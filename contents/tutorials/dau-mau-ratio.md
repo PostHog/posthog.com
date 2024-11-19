@@ -95,3 +95,5 @@ Once saved, you can use this power user cohort as a filter for your DAU/MAU rati
 - [How to calculate and lower churn rate](/tutorials/churn-rate)
 - [Calculating average session duration, time on site, and other session-based metrics](/tutorials/session-metrics)
 - [The most useful B2B SaaS product metrics](/blog/b2b-saas-product-metrics)
+
+<NewsletterForm />

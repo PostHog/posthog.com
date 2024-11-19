@@ -79,3 +79,5 @@ Now, every time you open a new tab, you see product data showing you how you are
 - Deciding what metric to add to your new tab page? Churn rate is a popular one. Here’s [a tutorial on how you calculate (and lower) churn rate](/tutorials/churn-rate).
 - Care more about time on site or average session duration? [This tutorial helps you calculate session-based metrics](/tutorials/session-metrics).
 - Would rather have product metrics in Slack? See how you can set up [Slack and PostHog in our docs](/docs/integrate/webhooks/slack).
+
+<NewsletterForm />

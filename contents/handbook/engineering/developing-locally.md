@@ -206,13 +206,14 @@ On Linux you often have separate packages: `postgres` for the tools, `postgres-s
 
 #### 3. Prepare plugin server
 
-Assuming Node.js is installed, run `pnpm i --dir plugin-server` to install all required packages. You'll also need to install the `brotli` compression library and `rust` stable via `rustup`:
+1. Install the `brotli` compression library and `rust` stable via `rustup`:
 
 - On macOS:
     ```bash
     brew install brotli rustup
     rustup default stable
     rustup-init
+    # Select 1 to proceed with default installation
     ```
 - On Debian-based Linux:
     ```bash
@@ -220,8 +221,7 @@ Assuming Node.js is installed, run `pnpm i --dir plugin-server` to install all r
     curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
     # Select 1 to proceed with default installation
     ```
-
-We'll run the plugin server in a later step.
+2. Run `pnpm i --dir plugin-server` to install all required packages. We'll actually run the plugin server in a later step.
 
 > Note: If you face an error like `ld: symbol(s) not found for architecture arm64`, most probably your openssl build flags are coming from the wrong place. To fix this, run:
 ```bash
@@ -396,7 +396,7 @@ To see debug logs (such as ClickHouse queries), add argument `--log-cli-level=DE
 
 ### End-to-end
 
-For Cypress end-to-end tests, run `bin/e2e-test-runner`. This will spin up a test instance of PostHog and show you the Cypress interface, from which you'll manually choose tests to run. Once you're done, terminate the command with Cmd + C.
+For Cypress end-to-end tests, run `bin/e2e-test-runner`. This will spin up a test instance of PostHog and show you the Cypress interface, from which you'll manually choose tests to run. You'll need `uv` installed (the Python package manager), which you can do so with `brew install uv`. Once you're done, terminate the command with Cmd + C.
 
 ## Extra: Working with feature flags
 
@@ -412,6 +412,12 @@ If you'd like to have ALL feature flags that exist in PostHog at your disposal r
 This command automatically turns any feature flag ending in `_EXPERIMENT` as a multivariate flag with `control` and `test` variants.
 
 Backend side flags are only evaluated locally, which requires the `POSTHOG_PERSONAL_API_KEY` env var to be set. Generate the key in [your user settings](http://localhost:8000/settings/user#personal-api-keys).
+
+## Extra: Debugging with VS Code
+
+The PostHog repository includes [VS Code launch options for debugging](https://github.com/PostHog/posthog/blob/master/.vscode/launch.json). Simply go to the `Run and Debug` tab in VS Code, select the desired service you want to debug, and run it. Once it starts up, you can set breakpoints and step through code to see exactly what is happening. There are also debug launch options for frontend and backend tests if you're dealing with a tricky test failure.
+
+> **Note:** You can debug all services using the main "PostHog" launch option. Otherwise, if you are running most of the PostHog services locally with `./bin/start`, for example if you only want to debug the backend, make sure to comment out that service from the [start script temporarily](https://github.com/PostHog/posthog/blob/master/bin/start#L22). 
 
 ## Extra: Debugging the backend in PyCharm
 

@@ -57,7 +57,8 @@ export const posthog = new PostHog('<ph_project_api_key>');
 export const SharedPostHogProvider = (props: any) => {
   return (
     <PostHogProvider client={posthog} autocapture={{
-      captureLifecycleEvents: false,  // Lifecycle events are handled differently for react-native-navigation
+      captureScreens: false, // Screen events are handled differently for react-native-navigation
+      captureLifecycleEvents: false, // Lifecycle events are handled differently for react-native-navigation
       captureTouches: true,
     }}>
       {props.children}
@@ -89,6 +90,8 @@ Navigation.events().registerAppLaunchedListener(async () => {
       // (Optional) Tracks all passProps as properties. Defaults to undefined
       routeToProperties: (name, properties) => properties,
     },
+    captureScreens: true,
+    captureLifecycleEvents: true,
   });
 });
 ```

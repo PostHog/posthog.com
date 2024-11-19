@@ -181,9 +181,8 @@ function Privacy() {
                         className="mx-auto"
                         alertMessage="Gen Z? Don't get distracted. You're here to read our thrilling privacy policy."
                     >
-                        🌐 We share necessary info of yours with service providers to run our site and product, but nothing else.
-                        We’re part of the EU-US Data Privacy Framework, ensuring your data is safe. You can opt out if
-                        you like!
+                        🌐 We share necessary info of yours with service providers to run our site and product, but
+                        nothing else. We’re part of the EU-US Data Privacy Framework, ensuring your data is safe.
                     </Tweet>
 
                     <Tweet
@@ -397,6 +396,10 @@ function Privacy() {
                         <p>
                             We use cookies to do this and they help us understand how we can improve a user's
                             experience.
+                        </p>
+                      <p>
+                            We use our own products to do this. eg we will use our Session Replay tool to debug user issues
+                            or understand how to improve our product.
                         </p>
                         <p>
                             FYI, we don’t use any third-party cookies at all. This means we don’t run any retargeting ad

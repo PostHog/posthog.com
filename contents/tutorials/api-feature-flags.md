@@ -357,3 +357,5 @@ Once confirmed, you're done. Congratulations, you’ve built a solid grasp of us
 - [How to use the PostHog API to get insights and persons](/tutorials/api-get-insights-persons)
 - [Documentation on our `decide` endpoint](/docs/api/decide)
 - [Using the PostHog API to capture events](/tutorials/api-capture-events)
+
+<NewsletterForm />

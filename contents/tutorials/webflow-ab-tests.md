@@ -74,3 +74,5 @@ Now that you set up an A/B test in Webflow with PostHog, you can use this same p
 - [How to set up Webflow analytics and session recordings](/tutorials/webflow)
 - [How to create surveys in Webflow](/tutorials/webflow-surveys)
 - [What to do after installing PostHog in 5 steps](/tutorials/next-steps-after-installing)
+
+<NewsletterForm />

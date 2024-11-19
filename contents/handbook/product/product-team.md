@@ -14,9 +14,27 @@ Among other things, they
 2. organize [user interviews](/handbook/product/user-feedback)
 3. coach product engineers on ["how to do product"](/handbook/engineering/product-engineering)
 
-PMs belong to up to two small teams, so both teams have a strong sense that the PM is there to support them equally. This limit also ensures that the PM has the time to dive deep into issues that require it.
+## Small team membership
 
-Check the [small teams page](/teams) to see which PM currently works with which team.
+Each PM belongs to a small number of our small engineering teams, so that all teams have a strong sense that the PM is there to support them equally. This also ensures that the PM has the time to dive deep into issues that require it.
+
+Here is a overview that shows which of our PMs currently works with which team:
+
+**Anna**
+- [Product Analytics](/teams/product-analytics)
+- [Web Analytics](web-analytics)
+- [CDP](/teams/cdp)
+
+**Annika**
+- [Session Replay](/teams/session-replay)
+- [Feature Flags](/teams/feature-flags)
+- [Experiments](/teams/experiments)
+  
+**Teams with no PM currently**
+- [Data Warehouse](/teams/data-warehouse)
+- [Error Tracking](/teams/error-tracking)
+- [AI Product Manager](/teams/ai-product-manager)
+- [Surveys](/teams/surveys) (light support from Annika)
 
 ## Product goals
 

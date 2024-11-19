@@ -12,6 +12,8 @@ import {
     IconPassword,
     IconGraph,
     IconFlask,
+    IconMessage,
+    IconRewindPlay,
     IconToggle,
 } from '@posthog/icons'
 import { CallToAction } from 'components/CallToAction'
@@ -164,7 +166,7 @@ const faqs = [
     {
         question: 'Do you offer a discount for non-profits?',
         children:
-            'Yes in most cases - 50% off any plan. Create your account, then email <a href="mailto:sales@posthog.com?subject=Non-profit%20discount">sales@posthog.com</a> from the same email address with some basic details on your organization. We will then apply a discount.',
+            'Yes in most cases - 25% off any plan. Create your account, then email <a href="mailto:sales@posthog.com?subject=Non-profit%20discount">sales@posthog.com</a> from the same email address with some basic details on your organization. We will then apply a discount.',
     },
     {
         question: 'Are there any minimums or annual commitments?',
@@ -277,19 +279,22 @@ const pairsWithItemCount = 3
 const PairsWithArray = [
     {
         icon: <IconGraph />,
+        color: 'blue',
         product: 'Product analytics',
         description: 'Need to go deeper than a dashboard? Building your own insights and HogQL queries from scratch!',
         url: '/product-analytics',
     },
     {
-        icon: <IconToggle />,
-        product: 'Session replays',
+        icon: <IconRewindPlay />,
+        color: 'yellow',
+        product: 'Session replay',
         description:
-            "Get more context by watching what users actually do on your site. It's not creepy if you have permission.",
+            "Get more context by watching what users actually do on your site. Spot the nuances that quantifiable data doesn't tell you.",
         url: '/session-replays',
     },
     {
-        icon: <IconFlask />,
+        icon: <IconMessage />,
+        color: 'salmon',
         product: 'Surveys',
         description:
             'Get even more context by sending surveys to users. Arrange interviews. Ask questions. Serve pop-ups.',

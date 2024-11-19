@@ -97,8 +97,6 @@ What constitutes a good ratio depends on the sector, but a [2017 report by Mixpa
 
 **Is it useful?** Yes, but you need to be careful as a large increase in monthly users can skew your ratio. It's best used by late-stage companies with predictable monthly growth, which is probably why it's popular at Facebook.
 
-<NewsletterForm />
-
 ### Feature usage
 
 **What is it?** The specifics will vary depending on the product, but this is all about tracking what people are doing. 

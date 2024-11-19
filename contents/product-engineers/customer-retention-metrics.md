@@ -149,8 +149,6 @@ As of March 2023 Facebook had a DAU/MAU ratio of around 68%. That’s very good.
 
 Want to go in-depth on DAU/MAU ratio? [Check out our guide](/tutorials/dau-mau-ratio).
 
-<NewsletterForm />
-
 ## 4. Net Promoter Score (NPS)
 
 ### What is NPS? 

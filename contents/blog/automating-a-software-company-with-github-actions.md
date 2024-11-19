@@ -78,8 +78,6 @@ jobs:
               run: python manage.py test
 ```
 
-<NewsletterForm />
-
 ### End-to-end testing
 
 It's good to have each building block of your software covered with unit tests, but your users need the _whole_ assembled machine to work – that is what end-to-end tests are about.
@@ -556,4 +554,4 @@ jobs:
 
 Hopefully these real-life examples inspire you to build the right workflow for your work, spending a bit of time _once_ to reap the rewards of saved time indefinitely.
 
-_Enjoyed this? Subscribe to our [newsletter](https://newsletter.posthog.com/subscribe) to hear more from us twice a month!_
+<NewsletterForm />

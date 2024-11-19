@@ -1,5 +1,5 @@
 ---
-title: Send data to Salesforce
+title: Send PostHog event data to Salesforce
 templateId: template-salesforce-create
 ---
 

@@ -99,3 +99,7 @@ Under the California Consumer Privacy Act (CCPA), PostHog as a Service Provider 
 We give all PostHog customers the tools to easily comply with their end users' requests under CCPA, including deletion of their data. We provide separate guidance for our customers on how to use PostHog in a CCPA-compliant way in our [Docs](/docs/privacy/ccpa-compliance). 
 
 We receive data collected by our customers from end-users and allow them to understand usage metrics of their products. We don't access customer end-user data unless instructed by a customer, and customer data is never sold to third parties. We do not have access to data collected by our customers who are using a self-hosted version of PostHog from end-users at all, unless they give us access to their instance. 
+
+## Pen tests
+
+We conduct these annually, most recently in April 2024  - see [here](https://github.com/PostHog/company-internal/issues/1577) for a link to the latest report and statuses (internally viewable only). 

@@ -51,8 +51,6 @@ _However,_ I really recommend you get personally familiar with each of the main 
 
 I personally like [the Demand Curve course](https://www.demandcurve.com/growth-program), which will give you a great grounding in all the major paid ad channels – it helped get us off the ground and means we're much better equipped to give our agency feedback. Outsource the legwork, not your critical thinking. 
 
-<NewsletterForm />
-
 ## Channel-by-channel tips
 
 This is not a comprehensive guide on how to set up each channel (use Demand Curve or similar for this) - these are just some non-obvious things we wish we'd known at the start. 

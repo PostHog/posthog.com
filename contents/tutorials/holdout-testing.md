@@ -81,3 +81,5 @@ After monitoring the two variants for a few more weeks and not seeing issues lik
 - [How to set up Next.js A/B tests](/tutorials/nextjs-ab-tests)
 - [How to run experiments without feature flags](/docs/experiments/running-experiments-without-feature-flags)
 - [Running experiments on new users](/tutorials/new-user-experiments)
+
+<NewsletterForm />

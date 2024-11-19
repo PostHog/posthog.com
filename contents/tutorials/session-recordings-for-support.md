@@ -122,3 +122,5 @@ Doing this enables you to further improve the support experience for users, espe
 - [How to use filters + session replays to understand user friction](/tutorials/filter-session-recordings)
 - [How to correlate errors with product performance using Sentry](/tutorials/sentry-plugin-tutorial)
 - [How to add session replays to Zendesk](/tutorials/zendesk-session-replays)
+
+<NewsletterForm />

@@ -1,5 +1,5 @@
 ---
-title: User Agent Populator
+title: Populate event properties with user agent data
 github: 'https://github.com/PostHog/user-agent-plugin'
 installUrl: 'https://app.posthog.com/project/apps?name=User%20Agent%20Populator'
 thumbnail: >-

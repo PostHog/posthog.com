@@ -98,12 +98,16 @@ export const handbookSidebar = [
                         url: '/handbook/getting-started/meetings',
                     },
                     {
+                        name: 'Using GitHub',
+                        url: '/handbook/company/new-to-github',
+                    },
+                    {
                         name: 'Goal setting',
                         url: '/handbook/company/goal-setting',
                     },
                     {
-                        name: 'Diversity and inclusion',
-                        url: '/handbook/company/diversity',
+                        name: 'A grown-up company',
+                        url: '/handbook/company/grown-ups',
                     },
                     {
                         name: 'Communication',
@@ -623,10 +627,6 @@ export const handbookSidebar = [
                 name: 'Per-product growth reviews',
                 url: '/handbook/product/per-product-growth-reviews',
             },
-            {
-                name: 'In-app prompts',
-                url: '/handbook/product/in-app-prompts',
-            },
         ],
     },
     {
@@ -718,6 +718,10 @@ export const handbookSidebar = [
                     {
                         name: 'Billing',
                         url: '/handbook/growth/sales/billing',
+                    },
+                    {
+                        name: 'Trials',
+                        url: '/handbook/growth/sales/trials',
                     },
                     {
                         name: 'Refunds',
@@ -1003,10 +1007,10 @@ export const companyMenu = {
             color: 'red',
             url: '/changelog/2024',
         },
-        { name: 'People', icon: 'IconProfile', color: 'blue', url: '/people' },
+        { name: 'People', icon: 'IconPeople', color: 'blue', url: '/people' },
         {
             name: 'Teams',
-            icon: 'IconPeople',
+            icon: 'IconShieldPeople',
             color: 'purple',
             url: '/teams',
             children: [
@@ -1396,6 +1400,10 @@ export const docsMenu = {
                             url: '/docs/libraries/webflow',
                         },
                         {
+                            name: 'WooCommerce',
+                            url: '/docs/libraries/woocommerce',
+                        },
+                        {
                             name: 'WordPress',
                             url: '/docs/libraries/wordpress',
                         },
@@ -1727,6 +1735,10 @@ export const docsMenu = {
                         {
                             name: 'Early access features',
                             url: '/docs/api/early-access-feature',
+                        },
+                        {
+                            name: 'Environments',
+                            url: '/docs/api/environments',
                         },
                         {
                             name: 'Event definitions',
@@ -2104,6 +2116,12 @@ export const docsMenu = {
                     color: 'orange',
                 },
                 {
+                    name: 'Best practices',
+                    url: '/docs/product-analytics/best-practices',
+                    icon: 'IconStar',
+                    color: 'red',
+                },
+                {
                     name: 'Troubleshooting and FAQs',
                     url: '/docs/product-analytics/troubleshooting',
                     icon: 'IconQuestion',
@@ -2292,6 +2310,18 @@ export const docsMenu = {
                     color: 'orange',
                 },
                 {
+                    name: 'Conversion goals',
+                    url: '/docs/web-analytics/conversion-goals',
+                    icon: 'IconFunnels',
+                    color: 'purple',
+                },
+                {
+                    name: 'Web vs product analytics',
+                    url: '/docs/web-analytics/web-vs-product-analytics',
+                    icon: 'IconGraph',
+                    color: 'red',
+                },
+                {
                     name: 'FAQ',
                     url: '/docs/web-analytics/faq',
                     icon: 'IconQuestion',
@@ -2337,6 +2367,16 @@ export const docsMenu = {
                     color: 'red',
                 },
                 {
+                    name: 'Mobile session replay',
+                    url: '/docs/session-replay/mobile',
+                    icon: 'IconPhone',
+                    color: 'blue',
+                    badge: {
+                        title: 'Beta',
+                        className: 'uppercase !bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',
+                    },
+                },
+                {
                     name: 'Troubleshooting and FAQs',
                     url: '/docs/session-replay/troubleshooting',
                     icon: 'IconQuestion',
@@ -2363,43 +2403,6 @@ export const docsMenu = {
                     url: '/docs/session-replay/network-recording',
                     icon: 'IconDashboard',
                     color: 'seagreen',
-                },
-                {
-                    name: 'Mobile session replay',
-                    url: '/docs/session-replay/mobile',
-                    icon: 'IconPhone',
-                    color: 'blue',
-                    featured: true,
-                    children: [
-                        {
-                            name: 'Overview',
-                            url: '/docs/session-replay/mobile',
-                        },
-                        {
-                            name: 'Android',
-                            url: '/docs/session-replay/android',
-                            badge: {
-                                title: 'Beta',
-                                className: 'uppercase !bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',
-                            },
-                        },
-                        {
-                            name: 'iOS',
-                            url: '/docs/session-replay/ios',
-                            badge: {
-                                title: 'Beta',
-                                className: 'uppercase !bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',
-                            },
-                        },
-                        {
-                            name: 'React Native',
-                            url: '/docs/session-replay/react-native',
-                            badge: {
-                                title: 'Beta',
-                                className: 'uppercase !bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',
-                            },
-                        },
-                    ],
                 },
                 {
                     name: 'Privacy controls',
@@ -2483,6 +2486,12 @@ export const docsMenu = {
                     featured: true,
                 },
                 {
+                    name: 'Best practices',
+                    url: '/docs/feature-flags/best-practices',
+                    icon: 'IconStar',
+                    color: 'red',
+                },
+                {
                     name: 'Troubleshooting and FAQs',
                     url: '/docs/feature-flags/common-questions',
                     icon: 'IconQuestion',
@@ -2552,14 +2561,6 @@ export const docsMenu = {
                     icon: 'IconHome',
                     color: 'seagreen',
                 },
-                /*
-                {
-                    name: 'Getting started',
-                    url: '/docs/experiments/start',
-                    icon: 'IconGraduationCap',
-                    color: 'red',
-                },
-                */
                 {
                     name: 'Installation',
                     url: '/docs/experiments/installation',
@@ -2575,6 +2576,13 @@ export const docsMenu = {
                     featured: true,
                 },
                 {
+                    name: 'Creating a no-code experiment',
+                    url: '/docs/experiments/no-code-web-experiments',
+                    icon: 'IconApp',
+                    color: 'seagreen',
+                    featured: true,
+                },
+                {
                     name: 'Adding your code',
                     url: '/docs/experiments/adding-experiment-code',
                     icon: 'IconCode',
@@ -2586,6 +2594,12 @@ export const docsMenu = {
                     icon: 'IconRocket',
                     color: 'purple',
                     featured: true,
+                },
+                {
+                    name: 'Best practices',
+                    url: '/docs/experiments/best-practices',
+                    icon: 'IconStar',
+                    color: 'yellow',
                 },
                 {
                     name: 'Troubleshooting and FAQs',
@@ -2706,7 +2720,7 @@ export const docsMenu = {
             ],
         },
         {
-            name: 'CDP',
+            name: 'Data pipelines',
             url: '/docs/cdp',
             color: 'sky-blue',
             icon: 'IconPlug',
@@ -2737,6 +2751,10 @@ export const docsMenu = {
                             url: '/docs/cdp/destinations',
                         },
                         {
+                            name: 'Customization',
+                            url: '/docs/cdp/destinations/customizing-destinations',
+                        },
+                        {
                             name: 'Destinations',
                         },
                         {
@@ -2750,6 +2768,10 @@ export const docsMenu = {
                         {
                             name: 'ActiveCampaign',
                             url: '/docs/cdp/destinations/activecampaign',
+                        },
+                        {
+                            name: 'Airtable',
+                            url: '/docs/cdp/destinations/airtable',
                         },
                         {
                             name: 'Avo',
@@ -2774,6 +2796,10 @@ export const docsMenu = {
                         {
                             name: 'Gleap',
                             url: '/docs/cdp/destinations/gleap',
+                        },
+                        {
+                            name: 'Google Ads Conversions',
+                            url: '/docs/cdp/destinations/google-ads',
                         },
                         {
                             name: 'Google Cloud Storage',
@@ -2987,6 +3013,10 @@ export const docsMenu = {
                             url: '/docs/data-warehouse/setup/vitally',
                         },
                         {
+                            name: 'Chargebee',
+                            url: '/docs/data-warehouse/setup/chargebee',
+                        },
+                        {
                             name: 'Self-managed',
                         },
                         {
@@ -3195,7 +3225,7 @@ const menu = [
                 url: '/surveys',
             },
             {
-                name: 'CDP',
+                name: 'Data pipelines',
                 icon: 'IconPlug',
                 color: 'sky-blue',
                 url: '/cdp',

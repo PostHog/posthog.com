@@ -1,6 +1,7 @@
 import SettingProperties from "./setting-properties-text.mdx" 
 import NamingTip from "./naming-tip.mdx" 
 import Intro from "./intro.mdx" 
+import IOSAutocapture from "../../../libraries/ios/_snippets/autocapture.mdx"
 
 <Intro />
 
@@ -16,48 +17,6 @@ PostHogSDK.shared.capture("user_signed_up")
 PostHogSDK.shared.capture("user_signed_up", properties: ["login_type": "email"], userProperties: ["is_free_trial": true])
 ```
 
-### Autocapture 
+## Autocapture
 
-PostHog autocapture automatically tracks the following events for you:
-
--   **Application Opened** - when the app is opened from a closed state or when the app comes to the foreground (e.g. from the app switcher)
--   **Application Backgrounded** - when the app is sent to the background by the user
--   **Application Installed** - when the app is installed.
--   **Application Updated** - when the app is updated.
--   **$screen** - when the user navigates (if using `UIViewController`)
-
-### Capturing screen views
-
-With [`configuration.captureScreenViews`](/docs/libraries/ios#all-configuration-options) set as `true`, PostHog will try to record all screen changes automatically.
-
-If you want to manually send a new screen capture event, use the `screen` function.
-
-```swift
-PostHogSDK.shared.screen("Dashboard", properties: ["fromIcon": "bottom"])
-```
-
-> **Important:** Please note that `captureScreenViews` configuration is intented for `UIKit` use. For `SwiftUI` screen captures, please see the following section.
-
-### Capturing screen views in SwiftUI
-
-To track a screen view in `SwiftUI`, apply the `postHogScreenView` modifier to your full-screen views. The PostHog iOS SDK will infer a screen name based on the view’s type, but you can provide a custom name and event properties if needed.
-
-```swift 
-// This will trigger a screen view event with $screen_name: "HomeViewContent"
-struct HomeView: View {
-    var body: some View {
-        HomeViewContent()
-            .postHogScreenView()
-    }
-}
-
-// This will trigger a screen view event with $screen_name: "My Home View" and an additional event property from_button: "start"
-struct HomeView: View {
-    var body: some View {
-        HomeViewContent()
-            .postHogScreenView("My Home View", ["from_button": "start"])
-    }
-}
-```
-
-In SwiftUI, views can range from entire screens to small UI components. Unlike UIKit, SwiftUI doesn’t clearly distinguish between these levels, which makes automatic tracking of full-screen views harder. 
+<IOSAutocapture />

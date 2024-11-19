@@ -1,0 +1,22 @@
+In iOS, PostHog uses method swizzling on [URLSession](https://developer.apple.com/documentation/foundation/urlsession) methods, which allows for the out-of-the-box collection of network data.
+
+However, URLSession’s async/await-powered APIs which are not exposed to the `objc` runtime and cannot be swizzled. As a result, network telemetry cannot be automatically captured. 
+
+For apps using async `URLSession` methods, PostHog provides wrapper functions that you can use to manually capture network logs. 
+
+```swift
+import PostHog
+
+func fetchData(from url: URL) async throws -> Data {
+   // let (data, _) = try await URLSession.shared.data(from: url)      // ⬅ replace this
+   let (data, _) = try await URLSession.shared.postHogData(from: url)  // 🦔 with this
+
+  // your logic here...
+  return data
+    
+}
+```
+
+You can find a list of available methods to use manually [here](https://github.com/PostHog/posthog-ios/blob/main/PostHog/Replay/URLSessionExtension.swift).
+
+> **Note:** Only metric-like data like speed, size, and response code are captured. No data is captured from the request or response body.
