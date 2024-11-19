@@ -17,15 +17,15 @@ const PostHugPage = () => {
                         </div>
                     </h1>
 
-                    <p className="m-2 text-center text-balance">Even engineers need hugs every now and again.</p>
+                    <div className="my-16 space-y-2 text-balance text-center">
+                        <p>Even engineers need hugs every now and again. 🥺</p>
 
-                    <p className="m-2 text-center text-balance">
-                        Seeing as how we can't literally give you a hug, here is the next best thing:
-                    </p>
+                        <p>Seeing as how we can't literally give you a hug, here is the next best thing:</p>
 
-                    <button>Get a Hug</button>
+                        <button>Get a Hug</button>
 
-                    <p>🦔 ❤️ 🦔</p>
+                        <p>🦔 ❤️ 🦔</p>
+                    </div>
                 </div>
             </div>
         </Layout>
