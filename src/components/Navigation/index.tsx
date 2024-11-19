@@ -1,11 +1,9 @@
-import CloudinaryImage from 'components/CloudinaryImage'
 import Link from 'components/Link'
 import Logo from 'components/Logo'
 import { layoutLogic } from '../../logic/layoutLogic'
 import { useValues } from 'kea'
 import * as icons from '@posthog/icons'
 import { useLocation } from '@reach/router'
-import { useLayoutData } from 'components/Layout/hooks'
 import React, { useEffect, useState } from 'react'
 import topLevelNav from '../../navs'
 import { IMenu } from 'components/PostLayout/types'
@@ -101,40 +99,35 @@ const MenuItem = ({ name, children, internal, url, icon, color, depth = 0 }: IMe
     )
 }
 
-const Navigation: React.FC<{ className?: string }> = ({ className }) => {
-    const { enterpriseMode } = useLayoutData()
+const Navigation: React.FC<{ children: React.ReactNode }> = ({ children }) => {
     const { websiteTheme } = useValues(layoutLogic)
 
     return (
-        <nav className={className}>
-            <div className="relative flex flex-col h-screen max-h-screen">
-                <Link
-                    className="flex justify-center m-2 pt-1.5 pb-2 px-1 rounded hover:bg-accent dark:hover:bg-accent-dark grow-0 shrink-0 basis-[auto] dark:text-primary-dark relative mb-2 border border-b-2 border-transparent hover:border-light dark:hover:border-dark hover:-top-px active:top-[.5px]"
-                    to="/"
-                >
-                    {enterpriseMode ? (
-                        <CloudinaryImage
-                            src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/MainNav/posthog-tm.png"
-                            className="h-6 mx-6"
-                        />
-                    ) : (
+        <div className="flex">
+            <nav className="shrink-0 h-screen sticky top-0 hidden md:block flex-[0_0_220px]">
+                <div className="relative flex flex-col h-screen max-h-screen">
+                    <Link
+                        className="flex justify-center m-2 pt-1.5 pb-2 px-1 rounded hover:bg-accent dark:hover:bg-accent-dark grow-0 shrink-0 basis-[auto] dark:text-primary-dark relative mb-2 border border-b-2 border-transparent hover:border-light dark:hover:border-dark hover:-top-px active:top-[.5px]"
+                        to="/"
+                    >
                         <Logo
                             color={websiteTheme === 'dark' && 'white'}
                             className="h-[24px] fill-current relative px-2 box-content"
                         />
-                    )}
-                </Link>
+                    </Link>
 
-                <ul className="px-0 py-px m-0 list-none flex-1 overflow-y-auto overflow-x-hidden">
-                    {topLevelNav
-                        .filter((item) => item.location === 'left')
-                        .map((item) => (
-                            <MenuItem key={`${item.name}-${item.url}`} {...item} />
-                        ))}
-                </ul>
-                <div className="absolute top-0 right-0 bottom-0 bg-border dark:bg-border-dark w-px"></div>
-            </div>
-        </nav>
+                    <ul className="px-0 py-px m-0 list-none flex-1 overflow-y-auto overflow-x-hidden">
+                        {topLevelNav
+                            .filter((item) => item.location === 'left')
+                            .map((item) => (
+                                <MenuItem key={`${item.name}-${item.url}`} {...item} />
+                            ))}
+                    </ul>
+                    <div className="absolute top-0 right-0 bottom-0 bg-border dark:bg-border-dark w-px"></div>
+                </div>
+            </nav>
+            <div className="flex-1">{children}</div>
+        </div>
     )
 }
 
