@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect } from 'react'
+import React, { useCallback } from 'react'
 import Link from 'components/Link'
 import Particles from 'react-tsparticles'
 import { loadStarsPreset } from 'tsparticles-preset-stars'
@@ -7,54 +7,21 @@ import { layoutLogic } from 'logic/layoutLogic'
 import { useInView } from 'react-intersection-observer'
 import { motion } from 'framer-motion'
 import { useBreakpoint } from 'gatsby-plugin-breakpoints'
-import { useLottie } from 'lottie-react'
-import light from './lotties/light'
-import dark from './lotties/dark'
-
-const blocks = [
-    {
-        title: '240k+',
-        subtitle: 'Developer community',
-    },
-    {
-        title: '108k+',
-        subtitle: 'Companies installed',
-    },
-    {
-        title: '9.5m+',
-        subtitle: 'Monthly traffic',
-    },
-]
-
-const CommunityStat = ({ count, label, className }) => {
-    return (
-        <div className={`absolute text-center text-[#392116] dark:text-[#E7F1FF] ${className}`}>
-            <h4 className="text-[2.5vw] lg:text-[2.75vw] xl:text-[3vw] leading-none mb-0.5">{count}</h4>
-            <p className="text-[1.5vw] lg:text-[1.25vw] xl:text-[1vw] m-0 leading-tight whitespace-nowrap">{label}</p>
-        </div>
-    )
-}
+import { DotLottiePlayer } from '@dotlottie/react-player'
 
 const CommunityHogs = () => {
-    const [containerRef, inView] = useInView({ threshold: 0 })
     const { websiteTheme } = useValues(layoutLogic)
-    const { play, pause, View } = useLottie({
-        animationData: websiteTheme === 'dark' ? dark(blocks) : light(blocks),
-        loop: true,
-        autoPlay: false,
-    })
-
-    useEffect(() => {
-        if (inView) {
-            play()
-        } else {
-            pause()
-        }
-    }, [inView])
-
     return (
-        <div ref={containerRef} className="w-[70vw] mx-auto absolute bottom-0 left-1/2 -translate-x-1/2">
-            {View}
+        <div className="w-[70vw] mx-auto absolute bottom-0 left-1/2 -translate-x-1/2">
+            <DotLottiePlayer
+                autoplay
+                loop
+                src={
+                    websiteTheme === 'dark'
+                        ? 'https://lottie.host/0b5196fb-89df-4d4d-b93c-cf69e0e8a608/0jsTIuWyDQ.lottie'
+                        : 'https://lottie.host/8a8166a0-6c2a-4944-a36e-67e5a124846f/1y1Pk6eZuo.lottie'
+                }
+            />
         </div>
     )
 }
@@ -90,6 +57,7 @@ const Stars = () => {
 export default function Community() {
     const { websiteTheme } = useValues(layoutLogic)
     const [ref, inView] = useInView({ threshold: 0 })
+
     return (
         <div
             ref={ref}
