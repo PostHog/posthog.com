@@ -84,7 +84,7 @@ export default function Questions({ data, pageContext, location }: IProps) {
 
     return (
         <CommunityLayout menu={topicsNav} title={data.squeakTopic.label}>
-            <section className="max-w-screen-4xl space-y-8 pb-12 -mx-3 lg:-mx-4 xl:-mx-10">
+            <section className="max-w-screen-4xl space-y-8 pb-12">
                 <div className="w-full flex items-center mb-8">
                     <Link
                         to={backTo?.url || '/questions'}

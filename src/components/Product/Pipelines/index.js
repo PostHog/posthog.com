@@ -17,7 +17,7 @@ import { VsCompetitor } from 'components/Products/Competitor'
 import { VsPostHog } from 'components/Products/Competitor/VsPostHog'
 import { MDXRenderer } from 'gatsby-plugin-mdx'
 import { useLayoutData } from 'components/Layout/hooks'
-import { Hero } from 'components/Products/Hero'
+import Hero from 'components/Products/Hero'
 import { PairsWith } from 'components/Products/PairsWith'
 import { PairsWithItem } from 'components/Products/PairsWith/item'
 import { StaticImage } from 'gatsby-plugin-image'
@@ -714,7 +714,9 @@ function PipelinesPage({ location }) {
                 <p className="mt-0 text-opacity-70 text-center">
                     Get a more technical overview of how everything works <Link to="/docs">in our docs</Link>.
                 </p>
-                <DocLinks menu={docsMenu.children.find(({ name }) => name.toLowerCase() === 'data pipelines').children} />
+                <DocLinks
+                    menu={docsMenu.children.find(({ name }) => name.toLowerCase() === 'data pipelines').children}
+                />
             </section>
 
             <section

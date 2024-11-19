@@ -22,7 +22,7 @@ import {
 } from '@posthog/icons'
 import { CallToAction } from 'components/CallToAction'
 import { CustomerCard } from 'components/Products/CustomerCard'
-import { Hero } from 'components/Products/Hero'
+import Hero from 'components/Products/Hero'
 import { Feature } from 'components/Products/Feature'
 import { Subfeature } from 'components/Products/Subfeature'
 import { graphql, useStaticQuery } from 'gatsby'
@@ -144,7 +144,11 @@ export const ProductOS = () => {
                 />
 
                 <div className="text-center mb-12">
-                    <CloudinaryImage src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Product/ProductOS/images/product-os.png" alt="" className="w-full max-w-[423px]" />
+                    <CloudinaryImage
+                        src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Product/ProductOS/images/product-os.png"
+                        alt=""
+                        className="w-full max-w-[423px]"
+                    />
                 </div>
             </div>
 
@@ -207,7 +211,11 @@ export const ProductOS = () => {
                             <p>You can also query directly from our data warehouse (powered by ClickHouse).</p>
                         </div>
                         <aside className="shrink-0 md:basis-[500px]">
-                            <CloudinaryImage src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Product/ProductOS/images/sql-hog.png" alt="" className="w-full max-w-[562px]" />
+                            <CloudinaryImage
+                                src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Product/ProductOS/images/sql-hog.png"
+                                alt=""
+                                className="w-full max-w-[562px]"
+                            />
                         </aside>
                     </div>
 
@@ -323,7 +331,11 @@ export const ProductOS = () => {
                             </p>
                         </div>
                         <aside className="shrink-0 md:basis-[300px] xl:basis-[500px]">
-                            <CloudinaryImage src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Product/ProductOS/images/alert.png" alt="" className="w-full max-w-[262px]" />
+                            <CloudinaryImage
+                                src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Product/ProductOS/images/alert.png"
+                                alt=""
+                                className="w-full max-w-[262px]"
+                            />
                         </aside>
                     </div>
                 </section>
