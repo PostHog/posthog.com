@@ -126,7 +126,7 @@ const Navigation: React.FC<{ children: React.ReactNode }> = ({ children }) => {
                     <div className="absolute top-0 right-0 bottom-0 bg-border dark:bg-border-dark w-px"></div>
                 </div>
             </nav>
-            <div className="flex-1">{children}</div>
+            <div className="flex-1 overflow-hidden">{children}</div>
         </div>
     )
 }

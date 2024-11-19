@@ -367,7 +367,7 @@ export const Main = () => {
                                 )
                             })}
                     </ul>
-                    <div className="flex items-center justify-end flex-1">
+                    <div className="flex items-center justify-end flex- mr-3">
                         {posthogInstance ? (
                             <CallToAction
                                 type={'outline'}
