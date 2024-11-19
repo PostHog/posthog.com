@@ -458,7 +458,7 @@ const handleCookieConsent = (consent) => {
 
 ## Amending events before they are captured
 
-When initializing the SDK, you can provide a `before_send` function.  This can be used to amend or reject events before they are sent to PostHog. 
+Since version 1.187.0, when initializing the SDK, you can provide a `before_send` function.  This can be used to amend or reject events before they are sent to PostHog. 
 
 > **Note:** Amending and rejecting events is advanced functionality and should be done with care. It can cause unexpected results in parts of PostHog.
 
