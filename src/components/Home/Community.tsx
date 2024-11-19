@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react'
+import React, { useCallback, useEffect, useRef } from 'react'
 import Link from 'components/Link'
 import Particles from 'react-tsparticles'
 import { loadStarsPreset } from 'tsparticles-preset-stars'
@@ -11,10 +11,21 @@ import { DotLottiePlayer } from '@dotlottie/react-player'
 
 const CommunityHogs = () => {
     const { websiteTheme } = useValues(layoutLogic)
+    const lottieRef = useRef<null>()
+    const [ref, inView] = useInView({ threshold: 0 })
+
+    useEffect(() => {
+        if (inView) {
+            lottieRef.current?.play()
+        } else {
+            lottieRef.current?.stop()
+        }
+    }, [inView])
+
     return (
-        <div className="w-[70vw] mx-auto absolute bottom-0 left-1/2 -translate-x-1/2">
+        <div ref={ref} className="w-[70vw] mx-auto absolute bottom-0 left-1/2 -translate-x-1/2">
             <DotLottiePlayer
-                autoplay
+                lottieRef={lottieRef}
                 loop
                 src={
                     websiteTheme === 'dark'
