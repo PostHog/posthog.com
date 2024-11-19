@@ -4,12 +4,21 @@ import { layoutLogic } from '../../logic/layoutLogic'
 import { useValues } from 'kea'
 import * as icons from '@posthog/icons'
 import { useLocation } from '@reach/router'
-import React, { useEffect, useState } from 'react'
+import React, { Dispatch, SetStateAction, useEffect, useState } from 'react'
 import topLevelNav from '../../navs'
 import { IMenu } from 'components/PostLayout/types'
 import { navigate } from 'gatsby'
 
-const MenuItem = ({ name, children, internal, url, icon, color, depth = 0 }: IMenu & { depth?: number }) => {
+const MenuItem = ({
+    name,
+    children,
+    internal,
+    url,
+    icon,
+    color,
+    depth = 0,
+    setAllowOverflow,
+}: IMenu & { depth?: number; setAllowOverflow: Dispatch<SetStateAction<boolean>> }) => {
     const [isOpen, setIsOpen] = useState(false)
     const [isActive, setIsActive] = useState(false)
     const { pathname } = useLocation()
@@ -31,6 +40,7 @@ const MenuItem = ({ name, children, internal, url, icon, color, depth = 0 }: IMe
     }, [pathname])
 
     const handleParentButtonClick = () => {
+        setAllowOverflow(false)
         if (!isOpen) {
             const newURL = url || children?.find(({ url }) => !!url)?.url
             if (newURL) {
@@ -89,9 +99,15 @@ const MenuItem = ({ name, children, internal, url, icon, color, depth = 0 }: IMe
                     className={`px-0 py-px m-0 mt-px space-y-px list-none transition-all duration-100 ease-in-out ${
                         isOpen ? 'max-h-[1000px] opacity-300 mb-2' : 'max-h-0 opacity-0 overflow-hidden'
                     }`}
+                    onTransitionEnd={() => setAllowOverflow(true)}
                 >
                     {children.map((item: any) => (
-                        <MenuItem key={`${item.name}-${item.url}`} {...item} depth={depth + 1} />
+                        <MenuItem
+                            setAllowOverflow={setAllowOverflow}
+                            key={`${item.name}-${item.url}`}
+                            {...item}
+                            depth={depth + 1}
+                        />
                     ))}
                 </ul>
             )}
@@ -101,6 +117,7 @@ const MenuItem = ({ name, children, internal, url, icon, color, depth = 0 }: IMe
 
 const Navigation: React.FC<{ children: React.ReactNode }> = ({ children }) => {
     const { websiteTheme } = useValues(layoutLogic)
+    const [allowOverflow, setAllowOverflow] = useState(true)
 
     return (
         <div className="flex">
@@ -116,11 +133,19 @@ const Navigation: React.FC<{ children: React.ReactNode }> = ({ children }) => {
                         />
                     </Link>
 
-                    <ul className="px-0 py-px m-0 list-none flex-1 overflow-y-auto overflow-x-hidden">
+                    <ul
+                        className={`px-0 py-px m-0 list-none flex-1 overflow-x-hidden ${
+                            allowOverflow ? 'overflow-y-auto' : 'overflow-y-hidden'
+                        }`}
+                    >
                         {topLevelNav
                             .filter((item) => item.location === 'left')
                             .map((item) => (
-                                <MenuItem key={`${item.name}-${item.url}`} {...item} />
+                                <MenuItem
+                                    setAllowOverflow={setAllowOverflow}
+                                    key={`${item.name}-${item.url}`}
+                                    {...item}
+                                />
                             ))}
                     </ul>
                     <div className="absolute top-0 right-0 bottom-0 bg-border dark:bg-border-dark w-px"></div>
