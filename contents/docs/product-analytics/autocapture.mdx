@@ -236,3 +236,16 @@ Clipboard autocapture respects other privacy settings. For example, won't captur
 
 > **Note:** Browsers don't directly allow access to copied data for privacy reasons so when `posthog-js` sees a clipboard event, we capture any text currently selected in the browser.import { useSelector } from 'react-redux'
 
+## Dead clicks autocapture
+
+A dead click (or slow click) is a click which isn't followed by a change to the page. They indicate that users are expecting to be able to interact with something but cannot. 
+
+You can collect dead clicks with the Web SDK by enabling them in PostHog settings. Or by setting your config
+
+```js-web
+posthog.init('<ph_project_api_key>', {
+    api_host: '<ph_client_api_host>',
+    capture_dead_clicks: true,
+    // any other config
+})
+```
