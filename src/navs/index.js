@@ -2100,7 +2100,7 @@ export const docsMenu = {
                     name: 'Identifying users',
                     url: '/docs/product-analytics/identify',
                     icon: 'IconPerson',
-                    color: 'purple'
+                    color: 'purple',
                 },
                 {
                     name: 'Setting person properties',
