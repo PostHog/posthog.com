@@ -42,6 +42,7 @@ import Install from '../Install'
 import { SEO } from 'components/seo'
 import { useLayoutData } from 'components/Layout/hooks'
 import Plans from 'components/Pricing/Plans'
+import { Screenshot } from '../Screenshot'
 
 const product = {
     slug: 'session-replay',
@@ -388,6 +389,15 @@ export const ProductSessionReplay = () => {
                 />
 
                 <div className="text-center">
+                    {/* if show live replay */}
+                    <Screenshot
+                        product={product.capitalized}
+                        slug={product.slug}
+                        icon={<IconRewindPlay />}
+                        order={2}
+                        className={`mx-auto`}
+                    />
+                    {/* else */}
                     <CloudinaryImage
                         src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/images/products/screenshot-session-replay.png"
                         alt="Screenshot of Session Replay in PostHog"
