@@ -360,17 +360,6 @@ const PairsWithArray = [
     },
 ]
 
-const CloseIcon = () => (
-    <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <path
-            fillRule="evenodd"
-            clipRule="evenodd"
-            d="M0.164752 0.164752C0.384422 -0.0549175 0.740578 -0.0549175 0.960248 0.164752L6 5.20451L11.0398 0.164752C11.2594 -0.0549175 11.6156 -0.0549175 11.8352 0.164752C12.0549 0.384422 12.0549 0.740578 11.8352 0.960248L6.79549 6L11.8352 11.0398C12.0549 11.2594 12.0549 11.6156 11.8352 11.8352C11.6156 12.0549 11.2594 12.0549 11.0398 11.8352L6 6.79549L0.960248 11.8352C0.740578 12.0549 0.384422 12.0549 0.164752 11.8352C-0.0549175 11.6156 -0.0549175 11.2594 0.164752 11.0398L5.20451 6L0.164752 0.960248C-0.0549175 0.740578 -0.0549175 0.384422 0.164752 0.164752Z"
-            fill="black"
-        />
-    </svg>
-)
-
 const CheckIcon = () => (
     <svg width="16" height="12" viewBox="0 0 16 12" fill="none" xmlns="http://www.w3.org/2000/svg">
         <path
@@ -380,7 +369,7 @@ const CheckIcon = () => (
     </svg>
 )
 
-const MockSurvey = () => {
+const MockSurvey = ({ onSubmit }: { onSubmit: () => void }) => {
     const formStyles = {
         color: 'black',
         borderColor: 'rgb(201, 198, 198)',
@@ -398,12 +387,6 @@ const MockSurvey = () => {
     return (
         <form className="survey-form fixed bottom-0 right-0" style={formStyles}>
             <div className="survey-box" style={surveyBoxStyles}>
-                <div className="cancel-btn-wrapper">
-                    <button className="form-cancel" disabled>
-                        <CloseIcon />
-                    </button>
-                </div>
-
                 <div>
                     <div style={surveyBoxStyles}>
                         <div className="survey-question">How would you feel if you could no longer use PostHog?</div>
@@ -430,7 +413,7 @@ const MockSurvey = () => {
 
                     <div className="bottom-section">
                         <div className="buttons">
-                            <button className="form-submit" type="button" style={{ color: 'white' }}>
+                            <button onClick={onSubmit} className="form-submit" type="button" style={{ color: 'white' }}>
                                 Submit
                             </button>
                         </div>
@@ -476,7 +459,7 @@ export const ProductSurveys = () => {
                 description="Ask anything with no-code surveys – or use the API for complete control."
                 image={`/images/og/surveys.jpg`}
             />
-            <MockSurvey />
+            <MockSurvey onSubmit={() => console.log('submitted')} />
             <div className={`${fullWidthContent ? 'max-w-full px-8' : 'max-w-7xl mx-auto'} px-5 py-10 md:pt-20 pb-0`}>
                 <Hero
                     color="salmon"
