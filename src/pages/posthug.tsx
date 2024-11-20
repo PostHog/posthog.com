@@ -33,6 +33,12 @@ const PostHugPage = () => {
                                 enable: false,
                             },
                             particles: {
+                                color: {
+                                    value: ['#FF0000', '#A020F0', '#FFD700'],
+                                },
+                                move: {
+                                    speed: 5,
+                                },
                                 number: {
                                     value: breakpoints.sm ? 100 : 400,
                                 },
