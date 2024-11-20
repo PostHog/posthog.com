@@ -2589,12 +2589,6 @@ export const docsMenu = {
                     color: 'salmon',
                 },
                 {
-                    name: 'Holdouts',
-                    url: '/docs/experiments/holdouts',
-                    icon: 'IconPeople',
-                    color: 'orange',
-                },
-                {
                     name: 'Testing and launching',
                     url: '/docs/experiments/testing-and-launching',
                     icon: 'IconRocket',
@@ -2649,6 +2643,12 @@ export const docsMenu = {
                     url: '/docs/experiments/running-experiments-without-feature-flags',
                     icon: 'IconFlag',
                     color: 'yellow',
+                },
+                {
+                    name: 'Holdouts',
+                    url: '/docs/experiments/holdouts',
+                    icon: 'IconPeople',
+                    color: 'orange',
                 },
             ],
         },
