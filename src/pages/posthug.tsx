@@ -1,8 +1,10 @@
-import React from 'react'
+import React, { useState } from 'react'
+import AnimatedBurger from 'components/AnimatedBurger'
 import Layout from 'components/Layout'
 import { SEO } from 'components/seo'
 
 const PostHugPage = () => {
+    const [active, setActive] = useState(false)
     return (
         <Layout>
             <SEO title="PostHug" description="Free hedgehugs." image={`/images/about.png`} />
@@ -25,6 +27,8 @@ const PostHugPage = () => {
                         <button>Get a Hug</button>
 
                         <p>🦔 ❤️ 🦔</p>
+
+                        <AnimatedBurger onClick={() => setActive(!active)} active={active} className="" />
                     </div>
                 </div>
             </div>
