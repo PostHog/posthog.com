@@ -22,12 +22,15 @@ const PostHugPage = () => {
                 <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
                     <Particles
                         init={particlesInit}
-                        className="w-full h-full absolute inset-0"
+                        className="w-full h-full absolute inset-0 -z-10"
                         options={{
                             preset: 'stars',
                             fullScreen: false,
                             background: {
                                 color: 'transparent',
+                            },
+                            interactivity: {
+                                enable: false,
                             },
                             particles: {
                                 number: {
@@ -38,7 +41,7 @@ const PostHugPage = () => {
                     />
                 </motion.div>
 
-                <div className="max-w-2xl mx-auto py-8 px-4 md:px-8">
+                <div className="max-w-2xl mx-auto py-8 px-4 md:px-8 z-10">
                     <h1 className="text-5xl text-center">
                         Were you looking for
                         <div className="text-center my-8">
