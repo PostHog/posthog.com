@@ -257,6 +257,10 @@ module.exports = {
                         '100%': { 'background-position-x': '100%' },
                     },
                 },
+                blink: {
+                    '0%, 49%': { opacity: '1' },
+                    '50%, 100%': { opacity: '0' },
+                },
             },
             animation: {
                 wiggle: 'wiggle .2s ease-in-out 3',
