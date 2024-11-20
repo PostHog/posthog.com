@@ -1,4 +1,4 @@
-If a user logs out on your frontend, you should call `reset` to unlink any future events made on that device with that user. 
+If a user logs out on your frontend, you should call `reset()` to unlink any future events made on that device with that user.
 
 This is important if your users are sharing a computer, as otherwise all of those users are grouped together into a single user due to shared cookies between sessions. **We strongly recommend you call `reset` on logout even if you don't expect users to share a computer.**
 
