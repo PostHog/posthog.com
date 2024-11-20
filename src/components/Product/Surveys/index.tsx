@@ -39,6 +39,7 @@ import { SEO } from 'components/seo'
 import { useLayoutData } from 'components/Layout/hooks'
 import Plans from 'components/Pricing/Plans'
 import { Screenshot } from '../Screenshot'
+import Logo from 'components/Logo'
 
 const product = {
     slug: 'surveys',
@@ -360,6 +361,73 @@ const PairsWithArray = [
     },
 ]
 
+const CheckIcon = () => (
+    <svg width="16" height="12" viewBox="0 0 16 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path
+            d="M5.30769 10.6923L4.77736 11.2226C4.91801 11.3633 5.10878 11.4423 5.30769 11.4423C5.5066 11.4423 5.69737 11.3633 5.83802 11.2226L5.30769 10.6923ZM15.5303 1.53033C15.8232 1.23744 15.8232 0.762563 15.5303 0.46967C15.2374 0.176777 14.7626 0.176777 14.4697 0.46967L15.5303 1.53033ZM1.53033 5.85429C1.23744 5.56139 0.762563 5.56139 0.46967 5.85429C0.176777 6.14718 0.176777 6.62205 0.46967 6.91495L1.53033 5.85429ZM5.83802 11.2226L15.5303 1.53033L14.4697 0.46967L4.77736 10.162L5.83802 11.2226ZM0.46967 6.91495L4.77736 11.2226L5.83802 10.162L1.53033 5.85429L0.46967 6.91495Z"
+            fill="currentColor"
+        />
+    </svg>
+)
+
+const MockSurvey = ({ onSubmit }: { onSubmit: () => void }) => {
+    const formStyles = {
+        color: 'black',
+        borderColor: 'rgb(201, 198, 198)',
+        borderBottomWidth: '1px',
+        borderBottomStyle: 'solid',
+        borderRadius: '10px',
+    }
+
+    const surveyBoxStyles = {
+        backgroundColor: 'rgb(238, 237, 237)',
+    }
+
+    const options = ['Not disappointed', 'Somewhat disappointed', 'Very disappointed']
+
+    return (
+        <form className="survey-form fixed bottom-0 right-0" style={formStyles}>
+            <div className="survey-box" style={surveyBoxStyles}>
+                <div>
+                    <div style={surveyBoxStyles}>
+                        <div className="survey-question">How would you feel if you could no longer use PostHog?</div>
+                    </div>
+
+                    <div className="multiple-choice-options">
+                        {options.map((option, index) => (
+                            <div className="choice-option" key={index}>
+                                <input
+                                    type="radio"
+                                    id={`surveyQuestion0Choice${index}`}
+                                    name="question0"
+                                    value={option}
+                                />
+                                <label htmlFor={`surveyQuestion0Choice${index}`} style={{ color: 'black' }}>
+                                    {option}
+                                </label>
+                                <span className="choice-check" style={{ color: 'black' }}>
+                                    <CheckIcon />
+                                </span>
+                            </div>
+                        ))}
+                    </div>
+
+                    <div className="bottom-section">
+                        <div className="buttons">
+                            <button onClick={onSubmit} className="form-submit" type="button" style={{ color: 'white' }}>
+                                Submit
+                            </button>
+                        </div>
+                        <Link to="https://posthog.com" externalNoIcon className="footer-branding !text-inherit">
+                            Survey by <Logo className="w-16" />
+                        </Link>
+                    </div>
+                </div>
+            </div>
+        </form>
+    )
+}
+
 export const ProductSurveys = () => {
     const { purplewave, elevenlabs } = useStaticQuery(graphql`
         fragment ProductCustomerFragment on Mdx {
@@ -392,6 +460,7 @@ export const ProductSurveys = () => {
                 description="Ask anything with no-code surveys – or use the API for complete control."
                 image={`/images/og/surveys.jpg`}
             />
+            <MockSurvey onSubmit={() => console.log('submitted')} />
             <div className={`${fullWidthContent ? 'max-w-full px-8' : 'max-w-7xl mx-auto'} px-5 py-10 md:pt-20 pb-0`}>
                 <Hero
                     color="salmon"
