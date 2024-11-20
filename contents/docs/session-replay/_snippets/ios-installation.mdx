@@ -13,7 +13,7 @@ import IOSInstall from "../../integrate/_snippets/install-ios.mdx"
 Add `config.sessionReplay = true` to your PostHog configuration alongside any of your other configuration options:
 
 ```swift
-let config = PostHogConfig(apiKey: apiKey)
+let config = PostHogConfig(apiKey: "<ph_project_api_key>")
 // Enable session recording. Requires enabling in your project settings as well.
 // Default is false.
 config.sessionReplay = true
