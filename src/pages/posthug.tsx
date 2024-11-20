@@ -1,16 +1,43 @@
-import React, { useState } from 'react'
+import React, { useCallback, useState } from 'react'
 import HugHog from 'components/HugHog'
 import Layout from 'components/Layout'
 import { SEO } from 'components/seo'
+import { motion } from 'framer-motion'
+import Particles from 'react-tsparticles'
+import { loadStarsPreset } from 'tsparticles-preset-stars'
+import { useBreakpoint } from 'gatsby-plugin-breakpoints'
 
 const PostHugPage = () => {
     const [active, setActive] = useState(false)
+    const breakpoints = useBreakpoint()
+    const particlesInit = useCallback(async (engine) => {
+        await loadStarsPreset(engine)
+    }, [])
 
     return (
         <Layout>
             <SEO title="PostHug" description="Free hedgehugs." image={`/images/about.png`} />
 
             <div>
+                <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
+                    <Particles
+                        init={particlesInit}
+                        className="w-full h-full absolute inset-0"
+                        options={{
+                            preset: 'stars',
+                            fullScreen: false,
+                            background: {
+                                color: 'transparent',
+                            },
+                            particles: {
+                                number: {
+                                    value: breakpoints.sm ? 100 : 400,
+                                },
+                            },
+                        }}
+                    />
+                </motion.div>
+
                 <div className="max-w-2xl mx-auto py-8 px-4 md:px-8">
                     <h1 className="text-5xl text-center">
                         Were you looking for
