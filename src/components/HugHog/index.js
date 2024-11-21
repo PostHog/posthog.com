@@ -12,12 +12,12 @@ export default function HugHog({ onClick, className, active }) {
                 xmlns="http://www.w3.org/2000/svg"
             >
                 <motion.svg
-                    width="30"
-                    height="22"
+                    width="90"
+                    height="66"
                     viewBox="0 0 30 22"
                     fill="none"
                     xmlns="http://www.w3.org/2000/svg"
-                    animate={{ translateX: active ? 100 : 0 }}
+                    animate={{ translateX: active ? 80 : 0 }}
                     initial={{ x: -100, y: 0, scaleX: -1 }}
                     transition={{ type: 'spring', duration: 0.5, bounce: 0.7 }}
                 >
@@ -80,13 +80,13 @@ export default function HugHog({ onClick, className, active }) {
                 </motion.svg>
                 {active && (
                     <motion.svg
-                        width="315"
-                        height="342"
+                        width="36"
+                        height="42"
                         viewBox="0 0 315 342"
                         fill="none"
                         xmlns="http://www.w3.org/2000/svg"
-                        animate={{ translateY: active ? -30 : 0 }}
-                        initial={{ x: 0, y: 0, rotate: -135 }}
+                        animate={{ translateY: active ? -360 : 0 }}
+                        initial={{ x: -130, y: 0, rotate: -135 }}
                         transition={{ type: 'spring', duration: 0.8, bounce: 0.8 }}
                     >
                         <path
@@ -99,12 +99,12 @@ export default function HugHog({ onClick, className, active }) {
                     </motion.svg>
                 )}
                 <motion.svg
-                    width="30"
-                    height="22"
+                    width="90"
+                    height="66"
                     viewBox="0 0 30 22"
                     fill="none"
                     xmlns="http://www.w3.org/2000/svg"
-                    animate={{ translateX: active ? -100 : 0 }}
+                    animate={{ translateX: active ? -80 : 0 }}
                     initial={{ x: 100, y: 0 }}
                     transition={{ type: 'spring', duration: 0.5, bounce: 0.7 }}
                 >

@@ -50,7 +50,7 @@ const PostHugPage = () => {
 
                         <p>Seeing as how we can't literally give you a hug, here is the next best thing:</p>
 
-                        <HugHog onClick={() => setActive(!active)} active={active} className="w-full" />
+                        <HugHog onClick={() => setActive(!active)} active={active} className="py-16 w-full" />
                     </div>
                 </div>
             </div>
