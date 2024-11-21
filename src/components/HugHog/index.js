@@ -4,7 +4,7 @@ export default function HugHog({ onClick, className, active }) {
     return (
         <button className={className} onClick={onClick}>
             <svg
-                className="!overflow-visible"
+                className="!overflow-visible mx-auto"
                 width="200"
                 height="200"
                 viewBox="0 0 200 200"

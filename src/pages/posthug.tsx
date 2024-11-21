@@ -29,6 +29,7 @@ const PostHugPage = () => {
                             particles: {
                                 color: { value: '#FF0000' },
                                 move: { speed: 5 },
+                                number: { value: 200 },
                             },
                         }}
                     />
