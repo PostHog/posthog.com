@@ -30,4 +30,4 @@ yarn.lock
 src/components/Layout/Fonts.scss
 .vercel
 .env
-*Type.ts
+*Type.ts.env.development

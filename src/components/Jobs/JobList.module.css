@@ -1,0 +1,63 @@
+.container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 2rem;
+    padding: 2rem;
+}
+
+.jobCard {
+    background: white;
+    border-radius: 8px;
+    padding: 1.5rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    transition: transform 0.2s ease-in-out;
+}
+
+.jobCard:hover {
+    transform: translateY(-4px);
+}
+
+.title {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: #1a1a1a;
+    margin: 0;
+}
+
+.details {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+.badge {
+    background: #f3f4f6;
+    padding: 0.25rem 0.75rem;
+    border-radius: 9999px;
+    font-size: 0.875rem;
+    color: #4b5563;
+}
+
+.meta {
+    font-size: 0.875rem;
+    color: #6b7280;
+}
+
+.applyButton {
+    background: #3fcf8e;
+    color: white;
+    padding: 0.75rem 1rem;
+    border-radius: 6px;
+    text-align: center;
+    text-decoration: none;
+    font-weight: 500;
+    margin-top: auto;
+    transition: background-color 0.2s ease-in-out;
+}
+
+.applyButton:hover {
+    background: #34b87a;
+}
