@@ -388,7 +388,7 @@ export const ProductSessionReplay = () => {
                     website.'
                 />
 
-                <div className="text-center">
+                <div className="text-center mb-12">
                     {/* if show live replay */}
                     <Screenshot
                         product={product.capitalized}
@@ -396,13 +396,6 @@ export const ProductSessionReplay = () => {
                         icon={<IconRewindPlay />}
                         order={2}
                         className={`mx-auto`}
-                    />
-                    {/* else */}
-                    <CloudinaryImage
-                        src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/images/products/screenshot-session-replay.png"
-                        alt="Screenshot of Session Replay in PostHog"
-                        className="w-full max-w-[1360.5px]"
-                        placeholder="none"
                     />
                 </div>
 

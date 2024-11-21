@@ -2044,3 +2044,7 @@ li.squeak-left-border {
 .bottom-section {
     margin-top: 14px;
 }
+
+.rr-player__frame {
+    @apply bg-black;
+}

@@ -7,12 +7,19 @@ import Posts from './src/components/Edition/Posts'
 import { Provider as ToastProvider } from './src/context/toast'
 import { RouteUpdateArgs } from 'gatsby'
 import { UserProvider } from './src/hooks/useUser'
+import { ReplayPreviewProvider } from './src/context/ReplayPreview'
+import { ReplayPreview } from './src/components/Layout/ReplayPreview'
 
 initKea(false)
 
 export const wrapRootElement = ({ element }) => (
     <UserProvider>
-        <ToastProvider>{wrapElement({ element })}</ToastProvider>
+        <ToastProvider>
+            <ReplayPreviewProvider>
+                {wrapElement({ element })}
+                <ReplayPreview />
+            </ReplayPreviewProvider>
+        </ToastProvider>
     </UserProvider>
 )
 export const onRouteUpdate = ({ location, prevLocation }: RouteUpdateArgs) => {
