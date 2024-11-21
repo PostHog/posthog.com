@@ -18,7 +18,7 @@ yarn add posthog-js
 npm install --save posthog-js
 ```
 
-First, you'll need to pass the `POSTHOG_API_KEY` to your client through Remix. We recommend placing them on `window.ENV` by following [this guide](https://remix.run/docs/en/main/guides/envvars#browser-environment-variables). You'll need both your API key and instance address (you can find these in your [project settings](https://us.posthog.com/project/settings)).
+First, you'll need to pass both your project API key and instance address from your [project settings](https://us.posthog.com/project/settings) to your client through Remix. We recommend placing the project API key on `window.ENV` like Remix recommends in [this guide](https://remix.run/docs/en/main/guides/envvars#browser-environment-variables).
 
 
 ```ts file=app/root.tsx
@@ -73,11 +73,6 @@ interface PosthogProviderProps {
   children: React.ReactNode;
 }
 
-/*
- * We need this file because posthog-js is missing an exports property that
- * allows the library to be used with Remix Vite.
- * https://github.com/PostHog/posthog-js/issues/908
- */
 export function PosthogProvider({ children }: PosthogProviderProps) {
   const posthogInstanceRef = useRef<PosthogType>(undefined);
 
@@ -88,7 +83,8 @@ export function PosthogProvider({ children }: PosthogProviderProps) {
     if (!window.ENV.POSTHOG_API_KEY) return undefined;
 
     posthogInstanceRef.current = posthog.init(window.ENV.POSTHOG_API_KEY, {
-      // ...your_options_here
+      api_host: '<ph_client_api_host>',
+      person_profiles: 'identified_only'
     });
     return posthogInstanceRef.current;
   }
@@ -101,7 +97,6 @@ export function PosthogProvider({ children }: PosthogProviderProps) {
 }
 
 export const usePosthog = () => useContext(PosthogContext);
-
 ```
 
 Lastly, we need to add this context to your React tree. Go to `app/entry.client.tsx` and add the following: 
@@ -110,7 +105,6 @@ Lastly, we need to add this context to your React tree. Go to `app/entry.client.
 import { RemixBrowser } from "@remix-run/react";
 import { startTransition, StrictMode, useEffect } from "react";
 import { hydrateRoot } from "react-dom/client";
-
 import { PosthogProvider } from "./contexts/posthog-context";
 
 startTransition(() => {
@@ -127,7 +121,7 @@ startTransition(() => {
 
 ### Identifying Users 
 
-If your app supports identifying users, you'll want to call `posthog?.identify()` wherever you have a Distinct ID. 
+To [identify users](/docs/product-analytics/identify) call `posthog?.identify()` when you have a distinct ID. 
 
 ```ts
 import { usePosthog } from "./contexts/posthog-context";
