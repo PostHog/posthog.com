@@ -53,7 +53,7 @@ export function ReplayPreview(): JSX.Element {
                                 <span className="animate-[blink_1.5s_ease-in-out_infinite] size-2 bg-[#f00] rounded-full inline-block -ml-3"></span>
                                 <strong className="text-sm">Session replay live demo</strong>
                             </div>
-                            <p className="text-xs mb-0 leading-snug">See what you just did on posthog.com</p>
+                            <p className="text-xs mb-0.5 leading-snug">See what you just did on posthog.com</p>
                             <div className="relative font-squeak text-[#f00] uppercase text-sm">
                                 <Arrow className="absolute left-[-60px] bottom-2" />
                                 You, seconds ago

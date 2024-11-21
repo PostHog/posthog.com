@@ -10,9 +10,10 @@ interface ScreenshotProps {
     slug: string
     order: number
     className?: string
+    children?: React.ReactNode
 }
 
-export const Screenshot = ({ icon, product, slug, order, className = '' }: ScreenshotProps): JSX.Element => {
+export const Screenshot = ({ icon, product, slug, order, className = '', children }: ScreenshotProps): JSX.Element => {
     const { replayEvents } = useReplayPreview()
     const posthog = usePostHog()
     const region = posthog?.getFeatureFlag?.('are-you-in-the-eu') ? 'eu' : 'us'
@@ -44,11 +45,12 @@ export const Screenshot = ({ icon, product, slug, order, className = '' }: Scree
     }, [])
 
     return (
+      <div className="mx-auto max-w-7xl relative">
         <svg
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
             viewBox="0 0 1280 736"
-            className={`${className} shadow-xl rounded-md reasonable:max-h-[calc(100vh_-_53px_-_2rem)] mx-auto max-w-7xl border border-transparent dark:border-dark/50`}
+            className={`${className} shadow-xl rounded-md reasonable:max-h-[calc(100vh_-_53px_-_2rem)] border border-transparent dark:border-dark/50`}
         >
             <g clipPath="url(#a)">
                 {/* content frame */}
@@ -565,5 +567,7 @@ export const Screenshot = ({ icon, product, slug, order, className = '' }: Scree
                 <pattern id="j" width="1" height="1" patternContentUnits="objectBoundingBox"></pattern>
             </defs>
         </svg>
+        {children}
+      </div>
     )
 }
