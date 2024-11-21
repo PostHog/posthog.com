@@ -1,54 +1,27 @@
+import React from 'react'
+import Card from '../Card'
 import styles from './JobList.module.css'
 
+console.log('Styles object:', styles)
+
 export default function JobList({ jobs }) {
-  console.log('JobList received jobs:', jobs)
-  
-  if (!jobs?.length) {
-    console.log('No jobs condition met because:', {
-      jobsIsDefined: !!jobs,
-      jobsLength: jobs?.length
-    })
-    return <div>No jobs found</div>
-  }
-
-  return (
-    <div className={styles.container}>
-      {jobs.map(job => (
-        <div key={job.id} className={styles.jobCard}>
-          <h2 className={styles.title}>{job.title}</h2>
-          
-          <div className={styles.details}>
-            <span className={styles.badge}>{job.departmentName}</span>
-            <span className={styles.badge}>{job.locationName}</span>
-            <span className={styles.badge}>{formatEmploymentType(job.employmentType)}</span>
-          </div>
-
-          <div className={styles.meta}>
-            <span>Posted: {formatDate(job.publishedDate)}</span>
-          </div>
-
-          <a 
-            href={`https://jobs.ashbyhq.com/supabase/${job.id}`}
-            target="_blank"
-            rel="noopener noreferrer" 
-            className={styles.applyButton}
-          >
-            Apply Now
-          </a>
+    return (
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+            {jobs.map((job) => (
+                <Card
+                    key={job.id}
+                    url={job.link}
+                    className="bg-white"
+                >
+                    <div className="p-6">
+                        <h3 className="text-lg font-semibold mb-2">{job.title}</h3>
+                        <div>
+                            <div className="text-gray-600 mb-1">{job.location}</div>
+                            <div className="text-gray-500">{job.department}</div>
+                        </div>
+                    </div>
+                </Card>
+            ))}
         </div>
-      ))}
-    </div>
-  )
-}
-
-function formatEmploymentType(type) {
-  return type.replace(/([A-Z])/g, ' $1').trim()
-}
-
-function formatDate(dateString) {
-  return new Date(dateString).toLocaleDateString('en-US', {
-    year: 'numeric',
-    month: 'long',
-    day: 'numeric'
-  })
+    )
 } 
