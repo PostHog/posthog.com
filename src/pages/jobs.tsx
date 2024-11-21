@@ -23,18 +23,27 @@ export default function JobsPage(): JSX.Element {
                 const data = await response.json()
 
                 if (data.success && Array.isArray(data.jobs)) {
-                    setJobs(
-                        data.jobs.map((job) => ({
+                    const engineeringJobs = data.jobs
+                        .filter((job) => {
+                            // Filter for engineering roles
+                            const isEngineering =
+                                job.departmentName.toLowerCase().includes('engineering') ||
+                                job.title.toLowerCase().includes('engineer') ||
+                                job.title.toLowerCase().includes('developer')
+                            return isEngineering
+                        })
+                        .map((job) => ({
                             id: job.id,
                             title: job.title,
                             department: job.departmentName,
                             location: job.locationName,
                             link: `https://jobs.ashbyhq.com/supabase/${job.id}`,
                         }))
-                    )
+
+                    setJobs(engineeringJobs)
                 } else {
                     console.log('Invalid data structure:', data)
-                    setError('No job listings found')
+                    setError('No engineering jobs found')
                 }
             } catch (error) {
                 console.error('Error fetching jobs:', error)
@@ -49,9 +58,9 @@ export default function JobsPage(): JSX.Element {
 
     return (
         <Layout>
-            <SEO title="Product Engineer Jobs" />
+            <SEO title="Engineering Jobs" />
             <div className="max-w-screen-2xl px-5 md:px-10 mx-auto">
-                <h1 className="text-4xl">Product Engineer Jobs</h1>
+                <h1 className="text-4xl">Engineering Jobs</h1>
                 <div className="mt-4">
                     {isLoading ? (
                         <p>Loading jobs...</p>
@@ -60,7 +69,7 @@ export default function JobsPage(): JSX.Element {
                     ) : jobs && jobs.length > 0 ? (
                         <JobList jobs={jobs} />
                     ) : (
-                        <p>No job listings found</p>
+                        <p>No engineering jobs found</p>
                     )}
                 </div>
             </div>
