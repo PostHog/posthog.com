@@ -1,5 +1,5 @@
 import React from 'react'
-import JobList from 'components/Jobs/JobList.jsx'
+import JobList from 'components/Jobs/JobList'
 
 export default function Home({ jobs }) {
     return (
