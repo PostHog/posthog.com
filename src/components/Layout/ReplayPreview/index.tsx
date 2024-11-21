@@ -45,18 +45,18 @@ export function ReplayPreview(): JSX.Element {
                     <Link
                         onClick={() => setVisible(false)}
                         to="/session-replay"
-                        className="bg-white dark:bg-accent-dark rounded-md border border-border dark:border-dark p-2 shadow-xl flex space-x-4 max-w-[320px] items-center hover:scale-[1.01] active:scale-100 transition-transform"
+                        className="bg-white dark:bg-accent-dark rounded-md border border-border dark:border-dark p-4 shadow-xl flex space-x-8 max-w-[420px] items-center hover:scale-[1.01] active:scale-100 transition-transform"
                     >
-                        <Replayer events={replayEvents} configProps={{ height: 73, width: 125 }} />
+                        <Replayer events={replayEvents} configProps={{ height: 100, width: 170 }} />
                         <div>
                             <div className="flex items-center space-x-1">
-                                <span className="animate-[blink_1.5s_ease-in-out_infinite] size-2 bg-[#f00] rounded-full inline-block -ml-3"></span>
-                                <strong className="text-sm">Session replay live demo</strong>
+                                <span className="animate-[blink_1.5s_ease-in-out_infinite] size-2 bg-[#f00] rounded-full inline-block -ml-4"></span>
+                                <strong className="text-[15px]">Session replay live demo</strong>
                             </div>
-                            <p className="text-xs mb-0.5 leading-snug">See what you just did on posthog.com</p>
-                            <div className="relative font-squeak text-[#f00] uppercase text-sm">
-                                <Arrow className="absolute left-[-60px] bottom-2" />
-                                You, seconds ago
+                            <p className="text-[13px] -ml-0.5 mb-0.5 leading-snug">See what you just did on posthog.com</p>
+                            <div className="relative font-squeak text-[#f00] uppercase text-[13px] pl-7 pt-1">
+                                <Arrow className="absolute left-[-28px] bottom-2 top-0" />
+                                <span className="inline-block transform -rotate-2 text-base">You, seconds ago!</span>
                             </div>
                         </div>
                     </Link>
