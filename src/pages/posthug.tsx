@@ -46,12 +46,15 @@ const PostHugPage = () => {
                         </a>
                     </h1>
 
-                    <div className="my-16 space-y-2 text-balance text-center">
+                    <div className="flex flex-col my-16 text-center">
                         <p className="font-semibold">Even engineers need hugs every now and again. 🥺</p>
 
                         <p>Seeing as how we can't literally give you a hug, here is the next best thing:</p>
 
-                        <HugHog onClick={() => setActive(!active)} active={active} className="py-16 w-full" />
+                        <img
+                            src="https://res.cloudinary.com/dmukukwp6/image/upload/max_hug_animated_e7732738d5.gif"
+                            alt="Hugging hedgehogs"
+                        />
                     </div>
                 </div>
             </div>
