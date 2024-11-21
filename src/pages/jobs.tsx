@@ -143,13 +143,7 @@ export default function JobsPage(): JSX.Element {
                 <select
                     value={filters[name]}
                     onChange={(e) => handleFilterChange(name, e.target.value)}
-                    className={`w-full rounded-md border px-3 py-2 pr-8 font-medium shadow-sm appearance-none sm:text-sm
-                        ${
-                            filters[name] === 'All'
-                                ? 'border-gray-300 bg-gray-50 text-gray-900'
-                                : 'border-primary bg-primary/10 text-primary-dark font-semibold'
-                        }
-                        hover:border-gray-400 focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary`}
+                    className="w-full rounded-md border border-primary bg-primary/20 text-primary-dark font-semibold px-3 py-2 pr-8 shadow-sm appearance-none sm:text-sm hover:border-gray-400 focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary"
                 >
                     <option value="All">All</option>
                     <option value="Yes">Yes</option>
@@ -163,9 +157,6 @@ export default function JobsPage(): JSX.Element {
                     </svg>
                 </div>
             </div>
-            {filters[name] !== 'All' && (
-                <div className="text-xs font-medium text-primary mt-1">Selected: {filters[name]}</div>
-            )}
         </div>
     )
 
