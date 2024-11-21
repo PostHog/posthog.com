@@ -38,15 +38,16 @@ After installing `posthog-js`, set up the PostHog initialization. This requires 
 'use client'
 import posthog from 'posthog-js'
 import { PostHogProvider } from 'posthog-js/react'
-
-if (typeof window !== 'undefined') {
-  posthog.init('<ph_project_api_key>', {
-    api_host: '<ph_client_api_host>',
-    opt_in_site_apps: true
-  })
-}
+import { useEffect } from 'react'
 
 export function PHProvider({ children }) {
+  useEffect(() => {
+    posthog.init('<ph_project_api_key>', {
+      api_host: '<ph_client_api_host>',
+      person_profiles: 'identified_only',
+      opt_in_site_apps: true
+    })
+  }, []);
   return <PostHogProvider client={posthog}>{children}</PostHogProvider>
 }
 ```
@@ -150,3 +151,5 @@ Once done, we can go back to our draft survey and press "Launch." Now, users who
 - [The Product-Market Fit Game](/blog/product-market-fit-game)
 - [Get feedback and book user interviews with surveys](/tutorials/feedback-interviews-site-apps)
 - [How we build features users love (really fast)](/blog/measuring-feature-success)
+
+<NewsletterForm />

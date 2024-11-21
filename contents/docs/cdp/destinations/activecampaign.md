@@ -1,13 +1,11 @@
 ---
-title: ActiveCampaign
+title: Send PostHog person data to ActiveCampaign
 templateId: template-activecampaign
 ---
 
 import Requirements from "../_snippets/requirements.mdx"
 import FeedbackQuestions from "../_snippets/feedback-questions.mdx"
 import PostHogMaintained from "../_snippets/posthog-maintained.mdx"
-
-Send person data from PostHog into ActiveCampaign.
 
 <Requirements />
 
@@ -20,6 +18,8 @@ You'll also need access to the relevant ActiveCampaign account.
 3. Search for 'ActiveCampaign' and select the destination.
 4. Add your ActiveCampaign API Key at the configuration step.
 5. Press 'Create & Enable' and watch your 'Events' list get populated in ActiveCampaign!
+
+<HideOnCDPIndex>
 
 ## Configuration
 
@@ -34,3 +34,5 @@ PostHog is open-source and so are all the destination on the platform. The [sour
 <PostHogMaintained />
 
 <FeedbackQuestions />
+
+</HideOnCDPIndex>

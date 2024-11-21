@@ -1,13 +1,11 @@
 ---
-title: RudderStack
+title: Send PostHog event data to RudderStack
 templateId: template-rudderstack
 ---
 
 import Requirements from "../_snippets/requirements.mdx"
 import FeedbackQuestions from "../_snippets/feedback-questions.mdx"
 import PostHogMaintained from "../_snippets/posthog-maintained.mdx"
-
-Send events from PostHog into RudderStack.
 
 <Requirements />
 
@@ -20,6 +18,8 @@ You'll also need access to the relevant RudderStack account.
 3. Search for 'RudderStack' and select the destination.
 4. Add your RudderStack Write API Key at the configuration step.
 5. Press 'Create & Enable' and watch your 'Events' get sent to RudderStack!
+
+<HideOnCDPIndex>
 
 ## Configuration
 
@@ -34,3 +34,5 @@ PostHog is open-source and so are all the destination on the platform. The [sour
 <PostHogMaintained />
 
 <FeedbackQuestions />
+
+</HideOnCDPIndex>

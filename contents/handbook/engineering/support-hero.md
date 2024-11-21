@@ -8,9 +8,11 @@ Every week, one person in each engineering team is designated the Support Hero. 
 
 As Support Hero, your job is to investigate and resolve issues reported by customers. A single case of suspicious data or a show-stopping bug can really undermine one's confidence in a data product, so it's important that we get to the bottom of all issues.
 
+One of the many awesome things about PostHog is that support is being dealt with by engineers and they ship fixes and improvements in real-time when you contact them. It is impossible to overstate how valuable it is for customers when they ask a question and get a shipped feature within a day.
+
 You'll see some teams using a term of endearment for Support Hero, examples being "Infra Hero" or… "Luigi". Don't ask – we don't know.
 
-<TeamMember name="Marcus Hof" photo />, <TeamMember name="Steven Shults" photo />, and <TeamMember name="Abigail Richardson" photo />, our Support Engineers, triage tickets for the Product Analytics, Web Analytics, Data Warehouse, CDP, Replay, and Feature Success teams, due to the high volume of tickets those teams get. They will resolve tickets if possible, and escalate to the engineering team responsible if they need further help.
+Our Support Engineers, in [the Comms team](/teams/customer-comms) triage tickets for the Product Analytics, Web Analytics, Data Warehouse, CDP, Replay, and Feature Success teams, due to the high volume of tickets those teams get. They will resolve tickets if possible, and escalate to the engineering team responsible if they need further help.
 
 ## When is my turn?
 
@@ -19,7 +21,7 @@ Most engineering teams run a PagerDuty schedule:
 - [Product Analytics](https://posthog.pagerduty.com/schedules#PXUZ9XL)
 - [Feature Success](https://posthog.pagerduty.com/schedules#P04FUTJ)
 - [Replay](https://posthog.pagerduty.com/schedules#PLGXQIF)
-- [Pipeline](https://posthog.pagerduty.com/schedules#PM8YSH8)
+- [CDP](https://posthog.pagerduty.com/schedules#PM8YSH8)
 - [Infrastructure](https://posthog.pagerduty.com/schedules#P78OOWZ)
 - [Growth](https://posthog.pagerduty.com/schedules#PN1Q6BO)
 
@@ -41,7 +43,7 @@ Each engineering team has its own list of tickets in Zendesk:
 - [Infrastructure](https://posthoghelp.zendesk.com/agent/filters/14507148758939)
 - [Auth & Billing, handled by Growth](https://posthoghelp.zendesk.com/agent/filters/14507107058843)
 
-Your job is simple: resolve ticket after ticket from your team's list.
+Your job is simple: ship features and fixes, and resolve ticket after ticket from your team's list.
 
 There are three sources of tickets:
 
@@ -49,24 +51,57 @@ There are three sources of tickets:
 1. Community questions asked on PostHog.com.
 1. Slack threads that have been marked with the 🎫 reaction in customer support channels.
 
-Some of them will ask for new features. If the feature would be widely useful for users matching [our ICP](/handbook/who-we-are-building-for), it might be a good idea to build it. Otherwise, feel free to just create a feature request issue in GitHub or +1 on an existing one – you can then send a link to the user, giving them a way of tracking progress. Also make sure to let the [Customer Success team](/teams/customer-success) know, since they will track feature requests for paying customers.
+### Shipping features
 
-Others will report bugs or suspected bugs. Get to the bottom of each one - you never know what you'll find. If the issue decidedly affects only that one user under one-in-a-million circumstances, it might not be worth fixing. But if it's far-reaching, a proper fix is in order. And then there are "bugs" which turn out to be pure cases of confusing UX. Try to improve these too.
+Some tickets ask for new features. If the feature is useful for users matching [our ICP](/handbook/who-we-are-building-for), then decide whether to just build it. Otherwise, create a feature request issue in GitHub or +1 on an existing one – you can then send a link to the user, giving them a way of tracking progress. Also make sure to let the [Customer Success team](/teams/customer-success) know, since they will track feature requests for paying customers.
+
+### Fixing bugs
+
+Others tickets report bugs or suspected bugs. Get to the bottom of each one - you never know what you'll find. If the issue decidedly affects only that one user under one-in-a-million circumstances, it might not be worth fixing. But if it's far-reaching, a proper fix is in order. And then there are "bugs" which turn out to be pure cases of confusing UX. Try to improve these too.
 
 If not much is happening, feel free to do feature work – but in the case of a backlog in Zendesk, drop other things and roll up your sleeves. When you're Support Hero, supporting users comes first.
 
-It's going to be an intense week, but you're also going to solve so many real problems, and that feels great.
+It might be an intense week, but you're also going to solve so many real problems, and that feels great.
+
+## Don't ask users to do work that you can do!
+
+If folk are asking us for help, then we know the product already didn't meet their needs. Asking them to do leg-work that we could do is adding insult to injury.
+
+For example don't ask them what version of posthog-js they're using or what their posthog config is when you can find out for yourself. Or visit their website and check the console instead of asking them if they had any errors.
+
+If you do then have to ask them to do something, make sure you explain why you need it and what you're going to do with it.
 
 ## How do I communicate?
 
-As an engineer, when a question comes in your first instinct is to give them an answer as quickly as possible. That means we often forget pleasantries, or will ignore a question until we've found the answer. Hence the following guidelines:
+There are two valid modes (which overlap!)
+
+1. excited, like a labrador puppy, to discover a new way to improve the product
+2. clinical and clear
+
+### Excited like a labrador puppy
+
+The first is great for when you're talking to someone with feedback or who doesn't seem frustrated. It's important because every single support interaction is an opportunity to ship a fix or an improvement. And the excitement is how we show enough interest to properly hear the feedback.
+
+example: "You can't do that right now, but it sounds super useful. Out of interest what does it unlock for you?"
+
+### Clinical and clear
+
+The second is great for when the issue is tricky or the customer seems frustrated. Sometimes this goes as far as communicating in bullet points instead of paragraphs. When something isn't working the person might (quite rightly) have low tolerance for a support interaction.
+
+example: "Ah, I see what you mean, that's not ideal! Sorry. I'll dig in to that now and let you know what I find by the end of tomorrow."
+
+### General tone
+
+As an engineer, when answering a question, your first instinct is to give them an answer as quickly as possible. That means we often forget pleasantries, or will ignore a question until we've found the answer. So, the following guidelines:
 
 - Always respond to a question within a reasonable timeframe during your working day. Our SLAs are [explained here](/handbook/comms/customer-support#response-targets), but you should always try to respond to tickets quickly. 
-  - If you're ready to look into the issue and you think it might take a while/require a fix, just mention that and say you'll get back to them
+  - If you're ready to look into the issue, and you think it might take a while/require a fix, just mention that and say you'll get back to them
   - If you have no idea how to answer or fix their issue, @mention someone who does
+  - They need to know we've understood them. And have a clear picture of what their onward journey is. Are they waiting for us? How Long? Or - are we waiting for them? what for?
 - Start your response with `Hey [insert name], ...` and make sure you're polite, not everyone you talk to is an engineer and as accepting of terse messages
   - If they expressed frustration, acknowledging it ("Sorry for the confusion", "Apologies for the trouble" etc.) can earn goodwill quickly.
   - Be sure to thank them for reporting problems, giving feedback, creating issues, PRs, etc.
+  - Even if you're using the support portal think about whether they'll see the message in Slack or email. A Slack message that reads like an email seems weirdly formal.
 - Follow up!
 - Housekeeping. Once a customer issue/question has been addressed, close the ticket in [Zendesk](#zendesk) (mark it `Solved`) to make it easy to identify outstanding conversations.
 - If a user has been particularly helpful, such as raising a security or bug report, feel free to offer a small credit for the merch store. 
@@ -221,6 +256,28 @@ We use [Pylon](https://usepylon.com/) to create Zendesk tickets from Slack posts
 Adding the `:ticket:` emoji reaction will cause Pylon to add a couple of replies in a thread under the post. The last of those replies includes options for the ZenDesk ticket you're creating: Use the `Group` menu to send the ticket to the appropriate team, and the `Severity` menu to set the severity flag on the ZenDesk ticket, then hit the `Submit` button.
 
 ZenDesk tickets created this way will normally be marked as high priority tickets. You can respond to them either in Zendesk or Slack, as there is a two-way sync.
+
+### Adding new teams to Zendesk.
+
+When we've added a new [team](/teams), or 🪓 split an existing team into two or more, we'll need to get them set up in Zendesk. Here's an overview of the steps:
+
+- [Create a new group in Zendesk](https://support.zendesk.com/hc/en-us/articles/4408894175130-Creating-groups)
+- [Add team members to the group](https://support.zendesk.com/hc/en-us/articles/4408821536794-Adding-and-removing-team-members-from-groups#topic_skt_qrs_4nb) 
+- [Add triggers](https://support.zendesk.com/hc/en-us/articles/4408843730458-Triggers-resources) to the `Routing for internal teams` category (Tip: Clone an existing trigger, rename it, and tweak it)
+- [Add views](https://support.zendesk.com/hc/en-us/articles/4408888828570-Creating-views-to-build-customized-lists-of-tickets) (Tip: Clone an existing view, rename it, and tweak it.)
+- Add Slack notification [triggers](https://posthoghelp.zendesk.com/admin/objects-rules/rules/triggers) (Tip: Clone an existing trigger, yada, yada)
+- Add SLA breach alerts
+	- [Create a webhook endpoint in slack](https://api.slack.com/messaging/webhooks)
+		- [Create a Slack app](https://api.slack.com/apps/new)
+		- [Enable incoming webhooks](https://api.slack.com/messaging/webhooks#enable_webhooks)
+		- [Create a webhook to the channel](https://api.slack.com/messaging/webhooks#create_a_webhook), copy the url
+	- [Create a webhook in zendesk](https://support.zendesk.com/hc/en-us/articles/4408839108378-Creating-webhooks-to-interact-with-third-party-systems) (Tip: Refer to existing webhooks for common settings)
+		- Choose "Trigger or automation"
+		- Paste the endpoint url you copied from the Slack app
+		  (Note: The built-in tool for testing webhooks in ZD has been flakey while the UI has been changing lately. Failed tests don't always mean the hook won't work. 🫤)
+	- [Create an automation in zendesk](https://support.zendesk.com/hc/en-us/articles/4408832701850-About-automations-and-how-they-work?Z2_EN-US%5Bquery%5D=a) (Tip: Clone an existing automation, blah, blah, blah)
+- If you've split a team, sort the tickets to the new groups as needed, then disable the triggers, automations, and views related to the old team.
+- Carry on
 
 ### Community questions
 

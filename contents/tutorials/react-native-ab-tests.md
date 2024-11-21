@@ -246,3 +246,5 @@ Lastly, you can [view your test results](/docs/experiments/testing-and-launching
 - [A software engineer's guide to A/B testing](/product-engineers/ab-testing-guide-for-engineers)
 - [How to set up React Native (Expo) analytics, feature flags, and more](/tutorials/react-native-analytics)
 - [How to set up A/B tests in iOS](/tutorials/ios-ab-tests)
+
+<NewsletterForm />

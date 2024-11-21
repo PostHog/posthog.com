@@ -48,7 +48,7 @@ const A = (props) => <Link {...props} className="text-red hover:text-red font-se
 export default function Tutorial({ data, pageContext: { tableOfContents, menu }, location }) {
     const { pageData } = data
     const { body, excerpt, fields } = pageData
-    const { title, featuredImage, description, contributors, categories, featuredVideo, date } = pageData?.frontmatter
+    const { title, featuredImage, description, categories, featuredVideo, date } = pageData?.frontmatter
     const filePath = pageData?.parent?.relativePath
     const components = {
         inlineCode: InlineCode,
@@ -76,13 +76,13 @@ export default function Tutorial({ data, pageContext: { tableOfContents, menu },
                 title={title + ' - PostHog'}
                 description={description || excerpt}
                 article
-                image={`/og-images/${fields.slug.replace(/\//g, '')}.jpeg`}
+                image={`${process.env.GATSBY_CLOUDFRONT_OG_URL}/${fields.slug.replace(/\//g, '')}.jpeg`}
+                imageType="absolute"
             />
             <div className="flex flex-col-reverse items-start @3xl:flex-row gap-8 2xl:gap-12">
                 <div className="flex-1 transition-all pt-8 w-full">
                     <div className={`mx-auto transition-all ${fullWidthContent ? 'max-w-full' : 'max-w-2xl px-0'}`}>
                         <Intro
-                            contributors={contributors}
                             featuredImage={featuredImage}
                             title={title}
                             featuredImageType="full"
@@ -129,15 +129,6 @@ export const query = graphql`
                 date(formatString: "MMM DD, YYYY")
                 description
                 categories: tags
-                contributors: authorData {
-                    id
-                    image {
-                        childImageSharp {
-                            gatsbyImageData(width: 38, height: 38)
-                        }
-                    }
-                    name
-                }
                 featuredVideo
                 featuredImage {
                     publicURL

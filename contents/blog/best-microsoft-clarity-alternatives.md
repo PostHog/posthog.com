@@ -44,14 +44,14 @@ PostHog offers more features for engineers, such as console logs and network mon
 
 <ComparisonTable column1="PostHog" column2="Clarity">
   <ComparisonRow column1={true} column2={true} feature="Web session replay" description="View real sessions on websites and web apps" />
-  <ComparisonRow column1="Android only*" column2="Android only" feature="Mobile session replay" description="View real sessions in mobile apps" />
+  <ComparisonRow column1={true} column2="Android only" feature="Mobile session replay" description="View real sessions in mobile apps" />
   <ComparisonRow column1={true} column2={true} feature="Event timeline" description="History of everything that happened in a user's session" />
   <ComparisonRow column1={true} column2={false} feature="Network monitor" description="Analyze performance and network calls" />
   <ComparisonRow column1={true} column2={false} feature="Console logs" description="Debug issues faster by browsing the user's console" />
   <ComparisonRow column1={true} column2={false} feature="Canvas recording" description="Capture canvas elements from your application" />
   <ComparisonRow column1={true} column2={true} feature="Heatmaps" description="See where users click and interact" />
   <ComparisonRow column1={true} column2={true} feature="Rage clicks" description="Detect when users click rapidly in the same place" />
-  <ComparisonRow column1={false} column2={true} feature="Scroll maps" description="See how far users scroll on websites and apps" />
+  <ComparisonRow column1={true} column2={true} feature="Scroll maps" description="See how far users scroll on websites and apps" />
   <ComparisonRow column1={true} column2={false} feature="Product analytics" description="Custom trends, funnels, paths, and retention analysis" />
   <ComparisonRow column1={true} column2={false} feature="Feature flags" description="Control feature access and phase rollouts" />  
   <ComparisonRow column1={true} column2={false} feature="A/B testing" description="Test changes and analyze their impact" />
@@ -73,8 +73,6 @@ According to [reviews on G2](https://www.g2.com/products/posthog/reviews), compa
 > #### Bottom line
 >
 > PostHog goes deeper than Clarity by making it easy to debug issues via detailed event timelines, console logs, and network monitoring, while also enabling you to understand user behavior at every level when combined with product analytics and its other tools.
-
-<NewsletterForm />
 
 <br />
 
@@ -443,4 +441,4 @@ We're biased, obviously, but we think PostHog is the perfect Clarity replacement
 
 Check out [our product pages](/product-analytics) and [read our docs](/docs) to learn more.
 
-<ArrayCTA />
+<NewsletterForm />

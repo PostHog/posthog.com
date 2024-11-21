@@ -680,8 +680,8 @@ function Terms() {
                             notice to Customer (which may be sent by email). If Customer believes that PostHog has
                             billed Customer incorrectly, Customer must contact PostHog no later than 60 days after the
                             closing date on the first billing statement in which the error or problem appeared, in order
-                            to receive an adjustment or credit. Inquiries should be directed to Company’s customer
-                            success department (sales@posthog.com).
+                            to receive an adjustment or credit. Inquiries should be submitted via 
+                            an in-app support ticket to the Company's customer success department.
                         </p>
                     </div>
                     <div className="md:pt-10">
@@ -896,8 +896,7 @@ function Terms() {
                             governed by the laws of the State of California, U.S.A. without regard to its conflict of
                             laws provisions. The federal and state courts sitting in San Francisco County, California,
                             U.S.A. will have proper and exclusive jurisdiction and venue with respect to any disputes
-                            arising from or related to the subject matter of this Agreement. If you provide PostHog with
-                            a link to a recorded video of you reading out these terms in full, we will hook you up with FIVE merch items of your choice for free. 
+                            arising from or related to the subject matter of this Agreement.
                         </p>
                     </div>
                     <div className="md:pt-10">

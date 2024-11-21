@@ -452,6 +452,25 @@ select
 from events
 ```
 
+#### Session replays
+
+You can create a button to view the replay for a session by using the `recording_button()` function with the `session_id`. For example, to get a list of recent replays, you can use:
+
+```sql
+SELECT
+    person.properties.email,
+    min_first_timestamp AS start,
+    recording_button(session_id)
+FROM
+    raw_session_replay_events
+WHERE
+    min_first_timestamp >= now() - INTERVAL 1 DAY
+    AND min_first_timestamp <= now()
+ORDER BY
+    min_first_timestamp DESC
+LIMIT 10
+```
+
 ## Accessing data
 
 ### Strings and quotes

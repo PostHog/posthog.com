@@ -65,7 +65,7 @@ PostHog only captures pageview events when a [page load](https://developer.mozil
 
 If we want to capture every route change, we must write code to capture pageviews that integrates with the router.
 
-To start, we need to add `capture_pageviews: false` to the PostHog initialization to avoid double capturing the first pageview.
+To start, we need to add `capture_pageview: false` to the PostHog initialization to avoid double capturing the first pageview.
 
 ```ts file=main.ts
 import { bootstrapApplication } from '@angular/platform-browser';
@@ -78,7 +78,7 @@ posthog.init(
   {
     api_host:'<ph_client_api_host>',
     person_profiles: 'identified_only',
-    capture_pageviews: false
+    capture_pageview: false
   }
 )
 
@@ -170,13 +170,32 @@ posthog.init(
   {
     api_host:'<ph_client_api_host>',
     person_profiles: 'identified_only',
-    capture_pageviews: false,
+    capture_pageview: false,
     capture_pageleave: true
   }
 )
 
 bootstrapApplication(AppComponent, appConfig)
   .catch((err) => console.error(err));
+```
+
+## Session replay
+
+When using the [JavaScript web library](/docs/libraries/js) for [session replay](/docs/session-replay) in an angular project, if you are manually starting session recording with `posthog.startSessionRecording()`, ensure that you use [`ngZone.runOutsideAngular`](https://angular.io/api/core/NgZone#runoutsideangular). This avoids potential performance issues with Angular's change detection running at the same time as Posthog's session recording.
+
+```ts file=posthog-session-recording.service.ts
+import { Injectable } from '@angular/core';
+import posthog from 'posthog-js'
+
+@Injectable({ providedIn: 'root' })
+export class PostHogSessionRecordingService {
+  constructor(private ngZone: NgZone) {}
+  startSessionRecording() {
+    this.ngZone.runOutsideAngular(() => {
+      posthog.startSessionRecording()
+    })
+  }
+}
 ```
 
 ## Next steps

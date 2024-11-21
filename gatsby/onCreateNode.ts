@@ -100,12 +100,7 @@ export const onCreateNode: GatsbyNode['onCreateNode'] = async ({
 
     if (node.internal.type === `MarkdownRemark` || node.internal.type === 'Mdx') {
         const parent = getNode(node.parent)
-        if (
-            parent?.internal.type === 'SqueakReply' ||
-            parent?.internal.type === 'PostHogPull' ||
-            parent?.internal.type === 'PostHogIssue'
-        )
-            return
+        if (parent?.internal.type === 'PostHogPull' || parent?.internal.type === 'PostHogIssue') return
 
         const imageFields = ['featuredImage', 'thumbnail', 'logo', 'logoDark', 'icon']
         imageFields.forEach((field) => {

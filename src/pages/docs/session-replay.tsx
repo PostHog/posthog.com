@@ -1,3 +1,4 @@
+import CloudinaryImage from 'components/CloudinaryImage'
 import React from 'react'
 import { StaticImage } from 'gatsby-plugin-image'
 
@@ -69,12 +70,12 @@ export const Intro = ({ image = true }) => {
 
             {image && (
                 <figure className="m-0 mt-auto p-0">
-                    <StaticImage
+                    <CloudinaryImage
                         alt=""
                         placeholder="none"
                         quality={100}
                         className=""
-                        src="../../components/Home/Slider/images/session-recording-hog.png"
+                        src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Home/Slider/images/session-recording-hog.png"
                     />
                 </figure>
             )}
@@ -101,13 +102,13 @@ export const Content = ({ quickLinks = false }) => {
                         title="Only record sessions you want"
                         description="Control cost by reducing volume"
                         Image={
-                            <StaticImage
+                            <CloudinaryImage
                                 alt=""
                                 placeholder="none"
                                 objectFit="contain"
                                 className="h-full"
                                 quality={100}
-                                src="../../components/Home/Slider/images/session-recording-hog.png"
+                                src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Home/Slider/images/session-recording-hog.png"
                             />
                         }
                         url="/tutorials/limit-session-recordings"
@@ -117,13 +118,13 @@ export const Content = ({ quickLinks = false }) => {
                         title="Discover user friction with replays"
                         description="Pinpoint issues with filters and replays"
                         Image={
-                            <StaticImage
+                            <CloudinaryImage
                                 alt=""
                                 placeholder="none"
                                 objectFit="contain"
                                 className="h-full"
                                 quality={100}
-                                src="../../components/Home/Slider/images/session-recording-hog.png"
+                                src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Home/Slider/images/session-recording-hog.png"
                             />
                         }
                         url="/tutorials/filter-session-recordings"
@@ -133,13 +134,13 @@ export const Content = ({ quickLinks = false }) => {
                         title="Analyze power users"
                         description="Define a cohort and watch those sessions"
                         Image={
-                            <StaticImage
+                            <CloudinaryImage
                                 alt=""
                                 placeholder="none"
                                 objectFit="contain"
                                 className="h-full"
                                 quality={100}
-                                src="../../components/Home/Slider/images/session-recording-hog.png"
+                                src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Home/Slider/images/session-recording-hog.png"
                             />
                         }
                         url="/tutorials/power-users"
@@ -149,13 +150,13 @@ export const Content = ({ quickLinks = false }) => {
                         title="Improve web app performance"
                         description="Network monitoring in session replays"
                         Image={
-                            <StaticImage
+                            <CloudinaryImage
                                 alt=""
                                 placeholder="none"
                                 objectFit="contain"
                                 className="h-full"
                                 quality={100}
-                                src="../../components/Home/Slider/images/session-recording-hog.png"
+                                src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Home/Slider/images/session-recording-hog.png"
                             />
                         }
                         url="/tutorials/performance-metrics"
@@ -165,13 +166,13 @@ export const Content = ({ quickLinks = false }) => {
                         title="Session replays in customer support"
                         description="Rageclicks, sharing recordings, error monitoring"
                         Image={
-                            <StaticImage
+                            <CloudinaryImage
                                 alt=""
                                 placeholder="none"
                                 objectFit="contain"
                                 className="h-full"
                                 quality={100}
-                                src="../../components/Home/Slider/images/session-recording-hog.png"
+                                src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Home/Slider/images/session-recording-hog.png"
                             />
                         }
                         url="/tutorials/session-recordings-for-support"
@@ -181,13 +182,13 @@ export const Content = ({ quickLinks = false }) => {
                         title="Replay users in a funnel"
                         description="Learn from users who do (or don't) convert"
                         Image={
-                            <StaticImage
+                            <CloudinaryImage
                                 alt=""
                                 placeholder="none"
                                 objectFit="contain"
                                 className="h-full"
                                 quality={100}
-                                src="../../components/Home/Slider/images/session-recording-hog.png"
+                                src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Home/Slider/images/session-recording-hog.png"
                             />
                         }
                         url="/tutorials/explore-insights-session-recordings"

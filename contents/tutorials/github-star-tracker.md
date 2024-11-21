@@ -53,10 +53,12 @@ To visualize star data in PostHog, create an insight by going to the [product an
   classes="rounded"
 />
 
-You can also [set up an action](/docs/data/actions) and then use the [the Slack webhook](/docs/webhooks/slack) to send a message every time you receive a new star.
+You can also [set up up the Slack destination](/docs/cdp/destinations/slack) to send a message every time you receive a new star.
 
 ## Further reading
 
 - [How to capture events from Calendly webhooks](/tutorials/calendly-webhooks)
 - [How to capture new RSS items in PostHog (releases, blogs, status)](/tutorials/rss-item-capture)
 - [Using the PostHog API to capture events](/tutorials/api-capture-events)
+
+<NewsletterForm />

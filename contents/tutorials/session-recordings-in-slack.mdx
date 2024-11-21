@@ -1,0 +1,118 @@
+---
+title: How to send a Slack notification when there's a recording to watch
+sidebar: Docs
+showTitle: true
+author:
+  - paul-dambra
+date: 2024-10-25
+tags:
+  - session replay
+---
+
+Sometimes it's important to watch recordings as soon as they are available. You can take advantage of a little custom code and our new [Hog](/docs/hog) powered functions to receive a Slack notification every time there's a new recording.
+
+## Prerequisites
+
+You'll need:
+
+* The [data pipelines add-on](/docs/cdp) in PostHog Cloud
+* A little custom code when you start `posthog-js`
+* A destination sending to Slack 
+
+## The data pipelines add-on
+
+We'll be using [PostHog's CDP](/docs/cdp) data pipelines add-on. This enables you to react to events in realtime, sending messages to destinations like [Slack](https://us.posthog.com/pipeline/new/destination/hog-template-slack), [Airtable](https://us.posthog.com/pipeline/new/destination/hog-template-airtable), and many more.
+
+This enables us to send an event to PostHog from a user's browser when we detect a recording that we want to act on and have that converted to a message to a Slack channel.
+
+## A little custom code
+
+When you start `posthog-js`, we can add code once the library is loaded to watch for the condition that for your app means the recording is ready to watch.
+
+Here we'll wait until a recording has been idle for 5 minutes, but you might wait for some time after starting or use the `onCapture` hook to send a Slack message when a user experiences a `$exception` event.
+
+```js
+posthog.init('<ph_project_api_key>', {
+    api_host: '<ph_client_api_host>',
+    loaded: (ph) => {
+      let checkInterval
+
+      // this will be called every time a new sesson starts
+      ph.onSessionId((sessionId) => {
+        clearInterval(checkInterval)
+
+        // setup a check for the condition that means the recording is interesting enough to be watched
+        checkInterval = setInterval(() => {
+          // we want to read the session data, but not change it, so we pass `true`
+          const { 
+            lastActivityTimestamp, 
+            // or maybe sessionStartTimestamp, 
+            sessionId 
+           } = ph.sessionManager.checkAndGetSessionAndWindowId(true)
+            
+            const sinceLastActivity = Math.abs(new Date().getTime() - lastActivityTimestamp)
+            const fiveMinutesInMillis = 5 * 60 * 1000
+            if (sinceLastActivity > fiveMinutesInMillis) {
+                // capture an event that will be used to trigger the posthog destination
+              ph.capture('session_idle_for_five_minutes', {
+                sessionURL: ph.get_session_replay_url({ withTimestamp: true }),
+                idleSessionId: sessionId,
+              })
+
+              // clear the interval so we only send the event once
+              clearInterval(checkInterval)
+            }
+          
+        }, 5000)
+      })
+    }
+  })
+```
+
+Now, for every session this instance of PostHog starts, whenever it first sees 5 minutes of inactivity, it sends an event with the session ID and URL for the recording.
+
+## A CDP destination
+
+You can see how to [setup a Slack destination in our docs here](/docs/cdp/destinations/slack)
+
+In this case, we want to set the event trigger to the event emitted above:
+
+* Set the event trigger to the event `session_idle_for_five_minutes`.
+* If you use our replay ingestion controls, not all sessions are recorded. You can add a filter for `session_recording_start_reason is set` to only react to sessions where recording is running.
+
+Finally, you can change the templated message we send to Slack. Here we add a button to jump to the person or straight to the recording:
+
+```hog
+[
+  {
+    "text": {
+      "text": "*{person.name}* has a recording available to watch",
+      "type": "mrkdwn"
+    },
+    "type": "section"
+  },
+  {
+    "type": "actions",
+    "elements": [
+      {
+        "url": "{person.url}",
+        "text": {
+          "text": "View Person in PostHog",
+          "type": "plain_text"
+        },
+        "type": "button"
+      },
+      {
+        "url": "{event.properties.sessionURL}",
+        "text": {
+          "text": "Replay URL",
+          "type": "plain_text"
+        },
+        "type": "button"
+      }
+    ]
+  }
+]
+```
+
+<NewsletterForm />

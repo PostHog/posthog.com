@@ -1,5 +1,5 @@
 ---
-title: Property Filter
+title: Filter event properties
 github: 'https://github.com/PostHog/property-filter-plugin'
 installUrl: 'https://app.posthog.com/project/apps?name=Property%20Filter'
 thumbnail: >-

@@ -245,7 +245,12 @@ const createOrUpdateStrapiPosts = async (posts, roadmaps) => {
 }
 
 export const onPostBuild: GatsbyNode['onPostBuild'] = async ({ graphql }) => {
-    if (process.env.VERCEL_GIT_COMMIT_REF !== 'master') return
+    if (process.env.AWS_CODEPIPELINE !== 'true') {
+        console.log('Skipping onPostBuild tasks')
+        return
+    }
+
+    console.log('Running onPostBuild tasks')
 
     const { data } = await graphql(`
         query {
@@ -324,8 +329,10 @@ export const onPostBuild: GatsbyNode['onPostBuild'] = async ({ graphql }) => {
                         authorData {
                             name
                             role
-                            image {
-                                absolutePath
+                            profile {
+                                avatar {
+                                    url
+                                }
                             }
                         }
                     }
@@ -337,9 +344,7 @@ export const onPostBuild: GatsbyNode['onPostBuild'] = async ({ graphql }) => {
                         slug
                         contributors {
                             username
-                            avatar {
-                                absolutePath
-                            }
+                            avatar
                         }
                     }
                     frontmatter {
@@ -404,9 +409,7 @@ export const onPostBuild: GatsbyNode['onPostBuild'] = async ({ graphql }) => {
         }
     `)
 
-    if (process.env.VERCEL_GIT_COMMIT_REF === 'master') {
-        await createOrUpdateStrapiPosts(data.allMDXPosts.nodes, data.allRoadmap.nodes)
-    }
+    await createOrUpdateStrapiPosts(data.allMDXPosts.nodes, data.allRoadmap.nodes)
 
     const dir = path.resolve(__dirname, '../public/og-images')
     if (!fs.existsSync(dir)) fs.mkdirSync(dir, { recursive: true })
@@ -467,9 +470,9 @@ export const onPostBuild: GatsbyNode['onPostBuild'] = async ({ graphql }) => {
         const author =
             authorData &&
             authorData.map((author) => {
-                const image = fs.readFileSync(author.image.absolutePath, {
-                    encoding: 'base64',
-                })
+                const image =
+                    author.profile?.avatar?.url ||
+                    `https://res.cloudinary.com/dmukukwp6/image/upload/contributor_posthog_e8c595ea3d.png`
                 return {
                     ...author,
                     image,
@@ -493,11 +496,7 @@ export const onPostBuild: GatsbyNode['onPostBuild'] = async ({ graphql }) => {
             const { avatar, username } = contributor
             return {
                 username,
-                avatar:
-                    avatar?.absolutePath &&
-                    fs.readFileSync(avatar.absolutePath, {
-                        encoding: 'base64',
-                    }),
+                avatar,
             }
         })
         let breadcrumbs = null

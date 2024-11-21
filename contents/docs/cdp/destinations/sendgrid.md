@@ -1,5 +1,5 @@
 ---
-title: Sendgrid
+title: Send PostHog person data to Sendgrid
 templateId: template-sendgrid
 ---
 
@@ -7,7 +7,7 @@ import Requirements from "../_snippets/requirements.mdx"
 import FeedbackQuestions from "../_snippets/feedback-questions.mdx"
 import PostHogMaintained from "../_snippets/posthog-maintained.mdx"
 
-Send person data from PostHog into Sendgrid. You can also send person properties to custom fields in Sendgrid.
+You can also send person properties to custom fields in Sendgrid.
 
 <Requirements />
 
@@ -20,6 +20,8 @@ You'll also need access to the relevant Sendgrid account.
 3. Search for 'Sendgrid' and select the destination.
 4. Add your Sendgrid API Key at the configuration step.
 5. Press 'Create & Enable' and watch your 'Contacts' list get populated in Sendgrid!
+
+<HideOnCDPIndex>
 
 ## Configuration
 
@@ -34,3 +36,5 @@ PostHog is open-source and so are all the destination on the platform. The [sour
 <PostHogMaintained />
 
 <FeedbackQuestions />
+
+</HideOnCDPIndex>

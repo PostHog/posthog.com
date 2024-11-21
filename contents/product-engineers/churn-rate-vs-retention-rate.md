@@ -73,8 +73,6 @@ I've collated the better sources [in the appendix](#more-on-churn-rate-benchmark
 
 Good retention rates are the same, but inverted – 5% churn equals 95% retention, and so on.
 
-<NewsletterForm />
-
 ## Retention rate formula explained 📈
 
 So that's churn rate, but what about retention rate? The basic formula is very similar:

@@ -1,13 +1,11 @@
 ---
-title: Intercom
+title: Send PostHog event data to Intercom
 templateId: template-intercom
 ---
 
 import Requirements from "../_snippets/requirements.mdx"
 import FeedbackQuestions from "../_snippets/feedback-questions.mdx"
 import PostHogMaintained from "../_snippets/posthog-maintained.mdx"
-
-Send event data from PostHog into Intercom.
 
 <Requirements />
 
@@ -20,6 +18,8 @@ You'll also need access to the relevant Intercom account.
 3. Search for 'Intercom' and select the destination.
 4. Add your Intercom access token at the configuration step.
 5. Press 'Create & Enable' and watch your 'Contacts' list get populated in Intercom!
+
+<HideOnCDPIndex>
 
 ## Configuration
 
@@ -34,3 +34,5 @@ PostHog is open-source and so are all the destination on the platform. The [sour
 <PostHogMaintained />
 
 <FeedbackQuestions />
+
+</HideOnCDPIndex>

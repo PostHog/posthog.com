@@ -19,6 +19,7 @@ const FunThing: React.FC<{
             </a>
         ) : (
             image
+
         )}
         <div className={`p-4 ${imagePosition === 'top' ? '' : ''}`}>
             <h3 className="text-xl mb-1 leading-tight" dangerouslySetInnerHTML={{ __html: title }} />
@@ -160,11 +161,25 @@ const frameContents = [
         ),
         imagePosition: 'bottom',
     },
+    {
+        title: 'DPA generator, featuring a Taylor Swift edition',
+        content: "It's the most fun you've ever had filling out a legal document.",
+        link: '/dpa',
+        image: <CloudinaryImage src="https://res.cloudinary.com/dmukukwp6/image/upload/dpa_a05cbe57d5.png" alt="DPA generator" />,
+        imagePosition: 'bottom',
+    },
+    {
+        title: 'Human-readable privacy policy',
+        content: "A privacy policy that won't put you to sleep. Be sure to check out the Tweet-style summary, too!",
+        link: '/privacy',
+        image: <CloudinaryImage src="https://res.cloudinary.com/dmukukwp6/image/upload/privacy_050678164a.png" alt="Human-readable privacy policy" />,
+        imagePosition: 'bottom',
+    },
     // {
     //     title: '',
     //     content: "",
     //     link: '',
-    //     image: <StaticImage src="./images/blah.png" alt="" />,
+    //     image: <CloudinaryImage src="./images/blah.png" alt="" />,
     //     imagePosition: 'bottom',
     // },
 ]

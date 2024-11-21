@@ -22,7 +22,6 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
     const ChangelogTemplate = path.resolve(`src/templates/Changelog.tsx`)
     const PostListingTemplate = path.resolve(`src/templates/PostListing.tsx`)
     const PaginationTemplate = path.resolve(`src/templates/Pagination.tsx`)
-    const TeamTemplate = path.resolve(`src/templates/Team.tsx`)
 
     // Tutorials
     const TutorialsTemplate = path.resolve(`src/templates/tutorials/index.tsx`)
@@ -32,14 +31,12 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
     // Docs
     const ApiEndpoint = path.resolve(`src/templates/ApiEndpoint.tsx`)
     const HandbookTemplate = path.resolve(`src/templates/Handbook.tsx`)
-    const merchStore =
-        process.env.SHOPIFY_APP_PASSWORD && process.env.GATSBY_MYSHOPIFY_URL && process.env.GATBSY_SHOPIFY_SALES_CHANNEL
 
     const result = (await graphql(`
         {
             allMdx(
                 filter: {
-                    fileAbsolutePath: { regex: "/^((?!contents/team/).)*$/" }
+                    fileAbsolutePath: { regex: "/^((?!contents/teams/).)*$/" }
                     frontmatter: { title: { ne: "" } }
                 }
             ) {
@@ -318,188 +315,11 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
                     fieldValue
                 }
             }
-            teams:  allMdx(filter: {frontmatter: {template: {eq: "team"}}}) {
-                nodes {
-                  id
-                  fields {
-                    slug
-                  }
-                  frontmatter {
-                    title
-                  }
-                }
-              }
-            ${
-                merchStore
-                    ? `allShopifyProduct(limit: 1000) {
-                nodes {
-                    handle
-                }
-            }
-            allShopifyCollection {
-                nodes {
-                    handle
-                    products {
-                        description
-                        featuredMedia {
-                            preview {
-                                image {
-                                    width
-                                    height
-                                    originalSrc
-                                }
-                            }
-                        }
-                        handle
-                        id
-                        media {
-                            mediaContentType
-                            preview {
-                                image {
-                                    width
-                                    height
-                                    originalSrc
-                                }
-                            }
-                        }
-						imageProducts {
-							handle
-							featuredImage {
-								width
-                                height
-                                originalSrc
-							}
-						}
-                        metafields {
-                            value
-                            key
-                        }
-                        options {
-                            shopifyId
-                            name
-                            values
-                        }
-                        priceRangeV2 {
-                            maxVariantPrice {
-                                amount
-                            }
-                            minVariantPrice {
-                                amount
-                            }
-                        }
-                        shopifyId
-                        status
-                        title
-                        tags
-                        totalInventory
-                        variants {
-                            availableForSale
-                            media {
-                                preview {
-                                    image {
-                                        width
-                                        height
-                                        originalSrc
-                                    }
-                                }
-                            }
-                            price
-                            product {
-                                title
-                                featuredMedia {
-                                    preview {
-                                        image {
-                                            width
-                                            height
-                                            originalSrc
-                                        }
-                                    }
-                                }
-                            }
-                            selectedOptions {
-                                name
-                                value
-                            }
-                            shopifyId
-                            sku
-                            title
-                        }
-                    }
-                }
-            }
-            allMerchNavigation {
-                nodes {
-                    title
-                    handle
-                }
-            }`
-                    : ''
-            }
         }
     `)) as GatsbyContentResponse
 
     if (result.error) {
         return Promise.reject(result.error)
-    }
-
-    /**
-     * Merch
-     */
-    if (merchStore) {
-        const merchNav = result.data.allMerchNavigation.nodes?.map((item: MetaobjectsCollection) => {
-            return {
-                url: item.handle === 'all-products' ? '/merch' : `/merch/${item.handle}`,
-                handle: item.handle,
-                title: item.title,
-            }
-        })
-
-        /**
-         * Collection pages. Slightly abusing context here and sending all products
-         * per paginated collection page. Gatsby doesn't let you both filter your
-         * Graphql query at collections and then again for the products inside.
-         */
-        const productsPerPage = 50
-        result.data.allShopifyCollection.nodes.forEach((collection) => {
-            const { handle, products } = collection
-            const merchBasePath = '/merch'
-            const collectionPath = handle === 'all-products' ? '' : `/${handle}`
-            const collectionProductsCount = products.length
-            const numPages = Math.ceil(collectionProductsCount / productsPerPage)
-
-            Array.from({
-                length: numPages,
-            }).forEach((_, i) => {
-                const currentPage = i + 1
-                const startIndex = (currentPage - 1) * productsPerPage
-                const endIndex = startIndex + productsPerPage
-                const productsForCurrentPage = products.slice(startIndex, endIndex)
-
-                createPage({
-                    path: i === 0 ? `${merchBasePath}${collectionPath}` : `${merchBasePath}${collectionPath}/${i + 1}`,
-                    component: path.resolve('./src/templates/merch/Collection.tsx'),
-                    context: {
-                        merchNav,
-                        handle,
-                        limit: productsPerPage,
-                        skip: i * productsPerPage,
-                        numPages,
-                        currentPage: i + 1,
-                        productsForCurrentPage,
-                    },
-                })
-            })
-        })
-
-        result.data.allShopifyProduct.nodes.forEach((node) => {
-            createPage({
-                path: `/merch/products/${node.handle}/`,
-                component: path.resolve(`./src/templates/merch/Product.tsx`),
-                context: {
-                    handle: node.handle,
-                },
-            })
-        })
     }
 
     const menuFlattened = flattenMenu(menu)
@@ -584,89 +404,136 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
         })
     }
 
-    const categories = {}
-    result.data.categories.categories.forEach(({ category, totalCount }) => {
-        const slug = slugify(category, { lower: true })
-        const base = `/blog/categories/${slug}`
-        categories[category] = {
-            slug,
-            url: base,
-        }
+    if (process.env.VERCEL_ENV !== 'preview') {
+        const categories = {}
+        result.data.categories.categories.forEach(({ category, totalCount }) => {
+            const slug = slugify(category, { lower: true })
+            const base = `/blog/categories/${slug}`
+            categories[category] = {
+                slug,
+                url: base,
+            }
 
-        createPaginatedPages({ totalCount, base, template: BlogCategoryTemplate, extraContext: { category, slug } })
-    })
+            createPaginatedPages({ totalCount, base, template: BlogCategoryTemplate, extraContext: { category, slug } })
+        })
 
-    result.data.categories.tags.forEach(({ tag, totalCount }) => {
-        const slug = slugify(tag, { lower: true })
-        const base = `/blog/tags/${slug}`
+        result.data.categories.tags.forEach(({ tag, totalCount }) => {
+            const slug = slugify(tag, { lower: true })
+            const base = `/blog/tags/${slug}`
+
+            createPaginatedPages({
+                totalCount,
+                base,
+                template: BlogTagTemplate,
+                extraContext: { tag, slug },
+            })
+        })
 
         createPaginatedPages({
-            totalCount,
-            base,
-            template: BlogTagTemplate,
-            extraContext: { tag, slug },
-        })
-    })
-
-    createPaginatedPages({
-        totalCount: result.data.blogPosts.totalCount,
-        base: '/blog/all',
-        template: PaginationTemplate,
-        extraContext: {
-            regex: '/^/blog/',
-            title: 'Blog',
-        },
-    })
-
-    createPaginatedPages({
-        totalCount: result.data.library.totalCount,
-        base: '/library/all',
-        template: PaginationTemplate,
-        extraContext: {
-            regex: '/^/library/',
-            title: 'Library',
-        },
-    })
-
-    createPaginatedPages({
-        totalCount: result.data.founders.totalCount,
-        base: '/founders/all',
-        template: PaginationTemplate,
-        extraContext: {
-            regex: '/^/founders/',
-            title: 'Founders',
-        },
-    })
-
-    createPaginatedPages({
-        totalCount: result.data.productEngineers.totalCount,
-        base: '/product-engineers/all',
-        template: PaginationTemplate,
-        extraContext: {
-            regex: '/^/product-engineers/',
-            title: 'Product engineers',
-        },
-    })
-
-    createPaginatedPages({
-        totalCount: result.data.features.totalCount,
-        base: '/features/all',
-        template: PaginationTemplate,
-        extraContext: {
-            regex: '/^/features/',
-            title: 'Features',
-        },
-    })
-
-    result.data.allMdx.nodes.forEach((node) => {
-        createPage({
-            path: replacePath(node.slug),
-            component: PlainTemplate,
-            context: {
-                id: node.id,
+            totalCount: result.data.blogPosts.totalCount,
+            base: '/blog/all',
+            template: PaginationTemplate,
+            extraContext: {
+                regex: '/^/blog/',
+                title: 'Blog',
             },
         })
-    })
+
+        createPaginatedPages({
+            totalCount: result.data.library.totalCount,
+            base: '/library/all',
+            template: PaginationTemplate,
+            extraContext: {
+                regex: '/^/library/',
+                title: 'Library',
+            },
+        })
+
+        createPaginatedPages({
+            totalCount: result.data.founders.totalCount,
+            base: '/founders/all',
+            template: PaginationTemplate,
+            extraContext: {
+                regex: '/^/founders/',
+                title: 'Founders',
+            },
+        })
+
+        createPaginatedPages({
+            totalCount: result.data.productEngineers.totalCount,
+            base: '/product-engineers/all',
+            template: PaginationTemplate,
+            extraContext: {
+                regex: '/^/product-engineers/',
+                title: 'Product engineers',
+            },
+        })
+
+        createPaginatedPages({
+            totalCount: result.data.features.totalCount,
+            base: '/features/all',
+            template: PaginationTemplate,
+            extraContext: {
+                regex: '/^/features/',
+                title: 'Features',
+            },
+        })
+
+        result.data.allMdx.nodes.forEach((node) => {
+            createPage({
+                path: replacePath(node.slug),
+                component: PlainTemplate,
+                context: {
+                    id: node.id,
+                },
+            })
+        })
+
+        result.data.tutorials.categories.forEach(({ category, totalCount }) => {
+            const slug = slugify(category, { lower: true })
+            const base = `/tutorials/categories/${slug}`
+
+            createPaginatedPages({
+                totalCount,
+                base,
+                template: TutorialsCategoryTemplate,
+                extraContext: { activeFilter: category, slug },
+            })
+        })
+
+        createPaginatedPages({
+            totalCount: result.data.tutorials.totalCount,
+            base: '/tutorials/all',
+            template: TutorialsTemplate,
+        })
+
+        result.data.postCategories.nodes.forEach(
+            ({ attributes: { folder: categoryFolder, label: categoryLabel, post_tags } }) => {
+                createPage({
+                    path: `/${categoryFolder}`,
+                    component: PostListingTemplate,
+                    context: {
+                        post: true,
+                        title: categoryLabel,
+                        article: false,
+                    },
+                })
+
+                post_tags?.data?.forEach(({ attributes: { label: tagLabel } }) => {
+                    createPage({
+                        path: `/${categoryFolder}/${slugify(tagLabel, { lower: true, strict: true })}`,
+                        component: PostListingTemplate,
+                        context: {
+                            selectedTag: tagLabel,
+                            post: true,
+                            title: tagLabel,
+                            article: false,
+                        },
+                    })
+                })
+            }
+        )
+    }
 
     createPosts(result.data.handbook.nodes, 'handbook', HandbookTemplate, { name: 'Handbook', url: '/handbook' })
     createPosts(result.data.docs.nodes, 'docs', HandbookTemplate, { name: 'Docs', url: '/docs' })
@@ -689,24 +556,6 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
                 article: true,
             },
         })
-    })
-
-    result.data.tutorials.categories.forEach(({ category, totalCount }) => {
-        const slug = slugify(category, { lower: true })
-        const base = `/tutorials/categories/${slug}`
-
-        createPaginatedPages({
-            totalCount,
-            base,
-            template: TutorialsCategoryTemplate,
-            extraContext: { activeFilter: category, slug },
-        })
-    })
-
-    createPaginatedPages({
-        totalCount: result.data.tutorials.totalCount,
-        base: '/tutorials/all',
-        template: TutorialsTemplate,
     })
 
     result.data.blogPosts.nodes.forEach((node) => {
@@ -750,33 +599,6 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
             article: false,
         },
     })
-
-    result.data.postCategories.nodes.forEach(
-        ({ attributes: { folder: categoryFolder, label: categoryLabel, post_tags } }) => {
-            createPage({
-                path: `/${categoryFolder}`,
-                component: PostListingTemplate,
-                context: {
-                    post: true,
-                    title: categoryLabel,
-                    article: false,
-                },
-            })
-
-            post_tags?.data?.forEach(({ attributes: { label: tagLabel } }) => {
-                createPage({
-                    path: `/${categoryFolder}/${slugify(tagLabel, { lower: true, strict: true })}`,
-                    component: PostListingTemplate,
-                    context: {
-                        selectedTag: tagLabel,
-                        post: true,
-                        title: tagLabel,
-                        article: false,
-                    },
-                })
-            })
-        }
-    )
 
     result.data.spotlights.nodes.forEach((node) => {
         const { slug } = node.fields
@@ -895,20 +717,6 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
             component: ChangelogTemplate,
             context: {
                 year: Number(year),
-            },
-        })
-    })
-
-    result.data.teams.nodes.forEach(({ id, frontmatter: { title }, fields: { slug } }) => {
-        createPage({
-            path: slug,
-            component: TeamTemplate,
-            context: {
-                id,
-                slug,
-                teamName: title,
-                ignoreWrapper: true,
-                objectives: `${slug}/objectives`,
             },
         })
     })

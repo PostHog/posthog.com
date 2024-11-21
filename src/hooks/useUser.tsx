@@ -58,6 +58,7 @@ type UserContextValue = {
     }) => Promise<void>
     notifications: any
     setNotifications: any
+    isValidating: boolean
 }
 
 export const UserContext = createContext<UserContextValue>({
@@ -80,6 +81,7 @@ export const UserContext = createContext<UserContextValue>({
     likeRoadmap: async () => undefined,
     notifications: [],
     setNotifications: () => undefined,
+    isValidating: true,
 })
 
 type UserProviderProps = {
@@ -88,6 +90,7 @@ type UserProviderProps = {
 
 export const UserProvider: React.FC<UserProviderProps> = ({ children }) => {
     const [isLoading, setIsLoading] = useState(false)
+    const [isValidating, setIsValidating] = useState(true)
     const [user, setUser] = useState<User | null>(null)
     const [jwt, setJwt] = useState<string | null>(null)
     const [notifications, setNotifications] = useState<any>([])
@@ -101,6 +104,7 @@ export const UserProvider: React.FC<UserProviderProps> = ({ children }) => {
         } else {
             logout()
         }
+        setIsValidating(false)
     }
 
     useEffect(() => {
@@ -572,6 +576,7 @@ export const UserProvider: React.FC<UserProviderProps> = ({ children }) => {
         likeRoadmap,
         notifications,
         setNotifications: updateNotifications,
+        isValidating,
     }
 
     return <UserContext.Provider value={contextValue}>{children}</UserContext.Provider>

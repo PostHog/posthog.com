@@ -57,7 +57,7 @@ The PostHog toolbar currently doesn't work for Nuxt users because Nuxt overrides
 
 ### Toolbar disppearing on transition with Astro
 
-[Astro](/tutorial/astro-analytics) with [view transitions enabled](https://docs.astro.build/en/guides/view-transitions/) can cause the toolbar to disappear on transition. To prevent this, you can: 
+[Astro](/tutorials/astro-analytics) with [view transitions enabled](https://docs.astro.build/en/guides/view-transitions/) can cause the toolbar to disappear on transition. To prevent this, you can: 
 
 1. Retrieve the `__posthog` JSON from the URL on `astro:page-load`.
 2. Prevent the toolbar from loading on `astro:before-swap`.

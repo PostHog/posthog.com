@@ -84,8 +84,6 @@ Because engineers shape the direction of every product, having this trait ensure
 
 > **What to look for:** People who build cool stuff for the sake of it – e.g. side projects, open source contributions – and haven’t job-hopped to optimize title or salary.
 
-<NewsletterForm />
-
 ## 4. Customer obsessed
 
 To uncover the real problems users have (and value), [product engineers](/blog/what-is-a-product-engineer) at PostHog interact with them much more often than regular engineers do. This includes:
@@ -113,7 +111,7 @@ Our teams have a lot of autonomy. They decide on their roadmap, goals, and imple
 - Choosing the right metrics to [measure the success of new features](https://newsletter.posthog.com/p/how-to-build-new-features-users-love).
 - Understanding the infrastructure requirements and scalability.
 
-To guide the development of mobile replay, [Manoel](/community/profiles/1166) researched competitors and feedback about them. He and [Paul](/community/profiles/69) also developed a spec for mobile replay that included details about the client lifecycle, API request, data structure, and compatibility with [rrweb](https://github.com/rrweb-io/rrweb). This research and planning helps them build a feature that makes business sense while also being scalable and maintainable.
+To guide the [development of mobile replay](/blog/mobile-session-replay), [Manoel](/community/profiles/1166) researched competitors and feedback about them. He and [Paul](/community/profiles/69) also developed a spec for mobile replay that included details about the client lifecycle, API request, data structure, and compatibility with [rrweb](https://github.com/rrweb-io/rrweb). This research and planning helps them build a feature that makes business sense while also being scalable and maintainable.
 
 The ability to see the bigger picture enables us to make better long-term decisions. If we’re too tunnel-visioned, we can miss opportunities or build things that break in the long run.
 
@@ -127,7 +125,7 @@ The opposite of this is people who are heavily self-promoting and ego-driven. Jo
 
 As an example of what being easy to work with looks like, the best sort of communication at PostHog is a pull request. Other companies encourage piling tasks on other people’s plates. We try to figure it out ourselves and open a PR if possible (even if it is wrong). It is a lot easier to tweak a PR than make a change from scratch, helping us ship faster.
 
-Because we work closely and give each other a lot of feedback, being difficult to work with would create a lot of tension and could have a massive negative impact on many.
+Because we work closely and give each other a lot of [feedback](/newsletter/how-to-give-feedback), being difficult to work with would create a lot of tension and could have a massive negative impact on many.
 
 > **What to look for:** Referrals, lack of excuses and complaints from past roles, gels well with team, proactive during the interview process.
 
