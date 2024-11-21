@@ -24,7 +24,7 @@ export const Screenshot = ({ icon, product, slug, order, className = '' }: Scree
   const isDark = websiteTheme === 'dark'
 
   return (
-    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 1280 736" className={`${className} shadow-xl rounded-md reasonable:max-h-[calc(100vh_-_53px_-_2rem)] border border-transparent dark:border-dark/50`}>
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 1280 736" className={`${className} shadow-xl rounded-md reasonable:max-h-[calc(100vh_-_53px_-_2rem)] mx-auto max-w-7xl border border-transparent dark:border-dark/50`}>
       
       <g clipPath="url(#a)">
         {/* content frame */}
