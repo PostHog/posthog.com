@@ -78,6 +78,26 @@ export default function HugHog({ onClick, className, active }) {
                         fill="#402943"
                     />
                 </motion.svg>
+                {active && (
+                    <motion.svg
+                        width="315"
+                        height="342"
+                        viewBox="0 0 315 342"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg"
+                        animate={{ translateY: active ? -30 : 0 }}
+                        initial={{ x: 0, y: 0, rotate: -135 }}
+                        transition={{ type: 'spring', duration: 0.8, bounce: 0.8 }}
+                    >
+                        <path
+                            stroke="red"
+                            pathLength="1"
+                            strokeWidth="5"
+                            d="M0 200 v-200 h200 a100,100 90 0,1 0,200 a100,100 90 0,1 -200,0 z"
+                            fill="red"
+                        />
+                    </motion.svg>
+                )}
                 <motion.svg
                     width="30"
                     height="22"
