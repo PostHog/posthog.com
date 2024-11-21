@@ -38,6 +38,7 @@ import { FAQ } from 'components/Products/FAQ'
 import { SEO } from 'components/seo'
 import { useLayoutData } from 'components/Layout/hooks'
 import Plans from 'components/Pricing/Plans'
+import { Screenshot } from '../Screenshot'
 import Logo from 'components/Logo'
 
 const product = {
@@ -470,6 +471,14 @@ export const ProductSurveys = () => {
                 />
 
                 <div className="text-center">
+                    {/* if show survey demo */}
+                    <Screenshot
+                        product={product.capitalized}
+                        slug={product.slug}
+                        icon={<IconMessage />}
+                        order={5}
+                        className={`mx-auto`}
+                    />
                     <CloudinaryImage
                         src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/images/products/screenshot-surveys.png"
                         alt="Screenshot of survey results in PostHog"

@@ -350,7 +350,7 @@ export const ProductWebAnalytics = () => {
                     <img
                         src="/images/products/web-analytics/screenshot-web-analytics.png"
                         alt="Screenshot of web analytics in PostHog"
-                        className="w-full max-w-[1440px]"
+                        className="mx-auto w-full max-w-[1440px]"
                         placeholder="none"
                     />
                 </div>

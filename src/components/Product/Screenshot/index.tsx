@@ -48,7 +48,7 @@ export const Screenshot = ({ icon, product, slug, order, className = '' }: Scree
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
             viewBox="0 0 1280 736"
-            className={`${className} shadow-xl rounded-md reasonable:max-h-[calc(100vh_-_53px_-_2rem)] border border-transparent dark:border-dark/50`}
+            className={`${className} shadow-xl rounded-md reasonable:max-h-[calc(100vh_-_53px_-_2rem)] mx-auto max-w-7xl border border-transparent dark:border-dark/50`}
         >
             <g clipPath="url(#a)">
                 {/* content frame */}
@@ -247,7 +247,69 @@ export const Screenshot = ({ icon, product, slug, order, className = '' }: Scree
                 </text>
 
                 {/* app background */}
-                <path fill="url(#j)" d="M215 77h1017v659H215z" />
+
+                {slug === 'surveys' && (
+                    <g id="survey content frame" style={{ backgroundColor: isDark ? '#202124' : '#fff' }}>
+                        <rect width="1017" height="596" transform="translate(215 138)" fill="white" />
+                        <text
+                            id="0"
+                            fill="black"
+                            xmlSpace="preserve"
+                            style={{
+                                whiteSpace: 'pre',
+                                fontFamily: 'Matter SQ',
+                                fontSize: '36',
+                                fontWeight: '670',
+                                letterSpacing: '0em',
+                            }}
+                        >
+                            <tspan x="262" y="209.352">
+                                0
+                            </tspan>
+                        </text>
+                        <text
+                            id="responses"
+                            opacity="0.75"
+                            fill="black"
+                            xmlSpace="preserve"
+                            style={{
+                                whiteSpace: 'pre',
+                                fontFamily: 'Matter SQ',
+                                fontSize: '24',
+                                fontWeight: '500',
+                                letterSpacing: '0em',
+                            }}
+                        >
+                            <tspan x="262" y="237.568">
+                                responses
+                            </tspan>
+                        </text>
+                        <g id="progress bar">
+                            <g clip-path="url(#clip2_16433_51496)">
+                                <rect id="background bar" x="260" y="266" width="920" height="44" fill="#EEEEEE" />
+                                <rect id="active bar" x="260" y="266" width="160" height="44" fill="#2F80FA" />
+                            </g>
+                        </g>
+                        <rect id="Rectangle 4144" x="260" y="392" width="710" height="36" rx="4" fill="#EEEEEE" />
+                        <rect id="Rectangle 4160" x="260" y="347" width="920" height="36" rx="4" fill="#EEEEEE" />
+                        <rect id="Rectangle 4152" x="992" y="392" width="188" height="36" rx="4" fill="#EEEEEE" />
+                        <rect id="Rectangle 4145" x="260" y="437" width="710" height="36" rx="4" fill="#EEEEEE" />
+                        <rect id="Rectangle 4153" x="992" y="437" width="188" height="36" rx="4" fill="#EEEEEE" />
+                        <rect id="Rectangle 4146" x="260" y="482" width="710" height="36" rx="4" fill="#EEEEEE" />
+                        <rect id="Rectangle 4154" x="992" y="482" width="188" height="36" rx="4" fill="#EEEEEE" />
+                        <rect id="Rectangle 4147" x="260" y="527" width="710" height="36" rx="4" fill="#EEEEEE" />
+                        <rect id="Rectangle 4155" x="992" y="527" width="188" height="36" rx="4" fill="#EEEEEE" />
+                        <rect id="Rectangle 4148" x="260" y="572" width="710" height="36" rx="4" fill="#EEEEEE" />
+                        <rect id="Rectangle 4156" x="992" y="572" width="188" height="36" rx="4" fill="#EEEEEE" />
+                        <rect id="Rectangle 4149" x="260" y="617" width="710" height="36" rx="4" fill="#EEEEEE" />
+                        <rect id="Rectangle 4157" x="992" y="617" width="188" height="36" rx="4" fill="#EEEEEE" />
+                        <rect id="Rectangle 4150" x="260" y="662" width="710" height="36" rx="4" fill="#EEEEEE" />
+                        <rect id="Rectangle 4158" x="992" y="662" width="188" height="36" rx="4" fill="#EEEEEE" />
+                        <rect id="Rectangle 4151" x="260" y="707" width="710" height="36" rx="4" fill="#EEEEEE" />
+                        <rect id="Rectangle 4159" x="992" y="707" width="188" height="36" rx="4" fill="#EEEEEE" />
+                    </g>
+                )}
+
                 <mask id="k" fill="#fff">
                     <path d="M0 77h215v659H0V77Z" />
                 </mask>
@@ -404,16 +466,18 @@ export const Screenshot = ({ icon, product, slug, order, className = '' }: Scree
                 </text>
             </g>
 
-            <foreignObject x="215" y="137" width="1017" height="599">
-                <div>
-                    <iframe
-                        ref={replayRef}
-                        width="1017"
-                        height="599"
-                        src="http://localhost:8000/shared/embedded-player"
-                    ></iframe>
-                </div>
-            </foreignObject>
+            {slug === 'session-replay' && (
+                <foreignObject x="215" y="137" width="1017" height="599">
+                    <div>
+                        <iframe
+                            ref={replayRef}
+                            width="1017"
+                            height="599"
+                            src="http://localhost:8000/shared/embedded-player"
+                        ></iframe>
+                    </div>
+                </foreignObject>
+            )}
 
             <defs>
                 <filter
@@ -498,9 +562,7 @@ export const Screenshot = ({ icon, product, slug, order, className = '' }: Scree
                 <clipPath id="h">
                     <path fill={isDark ? '#202124' : '#fff'} d="M92.5 20h16v9.6h-16z" />
                 </clipPath>
-                <pattern id="j" width="1" height="1" patternContentUnits="objectBoundingBox">
-                    <use xlinkHref="#n" transform="matrix(.00833 0 0 .01286 0 -.079)" />
-                </pattern>
+                <pattern id="j" width="1" height="1" patternContentUnits="objectBoundingBox"></pattern>
             </defs>
         </svg>
     )
