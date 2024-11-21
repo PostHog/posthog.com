@@ -58,7 +58,7 @@ Ideas for the agenda:
 - Hackathon - try to leave 2 days for this, and most importantly avoid sessions interrupting hacking
 - Even some regular work on ongoing challenging projects - this is the best time for exchanging knowledge!
 
-> Don't run a hackathon during an onboarding offsite. Other offsites normally do have a hackathon. Participation should be _very_ strongly encouraged but not mandatory - if not everyone is taking part make sure that working spaces are available to accommodate the different styles of work. It is super important that people taking part are fully available and focussed on participating. Given the offsite is an opportunity to work together there should be no teams of one. This extends beyond the formation of teams and into the hackathon itself in cases where there is team switching.
+> Don't run a hackathon during an onboarding offsite. Other offsites normally do have a hackathon. Participation should be _very_ strongly encouraged but not mandatory - if not everyone is taking part make sure that working spaces are available to accommodate the different styles of work. It is super important that people taking part are fully available and focused on participating. Given the offsite is an opportunity to work together there should be no teams of one. This extends beyond the formation of teams and into the hackathon itself in cases where there is team switching.
 
 Here's a real-world example: [Product Analytics team's Munich offsite agenda](https://posthog.slack.com/canvas/C07A0BQEAUB) (internal Slack link). Feel free to take inspiration – though your team's needs and wants might be quite different!
 
