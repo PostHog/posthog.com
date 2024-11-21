@@ -16,6 +16,9 @@ type Job = {
 const COMPANIES = [
     { name: 'Supabase', ashbyUrl: 'supabase' },
     { name: 'PostHog', ashbyUrl: 'posthog' },
+    { name: 'MonarchMoney', ashbyUrl: 'monarchmoney' },
+    { name: 'Terradot', ashbyUrl: 'terradot' },
+    { name: 'Eigen', ashbyUrl: 'eigen' },
     // Add more companies that use Ashby here
 ]
 
