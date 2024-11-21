@@ -45,7 +45,7 @@ Some guidelines:
 - We'd encourage you to get an Airbnb for everyone not living in the city, as you automatically get a space you can work from and there's less organizing involved. If the group is large enough optimize for multiple apartments in the same building so that you have separate spaces to work / chill / take calls.
 - Specify offsite start and end times down to the hour, for clarity and efficient use of everyone's time.
 - These offsites don't happen very often and involve a lot of travel, so make sure you make the most out of it by having an agenda and an idea of what you want to achieve _before_ the start of the trip.
-- If multiple teams are attending the same offsite make it very clear who is participating in each session. Sessions / activities require full particpation from attendees, especially for the likes of a hackathon given it runs over multiple days
+- Make it very clear who is participating in each session. Sessions / activities require full participation from attendees, especially for the likes of a hackathon given it runs over multiple days. Ideally one person should be responsible for the agenda and run a kick-off at the start of the hackathon.
 
 Ideas for the agenda:
 
@@ -58,7 +58,7 @@ Ideas for the agenda:
 - Hackathon - try to leave 2 days for this, and most importantly avoid sessions interrupting hacking
 - Even some regular work on ongoing challenging projects - this is the best time for exchanging knowledge!
 
-> When organising a hackathon: Participation should be _very_ strongly encouraged but not mandatory if it does not make sense for some attendees. It is more important that people are fully available and interested in particpating. Given the offsite is an opportunity to work together there should be no teams of one. This extends beyond the formation of teams and into the hackathon itself in cases where there is team switching.
+> Don't run a hackathon during an onboarding offsite. Other offsites normally do have a hackathon. Participation should be _very_ strongly encouraged but not mandatory - if not everyone is taking part make sure that working spaces are available to accommodate the different styles of work. It is super important that people taking part are fully available and focussed on participating. Given the offsite is an opportunity to work together there should be no teams of one. This extends beyond the formation of teams and into the hackathon itself in cases where there is team switching.
 
 Here's a real-world example: [Product Analytics team's Munich offsite agenda](https://posthog.slack.com/canvas/C07A0BQEAUB) (internal Slack link). Feel free to take inspiration – though your team's needs and wants might be quite different!
 
