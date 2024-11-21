@@ -43,6 +43,7 @@ import { SEO } from 'components/seo'
 import { useLayoutData } from 'components/Layout/hooks'
 import Plans from 'components/Pricing/Plans'
 import { Screenshot } from '../Screenshot'
+import { motion } from 'framer-motion'
 
 const product = {
     slug: 'session-replay',
@@ -397,7 +398,12 @@ export const ProductSessionReplay = () => {
                         order={2}
                         className={`mx-auto`}
                     >
-                        <div className="absolute -right-24 md:right-0 xl:right-0 2xl:-right-24 -bottom-24 md:-bottom-16 xl:-bottom-8 transform scale-50 md:scale-75 xl:scale-100">
+                        <motion.div
+                            initial={{ translateX: '100%', opacity: 0 }}
+                            animate={{ translateX: 0, opacity: 1 }}
+                            transition={{ delay: 1 }}
+                            className="absolute -right-24 md:right-0 xl:right-0 2xl:-right-24 -bottom-24 md:-bottom-16 xl:-bottom-8 transform scale-50 md:scale-75 xl:scale-100"
+                        >
                             <div className="relative">
                                 <CloudinaryImage
                                     src="https://res.cloudinary.com/dmukukwp6/image/upload/oddly_familiar_b6b3c36bb1.png"
@@ -407,14 +413,14 @@ export const ProductSessionReplay = () => {
                                     imgClassName="w-[173.5px] h-[83.5px]"
                                 />
                                 <CloudinaryImage
-                                src="https://res.cloudinary.com/dmukukwp6/image/upload/hog_film_camera_1147f66018.png"
-                                alt="Camera hog"
-                                className="max-w-[300px] size-[300px]"
+                                    src="https://res.cloudinary.com/dmukukwp6/image/upload/hog_film_camera_1147f66018.png"
+                                    alt="Camera hog"
+                                    className="max-w-[300px] size-[300px]"
                                     placeholder="none"
                                     imgClassName="size-[300px]"
                                 />
                             </div>
-                        </div>
+                        </motion.div>
                     </Screenshot>
                 </div>
 

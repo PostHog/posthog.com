@@ -12,6 +12,11 @@ export const ReplayPreviewProvider = ({ children }: IProps) => {
     const [replayEvents, setReplayEvents] = useState<any[]>([])
 
     useEffect(() => {
+        const replayEvents = localStorage.getItem('replayEvents')
+        if (replayEvents) {
+            setReplayEvents(JSON.parse(replayEvents))
+            return
+        }
         const eventBuffer: any[] = []
         const stopRecording = record({
             emit: (event) => {
@@ -22,16 +27,16 @@ export const ReplayPreviewProvider = ({ children }: IProps) => {
         setTimeout(() => {
             stopRecording?.()
             setReplayEvents(eventBuffer)
-        }, 10000)
+            setReplayReady(true)
+            try {
+                localStorage.setItem('replayEvents', JSON.stringify(eventBuffer))
+            } catch (e) {
+                console.warn('Failed to save replay events to localStorage:', e)
+            }
+        }, 8500)
 
         return () => stopRecording?.()
     }, [])
-
-    useEffect(() => {
-        if (replayEvents.length > 0 && !replayReady) {
-            setReplayReady(true)
-        }
-    }, [replayEvents])
 
     return <Context.Provider value={{ replayReady, replayEvents }}>{children}</Context.Provider>
 }
