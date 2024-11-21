@@ -2644,6 +2644,12 @@ export const docsMenu = {
                     icon: 'IconFlag',
                     color: 'yellow',
                 },
+                {
+                    name: 'Holdouts',
+                    url: '/docs/experiments/holdouts',
+                    icon: 'IconPeople',
+                    color: 'orange',
+                },
             ],
         },
         {
