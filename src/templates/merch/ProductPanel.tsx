@@ -130,7 +130,7 @@ export function ProductPanel(props: ProductPanelProps): React.ReactElement {
                 </>
             </CallToAction>
 
-            {outOfStock && <BackInStockForm />}
+            {!loading && outOfStock && <BackInStockForm />}
 
             {product.description && (
                 <div className="border-t border-light dark:border-dark pt-4">
