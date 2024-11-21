@@ -15,14 +15,69 @@ export default function JobCard({ job }: JobCardProps): JSX.Element {
     return (
         <a
             href={job.link}
-            className="block bg-white rounded-lg border border-light hover:-translate-y-0.5 transition-all duration-200 hover:shadow-xl p-6"
+            className="block bg-white rounded-lg border border-light hover:-translate-y-0.5 transition-all duration-200 hover:shadow-xl"
             target="_blank"
             rel="noopener noreferrer"
         >
-            <h3 className="text-lg font-semibold mb-3">{job.title}</h3>
-            <div>
-                <div className="text-sm text-gray-600 mb-1">{job.location}</div>
-                <div className="text-sm text-gray-500">{job.department}</div>
+            {/* Company banner */}
+            <div className="px-6 py-3 border-b border-light bg-gray-50 rounded-t-lg">
+                <span className="font-semibold text-primary">{job.company}</span>
+            </div>
+
+            {/* Job details */}
+            <div className="p-6">
+                {/* Title */}
+                <h3 className="text-lg font-semibold mb-4 text-primary">{job.title}</h3>
+
+                {/* Details grid */}
+                <div className="space-y-2 text-sm">
+                    {/* Location with icon */}
+                    <div className="flex items-center text-gray-600">
+                        <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                                strokeWidth="2"
+                                d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"
+                            />
+                            <path
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                                strokeWidth="2"
+                                d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"
+                            />
+                        </svg>
+                        {job.location || 'Remote'}
+                    </div>
+
+                    {/* Department with icon */}
+                    <div className="flex items-center text-gray-600">
+                        <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                                strokeWidth="2"
+                                d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"
+                            />
+                        </svg>
+                        {job.department}
+                    </div>
+                </div>
+
+                {/* Apply button */}
+                <div className="mt-4 pt-4 border-t border-light">
+                    <span className="inline-flex items-center text-sm font-medium text-primary hover:text-primary-dark">
+                        View Role
+                        <svg className="ml-1 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                                strokeWidth="2"
+                                d="M13 7l5 5m0 0l-5 5m5-5H6"
+                            />
+                        </svg>
+                    </span>
+                </div>
             </div>
         </a>
     )

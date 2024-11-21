@@ -11,17 +11,20 @@ export default async function scrape(req, res) {
         return
     }
 
-    try {
-        // Direct request to Ashby's job board
-        const response = await axios.get('https://jobs.ashbyhq.com/supabase')
+    // Get company from query parameters
+    const company = req.query.company || 'supabase'
 
-        // Log the raw response for debugging
-        console.log('Raw response:', response.data.slice(0, 200)) // First 200 chars for brevity
+    try {
+        // Use the company parameter in the URL
+        const response = await axios.get(`https://jobs.ashbyhq.com/${company}`)
+
+        // Log which company we're fetching
+        console.log(`Fetching jobs for ${company}`)
 
         // Extract the window.__appData object
         const match = response.data.match(/window\.__appData\s*=\s*({[^;]+})/)
         if (!match) {
-            throw new Error('Could not find job data in response')
+            throw new Error(`Could not find job data in response for ${company}`)
         }
 
         // Parse the job data
@@ -29,15 +32,16 @@ export default async function scrape(req, res) {
         const jobs = jobData?.jobBoard?.jobPostings || []
 
         // Log the extracted jobs
-        console.log('Found jobs:', jobs.length)
+        console.log(`Found ${jobs.length} jobs for ${company}`)
 
         res.status(200).json({
             success: true,
             jobs: jobs,
+            company: company, // Include company in response for debugging
         })
     } catch (error) {
         // Detailed error logging
-        console.error('API Error:', {
+        console.error(`API Error for ${company}:`, {
             message: error.message,
             name: error.name,
             stack: error.stack,
@@ -47,7 +51,7 @@ export default async function scrape(req, res) {
 
         res.status(500).json({
             success: false,
-            message: 'Error scraping jobs',
+            message: `Error scraping jobs for ${company}`,
             details: error.message,
         })
     }

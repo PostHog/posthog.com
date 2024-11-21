@@ -9,7 +9,15 @@ type Job = {
     department: string
     location: string
     link: string
+    company: string
 }
+
+// Define companies that use Ashby ATS
+const COMPANIES = [
+    { name: 'Supabase', ashbyUrl: 'supabase' },
+    { name: 'PostHog', ashbyUrl: 'posthog' },
+    // Add more companies that use Ashby here
+]
 
 export default function JobsPage(): JSX.Element {
     const [jobs, setJobs] = useState<Job[]>([])
@@ -19,31 +27,58 @@ export default function JobsPage(): JSX.Element {
     useEffect(() => {
         async function fetchJobs() {
             try {
-                const response = await fetch('/api/scrape')
-                const data = await response.json()
+                const jobPromises = COMPANIES.map((company) =>
+                    fetch(`/api/scrape?company=${company.ashbyUrl}`)
+                        .then((res) => res.json())
+                        .then((data) => {
+                            console.log(`Raw jobs from ${company.name}:`, data.jobs)
 
-                if (data.success && Array.isArray(data.jobs)) {
-                    const engineeringJobs = data.jobs
-                        .filter((job) => {
-                            // Filter for engineering roles
-                            const isEngineering =
-                                job.departmentName.toLowerCase().includes('engineering') ||
-                                job.title.toLowerCase().includes('engineer') ||
-                                job.title.toLowerCase().includes('developer')
-                            return isEngineering
+                            if (data.success && Array.isArray(data.jobs)) {
+                                // Filter engineering jobs for each company
+                                const engineeringJobs = data.jobs.filter((job) => {
+                                    const engineeringTerms = ['engineering', 'engineer', 'developer', 'software']
+                                    const titleLower = job.title.toLowerCase()
+
+                                    // Only check the title, not the department
+                                    const isEngineeringRole = engineeringTerms.some((term) => titleLower.includes(term))
+
+                                    console.log(`${company.name} - ${job.title}:`, {
+                                        title: titleLower,
+                                        isEngineeringRole,
+                                    })
+
+                                    return isEngineeringRole
+                                })
+
+                                console.log(`Filtered engineering jobs from ${company.name}:`, engineeringJobs)
+
+                                return engineeringJobs.map((job) => ({
+                                    id: job.id,
+                                    title: job.title,
+                                    department: job.departmentName,
+                                    location: job.locationName,
+                                    link: `https://jobs.ashbyhq.com/${company.ashbyUrl}/${job.id}`,
+                                    company: company.name,
+                                }))
+                            }
+                            console.log(`No jobs found for ${company.name}`)
+                            return []
                         })
-                        .map((job) => ({
-                            id: job.id,
-                            title: job.title,
-                            department: job.departmentName,
-                            location: job.locationName,
-                            link: `https://jobs.ashbyhq.com/supabase/${job.id}`,
-                        }))
+                        .catch((error) => {
+                            console.error(`Error fetching ${company.name} jobs:`, error)
+                            return []
+                        })
+                )
 
-                    setJobs(engineeringJobs)
-                } else {
-                    console.log('Invalid data structure:', data)
+                const allJobs = await Promise.all(jobPromises)
+                const flattenedJobs = allJobs.flat()
+
+                console.log('Final filtered jobs:', flattenedJobs)
+
+                if (flattenedJobs.length === 0) {
                     setError('No engineering jobs found')
+                } else {
+                    setJobs(flattenedJobs)
                 }
             } catch (error) {
                 console.error('Error fetching jobs:', error)
