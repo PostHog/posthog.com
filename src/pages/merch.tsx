@@ -14,7 +14,7 @@ export default function Merch({ data }) {
 
 export const query = graphql`
     {
-        shopifyCollection(handle: { eq: "all-products" }) {
+        shopifyCollection(handle: { eq: "dat-new-new" }) {
             handle
             products {
                 description
