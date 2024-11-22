@@ -17,7 +17,7 @@ showTitle: true
 
 ## Our goals with these principles are to: 
 
-- Keep the engineers at PostHog as close to our customers as possible, so they can build new products or improve existing in ways that are most impactful for them.
+- Keep the engineers at PostHog as close to our customers as possible, so they can build new products or improve existing products in ways that are most impactful for them.
 - Maintain low barriers to entry for our customers, so they can see value in PostHog quickly.
 - Ensure transparency around the value we provide to our customers.
 - Tightly couple our success with that of our customers’. The more we can help them succeed, the more we will succeed – e.g. with usage-based pricing.
@@ -42,7 +42,7 @@ It's better for customers because they get all these tools that are well integra
 
 Whenever we build a product, like feature flags, or product experimentation, we should have a specific price for that product by itself. Being consistent here is less confusing than randomly combining products for example, even though it will sometimes mean more items to explain to a customer.
 
-It means that that customers who want just one product, can compare each of our products to our competitors', seeing that we are cheaper everywhere, improving our self serve top of funnel.
+It means that customers who want just one product can compare each of our products to our competitors', seeing that we are cheaper everywhere, improving our self-serve top-of-funnel.
 
 ### Features that increase our stickiness should be free (with a reasonable limit)
 
@@ -58,7 +58,7 @@ For example, when someone calls a feature flag, we send a $feature_flag_called e
 
 ### Other guidelines
 
-- We should always ask ourselves how newly release features should be priced, even if it's launching as a free product. A default behavior is good, but it shouldn't be used as a replacement for critically thinking about where something fits into our pricing scheme.
+- We should always ask ourselves how newly-released features should be priced, even if it's launching as a free product. A default behavior is good, but it shouldn't be used as a replacement for critically thinking about where something fits into our pricing scheme.
 
 - Our default assumption for new features is that full usage is only available on the paid plans.
 
