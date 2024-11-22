@@ -528,6 +528,10 @@ export const handbookSidebar = [
                         url: '/handbook/growth/marketing/content',
                     },
                     {
+                        name: 'Docs',
+                        url: '/handbook/company/docs',
+                    },
+                    {
                         name: 'Newsletter',
                         url: '/handbook/growth/marketing/newsletter',
                     },
@@ -758,13 +762,9 @@ export const handbookSidebar = [
         ],
     },
     {
-        name: 'Website & Docs',
+        name: 'Website & Vibes',
         url: '',
         children: [
-            {
-                name: 'Updating docs',
-                url: '/handbook/company/docs',
-            },
             {
                 name: 'Community',
                 url: '',
