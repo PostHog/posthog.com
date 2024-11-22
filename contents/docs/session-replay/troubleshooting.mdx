@@ -109,6 +109,10 @@ Due to the complexity of browser rendering and replay, some web resources are un
 - **Heavy animations** - Some heavier animations such as SVG or Lottie animations may be _throttled_ or ignored entirely due to the performance overhead in recording and replaying
 - **Iframes** - iframes from the origins under your control **can** be recorded and played back. See [iframe recording](/docs/session-replay/iframes) for more info.
 
+## Angular performance
+
+It is sometimes necessary to run session replay outside of the Angular zone. See the [PostHog Angular docs for more detail](/docs/libraries/angular#session-replay)
+
 ## Report your specific issue
 
 To report a specific problem, you can open a [GitHub issue](https://github.com/PostHog/posthog/issues/new/choose). To help us figure it out as quickly as possible, please include the following information:
