@@ -11,7 +11,7 @@ Trigger Scenarios in Make based on PostHog events.
 
 ## Requirements
 
-Using this requires either PostHog Cloud, or a self-hosted PostHog instance running a recent version of the docker image.
+<Requirements />
 
 You'll also need access to the relevant Make account.
 
