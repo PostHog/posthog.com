@@ -187,14 +187,14 @@ The recorder tool attempts to detect when an Angular zone is present and avoid t
 
 If you see performance impact from recording in an Angular project, ensure that you use [`ngZone.runOutsideAngular`](https://angular.io/api/core/NgZone#runoutsideangular). 
 
-```ts file=posthog-session-recording.service.ts
+```ts file=posthog.service.ts
 import { Injectable } from '@angular/core';
 import posthog from 'posthog-js'
 
 @Injectable({ providedIn: 'root' })
 export class PostHogSessionRecordingService {
   constructor(private ngZone: NgZone) {}
-  startSessionRecording() {
+initPostHog() {
     this.ngZone.runOutsideAngular(() => {
       posthog.init(
         /* your config */
