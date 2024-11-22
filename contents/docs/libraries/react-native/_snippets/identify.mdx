@@ -14,16 +14,16 @@ posthog.identify('distinctID',
 )
 ```
 
-- **$set_once:** Optional. Similar to `$set`. [See the difference between `$set` and `$set_once`](/docs/product-analytics/person-properties#what-is-the-difference-between-set-and-set_once)
+`$set_once` works just like `$set`, except that it will **only set the property if the user doesn't already have that property set**. [See the difference between `$set` and `$set_once`](/docs/product-analytics/person-properties#what-is-the-difference-between-set-and-set_once)
 
 ```react-native
 posthog.identify('distinctID',
   {
-    $set: { // userProperties ($set):
+    $set: {
         email: 'user@posthog.com',
         name: 'My Name'
     },
-    $set_once: { // userPropertiesSetOnce ($set_once):
+    $set_once: {
         date_of_first_log_in: '2024-03-01'
     }
   }
