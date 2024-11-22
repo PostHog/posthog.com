@@ -275,7 +275,7 @@ export default function Team({ body, roadmaps, objectives, emojis, newTeam, slug
                 />
             )}
             <SideModal open={!!activeProfile} setOpen={setActiveProfile}>
-                {activeProfile && <Profile {...activeProfile} />}
+                {activeProfile && <Profile profile={{ ...activeProfile }} />}
             </SideModal>
             <Header
                 loading={loading}
