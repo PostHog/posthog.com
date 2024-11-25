@@ -2310,7 +2310,6 @@ export const docsMenu = {
                     color: 'purple',
                 },
                 {
-
                     name: 'Web vs product analytics',
                     url: '/docs/web-analytics/web-vs-product-analytics',
                     icon: 'IconGraph',
@@ -2819,6 +2818,10 @@ export const docsMenu = {
                         {
                             name: 'Mailjet',
                             url: '/docs/cdp/destinations/mailjet',
+                        },
+                        {
+                            name: 'Meta Ads',
+                            url: '/docs/cdp/destinations/meta-ads',
                         },
                         {
                             name: 'RudderStack',
