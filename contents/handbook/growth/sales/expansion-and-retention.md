@@ -43,6 +43,20 @@ AEs also do expansion at PostHog. This is because we are constantly on a sales f
 
 **Cross sell new products**
 
+### Identifying Opportunities
+We use a combination of proactive outreach and automated alerts to identify cross-sell opportunities:
+
+Automated Expansion Alerts
+- FF Opp (High Engineer %): Triggers when a company has a high % of engineers but isn't using feature flags
+- Replay Upsell Opp: Triggers for companies with customer success, sales, product, or customer service roles as PostHog users but no session replay usage
+- FF Opp (No Experiments): Triggers for companies who have users in product, marketing, leadership, or engineering roles haven't viewed any experiments
+- B2B Group Analytics Opp: Triggers when group count is 0, group analytics plan is null, and the company type is B2B
+- Web Analytics Opp (Marketing): Triggers when companies with marketing roles, >50 employees, and no visits to the web analytics page are identified
+
+These automated alerts serve as starting points for identifying expansion opportunities. You can use these signals alongside regular customer interactions to prioritize outreach.
+
+### Process for Cross-Selling
+
 - First you need to find out who cares about the problem that our other products solve - is it the existing team or the new team?
   - Use a tool like [The Org](https://theorg.com/) or [Chartloop](https://www.chartloop.com/#) to help you identify new people. 
 - Then you need to find out what are they using now to solve the problem (if anything) - surface this during the check in calls that you already have scheduled as part of onboarding if it's the existing team. If you're talking a new team, run this as a [new sales process](/handbook/growth/sales/new-sales). 
