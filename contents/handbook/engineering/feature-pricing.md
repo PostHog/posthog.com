@@ -76,4 +76,4 @@ For example, when someone calls a feature flag, we send a $feature_flag_called e
 
 - Keep in mind: It's easy to increase the free tier for existing customers, but it's very painful to decrease it (since we don't want existing customers to pay more).
 
-- If we decide to lower the free tier as part of a wider pricing change (primarily when we lower our prices), in principle we should roll out the new pricing **and** the new free tier to existing customers, because they will likely save money. An exception should be made for customers who are forecasted to pay more, in these cases, we should enroll them in the new pricing, but grandfather the higher free tier.
+- If we decide to lower the free tier as part of a wider pricing change (primarily when we lower our prices), in principle we should roll out the new pricing **and** the new free tier to existing customers, because they will likely save money. An exception should be made for customers who are forecasted to pay more. In these cases we should enroll them in the new pricing, but grandfather the higher free tier.
