@@ -58,7 +58,7 @@ For example, when someone calls a feature flag, we send a $feature_flag_called e
 
 ### Other guidelines
 
-- We should always ask ourselves how newly-released features should be priced, even if it's launching as a free product. A default behavior is good, but it shouldn't be used as a replacement for critically thinking about where something fits into our pricing scheme.
+- We should always ask ourselves how newly released features should be priced, even if it's launching as a free product. A default behavior is good, but it shouldn't be used as a replacement for critically thinking about where something fits into our pricing scheme.
 
 - Our default assumption for new features is that full usage is only available on the paid plans.
 
