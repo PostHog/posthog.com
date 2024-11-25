@@ -25,6 +25,14 @@ config.sessionReplayConfig.maskAllTextInputs = true
 // Whether images are masked. Default is true.
 config.sessionReplayConfig.maskAllImages = true
 
+// Enable masking of all sandboxed system views
+// These may include UIImagePickerController, PHPickerViewController and CNContactPickerViewController
+// Default is true.
+config.sessionReplayConfig.maskAllSandboxedViews = true
+
+// Enable masking of images that likely originated from user's photo library. Default is true.
+config.sessionReplayConfig.maskPhotoLibraryImages = true
+
 // Whether network requests are captured in recordings. Default is true
 // Only metric-like data like speed, size, and response code are captured. 
 // No data is captured from the request or response body.
