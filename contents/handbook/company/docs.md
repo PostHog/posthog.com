@@ -6,23 +6,23 @@ showTitle: true
 
 ## Responsibilities
 
-- **Product teams** are responsible for ensuring their docs are up-to-date. This means:
-  - Documenting new features when they're launched.
-  - Correcting mistakes reported by users.
-  - Clarifying documentation based on user feedback and support tickets.
-  - Ensuring public betas have documentation which is linked to from feature preview menu
+* **Product teams** are responsible for ensuring their docs are up-to-date. This means:
+  * Documenting new features when they're launched.
+  * Correcting mistakes reported by users.
+  * Clarifying documentation based on user feedback and support tickets.
+  * Ensuring public betas have documentation which is linked to from feature preview menu
 
-- **Content marketing** is responsible for improving the docs. This means:
-  - Reviewing draft documentation created by product teams.
-  - Identifying and improving low quality documentation.
-  - Ensuring screenshots and other visual elements are up-to-date.
-  - Shipping supplementary docs and tutorials based on feedback and emerging use cases.
+* **Content marketing** is responsible for improving the docs. This means:
+  * Reviewing draft documentation created by product teams.
+  * Identifying and improving low quality documentation.
+  * Ensuring screenshots and other visual elements are up-to-date.
+  * Shipping supplementary docs and tutorials based on feedback and emerging use cases.
 
-- **Website & Docs** is responsible for design, organization, and discovery. This means:
-  - The design and content of index pages.
-  - The overall layout of docs and how they're organized.
-  - In-page elements and components – e.g. light and dark mode screenshots.
-  - Website search and other elements that help users find the answers they need.
+* **Website & Docs** is responsible for design, organization, and discovery. This means:
+  * The design and content of index pages.
+  * The overall layout of docs and how they're organized.
+  * In-page elements and components – e.g. light and dark mode screenshots.
+  * Website search and other elements that help users find the answers they need.
 
 ## Frequently asked questions
 
