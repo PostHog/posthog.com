@@ -82,6 +82,18 @@ When support engineers need to escalate issues to other engineering teams for de
 
 > **_NOTE:_** The targets are for a reply to the user. If the escalation turns out to be a bug or feature request, the reported issue doesn't have to be solved by the response target date, we just need to reply to the user. That reply may be to let them know it won't be fixed right away, but that we have opened a bug report or feature request. If we've opened a feature request or a bug report, you can refer the user to the GitHub issue for updates, and `Solve` the ticket. If you're replying with info that should resolve the issue, leave it in a `Pending` state (will be auto-solved in 7 days if the user doesn't reply.) If the user replied to confirm the issue is resolved, `Solve` the ticket. Use `On-Hold` sparingly, e.g. if you intend to get back to the user soon (more than a week, less than a month.)
 
+### Offsites, holidays and support coverage
+
+Sometimes, the team needs a break. This may be during an offsite (during which we offer reduced coverage) or during holidays (during which we only respond to critical tickets). In both cases, we'll usually update the response targets in the support hero sidepanel with a message to let users know what's going on.
+
+Messages should be short, time-limited, and clear. Try to post the message approximately 24 hours before the offsite or holiday begins. Here's an example we've used in the past:
+
+```
+We're making improvements: Our team is attending an offsite so we can make long-term enhancements. We're working different hours, so non-urgent inquiries without priority support may experience a slight delay. We'll be back to full speed next week!
+```
+
+Once the disruption is over, restore the response targets to normal. This [PR](https://github.com/PostHog/posthog/pull/26380) is a useful reference. 
+
 ### CSAT Surveys
 
 We send out CSAT surveys after a ticket has been closed for at least 3 days using [this Automation](https://posthoghelp.zendesk.com/admin/objects-rules/rules/automations/22328357692571). The emails contain a link to https://survey.posthog.com/ with their `distinct_id`, `ticketId`, and the assigned team as query parameters, which are being used alongside their satisfaction rating to capture a `survey sent` event. The code for the survey website is in the [PostHog-csat](https://github.com/PostHog/posthog-csat) repo and the responses can be viewed in [this dashboard](https://us.posthog.com/project/2/dashboard/130687).
