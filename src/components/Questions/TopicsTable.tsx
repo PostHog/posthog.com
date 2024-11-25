@@ -18,6 +18,7 @@ import {
     IconPeople,
     IconPieChart,
     IconPhone,
+    IconPlug,
     IconPrivacy,
     IconPulse,
     IconRewindPlay,
@@ -35,6 +36,7 @@ import {
     IconMapPin,
     IconHandwave,
     IconCoffee,
+    IconWarning,
 } from '@posthog/icons'
 
 import { Megaphone, SparksJoy } from 'components/NotProductIcons'
@@ -51,10 +53,12 @@ export const topicIcons = {
     cohorts: Cohorts, // to be replaced or removed
     configuration: IconGear,
     dashboards: IconDashboard,
+    cdp: IconPlug,
     'data pipelines': IconDecisionTree,
     'data warehouse': IconDatabase,
     deployment: IconRocket,
     '#devrel': IconCoffee,
+    'error tracking': IconWarning,
     'events & actions': IconCursor,
     'feature flags': IconToggle,
     funnels: IconFunnels,

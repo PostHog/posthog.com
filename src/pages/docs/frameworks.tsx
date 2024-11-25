@@ -1,3 +1,4 @@
+import CloudinaryImage from 'components/CloudinaryImage'
 import React from 'react'
 import { graphql } from 'gatsby'
 import { StaticImage } from 'gatsby-plugin-image'
@@ -9,9 +10,9 @@ import Link from 'components/Link'
 import List from 'components/List'
 
 type QuickLinks = {
-    name: string;
-    to: string;
-}[];
+    name: string
+    to: string
+}[]
 
 export const quickLinks: QuickLinks = [
     {
@@ -107,6 +108,10 @@ export const quickLinks: QuickLinks = [
         to: '/docs/libraries/webflow',
     },
     {
+        name: 'WooCommerce',
+        to: '/docs/libraries/woocommerce',
+    },
+    {
         name: 'WordPress',
         to: '/docs/libraries/wordpress',
     },
@@ -128,12 +133,12 @@ const Integrations: React.FC<IntegrationsProps> = () => {
             <SEO title="Frameworks - Documentation - PostHog" />
 
             <PostLayout title={'Integrations'} hideSurvey hideSidebar>
-                <StaticImage
+                <CloudinaryImage
                     alt=""
                     placeholder="none"
                     quality={100}
                     className="w-full sm:w-[400px] sm:float-right sm:ml-8 sm:-mt-8 sm:mb-8"
-                    src="../../components/Home/Slider/images/product-analytics-hog.png"
+                    src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Home/Slider/images/product-analytics-hog.png"
                 />
                 <h1 className="text-4xl mt-0 mb-2">Framework guides</h1>
                 <h3 className="text-lg font-semibold text-primary/60 dark:text-primary-dark/75 leading-tight">

@@ -70,13 +70,18 @@ You can do this by:
 
 ## Bootstrapping with a distinct ID
 
-The `bootstrap` object has two optional arguments: `distinctID` and `isIdentifiedID`.
+The `bootstrap` object has four optional arguments: `distinctID`, `isIdentifiedID`, `sessionID`, and `featureFlags`.
 
 - `distinctID` enables you to set distinct ID of the user during PostHog's initialization. This is useful when you want to ensure the distinct ID on your frontend is the same as the distinct ID that you called `getAllFlags()` with on your server. It is **strongly recommended** to include it.
 
 > **Note:** The only case where you don't want to include `distinctID` is when your user has an existing PostHog session and you have not yet called [`identify()`](/docs/product-analytics/identify) at any point in time to link the anonymous session ID with their identified ID. In this case, bootstrapping `distinctID` will cause PostHog to drop the anonymous session ID and the two sessions will not be linked.
 
 - `isIdentifiedID` ensures that the `distinctID` is treated as an [identified ID](/docs/product-analytics/identify) in the library. This is helpful as it warns you when you try to do something wrong with this ID, like calling identify again with a different ID. Set this to `true` if you're using a unique ID such as `email` or a database ID. Set this to `false` if you're generating a random anonymous ID.
+
+- `sessionID` enables you to connect sessions across domains. This enables you get an accurate session count and complete session replays. To get the session ID, call `posthog.get_session_id()`.
+
+- `featureFlags` enables flag values to be valuable as soon as PostHog loads. Call `posthog.getAllFlags()` (or equivalent method) in your backend and pass the values to your frontend in the `bootstrap` object.
+
 
 <MultiLanguage>
 
@@ -86,6 +91,7 @@ posthog.init('<ph_project_api_key>', {
     bootstrap: {
         distinctID: 'distinct_id_of_your_user',
         isIdentifiedID: true,
+        sessionID: 'session_id_of_user_session',
         featureFlags: {
             'flag-1': true,
             'variant-flag': 'control',
@@ -105,8 +111,8 @@ export function MyApp() {
             // usually 'https://us.i.posthog.com' or 'https://eu.i.posthog.com'
             host: '<ph_client_api_host>', // TIP: host is optional if you use https://us.i.posthog.com
             bootstrap: {
-                distinctID: 'distinct_id_of_your_user',
-                isIdentifiedID: true,
+                distinctId: 'distinct_id_of_your_user',
+                isIdentifiedId: true,
                 featureFlags: {
                     'flag-1': true,
                     'variant-flag': 'control',
@@ -127,3 +133,4 @@ export function MyApp() {
 - [How to bootstrap feature flags in React and Express](/tutorials/bootstrap-feature-flags-react)
 - [How to use Next.js middleware to bootstrap feature flags](/tutorials/nextjs-bootstrap-flags)
 - [How to set up Next.js A/B tests](/tutorials/nextjs-ab-tests)
+- [How to set up cross-domain tracking](/tutorials/cross-domain-tracking)

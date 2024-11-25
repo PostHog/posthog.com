@@ -71,10 +71,13 @@ const query = (id: string | number, isModerator: boolean) =>
     )
 
 export const useQuestion = (id: number | string, options?: UseQuestionOptions) => {
-    const { getJwt, fetchUser, user, isModerator } = useUser()
+    const { getJwt, fetchUser, user, isModerator, isValidating } = useUser()
     const posthog = usePostHog()
 
-    const key = options?.data ? null : `${process.env.GATSBY_SQUEAK_API_HOST}/api/questions?${query(id, isModerator)}`
+    const key =
+        isValidating || options?.data
+            ? null
+            : `${process.env.GATSBY_SQUEAK_API_HOST}/api/questions?${query(id, isModerator)}`
 
     const {
         data: question,
@@ -392,7 +395,7 @@ export const useQuestion = (id: number | string, options?: UseQuestionOptions) =
         question: questionData,
         reply,
         error,
-        isLoading: isLoading && !questionData,
+        isLoading: isValidating || (isLoading && !questionData),
         isError: error,
         handlePublishReply,
         handleResolve,

@@ -129,3 +129,5 @@ You can also use these extended person properties in insights. For example, you 
 - [How to query Supabase data in PostHog](/tutorials/supabase-query)
 - [How to set up Google Ads reports](/tutorials/google-ads-reports)
 - [The basics of SQL for analytics](/product-engineers/sql-for-analytics)
+
+<NewsletterForm />

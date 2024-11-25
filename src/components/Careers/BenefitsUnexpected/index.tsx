@@ -13,7 +13,7 @@ const BenefitsUnexpected: React.FC = () => {
       </div>
 
       <div className="grid md:grid-cols-2 md:items-center md:gap-8 lg:gap-12">
-        <aside className="order-2 md:order-1 relative">
+        <aside className="order-2 md:order-1 relative pb-8 md:pb-0">
           <div className="dark:hidden">
             <CloudinaryImage
               src="https://res.cloudinary.com/dmukukwp6/image/upload/meeting_free_days_c52171b6a2.png"
@@ -30,7 +30,7 @@ const BenefitsUnexpected: React.FC = () => {
             <CloudinaryImage
               src="https://res.cloudinary.com/dmukukwp6/image/upload/police_hog_quote_1db93f2a05.png"
               alt="Look at all those empty time slots!"
-              className="w-[194px] translate-x-1/2 -ml-4"
+              className="w-[194px] absolute ml-24 -mt-8"
             />
             <CloudinaryImage
               src="https://res.cloudinary.com/dmukukwp6/image/upload/police_hog_eb78977120.png"
@@ -56,12 +56,12 @@ const BenefitsUnexpected: React.FC = () => {
             <CloudinaryImage
               src="https://res.cloudinary.com/dmukukwp6/image/upload/police_hog_quote_1db93f2a05.png"
               alt="Look at all those empty time slots!"
-              className="w-[194px] translate-x-1/2 -mb-4 -ml-2"
+              className="w-[194px] -mb-4 -ml-2 absolute left-24"
             />
             <CloudinaryImage
               src="https://res.cloudinary.com/dmukukwp6/image/upload/police_hog_eb78977120.png"
               alt="Police hog sez..."
-              className="w-[106px]"
+              className="w-[106px] mt-12"
             />
           </div>
         </div>

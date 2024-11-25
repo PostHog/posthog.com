@@ -73,7 +73,10 @@ The person who raised the incident is the incident lead. It’s their responsibi
 
 - Make sure the right people join the call. This includes [the current on-call person](https://posthog.pagerduty.com/service-directory/P43Y0E8). Optionally, add people from Infra and [the feature owner](/handbook/engineering/feature-ownership) and Comms if relevant. Comms can assist in running communications if required.
 - Take notes in the incident channel. This should include timestamps, and is a brain dump of everything that we know, and everything that we are or have tried. This will give us much more of an opportunity to learn from the incident afterwards.
-- Update the [status page](https://status.posthog.com/). This is best done in the incident Slack channel using `/incident statuspage` (`/inc sp`).
+- Update the [status page](https://status.posthog.com/). This is best done in the incident Slack channel using `/incident statuspage` (`/inc sp`). 
+    - We use Atlassian for hosting our status page. It is automatically updated from the incident.io slack command.
+    - Access to Atlassian is limited due to seats so if you need access talk to Tim or James.
+    - Do not try and update the status page via the incident.io dashboard because it won't be sync'd to the Atlassian status page.
 
 If the person who raised the incident is the best person to debug the issue, they should hand over the incident lead role to someone else on the call.
 

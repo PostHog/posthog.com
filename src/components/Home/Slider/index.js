@@ -49,6 +49,7 @@ const enterpriseModeProductNames = {
     Experiments: 'CX optimization',
     Surveys: 'Qualitative feedback',
     'Data pipelines': 'CDP/ETL',
+    CDP: 'CDP/ETL',
     'Data warehouse': 'Secure data vault',
     'AI engineering': 'Artificial intelligence',
 }

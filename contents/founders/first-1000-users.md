@@ -131,8 +131,6 @@ We also spent ~$2,000 promoting the repo on Twitter which, combined with the suc
 
 After the massive bump on launch day, our growth settled to a level that was noticeably higher than before.
 
-<NewsletterForm />
-
 ## 📈 Reaching 1,000 users in three months 
 
 Our Hacker News launch gave us a steady trickle of word-of-mouth growth. We made some of [our first hires](/founders/posthog-first-five), and the next few months were about understanding why people liked PostHog, and what to build next. 

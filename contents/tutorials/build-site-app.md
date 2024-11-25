@@ -207,3 +207,5 @@ You now have a basic site app added to your site you can continue to customize a
 - [All the cool things we built at our Rome hackathon](/blog/rome-hackathon): Site apps, pineapple mode, and the feedback app were only some of the cool things we built at our Rome Hackathon. Discover this rest.
 
 - [How to build your own app in PostHog](/tutorials/build-your-own-posthog-app): More interested in modifying, exporting, or adding events on the backend. This tutorial teaches you how to build a backend app that does just that.
+
+<NewsletterForm />

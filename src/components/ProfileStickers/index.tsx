@@ -5,6 +5,7 @@ import {
     StickerFlagAR,
     StickerFlagAT,
     StickerFlagBE,
+    StickerFlagBR,
     StickerFlagCA,
     StickerFlagCO,
     StickerFlagCY,
@@ -18,6 +19,7 @@ import {
     StickerFlagHR,
     StickerFlagNL,
     StickerFlagPL,
+    StickerFlagPR,
     StickerFlagUnknown,
     StickerFlagUS,
     StickerPineappleYes,
@@ -25,8 +27,8 @@ import {
     StickerPineappleUnknown,
 } from 'components/Stickers/Index'
 
-const Stickers = ({ location, country, pineappleOnPizza, isTeamLead, isModerator, id, handleTeamLead }) => {
-    const TeamLeadContainer = isModerator && handleTeamLead ? 'span' : 'button'
+const Stickers = ({ location, country, pineappleOnPizza, isTeamLead, editing, id, handleTeamLead }) => {
+    const TeamLeadContainer = editing && handleTeamLead ? 'span' : 'button'
 
     const handleTeamLeadClick = (e) => {
         e.stopPropagation()
@@ -38,6 +40,8 @@ const Stickers = ({ location, country, pineappleOnPizza, isTeamLead, isModerator
             <Tooltip content={`Lives in ${location}`}>
                 {country === 'BE' ? (
                     <StickerFlagBE className="w-8 h-8" />
+                ) : country === 'BR' ? (
+                    <StickerFlagBR className="w-8 h-8" />
                 ) : country === 'US' ? (
                     <StickerFlagUS className="w-8 h-8" />
                 ) : country === 'GB' ? (
@@ -70,6 +74,8 @@ const Stickers = ({ location, country, pineappleOnPizza, isTeamLead, isModerator
                     <StickerFlagCY className="w-8 h-8" />
                 ) : country === 'PL' ? (
                     <StickerFlagPL className="w-8 h-8" />
+                ) : country === 'PR' ? (
+                    <StickerFlagPR className="w-8 h-8" />
                 ) : (
                     <StickerFlagUnknown className="w-8 h-8" />
                 )}
@@ -89,8 +95,8 @@ const Stickers = ({ location, country, pineappleOnPizza, isTeamLead, isModerator
                     </Tooltip>
                 )}
             </span>
-            {isTeamLead || isModerator ? (
-                <TeamLeadContainer {...(isModerator && handleTeamLead ? { onClick: handleTeamLeadClick } : {})}>
+            {isTeamLead || editing ? (
+                <TeamLeadContainer {...(editing && handleTeamLead ? { onClick: handleTeamLeadClick } : {})}>
                     <Tooltip content={isTeamLead ? 'Team lead' : 'Make team lead?'}>
                         <span>
                             <StickerMayor

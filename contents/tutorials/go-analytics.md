@@ -310,3 +310,5 @@ That's it! Feel free to play around in your dashboard and explore the different 
 - [How to set up feature flags in Go](/tutorials/go-feature-flags)
 - [How to set up A/B tests in Go](/tutorials/go-ab-tests)
 - [What to do after installing PostHog](/tutorials/next-steps-after-installing)
+
+<NewsletterForm />

@@ -1,3 +1,4 @@
+import CloudinaryImage from 'components/CloudinaryImage'
 import React, { useState, useEffect, useRef } from 'react'
 import { SEO } from 'components/seo'
 import Layout from 'components/Layout'
@@ -498,8 +499,8 @@ function DpaGenerator() {
                                             </p>
 
                                             <div className="my-2 border border-light dark:border-dark rounded overflow-hidden">
-                                                <StaticImage
-                                                    src="../images/dpa/print-settings.png"
+                                                <CloudinaryImage
+                                                    src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/images/dpa/print-settings.png"
                                                     alt="Print settings"
                                                     placeholder="blurred"
                                                     className="dark:rounded"
@@ -546,8 +547,8 @@ function DpaGenerator() {
                             Weaving a Magical Pact for Data Protection: An Enchanted Alliance
                         </h2>
                         <div className="[&>p]:text-[19px] [&>p]:leading-relaxed [&>p]:pb-6 [&_li]:text-[19px] [&_li]:leading-relaxed max-w-xl mx-auto font-fairytale">
-                            <StaticImage
-                                src="../images/dpa/map.png"
+                            <CloudinaryImage
+                                src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/images/dpa/map.png"
                                 alt="Map"
                                 placeholder="blurred"
                                 className={FloatRight}
@@ -582,8 +583,8 @@ function DpaGenerator() {
                                 secure magic vaults.
                             </p>
 
-                            <StaticImage
-                                src="../images/dpa/sword.png"
+                            <CloudinaryImage
+                                src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/images/dpa/sword.png"
                                 alt="Sword"
                                 placeholder="blurred"
                                 className={FloatLeft}
@@ -617,8 +618,8 @@ function DpaGenerator() {
                                 the EEA.
                             </p>
 
-                            <StaticImage
-                                src="../images/dpa/wizard.png"
+                            <CloudinaryImage
+                                src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/images/dpa/wizard.png"
                                 alt="Wizard"
                                 placeholder="blurred"
                                 className={FloatRight}
@@ -676,8 +677,8 @@ function DpaGenerator() {
                                 's wise instructions.
                             </p>
 
-                            <StaticImage
-                                src="../images/dpa/gnomes.png"
+                            <CloudinaryImage
+                                src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/images/dpa/gnomes.png"
                                 alt="Gnomes"
                                 placeholder="blurred"
                                 className={FloatLeft}
@@ -718,8 +719,8 @@ function DpaGenerator() {
                                 trouble, like when a data gremlin might sneak in to create mischief.
                             </p>
 
-                            <StaticImage
-                                src="../images/dpa/porridge.png"
+                            <CloudinaryImage
+                                src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/images/dpa/porridge.png"
                                 alt="Porridge"
                                 placeholder="blurred"
                                 className={FloatRight}
@@ -796,8 +797,8 @@ function DpaGenerator() {
                             <h2 className="pt-8 pb-0">Data Dance</h2>
 
                             <div className="@lg:float-right flex flex-col -mr-2 ml-2 md:ml-0 mb-2 mt:mt-0 w-48 md:w-64">
-                                <StaticImage
-                                    src="../images/dpa/t-swift.png"
+                                <CloudinaryImage
+                                    src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/images/dpa/t-swift.png"
                                     alt="Taylor Swift hog"
                                     placeholder="blurred"
                                     className="mb-2"
@@ -1810,7 +1811,12 @@ function DpaGenerator() {
             <section className="text-center mt-20 md:mt-40 mb-20 md:mb-24 print:hidden">
                 <h3>Need a custom MSA?</h3>
 
-                <TrackedCTA event={{ name: `clicked Get a demo` }} href="/demo" type="secondary" size="lg">
+                <TrackedCTA
+                    event={{ name: `clicked Talk to a human` }}
+                    href="/talk-to-a-human"
+                    type="secondary"
+                    size="lg"
+                >
                     Talk to sales
                 </TrackedCTA>
             </section>

@@ -30,19 +30,20 @@ npm i posthog-js
 
 Next, go into your `app` folder and create a `providers.js` file. Create a client-side PostHog initialization using the project API key and instance address (from your [project settings](https://app.posthog.com/project/settings)). Make sure to add the `use client` directive and a check for the window. Altogether, this looks like this:
 
-```js-web
+```js
 // app/providers.js
 'use client'
 import posthog from 'posthog-js'
 import { PostHogProvider } from 'posthog-js/react'
-
-if (typeof window !== 'undefined') {
-  posthog.init('<ph_project_api_key>', {
-    api_host: '<ph_client_api_host>'
-  })
-}
+import { useEffect } from 'react'
 
 export function PHProvider({ children }) {
+    useEffect(() => {
+      posthog.init('<ph_project_api_key>', {
+        api_host: '<ph_client_api_host>',
+        person_profiles: 'identified_only'
+      })
+  }, []);
   return <PostHogProvider client={posthog}>{children}</PostHogProvider>
 }
 ```
@@ -303,3 +304,5 @@ This completes an introduction to our custom survey functionality, which you can
 - [Get feedback and book user interviews with surveys](/tutorials/feedback-interviews-site-apps)
 - [The Product-Market Fit Game](/blog/product-market-fit-game)
 - [How we made something people want](/blog/making-something-people-want)
+
+<NewsletterForm />

@@ -73,15 +73,17 @@ Next, create a `providers.js`  file in your `app`  folder. In it, initialize Pos
 'use client'
 import posthog from 'posthog-js'
 import { PostHogProvider } from 'posthog-js/react'
-
-if (typeof window !== 'undefined') {
-  posthog.init('<ph_project_api_key>', {
-    api_host: '<ph_client_api_host>',
-    ui_host: '<ph_app_host>'
-  })
-}
+import { useEffect } from 'react'
 
 export function PHProvider({ children }) {
+  useEffect(() => {
+    posthog.init('<ph_project_api_key>', {
+      api_host: '<ph_client_api_host>',
+      person_profiles: 'identified_only',
+      ui_host: '<ph_app_host>'
+    })
+  }, []);
+
   return <PostHogProvider client={posthog}>{children}</PostHogProvider>
 }
 ```
@@ -227,3 +229,5 @@ Now, when you check your ticket in Zendesk, you'll see a session replay link to 
 - [How to use session replays to improve your support experience](/tutorials/session-recordings-for-support)
 - [How to use filters + session replays to understand user friction](/tutorials/filter-session-recordings)
 - [How to add session replays to Intercom](/tutorials/intercom-session-replays)
+
+<NewsletterForm />

@@ -31,13 +31,15 @@ To add PostHog to our app, go into your `app` folder and create a `providers.js`
 'use client'
 import posthog from 'posthog-js'
 import { PostHogProvider } from 'posthog-js/react'
+import { useEffect } from 'react'
 
 export function PHProvider({ children }) {
-  if (typeof window !== 'undefined') {
+  useEffect(() => {
     posthog.init('<ph_project_api_key>', {
       api_host: '<ph_client_api_host>',
+      person_profiles: 'identified_only'
     })
-  }
+  }, []);
   return <PostHogProvider client={posthog}>{children}</PostHogProvider>
 }
 ```
@@ -261,14 +263,14 @@ To ensure, we initialize PostHog correctly on future loads, we also need to upda
 import posthog from 'posthog-js'
 import { PostHogProvider } from 'posthog-js/react'
 import { cookieConsentGiven } from './banner'
-
+import { useEffect } from 'react'
 export function PHProvider({ children }) {
-  if (typeof window !== 'undefined') {
+  useEffect(() => {
     posthog.init('<ph_project_api_key>', {
       api_host: '<ph_client_api_host>',
       persistence: cookieConsentGiven() === 'yes' ? 'localStorage+cookie' : 'memory'
     })
-  }
+  }, []);
   return <PostHogProvider client={posthog}>{children}</PostHogProvider>
 }
 ```
@@ -282,3 +284,5 @@ When users visit your site now, PostHog is initialized either with or without co
 - [How to use PostHog without cookie banners](/tutorials/cookieless-tracking)
 - [How to set up Next.js A/B tests](/tutorials/nextjs-ab-tests)
 - [How to set up Next.js app router analytics, feature flags, and more](/tutorials/nextjs-app-directory-analytics)
+
+<NewsletterForm />

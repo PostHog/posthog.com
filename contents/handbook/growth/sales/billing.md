@@ -37,7 +37,7 @@ If this is a new contract for an existing customer, you will need to add their e
 ###### Step 3: Verify invoice details and send
 - Use the Invoice ID recorded in the table to locate the invoice in Stripe.
 - Ensure all details are correct, particularly the Customer’s Billing/Shipping addresses and Tax ID on the Customer object.
-- Send the invoice to the customer and wait for the payment to be completed.
+- Send the invoice to the customer and wait for the payment to be completed.  Ensure that the customer is aware that payment is via Bank Transfer only (no checks).
 
 **Do not proceed to the next steps until payment is confirmed.** Any credits added to an account gets automatically applied to outstanding invoices. If you add credits before payment is completed, the credits will settle any existing debts, and customer will not be able to make a payment.
 
@@ -162,22 +162,6 @@ You can find a list of available plans in the billing repo. These are found insi
 Each plan can have a list of features, and a price.
 Features are used to infer which features are available in the product, for a customer on that plan.
 You can manually change the plan for a customer by updating the `plans_map` in the billing admin panel.
-
-### Giving customers a free trial
-
-Prerequisites
-- Customer needs to have an Organization set up on the EU or US Cloud
-- You need access to the billing admin (billing.posthog.com).  Ask Raquel or Simon for access.
-
-Process
-1. Log in to [Billing](billing.posthog.com/admin/) with your Google SSO login.
-2. Click the `Customers` link.
-3. Search for the Organization Name (potentially not unique) or Organization ID (potentially unique).
-4. There is a `Plan` section - in there you’ll need to set `Free Trial Until` to the appropriate date. This is usually 2 weeks, or 4 weeks for larger ($100k+) customers. (Optionally, you may want to activate `Is Enterprise Trial` to give them access to Enterprise features
-5. Click `Save`
-6. The next time that Customer visits PostHog, their `AvailableFeatures` will be updated to reflect the standard premium features (they might have to refresh their page to properly sync the new billing information).
-7. Once this date passes their `AvailableFeatures` will be reset to the free plan unless they have subscribed within this time.
-
 
 ### Updating subscriptions
 

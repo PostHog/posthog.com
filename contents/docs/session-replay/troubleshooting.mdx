@@ -95,6 +95,12 @@ To workaround this, you can use the `posthog.onSessionId` method in the web SDK 
 
 Some Cookie banners or "CMP"s modify the webpage in reaction to any changes to cookies, which can cause an infinite loop. If you are using a tool like this and experience the webpage becoming unresponsive or slow then try [configuring posthog](/docs/integrate/client/js#persistence) to use `persistence: "localStorage+cookie"`. This will use localStorage for the majority of storage needs, bypassing the infinite loop issue sometimes caused by cookie management tools.
 
+## Network payload capture is not capturing headers
+
+Browser do not automatically allow JS to read headers from cross-origin requests. So, when making a request from app.mywebsite.example to api.mywebsite.example headers are not available to be copied and reported.
+
+You need to add `Access-Control-Expose-Headers: *` as a header on responses from api.mywebsite.example to allow all headers to be read cross origin. You can specify which headers you want to be available `Access-Control-Expose-Headers: Content-Encoding, X-Correlation-Id` if you don't want all headers to be accessible.
+
 ## Recorder Limitations
 
 Due to the complexity of browser rendering and replay, some web resources are unable to be recordered or playedback. These include:
@@ -102,6 +108,10 @@ Due to the complexity of browser rendering and replay, some web resources are un
 - **Object elements** - Most object elements cannot be played back. Non-HTML native plugins such as Flash or Silverlight cannot be recorded
 - **Heavy animations** - Some heavier animations such as SVG or Lottie animations may be _throttled_ or ignored entirely due to the performance overhead in recording and replaying
 - **Iframes** - iframes from the origins under your control **can** be recorded and played back. See [iframe recording](/docs/session-replay/iframes) for more info.
+
+## Angular performance
+
+It is sometimes necessary to run session replay outside of the Angular zone. See the [PostHog Angular docs for more detail](/docs/libraries/angular#session-replay)
 
 ## Report your specific issue
 

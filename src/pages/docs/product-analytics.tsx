@@ -1,3 +1,4 @@
+import CloudinaryImage from 'components/CloudinaryImage'
 import React from 'react'
 import { StaticImage } from 'gatsby-plugin-image'
 
@@ -50,13 +51,13 @@ export const Content = ({ quickLinks = false }) => {
                         title="The complete guide to event tracking"
                         description="Set up your analytics foundation"
                         Image={
-                            <StaticImage
+                            <CloudinaryImage
                                 alt=""
                                 className="h-full"
                                 placeholder="none"
                                 objectFit="contain"
                                 quality={100}
-                                src="../../components/Home/Slider/images/product-analytics-hog.png"
+                                src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Home/Slider/images/product-analytics-hog.png"
                             />
                         }
                         url="/tutorials/event-tracking-guide"
@@ -66,13 +67,13 @@ export const Content = ({ quickLinks = false }) => {
                         title="Track performance marketing"
                         description="Optimize ads and marketing channels"
                         Image={
-                            <StaticImage
+                            <CloudinaryImage
                                 alt=""
                                 className="h-full"
                                 placeholder="none"
                                 objectFit="contain"
                                 quality={100}
-                                src="../../components/Home/Slider/images/product-analytics-hog.png"
+                                src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Home/Slider/images/product-analytics-hog.png"
                             />
                         }
                         url="/tutorials/performance-marketing"
@@ -82,13 +83,13 @@ export const Content = ({ quickLinks = false }) => {
                         title="Reduce churn"
                         description="The bread and butter of long-term growth"
                         Image={
-                            <StaticImage
+                            <CloudinaryImage
                                 alt=""
                                 className="h-full"
                                 placeholder="none"
                                 objectFit="contain"
                                 quality={100}
-                                src="../../components/Home/Slider/images/product-analytics-hog.png"
+                                src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Home/Slider/images/product-analytics-hog.png"
                             />
                         }
                         url="/tutorials/churn-rate"
@@ -98,13 +99,13 @@ export const Content = ({ quickLinks = false }) => {
                         title="Track new and returning users"
                         description="Build cohorts and compare users"
                         Image={
-                            <StaticImage
+                            <CloudinaryImage
                                 alt=""
                                 className="h-full"
                                 placeholder="none"
                                 objectFit="contain"
                                 quality={100}
-                                src="../../components/Home/Slider/images/product-analytics-hog.png"
+                                src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Home/Slider/images/product-analytics-hog.png"
                             />
                         }
                         url="/tutorials/track-new-returning-users"
@@ -114,13 +115,13 @@ export const Content = ({ quickLinks = false }) => {
                         title="Identify and analyze power users"
                         description="Find and understand your most engaged users"
                         Image={
-                            <StaticImage
+                            <CloudinaryImage
                                 alt=""
                                 className="h-full"
                                 placeholder="none"
                                 objectFit="contain"
                                 quality={100}
-                                src="../../components/Home/Slider/images/product-analytics-hog.png"
+                                src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Home/Slider/images/product-analytics-hog.png"
                             />
                         }
                         url="/tutorials/power-users"
@@ -130,13 +131,13 @@ export const Content = ({ quickLinks = false }) => {
                         title="Calculate DAU/MAU ratio"
                         description="Popular engagement metrics that measure stickiness"
                         Image={
-                            <StaticImage
+                            <CloudinaryImage
                                 alt=""
                                 className="h-full"
                                 placeholder="none"
                                 objectFit="contain"
                                 quality={100}
-                                src="../../components/Home/Slider/images/product-analytics-hog.png"
+                                src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Home/Slider/images/product-analytics-hog.png"
                             />
                         }
                         url="/tutorials/dau-mau-ratio"
@@ -163,13 +164,13 @@ export const Content = ({ quickLinks = false }) => {
                         title="Product analytics"
                         description="Active users, feature flags, growth accounting, traffic sources"
                         Image={
-                            <StaticImage
+                            <CloudinaryImage
                                 alt=""
                                 className="h-full"
                                 placeholder="none"
                                 objectFit="contain"
                                 quality={100}
-                                src="./images/template-product-analytics.png"
+                                src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/pages/docs/images/template-product-analytics.png"
                             />
                         }
                         url="/templates/product-analytics"
@@ -178,13 +179,13 @@ export const Content = ({ quickLinks = false }) => {
                         title="Website traffic"
                         description="User, sessions, content performance"
                         Image={
-                            <StaticImage
+                            <CloudinaryImage
                                 alt=""
                                 className="h-full"
                                 placeholder="none"
                                 objectFit="contain"
                                 quality={100}
-                                src="./images/template-website-traffic.png"
+                                src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/pages/docs/images/template-website-traffic.png"
                             />
                         }
                         url="/templates/website-dashboard"
@@ -193,13 +194,13 @@ export const Content = ({ quickLinks = false }) => {
                         title="Realtime analytics"
                         description="Live users, sessions, traffic, sources"
                         Image={
-                            <StaticImage
+                            <CloudinaryImage
                                 alt=""
                                 className="h-full"
                                 placeholder="none"
                                 objectFit="contain"
                                 quality={100}
-                                src="./images/template-realtime-analytics.png"
+                                src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/pages/docs/images/template-realtime-analytics.png"
                             />
                         }
                         url="/templates/real-time-dashboard"

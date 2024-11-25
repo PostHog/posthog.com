@@ -210,8 +210,6 @@ Everyone. It's basically impossible to measure product-market fit without it. Th
 | <span className="text-green text-lg">✔</span> Can be broken down by user cohorts for comparison                          |           |
 | <span className="text-green text-lg">✔</span> You can A/B test ways to improve user engagement                           |           |
 
-<NewsletterForm />
-
 ## Indicator #4: Paying ICP customers
 
 - **Type:** Leading indicator
