@@ -135,7 +135,7 @@ export function ProductPanel(props: ProductPanelProps): React.ReactElement {
             {product.description && (
                 <div className="border-t border-light dark:border-dark pt-4">
                     <h3 className="text-lg mb-0">Description</h3>
-                    <p className="text-[15px]">{product.description}</p>
+                    <div dangerouslySetInnerHTML={{ __html: product.descriptionHtml }} />
                 </div>
             )}
             {product.imageProducts?.length > 0 && (

@@ -18,6 +18,7 @@ export const query = graphql`
             handle
             products {
                 description
+                descriptionHtml
                 featuredMedia {
                     preview {
                         image {
