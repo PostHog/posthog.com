@@ -92,7 +92,7 @@ In the event of an emergency, please cover any related expenses (ideally on your
 
 ### Flight delays
 
-If your travel plans are affected due to a flight delay and you are forced to stay somewhere unplanned overnight, push the airline to cover the cost of your accommodations (including meals). It's not uncommon for them to initially tell you they no longer offer free hotel rooms for delays that caused by the airline, but with a little bit of polite coaxing, they will likely give in.
+If your travel plans are affected due to a flight delay or an airline-induced missed connection and you are forced to stay somewhere unplanned overnight, push the airline to cover the cost of your accommodations (including meals). It's not uncommon for them to initially tell you they no longer offer free hotel rooms for delays that caused by the airline, but with a little bit of polite coaxing, they will likely give in.
 
 ## How to plan an offsite in 8 weeks - a checklist
 
