@@ -292,7 +292,7 @@ export const CodeBlock = ({
                                 {tooltipVisible && (
                                     <AnimatePresence>
                                         <motion.div
-                                            className="absolute top-full mt-2 -right-2 bg-black text-white font-semibold px-2 py-1 rounded"
+                                            className="absolute top-full mt-2 -right-2 bg-black text-white font-semibold px-2 py-1 rounded z-10"
                                             initial={{ translateY: '-50%', opacity: 0 }}
                                             animate={{ translateY: 0, opacity: 1 }}
                                             exit={{ opacity: 0 }}
