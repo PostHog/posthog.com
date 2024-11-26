@@ -14,6 +14,7 @@ import { getProductMetafield } from './utils'
 import { GatsbyImage, getImage } from 'gatsby-plugin-image'
 import { getShopifyImage } from 'gatsby-source-shopify'
 import { IconSpinner } from '@posthog/icons'
+import SizeGuide from './SizeGuide'
 
 type ProductPanelProps = {
     className?: string
@@ -62,7 +63,6 @@ export function ProductPanel(props: ProductPanelProps): React.ReactElement {
                         New
                     </div>
                 )}
-
                 <ProductCarousel product={product} />
             </div>
             <div className="space-y-0.5">
@@ -102,6 +102,8 @@ export function ProductPanel(props: ProductPanelProps): React.ReactElement {
                         )
                     })
                     .filter(Boolean)}
+
+            <SizeGuide title={product.title} />
 
             <Quantity value={quantity} onChange={setQuantity} />
 
