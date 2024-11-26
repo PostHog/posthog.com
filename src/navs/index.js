@@ -2541,6 +2541,10 @@ export const docsMenu = {
                     icon: 'IconApp',
                     color: 'seagreen',
                     featured: true,
+                    badge: {
+                        title: 'Beta',
+                        className: 'uppercase !bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',
+                    },
                 },
                 {
                     name: 'Adding your code',
