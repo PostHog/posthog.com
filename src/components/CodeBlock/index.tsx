@@ -297,7 +297,7 @@ export const CodeBlock = ({
                                             animate={{ translateY: 0, opacity: 1 }}
                                             exit={{ opacity: 0 }}
                                         >
-                                            Copied
+                                            Copied!
                                         </motion.div>
                                     </AnimatePresence>
                                 )}
