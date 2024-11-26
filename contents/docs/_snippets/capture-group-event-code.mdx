@@ -3,14 +3,12 @@
 ```js-web
 // Option 1 (recommended):
 // Call posthog.group()
-// Note that this has the side-effect that for the rest of the session 
-// all subsequent events captured will be associated to the group
+// This has the side-effect that all subsequent events in the session are associated to the group
 posthog.group('company', 'company_id_in_your_db');
 posthog.capture('user_signed_up'); // This event is associated with the company above
 
-// Option 2: 
-// Set the group property in posthog.capture()
-// This method doesn't have the side-effect of associating all future events to the group.
+// Option 2: Set the group property in posthog.capture()
+// This method doesn't have the side-effect of associating the session's events to the group
 posthog.capture('user_signed_up', {
     '$groups': {
         'company': 'company_id_in_your_db'
@@ -52,16 +50,13 @@ PostHog::capture(array(
 ```
 
 ```ios_swift
-// Option 1 (recommended):
-// Call group()
-// Note that this has the side-effect that for the rest of the session 
-// all subsequent events captured will be associated to the group
+// Option 1 (recommended): Call group()
+// This has the side-effect that all subsequent events in the session are associated to the group
 PostHogSDK.shared.group(type: "company", key: "company_id_in_your_db")
 PostHogSDK.shared.capture("user_signed_up") // This event is associated with the company above
 
-// Option 2: 
-// Set the group property in capture()
-// This method doesn't have the side-effect of associating all future events to the group
+// Option 2: Set the group property in capture()
+// This method doesn't have the side-effect of associating the session's events to the group
 PostHogSDK.shared.capture(
     event: "user_signed_up",
     properties: [
@@ -73,16 +68,13 @@ PostHogSDK.shared.capture(
 ```
 
 ```android_kotlin
-// Option 1 (recommended):
-// Call group()
-// Note that this has the side-effect that for the rest of the session 
-// all subsequent events captured will be associated to the group
+// Option 1 (recommended): Call group()
+// This has the side-effect that all subsequent events in the session are associated to the group
 PostHog.group(type = "company", key = "company_id_in_your_db")
 PostHog.capture("user_signed_up") // This event is associated with the company above
 
-// Option 2: 
-// Set the group property in capture()
-// This method doesn't have the side-effect of associating all future events to the group
+// Option 2: Set the group property in capture()
+// This method doesn't have the side-effect of associating the session's events to the group
 PostHog.capture(
     event = "user_signed_up",
     properties = mapOf(

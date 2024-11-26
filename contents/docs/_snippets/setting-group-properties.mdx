@@ -2,15 +2,13 @@ In the same way that every person can have [properties](/docs/getting-started/pe
 
 Continuing with the previous example of using `company` as our group type, we'll add `company_name`, `date_joined`, and `subscription` as additional properties.
 
-> **Note:** You must include at least one group property for a group to be visible in the [Persons & Groups tab](https://app.posthog.com/persons).
+> **Note:** You must include at least one group property for a group to be visible in the [People and groups tab](https://app.posthog.com/persons).
 
 <MultiLanguage>
 
 ```js-web
-// Option 1 (recommended):
-// Set properties in posthog.group()
-// Note that this has the side-effect that for the rest of the session
-// all subsequent events captured will be associated to the group
+// Option 1 (recommended): Set properties in posthog.group()
+// This has the side-effect that all subsequent events in the session are associated to the group
 posthog.group('company', 'company_id_in_your_db', {
     name: 'PostHog',
     subscription: "subscription",
@@ -71,10 +69,8 @@ PostHog::groupIdentify([
 ```
 
 ```ios_swift
-// Option 1 (recommended):
-// Set properties in group()
-// Note that this has the side-effect that for the rest of the session
-// all subsequent events captured will be associated to the group
+// Option 1 (recommended): Set properties in group()
+// This has the side-effect that all subsequent events in the session are associated to the group
 PostHogSDK.shared.group(
     type: "company", 
     key: "company_id_in_your_db",
@@ -85,9 +81,8 @@ PostHogSDK.shared.group(
     ]
 )
 
-// Option 2:
-// Set properties using capture
-// This method doesn't have the side-effect of associating all future events to the group
+// Option 2: Set properties using capture
+// This method doesn't have the side-effect of associating the session's events to the group
 PostHogSDK.shared.capture(
     event: "$groupidentify",
     properties: [
@@ -103,10 +98,8 @@ PostHogSDK.shared.capture(
 ```
 
 ```android_kotlin
-// Option 1 (recommended):
-// Set properties in group()
-// Note that this has the side-effect that for the rest of the session
-// all subsequent events captured will be associated to the group
+// Option 1 (recommended): Set properties in group()
+// This has the side-effect that all subsequent events in the session are associated to the group
 PostHog.group(
     type = "company", 
     key = "company_id_in_your_db",
@@ -117,9 +110,8 @@ PostHog.group(
     )
 )
 
-// Option 2:
-// Set properties using capture
-// This method doesn't have the side-effect of associating all future events to the group
+// Option 2: Set properties using capture
+// This method doesn't have the side-effect of associating the session's events to the group
 PostHog.capture(
     event = "\$groupidentify",
     properties = mapOf(
