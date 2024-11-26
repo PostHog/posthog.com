@@ -32,12 +32,13 @@ This is usually the most difficult bit! Sometimes customers will proactively rea
 - Offer to optimize their usage/reduce their billing - if they are pointlessly tracking a bunch of junk, tell them! Otherwise they'll just find out themselves and churn anyway.
 - Tell them about new or upcoming features or products that they may not be aware of which you know could be a great fit for them (and let them try them out for free).
 - Use multiple channels - email is usually the worst way to reach our ICP. Slack, in-app Surveys or even Telegram are all usually better. But try email first anyway.
+- Loom videos sharing your observations about their usage/account provide a personalized and human touch which can go a long way to building lasting relationships.  Ask Simon for an invitation to our company account if you don't have access.
 - Adding the contact on LinkedIn and sending a very human video or audio message can work really well - even for technical people (use the LinkedIn mobile app).  
 - Figure out what the non-technical people in their team need and then go out and talk to them - get someone who isn’t an engineer to talk to us given engineers don’t want to.
 - If they submit a support request, jump in and respond yourself to try and build a relationship. 
 - Ask the wider team for help - we have to get creative here! As a last resort, deploying the founder card can be surprisingly effective. 
 
-Don't do clickbaity things or trick people into talking to you - it'll just annoy them. And definitely don't just offer a generic checkin 'to see how things are going'!
+Don't do clickbaity things or trick people into talking to you - it'll just annoy them. And definitely don't just offer a generic checkin 'to see how things are going'!  
 
 Ideally you want to get multiple people into a [shared Slack channel[(/handbook/growth/sales/new-sales#4-product-evaluation), as we've found this enables the best communication and allows us to provide them with great support. 
 
@@ -103,4 +104,4 @@ Generally speaking you should be trying to regularly see customers in your book 
 
 These are customers that are happily using PostHog long term, and are neither a churn risk nor likely to have expansion potential. Managing this group is much more automated and taken care of by CSMs, who do things like tracking usage and setting up alerts in Vitally to trigger outreach from us when a customer changes their usage behavior (either up or down). 
 
-An important part of retention here is also to ensure support issues fixed in a timely manner. We deliberately don't want to invest a huge amount in hands-on customer success here, because that can often paper over cracks in the product experience or quality of our customer support, so staying hands-off here is an intentional strategy. In the future, we will build out this playbook a lot more. 
+An important part of retention here is also to ensure support issues are fixed in a timely manner. We deliberately don't want to invest a huge amount in hands-on customer success here, because that can often paper over cracks in the product experience or quality of our customer support, so staying hands-off here is an intentional strategy. In the future, we will build out this playbook a lot more. 
