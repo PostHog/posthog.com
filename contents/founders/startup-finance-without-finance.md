@@ -112,8 +112,6 @@ Your report (sometimes referred to as 'management accounts') will comprise three
  
 - You may hear 'accruals' vs. 'cash'-based accounting floating around. 'Accruals' means you record the revenue when you issued the invoice; 'cash' means you record it when the money hits your bank account. We use accruals-based accounting, which is usually the sensible choice for B2B SaaS.
 
-<NewsletterForm />
-
 ## Predicting the future (aka Financial Planning)
 
 <iframe src="https://giphy.com/embed/Dps6uX4XPOKeA" width="480" height="366" frameBorder="0" class="giphy-embed" allowFullScreen></iframe>

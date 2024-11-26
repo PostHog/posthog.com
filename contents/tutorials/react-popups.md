@@ -169,3 +169,5 @@ You can also set up an experiment to test that popups drive usage of the feature
 - [Get feedback and book user interviews with site apps](/tutorials/feedback-interviews-site-apps)
 - [Running experiments on new users](/tutorials/new-user-experiments)
 - [How to set up Next.js A/B tests](/tutorials/nextjs-ab-tests)
+
+<NewsletterForm />

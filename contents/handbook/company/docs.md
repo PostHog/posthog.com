@@ -40,3 +40,16 @@ If you need help updating documentation:
 ### Who should review docs updates?
 
 For larger updates, please tag Lior and/or Ian from the content team, and Cory from the Website & Docs team, in addition to other relevant team members.
+
+### How do I add images to my docs?
+
+If you need to add images to your docs, please [upload them to Cloudinary first](/handbook/engineering/posthog-com/assets) and then embed them into the document. You can embed light mode and dark mode versions of the image using this code snippet:
+
+```jsx
+<ProductScreenshot
+  imageLight = "https://res.cloudinary.com/dmukukwp6/image/upload/add_holdout_light_ce0827be42.png"
+  imageDark = "https://res.cloudinary.com/dmukukwp6/image/upload/add_holdout_dark_cc687f7688.png"
+  classes="rounded"
+  alt="Screenshot of the form to create a new holdout"
+/>
+```

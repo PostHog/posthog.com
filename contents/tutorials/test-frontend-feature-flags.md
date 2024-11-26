@@ -171,3 +171,5 @@ This tests both variants of the flag. You can use this mocking strategy to test 
 - [Master Feature Flags: Best practice, tips and examples](/blog/feature-flag-best-practices)
 - [How to run Experiments without feature flags](/docs/experiments/running-experiments-without-feature-flags)
 - [How to do a canary release with feature flags in PostHog](/tutorials/canary-release)
+
+<NewsletterForm />

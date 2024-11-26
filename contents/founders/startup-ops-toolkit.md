@@ -60,8 +60,6 @@ Again, Deel will handle all things payroll. We don't use Deel for US payroll (ye
 
 > Don't forget that hiring someone doesn't just mean paying their salaries - you need to add things like social security payments, pension contributions etc. on top of that! This varies by country, but as a rough guide you should add ~15% to someone's salary to get their 'fully loaded' cost. 
 
-<NewsletterForm />
-
 ## 2. Managing your money
 
 There are basically two sides to finance – accounting and budgeting. You know this already from YC’s [Startup School](https://www.startupschool.org/), of course. Managing your money can be very stressful, especially as not having it means that everything else you're trying to do becomes kinda irrelevant...

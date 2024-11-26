@@ -340,6 +340,9 @@
         { "source": "/raroque", "destination": "/?utm_source=raroque&utm_campaign=raroque" },
         { "source": "/ashishps", "destination": "/?utm_source=ashishps&utm_campaign=ashishps" },
         { "source": "/codesource", "destination": "/?utm_source=codesource&utm_campaign=codesource" },
+        { "source": "/bytegrad", "destination": "/?utm_source=bytegrad&utm_campaign=bytegrad" },
+        { "source": "/fireship", "destination": "/?utm_source=fireship&utm_campaign=fireship" },
+        { "source": "/jesseshowalter", "destination": "/?utm_source=jesseshowalter&utm_campaign=jesseshowalter" },
         { "source": "/blog/the-posthog-array-1-36-1", "destination": "/blog/the-posthog-array-1-36-0" },
         { "source": "/tutorials/b2b", "destination": "/blog/b2b-saas-product-metrics" },
         { "source": "/docs/self-host/migrate-to-cloud", "destination": "/docs/migrate/migrate-to-cloud" },
@@ -1320,6 +1323,7 @@
         { "source": "/docs/cdp/outfunnel-exporter", "destination": "/docs/cdp/destinations" },
         { "source": "/docs/cdp/route-censor", "destination": "/docs/cdp" },
         { "source": "/docs/cdp/semver-flattener", "destination": "/docs/cdp" },
+        { "source": "/handbook/product/in-app-prompts", "destination": "/docs/surveys" },
         { "source": "/docs/webhooks", "destination": "/docs/cdp/destinations" },
         { "source": "/docs/webhooks/slack", "destination": "/docs/cdp/destinations/slack" },
         { "source": "/docs/webhooks/microsoft-teams", "destination": "/docs/cdp/destinations/webhook" },
@@ -1328,8 +1332,21 @@
         { "source": "/docs/session-replay/android", "destination": "/docs/session-replay/installation?tab=Android" },
         { "source": "/docs/session-replay/ios", "destination": "/docs/session-replay/installation?tab=iOS" },
         {
+            "source": "/questions/best-practices-naming-convention-for-event-names-and-properties",
+            "destination": "/docs/product-analytics/best-practices"
+        },
+        {
+            "source": "/product-engineers/feature-flag-best-practices",
+            "destination": "/docs/feature-flags/best-practices"
+        },
+        {
+            "source": "/product-engineers/5-ways-to-improve-analytics-data",
+            "destination": "/docs/product-analytics/best-practices"
+        },
+        {
             "source": "/docs/session-replay/react-native",
             "destination": "/docs/session-replay/installation?tab=React+Native"
-        }
+        },
+        { "source": "/apps", "destination": "/cdp", "statusCode": 302 }
     ]
 }

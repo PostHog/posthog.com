@@ -396,7 +396,7 @@ To see debug logs (such as ClickHouse queries), add argument `--log-cli-level=DE
 
 ### End-to-end
 
-For Cypress end-to-end tests, run `bin/e2e-test-runner`. This will spin up a test instance of PostHog and show you the Cypress interface, from which you'll manually choose tests to run. Once you're done, terminate the command with Cmd + C.
+For Cypress end-to-end tests, run `bin/e2e-test-runner`. This will spin up a test instance of PostHog and show you the Cypress interface, from which you'll manually choose tests to run. You'll need `uv` installed (the Python package manager), which you can do so with `brew install uv`. Once you're done, terminate the command with Cmd + C.
 
 ## Extra: Working with feature flags
 
@@ -412,6 +412,12 @@ If you'd like to have ALL feature flags that exist in PostHog at your disposal r
 This command automatically turns any feature flag ending in `_EXPERIMENT` as a multivariate flag with `control` and `test` variants.
 
 Backend side flags are only evaluated locally, which requires the `POSTHOG_PERSONAL_API_KEY` env var to be set. Generate the key in [your user settings](http://localhost:8000/settings/user#personal-api-keys).
+
+## Extra: Debugging with VS Code
+
+The PostHog repository includes [VS Code launch options for debugging](https://github.com/PostHog/posthog/blob/master/.vscode/launch.json). Simply go to the `Run and Debug` tab in VS Code, select the desired service you want to debug, and run it. Once it starts up, you can set breakpoints and step through code to see exactly what is happening. There are also debug launch options for frontend and backend tests if you're dealing with a tricky test failure.
+
+> **Note:** You can debug all services using the main "PostHog" launch option. Otherwise, if you are running most of the PostHog services locally with `./bin/start`, for example if you only want to debug the backend, make sure to comment out that service from the [start script temporarily](https://github.com/PostHog/posthog/blob/master/bin/start#L22). 
 
 ## Extra: Debugging the backend in PyCharm
 
@@ -437,3 +443,69 @@ With PyCharm's built in support for Django, it's fairly easy to setup debugging 
 ## Extra: Developing paid features (PostHog employees only)
 
 If you're a PostHog employee, you can get access to paid features on your local instance to make development easier. [Learn how to do so in our internal guide](https://github.com/PostHog/billing?tab=readme-ov-file#licensing-your-local-instance).
+
+## Extra: Working with the data warehouse and a MySQL source
+
+If you want to set up a local MySQL database as a source for the data warehouse, there are a few extra set up steps you'll need to complete:
+1. Setting up a local MySQL database to connect to.
+2. Installing MS SQL drivers on your machine.
+3. Defining additional environment variables for the Temporal task runner.
+
+First, install MySQL:
+
+```bash
+brew install mysql
+brew services start mysql
+```
+
+Once MySQL is installed, create a database and table, insert a row, and create a user who can connect to it:
+
+```bash
+mysql -u root
+```
+```sql
+CREATE DATABASE posthog_dw_test;
+CREATE TABLE IF NOT EXISTS payments (id INT AUTO_INCREMENT PRIMARY KEY, timestamp DATETIME, distinct_id VARCHAR(255), amount DECIMAL(10,2));
+INSERT INTO payments (timestamp, distinct_id, amount) VALUES (NOW(), 'testuser@example.com', 99.99);
+CREATE USER 'posthog'@'%' IDENTIFIED BY 'posthog';
+GRANT ALL PRIVILEGES ON posthog_dw_test.* TO 'posthog'@'%';
+FLUSH PRIVILEGES;
+```
+
+Next, you'll need to install some MS SQL drivers for PostHog the application to connect to the MySQL database. Learn the entire process in [posthog/warehouse/README.md](https://github.com/PostHog/posthog/blob/master/posthog/warehouse/README.md). Without the drivers, you'll get the following error when connecting a SQL database to data warehouse:
+
+```
+symbol not found in flat namespace '_bcp_batch'
+```
+
+Lastly, you'll need to define these environment variables in order for the Temporal task runner monitor the correct queue and work as expected:
+
+```
+# Ask for the values in #team-data-warehouse
+export PYTHONUNBUFFERED=
+export DJANGO_SETTINGS_MODULE=
+export DEBUG=
+export CLICKHOUSE_SECURE=
+export KAFKA_HOSTS=
+export DATABASE_URL=
+export SKIP_SERVICE_VERSION_REQUIREMENTS=
+export PRINT_SQL=
+export BUCKET_URL=
+export AIRBYTE_BUCKET_KEY=
+export AIRBYTE_BUCKET_SECRET=
+export AIRBYTE_BUCKET_REGION=
+export AIRBYTE_BUCKET_DOMAIN=
+export TEMPORAL_TASK_QUEUE=
+export AWS_S3_ALLOW_UNSAFE_RENAME=
+export HUBSPOT_APP_CLIENT_ID=
+export HUBSPOT_APP_CLIENT_SECRET=
+```
+
+If you put them in a `.temporal-worker-settings` file, you can run `source .temporal-worker-settings` before you call `DEBUG=1 ./bin/start`.
+
+To verify everything is working as expected:
+1. Navigate to "Data pipeline" in the PostHog application.
+2. Create a new MySQL source using the settings above.
+3. Once the source is created, click on the "MySQL" item. In the schemas table, click on the triple dot menu and select the "Reload" option.
+
+After the job runs, clicking on the synced table name should take you to your data.

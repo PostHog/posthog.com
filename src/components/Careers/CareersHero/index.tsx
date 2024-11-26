@@ -8,6 +8,7 @@ import { PineappleText, TeamMembers } from 'components/Job/Sidebar'
 import slugify from 'slugify'
 import { IconPineapple } from '@posthog/icons'
 import { StickerPineapple, StickerPineappleNo, StickerPineappleYes } from 'components/Stickers/Index'
+import TeamPatch from 'components/TeamPatch'
 
 const query = graphql`
     query CareersHero {
@@ -41,7 +42,23 @@ const query = graphql`
                 id
                 name
                 crest {
-                    gatsbyImageData(width: 200)
+                    data {
+                        attributes {
+                            url
+                        }
+                    }
+                }
+                crestOptions {
+                    textColor
+                    textShadow
+                    fontSize
+                    frame
+                    frameColor
+                    plaque
+                    plaqueColor
+                    imageScale
+                    imageXOffset
+                    imageYOffset
                 }
                 leadProfiles {
                     data {
@@ -345,16 +362,20 @@ export const CareersHero = () => {
                             )}
                             <p className="text-sm text-center opacity-60 font-medium mb-0">About this team</p>
                             <div className="max-w-48 mx-auto">
-                                <GatsbyImage image={getImage(selectedTeam.crest)} />
+                                <Link to={teamURL}>
+                                    <TeamPatch
+                                        name={selectedTeam.name}
+                                        imageUrl={selectedTeam.crest?.data?.attributes?.url}
+                                        {...selectedTeam.crestOptions}
+                                        className="w-full -mt-4"
+                                    />
+                                </Link>
                             </div>
-                            <h5 className="m-0 -mt-2 text-center">
-                                <Link to={teamURL}>{selectedTeam.name} Team</Link>
-                            </h5>
                             <div className="flex justify-center">
                                 <TeamMembers profiles={selectedTeam.profiles} />
                             </div>
 
-                            <div className="inline-flex mx-auto gap-2">
+                            <div className="inline-flex items-center mx-auto gap-2">
                                 {pineapplePercentage > 50 ? (
                                     <>
                                         <StickerPineappleYes className="size-12" />

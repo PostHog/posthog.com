@@ -92,8 +92,6 @@ Because ClickHouse doesn’t expect mutation requests, it can depend on merges b
 
 > 📖 **Further reader:** ClickHouse is just one of many column-based databases, others include Google's BigQuery, and Snowflake. Read our comparisons between [ClickHouse and BigQuery](/blog/clickhouse-vs-bigquery), and [ClickHouse vs Snowflake](/blog/clickhouse-vs-snowflake) to learn more about different OLAP database solutions.
 
-<NewsletterForm />
-
 ## Comparing ClickHouse and Postgres
 
 Because ClickHouse is the more opinionated solution, comparisons between Postgres and ClickHouse tend to go: 

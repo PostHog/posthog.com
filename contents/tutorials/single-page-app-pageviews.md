@@ -335,3 +335,5 @@ export class AppComponent {
 - [What to do after installing PostHog in 5 steps](/tutorials/next-steps-after-installing)
 - [What engineers get wrong about analytics](/newsletter/misconceptions-about-analytics)
 - [Complete guide to event tracking](/tutorials/event-tracking-guide)
+
+<NewsletterForm />
