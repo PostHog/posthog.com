@@ -1793,46 +1793,6 @@ export const docsMenu = {
                             url: '/docs/api/persons',
                         },
                         {
-                            name: 'Destinations',
-                            url: '/docs/api/pipeline-destinations',
-                        },
-                        {
-                            name: 'Destination configs',
-                            url: '/docs/api/pipeline-destination-configs',
-                        },
-                        {
-                            name: 'Frontend apps',
-                            url: '/docs/api/pipeline-frontend-apps',
-                        },
-                        {
-                            name: 'Frontend apps configs',
-                            url: '/docs/api/pipeline-frontend-apps-configs',
-                        },
-                        {
-                            name: 'Import apps',
-                            url: '/docs/api/pipeline-import-apps',
-                        },
-                        {
-                            name: 'Import apps configs',
-                            url: '/docs/api/pipeline-import-apps-configs',
-                        },
-                        {
-                            name: 'Transformations',
-                            url: '/docs/api/pipeline-transformations',
-                        },
-                        {
-                            name: 'Transformation configs',
-                            url: '/docs/api/pipeline-transformation-configs',
-                        },
-                        {
-                            name: 'Plugins',
-                            url: '/docs/api/plugins',
-                        },
-                        {
-                            name: 'Plugin configs',
-                            url: '/docs/api/plugin-configs',
-                        },
-                        {
                             name: 'Projects',
                             url: '/docs/api/projects',
                         },
@@ -2647,6 +2607,12 @@ export const docsMenu = {
                     url: '/docs/experiments/running-experiments-without-feature-flags',
                     icon: 'IconFlag',
                     color: 'yellow',
+                },
+                {
+                    name: 'Holdouts',
+                    url: '/docs/experiments/holdouts',
+                    icon: 'IconPeople',
+                    color: 'orange',
                 },
             ],
         },

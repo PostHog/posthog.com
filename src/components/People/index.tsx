@@ -14,7 +14,7 @@ import { StaticImage } from 'gatsby-plugin-image'
 import ReactMarkdown from 'react-markdown'
 import rehypeRaw from 'rehype-raw'
 import SideModal from 'components/Modal/SideModal'
-import { Profile } from 'components/Team'
+import Profile from 'components/Team/Profile'
 
 export const TeamMember = (props) => {
     const { avatar, lastName, firstName, companyRole, country, squeakId, location, biography, setActiveProfile } = props
@@ -116,7 +116,7 @@ export default function People() {
         <Layout>
             <SEO title="Team - PostHog" />
             <SideModal open={!!activeProfile} setOpen={setActiveProfile}>
-                <Profile {...activeProfile} />
+                <Profile profile={{ ...activeProfile }} />
             </SideModal>
             <div className="flex flex-col xl:flex-row gap-8 pt-10 md:pb-3 px-4 md:px-8 2xl:px-4 3xl:p-0 max-w-screen-2xl mx-auto">
                 <div className="flex-1">
