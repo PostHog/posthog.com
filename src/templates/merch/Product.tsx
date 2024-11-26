@@ -168,6 +168,7 @@ export const query = graphql`
             handle
             shopifyId
             description
+            descriptionHtml
             media {
                 mediaContentType
                 preview {

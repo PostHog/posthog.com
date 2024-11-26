@@ -2,12 +2,15 @@ import React, { useState } from 'react'
 import { CallToAction } from 'components/CallToAction'
 import usePostHog from 'hooks/usePostHog'
 
-export function BackInStockForm({ product }): React.ReactElement {
+export function BackInStockForm({ variant }) {
     const [email, setEmail] = useState('')
     const [submitted, setSubmitted] = useState(false)
     const posthog = usePostHog()
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
+        const title = variant?.product?.title
+        const size = variant?.selectedOptions?.find((o: any) => o.name === 'Size')?.value || 'N/A'
+        const product = { title, size, shopifyId: variant?.shopifyId }
         posthog?.capture('back_in_stock_form_submitted', { email, product })
         setSubmitted(true)
     }

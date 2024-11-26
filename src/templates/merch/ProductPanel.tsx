@@ -14,6 +14,7 @@ import { getProductMetafield } from './utils'
 import { GatsbyImage, getImage } from 'gatsby-plugin-image'
 import { getShopifyImage } from 'gatsby-source-shopify'
 import { IconSpinner } from '@posthog/icons'
+import SizeGuide from './SizeGuide'
 
 type ProductPanelProps = {
     className?: string
@@ -62,7 +63,6 @@ export function ProductPanel(props: ProductPanelProps): React.ReactElement {
                         New
                     </div>
                 )}
-
                 <ProductCarousel product={product} />
             </div>
             <div className="space-y-0.5">
@@ -103,6 +103,8 @@ export function ProductPanel(props: ProductPanelProps): React.ReactElement {
                     })
                     .filter(Boolean)}
 
+            <SizeGuide title={product.title} />
+
             <Quantity value={quantity} onChange={setQuantity} />
 
             <CallToAction
@@ -130,12 +132,12 @@ export function ProductPanel(props: ProductPanelProps): React.ReactElement {
                 </>
             </CallToAction>
 
-            {!loading && outOfStock && <BackInStockForm product={selectedVariant} />}
+            {!loading && outOfStock && <BackInStockForm variant={variantForCart} />}
 
             {product.description && (
                 <div className="border-t border-light dark:border-dark pt-4">
                     <h3 className="text-lg mb-0">Description</h3>
-                    <p className="text-[15px]">{product.description}</p>
+                    <div dangerouslySetInnerHTML={{ __html: product.descriptionHtml }} />
                 </div>
             )}
             {product.imageProducts?.length > 0 && (

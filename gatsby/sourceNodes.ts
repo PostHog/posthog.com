@@ -400,6 +400,7 @@ export const sourceNodes: GatsbyNode['sourceNodes'] = async ({ actions, createCo
               products(first: 250) {
                 nodes {
                   description
+                  descriptionHtml
                   featuredMedia {
                     preview {
                       image {
