@@ -90,6 +90,10 @@ Many of our company offsites involve team members traveling abroad, and although
 
 In the event of an emergency, please cover any related expenses (ideally on your company card) and keep receipts, and then reach out to either Charles as soon as possible. We will assist with making a claim based on our [policy binders](https://drive.google.com/drive/folders/1nMoHL_W9sW5IqAsILGzQ8Tuz0RgDRXOj?usp=share_link).
 
+### Flight delays
+
+If your travel plans are affected due to a flight delay and you are forced to stay somewhere unplanned overnight, push the airline to cover the cost of your accommodations (including meals). It's not uncommon for them to initially tell you they no longer offer free hotel rooms for delays that caused by the airline, but with a little bit of polite coaxing, they will likely give in.
+
 ## How to plan an offsite in 8 weeks - a checklist
 
 Below is a rough timeline for planning your next offsite, as well as links to templates and resources that you can repurpose and customize as needed. To use any of the templates, create a copy to your own drive and edit as you see fit.
