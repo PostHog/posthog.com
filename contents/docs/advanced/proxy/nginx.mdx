@@ -34,7 +34,8 @@ http {
 
         # Specify DNS resolver for variables, this is Google Public DNS
         # Please adjust this to a DNS resolver of your preference
-        resolver 8.8.8.8 8.8.4.4 [2001:4860:4860::]:8888 [2001:4860:4860::]:8844;
+        resolver 8.8.8.8 8.8.4.4 [2001:4860:4860::]:8888 [2001:4860:4860::]:8844 valid=300s;
+        resolver_timeout 5s;  # Timeout for DNS resolution
 
         # Check Referer header
         # Change hogbook to your domain as needed to ensure requests only come from your domain
