@@ -37,7 +37,7 @@ Product managers go into further depth here, often writing up reports and recomm
 
 This is where product engineers and managers begin to diverge. Product engineers dive quickly into building. They get their hands dirty writing code. They prototype and experiment. They ship previews, MVPs, and betas of features to get hands-on, direct feedback.
 
-Product managers take more time before handing off work to engineers. They do further research into the business case for a product and understand where it aligns in the competitive landscape. They also spend time gaining depth into what the needs of users are and understanding their business and technology stack. 
+Product managers take more time before handing off work to engineers. They do further research into the business case for a product and understand where it aligns in the competitive landscape. They also spend time gaining depth into what the needs of users are and [understanding their business and technology stack](/newsletter/choosing-technologies). 
 
 They use all this information to craft plans, requirements, and specs that solve the identified user needs. Product managers must translate this into something the whole team can understand. Product engineers face a similar task but have a smaller group to communicate with. Both roles require communication skills, but product managers place a higher emphasis on them.
 

@@ -54,7 +54,7 @@ Here are some pointers:
 
 - **Be careful when validating problems no one else has worked on.** Maybe you see something others are missing, but it's more likely the problem isn't important.
 
-- **Be wary about building what's trendy.** It's easier to beat unsexy, badly run, non-innovative companies than software companies with VC funding _and_ using the latest technology. Do not be fooled huge fundraises by startups working in these areas: `big funding rounds + press ≠ product-market fit`. In fact, the trendier the space, the less likely a big round means the company is succeeding.[^1]
+- **Be wary about building what's trendy.** It's easier to beat unsexy, badly run, non-innovative companies than software companies with VC funding _and_ [using the latest technology](/newsletter/choosing-technologies). Do not be fooled huge fundraises by startups working in these areas: `big funding rounds + press ≠ product-market fit`. In fact, the trendier the space, the less likely a big round means the company is succeeding.[^1]
 
 - **Conservative buyers demand differentiation.** You could probably get someone to try a new social app, but you won't get an enterprise to use an unproven CRM. A rip and replace strategy is harder to execute than a blue ocean strategy. It is easier to sell a product to someone who hasn't got anything in place.
 
