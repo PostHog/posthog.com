@@ -13,7 +13,7 @@ tags:
 
 Understanding how users spend their time on your site helps you understand your site’s strengths and weaknesses. Calculating the time spent on a page is the key metric for doing this. In this tutorial, we show you how to calculate time on page and related metrics using PostHog.
 
-With the development of web analytics, we began autocapturing more properties like `$prev_pageview_duration` and `$prev_pageview_pathname` that make calculating this a lot easier.
+With the development of [web analytics](/docs/web-analytics), we began autocapturing more properties like `$prev_pageview_duration` and `$prev_pageview_pathname` that make calculating this a lot easier.
 
 ## Calculating average time on page
 
