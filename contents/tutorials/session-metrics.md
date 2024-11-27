@@ -14,7 +14,7 @@ tags:
   - product analytics
 ---
 
-A session is a set of events grouped to try to capture a "single use" of your product. If you use the [snippet](/docs/getting-started/install?tab=snippet), [JavaScript Web SDK](/docs/libraries/js), or [mobile SDKs](/docs/libraries/ios), PostHog automatically groups events into sessions. We then provide multiple ways to analyze these sessions to get a fuller picture of how users are using your product, where they are spending their time, and more.
+A session is a set of events grouped to capture a "single use" of your product. If you use the [snippet](/docs/getting-started/install?tab=snippet), [JavaScript Web SDK](/docs/libraries/js), or [mobile SDKs](/docs/libraries/ios), PostHog automatically groups events into sessions. We then provide multiple ways to analyze these sessions to get a fuller picture of how users are using your product, where they are spending their time, and more.
 
 ## Analyzing sessions with web analytics
 
@@ -43,7 +43,7 @@ To do this, first, [create a new insight](https://us.posthog.com/insights/new). 
     classes="rounded"
 />
 
-To create a nice trend of average session duration over time, choose your date range and set the Y-axis unit to `Duration (s)`.
+To create a trend of average session duration over time, choose your date range and set the Y-axis unit to `Duration (s)`.
 
 <ProductScreenshot
     imageLight = "https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2024_11_26_at_11_26_55_2x_fab4ab06b6.png"
@@ -84,7 +84,7 @@ select avg($num_uniq_urls) from sessions
 
 ### Connecting sessions to other data
 
-A big use case for this is combining session data with other event data. Because all events in a `$session_id` property, we can use a `JOIN` to combine session data with event data.
+A big use case for this is combining session data with other event data. Because events have `$session_id` property, we can use a `JOIN` to combine session data with event data.
 
 For example, to get the non-pageview events for sessions with over 5 pageviews, you can run the following query:
 
