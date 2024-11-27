@@ -153,3 +153,57 @@ Custom session IDs must meet the following requirements:
 Any events with session IDs that do not meet these requirements are not included in session aggregations.
 
 Our [JavaScript Web library](/docs/libraries/js) and mobile SDKs (Android, iOS, React Native, and Flutter) automatically create session IDs for you, but if you override them, you also must ensure they meet these requirements.
+
+## Passing Session IDs from client-side code into server-side events
+
+Sometimes you want a server-side event to be considered part of a user's session. For example, if a user starts a purchase by clicking a button on your website that is tracked with `posthog-js`, but the way you receive confirmation is a callback to your server where you use `posthog-node`, you may want to connect the two events.
+
+To do this, you will need to get the session ID from `posthog-js` with `posthog.get_session_id()` and send it to your server with custom code. Then, you can set the session ID on the server-side event with `posthog.capture({ ..., '$session_id': session_id })`.
+
+Here's an example of how you might do this:
+
+```javascript
+// Client side code
+
+// Get the session ID
+const posthog_session_id = posthog.get_session_id()
+
+// Make a request to your server. This is just an example, you should replace this with your own code.
+fetch('https://your-api.example.com/purchase', {
+    method: 'POST',
+    body: JSON.stringify({
+        posthog_session_id, // include the posthog session ID
+        // other data
+    }),
+    headers: {
+        'Content-Type': 'application/json'
+    }
+})
+```
+
+```javascript
+// Server side code
+
+// This is an example route handler using Express, the actual implementation will depend on your server framework
+app.post('/purchase', (req, res) => {
+    const { posthog_distinct_id } = handleUserAuthentication(req) // replace with your own user authentication logic
+    const { posthog_session_id } = req.body
+
+    // Handle the purchase
+    handlePurchase(req.body) // replace with your own purchase handling logic etc
+
+    // Send a custom event, including the session ID
+    posthog.capture({
+        distinct_id: posthog_distinct_id,
+        event: 'Purchase Succeeded',
+        properties: {
+            '$session_id': posthog_session_id
+        }
+    })
+
+    res.send('OK')
+})
+
+
+```
+
