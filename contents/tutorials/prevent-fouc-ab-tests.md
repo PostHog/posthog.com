@@ -9,7 +9,9 @@ tags:
   - experimentation
 ---
 
-> 🚧 **NOTE:** As an alternative to the approach described below, we're experimenting with client-side feature flag assignments. Check out [https://posthog-fast-feature-flags.vercel.app/](https://posthog-fast-feature-flags.vercel.app/) to learn more. We are keen to gather as much feedback as possible so if you try this out please let us know. You can email [daniel.b@posthog.com](mailto:daniel.@posthog.com), send feedback via the [in-app support panel](https://us.posthog.com#panel=support%3Afeedback%3Aexperiments%3Alow), or use one of our other [support options](/docs/support-options).
+> 🚧 **Note:** As an alternative to the approach described below, we're experimenting with client-side feature flag assignments. Check out [https://posthog-fast-feature-flags.vercel.app/](https://posthog-fast-feature-flags.vercel.app/) to learn more. 
+>
+> We are keen to gather as much feedback as possible so if you try this out please let us know. You can email [daniel.b@posthog.com](mailto:daniel.@posthog.com), send feedback via the [in-app support panel](https://us.posthog.com#panel=support%3Afeedback%3Aexperiments%3Alow), or use one of our other [support options](/docs/support-options).
 
 Flashing of content (also known as [FOUC – Flash of unstyled content](https://en.wikipedia.org/wiki/Flash_of_unstyled_content)) happens when users briefly see the control variant before the test variant loads. It's a common issue when running experiments on the frontend.
 
