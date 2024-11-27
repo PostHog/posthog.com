@@ -5,6 +5,9 @@ showTitle: true
 ---
 
 import RegionWarning from "../_snippets/region-warning.mdx"
+import ProxyWarning from "../_snippets/proxy-usage-warning.mdx"
+
+<ProxyWarning />
 
 <RegionWarning />
 
@@ -29,6 +32,10 @@ http {
 
         server_name _;  # Accept requests for any domain
 
+        # Specify DNS resolver for variables, this is Google Public DNS
+        # Please adjust this to a DNS resolver of your preference
+        resolver 8.8.8.8 8.8.4.4 [2001:4860:4860::]:8888 [2001:4860:4860::]:8844;
+
         # Check Referer header
         # Change hogbook to your domain as needed to ensure requests only come from your domain
         set $valid_referer 0;
@@ -40,14 +47,18 @@ http {
             return 403;  # Return forbidden if the Referer header is invalid
         }
 
-        location /static/ {
-            proxy_pass https://us-assets.i.posthog.com/static/;
-            proxy_set_header Host us-assets.i.posthog.com;
+        location ~ ^/static/(.*)$ {
+            set $posthog_static "https://us-assets.i.posthog.com/static/";
+            # use variable to force proper DNS re-resolution, also must manually pass along path
+            proxy_pass $posthog_static$1$is_args$args;
+            proxy_set_header Host "us-assets.i.posthog.com";
         }
 
-        location / {
-            proxy_pass https://us.i.posthog.com/;
-            proxy_set_header Host us.i.posthog.com;
+        location ~ ^/(.*)$ {
+            set $posthog_main "https://us.i.posthog.com/";
+            # use variable to force proper DNS re-resolution, also must manually pass along path
+            proxy_pass $posthog_main$1$is_args$args;
+            proxy_set_header Host "us.i.posthog.com";
         }
     }
 }
