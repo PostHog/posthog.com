@@ -52,8 +52,7 @@ To create a trend of average session duration over time, choose your date range 
     classes="rounded"
 />
 
-
-> **Calculating time on page**: PostHog doesn't keep track of how long users spend on individual pages, only entire sessions. To calculate time on page, you can either implement a custom pageleave event (like we do in [how to capture scroll depth](/tutorials/scroll-depth)) that contains the time a user spent on a page, or calculate the time between a pageview and a subsequent pageview or pageleave event (like we do in our [how to calculate time on page](/tutorials/time-on-page) tutorial).
+> **Calculating time on page**: Calculating time on page is similar to calculating time on site, but it uses the **previous pageview duration** and **previous pageview pathname** properties. You can learn about this in our [how to calculate time on page](/tutorials/time-on-page) tutorial.
 
 ### Average pages per session
 
