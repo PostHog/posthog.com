@@ -1849,6 +1849,11 @@ export const docsMenu = {
                     icon: 'IconCode',
                 },
                 {
+                    name: 'Alerts',
+                    url: '/docs/alerts',
+                    icon: 'IconBell',
+                },
+                {
                     name: 'Resources',
                 },
                 {
