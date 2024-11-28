@@ -20,6 +20,7 @@ Some things that should definitely be an incident
 - No insights can be created
 - Feature flags are not being returned at all, or `/decide` is down
 - Various alerts defined as critical, such as disk space full, OOM or >5 minute ingestion lag
+- Security issues that may indicate issues with 
 
 Things that _shouldn’t_ be an incident
 
@@ -29,6 +30,19 @@ Things that _shouldn’t_ be an incident
 - Expected disruption which happens as part of scheduled maintenance
 
 > Planning some maintenance? Check the [announcements](/handbook/growth/comms/product-announcements) section instead.
+
+### Security-specific guidance
+
+Security incidents can have far-reaching consequences and should always be treated with urgency. 
+Some examples of security-related issues that warrant raising an incident include:
+
+- Unauthorized access to systems, data, or user accounts.
+- Detection of malware, ransomware, or other malicious software on company systems.
+- Suspicious activity on production infrastructure, such as unexpected user logins, privilege escalations, or resource consumption spikes.
+- Discovery of exposed credentials, sensitive data, or secrets in logs, repositories, or public forums.
+- Receiving a credible report of a vulnerability or exploit affecting company systems.
+
+**When in doubt, err on the side of caution and raise the incident.** Better to be safe than sorry.
 
 ### Incident severity
 
@@ -43,6 +57,7 @@ Examples
 - Broken non-critical functionality, with no workaround. Not on the critical path for customers.
 - Performance degradation. Not an outage, but our app is not performing as it should. For instance, growing (but not yet critical) ingestion lag.
 - A memory leak in a database or feature. With time, this could cause a major/critical incident, but does not usually require _immediate_ attention.
+- A low-risk security vulnerability or non-critical misconfiguration, such as overly permissive access on a non-sensitive resource.
 
 If not dealt with, minor incidents can often become major incidents. Minor incidents are usually OK to have open for a few days, whereas anything more severe we would be trying to resolve ASAP.
 
@@ -56,6 +71,7 @@ Examples
 
 - Customer signup is broken
 - Significantly elevated error rate
+- A Denial of Service (DoS) attack or other malicious activity that affects system availability.
 
 #### Critical
 
@@ -66,6 +82,9 @@ Examples
 - Posthog Cloud is completely down
 - A data breach, or loss of data
 - Event ingestion totally failing - we are losing events
+- Discovery of exposed sensitive data (e.g., credentials, secrets) that could lead to a security breach if not remediated.
+- Discovery of an active security exploit, such as a compromised user account or system.
+- Detection of ransomware, malware, or unauthorized modifications to production systems.
 
 ## What happens during an incident?
 
@@ -85,6 +104,10 @@ If the person who raised the incident is the best person to debug the issue, the
 ### Customer communications
 
 Significant incidents such as the app being partially or fully non-operational, as well as ingestion delays of 30 minutes or longer should be clearly communicated to our customers. They should get to know what is going on and what we are doing to resolve it.
+
+When handling a security incident, please align with the incident responder team in the incident slack channel about public communication of
+security issues. E.g. it could not make sense to immediately report an attack, as this could make the attacker aware that we are investigating already, which could it make harder for us to stop an attack for good.
+
 
 Our [status page](https://status.posthog.com/) is the central hub for all incident communication. You can update it easily using the `/incident statuspage` (`/inc sp`) Slack command.
 
