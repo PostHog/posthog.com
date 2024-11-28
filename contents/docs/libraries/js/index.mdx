@@ -545,7 +545,7 @@ posthog.init('<ph_project_api_key>', {
 
 ```tsx file=Script
 // Add this script to your site, may need to change the script src to match your API host:
-// <script type="text/javascript" src="https://us.i.posthog.com/static/customizations.js"></script>
+// <script type="text/javascript" src="https://us.i.posthog.com/static/customizations.full.js"></script>
 
 posthog.init('<ph_project_api_key>', {
     // capture only half of dead click and web vitals events
@@ -590,7 +590,7 @@ posthog.init('<ph_project_api_key>', {
 
 ```ts file=Script
 // Add this script to your site, may need to change the script src to match your API host:
-// <script type="text/javascript" src="https://us.i.posthog.com/static/customizations.js"></script>
+// <script type="text/javascript" src="https://us.i.posthog.com/static/customizations.full.js"></script>
 
 posthog.init('<ph_project_api_key>', {
     before_send: posthogCustomizations.sampleByDistinctId(0.4)
@@ -618,7 +618,7 @@ posthog.init('<ph_project_api_key>', {
 
 ```ts file=Script
 // Add this script to your site, may need to change the script src to match your API host:
-// <script type="text/javascript" src="https://us.i.posthog.com/static/customizations.js"></script>
+// <script type="text/javascript" src="https://us.i.posthog.com/static/customizations.full.js"></script>
 
 posthog.init('<ph_project_api_key>', {
     before_send: posthogCustomizations.sampleBySessionId(0.25)
