@@ -42,7 +42,7 @@ Some examples of security-related issues that warrant raising an incident includ
 - Discovery of exposed credentials, sensitive data, or secrets in logs, repositories, or public forums.
 - Receiving a credible report of a vulnerability or exploit affecting company systems.
 
-**When in doubt, err on the side of caution and raise the incident.** Better to be safe than sorry.
+**When in doubt, err on the side of caution and raise the incident and escalate early!** Better to be safe than sorry.
 
 ### Incident severity
 
