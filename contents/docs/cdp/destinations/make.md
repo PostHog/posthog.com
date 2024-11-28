@@ -17,11 +17,12 @@ You'll also need access to the relevant Make account.
 
 ## Installation
 
-1. In PostHog, click the "[Data pipeline](https://us.posthog.com/pipeline/overview)" tab in the left sidebar.
-2. Click the 'Destinations' tab.
-3. Search for 'Make' and select the destination.
+1. In PostHog, click the [Data pipeline](https://us.posthog.com/pipeline/overview) tab in the left sidebar.
+2. Click the **Destinations** tab.
+3. Search for **Make** and select the destination.
 4. Add your Make webhook URL at the configuration step.
-5. Press 'Create & Enable' and watch your 'Scenarios' get triggered in Make!
+5. Set up your event and property filters to remove unnecessary events. You only want to send events that you want to trigger scenarios. Filter out unrelated events or ones missing required data.
+6. Press **Create & Enable** and watch your **scenarios** get triggered in Make!
 
 <HideOnCDPIndex>
 
