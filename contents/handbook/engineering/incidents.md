@@ -72,6 +72,7 @@ Examples
 - Customer signup is broken
 - Significantly elevated error rate
 - A Denial of Service (DoS) attack or other malicious activity that affects system availability
+- Discovery of exposed sensitive data (e.g., credentials, secrets) that could lead to a security breach if not remediated
 
 #### Critical
 
@@ -82,7 +83,6 @@ Examples
 - Posthog Cloud is completely down
 - A data breach, or loss of data
 - Event ingestion totally failing - we are losing events
-- Discovery of exposed sensitive data (e.g., credentials, secrets) that could lead to a security breach if not remediated
 - Discovery of an active security exploit, such as a compromised user account or system
 - Detection of ransomware, malware, or unauthorized modifications to production systems
 
