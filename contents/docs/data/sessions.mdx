@@ -148,9 +148,7 @@ If the events are logically part of the same session, e.g. a user starts a purch
 
 ### Passing Session IDs from client-side code into server-side events
 
-To have a server-side event to be considered part of a user's session. For example, if a user starts a purchase by clicking a button on your website that is tracked with `posthog-js`, but the way you receive confirmation is a callback to your server where you use `posthog-node`, you may want to connect the two events.
-
-To do this, you will need to get the session ID from `posthog-js` with `posthog.get_session_id()` and send it to your server with custom code. Then, you can set the session ID on the server-side event with `posthog.capture({ ..., '$session_id': session_id })`.
+Get the session ID from `posthog-js` with `posthog.get_session_id()` and send it to your server with custom code. Then, you can set the session ID on the server-side event with `posthog.capture({ ..., '$session_id': session_id })`.
 
 Here's an example of how you might do this:
 
