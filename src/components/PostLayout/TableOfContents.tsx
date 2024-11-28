@@ -31,18 +31,7 @@ export default function TableOfContents({
     return (
         <nav>
             <Wrapper {...wrapperProps}>
-                {menu.map((menuItem) => {
-                    return (
-                        <Menu
-                            menuType={menuType}
-                            topLevel
-                            handleLinkClick={handleLinkClick}
-                            className="ml-0"
-                            key={menuItem.name}
-                            {...menuItem}
-                        />
-                    )
-                })}
+                <Menu menuItems={menu} topLevel handleLinkClick={handleLinkClick} />
             </Wrapper>
         </nav>
     )

@@ -46,6 +46,19 @@ const findInternalMenu = (menu: IMenu[]) => {
     return undefined
 }
 
+const findParent = (menu: IMenu[], url: string) => {
+    for (const item of menu || []) {
+        if (item.internal && !!recursiveSearch(item.internal, url)) {
+            return menu
+        }
+        if (item.children) {
+            const found = findParent(item.children, url)
+            if (found) return found
+        }
+    }
+    return undefined
+}
+
 export const LayoutProvider = ({ children, ...other }: IProps) => {
     const { pathname, search } = useLocation()
     const { setWebsiteTheme } = useActions(layoutLogic)
@@ -56,13 +69,8 @@ export const LayoutProvider = ({ children, ...other }: IProps) => {
     const [enterpriseMode, setEnterpriseMode] = useState(false)
     const [theoMode, setTheoMode] = useState(false)
     const [post, setPost] = useState<boolean>(false)
-    const parent =
-        other.parent ??
-        menu.find(({ children, url }) => {
-            const currentURL = pathname
-            return currentURL === url.split('?')[0] || recursiveSearch(children, currentURL)
-        })
-    const activeInternalMenu = findInternalMenu(parent?.children)
+    const parent = other.parent ?? findParent(menu, pathname)
+    const activeInternalMenu = findInternalMenu(parent)
 
     const internalMenu = parent?.children
 

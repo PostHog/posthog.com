@@ -48,17 +48,19 @@ export default function Post({ children }: { children: React.ReactNode }) {
         <div className="">
             {menu && mobileMenu && <MobileNav className={`flex ${compact ? '' : 'md:hidden'}`} menu={menu} />}
             <div
-                className={`w-full relative md:flex justify-between mx-auto transition-all ${fullWidthContent ? 'max-w-full' : 'max-w-screen-2xl'
-                    }`}
+                className={`w-full relative md:flex justify-between mx-auto transition-all ${
+                    fullWidthContent ? 'max-w-full' : 'max-w-screen-2xl'
+                }`}
             >
                 {!compact && menu && (
                     <div
                         // style={{ maxWidth: menuWidth?.left ?? defaultMenuWidth.left }}
-                        className="w-full max-w-2xs flex-shrink-0 md:block hidden relative z-20"
+                        className="w-full max-w-[16rem] flex-shrink-0 md:block hidden relative z-20"
                     >
                         <aside
-                            className={`md:sticky md:top-0 reasonable:top-[53px] max-h-screen h-[calc(100vh_-_53px)] flex-shrink-0 w-full justify-self-end md:box-border my-10 md:my-0 mr-auto overflow-y-auto bg-accent dark:bg-accent-dark border-r border-light dark:border-dark ${hideSearch ? 'pt-5' : ''
-                                }`}
+                            className={`md:sticky md:top-0 reasonable:top-[53px] flex-shrink-0 w-full justify-self-end md:box-border my-10 md:my-0 mr-auto bg-accent dark:bg-accent-dark border-r border-light dark:border-dark ${
+                                hideSearch ? 'pt-5' : ''
+                            }`}
                         >
                             {/*
                             {!hideSearch && (
@@ -75,8 +77,9 @@ export default function Post({ children }: { children: React.ReactNode }) {
                     style={contentWidth && !fullWidthContent ? { width: '100%', maxWidth: contentWidth } : {}}
                     key={`${title}-article`}
                     id="content-menu-wrapper"
-                    className={`py-4 box-border w-full flex-shrink mx-auto transition-all min-w-0 ${!fullWidthContent && sidebar && !hideSidebar ? ' max-w-3xl' : 'max-w-screen-2xl'
-                        }`}
+                    className={`py-4 box-border w-full flex-shrink mx-auto transition-all min-w-0 ${
+                        !fullWidthContent && sidebar && !hideSidebar ? ' max-w-3xl' : 'max-w-screen-2xl'
+                    }`}
                 >
                     <div onTransitionEnd={handleArticleTransitionEnd} className={contentContainerClasses}>
                         <div>{children}</div>
@@ -92,8 +95,9 @@ export default function Post({ children }: { children: React.ReactNode }) {
                         className="flex-shrink-0 pt-4 pl-4 w-full justify-self-end my-10 lg:my-0 box-border hidden lg:flex flex-col reasonable:sticky reasonable:top-[108px] mr-8 border-l border-light dark:border-dark"
                     >
                         <div
-                            className={`${stickySidebar ? 'reasonable:sticky reasonable:top-[108px]' : ''
-                                } bg-light dark:bg-dark z-10`}
+                            className={`${
+                                stickySidebar ? 'reasonable:sticky reasonable:top-[108px]' : ''
+                            } bg-light dark:bg-dark z-10`}
                         >
                             {sidebar}
                         </div>

@@ -1,36 +1,14 @@
 import { IMenu } from './types'
 import { useLocation } from '@reach/router'
 import { replacePath } from '../../../gatsby/utils'
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import Link from 'components/Link'
 import { Link as ScrollLink } from 'react-scroll'
 import { AnimatePresence, motion } from 'framer-motion'
 import * as NotProductIcons from '../NotProductIcons'
 import * as NewIcons from '@posthog/icons'
 import { usePost } from './hooks'
-
-const Chevron = ({ open, className = '' }: { open: boolean; className?: string }) => {
-    return (
-        <div className={`h-8 w-8 flex justify-center items-center text-primary dark:text-primary-dark ${className}`}>
-            <svg
-                className="transition-transform w-"
-                style={{ transform: `rotate(${open ? 0 : 180}deg)` }}
-                width="15"
-                height="15"
-                viewBox="0 0 15 15"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-            >
-                <g opacity="0.3">
-                    <path
-                        d="M3.59608 9.74106L6.99976 6.33626L10.4034 9.74106C10.8595 10.1972 11.5984 10.1972 12.0545 9.74106C12.51 9.28551 12.51 8.54613 12.0545 8.0906L7.82492 3.86106C7.36937 3.40606 6.6311 3.40606 6.17558 3.86106L1.9466 8.09004V8.09059C1.4905 8.54613 1.4905 9.28441 1.94605 9.74049C2.40159 10.1966 3.13987 10.1966 3.59595 9.74103L3.59608 9.74106Z"
-                        fill="currentColor"
-                    />
-                </g>
-            </svg>
-        </div>
-    )
-}
+import { IconArrowLeft, IconArrowRight, IconChevronDown } from '@posthog/icons'
 
 const getIcon = (name: string) => {
     const Icon = NewIcons[name] || NotProductIcons[name]
@@ -40,10 +18,11 @@ const getIcon = (name: string) => {
 export const Icon = ({ color, icon }: { color?: string; icon: string | React.ReactNode }) => {
     return (
         <span
-            className={`icon flex items-center justify-center shrink-0 ${color
-                ? `text-primary/50 dark:text-primary-dark/50 group-hover:text-primary/80 dark:group-hover:text-primary-dark/80 bg-primary/10 dark:bg-primary-dark/10 rounded-sm w-6 h-6 basis-6`
-                : 'w-4 h-4 basis-4 opacity-70'
-                }`}
+            className={`icon flex items-center justify-center shrink-0 ${
+                color
+                    ? `text-primary/50 dark:text-primary-dark/50 group-hover:text-primary/80 dark:group-hover:text-primary-dark/80 bg-primary/10 dark:bg-primary-dark/10 rounded-sm w-6 h-6 basis-6`
+                    : 'w-4 h-4 basis-4 opacity-70'
+            }`}
         >
             {typeof icon === 'string' ? getIcon(icon) : icon}
         </span>
@@ -54,8 +33,9 @@ export const badgeClasses = `bg-gray-accent/50 text-primary/75 dark:text-primary
 export const MenuItem = ({ icon, color, badge, name }) => {
     return icon ? (
         <span
-            className={`cursor-pointer w-full flex space-x-2 text-primary hover:text-primary dark:text-primary-dark dark:hover:text-primary-dark leading-tight ${color ? 'items-center' : 'items-center'
-                }`}
+            className={`cursor-pointer w-full flex space-x-2 text-primary hover:text-primary dark:text-primary-dark dark:hover:text-primary-dark leading-tight ${
+                color ? 'items-center' : 'items-center'
+            }`}
         >
             <Icon icon={icon} color={color} />
             <span className={`${color ? '' : 'opacity-100'} group-hover:opacity-100 ${badge?.title ? 'mr-1.5' : ''}`}>
@@ -91,31 +71,39 @@ export const menuVariants = {
     },
 }
 
-export default function Menu({
-    name,
-    url,
-    children,
-    className = '',
-    handleLinkClick,
-    topLevel,
-    icon,
-    badge,
-    color,
-    hidden,
-    tag,
-    ...other
-}: IMenu): JSX.Element | null {
+function Item(menuItem: IMenu & { onOpen?: (submenu: IMenu, ref: HTMLUListElement) => void }): JSX.Element | null {
+    const {
+        name,
+        url,
+        children,
+        className = '',
+        topLevel,
+        icon,
+        badge,
+        color,
+        hidden,
+        tag,
+        handleLinkClick,
+        onOpen,
+        ...other
+    } = menuItem
     if (hidden) return null
     const { isMenuItemActive, isMenuItemOpen } = usePost()
+    const ref = useRef<HTMLLIElement>(null)
     const location = useLocation()
     const pathname = replacePath(location?.pathname)
     const menuType = other.menuType === 'scroll' && !url?.includes(pathname) ? 'standard' : other.menuType ?? 'standard'
     const [isActive, setIsActive] = useState(false)
     const [open, setOpen] = useState<boolean | undefined>(false)
-    const buttonClasses = `group text-left text-primary hover:text-primary dark:text-primary-dark hover:dark:text-primary-dark flex w-full items-center relative text-sm px-1 rounded border border-b-3 border-transparent cursor-pointer font-semibold ${children || topLevel
-        ? 'hover:border-light dark:hover:border-dark hover:translate-y-[-1px] active:translate-y-[1px] active:transition-all min-h-[34px]'
-        : ''
-        } ${children && open ? 'font-bold border border-b-3 !border-light dark:!border-dark bg-white dark:bg-accent-dark hover:translate-y-[0px] active:translate-y-[0px] [&_.icon]:!text-primary/75 dark:[&_.icon]:!text-primary-dark/75' : ''}`
+    const buttonClasses = `group text-left text-primary hover:text-primary dark:text-primary-dark hover:dark:text-primary-dark flex w-full items-center relative text-sm px-1 rounded border border-b-3 border-transparent cursor-pointer font-semibold ${
+        children || topLevel
+            ? 'hover:border-light dark:hover:border-dark hover:translate-y-[-1px] active:translate-y-[1px] active:transition-all min-h-[34px]'
+            : ''
+    } ${
+        children && open
+            ? 'font-bold border border-b-3 !border-light dark:!border-dark bg-white dark:bg-accent-dark hover:translate-y-[0px] active:translate-y-[0px] [&_.icon]:!text-primary/75 dark:[&_.icon]:!text-primary-dark/75'
+            : ''
+    }`
     useEffect(() => {
         const isOpen = (children?: IMenu[]): boolean | undefined => {
             return (
@@ -131,12 +119,18 @@ export default function Menu({
         }
         setOpen(
             isMenuItemOpen?.({ name, url }) ||
-            isMenuItemActive?.({ name, url }) ||
-            url === pathname ||
-            (children && isOpen(children))
+                isMenuItemActive?.({ name, url }) ||
+                url === pathname ||
+                (children && isOpen(children))
         )
         setIsActive(isMenuItemActive?.({ name, url }) || url?.split('?')[0] === pathname)
     }, [pathname])
+
+    useEffect(() => {
+        if (open) {
+            onOpen && onOpen(menuItem, ref.current)
+        }
+    }, [open])
 
     const isWithChild = children && children.length > 0
     const MenuLink = { standard: Link, scroll: ScrollLink }[menuType]
@@ -152,9 +146,10 @@ export default function Menu({
             onSetInactive: () => setIsActive(false),
         },
     }[menuType]
+
     return (
-        <ul className={`list-none m-0 p-0 text-lg font-semibold overflow-hidden py-px px-2 ${className}`}>
-            <li>
+        <>
+            <li ref={ref}>
                 {(url === undefined || url === null) && name ? (
                     <p className="flex gap-2 items-baseline text-[13px] font-semibold mt-3 mx-1 mb-1">
                         <span className="opacity-50">{name}</span>
@@ -166,13 +161,18 @@ export default function Menu({
                 ) : name && url ? (
                     <MenuLink
                         onClick={() => {
-                            handleLinkClick && handleLinkClick({ name, url, topLevel, tag })
+                            handleLinkClick && handleLinkClick(menuItem)
                             if (isWithChild) {
                                 setOpen(!open)
                             }
                         }}
-                        className={`${buttonClasses} ${!topLevel ? 'group py-0.5' : ''} ${color ? ' ' : ''} ${isActive || isWithChild ? 'active ' : ''
-                            } ${isActive && topLevel ? 'font-bold border border-b-3 !border-light dark:!border-dark bg-white dark:bg-accent-dark hover:translate-y-[0px] active:translate-y-[0px]' : ''} ${isActive && !topLevel ? 'font-bold' : ''}`}
+                        className={`${buttonClasses} ${!topLevel ? 'group py-0.5' : ''} ${color ? ' ' : ''} ${
+                            isActive || isWithChild ? 'active ' : ''
+                        } ${
+                            isActive && topLevel
+                                ? 'font-bold border border-b-3 !border-light dark:!border-dark bg-white dark:bg-accent-dark hover:translate-y-[0px] active:translate-y-[0px]'
+                                : ''
+                        } ${isActive && !topLevel ? 'font-bold' : ''}`}
                         to={menuType === 'scroll' ? url.replace(pathname + '#', '') : url}
                         {...menuLinkProps}
                     >
@@ -188,7 +188,7 @@ export default function Menu({
                             )}
                         </AnimatePresence>
                         <MenuItem badge={badge} color={color} icon={icon} name={name} />
-                        {isWithChild && <Chevron open={open ?? false} />}
+                        {isWithChild && <IconChevronDown className="size-8 -rotate-90" />}
                     </MenuLink>
                 ) : (
                     <button className={`${buttonClasses} !p-0`} onClick={() => setOpen(!open)}>
@@ -208,32 +208,162 @@ export default function Menu({
                                         )}
                                     </span>
                                 </Link>
-                                <Chevron open={open ?? false} />
+                                <IconChevronDown />
                             </>
                         ) : (
                             <span className="inline-block pl-3 pr-2 py-1">{name}</span>
                         )}
                     </button>
                 )}
-                {isWithChild && (
+                {/* {isWithChild && (
                     <motion.div
-                        className={icon ? 'pl-[25px] -ml-2' : ''}
+                        className={`${icon ? 'pl-[25px] -ml-2' : ''} overflow-hidden`}
                         initial={{ height: 0 }}
                         animate={{ height: open ? 'auto' : 0 }}
                     >
-                        {children.map((child) => {
-                            return (
-                                <Menu
-                                    handleLinkClick={handleLinkClick}
-                                    key={child.name}
-                                    menuType={menuType}
-                                    {...child}
-                                />
-                            )
-                        })}
+                        <Menu menuItems={children} handleLinkClick={handleLinkClick} {...other} />
                     </motion.div>
-                )}
+                )} */}
             </li>
-        </ul>
+        </>
+    )
+}
+
+export default function Menu({ menuItems, ...other }) {
+    const [activeSubmenu, setActiveSubmenu] = useState<number>(0)
+    const [submenus, setSubmenus] = useState<IMenu[]>([{ children: menuItems, name: 'root', hidden: true }])
+    const submenusRef = useRef<Map<number, HTMLUListElement>>(new Map())
+    const containerRef = useRef<HTMLDivElement>(null)
+
+    const scrollToIndex = (index: number) => {
+        const map = getMap()
+        const node = map.get(index)
+        if (node && containerRef.current) {
+            containerRef.current.scrollTo({
+                behavior: 'smooth',
+                left: node.offsetLeft,
+            })
+        }
+    }
+
+    const getMap = () => {
+        return submenusRef.current
+    }
+
+    const handleSubmenuBack = () => {
+        if (activeSubmenu !== null) {
+            const newActiveSubmenu = activeSubmenu - 1
+            if (newActiveSubmenu >= 0) {
+                setActiveSubmenu(newActiveSubmenu)
+            }
+        }
+    }
+
+    const handleSubmenuForward = () => {
+        if (activeSubmenu !== null) {
+            const newActiveSubmenu = activeSubmenu + 1
+            if (newActiveSubmenu < submenus.length) {
+                setActiveSubmenu(newActiveSubmenu)
+            }
+        }
+    }
+
+    const handleSubmenuOpen = (submenu: IMenu, ref: HTMLUListElement) => {
+        const map = getMap()
+        if (activeSubmenu > 0 && map.get(activeSubmenu) && map.get(activeSubmenu)?.contains(ref as Node)) {
+            return
+        }
+        if (submenu.children) {
+            const newSubmenus = [{ children: menuItems, name: 'root', hidden: true }, submenu]
+            if (!submenus.some((s) => s.children === submenu.children)) {
+                setSubmenus(newSubmenus)
+                setActiveSubmenu(newSubmenus.length - 1)
+            } else {
+                scrollToIndex(submenus.length - 1)
+            }
+        } else {
+            setActiveSubmenu(0)
+            setSubmenus([{ children: menuItems, name: 'root', hidden: true }])
+        }
+    }
+
+    useEffect(() => {
+        scrollToIndex(activeSubmenu)
+    }, [activeSubmenu])
+
+    useEffect(() => {
+        const handleScroll = () => {
+            if (!containerRef.current) return
+
+            const container = containerRef.current
+            const map = getMap()
+            let maxVisibleArea = 0
+            let mostVisibleIndex = activeSubmenu
+
+            map.forEach((element, index) => {
+                const elementRect = element.getBoundingClientRect()
+                const containerRect = container.getBoundingClientRect()
+                const visibleWidth =
+                    Math.min(elementRect.right, containerRect.right) - Math.max(elementRect.left, containerRect.left)
+
+                if (visibleWidth > maxVisibleArea) {
+                    maxVisibleArea = visibleWidth
+                    mostVisibleIndex = index
+                }
+            })
+
+            setActiveSubmenu(mostVisibleIndex)
+        }
+        containerRef.current?.addEventListener('scrollend', handleScroll)
+        return () => {
+            containerRef.current?.removeEventListener('scrollend', handleScroll)
+        }
+    }, [])
+
+    return (
+        <div>
+            <div className="flex space-x-1 items-center pl-2 py-2 border-b border-border dark:border-border-dark ">
+                <button
+                    disabled={activeSubmenu === 0}
+                    onClick={handleSubmenuBack}
+                    className="p-0.5 border border-border dark:border-border-dark border-b-2 active:translate-y-[1px] disabled:active:translate-y-[0px] disabled:opacity-50 rounded-sm"
+                >
+                    <IconArrowLeft className="size-4 opacity-60" />
+                </button>
+                <button
+                    disabled={activeSubmenu === submenus.length - 1}
+                    onClick={handleSubmenuForward}
+                    className="p-0.5 border border-border dark:border-border-dark border-b-2 active:translate-y-[1px] disabled:active:translate-y-[0px] disabled:opacity-50 rounded-sm"
+                >
+                    <IconArrowRight className="size-4 opacity-60" />
+                </button>
+            </div>
+
+            <div ref={containerRef} className="flex overflow-auto snap-x snap-mandatory">
+                {submenus.map((submenu, index) => (
+                    <ul
+                        key={submenu.name}
+                        ref={(node) => {
+                            const map = getMap()
+                            if (node) {
+                                map.set(index, node)
+                            } else {
+                                map.delete(index)
+                            }
+                        }}
+                        className={`list-none m-0 p-0 text-lg font-semibold overflow-hidden py-px px-2 w-full flex-shrink-0 max-h-screen h-[calc(100vh_-_93px)] overflow-y-auto snap-start`}
+                    >
+                        {!submenu.hidden && (
+                            <h5 className="flex gap-2 items-baseline text-[13px] font-semibold opacity-50 m-0 mt-3 mx-1 mb-1">
+                                {submenu.name}
+                            </h5>
+                        )}
+                        {submenu.children?.map((item) => (
+                            <Item key={item.name} {...item} {...other} onOpen={handleSubmenuOpen} />
+                        ))}
+                    </ul>
+                ))}
+            </div>
+        </div>
     )
 }
