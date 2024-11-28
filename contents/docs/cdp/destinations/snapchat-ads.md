@@ -29,7 +29,7 @@ You'll also need access to the relevant Snapchat Ads account.
    5. Select **Create new token** and click **Generate**.
    6. Select **Set up manually** and click **Next**.
    7. You can create an access token by clicking **Generate Access Token**.
-   8. Configure your Events and copy your **access token**
+   8. Configure your Events and copy your **access token**.
    9. Select your Pixel from the event sources list and copy your **Pixel ID**.
 
 5. Back in PostHog, add the Pixel ID and Access token to the destination configuration.
