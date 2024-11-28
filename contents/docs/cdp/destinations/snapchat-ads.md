@@ -19,7 +19,7 @@ You'll also need access to the relevant Snapchat Ads account.
 
 3. Search for **Snapchat Ads Conversions** and select the destination.
 
-4. Log in to [Snapchat Ads Manager](https://ads.snapchat.com/).
+4. Next, get your Snapchat access token and pixel ID. Log in to [Snapchat Ads Manager](https://ads.snapchat.com/) then:
 
    1. Click the menu in the top corner and select **Events Manager**.
    2. Click **new event source** and select **Web**.
