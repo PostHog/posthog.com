@@ -11,7 +11,6 @@ tags:
   - Product analytics
   - Product engineers
   - Growth
-  - Inside PostHog
 crosspost:
   - Blog
 ---
@@ -95,6 +94,8 @@ WITH starting_companies AS (
 
 > **New to SQL?** Check our guide to [the basics of SQL for analytics](/product-engineers/sql-for-analytics) and our [SQL docs](/docs/product-analytics/sql) for more.
 
+<br />
+
 ### Part 2: Define and filter for your potential activation events
 
 Next, filter for one group of potential activation events. In this case, these are `important button clicked`, `thing saved to db`, and `team member invited`.
@@ -116,6 +117,8 @@ downfunnel AS (
   GROUP BY 1,2
 ),
 ```
+
+<br />
 
 ### Part 3: Filter for successful companies
 
@@ -139,6 +142,8 @@ successful_companies AS (
 
 > **Note:** Make sure there are enough users in each retention cohort to generate good results. If only 2 companies "succeeded" and did all the activation steps, the retention rate isn't going to be trustworthy.
 
+<br />
+
 ### Part 4: Calculate retention for successful companies
 
 To identify if our potential activation metrics are good ones, we calculate retention for successful companies 3 months later. The retention events are likely different from the activation events, but can be the same. It can be as simple as someone logging in or creating new things in your product. Whatever tells you they are an active user.
@@ -158,6 +163,8 @@ retained AS (
 )
 ```
 
+<br />
+
 ### Part 5. Put it all together
 
 The final `SELECT` statement gathers up all the info, does some calcs across it, and presents it to you in a nice table from oldest to newest month.
@@ -176,6 +183,8 @@ LEFT JOIN retained ON successful_companies.company_id = retained.company_id
 GROUP BY starting_companies.start_month
 ORDER BY starting_companies.start_month
 ```
+
+<br />
 
 ### Part 6. Repeat with each potential activation metric
 
@@ -262,6 +271,8 @@ GROUP BY starting_companies.start_month
 ORDER BY starting_companies.start_month
 ```
 </details>
+
+<br />
 
 ## What do I do with the activation metric once I find it?
 
