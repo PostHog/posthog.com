@@ -20,7 +20,7 @@ You'll also need access to the relevant TikTok Ads account.
 3. Search for **TikTok Ads Conversions** and select the destination.
 
 4. Visit the [TikTok Events Manager](https://ads.tiktok.com/i18n/events_manager/home).
-   1. Note: If you’ve already set up a Pixel for your website, we recommend that you use the same Pixel for your browser and server events.
+   1. If you’ve already set up a Pixel for your website, we recommend that you use the same Pixel for your browser and server events.
       1. To create a new Pixel, click **Connect data source** and select **Web**.
       2. Skip the **Add your website** step.
       3. For the connection method, select **Manual setup** and **Events API**.
