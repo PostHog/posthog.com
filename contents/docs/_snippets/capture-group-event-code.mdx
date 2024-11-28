@@ -1,8 +1,7 @@
 <MultiLanguage>
 
 ```js-web
-// Option 1 (recommended):
-// Call posthog.group()
+// Option 1 (recommended): Call posthog.group()
 // This has the side-effect that all subsequent events in the session are associated to the group
 posthog.group('company', 'company_id_in_your_db');
 posthog.capture('user_signed_up'); // This event is associated with the company above
