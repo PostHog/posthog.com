@@ -13,7 +13,7 @@ tags:
 
 Some of humanity's great mysteries: What happens after death? Where did life come from? Are aliens real? How much does [Google Analytics](/blog/google-analytics-to-posthog) actually cost? This post attempts to answer the only one that can be wrapped up in a single blog post. 
 
-Thanks to its connection with Google, early entrance into the analytics market, and initial price tag (free), Google Analytics has long been the most popular product in its category. According to [BuiltWith](https://trends.builtwith.com/analytics/Google-Analytics), as of November 2024, it's used by 50% of the top million sites.
+Thanks to its connection with Google, early entrance into the [web analytics](/web-analytics) market, and initial price tag (free), Google Analytics has long been the most popular product in its category. According to [BuiltWith](https://trends.builtwith.com/analytics/Google-Analytics), as of November 2024, it's used by 50% of the top million sites.
 
 Although Google Analytics is largely seen as a free product, this doesn't tell the full story. This post attempts to tell the rest of the story and help you figure out how much Google Analytics actually costs. 
 
@@ -110,7 +110,7 @@ When a product does work, it mostly only works with Google and rarely includes o
 
 ### 2. It's just analytics
 
-Although Google Analytics is strong when it comes to web and product analytics, the landscape of tools organizations rely on now has expanded dramatically and GA hasn't kept up. It lacks [session replays](/session-replay), [A/B testing](/experiments), [surveys](/surveys), [marketing automation](/cdp), and more. This means you miss out on a lot of potential benefits these tools provide.
+Although Google Analytics is strong when it comes to [web](/web-analytics) and [product analytics](/product-analytics), the landscape of tools organizations rely on now has expanded dramatically and GA hasn't kept up. It lacks [session replays](/session-replay), [A/B testing](/experiments), [surveys](/surveys), [marketing automation](/cdp), and more. This means you miss out on a lot of potential benefits these tools provide.
 
 ## How PostHog is different
 
