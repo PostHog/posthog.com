@@ -15,7 +15,7 @@ Currently alerts are supported on all [trends](/docs/product-analytics/trends) (
 
 ## How to create an alert?
 1. Alerts are based off of [insights](/product-analytics). You can pick any existing trend insight or create a new one.
-2. Click on the "Alerts" button on top right of the insight page. This shows you all the alerts you've setup for this insight.
+2. Click on the **Alerts** button on top right of the insight page. This shows you all the alerts you've setup for this insight.
 <ProductScreenshot
     imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/alerts_button_4ecd022cd6.png" 
     imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/alerts_button_4ecd022cd6.png"
@@ -23,7 +23,7 @@ Currently alerts are supported on all [trends](/docs/product-analytics/trends) (
     classes="rounded"
 />
 
-3. Click on 'New alert'
+3. Click on **New alert**
 <ProductScreenshot
     imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/new_alert_button_30d3dde83c.png" 
     imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/new_alert_button_30d3dde83c.png"
@@ -31,11 +31,11 @@ Currently alerts are supported on all [trends](/docs/product-analytics/trends) (
     classes="rounded"
 />
 
-4. Set a name for the alert
+4. Set a name for the alert.
 
 5. Pick which 'series' you want to alert on. These are the different events/values you're plotting in the insight. 
     For example, an insight might have multiple series like `A - Pageviews` (total count of page views for a URL) and `B - Signups` (count of users who signed up on the page). 
-    You can pick either `A` or `B` which will determine if the alert gets checked against the value for `A` (total page views) or `B` (signups).
+    You can pick either `A` or `B`, which will determine if the alert gets checked against the value for `A` (total page views) or `B` (signups).
 <ProductScreenshot
     imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/series_picker_aa01668862.png" 
     imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/series_picker_aa01668862.png"
@@ -44,7 +44,10 @@ Currently alerts are supported on all [trends](/docs/product-analytics/trends) (
 />
 
 
-6. Select the alert type. You can choose to check whether the series value against a specific value ('has value') or whether the value for the series has changed by a certain amount ('increases by'/'decreases by').
+6. Select the alert type. You can choose:
+    - **has value** - checks the series against a specific value.
+    - **increases by**/**decreases by** - checks if the series has changed by a certain amount.
+
 <ProductScreenshot
     imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/alert_type_picker_18909b0b33.png" 
     imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/alert_type_picker_18909b0b33.png"
@@ -54,7 +57,7 @@ Currently alerts are supported on all [trends](/docs/product-analytics/trends) (
 
 7. Set the threshold. This is the value you want to compare the series value against. 
 
-8. (Optional) For relative alerts ('increases by'/'decreases by'), you can set a percentage threshold. It compares the percentage change in the series value to the thresholds you've set.
+8. (Optional) For relative alerts (**increases by**/**decreases by**), you can set a percentage threshold. It compares the percentage change in the series value to the thresholds you've set.
 <ProductScreenshot
     imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/percentage_threshold_1940ead9e6.png" 
     imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/percentage_threshold_1940ead9e6.png"
@@ -64,7 +67,7 @@ Currently alerts are supported on all [trends](/docs/product-analytics/trends) (
 
 9. Select how often you want the alert to be checked (e.g. every hour, every day, every week, every month)
 
-10. Pick who all should be notified when the alert is triggered. The alert will send an email to everyone in this list when the alert is triggered.
+10. Pick who should be notified when the alert is triggered. The alert will send an email to everyone in this list when the alert is triggered.
 <ProductScreenshot
     imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/filled_alert_627158e6bb.png" 
     imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/filled_alert_627158e6bb.png"
@@ -72,7 +75,7 @@ Currently alerts are supported on all [trends](/docs/product-analytics/trends) (
     classes="rounded"
 />
 
-11. Click 'Create alert', and you're done! 
+11. Click **Create alert**, and you're done! 
 
 
 <ProductScreenshot
@@ -83,7 +86,7 @@ Currently alerts are supported on all [trends](/docs/product-analytics/trends) (
 />
 
 You can now view all the alerts set on the insight. 
-To view all the alerts set, you can click on ['Product Analytics'](/product-analytics) in the sidebar and then click on the 'Alerts' tab.
+To view all the alerts set, click on [Product Analytics](/product-analytics) in the sidebar and then click on the **Alerts** tab.
 
 <ProductScreenshot
     imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/all_alerts_d92386e45a.png" 
@@ -96,7 +99,7 @@ To view all the alerts set, you can click on ['Product Analytics'](/product-anal
 ## Relative alerts
 Relative alerts check for change in the value of an insight.
 For example, if a value increases by 5% in a week.
-To create a relative alert, you just need to change the 'has value' option to 'increases by' or 'decreases by'.
+To create a relative alert, you just need to change the **has value** option to **increases by** or **decreases by**.
 This will then also enable you to set a percentage threshold.
 
 <ProductScreenshot
@@ -109,16 +112,15 @@ This will then also enable you to set a percentage threshold.
 
 ### Thresholds
 We support both **absolute value** thresholds (insight value more than or less than a certain number) or **percentage** thresholds (insight value changed by a certain percentage).
-Percentage thresholds are only available for relative alerts (as you need to compare two values to figure out percentage change)
+Percentage thresholds are only available for relative alerts (as you need to compare two values to figure out percentage change).
 
 
 ## Notification
-Currently alerts only support email notifications. We will add more notification options like webhooks and slack soon.
+Currently alerts only support email notifications. We will add more notification options like webhooks and Slack soon.
 
 
 ## Alerts on breakdowns
-When you set an alert on a trend with a breakdown. 
-The alert will be triggered when any of the breakdown values breaches the thresholds set.
+When you set an alert on a trend with a breakdown, the alert will be triggered when any of the breakdown values breaches the thresholds set.
 
 <ProductScreenshot
     imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/breakdown_alert_7bd87114cb.png" 
