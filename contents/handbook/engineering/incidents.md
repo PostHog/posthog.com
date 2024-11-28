@@ -106,7 +106,8 @@ If the person who raised the incident is the best person to debug the issue, the
 Significant incidents such as the app being partially or fully non-operational, as well as ingestion delays of 30 minutes or longer should be clearly communicated to our customers. They should get to know what is going on and what we are doing to resolve it.
 
 When handling a security incident, please align with the incident responder team in the incident slack channel about public communication of
-security issues. E.g. it could not make sense to immediately report an attack, as this could make the attacker aware that we are investigating already, which could it make harder for us to stop an attack for good.
+security issues. E.g. it could not make sense to immediately communicate an attack publicly, as this could make the attacker aware that we are investigating already. This could it make harder for us to stop this attack for good.
+If an early communication is outweighing those kind of downsides or helps our customers if affected, then do it!
 
 
 Our [status page](https://status.posthog.com/) is the central hub for all incident communication. You can update it easily using the `/incident statuspage` (`/inc sp`) Slack command.
