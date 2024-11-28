@@ -161,12 +161,10 @@ const posthog_session_id = posthog.get_session_id()
 // Make a request to your server. This is just an example, you should replace this with your own code.
 fetch('https://your-api.example.com/purchase', {
     method: 'POST',
-    body: JSON.stringify({
-        posthog_session_id, // include the posthog session ID
-        // other data
-    }),
+    body: '[your request body]', // replace with your own request body
     headers: {
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        'X-POSTHOG-SESSION-ID': posthog_session_id // include the posthog session ID in a header
     }
 })
 ```
@@ -177,7 +175,7 @@ fetch('https://your-api.example.com/purchase', {
 // This is an example route handler using Express, the actual implementation will depend on your server framework and programming language
 app.post('/purchase', (req, res) => {
     const { posthog_distinct_id } = handleUserAuthentication(req) // replace with your own user authentication logic
-    const { posthog_session_id } = req.body
+    const posthog_session_id = req.header('X-POSTHOG-SESSION-ID') // get the session ID from the header
 
     // Handle the purchase
     handlePurchase(req.body) // replace with your own business logic
