@@ -35,11 +35,11 @@ Things that _shouldn’t_ be an incident
 Security incidents can have far-reaching consequences and should always be treated with urgency. 
 Some examples of security-related issues that warrant raising an incident include:
 
-- Unauthorized access to systems, data, or user accounts.
-- Detection of malware, ransomware, or other malicious software on company systems.
-- Suspicious activity on production infrastructure, such as unexpected user logins, privilege escalations, or resource consumption spikes.
-- Discovery of exposed credentials, sensitive data, or secrets in logs, repositories, or public forums.
-- Receiving a credible report of a vulnerability or exploit affecting company systems.
+- Unauthorized access to systems, data, or user accounts
+- Detection of malware, ransomware, or other malicious software on company systems
+- Suspicious activity on production infrastructure, such as unexpected user logins, privilege escalations, or resource consumption spikes
+- Discovery of exposed credentials, sensitive data, or secrets in logs, repositories, or public forums
+- Receiving a credible report of a vulnerability or exploit affecting company systems
 - Security-related issues that - if not handled - could have a negative impact on Posthog's reputation
 
 **When in doubt, err on the side of caution and raise the incident and escalate early!** Better to be safe than sorry.
@@ -57,7 +57,7 @@ Examples
 - Broken non-critical functionality, with no workaround. Not on the critical path for customers.
 - Performance degradation. Not an outage, but our app is not performing as it should. For instance, growing (but not yet critical) ingestion lag.
 - A memory leak in a database or feature. With time, this could cause a major/critical incident, but does not usually require _immediate_ attention.
-- A low-risk security vulnerability or non-critical misconfiguration, such as overly permissive access on a non-sensitive resource.
+- A low-risk security vulnerability or non-critical misconfiguration, such as overly permissive access on a non-sensitive resource
 
 If not dealt with, minor incidents can often become major incidents. Minor incidents are usually OK to have open for a few days, whereas anything more severe we would be trying to resolve ASAP.
 
@@ -71,7 +71,7 @@ Examples
 
 - Customer signup is broken
 - Significantly elevated error rate
-- A Denial of Service (DoS) attack or other malicious activity that affects system availability.
+- A Denial of Service (DoS) attack or other malicious activity that affects system availability
 
 #### Critical
 
@@ -82,9 +82,9 @@ Examples
 - Posthog Cloud is completely down
 - A data breach, or loss of data
 - Event ingestion totally failing - we are losing events
-- Discovery of exposed sensitive data (e.g., credentials, secrets) that could lead to a security breach if not remediated.
-- Discovery of an active security exploit, such as a compromised user account or system.
-- Detection of ransomware, malware, or unauthorized modifications to production systems.
+- Discovery of exposed sensitive data (e.g., credentials, secrets) that could lead to a security breach if not remediated
+- Discovery of an active security exploit, such as a compromised user account or system
+- Detection of ransomware, malware, or unauthorized modifications to production systems
 
 ## What happens during an incident?
 
