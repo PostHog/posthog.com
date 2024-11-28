@@ -20,7 +20,6 @@ Some things that should definitely be an incident
 - No insights can be created
 - Feature flags are not being returned at all, or `/decide` is down
 - Various alerts defined as critical, such as disk space full, OOM or >5 minute ingestion lag
-- Security issues that may indicate issues with 
 
 Things that _shouldn’t_ be an incident
 
