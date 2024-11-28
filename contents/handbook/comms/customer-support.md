@@ -119,7 +119,7 @@ When support engineers need to escalate issues to other engineering teams for de
 
 We very occasionally receive messages from people who are abusive, or who we suspect may have a mental illness. These can come via the app, or [Community Questions](/questions). We do not expect support engineers to deal with abuse of any kind, ever. 
 
-If this happens, notify <TeamMember name="Charles Cook" photo />, <TeamMember name="Joe Martin"> or <TeamMember name="Fraser Hopper" photo />. They will either take this on, or advise you on how to reply.
+If this happens, notify <TeamMember name="Charles Cook" photo />, <TeamMember name="Joe Martin"/> or <TeamMember name="Fraser Hopper" photo />. They will either take this on, or advise you on how to reply.
 
 ### Dealing with legal requests from users
 
