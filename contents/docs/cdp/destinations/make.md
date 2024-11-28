@@ -7,7 +7,7 @@ import Requirements from "../_snippets/requirements.mdx"
 import FeedbackQuestions from "../_snippets/feedback-questions.mdx"
 import PostHogMaintained from "../_snippets/posthog-maintained.mdx"
 
-Trigger Scenarios in Make based on PostHog events.
+Trigger scenarios in Make based on PostHog events.
 
 ## Requirements
 
