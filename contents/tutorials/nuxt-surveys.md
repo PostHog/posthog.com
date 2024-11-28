@@ -545,3 +545,5 @@ If you capture identified events, you can also filter these results based on [pe
 - [How to set up analytics in Nuxt](/tutorials/nuxt-analytics)
 - [How to set up feature flags in Nuxt](/tutorials/nuxt-feature-flags)
 - [How to set up A/B tests in Nuxt](/tutorials/nuxtjs-ab-tests)
+
+<NewsletterForm />

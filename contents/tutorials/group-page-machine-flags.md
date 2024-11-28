@@ -158,3 +158,5 @@ The flag now returns `false` meaning the user gets a different experience on all
 - [How to bootstrap feature flags in React and Express](/tutorials/bootstrap-feature-flags-react)
 - [How to add popups to your React app with feature flags](/tutorials/react-popups)
 - [How to use Next.js middleware to bootstrap feature flags](/tutorials/nextjs-bootstrap-flags)
+
+<NewsletterForm />

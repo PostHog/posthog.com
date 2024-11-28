@@ -355,3 +355,5 @@ Now that we're capturing events, we can create [insights](/docs/product-analytic
 - [How to compare AWS Bedrock prompts](/tutorials/compare-aws-bedrock-prompts)
 - [How to set up LLM analytics for ChatGPT](/tutorials/chatgpt-analytics) 
 - [How to compare AWS Bedrock foundational models](/tutorials/compare-aws-bedrock-foundational-models)
+
+<NewsletterForm />

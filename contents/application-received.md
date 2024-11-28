@@ -6,7 +6,7 @@ showTitle: true
 
 Thank you for submitting your application.
 
-We're really excited to work with start ups around the world.
+We're really excited to work with startups around the world.
 
 ## Next steps
 

@@ -9,7 +9,7 @@ icon: >-
 features:
   eventCapture: true
   userIdentification: true
-  autoCapture: false
+  autoCapture: true
   sessionRecording: true
   featureFlags: true
   groupAnalytics: true
@@ -35,6 +35,20 @@ PostHog supports the following Apple platforms:
 ## Capturing events
 
 <IOSSendEvents />
+
+## Preventing sensitive data capture
+
+To exclude specific UI elements from autocapture or session replay, add `ph-no-capture` as either an `accessibilityLabel` or `accessibilityIdentifier`. When PostHog detects this label or identifier anywhere in the view hierarchy, the element will be either ignored or masked:
+
+```swift
+// This view will be excluded from autocapture
+let view = UIView()
+view.accessibilityLabel = "ph-no-capture"
+```
+
+> **Important:** By default, PostHog will make a best effort to automatically exclude fields detected as sensitive, even without the `ph-no-capture` tag. These include password fields, credit card fields, OTP fields, and any other fields related to Personally Identifiable Information (PII).
+
+For more details on how to setup masking for session replay, please refer to our [Privacy Controls](/docs/session-replay/privacy?tab=iOS) documentation. 
 
 ## Identifying users
 
@@ -239,6 +253,14 @@ configuration.captureApplicationLifecycleEvents = true
 configuration.captureScreenViews = true
 
 /**
+* Whether the posthog client should automatically make a capture call when the user interacts with an element in a screen.
+* 
+* Experimental support (UIKit)
+* Defaults to false
+*/
+configuration.captureElementInteractions = false
+
+/**
  * Send a `$feature_flag_called` event when a feature flag is used automatically. (on/true by default)
  */
 configuration.sendFeatureFlagEvent = true
@@ -293,7 +315,6 @@ configuration.sessionReplay = false
  * Experimental support
  */
 configuration.sessionReplayConfig = .init()
-
 
 /**
 * The identifier of the App Group that should be used to store shared analytics data. 

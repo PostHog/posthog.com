@@ -136,3 +136,5 @@ This gives us a trend of our NPS score over time, which we can breakdown using d
 - [Using HogQL for advanced time and date filters](/tutorials/hogql-date-time-filters)
 - [Using HogQL for advanced breakdowns](/tutorials/hogql-breakdowns)
 - [Calculating average session duration, time on site, and other session-based metrics](/tutorials/session-metrics)
+
+<NewsletterForm />

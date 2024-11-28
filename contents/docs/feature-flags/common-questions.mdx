@@ -63,7 +63,7 @@ Evaluating feature flags requires making a request to PostHog. However, you can 
 
 By default, fetching flags from our servers takes about 100-500ms. During this time, the flag is disabled. When the request is complete, the flag is updated. This may be the cause of the flickering.
 
-To fix this, you can [bootstrap feature flags](/docs/feature-flags/bootstrapping).
+To fix this, you can [bootstrap feature flags](/docs/feature-flags/bootstrapping). Alternatively, you can [prevent the element from displaying until the feature flags load](/tutorials/prevent-fouc-ab-tests).
 
 ## Why can't I use a cohort with behavioral filters in my feature flag?
 

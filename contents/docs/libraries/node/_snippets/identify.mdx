@@ -1,9 +1,26 @@
 ```node
 client.identify({
   distinctId: "distinct_id_of_your_user",
-  properties: {
+  properties: { // ($set):
     email: 'john@doe.com',
     proUser: false
+  }
+})
+```
+
+`$set_once` works just like `$set`, except that it will **only set the property if the user doesn't already have that property set**. [See the difference between `$set` and `$set_once`](/docs/product-analytics/person-properties#what-is-the-difference-between-set-and-set_once)
+
+```node
+client.identify({
+  distinctId: "distinct_id_of_your_user",
+  properties: {
+    $set: {
+        email: 'john@doe.com',
+        proUser: false
+    },
+    $set_once: {
+        date_of_first_log_in: '2024-03-01'
+    }
   }
 })
 ```

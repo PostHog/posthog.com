@@ -46,7 +46,7 @@ You can further customize how PostHog works through its configuration on initial
 | `persistence`<br/><br/>**Type:** String<br/>**Default:** `file`                                                                                                                      | Allows you to provide the storage type. `file` will try to load the best available storage, the provided `customStorage`, `customAsyncStorage`, or in-memory storage.                                                                                                                                        |
 | `customAppProperties`<br/><br/>**Type:** Object or Function<br/>**Default:** `null`                                                                                                    | Allows you to provide your own implementation of the common information about your App or a function to modify the default App properties generated.                                                                                                                                                       |
 | `customStorage`<br/><br/>**Type:** Object<br/>**Default:** `null`                                                                                                                      | Allows you to provide a custom asynchronous storage such as `async-storage`, `expo-file-system`, or a synchronous storage such as `mmkv`. If not provided, PostHog will attempt to use the best available storage via optional peer dependencies. If `persistence` is set to `memory`, this option is ignored. |
-| `captureNativeAppLifecycleEvents`<br/><br/>**Type:** Boolean<br/>**Default:** `false`                                                                                                  | Captures native app lifecycle events such as Application Installed, Application Updated, Application Opened, Application Became Active, and Application Backgrounded. By default, this is false. If you're already using the `captureLifecycleEvents` options with `initReactNativeNavigation` or `PostHogProvider'` you should keep this as false, otherwise you may see duplicated events.                   |
+| `captureNativeAppLifecycleEvents`<br/><br/>**Type:** Boolean<br/>**Default:** `false`                                                                                                  | Captures native app lifecycle events such as Application Installed, Application Updated, Application Opened, Application Became Active, and Application Backgrounded. By default, this is false. If you're already using the `captureLifecycleEvents` options with `initReactNativeNavigation` or `PostHogProvider` you should keep this as false, otherwise you may see duplicated events.                   |
 | `disableGeoip`<br/><br/>**Type:** Boolean<br/>**Default:** `false`                                                                                                                     | When true, disables automatic GeoIP resolution for events and feature flags.                                                                                                                                                                                                                              |
 ## Capturing events
 
@@ -218,7 +218,7 @@ You can give your users the option to opt in or out by calling the relevant meth
 To opt in/out of tracking, use the following calls.
 
 ```javascript
-posthog.optedOut() // See if a user has opted out
+posthog.optedOut // See if a user has opted out
 posthog.optIn() // opt in
 posthog.optOut() // opt out
 ```

@@ -77,3 +77,5 @@ Once created, click any of the days in the graph, and you get a list of people w
 
 - [The complete guide to event tracking](/tutorials/event-tracking-guide)
 - [How to find relevant session replays quickly](https://posthog.com/tutorials/filter-session-recordings)
+
+<NewsletterForm />

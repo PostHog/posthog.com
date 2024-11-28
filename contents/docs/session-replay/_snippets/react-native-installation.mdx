@@ -26,17 +26,23 @@ Add `enableSessionReplay: true` to your PostHog configuration alongside any of y
 
 ```js
 export const posthog = new PostHog(
-  'apiKey',
+  '<ph_project_api_key>',
   {
     // Enable session recording. Requires enabling in your project settings as well.
     // Default is false.
     enableSessionReplay: true,
     sessionReplayConfig: {
-      // Whether text inputs are masked. Default is true.
+      // Whether text and text input fields are masked. Default is true.
       // Password inputs are always masked regardless
       maskAllTextInputs: true,
       // Whether images are masked. Default is true.
       maskAllImages: true,
+      // Enable masking of all sandboxed system views like UIImagePickerController, PHPickerViewController and CNContactPickerViewController. Default is true.
+      // iOS only
+      maskAllSandboxedViews = true,
+      // Enable masking of images that likely originated from user's photo library. Default is true.
+      // iOS only
+      maskPhotoLibraryImages = true,
       // Capture logs automatically. Default is true.
       // Android only (Native Logcat only)
       captureLog: true,
@@ -59,7 +65,7 @@ Or using the `PostHogProvider`:
 
 ```js
 <PostHogProvider
-        apiKey="apiKey"
+        apiKey="<ph_project_api_key>"
         options={{
           enableSessionReplay: true,
           ...
