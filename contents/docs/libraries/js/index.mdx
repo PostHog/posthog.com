@@ -530,14 +530,31 @@ Some functions of PostHog - for example much of web analytics - relies on receiv
 
 #### Sampling events using our provided customization
 
-If you're using NPM we offer a pre-built function to sample by event name. You can import this or copy it from our repo.
+We offer a pre-built function to sample by event name. You can import this or copy it from our repo.
 
-```
+
+<MultiLanguage>
+
+```tsx file=NPM
+import {sampleByEvent} from 'posthog-js/lib/src/customizations'
+
 posthog.init('my_token', {
     // capture only half of dead click and web vitals events
     before_send: sampleByEvent(['$dead_click', '$web_vitals'], 0.5)
 })
 ```
+
+```tsx file=Snippet
+// Add this script to your site:
+// <script type="text/javascript" src="https://us.i.posthog.com/static/customizations.js"></script>
+
+posthog.init('my_token', {
+    // capture only half of dead click and web vitals events
+    before_send: posthogCustomizations.sampleByEvent(['$dead_click', '$web_vitals'], 0.5)
+})
+```
+
+</MultiLanguage>
 
 #### Sampling events using a custom function
 
