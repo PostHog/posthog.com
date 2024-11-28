@@ -302,9 +302,17 @@ pr-32
 rotate-180
 rotate-45
 rotate-90
+scale-50
+scale-55
+scale-60
+scale-65
+scale-70
 scale-75
+scale-80
+scale-85
 scale-90
 scale-95
+scale-100
 scale-105
 scale-110
 sm:hidden
@@ -440,3 +448,5 @@ w-full
 
 fill-white
 text-brown
+
+

@@ -40,7 +40,7 @@ module.exports = {
             half: '0 0 49%',
             full: '0 0 100%',
         },
-        
+
         extend: {
             backgroundImage: {
                 'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
@@ -67,7 +67,7 @@ module.exports = {
             colors: {
                 transparent: 'transparent',
                 current: 'currentColor',
-    
+
                 primary: '#151515',
                 'primary-dark': '#EEEFE9',
                 accent: '#E5E7E0',
@@ -78,7 +78,7 @@ module.exports = {
                 dark: '#1D1F27',
                 highlight: 'rgba(235,157,42,.2)',
                 footer: '#08042f',
-    
+
                 black: '#000',
                 blue: '#2F80FA',
                 'blue-2': '#589DF8',
@@ -88,11 +88,11 @@ module.exports = {
                 'burnt-orange-dark': '#8E2600',
                 creamsicle: '#FFD699',
                 'creamsicle-dark': '#E38907',
-                'fuchsia': '#A621C8',
+                fuchsia: '#A621C8',
                 'fuchsia-dark': '#74108D',
                 gray: '#8F8F8C',
                 green: '#6AA84F',
-                'gold': '#FFBA53',
+                gold: '#FFBA53',
                 'gold-dark': '#E38907',
                 lilac: '#8567FF',
                 'light-blue': '#9FC4FF',
@@ -125,14 +125,13 @@ module.exports = {
                 white: '#fff',
                 'white-dark': '#111', // crest dark border hack
                 yellow: '#F7A501',
-    
+
                 // frame-bg
                 // frame-border
                 // plaque-bg
                 // plaque-border
                 // plaque-shadow-bg
-    
-                
+
                 'button-shadow': '#CD8407',
                 'button-border': '#B17816',
                 'button-shadow-dark': '#99660E',
@@ -270,8 +269,17 @@ module.exports = {
                 '2xs': '16rem',
             },
             scale: {
-                '-1': '-1',
+                50: '.5',
+                55: '.55',
+                60: '.6',
+                65: '.65',
+                70: '.7',
                 75: '.75',
+                80: '.8',
+                85: '.85',
+                90: '.9',
+                95: '.95',
+                '-1': '-1',
                 100: '1',
                 '-100': '-1',
             },

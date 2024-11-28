@@ -88,7 +88,7 @@ We send out CSAT surveys after a ticket has been closed for at least 3 days usin
 
 ### Support Engineers
 
-We hire Support Engineers once a product reaches a significant level of scale and/or product-market fit. This is a subjective judgement. Right now, support engineers sit in [the Comms team](/teams/customer-comms) and cover: 
+We hire Support Engineers once a product reaches a significant level of scale and/or product-market fit. This is a subjective judgement. Right now, support engineers sit in [the Comms team](/teams/comms) and cover: 
 
 - Product analytics
 - Web analytics

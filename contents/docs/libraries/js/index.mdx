@@ -468,8 +468,8 @@ Since version 1.187.0, when initializing the SDK, you can provide a `before_send
 
 #### Redact URLs in event properties
 
-```
-posthog.init('my_token', {
+```ts
+posthog.init('<ph_project_api_key>', {
     before_send: (event: CaptureResult): CaptureResult | null => {
         // redacting URLs will be specific to your site structure
         function redactUrl(value: string): string {
@@ -505,8 +505,8 @@ posthog.init('my_token', {
 
 #### Redact person properties in $set or $set_once
 
-```
-posthog.init('my_token', {
+```ts
+posthog.init('<ph_project_api_key>', {
     before_send: (event: CaptureResult): CaptureResult | null => {
         event.$set = {
             ...event.$set,
@@ -530,22 +530,38 @@ Some functions of PostHog - for example much of web analytics - relies on receiv
 
 #### Sampling events using our provided customization
 
-If you're using NPM we offer a pre-built function to sample by event name. You can import this or copy it from our repo.
+We offer a pre-built function to sample by event name. You can import this using a package manager, or add the customization script to your site.
 
-```
-posthog.init('my_token', {
+<MultiLanguage>
+
+```ts file=Import
+import { sampleByEvent } from 'posthog-js/lib/src/customizations'
+
+posthog.init('<ph_project_api_key>', {
     // capture only half of dead click and web vitals events
     before_send: sampleByEvent(['$dead_click', '$web_vitals'], 0.5)
 })
 ```
 
+```tsx file=Script
+// Add this script to your site, may need to change the script src to match your API host:
+// <script type="text/javascript" src="https://us.i.posthog.com/static/customizations.full.js"></script>
+
+posthog.init('<ph_project_api_key>', {
+    // capture only half of dead click and web vitals events
+    before_send: posthogCustomizations.sampleByEvent(['$dead_click', '$web_vitals'], 0.5)
+})
+```
+
+</MultiLanguage>
+
 #### Sampling events using a custom function
 
-```
-posthog.init('my_token', {
+```ts
+posthog.init('<ph_project_api_key>', {
     before_send: (event: CaptureResult): CaptureResult | null => {
         let sampleRate = 1.0 // default to always returning the event
-        if (event.event === '$heatmap) {
+        if (event.event === '$heatmap') {
             sampleRate = 0.1
         }
         if (event.event === '$dead_click') {
@@ -558,50 +574,81 @@ posthog.init('my_token', {
 
 #### Sampling to receive only 40% of events by person distinct ID
 
-If you're using NPM we offer a pre-built function to sample by distinct ID.  You can import this or copy it from our repo.
-
 A particular distinct ID will always either send all events or no events.
 
-```
-posthog.init('my_token', {
+You can import this using a package manager, or add the customization script to your site.
+
+<MultiLanguage>
+
+```ts file=Import
+import { sampleByDistinctId } from 'posthog-js/lib/src/customizations'
+
+posthog.init('<ph_project_api_key>', {
     before_send: sampleByDistinctId(0.4)
 })
 ```
 
-#### Sampling to receive only 25% of events by session ID
+```ts file=Script
+// Add this script to your site, may need to change the script src to match your API host:
+// <script type="text/javascript" src="https://us.i.posthog.com/static/customizations.full.js"></script>
 
-If you're using NPM we offer a pre-built function to sample by session ID. You can import this or copy it from our repo.
+posthog.init('<ph_project_api_key>', {
+    before_send: posthogCustomizations.sampleByDistinctId(0.4)
+})
+```
+
+</MultiLanguage>
+
+
+#### Sampling to receive only 25% of events by session ID
 
 A particular session ID will always either send all events or no events.
 
-```
-posthog.init('my_token', {
+You can import this using a package manager, or add the customization script to your site.
+
+<MultiLanguage>
+
+```ts file=Import
+import { sampleBySessionId } from 'posthog-js/lib/src/customizations'
+
+posthog.init('<ph_project_api_key>', {
     before_send: sampleBySessionId(0.25)
 })
 ```
+
+```ts file=Script
+// Add this script to your site, may need to change the script src to match your API host:
+// <script type="text/javascript" src="https://us.i.posthog.com/static/customizations.full.js"></script>
+
+posthog.init('<ph_project_api_key>', {
+    before_send: posthogCustomizations.sampleBySessionId(0.25)
+})
+```
+
+</MultiLanguage>
 
 ### Providing more than one before_send function
 
 You can provide an array of functions to be called one after the other
 
 
-```
-posthog.init('my_token', {
+```ts
+posthog.init('<ph_project_api_key>', {
     before_send: [
         sampleByDistinctId(0.5), // only half of people
-        sampleByEvent(['$web_vitals], 0.1), // and they capture all events except 10% of web vitals
-        sampleByEvent(['$$heatmap], 0.5), // and 50% of heatmaps
+        sampleByEvent(['$web_vitals'], 0.1), // and they capture all events except 10% of web vitals
+        sampleByEvent(['$$heatmap'], 0.5), // and 50% of heatmaps
     ]
-}
+})
 ```
 
 ### Or send no events while developing
 
 When working locally it can be useful to see what posthog would do, without actually sending the data to PostHog
 
-```
-posthog.init('my_token', {
-    before_send: (event: CaptureResult): CaptureResult | null {
+```ts
+posthog.init('<ph_project_api_key>', {
+    before_send: (event: CaptureResult): CaptureResult | null => {
         console.log('posthog event: ' + event.event, event)
         return null
     }
@@ -614,7 +661,7 @@ When calling `posthog.init`, there are various configuration options you can set
 
 To configure these options, pass them as an object to the `posthog.init` call, like so:
 
-```js-web
+```ts
 posthog.init('<ph_project_api_key>', {
     api_host: '<ph_client_api_host>',
     loaded: function (posthog) {

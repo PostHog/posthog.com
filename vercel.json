@@ -1347,6 +1347,10 @@
             "source": "/docs/session-replay/react-native",
             "destination": "/docs/session-replay/installation?tab=React+Native"
         },
+        {
+            "source": "/teams/customer-comms",
+            "destination": "/teams/comms"
+        },
         { "source": "/apps", "destination": "/cdp", "statusCode": 302 }
     ]
 }

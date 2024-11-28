@@ -4,7 +4,10 @@ sidebar: Docs
 showTitle: true
 ---
 
-No-code web experiments enable you to run A/B tests, multivariate tests, and other experiments that modify your website without writing a single line of code.  
+> 🚧 **NOTE:** No-code web experiments are currently considered in `beta`. To access them, enable the [feature preview](https://us.posthog.com#panel=feature-previews) in your PostHog account. We are keen to gather as much feedback as possible so if you try this out please let us know. You can email [daniel.b@posthog.com](mailto:daniel.@posthog.com), send feedback via the [in-app support panel](https://us.posthog.com#panel=support%3Afeedback%3Aexperiments%3Alow), or use one of our other [support options](/docs/support-options).
+
+No-code web experiments enable you to run A/B tests, multivariate tests, and other experiments that modify your website without writing a single line of code.
+
 Build your web experiment with the PostHog [toolbar](/docs/toolbar), our no-code tool, and then use the **preview variant** button to verify that everything works as expected.
 
 ## How to set up a no code experiment

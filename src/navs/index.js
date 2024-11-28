@@ -528,6 +528,10 @@ export const handbookSidebar = [
                         url: '/handbook/growth/marketing/content',
                     },
                     {
+                        name: 'Docs',
+                        url: '/handbook/company/docs',
+                    },
+                    {
                         name: 'Newsletter',
                         url: '/handbook/growth/marketing/newsletter',
                     },
@@ -758,13 +762,9 @@ export const handbookSidebar = [
         ],
     },
     {
-        name: 'Website & Docs',
+        name: 'Website & Vibes',
         url: '',
         children: [
-            {
-                name: 'Updating docs',
-                url: '/handbook/company/docs',
-            },
             {
                 name: 'Community',
                 url: '',
@@ -1069,8 +1069,8 @@ export const companyMenu = {
                     name: 'Not engineering',
                 },
                 {
-                    name: 'Customer Comms',
-                    url: '/teams/customer-comms',
+                    name: 'Comms',
+                    url: '/teams/comms',
                 },
                 {
                     name: 'Exec',
@@ -1793,46 +1793,6 @@ export const docsMenu = {
                             url: '/docs/api/persons',
                         },
                         {
-                            name: 'Destinations',
-                            url: '/docs/api/pipeline-destinations',
-                        },
-                        {
-                            name: 'Destination configs',
-                            url: '/docs/api/pipeline-destination-configs',
-                        },
-                        {
-                            name: 'Frontend apps',
-                            url: '/docs/api/pipeline-frontend-apps',
-                        },
-                        {
-                            name: 'Frontend apps configs',
-                            url: '/docs/api/pipeline-frontend-apps-configs',
-                        },
-                        {
-                            name: 'Import apps',
-                            url: '/docs/api/pipeline-import-apps',
-                        },
-                        {
-                            name: 'Import apps configs',
-                            url: '/docs/api/pipeline-import-apps-configs',
-                        },
-                        {
-                            name: 'Transformations',
-                            url: '/docs/api/pipeline-transformations',
-                        },
-                        {
-                            name: 'Transformation configs',
-                            url: '/docs/api/pipeline-transformation-configs',
-                        },
-                        {
-                            name: 'Plugins',
-                            url: '/docs/api/plugins',
-                        },
-                        {
-                            name: 'Plugin configs',
-                            url: '/docs/api/plugin-configs',
-                        },
-                        {
                             name: 'Projects',
                             url: '/docs/api/projects',
                         },
@@ -1887,6 +1847,11 @@ export const docsMenu = {
                     name: 'Hog',
                     url: '/docs/hog',
                     icon: 'IconCode',
+                },
+                {
+                    name: 'Alerts',
+                    url: '/docs/alerts',
+                    icon: 'IconBell',
                 },
                 {
                     name: 'Resources',
@@ -2581,6 +2546,10 @@ export const docsMenu = {
                     icon: 'IconApp',
                     color: 'seagreen',
                     featured: true,
+                    badge: {
+                        title: 'Beta',
+                        className: 'uppercase !bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',
+                    },
                 },
                 {
                     name: 'Adding your code',
@@ -2643,6 +2612,12 @@ export const docsMenu = {
                     url: '/docs/experiments/running-experiments-without-feature-flags',
                     icon: 'IconFlag',
                     color: 'yellow',
+                },
+                {
+                    name: 'Holdouts',
+                    url: '/docs/experiments/holdouts',
+                    icon: 'IconPeople',
+                    color: 'orange',
                 },
             ],
         },
