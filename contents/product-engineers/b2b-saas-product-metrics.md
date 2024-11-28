@@ -129,7 +129,7 @@ The formula is `(new users who completed key action / total number of new users)
 
 You want new users to find the value in your product as quickly as possible, and this is the perfect metric to measure that. 
 
-Improving activation is widely regarded as one of the best ways to improve monthly recurring revenue (MRR).
+[Improving activation](/product-engineers/activation-metrics) is widely regarded as one of the best ways to improve monthly recurring revenue (MRR).
 
 ### Productivity
 
