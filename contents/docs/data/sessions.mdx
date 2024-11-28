@@ -144,6 +144,8 @@ Our server-side SDKs do not send `$session_id` by default. If you want to use se
 
 You can either pass the session ID from posthog-js into your back end, or generate a new session ID. Then you can then use this session ID in your server-side events.
 
+If the events are logically part of the same session, e.g. a user starts a purchase on the front end and you receive confirmation on the back end, it's better to re-use the session ID from the front end. On the other hand, if the events have no corresponding front-end session, you can generate a new session ID.
+
 ### Passing Session IDs from client-side code into server-side events
 
 To have a server-side event to be considered part of a user's session. For example, if a user starts a purchase by clicking a button on your website that is tracked with `posthog-js`, but the way you receive confirmation is a callback to your server where you use `posthog-node`, you may want to connect the two events.
