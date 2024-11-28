@@ -530,12 +530,11 @@ Some functions of PostHog - for example much of web analytics - relies on receiv
 
 #### Sampling events using our provided customization
 
-We offer a pre-built function to sample by event name. You can import this or copy it from our repo.
-
+We offer a pre-built function to sample by event name. You can import this using a package manager, or add the customization script to your site.
 
 <MultiLanguage>
 
-```tsx file=NPM
+```tsx file=import
 import {sampleByEvent} from 'posthog-js/lib/src/customizations'
 
 posthog.init('my_token', {
@@ -544,8 +543,8 @@ posthog.init('my_token', {
 })
 ```
 
-```tsx file=Snippet
-// Add this script to your site:
+```tsx file=script
+// Add this script to your site, may need to change the script src to match your API host:
 // <script type="text/javascript" src="https://us.i.posthog.com/static/customizations.js"></script>
 
 posthog.init('my_token', {
@@ -575,27 +574,58 @@ posthog.init('my_token', {
 
 #### Sampling to receive only 40% of events by person distinct ID
 
-If you're using NPM we offer a pre-built function to sample by distinct ID.  You can import this or copy it from our repo.
-
 A particular distinct ID will always either send all events or no events.
 
-```
+You can import this using a package manager, or add the customization script to your site.
+
+<MultiLanguage>
+
+```tsx file=import
+import {sampleByDistinctId} from 'posthog-js/lib/src/customizations'
+
 posthog.init('my_token', {
     before_send: sampleByDistinctId(0.4)
 })
 ```
 
-#### Sampling to receive only 25% of events by session ID
+```tsx file=script
+// Add this script to your site, may need to change the script src to match your API host:
+// <script type="text/javascript" src="https://us.i.posthog.com/static/customizations.js"></script>
 
-If you're using NPM we offer a pre-built function to sample by session ID. You can import this or copy it from our repo.
+posthog.init('my_token', {
+    before_send: posthogCustomizations.sampleByDistinctId(0.4)
+})
+```
+
+</MultiLanguage>
+
+
+#### Sampling to receive only 25% of events by session ID
 
 A particular session ID will always either send all events or no events.
 
-```
+You can import this using a package manager, or add the customization script to your site.
+
+<MultiLanguage>
+
+```tsx file=import
+import {sampleBySessionId} from 'posthog-js/lib/src/customizations'
+
 posthog.init('my_token', {
     before_send: sampleBySessionId(0.25)
 })
 ```
+
+```tsx file=script
+// Add this script to your site, may need to change the script src to match your API host:
+// <script type="text/javascript" src="https://us.i.posthog.com/static/customizations.js"></script>
+
+posthog.init('my_token', {
+    before_send: posthogCustomizations.sampleBySessionId(0.25)
+})
+```
+
+</MultiLanguage>
 
 ### Providing more than one before_send function
 
