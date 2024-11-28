@@ -40,7 +40,6 @@ Some examples of security-related issues that warrant raising an incident includ
 - Suspicious activity on production infrastructure, such as unexpected user logins, privilege escalations, or resource consumption spikes
 - Discovery of exposed credentials, sensitive data, or secrets in logs, repositories, or public forums
 - Receiving a credible report of a vulnerability or exploit affecting company systems
-- Security-related issues that - if not handled - could have a negative impact on Posthog's reputation
 
 **When in doubt, err on the side of caution and raise the incident and escalate early!** Better to be safe than sorry.
 
