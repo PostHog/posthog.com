@@ -139,24 +139,15 @@ This is useful for understanding entry URLs or UTMs. For example, to break down 
 />
 
 
-## Custom session IDs
+## Server SDKs and sessions
 
 Our server-side SDKs do not send `$session_id` by default. If you want to use sessions with server-side events, you can set a custom `$session_id` property. This lets you use session aggregations for these events and can be useful if you want to connect server-side events to session replays or web analytics sessions.
 
-Custom session IDs must meet the following requirements:
-* Must be consistent across events in the same session
-* Must not be reused by a different user or session
-* Must be a valid UUIDv7
-* The timestamp part of the UUIDv7 must be equal to or before the timestamp of the first event in the session
-* The timestamp part of the UUIDv7 plus 24 hours must be after the timestamp of the last event in the session
+You can either pass the session ID from posthog-js into your back end, or generate a new session ID. Then you can then use this session ID in your server-side events.
 
-Any events with session IDs that do not meet these requirements are not included in session aggregations.
+### Passing Session IDs from client-side code into server-side events
 
-Our [JavaScript Web library](/docs/libraries/js) and mobile SDKs (Android, iOS, React Native, and Flutter) automatically create session IDs for you, but if you override them, you also must ensure they meet these requirements.
-
-## Passing Session IDs from client-side code into server-side events
-
-Sometimes you want a server-side event to be considered part of a user's session. For example, if a user starts a purchase by clicking a button on your website that is tracked with `posthog-js`, but the way you receive confirmation is a callback to your server where you use `posthog-node`, you may want to connect the two events.
+To have a server-side event to be considered part of a user's session. For example, if a user starts a purchase by clicking a button on your website that is tracked with `posthog-js`, but the way you receive confirmation is a callback to your server where you use `posthog-node`, you may want to connect the two events.
 
 To do this, you will need to get the session ID from `posthog-js` with `posthog.get_session_id()` and send it to your server with custom code. Then, you can set the session ID on the server-side event with `posthog.capture({ ..., '$session_id': session_id })`.
 
@@ -184,13 +175,13 @@ fetch('https://your-api.example.com/purchase', {
 ```javascript
 // Server side code
 
-// This is an example route handler using Express, the actual implementation will depend on your server framework
+// This is an example route handler using Express, the actual implementation will depend on your server framework and programming language
 app.post('/purchase', (req, res) => {
     const { posthog_distinct_id } = handleUserAuthentication(req) // replace with your own user authentication logic
     const { posthog_session_id } = req.body
 
     // Handle the purchase
-    handlePurchase(req.body) // replace with your own purchase handling logic etc
+    handlePurchase(req.body) // replace with your own business logic
 
     // Send a custom event, including the session ID
     posthog.capture({
@@ -206,4 +197,22 @@ app.post('/purchase', (req, res) => {
 
 
 ```
+
+
+### Custom session IDs
+
+
+Custom session IDs must meet the following requirements:
+* Must be consistent across events in the same session
+* Must not be reused by a different user or session
+* Must be a valid UUIDv7
+* The timestamp part of the UUIDv7 must be equal to or before the timestamp of the first event in the session
+* The timestamp part of the UUIDv7 plus 24 hours must be after the timestamp of the last event in the session
+
+Any events with session IDs that do not meet these requirements are not included in session aggregations.
+
+Our [JavaScript Web library](/docs/libraries/js) and mobile SDKs (Android, iOS, React Native, and Flutter) automatically create session IDs for you, but if you override them, you also must ensure they meet these requirements.
+
+
+
 
