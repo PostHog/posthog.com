@@ -12,4 +12,4 @@ We also lead the PostHog for Startups and Y Combinator programs, and generally t
 
 As a team we value being hands-on, putting human needs above internal processes, and treating support as a product. 
 
-Check out [our team page](/teams/customer-comms) for more info.
+Check out [our team page](/teams/comms) for more info.

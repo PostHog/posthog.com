@@ -181,18 +181,24 @@ bootstrapApplication(AppComponent, appConfig)
 
 ## Session replay
 
-When using the [JavaScript web library](/docs/libraries/js) for [session replay](/docs/session-replay) in an angular project, if you are manually starting session recording with `posthog.startSessionRecording()`, ensure that you use [`ngZone.runOutsideAngular`](https://angular.io/api/core/NgZone#runoutsideangular). This avoids potential performance issues with Angular's change detection running at the same time as Posthog's session recording.
+Session replay uses change detection to record the DOM. This can clash with Angular's change detection.
 
-```ts file=posthog-session-recording.service.ts
+The recorder tool attempts to detect when an Angular zone is present and avoid the clash but might not always succeed.
+
+If you see performance impact from recording in an Angular project, ensure that you use [`ngZone.runOutsideAngular`](https://angular.io/api/core/NgZone#runoutsideangular). 
+
+```ts file=posthog.service.ts
 import { Injectable } from '@angular/core';
 import posthog from 'posthog-js'
 
 @Injectable({ providedIn: 'root' })
 export class PostHogSessionRecordingService {
   constructor(private ngZone: NgZone) {}
-  startSessionRecording() {
+initPostHog() {
     this.ngZone.runOutsideAngular(() => {
-      posthog.startSessionRecording()
+      posthog.init(
+        /* your config */
+      )
     })
   }
 }

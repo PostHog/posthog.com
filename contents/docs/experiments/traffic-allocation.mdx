@@ -4,7 +4,7 @@ title: Traffic allocation
 
 By default, we use PostHog's multivariate [feature flags](/docs/feature-flags) to evenly assign people to variations (unless you choose to [run an experiment without feature flags](/docs/experiments/running-experiments-without-feature-flags)). The experiment feature flag is initialized automatically when you create your experiment.
 
-In any experiment, there is one control group and up to nine test groups. Each user is randomly assigned to one of these groups based on their `distinctId`. This assignment is stable, meaning the same user will remain in the same group even when they revisit your page.
+In any experiment, there is one control group and up to nine test groups. Each user is randomly assigned to one of these groups based on their `distinctId`. This assignment is stable, meaning the same user will remain in the same group even when they revisit your page. You can also [exclude a group of users from the test by creating a holdout](/docs/experiments/holdouts).
 
 We achieve this by creating a SHA-1 hash from a combination of the feature flag key and a `distinctId`, convert the first 15 characters of this hash (in hexadecimal) into a large integer, and then divide this integer by a predefined large constant to normalize it to a float between 0 and 1. If this float is less than a specified threshold percentage, the feature is enabled for the user; otherwise, it is not.
 
