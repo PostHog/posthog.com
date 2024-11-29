@@ -52,13 +52,13 @@ All businesses have costs, and as big as Google is, this is still true for them.
 
 2. By having strong integrations with Google Ads, GA4 encourages users to buy more of them. Ads have traditionally been Google's primary revenue driver, so other products can operate at losses.
 
-3. Your data is valuable to Google. It helps them improve ad targeting, product development, and data infrastructure among many other benefits. [GA has be declared illegal](/blog/is-google-analytics-illegal-microsite) in many countries because of this.
+3. Your data is valuable to Google. It helps them improve ad targeting, product development, and data infrastructure among many other benefits. [GA has been declared illegal](/blog/is-google-analytics-illegal-microsite) in many countries because of this.
 
 4. It leads to Google Analytics 360. For a company like Google, the money is in the massive enterprises. Casting a wide net, creating an ecosystem of support and information, and locking them in with a free product inevitably leads to more enterprise deals.
 
 ## Google Analytics 360 is expensive
 
-From what I can gather, when you start hitting the limits of GA4, you an invite into the secret club that is Google Analytics 360 (GA360). This is Google's enterprise version of analytics.
+From what I can gather, when you start hitting the limits of GA4, you get an invite into the secret club that is Google Analytics 360 (GA360). This is Google's enterprise version of analytics.
 
 ![A lot of money](https://res.cloudinary.com/dmukukwp6/image/upload/image_ec753abf75.png)
 
@@ -68,7 +68,7 @@ How much GA360 costs is a bit of a mystery, Google doesn't list it anywhere offi
 
 - [Infotrust](https://infotrust.com/wp-content/uploads/2018/10/google-analytics-adobe-analytics.pdf), a marketing and analytics consultancy, says typical pricing starts at $150,000 per year in the US for up to 500M hits.
 
-> **How much would PostHog cost for those amounts?** Unlike Google, PostHog has [fully transparent pricing](/pricing). 25M [anonymous events](/docs/data/anonymous-vs-identified-events) per month would cost $791 per month or $9492 per year. 500M anonymous events would cost $7,118 per month or $85,416.
+> **How much would PostHog cost for those amounts?** Unlike Google, PostHog has [fully transparent pricing](/pricing). 25M [anonymous events](/docs/data/anonymous-vs-identified-events) per month would cost $791 per month or $9492 per year. 500M anonymous events would cost $7,118 per month or $85,416 per year.
 
 Both sources mention that beyond the minimum $50-150k organizations pay, pricing is then usage-based based on the volume of data you capture. 
 
@@ -92,13 +92,13 @@ The primary benefit is [upgrades](https://support.google.com/analytics/answer/11
 
 On top of this, you get:
 
-- Unsampled explorations, rollup properties, subproperties.
+- Unsampled explorations, rollup properties, subproperties
 - Enterprise-level support and SLAs
 - Advanced integration capabilities with other Google Marketing Platform products
 
 ## The opportunity cost of Google Analytics
 
-There is another cost of Google Analytics they don't want you to think about is all the time, money, and effort could be going towards better options.
+There is another cost Google Analytics doesn't want you to think about: all the time, money, and effort that could be going towards better options.
 
 The potential problems can be summed up by looking at the two words that make up its name:
 
@@ -114,7 +114,7 @@ Although Google Analytics is strong when it comes to [web](/web-analytics) and [
 
 ## How PostHog is different
 
-We've written a full post on how GA4 and PostHog compare, but as a quick summary:
+We've written a full post on [how GA4 and PostHog compare](/blog/posthog-vs-ga4), but as a quick summary:
 
 1. **We're transparent.** Everything from our [pricing](/pricing) to [code](https://github.com/PostHog/posthog) to [strategy](/handbook) is open for anyone to see.
 
@@ -122,4 +122,4 @@ We've written a full post on how GA4 and PostHog compare, but as a quick summary
 
 3. **We integrate with other tools.** Our [data warehouse](/docs/data-warehouse) allows you to import and query data from sources like [Stripe](/tutorials/stripe-reports), [Hubspot](/tutorials/hubspot-reports), and [Zendesk](/tutorials/zendesk-reports) while our [CDP](/docs/cdp) lets you send data anywhere like [Zapier](/docs/cdp/destinations/zapier), [Google Ads](/docs/cdp/destinations/google-ads), and [webhooks](/docs/cdp/destinations/webhook).
 
-On top of all this, we've got a generous free tier. You can sign up and get started right away. 
+On top of all this, we've got a generous free tier. You can [sign up](https://us.posthog.com/signup) and get started for free right away. 
