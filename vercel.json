@@ -1330,6 +1330,10 @@
         { "source": "/docs/webhooks/discord", "destination": "/docs/cdp/destinations/webhook" },
         { "source": "/teams/website-docs", "destination": "/teams/website-vibes" },
         { "source": "/docs/session-replay/android", "destination": "/docs/session-replay/installation?tab=Android" },
+        {
+            "source": "/questions/how-to-get-current-user-identity",
+            "destination": "/docs/product-analytics/identify#get-the-current-users-distinct-id"
+        },
         { "source": "/docs/session-replay/ios", "destination": "/docs/session-replay/installation?tab=iOS" },
         {
             "source": "/questions/best-practices-naming-convention-for-event-names-and-properties",
