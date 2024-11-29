@@ -46,7 +46,7 @@ Adopting new technologies is hard and expensive, so "nice to have" is not enough
 
 ![Hair-on-fire problems](https://res.cloudinary.com/dmukukwp6/image/upload/14x9_833f0bb10b.png)
 
-<Caption>An artist’s impression of a “hair-on-fire” problem. ([available as a wallpaper](/blog/posthog-wallpapers)).</Caption>
+<Caption>An artist’s impression of a “hair-on-fire” problem. (<a href="/blog/posthog-wallpapers">available as a wallpaper</a>).</Caption>
 
 We find potential solutions in one of two ways:
 
