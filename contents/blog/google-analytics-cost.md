@@ -15,6 +15,8 @@ Some of humanity's great mysteries: What happens after death? Where did life com
 
 Thanks to its connection with Google, early entrance into the [web analytics](/web-analytics) market, and initial price tag (free), Google Analytics has long been the most popular product in its category. According to [BuiltWith](https://trends.builtwith.com/analytics/Google-Analytics), as of November 2024, it's used by 50% of the top million sites.
 
+![BuiltWith graph](https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2024_11_29_at_10_42_08_d308dcfae1.png)
+
 Although Google Analytics is largely seen as a free product, this doesn't tell the full story. This post attempts to tell the rest of the story and help you figure out how much Google Analytics actually costs. 
 
 ## Google Analytics 4 is free (but limited)
