@@ -46,7 +46,7 @@ By default, the email forwarding feature only accepts emails from your PostHog a
 
 - Buy something on your Revolut card.
 - If it's a digital invoice, just forward it to ukinvoices@posthog.com with a note explaining what it is for. If it's a physical receipt, take a picture and forward it to the same place with a note. 
-- You need to submit receipts for _all_ purchases. 
+- You need to submit receipts for _all_ purchases. This should be an itemised receipt. not a receipt from a credit card machine. We need to know what was purchased. 
 
 ### Your personal card
 
