@@ -91,6 +91,7 @@ export default function MobileLibraries() {
                             src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Home/images/hogflix-mobile.png"
                             alt="Hogflix mobile"
                             placeholder="blurred"
+                            style={{ maxHeight: '50%', width: 'auto' }} // Ensures aspect ratio is maintained
                         />
                     </div>
                 </div>

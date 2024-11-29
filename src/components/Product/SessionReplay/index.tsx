@@ -408,7 +408,7 @@ export const ProductSessionReplay = () => {
                             customer={netdata}
                         />
                         <CustomerCard
-                            outcome="uses replays to aid mobile testing"
+                            outcome="uses mobile replays to speed up app testing"
                             quote="Replays help us see how our mobile app looks on different devices and screen sizes."
                             customer={swype}
                         />
