@@ -69,7 +69,7 @@ The current rotation for Support Zero is:
 **Thursday:** Ben Lea <TeamMember name="Ben Lea" photo />
 **Friday:** Ben Haynes <TeamMember name="Ben Haynes" photo />
 
-We may occasionally pause this rotation if we have a big initiative that needs more attention, or if we need to focus on clearing a backlog of tickets. When you are Support Zero you should continue working on tickets that you're currently assigned to (or escalate/reassign as needed) but shouldn't take on new tickets unless you want to. 
+We may occasionally pause this rotation if we have a big initiative that needs more attention from one person, or if we need to focus on clearing a backlog of tickets. When you are Support Zero you should continue working on tickets that you're currently assigned to (or escalate/reassign as needed) but shouldn't take on new tickets unless you want to. 
 
 ## Response targets, SLAs, and CSAT surveys
 
