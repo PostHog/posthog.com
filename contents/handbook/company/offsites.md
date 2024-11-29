@@ -20,7 +20,7 @@ We understand organizing travel can be a challenge when you have personal/family
 > - **2023** [What we built at our sun-kissed Aruba hackathon](https://posthog.com/blog/aruba-hackathon)
 > - **2024** [What we built at our windswept Mykonos hackathon](https://posthog.com/blog/mykonos-hackathon)
 
-Once a year, the entire company will get together somewhere in the world for a week. Usually we'll all fly on Sunday, have an opening dinner, spend the week doing a mix of hard work, strategy, culture and fun activities and we then all fly back home on Friday. Our past offsites have been in Italy, Portugal and Iceland.
+Once a year, the entire company will get together somewhere in the world for a week. Usually we'll all fly on Sunday, have an opening dinner, spend the week doing a mix of hard work, strategy, culture and fun activities and we then all fly back home on Friday. Our past offsites have been in Italy, Portugal and Iceland. We try to ensure that everyone has their own bedroom.
 
 These are organized by the Ops & People team, and we budget up to $3,000 per person in total for these. 
 
@@ -46,6 +46,7 @@ Some guidelines:
 - Specify offsite start and end times down to the hour, for clarity and efficient use of everyone's time.
 - These offsites don't happen very often and involve a lot of travel, so make sure you make the most out of it by having an agenda and an idea of what you want to achieve _before_ the start of the trip.
 - Make it very clear who is participating in each session. Sessions / activities require full participation from attendees, especially for the likes of a hackathon given it runs over multiple days. Ideally one person should be responsible for the agenda and run a kick-off at the start of the hackathon.
+- Everyone should have their own bedroom which they don't need to share.
 
 Ideas for the agenda:
 
@@ -89,6 +90,10 @@ For offsites and onboardings in London, below is a list of hotels recommended in
 Many of our company offsites involve team members traveling abroad, and although we hope that these trips are uneventful and safe for all, in the event of an accident or medical emergency, we carry travel insurance through as well as general & auto liability policies through our partner [Embroker](https://www.embroker.com). 
 
 In the event of an emergency, please cover any related expenses (ideally on your company card) and keep receipts, and then reach out to either Charles as soon as possible. We will assist with making a claim based on our [policy binders](https://drive.google.com/drive/folders/1nMoHL_W9sW5IqAsILGzQ8Tuz0RgDRXOj?usp=share_link).
+
+### Flight delays
+
+If your travel plans are affected due to a flight delay or an airline-induced missed connection and you are forced to stay somewhere unplanned overnight, push the airline to cover the cost of your accommodations (including meals). It's not uncommon for them to initially tell you they no longer offer free hotel rooms for delays that were caused by the airline, but with a little bit of polite coaxing, they will likely give in.
 
 ## How to plan an offsite in 8 weeks - a checklist
 

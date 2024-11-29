@@ -328,6 +328,7 @@ export const createSchemaCustomization: GatsbyNode['createSchemaCustomization'] 
               originalSrc: String
             }
             type ShopifyProduct implements Node {
+              descriptionHtml: String
               description: String!
               featuredMedia: ShopifyMedia
               handle: String!
