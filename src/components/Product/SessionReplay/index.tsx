@@ -1,7 +1,7 @@
 import CloudinaryImage from 'components/CloudinaryImage'
 import React from 'react'
 import Link from 'components/Link'
-import Mobilelibraries from 'components/Products/Mobilelibraries'
+import MobileLibraries from 'components/Products/MobileLibraries'
 import { StaticImage } from 'gatsby-plugin-image'
 import {
     IconRewindPlay,
@@ -434,7 +434,7 @@ export const ProductSessionReplay = () => {
                 </section>
 
                 <section>
-                    <Mobilelibraries />
+                    <MobileLibraries />
                 </section>
 
                 <section className="bg-accent dark:bg-accent-dark">
