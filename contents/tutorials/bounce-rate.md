@@ -1,21 +1,45 @@
 ---
 title: How to calculate bounce rate
-date: 2023-06-27
+date: 2024-11-29
 author:
   - ian-vanagas
+  - bijan-boustani
 showTitle: true
 sidebar: Docs
 tags:
   - insights
   - hogql
   - product analytics
+  - web analytics
 ---
 
-Bounce rate is the percentage of users who leave your page immediately after visiting. It is a popular marketing metric showing the relevance and engagement of content for site visitors.  
+Bounce rate is the percentage of users who leave a page immediately after visiting. It is a popular marketing metric showing the relevance and engagement of content for site visitors. This tutorial shows you how to calculate bounce rate in PostHog.
 
-This tutorial shows you how to calculate bounce rate in PostHog. To get started, you need to install the [snippet](/docs/getting-started/install?tab=snippet) or [JavaScript SDK](/docs/libraries/js) and enable "record user sessions"  in [project settings](https://app.posthog.com/project/settings).
+To get started, you need to install the [snippet](/docs/getting-started/install?tab=snippet) or [JavaScript SDK](/docs/libraries/js). And ensure the following settings are enabled in your project settings:
+
+- [Record user sessions](https://app.posthog.com/project/settings/environment#replay)
+- [Enable autocapture for web](https://app.posthog.com/project/settings/environment-autocapture#autocapture)
+
+## How do we define bounce rate?
+
+Your bounce rate is the percentage of sessions that resulted in a bounce. A bounce is defined as a session where a visitor:
+
+- spent less than 30 seconds on a page
+- did not [autocapture](/docs/product-analytics/autocapture) any events
+- only had one pageview
 
 > **How does Google Analytics 4 [calculate the bounce rate](https://support.google.com/analytics/answer/12195621?hl=en)?** It is the percentage of sessions that **do not** last longer than 10 seconds, have a conversion event, or have at least 2 pageviews or screenviews.
+
+## Viewing bounce rate with Web analytics
+
+[Web analytics](/web-analytics) has made it easy to see the bounce rate for a given page on your website. Navigate to your web analytics dashboard, and you'll find the bounce rate listed alongside each page in the paths section.
+
+<ProductScreenshot
+    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/web_analytics_paths_light_fb2b05a261.png"
+    imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/web_analytics_paths_dark_0e6cd85638.png"
+    alt="Bounce rates"
+    classes="rounded"
+/>
 
 ## Calculating bounce rate with SQL insights
 
