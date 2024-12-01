@@ -1,6 +1,6 @@
 ---
 title: How to calculate bounce rate
-date: 2024-11-29
+date: 2024-12-01
 author:
   - ian-vanagas
   - bijan-boustani
@@ -17,22 +17,24 @@ Bounce rate is the percentage of users who leave a page immediately after visiti
 
 To get started, you need to install the [snippet](/docs/getting-started/install?tab=snippet) or [JavaScript SDK](/docs/libraries/js). And ensure the following settings are enabled in your project settings:
 
-- [Record user sessions](https://app.posthog.com/project/settings/environment#replay)
-- [Enable autocapture for web](https://app.posthog.com/project/settings/environment-autocapture#autocapture)
+- [Record user sessions](https://app.posthog.com/settings/environment#replay)
+- [Enable autocapture for web](https://app.posthog.com/settings/environment-autocapture#autocapture)
 
 ## How do we define bounce rate?
 
 Your bounce rate is the percentage of sessions that resulted in a bounce. A bounce is defined as a session where a visitor:
 
-- spent less than 30 seconds on a page
+- spent less than 10 seconds on a page
 - did not [autocapture](/docs/product-analytics/autocapture) any events
 - only had one pageview
 
 > **How does Google Analytics 4 [calculate the bounce rate](https://support.google.com/analytics/answer/12195621?hl=en)?** It is the percentage of sessions that **do not** last longer than 10 seconds, have a conversion event, or have at least 2 pageviews or screenviews.
 
+Since PostHog is open source, we can also look at the [`PostHog/posthog`](https://github.com/PostHog/posthog) repository on GitHub to look up the SQL conditions for a bounce in the [source code](https://github.com/PostHog/posthog/blob/68402d1ae5665298f02c82cc27247660b9647dfa/posthog/hogql_queries/web_analytics/ctes.py#L49).
+
 ## Viewing bounce rate with Web analytics
 
-[Web analytics](/web-analytics) has made it easy to see the bounce rate for a given page on your website. Navigate to your web analytics dashboard, and you'll find the bounce rate listed alongside each page in the paths section.
+[Web analytics](/web-analytics) makes it easy to see the bounce rate for a given page on your website. Navigate to your web analytics [dashboard](https://app.posthog.com/web), and you'll find the bounce rate listed alongside each page in the paths section.
 
 <ProductScreenshot
     imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/web_analytics_paths_light_fb2b05a261.png"
@@ -43,28 +45,72 @@ Your bounce rate is the percentage of sessions that resulted in a bounce. A boun
 
 ## Calculating bounce rate with SQL insights
 
-To calculate bounce rate, we need data from `raw_session_replay_events`, which we can access with [SQL insights](/docs/product-analytics/sql). To create a new SQL insight, go to the insight tab, click [new insight](https://app.posthog.com/insights/new), then go to the SQL tab. This is where we write our SQL statement.
+You can also use [SQL insights](/docs/product-analytics/sql) to calculate bounce rate using the `sessions` table. To create a new SQL insight, go to the **Product analytics** tab, click [new insight](https://app.posthog.com/insights/new), then go to the SQL tab. This is where we write our SQL statement.
+
+To use the default bounce criteria from above, we can use `$is_bounce` to see the bounce rate across all sessions. We take the average of all sessions that resulted in a bounce, multiply by 100 to get a percentage, and then round to a single decimal point.
+
+```sql
+select
+    round(avg(sessions.$is_bounce) * 100, 1) as bounce_rate
+from
+    sessions
+```
+
+For more granular control, we can redefine `is_bounce` with our own criteria.
+
+```sql
+select
+    round(
+        avg(
+            case
+                when $autocapture_count = 0
+                and $pageview_count <= 1
+                and $session_duration <= 10000 then 1.0
+                else 0.0
+            end
+        ), 1
+    ) * 100 as bounce_rate
+from
+    sessions
+```
+
+We can query the bounce rate across all sessions by...
+
+- Find the number of sessions that bounced.
+- Divide that by the total number of sessions (`count(session_id)`)
+- Multiply by 100 to view it as a percentage.
 
 We count a bounce as a session where the user is active for less than 10 seconds. To do this in SQL, we use a count of sessions (using `session_id`) where `active_milliseconds` is less than `10000` and divide by the total session count, then multiply by `100`. Together, this looks like this:
 
 ```sql
-select (
+select(
 	count(
 		multiIf(active_milliseconds < 10000, session_id, NULL)
 	) / count(session_id)
 ) * 100 as bounce_rate
 from raw_session_replay_events
+-- Last 24 hours
+-- 64.47411113984953
 ```
+
+```sql
+select(
+    count(
+        if($is_bounce = 1, session_id, null)
+    ) / count(session_id) * 100 as bounce_rate
+) from sessions
+-- 11.774369467403112
+```
+
+-- (num_autocaptures == 0 AND num_pageviews <= 1 AND duration_s < 10) AS is_bounce
 
 This gives us a bounce rate percentage insight we can save, update, and add to dashboards.
 
 ![Bounce rate](https://res.cloudinary.com/dmukukwp6/video/upload/v1710055416/posthog.com/contents/images/tutorials/bounce-rate/bounce-rate.mp4)
 
-> **Why not use single page visits divided by total visits?** The `raw_session_replay_events` data does not include the frequency of events and the `events` data does not include session details, making calculating sessions with a single `$pageview` event not possible (at the moment).
-
 ## Using different bounce criteria
 
-Although we used active time as our criteria for bounce rate, PostHog has other options. They include using `click_count`, `keypress_count`, or `mouse_activity_count`. We can find these  in the [database data management](https://app.posthog.com/data-management/database) tab under the `raw_session_replay_events` table.
+Although we used active time as our criteria for bounce rate, PostHog has other options. They include using `click_count`, `keypress_count`, or `mouse_activity_count`. We can find these in the [database data management](https://app.posthog.com/data-management/database) tab under the `raw_session_replay_events` table.
 
 Using different bounce criteria is as simple as changing `active_milliseconds < 10000` to the new criteria. For example, if we wanted to count bounce rate as the percentage of sessions with fewer than 3 clicks, we can use `click_count < 3` like this
 
@@ -124,3 +170,5 @@ This gives a bounce rate percentage for our homepage, and you can edit it for an
 - [Using HogQL for advanced breakdowns](/tutorials/hogql-breakdowns)
 
 <NewsletterForm />
+
+$entry_pathname
