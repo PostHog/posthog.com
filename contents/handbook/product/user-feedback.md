@@ -20,7 +20,7 @@ Ways to invite users for an interview:
    - We have more and more surveys running, therefore it's best if a survey wait period is applied. We recommend 14 days.
    - If your cohort is large (>1,000 users), it's best to not roll it out to 100%, as you might get overwhelmed by the amount of interviews in a short period of time. Start with 20-30% and increase if you need more interviews.
    - PMs use cal.com for scheduling interviews, but you can choose a different tool as well.
-- If a customer has requested a feature through slack then message them directly.
+- If a customer has requested a feature through Slack, then message them directly.
 - Email customers who have subscribed to the feature on the [roadmap](/roadmap).
 
 **Scheduling**
