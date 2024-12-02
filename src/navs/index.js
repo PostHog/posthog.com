@@ -2269,6 +2269,12 @@ export const docsMenu = {
                     featured: true,
                 },
                 {
+                    name: 'Getting started',
+                    url: '/docs/web-analytics/getting-started',
+                    icon: 'IconBook',
+                    color: 'blue',
+                },
+                {
                     name: 'Dashboard',
                     url: '/docs/web-analytics/dashboard',
                     icon: 'IconDashboard',
