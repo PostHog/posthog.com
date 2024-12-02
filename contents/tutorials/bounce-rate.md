@@ -98,3 +98,5 @@ This gives a bounce rate percentage for our homepage, and you can edit it for an
 - [Calculating average session duration, time on site, and other session-based metrics](/tutorials/session-metrics)
 - [Using HogQL for advanced time and date filters](/tutorials/hogql-date-time-filters)
 - [Using HogQL for advanced breakdowns](/tutorials/hogql-breakdowns)
+
+<NewsletterForm />

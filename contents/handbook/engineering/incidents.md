@@ -30,6 +30,19 @@ Things that _shouldn’t_ be an incident
 
 > Planning some maintenance? Check the [announcements](/handbook/growth/comms/product-announcements) section instead.
 
+### Security-specific guidance
+
+Security incidents can have far-reaching consequences and should always be treated with urgency. 
+Some examples of security-related issues that warrant raising an incident include:
+
+- Unauthorized access to systems, data, or user accounts
+- Detection of malware, ransomware, or other malicious software on company systems
+- Suspicious activity on production infrastructure, such as unexpected user logins, privilege escalations, or resource consumption spikes
+- Discovery of exposed credentials, sensitive data, or secrets in logs, repositories, or public forums
+- Receiving a credible report of a vulnerability or exploit affecting company systems
+
+**When in doubt, err on the side of caution and raise the incident and escalate early!** Better to be safe than sorry.
+
 ### Incident severity
 
 Please refer to the following guidance when choosing the severity for your incident. If you are unsure, it's usually better to over-estimate than under-estimate!
@@ -43,6 +56,7 @@ Examples
 - Broken non-critical functionality, with no workaround. Not on the critical path for customers.
 - Performance degradation. Not an outage, but our app is not performing as it should. For instance, growing (but not yet critical) ingestion lag.
 - A memory leak in a database or feature. With time, this could cause a major/critical incident, but does not usually require _immediate_ attention.
+- A low-risk security vulnerability or non-critical misconfiguration, such as overly permissive access on a non-sensitive resource
 
 If not dealt with, minor incidents can often become major incidents. Minor incidents are usually OK to have open for a few days, whereas anything more severe we would be trying to resolve ASAP.
 
@@ -56,6 +70,8 @@ Examples
 
 - Customer signup is broken
 - Significantly elevated error rate
+- A Denial of Service (DoS) attack or other malicious activity that affects system availability
+- Discovery of exposed sensitive data (e.g., credentials, secrets) that could lead to a security breach if not remediated
 
 #### Critical
 
@@ -66,6 +82,8 @@ Examples
 - Posthog Cloud is completely down
 - A data breach, or loss of data
 - Event ingestion totally failing - we are losing events
+- Discovery of an active security exploit, such as a compromised user account or system
+- Detection of ransomware, malware, or unauthorized modifications to production systems
 
 ## What happens during an incident?
 
@@ -73,7 +91,10 @@ The person who raised the incident is the incident lead. It’s their responsibi
 
 - Make sure the right people join the call. This includes [the current on-call person](https://posthog.pagerduty.com/service-directory/P43Y0E8). Optionally, add people from Infra and [the feature owner](/handbook/engineering/feature-ownership) and Comms if relevant. Comms can assist in running communications if required.
 - Take notes in the incident channel. This should include timestamps, and is a brain dump of everything that we know, and everything that we are or have tried. This will give us much more of an opportunity to learn from the incident afterwards.
-- Update the [status page](https://status.posthog.com/). This is best done in the incident Slack channel using `/incident statuspage` (`/inc sp`).
+- Update the [status page](https://status.posthog.com/). This is best done in the incident Slack channel using `/incident statuspage` (`/inc sp`). 
+    - We use Atlassian for hosting our status page. It is automatically updated from the incident.io slack command.
+    - Access to Atlassian is limited due to seats so if you need access talk to Tim or James.
+    - Do not try and update the status page via the incident.io dashboard because it won't be sync'd to the Atlassian status page.
 
 If the person who raised the incident is the best person to debug the issue, they should hand over the incident lead role to someone else on the call.
 
@@ -82,6 +103,11 @@ If the person who raised the incident is the best person to debug the issue, the
 ### Customer communications
 
 Significant incidents such as the app being partially or fully non-operational, as well as ingestion delays of 30 minutes or longer should be clearly communicated to our customers. They should get to know what is going on and what we are doing to resolve it.
+
+When handling a security incident, please align with the incident responder team in the incident slack channel about public communication of
+security issues. E.g. it could not make sense to immediately communicate an attack publicly, as this could make the attacker aware that we are investigating already. This could it make harder for us to stop this attack for good.
+If an early communication is outweighing those kind of downsides or helps our customers if affected, then do it!
+
 
 Our [status page](https://status.posthog.com/) is the central hub for all incident communication. You can update it easily using the `/incident statuspage` (`/inc sp`) Slack command.
 

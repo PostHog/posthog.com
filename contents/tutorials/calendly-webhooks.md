@@ -84,3 +84,5 @@ Now, every time someone creates (or cancels) a meeting using Calendly, you captu
 - [How to capture new RSS items in PostHog (releases, blogs, status)](/tutorials/rss-item-capture)
 - [How to use session replays to improve your support experience](/tutorials/session-recordings-for-support)
 - [How to track GitHub stars in PostHog](/tutorials/github-star-tracker)
+
+<NewsletterForm />

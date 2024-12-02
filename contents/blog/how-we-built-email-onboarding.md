@@ -81,8 +81,6 @@ This email performed very well, with a 68% open rate and a 16% CTR. Two emails i
 
 Best of all, though, because it was personalized and came from me directly, it also earned a steady trickle of replies. I responded in kind and was able to feed in further improvements, including adding another option for `role_at_organization` = `founder`.
 
-<NewsletterForm placement="middle" />
-
 ## Onboarding 3.3: The one where we added experiments
 
 In [3.3](https://github.com/PostHog/meta/issues/140), we started running a series of tests and experiments. We removed the `founder` targeted email, which invited teams to join [PostHog for Startups](/startups), because it was _too_ successful and cannibalised revenue.
@@ -111,7 +109,7 @@ Around this point we also started filtering out teams in our [ideal customer pro
 
 The next version was where things got out of hand. It contained over 53 emails and 38 timed events and was, quite simply, a pain in the ass to explain to everyone internally.
 
-The goal of this flow was to focus on improving activation, and build on some parallel improvements to our in-app onboarding flow. When a user signed up to PostHog we asked them to select a product to setup first: analytics, replays, flags, or surveys. [Onboarding 5.0](https://github.com/PostHog/meta/issues/172) builds off that selection by encouraging users to use that product, and then showing how other features can combine with it.
+The goal of this flow was to focus on [improving activation](/product-engineers/activation-metrics), and build on some parallel improvements to our in-app onboarding flow. When a user signed up to PostHog we asked them to select a product to setup first: analytics, replays, flags, or surveys. [Onboarding 5.0](https://github.com/PostHog/meta/issues/172) builds off that selection by encouraging users to use that product, and then showing how other features can combine with it.
 
 ![Onboarding 5.0](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/onboarding/onboarding_5.png)
 <Caption>Onboarding 5.0: Messy, complex, and highly personalized to user interests</Caption>

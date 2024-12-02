@@ -55,18 +55,20 @@ When you start, you will be automatically invited to these. They are totally opt
 - We will intro the new joiner and the onboarding buddy via email - please say hi and decide together where and when the in person onboarding will happen. 
  > If any travel is needed for the in-person onboarding, please check our [Spending Money page](/handbook/people/spending-money) and book your travel accordingly. _You don't need to let us team know, just use your Brex/Revolut card._
 - Please make sure you spend at least 3 days together, working through the [first week onboarding list](/handbook/people/onboarding#during-their-first-week) and spending time working on any role-specific tasks that are outlined in the new joiner's personal onboarding issue.
-    - Make sure to add the details of the in-person onboarding to the [In-person Onboarding Calendar](https://calendar.google.com/calendar/u/0?cid=Y19lMzdjNjE0NzM0NDAyOGJlY2ZkMTc0Y2MxZjUxZjY5ZTkxMzY0NzVlNTFjMTE3MjA4OGM2NWQwNjE1YTczNmRlQGdyb3VwLmNhbGVuZGFyLmdvb2dsZS5jb20) so that other PostHog team members can join, if possible.
+    - Make sure to add the details of the in-person onboarding to the [In-person Onboarding Calendar](https://calendar.google.com/calendar/u/0?cid=Y19lMzdjNjE0NzM0NDAyOGJlY2ZkMTc0Y2MxZjUxZjY5ZTkxMzY0NzVlNTFjMTE3MjA4OGM2NWQwNjE1YTczNmRlQGdyb3VwLmNhbGVuZGFyLmdvb2dsZS5jb20) so that other PostHog team members can join, if possible. Simply create an event in your calendar and then invite the in-person onboarding calendar as a guest.
 - You will remain the new joiner's main point of contact for the first few weeks, so please continue to check in with them at least once a week for the first month or so. 
 
 ## In-person onboarding
 
-Except under special circumstances, new joiners meet with members of their team in-person to go through the onboarding process. Upon acceptance of an offer, your Team Lead will notify the People & Operations team who will help you coordinate travel if necessary.
+Except under special circumstances, new joiners meet with members of their team in-person to go through the onboarding process. Upon acceptance of an offer, your Team Lead will notify the People & Operations team who will help you coordinate travel if necessary. We encourage team leads to consider the Hedgehouse as a location for in-person onboarding. Regardless of location, everyone should have their own bedroom.
 
 In these cases, the process is:
 
   - Preemptively create the new team member a Google account
   - Issue them a Brex card to their work email with a sufficiently high temporary balance to cover travel costs
   - Have the new team member book travel as usual
+
+> You should by default avoid combining in-person onboarding with [small team offsites](/handbook/company/offsites#small-team-offsites) as they serve different purposes. The focus of onboarding is generally on making the new team member successful, but offsites feature things like hackathons and 360 feedback which aren't usually helpful for this and detract from useful onboarding time. However, it may occasionally make sense to combine the two - just use your judgement. 
 
 ### Engineering
 
@@ -170,7 +172,7 @@ Each Small Team has its own Project for tracking their Issues - [full list here]
 
 Employees are occasionally called upon to act as [support heroes](/handbook/engineering/support-hero), or need to deal with support tickets that are escalated to them. This most often applies to engineers, but can include any employee regardless of their team. For this reason, we need everyone to have a broad idea of our support processes and know how we deal with customers.
 
-All new hires should schedule a 30 minute session with the [support engineer closest to their timezone](/teams/customer-comms) within their first three weeks at PostHog. 
+All new hires should schedule a 30 minute session with the [support engineer closest to their timezone](/teams/comms) within their first three weeks at PostHog. 
 
 In this call the support engineer will be able to answer any questions, as well as demonstrate how we deal with support at PostHog. In particular, the support engineer should cover:
 

@@ -94,8 +94,6 @@ More importantly, Snowflake’s middle layer – virtual warehouses – can be s
 
 ClickHouse utilizes Shared-Nothing Architecture by default. But ClickHouse also [supports Shared-Disk Architecture](https://clickhouse.com/docs/en/faq/operations/deploy-separate-storage-and-compute/). This is useful if you want to scale disk and compute separately, so you can can have the best of both worlds depending on your use case and tune it to fit. You can do this by leveraging Zero Copy Replication and [S3/GCS Backed MergeTrees](https://clickhouse.com/docs/en/guides/sre/s3-multi-region), or even HDFS.
 
-<NewsletterForm />
-
 ### Differences in query optimization & speed
 
 ClickHouse has three significant optimizations that make querying aggregate computations efficient: (i) materialized views, (ii) specialized engines, and (iii) vectorized query execution.

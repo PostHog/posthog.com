@@ -221,3 +221,5 @@ ORDER BY
 - [How to track performance marketing in PostHog](/tutorials/performance-marketing)
 - [How (and why) our marketing team uses PostHog](/blog/posthog-marketing)
 - [An intro to PostHog for Google Analytics users](/blog/google-analytics-to-posthog)
+
+<NewsletterForm />

@@ -122,3 +122,5 @@ Because status updates can have important real-time consequences for your app, w
 - [Using the PostHog API to capture events](/tutorials/api-capture-events)
 - [How to use the PostHog API to get insights and persons](/tutorials/api-get-insights-persons)
 - [What to do after installing PostHog in 5 steps](/tutorials/next-steps-after-installing)
+
+<NewsletterForm />

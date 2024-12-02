@@ -79,3 +79,5 @@ Canary releases ensure higher quality features get shipped and fewer issues impa
 - [Targeting feature flags on groups, pages, machines, and more](/tutorials/group-page-machine-flags)
 - [How to bootstrap feature flags in React and Express](/tutorials/bootstrap-feature-flags-react)
 - [How to evaluate and update feature flags with the PostHog API](/tutorials/api-feature-flags)
+
+<NewsletterForm />

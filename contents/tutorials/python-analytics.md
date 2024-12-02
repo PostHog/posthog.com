@@ -269,3 +269,5 @@ That's it! Feel free to play around in your dashboard and explore the different 
 - [How to set up feature flags in Python and Flask](/tutorials/python-feature-flags)
 - [How to set up A/B tests in Python and Flask](/tutorials/python-ab-testing)
 - [What to do after installing PostHog](/tutorials/next-steps-after-installing)
+
+<NewsletterForm />

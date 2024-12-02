@@ -481,3 +481,5 @@ If you capture identified events, you can also filter these results based on [pe
 - [How to set up Remix analytics, feature flags, and more](/tutorials/remix-analytics)
 - [How to set up A/B tests in Remix](/tutorials/remix-ab-tests)
 - [How to analyze surveys with ChatGPT](/tutorials/analyze-surveys-with-chatgpt)
+
+<NewsletterForm />

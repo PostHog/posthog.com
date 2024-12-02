@@ -247,3 +247,5 @@ const title = computed(() => titleData.value);
 - [How to set up analytics in Nuxt](/tutorials/nuxt-analytics)
 - [How to set up A/B tests in Nuxt](/tutorials/nuxtjs-ab-tests)
 - [How to set up surveys in Nuxt](/tutorials/nuxt-surveys)
+
+<NewsletterForm />

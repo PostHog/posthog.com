@@ -84,3 +84,5 @@ With this, you can set up alerts in Slack for email submissions with a [destinat
 - [How to run A/B tests in Webflow](/tutorials/webflow-ab-tests)
 - [How to set up Webflow analytics and session recordings](/tutorials/webflow)
 - [What to do after installing PostHog in 5 steps](/tutorials/next-steps-after-installing)
+
+<NewsletterForm />

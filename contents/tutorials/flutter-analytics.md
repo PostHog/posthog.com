@@ -477,3 +477,5 @@ That's it! Feel free to play around in your dashboard and explore the different 
 - [How to run A/B tests in Flutter](/tutorials/flutter-ab-tests)
 - [How to set up feature flags in Flutter](/tutorials/flutter-feature-flags)
 - [How to run A/B tests in Android](/tutorials/android-ab-tests)
+
+<NewsletterForm />

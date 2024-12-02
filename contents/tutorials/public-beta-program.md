@@ -281,3 +281,5 @@ With this, our beta page is all set up. Users can opt-in and out of betas whenev
 - [How to collect beta feedback from beta users](/tutorials/beta-feedback)
 - [Get feedback and book user interviews with surveys](/tutorials/feedback-interviews-site-apps)
 - [How to use Next.js middleware to bootstrap feature flags](/tutorials/nextjs-bootstrap-flags)
+
+<NewsletterForm />

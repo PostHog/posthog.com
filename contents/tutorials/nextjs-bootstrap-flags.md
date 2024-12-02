@@ -293,3 +293,5 @@ Once you restart your app to reinitialize PostHog, your flags load instantly.
 - [How to bootstrap feature flags in React and Express](/tutorials/bootstrap-feature-flags-react)
 - [Testing frontend feature flags with React, Jest, and PostHog](/tutorials/test-frontend-feature-flags)
 - [How to evaluate and update feature flags with the PostHog API](/tutorials/api-feature-flags)
+
+<NewsletterForm />

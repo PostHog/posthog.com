@@ -59,8 +59,6 @@ You can’t rely on UTM parameters to tell you where a user actually first heard
 
 In your product signup flow, include an optional free text box asking people where they first heard about you. About 10% of signups usually fill this in. Read the data and report on it every week. It’s manual but vitally important info.
 
-<NewsletterForm />
-
 ## 🚀 Post-product-market fit
 
 ### Hire a developer who loves writing onto your marketing team 

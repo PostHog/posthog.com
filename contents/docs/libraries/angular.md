@@ -179,6 +179,31 @@ bootstrapApplication(AppComponent, appConfig)
   .catch((err) => console.error(err));
 ```
 
+## Session replay
+
+Session replay uses change detection to record the DOM. This can clash with Angular's change detection.
+
+The recorder tool attempts to detect when an Angular zone is present and avoid the clash but might not always succeed.
+
+If you see performance impact from recording in an Angular project, ensure that you use [`ngZone.runOutsideAngular`](https://angular.io/api/core/NgZone#runoutsideangular). 
+
+```ts file=posthog.service.ts
+import { Injectable } from '@angular/core';
+import posthog from 'posthog-js'
+
+@Injectable({ providedIn: 'root' })
+export class PostHogSessionRecordingService {
+  constructor(private ngZone: NgZone) {}
+initPostHog() {
+    this.ngZone.runOutsideAngular(() => {
+      posthog.init(
+        /* your config */
+      )
+    })
+  }
+}
+```
+
 ## Next steps
 
 For any technical questions for how to integrate specific PostHog features into Angular (such as feature flags, A/B testing, surveys, etc.), have a look at our [JavaScript Web SDK docs](/docs/libraries/js).

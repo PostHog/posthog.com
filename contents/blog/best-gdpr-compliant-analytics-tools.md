@@ -113,8 +113,6 @@ Plausible is made and hosted in the EU. It collects no personally identifiable i
 
 Plausible charges by pageview with 1 million pageviews costing €69 per month – approx. $71. Paying annually grants you two free months per year – i.e. €69 per month becomes €690 per year. The open source version is free to self-host via Docker Compose.
 
-<NewsletterForm />
-
 ### 3. Umami
 
 ![umami analytics](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/open-source-analytics-tools/umami.png)
@@ -152,7 +150,7 @@ While based in Canada, Fathom offers EU-hosting. It also employs what it calls i
 
 #### Who is Fathom for?
 
-Fathom is ideal for individual users and companies who only require basic web analytics. Unlike GA and other more advanced alternatives, such as PostHog or Matomo, Fathom is a simple, single-page application. It tracks all the basic analytics most people need, but can't offer much insight into user behavior. It's also useful for agencies as it supports up to 50 websites on its core pricing plans.
+[Fathom](/blog/posthog-vs-fathom) is ideal for individual users and companies who only require basic web analytics. Unlike GA and other more advanced alternatives, such as PostHog or Matomo, Fathom is a simple, single-page application. It tracks all the basic analytics most people need, but can't offer much insight into user behavior. It's also useful for agencies as it supports up to 50 websites on its core pricing plans.
 
 #### Features & benefits
 

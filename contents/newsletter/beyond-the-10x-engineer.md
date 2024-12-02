@@ -84,8 +84,6 @@ Because engineers shape the direction of every product, having this trait ensure
 
 > **What to look for:** People who build cool stuff for the sake of it – e.g. side projects, open source contributions – and haven’t job-hopped to optimize title or salary.
 
-<NewsletterForm />
-
 ## 4. Customer obsessed
 
 To uncover the real problems users have (and value), [product engineers](/blog/what-is-a-product-engineer) at PostHog interact with them much more often than regular engineers do. This includes:
