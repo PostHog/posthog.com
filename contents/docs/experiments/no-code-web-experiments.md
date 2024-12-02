@@ -4,7 +4,9 @@ sidebar: Docs
 showTitle: true
 ---
 
-> 🚧 **NOTE:** No-code web experiments are currently considered in `beta`. To access them, enable the [feature preview](https://us.posthog.com#panel=feature-previews) in your PostHog account. We are keen to gather as much feedback as possible so if you try this out please let us know. You can email [daniel.b@posthog.com](mailto:daniel.@posthog.com), send feedback via the [in-app support panel](https://us.posthog.com#panel=support%3Afeedback%3Aexperiments%3Alow), or use one of our other [support options](/docs/support-options).
+> 🚧 **Note:** No-code web experiments are currently considered in `beta`. To access them, enable the [feature preview](https://us.posthog.com#panel=feature-previews) in your PostHog account. You'll also need to define `disable_web_experiments: false` in your Posthog web snippet configuration. 
+>
+> We are keen to gather as much feedback as possible so if you try this out please let us know. You can email [daniel.b@posthog.com](mailto:daniel.@posthog.com), send feedback via the [in-app support panel](https://us.posthog.com#panel=support%3Afeedback%3Aexperiments%3Alow), or use one of our other [support options](/docs/support-options).
 
 No-code web experiments enable you to run A/B tests, multivariate tests, and other experiments that modify your website without writing a single line of code.
 
@@ -133,3 +135,12 @@ Before launching, ensure the following:
 
 1. **Test thoroughly**: Verify that all variants display and function as expected across devices and browsers. See our [testing feature flags doc](/docs/feature-flags/testing) for more details.
 2. **Document changes**: Record the modifications made to each variant and their goals.
+
+Also, during the beta period, you'll need to add `disable_web_experiments: false` to your PostHog web snippet configuration, e.g.:
+
+```js-web
+posthog.init('<ph_project_api_key>', {
+    api_host: '<ph_client_api_host>',
+    disable_web_experiments: false,
+})
+```
