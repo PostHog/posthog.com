@@ -472,8 +472,8 @@ function PipelinesPage({ location }) {
 
     const product = {
         slug: 'cdp',
-        lowercase: 'integrations',
-        capitalized: 'Integrations',
+        lowercase: 'data pipelines',
+        capitalized: 'Data pipelines',
         freeTier: '10m rows',
     }
 
@@ -551,7 +551,7 @@ function PipelinesPage({ location }) {
                         duration={1000}
                         className="cursor-pointer inline-flex items-center rounded-full bg-accent dark:bg-accent-dark px-3 py-1 text-sm border border-light dark:border-dark text-primary dark:text-primary-dark hover:text-primary dark:hover:text-primary-dark hover:border-red dark:hover:border-yellow"
                     >
-                        PostHog integrations library{' '}
+                        Explore our sources &amp; destinations library{' '}
                         <IconArrowRightDown className="inline-block w-4 text-red dark:text-yellow" />
                     </SmoothScrollLink>
                 </div>
@@ -592,7 +592,7 @@ function PipelinesPage({ location }) {
 
             <div id="library" className="@container max-w-screen-2xl px-5 mx-auto grid md:grid-cols-4 pt-12 relative">
                 <div className="md:col-span-4 md:mb-4">
-                    <h2 className="text-center text-2xl lg:text-4xl">PostHog integrations library</h2>
+                    <h2 className="text-center text-2xl lg:text-4xl">Sources &amp; destinations library</h2>
 
                     <div className="md:max-w-lg mx-auto mb-5 rounded-md border border-border dark:border-dark py-3 px-4 bg-white dark:bg-accent-dark flex space-x-1.5">
                         <IconSearch className="w-5 opacity-60" />
@@ -714,7 +714,9 @@ function PipelinesPage({ location }) {
                 <p className="mt-0 text-opacity-70 text-center">
                     Get a more technical overview of how everything works <Link to="/docs">in our docs</Link>.
                 </p>
-                <DocLinks menu={docsMenu.children.find(({ name }) => name.toLowerCase() === 'integrations').children} />
+                <DocLinks
+                    menu={docsMenu.children.find(({ name }) => name.toLowerCase() === 'data pipelines').children}
+                />
             </section>
 
             <section

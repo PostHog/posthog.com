@@ -2699,7 +2699,7 @@ export const docsMenu = {
             ],
         },
         {
-            name: 'Integrations',
+            name: 'Data pipelines',
             url: '/docs/cdp',
             color: 'sky-blue',
             icon: 'IconPlug',
@@ -3208,7 +3208,7 @@ const menu = [
                 url: '/surveys',
             },
             {
-                name: 'Integrations',
+                name: 'Data pipelines',
                 icon: 'IconPlug',
                 color: 'sky-blue',
                 url: '/cdp',
