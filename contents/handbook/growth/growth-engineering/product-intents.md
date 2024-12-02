@@ -19,7 +19,7 @@ Product intents are:
 
 ## When should I start capturing product intents?
 
-As soon as your product is in any sort of public beta you should start tracking product intents. This is _not_ because you should be hyper focusing on your product's activaiton numbers at this stage - instead it is so that we can start collecting data for later on when we want to determine a good activation metric.
+As soon as your product is in any sort of public beta you should start tracking product intents. This is _not_ because you should be hyper focusing on your product's activation numbers at this stage - instead it is so that we can start collecting data for later on when we want to determine a good activation metric.
 
 So, collecting product intents should be a precursor to any sort of public release. 
 
@@ -41,10 +41,10 @@ Generally we've made the plumbing such that recording these product intents is q
 
 1. Figure out where you think the product intent event should happen.
 2. When someone clicks that button / views that page / does that thing, then simply call [`addProductIntent` in the `teamLogic`](https://github.com/PostHog/posthog/blob/b4d51e3b746e6174a7d60c525ea22387f00dcafe/frontend/src/scenes/teamLogic.tsx#L151-L161). That fires off an API request that records the product intent in the [database](https://github.com/PostHog/posthog/blob/master/posthog/models/product_intent/product_intent.py) and sends the event for you. You don't need to send the event yourself - it's all handled.
-  - If you want, you can include the _context_ of the intent with this API call. Maybe you are recording multiple intents for your product and want to track exactly where the intents are happening or for what reason - you can store that in the `intent_context`.
+    - If you want, you can include the _context_ of the intent with this API call. Maybe you are recording multiple intents for your product and want to track exactly where the intents are happening or for what reason - you can store that in the `intent_context`.
 3. (optional but recommended) track activation for the product intents [here](https://github.com/PostHog/posthog/blob/b4d51e3b746e6174a7d60c525ea22387f00dcafe/posthog/models/product_intent/product_intent.py#L77-L82).
-  - This code is run every time an intent is updated. For example, if the activation criteria is "save 4 insights", and we send a product intent every time someone clicks "new insight", we'll also check at that time if they have 4 insights saved, and if so mark them as activated.
-  - This part of the product intent plumbing needs some work - we should be able to manually trigger activation checks whenever someone does a certain action (not an Action like a grouping of events but a generic action like something that you just do). If you want to make that change, please do - and update these docs!
+    - This code is run every time an intent is updated. For example, if the activation criteria is "save 4 insights", and we send a product intent every time someone clicks "new insight", we'll also check at that time if they have 4 insights saved, and if so mark them as activated.
+    - This part of the product intent plumbing needs some work - we should be able to manually trigger activation checks whenever someone does a certain action (not an Action like a grouping of events but a generic action like something that you just do). If you want to make that change, please do - and update these docs!
 
 ## Why does this matter?
 
