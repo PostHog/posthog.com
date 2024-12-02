@@ -1336,6 +1336,10 @@
         },
         { "source": "/docs/session-replay/ios", "destination": "/docs/session-replay/installation?tab=iOS" },
         {
+            "source": "/questions/how-to-group-events",
+            "destination": "/docs/product-analytics/troubleshooting#how-do-i-group-or-combine-events"
+        },
+        {
             "source": "/questions/best-practices-naming-convention-for-event-names-and-properties",
             "destination": "/docs/product-analytics/best-practices"
         },
