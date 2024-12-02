@@ -2809,6 +2809,10 @@ export const docsMenu = {
                             url: '/docs/cdp/destinations/mailjet',
                         },
                         {
+                            name: 'Make',
+                            url: '/docs/cdp/destinations/make',
+                        },
+                        {
                             name: 'RudderStack',
                             url: '/docs/cdp/destinations/rudderstack',
                         },
