@@ -810,7 +810,7 @@ export const DataPipeline = () => {
         <Slide
             bgColor="[#43B6E7]"
             textColor="primary"
-            title="Data pipelines"
+            title="Data pipeline"
             flag="Beta"
             flagColor="yellow"
             description="Build your customer data platform: Import data from your warehouse and send to 25+ destinations."
