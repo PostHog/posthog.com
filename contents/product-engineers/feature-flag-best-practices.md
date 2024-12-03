@@ -144,8 +144,6 @@ Bootstrapping also ensures events have accurate feature flag data. If you captur
 
 > You can read more about bootstrapping in [our docs](/docs/feature-flags/bootstrapping) or tutorials for [Next.js](/tutorials/nextjs-bootstrap-flags) or [React and Express](/tutorials/bootstrap-feature-flags-react).
 
-<NewsletterForm />
-
 ## 6. Name your feature flags well
 
 Here is some practical advice on naming your feature flags to avoid confusion. None of these are laws. You can create your own conventions, but consistency is critical. As an example, for us, names should:

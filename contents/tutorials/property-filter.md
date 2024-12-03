@@ -87,3 +87,5 @@ For example to ensure `$geoip_cityname` is _never_ stored on either events or pe
 Below is the full configuration Witty Works uses to filter out unwanted data before it is written to PostHog's event log:
 
 ```$geoip_city_name,$geoip_longitude,$geoip_latitude,$ip,$geoip_postal_code,$current_url,$performance_raw,$referrer,$initial_referrer,$pathname```
+
+<NewsletterForm />

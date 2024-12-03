@@ -2120,6 +2120,12 @@ export const docsMenu = {
                     color: 'orange',
                 },
                 {
+                    name: 'Best practices',
+                    url: '/docs/product-analytics/best-practices',
+                    icon: 'IconStar',
+                    color: 'red',
+                },
+                {
                     name: 'Troubleshooting and FAQs',
                     url: '/docs/product-analytics/troubleshooting',
                     icon: 'IconQuestion',
@@ -2484,6 +2490,12 @@ export const docsMenu = {
                     featured: true,
                 },
                 {
+                    name: 'Best practices',
+                    url: '/docs/feature-flags/best-practices',
+                    icon: 'IconStar',
+                    color: 'red',
+                },
+                {
                     name: 'Troubleshooting and FAQs',
                     url: '/docs/feature-flags/common-questions',
                     icon: 'IconQuestion',
@@ -2553,14 +2565,6 @@ export const docsMenu = {
                     icon: 'IconHome',
                     color: 'seagreen',
                 },
-                /*
-                {
-                    name: 'Getting started',
-                    url: '/docs/experiments/start',
-                    icon: 'IconGraduationCap',
-                    color: 'red',
-                },
-                */
                 {
                     name: 'Installation',
                     url: '/docs/experiments/installation',
@@ -2594,6 +2598,12 @@ export const docsMenu = {
                     icon: 'IconRocket',
                     color: 'purple',
                     featured: true,
+                },
+                {
+                    name: 'Best practices',
+                    url: '/docs/experiments/best-practices',
+                    icon: 'IconStar',
+                    color: 'yellow',
                 },
                 {
                     name: 'Troubleshooting and FAQs',

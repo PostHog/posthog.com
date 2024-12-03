@@ -284,3 +284,5 @@ That's it! When you restart your app and click the button, you should see the gr
 - [A software engineer's guide to A/B testing](/product-engineers/ab-testing-guide-for-engineers)
 - [How to run A/B tests in Flutter](/tutorials/flutter-ab-tests)
 - [How to set up analytics in Flutter](/tutorials/flutter-analytics)
+
+<NewsletterForm />

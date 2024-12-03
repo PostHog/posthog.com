@@ -303,3 +303,5 @@ In the scenario where your PostHog cookie is not available on the server side, y
 - [How to set up Remix analytics, feature flags, and more](/tutorials/remix-analytics)
 - [How to set up surveys in Remix](/tutorials/remix-surveys)
 - [A software engineer's guide to A/B testing](/product-engineers/ab-testing-guide-for-engineers)
+
+<NewsletterForm />

@@ -84,3 +84,5 @@ Create a new insight, select the lifecycle tab, then  choose the event you want.
 - [Calculating average session duration, time on site, and other session-based metrics](/tutorials/session-metrics)
 - [How to identify and analyze power users](/tutorials/power-users)
 - [How to use session recordings to get a deeper understanding of user behavior](/tutorials/explore-insights-session-recordings)
+
+<NewsletterForm />

@@ -164,3 +164,5 @@ LIMIT 20
 - [How to set up Stripe reports](/tutorials/stripe-reports)
 - [The basics of SQL for analytics](/product-engineers/sql-for-analytics)
 - [How to set up Google Ads reports](/tutorials/google-ads-reports)
+
+<NewsletterForm />

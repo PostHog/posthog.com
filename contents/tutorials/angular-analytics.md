@@ -271,3 +271,5 @@ Now when you go to your app, a PostHog feature flag controls the button text.
 - [How to set up A/B tests in Angular](/tutorials/angular-ab-tests)
 - [How to set up surveys in Angular](/tutorials/angular-surveys)
 - [How to set up A/B/n testing](/tutorials/abn-testing)
+
+<NewsletterForm />

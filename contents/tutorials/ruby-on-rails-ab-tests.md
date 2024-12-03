@@ -334,3 +334,5 @@ To verify you've done this correctly, you should see an `Identify` event in your
 - [How to set up Ruby on Rails analytics, feature flags and more](/tutorials/ruby-on-rails-analytics)
 - [A software engineer's guide to A/B testing](/product-engineers/ab-testing-guide-for-engineers)
 - [8 annoying A/B testing mistakes every engineer should know](/blog/ab-testing-mistakes)
+
+<NewsletterForm />

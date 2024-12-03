@@ -531,3 +531,5 @@ If you capture identified events, you can also filter these results based on [pe
 - [How to set up A/B tests in Angular](/tutorials/angular-ab-tests)
 - [How to set up Angular analytics, feature flags, and more](/tutorials/angular-analytics)
 - [How to analyze surveys with ChatGPT](/tutorials/analyze-surveys-with-chatgpt)
+
+<NewsletterForm />

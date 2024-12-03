@@ -89,8 +89,6 @@ According to AWS, AQUA boosts performance by 10x on average by precomputing quer
 
 AQUA shifts Amazon’s shared-nothing model to something similar to a shared storage model. Because AQUA precomputes data, it encourages developers to use a single Redshift managed storage layer that multiple Redshift clusters can interact with.
 
-<NewsletterForm />
-
 ### ClickHouse’s (traditional) architecture
 
 ClickHouse’s traditional architecture differ for some managed instances, but it best represents overall design differences. 
