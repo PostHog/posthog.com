@@ -29,7 +29,7 @@ Netlify supports [redirects and rewrites](https://docs.netlify.com/routing/redir
   force = true
 ```
 
-> **NB:** This proxy configuration works with custom domains but may not work correctly with the default `.netlify.app` domain. If you're experiencing issues with PostHog requests being blocked, ensure you're using a custom domain rather than the default Netlify domain.
+**NB:** This proxy configuration works with custom domains but may not work correctly with the default `.netlify.app` domain. If you're experiencing issues with PostHog requests being blocked, ensure you're using a custom domain rather than the default Netlify domain.
 
 Once done, set the `/ingest` route of your domain as the API host in your PostHog initialization like this:
 
