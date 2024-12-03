@@ -8,32 +8,41 @@ availability:
   enterprise: partial
 ---
 
-It's easy to get up and running with [Web analytics](/web-analytics). All you need to do is [install PostHog](/docs/getting-started/install) and you're all set to collect data based on traffic to your app or website.
+It's easy to get up and running with [Web analytics](/web-analytics). All you need to do is [install PostHog](/docs/getting-started/install) and you'll automatically start collecting data based on traffic to your app or website.
 
 Web analytics provides you with a single, simple [dashboard](https://app.posthog.com/web). But it can still be overwhelming if you don't have a technical background or experience with marketing concepts.
 
-This post is a gentle introduction to web analytics concepts, with practical examples.
+This post is intended as a gentle introduction to web analytics concepts, with practical examples.
 
-## What are we looking at?
+## Where do I start?
 
-The core idea of web analytics is that you can gather insights based on how people are interacting with your app or website.
+Web analytics enables you to gather insights based on how people interact with your app or website.
 
-Here at PostHog, we use our web analytics dashboard to track both our app and our website (the project is literally called "PostHog App + Website"). That means we can use it to track data about our marketing website (posthog.com) as well as our application (app.posthog.com). Examples:
+The best way to get started is to open your web analytics [dashboard](https://app.posthog.com/web) and take a look at the data available. Then, we can dive into what the data means and how it can help you.
 
-- App Features: `https://app.posthog.com/web`
-- Marketing: `https://posthog.com/web-analytics`
-- Docs: `https://posthog.com/docs/web-analytics`
+<ProductScreenshot
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/web_analytics_top_light_mode_2024_10_be53cf5325.png"
+  imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/web_analytics_top_dark_mode_2024_10_6aa6dc9aeb.png"
+  alt="Web analytics dashboard"
+  classes="rounded"
+/>
 
-## Getting Started
+## How do I use it?
 
-The best way to get started is to open your web analytics [dashboard](https://app.posthog.com/web) and start taking a look at the data available.
+Consider PostHog as an example. We have:
 
-- Filtering
-- Working with time intervals
+- a marketing website (`posthog.com`)
+- an application (`app.posthog.com`)
+- a blog (`posthog.com/blog`)
+- docs (`posthog.com/docs`)
 
-## Questions
+We track all of those in a single [project](/docs/settings/organizations-and-projects#projects) (it's literally called "PostHog App + Website").
 
-What questions can we answer with web analytics data?
+This gives us a single web analytics dashboard we can use for tracking traffic data.
+
+## What can I use it for?
+
+You can use web analytics to find the answers to all sorts of questions:
 
 - How many people are visiting? How many right now? How many over the last N time period?
 - What pages are they going to?
@@ -42,6 +51,12 @@ What questions can we answer with web analytics data?
 - What information about users can I see? Location? Browser?
 - Which content is popular and effective?
 
+## Getting Started
+
+- Filtering
+  - filtering for blog posts at `/blog`
+- Working with time intervals
+
 ## Concepts and terminology
 
 - Distinction between visitors and sessions
@@ -49,11 +64,6 @@ What questions can we answer with web analytics data?
 - Referrers
 - Conversions
 - Bounce rate
-
-## Example
-
-posthog the app + posthog.com the website
-filtering for blog posts
 
 ## Other features
 
