@@ -165,32 +165,30 @@ posthog.unregister('icecream pref')
 
 This will remove the Super Property and subsequent events will not include it.
 
-## Opt users out
+## Opt out of data capture
 
-PostHog JS offers a function to opt users out based on your cookie settings definition (e.g. preferences set via a cookie banner).
+You can completely opt-out users from data capture. To do this, there are two options:
 
-This is also the suggested way to prevent capturing _any data_ from the admin on the page, as well as from team members of your organization. A simple way to do this is to access the page as the admin (or any other user on your team you wish to stop capturing data on), and call `posthog.opt_out_capturing();` on the developer console. You can also add this logic in your app and call it directly after an admin/team member logs in.
-
-If you still wish to capture these events but want to create a distinction between users and team in PostHog, you should look into [Cohorts](/docs/user-guides/cohorts#differentiating-team-vs-users-traffic).
-
-With PostHog, you can:
-
-Opt a user out:
+1. Opt users out by default by setting `opt_out_capturing_by_default` to `true` in your [PostHog config](/docs/libraries/js#config).
 
 ```js-web
-posthog.opt_out_capturing()
+posthog.init('<ph_project_api_key>', {
+    opt_out_capturing_by_default: true,
+});
 ```
 
-See if a user has opted out:
+2. Opt users out on a per-person basis by calling `posthog.opt_out_capturing()`.
 
-```js-web
-posthog.has_opted_out_capturing()
-```
-
-Opt a user back in:
+Similarly, you can opt users in:
 
 ```js-web
 posthog.opt_in_capturing()
+```
+
+To check if a user is opted out:
+
+```js-web
+posthog.has_opted_out_capturing()
 ```
 
 ## Feature Flags
