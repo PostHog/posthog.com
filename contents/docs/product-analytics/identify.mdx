@@ -299,11 +299,9 @@ PostHogSDK.shared.identify("distinct_id_two",
 
 It may happen that, due to implementation issues, the same user in your product has multiple users in PostHog associated with them. In these cases, you can use `$merge_dangerously` to merge multiple PostHog users into a single user.
    
-> **⚠️ Warning:** Merging users with `merge_dangerously` is irreversible and has no safeguards! Be careful not to merge users who should not be merged together.
-> 
-> Due to the dangers, we don't recommend you merge users frequently, but rather as a one-off for recovering from implementation problems.
-
-> **⚠️ Warning:** Before using `merge_dangerously`, first check if [alias](/docs/product-analytics/identify#alias-assigning-multiple-distinct-ids-to-the-same-user) would better suit your needs.
+> **⚠️ Warnings:** 
+> 1. Merging users with `$merge_dangerously` is irreversible and has no safeguards! Be careful not to merge users who should not be merged together. Due to the dangers, we don't recommend you merge users frequently, but rather as a one-off for recovering from implementation problems.
+> 2. Before using `$merge_dangerously`, first check if [alias](/docs/product-analytics/identify#alias-assigning-multiple-distinct-ids-to-the-same-user) would better suit your needs.
 
 Merging users is done by sending a `$merge_dangerously` event:
 
