@@ -260,10 +260,17 @@ Make sure when outside of `venv` to always use `python3` instead of `python`, as
 
 You can also use [pyenv](https://github.com/pyenv/pyenv) if you wish to manage multiple versions of Python 3 on the same machine.
 
+`uv` is a very fast tool you can use for make python virtual env and dependency management. See [https://docs.astral.sh/uv/](https://docs.astral.sh/uv/). Once installed you can prefix any `pip` command with `uv` to get the speed boost.
+
 1. Create the virtual environment in current directory called 'env':
 
     ```bash
     python3.11 -m venv env
+    ```
+    or
+
+    ```base
+    uv venv --python 3.11
     ```
 
 1. Activate the virtual environment:
@@ -296,15 +303,7 @@ You can also use [pyenv](https://github.com/pyenv/pyenv) if you wish to manage m
     These will be used when installing `grpcio` and `psycopg2`. After doing this once, and assuming nothing changed with these two packages, next time simply run:
 
     ```bash
-    pip install -r requirements.txt
-    ```
-
-    If on an x86 platform, simply run the latter version.
-
-1. Install dev requirements
-
-    ```bash
-    pip install -r requirements-dev.txt
+    pip install -r requirements.txt -r requirements-dev.txt
     ```
 
 #### 5. Prepare databases
