@@ -1,6 +1,6 @@
 ---
 title: How much does Google Analytics actually cost?
-date: 2024-11-28
+date: 2024-12-03
 author:
  - ian-vanagas
 rootpage: /blog
