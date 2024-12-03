@@ -2706,7 +2706,7 @@ export const docsMenu = {
             description: 'Collect, enrich, and send data to your destinations.',
             children: [
                 {
-                    name: 'Data pipeline integrations',
+                    name: 'Data pipelines integrations',
                 },
                 {
                     name: 'Overview',
