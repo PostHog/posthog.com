@@ -1,5 +1,5 @@
 ---
-title: "Data pipeline: CDP integrations"
+title: "Data pipelines: CDP integrations"
 showTitle: true
 ---
 

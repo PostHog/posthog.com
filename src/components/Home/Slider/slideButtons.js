@@ -36,7 +36,7 @@ export const slideButtons = [
         placeholderIcon: 'IconMessage',
     },
     {
-        title: 'Data pipeline',
+        title: 'Data pipelines',
         // lottieSrc: '/lotties/product-icons/data-pipeline.lottie',
         color: 'sky-blue',
         placeholderIcon: 'IconPlug',
