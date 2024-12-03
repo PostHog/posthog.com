@@ -269,7 +269,7 @@ You can also use [pyenv](https://github.com/pyenv/pyenv) if you wish to manage m
     ```
     or
 
-    ```base
+    ```bash
     uv venv env --python 3.11
     ```
 
