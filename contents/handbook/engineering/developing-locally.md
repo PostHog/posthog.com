@@ -196,7 +196,7 @@ On Linux you often have separate packages: `postgres` for the tools, `postgres-s
 
 2. Install the latest Node.js 18 (the version used by PostHog in production) with `nvm install 18`. You can start using it in the current shell with `nvm use 18`.
 
-3. Install pnpm with `npm install -g pnpm`.
+3. Install pnpm with `corepack enable` and check it with `pnpm --version`.
 
 4. Install Node packages by running `pnpm i`.
 
