@@ -67,7 +67,7 @@ All businesses have costs, and as big as Google is, this is still true for them.
 
 From what I can gather, when you start hitting the limits of GA4, you get an invite into the secret club that is Google Analytics 360 (GA360). This is Google's enterprise version of analytics.
 
-![A lot of money](https://res.cloudinary.com/dmukukwp6/image/upload/image_ec753abf75.png)
+![GA360 target customers meme](https://res.cloudinary.com/dmukukwp6/image/upload/image_ec753abf75.png)
 
 How much GA360 costs is a bit of a mystery, Google doesn't list it anywhere officially. This is because it is provided by resellers AKA "sales partners." These are organizations and consultants that help Google sell GA360 licenses and provide related services like dedicated support, implementation, optimization, and analysis. Two examples give an idea of pricing:
 
