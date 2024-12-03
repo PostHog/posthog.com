@@ -13,8 +13,8 @@ For integrating PostHog into a [Nuxt.js](https://nuxt.com/) app, see our [Nuxt g
 
 To follow this guide along, you need:
 
-1. a PostHog account (either [Cloud](/docs/getting-started/cloud) or [self-hosted](/docs/self-host))
-2. a running Vue.js application
+1. A PostHog account (either [Cloud](/docs/getting-started/cloud) or [self-hosted](/docs/self-host))
+2. A running Vue.js application
 
 ## Setting up PostHog
 
@@ -28,11 +28,12 @@ npm install --save posthog-js
 
 ### Initializing PostHog
 
-We will cover three different methods for initializing PostHog:
+We cover four different methods for initializing PostHog:
 
 1. [Plugins](#method-1-create-a-plugin)
 2. [Provide/inject](#method-2-use-provide--inject)
 3. [Vue.prototype](#method-3-use-vueprototype)
+4. [Composition API](#method-4-use-the-composition-api)
 
 Choose what is best for you, considering your Vue version and your codebase’s stylistic choices.
 

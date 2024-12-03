@@ -13,7 +13,7 @@ import IOSInstall from "../../integrate/_snippets/install-ios.mdx"
 Add `config.sessionReplay = true` to your PostHog configuration alongside any of your other configuration options:
 
 ```swift
-let config = PostHogConfig(apiKey: apiKey)
+let config = PostHogConfig(apiKey: "<ph_project_api_key>")
 // Enable session recording. Requires enabling in your project settings as well.
 // Default is false.
 config.sessionReplay = true
@@ -24,6 +24,11 @@ config.sessionReplayConfig.maskAllTextInputs = true
 
 // Whether images are masked. Default is true.
 config.sessionReplayConfig.maskAllImages = true
+
+// Enable masking of all sandboxed system views
+// These may include UIImagePickerController, PHPickerViewController and CNContactPickerViewController
+// Default is true.
+config.sessionReplayConfig.maskAllSandboxedViews = true
 
 // Whether network requests are captured in recordings. Default is true
 // Only metric-like data like speed, size, and response code are captured. 

@@ -35,7 +35,7 @@ Autocapture can also capture non-event data like session duration, mouse movemen
 
 Although autocapture is a great way to get started, it can be limiting for more advanced event tracking. This is for three reasons:
 
-1. **Lack of signal**. Since autocapture captures everything, it can be difficult to know what events matter, especially for high-traffic sites and apps. You need to have an idea of what you care about and then use filters, [actions](/docs/data/actions), and [insights](/docs/product-analytics/insights) to focus on it. The web analytics dashboard does this well.
+1. **Lack of signal**. Since autocapture captures everything, it can be difficult to know what events matter, especially for high-traffic sites and apps. You need to have an idea of what you care about and then use filters, [actions](/docs/data/actions), and [insights](/docs/product-analytics/insights) to focus on it. The [web analytics dashboard](/docs/web-analytics/dashboard) does this well.
 
 2. **Frontend only**. Autocapture only works on the frontend. This enables you to capture events from your website or app, but not your server.
 

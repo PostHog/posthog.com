@@ -367,7 +367,7 @@ export const sourceNodes: GatsbyNode['sourceNodes'] = async ({ actions, createCo
                     handle: item.node.handle,
                 }))
                 .sort((a: MetaobjectsCollection, b: MetaobjectsCollection) =>
-                    a.handle === 'all-products' ? -1 : b.handle === 'all-products' ? 1 : 0
+                    a.handle === 'frontpage' ? -1 : b.handle === 'frontpage' ? 1 : 0
                 )
 
         collections.forEach((collection, i) => {
@@ -395,11 +395,12 @@ export const sourceNodes: GatsbyNode['sourceNodes'] = async ({ actions, createCo
             },
             body: JSON.stringify({
                 query: ` {
-            collectionByHandle(handle: "all-products") {
+            collectionByHandle(handle: "frontpage") {
               handle
               products(first: 250) {
                 nodes {
                   description
+                  descriptionHtml
                   featuredMedia {
                     preview {
                       image {

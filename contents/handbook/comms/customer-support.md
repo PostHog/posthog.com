@@ -4,9 +4,7 @@ sidebar: Handbook
 showTitle: true
 ---
 
-## We aim to delight
-
-You can build a good company by focusing on getting lots of customers. To build a great company, you must delight your existing customers. This means that the journey doesn't simply end once we sign up a user - even more important is to ensure that PostHog is consistently delivering value for them.
+You can build a good company by focusing on getting lots of customers. To build a *great* company, you must delight your existing customers. This means that the journey doesn't simply end once we sign up a user - even more important is to ensure that PostHog is consistently delivering value for them.
 
 ## How we ensure amazing customer support
 
@@ -29,6 +27,51 @@ Sometimes people reach out to us with support issues on Twitter/X. Regardless of
 Your objective should be to get the conversation into Zendesk ASAP, because it's easier to help the person there and to avoid setting a precedent that complaining visibly on social media results in an expedited response. An exception to this rule is if you are engaging with someone who has provided general feedback about PostHog - feel free to use your personal account if someone has a feature request or similar. If a user engage in a way which causes you _any_ distress, you can skip all of the above and just highlight it in Slack for CS to deal with. 
 
 > Sometimes users ask about the progress of [certain issues](https://github.com/PostHog/posthog) that are important to them on GitHub. We don't consider GitHub to be a proper 'support' channel, but it is a useful place to gauge the popularity of feature requests or the prevalence of issues. 
+
+We send out CSAT surveys after a ticket has been closed for at least 3 days using [this Automation](https://posthoghelp.zendesk.com/admin/objects-rules/rules/automations/22328357692571). The emails contain a link to https://survey.posthog.com/ with their `distinct_id`, `ticketId`, and the assigned team as query parameters, which are being used alongside their satisfaction rating to capture a `survey sent` event. The code for the survey website is in the [PostHog-csat](https://github.com/PostHog/posthog-csat) repo and the responses can be viewed in [this dashboard](https://us.posthog.com/project/2/dashboard/130687).
+
+### Support is done by actual engineers
+
+All support at PostHog is done by actual, full-time engineers. We have two types of engineers: 
+
+- Support engineers, who are focused solely on support across multiple products and sit in [the Comms team](/teams/comms)
+- Product engineers, who are focused on products and take on support responsibilities in a [support hero rotation](/handbook/engineering/support-hero)
+
+#### What do Support Engineers do?
+
+Right now, support engineers provide the first level of support for the following products:
+
+- Product analytics
+- Web analytics
+- Session replay
+- Feature success
+- Comms
+- Data warehouse
+- Customer Success
+
+Support engineers respond to and solve as many tickets as they can for these products, or escalate tickets to the appropriate product engineer if needed. For all other products, the engineers on those teams are directly responsible for support. The support runbook is maintained on the [Support Hero page](/handbook/engineering/support-hero). 
+
+When we hire new support engineers they will usually spend the first few weeks focused just on product and web analytics tickets, until they've started to build more familiarity with the platform as a whole. Afterwards, they join the Support Zero rotation. 
+
+#### What do Support Heroes do?
+
+One person on each product team takes on the **[Support Hero](/handbook/engineering/support-hero)** role each week. This is a rotating responsibility, where the person involved spends a significant chunk of their time responding to support queries across Slack, email and Zendesk, and sharing that feedback with the team and/or building features and fixes in response. We find each stint as Support Hero throws up a lot of really valuable feedback.
+
+## Support isn't just about tickets
+
+Supporting our customers isn't just about solving tickets, and we don't judge the success of support engineers solely by how many tickets solve. Instead, we free up support engineers to spend at least one day a week as a _Support Zero_, when they can work on other tasks which help users. These tasks can include working on their quarterly goals, analyzing team performance, building new support features, tasks from our Big Ideas list, or whatever else they think will help us move faster. 
+
+The current rotation for Support Zero is: 
+
+**Monday:** Nobody 
+**Tuesday:** Steven <TeamMember name="Steven Shults" photo />
+**Wednesday:** Abigail <TeamMember name="Abigail Richardson" photo />
+**Thursday:** Ben Lea <TeamMember name="Ben Lea" photo />
+**Friday:** Ben Haynes <TeamMember name="Ben Haynes" photo />
+
+We may occasionally pause this rotation if we have a big initiative that needs more attention from one person, or if we need to focus on clearing a backlog of tickets. When you are Support Zero you should continue working on tickets that you're currently assigned to (or escalate/reassign as needed) but shouldn't take on new tickets unless you want to. 
+
+## Response targets, SLAs, and CSAT surveys
 
 ### Response Targets
 
@@ -84,35 +127,35 @@ When support engineers need to escalate issues to other engineering teams for de
 
 ### CSAT Surveys
 
-We send out CSAT surveys after a ticket has been closed for at least 3 days using [this Automation](https://posthoghelp.zendesk.com/admin/objects-rules/rules/automations/22328357692571). The emails contain a link to https://survey.posthog.com/ with their `distinct_id`, `ticketId`, and the assigned team as query parameters, which are being used alongside their satisfaction rating to capture a `survey sent` event. The code for the survey website is in the [PostHog-csat](https://github.com/PostHog/posthog-csat) repo and the responses can be viewed in [this dashboard](https://us.posthog.com/project/2/dashboard/130687).
+We send out CSAT surveys after a ticket has been closed for at least 3 days using [this Automation](https://posthoghelp.zendesk.com/admin/objects-rules/rules/automations/22328357692571). The emails contain a link to https://survey.posthog.com/ with their `distinct_id`, `ticketId`, and the assigned team as query parameters, which are being used alongside their satisfaction rating to capture a `survey sent` event. The code for the survey website is in the [PostHog-csat](https://github.com/PostHog/posthog-csat) repo and the responses can be viewed in [this dashboard](https://us.posthog.com/project/2/dashboard/130687). 
 
-### Support Engineers
+As an incentive, we offer to feed one hedgehog for every survey sent. <TeamMember name="Ben Haynes" photo /> is the current holder of the hedgehog feeding rights, and takes care of this by making a monthly donation to [the Herts Wildlife Trust](https://www.hertswildlifetrust.org.uk/).
 
-We hire Support Engineers once a product reaches a significant level of scale and/or product-market fit. This is a subjective judgement. Right now, support engineers sit in [the Comms team](/teams/customer-comms) and cover: 
+## Guidelines for doing support at PostHog
 
-- Product analytics
-- Web analytics
-- Session replay
-- Feature success
-- Comms
-- Data warehouse
-- Customer Success
+### Dealing with difficult or abusive users 
 
-Support engineers respond to as many tickets as they can for these products, and escalate other tickets to the appropriate teams as needed. For all other products, the engineers on those teams are directly responsible for support. The support runbook is maintained on the [Support Hero page](/handbook/engineering/support-hero). 
+We very occasionally receive messages from people who are abusive, or who we suspect may have a mental illness. These can come via the app, or [Community Questions](/questions). We do not expect support engineers to deal with abuse of any kind, ever. 
 
-When we hire new support engineers they will usually spend the first few weeks focused just on product and web analytics tickets, until they've started to build more familiarity with the platform as a whole. 
+If this happens, notify <TeamMember name="Charles Cook" photo />, <TeamMember name="Joe Martin"/> or <TeamMember name="Fraser Hopper" photo />. They will either take this on, or advise you on how to reply.
 
-### Engineers are Support Heroes
+### Dealing with legal requests from users
 
-The direct interaction between our engineering team and our users is _hugely_ valuable, and an important part of building trust in our community is the ability for users to talk directly with the people who are actually building the product.
+We very rarely receive messages from people wishing to make a legal claim against PostHog, such as cease and desist letters. These can come via the app, or [Community Questions](/questions). Do not respond to these requests. Instead, notify <TeamMember name="Charles Cook" photo /> or <TeamMember name="Fraser Hopper" photo /> immediately. They will either take this on, or advise you on how to reply.
 
-Providing support across most products is a responsibility shared across our engineering teams - we expect everyone to jump in and help a user if you see they have a question or problem. Once you have made the initial contact or response, it is your responsibility to see it through or explicitly hand over to someone else if they are better-equipped to help.
+### Users asking for demos, consultations or partnerships
 
-One person on each product team takes on the **[Support Hero](/handbook/engineering/support-hero)** role each week. This is a rotating responsibility, where the person involved spends a significant chunk of their time responding to support queries across Slack, email and Zendesk, and sharing that feedback with the team and/or building features and fixes in response. We have found that each stint as Support Hero has thrown up a lot of really valuable feedback.
+We often receive requests for demos, consultations or other sales-related requests. Most of the time these can be escalated to the [Sales team](/handbook/growth/sales/overview) if they arrive via Zendesk. If they arrive directly via email you can forward them to sales@posthog.com.
 
-### Difficult support requests 
+We also often get requests for partnerships, backlinks, or messages trying to sell us baby Yahama pianos. Sometimes, people want to invest in PostHog. Most of these are obviously spam and can be ignored, but if you think an opportunity may be genuine then you can forward it to <TeamMember name="Joe Martin" photo /> so he can take over. 
 
-We very occasionally receive messages from people either wishing to make a legal claim or who you suspect may have a mental illness, either via the app or [Community Questions](/questions). If this happens, notify <TeamMember name="Charles Cook" photo /> or <TeamMember name="Fraser Hopper" photo /> in the first instance. They will either take this on, or advise you on how to reply.
+### Users asking for their data to be deleted
+
+Most of the time users can self-serve deletion requests and should be encouraged to do so in order to save time and ensure they take responsibility for deleting their own data. Users can delete their [environment](https://us.posthog.com/settings/environment-danger-zone), [project](https://us.posthog.com/settings/project-danger-zone), and [organization](https://us.posthog.com/settings/organization-danger-zone) in the appropriate 'Danger Zone' section of their settings page if they have the correct permissions. Admins can remove members from their organization in [the Members page](https://us.posthog.com/settings/organization-members).
+
+If a user refuses to delete their own data, you must first confirm they have the permissions to do this by checking their email address matches that  an organization admin. As an extra layer of security, you should also ask them to confirm their address by emailing you directly from it (e.g. not through Zendesk.) Only then should you delete any data on their behalf. 
+
+If a user asks for us to delete all of their _personal_ data in compliance with GDPR, you should confirm their identity as described above and delete the user from PostHog. Finally, you should notify <TeamMember name="Joe Martin" photo /> so he can delete customer data from our email marketing systems, and <TeamMember name="Fraser Hopper" photo /> so he can coordinate further data deletion across our systems.
 
 ## Community
 

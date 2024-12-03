@@ -34,7 +34,7 @@ You'll also need access to the relevant Google Cloud, Google Ads and Google Ads 
 ![Location of the Google Ads Customer ID](https://res.cloudinary.com/dmukukwp6/image/upload/2024_10_31_at_15_15_51_a7a003008c.png)
 
 9. Create a conversion action inside Google Ads
-   1. Under [Goals > Conversions > Summary](https://ads.google.com/aw/conversions), ou'll need to create a conversion goal
+   1. Under [Goals > Conversions > Summary](https://ads.google.com/aw/conversions), you'll need to create a conversion goal
    2. Click **New conversion action**
    3. Select **Website**
    4. Enter your domain and scan your website

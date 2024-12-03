@@ -501,6 +501,10 @@ export const handbookSidebar = [
                 name: 'Revenue and forecasting',
                 url: '/handbook/engineering/revenue-and-forecasting',
             },
+            {
+                name: 'Activation & product intents',
+                url: '/handbook/growth/growth-engineering/product-intents',
+            },
         ],
     },
     {
@@ -526,6 +530,10 @@ export const handbookSidebar = [
                     {
                         name: 'Content',
                         url: '/handbook/growth/marketing/content',
+                    },
+                    {
+                        name: 'Docs',
+                        url: '/handbook/company/docs',
                     },
                     {
                         name: 'Newsletter',
@@ -762,13 +770,9 @@ export const handbookSidebar = [
         ],
     },
     {
-        name: 'Website & Docs',
+        name: 'Website & Vibes',
         url: '',
         children: [
-            {
-                name: 'Updating docs',
-                url: '/handbook/company/docs',
-            },
             {
                 name: 'Community',
                 url: '',
@@ -1073,8 +1077,8 @@ export const companyMenu = {
                     name: 'Not engineering',
                 },
                 {
-                    name: 'Customer Comms',
-                    url: '/teams/customer-comms',
+                    name: 'Comms',
+                    url: '/teams/comms',
                 },
                 {
                     name: 'Exec',
@@ -1797,46 +1801,6 @@ export const docsMenu = {
                             url: '/docs/api/persons',
                         },
                         {
-                            name: 'Destinations',
-                            url: '/docs/api/pipeline-destinations',
-                        },
-                        {
-                            name: 'Destination configs',
-                            url: '/docs/api/pipeline-destination-configs',
-                        },
-                        {
-                            name: 'Frontend apps',
-                            url: '/docs/api/pipeline-frontend-apps',
-                        },
-                        {
-                            name: 'Frontend apps configs',
-                            url: '/docs/api/pipeline-frontend-apps-configs',
-                        },
-                        {
-                            name: 'Import apps',
-                            url: '/docs/api/pipeline-import-apps',
-                        },
-                        {
-                            name: 'Import apps configs',
-                            url: '/docs/api/pipeline-import-apps-configs',
-                        },
-                        {
-                            name: 'Transformations',
-                            url: '/docs/api/pipeline-transformations',
-                        },
-                        {
-                            name: 'Transformation configs',
-                            url: '/docs/api/pipeline-transformation-configs',
-                        },
-                        {
-                            name: 'Plugins',
-                            url: '/docs/api/plugins',
-                        },
-                        {
-                            name: 'Plugin configs',
-                            url: '/docs/api/plugin-configs',
-                        },
-                        {
                             name: 'Projects',
                             url: '/docs/api/projects',
                         },
@@ -1891,6 +1855,11 @@ export const docsMenu = {
                     name: 'Hog',
                     url: '/docs/hog',
                     icon: 'IconCode',
+                },
+                {
+                    name: 'Alerts',
+                    url: '/docs/alerts',
+                    icon: 'IconBell',
                 },
                 {
                     name: 'Resources',
@@ -2585,6 +2554,10 @@ export const docsMenu = {
                     icon: 'IconApp',
                     color: 'seagreen',
                     featured: true,
+                    badge: {
+                        title: 'Beta',
+                        className: 'uppercase !bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',
+                    },
                 },
                 {
                     name: 'Adding your code',
@@ -2647,6 +2620,12 @@ export const docsMenu = {
                     url: '/docs/experiments/running-experiments-without-feature-flags',
                     icon: 'IconFlag',
                     color: 'yellow',
+                },
+                {
+                    name: 'Holdouts',
+                    url: '/docs/experiments/holdouts',
+                    icon: 'IconPeople',
+                    color: 'orange',
                 },
             ],
         },
@@ -2731,13 +2710,88 @@ export const docsMenu = {
             description: 'Collect, enrich, and send data to your destinations.',
             children: [
                 {
-                    name: 'Customer data platform',
+                    name: 'Data pipelines integrations',
                 },
                 {
                     name: 'Overview',
                     url: '/docs/cdp',
                     icon: 'IconHome',
                     color: 'seagreen',
+                },
+                {
+                    name: 'Sources',
+                    url: '/docs/cdp/sources',
+                    icon: 'IconBook',
+                    color: 'blue',
+                    featured: true,
+                    children: [
+                        {
+                            name: 'Overview',
+                            url: '/docs/cdp/sources/',
+                        },
+                        {
+                            name: 'Managed',
+                        },
+                        {
+                            name: 'Stripe',
+                            url: '/docs/cdp/sources/stripe',
+                        },
+                        {
+                            name: 'Hubspot',
+                            url: '/docs/cdp/sources/hubspot',
+                        },
+                        {
+                            name: 'Zendesk',
+                            url: '/docs/cdp/sources/zendesk',
+                        },
+                        {
+                            name: 'Postgres',
+                            url: '/docs/cdp/sources/postgres',
+                        },
+                        {
+                            name: 'Salesforce',
+                            url: '/docs/cdp/sources/salesforce',
+                        },
+                        {
+                            name: 'MySQL',
+                            url: '/docs/cdp/sources/mysql',
+                        },
+                        {
+                            name: 'Azure SQL Server',
+                            url: '/docs/cdp/sources/azure-db',
+                        },
+                        {
+                            name: 'Snowflake',
+                            url: '/docs/cdp/sources/snowflake',
+                        },
+                        {
+                            name: 'Vitally',
+                            url: '/docs/cdp/sources/vitally',
+                        },
+                        {
+                            name: 'Chargebee',
+                            url: '/docs/cdp/sources/chargebee',
+                        },
+                        {
+                            name: 'Self-managed',
+                        },
+                        {
+                            name: 'S3',
+                            url: '/docs/cdp/sources/s3',
+                        },
+                        {
+                            name: 'Azure Blob',
+                            url: '/docs/cdp/sources/azure-blob',
+                        },
+                        {
+                            name: 'Cloudflare R2',
+                            url: '/docs/cdp/sources/r2',
+                        },
+                        {
+                            name: 'Google Cloud Storage',
+                            url: '/docs/cdp/sources/gcs',
+                        },
+                    ],
                 },
                 {
                     name: 'Realtime destinations',
@@ -2753,6 +2807,10 @@ export const docsMenu = {
                         {
                             name: 'Overview',
                             url: '/docs/cdp/destinations',
+                        },
+                        {
+                            name: 'Customization',
+                            url: '/docs/cdp/destinations/customizing-destinations',
                         },
                         {
                             name: 'Destinations',
@@ -2832,6 +2890,10 @@ export const docsMenu = {
                         {
                             name: 'Mailjet',
                             url: '/docs/cdp/destinations/mailjet',
+                        },
+                        {
+                            name: 'Make',
+                            url: '/docs/cdp/destinations/make',
                         },
                         {
                             name: 'RudderStack',
@@ -2961,81 +3023,6 @@ export const docsMenu = {
                     url: '/docs/data-warehouse',
                     icon: 'IconHome',
                     color: 'seagreen',
-                },
-                {
-                    name: 'Link a source',
-                    url: '/docs/data-warehouse/setup',
-                    icon: 'IconBook',
-                    color: 'blue',
-                    featured: true,
-                    children: [
-                        {
-                            name: 'Overview',
-                            url: '/docs/data-warehouse/setup',
-                        },
-                        {
-                            name: 'Managed',
-                        },
-                        {
-                            name: 'Stripe',
-                            url: '/docs/data-warehouse/setup/stripe',
-                        },
-                        {
-                            name: 'Hubspot',
-                            url: '/docs/data-warehouse/setup/hubspot',
-                        },
-                        {
-                            name: 'Zendesk',
-                            url: '/docs/data-warehouse/setup/zendesk',
-                        },
-                        {
-                            name: 'Postgres',
-                            url: '/docs/data-warehouse/setup/postgres',
-                        },
-                        {
-                            name: 'Salesforce',
-                            url: '/docs/data-warehouse/setup/salesforce',
-                        },
-                        {
-                            name: 'MySQL',
-                            url: '/docs/data-warehouse/setup/mysql',
-                        },
-                        {
-                            name: 'Azure SQL Server',
-                            url: '/docs/data-warehouse/setup/azure-db',
-                        },
-                        {
-                            name: 'Snowflake',
-                            url: '/docs/data-warehouse/setup/snowflake',
-                        },
-                        {
-                            name: 'Vitally',
-                            url: '/docs/data-warehouse/setup/vitally',
-                        },
-                        {
-                            name: 'Chargebee',
-                            url: '/docs/data-warehouse/setup/chargebee',
-                        },
-                        {
-                            name: 'Self-managed',
-                        },
-                        {
-                            name: 'S3',
-                            url: '/docs/data-warehouse/setup/s3',
-                        },
-                        {
-                            name: 'Azure Blob',
-                            url: '/docs/data-warehouse/setup/azure-blob',
-                        },
-                        {
-                            name: 'Cloudflare R2',
-                            url: '/docs/data-warehouse/setup/r2',
-                        },
-                        {
-                            name: 'Google Cloud Storage',
-                            url: '/docs/data-warehouse/setup/gcs',
-                        },
-                    ],
                 },
                 {
                     name: 'Creating insights from sources',

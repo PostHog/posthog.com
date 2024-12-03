@@ -16,8 +16,12 @@ We actively seek (outbound) input in everything we work on. In addition to havin
 
 Ways to invite users for an interview:
 - [PostHog Surveys](https://app.posthog.com/survey_templates). We even have a template for [user interviews](/templates/user-interview).
-- If a customer has requested a feature through slack then message them directly
-- Email customers who have subscribed to the feature on the [roadmap](/roadmap)
+   - We recommend to create a cohort first (with a static copy), and use that as a display condition.
+   - We have more and more surveys running, therefore it's best if a survey wait period is applied. We recommend 14 days.
+   - If your cohort is large (>1,000 users), it's best to not roll it out to 100%, as you might get overwhelmed by the amount of interviews in a short period of time. Start with 20-30% and increase if you need more interviews.
+   - PMs use cal.com for scheduling interviews, but you can choose a different tool as well.
+- If a customer has requested a feature through Slack, then message them directly.
+- Email customers who have subscribed to the feature on the [roadmap](/roadmap).
 
 **Scheduling**
 - Add all feedback calls to the [User interviews calendar](https://calendar.google.com/calendar/?cid=Y19tczllaWN1Ym92ZGgxYWhzNmtoY2xpNTQ3b0Bncm91cC5jYWxlbmRhci5nb29nbGUuY29t). If the invite was created from your own calendar, you can simply add "User interviews" as an invitee.
@@ -29,8 +33,8 @@ Ways to invite users for an interview:
 
 **After the call**
 1. Add the notes to the [Google Doc][feedback-doc], linking the recording if you did one.
-2. Share a short summary of the user interview in the `#posthog-feedback` Slack channel
-3. If the user reported specific bug reports or specific feature requests, open the relevant issues in GitHub. Be sure to link to their Hubspot record in case Engineering needs more context when scoping/building.
+2. Share a short summary of the user interview in the `#posthog-feedback` Slack channel.
+3. If the user reported specific bugs or requested specific features, open the relevant issues in GitHub. Be sure to link to their person profile in case our engineers needs more context when scoping/building.
 3. Generate the reward for the user (see below).
    1. Most of the time, the reward will be a gift card for the [PostHog merch store](https://merch.posthog.com/). If it's the case, create the gift card in Shopify.
 4. Follow-up with the user. Send any applicable rewards, links to any opened GitHub issues, and answers to any outstanding questions.

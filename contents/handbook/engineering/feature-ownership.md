@@ -91,3 +91,4 @@ Some of the features we are building may exist in other products already. It is 
 [Team Growth]: /teams/growth
 [Team ClickHouse]: /teams/clickhouse
 [Team CDP]: /teams/cdp
+[Team Surveys]: /teams/surveys
