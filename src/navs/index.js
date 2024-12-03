@@ -2273,6 +2273,12 @@ export const docsMenu = {
                     featured: true,
                 },
                 {
+                    name: 'Installation',
+                    url: '/docs/web-analytics/installation',
+                    icon: 'IconBook',
+                    color: 'blue',
+                },
+                {
                     name: 'Dashboard',
                     url: '/docs/web-analytics/dashboard',
                     icon: 'IconDashboard',
