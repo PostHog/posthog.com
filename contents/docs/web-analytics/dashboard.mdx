@@ -6,7 +6,7 @@ showTitle: true
 
 The web analytics dashboard provides an overview of your website's traffic. 
 
-For the selected time range, it starts with the number of visitors, views, sessions, along with trends for each, as well as average session duration and bounce rate. Each of these is compared with the previous time range, showing how much they increased or decreased.
+For the selected time range, it starts with the number of visitors, views, [sessions](/docs/data/sessions), along with trends for each, as well as average session duration and bounce rate. Each of these is compared with the previous time range, showing how much they increased or decreased.
 
 <ProductScreenshot
   imageLight = "https://res.cloudinary.com/dmukukwp6/image/upload/web_analytics_top_light_mode_2024_10_be53cf5325.png"
@@ -14,6 +14,8 @@ For the selected time range, it starts with the number of visitors, views, sessi
   alt="Web analytics dashboard" 
   classes="rounded"
 />
+
+If you add a [conversion goal](/docs/web-analytics/conversion-goals), you can see the number of conversions and conversion rate as well.
 
 ## Bounce rate
 
@@ -23,11 +25,13 @@ PostHog uses autocaptured events to calculate this. To make sure this value is a
 
 ## LCP Score
 
-LCP stands for "Largest Contentful Paint", and is a Web vitals metric that measures how long it takes for the largest content element on a page to load. To calculate the score, we take the 75th percentile of the LCP values for the first pageview of each session. A good LCP score is less than 2.5 seconds, and a poor score is more than 4 seconds.
+[Largest contentful paint (LCP)](https://web.dev/articles/lcp) is a web vital metric that measures how long it takes for the largest content element on a page to load. 
+
+To calculate the score, we take the 75th percentile of the LCP values for the first pageview of each session. A good LCP score is less than 2.5 seconds, and a poor score is more than 4 seconds.
 
 ## Paths
 
-Top paths and top entry paths drill down into specific pages on your site to show their views, visitors, bounce rate, and scroll depth. You can click on any of the paths to filter the dashboard for that path.
+Top paths drill down into specific pages on your site to show their views, visitors, bounce rate, and scroll depth. You can click on any of the paths to filter the dashboard for that path.
 
 <ProductScreenshot
   imageLight = "https://res.cloudinary.com/dmukukwp6/image/upload/v1711580005/posthog.com/contents/images/docs/web-analytics/dashboard/paths-light.png" 
@@ -36,6 +40,8 @@ Top paths and top entry paths drill down into specific pages on your site to sho
   classes="rounded"
 />
 
+Entry and end paths show these stats for the first and last pageviews of each session, while outbound clicks shows the URLs that users clicked on to leave your site.
+
 ### Scroll depth
 
 Both average scroll and deep scroll rate are calculated using how far a user has scrolled down the page and how much content has scrolled into view.
@@ -43,9 +49,9 @@ Both average scroll and deep scroll rate are calculated using how far a user has
 - **Average scroll depth** is the average scroll percentage across pageviews.
 - **Deep scroll rate** is the percentage of users who scroll far enough down a page to view 80% of the content.
 
-## Referrers, channels, UTMs
+## Channels, referrers, UTMs
 
-To get an idea of where users are visiting your site from, you can see top referrers, channels, and UTM values.
+To get an idea of where users are visiting your site from, you can see top referrers, [channels](/docs/data/channel-type), and [UTMs](/docs/data/utm-segmentation).
 
 <ProductScreenshot
   imageLight = "https://res.cloudinary.com/dmukukwp6/image/upload/v1711580002/posthog.com/contents/images/docs/web-analytics/dashboard/referrers-light.png" 
@@ -53,6 +59,8 @@ To get an idea of where users are visiting your site from, you can see top refer
   alt="Web analytics referrers" 
   classes="rounded"
 />
+
+You can dive deeper into how your sessions are attributed using the [session attribution explorer](https://us.posthog.com/web/session-attribution-explorer). This shows the session count for each combination of channel type, referrer, and UTM as well as example entry URLs and the SQL query used to generate the data.
 
 ### Channel types
 
@@ -101,7 +109,7 @@ Setting UTMs correctly is crucial for accurately classifying your traffic, not o
 
 ## World map
 
-The world map shows where your users are located, but you can also select it to show top countries, regions (like California, England, or Ontario), or cities.
+The world map shows where your users are located, but you can also select it to show top countries, regions (like California, England, or Ontario), cities, timezones, or languages.
 
 <ProductScreenshot
   imageLight = "https://res.cloudinary.com/dmukukwp6/image/upload/v1711579999/posthog.com/contents/images/docs/web-analytics/dashboard/regions-light.png" 
