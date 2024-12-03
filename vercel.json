@@ -1329,6 +1329,14 @@
         { "source": "/docs/webhooks/microsoft-teams", "destination": "/docs/cdp/destinations/webhook" },
         { "source": "/docs/webhooks/discord", "destination": "/docs/cdp/destinations/webhook" },
         { "source": "/teams/website-docs", "destination": "/teams/website-vibes" },
+        {
+            "source": "/questions/manually-merging-persons",
+            "destination": "/docs/product-analytics/identify#how-to-merge-userss"
+        },
+        {
+            "source": "/questions/automatically-merge-users",
+            "destination": "/docs/product-analytics/identify#how-to-merge-users"
+        },
         { "source": "/docs/session-replay/android", "destination": "/docs/session-replay/installation?tab=Android" },
         {
             "source": "/questions/how-to-get-current-user-identity",
