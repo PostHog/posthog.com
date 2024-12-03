@@ -551,7 +551,7 @@ function PipelinesPage({ location }) {
                         duration={1000}
                         className="cursor-pointer inline-flex items-center rounded-full bg-accent dark:bg-accent-dark px-3 py-1 text-sm border border-light dark:border-dark text-primary dark:text-primary-dark hover:text-primary dark:hover:text-primary-dark hover:border-red dark:hover:border-yellow"
                     >
-                        Explore our sources &amp; destinations library{' '}
+                        PostHog integrations library{' '}
                         <IconArrowRightDown className="inline-block w-4 text-red dark:text-yellow" />
                     </SmoothScrollLink>
                 </div>
