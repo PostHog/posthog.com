@@ -262,7 +262,7 @@ You can also use [pyenv](https://github.com/pyenv/pyenv) if you wish to manage m
 
 1. Install `uv`
 
-`uv` is a very fast tool you can use for make python virtual env and dependency management. See [https://docs.astral.sh/uv/](https://docs.astral.sh/uv/). Once installed you can prefix any `pip` command with `uv` to get the speed boost.
+`uv` is a very fast tool you can use for python virtual env and dependency management. See [https://docs.astral.sh/uv/](https://docs.astral.sh/uv/). Once installed you can prefix any `pip` command with `uv` to get the speed boost.
 
 1. Create the virtual environment in current directory called 'env':
 
