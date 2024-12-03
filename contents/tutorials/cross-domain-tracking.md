@@ -10,9 +10,9 @@ tags:
  - product analytics
 ---
 
-Using multiple domains or subdomains is a common way to split up a product. For example, a company might have a marketing website, a web app, and documentation, each with their own domain or subdomain. 
+Using multiple website domains or subdomains is a common way to split up a product. For example, a company might have a marketing website, a web app, and documentation, each with their own subdomain. 
 
-We recommend using the same PostHog project across your product to ensure accuracy and consistency, but this can require tracking across domains. To help with this, PostHog has both automatic and manual options for setting up cross-domain tracking, and this tutorial shows how to set them up.  
+We recommend using the same PostHog project across your product to ensure accuracy and consistency, but this can require tracking across domains and even across websites. To help with this, PostHog has both automatic cross-domain tracking and manual options for setting up cross-website tracking, and this tutorial shows how to set them up.
 
 ## Cross subdomain tracking with automatic first-party cookies
 
@@ -20,13 +20,13 @@ If you are using the [JavaScript snippet](/docs/getting-started/install?tab=snip
 
 First-party cookies ensure you get the most data possible, as third-party cookies often get blocked or removed. Similarly, you can [set up a reverse proxy to send events from your domain](/docs/integrate/proxy) so they aren’t intercepted by tracking blockers.
 
-## Passing IDs across domains
+## Cross website tracking by passing IDs across domains
 
 Tracking users across different domains, like `posthog.com` and `hogflix.com`, requires some extra work. You need to pass users' `distinct_id` and `session_id` between PostHog initializations to ensure they are connected. This not only ensures tracking is accurate and consistent, but [session replays](/docs/session-replay/installation#how-to-record-sessions-across-different-domains) and [feature flag evaluations](/docs/feature-flags/bootstrapping) work across domains too.
 
-### Getting IDs on the first domain 
+### Getting IDs on the first website 
 
-To do this, first, we need to get the `distinct_id` and `session_id` from the first domain. To do this, we can call `posthog.get_distinct_id()` and `posthog.get_session_id()` and pass them in the URL hash to the second domain.
+To do this, first, we need to get the `distinct_id` and `session_id` from the first website. To do this, we can call `posthog.get_distinct_id()` and `posthog.get_session_id()` and pass them in the URL hash to the second domain.
 
 A barebones example in React looks like this:
 
@@ -35,7 +35,7 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import { usePostHog } from 'posthog-js/react'
 
-function FirstDomain() {
+function FirstSite() {
   const posthog = usePostHog()
 
   const sessionId = posthog.get_session_id()
@@ -43,21 +43,21 @@ function FirstDomain() {
 
   return (
     <div className="card">
-      <h1>First Domain</h1>
-      <p>This is the first domain.</p>
-      <Link to={`domain2.com#session_id=${sessionId}&distinct_id=${distinctId}`}>Go to Second Domain</Link>
+      <h1>First Site</h1>
+      <p>This is the first site.</p>
+      <Link to={`domain2.com#session_id=${sessionId}&distinct_id=${distinctId}`}>Go to Second Site</Link>
     </div>
   )
 }
 
-export default FirstDomain
+export default FirstSite
 ```
 
-### Bootstrapping the IDs on the second domain
+### Bootstrapping the IDs on the second website
 
-On the second domain, we can check for the `session_id` and `distinct_id` in the URL hash and then bootstrap those values in our PostHog initialization.
+On the second website, we can check for the `session_id` and `distinct_id` in the URL hash and then bootstrap those values in our PostHog initialization.
 
-In our barebones React example, our second domain's `main.jsx` file would look like this:
+In our barebones React example, our second website's `main.jsx` file would look like this:
 
 ```js
 import { StrictMode } from 'react'
@@ -91,16 +91,16 @@ createRoot(document.getElementById('root')).render(
 
 This ensures that the `distinct_id` and `session_id` are the same on both domains.
 
-### Identifying and merging users on the second domain
+### Identifying and merging users on the second website
 
-We recommend bootstrapping the IDs if you need to track users across domains. If you can't bootstrap, for instance if you can't access the window object, you can use a combination of `identify` and `alias` to merge the users instead. This requires a stable distinct ID like a username, app user ID, or email and won't connect the session replays and feature flag evaluations between the two domains.
+We recommend bootstrapping the IDs if you need to track users across websites or domains. If you can't bootstrap, for instance if you can't access the window object, you can use a combination of `identify` and `alias` to merge the users instead. This requires a stable distinct ID like a username, app user ID, or email and won't connect the session replays and feature flag evaluations between the two sites.
 
-The setup on the first domain is the same: a link with the `distinct_id` in the URL hash (we don't use the `session_id`). 
+The setup on the first website is the same: a link with the `distinct_id` in the URL hash (we don't use the `session_id`). 
 
-On the second domain, we need to use the stable distinct ID to: 
+On the second website, we need to use the stable distinct ID to: 
 
-1. `identify` the anonymous distinct ID from the second domain
-2. `alias` the distinct ID from the first domain
+1. `identify` the anonymous distinct ID from the second website
+2. `alias` the distinct ID from the first website
 
 In our barebones React example, this looks like this:
 
@@ -141,13 +141,13 @@ function SignUpPage() {
 export default SignUpPage
 ```
 
-This connects the events from both domains to the same user. See our docs on [identifying users](/docs/product-analytics/identify) and using [alias](/docs/product-analytics/identify#alias-assigning-multiple-distinct-ids-to-the-same-user) for more details.
+This connects the events from both sites to the same user. See our docs on [identifying users](/docs/product-analytics/identify) and using [alias](/docs/product-analytics/identify#alias-assigning-multiple-distinct-ids-to-the-same-user) for more details.
 
 ## Using third-party cookies (or their equivalent)
 
-Another way is using third-party cookies (or an equivalent method) to get the data from one domain to another. **This isn’t recommended**.
+Another way is using third-party cookies (or an equivalent method) to get the data from one site to another. **This isn’t recommended**.
 
-For example, you can add an iframe from one domain and pull tracking data into another. To apply cookies when viewing an iframe on another domain, your domain needs to set cookies with the following header:
+For example, you can add an iframe from one website and pull tracking data into another. To apply cookies when viewing an iframe on another website, your website needs to set cookies with the following header:
 
 ```
 Set-Cookie: session=your_session; 
