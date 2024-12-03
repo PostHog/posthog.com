@@ -11,13 +11,20 @@ tags:
  - Guides
 ---
 
+_**TL;DR:** Google Analytics 4 is free (with limits) while its enterprise tier, Google Analytics 360, starts at $50,000 per year._
+
 Some of humanity's great mysteries: What happens after death? Where did life come from? Are aliens real? How much does [Google Analytics](/blog/google-analytics-to-posthog) actually cost? This post attempts to answer the only one that can be wrapped up in a single blog post. 
 
-Thanks to its connection with Google, early entrance into the [web analytics](/web-analytics) market, and initial price tag (free), Google Analytics has long been the most popular product in its category. According to [BuiltWith](https://trends.builtwith.com/analytics/Google-Analytics), as of November 2024, it's used by 50% of the top million sites.
+Thanks to its connection with Google, early entrance into the [web analytics](/web-analytics) market, and initial price tag (free), Google Analytics has long been the most popular product in its category. According to [BuiltWith](https://trends.builtwith.com/analytics/Google-Analytics), as of December 2024, it's used by 50% of the top million sites.
 
 ![BuiltWith graph](https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2024_11_29_at_10_42_08_d308dcfae1.png)
 
-Although Google Analytics is largely seen as a free product, this doesn't tell the full story. This post attempts to tell the rest of the story and help you figure out how much Google Analytics actually costs. 
+The confusion about the cost of Google Analytics comes from the fact that it's actually two products:
+
+1. **Google Analytics 4 (GA4):** The free version a majority of people use.
+2. **Google Analytics 360 (GA360):** The paid version built for enterprises.
+
+Although the core features of both are the same, there are differences between them, with price being the most significant. This post details these differences and helps you figure out what Google Analytics will end up costing you.
 
 ## Google Analytics 4 is free (but limited)
 
@@ -31,9 +38,7 @@ Although Google Analytics is largely seen as a free product, this doesn't tell t
 - Monetization analytics to track purchase value, LTV, and revenue metrics
 - UTM tracking and advertising analytics for marketing and Google Ads campaigns
 
-GA4 helps hundreds of thousands of entrepreneurs, marketers, developers, and analysts understand how users are using their site, how their marketing campaigns are performing, and figure out ways to make it better.
-
-One thing Google doesn't talk about is GA4's limitations. You can think of GA4 as the **free plan** of their analytics product. This means it has [limits](https://support.google.com/analytics/answer/11202874?sjid=1063875790934107320-NC) like:
+Although Google loves to talk about all of GA's features, one thing they don't talk about is GA4's limitations. You can think of GA4 as the **free plan** of their analytics product. This means it has [limits](https://support.google.com/analytics/answer/11202874?sjid=1063875790934107320-NC) like:
 
 - Up to 500,000 sessions per report before sampling
 - Data retention up to 14 months
