@@ -83,6 +83,7 @@ export const query = graphql`
                     handle
                     shopifyId
                     description
+                    descriptionHtml
                     priceRangeV2 {
                         maxVariantPrice {
                             amount
@@ -94,10 +95,14 @@ export const query = graphql`
                     status
                     imageProducts {
                         handle
-                        featuredImage {
-                            width
-                            height
-                            originalSrc
+                        featuredMedia {
+                            preview {
+                                image {
+                                    width
+                                    height
+                                    originalSrc
+                                }
+                            }
                         }
                     }
                     featuredMedia {

@@ -297,6 +297,32 @@ function RadioGroup({
 
 const inputContainerClasses = `p-4 bg-accent dark:bg-accent-dark group active:bg-light focus-within:bg-light dark:active:bg-dark dark:focus-within:bg-dark relative text-left`
 
+const Textarea = (props: InputHTMLAttributes<HTMLTextAreaElement>) => {
+    const { name, placeholder } = props
+    if (!name) return null
+    const { errors, validateField, setFieldValue } = useFormikContext()
+    const error = errors[name]
+
+    return (
+        <label className={`${inputContainerClasses} ${error ? 'pb-8' : ''}`} htmlFor={props.id}>
+            <textarea
+                rows={8}
+                onChange={(e) => setFieldValue(name, e.target.value)}
+                onBlur={() => {
+                    validateField(name)
+                }}
+                className={`bg-transparent w-full outline-none left-0 p-0 pt-3 placeholder-shown:pt-0 peer placeholder-shown:placeholder-transparent transition-all border-0 py-0 shadow-none ring-0 focus:ring-0 resize-none`}
+                {...props}
+                {...(props.type === 'number' ? { min: 0 } : {})}
+            />
+            <span className="absolute left-4 top-3 w-full peer-placeholder-shown:top-4 text-xs peer-placeholder-shown:text-base peer-placeholder-shown:opacity-50 transition-all">
+                {placeholder}
+            </span>
+            {error && <p className="text-red dark:text-yellow font-semibold m-0 text-sm absolute bottom-1">{error}</p>}
+        </label>
+    )
+}
+
 const Input = (props: InputHTMLAttributes<HTMLInputElement>) => {
     const { name, placeholder } = props
     if (!name) return null
@@ -345,9 +371,9 @@ export default function SalesforceForm({
         posthog?.identify?.(distinctId, {
             email: values.email,
         })
-        posthog?.capture?.('form submission', {
-            form_name: form.name,
-            form_data: JSON.stringify(values),
+        await fetch(`/api/contact-event`, {
+            method: 'POST',
+            body: JSON.stringify({ ...values, type, source, distinctId, formName: form.name }),
         })
         await fetch('https://hooks.zapier.com/hooks/catch/8898847/222z130/', {
             method: 'POST',
@@ -418,6 +444,16 @@ export default function SalesforceForm({
                                             name={name}
                                             placeholder={label}
                                             cols={cols || formOptions?.cols}
+                                        />
+                                    )
+
+                                if (fieldType === 'textarea')
+                                    return (
+                                        <Textarea
+                                            key={`${name}-${index}`}
+                                            name={name}
+                                            placeholder={label}
+                                            required={required}
                                         />
                                     )
 

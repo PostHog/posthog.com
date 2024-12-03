@@ -3,12 +3,9 @@ import { GatsbyNode } from 'gatsby'
 export const createSchemaCustomization: GatsbyNode['createSchemaCustomization'] = async ({ actions, schema }) => {
     const { createTypes } = actions
     createTypes(`
-	type ShopifyProduct implements Node {
-		imageProducts: [ShopifyProduct]
-	}
     type Mdx implements Node {
       frontmatter: Frontmatter
-      avatar: File @link(from: "avatar___NODE")
+      avatar: String
       teamMember: Mdx
       name: String
       childMdx: Mdx
@@ -36,7 +33,7 @@ export const createSchemaCustomization: GatsbyNode['createSchemaCustomization'] 
       description: String
     }
     type Contributors {
-      avatar: File @link(from: "avatar___NODE")
+      avatar: String
       url: String
       username: String
       teamData: TeamData
@@ -257,6 +254,9 @@ export const createSchemaCustomization: GatsbyNode['createSchemaCustomization'] 
       secure_url: String
       public_id: String
     }
+    type PostHogDestination implements Node {
+      mdx: Mdx @link(by: "frontmatter.templateId", from: "destinationId")
+    }
   `)
     createTypes([
         schema.buildObjectType({
@@ -270,13 +270,13 @@ export const createSchemaCustomization: GatsbyNode['createSchemaCustomization'] 
             },
         }),
     ])
-    if (
-        !process.env.SHOPIFY_APP_PASSWORD ||
-        !process.env.GATSBY_MYSHOPIFY_URL ||
-        !process.env.GATBSY_SHOPIFY_SALES_CHANNEL
-    ) {
-        createTypes(
-            `
+
+    createTypes(
+        `
+            type ShopifyCollection implements Node {
+              handle: String!
+              products: [ShopifyProduct!] @link(by: "shopifyId", from: "products.shopifyId")
+            }
             type ShopifySelectedOption {
               name: String!
               value: String!
@@ -302,7 +302,6 @@ export const createSchemaCustomization: GatsbyNode['createSchemaCustomization'] 
               selectedOptions: [ShopifySelectedOption!]!
             }
             type ShopifyImage {
-              localFile: File
               width: Int
               height: Int
               originalSrc: String
@@ -329,6 +328,7 @@ export const createSchemaCustomization: GatsbyNode['createSchemaCustomization'] 
               originalSrc: String
             }
             type ShopifyProduct implements Node {
+              descriptionHtml: String
               description: String!
               featuredMedia: ShopifyMedia
               handle: String!
@@ -343,9 +343,9 @@ export const createSchemaCustomization: GatsbyNode['createSchemaCustomization'] 
               options: [ShopifyProductOption!]!
               tags: [String!]!
               totalInventory: Int!
-              featuredImage: ShopifyFeaturedImage
+              featuredImage: ShopifyImage @proxy(from: "featuredMedia.preview.image")
+              imageProducts: [ShopifyProduct]
             }
           `
-        )
-    }
+    )
 }

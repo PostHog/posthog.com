@@ -100,12 +100,7 @@ export const onCreateNode: GatsbyNode['onCreateNode'] = async ({
 
     if (node.internal.type === `MarkdownRemark` || node.internal.type === 'Mdx') {
         const parent = getNode(node.parent)
-        if (
-            parent?.internal.type === 'SqueakReply' ||
-            parent?.internal.type === 'PostHogPull' ||
-            parent?.internal.type === 'PostHogIssue'
-        )
-            return
+        if (parent?.internal.type === 'PostHogPull' || parent?.internal.type === 'PostHogIssue') return
 
         const imageFields = ['featuredImage', 'thumbnail', 'logo', 'logoDark', 'icon']
         imageFields.forEach((field) => {
@@ -218,6 +213,33 @@ export const onCreateNode: GatsbyNode['onCreateNode'] = async ({
                 }
             } catch (error) {
                 console.error(`Error fetching plugin.json from ${owner}/${name}: ${error}`)
+            }
+        }
+
+        if (/^\/docs\/(apps|cdp)/.test(slug) && node?.frontmatter?.templateId) {
+            const templateId = node.frontmatter.templateId
+
+            try {
+                const res = await fetch(`https://us.posthog.com/api/public_hog_function_templates/`)
+
+                if (res.status !== 200) {
+                    throw `Got status code ${res.status}`
+                }
+
+                const body = await res.json()
+                const config = body.results.find(
+                    (template: { id: string }) => template?.id === templateId
+                ).inputs_schema
+
+                if (config) {
+                    createNodeField({
+                        node,
+                        name: `templateConfig`,
+                        value: config,
+                    })
+                }
+            } catch (error) {
+                console.error(`Error fetching input_schema for ${templateId}: ${error}`)
             }
         }
     }

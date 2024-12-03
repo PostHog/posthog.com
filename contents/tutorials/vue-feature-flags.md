@@ -198,3 +198,5 @@ To ensure you are bootstrapping PostHog with the correct flag values, we recomme
 - [How to set up analytics in Vue](/tutorials/vue-analytics)
 - [How to set up A/B tests in Vue](/tutorials/vue-ab-tests)
 - [How to set up surveys in Vue](/tutorials/vue-surveys)
+
+<NewsletterForm />

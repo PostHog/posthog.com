@@ -36,16 +36,31 @@ export function useProduct(id: string): {
 
     const [selectedOptions, setSelectedOptions] = useState<SelectedOptions | null>()
 
+    const [options, setOptions] = useState<StorefrontProductOption[]>([])
+
     useEffect(() => {
         if (!product) return
         const initialVariant = product.variants.find((v) => v.availableForSale) || product.variants[0]
+        const options: StorefrontProductOption[] = []
+        product.variants.forEach((variant) => {
+            variant.selectedOptions.forEach((option) => {
+                if (!options.find((o) => o.name === option.name)) {
+                    options.push({ id: '', name: option.name, values: [] })
+                }
+                const optionIndex = options.findIndex((o) => o.name === option.name)
+                if (!options[optionIndex].values.includes(option.value)) {
+                    options[optionIndex].values.push(option.value)
+                }
+            })
+        })
+        setOptions(options)
         setSelectedVariant(initialVariant)
         setSelectedOptions(
-            product.options.map((_, index) =>
+            options.map((_, index) =>
                 getVariantOption({
-                    name: product.options[index].name,
+                    name: options[index].name,
                     value: initialVariant.selectedOptions[index].value,
-                    options: product.options,
+                    options,
                 })
             )
         )
@@ -73,16 +88,14 @@ export function useProduct(id: string): {
                     ? getVariantOption({
                           name: option.name,
                           value,
-                          options: product?.options,
+                          options: options,
                       })
                     : opt
             })
         })
     }
 
-    const outOfStock = selectedVariant
-        ? selectedVariant?.quantityAvailable <= 0 && !selectedVariant?.currentlyNotInStock
-        : false
+    const outOfStock = (selectedVariant?.brilliantQuantity || 0) <= 0
 
     return { selectedOptions, setOptionAtIndex, selectedVariant, loading, outOfStock }
 }
@@ -151,6 +164,7 @@ function useFetchProductOptions(id: string): { product: StorefrontProduct | null
 
                 const json = (await response.json()) as StorefrontShopRequestBody
                 const responseData = getProduct(json.data)
+                await assignBrilliantQuantities(responseData.variants)
                 setProductData(responseData)
                 setLoading(false)
             } catch (err) {
@@ -173,4 +187,24 @@ function getProduct(responseData: StorefrontShopResponse): StorefrontProduct {
 
 function getVariants(variants: StorefrontProductVariantsEdges): StorefrontProductVariantNode[] {
     return variants.edges.map((e: StorefrontProductVariantEdge) => e.node)
+}
+
+async function assignBrilliantQuantities(variants: StorefrontProductVariantNode[]): Promise<void> {
+    await Promise.all(
+        variants.map((v) => {
+            return fetch(
+                `${process.env.GATSBY_SQUEAK_API_HOST}/api/brilliant/inventory/${
+                    v.id.split('gid://shopify/ProductVariant/')[1]
+                }`
+            )
+                .then((res) => res.json())
+                .then((data) => {
+                    v.brilliantQuantity = data?.quantity || 0
+                })
+                .catch((err) => {
+                    console.error('Error fetching quantity:', err)
+                    v.brilliantQuantity = 0
+                })
+        })
+    )
 }

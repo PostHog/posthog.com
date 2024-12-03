@@ -10,8 +10,8 @@ const defaultInterviewProcess: IInterviewProcess[] = [
     {
         title: 'Application',
         description:
-            'Our talent team will review your application to see how your skills and experience align with our needs.',
-        badge: '(You are here)',
+            "We're looking to see how your skills and experience align with our needs.",
+        badge: 'Our talent team will review your application',
     },
     {
         title: 'Culture interview',
@@ -23,6 +23,11 @@ const defaultInterviewProcess: IInterviewProcess[] = [
         title: 'Technical interview',
         description: `You'll meet the hiring team who will evaluate skills needed to be successful in your role. No live coding.`,
         badge: '45 minutes, varies by role',
+    },
+    {
+        title: 'Founder interview',
+        description: `You have reached the final boss. It's time to chat with James or Tim.`,
+        badge: '30 minutes',
     },
     {
         title: 'PostHog SuperDay',
@@ -50,33 +55,35 @@ const roleInterviewProcess: Record<string, IInterviewProcess[]> = {
     ],
 }
 
-export default function InterviewProcess({ role }: { role?: string }) {
+export default function InterviewProcess({ role, inApplicationProcess }: { role?: string, inApplicationProcess?: boolean }) {
     return (
         <>
-            <p>We do 2-3 short interviews, then pay you to do some real-life (or close to real-life) work.</p>
-            <ul className="list-none m-0 p-0 grid gap-y-6">
+            <ul className="list-none m-0 p-0 grid">
                 {((role && roleInterviewProcess[role.trim()]) || defaultInterviewProcess).map(
                     ({ title, description, badge }, index) => {
                         return (
                             <li
-                                className="flex items-start space-x-4 first:border first:border-b-3 first:border-light dark:first:border-dark first:pt-3 first:pb-2 first:px-3 first:-mx-3 first:rounded-md "
+                                className={`flex items-start py-3 space-x-4 relative before:absolute before:w-px before:top-0 before:bottom-0 before:left-6 before:bg-border dark:before:bg-border-dark last:before:bottom-12 ${inApplicationProcess ? 'first:bg-white dark:first:bg-accent-dark first:border first:border-b-3 first:border-light dark:first:border-dark first:pt-3 first:pb-2 first:px-3 first:-mx-3 first:rounded-md first:before:hidden' : 'first:before:top-6'}`}
                                 key={title}
                             >
-                                <div className="w-12 h-12 bg-gray-accent-light dark:bg-gray-accent-dark rounded-full flex items-center justify-center flex-shrink-0 font-semibold">
+                                <div className="w-12 h-12 bg-accent dark:bg-accent-dark border border-light dark:border-dark rounded-full flex items-center justify-center flex-shrink-0 font-semibold relative">
                                     <span>{index + 1}</span>
                                 </div>
                                 <div>
-                                    <h5 className="m-0 flex items-baseline flex-wrap">
-                                        <span className="mr-2">{title}</span>
-                                        <span className="text-sm font-normal opacity-50">{badge}</span>
+                                    <h5 className="m-0 text-[17px]">
+                                        {title}
+                                        {inApplicationProcess && index === 0 && (
+                                            <span className="text-sm opacity-70 font-normal"> (You are here)</span>
+                                        )}
                                     </h5>
-                                    <p className="m-0">{description}</p>
+                                    <strong className="text-[15px] font-semibold">{badge}</strong>
+                                    <p className="m-0 text-sm opacity-70">{description}</p>
                                 </div>
                             </li>
                         )
                     }
                 )}
-            </ul>
+            </ul >
         </>
     )
 }

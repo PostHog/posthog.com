@@ -68,7 +68,7 @@ export default function Select({
                     {placeholder && !!activeOption && (
                         <label className="text-sm opacity-60 -mb-0.5 block">{placeholder}</label>
                     )}
-                    <div className="flex items-center justify-between">
+                    <div className="flex items-center justify-between space-x-2">
                         <span>{activeOption?.label || activeOption?.value || placeholder}</span>
                         <Chevron className="w-2.5" />
                     </div>
@@ -98,13 +98,15 @@ export default function Select({
                                                 setOpen(false)
                                             }}
                                         >
-                                            {({ selected }) => (
+                                            {({ selected, active }) => (
                                                 <div
                                                     className={`${
                                                         selected
                                                             ? 'bg-gray-accent-light text-black dark:bg-gray-accent-dark dark:text-primary-dark'
+                                                            : active
+                                                            ? 'bg-gray-accent-light/60 dark:bg-gray-accent-dark/60'
                                                             : 'bg-white text-black hover:bg-gray-accent-light/30 dark:bg-gray-accent-dark-hover dark:hover:bg-gray-accent-dark/30 dark:text-primary-dark'
-                                                    } py-2 px-4 cursor-pointer transition-all`}
+                                                    } py-2 px-4 cursor-pointer transition-all text-sm`}
                                                 >
                                                     <div>{option.label || option.value}</div>
                                                     {option?.subtext && (

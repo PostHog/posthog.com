@@ -1,3 +1,4 @@
+import CloudinaryImage from 'components/CloudinaryImage'
 import React from 'react'
 import Link from 'components/Link'
 import { StaticImage } from 'gatsby-plugin-image'
@@ -219,7 +220,7 @@ const faqs = [
     {
         question: 'Do you offer a discount for non-profits?',
         children:
-            'Yes in most cases - 50% off any plan. Create your account, then email <a href="mailto:sales@posthog.com?subject=Non-profit%20discount">sales@posthog.com</a> from the same email address with some basic details on your organization. We will then apply a discount.',
+            'Yes in most cases - 25% off any plan. Create your account, then email <a href="mailto:sales@posthog.com?subject=Non-profit%20discount">sales@posthog.com</a> from the same email address with some basic details on your organization. We will then apply a discount.',
     },
     {
         question: 'Are there any minimums or annual commitments?',
@@ -707,18 +708,21 @@ const PairsWithArray = [
     {
         icon: <IconRewindPlay />,
         product: 'Session replay',
+        color: 'yellow',
         description:
             'Jump into a playlist of session recordings directly from any point in a graph, or segment of a funnel',
         url: '/session-replay',
     },
     {
         icon: <IconToggle />,
+        color: 'seagreen',
         product: 'Feature flags',
         description: 'See which feature flags were enabled for a user during a session',
         url: '/feature-flags',
     },
     {
         icon: <IconFlask />,
+        color: 'purple',
         product: 'Experiments',
         description:
             'Filter data down to users within an active experiment, whether part of a control group or a test variant',
@@ -774,10 +778,10 @@ export const ProductProductAnalytics = () => {
                 />
 
                 <div className="text-center">
-                    <StaticImage
-                        src="./images/screenshot-product-analytics.png"
+                    <CloudinaryImage
+                        src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Product/ProductAnalytics/images/screenshot-product-analytics.png"
                         alt="Screenshot of PostHog Product Analytics"
-                        className="w-full max-w-[1360px]"
+                        className="w-full max-w-[1360px]]"
                         placeholder="none"
                     />
                 </div>
@@ -847,7 +851,12 @@ export const ProductProductAnalytics = () => {
                         </p>
                     </div>
                     <div className="md:w-96">
-                        <StaticImage placeholder="none" quality={100} src="../hogs/product-analytics-hog.png" alt="" />
+                        <CloudinaryImage
+                            placeholder="none"
+                            quality={100}
+                            src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Product/hogs/product-analytics-hog.png"
+                            alt=""
+                        />
                     </div>
                 </div>
 
@@ -877,8 +886,8 @@ export const ProductProductAnalytics = () => {
                             <VsCompetitor
                                 title="Reasons a competitor may be best for you (for now...)"
                                 image={
-                                    <StaticImage
-                                        src="../../../images/products/competitors-pa.png"
+                                    <CloudinaryImage
+                                        src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/images/products/competitors-pa.png"
                                         className="max-w-[171px]"
                                     />
                                 }

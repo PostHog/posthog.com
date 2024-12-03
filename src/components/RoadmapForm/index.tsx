@@ -280,7 +280,11 @@ const SocialSharing = ({ values, setFieldValue }) => {
     const downloadImage = async () => {
         if (containerRef.current) {
             setDownloadDisabled(true)
-            const dataURL = await toJpeg(containerRef.current)
+            const dataURL = await toJpeg(containerRef.current, {
+                quality: 1,
+                canvasWidth: 1200,
+                canvasHeight: 1200,
+            })
             const link = document.createElement('a')
             link.download = `${socialValues.title}.jpeg`
             link.href = dataURL

@@ -1,0 +1,67 @@
+---
+title: How to rename events
+sidebar: Docs
+showTitle: true
+author:
+  - bijan-boustani
+date: 2024-10-28
+tags:
+  - actions
+  - events
+---
+
+**Estimated reading time:** 3 minutes ☕☕
+
+**tl;dr** Use [actions](/docs/data/actions). Start capturing events with the new name, and then create an action to group it with the existing event.
+
+---
+
+After you've started capturing events, you might decide that the original name you've given an event doesn't quite suit it. For example, you might have an event called `register_button_clicked` and you want to rename it to `signup_button_clicked`.
+
+However, it's not possible to rename events in PostHog. Instead, you should use [actions](/docs/data/actions) to group the old and new events together. This tutorial shows you how.
+
+## How to create an action
+
+Actions are a way of combining several related events into one. You can match both the old and new event name and get a smooth transition in your insights, without losing historical data.
+
+Start by clicking the **New action** button in the [actions tab](https://us.posthog.com/data-management/actions) in your PostHog dashboard. Then, select the **From event or pageview** option.
+
+<ProductScreenshot
+    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/create_first_action_light_63d4f8aa42.png"
+    imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/create_first_action_dark_bb2ec7a894.png"
+    alt="Create an action"
+    classes="rounded"
+/>
+
+Now you can take the two separate events (`register_button_clicked` and `signup_button_clicked`) and combine them. Match groups allow you to find both of those events and see them as one `Sign Up CTA Clicked` action.
+
+In **Match Group #1**, click **Other events** and select the old event name. Then click **+ Add match group** and add the new event name. Then, give your action a name and press the **Save** button.
+
+<ProductVideo
+    videoLight="https://res.cloudinary.com/dmukukwp6/video/upload/action_match_groups_light_c1aeb1f8a4.mp4"
+    videoDark="https://res.cloudinary.com/dmukukwp6/video/upload/action_match_groups_dark_a990b24407.mp4"
+    alt="Create action page with match groups"
+    classes="rounded"
+/>
+
+After saving the action, check the matching events section at the bottom of the page to verify it's matching both events.
+
+<ProductScreenshot
+    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/matching_events_light_7e62c3b84a.png"
+    imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/matching_events_dark_0061946f67.png"
+    alt="View matching events"
+    classes="rounded"
+/>
+
+## Creating insights with your action
+
+Lastly, you can create an [insight](/docs/product-analytics/insights) with an action just like you normally would. Under event name, select your new action.
+
+<ProductScreenshot
+    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/action_insight_light_2516295bc0.png"
+    imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/action_insight_dark_56d659f545.png"
+    alt="Create an insight with an action"
+    classes="rounded"
+/>
+
+<NewsletterForm />

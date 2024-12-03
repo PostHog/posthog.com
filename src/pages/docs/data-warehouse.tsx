@@ -1,3 +1,4 @@
+import CloudinaryImage from 'components/CloudinaryImage'
 import React, { useState } from 'react'
 import { StaticImage } from 'gatsby-plugin-image'
 import Layout from 'components/Layout'
@@ -26,7 +27,7 @@ export const Intro = ({ image = true }) => {
 
                 {image && (
                     <figure className="m-0 p-0">
-                        <StaticImage
+                        <CloudinaryImage
                             alt=""
                             placeholder="none"
                             quality={100}
@@ -55,7 +56,7 @@ export const Content = ({ quickLinks = false }) => {
                         title="How to set up Stripe reports"
                         description="Connect your revenue data from Stripe to PostHog"
                         Image={
-                            <StaticImage
+                            <CloudinaryImage
                                 alt=""
                                 objectPosition="right"
                                 placeholder="none"
@@ -72,7 +73,7 @@ export const Content = ({ quickLinks = false }) => {
                         title="How to set up Hubspot reports"
                         description="Connect your sales data from Hubspot to PostHog"
                         Image={
-                            <StaticImage
+                            <CloudinaryImage
                                 alt=""
                                 objectPosition="right"
                                 placeholder="none"
@@ -89,7 +90,7 @@ export const Content = ({ quickLinks = false }) => {
                         title="The power of HogQL’s sum() aggregation"
                         description="Unlock a new level of aggregation customization"
                         Image={
-                            <StaticImage
+                            <CloudinaryImage
                                 alt=""
                                 objectPosition="right"
                                 placeholder="none"

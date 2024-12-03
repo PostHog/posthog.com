@@ -3,21 +3,45 @@ import Tooltip from 'components/Tooltip'
 import { GatsbyImage, getImage } from 'gatsby-plugin-image'
 import React from 'react'
 import { IContributor } from './types'
+import { Image, Transformation } from 'cloudinary-react'
+import CloudinaryImage from 'components/CloudinaryImage'
+
+const isCloudinaryImage = (url: string): boolean => {
+    const cloudinaryUrlPattern = new RegExp(`https://res.cloudinary.com/${process.env.GATSBY_CLOUDINARY_CLOUD_NAME}/`)
+    return cloudinaryUrlPattern.test(url)
+}
+
+const getCloudinaryPublicId = (url: string): string | null => {
+    const cloudinaryUrlPattern = /https:\/\/res\.cloudinary\.com\/[^/]+\/(?:image|video)\/upload\/(?:v\d+\/)?([^/.]+)/
+    const match = url.match(cloudinaryUrlPattern)
+    return match ? match[1] : null
+}
 
 export const ContributorImageSmall = ({ image, name, className = '', imgClassName = '' }) => {
     const gatsbyImage = image && getImage(image)
+    const cloudinaryPublicId = typeof image === 'string' && isCloudinaryImage(image) && getCloudinaryPublicId(image)
     return (
         <div
             className={`w-[32px] h-[32px] relative rounded-full overflow-hidden border-2 border-tan dark:border-primary transition-all ${className}`}
         >
             {typeof image === 'string' ? (
-                <img className={`rounded-full bg-gray-accent dark:bg-gray-accent-dark ${imgClassName}`} src={image} />
+                cloudinaryPublicId ? (
+                    <Image
+                        className={`rounded-full ${imgClassName}`}
+                        publicId={cloudinaryPublicId}
+                        cloudName={process.env.GATSBY_CLOUDINARY_CLOUD_NAME}
+                    >
+                        <Transformation width="50" crop="scale" />
+                    </Image>
+                ) : (
+                    <img className={`rounded-full ${imgClassName}`} src={image} />
+                )
             ) : gatsbyImage ? (
                 <GatsbyImage
                     imgClassName={`rounded-full ${imgClassName}`}
                     image={gatsbyImage}
                     alt={name}
-                    className="bg-gray-accent dark:bg-gray-accent-dark"
+                    className=""
                 />
             ) : (
                 <svg width="38" height="38" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -50,7 +74,11 @@ export const ContributorImage = ({ image, name, compact, rounded }) => {
             }`}
         >
             {typeof image === 'string' ? (
-                <img className={compact ? 'absolute w-full h-full object-cover' : 'w-24 h-24'} src={image} />
+                <CloudinaryImage
+                    width={200}
+                    className={compact ? 'absolute w-full h-full object-cover' : 'w-24 h-24'}
+                    src={image}
+                />
             ) : gatsbyImage ? (
                 <GatsbyImage
                     image={gatsbyImage}
@@ -91,16 +119,17 @@ export const Contributor = ({
     state,
     text = false,
     role,
+    color,
     compact = false,
     roundedImage = false,
-}: IContributor & { text?: boolean; url?: string; compact?: boolean; roundedImage?: boolean }) => {
+}: IContributor & { text?: boolean; url?: string; compact?: boolean; roundedImage?: boolean; color?: string }) => {
     const Container = url ? Link : 'div'
     return (
         <Container
             {...(url ? { to: url, state } : {})}
-            className={`${
-                compact ? 'overflow-hidden' : ''
-            } flex bg-accent dark:bg-accent-dark border border-light dark:border-dark md:mx-4 rounded relative hover:-translate-y-0.5 active:translate-y-0 hover:transition-all hover:border-b-[4px] active:border-b-1 active:top-[2px] justify-between text-primary dark:text-primary-dark hover:text-primary dark:hover:text-primary-dark ${
+            className={`${compact ? 'overflow-hidden' : ''} flex bg-${color ? color : 'accent'} dark:bg-${
+                color ? color : 'accent-dark'
+            } border border-light dark:border-dark md:mx-4 rounded relative hover:-translate-y-0.5 active:translate-y-0 hover:transition-all hover:border-b-[4px] active:border-b-1 active:top-[2px] justify-between text-primary dark:text-primary-dark hover:text-primary dark:hover:text-primary-dark ${
                 roundedImage ? 'items-center' : ''
             }`}
         >

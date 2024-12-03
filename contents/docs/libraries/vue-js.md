@@ -13,8 +13,8 @@ For integrating PostHog into a [Nuxt.js](https://nuxt.com/) app, see our [Nuxt g
 
 To follow this guide along, you need:
 
-1. a PostHog account (either [Cloud](/docs/getting-started/cloud) or [self-hosted](/docs/self-host))
-2. a running Vue.js application
+1. A PostHog account (either [Cloud](/docs/getting-started/cloud) or [self-hosted](/docs/self-host))
+2. A running Vue.js application
 
 ## Setting up PostHog
 
@@ -28,11 +28,12 @@ npm install --save posthog-js
 
 ### Initializing PostHog
 
-We will cover three different methods for initializing PostHog:
+We cover four different methods for initializing PostHog:
 
 1. [Plugins](#method-1-create-a-plugin)
 2. [Provide/inject](#method-2-use-provide--inject)
 3. [Vue.prototype](#method-3-use-vueprototype)
+4. [Composition API](#method-4-use-the-composition-api)
 
 Choose what is best for you, considering your Vue version and your codebase’s stylistic choices.
 
@@ -210,6 +211,77 @@ export default {
 }
 ```
 
+### Method 4: Use the Composition API
+
+Create a new folder `composables` in your project. In that folder, create a new file `usePosthog.js` with the following initialization code:
+
+```js
+// composables/usePostHog.js
+import { provide, inject } from 'vue'
+import posthog from 'posthog-js'
+
+const PostHogSymbol = Symbol('PostHog')
+
+export function usePostHogProvider() {
+  const posthogInstance = posthog.init(
+    "<ph_project_api_key>",
+    {
+      api_host: "<ph_client_api_host>",
+      person_profiles: 'identified_only'
+    }
+  )
+
+  provide(PostHogSymbol, posthogInstance)
+
+  return posthogInstance
+}
+
+export function usePostHog() {
+  const posthogInstance = inject(PostHogSymbol)
+  if (!posthogInstance) {
+    throw new Error('PostHog has not been provided')
+  }
+  return posthogInstance
+}
+```
+
+In `App.vue`, call `usePostHogProvider()` to initialize PostHog.
+
+```js
+// ...rest of your app
+</template>
+
+<script setup>
+import { usePostHogProvider } from './composables/usePostHog'
+
+// Initialize and provide PostHog
+usePostHogProvider()
+</script>
+
+<script>
+// ...rest of your app
+```
+
+You can then use `usePostHog()` to access PostHog in any component.
+
+```js
+<template>
+  <div>
+    <button @click="trackEvent">Track Event</button>
+  </div>
+</template>
+
+<script setup>
+import { usePostHog } from '../composables/usePostHog'
+
+const posthog = usePostHog()
+
+const trackEvent = () => {
+  posthog.capture('button_clicked', { property: 'value' })
+}
+</script>
+```
+
 ## Capturing pageviews
 
 You might notice that moving between pages only captures a single pageview event. This is because PostHog only captures pageview events when a [page load](https://developer.mozilla.org/en-US/docs/Web/API/Window/load_event) is fired. Since Vue creates a single-page app, this only happens once, and the Vue router handles subsequent page changes.
@@ -268,6 +340,51 @@ export default new Router({
       posthog.capture("$pageview", {
         $current_url: to.fullPath
       });
+    });
+  }
+});
+```
+
+## Capturing pageleaves
+
+Similar to pageviews, you need to manually capture pageleaves in a Vue single-page app. 
+
+This starts by setting `capture_pageleave` to `false` in the PostHog initialization config to ensure you don’t double-capture pageleaves. 
+
+```js
+// In the file where you initialize PostHog
+posthog.init(
+      "<ph_project_api_key>",
+      {
+        api_host: "<ph_client_api_host>",
+        person_profiles: 'identified_only',
+        capture_pageview: false,
+        capture_pageleave: false
+      }
+);
+```
+
+**Vue 3.x:** 
+
+You can then use the same `router.afterEach` hook to capture pageleaves. The difference is that you need to manually set the `$current_url` and `path` properties using the `from` object.
+
+```js
+import { createApp, nextTick } from 'vue'
+import App from './App.vue'
+import router from './router'
+import posthogPlugin from '../plugins/posthog';
+
+
+const app = createApp(App);
+app.use(posthogPlugin)
+.use(router)
+.mount('#app');
+
+router.afterEach((to, from, failure) => {
+  if (!failure) {
+    nextTick(() => {
+      app.config.globalProperties.$posthog.capture('$pageleave', { $current_url: window.location.host + from.fullPath, path: from.fullPath });
+      app.config.globalProperties.$posthog.capture('$pageview', { path: to.fullPath });
     });
   }
 });

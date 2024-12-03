@@ -1,5 +1,5 @@
 ---
-title: GeoIP Enricher
+title: Enrich PostHog analytics with IP location data
 github: 'https://github.com/PostHog/posthog-plugin-geoip'
 installUrl: 'https://app.posthog.com/project/apps?name=GeoIP'
 thumbnail: >-

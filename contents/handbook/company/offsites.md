@@ -20,7 +20,7 @@ We understand organizing travel can be a challenge when you have personal/family
 > - **2023** [What we built at our sun-kissed Aruba hackathon](https://posthog.com/blog/aruba-hackathon)
 > - **2024** [What we built at our windswept Mykonos hackathon](https://posthog.com/blog/mykonos-hackathon)
 
-Once a year, the entire company will get together somewhere in the world for a week. Usually we'll all fly on Sunday, have an opening dinner, spend the week doing a mix of hard work, strategy, culture and fun activities and we then all fly back home on Friday. Our past offsites have been in Italy, Portugal and Iceland.
+Once a year, the entire company will get together somewhere in the world for a week. Usually we'll all fly on Sunday, have an opening dinner, spend the week doing a mix of hard work, strategy, culture and fun activities and we then all fly back home on Friday. Our past offsites have been in Italy, Portugal and Iceland. We try to ensure that everyone has their own bedroom.
 
 These are organized by the Ops & People team, and we budget up to $3,000 per person in total for these. 
 
@@ -39,19 +39,27 @@ We want to try to encourage small teams to get together once each year. These ar
 Some guidelines:
 
 - These are more focused on work than the all-company offsite, but it's still worth organizing a fun activity, do some sightseeing and in general spend time together.
+- Quarterly planning is a great focal point for team offsites – it's worth scheduling your meetup for the week of planning.
 - You should default to picking a city that one or more of your team members already live in, and a place that minimizes travel time/expenses for everyone else.
 - Outside of your small team, you should only invite people who actually need to attend to make the offsite a success - if it would be 'nice to have' them attend, they shouldn't be going. 
-- We'd encourage you to get an AirBnB for everyone not living in the city, as you automatically get a space you can work from and there's less organizing involved.
-- These offsites don't happen very often and involve a lot of travel, so make sure you make the most out of it by having an agenda and an idea of what you want to achieve _before_ the start of the trip. 
+- We'd encourage you to get an Airbnb for everyone not living in the city, as you automatically get a space you can work from and there's less organizing involved. If the group is large enough optimize for multiple apartments in the same building so that you have separate spaces to work / chill / take calls.
+- Specify offsite start and end times down to the hour, for clarity and efficient use of everyone's time.
+- These offsites don't happen very often and involve a lot of travel, so make sure you make the most out of it by having an agenda and an idea of what you want to achieve _before_ the start of the trip.
+- Make it very clear who is participating in each session. Sessions / activities require full participation from attendees, especially for the likes of a hackathon given it runs over multiple days. Ideally one person should be responsible for the agenda and run a kick-off at the start of the hackathon.
+- Everyone should have their own bedroom which they don't need to share.
 
 Ideas for the agenda:
 
 - A spoken README session early in the week to share "Who am I/How I work best"
-- Planning session. What does the team want to achieve in the next month/quarter/year?
+- Planning session – what does the team want to achieve in the next month/quarter/year?
 - Look at the [team page](/handbook/team-structure#small-teams) - what needs to be updated?
 - [360 degree feedback session](/handbook/people/feedback#ground-rules) - these are more effective at small team offsites
     - This can work better over a shared cooked meal or takeaway in the accommodation rather than a noisy restaurant, particularly for people who might be anxious about the format or the feedback.
-- Hackathon - try to leave 2 days for this
+- Dogfooding session – set PostHog up in a toy project from scratch, looking for pain points
+- Hackathon - try to leave 2 days for this, and most importantly avoid sessions interrupting hacking
+- Even some regular work on ongoing challenging projects - this is the best time for exchanging knowledge!
+
+> Don't run a hackathon during an onboarding offsite. Other offsites normally do have a hackathon. Participation should be _very_ strongly encouraged but not mandatory - if not everyone is taking part make sure that working spaces are available to accommodate the different styles of work. It is super important that people taking part are fully available and focused on participating. Given the offsite is an opportunity to work together there should be no teams of one. This extends beyond the formation of teams and into the hackathon itself in cases where there is team switching.
 
 Here's a real-world example: [Product Analytics team's Munich offsite agenda](https://posthog.slack.com/canvas/C07A0BQEAUB) (internal Slack link). Feel free to take inspiration – though your team's needs and wants might be quite different!
 
@@ -82,6 +90,10 @@ For offsites and onboardings in London, below is a list of hotels recommended in
 Many of our company offsites involve team members traveling abroad, and although we hope that these trips are uneventful and safe for all, in the event of an accident or medical emergency, we carry travel insurance through as well as general & auto liability policies through our partner [Embroker](https://www.embroker.com). 
 
 In the event of an emergency, please cover any related expenses (ideally on your company card) and keep receipts, and then reach out to either Charles as soon as possible. We will assist with making a claim based on our [policy binders](https://drive.google.com/drive/folders/1nMoHL_W9sW5IqAsILGzQ8Tuz0RgDRXOj?usp=share_link).
+
+### Flight delays
+
+If your travel plans are affected due to a flight delay or an airline-induced missed connection and you are forced to stay somewhere unplanned overnight, push the airline to cover the cost of your accommodations (including meals). It's not uncommon for them to initially tell you they no longer offer free hotel rooms for delays that were caused by the airline, but with a little bit of polite coaxing, they will likely give in.
 
 ## How to plan an offsite in 8 weeks - a checklist
 
@@ -173,6 +185,8 @@ Below is a rough timeline for planning your next offsite, as well as links to te
 **2 Weeks Out**
 - [ ] Review and finalize session plans/presentations
   - We recommend having the offsite lead connect with session leads to review their plans and offer feedback before finalizing them - you want to make the most out of your sync time together
+- [ ] Block your calendar and send a reminder in Slack for other team members do the same, to avoid interviews and other meetings being booked during key sessions or at times incompatible with the new timezone. The offsite calendar event needs to be marked as "busy" to prevent others from booking over it, which means changing the default for all-day events.
+- [ ] Designate someone to bring or organise some of the essential supplies you expect to need for the week. At a minimum have post-it notes (don't skimp on cheap ones that fall off the wall), sharpies, a HDMI cable and / or a Chrome Cast.
 
 **1 Week Out**
 - [ ] Final plan review 
@@ -180,6 +194,7 @@ Below is a rough timeline for planning your next offsite, as well as links to te
 - [ ] Unveil the final offsite guide to the team
 
 **1 day before**
+- [ ] Add your new timezone as a secondary timezone in Google Calendar and check the 'Ask to update my primary timezone to current location' option. **Don't** update your primary timezone to the new one, as this causes issues for interview scheduling.
 - [ ] We recommend that the offsite organizer consider arriving a day early to prep for the team's arrival
 - [ ] Shop for any miscellaneous supplies and groceries (onsite)
 - [ ] Print and organize a few paper copies of the itinerary (onsite)
@@ -189,7 +204,7 @@ Below is a rough timeline for planning your next offsite, as well as links to te
 
 **1 week after**
 - [ ] Collect post-mortem feedback from the team
-  - We generally do this as an open GitHub issue, but you can also create a Google form to facilitate this
+  - We generally do this as an [open GitHub issue](https://github.com/PostHog/company-internal/issues/new?assignees=&labels=&projects=&template=small-team-offsite-retro.md&title=%5BRETRO%5D+%7Bteam_name%7D+%7Byear%7D+%7Blocation%7D+offsite), but you can also create a Google form to facilitate this
 
 
 ## All company offsite hackathon

@@ -100,15 +100,26 @@ Additional environment variables are needed to develop the merch store:
 
 Currently, these environment variables are excluded from Vercel preview builds to disable merch store node creation and speed up build times on non-merch related PRs.
 
+### Dynamic open graph images
+
+To develop a dynamic open graph image:
+
+1. Run `yarn build` with both the `ASHBY_API_KEY` and `GITHUB_API_KEY` set.
+1. In `gatsby/onPostBuild.ts`, temporarily comment out the following:
+    ```
+    if (process.env.VERCEL_GIT_COMMIT_REF !== 'master') return
+    ```
+1. Find the generated open graph image in `public/og-images/`
+
 ## Contributing
 
 We <3 contributions big and small. In priority order (although everything is appreciated) with the most helpful first:
 
 - Ask a [question in our community](https://posthog.com/questions)
 - Submit [bug reports and give us feedback in the app](https://app.posthog.com/home#supportModal)! 
-- Vote on features or get early access to beta functionality in our [roadmap](https://posthog.com/roadmap)
+- Vote on features or get early access to beta functionality in our [roadmap](https://posthog.com/roadmap)
 - Open a PR
-    - Read [our instructions above](#quick-start) on developing PostHog.com locally
+    - Read [our instructions above](#quick-start) on developing PostHog.com locally
     - Read more [detailed instructions in our manual](https://posthog.com/handbook/engineering/posthog-com/developing-the-website)
     - For basic edits, go to the file in GitHub and click the edit button (pencil icon)
 - Open [an issue](https://github.com/PostHog/posthog.com/issues/new) or [content idea](https://github.com/PostHog/posthog.com/issues/new?assignees=andyvan-ph&labels=content&template=blog-post-idea-template.md&title=%7BContent+type%7D+-+%7Btitle%7D)

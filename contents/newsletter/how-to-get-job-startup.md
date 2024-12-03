@@ -63,7 +63,7 @@ Strong cover letters we’ve received recently included the following:
 * Style and language that reflected our company culture.
 * Examples of personal projects they’ve worked on with links.
 * Really clear info on what they’re looking for and their availability.
-* Something that made them stand out. [Marcus](/community/profiles/30211), one of our support engineers, [opened a PR](/PostHog/posthog.com/pull/4922) to add him to the team page. Others have created PRs to update our docs, or raised useful product issues. When done well, we do notice these things.
+* Something that made them stand out. [Marcus](/community/profiles/30211), one of our support engineers, [opened a PR](https://github.com/PostHog/posthog.com/pull/4922) to add him to the team page. Others have created PRs to update our docs, or raised useful product issues. When done well, we do notice these things.
 
 ![Marcus' cover letter](https://res.cloudinary.com/dmukukwp6/image/upload/marcus_2f0952c1a4.png)
 
@@ -164,6 +164,6 @@ Be honest about your availability up front – and, if you can, be available wit
 
 _Words by James Temperton, who hates LinkedIn._
 
-[^1]: Being a great human doesn’t mean being an effervescent personality – you don’t need to be the life and soul of the party. Being reliable and easy to work with is way less common than you might imagine. If you struggle getting referrals from former colleagues, be really honest about why that could be. More companies don’t have a culture of direct, honest feedback, which can obscure problems. It’s why we[ value trust and feedback](https://posthog.com/handbook/values#4-trust-and-feedback-over-process) so much.
+[^1]: Being a great human doesn’t mean being an effervescent personality – you don’t need to be the life and soul of the party. Being reliable and easy to work with is way less common than you might imagine. If you struggle getting referrals from former colleagues, be really honest about why that could be. More companies don’t have a culture of direct, honest [feedback](/newsletter/how-to-give-feedback), which can obscure problems. It’s why we[ value trust and feedback](https://posthog.com/handbook/values#4-trust-and-feedback-over-process) so much.
 
 <NewsletterForm />

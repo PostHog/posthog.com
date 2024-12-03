@@ -203,7 +203,7 @@ class MySessionReplaysApplication : Application() {
             host = POSTHOG_HOST 
         ).apply {
             sessionReplay = true
-            sessionReplayConfig.maskAllTextInputs = false // Whether all texts are masked or redacted (default is enabled)
+            sessionReplayConfig.maskAllTextInputs = false // Whether all text and text input fields are masked or redacted (default is enabled)
             sessionReplayConfig.screenshot = true
         }
         PostHogAndroid.setup(this, config)
@@ -265,3 +265,5 @@ Now, the welcome messages shows up in replays like this:
 - [How to run A/B tests in Android](/tutorials/android-ab-tests)
 - [How to set up analytics in Android](/tutorials/android-analytics)
 - [How to set up feature flags in Android](/tutorials/android-feature-flags)
+
+<NewsletterForm />

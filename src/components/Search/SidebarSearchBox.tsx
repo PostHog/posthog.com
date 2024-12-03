@@ -23,14 +23,14 @@ export const SidebarSearchBox: React.FC<SearchBoxProps> = ({ placeholder, filter
         <button
             type="button"
             onClick={() => open('sidebar', filter)}
-            className="flex items-center m-0 mb-2 w-full text-sm text-gray focus:outline-none shadow-xl border border-gray/10 border-b-gray/30 hover:border-gray/20 rounded relative active:top-[0] hover:scale-[1.01] active:scale-[1]"
+            className="flex items-center m-0 mb-2 w-full text-sm text-gray focus:outline-none border border-light dark:border-dark hover:border-black/50 dark:hover:border-white/50 rounded-md relative active:top-[.5px] hover:scale-[1.005] active:scale-[1]"
         >
             <div className="absolute left-4 z-20">
                 <Search className="w-4 h-4" />
             </div>
 
-            <div className="flex items-center justify-between pl-10 pr-2 py-2 text-left text-[15px] font-medium text-black/30 dark:text-primary-dark/30 bg-white/50 dark:bg-gray-accent-dark dark:text-white w-full z-10">
-                <span>{placeholder || 'Search...'}</span>
+            <div className="flex items-center justify-between pl-10 pr-2 py-2 text-left text-[15px] font-medium text-black/30 dark:text-primary-dark/30 bg-white/50 dark:bg-gray-accent-dark dark:text-white w-full z-10 rounded-md">
+                <span className="dark:opacity-50">{placeholder || 'Search' + (filter === "docs" ? " docs" : "") + '...'}</span>
                 {isMac !== undefined && (
                     <span className="hidden md:block">
                         {isMac ? (

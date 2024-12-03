@@ -86,3 +86,5 @@ Congratulations, you just made a new calculated event using the PostHog toolbar.
 - [How to correlate errors with product performance using Sentry](/tutorials/sentry-plugin-tutorial)
 - [The complete guide to event tracking](/tutorials/event-tracking-guide)
 - [How and why to build an AARRR pirate funnel in PostHog](/blog/aarrr-pirate-funnel)
+
+<NewsletterForm />

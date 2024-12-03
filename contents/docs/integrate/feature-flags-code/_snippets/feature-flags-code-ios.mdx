@@ -20,33 +20,59 @@ if (PostHogSDK.shared.getFeatureFlag("flag-key") as? String == "variant-key") { 
 }
 ```
 
-### Ensuring flags are loaded before usage
-
-Every time a user loads a screen, we send a request in the background to fetch the feature flags that apply to that user. We store those flags in the storage.
-
-This means that for most screens, the feature flags are available immediately – **except for the first time a user visits**.
-
-To handle this, you can use the `didReceiveFeatureFlags` notification to wait for the feature flag request to finish:
-
-```swift
-// Before SDK initialization
-NotificationCenter.default.addObserver(self, selector: #selector(receiveFeatureFlags), name: PostHogSDK.didReceiveFeatureFlags, object: nil)
-PostHogSDK.shared.setup(config)
-
-// The "receiveFeatureFlags" method will be called when the SDK receives the feature flags from the server.
-
-// And/Or manually the SDK is initialized
-PostHogSDK.shared.reloadFeatureFlags {
-    if PostHogSDK.shared.isFeatureEnabled("flag-key") {
-        // do something
-    }
-}
-```
-
 ### Reloading feature flags
 
 Feature flag values are cached. If something has changed with your user and you'd like to refetch their flag values, call:
 
 ```swift
 PostHogSDK.shared.reloadFeatureFlags()
+```
+
+### Ensuring flags are loaded before usage
+
+Every time a user opens the app, we send a request in the background to fetch the feature flags that apply to that user. We store those flags in the storage.
+
+This means that for most screens, the feature flags are available immediately – **except for the first time a user visits**.
+
+To handle this, you can use the `didReceiveFeatureFlags` notification to wait for the feature flag request to finish:
+
+```swift
+class AppDelegate: NSObject, UIApplicationDelegate {
+    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
+        // register for `didReceiveFeatureFlags` notification before SDK initialization
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(receiveFeatureFlags),
+            name: PostHogSDK.didReceiveFeatureFlags,
+            object: nil
+        )
+
+        let POSTHOG_API_KEY = "<ph_project_api_key>"
+        // usually 'https://us.i.posthog.com' or 'https://eu.i.posthog.com'
+        let POSTHOG_HOST = "https://us.i.posthog.com"
+
+        let config = PostHogConfig(apiKey: POSTHOG_API_KEY, host: POSTHOG_HOST)
+
+        PostHogSDK.shared.setup(config)
+
+        return true
+    }
+
+    // The "receiveFeatureFlags" method will be called when the SDK receives the feature flags from the server.
+    @objc func receiveFeatureFlags() {
+        print("receiveFeatureFlags called")
+    }
+}
+```
+
+Alternatively, you can use the completion block of the `reloadFeatureFlags(_:)` method. This allows you to execute logic immediately after the flags are reloaded:
+
+
+``` swift
+// Reload feature flags and check if a specific feature is enabled
+PostHogSDK.shared.reloadFeatureFlags {
+    if PostHogSDK.shared.isFeatureEnabled("flag-key") {
+        // do something
+    }
+}
 ```

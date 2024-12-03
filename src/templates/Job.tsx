@@ -113,7 +113,11 @@ export default function Job({
             parent={companyMenu}
             activeInternalMenu={companyMenu.children.find(({ name }) => name.toLowerCase() === 'careers')}
         >
-            <SEO title={`${title} - PostHog`} image={`/og-images/${slug.replace(/\//g, '')}.jpeg`} />
+            <SEO
+                title={`${title} - PostHog`}
+                image={`${process.env.GATSBY_CLOUDFRONT_OG_URL}/${slug.replace(/\//g, '')}.jpeg`}
+                imageType="absolute"
+            />
             <div className="">
                 <PostLayout
                     tableOfContents={[
@@ -172,15 +176,7 @@ export default function Job({
                                             </Link>
                                         </p>
                                         <div className="mb-6">
-                                            <CompensationCalculator
-                                                descriptions={{
-                                                    step: `We hire into the Established step by default and believe there's a place to have incremental steps to allow for more flexibility.`,
-                                                    location: `The benchmark for each role we are hiring for is based on the market rate in San Francisco.`,
-                                                    level: `We pay more experienced team members a greater amount since it is reasonable to expect this correlates with an increase in skill`,
-                                                }}
-                                                hideRole
-                                                initialJob={salaryRole}
-                                            />
+                                            <CompensationCalculator hideRole initialJob={salaryRole} />
                                         </div>
                                     </Accordion>
                                 )}
@@ -258,7 +254,11 @@ export default function Job({
                                 )}
                                 <Accordion title="Interview process" id="interview-process">
                                     <div className="mb-6">
-                                        <InterviewProcess role={title} />
+                                        <p>
+                                            We do 2-3 short interviews, then pay you to do some real-life (or close to
+                                            real-life) work.
+                                        </p>
+                                        <InterviewProcess role={title} inApplicationProcess />
                                     </div>
                                 </Accordion>
                                 <Accordion title="Apply" id="apply">

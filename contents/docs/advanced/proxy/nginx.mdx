@@ -1,0 +1,66 @@
+---
+title: Using nginx as a reverse proxy
+sidebar: Docs
+showTitle: true
+---
+
+import RegionWarning from "../_snippets/region-warning.mdx"
+import ProxyWarning from "../_snippets/proxy-usage-warning.mdx"
+
+<ProxyWarning />
+
+<RegionWarning />
+
+You can use nginx as a reverse proxy. To do this, first create a `Dockerfile` to build a nginx container:
+
+```dockerfile
+FROM nginx:alpine
+COPY nginx.conf /etc/nginx/nginx.conf
+```
+
+Next, create the `nginx.conf` file with the reverse proxy configuration. The following checks the `Referer` header to ensure the request is coming from your domain (set as `hogbook.com` in this case), then proxies the request to PostHog Cloud US. Change `us` to `eu` to proxy to our EU Cloud.
+
+```nginx.conf
+# The main context
+events {
+    worker_connections 1024;
+}
+
+http {
+    server {
+        listen 8080;  # Set the port to 8080
+
+        server_name _;  # Accept requests for any domain
+
+        # Specify DNS resolver for variables, this is Google Public DNS
+        # You should adjust this to a DNS resolver of your choice
+        resolver 8.8.8.8 8.8.4.4 [2001:4860:4860::]:8888 [2001:4860:4860::]:8844 valid=300s;
+        resolver_timeout 5s;  # Timeout for DNS resolution
+
+        # Check Referer header
+        # Change hogbook to your domain as needed to ensure requests only come from your domain
+        set $valid_referer 0;
+        if ($http_referer ~* "^https?://(localhost|([a-zA-Z0-9-]+)\.hogbook\.com)") {
+            set $valid_referer 1;
+        }
+
+        if ($valid_referer = 0) {
+            return 403;  # Return forbidden if the Referer header is invalid
+        }
+
+        location ~ ^/static/(.*)$ {
+            set $posthog_static "https://us-assets.i.posthog.com/static/";
+            # use variable to force proper DNS re-resolution, also must manually pass along path
+            proxy_pass $posthog_static$1$is_args$args;
+            proxy_set_header Host "us-assets.i.posthog.com";
+        }
+
+        location ~ ^/(.*)$ {
+            set $posthog_main "https://us.i.posthog.com/";
+            # use variable to force proper DNS re-resolution, also must manually pass along path
+            proxy_pass $posthog_main$1$is_args$args;
+            proxy_set_header Host "us.i.posthog.com";
+        }
+    }
+}
+```

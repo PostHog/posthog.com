@@ -68,8 +68,6 @@ Being an all-in-one platform has two further benefits:
 
 A BAA is available on PostHog's [Teams plan](/pricing), which also includes priority support and generous free usage limits for all tools – e.g. 1 million free analytics events every month. You can also self-host the open-source edition of PostHog, but this isn't recommended as it's provided without guarantee or support.
 
-<NewsletterForm />
-
 ### 2. Mixpanel
 
 ![Mixpanel - hipaa analytics tools](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/open-source-analytics-tools/mixpanel.png)
@@ -162,7 +160,7 @@ Freshpaint is a cloud-only product specifically designed for healthcare companie
 
 #### Overview
 
-Piwik PRO is a commercial analytics and customer data platform spun out of the open-source analytics tool, Matomo. As such, it's more a web analytics tool than other options in this list, though you can use it on mobile and web apps. Because it's based on Europe, Piwik PRO is popular among companies also seeking GDPR compliance – it has a built-in compliance manager to assist with this, too.
+Piwik PRO is a commercial analytics and customer data platform spun out of the open-source analytics tool, [Matomo](/blog/best-matomo-alternatives). As such, it's more a web analytics tool than other options in this list, though you can use it on mobile and web apps. Because it's based on Europe, Piwik PRO is popular among companies also seeking GDPR compliance – it has a built-in compliance manager to assist with this, too.
 
 #### PiwikPRO and HIPAA compliance
 
@@ -242,3 +240,5 @@ This includes medical records, laboratory results, billing information, and any 
 There's no objective correct answer here. In theory, self-hosting is preferable as it means you don't share any data with third-parties (business associates), and thus you don't need to sign a BAA.
 
 But self-hosting also presents additional risks. You're wholly liable for ensuring your analytics infrastructure is secure, which can be challenging if you don't have the internal expertise to manage this. If this is the case, it may be better to rely on a HIPAA-compliant business associate who has experience hosting analytics at scale.
+
+<NewsletterForm />

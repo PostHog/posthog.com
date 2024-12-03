@@ -136,6 +136,7 @@ const query = graphql`
                             "/docs/libraries/svelte"
                             "/docs/libraries/vue-js"
                             "/docs/libraries/webflow"
+                            "/docs/libraries/woocommerce"
                             "/docs/libraries/wordpress"
                         ]
                     }

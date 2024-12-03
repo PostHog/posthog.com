@@ -19,10 +19,11 @@ import CustomerData from './CustomerData'
 import CodeBlocks from './CodeBlocks'
 import Libraries from './Libraries'
 import OnePlatform from './OnePlatform'
-import NoHatingAllowed from './NoHatingAllowed'
+import NoHatingAllowed from './../NoHatingAllowed'
 import { RenderInClient } from 'components/RenderInClient'
 import BillboardTruck from './BillboardTruck'
 import Spinner from 'components/Spinner'
+import { HomepageCards } from '../NoHatingAllowed/data.js'
 
 const Home = () => {
     const posthog = usePostHog()
@@ -41,7 +42,7 @@ const Home = () => {
                 <AllInOne />
                 <Libraries />
                 <CodeBlocks />
-                <NoHatingAllowed />
+                <NoHatingAllowed data={HomepageCards} youllHate="PostHog" size="text-4xl lg:text-6xl" />
 
                 <RenderInClient
                     render={() => {

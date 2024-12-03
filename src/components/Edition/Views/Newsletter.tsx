@@ -15,7 +15,7 @@ export default function Newsletter() {
             <SEO title="Newsletter - PostHog" />
             <LandingPageNotice title="Newsletter" />
             <FeaturedPost {...featuredPost?.attributes} />
-            <NewsletterForm className="-mb-12" />
+            <NewsletterForm placement="blog-index" />
             <PostsGrid posts={rest} />
         </div>
     )

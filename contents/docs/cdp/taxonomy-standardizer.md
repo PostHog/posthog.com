@@ -1,5 +1,5 @@
 ---
-title: Taxonomy Standardizer
+title: Standardize event names
 installUrl: 'https://app.posthog.com/project/apps?name=Taxonomy+Plugin'
 github: 'https://github.com/PostHog/taxonomy-plugin'
 thumbnail: >-

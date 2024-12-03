@@ -6,7 +6,6 @@ author:
 tags:
   - experimentation
   - feature flags
-  - actions
 ---
 
 [A/B tests](/experiments) are a way to make sure the content of your Next.js app performs as well as possible. They compare two or more variations on their impact on a goal.
@@ -302,3 +301,5 @@ This shows your updated button text immediately on load. This method still uses 
 - [How, when, and where to run your first A/B test](/product-engineers/how-to-do-ab-testing)
 - [10 things we've learned about A/B testing for startups](/newsletter/what-we've-learned-about-ab-testing)
 - [How to set up Next.js app router analytics, feature flags, and more](/tutorials/nextjs-app-directory-analytics)
+
+<NewsletterForm />

@@ -74,8 +74,6 @@ Jams masterminded our [migration from Postgres to Clickhouse](/blog/how-we-turne
 
 > **What we learned:** Don’t just rely on job ads, especially early on. Your first users could be your best hires because they likely understand the problem you’re trying to solve. Many of our best hires have come from recommendations, communities, and serendipitous connections.
 
-<NewsletterForm />
-
 ## 4. Lottie Coxon
 
 ![Lottie](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/posthog-first-five/lottie.png)

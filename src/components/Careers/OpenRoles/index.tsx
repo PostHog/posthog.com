@@ -17,7 +17,7 @@ export const OpenRoles = () => {
                             <a href=""></a>
                         </p>
                         <p className="mt-2">
-                            We take applications seriously - you won't just end up in a candidate database. We make
+                            Applications are taken seriously - you won't just end up in a candidate database. We make
                             quick decisions, and if the timing isn’t quite right, we’ll do our best to provide insight
                             into a better time to apply.
                         </p>

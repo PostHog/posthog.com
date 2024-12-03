@@ -1,3 +1,4 @@
+import CloudinaryImage from 'components/CloudinaryImage'
 import React, { useEffect, useState } from 'react'
 import { useUser } from 'hooks/useUser'
 import usePostHog from 'hooks/usePostHog'
@@ -44,8 +45,8 @@ export const NewsletterForm = ({ className = '', placement }: NewsletterFormProp
                 flex flex-col md:flex-row md:justify-center items-center gap-4 md:gap-8 border-light dark:border-dark ${placementClasses} ${className}`}
         >
             <div className="text-center hidden md:block">
-                <StaticImage
-                    src="../../images/swole-hog.png"
+                <CloudinaryImage
+                    src="https://res.cloudinary.com/dmukukwp6/image/upload/engineer_47d6638eae.png"
                     objectFit="contain"
                     className="w-full h-full max-w-[200px] md:max-w-[250px] mx-auto flex-shrink-0"
                 />
@@ -54,8 +55,8 @@ export const NewsletterForm = ({ className = '', placement }: NewsletterFormProp
                 {!submitted ? (
                     <>
                         <div className="float-right md:hidden -mt-6 2xs:-mt-12">
-                            <StaticImage
-                                src="../../images/swole-hog.png"
+                            <CloudinaryImage
+                                src="https://res.cloudinary.com/dmukukwp6/image/upload/engineer_47d6638eae.png"
                                 objectFit="contain"
                                 className="w-full h-full max-w-[170px]"
                             />
@@ -63,7 +64,7 @@ export const NewsletterForm = ({ className = '', placement }: NewsletterFormProp
                         <p className="!text-sm opacity-50 !m-0">Subscribe to our newsletter</p>
                         <h4 className="relative !text-2xl !m-0 !leading-tight">Product for Engineers</h4>
                         <p className="!m-0 !text-sm md:!text-[15px] !leading-normal !pt-1">
-                            Helping engineers and founders flex their product muscles
+                            Read by 25,000+ founders and builders.
                         </p>
                         <div className="">
                             <form

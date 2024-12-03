@@ -20,7 +20,7 @@ export const ImgSurveyResultsDark = "https://res.cloudinary.com/dmukukwp6/image/
 export const ImgSurveyTemplatesLight = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/tutorials/angular-surveys/survey-templates-light.png"
 export const ImgSurveyTemplatesDark = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/tutorials/angular-surveys/survey-templates-dark.png"
 
-[Surveys](/docs/surveys) are a great way to get feedback from your users. In this guide, we show you how to add a survey to your Angular.js app.
+[Surveys](/docs/surveys) are a great way to get feedback from your users. In this guide, we show you how to add a survey to your Angular app.
 
 We'll create a basic Angular app, add PostHog, create a survey, and then show you how to display the survey in the app and get responses.
 
@@ -531,3 +531,5 @@ If you capture identified events, you can also filter these results based on [pe
 - [How to set up A/B tests in Angular](/tutorials/angular-ab-tests)
 - [How to set up Angular analytics, feature flags, and more](/tutorials/angular-analytics)
 - [How to analyze surveys with ChatGPT](/tutorials/analyze-surveys-with-chatgpt)
+
+<NewsletterForm />

@@ -1,4 +1,4 @@
-import { StaticImage } from 'gatsby-plugin-image'
+import CloudinaryImage from 'components/CloudinaryImage'
 import React, { useState } from 'react'
 import { FAQs } from 'components/Pricing/FAQs'
 import { Quote } from 'components/Pricing/Quote'
@@ -7,9 +7,7 @@ import { SEO } from '../seo'
 import cntl from 'cntl'
 import { animateScroll as scroll } from 'react-scroll'
 import SelfHostOverlay from 'components/Pricing/Overlays/SelfHost'
-import tractorHog from '../../../static/lotties/tractor-hog.json'
-import Lottie from 'react-lottie'
-import Plans, { CTA as PlanCTA, PricingTiers } from './Plans'
+import { CTA as PlanCTA, PricingTiers } from './Plans'
 import Link from 'components/Link'
 import CTA from 'components/Home/CTA.js'
 import { IconCheck, IconHandMoney, IconInfo, IconRocket } from '@posthog/icons'
@@ -296,6 +294,11 @@ export const allProductsData = graphql`
                         name
                         type
                         unit
+                        features {
+                            category
+                            name
+                            description
+                        }
                         plans {
                             description
                             docs_url
@@ -720,7 +723,7 @@ const plans = [
                                     placement="top"
                                 >
                                     <div className="relative size-20 top-0 hover:top-[-.3rem] hover:scale-[1.1] transition-all">
-                                        <StaticImage
+                                        <CloudinaryImage
                                             src="https://res.cloudinary.com/dmukukwp6/image/upload/v1688575173/simon_bb4af1b047.png"
                                             quality={100}
                                             alt="Simon Fisher, Customer Success"
@@ -746,7 +749,7 @@ const plans = [
                                     placement="top"
                                 >
                                     <div className="relative size-[5.5rem] -ml-7 -mr-8 -mt-2 top-0 hover:top-[-.3rem] hover:scale-[1.1] transition-all">
-                                        <StaticImage
+                                        <CloudinaryImage
                                             src="https://res.cloudinary.com/dmukukwp6/image/upload/v1685570037/cameron_bc0de38765.png"
                                             quality={100}
                                             alt="Cameron DeLeone, Customer Success"
@@ -772,7 +775,7 @@ const plans = [
                                     placement="top"
                                 >
                                     <div className="relative size-20 top-0 hover:top-[-.2rem] hover:scale-[1.075] transition-all">
-                                        <StaticImage
+                                        <CloudinaryImage
                                             src="https://res.cloudinary.com/dmukukwp6/image/upload/v1704468198/Mine_dc7d915835.png"
                                             quality={100}
                                             alt="Mine Kansu, Customer Success Manager"
@@ -1154,7 +1157,7 @@ const PricingExperiment = ({
                         href="/community/profiles/27732"
                         className="rounded-full overflow-hidden size-12 border border-border hover:border-bg-dark/30 dark:border-dark dark:hover:border-light/50 p-0.5 bg-light dark:bg-dark"
                     >
-                        <StaticImage
+                        <CloudinaryImage
                             src="https://res.cloudinary.com/dmukukwp6/image/upload/v1683655764/james_b841adce96.png"
                             quality={100}
                             alt="James Hawkins, CEO, Co-founder"
@@ -1194,11 +1197,11 @@ const PricingExperiment = ({
                     name={<span className="text-white">Cat Li</span>}
                     title={<span className="text-white">Product & Engineering Lead, Y Combinator</span>}
                     image={
-                        <StaticImage
+                        <CloudinaryImage
                             width={100}
                             height={100}
                             alt="Cat Li, Y Combinator"
-                            src="../../images/cat.jpeg"
+                            src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/images/cat.jpeg"
                             placeholder="none"
                             className="rounded-full"
                         />
@@ -1217,7 +1220,12 @@ const PricingExperiment = ({
             </section>
             <section className={`${section} mb-12 mt-16`}>
                 <div className="sm:flex-row flex-col-reverse flex items-center sm:items-start justify-center">
-                    <StaticImage src="./images/vacation-hog.png" alt="Vacation Hog" width={252} placeholder="none" />
+                    <CloudinaryImage
+                        src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Pricing/images/vacation-hog.png"
+                        alt="Vacation Hog"
+                        width={252}
+                        placeholder="none"
+                    />
                     <div className="text-center bg-[#2D2D2D] p-4 rounded-md relative sm:rotate-6 sm:-mr-8 flex-shrink-0">
                         <p className="text-white m-0 text-[18px] font-bold font-comic">
                             Looking for the signup button?

@@ -1,34 +1,32 @@
-### Q3 2024 objectives
+### Q4 2024 objectives
 
-1.  Rock-solid analytics (Thomas + Julian + Sandy + Anirudh)
-    
-    1.  Legacy Minus – removing legacy insights code so that we can move fast
-        -  FilterType gone from the frontend.
-        -  rm -rf posthog/queries/
-        -  Experiments ported to HogQL.
-        -  All the flags from HogQL/querying work.
-    2.  Tests Plus – shipping fewer bugs in the first place
-        -  Ensure we test with the feature flags that users actually experience, both in end-to-end and integration tests.
-        -  When shipping changes to queries, replay old vs. new version on thousands of real queries to check for regressions.
-    3.  Metrics Plus – catching issues before before users report
-        -  Analytics performance dashboard in Grafana (query duration, failures, etc.). Paging alerts on critical metrics, e.g. if the number of queries drops rapidly, or failures rise.
-        -  Analytics experience dashboard in PostHog (time till data available, result freshness across insights and subscriptions, refreshes initiated manually vs. automatically, etc.)
-        -  Alerts on major Product Analytics errors from Sentry, and us acting on every alert. (Bonus: checking up the Sentry routing rules for the #product-analytics team.)
-        -  Cohorts dashboard in Grafana (successful vs. failed calculations per day, recalculation backlog). Alerts here too.
-    4. Performance Plus - eliminating UX pain via maximum query performance/reliability, based on Metrics Plus data
-        - Partial calculation of multi-day time series results
-        - …and more – work with Team Query Performance to find the lowest-hanging fruit, similarly to [Tim's performance mega issue](https://github.com/PostHog/posthog/issues/22413)
-    5.  Support Plus – sparking joy for users when they’re led to report a bug
-        -  1 hero + 1 sidekick
-        -  Goal: 90% of tickets fulfill the SLA
-2.  Answering more product questions, deeper (Thomas + Julian + Sandy + Anirudh)
-    1.  Growth Plus - increasing ease of onboarding, and subsequent retention
-        - Identify growth opportunities working with Anna, our product manager – implement growth optimizations and track their impact whenever possible.
-        - Work with Team Growth on optimizing the onboarding experience of Product Analytics.
-    2. Analysis Plus - answering more product questions, more deeply
-        -  Analytics alerts are out to users (implemented with the contributor)
-        -  “Done for the first time” in Trends, to kill the janky First Time Event Plugin
-        -  Query in new insight URL for instant insight sharing
-        -  Optional funnel steps
-        - ...and more, based on user feedback - see the [most requested features in GitHub](https://github.com/PostHog/posthog/issues?q=is%3Aissue+is%3Aopen+label%3Ateam%2Fproduct-analytics+sort%3Acomments-desc)
-3.  ArtificialHog (Michael + Georgiy) – an LLM-based chat-like interface for answering product questions.
+1.  Legacy 0x - Thomas owning
+    - All insights are `query`-based
+    - `rm -rf posthog/queries/`
+    - Insight query is stored in the URL for instant sharing of unsaved insights
+
+2. First-class environments - Michael owning
+   - Environments are rolled out to everyone
+
+3. Threshold-based alerts - Anirudh owning
+    - All users get to set up alerts on PostHog metrics
+    - Alerts are launched with Marketing, and positioned into paid plans
+    - We're using alerts ourselves for key trends and funnels
+
+4. Flexible funnels - Sandy owning
+    - UDF funnels rolled out to everyone, unlocking arbitrary complexity
+    - Allowing parts of funnels to be unordered. No more separation between regular, unordered, and strict funnels
+    - Optional funnel steps
+
+5. 10x onboarding and ease of discovering features - Anirudh and Sandy owning
+    - We run an exercise in implementing PostHog in a hobby project. What stands out as painful or unclear?
+
+6.  User delight 2x - support rotation owning
+    -  Support is 1 hero + 1 sidekick
+    -  Every week support folks ship those small requested features (see [list of requests so far](https://docs.google.com/spreadsheets/d/1-lXjfzo6313Ai2vMf6smmoA0zghitBQTRD4lPgZ-XqA/edit?gid=0#gid=0))
+    -  Goal: 90% of tickets fulfill the SLA
+
+7. B2B analytics research - Anna owning
+    - Understand the market and user needs better in order to improve our current Group analytics product next quarter
+
+See [our internal Q4 planning doc](https://docs.google.com/document/d/15pATJU0rYxl5LN9LRLfzPVFmcYT1OIFl1cOQwZmnjKA/edit) for the discussion that led us here.

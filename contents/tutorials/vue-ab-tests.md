@@ -182,3 +182,5 @@ With this, you’re ready to launch your experiment!
 - [How to set up surveys in Vue](/tutorials/vue-surveys)
 - [How to set up feature flags in Vue](/tutorials/vue-feature-flags)
 - [How to set up analytics in Vue](/tutorials/vue-analytics)
+
+<NewsletterForm />
