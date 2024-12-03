@@ -1,0 +1,49 @@
+> 🚧 **NOTE:** Flutter is considered `beta` and is free while in beta. We are keen to gather as much feedback as possible so if you try this out please let us know. You can send feedback via the [in-app support panel](https://us.posthog.com#panel=support%3Afeedback%3Asession_replay%3Alow) or one of our other [support options](/docs/support-options).
+
+## Step one: Add PostHog to your app
+
+> You must setup the SDK manually by disabling the `com.posthog.posthog.AUTO_INIT` mode.
+
+import FlutterInstall from "../../integrate/_snippets/install-flutter.mdx"
+
+<FlutterInstall />
+
+> Session replay requires PostHog Flutter SDK version >= [4.7.0](https://github.com/PostHog/posthog-flutter/releases), and it's recommended to always use the latest version.
+
+## Step two: Configure replay settings
+
+Add `sessionReplay = true` to your PostHog configuration alongside any of your other configuration options:
+
+```dart
+final config = PostHogConfig('<ph_project_api_key>');
+/// Enable Recording of Session replay for Android and iOS.
+/// Requires Record user sessions to be enabled in the PostHog Project Settings.
+/// Experimental support.
+/// Defaults to false.
+config.sessionReplay = true;
+/// Enable masking of all text and text input fields.
+/// Default: true.
+config.sessionReplayConfig.maskAllTexts = false;
+/// Enable masking of all images.
+/// Default: true.
+config.sessionReplayConfig.maskAllImages = false;
+/// Debouncer delay used to reduce the number of snapshots captured and reduce performance impact.
+/// This is used for capturing the view as a screenshot.
+/// The lower the number, the more snapshots will be captured but higher the performance impact.
+/// Defaults to 1s.
+config.sessionReplayConfig.debouncerDelay = const Duration(milliseconds: 1000);
+```
+
+## Limitations
+
+- On Android, requires API >= 26.
+- On iOS, minimum deployment target is [iOS13](/docs/libraries/ios)
+- WebView is not supported. A placeholder will be shown.
+- Wireframe mode isn't supported, only screenshot mode.
+- [Network performance recording](docs/session-replay/network-recording) isn't supported yet.
+- [Privacy controls](docs/session-replay/network-recording) isn't supported yet, only via the `maskAllTexts` and `maskAllImages` options.
+
+## Troubleshooting
+
+- Run a clean build if you experience issues.
+- Update your iOS Pods.
