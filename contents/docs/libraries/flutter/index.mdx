@@ -10,7 +10,7 @@ features:
   eventCapture: true
   userIdentification: true
   autoCapture: false
-  sessionRecording: false
+  sessionRecording: true
   featureFlags: true
   groupAnalytics: true
 ---
@@ -185,9 +185,9 @@ import FlutterFeatureFlagsCode from '../../integrate/feature-flags-code/_snippet
 
 ## Session replay
 
-> **Note: ** Session replay is only supported on the [Flutter Web, Android and iOS](https://flutter.dev/multi-platform/web) environment.
+> **Note: ** Session replay is only supported on the Flutter Web, Android and iOS environments.
 
-To set up [session replay web](/docs/session-replay) or [mobile session replay](/docs/session-replay/mobile) in your project, all you need to do is install the Flutter SDK and enable "Record user sessions" in [your project settings](https://us.posthog.com/settings/project-replay) and enable the `sessionReplay` option.
+To set up [session replay web](/docs/session-replay) or [mobile session replay](/docs/session-replay/mobile) in your project, all you need to do is install the Flutter SDK, enable "Record user sessions" in [your project settings](https://us.posthog.com/settings/project-replay) and enable the `sessionReplay` option.
 
 If you're using the `canvaskit` renderer on Flutter Web, also enable the "Canvas capture" in [your project settings](https://us.posthog.com/settings/project-replay).
 
