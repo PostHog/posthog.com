@@ -1355,6 +1355,66 @@
             "source": "/teams/customer-comms",
             "destination": "/teams/comms"
         },
-        { "source": "/apps", "destination": "/cdp", "statusCode": 302 }
+        { "source": "/apps", "destination": "/cdp", "statusCode": 302 },
+        {
+            "source": "/docs/data-warehouse/setup/azure-blob",
+            "destination": "/docs/cdp/sources/azure-blob"
+        },
+        {
+            "source": "/docs/data-warehouse/setup/azure-db",
+            "destination": "/docs/cdp/sources/azure-db"
+        },
+        {
+            "source": "/docs/data-warehouse/setup/chargebee",
+            "destination": "/docs/cdp/sources/chargebee"
+        },
+        {
+            "source": "/docs/data-warehouse/setup/gcs",
+            "destination": "/docs/cdp/sources/gcs"
+        },
+        {
+            "source": "/docs/data-warehouse/setup/hubspot",
+            "destination": "/docs/cdp/sources/hubspot"
+        },
+        {
+            "source": "/docs/data-warehouse/setup/index",
+            "destination": "/docs/cdp/sources"
+        },
+        {
+            "source": "/docs/data-warehouse/setup/mysql",
+            "destination": "/docs/cdp/sources/mysql"
+        },
+        {
+            "source": "/docs/data-warehouse/setup/postgres",
+            "destination": "/docs/cdp/sources/postgres"
+        },
+        {
+            "source": "/docs/data-warehouse/setup/r2",
+            "destination": "/docs/cdp/sources/r2"
+        },
+        {
+            "source": "/docs/data-warehouse/setup/s3",
+            "destination": "/docs/cdp/sources/s3"
+        },
+        {
+            "source": "/docs/data-warehouse/setup/salesforce",
+            "destination": "/docs/cdp/sources/salesforce"
+        },
+        {
+            "source": "/docs/data-warehouse/setup/snowflake",
+            "destination": "/docs/cdp/sources/snowflake"
+        },
+        {
+            "source": "/docs/data-warehouse/setup/stripe",
+            "destination": "/docs/cdp/sources/stripe"
+        },
+        {
+            "source": "/docs/data-warehouse/setup/vitally",
+            "destination": "/docs/cdp/sources/vitally"
+        },
+        {
+            "source": "/docs/data-warehouse/setup/zendesk",
+            "destination": "/docs/cdp/sources/zendesk"
+        }
     ]
 }
