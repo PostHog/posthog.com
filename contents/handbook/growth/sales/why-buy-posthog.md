@@ -14,7 +14,7 @@ With disparate tools, it's hard to get an understanding of your users both indiv
  - After launching an experiment, click to see the session replays of users experiencing a specific variant, showing you whether your users are experiencing it as intended.
  - Create a survey tied to an experiment (via the feature flag), letting you gather qualitative feedback from users who are experiencing this new feature for the first time.
  - Attach revenue data stored in our data warehouse from Stripe to product analytics to see behaviors which drive revenue acquisition and growth.
-
+ - Use Heatmaps to identify potential dead zones on your website, roll out a no-code experiment with your conversion funnel as a goal.
 ## Consolidated pricing
 
 As we have a low price point and can help replace a number of disparate tools they may be running customers are highly likely to save versus the cost of running multiple tools in parallel:
