@@ -894,6 +894,7 @@
         { "source": "/handbook/growth/marketing/Customer-personas", "destination": "/handbook/growth/marketing" },
         { "source": "/docs/cdp/bitbucket-release-tracker", "destination": "/docs/cdp" },
         { "source": "/handbook/company/strategy", "destination": "/handbook/strategy/overview" },
+        { "source": "/handbook/company/story", "destination": "/handbook/story" },
         { "source": "/guides", "destination": "/tutorials" },
         {
             "source": "/handbook/growth/marketing/customer-personas",

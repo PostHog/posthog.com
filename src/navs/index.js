@@ -1050,6 +1050,10 @@ export const companyMenu = {
                     url: '/teams/feature-flags',
                 },
                 {
+                    name: 'Growth',
+                    url: '/teams/growth',
+                },
+                {
                     name: 'Infrastructure',
                     url: '/teams/infrastructure',
                 },
@@ -1079,10 +1083,6 @@ export const companyMenu = {
                 {
                     name: 'Exec',
                     url: '/teams/exec',
-                },
-                {
-                    name: 'Growth',
-                    url: '/teams/growth',
                 },
                 {
                     name: 'Marketing',
