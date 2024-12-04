@@ -2,13 +2,13 @@
 
 ## Step one: Add PostHog to your app
 
-> You must setup the SDK manually by disabling the `com.posthog.posthog.AUTO_INIT` mode.
-
 > Session replay requires PostHog Flutter SDK version >= [4.7.0](https://github.com/PostHog/posthog-flutter/releases), and it's recommended to always use the latest version.
 
 import FlutterInstall from "../../integrate/_snippets/install-flutter.mdx"
 
 <FlutterInstall />
+
+#### Widget and Observer setup
 
 Wrap your app with the `PostHogWidget` Widget and Install the `PosthogObserver` Observer.
 
