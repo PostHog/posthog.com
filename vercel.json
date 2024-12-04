@@ -1364,6 +1364,10 @@
             "destination": "/docs/session-replay/installation?tab=React+Native"
         },
         {
+            "source": "/docs/session-replay/flutter",
+            "destination": "/docs/session-replay/installation?tab=Flutter"
+        },
+        {
             "source": "/teams/customer-comms",
             "destination": "/teams/comms"
         },

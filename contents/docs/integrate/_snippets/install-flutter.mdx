@@ -21,6 +21,8 @@ dependencies:
 
 Then complete the set up for each platform:
 
+> For Session replay, you must setup the SDK manually by disabling the `com.posthog.posthog.AUTO_INIT` mode.
+
 #### Android setup
 
 There are 2 ways of initializing the SDK, automatically and manually.
@@ -57,6 +59,10 @@ Add your PostHog configuration to your `AndroidManifest.xml` file located in the
 And setup the SDK manually:
 
 ```dart
+import 'package:flutter/material.dart';
+
+import 'package:posthog_flutter/posthog_flutter.dart';
+
 Future<void> main() async {
     // init WidgetsFlutterBinding if not yet
     WidgetsFlutterBinding.ensureInitialized();
@@ -130,6 +136,10 @@ Add your PostHog configuration to the `Info.plist` file located in the `ios/Runn
 And setup the SDK manually:
 
 ```dart
+import 'package:flutter/material.dart';
+
+import 'package:posthog_flutter/posthog_flutter.dart';
+
 Future<void> main() async {
     // init WidgetsFlutterBinding if not yet
     WidgetsFlutterBinding.ensureInitialized();

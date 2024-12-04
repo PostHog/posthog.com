@@ -1,0 +1,14 @@
+Masking individuals [Widgets](https://docs.flutter.dev/ui/widgets) isn't supported yet.
+
+### Masking All Texts and Images
+
+```dart
+final config = PostHogConfig('<ph_project_api_key>');
+config.sessionReplay = true;
+/// Enable masking of all text and text input fields.
+/// Default: true.
+config.sessionReplayConfig.maskAllTexts = false;
+/// Enable masking of all images.
+/// Default: true.
+config.sessionReplayConfig.maskAllImages = false;
+```
