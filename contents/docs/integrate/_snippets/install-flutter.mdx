@@ -57,6 +57,10 @@ Add your PostHog configuration to your `AndroidManifest.xml` file located in the
 And setup the SDK manually:
 
 ```dart
+import 'package:flutter/material.dart';
+
+import 'package:posthog_flutter/posthog_flutter.dart';
+
 Future<void> main() async {
     // init WidgetsFlutterBinding if not yet
     WidgetsFlutterBinding.ensureInitialized();
@@ -130,6 +134,10 @@ Add your PostHog configuration to the `Info.plist` file located in the `ios/Runn
 And setup the SDK manually:
 
 ```dart
+import 'package:flutter/material.dart';
+
+import 'package:posthog_flutter/posthog_flutter.dart';
+
 Future<void> main() async {
     // init WidgetsFlutterBinding if not yet
     WidgetsFlutterBinding.ensureInitialized();
