@@ -1,208 +1,117 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
+import useJobs, { Job } from '../hooks/useJobs'
+import groupBy from 'lodash.groupby'
+import useCompanies, { Company } from 'hooks/useCompanies'
 import Layout from 'components/Layout'
-import { SEO } from 'components/seo'
-import JobList from '../components/Jobs/JobList'
-import { COMPANIES, CompanyMetadata, EngineerDecision, BooleanFilter } from '../data/companies'
+import { layoutLogic } from 'logic/layoutLogic'
+import { useValues } from 'kea'
+import { IconCheck } from '@posthog/icons'
+import Link from 'components/Link'
+import dayjs from 'dayjs'
+import relativeTime from 'dayjs/plugin/relativeTime'
 
-type Job = {
-    id: string
-    title: string
-    location: string
-    department: string
-    link: string
-    company: string
-    logo: string | null
-    updatedAt: string
-    employmentType: string
-    remote: boolean
-}
+dayjs.extend(relativeTime)
 
-type FilterState = {
-    engineerDecision: EngineerDecision | 'All'
-    remoteOnly: BooleanFilter | 'All'
-    exoticOffsites: BooleanFilter | 'All'
-    meetingFreeDays: BooleanFilter | 'All'
-    noProductRequirementDocs: BooleanFilter | 'All'
-    highEngineerRatio: BooleanFilter | 'All'
-    posthogCustomer: BooleanFilter | 'All'
-    hasDeadlines: BooleanFilter | 'All'
-}
-
-// Helper function to get company metadata with defaults
-const getCompanyValue = (
-    company: CompanyMetadata | undefined,
-    field: keyof CompanyMetadata
-): EngineerDecision | BooleanFilter => {
-    if (!company || !company[field]) return 'Unclear'
-    return company[field] as EngineerDecision | BooleanFilter
-}
-
-export default function JobsPage(): JSX.Element {
-    const [jobs, setJobs] = useState<Job[]>([])
-    const [isLoading, setIsLoading] = useState(true)
-    const [error, setError] = useState<string | null>(null)
-    const [filters, setFilters] = useState<FilterState>({
-        engineerDecision: 'All',
-        remoteOnly: 'All',
-        exoticOffsites: 'All',
-        meetingFreeDays: 'All',
-        noProductRequirementDocs: 'All',
-        highEngineerRatio: 'All',
-        posthogCustomer: 'All',
-        hasDeadlines: 'All',
-    })
-
-    useEffect(() => {
-        async function fetchJobs() {
-            try {
-                const jobPromises = COMPANIES.map((company) =>
-                    fetch(`/api/scrape?company=${company.ashbyUrl}`)
-                        .then((res) => res.json())
-                        .then((data) => {
-                            if (data.success && Array.isArray(data.jobs)) {
-                                const engineeringJobs = data.jobs
-                                    .filter((job) => {
-                                        const engineeringTerms = ['engineering', 'engineer', 'developer', 'software']
-                                        const titleLower = job.title?.toLowerCase() || ''
-                                        return engineeringTerms.some((term) => titleLower.includes(term))
-                                    })
-                                    .map((job) => ({
-                                        id: job.id || '',
-                                        title: job.title || '',
-                                        department: job.departmentName || '',
-                                        location: job.locationName || '',
-                                        link: `https://jobs.ashbyhq.com/${company.ashbyUrl}/${job.id}`,
-                                        company: company.name,
-                                        logo: job.logo || null,
-                                        updatedAt: job.updatedAt || new Date().toISOString(),
-                                        employmentType: job.employmentType || 'Full-time',
-                                        remote: job.isRemote || false,
-                                    }))
-                                return engineeringJobs
-                            }
-                            return []
-                        })
-                        .catch((error) => {
-                            console.error(`Error fetching ${company.name} jobs:`, error)
-                            return []
-                        })
-                )
-
-                const allJobs = await Promise.all(jobPromises)
-                const flattenedJobs = allJobs.flat()
-
-                if (flattenedJobs.length === 0) {
-                    setError('No engineering jobs found')
-                } else {
-                    setJobs(flattenedJobs)
-                }
-            } catch (error) {
-                console.error('Error fetching jobs:', error)
-                setError('Failed to load jobs')
-            } finally {
-                setIsLoading(false)
-            }
-        }
-
-        fetchJobs()
-    }, [])
-
-    // Filter jobs based on all selected filters
-    const filteredJobs = jobs.filter((job) => {
-        const companyData = COMPANIES.find((c) => c.name === job.company)
-
-        return (
-            (filters.engineerDecision === 'All' ||
-                getCompanyValue(companyData, 'engineersDecideWhatToBuild') === filters.engineerDecision) &&
-            (filters.remoteOnly === 'All' || getCompanyValue(companyData, 'remoteOnly') === filters.remoteOnly) &&
-            (filters.exoticOffsites === 'All' ||
-                getCompanyValue(companyData, 'exoticOffsites') === filters.exoticOffsites) &&
-            (filters.meetingFreeDays === 'All' ||
-                getCompanyValue(companyData, 'meetingFreeDays') === filters.meetingFreeDays) &&
-            (filters.noProductRequirementDocs === 'All' ||
-                getCompanyValue(companyData, 'noProductRequirementDocs') === filters.noProductRequirementDocs) &&
-            (filters.highEngineerRatio === 'All' ||
-                getCompanyValue(companyData, 'highEngineerRatio') === filters.highEngineerRatio) &&
-            (filters.posthogCustomer === 'All' ||
-                getCompanyValue(companyData, 'posthogCustomer') === filters.posthogCustomer) &&
-            (filters.hasDeadlines === 'All' || getCompanyValue(companyData, 'hasDeadlines') === filters.hasDeadlines)
-        )
-    })
-
-    const handleFilterChange = (name: keyof FilterState, value: string) => {
-        setFilters((prev) => ({
-            ...prev,
-            [name]: value as FilterState[keyof FilterState],
-        }))
-    }
-
-    const FilterSelect = ({ label, name }: { label: string; name: keyof FilterState }) => (
-        <div className="flex flex-col gap-1">
-            <label className="text-sm font-medium text-gray-800">{label}</label>
-            <div className="relative">
-                <select
-                    value={filters[name]}
-                    onChange={(e) => handleFilterChange(name, e.target.value)}
-                    className="w-full rounded-md border border-primary bg-primary/20 text-primary-dark font-semibold px-3 py-2 pr-8 shadow-sm appearance-none sm:text-sm hover:border-gray-400 focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary"
-                >
-                    <option value="All">All</option>
-                    <option value="Yes">Yes</option>
-                    <option value="No">No</option>
-                    {name === 'engineerDecision' && <option value="To some extent">To some extent</option>}
-                    <option value="Unclear">Unclear</option>
-                </select>
-                <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
-                    <svg className="h-4 w-4 fill-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
-                        <path d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" />
-                    </svg>
-                </div>
-            </div>
-        </div>
+const Perks = ({ company }: { company: Company }) => {
+    const { engineersDecideWhatToBuild, remoteOnly, exoticOffsites, meetingFreeDays, highEngineerRatio } =
+        company.attributes
+    const perks = [
+        engineersDecideWhatToBuild && 'Engineers decide what to build',
+        remoteOnly && 'Remote only',
+        exoticOffsites && 'Exotic offsites',
+        meetingFreeDays && 'Meeting-free days',
+        highEngineerRatio && 'High engineer ratio',
+    ]
+    return (
+        <ul className="list-none p-0 m-0 flex space-x-2">
+            {perks.filter(Boolean).map((perk) => (
+                <li key={`${company.id}-${perk}`} className="flex items-center space-x-1">
+                    <IconCheck className="size-4 text-green" />
+                    <span className="text-sm font-semibold">{perk}</span>
+                </li>
+            ))}
+        </ul>
     )
+}
+
+const JobList = ({ jobs }: { jobs: Job[] }) => {
+    const jobsGroupedByDepartment = groupBy(jobs, 'attributes.department')
+
+    return (
+        <ul className="list-none p-0 m-0 space-y-6 mt-4">
+            {Object.entries(jobsGroupedByDepartment).map(([department, jobs]) => (
+                <li key={department}>
+                    <h3 className="m-0 opacity-60 text-base font-normal border-b border-light dark:border-dark pb-2 mb-2">
+                        {department}
+                    </h3>
+                    <ul className="list-none p-0 m-0 space-y-2">
+                        {jobs.map((job) => (
+                            <li key={job.id} className="flex justify-between">
+                                <Link externalNoIcon className="!text-inherit underline" to={job.attributes.url}>
+                                    {job.attributes.title}
+                                </Link>
+                                <p className="m-0 opacity-60 text-sm">{dayjs(job.attributes.postedDate).fromNow()}</p>
+                            </li>
+                        ))}
+                    </ul>
+                </li>
+            ))}
+        </ul>
+    )
+}
+
+const Companies = () => {
+    const { websiteTheme } = useValues(layoutLogic)
+    const { companies, isLoading } = useCompanies()
+
+    return isLoading ? (
+        <ul className="list-none p-0 m-0 space-y-4 my-12">
+            {Array.from({ length: 10 }).map((_, index) => (
+                <div key={index} className="h-12 w-full bg-accent dark:bg-accent-dark rounded-md" />
+            ))}
+        </ul>
+    ) : (
+        <ul className="list-none p-0 m-0 space-y-12 my-12">
+            {companies.map((company) => {
+                const { name } = company.attributes
+                const logoLight = company.attributes.logoLight.data.attributes.url
+                const logoDark = company.attributes.logoDark.data.attributes.url
+                return (
+                    <li key={company.id}>
+                        <img
+                            className="max-w-40 mb-2"
+                            src={websiteTheme === 'dark' ? logoDark : logoLight}
+                            alt={name}
+                        />
+                        <Perks company={company} />
+                        <JobList jobs={company.attributes.jobs.data} />
+                    </li>
+                )
+            })}
+        </ul>
+    )
+}
+
+const Jobs = () => {
+    const { jobs, isLoading, error } = useJobs()
+    return <div>Jobs</div>
+}
+
+export default function JobsPage() {
+    const [sortBy, setSortBy] = useState<'company' | 'job'>('company')
 
     return (
         <Layout>
-            <SEO title="Engineering Jobs" />
-            <div className="max-w-screen-2xl px-5 md:px-10 mx-auto">
-                <h1 className="text-4xl mb-6">Engineering Jobs</h1>
-
-                <div className="mb-8 p-6 bg-gray-100 rounded-lg shadow-sm border border-gray-200">
-                    <h2 className="text-lg font-semibold mb-4 text-gray-900">Filters</h2>
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
-                        <FilterSelect label="Do engineers decide what to build?" name="engineerDecision" />
-                        <FilterSelect label="Remote only?" name="remoteOnly" />
-                        <FilterSelect label="Exotic offsites?" name="exoticOffsites" />
-                        <FilterSelect label="Meeting-free days each week?" name="meetingFreeDays" />
-                        <FilterSelect label="No product requirements docs?" name="noProductRequirementDocs" />
-                        <FilterSelect label="50%+ engineer ratio?" name="highEngineerRatio" />
-                        <FilterSelect label="PostHog customer?" name="posthogCustomer" />
-                        <FilterSelect label="Has deadlines?" name="hasDeadlines" />
-                    </div>
-
-                    <div className="mt-4 pt-4 border-t border-gray-200">
-                        <div className="text-sm text-gray-600">
-                            {Object.entries(filters).filter(([_, value]) => value !== 'All').length} active filters
-                        </div>
-                    </div>
-                </div>
-
-                <div className="mt-4">
-                    {isLoading ? (
-                        <p>Loading jobs...</p>
-                    ) : error ? (
-                        <p className="text-red-500">{error}</p>
-                    ) : filteredJobs.length > 0 ? (
-                        <>
-                            <p className="text-sm text-gray-600 mb-4">
-                                Showing {filteredJobs.length} of {jobs.length} jobs
-                            </p>
-                            <JobList jobs={filteredJobs} />
-                        </>
-                    ) : (
-                        <p>No jobs match your filters</p>
-                    )}
-                </div>
-            </div>
+            <section className="px-5 my-12">
+                <header>
+                    <h1 className="text-4xl font-bold m-0">Cool tech jobs</h1>
+                    <p className="m-0 mt-1">
+                        Open roles for product engineers and other jobs from companies with unique perks and great
+                        culture.
+                    </p>
+                </header>
+                {sortBy === 'company' ? <Companies /> : <Jobs />}
+            </section>
         </Layout>
     )
 }
