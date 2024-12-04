@@ -35,7 +35,7 @@ If you're [identifying](/docs/product-analytics/identify) users, they may see a 
 
 To ensure they experience consistent behavior, check that you call `identify()` before evaluating the feature flag.
 
-> *Note*: This only applies to frontend SDKs. Server-side SDKs do not need to call `identify()`.
+> **Note:** This only applies to frontend SDKs. Server-side SDKs do not need to call `identify()`.
 
 ### 3. An ad-blocker may be blocking calls
 
@@ -43,7 +43,7 @@ Check if an ad-blocker is interfering with PostHog calls. If this is the case, y
 
 ### 4. User or group properties may not have been ingested yet
 
-If your [release conditions](/docs/feature-flags/creating-feature-flags#release-conditions) depend on user or group properties, and you immediately evaluate the feature flag after updating them, the properties may not be ingested in time to calculate the correct flag value.
+If your [release conditions](/docs/feature-flags/creating-feature-flags#release-conditions) depend on user or group properties and you immediately evaluate the feature flag after updating them, the properties may not be ingested in time to calculate the correct flag value.
 
 In this case, when making your `getFeatureFlag()` call, you can [manually include these properties](/docs/feature-flags/adding-feature-flag-code?tab=Web#overriding-server-properties) in the method arguments.
 
@@ -58,6 +58,8 @@ import FAQFalseOrNoneEvents from "./snippets/faq-false-or-none-events.mdx"
 ## How can I reduce the latency of feature flag requests on my server?
 
 Evaluating feature flags requires making a request to PostHog. However, you can [evaluate feature flags locally](/docs/feature-flags/bootstrapping-and-local-evaluation#server-side-local-evaluation) instead – without having to make a request to PostHog.
+
+We are also experimenting with with client-side feature flag assignments. Check out our [fast feature flag minisite](https://posthog-fast-feature-flags.vercel.app/) to learn more.
 
 ## Why do feature flags sometimes cause my app to flicker?
 
@@ -80,10 +82,9 @@ Behavioral cohorts are [dynamic cohorts](/docs/data/cohorts#dynamic-cohorts) cre
 Behavioral cohorts are dynamic cohorts created using the options under the "behavioral" subheading.
 </Caption>
 
-Feature flags require fast evaluation and behavioral queries are relatively slow. Thus enabling these queries would significantly impact the performance of feature flags. 
+We don't support using them with feature flags because querying them is relatively slow. Feature flags require fast evaluation and these queries would significantly impact the evaluation speed of the entire service. 
 
 A workaround is to create a dynamic behavioral cohort and then duplicate it as a static cohort (using the button on the top right of the cohort page).
-
 
 <ProductScreenshot
     imageLight={DeuplicateAsStaticCohortLight} 
@@ -102,9 +103,9 @@ import FlagChargeEstimate from "./snippets/flag-charge-estimate.mdx"
 
 <FlagChargeEstimate />
 
-### I have very few `$feature_flag_called` events when I look at a flag, but my bill is still very high, why is this?
+### I have very few feature flag called events when I look at a flag, but my bill is still very high, why is this?
 
-`$feature_flag_called` events are captured whenever you call `getFeatureFlag()` or `isFeatureEnabled()`. Also, they're not sent every time and are only sent when the flag value changes for a given person. 
+`$feature_flag_called` events are captured when you call `getFeatureFlag()` or `isFeatureEnabled()`, but not sent every time and are only sent when the flag value changes for a given person. 
 
 This is different from requests made to our servers to compute flags, which is what feature flag billable requests are. Thus, generally, there will be no relation between the number of `$feature_flag_called` events and the usage you see in your billing.
 
