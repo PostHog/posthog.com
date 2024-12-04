@@ -4,21 +4,21 @@ title: Privacy controls
 
 PostHog offers a range of controls to limit what data is captured by product analytics. They are listed below in order of least to most restrictive.
 
-## Disable sensitive information with auto-capture
+## Disable sensitive information with autocapture
 
 If you're using [autocapture](/docs/product-analytics/autocapture), PostHog automatically attempts to prevent sensitive data capture. We specifically only collect the `name`, `id`, and `class` attributes from input tags.
 
-If there are specific elements you don't want to capture, add the [ph-no-capture](/docs/product-analytics/autocapture#preventing-sensitive-data-capture) class name.
+If there are specific elements you don't want to capture, add the [`ph-no-capture`](/docs/product-analytics/autocapture#preventing-sensitive-data-capture) class name.
 
 ```html
 <button class='ph-no-capture'>Sensitive information here</button>
 ```
 
-Additionally, you can also set [ignore lists](/docs/product-analytics/autocapture#reducing-events-with-an-allow-and-ignorelist) in your PostHog config to prevent specific elements from being captured.
+Additionally, you can set [allow or ignore lists](/docs/product-analytics/autocapture#reducing-events-with-an-allow-and-ignorelist) in your PostHog config to prevent specific elements from being captured.
 
 ## Use the property filter app
 
-You can use the [property filter app](/docs/cdp/property-filter#who-created-this-transformation) to prevent PostHog from certain properties on events. For example, you can configure the app to remove all GeoIP data from events.
+You can use the [property filter app](/docs/cdp/property-filter) to prevent PostHog from certain properties on events. For example, you can configure the app to remove all GeoIP data from events.
 
 We've also put together a [tutorial](/tutorials/property-filter) to help you get started with the app.
 
