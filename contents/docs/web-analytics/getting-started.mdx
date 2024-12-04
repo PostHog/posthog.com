@@ -12,13 +12,15 @@ It's easy to get up and running with [Web analytics](/web-analytics). All you ne
 
 Web analytics provides you with a single, simple [dashboard](https://app.posthog.com/web). But it can still be overwhelming if you don't have a technical background or experience with marketing concepts.
 
-This post is intended as a gentle introduction to web analytics concepts, with practical examples.
+This post provides a gentle guide to web analytics by introducing the following:
+
+- 💡 concepts: explanations for common analytics terms
+- 🛠️ features: tools and affordances web analytics provides
+- 📋 use cases: practical examples of how to use web analytics
 
 ## Where do I start?
 
-Web analytics enables you to gather insights based on how people interact with your app or website.
-
-The best way to get started is to open your web analytics [dashboard](https://app.posthog.com/web) and take a look at the data available. Then, we can dive into what the data means and how it can help you.
+The best way to get started is to open your web analytics [dashboard](https://app.posthog.com/web) and take a look at the data, which is all based on how people interact with your website. Then, we can dive into what the data means and how it can help you.
 
 <ProductScreenshot
   imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/web_analytics_top_light_mode_2024_10_be53cf5325.png"
@@ -27,69 +29,87 @@ The best way to get started is to open your web analytics [dashboard](https://ap
   classes="rounded"
 />
 
-At a glance, we can see:
+At a glance, the dashboard gives us access to the following:
 
-- Vistors: How many people are visiting?
-- Paths: What pages are they going to?
-- Channels: Where did they come from?
-- Visitor Info: What devices, browsers, and operating systems are they using?
-- Geographic information: Where are they located?
-- Retention: How many people are coming back?
-- Goals: Are people doing what you want based on your defined goals?
+- **Vistors, pageviews, and sessions:** How many people are coming to your website?
+- **Paths:** What pages are they going to?
+- **Channels:** Where did they come from?
+- **User information:** What devices, browsers, and operating systems are they using?
+- **Geographic information:** Where are they located?
+- **Retention:** How many people are coming back?
+- **Goals:** Are users performing the actions you want them to?
 
 We'll dive into all these below.
 
 ## How do I use web analytics?
 
-Consider PostHog as an example. We have:
+### Visitors, Pageviews, and Sessions
 
-- a marketing website (`posthog.com`)
-- an application (`app.posthog.com`)
-- a blog (`posthog.com/blog`)
-- docs (`posthog.com/docs`)
+The first thing you'll see at the top of the web analytics dashboard is a graph of visitor data. We have data to answer questions like these:
 
-We track all of those in a single [project](/docs/settings/organizations-and-projects#projects) (it's literally called "PostHog App + Website").
+- How many people are online _right now_?
+- How many people visited in the last week, month, or any custom time range?
 
-This gives us a single web analytics dashboard we can use for tracking traffic data.
+> **💡 Concept:** What is the distinction between a visitor and a session?
+> A [session](/docs/data/sessions) is a set of events for a single visit to your website. Sessions enable you figure out where users enter, how long they stay, and when they exit.
+> A visitor represents a single person visiting your site. And they can come back for many sessions.
 
-## What can I use it for?
+> **🛠️ Feature:** Working with time intervals.
 
-You can use web analytics to find the answers to all sorts of questions:
+_Screenshot of all the available time options_
 
-- Visitors
-  - How many people are online right now?
-  - How many people are visiting? How many right now? How many over the last N time period?
-- Paths
-  - Which content is popular and effective?
-  - What pages are they going to?
-  - What is the bounce rate?
-  - What was the last page they visited before leaving (outbound click)?
+> **📋 Use case:** If you have a weekly newsletter, you can use this data to figure out the best time to send it to your users based on active traffic. PostHog has a newsletter called [Product for Engineers](https://newsletter.posthog.com).
+Filtering by the "Last 30 days" and grouping by day, it looks like Tuesdays and Wednesdays would be the times that users are most active. Filtering by the "Last 7 days" and grouping by hour shows us the ideal timing is between 1:00 p.m. and 7:00 p.m. PST
+
+### Paths
+
+Paths show you all the specific pages that were accessed in your app or website.
+
+- What content is popular and effective?
+- What is the bounce rate for a particular page?
+- What was the last page they visited before leaving?
+
+Top paths and top entry paths drill down into specific pages on your site to show their views, visitors, bounce rate, and scroll depth. You can click on any of the paths to filter the dashboard for that path.
+
+<ProductScreenshot
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/v1711580005/posthog.com/contents/images/docs/web-analytics/dashboard/paths-light.png"
+  imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/v1711580004/posthog.com/contents/images/docs/web-analytics/dashboard/paths-dark.png"
+  alt="Web analytics dashboard"
+  classes="rounded"
+/>
+
+> **🛠️ Feature:** Filtering. Example: Filter where `Path Name` contains `"/docs"`.
+
+> **📋 Use case: PostHog hosts developer documentation at `/docs`.
+> What if we want to find the most popular docs?
+> We can click the **+ Add filter** button and filter for where `Path Name` contains `"/docs"`.
+
+_Screenshot of results_
+
+> **💡 Concept:** Bounce rate is the percentage of users who leave your page immediately after visiting. In other words, people who arrive on a given page, but don't interact and leave quickly after arriving (within 10 seconds).
+
+### Channels
+
+- Where is the traffic coming from?
+
 - Channels
-  - Where is the traffic coming from?
-- User Info
-  - What information about users can I see? Location? Browser?
-
-> **💡 Concept:** What is the distinction between visitors and sessions?
-> A visitor represents a single person. A session represents a single contiguous visit.
-
-> **⚙️ Feature:** Filtering
-
-> **⚙️ Feature:** Working with time intervals
-
-## Concepts and terminology
-
-- Distinction between visitors and sessions
-- Pageviews
 - Referrers
-- Conversions
-- Bounce rate
+- UTM sources
 
-## Other features
+### User Info
+
+- What information about users can I see? Location? Browser?
+
+### Geographic information
+### Retention
+### Goals
+
+## Further reading
 
 This post is meant as a gentle introduction to the big picture concepts for web analytics. But there are more features available:
 
-- Conversion goals
-- Scroll
-- LCP
+- [Conversion goals](/docs/web-analytics/conversion-goals)
+- [Retention](/docs/web-analytics/dashboard#retention)
+- [LCP scores](/docs/web-analytics/dashboard#lcp-score)
 
-when to not use web analytics? see web vs product analytics
+While web analytics is good for tracking high-level website metrics, Product analytics is good for diving deep into how specific users behave. For more on the distinction between the two, check out our post on [Web vs. product analytics](docs/web-analytics/web-vs-product-analytics).
