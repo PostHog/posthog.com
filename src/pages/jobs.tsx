@@ -40,7 +40,7 @@ const JobList = ({ jobs }: { jobs: Job[] }) => {
     const jobsGroupedByDepartment = groupBy(jobs, 'attributes.department')
 
     return (
-        <ul className="list-none p-0 m-0 space-y-6 mt-4">
+        <ul className="list-none p-0 m-0 space-y-6 mt-2">
             {Object.entries(jobsGroupedByDepartment).map(([department, jobs]) => (
                 <li key={department}>
                     <h3 className="m-0 opacity-60 text-base font-normal border-b border-light dark:border-dark pb-2 mb-2">
