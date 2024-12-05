@@ -31,6 +31,9 @@ Below, we'll explain the two options for option two.
     - You may see a dialog that says, "Your application running on port 8001 is available." Don't be enticed by the big green button quite yet.
 1. Once you see <code><span class="text-green">success</span> Writing page-data.json files...</code>, you can click the green **Open in browser** button which will open the site at [http://localhost:8001](http://localhost:8001).
 
+    You can also click the **Ports** tab to access the URL where you can preview the site. Cmd + click the URL seen here.
+    ![port](https://res.cloudinary.com/dmukukwp6/image/upload/port_ec6ab549ce.png)
+
 ### Committing and pushing changes
 
 Use the built-in Git tab in VS Code to commit and push your changes.
