@@ -64,15 +64,15 @@ import 'package:flutter/material.dart';
 import 'package:posthog_flutter/posthog_flutter.dart';
 
 Future<void> main() async {
-    // init WidgetsFlutterBinding if not yet
-    WidgetsFlutterBinding.ensureInitialized();
-    final config = PostHogConfig('YOUR_API_KEY_GOES_HERE');
-    config.debug = true;
-    config.captureApplicationLifecycleEvents = true;
-    // or EU Host: 'https://eu.i.posthog.com'
-    config.host = 'https://us.i.posthog.com';
-    await Posthog().setup(config);
-    runApp(MyApp());
+  // init WidgetsFlutterBinding if not yet
+  WidgetsFlutterBinding.ensureInitialized();
+  final config = PostHogConfig('YOUR_API_KEY_GOES_HERE');
+  config.debug = true;
+  config.captureApplicationLifecycleEvents = true;
+  // or EU Host: 'https://eu.i.posthog.com'
+  config.host = 'https://us.i.posthog.com';
+  await Posthog().setup(config);
+  runApp(MyApp());
 }
 ```
 
@@ -82,8 +82,8 @@ In both cases, you'll also need to update the minimum Android SDK version to `21
 // rest of your config
 
     defaultConfig {
-      minSdkVersion 21
-      // rest of your config
+        minSdkVersion 21
+        // rest of your config
     }
 
 // rest of your config
@@ -104,15 +104,15 @@ Add your PostHog configuration to the `Info.plist` file located in the `ios/Runn
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-<!-- rest of your configuration -->
-  <key>com.posthog.posthog.API_KEY</key>
-  <string><ph_project_api_key></string>
-  <key>com.posthog.posthog.POSTHOG_HOST</key>
-  <string><ph_client_api_host></string>
-  <key>com.posthog.posthog.CAPTURE_APPLICATION_LIFECYCLE_EVENTS</key>
-  <true/>
-  <key>com.posthog.posthog.DEBUG</key>
-  <true/>
+    <!-- rest of your configuration -->
+    <key>com.posthog.posthog.API_KEY</key>
+    <string><ph_project_api_key></string>
+    <key>com.posthog.posthog.POSTHOG_HOST</key>
+    <string><ph_client_api_host></string>
+    <key>com.posthog.posthog.CAPTURE_APPLICATION_LIFECYCLE_EVENTS</key>
+    <true/>
+    <key>com.posthog.posthog.DEBUG</key>
+    <true/>
 </dict>
 </plist>
 ```
@@ -126,9 +126,9 @@ Add your PostHog configuration to the `Info.plist` file located in the `ios/Runn
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-<!-- rest of your configuration -->
-  <key>com.posthog.posthog.AUTO_INIT</key>
-	<false/>
+    <!-- rest of your configuration -->
+    <key>com.posthog.posthog.AUTO_INIT</key>
+    <false/>
 </dict>
 </plist>
 ```
@@ -141,15 +141,15 @@ import 'package:flutter/material.dart';
 import 'package:posthog_flutter/posthog_flutter.dart';
 
 Future<void> main() async {
-    // init WidgetsFlutterBinding if not yet
-    WidgetsFlutterBinding.ensureInitialized();
-    final config = PostHogConfig('YOUR_API_KEY_GOES_HERE');
-    config.debug = true;
-    config.captureApplicationLifecycleEvents = true;
-    // or EU Host: 'https://eu.i.posthog.com'
-    config.host = 'https://us.i.posthog.com';
-    await Posthog().setup(config);
-    runApp(MyApp());
+  // init WidgetsFlutterBinding if not yet
+  WidgetsFlutterBinding.ensureInitialized();
+  final config = PostHogConfig('YOUR_API_KEY_GOES_HERE');
+  config.debug = true;
+  config.captureApplicationLifecycleEvents = true;
+  // or EU Host: 'https://eu.i.posthog.com'
+  config.host = 'https://us.i.posthog.com';
+  await Posthog().setup(config);
+  runApp(MyApp());
 }
 ```
 
