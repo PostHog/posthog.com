@@ -83,7 +83,7 @@ const Companies = ({ companyFilters, jobFilters }: { companyFilters: FiltersType
                         <div className="sticky top-[41px] pt-8 pb-4 z-10 bg-light dark:bg-dark">
                             {(logoLight || logoDark) && (
                                 <img
-                                    className="max-w-40 mb-2"
+                                    className="max-w-40 mb-3"
                                     src={logoDark && websiteTheme === 'dark' ? logoDark : logoLight}
                                     alt={name}
                                 />
