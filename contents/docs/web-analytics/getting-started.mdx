@@ -122,35 +122,41 @@ PostHog hosts all of our developer documentation at `/docs`. What if we want to 
 
 ### Channels, referrers, and UTM sources
 
-The web analytics dashboard also enables you to find where traffic is coming from with the following resources:
-
-- Channels
-- Referrers
-- UTM sources
+The web analytics dashboard also enables you to find out where traffic is coming from.
 
 #### Channels
 
-Channels are also known as marketing channels or acquisition channels.
-Channels enable you to distinguish between the different sources that bring traffic to your website. For example, people could find out about your website via:
+Channels distinguish between different sources that are bringing traffic to your website. They're also sometimes called marketing channels or acquisition channels. Here are some examples:
 
-- Search: finding PostHog in Google search results
-- Social: finding PostHog via social media
-- Direct: going directly to PostHog.com
+- Search: visitors from a search engine like Google (you can also distinguish between traffic from organic search results and paid ads)
+- Social: visitors from social media site
+- Referrals: visitors that clicked a referral link (more on this below)
+- Direct: visitors that went directly to your website (by typing the URL or clicking a bookmark for example)
 
-You can find a list of all the available [channel types](/docs/data/channel-type).
-And we also have the ability to [create custom channels](/docs/web-analytics/dashboard#custom-channel-type) as well.
+This is just a small sample of the available channels to give you an idea of how to get started. There's a full list of available [channel types](/docs/data/channel-type), and features for defining your own [custom channels](/docs/web-analytics/dashboard#custom-channel-type) as well.
 
 #### Referrers
 
-...
+Referrers provides a list of the domains your visitors are coming from. For example, you'll see how many users came from `google.com`, `youtube.com`, or `ycombinator.com`. If a user visits your website directly without coming from somewhere else, it will show up as `$direct`.
+
+<ProductScreenshot
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/referrers_light_9d37babf9a.png"
+  imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/referrers_dark_8d458b5a66.png"
+  alt="Most popular paths"
+  classes="rounded"
+/>
 
 #### UTM sources
 
-...
+> **💡 Concept: What is a UTM?**
+
+Tutorial on [how to track performance marketing](/tutorials/performance-marketing).
 
 #### 📋 Use case: ...
 
-...
+Sponsored video:
+https://posthog.com/fireship
+https://posthog.com/?utm_source=fireship&utm_campaign=fireship
 
 ### Demographic information
 
