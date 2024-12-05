@@ -48,7 +48,7 @@ const JobList = ({ jobs }: { jobs: Job[] }) => {
                     </h3>
                     <ul className="list-none p-0 m-0 space-y-2">
                         {jobs.map((job) => (
-                            <li key={job.id} className="flex justify-between">
+                            <li key={job.id} className="flex justify-between items-end">
                                 <Link externalNoIcon className="!text-inherit underline" to={job.attributes.url}>
                                     {job.attributes.title}
                                 </Link>
