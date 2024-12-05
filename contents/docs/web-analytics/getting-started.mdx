@@ -14,9 +14,9 @@ Web analytics provides you with a single, simple [dashboard](/docs/web-analytics
 
 This post provides a gentle guide to web analytics by introducing the following:
 
-- **💡 Concepts:** explanations for common analytics terms
-- **🛠️ Features:** tools and affordances web analytics provides
-- **📋 Use cases:** practical examples of how to use web analytics
+- **Concepts:** explanations for common analytics terms
+- **Features:** tools and affordances web analytics provides
+- **Use cases:** practical examples of how to use web analytics
 
 ## Where do I start?
 
@@ -34,8 +34,7 @@ At a glance, the dashboard gives us access to the following:
 - **Visitors, pageviews, and sessions:** How many people are coming to your website? How many pages do they visit? How long do they stay?
 - **Paths:** Which pages are they going to?
 - **Channels, referrers, and UTM sources:** Where did they come from?
-- **User information:** What devices, browsers, and operating systems are they using?
-- **Geographic information:** Where are they located?
+- **Demographic information:** What devices, browsers, and operating systems are they using? Where are they located?
 - **Retention:** How many people are coming back?
 - **Goals:** Are users performing the actions you want them to?
 
@@ -52,22 +51,33 @@ The first thing you'll see at the top of the web analytics dashboard is a graph 
 - Is the number of visitors going up or down over a given time period?
 
 > **💡 Concept:** What is the distinction between a visitor and a session?
-> - A [**session**](/docs/data/sessions) is a set of events for a single visit to your website. Sessions have a start, a duration, and an end.
-> - A **visitor** represents a single person visiting your site. A single visitor can have many sessions as they keep coming back.
+> - A [**session**](/docs/data/sessions) is a set of events for a single visit to your website. Sessions have a beginning, a duration, and an end.
+> - A **visitor** represents a single person visiting your site. So a single visitor can have many sessions as they keep coming back.
 
-> **🛠️ Feature:** Working with time intervals. Seeing a single data point isn't very useful unless you have some other data to compare it to.
-> <ProductScreenshot
+The first important feature to get familiar with is working with time intervals. Seeing a single data point isn't very useful unless you have some other data to compare it to. You can adjust all the data on your web analytics dashboard to be scoped to the last 24 hours, the last 7 days, the year to date, or any other custom time range.
+
+<ProductScreenshot
   imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/time_intervals_wide_2ce241b1c4.png"
   imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/time_intervals_wide_dark_2256d417c6.png"
-  alt="Web analytics dashboard"
+  alt="Time interval selection"
   classes="rounded"
 />
 
-> **📋 Use case:** If you have a weekly newsletter, you can use this data to figure out the best time to send it to your users based on active traffic.
->
-> PostHog has a newsletter called [_Product for Engineers_](https://newsletter.posthog.com), and we can use these graphs to figure out when to send it out.
-> - Filtering by the "Last 30 days" and grouping by day shows Tuesdays and Wednesdays are the most active weekdays, whereas Saturday would be the day with the least activity.
-> - Filtering by the "Last 7 days" and grouping by hour shows the ideal timing is between 1:00 p.m. and 7:00 p.m. PST, whereas sending it at midnight would likely be a mistake.
+#### Use case: Finding the most active times
+
+If you have a weekly newsletter, you can use web analytics data to figure out the best time to send it to your users based on active traffic.
+
+PostHog has a newsletter called [_Product for Engineers_](https://newsletter.posthog.com), and we can use these graphs to figure out when to send it to readers.
+
+- Filtering by the "Last 30 days" and grouping by day shows Tuesdays and Wednesdays are the most active weekdays, whereas Saturdays are the days with the least activity.
+- Filtering by the "Last 7 days" and grouping by hour shows the ideal timing is between 1:00 p.m. and 7:00 p.m. PST.
+
+<ProductScreenshot
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/last_30_days_light_68a0edcfb6.png"
+  imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/last_30_days_dark_e8b68ca003.png"
+  alt="Last 30 days"
+  classes="rounded"
+/>
 
 ### Paths
 
@@ -77,45 +87,68 @@ Paths show you all the specific pages accessed in your app or website, which can
 - What is the bounce rate for a particular page?
 - What was the last page they visited before leaving?
 
-Top paths and top entry paths drill down into specific pages on your site to show their views, visitors, bounce rate, and scroll depth. You can click on any of the paths to filter the dashboard for that path.
+> **💡 Concept:** What is the bounce rate? Bounce rate is the percentage of users who leave your page immediately after visiting. In other words, a bounce is when someone lands on a given page, but don't interact with it and leaves within 10 seconds. For more information, we also have a tutorial available for [how to calculate bounce rate](/tutorials/bounce-rate).
 
 <ProductScreenshot
   imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/v1711580005/posthog.com/contents/images/docs/web-analytics/dashboard/paths-light.png"
   imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/v1711580004/posthog.com/contents/images/docs/web-analytics/dashboard/paths-dark.png"
-  alt="Web analytics dashboard"
+  alt="Paths"
   classes="rounded"
 />
 
-> **🛠️ Feature:** Filtering. All the data on the web analytics dashboard can be adjusted with filters. We've been looking at the data for all visitors, but we can filter by all sorts of fields. Here are some examples:
-> - filter where _Path Name_ is equal to `"/pricing"`
-> - filter where _Device Type_ is equal to `"Desktop"`
-> - filter where _Referrer URL_ contains `"youtube.com"`
+One of the most important features for web analytics is the ability to filter the data. At the top of your dashboard, you can click the **+ Add filter** button and filter based on all kinds of event properties. You'll have dozens or even hundreds of data points to use for filtering, but here are a handful of examples:
 
-> **📋 Use case:** PostHog hosts developer documentation at `/docs`. What if we want to find the most popular docs?
-> We can click the **+ Add filter** button and add a filter where `Path Name` contains `"/docs"`.
-> <ProductScreenshot
+- filter where _Path Name_ is equal to `"/pricing"`
+- filter where _Device Type_ is equal to `"Desktop"`
+- filter where _Referrer URL_ contains `"youtube.com"`
+
+The paths section of the dashboard also makes it easy to filter for specific pages. Instead of using the filter button, you can click on any of the paths to filter the dashboard for that path.
+
+#### Use case: Finding the most popular content
+
+PostHog hosts developer documentation at `/docs`. What if we want to find the most popular docs? We can click the **+ Add filter** button and add a filter where _Path Name_ contains `"/docs/"`. And we can see the results with the most popular documentation:
+
+<ProductScreenshot
   imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/paths_docs_2924a8d630.png"
   imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/paths_docs_dark_1887fbb2c7.png"
-  alt="Web analytics dashboard"
+  alt="Most popular paths"
   classes="rounded"
 />
 
-> **💡 Concept:** What is the bounce rate? Bounce rate is the percentage of users who leave your page immediately after visiting. In other words, a bounce is when someone lands on a given page, but don't interact with it and leaves within 10 seconds. For more information, we also have a tutorial available for [how to calculate bounce rate](/tutorials/bounce-rate).
+This section also has features for finding the entry paths, end paths, and outbound clicks:
 
-> **🛠️ Feature:** Entry paths, end paths, and outbound clicks.
-> - The **entry path** shows stats for the first pageview in the session
-> - The **end path** shows stats for the last pageview in the session
-> - **Outbound clicks** show which links that users clicked on to leave your site
+- The **entry path** shows stats for the first pageview in the session
+- The **end path** shows stats for the last pageview in the session
+- **Outbound clicks** show which links that users clicked on to leave your site
 
 ### Channels, referrers, and UTM sources
 
-- Where is the traffic coming from?
+The web analytics dashboard also enables you to find where traffic is coming from with the following resources:
 
 - Channels
 - Referrers
 - UTM sources
 
-### User information
+#### Channels
+
+Channels enable you to distinguish between the different sources that bring traffic to your website. For example, people could find out about your website via:
+
+- Search: finding PostHog in Google search results
+- Social: finding PostHog via social media
+- Direct: going directly to PostHog.com
+
+You can find a list of all the available [channel types](/docs/data/channel-type).
+And we also have the ability to [create custom channels](/docs/web-analytics/dashboard#custom-channel-type) as well.
+
+#### Referrers
+
+...
+
+#### UTM sources
+
+...
+
+### Demographic information
 
 Based on how users are accessing your website, we also have all kinds of other metrics that can help answer the following:
 
@@ -123,6 +156,10 @@ Based on how users are accessing your website, we also have all kinds of other m
 - Which browsers and operating systems are most popular?
 - Where are users located geographically? Which countries? Which cities?
 - What are the most popular languages for visitors?
+
+### Retention
+
+> **💡 Concept:** What are cohorts?
 
 ### Goals
 
