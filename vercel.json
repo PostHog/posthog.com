@@ -940,7 +940,6 @@
         { "source": "/docs/apps/feedback-widget", "destination": "/templates/in-app-feedback-survey" },
         { "source": "/apps/feedback-widget", "destination": "/templates/in-app-feedback-survey" },
         { "source": "/apps/user-interviewer", "destination": "/templates/user-interview" },
-        { "source": "/jobs", "destination": "/careers" },
         {
             "source": "/docs/getting-started/estimating-usage-costs",
             "destination": "/docs/billing/estimating-usage-costs"
