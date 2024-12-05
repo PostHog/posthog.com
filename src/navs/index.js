@@ -2287,6 +2287,12 @@ export const docsMenu = {
                     featured: true,
                 },
                 {
+                    name: 'Installation',
+                    url: '/docs/web-analytics/installation',
+                    icon: 'IconBook',
+                    color: 'blue',
+                },
+                {
                     name: 'Dashboard',
                     url: '/docs/web-analytics/dashboard',
                     icon: 'IconDashboard',
@@ -2720,13 +2726,88 @@ export const docsMenu = {
             description: 'Collect, enrich, and send data to your destinations.',
             children: [
                 {
-                    name: 'Customer data platform',
+                    name: 'Data pipelines integrations',
                 },
                 {
                     name: 'Overview',
                     url: '/docs/cdp',
                     icon: 'IconHome',
                     color: 'seagreen',
+                },
+                {
+                    name: 'Sources',
+                    url: '/docs/cdp/sources',
+                    icon: 'IconBook',
+                    color: 'blue',
+                    featured: true,
+                    children: [
+                        {
+                            name: 'Overview',
+                            url: '/docs/cdp/sources/',
+                        },
+                        {
+                            name: 'Managed',
+                        },
+                        {
+                            name: 'Stripe',
+                            url: '/docs/cdp/sources/stripe',
+                        },
+                        {
+                            name: 'Hubspot',
+                            url: '/docs/cdp/sources/hubspot',
+                        },
+                        {
+                            name: 'Zendesk',
+                            url: '/docs/cdp/sources/zendesk',
+                        },
+                        {
+                            name: 'Postgres',
+                            url: '/docs/cdp/sources/postgres',
+                        },
+                        {
+                            name: 'Salesforce',
+                            url: '/docs/cdp/sources/salesforce',
+                        },
+                        {
+                            name: 'MySQL',
+                            url: '/docs/cdp/sources/mysql',
+                        },
+                        {
+                            name: 'Azure SQL Server',
+                            url: '/docs/cdp/sources/azure-db',
+                        },
+                        {
+                            name: 'Snowflake',
+                            url: '/docs/cdp/sources/snowflake',
+                        },
+                        {
+                            name: 'Vitally',
+                            url: '/docs/cdp/sources/vitally',
+                        },
+                        {
+                            name: 'Chargebee',
+                            url: '/docs/cdp/sources/chargebee',
+                        },
+                        {
+                            name: 'Self-managed',
+                        },
+                        {
+                            name: 'S3',
+                            url: '/docs/cdp/sources/s3',
+                        },
+                        {
+                            name: 'Azure Blob',
+                            url: '/docs/cdp/sources/azure-blob',
+                        },
+                        {
+                            name: 'Cloudflare R2',
+                            url: '/docs/cdp/sources/r2',
+                        },
+                        {
+                            name: 'Google Cloud Storage',
+                            url: '/docs/cdp/sources/gcs',
+                        },
+                    ],
                 },
                 {
                     name: 'Realtime destinations',
@@ -2958,81 +3039,6 @@ export const docsMenu = {
                     url: '/docs/data-warehouse',
                     icon: 'IconHome',
                     color: 'seagreen',
-                },
-                {
-                    name: 'Link a source',
-                    url: '/docs/data-warehouse/setup',
-                    icon: 'IconBook',
-                    color: 'blue',
-                    featured: true,
-                    children: [
-                        {
-                            name: 'Overview',
-                            url: '/docs/data-warehouse/setup',
-                        },
-                        {
-                            name: 'Managed',
-                        },
-                        {
-                            name: 'Stripe',
-                            url: '/docs/data-warehouse/setup/stripe',
-                        },
-                        {
-                            name: 'Hubspot',
-                            url: '/docs/data-warehouse/setup/hubspot',
-                        },
-                        {
-                            name: 'Zendesk',
-                            url: '/docs/data-warehouse/setup/zendesk',
-                        },
-                        {
-                            name: 'Postgres',
-                            url: '/docs/data-warehouse/setup/postgres',
-                        },
-                        {
-                            name: 'Salesforce',
-                            url: '/docs/data-warehouse/setup/salesforce',
-                        },
-                        {
-                            name: 'MySQL',
-                            url: '/docs/data-warehouse/setup/mysql',
-                        },
-                        {
-                            name: 'Azure SQL Server',
-                            url: '/docs/data-warehouse/setup/azure-db',
-                        },
-                        {
-                            name: 'Snowflake',
-                            url: '/docs/data-warehouse/setup/snowflake',
-                        },
-                        {
-                            name: 'Vitally',
-                            url: '/docs/data-warehouse/setup/vitally',
-                        },
-                        {
-                            name: 'Chargebee',
-                            url: '/docs/data-warehouse/setup/chargebee',
-                        },
-                        {
-                            name: 'Self-managed',
-                        },
-                        {
-                            name: 'S3',
-                            url: '/docs/data-warehouse/setup/s3',
-                        },
-                        {
-                            name: 'Azure Blob',
-                            url: '/docs/data-warehouse/setup/azure-blob',
-                        },
-                        {
-                            name: 'Cloudflare R2',
-                            url: '/docs/data-warehouse/setup/r2',
-                        },
-                        {
-                            name: 'Google Cloud Storage',
-                            url: '/docs/data-warehouse/setup/gcs',
-                        },
-                    ],
                 },
                 {
                     name: 'Creating insights from sources',
