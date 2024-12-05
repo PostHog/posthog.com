@@ -2296,7 +2296,7 @@ export const docsMenu = {
                     name: 'Getting started',
                     url: '/docs/web-analytics/getting-started',
                     icon: 'IconGraduationCap',
-                    color: 'yellow',
+                    color: 'salmon',
                 },
                 {
                     name: 'Dashboard',
