@@ -3,21 +3,40 @@ import useSWRInfinite from 'swr/infinite'
 import qs from 'qs'
 import { Job } from './useJobs'
 
-const query = (offset: number) => {
-    return qs.stringify({
-        pagination: {
-            start: offset * 20,
-            limit: 20,
-        },
-        sort: 'createdAt:desc',
-        populate: {
-            jobs: {
-                sort: 'postedDate:desc',
+export type Filters = Array<
+    | {
+          label: string
+          key: string
+          type: 'toggle'
+      }
+    | {
+          label: string
+          key: string
+          type: 'select'
+          options: { label: string; value: any }[]
+      }
+>
+
+const query = (offset: number, companyFilters: Filters, jobFilters: Filters) => {
+    return qs.stringify(
+        {
+            pagination: {
+                start: offset * 20,
+                limit: 20,
             },
-            logoLight: true,
-            logoDark: true,
+            sort: 'createdAt:desc',
+            populate: {
+                jobs: {
+                    sort: 'postedDate:desc',
+                    ...(jobFilters.length > 0 && { filters: { $and: jobFilters } }),
+                },
+                logoLight: true,
+                logoDark: true,
+            },
+            ...(companyFilters.length > 0 && { filters: { $and: companyFilters } }),
         },
-    })
+        { encodeValuesOnly: true }
+    )
 }
 
 export type Company = {
@@ -56,14 +75,20 @@ export type Company = {
     }
 }
 
-export default function useCompanies(): {
+export default function useCompanies({
+    companyFilters,
+    jobFilters,
+}: {
+    companyFilters: Filters
+    jobFilters: Filters
+}): {
     companies: Company[]
     isLoading: boolean
     error: Error | undefined
     fetchMore: () => void
 } {
     const { data, size, setSize, isLoading, error } = useSWRInfinite(
-        (offset) => `${process.env.GATSBY_SQUEAK_API_HOST}/api/companies?${query(offset)}`,
+        (offset) => `${process.env.GATSBY_SQUEAK_API_HOST}/api/companies?${query(offset, companyFilters, jobFilters)}`,
         async (url: string) => {
             return fetch(url).then((r) => r.json())
         },
