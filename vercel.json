@@ -1436,6 +1436,10 @@
         {
             "source": "/docs/data-warehouse/setup/zendesk",
             "destination": "/docs/cdp/sources/zendesk"
+        },
+        {
+            "source": "/docs/data-warehouse/setup/",
+            "destination": "/docs/data-warehouse/query/"
         }
     ]
 }
