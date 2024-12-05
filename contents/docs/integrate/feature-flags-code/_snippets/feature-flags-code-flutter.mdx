@@ -2,10 +2,10 @@
 
 ```dart
 if (await Posthog().isFeatureEnabled('flag-key')) {
-    // Do something differently for this user
+  // Do something differently for this user
 
-    // Optional: fetch the payload
-    final matchedFlagPayload = await Posthog().getFeatureFlagPayload('flag-key');
+  // Optional: fetch the payload
+  final matchedFlagPayload = await Posthog().getFeatureFlagPayload('flag-key');
 }
 ```
 
@@ -13,10 +13,10 @@ if (await Posthog().isFeatureEnabled('flag-key')) {
 
 ```dart
 if (await Posthog().getFeatureFlag('flag-key') == 'variant-key') { // replace 'variant-key' with the key of your variant
-    // Do something differently for this user
+  // Do something differently for this user
 
-    // Optional: fetch the payload
-    final matchedFlagPayload = await Posthog().getFeatureFlagPayload('flag-key');
+  // Optional: fetch the payload
+  final matchedFlagPayload = await Posthog().getFeatureFlagPayload('flag-key');
 }
 ```
 

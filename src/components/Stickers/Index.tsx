@@ -973,6 +973,34 @@ export const StickerFlagNL: StickerComponent<StickerProps> = forwardRef(function
     )
 })
 
+export const StickerFlagNO: StickerComponent<StickerProps> = forwardRef(function StickerAdvanced(
+    props,
+    ref
+): JSX.Element {
+    return (
+        <BaseSticker ref={ref} {...props}>
+            <path
+                opacity="0.35"
+                d="M31.86 5.76001H4.14C2.84976 5.76001 1.8 6.80977 1.8 8.10001V27.9C1.8 29.1902 2.84976 30.24 4.14 30.24H31.86C33.1502 30.24 34.2 29.1902 34.2 27.9V8.10001C34.2 6.80977 33.1502 5.76001 31.86 5.76001Z"
+                fill="black"
+            />
+            <path
+                d="M31.14 5.04001H3.42C2.12976 5.04001 1.08 6.08977 1.08 7.38001V27.18C1.08 28.4702 2.12976 29.52 3.42 29.52H31.14C32.4302 29.52 33.48 28.4702 33.48 27.18V7.38001C33.48 6.08977 32.4302 5.04001 31.14 5.04001Z"
+                fill="#F2F2F2"
+            />
+            <path d="M3.24001 7.56H31.32V27.36H3.24001V7.56Z" fill="#DE5147" />
+            <path d="M15.48 7.56H10.44V27.36H15.48V7.56Z" fill="#F2F2F2" />
+            <path d="M3.24001 14.76L3.24001 19.8H30.96V14.76L3.24001 14.76Z" fill="#F2F2F2" />
+            <path d="M3.24001 15.84V18.72H30.96V15.84L3.24001 15.84Z" fill="#2B59A1" />
+            <path d="M14.4 7.56H11.52V27.36H14.4V7.56Z" fill="#2B59A1" />
+            <path
+                d="M31.14 27.72H3.42C3.12192 27.72 2.88 27.4781 2.88 27.18V7.38C2.88 7.08192 3.12192 6.84 3.42 6.84H31.14C31.4381 6.84 31.68 7.08192 31.68 7.38V27.18C31.68 27.4781 31.4381 27.72 31.14 27.72ZM3.96 26.64H30.6V7.92H3.96V26.64Z"
+                fill="#40396E"
+            />
+        </BaseSticker>
+    )
+})
+
 export const StickerFlagPL: StickerComponent<StickerProps> = forwardRef(function StickerAdvanced(
     props,
     ref

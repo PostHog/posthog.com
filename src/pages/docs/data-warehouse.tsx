@@ -22,7 +22,7 @@ export const Intro = ({ image = true }) => {
                     <h3 className="text-lg font-semibold text-primary/60 dark:text-primary-dark/75 leading-tight">
                         A single source for all your important data
                     </h3>
-                    <CallToAction to="/docs/data-warehouse/setup">Link your first source</CallToAction>
+                    <CallToAction to="/docs/cdp/sources">Link your first source</CallToAction>
                 </div>
 
                 {image && (
@@ -116,7 +116,7 @@ const DataWarehouse: React.FC = () => {
             <PostLayout title={'Data warehouse'} hideSurvey hideSidebar>
                 <Intro />
                 <Content />
-                <CallToAction to="/docs/data-warehouse/setup" width="full">
+                <CallToAction to="/docs/data-warehouse/query" width="full">
                     Visit the manual
                 </CallToAction>
             </PostLayout>

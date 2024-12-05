@@ -18,6 +18,7 @@ const Teams: React.FC = () => {
                 nodes {
                     id
                     name
+                    slug
                     profiles {
                         data {
                             id
@@ -86,11 +87,9 @@ const Teams: React.FC = () => {
                             <div className="grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-4 xl:gap-5 text-center">
                                 {allTeams.nodes
                                     .sort((a, b) => a.name.localeCompare(b.name))
-                                    .map(({ id, name, profiles, crest, crestOptions, leadProfiles }) => (
+                                    .map(({ id, name, slug, profiles, crest, crestOptions, leadProfiles }) => (
                                         <Link
-                                            to={`/teams/${slugify(name.toLowerCase().replace('ops', ''), {
-                                                remove: /and/,
-                                            })}`}
+                                            to={`/teams/${slug}`}
                                             key={id}
                                             className="group relative mb-6 hover:scale-[1.01] active:scale-[1] hover:top-[-.5px] active:top-px"
                                         >

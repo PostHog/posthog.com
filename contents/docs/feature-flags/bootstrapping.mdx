@@ -128,6 +128,25 @@ export function MyApp() {
 
 </MultiLanguage>
 
+
+## Overriding feature flags 
+
+Bootstrapped feature flag values are temporary and are disregarded after PostHog fetches flag values. If you are trying to override feature flag values in a persistent manner, some PostHog SDKs support overriding flags:
+
+
+<MultiLanguage selector="tabs">
+
+```node
+posthog.overrideFeatureFlag('my-feature-flag', true)
+```
+
+```js-web
+posthog.feature_flags.override({'my-feature-flag': 'variant-1', 'other-feature': true})
+```
+
+</MultiLanguage>
+
+
 ## Examples
 
 - [How to bootstrap feature flags in React and Express](/tutorials/bootstrap-feature-flags-react)

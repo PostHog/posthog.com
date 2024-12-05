@@ -196,7 +196,7 @@ On Linux you often have separate packages: `postgres` for the tools, `postgres-s
 
 2. Install the latest Node.js 18 (the version used by PostHog in production) with `nvm install 18`. You can start using it in the current shell with `nvm use 18`.
 
-3. Install pnpm with `npm install -g pnpm`.
+3. Install pnpm with `corepack enable` and check it with `pnpm --version`.
 
 4. Install Node packages by running `pnpm i`.
 
@@ -260,10 +260,14 @@ Make sure when outside of `venv` to always use `python3` instead of `python`, as
 
 You can also use [pyenv](https://github.com/pyenv/pyenv) if you wish to manage multiple versions of Python 3 on the same machine.
 
+1. Install `uv`
+
+`uv` is a very fast tool you can use for python virtual env and dependency management. See [https://docs.astral.sh/uv/](https://docs.astral.sh/uv/). Once installed you can prefix any `pip` command with `uv` to get the speed boost.
+
 1. Create the virtual environment in current directory called 'env':
 
     ```bash
-    python3.11 -m venv env
+    uv venv env --python 3.11
     ```
 
 1. Activate the virtual environment:
@@ -279,7 +283,7 @@ You can also use [pyenv](https://github.com/pyenv/pyenv) if you wish to manage m
 1. Upgrade pip to the latest version:
 
     ```bash
-    pip install -U pip
+    uv pip install -U pip
     ```
 
 1. Install requirements with pip
@@ -288,7 +292,7 @@ You can also use [pyenv](https://github.com/pyenv/pyenv) if you wish to manage m
 
     ```bash
     brew install openssl
-    CFLAGS="-I /opt/homebrew/opt/openssl/include $(python3.11-config --includes)" LDFLAGS="-L /opt/homebrew/opt/openssl/lib" GRPC_PYTHON_BUILD_SYSTEM_OPENSSL=1 GRPC_PYTHON_BUILD_SYSTEM_ZLIB=1 pip install -r requirements.txt
+    CFLAGS="-I /opt/homebrew/opt/openssl/include $(python3.11-config --includes)" LDFLAGS="-L /opt/homebrew/opt/openssl/lib" GRPC_PYTHON_BUILD_SYSTEM_OPENSSL=1 GRPC_PYTHON_BUILD_SYSTEM_ZLIB=1 uv pip install -r requirements.txt
     ```
 
     > **Friendly tip:** If you see `ERROR: Could not build wheels for xmlsec`, refer to this [issue](https://github.com/xmlsec/python-xmlsec/issues/254).
@@ -296,15 +300,7 @@ You can also use [pyenv](https://github.com/pyenv/pyenv) if you wish to manage m
     These will be used when installing `grpcio` and `psycopg2`. After doing this once, and assuming nothing changed with these two packages, next time simply run:
 
     ```bash
-    pip install -r requirements.txt
-    ```
-
-    If on an x86 platform, simply run the latter version.
-
-1. Install dev requirements
-
-    ```bash
-    pip install -r requirements-dev.txt
+    uv pip install -r requirements.txt -r requirements-dev.txt
     ```
 
 #### 5. Prepare databases
