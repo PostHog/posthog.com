@@ -821,7 +821,7 @@ export const handbookSidebar = [
             },
             {
                 name: 'Email marketing',
-                url: '/handbook/words-and-pictures/art-requests',
+                url: '/handbook/words-and-pictures/email-comms',
             },
             {
                 name: 'In-app messaging',
