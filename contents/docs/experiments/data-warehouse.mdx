@@ -51,7 +51,9 @@ When you select a data warehouse table as an experiment goal or secondary metric
 
 The PostHog uses the join to the `events` table to determine which variant a given data warehouse table row is associated with. For trends experiments, the most recent `$feature_flag_called` event before the row represents their active variant assignment:
 
-> Data Warehouse: timestamp=2024-01-03 12:00, distinct_id=user1
-> Events:
-> - 2024-01-02 12:00: (user1, variant='control')   <- This event will be joined
-> - 2024-01-03 18:00: (user1, variant='test')      <- Ignored (occurs after data warehouse timestamp)
+```
+Data Warehouse: timestamp=2024-01-03 12:00, distinct_id=user1
+Events:
+  - 2024-01-02 12:00: (user1, variant='control')   <- This event will be joined
+  - 2024-01-03 18:00: (user1, variant='test')      <- Ignored (occurs after data warehouse timestamp)
+```
