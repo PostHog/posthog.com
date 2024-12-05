@@ -97,6 +97,21 @@ Based on UTMs, referring domains, and more, PostHog automatically classifies tra
 
 > **Read more:** [How channel type is calculated](/docs/data/channel-type)
 
+### Custom channel type
+
+
+
+If our predefined channel types don't work for you, you can define rules to match incoming events to your own custom channel types in [your project settings](https://us.posthog.com/settings/project-web-analytics). The first matching rule is used, and if no rule matches (or if none are defined) then the default channel type is used.
+
+For example, you could create an **AI** channel type where the referring domain equals `chatgpt.com`, `www.perplexity.ai`, and other AI services.
+
+<ProductScreenshot
+  imageLight = "https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2024_12_04_at_16_48_30_2x_ea594a4d1c.png" 
+  imageDark = "https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2024_12_04_at_16_48_52_2x_12c92512c1.png"
+  alt="Custom channel types" 
+  classes="rounded"
+/>
+
 ### UTMs
 
 UTMs include source, medium, campaign, content, and term. Each are set as URL parameters and autocaptured by PostHog. For example, the following URL has the source of `twitter`, medium of `social`, and `campaign` of `twitter-campaign`:
