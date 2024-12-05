@@ -10,34 +10,11 @@ This guide walks you through integrating PostHog into your SvelteKit app using t
 
 ## Client-side setup
 
-Install `posthog-js` using your package manager:
+import SvelteInstall from "../integrate/_snippets/install-svelte.mdx"
 
-```bash
-yarn add posthog-js
-# or
-npm install --save posthog-js
-```
+<SvelteInstall />
 
-Then, if you haven't created a root [layout](https://kit.svelte.dev/docs/routing#layout) already, create a new file called `+layout.js` in your `src/routes` folder In this file, check the environment is the browser, and initialize PostHog if so. You can get both your API key and instance address in your [project settings](https://us.posthog.com/project/settings):
-
-```js file=routes/+layout.js
-import posthog from 'posthog-js'
-import { browser } from '$app/environment';
-
-export const load = async () => {
-
-  if (browser) {
-    posthog.init(
-      '<ph_project_api_key>',
-      { api_host: '<ph_client_api_host>', person_profiles: 'identified_only' }
-    )
-  }
-  return
-};
-```
-
-> ❗️ If you intend on using Session Replay with a server side rendered Svelte app
-> ensure that your [asset URLs are configured to be relative](https://posthog.com/docs/session-replay/troubleshooting#ensure-assets-are-imported-from-the-base-URL-in-Svelte).
+> ❗️ If you intend on using session replays with a server-side rendered Svelte app ensure that your [asset URLs are configured to be relative](/docs/session-replay/troubleshooting#ensure-assets-are-imported-from-the-base-URL-in-Svelte).
 
 ### Tracking pageviews and pageleaves
 
