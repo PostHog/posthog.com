@@ -34,7 +34,7 @@ We send out CSAT surveys after a ticket has been closed for at least 3 days usin
 
 All support at PostHog is done by actual, full-time engineers. We have two types of engineers: 
 
-- Support engineers, who are focused solely on support across multiple products and sit in [the Comms team](/teams/comms)
+- Support engineers, who are focused solely on support across multiple products and sit in [the Support team](/teams/support)
 - Product engineers, who are focused on products and take on support responsibilities in a [support hero rotation](/handbook/engineering/support-hero)
 
 #### What do Support Engineers do?
@@ -45,7 +45,7 @@ Right now, support engineers provide the first level of support for the followin
 - Web analytics
 - Session replay
 - Feature success
-- Comms
+- Support
 - Data warehouse
 - Customer Success
 
