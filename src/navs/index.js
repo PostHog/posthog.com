@@ -259,10 +259,6 @@ export const handbookSidebar = [
                 url: '/handbook/company/brand-assets',
             },
             {
-                name: 'Art requests',
-                url: '/handbook/design/art-requests',
-            },
-            {
                 name: 'Brand strategy',
                 url: '/handbook/strategy/brand',
             },
@@ -580,10 +576,6 @@ export const handbookSidebar = [
                 ],
             },
             {
-                name: 'Testimonials',
-                url: '/handbook/growth/marketing/testimonials',
-            },
-            {
                 name: 'Dashboard templates',
                 url: '/handbook/growth/marketing/templates',
             },
@@ -638,43 +630,19 @@ export const handbookSidebar = [
         ],
     },
     {
-        name: 'Customer comms',
+        name: 'Support',
         url: '',
         children: [
             {
                 name: 'Overview',
-                url: '/handbook/comms/comms-team',
-            },
-            {
-                name: 'Press',
-                url: '/handbook/comms/press',
-            },
-            {
-                name: 'Partners',
-                url: '/handbook/comms/partners',
-            },
-            {
-                name: 'Email comms',
-                url: '/handbook/comms/email-comms',
-            },
-            {
-                name: 'In-app comms',
-                url: '/handbook/comms/in-app',
+                url: '/handbook/support/support-team',
             },
             {
                 name: 'Customer support',
-                url: '/handbook/comms/customer-support',
+                url: '/handbook/support/customer-support',
             },
             {
-                name: 'Startups & Y Combinator',
-                url: '/handbook/comms/startups',
-            },
-            {
-                name: 'Product announcements',
-                url: '/handbook/comms/product-announcements',
-            },
-            {
-                name: 'Incident & maintenance comms',
+                name: 'Incidents & maintenance',
                 url: '/handbook/engineering/incidents#customer-communications',
             },
         ],
@@ -836,6 +804,48 @@ export const handbookSidebar = [
                         url: '/handbook/engineering/posthog-com/api-docs',
                     },
                 ],
+            },
+        ],
+    },
+    {
+        name: 'Words & Pictures',
+        url: '',
+        children: [
+            {
+                name: 'Overview',
+                url: '/handbook/words-and-pictures/words-and-pictures',
+            },
+            {
+                name: 'Art requests',
+                url: '/handbook/words-and-pictures/art-requests',
+            },
+            {
+                name: 'Email marketing',
+                url: '/handbook/words-and-pictures/art-requests',
+            },
+            {
+                name: 'In-app messaging',
+                url: '/handbook/words-and-pictures/in-app',
+            },
+            {
+                name: 'Partnerships',
+                url: '/handbook/words-and-pictures/partners',
+            },
+            {
+                name: 'Press & PR',
+                url: '/handbook/words-and-pictures/press',
+            },
+            {
+                name: 'Product launches',
+                url: '/handbook/words-and-pictures/product-announcements',
+            },
+            {
+                name: 'Startups & YC Programs',
+                url: '/handbook/words-and-pictures/startups',
+            },
+            {
+                name: 'Testimonials & G2',
+                url: '/handbook/words-and-pictures/testimonials',
             },
         ],
     },
@@ -1073,8 +1083,12 @@ export const companyMenu = {
                     name: 'Not engineering',
                 },
                 {
-                    name: 'Comms',
-                    url: '/teams/comms',
+                    name: 'Support',
+                    url: '/teams/support',
+                },
+                {
+                    name: 'Words & Pictures',
+                    url: '/teams/words-and-pictures',
                 },
                 {
                     name: 'Exec',

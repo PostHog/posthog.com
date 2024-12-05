@@ -9,7 +9,7 @@
     "redirects": [
         {
             "source": "/handbook/growth/marketing/product-announcements",
-            "destination": "/handbook/comms/product-announcements"
+            "destination": "/handbook/words-and-pictures/product-announcements"
         },
         { "source": "/tutorials/nps-survey", "destination": "/templates/nps-survey" },
         { "source": "/questions/topics/:path*", "destination": "/questions/topic/:path*" },
@@ -1364,8 +1364,8 @@
             "destination": "/docs/session-replay/installation?tab=React+Native"
         },
         {
-            "source": "/teams/customer-comms",
-            "destination": "/teams/comms"
+            "source": "/teams/comms",
+            "destination": "/teams/support"
         },
         { "source": "/apps", "destination": "/cdp", "statusCode": 302 }
     ]
