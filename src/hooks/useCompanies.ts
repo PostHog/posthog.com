@@ -24,7 +24,7 @@ const query = (offset: number, companyFilters: Filters, jobFilters: Filters) => 
                 start: offset * 20,
                 limit: 20,
             },
-            sort: 'createdAt:desc',
+            sort: 'name:asc',
             populate: {
                 jobs: {
                     sort: 'postedDate:desc',

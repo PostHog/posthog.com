@@ -73,7 +73,7 @@ const Companies = ({ companyFilters, jobFilters }: { companyFilters: FiltersType
             ))}
         </ul>
     ) : (
-        <ul className="list-none p-0 m-0 space-y-16 pb-12">
+        <ul className="list-none p-0 m-0 space-y-8 pb-12">
             {companies.map((company) => {
                 const { name } = company.attributes
                 const logoLight = company.attributes.logoLight?.data?.attributes?.url
