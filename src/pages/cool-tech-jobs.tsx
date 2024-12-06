@@ -73,7 +73,7 @@ const JobsByDepartment = ({ jobs, department }: { jobs: Job[]; department: strin
                 onClick={() => setOpen(!open)}
                 className="w-full text-left flex items-center border-b border-light dark:border-dark pb-2 mb-2"
             >
-                <IconChevronDown className={`size-7 transition-transform ${open ? 'rotate-180' : ''}`} />
+                <IconChevronDown className={`size-7 transition-transform opacity-60 ${open ? 'rotate-180' : ''}`} />
                 <span className="flex justify-between items-center flex-grow">
                     <h3 className="m-0 opacity-60 text-base font-semibold">{department}</h3>
                     <p className="m-0 opacity-60 text-sm font-normal">
