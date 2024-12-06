@@ -234,6 +234,7 @@ const Filters = ({
                                 key={filter.key}
                                 label={filter.label}
                                 onChange={(checked) => {
+                                    window.scrollTo({ top: 0, behavior: 'smooth' })
                                     setCompanyFilters((filters) => {
                                         if (checked) {
                                             return [...filters, { [filter.key]: { $eq: true } }]
