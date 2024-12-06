@@ -173,6 +173,7 @@ const FilterSelect = ({
             placeholder={filter.label}
             options={filter.options}
             onChange={(value) => {
+                window.scrollTo({ top: 0, behavior: 'smooth' })
                 setJobFilters((filters) => {
                     if (value) {
                         return [...filters.filter((f) => !(filter.key in f)), value]
