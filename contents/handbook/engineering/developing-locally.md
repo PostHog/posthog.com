@@ -230,6 +230,11 @@ export LDFLAGS=-L/opt/homebrew/opt/openssl/lib
 pnpm i --dir plugin-server
 ```
 
+> Note: If you face an error like `import gyp  # noqa: E402`, most probably need to install `python-setuptools`. To fix this, run:
+```bash
+brew install python-setuptools
+```
+
 #### 4. Prepare the Django server
 
 1. Install a few dependencies for SAML to work. If you're on macOS, run the command below, otherwise check the official [xmlsec repo](https://github.com/mehcode/python-xmlsec) for more details.
