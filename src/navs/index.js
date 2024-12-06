@@ -656,6 +656,10 @@ export const handbookSidebar = [
                 url: '/handbook/growth/sales/overview',
             },
             {
+                name: 'Why buy PostHog',
+                url: '/handbook/growth/sales/why-buy-posthog',
+            },
+            {
                 name: 'New sales',
                 url: '/handbook/growth/sales/new-sales',
             },
