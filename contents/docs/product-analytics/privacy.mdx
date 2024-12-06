@@ -4,6 +4,12 @@ title: Privacy controls
 
 PostHog offers a range of controls to limit what data is captured by product analytics. They are listed below in order of least to most restrictive.
 
+## EU-cloud hosting
+
+PostHog offers hosting on EU cloud. To use this, sign up at [eu.posthog.com](https://eu.posthog.com).
+
+If you've already created a US cloud instance and wish to migrate ticket, you must raise a [support ticket in-app](https://us.posthog.com/home#supportModal) with the **Data pipelines** topic for the PostHog team to do this migration for you. This option is **only available to customers on the team or enterprise plan** as it requires significant engineering time.  
+
 ## Disable sensitive information with autocapture
 
 If you're using [autocapture](/docs/product-analytics/autocapture), PostHog automatically attempts to prevent sensitive data capture. We specifically only collect the `name`, `id`, and `class` attributes from input tags.
@@ -13,6 +19,24 @@ If there are specific elements you don't want to capture, add the [`ph-no-captur
 ```html
 <button class='ph-no-capture'>Sensitive information here</button>
 ```
+
+## Sanitize properties
+
+You can sanitize properties on the client side by setting the `sanitize_properties` [config](/docs/libraries/js#config) option. This is a function that enables to modify the properties before they are sent to PostHog. For example:
+
+```js-web
+posthog.init('<ph_project_api_key>', {
+    api_host: '<ph_client_api_host>',
+    sanitize_properties: function(properties, event) {
+        if (properties['$ip']) {
+            properties['$ip'] = null;
+        }
+        return properties;
+    }
+});
+```
+
+##
 
 Additionally, you can set [allow or ignore lists](/docs/product-analytics/autocapture#reducing-events-with-an-allow-and-ignorelist) in your PostHog config to prevent specific elements from being captured.
 
