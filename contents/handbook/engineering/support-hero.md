@@ -283,7 +283,7 @@ When we've added a new [team](/teams), or 🪓 split an existing team into two o
 
 At the end of every page in the docs and handbook is a form where visitors can ask questions about the content of that page. (These questions also appear in the relevant category in the [PostHog community](/questions).)
 
-Community questions appear in Zendesk but tickets are closed automatically if an answer is picked as a solution on the website. Ideally, the original poster is the one who marks a response as the solution. If they don't, feel free to close the ticket in Zendesk once you've replied.
+Community questions appear in Zendesk and tickets are closed automatically if an answer is picked as a solution on the website. Ideally, the original poster is the one who marks a response as the solution. If they don't, feel free to close the ticket in Zendesk once you've replied.
 
 ## How do I answer community questions?
 
