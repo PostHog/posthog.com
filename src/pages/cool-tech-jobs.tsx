@@ -83,7 +83,6 @@ const JobsByDepartment = ({ jobs, department }: { jobs: Job[]; department: strin
             </button>
             <motion.ul
                 className="list-none p-0 m-0 overflow-hidden ml-7"
-                layout
                 animate={open ? { height: 'auto' } : { height: 0 }}
             >
                 {jobs.map((job) => (
