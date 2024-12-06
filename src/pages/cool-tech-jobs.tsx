@@ -44,8 +44,8 @@ const toggleFilters = [
     },
     {
         icon: <StickerHourglass className="size-6" />,
-        label: 'Has deadlines',
-        key: 'hasDeadlines',
+        label: 'No deadlines',
+        key: 'noDeadlines',
     },
 ]
 

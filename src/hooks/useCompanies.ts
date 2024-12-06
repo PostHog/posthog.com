@@ -51,7 +51,7 @@ export type Company = {
         exoticOffsites: boolean
         meetingFreeDays: boolean
         highEngineerRatio: boolean
-        hasDeadlines: boolean
+        noDeadlines: boolean
         description: string
         jobs: {
             data: Job[]
