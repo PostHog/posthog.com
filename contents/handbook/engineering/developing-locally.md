@@ -332,6 +332,11 @@ Open [http://localhost:8000](http://localhost:8000) to see the app.
 
 To get some practical test data into your brand-new instance of PostHog, run `DEBUG=1 ./manage.py generate_demo_data`. For a list of useful arguments of the command, run `DEBUG=1 ./manage.py generate_demo_data --help`.
 
+You can also use [mprocs](https://github.com/pvolok/mprocs) to run all development processes in a single terminal window. mprocs provides a clean interface for starting, stopping, and monitoring each service individually, with separate log views for easier debugging. This includes docker compose, so make sure to stop it if it's already running. Once you have mprocs installed, run
+```bash
+./bin/start-mprocs
+```
+
 #### 7. Develop
 
 This is it! You can now change PostHog in any way you want. See [Project Structure](/handbook/engineering/project-structure) for an intro to the repository's contents.
