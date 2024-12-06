@@ -5,7 +5,7 @@ import useCompanies, { Company, Filters as FiltersType } from 'hooks/useCompanie
 import Layout from 'components/Layout'
 import { layoutLogic } from 'logic/layoutLogic'
 import { useValues } from 'kea'
-import { IconCheck } from '@posthog/icons'
+import { IconChevronDown } from '@posthog/icons'
 import Link from 'components/Link'
 import dayjs from 'dayjs'
 import relativeTime from 'dayjs/plugin/relativeTime'
@@ -13,6 +13,7 @@ import Toggle from 'components/Toggle'
 import Select from 'components/Select'
 import { StickerEngineerRatio, StickerHourglass } from 'components/Stickers/Index'
 import { StickerDnd, StickerLaptop, StickerPalmTree, StickerPullRequest } from 'components/Stickers/Index'
+import { motion } from 'framer-motion'
 
 dayjs.extend(relativeTime)
 
@@ -64,26 +65,48 @@ const Perks = ({ company, className }: { company: Company; className?: string })
     )
 }
 
+const JobsByDepartment = ({ jobs, department }: { jobs: Job[]; department: string }) => {
+    const [open, setOpen] = useState(true)
+    return (
+        <div>
+            <button
+                onClick={() => setOpen(!open)}
+                className="w-full text-left flex items-center border-b border-light dark:border-dark pb-2 mb-2"
+            >
+                <IconChevronDown className={`size-7 transition-transform ${open ? 'rotate-180' : ''}`} />
+                <span className="flex justify-between items-center flex-grow">
+                    <h3 className="m-0 opacity-60 text-base font-semibold">{department}</h3>
+                    <p className="m-0 opacity-60 text-sm font-normal">
+                        <span className="font-bold">{jobs.length}</span> job{jobs.length === 1 ? '' : 's'}
+                    </p>
+                </span>
+            </button>
+            <motion.ul
+                className="list-none p-0 m-0 overflow-hidden ml-7"
+                layout
+                animate={open ? { height: 'auto' } : { height: 0 }}
+            >
+                {jobs.map((job) => (
+                    <li key={job.id} className="flex justify-between items-end last:mb-6 mt-2 first:mt-0">
+                        <Link externalNoIcon className="!text-inherit underline" to={job.attributes.url}>
+                            {job.attributes.title}
+                        </Link>
+                        <p className="m-0 opacity-60 text-sm">{dayjs(job.attributes.postedDate).fromNow()}</p>
+                    </li>
+                ))}
+            </motion.ul>
+        </div>
+    )
+}
+
 const JobList = ({ jobs }: { jobs: Job[] }) => {
     const jobsGroupedByDepartment = groupBy(jobs, 'attributes.department')
 
     return (
-        <ul className="list-none p-0 m-0 space-y-6 mt-2 flex-grow">
+        <ul className="list-none p-0 m-0 mt-2 flex-grow">
             {Object.entries(jobsGroupedByDepartment).map(([department, jobs]) => (
                 <li key={department}>
-                    <h3 className="m-0 opacity-60 text-base font-normal border-b border-light dark:border-dark pb-2 mb-2">
-                        {department}
-                    </h3>
-                    <ul className="list-none p-0 m-0 space-y-2">
-                        {jobs.map((job) => (
-                            <li key={job.id} className="flex justify-between items-end">
-                                <Link externalNoIcon className="!text-inherit underline" to={job.attributes.url}>
-                                    {job.attributes.title}
-                                </Link>
-                                <p className="m-0 opacity-60 text-sm">{dayjs(job.attributes.postedDate).fromNow()}</p>
-                            </li>
-                        ))}
-                    </ul>
+                    <JobsByDepartment jobs={jobs} department={department} />
                 </li>
             ))}
         </ul>
@@ -101,7 +124,7 @@ const Companies = ({ companyFilters, jobFilters }: { companyFilters: FiltersType
             ))}
         </ul>
     ) : (
-        <ul className="list-none p-0 m-0 space-y-8 pb-12">
+        <ul className="list-none p-0 m-0 space-y-8 pb-12 mt-2">
             {companies.map((company) => {
                 const { name } = company.attributes
                 const logoLight = company.attributes.logoLight?.data?.attributes?.url
