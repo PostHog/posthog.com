@@ -11,6 +11,8 @@ import dayjs from 'dayjs'
 import relativeTime from 'dayjs/plugin/relativeTime'
 import Toggle from 'components/Toggle'
 import Select from 'components/Select'
+import { StickerEngineerRatio, StickerHourglass } from 'components/Stickers/Index'
+import { StickerDnd, StickerLaptop, StickerPalmTree, StickerPullRequest } from 'components/Stickers/Index'
 
 dayjs.extend(relativeTime)
 
@@ -144,31 +146,37 @@ const Filters = ({
 }) => {
     const [displayedFilters, setDisplayedFilters] = useState<FiltersType>([
         {
+            icon: <StickerPullRequest className="size-8" />,
             label: 'Engineers decide what to build',
             key: 'engineersDecideWhatToBuild',
             type: 'toggle',
         },
         {
+            icon: <StickerLaptop className="size-8" />,
             label: 'Remote only',
             key: 'remoteOnly',
             type: 'toggle',
         },
         {
+            icon: <StickerPalmTree className="size-8" />,
             label: 'Exotic offsites',
             key: 'exoticOffsites',
             type: 'toggle',
         },
         {
+            icon: <StickerDnd className="size-8" />,
             label: 'Meeting-free days',
             key: 'meetingFreeDays',
             type: 'toggle',
         },
         {
+            icon: <StickerEngineerRatio className="size-8" />,
             label: 'High engineer ratio',
             key: 'highEngineerRatio',
             type: 'toggle',
         },
         {
+            icon: <StickerHourglass className="size-8" />,
             label: 'Has deadlines',
             key: 'hasDeadlines',
             type: 'toggle',
@@ -200,6 +208,7 @@ const Filters = ({
                     case 'toggle':
                         return (
                             <Toggle
+                                iconLeft={filter.icon}
                                 key={filter.key}
                                 label={filter.label}
                                 onChange={(checked) => {
@@ -229,8 +238,19 @@ export default function JobsPage() {
     return (
         <Layout>
             <section className="px-5">
-                <div className="flex items-start -mt-1">
-                    <div className="flex-grow mr-6 pr-6 border-r border-light dark:border-dark">
+                <div className="flex flex-col lg:flex-row items-start -mt-1">
+                    <div className="min-w-[300px] lg:max-w-[300px] pr-6 sticky top-[57px] py-4">
+                        <h1 className="text-2xl font-bold">Cool tech jobs</h1>
+                        <p>
+                            Open roles for product engineers and other jobs from companies with unique perks and great
+                            culture
+                        </p>
+
+                        <p className="mt-4">
+                            Looking to work at PostHog? <Link to="/jobs">Visit our careers page.</Link>
+                        </p>
+                    </div>
+                    <div className="flex-grow mr-6 lg:pl-6 pr-6 border-r lg:border-l border-light dark:border-dark">
                         {sortBy === 'company' ? (
                             <Companies companyFilters={companyFilters} jobFilters={jobFilters} />
                         ) : (
