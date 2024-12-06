@@ -16,22 +16,48 @@ import { StickerDnd, StickerLaptop, StickerPalmTree, StickerPullRequest } from '
 
 dayjs.extend(relativeTime)
 
+const toggleFilters = [
+    {
+        icon: <StickerPullRequest className="size-8" />,
+        label: 'Engineers decide what to build',
+        key: 'engineersDecideWhatToBuild',
+    },
+    {
+        icon: <StickerLaptop className="size-8" />,
+        label: 'Remote only',
+        key: 'remoteOnly',
+    },
+    {
+        icon: <StickerPalmTree className="size-8" />,
+        label: 'Exotic offsites',
+        key: 'exoticOffsites',
+    },
+    {
+        icon: <StickerDnd className="size-8" />,
+        label: 'Meeting-free days',
+        key: 'meetingFreeDays',
+    },
+    {
+        icon: <StickerEngineerRatio className="size-8" />,
+        label: 'High engineer ratio',
+        key: 'highEngineerRatio',
+    },
+    {
+        icon: <StickerHourglass className="size-8" />,
+        label: 'Has deadlines',
+        key: 'hasDeadlines',
+    },
+]
+
 const Perks = ({ company }: { company: Company }) => {
-    const { engineersDecideWhatToBuild, remoteOnly, exoticOffsites, meetingFreeDays, highEngineerRatio } =
-        company.attributes
-    const perks = [
-        engineersDecideWhatToBuild && 'Engineers decide what to build',
-        remoteOnly && 'Remote only',
-        exoticOffsites && 'Exotic offsites',
-        meetingFreeDays && 'Meeting-free days',
-        highEngineerRatio && 'High engineer ratio',
-    ]
+    const perks = toggleFilters.filter((toggle) => company.attributes[toggle.key])
+
     return (
         <ul className="list-none p-0 m-0 flex space-x-2">
             {perks.filter(Boolean).map((perk) => (
                 <li key={`${company.id}-${perk}`} className="flex items-center space-x-1">
-                    <IconCheck className="size-4 text-green" />
-                    <span className="text-sm font-semibold">{perk}</span>
+                    {perk.icon}
+                    <span className="text-sm font-semibold">{perk.label}</span>
                 </li>
             ))}
         </ul>
@@ -144,44 +170,12 @@ const Filters = ({
     jobFilters: FiltersType
     setJobFilters: (filters: FiltersType) => void
 }) => {
-    const [displayedFilters, setDisplayedFilters] = useState<FiltersType>([
-        {
-            icon: <StickerPullRequest className="size-8" />,
-            label: 'Engineers decide what to build',
-            key: 'engineersDecideWhatToBuild',
+    const [displayedFilters, setDisplayedFilters] = useState<FiltersType>(
+        toggleFilters.map((filter) => ({
+            ...filter,
             type: 'toggle',
-        },
-        {
-            icon: <StickerLaptop className="size-8" />,
-            label: 'Remote only',
-            key: 'remoteOnly',
-            type: 'toggle',
-        },
-        {
-            icon: <StickerPalmTree className="size-8" />,
-            label: 'Exotic offsites',
-            key: 'exoticOffsites',
-            type: 'toggle',
-        },
-        {
-            icon: <StickerDnd className="size-8" />,
-            label: 'Meeting-free days',
-            key: 'meetingFreeDays',
-            type: 'toggle',
-        },
-        {
-            icon: <StickerEngineerRatio className="size-8" />,
-            label: 'High engineer ratio',
-            key: 'highEngineerRatio',
-            type: 'toggle',
-        },
-        {
-            icon: <StickerHourglass className="size-8" />,
-            label: 'Has deadlines',
-            key: 'hasDeadlines',
-            type: 'toggle',
-        },
-    ])
+        }))
+    )
 
     useEffect(() => {
         fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/jobs/filters`)
@@ -208,6 +202,8 @@ const Filters = ({
                     case 'toggle':
                         return (
                             <Toggle
+                                activeOpacity={false}
+                                position="right"
                                 iconLeft={filter.icon}
                                 key={filter.key}
                                 label={filter.label}

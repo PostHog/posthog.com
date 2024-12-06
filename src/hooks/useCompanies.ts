@@ -5,11 +5,13 @@ import { Job } from './useJobs'
 
 export type Filters = Array<
     | {
+          icon: React.ReactNode
           label: string
           key: string
           type: 'toggle'
       }
     | {
+          icon: React.ReactNode
           label: string
           key: string
           type: 'select'
