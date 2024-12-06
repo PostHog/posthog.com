@@ -102,19 +102,23 @@ await Posthog().alias(
 
 We strongly recommend reading our docs on [alias](/docs/data/identify#alias-assigning-multiple-distinct-ids-to-the-same-user) to best understand how to correctly use this method.
 
-## Person Profiles ("anonymous" vs "identified" persons)
+## Anonymous vs identfied events
 
-The default behavior for this SDK is to use the `identifiedOnly` mode of person processing, but this can be changed in the config. The options are:
-- `PostHogPersonProfiles.identifiedOnly`
-- `PostHogPersonProfiles.never`
-- `PostHogPersonProfiles.always`
+import IdentifiedVsAnonymousIntro from '../../product-analytics/_snippets/identified-vs-anonymous-intro.mdx'
 
-To change the person profiles behaviour, you'll have to setup the SDK manually and set the desired person profiles:
+<IdentifiedVsAnonymousIntro />
 
-```dart
-final config = PostHogConfig('YOUR_API_KEY_GOES_HERE');
-config.personProfiles = PostHogPersonProfiles.always
-```
+### How to capture anonymous events
+
+import HowToCaptureAnonymousEventsFlutter from '../../product-analytics/_snippets/how-to-capture-anonymous-events-flutter.mdx'
+
+<HowToCaptureAnonymousEventsFlutter />
+
+### How to capture identified events
+
+import HowToCaptureIdentifiedEventsFlutter from '../../product-analytics/_snippets/how-to-capture-identified-events-flutter.mdx'
+
+<HowToCaptureIdentifiedEventsFlutter />
 
 ## Super Properties
 
