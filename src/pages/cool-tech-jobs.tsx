@@ -18,42 +18,42 @@ dayjs.extend(relativeTime)
 
 const toggleFilters = [
     {
-        icon: <StickerPullRequest className="size-8" />,
+        icon: <StickerPullRequest className="size-6" />,
         label: 'Engineers decide what to build',
         key: 'engineersDecideWhatToBuild',
     },
     {
-        icon: <StickerLaptop className="size-8" />,
+        icon: <StickerLaptop className="size-6" />,
         label: 'Remote only',
         key: 'remoteOnly',
     },
     {
-        icon: <StickerPalmTree className="size-8" />,
+        icon: <StickerPalmTree className="size-6" />,
         label: 'Exotic offsites',
         key: 'exoticOffsites',
     },
     {
-        icon: <StickerDnd className="size-8" />,
+        icon: <StickerDnd className="size-6" />,
         label: 'Meeting-free days',
         key: 'meetingFreeDays',
     },
     {
-        icon: <StickerEngineerRatio className="size-8" />,
+        icon: <StickerEngineerRatio className="size-6" />,
         label: 'High engineer ratio',
         key: 'highEngineerRatio',
     },
     {
-        icon: <StickerHourglass className="size-8" />,
+        icon: <StickerHourglass className="size-6" />,
         label: 'Has deadlines',
         key: 'hasDeadlines',
     },
 ]
 
-const Perks = ({ company }: { company: Company }) => {
+const Perks = ({ company, className }: { company: Company; className?: string }) => {
     const perks = toggleFilters.filter((toggle) => company.attributes[toggle.key])
 
     return (
-        <ul className="list-none p-0 m-0 flex space-x-2">
+        <ul className={`list-none p-0 m-0 ${className}`}>
             {perks.filter(Boolean).map((perk) => (
                 <li key={`${company.id}-${perk}`} className="flex items-center space-x-1">
                     {perk.icon}
@@ -68,7 +68,7 @@ const JobList = ({ jobs }: { jobs: Job[] }) => {
     const jobsGroupedByDepartment = groupBy(jobs, 'attributes.department')
 
     return (
-        <ul className="list-none p-0 m-0 space-y-6 mt-2">
+        <ul className="list-none p-0 m-0 space-y-6 mt-2 flex-grow">
             {Object.entries(jobsGroupedByDepartment).map(([department, jobs]) => (
                 <li key={department}>
                     <h3 className="m-0 opacity-60 text-base font-normal border-b border-light dark:border-dark pb-2 mb-2">
@@ -107,8 +107,8 @@ const Companies = ({ companyFilters, jobFilters }: { companyFilters: FiltersType
                 const logoLight = company.attributes.logoLight?.data?.attributes?.url
                 const logoDark = company.attributes.logoDark?.data?.attributes?.url
                 return company.attributes.jobs.data.length > 0 ? (
-                    <li key={company.id}>
-                        <div className="sticky top-[41px] pt-8 pb-4 z-10 bg-light dark:bg-dark">
+                    <li className="xl:flex xl:space-x-8 items-start" key={company.id}>
+                        <div className="sticky top-[57px] pt-4 pb-4 z-10 bg-light dark:bg-dark flex-shrink-0 xl:max-w-[230px] w-full">
                             {(logoLight || logoDark) && (
                                 <img
                                     className="max-w-40 mb-3"
@@ -116,7 +116,10 @@ const Companies = ({ companyFilters, jobFilters }: { companyFilters: FiltersType
                                     alt={name}
                                 />
                             )}
-                            <Perks company={company} />
+                            <Perks
+                                className="xl:block xl:[&>li]:ml-0 space-y-1 [&>li]:ml-2 xl:ml-0 -ml-2 flex flex-wrap"
+                                company={company}
+                            />
                         </div>
                         <JobList jobs={company.attributes.jobs.data} />
                     </li>
