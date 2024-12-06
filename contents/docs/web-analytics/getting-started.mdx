@@ -27,8 +27,9 @@ The best way to get started is to open your web analytics [dashboard](https://ap
 
 At a glance, the dashboard has sections for all of the following data:
 
-- **Visitors, pageviews, and sessions:** How many people are coming to your website? How many pages do they visit? How long do they stay?
-- **Paths:** Which pages are they going to?
+- **Visitors and pageviews, and sessions:** How many people are coming to your website? How many pages do they visit? 
+- **Sessions and session duration:** How often do people visit? How long do they stay?
+- **Paths:** What pages are they visiting?
 - **Channels, referrers, and UTM parameters:** Where did they come from?
 - **Demographic information:** What devices, browsers, and operating systems are they using? Where are they located?
 - **Goals:** Are users performing the actions you want them to?
@@ -45,13 +46,16 @@ The first thing you'll see at the top of the web analytics dashboard is a graph 
 - How many people visited in the last week, month, or custom time period?
 - Is the number of visitors going up or down over a given time period?
 
-> **💡 Concept:** What is the distinction between a visitor and a session?
-> - A [**session**](/docs/data/sessions) is a set of events for a single visit to your website. Sessions have a beginning, a duration, and an end.
-> - A **visitor** represents a single person visiting your site.
->
-> In other words, a single visitor will have many sessions as they return to your website. And each session will likely have many pageviews as they move from page to page.
+What's the difference a between a visitor and a session?
 
-The first important feature to get familiar with is working with time intervals. You can adjust all the data on your web analytics dashboard to be scoped to the last 24 hours, the last 7 days, the year-to-date, or any other custom time range. In the screenshot below, we can see the last 30 days of traffic. You can also hover over the graph to see the value for the current period compared with the previous period.
+- A [**session**](/docs/data/sessions) is a set of events for a single visit to your website. Sessions have a beginning, a duration, and an end.
+- A **visitor** represents a single, unique person visiting your site.
+
+In other words, a single visitor will have many sessions as they return to your website. And each session will likely have many pageviews as they move from page to page.
+
+You can adjust all the data on your web analytics dashboard to view last 24 hours, the last 7 days, the year-to-date, or any other custom time range. 
+
+In the screenshot below, we can see the last 30 days of traffic. You can also hover over the graph to see the value for the current period compared with the previous period.
 
 <ProductScreenshot
   imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/time_intervals_wide_2ce241b1c4.png"
@@ -60,7 +64,7 @@ The first important feature to get familiar with is working with time intervals.
   classes="rounded"
 />
 
-#### 📋 Use case: Finding when users are most active
+#### Use case: Finding when users are most active
 
 If you have a weekly newsletter, you may want to send it to your readers at a time they're likely to be active and not miss it. PostHog has a newsletter called [_Product for Engineers_](https://newsletter.posthog.com), and we can use these graphs to make an educated guess about when users are most active.
 
@@ -82,7 +86,7 @@ Paths show you all the specific pages accessed in your app or website, which can
 - What is the last page people visit before leaving?
 - What is the bounce rate for a particular page?
 
-> **💡 Concept:** What is the bounce rate? Bounce rate is the percentage of users who leave your page immediately after visiting. In other words, a bounce is when someone lands on a page, but doesn't interact with it and leaves within 10 seconds. For more information, we also have a tutorial available for [how to calculate bounce rate](/tutorials/bounce-rate).
+Bounce rate is the percentage of users who leave your page immediately after visiting. In other words, a bounce is when someone lands on a page, but doesn't interact with it and leaves within 10 seconds. For more information, we also have a tutorial available for [how to calculate bounce rate](/tutorials/bounce-rate).
 
 <ProductScreenshot
   imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/v1711580005/posthog.com/contents/images/docs/web-analytics/dashboard/paths-light.png"
@@ -91,7 +95,9 @@ Paths show you all the specific pages accessed in your app or website, which can
   classes="rounded"
 />
 
-One of the most powerful features for web analytics is the ability to filter the data. So far we've been looking at global data for all visitors, but we can also narrow the scope of the data we're looking at. At the top of your dashboard, you can click the **+ Add filter** button and filter based on various event properties. You'll have dozens or even hundreds of data points to use for filtering, but here are a handful of examples:
+You can drill down into specific pages and event properties using the **+ Add filter**.
+
+You'll have dozens or even hundreds of data points to use for filtering, but here are a handful of examples:
 
 - filter where _Path Name_ is equal to `"/pricing"`
 - filter where _Device Type_ is equal to `"Desktop"`
@@ -124,10 +130,10 @@ The web analytics dashboard also enables you to find out where traffic is coming
 
 Channels distinguish between different sources that are bringing traffic to your website. They're also sometimes called marketing channels or acquisition channels. Here are some examples:
 
-- Search: visitors from a search engine like Google (you can also distinguish between traffic from organic search results and paid ads)
-- Social: visitors from social media site
-- Referrals: visitors that clicked a referral link (more on this below)
-- Direct: visitors that went directly to your website (by typing the URL or clicking a bookmark for example)
+- **Search:** visitors from a search engine like Google (you can also distinguish between traffic from organic search results and paid ads)
+- **Social:** visitors from social media site
+- **Referrals:** visitors that clicked a referral link (more on this below)
+- **Direct:** visitors that went directly to your website (by typing the URL or clicking a bookmark for example)
 
 This is just a small sample of the available channels to give you an idea of how to get started. There's a full list of available [channel types](/docs/data/channel-type), and features for defining your own [custom channels](/docs/web-analytics/dashboard#custom-channel-type) as well.
 
@@ -150,9 +156,9 @@ For example, if you advertise a sale on Google, you can use the URL to indicate 
 
 `posthog.com?utm_source=google,utm_campaign=summer-sale`
 
-Web analytics enables you to filter by all the various UTM parameters that are available, and you can learn more about them in our [UTM segmentation](/docs/data/utm-segmentation) doc. We also have a tutorial on [how to track performance marketing](/tutorials/performance-marketing) that is highly relevant.
+Web analytics enables you to filter by all the various UTM parameters that are available, and you can learn more about them in our [UTM segmentation](/docs/data/utm-segmentation) doc. We also have a tutorial on [how to track performance marketing](/tutorials/performance-marketing) that goes into more detail.
 
-#### 📋 Use case: Tracking visitors from a sponsored video
+#### Use case: Tracking visitors from a sponsored video
 
 One example of how PostHog uses these features was a recent sponsored video on YouTube. We sponsored a [Fireship](https://www.youtube.com/c/Fireship) video, and we can see how it worked below.
 
@@ -186,7 +192,7 @@ Based on how users are accessing your website, web analytics also provides addit
 
 The goals section of the web analytics dashboard is all about tracking conversion goals.
 
-> **💡 Concept:** What is a conversion? A conversion is a key event or action you want users to do. If a user converted, it means they not only visited your website, but also performed some key action like signing up or subscribing.
+A conversion is a key event or action you want users to do. If a user converted, it means they not only visited your website, but also performed some key action like signing up or subscribing.
 
 You can click the **Add conversion goal** button at the top of the web analytics dashboard, and check out our detailed guide on how to set up [conversion goals](/docs/web-analytics/conversion-goals).
 
@@ -197,8 +203,3 @@ You can click the **Add conversion goal** button at the top of the web analytics
   classes="rounded"
 />
 
-## Further reading
-
-This post is meant as a gentle introduction to the big picture concepts for web analytics, but there's a lot more depth available. Check out the web analytics [dashboard](/docs/web-analytics/dashboard) docs for more.
-
-And while web analytics is good for tracking high-level website metrics, product analytics is good for diving deep into how specific users behave. For more on the distinction between the two, check out our post on [web vs. product analytics](/docs/web-analytics/web-vs-product-analytics).
