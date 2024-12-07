@@ -16,6 +16,7 @@ import { StickerDnd, StickerLaptop, StickerPalmTree, StickerPullRequest } from '
 import { motion } from 'framer-motion'
 import { useLayoutData } from 'components/Layout/hooks'
 import SEO from 'components/seo'
+import SideModal from 'components/Modal/SideModal'
 
 dayjs.extend(relativeTime)
 
@@ -313,6 +314,7 @@ export default function JobsPage() {
     const [companyFilters, setCompanyFilters] = useState<FiltersType>([])
     const [jobFilters, setJobFilters] = useState<FiltersType>([])
     const [filtersOpen, setFiltersOpen] = useState(false)
+    const [applyModalOpen, setApplyModalOpen] = useState(false)
 
     return (
         <Layout>
@@ -336,7 +338,12 @@ export default function JobsPage() {
 
                         <p className="mt-4 mb-0 border-t border-light dark:border-dark pt-4 text-sm">
                             Work at a company with great perks?{' '}
-                            <Link to="/jobs">Apply to get your jobs listed here.</Link>
+                            <button
+                                className="text-red hover:text-red/75 dark:text-yellow dark:hover:text-yellow/75 font-semibold"
+                                onClick={() => setApplyModalOpen(true)}
+                            >
+                                Apply to get your jobs listed here.
+                            </button>
                         </p>
                     </div>
                     <div className="w-full flex-grow lg:mr-6 lg:pl-6 lg:pr-6 lg:border-x border-light dark:border-dark order-3 lg:order-2">
@@ -372,6 +379,49 @@ export default function JobsPage() {
                     </div>
                 </div>
             </section>
+
+            <SideModal open={applyModalOpen} setOpen={setApplyModalOpen} title="List your cool tech jobs">
+                <div className="prose dark:prose-dark">
+                    <p className="mb-2">
+                        Our job board is designed to help product engineers (and other tech-adjacent candidates) find
+                        companies that have a similar vibe to PostHog – where employees are empowered to do their best
+                        work.
+                    </p>
+                    <p className="mb-2">
+                        To qualify to have your open roles listed, you'll need to meet the following criteria:
+                    </p>
+                    <ul className="mb-4">
+                        <li>
+                            At least one unique perk listed in our filters
+                            <br />{' '}
+                            <span className="text-[15px] opacity-80">
+                                (Have a great perk we don't list? Let us know!)
+                            </span>
+                        </li>
+                        <li>
+                            A public job board (like Ashby or Greenhouse) so we can automatically keep our job board up
+                            to date
+                        </li>
+                        <li>
+                            <em>Actually be</em> a cool tech company where product engineers enjoy working!
+                        </li>
+                    </ul>
+                    <p>
+                        <a
+                            href="#"
+                            className="text-red dark:text-yellow font-semibold"
+                            onClick={(e) => {
+                                e.preventDefault()
+                                const parts = ['cory', '@', 'posthog', '.', 'com?subject=Cool%20tech%20jobs']
+                                window.location.href = `mailto:${parts.join('')}`
+                            }}
+                        >
+                            Send us an email
+                        </a>{' '}
+                        with the info above to apply to be listed.
+                    </p>
+                </div>
+            </SideModal>
         </Layout>
     )
 }
