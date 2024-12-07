@@ -83,15 +83,17 @@ const JobsByDepartment = ({ jobs, department }: { jobs: Job[]; department: strin
                 </span>
             </button>
             <motion.ul
-                className="list-none p-0 m-0 overflow-hidden ml-7"
+                className="list-none p-0 m-0 overflow-hidden @2xl:ml-7"
                 animate={open ? { height: 'auto' } : { height: 0 }}
             >
                 {jobs.map((job) => (
-                    <li key={job.id} className="flex justify-between items-end last:mb-6 mt-2 first:mt-0">
+                    <li key={job.id} className="flex justify-between gap-1 items-start last:mb-6 mt-2 first:mt-0">
                         <Link externalNoIcon className="!text-inherit underline" to={job.attributes.url}>
                             {job.attributes.title}
                         </Link>
-                        <p className="m-0 opacity-60 text-sm w-32">{dayjs(job.attributes.postedDate).fromNow()}</p>
+                        <p className="m-0 pt-1 opacity-60 text-sm flex-[0_0_6rem] text-right">
+                            {dayjs(job.attributes.postedDate).fromNow()}
+                        </p>
                     </li>
                 ))}
             </motion.ul>
@@ -136,7 +138,7 @@ const Companies = ({ companyFilters, jobFilters }: { companyFilters: FiltersType
                 const logoDark = company.attributes.logoDark?.data?.attributes?.url
                 return company.attributes.jobs.data.length > 0 ? (
                     <li className="@2xl:flex @2xl:space-x-8 items-start" key={company.id}>
-                        <div className="sticky top-[57px] pt-4 pb-4 z-10 bg-light dark:bg-dark flex-shrink-0 max-w-[230px] w-full">
+                        <div className="@2xl:sticky top-0 reasonable:top-[57px] pt-4 pb-4 z-10 bg-light dark:bg-dark flex-shrink-0 max-w-[230px] w-full">
                             {(logoLight || logoDark) && (
                                 <img
                                     className="max-w-40 mb-3"
@@ -268,7 +270,7 @@ export default function JobsPage() {
         <Layout>
             <section className="px-5">
                 <div className="lg:flex flex-col lg:flex-row items-start -mt-1">
-                    <div className="min-w-[300px] lg:max-w-[300px] pr-6 md:sticky top-[57px] py-4">
+                    <div className="min-w-[300px] lg:max-w-[300px] pr-6 xl:sticky top-0 reasonable:top-[57px] py-4">
                         <h1 className="text-2xl font-bold">Cool tech jobs</h1>
                         <p>
                             Open roles for product engineers and other jobs from companies with unique perks and great
@@ -286,7 +288,7 @@ export default function JobsPage() {
                             <Jobs companyFilters={companyFilters} jobFilters={jobFilters} />
                         )}
                     </div>
-                    <div className="flex-shrink-0 md:sticky top-[57px] py-4">
+                    <div className="flex-shrink-0 md:sticky top-0 reasonable:top-[57px] py-4">
                         <Filters
                             companyFilters={companyFilters}
                             setCompanyFilters={setCompanyFilters}
