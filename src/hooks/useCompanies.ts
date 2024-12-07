@@ -46,6 +46,7 @@ export type Company = {
     attributes: {
         slug: string
         name: string
+        url: string
         engineersDecideWhatToBuild: boolean
         remoteOnly: boolean
         exoticOffsites: boolean
@@ -65,6 +66,13 @@ export type Company = {
             }
         }
         logoDark: {
+            data: {
+                attributes: {
+                    url: string
+                }
+            }
+        }
+        logomark: {
             data: {
                 attributes: {
                     url: string

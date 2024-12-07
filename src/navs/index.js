@@ -958,6 +958,12 @@ export const communityMenu = {
             url: '/templates',
         },
         {
+            name: 'Cool tech jobs',
+            icon: 'IconLaptop',
+            color: 'purple',
+            url: '/cool-tech-jobs',
+        },
+        {
             name: 'Newsletter',
             icon: 'IconNewspaper',
             color: 'green',

@@ -88,7 +88,11 @@ const JobsByDepartment = ({ jobs, department }: { jobs: Job[]; department: strin
             >
                 {jobs.map((job) => (
                     <li key={job.id} className="flex justify-between gap-1 items-start last:mb-6 mt-2 first:mt-0">
-                        <Link externalNoIcon className="group !text-inherit underline" to={job.attributes.url}>
+                        <Link
+                            externalNoIcon
+                            className="group !text-inherit underline"
+                            to={`${job.attributes.url}?utm_source=posthog`}
+                        >
                             <span className="relative">
                                 {job.attributes.title}
                                 <IconArrowUpRight className="inline-block size-4 opacity-0 group-hover:opacity-50 text-primary dark:text-primary-dark absolute left-full top-0.5 ml-0.5" />
@@ -141,32 +145,44 @@ const Companies = ({ companyFilters, jobFilters }: { companyFilters: FiltersType
                 const logoDark = company.attributes.logoDark?.data?.attributes?.url
                 return company.attributes.jobs.data.length > 0 ? (
                     <li className="@2xl:flex @2xl:space-x-8 items-start" key={company.id}>
-                        <div className="@2xl:sticky top-0 reasonable:top-[57px] pt-4 pb-4 z-10 bg-light dark:bg-dark @2xl:flex-[0_0_230px]">
+                        <div className="@2xl:sticky top-0 reasonable:top-[107px] pt-4 pb-4 z-10 bg-light dark:bg-dark @2xl:flex-[0_0_230px]">
                             {(logoLight || logoDark) && (
-                                <img
-                                    className="max-w-40 mb-3"
-                                    src={logoDark && websiteTheme === 'dark' ? logoDark : logoLight}
-                                    alt={name}
-                                />
+                                <>
+                                    {company.attributes.url ? (
+                                        <Link to={`${company.attributes.url}?utm_source=posthog`} externalNoIcon>
+                                            <img
+                                                className="max-w-40 mb-3"
+                                                src={logoDark && websiteTheme === 'dark' ? logoDark : logoLight}
+                                                alt={name}
+                                            />
+                                        </Link>
+                                    ) : (
+                                        <img
+                                            className="max-w-40 mb-3"
+                                            src={logoDark && websiteTheme === 'dark' ? logoDark : logoLight}
+                                            alt={name}
+                                        />
+                                    )}
+                                </>
                             )}
                             {company.attributes.description && (
-                                <p className="m-0 text-sm font-medium text-primary/75 dark:text-primary/75">
+                                <p className="m-0 text-sm font-medium text-primary/75 dark:text-primary-dark/75">
                                     {company.attributes.description}
                                 </p>
                             )}
 
-                            {/* {company.attributes.url && ( */}
-                            <Link
-                                href={company.attributes.url}
-                                className="group flex items-center gap-0.5 text-sm text-red dark:text-yellow font-semibold mb-2"
-                                externalNoIcon
-                            >
-                                Learn more
-                                <IconArrowUpRight className="size-4 opacity-0 group-hover:opacity-50 text-primary dark:text-primary-dark" />
-                            </Link>
-                            {/* )} */}
+                            {company.attributes.url && (
+                                <Link
+                                    href={`${company.attributes.url}?utm_source=posthog`}
+                                    className="group flex items-center gap-0.5 text-sm text-red dark:text-yellow font-semibold mb-2"
+                                    externalNoIcon
+                                >
+                                    Learn more
+                                    <IconArrowUpRight className="size-4 opacity-0 group-hover:opacity-50 text-primary dark:text-primary-dark" />
+                                </Link>
+                            )}
 
-                            <h4 className="text-sm font-medium text-primary/50 dark:text-primary/50 border-b border-light dark:border-dark pb-2 mt-4 mb-2">
+                            <h4 className="text-sm font-medium text-primary/50 dark:text-primary-dark/50 border-b border-light dark:border-dark pb-2 mt-4 mb-2">
                                 Unique perks
                             </h4>
                             <Perks
@@ -301,15 +317,20 @@ export default function JobsPage() {
         <Layout>
             <section className="px-5">
                 <div className="flex flex-col lg:flex-row items-start -mt-1 order-1">
-                    <div className="min-w-[300px] lg:max-w-[300px] pr-6 xl:sticky top-0 reasonable:top-[57px] py-4">
-                        <h1 className="text-2xl font-bold">Cool tech jobs</h1>
-                        <p className="mb-2">
+                    <div className="min-w-[300px] lg:max-w-[300px] pr-6 xl:sticky top-0 reasonable:top-[107px] py-4">
+                        <h1 className="text-2xl mb-2 font-bold">Cool tech jobs</h1>
+                        <p className="mb-2 text-[15px]">
                             Find open roles for product engineers and other jobs from companies with unique perks and
                             great culture.
                         </p>
 
-                        <p className="mt-2 mb-0">
-                            Looking to work at PostHog? <Link to="/jobs">Visit our careers page.</Link>
+                        <p className="mt-2 mb-0 text-[15px]">
+                            Looking to work at PostHog? <Link to="/careers">Visit our careers page.</Link>
+                        </p>
+
+                        <p className="mt-4 mb-0 border-t border-light dark:border-dark pt-4 text-sm">
+                            Work at a company with great perks?{' '}
+                            <Link to="/jobs">Apply to get your jobs listed here.</Link>
                         </p>
                     </div>
                     <div className="w-full flex-grow lg:mr-6 lg:pl-6 lg:pr-6 lg:border-x border-light dark:border-dark order-3 lg:order-2">
@@ -319,7 +340,7 @@ export default function JobsPage() {
                             <Jobs companyFilters={companyFilters} jobFilters={jobFilters} />
                         )}
                     </div>
-                    <div className="flex-shrink-0 xl:sticky top-0 reasonable:top-[57px] lg:py-4 order-2 pb-4 lg:pb-0 lg:order-3 w-full lg:w-auto">
+                    <div className="flex-shrink-0 xl:sticky top-0 reasonable:top-[107px] lg:py-4 order-2 pb-4 lg:pb-0 lg:order-3 w-full lg:w-auto">
                         <button
                             onClick={() => setFiltersOpen(!filtersOpen)}
                             className="text-left inline-flex items-center border border-light dark:border-dark rounded p-1 pr-3 bg-accent dark:bg-accent-dark lg:hidden"
