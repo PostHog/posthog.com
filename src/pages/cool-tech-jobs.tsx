@@ -20,32 +20,32 @@ dayjs.extend(relativeTime)
 
 const toggleFilters = [
     {
-        icon: <StickerPullRequest className="size-6" />,
+        icon: <StickerPullRequest className="size-8" />,
         label: 'Engineers decide what to build',
         key: 'engineersDecideWhatToBuild',
     },
     {
-        icon: <StickerLaptop className="size-6" />,
+        icon: <StickerLaptop className="size-8" />,
         label: 'Remote only',
         key: 'remoteOnly',
     },
     {
-        icon: <StickerPalmTree className="size-6" />,
-        label: 'Exotic offsites',
+        icon: <StickerPalmTree className="size-8" />,
+        label: 'Exotic off-sites',
         key: 'exoticOffsites',
     },
     {
-        icon: <StickerDnd className="size-6" />,
+        icon: <StickerDnd className="size-8" />,
         label: 'Meeting-free days',
         key: 'meetingFreeDays',
     },
     {
-        icon: <StickerEngineerRatio className="size-6" />,
+        icon: <StickerEngineerRatio className="size-8" />,
         label: 'High engineer ratio',
         key: 'highEngineerRatio',
     },
     {
-        icon: <StickerHourglass className="size-6" />,
+        icon: <StickerHourglass className="size-8" />,
         label: 'No deadlines',
         key: 'noDeadlines',
     },
@@ -57,9 +57,9 @@ const Perks = ({ company, className }: { company: Company; className?: string })
     return (
         <ul className={`list-none p-0 m-0 ${className}`}>
             {perks.filter(Boolean).map((perk) => (
-                <li key={`${company.id}-${perk}`} className="flex items-center space-x-1">
+                <li key={`${company.id}-${perk}`} className="flex gap-1.5 items-start">
                     {perk.icon}
-                    <span className="text-sm font-semibold">{perk.label}</span>
+                    <span className="text-[15px] font-medium pt-1">{perk.label}</span>
                 </li>
             ))}
         </ul>
@@ -138,7 +138,7 @@ const Companies = ({ companyFilters, jobFilters }: { companyFilters: FiltersType
                 const logoDark = company.attributes.logoDark?.data?.attributes?.url
                 return company.attributes.jobs.data.length > 0 ? (
                     <li className="@2xl:flex @2xl:space-x-8 items-start" key={company.id}>
-                        <div className="@2xl:sticky top-0 reasonable:top-[57px] pt-4 pb-4 z-10 bg-light dark:bg-dark flex-shrink-0 max-w-[230px] w-full">
+                        <div className="@2xl:sticky top-0 reasonable:top-[57px] pt-4 pb-4 z-10 bg-light dark:bg-dark @2xl:flex-[0_0_230px]">
                             {(logoLight || logoDark) && (
                                 <img
                                     className="max-w-40 mb-3"
@@ -146,8 +146,13 @@ const Companies = ({ companyFilters, jobFilters }: { companyFilters: FiltersType
                                     alt={name}
                                 />
                             )}
+                            {company.attributes.description && (
+                                <p className="m-0 pb-4 text-sm font-medium text-primary/75 dark:text-primary/75">
+                                    {company.attributes.description}
+                                </p>
+                            )}
                             <Perks
-                                className="xl:block xl:[&>li]:ml-0 space-y-1 [&>li]:ml-2 xl:ml-0 -ml-2 flex flex-wrap"
+                                className="grid @sm:grid-cols-2 @2xl:grid-cols-1 xl:[&>li]:ml-0 gap-1 [&>li]:ml-2 xl:ml-0 -ml-2"
                                 company={company}
                             />
                         </div>
@@ -228,7 +233,10 @@ const Filters = ({
     }, [])
 
     return (
-        <div className="space-y-2">
+        <div className="space-y-4">
+            <h4 className="text-[15px] font-medium text-primary/75 dark:text-primary/75 border-b border-light dark:border-dark pb-2 mb-2">
+                Typical filters
+            </h4>
             {displayedFilters.map((filter) => {
                 switch (filter.type) {
                     case 'select':
