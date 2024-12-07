@@ -189,6 +189,10 @@ const linklist: IProps[] = [
                 title: 'PostHog on GitHub',
                 url: 'https://github.com/PostHog/posthog',
             },
+            {
+                title: 'Cool tech jobs',
+                url: '/cool-tech-jobs',
+            },
         ],
     },
     {
