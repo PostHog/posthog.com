@@ -1225,6 +1225,10 @@ export const docsMenu = {
                             name: 'Enabling beta features',
                             url: '/docs/getting-started/enable-betas',
                         },
+                        {
+                            name: 'Data import and export',
+                            url: '/docs/getting-started/data-import-export',
+                        },
                     ],
                 },
                 {
