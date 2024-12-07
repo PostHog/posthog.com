@@ -233,38 +233,42 @@ const Filters = ({
     }, [])
 
     return (
-        <div className="space-y-4">
+        <div className="space-y-4 pt-4 pb-8 lg:py-0">
             <h4 className="text-[15px] font-medium text-primary/75 dark:text-primary/75 border-b border-light dark:border-dark pb-2 mb-2">
                 Typical filters
             </h4>
-            {displayedFilters.map((filter) => {
-                switch (filter.type) {
-                    case 'select':
-                        return <FilterSelect filter={filter} jobFilters={jobFilters} setJobFilters={setJobFilters} />
-                    case 'toggle':
-                        return (
-                            <Toggle
-                                activeOpacity={false}
-                                position="right"
-                                iconLeft={filter.icon}
-                                key={filter.key}
-                                label={filter.label}
-                                onChange={(checked) => {
-                                    window.scrollTo({ top: 0, behavior: 'smooth' })
-                                    setCompanyFilters((filters) => {
-                                        if (checked) {
-                                            return [...filters, { [filter.key]: { $eq: true } }]
-                                        }
-                                        return filters.filter((f) => !(filter.key in f))
-                                    })
-                                }}
-                                checked={companyFilters.some((f) => filter.key in f)}
-                            />
-                        )
-                    default:
-                        return null
-                }
-            })}
+            <div className="grid grid-cols-2 lg:grid-cols-1 gap-x-12 lg:gap-x-0 gap-y-4">
+                {displayedFilters.map((filter) => {
+                    switch (filter.type) {
+                        case 'select':
+                            return (
+                                <FilterSelect filter={filter} jobFilters={jobFilters} setJobFilters={setJobFilters} />
+                            )
+                        case 'toggle':
+                            return (
+                                <Toggle
+                                    activeOpacity={false}
+                                    position="right"
+                                    iconLeft={filter.icon}
+                                    key={filter.key}
+                                    label={filter.label}
+                                    onChange={(checked) => {
+                                        window.scrollTo({ top: 0, behavior: 'smooth' })
+                                        setCompanyFilters((filters) => {
+                                            if (checked) {
+                                                return [...filters, { [filter.key]: { $eq: true } }]
+                                            }
+                                            return filters.filter((f) => !(filter.key in f))
+                                        })
+                                    }}
+                                    checked={companyFilters.some((f) => filter.key in f)}
+                                />
+                            )
+                        default:
+                            return null
+                    }
+                })}
+            </div>
         </div>
     )
 }
@@ -273,6 +277,7 @@ export default function JobsPage() {
     const [sortBy, setSortBy] = useState<'company' | 'job'>('company')
     const [companyFilters, setCompanyFilters] = useState<FiltersType>([])
     const [jobFilters, setJobFilters] = useState<FiltersType>([])
+    const [filtersOpen, setFiltersOpen] = useState(false)
 
     return (
         <Layout>
@@ -280,12 +285,12 @@ export default function JobsPage() {
                 <div className="flex flex-col lg:flex-row items-start -mt-1 order-1">
                     <div className="min-w-[300px] lg:max-w-[300px] pr-6 xl:sticky top-0 reasonable:top-[57px] py-4">
                         <h1 className="text-2xl font-bold">Cool tech jobs</h1>
-                        <p>
-                            Open roles for product engineers and other jobs from companies with unique perks and great
-                            culture
+                        <p className="mb-2">
+                            Find open roles for product engineers and other jobs from companies with unique perks and
+                            great culture.
                         </p>
 
-                        <p className="mt-4">
+                        <p className="mt-2 mb-0">
                             Looking to work at PostHog? <Link to="/jobs">Visit our careers page.</Link>
                         </p>
                     </div>
@@ -296,13 +301,29 @@ export default function JobsPage() {
                             <Jobs companyFilters={companyFilters} jobFilters={jobFilters} />
                         )}
                     </div>
-                    <div className="flex-shrink-0 xl:sticky top-0 reasonable:top-[57px] py-4 order-2 lg:order-3">
-                        <Filters
-                            companyFilters={companyFilters}
-                            setCompanyFilters={setCompanyFilters}
-                            jobFilters={jobFilters}
-                            setJobFilters={setJobFilters}
-                        />
+                    <div className="flex-shrink-0 xl:sticky top-0 reasonable:top-[57px] lg:py-4 order-2 pb-4 lg:pb-0 lg:order-3 w-full lg:w-auto">
+                        <button
+                            onClick={() => setFiltersOpen(!filtersOpen)}
+                            className="text-left inline-flex items-center border border-light dark:border-dark rounded p-1 pr-3 bg-accent dark:bg-accent-dark lg:hidden"
+                        >
+                            <IconChevronDown
+                                className={`size-7 transition-transform opacity-60 ${filtersOpen ? 'rotate-180' : ''}`}
+                            />
+                            <span className="flex-grow font-semibold">
+                                {filtersOpen ? 'Hide filters' : 'Show filters'}
+                            </span>
+                        </button>
+                        <motion.div
+                            className="overflow-hidden lg:!h-auto"
+                            animate={filtersOpen ? { height: 'auto' } : { height: 0 }}
+                        >
+                            <Filters
+                                companyFilters={companyFilters}
+                                setCompanyFilters={setCompanyFilters}
+                                jobFilters={jobFilters}
+                                setJobFilters={setJobFilters}
+                            />
+                        </motion.div>
                     </div>
                 </div>
             </section>
