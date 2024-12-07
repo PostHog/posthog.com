@@ -277,7 +277,7 @@ export default function JobsPage() {
     return (
         <Layout>
             <section className="px-5">
-                <div className="lg:flex flex-col lg:flex-row items-start -mt-1">
+                <div className="flex flex-col lg:flex-row items-start -mt-1 order-1">
                     <div className="min-w-[300px] lg:max-w-[300px] pr-6 xl:sticky top-0 reasonable:top-[57px] py-4">
                         <h1 className="text-2xl font-bold">Cool tech jobs</h1>
                         <p>
@@ -289,14 +289,14 @@ export default function JobsPage() {
                             Looking to work at PostHog? <Link to="/jobs">Visit our careers page.</Link>
                         </p>
                     </div>
-                    <div className="flex-grow lg:mr-6 lg:pl-6 lg:pr-6 lg:border-x border-light dark:border-dark">
+                    <div className="w-full flex-grow lg:mr-6 lg:pl-6 lg:pr-6 lg:border-x border-light dark:border-dark order-3 lg:order-2">
                         {sortBy === 'company' ? (
                             <Companies companyFilters={companyFilters} jobFilters={jobFilters} />
                         ) : (
                             <Jobs companyFilters={companyFilters} jobFilters={jobFilters} />
                         )}
                     </div>
-                    <div className="flex-shrink-0 md:sticky top-0 reasonable:top-[57px] py-4">
+                    <div className="flex-shrink-0 xl:sticky top-0 reasonable:top-[57px] py-4 order-2 lg:order-3">
                         <Filters
                             companyFilters={companyFilters}
                             setCompanyFilters={setCompanyFilters}
