@@ -1,0 +1,46 @@
+First, we disable autocaptured pageviews by setting `capture_pageview` to `false` in the PostHog initialization config:
+
+```js
+// plugins/posthog.js
+import posthog from 'posthog-js'
+
+export default {
+  install(Vue) {
+    posthog.init(
+      '<ph_project_api_key>',
+      {
+        api_host: '<ph_client_api_host>',
+        capture_pageview: false,
+      }
+    )
+
+    Vue.prototype.$posthog = posthog
+  }
+}
+```
+
+Next, assuming you have a router setup, you can use the `afterEach` hook to capture pageviews.
+
+```js
+// src/main.js
+import Vue from 'vue'
+import App from './App.vue'
+import router from './router'
+import PosthogPlugin from './plugins/posthog'
+import posthog from 'posthog-js'
+
+Vue.config.productionTip = false
+Vue.use(PosthogPlugin)
+
+router.afterEach(() => {
+  Vue.nextTick(() => {
+    console.log('Capturing pageview')
+    posthog.capture('$pageview')
+  })
+})
+
+new Vue({
+  router,
+  render: h => h(App),
+}).$mount('#app')
+```

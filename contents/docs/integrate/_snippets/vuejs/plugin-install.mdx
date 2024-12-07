@@ -1,0 +1,37 @@
+Start by creating a `plugins` folder and adding a `posthog.js` file to that folder. In `posthog.js`, initialize PostHog using the `install` method:
+
+```js
+// src/plugins/posthog.js
+import posthog from 'posthog-js'
+
+export default {
+  install(Vue) {
+    posthog.init(
+      '<ph_project_api_key>',
+      {
+        api_host: '<ph_client_api_host>'
+      }
+    )
+
+    Vue.prototype.$posthog = posthog
+  }
+}
+```
+
+Next, in `main.js`, import and use the plugin.
+
+```js
+// src/main.js
+import Vue from 'vue'
+import App from './App.vue'
+import PosthogPlugin from './plugins/posthog'
+
+Vue.config.productionTip = false
+Vue.use(PosthogPlugin)
+
+new Vue({
+  render: h => h(App),
+}).$mount('#app')
+```
+
+This makes PostHog available as `this.$posthog` in any Vue component.

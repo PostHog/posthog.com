@@ -1,0 +1,22 @@
+ Pageleaves are similar to pageviews, they need to be manually captured.
+
+import Tab from "components/Tab"
+import CompositionPageleaves from "./composition-pageleaves.mdx"
+import PluginPageleaves from "./plugin-pageleaves.mdx"
+
+<Tab.Group tabs={[
+    'Vue 3: Composition API', 
+    'Vue 2: Plugins']}>
+    <Tab.List>
+        <Tab>Vue 3: Composition API</Tab>
+        <Tab>Vue 2: Plugins</Tab>
+    </Tab.List>
+    <Tab.Panels>
+        <Tab.Panel>
+            <CompositionPageleaves />
+        </Tab.Panel>
+        <Tab.Panel>
+            <PluginPageleaves />
+        </Tab.Panel>
+    </Tab.Panels>
+</Tab.Group>
