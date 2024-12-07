@@ -3201,6 +3201,12 @@ export const pricingMenu = {
 
 const menu = [
     {
+        name: 'Why PostHog?',
+        url: '/why',
+        icon: 'IconLightBulb',
+        color: 'yellow',
+    },
+    {
         name: 'Products',
         url: '/product-analytics',
         icon: 'IconFeatures',

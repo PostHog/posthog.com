@@ -1,0 +1,198 @@
+import React from 'react'
+import Layout from 'components/Layout'
+import { SEO } from 'components/seo'
+import Link from 'components/Link'
+import PostLayout from 'components/PostLayout'
+import Tooltip from 'components/Tooltip'
+import { graphql, useStaticQuery } from 'gatsby'
+import slugify from 'slugify'
+import TeamPatch from 'components/TeamPatch'
+import { CallToAction } from 'components/CallToAction'
+import { useUser } from 'hooks/useUser'
+
+const Teams: React.FC = () => {
+    const { isModerator } = useUser()
+
+    return (
+        <Layout>
+            <SEO title="Why PostHog? - PostHog" description="Why not?" image={`/images/small-teams.png`} />
+            <PostLayout article={false} title={'Handbook'} hideSurvey>
+                <section className="mx-auto">
+                    <div className="flex flex-col md:items-center md:justify-end md:flex-row-reverse gap-8 md:gap-2">
+                        <div className="md:flex-1">
+                            <h1 className="font-bold text-3xl md:text-4xl mb-6">Why PostHog?</h1>
+                            <div className="article-content">
+                                <h2>PostHog is literally designed to be a no-brainer</h2>
+                                <p>
+                                    <strong>
+                                        PostHog is an entire suite of products you can use to make your software
+                                        successful – <em>far more than anyone else.</em>
+                                    </strong>
+                                </p>
+                                <p>
+                                    All that context in one spot so you can focus on your users and not your data
+                                    engineering to fix endless system integrations.
+                                </p>
+                                <p>
+                                    <strong>We have 10+ products today,</strong> but even if we don't have it, we will
+                                    eventually. We're going to build every piece of SaaS you need to make your product
+                                    successful. You read that right. We've already got the world's best track record at
+                                    delivering them by being the wisest with so many customers.
+                                </p>
+                                <p>
+                                    You've probably already seen the products we do have. For stuff we don't yet, you
+                                    can <Link to="/roadmap">see our entire public roadmap</Link> and ask for stuff if
+                                    you need it.
+                                </p>
+
+                                <h3>Popular roadmap items</h3>
+
+                                <em>Roadmap embed here</em>
+
+                                <h2>PostHog has the lowest pricing for every product</h2>
+                                <p>
+                                    Sure it's great to have it all in one place, but only if you know you're getting a
+                                    deal. PostHog is always cheaper than the cheapest major competitor so you know you
+                                    should just use what we offer each time.
+                                </p>
+                                <p>
+                                    Pretty much every product has a generous free tier so you can always get started
+                                    before paying anything at all.
+                                </p>
+
+                                <h2>PostHog just does the right thing</h2>
+                                <p>
+                                    We polled our customers - one of the top four reasons they recommend PostHog is
+                                    "developer brand". To us that means we do the right thing for our customers:
+                                </p>
+                                <ul>
+                                    <li>
+                                        <Link to="/blog/analytics-pricing">We roll out pricing decreases</Link> to our
+                                        entire existing customer base
+                                    </li>
+                                    <li>
+                                        We have{' '}
+                                        <Link href="/handbook/growth/sales/refunds#unexpected-stardom">
+                                            side hustle insurance
+                                        </Link>{' '}
+                                        - we refund if your thing goes viral by accident on HackerNews
+                                    </li>
+                                    <li>
+                                        We've got{' '}
+                                        <Link href="https://github.com/posthog/posthog" external>
+                                            a huge open source project
+                                        </Link>{' '}
+                                        (&gt;20k stars), and beyond this you can inspect all our code in our repo so you
+                                        can see exactly what we're doing with your data
+                                    </li>
+                                    <li>
+                                        <Link href="/sales">We don't do outbound sales</Link> - we'd rather spend our
+                                        time on more products
+                                    </li>
+                                    <li>
+                                        You can <Link href="/pricing">see all our pricing publicly</Link> - other people
+                                        don’t hide it because "iT’s a bEtTeR vAlue!"
+                                    </li>
+                                    <li>
+                                        We don’t sell products at a loss - we run the company default alive. This means
+                                        we’ve never had a layoff, and we don’t take huge risks that means we could
+                                        disappear overnight.
+                                    </li>
+                                    <li>We don’t screw you on contract terms like auto-renewal.</li>
+                                    <li>
+                                        You can use all our stuff monthly until you want to lock things in with us. We
+                                        don’t pressure people.
+                                    </li>
+                                    <li>
+                                        The way we write our content. <Link href="/posts">Just read it</Link> and you’ll
+                                        get what I mean. It’s more honest and not marketing for the sake of it - it
+                                        actively helps developers build successful products. That’s our mission.
+                                    </li>
+                                    <li>
+                                        PostHog has zero intention of selling our business. We want to see just how
+                                        crazy huge this gigantic software stack can get - and we think that it will
+                                        reach at least $100bn in value. We’ll be around and fighting for a long, long
+                                        time. It’s our life’s work.
+                                    </li>
+                                    <li>
+                                        You can also see how our entire company operates - you can see our{' '}
+                                        <Link href="/handbook/growth/sales/overview">manual for our salespeople</Link>,{' '}
+                                        <Link href="/handbook/growth/marketing">marketing team</Link>, and so on. You
+                                        can even <Link href="/handbook/people/compensation">see what they’re paid</Link>{' '}
+                                        - it’s all in our public handbook. Even the contentious stuff. - There’s a
+                                        reason most companies hide this stuff.
+                                    </li>
+                                    <li>So many hedgehogs.</li>
+                                </ul>
+
+                                <p>
+                                    The reason we uniquely love doing all these sorts of things is that{' '}
+                                    <strong>
+                                        we grow because of our reputation on the internet whereas every single
+                                        competitor grows by salespeople.
+                                    </strong>{' '}
+                                    We are very, very proudly inbound only. This aligns us with customers. Long term,
+                                    that is what wins.
+                                </p>
+
+                                <h2>Support from actually technical people</h2>
+                                <p>
+                                    You can <Link href="/teams">literally see the engineers</Link> that built each of
+                                    our products on our website.
+                                </p>
+
+                                <p>
+                                    We’ve also got dedicated support people - they’ve all got engineering backgrounds
+                                    too. If they can’t answer, you get the OG engineers mentioned above. Frankly our
+                                    support engineers answer most stuff even when it gets deep. We don’t want you
+                                    waiting on our triage.
+                                </p>
+
+                                <p>
+                                    Even our marketing team is mostly engineers. And our salespeople can all write code
+                                    too.
+                                </p>
+
+                                <p>
+                                    <em>“Everybody codes”</em> even made it to{' '}
+                                    <Link href="/handbook/values">our list of values</Link>.
+                                </p>
+
+                                <h2>PostHog is more popular than every other product</h2>
+                                <p>
+                                    We get that you aren't a lemming (they refuse to type in our url with their little
+                                    paws), but it's probably a good sign when something is very popular.
+                                </p>
+                                <p>
+                                    We have over 100,000 customers using our products. Just under a quarter of a million
+                                    engineers use us. That's far, far more than any other vendor (most have around 1-3K
+                                    customers). It's what happens when the internet loves you. We are the default in
+                                    each YC batch, too (the world's best accelerator for startups) - up to 65% of each
+                                    batch uses our products.
+                                </p>
+
+                                <h2>Who doesn't PostHog work well for?</h2>
+                                <p>
+                                    People who don't like letting their engineering teams make decisions. If you are
+                                    happy to let engineering drive in your organization then we're usually a slam dunk.
+                                    Sometimes we might lack the 1000th feature of a particular product we offer compared
+                                    to the leading competitor but we've seen pretty much no one cares about that
+                                    compared to the advantages of it all in one place.
+                                </p>
+
+                                <h2>Every product has a huge free tier</h2>
+                                <p>
+                                    Just try it. You don't even need to put in a credit card. We give away more free
+                                    stuff than anyone else. What you'd pay $100s for on other platforms, you get here
+                                    for free, every month.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </PostLayout>
+        </Layout>
+    )
+}
+
+export default Teams
