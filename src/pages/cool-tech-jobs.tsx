@@ -5,7 +5,7 @@ import useCompanies, { Company, Filters as FiltersType } from 'hooks/useCompanie
 import Layout from 'components/Layout'
 import { layoutLogic } from 'logic/layoutLogic'
 import { useValues } from 'kea'
-import { IconChevronDown } from '@posthog/icons'
+import { IconChevronDown, IconArrowUpRight } from '@posthog/icons'
 import Link from 'components/Link'
 import dayjs from 'dayjs'
 import relativeTime from 'dayjs/plugin/relativeTime'
@@ -88,8 +88,11 @@ const JobsByDepartment = ({ jobs, department }: { jobs: Job[]; department: strin
             >
                 {jobs.map((job) => (
                     <li key={job.id} className="flex justify-between gap-1 items-start last:mb-6 mt-2 first:mt-0">
-                        <Link externalNoIcon className="!text-inherit underline" to={job.attributes.url}>
-                            {job.attributes.title}
+                        <Link externalNoIcon className="group !text-inherit underline" to={job.attributes.url}>
+                            <span className="relative">
+                                {job.attributes.title}
+                                <IconArrowUpRight className="inline-block size-4 opacity-0 group-hover:opacity-50 text-primary dark:text-primary-dark absolute left-full top-0.5 ml-0.5" />
+                            </span>
                         </Link>
                         <p className="m-0 pt-1 opacity-60 text-sm flex-[0_0_6rem] text-right">
                             {dayjs(job.attributes.postedDate).fromNow()}
@@ -147,10 +150,25 @@ const Companies = ({ companyFilters, jobFilters }: { companyFilters: FiltersType
                                 />
                             )}
                             {company.attributes.description && (
-                                <p className="m-0 pb-4 text-sm font-medium text-primary/75 dark:text-primary/75">
+                                <p className="m-0 text-sm font-medium text-primary/75 dark:text-primary/75">
                                     {company.attributes.description}
                                 </p>
                             )}
+
+                            {/* {company.attributes.url && ( */}
+                            <Link
+                                href={company.attributes.url}
+                                className="group flex items-center gap-0.5 text-sm text-red dark:text-yellow font-semibold mb-2"
+                                externalNoIcon
+                            >
+                                Learn more
+                                <IconArrowUpRight className="size-4 opacity-0 group-hover:opacity-50 text-primary dark:text-primary-dark" />
+                            </Link>
+                            {/* )} */}
+
+                            <h4 className="text-sm font-medium text-primary/50 dark:text-primary/50 border-b border-light dark:border-dark pb-2 mt-4 mb-2">
+                                Unique perks
+                            </h4>
                             <Perks
                                 className="grid @sm:grid-cols-2 @2xl:grid-cols-1 xl:[&>li]:ml-0 gap-1 [&>li]:ml-2 xl:ml-0 -ml-2"
                                 company={company}
