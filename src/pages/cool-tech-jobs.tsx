@@ -137,7 +137,7 @@ const Companies = ({ companyFilters, jobFilters }: { companyFilters: FiltersType
         </ul>
     ) : (
         <ul
-            className={`@container list-none p-0 m-0 space-y-8 pb-12 mt-2 mx-auto transition-all ${
+            className={`@container list-none p-0 m-0 space-y-8 pt-4 pb-12 mt-2 mx-auto transition-all ${
                 fullWidthContent ? 'max-w-full' : ' max-w-4xl'
             }`}
         >
@@ -147,7 +147,7 @@ const Companies = ({ companyFilters, jobFilters }: { companyFilters: FiltersType
                 const logoDark = company.attributes.logoDark?.data?.attributes?.url
                 return company.attributes.jobs.data.length > 0 ? (
                     <li className="@2xl:flex @2xl:space-x-8 items-start" key={company.id}>
-                        <div className="@2xl:sticky top-0 reasonable:top-[107px] pt-4 pb-4 z-10 bg-light dark:bg-dark @2xl:flex-[0_0_230px]">
+                        <div className="@2xl:sticky top-0 reasonable:top-[142px] pb-4 z-10 bg-light dark:bg-dark @2xl:flex-[0_0_230px]">
                             {(logoLight || logoDark) && (
                                 <>
                                     {company.attributes.url ? (
@@ -269,7 +269,7 @@ const Filters = ({
     }, [])
 
     return (
-        <div className="space-y-4 pt-4 pb-8 lg:py-0">
+        <div className="space-y-4 pt-4 !pb-8 lg:py-0">
             <h4 className="text-[15px] font-medium text-primary/60 dark:text-primary/60 border-b border-light dark:border-dark pb-2 mb-2">
                 Typical filters
             </h4>
