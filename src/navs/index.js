@@ -2238,6 +2238,12 @@ export const docsMenu = {
                     color: 'red',
                 },
                 {
+                    name: 'Privacy controls',
+                    url: '/docs/product-analytics/privacy',
+                    icon: 'IconShield',
+                    color: 'orange',
+                },
+                {
                     name: 'Web vitals',
                     url: '/docs/product-analytics/web-vitals',
                     icon: 'IconWrench',
