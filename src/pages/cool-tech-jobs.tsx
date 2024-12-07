@@ -14,6 +14,7 @@ import Select from 'components/Select'
 import { StickerEngineerRatio, StickerHourglass } from 'components/Stickers/Index'
 import { StickerDnd, StickerLaptop, StickerPalmTree, StickerPullRequest } from 'components/Stickers/Index'
 import { motion } from 'framer-motion'
+import { useLayoutData } from 'components/Layout/hooks'
 
 dayjs.extend(relativeTime)
 
@@ -90,7 +91,7 @@ const JobsByDepartment = ({ jobs, department }: { jobs: Job[]; department: strin
                         <Link externalNoIcon className="!text-inherit underline" to={job.attributes.url}>
                             {job.attributes.title}
                         </Link>
-                        <p className="m-0 opacity-60 text-sm">{dayjs(job.attributes.postedDate).fromNow()}</p>
+                        <p className="m-0 opacity-60 text-sm w-32">{dayjs(job.attributes.postedDate).fromNow()}</p>
                     </li>
                 ))}
             </motion.ul>
@@ -115,6 +116,7 @@ const JobList = ({ jobs }: { jobs: Job[] }) => {
 const Companies = ({ companyFilters, jobFilters }: { companyFilters: FiltersType; jobFilters: FiltersType }) => {
     const { websiteTheme } = useValues(layoutLogic)
     const { companies, isLoading } = useCompanies({ companyFilters, jobFilters })
+    const { fullWidthContent } = useLayoutData()
 
     return isLoading ? (
         <ul className="list-none p-0 m-0 space-y-4 py-8">
@@ -123,14 +125,18 @@ const Companies = ({ companyFilters, jobFilters }: { companyFilters: FiltersType
             ))}
         </ul>
     ) : (
-        <ul className="list-none p-0 m-0 space-y-8 pb-12 mt-2">
+        <ul
+            className={`@container list-none p-0 m-0 space-y-8 pb-12 mt-2 mx-auto transition-all ${
+                fullWidthContent ? 'max-w-full' : ' max-w-4xl'
+            }`}
+        >
             {companies.map((company) => {
                 const { name } = company.attributes
                 const logoLight = company.attributes.logoLight?.data?.attributes?.url
                 const logoDark = company.attributes.logoDark?.data?.attributes?.url
                 return company.attributes.jobs.data.length > 0 ? (
-                    <li className="xl:flex xl:space-x-8 items-start" key={company.id}>
-                        <div className="sticky top-[57px] pt-4 pb-4 z-10 bg-light dark:bg-dark flex-shrink-0 xl:max-w-[230px] w-full">
+                    <li className="@2xl:flex @2xl:space-x-8 items-start" key={company.id}>
+                        <div className="sticky top-[57px] pt-4 pb-4 z-10 bg-light dark:bg-dark flex-shrink-0 max-w-[230px] w-full">
                             {(logoLight || logoDark) && (
                                 <img
                                     className="max-w-40 mb-3"
@@ -261,8 +267,8 @@ export default function JobsPage() {
     return (
         <Layout>
             <section className="px-5">
-                <div className="flex flex-col lg:flex-row items-start -mt-1">
-                    <div className="min-w-[300px] lg:max-w-[300px] pr-6 sticky top-[57px] py-4">
+                <div className="lg:flex flex-col lg:flex-row items-start -mt-1">
+                    <div className="min-w-[300px] lg:max-w-[300px] pr-6 md:sticky top-[57px] py-4">
                         <h1 className="text-2xl font-bold">Cool tech jobs</h1>
                         <p>
                             Open roles for product engineers and other jobs from companies with unique perks and great
@@ -273,14 +279,14 @@ export default function JobsPage() {
                             Looking to work at PostHog? <Link to="/jobs">Visit our careers page.</Link>
                         </p>
                     </div>
-                    <div className="flex-grow mr-6 lg:pl-6 pr-6 border-r lg:border-l border-light dark:border-dark">
+                    <div className="flex-grow lg:mr-6 lg:pl-6 lg:pr-6 lg:border-x border-light dark:border-dark">
                         {sortBy === 'company' ? (
                             <Companies companyFilters={companyFilters} jobFilters={jobFilters} />
                         ) : (
                             <Jobs companyFilters={companyFilters} jobFilters={jobFilters} />
                         )}
                     </div>
-                    <div className="flex-shrink-0 sticky top-[57px] py-4">
+                    <div className="flex-shrink-0 md:sticky top-[57px] py-4">
                         <Filters
                             companyFilters={companyFilters}
                             setCompanyFilters={setCompanyFilters}
