@@ -15,6 +15,7 @@ import { StickerEngineerRatio, StickerHourglass } from 'components/Stickers/Inde
 import { StickerDnd, StickerLaptop, StickerPalmTree, StickerPullRequest } from 'components/Stickers/Index'
 import { motion } from 'framer-motion'
 import { useLayoutData } from 'components/Layout/hooks'
+import SEO from 'components/seo'
 
 dayjs.extend(relativeTime)
 
@@ -271,7 +272,7 @@ const Filters = ({
             <h4 className="text-[15px] font-medium text-primary/75 dark:text-primary/75 border-b border-light dark:border-dark pb-2 mb-2">
                 Typical filters
             </h4>
-            <div className="grid grid-cols-2 lg:grid-cols-1 gap-x-12 lg:gap-x-0 gap-y-4">
+            <div className="grid grid-cols-2 lg:grid-cols-1 gap-x-12 lg:gap-x-0 gap-y-4 pr-1">
                 {displayedFilters.map((filter) => {
                     switch (filter.type) {
                         case 'select':
@@ -315,12 +316,17 @@ export default function JobsPage() {
 
     return (
         <Layout>
+            <SEO
+                title="Cool tech jobs"
+                description="Open roles from companies with unique perks and great culture"
+                image={`/images/og/cool-tech-jobs.png`}
+            />
             <section className="px-5">
                 <div className="flex flex-col lg:flex-row items-start -mt-1 order-1">
                     <div className="min-w-[300px] lg:max-w-[300px] pr-6 xl:sticky top-0 reasonable:top-[107px] py-4">
                         <h1 className="text-2xl mb-2 font-bold">Cool tech jobs</h1>
                         <p className="mb-2 text-[15px]">
-                            Find open roles for product engineers and other jobs from companies with unique perks and
+                            Find open roles for product engineers (and other jobs) from companies with unique perks and
                             great culture.
                         </p>
 
