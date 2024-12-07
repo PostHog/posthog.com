@@ -270,39 +270,55 @@ const Filters = ({
 
     return (
         <div className="space-y-4 pt-4 pb-8 lg:py-0">
-            <h4 className="text-[15px] font-medium text-primary/75 dark:text-primary/75 border-b border-light dark:border-dark pb-2 mb-2">
+            <h4 className="text-[15px] font-medium text-primary/60 dark:text-primary/60 border-b border-light dark:border-dark pb-2 mb-2">
                 Typical filters
             </h4>
-            <div className="grid grid-cols-2 lg:grid-cols-1 gap-x-12 lg:gap-x-0 gap-y-4 pr-1">
-                {displayedFilters.map((filter) => {
-                    switch (filter.type) {
-                        case 'select':
-                            return (
-                                <FilterSelect filter={filter} jobFilters={jobFilters} setJobFilters={setJobFilters} />
-                            )
-                        case 'toggle':
-                            return (
-                                <Toggle
-                                    activeOpacity={false}
-                                    position="right"
-                                    iconLeft={filter.icon}
-                                    key={filter.key}
-                                    label={filter.label}
-                                    onChange={(checked) => {
-                                        window.scrollTo({ top: 0, behavior: 'smooth' })
-                                        setCompanyFilters((filters) => {
-                                            if (checked) {
-                                                return [...filters, { [filter.key]: { $eq: true } }]
-                                            }
-                                            return filters.filter((f) => !(filter.key in f))
-                                        })
-                                    }}
-                                    checked={companyFilters.some((f) => filter.key in f)}
-                                />
-                            )
-                        default:
-                            return null
-                    }
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-1 gap-x-12 lg:gap-x-0 gap-y-4 pr-1">
+                {displayedFilters.map((filter, index) => {
+                    const content = (
+                        <>
+                            {index === 2 && (
+                                <h4 className="text-[15px] font-medium text-primary/60 dark:text-primary/60 border-b border-light dark:border-dark py-2 mb-0 sm:col-span-2 lg:col-span-1">
+                                    Unique perks
+                                </h4>
+                            )}
+                            {(() => {
+                                switch (filter.type) {
+                                    case 'select':
+                                        return (
+                                            <FilterSelect
+                                                filter={filter}
+                                                jobFilters={jobFilters}
+                                                setJobFilters={setJobFilters}
+                                            />
+                                        )
+                                    case 'toggle':
+                                        return (
+                                            <Toggle
+                                                activeOpacity={false}
+                                                position="right"
+                                                iconLeft={filter.icon}
+                                                key={filter.key}
+                                                label={filter.label}
+                                                onChange={(checked) => {
+                                                    window.scrollTo({ top: 0, behavior: 'smooth' })
+                                                    setCompanyFilters((filters) => {
+                                                        if (checked) {
+                                                            return [...filters, { [filter.key]: { $eq: true } }]
+                                                        }
+                                                        return filters.filter((f) => !(filter.key in f))
+                                                    })
+                                                }}
+                                                checked={companyFilters.some((f) => filter.key in f)}
+                                            />
+                                        )
+                                    default:
+                                        return null
+                                }
+                            })()}
+                        </>
+                    )
+                    return content
                 })}
             </div>
         </div>
