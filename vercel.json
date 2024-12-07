@@ -9,7 +9,7 @@
     "redirects": [
         {
             "source": "/handbook/growth/marketing/product-announcements",
-            "destination": "/handbook/comms/product-announcements"
+            "destination": "/handbook/words-and-pictures/product-announcements"
         },
         { "source": "/tutorials/nps-survey", "destination": "/templates/nps-survey" },
         { "source": "/questions/topics/:path*", "destination": "/questions/topic/:path*" },
@@ -894,6 +894,7 @@
         { "source": "/handbook/growth/marketing/Customer-personas", "destination": "/handbook/growth/marketing" },
         { "source": "/docs/cdp/bitbucket-release-tracker", "destination": "/docs/cdp" },
         { "source": "/handbook/company/strategy", "destination": "/handbook/strategy/overview" },
+        { "source": "/handbook/company/story", "destination": "/handbook/story" },
         { "source": "/guides", "destination": "/tutorials" },
         {
             "source": "/handbook/growth/marketing/customer-personas",
@@ -1329,8 +1330,24 @@
         { "source": "/docs/webhooks/microsoft-teams", "destination": "/docs/cdp/destinations/webhook" },
         { "source": "/docs/webhooks/discord", "destination": "/docs/cdp/destinations/webhook" },
         { "source": "/teams/website-docs", "destination": "/teams/website-vibes" },
+        {
+            "source": "/questions/manually-merging-persons",
+            "destination": "/docs/product-analytics/identify#how-to-merge-userss"
+        },
+        {
+            "source": "/questions/automatically-merge-users",
+            "destination": "/docs/product-analytics/identify#how-to-merge-users"
+        },
         { "source": "/docs/session-replay/android", "destination": "/docs/session-replay/installation?tab=Android" },
+        {
+            "source": "/questions/how-to-get-current-user-identity",
+            "destination": "/docs/product-analytics/identify#get-the-current-users-distinct-id"
+        },
         { "source": "/docs/session-replay/ios", "destination": "/docs/session-replay/installation?tab=iOS" },
+        {
+            "source": "/questions/how-to-group-events",
+            "destination": "/docs/product-analytics/troubleshooting#how-do-i-group-or-combine-events"
+        },
         {
             "source": "/questions/best-practices-naming-convention-for-event-names-and-properties",
             "destination": "/docs/product-analytics/best-practices"
@@ -1347,6 +1364,82 @@
             "source": "/docs/session-replay/react-native",
             "destination": "/docs/session-replay/installation?tab=React+Native"
         },
-        { "source": "/apps", "destination": "/cdp", "statusCode": 302 }
+        {
+            "source": "/teams/comms",
+            "destination": "/teams/support"
+        },
+        {
+            "source": "/docs/session-replay/flutter",
+            "destination": "/docs/session-replay/installation?tab=Flutter"
+        },
+        {
+            "source": "/teams/customer-comms",
+            "destination": "/teams/support"
+        },
+        { "source": "/apps", "destination": "/cdp", "statusCode": 302 },
+        {
+            "source": "/docs/data-warehouse/setup/azure-blob",
+            "destination": "/docs/cdp/sources/azure-blob"
+        },
+        {
+            "source": "/docs/data-warehouse/setup/azure-db",
+            "destination": "/docs/cdp/sources/azure-db"
+        },
+        {
+            "source": "/docs/data-warehouse/setup/chargebee",
+            "destination": "/docs/cdp/sources/chargebee"
+        },
+        {
+            "source": "/docs/data-warehouse/setup/gcs",
+            "destination": "/docs/cdp/sources/gcs"
+        },
+        {
+            "source": "/docs/data-warehouse/setup/hubspot",
+            "destination": "/docs/cdp/sources/hubspot"
+        },
+        {
+            "source": "/docs/data-warehouse/setup/index",
+            "destination": "/docs/cdp/sources"
+        },
+        {
+            "source": "/docs/data-warehouse/setup/mysql",
+            "destination": "/docs/cdp/sources/mysql"
+        },
+        {
+            "source": "/docs/data-warehouse/setup/postgres",
+            "destination": "/docs/cdp/sources/postgres"
+        },
+        {
+            "source": "/docs/data-warehouse/setup/r2",
+            "destination": "/docs/cdp/sources/r2"
+        },
+        {
+            "source": "/docs/data-warehouse/setup/s3",
+            "destination": "/docs/cdp/sources/s3"
+        },
+        {
+            "source": "/docs/data-warehouse/setup/salesforce",
+            "destination": "/docs/cdp/sources/salesforce"
+        },
+        {
+            "source": "/docs/data-warehouse/setup/snowflake",
+            "destination": "/docs/cdp/sources/snowflake"
+        },
+        {
+            "source": "/docs/data-warehouse/setup/stripe",
+            "destination": "/docs/cdp/sources/stripe"
+        },
+        {
+            "source": "/docs/data-warehouse/setup/vitally",
+            "destination": "/docs/cdp/sources/vitally"
+        },
+        {
+            "source": "/docs/data-warehouse/setup/zendesk",
+            "destination": "/docs/cdp/sources/zendesk"
+        },
+        {
+            "source": "/docs/data-warehouse/setup/",
+            "destination": "/docs/data-warehouse/query/"
+        }
     ]
 }

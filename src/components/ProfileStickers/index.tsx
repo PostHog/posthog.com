@@ -5,6 +5,7 @@ import {
     StickerFlagAR,
     StickerFlagAT,
     StickerFlagBE,
+    StickerFlagBR,
     StickerFlagCA,
     StickerFlagCO,
     StickerFlagCY,
@@ -17,6 +18,7 @@ import {
     StickerFlagHU,
     StickerFlagHR,
     StickerFlagNL,
+    StickerFlagNO,
     StickerFlagPL,
     StickerFlagPR,
     StickerFlagUnknown,
@@ -39,6 +41,8 @@ const Stickers = ({ location, country, pineappleOnPizza, isTeamLead, editing, id
             <Tooltip content={`Lives in ${location}`}>
                 {country === 'BE' ? (
                     <StickerFlagBE className="w-8 h-8" />
+                ) : country === 'BR' ? (
+                    <StickerFlagBR className="w-8 h-8" />
                 ) : country === 'US' ? (
                     <StickerFlagUS className="w-8 h-8" />
                 ) : country === 'GB' ? (
@@ -59,6 +63,8 @@ const Stickers = ({ location, country, pineappleOnPizza, isTeamLead, editing, id
                     <StickerFlagFR className="w-8 h-8" />
                 ) : country === 'NL' ? (
                     <StickerFlagNL className="w-8 h-8" />
+                ) : country === 'NO' ? (
+                    <StickerFlagNO className="w-8 h-8" />
                 ) : country === 'AR' ? (
                     <StickerFlagAR className="w-8 h-8" />
                 ) : country === 'AT' ? (

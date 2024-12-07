@@ -46,7 +46,7 @@ By default, the email forwarding feature only accepts emails from your PostHog a
 
 - Buy something on your Revolut card.
 - If it's a digital invoice, just forward it to ukinvoices@posthog.com with a note explaining what it is for. If it's a physical receipt, take a picture and forward it to the same place with a note. 
-- You need to submit receipts for _all_ purchases. 
+- You need to submit receipts for _all_ purchases. This should be an itemised receipt. not a receipt from a credit card machine. We need to know what was purchased. 
 
 ### Your personal card
 
@@ -80,11 +80,13 @@ These are just general guidelines - the most important thing is that you select 
 
 Apple offer multiple screen sizes. The larger screen sizes (15 inches +), are disproportionately more expensive. These make sense if you do a ton of work in coworking spaces or cafés where you do not have a second screen. If you are realistically going to do most of your work at home, it is more rational to pick a smaller laptop size, and to get a large (27 inch) monitor.
 
-Please purchase an English keyboard (US, International or British is fine) - this enables us to easily pass your laptop on to someone else if you upgrade or leave. 
+> You need to purchase a laptop with an English keyboard configuration (US, International or British is fine) - this enables us to easily pass your laptop on to someone else if you upgrade or leave. Please do not purchase any other type.
 
 If you are in the US only, when buying something at Apple we can get 3% cashback on purchases through Brex. You should be able to find that in the 'Rewards' tab on Brex or ask Fraser. Don't do this if you're in the UK though - use your Revolut card as we claim back the VAT. 
 
 Also, Amazon regularly offer discounts on Apple products of around 10%, so always worth a check before buying direct from Apple. If you buy from Apple, you may be asked if you wanted to purchase Apple Care - please don't buy this as it's not great value for money.
+
+> You can request a budget to buy a new laptop every 4 years - you can do this in Brex. If you are having issues with your laptop before that and a genuine exception needs to be made, drop a note in the #team-people-and-ops channel. 
 
 ### Monitor
 

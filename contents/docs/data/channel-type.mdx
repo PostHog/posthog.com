@@ -89,5 +89,6 @@ These rules are applied in order, and the first one that matches is used to dete
 | Push             | `utm_medium` ends with `push`                                                                                                                     |
 | Unknown          | No previous rule matched                                                                                                                          |
 
-If you would to be able to customise this logic, please upvote [this issue](https://github.com/PostHog/posthog/issues/21195). Our definitions were based on the [definitions that GA4 uses](https://support.google.com/analytics/answer/9756891?hl=en), but added our own logic to handle some edge cases they don't.
+Our definitions were based on the [definitions that GA4 uses](https://support.google.com/analytics/answer/9756891?hl=en), but added our own logic to handle some edge cases they don't.
 
+> **Want custom channel types?** You can define rules to match incoming events to your own custom channel types in [your project settings](https://us.posthog.com/settings/project-web-analytics). Read more in [web analytics docs](/docs/web-analytics/dashboard#custom-channel-type).

@@ -13,7 +13,7 @@ Designers are spread between Small Teams. Like sovereign states have ambassadors
 
 | Name         | Role             | Team(s) |
 |--------------|------------------|-----------------|
-| [Lottie Coxon](/community/profiles/227) | Graphic Designer | Marketing, Growth  |
+| [Lottie Coxon](/community/profiles/227) | Graphic Designer | Words & Pictures  |
 | [Cory Watilo](/community/profiles/2) (Team lead)  | Design Lead      | Growth  |
 
 Design at PostHog:

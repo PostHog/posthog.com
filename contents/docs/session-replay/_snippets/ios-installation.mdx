@@ -25,6 +25,11 @@ config.sessionReplayConfig.maskAllTextInputs = true
 // Whether images are masked. Default is true.
 config.sessionReplayConfig.maskAllImages = true
 
+// Enable masking of all sandboxed system views
+// These may include UIImagePickerController, PHPickerViewController and CNContactPickerViewController
+// Default is true.
+config.sessionReplayConfig.maskAllSandboxedViews = true
+
 // Whether network requests are captured in recordings. Default is true
 // Only metric-like data like speed, size, and response code are captured. 
 // No data is captured from the request or response body.
@@ -47,4 +52,3 @@ config.sessionReplayConfig.debouncerDelay = 1.0
   - `Text` views in SwiftUI are considered images, so they are masked unless `maskAllImages` is disabled. 
 - Custom views are not fully supported if `screenshotMode` is disabled.
 - WebView is not supported. A placeholder will be shown.
-- Flutter for iOS isn't supported.

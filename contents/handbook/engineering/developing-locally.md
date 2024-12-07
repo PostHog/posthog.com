@@ -55,9 +55,11 @@ This is a faster option to get up and running. If you don't want to or can't use
 ![](https://user-images.githubusercontent.com/890921/231490278-140f814e-e77b-46d5-9a4f-31c1b1d6956a.png)
 3. Open the codespace, using one of the "Open in" options from the list.
 4. In the codespace, open a terminal window and run `docker compose -f docker-compose.dev.yml up`.
-5. Also in the codespace, open another terminal window and run `./bin/migrate` and then `./bin/start`.
-6. Open browser to http://localhost:8000/.
-7. To get some practical test data into your brand-new instance of PostHog, run `DEBUG=1 ./manage.py generate_demo_data`.
+5. In another terminal, run `pnpm i` (and use the same terminal for the following commands)
+6. Then run `pip install -r requirements.txt -r requirements-dev.txt`
+7. Now run `./bin/migrate` and then `./bin/start`.
+8. Open browser to http://localhost:8000/.
+9. To get some practical test data into your brand-new instance of PostHog, run `DEBUG=1 ./manage.py generate_demo_data`.
 
 ## Option 2: Developing locally
 
@@ -196,7 +198,7 @@ On Linux you often have separate packages: `postgres` for the tools, `postgres-s
 
 2. Install the latest Node.js 18 (the version used by PostHog in production) with `nvm install 18`. You can start using it in the current shell with `nvm use 18`.
 
-3. Install pnpm with `npm install -g pnpm`.
+3. Install pnpm with `corepack enable` and check it with `pnpm --version`.
 
 4. Install Node packages by running `pnpm i`.
 
@@ -230,6 +232,11 @@ export LDFLAGS=-L/opt/homebrew/opt/openssl/lib
 pnpm i --dir plugin-server
 ```
 
+> Note: If you face an error like `import gyp  # noqa: E402`, most probably need to install `python-setuptools`. To fix this, run:
+```bash
+brew install python-setuptools
+```
+
 #### 4. Prepare the Django server
 
 1. Install a few dependencies for SAML to work. If you're on macOS, run the command below, otherwise check the official [xmlsec repo](https://github.com/mehcode/python-xmlsec) for more details.
@@ -260,10 +267,14 @@ Make sure when outside of `venv` to always use `python3` instead of `python`, as
 
 You can also use [pyenv](https://github.com/pyenv/pyenv) if you wish to manage multiple versions of Python 3 on the same machine.
 
+1. Install `uv`
+
+`uv` is a very fast tool you can use for python virtual env and dependency management. See [https://docs.astral.sh/uv/](https://docs.astral.sh/uv/). Once installed you can prefix any `pip` command with `uv` to get the speed boost.
+
 1. Create the virtual environment in current directory called 'env':
 
     ```bash
-    python3.11 -m venv env
+    uv venv env --python 3.11
     ```
 
 1. Activate the virtual environment:
@@ -279,7 +290,7 @@ You can also use [pyenv](https://github.com/pyenv/pyenv) if you wish to manage m
 1. Upgrade pip to the latest version:
 
     ```bash
-    pip install -U pip
+    uv pip install -U pip
     ```
 
 1. Install requirements with pip
@@ -288,7 +299,7 @@ You can also use [pyenv](https://github.com/pyenv/pyenv) if you wish to manage m
 
     ```bash
     brew install openssl
-    CFLAGS="-I /opt/homebrew/opt/openssl/include $(python3.11-config --includes)" LDFLAGS="-L /opt/homebrew/opt/openssl/lib" GRPC_PYTHON_BUILD_SYSTEM_OPENSSL=1 GRPC_PYTHON_BUILD_SYSTEM_ZLIB=1 pip install -r requirements.txt
+    CFLAGS="-I /opt/homebrew/opt/openssl/include $(python3.11-config --includes)" LDFLAGS="-L /opt/homebrew/opt/openssl/lib" GRPC_PYTHON_BUILD_SYSTEM_OPENSSL=1 GRPC_PYTHON_BUILD_SYSTEM_ZLIB=1 uv pip install -r requirements.txt
     ```
 
     > **Friendly tip:** If you see `ERROR: Could not build wheels for xmlsec`, refer to this [issue](https://github.com/xmlsec/python-xmlsec/issues/254).
@@ -296,15 +307,7 @@ You can also use [pyenv](https://github.com/pyenv/pyenv) if you wish to manage m
     These will be used when installing `grpcio` and `psycopg2`. After doing this once, and assuming nothing changed with these two packages, next time simply run:
 
     ```bash
-    pip install -r requirements.txt
-    ```
-
-    If on an x86 platform, simply run the latter version.
-
-1. Install dev requirements
-
-    ```bash
-    pip install -r requirements-dev.txt
+    uv pip install -r requirements.txt -r requirements-dev.txt
     ```
 
 #### 5. Prepare databases

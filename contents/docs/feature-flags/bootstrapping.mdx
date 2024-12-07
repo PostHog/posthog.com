@@ -111,9 +111,8 @@ export function MyApp() {
             // usually 'https://us.i.posthog.com' or 'https://eu.i.posthog.com'
             host: '<ph_client_api_host>', // TIP: host is optional if you use https://us.i.posthog.com
             bootstrap: {
-                distinctID: 'distinct_id_of_your_user',
-                isIdentifiedID: true,
-                sessionID: 'session_id_of_user_session',
+                distinctId: 'distinct_id_of_your_user',
+                isIdentifiedId: true,
                 featureFlags: {
                     'flag-1': true,
                     'variant-flag': 'control',
@@ -128,6 +127,25 @@ export function MyApp() {
 ```
 
 </MultiLanguage>
+
+
+## Overriding feature flags 
+
+Bootstrapped feature flag values are temporary and are disregarded after PostHog fetches flag values. If you are trying to override feature flag values in a persistent manner, some PostHog SDKs support overriding flags:
+
+
+<MultiLanguage selector="tabs">
+
+```node
+posthog.overrideFeatureFlag('my-feature-flag', true)
+```
+
+```js-web
+posthog.feature_flags.override({'my-feature-flag': 'variant-1', 'other-feature': true})
+```
+
+</MultiLanguage>
+
 
 ## Examples
 
