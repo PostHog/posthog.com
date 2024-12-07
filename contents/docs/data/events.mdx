@@ -70,3 +70,52 @@ If something has been detected incorrectly, you can manually change the type by 
     alt="Edit properties" 
     classes="rounded"
 />
+
+### Default properties
+
+Below is a list of some of the properties that PostHog captures by default in client-side apps. You can see the full list of properties that PostHog captures by default in [GitHub](https://github.com/PostHog/posthog-js/blob/main/src/utils/event-utils.ts). 
+
+| Name                        | Key                      | Example value                  |
+|-----------------------------|--------------------------|--------------------------------|
+| Timestamp                   | `$timestamp`             | `2024-05-29T17:32:07.202Z`     |
+| OS                          | `$os`                    | `Mac OS X`                     |
+| OS Version                  | `$os_version`            | `10.15.7`                      |
+| Browser                     | `$browser`               | `Chrome`                       |
+| Browser Version             | `$browser_version`       | `125`                          |
+| Device Type                 | `$device_type`           | `Desktop`                      |
+| Current URL                 | `$current_url`           | `https://example.com/page`     |
+| Host                        | `$host`                  | `example.com`                  |
+| Path Name                   | `$pathname`              | `/page`                        |
+| Screen Height               | `$screen_height`         | `1080`                         |
+| Screen Width                | `$screen_width`          | `1920`                         |
+| Viewport Height             | `$viewport_height`       | `950`                          |
+| Viewport Width              | `$viewport_width`        | `1903`                         |
+| Library                     | `$lib`                   | `web`                          |
+| Library Version             | `$lib_version`           | `1.31.0`                       |
+| Search Engine               | `$search_engine`         | `google`                       |
+| Referrer URL                | `$referrer`              | `https://google.com`           |
+| Referring Domain            | `$referring_domain`      | `www.google.com`               |
+| Active Feature Flags        | `$active_feature_flags`  | `['beta_feature']`             |
+| Event Type                  | `$event_type`            | `click`                        |
+| UTM Source                  | `$utm_source`            | `newsletter`                   |
+| UTM Medium                  | `$utm_medium`            | `email`                        |
+| UTM Campaign                | `$utm_campaign`          | `product_launch`               |
+| UTM Term                    | `$utm_term`              | `new+product`                  |
+| UTM Content                 | `$utm_content`           | `logolink`                     |
+| Google Click ID             | `$gclid`                 | `TeSter-123`                   |
+| Google Ads Source           | `$gad_source`            | `google_ads`                   |
+| Google Search Ads 360 Click | `$gclsrc`                | `dsa`                          |
+| Google DoubleClick Click ID | `$dclid`                 | `testDclid123`                 |
+| Google Web-to-app Measure   | `$wbraid`                | `testWbraid123`                |
+| Google App-to-web Measure   | `$gbraid`                | `testGbraid123`                |
+| Facebook Click ID           | `$fbclid`                | `testFbclid123`                |
+| Microsoft Click ID          | `$msclkid`               | `testMsclkid123`               |
+| Twitter Click ID            | `$twclid`                | `testTwclid123`                |
+| LinkedIn Ad Tracking ID     | `$la_fat_id`             | `testLaFatId123`               |
+| Mailchimp Campaign ID       | `$mc_cid`                | `testMcCid123`                 |
+| Instagram Share Id          | `$igshid`                | `testIgshid123`                |
+| TikTok Click ID             | `$ttclid`                | `testTtclid123`                |
+| Plugins Succeeded           | `$plugins_succeeded`     | `['GeoIP (56578)']`            |
+| Plugins Failed              | `$plugins_failed`        | `['plugin3']`                  |
+| Plugins Deferred            | `$plugins_deferred`      | `['plugin4']`                  |
+| IP Address                  | `$ip`                    | `192.168.1.1`                  |
