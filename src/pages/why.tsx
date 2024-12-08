@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Layout from 'components/Layout'
 import { SEO } from 'components/seo'
 import Link from 'components/Link'
@@ -12,6 +12,7 @@ import { useUser } from 'hooks/useUser'
 import SidebarSection from 'components/PostLayout/SidebarSection'
 import { Contributor } from 'components/PostLayout/Contributors'
 import { productMenu } from '../navs'
+import RoadmapPreview from 'components/RoadmapPreview'
 
 const Teams: React.FC = () => {
     const { james } = useStaticQuery(graphql`
@@ -96,11 +97,11 @@ const Teams: React.FC = () => {
                 <section className="mx-auto">
                     <div className="flex flex-col md:items-center md:justify-end md:flex-row-reverse gap-8 md:gap-2">
                         <div className="md:flex-1">
-                            <h1 className="font-bold text-3xl md:text-4xl mb-6">Why PostHog?</h1>
                             <div className="article-content">
-                                <h2 id="posthog-is-literally-designed-to-be-a-no-brainer">
+                                <div className="opacity-70 text-[15px] font-medium">Why PostHog?</div>
+                                <h1 id="posthog-is-literally-designed-to-be-a-no-brainer" className="text-2xl">
                                     PostHog is literally designed to be a no-brainer
-                                </h2>
+                                </h1>
                                 <p>
                                     <strong>
                                         PostHog is an entire suite of products you can use to make your software
@@ -123,9 +124,23 @@ const Teams: React.FC = () => {
                                     you need it.
                                 </p>
 
-                                <h3 id="popular-roadmap-items">Popular roadmap items</h3>
+                                <div className="flex flex-col sm:flex-row justify-between items-baseline">
+                                    <h3 id="popular-roadmap-items" className="mb-3">
+                                        Popular roadmap items
+                                    </h3>
+                                    <div className="hidden sm:inline-flex mb-4 sm:mb-0">
+                                        <Link href="/roadmap" className="text-[15px]">
+                                            Browse full roadmap
+                                        </Link>
+                                    </div>
+                                </div>
+                                <RoadmapPreview />
 
-                                <em>Roadmap embed here</em>
+                                <div className="text-center sm:hidden -mt-4 mb-8">
+                                    <CallToAction href="/roadmap" size="sm" type="secondary">
+                                        Browse the roadmap
+                                    </CallToAction>
+                                </div>
 
                                 <h2 id="posthog-has-the-lowest-pricing-for-every-product">
                                     PostHog has the lowest pricing for every product
