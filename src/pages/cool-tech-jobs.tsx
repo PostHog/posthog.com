@@ -1,11 +1,11 @@
-import React, { useEffect, useState, useCallback } from 'react'
+import React, { useEffect, useState } from 'react'
 import useJobs, { Job } from '../hooks/useJobs'
 import groupBy from 'lodash.groupby'
 import useCompanies, { Company, Filters as FiltersType } from 'hooks/useCompanies'
 import Layout from 'components/Layout'
 import { layoutLogic } from 'logic/layoutLogic'
 import { useValues } from 'kea'
-import { IconChevronDown, IconArrowUpRight } from '@posthog/icons'
+import { IconChevronDown, IconArrowUpRight, IconX } from '@posthog/icons'
 import Link from 'components/Link'
 import dayjs from 'dayjs'
 import relativeTime from 'dayjs/plugin/relativeTime'
@@ -17,8 +17,6 @@ import { motion } from 'framer-motion'
 import { useLayoutData } from 'components/Layout/hooks'
 import SEO from 'components/seo'
 import SideModal from 'components/Modal/SideModal'
-import debounce from 'lodash.debounce'
-
 dayjs.extend(relativeTime)
 
 const toggleFilters = [
@@ -125,18 +123,13 @@ const JobList = ({ jobs }: { jobs: Job[] }) => {
     )
 }
 
-const Companies = ({
-    search,
-    companyFilters,
-    jobFilters,
-}: {
-    search: string
-    companyFilters: FiltersType
-    jobFilters: FiltersType
-}) => {
+const Companies = ({ companyFilters, jobFilters }: { companyFilters: FiltersType; jobFilters: FiltersType }) => {
+    const [search, setSearch] = useState('')
     const { websiteTheme } = useValues(layoutLogic)
     const { companies, isLoading } = useCompanies({ companyFilters, jobFilters, search })
     const { fullWidthContent } = useLayoutData()
+
+    const handleSearch = (value: string) => setSearch(value)
 
     return isLoading ? (
         <ul className="list-none p-0 m-0 space-y-4 py-8">
@@ -145,67 +138,87 @@ const Companies = ({
             ))}
         </ul>
     ) : (
-        <ul
-            className={`@container list-none p-0 m-0 space-y-8 pt-4 pb-12 mt-2 mx-auto transition-all ${
-                fullWidthContent ? 'max-w-full' : ' max-w-4xl'
-            }`}
-        >
-            {companies.map((company) => {
-                const { name } = company.attributes
-                const logoLight = company.attributes.logoLight?.data?.attributes?.url
-                const logoDark = company.attributes.logoDark?.data?.attributes?.url
-                return company.attributes.jobs.data.length > 0 ? (
-                    <li className="@2xl:flex @2xl:space-x-8 items-start" key={company.id}>
-                        <div className="@2xl:sticky top-0 reasonable:top-[142px] pb-4 z-10 bg-light dark:bg-dark @2xl:flex-[0_0_230px]">
-                            {(logoLight || logoDark) && (
-                                <>
-                                    {company.attributes.url ? (
-                                        <Link to={`${company.attributes.url}?utm_source=posthog`} externalNoIcon>
+        <div>
+            <div className="flex items-center justify-between mt-5 border bg-white dark:bg-accent-dark border-border dark:border-dark rounded">
+                <input
+                    type="search"
+                    placeholder="Search"
+                    className="w-full !outline-none !ring-0 p-2 bg-transparent border-none"
+                    onChange={(e) => handleSearch(e.target.value)}
+                    value={search}
+                    autoComplete="off"
+                />
+                {search && (
+                    <button
+                        onClick={() => setSearch('')}
+                        className="text-sm opacity-50 hover:opacity-80 transition-opacity p-2"
+                    >
+                        <IconX className="size-4" />
+                    </button>
+                )}
+            </div>
+            <ul
+                className={`@container list-none p-0 m-0 space-y-8 pt-4 pb-12 mt-2 mx-auto transition-all ${
+                    fullWidthContent ? 'max-w-full' : ' max-w-4xl'
+                }`}
+            >
+                {companies.map((company) => {
+                    const { name } = company.attributes
+                    const logoLight = company.attributes.logoLight?.data?.attributes?.url
+                    const logoDark = company.attributes.logoDark?.data?.attributes?.url
+                    return company.attributes.jobs.data.length > 0 ? (
+                        <li className="@2xl:flex @2xl:space-x-8 items-start" key={company.id}>
+                            <div className="@2xl:sticky top-0 reasonable:top-[142px] pb-4 z-10 bg-light dark:bg-dark @2xl:flex-[0_0_230px]">
+                                {(logoLight || logoDark) && (
+                                    <>
+                                        {company.attributes.url ? (
+                                            <Link to={`${company.attributes.url}?utm_source=posthog`} externalNoIcon>
+                                                <img
+                                                    className="max-w-40 mb-3"
+                                                    src={logoDark && websiteTheme === 'dark' ? logoDark : logoLight}
+                                                    alt={name}
+                                                />
+                                            </Link>
+                                        ) : (
                                             <img
                                                 className="max-w-40 mb-3"
                                                 src={logoDark && websiteTheme === 'dark' ? logoDark : logoLight}
                                                 alt={name}
                                             />
-                                        </Link>
-                                    ) : (
-                                        <img
-                                            className="max-w-40 mb-3"
-                                            src={logoDark && websiteTheme === 'dark' ? logoDark : logoLight}
-                                            alt={name}
-                                        />
-                                    )}
-                                </>
-                            )}
-                            {company.attributes.description && (
-                                <p className="m-0 text-sm font-medium text-primary/75 dark:text-primary-dark/75">
-                                    {company.attributes.description}
-                                </p>
-                            )}
+                                        )}
+                                    </>
+                                )}
+                                {company.attributes.description && (
+                                    <p className="m-0 text-sm font-medium text-primary/75 dark:text-primary-dark/75">
+                                        {company.attributes.description}
+                                    </p>
+                                )}
 
-                            {company.attributes.url && (
-                                <Link
-                                    href={`${company.attributes.url}?utm_source=posthog`}
-                                    className="group flex items-center gap-0.5 text-sm text-red dark:text-yellow font-semibold mb-2"
-                                    externalNoIcon
-                                >
-                                    Learn more
-                                    <IconArrowUpRight className="size-4 opacity-0 group-hover:opacity-50 text-primary dark:text-primary-dark" />
-                                </Link>
-                            )}
+                                {company.attributes.url && (
+                                    <Link
+                                        href={`${company.attributes.url}?utm_source=posthog`}
+                                        className="group flex items-center gap-0.5 text-sm text-red dark:text-yellow font-semibold mb-2"
+                                        externalNoIcon
+                                    >
+                                        Learn more
+                                        <IconArrowUpRight className="size-4 opacity-0 group-hover:opacity-50 text-primary dark:text-primary-dark" />
+                                    </Link>
+                                )}
 
-                            <h4 className="text-sm font-medium text-primary/50 dark:text-primary-dark/50 border-b border-light dark:border-dark pb-2 mt-4 mb-2">
-                                Unique perks
-                            </h4>
-                            <Perks
-                                className="grid @sm:grid-cols-2 @2xl:grid-cols-1 xl:[&>li]:ml-0 gap-1 [&>li]:ml-2 xl:ml-0 -ml-2"
-                                company={company}
-                            />
-                        </div>
-                        <JobList jobs={company.attributes.jobs.data} />
-                    </li>
-                ) : null
-            })}
-        </ul>
+                                <h4 className="text-sm font-medium text-primary/50 dark:text-primary-dark/50 border-b border-light dark:border-dark pb-2 mt-4 mb-2">
+                                    Unique perks
+                                </h4>
+                                <Perks
+                                    className="grid @sm:grid-cols-2 @2xl:grid-cols-1 xl:[&>li]:ml-0 gap-1 [&>li]:ml-2 xl:ml-0 -ml-2"
+                                    company={company}
+                                />
+                            </div>
+                            <JobList jobs={company.attributes.jobs.data} />
+                        </li>
+                    ) : null
+                })}
+            </ul>
+        </div>
     )
 }
 
@@ -248,13 +261,11 @@ const Filters = ({
     setCompanyFilters,
     jobFilters,
     setJobFilters,
-    onSearch,
 }: {
     companyFilters: FiltersType
     setCompanyFilters: (filters: FiltersType) => void
     jobFilters: FiltersType
     setJobFilters: (filters: FiltersType) => void
-    onSearch: (search: string) => void
 }) => {
     const [displayedFilters, setDisplayedFilters] = useState<FiltersType>(
         toggleFilters.map((filter) => ({
@@ -281,12 +292,6 @@ const Filters = ({
 
     return (
         <div className="space-y-4 pt-4 !pb-8 lg:py-0">
-            <input
-                type="text"
-                placeholder="Search"
-                className="w-full border bg-white dark:bg-accent-dark border-border dark:border-dark rounded p-2 !outline-none !ring-0"
-                onChange={(e) => onSearch(e.target.value)}
-            />
             <h4 className="text-[15px] font-medium text-primary/60 dark:text-primary-dark/60 border-b border-light dark:border-dark pb-2 mb-2">
                 Typical filters
             </h4>
@@ -343,19 +348,11 @@ const Filters = ({
 }
 
 export default function JobsPage() {
-    const [search, setSearch] = useState('')
     const [sortBy, setSortBy] = useState<'company' | 'job'>('company')
     const [companyFilters, setCompanyFilters] = useState<FiltersType>([])
     const [jobFilters, setJobFilters] = useState<FiltersType>([])
     const [filtersOpen, setFiltersOpen] = useState(false)
     const [applyModalOpen, setApplyModalOpen] = useState(false)
-
-    const onSearch = useCallback(
-        debounce((search: string) => {
-            setSearch(search)
-        }, 500),
-        []
-    )
 
     return (
         <Layout>
@@ -389,9 +386,9 @@ export default function JobsPage() {
                     </div>
                     <div className="w-full flex-grow lg:mr-6 lg:pl-6 lg:pr-6 lg:border-x border-light dark:border-dark order-3 lg:order-2">
                         {sortBy === 'company' ? (
-                            <Companies search={search} companyFilters={companyFilters} jobFilters={jobFilters} />
+                            <Companies companyFilters={companyFilters} jobFilters={jobFilters} />
                         ) : (
-                            <Jobs search={search} companyFilters={companyFilters} jobFilters={jobFilters} />
+                            <Jobs companyFilters={companyFilters} jobFilters={jobFilters} />
                         )}
                     </div>
                     <div className="flex-shrink-0 xl:sticky top-0 reasonable:top-[107px] lg:py-4 order-2 pb-4 lg:pb-0 lg:order-3 w-full lg:w-auto">
@@ -415,7 +412,6 @@ export default function JobsPage() {
                                 setCompanyFilters={setCompanyFilters}
                                 jobFilters={jobFilters}
                                 setJobFilters={setJobFilters}
-                                onSearch={onSearch}
                             />
                         </motion.div>
                     </div>

@@ -1,8 +1,9 @@
-import { useMemo } from 'react'
+import { useCallback, useEffect, useMemo, useState } from 'react'
 import useSWRInfinite from 'swr/infinite'
 import qs from 'qs'
 import { Job } from './useJobs'
 import Fuse from 'fuse.js'
+import debounce from 'lodash.debounce'
 
 export type Filters = Array<
     | {
@@ -92,9 +93,9 @@ export type Company = {
 }
 
 export default function useCompanies({
-    search,
     companyFilters,
     jobFilters,
+    ...other
 }: {
     search: string
     companyFilters: Filters
@@ -105,6 +106,7 @@ export default function useCompanies({
     error: Error | undefined
     fetchMore: () => void
 } {
+    const [search, setSearch] = useState('')
     const { data, size, setSize, isLoading, error } = useSWRInfinite(
         (offset) => `${process.env.GATSBY_SQUEAK_API_HOST}/api/companies?${query(offset, companyFilters, jobFilters)}`,
         async (url: string) => {
@@ -149,6 +151,18 @@ export default function useCompanies({
             }
         })
     }, [size, data, search])
+
+    const debouncedSearch = useCallback(
+        debounce((search: string) => {
+            setSearch(search)
+        }, 500),
+        []
+    )
+
+    useEffect(() => {
+        if (!other.search) return setSearch('')
+        debouncedSearch(other.search)
+    }, [other.search])
 
     return {
         companies,
