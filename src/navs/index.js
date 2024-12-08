@@ -3199,6 +3199,68 @@ export const pricingMenu = {
     ],
 }
 
+export const productMenu = {
+    name: 'Products',
+    url: '/product-analytics',
+    icon: 'IconFeatures',
+    children: [
+        {
+            name: 'Product analytics',
+            icon: 'IconGraph',
+            color: 'blue',
+            url: '/product-analytics',
+        },
+        {
+            name: 'Web analytics',
+            icon: 'IconPieChart',
+            color: '[#36C46F]',
+            url: '/web-analytics',
+        },
+        {
+            name: 'Session replay',
+            icon: 'IconRewindPlay',
+            color: 'yellow',
+            url: '/session-replay',
+        },
+        {
+            name: 'Feature flags',
+            icon: 'IconToggle',
+            color: 'seagreen',
+            url: '/feature-flags',
+        },
+        {
+            name: 'Experiments',
+            icon: 'IconFlask',
+            color: 'purple',
+            url: '/experiments',
+        },
+        {
+            name: 'Surveys',
+            icon: 'IconMessage',
+            color: 'salmon',
+            url: '/surveys',
+        },
+        {
+            name: 'Data pipelines',
+            icon: 'IconPlug',
+            color: 'sky-blue',
+            url: '/cdp',
+        },
+        {
+            name: 'Data warehouse',
+            icon: 'IconDatabase',
+            color: 'lilac',
+            url: '/data-warehouse',
+        },
+        {
+            name: 'Product OS',
+            icon: 'IconStack',
+            color: 'blue',
+            url: '/product-os',
+        },
+    ],
+}
+
 const menu = [
     {
         name: 'Why PostHog?',
@@ -3206,67 +3268,7 @@ const menu = [
         icon: 'IconLightBulb',
         color: 'yellow',
     },
-    {
-        name: 'Products',
-        url: '/product-analytics',
-        icon: 'IconFeatures',
-        children: [
-            {
-                name: 'Product analytics',
-                icon: 'IconGraph',
-                color: 'blue',
-                url: '/product-analytics',
-            },
-            {
-                name: 'Web analytics',
-                icon: 'IconPieChart',
-                color: '[#36C46F]',
-                url: '/web-analytics',
-            },
-            {
-                name: 'Session replay',
-                icon: 'IconRewindPlay',
-                color: 'yellow',
-                url: '/session-replay',
-            },
-            {
-                name: 'Feature flags',
-                icon: 'IconToggle',
-                color: 'seagreen',
-                url: '/feature-flags',
-            },
-            {
-                name: 'Experiments',
-                icon: 'IconFlask',
-                color: 'purple',
-                url: '/experiments',
-            },
-            {
-                name: 'Surveys',
-                icon: 'IconMessage',
-                color: 'salmon',
-                url: '/surveys',
-            },
-            {
-                name: 'Data pipelines',
-                icon: 'IconPlug',
-                color: 'sky-blue',
-                url: '/cdp',
-            },
-            {
-                name: 'Data warehouse',
-                icon: 'IconDatabase',
-                color: 'lilac',
-                url: '/data-warehouse',
-            },
-            {
-                name: 'Product OS',
-                icon: 'IconStack',
-                color: 'blue',
-                url: '/product-os',
-            },
-        ],
-    },
+    productMenu,
     pricingMenu,
     docsMenu,
     communityMenu,

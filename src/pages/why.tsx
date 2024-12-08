@@ -11,6 +11,7 @@ import { CallToAction } from 'components/CallToAction'
 import { useUser } from 'hooks/useUser'
 import SidebarSection from 'components/PostLayout/SidebarSection'
 import { Contributor } from 'components/PostLayout/Contributors'
+import { productMenu } from '../navs'
 
 const Teams: React.FC = () => {
     const { james } = useStaticQuery(graphql`
@@ -48,6 +49,7 @@ const Teams: React.FC = () => {
                         </div>
                     </SidebarSection>
                 }
+                menu={[{ name: 'Explore products', url: undefined }, ...productMenu.children]}
                 tableOfContents={[
                     {
                         url: 'posthog-is-literally-designed-to-be-a-no-brainer',
