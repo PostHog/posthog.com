@@ -2,6 +2,7 @@ import { useMemo } from 'react'
 import useSWRInfinite from 'swr/infinite'
 import qs from 'qs'
 import { Job } from './useJobs'
+import Fuse from 'fuse.js'
 
 export type Filters = Array<
     | {
@@ -30,6 +31,11 @@ const query = (offset: number, companyFilters: Filters, jobFilters: Filters) => 
             populate: {
                 jobs: {
                     sort: 'postedDate:desc',
+                    populate: {
+                        company: {
+                            fields: ['name'],
+                        },
+                    },
                     ...(jobFilters.length > 0 && { filters: { $and: jobFilters } }),
                 },
                 logoLight: true,
@@ -86,9 +92,11 @@ export type Company = {
 }
 
 export default function useCompanies({
+    search,
     companyFilters,
     jobFilters,
 }: {
+    search: string
     companyFilters: Filters
     jobFilters: Filters
 }): {
@@ -106,9 +114,41 @@ export default function useCompanies({
             revalidateOnFocus: false,
         }
     )
+
     const companies = useMemo(() => {
-        return data?.reduce((acc, cur) => [...acc, ...(cur.data || [])], []) ?? []
-    }, [size, data])
+        if (!data) return []
+
+        const allCompanies = data.reduce((acc, cur) => [...acc, ...(cur.data || [])], [])
+
+        if (!search) return allCompanies
+
+        return allCompanies.map((company: Company) => {
+            const jobs = company.attributes.jobs.data
+            if (!jobs.length) return company
+
+            const jobsFuse = new Fuse(jobs, {
+                keys: [
+                    'attributes.title',
+                    'attributes.description',
+                    'attributes.department',
+                    'attributes.company.data.attributes.name',
+                ],
+                threshold: 0.3,
+            })
+
+            const matchedJobs = search ? jobsFuse.search(search).map((result) => result.item) : jobs
+
+            return {
+                ...company,
+                attributes: {
+                    ...company.attributes,
+                    jobs: {
+                        data: matchedJobs,
+                    },
+                },
+            }
+        })
+    }, [size, data, search])
 
     return {
         companies,

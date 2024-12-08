@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useCallback } from 'react'
 import useJobs, { Job } from '../hooks/useJobs'
 import groupBy from 'lodash.groupby'
 import useCompanies, { Company, Filters as FiltersType } from 'hooks/useCompanies'
@@ -17,6 +17,7 @@ import { motion } from 'framer-motion'
 import { useLayoutData } from 'components/Layout/hooks'
 import SEO from 'components/seo'
 import SideModal from 'components/Modal/SideModal'
+import debounce from 'lodash.debounce'
 
 dayjs.extend(relativeTime)
 
@@ -124,9 +125,17 @@ const JobList = ({ jobs }: { jobs: Job[] }) => {
     )
 }
 
-const Companies = ({ companyFilters, jobFilters }: { companyFilters: FiltersType; jobFilters: FiltersType }) => {
+const Companies = ({
+    search,
+    companyFilters,
+    jobFilters,
+}: {
+    search: string
+    companyFilters: FiltersType
+    jobFilters: FiltersType
+}) => {
     const { websiteTheme } = useValues(layoutLogic)
-    const { companies, isLoading } = useCompanies({ companyFilters, jobFilters })
+    const { companies, isLoading } = useCompanies({ companyFilters, jobFilters, search })
     const { fullWidthContent } = useLayoutData()
 
     return isLoading ? (
@@ -239,11 +248,13 @@ const Filters = ({
     setCompanyFilters,
     jobFilters,
     setJobFilters,
+    onSearch,
 }: {
     companyFilters: FiltersType
     setCompanyFilters: (filters: FiltersType) => void
     jobFilters: FiltersType
     setJobFilters: (filters: FiltersType) => void
+    onSearch: (search: string) => void
 }) => {
     const [displayedFilters, setDisplayedFilters] = useState<FiltersType>(
         toggleFilters.map((filter) => ({
@@ -270,6 +281,12 @@ const Filters = ({
 
     return (
         <div className="space-y-4 pt-4 !pb-8 lg:py-0">
+            <input
+                type="text"
+                placeholder="Search"
+                className="w-full border border-border dark:border-dark rounded p-2 !outline-none !ring-0"
+                onChange={(e) => onSearch(e.target.value)}
+            />
             <h4 className="text-[15px] font-medium text-primary/60 dark:text-primary/60 border-b border-light dark:border-dark pb-2 mb-2">
                 Typical filters
             </h4>
@@ -326,11 +343,19 @@ const Filters = ({
 }
 
 export default function JobsPage() {
+    const [search, setSearch] = useState('')
     const [sortBy, setSortBy] = useState<'company' | 'job'>('company')
     const [companyFilters, setCompanyFilters] = useState<FiltersType>([])
     const [jobFilters, setJobFilters] = useState<FiltersType>([])
     const [filtersOpen, setFiltersOpen] = useState(false)
     const [applyModalOpen, setApplyModalOpen] = useState(false)
+
+    const onSearch = useCallback(
+        debounce((search: string) => {
+            setSearch(search)
+        }, 500),
+        []
+    )
 
     return (
         <Layout>
@@ -364,9 +389,9 @@ export default function JobsPage() {
                     </div>
                     <div className="w-full flex-grow lg:mr-6 lg:pl-6 lg:pr-6 lg:border-x border-light dark:border-dark order-3 lg:order-2">
                         {sortBy === 'company' ? (
-                            <Companies companyFilters={companyFilters} jobFilters={jobFilters} />
+                            <Companies search={search} companyFilters={companyFilters} jobFilters={jobFilters} />
                         ) : (
-                            <Jobs companyFilters={companyFilters} jobFilters={jobFilters} />
+                            <Jobs search={search} companyFilters={companyFilters} jobFilters={jobFilters} />
                         )}
                     </div>
                     <div className="flex-shrink-0 xl:sticky top-0 reasonable:top-[107px] lg:py-4 order-2 pb-4 lg:pb-0 lg:order-3 w-full lg:w-auto">
@@ -390,6 +415,7 @@ export default function JobsPage() {
                                 setCompanyFilters={setCompanyFilters}
                                 jobFilters={jobFilters}
                                 setJobFilters={setJobFilters}
+                                onSearch={onSearch}
                             />
                         </motion.div>
                     </div>
