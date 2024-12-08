@@ -139,10 +139,10 @@ const Companies = ({ companyFilters, jobFilters }: { companyFilters: FiltersType
         </ul>
     ) : (
         <div>
-            <div className="flex items-center justify-between mt-5 border bg-white dark:bg-accent-dark border-border dark:border-dark rounded">
+            <div className="flex items-center justify-between lg:mt-5 border bg-white dark:bg-accent-dark border-border dark:border-dark rounded">
                 <input
                     type="search"
-                    placeholder="Search"
+                    placeholder="Search..."
                     className="w-full !outline-none !ring-0 p-2 bg-transparent border-none"
                     onChange={(e) => handleSearch(e.target.value)}
                     value={search}
@@ -394,7 +394,7 @@ export default function JobsPage() {
                     <div className="flex-shrink-0 xl:sticky top-0 reasonable:top-[107px] lg:py-4 order-2 pb-4 lg:pb-0 lg:order-3 w-full lg:w-auto">
                         <button
                             onClick={() => setFiltersOpen(!filtersOpen)}
-                            className="text-left inline-flex items-center border border-light dark:border-dark rounded p-1 pr-3 bg-accent dark:bg-accent-dark lg:hidden"
+                            className="text-left inline-flex items-center justify-between border border-light dark:border-dark rounded p-1 pr-3 bg-accent dark:bg-accent-dark lg:hidden w-full"
                         >
                             <IconChevronDown
                                 className={`size-7 transition-transform opacity-60 ${filtersOpen ? 'rotate-180' : ''}`}
