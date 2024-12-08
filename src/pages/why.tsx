@@ -9,20 +9,96 @@ import slugify from 'slugify'
 import TeamPatch from 'components/TeamPatch'
 import { CallToAction } from 'components/CallToAction'
 import { useUser } from 'hooks/useUser'
+import SidebarSection from 'components/PostLayout/SidebarSection'
+import { Contributor } from 'components/PostLayout/Contributors'
 
 const Teams: React.FC = () => {
-    const { isModerator } = useUser()
+    const { james } = useStaticQuery(graphql`
+        {
+            james: squeakProfile(squeakId: { eq: 27732 }) {
+                squeakId
+                firstName
+                lastName
+                avatar {
+                    url
+                }
+                companyRole
+            }
+        }
+    `)
+
+    console.log(james)
 
     return (
         <Layout>
             <SEO title="Why PostHog? - PostHog" description="Why not?" image={`/images/small-teams.png`} />
-            <PostLayout article={false} title={'Handbook'} hideSurvey>
+            <PostLayout
+                title={'Handbook'}
+                hideSurvey
+                sidebar={
+                    <SidebarSection title="From the desk of...">
+                        <div className="-mx-4">
+                            <Contributor
+                                url={james.squeakId && `/community/profiles/${james.squeakId}`}
+                                image={james.avatar?.url}
+                                name={`${james.firstName} ${james.lastName}`}
+                                role={james.companyRole}
+                                text
+                            />
+                        </div>
+                    </SidebarSection>
+                }
+                tableOfContents={[
+                    {
+                        url: 'posthog-is-literally-designed-to-be-a-no-brainer',
+                        value: 'PostHog is literally designed to be a no-brainer',
+                        depth: 0,
+                    },
+                    {
+                        url: 'popular-roadmap-items',
+                        value: 'Popular roadmap items',
+                        depth: 1,
+                    },
+                    {
+                        url: 'posthog-has-the-lowest-pricing-for-every-product',
+                        value: 'PostHog has the lowest pricing for every product',
+                        depth: 0,
+                    },
+                    {
+                        url: 'posthog-just-does-the-right-thing',
+                        value: 'PostHog just does the right thing',
+                        depth: 0,
+                    },
+                    {
+                        url: 'support-from-actually-technical-people',
+                        value: 'Support from actually technical people',
+                        depth: 0,
+                    },
+                    {
+                        url: 'posthog-is-more-popular-than-every-other-product',
+                        value: 'PostHog is more popular than every other product',
+                        depth: 0,
+                    },
+                    {
+                        url: 'who-doesnt-posthog-work-well-for',
+                        value: "Who doesn't PostHog work well for?",
+                        depth: 0,
+                    },
+                    {
+                        url: 'every-product-has-a-huge-free-tier',
+                        value: 'Every product has a huge free tier',
+                        depth: 0,
+                    },
+                ]}
+            >
                 <section className="mx-auto">
                     <div className="flex flex-col md:items-center md:justify-end md:flex-row-reverse gap-8 md:gap-2">
                         <div className="md:flex-1">
                             <h1 className="font-bold text-3xl md:text-4xl mb-6">Why PostHog?</h1>
                             <div className="article-content">
-                                <h2>PostHog is literally designed to be a no-brainer</h2>
+                                <h2 id="posthog-is-literally-designed-to-be-a-no-brainer">
+                                    PostHog is literally designed to be a no-brainer
+                                </h2>
                                 <p>
                                     <strong>
                                         PostHog is an entire suite of products you can use to make your software
@@ -45,11 +121,13 @@ const Teams: React.FC = () => {
                                     you need it.
                                 </p>
 
-                                <h3>Popular roadmap items</h3>
+                                <h3 id="popular-roadmap-items">Popular roadmap items</h3>
 
                                 <em>Roadmap embed here</em>
 
-                                <h2>PostHog has the lowest pricing for every product</h2>
+                                <h2 id="posthog-has-the-lowest-pricing-for-every-product">
+                                    PostHog has the lowest pricing for every product
+                                </h2>
                                 <p>
                                     Sure it's great to have it all in one place, but only if you know you're getting a
                                     deal. PostHog is always cheaper than the cheapest major competitor so you know you
@@ -60,7 +138,7 @@ const Teams: React.FC = () => {
                                     before paying anything at all.
                                 </p>
 
-                                <h2>PostHog just does the right thing</h2>
+                                <h2 id="posthog-just-does-the-right-thing">PostHog just does the right thing</h2>
                                 <p>
                                     We polled our customers - one of the top four reasons they recommend PostHog is
                                     "developer brand". To us that means we do the right thing for our customers:
@@ -135,7 +213,9 @@ const Teams: React.FC = () => {
                                     that is what wins.
                                 </p>
 
-                                <h2>Support from actually technical people</h2>
+                                <h2 id="support-from-actually-technical-people">
+                                    Support from actually technical people
+                                </h2>
                                 <p>
                                     You can <Link href="/teams">literally see the engineers</Link> that built each of
                                     our products on our website.
@@ -158,7 +238,9 @@ const Teams: React.FC = () => {
                                     <Link href="/handbook/values">our list of values</Link>.
                                 </p>
 
-                                <h2>PostHog is more popular than every other product</h2>
+                                <h2 id="posthog-is-more-popular-than-every-other-product">
+                                    PostHog is more popular than every other product
+                                </h2>
                                 <p>
                                     We get that you aren't a lemming (they refuse to type in our url with their little
                                     paws), but it's probably a good sign when something is very popular.
@@ -171,7 +253,7 @@ const Teams: React.FC = () => {
                                     batch uses our products.
                                 </p>
 
-                                <h2>Who doesn't PostHog work well for?</h2>
+                                <h2 id="who-doesnt-posthog-work-well-for">Who doesn't PostHog work well for?</h2>
                                 <p>
                                     People who don't like letting their engineering teams make decisions. If you are
                                     happy to let engineering drive in your organization then we're usually a slam dunk.
@@ -180,7 +262,7 @@ const Teams: React.FC = () => {
                                     compared to the advantages of it all in one place.
                                 </p>
 
-                                <h2>Every product has a huge free tier</h2>
+                                <h2 id="every-product-has-a-huge-free-tier">Every product has a huge free tier</h2>
                                 <p>
                                     Just try it. You don't even need to put in a credit card. We give away more free
                                     stuff than anyone else. What you'd pay $100s for on other platforms, you get here
