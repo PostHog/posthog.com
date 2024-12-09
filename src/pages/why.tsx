@@ -66,6 +66,11 @@ const Teams: React.FC = () => {
                     imageXOffset
                     imageYOffset
                 }
+                leadProfiles {
+                    data {
+                        id
+                    }
+                }
             }
         }
     `)
@@ -277,9 +282,9 @@ const Teams: React.FC = () => {
                                     our products on our website.
                                 </p>
 
-                                <div className="@lg:float-right ml-5 @lg:ml-8 mb-6 @lg:mb-2 px-2 py-4 max-w-sm rounded border border-light dark:border-dark bg-accent dark:bg-accent-dark">
-                                    <div className="grid grid-cols-5 group gap-12">
-                                        <div className="max-w-32 mx-auto col-span-2 scale-[1.65] hover:scale-[1.68] active:scale-[1.65] relative hover:-top-0.5 active:top-0.5 transition-all duration-100 ml-2">
+                                <div className="@lg:float-right ml-2 @lg:ml-8 mb-6 mt-2 @lg:mb-2 px-2 py-4 max-w-sm rounded border border-light dark:border-dark bg-accent dark:bg-accent-dark">
+                                    <div className="grid grid-cols-2 @lg:grid-cols-5 group gap-12">
+                                        <div className="max-w-32 mx-auto @lg:col-span-2 scale-150 @lg:scale-[1.65] @lg:hover:scale-[1.68] @lg:active:scale-[1.65] relative hover:-top-0.5 active:top-0.5 transition-all duration-100 ml-2 -mt-2 @lg:mt-0">
                                             <Link to={`/teams/${supportTeam.slug}`}>
                                                 <TeamPatch
                                                     name={supportTeam.name}
@@ -289,32 +294,53 @@ const Teams: React.FC = () => {
                                                 />
                                             </Link>
                                         </div>
-                                        <div className="col-span-3">
+                                        <div className="@lg:col-span-3">
                                             <p className="!mb-2 !text-[15px] !leading-tight font-semibold">
-                                                Meet the support engineers on the front lines:
+                                                Meet our support engineers
+                                                <span className="hidden @lg:inline"> on the front lines</span>:
                                             </p>
 
-                                            <div className="flex flex-wrap justify-start -space-x-3 mb-2">
-                                                {supportTeam.profiles.data.map(
-                                                    ({ id, attributes: { firstName, lastName, avatar, color } }) => {
-                                                        const name = [firstName, lastName].filter(Boolean).join(' ')
-                                                        return (
-                                                            <Tooltip key={id} content={name}>
-                                                                <img
-                                                                    src={avatar?.data?.attributes?.url}
-                                                                    className={`size-10 rounded-full bg-${
-                                                                        color ?? 'accent'
-                                                                    } border border-light dark:border-dark`}
-                                                                    alt={name}
-                                                                />
-                                                            </Tooltip>
+                                            <div className="flex flex-wrap justify-end -space-x-3 ml-3 mb-3" dir="rtl">
+                                                {supportTeam.profiles.data
+                                                    .slice()
+                                                    .sort((a, b) => {
+                                                        const aIsLead = supportTeam.leadProfiles.data.some(
+                                                            ({ id: leadID }) => leadID === a.id
                                                         )
-                                                    }
-                                                )}
+                                                        const bIsLead = supportTeam.leadProfiles.data.some(
+                                                            ({ id: leadID }) => leadID === b.id
+                                                        )
+                                                        return aIsLead === bIsLead ? 0 : aIsLead ? -1 : 1
+                                                    })
+                                                    .reverse()
+                                                    .map(
+                                                        ({
+                                                            id,
+                                                            attributes: { firstName, lastName, avatar, color },
+                                                        }) => {
+                                                            const name = [firstName, lastName].filter(Boolean).join(' ')
+                                                            return (
+                                                                <Tooltip
+                                                                    key={id}
+                                                                    content={name}
+                                                                    placement="top"
+                                                                    className="first:-ml-3 relative hover:z-10 transform scale-100 hover:scale-125 transition-all"
+                                                                >
+                                                                    <img
+                                                                        src={avatar?.data?.attributes?.url}
+                                                                        className={`size-10 rounded-full bg-${
+                                                                            color ?? 'accent'
+                                                                        } border border-light dark:border-dark`}
+                                                                        alt={name}
+                                                                    />
+                                                                </Tooltip>
+                                                            )
+                                                        }
+                                                    )}
                                             </div>
 
                                             <CallToAction to={`/teams/${supportTeam.slug}`} type="secondary" size="xs">
-                                                Visit small team page
+                                                Learn about this team
                                             </CallToAction>
                                         </div>
                                     </div>
