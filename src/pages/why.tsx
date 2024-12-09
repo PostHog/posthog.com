@@ -393,6 +393,13 @@ const Teams: React.FC = () => {
                                     stuff than anyone else. What you'd pay $100s for on other platforms, you get here
                                     for free, every month.
                                 </p>
+
+                                <div className="flex flex-col sm:flex-row gap-3 sm:gap-2 mt-8">
+                                    <CallToAction to="https://app.posthog.com/signup">Get started - free</CallToAction>
+                                    <CallToAction to="/product-analytics" type="secondary">
+                                        Explore products
+                                    </CallToAction>
+                                </div>
                             </div>
                         </div>
                     </div>
