@@ -105,16 +105,16 @@ This section also has tabs for finding the entry paths, end paths, and outbound 
 - **End path** shows stats for the last page a user visited before their session ended
 - **Outbound clicks** show which links that users clicked on to leave your site
 
-#### Use case: Finding the most popular content
-
-PostHog hosts developer documentation at `/docs`. What if we want to find the most popular docs? We can click the **+ Add filter** button and add a filter where _Path Name_ contains `"/docs/"`. And then we can see the results with the most popular documentation:
-
-<ProductScreenshot
-  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/paths_docs_2924a8d630.png"
-  imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/paths_docs_dark_1887fbb2c7.png"
-  alt="Most popular paths"
-  classes="rounded"
-/>
+> #### Use case: Finding the most popular content
+>
+> PostHog hosts developer documentation at `/docs`. What if we want to find the most popular docs? We can click the **+ Add filter** button and add a filter where _Path Name_ contains `"/docs/"`. And then we can see the results with the most popular documentation:
+>
+> <ProductScreenshot
+>  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/paths_docs_2924a8d630.png"
+>  imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/paths_docs_dark_1887fbb2c7.png"
+>  alt="Most popular paths"
+>  classes="rounded"
+> />
 
 ### Channels, referrers, and UTM sources
 
@@ -152,26 +152,26 @@ For example, if you advertise a sale on Google, you can use the URL to indicate 
 
 Web analytics enables you to filter by all the various UTM parameters that are available, and you can learn more about them in our [UTM segmentation](/docs/data/utm-segmentation) doc. We also have a tutorial on [how to track performance marketing](/tutorials/performance-marketing) that goes into more detail.
 
-#### Use case: Tracking visitors from a sponsored video
-
-One example of how PostHog uses these features was a recent sponsored video on YouTube. We sponsored a [Fireship](https://www.youtube.com/c/Fireship) video, and we can see how it worked below.
-
-For the YouTube video, there's a link in the description for people that are interested in seeing what PostHog is, and it looks like this:
-
-`https://posthog.com/fireship`
-
-That URL gets transformed into the following UTM paramaters:
-
-`https://posthog.com/?utm_source=fireship&utm_campaign=fireship`
-
-Then, we can see how many visitors came from that video by using the "UTM source" option on our web analytics dashboard:
-
-<ProductScreenshot
-  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/utm_source_light_21fa9c00fe.png"
-  imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/utm_source_dark_eada0f8178.png"
-  alt="UTM sources"
-  classes="rounded"
-/>
+> #### Use case: Tracking visitors from a sponsored video
+>
+> One example of how PostHog uses these features was a recent sponsored video on YouTube. We sponsored a [Fireship](https://www.youtube.com/c/Fireship) video, and we can see how it worked below.
+>
+> For the YouTube video, there's a link in the description for people that are interested in seeing what PostHog is, and it looks like this:
+>
+> `https://posthog.com/fireship`
+>
+> That URL gets transformed into the following UTM paramaters:
+>
+> `https://posthog.com/?utm_source=fireship&utm_campaign=fireship`
+>
+> Then, we can see how many visitors came from that video by using the "UTM source" option on our web analytics dashboard:
+>
+> <ProductScreenshot
+>  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/utm_source_light_21fa9c00fe.png"
+>  imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/utm_source_dark_eada0f8178.png"
+>  alt="UTM sources"
+>  classes="rounded"
+> />
 
 ### Demographic information
 
