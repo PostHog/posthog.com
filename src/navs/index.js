@@ -239,6 +239,64 @@ export const handbookSidebar = [
         url: '/handbook/team-structure',
     },
     {
+        name: 'Content & Docs',
+        url: '',
+        children: [
+            {
+                name: 'Overview',
+                url: '/handbook/content-and-docs',
+            },
+            {
+                name: 'Content channels',
+                url: '',
+                children: [
+                    {
+                        name: 'Content',
+                        url: '/handbook/content-and-docs/content',
+                    },
+                    {
+                        name: 'Docs',
+                        url: '/handbook/content-and-docs/docs',
+                    },
+                    {
+                        name: 'Newsletter',
+                        url: '/handbook/content-and-docs/newsletter',
+                    },
+                    {
+                        name: 'YouTube',
+                        url: '/handbook/content-and-docs/youtube',
+                    },
+                ],
+            },
+            {
+                name: 'Publishing guide',
+                url: '',
+                children: [
+                    {
+                        name: 'Writing for PostHog',
+                        url: '/handbook/content-and-docs/writing-for-posthog',
+                    },
+                    {
+                        name: 'SEO best practices',
+                        url: '/handbook/content-and-docs/seo-guide',
+                    },
+                    {
+                        name: 'Style guide',
+                        url: '/handbook/content-and-docs/posthog-style-guide',
+                    },
+                    {
+                        name: 'Tags and categories',
+                        url: '/handbook/content-and-docs/tags-and-categories',
+                    },
+                    {
+                        name: 'Content components',
+                        url: '/handbook/content-and-docs/components',
+                    },
+                ],
+            },
+        ],
+    },
+    {
         name: 'Design',
         url: '',
         children: [
@@ -518,62 +576,6 @@ export const handbookSidebar = [
             {
                 name: 'ICP scoring',
                 url: '/handbook/growth/marketing/icp',
-            },
-            {
-                name: 'Marketing channels',
-                url: '',
-                children: [
-                    {
-                        name: 'Content',
-                        url: '/handbook/growth/marketing/content',
-                    },
-                    {
-                        name: 'Docs',
-                        url: '/handbook/company/docs',
-                    },
-                    {
-                        name: 'Newsletter',
-                        url: '/handbook/growth/marketing/newsletter',
-                    },
-                    {
-                        name: 'Paid ads',
-                        url: '/handbook/growth/marketing/paid',
-                    },
-                    {
-                        name: 'Sponsorships',
-                        url: '/handbook/growth/marketing/open-source-sponsorship',
-                    },
-                    {
-                        name: 'YouTube',
-                        url: '/handbook/growth/marketing/youtube',
-                    },
-                ],
-            },
-            {
-                name: 'Publishing guide',
-                url: '',
-                children: [
-                    {
-                        name: 'Writing for PostHog',
-                        url: '/handbook/growth/marketing/writing-for-posthog',
-                    },
-                    {
-                        name: 'SEO best practices',
-                        url: '/handbook/growth/marketing/seo-guide',
-                    },
-                    {
-                        name: 'Style guide',
-                        url: '/handbook/growth/marketing/posthog-style-guide',
-                    },
-                    {
-                        name: 'Tags and categories',
-                        url: '/handbook/growth/marketing/tags-and-categories',
-                    },
-                    {
-                        name: 'Content components',
-                        url: '/handbook/growth/marketing/components',
-                    },
-                ],
             },
             {
                 name: 'Dashboard templates',
