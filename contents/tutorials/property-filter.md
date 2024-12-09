@@ -16,7 +16,7 @@ When collecting data with PostHog, you may want to avoid collecting certain prop
 
 That's where the [property filter app](/apps/property-filter), which was created by the team at [Witty Works](https://www.witty.works/), comes in. It gives you fine-grained control over which properties are kept or discarded from your events, helping you balance data collection needs with privacy requirements. Here's how to use it.
 
-> **Note:** If you prefer not to use the property filter app, you can also filter out properties in your PostHog client directly by using the `sanitize` configuration option. See the [sanitize docs](/docs/product-analytics/privacy#sanitize-properties) for more details.
+> **Note:** If you prefer not to use the property filter app, you can also filter properties by using the `sanitize` configuration option when initializing the PostHog client. See the [sanitize docs](/docs/product-analytics/privacy#sanitize-properties) for more details.
 
 ## How to set up the property filter app
 
