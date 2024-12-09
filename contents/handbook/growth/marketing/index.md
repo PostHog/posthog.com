@@ -12,7 +12,7 @@ Marketing at PostHog is a collaborative effort dispersed across three teams:
 - **Words & Pictures:** Responsible for product marketing, art work, paid ads, and email marketing.
 - **Website & Vibes:** Responsible for website design, community, and backend.
 
-See [Marketing ownership](LINK-HERE) for more.
+See [Marketing ownership](/handbook/growth/marketing/ownership) for more.
 
 ## Marketing values
 

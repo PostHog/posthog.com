@@ -1,5 +1,5 @@
 ---
-title: Content
+title: Content strategy
 sidebar: Handbook
 showTitle: true
 ---
@@ -59,16 +59,4 @@ If you want to run a paid ad campaign on Reddit, Google, or Twitter, see the [pa
 
 It's a good idea to create an issue highlighting what you'd like to achieve in your campaign. Here's an [example](https://github.com/PostHog/posthog.com/issues/9646)
 
-## Good to knows
-
-- The marketing team is responsible for all the above – mostly Andy, Ian, and Lior, but James Hawkins, Joe, and Charles also contribute. The Website & Docs team owns our [reference documentation](/docs). 
-
-- You can view planned content on the <PrivateLink url="https://github.com/orgs/PostHog/projects/8?card_filter_query=label%3Acontent">Marketing project board</PrivateLink> using the "content" label filter. All planned content should have an issue.
-
 - Join our [#content-ideas Slack channel](https://posthog.slack.com/archives/C015CRUQR7Y) to share ad-hoc ideas.
-
-> **Useful resources:**
-> - [Guide to writing for PostHog](/handbook/growth/marketing/writing-for-posthog)
-> - [List of tags and categories](/handbook/growth/marketing/tags-and-categories)
-> - [Our internal SEO guide](/handbook/growth/marketing/seo-guide)
-> - [Components you can use in articles](/handbook/growth/marketing/components)

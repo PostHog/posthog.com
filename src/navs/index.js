@@ -247,11 +247,11 @@ export const handbookSidebar = [
                 url: '/handbook/content-and-docs',
             },
             {
-                name: 'Content channels',
+                name: 'Channels',
                 url: '',
                 children: [
                     {
-                        name: 'Content',
+                        name: 'Overview',
                         url: '/handbook/content-and-docs/content',
                     },
                     {
@@ -568,6 +568,10 @@ export const handbookSidebar = [
             {
                 name: 'Overview',
                 url: '/handbook/growth/marketing',
+            },
+            {
+                name: 'Marketing ownership',
+                url: '/handbook/growth/marketing/ownership',
             },
             {
                 name: 'Value proposition',
