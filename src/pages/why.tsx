@@ -3,15 +3,19 @@ import Layout from 'components/Layout'
 import { SEO } from 'components/seo'
 import Link from 'components/Link'
 import PostLayout from 'components/PostLayout'
+import Tooltip from 'components/Tooltip'
 import { graphql, useStaticQuery } from 'gatsby'
+import slugify from 'slugify'
+import TeamPatch from 'components/TeamPatch'
 import { CallToAction } from 'components/CallToAction'
+import { useUser } from 'hooks/useUser'
 import SidebarSection from 'components/PostLayout/SidebarSection'
 import { Contributor } from 'components/PostLayout/Contributors'
 import { productMenu } from '../navs'
 import RoadmapPreview from 'components/RoadmapPreview'
 
 const Teams: React.FC = () => {
-    const { james } = useStaticQuery(graphql`
+    const { james, supportTeam } = useStaticQuery(graphql`
         {
             james: squeakProfile(squeakId: { eq: 27732 }) {
                 squeakId
@@ -21,6 +25,47 @@ const Teams: React.FC = () => {
                     url
                 }
                 companyRole
+            }
+            supportTeam: squeakTeam(squeakId: { eq: 128 }) {
+                id
+                name
+                slug
+                profiles {
+                    data {
+                        id
+                        attributes {
+                            color
+                            firstName
+                            lastName
+                            avatar {
+                                data {
+                                    attributes {
+                                        url
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+                crest {
+                    data {
+                        attributes {
+                            url
+                        }
+                    }
+                }
+                crestOptions {
+                    textColor
+                    textShadow
+                    fontSize
+                    frame
+                    frameColor
+                    plaque
+                    plaqueColor
+                    imageScale
+                    imageXOffset
+                    imageYOffset
+                }
             }
         }
     `)
@@ -231,6 +276,40 @@ const Teams: React.FC = () => {
                                     You can <Link href="/teams">literally see the engineers</Link> that built each of
                                     our products on our website.
                                 </p>
+
+                                <div className="float-right ml-6 mb-6 bg-accent/5 rounded-md p-4 max-w-sm">
+                                    <Link to={`/teams/${supportTeam.slug}`} className="block group">
+                                        <TeamPatch
+                                            name={supportTeam.name}
+                                            imageUrl={supportTeam.crest?.data?.attributes?.url}
+                                            {...supportTeam.crestOptions}
+                                            className="w-full mb-4"
+                                        />
+
+                                        <div className="text-lg font-bold mb-2">
+                                            Meet the support engineers on the front lines
+                                        </div>
+
+                                        <div className="flex flex-wrap justify-end -space-x-3">
+                                            {supportTeam.profiles.data.map(
+                                                ({ id, attributes: { firstName, lastName, avatar, color } }) => {
+                                                    const name = [firstName, lastName].filter(Boolean).join(' ')
+                                                    return (
+                                                        <Tooltip key={id} content={name}>
+                                                            <img
+                                                                src={avatar?.data?.attributes?.url}
+                                                                className={`size-10 rounded-full bg-${
+                                                                    color ?? 'accent'
+                                                                } border border-light dark:border-dark`}
+                                                                alt={name}
+                                                            />
+                                                        </Tooltip>
+                                                    )
+                                                }
+                                            )}
+                                        </div>
+                                    </Link>
+                                </div>
 
                                 <p>
                                     We’ve also got dedicated support people - they’ve all got engineering backgrounds
