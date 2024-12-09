@@ -46,9 +46,9 @@ I got into startups 14 years ago, but I’ve never gotten this degree of transpa
 
 I’ve been here two months and no one has made me look at a fucking slideshow.
 
-Slideshows are the last refuge of the corporate bullshitter. A means of eliding detail through headlines and text that never quite coheres into an *argument*, and never finds itself as a useful reference in the future.
+Slideshows are the refuge of the corporate bullshitter. A means of eliding detail through headlines and text that never quite coheres into an *argument*, and never finds itself as a useful reference in the future.
 
-Instead, I sat down after lunch on my second day to read PostHog’s handbook. It’s public, you can read it too.
+Instead, I sat down after lunch on my second day to read PostHog’s handbook. It’s public, [you can read it too](/handbook).
 
 From the beginning it lays out actionable, logical arguments:
 
@@ -58,7 +58,7 @@ From the beginning it lays out actionable, logical arguments:
 
 From there, it breaks into fractal detail for each area of the business. How engineering works, how we approach design and marketing, what you need to know about HR.
 
-*Alignment* doesn’t often come from endless meetings and slides. I think it comes from everyone having an independent but accurate understanding of what the business is trying to do, and how they themselves can be part of that adventure.
+*Alignment* doesn’t come from endless meetings and slides. I think it comes from everyone having an independent but accurate understanding of what the business is trying to do, and how they themselves can be part of that adventure.
 
 But getting there takes ongoing rigor, documented in shared artifacts that let everyone learn the business, not just their own job in the abstract.
 
@@ -72,7 +72,7 @@ It has always been this way. In the typical organization, though, I’ve not fou
 
 A quarter into my second job, post-college, my boss blew his top at me, and we both spent a good half hour crying and talking it out.
 
-The alternative is deliberately-designed, ongoing 360 feedback sessions among teammates. 45 days into this job I got to hear candidly what people liked, what people wanted more of, and in a few cases, what people found grating in me.
+The alternative is deliberately-designed, ongoing 360 [feedback sessions](/newsletter/how-to-give-feedback) among teammates. 45 days into this job I got to hear candidly what people liked, what people wanted more of, and in a few cases, what people found grating in me.
 
 This gives me information to make better choices. I can evaluate the feedback and decide to lean further into places where my strengths are meshing with the team’s needs. I can make more intelligent tradeoffs between my ambitions and how my style impacts other people.
 
@@ -82,11 +82,11 @@ Instead of being in the dark, I can navigate with confidence.
 
 The org chart is, in most places, treated like some holy truth carved in stone. It doesn’t readily change, except in calamitous, company-wide ruptures that change everyone’s lives overnight.
 
-Alternatively, you can build teams as small squads, forming, dissolving, and combining talent as the needs of the business evolve.
+Alternatively, you can build teams as [small squads](/handbook/company/small-teams), forming, dissolving, and combining talent as the needs of the business evolve.
 
 Every now and then I’ll look over my shoulder and see a new team has formed, cleaving off from previous work to start a new adventure.
 
-The flexibility has obvious advantages for the business, but for people, it’s an antidote to *stagnation.* The org chart evolves to suit the best fit of people on it, instead of trying to bend them into an imagined shape that doesn’t work. I can’t tell you how many people I’ve seen burn out because they couldn’t quite manage to be what someone randomly wrote down in a doc 18 months earlier.
+The flexibility has obvious advantages for the business, but for people, it’s an antidote to *stagnation.* The org chart evolves to suit the best fit of people on it, instead of trying to bend them into an imagined shape that doesn’t work. I can’t tell you how many people I’ve seen burn out because they couldn’t quite manage to become what someone randomly wrote down in a doc 18 months earlier.
 
 Instead, when we notice such a mismatch, a team’s *actual* strengths can be codified, and new teams can be chartered to fill any gaps. This is the luxury of a business that’s healthy and growing: slack in the system to also evolve.
 
@@ -102,11 +102,11 @@ A common startup failure mode is the tyrant founder who assumes he knows better 
 
 But certainty is a trap for anyone trying something genuinely new. Curiosity, meanwhile, is the path to constant opportunity. You can’t know until you try. You can know even more if *everyone* is entitled to try.
 
-So everyone at PostHog is free to try, to fuck up, to discover. If I have a strong opinion that disagrees even with a founder, I have the option to give it a swing anyway, if the decision is reversible.
+So everyone at PostHog is free to try, to fuck up, [to discover](/handbook/company/communication#top-tips-for-rfcs). If I have a strong opinion that disagrees even with a founder, I have the option to give it a swing anyway, if the decision is reversible.
 
 There’s not an aggressive process that dictates what I can do or how I have to do it. I have the trust of my team to make moves, and I’ll get feedback when I get it wrong. We course-correct into the right path through a sort of social eventual consistency.
 
-Two guaranteed days of uninterrupted, *deep work* don’t hurt, either.
+[Two guaranteed days](/handbook/getting-started/meetings#no-recurring-meeting-days-tuesdaysthursdays) of uninterrupted, *deep work* don’t hurt, either.
 
 Periodically, teams will host an off-site where we get together to catch up and play around with technology. Open opportunity to experiment and learn new things is central, through a sedate and generous block of hackathon time.
 
