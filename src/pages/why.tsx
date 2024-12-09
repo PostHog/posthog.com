@@ -1,14 +1,10 @@
-import React, { useState } from 'react'
+import React from 'react'
 import Layout from 'components/Layout'
 import { SEO } from 'components/seo'
 import Link from 'components/Link'
 import PostLayout from 'components/PostLayout'
-import Tooltip from 'components/Tooltip'
 import { graphql, useStaticQuery } from 'gatsby'
-import slugify from 'slugify'
-import TeamPatch from 'components/TeamPatch'
 import { CallToAction } from 'components/CallToAction'
-import { useUser } from 'hooks/useUser'
 import SidebarSection from 'components/PostLayout/SidebarSection'
 import { Contributor } from 'components/PostLayout/Contributors'
 import { productMenu } from '../navs'
@@ -29,8 +25,6 @@ const Teams: React.FC = () => {
         }
     `)
 
-    console.log(james)
-
     return (
         <Layout>
             <SEO title="Why PostHog? - PostHog" description="Why not?" image={`/images/small-teams.png`} />
@@ -39,7 +33,7 @@ const Teams: React.FC = () => {
                 hideSurvey
                 sidebar={
                     <SidebarSection title="From the desk of...">
-                        <div className="-mx-4">
+                        <div className="-mx-4 pt-1">
                             <Contributor
                                 url={james.squeakId && `/community/profiles/${james.squeakId}`}
                                 image={james.avatar?.url}
