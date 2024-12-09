@@ -1,0 +1,94 @@
+---
+title: Vue.js
+icon: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/integrate/frameworks/vue.svg
+---
+
+PostHog makes it easy to get data about usage of your [Vue.js](https://vuejs.org/) app. Integrating PostHog into your app enables analytics about user behavior, custom events capture, session replays, feature flags, and more.
+
+This guide walks you through integrating PostHog into your app for both Vue.js major versions `2` and `3`. We'll use the [JavaScript Web SDK](/docs/libraries/js) for this. 
+
+For integrating PostHog into a [Nuxt.js](https://nuxt.com/) app, see our [Nuxt guide](/docs/libraries/nuxt-js).
+
+## Prerequisites
+
+To follow this guide along, you need:
+
+1. A PostHog account (either [Cloud](/docs/getting-started/cloud) or [self-hosted](/docs/self-host))
+2. A running Vue.js app
+
+## Setting up PostHog
+
+import VueSetup from "../../integrate/_snippets/vuejs/vue-setup.mdx"
+
+<VueSetup />
+
+## Capturing pageviews
+
+import VuePageviews from "../../integrate/_snippets/vuejs/vue-pageviews.mdx"
+
+<VuePageviews />
+
+## Capturing pageleaves
+
+import VuePageleaves from "../../integrate/_snippets/vuejs/vue-pageleaves.mdx"
+
+<VuePageleaves />
+
+## Capturing custom events, using feature flags, and more
+
+Once you have PostHog initialized, there is a lot more you can do with it beyond autocapture, pageviews, and pageleaves. You can find the full details in our [JavaScript SDK docs](/docs/libraries/js), but we'll cover a few examples here.
+
+import Tab from "components/Tab"
+import CompositionEvents from "./_snippets/composition-events.mdx"
+import PluginEvents from "./_snippets/plugin-events.mdx"
+
+<Tab.Group tabs={[
+    'Vue 3: Composition API', 
+    'Vue 2: Plugins']}>
+    <Tab.List>
+        <Tab>Vue 3: Composition API</Tab>
+        <Tab>Vue 2: Plugins</Tab>
+    </Tab.List>
+    <Tab.Panels>
+        <Tab.Panel>
+            <CompositionEvents />
+        </Tab.Panel>
+        <Tab.Panel>
+            <PluginEvents />
+        </Tab.Panel>
+    </Tab.Panels>
+</Tab.Group>
+
+## Other setup options
+
+import ProvideInjectInstall from "./_snippets/provide-inject-install.mdx"
+import PrototypeInstall from "./_snippets/prototype-install.mdx"
+
+<Tab.Group tabs={[
+    'Vue 3: Provide/inject', 
+    'Vue 2: Vue.prototype']}>
+    <Tab.List>
+        <Tab>Vue 3: Provide/inject</Tab>
+        <Tab>Vue 2: Vue.prototype</Tab>
+    </Tab.List>
+    <Tab.Panels>
+        <Tab.Panel>
+            <ProvideInjectInstall />
+        </Tab.Panel>
+        <Tab.Panel>
+            <PrototypeInstall />
+        </Tab.Panel>
+    </Tab.Panels>
+</Tab.Group>
+
+## Next steps
+
+For any technical questions for how to integrate specific PostHog features into Vue (such as analytics, feature flags, A/B testing, or surveys), have a look at our [JavaScript Web](/docs/libraries/js) SDK docs.
+
+Alternatively, the following tutorials can help you get started:
+
+- [How to set up analytics in Vue](/tutorials/vue-analytics)
+- [How to set up feature flags in Vue](/tutorials/vue-feature-flags)
+- [How to set up A/B tests in Vue](/tutorials/vue-ab-tests)
+- [How to set up surveys in Vue](/tutorials/vue-surveys)

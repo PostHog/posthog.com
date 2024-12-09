@@ -503,34 +503,7 @@ export const ProductSessionReplay = () => {
                                 }
                             >
                                 <ul>
-                                    <li>
-                                        You need heatmaps or scrollmaps
-                                        <ul className="pl-6">
-                                            <li className="text-sm">PostHog is currently limited to clickmaps</li>
-                                        </ul>
-                                    </li>
                                     <li>Error tracking and alerting</li>
-                                    <li>
-                                        Mobile SDKs (in progress...)
-                                        <ul className="pl-6">
-                                            <li className="text-sm">
-                                                <Link to="https://github.com/PostHog/posthog/issues/13269" external>
-                                                    React Native
-                                                </Link>{' '}
-                                                |&nbsp;
-                                                <Link to="https://github.com/PostHog/posthog/issues/12344" external>
-                                                    iOS
-                                                </Link>{' '}
-                                                |&nbsp;
-                                                <Link
-                                                    to="https://github.com/PostHog/posthog-flutter/issues/69"
-                                                    external
-                                                >
-                                                    Flutter
-                                                </Link>
-                                            </li>
-                                        </ul>
-                                    </li>
                                 </ul>
                             </VsCompetitor>
                             <VsPostHog>
