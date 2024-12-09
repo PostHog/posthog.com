@@ -8,11 +8,17 @@ Aligned with our Strategic [Ideal Customer Profile](/newsletter/ideal-customer-p
 We use [Clearbit](https://clearbit.com/) to enhance our contact information as it is created and then compute a score out of 24 in [Salesforce](https://posthog.lightning.force.com/lightning/setup/ObjectManager/Lead/FieldsAndRelationships/00NHp000018JdMZ/view) based on the following parameters:
 
 - *Employee count* - we use this as a strong indicator for product market fit.  Smaller companies are less likely to have achieved this so our highest score here goes to companies in the 15-500 employee range.  We score companies over 500 employees lower as they will generally be slower to deal with.
+
 - *Ability to pay* - indicates whether a company is likely to pay for a product like PostHog to solve their problems.  This is computed from the estimated company revenue. If their revenue is between $1m and $50m they get the highest score (6 points).
-- *Role* - from experience we sell best to people in an engineering role (6 points) and score those the highest.  We also do well with leadership (3 points) and product (3 points) folks, so they have a favourable score.
+
+- *Role* - from experience we sell best to people in an engineering role (6 points) and score those the highest.  We also do well with leadership (3 points) and product (3 points) folks, so they have a favorable score.
+
 - *Company Type* - private companies are ideal here and get 3 points
+
 - *Founded Year* - here we want to capture scale-ups so give 3 points to companies founded 2015-2022
+
 - *Country* - from experience we know that certain countries have a lower inclination to pay for software so we downweight those.
+
 - *Email provider* - if someone signs up with a non-work email they are less likely to become a high-paying customer so we downweight those.
 
 | Metric         | Value                                                                                                                                                                                                                                                                                    | Score |
