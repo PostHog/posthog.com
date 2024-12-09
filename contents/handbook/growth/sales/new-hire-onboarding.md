@@ -59,6 +59,7 @@ Ideally, this will happen in Week 3 or 4, and will be with a few existing team m
 
 ## Other tools that are useful
 
+- [Cal.com](https://app.cal.com/) for shared meeting booking links
 - [Loom](https://www.loom.com/) for short videos (Simon can invite you to the company account)
 - [Trumpet](https://www.sendtrumpet.com/) for sales rooms
 
