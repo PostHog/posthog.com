@@ -20,7 +20,7 @@ Welcome to the PostHog Sales and Customer Success team!  We only hire about 1 in
    - PostHog [US](https://us.posthog.com/) and [EU](https://eu.posthog.com/) instances (and our production project on the US)
    - [Jimminy](https://app.jiminny.eu/dashboard)
  - If you start on a Monday, join your first PostHog All Hands (at 4.30pm UK/8.30am PT) and be prepared to have a strong opinion on whether pineapple belongs on pizza.
- - If you start on a Monday, join your fist Sales and CS standup.
+ - If you start on a Monday, join your first Sales and CS standup.
    - We fill in a GitHub issue every week before this meeting so we are prepared for the discussion topics.  Simon will add your GitHub handle to the template.
 
 #### Rest of week 1
