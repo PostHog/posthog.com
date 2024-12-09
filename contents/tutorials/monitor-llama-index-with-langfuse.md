@@ -101,7 +101,7 @@ Settings.callback_manager = CallbackManager([langfuse_callback_handler])
 
 ## 3. Build RAG on the hedgehog pdf
 
-First downlad the [hedgehog care guide pdf](https://www.pro-igel.de/downloads/merkblaetter_engl/wildtier_engl.pdf) by running the following command in your project directory:
+First download the [hedgehog care guide pdf](https://www.pro-igel.de/downloads/merkblaetter_engl/wildtier_engl.pdf) by running the following command in your project directory:
 
 ```bash
 !wget 'https://www.pro-igel.de/downloads/merkblaetter_engl/wildtier_engl.pdf' -O './hedgehog.pdf'
@@ -131,7 +131,7 @@ response = hedgehog_query_engine.query("What is the best way to care for a hedge
 print(response)
 ```
 
-Test the app by running `python app.py`. You should hopefully see a reponse like the one below 🎉: 
+Test the app by running `python app.py`. You should hopefully see a response like the one below 🎉: 
 
 ```
 The best way to care for a hedgehog is to provide it with a suitable 
