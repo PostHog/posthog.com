@@ -36,7 +36,7 @@ posthog.init('<ph_project_api_key>', {
 });
 ```
 
-##
+## Sanitize properties on the client
 
 Additionally, you can set [allow or ignore lists](/docs/product-analytics/autocapture#reducing-events-with-an-allow-and-ignorelist) in your PostHog config to prevent specific elements from being captured.
 
@@ -54,7 +54,7 @@ It's possible to use PostHog without cookies. Instead, PostHog can use in-memory
 
 You can completely opt-out users from data capture. To do this, there are two options:
 
-1. Opt users out by default by setting `opt_out_capturing_by_default` to `true` in your [PostHog config](/docs/libraries/js#config).
+1. Opt users out by default in your PostHog initialization config.
 
 <MultiLanguage>
 
@@ -87,7 +87,7 @@ posthog.init('<ph_project_api_key>', {
 
 </MultiLanguage>
 
-2. Opt users out on a per-person basis by calling `posthog.opt_out_capturing()`.
+2. Opt users out on a per-person basis.
 
 <MultiLanguage>
 
