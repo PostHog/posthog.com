@@ -99,7 +99,7 @@ const Teams: React.FC = () => {
                     {
                         url: 'popular-roadmap-items',
                         value: 'Popular roadmap items',
-                        depth: 1,
+                        depth: 0,
                     },
                     {
                         url: 'posthog-has-the-lowest-pricing-for-every-product',

@@ -49,7 +49,7 @@ const RoadmapRow: React.FC<RoadmapRowProps> = ({ roadmap }) => {
                 </div>
             </td>
             <td className="p-2">
-                <div className="font-bold">{attributes.title}</div>
+                <div className="font-bold leading-snug pb-0.5">{attributes.title}</div>
                 <div className="sm:hidden pt-0.5 pb-1">
                     {team && (
                         <Link to={`/teams/${team.slug}`} className="flex items-center gap-1">
