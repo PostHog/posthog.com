@@ -57,34 +57,6 @@ Turns are taken randomly so that you are incentivized to turn up to every meetin
 
 The objective of the meeting is to hold each other to account, provide direct feedback, and also support each other. It is a great place to ask for help from the team with thorny problems - [you should not let your team mates fail](/culture#dont-let-others-fail). 
 
-## New sales team hire ramp up
-- Day 1
-  - Read the whole sales playbook (and updating it throughout as you learn more)
-  - Get using PostHog - start making insights and dashboards
-  - Assigned your customers
-- Week 1
-  - Reviewed your account list and prioritized/asked questions about them internally 
-  - Delivered a standard demo to the PostHog team and got feedback
-  - Introduced yourself to your customers
-  - Shadowed new inbound demos 
-- Week 2
-  - Contributed to customer calls with backup from an existing team member
-  - Understand how to work PandaDoc, HubSpot, Vitally, Stripe, Metabase (ie. contracts, billing, reporting)
-  - Built a plan for which customers to prioritize
-  - Completed 1-1s with anyone relevant at PostHog
-- Month 1
-  - Leading customer calls and demos on your own
-  - Have evaluations in flight with support from team if needed (AE)
-  - Had contact with _everyone_ in your book of business in some form
-  - Starting to solve technical problems for your book with occasional help (CSM)
-- Month 2
-  - Closed your first Medium annual deal (new or conversion to annual) (AE)
-  - Leading evaluations on your own (AE)
-  - Identified some opportunities to add to your book from self-serve signups who aren't paying yet (AE)
-- Month 3-4
-  - Closed multiple contracts by this point (either new or expansion/renewal) through the whole process (AE)
-  - Independently working with your entire book to solve tricky technical problems with minimal assistant (CSM)
- 
 ## How commission works - Technical AEs
 
 **General principles**
