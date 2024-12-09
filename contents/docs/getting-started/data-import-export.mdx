@@ -4,15 +4,20 @@ title: Data import and export
 
 There are many ways to get bulk data into and out of PostHog. In addition to the automated convenience of data pipeline sources and destinations, we’ve also got some manual options for bringing data in from other platforms.
 
-## Data pipeline
-
-Data pipeline streamlines the [ingest and export](/docs/cdp) of data to dozens of sources and destinations.
+## Import
 
 ### Sources
 
 [Combine data](/docs/data-warehouse/setup) from your database, Stripe, or even a bucket full of CSVs. Join it to your existing person and event data with data warehouse.
 
-### Destinations
+### Migrations
+
+PostHog offers [migration guides](/docs/migrate) to help you move your data from other providers.
+
+
+## Export
+
+### Real-time destinations
 
 [Export data as it arrives](/docs/cdp/destinations). Easily set up filters to get just the events you’re looking for. Choose from dozens of destinations, customize our webhook destination, or even build your own with a bit of code.
 
@@ -20,6 +25,10 @@ Data pipeline streamlines the [ingest and export](/docs/cdp) of data to dozens o
 
 Schedule [bulk data exports](/docs/cdp/batch-exports) to select destinations.
 
-## Historical migration
+### Query API
 
-PostHog offers [migration guides](/docs/migrate) to help you move your data from other providers.
+A full-featured [query API](/docs/api/query) allows you to programmatically extract data to use in your own applications.
+
+### Export to CSV
+
+Your insights and data tables within PostHog can be exported to CSV, with additional options like PNG for visualizations.
