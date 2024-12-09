@@ -15,11 +15,12 @@ Welcome to the PostHog Sales and Customer Success team!  We only hire about 1 in
  - Meet with [Simon](/community/profiles/28895) who will run through this plan and answer any questions you may have.  In addition, come equipped to talk about any nuances around how you prefer to work (e.g. schedules, family time etc.).
  - Meet with [Mine](/community/profiles/29862) who will get you set up with core tooling:
    - [Salesforce](https://posthog.lightning.force.com/)
-   - [Vitally](https://posthog.vitally-eu.io/)
-   - [Zendesk](https://posthoghelp.zendesk.com/agent/dashboard)
+   - [Vitally](https://posthog.vitally-eu.io/) - use Google SSO
+   - [Zendesk](https://posthoghelp.zendesk.com/agent/dashboard) - use Google SSO
    - PostHog [US](https://us.posthog.com/) and [EU](https://eu.posthog.com/) instances (and our production project on the US)
    - [Jimminy](https://app.jiminny.eu/dashboard)
    - [PandaDoc](https://app.pandadoc.com/)
+   - Metabase [US](https://metabase.prod-us.posthog.dev/) and [EU](https://metabase.prod-eu.posthog.dev/) - use Google SSO
  - If you start on a Monday, join your first PostHog All Hands (at 4.30pm UK/8.30am PT) and be prepared to have a strong opinion on whether pineapple belongs on pizza.
  - If you start on a Monday, join your first Sales and CS standup.
    - We fill in a GitHub issue every week before this meeting so we are prepared for the discussion topics.  Simon will add your GitHub handle to the template.
