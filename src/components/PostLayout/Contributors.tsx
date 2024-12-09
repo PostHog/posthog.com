@@ -66,7 +66,7 @@ export const ContributorImage = ({ image, name, compact, rounded }) => {
             className={`${
                 compact
                     ? `flex-shrink-0 relative size-12 ${rounded ? '' : 'self-end'}`
-                    : 'm-0 -mt-8 p-0 absolute right-0 bottom-0'
+                    : 'm-0 -mt-8 p-0 absolute right-0 bottom-0 rounded-br overflow-hidden [line-height:0]'
             } ${
                 rounded
                     ? `rounded-full overflow-hidden border-2 border-tan dark:border-primary ${compact ? 'mr-1' : ''}`

@@ -19480,6 +19480,11 @@ remark@^10.0.1:
     remark-stringify "^6.0.0"
     unified "^7.0.0"
 
+remove-markdown@^0.5.5:
+  version "0.5.5"
+  resolved "https://registry.yarnpkg.com/remove-markdown/-/remove-markdown-0.5.5.tgz#52913da6204391232cbce5a1bf2c26f990bdf8e0"
+  integrity sha512-lMR8tOtDqazFT6W2bZidoXwkptMdF3pCxpri0AEokHg0sZlC2GdoLqnoaxsEj1o7/BtXV1MKtT3YviA1t7rW7g==
+
 remove-trailing-separator@^1.0.1:
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/remove-trailing-separator/-/remove-trailing-separator-1.1.0.tgz#c24bce2a283adad5bc3f58e0d48249b92379d8ef"
