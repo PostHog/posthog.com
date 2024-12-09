@@ -503,12 +503,6 @@ export const ProductSessionReplay = () => {
                                 }
                             >
                                 <ul>
-                                    <li>
-                                        You need heatmaps or scrollmaps
-                                        <ul className="pl-6">
-                                            <li className="text-sm">PostHog is currently limited to clickmaps</li>
-                                        </ul>
-                                    </li>
                                     <li>Error tracking and alerting</li>
                                 </ul>
                             </VsCompetitor>
