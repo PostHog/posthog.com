@@ -1,0 +1,55 @@
+---
+title: Framer
+icon: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/docs/integrate/frameworks/framer.svg
+---
+
+PostHog makes it easy to get data about traffic and usage of your [Framer](https://www.framer.com/) app. Integrating PostHog into your site enables analytics about user behavior, custom events capture, session recordings, feature flags, and more.
+
+This guide walks you through integrating PostHog into your Framer app using the [JavaScript Web SDK](/docs/libraries/js).
+
+## Installation
+
+import FramerInstall from "../integrate/_snippets/install-framer.mdx"
+
+<FramerInstall />
+
+## Capture custom events
+
+To [capture custom events](/docs/product-analytics/capture-events), you call `posthog.capture()` using [custom code components in Framer](https://www.framer.com/developers/components/introduction).
+
+Go to the **Assets** tab in the top left of your Framer project, and click the **plus icon** next to the Code tab. This will show a pop up to create a new code file. Name the file `CaptureButton`, set it as a "New component" and press **Create**.
+
+In the new code file, delete the existing code and replace it with the following:
+
+```js
+export default function CaptureButton() {
+    const handleClick = () => {
+        window.posthog.capture("clicked_button", {
+            $set_once: { clicked_homepage_button: true },
+        })
+    }
+
+    return (
+        <button id="capture-button" onClick={handleClick}>
+            Click me
+        </button>
+    )
+}
+```
+
+Press `Cmd/Ctrl + s` to save your changes. Then press the **Home** button to go back to the home page. Add your new `CaptureButton` to your page by dragging it from the Code tab.
+
+![Create a code snippet in Framer](https://res.cloudinary.com/dmukukwp6/video/upload/framer_create_code_component_85251f4561.mp4)
+
+Publish your site and then click your new button to [see the event in PostHog](https://us.posthog.com/activity/explore).
+
+## Next steps
+
+For any technical questions for how to integrate specific PostHog features into Framer (such as analytics, feature flags, A/B testing, surveys, etc.), have a look at our [JavaScript Web SDK docs](/docs/libraries/js).
+
+Alternatively, the following tutorials can help you get started:
+
+- [How to set up Framer analytics, session replays, and feature flags](/tutorials/framer-analytics)
+- [How to run A/B tests in Framer](/tutorials/framer-ab-tests)
+- [How to create surveys in Framer](/tutorials/framer-surveys)

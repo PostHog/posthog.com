@@ -8,9 +8,9 @@ showTitle: true
 
 ## Main metrics for each role
 
-- AE: new and expansion revenue in your book of business
+- Technical AE: new and expansion revenue in your book of business
 - RevOps: overall revenue from $20k+ segment
-- CSM: logo retention 
+- Technical CSM: logo retention 
 
 Other metrics we generally care about:
 - Closed - won % from demo
@@ -26,7 +26,7 @@ Each CSM is assigned ~50 existing customer accounts to work with.
 
 Simon and Charles will also review everyone's accounts each month proactively to make sure that the balance of accounts across the team makes sense. 
 
-### Handing-off customers from AE to CSM
+### Handing-off customers from Technical AE to Technical CSM
 
 We want to ensure the expansion potential of a customer has been thoroughly exhausted before moving to a Customer Success Manager for steady-state retention.  When you want to move a customer off your book you should talk it through with Simon. Here are the things we will be looking at:
 
@@ -46,13 +46,14 @@ If the answer to any of the above questions is 'no' then it's likely that there 
 
 ## Weekly sales standup
 
-In addition to the weekly sprint planning meeting on a Monday, we do a weekly sales standup on a Wednesday. Two AEs are picked at random, and we spend 30min on each going in depth through:
+In addition to the weekly sprint planning meeting on a Monday, we do a weekly sales standups on Wednesday (Europe) and Friday (US). A Technical AE is picked at random, and we spend 30min on each going in depth through:
 
-- Your existing book of business - every customer should have a status update and next steps identified
-- Top 3 new leads
-- Any renewals in the current and next quarter
+- What is your path to quota this quarter? Talk through your oops closing this quarter.
+- Which accounts are at risk? Look at red health score or sentiment in Vitally.
+- How is cross-adoption going in your existing accounts? Check against Vitally goals.
 
-The reason for structuring the review in this way is that we find it is much more effective to go deep on a subset of customers than racing around giving everyone 5 minutes to give a very surface level update. Turns are taken randomly so that you are incentivized to turn up to every meeting fully prepared, in case you are selected!
+
+Turns are taken randomly so that you are incentivized to turn up to every meeting fully prepared, in case you are selected!
 
 The objective of the meeting is to hold each other to account, provide direct feedback, and also support each other. It is a great place to ask for help from the team with thorny problems - [you should not let your team mates fail](/culture#dont-let-others-fail). 
 
@@ -84,7 +85,7 @@ The objective of the meeting is to hold each other to account, provide direct fe
   - Closed multiple contracts by this point (either new or expansion/renewal) through the whole process (AE)
   - Independently working with your entire book to solve tricky technical problems with minimal assistant (CSM)
  
-## How commission works - AEs
+## How commission works - Technical AEs
 
 **General principles**
 
@@ -127,7 +128,7 @@ The objective of the meeting is to hold each other to account, provide direct fe
 
 > Your quota and assigned customers are likely to change slightly from quarter to quarter. In any case, your quota will be amended appropriately (up or down) to account for any movement. We will also be flexible in making changes mid-quarter if it's obviously the sensible thing to do. If you inherit a new account, you have a 3 month grace period - if they churn in that initial period, they won't be counted against your quota.
 
-## How contractual bonus works - CSMs
+## How contractual bonus works - Technical CSMs
 
 CSMs are responsible for ensuring that a larger book of existing customers - both annual and monthly - continue to use PostHog successfully. They nurture customers and are product experts - this isn't a role of just going back and forth between customers and support engineers, or collecting feedback. 
 
@@ -145,3 +146,24 @@ CSMs are responsible for ensuring that a larger book of existing customers - bot
 ## Travel to see customers
 
 You are likely to need to travel a lot more than the typical PostHog team member in order to meet customers. Please make sure that you follow our company [travel policy](/handbook/people/spending-money) and act in PostHog's best interests. We trust you to do the right thing here and won't pre-approve your travel plans, but we do keep track of what people are spending and the Ops team will follow up with you if it looks like you are wasting money here. We are not a giant company that pays for fancy flights, accommodation, and meals so please be sensible. 
+
+## Working with engineering teams
+
+We hire Technical AEs and Technical CSMs. This means you are responsible for dealing with the vast majority of product queries from your customers. However, we still work closely with engineering teams!
+
+**Product requests from large customers**
+
+Sometimes an existing or potential customer may ask us to fix an issue or build new features. These can vary hugely in size and complexity. A few things to bear in mind:
+
+- Engineers at PostHog [talk to customers](/handbook/making-users-happy#engineers-talk-to-users-and-provide-support). It's much better to bring engineers onto calls to speak to large customer to talk to them directly than just do the call yourself and copy and paste notes back and forth. This is especially useful if a) the team was already considering building the feature at some point, b) it's an interesting new use case, or c) the customer is really unhappy for valid reasons and could churn.
+- Provide as much internal context as you can. If a customer sends a one-liner in Slack, don't just copy and paste into a product team's channel - find out as much as you reasonably can first, ask clarifying questions up front etc. Otherwise the relevant team will just ask you to do this anyway.
+- We already have [principles](/handbook/how-we-make-money#principles-for-dealing-with-big-customers) for how we build for big customers - if you have a big customer with a niche use case that isn't applicable to anyone else, you should assume we won't build for them (don't be mad!)
+
+Finally, if you are bringing engineers onto a call, brief them first - what is the call about, who will be there. And then afterwards, summarize what you talked about. This goes a long way to ensuring sales <\> engineering happiness. 
+
+**Complicated technical questions**
+
+You will run into questions that you don't know the answer to from time to time - this is ok! Some principles here:
+
+- Try to solve your own problems. Deep dive the docs, ask Max AI, ask the rest of the sales team first - a bit of digging is a valuable opportunity for you to learn.
+- Similar to the above, don't just copy and paste questions from Slack with no context. Add some commentary - 'they have asked X, their use case is generally Y, I think the answer might be Z - is that right?'. Do some of the lifting here, rather than putting all the mental load on an engineering team.

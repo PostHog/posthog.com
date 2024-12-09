@@ -55,9 +55,11 @@ This is a faster option to get up and running. If you don't want to or can't use
 ![](https://user-images.githubusercontent.com/890921/231490278-140f814e-e77b-46d5-9a4f-31c1b1d6956a.png)
 3. Open the codespace, using one of the "Open in" options from the list.
 4. In the codespace, open a terminal window and run `docker compose -f docker-compose.dev.yml up`.
-5. Also in the codespace, open another terminal window and run `./bin/migrate` and then `./bin/start`.
-6. Open browser to http://localhost:8000/.
-7. To get some practical test data into your brand-new instance of PostHog, run `DEBUG=1 ./manage.py generate_demo_data`.
+5. In another terminal, run `pnpm i` (and use the same terminal for the following commands)
+6. Then run `pip install -r requirements.txt -r requirements-dev.txt`
+7. Now run `./bin/migrate` and then `./bin/start`.
+8. Open browser to http://localhost:8000/.
+9. To get some practical test data into your brand-new instance of PostHog, run `DEBUG=1 ./manage.py generate_demo_data`.
 
 ## Option 2: Developing locally
 
@@ -196,7 +198,7 @@ On Linux you often have separate packages: `postgres` for the tools, `postgres-s
 
 2. Install the latest Node.js 18 (the version used by PostHog in production) with `nvm install 18`. You can start using it in the current shell with `nvm use 18`.
 
-3. Install pnpm with `npm install -g pnpm`.
+3. Install pnpm with `corepack enable` and check it with `pnpm --version`.
 
 4. Install Node packages by running `pnpm i`.
 
@@ -230,6 +232,11 @@ export LDFLAGS=-L/opt/homebrew/opt/openssl/lib
 pnpm i --dir plugin-server
 ```
 
+> Note: If you face an error like `import gyp  # noqa: E402`, most probably need to install `python-setuptools`. To fix this, run:
+```bash
+brew install python-setuptools
+```
+
 #### 4. Prepare the Django server
 
 1. Install a few dependencies for SAML to work. If you're on macOS, run the command below, otherwise check the official [xmlsec repo](https://github.com/mehcode/python-xmlsec) for more details.
@@ -260,10 +267,14 @@ Make sure when outside of `venv` to always use `python3` instead of `python`, as
 
 You can also use [pyenv](https://github.com/pyenv/pyenv) if you wish to manage multiple versions of Python 3 on the same machine.
 
+1. Install `uv`
+
+`uv` is a very fast tool you can use for python virtual env and dependency management. See [https://docs.astral.sh/uv/](https://docs.astral.sh/uv/). Once installed you can prefix any `pip` command with `uv` to get the speed boost.
+
 1. Create the virtual environment in current directory called 'env':
 
     ```bash
-    python3.11 -m venv env
+    uv venv env --python 3.11
     ```
 
 1. Activate the virtual environment:
@@ -279,7 +290,7 @@ You can also use [pyenv](https://github.com/pyenv/pyenv) if you wish to manage m
 1. Upgrade pip to the latest version:
 
     ```bash
-    pip install -U pip
+    uv pip install -U pip
     ```
 
 1. Install requirements with pip
@@ -288,7 +299,7 @@ You can also use [pyenv](https://github.com/pyenv/pyenv) if you wish to manage m
 
     ```bash
     brew install openssl
-    CFLAGS="-I /opt/homebrew/opt/openssl/include $(python3.11-config --includes)" LDFLAGS="-L /opt/homebrew/opt/openssl/lib" GRPC_PYTHON_BUILD_SYSTEM_OPENSSL=1 GRPC_PYTHON_BUILD_SYSTEM_ZLIB=1 pip install -r requirements.txt
+    CFLAGS="-I /opt/homebrew/opt/openssl/include $(python3.11-config --includes)" LDFLAGS="-L /opt/homebrew/opt/openssl/lib" GRPC_PYTHON_BUILD_SYSTEM_OPENSSL=1 GRPC_PYTHON_BUILD_SYSTEM_ZLIB=1 uv pip install -r requirements.txt
     ```
 
     > **Friendly tip:** If you see `ERROR: Could not build wheels for xmlsec`, refer to this [issue](https://github.com/xmlsec/python-xmlsec/issues/254).
@@ -296,15 +307,7 @@ You can also use [pyenv](https://github.com/pyenv/pyenv) if you wish to manage m
     These will be used when installing `grpcio` and `psycopg2`. After doing this once, and assuming nothing changed with these two packages, next time simply run:
 
     ```bash
-    pip install -r requirements.txt
-    ```
-
-    If on an x86 platform, simply run the latter version.
-
-1. Install dev requirements
-
-    ```bash
-    pip install -r requirements-dev.txt
+    uv pip install -r requirements.txt -r requirements-dev.txt
     ```
 
 #### 5. Prepare databases
@@ -335,6 +338,11 @@ Open [http://localhost:8000](http://localhost:8000) to see the app.
 > **Note:** The first time you run this command you might get an error that says "layout.html is not defined". Make sure you wait until the frontend is finished compiling and try again.
 
 To get some practical test data into your brand-new instance of PostHog, run `DEBUG=1 ./manage.py generate_demo_data`. For a list of useful arguments of the command, run `DEBUG=1 ./manage.py generate_demo_data --help`.
+
+You can also use [mprocs](https://github.com/pvolok/mprocs) to run all development processes in a single terminal window. mprocs provides a clean interface for starting, stopping, and monitoring each service individually, with separate log views for easier debugging. This includes docker compose, so make sure to stop it if it's already running. Once you have mprocs installed, run
+```bash
+./bin/start-mprocs
+```
 
 #### 7. Develop
 
@@ -413,6 +421,12 @@ This command automatically turns any feature flag ending in `_EXPERIMENT` as a m
 
 Backend side flags are only evaluated locally, which requires the `POSTHOG_PERSONAL_API_KEY` env var to be set. Generate the key in [your user settings](http://localhost:8000/settings/user#personal-api-keys).
 
+## Extra: Debugging with VS Code
+
+The PostHog repository includes [VS Code launch options for debugging](https://github.com/PostHog/posthog/blob/master/.vscode/launch.json). Simply go to the `Run and Debug` tab in VS Code, select the desired service you want to debug, and run it. Once it starts up, you can set breakpoints and step through code to see exactly what is happening. There are also debug launch options for frontend and backend tests if you're dealing with a tricky test failure.
+
+> **Note:** You can debug all services using the main "PostHog" launch option. Otherwise, if you are running most of the PostHog services locally with `./bin/start`, for example if you only want to debug the backend, make sure to comment out that service from the [start script temporarily](https://github.com/PostHog/posthog/blob/master/bin/start#L22). 
+
 ## Extra: Debugging the backend in PyCharm
 
 With PyCharm's built in support for Django, it's fairly easy to setup debugging in the backend. This is especially useful when you want to trace and debug a network request made from the client all the way back to the server. You can set breakpoints and step through code to see exactly what the backend is doing with your request.
@@ -437,3 +451,69 @@ With PyCharm's built in support for Django, it's fairly easy to setup debugging 
 ## Extra: Developing paid features (PostHog employees only)
 
 If you're a PostHog employee, you can get access to paid features on your local instance to make development easier. [Learn how to do so in our internal guide](https://github.com/PostHog/billing?tab=readme-ov-file#licensing-your-local-instance).
+
+## Extra: Working with the data warehouse and a MySQL source
+
+If you want to set up a local MySQL database as a source for the data warehouse, there are a few extra set up steps you'll need to complete:
+1. Setting up a local MySQL database to connect to.
+2. Installing MS SQL drivers on your machine.
+3. Defining additional environment variables for the Temporal task runner.
+
+First, install MySQL:
+
+```bash
+brew install mysql
+brew services start mysql
+```
+
+Once MySQL is installed, create a database and table, insert a row, and create a user who can connect to it:
+
+```bash
+mysql -u root
+```
+```sql
+CREATE DATABASE posthog_dw_test;
+CREATE TABLE IF NOT EXISTS payments (id INT AUTO_INCREMENT PRIMARY KEY, timestamp DATETIME, distinct_id VARCHAR(255), amount DECIMAL(10,2));
+INSERT INTO payments (timestamp, distinct_id, amount) VALUES (NOW(), 'testuser@example.com', 99.99);
+CREATE USER 'posthog'@'%' IDENTIFIED BY 'posthog';
+GRANT ALL PRIVILEGES ON posthog_dw_test.* TO 'posthog'@'%';
+FLUSH PRIVILEGES;
+```
+
+Next, you'll need to install some MS SQL drivers for PostHog the application to connect to the MySQL database. Learn the entire process in [posthog/warehouse/README.md](https://github.com/PostHog/posthog/blob/master/posthog/warehouse/README.md). Without the drivers, you'll get the following error when connecting a SQL database to data warehouse:
+
+```
+symbol not found in flat namespace '_bcp_batch'
+```
+
+Lastly, you'll need to define these environment variables in order for the Temporal task runner monitor the correct queue and work as expected:
+
+```
+# Ask for the values in #team-data-warehouse
+export PYTHONUNBUFFERED=
+export DJANGO_SETTINGS_MODULE=
+export DEBUG=
+export CLICKHOUSE_SECURE=
+export KAFKA_HOSTS=
+export DATABASE_URL=
+export SKIP_SERVICE_VERSION_REQUIREMENTS=
+export PRINT_SQL=
+export BUCKET_URL=
+export AIRBYTE_BUCKET_KEY=
+export AIRBYTE_BUCKET_SECRET=
+export AIRBYTE_BUCKET_REGION=
+export AIRBYTE_BUCKET_DOMAIN=
+export TEMPORAL_TASK_QUEUE=
+export AWS_S3_ALLOW_UNSAFE_RENAME=
+export HUBSPOT_APP_CLIENT_ID=
+export HUBSPOT_APP_CLIENT_SECRET=
+```
+
+If you put them in a `.temporal-worker-settings` file, you can run `source .temporal-worker-settings` before you call `DEBUG=1 ./bin/start`.
+
+To verify everything is working as expected:
+1. Navigate to "Data pipeline" in the PostHog application.
+2. Create a new MySQL source using the settings above.
+3. Once the source is created, click on the "MySQL" item. In the schemas table, click on the triple dot menu and select the "Reload" option.
+
+After the job runs, clicking on the synced table name should take you to your data.

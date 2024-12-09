@@ -22,18 +22,18 @@ You can also view the list [directly in GitHub](https://github.com/PostHog/posth
 | Annotations | [Team Product Analytics][Team Product Analytics]  | <span class="lemon-tag gh-tag">feature/annotations</span> |
 | API Structure | Security + core updates owned by [Team Pipeline][Team Pipeline]. Features owned by the relevant small team | <span class="lemon-tag gh-tag">feature/api-structure</span> |
 | Async migrations | [Team Pipeline][Team Pipeline]  | <span class="lemon-tag gh-tag">feature/async-migrations</span> |
-| Batch exports | [Team Data Warehouse](teams/data-warehouse)  | <span class="lemon-tag gh-tag">feature/batch-exports</span> |
-| BI | [Team Data Warehouse](teams/data-warehouse)  |  <span class="lemon-tag gh-tag">feature/dashboards</span> |
+| Batch exports | [Team Batch Exports](/teams/batch-exports)  | <span class="lemon-tag gh-tag">feature/batch-exports</span> |
+| BI | [Team Data Warehouse](/teams/data-warehouse)  |  <span class="lemon-tag gh-tag">feature/dashboards</span> |
 | Billing | [Team Growth][Team Growth]  |  <span class="lemon-tag gh-tag">feature/billing</span> |
 | Client libraries | Core updates owned by [Team Pipeline][Team Pipeline]. Features owned by the relevant small team  | <span class="lemon-tag gh-tag">feature/pipeline</span> |
 | Cohorts | [Team Product Analytics][Team Product Analytics]  |  <span class="lemon-tag gh-tag">feature/cohorts</span>  |
 | Dashboards | [Team Product Analytics][Team Product Analytics]  |  <span class="lemon-tag gh-tag">feature/dashboards</span> |
 | Data Management | [Team Product Analytics][Team Product Analytics]  | <span class="lemon-tag gh-tag">feature/data-management</span>  |
-| Data Warehouse | [Team Data Warehouse](teams/data-warehouse)  | <span class="lemon-tag gh-tag">feature/data-warehouse</span> |
+| Data Warehouse | [Team Data Warehouse](/teams/data-warehouse)  | <span class="lemon-tag gh-tag">feature/data-warehouse</span> |
 | Error tracking | [Team Error Tracking](/teams/error-tracking)  |  <span class="lemon-tag gh-tag">feature/error-tracking</span>  |
 | Sentry integration | [Team Error Tracking](/teams/error-tracking)  |  <span class="lemon-tag gh-tag">feature/error-tracking</span>  |
 | Events | [Team Product Analytics][Team Product Analytics]  |  <span class="lemon-tag gh-tag">feature/events</span>  |
-| Experimentation | [Team Experiments](teams/experiments) |  <span class="lemon-tag gh-tag">feature/experimentation</span> |
+| Experimentation | [Team Experiments](/teams/experiments) |  <span class="lemon-tag gh-tag">feature/experimentation</span> |
 | Feature Flags | [Team Feature Flags][Team Feature Flags]  |  <span class="lemon-tag gh-tag">feature/feature-flags</span> |
 | Group Analytics | [Team Product Analytics][Team Product Analytics]  |  <span class="lemon-tag gh-tag">feature/group-analytics</span> |
 | HogQL | [Team Product Analytics][Team Product Analytics]  |  <span class="lemon-tag gh-tag">feature/dashboards</span> |
@@ -91,3 +91,4 @@ Some of the features we are building may exist in other products already. It is 
 [Team Growth]: /teams/growth
 [Team ClickHouse]: /teams/clickhouse
 [Team CDP]: /teams/cdp
+[Team Surveys]: /teams/surveys

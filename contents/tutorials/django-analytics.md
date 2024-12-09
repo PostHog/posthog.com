@@ -420,3 +420,5 @@ With autocapture, session recordings, feature flags, identification, and custom 
 - [How to set up A/B tests in Django](/tutorials/django-ab-tests)
 - [Understanding group analytics: frontend vs backend implementations](/tutorials/frontend-vs-backend-group-analytics)
 - [Complete guide to event tracking](/tutorials/event-tracking-guide)
+
+<NewsletterForm />

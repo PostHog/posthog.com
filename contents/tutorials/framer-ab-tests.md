@@ -132,3 +132,5 @@ If you want to view both variants of your experiment to make sure they are worki
 - [How to set up Framer analytics, session replay, and more](/tutorials/framer-analytics)
 - [How to create surveys in Framer](/tutorials/framer-surveys)
 - [A non-technical guide to understanding data in PostHog](/tutorials/non-technical-guide-to-data)
+
+<NewsletterForm />

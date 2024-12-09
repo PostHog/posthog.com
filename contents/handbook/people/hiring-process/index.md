@@ -27,8 +27,8 @@ This has resulted in the highest number of qualified and motivated candidates re
 We are all-remote, but we have a few limitations on the countries we are able to employ people in:
 
 - We hire within -8 to +2 GMT timezones - beyond these, it proves too difficult for us to collaborate effectively. We do hire in GMT +2 countries that shift to GMT +3 for daylight saving time only (e.g. Bulgaria, Greece). 
-- Due to US sanctions, we can't hire folks in Cuba, Iran, North Korea, or Syria
-- We don't currently employ people in France or Italy due to the high costs (40-50% on top of gross salary)
+- Due to US sanctions, we can't hire folks in Cuba, Iran, North Korea, or Syria. 
+- We don't currently employ people via EOR in France, Italy, Iceland, Belgium, Luxembourg, Uruguay, Bolivia, or Brazil, mainly due to the very high employer costs. In some of these countries we _may_ consider hiring as a contractor, provided there is no misclassification risk. 
 
 ## Hiring Process
 
@@ -172,6 +172,8 @@ If you receive an application via email or some other non-Ashby channel like Sla
 **Schedule interviews through Ashby itself.** Do not use Google Calendar, otherwise the event won't be populated with useful candidate info and we won't have a record of the meeting anywhere. 
 
 When we book a meeting, we have the option of selecting a Google Meet or Zoom call which Meet should be the default.
+
+If you are involved in interviewing it is important to keep your calendar up to date. Candidates can book directly into your calendar so having your calendar blocked when you are not available to interview is important. This includes things like personal appointments, travelling, attending off-sites etc. If you have an interview booked in you cannot make, do not just respond no to the calendar invite, please let the ops team know asap, or even better find a replacement for your interview and let Ops know and we can update the interview. We aim to provide a great candidate experience and moving interviews is one way to reduce the quality of that experience. 
 
 ## Hiring stage overview
 

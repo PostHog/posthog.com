@@ -53,8 +53,6 @@ Avoid:
 
 If there is no product-market fit, but you think the team could find it, it's very important the company has lots of runway (it'll be hard to raise more money without product-market fit, so time to find it is crucial), doesn't have a huge team (it's harder to make rapid changes in direction with a lot of people), and moves fast (look out for bureaucracy, management, or a team that can't work well with ambiguity).
 
-<NewsletterForm />
-
 ## How much runway does the company have? Does their spending look within reason?
 
 - "Are you [default alive](http://www.paulgraham.com/aord.html)?"

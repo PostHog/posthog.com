@@ -22,7 +22,7 @@ Why the long wait?
 
 3. Building performant and functional replay for mobile apps is way harder than web.
 
-Happily, after several months of hard work from the replay team, we have betas for [iOS](/docs/session-replay/ios), [Android](/docs/session-replay/android), and [React Native](/docs/session-replay/react-native), with [Flutter](https://github.com/PostHog/posthog-flutter/issues/69) coming soon. 
+Happily, after several months of hard work from the replay team, we have betas for [iOS](/docs/session-replay/ios), [Android](/docs/session-replay/android), [React Native](/docs/session-replay/react-native), and [Flutter](/docs/session-replay/flutter).
 
 This post covers how it works and some of the technical challenges we overcame it make it.
 

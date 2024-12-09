@@ -168,8 +168,9 @@ const AIDisclaimer = ({ replyID, mutate, topic, confidence, resolvable }) => {
                         return (
                             <li className="ml-2 mt-2" key={label}>
                                 <button
-                                    className={`click px-3 py-1 bg-white dark:bg-dark rounded-full text-sm font-semibold border ${helpful ? 'border-green' : 'border-red'
-                                        }`}
+                                    className={`click px-3 py-1 bg-white dark:bg-dark rounded-full text-sm font-semibold border ${
+                                        helpful ? 'border-green' : 'border-red'
+                                    }`}
                                     onClick={() => handleHelpful(helpful, label)}
                                 >
                                     {label}
@@ -268,8 +269,9 @@ export default function Reply({ reply, badgeText }: ReplyProps) {
                     >
                         <div className="mr-2 relative ml-[-2px]">
                             <Avatar
-                                className={`w-[25px] h-[25px] rounded-full ${profile?.data.attributes.color ? `bg-${profile.data.attributes.color}` : ''
-                                    }`}
+                                className={`w-[25px] h-[25px] rounded-full ${
+                                    profile?.data.attributes.color ? `bg-${profile.data.attributes.color}` : ''
+                                }`}
                                 image={getAvatarURL(profile?.data?.attributes)}
                                 color={profile?.data.attributes.color}
                             />
@@ -329,8 +331,7 @@ export default function Reply({ reply, badgeText }: ReplyProps) {
                 <div className={reply?.attributes?.helpful === false || !publishedAt ? 'opacity-70' : ''}>
                     {reply?.attributes?.helpful === false && (
                         <div className="p-2 rounded border border-light dark:border-dark mb-2 text-sm bg-accent dark:bg-accent-dark">
-                            <IconInfo className="size-5 inline-block" /> This answer was marked as unhelpful and is only
-                            visible to you.
+                            <IconInfo className="size-5 inline-block" /> This answer was marked as unhelpful.
                         </div>
                     )}
                     <Markdown>{body}</Markdown>
@@ -348,7 +349,11 @@ export default function Reply({ reply, badgeText }: ReplyProps) {
                 )}
 
                 {(isModerator || resolvable) && (
-                    <div className={`flex ${isModerator ? 'justify-end border-t border-light dark:border-dark' : ''}  mt-4 -mb-4 pt-1 pb-2`}>
+                    <div
+                        className={`flex ${
+                            isModerator ? 'justify-end border-t border-light dark:border-dark' : ''
+                        }  mt-4 -mb-4 pt-1 pb-2`}
+                    >
                         {!isModerator && resolvable && (
                             <div className="-mt-4 -ml-1">
                                 <button
@@ -378,7 +383,10 @@ export default function Reply({ reply, badgeText }: ReplyProps) {
                                     <IconArchive className="size-4 mr-1 text-primary/50 dark:text-primary-dark/50 inline-block" />
                                     {publishedAt ? 'Unpublish' : 'Publish'}
                                 </button>
-                                <button onClick={handleDelete} className="text-red font-semibold text-sm flex items-center py-1 px-1.5 rounded hover:bg-accent dark:hover:bg-border-dark/50">
+                                <button
+                                    onClick={handleDelete}
+                                    className="text-red font-semibold text-sm flex items-center py-1 px-1.5 rounded hover:bg-accent dark:hover:bg-border-dark/50"
+                                >
                                     <IconTrash className="size-4 mr-1 text-primary/50 dark:text-primary-dark/50 inline-block" />
                                     {confirmDelete ? 'Click again to confirm' : 'Delete'}
                                 </button>

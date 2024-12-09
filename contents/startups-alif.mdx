@@ -102,7 +102,7 @@ export const refer = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.
     
     <blockquote class="text-2xl text-primary dark:text-primary-dark m-0 quote md:text-[32px] md:leading-tight">
       <span class="leading-tight">
-        "Users stated preferences are often quite different from their revealed preferences. That's why we partner with PostHog: <span class="text-red">to give our startups deeper insights into which features are stickiest and which disrupt user flows</span>.”
+        "User-stated preferences are often quite different from their revealed preferences. That's why we partner with PostHog: <span class="text-red">to give our startups deeper insights into which features are stickiest and which disrupt user flows</span>.”
       </span>
       <footer class="flex items-center space-x-8 mt-9">
         <GatsbyImage image={getImage(props?.images[14])} alt="Shaheer Sanhu" objectFit="contain" style={{ maxWidth: 120, paddingRight: '20px' }} />
@@ -114,28 +114,41 @@ export const refer = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.
 
 <section class="my-24 px-5">
   <div class="max-w-screen-2xl mx-auto">
-    <h3 class="text-2xl lg:text-3xl m-0 text-center mb-3 sm:mb-8 lg:mb-3">Recommended by other amazing startups</h3>
-    <h3 className="m-0 dark:text-primary-dark font-semibold mt-2 md:mt-0 opacity-75 text-primary text-center text-lg pb-8">(And <a href="/customers">scale-ups and beyond</a> too)</h3>
-    <div class="flex justify-center">
-      <ul class="m-0 p-0 list-none inline-grid sm:grid-cols-3 lg:grid-cols-3 justify-evenly relative text-center sm:text-left">
-        <li class="relative md:max-w-md py-4 md:py-8 pl-4 pr-2 md:px-12 lg:px-8">
-          <GatsbyImage image={getImage(props?.images[10])} alt="Pry" objectFit="contain"  align="center" style={{ maxWidth: 200 }} />
-          <h5 class="text-xl font-extrabold m-0 pb-1 pr-4">Pry</h5>
-          <p class="m-0 text-[15px]">Pry used session replays to <a href="/customers/pry">increase new sign-ups by 30%</a>. Then they were acquired by Brex!</p>
-        </li>
-        <li class="relative md:max-w-md py-4 md:py-8 pl-4 pr-2 md:px-12 lg:px-8">
-          <GatsbyImage image={getImage(props?.images[11])} alt="AssemblyAI" objectFit="contain" style={{ maxWidth: 200 }} />
-          <h5 class="text-xl font-extrabold m-0 pb-1 pr-4">AssemblyAI</h5>
-          <p class="m-0 text-[15px]">AssemblyAI <a href="/customers/assemblyai">switched from Mixpanel to PostHog</a> and hasn't looked back since.</p>
-        </li>
-        <li class="relative md:max-w-md py-4 md:py-8 pl-4 pr-2 md:px-12 lg:px-8">
-          <GatsbyImage image={getImage(props?.images[12])} alt="YCombinator" objectFit="contain" style={{ maxWidth: 200 }} />
-          <h5 class="text-xl font-extrabold m-0 pb-1 pr-4">Y Combinator</h5>
-          <p class="m-0 text-[15px]">The world's leading accelerator <a href="/customers/ycombinator">improved engagement by +40% with A/B</a> experiments.</p>
-        </li>
-      </ul>
-    </div>
+    <h3 class="text-2xl lg:text-4xl m-0 text-center mb-3 sm:mb-8 lg:mb-1">Recommended by the world's leading startup accelerators</h3>
+    <p className="m-0 dark:text-primary-dark font-semibold mt-2 md:mt-0 text-primary/75 dark:text-primary-dark/75 text-center text-xl pb-8">(And <a href="/blog/categories/startups">their startups</a> like us, too.)</p>
   </div>
+  <ul class="list-none p-0 grid md:grid-cols-3 gap-4 mb-5 md:mb-10  justify-center">
+<li class="w-full bg-accent dark:bg-accent-dark p-6 rounded">
+  <div class="flex items-center mb-4">
+    <img class="max-h-150 max-w-[1500px] w-full object-contain object-left" src="https://res.cloudinary.com/dmukukwp6/image/upload/pry_posthog_506c464b7a.png" />
+  </div>
+  <p class="!text-xl font-bold m-0 !leading-tight !mb-2">Backed by <a href="/customers/ycombinator">Y Combinator</a>, acquired by Brex</p>
+  <p class="text-sm">"PostHog isn’t just about making decisions, it's about having ideas. <span class="bg-highlight p-0.5">There are things you don’t even think of until you see the data."</span></p>
+  <a class="bg-orange dark:bg-button-secondary-shadow-dark dark:border-button-secondary-dark border-[1.5px] relative top-[1px] rounded-[6px] w-auto text-primary inline-block border-button text-center group disabled:opacity-50 disabled:cursor-not-allowed" href="/customers/pry">
+    <span class="relative text-center w-auto bg-white text-primary hover:text-primary dark:text-primary-dark dark:hover:text-primary-dark border-button dark:border-orange dark:bg-dark rounded-[6px] text-[13px] font-bold px-3.5 py-1.5 translate-y-[-2px] hover:translate-y-[-3px] active:translate-y-[-1px] border-[1.5px] mx-[-1.5px] group-disabled:hover:!translate-y-[-2px] block active:transition-all active:duration-100 select-none">Read the story</span>
+  </a>
+</li>
+<li class="w-full bg-accent dark:bg-accent-dark p-6 rounded">
+  <div class="flex items-center mb-4">
+    <img class="max-h-150 max-w-[1500px] w-full object-contain object-left" src="https://res.cloudinary.com/dmukukwp6/image/upload/opensauced_posthog_a180477623.png" />
+  </div>
+  <p class="!text-xl font-bold m-0 !leading-tight !mb-2">Backed by Boldstart, the partner for dev founders</p>
+  <p class="text-sm">"Boldstart recommended PostHog to us. There’s so many things that are possible for us — but <span class="bg-highlight p-0.5">PostHog is helping us find a path."</span></p>
+  <a class="bg-orange dark:bg-button-secondary-shadow-dark dark:border-button-secondary-dark border-[1.5px] relative top-[1px] rounded-[6px] w-auto text-primary inline-block border-button text-center group disabled:opacity-50 disabled:cursor-not-allowed" href="/customers/opensauced">
+    <span class="relative text-center w-auto bg-white text-primary hover:text-primary dark:text-primary-dark dark:hover:text-primary-dark border-button dark:border-orange dark:bg-dark rounded-[6px] text-[13px] font-bold px-3.5 py-1.5 translate-y-[-2px] hover:translate-y-[-3px] active:translate-y-[-1px] border-[1.5px] mx-[-1.5px] group-disabled:hover:!translate-y-[-2px] block active:transition-all active:duration-100 select-none">Read the story</span>
+  </a>
+</li>
+<li class="w-full bg-accent dark:bg-accent-dark p-6 rounded">
+  <div class="flex items-center mb-4">
+    <img class="max-h-150 max-w-[1500px] w-full object-contain object-left" src="https://res.cloudinary.com/dmukukwp6/image/upload/eleven_labs_b5853d00b7.png" />
+  </div>
+  <p class="!text-xl font-bold m-0 !leading-tight !mb-2">Backed by Concept, the UK's largest seed fund</p>
+  <p class="text-sm">"We used to have dozens of tools and dashboards. PostHog is amazing because <span class="bg-highlight p-0.5">it reins in the chaos so we have everything in one place."</span></p>
+  <a class="bg-orange dark:bg-button-secondary-shadow-dark dark:border-button-secondary-dark border-[1.5px] relative top-[1px] rounded-[6px] w-auto text-primary inline-block border-button text-center group disabled:opacity-50 disabled:cursor-not-allowed" href="/customers/elevenlabs">
+    <span class="relative text-center w-auto bg-white text-primary hover:text-primary dark:text-primary-dark dark:hover:text-primary-dark border-button dark:border-orange dark:bg-dark rounded-[6px] text-[13px] font-bold px-3.5 py-1.5 translate-y-[-2px] hover:translate-y-[-3px] active:translate-y-[-1px] border-[1.5px] mx-[-1.5px] group-disabled:hover:!translate-y-[-2px] block active:transition-all active:duration-100 select-none">Read the story</span>
+  </a>
+</li>
+</ul>
 </section>
 
 <Section>
@@ -187,7 +200,7 @@ export const refer = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.
             <td className="bg-accent dark:bg-accent-dark text-center"><span className="text-green text-lg">✔</span></td>
         </tr>
         <tr class="border-b border-light dark:border-dark">
-            <td><strong>Free gifts (incl. stickers)</strong></td>
+            <td><strong>Free gifts (omg, stickers)</strong></td>
             <td className="text-center"><span className="text-red text-lg">✖</span></td>
             <td className="text-center"><span className="text-red text-lg">✖</span></td>
             <td className="text-center"><span className="text-red text-lg">✖</span></td>

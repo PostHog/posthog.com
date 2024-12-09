@@ -100,3 +100,5 @@ match(
 - [Complete guide to event tracking](/tutorials/event-tracking-guide)
 - [Using HogQL for advanced time and date filters](/tutorials/hogql-date-time-filters)
 - [Using HogQL for advanced breakdowns](/tutorials/hogql-breakdowns)
+
+<NewsletterForm />

@@ -1,0 +1,30 @@
+Start by installing `posthog-js` using your package manager:
+
+```bash
+yarn add posthog-js
+# or
+npm install --save posthog-js
+```
+
+Next, depending on your Vue version, we recommend initializing PostHog using the composition API or as a plugin.
+
+import Tab from "components/Tab"
+import CompositionInstall from "./composition-install.mdx"
+import PluginInstall from "./plugin-install.mdx"
+
+<Tab.Group tabs={[
+    'Vue 3: Composition API', 
+    'Vue 2: Plugins']}>
+    <Tab.List>
+        <Tab>Vue 3: Composition API</Tab>
+        <Tab>Vue 2: Plugins</Tab>
+    </Tab.List>
+    <Tab.Panels>
+        <Tab.Panel>
+            <CompositionInstall />
+        </Tab.Panel>
+        <Tab.Panel>
+            <PluginInstall />
+        </Tab.Panel>
+    </Tab.Panels>
+</Tab.Group>

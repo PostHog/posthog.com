@@ -78,3 +78,5 @@ With all that, you’ve set up a power user cohort and begun to do analysis. Fro
 - [How to run Experiments without feature flags](/docs/experiments/running-experiments-without-feature-flags): Learn how to improve your power user experience by running experiments without feature flags.
 
 - [How we made something people want](/blog/making-something-people-want): Learn how we make something people want (and create power users by doing it) in this blog post by our CEO James.
+
+<NewsletterForm />
