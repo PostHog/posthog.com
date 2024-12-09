@@ -19,6 +19,7 @@ Welcome to the PostHog Sales and Customer Success team!  We only hire about 1 in
    - [Zendesk](https://posthoghelp.zendesk.com/agent/dashboard)
    - PostHog [US](https://us.posthog.com/) and [EU](https://eu.posthog.com/) instances (and our production project on the US)
    - [Jimminy](https://app.jiminny.eu/dashboard)
+   - [PandaDoc](https://app.pandadoc.com/)
  - If you start on a Monday, join your first PostHog All Hands (at 4.30pm UK/8.30am PT) and be prepared to have a strong opinion on whether pineapple belongs on pizza.
  - If you start on a Monday, join your first Sales and CS standup.
    - We fill in a GitHub issue every week before this meeting so we are prepared for the discussion topics.  Simon will add your GitHub handle to the template.
@@ -28,7 +29,7 @@ Welcome to the PostHog Sales and Customer Success team!  We only hire about 1 in
  - Ask team members in your region to be invited to some customer calls so you can gain an understanding of how we work with customers.
  - Check out some [Jimminy](https://app.jiminny.eu/dashboard) calls.
  - Start to learn and practise a [demo](https://youtu.be/2jQco8hEvTI) of PostHog.
- - Read all of the Sales and CS section in the Handbook.
+ - Read all of the Sales and CS section in the Handbook (and update it as you learn more).
  - Meet with [Charles](/community/profiles/28625), the exec responsible for Sales and CS.
 
 ### Week 2
