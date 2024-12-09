@@ -59,6 +59,29 @@ Ideally, this will happen in Week 3 or 4, and will be with a few existing team m
 - Focus on taking more and more ownership on calls so that team members are just there as a safety net.  
 - Continue to meet with your book of customers and inbound leads.
 
+## Major Milestones
+
+### Month 1
+
+By the end of month 1 you should:
+ - Be leading customer calls and demos on your own
+ - Have evaluations in flight with support from the team if needed (AE)
+ - Have made contact with _everyone_ in your book of business in some form
+ - Be starting to solve technical problems for your book with occasional help (CSM)
+ 
+### Month 2 
+
+By the end of month 2 you should:
+  - Have closed your first Medium annual deal (new or conversion to annual) (AE)
+  - Be leading evaluations on your own (AE)
+  - Have identified some opportunities to add to your book from self-serve signups who aren't paying yet (AE)
+
+### Month 4
+
+By the end of month 4 - you should:
+  - Have closed multiple contracts by this point (either new or expansion/renewal) through the whole process (AE)
+  - Be independently working with your entire book to solve tricky technical problems with minimal assistant (CSM)
+
 ## Other tools that are useful
 
 - [Cal.com](https://app.cal.com/) for shared meeting booking links
