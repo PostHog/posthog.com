@@ -9,14 +9,14 @@ tags:
   - configuration
   - data management
   - product os
-date: 2024-12-05
+date: 2024-12-09
 ---
-
-_Estimated reading time: 2 minutes_ ☕
 
 When collecting data with PostHog, you may want to avoid collecting certain properties for privacy reasons. For example, you may want to ensure you never collect IP addresses or exact locations.
 
-That's where the [property filter app](/apps/property-filter), which was created by the team at [Witty Works](https://www.witty.works/), comes in. It gives you fine-grained control over which properties are kept or discarded from your events, helping you balance data collection needs with privacy requirements. Here's how to use it:
+That's where the [property filter app](/apps/property-filter), which was created by the team at [Witty Works](https://www.witty.works/), comes in. It gives you fine-grained control over which properties are kept or discarded from your events, helping you balance data collection needs with privacy requirements. Here's how to use it.
+
+> **Note:** If you prefer not to use the property filter app, you can also filter out properties in your PostHog client directly by using the `sanitize` configuration option. See the [sanitize docs](/docs/product-analytics/privacy#sanitize-properties) for more details.
 
 ## How to set up the property filter app
 
@@ -93,20 +93,20 @@ PostHog enriches events with the [GeoIP app](/cdp/geoip-enrichment) based on the
 
 The current list of GeoIP properties is shown below. For the most up-to-date list, see the [source code](https://github.com/PostHog/posthog-plugin-geoip).
 
-- $geoip_city_name
-- $geoip_country_name
-- $geoip_country_code
-- $geoip_continent_name
-- $geoip_continent_code
-- $geoip_latitude
-- $geoip_longitude
-- $geoip_time_zone
-- $geoip_subdivision_1_code
-- $geoip_subdivision_1_name
-- $geoip_subdivision_2_code
-- $geoip_subdivision_2_name
-- $geoip_subdivision_3_code
-- $geoip_subdivision_3_name
+- `$geoip_city_name`
+- `$geoip_country_name`
+- `$geoip_country_code`
+- `$geoip_continent_name`
+- `$geoip_continent_code`
+- `$geoip_latitude`
+- `$geoip_longitude`
+- `$geoip_time_zone`
+- `$geoip_subdivision_1_code`
+- `$geoip_subdivision_1_name`
+- `$geoip_subdivision_2_code`
+- `$geoip_subdivision_2_name`
+- `$geoip_subdivision_3_code`
+- `$geoip_subdivision_3_name`
 
 ## (Optional) Configure the order of transformations
 
