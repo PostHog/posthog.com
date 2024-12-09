@@ -11,6 +11,8 @@ export default function Toggle({
     iconRight,
     label,
     tooltip,
+    position = 'left',
+    activeOpacity = true,
 }: {
     checked: boolean
     onChange: (checked: boolean) => void
@@ -18,15 +20,30 @@ export default function Toggle({
     iconRight?: React.ReactNode
     label?: string
     tooltip?: string
+    position?: 'left' | 'right'
+    activeOpacity?: boolean
 }) {
     return (
-        <span className="flex space-x-1.5 items-center">
-            {iconLeft && (
-                <span className={`${checked ? 'opacity-50' : 'opacity-80'} font-semibold transition-opacity`}>
-                    {iconLeft}
-                </span>
-            )}
+        <span className="flex space-x-1.5 items-center justify-between">
             <Switch.Group>
+                {((position === 'right' && label) || iconLeft) && (
+                    <span className="flex items-center">
+                        {iconLeft && (
+                            <span
+                                className={`${
+                                    activeOpacity && checked ? 'opacity-50' : 'opacity-80'
+                                } font-semibold transition-opacity`}
+                            >
+                                {iconLeft}
+                            </span>
+                        )}
+                        {position === 'right' && label && (
+                            <Switch.Label>
+                                <span className="ml-1 font-semibold text-sm">{label}</span>
+                            </Switch.Label>
+                        )}
+                    </span>
+                )}
                 <Switch
                     checked={checked}
                     onChange={onChange}
@@ -47,10 +64,23 @@ export default function Toggle({
                         )}
                     />
                 </Switch>
-                {label && (
-                    <Switch.Label>
-                        <span className="ml-1 font-semibold text-sm">{label}</span>
-                    </Switch.Label>
+                {((position === 'left' && label) || iconRight) && (
+                    <span className="flex items-center">
+                        {position === 'left' && label && (
+                            <Switch.Label>
+                                <span className="ml-1 font-semibold text-sm">{label}</span>
+                            </Switch.Label>
+                        )}
+                        {iconRight && (
+                            <span
+                                className={`${
+                                    activeOpacity && !checked ? 'opacity-50' : 'opacity-80'
+                                } font-semibold transition-opacity`}
+                            >
+                                {iconRight}
+                            </span>
+                        )}
+                    </span>
                 )}
                 {tooltip && (
                     <Tooltip content={tooltip} contentContainerClassName="max-w-xs">
@@ -60,11 +90,6 @@ export default function Toggle({
                     </Tooltip>
                 )}
             </Switch.Group>
-            {iconRight && (
-                <span className={`${!checked ? 'opacity-50' : 'opacity-80'} font-semibold transition-opacity`}>
-                    {iconRight}
-                </span>
-            )}
         </span>
     )
 }

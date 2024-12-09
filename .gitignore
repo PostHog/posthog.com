@@ -31,3 +31,4 @@ src/components/Layout/Fonts.scss
 .vercel
 .env
 *Type.ts
+.env.development
