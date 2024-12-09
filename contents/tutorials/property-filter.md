@@ -14,15 +14,15 @@ date: 2024-12-05
 
 _Estimated reading time: 2 minutes_ ☕
 
-When collecting data with PostHog, you may sometimes want to avoid collecting certain properties for privacy reasons. For example, you may want to ensure you never collect specific kind of data such as IP addresses or exact locations.
+When collecting data with PostHog, you may want to avoid collecting certain properties for privacy reasons. For example, you may want to ensure you never collect IP addresses or exact locations.
 
-That's where the [Property Filter app](/apps/property-filter), which was created by the team at [Witty Works](https://www.witty.works/), comes in. It gives you fine-grained control over which properties are kept or discarded from your events, helping you balance data collection needs with privacy requirements. Here's how to use it:
+That's where the [property filter app](/apps/property-filter), which was created by the team at [Witty Works](https://www.witty.works/), comes in. It gives you fine-grained control over which properties are kept or discarded from your events, helping you balance data collection needs with privacy requirements. Here's how to use it:
 
-## How to set up the Property Filter app
+## How to set up the property filter app
 
 The property filter app works by setting the selected properties to `null` when events are ingested. Here's how to set it up:
 
-1. Navigate to the [data pipeline](https://us.posthog.com/pipeline) tab in PostHog.
+1. Navigate to the [data pipelines](https://us.posthog.com/pipeline) tab in PostHog.
 2. Click the **+ New** button in the top right.
 3. Select **Transformation** from the dropdown.
 4. Next to the **Property Filter** app, click **+ Create**.
@@ -89,7 +89,7 @@ Note that PostHog's default properties begin with `$`, so you'll need to include
 
 ### Filtering GeoIP properties
 
-PostHog enriches events with the [GeoIP app](/cdp/geoip-enrichment) based on the IP address. You either disable this app completely or filter out specific properties using the Property Filter app.
+PostHog enriches events with the [GeoIP app](/cdp/geoip-enrichment) based on the IP address. You either disable this app completely or filter out specific properties using the property filter app.
 
 The current list of GeoIP properties is shown below. For the most up-to-date list, see the [source code](https://github.com/PostHog/posthog-plugin-geoip).
 
