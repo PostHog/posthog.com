@@ -88,7 +88,7 @@ import HowToCaptureAnonymousEventsIOS from '../../product-analytics/_snippets/ho
 
 ### How to capture identified events
 
-import HowToCaptureIdentifiedEventsIOS from '../../product-analytics/_snippets/how-to-capture-identified-events-frontend.mdx'
+import HowToCaptureIdentifiedEventsIOS from '../../product-analytics/_snippets/how-to-capture-identified-events-ios.mdx'
 
 <HowToCaptureIdentifiedEventsIOS />
 
@@ -160,6 +160,36 @@ To reset the user's ID and anonymous ID, call `reset`. Usually you would do this
 PostHogSDK.shared.reset()
 ```
 
+## Opt out of data capture
+
+You can completely opt-out users from data capture. To do this, there are two options:
+
+1. Opt users out by default by setting `optOut` to `true` in your PostHog config:
+
+```swift
+let config = PostHogConfig(apiKey: <ph_project_api_key>, host: <ph_client_api_host>)
+config.optOut = true
+PostHogSDK.shared.setup(config)
+```
+
+2. Opt users out on a per-person basis by calling `optOut()`:
+
+```swift
+PostHogSDK.shared.optOut()
+```
+
+Similarly, you can opt users in:
+
+```swift
+PostHogSDK.shared.optIn()
+```
+
+To check if a user is opted out:
+
+```swift
+PostHogSDK.shared.isOptOut()
+```
+ 
 ## Group analytics
 
 Group analytics allows you to associate the events for that person's session with a group (e.g. teams, organizations, etc.). Read the [Group Analytics](/docs/user-guides/group-analytics) guide for more information.

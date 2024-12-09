@@ -9,7 +9,7 @@
     "redirects": [
         {
             "source": "/handbook/growth/marketing/product-announcements",
-            "destination": "/handbook/comms/product-announcements"
+            "destination": "/handbook/words-and-pictures/product-announcements"
         },
         { "source": "/tutorials/nps-survey", "destination": "/templates/nps-survey" },
         { "source": "/questions/topics/:path*", "destination": "/questions/topic/:path*" },
@@ -894,6 +894,7 @@
         { "source": "/handbook/growth/marketing/Customer-personas", "destination": "/handbook/growth/marketing" },
         { "source": "/docs/cdp/bitbucket-release-tracker", "destination": "/docs/cdp" },
         { "source": "/handbook/company/strategy", "destination": "/handbook/strategy/overview" },
+        { "source": "/handbook/company/story", "destination": "/handbook/story" },
         { "source": "/guides", "destination": "/tutorials" },
         {
             "source": "/handbook/growth/marketing/customer-personas",
@@ -1364,12 +1365,16 @@
             "destination": "/docs/session-replay/installation?tab=React+Native"
         },
         {
+            "source": "/teams/comms",
+            "destination": "/teams/support"
+        },
+        {
             "source": "/docs/session-replay/flutter",
             "destination": "/docs/session-replay/installation?tab=Flutter"
         },
         {
             "source": "/teams/customer-comms",
-            "destination": "/teams/comms"
+            "destination": "/teams/support"
         },
         { "source": "/apps", "destination": "/cdp", "statusCode": 302 },
         {
@@ -1431,6 +1436,10 @@
         {
             "source": "/docs/data-warehouse/setup/zendesk",
             "destination": "/docs/cdp/sources/zendesk"
+        },
+        {
+            "source": "/docs/data-warehouse/setup/",
+            "destination": "/docs/data-warehouse/query/"
         }
     ]
 }

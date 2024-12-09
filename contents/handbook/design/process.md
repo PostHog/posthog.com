@@ -18,7 +18,7 @@ Learn more about how we decide this in our [guide to working with product design
 
 ## Requesting artwork and brand materials.
 
-Need some custom artwork? Read the [art and branding request guidelines](/handbook/design/art-requests). 
+Need some custom artwork? Read the [art and branding request guidelines](/handbook/words-and-pictures/art-requests). 
 
 ## Portfolio
 

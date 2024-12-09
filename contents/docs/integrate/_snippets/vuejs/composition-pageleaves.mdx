@@ -1,0 +1,17 @@
+To capture pageleaves, we can simply use the `beforeEach` hook in the router.
+
+```js
+// src/router/index.js
+
+//... rest of your code
+
+const { posthog } = usePostHog()
+
+router.beforeEach((to, from) => {
+  if (from.path !== to.path) {
+    posthog.capture('$pageleave')
+  }
+})
+
+//... rest of your code
+```
