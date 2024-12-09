@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import Layout from 'components/Layout'
 import { SEO } from 'components/seo'
 import Link from 'components/Link'
@@ -26,7 +26,7 @@ const Teams: React.FC = () => {
                 }
                 companyRole
             }
-            supportTeam: squeakTeam(id: { eq: 128 }) {
+            supportTeam: squeakTeam(squeakId: { eq: 128 }) {
                 id
                 name
                 slug
@@ -70,8 +70,6 @@ const Teams: React.FC = () => {
         }
     `)
 
-    console.log(james)
-
     return (
         <Layout>
             <SEO title="Why PostHog? - PostHog" description="Why not?" image={`/images/small-teams.png`} />
@@ -80,7 +78,7 @@ const Teams: React.FC = () => {
                 hideSurvey
                 sidebar={
                     <SidebarSection title="From the desk of...">
-                        <div className="-mx-4">
+                        <div className="-mx-4 pt-1">
                             <Contributor
                                 url={james.squeakId && `/community/profiles/${james.squeakId}`}
                                 image={james.avatar?.url}

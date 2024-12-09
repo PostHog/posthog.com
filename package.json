@@ -143,6 +143,7 @@
         "rehype-raw": "^7.0.0",
         "rehype-sanitize": "^5.0.1",
         "remark-gfm": "^3.0.1",
+        "remove-markdown": "^0.5.5",
         "request": "^2.88.2",
         "sass": "^1.43.2",
         "slugify": "^1.6.0",
