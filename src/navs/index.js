@@ -656,6 +656,10 @@ export const handbookSidebar = [
                 url: '/handbook/growth/sales/overview',
             },
             {
+                name: 'Why buy PostHog',
+                url: '/handbook/growth/sales/why-buy-posthog',
+            },
+            {
                 name: 'New sales',
                 url: '/handbook/growth/sales/new-sales',
             },
@@ -2234,6 +2238,12 @@ export const docsMenu = {
                     color: 'red',
                 },
                 {
+                    name: 'Privacy controls',
+                    url: '/docs/product-analytics/privacy',
+                    icon: 'IconShield',
+                    color: 'orange',
+                },
+                {
                     name: 'Web vitals',
                     url: '/docs/product-analytics/web-vitals',
                     icon: 'IconWrench',
@@ -2648,6 +2658,16 @@ export const docsMenu = {
                     url: '/docs/experiments/holdouts',
                     icon: 'IconPeople',
                     color: 'orange',
+                },
+                {
+                    name: 'Data warehouse',
+                    url: '/docs/experiments/data-warehouse',
+                    icon: 'IconDatabase',
+                    color: 'blue',
+                    badge: {
+                        title: 'Beta',
+                        className: 'uppercase !bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',
+                    },
                 },
             ],
         },

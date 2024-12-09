@@ -55,9 +55,11 @@ This is a faster option to get up and running. If you don't want to or can't use
 ![](https://user-images.githubusercontent.com/890921/231490278-140f814e-e77b-46d5-9a4f-31c1b1d6956a.png)
 3. Open the codespace, using one of the "Open in" options from the list.
 4. In the codespace, open a terminal window and run `docker compose -f docker-compose.dev.yml up`.
-5. Also in the codespace, open another terminal window and run `./bin/migrate` and then `./bin/start`.
-6. Open browser to http://localhost:8000/.
-7. To get some practical test data into your brand-new instance of PostHog, run `DEBUG=1 ./manage.py generate_demo_data`.
+5. In another terminal, run `pnpm i` (and use the same terminal for the following commands)
+6. Then run `pip install -r requirements.txt -r requirements-dev.txt`
+7. Now run `./bin/migrate` and then `./bin/start`.
+8. Open browser to http://localhost:8000/.
+9. To get some practical test data into your brand-new instance of PostHog, run `DEBUG=1 ./manage.py generate_demo_data`.
 
 ## Option 2: Developing locally
 
@@ -230,6 +232,11 @@ export LDFLAGS=-L/opt/homebrew/opt/openssl/lib
 pnpm i --dir plugin-server
 ```
 
+> Note: If you face an error like `import gyp  # noqa: E402`, most probably need to install `python-setuptools`. To fix this, run:
+```bash
+brew install python-setuptools
+```
+
 #### 4. Prepare the Django server
 
 1. Install a few dependencies for SAML to work. If you're on macOS, run the command below, otherwise check the official [xmlsec repo](https://github.com/mehcode/python-xmlsec) for more details.
@@ -331,6 +338,11 @@ Open [http://localhost:8000](http://localhost:8000) to see the app.
 > **Note:** The first time you run this command you might get an error that says "layout.html is not defined". Make sure you wait until the frontend is finished compiling and try again.
 
 To get some practical test data into your brand-new instance of PostHog, run `DEBUG=1 ./manage.py generate_demo_data`. For a list of useful arguments of the command, run `DEBUG=1 ./manage.py generate_demo_data --help`.
+
+You can also use [mprocs](https://github.com/pvolok/mprocs) to run all development processes in a single terminal window. mprocs provides a clean interface for starting, stopping, and monitoring each service individually, with separate log views for easier debugging. This includes docker compose, so make sure to stop it if it's already running. Once you have mprocs installed, run
+```bash
+./bin/start-mprocs
+```
 
 #### 7. Develop
 

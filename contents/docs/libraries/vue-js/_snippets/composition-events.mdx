@@ -1,0 +1,26 @@
+To capture custom events, evaluate feature flags, and use any of the other PostHog features, you can use the `posthog` object returned from the `usePostHog` composable like this:
+
+```js
+// src/App.vue
+<script setup>
+import { RouterView } from 'vue-router'
+import { usePostHog } from './composables/usePostHog'
+
+const { posthog } = usePostHog()
+
+const handleClick = () => {
+  posthog.capture('button_clicked', { location: 'homepage' })
+}
+
+const isFeatureEnabled = posthog.isFeatureEnabled('test-flag')
+</script>
+
+<template>
+  <div>
+    <button @click="handleClick">Click me!</button>
+    <p>Is feature flag enabled? {{ isFeatureEnabled ? 'Yes' : 'No' }}</p>
+  </div>
+
+  <RouterView />
+</template>
+``` 
