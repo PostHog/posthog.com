@@ -120,7 +120,7 @@ I can’t wait to find out.
 
 I'm trying not to be *too* weird about it. I think my coworkers are getting used to my outbursts about how something makes way more sense than usual.
 
-By month two I’m usually anxiously glancing at the exits. The endless paper cuts of structures that don’t quite work – but still bind the everyday of workplace existence – start to chafe and rub.
+By month two I’m usually anxiously glancing at the exits. The endless paper cuts of structures that don’t quite work – but still bind the everyday of workplace existence – start to chafe and rub. Instead, I'm busily learning more and making plans for what I'll do next.
 
 I didn’t think they still made startups like this. But the more I think about it, I’m not sure they ever did.
 
