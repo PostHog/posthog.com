@@ -136,7 +136,7 @@ const Teams: React.FC = () => {
                 <section className="mx-auto">
                     <div className="flex flex-col md:items-center md:justify-end md:flex-row-reverse gap-8 md:gap-2">
                         <div className="md:flex-1">
-                            <div className="article-content">
+                            <div className="@container article-content">
                                 <div className="opacity-70 text-[15px] font-medium">Why PostHog?</div>
                                 <h1 id="posthog-is-literally-designed-to-be-a-no-brainer" className="text-2xl">
                                     PostHog is literally designed to be a no-brainer
@@ -253,8 +253,8 @@ const Teams: React.FC = () => {
                                         <Link href="/handbook/growth/sales/overview">manual for our salespeople</Link>,{' '}
                                         <Link href="/handbook/growth/marketing">marketing team</Link>, and so on. You
                                         can even <Link href="/handbook/people/compensation">see what they’re paid</Link>{' '}
-                                        - it’s all in our public handbook. Even the contentious stuff. - There’s a
-                                        reason most companies hide this stuff.
+                                        - it’s all in our public handbook. Even the contentious stuff – there’s a reason
+                                        most companies hide this stuff!
                                     </li>
                                     <li>So many hedgehogs.</li>
                                 </ul>
@@ -277,38 +277,47 @@ const Teams: React.FC = () => {
                                     our products on our website.
                                 </p>
 
-                                <div className="float-right ml-6 mb-6 bg-accent/5 rounded-md p-4 max-w-sm">
-                                    <Link to={`/teams/${supportTeam.slug}`} className="block group">
-                                        <TeamPatch
-                                            name={supportTeam.name}
-                                            imageUrl={supportTeam.crest?.data?.attributes?.url}
-                                            {...supportTeam.crestOptions}
-                                            className="w-full mb-4"
-                                        />
-
-                                        <div className="text-lg font-bold mb-2">
-                                            Meet the support engineers on the front lines
+                                <div className="@lg:float-right ml-5 @lg:ml-8 mb-6 @lg:mb-2 px-2 py-4 max-w-sm rounded border border-light dark:border-dark bg-accent dark:bg-accent-dark">
+                                    <div className="grid grid-cols-5 group gap-12">
+                                        <div className="max-w-32 mx-auto col-span-2 scale-[1.65] hover:scale-[1.68] active:scale-[1.65] relative hover:-top-0.5 active:top-0.5 transition-all duration-100 ml-2">
+                                            <Link to={`/teams/${supportTeam.slug}`}>
+                                                <TeamPatch
+                                                    name={supportTeam.name}
+                                                    imageUrl={supportTeam.crest?.data?.attributes?.url}
+                                                    {...supportTeam.crestOptions}
+                                                    className="w-full"
+                                                />
+                                            </Link>
                                         </div>
+                                        <div className="col-span-3">
+                                            <p className="!mb-2 !text-[15px] !leading-tight font-semibold">
+                                                Meet the support engineers on the front lines:
+                                            </p>
 
-                                        <div className="flex flex-wrap justify-end -space-x-3">
-                                            {supportTeam.profiles.data.map(
-                                                ({ id, attributes: { firstName, lastName, avatar, color } }) => {
-                                                    const name = [firstName, lastName].filter(Boolean).join(' ')
-                                                    return (
-                                                        <Tooltip key={id} content={name}>
-                                                            <img
-                                                                src={avatar?.data?.attributes?.url}
-                                                                className={`size-10 rounded-full bg-${
-                                                                    color ?? 'accent'
-                                                                } border border-light dark:border-dark`}
-                                                                alt={name}
-                                                            />
-                                                        </Tooltip>
-                                                    )
-                                                }
-                                            )}
+                                            <div className="flex flex-wrap justify-start -space-x-3 mb-2">
+                                                {supportTeam.profiles.data.map(
+                                                    ({ id, attributes: { firstName, lastName, avatar, color } }) => {
+                                                        const name = [firstName, lastName].filter(Boolean).join(' ')
+                                                        return (
+                                                            <Tooltip key={id} content={name}>
+                                                                <img
+                                                                    src={avatar?.data?.attributes?.url}
+                                                                    className={`size-10 rounded-full bg-${
+                                                                        color ?? 'accent'
+                                                                    } border border-light dark:border-dark`}
+                                                                    alt={name}
+                                                                />
+                                                            </Tooltip>
+                                                        )
+                                                    }
+                                                )}
+                                            </div>
+
+                                            <CallToAction to={`/teams/${supportTeam.slug}`} type="secondary" size="xs">
+                                                Visit small team page
+                                            </CallToAction>
                                         </div>
-                                    </Link>
+                                    </div>
                                 </div>
 
                                 <p>
