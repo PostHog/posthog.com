@@ -2,15 +2,15 @@ If your Next.js app to uses the [app router](https://nextjs.org/docs/app), you c
 
 <MultiLanguage>
 
-```js
-// app/providers.js
+```jsx
+// app/providers.jsx
 'use client'
 
 import posthog from 'posthog-js'
 import { PostHogProvider } from 'posthog-js/react'
 import { useEffect } from 'react'
 
-export function PHProvider({ children }) {
+export function PostHogProvider({ children }) {
   useEffect(() => {
     posthog.init(process.env.NEXT_PUBLIC_POSTHOG_KEY, {
       api_host: process.env.NEXT_PUBLIC_POSTHOG_HOST,
@@ -19,7 +19,11 @@ export function PHProvider({ children }) {
     })
   }, [])
 
-  return <PostHogProvider client={posthog}>{children}</PostHogProvider>
+  return (
+    <PostHogProvider client={posthog}>
+      {children}
+    </PostHogProvider>
+  )
 }
 ```
 
@@ -31,7 +35,7 @@ import posthog from 'posthog-js'
 import { PostHogProvider } from 'posthog-js/react'
 import { useEffect } from 'react'
 
-export function PHProvider({ children }: { children: React.ReactNode }) {
+export function PostHogProvider({ children }: { children: React.ReactNode }) {
     useEffect(() => {
       posthog.init(process.env.NEXT_PUBLIC_POSTHOG_KEY, {
         api_host: process.env.NEXT_PUBLIC_POSTHOG_HOST,
@@ -40,11 +44,63 @@ export function PHProvider({ children }: { children: React.ReactNode }) {
       })
   }, [])
 
-  return <PostHogProvider client={posthog}>{children}</PostHogProvider>
+  return (
+    <PostHogProvider client={posthog}>
+      {children}
+    </PostHogProvider>
+  )
 }
 ```
 
 </MultiLanguage>
+
+Then, import the `PostHogProvider` component into your `app/layout` file and wrap your app with it.
+
+<MultiLanguage>
+
+```jsx
+// app/layout.jsx
+
+import './globals.css'
+import { PostHogProvider } from './providers'
+
+export default function RootLayout({ children }) {
+  return (
+    <html lang="en">
+      <body>
+        <PostHogProvider>
+          {children}
+        </PostHogProvider>
+      </body>
+    </html>
+  )
+}
+```
+
+```tsx
+// app/layout.tsx
+
+import './globals.css'
+import { PostHogProvider } from './providers'
+
+export default function RootLayout({ children }: { children: React.ReactNode }) {
+  return (
+    <html lang="en">
+      <body>
+        <PostHogProvider>
+          {children}
+        </PostHogProvider>
+      </body>
+    </html>
+  )
+}
+```
+
+</MultiLanguage>
+
+PostHog is now set up and ready to go. Files and components accessing PostHog on the client-side need the `'use client'` directive.
+
+#### Pageview
 
 PostHog's `$pageview` autocapture relies on page load events. Since Next.js acts as a single-page app, this event doesn't trigger on navigation and we need to capture `$pageview` events manually. 
 
@@ -52,7 +108,7 @@ To do this, we set up a `PostHogPageView` component to listen to URL path change
 
 <MultiLanguage>
 
-```js
+```jsx
 // app/PostHogPageView.jsx
 'use client'
 
@@ -90,7 +146,7 @@ export default SuspendedPostHogPageView() {
 }
 ```
 
-```ts
+```tsx
 // app/PostHogPageView.tsx
 'use client'
 
@@ -127,105 +183,59 @@ export default SuspendedPostHogPageView() {
   </Suspense>
 }
 ```
-
 </MultiLanguage>
 
-Then, import the `PHProvider` component into your `app/layout` file and wrap your app with it. We also import the `PostHogPageView` component and include it as a child of `PHProvider`.
+We can then update our `PostHogProvider` to include this component in all of our pages.
 
-<MultiLanguage>
+```diff
+  // app/providers.js
+  'use client'
 
-```js
-// app/layout.js
+  import posthog from 'posthog-js'
+  import { PostHogProvider } from 'posthog-js/react'
+  import { useEffect } from 'react'
++ import PostHogPageView from "./PostHogPageView"
 
-import './globals.css'
-import { PHProvider } from './providers'
-import PostHogPageView from "./PostHogPageView"
 
-export default function RootLayout({ children }) {
-  return (
-    <html lang="en">
-      <body>
-        <PHProvider>
-          <PostHogPageView /> 
-          {children}
-        </PHProvider>
-      </body>
-    </html>
-  )
-}
+  export function PostHogProvider({ children }) {
+    useEffect(() => {
+      posthog.init(process.env.NEXT_PUBLIC_POSTHOG_KEY, {
+        api_host: process.env.NEXT_PUBLIC_POSTHOG_HOST,
+        person_profiles: 'identified_only',
+        capture_pageview: false // Disable automatic pageview capture, as we capture manually
+      })
+    }, [])
+  
+    return (
+      <PostHogProvider client={posthog}>
++       <PostHogPageView />
+        {children}
+      </PostHogProvider>
+    )
+  }
 ```
-
-```tsx
-// app/layout.tsx
-
-import './globals.css'
-import { PHProvider } from './providers'
-import PostHogPageView from "./PostHogPageView"
-
-export default function RootLayout({ children }: { children: React.ReactNode }) {
-  return (
-    <html lang="en">
-      <body>
-        <PHProvider>
-          <PostHogPageView /> 
-          {children}
-        </PHProvider>
-      </body>
-    </html>
-  )
-}
-```
-
-</MultiLanguage>
-
-PostHog is now set up and ready to go. Files and components accessing PostHog on the client-side need the `'use client'` directive.
 
 #### Pageleave events (optional)
 
 To capture pageleave events, we need to set `capture_pageleave: true` in the initialization because setting `capture_pageview: false` disables it.
 
-<MultiLanguage>
+```diff
+  // app/providers.js
+  'use client'
+  import posthog from 'posthog-js'
+  import { PostHogProvider } from 'posthog-js/react'
+  import { useEffect } from 'react'
 
-```js
-// app/providers.js
-'use client'
-import posthog from 'posthog-js'
-import { PostHogProvider } from 'posthog-js/react'
-import { useEffect } from 'react'
+  export function PostHogProvider({ children }) {
+    useEffect(() => {
+      posthog.init(process.env.NEXT_PUBLIC_POSTHOG_KEY, {
+        api_host: process.env.NEXT_PUBLIC_POSTHOG_HOST,
+        person_profiles: 'identified_only',
+        capture_pageview: false,
++       capture_pageleave: true // Enable pageleave capture
+      })
+    }, [])
 
-export function PHProvider({ children }) {
-  useEffect(() => {
-    posthog.init(process.env.NEXT_PUBLIC_POSTHOG_KEY, {
-      api_host: process.env.NEXT_PUBLIC_POSTHOG_HOST,
-      person_profiles: 'identified_only',
-      capture_pageview: false,
-      capture_pageleave: true // Enable pageleave capture
-    })
-  }, [])
-
-  return <PostHogProvider client={posthog}>{children}</PostHogProvider>
-}
+    return <PostHogProvider client={posthog}>{children}</PostHogProvider>
+  }
 ```
-
-```tsx
-// app/providers.tsx
-'use client'
-import posthog from 'posthog-js'
-import { PostHogProvider } from 'posthog-js/react'
-import { useEffect } from 'react'
-
-export function PHProvider({ children }: { children: React.ReactNode }) {
-  useEffect(() => {
-    posthog.init(process.env.NEXT_PUBLIC_POSTHOG_KEY!, {
-      api_host: process.env.NEXT_PUBLIC_POSTHOG_HOST,
-      person_profiles: 'identified_only',
-      capture_pageview: false,
-      capture_pageleave: true // Enable pageleave capture
-    })
-  }, [])
-
-  return <PostHogProvider client={posthog}>{children}</PostHogProvider>
-}
-```
-
-</MultiLanguage>
