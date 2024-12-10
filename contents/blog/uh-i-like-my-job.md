@@ -104,7 +104,7 @@ But certainty is a trap for anyone trying something genuinely new. Curiosity, me
 
 So everyone at PostHog is free to try, to fuck up, [to discover](/handbook/company/communication#top-tips-for-rfcs). If I have a strong opinion that disagrees even with a founder, I have the option to give it a swing anyway, if the decision is reversible.
 
-There’s not an aggressive process that dictates what I can do or how I have to do it. I have the trust of my team to make moves, and I’ll get feedback when I get it wrong. We course-correct into the right path through a sort of social eventual consistency.
+There’s [not an aggressive process](/handbook/values#4-trust-and-feedback-over-process) that dictates what I can do or how I have to do it. I have the trust of my team to make moves, and I’ll get feedback when I get it wrong. We course-correct into the right path through a sort of social eventual consistency.
 
 [Two guaranteed days](/handbook/getting-started/meetings#no-recurring-meeting-days-tuesdaysthursdays) of uninterrupted, *deep work* don’t hurt, either.
 
