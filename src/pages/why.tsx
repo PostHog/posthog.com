@@ -196,9 +196,12 @@ const Teams: React.FC = () => {
                                     PostHog has the lowest pricing for every product
                                 </h2>
                                 <p>
-                                    Sure it's great to have it all in one place, but only if you know you're getting a
-                                    deal. PostHog is always cheaper than the cheapest major competitor so you know you
-                                    should just use what we offer each time.
+                                    Sure, it's great to have it all in one place, but only if you know you're getting a
+                                    deal. 
+                                </p>
+                                <p>   
+                                    PostHog is always cheaper than the cheapest major competitor, so you know you
+                                    can just use what we offer each time.
                                 </p>
                                 <p>
                                     Pretty much every product has a generous free tier so you can always get started
