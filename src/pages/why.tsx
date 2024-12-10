@@ -153,8 +153,8 @@ const Teams: React.FC = () => {
                                     </strong>
                                 </p>
                                 <p>
-                                    All that context in one spot so you can focus on your users and not your data
-                                    engineering to fix endless system integrations.
+                                    We put all the context you need in one place, so you can focus on your users instead of fixing 
+                                    endless data integrations.
                                 </p>
                                 <p>
                                     <strong>We have 10+ products today,</strong> but even if we don't have it, we will
