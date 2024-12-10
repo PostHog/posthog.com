@@ -134,3 +134,13 @@ On your first-year anniversary with PostHog, you will receive a giftcard from [G
 3. You're all set!
 
 The gift will usually arrive on the day of or 1-3 days prior to the anniversary date. Shipping fees: UK shipping is free while all other countries will have shipping fees. 
+
+### 4th year anniversary
+
+On your 4th anniversary at PostHog as a big thank you for sticking with us, you have a choice of 3 gifts:
+
+1. Sage Barista Touch coffee machine
+2. Apple 27-inch 5K Retina Studio Display with standard glass and tilt-adjustable stand
+3. Rimowa luggage set (large trunk, cabin bag, packing cube, toiletries bag)
+
+On the run up to your anniversary Coua will send you a link to the gift options questionnaire, from there Kendal will order it for you! Thank you for making PostHog great!
