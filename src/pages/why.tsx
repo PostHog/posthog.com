@@ -158,9 +158,15 @@ const Teams: React.FC = () => {
                                 </p>
                                 <p>
                                     <strong>We have 10+ products today,</strong> but even if we don't have it, we will
-                                    eventually. We're going to build every piece of SaaS you need to make your product
-                                    successful. You read that right. We've already got the world's best track record at
-                                    delivering them by being the wisest with so many customers.
+                                    eventually. 
+                                </p>
+                                <p>
+                                    We're going to build every piece of SaaS you need to make your product
+                                    successful. You read that right.
+                                </p>     
+                                <p>   
+                                    We've already got the world's best track record at
+                                    delivering them by being the widest with so many customers.
                                 </p>
                                 <p>
                                     You've probably already seen the products we do have. For stuff we don't yet, you
