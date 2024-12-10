@@ -149,7 +149,7 @@ const Teams: React.FC = () => {
                                 <p>
                                     <strong>
                                         PostHog is an entire suite of products that help you build successful
-                                        successful – <em>far more than anyone else.</em>
+                                        products – <em>more so than anyone else.</em>
                                     </strong>
                                 </p>
                                 <p>
