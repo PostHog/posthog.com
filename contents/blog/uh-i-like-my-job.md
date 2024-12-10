@@ -40,7 +40,7 @@ This sat in a GitHub issue, in an internal repo anyone could read.
 
 Every quarter we all get to read the same income statements that investors do. This is only proper: we are all of us investors ourselves, after a fashion, deferring cash today for equity we hope to increase in value tomorrow.
 
-I got into startups 14 years ago, but I’ve never gotten this degree of transparency at work.
+I got into startups 14 years ago, but I’ve never gotten this degree of transparency at work. Being transparent keeps leaders honest.
 
 ## Rigor enables autonomy
 
@@ -62,11 +62,11 @@ From there, it breaks into fractal detail for each area of the business. How eng
 
 But getting there takes ongoing rigor, documented in shared artifacts that let everyone learn the business, not just their own job in the abstract.
 
-I know how PostHog wants to *win*, and how to do my part in it.
+I know how PostHog wants to *win*, and how to do my part in it. Being rigorous prevents hand-waving from taking over the business.
 
 ## 360 feedback
 
-I’m blessed and cursed with inspiring strong reactions from people. Some of them nice! Some of them more complicated.
+I’m blessed and cursed with inspiring strong reactions from people. Some of them nice! Others more complicated.
 
 It has always been this way. In the typical organization, though, I’ve not found particularly strong release valves for strong opinions.
 
@@ -76,7 +76,7 @@ The alternative is deliberately-designed, ongoing 360 [feedback sessions](/newsl
 
 This gives me information to make better choices. I can evaluate the feedback and decide to lean further into places where my strengths are meshing with the team’s needs. I can make more intelligent tradeoffs between my ambitions and how my style impacts other people.
 
-Instead of being in the dark, I can navigate with confidence.
+Instead of being in the dark, I can navigate with confidence. Consistent feedback prevents resentments and poor direction from building up.
 
 ## Fluid org chart
 
