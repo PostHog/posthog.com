@@ -381,10 +381,11 @@ const Teams: React.FC = () => {
                                 </p>
                                 <p>
                                     We have over 100,000 customers using our products. Just under a quarter of a million
-                                    engineers use us. That's far, far more than any other vendor (most have around 1-3K
-                                    customers). It's what happens when the internet loves you. We are the default in
-                                    each YC batch, too (the world's best accelerator for startups) - up to 65% of each
-                                    batch uses our products.
+                                    engineers use us. That's far, far more than any other vendor – most have around 1-3k
+                                    customers. It's what happens when the internet loves you. 
+                                  </p> 
+                                  <p>
+                                    65% of every Y Combinator batch (the world's best accelerator for startups) use our products.
                                 </p>
 
                                 <h2 id="who-doesnt-posthog-work-well-for">Who doesn't PostHog work well for?</h2>
