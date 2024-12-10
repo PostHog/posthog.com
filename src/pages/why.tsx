@@ -363,7 +363,7 @@ const Teams: React.FC = () => {
                                 </p>
 
                                 <p>
-                                    Even our marketing team is mostly engineers. And our salespeople can all write code
+                                    Even our marketing team is mostly engineers. Our salespeople can all write code,
                                     too.
                                 </p>
 
