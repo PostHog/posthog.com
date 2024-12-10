@@ -392,9 +392,11 @@ const Teams: React.FC = () => {
                                 <p>
                                     People who don't like letting their engineering teams make decisions. If you are
                                     happy to let engineering drive in your organization then we're usually a slam dunk.
-                                    Sometimes we might lack the 1000th feature of a particular product we offer compared
-                                    to the leading competitor but we've seen pretty much no one cares about that
-                                    compared to the advantages of it all in one place.
+                                  </p>
+                                  <p>  
+                                    Sometimes we might lack the 1,000th feature of a particular product we offer compared
+                                    to a leading competitor, but we've seen pretty much no one cares about that
+                                    compared to the advantages of having everything in one place.
                                 </p>
 
                                 <h2 id="every-product-has-a-huge-free-tier">Every product has a huge free tier</h2>
