@@ -232,6 +232,26 @@ const comparison = [
         },
     },
     {
+        feature: 'React Native recordings',
+        companies: {
+            Hotjar: false,
+            LogRocket: true,
+            Matomo: false,
+            FullStory: false,
+            PostHog: '<a href="https://github.com/PostHog/posthog/issues/13269">In beta</a>',
+        },
+    },
+    {
+        feature: 'Flutter recordings',
+        companies: {
+            Hotjar: false,
+            LogRocket: false,
+            Matomo: false,
+            FullStory: false,
+            PostHog: '<a href="https://github.com/PostHog/posthog-flutter/issues/69">In beta</a>',
+        },
+    },
+    {
         feature: 'Identity detection',
         companies: {
             Hotjar: false,
