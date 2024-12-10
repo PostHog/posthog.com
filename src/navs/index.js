@@ -1225,6 +1225,10 @@ export const docsMenu = {
                             name: 'Enabling beta features',
                             url: '/docs/getting-started/enable-betas',
                         },
+                        {
+                            name: 'Data import and export',
+                            url: '/docs/getting-started/data-import-export',
+                        },
                     ],
                 },
                 {
@@ -2238,6 +2242,12 @@ export const docsMenu = {
                     color: 'red',
                 },
                 {
+                    name: 'Privacy controls',
+                    url: '/docs/product-analytics/privacy',
+                    icon: 'IconShield',
+                    color: 'orange',
+                },
+                {
                     name: 'Web vitals',
                     url: '/docs/product-analytics/web-vitals',
                     icon: 'IconWrench',
@@ -2295,6 +2305,12 @@ export const docsMenu = {
                     url: '/docs/web-analytics/installation',
                     icon: 'IconBook',
                     color: 'blue',
+                },
+                {
+                    name: 'Getting started',
+                    url: '/docs/web-analytics/getting-started',
+                    icon: 'IconGraduationCap',
+                    color: 'salmon',
                 },
                 {
                     name: 'Dashboard',
