@@ -5,6 +5,7 @@ If your Next.js app to uses the [app router](https://nextjs.org/docs/app), you c
 ```js
 // app/providers.js
 'use client'
+
 import posthog from 'posthog-js'
 import { PostHogProvider } from 'posthog-js/react'
 import { useEffect } from 'react'
@@ -16,7 +17,7 @@ export function PHProvider({ children }) {
       person_profiles: 'identified_only',
       capture_pageview: false // Disable automatic pageview capture, as we capture manually
     })
-  }, []);
+  }, [])
 
   return <PostHogProvider client={posthog}>{children}</PostHogProvider>
 }
@@ -25,22 +26,19 @@ export function PHProvider({ children }) {
 ```tsx
 // app/providers.tsx
 'use client'
+
 import posthog from 'posthog-js'
 import { PostHogProvider } from 'posthog-js/react'
 import { useEffect } from 'react'
 
-export function PHProvider({
-  children,
-}: {
-  children: React.ReactNode
-}) {
+export function PHProvider({ children }: { children: React.ReactNode }) {
     useEffect(() => {
       posthog.init(process.env.NEXT_PUBLIC_POSTHOG_KEY, {
         api_host: process.env.NEXT_PUBLIC_POSTHOG_HOST,
         person_profiles: 'identified_only',
         capture_pageview: false // Disable automatic pageview capture, as we capture manually
       })
-  }, []);
+  }, [])
 
   return <PostHogProvider client={posthog}>{children}</PostHogProvider>
 }
@@ -58,31 +56,37 @@ To do this, we set up a `PostHogPageView` component to listen to URL path change
 // app/PostHogPageView.jsx
 'use client'
 
-import { usePathname, useSearchParams } from "next/navigation";
-import { useEffect } from "react";
-import { usePostHog } from 'posthog-js/react';
+import { usePathname, useSearchParams } from "next/navigation"
+import { useEffect } from "react"
+import { usePostHog } from 'posthog-js/react'
 
-export default function PostHogPageView() {
-  const pathname = usePathname();
-  const searchParams = useSearchParams();
-  const posthog = usePostHog();
+function PostHogPageView() {
+  const pathname = usePathname()
+  const searchParams = useSearchParams()
+  const posthog = usePostHog()
+
+  // Track pageviews
   useEffect(() => {
-    // Track pageviews
     if (pathname && posthog) {
       let url = window.origin + pathname
       if (searchParams.toString()) {
         url = url + `?${searchParams.toString()}`
       }
-      posthog.capture(
-        '$pageview',
-        {
-          '$current_url': url,
-        }
-      )
+
+      posthog.capture('$pageview', { '$current_url': url })
     }
   }, [pathname, searchParams, posthog])
   
   return null
+}
+
+// Wrap this in Suspense to avoid the `useSearchParams` usage above
+// from deopting the whole app into client-side rendering
+// See https://nextjs.org/docs/messages/deopted-into-client-rendering
+export default SuspendedPostHogPageView() {
+  return <Suspense fallback={null}>
+    <PostHogPageView />
+  </Suspense>
 }
 ```
 
@@ -90,39 +94,43 @@ export default function PostHogPageView() {
 // app/PostHogPageView.tsx
 'use client'
 
-import { usePathname, useSearchParams } from "next/navigation";
-import { useEffect } from "react";
-import { usePostHog } from 'posthog-js/react';
+import { usePathname, useSearchParams } from "next/navigation"
+import { useEffect } from "react"
+import { usePostHog } from 'posthog-js/react'
 
-export default function PostHogPageView() : null {
-  const pathname = usePathname();
-  const searchParams = useSearchParams();
-  const posthog = usePostHog();
+function PostHogPageView() : null {
+  const pathname = usePathname()
+  const searchParams = useSearchParams()
+  const posthog = usePostHog()
+
+  // Track pageviews
   useEffect(() => {
-    // Track pageviews
     if (pathname && posthog) {
       let url = window.origin + pathname
       if (searchParams.toString()) {
         url = url + `?${searchParams.toString()}`
       }
-      posthog.capture(
-        '$pageview',
-        {
-          '$current_url': url,
-        }
-      )
+
+      posthog.capture('$pageview', { '$current_url': url })
     }
   }, [pathname, searchParams, posthog])
   
   return null
 }
+
+// Wrap this in Suspense to avoid the `useSearchParams` usage above
+// from deopting the whole app into client-side rendering
+// See https://nextjs.org/docs/messages/deopted-into-client-rendering
+export default SuspendedPostHogPageView() {
+  return <Suspense fallback={null}>
+    <PostHogPageView />
+  </Suspense>
+}
 ```
 
 </MultiLanguage>
 
-Then, import the `PHProvider` component into your `app/layout` file and wrap your app with it. We also dynamically import the `PostHogPageView` component and include it as a child of `PHProvider`.
-
-> **Why is `PostHogPageView` dynamically imported?** It contains the [`useSearchParams`](https://nextjs.org/docs/app/api-reference/functions/use-search-params) hook, which [deopts](https://nextjs.org/docs/messages/deopted-into-client-rendering) the entire app into client-side rendering if it is not dynamically imported.
+Then, import the `PHProvider` component into your `app/layout` file and wrap your app with it. We also import the `PostHogPageView` component and include it as a child of `PHProvider`.
 
 <MultiLanguage>
 
@@ -131,11 +139,7 @@ Then, import the `PHProvider` component into your `app/layout` file and wrap you
 
 import './globals.css'
 import { PHProvider } from './providers'
-import dynamic from 'next/dynamic'
-
-const PostHogPageView = dynamic(() => import('./PostHogPageView'), {
-  ssr: false,
-})
+import PostHogPageView from "./PostHogPageView"
 
 export default function RootLayout({ children }) {
   return (
@@ -156,17 +160,9 @@ export default function RootLayout({ children }) {
 
 import './globals.css'
 import { PHProvider } from './providers'
-import dynamic from 'next/dynamic'
+import PostHogPageView from "./PostHogPageView"
 
-const PostHogPageView = dynamic(() => import('./PostHogPageView'), {
-  ssr: false,
-})
-
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode
-}) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
       <PHProvider>
@@ -205,7 +201,7 @@ export function PHProvider({ children }) {
       capture_pageview: false,
       capture_pageleave: true // Enable pageleave capture
     })
-  }, []);
+  }, [])
 
   return <PostHogProvider client={posthog}>{children}</PostHogProvider>
 }
@@ -217,11 +213,8 @@ export function PHProvider({ children }) {
 import posthog from 'posthog-js'
 import { PostHogProvider } from 'posthog-js/react'
 import { useEffect } from 'react'
-export function PHProvider({
-  children,
-}: {
-  children: React.ReactNode
-}) {
+
+export function PHProvider({ children }: { children: React.ReactNode }) {
   useEffect(() => {
     posthog.init(process.env.NEXT_PUBLIC_POSTHOG_KEY!, {
       api_host: process.env.NEXT_PUBLIC_POSTHOG_HOST,
@@ -229,7 +222,8 @@ export function PHProvider({
       capture_pageview: false,
       capture_pageleave: true // Enable pageleave capture
     })
-  }, []);
+  }, [])
+
   return <PostHogProvider client={posthog}>{children}</PostHogProvider>
 }
 ```
