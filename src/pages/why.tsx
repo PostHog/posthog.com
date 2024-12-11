@@ -148,25 +148,25 @@ const Teams: React.FC = () => {
                                 </h1>
                                 <p>
                                     <strong>
-                                        PostHog is an entire suite of products that help you build successful
-                                        products – <em>more so than anyone else.</em>
+                                        PostHog is an entire suite of products that help you build successful products –{' '}
+                                        <em>more so than anyone else.</em>
                                     </strong>
                                 </p>
                                 <p>
-                                    We put all the context you need in one place, so you can focus on your users instead of fixing 
-                                    endless data integrations.
+                                    We put all the context you need in one place, so you can focus on your users instead
+                                    of fixing endless data integrations.
                                 </p>
                                 <p>
                                     <strong>We have 10+ products today,</strong> but even if we don't have it, we will
-                                    eventually. 
+                                    eventually.
                                 </p>
                                 <p>
-                                    We're going to build every piece of SaaS you need to make your product
-                                    successful. You read that right.
-                                </p>     
-                                <p>   
-                                    We've already got the world's best track record at
-                                    delivering them by being the widest with so many customers.
+                                    We're going to build every piece of SaaS you need to make your product successful.
+                                    You read that right.
+                                </p>
+                                <p>
+                                    We've already got the world's best track record at delivering them by being the
+                                    widest with so many customers.
                                 </p>
                                 <p>
                                     You've probably already seen the products we do have. For stuff we don't yet, you
@@ -174,22 +174,18 @@ const Teams: React.FC = () => {
                                     you need it.
                                 </p>
 
-                                <div className="flex flex-col sm:flex-row justify-between items-baseline">
-                                    <h3 id="popular-roadmap-items" className="mb-3">
-                                        Popular roadmap items
-                                    </h3>
-                                    <div className="hidden sm:inline-flex mb-4 sm:mb-0">
-                                        <Link href="/roadmap" className="text-[15px]">
-                                            Browse full roadmap
-                                        </Link>
-                                    </div>
-                                </div>
+                                <h3 id="popular-roadmap-items" className="mb-3">
+                                    Popular roadmap items
+                                </h3>
                                 <RoadmapPreview />
 
-                                <div className="text-center sm:hidden -mt-4 mb-8">
-                                    <CallToAction href="/roadmap" size="sm" type="secondary">
-                                        Browse the roadmap
-                                    </CallToAction>
+                                <div className="text-center mb-8">
+                                    <Link
+                                        href="/roadmap"
+                                        className="border border-b-3 border-light dark:border-dark p-2 rounded text-center text-sm w-full block hover:bg-white hover:dark:bg-accent-dark hover:border-border hover:dark:border-border-dark hover:border-b-3 relative hover:-top-px active:top-px"
+                                    >
+                                        Explore the roadmap
+                                    </Link>
                                 </div>
 
                                 <h2 id="posthog-has-the-lowest-pricing-for-every-product">
@@ -197,11 +193,11 @@ const Teams: React.FC = () => {
                                 </h2>
                                 <p>
                                     Sure, it's great to have it all in one place, but only if you know you're getting a
-                                    deal. 
+                                    deal.
                                 </p>
-                                <p>   
-                                    PostHog is always cheaper than the cheapest major competitor, so you know you
-                                    can just use what we offer each time.
+                                <p>
+                                    PostHog is always cheaper than the cheapest major competitor, so you know you can
+                                    just use what we offer each time.
                                 </p>
                                 <p>
                                     Pretty much every product has a generous free tier so you can always get started
@@ -238,8 +234,8 @@ const Teams: React.FC = () => {
                                         time on more products
                                     </li>
                                     <li>
-                                        You can <Link href="/pricing">see all our pricing publicly</Link> - other people
-                                        don’t hide it because "iT’s a bEtTeR vAlue!"
+                                        You can <Link href="/pricing">see all our pricing publicly</Link> –{' '}
+                                        <em>there's a reason other companies don't list their pricing!</em>
                                     </li>
                                     <li>
                                         We don’t sell products at a loss - we run the company default alive. This means
@@ -267,8 +263,8 @@ const Teams: React.FC = () => {
                                         <Link href="/handbook/growth/sales/overview">manual for our salespeople</Link>,{' '}
                                         <Link href="/handbook/growth/marketing">marketing team</Link>, and so on. You
                                         can even <Link href="/handbook/people/compensation">see what they’re paid</Link>{' '}
-                                        - it’s all in our public handbook. Even the contentious stuff – there’s a reason
-                                        most companies hide this stuff!
+                                        - it’s all in our public handbook. You won't get this level of transparency from
+                                        most companies!
                                     </li>
                                     <li>So many hedgehogs.</li>
                                 </ul>
@@ -382,21 +378,22 @@ const Teams: React.FC = () => {
                                 <p>
                                     We have over 100,000 customers using our products. Just under a quarter of a million
                                     engineers use us. That's far, far more than any other vendor – most have around 1-3k
-                                    customers. It's what happens when the internet loves you. 
-                                  </p> 
-                                  <p>
-                                    65% of every Y Combinator batch (the world's best accelerator for startups) use our products.
+                                    customers. It's what happens when the internet loves you.
+                                </p>
+                                <p>
+                                    65% of every Y Combinator batch (the world's best accelerator for startups) use our
+                                    products.
                                 </p>
 
                                 <h2 id="who-doesnt-posthog-work-well-for">Who doesn't PostHog work well for?</h2>
                                 <p>
                                     People who don't like letting their engineering teams make decisions. If you are
                                     happy to let engineering drive in your organization then we're usually a slam dunk.
-                                  </p>
-                                  <p>  
-                                    Sometimes we might lack the 1,000th feature of a particular product we offer compared
-                                    to a leading competitor, but we've seen pretty much no one cares about that
-                                    compared to the advantages of having everything in one place.
+                                </p>
+                                <p>
+                                    Sometimes we might not have <em>every</em> feature compared to a leading competitor,
+                                    but we've seen pretty much no one cares about that compared to the advantages of
+                                    having everything in one place – and we'll always keep building!
                                 </p>
 
                                 <h2 id="every-product-has-a-huge-free-tier">Every product has a huge free tier</h2>
