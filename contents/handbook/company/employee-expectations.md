@@ -41,3 +41,7 @@ We expect you to be proactive about answering questions you don't know the answe
 ## Have an opinion
 
 You definitely don't need to have opinions on everything - but you should absolutely have opinions on your area of expertise. If you don't have opinions on your area, you are realistically then just waiting for someone to tell you what to do, which is very much at odds with our atonomous way of working. Opinions can take a bit to form, and that's okay - you don't need to have them on day 1. But we expect you to start forming them rather early on, even if it's just on little things.
+
+## Look around corners
+
+We expect you to be thinking through not only the one change you are making right now, but also how that change plays out down the road. What might happen with this code / process / thing in 6 months? Where will that leave my change today? We do have more senior people on the team (both in industry experience and in their tenure at PostHog), but they shouldn't be the only ones looking ahead - you should be the primary one looking ahead for _your_ changes.
