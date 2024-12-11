@@ -119,6 +119,13 @@ Unqualified: A lead that does not meet the criteria to become an opportunity.
 ### Lead Tiering
 AEs may use the Tier field to categorize leads into different groups based on their potential value to their book of business. This helps in prioritizing leads and focusing on the most promising leads.
 
+#### Tiering Examples
+1. Leads with a high likelihood of converting to an opportunity
+2. Leads with a medium likelihood of converting to an opportunity
+3. Leads with a low likelihood of converting to an opportunity
+4. Leads that are not a good fit for PostHog
+5. Spam / Junk / Unserious leads
+
 ### Best Practices
 - Make sure all new leads are contacted within 24 hours.
 - Keep all lead information up-to-date and accurate in Salesforce.
@@ -242,6 +249,15 @@ Accounts will be assigned to an AE based on one the following criteria:
 
 ### Tiering Accounts
 AEs may use the Tier field to categorize accounts into different groups based on their potential value to their book of business. This helps in prioritizing leads and focusing on the most promising accounts for cross-selling and upselling.
+
+Usage of the Tier field is optional, and how accounts are tiered are up to the discretion of the AE.
+
+### Tiering Examples
+1. Managed Accounts
+2. Accounts with an open opportunity
+3. Accounts you wish to pursue this quarter
+4. Accounts you may want to pursue in the future
+5. Accounts you do not want to pursue
 
 ## All done - now what?
 
