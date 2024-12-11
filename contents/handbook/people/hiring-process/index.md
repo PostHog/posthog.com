@@ -148,7 +148,7 @@ You'll get paid the bonus 3 months from the new team member's start date, and it
 We also welcome external referrals, e.g. from:
 
 *   From our investors
-*   From the PostHog community (the users Slack Group, and posting on our social media profiles for our followers to see)
+*   From the PostHog community (by posting on our social media profiles for our followers to see)
 *   From the YC community (Slack / WhatsApp / Forum)
 
 As a thank you, we will give you $50 credit for our [merch shop](https://merch.posthog.com/).
