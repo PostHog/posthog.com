@@ -523,7 +523,16 @@ export const ProductSessionReplay = () => {
                                 }
                             >
                                 <ul>
-                                    <li>Error tracking and alerting</li>
+                                    <li>
+                                        <Link to="https://github.com/PostHog/posthog/issues/23400" external>
+                                            Error tracking (in progress...)
+                                        </Link>
+                                    </li>
+                                    <li>
+                                        <Link to="https://github.com/PostHog/posthog/issues/14331" external>
+                                            Alerting (in progress...)
+                                        </Link>
+                                    </li>
                                 </ul>
                             </VsCompetitor>
                             <VsPostHog>
