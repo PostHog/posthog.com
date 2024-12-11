@@ -1,19 +1,19 @@
 ---
-title: Documentation
+title: Docs ownerhship
 sidebar: Handbook
 showTitle: true
 ---
 
-## Responsibilities
+## Who owns what?
 
 - **Product teams** are responsible for ensuring their docs are up-to-date. This means:
   - Documenting new features when they're launched.
   - Correcting mistakes reported by users.
-  - Clarifying documentation based on user feedback and support tickets.
+  - Clarifying documentation where needed based on support tickets.
   - Ensuring public betas have documentation which is linked to from feature preview menu
 
 - **Content marketing** is responsible for improving the docs. This means:
-  - Reviewing draft documentation created by product teams.
+  - Reviewing and improving draft documentation created by product teams.
   - Identifying and improving low quality documentation.
   - Ensuring screenshots and other visual elements are up-to-date.
   - Shipping supplementary docs and tutorials based on feedback and emerging use cases.
@@ -24,11 +24,9 @@ showTitle: true
   - In-page elements and components – e.g. light and dark mode screenshots.
   - Website search and other elements that help users find the answers they need.
 
-## Frequently asked questions
-
 ### I'm really busy, can the content team write docs for me?
 
-No. The content team isn't big enough to own all documentation. It also lacks the context necessary to document new features. First drafts of documentation must always come from the relevant product team.
+We can help, but we can't do it all for you. We lack the context necessary to document new features. First drafts of documentation must always come from the relevant product team.
 
 If you need help updating documentation:
 
@@ -39,11 +37,13 @@ If you need help updating documentation:
 
 ### Who should review docs updates?
 
-For larger updates, please tag Lior and/or Ian from the content team, and Cory from the Website & Docs team, in addition to other relevant team members.
+Tag the individual owner from the Contents & Docs team – see [Ownership in Contents & Docs](#ownership-in-content--docs-team) below.
 
 ### How do I add images to my docs?
 
-If you need to add images to your docs, please [upload them to Cloudinary first](/handbook/engineering/posthog-com/assets) and then embed them into the document. You can embed light mode and dark mode versions of the image using this code snippet:
+If you need to add images to your docs, please [upload them to Cloudinary first](/handbook/engineering/posthog-com/assets) and then embed them into the document. 
+
+You can embed light mode and dark mode versions of the image using this code snippet:
 
 ```jsx
 <ProductScreenshot
@@ -53,3 +53,34 @@ If you need to add images to your docs, please [upload them to Cloudinary first]
   alt="Screenshot of the form to create a new holdout"
 />
 ```
+
+## Ownership in Content & Docs team
+
+| &nbsp                           | **Individual owner** |
+|---------------------------------|----------------------|
+| **Alternative guides**          | TBD                  |
+| **AI integrations**             | Lior                 |
+| **Influencer sponsorships**     | Ian                  |
+| **Marketing dashboards**        | Andy                 |
+| **Newsletter**                  | Andy                 |
+| **Newsletter sponsorships**     | Ian                  |
+| **Newsletter sponsorships**     | Ian                  |
+| **SEO (general / technical)**   | Andy                 |
+| **SEO landing pages**           | Andy                 |
+| **Social media**                | Andy                 |
+| **Product comparisons**         | TBD                  |
+| **Where people hear about us**  | Andy                 |
+
+   * Product OS / platform level
+        * Frameworks
+        * Reverse proxy
+        * Migration guides
+        * API
+    * Product analytics
+    * Web analytics
+    * Session replay
+    * Feature flags
+    * Experiments
+    * CDP
+    * Data warehouse
+    * Data pipeline CDP

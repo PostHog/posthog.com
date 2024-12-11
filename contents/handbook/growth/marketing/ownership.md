@@ -6,68 +6,59 @@ showTitle: true
 
 ### Owned by Content & Docs
 
-* Newsletter
-* Social media
-* SEO content
-* Technical SEO
-* Engineering blogs
-* Writing and updating docs & tutorials
-    * Product OS / platform level
-        * Frameworks
-        * Reverse proxy
-        * Migration guides
-        * API
-    * Product analytics
-    * Web analytics
-    * Session replay
-    * Feature flags
-    * Experiments
-    * CDP
-    * Data warehouse
-    * Data pipeline CDP
-* Addressing #docs-feedback
-* Booking influencer sponsorships
-* Newsletter sponsorships
-* Marketing dashboards
-* Product comparisons
-* Where did people hear about PostHog updates
-* Ai integrations / partnerships 
+| &nbsp                           | **Individual owner** |
+|---------------------------------|----------------------|
+| **Alternative guides**          | TBD                  |
+| **AI integrations**             | Lior                 |
+| **Docs & tutorials**            | [See docs ownership](/handbook/content-and-docs/docs)   |
+| **Influencer sponsorships**     | Ian                  |
+| **Marketing dashboards**        | Andy                 |
+| **Newsletter**                  | Andy                 |
+| **Newsletter sponsorships**     | Ian                  |
+| **Newsletter sponsorships**     | Ian                  |
+| **SEO (general / technical)**   | Andy                 |
+| **SEO landing pages**           | Andy                 |
+| **Social media**                | Andy                 |
+| **Product comparisons**         | TBD                  |
+| **Where people hear about us**  | Andy                 |
 
 ## Owned by Words & Pictures
 
-* Paid Ads
-* Updating the changelog
-* Merch design
-* Merch stock / shipping
-* Art requests / hedgehogs
-* Team member profile pics
-* Case studies
-* Partnerships
-* YC batch engagement
-* Startup program
-* Onboarding emails
-* Updating product pages
-* Organizing new product announcements
-* Emailing customers about issues / incidents
-* Emailing customers about new products
-* Responding to complaints / issues on social media
-* Organizing any PostHog events
-* Sponsoring/turning up to other people’s events
-* Transactional emails
-* Automated comms
-* In-app notifications
-* Incident response
-* Public relations
-* Affiliate programs with VCs
-* Referral program
-* Reward packages
-* Billboards, out of home
+| &nbsp                                   | **Individual owner** |
+|-----------------------------------------|----------------------|
+| **Art requests / hedgehogs**            | Lottie               |
+| **Case studies**                        | Joe                  |
+| **Changelog**                           | Joe                  |
+| **Emailing customers**                  | Joe                  |
+| **Events**                              | Joe                  |
+| **Incident response**                   | Joe                  |
+| **In-app notifications**                | Joe                  |
+| **Merch design**                        | Lottie               |
+| **Merch promotion**                     | Lottie               |
+| **Merch stock / shipping**              | Kendall              |
+| **Onboarding emails**                   | Joe                  |
+| **Paid Ads**                            | Joe/Andy             |
+| **Partnerships**                        | Joe                  |
+| **Product announcements**               | Joe                  |
+| **Reward packages**                     | Joe                  |
+| **Startup program**                     | Joe                  |
+| **Team member profile pics**            | Lottie               |
+| **YC batch engagement**                 | Joe                  |
 
 ## Owned by Website & Vibes
 
-* Homepage
-* Pricing page
-* Product page design
-* Community features
-* Website backend
-* Website frontend
+| &nbsp                                   | **Individual owner** |
+|-----------------------------------------|----------------------|
+| **Community features**                  | Cory & Eli           |
+| **Docs layout and navigation**          | Cory & Eli           |
+| **Homepage**                            | Cory & Eli           |
+| **Merch store frontend**                | Cory & Eli           |
+| **Merch store backend**                 | Eli                  |
+| **Max AI**                              | Cory & Eli           |
+| **Pricing page**                        | Cory & Eli           |
+| **Product page design**                 | Cory & Eli           |
+| **Website backend**                     | Eli                  |
+| **Website search**                      | Eli                  |
+
+
+ 
