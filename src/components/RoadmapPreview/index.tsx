@@ -127,15 +127,15 @@ const RoadmapPreview = () => {
 
     return isLoading ? (
         <div className="space-y-2">
-            <div className="h-[90px] bg-accent dark:bg-accent-dark rounded w-full animate-pulse" />
-            <div className="h-[90px] bg-accent dark:bg-accent-dark rounded w-full animate-pulse" />
-            <div className="h-[90px] bg-accent dark:bg-accent-dark rounded w-full animate-pulse" />
-            <div className="h-[90px] bg-accent dark:bg-accent-dark rounded w-full animate-pulse" />
-            <div className="h-[90px] bg-accent dark:bg-accent-dark rounded w-full animate-pulse" />
+            <div className="h-6 bg-accent dark:bg-accent-dark rounded w-full animate-pulse" />
+            <div className="h-6 bg-accent dark:bg-accent-dark rounded w-full animate-pulse" />
+            <div className="h-6 bg-accent dark:bg-accent-dark rounded w-full animate-pulse" />
+            <div className="h-6 bg-accent dark:bg-accent-dark rounded w-full animate-pulse" />
+            <div className="h-6 bg-accent dark:bg-accent-dark rounded w-full animate-pulse" />
         </div>
     ) : (
         <div className="overflow-x-auto -mx-5 md:mx-0">
-            <table className="w-full border-collapse">
+            <table className="w-full border-collapse !mb-1">
                 <thead>
                     <tr className="bg-accent dark:bg-accent-dark">
                         <th className="p-2 !pl-5 md:!pl-2 w-18 text-center">Votes</th>
