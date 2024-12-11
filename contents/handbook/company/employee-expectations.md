@@ -17,7 +17,7 @@ If you've just joined us, there's a lot you probably don't know. That's okay! Ho
 - If it's an internal product
   - We expect you to read our docs
   - We expect you to search through slack
-  - If it's in beta, it might be buggy or missing features - definitely request/report them, but also figure out how to do your job with plan B and plan C if it won't be fixed quickly -- i think this is what we generally call grit
+  - If it's in beta, it might be buggy or missing features - definitely request/report them, but also figure out how to do your job with plan B and plan C if it won't be fixed quickly -- this is what we generally call grit
 - If it's an external product
   - We expect you to read the docs
   - If it takes you more than 10 mins to figure out then ask someone else internally
