@@ -13,6 +13,7 @@ import SidebarSection from 'components/PostLayout/SidebarSection'
 import { Contributor } from 'components/PostLayout/Contributors'
 import { productMenu } from '../navs'
 import RoadmapPreview from 'components/RoadmapPreview'
+import { PRODUCT_COUNT } from '../constants'
 
 const Teams: React.FC = () => {
     const { james, supportTeam } = useStaticQuery(graphql`
@@ -149,7 +150,7 @@ const Teams: React.FC = () => {
                                 <p>
                                     <strong>
                                         PostHog is an entire suite of products that help you build successful products –{' '}
-                                        <em>more so than anyone else.</em>
+                                        <em>we have more products than anyone else.</em>
                                     </strong>
                                 </p>
                                 <p>
@@ -157,21 +158,18 @@ const Teams: React.FC = () => {
                                     of fixing endless data integrations.
                                 </p>
                                 <p>
-                                    <strong>We have 10+ products today,</strong> but even if we don't have it, we will
-                                    eventually.
+                                    <strong>We have {PRODUCT_COUNT}+ products today,</strong> but even if we don't offer
+                                    it <em>yet</em>, we will eventually.
                                 </p>
                                 <p>
                                     We're going to build every piece of SaaS you need to make your product successful.
-                                    You read that right.
+                                    You read that right. We've already got the world's best track record at delivering
+                                    them by being the widest with so many customers.
                                 </p>
                                 <p>
-                                    We've already got the world's best track record at delivering them by being the
-                                    widest with so many customers.
-                                </p>
-                                <p>
-                                    You've probably already seen the products we do have. For stuff we don't yet, you
-                                    can <Link to="/roadmap">see our entire public roadmap</Link> and ask for stuff if
-                                    you need it.
+                                    You've probably already seen the products we do have. For the stuff we don't, you
+                                    can <Link to="/roadmap">see our entire public roadmap</Link> and ask for what you
+                                    need.
                                 </p>
 
                                 <h3 id="popular-roadmap-items" className="mb-3">
@@ -192,16 +190,16 @@ const Teams: React.FC = () => {
                                     PostHog has the lowest pricing for every product
                                 </h2>
                                 <p>
-                                    Sure, it's great to have it all in one place, but only if you know you're getting a
-                                    deal.
+                                    Sure, it's great to have everything you need in one place, but only if you know
+                                    you're getting a deal.
                                 </p>
                                 <p>
-                                    PostHog is always cheaper than the cheapest major competitor, so you know you can
-                                    just use what we offer each time.
+                                    PostHog is always cheaper than the cheapest major competitor, so you know you don't
+                                    have to compare pricing for each new product.
                                 </p>
                                 <p>
-                                    Pretty much every product has a generous free tier so you can always get started
-                                    before paying anything at all.
+                                    And every product has a generous free tier, so you can always try it out before
+                                    paying anything at all.
                                 </p>
 
                                 <h2 id="posthog-just-does-the-right-thing">PostHog just does the right thing</h2>
@@ -231,7 +229,7 @@ const Teams: React.FC = () => {
                                     </li>
                                     <li>
                                         <Link href="/sales">We don't do outbound sales</Link> - we'd rather spend our
-                                        time on more products
+                                        time building more products
                                     </li>
                                     <li>
                                         You can <Link href="/pricing">see all our pricing publicly</Link> –{' '}
@@ -239,8 +237,8 @@ const Teams: React.FC = () => {
                                     </li>
                                     <li>
                                         We don’t sell products at a loss - we run the company default alive. This means
-                                        we’ve never had a layoff, and we don’t take huge risks that means we could
-                                        disappear overnight.
+                                        we’ve never had layoffs, and we don’t take huge risks that could result in the
+                                        company disappearing overnight.
                                     </li>
                                     <li>We don’t screw you on contract terms like auto-renewal.</li>
                                     <li>
@@ -249,8 +247,9 @@ const Teams: React.FC = () => {
                                     </li>
                                     <li>
                                         The way we write our content. <Link href="/posts">Just read it</Link> and you’ll
-                                        get what I mean. It’s more honest and not marketing for the sake of it - it
-                                        actively helps developers build successful products. That’s our mission.
+                                        get what I mean. It’s more honest and not like marketing-speak you've come to
+                                        expect from other companies - it actively helps developers build successful
+                                        products. That’s our mission.
                                     </li>
                                     <li>
                                         PostHog has zero intention of selling our business. We want to see just how
@@ -259,20 +258,23 @@ const Teams: React.FC = () => {
                                         time. It’s our life’s work.
                                     </li>
                                     <li>
-                                        You can also see how our entire company operates - you can see our{' '}
+                                        You can also see how our entire company operates - our{' '}
                                         <Link href="/handbook/growth/sales/overview">manual for our salespeople</Link>,{' '}
                                         <Link href="/handbook/growth/marketing">marketing team</Link>, and so on. You
                                         can even <Link href="/handbook/people/compensation">see what they’re paid</Link>{' '}
                                         - it’s all in our public handbook. You won't get this level of transparency from
                                         most companies!
                                     </li>
-                                    <li>So many hedgehogs.</li>
+                                    <li>
+                                        <Link href="/merch">Cool company merch</Link> you'll actually <em>want</em> to
+                                        wear
+                                    </li>
                                 </ul>
 
                                 <p>
                                     The reason we uniquely love doing all these sorts of things is that{' '}
                                     <strong>
-                                        we grow because of our reputation on the internet whereas every single
+                                        we grow because of our reputation on the internet, whereas every single
                                         competitor grows by salespeople.
                                     </strong>{' '}
                                     We are very, very proudly inbound only. This aligns us with customers. Long term,
@@ -354,8 +356,8 @@ const Teams: React.FC = () => {
                                 <p>
                                     We’ve also got dedicated support people - they’ve all got engineering backgrounds
                                     too. If they can’t answer, you get the OG engineers mentioned above. Frankly our
-                                    support engineers answer most stuff even when it gets deep. We don’t want you
-                                    waiting on our triage.
+                                    support engineers answer most stuff when it gets deep. We don’t want you waiting on
+                                    our triage.
                                 </p>
 
                                 <p>
@@ -364,7 +366,7 @@ const Teams: React.FC = () => {
                                 </p>
 
                                 <p>
-                                    <em>“Everybody codes”</em> even made it to{' '}
+                                    <em>“Everybody codes”</em> has made it to{' '}
                                     <Link href="/handbook/values">our list of values</Link>.
                                 </p>
 
