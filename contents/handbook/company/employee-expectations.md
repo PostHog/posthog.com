@@ -36,6 +36,8 @@ PostHog is a startup. As solid as our stack / product / CI / dev ex is for a com
 
 If you run into something you found that is confusing or needs fixing, we expect you to update the docs or handbook at minimum, and if you're keen then definitely improve the experience yourself. For example, CI is _everyone's_ job. If it sucks, fix it.
 
+That being said, there is often a _reason_ why things are the way they are. That reason might be "because no one wanted to fix it," but it also might be "because it broke yesterday and we're on it" or "we've carefully considered this before and decided to make it this way." We encourage you to step on toes - but don't be a bull in a china shop. Context is oftentimes your best friend - gather it up and keep it close.
+
 ## Don't wait for someone else
 
 We expect you to be proactive about answering questions in your domain, even very early on after you are hired (ie after the first week). Look in the code. Read the docs. Find the answer. 
