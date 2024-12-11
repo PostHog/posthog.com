@@ -78,7 +78,11 @@ const Teams: React.FC = () => {
 
     return (
         <Layout>
-            <SEO title="Why PostHog? - PostHog" description="Why not?" image={`/images/small-teams.png`} />
+            <SEO
+                title="Why PostHog?"
+                description="Because it's literally designed to be a no-brainer"
+                image={`/images/og/why-posthog.png`}
+            />
             <PostLayout
                 title={'Handbook'}
                 hideSurvey
