@@ -149,7 +149,7 @@ The `sanitize()` method receives a dictionary of event properties and should ret
 Then pass your custom sanitizer to `config.propertiesSanitizer` option.  
 
 ```swift
-class SimpleSanitizer: PostHogPropertiesSanitizer {
+class ExampleSanitizer: PostHogPropertiesSanitizer {
     public func sanitize(_ properties: [String: Any]) -> [String: Any] {
         // Create a mutable copy
         var sanitizedProperties = properties
@@ -160,29 +160,6 @@ class SimpleSanitizer: PostHogPropertiesSanitizer {
                 sanitizedProperties.removeValue(forKey: key)
             }
         }
-        return sanitizedProperties
-    }
-}
-```
-
-You can add more complex logic to the sanitize method based on your application’s needs. For example:
-
-```swift
-class AdvancedSanitizer: PostHogPropertiesSanitizer {
-    public func sanitize(_ properties: [String: Any]) -> [String: Any] {
-        // Create a mutable copy
-        var sanitizedProperties = properties
-
-        // Normalize date formats
-        for (key, value) in sanitizedProperties {
-            if let date = value as? Date {
-                sanitizedProperties[key] = ISO8601DateFormatter().string(from: date)
-            }
-        }
-
-        // Add a global property
-        sanitizedProperties["my_app_version"] = "1.0.0"
-
         return sanitizedProperties
     }
 }
