@@ -116,6 +116,9 @@ Unqualified: A lead that does not meet the criteria to become an opportunity.
 - Have they shown interest in our product/service?
 - Are they looking to make a purchasing decision within a reasonable timeframe?
 
+### Lead Tiering
+AEs may use the Tier field to categorize leads into different groups based on their potential value to their book of business. This helps in prioritizing leads and focusing on the most promising leads.
+
 ### Best Practices
 - Make sure all new leads are contacted within 24 hours.
 - Keep all lead information up-to-date and accurate in Salesforce.
@@ -231,6 +234,14 @@ Important notes:
 When moving someone to self-serve we should set them up for success by using the [Post Demo route to self-serve](https://posthog.lightning.force.com/lightning/r/EmailTemplate/00XHp000001vNpqMAE/view). This encourages them to sign up to PostHog Cloud and provides some helpful getting started pointers. If there were any follow-up questions from initial meeting we should answer those in this email as well.
 
 > If you move an opportunity to self-serve then it won't be included in your quota retirement/commission calculation (as you aren't working on it).
+
+## Accounts
+Accounts will be assigned to an AE based on one the following criteria:
+- They're in your book of business, as defined in Vitally
+- You have an open opportunity for them
+
+### Tiering Accounts
+AEs may use the Tier field to categorize accounts into different groups based on their potential value to their book of business. This helps in prioritizing leads and focusing on the most promising accounts for cross-selling and upselling.
 
 ## All done - now what?
 
