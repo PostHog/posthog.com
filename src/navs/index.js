@@ -1100,7 +1100,7 @@ export const companyMenu = {
                 },
                 {
                     name: 'Words & Pictures',
-                    url: '/teams/words-and-pictures',
+                    url: '/teams/words-pictures',
                 },
                 {
                     name: 'Exec',
