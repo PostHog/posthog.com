@@ -216,5 +216,15 @@
         "*.{html,js,ts,tsx,json,yml,css,scss}": "prettier --write",
         "*.{js,ts,tsx}": "eslint"
     },
-    "packageManager": "yarn@1.22.19"
+    "packageManager": "yarn@1.22.19",
+    "browserslist": {
+        "development": [
+            "last 2 chrome versions",
+            "last 2 firefox versions",
+            "last 2 edge versions"
+        ],
+        "production": [
+            "defaults and not op_mini all"
+        ]
+    }
 }
