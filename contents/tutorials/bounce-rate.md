@@ -1,6 +1,6 @@
 ---
 title: How to calculate bounce rate
-date: 2024-12-06
+date: 2024-12-11
 author:
   - ian-vanagas
   - bijan-boustani
@@ -22,7 +22,7 @@ To get started, you need to install the [snippet](/docs/getting-started/install?
 
 ## How do we define bounce rate?
 
-Your bounce rate is the percentage of sessions that resulted in a bounce. A bounce is defined as a session where a visitor:
+Your bounce rate is the percentage of sessions that resulted in a bounce. We define a bounce as a session where a visitor:
 
 - spent less than 10 seconds on a page
 - did not [autocapture](/docs/product-analytics/autocapture) any events
@@ -43,9 +43,9 @@ Your bounce rate is the percentage of sessions that resulted in a bounce. A boun
 
 ## Calculating bounce rate with SQL insights
 
-You can also use [SQL insights](/docs/product-analytics/sql) to calculate bounce rate using the `sessions` table. To create a new SQL insight, go to the **Product analytics** tab, click [new insight](https://app.posthog.com/insights/new), then go to the SQL tab. This is where we write our SQL statements.
+You can also use [SQL insights](/docs/product-analytics/sql) to calculate bounce rate using the `sessions` table. To create a new SQL insight, go to the **Product analytics** tab, click [new insight](https://app.posthog.com/insights/new), then go to the **SQL** tab. This is where we write our SQL statements.
 
-We can use `$is_bounce` to find sessions that meet the default bounce criteria mentioned above. The value of `$is_bounce` is either `1` or `0`, so we can take the average for all sessions to get the bounce rate. Then, we multiply by `100` to view it as a percentage and round to a single decimal place.
+We can use `$is_bounce` to find sessions that meet the default bounce criteria mentioned above. The value of `$is_bounce` is either `1` or `0`, so we can take the average for all sessions to get the bounce rate. We multiply by `100` to view it as a percentage and round to a single decimal place.
 
 ```sql
 SELECT
@@ -56,7 +56,7 @@ FROM
 
 ## Calculating bounce rate for a specific page
 
-To find the bounce rate for sessions that began on a specific page, add a `where` clause to the query with the `$entry_pathname`. For example, this query will find the bounce rate for sessions that started on the home page:
+To find the bounce rate for sessions that begin on a specific page, add a `where` clause to the query with the `$entry_pathname`. For example, this query will find the bounce rate for sessions that started on the home page:
 
 ```sql
 SELECT
@@ -67,9 +67,7 @@ WHERE
     $entry_pathname = '/'
 ```
 
-The query above will only work for sessions that started on the home page. If we want to find the bounce rate for a page without
-
-If we want to find the bounce rate for the `/pricing` page (not just for sessions that started on that page), we'll need to join on the `events` table and filter for pageviews that match the URL.
+The query above will only work for sessions that started on the home page. If we want to find the bounce rate for the `/pricing` page (not only for sessions that started on that page), we'll need to join on the `events` table and filter for pageviews that match the URL.
 
 ```sql
 SELECT
@@ -105,7 +103,7 @@ WHERE
 
 ## Calculating bounce rate with raw session replay data
 
-Another way to calculate the bounce rate is to use the `raw_session_replay_events` table. This allows us to use different criteria that isn't available in the `sessions` data, like `click_count`, `keypress_count`, or `mouse_activity_count`. We can find these in the [database data management](https://app.posthog.com/data-management/database) tab under the `raw_session_replay_events` table.
+Another way to calculate the bounce rate is to use the `raw_session_replay_events` table. This allows us to use different criteria that isn't available in the session data, like `click_count`, `keypress_count`, and `mouse_activity_count`. We can find these in the [database data management](https://app.posthog.com/data-management/database) tab under the `raw_session_replay_events` table.
 
 We can use a `multiIf` statement to check conditions and set new criteria for calculating bounce rate. For example, if we wanted to count bounce rate as the percentage of sessions with fewer than 3 clicks, we can use `click_count < 3` like this:
 
