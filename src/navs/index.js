@@ -2958,6 +2958,10 @@ export const docsMenu = {
                             url: '/docs/cdp/destinations/sendgrid',
                         },
                         {
+                            name: 'TikTok Ads',
+                            url: '/docs/cdp/destinations/tiktok-ads',
+                        },
+                        {
                             name: 'Zapier',
                             url: '/docs/cdp/destinations/zapier',
                         },
