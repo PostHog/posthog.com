@@ -6,7 +6,7 @@ title: Data model
 
 PostHog’s data model starts with **[events](/docs/data/events)**, single actions that a user triggered at a specific point in time. These are sent either from one of our [SDKs](/docs/libraries) or directly via our [API](/docs/api).
 
-These are flexible: they can be captured automatically, via [auto-capture](/docs/product-analytics/autocapture), or you can emit your own [custom events](/docs/getting-started/send-events), attaching additional metadata via [properties](/docs/data/events#event-properties).
+Events are flexible: they can be captured automatically, via [autocapture](/docs/product-analytics/autocapture), or you can emit your own [custom events](/docs/getting-started/send-events), attaching additional metadata via [properties](/docs/data/events#event-properties).
 
 You might create an event to represent purchasing an upgrade, with custom properties like `price` or `renewal_period`.
 
@@ -24,15 +24,17 @@ If a user upgrades to a paid tier, for example, you could set a property called 
 Person profiles need [distinct identifiers](/docs/getting-started/identify-users) so PostHog can accurately track behavior. You might see a few identifiers on each profile: anonymous IDs created before a user has been identified, an ID you set after they log in, and IDs that are created on the client and backend, and later merged together into a single profile.
 
 > **Further reading:**
-
-- [How data is stored in ClickHouse](/docs/how-posthog-works/clickhouse)
-- [How person properties are added to events](/docs/how-posthog-works/ingestion-pipeline#2-person-processing)
+>
+> - [How data is stored in ClickHouse](/docs/how-posthog-works/clickhouse)
+> - [How person properties are added to events](/docs/how-posthog-works/ingestion-pipeline#2-person-processing)
 
 ## Discovering activity
 
 You can create ongoing queries to surface person profiles either according to their properties, or the details of their events. We call these **[cohorts](/docs/data/cohorts)**. If you want to see a list of every user in your paid tier, you could query for all profiles where that `paid_tier` property has been set. Your cohort would then show you a periodically-updated listing of your paid customers.
 
 Alternatively, you might want to understand *group behavior*. By defining **[groups](/docs/product-analytics/group-analytics)**, you can see a cross-section of events across multiple person profiles. This can be helpful if you’re selling to multi-seat customers, and want to understand the overall behavior of their users.
+
+Groups require that you have the [Group analytics add-on](/addons#group-analytics) enabled.
 
 ## Event fields
 
