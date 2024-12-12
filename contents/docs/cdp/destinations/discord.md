@@ -26,12 +26,12 @@ Send event data from PostHog into the Discord server and channel of your choice.
 
 ### PostHog: create a destination
 
-1. Back in PostHog, click the "[Data pipelines](https://us.posthog.com/pipeline/overview)" tab in the left sidebar.
+1. Back in PostHog, click the '[Data pipelines](https://us.posthog.com/pipeline/overview)' tab in the left sidebar.
 2. Click the 'Destinations' tab.
 3. Search for 'Discord' and select the destination.
 4. Add your Webhook URL.
-5. Use the **content** field to format your message. You can include any properties that exist on `event` or `person`.
-6. Use the **filters** panel to set up a query to filter the events you want to send, otherwise you'll get a firehose of all events filling your channel.
+5. Use the **Content** field to format your message. You can include any properties that exist on `event` or `person`.
+6. Use the **Filters** panel to set up a query to filter the events you want to send, otherwise you'll get a firehose of all events filling your channel.
 7. Press **Create & enable**. Events will now be sent to Discord. If you'd like to send a test event to your channel, hit the **Start testing** button.
 
 <HideOnCDPIndex>
