@@ -1,6 +1,6 @@
 ---
 title: How to monitor LlamaIndex apps with Langfuse and PostHog
-date: 2024-12-09
+date: 2024-12-12
 author:
   - lior-neu-ner
 tags:
@@ -10,7 +10,7 @@ tags:
 
 [LlamaIndex](https://www.llamaindex.ai/) is a powerful framework for connecting LLMs with external data sources. By combining PostHog with [Langfuse](https://langfuse.com/), an open-source LLM observability platform, you can easily monitor your LLM app.
 
-In this tutorial, we show you how to set this up by walking you through a simple RAG chat app.
+In this tutorial, we show you how to set this up by walking you through a simple [RAG](https://en.wikipedia.org/wiki/Retrieval-augmented_generation) chat app.
 
 
 ## 1. Set up the sample app
@@ -56,11 +56,11 @@ Settings.llm = llm
 Settings.embed_model = embed_model
 ```
 
-You need to replace `<your_mistral_api_key>` with your actual key. To do this, you first need to [sign up for a Mistral account](https://console.mistral.ai/). Then [subscribe](https://console.mistral.ai/billing/) to a free trial or billing plan, after which you’ll be able to [generate an API key](https://console.mistral.ai/api-keys/)
+You need to replace `<your_mistral_api_key>` with your actual key. To do this, you first need to [sign up for a Mistral account](https://console.mistral.ai/). Then [subscribe](https://console.mistral.ai/billing/) to a free trial or billing plan, after which you’ll be able to [generate an API key](https://console.mistral.ai/api-keys/).
 
 ## 2. Set up monitoring with Langfuse
 
-Next, we set up Langfuse to trace our model generations. [Sign up](https://cloud.langfuse.com/auth/sign-up) for a free Langfuse if you haven't already, create a new project and copy the [API keys](https://langfuse.com/faq/all/where-are-langfuse-api-keys).
+Next, we set up Langfuse to trace our model generations. [Sign up](https://cloud.langfuse.com/auth/sign-up) for a free Langfuse account if you haven't already. Then create a new project and copy the [API keys](https://langfuse.com/faq/all/where-are-langfuse-api-keys).
 
 Paste the keys into the top of `app.py` and instantiate Langfuse:
 
@@ -131,7 +131,7 @@ response = hedgehog_query_engine.query("What is the best way to care for a hedge
 print(response)
 ```
 
-Test the app by running `python app.py`. You should hopefully see a response like the one below 🎉: 
+Test the app by running `python app.py`. You should see a response like the one below 🎉: 
 
 ```
 The best way to care for a hedgehog is to provide it with a suitable 
@@ -152,7 +152,7 @@ All steps of the LLM chain are now tracked in Langfuse and you can view them in 
 
 ## 4. Integrate Langfuse with PostHog
 
-Next we connect Langfuse to PostHog so that you can combine your LLM trace data with your PostHog analytics. This enables to answer product questions such as:
+Next we connect Langfuse to PostHog so that you can combine your LLM trace data with your PostHog analytics. This enables you to answer product questions such as:
 
 - What are my LLM costs by customer, model, and in total?
 - How many of my users are interacting with my LLM features?
