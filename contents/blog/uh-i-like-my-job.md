@@ -44,7 +44,7 @@ I got into startups 14 years ago, but I’ve never gotten this degree of transpa
 
 ## Rigor enables autonomy
 
-I’ve been here two months and no one has made me look at a fucking slideshow.
+I’ve been here two months and no one has made me look at any tedious slideshows.
 
 Slideshows are the refuge of the corporate bullshitter. A means of eliding detail through headlines and text that never quite coheres into an *argument*, and never finds itself as a useful reference in the future.
 
