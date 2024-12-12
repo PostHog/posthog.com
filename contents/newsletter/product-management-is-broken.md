@@ -69,9 +69,9 @@ The reason Karl was right – and why engineers are usually right – is they ha
 
 So we decided to lean into this. At PostHog, PMs no longer own the roadmap, make product decisions, or shield engineers from users or the wider business goals.
 
-Instead, our engineers run the show. They manage product teams. They have complete autonomy and drive our products forward. They even *gasp* [talk to users](https://newsletter.posthog.com/p/talk-to-users).
+Instead, our engineers run the show. They manage product teams. They have complete autonomy and drive our products forward. They even *gasp* [talk to users](/newsletter/talk-to-users).
 
-This is why developers at PostHog are called [product engineers](/what-is-a-product-engineer). We want them to be opinionated and customer obsessed, and that’s only possible if they have genuine autonomy and responsibility for product decisions.
+This is why developers at PostHog are called [product engineers](/blog/what-is-a-product-engineer). We want them to be opinionated and customer obsessed, and that’s only possible if they have genuine autonomy and responsibility for product decisions.
 
 However, if engineers are to make all the decisions, they still need support…
 
@@ -135,7 +135,7 @@ They compile it and put it together in an easy to understand format – here's a
 
 - The PM, engineers and exec team then meet to discuss questions like:
 - Are our 10 biggest customers happy users of the product?
-- Do [high ICP](https://posthog.com/newsletter/ideal-customer-profile-framework) and non-ICP customers use the product differently?
+- Do [high ICP](/newsletter/ideal-customer-profile-framework) and non-ICP customers use the product differently?
 - Why was churn high last month? Can we identify any reasons?
 - Can we find leading indicators that predict long-term product usage? (e.g. Facebook’s 7 friends in 10 days)
 - Where in the onboarding funnel do new users struggle?
@@ -193,7 +193,7 @@ To do this, we set up [communication guidelines](/handbook/company/communication
 
 No more than six people per team. Any more than that and it all goes to hell: more meetings, more process, more bottlenecks, and more bullshit. 💩
 
-Here's how we [keep teams small](https://newsletter.posthog.com/p/the-magic-of-small-engineering-teams) and effective:
+Here's how we [keep teams small](/newsletter/small-teams) and effective:
 
 - Give them a clear mission – e.g. "Make PostHog the best experimentation platform for engineers"
 - Put an engineer in charge
