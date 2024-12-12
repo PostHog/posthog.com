@@ -52,12 +52,13 @@ Feature flag values are calculated based on a user's properties. Since it's poss
 
 By enabling the option to persist feature flags across authentication, you ensure that the flag value remains the same. 
 
+> **Note:** This feature requires `person_profiles: 'always'` to function. Read more [here](/docs/data/anonymous-vs-identified-events)
+
 In our experience, the tradeoffs to enabling this are **not** worthwhile for the majority of our users. They include:
 
 1. **Slower feature flag response:** Enabling this option introduces additional checks, which can slow down the response time when fetching feature flags.
 2. **Incompatible with [local evaluation](/docs/feature-flags/local-evaluation):** It is necessary to perform the additional checks on the PostHog servers.
 3. **Incompatible with [bootstrapping](/docs/feature-flags/bootstrapping):** Bootstrapping relies on local evaluation, which cannot correctly calculate persistent flag values.
-4. **Incompatible with [anonymous events](/docs/data/anonymous-vs-identified-events):** Persistent flags are calculated based on person properties, which are only available for identified events.
 
 ### Served value
 
