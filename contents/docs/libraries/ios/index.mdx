@@ -136,6 +136,35 @@ This will remove the Super Property and subsequent events will not include it.
 
 If you are doing this as part of a user logging out you can instead simply use `PostHogSDK.shared.reset` which takes care of clearing all stored Super Properties and more.
 
+## Amending event properties before they are captured
+
+In case you need to modify or process event properties before they are captured, cached, and sent to PostHog, you can use the `config.propertiesSanitizer` option. 
+
+This feature allows you to define custom logic for sanitizing or transforming properties, ensuring that your event data meets your specific requirements before it is sent over the wire.
+
+To implement this, define a custom sanitizer by creating a class or struct that conforms to the `PostHogPropertiesSanitizer` protocol and implement the `sanitize()` method. 
+
+The `sanitize()` method receives a dictionary of event properties and should return a modified version of the dictionary. 
+
+Then pass your custom sanitizer to `config.propertiesSanitizer` option.  
+
+```swift
+class ExampleSanitizer: PostHogPropertiesSanitizer {
+    public func sanitize(_ properties: [String: Any]) -> [String: Any] {
+        // Create a mutable copy
+        var sanitizedProperties = properties
+        // Perform sanitization
+        // For example, removing keys with empty values
+        for (key, value) in properties {
+            if let stringValue = value as? String, stringValue.isEmpty {
+                sanitizedProperties.removeValue(forKey: key)
+            }
+        }
+        return sanitizedProperties
+    }
+}
+```
+
 ## Flush
 
 You can set the number of events in the configuration that should queue before flushing.

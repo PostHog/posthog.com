@@ -8,4 +8,4 @@ We couldn't think of a better name for this team, so we just called it Words & P
 
 As a team we value being hands-on, putting human needs above internal processes, and sprinkling some chaos into everything we touch.
 
-Check out [our team page](/teams/words-and-pictures) for more info.
+Check out [our team page](/teams/words-pictures) for more info.

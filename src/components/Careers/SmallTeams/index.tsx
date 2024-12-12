@@ -39,7 +39,7 @@ export const SmallTeams = () => {
                         Join a startup <em className="text-red dark:text-yellow block">within a startup</em>
                     </h2>
                     <div className="max-w-xl">
-                        <p>Starting a job at a company of 50+ people can be intimidating!</p>
+                        <p>Starting a job at a company of 70+ people can be intimidating!</p>
                         <p>
                             With our <Link to="/handbook/company/small-teams">small teams</Link> structure, it's like
                             working at a startup <em>within</em> a startup. This allows each team to operate as
