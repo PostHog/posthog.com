@@ -46,7 +46,7 @@ I got into startups 14 years ago, but I’ve never gotten this degree of transpa
 
 I’ve been here two months and no one has made me look at any tedious slideshows.
 
-Slideshows are the refuge of the corporate bullshitter. A means of eliding detail through headlines and text that never quite coheres into an *argument*, and never finds itself as a useful reference in the future.
+Slideshows are the refuge of the corporate snow job artist. A means of eliding detail through headlines and text that never quite coheres into an *argument*, and never finds itself as a useful reference in the future.
 
 Instead, I sat down after lunch on my second day to read PostHog’s handbook. It’s public, [you can read it too](/handbook).
 
