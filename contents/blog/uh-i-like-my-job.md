@@ -36,11 +36,11 @@ My experience of the typical job is that executive decision making is a rat’s 
 
 But my first week on the job, I saw our co-founders writing up some mundane, quarters-long failure of their assumptions, extracting the lesson that could be learned from it.
 
-This sat in a GitHub issue, in an internal repo anyone could read.
+This sat in a GitHub issue, in an internal repo *anyone* could read.
 
-Every quarter we all get to read the same income statements that investors do. This is only proper: we are all of us investors ourselves, after a fashion, deferring cash today for equity we hope to increase in value tomorrow.
+Every quarter we all get to read the same income statements investors do. This is only proper: we are all of us investors ourselves, after a fashion, deferring cash today for equity we hope to increase in value tomorrow.
 
-I got into startups 14 years ago, but I’ve never gotten this degree of transparency at work. Being transparent keeps leaders honest.
+I got into startups 14 years ago, but I’ve never gotten this degree of transparency at work. Transparency keeps leaders honest, and this filters down to everyone.
 
 ## Rigor enables autonomy
 
