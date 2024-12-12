@@ -9,8 +9,9 @@ featuredImage: >-
 featuredImageType: full
 tags:
   - Engineering
+  - Product
+  - Culture
 crosspost:
-  - Product engineers
   - Founders
   - Blog
 ---
