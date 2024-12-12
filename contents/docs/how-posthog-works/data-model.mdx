@@ -10,18 +10,18 @@ Events are flexible: they can be captured automatically, via [autocapture](/docs
 
 You might create an event to represent purchasing an upgrade, with custom properties like `price` or `renewal_period`.
 
-Meanwhile, users of your product are given a **[person profile](/docs/data/persons)**, which gather these events. Person profiles similarly contain properties. Some properties are set automatically:
+Meanwhile, users of your product are given a **[person profile](/docs/data/persons)**, which gather these events. Person profiles similarly contain properties. Some are set automatically:
 
 - browser details
 - geo IP data
 - referrers
 - UTM values
 
-You can also set your own properties on them, which will appear in reports and data tables.
+You can also set your own properties on person profiles, which will appear in reports and data tables.
 
 If a user upgrades to a paid tier, for example, you could set a property called `paid_tier` with the details.
 
-Person profiles need [distinct identifiers](/docs/getting-started/identify-users) so PostHog can accurately track behavior. You might see a few identifiers on each profile: anonymous IDs created before a user has been identified, an ID you set after they log in, and IDs that are created on the client and backend, and later merged together into a single profile.
+Person profiles need [distinct identifiers](/docs/getting-started/identify-users), so PostHog can accurately track behavior. You might see a few identifiers on each profile: anonymous IDs created before a user has been identified, an ID you set after they log in, and IDs that are created on the client and backend, and later merged together into a single profile.
 
 > **Further reading:**
 >
