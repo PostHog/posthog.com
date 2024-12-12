@@ -38,7 +38,7 @@ But my first week on the job, I saw our co-founders writing up some mundane, qua
 
 This sat in a GitHub issue, in an internal repo *anyone* could read.
 
-Every quarter we all get to read the same income statements that investors do. This is only proper: we are all of us investors ourselves, after a fashion, deferring cash today for equity we hope to increase in value tomorrow.
+Every quarter we all get to read the same income statements investors do. This is only proper: we are all of us investors ourselves, after a fashion, deferring cash today for equity we hope to increase in value tomorrow.
 
 I got into startups 14 years ago, but I’ve never gotten this degree of transparency at work. Being transparent keeps leaders honest.
 
