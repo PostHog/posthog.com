@@ -2898,6 +2898,10 @@ export const docsMenu = {
                             url: '/docs/cdp/destinations/customerio',
                         },
                         {
+                            name: 'Discord',
+                            url: '/docs/cdp/destinations/discord',
+                        },
+                        {
                             name: 'Engage.so',
                             url: '/docs/cdp/destinations/engage',
                         },
