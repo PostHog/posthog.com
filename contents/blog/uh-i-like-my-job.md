@@ -92,7 +92,7 @@ Instead, when we notice such a mismatch, a team’s *actual* strengths can be co
 
 Even better, the org chart is descriptive, not prescriptive. It’s not a declaration of turf.
 
-I got to ship a new feature for our data pipelines product in my second week. *That’s not even my department*. So damn much fun.
+I got to ship a new feature for our data pipelines product in my second week. *That’s not even my department*[^1]. So damn much fun.
 
 ## Operational curiosity
 
@@ -124,3 +124,4 @@ By month two I’m usually anxiously glancing at the exits. The endless paper cu
 
 I didn’t think they still made startups like this. But the more I think about it, I’m not sure they ever did.
 
+[^1]: I wasn't really *looking* for a job. But I thought PostHog was extremely cool, and then they sniped my attention with a perfect listing called "developer who loves writing." I *love* writing. I *am* a developer. This knocked me entirely off balance, to the point where I had to end every interview saying "clearly I badly want to work at PostHog, so if there's something you're unsure about, let's talk about it." If it's genuinely true, this tack can be extremely helpful. A couple of my counterparts chuckled and gave me advice for the next round, and it was nice not to be in suspense. In any case, the job is what was promised: no one is mad if I write some code alongside the writing.
