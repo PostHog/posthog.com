@@ -64,7 +64,7 @@ Clicking through to an individual group shows you all the associated exceptions,
 
 PostHog attempts to group the same exceptions as a single issue. An `$exception_fingerprint` property is generated during ingestion by PostHog and used to perform this grouping. Setting the `$exception_fingerprint` property on the frontend will override the default flow to allow for custom grouping of certain exceptions.
 
-If using the `captureException` method you can provide `$exception_fingerprint` as an additional property in the functions second argument.
+When using the `captureException` method you can provide `$exception_fingerprint` as an additional property in the functions second argument.
 
 ```js
 posthog.captureException(error, { $exception_fingerprint: "MyCustomGroup" })
