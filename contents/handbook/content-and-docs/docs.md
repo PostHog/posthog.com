@@ -4,8 +4,6 @@ sidebar: Handbook
 showTitle: true
 ---
 
-## Who owns what?
-
 - **Product teams** are responsible for ensuring their docs are up-to-date. This means:
   - Documenting new features when they're launched.
   - Correcting mistakes reported by users.
@@ -54,33 +52,66 @@ You can embed light mode and dark mode versions of the image using this code sni
 />
 ```
 
-## Ownership in Content & Docs team
+## Docs ownership in Content & Docs team
+
+We aim to have a named individual for most areas of the docs, but this doesn't preclude anyone working on any part of the docs they deem necessary.
+
+### Product OS
 
 | &nbsp                           | **Individual owner** |
 |---------------------------------|----------------------|
-| **Alternative guides**          | TBD                  |
-| **AI integrations**             | Lior                 |
-| **Influencer sponsorships**     | Ian                  |
-| **Marketing dashboards**        | Andy                 |
-| **Newsletter**                  | Andy                 |
-| **Newsletter sponsorships**     | Ian                  |
-| **Newsletter sponsorships**     | Ian                  |
-| **SEO (general / technical)**   | Andy                 |
-| **SEO landing pages**           | Andy                 |
-| **Social media**                | Andy                 |
-| **Product comparisons**         | TBD                  |
-| **Where people hear about us**  | Andy                 |
+| **Overview**                    | Website & Vibes      |
+| **Start here**                  |                      |
+| **SDKs**                        |                      |
+| **Framework guides**            | Lior                 |
+| **Reverse proxy**               | Ian                  |
+| **Migrate**                     | Ian                  |
+| **Advanced**                    |                      |
+| **Data**                        |                      |
+| **HogQL**                       | Ian                  |
+| **API**                         | Ian                  |
+| **Alerts**                      | Bijan                |
 
-   * Product OS / platform level
-        * Frameworks
-        * Reverse proxy
-        * Migration guides
-        * API
-    * Product analytics
-    * Web analytics
-    * Session replay
-    * Feature flags
-    * Experiments
-    * CDP
-    * Data warehouse
-    * Data pipeline CDP
+### Product analytics
+
+| &nbsp                           | **Individual owner** |
+|---------------------------------|----------------------|
+| **Installation**                | Lior                 |
+| **Capturing events**            | Lior                 |
+| **Identifying users**           | Lior                 |
+| **Person properties**           | Ian                  |
+| **Group analytics**             | Lior                 |
+| **Best practices**              | Lior                 |
+| **FAQ**                         |                      |
+| **Trends**                      | Andy                 |
+| **Dashboards**                  | Andy                 |
+| **User paths**                  | Lior                 |
+| **Correlation analysis**        | Lior                 |
+| **Retention**                   | Andy                 |
+| **Lifecyle**                    | Lior                 |
+| **SQL**                         | Ian                  |
+| **Autocapture**                 | Ian                  |
+| **Privacy controls**            | Lior                 |
+
+### Other products
+
+| &nbsp                           | **Individual owner** |
+|---------------------------------|----------------------|
+| **Web analytics**               | Bijan                |
+| **Session replay**              |                      |
+| **Feature flags**               | Ian                  |
+| **Experiments**                 | Lior                 |
+| **Surveys**                     | Bijan                |
+| **Data pipelines**              | Danilo               |
+| **Data warehouse**              | Ian                  |
+
+
+
+
+
+
+
+
+
+
+
