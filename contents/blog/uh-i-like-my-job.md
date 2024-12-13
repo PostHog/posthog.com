@@ -1,13 +1,14 @@
 ---
+title: Inside my first months at PostHog
 date: 2024-12-12
-title: Uh, I like my job?
-rootPage: /blog
-sidebar: Blog
-showTitle: true
-hideAnchor: true
 author:
-  - danilo-campos
-category: Culture, People
+ - danilo-campos
+rootpage: /blog
+featuredImage: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/posthog-vs-ga4/posthog-vs-ga4.jpeg
+featuredImageType: full
+tags:
+ - People
 ---
 
 I never thought it would happen to me.
@@ -106,7 +107,7 @@ But certainty is a trap for anyone trying something genuinely new. Curiosity, me
 
 So everyone at PostHog is free to try, to fuck up, [to discover](/handbook/company/communication#top-tips-for-rfcs). If I have a strong opinion that disagrees even with a founder, I have the option to give it a swing anyway, if the decision is reversible.
 
-There’s [not an aggressive process](/handbook/values#4-trust-and-feedback-over-process) that dictates what I can do or how I have to do it. I have the trust of my team to make moves, and I’ll get feedback when I get it wrong. We course-correct into the right path through a sort of social eventual consistency.
+There’s [not an aggressive process](/handbook/values#4-trust-and-feedback-over-process) that dictates what I can do or how I have to do it. I have the trust of my team to make moves, and I’ll get feedback when I get it wrong. We course-correct into the right path through a sort of social eventual consistency[^2].
 
 [Two guaranteed days](/handbook/getting-started/meetings#no-recurring-meeting-days-tuesdaysthursdays) of uninterrupted, *deep work* don’t hurt, either.
 
@@ -127,3 +128,5 @@ By month two I’m usually anxiously glancing at the exits. The endless paper cu
 I didn’t think they still made startups like this. But the more I think about it, I’m not sure they ever did.
 
 [^1]: I wasn't really *looking* for a job. But I thought PostHog was extremely cool, and then they sniped my attention with a perfect listing called "developer who loves writing." I *love* writing. I *am* a developer. This knocked me entirely off balance, to the point where I had to end every interview saying "clearly I badly want to work at PostHog, so if there's something you're unsure about, let's talk about it." If it's genuinely true, this tack can be extremely helpful. A couple of my counterparts chuckled and gave me advice for the next round, and it was nice not to be in suspense. In any case, the job is what was promised: no one is mad if I write some code alongside the writing.
+
+[^2]: To really torture the distributed systems metaphor, it seems like most orgs degrade into a sort of strong, sequential consistency model. Everything has to pass through a handful of centralized approval processes, and only according to a timeline agreed upon in advance. This has the effect of being not only slow, but also discouraging proactive effort and course-correction altogether. Such centralized resources are finite – we have only so many hours in a day – so their reflex becomes one of saying "no" instead of collaboration and problem solving. Taken far enough, this desperate need for predictability and absolute control straightjackets the business, leaving it helpless to evolve to meet new circumstances. In creating single points of failure, it can also lead to extended paralysis if a key decision maker is taken off the board. It's surprising just how early in a startup's life this can happen, and delightful how aggressively PostHog has designed against it.
