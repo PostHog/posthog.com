@@ -88,7 +88,7 @@ We aim to have a named individual for most areas of the docs, but this doesn't p
 | **User paths**                  | Lior                 |
 | **Correlation analysis**        | Lior                 |
 | **Retention**                   | Andy                 |
-| **Lifecyle**                    | Lior                 |
+| **Lifecycle**                    | Lior                 |
 | **SQL**                         | Ian                  |
 | **Autocapture**                 | Ian                  |
 | **Privacy controls**            | Lior                 |
