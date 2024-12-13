@@ -247,10 +247,6 @@ export const handbookSidebar = [
                 url: '/handbook/content-and-docs',
             },
             {
-                name: 'Content strategy ',
-                url: '/handbook/content-and-docs/content',
-            },
-            {
                 name: 'Docs ownership',
                 url: '/handbook/content-and-docs/docs',
             },
@@ -262,31 +258,31 @@ export const handbookSidebar = [
                 name: 'YouTube',
                 url: '/handbook/content-and-docs/youtube',
             },
-        ],
-    },
-    {
-        name: 'Writing for PostHog',
-        url: '',
-        children: [
             {
-                name: 'Overview',
-                url: '/handbook/content-and-docs/writing-for-posthog',
-            },
-            {
-                name: 'SEO best practices',
-                url: '/handbook/content-and-docs/seo-guide',
-            },
-            {
-                name: 'Style guide',
-                url: '/handbook/content-and-docs/posthog-style-guide',
-            },
-            {
-                name: 'Tags and categories',
-                url: '/handbook/content-and-docs/tags-and-categories',
-            },
-            {
-                name: 'Content components',
-                url: '/handbook/content-and-docs/components',
+                name: 'Writing for PostHog',
+                url: '',
+                children: [
+                    {
+                        name: 'Overview',
+                        url: '/handbook/content-and-docs/writing-for-posthog',
+                    },
+                    {
+                        name: 'SEO best practices',
+                        url: '/handbook/content-and-docs/seo-guide',
+                    },
+                    {
+                        name: 'Style guide',
+                        url: '/handbook/content-and-docs/posthog-style-guide',
+                    },
+                    {
+                        name: 'Tags and categories',
+                        url: '/handbook/content-and-docs/tags-and-categories',
+                    },
+                    {
+                        name: 'Content components',
+                        url: '/handbook/content-and-docs/components',
+                    },
+                ],
             },
         ],
     },

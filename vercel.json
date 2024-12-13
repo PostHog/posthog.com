@@ -1440,6 +1440,46 @@
         {
             "source": "/docs/data-warehouse/setup/",
             "destination": "/docs/data-warehouse/query/"
+        },
+        {
+            "source": "/handbook/growth/marketing/content",
+            "destination": "/handbook/content-and-docs"
+        },
+        {
+            "source": "/handbook/company/docs",
+            "destination": "/handbook/content-and-docs/docs"
+        },
+        {
+            "source": "/handbook/growth/marketing/newsletter",
+            "destination": "/handbook/content-and-docs/newsletter"
+        },
+        {
+            "source": "/handbook/growth/marketing/youtube",
+            "destination": "/handbook/content-and-docs/youtube"
+        },
+        {
+            "source": "/handbook/growth/marketing/writing-for-posthog",
+            "destination": "/handbook/content-and-docs/writing-for-posthog"
+        },
+        {
+            "source": "/handbook/growth/marketing/seo-guide",
+            "destination": "/handbook/content-and-docs/seo-guide"
+        },
+        {
+            "source": "/handbook/growth/marketing/posthog-style-guide",
+            "destination": "/handbook/content-and-docs/posthog-style-guide"
+        },
+        {
+            "source": "/handbook/growth/marketing/tags-and-categories",
+            "destination": "/handbook/content-and-docs/tags-and-categories"
+        },
+        {
+            "source": "/handbook/growth/marketing/components",
+            "destination": "/handbook/content-and-docs/components"
+        },
+        {
+            "source": "/handbook/growth/marketing/paid",
+            "destination": "/handbook/words-and-pictures/paid"
         }
     ]
 }
