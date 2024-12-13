@@ -52,7 +52,7 @@ You can also view the list [directly in GitHub](https://github.com/PostHog/posth
 | Project Home Page | [Team Product Analytics][Team Product Analytics]  | <span class="lemon-tag gh-tag">feature/home</span> |
 | Property Filters | [Team Product Analytics][Team Product Analytics]  | <span class="lemon-tag gh-tag">feature/filters</span>  |
 | Replay | [Team Replay][Team Replay]  |  <span class="lemon-tag gh-tag">feature/replay</span> |
-| SDKs | Core updates owned by [Team CDP][Team CDP]. Features owned by the relevant Small Team, or try #feature-client-libraries  | <span class="lemon-tag gh-tag">feature/pipeline</span> |
+| SDKs | Shared responsibility with features owned by the relevant Small Team, or try #feature-client-libraries  | <span class="lemon-tag gh-tag">feature/pipeline</span> |
 | Security | [Team Infrastructure][Team Infrastructure] though it is every teams job to consider and react to security issues |  <span class="lemon-tag gh-tag">feature/security</span> |
 | Self-hosting | [Team Infrastructure][Team Infrastructure]  |  <span class="lemon-tag gh-tag">feature/self-hosting</span> |
 | Session Analytics | [Team Product Analytics][Team Product Analytics]  |  <span class="lemon-tag gh-tag">feature/sessions</span> |
