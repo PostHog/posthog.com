@@ -20,7 +20,7 @@ You'll also need access to the relevant Meta Ads account.
 3. Search for **Meta Ads Conversions** and select the destination.
 
 4. Visit the [Meta Events Manager](https://business.facebook.com/events_manager2/overview).
-   1. Note: If you’ve already set up a Pixel for your website, we recommend that you use the same Pixel ID for your browser and server events.
+   1. If you’ve already set up a Pixel for your website, we recommend that you use the same Pixel ID for your browser and server events.
       1. To create a new Pixel, click **Connect data** and select **Web**.
       2. For the connection method, select **Set up manually** and **Conversions API**.
    2. Go to your Pixel via **Data sources**.
