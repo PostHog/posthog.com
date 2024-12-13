@@ -60,11 +60,13 @@ config.sessionReplayConfig.maskAllTexts = false;
 /// Enable masking of all images.
 /// Default: true.
 config.sessionReplayConfig.maskAllImages = false;
-/// Debouncer delay used to reduce the number of snapshots captured and reduce performance impact.
+/// Throttling delay used to reduce the number of snapshots captured and reduce performance impact.
 /// This is used for capturing the view as a screenshot.
 /// The lower the number, the more snapshots will be captured but higher the performance impact.
+/// Experimental support.
 /// Defaults to 1s.
-config.sessionReplayConfig.debouncerDelay = const Duration(milliseconds: 1000);
+/// Ps: it was called [debouncerDelay] until version 4.7.1
+config.sessionReplayConfig.throttleDelay = const Duration(milliseconds: 1000);
 ```
 
 ## Limitations

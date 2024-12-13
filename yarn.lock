@@ -18005,10 +18005,10 @@ postcss@^8.4.23:
     picocolors "^1.0.0"
     source-map-js "^1.0.2"
 
-posthog-js@1.194.6:
-  version "1.194.6"
-  resolved "https://registry.yarnpkg.com/posthog-js/-/posthog-js-1.194.6.tgz#58fd5d2b1b4a125573ba6fcf546e0fb92142085d"
-  integrity sha512-5g5n7FjWLha/QWVTeWeMErGff21v4/V3wYCZ2z8vAbHaCyHkaDBEbuM756jMFBQMsq3HJcDX9mlxi2HhAHxq2A==
+posthog-js@1.198.0:
+  version "1.198.0"
+  resolved "https://registry.yarnpkg.com/posthog-js/-/posthog-js-1.198.0.tgz#da75874f7ea6b677f99d26489f1dbcbe9cfc2de0"
+  integrity sha512-QvXaLW9OTIWoXzFf9lAeVVN7q1exBjVi8Piygz771AvpnySloFrfHntFgnU0eMYSM199psANOtNlmqckG8YdfQ==
   dependencies:
     core-js "^3.38.1"
     fflate "^0.4.8"
@@ -19479,6 +19479,11 @@ remark@^10.0.1:
     remark-parse "^6.0.0"
     remark-stringify "^6.0.0"
     unified "^7.0.0"
+
+remove-markdown@^0.5.5:
+  version "0.5.5"
+  resolved "https://registry.yarnpkg.com/remove-markdown/-/remove-markdown-0.5.5.tgz#52913da6204391232cbce5a1bf2c26f990bdf8e0"
+  integrity sha512-lMR8tOtDqazFT6W2bZidoXwkptMdF3pCxpri0AEokHg0sZlC2GdoLqnoaxsEj1o7/BtXV1MKtT3YviA1t7rW7g==
 
 remove-trailing-separator@^1.0.1:
   version "1.1.0"

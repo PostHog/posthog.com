@@ -20,7 +20,7 @@ If there are specific elements you don't want to capture, add the [`ph-no-captur
 <button class='ph-no-capture'>Sensitive information here</button>
 ```
 
-## Sanitize properties
+## Sanitize properties on the client
 
 You can sanitize properties on the client side by setting the `sanitize_properties` [config](/docs/libraries/js#config) option. This is a function that enables you to modify the properties before they are sent to PostHog. For example:
 
@@ -35,10 +35,6 @@ posthog.init('<ph_project_api_key>', {
     }
 });
 ```
-
-## Sanitize properties on the client
-
-Additionally, you can set [allow or ignore lists](/docs/product-analytics/autocapture#reducing-events-with-an-allow-and-ignorelist) in your PostHog config to prevent specific elements from being captured.
 
 ## Use the property filter app
 

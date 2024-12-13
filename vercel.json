@@ -11,6 +11,7 @@
             "source": "/handbook/growth/marketing/product-announcements",
             "destination": "/handbook/words-and-pictures/product-announcements"
         },
+        { "source": "/teams/words-and-pictures", "destination": "/teams/words-pictures" },
         { "source": "/tutorials/nps-survey", "destination": "/templates/nps-survey" },
         { "source": "/questions/topics/:path*", "destination": "/questions/topic/:path*" },
         { "source": "/docs/sdks/:path*", "destination": "/docs/libraries/:path*" },
