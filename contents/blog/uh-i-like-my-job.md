@@ -73,7 +73,7 @@ I’m blessed and cursed with inspiring strong reactions from people. Some of th
 
 It has always been this way. In the typical organization, though, I’ve not found particularly strong release valves for strong opinions.
 
-A quarter into my second job, post-college, my boss blew his top at me, and we both spent a good half hour crying and talking it out.
+A quarter into my second job, post-college, my boss blew his top at me, and we both spent a good half-hour crying and talking it out.
 
 The alternative is deliberately-designed, ongoing 360 [feedback sessions](/newsletter/how-to-give-feedback) among teammates. 45 days into this job I got to hear candidly what people liked, what people wanted more of, and in a few cases, what people found grating in me.
 
