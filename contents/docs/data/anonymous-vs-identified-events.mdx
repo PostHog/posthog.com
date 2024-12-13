@@ -154,12 +154,6 @@ Since identified events are associated with a person profile, processing and que
 
 This [post](/blog/analytics-pricing#why-are-anonymous-events-so-much-cheaper) goes into more detail.
 
-### Why does PostHog capture identified events by default?
-
-This is required for backwards compatiability. Previously, all events were captured as identified events. When we added anonymous events, we didn't want to change the default behavior since that could cause issues with existing users.
-
-However, since anonymous events are cheaper to capture, we recommend capturing them by default.
-
 ### Why am I being charged for both "events" and "persons"
 
 We're not charging you for both. The person profiles line item you see on your invoice is a number of identified events captured. The events line item is the total number of anonymous events captured.
