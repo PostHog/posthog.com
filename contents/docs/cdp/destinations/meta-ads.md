@@ -27,7 +27,7 @@ You'll also need access to the relevant Meta Ads account.
    3. Switch to the **Settings** tab and your Pixel ID will be listed as **Dataset ID**.
    4. You can create an access token by clicking **Generate access token**.
 
-5. Back in PostHog, add the Pixel ID and Access token to the destination configuration.
+5. Back in PostHog, add the access token and Pixel ID to the destination configuration.
 
 6. Set up your event and property filters to remove unnecessary events. You only want to send events that are conversions. Filter out unrelated events or ones missing required data.
 
