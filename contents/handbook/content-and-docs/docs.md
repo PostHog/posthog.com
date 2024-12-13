@@ -104,14 +104,3 @@ We aim to have a named individual for most areas of the docs, but this doesn't p
 | **Surveys**                     | Bijan                |
 | **Data pipelines**              | Danilo               |
 | **Data warehouse**              | Ian                  |
-
-
-
-
-
-
-
-
-
-
-
