@@ -20,7 +20,7 @@ You can also view the list [directly in GitHub](https://github.com/PostHog/posth
 |---|---|---|
 | Actions | [Team Product Analytics][Team Product Analytics]  | <span class="lemon-tag gh-tag">feature/actions</span> |
 | Annotations | [Team Product Analytics][Team Product Analytics]  | <span class="lemon-tag gh-tag">feature/annotations</span> |
-| API Structure | Security + core updates owned by [Team CDO][Team CDP]. Features owned by the relevant small team | <span class="lemon-tag gh-tag">feature/api-structure</span> |
+| API Structure | Security + core updates owned by [Team CDP][Team CDP]. Features owned by the relevant small team | <span class="lemon-tag gh-tag">feature/api-structure</span> |
 | Async migrations | [Team CDP][Team CDP]  | <span class="lemon-tag gh-tag">feature/async-migrations</span> |
 | Batch exports | [Team Batch Exports](/teams/batch-exports)  | <span class="lemon-tag gh-tag">feature/batch-exports</span> |
 | BI | [Team Data Warehouse](/teams/data-warehouse)  |  <span class="lemon-tag gh-tag">feature/dashboards</span> |
