@@ -1,5 +1,5 @@
 ---
-title: "7 practical uses for PostHog alerts"
+title: '7 practical uses for PostHog alerts'
 date: 2024-12-16
 author:
  - bijan-boustani
@@ -12,24 +12,21 @@ tags:
 
 To keep life interesting, it's important to live in a state of perpetual ignorance. When things are going well, there's no need to find out why. When things go south, let anxiety run its course.
 
-![Homer covers his eyes while driving]()
-
-> "Ignorance is bliss."
-> – Not Sun Tzu, probably
+![Homer covers his eyes](https://res.cloudinary.com/dmukukwp6/image/upload/319051_c8e072f85e.gif)
 
 An alternative, less exciting, approach to life is to become aware as things change. For example, you can use PostHog's new alert features to receive notifications based on your [insights](/docs/product-analytics/insights).
 
-You can track important metrics, and get email notifications if they cross threshold you specify. The threshold can be an absolute value (e.g. pageviews exceeded 1,000) or a relative amount (e.g. conversion rate increased by 10%).
+You can track important metrics, and get email notifications if they cross threshold that you specify. The threshold can be an absolute value (e.g. pageviews exceeded 1,000) or a relative amount (e.g. conversion rate increased by 10%).
 
-So, instead of having to remember to check in on the status of a project, a feature, or a metric; you can receive an email alert as soon as changes happen.
+So, instead of having to remember to check in on the status of a a metric or feature; you can receive an email alert when changes occur.
 
 Let's get started with how to create alerts, and then we can dive into some practical examples of how alerts can be helpful.
 
 ## How to create alerts
 
-Alerts are based on your [insights](/docs/product-analytics/insights). You can select from your existing [trends](/docs/product-analytics/trends/overview), or create a new one.
+Alerts are based on your [insights](/docs/product-analytics/insights). You can select from your existing trends, or create a new one.
 
-To create an alert, click the **Alerts** button on the top right of the insight page. And then click **New alert**.
+To create an alert, click the **Alerts** button on the top right of the insight page.
 
 <ProductScreenshot
     imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/alerts_button_4ecd022cd6.png"
@@ -38,13 +35,13 @@ To create an alert, click the **Alerts** button on the top right of the insight 
     classes="rounded"
 />
 
-To configure an alert, we'll set all of the following:
+To configure a new alert, we'll set all of the following:
 
 - **Name:** this is the name you'll see when the alert fires.
-- **Series:** these are the data points you're showing in the graph. For example, you could have a trend insight that tracks the number of pageviews and signups. And you can use either of these series as the basis for the alert threshold.
-- **Alert Type:**
-  - Absolute value: check if the series is more than or less than a specified amount.
-  - Relative value: check if the series has increased or decreased by a specified amount. These can also be configured with a percentage instead of a static value (signups increased by 10%).
+- **When:** select the data points the alert will be based on. The drop-down contains a list of all the series your insight's graph. For example, if you have an insight that tracks the number of pageviews and signups, you can use either of these series as the basis for the alert threshold.
+- **Type:**
+  - **Absolute value:** check if the series is more than or less than a specified amount.
+  - **Relative value:** check if the series has increased or decreased by a specified amount. These can also be configured with a percentage instead of a static value (signups increased by 10%).
 
 <ProductScreenshot
     imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/alert_type_picker_18909b0b33.png"
