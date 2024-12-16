@@ -95,28 +95,36 @@ In addition to 404s, this same logic can be applied to other anomalous events li
 
 Alerts can also be used to check for the _absence_ of something happening.
 
-PostHog tracks the number of transactional billing emails that get sent out every day. If these emails aren't getting sent, it would be a big deal.
+For example, PostHog tracks the number of transactional billing emails that get sent out every day. If these emails aren't getting sent, it would be a big deal.
 
-1. Trigger events when you send transactional emails.
-2. Create a `transactional_email` event.
-3. Create an insight.
-4. Create your alert.
+To do something similar, you can track events when you trigger these transactional emails. Then, create an insight to track the number of transactional emails sent every day.
 
-Alerts also have the ability to notify multiple team members. For critical insights like this one, you can configure the alert with the emails for everyone on your billing team instead of a single individual.
+Then, we can set up an alert called "No billing events sent" that gets triggered when the transactional emails have a value less than 1.
+
+We can set the frequency to check this daily. And for critical alerts like this, you can add more than one email to the notification list and ensure the entire billing team gets the alert.
 
 ### 4. Monitor deploys and new features
 
-> "This would be useful as a simple canary to catch misconfigured deployments"
+With feature flags, you can set up [canary releases](/tutorials/canary-release) to slowly roll out changes and make sure your new features work well before they're released to all your users.
 
-https://posthog.com/tutorials/canary-release
+But you still want to monitor deploys and new features to verify that they're having the intended effect and not triggering unexpected errors.
 
-Shipped a new page with a new CTA, but no one is clicking it. You can set an if less than 100 people click the CTA over the next week.
+![Simpson, you've got a 513](https://frinkiac.com/meme/S08E23/385084.jpg?b64lines=U0lNUFNPTiwgWU9VJ1ZFIEdPVCBBIDUxMyE=)
+![That got it](https://frinkiac.com/video/S08E23/XOUcScbq8W_7yoA6nti16cCC31A=.gif)
 
-![Simpson you've got a 513](https://frinkiac.com/video/S08E23/XOUcScbq8W_7yoA6nti16cCC31A=.gif)
+For example, you could track error events and trigger an alert if the error rate rises above a particular threshold after a new feature launch.
 
-### 5. Conversion rates
+But there are more subtle issues that aren't necessarily bugs or errors. For example, you could launch a big redesign for the product pages on your marketing website. Or change the copy on some of your CTAs. Those won't necessarily trigger errors, but they could still have a drastic impact on engagement.
 
-> When the conversion rate drops below a certain threshold
+So you can set up an alert that coincides with the launch of your redesigned pages, and verify that the number of clicks for the CTAs on those pages should be increasing, not decreasing.
+
+### 5. Alert on changes in conversion rates
+
+To set alerts on changes in your conversion rate, you can set up an insight that tracks visits to your pricing page as well as user signups. For example, we can create a trend insight and filter for pageviews where "Path Name" equals "/pricing". And then add a filter for our `user_signed_up` event. So this insight will display a graph with a line for the number of pageviews for the pricing page as well as a separate line for the number of users that signed up.
+
+![Conversions](https://res.cloudinary.com/dmukukwp6/image/upload/conversion_graph_d4ac533adf.png)
+
+To find out if the conversion rate is increasing or decreasing by a specified percentage, we can set up multiple alerts. We can set up one alert for when the `user_sign_up` event is increasing by 5% and a separate alert for when the `user_sign_up` event is decreasing by 5%.
 
 ### 6. Alert on breakdown in referral sources
 
@@ -124,10 +132,8 @@ Alert on major changes in breakdowns. "For example, I have a graph showing traff
 
 > Note: For trends with breakdown, the alert will fire if any of the breakdown values breaches the threshold.
 
-## Suggestions and upcoming improvements
+## Upcoming improvements and suggestions
 
-Alerts are email-based, but PostHog also has features for [sending your event data to Slack](https://posthog.com/docs/cdp/destinations/slack).
+Alerts are currently available for trends insights. But we're currently working on adding alerts for [funnels](/docs/product-analytics/funnels), which will make it easier to track conversions across various stages. For example, we can create a funnel to see how many users are following through and signing up after visiting our pricing page.
 
-Alerts are currently available for trends insights. But they're also in the works for funnels, which will make tracking conversion rates easier. For example, we can create a funnel to see how many users are following through and signing up after visiting our pricing page.
-
-Any other features you'd like to see? Or interesting use cases to share?
+Thanks to [Anirudh](/community/profiles/30974) for making this much-requested feature a reality. The idea for threshold-based alerts started as a [GitHub Issue](https://github.com/PostHog/posthog/issues/14331), so if you have other interesting use cases and suggestions for how to improve the features be sure to let us know!
