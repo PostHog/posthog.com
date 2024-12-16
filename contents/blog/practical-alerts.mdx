@@ -1,5 +1,5 @@
 ---
-title: '7 practical uses for PostHog alerts'
+title: '6 practical uses for PostHog alerts'
 date: 2024-12-16
 author:
  - bijan-boustani
@@ -35,13 +35,13 @@ To create an alert, click the **Alerts** button on the top right of the insight 
     classes="rounded"
 />
 
-To configure a new alert, we'll set all of the following:
+To configure a new alert, we'll set the following:
 
 - **Name:** this is the name you'll see when the alert fires.
 - **When:** select the data points the alert will be based on. The drop-down contains a list of all the series your insight's graph. For example, if you have an insight that tracks the number of pageviews and signups, you can use either of these series as the basis for the alert threshold.
 - **Type:**
-  - **Absolute value:** check if the series is more than or less than a specified amount.
-  - **Relative value:** check if the series has increased or decreased by a specified amount. These can also be configured with a percentage instead of a static value (signups increased by 10%).
+  - absolute value: check if the series is more than or less than a specified amount.
+  - relative value: check if the series has increased or decreased by a specified amount. These can also be configured with a percentage instead of a static value (signups increased by 10%).
 
 <ProductScreenshot
     imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/alert_type_picker_18909b0b33.png"
@@ -53,7 +53,7 @@ To configure a new alert, we'll set all of the following:
 Then, we can configure the notification settings:
 
 - **Frequency:** how often we want to check the alert threshold (hourly, daily, weekly, monthly)
-- **Who to notify:** who to notify. The alert will send an email to everyone in this list when the alert is triggered.
+- **Who to notify:** who should receive an email when the alert is triggered
 
 <ProductScreenshot
     imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/filled_alert_627158e6bb.png"
@@ -75,23 +75,23 @@ If the alert threshold is met, you'll get an email that looks like this:
 
 ![Alert email](https://res.cloudinary.com/dmukukwp6/image/upload/posthog_alert_df58e89828.png)
 
-## Practical examples
+For more detailed specifics when creating alerts, see our [Alerts docs](https://posthog.com/docs/alerts).
+
+## Practical uses for alerts
 
 Now that we can create alerts, let's take a look at a handful of practical examples.
 
 ### 1. Get an alert when traffic spikes
 
-Want to get a notification when traffic spikes?
+Want to investigate when traffic spikes for your website? This can be useful for testing marketing campaigns to see if they trigger the expected spikes in traffic.
 
-For example, you can get an alert when the number of pageviews for your pricing page rises above 8,000 views for the week.
+But these kinds of alerts can also be useful to investigate an _unexpected_ spike in traffic. We often see this at PostHog when our content gets featured in a popular email newsletter.
+
+For example, we can get an alert when the number of pageviews for the pricing page rises above 8,000 views for the week.
 
 1. Create a new Trend insight.
 2. Set up a "Pageview" series and filter for where "Path Name" equals "/pricing". Year to date, group by week.
 3. Create an alert. Name "Pricing pageviews exceeded 8K" when pageview has value > 8000. Check weekly and notify.
-
-This can be useful for testing marketing campaigns and seeing if they trigger the expected spikes in traffic.
-
-This allows you to investigate the source of the traffic spike. We often see this at PostHog when we're featured in a popular email newsletter.
 
 ### 2. Get notified for 404 page anomalies
 
@@ -126,58 +126,22 @@ https://posthog.com/tutorials/canary-release
 
 Shipped a new page with a new CTA, but no one is clicking it. You can set an if less than 100 people click the CTA over the next week.
 
-### Error alerts
-
 ![Simpson you've got a 513](https://frinkiac.com/video/S08E23/XOUcScbq8W_7yoA6nti16cCC31A=.gif)
 
-### 5. Conversion rate
+### 5. Conversion rates
 
 > When the conversion rate drops below a certain threshold
 
-### Alert on breakdown in referral sources
+### 6. Alert on breakdown in referral sources
 
 Alert on major changes in breakdowns. "For example, I have a graph showing traffic to my site by day broken down by referrer - if there's a major change in who's referring traffic (a bunch of new traffic from a new source, or a previous major source of traffic disappearing) I'd love to be able to get alerts about that, even if the overall traffic total doesn't shift.
 
 > Note: For trends with breakdown, the alert will fire if any of the breakdown values breaches the threshold.
 
-### Support contact rate
+## Suggestions and upcoming improvements
 
-What percentage of users are contacting support? Early adopters may be willing to figure things out on their own.
+Alerts are email-based, but PostHog also has features for [sending your event data to Slack](https://posthog.com/docs/cdp/destinations/slack).
 
-Let's say you have 5,000 users, and 100 of them reach out every week.
-
-If your product spikes in popularity, the number of support requests will also increase. But at what rate? And what is sustainable?
-
-Now you have 50,000 users, and 100
-
-## Upcoming features
-
-Currently alerts are available for Trends. But they're also in the works for funnels, which will make conversion alerts better.
-
-Funnel example: Pricing page to signup conversion rate.
-
-Send PostHog event data to Slack webhooks:
-https://posthog.com/docs/cdp/destinations/slack
-
-## Suggestions?
+Alerts are currently available for trends insights. But they're also in the works for funnels, which will make tracking conversion rates easier. For example, we can create a funnel to see how many users are following through and signing up after visiting our pricing page.
 
 Any other features you'd like to see? Or interesting use cases to share?
-
-## Outro
-
-Check out our docs for Alerts:
-https://posthog.com/docs/alerts
-
-## Notes
-
-- Come up with a much better title
-- Use the examples to ensure all the useful features are shared.
-- For example, notifying the growth team is a good example to show how you can notify multiple people for a single alert.
-- What examples do other services show for their alert features?
-- a state of careful watching and readiness especially for danger or opportunity
-- Memes
-  - Marge Simpson catlike readiness
-  - Ross Unagi: "I sensed it was you."
-  - Homer Simpson 513
-  - The frogurt is cursed
-  - Someone set this to evil
