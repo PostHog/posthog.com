@@ -4,7 +4,7 @@ sidebar: Handbook
 showTitle: true
 ---
 
-### Owned by Content & Docs
+## Owned by Content & Docs
 
 | &nbsp                           | **Individual owner** |
 |---------------------------------|----------------------|
