@@ -248,13 +248,9 @@ Filtering by "All events" is useful, but is also much slower than filtering by a
 
 A smaller time period means less data to process. You can always adjust the period later if you need to.
 
-#### 3. Change the person properties mode
+#### 3. Use faster person properties mode
 
-PostHog provides multiple modes for the behavior of person property filters. You can find and change them in [your project settings](https://us.posthog.com/settings/project#persons-on-events). 
-
-![Person properties mode](https://res.cloudinary.com/dmukukwp6/image/upload/v1726779369/posthog.com/contents/CleanShot_2024-09-19_at_13.53.25_2x.png)
-
-We recommend using "Use person properties from the time of the event," but "Use person IDs and person properties from the time of the event" is even faster if needed. The tradeoff is that the latter mode creates inaccurate funnels and unique user counts if you have both anonymous and identified users.
+Avoid using `pdi.person.properties.<property>` in your filters and breakdowns, this should only be used if you absolutely need to see what the data for a person looks like right now. Instead, prefer to use `properties.<property>` which is much faster.
 
 You can find more details about how these modes works in our doc on [how querying works](/docs/how-posthog-works/queries#filtering-on-person-properties).
 
