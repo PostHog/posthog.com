@@ -44,7 +44,7 @@ You can also view the list [directly in GitHub](https://github.com/PostHog/posth
 | Messaging (Email, Notifications) | [Team Growth][Team Growth]  | <span class="lemon-tag gh-tag">feature/messaging</span>  |
 | Notebooks | [@daibhin][@daibhin]  |  <span class="lemon-tag gh-tag">feature/notebooks</span> |
 | Onboarding | [Team Growth][Team Growth]  | <span class="lemon-tag gh-tag">feature/onboarding</span>  |
-| Permissions | [@Twixes][@Twixes]  | <span class="lemon-tag gh-tag">feature/permissions</span>  |
+| Permissions | [Team Growth][Team Growth]  | <span class="lemon-tag gh-tag">feature/permissions</span>  |
 | Persons | [Team CDP][Team CDP]  | <span class="lemon-tag gh-tag">feature/persons</span>  |
 | Pipeline Transformations | [Team CDP][Team CDP] | <span class="lemon-tag gh-tag">feature/pipelines</span> |
 | Pipeline Destinations | [Team CDP][Team CDP] | <span class="lemon-tag gh-tag">feature/cdp</span> |
