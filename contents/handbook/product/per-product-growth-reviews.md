@@ -35,7 +35,7 @@ We’ve found that the best way to review what is a quite long list of metrics i
 
 ### Monthly focus areas
 
-To make growth reviews more actionable, each of the three growth reviews per quarter should have a slighly different angle:
+To make growth reviews more actionable, each of the three growth reviews per quarter should have a slightly different angle:
 
 **First growth review of the quarter (1 week in):**
 - Which metrics or areas of the product do we feel have potential, but we don't have enough context yet to take action?
