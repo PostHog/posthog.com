@@ -15,7 +15,6 @@ showTitle: true
 | **Marketing dashboards**        | Andy                 |
 | **Newsletter**                  | Andy                 |
 | **Newsletter sponsorships**     | Ian                  |
-| **Newsletter sponsorships**     | Ian                  |
 | **SEO (general / technical)**   | Andy                 |
 | **SEO landing pages**           | Andy                 |
 | **Social media**                | Andy                 |
