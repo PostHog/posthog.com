@@ -54,7 +54,7 @@ BigQuery’s serverless architecture was novel at the time of its 2010 debut. Ev
 
 ![BigQuery Architecture.png](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/clickhouse-vs-bigquery/bigquery-architecture.png)
 
-BigQuery extends many Google projects to make this happen. Specifically, BigQuery uses Colossus, Google’s file storage system; Borg, Google’s job scheduler; Dremel, a multi-tenant cluster that executes the queries; and Jupiter, Google’s pentabit network. BigQuery works because Google has a massive general-purpose infrastructure designed for isolated storage and compute.
+BigQuery extends many Google projects to make this happen. Specifically, BigQuery uses Colossus, Google’s file storage system; Borg, Google’s job scheduler; Dremel, a multi-tenant cluster that executes the queries; and Jupiter, Google’s petabit network. BigQuery works because Google has a massive general-purpose infrastructure designed for isolated storage and compute.
 
 ![Google Infra.png](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/clickhouse-vs-bigquery/google-infra.png)
 
