@@ -56,7 +56,7 @@ You can also view the list [directly in GitHub](https://github.com/PostHog/posth
 | Self-hosting | [Team Infrastructure][Team Infrastructure]  |  <span class="lemon-tag gh-tag">feature/self-hosting</span> |
 | Session Analytics | [Team Product Analytics][Team Product Analytics]  |  <span class="lemon-tag gh-tag">feature/sessions</span> |
 | Settings (personal & project) | [@benjackwhite][@benjackwhite]   |  <span class="lemon-tag gh-tag">feature/settings</span> |
-| SSO | [@mariusandra][@mariusandra]  | <span class="lemon-tag gh-tag">feature/sso</span>  |
+| SSO | [Team Growth][Team Growth]  | <span class="lemon-tag gh-tag">feature/sso</span>  |
 | Surveys | [Team Surveys][Team Surveys] | <span class="lemon-tag gh-tag">feature/surveys</span> |
 | Toolbar | [Team Replay][Team Replay]  | <span class="lemon-tag gh-tag">feature/toolbar</span>  |
 | Web Analytics                            | [Team Web Analytics][Team Web Analytics]                                                                   | <span class="lemon-tag gh-tag">feature/web-analytics</span>        |
