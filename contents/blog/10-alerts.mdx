@@ -1,64 +1,175 @@
 ---
-title: "10 ways to use alerts"
-date: 2024-12-11
+title: "7 practical uses for PostHog alerts"
+date: 2024-12-16
 author:
  - bijan-boustani
 rootpage: /blog
-featuredImage: >-
-  https://i.redd.it/n037ua69mteb1.gif
-featuredImageType: full
 category: General
 tags:
   - Alerts
+  - Product updates
 ---
 
-# 10 ways to use alerts
+To keep life interesting, it's important to live in a state of perpetual ignorance. When things are going well, there's no need to find out why. When things go south, let anxiety run its course.
 
-PostHog's new alert features allow you to receive notifications based on thresholds. Here is how to get started and some examples of how they can be useful.
+![Homer covers his eyes while driving]()
 
-## How to create an alert
+> "Ignorance is bliss."
+> – Not Sun Tzu, probably
 
-- Select an insight.
-- Create an alert.
-- Set a threshold.
+An alternative, less exciting, approach to life is to become aware as things change. For example, you can use PostHog's new alert features to receive notifications based on your [insights](/docs/product-analytics/insights).
 
-Threshold alerts, percentage change, and trends with breakdowns.
+You can track important metrics, and get email notifications if they cross threshold you specify. The threshold can be an absolute value (e.g. pageviews exceeded 1,000) or a relative amount (e.g. conversion rate increased by 10%).
+
+So, instead of having to remember to check in on the status of a project, a feature, or a metric; you can receive an email alert as soon as changes happen.
+
+Let's get started with how to create alerts, and then we can dive into some practical examples of how alerts can be helpful.
+
+## How to create alerts
+
+Alerts are based on your [insights](/docs/product-analytics/insights). You can select from your existing [trends](/docs/product-analytics/trends/overview), or create a new one.
+
+To create an alert, click the **Alerts** button on the top right of the insight page. And then click **New alert**.
+
+<ProductScreenshot
+    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/alerts_button_4ecd022cd6.png"
+    imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/alert_button_dark_c2f642fde3.png"
+    alt="alerts button"
+    classes="rounded"
+/>
+
+To configure an alert, we'll set all of the following:
+
+- **Name:** this is the name you'll see when the alert fires.
+- **Series:** these are the data points you're showing in the graph. For example, you could have a trend insight that tracks the number of pageviews and signups. And you can use either of these series as the basis for the alert threshold.
+- **Alert Type:**
+  - Absolute value: check if the series is more than or less than a specified amount.
+  - Relative value: check if the series has increased or decreased by a specified amount. These can also be configured with a percentage instead of a static value (signups increased by 10%).
+
+<ProductScreenshot
+    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/alert_type_picker_18909b0b33.png"
+    imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/new_alert_type_dark_b3620b34da.png"
+    alt="alert type picker"
+    classes="rounded"
+/>
+
+Then, we can configure the notification settings:
+
+- **Frequency:** how often we want to check the alert threshold (hourly, daily, weekly, monthly)
+- **Who to notify:** who to notify. The alert will send an email to everyone in this list when the alert is triggered.
+
+<ProductScreenshot
+    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/filled_alert_627158e6bb.png"
+    imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/alert_people_dark_0ccd7611bd.png"
+    alt="filled alert"
+    classes="rounded"
+/>
+
+Lastly, you click **Create alert**, and you're all set.
+
+<ProductScreenshot
+    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/insight_alerts_5k_daef47ade1.png"
+    imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/created_alert_dark_1710da74dc.png"
+    alt="insight alerts"
+    classes="rounded"
+/>
+
+If the alert threshold is met, you'll get an email that looks like this:
+
+![Alert email](https://res.cloudinary.com/dmukukwp6/image/upload/posthog_alert_df58e89828.png)
 
 ## Practical examples
 
-### Traffic spike alert
+Now that we can create alerts, let's take a look at a handful of practical examples.
 
-High website traffic alert (e.g. notify if this page gets more than x views in a day)
+### 1. Get an alert when traffic spikes
 
-### Conversion rate
+Want to get a notification when traffic spikes?
 
-> When the conversion rate drops below a certain threshold
+For example, you can get an alert when the number of pageviews for your pricing page rises above 8,000 views for the week.
 
-### Error alerts
+1. Create a new Trend insight.
+2. Set up a "Pageview" series and filter for where "Path Name" equals "/pricing". Year to date, group by week.
+3. Create an alert. Name "Pricing pageviews exceeded 8K" when pageview has value > 8000. Check weekly and notify.
 
-- If errors today > X
-- 404s surpass a threshold
-- rage clicks and dead clicks
+This can be useful for testing marketing campaigns and seeing if they trigger the expected spikes in traffic.
 
-### Monitoring Deploys
+This allows you to investigate the source of the traffic spike. We often see this at PostHog when we're featured in a popular email newsletter.
+
+### 2. Get notified for 404 page anomalies
+
+Track the number of visits to your 404 page. If a user visits `posthog.com/some-nonexistent-url` then it will take them to the 404 page. Some number of visits to this page are expected.
+
+But if the number of visits to this page suddenly spikes, it could mean there's an important broken link somewhere. Or perhaps you moved a page, and need to set up a redirect to prevent users from missing it.
+
+Graph the number of 404s. Find spikes. Click the graph to view instances. View session replay recording. Great success.
+
+I actually found a 404 in our [first five](/founders/posthog-first-five) article while writing this!
+
+In addition to 404s, this same logic can be applied to other things like rageclick events. "A user has rapidly and repeatedly clicked in a single place" "Rageclicks are triggered only when a user clicks three or more times (maximum 1s between each click) without moving their mouse."
+
+### 3. Alert if billing emails are not sent
+
+Alerts can also be used to check for the _absence_ of something happening.
+
+PostHog tracks the number of transactional billing emails that get sent out every day. If these emails aren't getting sent, it would be a big deal.
+
+1. Trigger events when you send transactional emails.
+2. Create a `transactional_email` event.
+3. Create an insight.
+4. Create your alert.
+
+Alerts also have the ability to notify multiple team members. For critical insights like this one, you can configure the alert with the emails for everyone on your billing team instead of a single individual.
+
+### 4. Monitor deploys and new features
 
 > "This would be useful as a simple canary to catch misconfigured deployments"
 
-### Billing Check
+https://posthog.com/tutorials/canary-release
 
-Test the absence of something happening: If no transactional billing emails are sent, alert the growth team.
+Shipped a new page with a new CTA, but no one is clicking it. You can set an if less than 100 people click the CTA over the next week.
+
+### Error alerts
+
+![Simpson you've got a 513](https://frinkiac.com/video/S08E23/XOUcScbq8W_7yoA6nti16cCC31A=.gif)
+
+### 5. Conversion rate
+
+> When the conversion rate drops below a certain threshold
 
 ### Alert on breakdown in referral sources
 
 Alert on major changes in breakdowns. "For example, I have a graph showing traffic to my site by day broken down by referrer - if there's a major change in who's referring traffic (a bunch of new traffic from a new source, or a previous major source of traffic disappearing) I'd love to be able to get alerts about that, even if the overall traffic total doesn't shift.
 
+> Note: For trends with breakdown, the alert will fire if any of the breakdown values breaches the threshold.
+
+### Support contact rate
+
+What percentage of users are contacting support? Early adopters may be willing to figure things out on their own.
+
+Let's say you have 5,000 users, and 100 of them reach out every week.
+
+If your product spikes in popularity, the number of support requests will also increase. But at what rate? And what is sustainable?
+
+Now you have 50,000 users, and 100
+
 ## Upcoming features
 
 Currently alerts are available for Trends. But they're also in the works for funnels, which will make conversion alerts better.
 
+Funnel example: Pricing page to signup conversion rate.
+
+Send PostHog event data to Slack webhooks:
+https://posthog.com/docs/cdp/destinations/slack
+
 ## Suggestions?
 
 Any other features you'd like to see? Or interesting use cases to share?
+
+## Outro
+
+Check out our docs for Alerts:
+https://posthog.com/docs/alerts
 
 ## Notes
 
@@ -66,3 +177,10 @@ Any other features you'd like to see? Or interesting use cases to share?
 - Use the examples to ensure all the useful features are shared.
 - For example, notifying the growth team is a good example to show how you can notify multiple people for a single alert.
 - What examples do other services show for their alert features?
+- a state of careful watching and readiness especially for danger or opportunity
+- Memes
+  - Marge Simpson catlike readiness
+  - Ross Unagi: "I sensed it was you."
+  - Homer Simpson 513
+  - The frogurt is cursed
+  - Someone set this to evil
