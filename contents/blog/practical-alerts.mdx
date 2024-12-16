@@ -59,10 +59,6 @@ Then, you can click **Create alert**, and you're all set.
     classes="rounded"
 />
 
-If the alert threshold is met, you'll get an email that looks like this:
-
-![Alert email](https://res.cloudinary.com/dmukukwp6/image/upload/posthog_alert_df58e89828.png)
-
 For a more detailed walkthrough, you can also check out our our [Alerts docs](https://posthog.com/docs/alerts), which we'll also update as new alerting features get added.
 
 ## Practical uses for alerts
@@ -71,27 +67,29 @@ Now that we can create alerts, let's take a look at a handful of practical examp
 
 ### 1. Get an alert when traffic spikes
 
-Want to investigate when traffic spikes for your website? This can be useful for testing marketing campaigns to see if they trigger the expected spikes in traffic.
+Want to investigate spikes in traffic to your website? This can be useful when testing marketing campaigns to see if they trigger the expected spikes in traffic.
 
-But these kinds of alerts can also be useful to investigate an _unexpected_ spike in traffic. We often see this at PostHog when our content gets featured in a popular email newsletter.
+But these kinds of alerts can also be useful to investigate an _unexpected_ spike in traffic. We often see this at PostHog when our content gets featured in a popular email newsletter or shared on Hacker News. When we notice an influx of new signups, it can be interesting to dig in and try to figure out where they came from.
 
-For example, we can get an alert when the number of pageviews for the pricing page rises above 8,000 views for the week.
+For example, we can get an alert when the number of pageviews for our [pricing page](/pricing) rises above 8,000 views for the week. First, you can [create a new trend insight](/docs/product-analytics/trends/overview#1-creating-a-new-trend) to track pageviews where "Path Name" equals "/pricing". Then, filter by the year to date and group by week.
 
-1. Create a new Trend insight.
-2. Set up a "Pageview" series and filter for where "Path Name" equals "/pricing". Year to date, group by week.
-3. Create an alert. Name "Pricing pageviews exceeded 8K" when pageview has value > 8000. Check weekly and notify.
+Then, set up an alert using the steps above to trigger a notification when the number of pageviews rises above 8,000. When the threshold is crossed, this is what the email looks like:
+
+![Pricing pageviews alert](https://res.cloudinary.com/dmukukwp6/image/upload/posthog_alert_df58e89828.png)
 
 ### 2. Get notified for 404 page anomalies
 
-Track the number of visits to your 404 page. If a user visits `posthog.com/some-nonexistent-url` then it will take them to the 404 page. Some number of visits to this page are expected.
+You can also use alerts to track down errors. For example, you can track the number of visits to your 404 page. If someone visits `posthog.com/some-nonexistent-url` they will land on our 404 page, and some number of these kinds of visits to this page is to be expected. Anyone that misspells a URL or finds a dead link is bound to land here at some point.
 
-But if the number of visits to this page suddenly spikes, it could mean there's an important broken link somewhere. Or perhaps you moved a page, and need to set up a redirect to prevent users from missing it.
+But what about anomalous spikes in 404s? It might mean you deployed a broken link somewhere. Or perhaps you moved a page and need to set up a redirect to prevent users from missing it.
 
-Graph the number of 404s. Find spikes. Click the graph to view instances. View session replay recording. Great success.
+In this case, you can set up another trend insight to graph the number of pageviews for your 404 page. You can examine the graph to establish a baseline for a standard amount of traffic to the 404 page. Then, set up an alert to check when 404s are significantly higher than this baseline.
 
-I actually found a 404 in our [first five](/founders/posthog-first-five) article while writing this!
+![Graph of 404s](https://res.cloudinary.com/dmukukwp6/image/upload/404_graph_79107f52bb.png)
 
-In addition to 404s, this same logic can be applied to other things like rageclick events. "A user has rapidly and repeatedly clicked in a single place" "Rageclicks are triggered only when a user clicks three or more times (maximum 1s between each click) without moving their mouse."
+One of the great things about these graphs is you can click the graph where you see a spike and it will display a list of all the users effected. And if you have [session replay](/session-replay) enabled, you can go through and watch the session where the 404 occurred and figure out exactly which link is broken.
+
+In addition to 404s, this same logic can be applied to other anomalous events like "rageclicks." Rageclick events are when a user has rapidly and repeatedly clicked in a single place. It could be an indicator that there is some visual affordance that looks like it should be interactive, but users are surprised to find out it does nothing. You can use the same process we used for the 404 visits to hunt down rageclicks as well.
 
 ### 3. Alert if billing emails are not sent
 
