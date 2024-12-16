@@ -836,6 +836,10 @@ export const handbookSidebar = [
                 url: '/handbook/words-and-pictures/partners',
             },
             {
+                name: 'Paid ads',
+                url: '/handbook/words-and-pictures/paid',
+            },
+            {
                 name: 'Press & PR',
                 url: '/handbook/words-and-pictures/press',
             },
