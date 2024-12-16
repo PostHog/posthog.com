@@ -12,7 +12,7 @@ We regularly send two emails.
 In addition, Words & Pictures also owns the onboarding email flow, which is controlled by Customer.io. 
 
 ### Changelog
-The changelog email is part of [the new release process](/handbook/engineering/release-new-version) and is used for [product announcements](/handbook/growth/words-and-pictures/product-announcements).
+The changelog email is part of [the new release process](/blog/tags/release-notes) and is used for [product announcements](/handbook/words-and-pictures/product-announcements).
 
 Every month, we use Customer.io to share a broadcast which summarizes the highlights from [the weekly changelog](/changelog) over the last month. We use our discretion to choose which updates to highlight, usually showcasing three or four of the most impactful changes. We usually reserve the top spot for making users aware of new beta features. A test is shared with the team ahead before we send to users. 
 
