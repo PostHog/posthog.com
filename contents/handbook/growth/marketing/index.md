@@ -74,7 +74,7 @@ For these reasons, we:
 
 ### Things we want to be brilliant at
  
-- **Word of mouth mindset:** By IPO, we want to have built a hugely successful company driven primarily by word of mouth, rather than paid ads or PR.
+- **Word of mouth mindset:** By IPO, we want to build a hugely successful company driven primarily by word of mouth, rather than paid ads or PR.
 
 - **Speed:** We want to be highly reactive, low process, and reliant on other teams as little as possible to ship things. We want to get stuff wrong quickly, then iterate.
 
@@ -88,7 +88,6 @@ For these reasons, we:
 
 - **Social media:** Specifically Twitter, where we've seen good traction posting on James' personal account and the PostHog brand account. We do a minimal amount of posting on PostHog's LinkedIn account to keep it active, but it's not an important channel for us. We don't use any other social media channels. 
 
-- **Paid ads:** An agency should keep handling this for us, but we shouldn’t get better at it internally. This includes out of home, should we ever decide to do this. We see paid ads as a hygiene factor. 
 
 - **Developer influencers:** A small but growing trend in the industry, most of these are very expensive and overwhelmingly focused on teaching people how to code (i.e. not our target audience). We tried this with an agency and didn't get traction, but have seen some early promising signs going to developers directly. 
 
