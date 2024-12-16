@@ -474,7 +474,11 @@ Since version 1.187.0, when initializing the SDK, you can provide a `before_send
 
 ```ts
 posthog.init('<ph_project_api_key>', {
-    before_send: (event: CaptureResult): CaptureResult | null => {
+    before_send: (event: CaptureResult | null): CaptureResult | null => {
+        if (!event) {
+            return null
+        }
+
         // redacting URLs will be specific to your site structure
         function redactUrl(value: string): string {
             return value.replace(/project\/\d+/, 'project/1234567');
@@ -511,7 +515,11 @@ posthog.init('<ph_project_api_key>', {
 
 ```ts
 posthog.init('<ph_project_api_key>', {
-    before_send: (event: CaptureResult): CaptureResult | null => {
+    before_send: (event: CaptureResult | null): CaptureResult | null => {
+        if (!event) {
+            return null
+        }
+
         event.$set = {
             ...event.$set,
             name: 'secret name'
@@ -563,7 +571,11 @@ posthog.init('<ph_project_api_key>', {
 
 ```ts
 posthog.init('<ph_project_api_key>', {
-    before_send: (event: CaptureResult): CaptureResult | null => {
+    before_send: (event: CaptureResult | null): CaptureResult | null => {
+        if (!event) {
+            return null
+        }
+
         let sampleRate = 1.0 // default to always returning the event
         if (event.event === '$heatmap') {
             sampleRate = 0.1
@@ -652,8 +664,10 @@ When working locally it can be useful to see what posthog would do, without actu
 
 ```ts
 posthog.init('<ph_project_api_key>', {
-    before_send: (event: CaptureResult): CaptureResult | null => {
-        console.log('posthog event: ' + event.event, event)
+    before_send: (event: CaptureResult | null): CaptureResult | null => {
+        if (event) {
+            console.log('posthog event: ' + event.event, event)
+        }
         return null
     }
 })
