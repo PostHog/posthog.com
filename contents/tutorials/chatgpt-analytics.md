@@ -317,6 +317,8 @@ We've shown you the basics of creating insights from your product's ChatGPT API 
 
 ## Further reading
 
-- [Product metrics to track for LLM apps](/product-engineers/llm-product-metrics)
 - [How to set up LLM analytics for Anthropic's Claude](/tutorials/anthropic-analytics) 
 - [How to set up LLM analytics for Cohere](/tutorials/cohere-analytics)
+- [How to monitor LlamaIndex apps with Langfuse and PostHog](/tutorials/monitor-llama-index-with-langfuse)
+
+<NewsletterForm />

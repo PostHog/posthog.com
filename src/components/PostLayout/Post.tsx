@@ -35,7 +35,7 @@ export default function Post({ children }: { children: React.ReactNode }) {
         searchFilter,
         fullWidthContent,
     } = usePost()
-    const { compact } = useLayoutData()
+    const { compact, internalMenu } = useLayoutData()
 
     const handleArticleTransitionEnd = (e) => {
         const hash = window?.location?.hash
@@ -45,7 +45,7 @@ export default function Post({ children }: { children: React.ReactNode }) {
     }
 
     return (
-        <div className="">
+        <div className={!internalMenu ? '-mt-1' : ''}>
             {menu && mobileMenu && <MobileNav className={`flex ${compact ? '' : 'md:hidden'}`} menu={menu} />}
             <div
                 className={`w-full relative md:flex justify-between mx-auto transition-all ${
@@ -58,7 +58,9 @@ export default function Post({ children }: { children: React.ReactNode }) {
                         className="w-full flex-shrink-0 md:block hidden relative z-20"
                     >
                         <aside
-                            className={`md:sticky md:top-0 reasonable:top-[108px] max-h-screen reasonable:h-[calc(100vh_-_108px)] flex-shrink-0 w-full justify-self-end px-4 md:box-border my-10 md:my-0 mr-auto overflow-y-auto pt-6 pb-10 bg-light dark:bg-dark border-r border-light dark:border-dark ${
+                            className={`md:sticky md:top-0 ${
+                                internalMenu ? 'reasonable:top-[108px]' : 'reasonable:top-[56px]'
+                            } max-h-screen reasonable:h-[calc(100vh_-_108px)] flex-shrink-0 w-full justify-self-end px-4 md:box-border my-10 md:my-0 mr-auto overflow-y-auto pt-6 pb-10 bg-light dark:bg-dark border-r border-light dark:border-dark ${
                                 hideSearch ? 'pt-5' : ''
                             }`}
                         >

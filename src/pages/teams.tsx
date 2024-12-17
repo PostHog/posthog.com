@@ -1,21 +1,24 @@
 import React from 'react'
 import Layout from 'components/Layout'
 import { SEO } from 'components/seo'
-import { GatsbyImage, getImage } from 'gatsby-plugin-image'
 import Link from 'components/Link'
 import PostLayout from 'components/PostLayout'
 import Tooltip from 'components/Tooltip'
 import { graphql, useStaticQuery } from 'gatsby'
 import slugify from 'slugify'
 import TeamPatch from 'components/TeamPatch'
+import { CallToAction } from 'components/CallToAction'
+import { useUser } from 'hooks/useUser'
 
 const Teams: React.FC = () => {
+    const { isModerator } = useUser()
     const { allTeams } = useStaticQuery(graphql`
         {
             allTeams: allSqueakTeam(filter: { name: { ne: "Hedgehogs" }, crest: { publicId: { ne: null } } }) {
                 nodes {
                     id
                     name
+                    slug
                     profiles {
                         data {
                             id
@@ -68,7 +71,6 @@ const Teams: React.FC = () => {
                 description="We're organized into multi-disciplinary small teams."
                 image={`/images/small-teams.png`}
             />
-
             <PostLayout article={false} title={'Handbook'} hideSidebar hideSurvey>
                 <section className="mx-auto">
                     <div className="flex flex-col md:items-center md:justify-end md:flex-row-reverse gap-8 md:gap-2">
@@ -85,11 +87,9 @@ const Teams: React.FC = () => {
                             <div className="grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-4 xl:gap-5 text-center">
                                 {allTeams.nodes
                                     .sort((a, b) => a.name.localeCompare(b.name))
-                                    .map(({ id, name, profiles, crest, crestOptions, leadProfiles }) => (
+                                    .map(({ id, name, slug, profiles, crest, crestOptions, leadProfiles }) => (
                                         <Link
-                                            to={`/teams/${slugify(name.toLowerCase().replace('ops', ''), {
-                                                remove: /and/,
-                                            })}`}
+                                            to={`/teams/${slug}`}
                                             key={id}
                                             className="group relative mb-6 hover:scale-[1.01] active:scale-[1] hover:top-[-.5px] active:top-px"
                                         >
@@ -160,6 +160,13 @@ const Teams: React.FC = () => {
                                             </div>
                                         </Link>
                                     ))}
+                                {isModerator && (
+                                    <div className="flex justify-center items-center">
+                                        <CallToAction to="/teams/new" size="md">
+                                            New team
+                                        </CallToAction>
+                                    </div>
+                                )}
                             </div>
                         </div>
                     </div>

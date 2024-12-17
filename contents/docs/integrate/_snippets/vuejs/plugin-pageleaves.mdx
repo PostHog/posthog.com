@@ -1,0 +1,16 @@
+To capture pageleaves, we can use the `beforeEach` hook in the router.
+
+```js
+// src/main.js
+
+//... rest of your code
+
+Vue.use(PosthogPlugin)
+
+router.beforeEach((to, from, next) => {
+  posthog.capture('$pageleave')
+  next()
+})
+
+//... rest of your code
+```

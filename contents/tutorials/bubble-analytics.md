@@ -117,3 +117,5 @@ When we save this and publish the site again, the button is still there. When we
 - [How to run A/B tests in Bubble](/tutorials/bubble-ab-tests)
 - [How to create surveys in Bubble](/tutorials/bubble-surveys)
 - [How to analyze first and last touch attribution](/tutorials/first-last-touch-attribution)
+
+<NewsletterForm />

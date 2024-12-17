@@ -40,7 +40,7 @@ Raising money, especially coming into 2021, felt self-fulfilling. It felt like y
 
 1. **Founder:** "Check it out, we raised tons of money!"
 2. **VC:** "Whoah, that's some compelling social proof! You're now on our radar."
-3. **Users:** "We should pick _this_ technology since they're featured in TechCrunch with a huge funding round!"
+3. **Users:** "We should [pick _this_ technology](/newsletter/choosing-technologies) since they're featured in TechCrunch with a huge funding round!"
 4. **Founder:** "We should keep raising. If we can raise the next round right now, not doing that feels stupid."
 5. **VC:** "Interest rates are low... let's do it."
 6. **Go back to step 1** (until founder raises too much, has big unwieldy team and no product-market fit, with high burn, has to fire people and will struggle to raise again)

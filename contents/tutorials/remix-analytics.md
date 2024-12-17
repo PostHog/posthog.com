@@ -4,9 +4,9 @@ date: 2023-11-22
 author:
   - ian-vanagas
 tags:
-  - configuration
+  - product analytics
+  - web analytics
   - feature flags
-  - events
 ---
 
 Remix is a full stack web framework built on [React](/docs/libraries/react) with a specific focus on following web standards. 
@@ -492,3 +492,5 @@ Now, when you reload your page, the button doesn’t flicker. This is especially
 - [What to do after installing PostHog in 5 steps](/tutorials/next-steps-after-installing)
 - [How to set up A/B tests in Remix](/tutorials/remix-ab-tests)
 - [How to set up surveys in Remix](/tutorials/remix-surveys)
+
+<NewsletterForm />

@@ -402,3 +402,5 @@ When we relaunch our application and go to either of the test or control routes,
 - [How to use Next.js middleware to bootstrap feature flags](/tutorials/nextjs-bootstrap-flags)
 - [How to evaluate and update feature flags with the PostHog API](/tutorials/api-feature-flags)
 - [How to bootstrap feature flags in React and Express](/tutorials/bootstrap-feature-flags-react)
+
+<NewsletterForm />

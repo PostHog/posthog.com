@@ -1,9 +1,18 @@
 <MultiLanguage>
 
 ```js-web
+// Option 1 (recommended): Call posthog.group()
+// This has the side-effect that all subsequent events in the session are associated to the group
 posthog.group('company', 'company_id_in_your_db');
-// For this session, any event captured after calling `posthog.group` will be associated with company `company_id_on_your_db`
-posthog.capture('user_signed_up')
+posthog.capture('user_signed_up'); // This event is associated with the company above
+
+// Option 2: Set the group property in posthog.capture()
+// This method doesn't have the side-effect of associating the session's events to the group
+posthog.capture('user_signed_up', {
+    '$groups': {
+        'company': 'company_id_in_your_db'
+    }
+});
 ```
 
 ```python
@@ -40,16 +49,39 @@ PostHog::capture(array(
 ```
 
 ```ios_swift
+// Option 1 (recommended): Call group()
+// This has the side-effect that all subsequent events in the session are associated to the group
 PostHogSDK.shared.group(type: "company", key: "company_id_in_your_db")
-// For this session, any event captured after calling `posthog.group` will be associated with company `company_id_on_your_db`
+PostHogSDK.shared.capture("user_signed_up") // This event is associated with the company above
+
+// Option 2: Set the group property in capture()
+// This method doesn't have the side-effect of associating the session's events to the group
+PostHogSDK.shared.capture(
+    event: "user_signed_up",
+    properties: [
+        "$groups": [
+            "company": "company_id_in_your_db"
+        ]
+    ]
+)
 ```
 
 ```android_kotlin
-PostHog.group(
-    type = "company", 
-    key = "company_id_in_your_db"
+// Option 1 (recommended): Call group()
+// This has the side-effect that all subsequent events in the session are associated to the group
+PostHog.group(type = "company", key = "company_id_in_your_db")
+PostHog.capture("user_signed_up") // This event is associated with the company above
+
+// Option 2: Set the group property in capture()
+// This method doesn't have the side-effect of associating the session's events to the group
+PostHog.capture(
+    event = "user_signed_up",
+    properties = mapOf(
+        "\$groups" to mapOf(
+            "company" to "company_id_in_your_db"
+        )
+    )
 )
-// For this session, any event captured after calling `PostHog.group` will be associated with company `company_id_on_your_db`
 ```
 
 ```segment

@@ -27,17 +27,20 @@ import HowToCaptureAnonymousEventsBackend from '../product-analytics/_snippets/h
 import HowToCaptureAnonymousEventsIOS from '../product-analytics/_snippets/how-to-capture-anonymous-events-ios.mdx'
 import HowToCaptureAnonymousEventsWeb from '../product-analytics/_snippets/how-to-capture-anonymous-events-web.mdx'
 import HowToCaptureAnonymousEventsAndroid from '../product-analytics/_snippets/how-to-capture-anonymous-events-android.mdx'
+import HowToCaptureAnonymousEventsFlutter from '../product-analytics/_snippets/how-to-capture-anonymous-events-flutter.mdx'
 
 <Tab.Group tabs={[
     'Web', 
     'Backend', 
     'Android', 
-    'iOS']}>
+    'iOS',
+    'Flutter']}>
     <Tab.List>
         <Tab>Web</Tab>
         <Tab>Backend</Tab>
         <Tab>Android</Tab>
         <Tab>iOS</Tab>
+        <Tab>Flutter</Tab>
     </Tab.List>
     <Tab.Panels>
         <Tab.Panel>
@@ -52,38 +55,52 @@ import HowToCaptureAnonymousEventsAndroid from '../product-analytics/_snippets/h
         <Tab.Panel>
            <HowToCaptureAnonymousEventsIOS />
         </Tab.Panel>
+        <Tab.Panel>
+           <HowToCaptureAnonymousEventsFlutter />
+        </Tab.Panel>
     </Tab.Panels>
 </Tab.Group>
 
 ## How to capture identified events
 
-import HowToCaptureIdentifiedEvents from '../product-analytics/_snippets/how-to-capture-identified-events-frontend.mdx'
+import HowToCaptureIdentifiedEventsFrontend from '../product-analytics/_snippets/how-to-capture-identified-events-frontend.mdx'
 
 import HowToCaptureIdentifiedEventsBackend from '../product-analytics/_snippets/how-to-capture-identified-events-backend.mdx'
+
+import HowToCaptureIdentifiedEventsAndroid from '../product-analytics/_snippets/how-to-capture-identified-events-android.mdx'
+
+import HowToCaptureIdentifiedEventsiOS from '../product-analytics/_snippets/how-to-capture-identified-events-ios.mdx'
+
+import HowToCaptureIdentifiedEventsFlutter from '../product-analytics/_snippets/how-to-capture-identified-events-flutter.mdx'
 
 <Tab.Group tabs={[
     'Web', 
     'Backend', 
     'Android', 
-    'iOS']}>
+    'iOS',
+    'Flutter']}>
     <Tab.List>
         <Tab>Web</Tab>
         <Tab>Backend</Tab>
         <Tab>Android</Tab>
         <Tab>iOS</Tab>
+        <Tab>Flutter</Tab>
     </Tab.List>
     <Tab.Panels>
         <Tab.Panel>
-            <HowToCaptureIdentifiedEvents />
+            <HowToCaptureIdentifiedEventsFrontend />
         </Tab.Panel>
         <Tab.Panel>
             <HowToCaptureIdentifiedEventsBackend />
         </Tab.Panel>
         <Tab.Panel>
-            <HowToCaptureIdentifiedEvents />
+            <HowToCaptureIdentifiedEventsAndroid />
         </Tab.Panel>
         <Tab.Panel>
-           <HowToCaptureIdentifiedEvents />
+           <HowToCaptureIdentifiedEventsiOS />
+        </Tab.Panel>
+        <Tab.Panel>
+           <HowToCaptureIdentifiedEventsFlutter />
         </Tab.Panel>
     </Tab.Panels>
 </Tab.Group>
@@ -136,12 +153,6 @@ However, if you capture events using the `distinct_id` used in their previously 
 Since identified events are associated with a person profile, processing and querying them requires using resource intensive table JOINs. On the other hand, anonymous events are stored in a single table and are more efficient to query.
 
 This [post](/blog/analytics-pricing#why-are-anonymous-events-so-much-cheaper) goes into more detail.
-
-### Why does PostHog capture identified events by default?
-
-This is required for backwards compatiability. Previously, all events were captured as identified events. When we added anonymous events, we didn't want to change the default behavior since that could cause issues with existing users.
-
-However, since anonymous events are cheaper to capture, we recommend capturing them by default.
 
 ### Why am I being charged for both "events" and "persons"
 

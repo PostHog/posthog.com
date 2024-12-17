@@ -321,3 +321,5 @@ This is feature flag bootstrapping working successfully. From here, you can make
 - [How to add popups to your React app with feature flags](/tutorials/react-popups)
 - [Testing frontend feature flags with React, Jest, and PostHog](/tutorials/test-frontend-feature-flags)
 - [How to evaluate and update feature flags with the PostHog API](/tutorials/api-feature-flags)
+
+<NewsletterForm />

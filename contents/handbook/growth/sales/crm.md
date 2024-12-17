@@ -69,6 +69,11 @@ Our preferred way to keep track of outreach is by creating Salesforce Leads, Con
 
 If you add "sf-lead" tag to a ticket in Zendesk, a new lead will be automatically created in Salesforce. This helps streamline the process of converting support questions or tickets into potential sales opportunities directly from Zendesk.
 
+### Forwarding Sales Opportunities
+If you are not in the sales team but are engaged with a client and identify a sales opportunity, forward the email chain to sales@posthog.com. A new lead will be automatically created in salesforce and assigned to the appropriate AE based on existing criteria. This way we can smoothly hand off potential opportunities and track things properly!
+
+**Important:** The email must be forwarded (not replied to), and sales@posthog.com must be in the "To:" field—not CC or BCC—for the automation to work correctly.
+
 ## How we do lead assignments
 Any user who submits a “contact sales” form on our website shows up as a lead in Salesforce and gets assigned to an Account Executive (AE). This is how we do lead assignment within our sales team:
 - Based on Territory: Leads are assigned based on their geographical location.
@@ -186,6 +191,14 @@ The renewal pipeline stages are:
 The "Opportunity Notes" section is to track key actions and next steps to manage an opportunity and avoid missed follow-ups. It has the following fields:
 - Next Steps: Add actions or tasks required to move the opportunity forward. Be clear and concise to ensure anyone reviewing the opportunity understands what needs to happen next.
 - Next Step Date: Enter the date by which the next step should be completed. This helps in maintaining timelines and keeping follow-ups on track.
+
+### Opportunity Closure Details
+This section is to add additional information for opportunities that are won or lost to capture context and details to setup customer account correctly:
+- Loss Reason: A required field for any opportunity marked as "Closed - Lost." Pick the most appropriate option from the dropdown to help identify patterns.
+- Additional Loss Context: Optional field to add further insights into the loss. It's great to include specific customer feedback if available.
+- Contract Start Date: Especially important for correct account setup and tracking renewals.
+- Products: Select the products discussed/planned to be used as part of the opportunity. Make sure to include all addons so RevOps can ensure the customer’s subscription is set up correctly.
+- Contract Link: Link to the contract in PandaDoc for easy access and reference.
 
 ### Self-Serve Opportunities
 If you feel like a customer doesn't fit a hands-on flow, then you mark the lead or opportunity as self serve. There are two ways to do this:

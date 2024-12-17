@@ -4,7 +4,8 @@ date: 2024-02-27
 author:
   - lior-neu-ner
 tags:
-  - feature flags
+  - product analytics
+  - web analytics
 ---
 
 import { ProductScreenshot } from 'components/ProductScreenshot'
@@ -289,3 +290,5 @@ That's it! Feel free to play around in your dashboard and explore the different 
 - [How to run A/B tests in iOS](/tutorials/ios-ab-tests)
 - [How to set up feature flags in iOS](/tutorials/ios-feature-flags)
 - [How to set up iOS session replay](/tutorials/ios-session-replay)
+
+<NewsletterForm />

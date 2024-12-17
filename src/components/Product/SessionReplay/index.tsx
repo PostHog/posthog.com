@@ -232,6 +232,26 @@ const comparison = [
         },
     },
     {
+        feature: 'React Native recordings',
+        companies: {
+            Hotjar: false,
+            LogRocket: true,
+            Matomo: false,
+            FullStory: false,
+            PostHog: '<a href="https://github.com/PostHog/posthog/issues/13269">In beta</a>',
+        },
+    },
+    {
+        feature: 'Flutter recordings',
+        companies: {
+            Hotjar: false,
+            LogRocket: false,
+            Matomo: false,
+            FullStory: false,
+            PostHog: '<a href="https://github.com/PostHog/posthog-flutter/issues/69">In beta</a>',
+        },
+    },
+    {
         feature: 'Identity detection',
         companies: {
             Hotjar: false,
@@ -504,32 +524,14 @@ export const ProductSessionReplay = () => {
                             >
                                 <ul>
                                     <li>
-                                        You need heatmaps or scrollmaps
-                                        <ul className="pl-6">
-                                            <li className="text-sm">PostHog is currently limited to clickmaps</li>
-                                        </ul>
+                                        <Link to="https://github.com/PostHog/posthog/issues/23400" external>
+                                            Error tracking (in progress...)
+                                        </Link>
                                     </li>
-                                    <li>Error tracking and alerting</li>
                                     <li>
-                                        Mobile SDKs (in progress...)
-                                        <ul className="pl-6">
-                                            <li className="text-sm">
-                                                <Link to="https://github.com/PostHog/posthog/issues/13269" external>
-                                                    React Native
-                                                </Link>{' '}
-                                                |&nbsp;
-                                                <Link to="https://github.com/PostHog/posthog/issues/12344" external>
-                                                    iOS
-                                                </Link>{' '}
-                                                |&nbsp;
-                                                <Link
-                                                    to="https://github.com/PostHog/posthog-flutter/issues/69"
-                                                    external
-                                                >
-                                                    Flutter
-                                                </Link>
-                                            </li>
-                                        </ul>
+                                        <Link to="https://github.com/PostHog/posthog/issues/14331" external>
+                                            Alerting (in progress...)
+                                        </Link>
                                     </li>
                                 </ul>
                             </VsCompetitor>

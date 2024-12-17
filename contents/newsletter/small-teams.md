@@ -30,7 +30,7 @@ When we launch a new product, or a project on an existing team becomes too large
 
 ![Small teams](https://res.cloudinary.com/dmukukwp6/image/upload/small_team_1_cdceda04ab.png)
 
-Right now, for example, we're in the process of scaling support by moving our support engineers out of the customer success team and into a new [customer comms team](/teams/customer-comms). We're [recruiting support engineers](/careers/support-engineer) for that team, by the way.
+Right now, for example, we're in the process of scaling support by moving our support engineers out of the customer success team and into a new [support team](/teams/support). We're [recruiting support engineers](/careers/support-engineer) for that team, by the way.
 
 We've also created a new team with the mission of making our customer data platform (CDP) a first-class product – a project spun out from a hackathon project at our recent all-company [offsite in Mykonos](/blog/mykonos-hackathon).
 

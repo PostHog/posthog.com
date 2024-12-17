@@ -86,3 +86,5 @@ Once created, repeat for the rest of your phases. You can then use the cohorts a
 - [How to do holdout testing](/tutorials/holdout-testing)
 - [Running experiments on new users](/tutorials/new-user-experiments)
 - [How to do a canary release with feature flags in PostHog](/tutorials/canary-release)
+
+<NewsletterForm />

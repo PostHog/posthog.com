@@ -233,3 +233,5 @@ For all of these insights, you can click the visualization to list the users and
 - [Calculating average session duration, time on site, and other session-based metrics](/tutorials/session-metrics)
 - [What is real user monitoring (and how to set it up)](/blog/real-user-monitoring)
 - [How to improve web app performance using PostHog session replays](/tutorials/performance-metrics)
+
+<NewsletterForm />

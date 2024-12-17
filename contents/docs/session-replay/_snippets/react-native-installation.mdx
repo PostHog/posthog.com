@@ -26,17 +26,20 @@ Add `enableSessionReplay: true` to your PostHog configuration alongside any of y
 
 ```js
 export const posthog = new PostHog(
-  'apiKey',
+  '<ph_project_api_key>',
   {
     // Enable session recording. Requires enabling in your project settings as well.
     // Default is false.
     enableSessionReplay: true,
     sessionReplayConfig: {
-      // Whether text inputs are masked. Default is true.
+      // Whether text and text input fields are masked. Default is true.
       // Password inputs are always masked regardless
       maskAllTextInputs: true,
       // Whether images are masked. Default is true.
       maskAllImages: true,
+      // Enable masking of all sandboxed system views like UIImagePickerController, PHPickerViewController and CNContactPickerViewController. Default is true.
+      // iOS only
+      maskAllSandboxedViews = true,
       // Capture logs automatically. Default is true.
       // Android only (Native Logcat only)
       captureLog: true,
@@ -59,7 +62,7 @@ Or using the `PostHogProvider`:
 
 ```js
 <PostHogProvider
-        apiKey="apiKey"
+        apiKey="<ph_project_api_key>"
         options={{
           enableSessionReplay: true,
           ...
@@ -91,7 +94,6 @@ npx expo run:ios --no-build-cache --device
 
 - On Android, requires API >= 26.
 - On iOS, minimum deployment target is [iOS13](/docs/libraries/ios)
-- WebView is not supported. A placeholder will be shown.
 - Keyboard is not supported. A placeholder will be shown.
 - Wireframe mode isn't supported, only screenshot mode.
 - Expo Go isn't supported since it uses Native plugins, please use development build.

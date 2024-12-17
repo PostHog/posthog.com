@@ -412,3 +412,5 @@ Once confirming this works, you’ve got a basic Express app working with the ke
 - [PostHog Node.js docs](/docs/integrate/server/node)
 - [How to set up A/B tests in Node.js (Express)](/tutorials/frontend-vs-backend-group-analytics)
 - [What to do after installing PostHog](/tutorials/next-steps-after-installing)
+
+<NewsletterForm />

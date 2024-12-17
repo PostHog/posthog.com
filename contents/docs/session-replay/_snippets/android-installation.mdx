@@ -18,7 +18,7 @@ val config = PostHogAndroidConfig(apiKey = "<ph_project_api_key>").apply {
     // Default is false.
     sessionReplay = true
 
-    // Whether text inputs are masked. Default is true.
+    // Whether text and text input fields are masked. Default is true.
     // Password inputs are always masked regardless
     sessionReplayConfig.maskAllTextInputs = true
 
@@ -46,4 +46,3 @@ val config = PostHogAndroidConfig(apiKey = "<ph_project_api_key>").apply {
 - Custom views are partly supported, and only fully supported if `screenshotMode`  is enabled.
 - WebView is not supported. A placeholder will be shown.
 - Keyboard is not supported. A placeholder will be shown.
-- Flutter for Android isn't supported.

@@ -127,3 +127,5 @@ This is useful to learn what features are used immediately after sign up and oth
 - [Using HogQL for advanced breakdowns](/tutorials/hogql-breakdowns)
 - [Running experiments on new users](/tutorials/new-user-experiments)
 - [The power of HogQL’s sum() aggregation](/tutorials/hogql-sum-aggregation)
+
+<NewsletterForm />

@@ -12,7 +12,7 @@ One of the many awesome things about PostHog is that support is being dealt with
 
 You'll see some teams using a term of endearment for Support Hero, examples being "Infra Hero" or… "Luigi". Don't ask – we don't know.
 
-Our Support Engineers, in [the Comms team](/teams/customer-comms) triage tickets for the Product Analytics, Web Analytics, Data Warehouse, CDP, Replay, and Feature Success teams, due to the high volume of tickets those teams get. They will resolve tickets if possible, and escalate to the engineering team responsible if they need further help.
+Our Support Engineers, in [the Support team](/teams/support) triage tickets for the Product Analytics, Web Analytics, Data Warehouse, CDP, Replay, and Feature Success teams, due to the high volume of tickets those teams get. They will resolve tickets if possible, and escalate to the engineering team responsible if they need further help.
 
 ## When is my turn?
 
@@ -94,7 +94,7 @@ example: "Ah, I see what you mean, that's not ideal! Sorry. I'll dig in to that 
 
 As an engineer, when answering a question, your first instinct is to give them an answer as quickly as possible. That means we often forget pleasantries, or will ignore a question until we've found the answer. So, the following guidelines:
 
-- Always respond to a question within a reasonable timeframe during your working day. Our SLAs are [explained here](/handbook/comms/customer-support#response-targets), but you should always try to respond to tickets quickly. 
+- Always respond to a question within a reasonable timeframe during your working day. Our SLAs are [explained here](/handbook/support/customer-support#response-targets), but you should always try to respond to tickets quickly. 
   - If you're ready to look into the issue, and you think it might take a while/require a fix, just mention that and say you'll get back to them
   - If you have no idea how to answer or fix their issue, @mention someone who does
   - They need to know we've understood them. And have a clear picture of what their onward journey is. Are they waiting for us? How Long? Or - are we waiting for them? what for?
@@ -106,7 +106,7 @@ As an engineer, when answering a question, your first instinct is to give them a
 - Housekeeping. Once a customer issue/question has been addressed, close the ticket in [Zendesk](#zendesk) (mark it `Solved`) to make it easy to identify outstanding conversations.
 - If a user has been particularly helpful, such as raising a security or bug report, feel free to offer a small credit for the merch store. 
 
-If you have any questions about how or when to communicate with users, you can always ask [the Comms team](/handbook/comms/comms-team) for help. 
+If you have any questions about how or when to communicate with users, you can always ask [the Words & Pictures team](/teams/words-pictures) for help. 
 
 ## How do I prioritize?
 
@@ -115,7 +115,7 @@ As a business we need to ensure we are focusing support on our paying customers,
 1. Any requests where you are tagged by the Customer Success team in a dedicated Slack channel, as there will be some urgency needed. 
 2. `Open`, `escalated` Zendesk tickets for your team that have `High` priority.
 3. `Open`, `escalated` Zendesk tickets for your team that have `Normal` priority.
-4. `New` and `Open`* (non-escalated) Zendesk tickets for your team that are nearing breach or have breached [SLAs](/handbook/comms/customer-support#response-targets)
+4. `New` and `Open`* (non-escalated) Zendesk tickets for your team that are nearing breach or have breached [SLAs](/handbook/support/customer-support#response-targets)
 5. `Open` ZenDesk tickets for your team that have low priority.
 
 \* Due to the way we're using Pylon, "new" tickets from high prio customer Slack channels only appear as `New` in Zendesk for a few seconds, then a webhook updates the ticket and quickly changes it to `Open`.
@@ -207,11 +207,11 @@ If the user raised the issue in a public forum, such as Twitter, it can be a goo
 
 #### Avoiding duplication of effort in ZenDesk
 
-Each team handles ZenDesk queues (views) in slightly different ways.  Check in with your team about whether or not to assign tickets to yourself, or keep them assigned to the team/group level. Comms team folks, who work on tickets from multiple queues, often assign tickets to themselves, (and when escalating, will assign the ticket back to the team/group.) 
+Each team handles ZenDesk queues (views) in slightly different ways.  Check in with your team about whether or not to assign tickets to yourself, or keep them assigned to the team/group level. Support team folks, who work on tickets from multiple queues, often assign tickets to themselves, (and when escalating, will assign the ticket back to the team/group.) 
 
 For unassigned tickets, keep an eye out for whether someone else is already viewing a ticket (will appear in the upper-left of a ticket you're viewing, with their name, avatar and `also viewing`.)  Use those as clues to avoid working on a ticket that someone is already working on (and communicate with each other when in doubt.  Err on the side of making sure the ticket gets responded to within SLA/response target times.)
 
-Also, avoid cherry-picking tickets. Pick the ticket that is closest to breaching our [response targets](/handbook/comms/customer-support#response-targets).
+Also, avoid cherry-picking tickets. Pick the ticket that is closest to breaching our [response targets](/handbook/support/customer-support#response-targets).
 
 #### Ticket Status
 
@@ -283,7 +283,7 @@ When we've added a new [team](/teams), or 🪓 split an existing team into two o
 
 At the end of every page in the docs and handbook is a form where visitors can ask questions about the content of that page. (These questions also appear in the relevant category in the [PostHog community](/questions).)
 
-Community questions appear in Zendesk but tickets are closed automatically if they're resolved directly on the website.
+Community questions appear in Zendesk and tickets are closed automatically if an answer is picked as a solution on the website. Ideally, the original poster is the one who marks a response as the solution. If they don't, feel free to close the ticket in Zendesk once you've replied.
 
 ## How do I answer community questions?
 
