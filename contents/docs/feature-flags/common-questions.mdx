@@ -118,7 +118,7 @@ posthog.setPersonPropertiesForFlags({
 
 ## Why do I see multiple feature flag calls when I only expect one?
 
-This is likely because the `onFeatureFlags()` callback is invoked every time feature flags are reloaded. This happens by default whenever person properties change, you call `reloadFeatureFlags()`, or other flag reload triggers.
+This is likely because the `onFeatureFlags()` callback is invoked every time feature flags are reloaded. This happens by default when person properties change, when you call `reloadFeatureFlags()`, or when other flag-reloading triggers happen.
 
 If you are using [React](/docs/libraries/react#feature-flags), an alternative is to use `useFeatureFlagEnabled` or related hooks.
 
