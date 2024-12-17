@@ -15,7 +15,7 @@ tags:
 
 Bounce rate is the percentage of users who leave a page immediately after visiting. It is a popular marketing metric showing the relevance and engagement of content for site visitors. This tutorial shows you how to calculate bounce rate in PostHog.
 
-To get started, you need to install the [snippet](/docs/getting-started/install?tab=snippet) or [JavaScript SDK](/docs/libraries/js). And ensure the following settings are enabled in your project settings:
+To get started, you need to install PostHog's [web snippet](/docs/getting-started/install?tab=snippet) or [JavaScript SDK](/docs/libraries/js). Then ensure the following settings are enabled in your project settings:
 
 - [Record user sessions](https://app.posthog.com/settings/environment#replay)
 - [Enable autocapture for web](https://app.posthog.com/settings/environment-autocapture#autocapture)
