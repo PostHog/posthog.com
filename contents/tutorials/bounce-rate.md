@@ -32,7 +32,7 @@ Your bounce rate is the percentage of sessions that resulted in a bounce. We def
 
 ## Viewing bounce rate with Web analytics
 
-[Web analytics](/web-analytics) makes it easy to see the bounce rate for a given page on your website. Navigate to your [web analytics dashboard](https://app.posthog.com/web), and you'll find the bounce rate listed alongside each page in the paths section.
+PostHog's [web analytics](/web-analytics) makes it easy to see the bounce rate for a given page on your website. Navigate to your [web analytics dashboard](https://app.posthog.com/web), and you'll find the bounce rate listed alongside each page in the paths section.
 
 <ProductScreenshot
     imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/web_analytics_paths_light_fb2b05a261.png"
