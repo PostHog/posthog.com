@@ -2882,6 +2882,10 @@ export const docsMenu = {
                             url: '/docs/cdp/destinations/airtable',
                         },
                         {
+                            name: 'Attio',
+                            url: '/docs/cdp/destinations/attio',
+                        },
+                        {
                             name: 'Avo',
                             url: '/docs/cdp/destinations/avo',
                         },
