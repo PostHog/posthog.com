@@ -4,23 +4,23 @@ sidebar: Handbook
 showTitle: true
 ---
 
-- **Product teams** are responsible for ensuring their docs are up-to-date. This means:
-  - Documenting new features when they're launched.
-  - Correcting mistakes reported by users.
-  - Clarifying documentation where needed based on support tickets.
+**Product teams** are responsible for ensuring their docs are up-to-date. This means:
+  - Documenting new features when they're launched
+  - Correcting mistakes reported by users
+  - Clarifying documentation where needed based on support tickets
   - Ensuring public betas have documentation which is linked to from feature preview menu
 
-- **Content marketing** is responsible for improving the docs. This means:
-  - Reviewing and improving draft documentation created by product teams.
-  - Identifying and improving low quality documentation.
-  - Ensuring screenshots and other visual elements are up-to-date.
-  - Shipping supplementary docs and tutorials based on feedback and emerging use cases.
+**Content & Docs** is responsible for improving the docs. This means:
+  - Reviewing and improving draft documentation created by product teams
+  - Identifying and improving low quality documentation
+  - Ensuring screenshots and other visual elements are up-to-date
+  - Shipping supplementary docs and tutorials based on feedback and emerging use cases
 
-- **Website & Docs** is responsible for design, organization, and discovery. This means:
-  - The design and content of index pages.
-  - The overall layout of docs and how they're organized.
-  - In-page elements and components – e.g. light and dark mode screenshots.
-  - Website search and other elements that help users find the answers they need.
+**Website & Vibes** is responsible for design, organization, and discovery. This means:
+  - The design and content of index pages
+  - The overall layout of docs and how they're organized
+  - In-page elements and components – e.g. light and dark mode screenshots
+  - Website search and other elements that help users find the answers they need
 
 ## Ownership in Content & Docs team
 
@@ -31,44 +31,22 @@ We aim to have a named individual for most areas of the docs, but this doesn't p
 | &nbsp                           | **Individual owner** |
 |---------------------------------|----------------------|
 | **Overview**                    | Website & Vibes      |
-| **Start here**                  |                      |
-| **SDKs**                        |                      |
-| **Framework guides**            | Lior                 |
+| **Start here**                  | Lior                 |
+| **SDKs and frameworks**         | Ian                  |
 | **Reverse proxy**               | Ian                  |
 | **Migrate**                     | Ian                  |
-| **Advanced**                    |                      |
-| **Data**                        |                      |
+| **Data**                        | Danilo               |
 | **HogQL**                       | Ian                  |
 | **API**                         | Ian                  |
 | **Alerts**                      | Bijan                |
 
-### Product analytics
+### Products
 
 | &nbsp                           | **Individual owner** |
 |---------------------------------|----------------------|
-| **Installation**                | Lior                 |
-| **Capturing events**            | Lior                 |
-| **Identifying users**           | Lior                 |
-| **Person properties**           | Ian                  |
-| **Group analytics**             | Lior                 |
-| **Best practices**              | Lior                 |
-| **FAQ**                         |                      |
-| **Trends**                      | Andy                 |
-| **Dashboards**                  | Andy                 |
-| **User paths**                  | Lior                 |
-| **Correlation analysis**        | Lior                 |
-| **Retention**                   | Andy                 |
-| **Lifecycle**                   | Lior                 |
-| **SQL**                         | Ian                  |
-| **Autocapture**                 | Ian                  |
-| **Privacy controls**            | Lior                 |
-
-### Other products
-
-| &nbsp                           | **Individual owner** |
-|---------------------------------|----------------------|
+| **Product analytics**           | Lior                 |
 | **Web analytics**               | Bijan                |
-| **Session replay**              |                      |
+| **Session replay**              | Bijan                |
 | **Feature flags**               | Ian                  |
 | **Experiments**                 | Lior                 |
 | **Surveys**                     | Bijan                |
@@ -84,7 +62,7 @@ We can help, but we can't do it all for you. We lack the context necessary to do
 If you need help updating documentation:
 
 - Write a draft that covers the basics, which the content team can then help review and polish.
-- In the event multiple docs pages need updating, create an example of changes needed and then request help to complete the rest.
+- If multiple docs pages need updating, create an example of changes needed and then request help to complete the rest.
 
 **Bottom line:** It's much easier for the content team to improve a draft than write completely new documentation, especially when documenting new features. Pull requests > Issues.
 
