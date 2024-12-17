@@ -240,7 +240,7 @@ export const handbookSidebar = [
     },
     {
         name: 'Content & Docs',
-        url: '',
+        url: '/handbook/content-and-docs',
         children: [
             {
                 name: 'Overview',

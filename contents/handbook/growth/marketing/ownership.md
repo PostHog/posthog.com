@@ -8,7 +8,7 @@ showTitle: true
 
 | &nbsp                           | **Individual owner** |
 |---------------------------------|----------------------|
-| **Alternative guides**          | TBD                  |
+| **Alternative guides**          | Ian                  |
 | **AI integrations**             | Lior                 |
 | **Docs & tutorials**            | [See docs ownership](/handbook/content-and-docs/docs)   |
 | **Influencer sponsorships**     | Ian                  |
@@ -18,7 +18,7 @@ showTitle: true
 | **SEO (general / technical)**   | Andy                 |
 | **SEO landing pages**           | Andy                 |
 | **Social media**                | Andy                 |
-| **Product comparisons**         | TBD                  |
+| **Product comparisons**         | Ian                  |
 | **Where people hear about us**  | Andy                 |
 
 ## Owned by Words & Pictures

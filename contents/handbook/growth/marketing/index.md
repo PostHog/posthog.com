@@ -86,10 +86,10 @@ For these reasons, we:
  
 ### Things we want to be good at
 
-- **Social media:** Specifically Twitter, where we've seen good traction posting on James' personal account and the PostHog brand account. We do a minimal amount of posting on PostHog's LinkedIn account to keep it active, but it's not an important channel for us. We don't use any other social media channels. 
+- **Social media:** Specifically Twitter, where we've seen good traction posting on [James' personal account](https://x.com/james406) and the PostHog brand account. We do a minimal amount of posting on PostHog's LinkedIn account to keep it active, but it's not an important channel for us. We don't use any other social media channels. 
 
 
-- **Developer influencers:** A small but growing trend in the industry, most of these are very expensive and overwhelmingly focused on teaching people how to code (i.e. not our target audience). We tried this with an agency and didn't get traction, but have seen some early promising signs going to developers directly. 
+- **Developer influencers:** We sponsor creators like Theo and Fireship to drive awareness and signups to PostHog. Many of the influencers we sponsor don't work out, but the ones that work drive great results. 
 
 ### Things we might want to be good at but haven't tested yet
 
