@@ -59,7 +59,7 @@ Share a post using either your own account or the company account, but note that
 
 Tips for writing a good post:
 - Don't just share the link. Write out an intriguing summary or introduction of the post. Here's a [good example](https://www.linkedin.com/feed/update/urn:li:activity:7257340218159116289).
-- Keep in the link in the main post, and don't do that annoying thing of saying "link is in the comments".
+- Keep the link in the main post, and don't do that annoying thing of saying "link is in the comments".
 - Attach a compelling image to the post. [Example](https://www.linkedin.com/feed/update/urn:li:activity:7256742630804307968).
   - You can create nice images when clicking **Add entry** in the [changelog](/changelog/). It's under the **Social sharing** header.
 
@@ -69,7 +69,7 @@ Again, use Buffer to post from the company account.
 
 Tips for writing a good post:
 - Write a brief summary of the post while sharing as much content as possible in it. [Good example](https://x.com/posthog/status/1851571551314825375).
-- Attach an image to the post (don't really on the link's social graph preview). Again, you can use **Add entry** in the [changelog](/changelog/) to create a nice image.
+- Attach an image to the post (don't rely on the link's social graph preview). Again, you can use **Add entry** in the [changelog](/changelog/) to create a nice image.
 - Do your best not to sound "corporate" or serious. Authenticity is appreciated on Twitter. Have fun with it!
 
 ### 3. Paid ads + newsletters

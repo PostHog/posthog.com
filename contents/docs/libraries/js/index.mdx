@@ -474,7 +474,11 @@ Since version 1.187.0, when initializing the SDK, you can provide a `before_send
 
 ```ts
 posthog.init('<ph_project_api_key>', {
-    before_send: (event: CaptureResult): CaptureResult | null => {
+    before_send: (event: CaptureResult | null): CaptureResult | null => {
+        if (!event) {
+            return null
+        }
+
         // redacting URLs will be specific to your site structure
         function redactUrl(value: string): string {
             return value.replace(/project\/\d+/, 'project/1234567');
@@ -511,7 +515,11 @@ posthog.init('<ph_project_api_key>', {
 
 ```ts
 posthog.init('<ph_project_api_key>', {
-    before_send: (event: CaptureResult): CaptureResult | null => {
+    before_send: (event: CaptureResult | null): CaptureResult | null => {
+        if (!event) {
+            return null
+        }
+
         event.$set = {
             ...event.$set,
             name: 'secret name'
@@ -563,7 +571,11 @@ posthog.init('<ph_project_api_key>', {
 
 ```ts
 posthog.init('<ph_project_api_key>', {
-    before_send: (event: CaptureResult): CaptureResult | null => {
+    before_send: (event: CaptureResult | null): CaptureResult | null => {
+        if (!event) {
+            return null
+        }
+
         let sampleRate = 1.0 // default to always returning the event
         if (event.event === '$heatmap') {
             sampleRate = 0.1
@@ -652,8 +664,10 @@ When working locally it can be useful to see what posthog would do, without actu
 
 ```ts
 posthog.init('<ph_project_api_key>', {
-    before_send: (event: CaptureResult): CaptureResult | null => {
-        console.log('posthog event: ' + event.event, event)
+    before_send: (event: CaptureResult | null): CaptureResult | null => {
+        if (event) {
+            console.log('posthog event: ' + event.event, event)
+        }
         return null
     }
 })
@@ -734,6 +748,9 @@ In this section we describe some additional details on advanced configuration av
 | `feature_flag_request_timeout_ms`<br/><br/>**Type:** Integer<br/>**Default:** `3000` | Sets timeout for fetching feature flags  |
 | `secure_cookie` <br/><br/>**Type:** Boolean<br/>**Default:** `false`          | If this is `true`, PostHog cookies will be marked as secure, meaning they will only be transmitted over HTTPS. |
 | `custom_campaign_params` <br/><br/>**Type:** Array<br/>**Default:** `[]`      | List of query params to be automatically captured (see [UTM Segmentation](/docs/data/utm-segmentation) ) |
+| `fetch_options.cache` <br/><br/>**Type:** string<br/>**Default:** `undefined`  | `fetch` call cache behavior (see [MDN Docs](https://developer.mozilla.org/en-US/docs/Web/API/RequestInit#cache) to understand available options). It's important when using NextJS, see [companion documentation](https://nextjs.org/docs/app/api-reference/functions/fetch#fetchurl-options). This is a tricky option, avoid using it unless you are aware of the changes this could cause - such as cached feature flag values, etc. |
+| `fetch_options.next_options` <br/><br/>**Type:** Object<br/>**Default:** `undefined` | Arguments to be passed to the `next` key when calling `fetch` under NextJS. See [companion documentation](https://nextjs.org/docs/app/api-reference/functions/fetch#optionsnextrevalidate).|
+
 
 <blockquote class="warning-note">
     These are features for advanced users and may lead to unintended side effects if not reviewed carefully. If you are
