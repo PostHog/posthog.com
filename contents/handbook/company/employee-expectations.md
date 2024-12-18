@@ -40,7 +40,7 @@ That being said, there is often a _reason_ why things are the way they are. That
 
 ## Don't wait for someone else
 
-We expect you to be proactive about answering questions in your domain, even very early on after you are hired (ie after the first week). Look in the code. Read the docs. Find the answer. 
+We expect you to be proactive about answering questions in your domain, even very early on after you are hired (i.e. after the first week). Look in the code. Read the docs. Find the answer. 
 
 Being wrong is way better than being silent - if you are wrong, someone will correct you. If you are silent, you're not doing your job.
 
