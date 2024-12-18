@@ -167,7 +167,6 @@ export default {
       "<ph_project_api_key>",
       {
         api_host: "<ph_client_api_host>",
-        person_profiles: 'identified_only',
       }
     );
   },
@@ -241,7 +240,6 @@ export default {
       {
         api_host: "<ph_client_api_host>",
         capture_pageview: false,
-        person_profiles: 'identified_only',
       }
     );
   },

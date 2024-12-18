@@ -14,7 +14,6 @@ export function PostHogProvider({ children }) {
   useEffect(() => {
     posthog.init(process.env.NEXT_PUBLIC_POSTHOG_KEY, {
       api_host: process.env.NEXT_PUBLIC_POSTHOG_HOST,
-      person_profiles: 'identified_only',
       capture_pageview: false // Disable automatic pageview capture, as we capture manually
     })
   }, [])
@@ -39,7 +38,6 @@ export function PostHogProvider({ children }: { children: React.ReactNode }) {
     useEffect(() => {
       posthog.init(process.env.NEXT_PUBLIC_POSTHOG_KEY, {
         api_host: process.env.NEXT_PUBLIC_POSTHOG_HOST,
-        person_profiles: 'identified_only',
         capture_pageview: false // Disable automatic pageview capture, as we capture manually
       })
   }, [])
@@ -187,7 +185,7 @@ export default function SuspendedPostHogPageView() {
 
 We can then update our `PostHogProvider` to include this component in all of our pages.
 
-```diff
+```js
   // app/providers.js
   'use client'
 
@@ -201,7 +199,6 @@ We can then update our `PostHogProvider` to include this component in all of our
     useEffect(() => {
       posthog.init(process.env.NEXT_PUBLIC_POSTHOG_KEY, {
         api_host: process.env.NEXT_PUBLIC_POSTHOG_HOST,
-        person_profiles: 'identified_only',
         capture_pageview: false // Disable automatic pageview capture, as we capture manually
       })
     }, [])
@@ -219,7 +216,7 @@ We can then update our `PostHogProvider` to include this component in all of our
 
 To capture pageleave events, we need to set `capture_pageleave: true` in the initialization because setting `capture_pageview: false` disables it.
 
-```diff
+```js
   // app/providers.js
   'use client'
   import posthog from 'posthog-js'
@@ -230,7 +227,6 @@ To capture pageleave events, we need to set `capture_pageleave: true` in the ini
     useEffect(() => {
       posthog.init(process.env.NEXT_PUBLIC_POSTHOG_KEY, {
         api_host: process.env.NEXT_PUBLIC_POSTHOG_HOST,
-        person_profiles: 'identified_only',
         capture_pageview: false,
 +       capture_pageleave: true, // Enable pageleave capture
       })
