@@ -18,9 +18,9 @@ An alternative, less exciting, approach to life is to become aware as things cha
 
 You can track important metrics and get email notifications when they cross threshold that you specify. The threshold can be an absolute value (e.g. pageviews exceeded 1,000) or a relative amount (e.g. conversion rate increased by 10%).
 
-So, instead of having to remember to check in on the status of a a metric or feature; you can receive an email alert when changes occur.
+So, instead of having to remember to check in on a metric or feature; you can receive an email alert when changes occur.
 
-Let's get started with how to create alerts, and then we can dive into some practical examples of how they can be helpful.
+Let's get started with how to create alerts, and then we'll dive into some practical examples of how they can be helpful.
 
 ## How to create alerts
 
@@ -35,7 +35,7 @@ To create an alert, click the **Alerts** button on the top right of the insight 
     classes="rounded"
 />
 
-To configure the alert, we'll set the following:
+To configure the alert, set the following:
 
 - **Name:** the name you'll see when the alert is triggered.
 - **When:** the data points the alert will be based on. The drop-down contains a list of all the series in your insight's graph. For example, if you have an insight that tracks the number of pageviews and signups, you can use either of these series as the basis for the alert threshold.
@@ -59,7 +59,7 @@ Then, you can click **Create alert**, and you're all set.
     classes="rounded"
 />
 
-For a more detailed walkthrough, you can also check out our our [Alerts docs](https://posthog.com/docs/alerts), which we'll also update as new alerting features get added.
+For a more detailed walkthrough, you can also check out our [Alerts docs](https://posthog.com/docs/alerts), which we'll also update as new alerting features get added.
 
 ## Practical uses for alerts
 
@@ -69,9 +69,9 @@ Now that we can create alerts, let's take a look at a handful of practical examp
 
 Want to investigate spikes in traffic to your website? This can be useful when testing marketing campaigns to see if they trigger the expected spikes in traffic.
 
-But these kinds of alerts can also be useful to investigate an _unexpected_ spike in traffic. We often see this at PostHog when our content gets featured in a popular email newsletter or shared on Hacker News. When we notice an influx of new signups, it can be interesting to dig in and try to figure out where they came from.
+These kinds of alerts can also be useful to investigate unexpected spikes in traffic. We often see this at PostHog when our content gets featured in a popular email newsletter or shared on Hacker News. When we notice an influx of new signups, it can be fun to dig in and try to figure out where they came from.
 
-For example, we can get an alert when the number of pageviews for our [pricing page](/pricing) rises above 8,000 views for the week. First, you can [create a new trend insight](/docs/product-analytics/trends/overview#1-creating-a-new-trend) to track pageviews where "Path Name" equals "/pricing". Then, filter by the year to date and group by week.
+For example, we can get an alert when the number of pageviews for our [pricing page](/pricing) rises above 8,000 views for the week. First, we can [create a new trend insight](/docs/product-analytics/trends/overview#1-creating-a-new-trend) to track pageviews where "Path Name" equals "/pricing". Then, filter by the year-to-date and group by week.
 
 Then, set up an alert using the steps above to trigger a notification when the number of pageviews rises above 8,000. When the threshold is crossed, this is what the email looks like:
 
