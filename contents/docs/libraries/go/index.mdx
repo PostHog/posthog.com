@@ -29,7 +29,7 @@ import GoSendEvents from '../../integrate/send-events/_snippets/send-events-go.m
 
 ## Person profiles and properties
 
-For backward compatibility, PostHog captures identified events by default. These create [person profiles](/docs/data/persons). To set [person properties](/docs/data/user-properties) in these profiles, include them when capturing an event:
+For backward compatibility, the Go SDK captures identified events by default. These create [person profiles](/docs/data/persons). To set [person properties](/docs/data/user-properties) in these profiles, include them when capturing an event:
 
 ```go
 client.Enqueue(posthog.Capture{
