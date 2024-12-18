@@ -1,8 +1,29 @@
 ---
-title: Content
+title: Overview
 sidebar: Handbook
 showTitle: true
 ---
+
+The Content & Docs team has two core goals:
+
+1. Increase awareness of PostHog, especially among people in our ideal customer profile
+2. Help developers and PostHog users be more successful through great content and docs
+
+We do this by:
+
+- Building a reputation for world-class content
+- Constantly working to improve our documentation
+- Identifying where content can help users be more successful
+- Holding a high bar for quality in everything we do
+- Never being satisfied with how high that bar is
+- Being weird, opinionated, and unafraid of being wrong
+- Reacting quickly to opportunities whenever they arise
+- Not being precious about our work and priorities
+- Having a team of talented, technically literate writers (and Andy)
+- Not relying on freelancers or guest contributors for content
+- Avoiding tedious enterprise marketing nonsense (PDFs, gated content, webinars, etc.)
+
+The latest goals for marketing can be found on the [Content & Docs team page](/teams/marketing).
 
 Content is the main pillar of our marketing strategy. Our strategy is to go _deeper_ and create better content as we grow. We don't rely on AI. We don't take content in exchange for links. We don't have arbitrary volume goals.
 
@@ -59,16 +80,4 @@ If you want to run a paid ad campaign on Reddit, Google, or Twitter, see the [pa
 
 It's a good idea to create an issue highlighting what you'd like to achieve in your campaign. Here's an [example](https://github.com/PostHog/posthog.com/issues/9646)
 
-## Good to knows
-
-- The marketing team is responsible for all the above – mostly Andy, Ian, and Lior, but James Hawkins, Joe, and Charles also contribute. The Website & Docs team owns our [reference documentation](/docs). 
-
-- You can view planned content on the <PrivateLink url="https://github.com/orgs/PostHog/projects/8?card_filter_query=label%3Acontent">Marketing project board</PrivateLink> using the "content" label filter. All planned content should have an issue.
-
 - Join our [#content-ideas Slack channel](https://posthog.slack.com/archives/C015CRUQR7Y) to share ad-hoc ideas.
-
-> **Useful resources:**
-> - [Guide to writing for PostHog](/handbook/growth/marketing/writing-for-posthog)
-> - [List of tags and categories](/handbook/growth/marketing/tags-and-categories)
-> - [Our internal SEO guide](/handbook/growth/marketing/seo-guide)
-> - [Components you can use in articles](/handbook/growth/marketing/components)
