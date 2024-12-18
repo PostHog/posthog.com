@@ -24,7 +24,15 @@ showTitle: true
 
 ## Ownership in Content & Docs team
 
-We aim to have a named individual for most areas of the docs, but this doesn't preclude anyone working on any part of the docs they deem necessary.
+We aim to have a named individual for most areas of the docs. Docs owners are responsible for:
+
+- Reviewing and polishing docs created by product teams 
+- Ongoing maintenance of those docs
+- Improving docs based on user feedback / suggestions from the support team
+- Fixing 404s and reviewing to community docs PRs
+- Managing questions on docs pages (e.g. archiving stale questions, ensuring relevant ones are answered, marking comments as solutions)
+
+This doesn't preclude anyone from submitting new or improved docs for any product – remember: PRs > issues
 
 ### Product OS
 
@@ -51,7 +59,7 @@ We aim to have a named individual for most areas of the docs, but this doesn't p
 | **Experiments**                 | Lior                 |
 | **Surveys**                     | Bijan                |
 | **Data pipelines**              | Danilo               |
-| **Data warehouse**              | Ian                  |
+| **Data warehouse**              | Danilo                  |
 
 ## FAQ
 
