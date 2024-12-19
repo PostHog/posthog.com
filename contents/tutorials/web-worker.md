@@ -9,7 +9,7 @@ tags:
 
 Web workers enable you to run computationally expensive tasks or scripts in background threads. This prevents the main webpage thread from slowing down or being blocked. 
 
-Because the web worker works on a background thread, it can't access the DOM, browser APIs, or window object methods. Instead, it communicates with the main thread through a messaging system .
+Because the web worker runs on a background thread, it can't access the DOM, browser APIs, or window object methods. Instead, it communicates with the main thread through a messaging system.
 
 This means PostHog requires a different setup for a web worker than a normal web implementation. This tutorial helps you with this different setup by building a basic app with a web worker script and then setting up PostHog to work with it.
 
