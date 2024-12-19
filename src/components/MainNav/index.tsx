@@ -292,7 +292,7 @@ export const InternalMenu = ({ className = '', mobile = false, menu, activeIndex
             <ul
                 style={{ justifyContent: overflowing ? 'start' : 'center' }}
                 ref={ref}
-                className={`flex space-x-4 list-none m-0 pt-1 px-4 border-b border-light dark:border-dark relative snap-x snap-mandatory overflow-x-auto overflow-y-hidden ${className}`}
+                className={`flex space-x-4 list-none m-0 pt-1 px-10 border-b border-light dark:border-dark relative snap-x snap-mandatory overflow-x-auto overflow-y-hidden ${className}`}
             >
                 {menu.map((menuItem, index) => {
                     const { url, color, colorDark, icon, name, onClick } = menuItem
