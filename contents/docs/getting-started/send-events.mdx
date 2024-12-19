@@ -17,8 +17,10 @@ We recommend starting with autocapture for your web app as it's the quickest way
 
 When you call `posthog.init`, the PostHog browser JS library begins automatically capturing user events:
 
-- **Page views**, including the URL
+- **Pageviews**, including the URL, referrer, UTMs, and more
 - **Autocaptured events**, such as any click, change of input, or submission associated with `a`, `button`, `form`, `input`, `select`, `textarea`, and `label` tags
+
+> **Note**: If you have a [single-page app](/tutorials/single-page-app-pageviews), you'll need to manually capture pageviews and pageleaves as PostHog only sends them once (when your app loads and when they leave).
 
 ### Hiding certain elements
 

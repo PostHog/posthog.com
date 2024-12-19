@@ -28,14 +28,18 @@ By default, PostHog automatically captures the following frontend events:
 
 If you prefer to disable these, set the appropriate values in your [configuration options](/docs/libraries/js#config).
 
-### Single-page apps and pageviews
+### Manually capturing pageviews and pageleaves in single-page apps
 
-PostHog automatically sends `pageview` events whenever it gets loaded. If you have a single-page app, that means it only sends a pageview once (when your app loads).
+PostHog automatically sends `$pageview` events whenever it gets loaded and `$pageleave` when they leaves. If you have a single-page app, that means it only sends pageview and pageleave once (when your app loads and when they leave).
 
-To make sure any navigating a user does within your app gets captured, you can make a pageview call manually.
+To make sure any navigating a user does within your app gets captured, you can make pageview and pageleave calls manually.
 
 ```js-web
+// Capture pageview
 posthog.capture('$pageview')
+
+// Capture pageleave
+posthog.capture('$pageleave')
 ```
 
-This automatically sends the current URL along with other relevant properties.
+This automatically sends the current URL along with other [autocaptured properties](/docs/product-analytics/autocapture#autocaptured-properties) like the referrer, OS, scroll depth, and more.
