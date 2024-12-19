@@ -2966,6 +2966,10 @@ export const docsMenu = {
                             url: '/docs/cdp/destinations/sendgrid',
                         },
                         {
+                            name: 'Snapchat Ads',
+                            url: '/docs/cdp/destinations/snapchat-ads',
+                        },
+                        {
                             name: 'Zapier',
                             url: '/docs/cdp/destinations/zapier',
                         },
