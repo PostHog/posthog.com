@@ -26,6 +26,9 @@ These components rely on a few external services:
 -   PostgreSQL – for storing ordinary data (users, projects, saved insights)
 -   Redis – for caching and inter-service communication
 -   Zookeeper – for coordinating Kafka and ClickHouse clusters
+-   Temporal+ElasticSearch - for managing long-running workflows (for Batch Export and other functionality)
+-   Two Rust based services for the Session Replay feature (replay, replay-capture)
+-   RedPanda-based 'livestream' data streaming service for the Live Events feature
 
 When spinning up an instance of PostHog for development, we recommend the following configuration:
 
