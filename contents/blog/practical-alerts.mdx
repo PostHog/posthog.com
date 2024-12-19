@@ -85,7 +85,12 @@ But what about anomalous spikes in 404s? It might mean you deployed a broken lin
 
 In this case, you can set up another trend insight to graph the number of pageviews for your 404 page. You can examine the graph to establish a baseline for a standard amount of traffic to the 404 page. Then, set up an alert to check when 404s are significantly higher than this baseline.
 
-![Graph of 404s](https://res.cloudinary.com/dmukukwp6/image/upload/404_graph_79107f52bb.png)
+<ProductScreenshot
+    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/404_graph_light_089709bc1e.png"
+    imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/404_graph_79107f52bb.png"
+    alt="404 graph"
+    classes="rounded"
+/>
 
 You can also click the graph where you see a spike and it will display a list of all the users effected. If you have [session replay](/session-replay) enabled, you can watch the session where the 404 occurred and figure out exactly which link is broken.
 
@@ -120,17 +125,40 @@ So you can set up an alert that coincides with the launch of a redesigned page a
 
 ### 5. Alert on changes in conversion rates
 
-To set alerts on changes in your conversion rate, you can set up an insight that tracks visits to your pricing page as well as user signups. For example, we can create a trend insight and filter for pageviews where "Path Name" equals "/pricing". And then add a filter for our `user_signed_up` event. So this insight will display a graph with a line for the number of pageviews for the pricing page as well as a separate line for the number of users that signed up.
+To set alerts on changes in your conversion rate, you can set up an insight that tracks visits to your pricing page and signups. For example, we can create a trend insight and filter for pageviews where "Path Name" equals "/pricing". And then add a filter for our `user_signed_up` event. So this insight will display a graph with a line for the number of pageviews for the pricing page as well as a separate line for the number of users that signed up.
 
-![Conversions](https://res.cloudinary.com/dmukukwp6/image/upload/conversion_graph_d4ac533adf.png)
+<ProductScreenshot
+    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/conversions_light_efbbc10280.png"
+    imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/conversion_graph_d4ac533adf.png"
+    alt="Conversions"
+    classes="rounded"
+/>
 
-To find out if the conversion rate is increasing or decreasing by a specified percentage, we can set up multiple alerts. We can set up one alert for when the `user_sign_up` event is increasing by 5% and a separate alert for when the `user_sign_up` event is decreasing by 5%.
+If we want to find out when the conversion rate increases or decreases by 10%, we can set up multiple alerts. We can set up one alert for when the `user_sign_up` event is increasing by 10% and a separate alert for when the `user_sign_up` event is decreasing by 10%.
+
+<ProductScreenshot
+    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/mutliple_alerts_light_a45b5f0ad9.png"
+    imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/mutliple_alerts_dark_1d37e0e9b9.png"
+    alt="Multiple alerts"
+    classes="rounded"
+/>
 
 ### 6. Alert on breakdown in referral sources
 
-Alert on major changes in breakdowns. "For example, I have a graph showing traffic to my site by day broken down by referrer - if there's a major change in who's referring traffic (a bunch of new traffic from a new source, or a previous major source of traffic disappearing) I'd love to be able to get alerts about that, even if the overall traffic total doesn't shift.
+We also have the ability to trigger alerts on trends with breakdowns. For example, you can track all the traffic to your website broken down by the referral source (e.g. google, substack, direct).
 
-> Note: For trends with breakdown, the alert will fire if any of the breakdown values breaches the threshold.
+If there's a major change in where the traffic is coming from, we want to trigger an alert. Traffic could surge from a new source, or an existing source of traffic could disappear, even if the overall traffic remains the same.
+
+Here's an example where we set up an alert when any of those breakdown values increases by 10% or more:
+
+<ProductScreenshot
+    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/breakdown_light_a6de1bd240.png"
+    imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/breakdown_dark_5d2300b6cd.png"
+    alt="Breakdown alerts"
+    classes="rounded"
+/>
+
+> 📝 Note: For trends with a breakdown, the alert will fire if _any_ of the breakdown values breaches the threshold.
 
 ## Upcoming improvements and suggestions
 
