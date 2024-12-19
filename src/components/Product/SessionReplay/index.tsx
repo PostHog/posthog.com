@@ -1,6 +1,7 @@
 import CloudinaryImage from 'components/CloudinaryImage'
 import React from 'react'
 import Link from 'components/Link'
+import MobileLibraries from 'components/Products/MobileLibraries'
 import { StaticImage } from 'gatsby-plugin-image'
 import {
     IconRewindPlay,
@@ -90,7 +91,7 @@ const features = [
     },
 ]
 
-const subfeaturesItemCount = 5
+const subfeaturesItemCount = 4
 const subfeatures = [
     {
         title: 'Capture sessions without extra code',
@@ -101,11 +102,6 @@ const subfeatures = [
         title: 'Automatic playlists',
         description: 'Filter by user behavior or time',
         icon: <IconPlaylist />,
-    },
-    {
-        title: 'Web or mobile session recording',
-        description: 'Web or Android (beta) available',
-        icon: <IconPhone />,
     },
     {
         title: 'Download recordings',
@@ -120,7 +116,6 @@ const subfeatures = [
 ]
 
 const questions = [
-    { question: 'Where do key events happen in my user’s sessions?' },
     {
         question: "How do I understand my users' behavior in funnels?",
         url: '/tutorials/explore-insights-session-recordings#watching-users-through-funnels',
@@ -136,7 +131,6 @@ const questions = [
     { question: 'How do I figure out how to lower churn?', url: '/tutorials/churn-rate#session-recordings' },
     { question: 'How do I improve my support experience?', url: '/tutorials/session-recordings-for-support' },
     { question: 'How do I see where errors happen?', url: '/tutorials/session-recordings-for-support' },
-    { question: 'How do I get bug recreation steps easily?' },
     {
         question: 'Why are users dropping off in my funnel?',
         url: '/tutorials/explore-insights-session-recordings#watching-users-through-funnels',
@@ -360,7 +354,7 @@ const PairsWithArray = [
 ]
 
 export const ProductSessionReplay = () => {
-    const { elevenlabs, hasura, netdata, pry } = useStaticQuery(graphql`
+    const { elevenlabs, hasura, netdata, swype } = useStaticQuery(graphql`
         fragment ProductCustomerFragment on Mdx {
             fields {
                 slug
@@ -384,7 +378,7 @@ export const ProductSessionReplay = () => {
             netdata: mdx(slug: { eq: "customers/netdata" }) {
                 ...ProductCustomerFragment
             }
-            pry: mdx(slug: { eq: "customers/pry" }) {
+            swype: mdx(slug: { eq: "customers/swype" }) {
                 ...ProductCustomerFragment
             }
         }
@@ -434,9 +428,9 @@ export const ProductSessionReplay = () => {
                             customer={netdata}
                         />
                         <CustomerCard
-                            outcome="improved registrations by 20-30%"
-                            quote="We've improved our whole onboarding flow by about 5% too, which is great."
-                            customer={pry}
+                            outcome="uses mobile replays to speed up app testing"
+                            quote="Replays help us see how our mobile app looks on different devices and screen sizes."
+                            customer={swype}
                         />
                     </ul>
                 </section>
@@ -457,6 +451,10 @@ export const ProductSessionReplay = () => {
                             return <Subfeature {...subfeature} key={index} />
                         })}
                     </ul>
+                </section>
+
+                <section>
+                    <MobileLibraries />
                 </section>
 
                 <section className="bg-accent dark:bg-accent-dark">
