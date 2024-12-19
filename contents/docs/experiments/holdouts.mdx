@@ -2,11 +2,15 @@
 title: Holdouts
 ---
 
-When running experiments, you can create lists of users called "holdouts" who will be excluded. You can keep these same users out of either specific experiments or all of your testing entirely.
+Holdouts are randomly assigned lists of users who will be excluded from experiments. You can exclude these users from specific experiments or even all of your experiments.
+
+Holdout testing is useful for understanding long term effects of product changes, typically over a few months. For example, a new onboarding flow might show great initial conversion rates, but a holdout group could reveal whether those users remain active in 3 months from now.
+
+## How to create a holdout
 
 To create a new holdout:
 
-1. Navigate to Experiments and click on the Holdout groups tab.
+1. Navigate to [Experiments](https://us.posthog.com/project/experiments) and click on the **Holdout groups** tab.
 2. Click **New holdout**. 
 3. Enter a descriptive name for your holdout, fill out the optional description to help you remember its purpose, and set the percentage of users you want to include in the holdout. 
 
@@ -27,6 +31,8 @@ Once created, you can assign the holdout to new or existing experiments. The hol
   classes="rounded"
   alt="Screenshot of the form to create an experiment with the holdout field expanded"
 />
+
+## How to view holdout results
 
 When assigned to an experiment, your holdout will be treated as another variant in experiment analysis. You'll be able to see the conversion rate, delta %, credible interval, and win probability alongside other experiment variants.
 
