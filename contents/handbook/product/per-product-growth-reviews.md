@@ -4,7 +4,7 @@ sidebar: Handbook
 showTitle: true
 ---
 
-For products that have product-market fit and are generating revenue, we are doing monthly **per-product growth reviews**. These are separate from the [growth reviews](/handbook/growth/growth-engineering/growth-sessions) the [Growth team](/teams/growth) are doing. We recommend to do the growth reviews at the start of the month, to review the previous month. The growth reviews are attended the Small Team Lead, the exec responsible for the team and the Product Manager. Apart from the Small Team Lead, the small team members currently don’t join the growth reviews, but all analysis is public, and they have the chance to participate async before and after the meeting. It’s the job of the Product Manager to schedule, prepare and lead the growth review.
+For products that have product-market fit and are generating revenue, we are doing monthly **per-product growth reviews**. These are separate from the [growth reviews](/handbook/growth/growth-engineering/growth-sessions) the [Growth team](/teams/growth) are doing. We recommend to do the growth reviews at the start of the month, to review the previous month. The growth reviews are attended by the small team lead, the exec responsible for the team and the product manager. Apart from the small team lead, the small team members currently don’t join the growth reviews, but all analysis is public, and they have the chance to participate async before and after the meeting. It’s the job of the product manager to schedule, prepare and lead the growth review.
 
 ## Objectives
 
