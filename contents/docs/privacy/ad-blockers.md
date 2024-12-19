@@ -15,7 +15,7 @@ Nevertheless, privacy-focused users of the web may wish to prevent any such data
 
 `https://eu.i.posthog.com/capture`
 
-PostHog provides other tools unrelated to event reporting and analytics, and these can be vital to workings of the sites which rely on them. You **should not block** these endpoints, at risk of breaking site functionality:
+PostHog provides other tools unrelated to event reporting and analytics. These can be vital to the sites which rely on them. You **should not block** these endpoints, at risk of breaking site functionality:
 
 `https://us.i.posthog.com/decide`
 
