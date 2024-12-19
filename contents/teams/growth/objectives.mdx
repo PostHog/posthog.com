@@ -1,21 +1,47 @@
-### Q4 2024 Objectives
+## Q1 2025 Objectives
 
-- **Objective 1**: Get to a 4/10 in Enterprise platform support (Zach)
-  - Release Enterprise addon and iterate with sales to find a pricing model that makes sense
-  - Build RBAC
-  - Reasoning: As a company we want to have a 4/10 support for enterprise - and our platform needs to support that.
-  - Metrics: RBAC is at a place where enterprises who require it can actually use it.
-- **Objective 2**: Make revenue & forecasting more reliable (Patricio)
-  - Rejig how we do sync_invoices so we don’t see big drops - respond to webhooks instead of large syncs
-  - Evaluate temporal vs celery for usage reports and billing tasks so we can adhere to rate limits better
-  - Side hustle, if time permits: Rejig how anonymous / identified events are billed, as the current implementation is confusing.
-- **Objective 3**: Activation: reverse trials, analytics onboarding flow, understand CC activation (Raquel)
-  - Dig into the data, watch replays to figure out why CC activation rate has been falling
-  - Add reverse trial to onboarding
-  - Add reverse trial to billing page for teams
-  - Reasoning: Our CC activation rate has been falling and we aren't really sure why. We should figure it out and try a few things to improve it. I also want to continue my focus on analytics activation that I finally got to start last quarter that I didn't get to finish!
-  - Metrics: Improved CC activaiton rate. Increase in people who sign up for Teams. Increase in people who successfully activate into product analytics and replay.
+### Pato
 
-Stretch goals:
-  - API query pricing (Raquel & Patricio)
-  - Move the annual credits flow out of Zapier
+1. Usage dashboard
+    - Over time usage for all projects and broken down by product
+    - A new structure to the billing page for usage and billing
+    - Bonus: layer on pricing tiers and break down costs by time/project/product
+2. Pricing changes
+    - Finish Mobile Replay pricing
+    - Query API pricing
+    - Clean up billing for identified / unidentified events
+
+### Zach
+
+1. RBAC
+    - Release in Beta to core customers requesting it
+    - Complete full documentation for internal and external use
+2. Enterprise add-on
+    - Update the offering and release the self-serve experience
+    - As part of this experiment with changing the teams plan structure/offering
+3. Improve SAML 
+    - Fix xmlsec or new add a new provider to handle it    
+
+### Surbhi (and Josh)
+
+1. Use intent data to onboard users into multiple products 
+    - This could be allowing users to onboard into multiple products
+    - Walk through each one without repetitive steps
+    - Improve how we think about activation within products when onboarding to multiple
+2. Surface intent data later in the users journey
+    - utilize the quick start panel to cross sell to get started in the other products
+    - cross sell to get started in the other products (be creative)
+
+### Extras
+
+_These are meant as nice to haves if we have time or you feel inspired_
+
+1. Postgres (pgbouncer + read replica) - infrastructure handling this
+2. Self serve account deletion
+3. Case insensitive emails
+4. Move all transactional emails to Customer.io
+5. 3D Secure improvements - email flows
+6. Move revenue dashboards from Metabase into PostHog
+7. Get credit cart input experiment over the line
+8. Billing endpoint performance improvements (split up)
+9. Proper callbacks for time-sensitive checks
