@@ -1792,7 +1792,7 @@ export const docsMenu = {
                 },
                 {
                     name: 'Features',
-                    url: '',
+                    url: '/docs/alerts',
                     icon: 'IconSearch',
                     children: [
                         {
