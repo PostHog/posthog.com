@@ -152,7 +152,7 @@ However, if you capture events using the `distinct_id` used in their previously 
 
 Yes, identified events can still be "anonymous" in the sense that they don't need to contain personal information such as name, email, or phone number. A person profile is still created for them, but it doesn't need to include any personal information.
 
-### What happens to initial person properties when an anonymous user is identified? Do we get the initial person properties from the anonymous events?
+### How are initial person properties set when an anonymous user is identified?
 
 As person properties are not stored on anonymous events, we cannot get any initial person properties directly from those events. We store initial URL and initial referrer in [your persistence](docs/libraries/js#persistence) and from this we are able to derive the following values which are set when the person profile is created:
  - `$initial_current_url`
