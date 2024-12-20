@@ -1793,27 +1793,23 @@ export const docsMenu = {
                 {
                     name: 'Features',
                     url: '',
-                    icon: 'IconHardDrive',
+                    icon: 'IconSearch',
                     children: [
                         {
                             name: 'Alerts',
                             url: '/docs/alerts',
-                            icon: 'IconBell',
                         },
                         {
                             name: 'Command palette',
                             url: '/docs/cmd-k',
-                            icon: 'IconSearch',
                         },
                         {
                             name: 'Hog',
                             url: '/docs/hog',
-                            icon: 'IconCode',
                         },
                         {
                             name: 'Notebooks',
                             url: '/docs/notebooks',
-                            icon: 'IconBook',
                         },
                     ],
                 },
