@@ -28,6 +28,8 @@ import { sortOptions } from 'components/Edition/Posts'
 import { AnimatePresence, motion } from 'framer-motion'
 import Tooltip from 'components/Tooltip'
 import NotFoundPage from 'components/NotFoundPage'
+import { IconX } from '@posthog/icons'
+import Confetti from 'react-confetti'
 
 const Avatar = (props: { className?: string; src?: string }) => {
     return (
@@ -127,7 +129,7 @@ const Bio = ({ biography, readme }) => {
     )
 }
 
-export default function ProfilePage({ params }: PageProps) {
+export default function ProfilePage({ params, location }: PageProps) {
     const id = parseInt(params.id || params['*'])
     const [view, setView] = useState('discussions')
     const posthog = usePostHog()
@@ -146,7 +148,6 @@ export default function ProfilePage({ params }: PageProps) {
             },
         },
     })
-    const isCurrentUser = user?.profile?.id === id
     const isModerator = user?.role?.type === 'moderator'
 
     const profileQuery = qs.stringify(
@@ -157,15 +158,6 @@ export default function ProfilePage({ params }: PageProps) {
                     select: ['type'],
                 },
                 achievements: {
-                    ...(!isCurrentUser
-                        ? {
-                              filters: {
-                                  hidden: {
-                                      $ne: true,
-                                  },
-                              },
-                          }
-                        : null),
                     populate: {
                         achievement: {
                             populate: {
@@ -245,7 +237,13 @@ export default function ProfilePage({ params }: PageProps) {
                     title="Profile"
                     breadcrumb={[{ name: 'Community', url: '/questions' }]}
                     menu={nav}
-                    sidebar={<ProfileSidebar profile={{ ...profile, id }} mutate={mutate} />}
+                    sidebar={
+                        <ProfileSidebar
+                            profile={{ ...profile, id }}
+                            mutate={mutate}
+                            highlightAchievement={location.state?.achievement?.id}
+                        />
+                    }
                     hideSurvey
                 >
                     {profile ? (
@@ -381,79 +379,120 @@ type ProfileSidebarProps = {
     mutate: () => void
 }
 
-const Achievement = ({ title, description, image, icon, id, mutate, profile, ...other }) => {
-    const { user, getJwt } = useUser()
-    const [hidden, setHidden] = useState(other.hidden)
-    const [opacity, setOpacity] = useState(hidden ? 0.6 : 1)
+export const AchievementModal = ({
+    highlight = false,
+    setModalOpen,
+    modalOpen,
+    imageURL,
+    title,
+    description,
+    points,
+    actionButtons,
+}) => {
+    return (
+        <Modal open={modalOpen} setOpen={setModalOpen}>
+            {highlight && <Confetti width={window.innerWidth} numberOfPieces={1000} recycle={false} />}
+            <div className="w-full h-full flex items-center justify-center p-5 z-10 relative">
+                <div className="relative max-w-screen-2xs w-full">
+                    <button
+                        className="absolute top-1 right-1 translate-x-1/2 -translate-y-1/2 z-10 rounded-full p-1 bg-white border border-border"
+                        onClick={() => setModalOpen(false)}
+                    >
+                        <IconX className="size-5 text-primary" />
+                    </button>
+                    <div className="rounded-md w-full z-10 bg-white border border-border overflow-hidden">
+                        <div className="relative aspect-video w-full overflow-hidden">
+                            <img
+                                className="w-full h-full object-cover absolute top-0 left-0 object-center"
+                                src={imageURL}
+                            />
+                            <div
+                                className={`${
+                                    highlight ? 'animate-jump-in' : ''
+                                } flex items-center py-1 px-2 rounded-md border border-white bg-red dark:bg-yellow text-white justify-center absolute bottom-2 right-2`}
+                            >
+                                <span className="flex items-baseline">
+                                    <span className="flex items-center">
+                                        <span className="text-base font-semibold leading-none">+</span>
+                                        <span className="text-lg font-bold leading-none">{points}</span>
+                                    </span>
+                                    <span className="text-xs m-0 opacity-70 leading-none">/xp</span>
+                                </span>
+                            </div>
+                        </div>
+                        <div className="p-3">
+                            <div className="flex items-center justify-between space-x-2">
+                                <h2 className="text-xl font-bold m-0 text-primary">{title}</h2>
+                            </div>
+                            <p className="text-sm m-0 opacity-70 text-primary">{description}</p>
+                            {actionButtons && actionButtons.length > 0 && (
+                                <div className="mt-2 flex items-center">
+                                    {actionButtons.map((button, index) => {
+                                        const Container = button.url ? Link : 'button'
+                                        return (
+                                            <Container
+                                                key={button.label}
+                                                {...(button.url ? { to: button.url, state: button.state } : undefined)}
+                                                {...(button.onClick ? { onClick: button.onClick } : undefined)}
+                                                className="text-sm font-bold text-red dark:text-yellow even:pl-2 even:border-l border-border dark:border-dark odd:pr-2 leading-none"
+                                            >
+                                                {button.label}
+                                            </Container>
+                                        )
+                                    })}
+                                </div>
+                            )}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </Modal>
+    )
+}
+
+const Achievement = ({ title, description, image, icon, id, mutate, profile, highlight, points }) => {
+    const [modalOpen, setModalOpen] = useState(false)
+    const { user } = useUser()
     const isCurrentUser = user?.profile?.id === profile.id
-    const handleClick = async (hidden: boolean) => {
+    const handleClick = async () => {
         if (isCurrentUser) {
-            setHidden(hidden)
-            try {
-                const jwt = await getJwt()
-                const body = {
-                    data: {
-                        achievements: [
-                            ...profile.achievements
-                                .filter((achievement) => achievement.id !== id)
-                                .map(({ id, hidden }) => ({ id, hidden })),
-                            {
-                                id,
-                                hidden,
-                            },
-                        ],
-                    },
-                }
-                await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/profiles/${user.profile.id}?populate=avatar`, {
-                    method: 'PUT',
-                    body: JSON.stringify(body),
-                    headers: {
-                        'Content-Type': 'application/json',
-                        Authorization: `Bearer ${jwt}`,
-                    },
-                })
-                await mutate()
-            } catch (err) {
-                console.error(err)
-            }
+            setModalOpen(true)
         }
     }
-
-    useEffect(() => {
-        setOpacity(hidden ? 0.6 : 1)
-    }, [hidden])
 
     const ImageContainer = isCurrentUser ? 'button' : 'span'
 
     return (
-        <Tooltip
-            contentContainerClassName="!border-none !p-0 !bg-transparent"
-            tooltipClassName="!rounded-none"
-            placement="bottom-start"
-            content={() => (
-                <div className="max-w-[250px] text-left px-2 rounded-sm overflow-hidden border border-border dark:border-dark bg-light dark:bg-dark">
-                    <div className="mb-4 -mx-4 -mt-2">
-                        <img src={image?.data?.attributes?.url} />
+        <>
+            <AchievementModal
+                setModalOpen={setModalOpen}
+                modalOpen={modalOpen}
+                imageURL={image?.data?.attributes?.url}
+                title={title}
+                description={description}
+                points={points}
+            />
+            <Tooltip
+                content={() => (
+                    <div>
+                        <p className="m-0 text-sm font-bold">{title}</p>
+                        <p className="m-0 text-xs opacity-70">{description}</p>
                     </div>
-                    <h4 className="text-lg m-0">{title}</h4>
-                    <p className="m-0 mt-1 text-sm mb-2">{description}</p>
-                </div>
-            )}
-        >
-            <ImageContainer
-                onClick={isCurrentUser ? () => handleClick(!hidden) : undefined}
-                onMouseEnter={isCurrentUser ? () => setOpacity(0.8) : undefined}
-                onMouseOut={isCurrentUser ? () => setOpacity(hidden ? 0.6 : 1) : undefined}
-                style={{ opacity }}
-                className={`relative transition-opacity`}
+                )}
+                placement="bottom"
             >
-                <img className="w-full" src={icon?.data?.attributes?.url} />
-            </ImageContainer>
-        </Tooltip>
+                <ImageContainer
+                    onClick={handleClick}
+                    className={`relative transition-opacity ${highlight ? 'animate-jump-in' : ''}`}
+                >
+                    <img className={`w-full`} src={icon?.data?.attributes?.url} />
+                </ImageContainer>
+            </Tooltip>
+        </>
     )
 }
 
-const ProfileSidebar: React.FC<ProfileSidebarProps> = ({ profile, mutate }) => {
+const ProfileSidebar: React.FC<ProfileSidebarProps> = ({ profile, mutate, highlightAchievement }) => {
     const { user, getJwt } = useUser()
 
     const handleBlock = async (blockUser: boolean) => {
@@ -548,13 +587,15 @@ const ProfileSidebar: React.FC<ProfileSidebarProps> = ({ profile, mutate }) => {
                         <ul className="list-none m-0 p-0 grid grid-cols-5 gap-2">
                             {profile.achievements
                                 .sort((a, b) => a.id - b.id)
-                                .map(({ achievement, hidden, id }) => {
+                                .map(({ achievement, id }) => {
                                     return (
                                         <li key={id}>
                                             <Achievement
                                                 {...achievement.data.attributes}
                                                 id={id}
-                                                hidden={hidden}
+                                                highlight={
+                                                    highlightAchievement && highlightAchievement === achievement.data.id
+                                                }
                                                 profile={profile}
                                                 mutate={mutate}
                                             />
