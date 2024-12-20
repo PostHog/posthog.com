@@ -107,6 +107,8 @@ import HowToCaptureIdentifiedEventsFlutter from '../product-analytics/_snippets/
 
 ## Frequently asked questions
 
+<!---  General questions -->
+
 ### What can and can't I do with anonymous events?
 
 You **can**:
@@ -134,10 +136,6 @@ All future events are associated with their person profile and are captured and 
 
 Past events are attributed to the person, but are otherwise unchanged. This means that past events remain billed as anonymous.
 
-### Can identified events still be "anonymous"?
-
-Yes, identified events can still be "anonymous" in the sense that they don't need to contain personal information such as name, email, or phone number. A person profile is still created for them, but it doesn't need to include any personal information.
-
 ### Can I specify some events to be identified and others to be anonymous for the same users?
 
 Not if you already identified them. Once a user is identified, all _future_ events for that user are associated with their person profile and are captured as identified events.
@@ -147,6 +145,50 @@ Not if you already identified them. Once a user is identified, all _future_ even
 Calling [`reset()`](/docs/product-analytics/identify#3-reset-after-logout) will unlink the person profile from the user and create a new PostHog anonymous ID for capturing events. Any future events are captured as anonymous events. 
 
 However, if you capture events using the `distinct_id` used in their previously identified person profile, the events are captured as identified events. You need to use a new `distinct_id` to capture events as anonymous events.
+
+<!---  Data questions -->
+
+### Can identified events still be "anonymous"?
+
+Yes, identified events can still be "anonymous" in the sense that they don't need to contain personal information such as name, email, or phone number. A person profile is still created for them, but it doesn't need to include any personal information.
+
+### What happens to initial person properties when an anonymous user is identified? Do we get the initial person properties from the anonymous events?
+
+As person properties are not stored on anonymous events, we cannot get any initial person properties directly from those events. We store initial URL and initial referrer in [your persistence](docs/libraries/js#persistence) and from this we are able to derive the following values which are set when the person profile is created:
+ - `$initial_current_url`
+ - `$initial_pathname`
+ - `$initial_referrer`
+ - `$initial_referring_domain`
+ - `$initial_host`
+ - and any initial properties that can be derived from the URL i.e 
+    - `$initial_utm_campaign`
+    - `$initial_utm_content`
+    - `$initial_utm_medium`
+    - `$initial_utm_source`
+
+<blockquote>
+Note that the above initial parameters will only work across subdomains if you're using `persistence: "localStorage+cookie"` (default) or `persistence: "cookie"`
+</blockquote>
+
+Any other initial [person properties](product-analytics/person-properties#default-person-properties), including initial [GeoIP properties](https://posthog.com/docs/product-analytics/person-properties#geoip-properties) will be set from the values in the event at the time that the person profile was created (i.e. when the events became identified).
+
+### If we change our `person_profiles` config to `'always'` away from `'identify-only'`? Will we get all the person data from the previously captured anonymous events?
+
+Anonymous events only capture the event data and none of the person data. If that person becomes identified at a later date, either by identifying them or changing your configuration settings, there isn't a way to retrieve what the person properties would have been at the time of those anonymous events.
+
+<!---  Insights questions -->
+
+### Why am I seeing "Person without distinct_id" in my insights?
+
+These are users who do not have a person profile and are anonymous users. We're aware that the wording here is confusing and are looking into updating this.
+
+### Why am I seeing drops in my insights that rely on person properties?
+
+If your insight is using a person property, then this relies on identified events. When using anonymous events, the person profile will not exist until the person has been identified and the events have become identified events. In some cases you may never identify a person, and in some cases you may identify a person at a later date.
+
+Depending on what you're trying to vizualize, you may be able to use some of the properties on the events to acheive a similar outcome i.e. Looking at the referring domain on the first ever pageview for each user.
+
+<!---  Billing questions -->
 
 ### Why are identified events so much more expensive?
 
@@ -161,3 +203,9 @@ We're not charging you for both. The person profiles line item you see on your i
 ### How does my free allowance work for anonymous vs identified events?
 
 Your first one million events each month are free, regardless if they are anonymous or identified. 
+
+
+
+
+
+
