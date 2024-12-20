@@ -1569,11 +1569,6 @@ export const docsMenu = {
                     icon: 'IconInfo',
                 },
                 {
-                    name: 'Alerts',
-                    url: '/docs/alerts',
-                    icon: 'IconBell',
-                },
-                {
                     name: 'API',
                     url: '/docs/api',
                     icon: 'IconBrackets',
@@ -1735,11 +1730,6 @@ export const docsMenu = {
                     ],
                 },
                 {
-                    name: 'Command palette',
-                    url: '/docs/cmd-k',
-                    icon: 'IconSearch',
-                },
-                {
                     name: 'Data',
                     url: '/docs/data',
                     icon: 'IconHardDrive',
@@ -1801,9 +1791,31 @@ export const docsMenu = {
                     ],
                 },
                 {
-                    name: 'Hog',
-                    url: '/docs/hog',
-                    icon: 'IconCode',
+                    name: 'Features',
+                    url: '',
+                    icon: 'IconHardDrive',
+                    children: [
+                        {
+                            name: 'Alerts',
+                            url: '/docs/alerts',
+                            icon: 'IconBell',
+                        },
+                        {
+                            name: 'Command palette',
+                            url: '/docs/cmd-k',
+                            icon: 'IconSearch',
+                        },
+                        {
+                            name: 'Hog',
+                            url: '/docs/hog',
+                            icon: 'IconCode',
+                        },
+                        {
+                            name: 'Notebooks',
+                            url: '/docs/notebooks',
+                            icon: 'IconBook',
+                        },
+                    ],
                 },
                 {
                     name: 'HogQL',
@@ -1835,11 +1847,6 @@ export const docsMenu = {
                             url: '/docs/hogql/tutorials',
                         },
                     ],
-                },
-                {
-                    name: 'Notebooks',
-                    url: '/docs/notebooks',
-                    icon: 'IconBook',
                 },
                 {
                     name: 'Settings',
