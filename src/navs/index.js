@@ -1793,7 +1793,7 @@ export const docsMenu = {
                 {
                     name: 'Features',
                     url: '/docs/alerts',
-                    icon: 'IconSearch',
+                    icon: 'IconBell',
                     children: [
                         {
                             name: 'Alerts',
