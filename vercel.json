@@ -1462,6 +1462,10 @@
         {
             "source": "/handbook/growth/marketing/paid",
             "destination": "/handbook/words-and-pictures/paid"
+        },
+        {
+            "source": "/features/self-hosted",
+            "destination": "/docs/self-host"
         }
     ]
 }
