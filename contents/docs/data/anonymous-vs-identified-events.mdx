@@ -162,11 +162,7 @@ We derive the following values from the persistence store:
  - `$initial_referrer`
  - `$initial_referring_domain`
  - `$initial_host`
- - and any initial properties that can be derived from the URL i.e 
-    - `$initial_utm_campaign`
-    - `$initial_utm_content`
-    - `$initial_utm_medium`
-    - `$initial_utm_source`
+ - and any initial properties that can be derived from the URL e.g., `$initial_utm_campaign`, `$initial_utm_content`, `$initial_utm_medium`, `$initial_utm_source`
 
 <blockquote>
 Note that the above initial parameters will only work across subdomains if you're using `persistence: "localStorage+cookie"` (default) or `persistence: "cookie"`
