@@ -154,7 +154,9 @@ Yes, identified events can still be "anonymous" in the sense that they don't nee
 
 ### How are initial person properties set when an anonymous user is identified?
 
-As person properties are not stored on anonymous events, we cannot get any initial person properties directly from those events. We store initial URL and initial referrer in [your persistence](docs/libraries/js#persistence) and from this we are able to derive the following values which are set when the person profile is created:
+As person properties are not stored on anonymous events, we cannot get any initial person properties directly from those events. Instead, we retrieve the initial person properties based on the values in the [persistence store].
+
+We derive the following values from the persistence store:
  - `$initial_current_url`
  - `$initial_pathname`
  - `$initial_referrer`
