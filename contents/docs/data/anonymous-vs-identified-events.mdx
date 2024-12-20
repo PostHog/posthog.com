@@ -126,21 +126,21 @@ You **cannot**:
 - Query the `persons` table using [SQL insights](/docs/product-analytics/sql)
 - Use group analytics
 
-### What can and can't I do with identified events?
+#### What can and can't I do with identified events?
 
 You can use all of PostHog's features with identified events. There are no restrictions.
 
-### What happens to events when an anonymous user is identified? 
+#### What happens to events when an anonymous user is identified? 
 
 All future events are associated with their person profile and are captured and billed as identified events.
 
 Past events are attributed to the person, but are otherwise unchanged. This means that past events remain billed as anonymous.
 
-### Can I specify some events to be identified and others to be anonymous for the same users?
+#### Can I specify some events to be identified and others to be anonymous for the same users?
 
 Not if you already identified them. Once a user is identified, all _future_ events for that user are associated with their person profile and are captured as identified events.
 
-### How do I revert back to anonymous events after identifying?
+#### How do I revert back to anonymous events after identifying?
 
 Calling [`reset()`](/docs/product-analytics/identify#3-reset-after-logout) will unlink the person profile from the user and create a new PostHog anonymous ID for capturing events. Any future events are captured as anonymous events. 
 
@@ -148,11 +148,11 @@ However, if you capture events using the `distinct_id` used in their previously 
 
 ### Data questions
 
-### Can identified events still be "anonymous"?
+#### Can identified events still be "anonymous"?
 
 Yes, identified events can still be "anonymous" in the sense that they don't need to contain personal information such as name, email, or phone number. A person profile is still created for them, but it doesn't need to include any personal information.
 
-### How are initial person properties set when an anonymous user is identified?
+#### How are initial person properties set when an anonymous user is identified?
 
 As person properties are not stored on anonymous events, we cannot get any initial person properties directly from those events. Instead, we retrieve the initial person properties based on the values in the [persistence store].
 
@@ -168,17 +168,17 @@ Note that the above initial parameters will only work across subdomains if you'r
 
 Any other initial [person properties](product-analytics/person-properties#default-person-properties), including initial [GeoIP properties](https://posthog.com/docs/product-analytics/person-properties#geoip-properties) will be set from the values in the event at the time that the person profile was created i.e. when the events became identified.
 
-### If we change our `person_profiles` config from `identified_only'`to `always`, will we get all the person data from the previously captured anonymous events?
+#### If we change our `person_profiles` config from `identified_only'`to `always`, will we get all the person data from the previously captured anonymous events?
 
 No, anonymous events only capture the event data and none of the person data. If that person is identified at a later date – either by identifying them or changing your configuration settings – there isn't a way to retrieve the person properties from the previously captured anonymous events.
 
 ### Insights questions
 
-### Why am I seeing "Person without distinct_id" in my insights?
+#### Why am I seeing "Person without distinct_id" in my insights?
 
 These are users who do not have a person profile and are anonymous users. We're aware that the wording here is confusing and are looking into updating this.
 
-### Why am I seeing drops in my insights that rely on person properties?
+#### Why am I seeing drops in my insights that rely on person properties?
 
 If your insight is using a person property, then this relies on identified events. When using anonymous events, the person profile will not exist until the person has been identified and the events have become identified events. In some cases you may never identify a person, and in some cases you may identify a person at a later date.
 
@@ -186,16 +186,16 @@ Depending on what you're trying to visualize, you may be able to use some of the
 
 ###  Billing questions
 
-### Why are identified events so much more expensive?
+#### Why are identified events so much more expensive?
 
 Since identified events are associated with a person profile, processing and querying them requires using resource intensive table JOINs. On the other hand, anonymous events are stored in a single table and are more efficient to query.
 
 This [post](/blog/analytics-pricing#why-are-anonymous-events-so-much-cheaper) goes into more detail.
 
-### Why am I being charged for both "events" and "persons"
+#### Why am I being charged for both "events" and "persons"
 
 We're not charging you for both. The person profiles line item you see on your invoice is a number of identified events captured. The events line item is the total number of anonymous events captured.
 
-### How does my free allowance work for anonymous vs identified events?
+#### How does my free allowance work for anonymous vs identified events?
 
 Your first one million events each month are free, regardless if they are anonymous or identified. 
