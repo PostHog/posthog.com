@@ -65,7 +65,7 @@ It might be an intense week, but you're also going to solve so many real problem
 
 ## What do I do as a SDK Support Hero?
 
-Outside of your team's Support Hero rotation, you are also eligible to serve in a one week SDK Support Hero rotation.
+Outside of your team's Support Hero rotation, you are also eligible to serve in a one week SDK Support Hero rotation. [The schedule is managed in PagerDuty](https://posthog.pagerduty.com/schedules#P7B7NTR).
 
 Your primary responsibilty is simply to make sure SDK questions get some love. During the rotation, please keep an eye on two things:
 - [Escalated SDK tickets in Zendesk](https://posthoghelp.zendesk.com/agent/filters/30528724215067)
