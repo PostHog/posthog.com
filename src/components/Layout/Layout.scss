@@ -326,6 +326,7 @@ pre {
     }
 }
 table {
+    display: block;
     margin-left: 0;
     margin-right: 0;
     margin-top: 0;
@@ -335,6 +336,7 @@ table {
     padding-top: 0;
     margin-bottom: 1.45rem;
     line-height: 1.45rem;
+    overflow-x: auto;
     width: 100%;
 }
 fieldset {

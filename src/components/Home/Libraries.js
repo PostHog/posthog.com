@@ -94,16 +94,6 @@ const librariesData = {
                 ),
             },
             {
-                name: 'PHP',
-                url: '/docs/libraries/php',
-                icon: (
-                    <CloudinaryImage
-                        src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/integrate/php.svg"
-                        alt="PHP"
-                    />
-                ),
-            },
-            {
                 name: 'Ruby',
                 url: '/docs/libraries/ruby',
                 icon: (
