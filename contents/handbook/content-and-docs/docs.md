@@ -1,5 +1,5 @@
 ---
-title: Docs ownerhship
+title: Docs ownership
 sidebar: Handbook
 showTitle: true
 ---
