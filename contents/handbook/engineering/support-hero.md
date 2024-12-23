@@ -65,6 +65,16 @@ If not much is happening, feel free to do feature work – but in the case of a 
 
 It might be an intense week, but you're also going to solve so many real problems, and that feels great.
 
+## What do I do as a SDK Support Hero?
+
+Outside of your team's Support Hero rotation, you are also eligible to serve in a one week SDK Support Hero rotation. [The schedule is managed in PagerDuty](https://posthog.pagerduty.com/schedules#P7B7NTR).
+
+Your primary responsibility is simply to make sure SDK questions get some love. During the rotation, please keep an eye on two things:
+- [Escalated SDK tickets in Zendesk](https://posthoghelp.zendesk.com/agent/filters/30528724215067)
+- New issues in the SDK repositories, e.g. [posthog-js](https://github.com/PostHog/posthog-js/issues?q=sort%3Aupdated-desc+is%3Aissue+is%3Aopen)
+
+You don't have to be an expert in all of the SDKs, but it can be a great opportunity to dive into parts unknown. Feel free to ping relevant folks as needed.
+
 ## Don't ask users to do work that you can do!
 
 If folk are asking us for help, then we know the product already didn't meet their needs. Asking them to do leg-work that we could do is adding insult to injury.
