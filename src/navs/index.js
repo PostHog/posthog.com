@@ -1601,6 +1601,24 @@ export const docsMenu = {
                                     name: 'Anonymous vs identified events',
                                     url: '/docs/data/anonymous-vs-identified-events',
                                 },
+                                {
+                                    name: 'Events Spec',
+                                    url: '/docs/data/event-spec/standard-events',
+                                    children: [
+                                        {
+                                            name: 'Standard Events',
+                                            url: '/docs/data/event-spec/standard-events',
+                                        },
+                                        {
+                                            name: 'Ecommerce Events',
+                                            url: '/docs/data/event-spec/ecommerce-events',
+                                        },
+                                        {
+                                            name: 'B2B SaaS Events',
+                                            url: '/docs/data/event-spec/ecommerce-events',
+                                        },
+                                    ],
+                                },
                             ],
                         },
                         {
