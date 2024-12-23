@@ -212,7 +212,7 @@ We can then update our `PostHogProvider` to include this component in all of our
   }
 ```
 
-> **Note:** For older versions of Next.js, you might need to **dynamically import** `PostHogPageView` instead of using a `<Suspense>`. This is because of a [known issue](https://github.com/vercel/next.js/issues/51581) where server rendering a `<Suspense>` throws an error.
+> **Note:** For older versions of Next.js (< 15), you might need to **dynamically import** `PostHogPageView` instead of using a `<Suspense>`. This is because of a [known issue](https://github.com/vercel/next.js/issues/51581) where server rendering a `<Suspense>` throws an error.
 >
 > ```js
 > import dynamic from 'next/dynamic'
