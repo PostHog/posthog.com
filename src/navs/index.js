@@ -2663,6 +2663,12 @@ export const docsMenu = {
                     name: 'Under the hood',
                 },
                 {
+                    name: 'Statistics primer',
+                    url: '/docs/experiments/statistics-primer',
+                    icon: 'IconBook',
+                    color: 'blue',
+                },
+                {
                     name: 'Traffic allocation',
                     url: '/docs/experiments/traffic-allocation',
                     icon: 'IconPeople',
