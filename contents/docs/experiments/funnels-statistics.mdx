@@ -1,29 +1,22 @@
 ---
-title: Funnels statistics
+title: Statistical methodology for funnel experiments
 ---
 
-Funnel experiments use a Beta model to evaluate the **win probabilities** and **credible intervals** for an experiment. [Read the statistics primer](/docs/experiments/statistics-primer) for an introduction to Bayesian statistics if you haven't already.
+Funnel experiments use Bayesian statistics with a beta model to evaluate the **win probabilities** and **credible intervals** for an experiment. [Read the statistics primer for an overview](/docs/experiments/statistics-primer) if you haven't already.
 
 ## What the heck is a Beta model?
 
-The Beta model is great for analyzing proportions (0% to 100%) - like whether someone completes a signup flow or not. Let's break it down with a simple example:
+Imagine you run a pizza shop and want to know if customers say "yes" to adding pineapple. Some customers will say yes, others will say no.
 
-Imagine you run a pizza shop and want to know if customers say "yes" to adding pineapple. Some customers will say yes, others will say no. This kind of binary outcome is what's called a **Beta distribution**.
-
-The Beta distribution helps us model our uncertainty about the true "yes" rate:
-- When we have very little data, the Beta distribution is wide, saying "hey, the true rate could be anywhere between 0% and 100%".
-- As we collect more data, the Beta distribution gets narrower, saying "we're getting more confident about what the true rate is".
+The **beta distribution** is a statistical model that's great for analyzing proportions or probabilities. It helps us understand:
+1. The true probability of customers saying yes to adding pineapple.
+2. How certain we are about that probability.
 
 For example, if:
-- Day 1: 2 out of 4 customers say yes (50%), we're still very uncertain.
-- Day 30: 150 out of 300 customers say yes (50%), we're much more confident it's around 50%.
+- Only 2 out of 4 customers (50%) say yes, the Beta distribution will be wide, indicating high uncertainty.
+- 150 out of 300 customers (50%) say yes, the Beta distribution will be narrow, showing we're more confident about that 50% rate.
 
-So when we say we're using a Beta model for experiments, we're:
-1. Using the Beta distribution to express our uncertainty about the true rate.
-2. Updating our understanding as we collect more data.
-3. Getting more confident in our estimates over time.
-
-Our Beta model uses a minimally informative prior of `ALPHA_PRIOR = 1` and `BETA_PRIOR = 1`.
+Within PostHog, our Beta model uses a minimally informative prior of `ALPHA_PRIOR = 1` and `BETA_PRIOR = 1`.
 
 ## Win probabilities
 
