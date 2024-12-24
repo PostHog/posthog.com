@@ -4,6 +4,25 @@ title: Statistics for trends with counts
 
 Trends experiments for count-based data use a Gamma-Poisson model to evaluate the **win probabilities** and **credible intervals** for an experiment. [Read the statistics primer](/docs/experiments/statistics-primer) for an introduction to Bayesian statistics if you haven't already. Our methodology uses a minimally informative prior of `ALPHA_PRIOR = 1` and `BETA_PRIOR = 1`.
 
+## What the heck is a Gamma-Poisson model?
+
+The Gamma-Poisson model is great for analyzing count data (0 to infinity) - like how many times users perform an action. Let's break it down with a simple example:
+
+Imagine you run a pizza shop and want to know how many slices a customer typically orders. Some days customers might order 1 slice, others 3 slices, and occasionally someone might order 6 slices! This kind of count data (1, 2, 3, etc.) follows what's called a **Poisson distribution**.
+
+The Poisson distribution has one key number: the average rate. In our pizza example, maybe it's 2.5 slices per customer. But here's the catch - we don't know the true rate for sure. We only have our observations to guess from.
+
+This is where the **Gamma distribution** comes in. It helps us model our uncertainty about the true rate:
+- When we have very little data, the Gamma distribution is wide, saying "hey, the true rate could be anywhere in this broad range".
+- As we collect more data, the Gamma distribution gets narrower, saying "we're getting more confident about what the true rate is".
+
+So when we say we're using a Gamma-Poisson model for experiments, we're:
+1. Using the Poisson distribution to model how count data naturally varies.
+2. Using the Gamma distribution to express our uncertainty about the true rate.
+3. Getting more confident in our estimates over time.
+
+This approach is particularly good for product analytics because it handles count data naturally and gives us clear probabilities about which variant is performing better.
+
 ## Win probabilities
 
 The **win probability** tells you how likely it is that a given variant has the highest rate compared to all other variants in the experiment. It helps you determine whether the experiment shows a **statistically significant** real effect vs. simply random chance.
