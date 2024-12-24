@@ -37,5 +37,7 @@ Gathering more data helps us increase our confidence in the results. The test va
 
 ## Supported methodologies
 
-PostHog uses different Bayesian methodologies depending on the type of data:
-* [Funnel experiments](/docs/experiments/funnels-statistics)
+PostHog uses Bayesian methodology with different models depending on the type of data:
+* [Beta model for funnel experiments](/docs/experiments/funnels-statistics) to analyze conversion rates through multi-step funnels.
+* [Gamma-Poisson model for trend experiments with count-based data](/docs/experiments/trends-count-statistics) like pageviews or interaction events.
+* [Log-normal model with a Normal-Inverse-Gamma prior for trend experiments with property values](/docs/experiments/trends-property-value-statistics) like revenue.
