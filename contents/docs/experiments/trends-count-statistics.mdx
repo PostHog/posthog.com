@@ -2,7 +2,7 @@
 title: Statistics for trends with counts
 ---
 
-Trends experiments for count-based data use a Gamma-Poisson model to evaluate the **win probabilities** and **credible intervals** for an experiment. [Read the statistics primer](/docs/experiments/statistics-primer) for an introduction to Bayesian statistics if you haven't already. Our methodology uses a minimally informative prior of `ALPHA_PRIOR = 1` and `BETA_PRIOR = 1`.
+Trends experiments for count-based data use a Gamma-Poisson model to evaluate the **win probabilities** and **credible intervals** for an experiment. [Read the statistics primer](/docs/experiments/statistics-primer) for an introduction to Bayesian statistics if you haven't already.
 
 ## What the heck is a Gamma-Poisson model?
 
@@ -21,7 +21,7 @@ So when we say we're using a Gamma-Poisson model for experiments, we're:
 2. Using the Gamma distribution to express our uncertainty about the true rate.
 3. Getting more confident in our estimates over time.
 
-This approach is particularly good for product analytics because it handles count data naturally and gives us clear probabilities about which variant is performing better.
+Our Gamma-Poisson model uses a minimally informative prior of `ALPHA_PRIOR = 1` and `BETA_PRIOR = 1`.
 
 ## Win probabilities
 

@@ -2,7 +2,7 @@
 title: Funnels statistics
 ---
 
-Funnel experiments use a Beta model to evaluate the **win probabilities** and **credible intervals** for an experiment. [Read the statistics primer](/docs/experiments/statistics-primer) for an introduction to Bayesian statistics if you haven't already. Our methodology uses a minimally informative prior of `ALPHA_PRIOR = 1` and `BETA_PRIOR = 1`.
+Funnel experiments use a Beta model to evaluate the **win probabilities** and **credible intervals** for an experiment. [Read the statistics primer](/docs/experiments/statistics-primer) for an introduction to Bayesian statistics if you haven't already.
 
 ## What the heck is a Beta model?
 
@@ -22,6 +22,8 @@ So when we say we're using a Beta model for experiments, we're:
 1. Using the Beta distribution to express our uncertainty about the true rate.
 2. Updating our understanding as we collect more data.
 3. Getting more confident in our estimates over time.
+
+Our Beta model uses a minimally informative prior of `ALPHA_PRIOR = 1` and `BETA_PRIOR = 1`.
 
 ## Win probabilities
 
