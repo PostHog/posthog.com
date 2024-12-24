@@ -2671,8 +2671,20 @@ export const docsMenu = {
                 {
                     name: 'Funnels statistics',
                     url: '/docs/experiments/funnels-statistics',
-                    icon: 'IconBook',
-                    color: 'blue',
+                    icon: 'IconGraph',
+                    color: 'yellow',
+                },
+                {
+                    name: 'Trends count statistics',
+                    url: '/docs/experiments/trends-count-statistics',
+                    icon: 'IconGraph',
+                    color: 'green',
+                },
+                {
+                    name: 'Trends continuous statistics',
+                    url: '/docs/experiments/trends-continuous-statistics',
+                    icon: 'IconGraph',
+                    color: 'red',
                 },
                 {
                     name: 'Traffic allocation',
