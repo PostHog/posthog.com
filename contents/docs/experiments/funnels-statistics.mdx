@@ -33,17 +33,17 @@ Let's say you're testing a new signup flow and have these results:
 - Control: 100 signups from 1000 visitors (10% conversion)
 - Test: 150 signups from 1000 visitors (15% conversion)
 
-To calculate the win probabilities for the experiment, our methodology:
+To calculate the win probabilities for the experiment, our methodology will:
 
-1. Models each variant's conversion rate using a Beta distribution:
+1. Model each variant's conversion rate using a Beta distribution:
 	- Control: Beta(100 + ALPHA_PRIOR, 900 + BETA_PRIOR)
 	- Test: Beta(150 + ALPHA_PRIOR, 850 + BETA_PRIOR)
 
-2. Takes 10,000 random samples from each distribution.
+2. Take 10,000 random samples from each distribution.
 
-3. Checks which variant had the higher conversion rate for each sample.
+3. Check which variant had the higher conversion rate for each sample.
 
-4. Calculates the final win probabilities:
+4. Calculate the final win probabilities:
 	- Control wins in 40 out of 10,000 samples = 0.4% probability
 	- Test wins in 9,960 out of 10,000 samples = 99.6% probability
 
