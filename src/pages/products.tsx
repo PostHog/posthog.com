@@ -15,19 +15,25 @@ import { productMenu } from '../navs'
 import RoadmapPreview from 'components/RoadmapPreview'
 import { PRODUCT_COUNT } from '../constants'
 import { FC } from 'react'
+import * as Icons from '@posthog/icons'
 
 interface ProductListingProps {
     name: string
     description: string
-    freeTierLimit: string
+    freeTierLimit?: string
     startingPrice: string
     url: string
+    icon: React.ReactNode
+    color: string
 }
 
-const ProductListing: FC<ProductListingProps> = ({ name, description, freeTierLimit, startingPrice, url }) => {
+const ProductListing: FC<ProductListingProps> = ({ name, description, freeTierLimit, startingPrice, url, icon, color }) => {
     return (
         <div className="flex flex-col items-start gap-2 bg-white dark:bg-accent-dark p-4 border border-light dark:border-dark">
+          <div className="flex items-center gap-2">
+            {icon}
             <h2 className="text-lg mb-0">{name}</h2>
+            </div>
             <p className="opacity-70 text-[15px]">{description}</p>
             <dl className="grid grid-cols-2 gap-2 text-sm">
                 <dt>
@@ -48,6 +54,58 @@ const ProductListing: FC<ProductListingProps> = ({ name, description, freeTierLi
     )
 }
 
+const productDetails: Record<string, {
+    freeTierLimit: string
+    startingPrice: string
+    description: string
+}> = {
+    'product-analytics': {
+        freeTierLimit: 'Up to 1M events/month',
+        startingPrice: '$0.0000500',
+        description: 'Understand user behavior with event-based analytics, cohorts, and conversion funnels',
+    },
+    'web-analytics': {
+        freeTierLimit: 'Up to 1M pageviews/month',
+        startingPrice: '$0.0000400',
+        description: 'Privacy-friendly website analytics with no cookie banner required',
+    },
+    'session-replay': {
+        freeTierLimit: 'Up to 5K recordings/month',
+        startingPrice: '$0.0006000',
+        description: 'Watch real users use your product to identify pain points and opportunities',
+    },
+    'feature-flags': {
+        freeTierLimit: 'Unlimited flags',
+        startingPrice: 'Free',
+        description: 'Release features safely with targeted rollouts and experiments',
+    },
+    'experiments': {
+        freeTierLimit: 'Unlimited experiments',
+        startingPrice: 'Free',
+        description: 'Run A/B tests to optimize your product with statistical rigor',
+    },
+    'surveys': {
+        freeTierLimit: 'Up to 500 responses/month',
+        startingPrice: '$0.1000000',
+        description: 'Get qualitative feedback from the right users at the right time',
+    },
+    'cdp': {
+        freeTierLimit: 'Up to 1M events/month',
+        startingPrice: '$0.0000500',
+        description: 'Send customer data anywhere with our CDP and reverse ETL pipeline',
+    },
+    'data-warehouse': {
+        freeTierLimit: 'Up to 1M events/month',
+        startingPrice: '$0.0000300',
+        description: 'Query your data with SQL in our lightning-fast data warehouse',
+    },
+    'product-os': {
+        freeTierLimit: 'Custom',
+        startingPrice: 'Contact us',
+        description: 'Build and scale your product with our complete product operating system',
+    },
+}
+
 const Teams: React.FC = () => {
     const { james, supportTeam } = useStaticQuery(graphql`
         {
@@ -62,6 +120,22 @@ const Teams: React.FC = () => {
             }
         }
     `)
+   
+    const products = productMenu.children.map((product) => {
+        const IconComponent = Icons[product.icon as keyof typeof Icons]
+        const key = product.url.replace('/', '')
+        const details = productDetails[key]
+        
+        return {
+            name: product.name,
+            description: details.description,
+            url: product.url,
+            startingPrice: details.startingPrice,
+            freeTierLimit: details.freeTierLimit,
+            icon: <IconComponent className={`text-${product.color} size-5`} />,
+            color: product.color,
+        }
+    })
 
     return (
         <Layout>
@@ -115,13 +189,12 @@ const Teams: React.FC = () => {
                               </div>
 
                               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                                <ProductListing 
-                                    name="Product analytics"
-                                    description="Funnels, Graphs & trends, User paths, Correlation analysis, Retention, Stickiness, Lifecycle, Dashboards, HogQL"
-                                    freeTierLimit="1 million events/mo"
-                                    startingPrice="$0.0000500"
-                                    url="/product-analytics"
-                                />
+                                {products.map((product) => (
+                                    <ProductListing
+                                        key={product.url}
+                                        {...product}
+                                    />
+                                ))}
                               </div>
 
                                 
