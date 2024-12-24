@@ -2,34 +2,31 @@
 title: Statistics primer
 ---
 
-Experiments lean heavily on statistics to determine whether a given **variant** is better than the **control**. Statistical analysis increases our confidence in the results by quantifying **win probabilities** and **credible intervals**. These calculations can help us determine whether the experiment's results are **statistically significant**, demonstrating a real effect, or simply random chance.
+Experiments use statistics to determine whether a given **variant** performs better than the **control**. Statistical analysis helps us increase our confidence in the results by quantifying **win probabilities** and **credible intervals**. These calculations help us determine whether the experiment shows a **statistically significant** real effect or simply random chance.
 
-PostHog uses [Bayesian statistics](https://en.wikipedia.org/wiki/Bayesian_statistics) to evaluate experiments because of these benefits:
+PostHog uses [Bayesian statistics](https://en.wikipedia.org/wiki/Bayesian_statistics) to evaluate experiments because it offers these benefits:
 
 - **Continuous Monitoring**: You can check results at any time without statistical penalties
 - **Intuitive Results**: Get direct probability statements about which variant is winning
 - **Faster Decisions**: Make confident decisions earlier with accumulating evidence
 - **Flexible Analysis**: No need for fixed sample sizes or rigid stopping rules
 
-This contrasts with [Frequentist statistics](https://en.wikipedia.org/
-wiki/Frequentist_inference), which requires predefined sample sizes and cannot update probabilities as new data arrives.
+This contrasts with [Frequentist statistics](https://en.wikipedia.org/wiki/Frequentist_inference), which requires you to predefine sample sizes and prevents you from updating probabilities as new data arrives.
 
 Consider the following experiment results:
 * 1 in 10 people in the control group complete the funnel = 10% success rate
 * 1 in 9 people in the variant group complete the funnel = 11% success rate
 
 When we analyze these results using Bayesian statistics, we find:
-* There's a 46.7% probability that the control variant is better and a 53.3% probability that the test variant is better.
-* The credible interval for the control is [0.023, 0.413] and the credible interval for the test is [0.25, 0.445].
+* The control variant has a 46.7% probability of being better and the test variant has a 53.3% probability of being better.
+* The control shows a credible interval of [0.023, 0.413] and the test shows a credible interval of [0.25, 0.445].
 
-These results show that, while the test variant has a slightly higher success rate, there isn't enough data to draw a statistically significant conclusion. We'd expect to see a much higher win probability for one of the variants, and more divergent credible intervals. We generally need more samples to be confident that the test variant is truly better than the control.
+These results show that, while the test variant has a slightly higher success rate, we don't have enough data to draw a statistically significant conclusion. We need to see a much higher win probability for one of the variants, and more divergent credible intervals. You'll typically need more samples to confirm that the test variant truly performs better than the control.
 
-When we let the experiment run longer, we might see these results:
+When we let the experiment run longer and analyze the results again, we find:
 * 100 in 1000 people in the control group complete the funnel = 10% success rate
 * 100 in 900 people in the variant group complete the funnel = 11% success rate
+* The control variant has a 21.5% probability of being better and the test variant has a 78.5% probability of being better.
+* The control shows a credible interval of [0.083, 0.120] and the test shows a credible interval of [0.092, 0.133].
 
-Then, when we analyze the results again, we find:
-* There's a 21.5% probability that the control variant is better and a 78.5% probability that the test variant is better.
-* The credible interval for the control is [0.083, 0.120] and the credible interval for the test is [0.092, 0.133].
-
-Gathering more data increases our confidence in the results. The win probability for the test variant increased significantly, and the credible intervals became narrower and more distinct. Depending on business requirements, we could decide on the winner now or continue to wait. PostHog considers an experiment to be significant when one variant has a greater than 90% probability of winning. funnels.
+Gathering more data helps us increase our confidence in the results. The test variant's win probability increased significantly, and the credible intervals became narrower and more distinct. You can decide on the winner now or continue to wait, depending on your business requirements. PostHog considers an experiment significant when one variant shows a greater than 90% probability of winning.
