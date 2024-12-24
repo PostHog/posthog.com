@@ -13,7 +13,7 @@ tags:
   - web analytics
 ---
 
-Bounce rate is the percentage of users who leave a page immediately after visiting. It is a popular marketing metric showing the relevance and engagement of content for site visitors. This tutorial shows you how to calculate bounce rate in PostHog.
+Bounce rate is the percentage of users who visit a page and then leave without taking any further actions. It is a popular marketing metric showing the relevance and engagement of content for site visitors. This tutorial shows you how to calculate bounce rate in PostHog.
 
 To get started, you need to install PostHog's [web snippet](/docs/getting-started/install?tab=snippet) or [JavaScript SDK](/docs/libraries/js). Then ensure the following settings are enabled in your project settings:
 
@@ -28,7 +28,7 @@ Your bounce rate is the percentage of sessions that resulted in a bounce. We def
 - did not [autocapture](/docs/product-analytics/autocapture) any events
 - only had one pageview
 
-> **How does Google Analytics 4 [calculate bounce rate](https://support.google.com/analytics/answer/12195621?hl=en)?** It is the percentage of sessions that **do not** last longer than 10 seconds, have a conversion event, or have at least 2 pageviews or screenviews.
+> **How does Google Analytics 4 [calculate bounce rate](https://support.google.com/analytics/answer/12195621?hl=en)?** Google Analytics uses a similar definition, where the bounce rate is the percentage of sessions that were "not engaged." An engaged session is defined as a session that lasts longer than 10 seconds, has a conversion event, or has at least 2 screen or pageviews.
 
 ## Viewing bounce rate with Web analytics
 
@@ -103,7 +103,7 @@ WHERE
 
 ## Calculating bounce rate with raw session replay data
 
-Another way to calculate the bounce rate is to use the `raw_session_replay_events` table. This allows us to use different criteria that isn't available in the session data, like `click_count`, `keypress_count`, and `mouse_activity_count`. We can find these in the [database data management](https://app.posthog.com/data-management/database) tab under the `raw_session_replay_events` table.
+When [session replay is enabled](https://app.posthog.com/settings/environment#replay), we can also to calculate the bounce rate using the `raw_session_replay_events` table. This allows us to use different criteria that isn't available in the session data, like `click_count`, `keypress_count`, and `mouse_activity_count`. We can find these in the [database data management](https://app.posthog.com/data-management/database) tab under the `raw_session_replay_events` table.
 
 We can use a `multiIf` statement to check conditions and set new criteria for calculating bounce rate. For example, if we wanted to count bounce rate as the percentage of sessions with fewer than 3 clicks, we can use `click_count < 3` like this:
 
