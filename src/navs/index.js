@@ -2669,6 +2669,12 @@ export const docsMenu = {
                     color: 'blue',
                 },
                 {
+                    name: 'Funnels statistics',
+                    url: '/docs/experiments/funnels-statistics',
+                    icon: 'IconBook',
+                    color: 'blue',
+                },
+                {
                     name: 'Traffic allocation',
                     url: '/docs/experiments/traffic-allocation',
                     icon: 'IconPeople',
