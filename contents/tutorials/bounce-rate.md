@@ -1,6 +1,6 @@
 ---
 title: How to calculate bounce rate
-date: 2024-12-11
+date: 2024-12-24
 author:
   - ian-vanagas
   - bijan-boustani
@@ -103,7 +103,7 @@ WHERE
 
 ## Calculating bounce rate with raw session replay data
 
-When [session replay is enabled](https://app.posthog.com/settings/environment#replay), we can also to calculate the bounce rate using the `raw_session_replay_events` table. This allows us to use different criteria that isn't available in the session data, like `click_count`, `keypress_count`, and `mouse_activity_count`. We can find these in the [database data management](https://app.posthog.com/data-management/database) tab under the `raw_session_replay_events` table.
+When [session replay is enabled](https://app.posthog.com/settings/environment#replay), we can also calculate the bounce rate using the `raw_session_replay_events` table. This allows us to use different criteria that isn't available in the session data, like `click_count`, `keypress_count`, and `mouse_activity_count`. We can find these in the [database data management](https://app.posthog.com/data-management/database) tab under the `raw_session_replay_events` table.
 
 We can use a `multiIf` statement to check conditions and set new criteria for calculating bounce rate. For example, if we wanted to count bounce rate as the percentage of sessions with fewer than 3 clicks, we can use `click_count < 3` like this:
 
