@@ -28,6 +28,7 @@ Below is an example of a relatively restrictive CSP that limits only scripts and
 ">
 ```
 
+
 ### Enabling the Toolbar
 
 The [Toolbar](/docs/toolbar) is a powerful tool for configuring and loading information from PostHog directly on your website. When enabled, `posthog-js` will load additional scripts which in turn can load everything from fonts to css to images in order to render it fully. This means adding quite a few more CSP directives _or_ being less restrictive by adding `https://*.posthog.com` to the `default-src` directive.
