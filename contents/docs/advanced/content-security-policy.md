@@ -53,7 +53,7 @@ Depending on your compliance needs you can either:
 
 ## Supporting none directives
 
-You may choose to use a `nonce` in your CSP in order to ensure every script loaded has the correct tag for the current page load. This can be done via config option in `posthog-js` like so:
+You may choose to use a `nonce` in your CSP in order to ensure every script loaded has the matching `nonce` for the current page load. This can be done via config option in `posthog-js` like so:
 
 ```js
 posthog.init('<ph_project_api_key>', {
