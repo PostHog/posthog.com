@@ -39,14 +39,14 @@ To do this, set up `beforeNavigate` and `afterNavigate` interceptors in a new fi
 <slot></slot>
 ```
 
-To make sure we don't double count pageviews and pageleaves, we also need to adjust our PostHog initialization in `routes/+layout.js` to set `capture_pageview` and `capture_pageleave` to false.
+To make sure we don't double count pageviews and pageleaves, we also need to adjust our PostHog initialization in `routes/+layout.svelte` to set `capture_pageview` and `capture_pageleave` to false.
 
-```js file=routes/+layout.js
+```js file=routes/+layout.svelte
 import posthog from 'posthog-js'
 import { browser } from '$app/environment';
+import { onMount } from 'svelte'
 
-export const load = async () => {
-
+onMount(() => {
   if (browser) {
     posthog.init(
       '<ph_project_api_key>',
@@ -54,11 +54,9 @@ export const load = async () => {
         api_host:'<ph_client_api_host>',
         capture_pageview: false,
         capture_pageleave: false
-      }
-    )
+      });
   }
-  return
-};
+});
 ```
 
 ## Server-side setup
@@ -78,7 +76,7 @@ import { PostHog } from 'posthog-node';
 
 export async function load() {
   const posthog = new PostHog('<ph_project_api_key>', 
-  { host: '<ph_client_api_host>' });
+    { host: '<ph_client_api_host>' });
   posthog.capture({
     distinctId: 'distinct_id_of_the_user',
     event: 'event_name',
