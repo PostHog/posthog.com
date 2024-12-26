@@ -132,7 +132,10 @@ const Teams: React.FC = () => {
     `)
    
     const products = productMenu.children
-        .filter((product) => product.url.replace('/', '') !== 'product-os')
+        .filter((product) => {
+            const key = product.url.replace('/', '')
+            return key !== 'product-os' && productDetails[key]
+        })
         .map((product) => {
             const IconComponent = Icons[product.icon as keyof typeof Icons]
             const key = product.url.replace('/', '')
@@ -214,7 +217,6 @@ const Teams: React.FC = () => {
                                         </button>
                                     )}
                                   </div>
-                                  
                                   
                                 </aside>
                               </div>

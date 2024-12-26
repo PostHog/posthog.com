@@ -3232,9 +3232,15 @@ export const pricingMenu = {
 
 export const productMenu = {
     name: 'Products',
-    url: '/product-analytics',
-    icon: 'IconFeatures',
+    url: '/products',
+    icon: 'IconApps',
     children: [
+        {
+            name: 'All products',
+            icon: 'IconApps',
+            color: 'red',
+            url: '/products',
+        },
         {
             name: 'Product analytics',
             icon: 'IconGraph',
