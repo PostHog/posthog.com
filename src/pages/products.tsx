@@ -14,8 +14,9 @@ import { Contributor } from 'components/PostLayout/Contributors'
 import { productMenu } from '../navs'
 import RoadmapPreview from 'components/RoadmapPreview'
 import { PRODUCT_COUNT } from '../constants'
-import { FC } from 'react'
+import { FC, useState } from 'react'
 import * as Icons from '@posthog/icons'
+import { IconX, IconSearch } from '@posthog/icons'
 
 interface ProductListingProps {
     name: string
@@ -114,6 +115,8 @@ const productDetails: Record<string, {
 }
 
 const Teams: React.FC = () => {
+    const [searchTerm, setSearchTerm] = useState('')
+    
     const { james, supportTeam } = useStaticQuery(graphql`
         {
             james: squeakProfile(squeakId: { eq: 27732 }) {
@@ -146,6 +149,11 @@ const Teams: React.FC = () => {
                 denominator: details.denominator,
             }
         })
+
+    const filteredProducts = products.filter((product) => {
+        const searchable = `${product.name} ${product.description}`.toLowerCase()
+        return searchable.includes(searchTerm.toLowerCase())
+    })
 
     return (
         <Layout>
@@ -188,31 +196,57 @@ const Teams: React.FC = () => {
                               <div className="flex items-center gap-2">
                                 <h1 className="text-2xl flex-1">All products</h1>
                                 <aside>
-                                  Search
-                                  |
-                                  Sort
+                                  <div className="relative">
+                                    <IconSearch className="size-5 absolute left-2 top-1/2 -translate-y-1/2 text-primary/50 dark:text-primary-dark/50" />
+                                    <input 
+                                        type="text" 
+                                        value={searchTerm}
+                                        onChange={(e) => setSearchTerm(e.target.value)}
+                                        placeholder="Search" 
+                                        className="border border-light dark:border-dark rounded-md py-1 pl-7 pr-8" 
+                                    />
+                                    {searchTerm && (
+                                        <button
+                                            onClick={() => setSearchTerm('')}
+                                            className="absolute right-2 top-1/2 -translate-y-1/2 text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200"
+                                        >
+                                            <IconX className="size-4" />
+                                        </button>
+                                    )}
+                                  </div>
+                                  
+                                  
                                 </aside>
                               </div>
 
-                              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                                {products.map((product) => (
-                                    <ProductListing
-                                        key={product.url}
-                                        {...product}
-                                    />
-                                ))}
-                              </div>
-
-                                
-
-                                
-
-                                <div className="flex flex-col sm:flex-row gap-3 sm:gap-2 mt-8">
+                              
+                                {filteredProducts.length > 0 ? (
+                                  <>
+                                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                    {filteredProducts.map((product) => (
+                                        <ProductListing
+                                            key={product.url}
+                                            {...product}
+                                        />
+                                    ))}
+                                  </div>
+                                  <div className="flex flex-col sm:flex-row gap-3 sm:gap-2 mt-8">
                                     <CallToAction to="https://app.posthog.com/signup">Get started - free</CallToAction>
                                     <CallToAction to="/product-analytics" type="secondary">
                                         Explore products
                                     </CallToAction>
-                                </div>
+                                  </div>
+                                  </>
+                                ) : (
+                                    <div className="p-8 rounded border border-light dark:border-dark bg-accent dark:bg-accent-dark">
+                                      <p className="mb-2 opacity-70">No results... yet</p>
+                                      <h2>We haven't built that one, but maybe we should?</h2>
+                                      <p>Help us decide what to build by voting on our roadmap.</p>
+                                      <CallToAction to="/roadmap" size="md">Visit our roadmap</CallToAction>
+                                    </div>
+                                )}
+
+                                
                             </div>
                         </div>
                     </div>
