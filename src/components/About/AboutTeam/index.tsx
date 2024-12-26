@@ -16,7 +16,7 @@ const avatarStyles = [
     { color: '#E6A9E8', className: 'left-[-6rem] bottom-[-12rem]', size: 'md' },
 ]
 
-export const AboutTeam = () => {
+export const AboutTeam = (): JSX.Element => {
     const { avatarTeamMembers, teamMembers } = useStaticQuery(query)
     const maxTheHedgehog = 1
 
@@ -51,6 +51,7 @@ export const AboutTeam = () => {
                                 name={name}
                                 country={country}
                             />
+
                         )
                     })}
                 </div>
@@ -66,7 +67,7 @@ const query = graphql`
     {
         avatarTeamMembers: allSqueakProfile(
             filter: {
-                lastName: { in: ["Andra", "Coxon", "Phang", "Obermüller", "Temperton", "Matloka", "Majerik"] }
+                lastName: { in: ["Andra", "Coxon", "Phang", "Obermüller", "Matloka", "Majerik"] }
                 teams: { data: { elemMatch: { attributes: { name: { ne: null } } } } }
             }
             sort: { fields: startDate }
