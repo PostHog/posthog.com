@@ -90,7 +90,7 @@
         "lodash.groupby": "^4.6.0",
         "lodash.uniqby": "^4.7.0",
         "markdown-link-extractor": "^4.0.1",
-        "markdown-to-jsx": "^7.1.7",
+        "markdown-to-jsx": "^7.4.0",
         "md5": "^2.3.0",
         "mermaid": "^9.1.5",
         "mobx": "^6.3.13",
