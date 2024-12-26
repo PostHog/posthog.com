@@ -1,0 +1,9 @@
+{
+    "name": "gatsby-mapbox-locations",
+    "version": "1.0.0",
+    "description": "Gatsby plugin to fetch location coordinates from Mapbox according to a Squeak source",
+    "main": "gatsby-node.js",
+    "dependencies": {
+        "@mapbox/mapbox-sdk": "^0.15.3"
+    }
+}
