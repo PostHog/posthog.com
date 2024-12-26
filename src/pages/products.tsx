@@ -31,25 +31,25 @@ interface ProductListingProps {
 
 const ProductListing: FC<ProductListingProps> = ({ name, description, freeTierLimit, startingPrice, url, icon, denominator, color }) => {
     return (
-        <div className="flex flex-col items-start gap-2 bg-white dark:bg-accent-dark p-4 border border-light dark:border-dark">
+        <div className="flex flex-col items-start gap-2 bg-white dark:bg-accent-dark p-4 border border-light dark:border-dark rounded-sm">
           <div className="flex items-center gap-2">
             {icon}
             <h2 className="text-lg mb-0">{name}</h2>
             </div>
             <p className="opacity-70 text-[15px] mb-2">{description}</p>
-            <div className="mt-auto">
-              <dl className="grid grid-cols-2 gap-x-2 gap-y-1 text-sm mb-4">
+            <div className="mt-auto w-full">
+              <dl className="grid grid-cols-2 gap-x-2 gap-y-1 text-sm mb-4 w-full">
                   <dt>
-                      <label className="font-normal">Free tier</label>
+                      <label className="font-normal opacity-75">Free tier</label>
                   </dt>
                   <dt>
-                      <label className="font-normal">Then pricing starts at</label>
+                      <label className="font-normal opacity-75">Then pricing starts at</label>
                   </dt>
                   <dd>
-                      <p className="mb-0 text-[15px]"><strong className="text-green">{freeTierLimit} {denominator}s</strong><span className="opacity-70">/mo</span></p>
+                      <p className="mb-0 text-[15px]"><strong className="text-green">{freeTierLimit} {denominator}s</strong><span className="opacity-70 text-sm">/mo</span></p>
                   </dd>
                   <dd>
-                      <p className="mb-0 text-[15px]"><strong>{startingPrice}</strong>/{denominator}</p>
+                      <p className="mb-0 text-[15px]"><strong>{startingPrice}</strong>/<span className="text-sm">{denominator}</span></p>
                   </dd>
               </dl>
               <CallToAction to={url} type="secondary" size="sm" width='auto'>Explore</CallToAction>
@@ -196,8 +196,8 @@ const Teams: React.FC = () => {
                     <div className="flex flex-col md:items-center md:justify-end md:flex-row-reverse gap-8 md:gap-2">
                         <div className="md:flex-1">
                             <div className="@container">
-                              <div className="flex items-center gap-2">
-                                <h1 className="text-2xl flex-1">All products</h1>
+                              <div className="flex flex-col md:flex-row md:items-center gap-2 mb-4 w-full">
+                                <h1 className="text-2xl flex-1 mb-0">All products</h1>
                                 <aside>
                                   <div className="relative">
                                     <IconSearch className="size-5 absolute left-2 top-1/2 -translate-y-1/2 text-primary/50 dark:text-primary-dark/50" />
@@ -205,8 +205,8 @@ const Teams: React.FC = () => {
                                         type="text" 
                                         value={searchTerm}
                                         onChange={(e) => setSearchTerm(e.target.value)}
-                                        placeholder="Search" 
-                                        className="border border-light dark:border-dark rounded-md py-1 pl-7 pr-8" 
+                                        placeholder="Search products" 
+                                        className="border border-light dark:border-dark rounded-md py-1 pl-7 pr-8 w-full md:w-auto bg-white dark:bg-accent-dark" 
                                     />
                                     {searchTerm && (
                                         <button
@@ -241,9 +241,9 @@ const Teams: React.FC = () => {
                                   </>
                                 ) : (
                                     <div className="p-8 rounded border border-light dark:border-dark bg-accent dark:bg-accent-dark">
-                                      <p className="mb-2 opacity-70">No results... yet</p>
-                                      <h2>We haven't built that one, but maybe we should?</h2>
-                                      <p>Help us decide what to build by voting on our roadmap.</p>
+                                      <p className="mb-2 opacity-70">No results</p>
+                                      <h2 className="mb-1">We haven't built that one... but maybe we should?</h2>
+                                      <p className="mb-4">Help us decide what to build by voting on our roadmap.</p>
                                       <CallToAction to="/roadmap" size="md">Visit our roadmap</CallToAction>
                                     </div>
                                 )}
