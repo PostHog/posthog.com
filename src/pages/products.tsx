@@ -25,31 +25,34 @@ interface ProductListingProps {
     url: string
     icon: React.ReactNode
     color: string
+    denominator: string
 }
 
-const ProductListing: FC<ProductListingProps> = ({ name, description, freeTierLimit, startingPrice, url, icon, color }) => {
+const ProductListing: FC<ProductListingProps> = ({ name, description, freeTierLimit, startingPrice, url, icon, denominator, color }) => {
     return (
         <div className="flex flex-col items-start gap-2 bg-white dark:bg-accent-dark p-4 border border-light dark:border-dark">
           <div className="flex items-center gap-2">
             {icon}
             <h2 className="text-lg mb-0">{name}</h2>
             </div>
-            <p className="opacity-70 text-[15px]">{description}</p>
-            <dl className="grid grid-cols-2 gap-2 text-sm">
-                <dt>
-                    <label>Free tier</label>
-                </dt>
-                <dt>
-                    <label>Then pricing starts at</label>
-                </dt>
-                <dd>
-                    <p>{freeTierLimit}</p>
-                </dd>
-                <dd>
-                    <p><strong>{startingPrice}</strong>/event</p>
-                </dd>
-            </dl>
-            <CallToAction to={url} type="secondary" size="sm" width='auto'>Explore</CallToAction>
+            <p className="opacity-70 text-[15px] mb-2">{description}</p>
+            <div className="mt-auto">
+              <dl className="grid grid-cols-2 gap-x-2 gap-y-1 text-sm mb-4">
+                  <dt>
+                      <label className="font-normal">Free tier</label>
+                  </dt>
+                  <dt>
+                      <label className="font-normal">Then pricing starts at</label>
+                  </dt>
+                  <dd>
+                      <p className="mb-0 text-[15px]"><strong className="text-green">{freeTierLimit} {denominator}s</strong><span className="opacity-70">/mo</span></p>
+                  </dd>
+                  <dd>
+                      <p className="mb-0 text-[15px]"><strong>{startingPrice}</strong>/{denominator}</p>
+                  </dd>
+              </dl>
+              <CallToAction to={url} type="secondary" size="sm" width='auto'>Explore</CallToAction>
+            </div>
         </div>
     )
 }
@@ -57,52 +60,56 @@ const ProductListing: FC<ProductListingProps> = ({ name, description, freeTierLi
 const productDetails: Record<string, {
     freeTierLimit: string
     startingPrice: string
-    description: string
+    description: string,
+    denominator: string
 }> = {
     'product-analytics': {
-        freeTierLimit: 'Up to 1M events/month',
+        freeTierLimit: '1 million',
+        denominator: 'event',
         startingPrice: '$0.0000500',
         description: 'Understand user behavior with event-based analytics, cohorts, and conversion funnels',
     },
     'web-analytics': {
-        freeTierLimit: 'Up to 1M pageviews/month',
-        startingPrice: '$0.0000400',
+        freeTierLimit: '1 million',
+        denominator: 'event',
+        startingPrice: '$0.0000500',
         description: 'Privacy-friendly website analytics with no cookie banner required',
     },
     'session-replay': {
-        freeTierLimit: 'Up to 5K recordings/month',
-        startingPrice: '$0.0006000',
-        description: 'Watch real users use your product to identify pain points and opportunities',
+        freeTierLimit: '5,000',
+        denominator: 'recording',
+        startingPrice: '$0.0050',
+        description: 'Watch people use your product to diagnose issues and understand user behavior',
     },
     'feature-flags': {
-        freeTierLimit: 'Unlimited flags',
-        startingPrice: 'Free',
-        description: 'Release features safely with targeted rollouts and experiments',
+        freeTierLimit: '1 million',
+        denominator: 'request',
+        startingPrice: '$0.000100',
+        description: 'Release features safely with targeted rollouts',
     },
     'experiments': {
-        freeTierLimit: 'Unlimited experiments',
-        startingPrice: 'Free',
+        freeTierLimit: '1 million',
+        denominator: 'request',
+        startingPrice: '$0.000100',
         description: 'Run A/B tests to optimize your product with statistical rigor',
     },
     'surveys': {
-        freeTierLimit: 'Up to 500 responses/month',
-        startingPrice: '$0.1000000',
+        freeTierLimit: '250',
+        denominator: 'response',
+        startingPrice: '$0.20',
         description: 'Get qualitative feedback from the right users at the right time',
     },
     'cdp': {
-        freeTierLimit: 'Up to 1M events/month',
+        freeTierLimit: '1 million',
+        denominator: 'row',
         startingPrice: '$0.0000500',
         description: 'Send customer data anywhere with our CDP and reverse ETL pipeline',
     },
     'data-warehouse': {
-        freeTierLimit: 'Up to 1M events/month',
+        freeTierLimit: '1 million',
+        denominator: 'row',
         startingPrice: '$0.0000300',
         description: 'Query your data with SQL in our lightning-fast data warehouse',
-    },
-    'product-os': {
-        freeTierLimit: 'Custom',
-        startingPrice: 'Contact us',
-        description: 'Build and scale your product with our complete product operating system',
     },
 }
 
@@ -121,21 +128,24 @@ const Teams: React.FC = () => {
         }
     `)
    
-    const products = productMenu.children.map((product) => {
-        const IconComponent = Icons[product.icon as keyof typeof Icons]
-        const key = product.url.replace('/', '')
-        const details = productDetails[key]
-        
-        return {
-            name: product.name,
-            description: details.description,
-            url: product.url,
-            startingPrice: details.startingPrice,
-            freeTierLimit: details.freeTierLimit,
-            icon: <IconComponent className={`text-${product.color} size-5`} />,
-            color: product.color,
-        }
-    })
+    const products = productMenu.children
+        .filter((product) => product.url.replace('/', '') !== 'product-os')
+        .map((product) => {
+            const IconComponent = Icons[product.icon as keyof typeof Icons]
+            const key = product.url.replace('/', '')
+            const details = productDetails[key]
+            
+            return {
+                name: product.name,
+                description: details.description,
+                url: product.url,
+                startingPrice: details.startingPrice,
+                freeTierLimit: details.freeTierLimit,
+                icon: <IconComponent className={`text-${product.color} size-6`} />,
+                color: product.color,
+                denominator: details.denominator,
+            }
+        })
 
     return (
         <Layout>
@@ -145,35 +155,31 @@ const Teams: React.FC = () => {
                 image={`/images/og/why-posthog.png`}
             />
             <PostLayout
-                title={'Handbook'}
+                title={'Products'}
                 hideSurvey
                 sidebar={
-                    <SidebarSection title="From the desk of...">
-                        <div className="-mx-4 pt-1">
-                            <Contributor
-                                url={james.squeakId && `/community/profiles/${james.squeakId}`}
-                                image={james.avatar?.url}
-                                name={`${james.firstName} ${james.lastName}`}
-                                role={james.companyRole}
-                                text
-                            />
+                    <SidebarSection>
+                    <div className="">
+                        <h3 className="text-lg mb-2">Products</h3>
+                        <p className="text-[15px]"><strong>PostHog is an entire suite of products you can use to make your software successful.</strong></p>
+
+                        <p className="text-[15px]"><strong>We have 10+ products today</strong> – but even if we don’t have it yet, we will eventually. We are going to build every piece of SaaS you need to make your product successful. Learn more about <Link href="/why">why picking PostHog is a no-brainer</Link>.</p>
+                    </div>
+                        <div className="">
+                            <h3 className="text-lg mb-2">Product OS</h3>
+                            <p className="text-[15px] mb-2">Build and scale your product with our complete open source product operating system.</p>
+                            <p className="text-[15px] mb-2">All our products are built on it, and it offers many features available to all of our products, like:</p>
+                            <ul className="pl-4 [&_li]:text-[15px]">
+                                <li>Autocapture</li>
+                                <li>Webhooks</li>
+                                <li>Reverse proxy</li>
+                                <li>API</li>
+                                <li>SQL access</li>
+                            </ul>
                         </div>
                     </SidebarSection>
                 }
                 menu={[{ name: 'Explore products', url: undefined }, ...productMenu.children]}
-                tableOfContents={[
-                    {
-                        url: 'posthog-is-literally-designed-to-be-a-no-brainer',
-                        value: 'PostHog is literally designed to be a no-brainer',
-                        depth: 0,
-                    },
-                    {
-                        url: 'popular-roadmap-items',
-                        value: 'Popular roadmap items',
-                        depth: 0,
-                    },
-                    
-                ]}
             >
                 <section className="mx-auto">
                     <div className="flex flex-col md:items-center md:justify-end md:flex-row-reverse gap-8 md:gap-2">
