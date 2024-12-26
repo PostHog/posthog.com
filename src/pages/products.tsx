@@ -32,29 +32,29 @@ interface ProductListingProps {
 const ProductListing: FC<ProductListingProps> = ({ name, description, freeTierLimit, startingPrice, url, icon, denominator, color }) => {
     return (
         <div className="flex flex-col items-start gap-2 bg-white dark:bg-accent-dark p-4 border border-light dark:border-dark rounded-sm">
-          <div className="flex items-center gap-2">
+          <Link href={url} className="flex items-center gap-2 hover:underline !text-primary dark:!text-primary-dark">
             {icon}
-            <h2 className="text-lg mb-0">{name}</h2>
-            </div>
-            <p className="opacity-70 text-[15px] mb-2">{description}</p>
-            <div className="mt-auto w-full">
-              <dl className="grid grid-cols-2 gap-x-2 gap-y-1 text-sm mb-4 w-full">
-                  <dt>
-                      <label className="font-normal opacity-75">Free tier</label>
-                  </dt>
-                  <dt>
-                      <label className="font-normal opacity-75">Then pricing starts at</label>
-                  </dt>
-                  <dd>
-                      <p className="mb-0 text-[15px]"><strong className="text-green">{freeTierLimit} {denominator}s</strong><span className="opacity-70 text-sm">/mo</span></p>
-                  </dd>
-                  <dd>
-                      <p className="mb-0 text-[15px]"><strong>{startingPrice}</strong>/<span className="text-sm">{denominator}</span></p>
-                  </dd>
-              </dl>
-              <CallToAction to={url} type="secondary" size="sm" width='auto'>Explore</CallToAction>
-            </div>
-        </div>
+            <h2 className="text-lg mb-0 text-primary dark:text-primary-dark">{name}</h2>
+          </Link>
+          <p className="opacity-70 text-[15px] mb-2">{description}</p>
+          <div className="mt-auto w-full">
+            <dl className="grid @3xl:grid-cols-2 gap-x-2 @3xl:gap-y-1 text-sm mb-4 w-full">
+                <dt className="order-1 @3xl:order-none">
+                    <label className="font-normal opacity-75">Monthly free tier</label>
+                </dt>
+                <dt className="order-3 @3xl:order-none">
+                    <label className="font-normal opacity-75">Then pricing starts at</label>
+                </dt>
+                <dd className="order-2 @3xl:order-none pb-2 @3xl:pb-0">
+                    <p className="mb-0 text-[15px]"><strong className="text-green">{freeTierLimit} {denominator}s</strong></p>
+                </dd>
+                <dd className="order-4 @3xl:order-none">
+                    <p className="mb-0 text-[15px]"><strong>{startingPrice}</strong>/<span className="text-sm opacity-70">{denominator}</span></p>
+                </dd>
+            </dl>
+            <CallToAction to={url} type="secondary" size="sm" width='auto'>Explore</CallToAction>
+          </div>
+      </div>
     )
 }
 
@@ -206,7 +206,7 @@ const Teams: React.FC = () => {
                                         value={searchTerm}
                                         onChange={(e) => setSearchTerm(e.target.value)}
                                         placeholder="Search products" 
-                                        className="border border-light dark:border-dark rounded-md py-1 pl-7 pr-8 w-full md:w-auto bg-white dark:bg-accent-dark" 
+                                        className="border border-light dark:border-dark rounded-sm py-1 pl-7 pr-8 w-full md:w-auto bg-white dark:bg-accent-dark" 
                                     />
                                     {searchTerm && (
                                         <button
