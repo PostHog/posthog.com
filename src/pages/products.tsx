@@ -180,13 +180,14 @@ const Teams: React.FC = () => {
                             <h3 className="text-lg mb-2">Product OS</h3>
                             <p className="text-[15px] mb-2">Build and scale your product with our complete open source product operating system.</p>
                             <p className="text-[15px] mb-2">All our products are built on it, and it offers many features available to all of our products, like:</p>
-                            <ul className="pl-4 [&_li]:text-[15px]">
+                            <ul className="pl-4 mb-4 [&_li]:text-[15px]">
                                 <li>Autocapture</li>
                                 <li>Webhooks</li>
                                 <li>Reverse proxy</li>
                                 <li>API</li>
                                 <li>SQL access</li>
                             </ul>
+                            <CallToAction to="/product-os" size="sm" type="secondary">Learn about Product OS</CallToAction>
                         </div>
                     </SidebarSection>
                 }
@@ -206,7 +207,7 @@ const Teams: React.FC = () => {
                                         value={searchTerm}
                                         onChange={(e) => setSearchTerm(e.target.value)}
                                         placeholder="Search products" 
-                                        className="border border-light dark:border-dark rounded-sm py-1 pl-7 pr-8 w-full md:w-auto bg-white dark:bg-accent-dark" 
+                                        className="border border-light dark:border-dark rounded-sm py-1 pl-7 pr-8 w-full md:w-auto bg-white dark:bg-accent-dark text-[15px]" 
                                     />
                                     {searchTerm && (
                                         <button
