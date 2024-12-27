@@ -26,6 +26,7 @@ const query = (id: string | number, isModerator: boolean) =>
                       }),
             },
             populate: {
+                edits: true,
                 resolvedBy: {
                     select: ['id'],
                 },

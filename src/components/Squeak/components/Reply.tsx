@@ -14,6 +14,7 @@ import usePostHog from 'hooks/usePostHog'
 import { IconFeatures } from '@posthog/icons'
 import Tooltip from 'components/Tooltip'
 import EditWrapper from './EditWrapper'
+import Edits from './Edits'
 
 type ReplyProps = {
     reply: StrapiRecord<ReplyData>
@@ -183,14 +184,6 @@ const AIDisclaimer = ({ replyID, mutate, topic, confidence, resolvable }) => {
             )}
         </div>
     )
-}
-
-const Edits = ({ edits }) => {
-    return edits?.length >= 1 ? (
-        <span>
-            <span className="m-0 text-sm opacity-50 font-bold cursor-default">Edited</span>
-        </span>
-    ) : null
 }
 
 export default function Reply({ reply, badgeText }: ReplyProps) {

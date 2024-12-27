@@ -39,6 +39,7 @@ const query = (offset: number, options?: UseQuestionsOptions, isModerator?: bool
             ],
         },
         populate: {
+            edits: true,
             resolvedBy: {
                 select: ['id'],
             },
