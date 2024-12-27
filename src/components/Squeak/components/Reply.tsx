@@ -14,7 +14,6 @@ import usePostHog from 'hooks/usePostHog'
 import { IconFeatures } from '@posthog/icons'
 import Tooltip from 'components/Tooltip'
 import EditWrapper from './EditWrapper'
-import Edits from './Edits'
 
 type ReplyProps = {
     reply: StrapiRecord<ReplyData>
@@ -293,8 +292,7 @@ export default function Reply({ reply, badgeText }: ReplyProps) {
                         {badgeText}
                     </span>
                 )}
-                <Days created={createdAt} />
-                <Edits edits={edits} />
+                <Days created={createdAt} edits={edits} profile={profile?.data} />
                 {resolved && resolvedBy?.data?.id === id && (
                     <>
                         <span className="border rounded-sm text-[#008200cc] text-xs font-semibold py-0.5 px-1 uppercase">
@@ -362,7 +360,7 @@ export default function Reply({ reply, badgeText }: ReplyProps) {
                                 {(isModerator || resolvable || isReplyAuthor) && (
                                     <div
                                         className={`flex ${
-                                            isModerator ? 'justify-end border-t border-light dark:border-dark' : ''
+                                            isModerator ? 'justify-end border-t border-light dark:border-dark mt-4' : ''
                                         } mt-1 pt-1 pb-2`}
                                     >
                                         <div
@@ -370,7 +368,7 @@ export default function Reply({ reply, badgeText }: ReplyProps) {
                                                 isModerator ? `bg-light dark:bg-dark px-1 mr-4 -mt-5` : ''
                                             }`}
                                         >
-                                            {(isModerator || isReplyAuthor) && (
+                                            {isReplyAuthor && (
                                                 <button
                                                     onClick={() => setEditing(true)}
                                                     className="text-red dark:text-yellow font-semibold text-sm flex items-center py-1 px-1.5 rounded hover:bg-accent dark:hover:bg-border-dark/50"

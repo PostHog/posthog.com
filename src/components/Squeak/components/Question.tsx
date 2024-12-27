@@ -19,13 +19,11 @@ import { Check2, Close } from 'components/Icons'
 import Modal from 'components/Modal'
 import Checkbox from 'components/Checkbox'
 import { CallToAction } from 'components/CallToAction'
-import { StaticImage } from 'gatsby-plugin-image'
 import { navigate } from 'gatsby'
 import Logomark from 'components/Home/images/Logomark'
 import Avatar from './Avatar'
 import { DotLottiePlayer } from '@dotlottie/react-player'
 import EditWrapper from './EditWrapper'
-import Edits from './Edits'
 
 type QuestionProps = {
     // TODO: Deal with id possibly being undefined at first
@@ -485,8 +483,11 @@ export const Question = (props: QuestionProps) => {
                             profile={questionData.attributes.profile?.data}
                             className={archived ? 'opacity-50' : ''}
                         />
-                        <Days created={questionData.attributes.createdAt} />
-                        <Edits edits={questionData.attributes.edits} />
+                        <Days
+                            created={questionData.attributes.createdAt}
+                            profile={questionData.attributes.profile?.data}
+                            edits={questionData.attributes.edits}
+                        />
                         <div className="!ml-auto flex space-x-2">
                             {user?.role?.type === 'moderator' && showActions && (
                                 <>
