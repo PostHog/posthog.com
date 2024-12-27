@@ -9,22 +9,11 @@ import { CurrentQuestionContext } from './Question'
 import Link from 'components/Link'
 import Logomark from 'components/Home/images/Logomark'
 import { CallToAction } from 'components/CallToAction'
-import {
-    IconArchive,
-    IconCheck,
-    IconInfo,
-    IconPencil,
-    IconThumbsDown,
-    IconThumbsUp,
-    IconTrash,
-    IconX,
-} from '@posthog/icons'
+import { IconArchive, IconCheck, IconInfo, IconPencil, IconThumbsDown, IconThumbsUp, IconTrash } from '@posthog/icons'
 import usePostHog from 'hooks/usePostHog'
 import { IconFeatures } from '@posthog/icons'
 import Tooltip from 'components/Tooltip'
-import RichText from './RichText'
-import { useFormik } from 'formik'
-import transformValues from '../util/transformValues'
+import EditWrapper from './EditWrapper'
 
 type ReplyProps = {
     reply: StrapiRecord<ReplyData>
@@ -196,78 +185,6 @@ const AIDisclaimer = ({ replyID, mutate, topic, confidence, resolvable }) => {
     )
 }
 
-const EditReply = ({
-    body,
-    replyID,
-    setEditing,
-    onSubmit,
-}: {
-    body: string
-    replyID: number
-    setEditing: (editing: boolean) => void
-    onSubmit: () => void
-}) => {
-    const [loading, setLoading] = useState(false)
-    const { user, getJwt } = useUser()
-    const { values, setFieldValue, submitForm } = useFormik({
-        initialValues: {
-            body,
-            images: [],
-        },
-        onSubmit: async (values) => {
-            if (loading || !user?.profile?.id) return
-            setLoading(true)
-            const jwt = await getJwt()
-            const transformedValues = await transformValues(values, user?.profile?.id, jwt)
-            await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/replies/${replyID}`, {
-                method: 'PUT',
-                headers: {
-                    'content-type': 'application/json',
-                    Authorization: `Bearer ${jwt}`,
-                },
-                body: JSON.stringify({
-                    data: {
-                        body: transformedValues.body,
-                    },
-                }),
-            })
-            await onSubmit()
-            setLoading(false)
-            setEditing(false)
-        },
-    })
-
-    return (
-        <div>
-            <div className="bg-white dark:bg-accent-dark border border-light dark:border-dark rounded-md overflow-hidden mb-2">
-                <RichText
-                    initialValue={values.body}
-                    setFieldValue={setFieldValue}
-                    values={values}
-                    onSubmit={submitForm}
-                />
-            </div>
-            <div className="flex items-baseline justify-end space-x-1">
-                <button
-                    onClick={() => setEditing(false)}
-                    className="text-red dark:text-yellow font-semibold text-sm flex items-center py-1 px-1.5 rounded hover:bg-accent dark:hover:bg-border-dark/50"
-                >
-                    <IconX className="size-4 mr-1 text-red inline-block" />
-                    Cancel
-                </button>
-                <button
-                    disabled={loading}
-                    onClick={submitForm}
-                    className="text-red dark:text-yellow font-semibold text-sm flex items-center py-1 px-1.5 rounded hover:bg-accent dark:hover:bg-border-dark/50 disabled:opacity-60 disabled:!bg-transparent disabled:cursor-not-allowed"
-                >
-                    <IconCheck className="size-4 mr-1 text-green inline-block" />
-                    {loading ? 'Saving...' : 'Save'}
-                </button>
-            </div>
-        </div>
-    )
-}
-
 const Edits = ({ edits }) => {
     return edits?.length >= 1 ? (
         <span>
@@ -291,7 +208,6 @@ export default function Reply({ reply, badgeText }: ReplyProps) {
     } = useContext(CurrentQuestionContext)
 
     const [confirmDelete, setConfirmDelete] = useState(false)
-    const [editing, setEditing] = useState(false)
     const { user } = useUser()
     const isModerator = user?.role?.type === 'moderator'
     const isAuthor = user?.profile?.id === questionProfile?.data?.id
@@ -423,77 +339,87 @@ export default function Reply({ reply, badgeText }: ReplyProps) {
                             resolvable={resolvable}
                         />
                     ))}
-                <div className={reply?.attributes?.helpful === false || !publishedAt ? 'opacity-70' : ''}>
-                    {reply?.attributes?.helpful === false && (
-                        <div className="p-2 rounded border border-light dark:border-dark mb-2 text-sm bg-accent dark:bg-accent-dark">
-                            <IconInfo className="size-5 inline-block" /> This answer was marked as unhelpful.
-                        </div>
-                    )}
-                    {!editing && <Markdown>{body}</Markdown>}
-                </div>
-                {editing && <EditReply replyID={id} setEditing={setEditing} body={body} onSubmit={() => mutate()} />}
-                {profile.data.id === Number(process.env.GATSBY_AI_PROFILE_ID) && helpful && (
-                    <div className="border-t border-light dark:border-dark pt-2 mt-2">
-                        <p className="m-0 text-sm text-primary/60 dark:text-primary-dark/60 pb-4">
-                            Max AI's response was generated by{' '}
-                            <Link to="https://inkeep.com?utm_source=posthog" externalNoIcon>
-                                Inkeep
-                            </Link>
-                            . Double-check for accuracy.
-                        </p>
-                    </div>
-                )}
+                <EditWrapper content={reply} type="reply" onSubmit={() => mutate()}>
+                    {({ setEditing }) => {
+                        return (
+                            <>
+                                <div
+                                    className={reply?.attributes?.helpful === false || !publishedAt ? 'opacity-70' : ''}
+                                >
+                                    {reply?.attributes?.helpful === false && (
+                                        <div className="p-2 rounded border border-light dark:border-dark mb-2 text-sm bg-accent dark:bg-accent-dark">
+                                            <IconInfo className="size-5 inline-block" /> This answer was marked as
+                                            unhelpful.
+                                        </div>
+                                    )}
+                                    <Markdown>{body}</Markdown>
+                                </div>
+                                {profile.data.id === Number(process.env.GATSBY_AI_PROFILE_ID) && helpful && (
+                                    <div className="border-t border-light dark:border-dark pt-2 mt-2">
+                                        <p className="m-0 text-sm text-primary/60 dark:text-primary-dark/60 pb-4">
+                                            Max AI's response was generated by{' '}
+                                            <Link to="https://inkeep.com?utm_source=posthog" externalNoIcon>
+                                                Inkeep
+                                            </Link>
+                                            . Double-check for accuracy.
+                                        </p>
+                                    </div>
+                                )}
 
-                {(isModerator || resolvable || isReplyAuthor) && (
-                    <div
-                        className={`flex ${
-                            isModerator ? 'justify-end border-t border-light dark:border-dark' : ''
-                        } mt-1 pt-1 pb-2`}
-                    >
-                        <div
-                            className={`inline-flex space-x-1 ${
-                                isModerator ? `bg-light dark:bg-dark px-1 mr-4 -mt-5` : ''
-                            }`}
-                        >
-                            {(isModerator || isReplyAuthor) && !editing && (
-                                <button
-                                    onClick={() => setEditing(!editing)}
-                                    className="text-red dark:text-yellow font-semibold text-sm flex items-center py-1 px-1.5 rounded hover:bg-accent dark:hover:bg-border-dark/50"
-                                >
-                                    <IconPencil className="size-4 mr-1 text-primary/70 dark:text-primary-dark/70 inline-block" />
-                                    Edit
-                                </button>
-                            )}
-                            {(isModerator || resolvable) && (
-                                <button
-                                    onClick={() => handleResolve(true, id)}
-                                    className="text-red dark:text-yellow font-semibold text-sm flex items-center py-1 px-1.5 rounded hover:bg-accent dark:hover:bg-border-dark/50"
-                                >
-                                    <IconCheck className="size-4 mr-1 text-green inline-block" />
-                                    Mark as solution
-                                </button>
-                            )}
-                            {isModerator && (
-                                <button
-                                    onClick={() => handlePublishReply(!!publishedAt, id)}
-                                    className="text-red dark:text-yellow font-semibold text-sm flex items-center py-1 px-1.5 rounded hover:bg-accent dark:hover:bg-border-dark/50"
-                                >
-                                    <IconArchive className="size-4 mr-1 text-primary/50 dark:text-primary-dark/50 inline-block" />
-                                    {publishedAt ? 'Unpublish' : 'Publish'}
-                                </button>
-                            )}
-                            {isModerator && (
-                                <button
-                                    onClick={handleDelete}
-                                    className="text-red font-semibold text-sm flex items-center py-1 px-1.5 rounded hover:bg-accent dark:hover:bg-border-dark/50"
-                                >
-                                    <IconTrash className="size-4 mr-1 text-primary/50 dark:text-primary-dark/50 inline-block" />
-                                    {confirmDelete ? 'Click again to confirm' : 'Delete'}
-                                </button>
-                            )}
-                        </div>
-                    </div>
-                )}
+                                {(isModerator || resolvable || isReplyAuthor) && (
+                                    <div
+                                        className={`flex ${
+                                            isModerator ? 'justify-end border-t border-light dark:border-dark' : ''
+                                        } mt-1 pt-1 pb-2`}
+                                    >
+                                        <div
+                                            className={`inline-flex space-x-1 ${
+                                                isModerator ? `bg-light dark:bg-dark px-1 mr-4 -mt-5` : ''
+                                            }`}
+                                        >
+                                            {(isModerator || isReplyAuthor) && (
+                                                <button
+                                                    onClick={() => setEditing(true)}
+                                                    className="text-red dark:text-yellow font-semibold text-sm flex items-center py-1 px-1.5 rounded hover:bg-accent dark:hover:bg-border-dark/50"
+                                                >
+                                                    <IconPencil className="size-4 mr-1 text-primary/70 dark:text-primary-dark/70 inline-block" />
+                                                    Edit
+                                                </button>
+                                            )}
+                                            {(isModerator || resolvable) && (
+                                                <button
+                                                    onClick={() => handleResolve(true, id)}
+                                                    className="text-red dark:text-yellow font-semibold text-sm flex items-center py-1 px-1.5 rounded hover:bg-accent dark:hover:bg-border-dark/50"
+                                                >
+                                                    <IconCheck className="size-4 mr-1 text-green inline-block" />
+                                                    Mark as solution
+                                                </button>
+                                            )}
+                                            {isModerator && (
+                                                <button
+                                                    onClick={() => handlePublishReply(!!publishedAt, id)}
+                                                    className="text-red dark:text-yellow font-semibold text-sm flex items-center py-1 px-1.5 rounded hover:bg-accent dark:hover:bg-border-dark/50"
+                                                >
+                                                    <IconArchive className="size-4 mr-1 text-primary/50 dark:text-primary-dark/50 inline-block" />
+                                                    {publishedAt ? 'Unpublish' : 'Publish'}
+                                                </button>
+                                            )}
+                                            {isModerator && (
+                                                <button
+                                                    onClick={handleDelete}
+                                                    className="text-red font-semibold text-sm flex items-center py-1 px-1.5 rounded hover:bg-accent dark:hover:bg-border-dark/50"
+                                                >
+                                                    <IconTrash className="size-4 mr-1 text-primary/50 dark:text-primary-dark/50 inline-block" />
+                                                    {confirmDelete ? 'Click again to confirm' : 'Delete'}
+                                                </button>
+                                            )}
+                                        </div>
+                                    </div>
+                                )}
+                            </>
+                        )
+                    }}
+                </EditWrapper>
             </div>
         </div>
     ) : null
