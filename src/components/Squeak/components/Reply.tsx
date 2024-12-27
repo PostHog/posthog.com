@@ -9,10 +9,22 @@ import { CurrentQuestionContext } from './Question'
 import Link from 'components/Link'
 import Logomark from 'components/Home/images/Logomark'
 import { CallToAction } from 'components/CallToAction'
-import { IconArchive, IconCheck, IconInfo, IconThumbsDown, IconThumbsUp, IconTrash } from '@posthog/icons'
+import {
+    IconArchive,
+    IconCheck,
+    IconInfo,
+    IconPencil,
+    IconThumbsDown,
+    IconThumbsUp,
+    IconTrash,
+    IconX,
+} from '@posthog/icons'
 import usePostHog from 'hooks/usePostHog'
 import { IconFeatures } from '@posthog/icons'
 import Tooltip from 'components/Tooltip'
+import RichText from './RichText'
+import { useFormik } from 'formik'
+import transformValues from '../util/transformValues'
 
 type ReplyProps = {
     reply: StrapiRecord<ReplyData>
@@ -184,10 +196,90 @@ const AIDisclaimer = ({ replyID, mutate, topic, confidence, resolvable }) => {
     )
 }
 
+const EditReply = ({
+    body,
+    replyID,
+    setEditing,
+    onSubmit,
+}: {
+    body: string
+    replyID: number
+    setEditing: (editing: boolean) => void
+    onSubmit: () => void
+}) => {
+    const [loading, setLoading] = useState(false)
+    const { user, getJwt } = useUser()
+    const { values, setFieldValue, submitForm } = useFormik({
+        initialValues: {
+            body,
+            images: [],
+        },
+        onSubmit: async (values) => {
+            if (loading || !user?.profile?.id) return
+            setLoading(true)
+            const jwt = await getJwt()
+            const transformedValues = await transformValues(values, user?.profile?.id, jwt)
+            await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/replies/${replyID}`, {
+                method: 'PUT',
+                headers: {
+                    'content-type': 'application/json',
+                    Authorization: `Bearer ${jwt}`,
+                },
+                body: JSON.stringify({
+                    data: {
+                        body: transformedValues.body,
+                    },
+                }),
+            })
+            await onSubmit()
+            setLoading(false)
+            setEditing(false)
+        },
+    })
+
+    return (
+        <div>
+            <div className="bg-white dark:bg-accent-dark border border-light dark:border-dark rounded-md overflow-hidden mb-2">
+                <RichText
+                    initialValue={values.body}
+                    setFieldValue={setFieldValue}
+                    values={values}
+                    onSubmit={submitForm}
+                />
+            </div>
+            <div className="flex items-baseline justify-end space-x-1">
+                <button
+                    onClick={() => setEditing(false)}
+                    className="text-red dark:text-yellow font-semibold text-sm flex items-center py-1 px-1.5 rounded hover:bg-accent dark:hover:bg-border-dark/50"
+                >
+                    <IconX className="size-4 mr-1 text-red inline-block" />
+                    Cancel
+                </button>
+                <button
+                    disabled={loading}
+                    onClick={submitForm}
+                    className="text-red dark:text-yellow font-semibold text-sm flex items-center py-1 px-1.5 rounded hover:bg-accent dark:hover:bg-border-dark/50 disabled:opacity-60 disabled:!bg-transparent disabled:cursor-not-allowed"
+                >
+                    <IconCheck className="size-4 mr-1 text-green inline-block" />
+                    {loading ? 'Saving...' : 'Save'}
+                </button>
+            </div>
+        </div>
+    )
+}
+
+const Edits = ({ edits }) => {
+    return edits?.length >= 1 ? (
+        <span>
+            <span className="m-0 text-sm opacity-50 font-bold cursor-default">Edited</span>
+        </span>
+    ) : null
+}
+
 export default function Reply({ reply, badgeText }: ReplyProps) {
     const {
         id,
-        attributes: { body, createdAt, profile, publishedAt, meta },
+        attributes: { body, createdAt, profile, publishedAt, meta, edits },
     } = reply
 
     const {
@@ -199,9 +291,11 @@ export default function Reply({ reply, badgeText }: ReplyProps) {
     } = useContext(CurrentQuestionContext)
 
     const [confirmDelete, setConfirmDelete] = useState(false)
+    const [editing, setEditing] = useState(false)
     const { user } = useUser()
     const isModerator = user?.role?.type === 'moderator'
     const isAuthor = user?.profile?.id === questionProfile?.data?.id
+    const isReplyAuthor = user?.profile?.id === profile?.data?.id
     const isTeamMember = profile?.data?.attributes?.teams?.data?.length > 0
     const resolvable =
         !resolved &&
@@ -291,6 +385,7 @@ export default function Reply({ reply, badgeText }: ReplyProps) {
                     </span>
                 )}
                 <Days created={createdAt} />
+                <Edits edits={edits} />
                 {resolved && resolvedBy?.data?.id === id && (
                     <>
                         <span className="border rounded-sm text-[#008200cc] text-xs font-semibold py-0.5 px-1 uppercase">
@@ -334,8 +429,9 @@ export default function Reply({ reply, badgeText }: ReplyProps) {
                             <IconInfo className="size-5 inline-block" /> This answer was marked as unhelpful.
                         </div>
                     )}
-                    <Markdown>{body}</Markdown>
+                    {!editing && <Markdown>{body}</Markdown>}
                 </div>
+                {editing && <EditReply replyID={id} setEditing={setEditing} body={body} onSubmit={() => mutate()} />}
                 {profile.data.id === Number(process.env.GATSBY_AI_PROFILE_ID) && helpful && (
                     <div className="border-t border-light dark:border-dark pt-2 mt-2">
                         <p className="m-0 text-sm text-primary/60 dark:text-primary-dark/60 pb-4">
@@ -348,14 +444,27 @@ export default function Reply({ reply, badgeText }: ReplyProps) {
                     </div>
                 )}
 
-                {(isModerator || resolvable) && (
+                {(isModerator || resolvable || isReplyAuthor) && (
                     <div
                         className={`flex ${
                             isModerator ? 'justify-end border-t border-light dark:border-dark' : ''
-                        }  mt-4 -mb-4 pt-1 pb-2`}
+                        } mt-1 pt-1 pb-2`}
                     >
-                        {!isModerator && resolvable && (
-                            <div className="-mt-4 -ml-1">
+                        <div
+                            className={`inline-flex space-x-1 ${
+                                isModerator ? `bg-light dark:bg-dark px-1 mr-4 -mt-5` : ''
+                            }`}
+                        >
+                            {(isModerator || isReplyAuthor) && !editing && (
+                                <button
+                                    onClick={() => setEditing(!editing)}
+                                    className="text-red dark:text-yellow font-semibold text-sm flex items-center py-1 px-1.5 rounded hover:bg-accent dark:hover:bg-border-dark/50"
+                                >
+                                    <IconPencil className="size-4 mr-1 text-primary/70 dark:text-primary-dark/70 inline-block" />
+                                    Edit
+                                </button>
+                            )}
+                            {(isModerator || resolvable) && (
                                 <button
                                     onClick={() => handleResolve(true, id)}
                                     className="text-red dark:text-yellow font-semibold text-sm flex items-center py-1 px-1.5 rounded hover:bg-accent dark:hover:bg-border-dark/50"
@@ -363,19 +472,8 @@ export default function Reply({ reply, badgeText }: ReplyProps) {
                                     <IconCheck className="size-4 mr-1 text-green inline-block" />
                                     Mark as solution
                                 </button>
-                            </div>
-                        )}
-                        {isModerator && (
-                            <div className="inline-flex space-x-1 bg-light dark:bg-dark px-1 mr-4 -mt-5">
-                                {resolvable && (
-                                    <button
-                                        onClick={() => handleResolve(true, id)}
-                                        className="text-red dark:text-yellow font-semibold text-sm flex items-center py-1 px-1.5 rounded hover:bg-accent dark:hover:bg-border-dark/50"
-                                    >
-                                        <IconCheck className="size-4 mr-1 text-green inline-block" />
-                                        Mark as solution
-                                    </button>
-                                )}
+                            )}
+                            {isModerator && (
                                 <button
                                     onClick={() => handlePublishReply(!!publishedAt, id)}
                                     className="text-red dark:text-yellow font-semibold text-sm flex items-center py-1 px-1.5 rounded hover:bg-accent dark:hover:bg-border-dark/50"
@@ -383,6 +481,8 @@ export default function Reply({ reply, badgeText }: ReplyProps) {
                                     <IconArchive className="size-4 mr-1 text-primary/50 dark:text-primary-dark/50 inline-block" />
                                     {publishedAt ? 'Unpublish' : 'Publish'}
                                 </button>
+                            )}
+                            {isModerator && (
                                 <button
                                     onClick={handleDelete}
                                     className="text-red font-semibold text-sm flex items-center py-1 px-1.5 rounded hover:bg-accent dark:hover:bg-border-dark/50"
@@ -390,8 +490,8 @@ export default function Reply({ reply, badgeText }: ReplyProps) {
                                     <IconTrash className="size-4 mr-1 text-primary/50 dark:text-primary-dark/50 inline-block" />
                                     {confirmDelete ? 'Click again to confirm' : 'Delete'}
                                 </button>
-                            </div>
-                        )}
+                            )}
+                        </div>
                     </div>
                 )}
             </div>

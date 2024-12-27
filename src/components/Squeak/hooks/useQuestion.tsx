@@ -47,6 +47,7 @@ const query = (id: string | number, isModerator: boolean) =>
                 replies: {
                     sort: ['createdAt:asc'],
                     populate: {
+                        edits: true,
                         profile: {
                             fields: ['id', 'firstName', 'lastName', 'gravatarURL', 'pronouns', 'color', 'startDate'],
                             populate: {

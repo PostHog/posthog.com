@@ -63,6 +63,7 @@ const query = (offset: number, options?: UseQuestionsOptions, isModerator?: bool
                     profile: {
                         fields: ['id', 'firstName', 'lastName', 'gravatarURL', 'pronouns'],
                         populate: {
+                            edits: true,
                             avatar: {
                                 fields: ['id', 'url'],
                             },
