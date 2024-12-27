@@ -541,7 +541,7 @@ export const Question = (props: QuestionProps) => {
                                     </Link>
                                 </h3>
                             )}
-                            <EditWrapper content={questionData} type="question" onSubmit={() => mutate()}>
+                            <EditWrapper data={questionData} type="question" onSubmit={() => mutate()}>
                                 {({ setEditing }) => {
                                     return (
                                         <>

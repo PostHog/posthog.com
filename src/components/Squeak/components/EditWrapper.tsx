@@ -6,12 +6,12 @@ import { useFormik } from 'formik'
 import transformValues from '../util/transformValues'
 
 export default function EditWrapper({
-    content,
+    data,
     onSubmit,
     children,
     type,
 }: {
-    content: any
+    data: any
     onSubmit: () => void
     children: (props: { setEditing: (editing: boolean) => void }) => React.ReactNode
     type: 'reply' | 'question'
@@ -19,8 +19,8 @@ export default function EditWrapper({
     const [editing, setEditing] = useState(false)
     const [loading, setLoading] = useState(false)
     const { user, getJwt } = useUser()
-    const body = content?.attributes?.body
-    const contentID = content?.id
+    const body = data?.attributes?.body
+    const contentID = data?.id
     const { values, setFieldValue, submitForm } = useFormik({
         initialValues: {
             body,
@@ -73,7 +73,7 @@ export default function EditWrapper({
                             Cancel
                         </button>
                         <button
-                            disabled={loading}
+                            disabled={loading || values.body?.trim() === body?.trim()}
                             onClick={submitForm}
                             className="text-red dark:text-yellow font-semibold text-sm flex items-center py-1 px-1.5 rounded hover:bg-accent dark:hover:bg-border-dark/50 disabled:opacity-60 disabled:!bg-transparent disabled:cursor-not-allowed"
                         >

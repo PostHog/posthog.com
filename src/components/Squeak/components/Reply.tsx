@@ -332,7 +332,7 @@ export default function Reply({ reply, badgeText }: ReplyProps) {
                             resolvable={resolvable}
                         />
                     ))}
-                <EditWrapper content={reply} type="reply" onSubmit={() => mutate()}>
+                <EditWrapper data={reply} type="reply" onSubmit={() => mutate()}>
                     {({ setEditing }) => {
                         return (
                             <>
