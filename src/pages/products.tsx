@@ -324,7 +324,9 @@ const Teams: React.FC = () => {
                         <div className="md:flex-1">
                             <div className="@container">
                                 <div className="flex flex-col md:flex-row md:items-center gap-2 mb-4 w-full">
-                                    <h1 className="text-2xl flex-1 mb-0">All products</h1>
+                                    <h1 className="text-2xl flex-1 mb-0">
+                                        {activeFilter ? activeFilter.value : 'All products'}
+                                    </h1>
                                     <aside>
                                         <div className="relative">
                                             <IconSearch className="size-5 absolute left-2 top-1/2 -translate-y-1/2 text-primary/50 dark:text-primary-dark/50" />
