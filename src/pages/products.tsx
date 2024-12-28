@@ -29,41 +29,61 @@ interface ProductListingProps {
     denominator: string
 }
 
-const ProductListing: FC<ProductListingProps> = ({ name, description, freeTierLimit, startingPrice, url, icon, denominator, color }) => {
+const ProductListing: FC<ProductListingProps> = ({
+    name,
+    description,
+    freeTierLimit,
+    startingPrice,
+    url,
+    icon,
+    denominator,
+    color,
+}) => {
     return (
         <div className="flex flex-col items-start gap-2 bg-white dark:bg-accent-dark p-4 border border-light dark:border-dark rounded-sm">
-          <Link href={url} className="flex items-center gap-2 hover:underline !text-primary dark:!text-primary-dark">
-            {icon}
-            <h2 className="text-lg mb-0 text-primary dark:text-primary-dark">{name}</h2>
-          </Link>
-          <p className="opacity-70 text-[15px] mb-2">{description}</p>
-          <div className="mt-auto w-full">
-            <dl className="grid @3xl:grid-cols-2 gap-x-2 @3xl:gap-y-1 text-sm mb-4 w-full">
-                <dt className="order-1 @3xl:order-none">
-                    <label className="font-normal opacity-75">Monthly free tier</label>
-                </dt>
-                <dt className="order-3 @3xl:order-none">
-                    <label className="font-normal opacity-75">Then pricing starts at</label>
-                </dt>
-                <dd className="order-2 @3xl:order-none pb-2 @3xl:pb-0">
-                    <p className="mb-0 text-[15px]"><strong className="text-green">{freeTierLimit} {denominator}s</strong></p>
-                </dd>
-                <dd className="order-4 @3xl:order-none">
-                    <p className="mb-0 text-[15px]"><strong>{startingPrice}</strong>/<span className="text-sm opacity-70">{denominator}</span></p>
-                </dd>
-            </dl>
-            <CallToAction to={url} type="secondary" size="sm" width='auto'>Explore</CallToAction>
-          </div>
-      </div>
+            <Link href={url} className="flex items-center gap-2 hover:underline !text-primary dark:!text-primary-dark">
+                {icon}
+                <h2 className="text-lg mb-0 text-primary dark:text-primary-dark">{name}</h2>
+            </Link>
+            <p className="opacity-70 text-[15px] mb-2">{description}</p>
+            <div className="mt-auto w-full">
+                <dl className="grid @3xl:grid-cols-2 gap-x-2 @3xl:gap-y-1 text-sm mb-4 w-full">
+                    <dt className="order-1 @3xl:order-none">
+                        <label className="font-normal opacity-75">Monthly free tier</label>
+                    </dt>
+                    <dt className="order-3 @3xl:order-none">
+                        <label className="font-normal opacity-75">Then pricing starts at</label>
+                    </dt>
+                    <dd className="order-2 @3xl:order-none pb-2 @3xl:pb-0">
+                        <p className="mb-0 text-[15px]">
+                            <strong className="text-green">
+                                {freeTierLimit} {denominator}s
+                            </strong>
+                        </p>
+                    </dd>
+                    <dd className="order-4 @3xl:order-none">
+                        <p className="mb-0 text-[15px]">
+                            <strong>{startingPrice}</strong>/<span className="text-sm opacity-70">{denominator}</span>
+                        </p>
+                    </dd>
+                </dl>
+                <CallToAction to={url} type="secondary" size="sm" width="auto">
+                    Explore
+                </CallToAction>
+            </div>
+        </div>
     )
 }
 
-const productDetails: Record<string, {
-    freeTierLimit: string
-    startingPrice: string
-    description: string,
-    denominator: string
-}> = {
+const productDetails: Record<
+    string,
+    {
+        freeTierLimit: string
+        startingPrice: string
+        description: string
+        denominator: string
+    }
+> = {
     'product-analytics': {
         freeTierLimit: '1 million',
         denominator: 'event',
@@ -88,19 +108,19 @@ const productDetails: Record<string, {
         startingPrice: '$0.000100',
         description: 'Release features safely with targeted rollouts',
     },
-    'experiments': {
+    experiments: {
         freeTierLimit: '1 million',
         denominator: 'request',
         startingPrice: '$0.000100',
         description: 'Run A/B tests to optimize your product with statistical rigor',
     },
-    'surveys': {
+    surveys: {
         freeTierLimit: '250',
         denominator: 'response',
         startingPrice: '$0.20',
         description: 'Get qualitative feedback from the right users at the right time',
     },
-    'cdp': {
+    cdp: {
         freeTierLimit: '1 million',
         denominator: 'row',
         startingPrice: '$0.0000500',
@@ -116,7 +136,7 @@ const productDetails: Record<string, {
 
 const Teams: React.FC = () => {
     const [searchTerm, setSearchTerm] = useState('')
-    
+
     const { james, supportTeam } = useStaticQuery(graphql`
         {
             james: squeakProfile(squeakId: { eq: 27732 }) {
@@ -130,7 +150,7 @@ const Teams: React.FC = () => {
             }
         }
     `)
-   
+
     const products = productMenu.children
         .filter((product) => {
             const key = product.url.replace('/', '')
@@ -140,7 +160,7 @@ const Teams: React.FC = () => {
             const IconComponent = Icons[product.icon as keyof typeof Icons]
             const key = product.url.replace('/', '')
             const details = productDetails[key]
-            
+
             return {
                 name: product.name,
                 description: details.description,
@@ -166,20 +186,35 @@ const Teams: React.FC = () => {
                 image={`/images/og/why-posthog.png`}
             />
             <PostLayout
+                contentWidth="56rem"
                 title={'Products'}
                 hideSurvey
                 sidebar={
                     <SidebarSection>
-                    <div className="">
-                        <h3 className="text-lg mb-2">Products</h3>
-                        <p className="text-[15px]"><strong>PostHog is an entire suite of products you can use to make your software successful.</strong></p>
+                        <div className="">
+                            <h3 className="text-lg mb-2">Products</h3>
+                            <p className="text-[15px]">
+                                <strong>
+                                    PostHog is an entire suite of products you can use to make your software successful.
+                                </strong>
+                            </p>
 
-                        <p className="text-[15px]"><strong>We have 10+ products today</strong> – but even if we don’t have it yet, we will eventually. We are going to build every piece of SaaS you need to make your product successful. Learn more about <Link href="/why">why picking PostHog is a no-brainer</Link>.</p>
-                    </div>
+                            <p className="text-[15px]">
+                                <strong>We have 10+ products today</strong> – but even if we don’t have it yet, we will
+                                eventually. We are going to build every piece of SaaS you need to make your product
+                                successful. Learn more about{' '}
+                                <Link href="/why">why picking PostHog is a no-brainer</Link>.
+                            </p>
+                        </div>
                         <div className="">
                             <h3 className="text-lg mb-2">Product OS</h3>
-                            <p className="text-[15px] mb-2">Build and scale your product with our complete open source product operating system.</p>
-                            <p className="text-[15px] mb-2">All our products are built on it, and it offers many features available to all of our products, like:</p>
+                            <p className="text-[15px] mb-2">
+                                Build and scale your product with our complete open source product operating system.
+                            </p>
+                            <p className="text-[15px] mb-2">
+                                All our products are built on it, and it offers many features available to all of our
+                                products, like:
+                            </p>
                             <ul className="pl-4 mb-4 [&_li]:text-[15px]">
                                 <li>Autocapture</li>
                                 <li>Webhooks</li>
@@ -187,7 +222,9 @@ const Teams: React.FC = () => {
                                 <li>API</li>
                                 <li>SQL access</li>
                             </ul>
-                            <CallToAction to="/product-os" size="sm" type="secondary">Learn about Product OS</CallToAction>
+                            <CallToAction to="/product-os" size="sm" type="secondary">
+                                Learn about Product OS
+                            </CallToAction>
                         </div>
                     </SidebarSection>
                 }
@@ -197,59 +234,56 @@ const Teams: React.FC = () => {
                     <div className="flex flex-col md:items-center md:justify-end md:flex-row-reverse gap-8 md:gap-2">
                         <div className="md:flex-1">
                             <div className="@container">
-                              <div className="flex flex-col md:flex-row md:items-center gap-2 mb-4 w-full">
-                                <h1 className="text-2xl flex-1 mb-0">All products</h1>
-                                <aside>
-                                  <div className="relative">
-                                    <IconSearch className="size-5 absolute left-2 top-1/2 -translate-y-1/2 text-primary/50 dark:text-primary-dark/50" />
-                                    <input 
-                                        type="text" 
-                                        value={searchTerm}
-                                        onChange={(e) => setSearchTerm(e.target.value)}
-                                        placeholder="Search products" 
-                                        className="border border-light dark:border-dark rounded-sm py-1 pl-7 pr-8 w-full md:w-auto bg-white dark:bg-accent-dark text-[15px]" 
-                                    />
-                                    {searchTerm && (
-                                        <button
-                                            onClick={() => setSearchTerm('')}
-                                            className="absolute right-2 top-1/2 -translate-y-1/2 text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200"
-                                        >
-                                            <IconX className="size-4" />
-                                        </button>
-                                    )}
-                                  </div>
-                                  
-                                </aside>
-                              </div>
+                                <div className="flex flex-col md:flex-row md:items-center gap-2 mb-4 w-full">
+                                    <h1 className="text-2xl flex-1 mb-0">All products</h1>
+                                    <aside>
+                                        <div className="relative">
+                                            <IconSearch className="size-5 absolute left-2 top-1/2 -translate-y-1/2 text-primary/50 dark:text-primary-dark/50" />
+                                            <input
+                                                type="text"
+                                                value={searchTerm}
+                                                onChange={(e) => setSearchTerm(e.target.value)}
+                                                placeholder="Search products"
+                                                className="border border-light dark:border-dark rounded-sm py-1 pl-7 pr-8 w-full md:w-auto bg-white dark:bg-accent-dark text-[15px]"
+                                            />
+                                            {searchTerm && (
+                                                <button
+                                                    onClick={() => setSearchTerm('')}
+                                                    className="absolute right-2 top-1/2 -translate-y-1/2 text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200"
+                                                >
+                                                    <IconX className="size-4" />
+                                                </button>
+                                            )}
+                                        </div>
+                                    </aside>
+                                </div>
 
-                              
                                 {filteredProducts.length > 0 ? (
-                                  <>
-                                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                                    {filteredProducts.map((product) => (
-                                        <ProductListing
-                                            key={product.url}
-                                            {...product}
-                                        />
-                                    ))}
-                                  </div>
-                                  <div className="flex flex-col sm:flex-row gap-3 sm:gap-2 mt-8">
-                                    <CallToAction to="https://app.posthog.com/signup">Get started - free</CallToAction>
-                                    <CallToAction to="/product-analytics" type="secondary">
-                                        Explore products
-                                    </CallToAction>
-                                  </div>
-                                  </>
+                                    <>
+                                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                            {filteredProducts.map((product) => (
+                                                <ProductListing key={product.url} {...product} />
+                                            ))}
+                                        </div>
+                                        <div className="flex flex-col sm:flex-row gap-3 sm:gap-2 mt-8">
+                                            <CallToAction to="https://app.posthog.com/signup">
+                                                Get started - free
+                                            </CallToAction>
+                                            <CallToAction to="/product-analytics" type="secondary">
+                                                Explore products
+                                            </CallToAction>
+                                        </div>
+                                    </>
                                 ) : (
                                     <div className="p-8 rounded border border-light dark:border-dark bg-accent dark:bg-accent-dark">
-                                      <p className="mb-2 opacity-70">No results</p>
-                                      <h2 className="mb-1">We haven't built that one... but maybe we should?</h2>
-                                      <p className="mb-4">Help us decide what to build by voting on our roadmap.</p>
-                                      <CallToAction to="/roadmap" size="md">Visit our roadmap</CallToAction>
+                                        <p className="mb-2 opacity-70">No results</p>
+                                        <h2 className="mb-1">We haven't built that one... but maybe we should?</h2>
+                                        <p className="mb-4">Help us decide what to build by voting on our roadmap.</p>
+                                        <CallToAction to="/roadmap" size="md">
+                                            Visit our roadmap
+                                        </CallToAction>
                                     </div>
                                 )}
-
-                                
                             </div>
                         </div>
                     </div>
