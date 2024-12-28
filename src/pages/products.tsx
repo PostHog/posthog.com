@@ -82,6 +82,9 @@ const productDetails: Record<
         startingPrice: string
         description: string
         denominator: string
+        roles: string[]
+        goals: string[]
+        complexity: string[]
     }
 > = {
     'product-analytics': {
@@ -89,53 +92,112 @@ const productDetails: Record<
         denominator: 'event',
         startingPrice: '$0.0000500',
         description: 'Understand user behavior with event-based analytics, cohorts, and conversion funnels',
+        roles: ['Product engineers', 'Startups & founders'],
+        goals: ['Understand user behavior', 'Improve product'],
+        complexity: ['Low-code'],
     },
     'web-analytics': {
         freeTierLimit: '1 million',
         denominator: 'event',
         startingPrice: '$0.0000500',
         description: 'Privacy-friendly website analytics with no cookie banner required',
+        roles: ['Marketing', 'Sales'],
+        goals: ['Understand user behavior', 'Data ops and monitoring'],
+        complexity: ['Low-code'],
     },
     'session-replay': {
         freeTierLimit: '5,000',
         denominator: 'recording',
         startingPrice: '$0.0050',
         description: 'Watch people use your product to diagnose issues and understand user behavior',
+        roles: ['Support', 'Product engineers', 'Sales'],
+        goals: ['Diagnose issues', 'Understand user behavior'],
+        complexity: ['Low-code'],
     },
     'feature-flags': {
         freeTierLimit: '1 million',
         denominator: 'request',
         startingPrice: '$0.000100',
         description: 'Release features safely with targeted rollouts',
+        roles: ['Product engineers', 'Startups & founders'],
+        goals: ['Improve product', 'Diagnose issues'],
+        complexity: ['People who code'],
     },
     experiments: {
         freeTierLimit: '1 million',
         denominator: 'request',
         startingPrice: '$0.000100',
         description: 'Run A/B tests to optimize your product with statistical rigor',
+        roles: ['Product people', 'Startups & founders'],
+        goals: ['Improve product', 'Data ops and monitoring'],
+        complexity: ['People who code'],
     },
     surveys: {
         freeTierLimit: '250',
         denominator: 'response',
         startingPrice: '$0.20',
         description: 'Get qualitative feedback from the right users at the right time',
+        roles: ['Product people', 'Marketing', 'Sales'],
+        goals: ['Understand user behavior', 'Improve product'],
+        complexity: ['Low-code'],
     },
     cdp: {
         freeTierLimit: '1 million',
         denominator: 'row',
         startingPrice: '$0.0000500',
         description: 'Send customer data anywhere with our CDP and reverse ETL pipeline',
+        roles: ['Data engineers', 'Marketing'],
+        goals: ['Data ops and monitoring', 'Diagnose issues'],
+        complexity: ['People who code'],
     },
     'data-warehouse': {
         freeTierLimit: '1 million',
         denominator: 'row',
         startingPrice: '$0.0000300',
         description: 'Query your data with SQL in our lightning-fast data warehouse',
+        roles: ['Data engineers', 'Startups & founders'],
+        goals: ['Data ops and monitoring', 'Improve product'],
+        complexity: ['People who code'],
     },
 }
 
+const filters = [
+    {
+        name: 'roles',
+        label: 'By role',
+        options: [
+            { name: 'Product engineers', icon: 'IconCode', color: 'purple' },
+            { name: 'Startups & founders', icon: 'IconRocket', color: 'blue' },
+            { name: 'Product people', icon: 'IconPageChart', color: 'pink' },
+            { name: 'Marketing', icon: 'IconMegaphone', color: 'blue' },
+            { name: 'Data engineers', icon: 'IconDatabase', color: 'orange' },
+            { name: 'Support', icon: 'IconSupport', color: 'red' },
+            { name: 'Sales', icon: 'IconCreditCard', color: 'green' },
+        ],
+    },
+    {
+        name: 'goals',
+        label: 'By goal',
+        options: [
+            { name: 'Understand user behavior', icon: 'IconPageChart', color: 'purple' },
+            { name: 'Improve product', icon: 'IconTrending', color: 'blue' },
+            { name: 'Diagnose issues', icon: 'IconBug', color: 'orange' },
+            { name: 'Data ops and monitoring', icon: 'IconDatabase', color: 'pink' },
+        ],
+    },
+    {
+        name: 'complexity',
+        label: 'By complexity',
+        options: [
+            { name: 'People who code', icon: 'IconCode', color: 'purple' },
+            { name: 'Low-code', icon: 'IconCursor', color: 'blue' },
+        ],
+    },
+]
+
 const Teams: React.FC = () => {
     const [searchTerm, setSearchTerm] = useState('')
+    const [activeFilter, setActiveFilter] = useState<{ type: string; value: string } | null>(null)
 
     const { james, supportTeam } = useStaticQuery(graphql`
         {
@@ -163,20 +225,24 @@ const Teams: React.FC = () => {
 
             return {
                 name: product.name,
-                description: details.description,
                 url: product.url,
-                startingPrice: details.startingPrice,
-                freeTierLimit: details.freeTierLimit,
                 icon: <IconComponent className={`text-${product.color} size-6`} />,
                 color: product.color,
-                denominator: details.denominator,
+                ...details,
             }
         })
 
-    const filteredProducts = products.filter((product) => {
-        const searchable = `${product.name} ${product.description}`.toLowerCase()
-        return searchable.includes(searchTerm.toLowerCase())
-    })
+    const filteredProducts = products
+        .filter((product) => {
+            const searchable = `${product.name} ${product.description}`.toLowerCase()
+            return searchable.includes(searchTerm.toLowerCase())
+        })
+        .filter((product) => {
+            if (!activeFilter) {
+                return true
+            }
+            return product[activeFilter.type].includes(activeFilter.value)
+        })
 
     return (
         <Layout>
@@ -228,7 +294,30 @@ const Teams: React.FC = () => {
                         </div>
                     </SidebarSection>
                 }
-                menu={[{ name: 'Explore products', url: undefined }, ...productMenu.children]}
+                menu={[
+                    { name: 'Explore products' },
+                    {
+                        name: 'All products',
+                        onClick: () => setActiveFilter(null),
+                        active: !activeFilter,
+                        icon: 'IconApps',
+                        color: 'pink',
+                    },
+                    ...filters.flatMap((filter) => [
+                        {
+                            name: filter.label,
+                        },
+                        ...filter.options.map((option) => ({
+                            name: option.name,
+                            icon: option.icon,
+                            onClick: () => {
+                                setActiveFilter({ type: filter.name, value: option.name })
+                            },
+                            active: activeFilter?.type === filter.name && activeFilter?.value === option.name,
+                            color: option.color,
+                        })),
+                    ]),
+                ]}
             >
                 <section className="mx-auto">
                     <div className="flex flex-col md:items-center md:justify-end md:flex-row-reverse gap-8 md:gap-2">

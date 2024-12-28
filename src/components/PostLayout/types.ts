@@ -33,6 +33,7 @@ export interface IMenu {
         topLevel?: boolean
         tag?: string
     }) => void
+    onClick?: ({ name, url }: { name: string; url?: string }) => void
     topLevel?: boolean
     menuType?: 'scroll' | 'standard'
     badge?: {
@@ -42,6 +43,7 @@ export interface IMenu {
     color?: string
     hidden?: boolean
     tag?: string
+    active?: boolean
 }
 
 export interface ICrumb {
