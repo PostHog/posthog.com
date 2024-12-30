@@ -180,9 +180,13 @@ These are users who do not have a person profile and are anonymous users. We're 
 
 #### Why am I seeing drops in my insights that rely on person properties?
 
-If your insight is using a person property, then this relies on identified events. When using anonymous events, the person profile will not exist until the person has been identified and the events have become identified events. In some cases you may never identify a person, and in some cases you may identify a person at a later date.
+If you have prevously had your `person_profiles` config set to `always` and your `person_profiles` config is now set to `identified_only`, you will likely see a dip in your insights graph if the filter settings include a person property.
 
-Depending on what you're trying to visualize, you may be able to use some of the properties on the events to achieve a similar outcome i.e. Looking at the referring domain on the first ever pageview for each user.
+Insights using person properties in the filter settings will essentially be filtering on identified events, where the person profile linked to that event has the relevant property set.
+
+Changing your `person_profiles` config to `identified_only` now means that there are fewer person profiles being created and being associated with events, and therefore fewer events to be included in your insight. The person profile won't exist until the person has been identified, which may happen at a later date or not happen at all. 
+
+Depending on what you're trying to visualize, you may be able to use some of the properties on the events themselves to achieve a similar outcome i.e. Looking at the referring domain on the first ever pageview for each user, instead of the initial referrer person property.
 
 ###  Billing questions
 
