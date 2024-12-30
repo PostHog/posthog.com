@@ -1569,145 +1569,6 @@ export const docsMenu = {
                     icon: 'IconInfo',
                 },
                 {
-                    name: 'Data',
-                    url: '/docs/data',
-                    icon: 'IconHardDrive',
-                    children: [
-                        {
-                            name: 'Overview',
-                            url: '/docs/data',
-                        },
-                        {
-                            name: 'Actions',
-                            url: '/docs/data/actions',
-                        },
-                        {
-                            name: 'Annotations',
-                            url: '/docs/data/annotations',
-                        },
-                        {
-                            name: 'Channel type',
-                            url: '/docs/data/channel-type',
-                        },
-                        {
-                            name: 'Cohorts',
-                            url: '/docs/data/cohorts',
-                        },
-                        {
-                            name: 'Events',
-                            url: '/docs/data/events',
-                            children: [
-                                {
-                                    name: 'Anonymous vs identified events',
-                                    url: '/docs/data/anonymous-vs-identified-events',
-                                },
-                            ],
-                        },
-                        {
-                            name: 'Ingestion warnings',
-                            url: '/docs/data/ingestion-warnings',
-                        },
-                        {
-                            name: 'People',
-                            url: '/docs/data/persons',
-                        },
-                        {
-                            name: 'Sessions',
-                            url: '/docs/data/sessions',
-                        },
-                        {
-                            name: 'Timestamps',
-                            url: '/docs/data/timestamps',
-                        },
-                        {
-                            name: 'Person properties',
-                            url: '/docs/data/user-properties',
-                        },
-                        {
-                            name: 'UTM segmentation',
-                            url: '/docs/data/utm-segmentation',
-                        },
-                    ],
-                },
-                {
-                    name: 'HogQL',
-                    url: '/docs/hogql',
-                    icon: 'IconHogQL',
-                    badge: {
-                        title: 'Beta',
-                        className: 'uppercase !bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',
-                    },
-                    children: [
-                        {
-                            name: 'Overview',
-                            url: '/docs/hogql',
-                        },
-                        {
-                            name: 'Expressions',
-                            url: '/docs/hogql/expressions',
-                        },
-                        {
-                            name: 'Supported functions',
-                            url: '/docs/hogql/clickhouse-functions',
-                        },
-                        {
-                            name: 'Supported aggregations',
-                            url: '/docs/hogql/aggregations',
-                        },
-                        {
-                            name: 'Tutorials',
-                            url: '/docs/hogql/tutorials',
-                        },
-                    ],
-                },
-                {
-                    name: 'Toolbar',
-                    url: '/docs/toolbar',
-                    icon: 'IconToolbar',
-                    children: [
-                        {
-                            name: 'Overview',
-                            url: '/docs/toolbar',
-                        },
-                        {
-                            name: 'Heatmaps',
-                            url: '/docs/toolbar/heatmaps',
-                        },
-                        {
-                            name: 'Creating actions',
-                            url: '/docs/toolbar/create-toolbar-actions',
-                        },
-                        {
-                            name: 'Overriding feature flags',
-                            url: '/docs/toolbar/override-feature-flags',
-                        },
-                    ],
-                },
-                {
-                    name: 'Notebooks',
-                    url: '/docs/notebooks',
-                    icon: 'IconBook',
-                },
-                {
-                    name: 'Settings',
-                    url: '/docs/settings/organizations-and-projects',
-                    icon: 'IconGear',
-                    children: [
-                        {
-                            name: 'Organizations & projects',
-                            url: '/docs/settings/organizations-and-projects',
-                        },
-                        {
-                            name: 'Role-based access',
-                            url: '/docs/settings/role-based-access',
-                        },
-                        {
-                            name: 'SSO & SAML',
-                            url: '/docs/settings/sso',
-                        },
-                    ],
-                },
-                {
                     name: 'API',
                     url: '/docs/api',
                     icon: 'IconBrackets',
@@ -1869,19 +1730,161 @@ export const docsMenu = {
                     ],
                 },
                 {
-                    name: 'Command palette',
-                    url: '/docs/cmd-k',
-                    icon: 'IconSearch',
+                    name: 'Data',
+                    url: '/docs/data',
+                    icon: 'IconHardDrive',
+                    children: [
+                        {
+                            name: 'Overview',
+                            url: '/docs/data',
+                        },
+                        {
+                            name: 'Actions',
+                            url: '/docs/data/actions',
+                        },
+                        {
+                            name: 'Annotations',
+                            url: '/docs/data/annotations',
+                        },
+                        {
+                            name: 'Channel type',
+                            url: '/docs/data/channel-type',
+                        },
+                        {
+                            name: 'Cohorts',
+                            url: '/docs/data/cohorts',
+                        },
+                        {
+                            name: 'Events',
+                            url: '/docs/data/events',
+                            children: [
+                                {
+                                    name: 'Anonymous vs identified events',
+                                    url: '/docs/data/anonymous-vs-identified-events',
+                                },
+                            ],
+                        },
+                        {
+                            name: 'Ingestion warnings',
+                            url: '/docs/data/ingestion-warnings',
+                        },
+                        {
+                            name: 'People',
+                            url: '/docs/data/persons',
+                        },
+                        {
+                            name: 'Sessions',
+                            url: '/docs/data/sessions',
+                        },
+                        {
+                            name: 'Timestamps',
+                            url: '/docs/data/timestamps',
+                        },
+                        {
+                            name: 'Person properties',
+                            url: '/docs/data/user-properties',
+                        },
+                        {
+                            name: 'UTM segmentation',
+                            url: '/docs/data/utm-segmentation',
+                        },
+                    ],
                 },
                 {
-                    name: 'Hog',
-                    url: '/docs/hog',
-                    icon: 'IconCode',
-                },
-                {
-                    name: 'Alerts',
+                    name: 'Features',
                     url: '/docs/alerts',
                     icon: 'IconBell',
+                    children: [
+                        {
+                            name: 'Alerts',
+                            url: '/docs/alerts',
+                        },
+                        {
+                            name: 'Command palette',
+                            url: '/docs/cmd-k',
+                        },
+                        {
+                            name: 'Hog',
+                            url: '/docs/hog',
+                        },
+                        {
+                            name: 'Notebooks',
+                            url: '/docs/notebooks',
+                        },
+                    ],
+                },
+                {
+                    name: 'HogQL',
+                    url: '/docs/hogql',
+                    icon: 'IconHogQL',
+                    badge: {
+                        title: 'Beta',
+                        className: 'uppercase !bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',
+                    },
+                    children: [
+                        {
+                            name: 'Overview',
+                            url: '/docs/hogql',
+                        },
+                        {
+                            name: 'Expressions',
+                            url: '/docs/hogql/expressions',
+                        },
+                        {
+                            name: 'Supported functions',
+                            url: '/docs/hogql/clickhouse-functions',
+                        },
+                        {
+                            name: 'Supported aggregations',
+                            url: '/docs/hogql/aggregations',
+                        },
+                        {
+                            name: 'Tutorials',
+                            url: '/docs/hogql/tutorials',
+                        },
+                    ],
+                },
+                {
+                    name: 'Settings',
+                    url: '/docs/settings/organizations-and-projects',
+                    icon: 'IconGear',
+                    children: [
+                        {
+                            name: 'Organizations & projects',
+                            url: '/docs/settings/organizations-and-projects',
+                        },
+                        {
+                            name: 'Role-based access',
+                            url: '/docs/settings/role-based-access',
+                        },
+                        {
+                            name: 'SSO & SAML',
+                            url: '/docs/settings/sso',
+                        },
+                    ],
+                },
+                {
+                    name: 'Toolbar',
+                    url: '/docs/toolbar',
+                    icon: 'IconToolbar',
+                    children: [
+                        {
+                            name: 'Overview',
+                            url: '/docs/toolbar',
+                        },
+                        {
+                            name: 'Heatmaps',
+                            url: '/docs/toolbar/heatmaps',
+                        },
+                        {
+                            name: 'Creating actions',
+                            url: '/docs/toolbar/create-toolbar-actions',
+                        },
+                        {
+                            name: 'Overriding feature flags',
+                            url: '/docs/toolbar/override-feature-flags',
+                        },
+                    ],
                 },
                 {
                     name: 'Resources',

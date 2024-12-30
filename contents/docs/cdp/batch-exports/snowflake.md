@@ -13,9 +13,9 @@ With batch exports, data can be exported to a Snowflake database table.
 ## Creating the batch export
 
 1. Subscribe to data pipelines add-on in [your billing settings](https://us.posthog.com/organization/billing) if you haven't already.
-2. Click [Data pipelines](https://app.posthog.com/pipeline) in the navigation and go to the exports tab in your PostHog instance.
-3. Click "Create export workflow".
-4. Select **Snowflake** as the batch export destination.
+2. Click [Data pipelines](https://app.posthog.com/pipeline) in the navigation and go to the **Destinations** tab in your PostHog instance.
+3. Search for **Snowflake**.
+4. Click the **+ Create** button. 
 5. Fill in the necessary [configuration details](#snowflake-configuration).
 6. Finalize the creation by clicking on "Create".
 7. Done! The batch export will schedule its first run on the start of the next period.

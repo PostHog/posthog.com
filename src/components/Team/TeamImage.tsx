@@ -17,8 +17,8 @@ export default function TeamImage({
     }
 
     return !!teamImage?.image?.data || editing ? (
-        <figure className="rotate-2 max-w-sm flex flex-col gap-2 mt-8 md:mt-0 ml-auto">
-            <div className="bg-accent aspect-video flex justify-center items-center shadow-xl border-8 border-white rounded-md">
+        <figure className="rotate-2 max-w-sm w-full flex flex-col gap-2 mt-8 md:mt-0 ml-auto">
+            <div className="bg-accent flex justify-center items-center shadow-xl border-8 border-white rounded-md">
                 {editing ? (
                     <div className="w-96">
                         <ImageDrop
