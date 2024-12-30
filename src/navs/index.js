@@ -1603,18 +1603,10 @@ export const docsMenu = {
                                 },
                                 {
                                     name: 'Events Spec',
-                                    url: '/docs/data/event-spec/standard-events',
+                                    url: '/docs/data/event-spec/ecommerce-events',
                                     children: [
                                         {
-                                            name: 'Standard Events',
-                                            url: '/docs/data/event-spec/standard-events',
-                                        },
-                                        {
                                             name: 'Ecommerce Events',
-                                            url: '/docs/data/event-spec/ecommerce-events',
-                                        },
-                                        {
-                                            name: 'B2B SaaS Events',
                                             url: '/docs/data/event-spec/ecommerce-events',
                                         },
                                     ],
