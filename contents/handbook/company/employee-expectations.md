@@ -22,7 +22,8 @@ If you've just joined us, there's a lot you probably don't know. That's okay! Ho
   - We expect you to read the docs
   - If it takes you more than 10 mins to figure it out, then ask someone internally.
 - If it's code
-  - Spend at least an hour on trying to get yourself unstuck, but not more than two hours
+  - Whether you're an engineer or not, spend at least an hour on trying to get yourself unstuck, but not more than two hours
+  - AI tools, such as ChatGPT, can be really helpful ways for less technical team members to get sections of code explained to them. Give them a go!
 
 You can also try self-serving an answer in our [#ask-max](https://posthog.slack.com/archives/C07TQR0V16U) Slack channel. It's trained on our handbook and documentation, so it's capable of answering both questions about internal processes and procedures, as well as product-related questions.
 
