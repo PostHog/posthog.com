@@ -23,6 +23,13 @@ const useInkeepSettings = (): InkeepSharedSettings => {
                     },
                 },
             },
+            tokens: {
+                fonts: {
+                    heading: "'MatterVF', sans-serif",
+                    body: "'MatterVF', sans-serif",
+                    mono: "'Source Code Pro', 'Menlo', 'Consolas', 'monaco', 'monospace'",
+                },
+            },
         },
     }
 
