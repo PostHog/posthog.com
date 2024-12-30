@@ -195,7 +195,7 @@ export default function Libraries() {
                             <div key={category.name}>
                                 <h4 className="mb-0">{category.name}</h4>
                                 <p className="opacity-70 mb-4">{category.description}</p>
-                                <ul className="flex gap-3 sm:gap-4 list-none p-0 pb-2 m-0">
+                                <ul className="flex gap-3 sm:gap-4 list-none p-0 pb-2 m-0 flex-wrap">
                                     {category.items.map((item) => (
                                         <li key={item.name}>
                                             <Link

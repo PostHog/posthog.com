@@ -19,9 +19,11 @@ If you add a [conversion goal](/docs/web-analytics/conversion-goals), you can se
 
 ## Bounce rate
 
-A bounce is a session where the user only had one pageview, no autocaptures, and spent less than 30 seconds on the page. Your bounce rate is the percentage of sessions that resulted in a bounce.
+A bounce is a session where the user only had one pageview, no autocaptures, and spent less than 10 seconds on the page. Your bounce rate is the percentage of sessions that resulted in a bounce.
 
 PostHog uses autocaptured events to calculate this. To make sure this value is accurate, make sure you enable [autocapture](/docs/product-analytics/autocapture) and are capturing both `$pageleave` and `$autocapture` events.
+
+You can change the duration threshold in the [web analytics settings](https://app.posthog.com/settings/project-web-analytics).
 
 ## LCP Score
 

@@ -58,7 +58,7 @@ This is a faster option to get up and running. If you don't want to or can't use
 5. In another terminal, run `pnpm i` (and use the same terminal for the following commands)
 6. Then run `pip install -r requirements.txt -r requirements-dev.txt`
 7. Now run `./bin/migrate` and then `./bin/start`.
-8. Open browser to http://localhost:8000/.
+8. Open browser to http://localhost:8010/.
 9. To get some practical test data into your brand-new instance of PostHog, run `DEBUG=1 ./manage.py generate_demo_data`.
 
 ## Option 2: Developing locally
@@ -333,7 +333,7 @@ Now start all of PostHog (backend, worker, plugin server, and frontend – simul
 
 > **Friendly tip:** If you get the error `Configuration property "enable.ssl.certificate.verification" not supported in this build: OpenSSL not available at build time`, make sure your environment is using the right `openssl` version by setting [those](https://github.com/xmlsec/python-xmlsec/issues/261#issuecomment-1630889826) environment variables, and then run `./bin/start` again.
 
-Open [http://localhost:8000](http://localhost:8000) to see the app.
+Open [http://localhost:8010](http://localhost:8010) to see the app.
 
 > **Note:** The first time you run this command you might get an error that says "layout.html is not defined". Make sure you wait until the frontend is finished compiling and try again.
 
@@ -413,13 +413,13 @@ all analytics inside your local PostHog instance is based on that instance itsel
 This means that your activity is immediately reflected in the current project, which is potentially useful for testing features
 – for example, which feature flags are currently enabled for your development instance is decided by the project you have open at the very same time.
 
-So, when working with a feature based on feature flag `foo-bar`, [add a feature flag with this key to your local instance](http://localhost:8000/feature_flags/new) and release it there.
+So, when working with a feature based on feature flag `foo-bar`, [add a feature flag with this key to your local instance](http://localhost:8010/feature_flags/new) and release it there.
 
 If you'd like to have ALL feature flags that exist in PostHog at your disposal right away, run `DEBUG=1 python3 manage.py sync_feature_flags` – they will be added to each project in the instance, fully rolled out by default.
 
 This command automatically turns any feature flag ending in `_EXPERIMENT` as a multivariate flag with `control` and `test` variants.
 
-Backend side flags are only evaluated locally, which requires the `POSTHOG_PERSONAL_API_KEY` env var to be set. Generate the key in [your user settings](http://localhost:8000/settings/user#personal-api-keys).
+Backend side flags are only evaluated locally, which requires the `POSTHOG_PERSONAL_API_KEY` env var to be set. Generate the key in [your user settings](http://localhost:8010/settings/user#personal-api-keys).
 
 ## Extra: Debugging with VS Code
 

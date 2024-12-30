@@ -8,17 +8,17 @@ showTitle: true
 
 | &nbsp                           | **Individual owner** |
 |---------------------------------|----------------------|
-| **Alternative guides**          | Ian                  |
+| **Alternative guides**          | Andy                 |
 | **AI integrations**             | Lior                 |
 | **Docs & tutorials**            | [See docs ownership](/handbook/content-and-docs/docs)   |
 | **Influencer sponsorships**     | Ian                  |
 | **Marketing dashboards**        | Andy                 |
-| **Newsletter**                  | Andy                 |
+| **Newsletter**                  | Ian & Andy           |
 | **Newsletter sponsorships**     | Ian                  |
 | **SEO (general / technical)**   | Andy                 |
 | **SEO landing pages**           | Andy                 |
 | **Social media**                | Andy                 |
-| **Product comparisons**         | Ian                  |
+| **Product comparisons**         | Andy                 |
 | **Where people hear about us**  | Andy                 |
 
 ## Owned by Words & Pictures

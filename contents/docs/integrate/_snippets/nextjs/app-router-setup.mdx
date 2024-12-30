@@ -98,7 +98,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 
 PostHog is now set up and ready to go. Files and components accessing PostHog on the client-side need the `'use client'` directive.
 
-#### Pageview
+#### Capturing pageviews
 
 PostHog's `$pageview` autocapture relies on page load events. Since Next.js acts as a single-page app, this event doesn't trigger on navigation and we need to capture `$pageview` events manually. 
 
@@ -135,8 +135,8 @@ function PostHogPageView() {
 }
 
 // Wrap this in Suspense to avoid the `useSearchParams` usage above
-// from deopting the whole app into client-side rendering
-// See https://nextjs.org/docs/messages/deopted-into-client-rendering
+// from de-opting the whole app into client-side rendering
+// See: https://nextjs.org/docs/messages/deopted-into-client-rendering
 export default function SuspendedPostHogPageView() {
   return <Suspense fallback={null}>
     <PostHogPageView />
@@ -173,8 +173,8 @@ function PostHogPageView() : null {
 }
 
 // Wrap this in Suspense to avoid the `useSearchParams` usage above
-// from deopting the whole app into client-side rendering
-// See https://nextjs.org/docs/messages/deopted-into-client-rendering
+// from de-opting the whole app into client-side rendering
+// See: https://nextjs.org/docs/messages/deopted-into-client-rendering
 export default function SuspendedPostHogPageView() {
   return <Suspense fallback={null}>
     <PostHogPageView />
@@ -185,7 +185,7 @@ export default function SuspendedPostHogPageView() {
 
 We can then update our `PostHogProvider` to include this component in all of our pages.
 
-```js
+```diff
   // app/providers.js
   'use client'
 
@@ -212,11 +212,21 @@ We can then update our `PostHogProvider` to include this component in all of our
   }
 ```
 
-#### Pageleave events (optional)
+> **Note:** For older versions of Next.js (< 15), you might need to **dynamically import** `PostHogPageView` instead of using a `<Suspense>`. This is because of a [known issue](https://github.com/vercel/next.js/issues/51581) where server rendering a `<Suspense>` throws an error.
+>
+> ```js
+> import dynamic from 'next/dynamic'
+>
+> const PostHogPageView = dynamic(() => import('./PostHogPageView'), {
+>   ssr: false,
+> })
+> ```
+
+#### Capturing pageleave events (optional)
 
 To capture pageleave events, we need to set `capture_pageleave: true` in the initialization because setting `capture_pageview: false` disables it.
 
-```js
+```diff
   // app/providers.js
   'use client'
   import posthog from 'posthog-js'

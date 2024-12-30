@@ -51,6 +51,22 @@ Depending on your compliance needs you can either:
 
 **NOTE**: This list should be enough at the time of writing. As the PostHog application changes rapidly, it is possible that other directives may be needed over time for loading the Toolbar. If you experience issues after implementing one of the above solutions, you can typically debug in the browser tools which part of the CSP is blocking requests.
 
+## Supporting none directives
+
+You may choose to use a `nonce` in your CSP in order to ensure every script loaded has the matching `nonce` for the current page load. This can be done via config option in `posthog-js` like so:
+
+```js
+posthog.init('<ph_project_api_key>', {
+  prepare_external_dependency_script = (script) => {
+    script.nonce = '<your-nonce-value>'
+    return script
+  }
+})
+```
+
+This will modify the script to be loaded before they are inserted to the DOM. Be sure to understand fully the implications of using a `nonce` and to ensure that you are using the `npm` install method or modifying the snippet to also include this nonce value.
+
+
 ## Domains used by PostHog clients
 
 > WARNING: Adding more specific domains is _not_ recommended as we may change target subdomains over time. If you do specify a non-wildcard domain, we cannot guarantee that it will continue to work in the future.

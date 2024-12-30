@@ -1,20 +1,25 @@
 ---
-date: 2024-08-05
-title: 7 best session replay tools for mobile apps (iOS & Android)
-rootPage: /blog
-featuredImage: >-
-  https://res.cloudinary.com/dmukukwp6/image/upload/v1721983244/posthog.com/contents/hog-mobile-replay.jpg
-featuredImageType: full
+title: "What's the best Hotjar for mobile apps?"
+date: 2024-12-20
 author:
   - lior-neu-ner
+rootpage: /blog
+featuredImage: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/clarity-alternatives/clarity-alternatives.png
+featuredImageType: full
 category: General
 tags:
-  - Guides
   - Comparisons
+seo: {
+    metaDescription: "Comparing session replay tools that support iOS, Android, React Native, and Flutter SDKs." }
 ---
 
 import { ComparisonTable } from 'components/ComparisonTable'
 import { ComparisonRow } from 'components/ComparisonTable/row'
+
+Hotjar is one of the most popular session replay tools on the market, but it doesn't work on iOS and Android mobile apps, or support popular app frameworks like React Native and Flutter. 
+
+This guide compares replay tools that support mobile apps, so you can find the best replay tool for your needs. If you don't need a "Hotjar for mobile", see our guide to [Hotjar alternatives for web apps](/blog/best-hotjar-alternatives).
 
 ## 1. LogRocket
 **Typical users:** Product managers, engineers, support teams
@@ -25,7 +30,7 @@ import { ComparisonRow } from 'components/ComparisonTable/row'
 
 [LogRocket](/blog/posthog-vs-logrocket) is a product experience platform that focuses on helping product managers, engineers, and support teams fix issues. In addition to session replay, it provides tools to identify the most impactful issues, such as crash reports, stack traces, performance monitoring, and product analytics.
 
-#### Supported features
+#### Mobile replay features
 
 <ComparisonTable column1="LogRocket">
   <ComparisonRow column1="Android, iOS, React Native" feature="Supported platforms" description="Mobile platforms where session replay is available" />
@@ -38,6 +43,14 @@ import { ComparisonRow } from 'components/ComparisonTable/row'
   <ComparisonRow column1={true} feature="Crash reports" description="Learn what happens before a crash without complex debugging or reproduction" />
   <ComparisonRow column1={true} feature="AI summaries" description="Generate summaries of session replays" />
 </ComparisonTable>
+
+#### Other key features
+
+- 📈 **Product analytics:** Capture usage data and visualize it with conversion funnels, path analysis, and retention charts.
+
+- 🚨 **Error tracking:** Identify and triage the most impactful issues with errors and stack traces.
+
+- 🏎️ **Performance monitoring:** Monitor app performance such as network speed, app start time, and CPU and memory usage.
 
 ### How much does LogRocket cost?
 
@@ -68,11 +81,11 @@ Reviewers on [G2](https://www.g2.com/products/logrocket/reviews) use LogRocket f
 
 ### What is UXCam?
 
-[UXCam](/blog/best-uxcam-alternatives) is a platform built solely for mobile apps. It includes a full-suite of analytics features as well as session replays, heatmaps, and crash analytics.
+[UXCam](/blog/best-uxcam-alternatives) is a platform built solely for mobile apps. It includes session replays as well as a full-suite of analytics features and crash analytics.
 
 It's designed to provide deep insights into user behavior, helping product managers understand how users interact with their apps.
 
-#### Supported features
+#### Mobile replay features
 
 <ComparisonTable column1="UXCam">
   <ComparisonRow column1="Android, iOS, React Native, Flutter" feature="Supported platforms" description="Mobile platforms where session replay is available" />
@@ -85,6 +98,12 @@ It's designed to provide deep insights into user behavior, helping product manag
   <ComparisonRow column1={true} feature="Crash reports" description="Learn what happens before a crash without complex debugging or reproduction" />
   <ComparisonRow column1={false} feature="AI summaries" description="Generate summaries of session replays" />
 </ComparisonTable>
+
+#### Other key features
+
+- 📈 **Product analytics:** Capture usage data and visualize it with conversion funnels, path analysis, and retention charts.
+
+- 🚨 **Error tracking:** Identify and triage the most impactful issues with errors and stack traces.
 
 ### How much does UXCam cost?
 
@@ -117,7 +136,7 @@ Looking at [G2 reviews](https://www.g2.com/products/uxcam/reviews), companies ch
 
 It includes most of the session replay features you would expect, but doesn't support any additional features that some of the other choices on this list do, like crash reports or debug logs.
 
-#### Supported features
+#### Mobile replay features
 
 <ComparisonTable column1="Microsoft Clarity">
   <ComparisonRow column1="Android, iOS, React Native" feature="Supported platforms" description="Mobile platforms where session replay is available" />
@@ -130,6 +149,12 @@ It includes most of the session replay features you would expect, but doesn't su
   <ComparisonRow column1={false} feature="Crash reports" description="Learn what happens before a crash without complex debugging or reproduction" />
   <ComparisonRow column1={true} feature="AI summaries" description="Generate summaries of session replays" />
 </ComparisonTable>
+
+#### Other key features
+
+- 📊 **Google Analytics integration:** View your GA data in Clarity and watch recordings for GA segments.
+
+- 🤖 **AI co-pilot:** Chat with an AI to get insights about your recordings.
 
 ### How much does Microsoft Clarity cost?
 
@@ -163,7 +188,7 @@ According to [reviews on G2](https://www.g2.com/products/microsoft-microsoft-cla
 
 It's designed for product-minded engineers, growth teams, and product managers who need to move fast and iterate based on reliable, actionable insights.
 
-#### Supported features
+#### Mobile replay features
 
 <ComparisonTable column1="PostHog">
   <ComparisonRow column1="Android, iOS, React Native, Flutter" feature="Supported platforms" description="Mobile platforms where session replay is available" />
@@ -177,9 +202,19 @@ It's designed for product-minded engineers, growth teams, and product managers w
   <ComparisonRow column1={false} feature="AI summaries" description="Generate summaries of session replays" />
 </ComparisonTable>
 
+#### Other key features
+
+- 📈 **Product analytics:** Custom trends, funnels, user paths, retention analysis, and segment user cohorts. Also, direct [SQL querying](/docs/product-analytics/sql) for power users.
+
+- 🧪 **A/B tests:** Experiment in your app with up to nine test variations and track impact on primary and secondary metrics. Auto-calculate test duration, sample size, and statistical significance.
+
+- 🚩 **Feature flags:** Rollout features safely with [local evaluation](/docs/feature-flags/local-evaluation) (for faster performance), JSON payloads, and instant rollbacks.
+
+- 🏠 **Data warehouse:** Combine data from all your different sources for easy analysis and comprehensive insights.
+
 ### How much does PostHog cost?
 
-PostHog has [transparent pricing](/session-replay#pricing) based on usage. It’s free to get started and completely free for the first 5,000 recordings. After this free monthly allowance, pricing starts at $0.0050/recording (or $50 for 10k recordings), and recordings cost progressively less the more you use. This makes PostHog significantly cheaper than all the other companies on this list (apart from [Microsoft Clarity](#3-microsoft-clarity)).
+PostHog has [transparent pricing](/session-replay#pricing) based on usage. It’s free to get started and completely free for the first 5,000 recordings. After this free monthly allowance, pricing starts at $0.0050/recording (or $50 for 10k recordings), and recordings cost progressively less the more you use. With the exception of Microsoft Clarity, this makes PostHog significantly cheaper than all the other tools on this list.
 
 ### Why do companies use PostHog?
 
@@ -206,7 +241,7 @@ According to [G2 reviews](https://www.g2.com/products/posthog/reviews), companie
  
 Smartlook combines session replays, product analytics, visualizations, and crash reports to generate an overall understanding of user experience. It focuses on mobile apps with specific tools like native rendering and wireframe mode.
 
-#### Supported features
+#### Mobile replay features
 
 <ComparisonTable column1="Smartlook">
   <ComparisonRow column1="Android, iOS, React Native, Flutter" feature="Supported platforms" description="Mobile platforms where session replay is available" />
@@ -219,6 +254,12 @@ Smartlook combines session replays, product analytics, visualizations, and crash
   <ComparisonRow column1={true} feature="Crash reports" description="Learn what happens before a crash without complex debugging or reproduction" />
   <ComparisonRow column1={false} feature="AI summaries" description="Generate summaries of session replays" />
 </ComparisonTable>
+
+#### Other key features
+
+- 📈 **Product analytics:** Capture usage data and visualize it with conversion funnels, path analysis, and retention charts.
+
+- 🚨 **Error tracking:** Identify and triage the most impactful issues with errors and stack traces.
 
 ### How much does Smartlook cost?
 
@@ -250,7 +291,7 @@ According to [G2](https://www.g2.com/products/smartlook/reviews) reviewers, Smar
 
 [FullStory](/blog/best-fullstory-alternatives) describes itself as behavioral data analytics platform, which is code for session replay and [mobile app analytics](/blog/best-mobile-app-analytics-tools), with a side of product analytics. 
 
-#### Supported features
+#### Mobile replay features
 
 <ComparisonTable column1="FullStory">
   <ComparisonRow column1="Android, iOS, React Native, Flutter" feature="Supported platforms" description="Mobile platforms where session replay is available" />
@@ -263,6 +304,10 @@ According to [G2](https://www.g2.com/products/smartlook/reviews) reviewers, Smar
   <ComparisonRow column1={false} feature="Crash reports" description="Learn what happens before a crash without complex debugging or reproduction" />
   <ComparisonRow column1={false} feature="AI summaries" description="Generate summaries of session replays" />
 </ComparisonTable>
+
+#### Other key features
+
+- 📈 **Product analytics:** Capture usage data and visualize it with conversion funnels, path analysis, and retention charts.
 
 ### How much does FullStory cost?
 
@@ -294,7 +339,7 @@ According to reviews on [G2](https://www.g2.com/products/fullstory/reviews), com
 
 Contentsquare is an analytics platform that combines heatmaps, customer journey analysis, and frustration scoring to help find and fix issues and friction points.
 
-#### Supported features
+#### Mobile replay features
 
 <ComparisonTable column1="Contentsquare">
   <ComparisonRow column1="Android, iOS, React Native" feature="Supported platforms" description="Mobile platforms where session replay is available" />
@@ -307,6 +352,12 @@ Contentsquare is an analytics platform that combines heatmaps, customer journey 
   <ComparisonRow column1={true} feature="Crash reports" description="Learn what happens before a crash without complex debugging or reproduction" />
   <ComparisonRow column1={false} feature="AI summaries" description="Generate summaries of session replays" />
 </ComparisonTable>
+
+#### Other key features
+
+- 📈 **Product analytics:** Capture usage data and visualize it with conversion funnels, path analysis, and retention charts.
+
+- 🚨 **Error tracking:** Identify and triage the most impactful issues with errors and stack traces.
 
 ### How much does Contentsqaure cost?
 
