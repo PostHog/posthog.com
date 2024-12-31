@@ -7,14 +7,14 @@ import Posts from './src/components/Edition/Posts'
 import { Provider as ToastProvider } from './src/context/toast'
 import { RouteUpdateArgs } from 'gatsby'
 import { UserProvider } from './src/hooks/useUser'
-import Chat from './src/components/Chat'
+import { ChatProvider } from './src/hooks/useChat'
 
 initKea(false)
 
 export const wrapRootElement = ({ element }) => (
     <UserProvider>
         <ToastProvider>
-            <Chat>{wrapElement({ element })}</Chat>
+            <ChatProvider>{wrapElement({ element })}</ChatProvider>
         </ToastProvider>
     </UserProvider>
 )

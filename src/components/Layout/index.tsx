@@ -14,6 +14,7 @@ import { useLayoutData } from './hooks'
 import SearchBox from 'components/Search/SearchBox'
 import Toggle from 'components/Toggle'
 import Tooltip from 'components/Tooltip'
+import Chat from 'components/Chat'
 
 const TheoToggle = () => {
     const { theoMode, setTheoMode } = useLayoutData()
@@ -44,6 +45,7 @@ const Article = ({
 
     return (
         <div className={className}>
+            <Chat />
             {/* <Banner /> */}
             {compact ? (
                 <div className="px-4 py-3 border-b border-border dark:border-dark sticky top-0 z-[50] bg-light dark:bg-dark">

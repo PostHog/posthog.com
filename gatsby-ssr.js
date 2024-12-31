@@ -13,14 +13,14 @@ import Job from './src/templates/Job'
 import { UserProvider } from './src/hooks/useUser'
 import Posts from './src/components/Edition/Posts'
 import { Provider as ToastProvider } from './src/context/toast'
-import Chat from './src/components/Chat'
+import { ChatProvider } from './src/hooks/useChat'
 
 export const wrapPageElement = ({ element, props }) => {
     const slug = props.location.pathname.substring(1)
     initKea(true, props.location)
     return (
         <UserProvider>
-            <Chat>
+            <ChatProvider>
                 {wrapElement({
                     element:
                         !/^posts\/new|^posts\/(.*)\/edit/.test(slug) &&
@@ -48,7 +48,7 @@ export const wrapPageElement = ({ element, props }) => {
                             element
                         ),
                 })}
-            </Chat>
+            </ChatProvider>
         </UserProvider>
     )
 }
