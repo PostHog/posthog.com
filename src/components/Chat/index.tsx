@@ -53,7 +53,7 @@ export default function Chat(): JSX.Element | null {
                         <IconX className="size-5 opacity-60 group-hover:opacity-100" />
                     </button>
                     <div className="flex flex-col h-full">
-                        <div className="px-6 py-2 flex items-center justify-center bg-accent dark:bg-accent-dark  border-b border-border dark:border-dark">
+                        <div className="px-6 py-2 flex items-center justify-center bg-light dark:bg-dark  border-b border-border dark:border-dark">
                             <p className="m-0 text-sm opacity-70">
                                 Use{' '}
                                 <kbd
