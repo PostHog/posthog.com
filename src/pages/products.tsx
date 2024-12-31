@@ -258,7 +258,7 @@ const Teams: React.FC = () => {
                 sidebar={
                     <SidebarSection className="space-y-8">
                         <div className="">
-                            <h3 className="text-lg mb-2">Products</h3>
+                            <h3 className="text-lg mt-4 mb-2">Products</h3>
                             <p className="text-[15px]">
                                 <strong>
                                     PostHog is an entire suite of products you can use to make your software successful.
@@ -370,7 +370,7 @@ const Teams: React.FC = () => {
 
                                 {filteredProducts.length > 0 ? (
                                     <>
-                                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                        <div className="grid grid-cols-1 @lg:grid-cols-2 gap-4">
                                             {filteredProducts.map((product) => (
                                                 <ProductListing key={product.url} {...product} />
                                             ))}
