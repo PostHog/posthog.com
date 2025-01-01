@@ -49,7 +49,7 @@ export default function Chat(): JSX.Element | null {
                         onClick={() => {
                             setChatOpen(!chatOpen)
                         }}
-                        animate={{ top: showDisclaimer ? 33 : 9, transition: { type: 'tween' } }}
+                        animate={{ top: showDisclaimer ? 34 : 9, transition: { type: 'tween' } }}
                         className={`absolute left-0 -translate-x-full z-10 rounded-tl-full rounded-bl-full border-l border-t border-b p-2 border-border dark:border-dark group transition-colors bg-white dark:bg-[#1c1c1c] pr-0`}
                     >
                         <IconX className="size-5 opacity-60 group-hover:opacity-100 transition-opacity" />
@@ -60,7 +60,7 @@ export default function Chat(): JSX.Element | null {
                                 height: showDisclaimer ? 35 : 0,
                                 transition: { type: 'tween' },
                             }}
-                            className="flex items-center justify-between bg-light dark:bg-dark  border-b border-border dark:border-dark overflow-hidden"
+                            className="flex items-center justify-between bg-light dark:bg-dark  border-b border-border dark:border-dark overflow-hidden flex-shrink-0"
                         >
                             <p className="m-0 text-sm opacity-70 pl-4">
                                 Use{' '}
@@ -76,9 +76,7 @@ export default function Chat(): JSX.Element | null {
                             </button>
                         </motion.div>
 
-                        <div className="flex-grow h-full">
-                            <InkeepEmbeddedChat />
-                        </div>
+                        <InkeepEmbeddedChat />
                     </div>
                 </motion.div>
             ) : null}

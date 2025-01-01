@@ -1,30 +1,24 @@
-import * as React from 'react'
-import { useEffect, useState } from 'react'
+import React, { useEffect, useRef } from 'react'
 import useInkeepSettings from 'hooks/useInkeepSettings'
-import { InkeepEmbeddedChatProps } from '@inkeep/uikit'
 
-export default function InkeepEmbeddedChat() {
-    const [EmbeddedChat, setEmbeddedChat] = useState<React.FC<InkeepEmbeddedChatProps> | null>(null)
-
+export default function InkeepEmbeddedChat(): JSX.Element {
     const { baseSettings, aiChatSettings } = useInkeepSettings()
+    const embeddedChatRef = useRef(null)
 
     useEffect(() => {
-        const loadEmbeddedChat = async () => {
-            try {
-                const { InkeepEmbeddedChat } = await import('@inkeep/uikit')
-                setEmbeddedChat(() => InkeepEmbeddedChat)
-            } catch (error) {
-                console.error('Failed to load EmbeddedChat:', error)
-            }
-        }
+        import('@inkeep/uikit-js').then((inkeepJS) => {
+            const inkeep = inkeepJS.Inkeep(baseSettings)
 
-        loadEmbeddedChat()
+            embeddedChatRef.current = inkeep.embed({
+                componentType: 'EmbeddedChat',
+                targetElement: '#embedded-chat-target',
+                properties: {
+                    baseSettings,
+                    aiChatSettings,
+                },
+            })
+        })
     }, [])
 
-    const embeddedChatProps = {
-        baseSettings,
-        aiChatSettings,
-    }
-
-    return EmbeddedChat && <EmbeddedChat {...embeddedChatProps} />
+    return <div id="embedded-chat-target" className="flex-grow h-full" />
 }
