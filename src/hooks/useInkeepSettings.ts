@@ -2,6 +2,10 @@ import type { InkeepAIChatSettings, InkeepSearchSettings, InkeepBaseSettings, In
 import { useValues } from 'kea'
 import { layoutLogic } from 'logic/layoutLogic'
 
+const inkeepStyleString = '.ikp-ai-chat__header {display: none;}'
+const encodedStyles = encodeURIComponent(inkeepStyleString)
+const stylesheetLink = `data:text/css;charset=UTF-8,${encodedStyles}`
+
 type InkeepSharedSettings = {
     baseSettings: InkeepBaseSettings
     aiChatSettings: InkeepAIChatSettings
@@ -21,6 +25,7 @@ const useInkeepSettings = (): InkeepSharedSettings => {
             forcedColorMode: websiteTheme === 'dark' ? 'dark' : 'light',
         },
         theme: {
+            stylesheetUrls: [stylesheetLink],
             components: {
                 AIChatPageWrapper: {
                     defaultProps: {
