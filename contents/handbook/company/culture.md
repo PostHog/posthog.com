@@ -54,7 +54,7 @@ We are direct about the quality of work. That doesn't always mean work needs to 
 
 ## We bias for action
 
-If given a choice, go live. If you can't go live, reduce the task size, so you can.
+If given a choice, go live. If you can't go live, reduce the task size so you can.
 
 * We are small, and can only win based on speed and agility.
 * Going live forces a level of completion, on which you can build.
