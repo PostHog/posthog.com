@@ -307,7 +307,7 @@ const Teams: React.FC = () => {
                                 <li>Group analytics</li>
                                 <li>Data pipelines</li>
                             </ul>
-                            <CallToAction to="/add-ons" size="sm" type="secondary">
+                            <CallToAction to="/addons" size="sm" type="secondary">
                                 Learn about add-ons
                             </CallToAction>
                         </div>
