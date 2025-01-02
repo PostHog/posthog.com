@@ -66,7 +66,6 @@ Default to _not_ asking for permission to do something if you are acting in the 
 We're big believers in the importance of the [maker's schedule](http://www.paulgraham.com/makersschedule.html). If we have meetings at all, we'll cluster them around any stand-ups, so our day doesn't get split up.
 
 ![Screenshot of an engineer's calendar at PostHog](https://res.cloudinary.com/dmukukwp6/image/upload/a0d634a2_bd3e_4229_ae8f_f98269a6c4f7_2268x1473_06595e2e80.jpg)
-<Caption>The typical calendar of a product engineer at PostHog</Caption>
 
 On Tuesdays and Thursdays, we don't have internal meetings at all. Occasionally an external meeting will slip in on those days, such as interviews, but we try to keep those to an absolute minimum.
 
