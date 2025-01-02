@@ -126,6 +126,7 @@ You **cannot**:
 - Use person properties for targeting feature flags, A/B tests, or surveys
 - Query the `persons` table using [SQL insights](/docs/product-analytics/sql)
 - Use group analytics
+
 </details>
 
 <details>
@@ -177,9 +178,9 @@ We derive the following values from the persistence store:
 - `$initial_host`
 - and any initial properties that can be derived from the URL e.g., `$initial_utm_campaign`, `$initial_utm_content`, `$initial_utm_medium`, `$initial_utm_source`
 
-  Note that the above initial parameters will only work across subdomains if you're using `persistence: "localStorage+cookie"` (default) or `persistence: "cookie"`
+Note that the above initial parameters will only work across subdomains if you're using `persistence: "localStorage+cookie"` (default) or `persistence: "cookie"`
 
-  Any other initial [person properties](docs/product-analytics/person-properties#default-person-properties), including initial [GeoIP properties](docs/product-analytics/person-properties#geoip-properties) will be set from the values in the event at the time that the person profile was created i.e. when the events became identified.
+Any other initial [person properties](docs/product-analytics/person-properties#default-person-properties), including initial [GeoIP properties](docs/product-analytics/person-properties#geoip-properties) will be set from the values in the event at the time that the person profile was created i.e. when the events became identified.
 </details>
 
 <details>
