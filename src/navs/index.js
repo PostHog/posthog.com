@@ -164,10 +164,6 @@ export const handbookSidebar = [
                 url: '/handbook/people/career-progression',
             },
             {
-                name: 'Clubs',
-                url: '/handbook/people/clubs',
-            },
-            {
                 name: 'Training',
                 url: '/handbook/people/training',
             },
@@ -178,6 +174,14 @@ export const handbookSidebar = [
             {
                 name: 'Feedback',
                 url: '/handbook/people/feedback',
+            },
+            {
+                name: 'Clubs',
+                url: '/handbook/people/clubs',
+            },
+            {
+                name: 'Lore',
+                url: '/handbook/company/lore',
             },
             {
                 name: 'Onboarding',
