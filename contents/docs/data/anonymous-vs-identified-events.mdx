@@ -115,8 +115,8 @@ import HowToCaptureIdentifiedEventsFlutter from '../product-analytics/_snippets/
 You **can**:
 
 - Set [event properties](/docs/product-analytics/capture-events#setting-event-properties)
-- Aggregate and filter events by event properties e.g. URL, geographic location, UTM source.
-- Create insights like [trends](/docs/product-analytics/trends/overview), [funnels](/docs/product-analytics/funnels), [SQL insights](/docs/product-analytics/sql) and more.
+- Aggregate and filter events by event properties (e.g. URL, location, UTM source)
+- Create insights like [trends](/docs/product-analytics/trends/overview), [funnels](/docs/product-analytics/funnels), [SQL insights](/docs/product-analytics/sql) and more
 
 You **cannot**:
 
@@ -178,7 +178,7 @@ We derive the following values from the persistence store:
 - `$initial_host`
 - and any initial properties that can be derived from the URL e.g., `$initial_utm_campaign`, `$initial_utm_content`, `$initial_utm_medium`, `$initial_utm_source`
 
-Note that the above initial parameters will only work across subdomains if you're using `persistence: "localStorage+cookie"` (default) or `persistence: "cookie"`
+Note that the above initial parameters will only work across subdomains if you're using `persistence: "localStorage+cookie"` (default) or `persistence: "cookie"`.
 
 Any other initial [person properties](docs/product-analytics/person-properties#default-person-properties), including initial [GeoIP properties](docs/product-analytics/person-properties#geoip-properties) will be set from the values in the event at the time that the person profile was created i.e. when the events became identified.
 </details>
