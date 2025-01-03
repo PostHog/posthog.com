@@ -17,7 +17,7 @@ Being all remote has a bunch of advantages:
 * We can hire [amazing people](/people) from a global talent pool.
 * It encourages thoughtful, and intentional, written communication
 * It creates space for lots of uninterrupted work.
-* We judge performance based on real outcomes, not hours spend in the office.
+* We judge performance based on real outcomes, not hours spent in an office.
 
 ## We're extremely welcoming
 
@@ -75,7 +75,7 @@ Hiring high-performing and self-sufficient team members means we don't need the 
 
 Our [management approach](/handbook/company/management) is super simple - James Hawkins, Tim, and the team leaders are the only managers, and everyone else reports to one of them. We don't want to create a fancy hierarchy of titles, as we believe this can lead, consciously or not, to people feeling less empowered to make changes and step on toes, especially if they are not in a 'senior' role. 
 
-It's up to you how to get things done. If you want to make a change, feel free to just create the pull request. If you want to discuss something more widely for a bigger piece of work, it might make sense to use an RFC for a change inside your team. 
+It's up to you how to get things done. If you want to make a change, feel free to just create the pull request. If you want to discuss something more widely for a bigger piece of work, it might make sense to [use an RFC](/handbook/company/communication#requests-for-comment-rfcs) for a change inside your team. 
 
 If your RFC could significantly impact other teams as well, it usually works best to book a call with them as well as it usually saves time – "fewer meetings" doesn't mean "no meetings", just that they should be meaningful and intentional, not routine.
 

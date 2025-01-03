@@ -28,11 +28,11 @@ Everything else is a means to this end! We often do onboarding in person to acce
 
 If you've just joined us, there's a lot you probably don't know. That's okay! However, we _do_ expect that you try to help yourself. Here's a framework to use as a guide:
 
-- If it's one of our own products that we build and sell
+- If it's one of our own products that we build and sell:
   - We expect you to [read our docs](/docs).
   - We expect you to search through GitHub or Slack.
   - If it's in beta, it might be buggy or missing features. Definitely request/report them, but also figure out how to do your job with plan B and plan C if it won't be fixed quickly - this is what we generally call grit.
-- If it's an external product
+- If it's an external product:
   - We expect you to read the docs
   - If it takes you more than 10 mins to figure it out, then ask someone internally.
 
