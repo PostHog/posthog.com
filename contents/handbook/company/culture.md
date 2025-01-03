@@ -10,14 +10,14 @@ So, what's it like working at PostHog?
 
 [Our team](/people) is 100% remote, and distributed across more than 15 countries.
 
-In addition to all the equipment you'll need, we provide [a budget to help you find coworking space](/handbook/people/spending-money#work-space), or to cover the costs of coffees for those who prefer not to work at home.
-
 Being all remote has a bunch of advantages:
 
 * We can hire [amazing people](/people) from a global talent pool.
 * It encourages thoughtful, and intentional, written communication
 * It creates space for lots of uninterrupted work.
 * We judge performance based on real outcomes, not hours spent in an office.
+
+In addition to all the equipment you'll need, we provide [a budget to help you find coworking space](/handbook/people/spending-money#work-space), or to cover coffee shop expenses. Everyone also has a [$1,500 quarterly travel budget](/handbook/people/spending-money#budget-for-working-togethersocializing) for ad-hoc meetups.
 
 ## We're extremely welcoming
 
