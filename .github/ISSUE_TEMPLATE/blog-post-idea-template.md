@@ -19,11 +19,6 @@ assignees:
 
 > _list any that apply_
 
-## Will it need custom art?
-
-- [ ] Yes
-- [ ] No
-
 ## Outline (optional)
 
 > _draft headings / questions you want to answer_
