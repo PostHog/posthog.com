@@ -2,19 +2,22 @@
 name: Docs request
 about: Suggest change or new docs pages
 title: "{title}"
-labels: technical docs
-assignees: andyvan-ph
+labels: docs
+assignees: 
 
 ---
 
 ## Summary
 
-> _explain what's needed and link to additional context_
+_explain what's needed and link to additional context_
+
+> Note: See [docs ownership](https://posthog.com/handbook/content-and-docs/docs) in the handbook for more context on who does what.
 
 ## What kind of request is this?
 
 - [ ] New docs page / feature
 - [ ] Update to existing page
+- [ ] Not sure
 
 ## Which product is this for?
 
@@ -27,12 +30,6 @@ assignees: andyvan-ph
 - [ ] CDP
 - [ ] Data warehouse
 - [ ] Other (e.g. open source specific)
-
-## What's the priority?
-
-- [ ] Urgent AND important ("great scott, this is horribly wrong / out of date")
-- [ ] Important, but not urgent ("we need to do this, but not immediately")
-- [ ] Non-urgent (this could be better / would be nice to have)
 
 ## Is there a deadline for this change?
 
