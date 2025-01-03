@@ -572,6 +572,10 @@ export const handbookSidebar = [
                 url: '/handbook/growth/marketing/icp',
             },
             {
+                name: 'Sponsorships',
+                url: '/handbook/growth/marketing/open-source-sponsorship',
+            },
+            {
                 name: 'Dashboard templates',
                 url: '/handbook/growth/marketing/templates',
             },
