@@ -81,10 +81,8 @@ export const TeamMember = (props) => {
 
 export default function People() {
     const {
-        team: { teamMembers: allTeamMembers },
+        team: { teamMembers },
     } = useStaticQuery(teamQuery)
-
-    const teamMembers = allTeamMembers.filter((member) => new Date(member.startDate) <= new Date())
 
     const [activeProfile, setActiveProfile] = useState(false)
 
@@ -195,7 +193,6 @@ export const teamQuery = graphql`
         ) {
             teamMembers: nodes {
                 squeakId
-                startDate
                 avatar {
                     url
                 }
