@@ -32,7 +32,7 @@ You can read more about [`posthog-js` configurations here](/docs/integrate/clien
 
 When surveys are enabled, `posthog-js` will fetch a `survey.js` script from the PostHog server. It is not included in the default `posthog-js` installation to minimize the default bundle size.
 
-Depending on your content security policy, this script may be blocked. If you have a `default-src`, `script-src`, `script-src-elem`, or `connect-src` directive in your CSP, you may need to ensure that PostHog doamins are permitted (see [CSP documentation](/docs/advanced/content-security-policy)).
+Depending on your content security policy, this script may be blocked. If you have a `default-src`, `script-src`, `script-src-elem`, or `connect-src` directive in your CSP, you may need to ensure that PostHog domains are permitted (see [CSP documentation](/docs/advanced/content-security-policy)).
 
 If PostHog is being blocked by your content security policy, you should see an error message in your developer console with more details.
 
