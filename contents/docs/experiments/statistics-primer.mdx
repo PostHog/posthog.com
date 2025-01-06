@@ -21,16 +21,20 @@ Say you started an experiment a few hours ago and see these results:
 * The control variant has a 46.7% probability of being better and the test variant has a 53.3% probability of being better.
 * The control variant shows a credible interval of [2.3%, 41.3%] and the test variant shows a credible interval of [2.5%, 44.5%].
 
-Bayesian statistics lets you see the interimediate results (the test variant has a slightly higher success rate), while also giving you detail on the confidence of those results (win probabilities and confidence intervals). Importantly, while the test variant has a slightly higher success rate, the analysis shows you don't have enough data to draw a statistically significant conclusion. 
+The first two values are pure math: dividing the number of successes by the total number of users gives us the raw success rates. It's not enough to just compare these conversion rates, however.
 
-After you've let the experiment run a bit longer, you see these results:
+The last two values are derived using Bayesian statistics and describe our confidence in the results. The **win probability** tells you how likely it is that a given variant has the highest conversion rate compared to all other variants in the experiment. The **credible interval** tells you the range where the true conversion rate lies with 95% probability.
+
+Importantly, even though the test variant is winning, it doesn't clear our threshold of 90% or greater win probability to to be a statistically significant conclusion. This uncertainty is also demonstrated with the amount of overlap in the credible intervals.
+
+As such, you decide to let the experiment run a bit longer and see these results:
 
 * 100 in 1000 people in the control group complete the funnel = 10% success rate.
 * 100 in 900 people in the test variant group complete the funnel = 11% success rate.
 * The control variant has a 21.5% probability of being better and the test variant has a 78.5% probability of being better.
 * The control variant shows a credible interval of [8.3%, 12%] and the test variant shows a credible interval of [9.2%, 13.3%].
 
-Et voilà! The test variant's win probability increased significantly, and the credible intervals became narrower and more distinct. You can decide on the winner now or continue to wait, depending on your business requirements.
+Et voilà! The additional data increased the win probability and narrowed the credible intervals. With 1,900 total users instead of just 19, random chance becomes a less likely explanation for the difference in conversion rates. Even though both variants maintained the same conversion rates (10% vs 11%), the larger sample size gives us more confidence in the experiment results. At this point, you could either declare the test variant as the winner (78.5% probability), or continue collecting data to reach the 90% statistical significance threshold. Bayesian statistics let you check your results whenever you'd like without worrying about increasing the chance of false positives from checking too frequently.
 
 ## Supported methodologies
 
