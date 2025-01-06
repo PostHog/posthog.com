@@ -12,6 +12,7 @@ import { SmoothScroll } from 'components/Products/SmoothScroll'
 import Tooltip from 'components/Tooltip'
 import SEO from 'components/seo'
 import SideModal from 'components/Modal/SideModal'
+import TeamMember, { FutureTeamMember } from 'components/TeamMember'
 import { AddTeamMember } from 'components/TeamMembers'
 import useTeam from 'hooks/useTeam'
 import { IconInfo, IconSpinner, IconX } from '@posthog/icons'
@@ -520,7 +521,7 @@ export default function Team({ body, roadmaps, objectives, emojis, newTeam, slug
             {objectives && (
                 <Section title="Goals" id="goals">
                     <div className="article-content max-w-2xl team-page-content">
-                        <MDXProvider components={{}}>
+                        <MDXProvider components={{ TeamMember, FutureTeamMember }}>
                             <MDXRenderer>{objectives}</MDXRenderer>
                         </MDXProvider>
                     </div>
