@@ -72,7 +72,7 @@ const Teams: React.FC = () => {
                                 </p>
                                 <CloudinaryImage src="https://res.cloudinary.com/dmukukwp6/image/upload/money_f6cb7907a3.png" width={600} className={`w-full md:w-96 md:float-right md:ml-4 ${fullWidthContent ? '' : 'md:-mr-12'}`} />
                                 <p>
-                                We often see this happen with a side project that unexpectedly goes viral.</p> 
+                                We often see this happen with a side project that unexpectedly goes viral (like <Link href="https://x.com/jxnlco/status/1777673854770463072" external>this one</Link> and <Link href="https://x.com/gabriel__xyz/status/1876188221983633535" external>this one</Link>).</p> 
                                 <p>First, congrats on your unexpected stardom! It’s the best kind of problem to have – and hopefully the beginning of great things to come.
                                 </p>
                                 <p>Let’s face it, PostHog isn’t successful because we nickel and dime builders with hobby projects. We’re here to grow with you for the long-term.
