@@ -1,9 +1,11 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { Avatar } from 'components/MainNav'
 import Stickers from 'components/ProfileStickers'
 import getAvatarURL from 'components/Squeak/util/getAvatar'
 import Markdown from 'markdown-to-jsx'
 import { CallToAction } from 'components/CallToAction'
+import { ColorPicker } from '../../pages/community/profile/edit'
+import { useUser } from 'hooks/useUser'
 
 export interface ProfileData {
     firstName: string
@@ -23,9 +25,36 @@ interface ProfileProps {
 }
 
 export default function Profile({ profile }: ProfileProps): JSX.Element {
-    const { firstName, lastName, country, companyRole, pineappleOnPizza, biography, isTeamLead, id, location, color } =
-        profile
+    const { user, getJwt } = useUser()
+    const [color, setColor] = useState<string | undefined>()
+    const { firstName, lastName, country, companyRole, pineappleOnPizza, biography, isTeamLead, id, location } = profile
     const name = [firstName, lastName].filter(Boolean).join(' ')
+
+    const handleColorChange = async (newColor: string) => {
+        setColor(newColor)
+        const jwt = await getJwt()
+        await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/profiles/${id}`, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+                Authorization: `Bearer ${jwt}`,
+            },
+            body: JSON.stringify({ data: { color: newColor } }),
+        })
+    }
+
+    useEffect(() => {
+        if (user?.role?.type === 'moderator' && user?.webmaster) {
+            fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/profiles/${id}`, {
+                method: 'GET',
+            })
+                .then((res) => res.json())
+                .then((data) => setColor(data.data.attributes.color))
+        } else {
+            setColor(profile.color)
+        }
+    }, [user])
+
     return (
         <div>
             <div className="flex space-x-2 mb-6">
@@ -48,6 +77,14 @@ export default function Profile({ profile }: ProfileProps): JSX.Element {
                     </div>
                 </div>
             </div>
+            {user?.role?.type === 'moderator' && user?.webmaster && (
+                <div className="mb-4">
+                    <ColorPicker
+                        active={(currColor) => currColor === color}
+                        onClick={(newColor) => handleColorChange(newColor)}
+                    />
+                </div>
+            )}
 
             {biography ? (
                 <Markdown className="bio-sidebar">{biography}</Markdown>

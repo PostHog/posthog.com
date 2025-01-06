@@ -82,6 +82,39 @@ const Toggle = ({ name, label, checked, onChange, options }) => {
     )
 }
 
+export const ColorPicker = ({ active, onClick }) => {
+    return (
+        <ul className="list-none m-0 p-0 flex space-x-1">
+            {[
+                'lime-green',
+                'blue',
+                'orange',
+                'teal',
+                'purple',
+                'seagreen',
+                'salmon',
+                'yellow',
+                'red',
+                'green',
+                'lilac',
+                'sky-blue',
+            ].map((color) => {
+                const isActive = active(color)
+                return (
+                    <li key={color} onClick={() => onClick(color)}>
+                        <button
+                            type="button"
+                            className={`w-6 h-6 rounded-full bg-${color} border-[1.5px] ${
+                                isActive ? 'border-black dark:border-white' : 'border-transparent'
+                            }`}
+                        />
+                    </li>
+                )
+            })}
+        </ul>
+    )
+}
+
 function Avatar({ values, setFieldValue }) {
     const inputRef = useRef<HTMLInputElement>(null)
     const [imageURL, setImageURL] = useState(values?.avatar?.url)
@@ -238,35 +271,13 @@ const formSections = [
                 component: ({ values, setFieldValue }) => {
                     return (
                         <>
-                            <label className="font-bold">Pick your favorite color</label>
-                            <ul className="list-none m-0 p-0 mt-2 flex space-x-1">
-                                {[
-                                    'lime-green',
-                                    'blue',
-                                    'orange',
-                                    'teal',
-                                    'purple',
-                                    'seagreen',
-                                    'salmon',
-                                    'yellow',
-                                    'red',
-                                    'green',
-                                    'lilac',
-                                    'sky-blue',
-                                ].map((color) => {
-                                    const active = values.color === color
-                                    return (
-                                        <li key={color} onClick={() => setFieldValue('color', color)}>
-                                            <button
-                                                type="button"
-                                                className={`w-6 h-6 rounded-full bg-${color} border-[1.5px] ${
-                                                    active ? 'border-black dark:border-white' : 'border-transparent'
-                                                }`}
-                                            />
-                                        </li>
-                                    )
-                                })}
-                            </ul>
+                            <div className="mb-2">
+                                <label className="font-bold">Pick your favorite color</label>
+                            </div>
+                            <ColorPicker
+                                active={(color) => values.color === color}
+                                onClick={(color) => setFieldValue('color', color)}
+                            />
                         </>
                     )
                 },
