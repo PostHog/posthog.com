@@ -38,7 +38,7 @@ Et voilà! The additional data increased the win probability and narrowed the cr
 
 ## Supported methodologies
 
-Experiments use a few different models depending on the type of data. Read these to understand how Bayesian statistics is applied to each type of experiment:
+Experiments use different statistical models because different types of data have distinct mathematical properties. For example, funnel conversions are always between 0% and 100%, pageview counts can be any positive number (0, 50, 280), and property values can vary widely and tend to be right-skewed. Each model is specifically designed to handle these unique characteristics. Read these to understand how Bayesian statistics is applied to each type of experiment:
 
 * [Beta model for funnel experiments](/docs/experiments/funnels-statistics) to analyze conversion rates through multi-step funnels.
 * [Gamma-Poisson model for trend experiments with count-based data](/docs/experiments/trends-count-statistics) like pageviews or interaction events.
