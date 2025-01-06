@@ -602,11 +602,12 @@ const ProfileSidebar: React.FC<ProfileSidebarProps> = ({ profile, mutate }) => {
                       })
                     : null}
 
-                {user?.profile?.id === profile.id && (
+                {(user?.profile?.id === profile.id || (user?.role?.type === 'moderator' && user?.webmaster)) && (
                     <SidebarSection>
                         <Link
                             to="/community/profile/edit"
                             className="text-base text-red dark:text-yellow font-semibold"
+                            state={{ profileID: profile.id }}
                         >
                             Edit profile
                         </Link>
