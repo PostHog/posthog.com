@@ -25,42 +25,42 @@ Our Gamma-Poisson model uses a minimally informative prior of `ALPHA_PRIOR = 1` 
 
 The **win probability** tells you how likely it is that a given variant has the highest rate compared to all other variants in the experiment. It helps you determine whether the experiment shows a **statistically significant** real effect vs. simply random chance.
 
-Let's say you're testing a new feature and have these results:
-- Control: 100 events from 1000 users (rate of 0.1 events per user)
-- Test: 150 events from 1000 users (rate of 0.15 events per user)
+Let's say you're testing a new menu design and have these results:
+- Control (old menu): 250 slices ordered by 100 customers (rate of 2.5 slices per customer)
+- Test (new menu): 300 slices ordered by 100 customers (rate of 3.0 slices per customer)
 
 To calculate the win probabilities for the experiment, our methodology:
 
 1. Models each variant's rate using a Gamma distribution:
-	- Control: Gamma(100 + ALPHA_PRIOR, 1000 + BETA_PRIOR)
-	- Test: Gamma(150 + ALPHA_PRIOR, 1000 + BETA_PRIOR)
+	- Control: Gamma(250 + ALPHA_PRIOR, 100 + BETA_PRIOR)
+	- Test: Gamma(300 + ALPHA_PRIOR, 100 + BETA_PRIOR)
 
 2. Takes 10,000 random samples from each distribution.
 
 3. Checks which variant had the higher rate for each sample.
 
 4. Calculates the final win probabilities:
-	- Control wins in 40 out of 10,000 samples = 0.4% probability
-	- Test wins in 9,960 out of 10,000 samples = 99.6% probability
+	- Control wins in 154 out of 10,000 samples = 1.54% probability
+	- Test wins in 9,846 out of 10,000 samples = 98.46% probability
 
-These results tell us we can be 99.6% confident that the test variant performs better than the control.
+These results tell us we can be 98.46%% confident that the new menu design leads to more slice orders per customer than the old menu.
 
 ## Credible intervals
 
 A **credible interval** tells you the range where the true rate lies with 95% probability. This is different than a confidence interval, which describes how often such intervals would contain the true rate if you repeated the experiment many times (not a direct probability statement about where the rate lies).
 
 For example, if you have these results:
-- Control: 100 events from 1000 users (rate of 0.1 events per user)
-- Test: 150 events from 1000 users (rate of 0.15 events per user)
+- Control (old menu): 250 slices ordered by 100 customers (rate of 2.5 slices per customer)
+- Test (new menu): 300 slices ordered by 100 customers (rate of 3.0 slices per customer)
 
 To calculate the credible intervals for the experiment, our methodology will:
 
 1. Create a Gamma distribution for each variant:
-	- Control: Gamma(100 + ALPHA_PRIOR, 1000 + BETA_PRIOR)
-	- Test: Gamma(150 + ALPHA_PRIOR, 1000 + BETA_PRIOR)
+	- Control: Gamma(250 + ALPHA_PRIOR, 100 + BETA_PRIOR)
+	- Test: Gamma(300 + ALPHA_PRIOR, 100 + BETA_PRIOR)
 
 2. Find the 2.5th and 97.5% percentiles of each distribution:
-	- Control: [0.082, 0.122] = "You can be 95% confident the true rate is between 0.082 and 0.122 events per user"
-	- Test: [0.128, 0.176] = "You can be 95% confident the true rate is between 0.128 and 0.176 events per user"
+	- Control: [2.2, 2.8] = "You can be 95% confident customers order between 2.2 and 2.8 slices on average with the old menu"
+	- Test: [2.7, 3.3] = "You can be 95% confident customers order between 2.7 and 3.3 slices on average with the new menu"
 
-Since these intervals don't overlap, you can be quite confident that the test variant performs better than the control. The intervals will become narrower as you collect more data, reflecting your increasing certainty about the true rates.
+Since these intervals barely overlap, you can be quite confident that the new menu design results in more slice orders per customer. The intervals will become narrower as you collect more data, reflecting your increasing certainty about the true rates.
