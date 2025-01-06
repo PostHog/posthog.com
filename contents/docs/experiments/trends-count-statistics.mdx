@@ -11,10 +11,12 @@ Imagine you run a pizza shop and want to know how many slices a customer typical
 The Poisson distribution has one key number: the average rate. In our pizza example, maybe it's 2.5 slices per customer. But here's the catch - we don't know the true rate for sure. We only have our observations to guess from.
 
 This is where the **Gamma distribution** comes in. It helps us model our uncertainty about the true rate:
+
 - When we have very little data, the Gamma distribution is wide, saying "hey, the true rate could be anywhere in this broad range".
 - As we collect more data, the Gamma distribution gets narrower, saying "we're getting more confident about what the true rate is".
 
 So when we say we're using a Gamma-Poisson model for experiments, we're:
+
 1. Using the Poisson distribution to model how count data naturally varies.
 2. Using the Gamma distribution to express our uncertainty about the true rate.
 3. Getting more confident in our estimates over time.
@@ -26,6 +28,7 @@ One more thing worth noting: Bayesian inference with an initial guess that then 
 The **win probability** tells you how likely it is that a given variant has the highest rate compared to all other variants in the experiment. It helps you determine whether the experiment shows a **statistically significant** real effect vs. simply random chance.
 
 Let's say you're testing a new menu design and have these results:
+
 - Control (old menu): 250 slices ordered by 100 customers (rate of 2.5 slices per customer)
 - Test (new menu): 300 slices ordered by 100 customers (rate of 3.0 slices per customer)
 
@@ -50,6 +53,7 @@ These results tell us we can be 98.46%% confident that the new menu design leads
 A **credible interval** tells you the range where the true rate lies with 95% probability. This is different than a confidence interval, which describes how often such intervals would contain the true rate if you repeated the experiment many times (not a direct probability statement about where the rate lies).
 
 For example, if you have these results:
+
 - Control (old menu): 250 slices ordered by 100 customers (rate of 2.5 slices per customer)
 - Test (new menu): 300 slices ordered by 100 customers (rate of 3.0 slices per customer)
 
