@@ -76,11 +76,11 @@ We do have more senior people on the team (both in industry experience and in th
 
 You can list and categorize issues. If you want someone to see an issue, @mention them and/or Slack them the link.
 
-### Don't yolo merge
+## Don't yolo merge
 
 Do not "yolo merge" – i.e.: force a change to our website or platform without someone else checking it. This should _only_ happen in emergencies, _even_ for simple changes. It is _so_ frequent that we find issues. If you have _any_ doubt, get someone else to look at it first.
 
-### PRs > issues > Slack
+## PRs > issues > Slack
 
 Bias for action. If you can just pick up the work, do so. We want a culture of individual contribution _not_ of delegation.
 
@@ -88,7 +88,7 @@ It is fine (and encouraged) to pick-up side quests, or to deviate from your goal
 
 If you aren't able to make a change yourself, create an issue in GitHub. Avoid simply relaying to-dos in Slack as a means of getting someone to pick up a task. It's hard to track and easy to forget.
 
-### Do things as publicly as possible by default
+## Do things as publicly as possible by default
 
 For discussions, public repos are the best place. Then private ones, then Slack public channels, then Slack private channels or DMs. This is part of our _"We are open source"_ value, and helps with general context setting for the wider team, which means everyone can work more autonomously.
 
@@ -96,7 +96,7 @@ There are only a few exceptions to what we can't share publicly, for example if 
 
 Internally, _everything_ can be shared apart from people issues – such as HR / personal (i.e. recruitment or health data).
 
-### Be proactive with community questions
+## Be proactive with community questions
 
 Don't _only_ help the community when you're the person on support hero in your small team. No matter what your goals may be, if you can quickly ship fixes to real life user problems, then you are going to build goodwill, word-of-mouth growth, and a better product all in one swoop.
 

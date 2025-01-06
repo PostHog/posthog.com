@@ -61,7 +61,7 @@ If given a choice, go live. If you can't go live, reduce the task size so you ca
 
 Default to _not_ asking for permission to do something if you are acting in the best interests of PostHog. It is ok to ask for more context though. 
 
-## We on the maker's schedule
+## We're on the maker's schedule
 
 We're big believers in the importance of the [maker's schedule](http://www.paulgraham.com/makersschedule.html). If we have meetings at all, we'll cluster them around any stand-ups, so our day doesn't get split up.
 

@@ -16,7 +16,7 @@ Building a successful product is hard; doing so when you don't understand your c
 
 PostHog includes every the tool you need to understand how people use your product, who they are, and how to make them happy.
 
-### 2. Useful at every stage
+### 2. Start from the start
 
 The tools we build help you from your first user to when your product is everything it could be.
 
