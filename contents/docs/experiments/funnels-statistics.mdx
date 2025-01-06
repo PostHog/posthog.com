@@ -17,7 +17,11 @@ For example, if:
 - Only 2 out of 4 customers (50%) say yes, the Beta distribution will be wide, indicating high uncertainty.
 - 150 out of 300 customers (50%) say yes, the Beta distribution will be narrow, showing we're more confident about that 50% rate.
 
-Within PostHog, our Beta model uses a minimally informative prior of `ALPHA_PRIOR = 1` and `BETA_PRIOR = 1`.
+So when we say we're using a Beta model for funnel experiments, we're:
+1. Using the Beta distribution to model conversion rates between 0% and 100%.
+2. Getting more confident in our estimates as we collect more data.
+
+One more thing worth noting: Bayesian inference with an initial guess that then gets updated as more data comes in. Our model uses a "minimally informative prior" of `ALPHA_PRIOR = 1` and `BETA_PRIOR = 1`, which is like starting with a blank slate instead of making an upfront assumption about the results.
 
 ## Win probabilities
 
