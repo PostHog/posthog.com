@@ -2702,12 +2702,6 @@ export const docsMenu = {
                     icon: 'IconDashboard',
                     color: 'blue',
                 },
-                {
-                    name: 'Experiment significance',
-                    url: '/docs/experiments/experiment-significance',
-                    icon: 'IconMagicWand',
-                    color: 'seagreen',
-                },
             ],
         },
         {
