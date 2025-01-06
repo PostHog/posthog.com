@@ -22,7 +22,7 @@ The "Normal-Inverse-Gamma prior" part helps us handle uncertainty:
 - When we have very little data, it keeps our estimates reasonable.
 - As we collect more data, it lets the actual data drive our conclusions.
 - It accounts for uncertainty in both the average value AND how spread out the values are.
-- We use a fixed log-space variance (`LOG_VARIANCE = 0.75`) based on typical patterns in revenue data.
+- We use a fixed log-space variance (`LOG_VARIANCE = 0.75`) based on typical patterns in property value data.
 
 For example:
 - Day 1: 5 customers spend an average of $50, but we're very uncertain about whether this represents the true average spending.
