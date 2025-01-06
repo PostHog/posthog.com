@@ -22,16 +22,17 @@ If there are specific elements you don't want to capture, add the [`ph-no-captur
 
 ## Sanitize properties on the client
 
-You can sanitize properties on the client side by setting the `sanitize_properties` [config](/docs/libraries/js#config) option. This is a function that enables you to modify the properties before they are sent to PostHog. For example:
+You can sanitize properties on the client side by setting the `before_send` [config](/docs/libraries/js#config) option. This is a function that enables you to modify the properties before they are sent to PostHog. You can even reject events by returning `null`. For example:
 
 ```js-web
 posthog.init('<ph_project_api_key>', {
     api_host: '<ph_client_api_host>',
-    sanitize_properties: function(properties, event) {
-        if (properties['$ip']) {
-            properties['$ip'] = null;
+    before_send: function(event) {
+        if (event.properties['$ip']) {
+            event.properties['$ip'] = null;
         }
-        return properties;
+
+        return event;
     }
 });
 ```

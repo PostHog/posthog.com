@@ -572,6 +572,10 @@ export const handbookSidebar = [
                 url: '/handbook/growth/marketing/icp',
             },
             {
+                name: 'Sponsorships',
+                url: '/handbook/growth/marketing/open-source-sponsorship',
+            },
+            {
                 name: 'Dashboard templates',
                 url: '/handbook/growth/marketing/templates',
             },
@@ -3256,9 +3260,15 @@ export const pricingMenu = {
 
 export const productMenu = {
     name: 'Products',
-    url: '/product-analytics',
-    icon: 'IconFeatures',
+    url: '/products',
+    icon: 'IconApps',
     children: [
+        {
+            name: 'All products',
+            icon: 'IconApps',
+            color: 'red',
+            url: '/products',
+        },
         {
             name: 'Product analytics',
             icon: 'IconGraph',
