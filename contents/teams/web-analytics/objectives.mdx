@@ -1,12 +1,31 @@
-* Continue to improve performance
-  * Restructures the queries to query everything at once rather than one per chart
-* Build a small amount of more advanced marketing features, to measure interest
-  * Customisable channel types
-* Cookieless tracking
-  * Explore how feasible it is this quarter
-  * Build it if yes
-* Improve the NextJS experience
-* More page-level insights
-  * Add a page report page
-  * Per-page web vitals
-* Improve the documentation, and link to it more from the app
+## Q1 2025 Goals
+
+* Finish building **cookieless prototype** <TeamMember name="Robbie Coomber" photo />
+  * This is being carried over from Q4, but it's almost done, and it has a lot of impact, so it makes sense to keep it as a goal for this quarter
+* **Marketing Analytics** <TeamMember name="Robbie Coomber" photo />
+  * Get revenue data from events, and from 1-2 data warehouse connectors (most likely Stripe and RevenueCat)
+  * Display revenue data inside the web analytics dashboard
+  * Get ad spend data from 2-5 data warehouse connectors (most likely Google Ads and CSV files, then other ad platforms that we can dogfood)
+  * Build out the 80/20 of marketing analytics insights, e.g. total revenue and spending per channel and per campaign
+  * Start on more advanced features, e.g. CPA (average for channel) as a person property
+* **Per-page Analytics** <TeamMember name="Rafael Audibert" photo />
+  * **Core web vitals**
+    * We're already collecting this data, so it's just a matter of displaying it
+  * Improve cross-selling inside per-page view
+    * Analytics conversion/funnels cross-sell
+    * Heatmaps/Session Replay cross-sell
+    * Error Tracking cross-sell
+  * React Performance
+  * Uptime monitoring
+    * Figure out a way to make it different from the 250 alternatives
+    * Initial proposal: allow customers to select the region where we hit their website from (`us-east`, `us-west`, `eu-central`, `eu-west`, `sa-east`, etc.), more reliable metrics 
+  * Add per-page analytics to the Toolbar view
+    * Web Analytics data will be much more useful if we can display it when using the toolbar, so, stretch goal: display this kind of information in an overlay when using the toolbar
+* **Define more sophisticated success metrics** to better understand how much our users value the product <TeamMember name="Anna Szell" photo />
+  * Activation, retention, etc.
+  * Performance (query-loading speed, total page load speed, etc.)
+    * Check in mid-quarter, and then decide if we should spend time working on the current set of features or if we should focus on the above goals
+
+### Stretch Goals
+
+* The web analytics dashboard for www.posthog.com is publicly shared as a **demo on the web analytics product page**
