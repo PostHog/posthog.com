@@ -23,9 +23,9 @@ Within PostHog, our Beta model uses a minimally informative prior of `ALPHA_PRIO
 
 The **win probability** tells you how likely it is that a given variant has the highest conversion rate compared to all other variants in the experiment. It helps you determine whether the experiment shows a **statistically significant** real effect vs. simply random chance.
 
-Let's say you're testing a new signup flow and have these results:
-- Control: 100 signups from 1000 visitors (10% conversion)
-- Test: 150 signups from 1000 visitors (15% conversion)
+Let's say you're testing a new way of presenting pineapple on the website and have these results:
+- Control (current design): 100 pineapple orders from 1000 customers (10% acceptance)
+- Test (suggesting pineapple with a photo): 150 pineapple orders from 1000 customers (15% acceptance)
 
 To calculate the win probabilities for the experiment, our methodology will:
 
@@ -41,15 +41,15 @@ To calculate the win probabilities for the experiment, our methodology will:
 	- Control wins in 40 out of 10,000 samples = 0.4% probability
 	- Test wins in 9,960 out of 10,000 samples = 99.6% probability
 
-These results tell us we can be 99.6% confident that the test variant performs better than the control.
+These results tell us we can be 99.6% confident that showing photos of pineapple pizza performs better than the current design.
 
 ## Credible intervals
 
 A **credible interval** tells you the range where the true conversion rate lies with 95% probability. This is different than a confidence interval, which describes how often such intervals would contain the true rate if you repeated the experiment many times (not a direct probability statement about where the rate lies).
 
 For example, if you have these results:
-- Control: 100 signups from 1000 visitors (10% conversion)
-- Test: 150 signups from 1000 visitors (15% conversion)
+- Control (current design): 100 pineapple orders from 1000 customers (10% acceptance)
+- Test (suggesting pineapple with a photo): 150 pineapple orders from 1000 customers (15% acceptance)
 
 To calculate the credible intervals for the experiment, our methodology will:
 
