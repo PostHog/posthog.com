@@ -2671,8 +2671,8 @@ export const docsMenu = {
                     name: 'Under the hood',
                 },
                 {
-                    name: 'Statistics primer',
-                    url: '/docs/experiments/statistics-primer',
+                    name: 'Statistics overview',
+                    url: '/docs/experiments/statistics',
                     icon: 'IconBook',
                     color: 'blue',
                 },
