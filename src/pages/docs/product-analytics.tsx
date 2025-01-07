@@ -11,6 +11,7 @@ import List from 'components/List'
 import { docsMenu } from '../../navs'
 import { useLayoutData } from 'components/Layout/hooks'
 import QuickLinks from 'components/QuickLinks'
+import { useChat } from 'hooks/useChat'
 
 type ProductAnalyticsProps = {
     data: {
@@ -33,9 +34,28 @@ export const Intro = () => (
 
 export const Content = ({ quickLinks = false }) => {
     const { compact } = useLayoutData()
+    const { setChatOpen } = useChat()
     return (
         <>
             <Intro />
+
+            <div className="bg-accent dark:bg-accent-dark pt-4 px-5 pb-6 border border-light dark:border-dark rounded relative mb-12">
+                <h3 className="mb-1 text-xl">Chat with MaxAI</h3>
+                <p className="text-[15px] mb-3 pr-24 md:pr-0">
+                Get your question answered directly instead of aimlessly clicking through docs pages.
+                </p>
+                <CallToAction type="primary" size="md" className="" onClick={() => setChatOpen(true)}>
+                    Chat with Max AI
+                </CallToAction>
+                
+                <CloudinaryImage
+                    src="https://res.cloudinary.com/dmukukwp6/image/upload/wizard_hog_bdbdabe5a2.png"
+                    width={205}
+                    placeholder="none"
+                    className="absolute bottom-1 right-0 md:right-4 w-32 md:w-auto"
+                />
+            </div>
+
             {(quickLinks || compact) && (
                 <QuickLinks
                     items={docsMenu.children.find(({ name }) => name.toLowerCase() === 'product analytics')?.children}
