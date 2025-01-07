@@ -302,7 +302,7 @@ const PairsWithArray = [
     },
 ]
 
-export const ProductWebAnalytics = () => {
+export const ProductWebAnalytics = (): JSX.Element => {
     const { ycombinator, significa, creatify } = useStaticQuery(graphql`
         fragment ProductCustomerFragment on Mdx {
             fields {
@@ -329,7 +329,9 @@ export const ProductWebAnalytics = () => {
             }
         }
     `)
+
     const { fullWidthContent } = useLayoutData()
+
     return (
         <>
             <SEO
@@ -346,12 +348,11 @@ export const ProductWebAnalytics = () => {
                     description="Web analytics for people who really liked GA3..."
                 />
 
-                <div className="text-center -mb-24">
-                    <img
-                        src="/images/products/web-analytics/screenshot-web-analytics.png"
+                <div className="text-center">
+                    <CloudinaryImage
+                        src="https://res.cloudinary.com/dmukukwp6/image/upload/screenshot_web_analytics_2a101a8558.png"
                         alt="Screenshot of web analytics in PostHog"
-                        className="w-full max-w-[1440px]"
-                        placeholder="none"
+                        className="w-full max-w-[1360.5px]"
                     />
                 </div>
 
