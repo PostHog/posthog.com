@@ -13,16 +13,14 @@ dayjs.extend(relativeTime)
 
 type QuestionsTableProps = {
     questions: Omit<StrapiResult<QuestionData[]>, 'meta'>
-    pinnedQuestions: Omit<StrapiResult<QuestionData[]>, 'meta'>
     isLoading: boolean
-    fetchMore: () => void
-    hideLoadMore?: boolean
+    fetchMore?: () => void
+    pinnedQuestions?: Omit<StrapiResult<QuestionData[]>, 'meta'>
     className?: string
     currentPage?: {
         url: string
         title: string
     }
-    hasMore?: boolean
     showAuthor?: boolean
     showTopic?: boolean
     showBody?: boolean
@@ -91,13 +89,13 @@ const Row = ({
     currentPage,
     showTopic,
     showBody,
-    showAuthor,
     sortBy,
     pinned,
     fetchMore,
     showStatus = true,
 }) => {
-    const { isModerator, notifications, user } = useUser()
+    const { isModerator, notifications } = useUser()
+
     const {
         id,
         attributes: { profile, subject, permalink, replies, createdAt, resolved, topics, activeAt, body },
@@ -113,7 +111,7 @@ const Row = ({
 
     useEffect(() => {
         if (inView) {
-            fetchMore()
+            fetchMore?.()
         }
     }, [inView])
 
@@ -121,10 +119,10 @@ const Row = ({
     const status = resolved
         ? 'resolved'
         : isModerator
-        ? latestAuthor?.data?.attributes?.user?.data?.attributes?.role?.data?.attributes?.type === 'moderator'
-            ? 'pending'
-            : 'needs-response'
-        : null
+            ? latestAuthor?.data?.attributes?.user?.data?.attributes?.role?.data?.attributes?.type === 'moderator'
+                ? 'pending'
+                : 'needs-response'
+            : null
 
     const featuredImage = topics.data?.[0]?.attributes.label.startsWith('#') && extractFirstImageURL(body)
 
@@ -187,16 +185,15 @@ const Row = ({
                         </div>
                     </div>
                     <div
-                        className={`hidden md:block md:col-span-2 2xl:col-span-1 text-center text-sm font-normal text-primary/60 dark:text-primary-dark/60 ${
-                            hasNewReplies ? 'font-bold !text-red dark:!text-yellow' : ''
-                        }`}
+                        className={`hidden md:block md:col-span-2 2xl:col-span-1 text-center text-sm font-normal text-primary/60 dark:text-primary-dark/60 ${hasNewReplies ? 'font-bold !text-red dark:!text-yellow' : ''
+                            }`}
                     >
                         {numReplies}
                     </div>
                     <div className="hidden md:block md:col-span-3 text-sm font-normal text-primary/60 dark:text-primary-dark/60">
                         <div className="text-primary dark:text-primary-dark font-medium opacity-60 line-clamp-2">
                             {dayjs(sortBy === 'activity' ? activeAt : createdAt).fromNow()} by{' '}
-                            {profile.data?.attributes?.firstName} {profile.data?.attributes?.lastName} {}
+                            {profile.data?.attributes?.firstName} {profile.data?.attributes?.lastName} { }
                         </div>
                     </div>
                 </div>
@@ -209,10 +206,8 @@ export const QuestionsTable = ({
     questions,
     isLoading,
     fetchMore,
-    hideLoadMore,
     className = '',
     currentPage,
-    hasMore,
     showTopic,
     showBody,
     showAuthor = true,
@@ -250,22 +245,22 @@ export const QuestionsTable = ({
             ) : null}
             {questionsFiltered
                 ? questionsFiltered.map((question, index) => {
-                      return (
-                          <li key={question.id} className="list-none px-[2px] divide-y divide-light dark:divide-dark">
-                              <Row
-                                  showStatus={showStatus}
-                                  className={className}
-                                  currentPage={currentPage}
-                                  showTopic={showTopic}
-                                  showBody={showBody}
-                                  showAuthor={showAuthor}
-                                  question={question}
-                                  sortBy={sortBy}
-                                  fetchMore={questionsFiltered.length === index + 1 && fetchMore}
-                              />
-                          </li>
-                      )
-                  })
+                    return (
+                        <li key={question.id} className="list-none px-[2px] divide-y divide-light dark:divide-dark">
+                            <Row
+                                showStatus={showStatus}
+                                className={className}
+                                currentPage={currentPage}
+                                showTopic={showTopic}
+                                showBody={showBody}
+                                showAuthor={showAuthor}
+                                question={question}
+                                sortBy={sortBy}
+                                fetchMore={questionsFiltered.length === index + 1 && fetchMore}
+                            />
+                        </li>
+                    )
+                })
                 : new Array(9).fill(0).map((_, i) => <Skeleton key={i} />)}
             {isLoading && <Skeleton />}
         </ul>

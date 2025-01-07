@@ -71,7 +71,6 @@ export default function ContactSales({ location }) {
                     <div className="text-center">
                         <CloudinaryImage
                             loading="eager"
-                            placeholder="none"
                             width={600}
                             height={309}
                             alt="Sales hedgehogs"
@@ -84,13 +83,12 @@ export default function ContactSales({ location }) {
                 <section className="grid md:grid-cols-2 max-w-5xl mx-auto md:gap-x-16 gap-y-12">
                     <div className="">
                         <div
-                            className={`space-y-3 transition-all duration-300 ${
-                                showVideo
+                            className={`space-y-3 transition-all duration-300 ${showVideo
                                     ? isMobile
                                         ? 'h-0 opacity-0 overflow-hidden'
                                         : 'opacity-0 h-0'
                                     : 'h-auto opacity-100 mb-6'
-                            }`}
+                                }`}
                         >
                             <h3 className="text-lg mb-3 text-center md:text-left">Quick demo first?</h3>
 

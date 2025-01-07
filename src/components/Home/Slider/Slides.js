@@ -231,7 +231,6 @@ export const ProductAnalytics = () => {
     const imageProps = {
         loading: 'eager',
         alt: 'A funnel insight with 4 steps showing how many users dropped off during a sign-up flow',
-        placeholder: 'none',
         quality: 100,
         objectFit: 'contain',
         className: 'w-full -mb-2 mdlg:max-w-[753px] mdlg:shadow-2xl mdlg:-rotate-1',
@@ -292,7 +291,6 @@ export const ProductAnalytics = () => {
             HogMobile={() => (
                 <CloudinaryImage
                     loading="eager"
-                    placeholder="none"
                     quality={100}
                     className="w-full max-w-[180px] sm:max-w-[230px] md:max-w-[260px]"
                     src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Home/Slider/images/product-analytics-hog.png"
@@ -302,7 +300,6 @@ export const ProductAnalytics = () => {
             HogDesktop={() => (
                 <CloudinaryImage
                     loading="eager"
-                    placeholder="none"
                     quality={100}
                     className="w-full max-w-[180px] lg:max-w-[230px] xl:max-w-[300px]"
                     src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Home/Slider/images/product-analytics-hog.png"
@@ -322,7 +319,6 @@ export const WebAnalytics = () => {
     const imageProps = {
         loading: 'eager',
         alt: 'A screenshot of web analytics',
-        placeholder: 'none',
         quality: 100,
         objectFit: 'contain',
         className: 'w-full border border-light dark:border-dark rounded md:max-w-[675px] md:shadow-2xl md:rotate-1',
@@ -382,7 +378,6 @@ export const WebAnalytics = () => {
             HogMobile={() => (
                 <CloudinaryImage
                     loading="eager"
-                    placeholder="none"
                     quality={100}
                     className="max-w-[150px] sm:max-w-[203px] md:max-w-[203px]"
                     src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Home/Slider/images/web-analytics-hog.png"
@@ -392,7 +387,6 @@ export const WebAnalytics = () => {
             HogDesktop={() => (
                 <CloudinaryImage
                     loading="eager"
-                    placeholder="none"
                     quality={100}
                     className="w-full max-w-[180px] 2xl:max-w-[203px]"
                     src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Home/Slider/images/web-analytics-hog.png"
@@ -412,7 +406,6 @@ export const SessionReplay = () => {
     const imageProps = {
         loading: 'eager',
         alt: 'A session recording of a fake application called Hogflix',
-        placeholder: 'none',
         quality: 100,
         objectFit: 'contain',
         className: 'w-full border border-light dark:border-dark rounded md:max-w-full md:shadow-2xl md:rotate-1',
@@ -469,7 +462,6 @@ export const SessionReplay = () => {
             HogMobile={() => (
                 <CloudinaryImage
                     loading="eager"
-                    placeholder="none"
                     quality={100}
                     className="w-full max-w-[200px] mdlg:block lg:max-w-[230px] xl:max-w-[300px]"
                     src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Home/Slider/images/session-recording-hog.png"
@@ -479,7 +471,6 @@ export const SessionReplay = () => {
             HogDesktop={() => (
                 <CloudinaryImage
                     loading="eager"
-                    placeholder="none"
                     quality={100}
                     className="w-full max-w-[180px] xl:max-w-[220px] 2xl:max-w-[275px]"
                     src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Home/Slider/images/session-recording-hog.png"
@@ -499,7 +490,6 @@ export const FeatureFlags = () => {
     const image1Props = {
         loading: 'eager',
         alt: "A code snippet to check if the feature flag 'nav' is enabled",
-        placeholder: 'none',
         quality: 100,
         objectFit: 'contain',
         className: 'w-full border border-light dark:border-dark rounded md:max-w-[840px] md:shadow-2xl md:-rotate-1',
@@ -507,7 +497,6 @@ export const FeatureFlags = () => {
     const image2Props = {
         loading: 'eager',
         alt: 'A filter for rolling out a feature flag to 50% of organizations in a cohort',
-        placeholder: 'none',
         quality: 100,
         objectFit: 'contain',
         className: 'w-full border border-light dark:border-dark rounded md:max-w-[840px] md:shadow-2xl md:rotate-1',
@@ -582,7 +571,6 @@ export const FeatureFlags = () => {
             HogMobile={() => (
                 <CloudinaryImage
                     loading="eager"
-                    placeholder="none"
                     quality={100}
                     className="w-full max-w-[200px] mdlg:block lg:max-w-[230px] xl:max-w-[300px]"
                     src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Home/Slider/images/feature-flags-hog.png"
@@ -592,7 +580,6 @@ export const FeatureFlags = () => {
             HogDesktop={() => (
                 <CloudinaryImage
                     loading="eager"
-                    placeholder="none"
                     quality={100}
                     className="w-full max-w-[200px] mdlg:block lg:max-w-[230px] xl:max-w-[300px]"
                     src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Home/Slider/images/feature-flags-hog.png"
@@ -612,7 +599,6 @@ export const ABTesting = () => {
     const image1Props = {
         loading: 'eager',
         alt: 'A graph depicting an increasing trend line showing improvement in an experiment over time',
-        placeholder: 'none',
         quality: 100,
         objectFit: 'contain',
         className: 'w-full dark:border dark:border-dark rounded md:max-w-[745px] md:shadow-2xl md:-rotate-1',
@@ -620,7 +606,6 @@ export const ABTesting = () => {
     const image2Props = {
         loading: 'eager',
         alt: 'A slider set at 5% showing how long an experiment will need to be run in order to get the specified improvement',
-        placeholder: 'none',
         quality: 100,
         objectFit: 'contain',
         className: 'w-full dark:border dark:border-dark rounded md:max-w-[400px] md:shadow-2xl md:rotate-1',
@@ -696,7 +681,6 @@ export const ABTesting = () => {
             HogMobile={() => (
                 <CloudinaryImage
                     loading="eager"
-                    placeholder="none"
                     quality={100}
                     className="w-full max-w-[120px] lg:max-w-[120px] xl:max-w-[175px] z-30"
                     src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Home/Slider/images/experiment-hog.png"
@@ -706,7 +690,6 @@ export const ABTesting = () => {
             HogDesktop={() => (
                 <CloudinaryImage
                     loading="eager"
-                    placeholder="none"
                     quality={100}
                     className="w-full max-w-[120px] lg:max-w-[120px] xl:max-w-[175px]"
                     src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Home/Slider/images/experiment-hog.png"
@@ -758,7 +741,6 @@ export const Surveys = () => {
                             <>
                                 <CloudinaryImage
                                     alt="Survey widget example"
-                                    placeholder="none"
                                     quality={100}
                                     objectFit="contain"
                                     className="w-full h-full pb-8 mdlg:py-4 max-w-[337px] md:max-w-[287px] mdlg:max-w-[337px] rotate-1"
@@ -772,7 +754,6 @@ export const Surveys = () => {
             HogMobile={() => (
                 <CloudinaryImage
                     loading="eager"
-                    placeholder="none"
                     quality={100}
                     className="w-full max-w-[180px] sm:max-w-[230px] md:max-w-[260px]"
                     src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Home/Slider/images/surveys-hog.png"
@@ -782,7 +763,6 @@ export const Surveys = () => {
             HogDesktop={() => (
                 <CloudinaryImage
                     loading="eager"
-                    placeholder="none"
                     quality={100}
                     className="w-full max-w-[200px] mdlg:block lg:max-w-[250px] xl:max-w-[350px]"
                     src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Home/Slider/images/surveys-hog.png"
@@ -833,7 +813,6 @@ export const DataPipeline = () => {
                             <>
                                 <CloudinaryImage
                                     alt="Some hedgehogs fixing some data pipes"
-                                    placeholder="none"
                                     quality={100}
                                     objectFit="contain"
                                     className="w-full h-full max-w-[571px]"
@@ -886,7 +865,6 @@ export const DataWarehouse = () => {
                             <>
                                 <CloudinaryImage
                                     alt="An artist's depiction of a data warehouse"
-                                    placeholder="none"
                                     quality={100}
                                     objectFit="contain"
                                     className="w-full h-full max-h-96 max-w-[826px]"
@@ -900,7 +878,6 @@ export const DataWarehouse = () => {
             HogMobile={() => (
                 <CloudinaryImage
                     alt="Just another hedgehog"
-                    placeholder="none"
                     quality={100}
                     className="w-full max-w-[100px] mdlg:block lg:max-w-[130px] xl:max-w-[150px]"
                     src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/products/data-warehouse/warehouse-hog.png"
@@ -909,7 +886,6 @@ export const DataWarehouse = () => {
             HogDesktop={() => (
                 <CloudinaryImage
                     alt="Just another hedgehog"
-                    placeholder="none"
                     quality={100}
                     className="w-full max-w-[100px] mdlg:block lg:max-w-[130px] xl:max-w-[150px]"
                     src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/products/data-warehouse/warehouse-hog.png"
@@ -1073,7 +1049,6 @@ export const Sql = () => {
                     <div className="h-full">
                         <CloudinaryImage
                             alt="A hedgehog working on a laptop while standing, using some sort of internet link that connects to the stars..."
-                            placeholder="none"
                             quality={100}
                             objectFit="contain"
                             className="w-full h-full py-10 max-h-96"

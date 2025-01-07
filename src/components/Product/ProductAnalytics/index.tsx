@@ -782,7 +782,6 @@ export const ProductProductAnalytics = () => {
                         src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Product/ProductAnalytics/images/screenshot-product-analytics.png"
                         alt="Screenshot of PostHog Product Analytics"
                         className="w-full max-w-[1360px]]"
-                        placeholder="none"
                     />
                 </div>
 
@@ -852,7 +851,6 @@ export const ProductProductAnalytics = () => {
                     </div>
                     <div className="md:w-96">
                         <CloudinaryImage
-                            placeholder="none"
                             quality={100}
                             src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Product/hogs/product-analytics-hog.png"
                             alt=""

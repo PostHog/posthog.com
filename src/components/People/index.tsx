@@ -24,9 +24,8 @@ export const TeamMember = (props) => {
         <li className="h-40 relative @container group click [perspective:1000px]">
             <button
                 onClick={() => setActiveProfile({ ...props, id: squeakId })}
-                className={`flex justify-between h-full relative text-primary dark:text-primary-dark hover:text-primary dark:hover:text-primary-dark w-full transition-transform preserve-3d text-left ${
-                    biography ? 'group-hover:[transform:rotateY(-180deg)]' : ''
-                }`}
+                className={`flex justify-between h-full relative text-primary dark:text-primary-dark hover:text-primary dark:hover:text-primary-dark w-full transition-transform preserve-3d text-left ${biography ? 'group-hover:[transform:rotateY(-180deg)]' : ''
+                    }`}
             >
                 <div className="flex flex-col justify-between px-4 md:px-6 py-4 w-full absolute h-full [backface-visibility:hidden] bg-accent dark:bg-accent-dark border border-light dark:border-dark rounded">
                     <div className="mr-32 xl:mr-40">
@@ -128,7 +127,6 @@ export default function People() {
                             alt="Hiking hog"
                             width="250"
                             height="250"
-                            placeholder="blurred"
                             className="w-[200px] sm:w-64 md:w-72 lg:w-auto lg:max-w-auto -mr-8 md:mr-0 -mt-4 md:mt-0"
                         />
                     </div>

@@ -1,10 +1,9 @@
 import React from 'react'
-import { StaticImage } from 'gatsby-plugin-image'
 
 interface FeatureProps {
-    name: string
+    title: string
     description: string
-    image: any
+    image: JSX.Element
     background?: boolean
     border?: boolean
     fade?: boolean
@@ -14,12 +13,10 @@ export const Feature = ({ title, description, image, background, border, fade }:
     return (
         <li className="text-center">
             <div
-                className={`mb-2 w-full ${background || (border && 'rounded overflow-hidden')} ${
-                    background && 'bg-accent dark:bg-accent-dark'
-                } ${border && 'border border-light dark:border-dark'} ${
-                    fade &&
+                className={`mb-2 w-full ${background || (border && 'rounded overflow-hidden')} ${background && 'bg-accent dark:bg-accent-dark'
+                    } ${border && 'border border-light dark:border-dark'} ${fade &&
                     'relative after:absolute after:w-full after:h-24 after:bottom-0 after:left-0 after:bg-gradient-to-b after:from-transparent dark:after:via-dark/80 dark:after:to-dark after:via-light/80 after:to-light after:z-10'
-                }`}
+                    }`}
             >
                 {image}
             </div>

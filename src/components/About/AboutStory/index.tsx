@@ -62,7 +62,6 @@ export const AboutStory = () => {
                         height={366}
                         quality={100}
                         alt="James Hawkins, CEO, Co-founder"
-                        placeholder="none"
                         objectFit="contain"
                         className="w-[55vw] md:w-[300px] lg:w-auto"
                     />
@@ -80,7 +79,6 @@ export const AboutStory = () => {
                         height={320}
                         quality={100}
                         alt="Tim Glaser, CTO, Co-founder"
-                        placeholder="none"
                         objectFit="contain"
                         className="w-[40vw] md:w-[230px] lg:w-auto"
                     />

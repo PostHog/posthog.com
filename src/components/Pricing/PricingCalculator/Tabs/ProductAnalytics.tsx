@@ -24,9 +24,9 @@ const getTotalAnalyticsCost = (analyticsData: any) => {
 export const getTotalEnhancedPersonsVolume = (analyticsData: any) => {
     return analyticsData
         ? Object.keys(analyticsData).reduce(
-              (acc, key) => acc + (analyticsData[key].enhanced ? analyticsData[key].volume : 0),
-              0
-          )
+            (acc, key) => acc + (analyticsData[key].enhanced ? analyticsData[key].volume : 0),
+            0
+        )
         : null
 }
 
@@ -83,9 +83,8 @@ const Modal = ({ onClose, isVisible }) => {
     return (
         <>
             <div
-                className={`bg-accent-dark/50 fixed h-screen left-0 right-0 top-0 bg-opacity-40 flex justify-center items-center ${
-                    !isVisible ? 'hidden' : 'z-[1000000]'
-                }`}
+                className={`bg-accent-dark/50 fixed h-screen left-0 right-0 top-0 bg-opacity-40 flex justify-center items-center ${!isVisible ? 'hidden' : 'z-[1000000]'
+                    }`}
                 onClick={() => onClose()}
             ></div>
             <div
@@ -118,7 +117,6 @@ const Modal = ({ onClose, isVisible }) => {
                                     src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Pricing/PricingCalculator/Tabs/event-anonymous.png"
                                     alt="Anonymous event example"
                                     className=""
-                                    placeholder="blurred"
                                 />
                             </div>
                         </div>
@@ -180,7 +178,6 @@ const Modal = ({ onClose, isVisible }) => {
                                 <CloudinaryImage
                                     src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Pricing/PricingCalculator/Tabs/event-identified.png"
                                     alt="Identified event example"
-                                    placeholder="blurred"
                                 />
                             </div>
                         </div>
@@ -524,8 +521,8 @@ export default function ProductAnalyticsTab({
                             <strong>
                                 {formatUSD(
                                     totalProductAnalyticsPrice +
-                                        enhancedPersonsCost.total +
-                                        addons.reduce((acc, addon) => acc + addon.totalCost, 0)
+                                    enhancedPersonsCost.total +
+                                    addons.reduce((acc, addon) => acc + addon.totalCost, 0)
                                 )}
                             </strong>
                         </div>

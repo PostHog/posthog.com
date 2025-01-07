@@ -1,7 +1,7 @@
 import React from 'react'
 import Link from 'components/Link'
 
-export const Question = ({ question, url }) => {
+export const Question = ({ question, url }: { question: string; url?: string }): JSX.Element => {
     return (
         <>
             {url ? (

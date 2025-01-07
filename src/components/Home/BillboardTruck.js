@@ -24,9 +24,8 @@ export default function BillboardTruck({ leftHandDrive }) {
         <section className="overflow-hidden">
             <div className="text-center pb-12 scale-[.6] xs:scale-[.75] md:scale-[.75] mdlg:scale-[.9] lg:scale-100 origin-left">
                 <div
-                    className={`relative inline-block ${
-                        leftHandDrive ? '-mr-24 xs:-mr-28 sm:mx-auto' : '-ml-24 xs:-ml-28 sm:mx-auto'
-                    }`}
+                    className={`relative inline-block ${leftHandDrive ? '-mr-24 xs:-mr-28 sm:mx-auto' : '-ml-24 xs:-ml-28 sm:mx-auto'
+                        }`}
                 >
                     <div
                         className={`md:hidden w-[809px] max-w-screen ${leftHandDrive ? 'transform -scale-x-100' : ''}`}
@@ -35,20 +34,17 @@ export default function BillboardTruck({ leftHandDrive }) {
                             src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Home/images/billboard-truck-short.png"
                             alt=""
                             quality={100}
-                            placeholder="tracedSVG"
                         />
                     </div>
                     <div
-                        className={`hidden md:block w-[966px] max-w-screen ${
-                            leftHandDrive ? 'transform -scale-x-100' : ''
-                        }`}
+                        className={`hidden md:block w-[966px] max-w-screen ${leftHandDrive ? 'transform -scale-x-100' : ''
+                            }`}
                     >
-                        <CloudinaryImage src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Home/images/billboard-truck.png" alt="" quality={100} placeholder="tracedSVG" />
+                        <CloudinaryImage src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Home/images/billboard-truck.png" alt="" quality={100} />
                     </div>
                     <div
-                        className={`absolute top-[16.25%] w-[341px] md:w-[495px] h-[239px] ${
-                            leftHandDrive ? 'left-[7.5%] md:left-[6.25%]' : 'right-[5.75%] md:right-[5.25%]'
-                        }`}
+                        className={`absolute top-[16.25%] w-[341px] md:w-[495px] h-[239px] ${leftHandDrive ? 'left-[7.5%] md:left-[6.25%]' : 'right-[5.75%] md:right-[5.25%]'
+                            }`}
                     >
                         <div className="relative h-full text-left">
                             <div className={`text-white pt-[1.25rem] pr-4 md:pr-5 pl-4 md:pl-[10.5rem]`}>
@@ -75,7 +71,6 @@ export default function BillboardTruck({ leftHandDrive }) {
                                     alt=""
                                     className="w-[62px] h-[72px] md:w-[164px] md:h-[190px]"
                                     quality={100}
-                                    placeholder="none"
                                 />
                             </div>
                         </div>

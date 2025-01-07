@@ -23,7 +23,6 @@ const CompanyHandbook: React.FC = () => {
             alt="This hog has an answer"
             height={250}
             width={330}
-            placeholder="blurred"
           />
         </div>
       </div>

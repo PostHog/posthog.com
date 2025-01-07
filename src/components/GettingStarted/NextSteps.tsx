@@ -1,6 +1,5 @@
 import CloudinaryImage from 'components/CloudinaryImage'
 import React from 'react'
-import { StaticImage } from 'gatsby-plugin-image'
 import { Link } from 'gatsby'
 import { quickLinks as featureFlagsLinks } from '../../pages/docs/feature-flags'
 import { quickLinks as experimentsLinks } from '../../pages/docs/experiments'
@@ -48,7 +47,6 @@ export const ProductAnalytics = () => {
         <NextStep title="Product Analytics" url="/docs/product-analytics" links={[]}>
             <CloudinaryImage
                 alt=""
-                placeholder="none"
                 quality={100}
                 className="w-full"
                 src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Home/Slider/images/product-analytics-hog.png"
@@ -62,7 +60,6 @@ export const SessionRecording = () => {
         <NextStep title="Session recording" url="/docs/session-replay" links={sessionRecordingLinks}>
             <CloudinaryImage
                 alt=""
-                placeholder="none"
                 quality={100}
                 className="w-full"
                 src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Home/Slider/images/session-recording-hog.png"
@@ -76,7 +73,6 @@ export const FeatureFlags = () => {
         <NextStep title="Feature flags" url="/docs/feature-flags" links={featureFlagsLinks}>
             <CloudinaryImage
                 alt=""
-                placeholder="none"
                 quality={100}
                 className="w-full"
                 src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Home/Slider/images/feature-flags-hog.png"
@@ -90,7 +86,6 @@ export const Experiments = () => {
         <NextStep title="Experiments" url="/docs/experiments" links={experimentsLinks}>
             <CloudinaryImage
                 alt=""
-                placeholder="none"
                 quality={100}
                 className="w-full"
                 src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Home/Slider/images/ab-testing-hog.png"
@@ -112,7 +107,6 @@ export const Apps = () => {
         >
             <CloudinaryImage
                 alt=""
-                placeholder="none"
                 quality={100}
                 className="w-full"
                 src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Home/Slider/images/event-pipelines-hog.png"

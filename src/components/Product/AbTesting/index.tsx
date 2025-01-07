@@ -323,7 +323,6 @@ export const ProductAbTesting = () => {
                         src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Product/AbTesting/images/screenshot-ab-testing.png"
                         alt="Screenshot of managing an A/B test in PostHog"
                         className="w-full max-w-[1361px]"
-                        placeholder="none"
                     />
                 </div>
 
@@ -398,7 +397,6 @@ export const ProductAbTesting = () => {
                     </div>
                     <div className="md:w-96">
                         <CloudinaryImage
-                            placeholder="none"
                             quality={100}
                             src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Product/hogs/ab-testing-hog.png"
                             alt=""

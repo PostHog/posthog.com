@@ -76,7 +76,6 @@ const Roadmap = () => {
                     width={367}
                     height={348}
                     imgClassName=""
-                    placeholder="blurred"
                     alt={`Here's what's cookin', good lookin'`}
                     src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Home/images/experiment-hog.png"
                 />

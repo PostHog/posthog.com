@@ -502,7 +502,6 @@ function DpaGenerator() {
                                                 <CloudinaryImage
                                                     src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/images/dpa/print-settings.png"
                                                     alt="Print settings"
-                                                    placeholder="blurred"
                                                     className="dark:rounded"
                                                     objectFit="contain"
                                                     width={362}
@@ -550,7 +549,6 @@ function DpaGenerator() {
                             <CloudinaryImage
                                 src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/images/dpa/map.png"
                                 alt="Map"
-                                placeholder="blurred"
                                 className={FloatRight}
                             />
                             <p>
@@ -586,7 +584,6 @@ function DpaGenerator() {
                             <CloudinaryImage
                                 src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/images/dpa/sword.png"
                                 alt="Sword"
-                                placeholder="blurred"
                                 className={FloatLeft}
                             />
                             <p>
@@ -621,7 +618,6 @@ function DpaGenerator() {
                             <CloudinaryImage
                                 src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/images/dpa/wizard.png"
                                 alt="Wizard"
-                                placeholder="blurred"
                                 className={FloatRight}
                             />
 
@@ -680,7 +676,6 @@ function DpaGenerator() {
                             <CloudinaryImage
                                 src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/images/dpa/gnomes.png"
                                 alt="Gnomes"
-                                placeholder="blurred"
                                 className={FloatLeft}
                             />
                             <p>
@@ -722,7 +717,6 @@ function DpaGenerator() {
                             <CloudinaryImage
                                 src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/images/dpa/porridge.png"
                                 alt="Porridge"
-                                placeholder="blurred"
                                 className={FloatRight}
                             />
                             <p>
@@ -800,7 +794,6 @@ function DpaGenerator() {
                                 <CloudinaryImage
                                     src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/images/dpa/t-swift.png"
                                     alt="Taylor Swift hog"
-                                    placeholder="blurred"
                                     className="mb-2"
                                 />
                             </div>
@@ -866,16 +859,13 @@ function DpaGenerator() {
                     </div>
 
                     <div
-                        className={`${mode === 'pretty' || mode === 'lawyer' ? 'block' : 'hidden'} ${
-                            mode === 'pretty' && ''
-                        } ${
-                            mode === 'lawyer' && 'font-serif'
-                        } print:[&>p]:text-sm print:[&_li]:text-sm max-w-3xl mx-auto`}
+                        className={`${mode === 'pretty' || mode === 'lawyer' ? 'block' : 'hidden'} ${mode === 'pretty' && ''
+                            } ${mode === 'lawyer' && 'font-serif'
+                            } print:[&>p]:text-sm print:[&_li]:text-sm max-w-3xl mx-auto`}
                     >
                         <div
-                            className={`my-8 print:mt-0 print:relative print:-top-2 print:mb-12 ${
-                                mode === 'lawyer' && 'hidden'
-                            }`}
+                            className={`my-8 print:mt-0 print:relative print:-top-2 print:mb-12 ${mode === 'lawyer' && 'hidden'
+                                }`}
                         >
                             <img width={157} src="/brand/posthog-logo.svg" />
                         </div>
@@ -1723,9 +1713,8 @@ function DpaGenerator() {
                     </div>
 
                     <div
-                        className={`${mode === 'pretty' || mode === 'lawyer' ? 'block' : 'hidden'} ${
-                            mode === 'lawyer' && 'font-serif'
-                        }`}
+                        className={`${mode === 'pretty' || mode === 'lawyer' ? 'block' : 'hidden'} ${mode === 'lawyer' && 'font-serif'
+                            }`}
                     >
                         <div className="grid @xl:grid-cols-[repeat(3,minmax(50px,1fr))] gap-x-8 @xl:gap-y-6 text-sm [&>div:nth-child(5n+6)]:border-t [&>div:nth-child(5n+6)]:border-light [&>div:nth-child(5n+6)]:pt-8 mb-8">
                             {subprocessors.map((subprocessor, index) => (

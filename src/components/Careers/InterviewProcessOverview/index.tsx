@@ -15,7 +15,7 @@ export const InterviewProcessOverview = () => {
           </div>
 
           <div className="md:pr-12 md:-ml-4 inline-block -rotate-1 md:rotate-0">
-            <CloudinaryImage quality={90} placeholder="blurred" src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/images/sales/posthog-ae.png" width={872} height={476} alt="You in the interview process" className="w-full" />
+            <CloudinaryImage quality={90} src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/images/sales/posthog-ae.png" width={872} height={476} alt="You in the interview process" className="w-full" />
             <p className="font-medium pl-4 mb-0 text-sm text-center">POV: We're excited to meet you!</p>
 
           </div>

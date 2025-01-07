@@ -54,7 +54,6 @@ export const Content = ({ quickLinks = false }) => {
                             <CloudinaryImage
                                 alt=""
                                 className="h-full"
-                                placeholder="none"
                                 objectFit="contain"
                                 quality={100}
                                 src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Home/Slider/images/product-analytics-hog.png"
@@ -70,7 +69,6 @@ export const Content = ({ quickLinks = false }) => {
                             <CloudinaryImage
                                 alt=""
                                 className="h-full"
-                                placeholder="none"
                                 objectFit="contain"
                                 quality={100}
                                 src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Home/Slider/images/product-analytics-hog.png"
@@ -86,7 +84,6 @@ export const Content = ({ quickLinks = false }) => {
                             <CloudinaryImage
                                 alt=""
                                 className="h-full"
-                                placeholder="none"
                                 objectFit="contain"
                                 quality={100}
                                 src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Home/Slider/images/product-analytics-hog.png"
@@ -102,7 +99,6 @@ export const Content = ({ quickLinks = false }) => {
                             <CloudinaryImage
                                 alt=""
                                 className="h-full"
-                                placeholder="none"
                                 objectFit="contain"
                                 quality={100}
                                 src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Home/Slider/images/product-analytics-hog.png"
@@ -118,7 +114,6 @@ export const Content = ({ quickLinks = false }) => {
                             <CloudinaryImage
                                 alt=""
                                 className="h-full"
-                                placeholder="none"
                                 objectFit="contain"
                                 quality={100}
                                 src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Home/Slider/images/product-analytics-hog.png"
@@ -134,7 +129,6 @@ export const Content = ({ quickLinks = false }) => {
                             <CloudinaryImage
                                 alt=""
                                 className="h-full"
-                                placeholder="none"
                                 objectFit="contain"
                                 quality={100}
                                 src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Home/Slider/images/product-analytics-hog.png"
@@ -167,7 +161,6 @@ export const Content = ({ quickLinks = false }) => {
                             <CloudinaryImage
                                 alt=""
                                 className="h-full"
-                                placeholder="none"
                                 objectFit="contain"
                                 quality={100}
                                 src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/pages/docs/images/template-product-analytics.png"
@@ -182,7 +175,6 @@ export const Content = ({ quickLinks = false }) => {
                             <CloudinaryImage
                                 alt=""
                                 className="h-full"
-                                placeholder="none"
                                 objectFit="contain"
                                 quality={100}
                                 src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/pages/docs/images/template-website-traffic.png"
@@ -197,7 +189,6 @@ export const Content = ({ quickLinks = false }) => {
                             <CloudinaryImage
                                 alt=""
                                 className="h-full"
-                                placeholder="none"
                                 objectFit="contain"
                                 quality={100}
                                 src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/pages/docs/images/template-realtime-analytics.png"

@@ -3,6 +3,7 @@ import { CallToAction } from 'components/CallToAction'
 import Link from 'components/Link'
 import Logo from 'components/Logo'
 import React, { useState } from 'react'
+
 const companies = {
     Amplitude: {
         comparisonURL: '/blog/posthog-vs-amplitude',
@@ -57,22 +58,24 @@ const companies = {
     },
 }
 
-export default function Comparison({ comparison, columnCount, truncate }) {
+type Company = keyof typeof companies
+type Comparison = { feature: string; companies: { [k in Company]?: boolean } }
+
+export default function Comparison({ comparison, columnCount, truncate = false }: { comparison: Comparison[]; columnCount: number; truncate?: boolean }): JSX.Element {
     const [collapsed, setCollapsed] = useState(truncate)
-    const activeCompanies = Object.keys(companies).filter((company) =>
+    const activeCompanies: Company[] = Object.keys(companies).filter((company) =>
         comparison.some(({ companies }) => Object.keys(companies).includes(company))
-    )
+    ) as Company[]
+
     return (
         <>
             <div className={`max-w-vw pb-2 mb-10 md:mb-20 [justify-content:_safe_center] overflow-auto`}>
                 <div
-                    className={`flex-1 grid md:grid-cols-${columnCount} grid-cols-${
-                        columnCount + 1
-                    } text-sm md:text-base divide-y divide-border dark:divide-border-dark mx-auto min-w-[600px] md:min-w-fit ${
-                        collapsed
+                    className={`flex-1 grid md:grid-cols-${columnCount} grid-cols-${columnCount + 1
+                        } text-sm md:text-base divide-y divide-border dark:divide-border-dark mx-auto min-w-[600px] md:min-w-fit ${collapsed
                             ? 'h-[460px] overflow-hidden relative after:absolute after:w-full after:h-24 after:bottom-0 after:left-0 after:bg-gradient-to-b after:from-transparent dark:after:via-dark/80 dark:after:to-dark after:via-light/80 after:to-light after:z-10'
                             : ' '
-                    }`}
+                        }`}
                 >
                     {/* header row */}
                     <div className="bg-accent dark:bg-accent-dark leading-tight p-2 mt-2 border-t border-border dark:border-dark">
@@ -109,11 +112,10 @@ export default function Comparison({ comparison, columnCount, truncate }) {
                                     return (
                                         <div
                                             key={company}
-                                            className={`p-2 text-center flex justify-center ${
-                                                company.toLowerCase() === 'posthog'
-                                                    ? 'bg-white dark:bg-accent-dark !border-x-2 !border-l-blue !border-r-blue md:col-span-1 col-span-2'
-                                                    : ''
-                                            }`}
+                                            className={`p-2 text-center flex justify-center ${company.toLowerCase() === 'posthog'
+                                                ? 'bg-white dark:bg-accent-dark !border-x-2 !border-l-blue !border-r-blue md:col-span-1 col-span-2'
+                                                : ''
+                                                }`}
                                         >
                                             {typeof featureAvailable === 'string' ? (
                                                 <span

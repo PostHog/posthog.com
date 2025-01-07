@@ -16,7 +16,6 @@ const comparison = [
                 src="https://res.cloudinary.com/dmukukwp6/image/upload/icon_amp_4d0e457978.png"
                 className=""
                 width={32}
-                placeholder="blurred"
                 alt="Amplitude"
             />
         ),
@@ -37,7 +36,6 @@ const comparison = [
                 src="https://res.cloudinary.com/dmukukwp6/image/upload/icon_mp_6404158e7f.png"
                 className=""
                 width={32}
-                placeholder="blurred"
                 alt="Mixpanel"
             />
         ),
@@ -57,7 +55,6 @@ const comparison = [
             <CloudinaryImage
                 src="https://res.cloudinary.com/dmukukwp6/image/upload/icon_heep_7d9bb0f55a.png"
                 width={16}
-                placeholder="blurred"
                 alt="Heap"
             />
         ),
@@ -78,7 +75,6 @@ const comparison = [
                 src="https://res.cloudinary.com/dmukukwp6/image/upload/icon_pnd0_dc3ea0f56f.png"
                 className=""
                 width={32}
-                placeholder="blurred"
                 alt="Pendo"
             />
         ),
@@ -99,7 +95,6 @@ const comparison = [
                 src="https://res.cloudinary.com/dmukukwp6/image/upload/icon_fs_542ca7eb05.png"
                 className=""
                 width={32}
-                placeholder="blurred"
                 alt="FullStory"
             />
         ),
@@ -144,11 +139,10 @@ export const SimilarProducts = () => {
                     {comparison.map((company) => (
                         <div
                             key={company.name}
-                            className={`text-center py-2 px-4 whitespace-nowrap flex flex-col justify-end ${
-                                company.name === 'PostHog'
+                            className={`text-center py-2 px-4 whitespace-nowrap flex flex-col justify-end ${company.name === 'PostHog'
                                     ? 'bg-white dark:bg-green/15 border-x-2 border-t-green border-x-green rounded-t-sm border-t-2'
                                     : ''
-                            }`}
+                                }`}
                         >
                             <div className="max-h-9 text-center mb-2">{company.logo}</div>
                             <strong>{company.name}</strong>
@@ -164,11 +158,10 @@ export const SimilarProducts = () => {
                             {comparison.map((company) => (
                                 <div
                                     key={`${company.name}-${product}`}
-                                    className={`py-2 px-4 text-center ${
-                                        company.name === 'PostHog'
+                                    className={`py-2 px-4 text-center ${company.name === 'PostHog'
                                             ? 'bg-white border-x-2 !border-x-green dark:bg-green/15 last:!border-b-2 last:!border-b-green last:rounded-b-sm last:pb-4 last:px-2'
                                             : ''
-                                    }`}
+                                        }`}
                                 >
                                     {company.products[product] ? (
                                         <IconCheck className="size-6 inline-block text-green" />

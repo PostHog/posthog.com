@@ -179,7 +179,6 @@ export default function Libraries() {
                         <CloudinaryImage
                             src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Home/images/hogflix-mobile.png"
                             alt="Hogflix mobile"
-                            placeholder="blurred"
                         />
                     </div>
                 </div>

@@ -69,7 +69,7 @@ export const AboutHero = () => {
                         <LazyHog
                             data={hogData[0]}
                             placeholder={
-                                <CloudinaryImage src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/images/about-hog-1.svg" alt="Hog" placeholder="blurred" />
+                                <CloudinaryImage src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/images/about-hog-1.svg" alt="Hog" />
                             }
                         />
                     </div>
@@ -77,7 +77,7 @@ export const AboutHero = () => {
                         <LazyHog
                             data={hogData[1]}
                             placeholder={
-                                <CloudinaryImage src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/images/about-hog-2.svg" alt="Hog" placeholder="blurred" />
+                                <CloudinaryImage src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/images/about-hog-2.svg" alt="Hog" />
                             }
                         />
                     </div>
@@ -87,7 +87,7 @@ export const AboutHero = () => {
                         <LazyHog
                             data={hogData[2]}
                             placeholder={
-                                <CloudinaryImage src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/images/about-hog-3.svg" alt="Hog" placeholder="blurred" />
+                                <CloudinaryImage src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/images/about-hog-3.svg" alt="Hog" />
                             }
                         />
                     </div>
@@ -95,7 +95,7 @@ export const AboutHero = () => {
                         <LazyHog
                             data={hogData[3]}
                             placeholder={
-                                <CloudinaryImage src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/images/about-hog-4.svg" alt="Hog" placeholder="blurred" />
+                                <CloudinaryImage src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/images/about-hog-4.svg" alt="Hog" />
                             }
                         />
                     </div>

@@ -74,7 +74,6 @@ export const Intro = ({ image = true }) => (
             <figure className="m-0 p-0">
                 <CloudinaryImage
                     alt=""
-                    placeholder="none"
                     quality={100}
                     className=""
                     src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Home/Slider/images/feature-flags-hog.png"
@@ -105,7 +104,6 @@ export const Content = ({ quickLinks = false }) => {
                         Image={
                             <CloudinaryImage
                                 alt=""
-                                placeholder="none"
                                 objectFit="contain"
                                 className="h-full"
                                 quality={100}
@@ -121,7 +119,6 @@ export const Content = ({ quickLinks = false }) => {
                         Image={
                             <CloudinaryImage
                                 alt=""
-                                placeholder="none"
                                 objectFit="contain"
                                 className="h-full"
                                 quality={100}
@@ -137,7 +134,6 @@ export const Content = ({ quickLinks = false }) => {
                         Image={
                             <CloudinaryImage
                                 alt=""
-                                placeholder="none"
                                 objectFit="contain"
                                 className="h-full"
                                 quality={100}
@@ -153,7 +149,6 @@ export const Content = ({ quickLinks = false }) => {
                         Image={
                             <CloudinaryImage
                                 alt=""
-                                placeholder="none"
                                 objectFit="contain"
                                 className="h-full"
                                 quality={100}
@@ -169,7 +164,6 @@ export const Content = ({ quickLinks = false }) => {
                         Image={
                             <CloudinaryImage
                                 alt=""
-                                placeholder="none"
                                 objectFit="contain"
                                 className="h-full"
                                 quality={100}
@@ -185,7 +179,6 @@ export const Content = ({ quickLinks = false }) => {
                         Image={
                             <CloudinaryImage
                                 alt=""
-                                placeholder="none"
                                 objectFit="contain"
                                 className="h-full"
                                 quality={100}
@@ -218,7 +211,6 @@ export const Content = ({ quickLinks = false }) => {
                         Image={
                             <CloudinaryImage
                                 alt=""
-                                placeholder="none"
                                 objectFit="contain"
                                 className="h-full"
                                 quality={100}
@@ -233,7 +225,6 @@ export const Content = ({ quickLinks = false }) => {
                         Image={
                             <CloudinaryImage
                                 alt=""
-                                placeholder="none"
                                 objectFit="contain"
                                 className="h-full"
                                 quality={100}
@@ -248,7 +239,6 @@ export const Content = ({ quickLinks = false }) => {
                         Image={
                             <CloudinaryImage
                                 alt=""
-                                placeholder="none"
                                 objectFit="contain"
                                 className="h-full"
                                 quality={100}

@@ -46,7 +46,6 @@ const features = [
             <CloudinaryImage
                 src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Product/DataWarehouse/images/stripe.png"
                 width={428}
-                placeholder="none"
             />
         ),
     },
@@ -58,7 +57,6 @@ const features = [
                 src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Product/DataWarehouse/images/hubspot.png"
                 width={428}
                 height={312}
-                placeholder="none"
             />
         ),
     },
@@ -69,7 +67,6 @@ const features = [
             <CloudinaryImage
                 src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Product/DataWarehouse/images/zendesk.png"
                 width={428}
-                placeholder="none"
             />
         ),
     },
@@ -81,7 +78,6 @@ const features = [
                 src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Product/DataWarehouse/images/custom.png"
                 width={428}
                 height={312}
-                placeholder="none"
             />
         ),
     },
@@ -226,7 +222,6 @@ export const ProductDataWarehouse = () => {
                         src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/images/products/screenshot-data-warehouse.png"
                         alt="Screenshot of the PostHog data warehouse"
                         className="w-full max-w-[1440px]"
-                        placeholder="none"
                     />
                 </div>
                 <section id="customers" className="-mt-48 pt-36">
@@ -283,7 +278,6 @@ export const ProductDataWarehouse = () => {
                     <div className="md:w-96 md:text-right mb-8 md:mb-0 -mt-8">
                         <CloudinaryImage
                             alt="Just another hedgehog"
-                            placeholder="blurred"
                             quality={100}
                             className="w-full max-w-[140px]"
                             src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/products/data-warehouse/warehouse-hog.png"
@@ -307,9 +301,8 @@ export const ProductDataWarehouse = () => {
 
             <section
                 id="tutorials"
-                className={`${
-                    fullWidthContent ? 'max-w-full px-8' : 'max-w-7xl mx-auto'
-                } px-5 py-10 md:pt-0 md:-mt-12 pb-0`}
+                className={`${fullWidthContent ? 'max-w-full px-8' : 'max-w-7xl mx-auto'
+                    } px-5 py-10 md:pt-0 md:-mt-12 pb-0`}
             >
                 <div className={`${fullWidthContent ? 'max-w-full px-8' : 'max-w-7xl mx-auto'} px-5 pb-0`}>
                     <h3 className="text-3xl lg:text-4xl text-center mb-2">Featured tutorials</h3>

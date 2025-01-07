@@ -20,7 +20,6 @@ export const Handbook: React.FC = () => {
                                 src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/search-hog-4.png"
                                 alt="This hog has an answer"
                                 width={400}
-                                placeholder="blurred"
                             />
                         </div>
                         <div className="md:flex-1">

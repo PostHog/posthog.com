@@ -30,7 +30,6 @@ const them = [
                     <div className="dark:hidden">
                         <CloudinaryImage
                             quality={100}
-                            placeholder="blurred"
                             loading="eager"
                             src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/images/sales/demo-form-light.png"
                             width={270}
@@ -39,7 +38,6 @@ const them = [
                     <div className="hidden dark:block">
                         <CloudinaryImage
                             quality={100}
-                            placeholder="blurred"
                             loading="eager"
                             src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/images/sales/demo-form-dark.png"
                             width={270}
@@ -59,7 +57,7 @@ const them = [
                 </div>
 
                 <div className="col-span-3 -mt-12">
-                    <CloudinaryImage quality={90} placeholder="blurred" src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/images/sales/sdr.png" width={338} />
+                    <CloudinaryImage quality={90} src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/images/sales/sdr.png" width={338} />
                 </div>
             </>
         ),
@@ -77,7 +75,7 @@ const them = [
                 </div>
 
                 <div className="col-span-4 -mt-4 pb-6 rotate-2">
-                    <CloudinaryImage quality={90} placeholder="blurred" src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/images/sales/sdr-on-zoom.png" width={436} />
+                    <CloudinaryImage quality={90} src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/images/sales/sdr-on-zoom.png" width={436} />
                 </div>
             </>
         ),
@@ -95,7 +93,7 @@ const them = [
                 </div>
 
                 <div className="col-span-3 -mt-6 md:-mt-12 pb-4">
-                    <CloudinaryImage quality={90} placeholder="blurred" src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/images/sales/no-hope.png" width={352} />
+                    <CloudinaryImage quality={90} src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/images/sales/no-hope.png" width={352} />
                 </div>
             </>
         ),
@@ -113,7 +111,7 @@ const them = [
                 </div>
 
                 <div className="col-span-5 text-center -mt-12">
-                    <CloudinaryImage quality={90} placeholder="blurred" src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/images/sales/receipt.png" width={613} />
+                    <CloudinaryImage quality={90} src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/images/sales/receipt.png" width={613} />
                 </div>
             </>
         ),
@@ -132,7 +130,6 @@ const them = [
                 <div className="col-span-4 -mt-12 pb-4 text-center">
                     <CloudinaryImage
                         quality={90}
-                        placeholder="blurred"
                         src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/images/sales/decision-makers.png"
                         width={286}
                     />
@@ -155,7 +152,6 @@ const them = [
                 <div className="col-span-3 -mt-6">
                     <CloudinaryImage
                         quality={90}
-                        placeholder="blurred"
                         src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/images/sales/contract-negotiation.png"
                         width={369}
                     />
@@ -179,7 +175,6 @@ const them = [
                     <div className="dark:hidden">
                         <CloudinaryImage
                             quality={90}
-                            placeholder="blurred"
                             src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/images/sales/gantt-chart-light.png"
                             width={555}
                         />
@@ -187,7 +182,6 @@ const them = [
                     <div className="hidden dark:block">
                         <CloudinaryImage
                             quality={90}
-                            placeholder="blurred"
                             src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/images/sales/gantt-chart-dark.png"
                             width={555}
                         />
@@ -208,7 +202,7 @@ const them = [
                 </div>
 
                 <div className="col-span-3 -mt-4 md:-mt-8 md:pb-8 text-center">
-                    <CloudinaryImage quality={90} placeholder="blurred" src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/images/sales/shocked-hog.png" width={200} />
+                    <CloudinaryImage quality={90} src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/images/sales/shocked-hog.png" width={200} />
                 </div>
             </>
         ),
@@ -254,7 +248,6 @@ const us = [
                 <div className="col-span-3 -mt-6 pb-8 text-center">
                     <CloudinaryImage
                         quality={90}
-                        placeholder="blurred"
                         loading="eager"
                         src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/images/sales/drake-hog-yes.png"
                         width={234}
@@ -281,7 +274,7 @@ const us = [
                 </div>
 
                 <div className="col-span-3 text-center rotate-2 pb-4 pr-2">
-                    <CloudinaryImage quality={90} placeholder="blurred" src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/images/sales/posthog-ae.png" width={436} />
+                    <CloudinaryImage quality={90} src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/images/sales/posthog-ae.png" width={436} />
                 </div>
             </>
         ),
@@ -310,7 +303,6 @@ const us = [
                 <div className="col-span-4">
                     <CloudinaryImage
                         quality={90}
-                        placeholder="blurred"
                         src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/images/sales/posthog-follow-up.png"
                         width={600}
                     />
@@ -338,7 +330,6 @@ const us = [
                 <div className="col-span-4 -mt-8 md:-mt-12 text-center">
                     <CloudinaryImage
                         quality={90}
-                        placeholder="blurred"
                         src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/images/sales/choose-discount.png"
                         width={433}
                     />
@@ -368,7 +359,6 @@ const us = [
                     <div className="-mx-4 md:ml-[-3.25rem] md:-mr-4">
                         <CloudinaryImage
                             quality={90}
-                            placeholder="blurred"
                             src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/images/sales/celebration.png"
                             layout="fullWidth"
                         />
@@ -397,15 +387,15 @@ const AccordionItem = ({
     return (
         <li
             className={`border-t relative ${isOpen
-                    ? 'active border-transparent bg-white dark:bg-accent-dark rounded shadow-lg z-10 overflow-hidden'
-                    : 'inactive border-light dark:border-dark first:border-transparent'
+                ? 'active border-transparent bg-white dark:bg-accent-dark rounded shadow-lg z-10 overflow-hidden'
+                : 'inactive border-light dark:border-dark first:border-transparent'
                 }`}
         >
             <button
                 onClick={onClick}
                 className={`text-left pl-3 pr-4 cursor-pointer w-full flex justify-between items-center transition-all rounded relative ${isOpen
-                        ? 'pt-4 pb-2 z-20'
-                        : 'text-primary/60 hover:text-primary/75 dark:text-primary-dark/60 dark:hover:text-primary-dark/75 py-2 hover:bg-accent/80 dark:hover:bg-accent/5 hover:scale-[1.0025] hover:top-[-.5px] active:scale-[.9999] active:top-[3px]'
+                    ? 'pt-4 pb-2 z-20'
+                    : 'text-primary/60 hover:text-primary/75 dark:text-primary-dark/60 dark:hover:text-primary-dark/75 py-2 hover:bg-accent/80 dark:hover:bg-accent/5 hover:scale-[1.0025] hover:top-[-.5px] active:scale-[.9999] active:top-[3px]'
                     }`}
             >
                 <span className="flex gap-2 items-center">
@@ -613,7 +603,6 @@ function Sales() {
                             <div className="dark:hidden">
                                 <CloudinaryImage
                                     quality={100}
-                                    placeholder="none"
                                     src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/images/sales/phone-hog-light.png"
                                     className="h-48 xs:h-[17rem] md:h-72"
                                     loading="eager"
@@ -624,7 +613,6 @@ function Sales() {
                             <div className="hidden dark:block">
                                 <CloudinaryImage
                                     quality={100}
-                                    placeholder="none"
                                     src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/images/sales/phone-hog-dark.png"
                                     className="h-48 xs:h-[17rem] md:h-72"
                                     loading="eager"

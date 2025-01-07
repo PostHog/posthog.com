@@ -40,7 +40,7 @@ export default function CommunityCTA() {
                         }}
                     />
                 ) : (
-                    <CloudinaryImage width={300} src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/images/about-hog-1.svg" alt="Hog" placeholder="blurred" />
+                    <CloudinaryImage width={300} src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/images/about-hog-1.svg" alt="Hog" />
                 )}
             </div>
             <div className="max-w-[400px]">

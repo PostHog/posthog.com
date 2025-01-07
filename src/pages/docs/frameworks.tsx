@@ -135,7 +135,6 @@ const Integrations: React.FC<IntegrationsProps> = () => {
             <PostLayout title={'Integrations'} hideSurvey hideSidebar>
                 <CloudinaryImage
                     alt=""
-                    placeholder="none"
                     quality={100}
                     className="w-full sm:w-[400px] sm:float-right sm:ml-8 sm:-mt-8 sm:mb-8"
                     src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Home/Slider/images/product-analytics-hog.png"

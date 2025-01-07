@@ -412,7 +412,6 @@ export const ProductSessionReplay = () => {
                         src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/images/products/screenshot-session-replay.png"
                         alt="Screenshot of Session Replay in PostHog"
                         className="w-full max-w-[1360.5px]"
-                        placeholder="none"
                     />
                 </div>
 
@@ -482,7 +481,6 @@ export const ProductSessionReplay = () => {
                     </div>
                     <div className="md:w-96">
                         <CloudinaryImage
-                            placeholder="none"
                             quality={100}
                             src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Product/hogs/session-replay-hog.png"
                             alt=""

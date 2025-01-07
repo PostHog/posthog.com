@@ -532,9 +532,8 @@ const ProductTabs = () => {
                 )}
 
                 <div
-                    className={`text-center font-semibold text-[15px] mt-4 ${
-                        activeTab === undefined && 'border-t'
-                    } border-light dark:border-dark`}
+                    className={`text-center font-semibold text-[15px] mt-4 ${activeTab === undefined && 'border-t'
+                        } border-light dark:border-dark`}
                 >
                     <div className="relative -top-3 bg-tan dark:bg-dark inline-block px-3">
                         <button
@@ -727,7 +726,6 @@ const plans = [
                                             src="https://res.cloudinary.com/dmukukwp6/image/upload/v1688575173/simon_bb4af1b047.png"
                                             quality={100}
                                             alt="Simon Fisher, Customer Success"
-                                            placeholder="none"
                                             objectFit="contain"
                                             className=""
                                         />
@@ -753,7 +751,6 @@ const plans = [
                                             src="https://res.cloudinary.com/dmukukwp6/image/upload/v1685570037/cameron_bc0de38765.png"
                                             quality={100}
                                             alt="Cameron DeLeone, Customer Success"
-                                            placeholder="none"
                                             objectFit="contain"
                                             className=""
                                         />
@@ -779,7 +776,6 @@ const plans = [
                                             src="https://res.cloudinary.com/dmukukwp6/image/upload/v1704468198/Mine_dc7d915835.png"
                                             quality={100}
                                             alt="Mine Kansu, Customer Success Manager"
-                                            placeholder="none"
                                             objectFit="contain"
                                             className=""
                                         />
@@ -934,11 +930,10 @@ const PricingExperiment = ({
             </SectionLayout>
 
             <section
-                className={`${section} ${
-                    isPlanComparisonVisible
+                className={`${section} ${isPlanComparisonVisible
                         ? 'visible max-h-full opacity-1 mb-12 mt-8 md:px-4'
                         : 'overflow-y-hidden invisible max-h-0 opacity-0'
-                } transition duration-500 ease-in-out transform`}
+                    } transition duration-500 ease-in-out transform`}
             >
                 <div className="overflow-x-auto -mx-4 px-4 md:mx-0 md:px-0">
                     <div className="grid grid-cols-16 mb-1 min-w-[1000px]">
@@ -1161,7 +1156,6 @@ const PricingExperiment = ({
                             src="https://res.cloudinary.com/dmukukwp6/image/upload/v1683655764/james_b841adce96.png"
                             quality={100}
                             alt="James Hawkins, CEO, Co-founder"
-                            placeholder="none"
                             objectFit="contain"
                             className="bg-yellow rounded-full"
                         />
@@ -1202,7 +1196,6 @@ const PricingExperiment = ({
                             height={100}
                             alt="Cat Li, Y Combinator"
                             src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/images/cat.jpeg"
-                            placeholder="none"
                             className="rounded-full"
                         />
                     }
@@ -1224,7 +1217,6 @@ const PricingExperiment = ({
                         src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Pricing/images/vacation-hog.png"
                         alt="Vacation Hog"
                         width={252}
-                        placeholder="none"
                     />
                     <div className="text-center bg-[#2D2D2D] p-4 rounded-md relative sm:rotate-6 sm:-mr-8 flex-shrink-0">
                         <p className="text-white m-0 text-[18px] font-bold font-comic">

@@ -62,7 +62,7 @@ export default function CTA() {
                         animate={{ translateX: '-2rem', opacity: 1 }}
                         className="absolute bottom-0 right-0 xl:block hidden -z-10"
                     >
-                        <CloudinaryImage loading="eager" placeholder="none" width={300} src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Home/images/conversion-hog.png" />
+                        <CloudinaryImage loading="eager" width={300} src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Home/images/conversion-hog.png" />
                     </motion.div>
                 )}
                 <h2 className={heading('lg')}>
@@ -136,11 +136,10 @@ export default function CTA() {
                                     <li>
                                         <button
                                             onClick={() => setVersion('us')}
-                                            className={`py-2 px-3 font-bold border ${
-                                                version === 'us'
+                                            className={`py-2 px-3 font-bold border ${version === 'us'
                                                     ? 'border-black dark:border-white'
                                                     : 'border-transparent dark:border-transparent'
-                                            }  hover:border-black dark:hover:border-white`}
+                                                }  hover:border-black dark:hover:border-white`}
                                         >
                                             US (Virginia)
                                         </button>
@@ -148,11 +147,10 @@ export default function CTA() {
                                     <li>
                                         <button
                                             onClick={() => setVersion('eu')}
-                                            className={`py-2 px-3 font-bold border ${
-                                                version === 'eu'
+                                            className={`py-2 px-3 font-bold border ${version === 'eu'
                                                     ? 'border-black dark:border-white'
                                                     : 'border-transparent dark:border-transparent'
-                                            }  hover:border-black dark:hover:border-white`}
+                                                }  hover:border-black dark:hover:border-white`}
                                         >
                                             EU (Frankfurt)
                                         </button>

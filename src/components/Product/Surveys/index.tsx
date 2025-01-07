@@ -58,7 +58,6 @@ const features = [
             <CloudinaryImage
                 src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Product/Surveys/images/question-types.png"
                 width={428}
-                placeholder="none"
             />
         ),
     },
@@ -69,7 +68,6 @@ const features = [
             <CloudinaryImage
                 src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Product/Surveys/images/templates.png"
                 width={428}
-                placeholder="none"
             />
         ),
         background: true,
@@ -82,7 +80,6 @@ const features = [
             <CloudinaryImage
                 src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Product/Surveys/images/targeting.png"
                 width={428}
-                placeholder="none"
             />
         ),
     },
@@ -93,7 +90,6 @@ const features = [
             <CloudinaryImage
                 src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Product/Surveys/images/steps.png"
                 width={428}
-                placeholder="none"
             />
         ),
     },
@@ -104,7 +100,6 @@ const features = [
             <CloudinaryImage
                 src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Product/Surveys/images/link-scheduler.png"
                 width={428}
-                placeholder="none"
             />
         ),
     },
@@ -116,7 +111,6 @@ const features = [
             <CloudinaryImage
                 src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Product/Surveys/images/api.png"
                 width={428}
-                placeholder="none"
             />
         ),
         fade: true,
@@ -405,7 +399,6 @@ export const ProductSurveys = () => {
                         src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/images/products/screenshot-surveys.png"
                         alt="Screenshot of survey results in PostHog"
                         className="w-full max-w-[1360px]"
-                        placeholder="none"
                     />
                 </div>
                 <section id="customers" className="-mt-36 pt-36">
@@ -465,7 +458,6 @@ export const ProductSurveys = () => {
                     </div>
                     <div className="md:w-96">
                         <CloudinaryImage
-                            placeholder="none"
                             quality={100}
                             src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Product/hogs/surveys-hog.png"
                             alt=""
@@ -503,7 +495,6 @@ export const ProductSurveys = () => {
                                     <CloudinaryImage
                                         src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/images/products/competitors-surveys.png"
                                         className="max-w-[159px]"
-                                        placeholder="none"
                                     />
                                 }
                             >

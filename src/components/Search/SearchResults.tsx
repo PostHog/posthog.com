@@ -359,9 +359,8 @@ const Hits: React.FC<HitsProps> = ({ activeOption, close }) => {
                                         onClick={() => close()}
                                     >
                                         <span
-                                            className={`text-[13px] font-normal ${
-                                                hit.type === 'api' ? 'uppercase' : 'capitalize'
-                                            } text-black/60 dark:text-white/60 rounded-full`}
+                                            className={`text-[13px] font-normal ${hit.type === 'api' ? 'uppercase' : 'capitalize'
+                                                } text-black/60 dark:text-white/60 rounded-full`}
                                         >
                                             {hit.type}
                                         </span>
@@ -400,7 +399,6 @@ const Hits: React.FC<HitsProps> = ({ activeOption, close }) => {
 
                             <div className="text-center mb-4">
                                 <CloudinaryImage
-                                    placeholder="none"
                                     loading="eager"
                                     quality={100}
                                     objectFit="contain"
@@ -429,9 +427,8 @@ const Hits: React.FC<HitsProps> = ({ activeOption, close }) => {
                     <div className="p-6 bg-white dark:bg-gray-accent-dark rounded border border-gray-accent-light/40 dark:border-gray-accent-dark">
                         <div className="text-left">
                             <span
-                                className={`block text-sm font-semibold text-black/50 dark:text-white/50 ${
-                                    activeOption.type === 'api' ? 'uppercase' : 'capitalize'
-                                } mb-1`}
+                                className={`block text-sm font-semibold text-black/50 dark:text-white/50 ${activeOption.type === 'api' ? 'uppercase' : 'capitalize'
+                                    } mb-1`}
                             >
                                 {activeOption.type}
                             </span>

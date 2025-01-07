@@ -1,11 +1,8 @@
 import CloudinaryImage from 'components/CloudinaryImage'
-import React, { useEffect, useState } from 'react'
-import { CallToAction } from '../CallToAction'
+import React from 'react'
 import Layout from '../Layout'
-import { StaticImage } from 'gatsby-plugin-image'
-import SearchBox from 'components/Search/SearchBox'
 import { Link } from 'gatsby'
-import { Help, Docs, Slack } from 'components/NotProductIcons'
+import { Help, Docs } from 'components/NotProductIcons'
 
 export default function SlackPage(): JSX.Element {
     return (
@@ -15,7 +12,6 @@ export default function SlackPage(): JSX.Element {
                     <CloudinaryImage
                         src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/images/max.png"
                         alt="The stars in the sky"
-                        placeholder="blurred"
                         className="max-w-[250px] md:max-w-xs"
                     />
                 </figure>

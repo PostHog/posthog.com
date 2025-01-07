@@ -25,7 +25,6 @@ const Events = (): JSX.Element => {
                             src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Pricing/PricingCalculator/Tabs/event-anonymous.png"
                             alt="Anonymous event example"
                             className=""
-                            placeholder="blurred"
                         />
                     </div>
                 </div>
@@ -86,7 +85,6 @@ const Events = (): JSX.Element => {
                         <CloudinaryImage
                             src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Pricing/PricingCalculator/Tabs/event-identified.png"
                             alt="Identified event example"
-                            placeholder="blurred"
                         />
                     </div>
                 </div>

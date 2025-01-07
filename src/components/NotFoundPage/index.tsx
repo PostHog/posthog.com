@@ -31,13 +31,11 @@ export default function NotFoundPage(): JSX.Element {
                     <CloudinaryImage
                         src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/images/galaxy-1.png"
                         alt="The stars in the sky"
-                        placeholder="blurred"
                         className="!absolute top-0 -left-24 max-h-full"
                     />
                     <CloudinaryImage
                         src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/images/galaxy-2.png"
                         alt="More stars in the sky"
-                        placeholder="blurred"
                         className="!absolute top-0 -right-8 max-h-full"
                     />
 

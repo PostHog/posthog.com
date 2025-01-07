@@ -90,7 +90,6 @@ const PricingPhilosophy = (): JSX.Element => {
                             src="https://res.cloudinary.com/dmukukwp6/image/upload/v1683655764/james_b841adce96.png"
                             quality={100}
                             alt="James Hawkins, CEO, Co-founder"
-                            placeholder="none"
                             objectFit="contain"
                             className="bg-yellow rounded-full"
                         />

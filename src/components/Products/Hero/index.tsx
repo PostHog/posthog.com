@@ -1,15 +1,13 @@
 import React from 'react'
-import { StaticImage } from 'gatsby-plugin-image'
 import { CallToAction } from 'components/CallToAction'
-import { IconRewindPlay, IconTrends } from '@posthog/icons'
 
 interface HeroProps {
-    icon: string
+    icon: React.ReactNode
     beta?: boolean
     product: string
     title: string
     description: string
-    image: any
+    color: `[#${string}]` | string
 }
 
 export const Hero = ({ color, icon, beta, product, title, description }: HeroProps): JSX.Element => {

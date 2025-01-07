@@ -89,7 +89,6 @@ export default function Enterprise() {
                                 height={140}
                                 width={140}
                                 alt="SOC 2 Type II certified"
-                                placeholder="blurred"
                             />
                             <CloudinaryImage
                                 src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/images/enterprise/hipaa.webp"
@@ -97,21 +96,18 @@ export default function Enterprise() {
                                 width={225}
                                 alt="HIPAA compliant"
                                 className="relative md:top-2"
-                                placeholder="blurred"
                             />
                             <CloudinaryImage
                                 src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/images/enterprise/gdpr-ready.png"
                                 width={153}
                                 height={66.5}
                                 alt="GDPR ready"
-                                placeholder="blurred"
                             />
                             <CloudinaryImage
                                 src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/images/enterprise/dpf.png"
                                 height={122}
                                 width={266}
                                 alt="EU-U.S. Data Privacy Framework"
-                                placeholder="blurred"
                             />
                         </div>
                     </div>
@@ -120,7 +116,6 @@ export default function Enterprise() {
                         <CloudinaryImage
                             src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/images/enterprise/flair-hogs.png"
                             alt="We need to talk about your flair"
-                            placeholder="blurred"
                         />
                     </aside>
                 </section>

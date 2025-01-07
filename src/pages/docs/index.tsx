@@ -103,7 +103,6 @@ export const DocsIndex = () => {
                                 src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/adventure-hog.png"
                                 alt="This hog knows where he's headed"
                                 width={342}
-                                placeholder="blurred"
                                 className="w-full sm:w-[345px]"
                             />
                         </figure>

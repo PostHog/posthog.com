@@ -164,9 +164,8 @@ const Category = ({ onClick, value, active }) => {
         <>
             <button
                 onClick={() => onClick(value)}
-                className={`group text-left text-primary hover:text-primary dark:text-primary-dark hover:dark:text-primary-dark flex justify-between items-center relative text-[15px] md:px-0 md:pl-3 py-0.5 rounded cursor-pointer px-2 md:border-none border border-border dark:border-dark w-auto ${
-                    active ? 'border-inherit dark:border-inherit' : ''
-                }`}
+                className={`group text-left text-primary hover:text-primary dark:text-primary-dark hover:dark:text-primary-dark flex justify-between items-center relative text-[15px] md:px-0 md:pl-3 py-0.5 rounded cursor-pointer px-2 md:border-none border border-border dark:border-dark w-auto ${active ? 'border-inherit dark:border-inherit' : ''
+                    }`}
             >
                 <AnimatePresence>
                     {active && (
@@ -561,7 +560,6 @@ function PipelinesPage({ location }) {
                         src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/images/products/screenshot-cdp.png"
                         alt="Screenshot of PostHog's CDP"
                         className="w-full max-w-[1280px]"
-                        placeholder="none"
                     />
                 </div>
             </div>
@@ -658,17 +656,16 @@ function PipelinesPage({ location }) {
                                             <Container
                                                 {...(destination.mdx
                                                     ? {
-                                                          onClick: () => {
-                                                              setSelectedDestination(destination)
-                                                              setModalOpen(true)
-                                                          },
-                                                      }
+                                                        onClick: () => {
+                                                            setSelectedDestination(destination)
+                                                            setModalOpen(true)
+                                                        },
+                                                    }
                                                     : {})}
-                                                className={`flex items-start text-left size-full border border-light dark:border-dark rounded-md bg-white dark:bg-accent-dark p-4 relative border-b-3 ${
-                                                    destination.mdx
+                                                className={`flex items-start text-left size-full border border-light dark:border-dark rounded-md bg-white dark:bg-accent-dark p-4 relative border-b-3 ${destination.mdx
                                                         ? 'click hover:top-[-1px] active:top-[1px] transition-all duration-75'
                                                         : ''
-                                                }`}
+                                                    }`}
                                             >
                                                 <div>
                                                     <div className="flex space-x-3 items-center">
@@ -757,9 +754,8 @@ function PipelinesPage({ location }) {
                 </PairsWith>
             </div>
             <div
-                className={`${
-                    fullWidthContent ? 'max-w-full px-8' : 'max-w-7xl mx-auto'
-                } relative px-5 py-10 md:pt-20 pb-0`}
+                className={`${fullWidthContent ? 'max-w-full px-8' : 'max-w-7xl mx-auto'
+                    } relative px-5 py-10 md:pt-20 pb-0`}
             >
                 <section className="mb-20">
                     <CTA />

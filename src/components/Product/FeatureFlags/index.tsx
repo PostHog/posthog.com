@@ -425,7 +425,6 @@ export const ProductFeatureFlags = () => {
                         src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Product/FeatureFlags/images/screenshot-feature-flags.png"
                         alt="Screenshot of a feature flag in PostHog"
                         className="w-full max-w-[1361px]"
-                        placeholder="none"
                     />
                 </div>
 
@@ -500,7 +499,6 @@ export const ProductFeatureFlags = () => {
 
                     <div className="md:w-96">
                         <CloudinaryImage
-                            placeholder="none"
                             quality={100}
                             src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Product/hogs/feature-flags-hog.png"
                             alt=""

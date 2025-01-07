@@ -239,7 +239,6 @@ export default function Apply({ id, info }) {
                             <CloudinaryImage
                                 className=""
                                 objectFit="contain"
-                                placeholder="blurred"
                                 width={296}
                                 src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Job/images/newsletter-signup.png"
                             />
@@ -284,9 +283,8 @@ export default function Apply({ id, info }) {
                                 <p className="font-semibold font-code m-0">{code}</p>
                                 <button
                                     disabled={copied}
-                                    className={`${
-                                        copied ? '' : 'active:top-[0.5px] active:scale-[.90]'
-                                    } relative outline-none`}
+                                    className={`${copied ? '' : 'active:top-[0.5px] active:scale-[.90]'
+                                        } relative outline-none`}
                                     onClick={handleCopy}
                                 >
                                     <AnimatePresence>
@@ -372,11 +370,10 @@ export default function Apply({ id, info }) {
                                 render={() => (
                                     <TrackedCTA
                                         className="mt-auto"
-                                        to={`https://${
-                                            posthog?.isFeatureEnabled && posthog?.isFeatureEnabled('direct-to-eu-cloud')
+                                        to={`https://${posthog?.isFeatureEnabled && posthog?.isFeatureEnabled('direct-to-eu-cloud')
                                                 ? 'eu'
                                                 : 'us'
-                                        }.posthog.com/signup`}
+                                            }.posthog.com/signup`}
                                         event={{ name: `clicked Continue`, type: 'cloud' }}
                                     >
                                         Get started - free

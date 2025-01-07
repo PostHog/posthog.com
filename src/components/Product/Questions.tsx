@@ -2,7 +2,11 @@ import QuestionsTable from 'components/Questions/QuestionsTable'
 import { useQuestions } from 'hooks/useQuestions'
 import React from 'react'
 
-export default function Questions({ topicIds = [] }) {
+type QuestionsProps = {
+    topicIds?: number[]
+}
+
+export default function Questions({ topicIds = [] }: QuestionsProps): JSX.Element {
     const { questions, isLoading } = useQuestions({
         limit: 10,
         sortBy: 'activity',
@@ -43,9 +47,9 @@ export default function Questions({ topicIds = [] }) {
             ],
         },
     })
+
     return (
         <QuestionsTable
-            hasMore={false}
             className="sm:grid-cols-4"
             questions={questions}
             isLoading={isLoading}

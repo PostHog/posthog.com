@@ -184,14 +184,13 @@ export const button = (
     ${className}
 `
 
-export type CTAPropsType = {
+export type CTAPropsType = React.PropsWithChildren<{
     type?: keyof typeof buttonTypes
     width?: string
     size?: keyof typeof sizes
     href?: string
     to?: string
     onClick?: () => void
-    children?: JSX.Element | string
     className?: string
     childClassName?: string
     external?: boolean
@@ -200,7 +199,7 @@ export type CTAPropsType = {
     event?: any
     color?: boolean
     disabled?: boolean
-}
+}>
 
 export interface TrackedCTAPropsType extends CTAPropsType {
     event: {
