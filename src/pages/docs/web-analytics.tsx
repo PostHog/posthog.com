@@ -37,7 +37,6 @@ export const Intro = ({ image = true }) => {
                 <figure className="m-0 mt-auto p-0">
                     <CloudinaryImage
                         alt=""
-                        placeholder="none"
                         quality={100}
                         className=""
                         src="https://res.cloudinary.com/dmukukwp6/image/upload/webhog2_7b3ca93610.png"
@@ -69,7 +68,6 @@ export const Content = ({ quickLinks = false }) => {
                         Image={
                             <CloudinaryImage
                                 alt=""
-                                placeholder="none"
                                 objectFit="contain"
                                 className="h-full"
                                 quality={100}
@@ -85,7 +83,6 @@ export const Content = ({ quickLinks = false }) => {
                         Image={
                             <CloudinaryImage
                                 alt=""
-                                placeholder="none"
                                 objectFit="contain"
                                 className="h-full"
                                 quality={100}
@@ -101,7 +98,6 @@ export const Content = ({ quickLinks = false }) => {
                         Image={
                             <CloudinaryImage
                                 alt=""
-                                placeholder="none"
                                 objectFit="contain"
                                 className="h-full"
                                 quality={100}
