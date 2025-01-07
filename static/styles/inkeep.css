@@ -10,7 +10,14 @@ strong,
 
 .ikp-ai-chat__message-box {
     background: #E5E7E0;
+    border-radius: .25rem;
     box-shadow: none;
+    padding: 0;
+}
+
+.ikp-ai-chat__message-input {
+    font-size: 15px;
+    padding-top: .58rem;
 }
 
 .community-suggestion {

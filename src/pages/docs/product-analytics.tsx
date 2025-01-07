@@ -14,6 +14,7 @@ import QuickLinks from 'components/QuickLinks'
 import { useChat } from 'hooks/useChat'
 import { useStaticQuery } from 'gatsby'
 import { graphql } from 'gatsby'
+import { IconSidebarOpen } from '@posthog/icons'
 
 type ProductAnalyticsProps = {
     data: {
@@ -25,12 +26,28 @@ type ProductAnalyticsProps = {
     }
 }
 
-export const Intro = () => (
-    <header className="pb-8">
-        <h1 className="text-4xl mt-0 mb-2">Product analytics</h1>
-        <h3 className="text-lg font-semibold text-primary/60 dark:text-primary-dark/75 leading-tight">
-            Learn how to use product analytics to understand your users.
-        </h3>
+export const Intro = ({image = true}) => (
+    <header className="bg-accent dark:bg-accent-dark border border-light dark:border-dark rounded flex flex-col items-center md:flex-row md:gap-4 pt-2 mb-8">
+        <div className="p-4 md:p-8">
+            <h1 className="text-4xl mt-0 mb-2">Product analytics</h1>
+            <h3 className="text-lg font-semibold text-primary/60 dark:text-primary-dark/75 leading-tight">
+                Learn how to use product analytics to understand your users.
+            </h3>
+            <CallToAction to="/docs/product-analytics/installation">Installation guide</CallToAction>
+        </div>
+
+        {image && (
+                <figure className="m-0 mt-auto p-0">
+                    <CloudinaryImage
+                        alt=""
+                        placeholder="none"
+                        quality={100}
+                        className="max-w-96 -mt-12"
+                        src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Home/Slider/images/product-analytics-hog.png"
+                    />
+                </figure>
+            )}
+            
     </header>
 )
 
@@ -56,8 +73,9 @@ export const Content = ({ quickLinks = false }) => {
                 <p className="text-[15px] mb-3 pr-24 md:pr-0">
                 It's easier than reading through <strong>{totalDocsCount} docs articles</strong>.
                 </p>
-                <CallToAction type="primary" size="md" className="" onClick={() => setChatOpen(true)}>
+                <CallToAction type="secondary" size="md" className="[&>span]:flex [&>span]:items-center [&>span]:gap-1" onClick={() => setChatOpen(true)}>
                     Chat with Max AI
+                    <IconSidebarOpen className="size-6 inline-block" />
                 </CallToAction>
 
                 <CloudinaryImage
@@ -67,6 +85,8 @@ export const Content = ({ quickLinks = false }) => {
                     className="absolute bottom-1 right-0 md:right-4 w-32 md:w-auto"
                 />
             </div>
+
+
 
             {(quickLinks || compact) && (
                 <QuickLinks
