@@ -67,7 +67,7 @@ const Teams: React.FC = () => {
                                 </h1>
                                 <p>
                                    
-                                    So you got your first bill from PostHog – <em>and it came out of nowhere/!</em>  <strong>(Rest assured, we’ll get this worked out.)
+                                    So you got your first bill from PostHog – <em>and it came out of nowhere?!</em>  <strong>(Rest assured, we’ll get this worked out.)
                                     </strong>
                                 </p>
                                 <CloudinaryImage src="https://res.cloudinary.com/dmukukwp6/image/upload/money_f6cb7907a3.png" width={600} className={`w-full md:w-96 md:float-right md:ml-4 ${fullWidthContent ? '' : 'md:-mr-12'}`} />
