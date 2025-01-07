@@ -2,7 +2,7 @@
 title: Statistical methodology for count trend metrics
 ---
 
-Trends experiments for count-based data use Bayesian statistics with a Gamma-Poisson model to evaluate the **win probabilities** and **credible intervals** for an experiment. [Read the statistics primer for an overview](/docs/experiments/statistics-primer) if you haven't already.
+Trends metrics for count-based data use Bayesian statistics with a Gamma-Poisson model to evaluate the **win probabilities** and **credible intervals**. [Read the statistics primer for an overview](/docs/experiments/statistics-primer) if you haven't already.
 
 ## What is a Gamma-Poisson model?
 
@@ -25,14 +25,14 @@ One more thing worth noting: Bayesian inference starts with an initial guess tha
 
 ## Win probabilities
 
-The **win probability** tells you how likely it is that a given variant has the highest rate compared to all other variants in the experiment. It helps you determine whether the experiment shows a **statistically significant** real effect vs. simply random chance.
+The **win probability** tells you how likely it is that a given variant has the highest rate compared to all other variants. It helps you determine whether the metric shows a **statistically significant** real effect vs. simply random chance.
 
 Let's say you're testing a new menu design and have these results:
 
 - Control (old menu): 250 slices ordered by 100 customers (rate of 2.5 slices per customer)
 - Test (new menu): 300 slices ordered by 100 customers (rate of 3.0 slices per customer)
 
-To calculate the win probabilities for the experiment, our methodology:
+To calculate the win probabilities, our methodology:
 
 1. Models each variant's rate using a Gamma distribution:
 	- Control: Gamma(250 + ALPHA_PRIOR, 100 + BETA_PRIOR)
@@ -57,7 +57,7 @@ For example, if you have these results:
 - Control (old menu): 250 slices ordered by 100 customers (rate of 2.5 slices per customer)
 - Test (new menu): 300 slices ordered by 100 customers (rate of 3.0 slices per customer)
 
-To calculate the credible intervals for the experiment, our methodology will:
+To calculate the credible intervals, our methodology will:
 
 1. Create a Gamma distribution for each variant:
 	- Control: Gamma(250 + ALPHA_PRIOR, 100 + BETA_PRIOR)

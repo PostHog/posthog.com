@@ -1,8 +1,8 @@
 ---
-title: Statistical methodology for funnel experiments
+title: Statistical methodology for funnel metrics
 ---
 
-Funnel experiments use Bayesian statistics with a Beta model to evaluate the **win probabilities** and **credible intervals** for an experiment. [Read the statistics primer for an overview](/docs/experiments/statistics-primer) if you haven't already.
+Funnel metrics use Bayesian statistics with a Beta model to evaluate the **win probabilities** and **credible intervals**. [Read the statistics primer for an overview](/docs/experiments/statistics-primer) if you haven't already.
 
 ## What is a Beta model?
 
@@ -18,7 +18,7 @@ For example, if:
 - Only 2 out of 4 customers (50%) say yes, the Beta distribution will be wide, indicating high uncertainty.
 - 150 out of 300 customers (50%) say yes, the Beta distribution will be narrow, showing we're more confident about that 50% rate.
 
-So when we say we're using a Beta model for funnel experiments, we're:
+So when we say we're using a Beta model for funnel metrics, we're:
 1. Using the Beta distribution to model conversion rates between 0% and 100%.
 2. Getting more confident in our estimates as we collect more data.
 
@@ -26,14 +26,14 @@ One more thing worth noting: Bayesian inference starts with an initial guess tha
 
 ## Win probabilities
 
-The **win probability** tells you how likely it is that a given variant has the highest conversion rate compared to all other variants in the experiment. It helps you determine whether the experiment shows a **statistically significant** real effect vs. simply random chance.
+The **win probability** tells you how likely it is that a given variant has the highest conversion rate compared to all other variants. It helps you determine whether the metric shows a **statistically significant** real effect vs. simply random chance.
 
 Let's say you're testing a new way of presenting pineapple on the website and have these results:
 
 - Control (current design): 100 pineapple orders from 1000 customers (10% acceptance)
 - Test (suggesting pineapple with a photo): 150 pineapple orders from 1000 customers (15% acceptance)
 
-To calculate the win probabilities for the experiment, our methodology will:
+To calculate the win probabilities, our methodology will:
 
 1. Model each variant's conversion rate using a Beta distribution:
 	- Control: Beta(100 + ALPHA_PRIOR, 900 + BETA_PRIOR)
@@ -58,7 +58,7 @@ For example, if you have these results:
 - Control (current design): 100 pineapple orders from 1000 customers (10% acceptance)
 - Test (suggesting pineapple with a photo): 150 pineapple orders from 1000 customers (15% acceptance)
 
-To calculate the credible intervals for the experiment, our methodology will:
+To calculate the credible intervals, our methodology will:
 
 1. Create a Beta distribution for each variant:
 	- Control: Beta(100 + ALPHA_PRIOR, 900 + BETA_PRIOR)

@@ -1,8 +1,8 @@
 ---
-title: Statistical methodology for property value trend experiments
+title: Statistical methodology for property value trend metrics
 ---
 
-Trends experiments for property values use Bayesian statistics with a log-normal model and Normal-Inverse-Gamma prior to evaluate the **win probabilities** and **credible intervals** for an experiment. [Read the statistics primer for an overview](/docs/experiments/statistics-primer) if you haven't already.
+Trends metrics for property values use Bayesian statistics with a log-normal model and Normal-Inverse-Gamma prior to evaluate the **win probabilities** and **credible intervals**. [Read the statistics primer for an overview](/docs/experiments/statistics-primer) if you haven't already.
 
 ## What is a log-normal model with Normal-Inverse-Gamma prior?
 
@@ -36,14 +36,14 @@ One more thing worth noting: Bayesian inference starts with an initial guess tha
 
 ## Win probabilities
 
-The **win probability** tells you how likely it is that a given variant has the highest value compared to all other variants in the experiment. It helps you determine whether the experiment shows a **statistically significant** real effect vs. simply random chance.
+The **win probability** tells you how likely it is that a given variant has the highest value compared to all other variants. It helps you determine whether the metric shows a **statistically significant** real effect vs. simply random chance.
 
 Let's say you're testing a new pricing page and have these results:
 
 - Control: $50 average revenue per user (500 users)
 - Test: $60 average revenue per user (500 users)
 
-To calculate the win probabilities for the experiment, our methodology:
+To calculate the win probabilities, our methodology:
 
 1. Models each variant's value using a log-normal distribution (which works well for metrics like revenue that are always positive and often right-skewed):
    - We transform the data to log-space where it follows a normal distribution.
@@ -68,7 +68,7 @@ For example, if you have these results:
 - Control: $50 average revenue per user (500 users)
 - Test: $60 average revenue per user (500 users)
 
-To calculate the credible intervals for the experiment, our methodology will:
+To calculate the credible intervals, our methodology will:
 
 1. Transform the data to log-space and model each variant using a t-distribution:
    - We use log transformation because metrics like revenue are often right-skewed
