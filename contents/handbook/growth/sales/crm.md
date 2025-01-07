@@ -121,6 +121,9 @@ Unqualified: A lead that does not meet the criteria to become an opportunity.
 - Keep all lead information up-to-date and accurate in Salesforce.
 - Periodically review lead statuses and update them as needed.
 
+### Which Leads Should Go to RevOps?
+Some incoming leads are better suited for RevOps, for example questions related to refunds, invoices, startup plan credits or eligibility. To ensure these leads are routed correctly, please create a zendesk ticket by leaving the :ticket: emoji in the relevant thread in the #website-contact-sales Slack channel. This will automatically create a ticket for RevOps to review and address.
+
 ## Opportunities
 
 Opportunities track potential deals in Salesforce. Managing opportunities effectively is important for tracking progress, forecasting revenue, and ensuring accurate reporting. In our sales process, for each lead conversion we create a Contact, an Account, and an Opportunity. Correctly identifying the appropriate opportunity record type is important to optimize our processes.
