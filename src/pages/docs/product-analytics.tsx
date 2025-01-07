@@ -52,9 +52,9 @@ export const Content = ({ quickLinks = false }) => {
             <Intro />
 
             <div className="bg-accent dark:bg-accent-dark pt-4 px-5 pb-6 border border-light dark:border-dark rounded relative mb-12">
-                <h3 className="mb-1 text-xl">Ask Max AI</h3>
+                <h3 className="mb-1 text-xl">Questions? Ask Max AI.</h3>
                 <p className="text-[15px] mb-3 pr-24 md:pr-0">
-                The PostHog docs are <strong>{totalDocsCount} pages</strong> (and counting). Why not ask Max instead?
+                It's easier than reading through <strong>{totalDocsCount} docs articles</strong>.
                 </p>
                 <CallToAction type="primary" size="md" className="" onClick={() => setChatOpen(true)}>
                     Chat with Max AI
