@@ -12,6 +12,8 @@ import { docsMenu } from '../../navs'
 import { useLayoutData } from 'components/Layout/hooks'
 import QuickLinks from 'components/QuickLinks'
 import { useChat } from 'hooks/useChat'
+import { useStaticQuery } from 'gatsby'
+import { graphql } from 'gatsby'
 
 type ProductAnalyticsProps = {
     data: {
@@ -35,6 +37,16 @@ export const Intro = () => (
 export const Content = ({ quickLinks = false }) => {
     const { compact } = useLayoutData()
     const { setChatOpen } = useChat()
+    const {
+        allDocsPages: { totalDocsCount },
+    } = useStaticQuery(graphql`
+        query {
+            allDocsPages: allMdx(filter: { slug: { regex: "^/docs/" } }) {
+                totalDocsCount: totalCount
+            }
+        }
+    `)
+
     return (
         <>
             <Intro />
@@ -42,12 +54,13 @@ export const Content = ({ quickLinks = false }) => {
             <div className="bg-accent dark:bg-accent-dark pt-4 px-5 pb-6 border border-light dark:border-dark rounded relative mb-12">
                 <h3 className="mb-1 text-xl">Chat with MaxAI</h3>
                 <p className="text-[15px] mb-3 pr-24 md:pr-0">
-                Get your question answered directly instead of aimlessly clicking through docs pages.
+                    Get your question answered directly instead of aimlessly clicking through{' '}
+                    <strong>{totalDocsCount}</strong> docs pages.
                 </p>
                 <CallToAction type="primary" size="md" className="" onClick={() => setChatOpen(true)}>
                     Chat with Max AI
                 </CallToAction>
-                
+
                 <CloudinaryImage
                     src="https://res.cloudinary.com/dmukukwp6/image/upload/wizard_hog_bdbdabe5a2.png"
                     width={205}
