@@ -38,16 +38,16 @@ Et voilà! The additional data increased the win probability and narrowed the cr
 
 At this point, you could either declare the test variant as the winner (78.5% probability), or continue collecting data to reach the 90% statistical significance threshold. Bayesian statistics let you check your results whenever you'd like without worrying about increasing the chance of false positives from checking too frequently.
 
-## Supported methodologies
+## Supported metric types
 
-Different types of experiments use different statistical models because their data types have distinct mathematical properties. 
+Experiments support a few different types of metrics, and each metric type uses a model appropriate to the shape of its data.
 
-For example, funnel conversions are always between 0% and 100%, pageview counts can be any positive number (0, 50, 280), and property values can vary widely and tend to be right-skewed. Each model is specifically designed to handle these unique characteristics. 
+For example, funnel conversions are always between 0% and 100%, pageview counts can be any positive number (0, 50, 280), and property values can vary widely and tend to be right-skewed.
 
-The following explain how Bayesian statistics is applied to each type of experiment:
+The following explain how Bayesian statistics is applied to each type of metric:
 
-- [Beta model for funnel experiments](/docs/experiments/funnels-statistics) to analyze conversion rates through multi-step funnels.
-- [Gamma-Poisson model for trend experiments with count-based data](/docs/experiments/trends-count-statistics) like pageviews or interaction events.
-- [Log-normal model with a Normal-Inverse-Gamma prior for trend experiments with property values](/docs/experiments/trends-property-value-statistics) like revenue.
+- [Beta model for funnel metrics](/docs/experiments/funnels-statistics) to analyze conversion rates through multi-step funnels.
+- [Gamma-Poisson model for trends metrics with count-based data](/docs/experiments/trends-count-statistics) like pageviews or interaction events.
+- [Log-normal model with a Normal-Inverse-Gamma prior for trends metrics with property values](/docs/experiments/trends-property-value-statistics) like revenue.
 
 If your experiment was created prior to January 2025, it is [evaluated using the legacy methodology](/docs/experiments/legacy-methodology).
