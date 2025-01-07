@@ -2033,6 +2033,10 @@ export const docsMenu = {
                             name: 'Data deletion',
                             url: '/docs/privacy/data-deletion',
                         },
+                        {
+                            name: 'Ad blockers',
+                            url: '/docs/privacy/ad-blockers',
+                        },
                     ],
                 },
                 {
