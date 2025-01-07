@@ -808,6 +808,10 @@ export const handbookSidebar = [
                         url: '/handbook/engineering/posthog-com/roadmap',
                     },
                     {
+                        name: 'Changelog entries',
+                        url: '/handbook/engineering/posthog-com/changelog',
+                    },
+                    {
                         name: 'Editing API docs',
                         url: '/handbook/engineering/posthog-com/api-docs',
                     },

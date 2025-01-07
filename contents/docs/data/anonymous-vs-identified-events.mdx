@@ -105,6 +105,24 @@ import HowToCaptureIdentifiedEventsFlutter from '../product-analytics/_snippets/
     </Tab.Panels>
 </Tab.Group>
 
+## Mobile SDK version considerations
+
+When using PostHog's mobile SDKs, any changes made to `personProfiles` configuration will only apply to users who have updated their app to the latest version. This is because mobile SDKs are bundled with your app and cannot be updated dynamically.
+
+**Impact on existing users:**
+
+Users running older versions of your app will continue using the `personProfiles` configuration that was bundled with their installed version, even after you release updates with new configurations.
+
+**Managing version differences:**
+
+To ensure consistent behavior across your user base, you can:
+
+1. Use feature flags (with a version payload) to detect users running outdated app versions
+2. Implement an update flow to guide users to install the latest version
+3. Consider making app updates mandatory for critical changes
+
+This will help maintain consistency in how person profiles are handled across your entire user base.
+
 ## Frequently asked questions
 
 ### General questions

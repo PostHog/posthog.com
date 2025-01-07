@@ -316,6 +316,12 @@ To check flag status for a different group, first switch the active group by cal
 
 [Surveys](/docs/surveys) launched with [popover presentation](/docs/surveys/creating-surveys#presentation) are automatically shown to users matching the [display conditions](/docs/surveys/creating-surveys#display-conditions) you set up.
 
+You can also [render *unstyled* surveys programmatically](/docs/surveys/implementing-custom-surveys) with the `renderSurvey` method.
+
+```js-web
+posthog.renderSurvey('survey_id', '#survey-container')
+```
+
 To disable loading surveys in a specific client, you can set the `disable_surveys` [config option](#config).
 
 Surveys using the **API** presentation enable you to implement your own survey UI and use PostHog to handle display logic, capturing results, and analytics.
