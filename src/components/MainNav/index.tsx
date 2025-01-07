@@ -529,7 +529,7 @@ export const Main = () => {
                         <HoverTooltip
                             content={() => (
                                 <div className="text-xs">
-                                    Chat with <strong>Max AI</strong>
+                                    Chat with <strong>Max AI</strong> <kbd className={`${keyboardShortcut} py-0 ml-0.5`}>?</kbd>
                                 </div>
                             )}
                         >
