@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
 import InkeepEmbeddedChat from './Inkeep'
 import { useChat } from 'hooks/useChat'
-import { IconX } from '@posthog/icons'
+import { IconChevronDown, IconX } from '@posthog/icons'
 
 export default function Chat(): JSX.Element | null {
     const { chatOpen, setChatOpen, chatting } = useChat()
@@ -49,31 +49,33 @@ export default function Chat(): JSX.Element | null {
                         onClick={() => {
                             setChatOpen(!chatOpen)
                         }}
-                        animate={{ top: showDisclaimer ? 34 : 9, transition: { type: 'tween' } }}
-                        className={`absolute left-0 -translate-x-full z-10 rounded-tl-full rounded-bl-full border-l border-t border-b p-2 border-border dark:border-dark group transition-colors bg-white dark:bg-[#1c1c1c] pr-0`}
+                        animate={{ top: showDisclaimer ? 35 : 35, transition: { type: 'tween' } }}
+                        className={`absolute left-0 -translate-x-full z-10 rounded-tl rounded-bl py-1 border-l border-t border-b border-border dark:border-dark group transition-colors bg-white dark:bg-[#1c1c1c] pr-0.5`}
                     >
-                        <IconX className="size-5 opacity-60 group-hover:opacity-100 transition-opacity" />
+                        <IconChevronDown className="size-8 opacity-60 group-hover:opacity-100 transition-opacity -rotate-90 relative left-1" />
                     </motion.button>
                     <div className="flex flex-col h-full">
                         <motion.div
                             animate={{
-                                height: showDisclaimer ? 35 : 0,
+                                height: showDisclaimer ? 55 : 0,
                                 transition: { type: 'tween' },
                             }}
-                            className="flex items-center justify-between bg-light dark:bg-dark  border-b border-border dark:border-dark overflow-hidden flex-shrink-0"
+                            className="dark:bg-[#1c1c1c]"
                         >
-                            <p className="m-0 text-sm opacity-70 pl-4">
-                                Use{' '}
-                                <kbd
-                                    className={`box-content p-[5px] border border-b-2 border-border dark:border-dark rounded-[3px] inline-flex text-black/35 dark:text-white/40 text-code text-xs py-0`}
-                                >
-                                    /
-                                </kbd>{' '}
-                                to search specific sections of PostHog.com
-                            </p>
-                            <button className="pr-4" onClick={() => setShowDisclaimer(false)}>
-                                <IconX className="size-4 opacity-60 hover:opacity-100 transition-opacity" />
-                            </button>
+                            <div className="m-2 p-2 flex items-center justify-between bg-yellow/20 dark:bg-dark border border-light dark:border-dark rounded overflow-hidden flex-shrink-0">
+                                <p className="m-0 text-sm opacity-70">
+                                    Use{' '}
+                                    <kbd
+                                        className={`box-content p-[5px] border border-b-2 border-border dark:border-dark rounded-[3px] inline-flex text-black/35 dark:text-white/40 text-code text-xs py-0 bg-white dark:bg-accent-dark`}
+                                    >
+                                        /
+                                    </kbd>{' '}
+                                    to search PostHog.com
+                                </p>
+                                <button className="" onClick={() => setShowDisclaimer(false)}>
+                                    <IconX className="size-4 opacity-60 hover:opacity-100 transition-opacity" />
+                                </button>
+                            </div>
                         </motion.div>
 
                         <InkeepEmbeddedChat />
