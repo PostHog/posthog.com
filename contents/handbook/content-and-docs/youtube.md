@@ -24,7 +24,7 @@ We also were starting to run out of obvious tutorial and SEO blog content to tur
 
 1. Tutorials like [How to bootstrap feature flags](https://youtu.be/9z1axmXdqV8)
 2. SEO-ish content like [The best GA4 alternatives for apps and websites](https://youtu.be/ImcNUnqDoUQ)
-3. "Essay" videos like [The modern data stack sucks](https://youtu.be/9z1axmXdqV8)
+3. "Essay" videos like [The modern data stack sucks](https://youtu.be/2N2cvCmv4us)
 
 ## YouTube comments
 
