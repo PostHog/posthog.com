@@ -18,6 +18,18 @@ export function ChatProvider({ children }: { children: ReactNode }): JSX.Element
         }
     }, [chatOpen])
 
+    useEffect(() => {
+        const handleKeyPress = (event: KeyboardEvent) => {
+            if (!chatOpen && event.key === '?') {
+                setChatOpen(true)
+                event.preventDefault()
+            }
+        }
+
+        window.addEventListener('keydown', handleKeyPress)
+        return () => window.removeEventListener('keydown', handleKeyPress)
+    }, [chatOpen])
+
     return <ChatContext.Provider value={{ chatOpen, setChatOpen, chatting }}>{children}</ChatContext.Provider>
 }
 
