@@ -2,7 +2,7 @@ import type { InkeepAIChatSettings, InkeepSearchSettings, InkeepBaseSettings, In
 import { useValues } from 'kea'
 import { layoutLogic } from 'logic/layoutLogic'
 
-const inkeepStyleString = '.ikp-ai-chat__header {display: none;} b, strong {font-variation-settings: "wght" 800;}'
+const inkeepStyleString = '.ikp-ai-chat__header {display: none;} b, strong, .ikp-message-header__name {font-variation-settings: "wght" 800;} .ikp-ai-chat__message-box {background: #E5E7E0; box-shadow: none;}'
 const encodedStyles = encodeURIComponent(inkeepStyleString)
 const stylesheetLink = `data:text/css;charset=UTF-8,${encodedStyles}`
 
@@ -52,7 +52,7 @@ const useInkeepSettings = (): InkeepSharedSettings => {
         botAvatarSrcUrl: 'https://res.cloudinary.com/dmukukwp6/image/upload/v1688579513/max_c5dd553db8.png',
         botName: 'Max AI',
         quickQuestions: [
-            'How do I track events?',
+            'How do I track events in JavaScript?',
             'How do I identify users?',
             'Help debug sending data',
             'How does autocapture work?',
