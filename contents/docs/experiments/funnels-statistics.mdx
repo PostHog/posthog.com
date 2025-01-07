@@ -2,24 +2,24 @@
 title: Statistical methodology for funnel metrics
 ---
 
-Funnel metrics use Bayesian statistics with a Beta model to evaluate the **win probabilities** and **credible intervals**. [Read the statistics primer for an overview](/docs/experiments/statistics-primer) if you haven't already.
+Funnel metrics use Bayesian statistics with a beta model to evaluate the **win probabilities** and **credible intervals**. [Read the statistics primer for an overview](/docs/experiments/statistics-primer) if you haven't already.
 
-## What is a Beta model?
+## What is a beta model?
 
 Imagine you run a pizza shop and want to know if customers say "yes" to adding pineapple. Some customers will say yes, others will say no. Knowing what percentage of customers want pineapple on their pizza helps you decide how much to order and what options to offer.
 
-The Beta model is a statistical approach that's great for analyzing proportions or probabilities. It uses a **Beta distribution** to model the uncertainty in conversion rates and helps us understand:
+The beta model is a statistical approach that's great for analyzing proportions or probabilities. It uses a **beta distribution** to model the uncertainty in conversion rates and helps us understand:
 
 1. Our best estimate of the _true_ probability that a customer will say "yes" to adding pineapple (vs. the probability we observe).
 2. How certain we are about that estimate.
 
 For example, if:
 
-- Only 2 out of 4 customers (50%) say yes, the Beta distribution will be wide, indicating high uncertainty.
-- 150 out of 300 customers (50%) say yes, the Beta distribution will be narrow, showing we're more confident about that 50% rate.
+- Only 2 out of 4 customers (50%) say yes, the beta distribution will be wide, indicating high uncertainty.
+- 150 out of 300 customers (50%) say yes, the beta distribution will be narrow, showing we're more confident about that 50% rate.
 
-So when we say we're using a Beta model for funnel metrics, we're:
-1. Using the Beta distribution to model conversion rates between 0% and 100%.
+So when we say we're using a beta model for funnel metrics, we're:
+1. Using the beta distribution to model conversion rates between 0% and 100%.
 2. Getting more confident in our estimates as we collect more data.
 
 One more thing worth noting: Bayesian inference starts with an initial guess that then gets updated as more data comes in. Our model uses a "minimally informative prior" of `ALPHA_PRIOR = 1` and `BETA_PRIOR = 1`, which is like starting with a blank slate instead of making an upfront assumption about the results.
@@ -35,7 +35,7 @@ Let's say you're testing a new way of presenting pineapple on the website and ha
 
 To calculate the win probabilities, our methodology will:
 
-1. Model each variant's conversion rate using a Beta distribution:
+1. Model each variant's conversion rate using a beta distribution:
 	- Control: Beta(100 + ALPHA_PRIOR, 900 + BETA_PRIOR)
 	- Test: Beta(150 + ALPHA_PRIOR, 850 + BETA_PRIOR)
 
@@ -60,7 +60,7 @@ For example, if you have these results:
 
 To calculate the credible intervals, our methodology will:
 
-1. Create a Beta distribution for each variant:
+1. Create a beta distribution for each variant:
 	- Control: Beta(100 + ALPHA_PRIOR, 900 + BETA_PRIOR)
 	- Test: Beta(150 + ALPHA_PRIOR, 850 + BETA_PRIOR)
 

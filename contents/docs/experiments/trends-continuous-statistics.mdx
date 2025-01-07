@@ -2,11 +2,11 @@
 title: Statistical methodology for property value trend metrics
 ---
 
-Trends metrics for property values use Bayesian statistics with a log-normal model and Normal-Inverse-Gamma prior to evaluate the **win probabilities** and **credible intervals**. [Read the statistics primer for an overview](/docs/experiments/statistics-primer) if you haven't already.
+Trends metrics for property values use Bayesian statistics with a lognormal model and normal-inverse-gamma prior to evaluate the **win probabilities** and **credible intervals**. [Read the statistics primer for an overview](/docs/experiments/statistics-primer) if you haven't already.
 
-## What is a log-normal model with Normal-Inverse-Gamma prior?
+## What is a lognormal model with normal-inverse-gamma prior?
 
-A log-normal model with Normal-Inverse-Gamma prior sounds like something you'd learn about in a quantum physics class, but its a lot less intimidating than it seems. The model is great for analyzing metrics like revenue or other property values that are always positive and often have a "long tail" of high values.
+A lognormal model with normal-inverse-gamma prior sounds like something you'd learn about in a quantum physics class, but its a lot less intimidating than it seems. The model is great for analyzing metrics like revenue or other property values that are always positive and often have a "long tail" of high values.
 
 Imagine you're looking at daily revenue from your customers:
 
@@ -20,7 +20,7 @@ This creates what we call a "right-skewed" distribution - lots of smaller values
 - This makes it much easier to analyze the data mathematically.
 - We can transform back to regular dollars for our final results.
 
-The "Normal-Inverse-Gamma prior" part helps us handle uncertainty:
+The "normal-inverse-gamma prior" part helps us handle uncertainty:
 
 - When we have very little data, it keeps our estimates reasonable.
 - As we collect more data, it lets the actual data drive our conclusions.
@@ -45,9 +45,9 @@ Let's say you're testing a new pricing page and have these results:
 
 To calculate the win probabilities, our methodology:
 
-1. Models each variant's value using a log-normal distribution (which works well for metrics like revenue that are always positive and often right-skewed):
+1. Models each variant's value using a lognormal distribution (which works well for metrics like revenue that are always positive and often right-skewed):
    - We transform the data to log-space where it follows a normal distribution.
-   - We use a Normal-Inverse-Gamma prior to handle uncertainty about both the mean and variance.
+   - We use a normal-inverse-gamma prior to handle uncertainty about both the mean and variance.
 
 2. Takes 10,000 random samples from each variant's posterior distribution.
 

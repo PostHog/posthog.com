@@ -2,23 +2,23 @@
 title: Statistical methodology for count trend metrics
 ---
 
-Trends metrics for count-based data use Bayesian statistics with a Gamma-Poisson model to evaluate the **win probabilities** and **credible intervals**. [Read the statistics primer for an overview](/docs/experiments/statistics-primer) if you haven't already.
+Trends metrics for count-based data use Bayesian statistics with a gamma-poisson model to evaluate the **win probabilities** and **credible intervals**. [Read the statistics primer for an overview](/docs/experiments/statistics-primer) if you haven't already.
 
-## What is a Gamma-Poisson model?
+## What is a gamma-poisson model?
 
-Imagine you run a pizza shop and want to know how many slices a customer typically orders. Some days customers might order 1 slice, others 3 slices, and occasionally someone might order 6 slices! This kind of count data (1, 2, 3, etc.) follows what's called a **Poisson distribution**.
+Imagine you run a pizza shop and want to know how many slices a customer typically orders. Some days customers might order 1 slice, others 3 slices, and occasionally someone might order 6 slices! This kind of count data (1, 2, 3, etc.) follows what's called a **poisson distribution**.
 
-The Poisson distribution has one key number: the average rate. In our pizza example, maybe it's 2.5 slices per customer. But here's the catch - we don't know the true rate for sure. We only have our observations to guess from.
+The poisson distribution has one key number: the average rate. In our pizza example, maybe it's 2.5 slices per customer. But here's the catch - we don't know the true rate for sure. We only have our observations to guess from.
 
-This is where the **Gamma distribution** comes in. It helps us model our uncertainty about the true rate:
+This is where the **gamma distribution** comes in. It helps us model our uncertainty about the true rate:
 
-- When we have very little data, the Gamma distribution is wide, saying "hey, the true rate could be anywhere in this broad range".
-- As we collect more data, the Gamma distribution gets narrower, saying "we're getting more confident about what the true rate is".
+- When we have very little data, the gamma distribution is wide, saying "hey, the true rate could be anywhere in this broad range".
+- As we collect more data, the gamma distribution gets narrower, saying "we're getting more confident about what the true rate is".
 
-So when we say we're using a Gamma-Poisson model for count metrics, we're:
+So when we say we're using a gamma-poisson model for count metrics, we're:
 
-1. Using the Poisson distribution to model how count data naturally varies.
-2. Using the Gamma distribution to express our uncertainty about the true rate.
+1. Using the poisson distribution to model how count data naturally varies.
+2. Using the gamma distribution to express our uncertainty about the true rate.
 3. Getting more confident in our estimates over time.
 
 One more thing worth noting: Bayesian inference starts with an initial guess that then gets updated as more data comes in. Our model uses a "minimally informative prior" of `ALPHA_PRIOR = 1` and `BETA_PRIOR = 1`, which is like starting with a blank slate instead of making an upfront assumption about the results.
@@ -34,7 +34,7 @@ Let's say you're testing a new menu design and have these results:
 
 To calculate the win probabilities, our methodology:
 
-1. Models each variant's rate using a Gamma distribution:
+1. Models each variant's rate using a gamma distribution:
 	- Control: Gamma(250 + ALPHA_PRIOR, 100 + BETA_PRIOR)
 	- Test: Gamma(300 + ALPHA_PRIOR, 100 + BETA_PRIOR)
 
@@ -59,7 +59,7 @@ For example, if you have these results:
 
 To calculate the credible intervals, our methodology will:
 
-1. Create a Gamma distribution for each variant:
+1. Create a gamma distribution for each variant:
 	- Control: Gamma(250 + ALPHA_PRIOR, 100 + BETA_PRIOR)
 	- Test: Gamma(300 + ALPHA_PRIOR, 100 + BETA_PRIOR)
 
