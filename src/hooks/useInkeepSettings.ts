@@ -2,7 +2,7 @@ import type { InkeepAIChatSettings, InkeepSearchSettings, InkeepBaseSettings, In
 import { useValues } from 'kea'
 import { layoutLogic } from 'logic/layoutLogic'
 
-const inkeepStyleString = '.ikp-ai-chat__header {display: none;}'
+const inkeepStyleString = '.ikp-ai-chat__header {display: none;} b, strong {font-variation-settings: "wght" 800;}'
 const encodedStyles = encodeURIComponent(inkeepStyleString)
 const stylesheetLink = `data:text/css;charset=UTF-8,${encodedStyles}`
 
@@ -55,7 +55,7 @@ const useInkeepSettings = (): InkeepSharedSettings => {
             'How do I track events?',
             'How do I identify users?',
             'Help debug sending data',
-            'How does auto capture work?',
+            'How does autocapture work?',
         ],
     }
 
