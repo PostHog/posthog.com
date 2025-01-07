@@ -331,6 +331,10 @@ Now start all of PostHog (backend, worker, plugin server, and frontend – simul
 ./bin/start
 ```
 
+> [!NOTE]  
+> This command uses [mprocs](https://github.com/pvolok/mprocs) to run all development processes in a single terminal window.
+
+
 > **Friendly tip:** If you get the error `Configuration property "enable.ssl.certificate.verification" not supported in this build: OpenSSL not available at build time`, make sure your environment is using the right `openssl` version by setting [those](https://github.com/xmlsec/python-xmlsec/issues/261#issuecomment-1630889826) environment variables, and then run `./bin/start` again.
 
 Open [http://localhost:8010](http://localhost:8010) to see the app.
@@ -338,11 +342,6 @@ Open [http://localhost:8010](http://localhost:8010) to see the app.
 > **Note:** The first time you run this command you might get an error that says "layout.html is not defined". Make sure you wait until the frontend is finished compiling and try again.
 
 To get some practical test data into your brand-new instance of PostHog, run `DEBUG=1 ./manage.py generate_demo_data`. For a list of useful arguments of the command, run `DEBUG=1 ./manage.py generate_demo_data --help`.
-
-You can also use [mprocs](https://github.com/pvolok/mprocs) to run all development processes in a single terminal window. mprocs provides a clean interface for starting, stopping, and monitoring each service individually, with separate log views for easier debugging. This includes docker compose, so make sure to stop it if it's already running. Once you have mprocs installed, run
-```bash
-./bin/start-mprocs
-```
 
 #### 7. Develop
 
