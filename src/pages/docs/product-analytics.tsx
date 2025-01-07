@@ -42,7 +42,7 @@ export const Intro = ({image = true}) => (
                         alt=""
                         placeholder="none"
                         quality={100}
-                        className="max-w-96 -mt-12"
+                        className="max-w-96 md:-mt-12"
                         src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Home/Slider/images/product-analytics-hog.png"
                     />
                 </figure>
@@ -68,22 +68,27 @@ export const Content = ({ quickLinks = false }) => {
         <>
             <Intro />
 
-            <div className="bg-accent dark:bg-accent-dark pt-4 px-5 pb-6 border border-light dark:border-dark rounded relative mb-12">
+            <div className="md:pt-4 pb-6 flex flex-col md:flex-row items-center justify-center gap-4 relative mb-6">
+
+                <aside>
+                <CloudinaryImage
+                    src="https://res.cloudinary.com/dmukukwp6/image/upload/wizard_hog_bdbdabe5a2.png"
+                    width={205}
+                    placeholder="none"
+                    className="w-32 md:w-auto"
+                />
+                </aside>
+                <div className="flex flex-col items-center md:items-start">
+
                 <h3 className="mb-1 text-xl">Questions? Ask Max AI.</h3>
-                <p className="text-[15px] mb-3 pr-24 md:pr-0">
+                <p className="text-[15px] mb-3 opacity-75">
                 It's easier than reading through <strong>{totalDocsCount} docs articles</strong>.
                 </p>
                 <CallToAction type="secondary" size="md" className="[&>span]:flex [&>span]:items-center [&>span]:gap-1" onClick={() => setChatOpen(true)}>
                     Chat with Max AI
                     <IconSidebarOpen className="size-6 inline-block" />
                 </CallToAction>
-
-                <CloudinaryImage
-                    src="https://res.cloudinary.com/dmukukwp6/image/upload/wizard_hog_bdbdabe5a2.png"
-                    width={205}
-                    placeholder="none"
-                    className="absolute bottom-1 right-0 md:right-4 w-32 md:w-auto"
-                />
+                </div>
             </div>
 
 
