@@ -1,0 +1,30 @@
+.ikp-ai-chat__header {
+    display: none;
+}
+
+b, 
+strong, 
+.ikp-message-header__name {
+    font-variation-settings: "wght" 800;
+}
+
+.ikp-ai-chat__message-box {
+    background: #E5E7E0;
+    box-shadow: none;
+}
+
+.community-suggestion {
+    border-width: 1px;
+    border-style: solid;
+    border-radius: .25rem; 
+    font-size: .875rem; 
+    padding: .5rem;
+    [data-theme="light"] & {
+        border-color: #D0D1C9;
+        background: #EEEFE9;
+    }
+    [data-theme="dark"] & {
+        border-color: #4A4C52;
+        background: #1d1f27;
+    }
+}
