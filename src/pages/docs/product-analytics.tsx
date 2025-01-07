@@ -52,10 +52,9 @@ export const Content = ({ quickLinks = false }) => {
             <Intro />
 
             <div className="bg-accent dark:bg-accent-dark pt-4 px-5 pb-6 border border-light dark:border-dark rounded relative mb-12">
-                <h3 className="mb-1 text-xl">Chat with MaxAI</h3>
+                <h3 className="mb-1 text-xl">Ask Max AI</h3>
                 <p className="text-[15px] mb-3 pr-24 md:pr-0">
-                    Get your question answered directly instead of aimlessly clicking through{' '}
-                    <strong>{totalDocsCount}</strong> docs pages.
+                The PostHog docs are {totalDocsCount} pages and counting. Why not ask Max instead?
                 </p>
                 <CallToAction type="primary" size="md" className="" onClick={() => setChatOpen(true)}>
                     Chat with Max AI
