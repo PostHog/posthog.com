@@ -69,9 +69,7 @@ Now that we can create alerts, let's take a look at a handful of practical examp
 
 ### 1. Get alerts when traffic spikes
 
-Want to investigate spikes in traffic to your website? Monitoring the traffic to your website can help you measure the success of marketing campaigns and understand which activities drive the most visitors to your site.
-
-These kinds of alerts can also be useful when traffic spikes are unexpected. We often see this at PostHog when our content gets featured in a popular email newsletter or shared on Hacker News. When we notice an influx of new signups, it can be fun to dig in and try to figure out where they came from.
+Traffic spike alerts are useful when this happens unexpectedly. We often see this at PostHog when our content gets featured in a popular email newsletter or shared on Hacker News. When we notice an influx of new signups, it can be fun to dig in and try to figure out where they came from.
 
 For example, we can set up an alert when the number of pageviews for our [pricing page](/pricing) rises above 8,000 views for the week. First, we [create a new trend](/docs/product-analytics/trends/overview#1-creating-a-new-trend) insight to track pageviews where "Path Name" equals "/pricing". To get a good baseline for comparison, we'll filter the data to show the year-to-date and group it by week to see weekly patterns in our pricing page traffic.
 
