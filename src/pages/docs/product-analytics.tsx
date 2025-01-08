@@ -16,6 +16,7 @@ import { useStaticQuery } from 'gatsby'
 import { graphql } from 'gatsby'
 import { IconLightBulb, IconSidebarOpen } from '@posthog/icons'
 import { AskMax } from 'components/AskMax'
+import Intro from 'components/Docs/Intro'
 
 type ProductAnalyticsProps = {
     data: {
@@ -27,31 +28,7 @@ type ProductAnalyticsProps = {
     }
 }
 
-export const Intro = ({image = true}) => (
-    <header className="bg-accent dark:bg-accent-dark border border-light dark:border-dark rounded flex flex-col items-center md:flex-row md:gap-4 pt-2 mb-8">
-        <div className="p-4 pb-0 md:p-8 flex-1">
-            <p className="text-[15px] text-primary/60 dark:text-primary-dark/75 mb-1">Getting started</p>
-            <h1 className="text-3xl md:text-4xl mt-0 mb-1 md:mb-2">Product analytics</h1>
-            <h3 className="text-base md:text-lg font-semibold text-primary/60 dark:text-primary-dark/75 leading-tight">
-                Learn how to use product analytics to understand your users.
-            </h3>
-            <CallToAction to="/docs/product-analytics/installation">Installation guide</CallToAction>
-        </div>
 
-        {image && (
-                <figure className="m-0 mt-auto p-0 md:pr-8">
-                    <CloudinaryImage
-                        alt=""
-                        placeholder="none"
-                        quality={100}
-                        className="max-w-96"
-                        src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Home/Slider/images/product-analytics-hog.png"
-                    />
-                </figure>
-            )}
-            
-    </header>
-)
 
 export const Content = ({ quickLinks = false }) => {
     const { compact } = useLayoutData()
@@ -68,7 +45,14 @@ export const Content = ({ quickLinks = false }) => {
 
     return (
         <>
-            <Intro />
+            <Intro
+                subheader="Getting started"
+                title="Product analytics"
+                description="Learn how to use product analytics to understand your users."
+                buttonText="Installation guide"
+                buttonLink="/docs/product-analytics/installation"
+                imageUrl="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Home/Slider/images/product-analytics-hog.png"
+            />
 
             <AskMax />
 

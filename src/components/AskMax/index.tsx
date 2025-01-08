@@ -24,7 +24,7 @@ export function AskMax({ border = false }: AskMaxProps) {
     const borderClasses = border ? 'py-6 border-y border-light dark:border-dark' : ''
 
     return (
-        <div className={`flex flex-col md:flex-row items-center justify-center gap-4 relative mb-8 md:mb-6 py-2 ${borderClasses}`}>
+        <div className={`flex flex-col md:flex-row items-center justify-center gap-4 relative mb-8 py-2 ${borderClasses}`}>
             <IconLightBulb className="size-10 inline-block bg-accent dark:bg-accent-dark rounded p-2 text-primary/50 dark:text-primary-dark/50" />
 
             <div className="flex flex-col text-center md:text-left">
