@@ -42,6 +42,9 @@ const useInkeepSettings = (): InkeepSharedSettings => {
         customIcons: {
             chatSubmit: { custom: '/icons/return.svg' },
         },
+        optOutAnalyticalCookies: true,
+        optOutAllAnalytics: true,
+        optOutFunctionalCookies: true,
     }
 
     const modalSettings: InkeepModalSettings = {}
