@@ -35,6 +35,7 @@ export default function Post({ children }: { children: React.ReactNode }) {
         stickySidebar,
         searchFilter,
         fullWidthContent,
+        askMax,
     } = usePost()
     const { compact, internalMenu } = useLayoutData()
 
@@ -86,7 +87,7 @@ export default function Post({ children }: { children: React.ReactNode }) {
                 >
                     <div onTransitionEnd={handleArticleTransitionEnd} className={contentContainerClasses}>
                         <div>{children}</div>
-                        <AskMax border />
+                        {askMax && <AskMax border />}
                         {questions}
                     </div>
                     {!hideSurvey && <Survey />}

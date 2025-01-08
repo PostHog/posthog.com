@@ -554,6 +554,7 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
                 slug,
                 post: true,
                 article: true,
+                askMax: true,
             },
         })
     })
