@@ -529,7 +529,8 @@ export const Main = () => {
                         <HoverTooltip
                             content={() => (
                                 <div className="text-xs">
-                                    Chat with <strong>Max AI</strong> <kbd className={`${keyboardShortcut} py-0 ml-0.5`}>?</kbd>
+                                    Chat with <strong>Max AI</strong>{' '}
+                                    <kbd className={`${keyboardShortcut} py-0 ml-0.5`}>?</kbd>
                                 </div>
                             )}
                         >
@@ -739,7 +740,7 @@ export const Mobile = () => {
     const { menu, parent, internalMenu, activeInternalMenu, enterpriseMode, setEnterpriseMode } = useLayoutData()
 
     return (
-        <div className="fixed bottom-0 w-full md:hidden z-[9999998] print:hidden">
+        <div id="mobile-nav" className="fixed bottom-0 w-full md:hidden z-[9999998] print:hidden">
             <InternalMenu
                 mobile
                 className="bg-light dark:bg-dark border-t mb-[-1px]"

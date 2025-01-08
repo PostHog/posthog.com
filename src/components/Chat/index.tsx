@@ -6,6 +6,7 @@ import { IconChevronDown, IconX } from '@posthog/icons'
 
 export default function Chat(): JSX.Element | null {
     const { chatOpen, setChatOpen, chatting } = useChat()
+    const [height, setHeight] = useState<string | number>('100%')
     const [showDisclaimer, setShowDisclaimer] = useState(true)
     const chatRef = useRef<HTMLDivElement>(null)
 
@@ -36,6 +37,12 @@ export default function Chat(): JSX.Element | null {
         return () => document.removeEventListener('keydown', handleEscKey)
     }, [chatOpen])
 
+    useEffect(() => {
+        const mobileNav = document?.getElementById('mobile-nav')
+        const height = mobileNav?.clientHeight
+        setHeight(`calc(100% - ${height ?? 0}px)`)
+    }, [chatOpen])
+
     return (
         <AnimatePresence>
             {chatting ? (
@@ -43,18 +50,17 @@ export default function Chat(): JSX.Element | null {
                     ref={chatRef}
                     initial={{ translateX: '110%' }}
                     animate={{ translateX: chatOpen ? 0 : '110%', transition: { type: 'tween' } }}
-                    className="fixed bottom-0 right-0 h-full bg-white dark:bg-dark z-[999999] border-l border-border dark:border-dark w-[400px]"
+                    className="fixed bottom-0 right-0 h-full bg-white dark:bg-dark z-[999999] border-l border-border dark:border-dark w-[350px] sm:w-[400px]"
                 >
-                    <motion.button
+                    <button
                         onClick={() => {
                             setChatOpen(!chatOpen)
                         }}
-                        animate={{ top: showDisclaimer ? 35 : 35, transition: { type: 'tween' } }}
-                        className={`absolute left-0 -translate-x-full z-10 rounded-tl rounded-bl py-1 border-l border-t border-b border-border dark:border-dark group transition-colors bg-white dark:bg-[#1c1c1c] pr-0.5`}
+                        className={`absolute left-0 -translate-x-full z-10 rounded-tl rounded-bl py-1 border-l border-t border-b border-border dark:border-dark group transition-colors bg-white dark:bg-[#1c1c1c] pr-0.5 top-[35px]`}
                     >
                         <IconChevronDown className="size-8 opacity-60 group-hover:opacity-100 transition-opacity -rotate-90 relative left-1" />
-                    </motion.button>
-                    <div className="h-full">
+                    </button>
+                    <div style={{ height }}>
                         <AnimatePresence>
                             {showDisclaimer && (
                                 <motion.div
