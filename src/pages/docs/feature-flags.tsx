@@ -1,6 +1,5 @@
 import CloudinaryImage from 'components/CloudinaryImage'
 import React from 'react'
-import { StaticImage } from 'gatsby-plugin-image'
 import Layout from 'components/Layout'
 import { SEO } from 'components/seo'
 import PostLayout from 'components/PostLayout'
@@ -10,6 +9,8 @@ import { CallToAction } from 'components/CallToAction'
 import { docsMenu } from '../../navs'
 import { useLayoutData } from 'components/Layout/hooks'
 import QuickLinks from 'components/QuickLinks'
+import Intro from 'components/Docs/Intro'
+import AskMax from 'components/AskMax'
 
 export const quickLinks = [
     {
@@ -59,30 +60,6 @@ type FeatureFlagsProps = {
         }
     }
 }
-
-export const Intro = ({ image = true }) => (
-    <div className="bg-accent dark:bg-accent-dark border border-light dark:border-dark rounded flex flex-col items-center md:flex-row gap-8 pt-2 mb-8">
-        <div className="p-4 md:p-8">
-            <h1 className="text-4xl mt-0 mb-2">Feature flags</h1>
-            <h3 className="text-lg font-semibold text-primary/60 dark:text-primary-dark/75 leading-tight">
-                Toggle features for cohorts or individuals to test the impact before rolling out to everyone.
-            </h3>
-            <CallToAction to="/docs/feature-flags/installation">Create your first feature flag</CallToAction>
-        </div>
-
-        {image && (
-            <figure className="m-0 p-0">
-                <CloudinaryImage
-                    alt=""
-                    placeholder="none"
-                    quality={100}
-                    className=""
-                    src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Home/Slider/images/feature-flags-hog.png"
-                />
-            </figure>
-        )}
-    </div>
-)
 
 export const Content = ({ quickLinks = false }) => {
     const { compact } = useLayoutData()
@@ -269,7 +246,19 @@ const FeatureFlags: React.FC<FeatureFlagsProps> = ({ data }) => {
             <SEO title="Feature flags - Docs - PostHog" />
 
             <PostLayout title={'Feature flags'} hideSurvey hideSidebar>
-                <Intro />
+            <Intro
+                subheader="Getting started"
+                title="Feature flags"
+                description="Toggle features for cohorts or individuals to test the impact before rolling out to everyone."
+                buttonText="Create your first feature flag"
+                buttonLink="/docs/feature-flags/installation"
+                imageColumnClasses="max-w-96 md:-mt-8"
+                imageUrl="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Home/Slider/images/feature-flags-hog.png"
+                imageClasses=""
+            />
+
+            <AskMax />
+
                 <Content />
 
                 <div className="pt-8">

@@ -1,6 +1,5 @@
 import CloudinaryImage from 'components/CloudinaryImage'
 import React, { useState } from 'react'
-import { StaticImage } from 'gatsby-plugin-image'
 import Layout from 'components/Layout'
 import { SEO } from 'components/seo'
 import PostLayout from 'components/PostLayout'
@@ -10,41 +9,13 @@ import { CallToAction } from 'components/CallToAction'
 import { docsMenu } from '../../navs'
 import { useLayoutData } from 'components/Layout/hooks'
 import QuickLinks from 'components/QuickLinks'
-
-export const Intro = ({ image = true }) => {
-    return (
-        <>
-            <div className="bg-accent dark:bg-accent-dark border border-light dark:border-dark rounded flex flex-col items-center md:flex-row gap-8 pt-2 mb-8">
-                <div className="p-4 md:p-8">
-                    <h1 className="text-4xl mt-0 mb-2 flex items-center space-x-2">
-                        <span>Data warehouse</span>
-                    </h1>
-                    <h3 className="text-lg font-semibold text-primary/60 dark:text-primary-dark/75 leading-tight">
-                        A single source for all your important data
-                    </h3>
-                    <CallToAction to="/docs/cdp/sources">Link your first source</CallToAction>
-                </div>
-
-                {image && (
-                    <figure className="m-0 p-0">
-                        <CloudinaryImage
-                            alt=""
-                            placeholder="none"
-                            quality={100}
-                            className=""
-                            src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/products/data-warehouse/data-warehouse.png"
-                        />
-                    </figure>
-                )}
-            </div>
-        </>
-    )
-}
+import Intro from 'components/Docs/Intro'
+import AskMax from 'components/AskMax'
 
 export const Content = ({ quickLinks = false }) => {
     const { compact } = useLayoutData()
     return (
-        <>
+        <>           
             {(quickLinks || compact) && <QuickLinks items={docsMenu.children[7].children} />}
             <section className="mb-12">
                 <h3 className="m-0 text-xl">Resources</h3>
@@ -55,51 +26,21 @@ export const Content = ({ quickLinks = false }) => {
                         type="Guide"
                         title="How to set up Stripe reports"
                         description="Connect your revenue data from Stripe to PostHog"
-                        Image={
-                            <CloudinaryImage
-                                alt=""
-                                objectPosition="right"
-                                placeholder="none"
-                                objectFit="contain"
-                                className="h-full"
-                                quality={100}
-                                src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/products/data-warehouse/warehouse-hog.png"
-                            />
-                        }
+                        
                         url="/tutorials/stripe-reports"
                     />
                     <ResourceItem
                         type="Guide"
                         title="How to set up Hubspot reports"
                         description="Connect your sales data from Hubspot to PostHog"
-                        Image={
-                            <CloudinaryImage
-                                alt=""
-                                objectPosition="right"
-                                placeholder="none"
-                                objectFit="contain"
-                                className="h-full"
-                                quality={100}
-                                src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/products/data-warehouse/warehouse-hog.png"
-                            />
-                        }
+                        
                         url="/tutorials/hubspot-reports"
                     />
                     <ResourceItem
                         type="Guide"
                         title="The power of HogQL’s sum() aggregation"
                         description="Unlock a new level of aggregation customization"
-                        Image={
-                            <CloudinaryImage
-                                alt=""
-                                objectPosition="right"
-                                placeholder="none"
-                                objectFit="contain"
-                                className="h-full"
-                                quality={100}
-                                src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/products/data-warehouse/warehouse-hog.png"
-                            />
-                        }
+                        
                         url="/tutorials/hogql-sum-aggregation"
                     />
                 </ul>
@@ -114,7 +55,18 @@ const DataWarehouse: React.FC = () => {
             <SEO title="Data warehouse - Docs - PostHog" />
 
             <PostLayout title={'Data warehouse'} hideSurvey hideSidebar>
-                <Intro />
+            <Intro
+                subheader="Getting started"
+                title="Data warehouse"
+                description="A single source for all your important data."
+                buttonText="Link your first source"
+                buttonLink="/docs/cdp/sources"
+                imageColumnClasses="mt-4 md:-mt-8"
+                imageUrl="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/products/data-warehouse/warehouse-hog.png"
+                imageClasses="max-h-48 md:max-h-64"
+            />
+
+            <AskMax />
                 <Content />
                 <CallToAction to="/docs/data-warehouse/query" width="full">
                     Visit the manual

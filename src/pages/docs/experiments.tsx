@@ -1,7 +1,5 @@
 import CloudinaryImage from 'components/CloudinaryImage'
 import React from 'react'
-import { StaticImage } from 'gatsby-plugin-image'
-
 import Layout from 'components/Layout'
 import { SEO } from 'components/seo'
 import PostLayout from 'components/PostLayout'
@@ -11,6 +9,8 @@ import { CallToAction } from 'components/CallToAction'
 import { docsMenu } from '../../navs'
 import { useLayoutData } from 'components/Layout/hooks'
 import QuickLinks from 'components/QuickLinks'
+import Intro from 'components/Docs/Intro'
+import AskMax from 'components/AskMax'
 
 export const quickLinks = [
     {
@@ -56,34 +56,11 @@ type ExperimentsProps = {
     }
 }
 
-export const Intro = ({ image = true }) => (
-    <div className="bg-accent dark:bg-accent-dark border border-light dark:border-dark rounded flex flex-col items-center md:flex-row md:gap-4 pt-2 mb-8">
-        <div className="p-4 md:p-8">
-            <h1 className="text-4xl mt-0 mb-2">Experiments</h1>
-            <h3 className="text-lg font-semibold text-primary/60 dark:text-primary-dark/75 leading-tight">
-                Test different variations of your product and measure the impact.
-            </h3>
-            <CallToAction to="/docs/experiments/installation">Roll out your first experiment</CallToAction>
-        </div>
-
-        {image && (
-            <figure className="m-0 mt-auto p-0">
-                <CloudinaryImage
-                    alt=""
-                    placeholder="none"
-                    quality={100}
-                    className=""
-                    src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Home/Slider/images/ab-testing-hog.png"
-                />
-            </figure>
-        )}
-    </div>
-)
-
 export const Content = ({ quickLinks = false }) => {
     const { compact } = useLayoutData()
     return (
         <>
+           
             {(quickLinks || compact) && (
                 <QuickLinks
                     items={docsMenu.children.find(({ name }) => name.toLowerCase() === 'a/b testing')?.children}
@@ -164,7 +141,19 @@ const Experiments: React.FC<ExperimentsProps> = ({ data }) => {
             <SEO title="Experiments - Docs - PostHog" />
 
             <PostLayout title={'Experiments'} hideSurvey hideSidebar>
-                <Intro />
+            <Intro
+                subheader="Getting started"
+                title="Experiments"
+                description="Test different variations of your product and measure the impact."
+                buttonText="Roll out your first experiment"
+                buttonLink="/docs/experiments/installation"
+                imageColumnClasses="max-w-96 mt-8 md:mt-0"
+                imageUrl="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Home/Slider/images/ab-testing-hog.png"
+                imageClasses=""
+            />
+
+            <AskMax />
+
                 <Content />
 
                 <div className="">

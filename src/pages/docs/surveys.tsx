@@ -10,6 +10,8 @@ import { CallToAction } from 'components/CallToAction'
 import { docsMenu } from '../../navs'
 import { useLayoutData } from 'components/Layout/hooks'
 import QuickLinks from 'components/QuickLinks'
+import Intro from 'components/Docs/Intro'
+import AskMax from 'components/AskMax'
 
 type SurveysProps = {
     data: {
@@ -20,30 +22,6 @@ type SurveysProps = {
         }
     }
 }
-
-export const Intro = ({ image = true }) => (
-    <div className="bg-accent dark:bg-accent-dark border border-light dark:border-dark rounded flex flex-col items-center md:flex-row gap-8 pt-2 mb-8">
-        <div className="p-4 md:p-8 shrink-0">
-            <h1 className="text-4xl mt-0 mb-2">Surveys</h1>
-            <h3 className="text-lg font-semibold text-primary/60 dark:text-primary-dark/75 leading-tight">
-                Collect feedback from your users.
-            </h3>
-            <CallToAction to="/docs/surveys/installation">Create your first survey</CallToAction>
-        </div>
-
-        {image && (
-            <figure className="m-0 p-0">
-                <CloudinaryImage
-                    alt=""
-                    placeholder="none"
-                    quality={100}
-                    className=""
-                    src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Home/Slider/images/surveys-hog.png"
-                />
-            </figure>
-        )}
-    </div>
-)
 
 export const Content = ({ quickLinks = false }) => {
     const { compact } = useLayoutData()
@@ -163,7 +141,18 @@ const Surveys: React.FC<SurveysProps> = () => {
             <SEO title="Surveys - Docs - PostHog" />
 
             <PostLayout title={'Surveys'} hideSurvey hideSidebar>
-                <Intro />
+            <Intro
+                subheader="Getting started"
+                title="Surveys"
+                description="Collect feedback from your users."
+                buttonText="Create your first survey"
+                buttonLink="/docs/surveys/installation"
+                imageColumnClasses="mt-8 md:mt-0 max-w-96"
+                imageUrl="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Home/Slider/images/surveys-hog.png"
+                imageClasses=""
+            />
+
+            <AskMax />
                 <Content />
             </PostLayout>
         </Layout>
