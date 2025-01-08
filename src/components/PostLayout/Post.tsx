@@ -15,6 +15,7 @@ import SidebarAction from './SidebarAction'
 import { Edit, ExpandDocument, Issue } from 'components/Icons'
 import { DarkModeToggle } from 'components/DarkModeToggle'
 import { useLayoutData } from 'components/Layout/hooks'
+import AskMax from 'components/AskMax'
 
 export default function Post({ children }: { children: React.ReactNode }) {
     const {
@@ -85,6 +86,7 @@ export default function Post({ children }: { children: React.ReactNode }) {
                 >
                     <div onTransitionEnd={handleArticleTransitionEnd} className={contentContainerClasses}>
                         <div>{children}</div>
+                        <AskMax border />
                         {questions}
                     </div>
                     {!hideSurvey && <Survey />}
