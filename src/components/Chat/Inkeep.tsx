@@ -2,8 +2,11 @@ import React, { useEffect, useRef, useState } from 'react'
 import useInkeepSettings from 'hooks/useInkeepSettings'
 import { DotLottiePlayer } from '@dotlottie/react-player'
 import { AIChatFunctions } from '@inkeep/uikit'
+import { layoutLogic } from 'logic/layoutLogic'
+import { useValues } from 'kea'
 
 export default function InkeepEmbeddedChat(): JSX.Element {
+    const { websiteTheme } = useValues(layoutLogic)
     const { baseSettings, aiChatSettings } = useInkeepSettings()
     const embeddedChatRef = useRef<AIChatFunctions | null>(null)
     const lottieRef = useRef(null)
@@ -47,6 +50,18 @@ export default function InkeepEmbeddedChat(): JSX.Element {
             }
         }
     }, [hasFirstResponse])
+
+    useEffect(() => {
+        if (embeddedChatRef.current) {
+            embeddedChatRef.current.render({
+                baseSettings: {
+                    colorMode: {
+                        forcedColorMode: websiteTheme === 'dark' ? 'dark' : 'light',
+                    },
+                },
+            })
+        }
+    }, [websiteTheme])
 
     return (
         <>
