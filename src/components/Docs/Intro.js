@@ -2,7 +2,7 @@ import React from 'react'
 import { CallToAction } from '../CallToAction'
 import CloudinaryImage from '../CloudinaryImage'
 
-export default function Intro({ subheader, title, description, buttonText, buttonLink, imageUrl}) {
+export default function Intro({ subheader, title, description, buttonText, buttonLink, imageColumnClasses, imageUrl, imageClasses}) {
   return (
   <div className="bg-accent dark:bg-accent-dark border border-light dark:border-dark rounded flex flex-col items-center md:flex-row md:gap-4 mb-8">
       <div className="p-4 pb-0 md:p-8 flex-1">
@@ -18,7 +18,8 @@ export default function Intro({ subheader, title, description, buttonText, butto
                       alt=""
                       placeholder="none"
                       quality={100}
-                      className="max-w-96"
+                      className={imageColumnClasses}
+                      imgClassName={imageClasses}
                       src={imageUrl}
                   />
               </figure>

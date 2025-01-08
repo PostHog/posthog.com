@@ -15,7 +15,7 @@ import { useChat } from 'hooks/useChat'
 import { useStaticQuery } from 'gatsby'
 import { graphql } from 'gatsby'
 import { IconLightBulb, IconSidebarOpen } from '@posthog/icons'
-import { AskMax } from 'components/AskMax'
+import AskMax from 'components/AskMax'
 import Intro from 'components/Docs/Intro'
 
 type ProductAnalyticsProps = {
@@ -27,8 +27,6 @@ type ProductAnalyticsProps = {
         }
     }
 }
-
-
 
 export const Content = ({ quickLinks = false }) => {
     const { compact } = useLayoutData()
@@ -51,11 +49,11 @@ export const Content = ({ quickLinks = false }) => {
                 description="Learn how to use product analytics to understand your users."
                 buttonText="Installation guide"
                 buttonLink="/docs/product-analytics/installation"
+                imageColumnClasses="max-w-96"
                 imageUrl="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Home/Slider/images/product-analytics-hog.png"
             />
 
             <AskMax />
-
 
 
             {(quickLinks || compact) && (

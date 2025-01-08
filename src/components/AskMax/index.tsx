@@ -9,7 +9,7 @@ interface AskMaxProps {
     border?: boolean
 }
 
-export function AskMax({ border = false }: AskMaxProps) {
+export default function AskMax({ border = false }: AskMaxProps) {
     const { setChatOpen } = useChat()
     const {
         allDocsPages: { totalDocsCount },
