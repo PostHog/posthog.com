@@ -47,45 +47,18 @@ export const Content = ({ quickLinks = false }) => {
                         type="Guide"
                         title="Calculating session-based metrics"
                         description="Give an overview, then dive deeper into metrics like average session duration and time on site."
-                        Image={
-                            <CloudinaryImage
-                                alt=""
-                                objectFit="contain"
-                                className="h-full"
-                                quality={100}
-                                src="https://res.cloudinary.com/dmukukwp6/image/upload/webhog2_7b3ca93610.png"
-                            />
-                        }
                         url="/tutorials/session-metrics"
                     />
                     <ResourceItem
                         type="Guide"
                         title="How to set up cross-domain tracking"
                         description="Track users accurately across multiple websites and domains."
-                        Image={
-                            <CloudinaryImage
-                                alt=""
-                                objectFit="contain"
-                                className="h-full"
-                                quality={100}
-                                src="https://res.cloudinary.com/dmukukwp6/image/upload/webhog2_7b3ca93610.png"
-                            />
-                        }
                         url="/tutorials/cross-domain-tracking"
                     />
                     <ResourceItem
                         type="Guide"
                         title="How to do cookieless tracking"
                         description="Track users without cookies for compliance and privacy."
-                        Image={
-                            <CloudinaryImage
-                                alt=""
-                                objectFit="contain"
-                                className="h-full"
-                                quality={100}
-                                src="https://res.cloudinary.com/dmukukwp6/image/upload/webhog2_7b3ca93610.png"
-                            />
-                        }
                         url="/tutorials/cookieless-tracking"
                     />
                 </ul>

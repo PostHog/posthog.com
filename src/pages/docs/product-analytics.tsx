@@ -68,96 +68,36 @@ export const Content = ({ quickLinks = false }) => {
                         type="Guide"
                         title="The complete guide to event tracking"
                         description="Set up your analytics foundation"
-                        Image={
-                            <CloudinaryImage
-                                alt=""
-                                className="h-full"
-                                placeholder="none"
-                                objectFit="contain"
-                                quality={100}
-                                src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Home/Slider/images/product-analytics-hog.png"
-                            />
-                        }
                         url="/tutorials/event-tracking-guide"
                     />
                     <ResourceItem
                         type="Guide"
                         title="Track performance marketing"
                         description="Optimize ads and marketing channels"
-                        Image={
-                            <CloudinaryImage
-                                alt=""
-                                className="h-full"
-                                placeholder="none"
-                                objectFit="contain"
-                                quality={100}
-                                src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Home/Slider/images/product-analytics-hog.png"
-                            />
-                        }
                         url="/tutorials/performance-marketing"
                     />
                     <ResourceItem
                         type="Guide"
                         title="Reduce churn"
                         description="The bread and butter of long-term growth"
-                        Image={
-                            <CloudinaryImage
-                                alt=""
-                                className="h-full"
-                                placeholder="none"
-                                objectFit="contain"
-                                quality={100}
-                                src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Home/Slider/images/product-analytics-hog.png"
-                            />
-                        }
                         url="/tutorials/churn-rate"
                     />
                     <ResourceItem
                         type="Guide"
                         title="Track new and returning users"
                         description="Build cohorts and compare users"
-                        Image={
-                            <CloudinaryImage
-                                alt=""
-                                className="h-full"
-                                placeholder="none"
-                                objectFit="contain"
-                                quality={100}
-                                src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Home/Slider/images/product-analytics-hog.png"
-                            />
-                        }
                         url="/tutorials/track-new-returning-users"
                     />
                     <ResourceItem
                         type="Guide"
                         title="Identify and analyze power users"
                         description="Find and understand your most engaged users"
-                        Image={
-                            <CloudinaryImage
-                                alt=""
-                                className="h-full"
-                                placeholder="none"
-                                objectFit="contain"
-                                quality={100}
-                                src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Home/Slider/images/product-analytics-hog.png"
-                            />
-                        }
                         url="/tutorials/power-users"
                     />
                     <ResourceItem
                         type="Guide"
                         title="Calculate DAU/MAU ratio"
                         description="Popular engagement metrics that measure stickiness"
-                        Image={
-                            <CloudinaryImage
-                                alt=""
-                                className="h-full"
-                                placeholder="none"
-                                objectFit="contain"
-                                quality={100}
-                                src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Home/Slider/images/product-analytics-hog.png"
-                            />
-                        }
                         url="/tutorials/dau-mau-ratio"
                     />
                 </ul>

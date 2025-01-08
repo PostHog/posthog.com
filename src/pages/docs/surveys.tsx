@@ -39,32 +39,12 @@ export const Content = ({ quickLinks = false }) => {
                         type="Guide"
                         title="Get feedback and book user interviews with surveys"
                         description="Automate the process of finding the right users and booking interviews"
-                        Image={
-                            <CloudinaryImage
-                                alt=""
-                                placeholder="none"
-                                objectFit="contain"
-                                className="h-full"
-                                quality={100}
-                                src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Home/Slider/images/surveys-hog.png"
-                            />
-                        }
                         url="/tutorials/feedback-interviews-site-apps"
                     />
                     <ResourceItem
                         type="Guide"
                         title="How to create custom surveys"
                         description="Customize the look and feel of your surveys"
-                        Image={
-                            <CloudinaryImage
-                                alt=""
-                                placeholder="none"
-                                objectFit="contain"
-                                className="h-full"
-                                quality={100}
-                                src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Home/Slider/images/surveys-hog.png"
-                            />
-                        }
                         url="/tutorials/survey"
                     />
                 </ul>

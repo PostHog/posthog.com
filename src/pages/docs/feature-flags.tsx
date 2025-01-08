@@ -79,96 +79,36 @@ export const Content = ({ quickLinks = false }) => {
                         type="Guide"
                         title="Feature flags API"
                         description="Evaluate and update with the /decide/ endpoint"
-                        Image={
-                            <CloudinaryImage
-                                alt=""
-                                placeholder="none"
-                                objectFit="contain"
-                                className="h-full"
-                                quality={100}
-                                src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Home/Slider/images/feature-flags-hog.png"
-                            />
-                        }
                         url="/tutorials/api-feature-flags"
                     />
                     <ResourceItem
                         type="Guide"
                         title="Canary releases"
                         description="Gradual rollouts to a subset of users"
-                        Image={
-                            <CloudinaryImage
-                                alt=""
-                                placeholder="none"
-                                objectFit="contain"
-                                className="h-full"
-                                quality={100}
-                                src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Home/Slider/images/feature-flags-hog.png"
-                            />
-                        }
                         url="/tutorials/canary-release"
                     />
                     <ResourceItem
                         type="Guide"
                         title="Bootstrapping feature flags in React"
                         description="Available at client-side load time"
-                        Image={
-                            <CloudinaryImage
-                                alt=""
-                                placeholder="none"
-                                objectFit="contain"
-                                className="h-full"
-                                quality={100}
-                                src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Home/Slider/images/feature-flags-hog.png"
-                            />
-                        }
                         url="/tutorials/bootstrap-feature-flags-react"
                     />
                     <ResourceItem
                         type="Article"
                         title="Best practices for feature flags"
                         description="Contains 8 examples"
-                        Image={
-                            <CloudinaryImage
-                                alt=""
-                                placeholder="none"
-                                objectFit="contain"
-                                className="h-full"
-                                quality={100}
-                                src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Home/Slider/images/feature-flags-hog.png"
-                            />
-                        }
                         url="/blog/feature-flag-best-practices"
                     />
                     <ResourceItem
                         type="Guide"
                         title="How to set up one-time feature flags"
                         description="Show a component or content just once"
-                        Image={
-                            <CloudinaryImage
-                                alt=""
-                                placeholder="none"
-                                objectFit="contain"
-                                className="h-full"
-                                quality={100}
-                                src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Home/Slider/images/feature-flags-hog.png"
-                            />
-                        }
                         url="/tutorials/one-time-feature-flags"
                     />
                     <ResourceItem
                         type="Guide"
                         title="Cookie-based feature flags"
                         description="Storing feature flag values locally"
-                        Image={
-                            <CloudinaryImage
-                                alt=""
-                                placeholder="none"
-                                objectFit="contain"
-                                className="h-full"
-                                quality={100}
-                                src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Home/Slider/images/feature-flags-hog.png"
-                            />
-                        }
                         url="/tutorials/one-time-feature-flags"
                     />
                 </ul>
@@ -192,46 +132,16 @@ export const Content = ({ quickLinks = false }) => {
                     <ResourceItem
                         title="Add popups to a React app"
                         description="Using payloads to send arbitrary data to your frontend"
-                        Image={
-                            <CloudinaryImage
-                                alt=""
-                                placeholder="none"
-                                objectFit="contain"
-                                className="h-full"
-                                quality={100}
-                                src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Home/Slider/images/feature-flags-hog.png"
-                            />
-                        }
                         url="/tutorials/react-popups"
                     />
                     <ResourceItem
                         title="Location-based site banner"
                         description="Regional announcements or country-based alerts"
-                        Image={
-                            <CloudinaryImage
-                                alt=""
-                                placeholder="none"
-                                objectFit="contain"
-                                className="h-full"
-                                quality={100}
-                                src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Home/Slider/images/feature-flags-hog.png"
-                            />
-                        }
                         url="/tutorials/location-based-banner"
                     />
                     <ResourceItem
                         title="Sampling with feature flags and local evaluation"
                         description="Use flags to capture a subset of events for analysis"
-                        Image={
-                            <CloudinaryImage
-                                alt=""
-                                placeholder="none"
-                                objectFit="contain"
-                                className="h-full"
-                                quality={100}
-                                src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Home/Slider/images/feature-flags-hog.png"
-                            />
-                        }
                         url="/tutorials/track-high-volume-apis"
                     />
                 </ul>

@@ -75,48 +75,18 @@ export const Content = ({ quickLinks = false }) => {
                         type="Guide"
                         title="Running experiments on new users"
                         description="Test changes to signup and onboarding flows"
-                        Image={
-                            <CloudinaryImage
-                                alt=""
-                                placeholder="none"
-                                objectFit="contain"
-                                className="h-full"
-                                quality={100}
-                                src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Home/Slider/images/experiment-hog.png"
-                            />
-                        }
                         url="/tutorials/new-user-experiments"
                     />
                     <ResourceItem
                         type="Guide"
                         title="Run A/B tests in Webflow"
                         description="A guide to low-code experimentation"
-                        Image={
-                            <CloudinaryImage
-                                alt=""
-                                placeholder="none"
-                                objectFit="contain"
-                                className="h-full"
-                                quality={100}
-                                src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Home/Slider/images/experiment-hog.png"
-                            />
-                        }
                         url="/tutorials/webflow-ab-tests"
                     />
                     <ResourceItem
                         type="Guide"
                         title="Run experiments without feature flags"
                         description="Useful if you don't use PostHog feature flags"
-                        Image={
-                            <CloudinaryImage
-                                alt=""
-                                placeholder="none"
-                                objectFit="contain"
-                                className="h-full"
-                                quality={100}
-                                src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Home/Slider/images/experiment-hog.png"
-                            />
-                        }
                         url="/docs/experiments/running-experiments-without-feature-flags"
                     />
                 </ul>

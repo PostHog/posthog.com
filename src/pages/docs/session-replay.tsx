@@ -74,96 +74,36 @@ export const Content = ({ quickLinks = false }) => {
                         type="Guide"
                         title="Only record sessions you want"
                         description="Control cost by reducing volume"
-                        Image={
-                            <CloudinaryImage
-                                alt=""
-                                placeholder="none"
-                                objectFit="contain"
-                                className="h-full"
-                                quality={100}
-                                src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Home/Slider/images/session-recording-hog.png"
-                            />
-                        }
                         url="/tutorials/limit-session-recordings"
                     />
                     <ResourceItem
                         type="Guide"
                         title="Discover user friction with replays"
                         description="Pinpoint issues with filters and replays"
-                        Image={
-                            <CloudinaryImage
-                                alt=""
-                                placeholder="none"
-                                objectFit="contain"
-                                className="h-full"
-                                quality={100}
-                                src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Home/Slider/images/session-recording-hog.png"
-                            />
-                        }
                         url="/tutorials/filter-session-recordings"
                     />
                     <ResourceItem
                         type="Guide"
                         title="Analyze power users"
                         description="Define a cohort and watch those sessions"
-                        Image={
-                            <CloudinaryImage
-                                alt=""
-                                placeholder="none"
-                                objectFit="contain"
-                                className="h-full"
-                                quality={100}
-                                src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Home/Slider/images/session-recording-hog.png"
-                            />
-                        }
                         url="/tutorials/power-users"
                     />
                     <ResourceItem
                         type="Guide"
                         title="Improve web app performance"
                         description="Network monitoring in session replays"
-                        Image={
-                            <CloudinaryImage
-                                alt=""
-                                placeholder="none"
-                                objectFit="contain"
-                                className="h-full"
-                                quality={100}
-                                src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Home/Slider/images/session-recording-hog.png"
-                            />
-                        }
                         url="/tutorials/performance-metrics"
                     />
                     <ResourceItem
                         type="Guide"
                         title="Session replays in customer support"
                         description="Rageclicks, sharing recordings, error monitoring"
-                        Image={
-                            <CloudinaryImage
-                                alt=""
-                                placeholder="none"
-                                objectFit="contain"
-                                className="h-full"
-                                quality={100}
-                                src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Home/Slider/images/session-recording-hog.png"
-                            />
-                        }
                         url="/tutorials/session-recordings-for-support"
                     />
                     <ResourceItem
                         type="Guide"
                         title="Replay users in a funnel"
                         description="Learn from users who do (or don't) convert"
-                        Image={
-                            <CloudinaryImage
-                                alt=""
-                                placeholder="none"
-                                objectFit="contain"
-                                className="h-full"
-                                quality={100}
-                                src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Home/Slider/images/session-recording-hog.png"
-                            />
-                        }
                         url="/tutorials/explore-insights-session-recordings"
                     />
                 </ul>
