@@ -49,6 +49,7 @@ import Tooltip from 'components/Tooltip'
 import { TextCard } from 'components/Products/TextCard'
 import { SEO } from 'components/seo'
 import { useLayoutData } from 'components/Layout/hooks'
+import { PRODUCT_COUNT } from '../../../constants'
 
 const ProductIcon = ({ name, url, color, icon }) => {
     return (
@@ -144,7 +145,11 @@ export const ProductOS = () => {
                 />
 
                 <div className="text-center mb-12">
-                    <CloudinaryImage src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Product/ProductOS/images/product-os.png" alt="" className="w-full max-w-[423px]" />
+                    <CloudinaryImage
+                        src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Product/ProductOS/images/product-os.png"
+                        alt=""
+                        className="w-full max-w-[423px]"
+                    />
                 </div>
             </div>
 
@@ -207,7 +212,11 @@ export const ProductOS = () => {
                             <p>You can also query directly from our data warehouse (powered by ClickHouse).</p>
                         </div>
                         <aside className="shrink-0 md:basis-[500px]">
-                            <CloudinaryImage src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Product/ProductOS/images/sql-hog.png" alt="" className="w-full max-w-[562px]" />
+                            <CloudinaryImage
+                                src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Product/ProductOS/images/sql-hog.png"
+                                alt=""
+                                className="w-full max-w-[562px]"
+                            />
                         </aside>
                     </div>
 
@@ -218,7 +227,7 @@ export const ProductOS = () => {
                                     One platform, <span className="text-red dark:text-yellow">loads of products</span>
                                 </h2>
                                 <p className="max-w-2xl">
-                                    PostHog offers 7+ products in one (and counting).{' '}
+                                    PostHog offers {PRODUCT_COUNT}+ products in one (and counting).{' '}
                                     <strong>Use only what you want. But...</strong> if you want to try a new PostHog
                                     product, there are benefits of using Product OS as your platform for all your
                                     product data.
@@ -323,7 +332,11 @@ export const ProductOS = () => {
                             </p>
                         </div>
                         <aside className="shrink-0 md:basis-[300px] xl:basis-[500px]">
-                            <CloudinaryImage src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Product/ProductOS/images/alert.png" alt="" className="w-full max-w-[262px]" />
+                            <CloudinaryImage
+                                src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Product/ProductOS/images/alert.png"
+                                alt=""
+                                className="w-full max-w-[262px]"
+                            />
                         </aside>
                     </div>
                 </section>

@@ -120,7 +120,6 @@ export default defineNuxtPlugin(nuxtApp => {
   const runtimeConfig = useRuntimeConfig();
   const posthogClient = posthog.init(runtimeConfig.public.posthogPublicKey, {
     api_host: runtimeConfig.public.posthogHost,
-    person_profiles: 'identified_only',
   })
   
   return {
@@ -156,7 +155,6 @@ export default defineNuxtPlugin(nuxtApp => {
   const runtimeConfig = useRuntimeConfig();
   const posthogClient = posthog.init(runtimeConfig.public.posthogPublicKey, {
     api_host: runtimeConfig.public.posthogHost,
-    person_profiles: 'identified_only'
     capture_pageview: false // set this to false since we manually capture pageviews in router.afterEach
   })
 
@@ -285,3 +283,5 @@ export default defineEventHandler(async (event) => {
 - [How to set up feature flags in Nuxt](/tutorials/nuxt-feature-flags)
 - [How to set up A/B tests in Nuxt](/tutorials/nuxtjs-ab-tests)
 - [How to set up surveys in Nuxt](/tutorials/nuxt-surveys)
+
+<NewsletterForm />

@@ -239,3 +239,5 @@ After running this, when you go to the user in Intercom, you see events connecte
 - [How to add session replays to Zendesk](/tutorials/zendesk-session-replays)
 - [How to use session replays to improve your support experience](/tutorials/session-recordings-for-support)
 - [How to use filters + session replays to understand user friction](/tutorials/filter-session-recordings)
+
+<NewsletterForm />

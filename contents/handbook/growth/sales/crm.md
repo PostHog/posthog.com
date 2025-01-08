@@ -17,7 +17,7 @@ For existing customers, you'll sometimes send emails directly from [Vitally](htt
 All Slack messages sync up with the corresponding account in Salesforce. We use [Pylon](https://app.usepylon.com) for this sync, so make sure Pylon is added to the customer Slack channel integrations and the channel is [linked to the Salesforce account](https://app.usepylon.com/integrations/salesforce?tab=account-mapping) properly for the sync to work smoothly.
 
 You are most likely to use the following regularly:
-- _Leads_ - A lead is a potential customer who has shown interest but hasn't yet been qualified. We create leads for every new user emailing sales@posthog.com or filling out contact sales form on our website. You can also create them manually if you are introduced through other sources (e.g. events, referrals). 
+- _Leads_ - A lead is a potential customer who has shown interest but hasn't yet been qualified. We create leads for every new user emailing sales@posthog.com or filling out contact sales form on our website. You can also create them manually if you are introduced through other sources (e.g. events, referrals) or by tagging tickets in Zendesk. 
 - _Opportunities_ - An opportunity is a qualified lead that has been assessed and is considered a potential sales deal (with an estimated revenue and an expected close date). This is where we manage our customers through their buying cycle. 
 - _Contacts_ - Contacts are individuals who use PostHog or contacts we interact with. You can create contacts manually or convert a Lead to a Contact after evaluating the lead and deciding to continue working with them.
 - _Accounts_ - You will also create an account record to associate with any contact. You can associate multiple contacts with a single account. If you enter the company's domain name, we have data enrichment in place to pull in additional data on the organization. 
@@ -65,6 +65,14 @@ Our preferred way to keep track of outreach is by creating Salesforce Leads, Con
 - Leads: If a contact is in the initial evaluation stage, it should be entered as a Lead. This allows us to track and manage potential clients who are not yet qualified or who are still in the early stages of engagement. This is typically how we add potential customers who do not use PostHog yet.
 - Opportunities: If you identify potential for growth with an existing user, such as expansion or commitment to an annual plan, you can create an Opportunity directly. This is appropriate for contacts or customers where you've already completed the lead assessment (more on that below).
 
+### Zendesk Integration
+
+If you add "sf-lead" tag to a ticket in Zendesk, a new lead will be automatically created in Salesforce. This helps streamline the process of converting support questions or tickets into potential sales opportunities directly from Zendesk.
+
+### Forwarding Sales Opportunities
+If you are not in the sales team but are engaged with a client and identify a sales opportunity, forward the email chain to sales@posthog.com. A new lead will be automatically created in salesforce and assigned to the appropriate AE based on existing criteria. This way we can smoothly hand off potential opportunities and track things properly!
+
+**Important:** The email must be forwarded (not replied to), and sales@posthog.com must be in the "To:" field—not CC or BCC—for the automation to work correctly.
 
 ## How we do lead assignments
 Any user who submits a “contact sales” form on our website shows up as a lead in Salesforce and gets assigned to an Account Executive (AE). This is how we do lead assignment within our sales team:
@@ -112,6 +120,9 @@ Unqualified: A lead that does not meet the criteria to become an opportunity.
 - Make sure all new leads are contacted within 24 hours.
 - Keep all lead information up-to-date and accurate in Salesforce.
 - Periodically review lead statuses and update them as needed.
+
+### Which Leads Should Go to RevOps?
+Some incoming leads are better suited for RevOps, for example questions related to refunds, invoices, startup plan credits or eligibility. To ensure these leads are routed correctly, please create a zendesk ticket by leaving the :ticket: emoji in the relevant thread in the #website-contact-sales Slack channel. This will automatically create a ticket for RevOps to review and address.
 
 ## Opportunities
 
@@ -183,6 +194,14 @@ The renewal pipeline stages are:
 The "Opportunity Notes" section is to track key actions and next steps to manage an opportunity and avoid missed follow-ups. It has the following fields:
 - Next Steps: Add actions or tasks required to move the opportunity forward. Be clear and concise to ensure anyone reviewing the opportunity understands what needs to happen next.
 - Next Step Date: Enter the date by which the next step should be completed. This helps in maintaining timelines and keeping follow-ups on track.
+
+### Opportunity Closure Details
+This section is to add additional information for opportunities that are won or lost to capture context and details to setup customer account correctly:
+- Loss Reason: A required field for any opportunity marked as "Closed - Lost." Pick the most appropriate option from the dropdown to help identify patterns.
+- Additional Loss Context: Optional field to add further insights into the loss. It's great to include specific customer feedback if available.
+- Contract Start Date: Especially important for correct account setup and tracking renewals.
+- Products: Select the products discussed/planned to be used as part of the opportunity. Make sure to include all addons so RevOps can ensure the customer’s subscription is set up correctly.
+- Contract Link: Link to the contract in PandaDoc for easy access and reference.
 
 ### Self-Serve Opportunities
 If you feel like a customer doesn't fit a hands-on flow, then you mark the lead or opportunity as self serve. There are two ways to do this:

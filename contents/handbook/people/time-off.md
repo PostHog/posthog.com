@@ -92,20 +92,21 @@ We celebrate all the big and little milestones at PostHog, including birthdays a
 
 ### Birthdays
 
-We have partnered with [Batch](https://batchusa.com/pages/about-us) to send all team members a personalized giftset for their birthday.
+We have partnered with [Wellbox](https://wellbox.app/) to send all team members a personalized giftset for their birthday.
 
 These are the steps for making an order:
 
-1. Complete all necessary information on the “Birthday tab” with the [customer order sheet](https://docs.google.com/spreadsheets/d/1OhYz-ws20VKtQ0NnoCEzw1i4V4XAiz3e/edit?usp=sharing&ouid=109235309101749414478&rtpof=true&sd=true) and send to Bri Nightingale, CSM at bri@batchusa.com 
-2. Bri will send an invoice to be paid with steps on how to make the purchase payment
-3. All set! 
+1. Log into our Wellbox account (details in 1Password)
+2. Select the birthday gift to send
+3. Fill out delivery information
+4. All set! 
 
-The birthday gift usually arrives on the day of or 1-3 days prior to the birthday. Shipping fees: US shipping is free while all other countries will have shipping fees. 
+The birthday gift usually arrives on the day of or 1-3 days prior to the birthday. Shipping fees: UK shipping is free while all other countries will have shipping fees. 
 
 
 ### Anniversaries
 
-On your first-year anniversary with PostHog, you will receive a giftcard from [Giftogram](https://giftogram.com/) which can be used on a wide selection of brands. On your second-year anniversary you'll be gifted a [customized Lego minifig](https://minifig.fab-bricks.com/) in a display case, and on your third-year anniversary, you'll receive a personalized gift from [Batch](https://batchusa.com). 
+On your first-year anniversary with PostHog, you will receive a giftcard from [Giftogram](https://giftogram.com/) or [Prezzee](https://www.prezzee.uk/business/signin/) (if you are based in the UK) which can be used on a wide selection of brands. On your second-year anniversary you'll be gifted a [customized Lego minifig](https://minifig.fab-bricks.com/) in a display case, and on your third-year anniversary, you'll receive a personalized gift from [Wellbox](https://wellbox.app/). 
 
 1st year anniversary - $50 for US gift cards/$55 for for all other countries gift cards to cover service fees:
 
@@ -126,9 +127,20 @@ On your first-year anniversary with PostHog, you will receive a giftcard from [G
 3. Make sure to include a display case and the three tier brick option
 4. After you’ve completed your design, check out. There should already be a Brex card on file. Please make sure you add the individual’s correct mailing address.
 
-### 3rd year anniversary- via [Batch](https://batchusa.com/):
+### 3rd year anniversary- via [Wellbox](https://wellbox.app/)):
 
-1. Complete all necessary information on the “Third Anniversary tab” with the [customer order sheet](https://docs.google.com/spreadsheets/d/1OhYz-ws20VKtQ0NnoCEzw1i4V4XAiz3e/edit?usp=sharing&ouid=109235309101749414478&rtpof=true&sd=true) and send to Bri Nightingale, CSM at bri@batchusa.com 
-2. Bri will send an invoice to be paid with steps on how to make the purchase payment
+1. Select the 3rd Anniversary gift in our profile
+2. Fill out delivery info
+3. You're all set!
 
-The gift will usually arrive on the day of or 1-3 days prior to the anniversary date. Shipping fees: US shipping is free while all other countries will have shipping fees. 
+The gift will usually arrive on the day of or 1-3 days prior to the anniversary date. Shipping fees: UK shipping is free while all other countries will have shipping fees. 
+
+### 4th year anniversary
+
+On your 4th anniversary at PostHog as a big thank you for sticking with us, you have a choice of 3 gifts:
+
+1. Sage Barista Touch coffee machine
+2. Apple 27-inch 5K Retina Studio Display with standard glass and tilt-adjustable stand
+3. Rimowa luggage set (large trunk, cabin bag, packing cube, toiletries bag)
+
+On the run up to your anniversary Coua will send you a link to the gift options questionnaire, from there Kendal will order it for you! Thank you for making PostHog great!

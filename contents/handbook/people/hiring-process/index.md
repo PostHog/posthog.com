@@ -19,7 +19,7 @@ This has resulted in the highest number of qualified and motivated candidates re
 - Writing exceptional job descriptions, and re-writing them frequently
 - Ensuring our careers page and application experience are world class
 - Sharing our roles within our networks for exposure in unusual ways (as candidates are likely to be pre-qualified)
-- Giving candidates genuinely useful and direct feedback if they weren't successful with us
+- Where we can, giving candidates genuinely useful and direct feedback if they weren't successful with us
 - Running a smooth and incredibly slick recruitment process, from application to offer
 
 ## Countries we employ people in
@@ -27,8 +27,8 @@ This has resulted in the highest number of qualified and motivated candidates re
 We are all-remote, but we have a few limitations on the countries we are able to employ people in:
 
 - We hire within -8 to +2 GMT timezones - beyond these, it proves too difficult for us to collaborate effectively. We do hire in GMT +2 countries that shift to GMT +3 for daylight saving time only (e.g. Bulgaria, Greece). 
-- Due to US sanctions, we can't hire folks in Cuba, Iran, North Korea, or Syria
-- We don't currently employ people in France or Italy due to the high costs (40-50% on top of gross salary)
+- Due to US sanctions, we can't hire folks in Cuba, Iran, North Korea, or Syria. 
+- We don't currently employ people via EOR in France, Italy, Iceland, Belgium, Luxembourg, Uruguay, Bolivia, or Brazil, mainly due to the very high employer costs. In some of these countries we _may_ consider hiring as a contractor, provided there is no misclassification risk. 
 
 ## Hiring Process
 
@@ -38,11 +38,9 @@ We are all-remote, but we have a few limitations on the countries we are able to
 
 | Position                     | Team                     | Reporting lead | Interview process                                                                                                                                                                                                                       |
 | ---------------------------- | ------------------------ | -------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Product Engineers          | Multiple teams                  | Tech Lead  | <ol><li>Culture screen with Coua (30mins)</li><li>Technical screen w/ an engineer (60mins)</li><li>Small team screen w/ James (30mins)</li><li>SuperDay - task assessment, peer team interview, and culture and motivation interview w/ Tim (8-10hrs)</li></ol>           |
-| Mobile Engineer              | Replay                   | Paul   | <ol><li>Culture screen with Coua (30mins)</li><li>Technical screen w/ Paul (60mins)</li><li>Small team screen w/ James H. (30mins)</li><li>SuperDay- task assessment, peer team interview, and culture and motivation interview w/ Tim (8-10hrs)</li></ol>            |
-| Support Engineer             | Comms                 | Joe  | <ol><li>Culture screen with Coua (30mins)</li><li>Technical screen w/ Joe (30mins)</li><li>Small team screen w/ James (30mins)</li><li>SuperDay- task assessment, peer team interview, and culture and motivation interview w/ Tim (8-10hrs)</li></ol>            |
-| Site Reliability Engineer              | Infrastructure                  | Ben  | <ol><li>Culture screen with Coua (30mins)</li><li>Technical screen w/ Ben (60mins)</li><li>Small team screen w/ James H. (30mins)</li><li>SuperDay- task assessment, peer team interview, and culture and motivation interview w/ Tim (8-10hrs)</li></ol>            |
-| Community Manager              | Comms                 | Joe  | <ol><li>Culture screen with Coua (30mins)</li><li>Technical screen w/ Joe (30mins)</li><li>Small team screen w/ James H. (30mins)</li><li>SuperDay- task assessment, peer team interview, and culture and motivation interview w/ Tim (8-10hrs)</li></ol>            |
+| Product Engineers          | Multiple teams                  | Tech Lead  | <ol><li>Culture screen with Ops (20mins)</li><li>Technical screen w/ an engineer (60mins)</li><li>Small team screen w/ James (30mins)</li><li>SuperDay - task assessment, peer team interview, and culture and motivation interview w/ Tim (8-10hrs)</li></ol>           |
+| Technical Account Executive              | Sales & CS                  | Simon   | <ol><li>Culture screen with Ops (20mins)</li><li>Technical screen w/ Simon (45mins)</li><li>Small team screen w/ Tim (30mins)</li><li>SuperDay- task assessment, peer team interview, and culture and motivation interview w/ James (8-10hrs)</li></ol>            |
+| Technical Customer Success Manager             | Sales & CS                 | Simon  | <ol><li>Culture screen with Ops (20mins)</li><li>Technical screen w/ Simon (45mins)</li><li>Small team screen w/ Tim (30mins)</li><li>SuperDay- task assessment, peer team interview, and culture and motivation interview w/ James (8-10hrs)</li></ol>            |
 
 
 </OverflowXSection>
@@ -150,7 +148,7 @@ You'll get paid the bonus 3 months from the new team member's start date, and it
 We also welcome external referrals, e.g. from:
 
 *   From our investors
-*   From the PostHog community (the users Slack Group, and posting on our social media profiles for our followers to see)
+*   From the PostHog community (by posting on our social media profiles for our followers to see)
 *   From the YC community (Slack / WhatsApp / Forum)
 
 As a thank you, we will give you $50 credit for our [merch shop](https://merch.posthog.com/).
@@ -175,6 +173,8 @@ If you receive an application via email or some other non-Ashby channel like Sla
 
 When we book a meeting, we have the option of selecting a Google Meet or Zoom call which Meet should be the default.
 
+If you are involved in interviewing it is important to keep your calendar up to date. Candidates can book directly into your calendar so having your calendar blocked when you are not available to interview is important. This includes things like personal appointments, travelling, attending off-sites etc. If you have an interview booked in you cannot make, do not just respond no to the calendar invite, please let the ops team know asap, or even better find a replacement for your interview and let Ops know and we can update the interview. We aim to provide a great candidate experience and moving interviews is one way to reduce the quality of that experience. 
+
 ## Hiring stage overview
 
 > A good rule of thumb when deciding whether not to progress at any stage - if the candidate doesn't get a _definite yes_ then assume it's a _no_. It's almost never worth putting through someone who is a 'maybe'! We provide lots of information about PostHog to enable candidates to put their best application forward.
@@ -187,11 +187,9 @@ If a candidate hasn't customized the application or resume to the role, it is a 
 
 Candidates who are unsuccessful at this stage will receive an automated rejection email. Due to the volume of applications we receive, we usually don't provide personalized feedback.
 
-We also review every single speculative application weekly and if there is a possible fit for future openings, we will place the applicant into the appropriate [Ashby talent project](https://app.ashbyhq.com/projects) (i.e. full stack engineers, platform, product, website & docs, customer success, people & ops, and marketing) and notify the applicant of this via email. 
-
 ### Interviews
 
-As a rule, all interviews at PostHog are conducted in English. Whilst this might seem obvious to some, we are lucky to have people from multiple different countries, that speak multiple languages. We are hiring for people to be successful at PostHog, and at PostHog we conduct our business in English so it is important the hiring process is also conducted in English. So if you are paired with an interviewee who speaks your native language, just politely acknowledge this and let them know all interviews are conducted in English.
+As a rule, all interviews at PostHog are conducted in English. Whilst this might seem obvious to some, we are lucky to have people from multiple different countries, that speak multiple languages. We are hiring for people to be successful at PostHog, and at PostHog we conduct our business in English so it is important the hiring process is also conducted in English. So if you are paired with an interviewee who speaks your native language, just politely acknowledge this and let them know all interviews are conducted in English. We also require these calls to be conducted as a video call so a working webcam is necessary.
 
 ### 1. Culture interview with People & Ops 
 
@@ -206,6 +204,8 @@ This round is loosely structured into 4 different sections:
 3. Talk about the hiring process and check if the candidate has seen our compensation calculator so we know we're roughly aligned.
 4. Answer any open questions
 
+This stage is usually a 20 minute video chat.
+
 Candidates who are unsuccessful at this stage should receive a short personalized email with feedback. 
 
 ### 2. Technical interview with the Hiring Manager
@@ -214,11 +214,13 @@ In this round, the candidate will meet a 1-2 future team members. This round is 
 
 As a rule of thumb, everyone interviewing must feel a genuine sense of excitement about working with the candidate. Again - if it is not a _definite yes_, then it's a _no_. Ask yourself - does this candidate raise the bar?
 
-Candidates who are unsuccessful at this stage should receive a personalized email with feedback, including a few bullets that are quite specific. 
+Candidates who are unsuccessful at this stage should receive a personalized email with feedback.
 
 ### 3. Small Team interview with James or Tim
 
 This is a call with either James or Tim, depending on which Small Team they are being hired into. They will probe further on the candidate's motivation, as well as checking for alignment with PostHog's values. 
+
+Candidates who are unsuccessful at this stage should receive a short personalized email with feedback. 
 
 ### 4. PostHog SuperDay
 

@@ -97,8 +97,6 @@ What constitutes a good ratio depends on the sector, but a [2017 report by Mixpa
 
 **Is it useful?** Yes, but you need to be careful as a large increase in monthly users can skew your ratio. It's best used by late-stage companies with predictable monthly growth, which is probably why it's popular at Facebook.
 
-<NewsletterForm />
-
 ### Feature usage
 
 **What is it?** The specifics will vary depending on the product, but this is all about tracking what people are doing. 
@@ -131,7 +129,7 @@ The formula is `(new users who completed key action / total number of new users)
 
 You want new users to find the value in your product as quickly as possible, and this is the perfect metric to measure that. 
 
-Improving activation is widely regarded as one of the best ways to improve monthly recurring revenue (MRR).
+[Improving activation](/product-engineers/activation-metrics) is widely regarded as one of the best ways to improve monthly recurring revenue (MRR).
 
 ### Productivity
 

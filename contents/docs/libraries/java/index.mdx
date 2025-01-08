@@ -9,8 +9,6 @@ icon: >-
 features:
   eventCapture: true
   userIdentification: true
-  autoCapture: false
-  sessionRecording: false
   featureFlags: false
   groupAnalytics: true
 ---
@@ -36,7 +34,7 @@ import JavaSendEvents from '../../integrate/send-events/_snippets/send-events-ja
 
 ## Person profiles and properties
 
-For backward compatibility, PostHog captures identified events by default. These create [person profiles](/docs/data/persons). To set [person properties](/docs/data/user-properties) in these profiles, include them when capturing an event:
+For backward compatibility, the Java SDK captures identified events by default. These create [person profiles](/docs/data/persons). To set [person properties](/docs/data/user-properties) in these profiles, include them when capturing an event:
 
 ```java
 posthog.capture("distinct_id", "event_name", new HashMap<String, Object>() {

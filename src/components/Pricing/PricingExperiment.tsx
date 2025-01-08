@@ -1,6 +1,5 @@
 import CloudinaryImage from 'components/CloudinaryImage'
-import { StaticImage } from 'gatsby-plugin-image'
-import React, { useState, useEffect, useRef } from 'react'
+import React, { useState, useEffect } from 'react'
 import { FAQs } from 'components/Pricing/FAQs'
 import { Quote } from 'components/Pricing/Quote'
 import 'components/Pricing/styles/index.scss'
@@ -8,22 +7,14 @@ import { SEO } from '../seo'
 import cntl from 'cntl'
 import { animateScroll as scroll } from 'react-scroll'
 import SelfHostOverlay from 'components/Pricing/Overlays/SelfHost'
-import tractorHog from '../../../static/lotties/tractor-hog.json'
-import Lottie from 'react-lottie'
-import Plans, { CTA as PlanCTA, PricingTiers } from './Plans'
+import { CTA as PlanCTA } from './Plans'
 import Link from 'components/Link'
 import CTA from 'components/Home/CTA.js'
-import { IconCheck, IconHandMoney, IconInfo, IconRocket, IconStarFilled, IconStar } from '@posthog/icons'
+import { IconHandMoney, IconRocket } from '@posthog/icons'
 import * as Icons from '@posthog/icons'
 import Tooltip from 'components/Tooltip'
-import useProducts from './Products'
 import { graphql, useStaticQuery } from 'gatsby'
-import { BillingProductV2Type, BillingV2FeatureType, BillingV2PlanType } from 'types'
-import Tabs from 'components/Tabs'
-import { CallToAction } from 'components/CallToAction'
 import Tabbed from './PricingCalculator/Tabbed'
-import { usePlatform } from './Platform/usePlatform'
-import { motion } from 'framer-motion'
 import { PlanColumns } from './Test/PlanColumns'
 import PlanContent from './Test/PlanContent'
 import { section, SectionLayout, SectionHeader, SectionColumns, SectionMainCol, SectionSidebar } from './Test/Sections'
@@ -35,6 +26,7 @@ import ImageSlider from './Test/ImageSlider'
 import Header from './Test/Header'
 import { Link as ScrollLink } from 'react-scroll'
 import PurchasedWith from './Test/PurchasedWith'
+import { PRODUCT_COUNT } from '../../constants'
 
 const SidebarList = ({ children }) => <ul className="tw-chevron-bullets flex flex-col gap-1 pl-4">{children}</ul>
 
@@ -275,8 +267,8 @@ const PricingExperiment = (): JSX.Element => {
                     </div>
 
                     <p className="mb-4">
-                        PostHog is designed to grow with you. Our 8 products (and counting) will take you from idea to
-                        product-market fit to IPO and beyond. 🚀
+                        PostHog is designed to grow with you. Our <strong>{PRODUCT_COUNT}+ products</strong> (and
+                        counting) will take you from idea to product-market fit to IPO and beyond. 🚀
                     </p>
 
                     <p className="mb-4">

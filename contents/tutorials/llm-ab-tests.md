@@ -73,7 +73,6 @@ export function PHProvider({ children }) {
   useEffect(() => {
     posthog.init('<ph_project_api_key>', {
       api_host: '<ph_client_api_host>',
-      person_profiles: 'identified_only'
     })
   }, []);
   return <PostHogProvider client={posthog}>{children}</PostHogProvider>
@@ -312,3 +311,5 @@ And we're done setting up our A/B test! Open your app, log in with a few differe
 - [Product metrics to track for LLM apps](/product-engineers/llm-product-metrics)
 - [How to set up LLM analytics for Anthropic's Claude](/tutorials/anthropic-analytics)
 - [How to set up LLM analytics for ChatGPT](/tutorials/chatgpt-analytics) 
+
+<NewsletterForm />

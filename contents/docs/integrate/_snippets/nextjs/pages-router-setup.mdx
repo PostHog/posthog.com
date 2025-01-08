@@ -1,0 +1,86 @@
+If you use the [pages router](https://nextjs.org/docs/pages), you can integrate PostHog at the root of your app in `pages/_app.js`. Because Next.js is a single page app, you need to capture `$pageview` events manually too.
+
+```js
+// pages/_app.js
+import { useEffect } from 'react'
+import { Router } from 'next/router'
+import posthog from 'posthog-js'
+import { PostHogProvider } from 'posthog-js/react'
+
+export default function App({ Component, pageProps }) {
+
+  useEffect(() => {
+    posthog.init(process.env.NEXT_PUBLIC_POSTHOG_KEY, {
+      api_host: process.env.NEXT_PUBLIC_POSTHOG_HOST || '<ph_client_api_host>',
+      // Enable debug mode in development
+      loaded: (posthog) => {
+        if (process.env.NODE_ENV === 'development') posthog.debug()
+      }
+    })
+
+    const handleRouteChange = () => posthog?.capture('$pageview')
+
+    Router.events.on('routeChangeComplete', handleRouteChange);
+
+    return () => {
+      Router.events.off('routeChangeComplete', handleRouteChange);
+    }
+  }, [])
+
+  return (
+    <PostHogProvider client={posthog}>
+      <Component {...pageProps} />
+    </PostHogProvider>
+  )
+}
+```
+
+> **Note:** Unlike the app router, we don't set `capture_pageview` to `false` in the initialization because we need it to capture the initial pageview.
+
+#### Pageleave events (optional)
+
+To capture `$pageleave` events accurately, set up `useRef` and `useRouter` to track the URL and capture a `$pageleave` event with it on `routeChangeStart`.
+
+```js
+// pages/_app.js
+import { useEffect, useRef } from 'react'
+import { Router, useRouter } from 'next/router'
+import posthog from 'posthog-js'
+import { PostHogProvider } from 'posthog-js/react'
+
+export default function App({ Component, pageProps }) {
+
+  const router = useRouter()
+  const oldUrlRef = useRef('')
+
+  useEffect(() => {
+    posthog.init(process.env.NEXT_PUBLIC_POSTHOG_KEY, {
+      api_host: process.env.NEXT_PUBLIC_POSTHOG_HOST || '<ph_client_api_host>',
+      // Enable debug mode in development
+      loaded: (posthog) => {
+        if (process.env.NODE_ENV === 'development') posthog.debug()
+      }
+    })
+
+    const handleRouteChange = () => posthog?.capture('$pageview')
+
+    const handleRouteChangeStart = () => posthog?.capture('$pageleave', {
+      $current_url: oldUrlRef.current
+    })
+
+    Router.events.on('routeChangeComplete', handleRouteChange);
+    Router.events.on('routeChangeStart', handleRouteChangeStart);
+
+    return () => {
+      Router.events.off('routeChangeComplete', handleRouteChange);
+      Router.events.off('routeChangeStart', handleRouteChangeStart);
+    }
+  }, [])
+
+  return (
+    <PostHogProvider client={posthog}>
+      <Component {...pageProps} />
+    </PostHogProvider>
+  )
+}
+```

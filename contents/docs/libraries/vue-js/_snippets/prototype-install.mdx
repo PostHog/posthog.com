@@ -1,0 +1,20 @@
+While Vue 3 dramatically clamped down on global variables, in Vue 2 you can initialize PostHog by using `Object.defineProperty` and `Vue.prototype`. 
+
+To do this, declare it anywhere in your project: 
+
+```js
+import posthog from "posthog-js";
+Object.defineProperty(Vue.prototype, '$posthog', { value: posthog });
+```
+
+Then, access PostHog by calling `this.$posthog`. 
+
+```js
+//component.vue
+
+export default {
+  created() {
+    this.$posthog.capture("app_created");
+  }
+}
+```

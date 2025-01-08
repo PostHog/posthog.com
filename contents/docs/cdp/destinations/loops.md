@@ -1,13 +1,11 @@
 ---
-title: Send data to Loops
+title: Send PostHog person data to Loops
 templateId: template-loops
 ---
 
 import Requirements from "../_snippets/requirements.mdx"
 import FeedbackQuestions from "../_snippets/feedback-questions.mdx"
 import PostHogMaintained from "../_snippets/posthog-maintained.mdx"
-
-Send person data from PostHog into Loops.
 
 <Requirements />
 

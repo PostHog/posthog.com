@@ -244,9 +244,9 @@
         "handle": "manoel-aranda-neto",
         "name": "Manoel Aranda Neto",
         "role": "Mobile Engineer",
-        "image": "../../static/images/authors/manoel.png",
         "link_type": "twitter",
-        "link_url": "https://twitter.com/marandaneto"
+        "link_url": "https://twitter.com/marandaneto",
+        "profile_id": 30206
     },
     {
         "handle": "mathew-pregasen",
@@ -348,9 +348,30 @@
         "handle": "danilo-campos",
         "name": "Danilo Campos",
         "role": "Technical Content Marketer",
-        "image": "../../static/images/authors/danilo-campos-posthog.png",
         "link_type": "LinkedIn",
         "link_url": "https://www.linkedin.com/in/danilo-campos/",
         "profile_id": 31731
+    },
+    {
+        "handle": "paul-dambra",
+        "name": "Paul D'Ambra",
+        "role": "Software Engineer",
+        "profile_id": 30173
+    },
+    {
+        "handle": "bijan-boustani",
+        "name": "Bijan Boustani",
+        "role": "Technical Content Marketer",
+        "link_type": "twitter",
+        "link_url": "https://twitter.com/bijanbwb",
+        "profile_id": 31729
+    },
+    {
+        "handle": "daniel-bachhuber",
+        "name": "Daniel Bachhuber",
+        "role": "Product Engineer",
+        "link_type": "linkedin",
+        "link_url": "https://www.linkedin.com/in/danielbachhuber/",
+        "profile_id": 31992
     }
 ]

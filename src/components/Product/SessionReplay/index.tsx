@@ -190,7 +190,7 @@ const faqs = [
     {
         question: 'Do you offer a discount for non-profits?',
         children:
-            'Yes in most cases - 50% off any plan. Create your account, then email <a href="mailto:sales@posthog.com?subject=Non-profit%20discount">sales@posthog.com</a> from the same email address with some basic details on your organization. We will then apply a discount.',
+            'Yes in most cases - 25% off any plan. Create your account, then email <a href="mailto:sales@posthog.com?subject=Non-profit%20discount">sales@posthog.com</a> from the same email address with some basic details on your organization. We will then apply a discount.',
     },
     {
         question: 'Are there any minimums or annual commitments?',
@@ -229,6 +229,26 @@ const comparison = [
             Matomo: false,
             FullStory: true,
             PostHog: '<a href="https://github.com/PostHog/posthog/issues/13267">In beta</a>',
+        },
+    },
+    {
+        feature: 'React Native recordings',
+        companies: {
+            Hotjar: false,
+            LogRocket: true,
+            Matomo: false,
+            FullStory: false,
+            PostHog: '<a href="https://github.com/PostHog/posthog/issues/13269">In beta</a>',
+        },
+    },
+    {
+        feature: 'Flutter recordings',
+        companies: {
+            Hotjar: false,
+            LogRocket: false,
+            Matomo: false,
+            FullStory: false,
+            PostHog: '<a href="https://github.com/PostHog/posthog-flutter/issues/69">In beta</a>',
         },
     },
     {
@@ -317,18 +337,21 @@ const pairsWithItemCount = 3
 const PairsWithArray = [
     {
         icon: <IconGraph />,
+        color: 'blue',
         product: 'Product analytics',
         description: 'Jump into a playlist of session recordings directly from any time series in a graph',
         url: '/product-analytics',
     },
     {
         icon: <IconToggle />,
+        color: 'seagreen',
         product: 'Feature flags',
         description: "See which feature flags are enabled for a user's session",
         url: '/feature-flags',
     },
     {
         icon: <IconFlask />,
+        color: 'purple',
         product: 'Experiments',
         description:
             'Generate a playlist of recordings limited to an A/B test or specific group within a multivariate experiment.',
@@ -458,7 +481,12 @@ export const ProductSessionReplay = () => {
                         </p>
                     </div>
                     <div className="md:w-96">
-                        <CloudinaryImage placeholder="none" quality={100} src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Product/hogs/session-replay-hog.png" alt="" />
+                        <CloudinaryImage
+                            placeholder="none"
+                            quality={100}
+                            src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Product/hogs/session-replay-hog.png"
+                            alt=""
+                        />
                     </div>
                 </div>
 
@@ -496,32 +524,14 @@ export const ProductSessionReplay = () => {
                             >
                                 <ul>
                                     <li>
-                                        You need heatmaps or scrollmaps
-                                        <ul className="pl-6">
-                                            <li className="text-sm">PostHog is currently limited to clickmaps</li>
-                                        </ul>
+                                        <Link to="https://github.com/PostHog/posthog/issues/23400" external>
+                                            Error tracking (in progress...)
+                                        </Link>
                                     </li>
-                                    <li>Error tracking and alerting</li>
                                     <li>
-                                        Mobile SDKs (in progress...)
-                                        <ul className="pl-6">
-                                            <li className="text-sm">
-                                                <Link to="https://github.com/PostHog/posthog/issues/13269" external>
-                                                    React Native
-                                                </Link>{' '}
-                                                |&nbsp;
-                                                <Link to="https://github.com/PostHog/posthog/issues/12344" external>
-                                                    iOS
-                                                </Link>{' '}
-                                                |&nbsp;
-                                                <Link
-                                                    to="https://github.com/PostHog/posthog-flutter/issues/69"
-                                                    external
-                                                >
-                                                    Flutter
-                                                </Link>
-                                            </li>
-                                        </ul>
+                                        <Link to="https://github.com/PostHog/posthog/issues/14331" external>
+                                            Alerting (in progress...)
+                                        </Link>
                                     </li>
                                 </ul>
                             </VsCompetitor>

@@ -167,7 +167,6 @@ export default {
       "<ph_project_api_key>",
       {
         api_host: "<ph_client_api_host>",
-        person_profiles: 'identified_only',
       }
     );
   },
@@ -241,7 +240,6 @@ export default {
       {
         api_host: "<ph_client_api_host>",
         capture_pageview: false,
-        person_profiles: 'identified_only',
       }
     );
   },
@@ -284,3 +282,5 @@ Now when you click the button, PostHog captures the custom `home_button_clicked`
 - [How to set up feature flags in Vue](/tutorials/vue-feature-flags)
 - [How to set up A/B tests in Vue](/tutorials/vue-ab-tests)
 - [How to set up surveys in Vue](/tutorials/vue-surveys)
+
+<NewsletterForm />

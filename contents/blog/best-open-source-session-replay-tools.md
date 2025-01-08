@@ -48,6 +48,8 @@ All PostHog’s tools work together natively, offering extensive, actionable use
 
 PostHog is ideal for [product-minded developers](/blog/what-is-a-product-engineer) and product teams. Unlike Hotjar and Fullstory, it's designed for technical users. Its broad range of features means PostHog can replace several tools.
 
+It also supports replay for mobile apps running that use Android, iOS, React Native, and Flutter SDKs, making it a good option if you're also looking for a tool that offers [Hotjar features for mobile apps](/blog/hotjar-for-mobile-ios-android-react-native-flutter).
+
 ### Features and benefits
 
 - Console logs and network performance
@@ -150,7 +152,7 @@ The cloud version starts at just $6 per month for 6,000 recordings. Lifetime sel
 ## 6. [Matomo](/blog/posthog-vs-matomo)
 ![Matomo - open source GA alternative](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/open-source-hotjar-alternatives/Matomo-session-recording.png)
 
-Matomo is an open web analytics platform. Touted as an alternative to Google Analytics, Matomo is largely focused on understanding marketing website analytics. Session recording is available as an add-on via the [on-premise marketplace](https://plugins.matomo.org/HeatmapSessionRecording).
+[Matomo](/blog/posthog-vs-matomo) is an open web analytics platform. Touted as an alternative to Google Analytics, Matomo is largely focused on understanding marketing website analytics. Session recording is available as an add-on via the [on-premise marketplace](https://plugins.matomo.org/HeatmapSessionRecording).
 
 ### Who is Matomo for?
 

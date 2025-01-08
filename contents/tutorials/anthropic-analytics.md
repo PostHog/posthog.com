@@ -58,8 +58,7 @@ import { useEffect } from 'react'
 export function PHProvider({ children }) {
   useEffect(() => {
     posthog.init('<ph_project_api_key>', {
-      api_host: '<ph_client_api_host>',
-      person_profiles: 'identified_only'
+      api_host: '<ph_client_api_host>'
     })
   }, []);
   return <PostHogProvider client={posthog}>{children}</PostHogProvider>
@@ -349,4 +348,6 @@ We've shown you the basics of creating insights from your product's Claude usage
 
 - [How to set up LLM analytics for Cohere](/tutorials/cohere-analytics)
 - [How to set up LLM analytics for ChatGPT](/tutorials/chatgpt-analytics) 
-- [How to monitor generative AI calls to AWS Bedrock](/tutorials/monitor-aws-bedrock-calls)
+- [How to monitor LlamaIndex apps with Langfuse and PostHog](/tutorials/monitor-llama-index-with-langfuse)
+
+<NewsletterForm />

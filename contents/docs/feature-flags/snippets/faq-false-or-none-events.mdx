@@ -1,5 +1,7 @@
-## My `Feature Flag Called` events show `None`, `(empty string)`, or `false` instead of my variant names
+## My feature flag called events don't show my variant names
 
-The `Feature Flag Response` property is `false` for users who called your feature flag but did not match any of the rollout conditions.
+`Feature Flag Called` events showing `None`, `(empty string)`, or `false` instead of your variant names has two potential causes:
 
-`None` or `(empty string)` indicates that the feature flag is disabled or failed to load. For example, due to a network error, adblocking, or something unexpected.
+1. Your feature flag did not match any of the rollout conditions. If this is the case, the `Feature Flag Response` property will be false `false`.
+
+2. The feature flag is disabled or failed to load. The variant names will show as `None` or `(empty string)` if this is the case. This can happen due to a network error, adblocking, or something unexpected. `(empty string)` also appears when some of the events for an experiment lack feature flag information.

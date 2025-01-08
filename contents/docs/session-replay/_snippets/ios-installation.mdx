@@ -1,0 +1,54 @@
+> 🚧 **NOTE:** iOS session replay is considered `beta` and is free while in beta. We are keen to gather as much feedback as possible so if you try this out please let us know. You can send feedback via the [in-app support panel](https://us.posthog.com#panel=support%3Afeedback%3Asession_replay%3Alow) or one of our other [support options](/docs/support-options).
+
+## Step one: Add PostHog to your app
+
+import IOSInstall from "../../integrate/_snippets/install-ios.mdx"
+
+<IOSInstall />
+
+> Requires PostHog iOS SDK version >= [3.6.0](https://github.com/PostHog/posthog-ios/releases), and it's recommended to always use the latest version.
+
+## Step two: Configure replay settings
+
+Add `config.sessionReplay = true` to your PostHog configuration alongside any of your other configuration options:
+
+```swift
+let config = PostHogConfig(apiKey: "<ph_project_api_key>")
+// Enable session recording. Requires enabling in your project settings as well.
+// Default is false.
+config.sessionReplay = true
+
+// Whether text and text input fields are masked. Default is true.
+// Password inputs are always masked regardless
+config.sessionReplayConfig.maskAllTextInputs = true
+
+// Whether images are masked. Default is true.
+config.sessionReplayConfig.maskAllImages = true
+
+// Enable masking of all sandboxed system views
+// These may include UIImagePickerController, PHPickerViewController and CNContactPickerViewController
+// Default is true.
+config.sessionReplayConfig.maskAllSandboxedViews = true
+
+// Whether network requests are captured in recordings. Default is true
+// Only metric-like data like speed, size, and response code are captured. 
+// No data is captured from the request or response body.
+config.sessionReplayConfig.captureNetworkTelemetry = true
+
+// Whether replays are created using high quality screenshots. Default is false.
+// Required for SwiftUI.
+// If disabled, replays are created using wireframes instead.
+// The screenshot may contain sensitive information, so use with caution
+config.sessionReplayConfig.screenshotMode = true
+
+// Deboucer delay used to reduce the number of snapshots captured and reduce performance impact. Default is 1s
+config.sessionReplayConfig.debouncerDelay = 1.0
+```
+
+## Limitations
+
+- On iOS, minimum deployment target is [iOS13](/docs/libraries/ios)
+- [SwiftUI](https://developer.apple.com/xcode/swiftui/) is only supported if the `screenshotMode` option is enabled.
+  - `Text` views in SwiftUI are considered images, so they are masked unless `maskAllImages` is disabled. 
+- Custom views are not fully supported if `screenshotMode` is disabled.
+- WebView is not supported. A placeholder will be shown.

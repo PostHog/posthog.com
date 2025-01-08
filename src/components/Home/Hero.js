@@ -288,19 +288,19 @@ export default function Hero() {
                         <div className="flex justify-center items-center gap-2 home-hero-cta">
                             {enterpriseMode ? (
                                 <CallToAction size="lg" to="/demo">
-                                    Contact sales
+                                    Contact Sales
                                 </CallToAction>
                             ) : (
                                 <SignupCTA />
                             )}
                             <TrackedCTA
-                                key={enterpriseMode ? 'talk-to-sales' : 'get-a-demo'}
-                                event={{ name: `clicked Get a demo` }}
-                                href="/demo"
+                                key={enterpriseMode ? 'talk-to-sales' : 'talk-to-a-human'}
+                                event={{ name: `clicked Talk to a human` }}
+                                href="/talk-to-a-human"
                                 type="secondary"
                                 size="lg"
                             >
-                                {enterpriseMode ? 'Contact enterprise sales' : 'Get a demo'}
+                                {enterpriseMode ? 'Contact enterprise sales' : 'Talk to a human'}
                             </TrackedCTA>
                         </div>
                         {enterpriseMode && (

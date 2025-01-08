@@ -12,7 +12,7 @@ One of the many awesome things about PostHog is that support is being dealt with
 
 You'll see some teams using a term of endearment for Support Hero, examples being "Infra Hero" or… "Luigi". Don't ask – we don't know.
 
-Our Support Engineers, in [the Comms team](/teams/customer-comms) triage tickets for the Product Analytics, Web Analytics, Data Warehouse, CDP, Replay, and Feature Success teams, due to the high volume of tickets those teams get. They will resolve tickets if possible, and escalate to the engineering team responsible if they need further help.
+Our Support Engineers, in [the Support team](/teams/support) triage tickets for the Product Analytics, Web Analytics, Data Warehouse, CDP, Replay, Experiments, Feature Flags, and Survey teams, due to the high volume of tickets those teams get. They will resolve tickets if possible, and escalate to the engineering team responsible if they need further help.
 
 ## When is my turn?
 
@@ -21,7 +21,7 @@ Most engineering teams run a PagerDuty schedule:
 - [Product Analytics](https://posthog.pagerduty.com/schedules#PXUZ9XL)
 - [Feature Success](https://posthog.pagerduty.com/schedules#P04FUTJ)
 - [Replay](https://posthog.pagerduty.com/schedules#PLGXQIF)
-- [Pipeline](https://posthog.pagerduty.com/schedules#PM8YSH8)
+- [CDP](https://posthog.pagerduty.com/schedules#PM8YSH8)
 - [Infrastructure](https://posthog.pagerduty.com/schedules#P78OOWZ)
 - [Growth](https://posthog.pagerduty.com/schedules#PN1Q6BO)
 
@@ -37,8 +37,10 @@ Each engineering team has its own list of tickets in Zendesk:
 
 - [Product Analytics](https://posthoghelp.zendesk.com/agent/filters/17989255082139) (escalated only)
 - [Web Analytics](https://posthoghelp.zendesk.com/agent/filters/21786368880027) (escalated only)
-- [Feature Success](https://posthoghelp.zendesk.com/agent/filters/25210600744731) (escalated only)
+- [Experiments](https://posthoghelp.zendesk.com/agent/filters/30579720982299) (escalated only)
+- [Feature Flags](https://posthoghelp.zendesk.com/agent/filters/30579605742363) (escalated only)
 - [Replay](https://posthoghelp.zendesk.com/agent/filters/25210723706907) (escalated only)
+- [Surveys](https://posthoghelp.zendesk.com/agent/filters/30579650784411) (escalated only)
 - [CDP](https://posthoghelp.zendesk.com/agent/filters/28134703633179) (escalated only)
 - [Infrastructure](https://posthoghelp.zendesk.com/agent/filters/14507148758939)
 - [Auth & Billing, handled by Growth](https://posthoghelp.zendesk.com/agent/filters/14507107058843)
@@ -62,6 +64,16 @@ Others tickets report bugs or suspected bugs. Get to the bottom of each one - yo
 If not much is happening, feel free to do feature work – but in the case of a backlog in Zendesk, drop other things and roll up your sleeves. When you're Support Hero, supporting users comes first.
 
 It might be an intense week, but you're also going to solve so many real problems, and that feels great.
+
+## What do I do as a SDK Support Hero?
+
+Outside of your team's Support Hero rotation, you are also eligible to serve in a one week SDK Support Hero rotation. [The schedule is managed in PagerDuty](https://posthog.pagerduty.com/schedules#P7B7NTR).
+
+Your primary responsibility is simply to make sure SDK questions get some love. During the rotation, please keep an eye on two things:
+- [Escalated SDK tickets in Zendesk](https://posthoghelp.zendesk.com/agent/filters/30528724215067)
+- New issues in the SDK repositories, e.g. [posthog-js](https://github.com/PostHog/posthog-js/issues?q=sort%3Aupdated-desc+is%3Aissue+is%3Aopen)
+
+You don't have to be an expert in all of the SDKs, but it can be a great opportunity to dive into parts unknown. Feel free to ping relevant folks as needed.
 
 ## Don't ask users to do work that you can do!
 
@@ -94,7 +106,7 @@ example: "Ah, I see what you mean, that's not ideal! Sorry. I'll dig in to that 
 
 As an engineer, when answering a question, your first instinct is to give them an answer as quickly as possible. That means we often forget pleasantries, or will ignore a question until we've found the answer. So, the following guidelines:
 
-- Always respond to a question within a reasonable timeframe during your working day. Our SLAs are [explained here](/handbook/comms/customer-support#response-targets), but you should always try to respond to tickets quickly. 
+- Always respond to a question within a reasonable timeframe during your working day. Our SLAs are [explained here](/handbook/support/customer-support#response-targets), but you should always try to respond to tickets quickly. 
   - If you're ready to look into the issue, and you think it might take a while/require a fix, just mention that and say you'll get back to them
   - If you have no idea how to answer or fix their issue, @mention someone who does
   - They need to know we've understood them. And have a clear picture of what their onward journey is. Are they waiting for us? How Long? Or - are we waiting for them? what for?
@@ -106,7 +118,7 @@ As an engineer, when answering a question, your first instinct is to give them a
 - Housekeeping. Once a customer issue/question has been addressed, close the ticket in [Zendesk](#zendesk) (mark it `Solved`) to make it easy to identify outstanding conversations.
 - If a user has been particularly helpful, such as raising a security or bug report, feel free to offer a small credit for the merch store. 
 
-If you have any questions about how or when to communicate with users, you can always ask [the Comms team](/handbook/comms/comms-team) for help. 
+If you have any questions about how or when to communicate with users, you can always ask [the Words & Pictures team](/teams/words-pictures) for help. 
 
 ## How do I prioritize?
 
@@ -115,7 +127,7 @@ As a business we need to ensure we are focusing support on our paying customers,
 1. Any requests where you are tagged by the Customer Success team in a dedicated Slack channel, as there will be some urgency needed. 
 2. `Open`, `escalated` Zendesk tickets for your team that have `High` priority.
 3. `Open`, `escalated` Zendesk tickets for your team that have `Normal` priority.
-4. `New` and `Open`* (non-escalated) Zendesk tickets for your team that are nearing breach or have breached [SLAs](/handbook/comms/customer-support#response-targets)
+4. `New` and `Open`* (non-escalated) Zendesk tickets for your team that are nearing breach or have breached [SLAs](/handbook/support/customer-support#response-targets)
 5. `Open` ZenDesk tickets for your team that have low priority.
 
 \* Due to the way we're using Pylon, "new" tickets from high prio customer Slack channels only appear as `New` in Zendesk for a few seconds, then a webhook updates the ticket and quickly changes it to `Open`.
@@ -207,11 +219,11 @@ If the user raised the issue in a public forum, such as Twitter, it can be a goo
 
 #### Avoiding duplication of effort in ZenDesk
 
-Each team handles ZenDesk queues (views) in slightly different ways.  Check in with your team about whether or not to assign tickets to yourself, or keep them assigned to the team/group level. Comms team folks, who work on tickets from multiple queues, often assign tickets to themselves, (and when escalating, will assign the ticket back to the team/group.) 
+Each team handles ZenDesk queues (views) in slightly different ways.  Check in with your team about whether or not to assign tickets to yourself, or keep them assigned to the team/group level. Support team folks, who work on tickets from multiple queues, often assign tickets to themselves, (and when escalating, will assign the ticket back to the team/group.) 
 
 For unassigned tickets, keep an eye out for whether someone else is already viewing a ticket (will appear in the upper-left of a ticket you're viewing, with their name, avatar and `also viewing`.)  Use those as clues to avoid working on a ticket that someone is already working on (and communicate with each other when in doubt.  Err on the side of making sure the ticket gets responded to within SLA/response target times.)
 
-Also, avoid cherry-picking tickets. Pick the ticket that is closest to breaching our [response targets](/handbook/comms/customer-support#response-targets).
+Also, avoid cherry-picking tickets. Pick the ticket that is closest to breaching our [response targets](/handbook/support/customer-support#response-targets).
 
 #### Ticket Status
 
@@ -257,11 +269,33 @@ Adding the `:ticket:` emoji reaction will cause Pylon to add a couple of replies
 
 ZenDesk tickets created this way will normally be marked as high priority tickets. You can respond to them either in Zendesk or Slack, as there is a two-way sync.
 
+### Adding new teams to Zendesk.
+
+When we've added a new [team](/teams), or 🪓 split an existing team into two or more, we'll need to get them set up in Zendesk. Here's an overview of the steps:
+
+- [Create a new group in Zendesk](https://support.zendesk.com/hc/en-us/articles/4408894175130-Creating-groups)
+- [Add team members to the group](https://support.zendesk.com/hc/en-us/articles/4408821536794-Adding-and-removing-team-members-from-groups#topic_skt_qrs_4nb) 
+- [Add triggers](https://support.zendesk.com/hc/en-us/articles/4408843730458-Triggers-resources) to the `Routing for internal teams` category (Tip: Clone an existing trigger, rename it, and tweak it)
+- [Add views](https://support.zendesk.com/hc/en-us/articles/4408888828570-Creating-views-to-build-customized-lists-of-tickets) (Tip: Clone an existing view, rename it, and tweak it.)
+- Add Slack notification [triggers](https://posthoghelp.zendesk.com/admin/objects-rules/rules/triggers) (Tip: Clone an existing trigger, yada, yada)
+- Add SLA breach alerts
+	- [Create a webhook endpoint in slack](https://api.slack.com/messaging/webhooks)
+		- [Create a Slack app](https://api.slack.com/apps/new)
+		- [Enable incoming webhooks](https://api.slack.com/messaging/webhooks#enable_webhooks)
+		- [Create a webhook to the channel](https://api.slack.com/messaging/webhooks#create_a_webhook), copy the url
+	- [Create a webhook in zendesk](https://support.zendesk.com/hc/en-us/articles/4408839108378-Creating-webhooks-to-interact-with-third-party-systems) (Tip: Refer to existing webhooks for common settings)
+		- Choose "Trigger or automation"
+		- Paste the endpoint url you copied from the Slack app
+		  (Note: The built-in tool for testing webhooks in ZD has been flakey while the UI has been changing lately. Failed tests don't always mean the hook won't work. 🫤)
+	- [Create an automation in zendesk](https://support.zendesk.com/hc/en-us/articles/4408832701850-About-automations-and-how-they-work?Z2_EN-US%5Bquery%5D=a) (Tip: Clone an existing automation, blah, blah, blah)
+- If you've split a team, sort the tickets to the new groups as needed, then disable the triggers, automations, and views related to the old team.
+- Carry on
+
 ### Community questions
 
 At the end of every page in the docs and handbook is a form where visitors can ask questions about the content of that page. (These questions also appear in the relevant category in the [PostHog community](/questions).)
 
-Community questions appear in Zendesk but tickets are closed automatically if they're resolved directly on the website.
+Community questions appear in Zendesk and tickets are closed automatically if an answer is picked as a solution on the website. Ideally, the original poster is the one who marks a response as the solution. If they don't, feel free to close the ticket in Zendesk once you've replied.
 
 ## How do I answer community questions?
 

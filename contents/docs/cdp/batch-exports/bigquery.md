@@ -66,6 +66,8 @@ Navigate to IAM and click on Grant Access to arrive at this screen:
 
 This section describes the models that can be exported to BigQuery.
 
+> **Note:** New fields may be added to these models over time. To maintain consistency, these fields are not automatically added to the destination tables. If a particular field is missing in your BigQuery tables, you can manually add the field, and it will be populated in future exports.
+
 ### Events model
 
 This is the default model for BigQuery batch exports. The schema of the model as created in BigQuery is:
@@ -99,6 +101,7 @@ The schema of the model as created in BigQuery is:
 | properties                 | `STRING` or `JSON` | A JSON object with all the latest properties of the person                                                                         |
 | person_version             | `INT64`            | Internal version of the person properties associated with a (`team_id`, `distinct_id`) pair, used by batch export in merge operation               |
 | person_distinct_id_version | `INT64`            | Internal version of the person to `distinct_id` mapping associated with a (`team_id`, `distinct_id`) pair, used by batch export in merge operation |
+| created_at                 | `TIMESTAMP`        | The timestamp when the person was created                                                                                          |
 
 The BigQuery table will contain one row per `(team_id, distinct_id)` pair, and each pair is mapped to their corresponding `person_id` and latest `properties`. The `properties` field can be either `STRING` or `JSON`, depending on whether the corresponding checkbox is marked or not when creating the batch export.
 

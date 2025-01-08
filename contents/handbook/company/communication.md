@@ -215,7 +215,7 @@ Writing an RFC may be helpful when any of the following is true:
 - You want to clarify something for yourself or it affects just one team
 - It is a relatively non controversial change/idea that doesn't require much extra context. In other words, it doesn't create problems for another team.
 - It will be a large amount of work (more than 2-3 weeks of people's time)
-- It's introducing a new technology
+- It's [introducing a new technology](/newsletter/choosing-technologies)
 - It's a major new feature, change to the product, or change to the company
 - It will have a major customer impact
 

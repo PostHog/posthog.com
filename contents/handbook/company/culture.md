@@ -21,9 +21,9 @@ All remote has a bunch of advantages:
 * It allows for uninterrupted work.
 * It makes results clearer, which helps us hold people to account for outcomes rather than hours spent in the office.
 
-## Diverse & inclusive
+## Extremely welcoming
 
-This is actually so important to us that it has [its own dedicated page](/handbook/company/diversity). 
+This is actually so important to us that it has [its own dedicated page](/handbook/company/grown-ups). 
 
 ## Extremely transparent
 

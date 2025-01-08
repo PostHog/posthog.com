@@ -371,3 +371,5 @@ export default defineConfig({
 - [How to set up Astro analytics, feature flags, and more](/tutorials/astro-analytics)
 - [How to set up surveys in Astro](/tutorials/astro-surveys)
 - [A software engineer's guide to A/B testing](/product-engineers/ab-testing-guide-for-engineers)
+
+<NewsletterForm />

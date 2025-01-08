@@ -357,3 +357,5 @@ Refresh your app and submit a few prompts (and try to get some toxic responses!)
 - [How to monitor generative AI calls to AWS Bedrock](/tutorials/monitor-aws-bedrock-calls)
 - [How to compare AWS Bedrock prompts](/tutorials/compare-aws-bedrock-prompts)
 - [Product metrics to track for LLM apps](/product-engineers/llm-product-metrics)
+
+<NewsletterForm />

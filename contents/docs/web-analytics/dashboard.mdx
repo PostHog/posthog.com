@@ -6,7 +6,7 @@ showTitle: true
 
 The web analytics dashboard provides an overview of your website's traffic. 
 
-For the selected time range, it starts with the number of visitors, views, sessions, along with trends for each, as well as average session duration and bounce rate. Each of these is compared with the previous time range, showing how much they increased or decreased.
+For the selected time range, it starts with the number of visitors, views, [sessions](/docs/data/sessions), along with trends for each, as well as average session duration and bounce rate. Each of these is compared with the previous time range, showing how much they increased or decreased.
 
 <ProductScreenshot
   imageLight = "https://res.cloudinary.com/dmukukwp6/image/upload/web_analytics_top_light_mode_2024_10_be53cf5325.png"
@@ -15,19 +15,25 @@ For the selected time range, it starts with the number of visitors, views, sessi
   classes="rounded"
 />
 
+If you add a [conversion goal](/docs/web-analytics/conversion-goals), you can see the number of conversions and conversion rate as well.
+
 ## Bounce rate
 
-A bounce is a session where the user only had one pageview, no autocaptures, and spent less than 30 seconds on the page. Your bounce rate is the percentage of sessions that resulted in a bounce.
+A bounce is a session where the user only had one pageview, no autocaptures, and spent less than 10 seconds on the page. Your bounce rate is the percentage of sessions that resulted in a bounce.
 
 PostHog uses autocaptured events to calculate this. To make sure this value is accurate, make sure you enable [autocapture](/docs/product-analytics/autocapture) and are capturing both `$pageleave` and `$autocapture` events.
 
+You can change the duration threshold in the [web analytics settings](https://app.posthog.com/settings/project-web-analytics).
+
 ## LCP Score
 
-LCP stands for "Largest Contentful Paint", and is a Web vitals metric that measures how long it takes for the largest content element on a page to load. To calculate the score, we take the 75th percentile of the LCP values for the first pageview of each session. A good LCP score is less than 2.5 seconds, and a poor score is more than 4 seconds.
+[Largest contentful paint (LCP)](https://web.dev/articles/lcp) is a web vital metric that measures how long it takes for the largest content element on a page to load. 
+
+To calculate the score, we take the 75th percentile of the LCP values for the first pageview of each session. A good LCP score is less than 2.5 seconds, and a poor score is more than 4 seconds.
 
 ## Paths
 
-Top paths and top entry paths drill down into specific pages on your site to show their views, visitors, bounce rate, and scroll depth. You can click on any of the paths to filter the dashboard for that path.
+Top paths drill down into specific pages on your site to show their views, visitors, bounce rate, and scroll depth. You can click on any of the paths to filter the dashboard for that path.
 
 <ProductScreenshot
   imageLight = "https://res.cloudinary.com/dmukukwp6/image/upload/v1711580005/posthog.com/contents/images/docs/web-analytics/dashboard/paths-light.png" 
@@ -36,6 +42,8 @@ Top paths and top entry paths drill down into specific pages on your site to sho
   classes="rounded"
 />
 
+Entry and end paths show these stats for the first and last pageviews of each session, while outbound clicks shows the URLs that users clicked on to leave your site.
+
 ### Scroll depth
 
 Both average scroll and deep scroll rate are calculated using how far a user has scrolled down the page and how much content has scrolled into view.
@@ -43,9 +51,9 @@ Both average scroll and deep scroll rate are calculated using how far a user has
 - **Average scroll depth** is the average scroll percentage across pageviews.
 - **Deep scroll rate** is the percentage of users who scroll far enough down a page to view 80% of the content.
 
-## Referrers, channels, UTMs
+## Channels, referrers, UTMs
 
-To get an idea of where users are visiting your site from, you can see top referrers, channels, and UTM values.
+To get an idea of where users are visiting your site from, you can see top referrers, [channels](/docs/data/channel-type), and [UTMs](/docs/data/utm-segmentation).
 
 <ProductScreenshot
   imageLight = "https://res.cloudinary.com/dmukukwp6/image/upload/v1711580002/posthog.com/contents/images/docs/web-analytics/dashboard/referrers-light.png" 
@@ -53,6 +61,8 @@ To get an idea of where users are visiting your site from, you can see top refer
   alt="Web analytics referrers" 
   classes="rounded"
 />
+
+You can dive deeper into how your sessions are attributed using the [session attribution explorer](https://us.posthog.com/web/session-attribution-explorer). This shows the session count for each combination of channel type, referrer, and UTM as well as example entry URLs and the SQL query used to generate the data.
 
 ### Channel types
 
@@ -89,6 +99,21 @@ Based on UTMs, referring domains, and more, PostHog automatically classifies tra
 
 > **Read more:** [How channel type is calculated](/docs/data/channel-type)
 
+### Custom channel type
+
+
+
+If our predefined channel types don't work for you, you can define rules to match incoming events to your own custom channel types in [your project settings](https://us.posthog.com/settings/project-web-analytics). The first matching rule is used, and if no rule matches (or if none are defined) then the default channel type is used.
+
+For example, you could create an **AI** channel type where the referring domain equals `chatgpt.com`, `www.perplexity.ai`, and other AI services.
+
+<ProductScreenshot
+  imageLight = "https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2024_12_04_at_16_48_30_2x_ea594a4d1c.png" 
+  imageDark = "https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2024_12_04_at_16_48_52_2x_12c92512c1.png"
+  alt="Custom channel types" 
+  classes="rounded"
+/>
+
 ### UTMs
 
 UTMs include source, medium, campaign, content, and term. Each are set as URL parameters and autocaptured by PostHog. For example, the following URL has the source of `twitter`, medium of `social`, and `campaign` of `twitter-campaign`:
@@ -101,7 +126,7 @@ Setting UTMs correctly is crucial for accurately classifying your traffic, not o
 
 ## World map
 
-The world map shows where your users are located, but you can also select it to show top countries, regions (like California, England, or Ontario), or cities.
+The world map shows where your users are located, but you can also select it to show top countries, regions (like California, England, or Ontario), cities, timezones, or languages.
 
 <ProductScreenshot
   imageLight = "https://res.cloudinary.com/dmukukwp6/image/upload/v1711579999/posthog.com/contents/images/docs/web-analytics/dashboard/regions-light.png" 
@@ -123,6 +148,17 @@ Retention creates a cohort of unique users who performed any event for the first
 
 > **Read more:** [Creating and understanding retention](/docs/product-analytics/retention)
 
+## Goals
+
+Goals shows your pinned or most recently created actions and the number of conversions they've had. You can set a custom event or action as a [conversion goal](/docs/web-analytics/conversion-goals) at the top of the dashboard for more specific metrics.
+
+<ProductScreenshot
+  imageLight = "https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2024_11_06_at_16_03_42_2x_bb31331709.png" 
+  imageDark = "https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2024_11_06_at_16_03_56_2x_c46b405ffa.png"
+  alt="Web analytics goals" 
+  classes="rounded"
+/>
+
 ## Filtering your dashboard
 
 Like other dashboards in PostHog, the web analytics dashboard is filterable. This means you can filter for data with certain event or person property values. Options include browser, path name, device type, country, and UTMs. Just click the "Add filter" button next to the date range at the top of the dashboard.
@@ -130,3 +166,5 @@ Like other dashboards in PostHog, the web analytics dashboard is filterable. Thi
 This enables you to dive into specific stats for regions, parts of the site, and specific marketing campaigns. 
 
 For more complex queries, you can still use the product analytics tab as usual.
+
+And for more on web analytics, check out our [getting started](/docs/web-analytics/getting-started) guide.

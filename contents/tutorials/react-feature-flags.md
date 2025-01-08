@@ -153,3 +153,5 @@ These are basic implementations of React feature flags setup. From here, you can
 - [Testing frontend feature flags with React, Jest, and PostHog](/tutorials/test-frontend-feature-flags)
 - [How to add popups to your React app with feature flags](/tutorials/react-popups)
 - [How to set up analytics in React](/tutorials/react-analytics)
+
+<NewsletterForm />

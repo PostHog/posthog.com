@@ -29,8 +29,7 @@ import posthog from 'posthog-js'
 posthog.init(
   '<ph_project_api_key>',
   {
-    api_host:'<ph_client_api_host>',
-    person_profiles: 'identified_only'
+    api_host:'<ph_client_api_host>'
   }
 )
 
@@ -77,7 +76,6 @@ posthog.init(
   '<ph_project_api_key>',
   {
     api_host:'<ph_client_api_host>',
-    person_profiles: 'identified_only',
     capture_pageview: false
   }
 )
@@ -169,7 +167,6 @@ posthog.init(
   '<ph_project_api_key>',
   {
     api_host:'<ph_client_api_host>',
-    person_profiles: 'identified_only',
     capture_pageview: false,
     capture_pageleave: true
   }
@@ -177,6 +174,31 @@ posthog.init(
 
 bootstrapApplication(AppComponent, appConfig)
   .catch((err) => console.error(err));
+```
+
+## Session replay
+
+Session replay uses change detection to record the DOM. This can clash with Angular's change detection.
+
+The recorder tool attempts to detect when an Angular zone is present and avoid the clash but might not always succeed.
+
+If you see performance impact from recording in an Angular project, ensure that you use [`ngZone.runOutsideAngular`](https://angular.io/api/core/NgZone#runoutsideangular). 
+
+```ts file=posthog.service.ts
+import { Injectable } from '@angular/core';
+import posthog from 'posthog-js'
+
+@Injectable({ providedIn: 'root' })
+export class PostHogSessionRecordingService {
+  constructor(private ngZone: NgZone) {}
+initPostHog() {
+    this.ngZone.runOutsideAngular(() => {
+      posthog.init(
+        /* your config */
+      )
+    })
+  }
+}
 ```
 
 ## Next steps

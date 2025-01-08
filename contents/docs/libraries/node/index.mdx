@@ -9,8 +9,6 @@ icon: >-
 features:
   eventCapture: true
   userIdentification: true
-  autoCapture: false
-  sessionRecording: false
   featureFlags: true
   groupAnalytics: true
 ---
@@ -47,7 +45,7 @@ import NodeSendEvents from '../../integrate/send-events/_snippets/send-events-no
 
 ## Person profiles and properties
 
-PostHog captures identified events by default. These create [person profiles](/docs/data/persons). To set [person properties](/docs/data/user-properties) in these profiles, include them when capturing an event:
+The Node SDK captures identified events by default. These create [person profiles](/docs/data/persons). To set [person properties](/docs/data/user-properties) in these profiles, include them when capturing an event:
 
 ```node
 client.capture({
@@ -165,6 +163,10 @@ client.groupIdentify({
     distinctId: 'xyz'
 })
 ```
+
+The `name` is a special property which is used in the PostHog UI for the name of the group. If you don't specify a `name` property, the group ID will be used instead.
+
+If the optional `distinct_id` is not provided in the group identify call, it defaults to `${groupType}_${groupKey}` (e.g., `$company_company_id_in_your_db` in the example above). This default behavior will result in each group appearing as a separate person in PostHog. To avoid this, it's often more practical to use a consistent `distinct_id`, such as `group_identifier`. 
 
 ## GeoIP properties
 
