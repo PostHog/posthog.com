@@ -14,7 +14,8 @@ import QuickLinks from 'components/QuickLinks'
 import { useChat } from 'hooks/useChat'
 import { useStaticQuery } from 'gatsby'
 import { graphql } from 'gatsby'
-import { IconSidebarOpen } from '@posthog/icons'
+import { IconLightBulb, IconSidebarOpen } from '@posthog/icons'
+import { AskMax } from 'components/AskMax'
 
 type ProductAnalyticsProps = {
     data: {
@@ -28,7 +29,8 @@ type ProductAnalyticsProps = {
 
 export const Intro = ({image = true}) => (
     <header className="bg-accent dark:bg-accent-dark border border-light dark:border-dark rounded flex flex-col items-center md:flex-row md:gap-4 pt-2 mb-8">
-        <div className="p-4 md:p-8">
+        <div className="p-4 md:p-8 flex-1">
+            <p className="text-[15px] text-primary/60 dark:text-primary-dark/75 mb-1">Getting started</p>
             <h1 className="text-4xl mt-0 mb-2">Product analytics</h1>
             <h3 className="text-lg font-semibold text-primary/60 dark:text-primary-dark/75 leading-tight">
                 Learn how to use product analytics to understand your users.
@@ -68,28 +70,7 @@ export const Content = ({ quickLinks = false }) => {
         <>
             <Intro />
 
-            <div className="md:pt-4 pb-6 flex flex-col md:flex-row items-center justify-center gap-4 relative mb-6">
-
-                <aside>
-                <CloudinaryImage
-                    src="https://res.cloudinary.com/dmukukwp6/image/upload/wizard_hog_bdbdabe5a2.png"
-                    width={205}
-                    placeholder="none"
-                    className="w-32 md:w-auto"
-                />
-                </aside>
-                <div className="flex flex-col items-center md:items-start">
-
-                <h3 className="mb-1 text-xl">Questions? Ask Max AI.</h3>
-                <p className="text-[15px] mb-3 opacity-75">
-                It's easier than reading through <strong>{totalDocsCount} docs articles</strong>.
-                </p>
-                <CallToAction type="secondary" size="md" className="[&>span]:flex [&>span]:items-center [&>span]:gap-1" onClick={() => setChatOpen(true)}>
-                    Chat with Max AI
-                    <IconSidebarOpen className="size-6 inline-block" />
-                </CallToAction>
-                </div>
-            </div>
+            <AskMax />
 
 
 

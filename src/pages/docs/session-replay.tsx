@@ -60,6 +60,7 @@ export const Intro = ({ image = true }) => {
     return (
         <div className="bg-accent dark:bg-accent-dark border border-light dark:border-dark rounded flex flex-col items-center md:flex-row md:gap-4 pt-2 mb-8">
             <div className="p-4 md:p-8">
+                <p className="text-[15px] text-primary/60 dark:text-primary-dark/75 mb-1">Getting started</p>
                 <h1 className="text-4xl mt-0 mb-2">Session replay</h1>
                 <h3 className="text-lg font-semibold text-primary/60 dark:text-primary-dark/75 leading-tight">
                     Play back sessions to diagnose UI issues, improve support, and get context for nuanced user
@@ -69,7 +70,7 @@ export const Intro = ({ image = true }) => {
             </div>
 
             {image && (
-                <figure className="m-0 mt-auto p-0">
+                <figure className="m-0 mt-auto p-0 flex items-end">
                     <CloudinaryImage
                         alt=""
                         placeholder="none"
