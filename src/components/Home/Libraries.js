@@ -184,7 +184,7 @@ export default function Libraries() {
                     </div>
                 </div>
 
-                <div className="col-span-7 -mt-48 sm:mt-0 relative z-10 after:absolute after:left-0 after:w-full after:-top-60 after:h-60 after:bg-gradient-to-b after:from-tan/0 after:via-tan/75 after:to-tan dark:after:from-dark/0 dark:after:via-bg/75 dark:after:to-dark sm:overflow-hidden bg-tan dark:bg-dark">
+                <div className="col-span-7 -mt-48 sm:mt-0 pl-1 relative z-10 after:absolute after:left-0 after:w-full after:-top-60 after:h-60 after:bg-gradient-to-b after:from-tan/0 after:via-tan/75 after:to-tan dark:after:from-dark/0 dark:after:via-bg/75 dark:after:to-dark sm:overflow-hidden bg-tan dark:bg-dark">
                     <h3 className="text-5xl xl:text-6xl text-center sm:text-left mb-8">
                         SDKs for <span className="text-blue">web</span> and{' '}
                         <span className="text-red dark:text-yellow">mobile</span>
