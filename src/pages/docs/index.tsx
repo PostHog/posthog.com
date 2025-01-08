@@ -31,7 +31,7 @@ const ProductItem = ({ product }) => {
                     <Icon className={`w-6 h-6 text-${product.color}`} />
                 </div>
                 <div className="flex-1">
-                    <strong>{product.name}</strong>
+                    <Link href={product.url} className="text-primary dark:text-primary-dark hover:underline hover:text-primary dark:hover:text-primary-dark"><strong>{product.name}</strong></Link>
                     <p className="mb-0 text-[15px] opacity-75">{product.description}</p>
                     <div className="flex flex-wrap gap-2 pt-2">
                         {product.children
