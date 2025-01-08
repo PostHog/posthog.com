@@ -51,10 +51,10 @@ const useInkeepSettings = (): InkeepSharedSettings => {
         botAvatarSrcUrl: 'https://res.cloudinary.com/dmukukwp6/image/upload/v1688579513/max_c5dd553db8.png',
         botName: 'Max AI',
         quickQuestions: [
-            'How do I track events in JavaScript?',
             'How do I identify users?',
             'Help debug sending data',
-            'How does autocapture work?',
+            'How do I set up a reverse proxy?',
+            'What are person profiles and how are they billed?',
         ],
     }
 
