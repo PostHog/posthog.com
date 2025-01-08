@@ -70,7 +70,7 @@ export default function Chat(): JSX.Element | null {
                                     className="absolute top-0 left-0 w-full z-10"
                                 >
                                     <div className="m-2 p-2 flex items-center justify-between bg-[#feedd5] dark:bg-dark border border-light dark:border-dark rounded overflow-hidden flex-shrink-0">
-                                        <p className="m-0 text-sm opacity-70">
+                                        <p className="m-0 pl-4 text-sm opacity-70 flex-1">
                                             Use{' '}
                                             <kbd
                                                 className={`box-content p-[5px] border border-b-2 border-border dark:border-dark rounded-[3px] inline-flex text-black/35 dark:text-white/40 text-code text-xs py-0 bg-white dark:bg-accent-dark`}

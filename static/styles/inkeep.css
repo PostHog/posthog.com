@@ -8,6 +8,22 @@ strong,
     font-variation-settings: "wght" 800;
 }
 
+.ikp-loading__dots {
+    background: url(https://res.cloudinary.com/dmukukwp6/image/upload/loading_bdba47912e.gif) no-repeat center center;
+    background-size: 100%;
+    height: 3rem;
+    margin-right: -.5rem;
+    width: 3rem;
+}
+
+.ikp-loading__dots span {
+    display: none;
+}
+
+.ikp-ai-chat-footer__content-wrapper {
+    padding-top: .5rem;
+}
+
 .ikp-ai-chat__message-box {
     background: #E5E7E0;
     border-radius: .25rem;
@@ -17,7 +33,54 @@ strong,
 
 .ikp-ai-chat__message-input {
     font-size: 15px;
-    padding-top: .58rem;
+}
+
+.ikp-ai-chat__send-button {
+    border-radius: .25rem;
+    border-style: solid;
+    border-width: 1.5px;
+    flex: 0 0 28px;
+    margin: .25rem .25rem calc(.25rem + 1px);
+    min-height: 28px;
+    padding: .25rem;
+    min-width: 28px;
+    width: 28px;
+}
+
+.ikp-ai-chat__send-button:not(:disabled) {
+    border-bottom-width: 2.5px;
+
+    [data-theme="light"] & {
+        border-color: rgba(0,0,0,.5);
+        color: rgba(0,0,0,.5);
+    }
+    [data-theme="dark"] & {
+        border-color: #4A4C52;
+        color: #EEEFE9;
+    }
+}
+
+.ikp-ai-chat__send-button:disabled {
+    [data-theme="light"] & {
+        border-color: rgba(0,0,0,.3);
+        color: rgba(0,0,0,.3);
+    }
+    [data-theme="dark"] & {
+        border-color: #1D1F27;
+        color: #1D1F27;
+    }
+}
+
+.ikp-ai-chat__send-button:hover {
+    top: -.5px;
+}
+
+.ikp-ai-chat__send-button:active {
+    top: .5px;
+}
+
+.ikp-ai-chat__send-icon {
+    transform: rotate(0deg);
 }
 
 .community-suggestion {

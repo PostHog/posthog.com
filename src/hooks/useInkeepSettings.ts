@@ -10,6 +10,7 @@ type InkeepSharedSettings = {
 }
 
 const useInkeepSettings = (): InkeepSharedSettings => {
+    
     const { websiteTheme } = useValues(layoutLogic)
     const baseSettings: InkeepBaseSettings = {
         apiKey: process.env.GATSBY_INKEEP_API_KEY,
@@ -37,6 +38,9 @@ const useInkeepSettings = (): InkeepSharedSettings => {
                     mono: "'Source Code Pro', 'Menlo', 'Consolas', 'monaco', 'monospace'",
                 },
             },
+        },
+        customIcons: {
+            chatSubmit: { custom: '/icons/return.svg' },
         },
     }
 
