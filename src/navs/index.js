@@ -2975,6 +2975,10 @@ export const docsMenu = {
                             url: '/docs/cdp/destinations/loops',
                         },
                         {
+                            name: 'Mailchimp',
+                            url: '/docs/cdp/destinations/mailchimp',
+                        },
+                        {
                             name: 'Mailgun',
                             url: '/docs/cdp/destinations/mailgun',
                         },
