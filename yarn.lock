@@ -17565,10 +17565,10 @@ markdown-table@^3.0.0:
   resolved "https://registry.yarnpkg.com/markdown-table/-/markdown-table-3.0.2.tgz#9b59eb2c1b22fe71954a65ff512887065a7bb57c"
   integrity sha512-y8j3a5/DkJCmS5x4dMCQL+OR0+2EAq3DOtio1COSHsmW2BGXnNCK3v12hJt1LrUz5iZH5g0LmuYOjDdI+czghA==
 
-markdown-to-jsx@^7.1.7:
-  version "7.1.7"
-  resolved "https://registry.yarnpkg.com/markdown-to-jsx/-/markdown-to-jsx-7.1.7.tgz#a5f22102fb12241c8cea1ca6a4050bb76b23a25d"
-  integrity sha512-VI3TyyHlGkO8uFle0IOibzpO1c1iJDcXcS/zBrQrXQQvJ2tpdwVzVZ7XdKsyRz1NdRmre4dqQkMZzUHaKIG/1w==
+markdown-to-jsx@^7.4.0:
+  version "7.7.3"
+  resolved "https://registry.yarnpkg.com/markdown-to-jsx/-/markdown-to-jsx-7.7.3.tgz#c75927252592696e9e8b2a9557628749d8ab023e"
+  integrity sha512-o35IhJDFP6Fv60zPy+hbvZSQMmgvSGdK5j8NRZ7FeZMY+Bgqw+dSg7SC1ZEzC26++CiOUCqkbq96/c3j/FfTEQ==
 
 marked@^4.0.15:
   version "4.1.0"
@@ -20485,10 +20485,10 @@ postcss@^8.4.31, postcss@^8.4.48:
     picocolors "^1.1.1"
     source-map-js "^1.2.1"
 
-posthog-js@1.202.4:
-  version "1.202.4"
-  resolved "https://registry.yarnpkg.com/posthog-js/-/posthog-js-1.202.4.tgz#82b06e8f4a300fe6bb3a32e84273d1c3df8043c9"
-  integrity sha512-YLu6f1ibAkiopGivGQnLBaCKegT+0GHP3DfP72z3KVby2UXLBB7dj+GIa54zfjburE7ehasysRzeK5nW39QOfA==
+posthog-js@1.205.0:
+  version "1.205.0"
+  resolved "https://registry.yarnpkg.com/posthog-js/-/posthog-js-1.205.0.tgz#a960a07f708dc374feb431809f31ae96081e99d3"
+  integrity sha512-zP4SQ9Dg9JwqkEteoAOviAAAMdT/nJ4vk1jqfE6fVudziEa3szkQWd7czk5ehlEdrKFUE85MonCKW4L/uwtybA==
   dependencies:
     core-js "^3.38.1"
     fflate "^0.4.8"
