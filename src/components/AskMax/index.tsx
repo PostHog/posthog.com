@@ -4,6 +4,7 @@ import { useStaticQuery } from 'gatsby'
 import { graphql } from 'gatsby'
 import { IconLightBulb, IconSidebarOpen } from '@posthog/icons'
 import { CallToAction } from 'components/CallToAction'
+import { useLayoutData } from 'components/Layout/hooks'
 
 interface AskMaxProps {
     border?: boolean
@@ -11,6 +12,7 @@ interface AskMaxProps {
 }
 
 export default function AskMax({ border = false, className = '' }: AskMaxProps) {
+    const { compact } = useLayoutData()
     const { setChatOpen } = useChat()
     const {
         allDocsPages: { totalDocsCount },
@@ -24,7 +26,7 @@ export default function AskMax({ border = false, className = '' }: AskMaxProps) 
 
     const borderClasses = border ? 'py-6 mt-4 border-y border-light dark:border-dark' : 'mb-8'
 
-    return (
+    return compact ? null : (
         <div className="@container">
             <div
                 className={`flex flex-col @lg:flex-row items-center justify-center @3xl:justify-start gap-4 @2xl:!gap-8 relative py-2 w-full @2xl:w-auto ${borderClasses} ${className}`}
