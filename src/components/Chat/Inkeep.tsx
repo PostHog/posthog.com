@@ -4,14 +4,27 @@ import { DotLottiePlayer } from '@dotlottie/react-player'
 import { AIChatFunctions } from '@inkeep/uikit'
 import { layoutLogic } from 'logic/layoutLogic'
 import { useValues } from 'kea'
+import { useChat } from 'hooks/useChat'
 
 export default function InkeepEmbeddedChat(): JSX.Element {
     const { websiteTheme } = useValues(layoutLogic)
     const { baseSettings, aiChatSettings } = useInkeepSettings()
+    const { chatOpen, setHasUnread } = useChat()
     const embeddedChatRef = useRef<AIChatFunctions | null>(null)
     const lottieRef = useRef(null)
     const [loading, setLoading] = useState(true)
     const [hasFirstResponse, setHasFirstResponse] = useState(false)
+
+    const logEventCallback = (event: any) => {
+        if (event?.eventName === 'chat_message_bot_response_received') {
+            if (!hasFirstResponse) {
+                setHasFirstResponse(true)
+            }
+            if (!chatOpen) {
+                setHasUnread(true)
+            }
+        }
+    }
 
     useEffect(() => {
         import('@inkeep/uikit-js').then((inkeepJS) => {
@@ -23,11 +36,6 @@ export default function InkeepEmbeddedChat(): JSX.Element {
                 properties: {
                     baseSettings: {
                         ...baseSettings,
-                        logEventCallback: (event) => {
-                            if (!hasFirstResponse && event?.eventName === 'chat_message_bot_response_received') {
-                                setHasFirstResponse(true)
-                            }
-                        },
                     },
                     aiChatSettings,
                 },
@@ -62,6 +70,22 @@ export default function InkeepEmbeddedChat(): JSX.Element {
             })
         }
     }, [websiteTheme])
+
+    useEffect(() => {
+        if (embeddedChatRef.current) {
+            embeddedChatRef.current.render({
+                baseSettings: {
+                    logEventCallback,
+                },
+            })
+        }
+    }, [chatOpen, hasFirstResponse])
+
+    useEffect(() => {
+        if (chatOpen) {
+            setHasUnread(false)
+        }
+    }, [chatOpen])
 
     return (
         <>

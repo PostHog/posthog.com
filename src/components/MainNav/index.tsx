@@ -418,7 +418,7 @@ const TheoTooltip = () => {
 
 export const Main = () => {
     const { user } = useUser()
-    const { setChatOpen } = useChat()
+    const { setChatOpen, hasUnread } = useChat()
     const {
         menu,
         parent,
@@ -535,10 +535,13 @@ export const Main = () => {
                             )}
                         >
                             <button
-                                className="group my-1mr-[1px] p-2 hover:bg-border dark:hover:bg-border-dark rounded"
+                                className="group my-1mr-[1px] p-2 hover:bg-border dark:hover:bg-border-dark rounded relative"
                                 onClick={() => setChatOpen(true)}
                             >
                                 <IconChatHelp className="opacity-50 inline-block w-6 group-hover:opacity-75" />
+                                {hasUnread && (
+                                    <span className="size-2 text-xs bg-red text-white flex justify-center items-center rounded-full absolute top-2 right-2 " />
+                                )}
                             </button>
                         </HoverTooltip>
 

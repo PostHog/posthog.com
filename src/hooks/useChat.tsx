@@ -4,6 +4,8 @@ interface ChatContextType {
     chatOpen: boolean
     setChatOpen: (open: boolean) => void
     chatting: boolean
+    hasUnread: boolean
+    setHasUnread: (unread: boolean) => void
 }
 
 const ChatContext = createContext<ChatContextType | undefined>(undefined)
@@ -11,6 +13,7 @@ const ChatContext = createContext<ChatContextType | undefined>(undefined)
 export function ChatProvider({ children }: { children: ReactNode }): JSX.Element {
     const [chatting, setChatting] = useState(false)
     const [chatOpen, setChatOpen] = useState(false)
+    const [hasUnread, setHasUnread] = useState(false)
 
     useEffect(() => {
         if (chatOpen && !chatting) {
@@ -30,7 +33,11 @@ export function ChatProvider({ children }: { children: ReactNode }): JSX.Element
         return () => window.removeEventListener('keydown', handleKeyPress)
     }, [chatOpen])
 
-    return <ChatContext.Provider value={{ chatOpen, setChatOpen, chatting }}>{children}</ChatContext.Provider>
+    return (
+        <ChatContext.Provider value={{ chatOpen, setChatOpen, chatting, hasUnread, setHasUnread }}>
+            {children}
+        </ChatContext.Provider>
+    )
 }
 
 export function useChat(): ChatContextType {
