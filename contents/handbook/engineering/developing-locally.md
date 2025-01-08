@@ -109,7 +109,23 @@ This is a faster option to get up and running. If you don't want to or can't use
     git clone https://github.com/PostHog/posthog && cd posthog/
     ```
 
-### Get things up and running
+### Environment setup
+
+You can set up your development environment quickly using [Flox](https://github.com/flox/flox). To do that, you should only need to:
+1. Install required system-level dependencies for flox:
+   
+```bash
+brew install flox ruff rustup && rustup-init && rustup default stable
+```
+2. From the root of the repository, activate the environment:
+```bash
+flox activate
+```
+This gets you a fully-fledged environment under `.flox/` in the repository directory's, with everything needed to run and develop PostHog. Once done, you'll see instructions for migrations and running the app. On the first activation you'll also be prompted if you'd like the environment to be activated automatically.
+
+### Manual setup
+
+Alternatively, if you would prefer not to use [Flox](https://github.com/flox/flox), you can manually setup your environment by following the next steps.
 
 #### 1. Spin up external services
 
@@ -339,10 +355,6 @@ Open [http://localhost:8010](http://localhost:8010) to see the app.
 
 To get some practical test data into your brand-new instance of PostHog, run `DEBUG=1 ./manage.py generate_demo_data`. For a list of useful arguments of the command, run `DEBUG=1 ./manage.py generate_demo_data --help`.
 
-You can also use [mprocs](https://github.com/pvolok/mprocs) to run all development processes in a single terminal window. mprocs provides a clean interface for starting, stopping, and monitoring each service individually, with separate log views for easier debugging. This includes docker compose, so make sure to stop it if it's already running. Once you have mprocs installed, run
-```bash
-./bin/start-mprocs
-```
 
 #### 7. Develop
 
