@@ -33,6 +33,13 @@ export function ChatProvider({ children }: { children: ReactNode }): JSX.Element
         return () => window.removeEventListener('keydown', handleKeyPress)
     }, [chatOpen])
 
+    useEffect(() => {
+        const params = new URLSearchParams(window.location.search)
+        if (params.get('chat') === 'true') {
+            setChatOpen(true)
+        }
+    }, [])
+
     return (
         <ChatContext.Provider value={{ chatOpen, setChatOpen, chatting, hasUnread, setHasUnread }}>
             {children}
