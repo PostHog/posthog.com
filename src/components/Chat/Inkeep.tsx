@@ -36,6 +36,7 @@ export default function InkeepEmbeddedChat(): JSX.Element {
                 properties: {
                     baseSettings: {
                         ...baseSettings,
+                        logEventCallback,
                     },
                     aiChatSettings,
                 },

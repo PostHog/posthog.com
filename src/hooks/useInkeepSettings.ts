@@ -38,6 +38,9 @@ const useInkeepSettings = (): InkeepSharedSettings => {
                 },
             },
         },
+        optOutAnalyticalCookies: true,
+        optOutAllAnalytics: true,
+        optOutFunctionalCookies: true,
     }
 
     const modalSettings: InkeepModalSettings = {}
