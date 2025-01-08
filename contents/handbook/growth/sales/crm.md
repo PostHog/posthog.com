@@ -82,6 +82,7 @@ Any user who submits a “contact sales” form on our website shows up as a lea
   - Territory 3: All other geographies, or if the country information is missing, assigned to this territory.
 
 - Round Robin Within Territory: Leads are assigned in a round-robin fashion to the AEs who own that territory, ensuring equal distribution among them.
+- Reassignment Logic for Returning Leads: If a lead incoming from a specific domain later submits another contact sales form, the new lead is reassigned to the original owner if the old lead came in within the last 4 months. This ensures continuity in discussions with different leads from same company while preventing spam leads from being reassigned to the original owner.
 
 ### How we assess leads in our pipeline
 We have the following lead statuses to manage the lead assessment process before we decide if a user is a right fit to use PostHog.
@@ -120,6 +121,9 @@ Unqualified: A lead that does not meet the criteria to become an opportunity.
 - Make sure all new leads are contacted within 24 hours.
 - Keep all lead information up-to-date and accurate in Salesforce.
 - Periodically review lead statuses and update them as needed.
+
+### Which Leads Should Go to RevOps?
+Some incoming leads are better suited for RevOps, for example questions related to refunds, invoices, startup plan credits or eligibility. To ensure these leads are routed correctly, please create a zendesk ticket by leaving the :ticket: emoji in the relevant thread in the #website-contact-sales Slack channel. This will automatically create a ticket for RevOps to review and address.
 
 ## Opportunities
 

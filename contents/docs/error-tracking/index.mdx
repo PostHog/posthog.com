@@ -96,7 +96,7 @@ If you have any feedback during the alpha please [share it with us](https://us.p
 
 ### Are web workers supported?
 
-Yes. Error tracking will work as long as you initialize PostHog in the web worker. You will need to disable any features that rely on the `window` object:
+Yes. Error tracking will work as long as you initialize PostHog in the [web worker](/tutorials/web-worker). You will need to disable any features that rely on the `window` object:
 
 ```js
 posthog.init(token, {

@@ -12,7 +12,7 @@ One of the many awesome things about PostHog is that support is being dealt with
 
 You'll see some teams using a term of endearment for Support Hero, examples being "Infra Hero" or… "Luigi". Don't ask – we don't know.
 
-Our Support Engineers, in [the Support team](/teams/support) triage tickets for the Product Analytics, Web Analytics, Data Warehouse, CDP, Replay, and Feature Success teams, due to the high volume of tickets those teams get. They will resolve tickets if possible, and escalate to the engineering team responsible if they need further help.
+Our Support Engineers, in [the Support team](/teams/support) triage tickets for the Product Analytics, Web Analytics, Data Warehouse, CDP, Replay, Experiments, Feature Flags, and Survey teams, due to the high volume of tickets those teams get. They will resolve tickets if possible, and escalate to the engineering team responsible if they need further help.
 
 ## When is my turn?
 
@@ -37,8 +37,10 @@ Each engineering team has its own list of tickets in Zendesk:
 
 - [Product Analytics](https://posthoghelp.zendesk.com/agent/filters/17989255082139) (escalated only)
 - [Web Analytics](https://posthoghelp.zendesk.com/agent/filters/21786368880027) (escalated only)
-- [Feature Success](https://posthoghelp.zendesk.com/agent/filters/25210600744731) (escalated only)
+- [Experiments](https://posthoghelp.zendesk.com/agent/filters/30579720982299) (escalated only)
+- [Feature Flags](https://posthoghelp.zendesk.com/agent/filters/30579605742363) (escalated only)
 - [Replay](https://posthoghelp.zendesk.com/agent/filters/25210723706907) (escalated only)
+- [Surveys](https://posthoghelp.zendesk.com/agent/filters/30579650784411) (escalated only)
 - [CDP](https://posthoghelp.zendesk.com/agent/filters/28134703633179) (escalated only)
 - [Infrastructure](https://posthoghelp.zendesk.com/agent/filters/14507148758939)
 - [Auth & Billing, handled by Growth](https://posthoghelp.zendesk.com/agent/filters/14507107058843)
@@ -62,6 +64,16 @@ Others tickets report bugs or suspected bugs. Get to the bottom of each one - yo
 If not much is happening, feel free to do feature work – but in the case of a backlog in Zendesk, drop other things and roll up your sleeves. When you're Support Hero, supporting users comes first.
 
 It might be an intense week, but you're also going to solve so many real problems, and that feels great.
+
+## What do I do as a SDK Support Hero?
+
+Outside of your team's Support Hero rotation, you are also eligible to serve in a one week SDK Support Hero rotation. [The schedule is managed in PagerDuty](https://posthog.pagerduty.com/schedules#P7B7NTR).
+
+Your primary responsibility is simply to make sure SDK questions get some love. During the rotation, please keep an eye on two things:
+- [Escalated SDK tickets in Zendesk](https://posthoghelp.zendesk.com/agent/filters/30528724215067)
+- New issues in the SDK repositories, e.g. [posthog-js](https://github.com/PostHog/posthog-js/issues?q=sort%3Aupdated-desc+is%3Aissue+is%3Aopen)
+
+You don't have to be an expert in all of the SDKs, but it can be a great opportunity to dive into parts unknown. Feel free to ping relevant folks as needed.
 
 ## Don't ask users to do work that you can do!
 

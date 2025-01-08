@@ -24,4 +24,10 @@ We also were starting to run out of obvious tutorial and SEO blog content to tur
 
 1. Tutorials like [How to bootstrap feature flags](https://youtu.be/9z1axmXdqV8)
 2. SEO-ish content like [The best GA4 alternatives for apps and websites](https://youtu.be/ImcNUnqDoUQ)
-3. "Essay" videos like [The modern data stack sucks](https://youtu.be/9z1axmXdqV8)
+3. "Essay" videos like [The modern data stack sucks](https://youtu.be/2N2cvCmv4us)
+
+## YouTube comments
+
+YouTube comments are posted to [Slack](https://posthog.slack.com/archives/C083NMDUVPW) using [Make](https://www.make.com/). It's a tool similar to Zapier, except Zapier doesn't support YouTube comments.
+
+For access to Make, ask anyone in the [Content & Docs team](https://posthog.com/teams/marketing). They're all admins and so they can add you.

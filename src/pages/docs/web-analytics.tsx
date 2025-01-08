@@ -50,7 +50,6 @@ export const Content = ({ quickLinks = false }) => {
                         Image={
                             <CloudinaryImage
                                 alt=""
-                                placeholder="none"
                                 objectFit="contain"
                                 className="h-full"
                                 quality={100}
@@ -66,7 +65,6 @@ export const Content = ({ quickLinks = false }) => {
                         Image={
                             <CloudinaryImage
                                 alt=""
-                                placeholder="none"
                                 objectFit="contain"
                                 className="h-full"
                                 quality={100}
@@ -82,7 +80,6 @@ export const Content = ({ quickLinks = false }) => {
                         Image={
                             <CloudinaryImage
                                 alt=""
-                                placeholder="none"
                                 objectFit="contain"
                                 className="h-full"
                                 quality={100}

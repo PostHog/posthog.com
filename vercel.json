@@ -1306,6 +1306,7 @@
         { "source": "/docs/cdp/outfunnel-exporter", "destination": "/docs/cdp/destinations" },
         { "source": "/docs/cdp/route-censor", "destination": "/docs/cdp" },
         { "source": "/docs/cdp/semver-flattener", "destination": "/docs/cdp" },
+        { "source": "/docs/experiments/experiment-significance", "destination": "/docs/experiments/statistics" },
         { "source": "/handbook/product/in-app-prompts", "destination": "/docs/surveys" },
         { "source": "/docs/webhooks", "destination": "/docs/cdp/destinations" },
         { "source": "/docs/webhooks/slack", "destination": "/docs/cdp/destinations/slack" },
@@ -1462,6 +1463,10 @@
         {
             "source": "/handbook/growth/marketing/paid",
             "destination": "/handbook/words-and-pictures/paid"
+        },
+        {
+            "source": "/features/self-hosted",
+            "destination": "/docs/self-host"
         }
     ]
 }

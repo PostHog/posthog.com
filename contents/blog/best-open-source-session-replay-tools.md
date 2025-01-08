@@ -48,6 +48,8 @@ All PostHog’s tools work together natively, offering extensive, actionable use
 
 PostHog is ideal for [product-minded developers](/blog/what-is-a-product-engineer) and product teams. Unlike Hotjar and Fullstory, it's designed for technical users. Its broad range of features means PostHog can replace several tools.
 
+It also supports replay for mobile apps running that use Android, iOS, React Native, and Flutter SDKs, making it a good option if you're also looking for a tool that offers [Hotjar features for mobile apps](/blog/hotjar-for-mobile-ios-android-react-native-flutter).
+
 ### Features and benefits
 
 - Console logs and network performance
