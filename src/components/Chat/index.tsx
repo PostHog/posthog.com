@@ -54,30 +54,32 @@ export default function Chat(): JSX.Element | null {
                     >
                         <IconChevronDown className="size-8 opacity-60 group-hover:opacity-100 transition-opacity -rotate-90 relative left-1" />
                     </motion.button>
-                    <div className="flex flex-col h-full">
-                        <motion.div
-                            animate={{
-                                height: showDisclaimer ? 55 : 0,
-                                transition: { type: 'tween' },
-                            }}
-                            className="dark:bg-[#1c1c1c]"
-                        >
-                            <div className="m-2 p-2 flex items-center justify-between bg-yellow/20 dark:bg-dark border border-light dark:border-dark rounded overflow-hidden flex-shrink-0">
-                                <p className="m-0 text-sm opacity-70">
-                                    Use{' '}
-                                    <kbd
-                                        className={`box-content p-[5px] border border-b-2 border-border dark:border-dark rounded-[3px] inline-flex text-black/35 dark:text-white/40 text-code text-xs py-0 bg-white dark:bg-accent-dark`}
-                                    >
-                                        /
-                                    </kbd>{' '}
-                                    to search PostHog.com
-                                </p>
-                                <button className="" onClick={() => setShowDisclaimer(false)}>
-                                    <IconX className="size-4 opacity-60 hover:opacity-100 transition-opacity" />
-                                </button>
-                            </div>
-                        </motion.div>
-
+                    <div className="h-full">
+                        <AnimatePresence>
+                            {showDisclaimer && (
+                                <motion.div
+                                    initial={{ opacity: 0 }}
+                                    animate={{ opacity: 1, transition: { duration: 0.2 } }}
+                                    exit={{ opacity: 0, transition: { duration: 0.2 } }}
+                                    className="absolute top-0 left-0 w-full z-10"
+                                >
+                                    <div className="m-2 p-2 flex items-center justify-between bg-yellow/20 dark:bg-dark border border-light dark:border-dark rounded overflow-hidden flex-shrink-0 backdrop-blur">
+                                        <p className="m-0 text-sm opacity-70">
+                                            Use{' '}
+                                            <kbd
+                                                className={`box-content p-[5px] border border-b-2 border-border dark:border-dark rounded-[3px] inline-flex text-black/35 dark:text-white/40 text-code text-xs py-0 bg-white dark:bg-accent-dark`}
+                                            >
+                                                /
+                                            </kbd>{' '}
+                                            to search PostHog.com
+                                        </p>
+                                        <button className="" onClick={() => setShowDisclaimer(false)}>
+                                            <IconX className="size-4 opacity-60 hover:opacity-100 transition-opacity" />
+                                        </button>
+                                    </div>
+                                </motion.div>
+                            )}
+                        </AnimatePresence>
                         <InkeepEmbeddedChat />
                     </div>
                 </motion.div>
