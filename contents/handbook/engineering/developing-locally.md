@@ -214,7 +214,7 @@ On Linux you often have separate packages: `postgres` for the tools, `postgres-s
 
 2. Install the latest Node.js 18 (the version used by PostHog in production) with `nvm install 18`. You can start using it in the current shell with `nvm use 18`.
 
-3. Install pnpm with `corepack enable` and check it with `pnpm --version`.
+3. Install pnpm by running `corepack enable` and then running `corepack prepare pnpm@8.10.5 --activate`. Validate the installation with `pnpm --version`.
 
 4. Install Node packages by running `pnpm i`.
 
@@ -346,6 +346,10 @@ Now start all of PostHog (backend, worker, plugin server, and frontend – simul
 ```bash
 ./bin/start
 ```
+
+> [!NOTE]  
+> This command uses [mprocs](https://github.com/pvolok/mprocs) to run all development processes in a single terminal window.
+
 
 > **Friendly tip:** If you get the error `Configuration property "enable.ssl.certificate.verification" not supported in this build: OpenSSL not available at build time`, make sure your environment is using the right `openssl` version by setting [those](https://github.com/xmlsec/python-xmlsec/issues/261#issuecomment-1630889826) environment variables, and then run `./bin/start` again.
 
