@@ -4,9 +4,13 @@ sidebar: Handbook
 showTitle: true
 ---
 
-We encourage engineers to give tech talks on topics they"re interested in/knowledgeable about. Here are our talks so far:
+We encourage engineers to give tech talks on topics they're interested in/knowledgeable about.
+
+> Recording links are only accessible by the PostHog team.
+
+Here are our talks so far:
 
 - "PostHog Cloud infrastructure" by [James Greenhill](/community/profiles/30174)
-- ["Let"s Talk About PyCharm"](https://drive.google.com/file/d/1GV08S638NzY1H0DI7w9ZHNSE4CcVbe6y/view?usp=sharing) by [Marius Andra](/community/profiles/30202)
+- <PrivateLink url="https://drive.google.com/file/d/1GV08S638NzY1H0DI7w9ZHNSE4CcVbe6y/view?usp=sharing">"Let's Talk About PyCharm"</PrivateLink> by [Marius Andra](/community/profiles/30202)
 - "Approaches to scaling" by Karl-Aksel Puulmann
-- ["Databases 101"](https://youtu.be/Cb-Ll5aOLvA) by [James Greenhill](/community/profiles/30174)
+- <PrivateLink url="https://youtu.be/Cb-Ll5aOLvA">"Databases 101"</PrivateLink> by [James Greenhill](/community/profiles/30174)
