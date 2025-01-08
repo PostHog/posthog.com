@@ -35,7 +35,7 @@ export function ChatProvider({ children }: { children: ReactNode }): JSX.Element
 
     useEffect(() => {
         const params = new URLSearchParams(window.location.search)
-        if (params.get('chat') === 'true') {
+        if (params.get('chat') === 'open') {
             setChatOpen(true)
         }
     }, [])
