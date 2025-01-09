@@ -13,6 +13,7 @@ import {
     IconLetter,
     IconUpload,
     IconLeave,
+    IconChatHelp,
 } from '@posthog/icons'
 
 import { Placement } from '@popperjs/core'
