@@ -14,7 +14,10 @@ Batch exports can be used to export data to a Postgres table.
 
 1. Make sure PostHog can access your Postgres database.
 
-> **Note:** Wherever your Postgres database is hosted, make sure the host is set to accept all incoming connections so that PostHog can connect to the database and insert events. PostHog does not guarantee a static list of IP addresses to whitelist. If this is not possible in your case, consider exporting data to a different destination (like [S3](./s3.md)) and then setting up your own system for getting data into your Postgres database.
+> **Notes:** 
+> - Wherever your Postgres database is hosted, make sure the host is set to accept all incoming connections so that PostHog can connect to the database and insert events. PostHog does not guarantee a static list of IP addresses to whitelist. If this is not possible in your case, consider exporting data to a different destination (like [S3](/docs/cdp/batch-exports/s3)) and then setting up your own system for getting data into your Postgres database.
+>
+> -  We only support connections using SSL/TLS. This [provides protection against various types of attacks](https://www.postgresql.org/docs/current/libpq-ssl.html#LIBPQ-SSL-PROTECTION).
 
 2. Create a Postgres user with table creation privileges.
 
@@ -48,7 +51,7 @@ This is the schema of all the fields that are exported to Postgres.
 ## Creating the batch export
 
 1. Subscribe to data pipelines add-on in [your billing settings](https://us.posthog.com/organization/billing) if you haven't already.
-2. Click [Data pipelines](https://app.posthog.com/apps) in the navigation and go to the exports tab in your PostHog instance.
+2. Click [Data pipelines](https://app.posthog.com/pipeline) in the navigation and go to the exports tab in your PostHog instance.
 3. Click "Create export workflow".
 4. Select **Postgres** as the batch export destination.
 5. Fill in the necessary [configuration details](#postgres-configuration).

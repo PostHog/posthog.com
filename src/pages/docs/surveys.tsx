@@ -1,3 +1,4 @@
+import CloudinaryImage from 'components/CloudinaryImage'
 import React from 'react'
 import { StaticImage } from 'gatsby-plugin-image'
 import Layout from 'components/Layout'
@@ -9,6 +10,8 @@ import { CallToAction } from 'components/CallToAction'
 import { docsMenu } from '../../navs'
 import { useLayoutData } from 'components/Layout/hooks'
 import QuickLinks from 'components/QuickLinks'
+import Intro from 'components/Docs/Intro'
+import AskMax from 'components/AskMax'
 
 type SurveysProps = {
     data: {
@@ -19,30 +22,6 @@ type SurveysProps = {
         }
     }
 }
-
-export const Intro = ({ image = true }) => (
-    <div className="bg-accent dark:bg-accent-dark border border-light dark:border-dark rounded flex flex-col items-center md:flex-row gap-8 pt-2 mb-8">
-        <div className="p-4 md:p-8 shrink-0">
-            <h1 className="text-4xl mt-0 mb-2">Surveys</h1>
-            <h3 className="text-lg font-semibold text-primary/60 dark:text-primary-dark/75 leading-tight">
-                Collect feedback from your users.
-            </h3>
-            <CallToAction to="/docs/surveys/installation">Create your first survey</CallToAction>
-        </div>
-
-        {image && (
-            <figure className="m-0 p-0">
-                <StaticImage
-                    alt=""
-                    placeholder="none"
-                    quality={100}
-                    className=""
-                    src="../../components/Home/Slider/images/surveys-hog.png"
-                />
-            </figure>
-        )}
-    </div>
-)
 
 export const Content = ({ quickLinks = false }) => {
     const { compact } = useLayoutData()
@@ -60,49 +39,13 @@ export const Content = ({ quickLinks = false }) => {
                         type="Guide"
                         title="Get feedback and book user interviews with surveys"
                         description="Automate the process of finding the right users and booking interviews"
-                        Image={
-                            <StaticImage
-                                alt=""
-                                placeholder="none"
-                                objectFit="contain"
-                                className="h-full"
-                                quality={100}
-                                src="../../components/Home/Slider/images/surveys-hog.png"
-                            />
-                        }
                         url="/tutorials/feedback-interviews-site-apps"
                     />
                     <ResourceItem
                         type="Guide"
                         title="How to create custom surveys"
                         description="Customize the look and feel of your surveys"
-                        Image={
-                            <StaticImage
-                                alt=""
-                                placeholder="none"
-                                objectFit="contain"
-                                className="h-full"
-                                quality={100}
-                                src="../../components/Home/Slider/images/surveys-hog.png"
-                            />
-                        }
                         url="/tutorials/survey"
-                    />
-                    <ResourceItem
-                        type="Guide"
-                        title="How to show a survey after a delay"
-                        description="Delay the display of your survey to improve user experience"
-                        Image={
-                            <StaticImage
-                                alt=""
-                                placeholder="none"
-                                objectFit="contain"
-                                className="h-full"
-                                quality={100}
-                                src="../../components/Home/Slider/images/surveys-hog.png"
-                            />
-                        }
-                        url="/tutorials/delayed-survey"
                     />
                 </ul>
             </section>
@@ -115,13 +58,13 @@ export const Content = ({ quickLinks = false }) => {
                         title="Net Promoter Score (NPS)"
                         description="The benchmark for judging what users think of you"
                         Image={
-                            <StaticImage
+                            <CloudinaryImage
                                 alt=""
                                 className="h-full"
                                 placeholder="none"
                                 objectFit="contain"
                                 quality={100}
-                                src="./images/nps-survey.png"
+                                src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/pages/docs/images/nps-survey.png"
                             />
                         }
                         url="/templates/nps-survey"
@@ -130,13 +73,13 @@ export const Content = ({ quickLinks = false }) => {
                         title="Customer Satisfaction (CSAT)"
                         description="Get a vibe check on your product"
                         Image={
-                            <StaticImage
+                            <CloudinaryImage
                                 alt=""
                                 className="h-full"
                                 placeholder="none"
                                 objectFit="contain"
                                 quality={100}
-                                src="./images/csat-survey.png"
+                                src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/pages/docs/images/csat-survey.png"
                             />
                         }
                         url="/templates/csat-survey"
@@ -145,13 +88,13 @@ export const Content = ({ quickLinks = false }) => {
                         title="Customer Churn Rate (CCR)"
                         description="Find out why your users are saying goodbye"
                         Image={
-                            <StaticImage
+                            <CloudinaryImage
                                 alt=""
                                 className="h-full"
                                 placeholder="none"
                                 objectFit="contain"
                                 quality={100}
-                                src="./images/ccr-survey.png"
+                                src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/pages/docs/images/ccr-survey.png"
                             />
                         }
                         url="/templates/churn-survey"
@@ -178,7 +121,24 @@ const Surveys: React.FC<SurveysProps> = () => {
             <SEO title="Surveys - Docs - PostHog" />
 
             <PostLayout title={'Surveys'} hideSurvey hideSidebar>
-                <Intro />
+            <Intro
+                subheader="Getting started"
+                title="Surveys"
+                description="Collect feedback from your users."
+                buttonText="Create your first survey"
+                buttonLink="/docs/surveys/installation"
+                imageColumnClasses="mt-8 md:mt-0 max-w-96"
+                imageUrl="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Home/Slider/images/surveys-hog.png"
+                imageClasses=""
+            />
+
+            <AskMax 
+                quickQuestions={[
+                    'Can I target a survey based on user behavior?',
+                    'How do I create my own survey UI?',
+                    'Why won\'t my survey appear?',
+                ]}
+            />
                 <Content />
             </PostLayout>
         </Layout>

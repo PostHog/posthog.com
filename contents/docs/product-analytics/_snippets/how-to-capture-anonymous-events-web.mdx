@@ -1,0 +1,17 @@
+The JavaScript Web SDK captures anonymous events by default. However, this may change depending on your [`person_profiles` config](/docs/libraries/js#config) when initializing PostHog:
+
+1. `person_profiles: 'identified_only'` _(recommended)_ _(default)_ - Anonymous events are captured by default. PostHog only captures identified events for users where [person profiles](/docs/data/persons) have already been created. 
+
+2. `person_profiles: 'always'`  - Capture identified events for all events.
+
+For example:
+
+```js-web
+posthog.init(
+    '<ph_project_api_key>',
+    {
+        api_host: '<ph_client_api_host>',
+        person_profiles: 'always'
+    }
+)
+```

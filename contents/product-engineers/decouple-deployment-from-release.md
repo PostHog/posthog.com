@@ -16,7 +16,7 @@ crosspost:
 
 Releasing a big feature can be nerve-racking. When deploying it, you don't know if it will work in production, break your app, or cause other issues. Without the right processes in place, the safety of your releases is a big question mark.
 
-A [best practice](/product-engineers/feature-flag-best-practices) for improving this is decoupling deployment and release. What does this mean, though? This post goes over the differences between the two, why you should decouple them, examples, and how to get started.
+A [best practice](/docs/feature-flags/best-practices) for improving this is decoupling deployment and release. What does this mean, though? This post goes over the differences between the two, why you should decouple them, examples, and how to get started.
 
 ## What are the differences between deployment and release?
 
@@ -54,7 +54,7 @@ We deploy many changes behind [feature flags](/feature-flags) and release them a
 
 ![PostHog's flags](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/decouple-deployment-from-release/flags.png)
 
-These flags help us dogfood features, roll out changes to specific users, do incremental rollouts, and more. For example, in the flags above, we deployed 5 new features without releasing them.
+These flags help us [dogfood features](/product-engineers/dogfooding), roll out changes to specific users, do incremental rollouts, and more. For example, in the flags above, we deployed 5 new features without releasing them.
 
 We also dark launch features using feature flags. This means they are available in production but hidden from users. For example, they might only be accessible through the API, don’t have navigation links, or only have limited options shown to users.
 

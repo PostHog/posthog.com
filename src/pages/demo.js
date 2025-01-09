@@ -1,3 +1,4 @@
+import CloudinaryImage from 'components/CloudinaryImage'
 import { CallToAction } from 'components/CallToAction/index.tsx'
 import { SEO } from 'components/seo'
 import React from 'react'
@@ -18,8 +19,8 @@ export default function BookADemo() {
                 </header>
                 <div className="border border-light dark:border-dark bg-accent dark:bg-accent-dark rounded p-4 flex space-x-4 mb-4 order-3 md:order-2">
                     <span className="bg-blue rounded-full leading-none flex h-12 w-12 overflow-hidden shrink-0 basis-12">
-                        <StaticImage
-                            src="../images/mine.png"
+                        <CloudinaryImage
+                            src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/images/mine.png"
                             width={60}
                             height={60}
                             alt="Mine Kansu"
@@ -29,12 +30,13 @@ export default function BookADemo() {
 
                     <div className="md:flex items-center md:space-x-4">
                         <p className="mb-2 md:mb-0 text-[15px]">
-                            <Link to="/community/profiles/1727">Mine Kansu</Link>, from Customer Success, made this demo
-                            video. If you have needs that aren't covered here, she's happy to chat!
+                            <Link to="/community/profiles/1727">Mine Kansu</Link>, from our Sales team, made this demo
+                            video. If you're exploring a paid plan and have questions after checking it out, our team
+                            is happy to chat!
                         </p>
 
                         <CallToAction type="secondary" to="/talk-to-a-human" className="whitespace-nowrap">
-                            Request a call
+                            Talk to a helpful person
                         </CallToAction>
                     </div>
                 </div>

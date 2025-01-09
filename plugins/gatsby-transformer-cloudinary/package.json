@@ -1,0 +1,33 @@
+{
+  "name": "gatsby-transformer-cloudinary",
+  "version": "4.5.0",
+  "description": "Transform local files into Cloudinary-managed assets for Gatsby sites.",
+  "main": "index.js",
+  "types": "index.d.ts",
+  "homepage": "https://gatsby-transformer-cloudinary.netlify.com/",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/cloudinary-devs/gatsby-transformer-cloudinary"
+  },
+  "keywords": [
+    "gatsby",
+    "gatsby-plugin",
+    "image",
+    "cloudinary"
+  ],
+  "license": "MIT",
+  "dependencies": {
+    "axios": "~1.1.3",
+    "cloudinary": "^1.35.0",
+    "fast-json-stable-stringify": "2.1.0",
+    "gatsby-plugin-utils": "^4.0.0",
+    "probe-image-size": "7.2.3"
+  },
+  "scripts": {
+    "postversion": "cp ../README.md ./README.md && cp ../CHANGELOG.md ./CHANGELOG.md"
+  },
+  "peerDependencies": {
+    "gatsby": "^3.0.0 || ^4.0.0 || ^5.0.0",
+    "gatsby-plugin-image": "^1.14.0 || ^2.0.0 || ^3.0.0"
+  }
+}

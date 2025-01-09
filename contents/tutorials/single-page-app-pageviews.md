@@ -38,16 +38,16 @@ To add PostHog to your [Next.js app](/docs/libraries/next-js), we start by creat
 'use client'
 import posthog from 'posthog-js'
 import { PostHogProvider } from 'posthog-js/react'
-
-if (typeof window !== 'undefined') {
-  posthog.init('<ph_project_api_key>', {
-    api_host: '<ph_client_api_host>',
-    person_profiles: 'identified_only',
-    capture_pageview: false
-  })
-}
+import { useEffect } from 'react'
 
 export function PHProvider({ children }) {
+  useEffect(() => {
+    posthog.init('<ph_project_api_key>', {
+      api_host: '<ph_client_api_host>',
+      capture_pageview: false
+    })
+  }, []);
+  
   return <PostHogProvider client={posthog}>{children}</PostHogProvider>
 }
 ```
@@ -112,7 +112,76 @@ export default function RootLayout({ children }) {
 }
 ```
 
-Make sure to dynamically import the `PostHogPageView` component or the `useSearchParams` hook will deopt the entire app into client-side rendering. 
+Make sure to dynamically import the `PostHogPageView` component or the `useSearchParams` hook will deopt the entire app into client-side rendering.
+
+## Tracking pageviews in React Router
+
+If you are using [React Router](https://reactrouter.com/en/main) AKA `react-router-dom`, start by adding the `PostHogProvider` component in the `app` folder. Make sure to set `capture_pageview: false` because we will manually capture pageviews.
+
+```js
+// app/providers.js
+'use client'
+import posthog from 'posthog-js'
+import { PostHogProvider } from 'posthog-js/react'
+
+if (typeof window !== 'undefined') {
+  posthog.init('<ph_project_api_key>', {
+    api_host: '<ph_client_api_host>',
+    capture_pageview: false
+  })
+}
+
+export function PHProvider({ children }) {
+  return <PostHogProvider client={posthog}>{children}</PostHogProvider>
+}
+```
+
+To capture pageviews, we create another `pageview.js` component in the app folder.
+
+```js
+// app/pageview.js
+import { useEffect } from "react";
+import { useLocation } from 'react-router-dom';
+
+export default function PostHogPageView() {
+  let location = useLocation();
+
+  // Track pageviews
+  useEffect(() => {
+    if (posthog) {
+      posthog.capture(
+        '$pageview',
+        {
+          '$current_url': window.location.href,
+        }
+      )
+    }
+  }, [location])
+  
+  return null
+}
+```
+
+Finally, we import both and put them together in the `app/layout.js` file.
+
+```js
+import * as React from 'react';
+import { PHProvider } from './providers'
+import { PostHogPageView } from './pageview'
+
+function App() {
+  return (
+    <html lang="en">
+      <PHProvider>
+        <body>
+          {children}
+          <PostHogPageView />
+        </body>
+      </PHProvider>
+    </html>
+  );
+}
+```
 
 ## Tracking pageviews in Vue
 
@@ -129,7 +198,6 @@ export default {
       "<ph_project_api_key>",
       {
         api_host: "<ph_client_api_host>",
-        person_profiles: 'identified_only',
         capture_pageview: false
       }
     );
@@ -177,7 +245,6 @@ export const load = async () => {
       '<ph_project_api_key>',
       {
         api_host: '<ph_client_api_host>',
-        person_profiles: 'identified_only',
         capture_pageview: false
       }
     )
@@ -216,7 +283,6 @@ import posthog from 'posthog-js';
 posthog.init('<ph_project_api_key>',
   {
     api_host: '<ph_client_api_host>',
-    person_profiles: 'identified_only',
     capture_pageview: false
   }
 );
@@ -264,3 +330,5 @@ export class AppComponent {
 - [What to do after installing PostHog in 5 steps](/tutorials/next-steps-after-installing)
 - [What engineers get wrong about analytics](/newsletter/misconceptions-about-analytics)
 - [Complete guide to event tracking](/tutorials/event-tracking-guide)
+
+<NewsletterForm />

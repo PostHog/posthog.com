@@ -4,15 +4,66 @@ import groupBy from 'lodash.groupby'
 import React, { useEffect, useRef, useState } from 'react'
 import { IconChevronDown } from '@posthog/icons'
 import { useBreakpoint } from 'gatsby-plugin-breakpoints'
-import Link from 'components/Link'
-import dayjs from 'dayjs'
-import slugify from 'slugify'
+import Tooltip from 'components/Tooltip'
+import Markdown from 'components/Squeak/components/Markdown'
+import { useUser } from 'hooks/useUser'
+import UpdateWrapper from 'components/Roadmap/UpdateWrapper'
+import SideModal from 'components/Modal/SideModal'
 
 const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
 const categories = {
     'Major new feature': 'feature',
     'Company news': 'news',
     'Something cool happened': 'milestone',
+}
+
+const Item = ({ title, category, description, squeakId }) => {
+    const [editModalOpen, setEditModalOpen] = useState(false)
+    const { user } = useUser()
+    const isModerator = user?.role?.type === 'moderator'
+
+    return (
+        <>
+            <SideModal open={editModalOpen} setOpen={setEditModalOpen}>
+                <div className="w-[400px]">
+                    <UpdateWrapper
+                        editing
+                        formClassName="[&>form]:p-0 [&>form]:border-0"
+                        id={squeakId}
+                        status="complete"
+                        showSuccessMessage
+                    />
+                </div>
+            </SideModal>
+            <li
+                className="relative list-none text-sm text-left pl-4 content-none before:inline-block before:absolute before:w-[10px] before:h-[10px] before:left-0 before:top-[5px] before:rounded-full before:mr-2 mt-1 first:mt-0"
+                data-type={categories[category]}
+            >
+                <Tooltip
+                    placement="right"
+                    contentContainerClassName="w-[320px]"
+                    content={() => {
+                        return (
+                            <div className="max-h-[320px] relative overflow-auto">
+                                <h5 className="m-0 text-base mb-2 leading-tight">{title}</h5>
+                                <Markdown>{description}</Markdown>
+                                {isModerator && (
+                                    <button
+                                        className="text-red dark:text-yellow font-bold"
+                                        onClick={() => setEditModalOpen(true)}
+                                    >
+                                        Edit
+                                    </button>
+                                )}
+                            </div>
+                        )
+                    }}
+                >
+                    <span className="relative cursor-default">{title}</span>
+                </Tooltip>
+            </li>
+        </>
+    )
 }
 
 export const Items = ({ items }) => {
@@ -24,38 +75,21 @@ export const Items = ({ items }) => {
     }, [])
 
     return (
-        <div
-            className={`relative ${
-                isOverflowing
-                    ? 'after:absolute after:h-[30px] after:w-full after:bottom-0 after:left-0 after:bg-gradient-to-t after:from-accent dark:after:from-accent-dark after:to-transparent'
-                    : ''
-            }`}
-        >
-            <ul ref={ref} className={`m-0 p-0 h-[110px] overflow-auto ${isOverflowing ? 'pb-[30px]' : ''}`}>
-                {items?.map(({ title, category, dateCompleted }) => {
-                    return (
-                        <li
-                            key={title}
-                            className="relative list-none text-sm text-left pl-4 content-none before:inline-block before:absolute before:w-[10px] before:h-[10px] before:left-0 before:top-[5px] before:rounded-full before:mr-2 mt-1 first:mt-0"
-                            data-type={categories[category]}
-                        >
-                            {dateCompleted ? (
-                                <Link
-                                    to={`/changelog/${dayjs(dateCompleted).format('YYYY')}#${slugify(title, {
-                                        lower: true,
-                                    })}`}
-                                    className="font-normal text-primary/80 dark:text-primary-dark/80 hover:text-red dark:hover:text-yellow"
-                                >
-                                    {title}
-                                </Link>
-                            ) : (
-                                title
-                            )}
-                        </li>
-                    )
-                })}
-            </ul>
-        </div>
+        <>
+            <div
+                className={`relative ${
+                    isOverflowing
+                        ? 'after:absolute after:h-[30px] after:w-full after:bottom-0 after:left-0 after:bg-gradient-to-t after:from-accent dark:after:from-accent-dark after:to-transparent'
+                        : ''
+                }`}
+            >
+                <ul ref={ref} className={`m-0 p-0 h-[110px] overflow-auto ${isOverflowing ? 'pb-[30px]' : ''}`}>
+                    {items?.map((item) => {
+                        return <Item {...item} key={item.squeakId} />
+                    })}
+                </ul>
+            </div>
+        </>
     )
 }
 
@@ -68,6 +102,7 @@ export default function Timeline() {
         query {
             allSqueakRoadmap(filter: { milestone: { eq: true } }, sort: { fields: dateCompleted }) {
                 nodes {
+                    squeakId
                     dateCompleted(formatString: "YYYY-MM-DD")
                     title
                     projectedCompletion(formatString: "YYYY-MM-DD")
@@ -75,6 +110,7 @@ export default function Timeline() {
                     cta {
                         url
                     }
+                    description
                 }
             }
         }

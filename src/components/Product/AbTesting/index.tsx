@@ -1,3 +1,4 @@
+import CloudinaryImage from 'components/CloudinaryImage'
 import React from 'react'
 import Link from 'components/Link'
 import { StaticImage } from 'gatsby-plugin-image'
@@ -35,33 +36,48 @@ import { useLayoutData } from 'components/Layout/hooks'
 import Plans from 'components/Pricing/Plans'
 
 const product = {
-    slug: 'ab-testing',
-    lowercase: 'A/B testing',
-    capitalized: 'A/B testing',
+    slug: 'experiments',
+    lowercase: 'Experiments',
+    capitalized: 'Experiments',
     freeTier: '1,000,000 requests',
 }
 
-const team = 'Feature Success'
-const teamSlug = '/teams/feature-success'
+const team = 'Experiments'
+const teamSlug = '/teams/experiments'
 
 const featuresPerRow = 3
 const features = [
     {
         title: 'Customizable goals',
         description: 'Conversion funnels or trends, secondary metrics, and range for statistical significance',
-        image: <StaticImage src="./images/goals.png" width={428} />,
+        image: (
+            <CloudinaryImage
+                src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Product/AbTesting/images/goals.png"
+                width={428}
+            />
+        ),
         border: true,
     },
     {
         title: 'Targeting & exclusion rules',
         description: 'Set criteria for user location, person property, cohort, or group',
-        image: <StaticImage src="./images/targeting-ab.png" width={428} />,
+        image: (
+            <CloudinaryImage
+                src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Product/AbTesting/images/targeting-ab.png"
+                width={428}
+            />
+        ),
         border: true,
     },
     {
         title: 'Recommendations',
         description: 'Automatic suggestions for duration, sample size, and confidence threshold in a winning variant',
-        image: <StaticImage src="./images/recommendations.png" width={428} />,
+        image: (
+            <CloudinaryImage
+                src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Product/AbTesting/images/recommendations.png"
+                width={428}
+            />
+        ),
         border: true,
     },
 ]
@@ -125,7 +141,7 @@ const faqs = [
     {
         question: 'Do you offer a discount for non-profits?',
         children:
-            'Yes in most cases - 50% off any plan. Create your account, then email <a href="mailto:sales@posthog.com?subject=Non-profit%20discount">sales@posthog.com</a> from the same email address with some basic details on your organization. We will then apply a discount.',
+            'Yes in most cases - 25% off any plan. Create your account, then email <a href="mailto:sales@posthog.com?subject=Non-profit%20discount">sales@posthog.com</a> from the same email address with some basic details on your organization. We will then apply a discount.',
     },
     {
         question: 'Are there any minimums or annual commitments?',
@@ -232,12 +248,14 @@ const pairsWithItemCount = 3
 const PairsWithArray = [
     {
         icon: <IconGraph />,
+        color: 'blue',
         product: 'Product analytics',
         description: 'Run analysis based on the value of a test, or build a cohort of users from a test variant',
         url: '/product-analytics',
     },
     {
         icon: <IconRewindPlay />,
+        color: 'yellow',
         product: 'Session replay',
         description:
             'Watch recordings of users in a variant to discover nuances in why they did or didn’t complete the goal',
@@ -245,6 +263,7 @@ const PairsWithArray = [
     },
     {
         icon: <IconToggle />,
+        color: 'seagreen',
         product: 'Feature flags',
         description: 'Make changes to the feature flag the experiment uses - including JSON payload for each variant',
         url: '/feature-flags',
@@ -252,7 +271,7 @@ const PairsWithArray = [
 ]
 
 export const ProductAbTesting = () => {
-    const { ycombinator, vendasta, assemblyai } = useStaticQuery(graphql`
+    const { ycombinator, researchgate, vendasta, assemblyai } = useStaticQuery(graphql`
         fragment ProductCustomerFragment on Mdx {
             fields {
                 slug
@@ -270,6 +289,9 @@ export const ProductAbTesting = () => {
             ycombinator: mdx(slug: { eq: "customers/ycombinator" }) {
                 ...ProductCustomerFragment
             }
+            researchgate: mdx(slug: { eq: "customers/researchgate" }) {
+                ...ProductCustomerFragment
+            }
             vendasta: mdx(slug: { eq: "customers/vendasta" }) {
                 ...ProductCustomerFragment
             }
@@ -279,10 +301,11 @@ export const ProductAbTesting = () => {
         }
     `)
     const { fullWidthContent } = useLayoutData()
+
     return (
         <>
             <SEO
-                title="A/B Testing - PostHog"
+                title="Experiments - PostHog"
                 description="Run statistically-significant multivariate tests and robust targeting & exclusion rules."
                 image={`/images/og/ab-testing.jpg`}
             />
@@ -296,20 +319,25 @@ export const ProductAbTesting = () => {
                 />
 
                 <div className="text-center">
-                    <StaticImage
-                        src="./images/screenshot-ab-testing.png"
+                    <CloudinaryImage
+                        src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Product/AbTesting/images/screenshot-ab-testing.png"
                         alt="Screenshot of managing an A/B test in PostHog"
                         className="w-full max-w-[1361px]"
                         placeholder="none"
                     />
                 </div>
 
-                <section id="customers" className="-mt-20">
-                    <ul className="list-none p-0 grid md:grid-cols-3 gap-4 mb-10 md:mb-20">
+                <section id="customers" className="md:-mt-20">
+                    <ul className="list-none p-0 grid md:grid-cols-4 gap-4 mb-10 md:mb-20">
                         <CustomerCard
-                            outcome="boosted engagement by 40%"
-                            quote="Y Combinator uses PostHog's A/B testing to try new ideas, which has led to significant improvements."
+                            outcome="boosted community engagement by 40%"
+                            quote="Y Combinator uses PostHog's experiments to try new ideas, which has led to significant improvements."
                             customer={ycombinator}
+                        />
+                        <CustomerCard
+                            outcome="tests product changes for over 25M users"
+                            quote="Our data scientists are able to rapidly and autonomously iterate on the data models that power our home feed."
+                            customer={researchgate}
                         />
                         <CustomerCard
                             outcome="increased registrations by 30%"
@@ -364,12 +392,17 @@ export const ProductAbTesting = () => {
                             Either way, your first {product.freeTier} are free – every month.
                         </p>
                         <div className="bg-accent dark:bg-accent-dark border border-light dark:border-dark rounded-md px-8 py-4 mb-2 text-sm">
-                            <strong>Note:</strong> A/B Testing and Feature Flags are currently packaged together and
+                            <strong>Note:</strong> Experiments and Feature Flags are currently packaged together and
                             share volume limits.
                         </div>
                     </div>
                     <div className="md:w-96">
-                        <StaticImage placeholder="none" quality={100} src="../hogs/ab-testing-hog.png" alt="" />
+                        <CloudinaryImage
+                            placeholder="none"
+                            quality={100}
+                            src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Product/hogs/ab-testing-hog.png"
+                            alt=""
+                        />
                     </div>
                 </div>
 
@@ -397,10 +430,10 @@ export const ProductAbTesting = () => {
                         <h3 className="text-center mb-8">So, what's best for you?</h3>
                         <div className="mb-8 mx-5 md:mx-0 grid md:grid-cols-2 gap-4">
                             <VsCompetitor
-                                title="Reasons a competitor might be better for you (for now...)"
+                                title="Reasons a competitor may be best for you (for now...)"
                                 image={
-                                    <StaticImage
-                                        src="../../../images/products/competitors-ab.png"
+                                    <CloudinaryImage
+                                        src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/images/products/competitors-ab.png"
                                         className="max-w-[189px]"
                                     />
                                 }
@@ -506,7 +539,7 @@ export const ProductAbTesting = () => {
                         Get a more technical overview of how everything works <Link to="/docs">in our docs</Link>.
                     </p>
                     <DocLinks
-                        menu={docsMenu.children.find(({ name }) => name.toLowerCase() === 'a/b testing').children}
+                        menu={docsMenu.children.find(({ name }) => name.toLowerCase() === 'experiments').children}
                     />
                 </section>
 

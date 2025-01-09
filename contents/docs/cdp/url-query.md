@@ -1,5 +1,5 @@
 ---
-title: URL query parameter converter
+title: Convert URL query parameters to event properties
 github: 'https://github.com/PostHog/posthog-app-url-parameters-to-event-properties'
 installUrl: 'https://app.posthog.com/project/apps?name=url-query-parameter-converter'
 thumbnail: >-
@@ -18,7 +18,7 @@ This transformation automatically converts URL query parameters for specific ter
 
 ## Installation
 
-1. In PostHog, click the "[Data pipeline](https://us.posthog.com/apps)" tab in the left sidebar.
+1. In PostHog, click the "[Data pipeline](https://us.posthog.com/pipeline)" tab in the left sidebar.
 2. Search for 'URL query parameter converter' and select the transformation, press Install.
 3. Configure the transformation to whitelist the parameters you want to turn into events.
 

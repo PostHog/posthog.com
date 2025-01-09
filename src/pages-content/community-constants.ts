@@ -10,6 +10,7 @@ export const ignoreContributors = new Set([
     'dependabot-preview[bot]',
     'paolodamico',
     'Twixes',
+    'daibhin',
     'EDsCODE',
     'fuziontech',
     'dependabot[bot]',

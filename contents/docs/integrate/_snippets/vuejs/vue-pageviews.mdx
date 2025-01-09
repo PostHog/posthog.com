@@ -1,0 +1,22 @@
+PostHog captures pageviews on [page load](https://developer.mozilla.org/en-US/docs/Web/API/Window/load_event), and since Vue creates a single-page app, this only happens once. This means if we want to capture every route change, we must write code to capture pageviews that integrates with the router.
+
+import Tab from "components/Tab"
+import CompositionPageviews from "./composition-pageviews.mdx"
+import PluginPageviews from "./plugin-pageviews.mdx"
+
+<Tab.Group tabs={[
+    'Vue 3: Composition API', 
+    'Vue 2: Plugins']}>
+    <Tab.List>
+        <Tab>Vue 3: Composition API</Tab>
+        <Tab>Vue 2: Plugins</Tab>
+    </Tab.List>
+    <Tab.Panels>
+        <Tab.Panel>
+            <CompositionPageviews />
+        </Tab.Panel>
+        <Tab.Panel>
+            <PluginPageviews />
+        </Tab.Panel>
+    </Tab.Panels>
+</Tab.Group>

@@ -14,6 +14,8 @@ tags:
 
 [Autocapture](/docs/data/autocapture) is a powerful way to capture usage data without having to implement any tracking yourself. [HogQL](/docs/product-analytics/hogql) unlocks more of that data for analysis. In this tutorial, we go over examples of how you can use HogQL to analyze autocapture events.
 
+> **Don't want to write SQL?** You can use autocapture element properties like tag name, text, `href` target, and/or CSS selector to filter autocapture events in trends, funnels, and more. See our [autocapture docs](/docs/data/autocapture) for more.
+
 ## The autocapture element chain
 
 Every autocapture event contains data on the "location" of that event in your code. It does this by creating an element chain from the specific element a user interacted with like `<a>`, `<input>`, or `<button>` to highest-level components like a `<body>` or `<div>` tag.
@@ -98,3 +100,5 @@ match(
 - [Complete guide to event tracking](/tutorials/event-tracking-guide)
 - [Using HogQL for advanced time and date filters](/tutorials/hogql-date-time-filters)
 - [Using HogQL for advanced breakdowns](/tutorials/hogql-breakdowns)
+
+<NewsletterForm />

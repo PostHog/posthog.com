@@ -291,26 +291,3 @@ Meaning that on top of the baseline speed to NVMe disk we can tier out to EBS an
 Currently US is entirely on NVMe backed nodes. EU will need to be migrated to this setup as well.
 
 
-## Future work
-
-**Objectives:**
-- All clusters (Dev, US, EU) should be consistent in shape and topology. This will make it easier to manage and maintain the clusters and apply learnings from one cluster to another.
-- We want all cluster operations to be automated and managed through some form of infra as code that is available in source control.
-- Schema management on ClickHouse should be entirely automated and managed through source control with no exceptions. This includes Coordinator schemas.
-- We should be able to spin up and down replicas of any cluster with no manual intervention.
-- We should be able to upgrade ClickHouse versions with no manual intervention.
-- We should have tooling / runbooks for resharding (if we continue down the current coordinator path)
-
-
-**Tasks:**
-- Move to NVMe backed nodes for EU
-- Move to NVMe backed nodes for Coordinator
-- Move to NVMe backed nodes for Dev
-- Infra as code for ClickHouse
-- Configs in Ansible for ClickHouse
-- Upgrade US to `im4gn.16xlarge` instances in one AZ
-- Setup Coordinators for multi-tennant workloads
-- Move to Table defined TTL based tiered storage
-- Move to ClickHouseKeeper from ZooKeeper
-
-

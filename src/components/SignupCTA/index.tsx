@@ -35,7 +35,7 @@ export const SignupCTA = ({
                     type={type}
                     className={className}
                     width={width}
-                    to={`https://app.posthog.com/signup`}
+                    to={`https://us.posthog.com/signup`}
                     event={event}
                     size={size}
                 >
@@ -47,7 +47,7 @@ export const SignupCTA = ({
                     type={type}
                     className={className}
                     width={width}
-                    to={`https://${posthog?.isFeatureEnabled('direct-to-eu-cloud') ? 'eu' : 'app'}.posthog.com/signup`}
+                    to={`https://${posthog?.isFeatureEnabled('direct-to-eu-cloud') ? 'eu' : 'us'}.posthog.com/signup`}
                     event={event}
                     size={size}
                 >

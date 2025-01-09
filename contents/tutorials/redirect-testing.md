@@ -12,7 +12,7 @@ tags:
   - feature flags
 ---
 
-Redirect testing is a way to [A/B test](/ab-testing) web pages by redirecting users to one or the other.
+Redirect testing is a way to [A/B test](/experiments) web pages by redirecting users to one or the other.
 
 To show you how to do a redirect test with PostHog, we set up a two-page Next.js app, create an A/B test in PostHog, and then implement it in our app using middleware and feature flags. 
 
@@ -333,7 +333,7 @@ export async function middleware(request) {
 
   // Format flags and distinct_id for bootstrap cookie
   const bootstrapData = {
-    distinctId: distinct_id,
+    distinctID: distinct_id,
     featureFlags: data.featureFlags
   }
 
@@ -402,3 +402,5 @@ When we relaunch our application and go to either of the test or control routes,
 - [How to use Next.js middleware to bootstrap feature flags](/tutorials/nextjs-bootstrap-flags)
 - [How to evaluate and update feature flags with the PostHog API](/tutorials/api-feature-flags)
 - [How to bootstrap feature flags in React and Express](/tutorials/bootstrap-feature-flags-react)
+
+<NewsletterForm />

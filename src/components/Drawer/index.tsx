@@ -15,11 +15,11 @@ interface DrawerProps {
 export const Drawer = (props: DrawerProps): React.ReactElement => {
     const { children, className, isOpen, onClose, animateOpen = true } = props
 
-    const classes = cn('scrollbar-hide relative min-h-full h-screen w-[600px] max-w-full md:max-w-[90%]', className)
+    const classes = cn('scrollbar-hide relative min-h-full h-screen w-[600px] max-w-full md:max-w-[90%] shadow-xl', className)
 
     return (
         <Transition.Root show={isOpen} as={Fragment}>
-            <Dialog as="div" className="drawer relative z-[9999999]" onClose={onClose}>
+            <Dialog as="div" className="drawer relative z-[9999998]" onClose={onClose}>
                 <Transition.Child
                     as={Fragment}
                     enter={cn('ease-out duration-[0s]', animateOpen && 'duration-300')}
@@ -29,7 +29,7 @@ export const Drawer = (props: DrawerProps): React.ReactElement => {
                     leaveFrom="opacity-100"
                     leaveTo="opacity-0"
                 >
-                    <div className="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity before:absolute before:left-0 before:top-0 before:w-full before:h-screen before:bg-tan/75" />
+                    <div className="fixed inset-0 transition-opacity before:absolute before:left-0 before:top-0 before:w-full before:h-screen before:bg-tan/75 dark:before:bg-dark/90" />
                 </Transition.Child>
 
                 <div className="fixed inset-0 z-10">
@@ -45,7 +45,7 @@ export const Drawer = (props: DrawerProps): React.ReactElement => {
                         >
                             <Dialog.Panel className={classes}>
                                 <div
-                                    className="group absolute top-4 right-4 bg-accent dark:bg-accent-dark rounded-full p-1 border-light dark:border-dark cursor-pointer z-[50] border-transparent  hover:border-light dark:hover:border-dark "
+                                    className="group absolute top-4 right-4 bg-accent dark:bg-accent-dark rounded-full p-1 border-light dark:border-dark cursor-pointer z-[50] border-transparent  hover:border-light dark:hover:border-dark"
                                     onClick={onClose}
                                 >
                                     <IconX className="text-primary dark:text-primary-dark w-6 h-6 relative group-hover:top-[-1px] group-hover:scale-[1.05] group-active:top-[0px] group-active:scale-[.99]" />

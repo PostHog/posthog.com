@@ -10,7 +10,7 @@ tags:
   - feature flags
 ---
 
-[Framer](https://www.framer.com/) is a great tool for building marketing websites. However, sometimes you may be unsure if a change will actually improve your conversion rate. This is where [A/B testing](/ab-testing) is helpful. It enables you to test and compare your changes to systemically improve your site.
+[Framer](https://www.framer.com/) is a great tool for building marketing websites. However, sometimes you may be unsure if a change will actually improve your conversion rate. This is where [A/B testing](/experiments) is helpful. It enables you to test and compare your changes to systemically improve your site.
 
 This tutorial shows you how to set up A/B tests with Framer and PostHog to get the most out of your website.
 
@@ -132,3 +132,5 @@ If you want to view both variants of your experiment to make sure they are worki
 - [How to set up Framer analytics, session replay, and more](/tutorials/framer-analytics)
 - [How to create surveys in Framer](/tutorials/framer-surveys)
 - [A non-technical guide to understanding data in PostHog](/tutorials/non-technical-guide-to-data)
+
+<NewsletterForm />

@@ -116,7 +116,7 @@ PostHog and LaunchDarkly take opposing approaches.
   <ComparisonRow column1={true} column2={false} feature="Free collaboration" />
 </ComparisonTable>
 
-**PostHog’s** [feature flag pricing](/pricing?product=feature-flags) is pay-per-request (and A/B tests use feature flags). There is a generous free tier of 1M requests per month with all features, add-ons, and integrations available.
+**PostHog’s** [feature flag pricing](/feature-flags#pricing) is pay-per-request (and A/B tests use feature flags). There is a generous free tier of 1M requests per month with all features, add-ons, and integrations available.
 
 ![PostHog pricing](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/posthog-vs-launchdarkly/posthog-price.png)
 
@@ -130,7 +130,7 @@ As mentioned earlier, many of the security, approval, and workflow features that
 
 To give you an idea of what pricing looks like in reality, here are some example situations and their estimated costs for both PostHog and LaunchDarkly.
 
-<div className="overflow-x-auto -mx-5 px-5">
+<OverflowXSection>
 <table className="w-full mt-4" style="min-width: 600px;">
     <thead>
         <tr>
@@ -177,7 +177,7 @@ To give you an idea of what pricing looks like in reality, here are some example
         </tr>
     </tbody>
 </table>
-</div>
+</OverflowXSection>
 
 > **Notes:** 
 > - Using [backend local evaluation](/docs/feature-flags/common-questions#backend-sdks) in PostHog lowers the amount of flag usage to depend on the polling duration and active number of servers. If you use flags with one server polling every 30 seconds, this amount is under 1M requests (meaning free). 
@@ -251,6 +251,10 @@ Feature flags and experiments are free for up to 1M requests per month. Beyond t
 LaunchDarkly starts at $10 per seat per month. This includes unlimited flags, server-side monthly active users, and 1,000 client-side monthly active users. More client-side monthly active users, also known as monthly context instances, cost more. 
 
 Their pro plan doubles the cost to $20 per seat per month. It adds API, unlimited projects, and more integrations. Above that, their enterprise plan requires talking to sales. It includes custom roles, SSO, scheduling, workflows, and more.
+
+### Can I migrate from LaunchDarkly?
+
+Yes. See our [LaunchDarkly to PostHog migration guide](/docs/migrate/launchdarkly) for more.
 
 ### Does LaunchDarkly or PostHog offer free trials?
 

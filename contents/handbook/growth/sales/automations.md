@@ -78,9 +78,10 @@ The Zap then:
 2. If successful, looks up the associated HubSpot Company
 3. Sets the posthog_organization_id property in HubSpot so that Vitally will be able to link to the Company
 4. Creates a Zendesk Organization with the following properties:
-   * name - Billing Customer ID - PostHog Organiation Name (e.g. 12345 - PostHog) which guarantees uniqueness
-   * external_id - PostHog Organization ID
-   * domain - The domain name from the HubSpot Company Object (which might not exist - see below)
+   * `name` - Billing Customer ID - PostHog Organiation Name (e.g. 12345 - PostHog) which guarantees uniqueness
+   * `external_id` - PostHog Organization ID
+   * `ph_external_id_org` - PostHog Organization ID custom field (because `external_id` cannot be used in triggers and automations)
+   * `domain` - The domain name from the HubSpot Company Object (which might not exist - see below)
 
 There are some scenarios (e.g. gmail signups) where HubSpot doesn't have an associated company record and as such 
 there won't be a domain to supply to Zendesk.  In this case the automation completes but also adds the Email and Zendesk
@@ -135,6 +136,14 @@ The Zap then updates the specific Zendesk Organization with the requested tags.
         * Account in Active Trial Segment
         * Zendesk Org ID is set
 
+### Setting the correct organization in Zendesk for new tickets
+
+Zendesk uses the requester's email domain to associate the ticket and the requester with an organization in Zendesk. To mitigate the problems this causes, we have a Zap named [Set user's correct organization ID](https://zapier.com/editor/253755029/published) which:
+
+- Checks each new ticket for a value in the custom ticket field `organization_id`. (This ID is added to each support ticket submitted via our Help sidebar `Email an engineer` form, and community questions.)
+- Looks for a Zendesk org with an `external_id` which matches the value of the custom ticket field `organization_id`
+- If no match is found, the Zap stops and does nothing
+- If a match is found, the Zap sets the user's Zendesk organization accordingly, and then sets an `org-checked` tag to prevent the Zap from running repeatedly on the same ticket.
 
 ## [Deprecated] HubSpot and Zendesk tagging
 

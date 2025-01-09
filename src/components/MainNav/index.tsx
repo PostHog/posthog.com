@@ -1,13 +1,12 @@
+import CloudinaryImage from 'components/CloudinaryImage'
 import Link from 'components/Link'
 import Logo from 'components/Logo'
-import { useSearch } from 'components/Search/SearchContext'
 import { useValues } from 'kea'
 import { layoutLogic } from '../../logic/layoutLogic'
 import {
     IconApp,
     IconBrightness,
     IconMessage,
-    IconSearch,
     IconTextWidth,
     IconUser,
     IconChevronDown,
@@ -32,10 +31,10 @@ import React, { useEffect, useRef, useState } from 'react'
 import { useInView } from 'react-intersection-observer'
 import { usePopper } from 'react-popper'
 import getAvatarURL from 'components/Squeak/util/getAvatar'
-import { StaticImage } from 'gatsby-plugin-image'
 import MediaUploadModal from 'components/MediaUploadModal'
 import SideModal from 'components/Modal/SideModal'
 import { Authentication } from 'components/Squeak'
+import { useChat } from 'hooks/useChat'
 
 export const Avatar = (props: { className?: string; src?: string }) => {
     return (
@@ -157,7 +156,11 @@ function Tooltip({
 
     useEffect(() => {
         function handleClick(e) {
-            if (containerEl?.current && !containerEl?.current.contains(e.target)) {
+            if (
+                containerEl?.current &&
+                !containerEl?.current.contains(e.target) &&
+                !document.querySelector('#portal-tooltip')?.contains(e.target)
+            ) {
                 setOpen(false)
             }
         }
@@ -173,7 +176,7 @@ function Tooltip({
                 <button
                     ref={setReferenceElement}
                     onClick={() => setOpen(!open)}
-                    className={`ml-2 flex items-center rounded-full border border-light dark:border-dark relative active:scale-[.99] ${
+                    className={`flex items-center rounded-full border border-light dark:border-dark relative active:scale-[.99] ${
                         open
                             ? 'border-primary/50 dark:border-primary-dark/50'
                             : 'hover:border-primary/25 hover:dark:border-primary-dark/25 hover:scale-[1.05]'
@@ -185,7 +188,7 @@ function Tooltip({
                 <button
                     ref={setReferenceElement}
                     onClick={() => setOpen(!open)}
-                    className={`ml-2 flex items-center p-2 rounded hover:bg-border dark:hover:bg-border-dark relative active:top-[1px] active:scale-[.99] ${
+                    className={`flex items-center p-2 rounded hover:bg-border dark:hover:bg-border-dark relative active:top-[1px] active:scale-[.99] ${
                         open ? 'bg-border dark:bg-border-dark' : ' hover:scale-[1.05]'
                     }`}
                 >
@@ -381,9 +384,45 @@ const Notifications = () => {
     ) : null
 }
 
+const TheoTooltip = () => {
+    return (
+        <div className="flex max-w-[350px] space-x-3">
+            <img
+                src="https://res.cloudinary.com/dmukukwp6/image/upload/theo_tooltip_22f692044d.png"
+                alt="Theo"
+                className="size-[80px]"
+            />
+            <div>
+                <h4 className="text-base m-0 mb-1">Enable Theo (clutter-free) mode</h4>
+                <p className="text-sm m-0">
+                    <Link
+                        className="text-red dark:text-yellow font-bold cursor-pointer"
+                        to="https://www.x.com/theo"
+                        externalNoIcon
+                    >
+                        Theo - t3.gg
+                    </Link>{' '}
+                    once{' '}
+                    <Link
+                        className="text-red dark:text-yellow font-bold cursor-pointer"
+                        to="https://youtu.be/zcZZxzkLwOc?si=FD5UJeFvh7uwKYy2&t=883"
+                        externalNoIcon
+                    >
+                        complained
+                    </Link>{' '}
+                    our blog had too many things on it for making screen recordings.
+                </p>
+                <p className="text-sm m-0 mt-1">So here's to you, Theo. Film away.</p>
+            </div>
+        </div>
+    )
+}
+
 export const Main = () => {
     const { user, logout } = useUser()
     const { open } = useSearch()
+    const { user } = useUser()
+    const { openChat, hasUnread } = useChat()
     const {
         menu,
         parent,
@@ -393,6 +432,9 @@ export const Main = () => {
         setFullWidthContent,
         enterpriseMode,
         setEnterpriseMode,
+        theoMode,
+        setTheoMode,
+        post,
     } = useLayoutData()
     const { pathname } = useLocation()
     const { websiteTheme } = useValues(layoutLogic)
@@ -456,7 +498,10 @@ export const Main = () => {
                         <Link className="py-4 grow-0 shrink-0 basis-[auto] dark:text-primary-dark relative" to="/">
                             {pathname === '/' && <ActiveBackground />}
                             {enterpriseMode ? (
-                                <StaticImage src="./posthog-tm.png" className="h-6 mx-6" />
+                                <CloudinaryImage
+                                    src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/MainNav/posthog-tm.png"
+                                    className="h-5 mx-6 relative"
+                                />
                             ) : (
                                 <Logo
                                     color={websiteTheme === 'dark' && 'white'}
@@ -509,15 +554,19 @@ export const Main = () => {
                         <HoverTooltip
                             content={() => (
                                 <div className="text-xs">
-                                    Open with <kbd className={`${keyboardShortcut} py-0`}>/</kbd>
+                                    Chat with <strong>Max AI</strong>{' '}
+                                    <kbd className={`${keyboardShortcut} py-0 ml-0.5`}>?</kbd>
                                 </div>
                             )}
                         >
                             <button
-                                className="group my-1mr-[1px] p-2 hover:bg-border dark:hover:bg-border-dark rounded"
-                                onClick={() => open('header')}
+                                className="group my-1mr-[1px] p-2 hover:bg-border dark:hover:bg-border-dark rounded relative"
+                                onClick={openChat}
                             >
-                                <IconSearch className="opacity-50 inline-block w-6 group-hover:opacity-75" />
+                                <IconChatHelp className="opacity-50 inline-block w-6 group-hover:opacity-75" />
+                                {hasUnread && (
+                                    <span className="size-2 text-xs bg-red text-white flex justify-center items-center rounded-full absolute top-2 right-2 " />
+                                )}
                             </button>
                         </HoverTooltip>
 
@@ -626,6 +675,27 @@ export const Main = () => {
                                                 <Toggle checked={fullWidthContent} />
                                             </button>
                                         </li>
+                                        {post && (
+                                            <li className="hidden md:block px-1">
+                                                <HoverTooltip placement="left" content={() => <TheoTooltip />}>
+                                                    <button
+                                                        onClick={() => setTheoMode(!theoMode)}
+                                                        className="group group/item text-sm px-2 py-2 rounded-sm hover:bg-border dark:hover:bg-border-dark flex justify-between items-center w-full"
+                                                    >
+                                                        <div className="flex items-center relative">
+                                                            <img
+                                                                className="w-[20px] inline-block mr-2 relative group-hover:scale-[1.75] group-hover:-rotate-12 group-hover:-top-0.5"
+                                                                src="https://res.cloudinary.com/dmukukwp6/image/upload/theo_mode_0b96ff74d6.png"
+                                                                alt="Theo mode"
+                                                            />
+                                                            <span>Theo mode</span>
+                                                        </div>
+
+                                                        <Toggle checked={theoMode} />
+                                                    </button>
+                                                </HoverTooltip>
+                                            </li>
+                                        )}
                                         {pathname === '/' && (
                                             <li className="px-1 whitespace-nowrap">
                                                 <button
@@ -684,7 +754,9 @@ export const Main = () => {
                                 <div className="p-px bg-accent dark:bg-accent-dark rounded-full inline-flex relative">
                                     <Avatar
                                         src={getAvatarURL(user?.profile)}
-                                        className="w-9 h-9 inline-block bg-tan rounded-full dark:bg-dark"
+                                        className={`w-9 h-9 inline-block bg-${
+                                            user.profile.color ?? 'white dark:bg-dark'
+                                        } rounded-full`}
                                     />
                                     <div className="absolute bottom-0 right-0 translate-x-1/2">
                                         <Notifications />
@@ -717,7 +789,7 @@ export const Mobile = () => {
     const { menu, parent, internalMenu, activeInternalMenu, enterpriseMode, setEnterpriseMode } = useLayoutData()
 
     return (
-        <div className="fixed bottom-0 w-full md:hidden z-[9999999] print:hidden">
+        <div id="mobile-nav" className="fixed bottom-0 w-full md:hidden z-[9999998] print:hidden">
             <InternalMenu
                 mobile
                 className="bg-light dark:bg-dark border-t mb-[-1px]"
@@ -730,7 +802,7 @@ export const Mobile = () => {
                     const { name, url, icon } = menuItem
                     const Icon = icons[icon]
                     return (
-                        <li className="h-full" key={name}>
+                        <li className="h-full first:hidden" key={name}>
                             <Link
                                 to={url}
                                 className={`text-[12.5px] font-medium relative px-4 py-4 flex flex-col space-y-1 items-center ${

@@ -5,7 +5,7 @@ import React from 'react'
 export default function Questions({ topicIds = [] }) {
     const { questions, isLoading } = useQuestions({
         limit: 10,
-        sortBy: 'newest',
+        sortBy: 'activity',
         filters: {
             topics: {
                 id: {
@@ -20,6 +20,27 @@ export default function Questions({ topicIds = [] }) {
                     $notContainsi: '/community/profiles',
                 },
             },
+            $or: [
+                {
+                    resolved: {
+                        $eq: true,
+                    },
+                },
+                {
+                    resolved: {
+                        $eq: false,
+                    },
+                    replies: {
+                        profile: {
+                            teams: {
+                                id: {
+                                    $notNull: true,
+                                },
+                            },
+                        },
+                    },
+                },
+            ],
         },
     })
     return (
@@ -28,6 +49,7 @@ export default function Questions({ topicIds = [] }) {
             className="sm:grid-cols-4"
             questions={questions}
             isLoading={isLoading}
+            sortBy="activity"
             showBody
         />
     )

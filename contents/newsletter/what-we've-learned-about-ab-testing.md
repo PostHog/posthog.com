@@ -7,7 +7,7 @@ featuredImage: >-
   https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/newsletter/feature-images/ab-test.png
 featuredImageType: full
 tags:
-  - AB testing
+  - Experiments
 crosspost:
   - Product engineers
   - Blog
@@ -147,7 +147,7 @@ A culture of experimentation is great, but A/B tests aren’t the solution to ev
 
 - **Ethical considerations…** because your users are real people and they are relying on your product. Running a test on a bug might verify your solution works, but some users will suffer needlessly.
 
-Learn more in [A software engineer's guide to A/B testing](product-engineers/ab-testing-guide-for-engineers#when-should-you-avoid-running-an-ab-test).
+Learn more in [A software engineer's guide to A/B testing](/product-engineers/ab-testing-guide-for-engineers#when-should-you-avoid-running-an-ab-test).
 
 ## 9. There are many different types of test 📝
 Other types of tests exist beyond the standard A/B test, which compares two variants and their impact on a goal metric, such as:

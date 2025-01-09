@@ -13,8 +13,6 @@ crosspost:
   - Blog
 ---
 
-The PostHog team includes a number of voracious readers — we even have [our own book club](/handbook/people/training)! — so here’s a collection of the books our teams recommend. 
-
 There are thousands of books which will tell you how to build a product and launch a new startup, but it can be hard to know which are actually worth reading and which are full of generic advice (or written by AI). If you’re looking for inspiration, where should you turn?
 
 The PostHog team includes a number of voracious readers — we even have [our own book club](/handbook/people/training)! — so here’s a collection of the books our teams recommend.

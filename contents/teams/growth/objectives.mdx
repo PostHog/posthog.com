@@ -1,17 +1,52 @@
-### Q2 2024 Objectives
+## Q1 2025 Objectives
 
-- **Objective 1**: Create a flow in product analytics onboarding to fill out a dashboard template using actions (Raquel)
-  - Reasoning: Templates are useful for getting people to valuable insights quickly, but they have to wait for data to come in before they can use themes. If we use actions, they can be made right away.
-  - Metrics: Percent of new orgs that activate increases, retention goes up or stays the same, people actually use the flow.
-- **Objective 2**: Simplify our subscription flows (Zach, supported by Raquel)
-  - Reasoning: Subscribing to PostHog can be very confusing. To get platform features, you have to subscribe to any Product. And what does it mean to be subscribed to one product but not another?
-  - Metrics: Conversion rate to subscribed should increase, complaints about unexpected charges should not go up.
-  - You don't sub to products individually, you instead just add a CC to the platform
-  - If you have a CC in, you're charged for any usage you accrue
-  - Pricing page reflects these changes
-  - Nice to have: Per-project breakdown on the billing page
-- **Objective 3**: Launch pricing changes (Bianca, Raquel)
-  - Personless events - will help us reach more customers at an affordable price
-  - Data warehouse - it's becoming pretty useful, we should charge for it
-  - Session replay - we can reduce costs to improve retention and reach more people
-      - Create plan transition feature so people can see new plans and decide if they want to switch
+### Pato
+
+1. Usage dashboard
+    - Over time usage for all projects and broken down by product
+    - A new structure to the billing page for usage and billing
+    - Bonus: layer on pricing tiers and break down costs by time/project/product
+2. Pricing changes
+    - Finish Mobile Replay pricing
+    - Query API pricing
+    - Clean up billing for identified / unidentified events
+
+### Zach
+
+1. RBAC
+    - Release in Beta to core customers requesting it
+    - Complete full documentation for internal and external use
+2. Enterprise add-on
+    - Update the offering and release the self-serve experience
+    - As part of this experiment with changing the teams plan structure/offering
+3. Improve SAML 
+    - Fix xmlsec or new add a new provider to handle it    
+
+### Surbhi (and Josh)
+
+1. Use intent data to onboard users into multiple products 
+    - This could be allowing users to onboard into multiple products
+    - Walk through each one without repetitive steps
+    - Improve how we think about activation within products when onboarding to multiple
+2. Surface intent data later in the users journey
+    - utilize the quick start panel to cross sell to get started in the other products
+    - cross sell to get started in the other products (be creative)
+
+
+### TBD
+
+1. Move core RevOps flows off of Zapier into the billing system - to be fleshed out later
+
+### Extras
+
+_These are meant as nice to haves if we have time or you feel inspired_
+
+1. Postgres (pgbouncer + read replica) - infrastructure handling this
+2. Self serve account deletion
+3. Case insensitive emails
+4. Move all transactional emails to Customer.io
+5. 3D Secure improvements - email flows
+6. Move revenue dashboards from Metabase into PostHog
+7. Get credit cart input experiment over the line
+8. Billing endpoint performance improvements (split up)
+9. Proper callbacks for time-sensitive checks

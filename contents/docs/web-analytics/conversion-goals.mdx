@@ -1,0 +1,59 @@
+---
+title: Conversion goals
+sidebar: Docs
+showTitle: true
+---
+
+A conversion goal is a key event or action you want users to do. It can be seen as the main focus your website is driving towards. These are known as **conversion actions** in Google Ads and **key events** in GA4. Examples include:
+
+- Signup
+- Book a demo
+- Subscribe
+- Download
+- Form submission
+
+In web analytics, these are higher-level goals that work well in the overview. To dive deeper, visualize multiple steps, and use breakdowns, you can use [funnels](/docs/product-analytics/funnels). 
+
+## How to set up a conversion goal
+
+To set up a conversion goal, first, you need to either capture a custom event or create an action for your goal.
+
+- For help capturing a custom event, see our guide on [capturing custom events](/docs/getting-started/send-events#2-capture-custom-events).
+- For help creating an action, see our guide on [creating an action from autocapture events](/docs/getting-started/actions-and-insights).
+
+Once created, head to the [web analytics dashboard](https://us.posthog.com/web) and click on **Add conversion goal** next to filters. Search and select your custom event or action. This adds conversion metrics to your dashboard.
+
+<ProductScreenshot
+  imageLight = "https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2024_11_04_at_12_29_08_3bba14e7e9.png"
+  imageDark = "https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2024_11_04_at_12_28_25_689e6c893d.png"
+  alt="Web analytics dashboard" 
+  classes="rounded"
+/>
+
+> **Note:** There is also a **goals** section at the bottom of the dashboard that contains recent and popular actions that can potentially be used as conversion goals.
+
+## Conversion goal metrics
+
+Adding a conversion goal adds the following metrics to the [web analytics dashboard](/docs/web-analytics/dashboard):
+
+- **Total conversions:** Total count of the conversion goal event or action.
+- **Unique conversions:** Total count of unique persons who did the conversion goal.
+- **Conversion rate:** The percentage of visitors who do the conversion goal.
+
+Each of these also can be visualized on the graph below.
+
+<ProductScreenshot
+  imageLight = "https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2024_11_04_at_14_31_16_2x_dc796cf835.png"
+  imageDark = "https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2024_11_04_at_14_31_36_2x_3984f9ed5f.png"
+  alt="Web analytics dashboard" 
+  classes="rounded"
+/>
+
+## How to improve your conversion
+
+Once you set up your conversion goal, what else is there to do other than improve it? Here are some recommendations:
+
+- Add filters to your web analytics dashboard to get conversion for sections of your site, demographics, marketing channels, and more.
+- Watch [session replays](/docs/session-replay) that include your conversion goal to identify friction, confusion, and other issues.
+- Set up a destination to send conversions to ad platforms like [Google Ads](/docs/cdp/destinations/google-ads) to optimize your ad spend.
+- Run [A/B tests](/docs/experiments) related to the conversion goal such as changing the copy, checkout flow, or subscription form.

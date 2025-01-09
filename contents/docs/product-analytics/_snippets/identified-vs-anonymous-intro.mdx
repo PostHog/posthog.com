@@ -1,0 +1,21 @@
+PostHog captures two types of events: [**anonymous** and **identified**](/docs/data/anonymous-vs-identified-events)
+
+**Identified events** enable you to attribute events to specific users, and attach [person properties](/docs/product-analytics/person-properties). They're best suited for logged-in users.
+
+Scenarios where you want to capture identified events are:
+
+- Tracking logged-in users in B2B and B2C SaaS apps
+- Doing user segmented product analysis
+- Growth and marketing teams wanting to analyze the _complete_ conversion lifecycle
+   
+**Anonymous events** are events without individually identifiable data. They're best suited for [web analytics](/docs/web-analytics) or apps where users aren't logged in. 
+
+Scenarios where you want to capture anonymous events are:
+
+- Tracking a marketing website
+- Content-focused sites
+- B2C apps where users don't sign up or log in
+
+Under the hood, the key difference between identified and anonymous events is that for identified events we create a [person profile](/docs/data/persons) for the user, whereas for anonymous events we do not.
+
+ > **💡 Tip:** Under our current [pricing](/pricing), anonymous events can be up to 4x cheaper than identified ones (due to the cost of processing them), so it's recommended you only capture identified events when needed.

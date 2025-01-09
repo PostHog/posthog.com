@@ -92,3 +92,5 @@ A successful A/A test provides evidence that your experimentation process and se
 - [Testing frontend feature flags with React, Jest, and PostHog](/tutorials/test-frontend-feature-flags)
 - [How to run experiments without feature flags](/docs/experiments/running-experiments-without-feature-flags)
 - [8 annoying A/B testing mistakes every engineer should know](/blog/ab-testing-mistakes)
+
+<NewsletterForm />

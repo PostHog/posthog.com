@@ -2,9 +2,9 @@
 title: 'How Webshare replaced Mixpanel, Hotjar, and FullStory with PostHog'
 customer: Webshare
 logo: >-
-  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/customers/webshare/webshare_logo.png
+  https://res.cloudinary.com/dmukukwp6/image/upload/webshare_light_cf767a3b25.png
 logoDark: >-
-  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/customers/webshare/webshare-logo-dark.png
+  https://res.cloudinary.com/dmukukwp6/image/upload/webshare_dark_7da8e60d52.png
 featuredImage: >-
   https://res.cloudinary.com/dmukukwp6/image/upload/webshare_4841e6543a.png
 industries:

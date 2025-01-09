@@ -1,3 +1,4 @@
+import CloudinaryImage from 'components/CloudinaryImage'
 import { MDXProvider } from '@mdx-js/react'
 import { graphql, useStaticQuery } from 'gatsby'
 import { MDXRenderer } from 'gatsby-plugin-mdx'
@@ -11,8 +12,9 @@ import { SEO } from '../seo'
 import TeamStat, { pineappleOnPizzaStat } from './TeamStat'
 import { StaticImage } from 'gatsby-plugin-image'
 import ReactMarkdown from 'react-markdown'
+import rehypeRaw from 'rehype-raw'
 import SideModal from 'components/Modal/SideModal'
-import { Profile } from '../../templates/Team'
+import Profile from 'components/Team/Profile'
 
 export const TeamMember = (props) => {
     const { avatar, lastName, firstName, companyRole, country, squeakId, location, biography, setActiveProfile } = props
@@ -66,7 +68,9 @@ export const TeamMember = (props) => {
                         />
                     </figure>
                     <div className="overflow-hidden absolute h-full w-full inset-0 p-4 bg-accent dark:bg-accent-dark">
-                        <ReactMarkdown className="text-sm [&_p]:text-sm [&_p]:mb-2">{biography}</ReactMarkdown>
+                        <ReactMarkdown rehypePlugins={[rehypeRaw]} className="text-sm bio-preview">
+                            {biography}
+                        </ReactMarkdown>
                         <div className="bg-gradient-to-t from-accent dark:from-accent-dark to-transparent absolute inset-0 w-full h-full" />
                     </div>
                 </div>
@@ -84,7 +88,7 @@ export default function People() {
 
     const teamSize = teamMembers.length - 1
 
-    // Some Stats were used as fallback until the actual data is added to the GraphlQL Server
+    // Some Stats were used as fallback until the actual data is added to the GraphQL Server
     const teamStats = [
         {
             data: pineappleOnPizzaStat(teamMembers) ? pineappleOnPizzaStat(teamMembers) : [60, 40],
@@ -112,15 +116,15 @@ export default function People() {
         <Layout>
             <SEO title="Team - PostHog" />
             <SideModal open={!!activeProfile} setOpen={setActiveProfile}>
-                <Profile {...activeProfile} />
+                <Profile profile={{ ...activeProfile }} />
             </SideModal>
             <div className="flex flex-col xl:flex-row gap-8 pt-10 md:pb-3 px-4 md:px-8 2xl:px-4 3xl:p-0 max-w-screen-2xl mx-auto">
                 <div className="flex-1">
                     <h2 className="text-4xl">People</h2>
 
                     <div className="float-right">
-                        <StaticImage
-                            src="../../images/explorer-hog.png"
+                        <CloudinaryImage
+                            src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/images/explorer-hog.png"
                             alt="Hiking hog"
                             width="250"
                             height="250"

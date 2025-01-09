@@ -1,3 +1,4 @@
+import CloudinaryImage from 'components/CloudinaryImage'
 import { Check2 } from 'components/Icons'
 import Layout from 'components/Layout'
 import { GatsbyImage, getImage, StaticImage } from 'gatsby-plugin-image'
@@ -7,6 +8,7 @@ import { graphql, useStaticQuery } from 'gatsby'
 import Link from 'components/Link'
 import SEO from 'components/seo'
 import HubSpotForm from 'components/HubSpotForm'
+import SalesforceForm from 'components/SalesforceForm'
 
 const benefits = [
     '$50k in PostHog credit',
@@ -69,10 +71,10 @@ export default function Startups() {
             <SEO title={'Startups - PostHog'} />
             <section className="text-center py-20 max-w-screen-lg mx-auto relative px-5">
                 <div className="absolute right-0 -bottom-12 md:-bottom-20 md:max-w-[240px] max-w-[150px]">
-                    <StaticImage width={240} src="./images/belay-on.png" />
+                    <CloudinaryImage width={240} src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Startups/images/belay-on.png" />
                 </div>
                 <div className="absolute left-0 bottom-0 max-w-[120px] md:max-w-[200px]">
-                    <StaticImage width={200} src="./images/on-belay.png" />
+                    <CloudinaryImage width={200} src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Startups/images/on-belay.png" />
                 </div>
                 <div className="relative hidden lg:block">
                     <h1 className="max-w-lg mx-auto pb-2 text-center">Apply for PostHog's startup program</h1>
@@ -137,9 +139,9 @@ export default function Startups() {
                 <div className="flex-shrink-0">
                     <h3 className="mb-0">Finish your application</h3>
                     <p>Remember to complete the steps listed above!</p>
-                    <HubSpotForm
-                        validationSchema={validationSchema}
-                        formID="aa91765b-e790-4e90-847e-46c7ebf43705"
+                    <SalesforceForm
+                        type="contact"
+                        source="startup"
                         customMessage={
                             <>
                                 <h4>
@@ -155,18 +157,84 @@ export default function Startups() {
                                 </p>
                             </>
                         }
-                        customFields={{
-                            self_registration_raised: {
-                                type: 'radioGroup',
-                                options: [
-                                    { label: 'Boostrapped', value: 0 },
-                                    { label: 'Under $100k', value: 100_000 },
-                                    { label: '$100k - $500k', value: 500_000 },
-                                    { label: '$500k - $1m', value: 1_000_000 },
-                                    { label: '$1m - $5m', value: 5_000_000 },
-                                    { label: 'More than $5m', value: 100_000_000_000 },
-                                ],
-                            },
+                        form={{
+                            fields: [
+                                {
+                                    label: 'Email',
+                                    name: 'email',
+                                    type: 'string',
+                                    fieldType: 'email',
+                                    required: true,
+                                },
+                                {
+                                    label: 'First name',
+                                    name: 'first_name',
+                                    type: 'string',
+                                    required: true,
+                                },
+                                {
+                                    label: 'Last name',
+                                    name: 'last_name',
+                                    type: 'string',
+                                    required: true,
+                                },
+                                {
+                                    label: 'Company name',
+                                    name: 'company',
+                                    type: 'string',
+                                    required: true,
+                                },
+                                {
+                                    label: 'Company domain',
+                                    name: 'startup_domain',
+                                    type: 'string',
+                                    required: true,
+                                },
+                                {
+                                    label: 'PostHog organization name',
+                                    name: 'posthog_organization_name',
+                                    type: 'string',
+                                    required: true,
+                                },
+                                {
+                                    label: 'How much in total funding have you raised (USD)',
+                                    name: 'raised',
+                                    type: 'enumeration',
+                                    options: [
+                                        { label: 'Bootstrapped', value: 0 },
+                                        { label: 'Under $100k', value: 100_000 },
+                                        { label: '$100k - $500k', value: 500_000 },
+                                        { label: '$500k - $1m', value: 1_000_000 },
+                                        { label: '$1m - $5m', value: 5_000_000 },
+                                        { label: 'More than $5m', value: 100_000_000_000 },
+                                    ],
+                                    required: true,
+                                },
+                                {
+                                    label: 'The date that your company was incorporated',
+                                    name: 'incorpation_date',
+                                    type: 'string',
+                                    fieldType: 'date',
+                                    required: true,
+                                },
+                                {
+                                    label: 'The company that referred you',
+                                    name: 'referrer',
+                                    type: 'string',
+                                    required: true,
+                                },
+                                {
+                                    label: 'Are you building LLM-powered features?',
+                                    name: 'is_building_with_llms',
+                                    type: 'enumeration',
+                                    required: true,
+                                    options: [
+                                        { label: 'Yes', value: 'true' },
+                                        { label: 'No', value: 'false' },
+                                    ],
+                                },
+                            ],
+                            name: 'Startup application',
                         }}
                     />
                 </div>

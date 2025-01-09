@@ -7,6 +7,7 @@ import { StaticImage } from 'gatsby-plugin-image'
 import { Check2 } from 'components/Icons'
 import { useValues } from 'kea'
 import { layoutLogic } from 'logic/layoutLogic'
+import SalesforceForm from 'components/SalesforceForm'
 
 const features = [
     '$50,000 in PostHog credit for 12 months<sup>1</sup>',
@@ -87,14 +88,68 @@ export const YCOnboarding = () => {
                                 in your product
                             </li>
                         </ol>
-                        <HubSpotForm
-                            customFields={{
-                                yc_reason: {
-                                    type: 'radioGroup',
-                                    cols: 1,
-                                },
+                        <SalesforceForm
+                            type="contact"
+                            source="YC"
+                            form={{
+                                fields: [
+                                    {
+                                        label: 'Email',
+                                        name: 'email',
+                                        type: 'string',
+                                        fieldType: 'email',
+                                        required: true,
+                                    },
+                                    {
+                                        label: 'First name',
+                                        name: 'first_name',
+                                        type: 'string',
+                                        required: true,
+                                    },
+                                    {
+                                        label: 'Last name',
+                                        name: 'last_name',
+                                        type: 'string',
+                                        required: true,
+                                    },
+                                    {
+                                        label: 'Company name',
+                                        type: 'string',
+                                        name: 'company',
+                                        required: true,
+                                    },
+                                    {
+                                        label: 'Company domain name',
+                                        type: 'string',
+                                        name: 'startup_domain',
+                                        required: true,
+                                    },
+                                    {
+                                        label: 'Which YC batch are you?',
+                                        type: 'string',
+                                        name: 'yc_batch',
+                                        required: true,
+                                    },
+                                    {
+                                        label: 'Are you building LLM-powered features?',
+                                        name: 'is_building_with_llms',
+                                        type: 'enumeration',
+                                        required: true,
+                                        options: [
+                                            { label: 'Yes', value: 'true' },
+                                            { label: 'No', value: 'false' },
+                                        ],
+                                    },
+                                    {
+                                        label: 'Anything to add?',
+                                        type: 'string',
+                                        name: 'yc_notes',
+                                        required: true,
+                                    },
+                                ],
+                                name: 'YC onboarding',
+                                message: 'Thanks for applying! We will get back to you shortly.',
                             }}
-                            formID="1c421f4a-320a-4c2a-8879-e37ccfcdea87"
                         />
                     </div>
                 </section>

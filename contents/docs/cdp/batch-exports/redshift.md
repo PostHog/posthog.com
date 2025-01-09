@@ -13,9 +13,9 @@ Batch exports can be used to export data to Redshift, Amazon's data warehouse pr
 ## Creating the batch export
 
 1. Subscribe to data pipelines add-on in [your billing settings](https://us.posthog.com/organization/billing) if you haven't already.
-2. Click [Data pipelines](https://app.posthog.com/apps) in the navigation and go to the exports tab in your PostHog instance.
-3. Click "Create export workflow".
-4. Select **Redshift** as the batch export type.
+2. Click [Data pipelines](https://app.posthog.com/pipeline) in the navigation and go to the **Destinations** tab in your PostHog instance.
+3. Search for **Redshift**.
+4. Click the **+ Create** button. 
 5. Fill in the necessary [configuration details](#redshift-configuration).
 6. Finalize the creation by clicking on "Create".
 7. Done! The batch export will schedule its first run on the start of the next period.

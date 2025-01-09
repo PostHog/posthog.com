@@ -47,7 +47,7 @@ During the quarter:
   4. Triage and fix related bugs
   5. Assist the support hero in answering related questions
   6. Collaborate with other Small Teams such as marketing
-  7. Become power users of their area of Posthog and use PostHog in their processes
+  7. Become power users of their area of PostHog and use PostHog in their processes
 
 ## What is the role of the team lead?
 
@@ -153,7 +153,7 @@ James and Tim are ultimately responsible for us having (i) no gaps in product (i
 
 #### How do you stop duplicate work?
 
-Luke has the ultimate responsibility to make sure we don't build the same thing in two different teams, or that we don't accidentally compete with each other internally.
+James and Tim have the ultimate responsibility to make sure we don't build the same thing in two different teams, or that we don't accidentally compete with each other internally.
 
 By keeping communication asynchronous and transparent, this is made much easier to do than is typical at other organizations.
 

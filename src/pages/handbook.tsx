@@ -1,94 +1,11 @@
+import CloudinaryImage from 'components/CloudinaryImage'
 import React from 'react'
 import Layout from 'components/Layout'
 import { SEO } from 'components/seo'
 import { StaticImage } from 'gatsby-plugin-image'
 import Link from 'components/Link'
 import PostLayout from 'components/PostLayout'
-
-const chapters = [
-    {
-        name: 'Chapters',
-        links: [
-            { order: '1', name: 'Why does PostHog exist?', to: '/handbook/why-does-posthog-exist' },
-            { order: '2', name: 'How we got here', to: '/handbook/story' },
-            { order: '3', name: 'How we get users', to: '/handbook/how-we-get-users' },
-            { order: '4', name: 'Who we are building for', to: '/handbook/who-we-are-building-for' },
-            { order: '5', name: 'How we make users happy', to: '/handbook/making-users-happy' },
-            { order: '6', name: 'How we make money', to: '/handbook/how-we-make-money' },
-            { order: '7', name: 'Enduringly low prices', to: '/handbook/low-prices' },
-            { order: '8', name: 'Deciding which products to build', to: '/handbook/which-products' },
-            { order: '9', name: 'A wide company with small teams', to: '/handbook/wide-company' },
-            { order: '10', name: "How we're building a world-class team", to: '/handbook/strong-team' },
-            { order: '11', name: 'What we value', to: '/handbook/values' },
-            {
-                order: '12',
-                name: 'Providing a world-class engineering environment',
-                to: '/handbook/world-class-engineering',
-            },
-            { order: '13', name: 'Not running out of money', to: '/handbook/finance' },
-            { order: '14', name: 'Where we are now', to: '/handbook/current-status' },
-            { order: '15', name: 'Where are we going?', to: '/handbook/future' },
-            { order: '16', name: 'How you can help', to: '/handbook/help' },
-        ],
-    },
-]
-
-const otherLinks = [
-    {
-        name: 'Company',
-        links: [
-            { name: 'Story', to: '/handbook/company/story' },
-            { name: 'Team', to: '/team' },
-            { name: 'Strategy overview', to: '/handbook/strategy/overview' },
-            { name: 'Objectives', to: '/handbook/strategy/objectives' },
-        ],
-    },
-    {
-        name: 'How we work',
-        links: [
-            { name: 'Culture', to: '/handbook/company/culture' },
-            { name: 'Values', to: '/handbook/company/values' },
-            { name: 'Team structure', to: '/handbook/company/small-teams' },
-            { name: 'Management', to: '/handbook/company/management' },
-        ],
-    },
-    {
-        name: 'People',
-        links: [
-            { name: 'Compensation', to: '/handbook/people/compensation' },
-            { name: 'Benefits', to: '/handbook/people/benefits' },
-            { name: 'Time off', to: '/handbook/people/time-off' },
-            { name: 'Spending money', to: '/handbook/people/spending-money' },
-        ],
-    },
-    {
-        name: 'Engineering',
-        links: [
-            { name: 'Developing locally', to: '/handbook/engineering/developing-locally' },
-            { name: 'Support hero', to: '/handbook/engineering/support-hero' },
-            { name: 'Feature ownership', to: '/handbook/engineering/feature-ownership' },
-            { name: 'Shipping and releasing', to: '/handbook/engineering/development-process' },
-        ],
-    },
-    {
-        name: 'Design',
-        links: [
-            { name: 'Philosophy', to: '/handbook/design/philosophy' },
-            { name: 'Product design', to: '/handbook/design/process' },
-            { name: 'Working with product design', to: '/handbook/engineering/product-design' },
-            { name: 'PostHog.com', to: '/handbook/design/designing-posthog-website' },
-        ],
-    },
-    {
-        name: 'Sales & marketing',
-        links: [
-            { name: 'Marketing overview', to: '/handbook/growth/marketing' },
-            { name: 'Content & SEO', to: '/handbook/growth/marketing/blog' },
-            { name: 'Inbound model', to: '/handbook/growth/sales/overview' },
-            { name: 'Sales operations', to: '/handbook/growth/sales/sales-operations' },
-        ],
-    },
-]
+import chapters from '../navs/handbook.json'
 
 export const Handbook: React.FC = () => {
     return (
@@ -99,7 +16,7 @@ export const Handbook: React.FC = () => {
                 <section className="max-w-4xl mx-auto">
                     <div className="flex flex-col md:items-center md:justify-end md:flex-row-reverse gap-8 md:gap-2">
                         <div className="-mt-16 md:-mt-12">
-                            <StaticImage
+                            <CloudinaryImage
                                 src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/search-hog-4.png"
                                 alt="This hog has an answer"
                                 width={400}
@@ -110,8 +27,8 @@ export const Handbook: React.FC = () => {
                             <h1 className="font-bold text-5xl mb-6">Company handbook</h1>
                             <h3 className="text-xl">👋 Welcome!</h3>
                             <h5 className="opacity-60 font-semibold leading-tight mb-8 max-w-lg">
-                                This handbook simply explains how we work. It has been one of the most important things
-                                we've ever made.
+                                This handbook simply explains how we work. It is one of the most important things we've
+                                ever made.
                             </h5>
                         </div>
                     </div>

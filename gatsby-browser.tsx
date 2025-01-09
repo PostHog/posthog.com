@@ -7,12 +7,15 @@ import Posts from './src/components/Edition/Posts'
 import { Provider as ToastProvider } from './src/context/toast'
 import { RouteUpdateArgs } from 'gatsby'
 import { UserProvider } from './src/hooks/useUser'
-
+import { ChatProvider } from './src/hooks/useChat'
+import Chat from './src/components/Chat'
 initKea(false)
 
 export const wrapRootElement = ({ element }) => (
     <UserProvider>
-        <ToastProvider>{wrapElement({ element })}</ToastProvider>
+        <ToastProvider>
+            <ChatProvider>{wrapElement({ element })}</ChatProvider>
+        </ToastProvider>
     </UserProvider>
 )
 export const onRouteUpdate = ({ location, prevLocation }: RouteUpdateArgs) => {
@@ -55,7 +58,7 @@ export const wrapPageElement = ({ element, props }) => {
           'docs/data',
       ].includes(slug) ? (
         <HandbookLayout {...props} />
-    ) : /^session-replay|^product-analytics|^feature-flags|^ab-testing|^product-os/.test(slug) ? (
+    ) : /^session-replay|^product-analytics|^feature-flags|^experiments|^product-os/.test(slug) ? (
         <Product {...props} />
     ) : /^careers\//.test(slug) ? (
         <Job {...props} />

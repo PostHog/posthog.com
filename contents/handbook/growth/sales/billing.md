@@ -37,13 +37,13 @@ If this is a new contract for an existing customer, you will need to add their e
 ###### Step 3: Verify invoice details and send
 - Use the Invoice ID recorded in the table to locate the invoice in Stripe.
 - Ensure all details are correct, particularly the Customer’s Billing/Shipping addresses and Tax ID on the Customer object.
-- Send the invoice to the customer and wait for the payment to be completed.
+- Send the invoice to the customer and wait for the payment to be completed.  Ensure that the customer is aware that payment is via Bank Transfer only (no checks).
 
 **Do not proceed to the next steps until payment is confirmed.** Any credits added to an account gets automatically applied to outstanding invoices. If you add credits before payment is completed, the credits will settle any existing debts, and customer will not be able to make a payment.
 
 ###### Step 4: Apply credits
 - Make sure that the payment is fully processed to avoid any automatic deductions.
-- **If customer wishes to begin using credits immediately:** return to the Zapier table after you’ve verified payment competion and click the "Apply Credit" button.
+- **If customer wishes to begin using credits immediately:** return to the Zapier table after you’ve verified payment completion and click the "Apply Credit" button.
 - **If customer wishes to begin using credits  in the next billing cycle:** ask the RevOps team to apply the credits at the end of the current billing cycle.
 
 ###### Step 5: Schedule subscription
@@ -80,6 +80,13 @@ If this is a new contract for an existing customer, you will need to add their e
 - **If customer wishes to begin using credits immediately:** return to the Zapier table after you’ve completed verifying subscription and invoice details, and click the "Apply credit - monthly" button.
 - **If customer wishes to begin using credits in the next billing cycle:** ask the RevOps team to apply the credits at the end of the current billing cycle.
 
+> If a customer is paying us by bank transfer, the default is to receive these through Stripe. Each customer will receive individual virtual account information to send these payments for Stripe to reconcile. If you create a new customer profile on Stripe, this virtual account information will change so it's important to update the customer. Although these bank details are automatically included on the annual invoices sometimes customers will ask for the bank details as part of their vendor onboarding process, and you can generate them by viewing the Stripe customer record and then adding a new Bank Transfer Account in the Payments section.  You can then click through on that payment method to download a PDF with the bank details to share with the customer.  If a customer is requesting to send us a transfer outside of Stripe, eg directly to us, please post in #team-people-ops to request the correct banking info to share with the customer. 
+
+###### Step 6: Update Django Admin
+- Navigate to the billing admin detail page for the customer (should add a column for this in the zap table?)
+- Create a new Customer to stripe customer
+  - Copy and paste the new stripe customer id and new stripe subscription id
+  - Save!
 
 ### Stripe Products & Prices
 
@@ -155,14 +162,6 @@ You can find a list of available plans in the billing repo. These are found insi
 Each plan can have a list of features, and a price.
 Features are used to infer which features are available in the product, for a customer on that plan.
 You can manually change the plan for a customer by updating the `plans_map` in the billing admin panel.
-
-### Giving customers a free trial
-
-1. Find the Organization in the Billing Service Admin portal
-2. Find the `Free Trial Until` field and update that to the appropriate date
-3. The next time that Customer visits PostHog, their `AvailableFeatures` will be updated to reflect the standard premium features (they might have to refresh their page to properly sync the new billing information).
-4. Once this date passes their `AvailableFeatures` will be reset to the free plan unless they have subscribed within this time.
-
 
 ### Updating subscriptions
 

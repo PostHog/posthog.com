@@ -5,6 +5,7 @@ author:
   - lior-neu-ner
 tags:
   - product analytics
+  - AI engineering
 ---
 
 import { ProductScreenshot } from 'components/ProductScreenshot'
@@ -52,15 +53,14 @@ Next, we set up Posthog using our API key and host (You can find these in [your 
 'use client'
 import posthog from 'posthog-js'
 import { PostHogProvider } from 'posthog-js/react'
-
-if (typeof window !== 'undefined') {
-  posthog.init('<ph_project_api_key>', {
-    api_host: '<ph_client_api_host>',
-    person_profiles: 'identified_only',
-  })
-}
+import { useEffect } from 'react'
 
 export function PHProvider({ children }) {
+  useEffect(() => {
+    posthog.init('<ph_project_api_key>', {
+      api_host: '<ph_client_api_host>'
+    })
+  }, []);
   return <PostHogProvider client={posthog}>{children}</PostHogProvider>
 }
 ```
@@ -257,7 +257,7 @@ To create this insight, go the [Product analytics tab](https://us.posthog.com/in
 1. Set the event to `claude_message_completion`
 2. Click on **Total count** to show a dropdown. Click on **Property value (sum)**.
 3. Select the `total_cost_in_dollars` property.
-4. Cclick **+ Add breakdown** and select `model` from the event properties list.
+4. Click **+ Add breakdown** and select `model` from the event properties list.
 
 > **Note:** Insights may show `0` if the total cost is less than `0.01`.
 
@@ -348,4 +348,6 @@ We've shown you the basics of creating insights from your product's Claude usage
 
 - [How to set up LLM analytics for Cohere](/tutorials/cohere-analytics)
 - [How to set up LLM analytics for ChatGPT](/tutorials/chatgpt-analytics) 
-- [Product metrics to track for LLM apps](/product-engineers/llm-product-metrics)
+- [How to monitor LlamaIndex apps with Langfuse and PostHog](/tutorials/monitor-llama-index-with-langfuse)
+
+<NewsletterForm />

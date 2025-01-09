@@ -9,7 +9,7 @@ featuredImageType: full
 tags:
   - Growth engineering
   - Product engineers
-  - AB testing
+  - Experiments
 crosspost:
   - Blog
 ---

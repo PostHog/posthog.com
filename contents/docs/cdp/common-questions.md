@@ -4,7 +4,7 @@ title: Troubleshooting and FAQs
 
 ## My transformation or destination isn't working, what do I do?
 
-1. Checking that the transformation or destination is enabled with the correct configuration options in the [data pipeline tab](https://app.posthog.com/apps). You can find the correct configuration options in the [transformation or destination's documentation](/docs/cdp) by searching for it in the destinations, transformations, or filtering sections of the docs.
+1. Checking that the transformation or destination is enabled with the correct configuration options in the [data pipeline tab](https://app.posthog.com/pipeline). You can find the correct configuration options in the [transformation or destination's documentation](/docs/cdp) by searching for it in the destinations, transformations, or filtering sections of the docs.
 
 2. Click "Logs & metrics" and go to the `Metrics` tab to check that the transformation or destination is processing events without errors.
 

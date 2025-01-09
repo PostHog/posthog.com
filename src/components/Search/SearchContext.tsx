@@ -4,6 +4,7 @@ import SearchResults from './SearchResults'
 import { InstantSearch } from 'react-instantsearch-hooks-web'
 import algoliasearch from 'algoliasearch/lite'
 import usePostHog from '../../hooks/usePostHog'
+import { useChat } from 'hooks/useChat'
 
 type SearchContextValue = {
     isVisible: boolean
@@ -40,6 +41,7 @@ const SearchContext = React.createContext<SearchContextValue>({
 
 export const SearchProvider: React.FC = ({ children }) => {
     const posthog = usePostHog()
+    const { closeChat } = useChat()
     const [isVisible, setIsVisible] = React.useState<boolean>(false)
     const [initialFilter, setInitialFilter] = React.useState<SearchResultType | undefined>(undefined)
 
@@ -76,6 +78,7 @@ export const SearchProvider: React.FC = ({ children }) => {
 
         setInitialFilter(filter)
         setIsVisible(true)
+        closeChat()
     }
 
     const close = () => {
@@ -99,10 +102,10 @@ export const SearchProvider: React.FC = ({ children }) => {
                         leaveFrom="opacity-100"
                         leaveTo="opacity-0"
                     >
-                        <div className="fixed inset-0 bg-tan/75 dark:bg-primary/75 transition-opacity z-[999999]" />
+                        <div className="fixed inset-0 bg-tan/75 dark:bg-primary/75 transition-opacity z-[999998]" />
                     </Transition.Child>
 
-                    <div className="fixed inset-0 overflow-y-auto z-[999999]">
+                    <div className="fixed inset-0 overflow-y-auto z-[999998]">
                         <div className="flex min-h-full items-end justify-center p-4 text-center sm:items-center sm:p-0">
                             <Transition.Child
                                 as={Fragment}
@@ -113,7 +116,7 @@ export const SearchProvider: React.FC = ({ children }) => {
                                 leaveFrom="opacity-100 translate-y-0 sm:scale-100"
                                 leaveTo="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
                             >
-                                <Dialog.Panel className="w-full max-w-4xl md:mx-4 h-[90vh] md:h-[600px] z-[999999]">
+                                <Dialog.Panel className="w-full max-w-4xl md:mx-4 h-[90vh] md:h-[600px] z-[999998]">
                                     <InstantSearch
                                         searchClient={searchClient}
                                         indexName={process.env.GATSBY_ALGOLIA_INDEX_NAME as string}

@@ -9,8 +9,12 @@ import { GitHub, LinkedIn, YouTube, SlackMonochrome, Twitter } from 'components/
 const linklist: IProps[] = [
     {
         title: 'Products',
-        url: '/products/product-analytics',
+        url: '/products',
         items: [
+            {
+                title: 'All products',
+                url: '/products',
+            },
             {
                 title: 'Product analytics',
                 url: '/product-analytics',
@@ -28,8 +32,8 @@ const linklist: IProps[] = [
                 url: '/feature-flags',
             },
             {
-                title: 'A/B testing',
-                url: '/ab-testing',
+                title: 'Experiments',
+                url: '/experiments',
             },
             {
                 title: 'Surveys',
@@ -58,6 +62,10 @@ const linklist: IProps[] = [
             {
                 title: 'Pricing',
                 url: '/pricing',
+            },
+            {
+                title: 'How we do "sales"',
+                url: '/sales',
             },
         ],
     },
@@ -93,10 +101,6 @@ const linklist: IProps[] = [
                 title: 'API',
                 url: '/docs/api',
             },
-            {
-                title: 'Webhooks',
-                url: '/docs/webhooks',
-            },
         ],
     },
     {
@@ -108,7 +112,7 @@ const linklist: IProps[] = [
                 url: '/docs/product-analytics/',
             },
             {
-                title: 'Session recording',
+                title: 'Session replay',
                 url: '/docs/session-replay',
             },
             {
@@ -116,7 +120,7 @@ const linklist: IProps[] = [
                 url: '/docs/feature-flags',
             },
             {
-                title: 'A/B testing',
+                title: 'Experiments',
                 url: '/docs/experiments',
             },
             {
@@ -132,8 +136,8 @@ const linklist: IProps[] = [
                 url: '/docs/data-warehouse',
             },
             {
-                title: 'Build an app',
-                url: '/docs/apps/build',
+                title: 'Migrate',
+                url: '/docs/migrate',
             },
         ],
     },
@@ -150,8 +154,8 @@ const linklist: IProps[] = [
                 url: '/tutorials',
             },
             {
-                title: 'Apps',
-                url: '/apps',
+                title: 'Integrations',
+                url: '/cdp',
             },
             {
                 title: 'Dashboard templates',
@@ -251,7 +255,7 @@ const linklist: IProps[] = [
             },
             {
                 title: 'Changelog',
-                url: '/changelog',
+                url: '/changelog/2025',
             },
             {
                 title: 'People',

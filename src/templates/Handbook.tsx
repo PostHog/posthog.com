@@ -7,7 +7,6 @@ import { InlineCode } from 'components/InlineCode'
 import Layout from 'components/Layout'
 import Link from 'components/Link'
 import PostLayout from 'components/PostLayout'
-import Contributors from 'components/PostLayout/Contributors'
 import SidebarSection from 'components/PostLayout/SidebarSection'
 import { SEO } from 'components/seo'
 import Team from 'components/People'
@@ -15,7 +14,7 @@ import TestimonialsTable from 'components/TestimonialsTable'
 import { ZoomImage } from 'components/ZoomImage'
 import { graphql } from 'gatsby'
 import { MDXRenderer } from 'gatsby-plugin-mdx'
-import React from 'react'
+import React, { useState } from 'react'
 import { shortcodes } from '../mdxGlobalComponents'
 import MobileSidebar from 'components/Docs/MobileSidebar'
 import LibraryFeatures from 'components/LibraryFeatures'
@@ -38,6 +37,8 @@ import { Emoji } from 'components/Emoji'
 import TeamUpdate from 'components/TeamUpdate'
 import CopyCode from 'components/CopyCode'
 import TeamMember from 'components/TeamMember'
+import { Contributor, ContributorImageSmall } from 'components/PostLayout/Contributors'
+import { OverflowXSection } from 'components/OverflowXSection'
 
 const renderAvailabilityIcon = (availability: 'full' | 'partial' | 'none') => {
     switch (availability) {
@@ -68,18 +69,41 @@ const MDX = ({ body }) => (
     </MDXProvider>
 )
 
+const Contributors = (props) => {
+    const [expanded, setExpanded] = useState(false)
+    const contributors = expanded ? props.contributors : props.contributors.slice(0, 3)
+    const more = props.contributors.length - 3
+    return (
+        <div className={`mb-4 flex flex-col gap-2 -mx-4`}>
+            {contributors.map(({ avatar, username, profile, url }) => {
+                return (
+                    <Contributor
+                        url={profile?.squeakId ? `/community/profiles/${profile.squeakId}` : url}
+                        image={profile?.avatar?.url || avatar}
+                        name={profile ? [profile.firstName, profile.lastName].filter(Boolean).join(' ') : username}
+                        key={username}
+                        role={profile?.companyRole || 'Contributor'}
+                        text
+                        compact
+                        roundedImage={!profile}
+                    />
+                )
+            })}
+            {more > 0 && !expanded && (
+                <button onClick={() => setExpanded(true)} className="mx-4 flex space-x-2 items-center">
+                    <span className="text-sm text-red font-bold text-left flex-shrink-0">+{more} more</span>
+                </button>
+            )}
+        </div>
+    )
+}
+
 export const HandbookSidebar = ({ contributors, title, location, availability, related }) => {
     return (
         <>
             {contributors && (
-                <SidebarSection>
-                    <Contributors
-                        contributors={contributors.map(({ url, username, avatar, teamData }) => ({
-                            url,
-                            name: teamData?.name || username,
-                            image: avatar,
-                        }))}
-                    />
+                <SidebarSection title="Contributors">
+                    <Contributors contributors={contributors} />
                 </SidebarSection>
             )}
 
@@ -129,6 +153,18 @@ type AppParametersProps = {
           }[]
         | null
 }
+
+type TemplateParametersProps =
+    | {
+          key: string
+          type: string | null
+          label: string | null
+          description: string | null
+          default: string | null
+          secret: boolean | null
+          required: boolean | null
+      }[]
+    | null
 
 export const AppParametersFactory: (params: AppParametersProps) => React.FC = ({ config }) => {
     const AppParameters = () => {
@@ -188,6 +224,60 @@ export const AppParametersFactory: (params: AppParametersProps) => React.FC = ({
     return AppParameters
 }
 
+export const TemplateParametersFactory: (params: TemplateParametersProps) => React.FC = (input_schema) => {
+    const TemplateParameters = () => {
+        if (!input_schema) {
+            return null
+        }
+
+        return (
+            <table>
+                <thead>
+                    <tr>
+                        <th>Option</th>
+                        <th>Description</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {input_schema.map((input) => {
+                        if (!input.label) {
+                            return null
+                        }
+
+                        return (
+                            <tr key={input.key}>
+                                <td>
+                                    <div className="mb-6 w-40">
+                                        <code className="dark:bg-gray-accent-dark dark:text-white bg-gray-accent-light text-inherit p-1 rounded">
+                                            {input.label}
+                                        </code>
+                                    </div>
+
+                                    {input.type && (
+                                        <div>
+                                            <strong>Type: </strong>
+                                            <span>{input.type}</span>
+                                        </div>
+                                    )}
+
+                                    <div>
+                                        <strong>Required: </strong>
+                                        <span>{input.required ? 'True' : 'False'}</span>
+                                    </div>
+                                </td>
+
+                                <td>{input.description ? <Markdown>{input.description || ''}</Markdown> : null}</td>
+                            </tr>
+                        )
+                    })}
+                </tbody>
+            </table>
+        )
+    }
+
+    return TemplateParameters
+}
+
 export default function Handbook({
     data: { post, nextPost, glossary },
     pageContext: { menu, breadcrumb = [], breadcrumbBase, tableOfContents, searchFilter },
@@ -196,7 +286,7 @@ export default function Handbook({
     const {
         body,
         frontmatter,
-        fields: { slug, contributors, appConfig },
+        fields: { slug, contributors, appConfig, templateConfig },
     } = post
     const {
         title,
@@ -247,6 +337,7 @@ export default function Handbook({
         a: A,
         TestimonialsTable,
         AppParameters: AppParametersFactory({ config: appConfig }),
+        TemplateParameters: TemplateParametersFactory(templateConfig),
         TeamRoadmap: (props) => TeamRoadmap({ team: title?.replace(/team/gi, '').trim(), ...props }),
         TeamMembers: (props) => TeamMembers({ team: title?.replace(/team/gi, '').trim(), ...props }),
         CategoryData,
@@ -255,6 +346,11 @@ export default function Handbook({
         TeamUpdate: (props) => TeamUpdate({ teamName: title?.replace(/team/gi, '').trim(), ...props }),
         CopyCode,
         TeamMember,
+        table: (props) => (
+            <OverflowXSection>
+                <table {...props} />
+            </OverflowXSection>
+        ),
         ...shortcodes,
     }
 
@@ -264,7 +360,8 @@ export default function Handbook({
                 title={seo?.metaTitle || `${title} - ${breadcrumbBase.name} - PostHog`}
                 description={seo?.metaDescription || excerpt}
                 article
-                image={`/og-images/${slug.replace(/\//g, '')}.jpeg`}
+                image={`${process.env.GATSBY_CLOUDFRONT_OG_URL}/${slug.replace(/\//g, '')}.jpeg`}
+                imageType="absolute"
             />
             <Layout>
                 <PostLayout
@@ -291,6 +388,7 @@ export default function Handbook({
                     breadcrumb={[breadcrumbBase, ...(breadcrumb?.slice(0, breadcrumb.length - 1) || [])]}
                     hideSidebar={hideAnchor}
                     nextPost={nextPost}
+                    askMax
                 >
                     <section>
                         <div className="mb-8 relative">
@@ -403,11 +501,24 @@ export const query = graphql`
                     teamData {
                         name
                     }
-                    avatar {
-                        childImageSharp {
-                            gatsbyImageData(width: 38, height: 38)
+                    avatar
+                    profile {
+                        squeakId
+                        firstName
+                        lastName
+                        companyRole
+                        avatar {
+                            url
                         }
                     }
+                }
+                templateConfig {
+                    key
+                    type
+                    label
+                    secret
+                    required
+                    description
                 }
             }
             frontmatter {

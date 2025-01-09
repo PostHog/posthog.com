@@ -5,9 +5,10 @@ import { Close } from 'components/Icons/Icons'
 
 import { QuestionForm } from 'components/Squeak'
 import { CallToAction } from 'components/CallToAction'
+import { navigate } from 'gatsby'
 
 type QuestionFormProps = {
-    onSubmit: () => void
+    onSubmit?: () => void
     topicID?: number
     showTopicSelector?: boolean
     label?: string
@@ -16,9 +17,17 @@ type QuestionFormProps = {
 export default function Questions(props: QuestionFormProps): JSX.Element {
     const [showModal, setShowModal] = useState(false)
 
-    const handleSubmit = () => {
-        props.onSubmit()
+    const handleSubmit = (_formValues, _type, question) => {
+        const permalink = question?.attributes?.permalink
         setShowModal(false)
+        props.onSubmit?.()
+        if (permalink) {
+            navigate(`/questions/${permalink}`, {
+                state: {
+                    askMax: true,
+                },
+            })
+        }
     }
 
     const label = props.label ?? 'Ask a question'

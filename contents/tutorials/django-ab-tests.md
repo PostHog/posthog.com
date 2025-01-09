@@ -134,8 +134,6 @@ With this set up, restart your app and then refresh your browser a few times. Yo
 
 ## 3. Create an A/B test in PostHog
 
-If you haven't done so already, you'll need to [upgrade](https://us.posthog.com/organization/billing) your PostHog account to include A/B testing. This requires entering your credit card, but don't worry, we have a [generous free tier](/pricing) of 1 million requests per month – so you won't be charged anything yet.
-
 Next, go to the [A/B testing tab](https://us.posthog.com/experiments) and create an A/B test by clicking the **New experiment** button. Add the following details to your experiment:
 
 1. Name it "My cool experiment".
@@ -219,3 +217,5 @@ Now PostHog is able to calculate our goal metric for our experiment results:
 - [Setting up Django analytics, feature flags, and more](/tutorials/django-analytics)
 - [A software engineer's guide to A/B testing](/product-engineers/ab-testing-guide-for-engineers)
 - [8 annoying A/B testing mistakes every engineer should know](/blog/ab-testing-mistakes)
+
+<NewsletterForm />

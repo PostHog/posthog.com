@@ -157,11 +157,15 @@ Our testing, reviewing and building process should be good enough that we're com
 
 Always request a review on your pull request by a fellow team member (or leave unassigned for anyone to pick up when available). We avoid self-merge PRs unless it's an emergency fix and no one else is available (especially for posthog.com).
 
+Once you merge a pull request, it will automatically deploy to all environments. Check out the `#platform-bots` Slack channel to see how your deploy is progressing.
+
 ## Documenting
 
 If you build it, [document it](/docs). You're in the best position to do this, and it forces you to think things through from a user perspective.
 
-It's not the responsibility of either [Website & Docs](/teams/website-docs) or [Marketing](/teams/marketing) to document features.
+It's not the responsibility of either [Website & Vibes](/teams/website-vibes) or [Marketing](/teams/marketing) teams to document features.
+
+See our [docs style guide](/handbook/content-and-docs/posthog-style-guide) for tips on how to write great docs.
 
 ## Releasing
 

@@ -35,7 +35,7 @@ We use the following general process for managing people whose performance isn't
 
 In cases where a team member's role can no longer be justified, we usually make a decision as an exec team and then let the team member know straight away - unfortunately it is not feasible to let someone know that we are thinking of getting rid of their role.
 
-We will usually ask the team member to stop working immediately. If they have been with us for at least 3 months, they will be paid 4 months of salary as [severance](/handbook/people/compensation#severance). Otherwise, they will be paid 1 month of salary as severance. 
+We will usually ask the team member to stop working immediately. If they have been with us for at least 3 months, they will be paid 4 months of their base salary as [severance](/handbook/people/compensation#severance). Otherwise, they will be paid 1 month of base salary as severance. 
 
 ## Communicating departures
 

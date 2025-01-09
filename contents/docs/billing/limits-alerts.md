@@ -7,12 +7,12 @@ To help you avoid surprise bills, PostHog enables you to set billing limits for 
 To set a billing limit:
 
 1. Go to your organization's [billing settings](https://app.posthog.com/organization/billing)
-2. Click on the three dots in the top right of a product, then "Set billing limit."
-3. Set your dollar limit in the box at the bottom of the product and press "Save."
+2. View the billing limit section at the bottom of the product and click "Set billing limit."
+3. Set your dollar limit in the box and press "Save."
 
 You’ll need to do this for each of the products. You can also remove limits by following the same process and clicking “Remove limit” instead of "Save."
 
-![two types of cohorts: static and dynamic](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/docs/billing/alerts.png)
+![billing limit image](https://res.cloudinary.com/dmukukwp6/image/upload/2024_07_12_at_09_47_11_2x_47fdd2e176.png)
 
 ## Billing alerts
 

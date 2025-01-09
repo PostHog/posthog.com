@@ -22,7 +22,7 @@ If you are looking for guidance on how to manage customers in HubSpot specifical
 1. If they are ready to get started with PostHog, we should either:
    1. For lower volume customers we should send them a getting started templated email which providers pointers on how to get set up as well as where to get help if they get stuck.
    2. For higher volume customers we can create a Slack Connect channel in our Company Slack, this allows us to provide more focused support to ensure that they are successful.
-1. As a priority we should get them sending data in from production (even just a small part of thair app) so that they can see the value of PostHog quickly (decreasing time to revenue) see how we do this in the Onboarding section below.
+1. As a priority we should get them sending data in from production (even just a small part of their app) so that they can see the value of PostHog quickly (decreasing time to revenue) see how we do this in the Onboarding section below.
 
 
 ## Self-serve Process

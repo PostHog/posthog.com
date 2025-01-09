@@ -48,7 +48,7 @@ Here are a few examples of the cohorts you can create:
 
 Your cohorts are available in the [People](https://us.posthog.com/persons) page under the [Cohorts](https://us.posthog.com/cohorts) tab.
 
-> **Note:** Cohorts rely on [person properties](/docs/product-analytics/person-properties), so you need to capture events with [person profiles](/docs/data/persons/#people-and-person-profiles) to create and use them. 
+> **Note:** Cohorts rely on [person properties](/docs/product-analytics/person-properties), so you need to capture identified events to create them. 
 
 ## Where can you use cohorts?
 
@@ -75,13 +75,14 @@ Cohorts are sometimes confused with [groups](/docs/product-analytics/group-analy
 
 - **Groups** aggregate events based on entities, such as organizations or companies, but do not necessarily connect to a user. They enable you to analyze trends, insights, and dashboards at an entity-level (like a company or organization), as opposed to a user-level.
  
+ If your only goal is to create a **list of users** with something in common, we recommend cohorts instead of groups.
+
 Groups require additional code in your app to set up, while cohorts are created in PostHog and don't require additional code. This makes cohorts easier to use and quicker to get started. 
 
-If your only goal is to create a **list of users** with something in common, we recommend cohorts instead of groups.
 
 ## How to create a cohort
 
-Once you've captured [events with person profiles](/docs/data/persons#capturing-person-profiles), there are two ways to create a new cohort:
+Once you've captured identified events, there are two ways to create a new cohort:
 
 ### Method 1: Create a new cohort directly from an insight
 

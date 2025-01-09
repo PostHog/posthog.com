@@ -14,7 +14,10 @@ As general guidance, we don't care about a few days here and there. If you are t
 
 We care about your results, not how long you work.
 
-You do not need to get approval for time off from your manager. Instead, we expect everyone to coordinate with their team to make sure that we're still able to move forwards in your absence. For example, having an entire Small Team off at the same time means we can't be responsive to community issues.
+You do not need to get approval for time off from your manager. Instead, we expect everyone to coordinate with their team to make sure that we're still able to move forwards in your absence. You should avoid things like:
+
+- Having an entire Small Team off - this means we can't provide support to customers
+- Having the only X people who can do some totally critical task at PostHog off - if this is unavoidable, try to make sure one of you can at least check in if something goes horribly wrong
 
 ### How to book time off in PTO by Deel
 
@@ -32,6 +35,10 @@ To book a day off:
 > Please manually book in public holidays you plan to take off as well. We have team members working in countries all over the world, so it is not practical for us to book these all in on your behalf. Some people also prefer to work on certain days even if they're considered a public holiday in the country they are living in or visiting. 
 
 The same rules as above apply regardless of the holiday length and type. Sick leave and any other types of time off should also be booked in the same way. 
+
+### How to cancel time off
+
+If you decide to cancel your holiday, drop a message in #team-people-and-ops and a member of the team will cancel the holiday for you, as only admins can delete holidays. 
 
 ## Flexible working
 
@@ -57,25 +64,27 @@ We do not define “closeness” and we won't ask about your relationship to the
 
 Our bereavement policy also covers pregnancy and child loss for both parents, with no questions asked. Please take at least 2 weeks of paid leave. 
 
-If you need extended time for physical or mental health reasons, we will treat it as extended sick leave.
+If you need extended time for physical or mental health reasons, we will treat it as extended sick leave - just chat to Fraser. 
 
 ### Jury duty / voting / childcare disasters, aka 'life stuff'
 
 There are lots of situations where life needs to come first. Please let it - just be communicative with your team and fit your work around it as you need. We trust you will do the right thing here. 
 
-If your are summonsed for jury duty, please let us know right away - we can often get an exception granted if we have enough notice. 
+If your are summonsed for jury duty, please let Fraser know right away - we can often get an exception granted if we have enough notice. 
 
 ## Parental leave
 
 Parental leave is exceptional as it needs to be significantly longer than a typical vacation. Anyone at PostHog, regardless of gender, is able to take parental leave, and regardless of whether you've become a parent through childbirth or adoption. 
 
-If you have been at PostHog for over 1 year as of the date of your child's birth, you can take up to 12 weeks off on full pay. You can take a further 4 weeks unpaid leave if you need more time. After this, if you need to stagger your return to work, you can come back at 50% capacity on 50% pay afterwards. If you live in a country where a statutory parental leave benefit is available, you will be required to claim statutory parental leave pay (if you are eligible) and PostHog will supplement any gaps.
+If you have been at PostHog for over 1 year as of the date of your child's birth, you can take up to 24 weeks maternity leave or 4 weeks paternity leave on full pay.
 
-If you have been at PostHog for under 1 year, we will pay you according to your local jurisdiction's legal requirements.
+We only pay this in one continuous block. If you have been at PostHog for under 1 year, we will pay you according to your local jurisdiction's legal requirements. 
 
-Please communicate parental leave to James or Tim as soon as you feel comfortable doing so, and in any case at least 2 months before it will begin. They will let the People & Ops team know, who will follow up on any logistical arrangements around salary etc. 
+Parental leave isn't supposed to be combined with our unlimited PTO policy here - we aren't prescriptive and will trust your judgement, but please note that we usually won't allow you do a combination of parental leave plus a long holiday in addition to that to extend your time off. 
 
-We are aware that there are local laws around time off for new parents in every country, and that these may vary. Wherever there is a discrepancy between local regulations and PostHog policy, local laws will override PostHog.
+Please communicate parental leave to Fraser as soon as you feel comfortable doing so, and in any case at least 4 months before it will begin. They will let the People & Ops team know, who will follow up on any logistical arrangements around salary etc. and any statutory paperwork that needs doing. 
+
+> Wherever there is a discrepancy between local regulations and PostHog policy, we will merge the local minimum rules with the above where relevant.
 
 ## Birthday and anniversaries
 
@@ -83,20 +92,21 @@ We celebrate all the big and little milestones at PostHog, including birthdays a
 
 ### Birthdays
 
-We have partnered with [Batch](https://batchusa.com/pages/about-us) to send all team members a personalized giftset for their birthday.
+We have partnered with [Wellbox](https://wellbox.app/) to send all team members a personalized giftset for their birthday.
 
 These are the steps for making an order:
 
-1. Complete all necessary information on the “Birthday tab” with the [customer order sheet](https://docs.google.com/spreadsheets/d/1OhYz-ws20VKtQ0NnoCEzw1i4V4XAiz3e/edit?usp=sharing&ouid=109235309101749414478&rtpof=true&sd=true) and send to Bri Nightingale, CSM at bri@batchusa.com 
-2. Bri will send an invoice to be paid with steps on how to make the purchase payment
-3. All set! 
+1. Log into our Wellbox account (details in 1Password)
+2. Select the birthday gift to send
+3. Fill out delivery information
+4. All set! 
 
-The birthday gift usually arrives on the day of or 1-3 days prior to the birthday. Shipping fees: US shipping is free while all other countries will have shipping fees. 
+The birthday gift usually arrives on the day of or 1-3 days prior to the birthday. Shipping fees: UK shipping is free while all other countries will have shipping fees. 
 
 
 ### Anniversaries
 
-On your first-year anniversary with PostHog, you will receive a giftcard from [Giftogram](https://giftogram.com/) which can be used on a wide selection of brands. On your second-year anniversary you'll be gifted a [customized Lego minifig](https://minifig.fab-bricks.com/) in a display case, and on your third-year anniversary, you'll receive a personalized gift from [Batch](https://batchusa.com). 
+On your first-year anniversary with PostHog, you will receive a giftcard from [Giftogram](https://giftogram.com/) or [Prezzee](https://www.prezzee.uk/business/signin/) (if you are based in the UK) which can be used on a wide selection of brands. On your second-year anniversary you'll be gifted a [customized Lego minifig](https://minifig.fab-bricks.com/) in a display case, and on your third-year anniversary, you'll receive a personalized gift from [Wellbox](https://wellbox.app/). 
 
 1st year anniversary - $50 for US gift cards/$55 for for all other countries gift cards to cover service fees:
 
@@ -117,9 +127,20 @@ On your first-year anniversary with PostHog, you will receive a giftcard from [G
 3. Make sure to include a display case and the three tier brick option
 4. After you’ve completed your design, check out. There should already be a Brex card on file. Please make sure you add the individual’s correct mailing address.
 
-### 3rd year anniversary- via [Batch](https://batchusa.com/):
+### 3rd year anniversary- via [Wellbox](https://wellbox.app/)):
 
-1. Complete all necessary information on the “Third Anniversary tab” with the [customer order sheet](https://docs.google.com/spreadsheets/d/1OhYz-ws20VKtQ0NnoCEzw1i4V4XAiz3e/edit?usp=sharing&ouid=109235309101749414478&rtpof=true&sd=true) and send to Bri Nightingale, CSM at bri@batchusa.com 
-2. Bri will send an invoice to be paid with steps on how to make the purchase payment
+1. Select the 3rd Anniversary gift in our profile
+2. Fill out delivery info
+3. You're all set!
 
-The gift will usually arrive on the day of or 1-3 days prior to the anniversary date. Shipping fees: US shipping is free while all other countries will have shipping fees. 
+The gift will usually arrive on the day of or 1-3 days prior to the anniversary date. Shipping fees: UK shipping is free while all other countries will have shipping fees. 
+
+### 4th year anniversary
+
+On your 4th anniversary at PostHog as a big thank you for sticking with us, you have a choice of 3 gifts:
+
+1. Sage Barista Touch coffee machine
+2. Apple 27-inch 5K Retina Studio Display with standard glass and tilt-adjustable stand
+3. Rimowa luggage set (large trunk, cabin bag, packing cube, toiletries bag)
+
+On the run up to your anniversary Coua will send you a link to the gift options questionnaire, from there Kendal will order it for you! Thank you for making PostHog great!

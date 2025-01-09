@@ -27,7 +27,7 @@ import { ComparisonRow } from 'components/ComparisonTable/row'
 
 PostHog is an open-source, all-in-one platform for feature management, A/B testing, product analytics, session replay, and user surveys. It's also building a [data warehouse for startups](/docs/data-warehouse) and a customer data platform (CDP), though both are currently in closed beta.
 
-By combining all these tools into one platform, it eliminates the need for stitching together integrations between third-party tools, and makes it easier for engineers to work with data. PostHog is popular with engineering-led companies, like AI startup [ElevenLabs](/customers/elevenlabs) and [carVertical](/feature-flags), which use PostHog for both feature flags and analytics.
+By combining all these tools into one platform, it eliminates the need for stitching together integrations between third-party tools, and makes it easier for engineers to work with data. PostHog is popular with engineering-led companies, like AI startup [ElevenLabs](/customers/elevenlabs) and [carVertical](/customers/carvertical), which use PostHog for both feature flags and analytics.
 
 According to [BuiltWith](https://trends.builtwith.com/analytics/PostHog), PostHog is used by 4,661 (0.47%) of the top 1 million websites, compared to Statsig's 706 (0.07%). This difference is [confirmed by Google Trends](https://trends.google.com/trends/explore?date=today%205-y&q=posthog,statsig) data.
 
@@ -93,7 +93,7 @@ According to [G2 reviews](https://www.g2.com/products/posthog/reviews), companie
 
 ### What is LaunchDarkly?
 
-[LaunchDarkly](/blog/posthog-vs-launchdarkly) is an enterprise feature flag and A/B testing platform. It helps developers de-risk releases, target experiences, and optimize their products. It provides automation and governance features to ensure teams are following [engineering best practices](/product-engineers/feature-flag-best-practices).
+[LaunchDarkly](/blog/posthog-vs-launchdarkly) is an enterprise feature flag and A/B testing platform. It helps developers de-risk releases, target experiences, and optimize their products. It provides automation and governance features to ensure teams are following [engineering best practices](/docs/feature-flags/best-practices).
 
 According to [BuiltWith](https://trends.builtwith.com/analytics/LaunchDarkly), as of April 2024, 1,072 of the top one million websites use LaunchDarkly, more than the 706 that use Statsig.
 
@@ -255,7 +255,7 @@ According to G2 reviews, people are fans of Optimizely because:
 
 1. **It's easy to use for non-engineers**: Optimizely makes it easy for anyone to run web experiments thanks to no code visual editor.
 
-2. **It integrates with their analytics platforms:** Optimizely doesn't have built-in analytics, but reviewers appreciate its integrations with Google Analytics, Adobe Analytics, and others.
+2. **It integrates with their analytics platforms:** Optimizely doesn't have built-in analytics, but reviewers appreciate its integrations with Google Analytics, [Adobe Analytics](/blog/best-adobe-analytics-alternatives), and others.
 
 3. **It's business-oriented:** Optimizely focuses on optimizing business, marketing, and ecommerce use cases, and helps users improve the core business metrics they care about most.
 

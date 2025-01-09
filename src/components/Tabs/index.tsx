@@ -1,4 +1,5 @@
 import { IconInfo } from '@posthog/icons'
+import Slider from 'components/Slider'
 import Tooltip from 'components/Tooltip'
 import React from 'react'
 
@@ -6,18 +7,16 @@ type Tab = {
     title: React.ReactNode
     subtitle: React.ReactNode
     icon: React.ReactNode
-    tooltip?: strong
+    tooltip?: string
 }
 
 const Horizontal = ({ tabs, onClick, activeTab, className = '', size = 'lg', activeClass }) => {
     return (
-        <ul
-            className={`list-none m-0 flex flex-row gap-px overflow-x-auto overflow-y-hidden w-screen md:w-auto -mx-4 px-4 py-0 pt-2 md:px-6 justify-between ${className}`}
-        >
+        <Slider className={`gap-px pt-2 ${className}`}>
             {tabs.map((tab, index) => {
                 const active = activeTab === index
                 return (
-                    <li key={`${tab.title}-${index}`} className="w-full">
+                    <li key={`${tab.title}-${index}`} className="w-full h-full">
                         <button
                             onClick={() => onClick?.(tab, index)}
                             key={`${tab.title}-${index}`}
@@ -27,7 +26,7 @@ const Horizontal = ({ tabs, onClick, activeTab, className = '', size = 'lg', act
                                 active
                                     ? activeClass !== undefined
                                         ? activeClass
-                                        : 'font-bold z-10 relative bg-white dark:bg-accent-dark border border-b-2 border-b-white dark:border-b-[#232429] border-light dark:border-dark rounded-br-none rounded-bl-none'
+                                        : 'font-bold z-[1] relative bg-white dark:bg-accent-dark border border-b-2 border-b-white dark:border-b-[#232429] border-light dark:border-dark rounded-br-none rounded-bl-none'
                                     : 'rounded hover:bg-light/50 hover:dark:bg-dark/50 border border-b-3 border-transparent md:hover:border-light dark:md:hover:border-dark hover:translate-y-[-1px] active:translate-y-[1px] active:transition-all'
                             }`}
                         >
@@ -61,7 +60,7 @@ const Horizontal = ({ tabs, onClick, activeTab, className = '', size = 'lg', act
                     </li>
                 )
             })}
-        </ul>
+        </Slider>
     )
 }
 

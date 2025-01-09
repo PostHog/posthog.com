@@ -221,7 +221,43 @@ cert-manager:
     enabled: true
 ```
 
-## Private links
+## Links
+
+### Linking internally
+
+Use Markdown's standard syntax for linking internally.
+
+```
+[Link text](/absolute-path/to/url)
+```
+
+Be sure to use _relative links_ (exclude `https://posthog.com`) with _absolute paths_ (reference the root of the domain with a preceding `/`).
+
+| | |
+|-----------	|------------------------------------------	|
+| **Correct syntax**   	| `/absolute-path/to/url`                  	|
+| **Incorrect syntax** 	| `https://posthog.com/absolute-path/to/url` 	|
+
+
+### Linking externally
+
+The `<Link />` component is used throughout the site, and is accessible within Markdown. (When used _internally_, it takes advantage of <Link to="https://www.gatsbyjs.com/docs/reference/built-in-components/gatsby-link/" external>Gatsby's `<Link />` features</Link> like prefetching and client-side navigation between routes).
+
+While that doesn't apply here, using it comes with some handy parameters that you can see in action via the link above:
+
+- Add `external` to a) open the link in a new tab, and b) add the _external link_ icon (for UX best practices if forcing a link to open in a new window)
+- If, for some reason, you need to hide the icon, use `externalNoIcon` instead
+
+Example:
+
+```
+<Link to="#" external>
+  click here
+</Link>
+
+```
+
+### Private links
 
 Sometimes we link to confidential information in our handbook. Since the handbook is public, it's useful to indicate when a link is private so visitors aren't confused as to why they can't access a URL. Use the `<PrivateLink />` component for this. ([Here's an example.](/handbook/people/share-options#what-are-my-share-options-actually-worth))
 
@@ -242,4 +278,37 @@ Use this component to mention a team member in a post. It will link to their com
 <TeamMember name="Cory Watilo" />
 ```
 
-There's also a `photo={true}` parameter which will inline their photo next to their name, but use sparingly as it can mess up the line height in paragraphs.
+There's also a `photo` parameter which will inline their photo next to their name like this: <TeamMember name="Cory Watilo" photo />
+
+## Embedded posts
+
+You can embed what looks like ~~a Tweet~~ an X post using the `<Tweet>` component. It's used on the [terms](/terms) and [privacy policy](/privacy) pages, but was componentized for use in blog posts to break up bullet points at the top of the post.
+
+_Note: This does **not** actually embed an X post; it's just styled to look like one._
+
+<Tweet
+    alertMessage="Gen Z? Don't get distracted. You're here to read our exciting embedded post component."
+>
+    Here's what a post looks like. It's designed to have a familiar look that makes it easy to scan.
+</Tweet>
+
+<Tweet
+    alertMessage="Gen Z? Don't get distracted. You're here to read our exciting embedded post component."
+>
+    If you show multiple posts in a row, they'll be connected by a vertical line to make it look like a thread.
+</Tweet>
+
+**Usage**
+
+Be sure to change the alert message which appears if you click one of the action buttons (reply, repost, like).
+
+```
+<Tweet
+    className="mx-auto"
+    alertMessage="Gen Z? Don't get distracted. You're here to read our exciting embedded post component."
+>
+    If you show multiple posts in a row, they'll be connected by a vertical line to make it look like a thread.
+</Tweet>
+```
+
+You can optionally center the post with the `mx-auto` class (shown in the example code, but _not_ used in the preview above).

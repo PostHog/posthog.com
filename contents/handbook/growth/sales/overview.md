@@ -37,7 +37,7 @@ PostHog's [vision](/handbook/strategy/overview#long-term-vision-for-2026) is to 
 
 - **Speed:** We want to be highly reactive, low process, and reliant on other teams as little as possible to ship things. We want to get stuff wrong quickly, then iterate. 
 
-- **Internal outreach:** We get hundreds of ICP signups to PostHog every week, and we want to make sure we're laser focused on ensuring they have the best possible experience with PostHog by proactively reaching out to them. 
+- **Internal outreach:** We get hundreds of ICP signups to PostHog every week, and we want to make sure we're laser focused on ensuring they have the best possible experience with PostHog by [proactively reaching out to them](/handbook/growth/sales/product-led-sales#product-led-lead-generation) based on certain triggers. Some people call this 'warm outbound'. 
 
 ### Things we might want to be great at but haven't tested yet
 
@@ -69,11 +69,11 @@ At PostHog, we already have thousands of ICPs using the product, so we need to b
 
 We categorize customer size using a deeply technical and McKinsey-endorsed framework - you may need an MBA to fully understand it:
 
-- Extra Large: $100k+/yr
-- Large: $60-100k/yr
-- Medium: $20-60k/yr
+- Large: $100k+/yr
+- Medium: $5k-100k/yr
+- Small: $1-5k/yr
 
-These are not rigid definitions - for example, we consider some customers to be ‘Extra Large’ even if their spend is low today because they could be huge but may need time to fully adopt PostHog in their org. We are pragmatic in how we define people here. 
+The Sales & CS team look after people in the Medium and Large buckets only. Typically this means customers who are paying $20k+/yr, but sometimes we will work with smaller accounts [if we see potential](/handbook/growth/sales/product-led-sales#product-led-lead-generation) to grow them into larger ones. 
 
 ### 'Enterprise' customers
 
@@ -95,7 +95,7 @@ We'd typically define a deal as a large deal if it has most of the following:
 
 ## Who the Sales & CS team are
 
-Our small team page is maintained [here](/teams/customer-success). By 2026, we still want to be a very small but highly effective and responsive team (<20 people), rather than a very large sales team with all the traditional functions and hierarchy. In addition to people who share PostHog's culture, we also value:
+Our small team page is maintained [here](/teams/sales-cs). By 2026, we still want to be a very small but highly effective and responsive team (<20 people), rather than a very large sales team with all the traditional functions and hierarchy. In addition to people who share PostHog's culture, we also value:
 
 - People who have very high empathy with product engineers and their needs
 - People who are happy to choose their own objectives if it meets a business goal
@@ -116,25 +116,22 @@ This is how current roles are split - including spaces for the next few hires we
 
 **Sales**
 - Simon
-  - AE for Extra Large customers
+  - Team Lead, AE for a handful of the Largest customers 
 - Cameron
-  - AE for Medium & Large customers
-  - Routes inbound demos to appropriate person
-  - If he does a demo and someone is actually smaller than Medium, route to self serve
-- Actively hiring - 2x AE
-  - Medium & Large customers (1x SF-based)
-- Future hire - Inbound SDR
+  - AE for Medium & Large customers in the Americas region
+- Scott
+  - AE for Medium & Large customers in the Americas region
+- David
+  - AE for Medium & Large customers in the Americas region
+- Ben
+  - AE for Medium & Large customers in the Americas region
+- Leon
+  - AE for Medium & Large customers in the EMEA/Asia region
+- Seb
+  - AE for Medium & Large customers in the EMEA/Asia region
  
 **RevOps & Customer Success**
 - Mine
   - Building and leading RevOps
-- Future hire - CSM
-  - Manage steady state/single product customers
- 
-**Support**
-- Marcus	
-  - Support engineer (EU time zones)
-- Future hire
-  - Support engineer (US time zones)
-
-Longer term, expansion/renewals is often a separate team, but we don't need to do this now. 
+- Steven
+  - CSM for steady state/single product customers

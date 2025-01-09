@@ -121,8 +121,6 @@ With this set up, refresh your app and click the button a few times to see the e
 
 ## 4. Create an A/B test in PostHog
 
-If you haven't done so already, you'll need to [upgrade](https://us.posthog.com/organization/billing) your PostHog account to include A/B testing. This requires entering your credit card, but don't worry, we have a [generous free tier](/pricing) of 1 million requests per month – so you won't be charged anything yet.
-
 Next, go to the [A/B testing tab](https://us.posthog.com/experiments) and create an A/B test by clicking the **New experiment** button. Add the following details to your experiment:
 
 1. Name it "My cool experiment".
@@ -305,3 +303,5 @@ In the scenario where your PostHog cookie is not available on the server side, y
 - [How to set up Remix analytics, feature flags, and more](/tutorials/remix-analytics)
 - [How to set up surveys in Remix](/tutorials/remix-surveys)
 - [A software engineer's guide to A/B testing](/product-engineers/ab-testing-guide-for-engineers)
+
+<NewsletterForm />

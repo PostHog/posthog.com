@@ -61,5 +61,5 @@ A situation where this happens is using pageviews as your goal metric. Because p
 
 To fix this, you make sure flags are immediately available on a page load. There are two options to do this:
 
-1. Wait for feature flags to load before showing the page (low engineering effort, but slows page down by ~200ms).
+1. [Wait for feature flags to load](/docs/feature-flags/adding-feature-flag-code#ensuring-flags-are-loaded-before-usage) before showing the page (low engineering effort, but slows page down by ~200ms).
 2. Use [client-side bootstrapping](/docs/feature-flags/bootstrapping) (high engineering effort, but keeps the page blazing fast).

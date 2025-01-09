@@ -112,6 +112,16 @@ WHERE event = '$pageview'
    AND properties.$current_url LIKE '%/blog%'
 ```
 
+To have the insight or dashboard date range selector apply to the insight, include `{filters}` in query like this:
+
+```sql
+SELECT *
+FROM events
+WHERE event = '$pageview'
+   AND properties.$current_url LIKE '%/blog%'
+   AND {filters}
+```
+
 `WHERE` is also useful for querying across multiple tables. For example, if you have the Hubspot connector set up, you can get a count of events for contacts with a query like this:
 
 ```sql
@@ -442,6 +452,25 @@ select
 from events
 ```
 
+#### Session replays
+
+You can create a button to view the replay for a session by using the `recording_button()` function with the `session_id`. For example, to get a list of recent replays, you can use:
+
+```sql
+SELECT
+    person.properties.email,
+    min_first_timestamp AS start,
+    recording_button(session_id)
+FROM
+    raw_session_replay_events
+WHERE
+    min_first_timestamp >= now() - INTERVAL 1 DAY
+    AND min_first_timestamp <= now()
+ORDER BY
+    min_first_timestamp DESC
+LIMIT 10
+```
+
 ## Accessing data
 
 ### Strings and quotes
@@ -465,7 +494,7 @@ Types (and names) for the accessible data can be found in the [database](https:/
 - `JSON` (accessible with dot or bracket notation)
 - `DATETIME`(in `ISO 8601`, [read more in our data docs](/docs/data/timestamps))
 - `INTEGER`
-- `NUMERIC`(AKA float)
+- `FLOAT`
 - `BOOLEAN`
 
 For example:
@@ -492,7 +521,7 @@ Some queries can error when accessing null values. To avoid this, use the `COALE
 
 ### Actions
 
-To use [actions](/docs/actions) in SQL insights, use the `matchesAction()` function. For example, to get a count of the action `clicked homepage button`, you can do:
+To use [actions](/docs/data/actions) in SQL insights, use the `matchesAction()` function. For example, to get a count of the action `clicked homepage button`, you can do:
 
 ```sql
 SELECT count() 

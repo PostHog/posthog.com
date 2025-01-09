@@ -17,7 +17,7 @@ crosspost:
   - Blog
 ---
 
-Is my new feature working? It's the question PostHog exists to answer – we even have [an entire team dedicated to it](/teams/feature-success). 
+Is my new feature working? It's the question PostHog exists to answer – we even have [an entire team dedicated to it](/teams/experiments). 
 
 We define a successful new feature as one that:
 
@@ -57,7 +57,7 @@ This is exactly what Yakko did with sampling. He picked one insight (lifecycle w
 
 ![Lifecycle](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/measuring-feature-success/lifecycle.png)
 
-A feature is successful at this stage if it solves the issue, isn’t broken, and can scale to millions of events and users. Since we use PostHog at PostHog, this often means using it ourselves (aka dogfooding). Feature flags let us roll out or roll back quickly if needed.
+A feature is successful at this stage if it solves the issue, isn’t broken, and can scale to millions of events and users. Since we use PostHog at PostHog, this often means using it ourselves (aka [dogfooding](/product-engineers/dogfooding)). Feature flags let us roll out or roll back quickly if needed.
 
 ## Step 3: Beta testing and gathering feedback
 
@@ -129,7 +129,7 @@ You may have noticed that this process is relatively fluid. We don’t enforce m
 
 This is because we bias for impact, and believe that ownership is key to building successful features. Without people or teams owning features, there is little incentive to make them successful. No process can make ownerless features successful.
 
-We know that every team, inside and outside of PostHog, has different ways of evaluating success, it's a [key focus of ours](/handbook/strategy/overview#strategy) to build tools to help them do this. If you're curious exactly what that looks like, you can check out what the feature success team is up to on [their small team page](/teams/feature-success).
+We know that every team, inside and outside of PostHog, has different ways of evaluating success, it's a [key focus of ours](/handbook/strategy/overview#strategy) to build tools to help them do this. If you're curious exactly what that looks like, you can check out what the Experiments team is up to on [their small team page](/teams/experiments).
 
 ## Further reading
 

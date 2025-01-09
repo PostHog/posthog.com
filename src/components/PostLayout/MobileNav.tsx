@@ -149,7 +149,7 @@ export default function MobileNav({ className = '', menu: postMenu }) {
     const [activeMenuItem, setActiveMenuItem] = useState(menu.menuItem)
     const menuRef = useRef(null)
     const handleClick = (menuItem: IMenu) => {
-        const { children, url } = menuItem
+        const { children, url, name } = menuItem
         if (children) {
             const newMenu = getActiveMenu({
                 menu: postMenu,
@@ -163,6 +163,10 @@ export default function MobileNav({ className = '', menu: postMenu }) {
             navigate(url)
             setOpen(null)
             setActiveMenuItem(menuItem)
+        } else if (menuItem.onClick) {
+            menuItem.onClick({ name, url })
+            setActiveMenuItem(menuItem)
+            setOpen(null)
         }
         setTimeout(() => {
             menuRef?.current?.scrollTo({ top: 0 })
@@ -184,6 +188,10 @@ export default function MobileNav({ className = '', menu: postMenu }) {
             }
         }
     }, [menu])
+
+    useEffect(() => {
+        setMenu(getActiveMenu({ menu: postMenu, url: pathname }) || { menu: postMenu, menuItem: postMenu[0] })
+    }, [postMenu])
 
     const Container = compact ? DropdownContainer : MenuContainer
     const ActiveIcon = Icons[activeMenuItem.icon]
@@ -223,7 +231,7 @@ export default function MobileNav({ className = '', menu: postMenu }) {
                                 </li>
                             )}
                             {menu?.menu?.map((menuItem, index) => {
-                                const { name, url, children, icon, color } = menuItem
+                                const { name, url, children, icon, color, active } = menuItem
                                 const Icon = Icons[icon]
                                 return (
                                     <li
@@ -231,7 +239,7 @@ export default function MobileNav({ className = '', menu: postMenu }) {
                                         key={name + index + url}
                                     >
                                         <div className={`text-base`}>
-                                            {url === undefined ? (
+                                            {url === undefined && !menuItem.onClick ? (
                                                 <h5
                                                     id={`mobile-nav-${slugify(name, { lower: true })}`}
                                                     className="m-0 text-lg pb-2"
@@ -241,7 +249,9 @@ export default function MobileNav({ className = '', menu: postMenu }) {
                                             ) : (
                                                 <button
                                                     className={`${
-                                                        url === pathname ? 'active-product opacity-90' : 'opacity-50'
+                                                        active || url === pathname
+                                                            ? 'active-product opacity-90'
+                                                            : 'opacity-50'
                                                     } hover:opacity-100 border-b border-gray-accent-light/50 dark:border-gray-accent-dark border-solid font-semibold flex w-full justify-between space-x-1 items-center py-2`}
                                                     onClick={() => {
                                                         handleClick(menuItem)

@@ -10,6 +10,7 @@ import { StaticImage } from 'gatsby-plugin-image'
 import { IconArrowRightDown } from '@posthog/icons'
 import { sexyLegalMenu } from '../navs'
 import Lawyers from 'components/Lawyers'
+import { Tweet } from 'components/Tweet'
 
 const termsClasses = cntl`
   full-terms
@@ -61,114 +62,6 @@ function Terms() {
         setHeaders(Array.from(h2s))
     }, [])
 
-    const Tweet = ({ children, lastTweet = false }) => (
-        <div
-            className={`max-w-xl mx-auto bg-white dark:bg-accent-dark border border-transparent dark:border-dark rounded-md shadow-md p-4 mb-8 relative ${
-                !lastTweet &&
-                'after:absolute after:w-px after:bg-border dark:after:bg-border-dark after:top-[calc(100%_+_1px)] after:-bottom-4 after:h-12 after:left-10'
-            }`}
-        >
-            <div className="flex items-center space-x-4">
-                <div className="rounded-full bg-accent w-12 h-12 overflow-hidden">
-                    <StaticImage
-                        src="https://res.cloudinary.com/dmukukwp6/image/upload/v1683655764/james_b841adce96.png"
-                        alt='James ("Veg"/"JC") Hawkins'
-                        className="w-12 h-12"
-                    />
-                </div>
-                <div>
-                    <div className="text-lg font-semibold leading-tight">James Hawkins</div>
-                    <div className="text-gray-500 text-sm">
-                        <Link
-                            href="https://x.com/james406"
-                            externalNoIcon
-                            className="text-primary/70 dark:text-primary-dark/70 hover:text-red dark:hover:text-yellow"
-                        >
-                            @james406
-                        </Link>
-                    </div>
-                </div>
-            </div>
-            <div className="mt-4">
-                <p className="text-gray-700">{children}</p>
-            </div>
-            <div className="mt-4 flex justify-between items-center text-gray-500">
-                <div className="flex space-x-4">
-                    <DontClickButton>
-                        <button className="dont-click flex items-center space-x-1 hover:text-blue-500">
-                            <svg
-                                className="w-5 h-5"
-                                fill="none"
-                                stroke="currentColor"
-                                viewBox="0 0 24 24"
-                                xmlns="http://www.w3.org/2000/svg"
-                            >
-                                <path
-                                    strokeLinecap="round"
-                                    strokeLinejoin="round"
-                                    strokeWidth="2"
-                                    d="M14 9l-5 5m0 0l5 5m-5-5h12"
-                                ></path>
-                            </svg>
-                            <span>Reply</span>
-                        </button>
-                    </DontClickButton>
-                    <DontClickButton>
-                        <button className="dont-click flex items-center space-x-1 hover:text-green-500">
-                            <svg
-                                className="w-5 h-5"
-                                fill="none"
-                                stroke="currentColor"
-                                viewBox="0 0 24 24"
-                                xmlns="http://www.w3.org/2000/svg"
-                            >
-                                <path
-                                    strokeLinecap="round"
-                                    strokeLinejoin="round"
-                                    strokeWidth="2"
-                                    d="M5 15l7-7 7 7"
-                                ></path>
-                            </svg>
-                            <span>Retweet</span>
-                        </button>
-                    </DontClickButton>
-                    <DontClickButton>
-                        <button className="dont-click flex items-center space-x-1 hover:text-red-500">
-                            <svg
-                                className="w-5 h-5"
-                                fill="none"
-                                stroke="currentColor"
-                                viewBox="0 0 24 24"
-                                xmlns="http://www.w3.org/2000/svg"
-                            >
-                                <path
-                                    strokeLinecap="round"
-                                    strokeLinejoin="round"
-                                    strokeWidth="2"
-                                    d="M12 4v16m8-8H4"
-                                ></path>
-                            </svg>
-                            <span>Like</span>
-                        </button>
-                    </DontClickButton>
-                </div>
-            </div>
-        </div>
-    )
-
-    const DontClickButton = ({ children, ...props }) => (
-        <button
-            className="dont-click flex items-center space-x-1 hover:text-blue-500"
-            onClick={(e) => {
-                e.preventDefault()
-                alert("Gen Z? Don't get distracted. You're here to read our thrilling terms.")
-            }}
-            {...props}
-        >
-            {children}
-        </button>
-    )
-
     return (
         <Layout
             parent={sexyLegalMenu}
@@ -208,9 +101,9 @@ function Terms() {
                             </Tooltip>
                             :
                         </span>
-                        <div className="text-xs mt-2 md:mt-0 mb-4">
+                        <span className="text-xs mt-2 md:mt-0 mb-4 block">
                             (Serif font demonstrates how important this disclaimer is)
-                        </div>
+                        </span>
                         The following is not legally binding. It is a summary of PostHog's terms. Please read{' '}
                         <SmoothScrollLink
                             to="full-terms"
@@ -225,23 +118,35 @@ function Terms() {
                         and don't rely on 140 characters of "terms" at a time.
                     </p>
 
-                    <Tweet>
+                    <Tweet
+                        className="mx-auto"
+                        alertMessage="Gen Z? Don't get distracted. You're here to read our thrilling terms."
+                    >
                         When you join PostHog Cloud, you’re agreeing to our terms. If you’re signing up for your
                         company, make sure your boss is okay with it.
                     </Tweet>
 
-                    <Tweet>
+                    <Tweet
+                        className="mx-auto"
+                        alertMessage="Gen Z? Don't get distracted. You're here to read our thrilling terms."
+                    >
                         We love it when you contribute to improving PostHog, but any changes you make belong to us.
                     </Tweet>
 
-                    <Tweet>
+                    <Tweet
+                        className="mx-auto"
+                        alertMessage="Gen Z? Don't get distracted. You're here to read our thrilling terms."
+                    >
                         Use our tool properly and follow the rules. No sneaky stuff like hacking, or spreading viruses.
                     </Tweet>
 
-                    <Tweet>
+                    <Tweet
+                        className="mx-auto"
+                        alertMessage="Gen Z? Don't get distracted. You're here to read our thrilling terms."
+                    >
                         Here's a cat gif to keep you engaged (and to keep the algos intrigued). Please like/RT.
                         <img src="/images/pizza-cat.gif" alt="Cat gif" className="w-full mt-2" />
-                        <p className="text-right !-mb-4">
+                        <span className="text-right !-mb-4 block">
                             <Link
                                 href="https://giphy.com/gifs/cat-pizza-crazy-3o7TKJwsoLn5QAmqw8"
                                 externalNoIcon
@@ -249,25 +154,37 @@ function Terms() {
                             >
                                 Thanks, Giphy!
                             </Link>
-                        </p>
+                        </span>
                     </Tweet>
 
-                    <Tweet>
+                    <Tweet
+                        className="mx-auto"
+                        alertMessage="Gen Z? Don't get distracted. You're here to read our thrilling terms."
+                    >
                         Both of us (you and PostHog) need to keep each other’s secrets safe. We can share general info
                         about how our tool is used, but we’ll never share secrets without asking you first.
                     </Tweet>
 
-                    <Tweet>
+                    <Tweet
+                        className="mx-auto"
+                        alertMessage="Gen Z? Don't get distracted. You're here to read our thrilling terms."
+                    >
                         We keep all the rights to our tool and any ideas you give us. Don’t remove any of our labels or
                         notices from it.
                     </Tweet>
 
-                    <Tweet>
+                    <Tweet
+                        className="mx-auto"
+                        alertMessage="Gen Z? Don't get distracted. You're here to read our thrilling terms."
+                    >
                         If you use more than you paid for, there will be extra charges. Not paying can stop the service,
                         and you’re responsible for any taxes.
                     </Tweet>
 
-                    <Tweet lastTweet={true}>
+                    <Tweet
+                        className="mx-auto"
+                        alertMessage="Gen Z? Don't get distracted. You're here to read our thrilling terms."
+                    >
                         If you liked this summary, you'll love following me on{' '}
                         <Link
                             href="https://twitter.com/james406"
@@ -763,8 +680,8 @@ function Terms() {
                             notice to Customer (which may be sent by email). If Customer believes that PostHog has
                             billed Customer incorrectly, Customer must contact PostHog no later than 60 days after the
                             closing date on the first billing statement in which the error or problem appeared, in order
-                            to receive an adjustment or credit. Inquiries should be directed to Company’s customer
-                            success department (sales@posthog.com).
+                            to receive an adjustment or credit. Inquiries should be submitted via 
+                            an in-app support ticket to the Company's customer success department.
                         </p>
                     </div>
                     <div className="md:pt-10">

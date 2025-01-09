@@ -19,10 +19,11 @@ import CustomerData from './CustomerData'
 import CodeBlocks from './CodeBlocks'
 import Libraries from './Libraries'
 import OnePlatform from './OnePlatform'
-import NoHatingAllowed from './NoHatingAllowed'
+import NoHatingAllowed from './../NoHatingAllowed'
 import { RenderInClient } from 'components/RenderInClient'
 import BillboardTruck from './BillboardTruck'
 import Spinner from 'components/Spinner'
+import { HomepageCards } from '../NoHatingAllowed/data.js'
 
 const Home = () => {
     const posthog = usePostHog()
@@ -33,7 +34,7 @@ const Home = () => {
             <Layout>
                 <SEO
                     title="PostHog - How developers build successful products"
-                    description="PostHog is the only all-in-one platform for product analytics, feature flags, session replays, A/B testing, and surveys that's built for developers."
+                    description="PostHog is the only all-in-one platform for product analytics, feature flags, session replays, experiments, and surveys that's built for developers."
                     image="/images/home.png"
                 />
                 <Hero />
@@ -41,7 +42,7 @@ const Home = () => {
                 <AllInOne />
                 <Libraries />
                 <CodeBlocks />
-                <NoHatingAllowed />
+                <NoHatingAllowed data={HomepageCards} youllHate="PostHog" size="text-4xl lg:text-6xl" />
 
                 <RenderInClient
                     render={() => {

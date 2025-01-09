@@ -8,16 +8,16 @@ showTitle: true
 import Disclaimer from './\_snippets/disclaimer.mdx'
 import Sunset from '../self-host/\_snippets/sunset-disclaimer.mdx'
 
-> **This page covers our free, open-source Docker compose deployment**, which is available under a MIT license [without guarantee](/docs/self-host/open-source/disclaimer). We continue to develop this version, but some premium features are only available on PostHog Cloud. We do not provide support for this "Hobby" version. 
+> **This page covers our free, open-source Docker Compose deployment**, which is available under an MIT license [without guarantee](/docs/self-host/open-source/disclaimer). We continue to develop this version, but some premium features are only available on PostHog Cloud. We do not provide support for this "Hobby" version. 
 >
-> We [no longer support paid, open-source deployments](/blog/sunsetting-helm-support-posthog) and it is **no longer possible to buy licenses for self-hosted versions** - we instead recommend [migrating to PostHog Cloud](/docs/migrate/migrate-to-cloud). 
+> We [no longer offer support for paid self-hosted deployments](/blog/sunsetting-helm-support-posthog) and it is **no longer possible to buy licenses for self-hosted versions** - we instead recommend [migrating to PostHog Cloud](/docs/migrate/migrate-to-cloud). We offer both US and EU cloud regions for users who require data residency in either region.
 
-Our MIT-licensed Docker compose deployment is best suited to internal tools, or evaluating features without vendor approval. It's also great for hobby projects which don't need advanced tools. For all other use cases, we recommend you use [PostHog Cloud](https://app.posthog.com/signup), which comes with a generous free tier.
+Our MIT-licensed Docker Compose deployment is best suited to internal tools, or evaluating features without vendor approval. It's also great for hobby projects which don't need advanced tools. For all other use cases, we recommend you use [PostHog Cloud](https://app.posthog.com/signup), which comes with a generous free tier.
 
 ## Requirements
 
 -   You have deployed a Linux Ubuntu Virtual Machine.
-    -   We highly recommend an instance with at least 4GB of RAM to handle any surges in event volume
+    -   You will need something equivalent to a Hetzner VM with 4 vCPU, 16GB RAM, and more than 30GB storage.
 -   You have set up an `A` record to connect a custom domain to your instance.
     -   PostHog will automatically create an SSL certificate for your domain using LetsEncrypt
 

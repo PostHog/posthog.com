@@ -8,167 +8,139 @@ showTitle: true
 
 ### What is PostHog?
 
-PostHog is a product analytics suite built for the modern enterprise, with the differentiators of being open source and having a broader view of the tools needed to make a product successful. 
+PostHog is an all-in-one suite of product and data tools including product analytics, web analytics, session replay, heatmaps, feature flags, experiments, surveys, and more. Our mission is to equip every developer to build successful products. 
 
-As a result, PostHog has an open-source version which can be deployed on your own infrastructure, or can be run in the Cloud with either EU or US hosting options. We provide a large set of tools to help improve your product, such as session recording, heatmaps, and feature flags, that are unique to PostHog in the product analytics space.
+We're open source, free-to-use, and self-serve.
 
 ### What does it do?
 
-We track user behavior across your website and applications.
+PostHog helps developers understand how users use their product, figure out ways to improve it, and ship new features faster. It does this through features like:
 
-**Features Overview**
+- Anonymous and identified event capture, supports both autocapture and custom events
+- Frontend and backend SDKs
+- API for capture, flags, creating and managing metadata
+- A full product analytics platform with trends, funnels, retention, SQL, and more
+- A simplified web analytics dashboard with session duration, bounce rates, and channel analysis
+- Session replays with event timeline, console and performance capture, and mobile recording
+- Heatmaps, clickmaps, scrollmaps
+- Feature flags with multivariant options, percentage and targeted rollouts, and local evaluation
+- Experiments with multivariate testing
+- Surveys with both no-code and API options
+- A data warehouse to import and query data from external sources alongside PostHog
+- Batch exports to popular warehouse destinations
+- Combine events into actions, anonymous and identified users, cohorts, and groups for analysis
 
-* Event capture for both frontend and backend events.
-* Event tracking at an identifiable user level (if you choose to identify your users).
-* A full product analytics UX, including:
-	* [Trends](/manual/trends)
-	* [Funnels](/manual/funnels)
-	* [Cohorts](/manual/cohorts)
-	* [Retention](/manual/retention)
-	* [Paths](/manual/paths)
-	* [Persons histories](/manual/persons)
-* Data visualization and product experimentation tools, such as:
-	* [Heatmaps](/manual/toolbar)
-	* [Feature Flags](/manual/feature-flags)
-	* [Surveys](/docs/surveys)
-	* [Session Recording](/manual/recordings)
-	* [Apps](/apps)
-
-You can read more about our features on the [Product page](/product).
-
-### Does it work for mobile and web?
-
-Yes. We support any kind of application.
+TLDR; All the tools you need to build a successful product.
 
 ### Does it work with my stack?
 
-Yes. PostHog can be used via:
+Yes. PostHog can be in a range of languages and frameworks across web, backend, and mobile. You can use it through:
 
-- An HTML snippet that goes inside your `<head></head>` tags.
-- One of our [15+ libraries](/docs/tutorials/overview) covering the main programming languages and tools
+- An [HTML snippet](/docs/libraries/js) that goes inside your `<head>` tags.
+- One of our [15+ libraries](/docs/libraries) covering the main programming languages and frameworks
 - Our [API](/docs/api)
 
 This means that it doesn't matter what your stack is - you can use PostHog with it.
 
-### Is this supported properly?
+### Does PostHog support mobile apps? 
 
-Yes. We are in very [active development](https://github.com/PostHog/posthog/graphs/commit-activity). 
+Yes. PostHog has SDKs for iOS, Android, React Native, Flutter, and more. All of them support event capture, feature flags, and experiments. Some also support autocapture and session replay.
 
-PostHog is a [well-funded](/handbook/strategy/investors) project with [thousands of stars](https://github.com/PostHog/posthog/stargazers) on GitHub, and dozens of PRs being worked on weekly, by both our [core team](/people) and our active community.
+### How much does PostHog cost?
 
-## About the Software
-
-### How popular is the software?
-
-<p>Very. We have thousands of users, thousands of stars on GitHub (<span className="relative top-2"><StarRepoButton /></span> to be precise), and <a href="/handbook/strategy/investors">supportive investors</a>.</p>
-
-### Is the software updated regularly?
-
-Yes. We release new versions about every two weeks and have a world-class team working daily on making the product better. It's [easy to update](/docs/runbook/upgrading-posthog), and the software will alert you to new updates within the application.
-
-Pro-tip: follow us on [Twitter](https://twitter.com/PostHog) or join [our community page](/posts) to keep up with our latest features. You can also [sign up to our newsletter](https://newsletter.posthog.com/subscribe)!
-
-### How many companies use it / How many well-known companies use it?
-
-We have thousands of users including very large enterprises.
-
-We have [case studies](/customers) available and [dozens of testimonials](/handbook/growth/marketing/testimonials).
-
-If you would like to be featured, please email _[sales@posthog.com](mailto:sales@posthog.com)_.
-
-### Is the software buggy?
-
-While there's always room for improvement, the software works well and we use it ourselves every day.
-
-If you have any [issues or feature requests](https://github.com/PostHog/posthog/issues).
-
-### Is this hard to set up?
-
-No. If you want to get started quickly you can use our [cloud version](https://app.posthog.com/signup), but we also have various [1-click deployment](/docs/deployment) options if you decide to self-host. 
-
-Additionally, if your company has a very large userbase and you need help with scalability and managing your setup, we can offer [paid help](https://share.hsforms.com/1-IVCY9gNRvaZBajMt_UPIg4559u) here.
- 
-## Deployment
-
-### Can I self-host?
-
-Yes, the open source version of PostHog can be deployed with Docker Compose and is available with no event limits. We believe it's an ideal solution for hobby projects or users who need to track up to 100k events per month. You have full access to [PostHog's code](https://github.com/PostHog/posthog), so it's fully flexible how you run the software.
-
-### How do I deploy?
-
-There are two options:
-
-1. [PostHog Cloud, with either US or EU hosting](https://app.posthog.com/signup)
-2. [Self hosting the open source version](/docs/deployment)
-
-### Can I get it live with my favorite hosting method?
-
-See our [Deployment page](/docs/deployment) for more information about how to deploy PostHog's open source version.
-
-Want to set it up differently? [Raise an issue](https://github.com/PostHog/posthog/issues) in the repo.
-
-### Will this scale?
-
-Yes. Check out [Scaling PostHog](/docs/self-host/deploy/configuration#scaling-up) for more information on this.
+PostHog is free to use and has a generous free plan. See [our pricing page](/pricing) for more details.
 
 ### Is there an enterprise offering?
 
-Yes. Our [enterprise offering](/pricing) is designed for companies with massive event volumes who need a more scalable version of PostHog. It includes:
+Yes, it includes:
 
-- ClickHouse as the underlying database for fast analytics at scale
-- Integrations with services like Zapier
-- Permissioning and multiple projects
-- Dedicated support
-- SSO/SAML
-- Export to data lakes
+- SAML SSO enforcement
+- Custom MSA
+- Priority training, support
+- Advanced permissions
+- Audit logs
 
-Email [sales@posthog.com](mailto:sales@posthog.com) to talk to us about this.
+Find out more on [the pricing page](/pricing) or [get in touch](/talk-to-a-human) to learn more.
+
+### How is PostHog different from other tools?
+
+1. We have all the tools in one.
+2. We cost less, have a free plan, and have scalable, transparent pricing.
+3. We are open source.
+4. We are built for engineers.
+
+There are many specific differences. Check out our blog for [comparisons](/posts). 
+
+### Are you hiring?
+
+Yes, come help us make PostHog even better. We would love to have you [join us](/careers).
+
+## About the software
+
+### Is PostHog updated regularly?
+
+Yes. We release continually and have a world-class team working daily on making the product better.
+
+Check out our [changelog](/changelog) to see what's new.
+
+### How many companies use PostHog? Anyone famous?
+
+We have tens of thousands of users from indie hackers to early-stage startups to high-growth scale ups to massive enterprises.
+
+As proof, we have dozens of [customer stories](/customers), hundreds of reviews on [G2](https://www.g2.com/products/posthog/reviews), and an overwhelming amount of praise (and criticism) on social.
+
+<p>We also have thousands of stars on GitHub (<span className="relative top-2"><StarRepoButton /></span> to be precise).</p>
+
+### Is PostHog buggy?
+
+While there's always room for improvement, the software works well and we use it ourselves every day.
+
+If you have any issues or feature requests, you can [raise a ticket in-app](https://us.posthog.com/home#supportModal).
+
+### Is this hard to set up?
+
+No. You can [signup](/signup), install the snippet, and capture your first event in less than five minutes.
+
+### I'm having trouble setting up PostHog. What should I do?
+
+1. Start by ensuring you have installed PostHog correctly. Try redoing whatever isn't working.
+2. Check the troubleshooting page of the product you are using, such as [product analytics](/docs/product-analytics/troubleshooting) or [feature flags](/docs/feature-flags/common-questions).
+3. Check our [status page](https://status.posthog.com/) to see if there are any issues.
+4. [Ask a question](/questions) in our community.
+
+### Can I self-host?
+
+Yes, the open source version of PostHog can be deployed with Docker Compose with no event limits. This is a good option for users who want to self-host for their hobby projects but is limited due to infrastructure complexity at scale. 
+
+See our [self-hosting docs](/docs/self-host) for more information about how to deploy PostHog's open source version.
 
 ### Will this make me better at my job?
 
-If you work at a software company, understanding user behavior is critical to driving growth. That's what we can help you with.
+If your job requires you to understand users and ship a product they want, then yes.
 
-The cool thing about PostHog is that you can go live into production without having to send all your user data to a SaaS company.
+If you're a firefighter, probably not.
 
 ## Community
 
 ### What's the community like?
 
-Active and growing! We have thousands of stars on GitHub (<span className="relative top-2"><StarRepoButton /></span> to be exact). There is a [community page](/posts) with daily conversations, and our repos have [issues](https://github.com/PostHog/posthog/issues) raised every day.
+Active and growing. 
 
-### How is this different from the other product analytics tools?
+This community is active on our [community forum](/questions), [GitHub](https://github.com/PostHog), and [socials](https://x.com/posthog). 
 
-PostHog is the only open source product analytics tool. There are plenty of SaaS options (Mixpanel/Amplitude/Heap), but all of them require you to send your data to third-parties, and they all charge based on volume. We have written out a [features comparison](/product-features) if you want to understand what we do better.
-
-There are multiple open source analytics offerings - Metabase, Matomo, etc. However, PostHog is the only open source software that gives you:
-
-1. Full event capturing functionality 
-2. Full identifiable user histories 
-3. A complete product analytics UX, including additional features such as session recording and heatmaps.
-
-## Contributing
+If you are active and helpful, we might toss you some free merch. 
 
 ### How can I contribute?
 
-We love contributions big or small. [See docs for a guide on how to get started](/docs/contributing).
-Not sure where to start? [Book a free, no-pressure pairing session](mailto:tim@posthog.com?subject=Pairing%20session&body=I'd%20like%20to%20do%20a%20pairing%20session!) with one of our core contributors.
+We love contributions big or small. You can be helpful by:
 
-### What are the Docs like?
+1. Reporting bugs or issues. 
+2. Voting on [our roadmap](/roadmap).
+3. Open a PR (see our instructions on [developing PostHog locally](/handbook/engineering/developing-locally)).
+4. Submit a feature request.
 
-Our Docs are a top priority to us and are updated **daily**. [Check them out](/docs) for yourself!
+[See our contributing guide](/docs/contribute) for more.
 
-## General Questions
+### What are the docs like?
 
-### Can I suggest new features?
-
-Absolutely!
-
-You can suggest new features by adding them as issues in our [GitHub repo](https://github.com/PostHog/posthog). You can search through already existing issues and see if your feature has already been requested. If it has, you could leave a reaction on the existing issue than to file a new one. The reactions would be used to measure how interested our community is in the new feature, so it’s better to have all of it captured on one issue.
-
-### I'm having trouble setting up PostHog. What should I do?
-
-If you’re having trouble setting up PostHog and believe its a bug you can raise an issue through our [GitHub repo](https://github.com/PostHog/posthog/issues).
-
-### Are you hiring?
-
-Yes, come help us make PostHog even better. We're growing like crazy, [and we would love to have you join us](/careers).
+Our docs are a top priority to us and are updated **daily**. [Check them out](/docs) for yourself.

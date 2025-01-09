@@ -1,0 +1,426 @@
+---
+title: 'The best Survicate alternatives & competitors, compared'
+date: 2024-07-09
+author:
+  - lior-neu-ner
+rootpage: /blog
+featuredImage: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/v1720536764/posthog.com/contents/surveys-hog.png
+featuredImageType: full
+category: General
+tags:
+  - Comparisons
+---
+
+import { ComparisonTable } from 'components/ComparisonTable'
+import { ComparisonRow } from 'components/ComparisonTable/row'
+
+## 1. Sprig
+
+- **Founded:** 2017
+- **Most similar to:** Hotjar
+- **Typical users:** Product teams and UX researchers
+
+![sprig](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/hotjar-alternatives/sprig.png)
+
+### What is Sprig?
+
+[Sprig](/blog/best-sprig-alternatives) is a user insights tool that combines surveys and session replays with AI analysis. Sprig works slightly differently than other tools as it links surveys and session replays together in what it calls studies, normally triggered by specific user events.
+
+According to [data from BuiltWith](https://trends.builtwith.com/analytics/Sprig) (June 2024), Sprig is used on 521 of the top one million websites, though this figure likely doesn't include apps that aren't accessible via the open web. It's used by large, B2C companies such as PayPal, Coinbase, and Robinhood.
+
+#### Key features
+
+- 📝 **Surveys:** Ask users questions to hear their opinions on features, flows, and what you should build next.
+
+- 📺 **Session replays:** View exactly how users are using your site.
+
+- 🤖 **AI analysis:** Surface product issues and opportunities in real time.
+
+### How does Sprig compare to Survicate?
+
+Sprig is a great replacement for Survicate, especially if you want to dive deeper into what's behind survey answers. It supports web and mobile apps, but doesn't offer surveys on email or shareable-link surveys.
+
+<ComparisonTable column1="Sprig" column2="Survicate">
+  <ComparisonRow column1={true} column2={true} feature="Surveys" description="Collect and analyze feedback, run NPS and PMF"/>
+  <ComparisonRow column1="Web and mobile apps" column2={true} feature="Multi-channel surveys" description="Send surveys in mobile apps, email, links" />
+  <ComparisonRow column1={true} column2={true} feature="Targeting" description="Control who sees your survey and when" />
+  <ComparisonRow column1={true} column2={true} feature="Survey logic" description="Customize survey flows based on previous responses" />
+  <ComparisonRow column1={true} column2={true} feature="Integrations" description="Send survey data to all your tools" />
+  <ComparisonRow column1={true} column2={false} feature="Session replay" description="Watch real users on your site; discover friction points" />
+  <ComparisonRow column1={true} column2={false} feature="Heatmaps" description="Visualize where users click and interact on your site" />
+  <ComparisonRow column1={false} column2={false} feature="Open source" description="Audit code, contribute to roadmap, and build integrations" />
+</ComparisonTable>
+
+### Why do companies use Sprig?
+
+According to [reviews on G2](https://www.g2.com/products/sprig/reviews), customers choose Sprig because:
+
+1. **It gives them real-time feedback:** Sprig makes it easy for product teams to engage with users while they were actively using the product. This real-time feedback helps them make informed decisions, iterate features faster, and improve the overall user experience.
+
+2. **It's easy to use:** Reviewers note how easy Sprig is to set up and use. This means they can go from idea to actionable learnings quickly.
+
+3. **It has pre-built reports and templates:** Users like the comprehensive documentation and the fact there are numerous templates they can immediately apply and adapt to their needs.
+
+> #### Bottom line
+> 
+> Sprig is a good option for product teams who want to do in-depth analysis on user journeys within products, especially compared to other Survicate alternatives like Lucky Orange that are more focused on e-commerce and small business users.
+
+<br />
+
+## 2. PostHog
+
+- **Founded:** 2020
+- **Similar to:** Hotjar, Pendo
+- **Typical users:** Engineers and product teams
+
+![PostHog](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/screenshots/feature-flags.png)
+
+### What is PostHog?
+
+[PostHog](/) (that's us 👋) is an open-source platform that combines surveys, product analytics, session replay, A/B testing, and feature flags. This means it's not only an alternative to Survicate, but also tools like [Mixpanel](/blog/posthog-vs-mixpanel) and [LaunchDarkly](/blog/posthog-vs-launchdarkly).
+
+According to [BuiltWith](https://trends.builtwith.com/analytics/PostHog), as of June 2024, 4,661 of the top million websites deploy PostHog, which is more than the 978 that use Survicate.
+
+#### Key features
+
+- 💬 **Surveys:** Target surveys by event or user properties. Templates for [net promoter score (NPS)](/templates/nps-survey), [product-market fit (PMF)](/templates/pmf-survey) surveys, and more.
+
+- 📈 **Product analytics:** Custom trends, funnels, user paths, retention analysis, and segment user cohorts. Also, direct [SQL querying](/docs/product-analytics/sql) for power users.
+
+- 📺 **Session replays:** View exactly how users are using your site. Includes event timelines, console logs, network activity, and 90-day data retention.
+
+- 🧪 **A/B tests:** Experiment in your app with up to nine test variations and track impact on primary and secondary metrics. Auto-calculate test duration, sample size, and statistical significance.
+
+- 🚩 **Feature flags:** Rollout features safely with [local evaluation](/docs/feature-flags/local-evaluation) (for faster performance), JSON payloads, and instant rollbacks.
+
+### How does PostHog compare to Survicate?
+
+Survicate supports platforms PostHog doesn't yet, such as surveys for mobile apps. It also offers 1-click integrations for sending survey data to other tools, whereas PostHog requires some basic setup using [webhooks](/docs/webhooks).
+
+But, while Survicate goes slightly deeper on survey features, PostHog integrates entire tools Survicate doesn't, such as [session replays](/session-replay), [product analytics](/product-analytics), and [A/B testing](/experiments). This makes it easier to connect survey data to real users, and real sessions.
+
+<ComparisonTable column1="PostHog" column2="Survicate">
+  <ComparisonRow column1={true} column2={true} feature="Surveys" description="Collect and analyze feedback, run NPS and PMF"/>
+  <ComparisonRow column1={false} column2={true} feature="Multi-channel surveys" description="Send surveys in mobile apps, email, links" />
+  <ComparisonRow column1={true} column2={true} feature="Targeting" description="Control who sees your survey and when" />
+  <ComparisonRow column1={true} column2={true} feature="Survey logic" description="Customize survey flows based on previous responses" />
+  <ComparisonRow column1={true} column2={true} feature="Integrations" description="Send survey data to all your tools" />
+  <ComparisonRow column1={true} column2={false} feature="Session replay" description="Watch real users on your site; discover friction points" />
+  <ComparisonRow column1={true} column2={false} feature="Heatmaps" description="Visualize where users click and interact on your site" />
+  <ComparisonRow column1={true} column2={false} feature="Open source" description="Audit code, contribute to roadmap, and build integrations" />
+</ComparisonTable>
+
+### Why do companies use PostHog?
+
+According to [G2 reviews](https://www.g2.com/products/posthog/reviews), companies use PostHog because:
+
+1. **It's many tools in one:** PostHog can replace Survicate (surveys), [Amplitude](/blog/posthog-vs-amplitude) (analytics), and [Statsig](/blog/posthog-vs-statsig) (A/B testing and feature flags). This simplifies workflows and ensures all product data is in one place.
+
+2. **They need a complete picture of users:** PostHog includes every tool necessary to understand users and build better products. This means gathering feedback with user surveys, creating funnels to track conversion, watching replays to see where users get stuck, and testing solutions with A/B tests.
+
+3. **Pricing is transparent and scalable:** Reviewers appreciate how PostHog's pricing scales as they grow. There's a [generous free tier](/pricing). Companies eligible for [PostHog for Startups](/startups) also get $50k in additional free credits.
+
+> #### Bottom line
+> 
+> For teams looking for all the tools they need to improve their products, PostHog makes for a great alternative. This is especially true for startups and scaleups thanks to it having a generous free tier.
+
+<br />
+
+## 3. SurveyMonkey
+
+- **Founded:** 2017
+- **Most similar to:** Hotjar
+- **Typical users:** Product teams and UX researchers
+
+![SurveyMonkey](https://res.cloudinary.com/dmukukwp6/image/upload/v1718775451/posthog.com/contents/surveymonkey.webp)
+
+### What is SurveyMonkey?
+
+Like Survicate, SurveyMonkey is a tool which solely focuses on surveys. It has every feature you could ever need when it comes to sending surveys and collecting feedback, but it doesn't provide any of the other features that other alternatives on this list to do.
+
+
+#### Key features
+
+- 📝 **Surveys:** Ask users questions to hear their opinions on features, flows, and what you should build next.
+
+- 📱 **Multi-platform:** Send surveys in mobile apps, email, share-able links, and even in text messages.
+  
+- 🔌 **Integrations:** Connects with analytics tools and other tools you already using for your workflow, like Slack, Teams, and Hubspot.
+
+### How does SurveyMonkey compare to Survicate?
+
+SurveyMonkey is the most similar alternative to Survicate on this list. They have almost all the same features and support all the same platforms.
+
+<ComparisonTable column1="SurveyMonkey" column2="Survicate">
+  <ComparisonRow column1={true} column2={true} feature="Surveys" description="Collect and analyze feedback, run NPS and PMF"/>
+  <ComparisonRow column1={true} column2={true} feature="Multi-channel surveys" description="Send surveys in mobile apps, email, links" />
+  <ComparisonRow column1={true} column2={true} feature="Targeting" description="Control who sees your survey and when" />
+  <ComparisonRow column1={true} column2={true} feature="Survey logic" description="Customize survey flows based on previous responses" />
+  <ComparisonRow column1={true} column2={true} feature="Integrations" description="Send survey data to all your tools" />
+  <ComparisonRow column1={false} column2={false} feature="Session replay" description="Watch real users on your site; discover friction points" />
+  <ComparisonRow column1={false} column2={false} feature="Heatmaps" description="Visualize where users click and interact on your site" />
+  <ComparisonRow column1={false} column2={false} feature="Open source" description="Audit code, contribute to roadmap, and build integrations" />
+</ComparisonTable>
+
+### Why do companies use SurveyMonkey?
+
+According to [reviews on G2](https://www.g2.com/products/surveymonkey/reviews), customers choose SurveyMonkey because:
+
+1. **It's easy to use:** Reviewers note how easy SurveyMonkey is to set up and use. This means they can go from idea to actionable learnings quickly.
+
+1. **It supports many integrations:** Reviewers value how easy it is to integrate survey answers into existing workflows and apps.
+
+3. **It has pre-built reporting tools:** Reviewers appreciate that they can easily interpret results and gain actionable insights from the collected data.
+
+> #### Bottom line
+> 
+> SurveyMonkey is a solid option if all you're looking for is surveys. SurveyMonkey charges per team seat while Survicate charges per survey response, so it's best to compare their pricing to see which will be cheaper for you.
+
+<br />
+
+## 4. Hotjar
+
+- **Founded:** 2014
+- **Most similar to:** Pendo, PostHog
+- **Typical users:** Product designers, researchers, and marketers
+
+![Hotjar](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/best-pendo-alternatives/hotjar.png)
+
+### What is Hotjar?
+
+[Hotjar](/blog/best-hotjar-alternatives) is a tool for understanding user behavior. It provides surveys, heatmaps, replays, and interviews to capture and display the qualitative aspects of your site and app. Teams use it to discover and address pain points on their site and app, which helps them improve customer experiences.
+
+According to [BuiltWith](https://trends.builtwith.com/analytics/Hotjar), Hotjar is by far the most popular option on this list as of June 2024. 67,108 of the top million sites use it, compared to the 378 of Survicate.
+
+### Key features
+
+- 📝 **Surveys:** Ask users questions to hear their opinions on features, flows, and what you should build next.
+
+- 🔥 **Heatmaps:** See what parts of your pages get attention and how far down the page users get.
+
+- 🎥 **Recordings:** Replay real user sessions and see what they see; discover hidden friction.
+
+- 🗣️ **Feedback:** Learn what your users are thinking. Find out their likes, dislikes, and satisfaction.
+
+- 👔 **Interviews:** Talk to real users to share ideas, test designs, and get live feedback.
+
+### How does Hotjar compare to Survicate?
+
+Hotjar and Survicate have comparable features when it comes to surveys. Hotjar is only available for websites, though.
+
+<ComparisonTable column1="Hotjar" column2="Survicate">
+  <ComparisonRow column1={true} column2={true} feature="Surveys" description="Collect and analyze feedback, run NPS and PMF"/>
+  <ComparisonRow column1={false} column2={true} feature="Multi-channel surveys" description="Send surveys in mobile apps, email, links" />
+  <ComparisonRow column1={true} column2={true} feature="Targeting" description="Control who sees your survey and when" />
+  <ComparisonRow column1={true} column2={true} feature="Survey logic" description="Customize survey flows based on previous responses" />
+  <ComparisonRow column1={true} column2={true} feature="Integrations" description="Send survey data to all your tools" />
+  <ComparisonRow column1={true} column2={false} feature="Session replay" description="Watch real users on your site; discover friction points" />
+  <ComparisonRow column1={true} column2={false} feature="Heatmaps" description="Visualize where users click and interact on your site" />
+  <ComparisonRow column1={false} column2={false} feature="Open source" description="Audit code, contribute to roadmap, and build integrations" />
+</ComparisonTable>
+
+### Why do companies use Hotjar?
+
+According to G2 reviews, users are fans of Hotjar because:
+
+1. **Insights on user behavior:** Hotjar captures what users are doing, where their attention is going, and how they are spending their time. Users love the insights they get with Hotjar's tools.
+
+2. **Simple for non-technical users:** Hotjar is easy to set up. Non-technical roles like designers, marketers, and product managers find it simple to use. The visuals do a good job of making data clear.
+
+3. **Heatmaps and scrollmaps:** Seeing clicks and scroll depth down works well and creates actionable insights for design, marketing, and content teams. Helps improve UX and page designs.
+
+> #### Bottom line
+> 
+> Hotjar is a good option for product and marketing teams who want to do in-depth analysis on user journeys within web apps. However, it's best to look elsewhere if you need to support on other platforms.
+
+<br />
+
+## 5. Pendo
+
+- **Founded:** 2013
+- **Similar to:** PostHog, Hotjar
+- **Typical users:** Product managers and customer success teams
+
+![Pendo](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/best-fullstory-alternatives/pendo.png)
+
+### What is Pendo?
+
+[Pendo](/blog/posthog-vs-pendo) is a product experience platform that offers surveys, session replays, product analytics, in-app guides, and product validation tools. It's primarily used by product managers and customer success teams.
+
+According to [BuiltWith](https://trends.builtwith.com/analytics/Pendo), 3,166 of the top million websites deploy Pendo as of June 2024. This is much more than the 978 that use Survicate.
+
+#### Key features
+
+- 📝 **Surveys:** Ask users questions to hear their opinions on features, flows, and what you should build next.
+
+- 📘 **In-app guides:** Deliver personalized guidance to customers inside your app, without changing the code.
+
+- 📣 **User feedback:** A centralized location to capture product feedback. Capture manually or with in-app prompts.
+
+- 📊 **Product analytics:** Learn how users are using your app with event autocapture. Analyze with funnels, trends, and retention analysis.
+
+- 📹 **Session replay:** Watch real users use your product and understand the behavior behind your analytics data.
+
+- 🛣️ **Product validation and roadmaps:** Manage your backlog and plan your roadmap to create alignment.
+
+### How does Pendo compare to Survicate?
+
+Pendo includes all of the key survey features that Survicate does and, unlike most other alternatives, it also supports mobile apps.
+
+<ComparisonTable column1="Pendo" column2="Survicate">
+  <ComparisonRow column1={true} column2={true} feature="Surveys" description="Collect and analyze feedback, run NPS and PMF"/>
+  <ComparisonRow column1="Web and mobile apps" column2={true} feature="Multi-channel surveys" description="Send surveys in mobile apps, email, links" />
+  <ComparisonRow column1={true} column2={true} feature="Targeting" description="Control who sees your survey and when" />
+  <ComparisonRow column1={true} column2={true} feature="Survey logic" description="Customize survey flows based on previous responses" />
+  <ComparisonRow column1={true} column2={true} feature="Integrations" description="Send survey data to all your tools" />
+  <ComparisonRow column1={true} column2={false} feature="Session replay" description="Watch real users on your site; discover friction points" />
+  <ComparisonRow column1={true} column2={false} feature="Heatmaps" description="Visualize where users click and interact on your site" />
+  <ComparisonRow column1={false} column2={false} feature="Open source" description="Audit code, contribute to roadmap, and build integrations" />
+</ComparisonTable>
+
+### Why do companies use Pendo?
+
+According to G2 reviews, customers use Pendo for:
+
+1. **Customer support and feedback:** Product and customer support value Pendo for its feedback collection and roadmapping capabilities. Users like how it helps them figure out what to work on next.
+
+2. **Improving onboarding:** Pendo's in-app guides combined with analytics features facilitate experimenting with new onboarding flows and improving user adoption.
+
+3. **Product planning:** Pendo's data tools, product validation, and roadmap features help align internal teams and stakeholders on product development.
+
+> #### Bottom line
+> 
+> Pendo makes for a good alternative to Survicate thanks to its support of both web and mobile apps. Pendo's opaque pricing can be a turnoff to some, though.
+
+<br />
+
+
+## 6. Lucky Orange
+
+- **Founded:** 2010
+- **Similar to:** Crazy Egg, Hotjar
+- **Typical users:** Marketers and consultants
+
+![Lucky Orange](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/clarity-alternatives/luckyorange.png)
+
+### What is Lucky Orange?
+
+Lucky Orange is a simple website analyisis tool. It's designed for e-commerce websites and includes surveys, session replays, and heatmaps. It also offers built-in form analytics, live chat, and announcements widgets that help store owners improve their conversion.
+
+According to [BuiltWith](https://trends.builtwith.com/analytics/Lucky-Orange), as of June 2024, 3,817 of the top million websites use Lucky Orange.
+
+#### Key features
+
+- 📋 **Surveys:** Get real feedback from your customers about your website, product, and ideas. 
+
+- 📺 **Session replay:** Watch how real users navigate your website and figure out what is stopping them from converting.
+
+- 🔥 **Heatmaps:** See where users click, move, and scroll to find out what areas drive conversion.
+
+- 📊 **Conversion funnels:** Figure out where you are losing customers in your funnels.
+
+- 👤 **Visitor profiles:** See all of the data you have about a specific user and group users into segments. 
+
+### How does Lucky Orange compare to Survicate?
+
+When it comes to surveys, Lucky Orange does many of the same things as Survicate. However, it's designed specifically for optimizing conversion on e-commerce websites, so doesn't support any of the other platforms that Survicate does. 
+
+<ComparisonTable column1="Lucky Orange" column2="Survicate">
+  <ComparisonRow column1={true} column2={true} feature="Surveys" description="Collect and analyze feedback, run NPS and PMF"/>
+  <ComparisonRow column1={false} column2={true} feature="Multi-channel surveys" description="Send surveys in mobile apps, email, links" />
+  <ComparisonRow column1={true} column2={true} feature="Targeting" description="Control who sees your survey and when" />
+  <ComparisonRow column1={false} column2={true} feature="Survey logic" description="Customize survey flows based on previous responses" />
+  <ComparisonRow column1={true} column2={true} feature="Integrations" description="Send survey data to all your tools" />
+  <ComparisonRow column1={true} column2={false} feature="Session replay" description="Watch real users on your site; discover friction points" />
+  <ComparisonRow column1={true} column2={false} feature="Heatmaps" description="Visualize where users click and interact on your site" />
+  <ComparisonRow column1={false} column2={false} feature="Open source" description="Audit code, contribute to roadmap, and build integrations" />
+</ComparisonTable>
+
+### Why do companies use Lucky Orange?
+
+According to G2 reviews, customers use Lucky Orange because:
+
+1. **It's easy to use:** Lucky Orange has a simple UI, which makes it easy to analyze user behavior and identify issues with websites.
+
+2. **It helps them improve conversion:** Customers are mostly using Lucky Orange to optimize landing pages and e-commerce checkout flows.
+
+3. **It doesn't impact page speed:** Users report Lucky Orange has negligible impact on website performance, which they value highly.
+
+> #### Bottom line
+> 
+> Lucky Orange is ideal for small businesses owners who want actionable insights without much effort, though its streamlined interface may be too limiting for larger teams who want more powerful tools.
+
+<br />
+
+## 7. Crazy Egg
+
+- **Founded:** 2006
+- **Similar to:** Lucky Orange, Hotjar
+- **Typical users:** Marketers and UX designers
+
+![Crazy Egg](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/hotjar-alternatives/crazy-egg.png)
+
+### What is Crazy Egg?
+
+Crazy Egg is a heatmap and optimization tool for small business owners and marketers. It's popular with e-commerce businesses that run Shopify stores. 
+
+It's best used for surveys and heatmaps, but also includes basic replay, A/B testing, and website analytics tools. It's ideal for non-technical users who want to optimize their websites and drive conversions.
+
+According to [BuiltWith](https://trends.builtwith.com/analytics/CrazyEgg), as of June 2024, 10,861 of the top million websites use Crazy Egg.
+
+
+#### Key features
+
+- 💬 **Surveys:** Fully customizable surveys help you get qualitative feedback at all stages of the customer journey.
+
+- 🔥 **Heatmaps:** See where users move, click, and scroll. Get reports on their interactions with your website.
+
+- 📺 **Session replay:** Watch recordings of actual visitors using your website. Figure out where they get stuck or where they avoid.
+
+- 🧪 **A/B testing:** Use the visual page editor or URL selector to run A/B tests.
+
+- 🐞 **Errors tracking:** Find out if errors are preventing your visitors from converting.
+
+### How does Lucky Orange compare to Survicate?
+
+Crazy Egg has a few features Survicate doesn't, including basic analytics and A/B tests, but doesn't support mobile apps or other platforms. It also doesn't have any integrations.
+
+<ComparisonTable column1="Crazy Egg" column2="Survicate">
+  <ComparisonRow column1={true} column2={true} feature="Surveys" description="Collect and analyze feedback, run NPS and PMF"/>
+  <ComparisonRow column1={false} column2={true} feature="Multi-channel surveys" description="Send surveys in mobile apps, email, links" />
+  <ComparisonRow column1={true} column2={true} feature="Targeting" description="Control who sees your survey and when" />
+  <ComparisonRow column1={true} column2={true} feature="Survey logic" description="Customize survey flows based on previous responses" />
+  <ComparisonRow column1={false} column2={true} feature="Integrations" description="Send survey data to all your tools" />
+  <ComparisonRow column1={true} column2={false} feature="Session replay" description="Watch real users on your site; discover friction points" />
+  <ComparisonRow column1={true} column2={false} feature="Heatmaps" description="Visualize where users click and interact on your site" />
+  <ComparisonRow column1={false} column2={false} feature="Open source" description="Audit code, contribute to roadmap, and build integrations" />
+</ComparisonTable>
+
+### Why do companies use Crazy Egg?
+
+According to G2 reviews, people use Crazy Egg because:
+
+1. **It's easy to setup:** Crazy Egg makes it easy integrate with numerous services and content management systems, like Shopify, Wix, and Wordpress. This is especially useful for website owners and agencies who run multiple websites.
+
+2. **They want to improve content and conversions:** Crazy Egg's heatmaps and session replay features enable people to gather valuable insights for optimizing their content, increasing conversions, and understanding how users navigate their websites.
+
+3. **Gathering feedback** Users like that they can combine data with the qualitative feedback from users and customer CTAs.
+   
+> #### Bottom line
+> 
+> If you're looking for an option to optimize your marketing or e-commerce site, Crazy Egg is a solid choice. However, if you need to set up integrations so that survey answers are sent to your existing workflows, it's best to look elsewhere.
+
+<br />
+
+## Is PostHog right for you?
+
+Here's the (short) sales pitch.
+
+We're biased, obviously, but we think PostHog is the perfect Survicate replacement if:
+
+- You value transparency. We're open source and open core.
+- You want more than just surveys and heatmaps. We have a full suite of product analytics, A/B testing, and feature flags.
+- You want to try before you buy. We're self-serve with a [generous free tier](/pricing).
+
+Check out [our product pages](/feature-flags) and [read our docs](/docs) to learn more.

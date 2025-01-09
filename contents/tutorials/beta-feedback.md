@@ -46,15 +46,15 @@ Once installed, go into the `app` folder and create a `providers.js` file. In th
 'use client'
 import posthog from 'posthog-js'
 import { PostHogProvider } from 'posthog-js/react'
-
-if (typeof window !== 'undefined') {
-  posthog.init('<ph_project_api_key>', {
-    api_host: '<ph_client_api_host>',
-    opt_in_site_apps: true
-  })
-}
+import { useEffect } from 'react'
 
 export function PHProvider({ children }) {
+  useEffect(() => {
+    posthog.init('<ph_project_api_key>', {
+      api_host: '<ph_client_api_host>',
+      opt_in_site_apps: true
+    })
+  }, []);
   return <PostHogProvider client={posthog}>{children}</PostHogProvider>
 }
 ```
@@ -125,7 +125,7 @@ Now, when users opt into the "new beta page" feature, a button shows on the home
 
 Lastly, we want to get feedback on our new beta page from the users in our beta. We can add this without adding code using [surveys](/docs/surveys).
 
-To create a survey, go to the [surveys tab](https://app.posthog.com/surveys) in PostHog and click "New survey." Choose the [open feedback template](/templates/in-app-feedback-survey), fill out any details, and open the targeting section. In this section, we target the `new-beta-page` feature flag and the `/beta` URL. This prevents non-beta users from getting the survey. Once done, click save and launch.
+To create a survey, go to the [surveys tab](https://app.posthog.com/surveys) in PostHog and click "New survey." Choose the [open feedback template](/templates/in-app-feedback-survey), fill out any details, and open the display conditions section. In this section, we target the `new-beta-page` feature flag and the `/beta` URL. This prevents non-beta users from getting the survey. Once done, click save and launch.
 
 ![Creating survey video](https://res.cloudinary.com/dmukukwp6/video/upload/v1710055416/posthog.com/contents/images/tutorials/beta-feedback/survey.mp4)
 
@@ -140,3 +140,5 @@ This is an easy, targeted, and scalable way to learn users' thoughts and problem
 - [How to create custom surveys](/tutorials/survey)
 - [Get feedback and book user interviews with surveys](/tutorials/feedback-interviews-site-apps)
 - [How to set up a public beta program using early access management](/tutorials/public-beta-program)
+
+<NewsletterForm />

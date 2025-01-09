@@ -75,8 +75,6 @@ Other options include:
 
 Why do this? FWIW, a single *Product for Engineers* newsletter drives more clicks to our website than a $5,000 newsletter sponsorship we ran recently.
 
-<NewsletterForm />
-
 ## 4. Make your website genuinely different 🙃
 This means:
 
@@ -146,7 +144,7 @@ You really don’t want anyone outranking you for any search that’s “your br
 - **Comparisons** – i.e. "your company vs another company"
 - **Alternatives** – i.e. "alternatives to your company"
 
-There’s no shortage of websites that will try. G2 and its many imitators are top of that list, but your competitors will too. You may need to spend some money on defensive Google ads as well.
+There’s no shortage of websites that will try. G2 and its many imitators are top of that list, but your competitors will too. You may need to spend some money on defensive [Google ads](/tutorials/google-ads-reports) as well.
 
 Once you’ve built this content out, focus on SEO content targeting your rivals – e.g. “alternatives to rival companies”. And make it genuinely useful. Include comparison tables, real data, reviews from users, and up-to-date screenshots.
 

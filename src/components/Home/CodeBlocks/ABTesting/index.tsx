@@ -5,7 +5,7 @@ function BuildTest() {
     return (
         <div className="-mt-5">
             <p className="leading-tight">
-                A/B testing is built on feature flags. Define the variants and use <code>getFeatureFlag</code> to serve
+                Experiments are built on feature flags. Define the variants and use <code>getFeatureFlag</code> to serve
                 content for each variant.
             </p>
             <CodeBlock
@@ -21,7 +21,7 @@ function BuildTest() {
 
 export default [
     {
-        title: 'Building an A/B test',
+        title: 'Setting up an experiment',
         body: BuildTest,
         bodyType: 'component',
         code: ['getFeatureFlag'],

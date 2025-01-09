@@ -37,14 +37,14 @@ In the `app` folder, create a `provider.js` file where we initialize PostHog on 
 'use client'
 import posthog from 'posthog-js'
 import { PostHogProvider } from 'posthog-js/react'
-
-if (typeof window !== 'undefined') {
-  posthog.init('<ph_project_api_key>',{
-    api_host:'<ph_client_api_host>'
-  })
-}
+import { useEffect } from 'react'
 
 export default function PHProvider({ children }) {
+  useEffect(() => {
+    posthog.init('<ph_project_api_key>', {
+      api_host: '<ph_client_api_host>',
+    })
+  }, []);
   return <PostHogProvider client={posthog}>{children}</PostHogProvider>
 }
 ```
@@ -108,36 +108,47 @@ When you go to a route that doesn’t exist, like [http://localhost:3000/test](h
 
 ![Not found event](https://res.cloudinary.com/dmukukwp6/video/upload/v1710055416/posthog.com/contents/images/tutorials/broken-link-checker/not-found.mp4)
 
-## Setting up our Slack webhook
+## Sending 404s to Slack
 
-Since we want to send our 404s and broken links to somewhere we check frequently, we will set up a Slack webhook to send notifications.
+Since we want to send our 404s and broken links to somewhere we check frequently, we will set up a Slack webhook to send notifications. We can use our Slack realtime destinations for this.
 
-To do this: 
+Start by going to the [data pipeline destinations tab](https://us.posthog.com/pipeline/destinations) and search for the **Slack** destination and click **+ Create**. On the creation screen:
 
-1. Go to the [Slack developer dashboard](https://api.slack.com/apps?new_app=1), create an app from scratch, name it, select your workspace, and click "Create App."
+1. Follow the steps to integrate with your Slack workspace if you haven't already and then select it.
 
-2. Next, go to "Incoming Webhooks," activate them, click "add new webhook to workspace," select a channel (I made a new `404s-broken-links` channel for it), and click allow.
+2. Make sure the PostHog integration is added to the channel you want to send messages to and select it.
 
-3. Copy your webhook URL for use in PostHog.
+3. Under **Match event and actions**, select **not found**.
 
-## Creating an action and sending it to Slack
+4. Under **Blocks**, modify the text to include the pathname. For example:
 
-With our Slack webhook, we can set up an action that triggers the webhook when someone hits a 404 or broken link. 
+```json
+{
+  "text": {
+    "text": "*{person.name}* triggered 404 on '{event.properties.$pathname}'",
+    "type": "mrkdwn"
+  },
+  "type": "section"
+},
+```
 
-1. Go to your [project settings](https://app.posthog.com/project/settings#webhook), scroll to webhook integration, paste your Slack webhook link, and click "test and save."
+5. Customize the name and description, and press **Create & enable**.
 
-2. After successfully sending a test event, you can set up your action. To create it, [go to actions](https://app.posthog.com/data-management/actions) in PostHog, click "New action," select "From event or pageview," and match your "not found" custom event. 
+<ProductScreenshot
+    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2024_09_27_at_12_00_11_2x_55556fa886.png"
+    imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2024_09_27_at_11_59_45_2x_39d95d4685.png"
+    alt="Create Slack destination"
+    classes="rounded"
+/>
 
-3. Select "Post to webhook when this action is triggered," set your message format to `[user.pathname] by [user.name]`, and press save.
+You can then test the destination and it will start sending 404s to Slack.
 
-4. Visit [http://localhost:3000/test](http://localhost:3000/test) again, and you’ll see a message in your Slack channel.
-
-![Slack](https://res.cloudinary.com/dmukukwp6/video/upload/v1710055416/posthog.com/contents/images/tutorials/broken-link-checker/slack.mp4)
-
-> **Note:** you can only send actions to one webhook. If you have multiple destinations you want to send to, you can use [Zapier](/docs/apps/zapier-connector).
+![Slack message](https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2024_09_27_at_12_02_01_2x_522adc6cef.png)
 
 ## Further reading
 
 - [How to set up Next.js monitoring](/tutorials/nextjs-monitoring)
 - [How to track new and returning users in PostHog](/tutorials/track-new-returning-users)
 - [How to improve web app performance using PostHog session replays](/tutorials/performance-metrics)
+
+<NewsletterForm />

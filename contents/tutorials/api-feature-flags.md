@@ -254,7 +254,7 @@ response = requests.patch(
 
 </MultiLanguage>
 
-This filter object can include available person properties, cohorts, or group properties if you capture events with [person profiles](/docs/data/persons). You also can use the `PATCH` endpoint to change the name, key, filters, deleted status, active status, and more. 
+This filter object can include available person properties, cohorts, or group properties if you capture identified events. You also can use the `PATCH` endpoint to change the name, key, filters, deleted status, active status, and more. 
 
 > Be careful when using the `PATCH` endpoint, as it overwrites any current feature flag details. Find out more in [our API docs](/docs/api/feature-flags#patch-api-projects-project_id-feature_flags-id).
 
@@ -357,3 +357,5 @@ Once confirmed, you're done. Congratulations, you’ve built a solid grasp of us
 - [How to use the PostHog API to get insights and persons](/tutorials/api-get-insights-persons)
 - [Documentation on our `decide` endpoint](/docs/api/decide)
 - [Using the PostHog API to capture events](/tutorials/api-capture-events)
+
+<NewsletterForm />

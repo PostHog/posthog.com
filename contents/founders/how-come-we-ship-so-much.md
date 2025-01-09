@@ -23,7 +23,7 @@ Our first line of code was January 22nd, 2020, after a pivot during a YC batch. 
 * [Product analytics](/product-analytics)
 * [Session replay](/session-replay)
 * [Feature flags](/feature-flags)
-* [A/B testing](/ab-testing)
+* [A/B testing](/experiments)
 * [User surveys](/docs/surveys)
 * [Heatmaps](/docs/toolbar/heatmaps)
 * [SDKs](/docs/libraries) for all the above

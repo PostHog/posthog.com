@@ -1,0 +1,89 @@
+---
+title: Link a source
+sidebar: Docs
+showTitle: true
+availability:
+  free: full
+  selfServe: full
+  enterprise: full
+---
+import { ProductScreenshot } from 'components/ProductScreenshot'
+export const SettingsLight = "https://res.cloudinary.com/dmukukwp6/image/upload/Screenshot_2024_08_30_at_10_45_12_ef06f67105.png"
+export const SettingsDark = "https://res.cloudinary.com/dmukukwp6/image/upload/Screenshot_2024_08_30_at_10_47_20_f6c1d42503.png"
+
+PostHog enables you to link your most important data from sources like your CRM, payment processor, or database. Once linked, you can combine this data with the product analytics data already in PostHog and query across all of it.
+
+To link a source, go to the Integrations tab, and click the **Sources** tab. On that page, you have an option to create a managed source such as:
+ 
+- [Stripe](/docs/cdp/sources/stripe)
+- [Hubspot](/docs/cdp/sources/hubspot)
+- [Zendesk](/docs/cdp/sources/zendesk)
+- [Postgres](/docs/cdp/sources/postgres)
+- [MySQL](/docs/cdp/sources/mysql)
+- [Azure SQL Server](/docs/cdp/sources/azure-db)
+- [Snowflake](/docs/cdp/sources/snowflake)
+- [Vitally](/docs/cdp/sources/vitally)
+- [Chargebee](/docs/cdp/sources/chargebee)
+
+The other option is a self-managed source, which include: 
+
+- [S3](/docs/cdp/sources/setup/s3)
+- [R2](/docs/cdp/sources/r2)
+- [Google Cloud Storage](/docs/cdp/sources/gcs)
+- [Azure](/docs/cdp/sources/azure-blob)
+
+You can find the set up instructions in-app or in the source specific docs.
+
+import InboundIpAddresses from '../_snippets/inbound-ip-addresses.mdx'
+
+<InboundIpAddresses />
+
+## Linking a custom source
+
+The data warehouse can link to data in your object storage system. To do this, you'll need to:
+
+1. Create a bucket in your object storage system like S3, GCS, or Cloudflare R2
+2. Set up an access key and secret
+3. Add data to the bucket (potentially using a tool like Airbyte, Fivetran, Stitch, or others)
+4. Link the table in PostHog
+
+See an example in our [S3 setup docs](/docs/cdp/sources/s3).
+
+## Incremental vs full table
+
+On some sources and tables, you can choose the sync method. The options are incremental replication or full table replication. 
+
+### Incremental
+
+With incremental replication, you only sync new or updated data. This reduces the total number of rows synced and how long it takes to sync.
+
+When choosing incremental replication, you must select a field to identify new and updated data. This is often something like an `updated_at` timestamp, or an autoincrementing ID. Not all fields are suitable to be used to identify new and updated data, and so we only support the following types as replication keys:
+- `integer` (including `bigint` and `smallint`)
+- `datetime`
+- `date`
+- `timestamp`
+- `numeric` (for Snowflake)
+
+The one downside to incremental syncing is that deletions of data won't be synced to your PostHog data warehouse. You need to use full table refreshes for this.
+
+### Full table
+
+This reloads the whole table on every sync. This is great for tables with common data deletions or ones without an incrementing field (such as a `updated_at` timestamp).
+
+## Syncing
+
+Once you add a source, you can see its status, sync frequency, and last successful run in the [sources page](https://us.posthog.com/pipeline/sources). You can also reload or delete sources here.
+
+When you expand each source, you can see:
+
+- Schema name
+- Enable or disable syncing for that table
+- Synced table name in PostHog
+- Time the table was last synced
+
+<ProductScreenshot
+    imageLight={SettingsLight} 
+    imageDark={SettingsDark} 
+    alt="Source settings in PostHog" 
+    classes="rounded"
+  />

@@ -79,6 +79,20 @@ export const MenuItem = ({ icon, color, badge, name }) => {
     )
 }
 
+export const menuVariants = {
+    hidden: {
+        translateX: '100%',
+        opacity: 0,
+    },
+    visible: {
+        transition: {
+            delay: 0.3,
+        },
+        translateX: 0,
+        opacity: '100%',
+    },
+}
+
 export default function Menu({
     name,
     url,
@@ -91,6 +105,8 @@ export default function Menu({
     color,
     hidden,
     tag,
+    onClick,
+    active,
     ...other
 }: IMenu): JSX.Element | null {
     if (hidden) return null
@@ -124,25 +140,11 @@ export default function Menu({
                 url === pathname ||
                 (children && isOpen(children))
         )
-        setIsActive(isMenuItemActive?.({ name, url }) || url?.split('?')[0] === pathname)
-    }, [pathname])
-
-    const variants = {
-        hidden: {
-            translateX: '100%',
-            opacity: 0,
-        },
-        visible: {
-            transition: {
-                delay: 0.3,
-            },
-            translateX: 0,
-            opacity: '100%',
-        },
-    }
+        setIsActive(active || isMenuItemActive?.({ name, url }) || url?.split('?')[0] === pathname)
+    }, [pathname, active])
 
     const isWithChild = children && children.length > 0
-    const MenuLink = { standard: Link, scroll: ScrollLink }[menuType]
+    const MenuLink = onClick ? 'button' : { standard: Link, scroll: ScrollLink }[menuType]
     const menuLinkProps = {
         standard: {},
         scroll: {
@@ -158,7 +160,7 @@ export default function Menu({
     return (
         <ul className={`list-none m-0 p-0 text-lg font-semibold overflow-hidden py-[1px] ml-4 ${className}`}>
             <li>
-                {(url === undefined || url === null) && name ? (
+                {(url === undefined || url === null) && !onClick && name ? (
                     <p className="flex gap-2 items-baseline text-sm font-semibold mt-3 mx-3 mb-1">
                         <span className="opacity-25">{name}</span>
 
@@ -166,9 +168,10 @@ export default function Menu({
                             <span className={`${badgeClasses} ${badge.className || ''}`}> {badge.title}</span>
                         )}
                     </p>
-                ) : name && url ? (
+                ) : (name && url) || (name && onClick) ? (
                     <MenuLink
                         onClick={() => {
+                            onClick && onClick({ name, url })
                             handleLinkClick && handleLinkClick({ name, url, topLevel, tag })
                             if (isWithChild) {
                                 setOpen(!open)
@@ -183,7 +186,7 @@ export default function Menu({
                         <AnimatePresence>
                             {isActive && !isWithChild && (
                                 <motion.span
-                                    variants={variants}
+                                    variants={menuVariants}
                                     className="absolute w-[4px] bg-red rounded-[2px] top-[2px] h-[calc(100%_-_4px)] left-0"
                                     initial="hidden"
                                     animate="visible"

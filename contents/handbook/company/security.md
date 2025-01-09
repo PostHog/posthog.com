@@ -23,13 +23,13 @@ Please enable security keys for Google Workspace, MacOS, AWS, 1Password (or what
 
 Google recently changed its settings for 2FA and Yubikeys and you may struggle to link your Yubikeys to your Google account. Go [here to find out about the change](https://joshua.hu/enrolling-hardware-keys-2fa-google-workspace) or use this direct link to head [straight to this page where](https://myaccount.google.com/signinoptions/two-step-verification?flow=sk&opendialog=addsk) you can register your Yubikeys. 
 
+> **YubiKey tip:** Avoid spamming OTPs if you accidentally touch your YubiKey by installing the [YubiKey Manager](https://www.yubico.com/support/download/yubikey-manager/) or by running `brew install ykman && ykman config usb --disable OTP`
+
 ## SOC 2
 
 PostHog is certified as SOC 2 Type II compliant, following an external audit. 
 
-Our latest [security report](https://drive.google.com/file/d/1hSW8roswMjVn0HReVOs1lQFo3O9ToqXh/view?usp=share_link) is publicly available (covering controls as of February 28th, 2023). 
-
-We are currently in the process of obtaining our Type II certification, and anticipate our report will be available in July. If a customer requires a bridge letter in the meantime, they should email privacy@posthog.com. 
+Our latest [security report](https://drive.google.com/file/d/1uLBE83_pN5q7p7IA-Ut85ArQh9BBzEdw/view?usp=drive_link) is publicly available (covering controls as of May 31st, 2024). 
 
 ### Policies
 
@@ -99,3 +99,7 @@ Under the California Consumer Privacy Act (CCPA), PostHog as a Service Provider 
 We give all PostHog customers the tools to easily comply with their end users' requests under CCPA, including deletion of their data. We provide separate guidance for our customers on how to use PostHog in a CCPA-compliant way in our [Docs](/docs/privacy/ccpa-compliance). 
 
 We receive data collected by our customers from end-users and allow them to understand usage metrics of their products. We don't access customer end-user data unless instructed by a customer, and customer data is never sold to third parties. We do not have access to data collected by our customers who are using a self-hosted version of PostHog from end-users at all, unless they give us access to their instance. 
+
+## Pen tests
+
+We conduct these annually, most recently in April 2024  - <PrivateLink url="https://github.com/PostHog/company-internal/issues/1577">see here</PrivateLink> for a link to the latest report and statuses. 

@@ -49,7 +49,8 @@ export default function Customer({ data, mobile, pageContext: { tableOfContents 
                 title={`${title} - PostHog`}
                 description={description || excerpt}
                 article
-                image={`/og-images/${fields.slug.replace(/\//g, '')}.jpeg`}
+                image={`${process.env.GATSBY_CLOUDFRONT_OG_URL}/${fields.slug.replace(/\//g, '')}.jpeg`}
+                imageType="absolute"
             />
             <div className="flex flex-col-reverse items-start @3xl:flex-row gap-8 2xl:gap-12">
                 <section className="article-content customer-content flex-1 transition-all pt-8 w-full">

@@ -51,6 +51,7 @@ WHERE event = '$pageview'
         WHERE event = '$pageview'
         GROUP BY distinct_id
     )
+    AND {filters}
 GROUP BY current_url
 ORDER BY url_count DESC
 ```
@@ -137,7 +138,7 @@ While in the public beta, the response format may still change.
 
 ## Data warehouse
 
-To get a list of all the sources you can query with HogQL, enable the [data warehouse beta](https://us.posthog.com/#panel=feature-previews) and check out the ["Data warehouse" tab](https://us.posthog.com/data-warehouse). You can click on every table listed to see the data included and query them.
+To get a list of all the sources you can query with HogQL, check out the ["Data warehouse" tab](https://us.posthog.com/data-warehouse). You can click on every table listed to see the data included and query them.
 
 <DataWarehouseScreenshot
   imageLight={WarehouseLight}
@@ -145,4 +146,4 @@ To get a list of all the sources you can query with HogQL, enable the [data ware
   alt="Data warehouse example"
 />
 
-The data warehouse also enables you to add external sources, like Stripe and Hubspot, and query them alongside your PostHog data.
+The data warehouse also enables you to add external sources, like [Stripe](/tutorials/stripe-reports) and Hubspot, and query them alongside your PostHog data.

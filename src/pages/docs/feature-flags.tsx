@@ -1,5 +1,5 @@
+import CloudinaryImage from 'components/CloudinaryImage'
 import React from 'react'
-import { StaticImage } from 'gatsby-plugin-image'
 import Layout from 'components/Layout'
 import { SEO } from 'components/seo'
 import PostLayout from 'components/PostLayout'
@@ -9,6 +9,8 @@ import { CallToAction } from 'components/CallToAction'
 import { docsMenu } from '../../navs'
 import { useLayoutData } from 'components/Layout/hooks'
 import QuickLinks from 'components/QuickLinks'
+import Intro from 'components/Docs/Intro'
+import AskMax from 'components/AskMax'
 
 export const quickLinks = [
     {
@@ -59,30 +61,6 @@ type FeatureFlagsProps = {
     }
 }
 
-export const Intro = ({ image = true }) => (
-    <div className="bg-accent dark:bg-accent-dark border border-light dark:border-dark rounded flex flex-col items-center md:flex-row gap-8 pt-2 mb-8">
-        <div className="p-4 md:p-8">
-            <h1 className="text-4xl mt-0 mb-2">Feature flags</h1>
-            <h3 className="text-lg font-semibold text-primary/60 dark:text-primary-dark/75 leading-tight">
-                Toggle features for cohorts or individuals to test the impact before rolling out to everyone.
-            </h3>
-            <CallToAction to="/docs/feature-flags/installation">Create your first feature flag</CallToAction>
-        </div>
-
-        {image && (
-            <figure className="m-0 p-0">
-                <StaticImage
-                    alt=""
-                    placeholder="none"
-                    quality={100}
-                    className=""
-                    src="../../components/Home/Slider/images/feature-flags-hog.png"
-                />
-            </figure>
-        )}
-    </div>
-)
-
 export const Content = ({ quickLinks = false }) => {
     const { compact } = useLayoutData()
     return (
@@ -101,96 +79,36 @@ export const Content = ({ quickLinks = false }) => {
                         type="Guide"
                         title="Feature flags API"
                         description="Evaluate and update with the /decide/ endpoint"
-                        Image={
-                            <StaticImage
-                                alt=""
-                                placeholder="none"
-                                objectFit="contain"
-                                className="h-full"
-                                quality={100}
-                                src="../../components/Home/Slider/images/feature-flags-hog.png"
-                            />
-                        }
                         url="/tutorials/api-feature-flags"
                     />
                     <ResourceItem
                         type="Guide"
                         title="Canary releases"
                         description="Gradual rollouts to a subset of users"
-                        Image={
-                            <StaticImage
-                                alt=""
-                                placeholder="none"
-                                objectFit="contain"
-                                className="h-full"
-                                quality={100}
-                                src="../../components/Home/Slider/images/feature-flags-hog.png"
-                            />
-                        }
                         url="/tutorials/canary-release"
                     />
                     <ResourceItem
                         type="Guide"
                         title="Bootstrapping feature flags in React"
                         description="Available at client-side load time"
-                        Image={
-                            <StaticImage
-                                alt=""
-                                placeholder="none"
-                                objectFit="contain"
-                                className="h-full"
-                                quality={100}
-                                src="../../components/Home/Slider/images/feature-flags-hog.png"
-                            />
-                        }
                         url="/tutorials/bootstrap-feature-flags-react"
                     />
                     <ResourceItem
                         type="Article"
                         title="Best practices for feature flags"
                         description="Contains 8 examples"
-                        Image={
-                            <StaticImage
-                                alt=""
-                                placeholder="none"
-                                objectFit="contain"
-                                className="h-full"
-                                quality={100}
-                                src="../../components/Home/Slider/images/feature-flags-hog.png"
-                            />
-                        }
                         url="/blog/feature-flag-best-practices"
                     />
                     <ResourceItem
                         type="Guide"
                         title="How to set up one-time feature flags"
                         description="Show a component or content just once"
-                        Image={
-                            <StaticImage
-                                alt=""
-                                placeholder="none"
-                                objectFit="contain"
-                                className="h-full"
-                                quality={100}
-                                src="../../components/Home/Slider/images/feature-flags-hog.png"
-                            />
-                        }
                         url="/tutorials/one-time-feature-flags"
                     />
                     <ResourceItem
                         type="Guide"
                         title="Cookie-based feature flags"
                         description="Storing feature flag values locally"
-                        Image={
-                            <StaticImage
-                                alt=""
-                                placeholder="none"
-                                objectFit="contain"
-                                className="h-full"
-                                quality={100}
-                                src="../../components/Home/Slider/images/feature-flags-hog.png"
-                            />
-                        }
                         url="/tutorials/one-time-feature-flags"
                     />
                 </ul>
@@ -214,46 +132,16 @@ export const Content = ({ quickLinks = false }) => {
                     <ResourceItem
                         title="Add popups to a React app"
                         description="Using payloads to send arbitrary data to your frontend"
-                        Image={
-                            <StaticImage
-                                alt=""
-                                placeholder="none"
-                                objectFit="contain"
-                                className="h-full"
-                                quality={100}
-                                src="../../components/Home/Slider/images/feature-flags-hog.png"
-                            />
-                        }
                         url="/tutorials/react-popups"
                     />
                     <ResourceItem
                         title="Location-based site banner"
                         description="Regional announcements or country-based alerts"
-                        Image={
-                            <StaticImage
-                                alt=""
-                                placeholder="none"
-                                objectFit="contain"
-                                className="h-full"
-                                quality={100}
-                                src="../../components/Home/Slider/images/feature-flags-hog.png"
-                            />
-                        }
                         url="/tutorials/location-based-banner"
                     />
                     <ResourceItem
                         title="Sampling with feature flags and local evaluation"
                         description="Use flags to capture a subset of events for analysis"
-                        Image={
-                            <StaticImage
-                                alt=""
-                                placeholder="none"
-                                objectFit="contain"
-                                className="h-full"
-                                quality={100}
-                                src="../../components/Home/Slider/images/feature-flags-hog.png"
-                            />
-                        }
                         url="/tutorials/track-high-volume-apis"
                     />
                 </ul>
@@ -268,7 +156,25 @@ const FeatureFlags: React.FC<FeatureFlagsProps> = ({ data }) => {
             <SEO title="Feature flags - Docs - PostHog" />
 
             <PostLayout title={'Feature flags'} hideSurvey hideSidebar>
-                <Intro />
+            <Intro
+                subheader="Getting started"
+                title="Feature flags"
+                description="Toggle features for cohorts or individuals to test the impact before rolling out to everyone."
+                buttonText="Create your first feature flag"
+                buttonLink="/docs/feature-flags/installation"
+                imageColumnClasses="max-w-96 md:-mt-8"
+                imageUrl="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Home/Slider/images/feature-flags-hog.png"
+                imageClasses=""
+            />
+
+            <AskMax 
+                quickQuestions={[
+                    'Why is there a delay in loading flags?',
+                    'How do I create a multivariate flag?',
+                    'Can I override a flag?',
+                ]}
+            />
+
                 <Content />
 
                 <div className="pt-8">

@@ -24,6 +24,27 @@ export const sourceNodes: GatsbyNode['sourceNodes'] = async ({ actions, createCo
     const menu = MenuBuilder.buildStructure(parser, {} as any)
 
     let all_endpoints = menu[menu.length - 1]['items'] // all grouped endpoints
+    const maxEndpointItems = 20
+    all_endpoints = all_endpoints.flatMap((endpoint) => {
+        if (endpoint.items.length > maxEndpointItems) {
+            const chunks = []
+            for (let i = 0; i < endpoint.items.length; i += maxEndpointItems) {
+                const next =
+                    i + maxEndpointItems < endpoint.items.length &&
+                    `${endpoint.name}-${Math.floor(i / maxEndpointItems) + 2}`
+                const name = i === 0 ? endpoint.name : `${endpoint.name}-${Math.floor(i / maxEndpointItems) + 1}`
+                const chunk = {
+                    ...endpoint,
+                    name,
+                    items: endpoint.items.slice(i, i + maxEndpointItems),
+                    next,
+                }
+                chunks.push(chunk)
+            }
+            return chunks
+        }
+        return endpoint
+    })
     all_endpoints.forEach((endpoint) => {
         const node = {
             id: createNodeId(`api_endpoint-${endpoint.name}`),
@@ -39,6 +60,7 @@ export const sourceNodes: GatsbyNode['sourceNodes'] = async ({ actions, createCo
             schema: endpoint.items.map((item) => ({ ...item, operationSpec: item.operationSpec, parent: null })),
             url: '/docs/api/' + endpoint.name.replace(/_/g, '-'),
             name: endpoint.name,
+            nextURL: endpoint.next ? '/docs/api/' + endpoint.next.replace(/_/g, '-') : null,
         }
         createNode(node)
     })
@@ -345,7 +367,7 @@ export const sourceNodes: GatsbyNode['sourceNodes'] = async ({ actions, createCo
                     handle: item.node.handle,
                 }))
                 .sort((a: MetaobjectsCollection, b: MetaobjectsCollection) =>
-                    a.handle === 'all-products' ? -1 : b.handle === 'all-products' ? 1 : 0
+                    a.handle === 'frontpage' ? -1 : b.handle === 'frontpage' ? 1 : 0
                 )
 
         collections.forEach((collection, i) => {
@@ -364,6 +386,166 @@ export const sourceNodes: GatsbyNode['sourceNodes'] = async ({ actions, createCo
 
             createNode(node)
         })
+
+        const collection = await fetch(`https://${shopifyURL}/admin/api/${shopifyAdminAPIVersion}/graphql.json`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-Shopify-Access-Token': shopifyAdminAPIAPIPassword!,
+            },
+            body: JSON.stringify({
+                query: ` {
+            collectionByHandle(handle: "frontpage") {
+              handle
+              products(first: 250) {
+                nodes {
+                  description
+                  descriptionHtml
+                  featuredMedia {
+                    preview {
+                      image {
+                        width
+                        height
+                        originalSrc
+                      }
+                    }
+                  }
+                  handle
+                  id
+                  media(first: 250) {
+                    nodes {
+                      mediaContentType
+                      preview {
+                        image {
+                          width
+                          height
+                          originalSrc
+                        }
+                      }
+                    }
+                  }
+                  metafields(first: 250) {
+                    nodes {
+                      value
+                      key
+                    }
+                  }
+                  options {
+                    shopifyId: id
+                    name
+                    values
+                  }
+                  priceRangeV2 {
+                    maxVariantPrice {
+                      amount
+                    }
+                    minVariantPrice {
+                      amount
+                    }
+                  }
+                  shopifyId: id
+                  status
+                  title
+                  tags
+                  totalInventory
+                }
+              }
+            }
+          } 
+              `,
+            }),
+        }).then((res) => res.json())
+        const variants = await fetch(`https://${shopifyURL}/admin/api/${shopifyAdminAPIVersion}/graphql.json`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-Shopify-Access-Token': shopifyAdminAPIAPIPassword!,
+            },
+            body: JSON.stringify({
+                query: ` {
+            productVariants(first: 250) {
+                nodes {
+                availableForSale
+                media(first: 250) {
+                    nodes {
+                    preview {
+                        image {
+                        width
+                        height
+                        originalSrc
+                        }
+                    }
+                    }
+                }
+                price
+                product {
+                    shopifyId: id
+                    title
+                    featuredMedia {
+                    preview {
+                        image {
+                        width
+                        height
+                        originalSrc
+                        }
+                    }
+                    }
+                }
+                selectedOptions {
+                    name
+                    value
+                }
+                shopifyId: id
+                sku
+                title
+                }
+            }
+          } 
+              `,
+            }),
+        }).then((res) => res.json())
+        const moveNodesToParent = (obj) => {
+            if (Array.isArray(obj)) {
+                return obj.map(moveNodesToParent)
+            } else if (obj && typeof obj === 'object') {
+                if (obj.nodes) {
+                    return moveNodesToParent(obj.nodes)
+                }
+                return Object.fromEntries(Object.entries(obj).map(([key, value]) => [key, moveNodesToParent(value)]))
+            }
+            return obj
+        }
+
+        const products = moveNodesToParent(collection.data.collectionByHandle.products.nodes).filter(
+            (product) => product.status === 'ACTIVE'
+        )
+        products.forEach((product) => {
+            product.variants = moveNodesToParent(
+                variants.data.productVariants.nodes.filter((variant) => variant.product.shopifyId === product.shopifyId)
+            )
+            const node = {
+                id: createNodeId(`shopify-product-${product.shopifyId}`),
+                internal: {
+                    type: 'ShopifyProduct',
+                    contentDigest: createContentDigest(product),
+                },
+                ...product,
+            }
+            createNode(node)
+        })
+        const data = {
+            handle: collection.data.collectionByHandle.handle,
+            products: products.map((product) => ({ shopifyId: product.shopifyId })),
+        }
+        const node = {
+            id: createNodeId(`shopify-collection`),
+            internal: {
+                type: 'ShopifyCollection',
+                contentDigest: createContentDigest(data),
+            },
+            ...data,
+        }
+        createNode(node)
     }
 
     const fetchSlackEmojis = async () => {
@@ -389,4 +571,69 @@ export const sourceNodes: GatsbyNode['sourceNodes'] = async ({ actions, createCo
     if (process.env.SLACK_API_KEY) {
         await fetchSlackEmojis()
     }
+    const fetchG2Reviews = async (url) => {
+        const g2Token = process.env.G2_API_KEY
+        const { data, links } = await fetch(url, {
+            headers: {
+                Authorization: `Token ${g2Token}`,
+            },
+        }).then((res) => res.json())
+        if (data?.length > 0) {
+            data.forEach((review) => {
+                const node = {
+                    id: createNodeId(`g2-review-${review.id}`),
+                    internal: {
+                        type: 'G2Review',
+                        contentDigest: createContentDigest(review),
+                    },
+                    ...review,
+                }
+                createNode(node)
+            })
+        }
+        if (links?.next) {
+            await fetchG2Reviews(links.next)
+        }
+    }
+    if (process.env.G2_API_KEY) {
+        await fetchG2Reviews('https://data.g2.com/api/v1/survey-responses?page[size]=100')
+    }
+    if (
+        process.env.CLOUDINARY_API_KEY &&
+        process.env.CLOUDINARY_API_SECRET &&
+        process.env.GATSBY_CLOUDINARY_CLOUD_NAME
+    ) {
+        const { resources } = await fetch(
+            `https://${process.env.CLOUDINARY_API_KEY}:${process.env.CLOUDINARY_API_SECRET}@api.cloudinary.com/v1_1/${process.env.GATSBY_CLOUDINARY_CLOUD_NAME}/resources/image?prefix=hogs&type=upload&max_results=500`
+        ).then((res) => res.json())
+        resources.forEach((resource) => {
+            const node = {
+                id: createNodeId(`cloudinary-image-${resource.public_id}`),
+                internal: {
+                    type: 'CloudinaryImage',
+                    contentDigest: createContentDigest(resource),
+                },
+                ...resource,
+            }
+            createNode(node)
+        })
+    }
+    const fetchPostHogDestinations = async () => {
+        const { results } = await fetch(`https://us.posthog.com/api/public_hog_function_templates`).then((res) =>
+            res.json()
+        )
+        results.forEach((destination) => {
+            const node = {
+                id: createNodeId(`posthog-destination-${destination.id}`),
+                internal: {
+                    type: 'PostHogDestination',
+                    contentDigest: createContentDigest(destination),
+                },
+                destinationId: destination.id,
+                ...destination,
+            }
+            createNode(node)
+        })
+    }
+    await fetchPostHogDestinations()
 }

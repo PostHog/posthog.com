@@ -27,11 +27,12 @@ import { SortDropdown } from 'components/Edition/Views/Default'
 import { sortOptions } from 'components/Edition/Posts'
 import { AnimatePresence, motion } from 'framer-motion'
 import Tooltip from 'components/Tooltip'
+import NotFoundPage from 'components/NotFoundPage'
 
 const Avatar = (props: { className?: string; src?: string }) => {
     return (
         <div
-            className={`overflow-hidden aspect-square rounded-full bg-white border border-light dark:border-dark ${props.className}`}
+            className={`overflow-hidden aspect-square rounded-full border border-light dark:border-dark ${props.className}`}
         >
             {props.src ? (
                 <img className="w-full object-fill" alt="" src={props.src} />
@@ -131,7 +132,7 @@ export default function ProfilePage({ params }: PageProps) {
     const [view, setView] = useState('discussions')
     const posthog = usePostHog()
     const nav = useTopicsNav()
-    const { user } = useUser()
+    const { user, getJwt } = useUser()
     const [sort, setSort] = useState(sortOptions[0].label)
     const posts = usePosts({
         params: {
@@ -146,6 +147,7 @@ export default function ProfilePage({ params }: PageProps) {
         },
     })
     const isCurrentUser = user?.profile?.id === id
+    const isModerator = user?.role?.type === 'moderator'
 
     const profileQuery = qs.stringify(
         {
@@ -180,6 +182,11 @@ export default function ProfilePage({ params }: PageProps) {
                         },
                     },
                 },
+                ...(isModerator
+                    ? {
+                          user: true,
+                      }
+                    : null),
             },
         },
         {
@@ -187,10 +194,20 @@ export default function ProfilePage({ params }: PageProps) {
         }
     )
 
-    const { data, error, mutate } = useSWR<StrapiRecord<ProfileData>>(
+    const { data, error, isLoading, mutate } = useSWR<StrapiRecord<ProfileData>>(
         `${process.env.GATSBY_SQUEAK_API_HOST}/api/profiles/${id}?${profileQuery}`,
         async (url) => {
-            const res = await fetch(url)
+            const jwt = user && (await getJwt())
+            const res = await fetch(
+                url,
+                jwt
+                    ? {
+                          headers: {
+                              Authorization: `Bearer ${jwt}`,
+                          },
+                      }
+                    : undefined
+            )
             const { data } = await res.json()
             return data
         }
@@ -213,8 +230,11 @@ export default function ProfilePage({ params }: PageProps) {
         if (!profile?.amaEnabled) setView('discussions')
     }, [profile])
 
-    if (!profile) {
+    if (!profile && isLoading) {
         return null
+    } else if (!profile && !isLoading) {
+        // if profile wasn't found after loading, show 404 page
+        return <NotFoundPage />
     }
 
     return (
@@ -234,7 +254,11 @@ export default function ProfilePage({ params }: PageProps) {
                                 <section className="">
                                     <div className="relative w-48 h-48 float-right -mt-12">
                                         <Avatar
-                                            className=" bg-gray-accent dark:gray-accent-dark"
+                                            className={`${
+                                                profile.color
+                                                    ? `bg-${profile.color}`
+                                                    : 'bg-gray-accent dark:gray-accent-dark'
+                                            }`}
                                             src={getAvatarURL(profile)}
                                         />
                                         {isTeamMember && (
@@ -430,7 +454,40 @@ const Achievement = ({ title, description, image, icon, id, mutate, profile, ...
 }
 
 const ProfileSidebar: React.FC<ProfileSidebarProps> = ({ profile, mutate }) => {
-    const { user } = useUser()
+    const { user, getJwt } = useUser()
+
+    const handleBlock = async (blockUser: boolean) => {
+        if (blockUser) {
+            if (confirm('Are you sure you want to block this user and remove all of their posts and replies?')) {
+                try {
+                    const jwt = await getJwt()
+                    await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/profile/block/${profile.id}`, {
+                        method: 'PUT',
+                        headers: {
+                            Authorization: `Bearer ${jwt}`,
+                        },
+                    })
+                } catch (err) {
+                    console.error(err)
+                }
+            } else {
+                return
+            }
+        } else {
+            try {
+                const jwt = await getJwt()
+                await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/profile/unblock/${profile.id}`, {
+                    method: 'PUT',
+                    headers: {
+                        Authorization: `Bearer ${jwt}`,
+                    },
+                })
+            } catch (err) {
+                console.error(err)
+            }
+        }
+        window.location.reload()
+    }
 
     return (
         profile && (
@@ -524,7 +581,12 @@ const ProfileSidebar: React.FC<ProfileSidebarProps> = ({ profile, mutate }) => {
                                                   .map((profile) => {
                                                       return (
                                                           <li key={profile.id} className="flex items-center space-x-2">
-                                                              <Avatar className="w-8 h-8" src={getAvatarURL(profile)} />
+                                                              <Avatar
+                                                                  className={`w-8 h-8 bg-${
+                                                                      profile.attributes.color ?? 'white'
+                                                                  }`}
+                                                                  src={getAvatarURL(profile)}
+                                                              />
                                                               <a href={`/community/profiles/${profile.id}`}>
                                                                   {profile.attributes?.firstName}{' '}
                                                                   {profile.attributes?.lastName}
@@ -540,26 +602,37 @@ const ProfileSidebar: React.FC<ProfileSidebarProps> = ({ profile, mutate }) => {
                       })
                     : null}
 
-                {user?.profile?.id === profile.id && (
+                {(user?.profile?.id === profile.id || (user?.role?.type === 'moderator' && user?.webmaster)) && (
                     <SidebarSection>
                         <Link
                             to="/community/profile/edit"
                             className="text-base text-red dark:text-yellow font-semibold"
+                            state={{ profileID: profile.id }}
                         >
                             Edit profile
                         </Link>
                     </SidebarSection>
                 )}
                 {user?.role?.type === 'moderator' && (
-                    <SidebarSection>
-                        <Link
-                            external
-                            to={`${process.env.GATSBY_SQUEAK_API_HOST}/admin/content-manager/collectionType/api::profile.profile/${profile.id}`}
-                            className="text-base text-red dark:text-yellow font-semibold"
-                        >
-                            View in Strapi
-                        </Link>
-                    </SidebarSection>
+                    <>
+                        <SidebarSection>
+                            <Link
+                                external
+                                to={`${process.env.GATSBY_SQUEAK_API_HOST}/admin/content-manager/collection-types/plugin::users-permissions.user/${profile.user?.data.id}`}
+                                className="text-base text-red dark:text-yellow font-semibold"
+                            >
+                                View in Strapi
+                            </Link>
+                        </SidebarSection>
+                        <SidebarSection>
+                            <button
+                                onClick={() => handleBlock(!profile.user?.data.attributes.blocked)}
+                                className="text-red font-bold text-base"
+                            >
+                                {profile.user?.data.attributes.blocked ? 'Unblock user' : 'Block user'}
+                            </button>
+                        </SidebarSection>
+                    </>
                 )}
             </>
         )

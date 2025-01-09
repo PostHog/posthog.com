@@ -32,7 +32,7 @@ You can read more about [`posthog-js` configurations here](/docs/integrate/clien
 
 When surveys are enabled, `posthog-js` will fetch a `survey.js` script from the PostHog server. It is not included in the default `posthog-js` installation to minimize the default bundle size.
 
-Depending on your content security policy, this script may be blocked. If you have a `default-src`, `script-src`, `script-src-elem`, or `connect-src` directive in your CSP, you may need to ensure that PostHog doamins are permitted (see [CSP documentation](/docs/advanced/content-security-policy)).
+Depending on your content security policy, this script may be blocked. If you have a `default-src`, `script-src`, `script-src-elem`, or `connect-src` directive in your CSP, you may need to ensure that PostHog domains are permitted (see [CSP documentation](/docs/advanced/content-security-policy)).
 
 If PostHog is being blocked by your content security policy, you should see an error message in your developer console with more details.
 
@@ -55,14 +55,17 @@ You can call `getActiveMatchingSurveys` in your browser console to see which sur
 posthog.getActiveMatchingSurveys(surveys => console.log(surveys))
 ```
 
-### How are users responding multiple times to the same survey, despite setting wait period?
+### I set a survey activate based on an event, why does it show up to users who haven't sent that event?
 
-The survey wait period is set locally on the client. This means, if they clear cookies / local storage, or change browsers, the same user can see the survey multiple times.
+Check your `posthog-js` version. If its lower than `v1.143.0`, please upgrade your installation of `posthog-js` to the latest to support event based surveys.
 
-Whenever someone responds to or dismisses a survey, we add a person property (if you are capturing person profiles). For now, you can use this property to exclude users from targeting by adding these properties to your existing conditions, like so:
+The event must be captured on the user's session by the `posthog-js` SDK.
 
-![Survey user targeting](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/docs/surveys/user-targeting.png)
+Backend events aren't supported yet, upvote this [issue](https://github.com/PostHog/posthog/issues/25433) if that would be useful for you.
 
+### I set a survey to be activated based on an action. Why does it shows up to users who haven't performed that action?
+
+Check your `posthog-js` version.  If its lower than `v1.151.0`, please upgrade your installation of `posthog-js` to the latest to support action based surveys.
 
 ### Why am I getting a feature flags error on my survey?
 

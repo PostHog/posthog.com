@@ -1,0 +1,364 @@
+---
+title: 'The best UXCam alternatives & competitors, compared'
+date: 2024-07-25
+author:
+  - lior-neu-ner
+rootpage: /blog
+featuredImage: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/posthog-alternatives/posthog-alternatives.jpeg
+featuredImageType: full
+category: General
+tags:
+  - Comparisons
+---
+
+import { ComparisonTable } from 'components/ComparisonTable'
+import { ComparisonRow } from 'components/ComparisonTable/row'
+
+## 1. PostHog
+
+- **Founded:** 2020
+- **Similar to:** Fullstory, LogRocket
+- **Typical users:** Engineers and product teams
+
+![PostHog](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/best-pendo-alternatives/posthog.png)
+
+### What is PostHog?
+
+[PostHog](/) (that's us 👋) is an open-source platform that combines [product analytics](/product-analytics), [session replay](/session-replay), [A/B testing](/experiments), and [feature flags](/feature-flags). It also has a [data warehouse for startups](/docs/data-warehouse) and a [customer data platform (CDP)](/docs/cdp). This means it's not only an alternative to UXCam, but also tools like [Statsig](/blog/posthog-vs-statsig) and [LaunchDarkly](/blog/posthog-vs-launchdarkly).
+
+By combining all these tools into one platform, it eliminates the need for stitching together integrations between third-party tools, and makes it easier for engineers to work with data. PostHog is popular with engineering-led companies, like AI startup [ElevenLabs](/customers/elevenlabs) and [carVertical](/feature-flags), which use PostHog for both session replays and analytics.
+
+#### Key features
+
+- 📈 **Product analytics:** Custom trends, funnels, user paths, retention analysis, and segment user cohorts. Also, direct [SQL querying](/docs/product-analytics/sql) for power users.
+
+- 📺 **Session replays:** View exactly how users are using your app. Includes event timelines, console logs, network activity, and 90-day data retention.
+
+- 🧪 **A/B tests:** Experiment in your app with up to nine test variations and track impact on primary and secondary metrics. Auto-calculate test duration, sample size, and statistical significance.
+
+- 🚩 **Feature flags:** Rollout features safely with [local evaluation](/docs/feature-flags/local-evaluation) (for faster performance), JSON payloads, and instant rollbacks.
+
+- 🏠 **Data warehouse:** Combine data from all your different sources for easy analysis and comprehensive insights.
+
+### How does PostHog compare to UXCam?
+
+UXCam is solely focused on mobile apps. PostHog, however, supports both mobile and web apps, with SDKs for all popular web and mobile frameworks, including React Native.
+
+<ComparisonTable column1="PostHog" column2="UXCam">
+  <ComparisonRow column1={true} column2={true} feature="Product analytics" description="Custom trends, funnels, paths, and retention analysis" />
+  <ComparisonRow column1={true} column2={true} feature="Autocapture" description="Capture events without manual instrumentation" />
+  <ComparisonRow column1={true} column2={true} feature="Funnels and journey maps" description="Measure conversion and track the paths users take" />
+  <ComparisonRow column1={true} column2={false} feature="Group analytics" description="Track metrics at the account or company level" />
+  <ComparisonRow column1={true} column2={true} feature="User segmenting" description="Analyze and filter based on user properties and behaviors" />
+  <ComparisonRow column1={true} column2={true} feature="Session replay" description="Watch real users on your mobile apps; discover friction points" />
+  <ComparisonRow column1={false} column2={true} feature="Heatmaps" description="See where users tap and interact" />
+  <ComparisonRow column1={true} column2={true} feature="Integrations" description="Import from and export to external services" />
+  <ComparisonRow column1={true} column2={false} feature="Transparent pricing" description="Get pricing immediately without talking to sales" />
+  <ComparisonRow column1={true} column2={false} feature="Open source" description="Audit code, contribute to roadmap, and build integrations" />
+</ComparisonTable>
+
+### Why do companies use PostHog?
+
+According to [G2 reviews](https://www.g2.com/products/posthog/reviews), companies use PostHog because:
+
+1. **It's many tools in one:** PostHog can replace UXCam (mobile analytics and session replay), [Mixpanel](/blog/posthog-vs-mixpanel) (full-stack analytics), and [Statsig](/blog/posthog-vs-statsig) (A/B testing and feature flags). This simplifies workflows and ensures all product data is in one place.
+
+2. **They need a complete picture of users:** PostHog includes every tool necessary to understand users and build better products. This means creating funnels to track conversion, watching replays to see where users get stuck, and testing solutions with A/B tests.
+
+3. **Pricing is transparent and scalable:** Reviewers appreciate how PostHog's pricing scales as they grow. There's a [generous free tier](/pricing). Companies eligible for [PostHog for Startups](/startups) also get $50k in additional free credits.
+
+> #### Bottom line
+> 
+> For teams looking for all the tools they need to improve their products, PostHog makes for a great alternative. This is especially true for startups and scaleups thanks to it having a generous free tier.
+
+<br />
+
+## 2. LogRocket
+
+- **Founded:** 2016
+- **Similar to:** PostHog, Smartlook
+- **Typical users:** Product managers, engineers, support teams
+
+![LogRocket](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/best-amplitude-alternatives/logrocket.webp)
+
+### What is LogRocket?
+
+[LogRocket](/blog/posthog-vs-logrocket) is a product experience platform with product analytics, error tracking, session replay, and performance monitoring. It focuses on helping product managers, engineers, and support teams identify and fix issues.
+
+#### Key features
+
+- 📈 **Product analytics:** Capture usage data and visualize it with conversion funnels, path analysis, and retention charts.
+
+- 📺 **Session replays:**  View exactly what users are doing on your app. See the screens they visit, places they tap, as well as console logs, network logs, and errors.
+
+- 🔥 **Heatmaps:** See what users are tapping on, where they are spending their time, and how far they scroll.
+
+- 🚨 **Error tracking:** Identify and triage the most impactful issues with errors and stack traces.
+
+- 🏎️ **Performance monitoring:** Monitor app performance such as network speed, app start time, and CPU and memory usage.
+
+### How does LogRocket compare to UXCam?
+
+LogRocket supports all the features UXCam does and more – like performance monitoring and error tracking.
+
+<ComparisonTable column1="LogRocket" column2="UXCam">
+  <ComparisonRow column1={true} column2={true} feature="Product analytics" description="Custom trends, funnels, paths, and retention analysis" />
+  <ComparisonRow column1={true} column2={true} feature="Autocapture" description="Capture events without manual instrumentation" />
+  <ComparisonRow column1={true} column2={true} feature="Funnels and journey maps" description="Measure conversion and track the paths users take" />
+  <ComparisonRow column1={false} column2={false} feature="Group analytics" description="Track metrics at the account or company level" />
+  <ComparisonRow column1={true} column2={true} feature="User segmenting" description="Analyze and filter based on user properties and behaviors" />
+  <ComparisonRow column1={true} column2={true} feature="Session replay" description="Watch real users on your mobile apps; discover friction points" />
+  <ComparisonRow column1={true} column2={true} feature="Heatmaps" description="See where users click and interact" />
+  <ComparisonRow column1={true} column2={true} feature="Integrations" description="Import from and export to external services" />
+  <ComparisonRow column1={true} column2={false} feature="Transparent pricing" description="Get pricing immediately without talking to sales" />
+  <ComparisonRow column1={false} column2={false} feature="Open source" description="Audit code, contribute to roadmap, and build integrations" />
+</ComparisonTable>
+
+### Why do companies use LogRocket?
+
+The reviewers of [G2](https://www.g2.com/products/logrocket/reviews) use LogRocket for these reasons:
+
+1. **Identifying problems:** LogRocket's combination of error tracking, performance monitoring, and session replay makes it uniquely powerful at finding bugs and issues.
+
+2. **Improves user experience:** LogRocket helps reviews fix issues with their apps. Reviewers find it provides all the tools to improve their user experience, mostly by solving what's wrong rather than feedback and planning.
+
+3. **High usability:** LogRocket provides a lot of functionality out of the box. It captures the details users need, provides useful visualizations, and automatically triages some issues.
+
+> #### Bottom line
+>
+> LogRocket is great choice for teams whose top priority is identifying and mitigating issues. Watch out for their session-based pricing though, as this can get expensive if you plan to primarily use it for product analytics.
+
+<br />
+
+## 3. Smartlook
+
+- **Founded:** 2016
+- **Most similar to:** FullStory, LogRocket
+- **Typical users:** Engineers, business analysts, product managers
+
+![Smartlook](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/best-fullstory-alternatives/smartlook.png)
+
+### What is Smartlook?
+ 
+Smartlook combines session replays, product analytics, visualizations, and crash reports to generate an overall understanding of user experience. It focuses more on mobile apps with specific tools like mobile heatmaps, native rendering, and wireframe mode.
+
+#### Key features
+
+- 📹 **Session recordings:** Understand how users are actually using your app and where issues occur.
+
+- 📊 **Event-based analytics:** See how often users behave in the ways important to you.
+
+- 🔥 **Heatmaps:** Figure out the most popular parts of a page users click on and scroll to.
+
+- 🛣️ **Funnels and paths:** See how users move through your app with custom visuals for key flows.
+
+- 📉 **Crash reports:** Learn what happens before a crash without complex debugging or reproduction.
+
+### How does Smartlook compare to UXCam?
+
+The feature sets of Smartlook and UXCam are nearly identical. The difference is that Smartlook adds crash reports.
+
+<ComparisonTable column1="Smartlook" column2="FullStory">
+  <ComparisonRow column1={true} column2={true} feature="Product analytics" description="Custom trends, funnels, paths, and retention analysis" />
+  <ComparisonRow column1={true} column2={true} feature="Autocapture" description="Capture events without manual instrumentation" />
+  <ComparisonRow column1={true} column2={true} feature="Funnels and journey maps" description="Measure conversion and track the paths users take" />
+  <ComparisonRow column1={false} column2={false} feature="Group analytics" description="Track metrics at the account or company level" />
+  <ComparisonRow column1={true} column2={true} feature="User segmenting" description="Analyze and filter based on user properties and behaviors" />
+  <ComparisonRow column1={true} column2={true} feature="Session replay" description="Watch real users on your mobile apps; discover friction points" />
+  <ComparisonRow column1={true} column2={true} feature="Heatmaps" description="See where users click and interact" />
+  <ComparisonRow column1={true} column2={true} feature="Integrations" description="Import from and export to external services" />
+  <ComparisonRow column1={true} column2={false} feature="Transparent pricing" description="Get pricing immediately without talking to sales" />
+  <ComparisonRow column1={false} column2={false} feature="Open source" description="Audit code, contribute to roadmap, and build integrations" />
+</ComparisonTable>
+
+### Why do companies use Smartlook?
+
+According to G2 reviewers, Smartlook users benefit from:
+
+1. **The integration between replays and events:** Smartlook connects event-based analytics and sessions. This enables users to dive deeper into user behavior than a single tool provides.
+
+2. **Understanding visitor pain points:** The analytics and visualizations make it easy to understand where users are running into trouble. Reviews use this to improve the user experience and conversion in these areas.
+
+3. **Real user monitoring:** Smartlook shows how real users are using your app and monitors the quality of their experiences. Reviewers use it to figure out what areas are confusing or used improperly.
+
+> #### Bottom line
+>  
+> Smartlook's combination of analytics, session replay, and crash reports make it a good choice for teams who want a full picture of their user experience.
+
+<br />
+
+
+## 4. FullStory
+
+- **Founded:** 2012
+- **Similar to:** PostHog, Logrocket
+- **Typical users:** Product managers, customer success, and support
+
+![FullStory](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/best-logrocket-alternatives/fullstory.png)
+
+### What is FullStory?
+
+[FullStory](/blog/best-fullstory-alternatives) describes itself as behavioral data analytics platform, which is code for session replay and mobile app analytics, with a side of product analytics. Like LogRocket and PostHog, it supports event autocapture, so you don't have to manually code every event you want to capture.
+
+#### Key features
+
+- 📈 **Product analytics:** Capture usage data and visualize it with conversion funnels, path analysis, and retention charts.
+
+- 📺 **Session replays:**  View exactly what users are doing on your app. See the screens they visit, places they tap, as well as console logs, network logs, and errors.
+
+- 🔥 **Heatmaps:** See what users are tapping on, where they are spending their time, and how far they scroll.
+
+### How does FullStory compare to UXCam?
+
+Fullstory is the most similar alternative to UXCam. It provides the same capabilities that UXCam does without any of the extra features that other alternatives on this list do – like A/B testing or error monitoring.
+
+<ComparisonTable column1="FullStory" column2="UXCam">
+   <ComparisonRow column1={true} column2={true} feature="Product analytics" description="Custom trends, funnels, paths, and retention analysis" />
+  <ComparisonRow column1={true} column2={true} feature="Autocapture" description="Capture events without manual instrumentation" />
+  <ComparisonRow column1={true} column2={true} feature="Funnels and journey maps" description="Measure conversion and track the paths users take" />
+  <ComparisonRow column1={false} column2={false} feature="Group analytics" description="Track metrics at the account or company level" />
+  <ComparisonRow column1={true} column2={true} feature="User segmenting" description="Analyze and filter based on user properties and behaviors" />
+  <ComparisonRow column1={true} column2={true} feature="Session replay" description="Watch real users on your mobile apps; discover friction points" />
+  <ComparisonRow column1={true} column2={true} feature="Heatmaps" description="See where users click and interact" />
+  <ComparisonRow column1={true} column2={true} feature="Integrations" description="Import from and export to external services" />
+  <ComparisonRow column1={false} column2={false} feature="Transparent pricing" description="Get pricing immediately without talking to sales" />
+  <ComparisonRow column1={false} column2={false} feature="Open source" description="Audit code, contribute to roadmap, and build integrations" />
+</ComparisonTable>
+
+### Why do companies use FullStory?
+
+According to reviews on G2, companies use FullStory for:
+
+1. **Easier collaboration:** As an accessible tool for non-technical users, FullStory facilitates collaboration between product, UX, and engineering teams by allowing all teams to access useful, reliable data.
+
+2. **Viewing user issues:** Support teams use FullStory to replay sessions to understand user hard-to-replicate problems, and identify bugs that need fixing.
+
+3. **Improving conversion:** FullStory users like to combine funnel insights with replays of user sessions to understand pain points and improve conversion.
+
+> #### Bottom line
+>  
+> FullStory is a mature product with many of the same features as UXCam. If you're struggling to decide between the two, speak to both of their sales teams to find out who can give you the best price.
+
+<br />
+
+
+## 5. Microsoft Clarity
+
+- **Founded:** 2020
+- **Most similar to:** Smartlook
+- **Typical users:** Marketing and content teams
+
+![clarity](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/hotjar-alternatives/microsoft-clarity.png)
+
+### What is Microsoft Clarity?
+
+[Microsoft Clarity](/blog/best-microsoft-clarity-alternatives) is a 100% free session replay tool that supports basic replay features and heatmaps. It also records rage taps and dead taps, and integrates with [Google Analytics 4](/blog/posthog-vs-ga4), so you can view your GA data in Clarity.
+
+#### Key features
+
+- 📺 **Session replays:**  View exactly what users are doing on your app
+
+- 🔥 **Heatmaps:** See what users are tapping on, where they are spending their time, and how far they scroll.
+
+- 📱 **Scrollmaps:** See how far users scroll and where they dwell
+
+- 😡 **Frustration signals:** Detect rage and dead clicks
+
+### How does Clarity compare to UXCam?
+
+Clarity covers most of the same features as UXCam with the exclusion of product analytics. It's also free, of course, though it only retains data for 30 days.
+
+<ComparisonTable column1="Clarity" column2="Hotjar">
+   <ComparisonRow column1={false} column2={true} feature="Product analytics" description="Custom trends, funnels, paths, and retention analysis" />
+  <ComparisonRow column1={false} column2={true} feature="Autocapture" description="Capture events without manual instrumentation" />
+  <ComparisonRow column1={false} column2={true} feature="Funnels and journey maps" description="Measure conversion and track the paths users take" />
+  <ComparisonRow column1={false} column2={false} feature="Group analytics" description="Track metrics at the account or company level" />
+  <ComparisonRow column1={true} column2={true} feature="User segmenting" description="Analyze and filter based on user properties and behaviors" />
+  <ComparisonRow column1={true} column2={true} feature="Session replay" description="Watch real users on your mobile apps; discover friction points" />
+  <ComparisonRow column1={true} column2={true} feature="Heatmaps" description="See where users click and interact" />
+  <ComparisonRow column1={true} column2={true} feature="Integrations" description="Import from and export to external services" />
+  <ComparisonRow column1={true} column2={false} feature="Transparent pricing" description="Get pricing immediately without talking to sales" />
+  <ComparisonRow column1={false} column2={false} feature="Open source" description="Audit code, contribute to roadmap, and build integrations" />
+</ComparisonTable>
+
+### Why do companies use Microsoft Clarity?
+
+According to [reviews on G2](https://www.g2.com/products/microsoft-microsoft-clarity/reviews) and [Capterra](https://www.capterra.com/p/236349/Microsoft-Clarity/), it's because:
+
+1. **It's easy to set up and use:** Setting up Clarity doesn't require much technical knowledge and users mostly like the simple user interface.
+
+2. **It helps uncover how users navigate:** Clarity users are mostly using it to understand how people navigate their app and identify opportunities for improvement.
+
+3. **It's free:** The short 30-day retention limit and lack of product analytics are easy to forgive when it's free.
+
+> #### Bottom line
+> 
+> If you only care about session replay, Clarity is the obvious choice - especially if you're already using Google Analytics.
+
+<br />
+
+## 6. Contentsquare
+
+- **Founded:** 2012
+- **Most similar to:** Fullstory, Smartlook 
+- **Typical users:** Product managers, ecommerce teams, and marketers
+
+### What is Contentsquare?
+
+Contentsquare is an analytics platform that combines heatmaps, customer journey analysis, and frustration scoring to help find and fix issues and friction points.
+
+#### Key features
+
+- 🔥 **Zone-based heatmaps:** Visualize how well each page element is performing based on metrics like attractiveness, engagement, and click rate.
+
+- 🗺️ **Journey analysis:** See how users move through your app by screen from start to finish and zero in on where drop-offs happen.
+
+- 📹 **Session recordings:** Understand how users are actually using your app and where issues occur.
+
+- 📉 **Crash reports:** Learn what happens before a crash without complex debugging or reproduction.
+
+### How does Contentsquare compare to UXCam?
+
+Contentsquare includes all of UXCam's features and more, like crash reports and AI-powered analytics reccomendations. It caters mostly to large enterprises, though. UXCam's user-friendly interface may appeal to smaller and mid-size companies.
+
+<ComparisonTable column1="Contentsquare" column2="UXCam">
+   <ComparisonRow column1={true} column2={true} feature="Product analytics" description="Custom trends, funnels, paths, and retention analysis" />
+  <ComparisonRow column1={true} column2={true} feature="Autocapture" description="Capture events without manual instrumentation" />
+  <ComparisonRow column1={true} column2={true} feature="Funnels and journey maps" description="Measure conversion and track the paths users take" />
+  <ComparisonRow column1={true} column2={false} feature="Group analytics" description="Track metrics at the account or company level" />
+  <ComparisonRow column1={true} column2={true} feature="User segmenting" description="Analyze and filter based on user properties and behaviors" />
+  <ComparisonRow column1={true} column2={true} feature="Session replay" description="Watch real users on your mobile apps; discover friction points" />
+  <ComparisonRow column1={true} column2={true} feature="Heatmaps" description="See where users click and interact" />
+  <ComparisonRow column1={true} column2={true} feature="Integrations" description="Import from and export to external services" />
+  <ComparisonRow column1={false} column2={false} feature="Transparent pricing" description="Get pricing immediately without talking to sales" />
+  <ComparisonRow column1={false} column2={false} feature="Open source" description="Audit code, contribute to roadmap, and build integrations" />
+</ComparisonTable>
+
+### Why do companies use Contentsquare?
+
+According to G2 reviews, people like Contentsquare because:
+
+1. **Data visualization and analysis:** Users like that Contentsquare makes it easy to visualize and analyze large data sets. Advanced features make it easier to identify and fix problems big and small.
+
+2. **Improve your UI and UX:** Contentsquare makes it easy to understand the impact of various design elements on a screen. This helps developers understand the impact of elements on conversion rate, revenue, and user journeys.
+
+3. **Detailed session replays:** Users appreciate being able to match quantitative data with qualitative data, giving them a better understanding of how best to solve problems.
+
+> #### Bottom line
+> 
+> From data visualizations, to behavior analysis, and detailed session replays, Contentsquare has a lot to offer, especially for larger companies. UXCam has a more user-friendly interface, which might appeal to smaller organizations.
+
+<br />
+
+## Is PostHog right for you?
+
+Here's the (short) sales pitch.
+
+We're biased, obviously, but we think PostHog is the perfect UXCam replacement if:
+
+- You value transparency. We're open source and open core.
+- You want all the tools you need to build a better product like product analytics, session replay, A/B testing, and feature flags.
+- You want to try before you buy. We're self-serve with a [generous free tier](/pricing).
+
+Check out [our product pages](/feature-flags) and [read our docs](/docs) to learn more.

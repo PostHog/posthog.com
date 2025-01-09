@@ -1,0 +1,92 @@
+PostHog's backend SDKs and API capture identified events by default. To capture anonymous events, set the `$process_person_profile` property to `false`:
+
+<MultiLanguage>
+
+```node
+client.capture({
+    distinctId: 'distinct_id_of_the_user',
+    event: 'your_event_name',
+    properties: {
+        $process_person_profile: false,
+    },
+})
+```
+
+```python
+posthog.capture(
+    "distinct_id_of_the_user", 
+    "your_event_name", 
+    {
+        "$process_person_profile": false
+    }
+)
+```
+
+```php
+PostHog::capture(array(
+  'distinctId' => 'distinct_id_of_the_user',
+  'event' => 'your_event_name',
+  'properties' => array(
+    '$process_person_profile' => false
+  )
+));
+```
+
+```ruby
+posthog.capture({
+    distinct_id: 'distinct_id_of_the_user',
+    event: 'your_event_name',
+    properties: {
+        $process_person_profile: false
+    }
+})
+```
+
+```go
+client.Enqueue(posthog.Capture{
+    DistinctId: "distinct_id_of_the_user",
+    Event:      "your_event_name",
+    Properties: posthog.NewProperties().
+      Set("$process_person_profile", false),
+})
+```
+
+```java
+posthog.capture("distinct_id_of_the_user", "your_event_name", new HashMap<String, Object>() {
+  {
+    put("$process_person_profile", false);
+  }
+});
+```
+
+```rust
+let mut event = Event::new("your_event_name", "distinct_id_of_the_user");
+
+event.insert_prop("$process_person_profile", false).unwrap();
+
+client.capture(event).unwrap();
+```
+
+```elixir
+Posthog.capture("your_event_name", %{
+  distinct_id: distinct_id_of_the_user,
+  properties: %{
+    "$process_person_profile": false
+  }
+})
+```
+
+```bash
+curl -v -L --header "Content-Type: application/json" -d '{
+    "api_key": "<ph_project_api_key>",
+    "properties": {
+        "$process_person_profile": false
+    },
+    "distinct_id": "distinct_id_of_the_user",
+    "event": "your_event_name"
+}' <ph_client_api_host>/capture/
+```
+
+</MultiLanguage>
+
+

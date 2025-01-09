@@ -41,6 +41,8 @@ export const LayoutProvider = ({ children, ...other }: IProps) => {
         compact || (typeof window !== 'undefined' && localStorage.getItem('full-width-content') === 'true')
     )
     const [enterpriseMode, setEnterpriseMode] = useState(false)
+    const [theoMode, setTheoMode] = useState(false)
+    const [post, setPost] = useState<boolean>(false)
     const parent =
         other.parent ??
         menu.find(({ children, url }) => {
@@ -139,6 +141,16 @@ export const LayoutProvider = ({ children, ...other }: IProps) => {
         if (pathname === '/' && search.includes('synergy=true')) {
             setEnterpriseMode(true)
         }
+        if (
+            ['/blog/', '/founders/', '/product-engineers/', '/newsletter/'].some((prefix) =>
+                pathname.startsWith(prefix)
+            )
+        ) {
+            setPost(true)
+        } else {
+            setPost(false)
+            setTheoMode(false)
+        }
     }, [pathname])
 
     return (
@@ -153,6 +165,9 @@ export const LayoutProvider = ({ children, ...other }: IProps) => {
                 compact,
                 enterpriseMode,
                 setEnterpriseMode,
+                theoMode,
+                setTheoMode,
+                post,
             }}
         >
             {children}

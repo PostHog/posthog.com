@@ -146,10 +146,12 @@ function App() {
 export default App;
 ```
 
-These are basic implementations of React feature flags setup. From here, you can set up [A/B tests](/ab-testing), a [public beta program](/tutorials/public-beta-program), or [canary releases](/tutorials/canary-release).
+These are basic implementations of React feature flags setup. From here, you can set up [A/B tests](/experiments), a [public beta program](/tutorials/public-beta-program), or [canary releases](/tutorials/canary-release).
 
 ## Further reading
 
 - [Testing frontend feature flags with React, Jest, and PostHog](/tutorials/test-frontend-feature-flags)
 - [How to add popups to your React app with feature flags](/tutorials/react-popups)
 - [How to set up analytics in React](/tutorials/react-analytics)
+
+<NewsletterForm />

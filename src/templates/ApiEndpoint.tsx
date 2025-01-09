@@ -17,6 +17,8 @@ import { MDXRenderer } from 'gatsby-plugin-mdx'
 import { shortcodes } from '../mdxGlobalComponents'
 import { MdxCodeBlock } from 'components/CodeBlock'
 import { InlineCode } from 'components/InlineCode'
+import { docsMenu } from '../navs'
+import { CallToAction } from 'components/CallToAction'
 
 const mapVerbsColor = {
     get: 'blue',
@@ -371,7 +373,7 @@ curl ${item.httpVerb === 'delete' ? ' -X DELETE ' : item.httpVerb == 'patch' ? '
                 item.httpVerb === 'post' ? "\n    -H 'Content-Type: application/json'" : ''
             }\\
     -H "Authorization: Bearer $POSTHOG_PERSONAL_API_KEY" \\
-    https://app.posthog.com${path}${params.map((item) => `\\\n\t-d ${item[0]}=${JSON.stringify(item[1])}`)}
+    <ph_app_host>${path}${params.map((item) => `\\\n\t-d ${item[0]}=${JSON.stringify(item[1])}`)}
             `,
         },
         {
@@ -381,7 +383,7 @@ curl ${item.httpVerb === 'delete' ? ' -X DELETE ' : item.httpVerb == 'patch' ? '
 api_key = "[your personal api key]"
 project_id = "[your project id]"
 response = requests.${item.httpVerb}(
-    "https://app.posthog.com${item.pathName.replace('{id}', `{${object}_id}`)}".format(
+    "<ph_app_host>${item.pathName.replace('{id}', `{${object}_id}`)}".format(
         project_id=project_id${item.pathName.includes('{id}') ? `,\n\t\t${object}_id="the ${object} id"` : ''}${
                 additionalPathParams.length > 0
                     ? additionalPathParams.map(
@@ -491,6 +493,7 @@ export default function ApiEndpoint({ data, pageContext: { menu, breadcrumb, bre
         allMdx,
     } = data
     const name = humanReadableName(data.data.name)
+    const nextURL = data.data.nextURL
     const paths = {}
     const components = {
         inlineCode: InlineCode,
@@ -522,7 +525,7 @@ export default function ApiEndpoint({ data, pageContext: { menu, breadcrumb, bre
     }, [])
 
     return (
-        <Layout>
+        <Layout parent={docsMenu} activeInternalMenu={docsMenu.children.find(({ name }) => name === 'Product OS')}>
             <SEO title={`${name} API Reference - PostHog`} />
             <PostLayout
                 title={name}
@@ -621,6 +624,12 @@ export default function ApiEndpoint({ data, pageContext: { menu, breadcrumb, bre
                         </div>
                     )
                 })}
+
+                {nextURL && (
+                    <CallToAction className="mt-8" to={nextURL}>
+                        Next page →
+                    </CallToAction>
+                )}
             </PostLayout>
         </Layout>
     )
@@ -645,6 +654,7 @@ export const query = graphql`
             items
             name
             url
+            nextURL
         }
         apiComponents: apiComponents {
             components

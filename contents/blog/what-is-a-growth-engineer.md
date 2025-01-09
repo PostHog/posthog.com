@@ -87,7 +87,7 @@ So what do growth engineers apply their skills to? We already covered that they 
 
 - Developing a growth strategy, experiment framework, and measurement for both.
 - Doing SEO optimization on the marketing site. Building landing pages. Optimizing the signup funnels.
-- [Running A/B tests](/product-engineers/how-to-do-ab-testing) on specific parts of the signup and activation funnel. Trying to improve the conversion rate and time to value.
+- [Running A/B tests](/product-engineers/how-to-do-ab-testing) on specific parts of the signup and [activation funnel](/product-engineers/activation-metrics). Trying to improve the conversion rate and time to value.
 - Setting up in-app and push notification messaging systems. Building tools and systems for better product onboarding.
 - Developing features to access new markets such as localization and support for new types of payments.
 
@@ -126,7 +126,7 @@ Growth engineers help your overall business by helping all products grow faster.
 
 We've seen this from our growth team. Building cross-product features, like billing, has improved our overall business and user experience. These features don't fit into a specific product team's responsibility and would be missed out on if growth engineers didn't exist.
 
-Growth engineers likely won't help you find traction, they need products to connect and optimize to thrive. Once you have traction, it might be the right time to hire a growth engineer to fuel rapid growth.
+Growth engineers likely won't help you find traction, they need products to connect and optimize to thrive. Once you have traction, it might be the right time to hire a [growth engineer](/newsletter/think-like-a-growth-engineer) to fuel rapid growth.
 
 From our experience, we'd recommend the technical and entreprenuerial growth engineer, this often arises in former founders. Later-stage teams often find success with larger growth teams, and more marketing-focused roles, but we haven't made it that far yet. 
 

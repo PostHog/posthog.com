@@ -3,21 +3,45 @@ import Tooltip from 'components/Tooltip'
 import { GatsbyImage, getImage } from 'gatsby-plugin-image'
 import React from 'react'
 import { IContributor } from './types'
+import { Image, Transformation } from 'cloudinary-react'
+import CloudinaryImage from 'components/CloudinaryImage'
+
+const isCloudinaryImage = (url: string): boolean => {
+    const cloudinaryUrlPattern = new RegExp(`https://res.cloudinary.com/${process.env.GATSBY_CLOUDINARY_CLOUD_NAME}/`)
+    return cloudinaryUrlPattern.test(url)
+}
+
+const getCloudinaryPublicId = (url: string): string | null => {
+    const cloudinaryUrlPattern = /https:\/\/res\.cloudinary\.com\/[^/]+\/(?:image|video)\/upload\/(?:v\d+\/)?([^/.]+)/
+    const match = url.match(cloudinaryUrlPattern)
+    return match ? match[1] : null
+}
 
 export const ContributorImageSmall = ({ image, name, className = '', imgClassName = '' }) => {
     const gatsbyImage = image && getImage(image)
+    const cloudinaryPublicId = typeof image === 'string' && isCloudinaryImage(image) && getCloudinaryPublicId(image)
     return (
         <div
             className={`w-[32px] h-[32px] relative rounded-full overflow-hidden border-2 border-tan dark:border-primary transition-all ${className}`}
         >
             {typeof image === 'string' ? (
-                <img className={`rounded-full bg-gray-accent dark:bg-gray-accent-dark ${imgClassName}`} src={image} />
+                cloudinaryPublicId ? (
+                    <Image
+                        className={`rounded-full ${imgClassName}`}
+                        publicId={cloudinaryPublicId}
+                        cloudName={process.env.GATSBY_CLOUDINARY_CLOUD_NAME}
+                    >
+                        <Transformation width="50" crop="scale" />
+                    </Image>
+                ) : (
+                    <img className={`rounded-full ${imgClassName}`} src={image} />
+                )
             ) : gatsbyImage ? (
                 <GatsbyImage
                     imgClassName={`rounded-full ${imgClassName}`}
                     image={gatsbyImage}
                     alt={name}
-                    className="bg-gray-accent dark:bg-gray-accent-dark"
+                    className=""
                 />
             ) : (
                 <svg width="38" height="38" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -35,14 +59,32 @@ export const ContributorImageSmall = ({ image, name, className = '', imgClassNam
     )
 }
 
-export const ContributorImage = ({ image, name, className = '', imgClassName = '' }) => {
+export const ContributorImage = ({ image, name, compact, rounded }) => {
     const gatsbyImage = image && getImage(image)
     return (
-        <figure className="m-0 -mt-8 p-0 absolute right-0 bottom-0">
+        <figure
+            className={`${
+                compact
+                    ? `flex-shrink-0 relative size-12 ${rounded ? '' : 'self-end'}`
+                    : 'm-0 -mt-8 p-0 absolute right-0 bottom-0 rounded-br overflow-hidden [line-height:0]'
+            } ${
+                rounded
+                    ? `rounded-full overflow-hidden border-2 border-tan dark:border-primary ${compact ? 'mr-1' : ''}`
+                    : ''
+            }`}
+        >
             {typeof image === 'string' ? (
-                <img className="w-24 h-24" src={image} />
+                <CloudinaryImage
+                    width={200}
+                    className={compact ? 'absolute w-full h-full object-cover' : 'w-24 h-24'}
+                    src={image}
+                />
             ) : gatsbyImage ? (
-                <GatsbyImage image={gatsbyImage} alt={name} className="w-24 h-24" />
+                <GatsbyImage
+                    image={gatsbyImage}
+                    alt={name}
+                    className={compact ? 'absolute w-full h-full object-cover' : 'w-24 h-24'}
+                />
             ) : (
                 ''
             )}
@@ -77,26 +119,37 @@ export const Contributor = ({
     state,
     text = false,
     role,
-}: IContributor & { text?: boolean; url?: string }) => {
+    color,
+    compact = false,
+    roundedImage = false,
+}: IContributor & { text?: boolean; url?: string; compact?: boolean; roundedImage?: boolean; color?: string }) => {
     const Container = url ? Link : 'div'
     return (
         <Container
             {...(url ? { to: url, state } : {})}
-            className="flex bg-accent dark:bg-accent-dark border border-light dark:border-dark md:mx-4 rounded relative hover:-translate-y-0.5 active:translate-y-0 hover:transition-all hover:border-b-[4px] active:border-b-1 active:top-[2px] justify-between text-primary dark:text-primary-dark hover:text-primary dark:hover:text-primary-dark"
+            className={`${compact ? 'overflow-hidden' : ''} flex bg-${color ? color : 'accent'} dark:bg-${
+                color ? color : 'accent-dark'
+            } border border-light dark:border-dark md:mx-4 rounded relative hover:-translate-y-0.5 active:translate-y-0 hover:transition-all hover:border-b-[4px] active:border-b-1 active:top-[2px] justify-between text-primary dark:text-primary-dark hover:text-primary dark:hover:text-primary-dark ${
+                roundedImage ? 'items-center' : ''
+            }`}
         >
-            <div className="pr-20">
+            <div className={compact ? '' : 'pr-20'}>
                 <div className="flex flex-col justify-between px-4 py-2 w-full gap-0.5">
-                    <h3 className="mb-0 text-base leading-tight">{text && <span>{name}</span>}</h3>
+                    <h3 className={`mb-0 leading-tight ${compact ? 'text-[15px]' : 'text-base'}`}>
+                        {text && <span>{name}</span>}
+                    </h3>
                     {role && (
-                        <p className="text-primary/50 text-sm dark:text-primary-dark/50 m-0 leading-tight">{role}</p>
+                        <p
+                            className={`text-primary/50 dark:text-primary-dark/50 m-0 leading-tight text-sm line-clamp-1 ${
+                                compact ? 'text-[13px]' : 'text-sm'
+                            }`}
+                        >
+                            {role}
+                        </p>
                     )}
                 </div>
             </div>
-            <ContributorImage
-                className={url ? 'hover:border-red hover:z-10 dark:hover:border-red' : ''}
-                image={image}
-                name={name}
-            />
+            <ContributorImage image={image} name={name} compact={compact} rounded={roundedImage} />
         </Container>
     )
 }

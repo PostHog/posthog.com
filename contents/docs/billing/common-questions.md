@@ -14,7 +14,11 @@ You can check our doc on [estimating usage and costs](/docs/billing/estimating-u
 
 ### How do I update billing information or see previous months' invoices or usage?
 
-Go to your organization's [billing settings](https://app.posthog.com/organization/billing) and click "Manage card details" to be brought to Stripe where you can update your credit card, billing information, and see your invoice history.
+Go to your organization's [billing settings](https://app.posthog.com/organization/billing) and click **Manage card details and view past invoices** to be brought to Stripe where you can update your credit card, billing information, and see your invoice history.
+
+You can also download invoices or receipts from here by clicking on them under **Invoice history**.
+
+![Invoices](https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2024_09_19_at_16_44_05_2x_1c2cc687c2.png)
 
 ### Can I set a billing limit?
 
@@ -28,7 +32,7 @@ Yes, PostHog drops data after you go over your billing limit. To capture more du
 
 Yes, early-stage startups can get $50,000 in credits, merch, and exclusive events. Find out more and apply on our [startup program page](/startups).
 
-Non-profits can contact our [sales team](/talk-to-a-human) for 50% off in most cases.
+Non-profits can contact our [sales team](/talk-to-a-human) after signing up to discuss discount options.
 
 ### Can I change the email invoices or billing alerts are sent to?
 

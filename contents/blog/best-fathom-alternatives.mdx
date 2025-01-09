@@ -1,0 +1,473 @@
+---
+title: 'The best Fathom alternatives & competitors, compared'
+date: 2024-10-10
+author:
+  - ian-vanagas
+rootpage: /blog
+featuredImage: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/posthog-company-culture-blog.png
+featuredImageType: full
+category: General
+tags:
+  - Comparisons
+---
+ 
+import { ComparisonTable } from 'components/ComparisonTable'
+import { ComparisonRow } from 'components/ComparisonTable/row'
+
+## 1. PostHog
+
+- **Founded:** 2020
+- **Similar to:** Heap, Matomo
+- **Typical users:** Engineers and product teams
+- **Typical customers:** Mid-size B2Bs and startups
+
+<ProductScreenshot
+  imageLight = "https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2024_10_01_at_11_39_58_2x_5dff6baf53.png"
+  imageDark = "https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2024_10_01_at_11_40_26_2x_76efad2201.png"
+  classes="rounded"
+  alt="PostHog web analytics dashboard"
+/>
+
+### What is PostHog?
+
+[PostHog](/) (that's us 👋) is an open source platform combining web analytics, product analytics, session replay, A/B testing, feature flags, and user surveys into one product. This means it's not only an alternative to Fathom but also tools like [Mixpanel](/blog/posthog-vs-mixpanel), [LaunchDarkly](/blog/posthog-vs-launchdarkly), and [Hotjar](/blog/posthog-vs-hotjar).
+
+According to [BuiltWith](https://trends.builtwith.com/analytics/PostHog), as of October 2024, 5,330 of the top 1 million websites deploy PostHog. Significantly more than the 1,832 using Fathom.
+
+#### Key features
+
+- 📊 **Web analytics:** Monitor your [web traffic](/docs/web-analytics) by automatically capturing and calculating metrics like visitors, pageviews, session duration, and bounce rate. See the sources, entry and exit paths, [channels](/docs/data/channel-type), and more.
+
+- 📈 **Product analytics:** Custom trends, funnels, user paths, retention analysis, and segment user cohorts. Also, direct [SQL querying](/docs/product-analytics/sql) for full customization.
+
+- 📺 **Session replays:** View exactly how users are using your site. Includes event timelines, console logs, network activity, and 90-day data retention.
+
+- 💬 **Surveys:** Target surveys by event or user properties. Templates for [net promoter score (NPS)](/templates/nps-survey), [product-market fit (PMF)](/templates/pmf-survey) surveys, and more.
+
+- 🧪 **A/B tests:** Optimize your app and website with up to nine test variations and track impact on primary and secondary metrics. Automatically calculate test duration, sample size, and statistical significance.
+
+### How does PostHog compare to Fathom?
+
+Fathom focuses entirely on web analytics while PostHog includes web analytics with a whole suite of tools for analyzing and improving your site and app. This means PostHog has a wider feature set while still offering the privacy-prerserving options Fathom prides itself on. PostHog is also open source and provides a generous free tier, neither of which is true of Fathom. 
+
+<ComparisonTable column1="PostHog" column2="Fathom">
+  <ComparisonRow column1={true} column2={false} feature="Free tier" description="Free forever option, no credit card required" />
+  <ComparisonRow column1={true} column2={true} feature="Web analytics" description="Pre-built dashboard of aggregate traffic, sources, campaigns, and session metrics" />
+  <ComparisonRow column1={true} column2={true} feature="Custom events" description="Manually capture custom events  wherever they happen" />
+  <ComparisonRow column1={true} column2={false} feature="Custom properties" description="Capture properties like type, date, and more with your events" />
+  <ComparisonRow column1={true} column2={false} feature="Conversions" description="Track conversions towards a goal metric with funnels" />
+  <ComparisonRow column1={true} column2={true} feature="Simple script install" description="Start capturing data by adding a simple script to your site" />
+  <ComparisonRow column1={true} column2={true} feature="Cookieless tracking" description="Option to track without using cookies" />
+  <ComparisonRow column1={true} column2={true} feature="EU hosting" description="Store your data in the EU for compliance" />
+  <ComparisonRow column1={true} column2={false} feature="Open source" description="Audit code, contribute to roadmap, and build integrations" />
+  <ComparisonRow column1={true} column2={false} feature="Product analytics" description="Analyze your data with trends, funnels, paths, and retention" />
+  <ComparisonRow column1={true} column2={false} feature="Session replay" description="Watch real users on your site; discover friction points" />
+  <ComparisonRow column1={true} column2={true} feature="Email reports" description="Get analytics report sent directly to your inbox" />
+  <ComparisonRow column1={true} column2={true} feature="API" description="Query your event data via an API" />
+</ComparisonTable>
+
+> 💡 **Good to know:** Fathom has a slightly different approach to complying with EU privacy regulations. They do so by:
+> 1. Being a Canadian company. The European Commission determined that Canada has an adequate level of data protection.
+> 2. Having EU isolation so visitor data is routed and stored on EU servers.
+> 3. Having a data processing agreement (DPA) available.
+
+### Why do companies use PostHog?
+
+According to [reviews on G2](https://www.g2.com/products/posthog/reviews), companies use PostHog because:
+
+1. **It replaces multiple tools:** PostHog can replace Fathom (web analytics), [Fullstory](/blog/posthog-vs-fullstory) (session replay), and [LaunchDarkly](/blog/posthog-vs-launchdarkly) (feature flags and A/B testing). This simplifies workflows and ensures product data is all in one place.
+
+2. **Pricing is transparent and scalable:** Reviewers appreciate how PostHog's pricing scales as they grow. There's a [generous free tier](/pricing) they can use forever. Companies eligible for [PostHog for Startups](/startups) also get $50k in additional free credits.
+
+3. **They need a complete picture of users:** PostHog includes every tool necessary to understand users and improve products. This means creating funnels to track conversion, watching replays to see where users get stuck, testing solutions with A/B tests, and gathering feedback with user surveys.
+
+> #### Bottom line
+> Because PostHog is free and includes the core web analytics and privacy features of Fathom, it makes an excellent alternative. This is especially true for startups and scaleups looking for a range of tools to help them build a better product.
+
+<br />
+
+## 2. Plausible
+
+- **Founded:** 2019
+- **Similar to:** Fathom, Umami
+- **Typical users:** Small SaaS companies
+- **Typical customers:** Privacy-focused indiehackers and founders
+
+![Plausible](https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2024_10_03_at_10_03_23_2x_9ee8616ddf.png)
+
+### What is Plausible?
+
+Plausible is a lightweight, privacy-friendly, EU-hosted Google Analytics alternative. It helps teams comply with regulations like GDPR and CCPA while still giving them the key traffic metrics they care about.
+
+Plausible is also open source and self-hostable. This makes it a popular choice with indiehackers.
+
+Plausible is nearly twice as popular as Fathom according to [BuiltWith](https://trends.builtwith.com/analytics/Plausible-Analytics). As of October 2024, 3,500 of the top 1 million websites deploy Plausible while 1,832 use Fathom.
+
+#### Key features
+
+- 📈 **Traffic analysis:** An overview of traffic, sources, sessions, and more in a simple, easy-to-understand dashboard.
+
+- 🇪🇺 **EU hosting:** Comply with regulations by storing all your data in the EU (and never having it leave).
+
+- 🍪 **Cookieless:** Capture data about your traffic without needing cookies (or cookie banners). 
+
+- 🏋️ **Lightweight:** Plausible's script is less than 1kB, making it significantly smaller than competitors. 
+
+### How does Plausible compare to Fathom?
+
+Plausible is the closest like-for-like competitor to Fathom. Both focus on privacy-friendly web analytics, but they do have some fundamental differences. Plausible is open source, EU built and hosted, and enables users to capture properties with their custom events. 
+
+<ComparisonTable column1="Plausible" column2="Fathom">
+  <ComparisonRow column1={false} column2={false} feature="Free tier" description="Free forever option, no credit card required" />
+  <ComparisonRow column1={true} column2={true} feature="Web analytics" description="Pre-built dashboard of aggregate traffic, sources, campaigns, and session metrics" />
+  <ComparisonRow column1={true} column2={true} feature="Custom events" description="Manually capture custom events  wherever they happen" />
+  <ComparisonRow column1={true} column2={false} feature="Custom properties" description="Capture properties like type, date, and more with your events" />
+  <ComparisonRow column1={false} column2={false} feature="Conversions" description="Track conversions towards a goal metric with funnels" />
+  <ComparisonRow column1={true} column2={true} feature="Simple script install" description="Start capturing data by adding a simple script to your site" />
+  <ComparisonRow column1={true} column2={true} feature="Cookieless tracking" description="Option to track without using cookies" />
+  <ComparisonRow column1={true} column2={true} feature="EU hosting" description="Store your data in the EU for compliance" />
+  <ComparisonRow column1={true} column2={false} feature="Open source" description="Audit code, contribute to roadmap, and build integrations" />
+  <ComparisonRow column1={false} column2={false} feature="Product analytics" description="Analyze your data with trends, funnels, paths, and retention" />
+  <ComparisonRow column1={false} column2={false} feature="Session replay" description="Watch real users on your site; discover friction points" />
+  <ComparisonRow column1={true} column2={true} feature="Email reports" description="Get analytics report sent directly to your inbox" />
+  <ComparisonRow column1={true} column2={true} feature="API" description="Evaluate and edit flags and A/B tests with an API" />
+</ComparisonTable>
+
+> 💡 **Good to know:** Although they don't have a free plan, both Plausible and Fathom offer a 30-day free trial.
+
+### Why do companies use Plausible?
+
+According to social media, users choose Plausible for the following reasons:
+
+1. **Simplicity:** Plausible's paired-down feature set makes it easier for bloggers, indiehackers, and smaller teams to get an understanding of their traffic.
+
+2. **Self-hostable:** Many like that Plausible is self-hostable, meaning they are fully in control of their data and costs.
+
+3. **Privacy-focused:** Privacy-conscious developers like they can still track their site while remaining compliant with regulations.
+
+> #### Bottom line
+> For simple web analytics, Plausible is a near copy of Fathom. For small developers wanting to self-host a solution, Plausible is a great choice.
+
+<br />
+
+## 3. Matomo
+
+- **Founded:** 2007
+- **Similar to:** Google Analytics, PostHog
+- **Typical users:** Marketing and ecommerce teams
+- **Typical customers:** Privacy-focused former GA users
+
+![Matomo](https://res.cloudinary.com/dmukukwp6/image/upload/matomo_8d74c7fc2c.png)
+
+### What is Matomo?
+
+[Matomo](/blog/posthog-vs-matomo) is a fully-featured, privacy-focused Google Analytics alternative. It contains basic web analytics along with more advanced product and behavioral analytics features. This includes features like funnels, cohorts, session recordings, and heatmaps.
+
+Matomo is 20x more popular than Fathom according to [BuiltWith](https://trends.builtwith.com/analytics/Matomo). As of October 2024, 1,832 of the top 1 million websites deploy Fathom and 20,816 use Matomo.
+
+#### Key features
+
+- 🌐 **Web analytics:** Get an overview of your traffic, popular pages, sources, referrers, and more.
+
+- 📊 **Custom reports:** Get detailed reports on product usage, cohorts, funnels, and conversion goals. 
+
+- 📋 **Marketing analysis:** Combine traffic insights with channel attribution, keyword data, ad performance, and more.
+
+- 💸 **Ecommerce:** Integrate with popular ecommerce platforms and track sales, products, and conversions.
+
+### How does Matomo compare to Fathom?
+
+Although both Matomo and Fathom position themselves as privacy-friendly [Google Analytics alternative](/blog/ga4-alternatives), Matomo is much more fully featured. Matomo has a range of paid add-ons for features like session replays, heatmaps, search performance, and A/B testing. 
+
+<ComparisonTable column1="Matomo" column2="Fathom">
+  <ComparisonRow column1={false} column2={false} feature="Free tier" description="Free forever option, no credit card required" />
+  <ComparisonRow column1={true} column2={true} feature="Web analytics" description="Pre-built dashboard of aggregate traffic, sources, campaigns, and session metrics" />
+  <ComparisonRow column1={true} column2={true} feature="Custom events" description="Manually capture custom events  wherever they happen" />
+  <ComparisonRow column1={true} column2={false} feature="Custom properties" description="Capture properties like type, date, and more with your events" />
+  <ComparisonRow column1={true} column2={false} feature="Conversions" description="Track conversions towards a goal metric with funnels" />
+  <ComparisonRow column1={true} column2={true} feature="Simple script install" description="Start capturing data by adding a simple script to your site" />
+  <ComparisonRow column1={true} column2={true} feature="Cookieless tracking" description="Option to track without using cookies" />
+  <ComparisonRow column1={true} column2={true} feature="EU hosting" description="Store your data in the EU for compliance" />
+  <ComparisonRow column1={true} column2={false} feature="Open source" description="Audit code, contribute to roadmap, and build integrations" />
+  <ComparisonRow column1={true} column2={false} feature="Product analytics" description="Analyze your data with trends, funnels, paths, and retention" />
+  <ComparisonRow column1={true} column2={false} feature="Session replay" description="Watch real users on your site; discover friction points" />
+  <ComparisonRow column1={true} column2={true} feature="Email reports" description="Get analytics report sent directly to your inbox" />
+  <ComparisonRow column1={true} column2={true} feature="API" description="Evaluate and edit flags and A/B tests with an API" />
+</ComparisonTable>
+
+> 💡 **Good to know:** Like Fathom, Matomo offers a free trial (but only 21 days).
+
+### Why do companies use Matomo?
+
+According to reviews on [G2](https://www.g2.com/products/matomo-formerly-piwik/reviews), people choose Matomo because:
+
+1. **On-premise:** Reviews appreciate that Matomo can be hosted and run from your own servers, keeping them in full control of their data.
+
+2. **Privacy:** Matomo is open source, self-hostable, and community-focused. The combination of these creates a privacy-focused platform that reviewers appreciate.
+
+3. **GA-like:** Matomo's feature set is very similar to Google Analytics. This means users can do the analysis they are familiar with on a more privacy-friendly platform.
+
+> #### Bottom line
+> For Fathom users looking for other privacy-friendly, GA-like options will find Matomo a good one. It does lack the free plan of other tools but does at least provide a free trial. 
+
+<br />
+
+## 4. Umami
+
+- **Founded:** 2022
+- **Similar to:** Fathom, Plausible
+- **Typical users:** Developers and content-focused teams
+- **Typical customers:** Small devs and large content-focused enterprises
+
+![Umami](https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2024_10_07_at_11_29_28_46e1a43d78.png)
+
+### What is Umami?
+
+Umami is an open source, easy-to-use Google Analytics alternative. Like other similar tools, it is privacy-friendly. This means data is anonymized, no personal data is saved, you don't need a cookie banner, and comply with GDPR. 
+
+According to [BuiltWith](https://trends.builtwith.com/analytics/Umami), as of October 2024, Fathom is more popular. Only 1,077 of the top 1 million websites deploy Umami whereas 1,832 use Fathom.
+
+#### Key features
+
+- 🌍 **Visitor insights:** Breakdown the sources of your traffic. See the browsers, locations, devices, and OS they use.
+
+- 🛠️ **Custom events:** Track more than pageviews. Capture custom events wherever they happen on your site.
+
+- 📖 **Open source:** See all of the code, run and host it yourself, modify it for your needs, and contribute to it.
+
+- 🏃 **Realtime:** Get a view into the live stats for your site. See how many current visitors you have.
+
+### How does Umami compare to Fathom?
+
+Similar to Plausible, Umami is a like-for-like alternative to Fathom. The big differences are that it includes a free tier and is open source. 
+
+<ComparisonTable column1="Umami" column2="Fathom">
+  <ComparisonRow column1={true} column2={false} feature="Free tier" description="Free forever option, no credit card required" />
+  <ComparisonRow column1={true} column2={true} feature="Web analytics" description="Pre-built dashboard of aggregate traffic, sources, campaigns, and session metrics" />
+  <ComparisonRow column1={true} column2={true} feature="Custom events" description="Manually capture custom events  wherever they happen" />
+  <ComparisonRow column1={true} column2={false} feature="Custom properties" description="Capture properties like type, date, and more with your events" />
+  <ComparisonRow column1={false} column2={false} feature="Conversions" description="Track conversions towards a goal metric with funnels" />
+  <ComparisonRow column1={true} column2={true} feature="Simple script install" description="Start capturing data by adding a simple script to your site" />
+  <ComparisonRow column1={true} column2={true} feature="Cookieless tracking" description="Option to track without using cookies" />
+  <ComparisonRow column1={false} column2={true} feature="EU hosting" description="Store your data in the EU for compliance" />
+  <ComparisonRow column1={true} column2={false} feature="Open source" description="Audit code, contribute to roadmap, and build integrations" />
+  <ComparisonRow column1={false} column2={false} feature="Product analytics" description="Analyze your data with trends, funnels, paths, and retention" />
+  <ComparisonRow column1={false} column2={false} feature="Session replay" description="Watch real users on your site; discover friction points" />
+  <ComparisonRow column1={true} column2={true} feature="Email reports" description="Get analytics report sent directly to your inbox" />
+  <ComparisonRow column1={true} column2={true} feature="API" description="Evaluate and edit flags and A/B tests with an API" />
+</ComparisonTable>
+
+### Why do companies use Umami?
+
+According to its few [G2](https://www.g2.com/products/umami/reviews) reviews and mentions on social, users choose Umami because of:
+
+1. **Simple setup:** Reviewers find that Umami is easy to setup, self-host, and add to their site.
+
+2. **Free plan:** Users appreciate that they can use Umami for 3 sites and 100k events for free.
+
+3. **Design:** Umami's clean and simple UI gets brought up as a selling point for some reviewers. 
+
+> #### Bottom line
+> Because it provides web analytics and is free, Umami makes for a solid choice for those looking for simple, privacy-friendly web analytics. 
+
+<br />
+
+## 5. Google Analytics
+
+- **Founded:** 2005
+- **Similar to:** Matomo, Piwik Pro
+- **Typical users:** Marketing and business teams reliant on Google's ecosystem
+- **Typical customers:** Small businesses and massive enterprises
+
+![Google Analytics](https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2024_10_02_at_14_54_37_25bd7082b7.png)
+
+### What is Google Analytics?
+
+[Google Analytics](/blog/google-analytics-cost) has long been the go-to choice for website and app analytics thanks to Google's huge market share, a large amount of informational content, and its connection with the rest of the Google suite.
+
+Google Analytics recently switched fully over from session-based Universal Analytics (GA3) to event-based GA4. This also introduced conversion funnels and retention tables that product teams are fans of. 
+
+Google Analytics is still massively popular. According to [BuiltWith](https://trends.builtwith.com/analytics/Google-Analytics), as of October 2024, 489,524 of the top 1 million websites deploy Google Analytics and a comparatively tiny 1,832 use Fathom.
+
+#### Key features
+
+- 📊 **Flexible reporting:** GA has pre-built insights as well as fully customizable ones to fit your reporting requirements.
+
+- 🤖 **Predictive insights:** Alert you to trends you're not aware of, like an increase in traffic to a specific landing page, or an anomalous decline in conversion from one period to another.
+
+- 🔁 **Integration with Google tools:** It's easy to combine and analyze your GA4 data with tools like Looker Studio, Google Ads, BigQuery, and Firebase.
+
+- ⌨️ **Natural language search:** Ask specific questions, like "MoM growth in users on iOS", rather than searching existing reports.
+
+- 💸 **Revenue metrics:** Connect metrics to marketing spend and revenue conversion to get a full picture of ROI.
+
+### How does Google Analytics compare to Fathom?
+
+Fathom positions itself as a privacy-friendly Google Analytics alternative. They both have a focus on web analytics, but Google Analytics has expanded to include some product analytics features over the years. 
+
+<ComparisonTable column1="Google Analytics" column2="Fathom">
+  <ComparisonRow column1={true} column2={false} feature="Free tier" description="Free forever option, no credit card required" />
+  <ComparisonRow column1={true} column2={true} feature="Web analytics" description="Pre-built dashboard of aggregate traffic, sources, campaigns, and session metrics" />
+  <ComparisonRow column1={true} column2={true} feature="Custom events" description="Manually capture custom events  wherever they happen" />
+  <ComparisonRow column1={true} column2={false} feature="Custom properties" description="Capture properties like type, date, and more with your events" />
+  <ComparisonRow column1={true} column2={false} feature="Conversions" description="Track conversions towards a goal metric with funnels" />
+  <ComparisonRow column1={false} column2={true} feature="Simple script install" description="Start capturing data by adding a simple script to your site" />
+  <ComparisonRow column1={false} column2={true} feature="Cookieless tracking" description="Option to track without using cookies" />
+  <ComparisonRow column1={false} column2={true} feature="EU hosting" description="Store your data in the EU for compliance" />
+  <ComparisonRow column1={false} column2={false} feature="Open source" description="Audit code, contribute to roadmap, and build integrations" />
+  <ComparisonRow column1={true} column2={false} feature="Product analytics" description="Analyze your data with trends, funnels, paths, and retention" />
+  <ComparisonRow column1={false} column2={false} feature="Session replay" description="Watch real users on your site; discover friction points" />
+  <ComparisonRow column1={true} column2={true} feature="Email reports" description="Get analytics report sent directly to your inbox" />
+  <ComparisonRow column1={true} column2={true} feature="API" description="Evaluate and edit flags and A/B tests with an API" />
+</ComparisonTable>
+
+### Why do companies use Google Analytics?
+
+According to [G2](https://www.g2.com/products/google-analytics/reviews), users choose Google Analytics for:
+
+1. **Website traffic:** The main use case reviewers praise GA for simply understanding their website's traffic, where it comes from, and what they do on the site.
+
+2. **Connection to marketing:** Marketers like that it connects to marketing tools like Ads and Search Console. This helps them analyze the overall effectiveness of marketing efforts.
+
+3. **AI insights:** Reviewers appreciate the fact that GA surfaces insights automatically and makes predictions. This helps them find new ways of improving their site.
+
+> #### Bottom line
+> You would probably not consider Fathom without knowing about Google Analytics. It's the go-to choice for a significant portion of sites, especially ones tied to the Google ecosystem.
+
+<br />
+
+## 6. Piwik Pro
+
+- **Founded:** 2013
+- **Similar to:** Matomo, Google Analytics
+- **Typical users:** Marketing and analysis teams
+- **Typical customers:** European enterprises in strict regulatory situations
+
+![Piwik Pro](https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2024_10_03_at_10_24_54_2x_b0a26db1cb.png)
+
+### What is Piwik Pro?
+
+Piwik Pro is a suite of privacy respecting analytics tools. These include web, mobile, and product analytics as well as tag and consent management. It is targeted at users in a strict regulatory environment.
+
+It also has integrations with a range of tools like Looker, Google Search Console, and Google Ads.
+
+Piwik Pro and Fathom are neck and neck in terms of popularity according to [BuiltWith](https://trends.builtwith.com/analytics/Piwik-PRO). As of October 2024, 1,902 of the top 1 million websites deploy Piwik Pro and 1,832 use Fathom.
+
+#### Key features
+
+- 📈 **Analytics:** Create custom dashboards with trends, charts, flows, funnels, and more to analyze your analytics.
+
+- 🏷️ **Tag manager:** Manage tags, pixels, and JavaScript snippets from a range of platforms.
+
+- 🙅 **Consent manager:** Collect and manage consent to track and use personal information. Customize and tailor banners for different situations.
+
+- 💽 **Customer data platform:** Integrate with other tools and capture data to have it all in one place. Send data from Piwik Pro to other tools.
+
+### How does Piwik Pro compare to Fathom?
+
+<ComparisonTable column1="Piwik Pro" column2="Fathom">
+  <ComparisonRow column1={true} column2={false} feature="Free tier" description="Free forever option, no credit card required" />
+  <ComparisonRow column1={true} column2={true} feature="Web analytics" description="Pre-built dashboard of aggregate traffic, sources, campaigns, and session metrics" />
+  <ComparisonRow column1={true} column2={true} feature="Custom events" description="Manually capture custom events  wherever they happen" />
+  <ComparisonRow column1={true} column2={false} feature="Custom properties" description="Capture properties like type, date, and more with your events" />
+  <ComparisonRow column1={true} column2={false} feature="Conversions" description="Track conversions towards a goal metric with funnels" />
+  <ComparisonRow column1={false} column2={true} feature="Simple script install" description="Start capturing data by adding a simple script to your site" />
+  <ComparisonRow column1={true} column2={true} feature="Cookieless tracking" description="Option to track without using cookies" />
+  <ComparisonRow column1={true} column2={true} feature="EU hosting" description="Store your data in the EU for compliance" />
+  <ComparisonRow column1={false} column2={false} feature="Open source" description="Audit code, contribute to roadmap, and build integrations" />
+  <ComparisonRow column1={true} column2={false} feature="Product analytics" description="Analyze your data with trends, funnels, paths, and retention" />
+  <ComparisonRow column1={false} column2={false} feature="Session replay" description="Watch real users on your site; discover friction points" />
+  <ComparisonRow column1={true} column2={true} feature="Email reports" description="Get analytics report sent directly to your inbox" />
+  <ComparisonRow column1={true} column2={true} feature="API" description="Evaluate and edit flags and A/B tests with an API" />
+</ComparisonTable>
+
+### Why do companies use Piwik Pro?
+
+Based on reviews from [G2](https://www.g2.com/products/piwik-pro/reviews), the following summarizes the reasons why users choose Piwik Pro:
+
+1. **GA-like:** Google Analytics users find that the transition to Piwik Pro is an easy one thanks to their similar dashboards and data models.
+
+2. **Compliance:** Those in strict regulatory environments appreciate how Piwik Pro provides many of the tools they need to stay compliant like tag and consent management.
+
+3. **Control:** Reviewers like that they are in control of their data, tune it to their needs, and host it outside the US.
+
+> #### Bottom line
+> Piwik Pro offers a special set of compliance tools and a free tier that makes it a solid choice as a Fathom alternative. 
+
+<br />
+
+## 7. Heap
+
+- **Founded:** 2013
+- **Similar to:** PostHog
+- **Typical users:** Product and marketing teams
+- **Typical customers:** B2C SaaS and ecommerce companies with a user experience focus.
+
+![Heap](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/best-amplitude-alternatives/heap.png)
+
+### What is Heap?
+
+[Heap](/blog/posthog-vs-heap) describes itself as a digital insights platform. This means it offers both product analytics and session replay and supports marketing use cases with multi-touch attribution. Contentsquare, a marketing and ecommerce analytics firm, [acquired Heap in September 2023](https://contentsquare.com/heap/) and announced plans to integrate the two products.
+
+According to [BuiltWith](https://trends.builtwith.com/analytics/Heap), as of October 2024, 2824 of the top 1 million websites deploy Heap. 1832 use Fathom.
+
+#### Key features
+
+- ✅ **Event autocapture:** Product teams don't need to rely on engineers to instrument all events. Heap has a visual editor for teams to tag events directly on-page for analysis.
+
+- 📺 **Session replay:** Get qualitative insights about user behavior by replaying their session – although this lacks the debugging tools typical of most replay tools.
+
+- 🔥 **Heatmaps:** See where people click, what point they scroll to, and the areas that get the most attention.
+
+- 🤖 **Analysis suggestions**: Advanced data science capabilities discover hidden interactions, friction points, and knowledge about key paths.
+
+- 🔁 **Managed ETL:** Connect to data warehouses, so you can combine your analytics with other sources and get a fuller picture of the entire user journey.
+
+### How does Heap compare to Fathom?
+
+Heap has a different focus than Fathom. It doesn't have a simple web analytics view but does have a full suite of product analytics tools including autocapture. 
+
+<ComparisonTable column1="Heap" column2="Fathom">
+  <ComparisonRow column1={true} column2={false} feature="Free tier" description="Free forever option, no credit card required" />
+  <ComparisonRow column1={false} column2={true} feature="Web analytics" description="Pre-built dashboard of aggregate traffic, sources, campaigns, and session metrics" />
+  <ComparisonRow column1={true} column2={true} feature="Custom events" description="Manually capture custom events  wherever they happen" />
+  <ComparisonRow column1={true} column2={false} feature="Custom properties" description="Capture properties like type, date, and more with your events" />
+  <ComparisonRow column1={true} column2={false} feature="Conversions" description="Track conversions towards a goal metric with funnels" />
+  <ComparisonRow column1={true} column2={true} feature="Simple script install" description="Start capturing data by adding a simple script to your site" />
+  <ComparisonRow column1={false} column2={true} feature="Cookieless tracking" description="Option to track without using cookies" />
+  <ComparisonRow column1={false} column2={true} feature="EU hosting" description="Store your data in the EU for compliance" />
+  <ComparisonRow column1={false} column2={false} feature="Open source" description="Audit code, contribute to roadmap, and build integrations" />
+  <ComparisonRow column1={true} column2={false} feature="Product analytics" description="Analyze your data with trends, funnels, paths, and retention" />
+  <ComparisonRow column1={true} column2={false} feature="Session replay" description="Watch real users on your site; discover friction points" />
+  <ComparisonRow column1={true} column2={true} feature="Email reports" description="Get analytics report sent directly to your inbox" />
+  <ComparisonRow column1={false} column2={true} feature="API" description="Evaluate and edit flags and A/B tests with an API" />
+</ComparisonTable>
+
+### Why do companies use Heap?
+
+According to G2 reviews, companies enjoy these three areas of Heap:
+
+1. **Autocapture:** Non-technical users love how easy autocapture makes tracking on their site. Along with the element data included, this provides a huge amount of useful analytics data with little setup.
+
+2. **Simple setup:** It does not take a big technical effort to set Heap up. Users can add a single script and begin collecting data. They then make it easy to visualize that data through user paths, funnels, and session replays.
+
+3. **Streamlining analysis:** By having analytics and session replay data in one place, Heap makes it easy to understand the usage of their app or site. This replaces interviews or user testing and makes the development cycle faster.
+
+> #### Bottom line
+> For those looking for product analytics, Heap is a good tool to consider. It does lack the simple web analytics view and some of the compliance features Fathom users might care about though.
+
+<br />
+
+## Is PostHog right for you?
+
+Here's the (short) sales pitch.
+
+We're biased, obviously, but we think PostHog is the perfect [Fathom](/blog/posthog-vs-fathom) replacement if:
+
+- You want all the tools to help you build a better product (like product analytics, session replay, and A/B testing).
+- You value transparency. We're open source and open core.
+- You want to try before you buy. We're self-serve with a [generous free tier](/pricing).
+
+Check out [our product pages](/web-analytics) and [read our docs](/docs) to learn more.
+

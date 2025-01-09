@@ -1,0 +1,49 @@
+### Q1 2025 Objectives
+
+Experiments at PostHog are growing up. Our product is simple yet functional, but there are gaps compared to our competitors. This quarter, we're balancing quality improvements with building new features to make PostHog Experiments a great choice for teams of any size and maturity. To attract mature users and retain our growing base, we must close those gaps while improving the overall product experience.
+
+Last quarter, we scaled the team from one to three engineers and shipped a lot of features, but we've accumulated technical debt and seen an increase in support tickets. This quarter, we aim to fix bugs, improve documentation, and solidify the product while keeping feature work manageable to have a stable foundation for future growth.
+
+We have five core objectives for Q1:
+1. New features: Keep closing feature gaps to attract advanced users.
+2. Data & statistics: Finalize our new statistics engine to improve correctness and clarity.
+3. Data Warehouse integration: Lay the groundwork for large-scale adoption.
+4. UX & UI improvements: Make the interface simple and intuitive.
+5. Codebase quality: Clean up technical debt to speed up future development.
+
+#### Objective 1: New features (@jurajmajerik, @danielbachhuber, @andehen)
+These features are consistently requested by our largest and most demanding customers, but will greatly benefit all users.
+- [Timeseries chart for deltas and credible intervals](https://github.com/PostHog/posthog/issues/26931) @jurajmajerik 
+- [Winsorization](https://github.com/PostHog/posthog/issues/26060) to exclude extreme values from analyses. @andehen 
+- [New data collection calculator](https://github.com/PostHog/posthog/issues/26933) @andehen 
+- [Filtering for experiment results](https://github.com/PostHog/posthog/issues/26934) @danielbachhuber 
+
+#### Objective 2: Data & statistics (@andehen)
+We’re finalizing our new statistics engine to ensure more accurate and trustworthy experiment results.
+- Complete the [migration to updated statistical methods](https://github.com/PostHog/posthog/issues/26713).
+- Document each statistical method in detail.
+- Write a practical "manual" chapter for every metric type.
+- Address neglected cases, such as "average count per user."
+- Improve diagnostics to provide more detailed information, like flagging missing exposure data.
+
+#### Objective 3: Data Warehouse integration (@danielbachhuber)
+Large customers increasingly request this capability, and our major competitors already offer it. This is a must-have for enterprise-level adoption.
+- Ensure a great experience for our pilot users.
+- Add support for funnel experiments.
+- Graduate the integration out of beta.
+
+#### Objective 4: UX & UI improvements (@jurajmajerik)
+A great user experience is one of the few areas where we can already outcompete our competitors.
+- Polish the reusable metrics UI.
+- Add a new verbal summary to support multiple metrics.
+- Improve product analytics insights when transitioning from experiments.
+- [Polish no-code experiments UI](https://github.com/PostHog/posthog/issues/26936)
+- Add [in-product tooltips](https://github.com/PostHog/posthog/issues/26937).
+
+#### Objective 5: Codebase quality (@jurajmajerik)
+We've accumulated technical debt over the last year and now need to clean up the codebase to allow us to move faster.
+- Improve test coverage for query runners and add missing legacy code test cases.
+- Add E2E for the basic flows once the multi-metrics UI stabilizes.
+- Refactor experiment logic to remove dependencies on other logics, improve reusability, and delete dead code.
+- Set up monitoring for query timeouts.
+- Audit Sentry to ensure we’re tracking the most relevant issues.

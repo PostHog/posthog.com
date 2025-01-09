@@ -160,3 +160,4 @@ Once you have identified which factors are affected your page load times, here a
 - [How to use session replays to improve your support experience](/tutorials/session-recordings-for-support)
 - [What is real user monitoring (and how to set it up)](/blog/real-user-monitoring)
 
+<NewsletterForm />

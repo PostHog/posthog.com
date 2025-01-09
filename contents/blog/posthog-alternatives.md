@@ -40,7 +40,7 @@ Amplitude is most known as a product analytics platform, though it also offers s
 
 ### Amplitude vs PostHog summary
 
-<div className="overflow-x-auto -mx-5 px-5">
+<OverflowXSection>
 <table className="w-full mt-4" style="min-width: 600px;">
 	<thead>
     	<tr>
@@ -119,7 +119,7 @@ Amplitude is most known as a product analytics platform, though it also offers s
    		</tr>
 	</tbody>
 </table>
-</div>
+</OverflowXSection>
 
 ### Key differences
 
@@ -174,7 +174,7 @@ Mixpanel is purely focused on product analytics, going so far as to shut down ot
 
 ### Mixpanel vs PostHog summary
 
-<div className="overflow-x-auto -mx-5 px-5">
+<OverflowXSection>
 <table className="w-full mt-4" style="min-width: 600px;">
 	<thead>
     	<tr>
@@ -253,7 +253,7 @@ Mixpanel is purely focused on product analytics, going so far as to shut down ot
    		</tr>
 	</tbody>
 </table>
-</div>
+</OverflowXSection>
 
 **Read more:** [The best alternatives to Mixpanel compared](/blog/best-mixpanel-alternatives)
 
@@ -314,7 +314,7 @@ FullStory is primarily a session replay tool, though it also includes some produ
 
 ### FullStory vs PostHog summary
 
-<div className="overflow-x-auto -mx-5 px-5">
+<OverflowXSection>
 <table className="w-full mt-4" style="min-width: 600px;">
 	<thead>
     	<tr>
@@ -393,7 +393,7 @@ FullStory is primarily a session replay tool, though it also includes some produ
    		</tr>
 	</tbody>
 </table>
-</div>
+</OverflowXSection>
 
 ### Key differences
 
@@ -446,7 +446,7 @@ Heap is very similar to Amplitude and Mixpanel, though it added session replay f
 
 ### Heap vs PostHog at a glance
 
-<div className="overflow-x-auto -mx-5 px-5">
+<OverflowXSection>
 <table className="w-full mt-4" style="min-width: 600px;">
 	<thead>
     	<tr>
@@ -525,7 +525,7 @@ Heap is very similar to Amplitude and Mixpanel, though it added session replay f
    		</tr>
 	</tbody>
 </table>
-</div>
+</OverflowXSection>
 
 ### Key differences
 
@@ -580,7 +580,7 @@ LogRocket is similar to FullStory in many respects, but with a greater focus on 
 
 ### LogRocket vs PostHog summary
 
-<div className="overflow-x-auto -mx-5 px-5">
+<OverflowXSection>
 <table className="w-full mt-4" style="min-width: 600px;">
 	<thead>
     	<tr>
@@ -659,7 +659,7 @@ LogRocket is similar to FullStory in many respects, but with a greater focus on 
    		</tr>
 	</tbody>
 </table>
-</div>
+</OverflowXSection>
 
 ### Key differences
 

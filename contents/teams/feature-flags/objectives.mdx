@@ -1,0 +1,58 @@
+### Q1 2025 Objectives
+
+The theme for Q1 2025 is "pour gasoline on the fire" – we want to accelerate the remarkable growth of feature flags we saw last year.  To do this, we'll focus on five key areas:
+
+1. Performance & Reliability: Scale our feature flag platform to handle exponential growth while improving speed and dependability
+2. Customer-Driven Innovation: Deliver high-impact features that our users are asking for to drive adoption and provide greater value
+3. Strategic Research: Map the competitive landscape to identify opportunities for breakthrough features and capabilities
+4. SDK Excellence: Strengthen and expand our SDK ecosystem to make feature flag implementation seamless for both new and existing customers
+5. UX Enhancement: Continue refining the feature flag experience to make it more intuitive and powerful for all users
+
+More details on each of these areas below.
+
+#### 1. Performance & Reliability
+_Owners: @dmarticus, @havenbarnes_
+- [Complete migration of feature flag evaluation traffic from the legacy `/decide` endpoint to the new `/flags` endpoint](https://github.com/PostHog/posthog/issues/22131) (@dmarticus)
+- Establish comprehensive monitoring and observability for the feature flag platform (@dmarticus, @havenbarnes)
+  - Enhance Grafana metrics to differentiate between infrastructure failures and logical errors (@dmarticus)
+  - Collaborate with infrastructure team to create infrastructure cost analysis and dependency mapping with Michi (@dmarticus)
+  - Improve observability of the feature flag evaluation process by tying flag evaluation results to the original request context (@havenbarnes)
+  - Experiment with sampling request parameters for high-value customers to have better observability for support requests (@havenbarnes)
+  - Implement actionable Sentry alerts in #alerts-feature-flags channel (@havenbarnes)
+  - Integrate PostHog error tracking with new flags endpoint (@dmarticus)
+- Implement read-only flags (specifics to be defined, see the following [RFC](https://github.com/PostHog/product-internal/pull/692/files)) (@havenbarnes)
+
+#### 2. Customer-Driven Innovation
+_Owners: @dmarticus, @havenbarnes, @haacked_
+- [Behavioral cohort targeting for flags](https://github.com/PostHog/posthog/issues/14796) (RFC [here](https://github.com/PostHog/product-internal/pull/683/)) (@dmarticus)
+- [Feature management](https://github.com/PostHog/posthog/issues?q=is:open+is:issue+label:feature/feature-management) (@havenbarnes)
+- [Automatically manage flag staleness](https://github.com/PostHog/posthog/issues/16497) (@haacked)
+- Customer research-driven features (TBD based on the findings of the market research and customer interviews)
+
+#### 3. Strategic research
+_Owners: @havenbarnes, @annikaschmid_
+- Identify and analyze key user segments:
+  1. Current active users
+  2. Competitor users
+  3. Custom solution implementers
+  4. Potential users unaware of feature flagging
+- Conduct customer interviews to identify gaps and growth opportunities
+- Document findings and recommendations for product roadmap.
+- More context [here](https://github.com/PostHog/posthog/issues/14257)
+
+#### 4. SDK Spike
+_Owners: @dmarticus, @havenbarnes, @haacked_
+- [Evaluate feasibility and tradeoffs around adding feature flags to the Java SDK](https://github.com/PostHog/posthog/issues/16419)
+- Investigate improving the Rust SDK (add feature flag evaluation, [implement the suggestions from the open issues](https://github.com/PostHog/posthog-rs/issues?q=sort:updated-desc+is:issue+is:open) etc.)
+- [Research .NET SDK demand + feasibility](https://github.com/PostHog/posthog/issues/16339)
+- Fix open issues in the Python and Node SDKs: ([Python](https://github.com/PostHog/posthog-python/issues?q=sort:updated-desc+is:issue+is:open), [Node](https://github.com/PostHog/posthog-js-lite/issues?q=sort:updated-desc+is:issue+is:open+label:nodejs))
+
+#### 5. User Experience Improvements
+_Owners: @dmarticus, @havenbarnes, @haacked_
+Low-hanging, medium-impact, and largely context-free fruit that can be picked up by any team member during available capacity:
+
+- UI Changes
+  - [Consolidate boolean and multivariate flag interfaces](https://github.com/PostHog/posthog/issues/26995)
+  - [Show flag evaluation results more clearly in the flag editor UI](https://github.com/PostHog/posthog/issues/26995)
+  - [Improve the experience of syncing flags between environments](https://github.com/PostHog/posthog/issues/21788)
+  - Anything else from the [current feature flag backlog](https://github.com/orgs/PostHog/projects/112/views/2)

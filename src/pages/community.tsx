@@ -24,6 +24,9 @@ import FeatureRequests from 'components/InsidePostHog/FeatureRequests'
 import AppStatus from 'components/AppStatus'
 import qs from 'qs'
 import slugify from 'slugify'
+import uniqBy from 'lodash/uniqBy'
+import { NewsletterForm } from 'components/NewsletterForm'
+import CloudinaryImage from 'components/CloudinaryImage'
 
 const quote =
     // "Let your work shine as brightly as a hedgehog's quills, threading through life's challenges with perseverance."
@@ -73,6 +76,7 @@ const SlackPosts = () => {
     useEffect(() => {
         const slackPostsQuery = qs.stringify(
             {
+                sort: ['createdAt:desc'],
                 populate: {
                     question: {
                         populate: ['topics', 'profile'],
@@ -99,7 +103,7 @@ const SlackPosts = () => {
         <div className="py-4">
             <h3 className="text-base">From the PostHog Slack</h3>
             <ul className="list-none m-0 p-0 space-y-4">
-                {slackPosts.map(
+                {uniqBy(slackPosts, 'attributes.question.data.attributes.topics.data[0].id').map(
                     ({
                         id,
                         attributes: {
@@ -235,7 +239,10 @@ const Main = () => {
                         byline="- Andy, Editor-in-Chief"
                         image={
                             <div className="w-24 rounded-full overflow-hidden bg-yellow">
-                                <StaticImage src="../../static/images/authors/andy-vandervell-posthog.png" />
+                                <CloudinaryImage
+                                    width={200}
+                                    src="https://res.cloudinary.com/dmukukwp6/image/upload/andy_86a7232754.png"
+                                />
                             </div>
                         }
                     />
@@ -257,7 +264,10 @@ const Main = () => {
                             content="<p>James G. is coming up on his 4-year anniversary. When he's not restarting servers, you can likely find him out on a trail."
                             image={
                                 <div className="w-24 rounded-full overflow-hidden bg-salmon">
-                                    <StaticImage src="../../static/images/authors/james-greenhill-posthog.png" />
+                                    <CloudinaryImage
+                                        width={200}
+                                        src="https://res.cloudinary.com/dmukukwp6/image/upload/james_g_d9de6cbcdb.png"
+                                    />
                                 </div>
                             }
                             cta={
@@ -303,7 +313,7 @@ const Main = () => {
                     <Posts />
 
                     <div className="pt-4 pb-0 @md:pt-8 @md:pb-4">
-                        <Newsletter />
+                        <NewsletterForm placement="community" />
                     </div>
                     <div className="py-4">
                         <Changelog />
@@ -328,7 +338,10 @@ const Main = () => {
             </ol>"
                         image={
                             <div className="w-24 rounded-full overflow-hidden bg-yellow">
-                                <StaticImage src="../../static/images/authors/james-hawkins-posthog.png" />
+                                <CloudinaryImage
+                                    width={200}
+                                    src="https://res.cloudinary.com/dmukukwp6/image/upload/james_b841adce96.png"
+                                />
                             </div>
                         }
                         cta={

@@ -6,10 +6,9 @@ author:
 tags:
   - experimentation
   - feature flags
-  - actions
 ---
 
-[A/B tests](/ab-testing) are a way to make sure the content of your Next.js app performs as well as possible. They compare two or more variations on their impact on a goal.
+[A/B tests](/experiments) are a way to make sure the content of your Next.js app performs as well as possible. They compare two or more variations on their impact on a goal.
 
 PostHog's experimentation tool makes it easy to set up A/B tests. This tutorial shows you how to build a basic Next.js app (with the app router), add PostHog to it, bootstrap feature flag data, and set up the A/B test in the app.
 
@@ -302,3 +301,5 @@ This shows your updated button text immediately on load. This method still uses 
 - [How, when, and where to run your first A/B test](/product-engineers/how-to-do-ab-testing)
 - [10 things we've learned about A/B testing for startups](/newsletter/what-we've-learned-about-ab-testing)
 - [How to set up Next.js app router analytics, feature flags, and more](/tutorials/nextjs-app-directory-analytics)
+
+<NewsletterForm />

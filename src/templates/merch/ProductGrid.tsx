@@ -51,7 +51,7 @@ export default function ProductGrid(props: ProductGridProps): React.ReactElement
     }, [])
 
     const classes = cn(
-        'space-y-8 sm:space-y-0 sm:grid lg:grid-cols-[repeat(4,minMax(0,1fr))] gap-x-10 gap-y-7 sm:grid-cols-2',
+        'grid grid-cols-2 lg:grid-cols-[repeat(4,minMax(0,1fr))] gap-x-4 sm:gap-x-10 gap-y-4 sm:gap-y-7',
         className
     )
 

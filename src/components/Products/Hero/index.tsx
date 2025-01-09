@@ -19,12 +19,12 @@ export const Hero = ({ color, icon, beta, product, title, description }: HeroPro
                 <span className={`w-6 h-6 text-${color}`}>{icon}</span>
                 <span className="text-[15px] font-semibold text-opacity-60">{product}</span>
                 {beta && (
-                    <span className="text-xs font-semibold text-opacity-60 bg-yellow px-1 py-0.5 rounded-sm uppercase">
+                    <span className="text-xs font-semibold text-opacity-60 bg-yellow px-1 py-0.5 rounded-sm uppercase text-primary">
                         Beta
                     </span>
                 )}
             </div>
-            <h1 className="text-5xl md:text-6xl text-center mb-4 md:mb-2" dangerouslySetInnerHTML={{ __html: title }} />
+            <h1 className="text-5xl md:text-6xl text-center mb-4 md:mb-2 text-balance" dangerouslySetInnerHTML={{ __html: title }} />
             <p
                 className="text-lg font-semibold text-center text-opacity-75 mb-5"
                 dangerouslySetInnerHTML={{ __html: description }}
@@ -33,8 +33,8 @@ export const Hero = ({ color, icon, beta, product, title, description }: HeroPro
                 <CallToAction href="https://app.posthog.com/signup" type="primary">
                     Get started - free
                 </CallToAction>
-                <CallToAction href="/demo" type="secondary">
-                    Book a demo
+                <CallToAction href="/talk-to-a-human" type="secondary">
+                    Talk to a human
                 </CallToAction>
             </div>
         </section>

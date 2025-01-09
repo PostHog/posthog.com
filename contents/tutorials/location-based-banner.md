@@ -33,16 +33,14 @@ After installing PostHog, create a `providers.js` file in the `app` folder which
 'use client'
 import posthog from 'posthog-js'
 import { PostHogProvider } from 'posthog-js/react'
-
-if (typeof window !== 'undefined') {
-  posthog.init(
-    '<ph_project_api_key>',{
-      api_host:'<ph_client_api_host>'
-    }
-  )
-}
+import { useEffect } from 'react'
 
 export default function PHProvider({ children }) {
+  useEffect(() => {
+    posthog.init('<ph_project_api_key>', {
+      api_host: '<ph_client_api_host>',
+    })
+  }, []);
   return <PostHogProvider client={posthog}>{children}</PostHogProvider>
 }
 
@@ -195,3 +193,5 @@ With this, we have full control of the visibility and content of our site banner
 - [How to set up one-time feature flags](/tutorials/one-time-feature-flags)
 - [How to bootstrap feature flags in React and Express](/tutorials/bootstrap-feature-flags-react)
 - [How to add popups to your React app with feature flags](/tutorials/react-popups)
+
+<NewsletterForm />

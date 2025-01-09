@@ -8,6 +8,7 @@ import Pagination from 'components/Pagination'
 import { Cart } from './Cart'
 import { useCartStore } from './store'
 import { AllShopifyProduct, MerchPageContext, ShopifyProduct } from './types'
+import { getShopifyImage } from 'gatsby-source-shopify'
 
 type MerchPageProps = {
     pageContext: MerchPageContext
@@ -45,7 +46,7 @@ export default function MerchPage(props: MerchPageProps): React.ReactElement {
                             <div className="group relative" key={node.shopifyId}>
                                 <GatsbyImage
                                     className="aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-md bg-gray-200 lg:aspect-none group-hover:opacity-75 lg:h-80"
-                                    image={node.featuredMedia.preview.image.localFile.childImageSharp.gatsbyImageData}
+                                    image={getShopifyImage({ image: node.featuredMedia.preview.image })}
                                     alt={node.title}
                                 />
                                 <div className="mt-4 flex justify-between">
@@ -82,6 +83,7 @@ export const query = graphql`
                     handle
                     shopifyId
                     description
+                    descriptionHtml
                     priceRangeV2 {
                         maxVariantPrice {
                             amount
@@ -93,10 +95,12 @@ export const query = graphql`
                     status
                     imageProducts {
                         handle
-                        featuredImage {
-                            localFile {
-                                childImageSharp {
-                                    gatsbyImageData(width: 400)
+                        featuredMedia {
+                            preview {
+                                image {
+                                    width
+                                    height
+                                    originalSrc
                                 }
                             }
                         }
@@ -104,11 +108,9 @@ export const query = graphql`
                     featuredMedia {
                         preview {
                             image {
-                                localFile {
-                                    childImageSharp {
-                                        gatsbyImageData
-                                    }
-                                }
+                                width
+                                height
+                                originalSrc
                             }
                         }
                     }
@@ -123,11 +125,9 @@ export const query = graphql`
                             featuredMedia {
                                 preview {
                                     image {
-                                        localFile {
-                                            childImageSharp {
-                                                gatsbyImageData
-                                            }
-                                        }
+                                        width
+                                        height
+                                        originalSrc
                                     }
                                 }
                             }
@@ -135,11 +135,9 @@ export const query = graphql`
                         media {
                             preview {
                                 image {
-                                    localFile {
-                                        childImageSharp {
-                                            gatsbyImageData
-                                        }
-                                    }
+                                    width
+                                    height
+                                    originalSrc
                                 }
                             }
                         }

@@ -2,26 +2,52 @@ import { useEffect, useState } from 'react'
 import { useUser } from './useUser'
 import qs from 'qs'
 
-const teamQuery = (name: string) =>
+const teamQuery = (slug: string) =>
     qs.stringify(
         {
             filters: {
-                name: {
-                    $eqi: name,
+                slug: {
+                    $eqi: slug,
                 },
             },
-            populate: ['profiles.avatar', 'profiles.leadTeams.name', 'leadProfiles'],
+            publicationState: 'preview',
+            populate: {
+                profiles: {
+                    filters: {
+                        startDate: {
+                            $lte: new Date(),
+                        },
+                    },
+                    populate: {
+                        avatar: true,
+                        leadTeams: {
+                            populate: {
+                                name: true,
+                            },
+                        },
+                    },
+                },
+                leadProfiles: true,
+                crest: true,
+                crestOptions: true,
+                teamImage: {
+                    populate: {
+                        image: true,
+                    },
+                },
+            },
         },
         { encodeValuesOnly: true }
     )
 
-export default function useTeam({ teamName }: { teamName: string }) {
+export default function useTeam({ slug }: { slug: string }) {
     const { getJwt } = useUser()
     const [team, setTeam] = useState()
     const [loading, setLoading] = useState(true)
 
-    const fetchTeam = () => {
-        return fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/teams?${teamQuery(teamName)}`)
+    const fetchTeam = async () => {
+        if (!slug) return
+        return fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/teams?${teamQuery(slug)}`)
             .then((res) => res.json())
             .then(({ data }) => {
                 setTeam(data?.[0] ?? [])
@@ -104,9 +130,32 @@ export default function useTeam({ teamName }: { teamName: string }) {
         fetchTeam()
     }
 
+    const updateTeam = async (update: any) => {
+        const jwt = await getJwt()
+        const body = JSON.stringify({ data: { ...update } })
+        await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/teams/${team?.id}`, {
+            headers: {
+                Authorization: `Bearer ${jwt}`,
+                'content-type': 'application/json',
+            },
+            method: 'PUT',
+            body,
+        })
+        fetchTeam()
+    }
+
     useEffect(() => {
         fetchTeam().then(() => setLoading(false))
-    }, [])
+    }, [slug])
 
-    return { loading, fetchTeam, team, addTeamMember, removeTeamMember, handleTeamLead, updateDescription }
+    return {
+        loading,
+        fetchTeam,
+        team,
+        addTeamMember,
+        removeTeamMember,
+        handleTeamLead,
+        updateDescription,
+        updateTeam,
+    }
 }

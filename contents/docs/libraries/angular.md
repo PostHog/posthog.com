@@ -4,7 +4,7 @@ icon: >-
   https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/docs/integrate/frameworks/angular.svg
 ---
 
-PostHog makes it easy to get data about traffic and usage of your [Angular.js](https://angularjs.org/) app. Integrating PostHog into your site enables analytics about user behavior, custom events capture, session recordings, feature flags, and more.
+PostHog makes it easy to get data about traffic and usage of your [Angular](https://angular.dev/) app. Integrating PostHog into your site enables analytics about user behavior, custom events capture, session recordings, feature flags, and more.
 
 This guide walks you through integrating PostHog into your Angular app using the [JavaScript Web SDK](/docs/libraries/js).
 
@@ -29,8 +29,7 @@ import posthog from 'posthog-js'
 posthog.init(
   '<ph_project_api_key>',
   {
-    api_host:'<ph_client_api_host>',
-    person_profiles: 'identified_only'
+    api_host:'<ph_client_api_host>'
   }
 )
 
@@ -65,7 +64,7 @@ PostHog only captures pageview events when a [page load](https://developer.mozil
 
 If we want to capture every route change, we must write code to capture pageviews that integrates with the router.
 
-To start, we need to add `capture_pageviews: false` to the PostHog initialization to avoid double capturing the first pageview.
+To start, we need to add `capture_pageview: false` to the PostHog initialization to avoid double capturing the first pageview.
 
 ```ts file=main.ts
 import { bootstrapApplication } from '@angular/platform-browser';
@@ -77,8 +76,7 @@ posthog.init(
   '<ph_project_api_key>',
   {
     api_host:'<ph_client_api_host>',
-    person_profiles: 'identified_only',
-    capture_pageviews: false
+    capture_pageview: false
   }
 )
 
@@ -169,14 +167,38 @@ posthog.init(
   '<ph_project_api_key>',
   {
     api_host:'<ph_client_api_host>',
-    person_profiles: 'identified_only',
-    capture_pageviews: false,
+    capture_pageview: false,
     capture_pageleave: true
   }
 )
 
 bootstrapApplication(AppComponent, appConfig)
   .catch((err) => console.error(err));
+```
+
+## Session replay
+
+Session replay uses change detection to record the DOM. This can clash with Angular's change detection.
+
+The recorder tool attempts to detect when an Angular zone is present and avoid the clash but might not always succeed.
+
+If you see performance impact from recording in an Angular project, ensure that you use [`ngZone.runOutsideAngular`](https://angular.io/api/core/NgZone#runoutsideangular). 
+
+```ts file=posthog.service.ts
+import { Injectable } from '@angular/core';
+import posthog from 'posthog-js'
+
+@Injectable({ providedIn: 'root' })
+export class PostHogSessionRecordingService {
+  constructor(private ngZone: NgZone) {}
+initPostHog() {
+    this.ngZone.runOutsideAngular(() => {
+      posthog.init(
+        /* your config */
+      )
+    })
+  }
+}
 ```
 
 ## Next steps
