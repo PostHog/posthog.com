@@ -178,7 +178,7 @@ function Tooltip({
                 <button
                     ref={setReferenceElement}
                     onClick={() => setOpen(!open)}
-                    className={`flex items-center rounded-full border border-light dark:border-dark relative active:scale-[.99] ${
+                    className={`flex items-center rounded-full ml-1 border border-light dark:border-dark relative active:scale-[.99] ${
                         open
                             ? 'border-primary/50 dark:border-primary-dark/50'
                             : 'hover:border-primary/25 hover:dark:border-primary-dark/25 hover:scale-[1.05]'
@@ -190,7 +190,7 @@ function Tooltip({
                 <button
                     ref={setReferenceElement}
                     onClick={() => setOpen(!open)}
-                    className={`flex items-center p-2 rounded hover:bg-border dark:hover:bg-border-dark relative active:top-[1px] active:scale-[.99] ${
+                    className={`flex items-center p-2 rounded-full hover:bg-border dark:hover:bg-border-dark relative active:top-[1px] active:scale-[.99] ${
                         open ? 'bg-border dark:bg-border-dark' : ' hover:scale-[1.05]'
                     }`}
                 >
@@ -380,7 +380,7 @@ const enterpiseModeNames = {
 const Notifications = () => {
     const { notifications } = useUser()
     return notifications.length > 0 ? (
-        <span className="size-4 text-xs bg-red text-white flex justify-center items-center rounded-full">
+        <span className="py-0.5 px-0.5 min-w-[20px] text-xs bg-red text-white flex justify-center items-center rounded-full">
             {notifications.length}
         </span>
     ) : null
@@ -564,7 +564,7 @@ export const Main = () => {
                             )}
                         >
                             <button
-                                className="group my-1mr-[1px] p-2 hover:bg-border dark:hover:bg-border-dark rounded relative"
+                                className="group my-1mr-[1px] p-2 hover:bg-border dark:hover:bg-border-dark rounded-full relative"
                                 onClick={openChat}
                             >
                                 <IconChatHelp className="opacity-50 inline-block w-6 group-hover:opacity-75" />
