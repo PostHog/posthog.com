@@ -106,4 +106,5 @@ export interface IProps {
     hideWidthToggle?: boolean
     isMenuItemActive?: ({ name, url }: { name: string; url?: string }) => boolean
     isMenuItemOpen?: ({ name, url }: { name: string; url?: string }) => boolean | undefined
+    askMax?: boolean
 }

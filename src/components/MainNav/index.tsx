@@ -1,19 +1,18 @@
 import CloudinaryImage from 'components/CloudinaryImage'
 import Link from 'components/Link'
 import Logo from 'components/Logo'
-import { useSearch } from 'components/Search/SearchContext'
 import { useValues } from 'kea'
 import { layoutLogic } from '../../logic/layoutLogic'
 import {
     IconApp,
     IconBrightness,
     IconMessage,
-    IconSearch,
     IconTextWidth,
     IconUser,
     IconChevronDown,
     IconLetter,
     IconUpload,
+    IconChatHelp,
 } from '@posthog/icons'
 
 import { Placement } from '@popperjs/core'
@@ -32,8 +31,8 @@ import React, { useEffect, useRef, useState } from 'react'
 import { useInView } from 'react-intersection-observer'
 import { usePopper } from 'react-popper'
 import getAvatarURL from 'components/Squeak/util/getAvatar'
-import { StaticImage } from 'gatsby-plugin-image'
 import MediaUploadModal from 'components/MediaUploadModal'
+import { useChat } from 'hooks/useChat'
 
 export const Avatar = (props: { className?: string; src?: string }) => {
     return (
@@ -175,7 +174,7 @@ function Tooltip({
                 <button
                     ref={setReferenceElement}
                     onClick={() => setOpen(!open)}
-                    className={`ml-2 flex items-center rounded-full border border-light dark:border-dark relative active:scale-[.99] ${
+                    className={`flex items-center rounded-full border border-light dark:border-dark relative active:scale-[.99] ${
                         open
                             ? 'border-primary/50 dark:border-primary-dark/50'
                             : 'hover:border-primary/25 hover:dark:border-primary-dark/25 hover:scale-[1.05]'
@@ -187,7 +186,7 @@ function Tooltip({
                 <button
                     ref={setReferenceElement}
                     onClick={() => setOpen(!open)}
-                    className={`ml-2 flex items-center p-2 rounded hover:bg-border dark:hover:bg-border-dark relative active:top-[1px] active:scale-[.99] ${
+                    className={`flex items-center p-2 rounded hover:bg-border dark:hover:bg-border-dark relative active:top-[1px] active:scale-[.99] ${
                         open ? 'bg-border dark:bg-border-dark' : ' hover:scale-[1.05]'
                     }`}
                 >
@@ -419,7 +418,7 @@ const TheoTooltip = () => {
 
 export const Main = () => {
     const { user } = useUser()
-    const { open } = useSearch()
+    const { openChat, hasUnread } = useChat()
     const {
         menu,
         parent,
@@ -530,15 +529,19 @@ export const Main = () => {
                         <HoverTooltip
                             content={() => (
                                 <div className="text-xs">
-                                    Open with <kbd className={`${keyboardShortcut} py-0`}>/</kbd>
+                                    Chat with <strong>Max AI</strong>{' '}
+                                    <kbd className={`${keyboardShortcut} py-0 ml-0.5`}>?</kbd>
                                 </div>
                             )}
                         >
                             <button
-                                className="group my-1mr-[1px] p-2 hover:bg-border dark:hover:bg-border-dark rounded"
-                                onClick={() => open('header')}
+                                className="group my-1mr-[1px] p-2 hover:bg-border dark:hover:bg-border-dark rounded relative"
+                                onClick={openChat}
                             >
-                                <IconSearch className="opacity-50 inline-block w-6 group-hover:opacity-75" />
+                                <IconChatHelp className="opacity-50 inline-block w-6 group-hover:opacity-75" />
+                                {hasUnread && (
+                                    <span className="size-2 text-xs bg-red text-white flex justify-center items-center rounded-full absolute top-2 right-2 " />
+                                )}
                             </button>
                         </HoverTooltip>
 
@@ -740,7 +743,7 @@ export const Mobile = () => {
     const { menu, parent, internalMenu, activeInternalMenu, enterpriseMode, setEnterpriseMode } = useLayoutData()
 
     return (
-        <div className="fixed bottom-0 w-full md:hidden z-[9999998] print:hidden">
+        <div id="mobile-nav" className="fixed bottom-0 w-full md:hidden z-[9999998] print:hidden">
             <InternalMenu
                 mobile
                 className="bg-light dark:bg-dark border-t mb-[-1px]"
