@@ -12,6 +12,7 @@ import {
     IconChevronDown,
     IconLetter,
     IconUpload,
+    IconLock,
     IconChatHelp,
 } from '@posthog/icons'
 
@@ -32,7 +33,10 @@ import { useInView } from 'react-intersection-observer'
 import { usePopper } from 'react-popper'
 import getAvatarURL from 'components/Squeak/util/getAvatar'
 import MediaUploadModal from 'components/MediaUploadModal'
+import SideModal from 'components/Modal/SideModal'
+import { Authentication } from 'components/Squeak'
 import { useChat } from 'hooks/useChat'
+import { useSearch } from 'components/Search/SearchContext'
 
 export const Avatar = (props: { className?: string; src?: string }) => {
     return (
@@ -174,7 +178,7 @@ function Tooltip({
                 <button
                     ref={setReferenceElement}
                     onClick={() => setOpen(!open)}
-                    className={`flex items-center rounded-full border border-light dark:border-dark relative active:scale-[.99] ${
+                    className={`flex items-center rounded-full ml-1 border border-light dark:border-dark relative active:scale-[.99] ${
                         open
                             ? 'border-primary/50 dark:border-primary-dark/50'
                             : 'hover:border-primary/25 hover:dark:border-primary-dark/25 hover:scale-[1.05]'
@@ -186,7 +190,7 @@ function Tooltip({
                 <button
                     ref={setReferenceElement}
                     onClick={() => setOpen(!open)}
-                    className={`flex items-center p-2 rounded hover:bg-border dark:hover:bg-border-dark relative active:top-[1px] active:scale-[.99] ${
+                    className={`flex items-center p-2 rounded-full hover:bg-border dark:hover:bg-border-dark relative active:top-[1px] active:scale-[.99] ${
                         open ? 'bg-border dark:bg-border-dark' : ' hover:scale-[1.05]'
                     }`}
                 >
@@ -376,7 +380,7 @@ const enterpiseModeNames = {
 const Notifications = () => {
     const { notifications } = useUser()
     return notifications.length > 0 ? (
-        <span className="size-4 text-xs bg-red text-white flex justify-center items-center rounded-full">
+        <span className="py-0.5 px-0.5 min-w-[20px] text-xs bg-red text-white flex justify-center items-center rounded-full">
             {notifications.length}
         </span>
     ) : null
@@ -417,7 +421,7 @@ const TheoTooltip = () => {
 }
 
 export const Main = () => {
-    const { user } = useUser()
+    const { user, logout } = useUser()
     const { openChat, hasUnread } = useChat()
     const {
         menu,
@@ -436,6 +440,7 @@ export const Main = () => {
     const { websiteTheme } = useValues(layoutLogic)
     const [posthogInstance, setPosthogInstance] = useState<string>()
     const [mediaModalOpen, setMediaModalOpen] = useState(false)
+    const [authModalOpen, setAuthModalOpen] = useState(false)
     const posthog = usePostHog()
 
     useEffect(() => {
@@ -462,6 +467,30 @@ export const Main = () => {
 
     return (
         <div>
+            <SideModal
+                open={authModalOpen}
+                setOpen={setAuthModalOpen}
+                title="Sign into PostHog.com"
+                className="!bg-light dark:!bg-dark !border-light dark:!border-dark"
+            >
+                <div className="bg-border dark:bg-border-dark p-4 mb-2">
+                    <p className="text-sm mb-2">
+                        <strong>Note: PostHog.com authentication is separate from your PostHog app.</strong>
+                    </p>
+
+                    <p className="text-sm mb-0">
+                        We suggest signing up with your personal email. Soon you'll be able to link your PostHog app
+                        account.
+                    </p>
+                </div>
+
+                <Authentication
+                    onAuth={() => setAuthModalOpen(false)}
+                    initialView="sign-in"
+                    showBanner={false}
+                    showProfile={false}
+                />
+            </SideModal>
             <MediaUploadModal open={mediaModalOpen} setOpen={setMediaModalOpen} />
             <div className="border-b border-light dark:border-dark bg-accent dark:bg-accent-dark mb-1">
                 <div
@@ -535,7 +564,7 @@ export const Main = () => {
                             )}
                         >
                             <button
-                                className="group my-1mr-[1px] p-2 hover:bg-border dark:hover:bg-border-dark rounded relative"
+                                className="group my-1mr-[1px] p-2 hover:bg-border dark:hover:bg-border-dark rounded-full relative"
                                 onClick={openChat}
                             >
                                 <IconChatHelp className="opacity-50 inline-block w-6 group-hover:opacity-75" />
@@ -611,6 +640,27 @@ export const Main = () => {
                                                 )}
                                             </>
                                         )}
+
+                                        <li className="px-1">
+                                            {user?.profile ? (
+                                                <button
+                                                    onClick={() => logout()}
+                                                    className="group/item flex items-center text-sm px-2 py-2 rounded-sm hover:bg-border dark:hover:bg-border-dark w-full"
+                                                >
+                                                    <IconLock className="opacity-50 group-hover/item:opacity-75 inline-block mr-2 w-6" />
+                                                    Community logout
+                                                </button>
+                                            ) : (
+                                                <button
+                                                    onClick={() => setAuthModalOpen(true)}
+                                                    className="group/item flex items-center text-sm px-2 py-2 rounded-sm hover:bg-border dark:hover:bg-border-dark w-full"
+                                                >
+                                                    <IconUser className="opacity-50 group-hover/item:opacity-75 inline-block mr-2 w-6" />
+                                                    Community login
+                                                </button>
+                                            )}
+                                        </li>
+
                                         <li className="bg-border/20 dark:bg-border-dark/20 border-y border-light dark:border-dark text-[13px] px-2 py-1.5 !my-1 text-primary/50 dark:text-primary-dark/60 z-20 m-0 font-semibold">
                                             Site settings
                                         </li>
