@@ -75,9 +75,9 @@ export default function Chat(): JSX.Element | null {
                         <AnimatePresence>
                             {showDisclaimer && (
                                 <motion.div
-                                    initial={{ opacity: 0 }}
-                                    animate={{ opacity: 1, transition: { duration: 0.2 } }}
-                                    exit={{ opacity: 0, transition: { duration: 0.2 } }}
+                                    initial={{ opacity: 0, translateY: '-100%' }}
+                                    animate={{ opacity: 1, translateY: 0, transition: { duration: 0.2 } }}
+                                    exit={{ opacity: 0, translateY: '-100%', transition: { duration: 0.2 } }}
                                     className="absolute top-0 left-0 w-full z-10"
                                 >
                                     <div className="m-2 p-2 flex items-center justify-between bg-[#feedd5] dark:bg-dark border border-light dark:border-dark rounded overflow-hidden flex-shrink-0">
