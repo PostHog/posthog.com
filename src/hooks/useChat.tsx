@@ -7,7 +7,8 @@ import Chat from 'components/Chat'
 
 interface ChatContextType {
     chatOpen: boolean
-    setChatOpen: (open: boolean) => void
+    closeChat: () => void
+    openChat: () => void
     chatting: boolean
     hasUnread: boolean
     setHasUnread: (unread: boolean) => void
@@ -42,6 +43,14 @@ export function ChatProvider({ children }: { children: ReactNode }): JSX.Element
         [hasFirstResponse, chatOpen]
     )
 
+    const openChat = () => {
+        setChatOpen(true)
+    }
+
+    const closeChat = () => {
+        setChatOpen(false)
+    }
+
     const renderChat = (target: string) => {
         // Render chat (usually after the target element is mounted)
         import('@inkeep/uikit-js').then((inkeepJS) => {
@@ -65,7 +74,7 @@ export function ChatProvider({ children }: { children: ReactNode }): JSX.Element
         // Open chat on ?chat=open
         const params = new URLSearchParams(window.location.search)
         if (params.get('chat') === 'open') {
-            setChatOpen(true)
+            openChat()
         }
     }, [])
 
@@ -121,7 +130,7 @@ export function ChatProvider({ children }: { children: ReactNode }): JSX.Element
         // Open chat on ? key press
         const handleKeyPress = (event: KeyboardEvent) => {
             if (!chatOpen && event.key === '?') {
-                setChatOpen(true)
+                openChat()
                 event.preventDefault()
             }
         }
@@ -134,7 +143,8 @@ export function ChatProvider({ children }: { children: ReactNode }): JSX.Element
         <ChatContext.Provider
             value={{
                 chatOpen,
-                setChatOpen,
+                closeChat,
+                openChat,
                 chatting,
                 hasUnread,
                 setHasUnread,

@@ -15,7 +15,7 @@ interface AskMaxProps {
 export default function AskMax({ border = false, className = '' }: AskMaxProps) {
     const posthog = usePostHog()
     const { compact } = useLayoutData()
-    const { setChatOpen } = useChat()
+    const { openChat } = useChat()
     const {
         allDocsPages: { totalDocsCount },
     } = useStaticQuery(graphql`
@@ -30,7 +30,7 @@ export default function AskMax({ border = false, className = '' }: AskMaxProps) 
 
     const handleChatOpen = () => {
         posthog?.capture('Opened MaxAI chat')
-        setChatOpen(true)
+        openChat()
     }
 
     return compact ? null : (

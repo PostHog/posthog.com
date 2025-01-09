@@ -28,7 +28,6 @@ type ProductAnalyticsProps = {
 
 export const Content = ({ quickLinks = false }) => {
     const { compact } = useLayoutData()
-    const { setChatOpen } = useChat()
     const {
         allDocsPages: { totalDocsCount },
     } = useStaticQuery(graphql`
@@ -52,7 +51,6 @@ export const Content = ({ quickLinks = false }) => {
             />
 
             <AskMax />
-
 
             {(quickLinks || compact) && (
                 <QuickLinks

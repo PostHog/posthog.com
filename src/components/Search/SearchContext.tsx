@@ -41,7 +41,7 @@ const SearchContext = React.createContext<SearchContextValue>({
 
 export const SearchProvider: React.FC = ({ children }) => {
     const posthog = usePostHog()
-    const { setChatOpen } = useChat()
+    const { closeChat } = useChat()
     const [isVisible, setIsVisible] = React.useState<boolean>(false)
     const [initialFilter, setInitialFilter] = React.useState<SearchResultType | undefined>(undefined)
 
@@ -78,7 +78,7 @@ export const SearchProvider: React.FC = ({ children }) => {
 
         setInitialFilter(filter)
         setIsVisible(true)
-        setChatOpen(false)
+        closeChat()
     }
 
     const close = () => {

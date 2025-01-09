@@ -7,7 +7,7 @@ import usePostHog from 'hooks/usePostHog'
 
 export default function Chat(): JSX.Element | null {
     const posthog = usePostHog()
-    const { chatOpen, setChatOpen, chatting } = useChat()
+    const { chatOpen, closeChat, chatting } = useChat()
     const [height, setHeight] = useState<string | number>('100%')
     const [showDisclaimer, setShowDisclaimer] = useState(true)
     const chatRef = useRef<HTMLDivElement>(null)
@@ -15,7 +15,7 @@ export default function Chat(): JSX.Element | null {
     useEffect(() => {
         const handleClickOutside = (event: MouseEvent) => {
             if (chatRef.current && !chatRef.current.contains(event.target as Node)) {
-                setChatOpen(false)
+                closeChat()
             }
         }
 
@@ -31,7 +31,7 @@ export default function Chat(): JSX.Element | null {
     useEffect(() => {
         const handleEscKey = (event: KeyboardEvent) => {
             if (event.key === 'Escape' && chatOpen) {
-                setChatOpen(false)
+                closeChat()
             }
         }
 
@@ -56,7 +56,7 @@ export default function Chat(): JSX.Element | null {
                 >
                     <button
                         onClick={() => {
-                            setChatOpen(!chatOpen)
+                            closeChat()
                             posthog?.capture('Closed MaxAI chat')
                         }}
                         className={`absolute left-0 -translate-x-full z-10 rounded-tl rounded-bl py-1 border-l border-t border-b border-border dark:border-dark group transition-colors bg-white dark:bg-[#1c1c1c] pr-0.5 top-[35px]`}
