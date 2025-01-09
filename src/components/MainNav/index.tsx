@@ -12,7 +12,7 @@ import {
     IconChevronDown,
     IconLetter,
     IconUpload,
-    IconLeave,
+    IconLock,
     IconChatHelp,
 } from '@posthog/icons'
 
@@ -467,8 +467,12 @@ export const Main = () => {
 
     return (
         <div>
-            <SideModal open={authModalOpen} setOpen={setAuthModalOpen}>
-                <h4 className="mb-4">Sign into PostHog.com</h4>
+            <SideModal
+                open={authModalOpen}
+                setOpen={setAuthModalOpen}
+                title="Sign into PostHog.com"
+                className="!bg-light dark:!bg-dark !border-light dark:!border-dark"
+            >
                 <div className="bg-border dark:bg-border-dark p-4 mb-2">
                     <p className="text-sm mb-2">
                         <strong>Note: PostHog.com authentication is separate from your PostHog app.</strong>
@@ -641,18 +645,18 @@ export const Main = () => {
                                             {user?.profile ? (
                                                 <button
                                                     onClick={() => logout()}
-                                                    className="group/item text-sm px-2 py-2 rounded-sm hover:bg-border dark:hover:bg-border-dark block w-full text-left"
+                                                    className="group/item flex items-center text-sm px-2 py-2 rounded-sm hover:bg-border dark:hover:bg-border-dark w-full"
                                                 >
-                                                    <IconLeave className="opacity-50 group-hover/item:opacity-75 inline-block mr-2 w-6" />
-                                                    Logout
+                                                    <IconLock className="opacity-50 group-hover/item:opacity-75 inline-block mr-2 w-6" />
+                                                    Community logout
                                                 </button>
                                             ) : (
                                                 <button
                                                     onClick={() => setAuthModalOpen(true)}
-                                                    className="group/item text-sm px-2 py-2 rounded-sm hover:bg-border dark:hover:bg-border-dark block w-full text-left"
+                                                    className="group/item flex items-center text-sm px-2 py-2 rounded-sm hover:bg-border dark:hover:bg-border-dark w-full"
                                                 >
                                                     <IconUser className="opacity-50 group-hover/item:opacity-75 inline-block mr-2 w-6" />
-                                                    Login
+                                                    Community login
                                                 </button>
                                             )}
                                         </li>
