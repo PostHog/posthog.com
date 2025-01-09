@@ -35,6 +35,7 @@ import MediaUploadModal from 'components/MediaUploadModal'
 import SideModal from 'components/Modal/SideModal'
 import { Authentication } from 'components/Squeak'
 import { useChat } from 'hooks/useChat'
+import { useSearch } from 'components/Search/SearchContext'
 
 export const Avatar = (props: { className?: string; src?: string }) => {
     return (
@@ -420,8 +421,6 @@ const TheoTooltip = () => {
 
 export const Main = () => {
     const { user, logout } = useUser()
-    const { open } = useSearch()
-    const { user } = useUser()
     const { openChat, hasUnread } = useChat()
     const {
         menu,
