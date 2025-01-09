@@ -88,8 +88,7 @@ This works similarly to PostHog's [`identify` function](/docs/product-analytics/
 1. It identifies anonymous users with a distinct ID, creating a person in PostHog.
 2. It sets the person properties.
 
-
-> If you're using the PostHog 
+> If you're also using the PostHog SDK or snippet for the other PostHog functionality, you also need to call `posthog.identify`
 
 ### Aliasing users
 
