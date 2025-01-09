@@ -88,7 +88,8 @@ Your primary responsibility is simply to make sure SDK questions get some love. 
 You don't have to be an expert in all of the SDKs, but it can be a great opportunity to dive into parts unknown.
 
 ### How should I prioritize my time?
-Firstly, try to stay on top of new escalated Zendesk tickets and GitHub issues, and make sure that issues related to a specific team are routed to them. If there is a relevant team (e.g. the issue is related to session replay in posthog-js), you can assign the Zendesk ticket to that team, and use the team's label in GitHub. If there is no relevant team for a GitHub issue, please label with `SDK Support Hero`.
+
+Firstly, try to stay on top of new escalated Zendesk tickets and GitHub issues, and make sure that issues related to a specific team are routed to them. If there is a relevant team (e.g. the issue is related to session replay in posthog-js), you can assign the Zendesk ticket to that team, and use the team's label in GitHub. If there is no relevant team for a GitHub issue, please label with `SDK Support Hero`. Feel free to try to fix things yourself before tagging the team.
 
 Next, please work on SDK tickets in Zendesk, and GitHub issues labelled `SDK Support Hero` (and unlabelled, but please label these!). You can use your own judgement to decide which issues to work on but please consider effort / reward / urgency / your skill set. For example, `posthog-js` usually has the most issues, but if you're a Python expert, you might want to focus on `posthog-python`.
 
