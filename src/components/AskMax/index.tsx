@@ -11,9 +11,11 @@ interface AskMaxProps {
     border?: boolean
     className?: string
     quickQuestions?: string[]
+    linkOnly?: boolean
+    children?: React.ReactNode
 }
 
-export default function AskMax({ border = false, className = '', quickQuestions }: AskMaxProps) {
+export default function AskMax({ border = false, className = '', quickQuestions, linkOnly = false, children }: AskMaxProps) {
     const posthog = usePostHog()
     const { compact } = useLayoutData()
     const { openChat, setQuickQuestions } = useChat()
@@ -35,6 +37,14 @@ export default function AskMax({ border = false, className = '', quickQuestions 
             setQuickQuestions(quickQuestions)
         }
         openChat()
+    }
+
+    if (linkOnly) {
+        return (
+            <button onClick={handleChatOpen} className={className}>
+                {children}
+            </button>
+        )
     }
 
     return compact ? null : (
