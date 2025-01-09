@@ -71,9 +71,11 @@ Outside of your team's Support Hero rotation, you are also eligible to serve in 
 
 Your primary responsibility is simply to make sure SDK questions get some love. During the rotation, please keep an eye on two things:
 - [Escalated SDK tickets in Zendesk](https://posthoghelp.zendesk.com/agent/filters/30528724215067)
-- New issues in the SDK repositories, e.g. [posthog-js](https://github.com/PostHog/posthog-js/issues?q=sort%3Aupdated-desc+is%3Aissue+is%3Aopen)
+- New issues in the SDK repositories, e.g. [posthog-js](https://github.com/PostHog/posthog-js/issues?q=sort%3Aupdated-desc+is%3Aissue+is%3Aopen), including the Mobile SDKs, e.g. [posthog-android](https://github.com/postHog/posthog-android).
 
 You don't have to be an expert in all of the SDKs, but it can be a great opportunity to dive into parts unknown. Feel free to ping relevant folks as needed.
+
+For Mobile SDK issues, the SLA has to be a bit faster since rolling out fixes on Mobile Apps may take weeks or even months. So, if you see a high-priority issue, please try to figure it out but if you get stuck, escalate it to the relevant team as soon as possible or ping @mobile-folks on Slack.
 
 ## Don't ask users to do work that you can do!
 
