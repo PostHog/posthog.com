@@ -8,7 +8,7 @@ type InkeepSharedSettings = {
 }
 
 export const defaultQuickQuestions = [
-    'Why isn\'t my data showing up?',
+    "Why isn't my data showing up?",
     'How do I set up a reverse proxy?',
     'How do I identify users?',
     'What are person profiles and how are they billed?',
@@ -55,6 +55,7 @@ const useInkeepSettings = (): InkeepSharedSettings => {
         botAvatarSrcUrl: 'https://res.cloudinary.com/dmukukwp6/image/upload/v1688579513/max_c5dd553db8.png',
         botName: 'Max AI',
         quickQuestions: defaultQuickQuestions,
+        shouldHighlightFirstQuickQuestion: false,
     }
 
     return { baseSettings, aiChatSettings }
