@@ -10,13 +10,18 @@ export default function Chat(): JSX.Element | null {
     const posthog = usePostHog()
     const { chatOpen, closeChat, chatting, setQuickQuestions } = useChat()
     const [height, setHeight] = useState<string | number>('100%')
-    const [showDisclaimer, setShowDisclaimer] = useState(true)
+    const [showDisclaimer, setShowDisclaimer] = useState(false)
     const chatRef = useRef<HTMLDivElement>(null)
 
     const handleAnimationComplete = () => {
         if (!chatOpen) {
             setQuickQuestions(defaultQuickQuestions)
         }
+    }
+
+    const handleHideDisclaimer = () => {
+        setShowDisclaimer(false)
+        localStorage.setItem('showDisclaimer', 'false')
     }
 
     useEffect(() => {
@@ -51,6 +56,12 @@ export default function Chat(): JSX.Element | null {
         const height = mobileNav?.clientHeight
         setHeight(`calc(100% - ${height ?? 0}px)`)
     }, [chatOpen])
+
+    useEffect(() => {
+        if (localStorage.getItem('showDisclaimer') !== 'false') {
+            setShowDisclaimer(true)
+        }
+    }, [])
 
     return (
         <AnimatePresence>
@@ -90,7 +101,7 @@ export default function Chat(): JSX.Element | null {
                                             </kbd>{' '}
                                             to search PostHog.com
                                         </p>
-                                        <button className="" onClick={() => setShowDisclaimer(false)}>
+                                        <button className="" onClick={handleHideDisclaimer}>
                                             <IconX className="size-4 opacity-60 hover:opacity-100 transition-opacity" />
                                         </button>
                                     </div>
