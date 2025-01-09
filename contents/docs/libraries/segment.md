@@ -39,12 +39,17 @@ The simple Segment destination only supports tracking of pageviews, custom event
     analytics.load("<your-segment-key>");
 
     analytics.ready(() => {
-        window.posthog.init("<your-posthog-key>", {
+        window.posthog.init("<ph_project_api_key>", {
             api_host: '<ph_client_api_host>', // Use eu.i.posthog.com for EU instances
             segment: window.analytics, // Pass window.analytics here - NOTE: `window.` is important
             capture_pageview: false, // You want this false if you are going to use segment's `analytics.page()` for pageviews
-            // When the posthog library has loaded, call `analytics.page()` explicitly.
-            loaded: () => window.analytics.page(),
+            
+            loaded: (posthog) => {
+              // When the posthog library has loaded, call `analytics.page()` explicitly.
+              window.analytics.page()
+              // If you're calling analytics.identify, you still need to call posthog.identify too
+              // posthog.identify('[user unique id]')
+            }
         });
     })
     ```
@@ -70,7 +75,7 @@ Similarly, the `analytics.page()` function sends `$pageview` events and the `ana
 
 ### Identifying users
 
-To add identify users and add person properties, you can use Segment's `identify` function:
+To add identify users and add person properties, you can use Segment's `identify` function.
 
 ```js
 analytics.identify('userId123', {
@@ -82,6 +87,8 @@ This works similarly to PostHog's [`identify` function](/docs/product-analytics/
 
 1. It identifies anonymous users with a distinct ID, creating a person in PostHog.
 2. It sets the person properties.
+
+> If you're also using the PostHog SDK or snippet for the other PostHog functionality, you also need to call `posthog.identify`
 
 ### Aliasing users
 
