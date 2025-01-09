@@ -5,6 +5,7 @@ import { graphql } from 'gatsby'
 import { IconLightBulb, IconSidebarOpen } from '@posthog/icons'
 import { CallToAction } from 'components/CallToAction'
 import { useLayoutData } from 'components/Layout/hooks'
+import posthog from 'posthog-js'
 
 interface AskMaxProps {
     border?: boolean
@@ -25,6 +26,11 @@ export default function AskMax({ border = false, className = '' }: AskMaxProps) 
     `)
 
     const borderClasses = border ? 'py-6 mt-4 border-y border-light dark:border-dark' : 'mb-8'
+
+    const handleChatOpen = () => {
+        posthog?.capture('Opened MaxAI chat')
+        setChatOpen(true)
+    }
 
     return compact ? null : (
         <div className="@container">
@@ -50,7 +56,7 @@ export default function AskMax({ border = false, className = '' }: AskMaxProps) 
                         type="secondary"
                         size="md"
                         className="group [&>span]:flex [&>span]:items-center [&>span]:gap-1.5 [&>span]:px-3"
-                        onClick={() => setChatOpen(true)}
+                        onClick={handleChatOpen}
                     >
                         Chat with Max AI
                         <IconSidebarOpen className="size-6 inline-block opacity-75 group-hover:opacity-100" />

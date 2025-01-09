@@ -3,6 +3,7 @@ import { AnimatePresence, motion } from 'framer-motion'
 import InkeepEmbeddedChat from './Inkeep'
 import { useChat } from 'hooks/useChat'
 import { IconChevronDown, IconX } from '@posthog/icons'
+import posthog from 'posthog-js'
 
 export default function Chat(): JSX.Element | null {
     const { chatOpen, setChatOpen, chatting } = useChat()
@@ -55,6 +56,7 @@ export default function Chat(): JSX.Element | null {
                     <button
                         onClick={() => {
                             setChatOpen(!chatOpen)
+                            posthog?.capture('Closed MaxAI chat')
                         }}
                         className={`absolute left-0 -translate-x-full z-10 rounded-tl rounded-bl py-1 border-l border-t border-b border-border dark:border-dark group transition-colors bg-white dark:bg-[#1c1c1c] pr-0.5 top-[35px]`}
                     >
