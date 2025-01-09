@@ -14,10 +14,7 @@ initKea(false)
 export const wrapRootElement = ({ element }) => (
     <UserProvider>
         <ToastProvider>
-            <ChatProvider>
-                {wrapElement({ element })}
-                <Chat />
-            </ChatProvider>
+            <ChatProvider>{wrapElement({ element })}</ChatProvider>
         </ToastProvider>
     </UserProvider>
 )
