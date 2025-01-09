@@ -148,24 +148,33 @@ We can set the frequency to check this daily. And for critical alerts like this,
 
 ### 4. Alert on changes in conversion rates
 
-To set alerts when your conversion rate changes, you can set up an insight that tracks signups on your pricing page.
+To set alerts when our conversion rate changes, we can set up an insight that tracks pricing page to signup conversion.
 
-For example, we can create a trend insight filtered for our pricing pageviews and our [`user_signed_up` event](/docs/getting-started/send-events#2-capture-custom-events), which is triggered whenever a user completes our signup flow and creates their account.
+For example, we can create a trend insight filtered by unique pricing pageviews and a [`user_signed_up` event](/docs/getting-started/send-events#2-capture-custom-events), which is triggered whenever a user completes our signup flow and creates their account.
 
-So this insight will display a graph with a line for the number of pageviews for the pricing page as well as a separate line for the number of users that signed up.
+In this example, we enable [formula mode](/docs/product-analytics/trends/formulas) and divide the number of signups by the number of unique visitors that visit the pricing page, which gives us a conversion rate to work with.
 
 <ProductScreenshot
-    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/conversions_light_efbbc10280.png"
-    imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/conversion_graph_d4ac533adf.png"
+    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/conversion_formula_light_d0869f0480.png"
+    imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/conversion_formula_dark_104fdcdcb7.png"
     alt="Conversions"
     classes="rounded"
 />
 
-If we want to find out when the conversion rate increases or decreases by 10%, we can set up multiple alerts. We can set up one alert for when the `user_sign_up` event increases by 10% and a separate alert for when the event decreases by 10%.
+To find out when the conversion rate increases or decreases by 10%, we can set up multiple alerts based on the formula above.
 
 <ProductScreenshot
-    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/mutliple_alerts_light_a45b5f0ad9.png"
-    imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/mutliple_alerts_dark_1d37e0e9b9.png"
+    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/increase_alert_dark_5811f94fda.png"
+    imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/increase_alert_light_8d64702edc.png"
+    alt="Conversion alert setup"
+    classes="rounded"
+/>
+
+We can set up one alert for when the `user_sign_up` event increases by 10% and a separate alert for when the event decreases by 10%.
+
+<ProductScreenshot
+    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/multiple_alerts_light_431156475b.png"
+    imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/multiple_alerts_dark_e2982a022e.png"
     alt="Multiple alerts"
     classes="rounded"
 />
