@@ -52,9 +52,10 @@ export const Content = ({ quickLinks = false }) => {
 
             <AskMax
                 quickQuestions={[
-                    'How do I track custom events in PostHog?',
-                    'How do I create a funnel analysis?',
-                    'How do I track user retention?',
+                    'Why aren\'t my events showing up?',
+                    'How do I send custom properties with an event?',
+                    'What\'s the difference between events and actions?',
+                    'What are person profiles and how are they billed?',
                 ]}
             />
 

@@ -84,7 +84,13 @@ const WebAnalytics: React.FC<WebAnalyticsProps> = ({ data }) => {
                     imageClasses="max-h-48 md:max-h-64"
                 />
 
-                <AskMax />
+                <AskMax
+                    quickQuestions={[
+                        'Do I need a cookie banner?',
+                        'How do I track conversions?',
+                        'Why do my metrics differ from other tools?',
+                    ]}
+                 />
 
                 <Content />
 

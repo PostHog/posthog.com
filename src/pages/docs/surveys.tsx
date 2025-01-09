@@ -132,7 +132,13 @@ const Surveys: React.FC<SurveysProps> = () => {
                 imageClasses=""
             />
 
-            <AskMax />
+            <AskMax 
+                quickQuestions={[
+                    'Can I target a survey based on user behavior?',
+                    'How do I create my own survey UI?',
+                    'Why won\'t my survey appear?',
+                ]}
+            />
                 <Content />
             </PostLayout>
         </Layout>

@@ -122,7 +122,13 @@ const Experiments: React.FC<ExperimentsProps> = ({ data }) => {
                 imageClasses=""
             />
 
-            <AskMax />
+            <AskMax 
+                quickQuestions={[
+                    'How can I watch recordings of users in my experiment?',
+                    'Can I override a release condition?',
+                    'How do I know if I\'ve reached statistical significance?',
+                ]}
+            />
 
                 <Content />
 

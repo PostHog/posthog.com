@@ -8,9 +8,9 @@ type InkeepSharedSettings = {
 }
 
 export const defaultQuickQuestions = [
-    'How do I identify users?',
-    'Help debug sending data',
+    'Why isn\'t my data showing up?',
     'How do I set up a reverse proxy?',
+    'How do I identify users?',
     'What are person profiles and how are they billed?',
 ]
 

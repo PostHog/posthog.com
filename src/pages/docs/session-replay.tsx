@@ -140,7 +140,12 @@ const SessionRecording: React.FC<SessionRecordingProps> = ({ data }) => {
                     imageClasses=""
                 />
 
-                <AskMax />
+                <AskMax 
+                    quickQuestions={[
+                        'How do I mask sensitive data?',
+                        'Can I enable recordings only for certain users?',
+                        'How can I control costs?',
+                    ]}/>
                 
                 <Content />
 

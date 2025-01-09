@@ -66,7 +66,13 @@ const DataWarehouse: React.FC = () => {
                 imageClasses="max-h-48 md:max-h-64"
             />
 
-            <AskMax />
+            <AskMax 
+                quickQuestions={[
+                    'What are some cool things I can do?',
+                    'What is HogQL and why should I use it?',
+                    'How can I get external data into PostHog?',
+                ]}
+            />
                 <Content />
                 <CallToAction to="/docs/data-warehouse/query" width="full">
                     Visit the manual

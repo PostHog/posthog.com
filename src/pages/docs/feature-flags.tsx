@@ -167,7 +167,13 @@ const FeatureFlags: React.FC<FeatureFlagsProps> = ({ data }) => {
                 imageClasses=""
             />
 
-            <AskMax />
+            <AskMax 
+                quickQuestions={[
+                    'Why is there a delay in loading flags?',
+                    'How do I create a multivariate flag?',
+                    'Can I override a flag?',
+                ]}
+            />
 
                 <Content />
 
