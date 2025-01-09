@@ -5,7 +5,7 @@ import { graphql } from 'gatsby'
 import { IconLightBulb, IconSidebarOpen } from '@posthog/icons'
 import { CallToAction } from 'components/CallToAction'
 import { useLayoutData } from 'components/Layout/hooks'
-import posthog from 'posthog-js'
+import usePostHog from 'hooks/usePostHog'
 
 interface AskMaxProps {
     border?: boolean
@@ -13,6 +13,7 @@ interface AskMaxProps {
 }
 
 export default function AskMax({ border = false, className = '' }: AskMaxProps) {
+    const posthog = usePostHog()
     const { compact } = useLayoutData()
     const { setChatOpen } = useChat()
     const {

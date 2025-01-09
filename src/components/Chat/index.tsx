@@ -3,9 +3,10 @@ import { AnimatePresence, motion } from 'framer-motion'
 import InkeepEmbeddedChat from './Inkeep'
 import { useChat } from 'hooks/useChat'
 import { IconChevronDown, IconX } from '@posthog/icons'
-import posthog from 'posthog-js'
+import usePostHog from 'hooks/usePostHog'
 
 export default function Chat(): JSX.Element | null {
+    const posthog = usePostHog()
     const { chatOpen, setChatOpen, chatting } = useChat()
     const [height, setHeight] = useState<string | number>('100%')
     const [showDisclaimer, setShowDisclaimer] = useState(true)
