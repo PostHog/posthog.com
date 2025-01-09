@@ -50,7 +50,13 @@ export const Content = ({ quickLinks = false }) => {
                 imageUrl="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Home/Slider/images/product-analytics-hog.png"
             />
 
-            <AskMax />
+            <AskMax
+                quickQuestions={[
+                    'How do I track custom events in PostHog?',
+                    'How do I create a funnel analysis?',
+                    'How do I track user retention?',
+                ]}
+            />
 
             {(quickLinks || compact) && (
                 <QuickLinks

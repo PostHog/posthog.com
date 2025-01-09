@@ -1,5 +1,5 @@
 import React, { createContext, useContext, ReactNode, useState, useEffect, useRef, useCallback } from 'react'
-import useInkeepSettings from './useInkeepSettings'
+import useInkeepSettings, { defaultQuickQuestions } from './useInkeepSettings'
 import { layoutLogic } from 'logic/layoutLogic'
 import { useValues } from 'kea'
 import { AIChatFunctions } from '@inkeep/uikit'
@@ -15,6 +15,7 @@ interface ChatContextType {
     loading: boolean
     renderChat: (target: string) => void
     inkeep: AIChatFunctions | null
+    setQuickQuestions: (questions: string[]) => void
 }
 
 const ChatContext = createContext<ChatContextType | undefined>(undefined)
@@ -28,6 +29,7 @@ export function ChatProvider({ children }: { children: ReactNode }): JSX.Element
     const [hasUnread, setHasUnread] = useState(false)
     const [loading, setLoading] = useState(true)
     const [hasFirstResponse, setHasFirstResponse] = useState(false)
+    const [quickQuestions, setQuickQuestions] = useState(defaultQuickQuestions)
 
     const logEventCallback = useCallback(
         (event: any) => {
@@ -63,7 +65,10 @@ export function ChatProvider({ children }: { children: ReactNode }): JSX.Element
                         ...baseSettings,
                         logEventCallback,
                     },
-                    aiChatSettings,
+                    aiChatSettings: {
+                        ...aiChatSettings,
+                        quickQuestions,
+                    },
                 },
             })
             setLoading(false)
@@ -77,6 +82,26 @@ export function ChatProvider({ children }: { children: ReactNode }): JSX.Element
             openChat()
         }
     }, [])
+
+    useEffect(() => {
+        // Update quick questions
+        if (quickQuestions.length > 0) {
+            if (embeddedChatRef.current) {
+                // Remove old quick questions first because they're not removed automatically
+                embeddedChatRef.current.render({
+                    aiChatSettings: {
+                        quickQuestions: false,
+                    },
+                })
+                // Add new quick questions
+                embeddedChatRef.current.render({
+                    aiChatSettings: {
+                        quickQuestions,
+                    },
+                })
+            }
+        }
+    }, [quickQuestions])
 
     useEffect(() => {
         // Add community suggestion to chat
@@ -151,6 +176,7 @@ export function ChatProvider({ children }: { children: ReactNode }): JSX.Element
                 loading,
                 renderChat,
                 inkeep: embeddedChatRef.current,
+                setQuickQuestions,
             }}
         >
             {children}

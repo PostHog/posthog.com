@@ -10,12 +10,13 @@ import usePostHog from 'hooks/usePostHog'
 interface AskMaxProps {
     border?: boolean
     className?: string
+    quickQuestions?: string[]
 }
 
-export default function AskMax({ border = false, className = '' }: AskMaxProps) {
+export default function AskMax({ border = false, className = '', quickQuestions }: AskMaxProps) {
     const posthog = usePostHog()
     const { compact } = useLayoutData()
-    const { openChat } = useChat()
+    const { openChat, setQuickQuestions } = useChat()
     const {
         allDocsPages: { totalDocsCount },
     } = useStaticQuery(graphql`
@@ -30,6 +31,9 @@ export default function AskMax({ border = false, className = '' }: AskMaxProps) 
 
     const handleChatOpen = () => {
         posthog?.capture('Opened MaxAI chat')
+        if (quickQuestions) {
+            setQuickQuestions(quickQuestions)
+        }
         openChat()
     }
 

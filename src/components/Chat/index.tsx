@@ -4,13 +4,20 @@ import InkeepEmbeddedChat from './Inkeep'
 import { useChat } from 'hooks/useChat'
 import { IconChevronDown, IconX } from '@posthog/icons'
 import usePostHog from 'hooks/usePostHog'
+import { defaultQuickQuestions } from 'hooks/useInkeepSettings'
 
 export default function Chat(): JSX.Element | null {
     const posthog = usePostHog()
-    const { chatOpen, closeChat, chatting } = useChat()
+    const { chatOpen, closeChat, chatting, setQuickQuestions } = useChat()
     const [height, setHeight] = useState<string | number>('100%')
     const [showDisclaimer, setShowDisclaimer] = useState(true)
     const chatRef = useRef<HTMLDivElement>(null)
+
+    const handleAnimationComplete = () => {
+        if (!chatOpen) {
+            setQuickQuestions(defaultQuickQuestions)
+        }
+    }
 
     useEffect(() => {
         const handleClickOutside = (event: MouseEvent) => {
@@ -53,6 +60,7 @@ export default function Chat(): JSX.Element | null {
                     initial={{ translateX: '110%' }}
                     animate={{ translateX: chatOpen ? 0 : '110%', transition: { type: 'tween' } }}
                     className="fixed bottom-0 right-0 h-full bg-white dark:bg-dark z-[999999] border-l border-border dark:border-dark w-[350px] sm:w-[400px]"
+                    onAnimationComplete={handleAnimationComplete}
                 >
                     <button
                         onClick={() => {

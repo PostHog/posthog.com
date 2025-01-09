@@ -7,6 +7,13 @@ type InkeepSharedSettings = {
     aiChatSettings: InkeepAIChatSettings
 }
 
+export const defaultQuickQuestions = [
+    'How do I identify users?',
+    'Help debug sending data',
+    'How do I set up a reverse proxy?',
+    'What are person profiles and how are they billed?',
+]
+
 const useInkeepSettings = (): InkeepSharedSettings => {
     const { websiteTheme } = useValues(layoutLogic)
     const baseSettings: InkeepBaseSettings = {
@@ -47,12 +54,7 @@ const useInkeepSettings = (): InkeepSharedSettings => {
     const aiChatSettings: InkeepAIChatSettings = {
         botAvatarSrcUrl: 'https://res.cloudinary.com/dmukukwp6/image/upload/v1688579513/max_c5dd553db8.png',
         botName: 'Max AI',
-        quickQuestions: [
-            'How do I identify users?',
-            'Help debug sending data',
-            'How do I set up a reverse proxy?',
-            'What are person profiles and how are they billed?',
-        ],
+        quickQuestions: defaultQuickQuestions,
     }
 
     return { baseSettings, aiChatSettings }
