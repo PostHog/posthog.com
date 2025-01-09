@@ -1,16 +1,13 @@
-import type { InkeepAIChatSettings, InkeepSearchSettings, InkeepBaseSettings, InkeepModalSettings } from '@inkeep/uikit'
+import type { InkeepAIChatSettings, InkeepBaseSettings } from '@inkeep/uikit'
 import { useValues } from 'kea'
 import { layoutLogic } from 'logic/layoutLogic'
 
 type InkeepSharedSettings = {
     baseSettings: InkeepBaseSettings
     aiChatSettings: InkeepAIChatSettings
-    searchSettings: InkeepSearchSettings
-    modalSettings: InkeepModalSettings
 }
 
 const useInkeepSettings = (): InkeepSharedSettings => {
-    
     const { websiteTheme } = useValues(layoutLogic)
     const baseSettings: InkeepBaseSettings = {
         apiKey: process.env.GATSBY_INKEEP_API_KEY,
@@ -47,10 +44,6 @@ const useInkeepSettings = (): InkeepSharedSettings => {
         optOutFunctionalCookies: true,
     }
 
-    const modalSettings: InkeepModalSettings = {}
-
-    const searchSettings: InkeepSearchSettings = {}
-
     const aiChatSettings: InkeepAIChatSettings = {
         botAvatarSrcUrl: 'https://res.cloudinary.com/dmukukwp6/image/upload/v1688579513/max_c5dd553db8.png',
         botName: 'Max AI',
@@ -62,7 +55,7 @@ const useInkeepSettings = (): InkeepSharedSettings => {
         ],
     }
 
-    return { baseSettings, aiChatSettings, searchSettings, modalSettings }
+    return { baseSettings, aiChatSettings }
 }
 
 export default useInkeepSettings

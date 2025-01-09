@@ -48,7 +48,6 @@ export const wrapPageElement = ({ element, props }) => {
                             element
                         ),
                 })}
-                <Chat />
             </ChatProvider>
         </UserProvider>
     )
