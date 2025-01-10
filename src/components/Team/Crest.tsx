@@ -293,18 +293,14 @@ export default function Crest({
                                 image={values.miniCrest}
                                 className="!size-full bg-white rounded-full border border-border dark:border-border-dark overflow-hidden !p-2"
                             />
-                        ) : (
+                        ) : values.miniCrest?.objectURL ? (
                             <div className="size-full">
-                                {values.miniCrest?.objectURL ? (
-                                    <img
-                                        src={values.miniCrest?.objectURL}
-                                        className="absolute w-full h-full object-contain object-center inset-0 size-full bg-white rounded-full border border-border dark:border-border-dark overflow-hidden"
-                                    />
-                                ) : (
-                                    <div className="size-full bg-white rounded-full border border-border dark:border-border-dark overflow-hidden"></div>
-                                )}
+                                <img
+                                    src={values.miniCrest?.objectURL}
+                                    className="absolute w-full h-full object-contain object-center inset-0 size-full bg-white rounded-full border border-border dark:border-border-dark overflow-hidden"
+                                />
                             </div>
-                        )}
+                        ) : null}
                     </div>
                 ) : null}
                 {values.crestOptions ? (
