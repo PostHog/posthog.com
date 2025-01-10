@@ -78,7 +78,7 @@ For these reasons, we:
 
 - **Speed:** We want to be highly reactive, low process, and reliant on other teams as little as possible to ship things. We want to get stuff wrong quickly, then iterate.
 
-- **Helping PostHog users be successful:** Through our docs, tutorials, newsletter and beyond, we help PostHog users be more successful, both generally in their goals, but also more successful and powerful users of PostHog.
+- **Helping PostHog users be successful:** Through our docs, tutorials, [newsletter](/handbook/content-and-docs/newsletter) and beyond, we help PostHog users be more successful, both generally in their goals, but also more successful and powerful users of PostHog.
 
 - **Content for our ideal customer:** We deliver genuinely useful insights about things those customers care about (can be purely product-related, but also general advice). We're pitching our content at ‘self-servers’.
 
