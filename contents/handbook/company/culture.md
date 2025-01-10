@@ -46,7 +46,7 @@ To accomplish this, we use [asynchronous communication](/handbook/company/commun
 
 Putting things in writing helps us clarify our own ideas, as well as allow others to provide better feedback. It has been key to our development and growth.
 
-## We don't let others fail
+## We give direct feedback early and often
 
 Everyone should help everyone else raise their game. Fatigue sets in when you complete a task, so it's easier for outsiders to help those creating the work to raise their game.
 
