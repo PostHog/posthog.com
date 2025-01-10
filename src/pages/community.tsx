@@ -30,7 +30,8 @@ import CloudinaryImage from 'components/CloudinaryImage'
 
 const quote =
     // "Let your work shine as brightly as a hedgehog's quills, threading through life's challenges with perseverance."
-    'Even the smallest hedgehog carries the wisdom of survival, showing us that even in a world full of thorns, one can embrace challenges with grace and courage.'
+    // 'Even the smallest hedgehog carries the wisdom of survival, showing us that even in a world full of thorns, one can embrace challenges with grace and courage.'
+    'Why scurry through life when you can forage? Take time to sniff the mealworms. When things feel overwhelming, just curl into a ball.'
 
 const TabButton = ({ active, onClick, children, className = '' }) => {
     return (
