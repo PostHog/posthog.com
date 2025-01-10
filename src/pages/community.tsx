@@ -238,7 +238,7 @@ const Main = () => {
                         content="<p>Welcome to <em>Inside PostHog</em> - our community newspaper. Find our latest posts, community questions, and everything else that's happening in the world of PostHog."
                         byline="- Andy, Editor-in-Chief"
                         image={
-                            <div className="w-24 rounded-full overflow-hidden bg-yellow">
+                            <div className="h-24 w-24 rounded-full overflow-hidden bg-yellow">
                                 <CloudinaryImage
                                     width={200}
                                     src="https://res.cloudinary.com/dmukukwp6/image/upload/andy_86a7232754.png"
@@ -263,7 +263,7 @@ const Main = () => {
                             title="Meet a team member"
                             content="<p>James G. is coming up on his 4-year anniversary. When he's not restarting servers, you can likely find him out on a trail."
                             image={
-                                <div className="w-24 rounded-full overflow-hidden bg-salmon">
+                                <div className="h-24 w-24 rounded-full overflow-hidden bg-salmon">
                                     <CloudinaryImage
                                         width={200}
                                         src="https://res.cloudinary.com/dmukukwp6/image/upload/james_g_d9de6cbcdb.png"
@@ -337,7 +337,7 @@ const Main = () => {
                 <li>having customers buy from us instead of us selling to them</li>
             </ol>"
                         image={
-                            <div className="w-24 rounded-full overflow-hidden bg-yellow">
+                            <div className="h-24 w-24 rounded-full overflow-hidden bg-yellow">
                                 <CloudinaryImage
                                     width={200}
                                     src="https://res.cloudinary.com/dmukukwp6/image/upload/james_b841adce96.png"
