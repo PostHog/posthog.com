@@ -73,7 +73,7 @@ On Tuesdays and Thursdays, we don't have internal meetings at all. Occasionally 
 
 Hiring high-performing and self-sufficient team members means we don't need the typical corporate processes that are designed to slow teams down. Instead, we're organized into [small teams](/handbook/team-structure), which prioritize speed by delegating decision-making autonomy as much as possible. 
 
-Our [management approach](/handbook/company/management) is super simple - James Hawkins, Tim, and the team leaders are the only managers, and everyone else reports to one of them. We don't want to create a fancy hierarchy of titles, as we believe this can lead, consciously or not, to people feeling less empowered to make changes and step on toes, especially if they are not in a 'senior' role. 
+Our [management approach](/handbook/company/management) is super simple - small teams report to their team leader, and each of the team leaders reports to one of our four execs. We don't want to create a fancy hierarchy of titles, as we believe this can lead, consciously or not, to people feeling less empowered to make changes and step on toes, especially if they are not in a 'senior' role. 
 
 It's up to you how to get things done. If you want to make a change, feel free to just create the pull request. If you want to discuss something more widely for a bigger piece of work, it might make sense to [use an RFC](/handbook/company/communication#requests-for-comment-rfcs) for a change inside your team. 
 
