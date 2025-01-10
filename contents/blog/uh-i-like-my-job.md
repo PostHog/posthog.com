@@ -1,6 +1,6 @@
 ---
 title: Inside my first months at PostHog
-date: 2024-12-12
+date: 2025-01-13
 author:
  - danilo-campos
 rootpage: /blog
