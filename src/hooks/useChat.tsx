@@ -154,6 +154,14 @@ export function ChatProvider({ children }: { children: ReactNode }): JSX.Element
     useEffect(() => {
         // Open chat on ? key press
         const handleKeyPress = (event: KeyboardEvent) => {
+            // Don't trigger if user is typing in an input or textarea
+            if (
+                event.target instanceof HTMLElement &&
+                (event.target.tagName === 'INPUT' || event.target.tagName === 'TEXTAREA')
+            ) {
+                return
+            }
+
             if (!chatOpen && event.key === '?') {
                 openChat()
                 event.preventDefault()
