@@ -332,15 +332,23 @@ const Main = () => {
 
                 <div className="pt-4">
                     <PersonSpotlight
-                        title="A musing from the CEO"
-                        content="<p>what motivates us:</p>
-            <ol>
-                <li>building an epic product and company</li>
-                <li>figuring out how far we can go</li>
-                <li>helping engineers build products</li>
-                <li>beating all the point solution competitors</li>
-                <li>having customers buy from us instead of us selling to them</li>
-            </ol>"
+                        title="Musings from the CEO"
+                        content="<p>nobody will remember:</p>
+            <ul>
+                <li>your salary</li>
+                <li>how “busy you were”</li>
+                <li>how many hours you worked</li>
+            </ul>
+
+            <p>people will remember:</p>
+
+            <ul>
+                <li>if you hopped on a quick call</li>
+                <li>when you hopped on a quick call</li>
+                <li>how many quick calls you hopped on</li>
+                <li>how you made them feel when you hopped on a quick call</li>
+            </ul>
+            "
                         image={
                             <div className="h-24 w-24 rounded-full overflow-hidden bg-yellow">
                                 <CloudinaryImage
