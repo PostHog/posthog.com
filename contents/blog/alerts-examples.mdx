@@ -1,5 +1,5 @@
 ---
-title: 'Never miss changes to your key metrics: 5 alerts you can use'
+title: 5 alerts so you never miss changes to your key metrics
 date: 2025-01-09
 author:
  - bijan-boustani
@@ -12,12 +12,7 @@ tags:
 
 To keep life interesting, it's important to live in a state of perpetual ignorance. When things are going well, there's no need to find out why. When things go downhill, let anxiety run its course. After all, who needs data and insights when you have hope?
 
-<ProductScreenshot
-    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/319051_c8e072f85e.gif"
-    imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/319051_c8e072f85e.gif"
-    alt="Driving blind gif"
-    classes="rounded"
-/>
+![Driving blind](https://res.cloudinary.com/dmukukwp6/image/upload/319051_c8e072f85e.gif)
 
 An alternative, more effective approach is to use [PostHog alerts](/docs/alerts) to get notified when important metrics change.
 
@@ -126,12 +121,7 @@ Alerts can also be used to check for the _absence_ of something happening.
 
 For example, PostHog tracks the number of transactional billing emails that get sent out every day. If these emails aren't getting sent, it would be a big deal.
 
-<ProductScreenshot
-    imageLight="https://frinkiac.com/video/S08E23/XOUcScbq8W_7yoA6nti16cCC31A=.gif"
-    imageDark="https://frinkiac.com/video/S08E23/XOUcScbq8W_7yoA6nti16cCC31A=.gif"
-    alt="Ignoring warnings gif"
-    classes="rounded"
-/>
+![Ignoring warnings](https://frinkiac.com/video/S08E23/XOUcScbq8W_7yoA6nti16cCC31A=.gif)
 
 To do something similar, you can track events when you trigger transactional emails. Then, create an insight to track the number of emails sent every day.
 
@@ -152,7 +142,7 @@ To set alerts when our conversion rate changes, we can set up an insight that tr
 
 For example, we can create a trend insight filtered by unique pricing pageviews and a [`user_signed_up` event](/docs/getting-started/send-events#2-capture-custom-events), which is triggered whenever a user completes our signup flow and creates their account.
 
-In this example, we enable [formula mode](/docs/product-analytics/trends/formulas) and divide the number of signups by the number of unique visitors that visit the pricing page, which gives us a conversion rate to work with.
+In this example, we enable [formula mode](/docs/product-analytics/trends/formulas) and divide the number of signups by the total number of unique visitors that visit the pricing page, which gives us a conversion rate to work with.
 
 <ProductScreenshot
     imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/conversion_formula_light_d0869f0480.png"
@@ -164,8 +154,8 @@ In this example, we enable [formula mode](/docs/product-analytics/trends/formula
 To find out when the conversion rate increases or decreases by 10%, we can set up multiple alerts based on the formula above.
 
 <ProductScreenshot
-    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/increase_alert_dark_5811f94fda.png"
-    imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/increase_alert_light_8d64702edc.png"
+    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/increase_alert_light_6aad9ad763.png"
+    imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/increase_alert_dark_4e94fe15bb.png"
     alt="Conversion alert setup"
     classes="rounded"
 />
