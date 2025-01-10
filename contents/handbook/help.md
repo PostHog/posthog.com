@@ -74,7 +74,7 @@ We expect you to be thinking through not only the one change you're making right
 
 We do have more senior people on the team (both in industry experience and in their tenure at PostHog), but they shouldn't be the only ones looking ahead – you should be the primary one looking ahead for _your_ changes.
 
-### Don't assign issues to people
+## Don't assign issues to people
 
 You can list and categorize issues. If you want someone to see an issue, @mention them and/or Slack them the link.
 
