@@ -32,6 +32,7 @@ If you've just joined us, there's a lot you probably don't know. That's okay! Ho
   - We expect you to [read our docs](/docs).
   - We expect you to search through GitHub or Slack.
   - If it's in beta, it might be buggy or missing features. Definitely request/report them, but also figure out how to do your job with plan B and plan C if it won't be fixed quickly - this is what we generally call grit.
+  - For engineers: try to figure something out by yourself for at least 1 hour, but don't remain totally stuck on something for more than 2 hours before asking for help. This time window should increase over time as you run into more questions that likely no one has the answer to, at which point it's time to dig in and figure it out.
 - If it's an external product:
   - We expect you to read the docs
   - If it takes you more than 10 mins to figure it out, then ask someone internally.
@@ -58,6 +59,7 @@ We expect you to be proactive about answering questions in your domain, even ver
 
 Being wrong is way better than being silent – if you are wrong, someone will correct you. If you are silent, you're not doing your job.
 
+Similarly, if you need something to get done, you are responsible for making _sure_ it gets done. This is not your team lead's job or some other team's job - if you need it, you own it. _Most_ of the time this means doing it yourself (see section on helping yourself above); other times it means getting the right people together to understand the urgency and do it with you. But at the end of the day, the responsibility rests on you.
 ## Have an opinion
 
 You definitely don't need to have opinions on everything, but you should absolutely have opinions on your area of expertise. 
