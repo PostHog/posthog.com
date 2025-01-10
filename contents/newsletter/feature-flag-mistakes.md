@@ -18,7 +18,7 @@ crosspost:
 
 Misused feature flags have caused downtime for the largest apps in the world, created a mountain of tech debt, and literally bankrupted a company. Luckily, these are all avoidable mistakes we can learn from and avoid.
 
-They largely boil down to two main issues:
+They boil down to two main issues:
 
 1. **Complexity creates confusion.** Embed and interlinked flags create many potential states that can quickly become untestable and unpredictable.
 
@@ -91,7 +91,7 @@ The core of a feature flag's value to developers is the ability to turn them off
 
 ![Shocked by feature flag](https://res.cloudinary.com/dmukukwp6/image/upload/turnoff_941966283f.png)
 
-As an example, a [commenter on HackerNews](https://news.ycombinator.com/item?id=24550442) shared that they had two major incidents in two years due to their feature flag service failing to return flag states and old flags unintentionally being set to false.
+As an example, a [commenter on Hacker News](https://news.ycombinator.com/item?id=24550442) shared that they had two major incidents in two years due to their feature flag service failing to return flag states and old flags unintentionally being set to false.
 
 This hits close to home. Last year, we had an [incident](https://github.com/PostHog/post-mortems/blob/main/investigations/2024-02-28-decide%20is%20down.md) with our feature flag service that caused flags to fallback to empty responses. On top of this, some requests had exceeding long timeouts. The combination of these caused some of our customer's applications to crash. 
 
