@@ -16,7 +16,7 @@ Building a successful product is hard; doing so when you don't understand your c
 
 We aim to offer every tool software teams need to find, sell to, get users, understand who they are, support them and improve their product experience.
 
-### 2. Start from the start
+### 2. Get in first
 
 The tools we build help you from your first user to when your product is everything it could be.
 
