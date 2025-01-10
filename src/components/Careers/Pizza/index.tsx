@@ -15,6 +15,7 @@ import 'swiper/css'
 import 'swiper/css/pagination'
 import { IconChevronDown } from '@posthog/icons'
 import CloudinaryImage from 'components/CloudinaryImage'
+import groupBy from 'lodash.groupby'
 
 interface FullscreenModalProps {
     image: { image: React.ReactNode; pineapple: boolean }
@@ -192,6 +193,136 @@ const PizzaBox = ({ children }: { children: React.ReactNode }) => {
     )
 }
 
+const PizzaStatColumn = ({
+    teams,
+    title,
+    Sticker,
+    color,
+}: {
+    teams: any[]
+    title: string
+    Sticker: any
+    color: string
+}) => {
+    return (
+        <div>
+            <div className="mb-4 border-b border-light dark:border-dark pb-2 flex gap-2 items-center md:items-start">
+                <Sticker className="inline-block size-12" />
+                <div className="flex-1 items-baseline gap-1 md:block">
+                    <p className="m-0 text-[15px] md:text-sm mdlg:text-[15px] font-bold md:font-normal">
+                        Small teams who<span className="hidden md:inline-block">...</span>
+                    </p>
+                    <h3 className="text-[19px] leading-tight m-0 font-bold">
+                        <span className={`text-${color}`}>{title}</span>
+                    </h3>
+                    <p className="text-[15px] md:text-sm mdlg:text-[15px] mb-0 font-bold md:font-normal">
+                        pineapple belongs on pizza
+                    </p>
+                </div>
+            </div>
+
+            <ul className="list-none p-0 space-y-3">
+                {teams.map((team) => {
+                    const teamMiniCrest = getImage(team.miniCrest)
+                    return (
+                        <li key={team.name} className="">
+                            <div className="flex gap-2">
+                                {teamMiniCrest && (
+                                    <GatsbyImage
+                                        image={teamMiniCrest}
+                                        alt={`${team.name} mini crest`}
+                                        className="mr-2"
+                                    />
+                                )}
+                                <div className="flex-1">
+                                    <Link
+                                        to={`/teams/${slugify(team.name.toLowerCase().replace('ops', ''), {
+                                            lower: true,
+                                            remove: /and/,
+                                        })}`}
+                                        className="text-[15px] font-semibold text-primary dark:text-primary-dark hover:text-red dark:hover:text-yellow"
+                                    >
+                                        {team.name}
+                                    </Link>
+                                    <div className="flex gap-2 items-center -mt-1">
+                                        <div className="flex-1 relative h-2 w-full bg-accent dark:bg-white/10 rounded-full">
+                                            <div
+                                                className={`absolute left-0 top-0 h-full bg-${color} rounded-full`}
+                                                style={{ width: `${team.pineapplePercentage}%` }}
+                                            ></div>
+                                        </div>
+                                        <span className="text-sm font-medium">
+                                            {Math.round(team.pineapplePercentage)}%
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                    )
+                })}
+            </ul>
+            {title === 'are SPLIT' && (
+                <p className="text-sm mt-2 italic pl-14 font-medium">(You could break the tie!)</p>
+            )}
+        </div>
+    )
+}
+
+const PizzaStats = () => {
+    const { allTeams } = useStaticQuery(graphql`
+        {
+            allTeams: allSqueakTeam(filter: { name: { ne: "Hedgehogs" }, miniCrest: { publicId: { ne: null } } }) {
+                nodes {
+                    id
+                    name
+                    pineapplePercentage
+                    miniCrest {
+                        gatsbyImageData(width: 40, height: 40)
+                    }
+                    profiles {
+                        data {
+                            attributes {
+                                pineappleOnPizza
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    `)
+
+    const allTeamSorted = [...allTeams.nodes].sort((a, b) => b.pineapplePercentage - a.pineapplePercentage)
+
+    const groupedTeams = groupBy(allTeamSorted, (team) => {
+        if (team.pineapplePercentage > 50) return 'moreThan50'
+        if (team.pineapplePercentage === 50) return 'exactly50'
+        return 'lessThan50'
+    })
+
+    return (
+        <div className="grid md:grid-cols-3 gap-10 md:gap-6 lg:gap-12 pt-6 pb-12">
+            <PizzaStatColumn
+                teams={groupedTeams.moreThan50}
+                title="CORRECTLY agree"
+                Sticker={StickerPineappleYes}
+                color="green"
+            />
+            <PizzaStatColumn
+                teams={groupedTeams.exactly50}
+                title="are SPLIT"
+                Sticker={StickerPineappleUnknown}
+                color="yellow"
+            />
+            <PizzaStatColumn
+                teams={groupedTeams.lessThan50}
+                title="shockingly DISAGREE"
+                Sticker={StickerPineappleNo}
+                color="red"
+            />
+        </div>
+    )
+}
+
 export const Pizza = () => {
     const [activeIndex, setActiveIndex] = useState<number | null>(null)
 
@@ -216,60 +347,6 @@ export const Pizza = () => {
         setActiveIndex(null)
     }
 
-    const { allTeams } = useStaticQuery(graphql`
-        {
-            allTeams: allSqueakTeam(filter: { name: { ne: "Hedgehogs" }, miniCrest: { publicId: { ne: null } } }) {
-                nodes {
-                    id
-                    name
-                    miniCrest {
-                        gatsbyImageData(width: 40, height: 40)
-                    }
-                    profiles {
-                        data {
-                            attributes {
-                                pineappleOnPizza
-                            }
-                        }
-                    }
-                }
-            }
-        }
-    `)
-
-    const teamsWithPineapplePercentage = allTeams.nodes.map((team) => {
-        const teamLength = team.profiles?.data?.length || 0
-        const pineappleLovers = team.profiles?.data?.filter(({ attributes }) => attributes.pineappleOnPizza).length || 0
-        const percentage = teamLength > 0 ? (pineappleLovers / teamLength) * 100 : 0
-
-        return {
-            name: team.name,
-            pineapplePercentage: percentage.toFixed(1),
-        }
-    })
-
-    const groupedTeams = {
-        moreThan50: [],
-        exactly50: [],
-        lessThan50: [],
-    }
-
-    teamsWithPineapplePercentage.forEach((team) => {
-        const percentage = parseFloat(team.pineapplePercentage)
-        if (percentage > 50) {
-            groupedTeams.moreThan50.push(team)
-        } else if (percentage === 50) {
-            groupedTeams.exactly50.push(team)
-        } else {
-            groupedTeams.lessThan50.push(team)
-        }
-    })
-
-    // Sort teams within each group by percentage (highest to lowest)
-    Object.keys(groupedTeams).forEach((key) => {
-        groupedTeams[key].sort((a, b) => parseFloat(b.pineapplePercentage) - parseFloat(a.pineapplePercentage))
-    })
-
     return (
         <div className="px-4 max-w-7xl mx-auto py-12">
             <div className="text-center">
@@ -292,188 +369,7 @@ export const Pizza = () => {
                 </div>
             </div>
 
-            <div className="grid md:grid-cols-3 gap-10 md:gap-6 lg:gap-12 pt-6 pb-12">
-                <div>
-                    <div className="mb-4 border-b border-light dark:border-dark pb-2 flex gap-2 items-center md:items-start">
-                        <StickerPineappleYes className="inline-block size-12" />
-                        <div className="flex-1 items-baseline gap-1 md:block">
-                            <p className="m-0 text-[15px] md:text-sm mdlg:text-[15px] font-bold md:font-normal">
-                                Small teams who<span className="hidden md:inline-block">...</span>
-                            </p>
-                            <h3 className="text-[19px] leading-tight m-0 font-bold">
-                                <span className="text-green">CORRECTLY agree</span>
-                            </h3>
-                            <p className="text-[15px] md:text-sm mdlg:text-[15px] mb-0 font-bold md:font-normal">
-                                pineapple belongs on pizza
-                            </p>
-                        </div>
-                    </div>
-
-                    <ul className="list-none p-0 space-y-3">
-                        {groupedTeams.moreThan50.map((team) => {
-                            const teamData = allTeams.nodes.find((node) => node.name === team.name)
-                            const teamMiniCrest = getImage(teamData.miniCrest)
-                            return (
-                                <li key={team.name} className="">
-                                    <div className="flex gap-2">
-                                        {teamMiniCrest && (
-                                            <GatsbyImage
-                                                image={teamMiniCrest}
-                                                alt={`${team.name} mini crest`}
-                                                className="mr-2"
-                                            />
-                                        )}
-                                        <div className="flex-1">
-                                            <Link
-                                                to={`/teams/${slugify(team.name.toLowerCase().replace('ops', ''), {
-                                                    lower: true,
-                                                    remove: /and/,
-                                                })}`}
-                                                className="text-[15px] font-semibold text-primary dark:text-primary-dark hover:text-red dark:hover:text-yellow"
-                                            >
-                                                {team.name}
-                                            </Link>
-                                            <div className="flex gap-2 items-center -mt-1">
-                                                <div className="flex-1 relative h-2 w-full bg-accent dark:bg-white/10 rounded-full">
-                                                    <div
-                                                        className="absolute left-0 top-0 h-full bg-green rounded-full"
-                                                        style={{ width: `${team.pineapplePercentage}%` }}
-                                                    ></div>
-                                                </div>
-                                                <span className="text-sm font-medium">
-                                                    {Math.round(team.pineapplePercentage)}%
-                                                </span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </li>
-                            )
-                        })}
-                    </ul>
-                </div>
-
-                <div>
-                    <div className="mb-4 border-b border-light dark:border-dark pb-2 flex gap-2 items-center md:items-start">
-                        <StickerPineappleUnknown className="inline-block size-12" />
-                        <div className="flex-1 items-baseline gap-1 md:block">
-                            <p className="m-0 text-[15px] md:text-sm mdlg:text-[15px] font-bold md:font-normal">
-                                Small teams who<span className="hidden md:inline-block">...</span>
-                            </p>
-                            <div className="flex items-baseline gap-1">
-                                <h3 className="text-[19px] leading-tight m-0 font-bold">
-                                    <span className="text-yellow">are SPLIT</span>
-                                </h3>
-                                on whether
-                            </div>
-                            <p className="text-[15px] md:text-sm mdlg:text-[15px] mb-0 font-bold md:font-normal">
-                                pineapple belongs on pizza
-                            </p>
-                        </div>
-                    </div>
-
-                    <ul className="list-none p-0 space-y-3">
-                        {groupedTeams.exactly50.map((team) => {
-                            const teamData = allTeams.nodes.find((node) => node.name === team.name)
-                            const teamMiniCrest = getImage(teamData.miniCrest)
-                            return (
-                                <li key={team.name} className="">
-                                    <div className="flex gap-2">
-                                        {teamMiniCrest && (
-                                            <GatsbyImage
-                                                image={teamMiniCrest}
-                                                alt={`${team.name} mini crest`}
-                                                className="mr-2"
-                                            />
-                                        )}
-                                        <div className="flex-1">
-                                            <Link
-                                                to={`/teams/${slugify(team.name.toLowerCase().replace('ops', ''), {
-                                                    lower: true,
-                                                    remove: /and/,
-                                                })}`}
-                                                className="text-[15px] font-semibold text-primary dark:text-primary-dark hover:text-red dark:hover:text-yellow"
-                                            >
-                                                {team.name}
-                                            </Link>
-                                            <div className="flex gap-2 items-center -mt-1">
-                                                <div className="flex-1 relative h-2 w-full bg-accent dark:bg-white/10 rounded-full">
-                                                    <div
-                                                        className="absolute left-0 top-0 h-full bg-yellow rounded-full"
-                                                        style={{ width: `${team.pineapplePercentage}%` }}
-                                                    ></div>
-                                                </div>
-                                                <span className="text-sm font-medium">
-                                                    {Math.round(team.pineapplePercentage)}%
-                                                </span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </li>
-                            )
-                        })}
-                    </ul>
-                    <p className="text-sm mt-2 italic pl-14 font-medium">(You could break the tie!)</p>
-                </div>
-
-                <div>
-                    <div className="mb-4 border-b border-light dark:border-dark pb-2 flex gap-2 items-center md:items-start">
-                        <StickerPineappleNo className="inline-block size-12" />
-                        <div className="flex-1 items-baseline gap-1 md:block">
-                            <p className="m-0 text-[15px] md:text-sm mdlg:text-[15px] font-bold md:font-normal">
-                                Small teams who<span className="hidden md:inline-block">...</span>
-                            </p>
-                            <h3 className="text-[19px] leading-tight m-0 font-bold">
-                                <span className="text-red">shockingly DISAGREE</span>
-                            </h3>
-                            <p className="text-[15px] md:text-sm mdlg:text-[15px] mb-0 font-bold md:font-normal">
-                                pineapple belongs on pizza
-                            </p>
-                        </div>
-                    </div>
-
-                    <ul className="list-none p-0 space-y-3">
-                        {groupedTeams.lessThan50.map((team) => {
-                            const teamData = allTeams.nodes.find((node) => node.name === team.name)
-                            const teamMiniCrest = getImage(teamData.miniCrest)
-                            return (
-                                <li key={team.name} className="">
-                                    <div className="flex gap-2">
-                                        {teamMiniCrest && (
-                                            <GatsbyImage
-                                                image={teamMiniCrest}
-                                                alt={`${team.name} mini crest`}
-                                                className="mr-2"
-                                            />
-                                        )}
-                                        <div className="flex-1">
-                                            <Link
-                                                to={`/teams/${slugify(team.name.toLowerCase().replace('ops', ''), {
-                                                    lower: true,
-                                                    remove: /and/,
-                                                })}`}
-                                                className="text-[15px] font-semibold text-primary dark:text-primary-dark hover:text-red dark:hover:text-yellow"
-                                            >
-                                                {team.name}
-                                            </Link>
-                                            <div className="flex gap-2 items-center -mt-1">
-                                                <div className="flex-1 relative h-2 w-full bg-accent dark:bg-white/10 rounded-full">
-                                                    <div
-                                                        className="absolute left-0 top-0 h-full bg-red rounded-full"
-                                                        style={{ width: `${team.pineapplePercentage}%` }}
-                                                    ></div>
-                                                </div>
-                                                <span className="text-sm font-medium">
-                                                    {Math.round(team.pineapplePercentage)}%
-                                                </span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </li>
-                            )
-                        })}
-                    </ul>
-                </div>
-            </div>
+            <PizzaStats />
 
             <h3 className="text-3xl mb-0 text-center">Speaking of pizza...</h3>
             <div className="text-lg opacity-70 mb-6 text-center">Here are some of our creations.</div>

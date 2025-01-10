@@ -62,6 +62,19 @@ export const createResolvers: GatsbyNode['createResolvers'] = ({ createResolvers
                 },
             },
         },
+        SqueakTeam: {
+            pineapplePercentage: {
+                type: 'Float!',
+                resolve: (source) => {
+                    const teamLength = source.profiles?.data?.length || 0
+                    const pineappleLovers =
+                        source.profiles?.data?.filter(({ attributes }) => !!attributes.pineappleOnPizza).length || 0
+
+                    const percentage = teamLength > 0 ? (pineappleLovers / teamLength) * 100 : 0
+                    return Number(percentage.toFixed(1))
+                },
+            },
+        },
     }
     createResolvers(resolvers)
 }
