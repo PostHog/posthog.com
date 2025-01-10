@@ -16,7 +16,7 @@ crosspost:
 
 [Feature flags](/feature-flags) are a powerful tool for shipping, deploying, and releasing software safely, but with great power comes great responsibility.
 
-Misused feature flags have caused downtime for the largest apps in the world, created a mountain of tech debt, and literally bankrupted a company. Luckily, these are all avoidable mistakes we can learn from and avoid.
+Misused feature flags have caused downtime for the largest apps in the world, created a mountain of tech debt, and nearly bankrupted a company (we'll cover this later). Luckily, these are all avoidable mistakes we can learn from and avoid.
 
 They boil down to two main issues:
 
@@ -106,7 +106,13 @@ Preventing this issue is a two step process:
 
 As the saying goes: "If you love something, set it free." The same is true of feature flags. 
 
-The opposite of this (and one of the most popular feature flag examples) is [Knight Capital Group](https://en.wikipedia.org/wiki/Knight_Capital_Group). On August 1st, 2012, they lost $460M in 45 minutes due to a stale flag from 2003 being reused and reactivated.
+The opposite of this is [Knight Capital Group](https://www.henricodolfing.com/2019/06/project-failure-case-study-knight-capital.html), a financial services firm that was *formerly* the largest U.S. equities trader on the NYSE.
+
+To support a new private market being launched by the NYSE, their team needed to build and deploy an updated trade execution system, responsible for thousands of orders per second, in a month. 
+
+After rushing to meet an August 1st, 2012 deadline, their team shipped an update replacing code in a part of their system unused since 2003. This old code wasn't meant to be used in production, but was left behind a feature flag in their codebase anyways.
+
+As part of the release, they reused this old feature flag controlling the old code. When they deployed the update and enabled the flag, 7/8 servers worked as expected, but the 8th one triggered the old code to process orders. This server executed over 4 million executions with a value of $7.65 billion in 45 minutes, costing them $440M. Their shares plummeted 70%, requiring them to be rescued by outside investors and eventually get acquired. 
 
 ![Knight Capital Group](https://res.cloudinary.com/dmukukwp6/image/upload/kcg_031bb613a9.png)
 
