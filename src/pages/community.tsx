@@ -266,18 +266,18 @@ const Main = () => {
                     <div className="pt-4">
                         <PersonSpotlight
                             title="Meet a team member"
-                            content="<p>James G. is coming up on his 4-year anniversary. When he's not restarting servers, you can likely find him out on a trail."
+                            content="<p>As an engineer on our Growth team, Zach is probably the reason you heard about PostHog. When he's not RBAC-ing that ass up, he's investing in early stage startups and finishing triathlons."
                             image={
                                 <div className="h-24 w-24 rounded-full overflow-hidden bg-salmon">
                                     <CloudinaryImage
                                         width={200}
-                                        src="https://res.cloudinary.com/dmukukwp6/image/upload/james_g_d9de6cbcdb.png"
+                                        src="https://res.cloudinary.com/dmukukwp6/image/upload/v1711452549/Zach_c7f6a5a292.png"
                                     />
                                 </div>
                             }
                             cta={
-                                <Link to="/community/profiles/30174" className="text-[15px]">
-                                    Learn more about James G.
+                                <Link to="/community/profiles/30086" className="text-[15px]">
+                                    Learn more about Zach W.
                                 </Link>
                             }
                         />
