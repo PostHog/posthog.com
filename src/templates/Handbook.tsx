@@ -388,6 +388,7 @@ export default function Handbook({
                     breadcrumb={[breadcrumbBase, ...(breadcrumb?.slice(0, breadcrumb.length - 1) || [])]}
                     hideSidebar={hideAnchor}
                     nextPost={nextPost}
+                    askMax
                 >
                     <section>
                         <div className="mb-8 relative">

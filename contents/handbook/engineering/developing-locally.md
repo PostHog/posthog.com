@@ -71,14 +71,14 @@ This is a faster option to get up and running. If you don't want to or can't use
 
 2. Install the package manager Homebrew by following the [instructions here](https://brew.sh/).
 
-<blockquote class="warning-note">
-    After installation, make sure to follow the instructions printed in your terminal to add Homebrew to your{' '}
-    <code>$PATH</code>. Otherwise the command line will not know about packages installed with <code>brew</code>.
-</blockquote>
+    <blockquote class="warning-note">
+        After installation, make sure to follow the instructions printed in your terminal to add Homebrew to your{' '}
+        <code>$PATH</code>. Otherwise the command line will not know about packages installed with <code>brew</code>.
+    </blockquote>
 
 3. Install [OrbStack](https://orbstack.dev/) – a more performant Docker Desktop alternative – with `brew install orbstack`. Go to OrbStack settings and set the memory usage limit to **at least 4 GB** (or 8 GB if you can afford it) + the CPU usage limit to at least 4 cores (i.e. 400%). You'll want to use Brex for the license if you work at PostHog.
 
-4. Continue with the [common prerequisites for both macOS and Linux](#common-prerequisites-for-both-macos--linux).
+4. Continue with [cloning the repository](#cloning-the-repository).
 
 #### Ubuntu
 
@@ -89,31 +89,55 @@ This is a faster option to get up and running. If you don't want to or can't use
     ```bash
     sudo apt install -y build-essential
     ```
-3. Continue with the [common prerequisites for both macOS and Linux](#common-prerequisites-for-both-macos--linux).
+3. Continue with [cloning the repository](#cloning-the-repository).
 
-#### Common prerequisites for both macOS & Linux
+#### Cloning the repository
 
-1. Append line `127.0.0.1 kafka clickhouse` to `/etc/hosts`. You can do it in one line with:
+
+Clone the [PostHog repo](https://github.com/posthog/posthog). All future commands assume you're inside the `posthog/` folder.
+
+```bash
+git clone https://github.com/PostHog/posthog && cd posthog/
+```
+
+### Instant setup
+
+You can set your development environment up instantly using [Flox](https://flox.dev/). Flox is a dev environment manager, which takes care of the whole dependency graph needed to develop PostHog – all declared in the repo's `.flox/manifest.toml`. To get this environment going:
+
+1. Install Flox (plus `ruff` and `rustup` for pre-commit checks outside of the Flox env).
 
     ```bash
-    echo '127.0.0.1 kafka clickhouse' | sudo tee -a /etc/hosts
+    brew install flox ruff rustup && rustup-init && rustup default stable
     ```
 
-    ClickHouse and Kafka won't be able to talk to each other without these mapped hosts.
-
-    > If you are using a newer (>=4.1) version of Podman instead of Docker, the host machine's `/etc/hosts` is used as the base hosts file for containers by default, instead of container's `/etc/hosts` like in Docker. This can make hostname resolution fail in the ClickHouse container, and can be mended by setting `base_hosts_file="none"` in [`containers.conf`](https://github.com/containers/common/blob/main/docs/containers.conf.5.md#containers-table).
-
-2. Clone the [PostHog repository](https://github.com/posthog/posthog). All future commands assume you're inside the `posthog/` folder.
+2. From the root of the repository, activate the environment. (On first activation, you'll be prompted if you'd like the environment to be activated automatically using `direnv`.)
 
     ```bash
-    git clone https://github.com/PostHog/posthog && cd posthog/
+    flox activate
     ```
 
-### Get things up and running
+This gets you a fully fledged environment, with its executables and linked libraries stored under `.flox/`. You should now be seeing instructions for migrations and running the app.
+
+That's it! You can now change PostHog in any way you want. See [Project structure](/handbook/engineering/project-structure) for an intro to the repository's contents. To commit changes, create a new branch based on `master` for your intended change, and develop away.
+
+### Manual setup
+
+Alternatively, if you'd prefer not to use [Flox-based instant setup](#instant-setup), you can set the environment up manually:
 
 #### 1. Spin up external services
 
 In this step we will start all the external services needed by PostHog to work.
+
+First, append line `127.0.0.1 kafka clickhouse` to `/etc/hosts`. Our ClickHouse and Kafka data services won't be able to talk to each other without these mapped hosts.  
+You can do this in one line with:
+
+```bash
+echo '127.0.0.1 kafka clickhouse' | sudo tee -a /etc/hosts
+```
+
+> If you are using a newer (>=4.1) version of Podman instead of Docker, the host machine's `/etc/hosts` is used as the base hosts file for containers by default, instead of container's `/etc/hosts` like in Docker. This can make hostname resolution fail in the ClickHouse container, and can be mended by setting `base_hosts_file="none"` in [`containers.conf`](https://github.com/containers/common/blob/main/docs/containers.conf.5.md#containers-table).
+
+Now, start the Docker Compose stack:
 
 ```bash
 docker compose -f docker-compose.dev.yml up
@@ -343,11 +367,10 @@ Open [http://localhost:8010](http://localhost:8010) to see the app.
 
 To get some practical test data into your brand-new instance of PostHog, run `DEBUG=1 ./manage.py generate_demo_data`. For a list of useful arguments of the command, run `DEBUG=1 ./manage.py generate_demo_data --help`.
 
+
 #### 7. Develop
 
-This is it! You can now change PostHog in any way you want. See [Project Structure](/handbook/engineering/project-structure) for an intro to the repository's contents.
-
-To commit changes, create a new branch based on `master` for your intended change, and develop away. Just make sure not use to use `release-*` patterns in your branches unless putting out a new version of PostHog, as such branches have special handling related to releases.
+That's it! You can now change PostHog in any way you want. See [Project structure](/handbook/engineering/project-structure) for an intro to the repository's contents. To commit changes, create a new branch based on `master` for your intended change, and develop away.
 
 ## Testing
 

@@ -1,7 +1,5 @@
 import CloudinaryImage from 'components/CloudinaryImage'
 import React from 'react'
-import { StaticImage } from 'gatsby-plugin-image'
-
 import Layout from 'components/Layout'
 import { SEO } from 'components/seo'
 import PostLayout from 'components/PostLayout'
@@ -11,6 +9,8 @@ import { CallToAction } from 'components/CallToAction'
 import { docsMenu } from '../../navs'
 import { useLayoutData } from 'components/Layout/hooks'
 import QuickLinks from 'components/QuickLinks'
+import Intro from 'components/Docs/Intro'
+import AskMax from 'components/AskMax'
 
 export const quickLinks = [
     {
@@ -56,33 +56,6 @@ type SessionRecordingProps = {
     }
 }
 
-export const Intro = ({ image = true }) => {
-    return (
-        <div className="bg-accent dark:bg-accent-dark border border-light dark:border-dark rounded flex flex-col items-center md:flex-row md:gap-4 pt-2 mb-8">
-            <div className="p-4 md:p-8">
-                <h1 className="text-4xl mt-0 mb-2">Session replay</h1>
-                <h3 className="text-lg font-semibold text-primary/60 dark:text-primary-dark/75 leading-tight">
-                    Play back sessions to diagnose UI issues, improve support, and get context for nuanced user
-                    behavior.
-                </h3>
-                <CallToAction to="/docs/session-replay/installation">Record your first session</CallToAction>
-            </div>
-
-            {image && (
-                <figure className="m-0 mt-auto p-0">
-                    <CloudinaryImage
-                        alt=""
-                        placeholder="none"
-                        quality={100}
-                        className=""
-                        src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Home/Slider/images/session-recording-hog.png"
-                    />
-                </figure>
-            )}
-        </div>
-    )
-}
-
 export const Content = ({ quickLinks = false }) => {
     const { compact } = useLayoutData()
     return (
@@ -101,96 +74,36 @@ export const Content = ({ quickLinks = false }) => {
                         type="Guide"
                         title="Only record sessions you want"
                         description="Control cost by reducing volume"
-                        Image={
-                            <CloudinaryImage
-                                alt=""
-                                placeholder="none"
-                                objectFit="contain"
-                                className="h-full"
-                                quality={100}
-                                src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Home/Slider/images/session-recording-hog.png"
-                            />
-                        }
                         url="/tutorials/limit-session-recordings"
                     />
                     <ResourceItem
                         type="Guide"
                         title="Discover user friction with replays"
                         description="Pinpoint issues with filters and replays"
-                        Image={
-                            <CloudinaryImage
-                                alt=""
-                                placeholder="none"
-                                objectFit="contain"
-                                className="h-full"
-                                quality={100}
-                                src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Home/Slider/images/session-recording-hog.png"
-                            />
-                        }
                         url="/tutorials/filter-session-recordings"
                     />
                     <ResourceItem
                         type="Guide"
                         title="Analyze power users"
                         description="Define a cohort and watch those sessions"
-                        Image={
-                            <CloudinaryImage
-                                alt=""
-                                placeholder="none"
-                                objectFit="contain"
-                                className="h-full"
-                                quality={100}
-                                src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Home/Slider/images/session-recording-hog.png"
-                            />
-                        }
                         url="/tutorials/power-users"
                     />
                     <ResourceItem
                         type="Guide"
                         title="Improve web app performance"
                         description="Network monitoring in session replays"
-                        Image={
-                            <CloudinaryImage
-                                alt=""
-                                placeholder="none"
-                                objectFit="contain"
-                                className="h-full"
-                                quality={100}
-                                src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Home/Slider/images/session-recording-hog.png"
-                            />
-                        }
                         url="/tutorials/performance-metrics"
                     />
                     <ResourceItem
                         type="Guide"
                         title="Session replays in customer support"
                         description="Rageclicks, sharing recordings, error monitoring"
-                        Image={
-                            <CloudinaryImage
-                                alt=""
-                                placeholder="none"
-                                objectFit="contain"
-                                className="h-full"
-                                quality={100}
-                                src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Home/Slider/images/session-recording-hog.png"
-                            />
-                        }
                         url="/tutorials/session-recordings-for-support"
                     />
                     <ResourceItem
                         type="Guide"
                         title="Replay users in a funnel"
                         description="Learn from users who do (or don't) convert"
-                        Image={
-                            <CloudinaryImage
-                                alt=""
-                                placeholder="none"
-                                objectFit="contain"
-                                className="h-full"
-                                quality={100}
-                                src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Home/Slider/images/session-recording-hog.png"
-                            />
-                        }
                         url="/tutorials/explore-insights-session-recordings"
                     />
                 </ul>
@@ -215,7 +128,25 @@ const SessionRecording: React.FC<SessionRecordingProps> = ({ data }) => {
             <SEO title="Session replay - Docs - PostHog" />
 
             <PostLayout title={'Session replay'} hideSurvey hideSidebar>
-                <Intro />
+                
+                <Intro
+                    subheader="Getting started"
+                    title="Session replay"
+                    description="Play back sessions to diagnose UI issues, improve support, and get context for nuanced user behavior."
+                    buttonText="Record your first session"
+                    buttonLink="/docs/session-replay/installation"
+                    imageColumnClasses="max-w-96 mt-8 md:mt-0"
+                    imageUrl="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Home/Slider/images/session-recording-hog.png"
+                    imageClasses=""
+                />
+
+                <AskMax 
+                    quickQuestions={[
+                        'How do I mask sensitive data?',
+                        'Can I enable recordings only for certain users?',
+                        'How can I control costs?',
+                    ]}/>
+                
                 <Content />
 
                 <div className="">
