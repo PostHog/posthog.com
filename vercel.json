@@ -8,6 +8,10 @@
     ],
     "redirects": [
         {
+            "source": "/youreastar",
+            "destination": "https://www.youtube.com/watch?v=SD7B2teuLXk"
+        },
+        {
             "source": "/handbook/growth/marketing/product-announcements",
             "destination": "/handbook/words-and-pictures/product-announcements"
         },
