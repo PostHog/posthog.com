@@ -249,7 +249,11 @@ const Main = () => {
                     />
 
                     <div className="text-center pt-6 pb-4 px-2">
-                        <p className="mb-2">
+                        <img
+                            className="h-20 w-20 float-left mr-2 mb-2"
+                            src="https://res.cloudinary.com/dmukukwp6/image/upload/detective_hog_9b2bb1da51.png"
+                        />
+                        <p className="mb-2 text-sm">
                             <em>"{quote}"</em>
                         </p>
                         <p className="text-sm opacity-75 mb-0">
