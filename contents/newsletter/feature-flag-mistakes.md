@@ -1,5 +1,5 @@
 ---
-title: Feature flag mistakes to avoid
+title: Don't make these classic feature flag mistakes
 date: 2025-01-08
 author:
  - ian-vanagas
@@ -14,9 +14,9 @@ crosspost:
   - Blog
 ---
 
-[Feature flags](/feature-flags) are a powerful tool for shipping, deploying, and releasing software safely, but with great power comes great responsibility.
+Product engineers succeed when they can ship quickly, understand if a change is working, and iterate from there. Because they let you ship, deploy, and release software safely, [feature flags](/feature-flags) are a powerful tool for doing this.
 
-Misused feature flags have caused downtime for the largest apps in the world, created a mountain of tech debt, and nearly bankrupted a company (we'll cover this later). Luckily, these are all avoidable mistakes we can learn from and avoid.
+But with great power comes great responsibility. Misused feature flags have caused downtime for the largest apps in the world, created a mountain of tech debt, and nearly bankrupted a company (we'll cover this later). Luckily, these are all avoidable mistakes we can learn from and avoid.
 
 They boil down to two main issues:
 
@@ -24,7 +24,7 @@ They boil down to two main issues:
 
 2. **Poor maintainability creates tech debt.** The longer flags stick around the more likely they are to get reused in unintended ways or negatively react with new changes. 
 
-Both create situations where mistakes can happen and have unintended consequences. Avoiding them means avoiding the issues we've put together here:
+Both create situations where mistakes and unintended consequences can happen. Avoiding them means avoiding the issues we've put together here:
 
 ## 1. Not using them
 
