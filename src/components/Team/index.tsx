@@ -76,7 +76,8 @@ export default function Team({ body, roadmaps, objectives, emojis, newTeam, slug
         slug,
     })
 
-    const { name, crest, crestOptions, description, profiles, leadProfiles, teamImage } = team?.attributes || {}
+    const { name, crest, crestOptions, description, profiles, leadProfiles, teamImage, miniCrest } =
+        team?.attributes || {}
     const { user, getJwt } = useUser()
     const isModerator = user?.role?.type === 'moderator'
     const {
@@ -117,6 +118,7 @@ export default function Team({ body, roadmaps, objectives, emojis, newTeam, slug
             },
             teamMembers: team?.attributes?.profiles?.data || [],
             teamLeads: team?.attributes?.leadProfiles?.data || [],
+            miniCrest: miniCrest?.data ? { file: null, objectURL: miniCrest?.data?.attributes?.url } : undefined,
         },
         onSubmit: async ({
             name,
@@ -126,6 +128,7 @@ export default function Team({ body, roadmaps, objectives, emojis, newTeam, slug
             crestOptions,
             teamMembers,
             teamLeads,
+            miniCrest,
             ...other
         }) => {
             const jwt = await getJwt()
@@ -146,6 +149,13 @@ export default function Team({ body, roadmaps, objectives, emojis, newTeam, slug
                     id: profileID,
                     type: 'api::profile.profile',
                 }))
+            const uploadedMiniCrestImage =
+                miniCrest?.file &&
+                (await uploadImage(miniCrest.file, jwt, {
+                    field: 'images',
+                    id: profileID,
+                    type: 'api::profile.profile',
+                }))
             const updatedTeam = {
                 name,
                 description,
@@ -161,6 +171,7 @@ export default function Team({ body, roadmaps, objectives, emojis, newTeam, slug
                 ...(uploadedCrestImage ? { crest: uploadedCrestImage.id } : {}),
                 ...(teamMembers ? { profiles: teamMembers.map(({ id }) => ({ id })) } : {}),
                 ...(teamLeads ? { leadProfiles: teamLeads.map(({ id }) => ({ id })) } : {}),
+                ...(uploadedMiniCrestImage ? { miniCrest: uploadedMiniCrestImage.id } : {}),
             }
             if (!team) {
                 await createTeam(updatedTeam)

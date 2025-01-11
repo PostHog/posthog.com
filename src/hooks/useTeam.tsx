@@ -35,6 +35,7 @@ const teamQuery = (slug: string) =>
                         image: true,
                     },
                 },
+                miniCrest: true,
             },
         },
         { encodeValuesOnly: true }
