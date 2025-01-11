@@ -12,6 +12,8 @@ The goal of the podcast is the same as that of our Product for Engineers newslet
 
 > Helping engineers and founders build great products.
 
+> focuses on product and business lessons and information for engineers.
+
 So, why have a podcast if we already have other great content?
 
 ### Stories and specifics
@@ -57,7 +59,7 @@ This section is subject to change, but initially there are a couple types of con
 
 ## Format
 
-We
+...
 
 ## Best Practices
 
@@ -73,6 +75,7 @@ This is not just for the audience. We also want to ensure the podcast conversati
 
 ### Host
 
+- There's no need to be salesy.
 - Avoid "let's talk about X for a while". Keep the conversation focused on what the audience would want to know more about.
 - Keep asking questions to dive deeper. Don't just cover a topic and then move on to the next.
 
