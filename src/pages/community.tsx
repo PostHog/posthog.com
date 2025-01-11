@@ -236,7 +236,7 @@ const Main = () => {
                 <div className="grid @xl:grid-cols-2 gap-4 @xl:gap-x-12 @xl:gap-y-4 divide-y @lg:divide-y-0 divide-border dark:divide-border-dark">
                     <PersonSpotlight
                         title="A note from the editor"
-                        content="<p>Welcome to <em>Inside PostHog</em> - our community newspaper. Find our latest posts, community questions, and everything else that's happening in the world of PostHog."
+                        content="<p>Welcome to <em>Inside PostHog</em> - our community newspaper. Explore our latest posts, community questions, and everything else that's happening in the world of PostHog."
                         byline="- Andy, Editor-in-Chief"
                         image={
                             <div className="h-24 w-24 rounded-full overflow-hidden bg-yellow">
