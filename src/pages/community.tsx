@@ -249,8 +249,9 @@ const Main = () => {
                     />
 
                     <div className="text-center pt-6 pb-4 px-2">
-                        <img
+                        <CloudinaryImage
                             className="h-20 w-20 float-left mr-2 mb-2"
+                            width={200}
                             src="https://res.cloudinary.com/dmukukwp6/image/upload/detective_hog_9b2bb1da51.png"
                         />
                         <p className="mb-2 text-sm">
