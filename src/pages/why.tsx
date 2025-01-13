@@ -218,7 +218,7 @@ const Teams: React.FC = () => {
                                     </li>
                                     <li>
                                         We have{' '}
-                                        <Link href="/handbook/growth/sales/refunds#unexpected-stardom">
+                                        <Link href="/side-project-insurance">
                                             side hustle insurance
                                         </Link>{' '}
                                         - we refund if your thing goes viral by accident on HackerNews

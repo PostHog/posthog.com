@@ -40,6 +40,7 @@ Welcome to the PostHog Sales and Customer Success team!  We only hire about 1 in
 - Towards the end of the week, schedule a demo and feedback session with Simon.  We might need to do a couple of iterations over the next few weeks as you take onboard feedback, don't worry if that's the case!
 - Review your current book of customers, and prioritize who you want to reach out to first.
 - Get comfortable with the PostHog [Docs](/docs).
+- Consider attending the Onboarding Intros meetings [via this Google Calendar](https://calendar.google.com/calendar/embed?src=c_25ceb28129b44d3e9c558c361cc565fde75c95ccf8298857c4c59f9c1f1539f8%40group.calendar.google.com) on Monday and Wednesday, to meet the product teams and learn about the current state of each product/feature. 
 
 #### AE-specific
 

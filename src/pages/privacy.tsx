@@ -651,9 +651,11 @@ function Privacy() {
                             <li>Google Cloud Platform - cloud data hosting</li>
                             <li>Google Workspace - internal collaboration tools</li>
                             <li>Heroku - cloud data hosting</li>
-                            <li>HubSpot - CRM database</li>
+                            <li>OpenPhone - SMS campaigns</li>
+                            <li>Salesforce - CRM database</li>
                             <li>Sentry - application monitoring and error tracking</li>
                             <li>Slack - internal communications tool</li>
+                            <li>Vitally - CRM database</li>
                             <li>Zendesk - customer support tool</li>
                         </ul>
                         <p>
@@ -663,7 +665,7 @@ function Privacy() {
                         </p>
                     </div>
                     <div>
-                        <p>Here is the list of companies we use.</p>
+                        <p>Here is the list of companies we use. This applies to your personal data, not the data of your users.</p>
                     </div>
 
                     <div>

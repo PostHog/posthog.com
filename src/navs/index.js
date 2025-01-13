@@ -164,10 +164,6 @@ export const handbookSidebar = [
                 url: '/handbook/people/career-progression',
             },
             {
-                name: 'Clubs',
-                url: '/handbook/people/clubs',
-            },
-            {
                 name: 'Training',
                 url: '/handbook/people/training',
             },
@@ -178,6 +174,14 @@ export const handbookSidebar = [
             {
                 name: 'Feedback',
                 url: '/handbook/people/feedback',
+            },
+            {
+                name: 'Clubs',
+                url: '/handbook/people/clubs',
+            },
+            {
+                name: 'Lore',
+                url: '/handbook/company/lore',
             },
             {
                 name: 'Onboarding',
@@ -572,6 +576,10 @@ export const handbookSidebar = [
                 url: '/handbook/growth/marketing/icp',
             },
             {
+                name: 'Sponsorships',
+                url: '/handbook/growth/marketing/open-source-sponsorship',
+            },
+            {
                 name: 'Dashboard templates',
                 url: '/handbook/growth/marketing/templates',
             },
@@ -811,6 +819,84 @@ export const handbookSidebar = [
         ],
     },
     {
+        name: 'Website & Vibes',
+        url: '',
+        children: [
+            {
+                name: 'Community',
+                url: '',
+                children: [
+                    {
+                        name: 'Overview',
+                        url: '/handbook/community',
+                    },
+                    {
+                        name: 'Answering community questions',
+                        url: '/handbook/community/questions',
+                    },
+                    {
+                        name: 'Profiles',
+                        url: '/handbook/community/profiles',
+                    },
+                ],
+            },
+            {
+                name: 'Designing PostHog.com',
+                url: '/handbook/design/designing-posthog-website',
+            },
+            {
+                name: 'Developing PostHog.com',
+                url: '',
+                children: [
+                    {
+                        name: 'Developing the website',
+                        url: '/handbook/engineering/posthog-com/developing-the-website',
+                    },
+                    {
+                        name: 'How PostHog.com works',
+                        url: '/handbook/engineering/posthog-com/how-posthog-website-works',
+                    },
+                    {
+                        name: 'MDX setup',
+                        url: '/handbook/engineering/posthog-com/mdx-setup',
+                    },
+                    {
+                        name: 'MDX components',
+                        url: '/handbook/engineering/posthog-com/markdown',
+                    },
+                    {
+                        name: 'Uploading assets',
+                        url: '/handbook/engineering/posthog-com/assets',
+                    },
+                    {
+                        name: 'Merch store',
+                        url: '/handbook/engineering/posthog-com/merch-store',
+                    },
+                    {
+                        name: 'Posting a new job',
+                        url: '/handbook/engineering/posthog-com/jobs',
+                    },
+                    {
+                        name: 'Managing small teams',
+                        url: '/handbook/engineering/posthog-com/small-teams',
+                    },
+                    {
+                        name: 'Managing the company roadmap',
+                        url: '/handbook/engineering/posthog-com/roadmap',
+                    },
+                    {
+                        name: 'Changelog entries',
+                        url: '/handbook/engineering/posthog-com/changelog',
+                    },
+                    {
+                        name: 'Editing API docs',
+                        url: '/handbook/engineering/posthog-com/api-docs',
+                    },
+                ],
+            },
+        ],
+    },
+    {
         name: 'Words & Pictures',
         url: '',
         children: [
@@ -1026,7 +1112,7 @@ export const companyMenu = {
             name: 'Changelog',
             icon: 'IconCalendar',
             color: 'red',
-            url: '/changelog/2024',
+            url: '/changelog/2025',
         },
         { name: 'People', icon: 'IconPeople', color: 'blue', url: '/people' },
         {
@@ -2024,6 +2110,10 @@ export const docsMenu = {
                             name: 'Data deletion',
                             url: '/docs/privacy/data-deletion',
                         },
+                        {
+                            name: 'Ad blockers',
+                            url: '/docs/privacy/ad-blockers',
+                        },
                     ],
                 },
                 {
@@ -2634,27 +2724,6 @@ export const docsMenu = {
                     color: 'blue',
                 },
                 {
-                    name: 'Methodology',
-                },
-                {
-                    name: 'Traffic allocation',
-                    url: '/docs/experiments/traffic-allocation',
-                    icon: 'IconPeople',
-                    color: 'orange',
-                },
-                {
-                    name: 'Sample size and running time',
-                    url: '/docs/experiments/sample-size-running-time',
-                    icon: 'IconDashboard',
-                    color: 'blue',
-                },
-                {
-                    name: 'Experiment significance',
-                    url: '/docs/experiments/experiment-significance',
-                    icon: 'IconMagicWand',
-                    color: 'seagreen',
-                },
-                {
                     name: 'Features',
                 },
                 {
@@ -2678,6 +2747,45 @@ export const docsMenu = {
                         title: 'Beta',
                         className: 'uppercase !bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',
                     },
+                },
+                {
+                    name: 'Under the hood',
+                },
+                {
+                    name: 'Statistics overview',
+                    url: '/docs/experiments/statistics',
+                    icon: 'IconBook',
+                    color: 'blue',
+                },
+                {
+                    name: 'Funnels statistics',
+                    url: '/docs/experiments/funnels-statistics',
+                    icon: 'IconGraph',
+                    color: 'yellow',
+                },
+                {
+                    name: 'Trends count statistics',
+                    url: '/docs/experiments/trends-count-statistics',
+                    icon: 'IconGraph',
+                    color: 'green',
+                },
+                {
+                    name: 'Trends continuous statistics',
+                    url: '/docs/experiments/trends-continuous-statistics',
+                    icon: 'IconGraph',
+                    color: 'red',
+                },
+                {
+                    name: 'Traffic allocation',
+                    url: '/docs/experiments/traffic-allocation',
+                    icon: 'IconPeople',
+                    color: 'orange',
+                },
+                {
+                    name: 'Sample size and running time',
+                    url: '/docs/experiments/sample-size-running-time',
+                    icon: 'IconDashboard',
+                    color: 'blue',
                 },
             ],
         },
@@ -2942,6 +3050,10 @@ export const docsMenu = {
                         {
                             name: 'Loops',
                             url: '/docs/cdp/destinations/loops',
+                        },
+                        {
+                            name: 'Mailchimp',
+                            url: '/docs/cdp/destinations/mailchimp',
                         },
                         {
                             name: 'Mailgun',

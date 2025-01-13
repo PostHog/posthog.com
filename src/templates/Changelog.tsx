@@ -251,6 +251,7 @@ export default function Changelog({ pageContext }) {
                         value={pageContext.year}
                         onChange={({ value }) => navigate(value)}
                         values={[
+                            { label: 2025, value: '/changelog/2025' },
                             { label: 2024, value: '/changelog/2024' },
                             { label: 2023, value: '/changelog/2023' },
                             { label: 2022, value: '/changelog/2022' },

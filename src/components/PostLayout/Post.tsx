@@ -15,6 +15,7 @@ import SidebarAction from './SidebarAction'
 import { Edit, ExpandDocument, Issue } from 'components/Icons'
 import { DarkModeToggle } from 'components/DarkModeToggle'
 import { useLayoutData } from 'components/Layout/hooks'
+import AskMax from 'components/AskMax'
 
 export default function Post({ children }: { children: React.ReactNode }) {
     const {
@@ -34,6 +35,7 @@ export default function Post({ children }: { children: React.ReactNode }) {
         stickySidebar,
         searchFilter,
         fullWidthContent,
+        askMax,
     } = usePost()
     const { compact, internalMenu } = useLayoutData()
 
@@ -85,6 +87,7 @@ export default function Post({ children }: { children: React.ReactNode }) {
                 >
                     <div onTransitionEnd={handleArticleTransitionEnd} className={contentContainerClasses}>
                         <div>{children}</div>
+                        {askMax && <AskMax border />}
                         {questions}
                     </div>
                     {!hideSurvey && <Survey />}

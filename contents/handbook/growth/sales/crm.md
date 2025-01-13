@@ -82,6 +82,28 @@ Any user who submits a “contact sales” form on our website shows up as a lea
   - Territory 3: All other geographies, or if the country information is missing, assigned to this territory.
 
 - Round Robin Within Territory: Leads are assigned in a round-robin fashion to the AEs who own that territory, ensuring equal distribution among them.
+- Reassignment Logic for Returning Leads: If a lead incoming from a specific domain later submits another contact sales form, the new lead is reassigned to the original owner if the old lead came in within the last 4 months. This ensures continuity in discussions with different leads from same company while preventing spam leads from being reassigned to the original owner.
+
+### Lead Pool Process (Experimental)
+We’re testing a **new process** for handling **product-led leads** that haven’t been acted on within **7 days**. If a lead is assigned to an AE but hasn’t been updated for **7 days**, it will:
+1. Automatically unassign from the AE.
+2. Move to a shared lead pool where anyone can pick it up and take action.
+
+#### Why Are We Doing This?
+- **Keeps leads active:** Ensures leads don’t go stale and slip through the cracks.
+- **Encourages responsiveness:** AEs are motivated to act quickly to keep their assigned leads.
+- **Creates shared accountability:** Gives others a chance to work leads that need attention.
+- **Helps identify patterns:** Tracks unqualified leads and informs adjustments to our lead routing.
+
+#### What You Should Do
+- **Prioritize your assigned leads** to avoid them being reassigned. ✅
+- **Check the lead pool regularly**—there might be great leads waiting for you to pick up. 🚀
+- **Mark unqualified leads** in Salesforce instead of leaving them in the pool. ❌ Flagging them helps us track trends and improve lead quality.
+
+#### What *Not* to Do
+- **Ignore assigned leads.** Leads that sit untouched will be unassigned and go to the pool.
+- **Dump bad leads into the pool.** If you’ve reviewed a lead and it’s not a fit, mark it appropriately in Salesforce.
+
 
 ### How we assess leads in our pipeline
 We have the following lead statuses to manage the lead assessment process before we decide if a user is a right fit to use PostHog.
@@ -120,6 +142,9 @@ Unqualified: A lead that does not meet the criteria to become an opportunity.
 - Make sure all new leads are contacted within 24 hours.
 - Keep all lead information up-to-date and accurate in Salesforce.
 - Periodically review lead statuses and update them as needed.
+
+### Which Leads Should Go to RevOps?
+Some incoming leads are better suited for RevOps, for example questions related to refunds, invoices, startup plan credits or eligibility. To ensure these leads are routed correctly, please create a zendesk ticket by leaving the :ticket: emoji in the relevant thread in the #website-contact-sales Slack channel. This will automatically create a ticket for RevOps to review and address.
 
 ## Opportunities
 

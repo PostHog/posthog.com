@@ -10,28 +10,11 @@ type CollectionProps = {
     pageContext: CollectionPageContext
 }
 
-const order = [
-    'Caution T-Shirt',
-    'Dark Mode T-Shirt',
-    'Items T-Shirt',
-    'Hogzilla T-Shirt',
-    'Scrabble T-Shirt',
-    'SF T-Shirt',
-]
-
 export default function Collection(props: CollectionProps): React.ReactElement {
     const { pageContext } = props
 
     const products = pageContext.productsForCurrentPage
-    const transformedProducts = products
-        ?.map((p) => getProduct(p))
-        .sort((a, b) => {
-            const aIndex = order.findIndex((title) => title.toLowerCase() === a.title.toLowerCase())
-            const bIndex = order.findIndex((title) => title.toLowerCase() === b.title.toLowerCase())
-            if (aIndex === -1) return 1
-            if (bIndex === -1) return -1
-            return aIndex - bIndex
-        })
+    const transformedProducts = products?.map((p) => getProduct(p))
 
     return (
         <>
