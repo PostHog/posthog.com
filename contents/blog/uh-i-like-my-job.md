@@ -3,12 +3,14 @@ title: Inside my first months at PostHog
 date: 2025-01-13
 author:
  - danilo-campos
-rootpage: /blog
 featuredImage: >-
   https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/posthog-vs-ga4/posthog-vs-ga4.jpeg
 featuredImageType: full
 tags:
  - People
+ - Culture
+crosspost:
+ - Founders
 ---
 
 I never thought it would happen to me.
