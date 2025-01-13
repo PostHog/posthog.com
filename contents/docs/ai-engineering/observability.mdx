@@ -28,7 +28,7 @@ Setting up observability starts with installing the PostHog Python SDK.
 pip install posthog
 ```
 
-The rest of the setup depends on the LLM platform you're using.
+The rest of the setup depends on the LLM platform you're using. These SDKs _do not_ proxy your calls, they only fire off an async call to PostHog in the background to send the data.
 
 import Tab from "components/Tab"
 import OpenAIInstall from "./_snippets/openai.mdx"
