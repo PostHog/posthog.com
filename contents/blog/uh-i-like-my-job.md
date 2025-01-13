@@ -97,7 +97,7 @@ Instead, when we notice such a mismatch, a team’s *actual* strengths can be co
 
 Even better, the org chart is descriptive, not prescriptive. It’s not a declaration of turf.
 
-I got to ship a new feature for our data pipelines product in my second week. *That’s not even my department*[^1]. So damn much fun.
+I got to ship a new feature for our data pipelines product in my second week. *That’s not even my department* – I'm a technical marketer at PostHog, not a product engineer.[^1] So damn much fun.
 
 ## Operational curiosity
 
