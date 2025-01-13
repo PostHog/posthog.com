@@ -59,7 +59,7 @@ Share a post using either your own account or the company account, but note that
 
 Tips for writing a good post:
 
-- The **image** is really want makes or breaks a post. Ideally, it should standalone. [Graphics](https://www.linkedin.com/posts/andyvandervell_in-the-last-two-months-weve-had-900-people-activity-7231695253437661186-j5hg) and [memes](https://www.linkedin.com/posts/andyvandervell_whats-the-difference-between-a-software-activity-7245386804491620355-4dR6) work well.
+- The **image** is really what makes or breaks a post. Ideally, it should standalone. [Graphics](https://www.linkedin.com/posts/andyvandervell_in-the-last-two-months-weve-had-900-people-activity-7231695253437661186-j5hg) and [memes](https://www.linkedin.com/posts/andyvandervell_whats-the-difference-between-a-software-activity-7245386804491620355-4dR6) work well.
 
   - If you are posting a changelog update, you can create nice images when clicking **Add entry** in the [changelog](/changelog/). It's under the **Social sharing** header.
 
