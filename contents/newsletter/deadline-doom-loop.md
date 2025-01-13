@@ -20,7 +20,7 @@ Most companies love to set artificial deadlines. They’re the easiest way to �
 
 But they have a nasty habit of manifesting into meaningful deadlines. Deadlines that generate mountains of debt and slow you down over time.
 
-I call this the deadline doom loop, and it’s one of the reasons we don’t have product deadlines at [PostHog](https://posthog.com/).
+I call this the **deadline doom loop**, and it’s one of the reasons we don’t have product deadlines at [PostHog](https://posthog.com/).
 
 Here’s how the loop plays out:
 
@@ -187,7 +187,7 @@ As of writing, we’re [78 people split across 21 small teams](/teams). If and w
 
 [^1]: AAA videogame development is a great example of the deadline doom loop in action. Successful studios frequently doom loop their way into oblivion, normally after being acquired by a large, corporate software publisher.
 
-[^2: ]Other things PostHog engineers talk about: the latest mechanical keyboard, what the latest M(n) chip is like + how to convince us to upgrade them to it.
+[^2]: Other things PostHog engineers talk about: the latest mechanical keyboard, what the latest M(n) chip is like + how to convince us to upgrade them to it.
 
 [^3]: This is one of the reasons we generally don't hire people that have only worked at huge companies. Experience at huge companies AND startups is fine, though, and this is a preference, not immovable rule.
 
