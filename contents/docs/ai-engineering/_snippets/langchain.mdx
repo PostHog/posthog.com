@@ -1,0 +1,46 @@
+Start by installing the Langchain and OpenAI Python SDKs:
+
+```bash
+pip install langchain openai langchain-openai
+```
+
+In the spot where you make your OpenAI calls, import PostHog, Langchain, and our Langchain `CallbackHandler`. Initialize PostHog with your project API key and host (from [your project settings](https://us.posthog.com/settings/project)), and pass it to the `CallbackHandler` along with (optionally) a distinct ID, trace ID, and PostHog properties.
+
+```python
+from posthog.ai.langchain import CallbackHandler
+from langchain_openai import ChatOpenAI
+from langchain_core.prompts import ChatPromptTemplate
+import posthog
+
+posthog.project_api_key = "<ph_project_api_key>"
+posthog.host = "<ph_client_api_host>"
+
+callback_handler = CallbackHandler(
+    client=posthog,
+    distinct_id="user_123",
+    trace_id="trace_456",
+    properties={"conversation_id": "abc123"}
+)
+```
+
+When you invoke your chain, pass the `callback_handler` in the `config` as part of your `callbacks`:
+
+```python
+prompt = ChatPromptTemplate.from_messages([
+    ("system", "You are a helpful assistant."),
+    ("user", "{input}")
+])
+
+model = ChatOpenAI(openai_api_key="your_openai_api_key")
+chain = prompt | model
+
+# Execute the chain with the callback handler
+response = chain.invoke(
+    {"input": "Tell me a joke about programming"},
+    config={"callbacks": [callback_handler]}
+)
+
+print(response.content)
+```
+
+This automatically captures many properties into PostHog including `$ai_input`, `$ai_input_tokens`, `$ai_latency`, `$ai_model`, `$ai_model_parameters`, `$ai_output`, and `$ai_output_tokens`.

@@ -1,0 +1,46 @@
+---
+title: LLM observability (beta)
+availability:
+    free: full
+    selfServe: full
+    enterprise: full
+---
+
+LLM observability enables you to capture and analyze LLM usage and performance data. Specifically, it captures:
+
+- Input and output content and tokens
+- Latency
+- Model
+- Traces
+
+All of this data is captured into PostHog to be used in insights, dashboards, alerts, and more. 
+
+## Observability installation
+
+Setting up observability starts with installing the PostHog Python SDK.
+
+```bash
+pip install posthog
+```
+
+The rest of the setup depends on the LLM platform you're using.
+
+import Tab from "components/Tab"
+import OpenAIInstall from "./_snippets/openai.mdx"
+import LangchainInstall from "./_snippets/langchain.mdx"
+
+<!-- prettier-ignore -->
+<Tab.Group tabs={['OpenAI', 'Langchain']}>
+    <Tab.List>
+        <Tab>OpenAI</Tab>
+        <Tab>Langchain</Tab>
+    </Tab.List>
+    <Tab.Panels>
+        <Tab.Panel>
+            <OpenAIInstall />
+        </Tab.Panel>
+        <Tab.Panel>
+            <LangchainInstall />
+        </Tab.Panel>
+    </Tab.Panels>
+</Tab.Group>
