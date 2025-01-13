@@ -4,7 +4,7 @@ date: 2025-01-13
 author:
  - danilo-campos
 featuredImage: >-
-  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/posthog-vs-ga4/posthog-vs-ga4.jpeg
+  https://res.cloudinary.com/dmukukwp6/image/upload/working_at_posthog_c7c74d7e65.png
 featuredImageType: full
 tags:
  - People
