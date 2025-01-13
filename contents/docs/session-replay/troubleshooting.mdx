@@ -40,7 +40,7 @@ You can read more about [posthog-js configurations here](/docs/integrate/client/
 
 When recordings are enabled, postHog-js will fetch a `recorder.js` script from the PostHog server. (This is not included in the default posthog-js to minimize the default bundle size)
 
-Depending on your content security policy, this script may be blocked. If you have a `default-src`, `script-src`, `script-src-elem`, or `connect-src` directive in your CSP, you may need to ensure that PostHog doamins are permitted (see [CSP documentation](/docs/advanced/content-security-policy)).
+Depending on your content security policy, this script may be blocked. If you have a `default-src`, `script-src`, `script-src-elem`, or `connect-src` directive in your CSP, you may need to ensure that PostHog domains are permitted (see [CSP documentation](/docs/advanced/content-security-policy)).
 
 If PostHog is being blocked by your content security policy, you should see an error message in your developer console with more details.
 
@@ -53,14 +53,6 @@ Some ad/tracking blockers will block PostHog from fetching `posthog-js`. If you'
 ## Replay of recording looks incorrect or buggy
 
 If you're having issues with recordings not looking correct, there are a few things you can:
-
-### Message too large warning
-
-When we capture data from your page we compress it and allow very large messages to be sent to our servers for storage. But even then sometimes we receive data from your page that is too large to be ingested.
-
-This almost always means that playback won't be accurate. For example: you might notice missing styles or page navigation not being reflected in the playback.
-
-The only way to fix this is to reduce the amount of data that you send to our service. [Learn how to restrict what you capture in our privacy docs](https://posthog.com/docs/session-replay/privacy)
 
 ### Ensure your website permits PostHog CORS
 

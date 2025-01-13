@@ -8,6 +8,10 @@
     ],
     "redirects": [
         {
+            "source": "/youreastar",
+            "destination": "https://www.youtube.com/watch?v=SD7B2teuLXk"
+        },
+        {
             "source": "/handbook/growth/marketing/product-announcements",
             "destination": "/handbook/words-and-pictures/product-announcements"
         },
@@ -664,32 +668,16 @@
             "source": "/docs/integrate/third-party/google-tag-manager",
             "destination": "/docs/libraries/google-tag-manager"
         },
-        { "source": "/manual/feature-flags", "destination": "/docs/feature-flags/manual" },
-        { "source": "/manual/experimentation", "destination": "/docs/experiments/manual" },
         { "source": "/docs/experiments/manual", "destination": "/docs/experiments/installation" },
         { "source": "/docs/experiments/under-the-hood", "destination": "/docs/experiments/experiment-significance" },
         { "source": "/docs/experiments/significance", "destination": "/docs/experiments/experiment-significance" },
         { "source": "/docs/session-replay/manual", "destination": "/docs/session-replay/installation" },
         { "source": "/docs/user-guides/feature-flags", "destination": "/docs/feature-flags/manual" },
-        { "source": "/manual/", "destination": "/docs/product-analytics/" },
-        { "source": "/manual/correlation", "destination": "/docs/product-analytics/correlation" },
-        { "source": "/manual/dashboards", "destination": "/docs/product-analytics/dashboards" },
-        { "source": "/manual/funnels", "destination": "/docs/product-analytics/funnels" },
         { "source": "/manual/group-analytics", "destination": "/docs/product-analytics/group-analytics" },
-        { "source": "/manual/hogql", "destination": "/docs/hogql" },
         { "source": "/docs/product-analytics/hogql", "destination": "/docs/hogql" },
         { "source": "/docs/hogql/guide", "destination": "/docs/product-analytics/sql" },
-        { "source": "/manual/insights", "destination": "/docs/product-analytics/insights" },
-        { "source": "/manual/lifecycle", "destination": "/docs/product-analytics/lifecycle" },
-        { "source": "/manual/paths", "destination": "/docs/product-analytics/paths" },
-        { "source": "/manual/retention", "destination": "/docs/product-analytics/retention" },
-        { "source": "/manual/sampling", "destination": "/docs/product-analytics/sampling" },
-        { "source": "/manual/stickiness", "destination": "/docs/product-analytics/stickiness" },
         { "source": "/manual/toolbar", "destination": "/docs/toolbar" },
         { "source": "/docs/product-analytics/toolbar", "destination": "/docs/toolbar" },
-        { "source": "/manual/trends", "destination": "/docs/product-analytics/trends" },
-        { "source": "/manual/actions", "destination": "/docs/data/actions" },
-        { "source": "/manual/annotations", "destination": "/docs/data/annotations" },
         { "source": "/manual/application-settings", "destination": "/docs/data/application-settings" },
         { "source": "/manual/cohorts", "destination": "/docs/data/cohorts" },
         { "source": "/manual/data-management", "destination": "/docs/data" },
@@ -699,9 +687,6 @@
         { "source": "/manual/persons", "destination": "/docs/data/persons" },
         { "source": "/manual/role-based-access", "destination": "/docs/data/role-based-access" },
         { "source": "/manual/sessions", "destination": "/docs/data/sessions" },
-        { "source": "/manual/session-recording", "destination": "/docs/session-replay" },
-        { "source": "/manual/session-recordings", "destination": "/docs/session-replay" },
-        { "source": "/manual/sso", "destination": "/docs/data/sso" },
         { "source": "/manual/subscriptions", "destination": "/docs/product-analytics/subscriptions" },
         { "source": "/manual/team-collaboration", "destination": "/docs/data/team-collaboration" },
         { "source": "/manual/utm-segmentation", "destination": "/docs/data/utm-segmentation" },
@@ -742,10 +727,10 @@
         { "source": "/ab-testing/features", "destination": "/experiments" },
         { "source": "/product-os/features", "destination": "/product-os" },
         { "source": "/docs/integrate/webhooks", "destination": "/docs/cdp/destinations/webhook" },
-        { "source": "/roadmap/changelog", "destination": "/changelog/2024" },
-        { "source": "/blog/posthog-changelog", "destination": "/changelog/2024" },
-        { "source": "/roadmap/changelog/2023", "destination": "/changelog/2024" },
-        { "source": "/changelog", "destination": "/changelog/2024" },
+        { "source": "/roadmap/changelog", "destination": "/changelog/2025" },
+        { "source": "/blog/posthog-changelog", "destination": "/changelog/2025" },
+        { "source": "/roadmap/changelog/2023", "destination": "/changelog/2025" },
+        { "source": "/changelog", "destination": "/changelog/2025" },
         { "source": "/docs/integrate/webhooks", "destination": "/docs/cdp/destinations/webhook" },
         { "source": "/apps/advanced-geoip", "destination": "/cdp/geoip-enrichment" },
         { "source": "/cdp/advanced-geoip", "destination": "/cdp/geoip-enrichment" },
@@ -1325,6 +1310,7 @@
         { "source": "/docs/cdp/outfunnel-exporter", "destination": "/docs/cdp/destinations" },
         { "source": "/docs/cdp/route-censor", "destination": "/docs/cdp" },
         { "source": "/docs/cdp/semver-flattener", "destination": "/docs/cdp" },
+        { "source": "/docs/experiments/experiment-significance", "destination": "/docs/experiments/statistics" },
         { "source": "/handbook/product/in-app-prompts", "destination": "/docs/surveys" },
         { "source": "/docs/webhooks", "destination": "/docs/cdp/destinations" },
         { "source": "/docs/webhooks/slack", "destination": "/docs/cdp/destinations/slack" },
@@ -1441,6 +1427,50 @@
         {
             "source": "/docs/data-warehouse/setup/",
             "destination": "/docs/data-warehouse/query/"
+        },
+        {
+            "source": "/handbook/growth/marketing/content",
+            "destination": "/handbook/content-and-docs"
+        },
+        {
+            "source": "/handbook/company/docs",
+            "destination": "/handbook/content-and-docs/docs"
+        },
+        {
+            "source": "/handbook/growth/marketing/newsletter",
+            "destination": "/handbook/content-and-docs/newsletter"
+        },
+        {
+            "source": "/handbook/growth/marketing/youtube",
+            "destination": "/handbook/content-and-docs/youtube"
+        },
+        {
+            "source": "/handbook/growth/marketing/writing-for-posthog",
+            "destination": "/handbook/content-and-docs/writing-for-posthog"
+        },
+        {
+            "source": "/handbook/growth/marketing/seo-guide",
+            "destination": "/handbook/content-and-docs/seo-guide"
+        },
+        {
+            "source": "/handbook/growth/marketing/posthog-style-guide",
+            "destination": "/handbook/content-and-docs/posthog-style-guide"
+        },
+        {
+            "source": "/handbook/growth/marketing/tags-and-categories",
+            "destination": "/handbook/content-and-docs/tags-and-categories"
+        },
+        {
+            "source": "/handbook/growth/marketing/components",
+            "destination": "/handbook/content-and-docs/components"
+        },
+        {
+            "source": "/handbook/growth/marketing/paid",
+            "destination": "/handbook/words-and-pictures/paid"
+        },
+        {
+            "source": "/features/self-hosted",
+            "destination": "/docs/self-host"
         }
     ]
 }

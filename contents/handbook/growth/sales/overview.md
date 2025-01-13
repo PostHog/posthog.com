@@ -121,6 +121,10 @@ This is how current roles are split - including spaces for the next few hires we
   - AE for Medium & Large customers in the Americas region
 - Scott
   - AE for Medium & Large customers in the Americas region
+- David
+  - AE for Medium & Large customers in the Americas region
+- Ben
+  - AE for Medium & Large customers in the Americas region
 - Leon
   - AE for Medium & Large customers in the EMEA/Asia region
 - Seb
@@ -129,5 +133,5 @@ This is how current roles are split - including spaces for the next few hires we
 **RevOps & Customer Success**
 - Mine
   - Building and leading RevOps
-- Future hire - CSM
-  - Manage steady state/single product customers
+- Steven
+  - CSM for steady state/single product customers

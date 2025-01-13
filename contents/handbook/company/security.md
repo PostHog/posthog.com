@@ -102,4 +102,4 @@ We receive data collected by our customers from end-users and allow them to unde
 
 ## Pen tests
 
-We conduct these annually, most recently in April 2024  - see [here](https://github.com/PostHog/company-internal/issues/1577) for a link to the latest report and statuses (internally viewable only). 
+We conduct these annually, most recently in April 2024  - <PrivateLink url="https://github.com/PostHog/company-internal/issues/1577">see here</PrivateLink> for a link to the latest report and statuses. 

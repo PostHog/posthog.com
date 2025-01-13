@@ -26,6 +26,19 @@ const query = (id: string | number, isModerator: boolean) =>
                       }),
             },
             populate: {
+                edits: {
+                    sort: ['date:desc'],
+                    populate: {
+                        by: {
+                            fields: ['firstName', 'lastName', 'color', 'gravatarURL'],
+                            populate: {
+                                avatar: {
+                                    fields: ['url'],
+                                },
+                            },
+                        },
+                    },
+                },
                 resolvedBy: {
                     select: ['id'],
                 },
@@ -47,6 +60,19 @@ const query = (id: string | number, isModerator: boolean) =>
                 replies: {
                     sort: ['createdAt:asc'],
                     populate: {
+                        edits: {
+                            sort: ['date:desc'],
+                            populate: {
+                                by: {
+                                    fields: ['firstName', 'lastName', 'color', 'gravatarURL'],
+                                    populate: {
+                                        avatar: {
+                                            fields: ['url'],
+                                        },
+                                    },
+                                },
+                            },
+                        },
                         profile: {
                             fields: ['id', 'firstName', 'lastName', 'gravatarURL', 'pronouns', 'color', 'startDate'],
                             populate: {

@@ -26,40 +26,38 @@ To do this, set up `beforeNavigate` and `afterNavigate` interceptors in a new fi
 
 ```svelte file=+layout.svelte
 <script>
-  import posthog from 'posthog-js'
   import { browser } from '$app/environment';
   import { beforeNavigate, afterNavigate } from '$app/navigation';
+  import posthog from 'posthog-js'
 
   if (browser) {
-        beforeNavigate(() => posthog.capture('$pageleave'));
-        afterNavigate(() => posthog.capture('$pageview'));
-    }
+    beforeNavigate(() => posthog.capture('$pageleave'));
+    afterNavigate(() => posthog.capture('$pageview'));
+  }
 </script>
 
 <slot></slot>
 ```
 
-To make sure we don't double count pageviews and pageleaves, we also need to adjust our PostHog initialization in `routes/+layout.js` to set `capture_pageview` and `capture_pageleave` to false.
+To make sure we don't double count pageviews and pageleaves, we also need to adjust our PostHog initialization in `routes/+layout.svelte` to set `capture_pageview` and `capture_pageleave` to false.
 
-```js file=routes/+layout.js
-import posthog from 'posthog-js'
+```js file=routes/+layout.svelte
+import { onMount } from 'svelte'
 import { browser } from '$app/environment';
+import posthog from 'posthog-js'
 
-export const load = async () => {
-
+onMount(() => {
   if (browser) {
     posthog.init(
       '<ph_project_api_key>',
       {
         api_host:'<ph_client_api_host>',
-        person_profiles: 'identified_only',
         capture_pageview: false,
         capture_pageleave: false
       }
-    )
+    );
   }
-  return
-};
+});
 ```
 
 ## Server-side setup
@@ -78,12 +76,13 @@ Then, initialize the PostHog Node client where you'd like to use it on the serve
 import { PostHog } from 'posthog-node';
 
 export async function load() {
-  const posthog = new PostHog('<ph_project_api_key>', 
-  { host: '<ph_client_api_host>' });
+  const posthog = new PostHog('<ph_project_api_key>', { host: '<ph_client_api_host>' });
+
   posthog.capture({
     distinctId: 'distinct_id_of_the_user',
     event: 'event_name',
   })
+
   await posthog.shutdown()
 }
 ```

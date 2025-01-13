@@ -22,6 +22,7 @@ export default function CloudinaryImage({ src, width, placeholder, className = '
                 publicId={cloudinaryPublicId}
                 cloudName={process.env.GATSBY_CLOUDINARY_CLOUD_NAME}
                 className={imgClassName}
+                secure
             >
                 <Transformation width={width} crop="scale" />
             </Image>

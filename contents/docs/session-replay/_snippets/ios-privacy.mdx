@@ -11,10 +11,17 @@ imvProfilePhoto.accessibilityIdentifier = "ph-no-capture"
 
 - When using the [SwiftUI TextField](https://developer.apple.com/documentation/swiftui/textfield) with [UITextInputTraits](https://developer.apple.com/documentation/uikit/uitextinputtraits), setting traits such as `TextField("Email", text: ...).keyboardType(.emailAddress)` will always be automatically masked since it's for private text.
 - The [SwiftUI SecureField](https://developer.apple.com/documentation/swiftui/securefield) view is always automatically masked.
-- You can manually mark a SwiftUI View for masking using the `postHogMask(_:)` view modifier:
+- You can manually mark a SwiftUI View for masking using the `postHogMask()` view modifier:
 
   ```swift
-  // This view will be masked in session replay recordings
+  // This view (and children) will *always* be masked in session replay recordings
   MyCoolView()
     .postHogMask()
+  ```
+- The `postHogNoMask()` view modifier can be used to prevent a view from being masked in session recordings, regardless of any default masking behavior:
+
+  ```swift
+  // This view (and children) will *never* be masked in session replay recordings
+  MyCoolView()
+    .postHogNoMask()
   ```
