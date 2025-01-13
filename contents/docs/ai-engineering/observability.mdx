@@ -27,20 +27,20 @@ The rest of the setup depends on the LLM platform you're using.
 
 import Tab from "components/Tab"
 import OpenAIInstall from "./_snippets/openai.mdx"
-import LangchainInstall from "./_snippets/langchain.mdx"
+import LangChainInstall from "./_snippets/langchain.mdx"
 
 <!-- prettier-ignore -->
 <Tab.Group tabs={['OpenAI', 'Langchain']}>
     <Tab.List>
         <Tab>OpenAI</Tab>
-        <Tab>Langchain</Tab>
+        <Tab>LangChain</Tab>
     </Tab.List>
     <Tab.Panels>
         <Tab.Panel>
             <OpenAIInstall />
         </Tab.Panel>
         <Tab.Panel>
-            <LangchainInstall />
+            <LangChainInstall />
         </Tab.Panel>
     </Tab.Panels>
 </Tab.Group>
