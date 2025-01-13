@@ -1,14 +1,16 @@
 ---
 title: Inside my first months at PostHog
-date: 2024-12-12
+date: 2025-01-13
 author:
  - danilo-campos
-rootpage: /blog
 featuredImage: >-
-  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/posthog-vs-ga4/posthog-vs-ga4.jpeg
+  https://res.cloudinary.com/dmukukwp6/image/upload/working_at_posthog_c7c74d7e65.png
 featuredImageType: full
 tags:
  - People
+ - Culture
+crosspost:
+ - Founders
 ---
 
 I never thought it would happen to me.
@@ -47,7 +49,7 @@ I got into startups 14 years ago, but I’ve never gotten this degree of transpa
 
 ## Rigor enables autonomy
 
-I’ve been here two months and no one has made me look at any tedious slideshows.
+I’ve been here three months and no one has made me look at any tedious slideshows.
 
 Slideshows are the refuge of the corporate snow job artist. A means of eliding detail through headlines and text that never quite coheres into an *argument*, and never finds itself as a useful reference in the future.
 
@@ -95,7 +97,7 @@ Instead, when we notice such a mismatch, a team’s *actual* strengths can be co
 
 Even better, the org chart is descriptive, not prescriptive. It’s not a declaration of turf.
 
-I got to ship a new feature for our data pipelines product in my second week. *That’s not even my department*[^1]. So damn much fun.
+I got to ship a new feature for our data pipelines product in my second week. *That’s not even my department* – I'm a technical marketer at PostHog, not a product engineer.[^1] So damn much fun.
 
 ## Operational curiosity
 
