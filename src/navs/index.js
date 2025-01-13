@@ -1763,14 +1763,8 @@ export const docsMenu = {
                                     url: '/docs/data/anonymous-vs-identified-events',
                                 },
                                 {
-                                    name: 'Events Spec',
+                                    name: 'Ecommerce events spec',
                                     url: '/docs/data/event-spec/ecommerce-events',
-                                    children: [
-                                        {
-                                            name: 'Ecommerce Events',
-                                            url: '/docs/data/event-spec/ecommerce-events',
-                                        },
-                                    ],
                                 },
                             ],
                         },
