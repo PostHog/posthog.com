@@ -1,6 +1,6 @@
 ---
 title: PostHog ruined all other jobs for me
-date: 2025-01-13
+date: 2025-01-14
 author:
  - danilo-campos
 featuredImage: >-
