@@ -10,15 +10,15 @@ After creating an experiment, you need a goal to track your experiment's impact 
 
 There are two types of experiment metrics:
 
-1. **Funnels:** Evaluates using funnel conversions. Read more about how we calculate these in our [funnel statistic docs](/docs/experiments/funnels-statistics) or by reading about [funnel insights](/docs/product-analytics/funnels). 
+1. **Funnels:** Evaluates using funnel conversions. Read more about how we calculate these in our [funnel statistic](/docs/experiments/funnels-statistics) or [funnel insights](/docs/product-analytics/funnels) docs.
 
-2. **Trends:** Evaluates using aggregate metrics like total count, average count per user, unique sessions, property values, and more. Trends also let you set the exposure event if you want it to be something other than `$feature_flag_called`. Read more about how we calculate these in our [trend count](/docs/experiments/trends-count-statistics) or [trend continuous](/docs/experiments/trends-continuous-statistics) statistic docs or by reading about [trend insights](/docs/product-analytics/trends/overview).
+2. **Trends:** Evaluates using aggregate metrics such as total count, average count per user, unique sessions, property values, and more. Trends also let you set the exposure event if you want it to be something other than `$feature_flag_called`. Read more about how we calculate these in our [trend count](/docs/experiments/trends-count-statistics) or [trend continuous](/docs/experiments/trends-continuous-statistics) statistic or [trend insights](/docs/product-analytics/trends/overview) docs.
 
 ## Primary and secondary metrics
 
 Each metric can be set as either a **primary** or **secondary** metric. You can set up to 10 primary and secondary metrics per experiment.
 
-**Primary metrics** represent the main goal of your experiment. They directly measure whether your hypothesis was successful and are the key factor in deciding if the test achieved its primary objective.
+**Primary metrics** represent the main goal of your experiment. They directly measure if your hypothesis was successful and are the key factor in deciding if the test achieved its primary objective.
 
 <ProductScreenshot
     imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_01_14_at_10_17_53_2x_928092c2ee.png"
@@ -27,9 +27,9 @@ Each metric can be set as either a **primary** or **secondary** metric. You can 
     classes="rounded"
 />
 
-**Secondary metrics** are metrics provide more context for your experiment. They can help you understand the impact of your primary metric and ensure your experiment didn't have negative side effects.
+**Secondary metrics** provide more context for your experiment. They can help you understand the impact of your primary metric and ensure your experiment didn't have negative side effects.
 
-Once added and data starts being collected, they will show the results as a credible interval bar chart along with details about significance, win probability, and delta between variants.
+Once added and data starts being collected, we show the results as a credible interval bar chart along with details about significance, win probability, and delta between variants.
 
 ### How to read credible interval bar charts
 
