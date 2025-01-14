@@ -35,9 +35,10 @@ export default function Merch() {
 
                 <Link to="/merch">
                     <CloudinaryImage
-                        src="https://cdn.shopify.com/s/files/1/0452/0935/4401/files/DSC07383_3265x4897_crop_center.jpg?v=1709570954"
+                        src="https://res.cloudinary.com/dmukukwp6/image/upload/DSC_07383_3265x4897_crop_center_28e2007a77.jpg"
                         alt="PostHog stickers"
                         className="w-full"
+                        width={500}
                     />
                     {/* <GatsbyImage image={getImage(gatsbyImageData)} /> */}
                 </Link>
