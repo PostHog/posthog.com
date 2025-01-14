@@ -85,9 +85,7 @@ COMMENT = 'PostHog events table'
 
 ### Persons model
 
-The schema of the model as created in BigQuery is:
-
-The schema of the model as created in BigQuery is:
+The schema of the model as created in Snowflake is:
 
 | Field                      | Type      | Description                                                                                          |
 |----------------------------|-----------|------------------------------------------------------------------------------------------------------|
