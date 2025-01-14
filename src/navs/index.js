@@ -2955,10 +2955,6 @@ export const docsMenu = {
                             url: '/docs/cdp/destinations/gleap',
                         },
                         {
-                            name: 'Google Ads Conversions',
-                            url: '/docs/cdp/destinations/google-ads',
-                        },
-                        {
                             name: 'Google Cloud Storage',
                             url: '/docs/cdp/destinations/google-cloud-storage',
                         },
