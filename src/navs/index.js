@@ -3185,6 +3185,12 @@ export const docsMenu = {
                     color: 'seagreen',
                 },
                 {
+                    name: 'Observability',
+                    url: '/docs/ai-engineering/observability',
+                    icon: 'IconDashboard',
+                    color: 'red',
+                },
+                {
                     name: 'LLM insights',
                     url: '/docs/ai-engineering/llm-insights',
                     icon: 'IconAIText',

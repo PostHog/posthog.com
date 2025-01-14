@@ -1,0 +1,51 @@
+---
+title: LLM observability (beta)
+availability:
+    free: full
+    selfServe: full
+    enterprise: full
+---
+
+> 🚧 **Note:** LLM observability is currently considered in `beta`. To access it, enable the [feature preview](https://us.posthog.com#panel=feature-previews) in your PostHog account.
+>
+> We are keen to gather as much feedback as possible so if you try this out please let us know. You can email [tim@posthog.com](mailto:tim@posthog.com), send feedback via the [in-app support panel](https://us.posthog.com#panel=support%3Afeedback%3Aexperiments%3Alow), or use one of our other [support options](/docs/support-options).
+
+LLM observability enables you to capture and analyze LLM usage and performance data. Specifically, it captures:
+
+- Input and output content and tokens
+- Latency
+- Model
+- Traces
+- Cost of each generation
+
+All of this data is captured into PostHog to be used in insights, dashboards, alerts, and more. 
+
+## Observability installation
+
+Setting up observability starts with installing the PostHog Python SDK.
+
+```bash
+pip install posthog
+```
+
+The rest of the setup depends on the LLM platform you're using. These SDKs _do not_ proxy your calls, they only fire off an async call to PostHog in the background to send the data.
+
+import Tab from "components/Tab"
+import OpenAIInstall from "./_snippets/openai.mdx"
+import LangChainInstall from "./_snippets/langchain.mdx"
+
+<!-- prettier-ignore -->
+<Tab.Group tabs={['OpenAI', 'Langchain']}>
+    <Tab.List>
+        <Tab>OpenAI</Tab>
+        <Tab>LangChain</Tab>
+    </Tab.List>
+    <Tab.Panels>
+        <Tab.Panel>
+            <OpenAIInstall />
+        </Tab.Panel>
+        <Tab.Panel>
+            <LangChainInstall />
+        </Tab.Panel>
+    </Tab.Panels>
+</Tab.Group>
