@@ -1774,6 +1774,10 @@ export const docsMenu = {
                                     name: 'Anonymous vs identified events',
                                     url: '/docs/data/anonymous-vs-identified-events',
                                 },
+                                {
+                                    name: 'Ecommerce events spec',
+                                    url: '/docs/data/event-spec/ecommerce-events',
+                                },
                             ],
                         },
                         {
