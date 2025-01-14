@@ -2623,6 +2623,12 @@ export const docsMenu = {
                     },
                 },
                 {
+                    name: 'Experiment metrics',
+                    url: '/docs/experiments/metrics',
+                    icon: 'IconGraph',
+                    color: 'red',
+                },
+                {
                     name: 'Adding your code',
                     url: '/docs/experiments/adding-experiment-code',
                     icon: 'IconCode',
