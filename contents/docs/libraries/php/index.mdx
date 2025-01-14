@@ -29,7 +29,7 @@ import PHPSendEvents from '../../integrate/send-events/_snippets/send-events-php
 
 ## Person profiles and properties
 
-PostHog captures identified events by default. These create [person profiles](/docs/data/persons). To set [person properties](/docs/data/user-properties) in these profiles, include them when capturing an event:
+The PHP SDK captures identified events by default. These create [person profiles](/docs/data/persons). To set [person properties](/docs/data/user-properties) in these profiles, include them when capturing an event:
 
 ```php
 PostHog::capture(array(
@@ -133,7 +133,7 @@ PostHog::groupIdentify(array(
 ));
 ```
 
-The `name` is a special property which is used in the PostHog UI for the name of the Group. If you don't specify a `name` property, the group ID will be used instead.
+The `name` is a special property which is used in the PostHog UI for the name of the group. If you don't specify a `name` property, the group ID will be used instead.
 
 ## Config options
 

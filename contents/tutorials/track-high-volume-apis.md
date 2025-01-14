@@ -280,3 +280,5 @@ Since we included an ID in the event property, we can use it to break down the s
 - [Using the PostHog API to capture events](/tutorials/api-capture-events)
 - [How to evaluate and update feature flags with the PostHog API](/tutorials/api-feature-flags)
 - [How to set up Node.js (Express) analytics, feature flags, and more](/tutorials/node-express-analytics)
+
+<NewsletterForm />

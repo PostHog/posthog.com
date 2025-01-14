@@ -120,7 +120,6 @@ import { PostHogProvider } from 'posthog-js/react'
 
 posthog.init('<ph_project_api_key>', {
   api_host: '<ph_client_api_host>',
-  person_profiles: 'identified_only',
 })
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
@@ -199,7 +198,6 @@ Lastly, go back to `src/index.js` and make sure to set `capture_pageview` in the
 
 posthog.init("<ph_project_api_key>", {
   api_host: "<ph_client_api_host>",
-  person_profiles: 'identified_only',
   capture_pageview: false
 })
 
@@ -242,3 +240,5 @@ Now when you click the button, PostHog captures the custom `home_button_clicked`
 - [How to set up surveys in React](/tutorials/react-surveys)
 - [How to set up A/B tests in React](/tutorials/react-ab-testing)
 - [How to set up feature flags in React](/tutorials/react-feature-flags)
+
+<NewsletterForm />

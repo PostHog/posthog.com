@@ -40,8 +40,7 @@ import { useEffect } from 'react'
 export function PHProvider({ children }) {
     useEffect(() => {
       posthog.init('<ph_project_api_key>', {
-        api_host: '<ph_client_api_host>',
-        person_profiles: 'identified_only'
+        api_host: '<ph_client_api_host>'
       })
   }, []);
   return <PostHogProvider client={posthog}>{children}</PostHogProvider>
@@ -304,3 +303,5 @@ This completes an introduction to our custom survey functionality, which you can
 - [Get feedback and book user interviews with surveys](/tutorials/feedback-interviews-site-apps)
 - [The Product-Market Fit Game](/blog/product-market-fit-game)
 - [How we made something people want](/blog/making-something-people-want)
+
+<NewsletterForm />

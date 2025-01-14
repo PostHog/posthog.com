@@ -55,3 +55,5 @@ You can also filter these results based on [person properties](/docs/product-ana
 - [How to set up Webflow analytics and session recordings](/tutorials/webflow)
 - [How to run A/B tests in Webflow](/tutorials/webflow-ab-tests)
 - [How to analyze surveys with ChatGPT](/tutorials/analyze-surveys-with-chatgpt)
+
+<NewsletterForm />

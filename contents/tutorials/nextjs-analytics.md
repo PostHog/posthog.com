@@ -301,7 +301,6 @@ export default function App(
   useEffect(() => {
     posthog.init(process.env.NEXT_PUBLIC_POSTHOG_KEY, {
       api_host: process.env.NEXT_PUBLIC_POSTHOG_HOST || '<ph_client_api_host>',
-      person_profiles: 'identified_only',
       // Enable debug mode in development
       loaded: (posthog) => {
         if (process.env.NODE_ENV === 'development') posthog.debug()
@@ -652,3 +651,5 @@ You now have a basic Next.js app with user authentication and many of the featur
 - [How to set up Next.js app router analytics, feature flags, and more](/tutorials/nextjs-app-directory-analytics)
 - [How to set up Next.js A/B tests](/tutorials/nextjs-ab-tests)
 - [An introductory guide to identifying users in PostHog](/tutorials/identifying-users-guide)
+
+<NewsletterForm />

@@ -98,8 +98,7 @@ With our app set up, the next step is to add PostHog to it. To start, create a n
   posthog.init(
     '<ph_project_api_key>',
     {
-      api_host:'<ph_client_api_host>',
-      person_profiles: 'identified_only'
+      api_host:'<ph_client_api_host>'
     }
   )
 </script>
@@ -187,7 +186,6 @@ With the feature flag, go back to your home page at `components/posthog.astro`. 
     '<ph_project_api_key>',
     {
       api_host:'<ph_client_api_host>',
-      person_profiles: 'identified_only',
       loaded: (posthog) => {
         posthog.onFeatureFlags(() => {
           const button = document.querySelector('.main');
@@ -337,7 +335,6 @@ Finally, in `posthog.astro`, we add logic to get the distinct ID, check if it’
     '<ph_project_api_key>',
     {
       api_host:'<ph_client_api_host>',
-			person_profiles: 'identified_only',
       loaded: function(posthog) {
         const button = document.querySelector('.main');
         if (posthog.isFeatureEnabled('new-button')) {
@@ -402,7 +399,6 @@ Lastly, remove the `posthog.onFeatureFlags()` code we added in `posthog.astro`:
     '<ph_project_api_key>',
     {
       api_host:'<ph_client_api_host>',
-      person_profiles: 'identified_only',
       loaded: function(posthog) {
         // posthog.onFeatureFlags has been removed
 
@@ -423,3 +419,5 @@ Now when you refresh your page, your flag won’t flicker because the content is
 - [What to do after installing PostHog in 5 steps](/tutorials/next-steps-after-installing)
 - [How to set up A/B tests in Astro](/tutorials/astro-ab-tests)
 - [How to set up surveys in Astro](/tutorials/astro-surveys)
+
+<NewsletterForm />

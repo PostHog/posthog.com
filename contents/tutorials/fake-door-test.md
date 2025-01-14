@@ -44,7 +44,6 @@ export function PHProvider({ children }) {
   useEffect(() => {
     posthog.init('<ph_project_api_key>', {
       api_host: '<ph_client_api_host>',
-      person_profiles: 'identified_only',
       opt_in_site_apps: true
     })
   }, []);
@@ -151,3 +150,5 @@ Once done, we can go back to our draft survey and press "Launch." Now, users who
 - [The Product-Market Fit Game](/blog/product-market-fit-game)
 - [Get feedback and book user interviews with surveys](/tutorials/feedback-interviews-site-apps)
 - [How we build features users love (really fast)](/blog/measuring-feature-success)
+
+<NewsletterForm />

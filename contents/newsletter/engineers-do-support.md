@@ -142,7 +142,7 @@ We try our best to get to everything, but there are always going to be tickets y
 
 As we grew, even dedicated support heroes weren't enough to keep up with the support load. They couldn't get through high-priority support, let alone the rest of the queue. This was causing them to neglect longer-term improvements critical for reducing support load.
 
-The fix for this was the introduction of [support engineers](/handbook/comms/customer-support) who are entirely dedicated to doing support. This role is not a traditional, non-technical, first-line support agent. They are expected to be able to figure out and fix issues, often by shipping code.
+The fix for this was the introduction of [support engineers](/handbook/support/customer-support) who are entirely dedicated to doing support. This role is not a traditional, non-technical, first-line support agent. They are expected to be able to figure out and fix issues, often by shipping code.
 
 For example, [Marcus](https://posthog.com/community/profiles/30211) has recently shipped fixes for [batch export secrets](https://github.com/PostHog/posthog/pull/23963), the [filter out transformation](https://github.com/PostHog/posthog/pull/23877), and [Reddit as a campaign parameter](https://github.com/PostHog/posthog/pull/23469).
 

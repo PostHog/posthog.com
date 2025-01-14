@@ -26,6 +26,7 @@ import ImageSlider from './Test/ImageSlider'
 import Header from './Test/Header'
 import { Link as ScrollLink } from 'react-scroll'
 import PurchasedWith from './Test/PurchasedWith'
+import { PRODUCT_COUNT } from '../../constants'
 
 const SidebarList = ({ children }) => <ul className="tw-chevron-bullets flex flex-col gap-1 pl-4">{children}</ul>
 
@@ -266,8 +267,8 @@ const PricingExperiment = (): JSX.Element => {
                     </div>
 
                     <p className="mb-4">
-                        PostHog is designed to grow with you. Our 8 products (and counting) will take you from idea to
-                        product-market fit to IPO and beyond. 🚀
+                        PostHog is designed to grow with you. Our <strong>{PRODUCT_COUNT}+ products</strong> (and
+                        counting) will take you from idea to product-market fit to IPO and beyond. 🚀
                     </p>
 
                     <p className="mb-4">
@@ -446,7 +447,7 @@ const PricingExperiment = (): JSX.Element => {
                                     back in a few days – no credit card required.
                                 </SidebarListItem>
                                 <SidebarListItem>
-                                    If something stupid happens, like you get an unexpected bill and you’re unhappy,
+                                    If something stupid happens and you get an unexpected bill (like if <Link href="/side-project-insurance">your side project unexpectedly goes viral</Link> or you’re unhappy),
                                     we’ll pretty much always refund it!
                                 </SidebarListItem>
                                 <SidebarListItem>

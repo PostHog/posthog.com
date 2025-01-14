@@ -1,0 +1,151 @@
+---
+title: Privacy controls
+---
+
+PostHog offers a range of controls to limit what data is captured by product analytics. They are listed below in order of least to most restrictive.
+
+## EU-cloud hosting
+
+PostHog offers hosting on EU cloud. To use this, sign up at [eu.posthog.com](https://eu.posthog.com).
+
+If you've already created a US cloud instance and wish to migrate ticket, you must raise a [support ticket in-app](https://us.posthog.com/home#supportModal) with the **Data pipelines** topic for the PostHog team to do this migration for you. This option is **only available to customers on the team or enterprise plan** as it requires significant engineering time.  
+
+## Disable sensitive information with autocapture
+
+If you're using [autocapture](/docs/product-analytics/autocapture), PostHog automatically attempts to prevent sensitive data capture. We specifically only collect the `name`, `id`, and `class` attributes from input tags.
+
+If there are specific elements you don't want to capture, add the [`ph-no-capture`](/docs/product-analytics/autocapture#preventing-sensitive-data-capture) class name.
+
+```html
+<button class='ph-no-capture'>Sensitive information here</button>
+```
+
+## Sanitize properties on the client
+
+You can sanitize properties on the client side by setting the `before_send` [config](/docs/libraries/js#config) option. This is a function that enables you to modify the properties before they are sent to PostHog. You can even reject events by returning `null`. For example:
+
+```js-web
+posthog.init('<ph_project_api_key>', {
+    api_host: '<ph_client_api_host>',
+    before_send: function(event) {
+        if (event.properties['$ip']) {
+            event.properties['$ip'] = null;
+        }
+
+        return event;
+    }
+});
+```
+
+## Use the property filter app
+
+You can use the [property filter app](/docs/cdp/property-filter) to prevent PostHog from certain properties on events. For example, you can configure the app to remove all GeoIP data from events.
+
+We've also put together a [tutorial](/tutorials/property-filter) to help you get started with the app.
+
+## Cookieless tracking
+
+It's possible to use PostHog without cookies. Instead, PostHog can use in-memory storage. For more details on how to do this, read our tutorial on [how to set up cookieless tracking](/tutorials/cookieless-tracking).
+
+## Complete opt-out
+
+You can completely opt-out users from data capture. To do this, there are two options:
+
+1. Opt users out by default in your PostHog initialization config.
+
+<MultiLanguage>
+
+```js-web
+posthog.init('<ph_project_api_key>', {
+    opt_out_capturing_by_default: true,
+});
+```
+
+```ios_swift        
+let config = PostHogConfig(apiKey: <ph_project_api_key>, host: <ph_client_api_host>)
+config.optOut = true
+PostHogSDK.shared.setup(config)
+```
+
+```android
+val config = PostHogAndroidConfig(
+    apiKey = <ph_project_api_key>,
+    host = <ph_client_api_host> 
+)
+config.optOut = true
+PostHogAndroid.setup(this, config)
+```
+
+```react-native
+posthog.init('<ph_project_api_key>', {
+    opt_out_capturing_by_default: true,
+});
+```
+
+</MultiLanguage>
+
+2. Opt users out on a per-person basis.
+
+<MultiLanguage>
+
+```js-web
+posthog.opt_out_capturing()
+```
+
+```ios_swift        
+PostHogSDK.shared.optOut()
+```
+
+```android
+PostHog.optOut()
+```
+
+```react-native
+posthog.opt_out_capturing()
+```
+
+</MultiLanguage>
+
+Similarly, you can opt users in:
+
+<MultiLanguage>
+
+```js-web
+posthog.opt_in_capturing()
+```
+
+```ios_swift        
+PostHogSDK.shared.optIn()
+```
+
+```android
+PostHog.optIn()
+```
+
+```react-native
+posthog.opt_in_capturing()
+```
+
+</MultiLanguage>
+
+To check if a user is opted out:
+
+<MultiLanguage>
+
+```js-web
+posthog.has_opted_out_capturing()
+```
+
+```ios_swift        
+PostHogSDK.shared.isOptOut()
+```
+
+```android
+PostHog.isOptOut()
+```
+
+```react-native
+posthog.has_opted_out_capturing()
+```
+
+</MultiLanguage>

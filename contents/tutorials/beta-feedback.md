@@ -52,7 +52,6 @@ export function PHProvider({ children }) {
   useEffect(() => {
     posthog.init('<ph_project_api_key>', {
       api_host: '<ph_client_api_host>',
-      person_profiles: 'identified_only',
       opt_in_site_apps: true
     })
   }, []);
@@ -141,3 +140,5 @@ This is an easy, targeted, and scalable way to learn users' thoughts and problem
 - [How to create custom surveys](/tutorials/survey)
 - [Get feedback and book user interviews with surveys](/tutorials/feedback-interviews-site-apps)
 - [How to set up a public beta program using early access management](/tutorials/public-beta-program)
+
+<NewsletterForm />

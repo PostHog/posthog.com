@@ -25,6 +25,8 @@ const locations = [
     { latitude: 47.497912, longitude: 19.040235 }, // budapest
     { latitude: 53.3498053, longitude: -6.2603097 }, // dublin
     { latitude: 39.7392358, longitude: -104.990251 }, // denver
+    { latitude: -34.6037, longitude: -58.3816 }, // buenos aires
+    { latitude: -19.9167, longitude: -43.9345 }, // belo horizonte
 ]
 
 export default function Map() {

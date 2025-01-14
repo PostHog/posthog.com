@@ -207,3 +207,5 @@ Now when your event is captured, you should see the flag value in the event deta
 - [How to set up one-time feature flags](/tutorials/one-time-feature-flags)
 - [How to set up analytics in Laravel](/tutorials/laravel-analytics)
 - [How to set up A/B tests in Laravel](/tutorials/laravel-ab-tests)
+
+<NewsletterForm />

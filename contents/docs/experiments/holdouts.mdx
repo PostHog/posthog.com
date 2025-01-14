@@ -1,0 +1,44 @@
+---
+title: Holdouts
+---
+
+Holdouts are randomly assigned lists of users who will be excluded from experiments. You can exclude these users from specific experiments or even all of your experiments.
+
+Holdout testing is useful for understanding long term effects of product changes, typically over a few months. For example, a new onboarding flow might show great initial conversion rates, but a holdout group could reveal whether those users remain active in 3 months from now.
+
+## How to create a holdout
+
+To create a new holdout:
+
+1. Navigate to [Experiments](https://us.posthog.com/project/experiments) and click on the **Holdout groups** tab.
+2. Click **New holdout**. 
+3. Enter a descriptive name for your holdout, fill out the optional description to help you remember its purpose, and set the percentage of users you want to include in the holdout. 
+
+<ProductScreenshot
+  imageLight = "https://res.cloudinary.com/dmukukwp6/image/upload/holdout_add_light_v2_0669a879d1.png"
+  imageDark = "https://res.cloudinary.com/dmukukwp6/image/upload/holdout_add_dark_v2_f74c182112.png"
+  classes="rounded"
+  alt="Screenshot of the form to create a new holdout"
+/>
+
+The holdout should be large enough to be statistically significant, but small enough as to not significantly reduce the pool of users available for experiments. We recommend between 1% and 10%.
+
+Once created, you can assign the holdout to new or existing experiments. The holdout becomes locked once any experiment using it is launched and you will be unable to modify it. This is to prevent data inconsistencies that could affect results.
+
+<ProductScreenshot
+  imageLight = "https://res.cloudinary.com/dmukukwp6/image/upload/holdout_assign_light_v2_3098bd106e.png"
+  imageDark = "https://res.cloudinary.com/dmukukwp6/image/upload/holdout_assign_dark_v2_4462c9c0ad.png"
+  classes="rounded"
+  alt="Screenshot of the form to create an experiment with the holdout field expanded"
+/>
+
+## How to view holdout results
+
+When assigned to an experiment, your holdout will be treated as another variant in experiment analysis. You'll be able to see the conversion rate, delta %, credible interval, and win probability alongside other experiment variants.
+
+<ProductScreenshot
+  imageLight = "https://res.cloudinary.com/dmukukwp6/image/upload/holdout_results_light_v2_9670e2a73b.png"
+  imageDark = "https://res.cloudinary.com/dmukukwp6/image/upload/holdout_results_dark_v2_1128fa41c3.png"
+  classes="rounded"
+  alt="Screenshot of the experiment with the results displayed"
+/>

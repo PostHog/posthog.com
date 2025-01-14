@@ -110,8 +110,7 @@ import posthog from 'posthog-js'
 posthog.init(
   '<ph_project_api_key>',
   {
-    api_host:'<ph_client_api_host>',
-    person_profiles: 'identified_only',
+    api_host:'<ph_client_api_host>'
   }
 )
 
@@ -159,7 +158,6 @@ posthog.init(
   '<ph_project_api_key>',
   {
     api_host:'<ph_client_api_host>',
-    person_profiles: 'identified_only',
     capture_pageview: false
   }
 )
@@ -271,3 +269,5 @@ Now when you go to your app, a PostHog feature flag controls the button text.
 - [How to set up A/B tests in Angular](/tutorials/angular-ab-tests)
 - [How to set up surveys in Angular](/tutorials/angular-surveys)
 - [How to set up A/B/n testing](/tutorials/abn-testing)
+
+<NewsletterForm />

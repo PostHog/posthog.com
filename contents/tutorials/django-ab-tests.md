@@ -217,3 +217,5 @@ Now PostHog is able to calculate our goal metric for our experiment results:
 - [Setting up Django analytics, feature flags, and more](/tutorials/django-analytics)
 - [A software engineer's guide to A/B testing](/product-engineers/ab-testing-guide-for-engineers)
 - [8 annoying A/B testing mistakes every engineer should know](/blog/ab-testing-mistakes)
+
+<NewsletterForm />

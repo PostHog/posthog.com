@@ -1504,6 +1504,12 @@ export const locationFactor: CompensationCalculatorLocation[] = [
     },
     {
         country: 'United Kingdom',
+        area: 'Cambridge, England',
+        locationFactor: 0.65,
+        currency: 'GBP',
+    },
+    {
+        country: 'United Kingdom',
         area: 'Birmingham, England',
         locationFactor: 0.6,
         currency: 'GBP',

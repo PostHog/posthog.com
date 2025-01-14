@@ -96,3 +96,5 @@ If you want to filter arrays by the first, last, or specific index value, you ca
 - [Using HogQL for advanced time and date filters](/tutorials/hogql-date-time-filters)
 - [Using HogQL for advanced breakdowns](/tutorials/hogql-breakdowns)
 - [How to do time-based breakdowns (hour, minute, real time)](/tutorials/time-breakdowns)
+
+<NewsletterForm />

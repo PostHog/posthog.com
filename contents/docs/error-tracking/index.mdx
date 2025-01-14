@@ -2,7 +2,7 @@
 title: Error tracking
 ---
 
-> ⚠️ Error tracking is considered an alpha product while we continue to ship some crucial features.
+> ⚠️ Error tracking is currently released as a feature preview. You can [enable it from within your PostHog account](https://us.posthog.com/#panel=feature-previews).
 
 Error tracking allows you to track, investigate, and resolve exceptions your customers face.
 
@@ -60,12 +60,65 @@ Clicking through to an individual group shows you all the associated exceptions,
 
 ![Exception events](https://res.cloudinary.com/dmukukwp6/image/upload/Screenshot_2024_10_01_at_18_08_56_8efb2e9aba.png)
 
+## Custom issue grouping
+
+PostHog attempts to group the same exceptions as a single issue. An `$exception_fingerprint` property is generated during ingestion by PostHog and used to perform this grouping. Setting the `$exception_fingerprint` property on the frontend will override the default flow to allow for custom grouping of certain exceptions.
+
+When using the `captureException` method you can provide `$exception_fingerprint` as an additional property in the functions second argument.
+
+```js
+posthog.captureException(error, { $exception_fingerprint: "MyCustomGroup" })
+```
+
+Should an exception be autocaptured you will need to modify the properties before the event is sent. The PostHog config offers a [`before_send`](https://posthog.com/docs/libraries/js#amending-events-before-they-are-captured) hook that fires for each event. You can alter the event as part of this callback to add the property:
+
+```javascript
+posthog.init("<API_KEY>", {
+  before_send: (event) => {
+    if (event.event === "$exception") {
+      const exceptionList = event.properties["$exception_list"] || []
+      const exception = exceptionList.length > 0 ? exceptionList[0] : null;
+
+      if (exception && exception["$exception_type"] == "SyntaxError") {
+        event.properties["$exception_fingerprint"] = "MyCustomGroup"
+      }    
+    }
+    return event
+  }
+})
+```
+
 ## Upcoming features
 
 There is a long list of features on our roadmap but we're primarily working towards:
 
-* Stack trace demangling (for Javascript)
 * Actioning exceptions (merging, assigning, resolving, etc)
 * Alerting
 
 If you have any feedback during the alpha please [share it with us](https://us.posthog.com/?panel=support%3Asupport%3A%3A%3Afalse#panel=support%3Asupport%3A%3A%3Afalse).
+
+## FAQs
+
+### Are web workers supported?
+
+Yes. Error tracking will work as long as you initialize PostHog in the [web worker](/tutorials/web-worker). You will need to disable any features that rely on the `window` object:
+
+```js
+posthog.init(token, {
+    ...
+    autocapture: false,
+    capture_pageview: false,
+    capture_pageleave: false,
+    disable_session_recording: true,
+    disable_surveys: true,
+});
+```
+
+To `identify` users in web workers you will need to pass the distinct ID. This can be done via an env variable or sending it via `postMessage` from your main application.
+
+### Can exceptions be sampled / ignored
+
+Returning `null` for a given event in the [`before_send`](https://posthog.com/docs/libraries/js#amending-events-before-they-are-captured) hook will cause it not to be captured. You may want to:
+- Drop certain types of exceptions
+- Randomly sample a subset of all exceptions 
+- Sample based on the events properties (e.g. URL or user)

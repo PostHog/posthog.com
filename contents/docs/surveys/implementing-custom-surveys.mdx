@@ -51,9 +51,58 @@ The benefit of using PostHog beyond this is that it handles:
 
 If you create a [popover survey](/docs/surveys/creating-surveys#presentation), updating and display conditions are handled automatically. When you create one in **API mode**, you need to add logic to fetch and display surveys yourself with the help of the [JavaScript Web SDK or snippet](/docs/libraries/js).
 
-## Fetching surveys
+## Rendering surveys programmatically
 
-When implementing an API survey, there are two options for fetching surveys from PostHog:
+Although we recommend using popover surveys and display conditions, if you want to show surveys programmatically without setting up all the extra logic needed for API surveys, you can render surveys programmatically with the `renderSurvey` method. This takes a survey ID and an HTML selector to render an **unstyled** survey.
+
+An example implementation in React looks like this:
+
+```js
+import './App.css';
+import React from 'react';
+import { usePostHog } from 'posthog-js/react';
+
+function App() {
+  const posthog = usePostHog();
+
+  const coolSurveyID = "01942e4c-d028-0000-6ab5-afb4ed961263"
+
+  const handleRenderSurvey = () => {
+    posthog.renderSurvey(coolSurveyID, '#survey-container');
+  };
+
+  return (
+    <div className="App">
+      <h1>Survey Tutorial with PostHog</h1>
+      <div className="survey-controls">
+        <button onClick={handleRenderSurvey}>
+          Render Survey
+        </button>
+      </div>
+      <div id="survey-container">
+        <p>Survey will render here</p>
+      </div>
+    </div>
+  );
+}
+
+export default App;
+```
+
+This renders an unstyled survey in the `#survey-container` element that looks like this:
+
+<ProductScreenshot
+    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_01_03_at_15_01_34_2x_761478ffdc.png" 
+    imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_01_03_at_15_01_34_2x_761478ffdc.png"
+    alt="Survey templates" 
+    classes="rounded"
+/>
+
+You can then style the survey by targeting the classes like `survey-box`, `survey-question`, `textarea`, `buttons`, `footer-branding`, and `thank-you-message`. 
+
+## Fetching surveys manually
+
+For more control over your surveys, you can use API surveys. When implementing an API survey, there are two options for fetching surveys from PostHog:
 
 1. To get all surveys, call `getSurveys(callback, forceReload)`. This means you still need to handle display conditions yourself.
 
@@ -181,7 +230,7 @@ If you want to make the most of PostHog's automatic survey analysis and results 
 
 ## Capture survey lifecycle events
 
-There are two other events you should capture to track the full lifecycle of a survey. They are `survey_shown` and `survey_dismissed`:
+There are two other events you should capture to track the full lifecycle of a survey. They are `survey shown` and `survey dismissed`:
 
 ```js-web
 // 1. When a user is shown a survey
