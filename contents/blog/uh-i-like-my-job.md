@@ -27,7 +27,7 @@ Or worse: a malcontent.
 
 So I gave up on ever liking a job. Eventually I gave up on *jobs* altogether, hoping to scrape a living from a pile of grit and contracts.
 
-Then I found PostHog.  Three months into the job, I’m still finding the experience to be *weirdly liberating*.
+Then I found PostHog. Three months into the job, I’m still finding the experience to be *weirdly liberating*.
 
 Why? I'm still learning and decoding how it all works, but it seems as if everything that made previous work environments oppressively painful can be solved through simple, deeply honest **hygiene**.
 
