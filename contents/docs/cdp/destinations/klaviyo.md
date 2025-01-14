@@ -42,7 +42,7 @@ You should configure the destination filter to only accept events that have an e
 
 ### Testing
 
-Once you’ve configured your Klaviyo destination, click **Start testing** to verify everything works the way you want.
+Once you’ve configured your Klaviyo destination, click **Create & enable** then **Start testing** to verify everything works the way you want.
 
 ***
 
