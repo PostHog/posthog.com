@@ -42,9 +42,11 @@ Batch exports use Snowflake's [internal table stages](https://docs.snowflake.com
 
 This section describes the models that can be exported to Snowflake.
 
+> **Note:** New fields may be added to these models over time. To maintain consistency, these fields are not automatically added to the destination tables. If a particular field is missing in your Snowflake tables, you can manually add the field, and it will be populated in future exports.
+
 ### Events model
 
-This is the default model for Snowflake batch exports. The schema of the model as created in BigQuery is:
+This is the default model for Snowflake batch exports. The schema of the model as created in Snowflake is:
 
 | Field           | Type        | Description                                                               |
 |-----------------|-------------|---------------------------------------------------------------------------|
@@ -95,6 +97,7 @@ The schema of the model as created in BigQuery is:
 | properties                 | `VARIANT` | A JSON object with all the latest properties of the person                                           |
 | person_version             | `INTEGER` | The version of the person properties associated with a (`team_id`, `distinct_id`) pair               |
 | person_distinct_id_version | `INTEGER` | The version of the person to `distinct_id` mapping associated with a (`team_id`, `distinct_id`) pair |
+| created_at                 | `TIMESTAMP` | The timestamp when the person was created                                                                                          |
 
 The Snowflake table will contain one row per `(team_id, distinct_id)` pair, and each pair is mapped to their corresponding `person_id` and latest `properties`.
 
@@ -108,6 +111,7 @@ CREATE TABLE IF NOT EXISTS "{database}"."{schema}"."{table_name}" (
     "properties" VARIANT,
     "person_version" INTEGER,
     "person_distinct_id_version" INTEGER,
+    "created_at" TIMESTAMP
 )
 COMMENT = 'PostHog persons table'
 ```
