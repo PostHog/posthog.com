@@ -17,8 +17,8 @@ First, [create](https://www.klaviyo.com/settings/account/api-keys) a new **API k
 
 Make sure to set `Read/Write Access` for:
 
-- **Events** if you'd like to send event data
-- **Profiles** if you'd like to send contact data
+- **Events** to send event data
+- **Profiles** to send contact data
 
 ## Configuring PostHog’s Klaviyo destination
 
