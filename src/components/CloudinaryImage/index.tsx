@@ -18,6 +18,7 @@ export default function CloudinaryImage({
     width,
     className = '',
     imgClassName = '',
+    placeholder,
     ...other
 }: {
     src: `https://res.cloudinary.com/${string}`
