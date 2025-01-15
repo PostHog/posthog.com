@@ -92,7 +92,7 @@ export const Change = ({ title, teamName, media, description, cta }) => {
             ) : media?.data?.attributes?.url ? (
                 <div className="my-4">
                     <ZoomImage>
-                        <CloudinaryImage src={media?.data?.attributes?.url} className="w-full" width={650} />
+                        <CloudinaryImage src={media?.data?.attributes?.url} className="w-full" width={1500} />
                     </ZoomImage>
                 </div>
             ) : null}
