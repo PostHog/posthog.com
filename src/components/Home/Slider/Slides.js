@@ -924,7 +924,7 @@ export const DataWarehouse = () => {
     )
 }
 
-export const AIEngineering = () => {
+export const LLMObservability = () => {
     const { enterpriseMode } = useLayoutData()
 
     const BrainIcon = () => (
@@ -985,7 +985,6 @@ export const AIEngineering = () => {
             containerClasses="!pt-8 mdlg:!py-4 xl:!py-10"
             bgColor="gradient-to-tr from-[#f3e8ff] via-[#f5d0fe] to-[#e0f2fe]"
             textColor="primary"
-            title="AI engineering"
             flag="Beta"
             flagColor="yellow"
             description="Tools for AI and LLM products"
