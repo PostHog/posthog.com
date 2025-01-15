@@ -7,7 +7,7 @@ import {
     IconCheckbox,
     IconClock,
     IconColumns,
-    IconCursorClick,
+    IconDecisionTree,
     IconDownload,
     IconFilter,
     IconFunnels,
@@ -18,7 +18,6 @@ import {
     IconHogQL,
     IconLifecycle,
     IconLineGraph,
-    IconList,
     IconMagicWand,
     IconMegaphone,
     IconPalette,
@@ -701,7 +700,7 @@ export const ABTesting = () => {
                     loading="eager"
                     placeholder="none"
                     quality={100}
-                    className="w-full max-w-[120px] lg:max-w-[120px] xl:max-w-[175px] z-30"
+                    className="w-full max-w-[120px] lg:max-w-[120px] xl:max-w-[175px] relative z-30"
                     src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Home/Slider/images/experiment-hog.png"
                     alt="A hedgehog running an experiment"
                 />
@@ -991,10 +990,10 @@ export const LLMObservability = () => {
             title="LLM observability"
             flag="Beta"
             flagColor="yellow"
-            description="Build AI features with full visibility – both in development and production."
+            description="Build AI features with full visibility – both in development and production."
             features={[
-                { title: 'LLM traces', Icon: IconList },
-                { title: 'AI usage and performance metrics', Icon: IconCursorClick },
+                { title: 'LLM traces', Icon: IconDecisionTree },
+                { title: 'AI usage and performance metrics', Icon: IconTrends },
                 { title: 'Cost analysis', Icon: IconHandMoney },
             ]}
             imageColumn="relative md:col-span-10"
@@ -1025,12 +1024,22 @@ export const LLMObservability = () => {
                     </>
                 )
             }}
+            HogMobile={() => (
+                <CloudinaryImage
+                    loading="eager"
+                    placeholder="none"
+                    quality={100}
+                    className="w-full max-w-[80px] relative z-30"
+                    src="https://res.cloudinary.com/dmukukwp6/image/upload/1ab5c6f9e37af282fbec24c7350ad484_c9acab0119.png"
+                    alt="Robot hedgehog"
+                />
+            )}
             HogDesktop={() => (
                 <CloudinaryImage
                     loading="eager"
                     placeholder="none"
                     quality={100}
-                    className="w-full max-w-[80px] xl:max-w-[100px] mr-4 lg:mr-8 -mb-2 xl:-mb-6 -scale-x-100"
+                    className="w-full max-w-[100px] xl:max-w-[140px] mr-2 lg:-mr-4 -mb-2 xl:-mb-12"
                     src="https://res.cloudinary.com/dmukukwp6/image/upload/1ab5c6f9e37af282fbec24c7350ad484_c9acab0119.png"
                     alt="Robot hedgehog"
                 />
