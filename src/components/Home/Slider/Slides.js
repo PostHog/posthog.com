@@ -18,7 +18,6 @@ import {
     IconHogQL,
     IconLifecycle,
     IconLineGraph,
-    IconList,
     IconMagicWand,
     IconMegaphone,
     IconPalette,
