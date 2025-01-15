@@ -3195,17 +3195,16 @@ export const docsMenu = {
                     color: 'seagreen',
                 },
                 {
-                    name: 'Observability',
+                    name: 'Installation',
                     url: '/docs/ai-engineering/observability',
-                    icon: 'IconDashboard',
-                    color: 'red',
+                    icon: 'IconBook',
+                    color: 'blue',
                 },
                 {
-                    name: 'LLM insights',
-                    url: '/docs/ai-engineering/llm-insights',
-                    icon: 'IconAIText',
-                    color: 'blue',
-                    featured: true,
+                    name: 'Dashboard',
+                    url: '/docs/ai-engineering/dashboard',
+                    icon: 'IconDashboard',
+                    color: 'red',
                 },
                 {
                     name: 'Tutorials and guides',
@@ -3216,6 +3215,13 @@ export const docsMenu = {
                 },
                 {
                     name: 'Integrations',
+                },
+                {
+                    name: 'LLM insights',
+                    url: '/docs/ai-engineering/llm-insights',
+                    icon: 'IconAIText',
+                    color: 'blue',
+                    featured: true,
                 },
                 {
                     name: 'Helicone',
