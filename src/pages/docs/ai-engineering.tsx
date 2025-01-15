@@ -11,6 +11,7 @@ import List from 'components/List'
 import { docsMenu } from '../../navs'
 import { useLayoutData } from 'components/Layout/hooks'
 import QuickLinks from 'components/QuickLinks'
+import Intro from 'components/Docs/Intro'
 
 type LLMObservabilityProps = {
     data: {
@@ -22,20 +23,10 @@ type LLMObservabilityProps = {
     }
 }
 
-export const Intro = () => (
-    <header className="pb-8">
-        <h1 className="text-4xl mt-0 mb-2">LLM observability</h1>
-        <h3 className="text-lg font-semibold text-primary/60 dark:text-primary-dark/75 leading-tight">
-            Learn how to gather insights for your AI and LLM products.
-        </h3>
-    </header>
-)
-
 export const Content = ({ quickLinks = false }) => {
     const { compact } = useLayoutData()
     return (
         <>
-            <Intro />
             {(quickLinks || compact) && (
                 <QuickLinks
                     items={docsMenu.children.find(({ name }) => name.toLowerCase() === 'LLM observability')?.children}
@@ -50,48 +41,18 @@ export const Content = ({ quickLinks = false }) => {
                         type="Guide"
                         title="How to set up LLM analytics for Cohere"
                         description="Track your Cohere usage, costs, and latency."
-                        Image={
-                            <CloudinaryImage
-                                alt=""
-                                className="h-full"
-                                placeholder="none"
-                                objectFit="contain"
-                                quality={100}
-                                src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Home/Slider/images/product-analytics-hog.png"
-                            />
-                        }
                         url="/tutorials/cohere-analytics"
                     />
                     <ResourceItem
                         type="Guide"
                         title="How to set up LLM analytics for Anthropic's Claude"
                         description="Monitor costs per model, user, and more."
-                        Image={
-                            <CloudinaryImage
-                                alt=""
-                                className="h-full"
-                                placeholder="none"
-                                objectFit="contain"
-                                quality={100}
-                                src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Home/Slider/images/product-analytics-hog.png"
-                            />
-                        }
                         url="/tutorials/anthropic-analytics"
                     />
                     <ResourceItem
                         type="Guide"
                         title="How to set up LLM analytics for ChatGPT"
                         description="Track API usage, cost, and latency."
-                        Image={
-                            <CloudinaryImage
-                                alt=""
-                                className="h-full"
-                                placeholder="none"
-                                objectFit="contain"
-                                quality={100}
-                                src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Home/Slider/images/product-analytics-hog.png"
-                            />
-                        }
                         url="/tutorials/chatgpt-analytics"
                     />
                 </ul>
@@ -163,9 +124,20 @@ export const Content = ({ quickLinks = false }) => {
 const LLMObservability: React.FC<LLMObservabilityProps> = ({ data }) => {
     return (
         <Layout>
-            <SEO title="PostHog for AI - Documentation - PostHog" />
+            <SEO title="LLM observability - Documentation - PostHog" />
 
-            <PostLayout title={'PostHog for AI'} hideSurvey hideSidebar>
+            <PostLayout title={'LLM observability'} hideSurvey hideSidebar>
+                <Intro
+                    subheader="Getting started"
+                    title="LLM observability"
+                    description="Gather data for your AI and LLM products usage and performance."
+                    buttonText="Start capturing LLM data"
+                    buttonLink="/docs/ai-engineering/observability"
+                    imageColumnClasses="max-w-96 mt-8 md:mt-0"
+                    imageUrl="https://res.cloudinary.com/dmukukwp6/image/upload/robot_960530c306.png"
+                    imageClasses="max-h-48 md:max-h-64"
+                />
+
                 <Content />
             </PostLayout>
         </Layout>
