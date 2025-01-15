@@ -7,15 +7,18 @@ import {
     IconCheckbox,
     IconClock,
     IconColumns,
+    IconCursorClick,
     IconDownload,
     IconFilter,
     IconFunnels,
     IconGear,
     IconGlobe,
     IconGridMasonry,
+    IconHandMoney,
     IconHogQL,
     IconLifecycle,
     IconLineGraph,
+    IconList,
     IconMagicWand,
     IconMegaphone,
     IconPalette,
@@ -924,7 +927,7 @@ export const DataWarehouse = () => {
     )
 }
 
-export const AIEngineering = () => {
+export const LLMObservability = () => {
     const { enterpriseMode } = useLayoutData()
 
     const BrainIcon = () => (
@@ -985,73 +988,55 @@ export const AIEngineering = () => {
             containerClasses="!pt-8 mdlg:!py-4 xl:!py-10"
             bgColor="gradient-to-tr from-[#f3e8ff] via-[#f5d0fe] to-[#e0f2fe]"
             textColor="primary"
-            title="AI engineering"
+            title="LLM observability"
             flag="Beta"
             flagColor="yellow"
-            description="Tools for AI and LLM products"
-            additionalText={
-                <>
-                    <p className="pt-2 mb-2">
-                        Find correlations between your AI/LLM features and product usage. Combine with other PostHog
-                        products for deeper insights.
-                    </p>
-                    <ul className="mb-4">
-                        <li>Evaluations with surveys</li>
-                        <li>Insights with Session replay</li>
-                        <li>Roll out model improvements with experiments</li>
-                    </ul>
-                    <p className="mt-2 mb-4 text-sm border-l-3 border-[#7A4096]/50 pl-2">
-                        ElevenLabs uses the entire PostHog toolset to build their generative voice AI
-                        <br />
-                        <Link href="/customers/elevenlabs" className="!text-[#681291] !hover:text-[#681291]">
-                            Read the story
-                            <IconArrowRight className="size-4 inline-block" />
-                        </Link>
-                    </p>
-                </>
-            }
-            imageColumn="relative md:col-span-8"
+            description="Build AI features with full visibility – both in development and production."
+            features={[
+                { title: 'LLM traces', Icon: IconList },
+                { title: 'AI usage and performance metrics', Icon: IconCursorClick },
+                { title: 'Cost analysis', Icon: IconHandMoney },
+            ]}
+            imageColumn="relative md:col-span-10"
             imageClasses="flex-col gap-6 lg:gap-8 px-8 text-center pb-8 md:pb-0 xl:items-center"
-            contentColumn="md:col-span-8"
+            contentColumn="md:col-span-6"
             Images={() => {
                 return (
                     <>
                         {enterpriseMode ? (
                             <div className="py-2 pl-2">
                                 <CloudinaryImage
-                                    src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Home/Slider/images/enterprise-mode/shutterstock_2372110997.jpg"
+                                    src="https://res.cloudinary.com/dmukukwp6/image/upload/3ff68b81_ccf5_43b6_a392_398adb7b3f65_8c60038df2.jpeg"
                                     alt=""
                                 />
                             </div>
                         ) : (
                             <>
-                                <div className="absolute -top-6 md:top-0 right-6 md:right-0">
-                                    <BrainIcon />
-                                </div>
-                                <div className="relative -ml-32 md:-ml-48">
-                                    “Which traces consume <br />
-                                    the most tokens?”
-                                </div>
-                                <div className="relative self-end text-2xl font-bold text-balance">
-                                    “Does my LLM feature increase retention rates?”
-                                </div>
-                                <div className="relative text-sm -left-6 md:-left-12 xl:left-0">
-                                    “Are there generation latency spikes?”
-                                </div>
-                                <div className="relative font-bold self-end left-4 md:left-0 md:pr-4">
-                                    “What are my LLM costs by <br />
-                                    customer, model, and in total?”
-                                </div>
-                                <div className="absolute bottom-2 md:bottom-0 left-2 md:left-12">
-                                    <ListSparkleIcon />
-                                </div>
+                                <CloudinaryImage
+                                    alt="The PostHog LLM observability dashboard, showing data on generative AI usage, performance, and costs"
+                                    placeholder="none"
+                                    quality={100}
+                                    objectFit="contain"
+                                    className="inline-block w-full mdlg:-mt-28 mdlg:translate-y-16 -mb-12 md:mb-0 mdlg:max-w-[700px] mdlg:shadow-2xl mdlg:-rotate-1 rounded overflow-hidden"
+                                    src="https://res.cloudinary.com/dmukukwp6/image/upload/llm_observability_dashboard_4_6b54d8abd7.png"
+                                />
                             </>
                         )}
                     </>
                 )
             }}
+            HogDesktop={() => (
+                <CloudinaryImage
+                    loading="eager"
+                    placeholder="none"
+                    quality={100}
+                    className="w-full max-w-[80px] xl:max-w-[100px] mr-4 lg:mr-8 -mb-2 xl:-mb-6 -scale-x-100"
+                    src="https://res.cloudinary.com/dmukukwp6/image/upload/1ab5c6f9e37af282fbec24c7350ad484_c9acab0119.png"
+                    alt="Robot hedgehog"
+                />
+            )}
             contentOffset=""
-            buttonLabel="Explore the docs"
+            buttonLabel="Explore"
             buttonUrl="/docs/ai-engineering"
             buttonClasses="group !border-black/25 !bg-black/10 md:!w-auto !w-full"
             buttonChildClasses="!bg-[#fff] border-black/50 !text-black group-hover:text-black"

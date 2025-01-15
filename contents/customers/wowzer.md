@@ -17,7 +17,7 @@ toolsUsed:
   - Experimentation
   - Product analytics
   - Surveys
-  - AI engineering
+  - LLM observability
 date: 2024-05-29
 ---
 
