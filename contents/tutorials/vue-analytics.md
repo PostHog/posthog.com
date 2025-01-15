@@ -248,7 +248,7 @@ export default {
 
 ### Capturing pageleaves (optional)
 
-Note that once you disable automatic `$pageview` captures when calling `posthog.init` you'll be disabling automatic `$pageleave` capture as well. If you want to continue capturing `$pageleave`s automatically, you can reenable it.
+Note that once you disable automatic `$pageview` captures when calling `posthog.init` you'll be disabling automatic `$pageleave` capture as well. If you want to continue capturing `$pageleave`s automatically, you can re-enable it.
 
 ```js file=plugins/posthog.js
 import posthog from "posthog-js";
