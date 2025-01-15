@@ -669,6 +669,10 @@ export const handbookSidebar = [
                         url: '/handbook/engineering/posthog-com/roadmap',
                     },
                     {
+                        name: 'Changelog entries',
+                        url: '/handbook/engineering/posthog-com/changelog',
+                    },
+                    {
                         name: 'Editing API docs',
                         url: '/handbook/engineering/posthog-com/api-docs',
                     },
@@ -813,84 +817,6 @@ export const handbookSidebar = [
                     {
                         name: 'Feature requests',
                         url: '/handbook/growth/sales/feature-requests',
-                    },
-                ],
-            },
-        ],
-    },
-    {
-        name: 'Website & Vibes',
-        url: '',
-        children: [
-            {
-                name: 'Community',
-                url: '',
-                children: [
-                    {
-                        name: 'Overview',
-                        url: '/handbook/community',
-                    },
-                    {
-                        name: 'Answering community questions',
-                        url: '/handbook/community/questions',
-                    },
-                    {
-                        name: 'Profiles',
-                        url: '/handbook/community/profiles',
-                    },
-                ],
-            },
-            {
-                name: 'Designing PostHog.com',
-                url: '/handbook/design/designing-posthog-website',
-            },
-            {
-                name: 'Developing PostHog.com',
-                url: '',
-                children: [
-                    {
-                        name: 'Developing the website',
-                        url: '/handbook/engineering/posthog-com/developing-the-website',
-                    },
-                    {
-                        name: 'How PostHog.com works',
-                        url: '/handbook/engineering/posthog-com/how-posthog-website-works',
-                    },
-                    {
-                        name: 'MDX setup',
-                        url: '/handbook/engineering/posthog-com/mdx-setup',
-                    },
-                    {
-                        name: 'MDX components',
-                        url: '/handbook/engineering/posthog-com/markdown',
-                    },
-                    {
-                        name: 'Uploading assets',
-                        url: '/handbook/engineering/posthog-com/assets',
-                    },
-                    {
-                        name: 'Merch store',
-                        url: '/handbook/engineering/posthog-com/merch-store',
-                    },
-                    {
-                        name: 'Posting a new job',
-                        url: '/handbook/engineering/posthog-com/jobs',
-                    },
-                    {
-                        name: 'Managing small teams',
-                        url: '/handbook/engineering/posthog-com/small-teams',
-                    },
-                    {
-                        name: 'Managing the company roadmap',
-                        url: '/handbook/engineering/posthog-com/roadmap',
-                    },
-                    {
-                        name: 'Changelog entries',
-                        url: '/handbook/engineering/posthog-com/changelog',
-                    },
-                    {
-                        name: 'Editing API docs',
-                        url: '/handbook/engineering/posthog-com/api-docs',
                     },
                 ],
             },
