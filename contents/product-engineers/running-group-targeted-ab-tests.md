@@ -87,7 +87,7 @@ In the New Experiment screen, select the Participant type. By default, it will s
 
 ![Screenshot of setting the participant type in an experiment](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/running-group-targeted-ab-tests/participant-type.png)
 
-Next, set your experiment goal and secondary metrics as usual. 
+Next, set your [primary and secondary metrics](/docs/experiments/metrics) as usual. 
 
 A handy feature especially useful for group-targeted experiments is the Minimum Acceptable Improvement calculator at the bottom of the page. Since group-targeted experiments have lower statistical power, this will recommend a time for how long you should run your experiment in order to see results.
 

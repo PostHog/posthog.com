@@ -128,12 +128,17 @@ Go to the [Experiments tab](https://app.posthog.com/experiments) in PostHog and 
 
 1. Name it "Nuxt button text experiment".
 2. Set "Feature flag key" to `nuxt-button-text-experiment`.
-3. Under the experiment goal, select the `home_button_clicked` event we created in the previous step.
-4. Use the default values for all other fields.
+3. Use the default values for all other fields.
+4. Click **Save as draft**.
 
-Click "Save as draft" and then click "Launch".
+<ProductScreenshot
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_01_16_at_10_47_23_2x_a7b61fded5.png" 
+  imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_01_16_at_10_47_37_2x_4abc646695.png" 
+  alt="Experiment setup in PostHog" 
+  classes="rounded"
+/>
 
-![Nuxt.js experiment setup in PostHog](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/nuxtjs-ab-tests/experiment-setup.png)
+Once created, set the primary metric to a trend of `home_button_clicked` and then click **Launch**.
 
 ## Implementing the A/B test code
 

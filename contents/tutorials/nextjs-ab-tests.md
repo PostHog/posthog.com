@@ -87,9 +87,9 @@ export default function RootLayout({ children }) {
 
 When you reload your app, you should see events captured in [your activity tab](https://us.posthog.com/events) in PostHog.
 
-## 3. Creating an action for our experiment goal
+## 3. Creating an action for our experiment metric
 
-To measure the impact of our change, we need a goal metric. To set this up, we can create an [action](/docs/data/actions) from the events PostHog [autocaptures](/docs/product-analytics/autocapture) using the toolbar.
+To measure the impact of our change, we need an [experiment metric](/docs/experiments/metrics). To set this up, we can create an [action](/docs/data/actions) from the events PostHog [autocaptures](/docs/product-analytics/autocapture) using the toolbar.
 
 To enable and launch the toolbar, go to the "[Launch toolbar](https://us.posthog.com/toolbar)" tab, add `http://localhost:3000/` as an authorized URL, then click launch. To create an action with the toolbar, click:
 
@@ -109,8 +109,9 @@ With PostHog installed and our action set up, we're ready to create our experime
 
 1. Name your A/B test.
 2. Set your feature flag key to something like `main-cta`.
-3. Choose the "Clicked Main CTA" action as your experiment goal. You may need to refresh for it to show up.
-4. Click "Save as draft" and then "Launch."
+3. Click **Save as draft**.
+4. Set the primary metric to a trend of `clicked_main_cta`.
+5. Click **Launch**.
 
 Once done, you're ready to go back to your app to start implementing it.
 
