@@ -18,16 +18,28 @@ We're very new to podcasting, so a lot of the ideas and "best practices" are hyp
 
 The goal for our podcast is to help developers build successful products by sharing practical insights, lessons learned, and real experiences from PostHog and other technical founders.
 
+Following the success of our newsletter.
+
 Like our [newsletter](/handbook/content-and-docs/newsletter), we focus on product and business lessons that are especially relevant for engineers - whether they're building side projects, launching startups, or leading product teams.
 
 conversations
+
+> Have interesting people. Not just having a conversation.
+
+Ask questions from the perspective of the audience.
 
 So, why have a podcast if we already have other great content?
 
 - Stories: The podcast format gives us an opportunity to tell stories that wouldn't fit into a tightly written article. A more personal touch.
 - Conversations: ...
-- Reveal the human, personal side
+- Highlight the people behind the product. Make it personal and human. Reveal. Approachable.
 - Specifics: It also gives us an opportunity to shed some more light on things we gloss over in writing. We might mention something in passing in an article, but the podcast gives us an opportunity to do deep dives and share more. The back and forth nature of a conversation gives us a chance to push back and ask to clarify.
+
+Ask questions based on genuine curiosity (see Joe Rogan).
+
+> **Don't be salesy.**
+
+> **A quirky, well-researched podcast.**
 
 Also aligns with our marketing goals and growth of PostHog.
 
@@ -59,7 +71,13 @@ The advice for our [newsletter topics](/handbook/content-and-docs/newsletter#top
 Split into seasonal episode themes.
 Split episodes into segments with a short rest to keep energy levels.
 
-Ideally have three people on an episode (1 interviewer and 2 guests or 2 interviewer and 1 guest).
+- Ideally have three people on an episode (1 interviewer and 2 guests or 2 interviewer and 1 guest).
+- Share mistakes and fails too, not just wins. "Flounder" (via Kevan)
+- For product management, try to find content that's useful for practitioners. It should be applicable, and not too high level. (via Annika)
+
+How long should episodes be?
+
+We're shooting for 30-40 minute episodes, but we could go longer when we have external guests.
 
 What kinds of content should we avoid?
 
@@ -88,8 +106,16 @@ If someone needs to go on vacation for a week, the entire podcasting infrastruct
 
 The podcast intros should briefly introduce why it makes sense to listen to us. Build credibility. The lessons from our [newsletter intros](/handbook/content-and-docs/newsletter#intro) apply to the podcast as well.
 
+Give some context, but avoid overly long intros.
+
 ### Hosting and interviewing
 
+> "We can afford to be weird." Joe
+
+> Felt too easy. Could be more intense. Don't need to be salesy.
+
+- Be investigative. Challenge. Be skeptical. Be curious.
+- Conversations should be fun and exciting. If you're bored the audience will be bored too.
 - Split episode into segments with a short rest to keep energy levels.
 - Schedule brief breaks in the conversation to avoid lulls.
 - Rehearse the intro. If you make a mistake, stop and start again.
@@ -98,6 +124,8 @@ The podcast intros should briefly introduce why it makes sense to listen to us. 
 - Keep asking questions to dive deeper. Don't just cover a topic and then move on to the next.
 
 ### Scripts
+
+- Structure and script to prevent overly verbose answers.
 
 For the script, have giant headings with copious spacing
 
@@ -115,7 +143,7 @@ See YouTube's [guide to thumbnails and titles](https://support.google.com/youtub
 
 1. Planning
   - Topic
-  - Schedule
+  - Schedule (reach out to Scott for help)
   - Script
     - Initial draft
     - Get feedback
@@ -134,7 +162,7 @@ See YouTube's [guide to thumbnails and titles](https://support.google.com/youtub
   - Internal review and re-edits
 3. Publishing
   - Gather supporting materials
-    - Art
+    - Art (reach out to Lottie for help)
     - Description
     - Show notes and links
   - Publish
@@ -151,7 +179,9 @@ See YouTube's [guide to thumbnails and titles](https://support.google.com/youtub
 ### Tools
 
 - Recording and editing: riverside.fm
+  - Other options: Descript
 - Publishing: transistor.fm
+- Video Editing: iMovie, Adobe Premier, Da Vinci Resolve
 
 ### Gear
 
