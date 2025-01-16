@@ -3004,6 +3004,10 @@ export const docsMenu = {
                             url: '/docs/cdp/destinations/make',
                         },
                         {
+                            name: 'Meta Ads',
+                            url: '/docs/cdp/destinations/meta-ads',
+                        },
+                        {
                             name: 'RudderStack',
                             url: '/docs/cdp/destinations/rudderstack',
                         },
