@@ -367,6 +367,7 @@ Open [http://localhost:8010](http://localhost:8010) to see the app.
 
 To get some practical test data into your brand-new instance of PostHog, run `DEBUG=1 ./manage.py generate_demo_data`. For a list of useful arguments of the command, run `DEBUG=1 ./manage.py generate_demo_data --help`.
 
+> **Friendly Tip** The first time you run the app, you can log in with a test account: _user_:`test@posthog.com` _pwd_:`12345678`. You may want to connect to the database and set `posthog_user.is_staff` to true. To connect to the database, use a tool like pgAdmin and enter these connection details: _host_:`localhost` _port_:`5432` _database_:`posthog`, _username_:`posthog`, _pwd_:`posthog`.  This makes it possible to access the Django admin section http://localhost:8000/admin/.
 
 #### 7. Develop
 
