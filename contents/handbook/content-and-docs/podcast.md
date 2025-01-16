@@ -4,40 +4,48 @@ sidebar: Handbook
 showTitle: true
 ---
 
-This is a guide to podcasting at PostHog.
+This guide to podcasting at PostHog includes:
+
+- Big picture: themes, goals, and the purpose of the podcast
+- Best practices: what should we
+- Process: how we plan, record, edit, and publish episodes
+- Practical tips: specific guidelines and recommendations for producing the podcast
+- Tools: tools we use to assemble podcast episodes
+
+We're very new to podcasting, so a lot of the ideas and "best practices" are hypotheses about what will work well. But the plan is to use this as a place to capture lessons we learn and evolve over time.
 
 ## Purpose and themes
 
-The goal of the podcast is the same as that of our Product for Engineers newsletter.
+The goal for our podcast is to help developers build successful products by sharing practical insights, lessons learned, and real experiences from PostHog and other technical founders.
 
-> Helping engineers and founders build great products.
+Like our [newsletter](/handbook/content-and-docs/newsletter), we focus on product and business lessons that are especially relevant for engineers - whether they're building side projects, launching startups, or leading product teams.
 
-> focuses on product and business lessons and information for engineers.
+conversations
 
 So, why have a podcast if we already have other great content?
 
-### Stories and specifics
+- Stories: The podcast format gives us an opportunity to tell stories that wouldn't fit into a tightly written article. A more personal touch.
+- Conversations: ...
+- Reveal the human, personal side
+- Specifics: It also gives us an opportunity to shed some more light on things we gloss over in writing. We might mention something in passing in an article, but the podcast gives us an opportunity to do deep dives and share more. The back and forth nature of a conversation gives us a chance to push back and ask to clarify.
 
-- Stories: The podcast format gives us an opportunity to tell stories that wouldn't fit into a tightly written article.
-- Specifics: It also gives us an opportunity to shed some more light on things we gloss over in writing. We might mention something in passing in an article, but the podcast gives us an opportunity to do deep dives and share more. For example, ...
+Also aligns with our marketing goals and growth of PostHog.
 
-Aligns with our marketing goals and growth of PostHog.
+Who is it for?
 
-## Audience
+Developers, founders, product managers, indie hackers.
 
 The podcast is primarily intended for founders and engineers that are building products. See also our [Who we are building for](/handbook/who-we-are-building-for) and our [ICP](/newsletter/ideal-customer-profile-framework)
 
 We also want the podcast to be more broadly accessible to product managers. So we don’t necessarily want to do technical deep dives. (or do we?)
 
-## Cadence
+If it's not engaging and entertaining, no one is going to want to listen even if we have useful, valuable content.
 
-Maintain a sustainable pace.
+This is not just for the audience. We also want to ensure the podcast conversations are fun enough for us to want to continue doing them.
 
-The long-term goal is that we'll release an episode every other week. We release a newsletter, then a podcast episode, then a newsletter, then a podcast episode, etc.
+## Content, format, and episode topics
 
-Initially, we're recording episodes every week as we experiment with the format and get our legs under us.
-
-## Content and episode topics
+What kinds of content do we feature for episdoes?
 
 We'd like to find a cycle of episode formats we can work with. For instance, we can record the following four types of episodes and then repeat the cycle.
 
@@ -48,138 +56,124 @@ We'd like to find a cycle of episode formats we can work with. For instance, we 
 
 The advice for our [newsletter topics](/handbook/content-and-docs/newsletter#topic) applies to our podcast as well.
 
-See also [Kathy Sierra's content](https://www.amazon.com/Badass-Making-Awesome-Kathy-Sierra/dp/1491919019) on why someone would want to listen.
+Split into seasonal episode themes.
+Split episodes into segments with a short rest to keep energy levels.
 
-### What should we avoid?
+Ideally have three people on an episode (1 interviewer and 2 guests or 2 interviewer and 1 guest).
 
-This section is subject to change, but initially there are a couple types of content we intend to avoid.
+What kinds of content should we avoid?
 
 - "Behind the Scenes" episodes that don't have any obvious value to our audience. There are likely some fascinating episodes we could produce about "How PostHog does XYZ", but the intention is to create content that's geniunely useful to our core audience (see above). See "The Whole Hog" podcast.
 - Overly technical deep dives.
 
-## Format
+### Episodes
 
-...
+Start with a contrarian point, “most people think X, why not?"
+
+## Publishing
+
+### Cadence
+
+Maintain a sustainable pace.
+
+The long-term goal is that we'll release an episode every other week. We release a newsletter, then a podcast episode, then a newsletter, then a podcast episode, etc.
+
+Initially, we're recording episodes every week as we experiment with the format and get our legs under us.
+
+If someone needs to go on vacation for a week, the entire podcasting infrastructure shouldn't need to come crashing down.
 
 ## Best Practices
-
-### Reveal the human, personal side
-
-...
-
-### Engaging and entertaining
-
-If it's not engaging and entertaining, no one is going to want to listen even if we have useful, valuable content.
-
-This is not just for the audience. We also want to ensure the podcast conversations are fun enough for us to want to continue doing them.
-
-### Host
-
-- There's no need to be salesy.
-- Avoid "let's talk about X for a while". Keep the conversation focused on what the audience would want to know more about.
-- Keep asking questions to dive deeper. Don't just cover a topic and then move on to the next.
-
-### Production
-
-Remove the “ums” and “uhs” but don’t overdo it or it feels a bit jumpy.
-
-### Publishing
-
-Set a sustainable pace. If someone needs to go on vacation for a week, the entire podcasting infrastructure shouldn't need to come crashing down.
-
-- Apple Podcasts
-- Spotify
-- Substack
-- YouTube
-
-#### Social
-
-- Share episodes on social channels
-- PostHog twitter account
-- James's twitter account
 
 ### Intros
 
 The podcast intros should briefly introduce why it makes sense to listen to us. Build credibility. The lessons from our [newsletter intros](/handbook/content-and-docs/newsletter#intro) apply to the podcast as well.
 
-### Thumbnails and titles
+### Hosting and interviewing
 
-See YouTube's [guide to thumbnails and titles](https://support.google.com/youtube/answer/12340300?hl=en).
+- Split episode into segments with a short rest to keep energy levels.
+- Schedule brief breaks in the conversation to avoid lulls.
+- Rehearse the intro. If you make a mistake, stop and start again.
+- There's no need to be salesy.
+- Avoid "let's talk about X for a while". Keep the conversation focused on what the audience would want to know more about.
+- Keep asking questions to dive deeper. Don't just cover a topic and then move on to the next.
 
-> A thumbnail is 90% the psychology of the click, and 10% about the design.
+### Scripts
+
+For the script, have giant headings with copious spacing
+
+### Editing
+
+Remove the “ums” and “uhs” but don’t overdo it or it feels a bit jumpy. Be wary of "magic AI" fixes that may mangle the audio.
+
+### Titles and thumbnails
 
 > The decision to click/listen is driven by “the curiosity gap” the gap between what we currently know and what we want to know.
 
-## What should we avoid?
+See YouTube's [guide to thumbnails and titles](https://support.google.com/youtube/answer/12340300?hl=en).
 
-- Unsustainable pace.
-- Boring conversations.
+## Process
 
-## Checklists
+1. Planning
+  - Topic
+  - Schedule
+  - Script
+    - Initial draft
+    - Get feedback
+2. Recording
+  - Record
+    - Pre-show checklist
+      - Audio levels
+      - Camera focus
+      - Lighting
+    - Pre-interview
+      - Reminders and themes
+    - Interview
+    - Wrapup
+  - Edit
+    - Riverside
+  - Internal review and re-edits
+3. Publishing
+  - Gather supporting materials
+    - Art
+    - Description
+    - Show notes and links
+  - Publish
+    - Transistor
+      - Apple Podcasts
+      - Spotify
+      - Substack
+      - YouTube
+  - Share
+    - Social
 
-- Pre-show Checklist
-  - Audio levels
-  - Focus
-- Episode Script Template
-- Release Checklist
-
-## Gear and tools
-
-### Gear
-
-Lighting makes the biggest difference. Have a decent microphone. Doesn’t have to be expensive or fancy.
-
-- Lighting
-  - Keylights from either [Elgato](https://www.elgato.com/us/en/p/key-light) or Neewer
-- Camera
-  - Budget: Try using your phone camera.
-- Microphone
-  - Budget: Consider a cheap USB microphone.
-  - Upgrade: Focusrite Scarlett Solo
-  - Resource: Check out Wirecutter's [best microphones](https://www.nytimes.com/wirecutter/reviews/the-best-usb-microphone/)
+## Tools and gear
 
 ### Tools
 
 - Recording and editing: riverside.fm
 - Publishing: transistor.fm
 
+### Gear
+
+Not everyone needs to have a professional setup, but it's worth putting in a little effort if you're going to be a recurring guest on the podcast. For most people, AirPods are fine. Here are some recommendations for video.
+
+- Lighting
+  - makes the biggest difference.
+  - Keylights from either [Elgato](https://www.elgato.com/us/en/p/key-light) or Neewer
+- Camera
+  - Consider using your iPhone camera over a laptop webcam.
+- Background and framing
+- Microphone
+  - AirPods will work fine for most people.
+  - Budget: Consider a cheap USB microphone.
+  - Upgrade: Focusrite Scarlett Solo
+  - Resource: Check out Wirecutter's [best microphones](https://www.nytimes.com/wirecutter/reviews/the-best-usb-microphone/)
+
 ## Inspiration
+
+What are some good podcasts and learning resources to look to for inspiration?
 
 - Lenny's Podcast
 - The Pragmatic Engineer Podcast
-
-## Process
-
-- Topic
-- Schedule
-- Script
-- Record
-  - Pre-interview
-    - Reminders and themes
-  - Interview
-  - Wrapup
-- Edit
-  - Riverside
-- Show notes
-- Internal review and re-edits
-- Publish
-  - Transistor
-- Share
-  - Social
-
-## Inbox
-
-### Notes from chat with Cory and James
-
-Split episode into segments with a short rest to keep energy levels.
-
-### Notes from conversation with Andy
-
-Potentially having 3 people instead of 2
-either 2 interviewers or 2 guests
-James should be in 80%+ of the episodes, but occasionally special guests
-We want PostHog guests, but on a topic and not just “behind the scenes”
-Episode idea: James and Charles on ops
-For the script, have giant headings with copious spacing
-Start with a contrarian point, “most people say… right?”
-Seasons of the podcast
+- [Transistor.fm Podcasting Guide](https://transistor.fm/how-to-start-a-podcast/)
+- [Riverside.fm University](https://riverside.fm/university)
