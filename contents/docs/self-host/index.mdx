@@ -12,7 +12,7 @@ import Sunset from '../self-host/\_snippets/sunset-disclaimer.mdx'
 
 PostHog is open-source and freely available for anyone to host themselves. We offer a free Docker Compose deployment under an MIT license. Essentially, self-hosting PostHog means you run or purchase your own infrastructure, manage deployments, choose your own URLs to expose it on, and deal with any scaling issues yourself.
 
-The self-hosted version is the same exact product we run on PostHog Cloud, though our infrastructure is very, very different to support the kind of volumes we see across all of our cloud customers. We don't do tagged releases for self-hosted PostHog. All commits go through our standard CI/CD pipeline before they are merged into our cloud deployments and also become available for self-hosted instances.
+The self-hosted version is the same exact product we run on PostHog Cloud, though our infrastructure is very, very different to support serious volume. We don't do tagged releases for self-hosted PostHog. All commits go through our standard CI/CD pipeline before they are merged into our cloud deployments and also become available for self-hosted instances.
 
 Because we don't manage self-hosted instances or provide paid support plans for them, [we don't offer any sort of guarantees](/docs/self-host/open-source/disclaimer) around it working in certain ways on your infrastructure, and you assume all responsibility and risk for your use of the product and the stack.
 
@@ -63,9 +63,8 @@ flowchart TD
     n4@{ shape: diam}
 ```
 
-If you've decided that PostHog Cloud is the better option for you, go ahead and sign up for a free account on our [US](https://us.posthog.com/signup) or [EU](https://eu.posthog.com/signup) cloud instance, whichever you prefer.
-
-If instead you've decided that self-hosting is for you, you can follow the rest of this guide to get it up and running. You can always move your data to PostHog Cloud later if you get stuck on the infra or simply tired of managing it yourself (it is powerful software so can be kind of a beast, even when using the simple Docker compose version). Alright, let's get to it!
+You can follow the rest of the guide for instructions on how to set up self-hosted PostHog. If you want to use Cloud instead, you can sign up for our
+ [US](https://us.posthog.com/signup) or [EU](https://eu.posthog.com/signup) cloud instance.
 
 ## Requirements
 
