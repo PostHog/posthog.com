@@ -147,3 +147,39 @@ Lighting makes the biggest difference. Have a decent microphone. Doesn’t have 
 
 - Lenny's Podcast
 - The Pragmatic Engineer Podcast
+
+## Process
+
+- Topic
+- Schedule
+- Script
+- Record
+  - Pre-interview
+    - Reminders and themes
+  - Interview
+  - Wrapup
+- Edit
+  - Riverside
+- Show notes
+- Internal review and re-edits
+- Publish
+  - Transistor
+- Share
+  - Social
+
+## Inbox
+
+### Notes from chat with Cory and James
+
+Split episode into segments with a short rest to keep energy levels.
+
+### Notes from conversation with Andy
+
+Potentially having 3 people instead of 2
+either 2 interviewers or 2 guests
+James should be in 80%+ of the episodes, but occasionally special guests
+We want PostHog guests, but on a topic and not just “behind the scenes”
+Episode idea: James and Charles on ops
+For the script, have giant headings with copious spacing
+Start with a contrarian point, “most people say… right?”
+Seasons of the podcast
