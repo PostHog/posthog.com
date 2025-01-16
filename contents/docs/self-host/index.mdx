@@ -8,8 +8,6 @@ showTitle: true
 import Disclaimer from './\_snippets/disclaimer.mdx'
 import Sunset from '../self-host/\_snippets/sunset-disclaimer.mdx'
 
-## What is self-hosted PostHog?
-
 PostHog is open-source and freely available for anyone to host themselves. We offer a free Docker Compose deployment under an MIT license. Essentially, self-hosting PostHog means you run or purchase your own infrastructure, manage deployments, choose your own URLs to expose it on, and deal with any scaling issues yourself.
 
 The self-hosted version is the same exact product we run on PostHog Cloud, though our infrastructure is very, very different to support serious volume. We don't do tagged releases for self-hosted PostHog. All commits go through our standard CI/CD pipeline before they are merged into our cloud deployments and also become available for self-hosted instances.
@@ -21,10 +19,6 @@ Because we don't manage self-hosted instances or provide paid support plans for 
 Good question! We've found that PostHog Cloud is far and away the best experience for the vast majority of our users. However, some people still want to self-host, and we're here for that! Here's a quick flow chart to help you understand if self-hosting PostHog is for you:
 
 ```mermaid
----
-config:
-  layout: elk
----
 flowchart TD
     A@{ label: "I'm a die-hard self-hoster" } --> B("Do you expect to ingest more than 300k events, 1k recordings, 300k /decide API calls into the instance?")
     n6["What makes you interested in self-hosting PostHog?"] --> A & n7["I have data privacy requirements / desires"] & n8@{ label: "I'm worried about cost" }
