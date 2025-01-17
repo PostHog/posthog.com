@@ -24,11 +24,16 @@ const getCloudinaryPublicId = (url: string): string | null => {
 export default function CloudinaryImage({
     src,
     width,
-    placeholder = 'none',
     className = '',
     imgClassName = '',
+    placeholder,
     ...other
-}: CloudinaryImageProps): JSX.Element {
+}: {
+    src: `https://res.cloudinary.com/${string}`
+    width?: number
+    className?: string
+    imgClassName?: string
+} & React.ImgHTMLAttributes<HTMLImageElement>): JSX.Element {
     const cloudinaryPublicId = isCloudinaryImage(src) && getCloudinaryPublicId(src)
     const placeholderType =
         placeholder === 'blurred' ? 'blur' : placeholder === 'dominantColor' ? 'predominant' : placeholder
@@ -40,6 +45,7 @@ export default function CloudinaryImage({
                 publicId={cloudinaryPublicId}
                 cloudName={process.env.GATSBY_CLOUDINARY_CLOUD_NAME}
                 className={imgClassName}
+                secure
             >
                 {width && <Transformation width={width} crop="scale" />}
                 {placeholder !== 'none' && <Placeholder type={placeholderType} />}

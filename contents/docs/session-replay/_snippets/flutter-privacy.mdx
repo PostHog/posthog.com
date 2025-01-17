@@ -1,5 +1,3 @@
-Masking individuals [Widgets](https://docs.flutter.dev/ui/widgets) isn't supported yet.
-
 ### Masking All Texts and Images
 
 ```dart
@@ -11,4 +9,14 @@ config.sessionReplayConfig.maskAllTexts = false;
 /// Enable masking of all images.
 /// Default: true.
 config.sessionReplayConfig.maskAllImages = false;
+```
+
+### Masking in Flutter
+
+- You can manually mark a Widget for masking using the `PostHogMaskWidget` Widget:
+
+```dart
+...
+    const PostHogMaskWidget(child: Text('Sensitive!'))
+...
 ```

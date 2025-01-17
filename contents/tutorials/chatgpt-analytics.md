@@ -5,7 +5,7 @@ author:
   - lior-neu-ner
 tags:
   - product analytics
-  - AI engineering
+  - LLM observability
 ---
 
 import { ProductScreenshot } from 'components/ProductScreenshot'
@@ -26,6 +26,8 @@ Tracking your ChatGPT API usage, costs, and latency is crucial to understanding 
 - Average API response time
 
 We'll build a basic React app, implement the ChatGPT API, and capture these events using PostHog. 
+
+> **Try out our new observability beta** We recently launched our own built-in LLM observability feature. It can automatically capture many of the details manually captured in this tutorial. Check out our [observability docs](/docs/ai-engineering/observability) for more details on setting it up.
 
 ## 1. Create a React app
 

@@ -8,6 +8,10 @@
     ],
     "redirects": [
         {
+            "source": "/youreastar",
+            "destination": "https://www.youtube.com/watch?v=SD7B2teuLXk"
+        },
+        {
             "source": "/handbook/growth/marketing/product-announcements",
             "destination": "/handbook/words-and-pictures/product-announcements"
         },
@@ -723,10 +727,10 @@
         { "source": "/ab-testing/features", "destination": "/experiments" },
         { "source": "/product-os/features", "destination": "/product-os" },
         { "source": "/docs/integrate/webhooks", "destination": "/docs/cdp/destinations/webhook" },
-        { "source": "/roadmap/changelog", "destination": "/changelog/2024" },
-        { "source": "/blog/posthog-changelog", "destination": "/changelog/2024" },
-        { "source": "/roadmap/changelog/2023", "destination": "/changelog/2024" },
-        { "source": "/changelog", "destination": "/changelog/2024" },
+        { "source": "/roadmap/changelog", "destination": "/changelog/2025" },
+        { "source": "/blog/posthog-changelog", "destination": "/changelog/2025" },
+        { "source": "/roadmap/changelog/2023", "destination": "/changelog/2025" },
+        { "source": "/changelog", "destination": "/changelog/2025" },
         { "source": "/docs/integrate/webhooks", "destination": "/docs/cdp/destinations/webhook" },
         { "source": "/apps/advanced-geoip", "destination": "/cdp/geoip-enrichment" },
         { "source": "/cdp/advanced-geoip", "destination": "/cdp/geoip-enrichment" },

@@ -2,7 +2,7 @@
 title: Error tracking
 ---
 
-> ⚠️ Error tracking is considered an alpha product while we continue to ship some crucial features. You can email [david@posthog.com](mailto:david@posthog.com) if you would like early access.
+> ⚠️ Error tracking is currently released as a feature preview. You can [enable it from within your PostHog account](https://us.posthog.com/#panel=feature-previews).
 
 Error tracking allows you to track, investigate, and resolve exceptions your customers face.
 
@@ -75,8 +75,13 @@ Should an exception be autocaptured you will need to modify the properties befor
 ```javascript
 posthog.init("<API_KEY>", {
   before_send: (event) => {
-    if (event.event === "$exception" && event.properties["$exception_list"][0]["$exception_type"] == "SyntaxError") {
-      event.properties["$exception_fingerprint"] = "MyCustomGroup"
+    if (event.event === "$exception") {
+      const exceptionList = event.properties["$exception_list"] || []
+      const exception = exceptionList.length > 0 ? exceptionList[0] : null;
+
+      if (exception && exception["$exception_type"] == "SyntaxError") {
+        event.properties["$exception_fingerprint"] = "MyCustomGroup"
+      }    
     }
     return event
   }
@@ -109,7 +114,7 @@ posthog.init(token, {
 });
 ```
 
-To `idenitfy` users in web workers you will need to pass the distinct ID. This can be done via an env variable or sending it via `postMessage` from your main application.
+To `identify` users in web workers you will need to pass the distinct ID. This can be done via an env variable or sending it via `postMessage` from your main application.
 
 ### Can exceptions be sampled / ignored
 

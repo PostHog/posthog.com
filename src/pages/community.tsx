@@ -30,7 +30,8 @@ import CloudinaryImage from 'components/CloudinaryImage'
 
 const quote =
     // "Let your work shine as brightly as a hedgehog's quills, threading through life's challenges with perseverance."
-    'Even the smallest hedgehog carries the wisdom of survival, showing us that even in a world full of thorns, one can embrace challenges with grace and courage.'
+    // 'Even the smallest hedgehog carries the wisdom of survival, showing us that even in a world full of thorns, one can embrace challenges with grace and courage.'
+    'Why scurry through life when you can forage? Take time to sniff the mealworms. When things feel overwhelming, just curl into a ball.'
 
 const TabButton = ({ active, onClick, children, className = '' }) => {
     return (
@@ -235,10 +236,10 @@ const Main = () => {
                 <div className="grid @xl:grid-cols-2 gap-4 @xl:gap-x-12 @xl:gap-y-4 divide-y @lg:divide-y-0 divide-border dark:divide-border-dark">
                     <PersonSpotlight
                         title="A note from the editor"
-                        content="<p>Welcome to <em>Inside PostHog</em> - our community newspaper. Find our latest posts, community questions, and everything else that's happening in the world of PostHog."
+                        content="<p>Welcome to <em>Inside PostHog</em> - our community newspaper. Explore our latest posts, community questions, and everything else that's happening in the world of PostHog."
                         byline="- Andy, Editor-in-Chief"
                         image={
-                            <div className="w-24 rounded-full overflow-hidden bg-yellow">
+                            <div className="h-24 w-24 rounded-full overflow-hidden bg-yellow">
                                 <CloudinaryImage
                                     width={200}
                                     src="https://res.cloudinary.com/dmukukwp6/image/upload/andy_86a7232754.png"
@@ -248,7 +249,12 @@ const Main = () => {
                     />
 
                     <div className="text-center pt-6 pb-4 px-2">
-                        <p className="mb-2">
+                        <CloudinaryImage
+                            className="h-20 w-20 float-left mr-2 mb-2"
+                            width={200}
+                            src="https://res.cloudinary.com/dmukukwp6/image/upload/detective_hog_9b2bb1da51.png"
+                        />
+                        <p className="mb-2 text-sm">
                             <em>"{quote}"</em>
                         </p>
                         <p className="text-sm opacity-75 mb-0">
@@ -261,18 +267,18 @@ const Main = () => {
                     <div className="pt-4">
                         <PersonSpotlight
                             title="Meet a team member"
-                            content="<p>James G. is coming up on his 4-year anniversary. When he's not restarting servers, you can likely find him out on a trail."
+                            content="<p>As an engineer on our Growth team, Zach is probably the reason you heard about PostHog. When he's not RBAC-ing that ass up, he's investing in early stage startups and finishing triathlons."
                             image={
-                                <div className="w-24 rounded-full overflow-hidden bg-salmon">
+                                <div className="h-24 w-24 rounded-full overflow-hidden bg-salmon">
                                     <CloudinaryImage
                                         width={200}
-                                        src="https://res.cloudinary.com/dmukukwp6/image/upload/james_g_d9de6cbcdb.png"
+                                        src="https://res.cloudinary.com/dmukukwp6/image/upload/v1711452549/Zach_c7f6a5a292.png"
                                     />
                                 </div>
                             }
                             cta={
-                                <Link to="/community/profiles/30174" className="text-[15px]">
-                                    Learn more about James G.
+                                <Link to="/community/profiles/30086" className="text-[15px]">
+                                    Learn more about Zach W.
                                 </Link>
                             }
                         />
@@ -327,17 +333,25 @@ const Main = () => {
 
                 <div className="pt-4">
                     <PersonSpotlight
-                        title="A musing from the CEO"
-                        content="<p>what motivates us:</p>
-            <ol>
-                <li>building an epic product and company</li>
-                <li>figuring out how far we can go</li>
-                <li>helping engineers build products</li>
-                <li>beating all the point solution competitors</li>
-                <li>having customers buy from us instead of us selling to them</li>
-            </ol>"
+                        title="Musings from the CEO"
+                        content="<p>nobody will remember:</p>
+            <ul>
+                <li>your salary</li>
+                <li>how “busy you were”</li>
+                <li>how many hours you worked</li>
+            </ul>
+
+            <p>people will remember:</p>
+
+            <ul>
+                <li>if you hopped on a quick call</li>
+                <li>when you hopped on a quick call</li>
+                <li>how many quick calls you hopped on</li>
+                <li>how you made them feel when you hopped on a quick call</li>
+            </ul>
+            "
                         image={
-                            <div className="w-24 rounded-full overflow-hidden bg-yellow">
+                            <div className="h-24 w-24 rounded-full overflow-hidden bg-yellow">
                                 <CloudinaryImage
                                     width={200}
                                     src="https://res.cloudinary.com/dmukukwp6/image/upload/james_b841adce96.png"

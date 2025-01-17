@@ -4,13 +4,45 @@
 
 import IOSInstall from "../../integrate/_snippets/install-ios.mdx"
 
+export const EnableSessionReplayDark = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/session-replay/enable-session-replay-in-project-settings-dark-mode.png"
+export const EnableSessionReplayLight = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/session-replay/enable-session-replay-in-project-settings-light-mode.png"
+
 <IOSInstall />
 
 > Requires PostHog iOS SDK version >= [3.6.0](https://github.com/PostHog/posthog-ios/releases), and it's recommended to always use the latest version.
 
-## Step two: Configure replay settings
+## Step two: Enable session recordings in your project settings
 
-Add `config.sessionReplay = true` to your PostHog configuration alongside any of your other configuration options:
+Enable session recordings in your PostHog [Project Settings](https://app.posthog.com/project/settings).
+
+<ProductScreenshot
+  imageLight={EnableSessionReplayLight} 
+  imageDark={EnableSessionReplayDark} 
+  alt="Enable session recordings in your PostHog'"
+  classes="rounded"
+/>
+
+## Step three: Configure replay settings
+
+### Automatically start session recordings
+
+Setting `config.sessionReplay = true` to your PostHog configuration will start session recordings on SDK setup.
+
+### Manually control session recordings
+
+Setting `config.sessionReplay = false` to your PostHog configuration will prevent PostHog from automatically starting session recordings on SDK setup. 
+
+You can manually control when to start and stop session recordings using the following two methods:
+
+- `startSessionRecording(resumeCurrent: Bool)`
+  - Set **resumeCurrent** to `true` to resume a previous session recording (Default). 
+  - Set **resumeCurrent** to `false` to start a new session recording. 
+- `stopSessionRecording()` 
+  - Stops/pauses the current session recording.
+
+> **Note:** Calling these methods will have no effect if session recordings are disabled in your PostHog [Project Settings](https://app.posthog.com/project/settings).
+
+## Configuration options
 
 ```swift
 let config = PostHogConfig(apiKey: "<ph_project_api_key>")
@@ -49,6 +81,5 @@ config.sessionReplayConfig.debouncerDelay = 1.0
 
 - On iOS, minimum deployment target is [iOS13](/docs/libraries/ios)
 - [SwiftUI](https://developer.apple.com/xcode/swiftui/) is only supported if the `screenshotMode` option is enabled.
-  - `Text` views in SwiftUI are considered images, so they are masked unless `maskAllImages` is disabled. 
 - Custom views are not fully supported if `screenshotMode` is disabled.
 - WebView is not supported. A placeholder will be shown.

@@ -255,7 +255,7 @@ const linklist: IProps[] = [
             },
             {
                 title: 'Changelog',
-                url: '/changelog',
+                url: '/changelog/2025',
             },
             {
                 title: 'People',
