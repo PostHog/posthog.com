@@ -5,7 +5,7 @@ author:
   - lior-neu-ner
 tags:
   - product analytics
-  - AI engineering
+  - LLM observability
 ---
 
 import { ProductScreenshot } from 'components/ProductScreenshot'

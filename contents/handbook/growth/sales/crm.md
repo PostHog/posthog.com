@@ -69,6 +69,8 @@ Our preferred way to keep track of outreach is by creating Salesforce Leads, Con
 
 If you add "sf-lead" tag to a ticket in Zendesk, a new lead will be automatically created in Salesforce. This helps streamline the process of converting support questions or tickets into potential sales opportunities directly from Zendesk.
 
+If you see "Zendesk" as the lead source, please review the ticket under the Zendesk widget in Salesforce which allows you to view the full context within salesforce. It will also appear in sales_form_message field for quick review of last request before the Zendesk ticket is converted to a lead.
+
 ### Forwarding Sales Opportunities
 If you are not in the sales team but are engaged with a client and identify a sales opportunity, forward the email chain to sales@posthog.com. A new lead will be automatically created in salesforce and assigned to the appropriate AE based on existing criteria. This way we can smoothly hand off potential opportunities and track things properly!
 

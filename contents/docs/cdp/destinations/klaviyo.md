@@ -1,6 +1,6 @@
 ---
 title: Send contacts and analytics events to Klaviyo
-templateId: template-klaviyo-event
+templateId: template-klaviyo
 ---
 
 import Requirements from "../_snippets/requirements.mdx"
