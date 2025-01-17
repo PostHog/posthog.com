@@ -22,7 +22,6 @@ import startengine from './images/customers/startengine.svg'
 import zendesk from './images/customers/zendesk.svg'
 import researchgate from './images/customers/researchgate.svg'
 
-
 import { useValues } from 'kea'
 import { layoutLogic } from 'logic/layoutLogic'
 import Link from 'components/Link'

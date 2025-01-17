@@ -602,7 +602,8 @@ export const handbookSidebar = [
                 url: '/handbook/company/merch-store',
             },
         ],
-    },{
+    },
+    {
         name: 'PostHog.com',
         url: '',
         children: [
