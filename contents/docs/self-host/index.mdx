@@ -20,38 +20,48 @@ Good question! We've found that PostHog Cloud is far and away the best experienc
 
 ```mermaid
 flowchart TD
-    A["I'm a die-hard self-hoster"] --> B["Do you expect to ingest more than 300k events, 1k recordings, 300k /decide API calls into the instance?"]
-    start["What makes you interested in self-hosting PostHog?"] --> A & privacy["I have data privacy requirements / desires"] & cost["I'm worried about cost"]
+    A@{ label: "I'm a die-hard self-hoster" } --> B["Do you expect to ingest more than 300k events, 1k recordings, 300k /decide API calls into the instance?"]
+    start["What makes you interested in self-hosting PostHog?"] --> A & privacy["I have data privacy requirements / desires"] & cost@{ label: "I'm worried about cost" }
     cost --> events["Will you have more than 1M events, 5k recordings etc per month?"]
     events -- No --> cloud_free["PostHog Cloud is free for 1M events, 5k recordings, 250 surveys, and more every single month. See posthog.com/pricing for more."]
-    cloud_free --> better_cloud["You'll probably be better off with PostHog Cloud"]
+    cloud_free --> better_cloud@{ label: "You'll probably be better off with PostHog Cloud" }
     privacy --> gdpr["PostHog Cloud has both EU and US regions for GDPR and BAAs available for HIPPA-compliant companies."]
     gdpr -- Cool --> better_cloud
     B -- Yes --> infra["Is managing infrastructure one of your core competencies?"]
     B -- No --> risk["Are you okay with accepting the risk for potential data loss? (we have no guarantees for self-hosted instances)"]
     infra -- No --> better_cloud
-    events -- Yes --> pricing["Have you compared the pricing for your anticipated volume vs the cost of a devops engineer's time?"]
-    pricing -- "Yes, and it's cheaper to do this in-house" --> doubt["We've literally never seen this math work out. However..."]
+    events -- Yes --> pricing@{ label: "Have you compared the pricing for your anticipated volume vs the cost of a devops engineer's time?" }
+    pricing -- "Yes, and it's cheaper to do this in-house" --> doubt@{ label: "We've literally never seen this math work out. However..." }
     doubt --> infra
-    gdpr -- "It's something else" --> other_privacy["We host all lots of companies with privacy needs, feel free to send a message with your requirements and we can go from there."]
+    gdpr -- It's something else --> other_privacy["We host all lots of companies with privacy needs, feel free to send a message with your requirements and we can go from there."]
     other_privacy --> better_cloud
     pricing -- No --> calculator["Use the calculator on posthog.com/pricing, then come back"]
     calculator -- "Going back to this question..." --> pricing
-    pricing -- "Yes, and it's cheaper to use Posthog Cloud" --> cloud_cheaper["Because we spread the cost of managing infra across all our customers, PostHog Cloud is usually far cheaper than doing it yourself!"]
+    pricing -- Yes, and it's cheaper to use Posthog Cloud --> cloud_cheaper["Because we spread the cost of managing infra across all our customers, PostHog Cloud is usually far cheaper than doing it yourself!"]
     cloud_cheaper --> better_cloud
-    infra --> risk
-    risk --> support["We don't offer customer support for product, infrastructure, or other questions for self-hosted instances. That alright with you?"]
+    infra -- Yes --> risk
+    risk -- Yes --> support@{ label: "We don't offer customer support for product, infrastructure, or other questions for self-hosted instances. That alright with you?" }
     support -- No --> better_cloud
-    support --> features["Are you cool with just using the features that are available on the free plan? All paid-plan features are Cloud-only. But of course, you do have access to the source code ;)"]
+    support -- Yes --> features["Are you cool with just using the features that are available on the free plan? All paid-plan features are Cloud-only."]
     features -- Yep --> try_it["Feel free to give PostHog self-hosting a try!"]
-    features -- "No, I want all the features" --> better_cloud
-
-    classDef default fill:#f9f9f9,stroke:#333,stroke-width:2px;
-    classDef decision fill:#e9f2ff,stroke:#333,stroke-width:2px;
-    classDef endpoint fill:#f0f0f0,stroke:#333,stroke-width:2px;
-    
-    class A,privacy,cost,risk,support decision;
-    class try_it,better_cloud endpoint;
+    features -- No, I want all the features --> better_cloud
+    risk -- No --> better_cloud
+    A@{ shape: rect}
+    cost@{ shape: rect}
+    better_cloud@{ shape: rect}
+    pricing@{ shape: rect}
+    doubt@{ shape: rect}
+    support@{ shape: rect}
+     A:::decision
+     privacy:::decision
+     cost:::decision
+     better_cloud:::endpoint
+     risk:::decision
+     support:::decision
+     try_it:::endpoint
+    classDef default fill:#f9f9f9,stroke:#333,stroke-width:2px
+    classDef decision fill:#e9f2ff,stroke:#333,stroke-width:2px
+    classDef endpoint fill:#f0f0f0,stroke:#333,stroke-width:2px
 ```
 
 You can follow the rest of the guide for instructions on how to set up self-hosted PostHog. If you want to use Cloud instead, you can sign up for our
