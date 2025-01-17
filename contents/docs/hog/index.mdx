@@ -8,13 +8,84 @@ availability:
   enterprise: full
 ---
 
-Hog is the coolest programming language in the world (we're biased). 
+PostHog wants you to have the power to transform and export your data in real time, without the headache of maintaining your own service to get it done.
 
-It is being used to build our CDP product, which you can follow along with in [GitHub](https://github.com/PostHog/posthog/issues/22833).
+Enter Hog: the language that drives our [realtime destinations](/docs/cdp/destinations).
+
+We’ve written Hog destination templates for dozens of services. But you can also write destinations yourself. Here’s how it works.
 
 > **Note:** Hog shouldn't be confused with [HogQL](/docs/hogql), our SQL-like query language used inside PostHog. If you're looking to query data in PostHog, see those docs.
 
-## Quickstart
+## Hog by example: webhook
+
+When creating a destination, you’ll start with an input interface sheet. This allows for easy changes and maintenance to your destination. Each input’s property name is noted beside its title.
+
+You can include additional inputs by clicking **Add input variable**.
+
+Under the hood, the default webhook template looks like this:
+
+```hog
+
+let payload := {
+// This is the object we'll use to structure our request
+  'headers': inputs.headers,
+  'body': inputs.body,
+  'method': inputs.method
+}
+
+if (inputs.debug) {
+// If we're running in debug mode, we'll take an extra step:
+// Printing the request's URL and payload object
+  print('Request', inputs.url, payload)
+}
+
+// Create and fire a request with the specified URL and payload object
+let res := fetch(inputs.url, payload);
+
+// When the request returns, execution will continue
+// The response will be stored to the above constant, `res`
+
+if (inputs.debug) {
+// If we're in debug mode, print the status code and body for the response
+  print('Response', res.status, res.body);
+}
+```
+
+It’s okay if your destination service is a little pickier, though. Let’s say the endpoint you’re targeting expects to receive a body with a specific structure. You could wrap the JSON body content in another object, then pass this along to the payload:
+
+```hog
+
+let wrapped_input := {
+	'some_necessary_property': 'its necessary value',
+	'content': inputs.body
+}
+
+let payload := {
+  'headers': inputs.headers,
+  'body': wrapped_input,
+  'method': inputs.method
+}
+```
+
+You could even add a new input field to your destination, which is convenient if you think you’ll want to change the value again in the future.
+
+![Input UI sheet screenshot](https://res.cloudinary.com/dmukukwp6/image/upload/custom_destination_input_f74eb7947d.png)
+
+Imagine a destination endpoint that can update one of many tables, and therefore requires a table name to be specified. With a string input named `table`, you could write this:
+
+```hog
+
+let table_patch := {
+	'table': inputs.table,
+	'content': inputs.body
+}
+```
+
+You can even write HogQL queries in Hog, for example:
+
+[HogQL query example TK]
+
+### Keep in mind
 
 Hog was designed to be syntax-compatible with SQL / HogQL. This means all HogQL expressions work as Hog code.
 
