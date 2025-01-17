@@ -21,7 +21,7 @@ client = OpenAI(
 
 > **Note:** This also works with the `AsyncOpenAI` client. 
 
-Now, when you use the OpenAI SDK, it automatically captures many properties into PostHog including `$ai_input`, `$ai_input_tokens`, `$ai_latency`, `$ai_model`, `$ai_model_parameters`, `$ai_output`, and `$ai_output_tokens`.
+Now, when you use the OpenAI SDK, it automatically captures many properties into PostHog including `$ai_input`, `$ai_input_tokens`, `$ai_latency`, `$ai_model`, `$ai_model_parameters`, `$ai_output_choices`, and `$ai_output_tokens`.
 
 You can also capture additional properties like `posthog_distinct_id`, `posthog_trace_id`, `posthog_properties`, `posthog_groups`, and `posthog_privacy_mode`.
 
@@ -33,8 +33,8 @@ response = client.chat.completions.create(
     ],
     posthog_distinct_id="user_123", # optional
     posthog_trace_id="trace_123", # optional
-    posthog_properties={"conversation_id": "abc123", "paid": True} # optional
-    posthog_groups={"company": "company_id_in_your_db"}  # optional 
+    posthog_properties={"conversation_id": "abc123", "paid": True}, # optional
+    posthog_groups={"company": "company_id_in_your_db"},  # optional 
     posthog_privacy_mode=False # optional
 )
 
