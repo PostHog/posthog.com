@@ -11,6 +11,7 @@ export type Filters = Array<
           label: string
           key: string
           type: 'toggle'
+          appliesTo: 'company' | 'job'
       }
     | {
           icon: React.ReactNode
@@ -18,6 +19,7 @@ export type Filters = Array<
           key: string
           type: 'select'
           options: { label: string; value: any }[]
+          appliesTo: 'company' | 'job'
       }
 >
 

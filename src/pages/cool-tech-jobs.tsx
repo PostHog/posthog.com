@@ -21,34 +21,46 @@ dayjs.extend(relativeTime)
 
 const toggleFilters = [
     {
+        icon: <StickerLaptop className="size-8" />,
+        label: 'Remote',
+        key: 'isRemote',
+        appliesTo: 'job',
+    },
+    {
         icon: <StickerPullRequest className="size-8" />,
         label: 'Engineers decide what to build',
         key: 'engineersDecideWhatToBuild',
+        appliesTo: 'company',
     },
     {
         icon: <StickerLaptop className="size-8" />,
-        label: 'Remote only',
+        label: 'Remote only company',
         key: 'remoteOnly',
+        appliesTo: 'company',
     },
     {
         icon: <StickerPalmTree className="size-8" />,
         label: 'Exotic off-sites',
         key: 'exoticOffsites',
+        appliesTo: 'company',
     },
     {
         icon: <StickerDnd className="size-8" />,
         label: 'Meeting-free days',
         key: 'meetingFreeDays',
+        appliesTo: 'company',
     },
     {
         icon: <StickerEngineerRatio className="size-8" />,
         label: 'High engineer ratio',
         key: 'highEngineerRatio',
+        appliesTo: 'company',
     },
     {
         icon: <StickerHourglass className="size-8" />,
         label: 'No deadlines',
         key: 'noDeadlines',
+        appliesTo: 'company',
     },
 ]
 
@@ -68,7 +80,7 @@ const Perks = ({ company, className }: { company: Company; className?: string })
 }
 
 const JobsByDepartment = ({ jobs, department }: { jobs: Job[]; department: string }) => {
-    const [open, setOpen] = useState(true)
+    const [open, setOpen] = useState(false)
     return (
         <div>
             <button
@@ -84,6 +96,7 @@ const JobsByDepartment = ({ jobs, department }: { jobs: Job[]; department: strin
                 </span>
             </button>
             <motion.ul
+                initial={{ height: 0 }}
                 className="list-none p-0 m-0 overflow-hidden @2xl:ml-7"
                 animate={open ? { height: 'auto' } : { height: 0 }}
             >
@@ -232,7 +245,7 @@ const FilterSelect = ({
     jobFilters,
     setJobFilters,
 }: {
-    filter: FiltersType[number]
+    filter: FiltersType[number] & { type: 'select' }
     jobFilters: FiltersType
     setJobFilters: (filters: FiltersType) => void
 }) => {
@@ -299,7 +312,7 @@ const Filters = ({
                 {displayedFilters.map((filter, index) => {
                     const content = (
                         <>
-                            {index === 2 && (
+                            {index === 3 && (
                                 <h4 className="text-[15px] font-medium text-primary/60 dark:text-primary-dark/60 border-b border-light dark:border-dark py-2 mb-0 sm:col-span-2 lg:col-span-1">
                                     Unique perks
                                 </h4>
@@ -324,14 +337,21 @@ const Filters = ({
                                                 label={filter.label}
                                                 onChange={(checked) => {
                                                     window.scrollTo({ top: 0, behavior: 'smooth' })
-                                                    setCompanyFilters((filters) => {
+                                                    const setFilter =
+                                                        filter.appliesTo === 'company'
+                                                            ? setCompanyFilters
+                                                            : setJobFilters
+                                                    setFilter((filters) => {
                                                         if (checked) {
                                                             return [...filters, { [filter.key]: { $eq: true } }]
                                                         }
                                                         return filters.filter((f) => !(filter.key in f))
                                                     })
                                                 }}
-                                                checked={companyFilters.some((f) => filter.key in f)}
+                                                checked={(filter.appliesTo === 'company'
+                                                    ? companyFilters
+                                                    : jobFilters
+                                                ).some((f) => filter.key in f)}
                                             />
                                         )
                                     default:
