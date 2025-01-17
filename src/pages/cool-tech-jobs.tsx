@@ -79,8 +79,16 @@ const Perks = ({ company, className }: { company: Company; className?: string })
     )
 }
 
-const JobsByDepartment = ({ jobs, department }: { jobs: Job[]; department: string }) => {
-    const [open, setOpen] = useState(false)
+const JobsByDepartment = ({
+    jobs,
+    department,
+    initialOpen = false,
+}: {
+    jobs: Job[]
+    department: string
+    initialOpen?: boolean
+}) => {
+    const [open, setOpen] = useState(initialOpen)
     return (
         <div>
             <button
@@ -127,9 +135,9 @@ const JobList = ({ jobs }: { jobs: Job[] }) => {
 
     return (
         <ul className="list-none p-0 m-0 mt-2 flex-grow">
-            {Object.entries(jobsGroupedByDepartment).map(([department, jobs]) => (
+            {Object.entries(jobsGroupedByDepartment).map(([department, jobs], index) => (
                 <li key={department}>
-                    <JobsByDepartment jobs={jobs} department={department} />
+                    <JobsByDepartment jobs={jobs} department={department} initialOpen={index === 0} />
                 </li>
             ))}
         </ul>
