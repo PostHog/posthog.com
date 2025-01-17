@@ -40,7 +40,7 @@ Here is a overview that shows which of our PMs currently works with which team:
 
 Product managers primarily support their teams in reaching their goals. The top two priorities of each PM are to run a growth review at the beginning of every month for each of their products, and to organise regular user interviews. (Our rule of thumb is 1 interview per week per PM).
 
-The [quarterly per-product planning](/handbook/company/goal-setting) typically highlight the biggest blind spots a team or product has (e.g. what metrics or parts of the product do we think have potential, but we don't have enough context yet). Teams are encouraged to include their "biggest unknown" as a research goal for the PM to own as part of their quarterly goals. Findings should be shared asyncronously via a GitHub PR in [#product-internal](https://github.com/PostHog/product-internal), and in the growth reviews or team standups where applicable.
+The [quarterly per-product planning](/handbook/company/goal-setting) typically highlight the biggest blind spots a team or product has (e.g. what metrics or parts of the product do we think have potential, but we don't have enough context yet). Teams are encouraged to include their "biggest unknown" as a research goal for the PM to own as part of their quarterly goals. Findings should be shared asynchronously via a GitHub PR in [#product-internal](https://github.com/PostHog/product-internal), and in the growth reviews or team standups where applicable.
 
 As the PM team, we are also pursuing a couple of side projects each quarter with the goal of leveling up how we do Product at PostHog.
 
