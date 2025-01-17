@@ -62,7 +62,7 @@ The toolbar enables you to select elements and apply transformations for each va
 
 The toolbar also enables further editing of your experiment. For example, you can:
 
-- Add multiple element changes to a variant by clicking **+ Add element**.
+- Add multiple element changes to a variant by clicking **+ Add element**. Elements are buttons, headers, images, and more.
 - Remove an element from a variant by clicking the trash bin icon.
 - Add more versions of your experiment by clicking **+ Add variant**.
 - Change all elements, headers, buttons, and/or images by clicking the **Change element** dropdown.
