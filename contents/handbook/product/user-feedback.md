@@ -35,7 +35,7 @@ Ways to invite users for an interview:
 - If this is the first interview with the user, ask them for context about their company, their role, if they're technical.
 
 **After the call**
-1. If you used BuildBetter, the tool will automatically generate a summary for you under the recording. We recommend checking this, and adding any additional thoughts, or you can generate a doc using the platform, where you can give very specific prompts for the outline of the summay.
+1. If you used BuildBetter, the tool will automatically generate a summary for you under the recording. We recommend checking this, and adding any additional thoughts, because the AI can sometimes pick up things incorrectly. You can also generate a doc using the platform, where you can give very specific prompts for the outline of the summary.
    1. We also want to keep recordings easily identifiable, therefore please rename the recording to `[topic of the interview] user interview with [first name of the user]`, e.g. Web analytics user interview with Joe.
 2. In case recording wasn't possible, add the notes to the [Google Doc][feedback-doc].
 3. Share a short summary of the user interview in the `#posthog-feedback` Slack channel.
