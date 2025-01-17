@@ -37,8 +37,9 @@ After enabling the **No Code Web experiments** feature preview, go to the [exper
 >   disable_web_experiments: false,
 > })
 > ```
+> Otherwise, you'll be able to set up the experiment in the toolbar but it won't actually run on your live site.
 
-On the draft experiment page under the **Implementation** section, click **Launch toolbar on your website**.
+Once you've created your no-code web experiment, click **Launch toolbar on your website** under the **Implementation** section.
 
 ![Implement web experiment](https://res.cloudinary.com/dmukukwp6/image/upload/web_exp_implementation_ddd1848103.png)
 
@@ -50,9 +51,10 @@ The toolbar enables you to select elements and apply transformations for each va
 
 3. Click **Add element** and select the element you want to modify. We select the main signup button on our page.
 
-4. Use the toolbar to modify the element's text, CSS, or HTML. We'll change the button's text to say "Sign up for free".
+4. Use the toolbar to modify the element's text, CSS, or HTML. We'll change the button's text to say "Sign up for free". Importantly, the **Text** field modifies the text of the element. The **CSS** field lets you change the styling of the element. The **HTML** field will override the entire element.
+5. If you'd like to change more parts of the page for this version of the experiment, click **Add element** to modify a second, third, or fourth element.
 
-5. Once done modifying elements for your variants, click **Save experiment**.
+6. Once done modifying elements for your variants, click **Save experiment**.
 
 ![Implementing web experiments with the toolbar](https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_01_16_at_13_56_01_2x_aff05d4224.png)
 
@@ -62,12 +64,12 @@ The toolbar also enables further editing of your experiment. For example, you ca
 
 - Add multiple element changes to a variant by clicking **+ Add element**.
 - Remove an element from a variant by clicking the trash bin icon.
-- Add variants by clicking **+ Add variant**.
+- Add more versions of your experiment by clicking **+ Add variant**.
 - Change all elements, headers, buttons, and/or images by clicking the **Change element** dropdown.
 
-## How to preview a variant
+## How to see how your experiment will look
 
-To preview your variants, go back to your experiment details page in PostHog and click the **Variants** tab. Here, you'll see your variants along with a button to preview each of them (and the ability to add a screenshot for them).
+To preview the different versions of your experiment, go back to your experiment details page in PostHog and click the **Variants** tab. Here, you'll see your variants along with a button to preview each of them (and the ability to add a screenshot for them).
 
 <ProductScreenshot
   imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_01_16_at_14_06_28_2x_1ca848f7ca.png"
