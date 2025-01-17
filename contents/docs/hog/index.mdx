@@ -18,11 +18,14 @@ We’ve written Hog destination templates for dozens of services. But you can al
 
 ## Hog by example: webhook
 
-When creating a destination, you’ll start with an input interface sheet. This allows for easy changes and maintenance to your destination. Each input’s property name is noted beside its title.
+When creating a destination, you’ll start with an input interface sheet. This enables easy changes and maintenance to your destination. Each input’s property name is noted beside its title.
 
-You can include additional inputs by clicking **Add input variable**.
+You can include additional inputs while editing the destination:
 
-Under the hood, the default webhook template looks like this:
+- Click **Edit source code**
+- Click **Add input variable**
+
+Under the hood, the default [webhook template](/docs/cdp/destinations/webhook) works like this. It's a great starting point for your own destinations.
 
 ```hog
 
@@ -67,7 +70,7 @@ let payload := {
 }
 ```
 
-You could even add a new input field to your destination, which is convenient if you think you’ll want to change the value again in the future.
+You could even add a new input field to your destination, which is convenient if you think you’ll want to change the value again in the future, or reuse this destination for multiple targets.
 
 ![Input UI sheet screenshot](https://res.cloudinary.com/dmukukwp6/image/upload/custom_destination_input_f74eb7947d.png)
 
