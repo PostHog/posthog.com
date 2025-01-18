@@ -30,7 +30,7 @@ Let's walk through the default [webhook template](/docs/cdp/destinations/webhook
 ```hog
 
 let payload := {
-// This is the object we'll use to structure our request
+// This is the object we'll use to specify our HTTP request
   'headers': inputs.headers,
   'body': inputs.body,
   'method': inputs.method
@@ -47,6 +47,7 @@ let res := fetch(inputs.url, payload);
 
 // When the request returns, execution will continue
 // The response will be stored to the above constant, `res`
+// You can write code that handles the response from here
 
 if (inputs.debug) {
 // If we're in debug mode, print the status code and body for the response
