@@ -602,7 +602,8 @@ export const handbookSidebar = [
                 url: '/handbook/company/merch-store',
             },
         ],
-    },{
+    },
+    {
         name: 'PostHog.com',
         url: '',
         children: [
@@ -2559,6 +2560,12 @@ export const docsMenu = {
                     url: '/docs/feature-flags/bootstrapping',
                     icon: 'IconLaptop',
                     color: 'salmon',
+                },
+                {
+                    name: 'Remote config',
+                    url: '/docs/feature-flags/remote-config',
+                    icon: 'IconGear',
+                    color: 'green',
                 },
                 {
                     name: 'Early access feature management',
