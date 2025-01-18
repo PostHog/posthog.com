@@ -1,5 +1,5 @@
 import CloudinaryImage from 'components/CloudinaryImage'
-import React from 'react'
+import React, { useState } from 'react'
 import Link from 'components/Link'
 import { StaticImage } from 'gatsby-plugin-image'
 import { IconBrackets, IconGraph, IconFlask, IconToggle, IconPeople, IconRewindPlay } from '@posthog/icons'
@@ -34,6 +34,8 @@ import { FAQ } from 'components/Products/FAQ'
 import { SEO } from 'components/seo'
 import { useLayoutData } from 'components/Layout/hooks'
 import Plans from 'components/Pricing/Plans'
+import SideModal from '../../Modal/SideModal'
+import Profile from '../../Team/Profile'
 
 const product = {
     slug: 'experiments',
@@ -301,6 +303,7 @@ export const ProductAbTesting = () => {
         }
     `)
     const { fullWidthContent } = useLayoutData()
+    const [activeProfile, setActiveProfile] = useState(false)
 
     return (
         <>
@@ -309,6 +312,9 @@ export const ProductAbTesting = () => {
                 description="Run statistically-significant multivariate tests and robust targeting & exclusion rules."
                 image={`/images/og/ab-testing.jpg`}
             />
+            <SideModal open={!!activeProfile} setOpen={setActiveProfile}>
+                {activeProfile && <Profile profile={{ ...activeProfile }} />}
+            </SideModal>
             <div className={`${fullWidthContent ? 'max-w-full px-8' : 'max-w-7xl mx-auto'} px-5 py-10 md:pt-20 pb-0`}>
                 <Hero
                     color="purple"
@@ -550,7 +556,7 @@ export const ProductAbTesting = () => {
                         PostHog works in small teams. The <Link to={teamSlug}>{team}</Link> team is responsible for
                         building {product.lowercase}.
                     </p>
-                    <TeamMembers teamName={team} />
+                    <TeamMembers teamName={team} setActiveProfile={setActiveProfile} />
                 </section>
 
                 <section id="roadmap" className="mb-20 px-5">
