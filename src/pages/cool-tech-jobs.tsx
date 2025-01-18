@@ -17,6 +17,10 @@ import { motion } from 'framer-motion'
 import { useLayoutData } from 'components/Layout/hooks'
 import SEO from 'components/seo'
 import SideModal from 'components/Modal/SideModal'
+import { useFormik } from 'formik'
+import * as Yup from 'yup'
+import { CallToAction } from 'components/CallToAction'
+import usePostHog from 'hooks/usePostHog'
 dayjs.extend(relativeTime)
 
 const toggleFilters = [
@@ -375,12 +379,112 @@ const Filters = ({
     )
 }
 
+const IssueForm = () => {
+    const [submitted, setSubmitted] = useState(false)
+    const { companies } = useCompanies({ companyFilters: [], jobFilters: [], search: '' })
+    const posthog = usePostHog()
+
+    const { handleSubmit, values, touched, setFieldValue, errors, setFieldTouched, getFieldProps, isSubmitting } =
+        useFormik({
+            initialValues: {
+                company: '',
+                issueType: '',
+                description: '',
+            },
+            validationSchema: Yup.object({
+                company: Yup.string().required('Please select a company'),
+                issueType: Yup.string().required('Please select an issue type'),
+                description: Yup.string().required('Please provide details about the issue'),
+            }),
+            onSubmit: async (values, { setSubmitting }) => {
+                try {
+                    posthog?.capture('job_board_issue_reported', values)
+                    setSubmitted(true)
+                } catch (error) {
+                    console.error('Error submitting issue:', error)
+                } finally {
+                    setSubmitting(false)
+                }
+            },
+        })
+
+    const issueTypeOptions = [
+        { label: 'Incorrect perk information' },
+        { label: 'Broken link' },
+        { label: 'Outdated job posting' },
+        { label: 'Other' },
+    ]
+
+    if (submitted) {
+        return (
+            <div className="border border-border dark:border-dark rounded-md p-2 bg-accent dark:bg-accent-dark">
+                <h4 className="text-base m-0">Thanks for your report!</h4>
+                <p className="text-sm opacity-70 m-0">We'll look into this issue as soon as possible.</p>
+            </div>
+        )
+    }
+
+    return (
+        <form onSubmit={handleSubmit} className="space-y-4 m-0">
+            <div>
+                <Select
+                    className={`!p-0`}
+                    options={companies.map((company) => {
+                        const { name } = company.attributes
+                        return { label: name, value: name }
+                    })}
+                    value={values.company}
+                    onChange={(value) => setFieldValue('company', value)}
+                    placeholder="Select a company"
+                    onBlur={() => setFieldTouched('company')}
+                />
+                {touched.company && errors.company && <p className="text-red text-sm m-0 mt-1">{errors.company}</p>}
+            </div>
+
+            <div>
+                <Select
+                    className={`!p-0 !rounded-md`}
+                    options={issueTypeOptions.map((option) => ({ label: option.label, value: option.label }))}
+                    value={values.issueType}
+                    onChange={(value) => setFieldValue('issueType', value)}
+                    placeholder="Select an issue type"
+                    onBlur={() => setFieldTouched('issueType')}
+                />
+                {touched.issueType && errors.issueType && (
+                    <p className="text-red text-sm m-0 mt-1">{errors.issueType}</p>
+                )}
+            </div>
+
+            <div>
+                <label className="block text-base font-semibold mb-1">Description</label>
+                <textarea
+                    id="description"
+                    rows={4}
+                    className={`w-full p-2 border rounded-md bg-transparent ${
+                        touched.description && errors.description ? 'border-red' : 'border-border dark:border-dark'
+                    }`}
+                    placeholder="Please provide details about the issue"
+                    {...getFieldProps('description')}
+                />
+                {touched.description && errors.description && (
+                    <p className="text-red text-sm m-0 mt-1">{errors.description}</p>
+                )}
+            </div>
+
+            <CallToAction disabled={isSubmitting} width="full">
+                {isSubmitting ? 'Submitting...' : 'Submit report'}
+            </CallToAction>
+        </form>
+    )
+}
+
 export default function JobsPage() {
     const [sortBy, setSortBy] = useState<'company' | 'job'>('company')
     const [companyFilters, setCompanyFilters] = useState<FiltersType>([])
     const [jobFilters, setJobFilters] = useState<FiltersType>([])
     const [filtersOpen, setFiltersOpen] = useState(false)
     const [applyModalOpen, setApplyModalOpen] = useState(false)
+    const [issueModalOpen, setIssueModalOpen] = useState(false)
 
     return (
         <Layout>
@@ -410,6 +514,16 @@ export default function JobsPage() {
                             >
                                 Apply to get your jobs listed here.
                             </button>
+                        </p>
+                        <p className="text-[15px] mt-2 mb-0">
+                            Something off?{' '}
+                            <button
+                                className="text-red hover:text-red/75 dark:text-yellow dark:hover:text-yellow/75 font-semibold"
+                                onClick={() => setIssueModalOpen(true)}
+                            >
+                                Let us know
+                            </button>
+                            .
                         </p>
                     </div>
                     <div className="w-full flex-grow lg:mr-6 lg:pl-6 lg:pr-6 lg:border-x border-light dark:border-dark order-3 lg:order-2">
@@ -487,6 +601,9 @@ export default function JobsPage() {
                         with the info above to apply to be listed.
                     </p>
                 </div>
+            </SideModal>
+            <SideModal className="w-full" open={issueModalOpen} setOpen={setIssueModalOpen} title="Report an issue">
+                <IssueForm />
             </SideModal>
         </Layout>
     )
