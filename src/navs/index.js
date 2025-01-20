@@ -517,6 +517,10 @@ export const handbookSidebar = [
                 name: 'Tech talks',
                 url: '/handbook/engineering/tech-talks',
             },
+            {
+                name: 'API / primitives strategy',
+                url: '/handbook/engineering/building-blocks',
+            },
         ],
     },
     {
