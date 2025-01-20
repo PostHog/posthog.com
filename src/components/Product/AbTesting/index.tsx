@@ -326,7 +326,7 @@ export const ProductAbTesting = () => {
 
                 <div className="text-center">
                     <CloudinaryImage
-                        src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Product/AbTesting/images/screenshot-ab-testing.png"
+                        src="https://res.cloudinary.com/dmukukwp6/image/upload/Xnapper_2025_01_20_15_25_58_0867c02f69.png"
                         alt="Screenshot of managing an A/B test in PostHog"
                         className="w-full max-w-[1361px]"
                         placeholder="none"
