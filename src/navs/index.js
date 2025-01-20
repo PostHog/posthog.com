@@ -3021,6 +3021,10 @@ export const docsMenu = {
                             url: '/docs/cdp/destinations/sendgrid',
                         },
                         {
+                            name: 'Twilio',
+                            url: '/docs/cdp/destinations/twilio',
+                        },
+                        {
                             name: 'Zapier',
                             url: '/docs/cdp/destinations/zapier',
                         },
