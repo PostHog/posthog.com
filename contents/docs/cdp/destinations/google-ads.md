@@ -7,8 +7,6 @@ import Requirements from "../_snippets/requirements.mdx"
 import FeedbackQuestions from "../_snippets/feedback-questions.mdx"
 import PostHogMaintained from "../_snippets/posthog-maintained.mdx"
 
-> **IMPORTANT:** The Google Ads integration is currently unavailable pending changes to improve the experience, which are currently under active development.
-
 <Requirements />
 
 You'll also need access to the relevant Google Cloud, Google Ads and Google Ads Manager account.
