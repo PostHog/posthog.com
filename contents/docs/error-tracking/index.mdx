@@ -2,24 +2,24 @@
 title: Error tracking
 ---
 
-> ⚠️ Error tracking is currently released as a feature preview. You can [enable it from within your PostHog account](https://us.posthog.com/#panel=feature-previews).
+> ⚠️ Error tracking is currently released as a beta in feature preview. You can [enable it from within your PostHog account](https://us.posthog.com/#panel=feature-previews). If you have any feedback during the beta, please [share it with us](https://us.posthog.com/?panel=support%3Asupport%3A%3A%3Afalse#panel=support%3Asupport%3A%3A%3Afalse).
 
-Error tracking allows you to track, investigate, and resolve exceptions your customers face.
+Error tracking enables you to track, investigate, and resolve exceptions your customers face.
 
-Errors are captured as `$exception` events which means that you can create insights, filter recordings and trigger surveys based on them exactly the same way you can for any other type of event.
+Errors are captured as `$exception` events which means that you can create insights, filter recordings, trigger surveys, and more in the same way you can for any other type of event.
 
 ## Installation
 
 ### Python
 
-> A minimum SDK version of v3.7.0 is required
+> **Note:** A minimum SDK version of v3.7.0 is required, but we recommend keeping up to date with the latest version to ensure you have all of error tracking's features.
 
 Exception autocapture can be enabled during initialization of the PostHog client to automatically capture any exception thrown by your Python application.
 
 ```python
 from posthog import Posthog
 
-posthog = Posthog("API_KEY", enable_exception_autocapture=True, ...)
+posthog = Posthog("<ph_project_api_key>", enable_exception_autocapture=True, ...)
 ```
 
 If you're using Django 4.2+, you can enable the exception autocapture integration which will also automatically capture Django errors.
@@ -27,22 +27,22 @@ If you're using Django 4.2+, you can enable the exception autocapture integratio
 ```python
 from posthog.exception_capture import Integrations
 
-Posthog("API_KEY", enable_exception_autocapture=True, exception_autocapture_integrations = [Integrations.Django])
+Posthog("<ph_project_api_key>", enable_exception_autocapture=True, exception_autocapture_integrations = [Integrations.Django])
 ```
 
-For exceptions handled by your application that you would still like sent to PostHog it is possible to manually call the capture method.
+For exceptions handled by your application that you would still like sent to PostHog, you can manually call the capture method:
 
 ```python
-posthog.capture_exception(e, 'DISTINCT_ID', properties=additional_properties)
+posthog.capture_exception(e, 'user_distinct_id', properties=additional_properties)
 ```
 
 ### Javascript
 
-> A minimum SDK version of v1.160.0 is required
+> **Note:** A minimum SDK version of v1.160.0 is required, but we recommend keeping up to date with the latest version to ensure you have all of error tracking's features.
 
-Exception autocapture within the JS SDK is remotely controlled via [the PostHog app](https://us.posthog.com/settings/project-autocapture#exception-autocapture).
+Exception autocapture within the JavaScript Web SDK is remotely controlled via [the PostHog app](https://us.posthog.com/settings/project-autocapture#exception-autocapture).
 
-It is also possible to manually capture exceptions using the JS SDK.
+It is also possible to manually capture exceptions:
 
 ```js
 posthog.captureException(error, additionalProperties)
@@ -52,13 +52,23 @@ posthog.captureException(error, additionalProperties)
 
 In addition to using events in insights, replays, and surveys as mentioned above customers can also visit the [error tracking page](https://us.posthog.com/error_tracking).
 
-Exceptions are grouped by type. Aggregated counts and sparklines provide an indication of the severity of each group. Search makes it easy to find exceptions containing specific text, and filters allow you to see which exceptions affect certain users.
+Exceptions are grouped by type, each with aggregated counts and sparklines providing an indication of the severity of each group. You can also search for exceptions containing specific text and filter to see which exceptions affect certain users.
 
-![Error tracking groups](https://res.cloudinary.com/dmukukwp6/image/upload/Screenshot_2024_10_01_at_18_08_33_46c312e330.png)
+<ProductScreenshot
+    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_01_20_at_10_15_21_2x_f4848a78c6.png"
+    imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_01_20_at_10_15_46_2x_f1f5e7f31b.png"
+    alt="Error tracking overview"
+    classes="rounded"
+/>
 
-Clicking through to an individual group shows you all the associated exceptions, including the associated stack trace, active feature flags when the exception was captured and a link to the relevant session replay. 
+Clicking through to an individual group shows you all the associated exceptions, including the associated stack trace, active feature flags when the exception was captured, and a link to the relevant session replay.
 
-![Exception events](https://res.cloudinary.com/dmukukwp6/image/upload/Screenshot_2024_10_01_at_18_08_56_8efb2e9aba.png)
+<ProductScreenshot
+    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_01_20_at_10_19_44_2x_0d99749100.png"
+    imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_01_20_at_10_19_29_2x_4c508f3506.png"
+    alt="Error tracking details"
+    classes="rounded"
+/>
 
 ## Custom issue grouping
 
@@ -70,10 +80,10 @@ When using the `captureException` method you can provide `$exception_fingerprint
 posthog.captureException(error, { $exception_fingerprint: "MyCustomGroup" })
 ```
 
-Should an exception be autocaptured you will need to modify the properties before the event is sent. The PostHog config offers a [`before_send`](https://posthog.com/docs/libraries/js#amending-events-before-they-are-captured) hook that fires for each event. You can alter the event as part of this callback to add the property:
+Should an exception be autocaptured, you will need to modify the properties before the event is sent. The PostHog config offers a [`before_send`](/docs/libraries/js#amending-events-before-they-are-captured) hook that fires for each event. You can alter the event as part of this callback to add the property:
 
 ```javascript
-posthog.init("<API_KEY>", {
+posthog.init("<ph_project_api_key>", {
   before_send: (event) => {
     if (event.event === "$exception") {
       const exceptionList = event.properties["$exception_list"] || []
@@ -94,8 +104,6 @@ There is a long list of features on our roadmap but we're primarily working towa
 
 * Actioning exceptions (merging, assigning, resolving, etc)
 * Alerting
-
-If you have any feedback during the alpha please [share it with us](https://us.posthog.com/?panel=support%3Asupport%3A%3A%3Afalse#panel=support%3Asupport%3A%3A%3Afalse).
 
 ## FAQs
 
@@ -118,7 +126,7 @@ To `identify` users in web workers you will need to pass the distinct ID. This c
 
 ### Can exceptions be sampled / ignored
 
-Returning `null` for a given event in the [`before_send`](https://posthog.com/docs/libraries/js#amending-events-before-they-are-captured) hook will cause it not to be captured. You may want to:
+Returning `null` for a given event in the [`before_send`](/docs/libraries/js#amending-events-before-they-are-captured) hook will cause it not to be captured. You may want to:
 - Drop certain types of exceptions
 - Randomly sample a subset of all exceptions 
 - Sample based on the events properties (e.g. URL or user)
