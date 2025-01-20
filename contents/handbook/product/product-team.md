@@ -44,20 +44,17 @@ The [quarterly per-product planning](/handbook/company/goal-setting) typically h
 
 As the PM team, we are also pursuing a couple of side projects each quarter with the goal of leveling up how we do Product at PostHog.
 
-In Q4 2024, those are:
+In Q1 2025, those are:
 
-**Goal 1: Improve how we coach product engineers "how to do product"** -> Anna & Annika
-* Make sure the handbook is up to date for how to collect user feedback (surveys, interviews)
-* Make sure the handbook is up to date for how we do product at PostHog
-* Good structure for the “how to do product as an engineer” onboarding sessions, iterated based on feedback
-* More engineers are confident to do user interviews on their own
+**Goal 1: Bring growth and product thinking into teams** -> Raquel
 
-**Goal 2: More teams have a PM** -> Annika
-* Polish the hiring process (interview questions, superday)
+**Goal 2: Hire a new PM** -> Annika, with support from Anna
+* Update the superday task to make it more data analysis heavy
 * Hire a third PM
 * New PM is set up successfully with their first team
-* Anna is set up successfully with one more team
 
-**Goal 3: Improve product tooling** -> Anna
-* Come up with a better way to organise user interview notes
-* Move all remaining dashboards to PostHog from Metabase (only do this if data warehouse provides 90% of the missing features we need)
+**Goal 3: Identify benchmarks for metrics we should care about to make them more actionable** -> Anna
+* Define what per-product metrics we care about (e.g. activation, churn)
+* Based on industry benchmarks, define what "good" looks like
+* Define a standard how we track these metrics across products (e.g. for churn, do we want to use a rolling 3-month average?)
+* Update [Product Metrics](https://posthog.com/handbook/product/metrics) with agreed-upon definitions
