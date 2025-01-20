@@ -131,7 +131,18 @@ You can also configure surveys to repeat at specific intervals, which is useful 
 />
 
 For example, you can configure settings like:
-- **Repeat this survey `3` times, once every `90` days**: The survey will be shown to a user up to 3 times total, with a 90-day gap between each showing.
+- **Repeat this survey `3` times, once every `30` days**: The survey will be shown to a user up to 3 times total, with a 30-day gap between each showing.
+
+| Date | Event | Explanation |
+|------|-------|-------------|
+| Jan 1 | Survey shown and completed | First showing of the survey. User completes it, starting the 30-day timer |
+| Jan 2-30 | No survey shown | Within 30-day waiting period after first completion |
+| Jan 31 | Survey becomes eligible | 30 days have passed since first completion |
+| Feb 15 | Survey shown and completed | User visits site and completes survey for the second time |
+| Feb 16-Mar 16 | No survey shown | Within 30-day waiting period after second completion |
+| Mar 17 | Survey becomes eligible | 30 days have passed since second completion |
+| Apr 1 | Survey shown and completed | User completes survey for the third and final time |
+| After Apr 1 | Survey never shown again for this user | Maximum number of repetitions (3) reached |
 
 A survey is considered "shown" when a user either completes or dismisses it. The repeat interval timer starts from that moment. For example, if you set a survey to repeat every 90 days and a user completes it on January 1st, they won't see it again until April 1st, regardless of how many times they visit your site in between.
 
