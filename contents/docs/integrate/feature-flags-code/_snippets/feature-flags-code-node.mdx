@@ -10,7 +10,7 @@ if (isFeatureFlagEnabled) {
     // Your code if the flag is enabled
 
     // Optional: fetch the payload
-    const matchedFlagPayload = await client.getFeatureFlagPayload('flag-key', 'distinct_id_of_your_user')
+    const matchedFlagPayload = await client.getFeatureFlagPayload('flag-key', 'distinct_id_of_your_user', isFeatureFlagEnabled)
 }
 ```
 
@@ -23,7 +23,7 @@ if (enabledVariant === 'variant-key') {  // replace 'variant-key' with the key o
     // Do something differently for this user
 
     // Optional: fetch the payload
-    const matchedFlagPayload = await client.getFeatureFlagPayload('flag-key', 'distinct_id_of_your_user')
+    const matchedFlagPayload = await client.getFeatureFlagPayload('flag-key', 'distinct_id_of_your_user', enabledVariant)
 }
 ```
 

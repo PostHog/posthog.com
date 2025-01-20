@@ -1,0 +1,42 @@
+With Vue 3, developers can use `provide()` and `inject()` to pipe global values into any component without prop drilling. And if you don't know what prop drilling is, good for you.
+
+While this method is more declarative, as you need to inject PostHog into every component, it avoids “polluting” globals (like the plugins can do). Some engineers prefer this approach, while others include PostHog in globals since it doesn't need to be reactive and will be called throughout your application. 
+
+#### Step 1: Initialize Vue
+
+Prior to mounting the app, you must:
+
+1. Import PostHog
+2. Initialize it
+3. Provide it to your app.
+   
+This **must** be done *before* you mount your app. If you provide PostHog *after* mounting it, PostHog will not be predictably available. 
+
+```js
+//app.js
+
+import posthog from "posthog-js";
+
+const app = createApp(App);
+posthog.init("<ph_project_api_key>", {
+  api_host: "<ph_client_api_host>",
+});
+app.provide("posthog", posthog);
+```
+
+#### Step 2: Inject into any Vue file
+
+```js
+//component.vue
+export default {
+  data() {
+    return {
+      greeting: "How are you!",
+    };
+  },
+  inject: ["posthog"], //grab the injection from app-wide provider
+  created() {
+    console.log("Created", this.posthog); //posthog accessible!
+  },
+};
+```

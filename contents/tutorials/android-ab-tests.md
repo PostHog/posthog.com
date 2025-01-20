@@ -209,12 +209,17 @@ Go to the [Experiments tab](https://app.posthog.com/experiments) in PostHog and 
 
 1. Name it "Android background color experiment".
 2. Set "Feature flag key" to `android-background-color-experiment`.
-3. Under the experiment goal, select the `feature_button_clicked` we created in the previous step.
-4. Use the default values for all other fields.
+3. Use the default values for all other fields.
+4. Click **Save as draft**
 
-Click "Save as draft" and then click "Launch".
+<ProductScreenshot
+    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_01_16_at_09_02_51_2x_3205d33b7d.png"
+    imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_01_16_at_09_02_31_2x_ed58fd9e6c.png"
+    alt="Creating an experiment in PostHog"
+    classes="rounded"
+/>
 
-![Experiment setup in PostHog](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/android-ab-tests/experiment-setup.png)
+Once created, set the primary metric to a trend of `feature_button_clicked` and then click **Launch**.
 
 ## Implement the A/B test code
 
@@ -261,3 +266,5 @@ Lastly, you can [view your test results](/docs/experiments/testing-and-launching
 - [A software engineer's guide to A/B testing](/product-engineers/ab-testing-guide-for-engineers)
 - [How to set up feature flags in Android](/tutorials/android-feature-flags)
 - [How to set up analytics in Android](/tutorials/android-analytics)
+
+<NewsletterForm />

@@ -165,6 +165,8 @@ If you build it, [document it](/docs). You're in the best position to do this, a
 
 It's not the responsibility of either [Website & Vibes](/teams/website-vibes) or [Marketing](/teams/marketing) teams to document features.
 
+See our [docs style guide](/handbook/content-and-docs/posthog-style-guide) for tips on how to write great docs.
+
 ## Releasing
 
 ### Best practices for full releases

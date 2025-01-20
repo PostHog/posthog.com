@@ -1,0 +1,137 @@
+---
+title: Alerts
+sidebar: Docs
+showTitle: true
+availability:
+  free: partial
+  selfServe: full
+  enterprise: full
+---
+
+Alerts enable you to monitor your [insights](/product-analytics) and get notified when the value of the insight breaches a threshold that you've set (for example, the number of unique visitors to your site increased by 5% week over week).
+Currently, alerts are supported on all [trends](/docs/product-analytics/trends), with support for [funnels](/docs/product-analytics/funnels) coming soon!
+
+## How to create an alert
+
+<ProductVideo
+    videoLight="https://res.cloudinary.com/dmukukwp6/video/upload/alerts_light_3687dafb8a.mp4"
+    videoDark="https://res.cloudinary.com/dmukukwp6/video/upload/alerts_video_3685c5b1e1.mp4"
+    alt="How to create an alert video"
+    classes="rounded"
+/>
+
+1. Alerts are based off of [insights](/docs/product-analytics/insights). You can pick any existing trend insight or create a new one.
+2. Click the **Alerts** button on the top right of the insight page. This shows you all the alerts for this insight.
+<ProductScreenshot
+    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/alerts_button_4ecd022cd6.png" 
+    imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/alert_button_dark_c2f642fde3.png"
+    alt="alerts button"
+    classes="rounded"
+/>
+
+3. Click the **New alert** button.
+<ProductScreenshot
+    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/new_alert_button_30d3dde83c.png" 
+    imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/new_alert_dark_19591ee179.png"
+    alt="new alert button"
+    classes="rounded"
+/>
+
+4. Set a name for the alert.
+
+5. Select a 'series' you want to alert on. These are the different events/values you're plotting in the insight.
+    For example, an insight might have multiple series like `A - $pageview` (total count of page views for a URL) and `B - signed_up` (count of users who signed up on the page).
+    You can select either `A` or `B`, which will determine if the alert gets checked against the value for `A` (total page views) or `B` (signups).
+<ProductScreenshot
+    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/series_picker_aa01668862.png" 
+    imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/new_alert_options_dark_7adf700d24.png"
+    alt="series picker" 
+    classes="rounded"
+/>
+
+
+6. Select the alert type:
+    - **has value** - checks the series against a specific value.
+    - **increases by**/**decreases by** - checks if the series has changed by a certain amount.
+
+    <ProductScreenshot
+        imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/alert_type_picker_18909b0b33.png"
+        imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/new_alert_type_dark_b3620b34da.png"
+        alt="alert type picker"
+        classes="rounded"
+    />
+
+7. Set the threshold. This is the value you want to compare the series value against. For example, you can set a value of 5000 in the "more than" field to check when pageviews have exceeded 5k.
+
+8. (Optional) For relative alerts (**increases by**/**decreases by**), you can set a percentage threshold. It compares the percentage change in the series value to the thresholds you've set.
+<ProductScreenshot
+    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/percentage_threshold_1940ead9e6.png" 
+    imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/alert_relative_threshold_dark_02aa4741c3.png"
+    alt="percentage threshold" 
+    classes="rounded"
+/>
+
+9. Select how often you want the alert to be checked (e.g. every hour, every day, every week, every month)
+
+10. Pick who should be notified when the alert is triggered. The alert will send an email to everyone in this list when the alert is triggered.
+<ProductScreenshot
+    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/filled_alert_627158e6bb.png" 
+    imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/alert_people_dark_0ccd7611bd.png"
+    alt="filled alert" 
+    classes="rounded"
+/>
+
+11. Click **Create alert**, and you're done! 
+<ProductScreenshot
+    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/insight_alerts_5k_daef47ade1.png" 
+    imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/created_alert_dark_1710da74dc.png"
+    alt="insight alerts" 
+    classes="rounded"
+/>
+
+You can now view all the alerts set on the insight.
+To view all the alerts set, click [Product analytics](https://app.posthog.com/insights) in the sidebar and then click the **Alerts** tab.
+
+<ProductScreenshot
+    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/all_alerts_d92386e45a.png" 
+    imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/all_alerts_dark_80be487707.png"
+    alt="all alerts" 
+    classes="rounded"
+/>
+
+
+## Relative alerts
+Relative alerts check for change in the value of an insight.
+For example, if a value increases by 5% in a week.
+To create a relative alert, you just need to change the **has value** option to **increases by** or **decreases by**.
+This will then also enable you to set a percentage threshold.
+
+<ProductScreenshot
+    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/relative_alert_picker_fa04215397.png" 
+    imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/alert_relative_increase_dark_0855f0afee.png"
+    alt="relative alert picker" 
+    classes="rounded"
+/>
+
+
+### Thresholds
+We support both **absolute value** thresholds (insight value more than or less than a certain number) or **percentage** thresholds (insight value changed by a certain percentage).
+Percentage thresholds are only available for relative alerts (as you need to compare two values to figure out percentage change).
+
+
+## Notification
+Currently alerts only support email notifications. We will add more notification options like webhooks and Slack soon.
+
+
+## Alerts on breakdowns
+When you set an alert on a trend with a breakdown, the alert will be triggered when any of the breakdown values breaches the thresholds set.
+
+<ProductScreenshot
+    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/breakdown_alert_7bd87114cb.png" 
+    imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/alert_with_breakdown_dark_475c3803c3.png"
+    alt="alert on breakdown" 
+    classes="rounded"
+/>
+
+## Further reading
+For more ideas on how to get started with Alerts, check out our [alerts examples](/blog/alerts-examples).

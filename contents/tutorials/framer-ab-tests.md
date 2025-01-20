@@ -69,12 +69,17 @@ Go to the [Experiments tab](https://app.posthog.com/experiments) in PostHog and 
 
 1. Name it "Home button experiment".
 2. Set "Feature flag key" to `home-button-test`.
-3. Under the experiment goal, select the `clicked_homepage_button` we created in the previous step.
-4. Use the default values for all other fields.
+3. Use the default values for all other fields.
+4. Click **Save as draft**.
 
-Click "Save as draft" and then click "Launch".
+<ProductScreenshot
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_01_16_at_10_32_58_2x_3cb17477c7.png" 
+  imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_01_16_at_10_33_11_2x_a6b80d0685.png" 
+  alt="Experiment setup in PostHog" 
+  classes="rounded"
+/>
 
-![View captured events in PostHog](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/framer-ab-tests/experiment-setup.png)
+Once created, set the primary metric to a trend of `clicked_homepage_button` and then click **Launch**.
 
 ## Implement the A/B test in Framer
 
@@ -132,3 +137,5 @@ If you want to view both variants of your experiment to make sure they are worki
 - [How to set up Framer analytics, session replay, and more](/tutorials/framer-analytics)
 - [How to create surveys in Framer](/tutorials/framer-surveys)
 - [A non-technical guide to understanding data in PostHog](/tutorials/non-technical-guide-to-data)
+
+<NewsletterForm />

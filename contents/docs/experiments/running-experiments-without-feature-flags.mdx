@@ -1,5 +1,5 @@
 ---
-title: "Advanced: How to run experiments without feature flags"
+title: "How to run experiments without feature flags"
 ---
 
 You may want to run experiments without using PostHog's feature flags. There are 2 reasons why you may want to do this:
@@ -14,6 +14,8 @@ This doc walks you through how to set up an experiment without using PostHog's f
 Create a new experiment in the [experiments tab](https://app.posthog.com/experiments) and follow the same steps as you would when [creating a regular one](/docs/experiments/manual#how-to-create-an-experiment-in-posthog).
 
 > **Note:** Although you won't be using feature flags directly in your experiment, you still need to name your feature flag key for submitting events so PostHog can calculate your experiment results.
+>
+> Additionally, it's not possible to rename the 'control' variant. You can name the other variants whatever you'd like, though.
 
 ## Step 2 (optional): Call the `decide` endpoint
 
@@ -125,7 +127,7 @@ posthog.capture(
 
 ## Step 4 (optional): Send the `$feature_flag_called` event
 
-> **This step is only required if your [experiment goal metric](/docs/experiments/manual#experiment-goal) is set to "trend"**. This is not required for funnel goals:
+> **This step is only required if your [experiment metric](/docs/experiments/metrics) is a "trend"**. This is not required for funnel goals.
 
 You need to capture the `$feature_flag_called` event. This ensures that we record which experiment variant each user was assigned to. This is also referred to as "exposure logging", and without it you would not be able to analyze your results. 
 

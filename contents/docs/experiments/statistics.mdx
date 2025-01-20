@@ -1,0 +1,53 @@
+---
+title: Experiment statistics overview
+---
+
+A working understanding of statistical methodology is helpful to feel confident about interpreting experiment results. For those without prior experience, this overview explains everything you need to know in layperson's terms. For those with some statistics experiments, this overview documents our methodology and assumptions.
+
+Experiments use [Bayesian statistics](https://en.wikipedia.org/wiki/Bayesian_statistics) to determine whether a given **variant** performs better than the **control**. It quantifies **win probabilities** and **credible intervals**, helps determine whether the experiment shows a **statistically significant** effect, and enables you to:
+
+- Check results at any time without statistical penalties.
+- Get direct probability statements about which variant is winning.
+- Make confident decisions earlier with accumulating evidence.
+
+This contrasts with [Frequentist statistics](https://en.wikipedia.org/wiki/Frequentist_inference), which requires you to predefine sample sizes and prevents you from updating probabilities as new data arrives.
+
+## Example Bayesian analysis
+
+Say you started an experiment a few hours ago and see these results:
+
+- 1 in 10 people in the control group complete the funnel = 10% success rate.
+- 1 in 9 people in the test variant group complete the funnel = 11% success rate.
+- The control variant has a 46.7% probability of being better and the test variant has a 53.3% probability of being better.
+- The control variant shows a credible interval of [2.3%, 41.3%] and the test variant shows a credible interval of [2.5%, 44.5%].
+
+The first two values are pure math: dividing the number of successes by the total number of users gives us the raw success rates. It's not enough to just compare these conversion rates, however.
+
+The last two values are derived using Bayesian statistics and describe our confidence in the results. The **win probability** tells you how likely it is that a given variant has the highest conversion rate compared to all other variants in the experiment. The **credible interval** tells you the range where the true conversion rate lies with 95% probability.
+
+Importantly, even though the test variant is winning, it doesn't clear our threshold of 90% or greater win probability to to be a statistically significant conclusion. This uncertainty is also demonstrated with the amount of overlap in the credible intervals.
+
+As such, you decide to let the experiment run a bit longer and see these results:
+
+- 100 in 1000 people in the control group complete the funnel = 10% success rate.
+- 100 in 900 people in the test variant group complete the funnel = 11% success rate.
+- The control variant has a 21.5% probability of being better and the test variant has a 78.5% probability of being better.
+- The control variant shows a credible interval of [8.3%, 12%] and the test variant shows a credible interval of [9.2%, 13.3%].
+
+Et voilà! The additional data increased the win probability and narrowed the credible intervals. With 1,900 total users instead of just 19, random chance becomes a less likely explanation for the difference in conversion rates. Even though both variants maintained the same conversion rates (10% vs 11%), the larger sample size gives us more confidence in the experiment results. 
+
+At this point, you could either declare the test variant as the winner (78.5% probability), or continue collecting data to reach the 90% statistical significance threshold. Bayesian statistics let you check your results whenever you'd like without worrying about increasing the chance of false positives from checking too frequently.
+
+## Supported metric types
+
+Experiments support a few different types of metrics, and each metric type uses a model appropriate to the shape of its data.
+
+For example, funnel conversions are always between 0% and 100%, pageview counts can be any positive number (0, 50, 280), and property values can vary widely and tend to be right-skewed.
+
+The following explain how Bayesian statistics is applied to each type of metric:
+
+- [Beta model for funnel metrics](/docs/experiments/funnels-statistics) to analyze conversion rates through multi-step funnels.
+- [Gamma-poisson model for trends metrics with count-based data](/docs/experiments/trends-count-statistics) like pageviews or interaction events.
+- [Lognormal model with a normal-inverse-gamma prior for trends metrics with property values](/docs/experiments/trends-property-value-statistics) like revenue.
+
+If your experiment was created prior to January 2025, it is [evaluated using the legacy methodology](/docs/experiments/legacy-methodology).

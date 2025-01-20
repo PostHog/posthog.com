@@ -5,7 +5,7 @@ author:
   - lior-neu-ner
 tags:
   - product analytics
-  - AI engineering
+  - LLM observability
 ---
 
 Evaluating LLM models is important for determining which is the best for your use case. In this tutorial, we explore three methods to assess models by comparing their LLM outputs. Namely:
@@ -357,3 +357,5 @@ Refresh your app and submit a few prompts (and try to get some toxic responses!)
 - [How to monitor generative AI calls to AWS Bedrock](/tutorials/monitor-aws-bedrock-calls)
 - [How to compare AWS Bedrock prompts](/tutorials/compare-aws-bedrock-prompts)
 - [Product metrics to track for LLM apps](/product-engineers/llm-product-metrics)
+
+<NewsletterForm />

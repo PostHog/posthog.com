@@ -235,3 +235,5 @@ That's it! When you restart your app and click the button, you should see the gr
 - [How to set up session replays in Android](/tutorials/android-session-replay)
 - [How to run A/B tests in Android](/tutorials/android-ab-tests)
 - [How to set up analytics in Android](/tutorials/android-analytics)
+
+<NewsletterForm />

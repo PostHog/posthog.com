@@ -62,6 +62,7 @@ import ReactFlow, {
     Panel,
 } from 'reactflow'
 import 'reactflow/dist/style.css'
+import Profile from '../../Team/Profile'
 
 const team = 'CDP'
 const teamSlug = '/teams/cdp'
@@ -469,6 +470,7 @@ function PipelinesPage({ location }) {
     const [selectedDestination, setSelectedDestination] = React.useState(null)
     const [modalOpen, setModalOpen] = React.useState(false)
     const { fullWidthContent } = useLayoutData()
+    const [activeProfile, setActiveProfile] = React.useState(false)
 
     const product = {
         slug: 'cdp',
@@ -484,6 +486,9 @@ function PipelinesPage({ location }) {
                 description="Get all your data into PostHog with 60+ sources & destinations"
                 image={`images/og/cdp.jpg`}
             />
+            <SideModal open={!!activeProfile} setOpen={setActiveProfile}>
+                {activeProfile && <Profile profile={{ ...activeProfile }} />}
+            </SideModal>
             <SideModal
                 title={
                     selectedDestination ? (
@@ -551,7 +556,7 @@ function PipelinesPage({ location }) {
                         duration={1000}
                         className="cursor-pointer inline-flex items-center rounded-full bg-accent dark:bg-accent-dark px-3 py-1 text-sm border border-light dark:border-dark text-primary dark:text-primary-dark hover:text-primary dark:hover:text-primary-dark hover:border-red dark:hover:border-yellow"
                     >
-                        Explore our sources &amp; destinations library{' '}
+                        PostHog integrations library{' '}
                         <IconArrowRightDown className="inline-block w-4 text-red dark:text-yellow" />
                     </SmoothScrollLink>
                 </div>
@@ -714,7 +719,9 @@ function PipelinesPage({ location }) {
                 <p className="mt-0 text-opacity-70 text-center">
                     Get a more technical overview of how everything works <Link to="/docs">in our docs</Link>.
                 </p>
-                <DocLinks menu={docsMenu.children.find(({ name }) => name.toLowerCase() === 'data pipelines').children} />
+                <DocLinks
+                    menu={docsMenu.children.find(({ name }) => name.toLowerCase() === 'data pipelines').children}
+                />
             </section>
 
             <section
@@ -727,7 +734,7 @@ function PipelinesPage({ location }) {
                     PostHog works in small teams. <Link to={teamSlug}>Here's the team</Link> responsible for building
                     our customer data platform.
                 </p>
-                <TeamMembers teamName={team} />
+                <TeamMembers teamName={team} setActiveProfile={setActiveProfile} />
             </section>
 
             <section

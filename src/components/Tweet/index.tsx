@@ -47,9 +47,7 @@ export const Tweet = ({ children, className = '', alertMessage }) => {
                     </div>
                 </div>
             </div>
-            <div className="mt-3">
-                <p className="!leading-normal">{children}</p>
-            </div>
+            <div className="mt-3 [&_*]:!leading-normal">{children}</div>
             <div className="mt-3 flex justify-between items-center text-gray-500">
                 <div className="flex space-x-4">
                     <DontClickButton alertMessage={alertMessage}>

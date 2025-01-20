@@ -9,8 +9,12 @@ import { GitHub, LinkedIn, YouTube, SlackMonochrome, Twitter } from 'components/
 const linklist: IProps[] = [
     {
         title: 'Products',
-        url: '/products/product-analytics',
+        url: '/products',
         items: [
+            {
+                title: 'All products',
+                url: '/products',
+            },
             {
                 title: 'Product analytics',
                 url: '/product-analytics',
@@ -96,7 +100,7 @@ const linklist: IProps[] = [
             {
                 title: 'API',
                 url: '/docs/api',
-            }
+            },
         ],
     },
     {
@@ -132,10 +136,6 @@ const linklist: IProps[] = [
                 url: '/docs/data-warehouse',
             },
             {
-                title: 'Build an app',
-                url: '/docs/apps/build',
-            },
-            {
                 title: 'Migrate',
                 url: '/docs/migrate',
             },
@@ -154,8 +154,8 @@ const linklist: IProps[] = [
                 url: '/tutorials',
             },
             {
-                title: 'Apps',
-                url: '/apps',
+                title: 'Integrations',
+                url: '/cdp',
             },
             {
                 title: 'Dashboard templates',
@@ -255,7 +255,7 @@ const linklist: IProps[] = [
             },
             {
                 title: 'Changelog',
-                url: '/changelog',
+                url: '/changelog/2025',
             },
             {
                 title: 'People',

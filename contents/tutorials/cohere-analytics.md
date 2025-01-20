@@ -5,7 +5,7 @@ author:
   - lior-neu-ner
 tags:
   - product analytics
-  - AI engineering
+  - LLM observability
 ---
 
 import { ProductScreenshot } from 'components/ProductScreenshot'
@@ -59,7 +59,6 @@ export function PHProvider({ children }) {
   useEffect(() => {
     posthog.init('<ph_project_api_key>', {
       api_host: '<ph_client_api_host>',
-      person_profiles: 'identified_only'
     })
   }, []);
 
@@ -325,3 +324,5 @@ We've shown you the basics of creating insights from your product's Cohere usage
 - [How to set up LLM analytics for Anthropic](/tutorials/anthropic-analytics) 
 - [How to set up LLM analytics for ChatGPT](/tutorials/chatgpt-analytics) 
 - [How to monitor generative AI calls to AWS Bedrock](/tutorials/monitor-aws-bedrock-calls)
+
+<NewsletterForm />

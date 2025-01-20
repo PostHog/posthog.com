@@ -40,3 +40,5 @@ Click the save icon and publish the site. Now, when you go to your published sit
 - [What to do after installing PostHog in 5 steps](/tutorials/next-steps-after-installing)
 - [How to track performance marketing in PostHog](/tutorials/performance-marketing)
 - [How to do cookieless tracking with PostHog](/tutorials/cookieless-tracking)
+
+<NewsletterForm />

@@ -5,7 +5,7 @@ author:
   - lior-neu-ner
 tags:
   - product analytics
-  - AI engineering
+  - LLM observability
 ---
 
 Evaluating LLM prompts is important for determining whether they are improving your app. In this tutorial, we explore three methods to assess prompts by comparing their LLM outputs. Namely:
@@ -329,3 +329,5 @@ Refresh your app and submit a few prompts (and try to get some toxic responses!)
 - [How to monitor generative AI calls to AWS Bedrock](/tutorials/monitor-aws-bedrock-calls)
 - [How to set up LLM analytics for ChatGPT](/tutorials/chatgpt-analytics) 
 - [How to compare AWS Bedrock foundational models](/tutorials/compare-aws-bedrock-foundational-models)
+
+<NewsletterForm />

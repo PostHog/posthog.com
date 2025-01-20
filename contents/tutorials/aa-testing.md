@@ -18,11 +18,16 @@ Teams run A/A tests to ensure their A/B test service, functionality, and impleme
 
 ## Creating an experiment
 
-The first step in running an A/A test is creating an experiment. You do this going to the [experiments tab](https://app.posthog.com/experiments) and clicking the "New experiment" button. Set a name, key, and experiment goal. Make sure to clarify in the name or description that it is an A/A test.
+The first step in running an A/A test is creating an experiment. You do this going to the [experiments tab](https://app.posthog.com/experiments) and clicking the **New experiment** button. Set a name and flag key. Make sure to clarify in the name or description that it is an A/A test.
 
-![Create an experiment](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/aa-testing/experiment.png)
+<ProductScreenshot
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_01_16_at_09_49_59_2x_2eb8d27634.png"
+  imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_01_16_at_09_50_41_2x_90cb76684b.png"
+  alt="Create an experiment"
+  classes="rounded"
+/>
 
-If you use an absolute goal, like total pageviews, make sure to use an equal variant split (which is the default). If you use a relative goal like conversion, you can test non-equal variant splits like 25-75. To do this, edit the feature flag with the same key as your experiment, change the variant rollout, and press save.
+Once created, set a primary metric. If you use a trend, like total pageviews, make sure to use an equal variant split (which is the default). If you use a funnel, you can test non-equal variant splits like 25-75. To do this, edit the feature flag with the same key as your experiment, change the variant rollout, and press save.
 
 ## Implementing your A/A test
 
@@ -92,3 +97,5 @@ A successful A/A test provides evidence that your experimentation process and se
 - [Testing frontend feature flags with React, Jest, and PostHog](/tutorials/test-frontend-feature-flags)
 - [How to run experiments without feature flags](/docs/experiments/running-experiments-without-feature-flags)
 - [8 annoying A/B testing mistakes every engineer should know](/blog/ab-testing-mistakes)
+
+<NewsletterForm />

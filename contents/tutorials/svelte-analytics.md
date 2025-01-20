@@ -224,7 +224,6 @@ export const load = async () => {
       '<ph_project_api_key>',
       {
         api_host: '<ph_client_api_host>',
-        person_profiles: 'identified_only'
       }
     )
   }
@@ -271,7 +270,6 @@ export const load = async () => {
       '<ph_project_api_key>',
       {
         api_host:'<ph_client_api_host>',
-        person_profiles: 'identified_only',
         capture_pageview: false,
         capture_pageleave: false
       }
@@ -394,3 +392,5 @@ With this done, you built a Svelte app with all the basics of PostHog set up. To
 - [How to set up A/B tests in Svelte](/tutorials/svelte-ab-tests)
 - [How to set up surveys in Svelte](/tutorials/svelte-surveys)
 - [An introductory guide to identifying users in PostHog](/tutorials/identifying-users-guide)
+
+<NewsletterForm />

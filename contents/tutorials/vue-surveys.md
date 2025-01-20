@@ -619,3 +619,5 @@ You can also filter these results based on [person properties](/docs/product-ana
 - [How to set up analytics in Vue](/tutorials/vue-analytics)
 - [How to set up feature flags in Vue](/tutorials/vue-feature-flags)
 - [How to set up A/B tests in Vue](/tutorials/vue-ab-tests)
+
+<NewsletterForm />

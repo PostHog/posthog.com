@@ -87,3 +87,5 @@ To help you get set up faster with this, you can use our [real time dashboard te
 - [Using HogQL for advanced time and date filters](/tutorials/hogql-date-time-filters)
 - [The power of HogQL’s sum() aggregation](/tutorials/hogql-sum-aggregation)
 - [Using HogQL for advanced breakdowns](/tutorials/hogql-breakdowns)
+
+<NewsletterForm />

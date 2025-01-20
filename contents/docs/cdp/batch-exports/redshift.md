@@ -13,9 +13,9 @@ Batch exports can be used to export data to Redshift, Amazon's data warehouse pr
 ## Creating the batch export
 
 1. Subscribe to data pipelines add-on in [your billing settings](https://us.posthog.com/organization/billing) if you haven't already.
-2. Click [Data pipelines](https://app.posthog.com/pipeline) in the navigation and go to the exports tab in your PostHog instance.
-3. Click "Create export workflow".
-4. Select **Redshift** as the batch export type.
+2. Click [Data pipelines](https://app.posthog.com/pipeline) in the navigation and go to the **Destinations** tab in your PostHog instance.
+3. Search for **Redshift**.
+4. Click the **+ Create** button. 
 5. Fill in the necessary [configuration details](#redshift-configuration).
 6. Finalize the creation by clicking on "Create".
 7. Done! The batch export will schedule its first run on the start of the next period.
@@ -44,9 +44,13 @@ Configuring a batch export targeting Redshift requires the following Redshift-sp
 
 - **Events to include:** A list of events to include in the exported data. If added, only these events will be exported.
 
-## Event schema
+## Models
 
-This is the schema of all the fields that are exported to Redshift.
+> **Note:** New fields may be added to these models over time. To maintain consistency, these fields are not automatically added to the destination tables. If a particular field is missing in your Redshift tables, you can manually add the field, and it will be populated in future exports.
+
+### Events model
+
+This is the default model for Redshift batch exports. The schema of the model as created in Redshift is:
 
 | Field        | Type                          | Description                                                               |
 |--------------|-------------------------------|---------------------------------------------------------------------------|
@@ -61,3 +65,19 @@ This is the schema of all the fields that are exported to Redshift.
 | ip           | `VARCHAR(200)`                | The IP address that was sent with the event                               |
 | site_url     | `VARCHAR(200)`                | This field is present for backwards compatibility but has been deprecated |
 | timestamp    | `TIMESTAMP WITH TIME ZONE`    | The timestamp associated with an event                                    |
+
+### Persons model
+
+The schema of the model as created in Redshift is:
+
+| Field                      | Type               | Description                                                                                                                        |
+|----------------------------|--------------------|------------------------------------------------------------------------------------------------------------------------------------|
+| team_id                    | `INTEGER`        | The id of the project (team) the person belongs to                                                                                 |
+| distinct_id                | `VARCHAR(200)`           | A `distinct_id` associated with the person                                                                                         |
+| person_id                  | `VARCHAR(200)`           | The id of the person associated to this (`team_id`, `distinct_id`) pair                                                            |
+| properties                 | `SUPER` or `VARCHAR(65535)`   | A JSON object with all the latest properties of the person                                                                         |
+| person_distinct_id_version | `INTEGER`        | Internal version of the person to `distinct_id` mapping associated with a (`team_id`, `distinct_id`) pair, used by batch export in merge operation |
+| person_version             | `INTEGER`        | Internal version of the person properties associated with a (`team_id`, `distinct_id`) pair, used by batch export in merge operation               |
+| created_at                 | `TIMESTAMP WITH TIME ZONE`    | The timestamp when the person was created                                                                                          |
+
+The Redshift table will contain one row per `(team_id, distinct_id)` pair, and each pair is mapped to their corresponding `person_id` and latest `properties`.

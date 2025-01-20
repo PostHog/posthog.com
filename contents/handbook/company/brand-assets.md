@@ -131,6 +131,6 @@ Here's how:
 2. Select the hog you want. If needed, adjust the size using the 'Frame' menu in the top of the right-hand sidebar. 
 3. At the bottom of the right-hand sidebar, select the file type you need in the 'Export' menu, choose `@2x`, then select 'Export [filename]' to download the image.
 
-If you can't find a suitable hog, you can [request one from the design team](/handbook/design/art-requests). 
+If you can't find a suitable hog, you can [request one from the design team](/handbook/words-and-pictures/art-requests). 
 
 > Non-team members can find some of the most-used hogs to download on [our press page](/media).

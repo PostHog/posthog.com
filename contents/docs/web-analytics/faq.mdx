@@ -13,8 +13,7 @@ Have a question not covered here? [Let us know](http://app.posthog.com/home#supp
 
 Web analytics is a streamlined experience for tracking and monitoring your most important website metrics. Product analytics is a more powerful and flexible experience for tracking your product.
 
-For a more detailed description of the difference, check out [Web vs. product analytic
-s](/docs/web-analytics/web-vs-product-analytics).
+For a more detailed description of the difference, check out our page on [web vs product analytics](/docs/web-analytics/web-vs-product-analytics).
 
 ## How much does web analytics cost?
 
@@ -62,6 +61,8 @@ Some traffic to your site might be bots like search engines crawlers, archivers,
 
 Our client-side bot detection code is available on [GitHub](https://github.com/PostHog/posthog-js/blob/main/src/utils/blocked-uas.ts) (pull requests welcome!) and we automatically prevent detected bots from sending events.
 
+You can also block custom user agents by setting the `custom_blocked_useragents` [config](/docs/libraries/js#config) option if there's a specific user agent that you don't want to track - your custom user agent or maybe a bad actor you want to block.
+
 ## Why am I getting a lot of direct traffic?
 
 Direct traffic usually refers to when a user enters the address to your website directly, but it also includes any traffic where the referrer is unknown or impossible to calculate. We use the `document.referrer` property, which might be hidden for a few reasons:
@@ -79,7 +80,7 @@ This is called self-referral traffic, having a small amount (less than 5%) of se
 
 ### Cross-domain tracking
 
-If you track multiple domains, you might need to set up [cross-domain tracking](/tutorials/cross-domain-tracking) to ensure that sessions are correctly attributed.
+If you track multiple domains or websites, you might need to set up [cross-domain tracking](/tutorials/cross-domain-tracking) to ensure that sessions are correctly attributed.
 
 ### Session timeout
 

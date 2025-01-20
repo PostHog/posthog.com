@@ -8,6 +8,7 @@ import { PineappleText, TeamMembers } from 'components/Job/Sidebar'
 import slugify from 'slugify'
 import { IconPineapple } from '@posthog/icons'
 import { StickerPineapple, StickerPineappleNo, StickerPineappleYes } from 'components/Stickers/Index'
+import TeamPatch from 'components/TeamPatch'
 
 const query = graphql`
     query CareersHero {
@@ -41,7 +42,23 @@ const query = graphql`
                 id
                 name
                 crest {
-                    gatsbyImageData(width: 200)
+                    data {
+                        attributes {
+                            url
+                        }
+                    }
+                }
+                crestOptions {
+                    textColor
+                    textShadow
+                    fontSize
+                    frame
+                    frameColor
+                    plaque
+                    plaqueColor
+                    imageScale
+                    imageXOffset
+                    imageYOffset
                 }
                 leadProfiles {
                     data {
@@ -132,8 +149,8 @@ export const CareersHero = () => {
     const teams = teamsField ? JSON.parse(teamsField.value) : []
     const [selectedTeamName, setSelectedTeamName] = useState(teams[0])
     const selectedTeam = allTeams.find((team) => team.name.toLowerCase() === selectedTeamName.toLowerCase())
-    const teamLength = selectedTeam.profiles?.data?.length
-    const teamURL = `/teams/${slugify((selectedTeam.name || '').toLowerCase().replace('ops', ''), {
+    const teamLength = selectedTeam?.profiles?.data?.length
+    const teamURL = `/teams/${slugify((selectedTeam?.name || '').toLowerCase().replace('ops', ''), {
         lower: true,
         remove: /and/,
     })}`
@@ -143,7 +160,7 @@ export const CareersHero = () => {
         Math.round(
             (selectedTeam.profiles?.data?.filter(({ attributes: { pineappleOnPizza } }) => pineappleOnPizza).length /
                 teamLength) *
-            100
+                100
         )
 
     const [isLoading, setIsLoading] = useState(true)
@@ -208,15 +225,17 @@ export const CareersHero = () => {
                             return (
                                 <li key={job.fields.title} className="">
                                     <button
-                                        className={`w-full flex flex-col text-left px-2 py-1 rounded border border-b-3 ${selectedJob.fields.title === job.fields.title
-                                            ? 'border-light dark:border-dark bg-white dark:bg-accent-dark'
-                                            : 'hover:bg-light/50 hover:dark:bg-dark/50 border-transparent md:hover:border-light dark:md:hover:border-dark hover:translate-y-[-1px] active:translate-y-[1px] active:transition-all'
-                                            }`}
+                                        className={`w-full flex flex-col text-left px-2 py-1 rounded border border-b-3 ${
+                                            selectedJob.fields.title === job.fields.title
+                                                ? 'border-light dark:border-dark bg-white dark:bg-accent-dark'
+                                                : 'hover:bg-light/50 hover:dark:bg-dark/50 border-transparent md:hover:border-light dark:md:hover:border-dark hover:translate-y-[-1px] active:translate-y-[1px] active:transition-all'
+                                        }`}
                                         onClick={() => setSelectedJob(job)}
                                     >
                                         <span
-                                            className={`font-semibold text-[15px] ${selectedJob.fields.title === job.fields.title ? 'font-bold' : ''
-                                                }`}
+                                            className={`font-semibold text-[15px] ${
+                                                selectedJob.fields.title === job.fields.title ? 'font-bold' : ''
+                                            }`}
                                         >
                                             {job.fields.title}
                                         </span>
@@ -246,30 +265,32 @@ export const CareersHero = () => {
                         <ul className="list-none m-0 p-0 md:items-center text-black/50 dark:text-white/50 flex md:flex-row flex-col md:space-x-12 md:space-y-0 space-y-6">
                             <Detail
                                 title="Location"
-                                value={`Remote${selectedJob.parent.customFields.find(
-                                    (field: { title: string }) => field.title === 'Location(s)'
-                                )?.value
-                                    ? ` (${selectedJob.parent.customFields.find(
+                                value={`Remote${
+                                    selectedJob.parent.customFields.find(
                                         (field: { title: string }) => field.title === 'Location(s)'
-                                    ).value
-                                    })`
-                                    : ''
-                                    }`}
+                                    )?.value
+                                        ? ` (${
+                                              selectedJob.parent.customFields.find(
+                                                  (field: { title: string }) => field.title === 'Location(s)'
+                                              ).value
+                                          })`
+                                        : ''
+                                }`}
                                 icon={<Location />}
                             />
                             {selectedJob.parent.customFields.find(
                                 (field: { title: string }) => field.title === 'Timezone(s)'
                             )?.value && (
-                                    <Detail
-                                        title="Timezone(s)"
-                                        value={
-                                            selectedJob.parent.customFields.find(
-                                                (field: { title: string }) => field.title === 'Timezone(s)'
-                                            ).value
-                                        }
-                                        icon={<Timezone />}
-                                    />
-                                )}
+                                <Detail
+                                    title="Timezone(s)"
+                                    value={
+                                        selectedJob.parent.customFields.find(
+                                            (field: { title: string }) => field.title === 'Timezone(s)'
+                                        ).value
+                                    }
+                                    icon={<Timezone />}
+                                />
+                            )}
                         </ul>
 
                         <div className="job-content mt-4">
@@ -320,60 +341,66 @@ export const CareersHero = () => {
                             </CallToAction>
                         </div>
                     </div>
-                    <div className="lg:max-w-xs border-t md:border-t-0 md:border-l border-light dark:border-dark p-4 md:p-6 bg-accent/50 dark:bg-accent-dark">
-                        {teams.length > 1 && (
-                            <p className="mb-2">
-                                <strong>{teams.length} small teams are hiring for this role</strong>
-                            </p>
-                        )}
-
-                        <div className="flex flex-col items-center gap-2">
+                    {selectedTeam && (
+                        <div className="lg:max-w-xs border-t md:border-t-0 md:border-l border-light dark:border-dark p-4 md:p-6 bg-accent/50 dark:bg-accent-dark">
                             {teams.length > 1 && (
-                                <select
-                                    className="w-full p-2 mb-2 border border-b-3 border-light dark:border-dark rounded text-sm font-medium dark:bg-dark"
-                                    value={selectedTeamName}
-                                    onChange={(e) => {
-                                        setSelectedTeamName(e.target.value)
-                                    }}
-                                >
-                                    {teams.map((team) => (
-                                        <option key={team} value={team}>
-                                            {team}
-                                        </option>
-                                    ))}
-                                </select>
-                            )}
-                            <p className="text-sm text-center opacity-60 font-medium mb-0">About this team</p>
-                            <div className="max-w-48 mx-auto">
-                                <GatsbyImage image={getImage(selectedTeam.crest)} />
-                            </div>
-                            <h5 className="m-0 -mt-2 text-center">
-                                <Link to={teamURL}>{selectedTeam.name} Team</Link>
-                            </h5>
-                            <div className="flex justify-center">
-                                <TeamMembers profiles={selectedTeam.profiles} />
-                            </div>
-
-                            <div className="inline-flex mx-auto gap-2">
-                                {pineapplePercentage > 50 ? (
-                                    <>
-                                        <StickerPineappleYes className="size-12" />
-                                    </>
-                                ) : pineapplePercentage === 50 ? (
-                                    <>
-                                        <StickerPineapple className="size-12" />
-                                    </>
-                                ) : (
-                                    <>
-                                        <StickerPineappleNo className="size-12" />
-                                    </>
-                                )}
-                                <p className="text-[13px] mt-2 mb-0 w-auto leading-tight">
-                                    {PineappleText(pineapplePercentage)}
+                                <p className="mb-2">
+                                    <strong>{teams.length} small teams are hiring for this role</strong>
                                 </p>
+                            )}
+
+                            <div className="flex flex-col items-center gap-2">
+                                {teams.length > 1 && (
+                                    <select
+                                        className="w-full p-2 mb-2 border border-b-3 border-light dark:border-dark rounded text-sm font-medium dark:bg-dark"
+                                        value={selectedTeamName}
+                                        onChange={(e) => {
+                                            setSelectedTeamName(e.target.value)
+                                        }}
+                                    >
+                                        {teams.map((team) => (
+                                            <option key={team} value={team}>
+                                                {team}
+                                            </option>
+                                        ))}
+                                    </select>
+                                )}
+                                <p className="text-sm text-center opacity-60 font-medium mb-0">About this team</p>
+                                <div className="max-w-48 mx-auto">
+                                    <Link to={teamURL}>
+                                        <TeamPatch
+                                            name={selectedTeam.name}
+                                            imageUrl={selectedTeam.crest?.data?.attributes?.url}
+                                            {...selectedTeam.crestOptions}
+                                            className="w-full -mt-4"
+                                        />
+                                    </Link>
+                                </div>
+                                <div className="flex justify-center">
+                                    <TeamMembers profiles={selectedTeam.profiles} />
+                                </div>
+
+                                <div className="inline-flex items-center mx-auto gap-2">
+                                    {pineapplePercentage > 50 ? (
+                                        <>
+                                            <StickerPineappleYes className="size-12" />
+                                        </>
+                                    ) : pineapplePercentage === 50 ? (
+                                        <>
+                                            <StickerPineapple className="size-12" />
+                                        </>
+                                    ) : (
+                                        <>
+                                            <StickerPineappleNo className="size-12" />
+                                        </>
+                                    )}
+                                    <p className="text-[13px] mt-2 mb-0 w-auto leading-tight">
+                                        {PineappleText(pineapplePercentage)}
+                                    </p>
+                                </div>
                             </div>
                         </div>
-                    </div>
+                    )}
                 </div>
             </section>
         </>
