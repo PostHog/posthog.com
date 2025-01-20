@@ -14,45 +14,54 @@ PostHog can automatically capture [web vitals](https://web.dev/explore/learn-cor
 
 ## What are Web vitals?
 
-Web Vitals are a set of metrics that measure the performance of your site. At the moment, Posthog collects and provides you a dashboard for the following:
+**Web Vitals** are a set of metrics that measure the performance of your site. At the moment, Posthog collects and provides you a dashboard for the following:
 
-- LCP: Largest Contentful Paint
-- FCP: First Contentful Paint
-- CLS: Cumulative Layout Shift
-- INP: Interaction to Next Paint
-
-### LCP - Largest Contentful Paint
-
-Largest Contentful Paint (LCP) measures how long it takes for the largest content element visible in the viewport to be rendered. This is typically an image, video, or large block of text. LCP is important because it tells you when the main content of a page has finished loading from a user's perspective.
-
-A good LCP score is 2.5 seconds or less. If your LCP is higher, users might perceive your site as slow or unresponsive. Common causes of poor LCP include slow server response times, render-blocking JavaScript and CSS, slow resource load times, and client-side rendering.
-
+- **FCP**: First Contentful Paint
+- **LCP**: Largest Contentful Paint
+- **INP**: Interaction to Next Paint
+- **CLS**: Cumulative Layout Shift
 
 ### FCP - First Contentful Paint
 
-First Contentful Paint (FCP) measures the time from when the page starts loading to when any part of the page's content is rendered on the screen. This could be text, images, SVGs, or even `<canvas>` elements. FCP is important because it indicates when users first see something happening on your page, giving them confidence that the page is actually loading.
+First Contentful Paint ([FCP](https://web.dev/articles/fcp)) measures the time from when the page starts loading to when any part of the page's content is rendered on the screen. This could be text, images, SVGs, or even `<canvas>` elements. FCP is important because it indicates when users first see something happening on your page, giving them confidence that the page is actually loading.
 
-A good FCP score is 1.8 seconds or less. Poor FCP scores can be caused by render-blocking resources (like CSS or JavaScript files), slow server response times, or large HTML documents that take time to parse. Improving FCP often involves optimizing critical rendering paths, reducing server response times, and minimizing or deferring non-critical resources.
+A good FCP score is 1.8 seconds or less. Poor FCP scores can be caused by render-blocking resources (like CSS or JavaScript files), slow server response times, or large HTML documents that take time to parse.
 
+Improving FCP often involves optimizing critical rendering paths, reducing server response times, and minimizing or deferring non-critical resources.
 
-### CLS - Cumulative Layout Shift
+### LCP - Largest Contentful Paint
 
-Cumulative Layout Shift (CLS) measures visual stability by quantifying how much unexpected layout shifts occur during the entire lifespan of the page. A layout shift happens when a visible element changes its position from one rendered frame to the next. CLS is important because unexpected movement of page content can be extremely frustrating for users, especially if they were about to click or tap on something that suddenly moves.
+Largest Contentful Paint ([LCP](https://web.dev/articles/lcp)) measures how long it takes for the largest content element visible in the viewport to be rendered. This is typically an image, video, or large block of text. LCP is important because it tells you when the main content of a page has finished loading from a user's perspective.
 
-A good CLS score is 0.1 or less. Common causes of poor CLS include images or ads without dimensions, dynamically injected content, web fonts causing FOIT/FOUT (Flash of Invisible/Unstyled Text), and actions waiting for a network response before updating the DOM. To improve CLS, always include width and height attributes on images and video elements, reserve space for dynamic content, and ensure web fonts don't cause layout shifts. Modern web frameworks should help you with this.
+A good LCP score is 2.5 seconds or less. If your LCP is higher, users might perceive your site as slow or unresponsive. Common causes of poor LCP include slow server response times, render-blocking JavaScript and CSS, slow resource load times, and client-side rendering.
+
+Improving LCP often involves optimizing server response times, minimizing render-blocking resources, optimizing images, and implementing effective caching strategies. Key techniques include using a CDN to serve content closer to users, deferring non-critical JavaScript, compressing and properly sizing images, using modern image formats like WebP, implementing browser caching, and optimizing the critical rendering path by minimizing critical resources and prioritizing visible content.
 
 
 ### INP - Interaction to Next Paint
 
-Interaction to Next Paint (INP) measures the responsiveness of your site by measuring the time it takes to respond to user interactions like clicks or taps. It's important because it tells you how quickly your site reacts to user input, which is a key factor in user experience.
+Interaction to Next Paint ([INP](https://web.dev/articles/inp)) measures the responsiveness of your site by measuring the time it takes to respond to user interactions like clicks or taps. It's important because it tells you how quickly your site reacts to user input, which is a key factor in user experience.
 
-A good INP score is 100ms or less. Poor INP scores can be caused by slow JavaScript execution, blocking the main thread, or excessive layout thrashing. To improve INP, optimize JavaScript performance, reduce unnecessary layout changes, and ensure smooth animations.
+A good INP score is 100ms or less. Poor INP scores can be caused by slow JavaScript execution, blocking the main thread, or excessive layout thrashing.
+
+To improve INP, optimize JavaScript performance, reduce unnecessary layout changes, and ensure smooth animations.
+
+
+### CLS - Cumulative Layout Shift
+
+Cumulative Layout Shift ([CLS](https://web.dev/articles/cls)) measures visual stability by quantifying how much unexpected layout shifts occur during the entire lifespan of the page. A layout shift happens when a visible element changes its position from one rendered frame to the next. CLS is important because unexpected movement of page content can be extremely frustrating for users, especially if they were about to click or tap on something that suddenly moves.
+
+A good CLS score is 0.1 or less. Common causes of poor CLS include images or ads without dimensions, dynamically injected content, web fonts causing FOIT/FOUT (Flash of Invisible/Unstyled Text), and actions waiting for a network response before updating the DOM.
+
+To improve CLS, always include width and height attributes on images and video elements, reserve space for dynamic content, and ensure web fonts don't cause layout shifts. Modern web frameworks should help you with this.
+
+
 
 ## Web vitals dashboard
 
-You can access web vitals in the sidebar by clicking on the dropdown to the right of web analytics.
+You can access web vitals in PostHog's sidebar by clicking on the dropdown to the right of web analytics.
 
-If you're inside web analytics, you can also toggle to the web vitals view by clicking the toggle in the top right.
+Alternatively, if you're inside web analytics, you can also toggle to the web vitals view by clicking the toggle in the top right.
 
 > TODO: ADD IMAGE
 
@@ -71,10 +80,10 @@ They differ according to the specific metric:
 
 | Metric                          | Good    | Needs improvement | Poor    |
 | ------------------------------- | ------- | ----------------- | ------- |
-| LCP (Largest Contentful Paint)  | ≤ 2.5s  | 2.5s - 4.0s       | > 4.0s  |
 | FCP (First Contentful Paint)    | ≤ 1.8s  | 1.8s - 3.0s       | > 3.0s  |
-| CLS (Cumulative Layout Shift)   | ≤ 0.1   | 0.1 - 0.25        | > 0.25  |
+| LCP (Largest Contentful Paint)  | ≤ 2.5s  | 2.5s - 4.0s       | > 4.0s  |
 | INP (Interaction to Next Paint) | ≤ 200ms | 200ms - 500ms     | > 500ms |
+| CLS (Cumulative Layout Shift)   | ≤ 0.1   | 0.1 - 0.25        | > 0.25  |
 
 ### What is the recommended percentile?
 
@@ -122,8 +131,10 @@ The SDK attempts to send as many of the available metrics as possible in each `$
 
 Metrics are made available when the [web vitals library](https://github.com/GoogleChrome/web-vitals) triggers them:
 
-- [FCP](https://web.dev/articles/fcp) and [LCP](https://web.dev/articles/lcp) are relative to a page being rendered and are made available relatively soon after loading a page. 
-- [INP](https://web.dev/articles/inp) and [CLS](https://web.dev/articles/cls) are measures across the lifecycle of a page and don't have a fixed time they become available.
+- FCP and LCP are relative to a page being rendered and are made available relatively soon after loading a page. 
+- INP and CLS are measured across the lifecycle of a page and don't have a fixed time they become available.
+
+You can look at our Web vitals capturing code in here: [web-vitals/index.ts](https://github.com/PostHog/posthog-js/blob/main/src/extensions/web-vitals/index.ts).
 
 
 ## Pricing
