@@ -447,11 +447,8 @@ const PricingExperiment = (): JSX.Element => {
                                     back in a few days – no credit card required.
                                 </SidebarListItem>
                                 <SidebarListItem>
-                                    If something stupid happens and you get an unexpected bill (like if{' '}
-                                    <Link href="/side-project-insurance">
-                                        your side project unexpectedly goes viral
-                                    </Link>{' '}
-                                    or you’re unhappy), we’ll pretty much always refund it!
+                                    If something stupid happens and you get an unexpected bill (like if <Link href="/side-project-insurance">your side project unexpectedly goes viral</Link> or you’re unhappy),
+                                    we’ll pretty much always refund it!
                                 </SidebarListItem>
                                 <SidebarListItem>
                                     We've also written{' '}

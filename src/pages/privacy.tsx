@@ -397,9 +397,9 @@ function Privacy() {
                             We use cookies to do this and they help us understand how we can improve a user's
                             experience.
                         </p>
-                        <p>
-                            We use our own products to do this. eg we will use our Session Replay tool to debug user
-                            issues or understand how to improve our product.
+                      <p>
+                            We use our own products to do this. eg we will use our Session Replay tool to debug user issues
+                            or understand how to improve our product.
                         </p>
                         <p>
                             FYI, we don’t use any third-party cookies at all. This means we don’t run any retargeting ad
@@ -665,10 +665,7 @@ function Privacy() {
                         </p>
                     </div>
                     <div>
-                        <p>
-                            Here is the list of companies we use. This applies to your personal data, not the data of
-                            your users.
-                        </p>
+                        <p>Here is the list of companies we use. This applies to your personal data, not the data of your users.</p>
                     </div>
 
                     <div>

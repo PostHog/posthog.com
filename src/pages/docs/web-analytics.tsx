@@ -26,6 +26,7 @@ export const Content = ({ quickLinks = false }) => {
     const { compact } = useLayoutData()
     return (
         <>
+            
             {(quickLinks || compact) && (
                 <QuickLinks
                     items={docsMenu.children.find(({ name }) => name.toLowerCase() === 'web analytics')?.children}
@@ -33,9 +34,9 @@ export const Content = ({ quickLinks = false }) => {
             )}
             <section className="mb-12">
                 <h3 className="mb-2 text-xl">FAQ</h3>
-                <Link href="/docs/web-analytics/web-vs-product-analytics">
-                    What's the difference between web and product analytics?
-                </Link>
+                <Link href="/docs/web-analytics/web-vs-product-analytics">What's the difference between web and product analytics?</Link>
+
+
             </section>
             <section className="mb-12">
                 <h3 className="m-0 text-xl">Resources</h3>
@@ -89,9 +90,10 @@ const WebAnalytics: React.FC<WebAnalyticsProps> = ({ data }) => {
                         'How do I track conversions?',
                         'Why do my metrics differ from other tools?',
                     ]}
-                />
+                 />
 
                 <Content />
+
             </PostLayout>
         </Layout>
     )

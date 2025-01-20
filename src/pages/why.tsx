@@ -217,8 +217,11 @@ const Teams: React.FC = () => {
                                         entire existing customer base
                                     </li>
                                     <li>
-                                        We have <Link href="/side-project-insurance">side hustle insurance</Link> - we
-                                        refund if your thing goes viral by accident on HackerNews
+                                        We have{' '}
+                                        <Link href="/side-project-insurance">
+                                            side hustle insurance
+                                        </Link>{' '}
+                                        - we refund if your thing goes viral by accident on HackerNews
                                     </li>
                                     <li>
                                         We've got{' '}
