@@ -15,25 +15,23 @@ You'll also need access to the relevant Google Cloud, Google Ads and Google Ads 
 
 ## Installation
 
-1. Apply for a Google Ads developer token using [these steps](https://developers.google.com/google-ads/api/docs/get-started/dev-token).
+1. In PostHog, click the [Data pipeline](https://us.posthog.com/pipeline/overview) tab in the left sidebar.
 
-2. In PostHog, click the [Data pipeline](https://us.posthog.com/pipeline/overview) tab in the left sidebar.
+2. Click the **Destinations** tab.
 
-3. Click the **Destinations** tab.
+3. Search for **Google Ads Conversions** and select the destination.
 
-4. Search for **Google Ads Conversions** and select the destination.
+4. Connect your Google account at the configuration step.
 
-5. Connect your Google account at the configuration step.
-
-6. Add your developer token and select your Customer ID.
+5. Select your Customer ID.
 
 ![Location of the Google Ads Customer ID](https://res.cloudinary.com/dmukukwp6/image/upload/2024_10_31_at_15_15_51_a7a003008c.png)
 
-7. In Google Ads, go to [Goals settings](https://ads.google.com/aw/conversions/customersettings), enable enhanced conversions, set the method to `Google Ads API`, and click **Save**.
+6. In Google Ads, go to [Goals settings](https://ads.google.com/aw/conversions/customersettings), enable enhanced conversions, set the method to `Google Ads API`, and click **Save**.
 
 ![Goal settings](https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2024_11_01_at_13_38_50_d9c811bebd.png)
 
-8. Create a conversion action inside Google Ads
+7. Create a conversion action inside Google Ads
    1. Under [Goals > Conversions > Summary](https://ads.google.com/aw/conversions), you'll need to create a conversion action
    2. Click **New conversion action**
    3. Select **Import**
@@ -44,11 +42,11 @@ You'll also need access to the relevant Google Cloud, Google Ads and Google Ads 
 
 ![Steps to create a conversion action inside Google Ads](https://res.cloudinary.com/dmukukwp6/image/upload/2024_11_09_at_14_52_07_dfb486cd19.gif)
 
-9. Back in PostHog, select the conversion action to the destination configuration.
+8. Back in PostHog, select the conversion action in the destination configuration.
 
-10. Set up your event and property filters to remove unnecessary events. You only want to send events that are conversions. Filter out unrelated events or ones missing data like `gclid`.
+9. Set up your event and property filters to remove unnecessary events. You only want to send events that are conversions. Filter out unrelated events or ones missing data like `gclid`.
 
-11. Press **Create & enable**, test your destination, and then watch your conversions get sent to Google Ads.
+10. Press **Create & enable**, test your destination, and then watch your conversions get sent to Google Ads.
 
 <HideOnCDPIndex>
 
