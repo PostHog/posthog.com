@@ -45,7 +45,6 @@ As the PM team, we are pursuing a couple of side projects each quarter with the 
 In Q1 2025, those are:
 
 **Goal 1: Bring growth and product thinking into teams** -> Raquel
-* tbd, we should have some points here so that we know how to achieve this
 
 **Goal 2: Hire a new PM** -> Annika, with support from Anna
 * Update the superday task to make it more data analysis heavy
