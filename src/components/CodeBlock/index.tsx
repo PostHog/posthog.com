@@ -10,6 +10,7 @@ import languageMap from './languages'
 import { useValues } from 'kea'
 import { layoutLogic } from 'logic/layoutLogic'
 import Tooltip from 'components/Tooltip'
+import Mermaid from 'components/Mermaid'
 
 type LanguageOption = {
     label?: string
@@ -74,6 +75,9 @@ type MdxCodeBlockChildren = {
 }
 
 export const MdxCodeBlock = ({ children, ...props }: MdxCodeBlock) => {
+    if (children?.props?.className?.includes('language-mermaid')) {
+        return <Mermaid>{children.props.children}</Mermaid>
+    }
     const childArray = Array.isArray(children) ? children : [children]
 
     const languages = childArray
