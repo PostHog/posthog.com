@@ -62,7 +62,7 @@ In our experience, the tradeoffs to enabling this are **not** worthwhile for the
 
 ### Served value
 
-There are two types of feature flags:
+There are three types of feature flags:
 
 #### 1. Boolean flags. 
 
@@ -73,6 +73,11 @@ These return `true` or `false`.
 Instead of returning true or false, multivariate flags return a key – for example, `control` or `test`. 
 
 You can choose the rollout percentage for each variant key, where each is given a specific percentage of the total audience. Users will then be randomly assigned to each variant based on these percentages.
+
+#### 3. Remote config flags. 
+
+While boolean and multivariate flags can be set up to serve different values to different users, remote config flags are meant to pass static configuration values to your applications at runtime. The config value will always
+be passed in the flag's payload. You can use remote config flags to tweak application configs on the fly without deploying code changes.
 
 ### Payloads
 

@@ -1,0 +1,44 @@
+---
+title: Remote config
+sidebar: Docs
+showTitle: true
+availability:
+    free: full
+    selfServe: full
+    enterprise: full
+---
+
+> **Note**: Remote config flags are only available in our JavaScript web, Node, Python, Ruby, and React libraries.
+
+Boolean and multivariate flags are helpful for dynamic values that differ from user to user, but sometimes you need a simple way to 
+pass configuration related to your application without having to make code changes or redeploy your app.
+
+Remote config flags allow you to configure a simple flag that always returns the same payload wherever it is called:
+
+<MultiLanguage>
+
+```js-web
+const themedLogoUrl = posthog.getFeatureFlagPayload('company-holiday-logo-url')
+```
+
+
+```node
+const remoteConfigValue = posthog.getFeatureFlagPayload({
+    key: 'current-chat-completion-model',
+    distinctId: '_irrelevant_',
+})
+```
+
+</MultiLanguage>
+
+You can think of remote config flags as multivariate flags with a single variant which will be served for all flag requests. 
+
+
+> **Note**: Remote config flags are meant to always serve payloads and be called with the flag payload function in each SDK. If `getFeatureFlag` is called instead,
+> the SDK will simply return `true`
+
+
+
+## Related
+
+- [Feature flags vs configuration: Which should you choose?](/product-engineers/feature-flags-vs-configuration)
