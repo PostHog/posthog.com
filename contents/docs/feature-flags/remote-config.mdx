@@ -32,8 +32,7 @@ const remoteConfigValue = posthog.getFeatureFlagPayload({
 
 You can think of remote config flags as multivariate flags with a single variant which is served for all flag requests. 
 
-> **Note**: Remote config flags are meant to always serve payloads and be called with the flag payload function in each SDK. If `getFeatureFlag` is called instead,
-> the SDK will simply return `true`
+> **Note**: Remote config flags are meant to always serve payloads and be called with the flag payload function in each SDK. If `getFeatureFlag` is called instead, the SDK simply returns `true`
 
 
 
