@@ -555,20 +555,28 @@ const supportedJobBoardTypes = [
 ]
 
 const CompanyFormSkeleton = () => {
-    const [skeletonLength, setSkeletonLength] = useState(1)
-
-    useEffect(() => {
-        const interval = setInterval(() => {
-            setSkeletonLength((prev) => prev + 1)
-        }, 1000)
-        return () => clearInterval(interval)
-    }, [])
-
     return (
         <ul className="list-none p-0 m-0 space-y-3">
-            {Array.from({ length: skeletonLength }).map((_, index) => (
-                <div key={index} className="h-10 w-full bg-accent dark:bg-accent-dark rounded-md animate-pulse" />
-            ))}
+            <div className="h-10 w-full bg-accent dark:bg-accent-dark rounded-md animate-pulse" />
+            <div className="h-10 w-full bg-accent dark:bg-accent-dark rounded-md animate-pulse" />
+            <div className="h-10 w-full bg-accent dark:bg-accent-dark rounded-md animate-pulse" />
+            <div className="flex items-center space-x-2">
+                <div className="h-10 w-1/2 bg-accent dark:bg-accent-dark rounded-md animate-pulse" />
+                <div className="h-10 w-1/2 bg-accent dark:bg-accent-dark rounded-md animate-pulse" />
+            </div>
+            <div className="h-40 w-full bg-accent dark:bg-accent-dark rounded-md animate-pulse" />
+            <div className="h-10 w-full bg-accent dark:bg-accent-dark rounded-md animate-pulse" />
+            <div className="h-10 w-full bg-accent dark:bg-accent-dark rounded-md animate-pulse" />
+            <div className="h-10 w-full bg-accent dark:bg-accent-dark rounded-md animate-pulse" />
+            <div className="h-10 w-full bg-accent dark:bg-accent-dark rounded-md animate-pulse" />
+            <div className="h-10 w-full bg-accent dark:bg-accent-dark rounded-md animate-pulse" />
+            <div className="h-10 w-full bg-accent dark:bg-accent-dark rounded-md animate-pulse" />
+            <div className="h-10 w-full bg-accent dark:bg-accent-dark rounded-md animate-pulse" />
+            <div className="grid grid-cols-3 gap-2">
+                <div className="aspect-square bg-accent dark:bg-accent-dark rounded-md animate-pulse" />
+                <div className="aspect-square bg-accent dark:bg-accent-dark rounded-md animate-pulse" />
+                <div className="aspect-square bg-accent dark:bg-accent-dark rounded-md animate-pulse" />
+            </div>
         </ul>
     )
 }
@@ -815,7 +823,7 @@ const CompanyForm = ({ onSuccess, companyId }: { onSuccess?: () => void; company
                                     className={`border rounded-md p-2 text-sm w-full bg-white dark:bg-accent-dark ${
                                         touched.slug && errors.slug ? 'border-red' : 'border-border dark:border-dark'
                                     }`}
-                                    placeholder={slugify(values.name || '', { lower: true })}
+                                    placeholder="bluth-company"
                                     {...getFieldProps('slug')}
                                 />
                                 {touched.slug && errors.slug && (
@@ -830,7 +838,7 @@ const CompanyForm = ({ onSuccess, companyId }: { onSuccess?: () => void; company
                 {values.jobBoardType === 'other' && (
                     <Input
                         label="Job board URL"
-                        placeholder="https://example.com/jobs"
+                        placeholder="https://bobloblawlawblog.com/jobs"
                         {...getFieldProps('jobBoardURL')}
                         error={errors.jobBoardURL}
                         touched={touched.jobBoardURL}
