@@ -1,6 +1,6 @@
 import { IconX } from '@posthog/icons'
 import React, { useCallback } from 'react'
-import { useDropzone } from 'react-dropzone'
+import { Accept, FileError, FileRejection, useDropzone } from 'react-dropzone'
 
 export type Image = {
     file: File
@@ -12,19 +12,25 @@ export default function ImageDrop({
     onDrop,
     onRemove,
     className = '',
+    accept = { 'image/png': ['.png'], 'image/jpeg': ['.jpg', '.jpeg'] },
+    onDropRejected,
 }: {
     image?: Image
-    onDrop: (image: Image) => void
+    onDrop: (image: Image | undefined) => void
     onRemove: () => void
     className?: string
+    accept?: Accept
+    onDropRejected?: (fileRejections: FileRejection[]) => void
 }): JSX.Element {
     const handleDrop = useCallback(
         async (acceptedFiles) => {
             const file = acceptedFiles[0]
-            onDrop({
-                file,
-                objectURL: URL.createObjectURL(file),
-            })
+            if (file) {
+                onDrop({
+                    file,
+                    objectURL: URL.createObjectURL(file),
+                })
+            }
         },
         [image]
     )
@@ -34,7 +40,8 @@ export default function ImageDrop({
         noClick: true,
         noKeyboard: true,
         multiple: false,
-        accept: { 'image/png': ['.png'], 'image/jpeg': ['.jpg', '.jpeg'] },
+        accept,
+        onDropRejected,
     })
 
     return (
@@ -68,7 +75,10 @@ export default function ImageDrop({
                     <button
                         type="button"
                         className="p-2 border border-black/50 rounded-full bg-white"
-                        onClick={onRemove}
+                        onClick={(e) => {
+                            e.preventDefault()
+                            onRemove()
+                        }}
                     >
                         <IconX className="w-5 h-5 text-black/50" />
                     </button>

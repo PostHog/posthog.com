@@ -107,9 +107,10 @@ export default function useCompanies({
     isLoading: boolean
     error: Error | undefined
     fetchMore: () => void
+    mutate: () => void
 } {
     const [search, setSearch] = useState('')
-    const { data, size, setSize, isLoading, error } = useSWRInfinite(
+    const { data, size, setSize, isLoading, error, mutate } = useSWRInfinite(
         (offset) => `${process.env.GATSBY_SQUEAK_API_HOST}/api/companies?${query(offset, companyFilters, jobFilters)}`,
         async (url: string) => {
             return fetch(url).then((r) => r.json())
@@ -171,5 +172,6 @@ export default function useCompanies({
         isLoading,
         error,
         fetchMore: () => setSize(size + 1),
+        mutate,
     }
 }

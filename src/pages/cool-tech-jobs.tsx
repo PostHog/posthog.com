@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useCallback, useEffect, useState } from 'react'
 import useJobs, { Job } from '../hooks/useJobs'
 import groupBy from 'lodash.groupby'
 import useCompanies, { Company, Filters as FiltersType } from 'hooks/useCompanies'
@@ -21,6 +21,12 @@ import { useFormik } from 'formik'
 import * as Yup from 'yup'
 import { CallToAction } from 'components/CallToAction'
 import usePostHog from 'hooks/usePostHog'
+import ImageDrop from 'components/ImageDrop'
+import slugify from 'slugify'
+import Spinner from 'components/Spinner'
+import { useUser } from 'hooks/useUser'
+import uploadImage from 'components/Squeak/util/uploadImage'
+import { debounce } from 'lodash'
 dayjs.extend(relativeTime)
 
 const toggleFilters = [
@@ -148,15 +154,21 @@ const JobList = ({ jobs }: { jobs: Job[] }) => {
     )
 }
 
-const Companies = ({ companyFilters, jobFilters }: { companyFilters: FiltersType; jobFilters: FiltersType }) => {
-    const [search, setSearch] = useState('')
+const Companies = ({
+    companiesLoading,
+    companies,
+    search,
+    onSearch,
+}: {
+    companiesLoading: boolean
+    companies: Company[]
+    search: string
+    onSearch: (search: string) => void
+}) => {
     const { websiteTheme } = useValues(layoutLogic)
-    const { companies, isLoading } = useCompanies({ companyFilters, jobFilters, search })
     const { fullWidthContent } = useLayoutData()
 
-    const handleSearch = (value: string) => setSearch(value)
-
-    return isLoading ? (
+    return companiesLoading ? (
         <ul className="list-none p-0 m-0 space-y-4 py-8">
             {Array.from({ length: 10 }).map((_, index) => (
                 <div key={index} className="h-12 w-full bg-accent dark:bg-accent-dark rounded-md" />
@@ -169,7 +181,7 @@ const Companies = ({ companyFilters, jobFilters }: { companyFilters: FiltersType
                     type="search"
                     placeholder="Search..."
                     className="w-full !outline-none !ring-0 p-2 bg-transparent border-none"
-                    onChange={(e) => handleSearch(e.target.value)}
+                    onChange={(e) => onSearch(e.target.value)}
                     value={search}
                     autoComplete="off"
                 />
@@ -478,6 +490,351 @@ const IssueForm = () => {
     )
 }
 
+interface InputProps extends React.InputHTMLAttributes<HTMLInputElement | HTMLTextAreaElement> {
+    label: string
+    error?: string
+    touched?: boolean
+    multiline?: boolean
+    rows?: number
+}
+
+const Input = ({ label, error, touched, multiline, className = '', rows = 4, ...props }: InputProps) => {
+    const Component = multiline ? 'textarea' : 'input'
+    return (
+        <div className={className}>
+            <label className="block text-base font-semibold mb-1">{label}</label>
+            <Component
+                {...props}
+                rows={multiline ? rows : undefined}
+                className={`w-full p-2 border rounded-md bg-white dark:bg-accent-dark ${
+                    touched && error ? 'border-red' : 'border-border dark:border-dark'
+                }`}
+            />
+            {touched && error && <p className="text-red text-sm m-0 mt-1">{error}</p>}
+        </div>
+    )
+}
+
+const jobBoardBaseURLs = {
+    ashby: 'https://jobs.ashbyhq.com/',
+    greenhouse: 'https://boards.greenhouse.io/',
+}
+
+const supportedJobBoardTypes = [
+    { value: 'ashby', label: 'Ashby' },
+    { value: 'greenhouse', label: 'Greenhouse' },
+]
+
+const AddAJobForm = ({ onSuccess }: { onSuccess?: () => void }) => {
+    const { user, getJwt } = useUser()
+    const [companyExists, setCompanyExists] = useState<boolean>(false)
+    const [submissionError, setSubmissionError] = useState<string | null>(null)
+
+    const debouncedCheckSlugExists = useCallback(
+        debounce(async (slug: string) => {
+            try {
+                if (!slug) return
+                const response = await fetch(
+                    `${process.env.GATSBY_SQUEAK_API_HOST}/api/companies?filters[slug][$eq]=${slug}`
+                )
+                const data = await response.json()
+                setCompanyExists(data?.data?.length > 0)
+            } catch (error) {
+                console.error('Error checking slug:', error)
+            }
+        }, 1000),
+        []
+    )
+
+    const { handleSubmit, values, touched, setFieldValue, errors, getFieldProps, isSubmitting, validateField } =
+        useFormik({
+            initialValues: {
+                name: '',
+                url: '',
+                slug: '',
+                engineersDecideWhatToBuild: false,
+                remoteOnly: false,
+                exoticOffsites: false,
+                meetingFreeDays: false,
+                highEngineerRatio: false,
+                noDeadlines: false,
+                description: '',
+                jobBoardType: 'ashby',
+                logoLight: undefined,
+                logoDark: undefined,
+                logomark: undefined,
+            },
+            validationSchema: Yup.object({
+                name: Yup.string().required('Company name is required'),
+                url: Yup.string().url('Must be a valid URL').required('Company website URL is required'),
+                slug: Yup.string().when('jobBoardType', {
+                    is: (value: string) => value !== 'other',
+                    then: Yup.string().required('Job board slug is required'),
+                    otherwise: Yup.string(),
+                }),
+                description: Yup.string().required('Company description is required'),
+                jobBoardType: Yup.string().required('Job board type is required'),
+                logoLight: Yup.mixed().required('Light logo is required'),
+                logoDark: Yup.mixed().required('Dark logo is required'),
+                logomark: Yup.mixed().required('Logomark is required'),
+            }),
+            validateOnChange: true,
+            validateOnBlur: false,
+            onSubmit: async (values, { setSubmitting }) => {
+                try {
+                    if (companyExists) return
+                    const { logoLight, logoDark, logomark, ...rest } = values
+                    const jwt = await getJwt()
+                    const profileID = user?.profile?.id
+                    if (!profileID || !jwt) return
+                    // Create initial company without images in case of failure
+                    const createResponse = await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/companies`, {
+                        method: 'POST',
+                        headers: {
+                            Authorization: `Bearer ${jwt}`,
+                            'content-type': 'application/json',
+                        },
+                        body: JSON.stringify({
+                            data: rest,
+                        }),
+                    })
+                    if (!createResponse.ok) {
+                        throw new Error('Failed to create company')
+                    }
+                    const company = await createResponse.json()
+                    if (!company?.data?.id) {
+                        throw new Error('Failed to create company')
+                    }
+                    // Upload images and update the company
+                    const uploadedLogoLight =
+                        values.logoLight?.file &&
+                        (await uploadImage(logoLight.file, jwt, {
+                            field: 'images',
+                            id: profileID,
+                            type: 'api::profile.profile',
+                        }))
+                    const uploadedLogoDark =
+                        values.logoDark?.file &&
+                        (await uploadImage(logoDark.file, jwt, {
+                            field: 'images',
+                            id: profileID,
+                            type: 'api::profile.profile',
+                        }))
+                    const uploadedLogomark =
+                        values.logomark?.file &&
+                        (await uploadImage(logomark.file, jwt, {
+                            field: 'images',
+                            id: profileID,
+                            type: 'api::profile.profile',
+                        }))
+                    const updateResponse = await fetch(
+                        `${process.env.GATSBY_SQUEAK_API_HOST}/api/companies/${company.data.id}`,
+                        {
+                            method: 'PUT',
+                            headers: {
+                                Authorization: `Bearer ${jwt}`,
+                                'content-type': 'application/json',
+                            },
+                            body: JSON.stringify({
+                                data: {
+                                    ...(uploadedLogoLight ? { logoLight: uploadedLogoLight.id } : {}),
+                                    ...(uploadedLogoDark ? { logoDark: uploadedLogoDark.id } : {}),
+                                    ...(uploadedLogomark ? { logomark: uploadedLogomark.id } : {}),
+                                },
+                            }),
+                        }
+                    )
+                    if (!updateResponse.ok) {
+                        throw new Error('Failed to update company')
+                    }
+                    const scrapeData = await fetch(
+                        `${process.env.GATSBY_SQUEAK_API_HOST}/api/scrape-jobs/${company.data.id}`,
+                        {
+                            headers: {
+                                Authorization: `Bearer ${jwt}`,
+                                'content-type': 'application/json',
+                            },
+                        }
+                    ).then((res) => res.json())
+                    if (scrapeData.jobsCreated <= 0) {
+                        throw new Error(
+                            'The company was created, but no jobs were found. Please check the job board URL.'
+                        )
+                    }
+                    onSuccess?.()
+                } catch (error) {
+                    console.error('Error submitting form:', error)
+                    setSubmissionError(error instanceof Error ? error.message : 'Something went wrong')
+                } finally {
+                    setSubmitting(false)
+                }
+            },
+        })
+
+    useEffect(() => {
+        setFieldValue('slug', slugify(values.name || '', { lower: true }))
+    }, [values.name])
+
+    useEffect(() => {
+        if (values.slug) {
+            debouncedCheckSlugExists(values.slug)
+        }
+        setCompanyExists(false)
+    }, [values.slug])
+
+    return submissionError ? (
+        <div className="bg-red/10 p-3 rounded-md border border-red">
+            <h4 className="m-0 text-base">Something went wrong</h4>
+            <p className="m-0 text-sm">{submissionError}</p>
+        </div>
+    ) : (
+        <form onSubmit={handleSubmit} className="space-y-4 m-0">
+            <Input
+                label="Company name"
+                placeholder="Bluth Company"
+                {...getFieldProps('name')}
+                error={errors.name}
+                touched={touched.name}
+            />
+
+            <Input
+                label="Company website URL"
+                placeholder="https://bobloblawlawblog.com"
+                type="url"
+                {...getFieldProps('url')}
+                error={errors.url}
+                touched={touched.url}
+            />
+
+            <div>
+                <Select
+                    className="!p-0"
+                    options={[...supportedJobBoardTypes, { value: 'other', label: 'Other' }]}
+                    value={values.jobBoardType}
+                    onChange={(value) => setFieldValue('jobBoardType', value)}
+                    placeholder="Job board type"
+                />
+                {touched.jobBoardType && errors.jobBoardType && (
+                    <p className="text-red text-sm m-0 mt-1">{errors.jobBoardType}</p>
+                )}
+                {supportedJobBoardTypes.some((type) => type.value === values.jobBoardType) && (
+                    <div className="mt-2">
+                        <label className="block text-base font-semibold">Job board slug</label>
+                        <div className="flex items-center space-x-1 -mt-2">
+                            <p className="m-0 text-sm opacity-70">{jobBoardBaseURLs[values.jobBoardType]}</p>
+                            <div className="flex-grow relative">
+                                <input
+                                    className={`border border-border dark:border-dark rounded-md p-2 text-sm w-full bg-white dark:bg-accent-dark ${
+                                        companyExists || (touched.slug && errors.slug) ? 'border-red' : ''
+                                    }`}
+                                    placeholder={slugify(values.name || '', { lower: true })}
+                                    {...getFieldProps('slug')}
+                                />
+                                {(companyExists || (touched.slug && errors.slug)) && (
+                                    <p className="text-red text-sm m-0 mt-1 absolute -bottom-1 translate-y-full">
+                                        {companyExists ? 'Company already exists' : errors.slug}
+                                    </p>
+                                )}
+                            </div>
+                        </div>
+                    </div>
+                )}
+            </div>
+
+            <Input
+                label="Company description"
+                placeholder="Describe the company in a few sentences"
+                multiline
+                rows={4}
+                {...getFieldProps('description')}
+                error={errors.description}
+                touched={touched.description}
+            />
+
+            <div className="space-y-2">
+                <h4 className="text-base font-semibold m-0">Company perks</h4>
+                {toggleFilters
+                    .filter((filter) => filter.appliesTo === 'company')
+                    .map((filter) => (
+                        <Toggle
+                            key={filter.key}
+                            activeOpacity={false}
+                            position="right"
+                            iconLeft={filter.icon}
+                            label={filter.label}
+                            onChange={(checked) => setFieldValue(filter.key, checked)}
+                            checked={values[filter.key]}
+                        />
+                    ))}
+            </div>
+
+            <div className="space-y-2 !mt-5">
+                <div>
+                    <h4 className="text-base font-semibold m-0">Company logos</h4>
+                    <p className="text-sm opacity-70 m-0">Upload the company logos in SVG or PNG format</p>
+                </div>
+
+                <div className="grid grid-cols-3 gap-4">
+                    <label className="block">
+                        <span className="text-base font-semibold mb-1 block">Light logo</span>
+                        <ImageDrop
+                            className={`h-auto aspect-square rounded-sm border border-border dark:border-dark ${
+                                touched.logoLight && errors.logoLight ? 'border-red' : ''
+                            }`}
+                            onDrop={(file) => setFieldValue('logoLight', file)}
+                            onRemove={() => setFieldValue('logoLight', null)}
+                            image={values.logoLight}
+                            accept={{ 'image/png': ['.png'], 'image/svg': ['.svg'] }}
+                        />
+                    </label>
+
+                    <label className="block">
+                        <span className="text-base font-semibold mb-1 block">Dark logo</span>
+                        <ImageDrop
+                            className={`h-auto aspect-square rounded-sm border border-border dark:border-dark ${
+                                touched.logoDark && errors.logoDark ? 'border-red' : ''
+                            }`}
+                            onDrop={(file) => setFieldValue('logoDark', file)}
+                            onRemove={() => setFieldValue('logoDark', null)}
+                            image={values.logoDark}
+                            accept={{ 'image/png': ['.png'], 'image/svg': ['.svg'] }}
+                        />
+                    </label>
+
+                    <label className="block">
+                        <span className="text-base font-semibold mb-1 block">Logomark</span>
+                        <ImageDrop
+                            className={`h-auto aspect-square rounded-sm border border-border dark:border-dark ${
+                                touched.logomark && errors.logomark ? 'border-red' : ''
+                            }`}
+                            onDrop={(file) => setFieldValue('logomark', file)}
+                            onRemove={() => setFieldValue('logomark', null)}
+                            image={values.logomark}
+                            accept={{ 'image/png': ['.png'], 'image/svg': ['.svg'] }}
+                        />
+                    </label>
+                </div>
+                {(touched.logoLight && errors.logoLight) ||
+                (touched.logoDark && errors.logoDark) ||
+                (touched.logomark && errors.logomark) ? (
+                    <p className="text-red text-sm m-0 mt-1">All logos are required</p>
+                ) : null}
+            </div>
+            <div className="!mt-8">
+                <CallToAction disabled={isSubmitting} width="full">
+                    {isSubmitting ? (
+                        <div className="flex items-center justify-center">
+                            <Spinner className="!size-6" />
+                        </div>
+                    ) : (
+                        'Submit company'
+                    )}
+                </CallToAction>
+            </div>
+        </form>
+    )
+}
+
 export default function JobsPage() {
     const [sortBy, setSortBy] = useState<'company' | 'job'>('company')
     const [companyFilters, setCompanyFilters] = useState<FiltersType>([])
@@ -485,6 +842,10 @@ export default function JobsPage() {
     const [filtersOpen, setFiltersOpen] = useState(false)
     const [applyModalOpen, setApplyModalOpen] = useState(false)
     const [issueModalOpen, setIssueModalOpen] = useState(false)
+    const [addAJobModalOpen, setAddAJobModalOpen] = useState(false)
+    const [search, setSearch] = useState('')
+    const { companies, isLoading: companiesLoading, mutate } = useCompanies({ companyFilters, jobFilters, search })
+    const { isModerator } = useUser()
 
     return (
         <Layout>
@@ -515,7 +876,7 @@ export default function JobsPage() {
                                 Apply to get your jobs listed here.
                             </button>
                         </p>
-                        <p className="text-[15px] mt-2 mb-0">
+                        <p className="text-[15px] mt-2 mb-4">
                             Something off?{' '}
                             <button
                                 className="text-red hover:text-red/75 dark:text-yellow dark:hover:text-yellow/75 font-semibold"
@@ -525,10 +886,20 @@ export default function JobsPage() {
                             </button>
                             .
                         </p>
+                        {isModerator && (
+                            <CallToAction onClick={() => setAddAJobModalOpen(true)} size="sm" width="full">
+                                Add a company
+                            </CallToAction>
+                        )}
                     </div>
                     <div className="w-full flex-grow lg:mr-6 lg:pl-6 lg:pr-6 lg:border-x border-light dark:border-dark order-3 lg:order-2">
                         {sortBy === 'company' ? (
-                            <Companies companyFilters={companyFilters} jobFilters={jobFilters} />
+                            <Companies
+                                companiesLoading={companiesLoading}
+                                companies={companies}
+                                search={search}
+                                onSearch={(value) => setSearch(value)}
+                            />
                         ) : (
                             <Jobs companyFilters={companyFilters} jobFilters={jobFilters} />
                         )}
@@ -604,6 +975,14 @@ export default function JobsPage() {
             </SideModal>
             <SideModal className="w-full" open={issueModalOpen} setOpen={setIssueModalOpen} title="Report an issue">
                 <IssueForm />
+            </SideModal>
+            <SideModal className="w-full" open={addAJobModalOpen} setOpen={setAddAJobModalOpen} title="Add a company">
+                <AddAJobForm
+                    onSuccess={() => {
+                        mutate()
+                        setAddAJobModalOpen(false)
+                    }}
+                />
             </SideModal>
         </Layout>
     )
