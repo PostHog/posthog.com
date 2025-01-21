@@ -42,3 +42,7 @@ All jobs associated with the deleted company will be deleted along with the orig
 - **Company logos** - SVG/PNG only
 
 Unless required conditionally (job board URL/slug), every company field is required.
+
+### Scraping
+
+Jobs are scraped hourly based on the provided job board URL/slug. Jobs are individually checked for freshness hourly. If a job URL 404s, it is deleted.
