@@ -19,6 +19,7 @@ Since our system does not experience a huge variance in incoming traffic aside f
 	- Will you have apps enabled
 	- What will be the peak rate and total duration of calls
 	- What will the ramp-up profile look like
+3. Historical imports pricing is currently being discussed in [this RFC](https://github.com/PostHog/product-internal/pull/708). Current approach is to only consider these in the context of a signed annual contract if the event volume is over 100M.  
 
 If the count of events for a given distinct_id is too high, we may relax the constraint that events for a single distinct_id are always sent to the same kafka partition, which means these events might not be processed in the correct order. This can be problematic for merging events, where order of ingestion matters (eg an alias event arriving before an identify event on which it depends). This will need to be communicated to the customer.
 
