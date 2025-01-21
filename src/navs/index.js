@@ -2275,12 +2275,6 @@ export const docsMenu = {
                     color: 'orange',
                 },
                 {
-                    name: 'Web vitals',
-                    url: '/docs/product-analytics/web-vitals',
-                    icon: 'IconWrench',
-                    color: 'seagreen',
-                },
-                {
                     name: 'Data management',
                     url: '/docs/data',
                     icon: 'IconDatabase',
@@ -2356,6 +2350,12 @@ export const docsMenu = {
                     url: '/docs/web-analytics/web-vs-product-analytics',
                     icon: 'IconGraph',
                     color: 'red',
+                },
+                {
+                    name: 'Web vitals',
+                    url: '/docs/web-analytics/web-vitals',
+                    icon: 'IconWrench',
+                    color: 'seagreen',
                 },
                 {
                     name: 'FAQ',

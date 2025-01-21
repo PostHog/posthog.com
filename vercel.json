@@ -646,6 +646,10 @@
             "source": "/docs/product-analytics/start",
             "destination": "/docs/getting-started/send-events"
         },
+        {
+            "source": "/docs/product-analytics/web-vitals",
+            "destination": "/docs/web-analytics/web-vitals"
+        },
         { "source": "/docs/getting-started/user-properties", "destination": "/docs/getting-started/person-properties" },
         {
             "source": "/docs/feature-flags/multivariate-flags",
