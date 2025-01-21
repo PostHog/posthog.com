@@ -172,7 +172,15 @@ In the last touchpoint mode, one person will always only have one value.
 
 ##### 3. All steps
 
-In this case, the property value must be seen in all steps to be considered in the funnel.
+In this case, all events will be included in the funnel.
+
+Consider the following entirely possible example:
+
+1. `$pageview` with `browser = Chrome`
+2. `$pageview` with `browser = Firefox`
+3. `user signed up` with `browser = Chrome`
+
+All steps means the person will be counted twice for the `$pageview` event and once for the `user signed up` event.
 
 ##### 4. Specific step
 
