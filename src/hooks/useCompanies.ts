@@ -4,6 +4,7 @@ import qs from 'qs'
 import { Job } from './useJobs'
 import Fuse from 'fuse.js'
 import debounce from 'lodash.debounce'
+import { useUser } from './useUser'
 
 export type Filters = Array<
     | {
@@ -108,7 +109,9 @@ export default function useCompanies({
     error: Error | undefined
     fetchMore: () => void
     mutate: () => void
+    deleteCompany: (companyId: number, companyName: string) => void
 } {
+    const { getJwt } = useUser()
     const [search, setSearch] = useState('')
     const { data, size, setSize, isLoading, error, mutate } = useSWRInfinite(
         (offset) => `${process.env.GATSBY_SQUEAK_API_HOST}/api/companies?${query(offset, companyFilters, jobFilters)}`,
@@ -162,6 +165,19 @@ export default function useCompanies({
         []
     )
 
+    const deleteCompany = async (companyId: number, companyName: string) => {
+        if (confirm(`Are you sure you want to delete ${companyName}?`)) {
+            const jwt = await getJwt()
+            await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/companies/${companyId}`, {
+                method: 'DELETE',
+                headers: {
+                    Authorization: `Bearer ${jwt}`,
+                },
+            })
+            mutate()
+        }
+    }
+
     useEffect(() => {
         if (!other.search) return setSearch('')
         debouncedSearch(other.search)
@@ -173,5 +189,6 @@ export default function useCompanies({
         error,
         fetchMore: () => setSize(size + 1),
         mutate,
+        deleteCompany,
     }
 }

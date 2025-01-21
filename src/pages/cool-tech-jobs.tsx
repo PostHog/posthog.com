@@ -5,7 +5,7 @@ import useCompanies, { Company, Filters as FiltersType } from 'hooks/useCompanie
 import Layout from 'components/Layout'
 import { layoutLogic } from 'logic/layoutLogic'
 import { useValues } from 'kea'
-import { IconChevronDown, IconArrowUpRight, IconX } from '@posthog/icons'
+import { IconChevronDown, IconArrowUpRight, IconX, IconPencil, IconTrash } from '@posthog/icons'
 import Link from 'components/Link'
 import dayjs from 'dayjs'
 import relativeTime from 'dayjs/plugin/relativeTime'
@@ -159,12 +159,17 @@ const Companies = ({
     companies,
     search,
     onSearch,
+    onEdit,
+    onDelete,
 }: {
     companiesLoading: boolean
     companies: Company[]
     search: string
     onSearch: (search: string) => void
+    onEdit: (companyId: number) => void
+    onDelete: (companyId: number, companyName: string) => void
 }) => {
+    const { isModerator } = useUser()
     const { websiteTheme } = useValues(layoutLogic)
     const { fullWidthContent } = useLayoutData()
 
@@ -187,7 +192,7 @@ const Companies = ({
                 />
                 {search && (
                     <button
-                        onClick={() => setSearch('')}
+                        onClick={() => onSearch('')}
                         className="text-sm opacity-50 hover:opacity-80 transition-opacity p-2"
                     >
                         <IconX className="size-4" />
@@ -203,8 +208,12 @@ const Companies = ({
                     const { name } = company.attributes
                     const logoLight = company.attributes.logoLight?.data?.attributes?.url
                     const logoDark = company.attributes.logoDark?.data?.attributes?.url
-                    return company.attributes.jobs.data.length > 0 ? (
-                        <li className="@2xl:flex @2xl:space-x-8 items-start" key={company.id}>
+                    const hasJobs = company.attributes.jobs.data.length > 0
+                    return (isModerator && !search) || hasJobs ? (
+                        <li
+                            className={`@2xl:flex @2xl:space-x-8 items-start ${!hasJobs ? 'opacity-60' : ''}`}
+                            key={company.id}
+                        >
                             <div className="@2xl:sticky top-0 reasonable:top-[142px] pb-4 z-10 bg-light dark:bg-dark @2xl:flex-[0_0_230px]">
                                 {(logoLight || logoDark) && (
                                     <>
@@ -249,8 +258,26 @@ const Companies = ({
                                     className="grid @sm:grid-cols-2 @2xl:grid-cols-1 xl:[&>li]:ml-0 gap-1 [&>li]:ml-2 xl:ml-0 -ml-2"
                                     company={company}
                                 />
+                                {isModerator && (
+                                    <div className="border-t border-border dark:border-dark pt-2 mt-3 flex justify-end items-center">
+                                        <button
+                                            className="font-bold text-red dark:text-yellow text-sm flex items-center space-x-1 bg-transparent hover:bg-accent dark:hover:bg-accent-dark rounded-md px-1.5 py-1 click"
+                                            onClick={() => onEdit(company.id)}
+                                        >
+                                            <IconPencil className="size-3" />
+                                            <span>Edit</span>
+                                        </button>
+                                        <button
+                                            className="font-bold text-red dark:text-yellow text-sm flex items-center space-x-1 bg-transparent hover:bg-accent dark:hover:bg-accent-dark rounded-md px-1.5 py-1 click"
+                                            onClick={() => onDelete(company.id, name)}
+                                        >
+                                            <IconTrash className="size-3" />
+                                            <span>Delete</span>
+                                        </button>
+                                    </div>
+                                )}
                             </div>
-                            <JobList jobs={company.attributes.jobs.data} />
+                            {hasJobs && <JobList jobs={company.attributes.jobs.data} />}
                         </li>
                     ) : null
                 })}
@@ -525,11 +552,10 @@ const supportedJobBoardTypes = [
     { value: 'greenhouse', label: 'Greenhouse' },
 ]
 
-const AddAJobForm = ({ onSuccess }: { onSuccess?: () => void }) => {
+const CompanyForm = ({ onSuccess, companyId }: { onSuccess?: () => void; companyId?: number }) => {
     const { user, getJwt } = useUser()
-    const [submissionError, setSubmissionError] = useState<string | null>(null)
     const [slugExists, setSlugExists] = useState<boolean | undefined>(undefined)
-
+    const [company, setCompany] = useState<Company | null>(null)
     const debouncedCheckSlugExists = useCallback(
         debounce(async (slug: string) => {
             try {
@@ -559,22 +585,29 @@ const AddAJobForm = ({ onSuccess }: { onSuccess?: () => void }) => {
         setTouched,
         validateField,
     } = useFormik({
+        enableReinitialize: true,
         initialValues: {
-            name: '',
-            url: '',
-            slug: '',
-            engineersDecideWhatToBuild: false,
-            remoteOnly: false,
-            exoticOffsites: false,
-            meetingFreeDays: false,
-            highEngineerRatio: false,
-            noDeadlines: false,
-            description: '',
-            jobBoardType: 'ashby',
-            logoLight: undefined,
-            logoDark: undefined,
-            logomark: undefined,
-            jobBoardURL: '',
+            name: company?.attributes?.name || '',
+            url: company?.attributes?.url || '',
+            slug: company?.attributes?.slug || '',
+            engineersDecideWhatToBuild: company?.attributes?.engineersDecideWhatToBuild || false,
+            remoteOnly: company?.attributes?.remoteOnly || false,
+            exoticOffsites: company?.attributes?.exoticOffsites || false,
+            meetingFreeDays: company?.attributes?.meetingFreeDays || false,
+            highEngineerRatio: company?.attributes?.highEngineerRatio || false,
+            noDeadlines: company?.attributes?.noDeadlines || false,
+            description: company?.attributes?.description || '',
+            jobBoardType: company?.attributes?.jobBoardType || 'ashby',
+            logoLight: company?.attributes?.logoLight?.data
+                ? { file: null, objectURL: company?.attributes?.logoLight?.data?.attributes?.url }
+                : undefined,
+            logoDark: company?.attributes?.logoDark?.data
+                ? { file: null, objectURL: company?.attributes?.logoDark?.data?.attributes?.url }
+                : undefined,
+            logomark: company?.attributes?.logomark?.data
+                ? { file: null, objectURL: company?.attributes?.logomark?.data?.attributes?.url }
+                : undefined,
+            jobBoardURL: company?.attributes?.jobBoardURL || '',
         },
         validationSchema: Yup.object({
             name: Yup.string().required('Company name is required'),
@@ -584,7 +617,11 @@ const AddAJobForm = ({ onSuccess }: { onSuccess?: () => void }) => {
                 then: Yup.string()
                     .required('Job board slug is required')
                     .test('unique-slug', 'Company already exists', () => {
-                        return slugExists === undefined || slugExists === false
+                        return (
+                            company?.attributes?.slug === values.slug ||
+                            slugExists === undefined ||
+                            slugExists === false
+                        )
                     }),
                 otherwise: Yup.string(),
             }),
@@ -608,20 +645,23 @@ const AddAJobForm = ({ onSuccess }: { onSuccess?: () => void }) => {
                 const profileID = user?.profile?.id
                 if (!profileID || !jwt) return
                 // Create initial company without images in case of failure
-                const createResponse = await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/companies`, {
-                    method: 'POST',
-                    headers: {
-                        Authorization: `Bearer ${jwt}`,
-                        'content-type': 'application/json',
-                    },
-                    body: JSON.stringify({
-                        data: rest,
-                    }),
-                })
-                if (!createResponse.ok) {
+                const companyResponse = await fetch(
+                    `${process.env.GATSBY_SQUEAK_API_HOST}/api/companies${companyId ? `/${companyId}` : ''}`,
+                    {
+                        method: companyId ? 'PUT' : 'POST',
+                        headers: {
+                            Authorization: `Bearer ${jwt}`,
+                            'content-type': 'application/json',
+                        },
+                        body: JSON.stringify({
+                            data: rest,
+                        }),
+                    }
+                )
+                if (!companyResponse.ok) {
                     throw new Error('Failed to create company')
                 }
-                const company = await createResponse.json()
+                const company = await companyResponse.json()
                 if (!company?.data?.id) {
                     throw new Error('Failed to create company')
                 }
@@ -667,22 +707,15 @@ const AddAJobForm = ({ onSuccess }: { onSuccess?: () => void }) => {
                 if (!updateResponse.ok) {
                     throw new Error('Failed to update company')
                 }
-                const scrapeData = await fetch(
-                    `${process.env.GATSBY_SQUEAK_API_HOST}/api/scrape-jobs/${company.data.id}`,
-                    {
-                        headers: {
-                            Authorization: `Bearer ${jwt}`,
-                            'content-type': 'application/json',
-                        },
-                    }
-                ).then((res) => res.json())
-                if (scrapeData.jobsCreated <= 0) {
-                    throw new Error('The company was created, but no jobs were found. Please check the job board URL.')
-                }
+                await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/scrape-jobs/${company.data.id}`, {
+                    headers: {
+                        Authorization: `Bearer ${jwt}`,
+                        'content-type': 'application/json',
+                    },
+                })
                 onSuccess?.()
             } catch (error) {
                 console.error('Error submitting form:', error)
-                setSubmissionError(error instanceof Error ? error.message : 'Something went wrong')
             } finally {
                 setSubmitting(false)
             }
@@ -701,12 +734,25 @@ const AddAJobForm = ({ onSuccess }: { onSuccess?: () => void }) => {
         }
     }, [values.slug])
 
-    return submissionError ? (
-        <div className="bg-red/10 p-3 rounded-md border border-red">
-            <h4 className="m-0 text-base">Something went wrong</h4>
-            <p className="m-0 text-sm">{submissionError}</p>
-        </div>
-    ) : (
+    const getCompany = useCallback(async () => {
+        if (!companyId) return
+        const jwt = await getJwt()
+        const response = await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/companies/${companyId}?populate=*`, {
+            headers: {
+                Authorization: `Bearer ${jwt}`,
+            },
+        })
+        const data = await response.json()
+        setCompany(data.data)
+    }, [companyId, user])
+
+    useEffect(() => {
+        if (companyId) {
+            getCompany()
+        }
+    }, [companyId])
+
+    return (
         <form onSubmit={handleSubmit} className="space-y-4 m-0">
             <Input
                 label="Company name"
@@ -856,7 +902,7 @@ const AddAJobForm = ({ onSuccess }: { onSuccess?: () => void }) => {
                             <Spinner className="!size-6" />
                         </div>
                     ) : (
-                        'Submit company'
+                        `${companyId ? 'Update' : 'Create'} company`
                     )}
                 </CallToAction>
             </div>
@@ -872,8 +918,14 @@ export default function JobsPage() {
     const [applyModalOpen, setApplyModalOpen] = useState(false)
     const [issueModalOpen, setIssueModalOpen] = useState(false)
     const [addAJobModalOpen, setAddAJobModalOpen] = useState(false)
+    const [companyId, setCompanyId] = useState<number>()
     const [search, setSearch] = useState('')
-    const { companies, isLoading: companiesLoading, mutate } = useCompanies({ companyFilters, jobFilters, search })
+    const {
+        companies,
+        isLoading: companiesLoading,
+        mutate,
+        deleteCompany,
+    } = useCompanies({ companyFilters, jobFilters, search })
     const { isModerator } = useUser()
 
     return (
@@ -928,6 +980,11 @@ export default function JobsPage() {
                                 companies={companies}
                                 search={search}
                                 onSearch={(value) => setSearch(value)}
+                                onEdit={(id) => {
+                                    setCompanyId(id)
+                                    setAddAJobModalOpen(true)
+                                }}
+                                onDelete={deleteCompany}
                             />
                         ) : (
                             <Jobs companyFilters={companyFilters} jobFilters={jobFilters} />
@@ -1005,8 +1062,17 @@ export default function JobsPage() {
             <SideModal className="w-full" open={issueModalOpen} setOpen={setIssueModalOpen} title="Report an issue">
                 <IssueForm />
             </SideModal>
-            <SideModal className="w-full" open={addAJobModalOpen} setOpen={setAddAJobModalOpen} title="Add a company">
-                <AddAJobForm
+            <SideModal
+                className="w-full"
+                open={addAJobModalOpen}
+                setOpen={(open) => {
+                    setAddAJobModalOpen(open)
+                    setCompanyId(undefined)
+                }}
+                title="Add a company"
+            >
+                <CompanyForm
+                    companyId={companyId}
                     onSuccess={() => {
                         mutate()
                         setAddAJobModalOpen(false)
