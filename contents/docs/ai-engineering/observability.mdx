@@ -22,11 +22,19 @@ All of this data is captured into PostHog to be used in insights, dashboards, al
 
 ## Observability installation
 
-Setting up observability starts with installing the PostHog Python SDK.
+Setting up observability starts with installing the PostHog SDK for your language.
 
-```bash
+<MultiLanguage>
+
+```bash file=Python
 pip install posthog
 ```
+
+```bash file=TypeScript
+npm install @posthog/ai posthog-node
+```
+
+</MultiLanguage>
 
 The rest of the setup depends on the LLM platform you're using. These SDKs _do not_ proxy your calls, they only fire off an async call to PostHog in the background to send the data.
 
@@ -59,7 +67,9 @@ import LangChainInstall from "./_snippets/langchain.mdx"
 
 To avoid storing potentially sensitive prompt and completion data, you can enable privacy mode. This excludes the `$ai_input` and `$ai_output_choices` properties from being captured.
 
-This can be done either by setting the `privacy_mode` config option in the Python SDK like this:
+This can be done either by setting the `privacy_mode` config option in the SDK like this:
+
+<MultiLanguage>
 
 ```python
 import posthog
@@ -69,15 +79,36 @@ posthog.host = "<ph_client_api_host>"
 posthog.privacy_mode = True
 ```
 
+```ts
+const phClient = new PostHog(
+  '<ph_project_api_key>',
+  { 
+    host: '<ph_client_api_host>',
+    privacyMode: true
+  }
+)
+```
+
+</MultiLanguage>
+
 It can also be on at the request level by including setting the `privacy_mode` parameter to `True` in the request. The exact setup depends on the LLM platform you're using:
 
 <MultiLanguage>
 
-```python file=OpenAI
+```python file=OpenAI.py
 client.chat.completions.create(
+    model="gpt-3.5-turbo",
     messages=[...],
     posthog_privacy_mode=True
 )
+```
+
+```typescript file=OpenAI.ts
+const completion = await openai.chat.completions.create({
+    model: "gpt-3.5-turbo",
+    messages: [...],
+    posthog_privacy_mode: true
+});
 ```
 
 ```python file=Anthropic
