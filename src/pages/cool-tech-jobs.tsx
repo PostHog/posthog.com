@@ -161,6 +161,7 @@ const Companies = ({
     onSearch,
     onEdit,
     onDelete,
+    hasFilters,
 }: {
     companiesLoading: boolean
     companies: Company[]
@@ -168,6 +169,7 @@ const Companies = ({
     onSearch: (search: string) => void
     onEdit: (companyId: number) => void
     onDelete: (companyId: number, companyName: string) => void
+    hasFilters: boolean
 }) => {
     const { isModerator } = useUser()
     const { websiteTheme } = useValues(layoutLogic)
@@ -209,7 +211,7 @@ const Companies = ({
                     const logoLight = company.attributes.logoLight?.data?.attributes?.url
                     const logoDark = company.attributes.logoDark?.data?.attributes?.url
                     const hasJobs = company.attributes.jobs.data.length > 0
-                    return (isModerator && !search) || hasJobs ? (
+                    return (isModerator && !search && !hasFilters) || hasJobs ? (
                         <li
                             className={`@2xl:flex @2xl:space-x-8 items-start ${!hasJobs ? 'opacity-60' : ''}`}
                             key={company.id}
@@ -985,6 +987,7 @@ export default function JobsPage() {
                                     setAddAJobModalOpen(true)
                                 }}
                                 onDelete={deleteCompany}
+                                hasFilters={companyFilters.length > 0 || jobFilters.length > 0}
                             />
                         ) : (
                             <Jobs companyFilters={companyFilters} jobFilters={jobFilters} />
