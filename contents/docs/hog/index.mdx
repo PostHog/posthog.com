@@ -47,8 +47,8 @@ if (inputs.debug) {
 // Create and fire a request with the specified URL and payload object
 let res := fetch(inputs.url, payload);
 
-// When the request returns, execution will continue
-// The response will be stored to the above constant, `res`
+// When the request returns, execution continues
+// The response is stored to the above constant, `res`
 // You can write code that handles the response from here
 
 if (inputs.debug) {
@@ -62,8 +62,8 @@ It’s okay if your destination service is a little pickier, though. Let’s say
 ```hog
 
 let wrapped_input := {
-	'some_necessary_property': 'its necessary value',
-	'content': inputs.body
+  'some_necessary_property': 'its necessary value',
+  'content': inputs.body
 }
 
 let payload := {
@@ -82,8 +82,8 @@ Imagine a destination endpoint that can update one of many tables, and therefore
 ```hog
 
 let table_patch := {
-	'table': inputs.table,
-	'content': inputs.body
+  'table': inputs.table,
+  'content': inputs.body
 }
 ```
 ### Keep in mind
