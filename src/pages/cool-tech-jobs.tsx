@@ -574,6 +574,7 @@ const AddAJobForm = ({ onSuccess }: { onSuccess?: () => void }) => {
             logoLight: undefined,
             logoDark: undefined,
             logomark: undefined,
+            jobBoardURL: '',
         },
         validationSchema: Yup.object({
             name: Yup.string().required('Company name is required'),
@@ -585,6 +586,11 @@ const AddAJobForm = ({ onSuccess }: { onSuccess?: () => void }) => {
                     .test('unique-slug', 'Company already exists', () => {
                         return slugExists === undefined || slugExists === false
                     }),
+                otherwise: Yup.string(),
+            }),
+            jobBoardURL: Yup.string().when('jobBoardType', {
+                is: (value: string) => value === 'other',
+                then: Yup.string().url('Must be a valid URL').required('Job board URL is required'),
                 otherwise: Yup.string(),
             }),
             description: Yup.string().required('Company description is required'),
@@ -751,6 +757,16 @@ const AddAJobForm = ({ onSuccess }: { onSuccess?: () => void }) => {
                             </div>
                         </div>
                     </div>
+                )}
+                {values.jobBoardType === 'other' && (
+                    <Input
+                        label="Job board URL"
+                        placeholder="https://example.com/jobs"
+                        {...getFieldProps('jobBoardURL')}
+                        error={errors.jobBoardURL}
+                        touched={touched.jobBoardURL}
+                        className="mt-2"
+                    />
                 )}
             </div>
 
