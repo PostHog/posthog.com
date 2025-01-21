@@ -554,6 +554,25 @@ const supportedJobBoardTypes = [
     { value: 'greenhouse', label: 'Greenhouse' },
 ]
 
+const CompanyFormSkeleton = () => {
+    const [skeletonLength, setSkeletonLength] = useState(1)
+
+    useEffect(() => {
+        const interval = setInterval(() => {
+            setSkeletonLength((prev) => prev + 1)
+        }, 1000)
+        return () => clearInterval(interval)
+    }, [])
+
+    return (
+        <ul className="list-none p-0 m-0 space-y-3">
+            {Array.from({ length: skeletonLength }).map((_, index) => (
+                <div key={index} className="h-10 w-full bg-accent dark:bg-accent-dark rounded-md animate-pulse" />
+            ))}
+        </ul>
+    )
+}
+
 const CompanyForm = ({ onSuccess, companyId }: { onSuccess?: () => void; companyId?: number }) => {
     const { user, getJwt } = useUser()
     const [slugExists, setSlugExists] = useState<boolean | undefined>(undefined)
@@ -754,7 +773,9 @@ const CompanyForm = ({ onSuccess, companyId }: { onSuccess?: () => void; company
         }
     }, [companyId])
 
-    return (
+    return companyId && !company ? (
+        <CompanyFormSkeleton />
+    ) : (
         <form onSubmit={handleSubmit} className="space-y-4 m-0">
             <Input
                 label="Company name"
