@@ -179,8 +179,12 @@ Consider the following entirely possible example:
 1. `$pageview` with `browser = Chrome`
 2. `$pageview` with `browser = Firefox`
 3. `user signed up` with `browser = Chrome`
+4. `user posted` with `browser = Chrome`
+5. `user posted` with `browser = Firefox`
 
-All steps means the person will be counted twice for the `$pageview` event and once for the `user signed up` event.
+With all steps mode, the person will be counted twice in the funnel, but in slightly different ways.
+
+The person will be in the Chrome breakdown as having completed all three steps: `$pageview`, `user signed up`, and `user posted`. The person will also be in the Firefox breakdown, but only for the `$pageview` step because they didn't complete the `user posted` step.
 
 ##### 4. Specific step
 
