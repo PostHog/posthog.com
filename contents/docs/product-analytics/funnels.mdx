@@ -184,14 +184,14 @@ All steps means the person will be counted twice for the `$pageview` event and o
 
 ##### 4. Specific step
 
-In this case, only the property value seen at the selected step is chosen.
+In this case, only the property value seen at the selected step is chosen. Importantly, this also means that the person won't be included in the funnel if they don't have a property value at the selected step.
 
 Consider the same example as above:
 
 1. `$pageview` with `browser = Chrome`
 2. `user signed up` with `browser = Firefox`
 
-For the example above, when step two is chosen the value will be `Firefox`.
+For the example above, when step two is chosen the value will be `Firefox`. If step two is chosen, any people who only have a `$pageview` event will be excluded from the funnel.
 
 With the specific step mode, one person can have more than one property value. For example, if the user captured the same event with different browsers:
 
