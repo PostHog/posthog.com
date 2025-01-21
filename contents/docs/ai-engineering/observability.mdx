@@ -42,13 +42,15 @@ import Tab from "components/Tab"
 import OpenAIInstall from "./_snippets/openai.mdx"
 import AnthropicInstall from "./_snippets/anthropic.mdx"
 import LangChainInstall from "./_snippets/langchain.mdx"
+import VercelAISDKInstall from "./_snippets/vercelai.mdx"
 
 <!-- prettier-ignore -->
-<Tab.Group tabs={['OpenAI', 'Anthropic', 'Langchain']}>
+<Tab.Group tabs={['OpenAI', 'Anthropic', 'Langchain', 'Vercel AI SDK']}>
     <Tab.List>
         <Tab>OpenAI</Tab>
         <Tab>Anthropic</Tab>
         <Tab>LangChain</Tab>
+        <Tab>Vercel AI SDK</Tab>
     </Tab.List>
     <Tab.Panels>
         <Tab.Panel>
@@ -59,6 +61,9 @@ import LangChainInstall from "./_snippets/langchain.mdx"
         </Tab.Panel>
         <Tab.Panel>
             <LangChainInstall />
+        </Tab.Panel>
+        <Tab.Panel>
+            <VercelAISDKInstall />
         </Tab.Panel>
     </Tab.Panels>
 </Tab.Group>
@@ -107,7 +112,7 @@ client.chat.completions.create(
 const completion = await openai.chat.completions.create({
     model: "gpt-3.5-turbo",
     messages: [...],
-    posthog_privacy_mode: true
+    posthogPrivacyMode: true
 });
 ```
 
@@ -124,6 +129,6 @@ callback_handler = PosthogCallbackHandler(
     client,
     privacy_mode=True
 )
-``` 
+```
 
 </MultiLanguage>
