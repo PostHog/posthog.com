@@ -18,12 +18,14 @@ We’ve written Hog destination templates for dozens of services. But you can al
 
 ## Hog by example: webhook
 
-When creating a destination, you’ll start with an input interface sheet. This enables easy changes and maintenance to your destination. Each input’s property name is noted beside its title.
+When creating a destination, you’ll start with an input interface sheet. This enables easy changes and maintenance to your destination. 
 
 You can include additional inputs while editing the destination:
 
 - Click **Edit source code**
 - Click **Add input variable**
+
+While editing your destination, each input's property name is noted beside its title.
 
 Let's walk through the default [webhook template](/docs/cdp/destinations/webhook). It's a great starting point for your own destinations.
 
@@ -55,7 +57,7 @@ if (inputs.debug) {
 }
 ```
 
-It’s okay if your destination service is a little pickier, though. Let’s say the endpoint you’re targeting expects to receive a body with a specific structure. You could wrap the JSON body content in another object, then pass this along to the payload:
+It’s okay if your destination service is a little pickier, though. Let’s say the endpoint you’re targeting expects to receive a body with a specific structure. You could wrap the `inputs.body` JSON content in another object, then pass this along to the payload:
 
 ```hog
 
@@ -84,11 +86,6 @@ let table_patch := {
 	'content': inputs.body
 }
 ```
-
-You can even write HogQL queries in Hog, for example:
-
-[HogQL query example TK]
-
 ### Keep in mind
 
 Hog was designed to be syntax-compatible with SQL / HogQL. This means all HogQL expressions work as Hog code.
