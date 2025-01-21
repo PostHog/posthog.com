@@ -1,0 +1,44 @@
+---
+title: Managing cool tech jobs
+---
+
+### Create a company/jobs:
+
+- Login to PostHog.com as a moderator
+- Navigate to `/cool-tech-jobs`
+- Click “Add a company”
+- Fill out the fields in the side modal
+- Click Create company
+
+When a company is created, its jobs are automatically scraped based on the job board URL/slug provided. If no jobs are found, the company doesn’t appear on `/cool-tech-jobs` (unless you’re a moderator, in which case it will appear semi-transparent).
+
+### Edit a company
+
+- Login to PostHog.com as a moderator
+- Navigate to `/cool-tech-jobs`
+- Click “Edit” under the desired company
+- Fill out the fields in the side modal
+- Click Update company
+
+Jobs will be re-scraped when a company is edited.
+
+### Delete a company
+
+- Login to PostHog.com as a moderator
+- Navigate to `/cool-tech-jobs`
+- Click “Delete” under the desired company
+- Confirm that you want to delete that company
+
+All jobs associated with the deleted company will be deleted along with the original company record.
+
+### Company fields
+
+- **Company name**
+- **Company website URL** - Used for the “Learn more” link
+- **Job board type** (Ashby, Greenhouse, Other) - If “Other” is selected, a custom scraper will need to be built. When the company is published, it will be hidden as no jobs will be scraped.
+- **Job board URL** (if Job board type is set to “Other”) - we’ll use this to build a custom scraper
+- **Job board slug** (if Job board type is *not* “Other”) - the job board’s slug. This is automatically created as you type the company name, as these usually mirror each other. Must be unique and is checked for uniqueness as you type.
+- **Company perks**
+- **Company logos** - SVG/PNG only
+
+Unless required conditionally (job board URL/slug), every company field is required.
