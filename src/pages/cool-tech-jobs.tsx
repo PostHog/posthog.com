@@ -527,8 +527,8 @@ const supportedJobBoardTypes = [
 
 const AddAJobForm = ({ onSuccess }: { onSuccess?: () => void }) => {
     const { user, getJwt } = useUser()
-    const [companyExists, setCompanyExists] = useState<boolean>(false)
     const [submissionError, setSubmissionError] = useState<string | null>(null)
+    const [slugExists, setSlugExists] = useState<boolean | undefined>(undefined)
 
     const debouncedCheckSlugExists = useCallback(
         debounce(async (slug: string) => {
@@ -538,7 +538,9 @@ const AddAJobForm = ({ onSuccess }: { onSuccess?: () => void }) => {
                     `${process.env.GATSBY_SQUEAK_API_HOST}/api/companies?filters[slug][$eq]=${slug}`
                 )
                 const data = await response.json()
-                setCompanyExists(data?.data?.length > 0)
+                const exists = data?.data?.length > 0
+                setSlugExists(exists)
+                validateField('slug')
             } catch (error) {
                 console.error('Error checking slug:', error)
             }
@@ -546,130 +548,140 @@ const AddAJobForm = ({ onSuccess }: { onSuccess?: () => void }) => {
         []
     )
 
-    const { handleSubmit, values, touched, setFieldValue, errors, getFieldProps, isSubmitting, validateField } =
-        useFormik({
-            initialValues: {
-                name: '',
-                url: '',
-                slug: '',
-                engineersDecideWhatToBuild: false,
-                remoteOnly: false,
-                exoticOffsites: false,
-                meetingFreeDays: false,
-                highEngineerRatio: false,
-                noDeadlines: false,
-                description: '',
-                jobBoardType: 'ashby',
-                logoLight: undefined,
-                logoDark: undefined,
-                logomark: undefined,
-            },
-            validationSchema: Yup.object({
-                name: Yup.string().required('Company name is required'),
-                url: Yup.string().url('Must be a valid URL').required('Company website URL is required'),
-                slug: Yup.string().when('jobBoardType', {
-                    is: (value: string) => value !== 'other',
-                    then: Yup.string().required('Job board slug is required'),
-                    otherwise: Yup.string(),
-                }),
-                description: Yup.string().required('Company description is required'),
-                jobBoardType: Yup.string().required('Job board type is required'),
-                logoLight: Yup.mixed().required('Light logo is required'),
-                logoDark: Yup.mixed().required('Dark logo is required'),
-                logomark: Yup.mixed().required('Logomark is required'),
+    const {
+        handleSubmit,
+        values,
+        touched,
+        setFieldValue,
+        errors,
+        getFieldProps,
+        isSubmitting,
+        setTouched,
+        validateField,
+    } = useFormik({
+        initialValues: {
+            name: '',
+            url: '',
+            slug: '',
+            engineersDecideWhatToBuild: false,
+            remoteOnly: false,
+            exoticOffsites: false,
+            meetingFreeDays: false,
+            highEngineerRatio: false,
+            noDeadlines: false,
+            description: '',
+            jobBoardType: 'ashby',
+            logoLight: undefined,
+            logoDark: undefined,
+            logomark: undefined,
+        },
+        validationSchema: Yup.object({
+            name: Yup.string().required('Company name is required'),
+            url: Yup.string().url('Must be a valid URL').required('Company website URL is required'),
+            slug: Yup.string().when('jobBoardType', {
+                is: (value: string) => value !== 'other',
+                then: Yup.string()
+                    .required('Job board slug is required')
+                    .test('unique-slug', 'Company already exists', () => {
+                        return slugExists === undefined || slugExists === false
+                    }),
+                otherwise: Yup.string(),
             }),
-            validateOnChange: true,
-            validateOnBlur: false,
-            onSubmit: async (values, { setSubmitting }) => {
-                try {
-                    if (companyExists) return
-                    const { logoLight, logoDark, logomark, ...rest } = values
-                    const jwt = await getJwt()
-                    const profileID = user?.profile?.id
-                    if (!profileID || !jwt) return
-                    // Create initial company without images in case of failure
-                    const createResponse = await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/companies`, {
-                        method: 'POST',
+            description: Yup.string().required('Company description is required'),
+            jobBoardType: Yup.string().required('Job board type is required'),
+            logoLight: Yup.mixed().required('Light logo is required'),
+            logoDark: Yup.mixed().required('Dark logo is required'),
+            logomark: Yup.mixed().required('Logomark is required'),
+        }),
+        validateOnChange: true,
+        validateOnBlur: false,
+        onSubmit: async (values, { setSubmitting }) => {
+            try {
+                const { logoLight, logoDark, logomark, ...rest } = values
+                const jwt = await getJwt()
+                const profileID = user?.profile?.id
+                if (!profileID || !jwt) return
+                // Create initial company without images in case of failure
+                const createResponse = await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/companies`, {
+                    method: 'POST',
+                    headers: {
+                        Authorization: `Bearer ${jwt}`,
+                        'content-type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        data: rest,
+                    }),
+                })
+                if (!createResponse.ok) {
+                    throw new Error('Failed to create company')
+                }
+                const company = await createResponse.json()
+                if (!company?.data?.id) {
+                    throw new Error('Failed to create company')
+                }
+                // Upload images and update the company
+                const uploadedLogoLight =
+                    values.logoLight?.file &&
+                    (await uploadImage(logoLight.file, jwt, {
+                        field: 'images',
+                        id: profileID,
+                        type: 'api::profile.profile',
+                    }))
+                const uploadedLogoDark =
+                    values.logoDark?.file &&
+                    (await uploadImage(logoDark.file, jwt, {
+                        field: 'images',
+                        id: profileID,
+                        type: 'api::profile.profile',
+                    }))
+                const uploadedLogomark =
+                    values.logomark?.file &&
+                    (await uploadImage(logomark.file, jwt, {
+                        field: 'images',
+                        id: profileID,
+                        type: 'api::profile.profile',
+                    }))
+                const updateResponse = await fetch(
+                    `${process.env.GATSBY_SQUEAK_API_HOST}/api/companies/${company.data.id}`,
+                    {
+                        method: 'PUT',
                         headers: {
                             Authorization: `Bearer ${jwt}`,
                             'content-type': 'application/json',
                         },
                         body: JSON.stringify({
-                            data: rest,
+                            data: {
+                                ...(uploadedLogoLight ? { logoLight: uploadedLogoLight.id } : {}),
+                                ...(uploadedLogoDark ? { logoDark: uploadedLogoDark.id } : {}),
+                                ...(uploadedLogomark ? { logomark: uploadedLogomark.id } : {}),
+                            },
                         }),
-                    })
-                    if (!createResponse.ok) {
-                        throw new Error('Failed to create company')
                     }
-                    const company = await createResponse.json()
-                    if (!company?.data?.id) {
-                        throw new Error('Failed to create company')
-                    }
-                    // Upload images and update the company
-                    const uploadedLogoLight =
-                        values.logoLight?.file &&
-                        (await uploadImage(logoLight.file, jwt, {
-                            field: 'images',
-                            id: profileID,
-                            type: 'api::profile.profile',
-                        }))
-                    const uploadedLogoDark =
-                        values.logoDark?.file &&
-                        (await uploadImage(logoDark.file, jwt, {
-                            field: 'images',
-                            id: profileID,
-                            type: 'api::profile.profile',
-                        }))
-                    const uploadedLogomark =
-                        values.logomark?.file &&
-                        (await uploadImage(logomark.file, jwt, {
-                            field: 'images',
-                            id: profileID,
-                            type: 'api::profile.profile',
-                        }))
-                    const updateResponse = await fetch(
-                        `${process.env.GATSBY_SQUEAK_API_HOST}/api/companies/${company.data.id}`,
-                        {
-                            method: 'PUT',
-                            headers: {
-                                Authorization: `Bearer ${jwt}`,
-                                'content-type': 'application/json',
-                            },
-                            body: JSON.stringify({
-                                data: {
-                                    ...(uploadedLogoLight ? { logoLight: uploadedLogoLight.id } : {}),
-                                    ...(uploadedLogoDark ? { logoDark: uploadedLogoDark.id } : {}),
-                                    ...(uploadedLogomark ? { logomark: uploadedLogomark.id } : {}),
-                                },
-                            }),
-                        }
-                    )
-                    if (!updateResponse.ok) {
-                        throw new Error('Failed to update company')
-                    }
-                    const scrapeData = await fetch(
-                        `${process.env.GATSBY_SQUEAK_API_HOST}/api/scrape-jobs/${company.data.id}`,
-                        {
-                            headers: {
-                                Authorization: `Bearer ${jwt}`,
-                                'content-type': 'application/json',
-                            },
-                        }
-                    ).then((res) => res.json())
-                    if (scrapeData.jobsCreated <= 0) {
-                        throw new Error(
-                            'The company was created, but no jobs were found. Please check the job board URL.'
-                        )
-                    }
-                    onSuccess?.()
-                } catch (error) {
-                    console.error('Error submitting form:', error)
-                    setSubmissionError(error instanceof Error ? error.message : 'Something went wrong')
-                } finally {
-                    setSubmitting(false)
+                )
+                if (!updateResponse.ok) {
+                    throw new Error('Failed to update company')
                 }
-            },
-        })
+                const scrapeData = await fetch(
+                    `${process.env.GATSBY_SQUEAK_API_HOST}/api/scrape-jobs/${company.data.id}`,
+                    {
+                        headers: {
+                            Authorization: `Bearer ${jwt}`,
+                            'content-type': 'application/json',
+                        },
+                    }
+                ).then((res) => res.json())
+                if (scrapeData.jobsCreated <= 0) {
+                    throw new Error('The company was created, but no jobs were found. Please check the job board URL.')
+                }
+                onSuccess?.()
+            } catch (error) {
+                console.error('Error submitting form:', error)
+                setSubmissionError(error instanceof Error ? error.message : 'Something went wrong')
+            } finally {
+                setSubmitting(false)
+            }
+        },
+    })
 
     useEffect(() => {
         setFieldValue('slug', slugify(values.name || '', { lower: true }))
@@ -677,9 +689,10 @@ const AddAJobForm = ({ onSuccess }: { onSuccess?: () => void }) => {
 
     useEffect(() => {
         if (values.slug) {
+            setTouched({ slug: true })
+            setSlugExists(undefined)
             debouncedCheckSlugExists(values.slug)
         }
-        setCompanyExists(false)
     }, [values.slug])
 
     return submissionError ? (
@@ -724,15 +737,15 @@ const AddAJobForm = ({ onSuccess }: { onSuccess?: () => void }) => {
                             <p className="m-0 text-sm opacity-70">{jobBoardBaseURLs[values.jobBoardType]}</p>
                             <div className="flex-grow relative">
                                 <input
-                                    className={`border border-border dark:border-dark rounded-md p-2 text-sm w-full bg-white dark:bg-accent-dark ${
-                                        companyExists || (touched.slug && errors.slug) ? 'border-red' : ''
+                                    className={`border rounded-md p-2 text-sm w-full bg-white dark:bg-accent-dark ${
+                                        touched.slug && errors.slug ? 'border-red' : 'border-border dark:border-dark'
                                     }`}
                                     placeholder={slugify(values.name || '', { lower: true })}
                                     {...getFieldProps('slug')}
                                 />
-                                {(companyExists || (touched.slug && errors.slug)) && (
+                                {touched.slug && errors.slug && (
                                     <p className="text-red text-sm m-0 mt-1 absolute -bottom-1 translate-y-full">
-                                        {companyExists ? 'Company already exists' : errors.slug}
+                                        {errors.slug}
                                     </p>
                                 )}
                             </div>

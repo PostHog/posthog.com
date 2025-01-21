@@ -71,7 +71,7 @@ export default function ImageDrop({
                 )}
             </button>
             {image && (
-                <div className="hidden group-hover:flex absolute h-full w-full inset-0 bg-border/70 justify-center items-center z-10">
+                <div className="hidden group-hover:flex absolute h-full w-full inset-0 bg-border/70 dark:bg-border-dark/70 justify-center items-center z-10">
                     <button
                         type="button"
                         className="p-2 border border-black/50 rounded-full bg-white"
