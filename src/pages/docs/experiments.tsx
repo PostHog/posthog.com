@@ -60,7 +60,6 @@ export const Content = ({ quickLinks = false }) => {
     const { compact } = useLayoutData()
     return (
         <>
-           
             {(quickLinks || compact) && (
                 <QuickLinks
                     items={docsMenu.children.find(({ name }) => name.toLowerCase() === 'a/b testing')?.children}
@@ -111,24 +110,24 @@ const Experiments: React.FC<ExperimentsProps> = ({ data }) => {
             <SEO title="Experiments - Docs - PostHog" />
 
             <PostLayout title={'Experiments'} hideSurvey hideSidebar>
-            <Intro
-                subheader="Getting started"
-                title="Experiments"
-                description="Test different variations of your product and measure the impact."
-                buttonText="Roll out your first experiment"
-                buttonLink="/docs/experiments/installation"
-                imageColumnClasses="max-w-96 mt-8 md:mt-0"
-                imageUrl="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Home/Slider/images/ab-testing-hog.png"
-                imageClasses=""
-            />
+                <Intro
+                    subheader="Getting started"
+                    title="Experiments"
+                    description="Test different variations of your product and measure the impact."
+                    buttonText="Roll out your first experiment"
+                    buttonLink="/docs/experiments/installation"
+                    imageColumnClasses="max-w-96 mt-8 md:mt-0"
+                    imageUrl="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Home/Slider/images/ab-testing-hog.png"
+                    imageClasses=""
+                />
 
-            <AskMax 
-                quickQuestions={[
-                    'How can I watch recordings of users in my experiment?',
-                    'Can I override a release condition?',
-                    'How do I know if I\'ve reached statistical significance?',
-                ]}
-            />
+                <AskMax
+                    quickQuestions={[
+                        'How can I watch recordings of users in my experiment?',
+                        'Can I override a release condition?',
+                        "How do I know if I've reached statistical significance?",
+                    ]}
+                />
 
                 <Content />
 

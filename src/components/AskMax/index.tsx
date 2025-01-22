@@ -15,7 +15,13 @@ interface AskMaxProps {
     children?: React.ReactNode
 }
 
-export default function AskMax({ border = false, className = '', quickQuestions, linkOnly = false, children }: AskMaxProps) {
+export default function AskMax({
+    border = false,
+    className = '',
+    quickQuestions,
+    linkOnly = false,
+    children,
+}: AskMaxProps) {
     const posthog = usePostHog()
     const { compact } = useLayoutData()
     const { openChat, setQuickQuestions } = useChat()
