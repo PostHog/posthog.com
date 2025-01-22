@@ -139,13 +139,13 @@ export default function Customers() {
                     <Customer className="max-h-[50px]" image={trustwallet} alt="Trust Wallet" />
                     <Customer
                         url="/customers/researchgate"
-                        className="max-h-[40px]"
+                        className="max-h-[30px]"
                         image={researchgate}
                         alt="ResearchGate"
                     />
                     <Customer
                         url="/blog/posthog-marketing"
-                        className="max-h-[45px]"
+                        className="max-h-[40px]"
                         image={posthog}
                         alt="PostHog - so meta!"
                     />
