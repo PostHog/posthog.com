@@ -9,7 +9,7 @@ const query = (params: any, offset: number, limit = 20) => {
                 populate: ['question', 'team'],
             },
             teams: {
-                populate: ['leadProfiles'],
+                populate: ['leadProfiles', 'miniCrest'],
             },
             likes: true,
             topic: true,

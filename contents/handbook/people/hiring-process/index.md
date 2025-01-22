@@ -32,18 +32,15 @@ We are all-remote, but we have a few limitations on the countries we are able to
 
 ## Hiring Process
 
-### Summary of process for current live roles
+Our hiring process follows a relatively standard structure. However, please check the individual job posting on the [careers page](/careers) as there is occasionally changes. 
 
-<OverflowXSection>
+Our process is as follows:- 
 
-| Position                     | Team                     | Reporting lead | Interview process                                                                                                                                                                                                                       |
-| ---------------------------- | ------------------------ | -------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Product Engineers          | Multiple teams                  | Tech Lead  | <ol><li>Culture screen with Ops (20mins)</li><li>Technical screen w/ an engineer (60mins)</li><li>Small team screen w/ James (30mins)</li><li>SuperDay - task assessment, peer team interview, and culture and motivation interview w/ Tim (8-10hrs)</li></ol>           |
-| Technical Account Executive              | Sales & CS                  | Simon   | <ol><li>Culture screen with Ops (20mins)</li><li>Technical screen w/ Simon (45mins)</li><li>Small team screen w/ Tim (30mins)</li><li>SuperDay- task assessment, peer team interview, and culture and motivation interview w/ James (8-10hrs)</li></ol>            |
-| Technical Customer Success Manager             | Sales & CS                 | Simon  | <ol><li>Culture screen with Ops (20mins)</li><li>Technical screen w/ Simon (45mins)</li><li>Small team screen w/ Tim (30mins)</li><li>SuperDay- task assessment, peer team interview, and culture and motivation interview w/ James (8-10hrs)</li></ol>            |
-
-
-</OverflowXSection>
+1. Application - you let us know via the job posting you're interested in the role
+2. Culture Interview (20 mins)- you've made it to the next stage, this is a call with one our Ops team members. Our goal is to explore your motivations to join our team, learn why you’d be a great fit, and answer questions about us.
+3. Technical Interview (45-60 mins) - This stage is to assess your suitability for the role. For engineering roles, this is not a live coding interview.
+4. Founder Interview (20-30 mins) - You have reached the final boss. It's time to chat with James or Tim.
+5. SuperDay (Paid day of work) - You’ll meet a few more members of the team and work on a independent project. It's challenging, but most people say it's fun! Please note that for engineering roles this is not working on the live codebase. 
 
 ### External recruiters
 
@@ -148,7 +145,7 @@ You'll get paid the bonus 3 months from the new team member's start date, and it
 We also welcome external referrals, e.g. from:
 
 *   From our investors
-*   From the PostHog community (the users Slack Group, and posting on our social media profiles for our followers to see)
+*   From the PostHog community (by posting on our social media profiles for our followers to see)
 *   From the YC community (Slack / WhatsApp / Forum)
 
 As a thank you, we will give you $50 credit for our [merch shop](https://merch.posthog.com/).
@@ -186,8 +183,6 @@ The People & Ops team reviews applications and resumes/portfolios carefully and 
 If a candidate hasn't customized the application or resume to the role, it is a flag they aren't that excited about working at PostHog. Cover letters are definitely _not_ mandatory, but at an interview stage, it's important to note how passionate they seem about the company. Did they try out the software already? Did they read the handbook? Are they in [our community forum](/questions)?
 
 Candidates who are unsuccessful at this stage will receive an automated rejection email. Due to the volume of applications we receive, we usually don't provide personalized feedback.
-
-We also review every single speculative application weekly and if there is a possible fit for future openings, we will place the applicant into the appropriate [Ashby talent project](https://app.ashbyhq.com/projects) (i.e. full stack engineers, platform, product, website & docs, customer success, people & ops, and marketing) and notify the applicant of this via email. 
 
 ### Interviews
 

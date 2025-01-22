@@ -6,7 +6,7 @@ import { AdjustedLineItems } from './AdjustedLineItems'
 import { LoaderIcon } from './LoaderIcon'
 import { useCartStore } from './store'
 import type { AdjustedLineItem, Cart } from './types'
-import { getCartVariables } from './utils'
+import { getCartVariables, itemIsAvailableForSale } from './utils'
 
 type CheckoutProps = {
     className?: string
@@ -63,16 +63,16 @@ export function Checkout(props: CheckoutProps): React.ReactElement {
 
             if (cart === null) return
 
-            cartItems.forEach((item) => {
+            for (const item of cartItems) {
                 // first check if it's available for sale. If not, then add to the list
                 // with flag for removal from cart
-                if (!item.availableForSale) {
+                if (!(await itemIsAvailableForSale(item))) {
                     itemsExceedingQuantityAvailable.push({
                         item,
                         remove: true,
                         newCount: null,
                     })
-                    return
+                    continue
                 }
 
                 // if it is available for sale, then check if the quantity available is less than
@@ -97,7 +97,7 @@ export function Checkout(props: CheckoutProps): React.ReactElement {
                         })
                     }
                 }
-            })
+            }
 
             if (itemsExceedingQuantityAvailable.length > 0) {
                 setAdjustedItems(itemsExceedingQuantityAvailable)
@@ -136,7 +136,7 @@ export function Checkout(props: CheckoutProps): React.ReactElement {
     }, [setIsCheckingOut, discountCode, cartItems])
 
     const classes = cn(
-        'rounded-md px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black',
+        'rounded-md px-3.5 py-2.5 text-sm font-semibold text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black',
         className
     )
 

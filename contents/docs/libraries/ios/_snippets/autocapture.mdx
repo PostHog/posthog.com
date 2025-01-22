@@ -66,3 +66,52 @@ struct HomeView: View {
 ```
 
 In SwiftUI, views can range from entire screens to small UI components. Unlike UIKit, SwiftUI doesn’t clearly distinguish between these levels, which makes automatic tracking of full-screen views harder.
+
+### Adding a custom label on autocaptured elements
+
+PostHog automatically captures interactions with various UI elements in your app, but these interactions are often identified by element type names (e.g., UIButton, UITextField, UILabel). 
+
+While this provides basic tracking, it can be challenging to pinpoint specific interactions with particular elements in your analytics. To make your data more meaningful and actionable, you can assign custom labels to any autocaptured element. These labels act as descriptive identifiers, making it easier to identify, filter, and analyze events in your reports.
+
+** Adding a custom label in UIKit **
+
+To assign a custom label to a UIView, use the `postHogLabel` property:
+
+```swift
+let view = UIView()
+view.postHogLabel = "usernameTextField"
+```
+
+In this example, interactions with the UITextField will be captured with an additional identifier "usernameTextField".
+
+** Adding a custom label in SwiftUI **
+
+In SwiftUI, use the `.postHogLabel(_:)` modifier instead:
+
+```swift
+var body: some View {
+    ...
+    TextField("username", text: $username)
+        .postHogLabel("usernameTextField")
+}
+```
+
+In this example, interactions with the _underlying_ UITextField will be captured with an additional identifier "usernameTextField".
+
+**Example of generated analytics data**
+
+The generated analytics element in the examples above will have the following form: 
+
+```html
+<UITextField id="usernameTextField">text value</UITextField>
+```
+
+**Filtering for labeled autocaptured elements in reports**
+
+To locate and filter interactions with specific elements in PostHog reports, you can use Autocapture element filters, such as:
+
+- Tag Name (`UITextField` in this example)
+- Text (`text value` in this example)
+- CSS Selector (the generated `id` attribute in this example)
+
+In the examples above, we can filter for the specific text field using the CSS Selector `#usernameTextField`

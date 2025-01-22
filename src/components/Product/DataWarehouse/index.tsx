@@ -1,5 +1,5 @@
 import CloudinaryImage from 'components/CloudinaryImage'
-import React from 'react'
+import React, { useState } from 'react'
 import Link from 'components/Link'
 import { StaticImage } from 'gatsby-plugin-image'
 import { IconDatabase, IconGraph, IconHogQL, IconClock, IconToggle, IconDecisionTree } from '@posthog/icons'
@@ -26,6 +26,8 @@ import { FAQ } from 'components/Products/FAQ'
 import { SEO } from 'components/seo'
 import { useLayoutData } from 'components/Layout/hooks'
 import Plans from 'components/Pricing/Plans'
+import Profile from '../../Team/Profile'
+import SideModal from '../../Modal/SideModal'
 
 const product = {
     slug: 'data-warehouse',
@@ -205,6 +207,7 @@ export const ProductDataWarehouse = () => {
         }
     `)
     const { fullWidthContent } = useLayoutData()
+    const [activeProfile, setActiveProfile] = useState(false)
     return (
         <>
             <SEO
@@ -212,6 +215,9 @@ export const ProductDataWarehouse = () => {
                 description="Unify and query data from any source and analyze it alongside your product data."
                 image={`/images/og/data-warehouse.jpg`}
             />
+            <SideModal open={!!activeProfile} setOpen={setActiveProfile}>
+                {activeProfile && <Profile profile={{ ...activeProfile }} />}
+            </SideModal>
             <div className={`${fullWidthContent ? 'max-w-full px-8' : 'max-w-7xl mx-auto'} px-5 py-10 md:pt-20 pb-0`}>
                 <Hero
                     color="lilac"
@@ -372,7 +378,7 @@ export const ProductDataWarehouse = () => {
                         PostHog works in small teams. The <Link to={teamSlug}>{team}</Link> team is responsible for
                         building the {product.lowercase}.
                     </p>
-                    <TeamMembers teamName={team} />
+                    <TeamMembers teamName={team} setActiveProfile={setActiveProfile} />
                 </div>
             </section>
 

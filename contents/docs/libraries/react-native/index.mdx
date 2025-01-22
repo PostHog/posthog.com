@@ -160,8 +160,6 @@ posthog.capture('some_event', { $set: { userProperty: 'value' } })
 posthog.capture('some_event', { $set_once: { userProperty: 'value' } })
 ```
 
-
-
 ## Super properties
 
 Super properties are properties associated with events that are set once and then sent with every `capture` call, be it a `$screen`, an autocaptured touch, or anything else.
@@ -192,6 +190,36 @@ posthog.unregister('icecream pref'),
 This will remove the super property and subsequent events will not include it.
 
 If you are doing this as part of a user logging out you can instead simply [`posthog.reset()`](#reset-after-logout) which takes care of clearing all stored Super Properties and more.
+
+## Opt out of data capture
+
+You can completely opt-out users from data capture. To do this, there are two options:
+
+1. Opt users out by default by setting `opt_out_capturing_by_default` to `true` in your PostHog config:
+
+```javascript
+posthog.init('<ph_project_api_key>', {
+    opt_out_capturing_by_default: true,
+});
+```
+
+2. Opt users out on a per-person basis by calling `opt_out_capturing()`:
+
+```javascript
+posthog.opt_out_capturing()
+```
+
+Similarly, you can opt users in:
+
+```javascript
+posthog.opt_in_capturing()
+```
+
+To check if a user is opted out:
+
+```javascript
+posthog.has_opted_out_capturing()
+```
 
 ## Flush
 
@@ -296,7 +324,7 @@ posthog.group('company', 'company_id_in_your_db', {
 })
 ```
 
-The `name` is a special property which is used in the PostHog UI for the name of the Group. If you don't specify a `name` property, the group ID will be used instead.
+The `name` is a special property which is used in the PostHog UI for the name of the group. If you don't specify a `name` property, the group ID will be used instead.
 
 ## Session replay
 

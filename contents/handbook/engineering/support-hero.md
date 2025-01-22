@@ -12,7 +12,7 @@ One of the many awesome things about PostHog is that support is being dealt with
 
 You'll see some teams using a term of endearment for Support Hero, examples being "Infra Hero" or… "Luigi". Don't ask – we don't know.
 
-Our Support Engineers, in [the Support team](/teams/support) triage tickets for the Product Analytics, Web Analytics, Data Warehouse, CDP, Replay, and Feature Success teams, due to the high volume of tickets those teams get. They will resolve tickets if possible, and escalate to the engineering team responsible if they need further help.
+Our Support Engineers, in [the Support team](/teams/support) triage tickets for the Product Analytics, Web Analytics, Data Warehouse, CDP, Replay, Experiments, Feature Flags, and Survey teams, due to the high volume of tickets those teams get. They will resolve tickets if possible, and escalate to the engineering team responsible if they need further help.
 
 ## When is my turn?
 
@@ -37,8 +37,10 @@ Each engineering team has its own list of tickets in Zendesk:
 
 - [Product Analytics](https://posthoghelp.zendesk.com/agent/filters/17989255082139) (escalated only)
 - [Web Analytics](https://posthoghelp.zendesk.com/agent/filters/21786368880027) (escalated only)
-- [Feature Success](https://posthoghelp.zendesk.com/agent/filters/25210600744731) (escalated only)
+- [Experiments](https://posthoghelp.zendesk.com/agent/filters/30579720982299) (escalated only)
+- [Feature Flags](https://posthoghelp.zendesk.com/agent/filters/30579605742363) (escalated only)
 - [Replay](https://posthoghelp.zendesk.com/agent/filters/25210723706907) (escalated only)
+- [Surveys](https://posthoghelp.zendesk.com/agent/filters/30579650784411) (escalated only)
 - [CDP](https://posthoghelp.zendesk.com/agent/filters/28134703633179) (escalated only)
 - [Infrastructure](https://posthoghelp.zendesk.com/agent/filters/14507148758939)
 - [Auth & Billing, handled by Growth](https://posthoghelp.zendesk.com/agent/filters/14507107058843)
@@ -62,6 +64,38 @@ Others tickets report bugs or suspected bugs. Get to the bottom of each one - yo
 If not much is happening, feel free to do feature work – but in the case of a backlog in Zendesk, drop other things and roll up your sleeves. When you're Support Hero, supporting users comes first.
 
 It might be an intense week, but you're also going to solve so many real problems, and that feels great.
+
+## What do I do as a SDK Support Hero?
+
+Outside of your team's Support Hero rotation, you are also eligible to serve in a one week SDK Support Hero rotation. [The schedule is managed in PagerDuty](https://posthog.pagerduty.com/schedules#P7B7NTR).
+
+Your primary responsibility is simply to make sure SDK questions get some love. During the rotation, please keep an eye on two things:
+- [Escalated SDK tickets in Zendesk](https://posthoghelp.zendesk.com/agent/filters/30528724215067)
+- New issues in the SDK repositories
+  - [posthog-js (Web, React, Next)](https://github.com/PostHog/posthog-js/issues?q=sort%3Aupdated-desc+is%3Aissue+is%3Aopen)
+  - [posthog-js-lite (React Native, Node)](https://github.com/PostHog/posthog-js-lite/)
+  - [posthog-ios](https://github.com/PostHog/posthog-ios)
+  - [posthog-android](https://github.com/PostHog/posthog-android)
+  - [posthog-flutter](https://github.com/PostHog/posthog-flutter)
+  - [posthog-python](https://github.com/PostHog/posthog-python)
+  - [posthog-php](https://github.com/PostHog/posthog-php)
+  - [posthog-ruby](https://github.com/PostHog/posthog-ruby)
+  - [posthog-java](https://github.com/PostHog/posthog-java)
+  - [posthog-rs (Rust)](https://posthog.com/docs/libraries/rust)
+  - [posthog-go](https://posthog.com/docs/libraries/go)
+  - Others, see https://posthog.com/docs/libraries
+
+You don't have to be an expert in all of the SDKs, but it can be a great opportunity to dive into parts unknown.
+
+### How should I prioritize my time?
+
+Firstly, try to stay on top of new escalated Zendesk tickets and GitHub issues, and make sure that issues related to a specific team are routed to them. If there is a relevant team (e.g. the issue is related to session replay in posthog-js), you can assign the Zendesk ticket to that team, and use the team's label in GitHub. If there is no relevant team for a GitHub issue, please label with `SDK Support Hero`. Feel free to try to fix things yourself before tagging the team.
+
+Next, please work on SDK tickets in Zendesk, and GitHub issues labelled `SDK Support Hero` (and unlabelled, but please label these!). You can use your own judgement to decide which issues to work on but please consider effort / reward / urgency / your skill set. For example, `posthog-js` usually has the most issues, but if you're a Python expert, you might want to focus on `posthog-python`.
+
+At the end of the week, please write a public handover message in `#support-client-libraries`, to let the next person know what work is in progress, let the team know how the support rotation is going in general, and to share any learnings or feedback.
+
+For Mobile SDK issues, the SLA has to be a bit faster since rolling out fixes on Mobile Apps may take weeks or even months. So, if you see a high-priority issue, please try to figure it out but if you get stuck, escalate it to the relevant team as soon as possible or ping @mobile-folks on Slack.
 
 ## Don't ask users to do work that you can do!
 
@@ -106,7 +140,7 @@ As an engineer, when answering a question, your first instinct is to give them a
 - Housekeeping. Once a customer issue/question has been addressed, close the ticket in [Zendesk](#zendesk) (mark it `Solved`) to make it easy to identify outstanding conversations.
 - If a user has been particularly helpful, such as raising a security or bug report, feel free to offer a small credit for the merch store. 
 
-If you have any questions about how or when to communicate with users, you can always ask [the Words & Pictures team](/teams/words-and-pictures) for help. 
+If you have any questions about how or when to communicate with users, you can always ask [the Words & Pictures team](/teams/words-pictures) for help. 
 
 ## How do I prioritize?
 

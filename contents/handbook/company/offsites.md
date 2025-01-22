@@ -84,6 +84,7 @@ For offsites and onboardings in London, below is a list of hotels recommended in
 - [Hampton by Hilton  - London Old Street](https://www.hilton.com/en/hotels/lhroshx-hampton-london-old-street/)
 - [hub by Premier Inn London Clerkenwell hotel](https://www.premierinn.com/gb/en/hotels/england/greater-london/london/hub-london-clerkenwell.html)
 - [Yotel London City](https://www.yotel.com/en/hotels/yotel-london-city)
+- [Bob W Tower Hill Studios](https://bobw.co/apartments/comfy-studio-tower-hill)
 
 ## Travel insurance
 

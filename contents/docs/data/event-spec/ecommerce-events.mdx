@@ -1,0 +1,1214 @@
+---
+title: Ecommerce events specification
+sidebar: Docs
+showTitle: true
+---
+
+PostHog's ecommerce spec helps define the journey for a customer as they browse your store, click on promotions, view products, add those products to a cart, and complete a purchase.
+
+This spec serves as the foundation for our CDP destination templates. We recommend implementing this spec to avoid having to manually map events and properties to our CDP destinations.
+
+## Event lifecycle overview
+
+Here is a list of supported events for our various categories within the customer journey.
+
+### Browsing
+
+| Event                  | Description                              |
+|------------------------|------------------------------------------|
+| Products Searched      | User searched for products               |
+| Product List Viewed    | User viewed a product list or category   |
+| Product List Filtered	 | User filtered a product list or category |
+
+### Promotions
+
+| Event              | Description               |
+|--------------------|---------------------------|
+| Promotion Viewed   | User viewed promotion     |
+| Promotion Clicked  | User clicked on promotion |
+
+### Ordering
+
+| Event                   | Description                                     |
+|-------------------------|-------------------------------------------------|
+| Product Clicked         | User clicked on a product                       |
+| Product Viewed          | User viewed a product details                   |
+| Product Added           | User added a product to their shopping cart     |
+| Product Removed         | User removed a product from their shopping cart |
+| Cart Viewed             | User viewed their shopping cart                 |
+| Checkout Started        | User initiated the order process                |
+| Checkout Step Viewed    | User viewed a checkout step                     |
+| Checkout Step Completed | User completed a checkout step                  |
+| Payment Info Entered    | User added payment information                  |
+| Order Completed         | User completed the order                        |
+| Order Updated           | User updated the order                          |
+| Order Refunded          | User refunded the order                         |
+| Order Cancelled         | User cancelled the order                        |
+
+### Coupons
+
+| Event          | Description                                            |
+|----------------|--------------------------------------------------------|
+| Coupon Entered | User entered a coupon on a shopping cart or order      |
+| Coupon Applied | Coupon was applied on a user’s shopping cart or order  |
+| Coupon Denied  | Coupon was denied from a user’s shopping cart or order |
+| Coupon Removed | User removed a coupon from a cart or order             |
+
+### Wishlisting
+
+| Event                          | Description                               |
+|--------------------------------|-------------------------------------------|
+| Product Added to Wishlist      | User added a product to the wishlist      |
+| Product Removed from Wishlist  | User removed a product from the wishlist  |
+| Wishlist Product Added to Cart | User added a wishlist product to the cart |
+
+### Sharing
+
+| Event          | Description                               |
+|----------------|-------------------------------------------|
+| Product Shared | Shared a product with one or more friends |
+| Cart Shared    | Shared the cart with one or more friends  |
+
+### Reviewing
+
+| Event            | Description             |
+|------------------|-------------------------|
+| Product Reviewed | User reviewed a product |
+
+## Browsing
+
+The browsing lifecycle events are associated with key activities that a customer might perform while browsing through your website or mobile app.
+
+### Products Searched
+
+Fire this event when a visitor searches for products. The following properties are supported:
+
+| Property | Type             | Description                  |
+|----------|------------------|------------------------------|
+| query    | String \| Object | Query the user searched with |
+
+Example:
+
+```js
+posthog.capture('Products Searched', {
+  query: 'blue roses'
+});
+```
+
+### Product List Viewed
+
+Fire this event when a visitor views a product list or category. The following properties are supported:
+
+| Property              | Type            | Description                                                      |
+|-----------------------|-----------------|------------------------------------------------------------------|
+| list_id               | String          | Product list being viewed                                        |
+| category              | String          | Product category being viewed                                    |
+| products              | Array<Product\> | Products displayed in the list                                   |
+| products.$.product_id | String          | Product id displayed on the list                                 |
+| products.$.sku        | String          | SKU (Stock Keeping Unit) of the product being viewed             |
+| products.$.category   | String          | Product category being viewed                                    |
+| products.$.name       | String          | Name of the product being viewed                                 |
+| products.$.brand      | String          | Brand associated with the product                                |
+| products.$.variant    | String          | Variant of the product                                           |
+| products.$.price      | Number          | Price ($) of the product being viewed                            |
+| products.$.quantity   | Number          | Quantity of a product                                            |
+| products.$.coupon     | String          | Coupon code associated with a product (for example, MAY_DEALS_3) |
+| products.$.position   | Number          | Position in the product list (ex. 3)                             |
+| products.$.url        | String          | URL of the product page                                          |
+| products.$.image_url  | String          | Image url of the product                                         |
+
+Example:
+
+```js
+posthog.capture('Product List Viewed', {
+  list_id: 'list1',
+  category: 'merch',
+  products: [
+    {
+      product_id: 'dc2046c33b104932851dbcf4',
+      sku: '37890-12',
+      name: 'Dark mode PostHog hoodie',
+      price: 80,
+      position: 1,
+      category: 'merch',
+      url: 'https://posthog.com/merch?product=black-posthog-hoodie',
+      image_url: 'https://cdn.shopify.com/s/files/1/0452/0935/4401/files/DSC05606_1500x1000_crop_center.jpg?v=1709571158'
+    }
+  ]
+});
+```
+
+### Product List Filtered
+
+Fire this event when a visitor filters a product list or category. The following properties are supported:
+
+| Property              | Type            | Description                                                      |
+|-----------------------|-----------------|------------------------------------------------------------------|
+| list_id               | String          | Product list being viewed                                        |
+| category              | String          | Product category being viewed                                    |
+| filters               | Array           | Product filters being used                                       |
+| filters.$.type        | String          | Id of the filter type being used                                 |
+| filters.$.value       | String          | Id of the selection that the customer chose                      |
+| sorts                 | Array<Sort\>    | Product sorting being used                                       |
+| sorts.$.type          | String          | Id of the sort type being used                                   |
+| sorts.$.value         | String          | Id of the selection type being used (ascending, descending)      |
+| products              | Array<Product\> | Products displayed in the filtered list                          |
+| products.$.product_id | String          | Product id displayed on the list                                 |
+| products.$.sku        | String          | SKU (Stock Keeping Unit) of of the product being viewed          |
+| products.$.category   | String          | Product category being viewed                                    |
+| products.$.name       | String          | Name of the product being viewed                                 |
+| products.$.brand      | String          | Brand associated with the product                                |
+| products.$.variant    | String          | Variant of the product                                           |
+| products.$.price      | Number          | Price ($) of the product being viewed                            |
+| products.$.quantity   | Number          | Quantity of a product                                            |
+| products.$.coupon     | String          | Coupon code associated with a product (for example, MAY_DEALS_3) |
+| products.$.position   | Number          | Position in the product list (ex. 3)                             |
+| products.$.url        | String          | URL of the product page                                          |
+| products.$.image_url  | String          | Image url of the product                                         |
+
+Example:
+
+```js
+posthog.capture('Product List Filtered', {
+  list_id: 'list1',
+  filters: [
+    {
+      type: 'department',
+      value: 'merch'
+    },
+    {
+      type: 'price',
+      value: 'under-$50'
+    }
+  ],
+  sorts: [
+    {
+      type: 'price',
+      value: 'desc'
+    }
+  ],
+  products: [
+    {
+      product_id: '17584e91ae1abff0d355e3f5',
+      sku: '92849-15',
+      name: 'Copy/pasta t-shirt',
+      price: 30,
+      position: 1,
+      category: 'merch',
+      url: 'https://posthog.com/merch?product=copy-pasta-t-shirt',
+      image_url: 'https://cdn.shopify.com/s/files/1/0452/0935/4401/files/DSC07153_813x1219_crop_center.jpg?v=1709571082'
+    }
+  ]
+});
+```
+
+## Promotions
+
+Promotion view and click events help you gather analytics on internal offers within your website or mobile app.
+
+### Promotion Viewed
+
+Fire this event when a user views a promotion. The following properties are supported:
+
+| Property     | Type   | Description                       |
+|--------------|--------|-----------------------------------|
+| promotion_id | String | ID of the promotion               |
+| creative     | String | Creative details of the promotion |
+| name         | String | Name of the promotion             |
+| position     | String | Position of the promotion         |
+
+Example:
+
+```js
+posthog.capture('Promotion Viewed', {
+  promotion_id: 'promo_1',
+  creative: 'top_banner_2',
+  name: '50% store-wide sale',
+  position: 'home_banner_top'
+});
+```
+
+### Promotion Clicked
+
+Fire this event when a visitor clicks on a promotion. The following properties are supported:
+
+| Property     | Type   | Description                       |
+|--------------|--------|-----------------------------------|
+| promotion_id | String | ID of the promotion               |
+| creative     | String | Creative details of the promotion |
+| name         | String | Name of the promotion             |
+| position     | String | Position of the promotion         |
+
+Example:
+
+```js
+posthog.capture('Promotion Clicked', {
+  promotion_id: 'promo_1',
+  creative: 'top_banner_2',
+  name: '75% store-wide shoe sale',
+  position: 'home_banner_top'
+});
+```
+
+## Ordering
+
+These lifecycle events are associated with the key interactions that a customer has with the app or website while placing an order for a product.
+
+### Product Clicked
+
+Fire this event when a visitor clicks a product. The following properties are supported:
+
+| Property   | Type   | Description                             |
+|------------|--------|-----------------------------------------|
+| product_id | String | Database ID of the product              |
+| sku        | String | SKU (Stock Keeping Unit) of the product |
+| category   | String | Product category                        |
+| name       | String | Name of the product                     |
+| brand      | String | Brand associated with the product       |
+| variant    | String | Variant of the product                  |
+| price      | Number | Price of the product                    |
+| quantity   | Number | Quantity of the product                 |
+| coupon     | String | Coupon code for the product             |
+| position   | Number | Product list position                   |
+| url        | String | URL of the product page                 |
+| image_url  | String | Image URL of the product                |
+
+Example:
+
+```js
+posthog.capture('Product Clicked', {
+  product_id: 'c6e74d89b70b4972b867eb62',
+  sku: '18499-12',
+  category: 'merch',
+  name: 'Data warehouse t-shirt',
+  brand: 'PostHog',
+  variant: 'light',
+  price: 30,
+  quantity: 1,
+  coupon: 'BLACKFRIDAY',
+  position: 3,
+  url: 'https://posthog.com/merch?product=data-warehouse-t-shirt',
+  image_url: 'https://cdn.shopify.com/s/files/1/0452/0935/4401/files/DSC07095_1017x1526_crop_center.jpg?v=1709570895'
+});
+```
+
+### Product Viewed
+
+Fire this event when a visitor views a product. The following properties are supported:
+
+| Property   | Type   | Description                             |
+|------------|--------|-----------------------------------------|
+| product_id | String | Database ID of the product              |
+| sku        | String | SKU (Stock Keeping Unit) of the product |
+| category   | String | Product category                        |
+| name       | String | Name of the product                     |
+| brand      | String | Brand associated with the product       |
+| variant    | String | Variant of the product                  |
+| price      | Number | Price ($) of the product                |
+| quantity   | Number | Quantity of the product                 |
+| coupon     | String | Coupon code for the product             |
+| currency   | String | Currency of the transaction             |
+| position   | Number | Position in the product list            |
+| value      | Number | Total value of the product              |
+| url        | String | URL of the product page                 |
+| image_url  | String | Image URL of the product                |
+
+Example:
+
+```js
+posthog.capture('Product Viewed', {
+  product_id: '1bdfef47c9724b58b6831933',
+  sku: '43431-18',
+  category: 'merch',
+  name: 'Tactical black t-shirt',
+  brand: 'PostHog',
+  variant: 'dark',
+  price: 30,
+  quantity: 1,
+  coupon: 'BLACKFRIDAY',
+  currency: 'usd',
+  position: 3,
+  value: 30,
+  url: 'https://posthog.com/merch?product=tactical-black-t-shirt',
+  image_url: 'https://cdn.shopify.com/s/files/1/0452/0935/4401/files/darkmode_tee_5_1000x1000_crop_center.jpg?v=1732211354'
+});
+```
+
+### Product Added
+
+Fire this event when a visitor adds a product to their shopping cart. The following properties are supported:
+
+| Property   | Type   | Description                             |
+|------------|--------|-----------------------------------------|
+| cart_id    | String | Cart ID the product was added to        |
+| product_id | String | Database ID of the product              |
+| sku        | String | SKU (Stock Keeping Unit) of the product |
+| category   | String | Product category                        |
+| name       | String | Name of the product                     |
+| brand      | String | Brand associated with the product       |
+| variant    | String | Variant of the product                  |
+| price      | Number | Price ($) of the product                |
+| quantity   | Number | Quantity of the product                 |
+| coupon     | String | Coupon code for the product             |
+| position   | Number | Position in the product list            |
+| url        | String | URL of the product page                 |
+| image_url  | String | Image URL of the product                |
+
+Example:
+
+```js
+posthog.capture('Product Added', {
+  cart_id: '2249490906054e33aabc2983',
+  product_id: '101c66c0b37f47bc9c75561f',
+  sku: '94839-23',
+  category: 'merch',
+  name: 'Danger t-shirt',
+  brand: 'PostHog',
+  variant: 'blue',
+  price: 30,
+  quantity: 1,
+  coupon: 'BLACKFRIDAY',
+  position: 3,
+  url: 'https://posthog.com/merch?product=danger-t-shirt',
+  image_url: 'https://cdn.shopify.com/s/files/1/0452/0935/4401/files/cautiontee4_1000x1000_crop_center.jpg?v=1732041736'
+});
+```
+
+### Product Removed
+
+Fire this event when a visitor removes a product from their shopping cart. The following properties are supported:
+
+| Property   | Type   | Description                             |
+|------------|--------|-----------------------------------------|
+| cart_id    | String | Cart ID the product was removed from    |
+| product_id | String | Database ID of the product              |
+| sku        | String | SKU (Stock Keeping Unit) of the product |
+| category   | String | Product category                        |
+| name       | String | Name of the product                     |
+| brand      | String | Brand associated with the product       |
+| variant    | String | Variant of the product                  |
+| price      | Number | Price ($) of the product                |
+| quantity   | Number | Quantity of the product                 |
+| coupon     | String | Coupon code for the product             |
+| position   | Number | Position in the product list            |
+| url        | String | URL of the product page                 |
+| image_url  | String | Image URL of the product                |
+
+Example:
+
+```js
+posthog.capture('Product Removed', {
+  cart_id: '2249490906054e33aabc2983',
+  product_id: '101c66c0b37f47bc9c75561f',
+  sku: '94839-23',
+  category: 'merch',
+  name: 'Danger t-shirt',
+  brand: 'PostHog',
+  variant: 'blue',
+  price: 30,
+  quantity: 1,
+  coupon: 'BLACKFRIDAY',
+  position: 3,
+  url: 'https://posthog.com/merch?product=danger-t-shirt',
+  image_url: 'https://cdn.shopify.com/s/files/1/0452/0935/4401/files/cautiontee4_1000x1000_crop_center.jpg?v=1732041736'
+});
+```
+
+### Cart Viewed
+
+Fire this event when a user views their shopping cart. The following properties are supported:
+
+| Property              | Type   | Description                             |
+|-----------------------|--------|-----------------------------------------|
+| cart_id               | String | Shopping cart ID                        |
+| products              | Array  | Products displayed in the cart          |
+| products.$.product_id | String | Product ID displayed in the cart        |
+| products.$.sku        | String | SKU (Stock Keeping Unit) of the product |
+| products.$.category   | String | Product category                        |
+| products.$.name       | String | Name of the product                     |
+| products.$.brand      | String | Brand associated with the product       |
+| products.$.variant    | String | Variant of the product                  |
+| products.$.price      | Number | Price ($) of the product                |
+| products.$.quantity   | Number | Quantity of a product                   |
+| products.$.coupon     | String | Coupon code for the product             |
+| products.$.position   | Number | Position in the product list            |
+| products.$.url        | String | URL of the product page                 |
+| products.$.image_url  | String | Image URL of the product                |
+
+Example:
+
+```js
+posthog.capture('Cart Viewed', {
+  cart_id: 'e1f17b1ed3ec47a298a05838',
+  products: [
+    {
+      product_id: 'c6e74d89b70b4972b867eb62',
+      sku: '18499-12',
+      category: 'merch',
+      name: 'Data warehouse t-shirt',
+      brand: 'PostHog',
+      variant: 'light',
+      price: 30,
+      quantity: 1,
+      coupon: 'BLACKFRIDAY',
+      position: 3,
+      url: 'https://posthog.com/merch?product=data-warehouse-t-shirt',
+      image_url: 'https://cdn.shopify.com/s/files/1/0452/0935/4401/files/DSC07095_1017x1526_crop_center.jpg?v=1709570895'
+    },
+    {
+      product_id: '101c66c0b37f47bc9c75561f',
+      sku: '94839-23',
+      category: 'merch',
+      name: 'Danger t-shirt',
+      brand: 'PostHog',
+      variant: 'blue',
+      price: 30,
+      quantity: 1,
+      coupon: 'BLACKFRIDAY',
+      position: 3,
+      url: 'https://posthog.com/merch?product=danger-t-shirt',
+      image_url: 'https://cdn.shopify.com/s/files/1/0452/0935/4401/files/cautiontee4_1000x1000_crop_center.jpg?v=1732041736'
+    }
+  ]
+});
+```
+
+### Checkout Started
+
+Fire this event when a user starts the checkout process. The following properties are supported:
+
+| Property              | Type   | Description                                                              |
+|-----------------------|--------|--------------------------------------------------------------------------|
+| order_id              | String | Order ID or transaction ID, whichever is applicable                      |
+| affiliation           | String | Store or affiliation from which this transaction occurred                |
+| value                 | Number | Revenue ($) with discounts and coupons added in                          |
+| revenue               | Number | Revenue ($) associated with the transaction (excluding shipping and tax) |
+| shipping              | Number | Shipping cost associated with the transaction                            |
+| tax                   | Number | Total tax associated with the transaction                                |
+| discount              | Number | Total discount associated with the transaction                           |
+| coupon                | String | Transaction coupon redeemed with the transaction                         |
+| currency              | String | Currency code associated with the transaction                            |
+| products              | Array  | Products in the order                                                    |
+| products.$.product_id | String | Database ID of the product                                               |
+| products.$.sku        | String | SKU (Stock Keeping Unit) of the product                                  |
+| products.$.category   | String | Product category                                                         |
+| products.$.name       | String | Name of the product                                                      |
+| products.$.brand      | String | Brand associated with the product                                        |
+| products.$.variant    | String | Variant of the product                                                   |
+| products.$.price      | Number | Price ($) of the product                                                 |
+| products.$.quantity   | Number | Quantity of a product                                                    |
+| products.$.coupon     | String | Coupon code for the product                                              |
+| products.$.position   | Number | Position in the product list (ex. 3)                                     |
+| products.$.url        | String | URL of the product page                                                  |
+| products.$.image_url  | String | Image URL of the product                                                 |
+
+Example:
+
+```js
+posthog.capture('Checkout Started', {
+  order_id: '3e94e72c0a7443e9b51155a3',
+  affiliation: 'Shopify',
+  value: 80,
+  revenue: 90.00,
+  shipping: 3,
+  tax: 2,
+  discount: 15,
+  coupon: 'BLACKFRIDAY',
+  currency: 'USD',
+  products: [
+    {
+      product_id: 'c6e74d89b70b4972b867eb62',
+      sku: '18499-12',
+      category: 'merch',
+      name: 'Data warehouse t-shirt',
+      brand: 'PostHog',
+      variant: 'light',
+      price: 30,
+      quantity: 1,
+      position: 3,
+      url: 'https://posthog.com/merch?product=data-warehouse-t-shirt',
+      image_url: 'https://cdn.shopify.com/s/files/1/0452/0935/4401/files/DSC07095_1017x1526_crop_center.jpg?v=1709570895'
+    },
+    {
+      product_id: '101c66c0b37f47bc9c75561f',
+      sku: '94839-23',
+      category: 'merch',
+      name: 'Danger t-shirt',
+      brand: 'PostHog',
+      variant: 'blue',
+      price: 30,
+      quantity: 2,
+      position: 3,
+      url: 'https://posthog.com/merch?product=danger-t-shirt',
+      image_url: 'https://cdn.shopify.com/s/files/1/0452/0935/4401/files/cautiontee4_1000x1000_crop_center.jpg?v=1732041736'
+    }
+  ]
+});
+```
+
+### Checkout Step Viewed
+
+Fire this event when a checkout step is viewed. The following properties are supported:
+
+| Property        | Type   | Description                              |
+|-----------------|--------|------------------------------------------|
+| checkout_id     | String | Checkout transaction ID                  |
+| step            | Number | Step number in the checkout process      |
+| shipping_method | String | Shipping method chosen                   |
+| payment_method  | String | Payment method chosen                    |
+
+Example:
+
+```js
+posthog.capture('Checkout Step Viewed', {
+  checkout_id: 'e461659ed1714b9ebc3299ae',
+  step: 2,
+  shipping_method: 'DHL',
+  payment_method: 'Visa'
+});
+```
+
+### Checkout Step Completed
+
+Fire this event when a checkout step is completed. The following properties are supported:
+
+| Property        | Type   | Description                  |
+|-----------------|--------|------------------------------|
+| checkout_id     | String | Checkout transaction ID      |
+| step            | Number | Checkout process step number |
+| shipping_method | String | Chosen shipping method       |
+| payment_method  | String | Chosen payment method        |
+
+Example:
+
+```js
+posthog.capture('Checkout Step Completed', {
+  checkout_id: 'e461659ed1714b9ebc3299ae',
+  step: 2,
+  shipping_method: 'DHL',
+  payment_method: 'Visa'
+});
+```
+
+### Payment Info Entered
+
+Fire this event when payment information is entered successfully. The following properties are supported:
+
+| Property        | Type   | Description              |
+|-----------------|--------|--------------------------|
+| checkout_id     | String | Checkout transaction ID  |
+| order_id        | String | Order ID (optional)      |
+| step            | Number | Step number in checkout  |
+| shipping_method | String | Shipping method chosen   |
+| payment_method  | String | Payment method chosen    |
+
+Example:
+
+```js
+posthog.capture('Payment Info Entered', {
+  checkout_id: 'e461659ed1714b9ebc3299ae',
+  order_id: 'f9300932fbc04887aa775997'
+});
+```
+
+### Order Updated
+
+Fire this event when an order is updated. The following properties are supported:
+
+| Property              | Type   | Description                                                              |
+|-----------------------|--------|--------------------------------------------------------------------------|
+| order_id              | String | Order/transaction ID                                                     |
+| affiliation           | String | Store or affiliation from which this transaction occurred                |
+| total                 | Number | Revenue ($) with discounts and coupons added in                          |
+| revenue               | Number | Revenue ($) associated with the transaction (excluding shipping and tax) |
+| shipping              | Number | Shipping cost associated with the transaction                            |
+| tax                   | Number | Total tax associated with the transaction                                |
+| discount              | Number | Total discount associated with the transaction                           |
+| coupon                | String | Transaction coupon redeemed with the transaction                         |
+| currency              | String | Currency code associated with the transaction                            |
+| products              | Array  | Products in the order                                                    |
+| products.$.product_id | String | Database ID of the product                                               |
+| products.$.sku        | String | SKU (Stock Keeping Unit) of the product                                  |
+| products.$.category   | String | Product category                                                         |
+| products.$.name       | String | Name of the product                                                      |
+| products.$.brand      | String | Brand associated with the product                                        |
+| products.$.variant    | String | Variant of the product                                                   |
+| products.$.price      | Number | Price ($) of the product                                                 |
+| products.$.quantity   | Number | Quantity of a product                                                    |
+| products.$.coupon     | String | Coupon code for the product                                              |
+| products.$.position   | Number | Position in the product list (ex. 3)                                     |
+| products.$.url        | String | URL of the product page                                                  |
+| products.$.image_url  | String | Image URL of the product                                                 |
+
+Example:
+
+```js
+posthog.capture('Order Updated', {
+  order_id: '3e94e72c0a7443e9b51155a3',
+  affiliation: 'Shopify',
+  value: 80,
+  revenue: 90.00,
+  shipping: 3,
+  tax: 2,
+  discount: 15,
+  coupon: 'BLACKFRIDAY',
+  currency: 'USD',
+  products: [
+    {
+      product_id: 'c6e74d89b70b4972b867eb62',
+      sku: '18499-12',
+      category: 'merch',
+      name: 'Data warehouse t-shirt',
+      brand: 'PostHog',
+      variant: 'light',
+      price: 30,
+      quantity: 1,
+      position: 3,
+      url: 'https://posthog.com/merch?product=data-warehouse-t-shirt',
+      image_url: 'https://cdn.shopify.com/s/files/1/0452/0935/4401/files/DSC07095_1017x1526_crop_center.jpg?v=1709570895'
+    },
+    {
+      product_id: '101c66c0b37f47bc9c75561f',
+      sku: '94839-23',
+      category: 'merch',
+      name: 'Danger t-shirt',
+      brand: 'PostHog',
+      variant: 'blue',
+      price: 30,
+      quantity: 2,
+      position: 3,
+      url: 'https://posthog.com/merch?product=danger-t-shirt',
+      image_url: 'https://cdn.shopify.com/s/files/1/0452/0935/4401/files/cautiontee4_1000x1000_crop_center.jpg?v=1732041736'
+    }
+  ]
+});
+```
+
+### Order Completed
+
+Fire this event when an order is successfully completed. The following properties are supported:
+
+| Property              | Type   | Description                                                                                         |
+|-----------------------|--------|-----------------------------------------------------------------------------------------------------|
+| checkout_id           | String | Checkout ID                                                                                         |
+| order_id              | String | Order/transaction ID                                                                                |
+| affiliation           | String | Store or affiliation from which this transaction occurred                                           |
+| subtotal              | Number | Order total after discounts but before taxes and shipping                                           |
+| total                 | Number | Subtotal ($) with shipping and taxes added in.                                                      |
+| revenue               | Number | Revenue ($) associated with the transaction (including discounts, but excluding shipping and taxes) |
+| shipping              | Number | Shipping cost associated with the transaction                                                       |
+| tax                   | Number | Total tax associated with the transaction                                                           |
+| discount              | Number | Total discount associated with the transaction                                                      |
+| coupon                | String | Transaction coupon redeemed with the transaction                                                    |
+| currency              | String | Currency code associated with the transaction                                                       |
+| products              | Array  | Products in the order                                                                               |
+| products.$.product_id | String | Database ID of the product                                                                          |
+| products.$.sku        | String | SKU (Stock Keeping Unit) of the product                                                             |
+| products.$.category   | String | Product category                                                                                    |
+| products.$.name       | String | Name of the product                                                                                 |
+| products.$.brand      | String | Brand associated with the product                                                                   |
+| products.$.variant    | String | Variant of the product                                                                              |
+| products.$.price      | Number | Price ($) of the product                                                                            |
+| products.$.quantity   | Number | Quantity of a product                                                                               |
+| products.$.coupon     | String | Coupon code for the product                                                                         |
+| products.$.position   | Number | Position in the product list (ex. 3)                                                                |
+| products.$.url        | String | URL of the product page                                                                             |
+| products.$.image_url  | String | Image URL of the product                                                                            |
+
+Example:
+
+```js
+posthog.capture('Order Completed', {
+  checkout_id: 'e461659ed1714b9ebc3299ae',
+  order_id: '3e94e72c0a7443e9b51155a3',
+  affiliation: 'Shopify',
+  total: 80,
+  subtotal: 75,
+  revenue: 90.00,
+  shipping: 3,
+  tax: 2,
+  discount: 15,
+  coupon: 'BLACKFRIDAY',
+  currency: 'USD',
+  products: [
+    {
+      product_id: 'c6e74d89b70b4972b867eb62',
+      sku: '18499-12',
+      category: 'merch',
+      name: 'Data warehouse t-shirt',
+      brand: 'PostHog',
+      variant: 'light',
+      price: 30,
+      quantity: 1,
+      position: 3,
+      url: 'https://posthog.com/merch?product=data-warehouse-t-shirt',
+      image_url: 'https://cdn.shopify.com/s/files/1/0452/0935/4401/files/DSC07095_1017x1526_crop_center.jpg?v=1709570895'
+    },
+    {
+      product_id: '101c66c0b37f47bc9c75561f',
+      sku: '94839-23',
+      category: 'merch',
+      name: 'Danger t-shirt',
+      brand: 'PostHog',
+      variant: 'blue',
+      price: 30,
+      quantity: 2,
+      position: 3,
+      url: 'https://posthog.com/merch?product=danger-t-shirt',
+      image_url: 'https://cdn.shopify.com/s/files/1/0452/0935/4401/files/cautiontee4_1000x1000_crop_center.jpg?v=1732041736'
+    }
+  ]
+});
+```
+
+### Order Refunded
+
+Fire this event when an order is refunded. The following properties are supported:
+
+| Property              | Type   | Description                             |
+|-----------------------|--------|-----------------------------------------|
+| order_id              | String | Order/transaction ID                    |
+| total                 | Number | Total amount refunded                   |
+| currency              | String | Currency code                           |
+| products              | Array  | Refunded products                       |
+| products.$.product_id | String | Database ID of the product              |
+| products.$.sku        | String | SKU (Stock Keeping Unit) of the product |
+| products.$.category   | String | Product category                        |
+| products.$.name       | String | Name of the product                     |
+| products.$.brand      | String | Brand associated with the product       |
+| products.$.variant    | String | Variant of the product                  |
+| products.$.price      | Number | Price of the product                    |
+| products.$.quantity   | Number | Quantity of the product                 |
+| products.$.url        | String | URL of the product page                 |
+| products.$.image_url  | String | Image URL of the product                |
+
+Example:
+
+```js
+posthog.capture('Order Refunded', {
+  order_id: '3e94e72c0a7443e9b51155a3',
+  total: 30,
+  currency: 'USD',
+  products: [
+    {
+      product_id: 'c6e74d89b70b4972b867eb62',
+      sku: '18499-12',
+      category: 'merch',
+      name: 'Data warehouse t-shirt',
+      brand: 'PostHog',
+      variant: 'light',
+      price: 30,
+      quantity: 1,
+      position: 3,
+      url: 'https://posthog.com/merch?product=data-warehouse-t-shirt',
+      image_url: 'https://cdn.shopify.com/s/files/1/0452/0935/4401/files/DSC07095_1017x1526_crop_center.jpg?v=1709570895'
+    },
+    {
+      product_id: '101c66c0b37f47bc9c75561f',
+      sku: '94839-23',
+      category: 'merch',
+      name: 'Danger t-shirt',
+      brand: 'PostHog',
+      variant: 'blue',
+      price: 30,
+      quantity: 2,
+      position: 3,
+      url: 'https://posthog.com/merch?product=danger-t-shirt',
+      image_url: 'https://cdn.shopify.com/s/files/1/0452/0935/4401/files/cautiontee4_1000x1000_crop_center.jpg?v=1732041736'
+    }
+  ]
+});
+```
+
+### Order Cancelled
+
+Fire this event when an order is cancelled. The following properties are supported:
+
+| Property              | Type   | Description                                                                                         |
+|-----------------------|--------|-----------------------------------------------------------------------------------------------------|
+| order_id              | String | Order/transaction ID                                                                                |
+| affiliation           | String | Store/affiliation from which this transaction occurred                                              |
+| total                 | Number | Subtotal ($) with shipping and taxes added in.                                                      |
+| revenue               | Number | Revenue ($) associated with the transaction (including discounts, but excluding shipping and taxes) |
+| shipping              | Number | Shipping cost associated with the transaction                                                       |
+| tax                   | Number | Total tax associated with the transaction                                                           |
+| discount              | Number | Total discount associated with the transaction                                                      |
+| coupon                | String | Transaction coupon redeemed with the transaction                                                    |
+| currency              | String | Currency code associated with the transaction                                                       |
+| products              | Array  | Products in the order                                                                               |
+| products.$.product_id | String | Database ID of the product                                                                          |
+| products.$.sku        | String | SKU (Stock Keeping Unit) of the product                                                             |
+| products.$.category   | String | Product category                                                                                    |
+| products.$.name       | String | Name of the product                                                                                 |
+| products.$.brand      | String | Brand associated with the product                                                                   |
+| products.$.variant    | String | Variant of the product                                                                              |
+| products.$.price      | Number | Price ($) of the product                                                                            |
+| products.$.quantity   | Number | Quantity of a product                                                                               |
+| products.$.coupon     | String | Coupon code for the product                                                                         |
+| products.$.position   | Number | Position in the product list (ex. 3)                                                                |
+| products.$.url        | String | URL of the product page                                                                             |
+| products.$.image_url  | String | Image URL of the product                                                                            |
+
+Example:
+
+```js
+posthog.capture('Order Cancelled', {
+  order_id: '3e94e72c0a7443e9b51155a3',
+  affiliation: 'Shopify',
+  total: 80,
+  revenue: 90.00,
+  shipping: 3,
+  tax: 2,
+  discount: 15,
+  coupon: 'BLACKFRIDAY',
+  currency: 'USD',
+  products: [
+    {
+      product_id: 'c6e74d89b70b4972b867eb62',
+      sku: '18499-12',
+      category: 'merch',
+      name: 'Data warehouse t-shirt',
+      brand: 'PostHog',
+      variant: 'light',
+      price: 30,
+      quantity: 1,
+      position: 3,
+      url: 'https://posthog.com/merch?product=data-warehouse-t-shirt',
+      image_url: 'https://cdn.shopify.com/s/files/1/0452/0935/4401/files/DSC07095_1017x1526_crop_center.jpg?v=1709570895'
+    },
+    {
+      product_id: '101c66c0b37f47bc9c75561f',
+      sku: '94839-23',
+      category: 'merch',
+      name: 'Danger t-shirt',
+      brand: 'PostHog',
+      variant: 'blue',
+      price: 30,
+      quantity: 2,
+      position: 3,
+      url: 'https://posthog.com/merch?product=danger-t-shirt',
+      image_url: 'https://cdn.shopify.com/s/files/1/0452/0935/4401/files/cautiontee4_1000x1000_crop_center.jpg?v=1732041736'
+    }
+  ]
+});
+```
+
+## Coupons
+
+These are events that might occur when dealing with coupons in your ecommerce.
+
+### Coupon Entered
+
+Fire this event when a coupon is entered on a cart or order.
+
+| Property  | Type   | Description                               |
+|-----------|--------|-------------------------------------------|
+| order_id  | String | Order ID or transaction ID, if applicable |
+| cart_id   | String | Cart ID, if applicable                    |
+| coupon_id | String | Coupon ID                                 |
+
+Example:
+
+```js
+posthog.capture('Coupon Entered', {
+  order_id: 'a239ebb8404c4ac29950756f',
+  cart_id: 'cb271d41bc2140ea8d076c50',
+  coupon_id: 'blackfriday_2025'
+});
+```
+
+### Coupon Applied
+
+Fire this event when a coupon is successfully applied to a cart or order.
+
+| Property    | Type   | Description                               |
+|-------------|--------|-------------------------------------------|
+| order_id    | String | Order ID or transaction ID, if applicable |
+| cart_id     | String | Cart ID, if applicable                    |
+| coupon_id   | String | Coupon ID                                 |
+| coupon_name | String | Coupon name                               |
+| discount    | Number | Monetary discount applied                 |
+
+Example:
+
+```js
+posthog.capture('Coupon Applied', {
+  order_id: 'a239ebb8404c4ac29950756f',
+  cart_id: 'cb271d41bc2140ea8d076c50',
+  coupon_id: 'blackfriday_2025',
+  coupon_name: 'Black Friday 2025',
+  discount: 25
+});
+```
+
+### Coupon Denied
+
+Fire this event when a coupon is denied.
+
+| Property  | Type   | Description                               |
+|-----------|--------|-------------------------------------------|
+| order_id  | String | Order ID or transaction ID, if applicable |
+| cart_id   | String | Cart ID, if applicable                    |
+| coupon_id | String | Coupon ID                                 |
+| reason    | String | Reason for denial                         |
+
+Example:
+
+```js
+posthog.capture('Coupon Denied', {
+  order_id: 'a239ebb8404c4ac29950756f',
+  cart_id: 'cb271d41bc2140ea8d076c50',
+  coupon_id: 'blackfriday_2025',
+  reason: 'Coupon expired'
+});
+```
+
+### Coupon Removed
+
+Fire this event when a coupon is removed from a cart or order.
+
+| Property    | Type   | Description                               |
+|-------------|--------|-------------------------------------------|
+| order_id    | String | Order ID or transaction ID, if applicable |
+| cart_id     | String | Cart ID, if applicable                    |
+| coupon_id   | String | Coupon ID                                 |
+| coupon_name | String | Coupon name                               |
+| discount    | Number | Monetary discount applied                 |
+
+Example:
+
+```js
+posthog.capture('Coupon Removed', {
+  order_id: 'a239ebb8404c4ac29950756f',
+  cart_id: 'cb271d41bc2140ea8d076c50',
+  coupon_id: 'blackfriday_2025',
+  coupon_name: 'May Deals 2016',
+  discount: 25
+});
+```
+
+## Wishlist
+
+Events occurring when customers interact with wish lists.
+
+### Product Added to Wishlist
+
+Fire this event when a product is added to a wish list.
+
+| Property      | Type   | Description                                   |
+|---------------|--------|-----------------------------------------------|
+| wishlist_id   | String | Wishlist ID                                   |
+| wishlist_name | String | Name of the wishlist the product was added to |
+| product_id    | String | Database ID of the product                    |
+| sku           | String | SKU (Stock Keeping Unit) of the product       |
+| category      | String | Product category                              |
+| name          | String | Name of the product                           |
+| brand         | String | Brand associated with the product             |
+| variant       | String | Variant of the product                        |
+| price         | Number | Price ($) of the product                      |
+| quantity      | Number | Quantity of the product                       |
+| coupon        | String | Coupon code for the product                   |
+| position      | Number | Position in the product list                  |
+| url           | String | URL of the product page                       |
+| image_url     | String | Image URL of the product                      |
+
+Example:
+
+```js
+posthog.capture('Product Added to Wishlist', {
+  wishlist_id: '5cf4804e6cb645f99ab05be3',
+  wishlist_name: 'Loved Merch',
+  product_id: '101c66c0b37f47bc9c75561f',
+  sku: '94839-23',
+  category: 'merch',
+  name: 'Danger t-shirt',
+  brand: 'PostHog',
+  variant: 'blue',
+  price: 30,
+  quantity: 2,
+  coupon: 'BLACKFRIDAY',
+  position: 3,
+  url: 'https://posthog.com/merch?product=danger-t-shirt',
+  image_url: 'https://cdn.shopify.com/s/files/1/0452/0935/4401/files/cautiontee4_1000x1000_crop_center.jpg?v=1732041736'
+});
+```
+
+### Product Removed from Wishlist
+
+Fire this event when a product is removed from a wish list.
+
+| Property      | Type   | Description                                   |
+|---------------|--------|-----------------------------------------------|
+| wishlist_id   | String | Wishlist ID                                   |
+| wishlist_name | String | Name of the wishlist the product was added to |
+| product_id    | String | Database ID of the product                    |
+| sku           | String | SKU (Stock Keeping Unit) of the product       |
+| category      | String | Product category                              |
+| name          | String | Name of the product                           |
+| brand         | String | Brand associated with the product             |
+| variant       | String | Variant of the product                        |
+| price         | Number | Price ($) of the product                      |
+| quantity      | Number | Quantity of the product                       |
+| coupon        | String | Coupon code for the product                   |
+| position      | Number | Position in the product list                  |
+| url           | String | URL of the product page                       |
+| image_url     | String | Image URL of the product                      |
+
+Example:
+
+```js
+posthog.capture('Product Removed from Wishlist', {
+  wishlist_id: '5cf4804e6cb645f99ab05be3',
+  wishlist_name: 'Loved Merch',
+  product_id: '101c66c0b37f47bc9c75561f',
+  sku: '94839-23',
+  category: 'merch',
+  name: 'Danger t-shirt',
+  brand: 'PostHog',
+  variant: 'blue',
+  price: 30,
+  quantity: 2,
+  coupon: 'BLACKFRIDAY',
+  position: 3,
+  url: 'https://posthog.com/merch?product=danger-t-shirt',
+  image_url: 'https://cdn.shopify.com/s/files/1/0452/0935/4401/files/cautiontee4_1000x1000_crop_center.jpg?v=1732041736'
+});
+```
+
+### Wishlist Product Added to Cart
+
+Fire this event when a product from a wish list is added to a cart.
+
+| Property      | Type   | Description                                   |
+|---------------|--------|-----------------------------------------------|
+| wishlist_id   | String | Wishlist ID                                   |
+| wishlist_name | String | Name of the wishlist the product was added to |
+| cart_id       | String | Cart ID                                       |
+| product_id    | String | Database ID of the product                    |
+| sku           | String | SKU (Stock Keeping Unit) of the product       |
+| category      | String | Product category                              |
+| name          | String | Name of the product                           |
+| brand         | String | Brand associated with the product             |
+| variant       | String | Variant of the product                        |
+| price         | Number | Price ($) of the product                      |
+| quantity      | Number | Quantity of the product                       |
+| coupon        | String | Coupon code for the product                   |
+| position      | Number | Position in the product list                  |
+| url           | String | URL of the product page                       |
+| image_url     | String | Image URL of the product                      |
+
+Example:
+
+```js
+posthog.capture('Wishlist Product Added to Cart', {
+  wishlist_id: '5cf4804e6cb645f99ab05be3',
+  wishlist_name: 'Loved Merch',
+  cart_id: '2249490906054e33aabc2983',
+  product_id: '101c66c0b37f47bc9c75561f',
+  sku: '94839-23',
+  category: 'merch',
+  name: 'Danger t-shirt',
+  brand: 'PostHog',
+  variant: 'blue',
+  price: 30,
+  quantity: 2,
+  coupon: 'BLACKFRIDAY',
+  position: 3,
+  url: 'https://posthog.com/merch?product=danger-t-shirt',
+  image_url: 'https://cdn.shopify.com/s/files/1/0452/0935/4401/files/cautiontee4_1000x1000_crop_center.jpg?v=1732041736'});
+```
+
+## Sharing
+
+Events related to sharing products or cart contents.
+
+### Product Shared
+
+Fire this event when a product is shared.
+
+| Property      | Type   | Description                             |
+|---------------|--------|-----------------------------------------|
+| share_via     | String | Method of sharing                       |
+| share_message | String | Message sent with the product           |
+| recipient     | String | Recipient of the share                  |
+| product_id    | String | Database ID of the product              |
+| sku           | String | SKU (Stock Keeping Unit) of the product |
+| category      | String | Product category                        |
+| name          | String | Name of the product                     |
+| brand         | String | Brand associated with the product       |
+| variant       | String | Variant of the product                  |
+| price         | Number | Price ($) of the product                |
+| url           | String | URL of the product page                 |
+| image_url     | String | Image URL of the product                |
+
+Example:
+
+```js
+posthog.capture('Product Shared', {
+  share_via: 'email',
+  share_message: 'Hey, check out this item',
+  recipient: 'max@posthog.com',
+  product_id: '101c66c0b37f47bc9c75561f',
+  sku: '94839-23',
+  category: 'merch',
+  name: 'Danger t-shirt',
+  brand: 'PostHog',
+  variant: 'blue',
+  price: 30,
+  url: 'https://posthog.com/merch?product=danger-t-shirt',
+  image_url: 'https://cdn.shopify.com/s/files/1/0452/0935/4401/files/cautiontee4_1000x1000_crop_center.jpg?v=1732041736'
+});
+```
+
+### Cart Shared
+
+Fire this event when a cart is shared.
+
+| Property      | Type   | Description                |
+|---------------|--------|----------------------------|
+| share_via     | String | Method of sharing          |
+| share_message | String | Message sent with the cart |
+| recipient     | String | Recipient of the share     |
+| cart_id       | String | Cart ID                    |
+| products      | Array  | Products in the cart       |
+
+Example:
+
+```js
+posthog.capture('Cart Shared', {
+  share_via: 'email',
+  share_message: 'Hey, check out this item',
+  recipient: 'max@posthog.com',
+  cart_id: 'e1f17b1ed3ec47a298a05838',
+  products: [
+    { product_id: 'dc2046c33b104932851dbcf4' },
+    { product_id: '17584e91ae1abff0d355e3f5' }
+  ]
+});
+```
+
+## Reviewing
+
+Track customer reviews of products.
+
+### Product Reviewed
+
+Fire this event when a product is reviewed.
+
+| Property    | Type   | Description                |
+|-------------|--------|----------------------------|
+| product_id  | String | Database ID of the product |
+| review_id   | String | Review ID                  |
+| review_body | String | Review content             |
+| rating      | String | Review rating              |
+
+Example:
+
+```js
+posthog.capture('Product Reviewed', {
+  product_id: 'dc2046c33b104932851dbcf4',
+  review_id: 'e6b795d687884d0b8b59b4de',
+  review_body: 'They are shipping things, like, almost every day. That is so great.',
+  rating: '5'
+});
+```
