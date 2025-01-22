@@ -1,4 +1,5 @@
-import React, { useMemo, useState } from 'react'
+import React, { useEffect, useMemo, useState } from 'react'
+import ReactDOM from 'react-dom'
 import {
     IconBrowser,
     IconLineGraph,
@@ -37,10 +38,16 @@ import {
     IconTrends,
     IconFunnels,
     IconGraph,
+    IconX,
 } from '@posthog/icons'
 import CloudinaryImage from 'components/CloudinaryImage'
 import useProducts from 'hooks/useProducts'
 import { CallToAction } from 'components/CallToAction'
+import { Feature } from 'components/Roadmap'
+import { useRoadmaps } from 'hooks/useRoadmaps'
+import { graphql } from 'gatsby'
+import { useStaticQuery } from 'gatsby'
+import { AnimatePresence, motion } from 'framer-motion'
 
 type Product = {
     name: string
@@ -48,7 +55,7 @@ type Product = {
     color: string
     colorDark?: string
     Icon: React.ReactNode
-    description: React.ReactNode
+    description?: React.ReactNode
     pricingKey?: string
     types: string[]
     features?: { title: string; Icon: React.ReactNode }[]
@@ -62,6 +69,9 @@ type Product = {
             text: string
         }
     }
+    roadmapID?: number
+    badge?: string
+    roadmap?: any
 }
 
 const products: Product[] = [
@@ -296,7 +306,8 @@ const products: Product[] = [
                 </>
             )
         },
-        status: 'Beta',
+        status: 'WIP',
+        badge: 'ALPHA',
         pricing: {
             FreeTier: () => (
                 <p className="text-base m-0">
@@ -314,6 +325,29 @@ const products: Product[] = [
             },
         },
     },
+    {
+        name: 'Messaging product',
+        color: 'red',
+        Icon: IconMessage,
+        types: ['Data'],
+        status: 'Roadmap',
+        roadmapID: 1999,
+    },
+]
+
+const legend = [
+    {
+        name: 'Production',
+        color: 'blue',
+    },
+    {
+        name: 'WIP',
+        color: 'yellow',
+    },
+    {
+        name: 'Roadmap',
+        color: 'red',
+    },
 ]
 
 const numberToWords = (num: number) => {
@@ -323,19 +357,63 @@ const numberToWords = (num: number) => {
     return num.toString()
 }
 
+const RoadmapProductDetails = ({ product }: { product: Product }) => {
+    const { name, description, Icon, color, colorDark, roadmapID } = product
+    const { roadmaps, mutate, isLoading } = useRoadmaps({
+        params: {
+            filters: {
+                id: {
+                    $eq: roadmapID,
+                },
+            },
+        },
+    })
+    const roadmap = roadmaps[0]
+    const likeCount = roadmap?.attributes?.likes?.data?.length || 0
+    const staticLikeCount = product.roadmap?.githubPages?.[0]?.reactions?.total_count || 0
+
+    return (
+        <div className="bg-white border border-border dark:border-dark max-w-[700px] w-full overflow-hidden">
+            <div className="p-6">
+                <h2 className="text-xl m-0 flex space-x-2">
+                    <Icon className={`size-8 text-${color} ${colorDark ? 'dark:text-${colorDark}' : ''}`} />
+                    <span>{name}</span>
+                </h2>
+                {description && <p className="text-base opacity-70 ml-10">{description}</p>}
+                <div className="mt-4">
+                    {isLoading ? (
+                        <div />
+                    ) : (
+                        <Feature
+                            id={roadmap.id}
+                            {...roadmap.attributes}
+                            likeCount={likeCount + staticLikeCount}
+                            onLike={mutate}
+                            onUpdate={mutate}
+                        />
+                    )}
+                </div>
+            </div>
+        </div>
+    )
+}
+
 const ProductDetails = ({ product }: { product: Product }) => {
-    const { name, description, features, Images, Icon, color, colorDark, pricingKey, pricing } = product
+    const { name, description, features, Images, Icon, color, colorDark, pricingKey, pricing, badge } = product
     const products = useProducts()
     const billingData = products.products.find((billingProduct) => billingProduct.type === pricingKey)
 
     return (
         <div className="bg-white border border-border dark:border-dark max-w-[700px] w-full overflow-hidden">
             <div className="px-6 pt-6">
-                <h2 className="text-xl m-0 flex space-x-2">
+                <h2 className="text-xl m-0 flex space-x-2 items-center">
                     <Icon className={`size-8 text-${color} ${colorDark ? 'dark:text-${colorDark}' : ''}`} />
                     <span>{name}</span>
+                    {badge && (
+                        <span className="bg-accent dark:bg-accent-dark rounded-md px-2 py-1 text-sm">{badge}</span>
+                    )}
                 </h2>
-                <p className="text-base opacity-70 ml-10">{description}</p>
+                {description && <p className="text-base opacity-70 ml-10">{description}</p>}
                 {Images && (
                     <div className="-mb-32 h-[350px] relative">
                         <div className="absolute inset-0 w-full h-full">
@@ -389,8 +467,63 @@ const ProductDetails = ({ product }: { product: Product }) => {
     )
 }
 
+const ProductModal = ({
+    children,
+    setProductModalOpen,
+    productModalOpen,
+}: {
+    children: React.ReactNode
+    setProductModalOpen: (open: boolean) => void
+    productModalOpen: boolean
+}) => {
+    return ReactDOM.createPortal(
+        <AnimatePresence>
+            {productModalOpen && (
+                <motion.div
+                    initial={{ translateY: '100%' }}
+                    animate={{ translateY: '0%' }}
+                    exit={{ translateY: '100%' }}
+                    transition={{ type: 'tween' }}
+                    className="fixed bottom-[75.75px] md:bottom-0 md:hidden left-0 z-[999999] flex items-end justify-center h-full w-full"
+                    onClick={() => setProductModalOpen(false)}
+                >
+                    <div className="relative" onClick={(e) => e.stopPropagation()}>
+                        <div>
+                            <button
+                                onClick={() => setProductModalOpen(false)}
+                                className="absolute top-2 right-2 hover:opacity-100 opacity-70 transition-opacity"
+                            >
+                                <IconX className="size-5" />
+                            </button>
+                        </div>
+                        {children}
+                    </div>
+                </motion.div>
+            )}
+        </AnimatePresence>,
+        document.body
+    )
+}
+
 export default function Hero(): JSX.Element {
-    const [activeProduct, setActiveProduct] = useState<Product>(products[0])
+    const { staticRoadmaps } = useStaticQuery(graphql`
+        {
+            staticRoadmaps: allSqueakRoadmap {
+                nodes {
+                    githubPages {
+                        reactions {
+                            total_count
+                        }
+                    }
+                    squeakId
+                }
+            }
+        }
+    `)
+
+    const [productModalOpen, setProductModalOpen] = useState(false)
+    const [activeProduct, setActiveProduct] = useState<Product | null>(products[0])
+    const [activeStatus, setActiveStatus] = useState<string>('All products')
     const groupedProducts = useMemo(() => {
         const groupedProducts: { [key: string]: Product[] } = {}
 
@@ -399,45 +532,114 @@ export default function Hero(): JSX.Element {
                 if (!groupedProducts[type]) {
                     groupedProducts[type] = []
                 }
-                groupedProducts[type].push(product)
+                groupedProducts[type].push({
+                    ...product,
+                    roadmap: staticRoadmaps.nodes.find((roadmap) => roadmap.squeakId === product.roadmapID),
+                })
             })
         })
         return groupedProducts
-    }, [products])
+    }, [])
+
+    const handleProductClick = (product: Product) => {
+        setActiveProduct(product)
+    }
+
+    useEffect(() => {
+        if (activeProduct) {
+            setProductModalOpen(true)
+        }
+    }, [activeProduct])
+
+    useEffect(() => {
+        const isMobile = window.innerWidth < 768
+        if (isMobile && !productModalOpen) {
+            setActiveProduct(null)
+        }
+    }, [productModalOpen])
 
     return (
-        <section className="max-w-screen-2xl mx-auto flex space-x-12 py-12">
-            <ul className="grid grid-cols-3 gap-4 list-none m-0 p-0 flex-grow">
-                {Object.entries(groupedProducts).map(([type, products]) => (
-                    <li key={type}>
-                        <h2 className="text-lg opacity-70 font-semibold m-0 mb-1">{type}</h2>
-                        <ul className="list-none m-0 p-0 -mx-3 space-y-1">
-                            {products.map((product) => {
-                                const { Icon, name, color, colorDark } = product
-                                const active = activeProduct.name === product.name
-                                return (
-                                    <li key={name}>
-                                        <button
-                                            className={`flex items-center gap-2 text-lg font-semibold hover:font-bold hover:bg-accent/60 dark:bg-accent-dark/60 click rounded-md px-3 py-1 ${
-                                                active ? 'bg-accent dark:bg-accent-dark font-bold' : ''
-                                            }`}
-                                            onClick={() => setActiveProduct(product)}
-                                        >
-                                            <Icon
-                                                className={`size-5 text-${color} ${
-                                                    colorDark ? 'dark:text-${colorDark}' : ''
-                                                }`}
-                                            />
-                                            <span>{name}</span>
-                                        </button>
-                                    </li>
-                                )
-                            })}
-                        </ul>
-                    </li>
-                ))}
-            </ul>
-            <ProductDetails product={activeProduct} />
+        <section className="max-w-screen-2xl mx-auto px-5 py-12">
+            <div>
+                <ul className="flex space-x-4 m-0 p-0 list-none mb-6 border-b border-border dark:border-dark">
+                    {[{ name: 'All products' }, ...legend].map(({ name, color }) => {
+                        const active = activeStatus === name
+                        return (
+                            <li className="relative" key={name}>
+                                <button
+                                    className={`text-base font-semibold flex space-x-2 items-center pb-2 ${
+                                        active ? 'font-bold' : ''
+                                    }`}
+                                    onClick={() => setActiveStatus(name)}
+                                >
+                                    <span>{name}</span>
+                                    {color && <span className={`size-2 bg-${color} rounded-full`} />}
+                                </button>
+                                {active && (
+                                    <span className="h-[1px] bg-red w-full absolute bottom-0 translate-y-full left-0" />
+                                )}
+                            </li>
+                        )
+                    })}
+                </ul>
+            </div>
+            <div className="flex md:space-x-12 items-start">
+                <ul className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-4 list-none m-0 p-0 flex-grow flex-shrink-0">
+                    {Object.entries(groupedProducts).map(([type, products]) => (
+                        <li key={type}>
+                            <h2 className="text-lg opacity-70 font-semibold m-0 mb-1">{type}</h2>
+                            <ul className="list-none m-0 p-0 -mx-3 space-y-1">
+                                {products.map((product) => {
+                                    const { Icon, name, color, colorDark, status } = product
+                                    const active = activeProduct?.name === product.name
+                                    const isInActiveStatus = activeStatus === 'All products' || activeStatus === status
+                                    const statusColor = legend.find(
+                                        (legend) => legend.name.toLowerCase() === status.toLowerCase()
+                                    )?.color
+                                    return (
+                                        <li key={name}>
+                                            <button
+                                                className={`flex items-center gap-2 text-lg font-semibold hover:font-bold hover:bg-accent/60 dark:bg-accent-dark/60 click rounded-md px-3 py-1 transition-all ${
+                                                    active ? 'bg-accent dark:bg-accent-dark font-bold' : ''
+                                                } ${isInActiveStatus ? '' : 'opacity-50'}`}
+                                                onClick={() => handleProductClick(product)}
+                                            >
+                                                <Icon
+                                                    className={`size-5 text-${color} ${
+                                                        colorDark ? 'dark:text-${colorDark}' : ''
+                                                    }`}
+                                                />
+                                                <span>{name}</span>
+                                                <span className={`size-2 bg-${statusColor} rounded-full`} />
+                                            </button>
+                                        </li>
+                                    )
+                                })}
+                            </ul>
+                        </li>
+                    ))}
+                </ul>
+                <div className="hidden md:block">
+                    {activeProduct && (
+                        <div>
+                            {activeProduct.roadmapID ? (
+                                <RoadmapProductDetails product={activeProduct} />
+                            ) : (
+                                <ProductDetails product={activeProduct} />
+                            )}
+                        </div>
+                    )}
+                </div>
+                {activeProduct && (
+                    <ProductModal productModalOpen={productModalOpen} setProductModalOpen={setProductModalOpen}>
+                        {activeProduct.roadmapID ? (
+                            <RoadmapProductDetails product={activeProduct} />
+                        ) : (
+                            <ProductDetails product={activeProduct} />
+                        )}
+                    </ProductModal>
+                )}
+            </div>
         </section>
     )
 }
