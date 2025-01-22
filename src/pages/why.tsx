@@ -122,6 +122,11 @@ const Teams: React.FC = () => {
                         depth: 0,
                     },
                     {
+                        url: 'all-your-user-context-in-one-place',
+                        value: 'All your user context in one place',
+                        depth: 0,
+                    },
+                    {
                         url: 'who-doesnt-posthog-work-well-for',
                         value: "Who doesn't PostHog work well for?",
                         depth: 0,
@@ -341,6 +346,43 @@ const Teams: React.FC = () => {
                                     65% of every Y Combinator batch (the world's best accelerator for startups) use our
                                     products.
                                 </p>
+
+                                <h2 id="all-your-user-context-in-one-place">
+                                    All your user context in one place
+                                </h2>
+                            
+                                <p>
+                                    We put all the context you need in one place, so you can focus on your users instead
+                                    of fixing endless data integrations.
+                                </p>
+                                <p>
+                                    <strong>We have {PRODUCT_COUNT}+ products today,</strong> but even if we don't offer
+                                    it <em>yet</em>, we will eventually.
+                                </p>
+                                <p>
+                                    We're going to build every piece of SaaS you need to make your product successful.
+                                    You read that right. We've already got the world's best track record at delivering
+                                    them by being the widest with so many customers.
+                                </p>
+                                <p>
+                                    You've probably already seen the products we do have. For the stuff we don't, you
+                                    can <Link to="/roadmap">see our entire public roadmap</Link> and ask for what you
+                                    need.
+                                </p>
+
+                                <h3 id="popular-roadmap-items" className="mb-3">
+                                    Popular roadmap items
+                                </h3>
+                                <RoadmapPreview />
+
+                                <div className="text-center mb-8">
+                                    <Link
+                                        href="/roadmap"
+                                        className="border border-b-3 border-light dark:border-dark p-2 rounded text-center text-sm w-full block hover:bg-white hover:dark:bg-accent-dark hover:border-border hover:dark:border-border-dark hover:border-b-3 relative hover:-top-px active:top-px"
+                                    >
+                                        Explore the roadmap
+                                    </Link>
+                                </div>
 
                                 <h2 id="who-doesnt-posthog-work-well-for">Who doesn't PostHog work well for?</h2>
                                 <p>
