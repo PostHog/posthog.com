@@ -155,6 +155,8 @@ Check the `test-runner.ts` file to see how this is configured. We use the `@stor
 
 This setup will help catch unintended UI regressions and ensure consistent visual quality.
 
+[Learn more](https://github.com/PostHog/posthog/blob/master/.storybook/README.md)
+
 ## Reviewing code
 
 When we review a PR, we'll look at the following things:
