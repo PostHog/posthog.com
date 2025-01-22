@@ -536,6 +536,9 @@ export const query = graphql`
                     sessionRecording
                     featureFlags
                     groupAnalytics
+                    surveys
+                    llmObservability
+                    errorTracking
                 }
                 availability {
                     free
