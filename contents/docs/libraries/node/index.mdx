@@ -11,6 +11,9 @@ features:
   userIdentification: true
   featureFlags: true
   groupAnalytics: true
+  surveys: false
+  llmObservability: true
+  errorTracking: true
 ---
 
 If you're working with Node.js, the official `posthog-node` library is the simplest way to integrate your software with PostHog. This library uses an internal queue to make calls fast and non-blocking. It also batches requests and flushes asynchronously, making it perfect to use in any part of your web app or other server-side application that needs performance. And in addition to event capture, [feature flags](/docs/feature-flags) are supported as well.
@@ -256,6 +259,10 @@ export const handler() {
   await client.shutdown()
 }
 ```
+
+## LLM observability
+
+You can capture LLM usage and performance data by combining the `posthog-node` and `@posthog/ai` libraries. These work with LLM providers like OpenAI and Vercel's AI SDKs. Learn more in our [LLM observability docs](/docs/ai-engineering/observability).
 
 ## Sentry integration
 
