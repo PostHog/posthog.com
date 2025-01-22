@@ -5,7 +5,7 @@ import useCompanies, { Company, Filters as FiltersType } from 'hooks/useCompanie
 import Layout from 'components/Layout'
 import { layoutLogic } from 'logic/layoutLogic'
 import { useValues } from 'kea'
-import { IconChevronDown, IconArrowUpRight, IconX, IconPencil, IconTrash } from '@posthog/icons'
+import { IconChevronDown, IconArrowUpRight, IconX, IconPencil, IconTrash, IconShield } from '@posthog/icons'
 import Link from 'components/Link'
 import dayjs from 'dayjs'
 import relativeTime from 'dayjs/plugin/relativeTime'
@@ -183,7 +183,11 @@ const Companies = ({
         </ul>
     ) : (
         <div>
-            <div className="flex items-center justify-between lg:mt-5 border bg-white dark:bg-accent-dark border-border dark:border-dark rounded">
+            <div
+                className={`flex items-center justify-between lg:mt-5 border bg-white dark:bg-accent-dark border-border dark:border-dark rounded mx-auto transition-all ${
+                    fullWidthContent ? 'max-w-full' : ' max-w-4xl'
+                }`}
+            >
                 <input
                     type="search"
                     placeholder="Search..."
@@ -979,10 +983,10 @@ export default function JobsPage() {
                             Looking to work at PostHog? <Link to="/careers">Visit our careers page.</Link>
                         </p>
 
-                        <p className="mt-4 mb-0 border-t border-light dark:border-dark pt-4 text-sm">
+                        <p className="mt-4 mb-0 border-t border-light dark:border-dark pt-4 text-[15px]">
                             Work at a company with great perks?{' '}
                             <button
-                                className="text-red hover:text-red/75 dark:text-yellow dark:hover:text-yellow/75 font-semibold"
+                                className="text-red dark:text-yellow font-semibold"
                                 onClick={() => setApplyModalOpen(true)}
                             >
                                 Apply to get your jobs listed here.
@@ -991,7 +995,7 @@ export default function JobsPage() {
                         <p className="text-[15px] mt-2 mb-4">
                             Something off?{' '}
                             <button
-                                className="text-red hover:text-red/75 dark:text-yellow dark:hover:text-yellow/75 font-semibold"
+                                className="text-red dark:text-yellow font-semibold"
                                 onClick={() => setIssueModalOpen(true)}
                             >
                                 Let us know
@@ -999,7 +1003,13 @@ export default function JobsPage() {
                             .
                         </p>
                         {isModerator && (
-                            <CallToAction onClick={() => setAddAJobModalOpen(true)} size="sm" width="full">
+                            <CallToAction
+                                onClick={() => setAddAJobModalOpen(true)}
+                                size="sm"
+                                width="full"
+                                childClassName="flex items-center justify-center gap-1"
+                            >
+                                <IconShield className="size-5" />
                                 Add a company
                             </CallToAction>
                         )}
