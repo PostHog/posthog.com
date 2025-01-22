@@ -1,54 +1,10 @@
 ---
-title: Error tracking
+title: Error monitoring
 ---
-
-> ⚠️ Error tracking is currently released as a beta in feature preview. You can [enable it from within your PostHog account](https://us.posthog.com/#panel=feature-previews). If you have any feedback during the beta, please [share it with us](https://us.posthog.com/?panel=support%3Asupport%3A%3A%3Afalse#panel=support%3Asupport%3A%3A%3Afalse).
-
-Error tracking enables you to track, investigate, and resolve exceptions your customers face.
 
 Errors are captured as `$exception` events which means that you can create insights, filter recordings, trigger surveys, and more in the same way you can for any other type of event.
 
-## Installation
-
-### Python
-
-> **Note:** A minimum SDK version of v3.7.0 is required, but we recommend keeping up to date with the latest version to ensure you have all of error tracking's features.
-
-Exception autocapture can be enabled during initialization of the PostHog client to automatically capture any exception thrown by your Python application.
-
-```python
-from posthog import Posthog
-
-posthog = Posthog("<ph_project_api_key>", enable_exception_autocapture=True, ...)
-```
-
-If you're using Django 4.2+, you can enable the exception autocapture integration which will also automatically capture Django errors.
-
-```python
-from posthog.exception_capture import Integrations
-
-Posthog("<ph_project_api_key>", enable_exception_autocapture=True, exception_autocapture_integrations = [Integrations.Django])
-```
-
-For exceptions handled by your application that you would still like sent to PostHog, you can manually call the capture method:
-
-```python
-posthog.capture_exception(e, 'user_distinct_id', properties=additional_properties)
-```
-
-### Javascript
-
-> **Note:** A minimum SDK version of v1.160.0 is required, but we recommend keeping up to date with the latest version to ensure you have all of error tracking's features.
-
-Exception autocapture within the JavaScript Web SDK is remotely controlled via [the PostHog app](https://us.posthog.com/settings/project-autocapture#exception-autocapture).
-
-It is also possible to manually capture exceptions:
-
-```js
-posthog.captureException(error, additionalProperties)
-```
-
-## Functionality
+## Error tracking dashboard
 
 In addition to using events in insights, replays, and surveys as mentioned above customers can also visit the [error tracking page](https://us.posthog.com/error_tracking).
 
@@ -104,29 +60,3 @@ There is a long list of features on our roadmap but we're primarily working towa
 
 * Actioning exceptions (merging, assigning, resolving, etc)
 * Alerting
-
-## FAQs
-
-### Are web workers supported?
-
-Yes. Error tracking will work as long as you initialize PostHog in the [web worker](/tutorials/web-worker). You will need to disable any features that rely on the `window` object:
-
-```js
-posthog.init(token, {
-    ...
-    autocapture: false,
-    capture_pageview: false,
-    capture_pageleave: false,
-    disable_session_recording: true,
-    disable_surveys: true,
-});
-```
-
-To `identify` users in web workers you will need to pass the distinct ID. This can be done via an env variable or sending it via `postMessage` from your main application.
-
-### Can exceptions be sampled / ignored
-
-Returning `null` for a given event in the [`before_send`](/docs/libraries/js#amending-events-before-they-are-captured) hook will cause it not to be captured. You may want to:
-- Drop certain types of exceptions
-- Randomly sample a subset of all exceptions 
-- Sample based on the events properties (e.g. URL or user)
