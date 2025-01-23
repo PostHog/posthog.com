@@ -2263,16 +2263,6 @@ export const docsMenu = {
                     name: 'Tools',
                 },
                 {
-                    name: 'LLM insights',
-                    url: '/docs/ai-engineering/llms',
-                    icon: 'IconAIText',
-                    color: 'yellow',
-                    badge: {
-                        title: 'Beta',
-                        className: 'uppercase !bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',
-                    },
-                },
-                {
                     name: 'Autocapture',
                     url: '/docs/product-analytics/autocapture',
                     icon: 'IconBolt',
@@ -3233,45 +3223,41 @@ export const docsMenu = {
                     color: 'red',
                 },
                 {
+                    name: 'Traces and generations',
+                    url: '/docs/ai-engineering/traces-generations',
+                    icon: 'yellow',
+                    color: 'orange',
+                },
+                {
                     name: 'Tutorials and guides',
                     url: '/docs/ai-engineering/tutorials',
                     icon: 'IconGraduationCap',
-                    color: 'yellow',
+                    color: 'seagreen',
                     featured: true,
                 },
                 {
-                    name: 'Integrations',
-                },
-                {
-                    name: 'LLM insights',
+                    name: 'Observability integrations',
                     url: '/docs/ai-engineering/llm-insights',
                     icon: 'IconAIText',
                     color: 'blue',
-                    featured: true,
-                },
-                {
-                    name: 'Helicone',
-                    url: '/docs/ai-engineering/helicone-posthog',
-                    icon: 'IconWrench',
-                    color: 'green',
-                },
-                {
-                    name: 'Keywords AI',
-                    url: '/docs/ai-engineering/keywords-ai-posthog',
-                    icon: 'IconWrench',
-                    color: 'blue',
-                },
-                {
-                    name: 'Langfuse',
-                    url: '/docs/ai-engineering/langfuse-posthog',
-                    icon: 'IconWrench',
-                    color: 'red',
-                },
-                {
-                    name: 'Traceloop',
-                    url: '/docs/ai-engineering/traceloop-posthog',
-                    icon: 'IconWrench',
-                    color: 'purple',
+                    children: [
+                        {
+                            name: 'Helicone',
+                            url: '/docs/ai-engineering/helicone-posthog',
+                        },
+                        {
+                            name: 'Langfuse',
+                            url: '/docs/ai-engineering/langfuse-posthog',
+                        },
+                        {
+                            name: 'Traceloop',
+                            url: '/docs/ai-engineering/traceloop-posthog',
+                        },
+                        {
+                            name: 'Keywords AI',
+                            url: '/docs/ai-engineering/keywords-ai-posthog',
+                        },
+                    ],
                 },
             ],
         },
