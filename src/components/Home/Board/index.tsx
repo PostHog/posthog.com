@@ -699,9 +699,9 @@ export default function Hero(): JSX.Element {
                                         return (
                                             <li key={name}>
                                                 <button
-                                                    className={`flex items-center gap-2 text-sm md:text-[15px] font-medium hover:bg-accent/60 dark:bg-accent-dark/60 click rounded-md px-3 py-2 transition-all w-full ${
-                                                        active ? 'bg-accent dark:bg-accent-dark font-bold' : ''
-                                                    } ${isInActiveStatus ? '' : ''} ${
+                                                    className={`flex items-center gap-2 text-sm md:text-[15px] font-medium hover:bg-accent/60 dark:bg-accent-dark/60 click rounded-md px-3 py-2 transition-all w-full 
+                                                        border border-b-3 border-transparent md:hover:border-light dark:md:hover:border-dark hover:translate-y-[-1px] active:translate-y-[1px] active:transition-all
+                                                        ${isInActiveStatus ? '' : ''} ${
                                                         status === 'Roadmap' ? 'italic' : ''
                                                     }`}
                                                     onClick={() => setActiveProduct(product)}
