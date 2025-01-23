@@ -472,7 +472,7 @@ const RoadmapProductDetails = ({ product }: { product: Product }) => {
                 {description && <p className="text-base opacity-70 ml-10">{description}</p>}
                 <div className="mt-4">
                     {isLoading ? (
-                        <div />
+                        <div className="h-64 bg-accent dark:bg-accent-dark rounded-md animate-pulse" />
                     ) : (
                         <Feature
                             id={roadmap.id}
