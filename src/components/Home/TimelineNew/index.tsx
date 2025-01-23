@@ -6,6 +6,7 @@ import Markdown from 'components/Squeak/components/Markdown'
 import { CallToAction } from 'components/CallToAction'
 import { IconArrowLeft, IconArrowRight } from '@posthog/icons'
 import { heading } from '../classes'
+import Slider from 'components/Slider'
 
 const getFirstYear = (roadmaps: any) => Object.keys(roadmaps)[0]
 const getFirstMonth = (roadmaps: any, year: string) => Object.keys(roadmaps[year])[0]
@@ -23,6 +24,7 @@ const groupRoadmaps = (roadmaps: any) =>
         acc[year][monthName].push(node)
         return acc
     }, {})
+const filters = ['All highlights', 'Launched a product', 'Major new feature', 'Something cool happened']
 
 export default function TimelineNew() {
     const {
@@ -107,47 +109,27 @@ export default function TimelineNew() {
             <p className={`${heading('sm')} !text-left`}>
                 We started with product analytics and now have shipped 8 products in the last 5 years.
             </p>
-            <div className="flex items-center justify-between mt-10">
-                <ul className="flex items-center space-x-4 list-none m-0 p-0 border-b border-border dark:border-border-dark mb-8 w-full">
-                    {[
-                        {
-                            label: 'All highlights',
-                            onClick: () => {
-                                setActiveFilter('All highlights')
-                            },
-                        },
-                        {
-                            label: 'Launched a product',
-                            onClick: () => {
-                                setActiveFilter('Launched a product')
-                            },
-                        },
-                        {
-                            label: 'Major new feature',
-                            onClick: () => {
-                                setActiveFilter('Major new feature')
-                            },
-                        },
-                        {
-                            label: 'Something cool happened',
-                            onClick: () => {
-                                setActiveFilter('Something cool happened')
-                            },
-                        },
-                    ].map(({ label, onClick }) => {
+            <div className="mt-10">
+                <Slider
+                    className="border-b border-border dark:border-border-dark mb-8 space-x-4"
+                    activeIndex={filters.indexOf(activeFilter)}
+                >
+                    {filters.map((label) => {
                         const active = label === activeFilter
                         return (
-                            <li className="relative" key={label}>
-                                <button className={`text-base pb-2 ${active ? 'font-bold' : ''}`} onClick={onClick}>
-                                    {label}
-                                </button>
+                            <button
+                                key={label}
+                                className={`text-base pb-2 whitespace-nowrap relative ${active ? 'font-bold' : ''}`}
+                                onClick={() => setActiveFilter(label)}
+                            >
+                                {label}
                                 {active && (
                                     <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-red dark:bg-yellow" />
                                 )}
-                            </li>
+                            </button>
                         )
                     })}
-                </ul>
+                </Slider>
             </div>
             <div className="items-start md:space-x-4 md:space-y-0 space-y-4 flex md:flex-row flex-col">
                 <div className="flex space-x-8 max-w-1/3 w-full">
