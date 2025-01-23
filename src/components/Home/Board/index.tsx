@@ -569,6 +569,16 @@ const ProductModal = ({
     setProductModalOpen: (open: boolean) => void
     productModalOpen: boolean
 }) => {
+    const [isBrowser, setIsBrowser] = useState(false)
+
+    useEffect(() => {
+        setIsBrowser(true)
+    }, [])
+
+    if (!isBrowser) {
+        return null
+    }
+
     return ReactDOM.createPortal(
         <AnimatePresence>
             {productModalOpen && (
