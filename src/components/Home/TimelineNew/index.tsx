@@ -105,7 +105,7 @@ export default function TimelineNew() {
 
     return (
         <div className="max-w-screen-xl mx-auto my-12 px-5">
-            <h2 className={`text-3xl md:text-5xl`}>
+            <h2 className={`text-3xl md:text-4xl`}>
                 We ship <span className="text-red dark:text-yellow">weirdly</span> fast
             </h2>
             <p className={`text-xl mb-4`}>
@@ -121,7 +121,7 @@ export default function TimelineNew() {
                         return (
                             <button
                                 key={label}
-                                className={`text-base pb-2 whitespace-nowrap relative ${active ? 'font-bold' : ''}`}
+                                className={`text-sm pb-2 whitespace-nowrap relative ${active ? 'font-bold' : ''}`}
                                 onClick={() => setActiveFilter(label)}
                             >
                                 {label}
@@ -139,7 +139,7 @@ export default function TimelineNew() {
                         {Object.entries(roadmapsGrouped).map(([year]) => (
                             <li key={year}>
                                 <button
-                                    className={`text-base hover:bg-accent/60 dark:hover:bg-accent-dark px-2 py-1 rounded-md ${
+                                    className={`text-sm hover:bg-accent/60 dark:hover:bg-accent-dark px-2 py-1 rounded-md ${
                                         year === activeYear ? 'bg-accent dark:bg-accent-dark font-bold' : ''
                                     }`}
                                     onClick={() => {
@@ -162,7 +162,7 @@ export default function TimelineNew() {
                                 const nextYear = `${Number(activeYear) + 1}`
                                 return (
                                     <>
-                                        <li className="`text-base px-2 py-1 rounded-md`" key={month}>
+                                        <li className="text-sm px-2 py-1 rounded-md" key={month}>
                                             {month}
                                         </li>
                                         {isLastMonth && roadmapsGrouped[nextYear] && (
@@ -197,7 +197,7 @@ export default function TimelineNew() {
                                 roadmaps.map((node) => (
                                     <li key={node.squeakId}>
                                         <button
-                                            className={`text-left text-base hover:bg-accent/60 dark:hover:bg-accent-dark px-2 py-1 rounded-md text-ellipsis overflow-hidden ${
+                                            className={`text-left text-sm hover:bg-accent/60 dark:hover:bg-accent-dark px-2 py-1 rounded-md text-ellipsis overflow-hidden ${
                                                 node.squeakId === activeRoadmap.squeakId
                                                     ? 'bg-accent dark:bg-accent-dark font-bold'
                                                     : ''
@@ -216,9 +216,9 @@ export default function TimelineNew() {
                 </div>
 
                 <div className="border border-border dark:border-border-dark flex-grow w-full">
-                    <div className="flex justify-between items-center p-4 border-b border-border dark:border-border-dark">
+                    <div className="flex justify-between items-center py-2 px-4 border-b border-light dark:border-dark bg-accent dark:bg-accent-dark">
                         <CallToAction
-                            size="sm"
+                            size="xs"
                             type="outline"
                             disabled={!hasPrevious}
                             onClick={() => {
@@ -234,11 +234,11 @@ export default function TimelineNew() {
                                 <span>Previous</span>
                             </span>
                         </CallToAction>
-                        <h3 className="m-0 text-base">
+                        <h3 className="m-0 text-sm">
                             {activeMonth} {activeYear}
                         </h3>
                         <CallToAction
-                            size="sm"
+                            size="xs"
                             type="outline"
                             disabled={!hasNext}
                             onClick={() => {
