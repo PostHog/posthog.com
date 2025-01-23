@@ -463,7 +463,7 @@ const RoadmapProductDetails = ({ product }: { product: Product }) => {
     const staticLikeCount = product.roadmap?.githubPages?.[0]?.reactions?.total_count || 0
 
     return (
-        <div className="bg-white border border-border dark:border-dark max-w-[700px] w-full overflow-hidden">
+        <div className="bg-white dark:bg-accent-dark border border-border dark:border-dark max-w-[700px] w-full overflow-hidden">
             <div className="p-6">
                 <h2 className="text-xl m-0 flex space-x-2">
                     <Icon className={`size-8 text-${color} ${colorDark ? 'dark:text-${colorDark}' : ''}`} />
@@ -472,7 +472,7 @@ const RoadmapProductDetails = ({ product }: { product: Product }) => {
                 {description && <p className="text-base opacity-70 ml-10">{description}</p>}
                 <div className="mt-4">
                     {isLoading ? (
-                        <div className="h-64 bg-accent dark:bg-accent-dark rounded-md animate-pulse" />
+                        <div className="h-64 bg-accent dark:bg-dark rounded-md animate-pulse" />
                     ) : (
                         <Feature
                             id={roadmap.id}
@@ -494,7 +494,7 @@ const ProductDetails = ({ product }: { product: Product }) => {
     const billingData = products.products.find((billingProduct) => billingProduct.type === pricingKey)
 
     return (
-        <div className="bg-white border border-border dark:border-dark max-w-[700px] w-full overflow-hidden">
+        <div className="bg-white dark:bg-accent-dark border border-border dark:border-dark max-w-[700px] w-full overflow-hidden">
             <div className="px-6 pt-6">
                 <h2 className="text-xl m-0 flex space-x-2 items-center">
                     <Icon className={`size-8 text-${color} ${colorDark ? 'dark:text-${colorDark}' : ''}`} />
@@ -513,7 +513,7 @@ const ProductDetails = ({ product }: { product: Product }) => {
                 )}
             </div>
             {features?.length > 0 && (
-                <ul className="grid grid-cols-3 gap-4 list-none px-6 py-6 border-t border-border dark:border-dark relative bg-white">
+                <ul className="grid grid-cols-3 gap-4 list-none px-6 py-6 border-t border-border dark:border-dark relative bg-white dark:bg-accent-dark">
                     {features?.map(({ title, Icon }) => (
                         <li key={title} className="flex items-center space-x-2 text-base font-semibold">
                             <div className="size-8 bg-accent dark:bg-accent-dark rounded-md p-1 flex items-center justify-center">
@@ -525,7 +525,7 @@ const ProductDetails = ({ product }: { product: Product }) => {
                 </ul>
             )}
             {(billingData || pricing) && (
-                <div className="grid grid-cols-3 p-6 border-t border-border dark:border-dark bg-white relative">
+                <div className="grid grid-cols-3 p-6 border-t border-border dark:border-dark bg-white dark:bg-accent-dark relative">
                     <div>
                         <h3 className="text-base opacity-70 font-semibold m-0">Monthly free tier</h3>
                         {pricing?.FreeTier ? (
@@ -700,8 +700,13 @@ export default function Hero(): JSX.Element {
                                             <li key={name}>
                                                 <button
                                                     className={`flex items-center gap-2 text-sm md:text-[15px] font-medium click rounded-md px-3 py-2 transition-all w-full 
-                                                        border border-b-3 border-transparent md:hover:border-light dark:md:hover:border-dark hover:translate-y-[-1px] active:translate-y-[1px] active:transition-all
-                                                        ${isInActiveStatus ? '' : ''} ${
+                                                        border border-b-3 border-transparent hover:border-light dark:hover:border-dark hover:translate-y-[-1px] active:translate-y-[1px] active:transition-all
+                                                        ${
+                                                            active
+                                                                ? '!border-light dark:!border-dark bg-accent dark:bg-accent-dark'
+                                                                : ''
+                                                        }
+                                                        ${isInActiveStatus ? '' : 'opacity-50'} ${
                                                         status === 'Roadmap' ? 'italic' : ''
                                                     }`}
                                                     onClick={() => setActiveProduct(product)}
