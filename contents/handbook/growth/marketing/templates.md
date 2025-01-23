@@ -54,7 +54,7 @@ Let us know [on this GitHub issue](https://github.com/PostHog/posthog/issues/127
 If you ever need to remove a dashboard template, you need to:
 
 1. Open [the templates list](https://us.posthog.com/project/2/dashboard?tab=templates)
-2. Click on the three dots to the right of the template you wanna remove, and then click "Make visible to this team only" - required step before you can delete it
-4. Click on the three dots again, and then click "Delete Dashboard"
+2. Click on the three dots to the right of the template you want to remove and then click **Make visible to this team only**. This is a required step before you can delete it.
+3. Click on the three dots again and then click **Delete Dashboard**.
 
-Be extremely sure of what you're doing, this is a non-reversible action.
+Be sure of what you're doing as this is a non-reversible action.
