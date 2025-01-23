@@ -23,7 +23,7 @@ We'll build a basic Next.js app, implement the ChatGPT API, and capture these ev
 
 To showcase how to track important metrics, we create a simple one-page React app with the following:
 
-- A form with textfield and button for user input.
+- A form with a textfield and button for user input.
 - A label to show ChatGPT output.
 - A dropdown to select different [OpenAI models](https://platform.openai.com/docs/models).
 - An API route to call the ChatGPT API and generate a response.
@@ -111,13 +111,13 @@ export default function Home() {
 };
 ```
 
-Run `npm run dev` to see our app action:
+Run `npm run dev` to see our app in action:
 
 ![Basic Next.js app with ChatGPT](https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_01_23_at_10_50_12_2x_482fd1852c.png)
 
 ## 2. Adding and tracking the generate API route
 
-In the `app` folder, create a `api` folder, a `generate` folder in that, and then `route.js` file in that. This is our `/api/generate` API route that calls the ChatGPT API and returns the response. 
+In the `app` folder, create an `api` folder, a `generate` folder inside it, and then a `route.js` file in that. This is our `/api/generate` API route that calls the ChatGPT API and returns the response. 
 
 Next, set up:
 
