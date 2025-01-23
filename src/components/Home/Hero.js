@@ -12,7 +12,7 @@ import Modal from 'components/Modal'
 import { IconX } from '@posthog/icons'
 import { motion } from 'framer-motion'
 import { StaticImage } from 'gatsby-plugin-image'
-import Board from './Board'
+
 export const FeatureStrip = ({ className = '' }) => {
     return (
         <div className="text-center mt-0 mb-4">
@@ -309,7 +309,8 @@ export default function Hero() {
                             </div>
                         )}
                     </div>
-                    <Board />
+                    <Slider />
+                    <Accordion />
                 </div>
             </section>
         </>
