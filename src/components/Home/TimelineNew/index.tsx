@@ -74,7 +74,7 @@ export default function TimelineNew() {
         let newRoadmaps = nodes
         switch (activeFilter) {
             case 'Launched a product':
-                newRoadmaps = nodes.filter((node) => node.category === 'Beta')
+                newRoadmaps = nodes.filter((node) => node.category === 'Beta' || node.category === 'Launched a product')
                 break
             case 'Major new feature':
                 newRoadmaps = nodes.filter((node) => node.category === 'Major new feature')

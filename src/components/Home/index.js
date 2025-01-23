@@ -41,6 +41,7 @@ const Home = () => {
                 <Hero />
                 <Customers />
                 <AllInOne />
+                <TimelineNew />
                 <Libraries />
                 <CodeBlocks />
                 <NoHatingAllowed data={HomepageCards} youllHate="PostHog" size="text-4xl lg:text-6xl" />
@@ -65,7 +66,6 @@ const Home = () => {
                 <Community />
                 <OnePlatform />
                 <CustomerData />
-                <TimelineNew />
                 <Roadmap />
                 <Startups />
                 {/*<Tutorials
