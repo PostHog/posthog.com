@@ -39,6 +39,16 @@ import {
     IconFunnels,
     IconGraph,
     IconX,
+    IconLlmPromptManagement,
+    IconCode,
+    IconChatHelp,
+    IconIssue,
+    IconLlmPromptEvaluation,
+    IconWarning,
+    IconSend,
+    IconLlmObservability,
+    IconListCheck,
+    IconApp,
 } from '@posthog/icons'
 import CloudinaryImage from 'components/CloudinaryImage'
 import useProducts from 'hooks/useProducts'
@@ -286,7 +296,7 @@ const products: Product[] = [
         name: 'LLM observability',
         color: '[#8B0DC8]',
         colorDark: '[#C170E8]',
-        Icon: IconAI,
+        Icon: IconLlmObservability,
         description: 'Build AI features with full visibility – both in development and production.',
         pricingKey: 'llm-observability',
         types: ['AI'],
@@ -329,14 +339,14 @@ const products: Product[] = [
     {
         name: 'Messaging',
         color: 'red',
-        Icon: IconMessage,
+        Icon: IconSend,
         types: ['Data'],
         status: 'Roadmap',
         roadmapID: 1999,
     },
     {
         name: 'Product tours',
-        Icon: IconMessage,
+        Icon: IconMegaphone,
         color: 'red',
         types: ['Product'],
         status: 'Roadmap',
@@ -344,7 +354,7 @@ const products: Product[] = [
     },
     {
         name: 'Product roadmaps',
-        Icon: IconMessage,
+        Icon: IconListCheck,
         color: 'red',
         types: ['Product'],
         status: 'Roadmap',
@@ -352,7 +362,7 @@ const products: Product[] = [
     },
     {
         name: 'Heatmaps 2.0',
-        Icon: IconMessage,
+        Icon: IconApp,
         color: 'yellow',
         types: ['Marketing'],
         status: 'WIP',
@@ -368,7 +378,7 @@ const products: Product[] = [
     },
     {
         name: 'No-code A/B testing',
-        Icon: IconMessage,
+        Icon: IconTestTube,
         color: 'pink',
         types: ['Marketing'],
         status: 'WIP',
@@ -376,7 +386,7 @@ const products: Product[] = [
     },
     {
         name: 'Error tracking',
-        Icon: IconMessage,
+        Icon: IconWarning,
         color: 'brown',
         types: ['Engineering'],
         status: 'WIP',
@@ -384,7 +394,7 @@ const products: Product[] = [
     },
     {
         name: 'Prompt evaluation',
-        Icon: IconMessage,
+        Icon: IconLlmPromptEvaluation,
         color: 'blue',
         types: ['AI'],
         status: 'Roadmap',
@@ -392,7 +402,7 @@ const products: Product[] = [
     },
     {
         name: 'Prompt management',
-        Icon: IconMessage,
+        Icon: IconLlmPromptManagement,
         color: 'blue',
         types: ['AI'],
         status: 'Roadmap',
@@ -400,7 +410,7 @@ const products: Product[] = [
     },
     {
         name: 'Code editor',
-        Icon: IconMessage,
+        Icon: IconCode,
         color: 'black',
         types: ['AI'],
         status: 'Roadmap',
@@ -408,7 +418,7 @@ const products: Product[] = [
     },
     {
         name: 'AI docs chat',
-        Icon: IconMessage,
+        Icon: IconChatHelp,
         color: 'blue',
         types: ['Support'],
         status: 'Roadmap',
@@ -416,7 +426,7 @@ const products: Product[] = [
     },
     {
         name: 'Issue tracker',
-        Icon: IconMessage,
+        Icon: IconIssue,
         color: 'yellow',
         types: ['Support'],
         status: 'Roadmap',
