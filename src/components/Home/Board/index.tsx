@@ -48,6 +48,7 @@ import { useRoadmaps } from 'hooks/useRoadmaps'
 import { graphql } from 'gatsby'
 import { useStaticQuery } from 'gatsby'
 import { AnimatePresence, motion } from 'framer-motion'
+import Slider from 'components/Slider'
 
 type Product = {
     name: string
@@ -437,6 +438,8 @@ const legend = [
     },
 ]
 
+const filters = [{ name: 'All products' }, ...legend]
+
 const numberToWords = (num: number) => {
     if (num >= 1_000_000_000) return num / 1_000_000_000 + ' billion'
     if (num >= 1_000_000) return num / 1_000_000 + ' million'
@@ -646,8 +649,11 @@ export default function Hero(): JSX.Element {
     return (
         <section className="max-w-screen-2xl mx-auto py-12 md:px-4">
             <div>
-                <ul className="max-w-screen px-5 md:px-0 overflow-x-auto flex space-x-4 m-0 p-0 list-none mb-6 border-b border-border dark:border-dark">
-                    {[{ name: 'All products' }, ...legend].map(({ name, color }) => {
+                <Slider
+                    activeIndex={filters.findIndex(({ name }) => name === activeStatus)}
+                    className="max-w-screen px-5 md:px-0 overflow-x-auto flex space-x-4 m-0 p-0 list-none mb-6 border-b border-border dark:border-dark"
+                >
+                    {filters.map(({ name, color }) => {
                         const active = activeStatus === name
                         return (
                             <li className="relative" key={name}>
@@ -672,7 +678,7 @@ export default function Hero(): JSX.Element {
                             </li>
                         )
                     })}
-                </ul>
+                </Slider>
             </div>
             <div className="flex px-2 md:px-0 md:space-x-12 items-start">
                 <ul className="flex-1 grid grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-x-2 gap-y-6 md:gap-4 list-none m-0 p-0 flex-grow flex-shrink-0">
