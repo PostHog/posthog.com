@@ -9,6 +9,22 @@ import { useValues } from 'kea'
 import { layoutLogic } from 'logic/layoutLogic'
 import SalesforceForm from 'components/SalesforceForm'
 
+enum YCBatch {
+    S25 = 'S25',
+    X25 = 'X25',
+    W25 = 'W25',
+    F24 = 'F24',
+    S24 = 'S24',
+    W24 = 'W24',
+    S23 = 'S23',
+    W23 = 'W23',
+    S22 = 'S22',
+    W22 = 'W22',
+    S21 = 'S21',
+    W21 = 'W21',
+    Earlier = 'Earlier'
+}
+
 const features = [
     '$50,000 in PostHog credit for 12 months<sup>1</sup>',
     'Exclusive PostHog merch for founders<sup>2</sup>',
@@ -34,7 +50,7 @@ export const YCOnboarding = () => {
                         <h1 className="text-3xl md:text-5xl mt-4 mb-2">You've found our secret Y Combinator offer!</h1>
                         <p className="m-0 text-lg">
                             We offer special benefits for teams in the current batch - things we'd have found useful
-                            during our W20 batch.
+                            during <Link to="/blog/yc-2-years-on" external>our W20 batch</Link>.{' '}
                         </p>
                     </div>
                 </section>
@@ -126,24 +142,25 @@ export const YCOnboarding = () => {
                                     },
                                     {
                                         label: 'Which YC batch are you?',
-                                        type: 'string',
+                                        type: 'enumeration',
                                         name: 'yc_batch',
                                         required: true,
                                         options: [
                                             { label: 'Select your batch', value: '' },
-                                            { label: 'Spring 2025 (X25)', value: 'X25' },
-                                            { label: 'Winter 2025 (W25)', value: 'W25' },
-                                            { label: 'Fall 2024 (F24)', value: 'F24' },
-                                            { label: 'Summer 2024 (S24)', value: 'S24' },
-                                            { label: 'Spring 2024 (X24)', value: 'X24' },
-                                            { label: 'Winter 2024 (W24)', value: 'W24' },
-                                            { label: 'Summer 2023 (S23)', value: 'S23' },
-                                            { label: 'Winter 2023 (W23)', value: 'W23' },
-                                            { label: 'Summer 2022 (S22)', value: 'S22' },
-                                            { label: 'Winter 2022 (W22)', value: 'W22' },
-                                            { label: 'Summer 2021 (S21)', value: 'S21' },
-                                            { label: 'Winter 2021 (W21)', value: 'W21' },
-                                        ],
+                                            { label: 'Summer 2025 (S25)', value: YCBatch.S25 },
+                                            { label: 'Spring 2025 (X25)', value: YCBatch.X25 },
+                                            { label: 'Winter 2025 (W25)', value: YCBatch.W25 },
+         			                        { label: 'Fall 2024 (F24)', value: YCBatch.F24 },
+                                            { label: 'Summer 2024 (S24)', value: YCBatch.S24 },
+                                            { label: 'Winter 2024 (W24)', value: YCBatch.W24 },
+                                            { label: 'Summer 2023 (S23)', value: YCBatch.S23 },
+                                            { label: 'Winter 2023 (W23)', value: YCBatch.W23 },
+                                            { label: 'Summer 2022 (S22)', value: YCBatch.S22 },
+                                            { label: 'Winter 2022 (W22)', value: YCBatch.W22 },
+                                            { label: 'Summer 2021 (S21)', value: YCBatch.S21 },
+                                            { label: 'Winter 2021 (W21)', value: YCBatch.W21 },
+                                            { label: 'Earlier batches', value: YCBatch.Earlier },
+                                        ]
                                     },
                                     {
                                         label: 'Are you building LLM-powered features?',
