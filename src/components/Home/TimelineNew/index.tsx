@@ -149,7 +149,7 @@ export default function TimelineNew() {
                     })}
                 </ul>
             </div>
-            <div className="items-start space-x-4 flex">
+            <div className="items-start md:space-x-4 md:space-y-0 space-y-4 flex md:flex-row flex-col">
                 <div className="flex space-x-8 max-w-1/3 w-full">
                     <ul className="m-0 p-0 list-none space-y-1 flex-shrink-0">
                         {Object.entries(roadmapsGrouped).map(([year]) => (
@@ -172,39 +172,38 @@ export default function TimelineNew() {
                         ))}
                     </ul>
                     <ul className="m-0 p-0 list-none space-y-1 flex-shrink-0">
-                        {Object.entries(roadmapsGrouped[activeYear]).map(([month]) => (
-                            <li key={month}>
-                                <button
-                                    className={`text-base hover:bg-accent/60 dark:hover:bg-accent-dark px-2 py-1 rounded-md ${
-                                        activeMonth === month ? 'bg-accent dark:bg-accent-dark font-bold' : ''
-                                    }`}
-                                    onClick={() => {
-                                        setActiveMonth(month)
-                                        setActiveRoadmap(roadmapsGrouped[activeYear][month][0])
-                                    }}
-                                >
+                        {Object.entries(roadmapsGrouped[activeYear]).map(([month, roadmaps]) => (
+                            <>
+                                <li className="`text-base px-2 py-1 rounded-md`" key={month}>
                                     {month}
-                                </button>
-                            </li>
+                                </li>
+                                {new Array(roadmaps.length - 1).fill(null).map((_, index) => (
+                                    <li className="py-1" key={index}>
+                                        <br />
+                                    </li>
+                                ))}
+                            </>
                         ))}
                     </ul>
                     <ul className="m-0 p-0 list-none space-y-1">
-                        {roadmapsGrouped[activeYear][activeMonth].map((node) => (
-                            <li key={node.squeakId}>
-                                <button
-                                    className={`text-left text-base hover:bg-accent/60 dark:hover:bg-accent-dark px-2 py-1 rounded-md text-ellipsis overflow-hidden ${
-                                        node.squeakId === activeRoadmap.squeakId
-                                            ? 'bg-accent dark:bg-accent-dark font-bold'
-                                            : ''
-                                    }`}
-                                    onClick={() => {
-                                        setActiveRoadmap(node)
-                                    }}
-                                >
-                                    {node.title}
-                                </button>
-                            </li>
-                        ))}
+                        {Object.entries(roadmapsGrouped[activeYear]).map(([month, roadmaps]) =>
+                            roadmaps.map((node) => (
+                                <li key={node.squeakId}>
+                                    <button
+                                        className={`text-left text-base hover:bg-accent/60 dark:hover:bg-accent-dark px-2 py-1 rounded-md text-ellipsis overflow-hidden ${
+                                            node.squeakId === activeRoadmap.squeakId
+                                                ? 'bg-accent dark:bg-accent-dark font-bold'
+                                                : ''
+                                        }`}
+                                        onClick={() => {
+                                            setActiveRoadmap(node)
+                                        }}
+                                    >
+                                        {node.title}
+                                    </button>
+                                </li>
+                            ))
+                        )}
                     </ul>
                 </div>
 
