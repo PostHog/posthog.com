@@ -426,7 +426,6 @@ const products: Product[] = [
 const legend = [
     {
         name: 'Production',
-        color: 'blue',
     },
     {
         name: 'WIP',
@@ -691,7 +690,9 @@ export default function Hero(): JSX.Element {
                                             <button
                                                 className={`flex items-center gap-2 text-sm md:text-[15px] font-medium hover:bg-accent/60 dark:bg-accent-dark/60 click rounded-md px-3 py-2 transition-all w-full ${
                                                     active ? 'bg-accent dark:bg-accent-dark font-bold' : ''
-                                                } ${isInActiveStatus ? '' : ''}`}
+                                                } ${isInActiveStatus ? '' : ''} ${
+                                                    status === 'Roadmap' ? 'italic' : ''
+                                                }`}
                                                 onClick={() => setActiveProduct(product)}
                                                 onFocus={(e) => {
                                                     if (
