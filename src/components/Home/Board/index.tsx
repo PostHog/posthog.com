@@ -234,7 +234,7 @@ const products: Product[] = [
         status: 'Production',
     },
     {
-        name: 'Data pipelines',
+        name: 'CDP',
         // lottieSrc: '/lotties/product-icons/data-pipeline.lottie',
         color: 'sky-blue',
         Icon: IconPlug,
