@@ -24,6 +24,7 @@ import { RenderInClient } from 'components/RenderInClient'
 import BillboardTruck from './BillboardTruck'
 import Spinner from 'components/Spinner'
 import { HomepageCards } from '../NoHatingAllowed/data.js'
+import TimelineNew from './TimelineNew'
 
 const Home = () => {
     const posthog = usePostHog()
@@ -64,7 +65,7 @@ const Home = () => {
                 <Community />
                 <OnePlatform />
                 <CustomerData />
-                <Timeline />
+                <TimelineNew />
                 <Roadmap />
                 <Startups />
                 {/*<Tutorials
