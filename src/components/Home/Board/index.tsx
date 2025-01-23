@@ -445,7 +445,7 @@ const filters = [{ name: 'All products' }, ...legend]
 const numberToWords = (num: number) => {
     if (num >= 1_000_000_000) return num / 1_000_000_000 + ' billion'
     if (num >= 1_000_000) return num / 1_000_000 + ' million'
-    if (num >= 1_000) return num / 1_000 + ' thousand'
+    if (num >= 1_000) return num / 1_000 + ',000'
     return num.toString()
 }
 
@@ -471,7 +471,7 @@ const RoadmapProductDetails = ({ product }: { product: Product }) => {
                     <Icon className={`size-8 text-${color} ${colorDark ? 'dark:text-${colorDark}' : ''}`} />
                     <span>{name}</span>
                 </h2>
-                {description && <p className="text-base opacity-70 ml-10">{description}</p>}
+                {description && <p className="text-sm opacity-70 ml-10">{description}</p>}
                 <div className="mt-4">
                     {isLoading ? (
                         <div className="h-64 bg-accent dark:bg-dark rounded-md animate-pulse" />
@@ -496,7 +496,7 @@ const ProductDetails = ({ product }: { product: Product }) => {
     const billingData = products.products.find((billingProduct) => billingProduct.type === pricingKey)
 
     return (
-        <div className="bg-white dark:bg-accent-dark border border-border dark:border-dark md:max-w-[700px] w-full overflow-hidden">
+        <div className="@container bg-white dark:bg-accent-dark border border-border dark:border-dark md:max-w-[700px] w-full overflow-hidden">
             <div className="px-6 pt-6">
                 <h2 className="text-xl m-0 flex space-x-2 items-center">
                     <Icon className={`size-8 text-${color} ${colorDark ? 'dark:text-${colorDark}' : ''}`} />
@@ -505,7 +505,7 @@ const ProductDetails = ({ product }: { product: Product }) => {
                         <span className="bg-accent dark:bg-accent-dark rounded-md px-2 py-1 text-sm">{badge}</span>
                     )}
                 </h2>
-                {description && <p className="text-base opacity-70 ml-10">{description}</p>}
+                {description && <p className="text-sm opacity-70 ml-10">{description}</p>}
                 {Images && (
                     <div className="-mb-32 h-[350px] relative">
                         <div className="absolute inset-0 w-full h-full">
@@ -515,41 +515,42 @@ const ProductDetails = ({ product }: { product: Product }) => {
                 )}
             </div>
             {features?.length > 0 && (
-                <ul className="grid md:grid-cols-3 gap-4 list-none px-6 py-6 border-t border-border dark:border-dark relative bg-white dark:bg-accent-dark">
+                <ul className="grid @xs:grid-cols-2 @2xl:grid-cols-3 gap-x-4 gap-y-2 @xl:gap-x-8 list-none px-6 py-6 border-t border-border dark:border-dark relative bg-accent dark:bg-accent-dark">
                     {features?.map(({ title, Icon }) => (
-                        <li key={title} className="flex items-center space-x-2 text-base font-semibold">
-                            <div className="size-8 bg-accent dark:bg-accent-dark rounded-md p-1 flex items-center justify-center">
+                        <li key={title} className="flex items-start space-x-2 text-base font-semibold">
+                            <div className="size-8 bg-border dark:bg-border-dark rounded-md p-1 flex items-center justify-center">
                                 <Icon className="size-5" />
                             </div>
-                            <span>{title}</span>
+                            <span className="mt-1.5 text-sm">{title}</span>
                         </li>
                     ))}
                 </ul>
             )}
             {(billingData || pricing) && (
-                <div className="grid md:grid-cols-3 md:gap-0 gap-2 p-6 border-t border-border dark:border-dark bg-white dark:bg-accent-dark relative">
+                <div className="grid md:grid-cols-3 md:gap-0 gap-2 p-6 border-t border-border dark:border-dark bg-accent dark:bg-accent-dark relative">
                     <div>
-                        <h3 className="text-base opacity-70 font-semibold m-0">Monthly free tier</h3>
+                        <h3 className="text-sm opacity-60 font-semibold m-0">Monthly free tier</h3>
                         {pricing?.FreeTier ? (
                             <pricing.FreeTier />
                         ) : (
-                            <p className="text-base text-green font-bold m-0">
+                            <p className="text-sm text-green font-bold m-0">
                                 {numberToWords(billingData?.freeLimit)} {billingData?.billingData.unit}s
                             </p>
                         )}
                     </div>
                     <div>
-                        <h3 className="text-base opacity-70 font-semibold m-0">Starts at</h3>
+                        <h3 className="text-sm opacity-60 font-semibold m-0">Starts at</h3>
                         {pricing?.StartsAt ? (
                             <pricing.StartsAt />
                         ) : (
-                            <p className="text-base m-0">
-                                <strong>${billingData?.startsAt}</strong>/{billingData?.billingData.unit}
+                            <p className="text-sm m-0">
+                                <strong>${billingData?.startsAt}</strong>
+                                <span className="opacity-60">/{billingData?.billingData.unit}</span>
                             </p>
                         )}
                     </div>
                     <div className="md:ml-auto">
-                        <CallToAction type="outline" to={pricing?.cta?.url || '/pricing'}>
+                        <CallToAction type="outline" size="sm" to={pricing?.cta?.url || '/pricing'}>
                             {pricing?.cta?.text || 'Explore'}
                         </CallToAction>
                     </div>
@@ -682,7 +683,7 @@ export default function Hero(): JSX.Element {
                     })}
                 </Slider>
             </div>
-            <div className="flex px-2 md:px-0 md:space-x-12 items-start">
+            <div className="flex px-2 md:px-0 md:space-x-6 items-start">
                 <ul className="flex-1 grid grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-x-2 gap-y-6 md:gap-4 list-none m-0 p-0 flex-grow flex-shrink-0">
                     {[...Object.entries(groupedProducts)]
                         .sort(([typeA], [typeB]) => sorted.indexOf(typeA) - sorted.indexOf(typeB))
@@ -701,14 +702,14 @@ export default function Hero(): JSX.Element {
                                         return (
                                             <li key={name}>
                                                 <button
-                                                    className={`flex items-center gap-2 text-sm md:text-[15px] font-medium click rounded-md px-3 py-2 transition-all w-full 
+                                                    className={`flex items-center gap-2 text-sm font-medium click rounded-md px-3 py-1.5 transition-all w-full 
                                                         border border-b-3 border-transparent hover:border-light dark:hover:border-dark hover:translate-y-[-1px] active:translate-y-[1px] active:transition-all
                                                         ${
                                                             active
                                                                 ? '!border-light dark:!border-dark bg-accent dark:bg-accent-dark'
                                                                 : ''
                                                         }
-                                                        ${isInActiveStatus ? '' : 'opacity-50'} ${
+                                                        ${isInActiveStatus ? '' : 'opacity-30'} ${
                                                         status === 'Roadmap' ? 'italic' : ''
                                                     }`}
                                                     onClick={() => setActiveProduct(product)}

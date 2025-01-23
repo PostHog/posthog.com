@@ -3401,10 +3401,10 @@
   resolved "https://registry.yarnpkg.com/@popperjs/core/-/core-2.11.8.tgz#6b79032e760a0899cd4204710beede972a3a185f"
   integrity sha512-P1st0aksCrn9sGZhp8GMYwBnQsbvAWsZAX44oXNNvLHGqAOcoVxmjZiohstwQ7SqKnbR47akdNi+uleWD8+g6A==
 
-"@posthog/icons@0.11.0":
-  version "0.11.0"
-  resolved "https://registry.yarnpkg.com/@posthog/icons/-/icons-0.11.0.tgz#751e0beb8d5532f2a5bd01f48bc023f1466fca2a"
-  integrity sha512-y1Y3zrM2ZS9pAlIg4EZP0rVFJUt0/A3WaAVySUcfqN+8rLiNau+YElUek4JtpxNWbigSrEqplLAEN1lcEYAYzA==
+"@posthog/icons@0.11.1":
+  version "0.11.1"
+  resolved "https://registry.yarnpkg.com/@posthog/icons/-/icons-0.11.1.tgz#f21430fa400b125dec5d96846b0366bd1d1bc7f8"
+  integrity sha512-usNM3nAk1EuWut577qu2enGedfhrQLcRR0nLPYt0U3wt3YV7fKR9VSFbX/J2mcbF+bqdY89lAi6OQnHj6ZJo1A==
 
 "@preact/signals-core@^1.2.3":
   version "1.8.0"

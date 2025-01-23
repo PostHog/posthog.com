@@ -105,9 +105,11 @@ export default function TimelineNew() {
 
     return (
         <div className="max-w-screen-xl mx-auto my-12 px-5">
-            <h1 className={`${heading()} !text-left`}>We ship fast</h1>
-            <p className={`${heading('sm')} !text-left mb-4`}>
-                We started with product analytics and now have shipped 8 products in the last 5 years.
+            <h2 className={`text-3xl md:text-5xl`}>
+                We ship <span className="text-red dark:text-yellow">weirdly</span> fast
+            </h2>
+            <p className={`text-xl mb-4`}>
+                We started with product analytics, but no we've shipped 10+ products in the last 5 years.
             </p>
             {/* <div className="mt-10">
                 <Slider
