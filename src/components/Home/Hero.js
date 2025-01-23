@@ -310,7 +310,6 @@ export default function Hero() {
                         )}
                     </div>
                     <Board />
-                    <Accordion />
                 </div>
             </section>
         </>
