@@ -106,10 +106,10 @@ export default function TimelineNew() {
     return (
         <div className="max-w-screen-xl mx-auto my-12 px-5">
             <h1 className={`${heading()} !text-left`}>We ship fast</h1>
-            <p className={`${heading('sm')} !text-left`}>
+            <p className={`${heading('sm')} !text-left mb-4`}>
                 We started with product analytics and now have shipped 8 products in the last 5 years.
             </p>
-            <div className="mt-10">
+            {/* <div className="mt-10">
                 <Slider
                     className="border-b border-border dark:border-border-dark mb-8 space-x-4"
                     activeIndex={filters.indexOf(activeFilter)}
@@ -130,8 +130,8 @@ export default function TimelineNew() {
                         )
                     })}
                 </Slider>
-            </div>
-            <div className="items-start md:space-x-4 md:space-y-0 space-y-4 flex md:flex-row flex-col">
+            </div> */}
+            <div className="items-start md:space-x-4 md:space-y-0 space-y-4 flex md:flex-row flex-col mt-12">
                 <div className="flex space-x-8 max-w-1/3 w-full">
                     <ul className="m-0 p-0 list-none space-y-1 flex-shrink-0">
                         {Object.entries(roadmapsGrouped).map(([year]) => (
@@ -154,18 +154,40 @@ export default function TimelineNew() {
                         ))}
                     </ul>
                     <ul className="m-0 p-0 list-none space-y-1 flex-shrink-0">
-                        {Object.entries(roadmapsGrouped[activeYear]).map(([month, roadmaps]) => (
-                            <>
-                                <li className="`text-base px-2 py-1 rounded-md`" key={month}>
-                                    {month}
-                                </li>
-                                {new Array(roadmaps.length - 1).fill(null).map((_, index) => (
-                                    <li className="py-1" key={index}>
-                                        <br />
+                        {Object.entries(roadmapsGrouped[activeYear]).map(([month, roadmaps], index) => {
+                            const isLastMonth = index === Object.keys(roadmapsGrouped[activeYear]).length - 1
+                            const nextYear = `${Number(activeYear) + 1}`
+                            return (
+                                <>
+                                    <li className="`text-base px-2 py-1 rounded-md`" key={month}>
+                                        {month}
                                     </li>
-                                ))}
-                            </>
-                        ))}
+                                    {isLastMonth && roadmapsGrouped[nextYear] && (
+                                        <CallToAction
+                                            size="sm"
+                                            type="secondary"
+                                            onClick={() => {
+                                                setActiveYear(nextYear)
+                                                setActiveMonth(Object.keys(roadmapsGrouped[nextYear])[0])
+                                                setActiveRoadmap(
+                                                    roadmapsGrouped[nextYear][
+                                                        Object.keys(roadmapsGrouped[nextYear])[0]
+                                                    ][0]
+                                                )
+                                            }}
+                                        >
+                                            See {nextYear}
+                                        </CallToAction>
+                                    )}
+                                    {!isLastMonth &&
+                                        new Array(roadmaps.length - 1).fill(null).map((_, index) => (
+                                            <li className="py-1" key={index}>
+                                                <br />
+                                            </li>
+                                        ))}
+                                </>
+                            )
+                        })}
                     </ul>
                     <ul className="m-0 p-0 list-none space-y-1">
                         {Object.entries(roadmapsGrouped[activeYear]).map(([month, roadmaps]) =>
