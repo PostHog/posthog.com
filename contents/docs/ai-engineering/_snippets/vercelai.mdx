@@ -22,13 +22,15 @@ const openaiClient = createOpenAI({
   compatibility: 'strict'
 });
 
-const model = withTracing(openaiClient("gpt-4-turbo"), posthog, {
+const model = withTracing(openaiClient("gpt-4-turbo"), phClient, {
   posthogDistinctId: "user_123", // optional
   posthogTraceId: "trace_123", // optional
   posthogProperties: { "conversation_id": "abc123", "paid": true }, // optional
   posthogPrivacyMode: false, // optional
   posthogGroups: { "company": "company_id_in_your_db" }, // optional
 });
+
+phClient.shutdown()
 ``` 
 
 Now, when you use the Vercel AI SDK, it automatically captures many properties into PostHog including `$ai_input`, `$ai_input_tokens`, `$ai_latency`, `$ai_model`, `$ai_model_parameters`, `$ai_output_choices`, and `$ai_output_tokens`.
