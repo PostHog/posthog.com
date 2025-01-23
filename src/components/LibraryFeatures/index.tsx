@@ -16,9 +16,16 @@ const features = [
         name: 'User identification',
         url: 'https://posthog.com/docs/integrate/identifying-users',
     },
-    { key: 'sessionRecording', name: 'Session recording', url: 'https://posthog.com/docs/user-guides/recordings' },
+    { key: 'sessionRecording', name: 'Session replay', url: 'https://posthog.com/docs/user-guides/recordings' },
     { key: 'featureFlags', name: 'Feature flags', url: 'https://posthog.com/docs/user-guides/feature-flags' },
     { key: 'groupAnalytics', name: 'Group analytics', url: 'https://posthog.com/docs/user-guides/group-analytics' },
+    { key: 'surveys', name: 'Surveys', url: 'https://posthog.com/docs/surveys' },
+    {
+        key: 'llmObservability',
+        name: 'LLM observability',
+        url: 'https://posthog.com/docs/ai-engineering/observability',
+    },
+    { key: 'errorTracking', name: 'Error tracking', url: 'https://posthog.com/docs/error-tracking' },
 ] as const
 
 export type LibraryFeaturesProps = {
