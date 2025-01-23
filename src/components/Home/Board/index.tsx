@@ -463,7 +463,7 @@ const RoadmapProductDetails = ({ product }: { product: Product }) => {
     const staticLikeCount = product.roadmap?.githubPages?.[0]?.reactions?.total_count || 0
 
     return (
-        <div className="bg-white dark:bg-accent-dark border border-border dark:border-dark max-w-[700px] w-full overflow-hidden">
+        <div className="bg-white dark:bg-accent-dark border border-border dark:border-dark md:max-w-[700px] w-full overflow-hidden">
             <div className="p-6">
                 <h2 className="text-xl m-0 flex space-x-2">
                     <Icon className={`size-8 text-${color} ${colorDark ? 'dark:text-${colorDark}' : ''}`} />
@@ -494,7 +494,7 @@ const ProductDetails = ({ product }: { product: Product }) => {
     const billingData = products.products.find((billingProduct) => billingProduct.type === pricingKey)
 
     return (
-        <div className="bg-white dark:bg-accent-dark border border-border dark:border-dark max-w-[700px] w-full overflow-hidden">
+        <div className="bg-white dark:bg-accent-dark border border-border dark:border-dark md:max-w-[700px] w-full overflow-hidden">
             <div className="px-6 pt-6">
                 <h2 className="text-xl m-0 flex space-x-2 items-center">
                     <Icon className={`size-8 text-${color} ${colorDark ? 'dark:text-${colorDark}' : ''}`} />
