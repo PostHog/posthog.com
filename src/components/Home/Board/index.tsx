@@ -592,6 +592,8 @@ const ProductModal = ({
     )
 }
 
+const sorted = ['Product', 'Marketing', 'Support', 'AI', 'Data', 'Engineering']
+
 export default function Hero(): JSX.Element {
     const { staticRoadmaps } = useStaticQuery(graphql`
         {
@@ -674,50 +676,53 @@ export default function Hero(): JSX.Element {
             </div>
             <div className="flex px-2 md:px-0 md:space-x-12 items-start">
                 <ul className="flex-1 grid grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-x-2 gap-y-6 md:gap-4 list-none m-0 p-0 flex-grow flex-shrink-0">
-                    {Object.entries(groupedProducts).map(([type, products]) => (
-                        <li key={type}>
-                            <p className="text-sm opacity-70 m-0 mb-1 px-3">{type}</p>
-                            <ul className="list-none m-0 p-0 space-y-px">
-                                {products.map((product) => {
-                                    const { Icon, name, color, colorDark, status } = product
-                                    const active = activeProduct?.name === product.name
-                                    const isInActiveStatus = activeStatus === 'All products' || activeStatus === status
-                                    const statusColor = legend.find(
-                                        (legend) => legend.name.toLowerCase() === status.toLowerCase()
-                                    )?.color
-                                    return (
-                                        <li key={name}>
-                                            <button
-                                                className={`flex items-center gap-2 text-sm md:text-[15px] font-medium hover:bg-accent/60 dark:bg-accent-dark/60 click rounded-md px-3 py-2 transition-all w-full ${
-                                                    active ? 'bg-accent dark:bg-accent-dark font-bold' : ''
-                                                } ${isInActiveStatus ? '' : ''} ${
-                                                    status === 'Roadmap' ? 'italic' : ''
-                                                }`}
-                                                onClick={() => setActiveProduct(product)}
-                                                onFocus={(e) => {
-                                                    if (
-                                                        e.type === 'focus' &&
-                                                        !e.currentTarget.matches(':focus-visible')
-                                                    ) {
-                                                        return
-                                                    }
-                                                    setActiveProduct(product)
-                                                }}
-                                            >
-                                                <Icon
-                                                    className={`size-5 text-${color} ${
-                                                        colorDark ? 'dark:text-${colorDark}' : ''
+                    {[...Object.entries(groupedProducts)]
+                        .sort(([typeA], [typeB]) => sorted.indexOf(typeA) - sorted.indexOf(typeB))
+                        .map(([type, products]) => (
+                            <li key={type}>
+                                <p className="text-sm opacity-70 m-0 mb-1 px-3">{type}</p>
+                                <ul className="list-none m-0 p-0 space-y-px">
+                                    {products.map((product) => {
+                                        const { Icon, name, color, colorDark, status } = product
+                                        const active = activeProduct?.name === product.name
+                                        const isInActiveStatus =
+                                            activeStatus === 'All products' || activeStatus === status
+                                        const statusColor = legend.find(
+                                            (legend) => legend.name.toLowerCase() === status.toLowerCase()
+                                        )?.color
+                                        return (
+                                            <li key={name}>
+                                                <button
+                                                    className={`flex items-center gap-2 text-sm md:text-[15px] font-medium hover:bg-accent/60 dark:bg-accent-dark/60 click rounded-md px-3 py-2 transition-all w-full ${
+                                                        active ? 'bg-accent dark:bg-accent-dark font-bold' : ''
+                                                    } ${isInActiveStatus ? '' : ''} ${
+                                                        status === 'Roadmap' ? 'italic' : ''
                                                     }`}
-                                                />
-                                                <span className="text-left">{name}</span>
-                                                <span className={`size-2 bg-${statusColor} rounded-full`} />
-                                            </button>
-                                        </li>
-                                    )
-                                })}
-                            </ul>
-                        </li>
-                    ))}
+                                                    onClick={() => setActiveProduct(product)}
+                                                    onFocus={(e) => {
+                                                        if (
+                                                            e.type === 'focus' &&
+                                                            !e.currentTarget.matches(':focus-visible')
+                                                        ) {
+                                                            return
+                                                        }
+                                                        setActiveProduct(product)
+                                                    }}
+                                                >
+                                                    <Icon
+                                                        className={`size-5 text-${color} ${
+                                                            colorDark ? 'dark:text-${colorDark}' : ''
+                                                        }`}
+                                                    />
+                                                    <span className="text-left">{name}</span>
+                                                    <span className={`size-2 bg-${statusColor} rounded-full`} />
+                                                </button>
+                                            </li>
+                                        )
+                                    })}
+                                </ul>
+                            </li>
+                        ))}
                 </ul>
                 <div className="hidden md:block flex-[0_0_550px]">
                     {activeProduct && (
