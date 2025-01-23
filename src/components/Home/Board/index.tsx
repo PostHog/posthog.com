@@ -584,12 +584,12 @@ const ProductModal = ({
                         <div>
                             <button
                                 onClick={() => setProductModalOpen(false)}
-                                className="absolute top-2 right-2 hover:opacity-100 opacity-70 transition-opacity"
+                                className="absolute top-4 right-4 hover:opacity-100 opacity-70 transition-opacity"
                             >
                                 <IconX className="size-5" />
                             </button>
                         </div>
-                        {children}
+                        <div className="max-h-[70vh] overflow-y-auto">{children}</div>
                     </div>
                 </motion.div>
             )}
