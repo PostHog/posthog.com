@@ -684,7 +684,7 @@ export default function Hero(): JSX.Element {
                 </Slider>
             </div>
             <div className="flex px-2 md:px-0 md:space-x-6 items-start">
-                <ul className="flex-1 grid grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-x-2 gap-y-6 md:gap-4 list-none m-0 p-0 flex-grow flex-shrink-0">
+                <ul className="flex-1 grid grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-x-2 gap-y-6 lg:gap-y-8 md:gap-4 list-none m-0 p-0 flex-grow flex-shrink-0">
                     {[...Object.entries(groupedProducts)]
                         .sort(([typeA], [typeB]) => sorted.indexOf(typeA) - sorted.indexOf(typeB))
                         .map(([type, products]) => (
@@ -702,7 +702,7 @@ export default function Hero(): JSX.Element {
                                         return (
                                             <li key={name}>
                                                 <button
-                                                    className={`flex items-center gap-2 text-sm font-medium click rounded-md px-3 py-1.5 transition-all w-full 
+                                                    className={`flex items-start gap-1 text-sm font-medium click rounded-md px-3 py-1.5 transition-all w-full 
                                                         border border-b-3 border-transparent hover:border-light dark:hover:border-dark hover:translate-y-[-1px] active:translate-y-[1px] active:transition-all
                                                         ${
                                                             active
@@ -728,8 +728,12 @@ export default function Hero(): JSX.Element {
                                                             colorDark ? 'dark:text-${colorDark}' : ''
                                                         }`}
                                                     />
-                                                    <span className="text-left">{name}</span>
-                                                    <span className={`size-2 bg-${statusColor} rounded-full`} />
+                                                    <div className="text-left">
+                                                        <span className="text-left">{name}</span>
+                                                        <span
+                                                            className={`inline-block mt-1.5 ml-1 size-2 bg-${statusColor} rounded-full`}
+                                                        />
+                                                    </div>
                                                 </button>
                                             </li>
                                         )

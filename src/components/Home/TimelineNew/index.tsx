@@ -105,10 +105,10 @@ export default function TimelineNew() {
 
     return (
         <div className="max-w-screen-xl mx-auto my-12 px-5">
-            <h2 className={`text-3xl md:text-4xl`}>
+            <h2 className={`text-3xl md:text-5xl mb-2`}>
                 We ship <span className="text-red dark:text-yellow">weirdly</span> fast
             </h2>
-            <p className={`text-xl mb-4`}>
+            <p className={`text-lg mb-4`}>
                 We started with product analytics, but no we've shipped 10+ products in the last 5 years.
             </p>
             {/* <div className="mt-10">
@@ -133,66 +133,41 @@ export default function TimelineNew() {
                     })}
                 </Slider>
             </div> */}
-            <div className="items-start md:space-x-4 md:space-y-0 space-y-4 flex md:flex-row flex-col mt-12">
-                <div className=" max-w-1/3 w-full">
-                    <ul className="m-0 p-0 list-none space-x-2 flex flex-shrink-0 mb-3">
-                        {Object.entries(roadmapsGrouped).map(([year]) => (
-                            <li key={year}>
-                                <button
-                                    className={`text-sm hover:bg-accent/60 dark:hover:bg-accent-dark px-2 py-1 rounded-md ${
-                                        year === activeYear ? 'bg-accent dark:bg-accent-dark font-bold' : ''
-                                    }`}
-                                    onClick={() => {
-                                        setActiveYear(year)
-                                        setActiveMonth(Object.keys(roadmapsGrouped[year])[0])
-                                        setActiveRoadmap(
-                                            roadmapsGrouped[year][Object.keys(roadmapsGrouped[year])[0]][0]
-                                        )
-                                    }}
-                                >
-                                    {year}
-                                </button>
-                            </li>
-                        ))}
-                    </ul>
-                    <div className="flex space-x-8">
-                        <ul className="m-0 p-0 list-none space-y-1 flex-shrink-0">
+            <ul className="m-0 p-0 list-none space-x-2 flex flex-shrink-0 border-b border-border dark:border-border-dark mt-8 mb-3">
+                {Object.entries(roadmapsGrouped).map(([year]) => (
+                    <li key={year}>
+                        <button
+                            className={`text-sm hover:bg-accent/60 dark:hover:bg-accent-dark px-2 py-1 rounded-md ${
+                                year === activeYear ? 'bg-accent dark:bg-accent-dark font-bold' : ''
+                            }`}
+                            onClick={() => {
+                                setActiveYear(year)
+                                setActiveMonth(Object.keys(roadmapsGrouped[year])[0])
+                                setActiveRoadmap(roadmapsGrouped[year][Object.keys(roadmapsGrouped[year])[0]][0])
+                            }}
+                        >
+                            {year}
+                        </button>
+                    </li>
+                ))}
+            </ul>
+            <div className="items-start md:space-x-4 md:space-y-0 space-y-4 grid md:grid-cols-12 flex-col mt-4">
+                <div className="w-full md:col-span-7">
+                    <div className="grid grid-cols-12">
+                        <ul className="col-span-4 md:col-span-3 m-0 p-0 list-none space-y-1">
                             {Object.entries(roadmapsGrouped[activeYear]).map(([month, roadmaps], index) => {
                                 const isLastMonth = index === Object.keys(roadmapsGrouped[activeYear]).length - 1
                                 const nextYear = `${Number(activeYear) + 1}`
                                 return (
                                     <>
-                                        <li className="text-sm px-2 py-1 rounded-md" key={month}>
+                                        <li className="text-sm px-2 py-1 rounded-md opacity-70" key={month}>
                                             {month}
                                         </li>
-                                        {isLastMonth && roadmapsGrouped[nextYear] && (
-                                            <CallToAction
-                                                size="sm"
-                                                type="secondary"
-                                                onClick={() => {
-                                                    setActiveYear(nextYear)
-                                                    setActiveMonth(Object.keys(roadmapsGrouped[nextYear])[0])
-                                                    setActiveRoadmap(
-                                                        roadmapsGrouped[nextYear][
-                                                            Object.keys(roadmapsGrouped[nextYear])[0]
-                                                        ][0]
-                                                    )
-                                                }}
-                                            >
-                                                See {nextYear}
-                                            </CallToAction>
-                                        )}
-                                        {!isLastMonth &&
-                                            new Array(roadmaps.length - 1).fill(null).map((_, index) => (
-                                                <li className="py-1" key={index}>
-                                                    <br />
-                                                </li>
-                                            ))}
                                     </>
                                 )
                             })}
                         </ul>
-                        <ul className="m-0 p-0 list-none space-y-1">
+                        <ul className="col-span-8 md:col-span-9 m-0 p-0 list-none space-y-1">
                             {Object.entries(roadmapsGrouped[activeYear]).map(([month, roadmaps]) =>
                                 roadmaps.map((node) => (
                                     <li key={node.squeakId}>
@@ -212,10 +187,40 @@ export default function TimelineNew() {
                                 ))
                             )}
                         </ul>
+                        <div className="col-span-3"></div>
+                        <div className="col-span-9">
+                            {Object.entries(roadmapsGrouped[activeYear]).map(([month, roadmaps], index) => {
+                                const isLastMonth = index === Object.keys(roadmapsGrouped[activeYear]).length - 1
+                                const nextYear = `${Number(activeYear) + 1}`
+                                return (
+                                    <>
+                                        {isLastMonth && roadmapsGrouped[nextYear] && (
+                                            <div className="ml-1 mt-2">
+                                                <CallToAction
+                                                    size="sm"
+                                                    type="secondary"
+                                                    onClick={() => {
+                                                        setActiveYear(nextYear)
+                                                        setActiveMonth(Object.keys(roadmapsGrouped[nextYear])[0])
+                                                        setActiveRoadmap(
+                                                            roadmapsGrouped[nextYear][
+                                                                Object.keys(roadmapsGrouped[nextYear])[0]
+                                                            ][0]
+                                                        )
+                                                    }}
+                                                >
+                                                    See {nextYear}
+                                                </CallToAction>
+                                            </div>
+                                        )}
+                                    </>
+                                )
+                            })}
+                        </div>
                     </div>
                 </div>
 
-                <div className="border border-border dark:border-border-dark flex-grow w-full">
+                <div className="md:col-span-5 border border-border dark:border-border-dark w-full">
                     <div className="flex justify-between items-center py-2 px-4 border-b border-light dark:border-dark bg-accent dark:bg-accent-dark">
                         <CallToAction
                             size="xs"
@@ -234,7 +239,7 @@ export default function TimelineNew() {
                                 <span>Previous</span>
                             </span>
                         </CallToAction>
-                        <h3 className="m-0 text-sm">
+                        <h3 className="m-0 text-sm font-normal opacity-70">
                             {activeMonth} {activeYear}
                         </h3>
                         <CallToAction
@@ -255,8 +260,8 @@ export default function TimelineNew() {
                             </span>
                         </CallToAction>
                     </div>
-                    <div className="p-4">
-                        <h1>{activeRoadmap.title}</h1>
+                    <div className="p-4 bg-white dark:bg-dark">
+                        <h3 className="text-lg font-bold mb-1">{activeRoadmap.title}</h3>
                         <Markdown>{activeRoadmap.description}</Markdown>
                     </div>
                 </div>
