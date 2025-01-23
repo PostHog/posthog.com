@@ -340,7 +340,7 @@ const products: Product[] = [
         name: 'Messaging',
         color: 'blue',
         Icon: IconSend,
-        types: ['Data'],
+        types: ['Marketing'],
         status: 'Roadmap',
         roadmapID: 1999,
     },
