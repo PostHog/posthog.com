@@ -515,7 +515,7 @@ const ProductDetails = ({ product }: { product: Product }) => {
                 )}
             </div>
             {features?.length > 0 && (
-                <ul className="grid grid-cols-3 gap-4 list-none px-6 py-6 border-t border-border dark:border-dark relative bg-white dark:bg-accent-dark">
+                <ul className="grid md:grid-cols-3 gap-4 list-none px-6 py-6 border-t border-border dark:border-dark relative bg-white dark:bg-accent-dark">
                     {features?.map(({ title, Icon }) => (
                         <li key={title} className="flex items-center space-x-2 text-base font-semibold">
                             <div className="size-8 bg-accent dark:bg-accent-dark rounded-md p-1 flex items-center justify-center">
@@ -527,7 +527,7 @@ const ProductDetails = ({ product }: { product: Product }) => {
                 </ul>
             )}
             {(billingData || pricing) && (
-                <div className="grid grid-cols-3 p-6 border-t border-border dark:border-dark bg-white dark:bg-accent-dark relative">
+                <div className="grid md:grid-cols-3 md:gap-0 gap-2 p-6 border-t border-border dark:border-dark bg-white dark:bg-accent-dark relative">
                     <div>
                         <h3 className="text-base opacity-70 font-semibold m-0">Monthly free tier</h3>
                         {pricing?.FreeTier ? (
@@ -548,7 +548,7 @@ const ProductDetails = ({ product }: { product: Product }) => {
                             </p>
                         )}
                     </div>
-                    <div className="ml-auto">
+                    <div className="md:ml-auto">
                         <CallToAction type="outline" to={pricing?.cta?.url || '/pricing'}>
                             {pricing?.cta?.text || 'Explore'}
                         </CallToAction>
@@ -579,7 +579,7 @@ const ProductModal = ({
                     className="fixed bottom-[75.75px] md:bottom-0 md:hidden left-0 z-[999999] flex items-end justify-center h-full w-full"
                     onClick={() => setProductModalOpen(false)}
                 >
-                    <div className="relative" onClick={(e) => e.stopPropagation()}>
+                    <div className="relative w-full" onClick={(e) => e.stopPropagation()}>
                         <div>
                             <button
                                 onClick={() => setProductModalOpen(false)}
