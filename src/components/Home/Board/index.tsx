@@ -583,12 +583,12 @@ const ProductModal = ({
                         <div>
                             <button
                                 onClick={() => setProductModalOpen(false)}
-                                className="absolute top-2 right-2 hover:opacity-100 opacity-70 transition-opacity"
+                                className="absolute top-4 right-4 hover:opacity-100 opacity-70 transition-opacity"
                             >
                                 <IconX className="size-5" />
                             </button>
                         </div>
-                        {children}
+                        <div className="max-h-[70vh] overflow-y-auto">{children}</div>
                     </div>
                 </motion.div>
             )}
@@ -683,7 +683,7 @@ export default function Hero(): JSX.Element {
                 </Slider>
             </div>
             <div className="flex px-2 md:px-0 md:space-x-12 items-start">
-                <ul className="flex-1 grid grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-x-2 gap-y-6 md:gap-4 list-none m-0 p-0 flex-grow flex-shrink-0">
+                <ul className="flex-1 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-x-2 gap-y-6 md:gap-4 list-none m-0 p-0 flex-grow flex-shrink-0">
                     {[...Object.entries(groupedProducts)]
                         .sort(([typeA], [typeB]) => sorted.indexOf(typeA) - sorted.indexOf(typeB))
                         .map(([type, products]) => (
