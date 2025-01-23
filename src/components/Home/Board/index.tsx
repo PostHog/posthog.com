@@ -684,7 +684,7 @@ export default function Hero(): JSX.Element {
                 </Slider>
             </div>
             <div className="flex px-2 md:px-0 md:space-x-6 items-start">
-                <ul className="flex-1 grid grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-x-2 gap-y-6 md:gap-4 list-none m-0 p-0 flex-grow flex-shrink-0">
+                <ul className="flex-1 grid sm:grid-cols-2 md:grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-x-2 gap-y-6 md:gap-4 list-none m-0 p-0 flex-grow flex-shrink-0">
                     {[...Object.entries(groupedProducts)]
                         .sort(([typeA], [typeB]) => sorted.indexOf(typeA) - sorted.indexOf(typeB))
                         .map(([type, products]) => (
