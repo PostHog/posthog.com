@@ -39,6 +39,12 @@ export const Content = ({ quickLinks = false }) => {
                 <ul className="m-0 mb-3 p-0 flex flex-col gap-4 md:grid md:grid-cols-2 xl:grid-cols-3">
                     <ResourceItem
                         type="Guide"
+                        title="How to set up LLM analytics for ChatGPT"
+                        description="Track API usage, cost, and latency."
+                        url="/tutorials/chatgpt-analytics"
+                    />
+                    <ResourceItem
+                        type="Guide"
                         title="How to set up LLM analytics for Cohere"
                         description="Track your Cohere usage, costs, and latency."
                         url="/tutorials/cohere-analytics"
@@ -48,12 +54,6 @@ export const Content = ({ quickLinks = false }) => {
                         title="How to set up LLM analytics for Anthropic's Claude"
                         description="Monitor costs per model, user, and more."
                         url="/tutorials/anthropic-analytics"
-                    />
-                    <ResourceItem
-                        type="Guide"
-                        title="How to set up LLM analytics for ChatGPT"
-                        description="Track API usage, cost, and latency."
-                        url="/tutorials/chatgpt-analytics"
                     />
                 </ul>
                 <CallToAction
