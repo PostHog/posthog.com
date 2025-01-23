@@ -541,10 +541,6 @@ export default function Hero(): JSX.Element {
         return groupedProducts
     }, [])
 
-    const handleProductClick = (product: Product) => {
-        setActiveProduct(product)
-    }
-
     useEffect(() => {
         if (activeProduct) {
             setProductModalOpen(true)
@@ -571,12 +567,18 @@ export default function Hero(): JSX.Element {
                                         active ? 'font-bold' : ''
                                     }`}
                                     onClick={() => setActiveStatus(name)}
+                                    onFocus={(e) => {
+                                        if (e.type === 'focus' && !e.currentTarget.matches(':focus-visible')) {
+                                            return
+                                        }
+                                        setActiveStatus(name)
+                                    }}
                                 >
                                     <span>{name}</span>
                                     {color && <span className={`size-2 bg-${color} rounded-full`} />}
                                 </button>
                                 {active && (
-                                    <span className="h-[1px] bg-red w-full absolute bottom-0 translate-y-full left-0" />
+                                    <span className="h-0.5 bg-red w-full absolute bottom-0 translate-y-1/2 left-0" />
                                 )}
                             </li>
                         )
@@ -602,7 +604,16 @@ export default function Hero(): JSX.Element {
                                                 className={`flex items-center gap-2 text-lg font-semibold hover:font-bold hover:bg-accent/60 dark:bg-accent-dark/60 click rounded-md px-3 py-1 transition-all ${
                                                     active ? 'bg-accent dark:bg-accent-dark font-bold' : ''
                                                 } ${isInActiveStatus ? '' : 'opacity-50'}`}
-                                                onClick={() => handleProductClick(product)}
+                                                onClick={() => setActiveProduct(product)}
+                                                onFocus={(e) => {
+                                                    if (
+                                                        e.type === 'focus' &&
+                                                        !e.currentTarget.matches(':focus-visible')
+                                                    ) {
+                                                        return
+                                                    }
+                                                    setActiveProduct(product)
+                                                }}
                                             >
                                                 <Icon
                                                     className={`size-5 text-${color} ${
