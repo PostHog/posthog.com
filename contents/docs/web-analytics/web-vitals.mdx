@@ -10,7 +10,7 @@ availability:
 
 import { ProductScreenshot } from 'components/ProductScreenshot'
 
-PostHog can automatically capture [web vitals](https://web.dev/explore/learn-core-web-vitals) like largest contentful paint, first input delay, cumulative layout shift, and first contentful paint. This means you don't need to manually add web vitals logging. You can also see them in the [web vitals dashboard](https://app.posthog.com/web/web-vitals).
+PostHog can automatically capture [web vitals](https://web.dev/explore/learn-core-web-vitals) like largest contentful paint, first input delay, cumulative layout shift, and first contentful paint. This means you don't need to manually add web vitals logging. You can also see them in the [web vitals dashboard](https://app.posthog.com/web/web-vitals).  <span className="text-xs font-semibold text-opacity-60 bg-yellow px-1 py-0.5 rounded-sm uppercase text-primary">Beta</span>.
 
 ## What are Web vitals?
 
@@ -57,7 +57,9 @@ To improve CLS, always include width and height attributes on images and video e
 
 
 
-## Web vitals dashboard
+## Web vitals dashboard <span className="absolute top-1/2 -translate-y-1/2 text-xs font-semibold text-opacity-60 bg-yellow px-1 py-0.5 rounded-sm uppercase text-primary">Beta</span>
+
+> **Note:** Web vitals is currently in open beta. You can enable it by toggling it on in the [Feature Previews panel](https://app.posthog.com#panel=feature-previews). You'll need to refresh your browser to see it in the sidebar.
 
 You can access web vitals in PostHog's sidebar by clicking on the dropdown to the right of web analytics.
 
