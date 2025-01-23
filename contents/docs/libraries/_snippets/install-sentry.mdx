@@ -22,6 +22,8 @@ Sentry.init({
 })
 ```
 
+> **Note:** If you set up Sentry exception autocapture, make sure PostHog's exception autocapture is disabled in [your project settings](https://us.posthog.com/settings/project-autocapture#exception-autocapture).
+
 <details>
   <summary>Using Sentry SDK v6 and below</summary>
   If you are using a lower version of the Sentry SDK you may need to use the "class based" integration as below
