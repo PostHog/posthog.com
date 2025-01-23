@@ -1,6 +1,6 @@
 ---
-title: Don't make these classic feature flag mistakes
-date: 2025-01-13
+title: Don't make these feature flag mistakes
+date: 2025-01-23
 author:
  - ian-vanagas
 featuredImage: >-
