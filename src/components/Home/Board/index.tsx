@@ -555,16 +555,16 @@ export default function Hero(): JSX.Element {
     }, [productModalOpen])
 
     return (
-        <section className="max-w-screen-2xl mx-auto px-5 py-12">
+        <section className="max-w-screen-2xl mx-auto py-12">
             <div>
-                <ul className="flex space-x-4 m-0 p-0 list-none mb-6 border-b border-border dark:border-dark">
+                <ul className="max-w-screen px-5 md:px-0 overflow-x-auto flex space-x-4 m-0 p-0 list-none mb-6 border-b border-border dark:border-dark">
                     {[{ name: 'All products' }, ...legend].map(({ name, color }) => {
                         const active = activeStatus === name
                         return (
                             <li className="relative" key={name}>
                                 <button
-                                    className={`text-base font-semibold flex space-x-2 items-center pb-2 ${
-                                        active ? 'font-bold' : ''
+                                    className={`text-[15px] font-semibold flex space-x-2 items-center px-3 py-1 whitespace-nowrap ${
+                                        active ? 'font-bold' : 'opacity-75 hover:opacity-100'
                                     }`}
                                     onClick={() => setActiveStatus(name)}
                                     onFocus={(e) => {
@@ -585,12 +585,12 @@ export default function Hero(): JSX.Element {
                     })}
                 </ul>
             </div>
-            <div className="flex md:space-x-12 items-start">
-                <ul className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-4 list-none m-0 p-0 flex-grow flex-shrink-0">
+            <div className="flex px-2 md:px-5 md:space-x-12 items-start">
+                <ul className="flex-1 grid grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-x-2 gap-y-6 md:gap-4 list-none m-0 p-0 flex-grow flex-shrink-0">
                     {Object.entries(groupedProducts).map(([type, products]) => (
                         <li key={type}>
-                            <h2 className="text-lg opacity-70 font-semibold m-0 mb-1">{type}</h2>
-                            <ul className="list-none m-0 p-0 -mx-3 space-y-1">
+                            <p className="text-sm opacity-70 m-0 mb-1 px-3">{type}</p>
+                            <ul className="list-none m-0 p-0 space-y-1">
                                 {products.map((product) => {
                                     const { Icon, name, color, colorDark, status } = product
                                     const active = activeProduct?.name === product.name
@@ -601,9 +601,9 @@ export default function Hero(): JSX.Element {
                                     return (
                                         <li key={name}>
                                             <button
-                                                className={`flex items-center gap-2 text-lg font-semibold hover:font-bold hover:bg-accent/60 dark:bg-accent-dark/60 click rounded-md px-3 py-1 transition-all ${
+                                                className={`flex items-center gap-2 text-sm md:text-[15px] font-medium hover:bg-accent/60 dark:bg-accent-dark/60 click rounded-md px-3 py-2 transition-all w-full ${
                                                     active ? 'bg-accent dark:bg-accent-dark font-bold' : ''
-                                                } ${isInActiveStatus ? '' : 'opacity-50'}`}
+                                                } ${isInActiveStatus ? '' : ''}`}
                                                 onClick={() => setActiveProduct(product)}
                                                 onFocus={(e) => {
                                                     if (
@@ -620,7 +620,7 @@ export default function Hero(): JSX.Element {
                                                         colorDark ? 'dark:text-${colorDark}' : ''
                                                     }`}
                                                 />
-                                                <span>{name}</span>
+                                                <span className="text-left">{name}</span>
                                                 <span className={`size-2 bg-${statusColor} rounded-full`} />
                                             </button>
                                         </li>
@@ -630,7 +630,7 @@ export default function Hero(): JSX.Element {
                         </li>
                     ))}
                 </ul>
-                <div className="hidden md:block">
+                <div className="hidden md:block flex-[0_0_550px]">
                     {activeProduct && (
                         <div>
                             {activeProduct.roadmapID ? (
