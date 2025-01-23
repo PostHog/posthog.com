@@ -132,8 +132,8 @@ export default function TimelineNew() {
                 </Slider>
             </div> */}
             <div className="items-start md:space-x-4 md:space-y-0 space-y-4 flex md:flex-row flex-col mt-12">
-                <div className="flex space-x-8 max-w-1/3 w-full">
-                    <ul className="m-0 p-0 list-none space-y-1 flex-shrink-0">
+                <div className=" max-w-1/3 w-full">
+                    <ul className="m-0 p-0 list-none space-x-2 flex flex-shrink-0 mb-3">
                         {Object.entries(roadmapsGrouped).map(([year]) => (
                             <li key={year}>
                                 <button
@@ -153,62 +153,64 @@ export default function TimelineNew() {
                             </li>
                         ))}
                     </ul>
-                    <ul className="m-0 p-0 list-none space-y-1 flex-shrink-0">
-                        {Object.entries(roadmapsGrouped[activeYear]).map(([month, roadmaps], index) => {
-                            const isLastMonth = index === Object.keys(roadmapsGrouped[activeYear]).length - 1
-                            const nextYear = `${Number(activeYear) + 1}`
-                            return (
-                                <>
-                                    <li className="`text-base px-2 py-1 rounded-md`" key={month}>
-                                        {month}
-                                    </li>
-                                    {isLastMonth && roadmapsGrouped[nextYear] && (
-                                        <CallToAction
-                                            size="sm"
-                                            type="secondary"
+                    <div className="flex space-x-8">
+                        <ul className="m-0 p-0 list-none space-y-1 flex-shrink-0">
+                            {Object.entries(roadmapsGrouped[activeYear]).map(([month, roadmaps], index) => {
+                                const isLastMonth = index === Object.keys(roadmapsGrouped[activeYear]).length - 1
+                                const nextYear = `${Number(activeYear) + 1}`
+                                return (
+                                    <>
+                                        <li className="`text-base px-2 py-1 rounded-md`" key={month}>
+                                            {month}
+                                        </li>
+                                        {isLastMonth && roadmapsGrouped[nextYear] && (
+                                            <CallToAction
+                                                size="sm"
+                                                type="secondary"
+                                                onClick={() => {
+                                                    setActiveYear(nextYear)
+                                                    setActiveMonth(Object.keys(roadmapsGrouped[nextYear])[0])
+                                                    setActiveRoadmap(
+                                                        roadmapsGrouped[nextYear][
+                                                            Object.keys(roadmapsGrouped[nextYear])[0]
+                                                        ][0]
+                                                    )
+                                                }}
+                                            >
+                                                See {nextYear}
+                                            </CallToAction>
+                                        )}
+                                        {!isLastMonth &&
+                                            new Array(roadmaps.length - 1).fill(null).map((_, index) => (
+                                                <li className="py-1" key={index}>
+                                                    <br />
+                                                </li>
+                                            ))}
+                                    </>
+                                )
+                            })}
+                        </ul>
+                        <ul className="m-0 p-0 list-none space-y-1">
+                            {Object.entries(roadmapsGrouped[activeYear]).map(([month, roadmaps]) =>
+                                roadmaps.map((node) => (
+                                    <li key={node.squeakId}>
+                                        <button
+                                            className={`text-left text-base hover:bg-accent/60 dark:hover:bg-accent-dark px-2 py-1 rounded-md text-ellipsis overflow-hidden ${
+                                                node.squeakId === activeRoadmap.squeakId
+                                                    ? 'bg-accent dark:bg-accent-dark font-bold'
+                                                    : ''
+                                            }`}
                                             onClick={() => {
-                                                setActiveYear(nextYear)
-                                                setActiveMonth(Object.keys(roadmapsGrouped[nextYear])[0])
-                                                setActiveRoadmap(
-                                                    roadmapsGrouped[nextYear][
-                                                        Object.keys(roadmapsGrouped[nextYear])[0]
-                                                    ][0]
-                                                )
+                                                setActiveRoadmap(node)
                                             }}
                                         >
-                                            See {nextYear}
-                                        </CallToAction>
-                                    )}
-                                    {!isLastMonth &&
-                                        new Array(roadmaps.length - 1).fill(null).map((_, index) => (
-                                            <li className="py-1" key={index}>
-                                                <br />
-                                            </li>
-                                        ))}
-                                </>
-                            )
-                        })}
-                    </ul>
-                    <ul className="m-0 p-0 list-none space-y-1">
-                        {Object.entries(roadmapsGrouped[activeYear]).map(([month, roadmaps]) =>
-                            roadmaps.map((node) => (
-                                <li key={node.squeakId}>
-                                    <button
-                                        className={`text-left text-base hover:bg-accent/60 dark:hover:bg-accent-dark px-2 py-1 rounded-md text-ellipsis overflow-hidden ${
-                                            node.squeakId === activeRoadmap.squeakId
-                                                ? 'bg-accent dark:bg-accent-dark font-bold'
-                                                : ''
-                                        }`}
-                                        onClick={() => {
-                                            setActiveRoadmap(node)
-                                        }}
-                                    >
-                                        {node.title}
-                                    </button>
-                                </li>
-                            ))
-                        )}
-                    </ul>
+                                            {node.title}
+                                        </button>
+                                    </li>
+                                ))
+                            )}
+                        </ul>
+                    </div>
                 </div>
 
                 <div className="border border-border dark:border-border-dark flex-grow w-full">
