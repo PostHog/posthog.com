@@ -326,7 +326,7 @@ const products: Product[] = [
         },
     },
     {
-        name: 'Messaging product',
+        name: 'Messaging',
         color: 'red',
         Icon: IconMessage,
         types: ['Data'],
@@ -555,7 +555,7 @@ export default function Hero(): JSX.Element {
     }, [productModalOpen])
 
     return (
-        <section className="max-w-screen-2xl mx-auto py-12">
+        <section className="max-w-screen-2xl mx-auto py-12 md:px-4">
             <div>
                 <ul className="max-w-screen px-5 md:px-0 overflow-x-auto flex space-x-4 m-0 p-0 list-none mb-6 border-b border-border dark:border-dark">
                     {[{ name: 'All products' }, ...legend].map(({ name, color }) => {
@@ -585,12 +585,12 @@ export default function Hero(): JSX.Element {
                     })}
                 </ul>
             </div>
-            <div className="flex px-2 md:px-5 md:space-x-12 items-start">
+            <div className="flex px-2 md:px-0 md:space-x-12 items-start">
                 <ul className="flex-1 grid grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-x-2 gap-y-6 md:gap-4 list-none m-0 p-0 flex-grow flex-shrink-0">
                     {Object.entries(groupedProducts).map(([type, products]) => (
                         <li key={type}>
                             <p className="text-sm opacity-70 m-0 mb-1 px-3">{type}</p>
-                            <ul className="list-none m-0 p-0 space-y-1">
+                            <ul className="list-none m-0 p-0 space-y-px">
                                 {products.map((product) => {
                                     const { Icon, name, color, colorDark, status } = product
                                     const active = activeProduct?.name === product.name
