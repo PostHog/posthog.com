@@ -636,18 +636,15 @@ export default function Hero(): JSX.Element {
         return groupedProducts
     }, [])
 
-    useEffect(() => {
-        if (activeProduct) {
-            setProductModalOpen(true)
-        }
-    }, [activeProduct])
+    const checkMobile = () => {
+        const isMobile = window.innerWidth < 768
+        setActiveProduct(isMobile ? null : products[0])
+    }
 
     useEffect(() => {
-        const isMobile = window.innerWidth < 768
-        if (isMobile && !productModalOpen) {
-            setActiveProduct(null)
-        }
-    }, [productModalOpen])
+        window.addEventListener('resize', checkMobile)
+        return () => window.removeEventListener('resize', checkMobile)
+    }, [])
 
     return (
         <section className="max-w-screen-2xl mx-auto py-12 md:px-4">
@@ -712,7 +709,12 @@ export default function Hero(): JSX.Element {
                                                         ${isInActiveStatus ? '' : 'opacity-30'} ${
                                                         status === 'Roadmap' ? 'italic' : ''
                                                     }`}
-                                                    onClick={() => setActiveProduct(product)}
+                                                    onClick={() => {
+                                                        setActiveProduct(product)
+                                                        if (window.innerWidth < 768) {
+                                                            setProductModalOpen(true)
+                                                        }
+                                                    }}
                                                     onFocus={(e) => {
                                                         if (
                                                             e.type === 'focus' &&
