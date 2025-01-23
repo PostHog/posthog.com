@@ -338,7 +338,7 @@ const products: Product[] = [
     },
     {
         name: 'Messaging',
-        color: 'red',
+        color: 'blue',
         Icon: IconSend,
         types: ['Data'],
         status: 'Roadmap',
@@ -347,18 +347,10 @@ const products: Product[] = [
     {
         name: 'Product tours',
         Icon: IconMegaphone,
-        color: 'red',
+        color: 'seagreen',
         types: ['Product'],
         status: 'Roadmap',
         roadmapID: 2111,
-    },
-    {
-        name: 'Product roadmaps',
-        Icon: IconListCheck,
-        color: 'red',
-        types: ['Product'],
-        status: 'Roadmap',
-        roadmapID: 2164,
     },
     {
         name: 'Heatmaps 2.0',
@@ -369,8 +361,8 @@ const products: Product[] = [
         roadmapID: 2165,
     },
     {
-        name: 'Roadmap manager',
-        Icon: IconMessage,
+        name: 'Product roadmaps',
+        Icon: IconListCheck,
         color: 'red',
         types: ['Product'],
         status: 'Roadmap',
@@ -379,7 +371,7 @@ const products: Product[] = [
     {
         name: 'No-code A/B testing',
         Icon: IconTestTube,
-        color: 'pink',
+        color: 'blue',
         types: ['Marketing'],
         status: 'WIP',
         roadmapID: 1809,
@@ -387,7 +379,7 @@ const products: Product[] = [
     {
         name: 'Error tracking',
         Icon: IconWarning,
-        color: 'brown',
+        color: 'yellow',
         types: ['Engineering'],
         status: 'WIP',
         roadmapID: 2017,
@@ -403,7 +395,7 @@ const products: Product[] = [
     {
         name: 'Prompt management',
         Icon: IconLlmPromptManagement,
-        color: 'blue',
+        color: 'yellow',
         types: ['AI'],
         status: 'Roadmap',
         roadmapID: 2168,
@@ -411,7 +403,7 @@ const products: Product[] = [
     {
         name: 'Code editor',
         Icon: IconCode,
-        color: 'black',
+        color: 'seagreen',
         types: ['AI'],
         status: 'Roadmap',
         roadmapID: 2169,
@@ -427,7 +419,7 @@ const products: Product[] = [
     {
         name: 'Issue tracker',
         Icon: IconIssue,
-        color: 'yellow',
+        color: 'red',
         types: ['Support'],
         status: 'Roadmap',
         roadmapID: 2171,
