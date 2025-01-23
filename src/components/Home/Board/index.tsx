@@ -666,7 +666,7 @@ export default function Hero(): JSX.Element {
                     {filters.map(({ name, color }) => {
                         const active = activeStatus === name
                         return (
-                            <li className="relative" key={name}>
+                            <div className="relative" key={name}>
                                 <button
                                     className={`text-[15px] font-semibold flex space-x-2 items-center px-3 py-1 whitespace-nowrap ${
                                         active ? 'font-bold' : 'opacity-75 hover:opacity-100'
@@ -685,7 +685,7 @@ export default function Hero(): JSX.Element {
                                 {active && (
                                     <span className="h-0.5 bg-red w-full absolute bottom-0 translate-y-1/2 left-0" />
                                 )}
-                            </li>
+                            </div>
                         )
                     })}
                 </Slider>
