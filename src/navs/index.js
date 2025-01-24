@@ -3352,6 +3352,12 @@ export const pricingMenu = {
             color: 'green',
             url: '/sales',
         },
+        {
+            name: 'Founder stack',
+            icon: 'IconStack',
+            color: 'salmon',
+            url: '/founder-stack',
+        },
     ],
 }
 
