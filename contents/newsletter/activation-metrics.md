@@ -64,7 +64,7 @@ Our process starts by gathering a big list of events we think might "hook" users
 
 Next, we create groups of 3-5 events to test together. We aimed for 5-10 different groups, including the number of times the event occurs (e.g. watched 5 replays vs. watched 1 replay).
 
-![Groups](https://res.cloudinary.com/dmukukwp6/image/upload/group_84b5b0f69b.png)
+![Groups](https://res.cloudinary.com/dmukukwp6/image/upload/image_16_bf16064d65.png)
 
 With our potential activation event groups, we write a query to test how they correlate with retention:
 
@@ -74,7 +74,7 @@ With our potential activation event groups, we write a query to test how they co
 
 3. Calculate retention for successful companies. We check to see how many of them are still using the product 3 months after starting.
 
-![Activation](https://res.cloudinary.com/dmukukwp6/image/upload/activate_6084695a9b.png)
+![Activation](https://res.cloudinary.com/dmukukwp6/image/upload/image_17_a3f3ac0bfe.png)
 
 We then compare the retention against our product's average retention rate for all companies. We look for a retention percentage that's nominally higher than our average retention rate. 
 
