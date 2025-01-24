@@ -55,7 +55,7 @@ import useProducts from 'hooks/useProducts'
 import { CallToAction } from 'components/CallToAction'
 import { Feature } from 'components/Roadmap'
 import { useRoadmaps } from 'hooks/useRoadmaps'
-import { graphql } from 'gatsby'
+import { graphql, Link } from 'gatsby'
 import { useStaticQuery } from 'gatsby'
 import { AnimatePresence, motion } from 'framer-motion'
 import Slider from 'components/Slider'
@@ -668,7 +668,7 @@ export default function Hero(): JSX.Element {
                         return (
                             <div className="relative" key={name}>
                                 <button
-                                    className={`text-[15px] font-semibold flex space-x-2 items-center px-3 py-1 whitespace-nowrap ${
+                                    className={`text-[15px] font-semibold flex space-x-2 items-center px-3 py-1.5 whitespace-nowrap ${
                                         active ? 'font-bold' : 'opacity-75 hover:opacity-100'
                                     }`}
                                     onClick={() => setActiveStatus(name)}
@@ -691,69 +691,74 @@ export default function Hero(): JSX.Element {
                 </Slider>
             </div>
             <div className="flex px-2 md:px-0 md:space-x-6 items-start">
-                <ul className="flex-1 grid grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-x-2 gap-y-6 lg:gap-y-8 md:gap-4 list-none m-0 p-0 flex-grow flex-shrink-0">
-                    {[...Object.entries(groupedProducts)]
-                        .sort(([typeA], [typeB]) => sorted.indexOf(typeA) - sorted.indexOf(typeB))
-                        .map(([type, products]) => (
-                            <li key={type}>
-                                <p className="text-sm opacity-70 m-0 mb-1 px-3">{type}</p>
-                                <ul className="list-none m-0 p-0 space-y-px">
-                                    {products.map((product) => {
-                                        const { Icon, name, color, colorDark, status } = product
-                                        const active = activeProduct?.name === product.name
-                                        const isInActiveStatus =
-                                            activeStatus === 'All products' || activeStatus === status
-                                        const statusColor = legend.find(
-                                            (legend) => legend.name.toLowerCase() === status.toLowerCase()
-                                        )?.color
-                                        return (
-                                            <li key={name}>
-                                                <button
-                                                    className={`flex items-start gap-1 text-sm font-medium click rounded-md px-3 py-1.5 transition-all w-full 
-                                                        border border-b-3 border-transparent hover:border-light dark:hover:border-dark hover:translate-y-[-1px] active:translate-y-[1px] active:transition-all
-                                                        ${
-                                                            active
-                                                                ? '!border-light dark:!border-dark bg-accent dark:bg-accent-dark'
-                                                                : ''
-                                                        }
-                                                        ${isInActiveStatus ? '' : 'opacity-30'} ${
-                                                        status === 'Roadmap' ? 'italic' : ''
-                                                    }`}
-                                                    onClick={() => {
-                                                        setActiveProduct(product)
-                                                        if (window.innerWidth < 768) {
-                                                            setProductModalOpen(true)
-                                                        }
-                                                    }}
-                                                    onFocus={(e) => {
-                                                        if (
-                                                            e.type === 'focus' &&
-                                                            !e.currentTarget.matches(':focus-visible')
-                                                        ) {
-                                                            return
-                                                        }
-                                                        setActiveProduct(product)
-                                                    }}
-                                                >
-                                                    <Icon
-                                                        className={`size-5 text-${color} ${
-                                                            colorDark ? 'dark:text-${colorDark}' : ''
+                <div className="flex-1">
+                    <ul className="grid grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-x-2 gap-y-6 lg:gap-y-8 md:gap-4 list-none m-0 p-0 flex-grow flex-shrink-0">
+                        {[...Object.entries(groupedProducts)]
+                            .sort(([typeA], [typeB]) => sorted.indexOf(typeA) - sorted.indexOf(typeB))
+                            .map(([type, products]) => (
+                                <li key={type}>
+                                    <p className="text-sm opacity-70 m-0 mb-1 px-3">{type}</p>
+                                    <ul className="list-none m-0 p-0 space-y-px">
+                                        {products.map((product) => {
+                                            const { Icon, name, color, colorDark, status } = product
+                                            const active = activeProduct?.name === product.name
+                                            const isInActiveStatus =
+                                                activeStatus === 'All products' || activeStatus === status
+                                            const statusColor = legend.find(
+                                                (legend) => legend.name.toLowerCase() === status.toLowerCase()
+                                            )?.color
+                                            return (
+                                                <li key={name}>
+                                                    <button
+                                                        className={`flex items-start gap-1 text-sm font-medium click rounded-md px-3 py-1.5 transition-all w-full 
+                                                            border border-b-3 border-transparent hover:border-light dark:hover:border-dark hover:translate-y-[-1px] active:translate-y-[1px] active:transition-all
+                                                            ${
+                                                                active
+                                                                    ? '!border-light dark:!border-dark bg-accent dark:bg-accent-dark'
+                                                                    : ''
+                                                            }
+                                                            ${isInActiveStatus ? '' : 'opacity-30'} ${
+                                                            status === 'Roadmap' ? 'italic' : ''
                                                         }`}
-                                                    />
-                                                    <div className="text-left">
-                                                        <span className="text-left">{name}</span>
-                                                        <span
-                                                            className={`inline-block mt-1.5 ml-1 size-2 bg-${statusColor} rounded-full`}
+                                                        onClick={() => {
+                                                            setActiveProduct(product)
+                                                            if (window.innerWidth < 768) {
+                                                                setProductModalOpen(true)
+                                                            }
+                                                        }}
+                                                        onFocus={(e) => {
+                                                            if (
+                                                                e.type === 'focus' &&
+                                                                !e.currentTarget.matches(':focus-visible')
+                                                            ) {
+                                                                return
+                                                            }
+                                                            setActiveProduct(product)
+                                                        }}
+                                                    >
+                                                        <Icon
+                                                            className={`size-5 text-${color} ${
+                                                                colorDark ? 'dark:text-${colorDark}' : ''
+                                                            }`}
                                                         />
-                                                    </div>
-                                                </button>
-                                            </li>
-                                        )
-                                    })}
-                                </ul>
-                            </li>
-                        ))}
-                </ul>
+                                                        <div className="text-left">
+                                                            <span className="text-left">{name}</span>
+                                                            <span
+                                                                className={`inline-block mt-1.5 ml-1 size-2 bg-${statusColor} rounded-full`}
+                                                            />
+                                                        </div>
+                                                    </button>
+                                                </li>
+                                            )
+                                        })}
+                                    </ul>
+                                </li>
+                            ))}
+                    </ul>
+                    <div className="border-t border-border dark:border-dark mt-12 pt-6 text-sm text-primary/70 dark:text-primary-dark/75">
+                        Just starting out? <Link to="/founder-stack">Explore our founder stack.</Link>
+                    </div>
+                </div>
                 <div className="hidden md:block flex-[0_0_550px]">
                     {activeProduct && (
                         <div>
