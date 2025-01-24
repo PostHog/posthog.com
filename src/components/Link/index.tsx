@@ -98,22 +98,6 @@ export default function Link({
                     {children}
                 </GatsbyLink>
             </Tooltip>
-        ) : external ? (
-            <a
-                {...other}
-                href={url}
-                className={`${className} group`}
-                onClick={handleClick}
-                target="_blank"
-                rel="noopener noreferrer"
-            >
-                <span className="inline-flex justify-center items-center group">
-                    {children}
-                    <IconArrowUpRight
-                        className={`size-4 text-primary dark:text-primary-dark opacity-50 group-hover:opacity-90 relative ${iconClasses}`}
-                    />
-                </span>
-            </a>
         ) : (
             <GatsbyLink {...other} to={url} className={className} state={state} onClick={handleClick}>
                 {children}

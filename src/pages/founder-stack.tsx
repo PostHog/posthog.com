@@ -24,7 +24,7 @@ interface ProductLinkProps {
 function ProductLink({ link, icon: Icon, productName, color }: ProductLinkProps) {
     return (
         <Link
-            to={link}
+            to={`https://posthog.com/${link}`}
             className="flex items-center gap-2 border border-light dark:border-dark rounded-sm px-1 py-0.5 font-bold text-primary dark:text-primary-dark hover:text-primary dark:hover:text-primary-dark bg-accent/50 dark:bg-accent-dark/50 hover:bg-accent dark:hover:bg-accent-dark hover:border-border dark:hover:border-border-dark"
             external
         >
