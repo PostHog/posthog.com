@@ -29,7 +29,6 @@ import {
     IconDownload,
     IconDatabase,
     IconHandMoney,
-    IconAI,
     IconDecisionTree,
     IconRetention,
     IconUserPaths,
@@ -51,6 +50,7 @@ import {
     IconApp,
     IconPhone,
     IconHeadset,
+    IconLaptop,
 } from '@posthog/icons'
 import CloudinaryImage from 'components/CloudinaryImage'
 import useProducts from 'hooks/useProducts'
@@ -330,12 +330,25 @@ const products: Product[] = [
         },
     },
     {
-        name: 'Messaging',
-        color: 'blue',
-        Icon: IconSend,
+        name: 'Web Vitals',
+        color: 'seagreen',
+        Icon: IconPulse,
+        description: 'Monitor Web Vitals and improve your site performance.',
         types: ['Marketing'],
-        status: 'Roadmap',
-        roadmapID: 1999,
+        features: [
+            { title: 'Metrics Tracking', Icon: IconGlobe },
+            { title: 'Breakdown by Path', Icon: IconLaptop },
+        ],
+        status: 'WIP',
+        badge: 'BETA',
+    },
+    {
+        name: 'Marketing Management',
+        color: 'salmon',
+        Icon: IconHandMoney,
+        types: ['Marketing'],
+        status: 'WIP',
+        roadmapID: 2182,
     },
     {
         name: 'Product tours',
@@ -368,6 +381,14 @@ const products: Product[] = [
         types: ['Marketing'],
         status: 'WIP',
         roadmapID: 1809,
+    },
+    {
+        name: 'Messaging',
+        color: 'blue',
+        Icon: IconSend,
+        types: ['Marketing'],
+        status: 'Roadmap',
+        roadmapID: 1999,
     },
     {
         name: 'Error tracking',
