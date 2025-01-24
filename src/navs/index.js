@@ -2572,6 +2572,12 @@ export const docsMenu = {
                     color: 'salmon',
                 },
                 {
+                    name: 'Remote config',
+                    url: '/docs/feature-flags/remote-config',
+                    icon: 'IconGear',
+                    color: 'green',
+                },
+                {
                     name: 'Early access feature management',
                     url: '/docs/feature-flags/early-access-feature-management',
                     icon: 'IconFeatures',

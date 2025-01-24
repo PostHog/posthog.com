@@ -247,6 +247,7 @@ export default function Roadmap() {
                 },
             },
         },
+        limit: 100,
     })
 
     const fuse = useMemo(
