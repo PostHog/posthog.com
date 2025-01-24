@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from 'react'
+import React, { useEffect, useMemo, useRef, useState } from 'react'
 import ReactDOM from 'react-dom'
 import {
     IconBrowser,
@@ -60,6 +60,7 @@ import { graphql } from 'gatsby'
 import { useStaticQuery } from 'gatsby'
 import { AnimatePresence, motion } from 'framer-motion'
 import Slider from 'components/Slider'
+import { PlayerEvents, DotLottiePlayer } from '@dotlottie/react-player'
 
 type Product = {
     name: string
@@ -482,16 +483,55 @@ const RoadmapProductDetails = ({ product }: { product: Product }) => {
     )
 }
 
+const Lottie = ({ lottieRef, src, PlaceholderIcon }) => {
+    const [ready, setReady] = useState(false)
+
+    return (
+        <>
+            {src && (
+                <DotLottiePlayer
+                    autoplay={true}
+                    style={{ display: ready ? 'inline-block' : 'none' }}
+                    lottieRef={lottieRef}
+                    src={src}
+                    onEvent={(event) => {
+                        if (event === PlayerEvents.Ready) {
+                            setReady(true)
+                        }
+                    }}
+                    className="size-8"
+                />
+            )}
+            {!ready && <PlaceholderIcon />}
+        </>
+    )
+}
+
 const ProductDetails = ({ product }: { product: Product }) => {
-    const { name, description, features, Images, Icon, color, colorDark, pricingKey, pricing, badge } = product
+    const { name, description, features, Images, Icon, color, colorDark, pricingKey, pricing, badge, lottieSrc } =
+        product
     const products = useProducts()
     const billingData = products.products.find((billingProduct) => billingProduct.type === pricingKey)
+    const lottieRef = useRef()
 
     return (
         <div className="@container bg-white dark:bg-accent-dark border border-border dark:border-dark md:max-w-[700px] w-full overflow-hidden">
             <div className="px-6 pt-6">
                 <h2 className="text-xl m-0 flex space-x-2 items-center">
-                    <Icon className={`size-8 text-${color} ${colorDark ? 'dark:text-${colorDark}' : ''}`} />
+                    {lottieSrc ? (
+                        <Lottie
+                            lottieRef={lottieRef}
+                            src={lottieSrc}
+                            PlaceholderIcon={() => (
+                                <Icon
+                                    className={`!m-0 size-8 text-${color} ${colorDark ? `dark:text-${colorDark}` : ''}`}
+                                />
+                            )}
+                        />
+                    ) : (
+                        <Icon className={`size-8 text-${color} ${colorDark ? `dark:text-${colorDark}` : ''}`} />
+                    )}
+
                     <span>{name}</span>
                     {badge && (
                         <span className="bg-accent dark:bg-accent-dark rounded-md px-2 py-1 text-sm">{badge}</span>
