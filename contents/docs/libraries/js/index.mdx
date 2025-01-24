@@ -428,6 +428,16 @@ It has two optional parameters:
 -  `withTimestamp` (default: `false`): When set to `true`, the URL includes a timestamp that takes you to the session at the time of the event.
 -  `timestampLookBack` (default: `10`): The number of seconds back the timestamp links to.
 
+## Error tracking
+
+You can enable [exception autocapture](/docs/error-tracking/installation) in the **Autocapture & heatmaps** section of [your project settings](https://us.posthog.com/settings/project-autocapture#exception-autocapture). When enabled, this automatically captures `$exception` events when errors are thrown.
+
+It is also possible to manually capture exceptions using the `captureException` method:
+
+```js
+posthog.captureException(error, additionalProperties)
+```
+
 ## Persistence
 
 For PostHog to work optimally, we store small amount of information about the user on the user's browser. This ensures we identify users properly if they navigates away from your site and come back later. We store the following information in the user's browser:

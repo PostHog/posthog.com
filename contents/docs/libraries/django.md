@@ -45,6 +45,16 @@ def some_request(request):
     posthog.capture('distinct_id_of_the_user', 'event_name')
 ```
 
+## Error tracking
+
+If you're using Django 4.2+, you can enable the exception autocapture integration which will automatically capture Django errors.
+
+```python
+from posthog.exception_capture import Integrations
+
+Posthog("<ph_project_api_key>", enable_exception_autocapture=True, exception_autocapture_integrations = [Integrations.Django])
+```
+
 ## Next steps
 
 For any technical questions for how to integrate specific PostHog features into Django (such as analytics, feature flags, A/B testing, etc.), have a look at our [Python SDK docs](/docs/libraries/python).
