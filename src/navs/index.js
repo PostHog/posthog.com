@@ -3225,21 +3225,21 @@ export const docsMenu = {
                 {
                     name: 'Traces and generations',
                     url: '/docs/ai-engineering/traces-generations',
-                    icon: 'yellow',
+                    icon: 'IconTarget',
                     color: 'orange',
                 },
                 {
                     name: 'Tutorials and guides',
                     url: '/docs/ai-engineering/tutorials',
                     icon: 'IconGraduationCap',
-                    color: 'seagreen',
+                    color: 'salmon',
                     featured: true,
                 },
                 {
                     name: 'Observability integrations',
                     url: '/docs/ai-engineering/llm-insights',
                     icon: 'IconAIText',
-                    color: 'blue',
+                    color: 'purple',
                     children: [
                         {
                             name: 'Helicone',
