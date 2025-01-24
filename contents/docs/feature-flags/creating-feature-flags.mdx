@@ -66,7 +66,7 @@ There are three types of feature flags:
 
 #### 1. Boolean flags. 
 
-These return `true` or `false`.
+These return `false` if the flag is disabled, `true` if the flag is enabled and has a matching release condition, and `null` or `undefined` if no release condition matches.
 
 #### 2. Multiple variant flags (multivariate flags). 
 
