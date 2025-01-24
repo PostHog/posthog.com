@@ -359,8 +359,19 @@ const products: Product[] = [
         Icon: IconApp,
         color: 'yellow',
         types: ['Marketing'],
-        status: 'WIP',
-        roadmapID: 2165,
+        status: 'Production',
+        description: 'Visually track user interactions, clicks, and scrolling behavior.',
+        Images: () => {
+            return (
+                <CloudinaryImage src="https://res.cloudinary.com/dmukukwp6/image/upload/v1716592885/posthog.com/contents/docs/toolbar/settings.png" />
+            )
+        },
+        features: [
+            { title: 'Click tracking', Icon: IconApp },
+            { title: 'Scroll depth', Icon: IconApp },
+            { title: 'Rage clicks', Icon: IconApp },
+            { title: 'Mouse movement', Icon: IconApp },
+        ],
     },
     {
         name: 'Product roadmaps',
@@ -477,7 +488,7 @@ const RoadmapProductDetails = ({ product }: { product: Product }) => {
                 <div className="mt-4">
                     {isLoading ? (
                         <div className="h-64 bg-accent dark:bg-dark rounded-md animate-pulse" />
-                    ) : (
+                    ) : roadmap ? (
                         <Feature
                             id={roadmap.id}
                             {...roadmap.attributes}
@@ -485,7 +496,7 @@ const RoadmapProductDetails = ({ product }: { product: Product }) => {
                             onLike={mutate}
                             onUpdate={mutate}
                         />
-                    )}
+                    ) : null}
                 </div>
             </div>
         </div>
