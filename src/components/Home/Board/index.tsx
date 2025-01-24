@@ -333,7 +333,7 @@ const products: Product[] = [
                 </p>
             ),
             cta: {
-                url: '/pricing',
+                url: 'https://app.posthog.com/home#panel=feature-previews',
                 text: 'Request access',
             },
         },
