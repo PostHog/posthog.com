@@ -1,0 +1,43 @@
+Make sure you're using both PostHog and Sentry as JS modules. You'll need to replace `'your organization'` and `project-id` with the organization and project-id from Sentry.
+
+- `'your organization'`: will be in the URL when you go to your Sentry instance, like so: `https://sentry.io/organizations/your-organization/projects/`
+- `project-id`: will be the last few digits in your Sentry DSN, such as `https://adf90sdc09asfd3@9ads0fue.ingest.sentry.io/project-id`
+- `prefix`: Optional: Url of a self-hosted sentry instance (default: https://sentry.io/organizations/)
+- `severityAllowList`: Optional: by default this is `['error']`, you can provide more Sentry severity levels (e.g. `['error', 'info']`) or '*' to capture any severity. Only available from posthog-js version 1.118.0 forward
+
+```js-web
+import posthog from 'posthog-js'
+import * as Sentry from '@sentry/browser'
+
+posthog.init('<ph_project_api_key>')
+
+Sentry.init({
+    dsn: '<your Sentry DSN>',
+    integrations: [posthog.sentryIntegration({
+        organization: 'your organization',
+        projectId: 'project-id',
+        severityAllowList: ['error', 'info'] // optional: here is set to handle captureMessage (info) and captureException (error)
+      }
+    )],
+})
+```
+
+> **Note:** If you set up Sentry exception autocapture, make sure PostHog's exception autocapture is disabled in [your project settings](https://us.posthog.com/settings/project-autocapture#exception-autocapture).
+
+<details>
+  <summary>Using Sentry SDK v6 and below</summary>
+  If you are using a lower version of the Sentry SDK you may need to use the "class based" integration as below
+
+  ```js-web
+  Sentry.init({
+      dsn: '<your Sentry DSN>',
+      integrations: [new posthog.SentryIntegration(
+          posthog,
+          'your organization',
+          project-id,
+          undefined, // optional: but necessary if you want to set a severity allowlist
+          ['error', 'info'] // optional: here is set to handle captureMessage (info) and captureException (error)
+      )],
+  })
+  ```
+</details>

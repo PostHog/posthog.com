@@ -22,7 +22,6 @@ import startengine from './images/customers/startengine.svg'
 import zendesk from './images/customers/zendesk.svg'
 import researchgate from './images/customers/researchgate.svg'
 
-
 import { useValues } from 'kea'
 import { layoutLogic } from 'logic/layoutLogic'
 import Link from 'components/Link'
@@ -125,7 +124,12 @@ export default function Customers() {
                     <Customer className="max-h-[36px]" image={airbus} alt="Airbus" />
                     <Customer className="max-h-[30px]" image={dhl} alt="DHL" />
                     <Customer className="max-h-[60px]" image={startengine} alt="StartEngine" />
-                    <Customer className="max-h-[45px]" image={zendesk} alt="Zendesk" />
+                    <Customer
+                        url="/customers/assemblyai"
+                        className="max-h-[45px]"
+                        image={assemblyai}
+                        alt="Assembly AI"
+                    />
                     <Customer
                         url="/customers/hasura"
                         className="max-h-[45px] relative -top-1"
@@ -135,13 +139,13 @@ export default function Customers() {
                     <Customer className="max-h-[50px]" image={trustwallet} alt="Trust Wallet" />
                     <Customer
                         url="/customers/researchgate"
-                        className="max-h-[40px]"
+                        className="max-h-[30px]"
                         image={researchgate}
                         alt="ResearchGate"
                     />
                     <Customer
                         url="/blog/posthog-marketing"
-                        className="max-h-[45px]"
+                        className="max-h-[40px]"
                         image={posthog}
                         alt="PostHog - so meta!"
                     />

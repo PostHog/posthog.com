@@ -51,6 +51,9 @@ class _MyAppState extends State<MyApp> {
 
 Enable session recordings in your PostHog [Project Settings](https://app.posthog.com/project/settings).
 
+If you're using Flutter Web, also enable the [Canvas capture](/docs/session-replay/canvas-recording) in [your project settings](https://us.posthog.com/settings/project-replay).  
+This is needed as Flutter renders your app using a browser canvas element.
+
 <ProductScreenshot
   imageLight={EnableSessionReplayLight} 
   imageDark={EnableSessionReplayDark} 
@@ -95,3 +98,4 @@ config.sessionReplayConfig.throttleDelay = const Duration(milliseconds: 1000);
 
 - Run a clean build if you experience issues.
 - Update your iOS Pods.
+- For blank recordings, be sure to set up the [Widget and Observer](/docs/session-replay/installation?tab=Flutter#widget-and-observer-setup)

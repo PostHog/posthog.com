@@ -602,7 +602,8 @@ export const handbookSidebar = [
                 url: '/handbook/company/merch-store',
             },
         ],
-    },{
+    },
+    {
         name: 'PostHog.com',
         url: '',
         children: [
@@ -659,6 +660,10 @@ export const handbookSidebar = [
                     {
                         name: 'Posting a new job',
                         url: '/handbook/engineering/posthog-com/jobs',
+                    },
+                    {
+                        name: 'Managing cool tech jobs',
+                        url: '/handbook/engineering/posthog-com/cool-tech-jobs',
                     },
                     {
                         name: 'Managing small teams',
@@ -991,6 +996,12 @@ export const communityMenu = {
             url: '/templates',
         },
         {
+            name: 'Cool tech jobs',
+            icon: 'IconLaptop',
+            color: 'purple',
+            url: '/cool-tech-jobs',
+        },
+        {
             name: 'Newsletter',
             icon: 'IconNewspaper',
             color: 'green',
@@ -1106,14 +1117,6 @@ export const companyMenu = {
                     name: 'Not engineering',
                 },
                 {
-                    name: 'Support',
-                    url: '/teams/support',
-                },
-                {
-                    name: 'Words & Pictures',
-                    url: '/teams/words-pictures',
-                },
-                {
                     name: 'Exec',
                     url: '/teams/exec',
                 },
@@ -1130,8 +1133,16 @@ export const companyMenu = {
                     url: '/teams/sales-cs',
                 },
                 {
+                    name: 'Support',
+                    url: '/teams/support',
+                },
+                {
                     name: 'Website & Vibes',
                     url: '/teams/website-vibes',
+                },
+                {
+                    name: 'Words & Pictures',
+                    url: '/teams/words-and-pictures',
                 },
             ],
         },
@@ -2274,12 +2285,6 @@ export const docsMenu = {
                     color: 'orange',
                 },
                 {
-                    name: 'Web vitals',
-                    url: '/docs/product-analytics/web-vitals',
-                    icon: 'IconWrench',
-                    color: 'seagreen',
-                },
-                {
                     name: 'Data management',
                     url: '/docs/data',
                     icon: 'IconDatabase',
@@ -2357,6 +2362,16 @@ export const docsMenu = {
                     color: 'red',
                 },
                 {
+                    name: 'Web vitals',
+                    url: '/docs/web-analytics/web-vitals',
+                    icon: 'IconWrench',
+                    color: 'seagreen',
+                    badge: {
+                        title: 'Beta',
+                        className: 'uppercase !bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',
+                    },
+                },
+                {
                     name: 'FAQ',
                     url: '/docs/web-analytics/faq',
                     icon: 'IconQuestion',
@@ -2406,10 +2421,6 @@ export const docsMenu = {
                     url: '/docs/session-replay/mobile',
                     icon: 'IconPhone',
                     color: 'blue',
-                    badge: {
-                        title: 'Beta',
-                        className: 'uppercase !bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',
-                    },
                 },
                 {
                     name: 'Troubleshooting and FAQs',
@@ -2944,6 +2955,10 @@ export const docsMenu = {
                             url: '/docs/cdp/destinations/braze',
                         },
                         {
+                            name: 'Brevo',
+                            url: '/docs/cdp/destinations/brevo',
+                        },
+                        {
                             name: 'Customer.io',
                             url: '/docs/cdp/destinations/customerio',
                         },
@@ -3018,6 +3033,10 @@ export const docsMenu = {
                         {
                             name: 'Sendgrid',
                             url: '/docs/cdp/destinations/sendgrid',
+                        },
+                        {
+                            name: 'Twilio',
+                            url: '/docs/cdp/destinations/twilio',
                         },
                         {
                             name: 'Zapier',
@@ -3248,6 +3267,45 @@ export const docsMenu = {
                     name: 'Traceloop',
                     url: '/docs/ai-engineering/traceloop-posthog',
                     icon: 'IconWrench',
+                    color: 'purple',
+                },
+            ],
+        },
+        {
+            name: 'Error tracking',
+            url: '/docs/error-tracking',
+            icon: 'IconWarning',
+            color: 'salmon',
+            children: [
+                {
+                    name: 'Error tracking',
+                    badge: {
+                        title: 'Beta',
+                        className: 'uppercase !bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',
+                    },
+                },
+                {
+                    name: 'Overview',
+                    url: '/docs/error-tracking',
+                    icon: 'IconHome',
+                    color: 'seagreen',
+                },
+                {
+                    name: 'Installation',
+                    url: '/docs/error-tracking/installation',
+                    icon: 'IconBook',
+                    color: 'blue',
+                },
+                {
+                    name: 'Monitor errors',
+                    url: '/docs/error-tracking/monitoring',
+                    icon: 'IconGraph',
+                    color: 'orange',
+                },
+                {
+                    name: 'Troubleshooting and FAQs',
+                    url: '/docs/error-tracking/common-questions',
+                    icon: 'IconQuestion',
                     color: 'purple',
                 },
             ],

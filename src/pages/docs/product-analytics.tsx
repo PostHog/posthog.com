@@ -52,9 +52,9 @@ export const Content = ({ quickLinks = false }) => {
 
             <AskMax
                 quickQuestions={[
-                    'Why aren\'t my events showing up?',
+                    "Why aren't my events showing up?",
                     'How do I send custom properties with an event?',
-                    'What\'s the difference between events and actions?',
+                    "What's the difference between events and actions?",
                     'What are person profiles and how are they billed?',
                 ]}
             />
