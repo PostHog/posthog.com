@@ -49,6 +49,7 @@ import {
     IconLlmObservability,
     IconListCheck,
     IconApp,
+    IconPhone,
 } from '@posthog/icons'
 import CloudinaryImage from 'components/CloudinaryImage'
 import useProducts from 'hooks/useProducts'
@@ -159,6 +160,7 @@ const products: Product[] = [
             { title: 'Event timeline', Icon: IconClock },
             { title: 'Console logs', Icon: IconTerminal },
             { title: 'Network requests', Icon: IconPulse },
+            { title: 'Mobile SDKs', Icon: IconPhone },
         ],
         Images: () => {
             return (

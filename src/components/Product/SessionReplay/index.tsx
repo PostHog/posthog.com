@@ -106,7 +106,7 @@ const subfeatures = [
     },
     {
         title: 'Web or mobile session recording',
-        description: 'Web or Android (beta) available',
+        description: 'Your choice of web and mobile SDKs',
         icon: <IconPhone />,
     },
     {
