@@ -8,8 +8,6 @@ availability:
     enterprise: full
 ---
 
-> **Note**: Remote config flags are only available in our JavaScript web, Node, Python, Ruby, and React libraries.
-
 Boolean and multivariate flags are helpful for dynamic values that differ from user to user, but sometimes you need a simple way to pass configuration related to your application without having to make code changes or redeploy your app.
 
 Remote config flags enable you to configure a simple flag that always returns the same payload wherever it is called:
@@ -25,6 +23,14 @@ const remoteConfigValue = posthog.getFeatureFlagPayload({
     key: 'current-chat-completion-model',
     distinctId: '_irrelevant_',
 })
+```
+
+```ios_swift
+let themedLogoUrl = PostHogSDK.shared.getFeatureFlagPayload('company-holiday-logo-url')
+```
+
+```android_kotlin
+val themedLogoUrl = PostHog.getFeatureFlagPayload('company-holiday-logo-url')
 ```
 
 </MultiLanguage>
