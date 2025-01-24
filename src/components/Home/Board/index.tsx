@@ -755,7 +755,12 @@ export default function Hero(): JSX.Element {
                                 </li>
                             ))}
                     </ul>
-                    <div className="border-t border-border dark:border-dark mt-12 pt-6 text-sm text-primary/70 dark:text-primary-dark/75">
+                    <div>
+                        <p className="text-sm text-primary/70 dark:text-primary-dark/70 mt-12">
+                            Each product is guaranteed to offer the lowest pricing vs. every competitor at scale.
+                        </p>
+                    </div>
+                    <div className="border-t border-border dark:border-dark pt-4 text-sm text-primary/70 dark:text-primary-dark/70">
                         Just starting out? <Link to="/founder-stack">Explore our founder stack.</Link>
                     </div>
                 </div>
