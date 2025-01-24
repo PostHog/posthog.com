@@ -39,7 +39,7 @@ export const useNav = () => {
         },
         {
             name: 'Changelog',
-            url: '',
+            url: '/changelog/2025',
             children: roadmapYears.group
                 .sort((a, b) => Number(b.fieldValue) - Number(a.fieldValue))
                 .map(({ fieldValue: year }) => ({
