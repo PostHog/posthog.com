@@ -50,6 +50,8 @@ import {
     IconListCheck,
     IconApp,
     IconPhone,
+    IconArrowLeft,
+    IconArrowRight,
 } from '@posthog/icons'
 import CloudinaryImage from 'components/CloudinaryImage'
 import useProducts from 'hooks/useProducts'
@@ -442,7 +444,15 @@ const numberToWords = (num: number) => {
     return num.toString()
 }
 
-const RoadmapProductDetails = ({ product }: { product: Product }) => {
+const RoadmapProductDetails = ({
+    product,
+    onNext,
+    onPrev,
+}: {
+    product: Product
+    onNext: () => void
+    onPrev: () => void
+}) => {
     const { name, description, Icon, color, colorDark, roadmapID } = product
     const { roadmaps, mutate, isLoading } = useRoadmaps({
         params: {
@@ -459,7 +469,8 @@ const RoadmapProductDetails = ({ product }: { product: Product }) => {
 
     return (
         <div className="bg-white dark:bg-accent-dark border border-border dark:border-dark md:max-w-[700px] w-full overflow-hidden">
-            <div className="p-6">
+            <div className="p-6 relative">
+                <ProductNavButtons onNext={onNext} onPrev={onPrev} />
                 <h2 className="text-xl m-0 flex space-x-2">
                     <Icon className={`size-8 text-${color} ${colorDark ? 'dark:text-${colorDark}' : ''}`} />
                     <span>{name}</span>
@@ -507,7 +518,26 @@ const Lottie = ({ lottieRef, src, PlaceholderIcon }) => {
     )
 }
 
-const ProductDetails = ({ product }: { product: Product }) => {
+const ProductNavButtons = ({ onNext, onPrev }: { onNext: () => void; onPrev: () => void }) => {
+    return (
+        <div className="flex space-x-1 absolute top-2 right-2">
+            <button
+                className="flex items-start gap-1 text-sm font-medium click rounded-md px-1.5 py-0.5 transition-all w-full border border-b-3 border-light dark:border-dark hover:translate-y-[-1px] active:translate-y-[1px] active:transition-all"
+                onClick={onPrev}
+            >
+                <IconArrowLeft className="size-5" />
+            </button>
+            <button
+                className="flex items-start gap-1 text-sm font-medium click rounded-md px-1.5 py-0.5 transition-all w-full border border-b-3 border-light dark:border-dark hover:translate-y-[-1px] active:translate-y-[1px] active:transition-all"
+                onClick={onNext}
+            >
+                <IconArrowRight className="size-5" />
+            </button>
+        </div>
+    )
+}
+
+const ProductDetails = ({ product, onNext, onPrev }: { product: Product; onNext: () => void; onPrev: () => void }) => {
     const { name, description, features, Images, Icon, color, colorDark, pricingKey, pricing, badge, lottieSrc } =
         product
     const products = useProducts()
@@ -516,7 +546,8 @@ const ProductDetails = ({ product }: { product: Product }) => {
 
     return (
         <div className="@container bg-white dark:bg-accent-dark border border-border dark:border-dark md:max-w-[700px] w-full overflow-hidden">
-            <div className="px-6 pt-6">
+            <div className="px-6 pt-6 relative">
+                <ProductNavButtons onNext={onNext} onPrev={onPrev} />
                 <h2 className="text-xl m-0 flex space-x-2 items-center">
                     {lottieSrc ? (
                         <Lottie
@@ -659,7 +690,6 @@ export default function Hero(): JSX.Element {
     `)
 
     const [productModalOpen, setProductModalOpen] = useState(false)
-    const [activeProduct, setActiveProduct] = useState<Product | null>(products[0])
     const [activeStatus, setActiveStatus] = useState<string>('All products')
     const groupedProducts = useMemo(() => {
         const groupedProducts: { [key: string]: Product[] } = {}
@@ -675,18 +705,46 @@ export default function Hero(): JSX.Element {
                 })
             })
         })
-        return groupedProducts
+        return [...Object.entries(groupedProducts)].sort(
+            ([typeA], [typeB]) => sorted.indexOf(typeA) - sorted.indexOf(typeB)
+        )
     }, [])
+    const [activeProduct, setActiveProduct] = useState<Product | null>(groupedProducts[0][1][0])
+
+    const handleNext = () => {
+        const products = groupedProducts
+            .flatMap(([_type, products]) => products)
+            .filter((product) => activeStatus === 'All products' || activeStatus === product.status)
+        const nextIndex = products.findIndex((product) => product === activeProduct) + 1
+        setActiveProduct(products[nextIndex] || products[0])
+    }
+
+    const handlePrev = () => {
+        const products = groupedProducts
+            .flatMap(([_type, products]) => products)
+            .filter((product) => activeStatus === 'All products' || activeStatus === product.status)
+        const prevIndex = products.findIndex((product) => product === activeProduct) - 1
+        setActiveProduct(products[prevIndex] || products[products.length - 1])
+    }
 
     const checkMobile = () => {
         const isMobile = window.innerWidth < 768
-        setActiveProduct(isMobile ? null : products[0])
+        setActiveProduct(isMobile ? null : groupedProducts[0][1][0])
     }
 
     useEffect(() => {
         window.addEventListener('resize', checkMobile)
         return () => window.removeEventListener('resize', checkMobile)
     }, [])
+
+    useEffect(() => {
+        if (activeStatus !== 'All products' && activeProduct?.status !== activeStatus) {
+            const newActiveProduct = groupedProducts
+                .flatMap(([_type, products]) => products)
+                .find((product) => product.status === activeStatus)
+            setActiveProduct(newActiveProduct || groupedProducts[0][1][0])
+        }
+    }, [activeStatus])
 
     return (
         <section className="max-w-screen-2xl mx-auto py-12 md:px-4">
@@ -724,24 +782,21 @@ export default function Hero(): JSX.Element {
             </div>
             <div className="flex px-2 md:px-0 md:space-x-6 items-start">
                 <ul className="flex-1 grid grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-x-2 gap-y-6 lg:gap-y-8 md:gap-4 list-none m-0 p-0 flex-grow flex-shrink-0">
-                    {[...Object.entries(groupedProducts)]
-                        .sort(([typeA], [typeB]) => sorted.indexOf(typeA) - sorted.indexOf(typeB))
-                        .map(([type, products]) => (
-                            <li key={type}>
-                                <p className="text-sm opacity-70 m-0 mb-1 px-3">{type}</p>
-                                <ul className="list-none m-0 p-0 space-y-px">
-                                    {products.map((product) => {
-                                        const { Icon, name, color, colorDark, status } = product
-                                        const active = activeProduct?.name === product.name
-                                        const isInActiveStatus =
-                                            activeStatus === 'All products' || activeStatus === status
-                                        const statusColor = legend.find(
-                                            (legend) => legend.name.toLowerCase() === status.toLowerCase()
-                                        )?.color
-                                        return (
-                                            <li key={name}>
-                                                <button
-                                                    className={`flex items-start gap-1 text-sm font-medium click rounded-md px-3 py-1.5 transition-all w-full 
+                    {groupedProducts.map(([type, products]) => (
+                        <li key={type}>
+                            <p className="text-sm opacity-70 m-0 mb-1 px-3">{type}</p>
+                            <ul className="list-none m-0 p-0 space-y-px">
+                                {products.map((product) => {
+                                    const { Icon, name, color, colorDark, status } = product
+                                    const active = activeProduct === product
+                                    const isInActiveStatus = activeStatus === 'All products' || activeStatus === status
+                                    const statusColor = legend.find(
+                                        (legend) => legend.name.toLowerCase() === status.toLowerCase()
+                                    )?.color
+                                    return (
+                                        <li key={name}>
+                                            <button
+                                                className={`flex items-start gap-1 text-sm font-medium click rounded-md px-3 py-1.5 transition-all w-full 
                                                         border border-b-3 border-transparent hover:border-light dark:hover:border-dark hover:translate-y-[-1px] active:translate-y-[1px] active:transition-all
                                                         ${
                                                             active
@@ -749,50 +804,54 @@ export default function Hero(): JSX.Element {
                                                                 : ''
                                                         }
                                                         ${isInActiveStatus ? '' : 'opacity-30'} ${
-                                                        status === 'Roadmap' ? 'italic' : ''
+                                                    status === 'Roadmap' ? 'italic' : ''
+                                                }`}
+                                                onClick={() => {
+                                                    setActiveProduct(product)
+                                                    if (window.innerWidth < 768) {
+                                                        setProductModalOpen(true)
+                                                    }
+                                                }}
+                                                onFocus={(e) => {
+                                                    if (
+                                                        e.type === 'focus' &&
+                                                        !e.currentTarget.matches(':focus-visible')
+                                                    ) {
+                                                        return
+                                                    }
+                                                    setActiveProduct(product)
+                                                }}
+                                            >
+                                                <Icon
+                                                    className={`size-5 text-${color} ${
+                                                        colorDark ? 'dark:text-${colorDark}' : ''
                                                     }`}
-                                                    onClick={() => {
-                                                        setActiveProduct(product)
-                                                        if (window.innerWidth < 768) {
-                                                            setProductModalOpen(true)
-                                                        }
-                                                    }}
-                                                    onFocus={(e) => {
-                                                        if (
-                                                            e.type === 'focus' &&
-                                                            !e.currentTarget.matches(':focus-visible')
-                                                        ) {
-                                                            return
-                                                        }
-                                                        setActiveProduct(product)
-                                                    }}
-                                                >
-                                                    <Icon
-                                                        className={`size-5 text-${color} ${
-                                                            colorDark ? 'dark:text-${colorDark}' : ''
-                                                        }`}
+                                                />
+                                                <div className="text-left">
+                                                    <span className="text-left">{name}</span>
+                                                    <span
+                                                        className={`inline-block mt-1.5 ml-1 size-2 bg-${statusColor} rounded-full`}
                                                     />
-                                                    <div className="text-left">
-                                                        <span className="text-left">{name}</span>
-                                                        <span
-                                                            className={`inline-block mt-1.5 ml-1 size-2 bg-${statusColor} rounded-full`}
-                                                        />
-                                                    </div>
-                                                </button>
-                                            </li>
-                                        )
-                                    })}
-                                </ul>
-                            </li>
-                        ))}
+                                                </div>
+                                            </button>
+                                        </li>
+                                    )
+                                })}
+                            </ul>
+                        </li>
+                    ))}
                 </ul>
                 <div className="hidden md:block flex-[0_0_550px]">
                     {activeProduct && (
                         <div>
                             {activeProduct.roadmapID ? (
-                                <RoadmapProductDetails product={activeProduct} />
+                                <RoadmapProductDetails
+                                    product={activeProduct}
+                                    onNext={handleNext}
+                                    onPrev={handlePrev}
+                                />
                             ) : (
-                                <ProductDetails product={activeProduct} />
+                                <ProductDetails onNext={handleNext} onPrev={handlePrev} product={activeProduct} />
                             )}
                         </div>
                     )}
@@ -800,9 +859,9 @@ export default function Hero(): JSX.Element {
                 {activeProduct && (
                     <ProductModal productModalOpen={productModalOpen} setProductModalOpen={setProductModalOpen}>
                         {activeProduct.roadmapID ? (
-                            <RoadmapProductDetails product={activeProduct} />
+                            <RoadmapProductDetails product={activeProduct} onNext={handleNext} onPrev={handlePrev} />
                         ) : (
-                            <ProductDetails product={activeProduct} />
+                            <ProductDetails onNext={handleNext} onPrev={handlePrev} product={activeProduct} />
                         )}
                     </ProductModal>
                 )}
