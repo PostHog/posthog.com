@@ -300,7 +300,7 @@ const products: Product[] = [
         colorDark: '[#C170E8]',
         Icon: IconLlmObservability,
         description: 'Build AI features with full visibility – both in development and production.',
-        pricingKey: 'llm-observability',
+        pricingKey: 'product_analytics',
         types: ['AI'],
         features: [
             { title: 'LLM traces', Icon: IconDecisionTree },
@@ -322,16 +322,6 @@ const products: Product[] = [
         status: 'WIP',
         badge: 'ALPHA',
         pricing: {
-            FreeTier: () => (
-                <p className="text-base m-0">
-                    <strong>Unlimited</strong> during beta
-                </p>
-            ),
-            StartsAt: () => (
-                <p className="text-base m-0">
-                    <strong>Free</strong> during beta
-                </p>
-            ),
             cta: {
                 url: 'https://app.posthog.com/home#panel=feature-previews',
                 text: 'Try it out',
