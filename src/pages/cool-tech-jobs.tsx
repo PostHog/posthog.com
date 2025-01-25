@@ -80,7 +80,7 @@ const Perks = ({ company, className }: { company: Company; className?: string })
     return (
         <ul className={`list-none p-0 m-0 ${className}`}>
             {perks.filter(Boolean).map((perk) => (
-                <li key={`${company.id}-${perk}`} className="flex gap-1.5 items-start">
+                <li key={`${company.id}-${perk.key}`} className="flex gap-1.5 items-start">
                     {perk.icon}
                     <span className="text-[15px] font-medium pt-1">{perk.label}</span>
                 </li>
@@ -587,10 +587,72 @@ const CompanyFormSkeleton = () => {
     )
 }
 
+const ModeratorInitialView = ({
+    onStartFromPendingCompany,
+    onAddNewCompany,
+}: {
+    onStartFromPendingCompany: (company: Company) => void
+    onAddNewCompany: () => void
+}) => {
+    const { getJwt } = useUser()
+    const [pendingCompanies, setPendingCompanies] = useState<Company[]>([])
+    const [selectedCompany, setSelectedCompany] = useState<Company | null>(null)
+
+    const getPendingCompanies = async () => {
+        const jwt = await getJwt()
+        const response = await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/pending-companies?populate=*`, {
+            headers: {
+                Authorization: `Bearer ${jwt}`,
+            },
+        })
+        const data = await response.json()
+        if (data.data?.length > 0) {
+            setPendingCompanies(data.data)
+            setSelectedCompany(data.data[0])
+        } else {
+            onAddNewCompany()
+        }
+    }
+
+    useEffect(() => {
+        getPendingCompanies()
+    }, [])
+
+    return pendingCompanies.length > 0 ? (
+        <div>
+            <Select
+                className="!p-0"
+                options={pendingCompanies.map((company) => ({ label: company.attributes.name, value: company.id }))}
+                value={selectedCompany?.id}
+                onChange={(value) => {
+                    setSelectedCompany(pendingCompanies.find((company) => company.id === value) || null)
+                }}
+                placeholder="Continue with a pending company"
+            />
+            {selectedCompany && (
+                <div className="mt-4">
+                    <CallToAction onClick={() => onStartFromPendingCompany(selectedCompany)} size="md" width="full">
+                        Continue with {selectedCompany?.attributes.name}
+                    </CallToAction>
+                </div>
+            )}
+            <h4 className="opacity-70 py-3 my-3 relative before:w-full before:h-[1px] before:bg-border dark:before:bg-dark before:absolute flex items-center justify-center">
+                <span className="bg-white dark:bg-accent-dark px-2 relative">or</span>
+            </h4>
+            <CallToAction size="md" width="full" type="secondary" onClick={onAddNewCompany}>
+                Add a new company
+            </CallToAction>
+        </div>
+    ) : null
+}
+
 const CompanyForm = ({ onSuccess, companyId }: { onSuccess?: () => void; companyId?: number }) => {
-    const { user, getJwt } = useUser()
+    const { user, getJwt, isModerator } = useUser()
     const [slugExists, setSlugExists] = useState<boolean | undefined>(undefined)
+    const [nameExists, setNameExists] = useState<boolean | undefined>(undefined)
     const [company, setCompany] = useState<Company | null>(null)
+    const [usingPending, setUsingPending] = useState<boolean | null>(null)
+    const [pendingCompanySubmitted, setPendingCompanySubmitted] = useState(false)
     const debouncedCheckSlugExists = useCallback(
         debounce(async (slug: string) => {
             try {
@@ -604,6 +666,24 @@ const CompanyForm = ({ onSuccess, companyId }: { onSuccess?: () => void; company
                 validateField('slug')
             } catch (error) {
                 console.error('Error checking slug:', error)
+            }
+        }, 1000),
+        []
+    )
+
+    const debouncedCheckNameExists = useCallback(
+        debounce(async (name: string) => {
+            try {
+                if (!name) return
+                const response = await fetch(
+                    `${process.env.GATSBY_SQUEAK_API_HOST}/api/companies?filters[name][$eq]=${name}`
+                )
+                const data = await response.json()
+                const exists = data?.data?.length > 0
+                setNameExists(exists)
+                validateField('name')
+            } catch (error) {
+                console.error('Error checking name:', error)
             }
         }, 1000),
         []
@@ -643,20 +723,21 @@ const CompanyForm = ({ onSuccess, companyId }: { onSuccess?: () => void; company
                 ? { file: null, objectURL: company?.attributes?.logomark?.data?.attributes?.url }
                 : undefined,
             jobBoardURL: company?.attributes?.jobBoardURL || '',
+            why: '',
         },
         validationSchema: Yup.object({
-            name: Yup.string().required('Company name is required'),
+            name: Yup.string()
+                .required('Company name is required')
+                .test('unique-name', 'Company already exists', () => {
+                    return !!companyId || nameExists === undefined || nameExists === false
+                }),
             url: Yup.string().url('Must be a valid URL').required('Company website URL is required'),
             slug: Yup.string().when('jobBoardType', {
                 is: (value: string) => value !== 'other',
                 then: Yup.string()
                     .required('Job board slug is required')
-                    .test('unique-slug', 'Company already exists', () => {
-                        return (
-                            company?.attributes?.slug === values.slug ||
-                            slugExists === undefined ||
-                            slugExists === false
-                        )
+                    .test('unique-slug', 'Slug already exists', () => {
+                        return !!companyId || slugExists === undefined || slugExists === false
                     }),
                 otherwise: Yup.string(),
             }),
@@ -670,6 +751,7 @@ const CompanyForm = ({ onSuccess, companyId }: { onSuccess?: () => void; company
             logoLight: Yup.mixed().required('Logo is required'),
             logoDark: Yup.mixed(),
             logomark: Yup.mixed(),
+            why: Yup.string().test('why', "C'mon, gas yourself up", (value) => !!value || isModerator),
         }),
         validateOnChange: true,
         validateOnBlur: false,
@@ -679,25 +761,29 @@ const CompanyForm = ({ onSuccess, companyId }: { onSuccess?: () => void; company
                 const jwt = await getJwt()
                 const profileID = user?.profile?.id
                 if (!profileID || !jwt) return
+                const endpoint = isModerator ? 'companies' : 'pending-companies'
+                const canUpdate = isModerator && companyId
                 // Create initial company without images in case of failure
                 const companyResponse = await fetch(
-                    `${process.env.GATSBY_SQUEAK_API_HOST}/api/companies${companyId ? `/${companyId}` : ''}`,
+                    `${process.env.GATSBY_SQUEAK_API_HOST}/api/${endpoint}${
+                        canUpdate ? `/${companyId}` : ''
+                    }?populate=*`,
                     {
-                        method: companyId ? 'PUT' : 'POST',
+                        method: canUpdate ? 'PUT' : 'POST',
                         headers: {
                             Authorization: `Bearer ${jwt}`,
                             'content-type': 'application/json',
                         },
                         body: JSON.stringify({
-                            data: rest,
+                            data: { ...rest, profile: profileID },
                         }),
                     }
                 )
                 if (!companyResponse.ok) {
                     throw new Error('Failed to create company')
                 }
-                const company = await companyResponse.json()
-                if (!company?.data?.id) {
+                const createdCompany = await companyResponse.json()
+                if (!createdCompany?.data?.id) {
                     throw new Error('Failed to create company')
                 }
                 // Upload images and update the company
@@ -723,7 +809,7 @@ const CompanyForm = ({ onSuccess, companyId }: { onSuccess?: () => void; company
                         type: 'api::profile.profile',
                     }))
                 const updateResponse = await fetch(
-                    `${process.env.GATSBY_SQUEAK_API_HOST}/api/companies/${company.data.id}`,
+                    `${process.env.GATSBY_SQUEAK_API_HOST}/api/${endpoint}/${createdCompany.data.id}`,
                     {
                         method: 'PUT',
                         headers: {
@@ -732,9 +818,21 @@ const CompanyForm = ({ onSuccess, companyId }: { onSuccess?: () => void; company
                         },
                         body: JSON.stringify({
                             data: {
-                                ...(uploadedLogoLight ? { logoLight: uploadedLogoLight.id } : {}),
-                                ...(uploadedLogoDark ? { logoDark: uploadedLogoDark.id } : {}),
-                                ...(uploadedLogomark ? { logomark: uploadedLogomark.id } : {}),
+                                ...(uploadedLogoLight
+                                    ? { logoLight: uploadedLogoLight.id }
+                                    : usingPending && logoLight
+                                    ? { logoLight: company?.attributes.logoLight.data?.id }
+                                    : {}),
+                                ...(uploadedLogoDark
+                                    ? { logoDark: uploadedLogoDark.id }
+                                    : usingPending && logoDark
+                                    ? { logoDark: company?.attributes.logoDark.data?.id }
+                                    : {}),
+                                ...(uploadedLogomark
+                                    ? { logomark: uploadedLogomark.id }
+                                    : usingPending && logomark
+                                    ? { logomark: company?.attributes.logomark.data?.id }
+                                    : {}),
                             },
                         }),
                     }
@@ -742,13 +840,19 @@ const CompanyForm = ({ onSuccess, companyId }: { onSuccess?: () => void; company
                 if (!updateResponse.ok) {
                     throw new Error('Failed to update company')
                 }
-                await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/scrape-jobs/${company.data.id}`, {
-                    headers: {
-                        Authorization: `Bearer ${jwt}`,
-                        'content-type': 'application/json',
-                    },
-                })
-                onSuccess?.()
+                if (isModerator) {
+                    await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/scrape-jobs/${createdCompany.data.id}`, {
+                        headers: {
+                            Authorization: `Bearer ${jwt}`,
+                            'content-type': 'application/json',
+                        },
+                    })
+                }
+                if (!isModerator) {
+                    setPendingCompanySubmitted(true)
+                } else {
+                    onSuccess?.()
+                }
             } catch (error) {
                 console.error('Error submitting form:', error)
             } finally {
@@ -758,7 +862,11 @@ const CompanyForm = ({ onSuccess, companyId }: { onSuccess?: () => void; company
     })
 
     useEffect(() => {
-        setFieldValue('slug', slugify(values.name || '', { lower: true }))
+        if (values.name) {
+            setTouched({ name: true })
+            setNameExists(undefined)
+            debouncedCheckNameExists(values.name)
+        }
     }, [values.name])
 
     useEffect(() => {
@@ -781,14 +889,36 @@ const CompanyForm = ({ onSuccess, companyId }: { onSuccess?: () => void; company
         setCompany(data.data)
     }, [companyId, user])
 
+    const handleStartFromPendingCompany = (company: Company) => {
+        setCompany(company)
+        setUsingPending(true)
+    }
+
+    const handleAddNewCompany = () => {
+        setUsingPending(false)
+    }
+
     useEffect(() => {
         if (companyId) {
             getCompany()
         }
     }, [companyId])
 
-    return companyId && !company ? (
+    return pendingCompanySubmitted ? (
+        <div className="p-4 rounded-md bg-accent dark:bg-accent-dark border border-light dark:border-dark">
+            <h4 className="text-base m-0">Application submitted</h4>
+            <p className="text-sm opacity-70 m-0">
+                Thanks for applying to be a part of Cool tech jobs! We'll review your application and get back to you as
+                soon as possible.
+            </p>
+        </div>
+    ) : companyId && !company ? (
         <CompanyFormSkeleton />
+    ) : isModerator && !companyId && usingPending === null ? (
+        <ModeratorInitialView
+            onStartFromPendingCompany={handleStartFromPendingCompany}
+            onAddNewCompany={handleAddNewCompany}
+        />
     ) : (
         <form onSubmit={handleSubmit} className="space-y-4 m-0">
             <Input
@@ -813,7 +943,7 @@ const CompanyForm = ({ onSuccess, companyId }: { onSuccess?: () => void; company
                     className="!p-0"
                     options={[
                         ...supportedJobBoardTypes,
-                        { value: 'kadoa', label: 'Kadoa' },
+                        ...(isModerator ? [{ value: 'kadoa', label: 'Kadoa' }] : []),
                         { value: 'other', label: 'Other' },
                     ]}
                     value={values.jobBoardType}
@@ -876,6 +1006,18 @@ const CompanyForm = ({ onSuccess, companyId }: { onSuccess?: () => void; company
                 error={errors.description}
                 touched={touched.description}
             />
+
+            {!isModerator && (
+                <Input
+                    label="Why is your company cool?"
+                    placeholder="We have a great culture and a great product"
+                    multiline
+                    rows={4}
+                    {...getFieldProps('why')}
+                    error={errors.why}
+                    touched={touched.why}
+                />
+            )}
 
             <div className="space-y-2">
                 <h4 className="text-base font-semibold m-0">Company perks</h4>
@@ -958,8 +1100,12 @@ const CompanyForm = ({ onSuccess, companyId }: { onSuccess?: () => void; company
                         <div className="flex items-center justify-center">
                             <Spinner className="!size-6" />
                         </div>
+                    ) : companyId ? (
+                        'Update company'
+                    ) : isModerator ? (
+                        'Add company'
                     ) : (
-                        `${companyId ? 'Update' : 'Create'} company`
+                        'Submit application'
                     )}
                 </CallToAction>
             </div>
@@ -983,7 +1129,7 @@ export default function JobsPage() {
         mutate,
         deleteCompany,
     } = useCompanies({ companyFilters, jobFilters, search })
-    const { isModerator } = useUser()
+    const { isModerator, user } = useUser()
 
     return (
         <Layout>
@@ -1024,15 +1170,21 @@ export default function JobsPage() {
                             </button>
                             .
                         </p>
-                        {isModerator && (
+                        {user && (
                             <CallToAction
                                 onClick={() => setAddAJobModalOpen(true)}
                                 size="sm"
                                 width="full"
                                 childClassName="flex items-center justify-center gap-1"
                             >
-                                <IconShield className="size-5" />
-                                Add a company
+                                {isModerator ? (
+                                    <>
+                                        <IconShield className="size-5" />
+                                        Add a company
+                                    </>
+                                ) : (
+                                    'Add your company'
+                                )}
                             </CallToAction>
                         )}
                     </div>
