@@ -811,7 +811,11 @@ const CompanyForm = ({ onSuccess, companyId }: { onSuccess?: () => void; company
             <div>
                 <Select
                     className="!p-0"
-                    options={[...supportedJobBoardTypes, { value: 'other', label: 'Other' }]}
+                    options={[
+                        ...supportedJobBoardTypes,
+                        { value: 'kadoa', label: 'Kadoa' },
+                        { value: 'other', label: 'Other' },
+                    ]}
                     value={values.jobBoardType}
                     onChange={(value) => setFieldValue('jobBoardType', value)}
                     placeholder="Job board type"
@@ -845,6 +849,16 @@ const CompanyForm = ({ onSuccess, companyId }: { onSuccess?: () => void; company
                     <Input
                         label="Job board URL"
                         placeholder="https://bobloblawlawblog.com/jobs"
+                        {...getFieldProps('jobBoardURL')}
+                        error={errors.jobBoardURL}
+                        touched={touched.jobBoardURL}
+                        className="mt-2"
+                    />
+                )}
+                {values.jobBoardType === 'kadoa' && (
+                    <Input
+                        label="Kadoa endpoint URL"
+                        placeholder="https://api.kadoa.com/v4/workflows/123456789/data"
                         {...getFieldProps('jobBoardURL')}
                         error={errors.jobBoardURL}
                         touched={touched.jobBoardURL}
