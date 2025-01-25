@@ -667,9 +667,9 @@ const CompanyForm = ({ onSuccess, companyId }: { onSuccess?: () => void; company
             }),
             description: Yup.string().required('Company description is required'),
             jobBoardType: Yup.string().required('Job board type is required'),
-            logoLight: Yup.mixed().required('Light logo is required'),
-            logoDark: Yup.mixed().required('Dark logo is required'),
-            logomark: Yup.mixed().required('Logomark is required'),
+            logoLight: Yup.mixed().required('Logo is required'),
+            logoDark: Yup.mixed(),
+            logomark: Yup.mixed(),
         }),
         validateOnChange: true,
         validateOnBlur: false,
@@ -902,7 +902,7 @@ const CompanyForm = ({ onSuccess, companyId }: { onSuccess?: () => void; company
 
                 <div className="grid grid-cols-3 gap-4">
                     <label className="block">
-                        <span className="text-base font-semibold mb-1 block">Light logo</span>
+                        <span className="text-base font-semibold mb-1 block">Logo</span>
                         <ImageDrop
                             className={`h-auto aspect-square rounded-sm border border-border dark:border-dark ${
                                 touched.logoLight && errors.logoLight ? 'border-red' : ''
@@ -915,7 +915,7 @@ const CompanyForm = ({ onSuccess, companyId }: { onSuccess?: () => void; company
                     </label>
 
                     <label className="block">
-                        <span className="text-base font-semibold mb-1 block">Dark logo</span>
+                        <span className="text-base font-semibold mb-1 block">Logo (dark)</span>
                         <ImageDrop
                             className={`h-auto aspect-square rounded-sm border border-border dark:border-dark ${
                                 touched.logoDark && errors.logoDark ? 'border-red' : ''
@@ -943,7 +943,13 @@ const CompanyForm = ({ onSuccess, companyId }: { onSuccess?: () => void; company
                 {(touched.logoLight && errors.logoLight) ||
                 (touched.logoDark && errors.logoDark) ||
                 (touched.logomark && errors.logomark) ? (
-                    <p className="text-red text-sm m-0 mt-1">All logos are required</p>
+                    <p className="text-red text-sm m-0 mt-1">
+                        {touched.logoLight && errors.logoLight
+                            ? errors.logoLight
+                            : touched.logoDark && errors.logoDark
+                            ? errors.logoDark
+                            : errors.logomark}
+                    </p>
                 ) : null}
             </div>
             <div className="!mt-8">
