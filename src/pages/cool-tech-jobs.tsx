@@ -551,11 +551,13 @@ const Input = ({ label, error, touched, multiline, className = '', rows = 4, ...
 const jobBoardBaseURLs = {
     ashby: 'https://jobs.ashbyhq.com/',
     greenhouse: 'https://boards.greenhouse.io/',
+    gem: 'https://jobs.gem.com/',
 }
 
 const supportedJobBoardTypes = [
     { value: 'ashby', label: 'Ashby' },
     { value: 'greenhouse', label: 'Greenhouse' },
+    { value: 'gem', label: 'Gem' },
 ]
 
 const CompanyFormSkeleton = () => {
