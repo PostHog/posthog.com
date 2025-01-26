@@ -5,7 +5,15 @@ import useCompanies, { Company, Filters as FiltersType } from 'hooks/useCompanie
 import Layout from 'components/Layout'
 import { layoutLogic } from 'logic/layoutLogic'
 import { useValues } from 'kea'
-import { IconChevronDown, IconArrowUpRight, IconX, IconPencil, IconTrash, IconShield } from '@posthog/icons'
+import {
+    IconChevronDown,
+    IconArrowUpRight,
+    IconX,
+    IconPencil,
+    IconTrash,
+    IconShield,
+    IconArrowLeft,
+} from '@posthog/icons'
 import Link from 'components/Link'
 import dayjs from 'dayjs'
 import relativeTime from 'dayjs/plugin/relativeTime'
@@ -636,7 +644,7 @@ const ModeratorInitialView = ({
                     </CallToAction>
                 </div>
             )}
-            <h4 className="opacity-70 py-3 my-3 relative before:w-full before:h-[1px] before:bg-border dark:before:bg-dark before:absolute flex items-center justify-center">
+            <h4 className="opacity-70 py-3 my-3 relative before:w-full before:h-[1px] before:bg-border dark:before:bg-dark before:absolute flex items-center justify-center text-base">
                 <span className="bg-white dark:bg-accent-dark px-2 relative">or</span>
             </h4>
             <CallToAction size="md" width="full" type="secondary" onClick={onAddNewCompany}>
@@ -652,7 +660,13 @@ const CompanyForm = ({ onSuccess, companyId }: { onSuccess?: () => void; company
     const [nameExists, setNameExists] = useState<boolean | undefined>(undefined)
     const [company, setCompany] = useState<Company | null>(null)
     const [usingPending, setUsingPending] = useState<boolean | null>(null)
-    const [pendingCompanySubmitted, setPendingCompanySubmitted] = useState(false)
+    const [confirmationMessage, setConfirmationMessage] = useState<{
+        type: 'success' | 'error' | 'warning'
+        title: string
+        description: string
+    } | null>(null)
+    const canUpdate = isModerator && companyId
+
     const debouncedCheckSlugExists = useCallback(
         debounce(async (slug: string) => {
             try {
@@ -762,7 +776,10 @@ const CompanyForm = ({ onSuccess, companyId }: { onSuccess?: () => void; company
                 const profileID = user?.profile?.id
                 if (!profileID || !jwt) return
                 const endpoint = isModerator ? 'companies' : 'pending-companies'
-                const canUpdate = isModerator && companyId
+                const jobBoardChanged =
+                    values.jobBoardType !== company?.attributes?.jobBoardType ||
+                    values.jobBoardURL !== company?.attributes?.jobBoardURL ||
+                    values.slug !== company?.attributes?.slug
                 // Create initial company without images in case of failure
                 const companyResponse = await fetch(
                     `${process.env.GATSBY_SQUEAK_API_HOST}/api/${endpoint}${
@@ -841,20 +858,47 @@ const CompanyForm = ({ onSuccess, companyId }: { onSuccess?: () => void; company
                     throw new Error('Failed to update company')
                 }
                 if (isModerator) {
-                    await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/scrape-jobs/${createdCompany.data.id}`, {
-                        headers: {
-                            Authorization: `Bearer ${jwt}`,
-                            'content-type': 'application/json',
-                        },
+                    const { jobsCreated } = await fetch(
+                        `${process.env.GATSBY_SQUEAK_API_HOST}/api/scrape-jobs/${createdCompany.data.id}`,
+                        {
+                            headers: {
+                                Authorization: `Bearer ${jwt}`,
+                                'content-type': 'application/json',
+                            },
+                        }
+                    ).then((response) => response.json())
+                    if ((jobBoardChanged && !jobsCreated) || !canUpdate) {
+                        setConfirmationMessage({
+                            type: canUpdate ? 'warning' : 'error',
+                            title: canUpdate ? 'No new jobs found' : 'Failed to create jobs',
+                            description: canUpdate
+                                ? "The company was updated, but we couldn't find any new jobs. If you're expecting new jobs, double check the job board URL and try again."
+                                : "The company was created, but we couldn't find any jobs. Double check the job board URL and try again.",
+                        })
+                    } else {
+                        setConfirmationMessage({
+                            type: 'success',
+                            title: canUpdate ? 'Company updated' : 'Company added',
+                            description: canUpdate
+                                ? `Updated <strong>${createdCompany.data.attributes.name}</strong> and added <strong>${jobsCreated}</strong> jobs.`
+                                : `Added <strong>${createdCompany.data.attributes.name}</strong> with <strong>${jobsCreated}</strong> jobs.`,
+                        })
+                    }
+                } else {
+                    setConfirmationMessage({
+                        type: 'success',
+                        title: 'Application submitted',
+                        description:
+                            "Thanks for applying to be a part of Cool tech jobs! We'll review your application and get back to you as soon as possible.",
                     })
                 }
-                if (!isModerator) {
-                    setPendingCompanySubmitted(true)
-                } else {
-                    onSuccess?.()
-                }
+                onSuccess?.()
             } catch (error) {
-                console.error('Error submitting form:', error)
+                setConfirmationMessage({
+                    type: 'error',
+                    title: 'Failed to submit application',
+                    description: 'Something went wrong. Please try again later.',
+                })
             } finally {
                 setSubmitting(false)
             }
@@ -904,13 +948,35 @@ const CompanyForm = ({ onSuccess, companyId }: { onSuccess?: () => void; company
         }
     }, [companyId])
 
-    return pendingCompanySubmitted ? (
-        <div className="p-4 rounded-md bg-accent dark:bg-accent-dark border border-light dark:border-dark">
-            <h4 className="text-base m-0">Application submitted</h4>
-            <p className="text-sm opacity-70 m-0">
-                Thanks for applying to be a part of Cool tech jobs! We'll review your application and get back to you as
-                soon as possible.
-            </p>
+    return confirmationMessage ? (
+        <div
+            className={`p-4 rounded-md border ${
+                confirmationMessage.type === 'success'
+                    ? 'border-green bg-green/20'
+                    : confirmationMessage.type === 'warning'
+                    ? 'border-yellow bg-yellow/20'
+                    : 'border-red bg-red/20'
+            }`}
+        >
+            <h4 className="text-base m-0">{confirmationMessage.title}</h4>
+            <p
+                className="text-sm opacity-70 m-0"
+                dangerouslySetInnerHTML={{ __html: confirmationMessage.description }}
+            />
+            {(confirmationMessage.type === 'error' || confirmationMessage.type === 'warning') &&
+                (canUpdate || !isModerator) && (
+                    <CallToAction
+                        size="sm"
+                        type="secondary"
+                        className="mt-2"
+                        onClick={() => setConfirmationMessage(null)}
+                    >
+                        <span className="flex items-center gap-1">
+                            <IconArrowLeft className="size-4" />
+                            Go back
+                        </span>
+                    </CallToAction>
+                )}
         </div>
     ) : companyId && !company ? (
         <CompanyFormSkeleton />
@@ -1103,7 +1169,7 @@ const CompanyForm = ({ onSuccess, companyId }: { onSuccess?: () => void; company
                     ) : companyId ? (
                         'Update company'
                     ) : isModerator ? (
-                        'Add company'
+                        'Publish company'
                     ) : (
                         'Submit application'
                     )}
@@ -1291,7 +1357,6 @@ export default function JobsPage() {
                     companyId={companyId}
                     onSuccess={() => {
                         mutate()
-                        setAddAJobModalOpen(false)
                     }}
                 />
             </SideModal>
