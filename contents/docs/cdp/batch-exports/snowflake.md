@@ -25,7 +25,7 @@ With batch exports, data can be exported to a Snowflake database table.
 PostHog supports two authentication methods for Snowflake:
 
 1. **Password:** This is the simplest method, and just requires a password for the user.
-2. **Key pair:** For enchanced security, you can use a key pair to authenticate with Snowflake. For information on how to set this up, see [Snowflake's documentation](https://docs.snowflake.com/en/user-guide/key-pair-auth#configuring-key-pair-authentication). We support both encrypted and unencrypted key pairs.
+2. **Key pair:** For enhanced security, you can use a key pair to authenticate with Snowflake. For information on how to set this up, see [Snowflake's documentation](https://docs.snowflake.com/en/user-guide/key-pair-auth#configuring-key-pair-authentication). We support both encrypted and unencrypted key pairs.
 
 ## Snowflake configuration
 
