@@ -13,6 +13,9 @@ features:
   sessionRecording: true
   featureFlags: true
   groupAnalytics: true
+  surveys: true
+  llmObservability: false
+  errorTracking: true
 ---
 
 PostHog makes it easy to get data about traffic and usage of your React app. Integrating PostHog into your site enables analytics about user behavior, custom events capture, session recordings, feature flags, and more.
@@ -44,7 +47,6 @@ posthog.init(
   process.env.REACT_APP_PUBLIC_POSTHOG_KEY,
   {
     api_host: process.env.REACT_APP_PUBLIC_POSTHOG_HOST,
-    person_profiles: 'identified_only',
   }
 );
 

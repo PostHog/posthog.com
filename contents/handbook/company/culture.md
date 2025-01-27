@@ -6,30 +6,28 @@ showTitle: true
 
 So, what's it like working at PostHog?
 
-<iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/rRwzJiljpSA" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+## We're 100% remote 
 
-## All remote
+[Our team](/people) is 100% remote, and distributed across more than 15 countries.
 
-Our [team](/people) is 100% remote, and distributed across over 10 countries.
-
-As well as the equipment you'll need, we provide [a budget to help you find coworking space](/handbook/people/spending-money#work-space) or to cover the costs of coffees for those who prefer not to work at home.
-
-All remote has a bunch of advantages:
+Being all remote has a bunch of advantages:
 
 * We can hire [amazing people](/people) from a global talent pool.
-* Being remote encourages a deeper level of personal thought and writing things down.
-* It allows for uninterrupted work.
-* It makes results clearer, which helps us hold people to account for outcomes rather than hours spent in the office.
+* It encourages thoughtful, and intentional, written communication
+* It creates space for lots of uninterrupted work.
+* We judge performance based on real outcomes, not hours spent in an office.
 
-## Extremely welcoming
+In addition to all the equipment you'll need, we provide [a budget to help you find coworking space](/handbook/people/spending-money#work-space), or to cover coffee shop expenses. Everyone also has a [$1,500 quarterly travel budget](/handbook/people/spending-money#budget-for-working-togethersocializing) for ad-hoc meetups.
 
-This is actually so important to us that it has [its own dedicated page](/handbook/company/grown-ups). 
+## We're extremely welcoming
 
-## Extremely transparent
+This is so important to us that it has [its own dedicated page](/handbook/company/grown-ups). 
+
+## We're extremely transparent
 
 As the builders of an open-source product, we believe it is only right that we be as transparent as possible as a company.
 
-This isn't just a meaningless corporate statement. Most of our communication happens publicly on GitHub, our roadmap is open for anyone to see, and our open source handbook explains everything from how we hire and pay team members to how we email investors!
+This isn't just a meaningless corporate statement. Most of our communication happens publicly on GitHub, our roadmap is open for anyone to see, and our open-source handbook explains everything from how we hire and pay team members to how we email investors!
 
 Almost everything we do is open for anyone else to edit. This includes things like the contents of this very Handbook. Anyone can give direct feedback on work they think could be improved, which helps increase our responsiveness to the community. 
 
@@ -48,13 +46,13 @@ To accomplish this, we use [asynchronous communication](/handbook/company/commun
 
 Putting things in writing helps us clarify our own ideas, as well as allow others to provide better feedback. It has been key to our development and growth.
 
-## Don't let others fail
+## We give direct feedback early and often
 
 Everyone should help everyone else raise their game. Fatigue sets in when you complete a task, so it's easier for outsiders to help those creating the work to raise their game.
 
 We are direct about the quality of work. That doesn't always mean work needs to be completely polished, as it depends on the speed and impact of a task. Being great at [giving and receiving feedback](/handbook/people/feedback) is a key part of our culture. 
 
-## Bias for impact
+## We bias for action
 
 If given a choice, go live. If you can't go live, reduce the task size so you can.
 
@@ -63,16 +61,22 @@ If given a choice, go live. If you can't go live, reduce the task size so you ca
 
 Default to _not_ asking for permission to do something if you are acting in the best interests of PostHog. It is ok to ask for more context though. 
 
-## Have fewer meetings
+## We're on the maker's schedule
 
-We're big believers in the importance of the [maker's schedule](http://www.paulgraham.com/makersschedule.html). If we have meetings at all (which we try to avoid, see _"Write stuff down"_ above), we'll cluster them around any standups so our day doesn't get split up. On Tuesdays and Thursdays, we don't have internal meetings at all. Occasionally an external meeting will slip in on those days such as interviews, but we try to keep those to an absolute minimum.
+We're big believers in the importance of the [maker's schedule](http://www.paulgraham.com/makersschedule.html). If we have meetings at all, we'll cluster them around any stand-ups, so our day doesn't get split up.
 
-## Structured for speed and autonomy
+![Screenshot of an engineer's calendar at PostHog](https://res.cloudinary.com/dmukukwp6/image/upload/a0d634a2_bd3e_4229_ae8f_f98269a6c4f7_2268x1473_06595e2e80.jpg)
 
-One of the benefits of hiring high-performing, self-sufficient, empowered team members is that we don't need to put in place some of the typical corporate structures and processes that can slow teams down. 
+On Tuesdays and Thursdays, we don't have internal meetings at all. Occasionally an external meeting will slip in on those days, such as interviews, but we try to keep those to an absolute minimum.
 
-We have optimised for this by introducing [Small Teams](/handbook/team-structure), which prioritise speed by delegating decision-making autonomy as much as possible. 
+## We're structured for speed and autonomy
 
-Right now, our [management approach](/handbook/company/management) is super simple - James H, Tim and the team leaders are the only managers, and everyone else reports to one of them. We don't want to create a fancy hierarchy of titles, as we believe this can lead, consciously or not, to people feeling less empowered to make changes and step on toes, especially if they are not in a 'senior' role. 
+Hiring high-performing and self-sufficient team members means we don't need the typical corporate processes that are designed to slow teams down. Instead, we're organized into [small teams](/handbook/team-structure), which prioritize speed by delegating decision-making autonomy as much as possible. 
 
-It's up to you how to get things done. If you want to make a change, feel free to just create the pull request. If you want to discuss something more widely for a bigger piece of work, it might make sense to use an RFC for a change inside your team. If you want to ship something that could significantly impact other teams, it usually works best to book a call - communicating with the relevant team (and using this to particularly focus on who you're building for, the goals of your idea before you get into the tactics) as a meeting tends to work better and usually saves time.
+Our [management approach](/handbook/company/management) is super simple - small teams report to their team leader, and each of the team leaders reports to one of our four execs. We don't want to create a fancy hierarchy of titles, as we believe this can lead, consciously or not, to people feeling less empowered to make changes and step on toes, especially if they are not in a 'senior' role. 
+
+It's up to you how to get things done. If you want to make a change, feel free to just create the pull request. If you want to discuss something more widely for a bigger piece of work, it might make sense to [use an RFC](/handbook/company/communication#requests-for-comment-rfcs) for a change inside your team. 
+
+If your RFC could significantly impact other teams as well, it usually works best to book a call with them as well as it usually saves time – "fewer meetings" doesn't mean "no meetings", just that they should be meaningful and intentional, not routine.
+
+Read [How you can help](/handbook/help) to understand how you can contribute to this culture.

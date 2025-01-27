@@ -130,7 +130,32 @@ git commit -m "Closes #289 add posthog logo to website"
 
 ## Testing code
 
-See: [How to test](/docs/contributing#testing).
+See: [How we review](/handbook/engineering/how-we-review).
+
+### Storybook Visual Regression Tests
+
+In our CI pipeline, we use [Playwright](https://playwright.dev/) to load our Storybook stories and take snapshots. If any changes are detected, the updated snapshots are automatically committed to the PR. This helps you quickly verify whether you've introduced unexpected changes or if the UI has been altered in the intended way.
+
+Check the `test-runner.ts` file to see how this is configured. We use the `@storybook/test-runner` package; you can find more details in the [official Storybook documentation](https://storybook.js.org/docs/writing-tests/test-runner).
+
+#### Running Tests Locally
+
+1. **Start Storybook** in one terminal:
+
+   ```bash
+   pnpm storybook
+   ```
+
+2. **Install Playwright and run the visual tests in debug mode** in another terminal:
+
+   ```bash
+   pnpm exec playwright install
+   pnpm test:visual:debug
+   ```
+
+This setup will help catch unintended UI regressions and ensure consistent visual quality.
+
+[Learn more](https://github.com/PostHog/posthog/blob/master/.storybook/README.md)
 
 ## Reviewing code
 
@@ -147,8 +172,6 @@ Things we do not care about during review:
 
 - Syntax. If we're arguing about syntax, that means we should install a code formatter.
 
-See: [How we review](/handbook/engineering/how-we-review).
-
 ## Merging
 
 Merge anytime. Friday afternoon? Merge.
@@ -164,6 +187,8 @@ Once you merge a pull request, it will automatically deploy to all environments.
 If you build it, [document it](/docs). You're in the best position to do this, and it forces you to think things through from a user perspective.
 
 It's not the responsibility of either [Website & Vibes](/teams/website-vibes) or [Marketing](/teams/marketing) teams to document features.
+
+See our [docs style guide](/handbook/content-and-docs/posthog-style-guide) for tips on how to write great docs.
 
 ## Releasing
 

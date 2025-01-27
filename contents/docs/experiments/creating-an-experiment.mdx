@@ -56,10 +56,6 @@ Participants are automatically split equally between variants. If you want assig
 
 By default, PostHog runs experiments at a user-level. This means that participants are assigned to a variant based on their person properties. However, if you've created [groups](/docs/product-analytics/group-analytics), you can also run [group-targeted experiments](/blog/running-group-targeted-ab-tests). This will test how a change affects your product at a group-level by providing the same variant to every member of a group.
 
-## Experiment goal
-
-Setting your goal metric enables PostHog to calculate the impact of your experiment and if your results are [statistically significant](/docs/experiments/significance). You can select between a `trend` or `conversion funnel` goal.
-
 ## Distribution and release conditions
 
 By default, your experiment will target 100% of participants. If you want to target a more specific set of participants or change the rollout percentage, you need to do this by changing the [release conditions](/docs/feature-flags/creating-feature-flags#release-conditions) for the feature flag used by your experiment.

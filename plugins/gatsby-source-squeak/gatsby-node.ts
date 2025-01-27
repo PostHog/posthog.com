@@ -15,9 +15,18 @@ export const sourceNodes: GatsbyNode['sourceNodes'] = async (
         let profileQuery = qs.stringify(
             {
                 filters: {
-                    startDate: {
-                        $notNull: true,
-                    },
+                    $and: [
+                        {
+                            startDate: {
+                                $notNull: true,
+                            },
+                        },
+                        {
+                            startDate: {
+                                $lte: new Date(),
+                            },
+                        },
+                    ],
                 },
                 pagination: {
                     page,
@@ -136,9 +145,37 @@ export const sourceNodes: GatsbyNode['sourceNodes'] = async (
                     fields: ['id'],
                 },
                 profiles: {
+                    filters: {
+                        $and: [
+                            {
+                                startDate: {
+                                    $notNull: true,
+                                },
+                            },
+                            {
+                                startDate: {
+                                    $lte: new Date(),
+                                },
+                            },
+                        ],
+                    },
                     populate: '*',
                 },
                 leadProfiles: {
+                    filters: {
+                        $and: [
+                            {
+                                startDate: {
+                                    $notNull: true,
+                                },
+                            },
+                            {
+                                startDate: {
+                                    $lte: new Date(),
+                                },
+                            },
+                        ],
+                    },
                     fields: 'id',
                 },
                 crest: true,

@@ -38,6 +38,7 @@ import TeamUpdate from 'components/TeamUpdate'
 import CopyCode from 'components/CopyCode'
 import TeamMember from 'components/TeamMember'
 import { Contributor, ContributorImageSmall } from 'components/PostLayout/Contributors'
+import { OverflowXSection } from 'components/OverflowXSection'
 
 const renderAvailabilityIcon = (availability: 'full' | 'partial' | 'none') => {
     switch (availability) {
@@ -345,6 +346,11 @@ export default function Handbook({
         TeamUpdate: (props) => TeamUpdate({ teamName: title?.replace(/team/gi, '').trim(), ...props }),
         CopyCode,
         TeamMember,
+        table: (props) => (
+            <OverflowXSection>
+                <table {...props} />
+            </OverflowXSection>
+        ),
         ...shortcodes,
     }
 
@@ -382,6 +388,7 @@ export default function Handbook({
                     breadcrumb={[breadcrumbBase, ...(breadcrumb?.slice(0, breadcrumb.length - 1) || [])]}
                     hideSidebar={hideAnchor}
                     nextPost={nextPost}
+                    askMax
                 >
                     <section>
                         <div className="mb-8 relative">
@@ -529,6 +536,9 @@ export const query = graphql`
                     sessionRecording
                     featureFlags
                     groupAnalytics
+                    surveys
+                    llmObservability
+                    errorTracking
                 }
                 availability {
                     free

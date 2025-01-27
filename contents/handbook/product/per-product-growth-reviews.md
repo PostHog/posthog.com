@@ -4,7 +4,7 @@ sidebar: Handbook
 showTitle: true
 ---
 
-For products that have product-market fit and are generating revenue, we are doing monthly **per-product growth reviews**. These are separate from the [growth reviews](/handbook/growth/growth-engineering/growth-sessions) the [Growth team](/teams/growth) are doing. We recommend to do the growth reviews at the start of the month, to review the previous month. The growth reviews are attended by James (CEO), Tim (CTO), the Small Team Lead and the Product Manager. Apart from the Small Team Lead, the small team members currently don’t join the growth reviews, but all analysis is public, and they have the chance to participate async before and after the meeting. It’s the job of the Product Manager to schedule, prepare and lead the growth review.
+For products that have product-market fit and are generating revenue, we are doing monthly **per-product growth reviews**. These are separate from the [growth reviews](/handbook/growth/growth-engineering/growth-sessions) the [Growth team](/teams/growth) are doing. We recommend to do the growth reviews at the start of the month, to review the previous month. The growth reviews are attended by the small team lead, the exec responsible for the team and the product manager. Apart from the small team lead, the small team members currently don’t join the growth reviews, but all analysis is public, and they have the chance to participate async before and after the meeting. It’s the job of the product manager to schedule, prepare and lead the growth review.
 
 ## Objectives
 
@@ -32,6 +32,25 @@ As mentioned before, we aim to analyse the same set of metrics month over month,
 We’ve found that the best way to review what is a quite long list of metrics is to combine all numbers (revenue as well as usage) in one spreadsheet with a new column for each month, and only open individual graphs where required. Below is a screenshot that shows a part of our growth review document. [Here](https://docs.google.com/spreadsheets/d/1Q_hibP9Pv4b8H_9guceKXNrTUP0B_5hWvmiM-EJ2LrU/edit#gid=541742743) is the link to the document for internal users. 
 
 ![Growth review template](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/handbook/growth-review-template.png)
+
+### Monthly focus areas
+
+To make growth reviews more actionable, each of the three growth reviews per quarter should have a slightly different angle:
+
+**First growth review of the quarter (1 week in):**
+- Review the [product / research goal](handbook/product/product-team#product-goals) planned as part of the team's quarterly planning
+    - If we have answered this, have we answered the biggest unknown for the product?
+    - Are there any other topics / research we could work on as a secondary priority?
+
+**Second growth review of the quarter (5 weeks in):**
+- Has our research yielded anything useful so far? What do we need to focus on understanding before planning in a few weeks?
+- From the things we've shipped so far this quarter, did we learn anything?
+- The outcome should be a list of open questions we should answer before the next quarterly planning
+
+**Third growth review of the quarter (9 weeks in):**
+- What impact did the things we have shipped this quarter have on our metrics, and overall success of the product?
+- Looking back over the quarter so far, was growth healthy or are there issues we should address in the next quarter?
+- This session will be the least actionable, since it is happening around the same time as the quarterly planning, so it's a good time to do an overall health check
 
 ### Deep dives
 

@@ -11,6 +11,9 @@ features:
   userIdentification: true
   featureFlags: true
   groupAnalytics: true
+  surveys: false
+  llmObservability: true
+  errorTracking: true
 ---
 
 This is an optional library you can install if you're working with Python. It uses an internal queue to make calls fast and non-blocking. It also batches requests and flushes asynchronously, making it perfect to use in any part of your web app or other server side application that needs performance.
@@ -29,7 +32,7 @@ import PythonSendEvents from '../../integrate/send-events/_snippets/send-events-
 
 ## Person profiles and properties
 
-PostHog captures identified events by default. These create [person profiles](/docs/data/persons). To set [person properties](/docs/data/user-properties) in these profiles, include them when capturing an event:
+The Python SDK captures identified events by default. These create [person profiles](/docs/data/persons). To set [person properties](/docs/data/user-properties) in these profiles, include them when capturing an event:
 
 ```python
 posthog.capture(
@@ -120,7 +123,7 @@ posthog.group_identify('company', 'company_id_in_your_db', {
 })
 ```
 
-The `name` is a special property which is used in the PostHog UI for the name of the Group. If you don't specify a `name` property, the group ID will be used instead.
+The `name` is a special property which is used in the PostHog UI for the name of the group. If you don't specify a `name` property, the group ID will be used instead.
 
 ## GeoIP properties
 
@@ -166,6 +169,10 @@ is fully flushed. To avoid this, you can either:
 
 - ensure that `posthog.flush()` is called after processing every request, by adding a middleware to your server: this allows `posthog.capture()` to remain asynchronous for better performance.
 - enable the `sync_mode` option when initializing the client, so that all calls to `posthog.capture()` become synchronous.
+
+## LLM observability
+
+Our Python SDK includes a built-in LLM observability feature. It enables you to capture LLM usage, performance, and more. Check out our [observability docs](/docs/ai-engineering/observability) for more details on setting it up.
 
 ## Django
 

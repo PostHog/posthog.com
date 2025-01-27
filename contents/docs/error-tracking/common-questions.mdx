@@ -1,0 +1,29 @@
+---
+title: Troubleshooting and FAQs
+---
+
+## FAQs
+
+### Are web workers supported?
+
+Yes. Error tracking will work as long as you initialize PostHog in the [web worker](/tutorials/web-worker). You will need to disable any features that rely on the `window` object:
+
+```js
+posthog.init(token, {
+    ...
+    autocapture: false,
+    capture_pageview: false,
+    capture_pageleave: false,
+    disable_session_recording: true,
+    disable_surveys: true,
+});
+```
+
+To `identify` users in web workers you will need to pass the distinct ID. This can be done via an env variable or sending it via `postMessage` from your main application.
+
+### Can exceptions be sampled / ignored
+
+Returning `null` for a given event in the [`before_send`](/docs/libraries/js#amending-events-before-they-are-captured) hook will cause it not to be captured. You may want to:
+- Drop certain types of exceptions
+- Randomly sample a subset of all exceptions 
+- Sample based on the events properties (e.g. URL or user)

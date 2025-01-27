@@ -13,6 +13,9 @@ features:
   sessionRecording: true
   featureFlags: true
   groupAnalytics: true
+  surveys: false
+  llmObservability: false
+  errorTracking: false
 ---
 
 import IOSInstall from '../../integrate/_snippets/install-ios.mdx'
@@ -239,7 +242,7 @@ PostHogSDK.shared.group(type: "company", key: "company_id_in_your_db", groupProp
 ])
 ```
 
-The `name` is a special property which is used in the PostHog UI for the name of the Group. If you don't specify a `name` property, the group ID will be used instead.
+The `name` is a special property which is used in the PostHog UI for the name of the group. If you don't specify a `name` property, the group ID will be used instead.
 
 ## Feature Flags
 
@@ -371,13 +374,11 @@ configuration.personProfiles = .identifiedOnly
 
 /**
  * Enable Recording of Session Replays. (off/false by default)
- * Experimental support
  */
 configuration.sessionReplay = false
 
 /**
  * Session Replay configuration
- * Experimental support
  */
 configuration.sessionReplayConfig = .init()
 

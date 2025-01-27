@@ -65,7 +65,7 @@ Thus, after a lot of brainstorming and [calls with the likes of Sid Sijbrandij](
 
 This led to the creation of two key things: an `ee` subdirectory on our [main repo](https://github.com/PostHog/posthog), and a new repository called [posthog-foss](https://github.com/PostHog/posthog-foss). We'll be explaining these in more detail in the future, but, for now, you should know that to run fully MIT-licensed software, you can either clone the main repo and delete the `ee` subdirectory (without any consequences), or clone our posthog-foss repo, which is a mirror of the main repository without proprietary code.
 
-In addition, if you're an enterprise customer looking for added functionality and improved performance, contact us at _[sales@posthog.com](mailto:sales@posthog.com)_ or via [this form](https://share.hsforms.com/1-IVCY9gNRvaZBajMt_UPIg4559u) to discuss the license for using our proprietary features. 
+In addition, if you're an enterprise customer looking for added functionality and improved performance, [contact us](/talk-to-a-human) to discuss the license for using our proprietary features. 
 
 ### [Secret Key Requirement](https://github.com/PostHog/posthog/pull/1426)
 

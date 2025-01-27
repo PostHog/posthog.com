@@ -13,6 +13,9 @@ features:
   sessionRecording: true
   featureFlags: true
   groupAnalytics: true
+  surveys: false
+  llmObservability: false
+  errorTracking: false
 ---
 
 It uses an internal queue to make calls fast and non-blocking. It also batches requests and flushes asynchronously, making it perfect to use in any part of your mobile app.
@@ -263,7 +266,7 @@ PostHog.group(
 )
 ```
 
-The `name` is a special property which is used in the PostHog UI for the name of the Group. If you don't specify a `name` property, the group ID will be used instead.
+The `name` is a special property which is used in the PostHog UI for the name of the group. If you don't specify a `name` property, the group ID will be used instead.
 
 ## Session replay
 
@@ -328,11 +331,9 @@ val config = PostHogAndroidConfig(apiKey = POSTHOG_API_KEY, host = POSTHOG_HOST)
     personProfiles = PersonProfiles.IDENTIFIED_ONLY
 
     // Enable Recording of Session Replay. (off/false by default)
-    // Experimental support
     sessionReplay = false
 
     // Session Replay configuration
-    // Experimental support
     sessionReplayConfig = PostHogSessionReplayConfig(...)
 }
 ```
