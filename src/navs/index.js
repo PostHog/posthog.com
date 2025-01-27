@@ -737,6 +737,10 @@ export const handbookSidebar = [
                         name: 'Feature requests',
                         url: '/handbook/growth/sales/feature-requests',
                     },
+                    {
+                        name: 'Customer health checks',
+                        url: '/handbook/growth/sales/health-checks',
+                    },
                 ],
             },
         ],
