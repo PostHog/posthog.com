@@ -91,7 +91,7 @@ Next, we configure PostHog in each platform using our project API key and instan
 
 ### Android setup
 
-For Android, add your PostHog configuration to your `AndroidManifest.xml` file located in the `android/app/src/main`:
+For Android, add your PostHog configuration to your `AndroidManifest.xml` file located in `android/app/src/main` folder:
 
 ```xml
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
