@@ -143,9 +143,6 @@ const Teams: React.FC = () => {
                         <div className="md:flex-1">
                             <div className="@container article-content">
                                 <div className="opacity-70 text-[15px] font-medium">Why PostHog?</div>
-                                <h1 id="posthog-is-literally-designed-to-be-a-no-brainer" className="text-2xl">
-                                    PostHog is literally designed to be a no-brainer
-                                </h1>
 
                                 <h2 id="posthog-has-the-lowest-pricing-for-every-product">
                                     We have the lowest pricing for every product
@@ -369,10 +366,7 @@ const Teams: React.FC = () => {
                                     can <Link to="/roadmap">see our entire public roadmap</Link> and ask for what you
                                     need.
                                 </p>
-
-                                <h3 id="popular-roadmap-items" className="mb-3">
-                                    Popular roadmap items
-                                </h3>
+                                
                                 <RoadmapPreview />
 
                                 <div className="text-center mb-8">
