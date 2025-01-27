@@ -20,13 +20,23 @@ With batch exports, data can be exported to a Snowflake database table.
 6. Finalize the creation by clicking on "Create".
 7. Done! The batch export will schedule its first run on the start of the next period.
 
+## Authentication
+
+PostHog supports two authentication methods for Snowflake:
+
+1. **Password:** This is the simplest method, and just requires a password for the user.
+2. **Key pair:** For enchanced security, you can use a key pair to authenticate with Snowflake. For information on how to set this up, see [Snowflake's documentation](https://docs.snowflake.com/en/user-guide/key-pair-auth#configuring-key-pair-authentication). We support both encrypted and unencrypted key pairs.
+
 ## Snowflake configuration
 
 Configuring a batch export targeting Snowflake requires the following Snowflake-specific configuration values:
-* **User:** A Snowflake user name with permissions to insert data into the provided table and, if the table is meant to be created, permissions to create the table.
-* **Password:** The password of the Snowflake user provided.
-* **Role (optional):** A role to assume for the required permissions.
 * **Account:** A [Snowflake account identifier](https://docs.snowflake.com/en/user-guide/admin-account-identifier) without the `snowflakecomputing.com` suffix (if any).
+* **User:** A Snowflake user name with permissions to insert data into the provided table and, if the table is meant to be created, permissions to create the table.
+* **Authentication type:** The authentication method to use: password or key pair.
+* **Password:** The password of the Snowflake user provided, if using password authentication.
+* **Private key:** The private key of the Snowflake user provided, if using key pair authentication.
+* **Private key passphrase (optional):** The private key passphrase, if using an encrypted key pair.
+* **Role (optional):** A role to assume for the required permissions.
 * **Database:** The Snowflake database where the table provided to insert data is located (and created if not present).
 * **Schema:** The Snowflake database schema where the table provided to insert data is located (and created if not present).
 * **Table name:** The name of a Snowflake table where to export the data.
