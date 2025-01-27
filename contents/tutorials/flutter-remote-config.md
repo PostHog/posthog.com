@@ -66,7 +66,7 @@ class MainScreen extends StatelessWidget {
 
 ```
 
-To test this works, check we check for the emulation devices available with `flutter devices` and run the app for one of them. We'll use the web version and launch it like this:
+To test this works, we check for the emulation devices available with `flutter devices` and run the app for one of them. We'll use the web version and launch it like this:
 
 ```bash
 flutter run -d chrome
@@ -174,7 +174,7 @@ With PostHog set up, let's create two remote config flags to control our app's c
 1. Go to the [feature flags tab](https://us.posthog.com/feature_flags) in PostHog and click **New feature flag**
 2. Enter `company-logo-url` as the key
 3. Under **Served value**, select **Remote config (single payload)**
-4. Set the payload to a string of a image. We'll use PostHog's logo at `"/brand/posthog-logo@2x.png"`
+4. Set the payload to a string of an image. We'll use PostHog's logo at `"/brand/posthog-logo@2x.png"`
 5. Click **Save**
 
 <ProductScreenshot
@@ -188,7 +188,7 @@ After this, repeat steps 1-5 to create another flag with key `welcome-message` a
 
 ## 4. Implement remote config in Flutter
 
-Finally, we'll update our app to use these remote config values. To do this, we start by creating a new file in `lib` named `config_provider.dart`. This this file we create a `ConfigProvider` to manage our remote config state.
+Finally, we'll update our app to use these remote config values. To do this, we start by creating a new file in `lib` named `config_provider.dart`. In this file we create a `ConfigProvider` to manage our remote config state.
 
 ```dart
 import 'package:flutter/material.dart';
