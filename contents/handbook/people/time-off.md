@@ -8,7 +8,7 @@ We offer our team unlimited time off, but with an expectation that you take _at 
 
 The reason for this policy is that it's critical for PostHog that we hire people we can trust to be responsible with their time off - enough that they can recharge, but not so much that it means we don't get any work done. The People & Ops team will look into holiday usage occasionally to encourage people who haven't taken the minimum time off to do so. The 25 days is a minimum, not a guide.
 
-As general guidance, we don't care about a few days here and there. If you are taking significantly more vacation time than most - for example, 40 days, we would be very surprised if you aren't causing a strain on the rest of your team as a result.
+As general guidance, we don't care about a few days here and there. If you are taking significantly more vacation time than most - for example, 40 days - we would be very surprised if you aren't causing a strain on the rest of your team as a result.
 
 ## Permissionless time off
 
@@ -76,7 +76,7 @@ If your are summonsed for jury duty, please let Fraser know right away - we can 
 
 Parental leave is exceptional as it needs to be significantly longer than a typical vacation. Anyone at PostHog, regardless of gender, is able to take parental leave, and regardless of whether you've become a parent through childbirth or adoption. 
 
-If you have been at PostHog for over 1 year as of the date of your child's birth, you can take up to 24 weeks maternity leave or 4 weeks paternity leave on full pay.
+If you have been at PostHog for over 1 year as of the date of your child's birth, you can take up to 24 weeks maternity leave or 4 weeks paternity leave on full base salary pay. 
 
 We only pay this in one continuous block. If you have been at PostHog for under 1 year, we will pay you according to your local jurisdiction's legal requirements. 
 
