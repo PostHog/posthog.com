@@ -8,31 +8,8 @@ import { Provider as ToastProvider } from './src/context/toast'
 import { RouteUpdateArgs } from 'gatsby'
 import { UserProvider } from './src/hooks/useUser'
 import { ChatProvider } from './src/hooks/useChat'
-import mermaid from 'mermaid'
 
 initKea(false)
-
-export const onInitialClientRender = async () => {
-    try {
-        const mermaidNodes = document.querySelectorAll('.mermaid')
-        if (mermaidNodes.length > 0) {
-            mermaid.initialize({ startOnLoad: false })
-            await mermaid.run({
-                nodes: mermaidNodes,
-                postRenderCallback: () => {
-                    document.querySelectorAll('.mermaid-loading').forEach((node) => {
-                        node.classList.add('hidden')
-                    })
-                    document.querySelectorAll('.mermaid').forEach((node) => {
-                        node.classList.remove('invisible')
-                    })
-                },
-            })
-        }
-    } catch (e) {
-        console.error(e)
-    }
-}
 
 export const wrapRootElement = ({ element }) => (
     <UserProvider>
