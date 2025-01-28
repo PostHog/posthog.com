@@ -428,6 +428,16 @@ It has two optional parameters:
 -  `withTimestamp` (default: `false`): When set to `true`, the URL includes a timestamp that takes you to the session at the time of the event.
 -  `timestampLookBack` (default: `10`): The number of seconds back the timestamp links to.
 
+## Error tracking
+
+You can enable [exception autocapture](/docs/error-tracking/installation) in the **Autocapture & heatmaps** section of [your project settings](https://us.posthog.com/settings/project-autocapture#exception-autocapture). When enabled, this automatically captures `$exception` events when errors are thrown.
+
+It is also possible to manually capture exceptions using the `captureException` method:
+
+```js
+posthog.captureException(error, additionalProperties)
+```
+
 ## Persistence
 
 For PostHog to work optimally, we store small amount of information about the user on the user's browser. This ensures we identify users properly if they navigates away from your site and come back later. We store the following information in the user's browser:
@@ -753,7 +763,7 @@ In this section we describe some additional details on advanced configuration av
 | Attribute                                                                                          | Description                                                                                                                                                                                                                                                                                                              |
 | -------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | `advanced_disable_decide`<br/><br/>**Type:** Boolean<br/>**Default:** `false`                      | Will completely disable the `/decide` endpoint request (and features that rely on it). More details below.                                                                                                                                                                                                               |
-| `advanced_disable_feature_flags`<br/><br/>**Type:** Boolean<br/>**Default:** `false`               | Will keep `/decide` running, but without any feature flag requests                                                                                                                                                                                                                                                       |
+| `advanced_disable_feature_flags`<br/><br/>**Type:** Boolean<br/>**Default:** `false`               | Will keep `/decide` running, but without any feature flag requests. Important: do not use this argument if using surveys, as display conditions rely on feature flags internally.                                                                                                                                        |
 | `advanced_disable_feature_flags_on_first_load`<br/><br/>**Type:** Boolean<br/>**Default:** `false` | Stops from firing feature flag requests on first page load. Only requests feature flags when user identity or properties are updated, or you manually request for flags to be loaded.                                                                                                                                    |
 | `feature_flag_request_timeout_ms`<br/><br/>**Type:** Integer<br/>**Default:** `3000`               | Sets timeout for fetching feature flags                                                                                                                                                                                                                                                                                  |
 | `secure_cookie` <br/><br/>**Type:** Boolean<br/>**Default:** `false`                               | If this is `true`, PostHog cookies will be marked as secure, meaning they will only be transmitted over HTTPS.                                                                                                                                                                                                           |
