@@ -154,7 +154,7 @@ const products: Product[] = [
         color: 'yellow',
         Icon: IconRewindPlay,
         description:
-            'Watch users interacting with your app or website. Available for web, Android (beta), and iOS (alpha).',
+            'Watch users interacting with your app or website. Available for web, Android, iOS, React Native, and Flutter.',
         pricingKey: 'session_replay',
         types: ['Product', 'Engineering'],
         features: [
