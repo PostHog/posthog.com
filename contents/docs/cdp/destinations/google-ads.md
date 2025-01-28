@@ -17,40 +17,38 @@ You'll also need access to the relevant Google Cloud, Google Ads and Google Ads 
 
 1. Apply for a Google Ads developer token using [these steps](https://developers.google.com/google-ads/api/docs/get-started/dev-token).
 
-2. Enable the Google Ads API for your organization in your [Google Cloud settings](https://console.cloud.google.com/marketplace/product/google/googleads.googleapis.com).
+2. In PostHog, click the [Data pipeline](https://us.posthog.com/pipeline/overview) tab in the left sidebar.
 
-3. In Google Ads, go to [Goals settings](https://ads.google.com/aw/conversions/customersettings), enable enhanced conversions, set the method to `Google Ads API`, and click **Save**.
+3. Click the **Destinations** tab.
 
-![Goal settings](https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2024_11_01_at_13_38_50_d9c811bebd.png)
+4. Search for **Google Ads Conversions** and select the destination.
 
-4. In PostHog, click the [Data pipeline](https://us.posthog.com/pipeline/overview) tab in the left sidebar.
+5. Connect your Google account at the configuration step.
 
-5. Click the **Destinations** tab.
-
-6. Search for **Google Ads Conversions** and select the destination.
-
-7. Connect your Google account at the configuration step.
-
-8. Add your developer token and customer ID.
+6. Add your developer token and select your Customer ID.
 
 ![Location of the Google Ads Customer ID](https://res.cloudinary.com/dmukukwp6/image/upload/2024_10_31_at_15_15_51_a7a003008c.png)
 
-9. Create a conversion action inside Google Ads
-   1. Under [Goals > Conversions > Summary](https://ads.google.com/aw/conversions), you'll need to create a conversion goal
+7. In Google Ads, go to [Goals settings](https://ads.google.com/aw/conversions/customersettings), enable enhanced conversions, set the method to `Google Ads API`, and click **Save**.
+
+![Goal settings](https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2024_11_01_at_13_38_50_d9c811bebd.png)
+
+8. Create a conversion action inside Google Ads
+   1. Under [Goals > Conversions > Summary](https://ads.google.com/aw/conversions), you'll need to create a conversion action
    2. Click **New conversion action**
-   3. Select **Website**
-   4. Enter your domain and scan your website
-   5. Click **Add a conversion action manually**, fill in the details about the category name, and enable enhanced conversions (if not already)
-   6. Press **Done** and **Save and continue**
-   7. Click **See the event snippet**. It should show something like `gtag('event', 'conversion', {'send_to': 'AW-XXXXXXXXXXX/XXXXXXXXXXXXXXXXXX'})`. You want the conversion action ID which is the `send_to` value before the forward slash like `AW-XXXXXXXXXXX`
+   3. Select **Import**
+   4. Click **CRMs, files, or other data sources** and **Track conversions from clicks**
+   5. Under data source, select **skip this step and set up a data source later**
+   6. Click **Continue**, fill in the conversion type and name
+   7. Press **Save and continue**
 
-![Steps to create a conversion action inside Google Ads](https://res.cloudinary.com/dmukukwp6/image/upload/2024_10_30_at_15_04_47_772e736817.gif)
+![Steps to create a conversion action inside Google Ads](https://res.cloudinary.com/dmukukwp6/image/upload/2024_11_09_at_14_52_07_dfb486cd19.gif)
 
-10. Back in PostHog, add the conversion action ID to the destination configuration.
+9. Back in PostHog, select the conversion action to the destination configuration.
 
-11. Set up your event and property filters to remove unnecessary events. You only want to send events that are conversions. Filter out unrelated events or ones missing data like `gclid`.
+10. Set up your event and property filters to remove unnecessary events. You only want to send events that are conversions. Filter out unrelated events or ones missing data like `gclid`.
 
-12. Press **Create & enable**, test your destination, and then watch your conversions get sent to Google Ads.
+11. Press **Create & enable**, test your destination, and then watch your conversions get sent to Google Ads.
 
 <HideOnCDPIndex>
 
