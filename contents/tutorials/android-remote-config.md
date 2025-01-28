@@ -67,7 +67,7 @@ Finally, in your `app/src/main/AndroidManifest.xml` file, add a reference to you
 
 ## 3. Creating our remote config
 
-With PostHog set up, let's create a remote config flags to control our app's welcome message:
+With the integration set up, let's create a remote config flags to control our app's welcome message:
 
 1. Go to the [feature flags tab](https://us.posthog.com/feature_flags) in PostHog and click **New feature flag**
 2. Enter `welcome-message` as the key
