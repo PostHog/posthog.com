@@ -7,7 +7,7 @@ import Requirements from "../_snippets/requirements.mdx"
 import FeedbackQuestions from "../_snippets/feedback-questions.mdx"
 import PostHogMaintained from "../_snippets/posthog-maintained.mdx"
 
-It’s easier than ever to export realtime PostHog data to satisfy the Airtable fanatics in your life.
+You can send analytics events to June to enrich your customer data in real-time.
 
 <Requirements />
 
