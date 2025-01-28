@@ -15,6 +15,7 @@ type Props = {
     placeholder?: string
     className?: string
     search?: boolean
+    onBlur?: () => void
 }
 
 export default function Select({
@@ -23,6 +24,7 @@ export default function Select({
     placeholder = '',
     className = '',
     search,
+    onBlur,
     ...other
 }: Props): JSX.Element {
     const ref = useRef<HTMLDivElement>(null)
@@ -55,7 +57,7 @@ export default function Select({
     }, [other.options])
 
     return (
-        <div ref={ref} className="relative">
+        <div ref={ref} className="relative" onBlur={onBlur}>
             <Listbox value={value} onChange={onChange}>
                 <Listbox.Button
                     onClick={() => {

@@ -62,6 +62,7 @@ import ReactFlow, {
     Panel,
 } from 'reactflow'
 import 'reactflow/dist/style.css'
+import Profile from '../../Team/Profile'
 
 const team = 'CDP'
 const teamSlug = '/teams/cdp'
@@ -469,6 +470,7 @@ function PipelinesPage({ location }) {
     const [selectedDestination, setSelectedDestination] = React.useState(null)
     const [modalOpen, setModalOpen] = React.useState(false)
     const { fullWidthContent } = useLayoutData()
+    const [activeProfile, setActiveProfile] = React.useState(false)
 
     const product = {
         slug: 'cdp',
@@ -484,6 +486,9 @@ function PipelinesPage({ location }) {
                 description="Get all your data into PostHog with 60+ sources & destinations"
                 image={`images/og/cdp.jpg`}
             />
+            <SideModal open={!!activeProfile} setOpen={setActiveProfile}>
+                {activeProfile && <Profile profile={{ ...activeProfile }} />}
+            </SideModal>
             <SideModal
                 title={
                     selectedDestination ? (
@@ -729,7 +734,7 @@ function PipelinesPage({ location }) {
                     PostHog works in small teams. <Link to={teamSlug}>Here's the team</Link> responsible for building
                     our customer data platform.
                 </p>
-                <TeamMembers teamName={team} />
+                <TeamMembers teamName={team} setActiveProfile={setActiveProfile} />
             </section>
 
             <section

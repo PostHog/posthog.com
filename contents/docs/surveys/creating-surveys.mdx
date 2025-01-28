@@ -14,6 +14,8 @@ export const delaySurveyLight = "https://res.cloudinary.com/dmukukwp6/image/uplo
 export const delaySurveyDark = "https://res.cloudinary.com/dmukukwp6/image/upload/Screenshot_2024_06_25_at_11_09_41_AM_52fd4a8e34.png"
 export const displayConditionsLight = "https://res.cloudinary.com/dmukukwp6/image/upload/Screenshot_2024_07_10_at_9_52_48_AM_6287f11b96.png"
 export const displayConditionsDark = "https://res.cloudinary.com/dmukukwp6/image/upload/Screenshot_2024_07_10_at_9_52_35_AM_3fefd0b9cc.png"
+export const repeatingSurveyLight = "https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_01_20_at_11_35_29_2x_cc089a2cd1.jpg"
+export const repeatingSurveyDark = "https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_01_20_at_11_37_57_2x_0aa568d0d2.jpg"
 
 <iframe
     src="https://www.youtube-nocookie.com/embed/2jQco8hEvTI?start=900"
@@ -23,18 +25,18 @@ export const displayConditionsDark = "https://res.cloudinary.com/dmukukwp6/image
 To create a new survey, go to the [surveys tab](https://us.posthog.com/surveys) in the PostHog app, and click on the "New survey" button in the top right. This presents you with a collection of [survey templates](/templates?filter=type&value=survey) or you can click "Create blank survey" in the top right to create your own.
 
 <ProductScreenshot
-    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/v1714691601/posthog.com/contents/images/docs/surveys/survey-template-light.png" 
+    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/v1714691601/posthog.com/contents/images/docs/surveys/survey-template-light.png"
     imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/v1714691601/posthog.com/contents/images/docs/surveys/survey-template-dark.png"
-    alt="Survey templates" 
+    alt="Survey templates"
     classes="rounded"
 />
 
 After choosing one, you are brought to a form where you can complete the details of your new survey:
 
 <ProductScreenshot
-    imageLight={newSurveyLight} 
+    imageLight={newSurveyLight}
     imageDark={newSurveyDark}
-    alt="Create a survey" 
+    alt="Create a survey"
     classes="rounded"
 />
 
@@ -47,6 +49,10 @@ There are three options for displaying a survey:
 1. **Popover:** Use PostHog's prebuilt user interfaces to show surveys as a popover in the bottom corner of the screen.
 
 2. **API:** Implement your own survey UI and use PostHog to handle display logic, capturing results, and analytics.
+
+3. **Feedback button:** Set up a survey based on your own custom button or our prebuilt feedback tab.
+
+> 🚧 **NOTE:** Feedback button is considered `beta`. We are keen to gather as much feedback as possible so if you try this out please let us know. You can send feedback via the [in-app support panel](https://us.posthog.com#panel=support%3Afeedback%3Asurveys%3Alow%3Atrue) or one of our other [support options](/docs/support-options).
 
 ### Steps
 
@@ -69,7 +75,7 @@ PostHog supports multiple question types which are all available for both popove
 
 ### Customization
 
-Customization enables you to change the look, feel, and timing of your popover survey: 
+Customization enables you to change the look, feel, and timing of your popover survey:
 
 - The color of the background, border, and buttons.
 - The position of the popover at the bottom of the screen.
@@ -80,9 +86,9 @@ Customization enables you to change the look, feel, and timing of your popover s
 - Whether the confirmation message auto disappears after 5 seconds.
 
 <ProductScreenshot
-    imageLight={delaySurveyLight} 
+    imageLight={delaySurveyLight}
     imageDark={delaySurveyDark}
-    alt="Delay survey customization" 
+    alt="Delay survey customization"
     classes="rounded"
 />
 
@@ -94,26 +100,57 @@ You can display your survey to specific users based on:
 
 - **Linked feature flag:** Whether a user has a specific [feature flag](/docs/feature-flags) enabled. For example, if you're rolling out a new landing page using a feature flag `new-landing-page`, you can gather feedback only from users who have that flag enabled. This is also a way to show surveys to cohorts (but it must be a [non-behavioral one](/docs/feature-flags/common-questions#why-cant-i-use-a-cohort-with-behavioral-filters-in-my-feature-flag)).
 
-- **URL targeting:** Show when URL either contains a string, exactly matches a string, matches a regex.
-  
+- **URL targeting:** Show when URL either contains a string, exactly matches a string, matches a regex. The URL targeting is evaluated against `window.location.href`.
+
 - **Selector matches:** Whether a specific element exists or appears on the page with the specified class name or ID. For example, you can display a survey with `#my-button` or `.my-button` selector. This is useful for showing a survey after a user action.
 
 - **Wait period**: Hide surveys from users who have seen a survey in the last X days. Note that a user who completes a survey are never shown the same survey again, even if no wait period is set.
 
-- **Person and group properties:** If you are capturing identified events, you can display a survey to users who have specific [person](/docs/product-analytics/person-properties) or [group properties](/docs/product-analytics/group-analytics#how-to-set-group-properties). For example, you can target a survey to users who have a property `is_paying=true`. This also includes a percentage rollout option.
+- **Person and group properties:** If you are capturing identified events, you can display a survey to users who have specific [person](/docs/product-analytics/person-properties) or [group properties](/docs/product-analytics/group-analytics#how-to-set-group-properties). For example, you can target a survey to users who have a property `is_paying=true`. This also includes a percentage rollout option. The person and group properties are evaluated with internal feature flags.
 
 - **User sends events:** Display a survey to users who have sent a specific event during their session.
 
 <ProductScreenshot
-    imageLight={displayConditionsLight} 
+    imageLight={displayConditionsLight}
     imageDark={displayConditionsDark}
-    alt="Display conditions" 
+    alt="Display conditions"
     classes="rounded"
 />
 
 ### Completion conditions
 
-This enables you to stop your survey once you receive a specific number of responses. Note that because it takes time for PostHog to process responses, this is a rough guideline. Your survey might receive slightly more responses than you set.
+This enables you to stop your survey once you receive a specific number of responses. Note that because it takes time for PostHog to process responses, this is a rough guideline. Your survey might receive slightly more responses than you set. The completion conditions properties are evaluated with internal feature flags.
+
+## Repeating surveys
+
+By default, surveys are shown once to each user until they either dismiss it or complete it. After that, they won't see the survey again.
+
+You can also configure surveys to repeat at specific intervals, which is useful for gathering feedback from users on a regular basis.
+
+<ProductScreenshot
+    imageLight={repeatingSurveyLight}
+    imageDark={repeatingSurveyDark}
+    alt="Repeating surveys"
+    classes="rounded"
+/>
+
+For example, you can configure settings like:
+- **Repeat this survey `3` times, once every `30` days**: The survey will be shown to a user up to 3 times total, with a 30-day gap between each showing.
+
+| Date | Event | Explanation |
+|------|-------|-------------|
+| Jan 1 | Survey shown and completed | First showing of the survey. User completes it, starting the 30-day timer |
+| Jan 2-30 | No survey shown | Within 30-day waiting period after first completion |
+| Jan 31 | Survey becomes eligible | 30 days have passed since first completion |
+| Feb 15 | Survey shown and completed | User visits site and completes survey for the second time |
+| Feb 16-Mar 16 | No survey shown | Within 30-day waiting period after second completion |
+| Mar 17 | Survey becomes eligible | 30 days have passed since second completion |
+| Apr 1 | Survey shown and completed | User completes survey for the third and final time |
+| After Apr 1 | Survey never shown again for this user | Maximum number of repetitions (3) reached |
+
+A survey is considered "shown" when a user either completes or dismisses it. The repeat interval timer starts from that moment. For example, if you set a survey to repeat every 90 days and a user completes it on January 1st, they won't see it again until April 1st, regardless of how many times they visit your site in between.
+
+> **Note:** Users must still match any display conditions you've set each time the survey becomes eligible to show again.
 
 ## Launching your survey
 
@@ -122,4 +159,3 @@ Once you've set up your survey, click "Save as draft" to save your survey. This 
 If you've created a [popover survey](#presentation), your survey will begin showing immediately to users matching your display conditions.
 
 If you've created an [API survey](#presentation), you'll need to add your [custom survey code](/docs/surveys/implementing-custom-surveys) before launching.
-

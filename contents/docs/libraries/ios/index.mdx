@@ -13,6 +13,9 @@ features:
   sessionRecording: true
   featureFlags: true
   groupAnalytics: true
+  surveys: false
+  llmObservability: false
+  errorTracking: false
 ---
 
 import IOSInstall from '../../integrate/_snippets/install-ios.mdx'
@@ -371,13 +374,11 @@ configuration.personProfiles = .identifiedOnly
 
 /**
  * Enable Recording of Session Replays. (off/false by default)
- * Experimental support
  */
 configuration.sessionReplay = false
 
 /**
  * Session Replay configuration
- * Experimental support
  */
 configuration.sessionReplayConfig = .init()
 

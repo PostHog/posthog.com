@@ -246,6 +246,27 @@ export default {
 };
 ```
 
+### Capturing pageleaves (optional)
+
+Note that once you disable automatic `$pageview` captures when calling `posthog.init` you'll be disabling automatic `$pageleave` capture as well. If you want to continue capturing `$pageleave`s automatically, you can re-enable it.
+
+```js file=plugins/posthog.js
+import posthog from "posthog-js";
+
+export default {
+  install(app) {
+    app.config.globalProperties.$posthog = posthog.init(
+      "<ph_project_api_key>",
+      {
+        api_host: "<ph_client_api_host>",
+        capture_pageview: false,
+        capture_pageleave: true, // Opt back in because disabling $pageview capture disables $pageleave events
+      }
+    );
+  },
+};
+```
+
 ## Capturing custom events
 
 Beyond pageviews, there might be more events you want to capture. To do this, you can capture custom events with PostHog. 

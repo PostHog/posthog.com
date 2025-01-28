@@ -249,14 +249,14 @@ On Linux you often have separate packages: `postgres` for the tools, `postgres-s
     ```
 2. Run `pnpm i --dir plugin-server` to install all required packages. We'll actually run the plugin server in a later step.
 
-> Note: If you face an error like `ld: symbol(s) not found for architecture arm64`, most probably your openssl build flags are coming from the wrong place. To fix this, run:
+> **Note:** If you face an error like `ld: symbol(s) not found for architecture arm64`, most probably your openssl build flags are coming from the wrong place. To fix this, run:
 ```bash
 export CPPFLAGS=-I/opt/homebrew/opt/openssl/include
 export LDFLAGS=-L/opt/homebrew/opt/openssl/lib
 pnpm i --dir plugin-server
 ```
 
-> Note: If you face an error like `import gyp  # noqa: E402`, most probably need to install `python-setuptools`. To fix this, run:
+> **Note:** If you face an error like `import gyp  # noqa: E402`, most probably need to install `python-setuptools`. To fix this, run:
 ```bash
 brew install python-setuptools
 ```
@@ -355,9 +355,7 @@ Now start all of PostHog (backend, worker, plugin server, and frontend – simul
 ./bin/start
 ```
 
-> [!NOTE]  
-> This command uses [mprocs](https://github.com/pvolok/mprocs) to run all development processes in a single terminal window.
-
+> **Note:** This command uses [mprocs](https://github.com/pvolok/mprocs) to run all development processes in a single terminal window.
 
 > **Friendly tip:** If you get the error `Configuration property "enable.ssl.certificate.verification" not supported in this build: OpenSSL not available at build time`, make sure your environment is using the right `openssl` version by setting [those](https://github.com/xmlsec/python-xmlsec/issues/261#issuecomment-1630889826) environment variables, and then run `./bin/start` again.
 
@@ -367,6 +365,7 @@ Open [http://localhost:8010](http://localhost:8010) to see the app.
 
 To get some practical test data into your brand-new instance of PostHog, run `DEBUG=1 ./manage.py generate_demo_data`. For a list of useful arguments of the command, run `DEBUG=1 ./manage.py generate_demo_data --help`.
 
+> **Friendly Tip** The first time you run the app, you can log in with a test account: _user_:`test@posthog.com` _pwd_:`12345678`.
 
 #### 7. Develop
 
@@ -469,6 +468,14 @@ With PyCharm's built in support for Django, it's fairly easy to setup debugging 
    - "Celery" and click on debug (optional)
    - "Frontend" and click on run
    - "Plugin server" and click on run
+
+## Extra: Accessing Postgres
+
+While developing, there are times you may want to connect to the database to query the local database, make changes, etc. To connect to the database, use a tool like pgAdmin and enter these connection details: _host_:`localhost` _port_:`5432` _database_:`posthog`, _username_:`posthog`, _pwd_:`posthog`.
+
+## Extra: Accessing the Django Admin
+
+If you cannot access the Django admin http://localhost:8000/admin/, it could be that your local user is not set up as a staff user. You can connect to the database, find your `posthog_user` and set `is_staf` to `true`. This should make the admin page accessible.
 
 ## Extra: Developing paid features (PostHog employees only)
 

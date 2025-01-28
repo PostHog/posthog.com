@@ -5,7 +5,7 @@ author:
   - lior-neu-ner
 tags:
   - product analytics
-  - AI engineering
+  - LLM observability
 ---
 
 [LlamaIndex](https://www.llamaindex.ai/) is a powerful framework for connecting LLMs with external data sources. By combining PostHog with [Langfuse](https://langfuse.com/), an open-source LLM observability platform, you can easily monitor your LLM app.

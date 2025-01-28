@@ -156,24 +156,24 @@ const FeatureFlags: React.FC<FeatureFlagsProps> = ({ data }) => {
             <SEO title="Feature flags - Docs - PostHog" />
 
             <PostLayout title={'Feature flags'} hideSurvey hideSidebar>
-            <Intro
-                subheader="Getting started"
-                title="Feature flags"
-                description="Toggle features for cohorts or individuals to test the impact before rolling out to everyone."
-                buttonText="Create your first feature flag"
-                buttonLink="/docs/feature-flags/installation"
-                imageColumnClasses="max-w-96 md:-mt-8"
-                imageUrl="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Home/Slider/images/feature-flags-hog.png"
-                imageClasses=""
-            />
+                <Intro
+                    subheader="Getting started"
+                    title="Feature flags"
+                    description="Toggle features for cohorts or individuals to test the impact before rolling out to everyone."
+                    buttonText="Create your first feature flag"
+                    buttonLink="/docs/feature-flags/installation"
+                    imageColumnClasses="max-w-96 md:-mt-8"
+                    imageUrl="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Home/Slider/images/feature-flags-hog.png"
+                    imageClasses=""
+                />
 
-            <AskMax 
-                quickQuestions={[
-                    'Why is there a delay in loading flags?',
-                    'How do I create a multivariate flag?',
-                    'Can I override a flag?',
-                ]}
-            />
+                <AskMax
+                    quickQuestions={[
+                        'Why is there a delay in loading flags?',
+                        'How do I create a multivariate flag?',
+                        'Can I override a flag?',
+                    ]}
+                />
 
                 <Content />
 

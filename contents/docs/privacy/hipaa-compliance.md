@@ -45,7 +45,7 @@ Yes. If you're interested in a BAA for HIPAA compliance, please [contact us with
 
 > We strongly recommend teams which need HIPAA compliance use PostHog Cloud under a BAA, rather than the legacy self-hosted product or Hobby versions. 
 
-The best way to use PostHog in a way which is HIPAA compliant is with a BAA covering a PostHog Cloud instance. This ensures that PostHog remains scalable and that you have access to all premium features and security enhancements. BAAs are only available to users with a [Teams add on](/pricing).
+The best way to use PostHog in a way which is HIPAA compliant is with a BAA covering a PostHog Cloud instance. This ensures that PostHog remains scalable and that you have access to all premium features and security enhancements. BAAs are only available to users with a [Teams add-on for our standard BAA, or the Enterprise plan for a custom BAA](/pricing).
 
 However, it is possible to host PostHog yourself using our open-source hobby deployment. It is important to note that the hobby deployment is **only suitable for smaller event volumes** and provided without guarantee. It also lacks many of the advanced features available under PostHog Cloud. 
 

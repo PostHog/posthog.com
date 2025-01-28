@@ -128,7 +128,6 @@ const SessionRecording: React.FC<SessionRecordingProps> = ({ data }) => {
             <SEO title="Session replay - Docs - PostHog" />
 
             <PostLayout title={'Session replay'} hideSurvey hideSidebar>
-                
                 <Intro
                     subheader="Getting started"
                     title="Session replay"
@@ -140,13 +139,14 @@ const SessionRecording: React.FC<SessionRecordingProps> = ({ data }) => {
                     imageClasses=""
                 />
 
-                <AskMax 
+                <AskMax
                     quickQuestions={[
                         'How do I mask sensitive data?',
                         'Can I enable recordings only for certain users?',
                         'How can I control costs?',
-                    ]}/>
-                
+                    ]}
+                />
+
                 <Content />
 
                 <div className="">

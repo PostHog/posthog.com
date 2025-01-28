@@ -140,12 +140,17 @@ Go to the [Experiments tab](https://app.posthog.com/experiments) in PostHog and 
 
 1. Name it "iOS background color experiment".
 2. Set "Feature flag key" to `ios-background-color-experiment`.
-3. Under the experiment goal, select the `feature_button_clicked` we created in the previous step.
-4. Use the default values for all other fields.
+3. Use the default values for all other fields.
+4. Click **Save as draft**.
 
-Click "Save as draft" and then click "Launch".
+<ProductScreenshot
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_01_16_at_10_35_52_2x_ff399e9702.png" 
+  imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_01_16_at_10_35_37_2x_bdad6e3d2a.png" 
+  alt="Experiment setup in PostHog" 
+  classes="rounded"
+/>
 
-![Experiment setup in PostHog](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/ios-ab-tests/experiment-setup.png)
+Once created, set the primary metric to a trend of `feature_button_clicked` and then click **Launch**.
 
 ## Implement the A/B test in Xcode
 

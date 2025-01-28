@@ -5,7 +5,7 @@ author:
   - lior-neu-ner
 tags:
   - product analytics
-  - AI engineering
+  - LLM observability
 ---
 
 Evaluating LLM models is important for determining which is the best for your use case. In this tutorial, we explore three methods to assess models by comparing their LLM outputs. Namely:

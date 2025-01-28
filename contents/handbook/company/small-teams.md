@@ -129,7 +129,7 @@ There are two scenarios that will trigger a move:
 
 It is at the discretion of the _manager_ of that person if they can move.
 
-#### Aren't most our Small Teams way too small?
+#### Aren't most Small Teams way too small?
 
 In general, no - it's surprisingly great how much just 2-6 people can get done.
 
