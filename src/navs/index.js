@@ -2971,6 +2971,10 @@ export const docsMenu = {
                             url: '/docs/cdp/destinations/intercom',
                         },
                         {
+                            name: 'June',
+                            url: '/docs/cdp/destinations/june',
+                        },
+                        {
                             name: 'Knock',
                             url: '/docs/cdp/destinations/knock',
                         },
