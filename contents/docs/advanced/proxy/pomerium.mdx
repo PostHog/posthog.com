@@ -1,0 +1,106 @@
+---
+title: Using Pomerium as a reverse proxy
+sidebar: Docs
+showTitle: true
+---
+
+import RegionWarning from "../_snippets/region-warning.mdx"
+import ProxyWarning from "../_snippets/proxy-usage-warning.mdx"
+
+<ProxyWarning />
+
+<RegionWarning />
+
+[Pomerium](https://www.pomerium.com/) is an identity-aware proxy that can be used to securely proxy traffic to PostHog. This guide will show you how to configure Pomerium as a reverse proxy for PostHog.
+
+## Set up with Pomerium Zero
+
+The assumption is you've already set up [Pomerium Zero](https://www.pomerium.com/zero).
+
+### 1. Create an Optional Allow All Policy
+
+1. [Log in to Pomerium Zero](https://console.pomerium.app/).
+1. Click on Manage -> Policies in the side bar.
+1. Click the New Policy button to create a new policy.
+
+![new policy button](https://res.cloudinary.com/dmukukwp6/image/upload/new_policy_button_84e1a23f84.png)
+
+1. Name the policy `allow all` or something similar.
+1. Set the Policy Enforcement field to `Optional`.
+1. In the Overrides section, enable Public Access.
+1. Click the Save Policy button to save the policy.
+1. The `allow all` policy has been created.
+
+![Pomerium Zero create new policy form](https://res.cloudinary.com/dmukukwp6/image/upload/create_allow_all_policy_3b3c9cab82.png)
+
+### 2. Create the main PostHog Route
+
+1. Click on the New Route button to create a new route.
+1. Select Custom Route from the list of route types.
+
+![Pomerium Zero create routes button with options for guided routes and a custom route](https://res.cloudinary.com/dmukukwp6/image/upload/pomerium_create_route_button_a94eba8141.png)
+
+1. Name the Route PostHog
+1. Set the From field to, e.g. `https://e.some-name.pomerium.app`
+1. Set the To field to `https://us.i.posthog.com`.
+1. In the Policies drop down, select the `allow all` policy created so the analytics will run for everyone.
+1. Click the Save Route button to save the route.
+
+![Pomerium Zero create route form with settings for the main PostHog route](https://res.cloudinary.com/dmukukwp6/image/upload/create_posthog_route_32ab914a59.png)
+
+### 3. Create the PostHog Assets Route
+
+1. Click on the New Route button to create a new route.
+1. Select Custom Route from the list of route types.
+1. Name the Route PostHog Assets
+1. Set the From field to, e.g. `https://e.some-name.pomerium.app`
+1. Set the To field to `https://us-assets.i.posthog.com`.
+1. In the Policies drop down, select the `allow all` policy created so the analytics will run for everyone.
+1. Click on the Path Matching link in the edit route side bar.
+1. Set the Prefix field to `/static`.
+
+![Pomerium Zero create route form with settings for the PostHog assets route configuration for path matching set to /static](https://res.cloudinary.com/dmukukwp6/image/upload/pomerium_zero_route_path_matching_e390783210.png)
+
+1. Click the Save Route button to save the route
+
+![Pomerium Zero create route form with settings for the PostHog assets route configuration](https://res.cloudinary.com/dmukukwp6/image/upload/create_posthog_assets_route_97971ca8d0.png)
+
+Pomerium Zero is now configured to proxy PostHog.
+
+## Set up with Pomerium Core
+
+Assuming [Pomerium Core](https://www.pomerium.com/docs/deploy/core) is set up, open your [config.yaml](https://www.pomerium.com/docs/deploy/core#configuration) to configure Pomerium to proxy requests to PostHog by adding the following routes to your Pomerium config file:
+
+```yaml
+routes:
+  - from: https://e.some-name.pomerium.app
+    to: https://us.i.posthog.com
+    policy:
+      - allow:
+          or:
+            - public: true
+    name: "PostHog"
+
+  - from: https://e.some-name.pomerium.app
+    to: https://us-assets.i.posthog.com
+    prefix: "/static"
+    policy:
+      - allow:
+          or:
+            - public: true
+    name: "PostHog Assets"
+
+# rest of your configuration
+```
+
+## Use the Pomerium URL in your PostHog initialization
+
+Once everything is configured, set the the API host to e.g. `https://e.some-name.pomerium.app` in your PostHog initialization like this:
+
+```js
+posthog.init('<ph_project_api_key>',
+  {
+    api_host: 'https://e.some-name.pomerium.app',
+  }
+)
+```
