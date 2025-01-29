@@ -220,7 +220,7 @@ const comparison = [
             LogRocket: true,
             Matomo: false,
             FullStory: true,
-            PostHog: '<a href="https://github.com/PostHog/posthog/issues/12344">In beta</a>',
+            PostHog: true,
         },
     },
     {
@@ -230,7 +230,7 @@ const comparison = [
             LogRocket: true,
             Matomo: false,
             FullStory: true,
-            PostHog: '<a href="https://github.com/PostHog/posthog/issues/13267">In beta</a>',
+            PostHog: true,
         },
     },
     {
