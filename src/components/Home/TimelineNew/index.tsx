@@ -109,7 +109,7 @@ export default function TimelineNew() {
                 We ship <span className="text-red dark:text-yellow">weirdly</span> fast
             </h2>
             <p className={`text-lg mb-4`}>
-                We started with product analytics, but no we've shipped 10+ products in the last 5 years.
+                We started with product analytics, but we've shipped 10+ products since then.
             </p>
             {/* <div className="mt-10">
                 <Slider
