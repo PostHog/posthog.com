@@ -49,7 +49,7 @@ Once you’ve configured your Mailchimp destination, click **Start testing** to 
 
 ### Is the source code for this destination available?
 
-PostHog is open-source and so are all the destination on the platform. The [source code](https://github.com/PostHog/posthog/blob/master/posthog/cdp/templates/webhook/template_mailchimp.py) is available on GitHub.
+PostHog is open-source and so are all the destination on the platform. The [source code](https://github.com/PostHog/posthog/blob/master/posthog/cdp/templates/mailchimp/template_mailchimp.py) is available on GitHub.
 
 <PostHogMaintained />
 

@@ -21,7 +21,7 @@ export default function Mermaid({ children }: { children: string }): JSX.Element
             {loading && (
                 <div className="bg-accent dark:bg-accent-dark flex items-center justify-center size-full rounded-md animate-pulse absolute inset-0" />
             )}
-            <div ref={mermaidRef} className={loading ? 'invisible' : ''}>
+            <div ref={mermaidRef} className={`${loading ? 'invisible' : ''} mermaid`}>
                 {children}
             </div>
         </div>

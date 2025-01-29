@@ -1503,6 +1503,10 @@ export const docsMenu = {
                             url: '/docs/advanced/proxy/nuxt',
                         },
                         {
+                            name: 'Pomerium',
+                            url: '/docs/advanced/proxy/pomerium',
+                        },
+                        {
                             name: 'Remix',
                             url: '/docs/advanced/proxy/remix',
                         },
@@ -2985,6 +2989,10 @@ export const docsMenu = {
                         {
                             name: 'Intercom',
                             url: '/docs/cdp/destinations/intercom',
+                        },
+                        {
+                            name: 'June',
+                            url: '/docs/cdp/destinations/june',
                         },
                         {
                             name: 'Klaviyo',
