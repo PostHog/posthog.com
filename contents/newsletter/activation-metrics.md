@@ -82,10 +82,10 @@ With our potential activation event groups, we write a query to test how they co
 
 We then compare the retention against our product's average retention rate for all companies. We look for a retention percentage that's nominally higher than our average retention rate. 
 
-The above example has a retention rate of 66% for activated companies. This means:
+Because we retained two of the three activated companies in the above example, we have a retention rate of 66% for activated companies. This means:
 
-- If our average retention was 50%, this would be a good activation metric 🥳.
-- If our average retention was 75%, this would be a bad activation metric 😭.
+- If our average retention was 50%, this would be a good activation metric 🥳
+- If our average retention was 75%, this would be a bad activation metric 😭
 
 We repeat to ensure there is a large enough sample of activated companies in the retention calculation and that one potential activation event group is dramatically better than the others.
 
