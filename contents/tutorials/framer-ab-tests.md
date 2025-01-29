@@ -112,12 +112,12 @@ Click "Save" and then publish your site.
 
 That's it! Your A/B test is now live. Half your users will see the updated button text and PostHog will track whether it has an impact on your clickthrough rate. You can [view your test results](/docs/experiments/testing-and-launching#viewing-experiment-results) on the experiment page.
 
-If you want to view both variants of your experiment to make sure they are working correctly, add the line `posthog.featureFlags.override({'home-button-test': 'test'})` to your code:
+If you want to view both variants of your experiment to make sure they are working correctly, add the line `posthog.featureFlags.overrideFeatureFlags({ flags: {'home-button-test': 'test'}})` to your code:
 
 ```js
 <script>
   posthog.onFeatureFlags(() => {
-   posthog.featureFlags.override({'home-button-test': 'test'}) // or 'control' 
+   posthog.featureFlags.overrideFeatureFlags({ flags: {'home-button-test': 'test'}}) // or 'control' 
 
    const button = document.getElementById('capture-button')
    if (button) {

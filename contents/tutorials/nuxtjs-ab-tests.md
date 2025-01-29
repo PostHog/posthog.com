@@ -194,7 +194,7 @@ import posthog from 'posthog-js'
 export default defineNuxtPlugin(nuxtApp => {
   // ... your existing code
   
-  posthogClient.featureFlags.override({'nuxt-button-text-experiment': 'test'});
+  posthogClient.featureFlags.overrideFeatureFlags({ flags: {'nuxt-button-text-experiment': 'test'}});
   return {
     provide: {
       posthog: () => posthogClient
