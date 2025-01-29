@@ -12,7 +12,7 @@ const sourceNodes = async (options, pluginOptions) => {
     const { mapboxToken } = pluginOptions
 
     if (!mapboxToken) {
-        reporter.panic('You must provide a Mapbox access token')
+        reporter.warn('No Mapbox access token provided')
         return
     }
 
@@ -97,4 +97,21 @@ const sourceNodes = async (options, pluginOptions) => {
     })
 }
 
-module.exports = { sourceNodes }
+const createSchemaCustomization = ({ actions }) => {
+    const { createTypes } = actions
+    const typeDefs = `
+        type MapboxLocation implements Node {
+            profileId: String!
+            location: String!
+            coordinates: MapboxCoordinates!
+        }
+
+        type MapboxCoordinates {
+            latitude: Float!
+            longitude: Float!
+        }
+    `
+    createTypes(typeDefs)
+}
+
+module.exports = { sourceNodes, createSchemaCustomization }
