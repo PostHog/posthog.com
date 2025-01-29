@@ -102,7 +102,7 @@ You can display your survey to specific users based on:
 
 - **URL targeting:** Show when URL either contains a string, exactly matches a string, matches a regex. The URL targeting is evaluated against `window.location.href`.
 
-- **Device types targeting:** Show when device type either contains a string, exactly matches a string, matches a regex. The device type targeting is evaluated by parsing the [userAgent](https://developer.mozilla.org/en-US/docs/Web/API/Navigator/userAgent) on the client-side, possible values are: Desktop, Mobile, Tablet, Console and Wearable. You can also target device types using *Person and group properties* (Latest or Initial Device type: `$device_type`), but these properties aren't immediately available on first page load for unidentified persons.
+- **Device types targeting:** Show when the device type either contains a string, exactly matches a string or matches a regex. The device type targeting is evaluated by parsing the [userAgent](https://developer.mozilla.org/en-US/docs/Web/API/Navigator/userAgent) on the client-side, possible values are: Desktop, Mobile, Tablet, Console, and Wearable. You can also target device types using *Person and group properties* (Latest or Initial Device type), but these properties aren't immediately available on the first page load for unidentified persons.
 
 - **Selector matches:** Whether a specific element exists or appears on the page with the specified class name or ID. For example, you can display a survey with `#my-button` or `.my-button` selector. This is useful for showing a survey after a user action.
 
