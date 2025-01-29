@@ -2,7 +2,7 @@ import { TeamMember, teamQuery } from 'components/People'
 import { useStaticQuery } from 'gatsby'
 import React from 'react'
 
-export default function TeamMembers({ teamName }) {
+export default function TeamMembers({ teamName, setActiveProfile }) {
     const { team } = useStaticQuery(teamQuery)
 
     const teamMembers = team.teamMembers.filter((teamMember) =>
@@ -22,7 +22,7 @@ export default function TeamMembers({ teamName }) {
             )}
             <ul className="list-none m-0 p-0 grid md:grid-cols-2 lg:grid-cols-3 gap-4 mt-20">
                 {teamMembers.map((teamMember, index) => {
-                    return <TeamMember key={index} {...teamMember} />
+                    return <TeamMember key={index} {...teamMember} setActiveProfile={setActiveProfile} />
                 })}
             </ul>
         </>

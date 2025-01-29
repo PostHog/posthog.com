@@ -105,9 +105,6 @@ module.exports = {
                 gatsbyRemarkPlugins: [
                     { resolve: 'gatsby-remark-autolink-headers', options: { icon: false } },
                     {
-                        resolve: require.resolve(`./plugins/gatsby-remark-mermaid`),
-                    },
-                    {
                         resolve: require.resolve('./plugins/gatsby-remark-video'),
                     },
                 ],

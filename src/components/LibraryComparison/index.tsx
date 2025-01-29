@@ -20,6 +20,9 @@ type LibraryFeatures = {
     groupAnalytics: boolean
     sessionRecording?: boolean
     userIdentification: boolean
+    surveys?: boolean
+    llmObservability?: boolean
+    errorTracking?: boolean
 }
 
 export const LibraryComparison = () => {

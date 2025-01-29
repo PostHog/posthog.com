@@ -1,0 +1,11 @@
+### Setting up JavaScript Web exception autocapture
+
+> **Note:** A minimum SDK version of v1.207.8 is required, but we recommend keeping up to date with the latest version to ensure you have all of error tracking's features.
+
+You can enable exception autocapture for the JavaScript Web SDK in the **Autocapture & heatmaps** section of [your project settings](https://us.posthog.com/settings/project-autocapture#exception-autocapture). When enabled, this automatically captures `$exception` events when errors are thrown.
+
+It is also possible to manually capture exceptions using the `captureException` method:
+
+```js
+posthog.captureException(error, additionalProperties)
+```

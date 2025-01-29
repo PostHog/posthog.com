@@ -1,0 +1,72 @@
+---
+title: Experiment metrics
+sidebar: Docs
+showTitle: true
+---
+
+Once you've created your experiment, you can assign metrics to let you evaluate your experiment's impact and determine if the observed results are [statistically significant](/docs/experiments/significance).
+
+## Metric types
+
+There are two types of experiment metrics:
+
+1. **Funnels:** Evaluates using funnel conversions. Read more about how we calculate these in our [funnel statistic](/docs/experiments/funnels-statistics) or [funnel insights](/docs/product-analytics/funnels) docs.
+
+2. **Trends:** Evaluates using aggregate metrics such as total count, average count per user, unique sessions, property values, and more. Trends also let you set the exposure event if you want it to be something other than `$feature_flag_called`. Read more about how we calculate these in our [trend count](/docs/experiments/trends-count-statistics) or [trend continuous](/docs/experiments/trends-continuous-statistics) statistic or [trend insights](/docs/product-analytics/trends/overview) docs.
+
+## Primary and secondary metrics
+
+Each metric can be set as either a **primary** or **secondary** metric. You can set up to 10 primary and secondary metrics per experiment.
+
+**Primary metrics** represent the main goal of your experiment. They directly measure if your hypothesis was successful and are the key factor in deciding if the test achieved its primary objective.
+
+<ProductScreenshot
+    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_01_14_at_10_17_53_2x_928092c2ee.png"
+    imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_01_14_at_10_17_22_2x_e0b179b143.png"
+    alt="Primary metrics in PostHog experiments"
+    classes="rounded"
+/>
+
+**Secondary metrics** provide more context for your experiment. They can help you understand the impact of your primary metric and ensure your experiment didn't have negative side effects.
+
+Once added and data starts being collected, we show the results as a credible interval bar chart along with details about significance, win probability, and delta between variants.
+
+### How to read credible interval bar charts
+
+Each bar shows how a variant is performing compared to the control (the gray bar) for the metric, using a 95% credible interval. That means there's a 95% chance the true difference for that variant falls within this range. The vertical "0%" line is your baseline:
+
+- To the right (green): The metric is higher (an improvement).
+- To the left (red): The metric is lower (a decrease).
+
+<ProductScreenshot
+    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_01_14_at_11_19_24_2x_3cadbb532c.png"
+    imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_01_14_at_11_19_43_2x_730755c2c5.png"
+    alt="Credible interval bar chart"
+    classes="rounded"
+/>
+
+The width of the bar represents uncertainty. A narrower bar means we're more confident in that result, while a wider bar means it could shift either way.
+
+The control (baseline) is always shown in gray. Other bars will be green or red—or even a mix—depending on whether the change is positive or negative.
+
+## Shared metrics
+
+Create a shared metric to easily reuse a funnel or a trend metric across experiments. This is ideal for key company metrics like conversion, revenue, churn, and more.
+
+To create one, go to the [shared metrics tab](https://us.posthog.com/experiments/shared-metrics) and click **New shared metric**. From here, they are created the same way as single-use metrics.
+
+<ProductScreenshot
+    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_01_14_at_11_02_56_2x_1a7cf4bd0e.png"
+    imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_01_14_at_11_03_11_2x_0e3853ba73.png"
+    alt="Shared metrics"
+    classes="rounded"
+/>
+
+Once created, choose **Shared** as a metric source when adding a primary or secondary metric to an experiment and then select the shared metric(s) you want to use.
+
+<ProductScreenshot
+    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_01_14_at_11_07_27_2x_9d55300e49.png"
+    imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_01_14_at_11_07_12_2x_9043573390.png"
+    alt="Shared metrics"
+    classes="rounded"
+/>

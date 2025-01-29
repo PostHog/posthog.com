@@ -174,6 +174,33 @@ export default defineNuxtPlugin(nuxtApp => {
 
 Make sure to set `capture_pageview` in the PostHog initialization config to `false`. This turns off autocaptured pageviews and ensures you won’t double-capture pageviews on the first load.
 
+```js file=src/index.js
+// your existing imports
+
+posthog.init("<ph_project_api_key>", {
+  api_host: "<ph_client_api_host>",
+  capture_pageview: false
+})
+
+// rest of your code
+```
+
+### Capturing pageleaves (optional)
+
+Note that once you disable automatic `$pageview` captures when calling `posthog.init` you'll be disabling automatic `$pageleave` capture as well. If you want to continue capturing `$pageleave`s automatically, you can re-enable it.
+
+```js file=src/index.js
+// your existing imports
+
+posthog.init("<ph_project_api_key>", {
+  api_host: "<ph_client_api_host>",
+  capture_pageview: false,
+  capture_pageleave: true, // Opt back in because disabling $pageview capture disables $pageleave events
+})
+
+// rest of your code
+```
+
 ### Capturing custom events
 
 Beyond pageviews, there might be more events you want to capture. You can do this by capturing custom events with PostHog. 

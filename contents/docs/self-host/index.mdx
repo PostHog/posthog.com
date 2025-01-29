@@ -8,16 +8,25 @@ showTitle: true
 import Disclaimer from './\_snippets/disclaimer.mdx'
 import Sunset from '../self-host/\_snippets/sunset-disclaimer.mdx'
 
-> **This page covers our free, open-source Docker compose deployment**, which is available under a MIT license [without guarantee](/docs/self-host/open-source/disclaimer). We continue to develop this version, but some premium features are only available on PostHog Cloud. We do not provide support for this "Hobby" version. 
->
-> We [no longer support paid, open-source deployments](/blog/sunsetting-helm-support-posthog) and it is **no longer possible to buy licenses for self-hosted versions** - we instead recommend [migrating to PostHog Cloud](/docs/migrate/migrate-to-cloud). 
+PostHog is open-source and freely available for anyone to host themselves. We offer a free Docker Compose deployment under an MIT license. Essentially, self-hosting PostHog means you run or purchase your own infrastructure, manage deployments, choose your own URLs to expose it on, and deal with any scaling issues yourself.
 
-Our MIT-licensed Docker compose deployment is best suited to internal tools, or evaluating features without vendor approval. It's also great for hobby projects which don't need advanced tools. For all other use cases, we recommend you use [PostHog Cloud](https://app.posthog.com/signup), which comes with a generous free tier.
+The self-hosted version is the same exact product we run on PostHog Cloud, though our infrastructure is very, very different to support serious volume. We don't do tagged releases for self-hosted PostHog. All commits go through our standard CI/CD pipeline before they are merged into our cloud deployments and also become available for self-hosted instances.
+
+Because we don't manage self-hosted instances or provide paid support plans for them, [we don't offer any sort of guarantees](/docs/self-host/open-source/disclaimer) around it working in certain ways on your infrastructure, and you assume all responsibility and risk for your use of the product and the stack.
+
+## Should I use self-hosted PostHog or PostHog Cloud?
+
+Good question! We've found that PostHog Cloud is far and away the best experience for the vast majority of our users. However, some people still want to self-host, and we're here for that! Here's a quick flow chart to help you understand if self-hosting PostHog is for you:
+
+![flowchart for deciding if to self-host posthog](https://res.cloudinary.com/dmukukwp6/image/upload/flowchart_ae48a9fc3a.png)
+
+You can follow the rest of the guide for instructions on how to set up self-hosted PostHog. If you want to use Cloud instead, you can sign up for our
+ [US](https://us.posthog.com/signup) or [EU](https://eu.posthog.com/signup) cloud instance.
 
 ## Requirements
 
 -   You have deployed a Linux Ubuntu Virtual Machine.
-    -   We highly recommend an instance with at least 8GB of RAM to handle any surges in event volume
+    -   You will need something equivalent to a Hetzner VM with 4 vCPU, 16GB RAM, and more than 30GB storage.
 -   You have set up an `A` record to connect a custom domain to your instance.
     -   PostHog will automatically create an SSL certificate for your domain using LetsEncrypt
 

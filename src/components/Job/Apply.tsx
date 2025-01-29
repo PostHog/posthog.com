@@ -328,7 +328,7 @@ export default function Apply({ id, info }) {
                             </div>
                             <CallToAction
                                 externalNoIcon
-                                to="https://merch.posthog.com/discount/X7DABDB33723?redirect=%2Fproducts%2Fposthog-sticker"
+                                to="/merch?product=posthog-sticker"
                                 size="sm"
                                 className="!w-full"
                             >
@@ -337,7 +337,7 @@ export default function Apply({ id, info }) {
                             </CallToAction>
                         </div>
 
-                        <div className="mx-6 md:mx-12 py-6 ">
+                        <div className="mx-6 md:mx-12 py-2 ">
                             <h4 className="mb-0">Be our next star?</h4>
                             <aside className="float-right h-[28px] w-[125px] ml-8">
                                 <GitHubButton href="https://github.com/PostHog/posthog" />
@@ -347,13 +347,27 @@ export default function Apply({ id, info }) {
                             </p>
                         </div>
 
-                        <div className="mx-6 md:mx-12 py-6 ">
-                            <h4 className="mb-0">Join our mailing list</h4>
-                            <p className="text-sm mb-0">The best of PostHog. Delivered twice a month.</p>
+                        <div className="mx-6 md:mx-12 pt-6 pb-2 border-t border-light dark:border-dark">
+                            <h4 className="mb-0">More cool tech jobs</h4>
+                            <p className="text-sm mb-4">
+                                While you're waiting to hear back, you might also be interested in exploring our{' '}
+                                <Link href="/cool-tech-jobs" className="text-red dark:text-yellow font-semibold">
+                                    cool tech job board
+                                </Link>{' '}
+                                – it's where we highlight other companies with similar vibes to PostHog.
+                            </p>
+
+                            <CallToAction externalNoIcon to="/cool-tech-jobs" size="sm" className="">
+                                <span>Browse cool tech jobs</span>
+                                <IconExternal className="w-5 h-5 inline-block ml-1" />
+                            </CallToAction>
+                        </div>
+
+                        <div className="mx-6 md:mx-12 py-2 ">
                             <NewsletterForm className="!py-0 !pt-6" />
                         </div>
 
-                        <div className="mx-6 md:mx-12 py-6 ">
+                        <div className="mx-6 md:mx-12 py-2 ">
                             <h4 className="mb-0">Install PostHog on a side project</h4>
                             <p className="text-[15px] mb-3">
                                 Feel free to give PostHog a whirl - we’d love to hear your feedback!

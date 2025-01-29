@@ -25,7 +25,7 @@ Check the **feature flags tab** on [the persons page](https://app.posthog.com/pe
     classes="rounded"
 />
 
-- If the flag is shown as disabled here, check the "match evaluation" column to know the understand why.
+- If the flag is shown as disabled here, check the "match evaluation" column to understand why.
 - If the flag is shown as enabled here, there may be a problem in your code. Double-check the steps to [add feature flag code](/docs/feature-flags/adding-feature-flag-code).
 - Ensure you are capturing identified events.
 
@@ -57,7 +57,7 @@ import FAQFalseOrNoneEvents from "./snippets/faq-false-or-none-events.mdx"
 
 ## How can I reduce the latency of feature flag requests on my server?
 
-Evaluating feature flags requires making a request to PostHog. However, you can [evaluate feature flags locally](/docs/feature-flags/bootstrapping-and-local-evaluation#server-side-local-evaluation) instead – without having to make a request to PostHog.
+Evaluating feature flags requires making a request to PostHog. However, you can [evaluate feature flags locally](/docs/feature-flags/local-evaluation) instead – without having to make a request to PostHog.
 
 We are also experimenting with with client-side feature flag assignments. Check out our [fast feature flag minisite](https://posthog-fast-feature-flags.vercel.app/) to learn more.
 

@@ -1,5 +1,5 @@
 import CloudinaryImage from 'components/CloudinaryImage'
-import React from 'react'
+import React, { useState } from 'react'
 import Link from 'components/Link'
 import { StaticImage } from 'gatsby-plugin-image'
 import {
@@ -45,6 +45,8 @@ import MobileSlides from 'components/Products/MobileSlides'
 import { SEO } from 'components/seo'
 import { useLayoutData } from 'components/Layout/hooks'
 import Plans from 'components/Pricing/Plans'
+import SideModal from '../../Modal/SideModal'
+import Profile from '../../Team/Profile'
 
 const product = {
     slug: 'product-analytics',
@@ -86,7 +88,7 @@ const subfeatures = [
     },
     {
         icon: <IconAI />,
-        title: 'AI engineering',
+        title: 'LLM observability',
         description: 'Integrate with existing monitoring tools and track latency, cost, and model performance',
     },
 ]
@@ -761,6 +763,7 @@ export const ProductProductAnalytics = () => {
         }
     `)
     const { fullWidthContent } = useLayoutData()
+    const [activeProfile, setActiveProfile] = useState(false)
     return (
         <>
             <SEO
@@ -768,6 +771,9 @@ export const ProductProductAnalytics = () => {
                 description="PostHog is the only product analytics platform built to natively work with Session Replay, Feature Flags, Experiments, and Surveys."
                 image={`/images/og/product-analytics.jpg`}
             />
+            <SideModal open={!!activeProfile} setOpen={setActiveProfile}>
+                {activeProfile && <Profile profile={{ ...activeProfile }} />}
+            </SideModal>
             <div className={`${fullWidthContent ? 'max-w-full px-8' : 'max-w-7xl mx-auto'} px-5 py-10 md:pt-20 pb-0`}>
                 <Hero
                     color="blue"
@@ -996,7 +1002,7 @@ export const ProductProductAnalytics = () => {
                         PostHog works in small teams. The <Link to={teamSlug}>{team}</Link> team is responsible for
                         building {product.lowercase}.
                     </p>
-                    <TeamMembers teamName={team} />
+                    <TeamMembers teamName={team} setActiveProfile={setActiveProfile} />
                 </section>
 
                 <section id="roadmap" className="mb-20 px-5">

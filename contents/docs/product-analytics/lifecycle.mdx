@@ -36,7 +36,7 @@ This insight give you a place to start investigating issues like increased churn
 
 ### Configuration
 
-Lifecycle calculates whether a user was active in your selected time interval or not, and by whether they were also active in the previous interval.
+Lifecycle determines whether a user was active during your selected time interval and whether they were also active in the previous interval. Users who first appear as 'new' might have had prior anonymous events, but their lifecycle starts only when they are identified. Anonymous events are excluded from this calculation.
 
 #### Events
 
