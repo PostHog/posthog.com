@@ -129,7 +129,7 @@ We use [PandaDoc](https://app.pandadoc.com/a/#/) to handle document generation, 
 
    > PostHog Cloud License Terms executed by and between PostHog, Inc. and CUSTOMER LEGAL NAME (the “Agreement”)
 
-8. You should link the order form to the HubSpot deal using the sidebar on the right so that we have a reference to the completed paperwork from our CRM.
+8. You should link the order form to the opportunity record in Salesforce using the `Contract Link` field in the "Opportunity Closure Details" so that we have a reference to the completed paperwork from our CRM.
 
 ### Routing an Order Form for review and signature
 
@@ -183,9 +183,9 @@ We offer HIPAA Compliance on PostHog Cloud and as such health companies will req
 2. Create a new document from the [PandaDoc Template](https://app.pandadoc.com/a/#/templates/4psCXzU527sNE6WEbFBg3a).
 3. All you need to do it set the `Client.Company` variable and then send it to them for review and signature.
 4. Once the client has signed it then it will get routed to Fraser for countersignature.
-5. You'll get a notification when everybody has signed it - _don't forget to update the *BAA Signed Date* property on the HubSpot company record,_ so we can keep track of who we have signed a BAA with.
+5. You'll get a notification when everybody has signed it - _don't forget to update the *HIPAA BAA Signed Date* property on the customer's Salesforce Accountrecord,_ so we can keep track of who we have signed a BAA with.
 
-> We only provide our default BAA for Teams plan subscribers - customization requires >$20k annual spend. The BAA only remains active for as long as the customer is subscribed to Teams - if they unsubscribe, we send them a message that their BAA will become inactive at the end of the month in which they cancelled. If the lead is not sure whether they will need a custom BAA and their usage wouldn't put them at $20K, then it is worth pushing them to get legal feedback by sending them our BAA before moving forward, else you risk spending a lot of time on an evaluation that ends up at $450/month.
+> We only provide our default BAA for Teams plan subscribers - customization requires >$20k annual spend. The BAA only remains active for as long as the customer is subscribed to Teams - if they unsubscribe, we send them a message that their BAA will become inactive at the end of the month in which they cancelled. A customer who is on a Teams trial (with a credit card in PostHog) is eligible to sign a default BAA, but you should make it clear to them that the default BAA will be voided if/when the Teams subscription lapses. If the lead is not sure whether they will need a custom BAA and their usage wouldn't put them at $20K, then it is worth pushing them to get legal feedback by sending them our BAA before moving forward, else you risk spending a lot of time on an evaluation that ends up at $450/month.
 
 ## Non-PostHog contracts
 
