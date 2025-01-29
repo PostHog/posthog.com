@@ -59,12 +59,10 @@ const DropdownContainer = forwardRef(function DropdownContainer(props, ref) {
 
 export const MenuContainer = ({
     children,
-    setOpen,
     className = '',
     onClose,
 }: {
     children: React.ReactNode
-    setOpen: (open: null | string) => void
     className?: string
     onClose: () => void
 }) => {
@@ -77,7 +75,6 @@ export const MenuContainer = ({
 
     const handleClose = () => {
         onClose?.()
-        setOpen(null)
     }
 
     const handleDragEnd = () => {
@@ -215,7 +212,7 @@ export default function MobileNav({ className = '', menu: postMenu }) {
             </button>
             <AnimatePresence>
                 {open === 'menu' && (
-                    <Container ref={menuRef} setOpen={setOpen}>
+                    <Container ref={menuRef} onClose={() => setOpen(null)}>
                         <ul key={menu?.parent?.name} className="list-none m-0 p-0">
                             {menu?.parent?.menu && (
                                 <li className="pb-1 mb-2 flex flex-start items-center relative">

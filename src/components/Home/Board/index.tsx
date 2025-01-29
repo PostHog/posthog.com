@@ -64,6 +64,7 @@ import { useStaticQuery } from 'gatsby'
 import { AnimatePresence, motion } from 'framer-motion'
 import Slider from 'components/Slider'
 import { PlayerEvents, DotLottiePlayer } from '@dotlottie/react-player'
+import { MenuContainer } from 'components/PostLayout/MobileNav'
 
 type Product = {
     name: string
@@ -713,7 +714,7 @@ const ProductButton = ({
                             <button
                                 className={`flex items-start gap-1 text-sm font-medium click rounded-md px-3 py-1.5 transition-all w-full 
                         border border-b-3 border-transparent hover:border-light dark:hover:border-dark hover:translate-y-[-1px] active:translate-y-[1px] active:transition-all
-                        ${active ? '!border-light dark:!border-dark bg-accent dark:bg-accent-dark' : ''}
+                        ${active ? 'md:!border-light md:dark:!border-dark md:!bg-accent md:dark:!bg-accent-dark' : ''}
                         ${isInActiveStatus ? '' : 'opacity-30'} ${status === 'Roadmap' ? 'italic' : ''}`}
                                 onClick={() => {
                                     setActiveProduct(product)
@@ -894,14 +895,15 @@ export default function Hero(): JSX.Element {
                         </div>
                     )}
                 </div>
-                {activeProduct && (
-                    <ProductModal productModalOpen={productModalOpen} setProductModalOpen={setProductModalOpen}>
+
+                {productModalOpen && (
+                    <MenuContainer onClose={() => setProductModalOpen(false)} className="mb-[75.75px]">
                         {activeProduct.roadmapID ? (
                             <RoadmapProductDetails product={activeProduct} onNext={handleNext} onPrev={handlePrev} />
                         ) : (
                             <ProductDetails onNext={handleNext} onPrev={handlePrev} product={activeProduct} />
                         )}
-                    </ProductModal>
+                    </MenuContainer>
                 )}
             </div>
         </section>
