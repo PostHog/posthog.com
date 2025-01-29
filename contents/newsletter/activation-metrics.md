@@ -1,5 +1,5 @@
 ---
-title: A crash course on activation metrics
+title: The first metric product engineers should care about
 date: 2025-01-21
 author:
  - ian-vanagas
@@ -14,11 +14,27 @@ crosspost:
   - Blog
 ---
 
-In your journey to become a world-class product engineer, there is one metric that stands out in its relevance to both product and business decisions: **activation**.
+In your journey to become a world-class product engineer, there is one metric that stands out in its early relevance to both product and business decisions: **activation**.
 
-Don't know exactly what that means, why you should care, or how to define it for your product? This post has got you covered.
+Let me explain why.
+
+## The mysterious definition of activation
+
+Your journey to understand activation starts with a definition, but when you look around you'll find a bunch of different advice. Some say it's your "aha" moment, others, when you show your product's value, and others, when you make your users happy, but none of these are definitive.
+
+So why isn't there a simple, shared definition?
+
+1. **Activation is unique to your product.** There's no standard way to define activation (this is also why benchmarks suck).[^1]
+
+2. **It could be many things.** There are likely many things you want users to do in your product: complete onboarding, upload a file, share a link, watch a video. Activation could mean doing any of these (or a combination of them).
+
+3. **Activating may mean doing something multiple times.** Adding to the complexity is that someone might need to do something multiple times in order to get it. For example, to activate into our session replay product means analyzing not one but five replays. 
+
+![Replay](https://res.cloudinary.com/dmukukwp6/image/upload/replay_bc46055955.png)
 
 ## Why you should care about activation metrics
+
+If activation is so hard to define, why should you care about it, especially as a product engineer with many other metrics to care about?
 
 ### 1. It's a clear starting point
 
@@ -41,18 +57,6 @@ That leaves activation and retention as the responsibilities of product engineer
 In a way, activation is the base rate for the rest of your product. All of your metrics are downstream of your activation rate. Only activated users actually use your product. Having as many of them as possible is important.
 
 On top of this, having a clear activation rate makes it easier to have a clear picture of other metrics down the funnel. For example, a poor referral rate could just be a product of not enough users being activated and getting there. A larger sample size (more activated users) lets you do a proper analysis of the down funnel metrics.
-
-## What makes activation tricky?
-
-If you look around for how to define your activation metric, you'll find a bunch of different advice. Common ones include it being your "aha" moment or when you make your users happy. Why isn't there a simple, shared definition?
-
-1. **It's unique to your product.** There's no standard way to define activation (this is also why benchmarks suck).[^1]
-
-2. **It could be many things.** There are likely many things you want users to do in your product: complete onboarding, upload a file, share a link, watch a video. Activation could mean doing any of these (or a combination of them).
-
-3. **Activating may mean doing something multiple times.** Adding to the complexity is that someone might need to do something multiple times in order to get it. For example, to activate into our session replay product means analyzing not one but five replays. 
-
-![Replay](https://res.cloudinary.com/dmukukwp6/image/upload/replay_898e279f51.png)
 
 ## How we find activation metrics at PostHog
 
@@ -91,7 +95,7 @@ We repeat to ensure there is a large enough sample of activated companies in the
 
 ![Dog chasing activation metrics](https://res.cloudinary.com/dmukukwp6/image/upload/dog_5bc8932441.png)
 
-### Track it accurately
+### 1. Track it accurately
 
 Because the events for your activation metric now stand out, it's worth investing time to make sure they are tracked accurately. This means:
 
@@ -101,7 +105,7 @@ Because the events for your activation metric now stand out, it's worth investin
 
 3. **Capturing it on the server.** Client-side events can be ad blocked. Capturing your activation events on the server ensures you get them all.
 
-### Review it
+### 2. Review it
 
 Once we have an activation metric, it becomes part of our recurring growth reviews. 
 
@@ -111,7 +115,7 @@ Once we have an activation metric, it becomes part of our recurring growth revie
 
 The outcome of our growth reviews is a list of action items to do and then review in the next meeting.
 
-### See how it correlates with other areas
+### 3. See how it correlates with other areas
 
 As activation is one part of the funnel, you can use it to evaluate and improve other parts of the funnel. For example, in the up-funnel
 
@@ -129,17 +133,17 @@ A special, related one for us (and other multi-product companies) is **cross-sel
 
 Because of the importance of cross-sell, we look at how the activation of one product impacts another, figure out the "right" products for a user's lifecycle, and look for opportunities to promote "cross-activation." This is a big area of focus for our growth team upcoming.
 
-### Just improve it
+### 4. Just improve it
 
 ![Improve](https://res.cloudinary.com/dmukukwp6/image/upload/improve_15c3b39891.png)
 
 Finally, there's only so much analyzing your activation rate you can do. Eventually, you try to improve it by helping users activate faster or providing them more motivation to activate. This is done by:
 
-- Create email campaigns focused on your activation events
-- Track signup to activation conversion with [funnels](/docs/product-analytics/funnels)
-- Run [experiments](/docs/experiments) with your activation events as a goal metric
-- Launch [surveys](/docs/surveys) asking people why they don't activate
-- Connect activation to sales or revenue data with our [data warehouse](/docs/data-warehouse)
+- Creating email campaigns focused on your activation events
+- Tracking signup to activation conversion with [funnels](/docs/product-analytics/funnels)
+- Running [experiments](/docs/experiments) with your activation events as a goal metric
+- Launching [surveys](/docs/surveys) asking people why they don't activate
+- Connecting activation to sales or revenue data with our [data warehouse](/docs/data-warehouse)
 
 When I asked [Paul Copplestone](https://x.com/kiwicopple), CEO of [Supabase](https://supabase.com/), how they tried to improve their activation metric of "weekly active databases," he said:
 
@@ -149,8 +153,10 @@ In our case, because  `replay list filter added` is part of our activation metri
 
 ![What to watch](https://res.cloudinary.com/dmukukwp6/image/upload/whatwatch_52436ea8ae.png)
 
+If you're stuck, Lenny's post on activation metrics includes [119 different ways](https://www.lennysnewsletter.com/i/77646597/what-are-the-most-common-ways-to-increase-activation) to try to increase activation.
+
 <NewsletterForm />
 
-[^1]: **What about my benchmarks bro?** Lenny put together some nice benchmarks for activation but the ranges are extremely wide. Because the definition of "activation" varies between businesses, there's no real way to compare. When you are battling to increase your activation rates by single digit percentage points, having a range of 20%+ between ok and good isn't helpful.
+[^1]: **What about my benchmarks bro?** Lenny's activation post also has some [nice benchmarks for activation](https://www.lennysnewsletter.com/p/what-is-a-good-activation-rate) but the ranges are extremely wide. Because the definition of "activation" varies between businesses, there's no real way to compare. When you are battling to increase your activation rates by single digit percentage points, having a range of 20%+ between "ok" and "good" isn't helpful.
 
 
