@@ -32,7 +32,6 @@ We are all-remote, but we have a few limitations on the countries we are able to
 
 ## Hiring Process         
 
-</OverflowXSection>
 
 ### External recruiters
 
