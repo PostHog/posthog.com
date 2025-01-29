@@ -1,0 +1,28 @@
+---
+title: Stack traces
+---
+
+import BetaFeedbackBanner from './_snippets/beta-feedback-banner.mdx'
+
+<BetaFeedbackBanner />
+
+Error tracking provides you with the ability to view the stack trace and code context associated with an exception. This can help understand, identify and resolve the root cause of an issue.
+
+For languages like Python the stack trace and code context can be gathered clientside and requires no additional processing.
+
+<ProductScreenshot
+    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/Screenshot_2025_01_29_at_14_47_35_aebd47a5ab.png"
+    imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/Screenshot_2025_01_29_at_14_47_52_5b3706c0eb.png"
+    alt="Stack traces example"
+    classes="rounded"
+/>
+
+### Symbol sets
+
+Compiled or minified languages requires additional information to perform a process called symbolification to produce the same stack trace and code context output shown above. The additional information is known as a symbol set.
+
+For example, in the case of minified Javascript a source map is needed as a symbol set. We currently rely on souce maps being publicly available as we do not (yet) support uploading symbol sets during the build phase of your application.
+
+The `source` of a frame in the exception stack trace should point to the minified code of your application which should contain the `sourceMappingUrl` parameter denoting the location of the source map. Both of these files must be publicly accessible for PostHog to fetch and symbolify the stack trace.
+
+You can see the symbol sets fetched by PostHog and the associated frames within the [error tracking settings](https://us.posthog.com/settings/project-error-tracking#error-tracking-symbol-sets). Any missing symbol sets will also be present along with the failure reason. From here you can also manually upload missing symbol sets or replace existing ones.

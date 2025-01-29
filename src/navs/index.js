@@ -3303,6 +3303,12 @@ export const docsMenu = {
                     color: 'orange',
                 },
                 {
+                    name: 'Stack traces',
+                    url: '/docs/error-tracking/stack-traces',
+                    icon: 'IconCode',
+                    color: 'seagreen',
+                },
+                {
                     name: 'Troubleshooting and FAQs',
                     url: '/docs/error-tracking/common-questions',
                     icon: 'IconQuestion',
