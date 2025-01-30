@@ -177,6 +177,14 @@ const comparison = [
         },
     },
     {
+        feature: 'Web Vitals reporting',
+        companies: {
+            Matomo: '<a href="https://matomo.org/guide/reports/seo-web-vitals/">On-Premise only</a>',
+            GA4: true,
+            PostHog: true,
+        },
+    },
+    {
         feature: 'Real-time reporting',
         companies: {
             Matomo: true,
