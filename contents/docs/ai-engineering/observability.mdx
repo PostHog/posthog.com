@@ -8,21 +8,20 @@ availability:
 
 > 🚧 **Note:** LLM observability is currently considered in `beta`. To access it, enable the [feature preview](https://us.posthog.com#panel=feature-previews) in your PostHog account.
 >
-> We are keen to gather as much feedback as possible so if you try this out please let us know. You can email [tim@posthog.com](mailto:tim@posthog.com), send feedback via the [in-app support panel](https://us.posthog.com#panel=support%3Afeedback%3Aexperiments%3Alow), or use one of our other [support options](/docs/support-options).
+> We are keen to gather as much feedback as possible so if you try this out please let us know. You can email [peter@posthog.com](mailto:peter@posthog.com), send feedback via the [in-app support panel](https://us.posthog.com#panel=support%3Afeedback%3Aexperiments%3Alow), or use one of our other [support options](/docs/support-options).
 
-LLM observability enables you to capture and analyze LLM usage and performance data. Specifically, it captures:
+Our LLM observability gives you x-ray vision into your LLM applications! Here's what you can track:
 
-- Input and output content and tokens
-- Latency
-- Model
-- Traces
-- Cost of each generation
+- Every conversation (inputs, outputs, and those sneaky tokens) 🗣️
+- Model performance (cost, latency and error rates) 🤖
+- Full traces for when you need to go detective mode 🔍
+- How much each chat/user/organization is costing you 💰
 
-All of this data is captured into PostHog to be used in insights, dashboards, alerts, and more. LLM events are charged at the same rate as other PostHog events, and so in practice are roughly **an order of magnitude cheaper** than most other LLM providers.
+The best part? All this data gets sent as regular PostHog events, where you can slice, dice, and analyze it in dashboards, insights, and alerts. And because we charge the same as regular PostHog events, it's roughly **10x cheaper** than other LLM observability tools.
 
 ## Observability installation
 
-Setting up observability starts with installing the PostHog SDK for your language.
+Setting up observability starts with installing the PostHog SDK for your language. LLM observability works best with our python and node SDKs.
 
 <MultiLanguage>
 
@@ -34,9 +33,9 @@ pip install posthog
 npm install @posthog/ai posthog-node
 ```
 
-> **Note:** You can use LLM observability with any of our SDK's however you will need to capture the data manually via the capture method. See schema of event [here](#manual-capture).
-
 </MultiLanguage>
+
+> **Note:** You can use LLM observability with any of our SDK's however you will need to capture the data manually via the capture method. See schema of event [here](#manual-capture).
 
 The rest of the setup depends on the LLM platform you're using. These SDKs _do not_ proxy your calls, they only fire off an async call to PostHog in the background to send the data.
 
@@ -46,7 +45,7 @@ import AnthropicInstall from "./_snippets/anthropic.mdx"
 import LangChainInstall from "./_snippets/langchain.mdx"
 import VercelAISDKInstall from "./_snippets/vercelai.mdx"
 
-{/* <!-- prettier-ignore --> */}
+<!-- prettier-ignore -->
 <Tab.Group tabs={['OpenAI', 'Anthropic', 'Langchain', 'Vercel AI SDK']}>
     <Tab.List>
         <Tab>OpenAI</Tab>
@@ -137,9 +136,14 @@ callback_handler = PosthogCallbackHandler(
 
 ## Manual capture
 
-If you're using a different SDK, you can manually capture the data by calling the `capture` method.
+If you're using a different SDK or the API, you can manually capture the data by calling the `capture` method.
 
-{/* <!-- prettier-ignore --> */}
+import GenerationEvent from "./_snippets/generation-event.mdx"
+import TraceEvent from "./_snippets/trace-event.mdx"
+import SpanEvent from "./_snippets/span-event.mdx"
+import EmbeddingEvent from "./_snippets/embedding-event.mdx"
+
+<!-- prettier-ignore -->
 <Tab.Group tabs={['Generation', 'Trace', 'Span', 'Embedding']}>
     <Tab.List>
         <Tab>Generation</Tab>
@@ -149,37 +153,16 @@ If you're using a different SDK, you can manually capture the data by calling th
     </Tab.List>
     <Tab.Panels>
         <Tab.Panel>
-            A generation is a single call to an LLM.
-            ```
-            Event Name: $ai_generation
-            Distinct ID: User ID or Anonymous ID (optional)
-            Properties:
-                - $ai_trace_id # The trace ID of the request (a UUID to group ai events)
-                - $ai_model # The model used (e.g. `gpt-3.5-turbo`)
-                - $ai_provider # The LLM provider
-                - $ai_input # List of messages
-                    - e.g. `[{"role": "user", "content": "Tell me a fun fact about hedgehogs"}]`
-                - $ai_input_tokens # The number of tokens in the input (often found in response.usage)
-                - $ai_output_choices # List of choices
-                    - e.g. `[{"role": "assistant", "content": "Hedgehogs are small mammals with spines on their back."}]`
-                - $ai_output_tokens # The number of tokens in the output (often found in response.usage)
-                - $ai_latency # The latency of the LLM call (tracked yourself)
-                - $ai_http_status # The HTTP status code of the response
-                - $ai_base_url # The base URL of the LLM provider
-                - $ai_is_error # boolean to indicate if the request was an error
-                - $ai_error # The error message or object 
-            ```
+            <GenerationEvent />
         </Tab.Panel>
         <Tab.Panel>
-            The trace event is used to store additional context about for a given traceID.
+            <TraceEvent />
         </Tab.Panel>
         <Tab.Panel>
-            A span is a single action withing your application i.e. a function call or vector database search.
+            <SpanEvent />
         </Tab.Panel>
         <Tab.Panel>
-            An embedding is a way to track the embedding of a given text.
+            <EmbeddingEvent />
         </Tab.Panel>
     </Tab.Panels>
 </Tab.Group>
-
-test
