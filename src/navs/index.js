@@ -2312,6 +2312,16 @@ export const docsMenu = {
                         className: 'uppercase !bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',
                     },
                 },
+                {
+                    name: 'Color themes',
+                    url: '/docs/product-analytics/color-themes',
+                    icon: 'IconPalette',
+                    color: 'seagreen',
+                    badge: {
+                        title: 'Beta',
+                        className: 'uppercase !bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',
+                    },
+                },
             ],
         },
         {
