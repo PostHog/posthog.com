@@ -13,6 +13,7 @@ import {
     IconTrash,
     IconShield,
     IconArrowLeft,
+    IconArrowRight,
 } from '@posthog/icons'
 import Link from 'components/Link'
 import dayjs from 'dayjs'
@@ -654,12 +655,49 @@ const ModeratorInitialView = ({
     ) : null
 }
 
+const JobBoardIntro = ({ onConfirm }: { onConfirm: () => void }) => {
+    return (
+        <div className="prose dark:prose-dark">
+            <p className="mb-2">
+                Our job board is designed to help product engineers (and other tech-adjacent candidates) find companies
+                that have a similar vibe to PostHog – where employees are empowered to do their best work.
+            </p>
+            <p className="mb-2">
+                To qualify to have your open roles listed, you'll need to meet the following criteria:
+            </p>
+            <ul className="mb-4">
+                <li>
+                    At least one unique perk listed in our filters
+                    <br />{' '}
+                    <span className="text-[15px] opacity-80">(Have a great perk we don't list? Let us know!)</span>
+                </li>
+                <li>
+                    A public job board (like Ashby or Greenhouse) so we can automatically keep our job board up to date
+                </li>
+                <li>
+                    <em>Actually be</em> a cool tech company where product engineers enjoy working!
+                </li>
+            </ul>
+            <CallToAction
+                onClick={onConfirm}
+                size="md"
+                width="full"
+                childClassName="flex items-center justify-center gap-1"
+            >
+                Next
+                <IconArrowRight className="size-5" />
+            </CallToAction>
+        </div>
+    )
+}
+
 const CompanyForm = ({ onSuccess, companyId }: { onSuccess?: () => void; companyId?: number }) => {
     const { user, getJwt, isModerator } = useUser()
     const [slugExists, setSlugExists] = useState<boolean | undefined>(undefined)
     const [nameExists, setNameExists] = useState<boolean | undefined>(undefined)
     const [company, setCompany] = useState<Company | null>(null)
     const [usingPending, setUsingPending] = useState<boolean | null>(null)
+    const [disclaimerConfirmed, setDisclaimerConfirmed] = useState<boolean>(false)
     const [confirmationMessage, setConfirmationMessage] = useState<{
         type: 'success' | 'error' | 'warning'
         title: string
@@ -948,7 +986,9 @@ const CompanyForm = ({ onSuccess, companyId }: { onSuccess?: () => void; company
         }
     }, [companyId])
 
-    return confirmationMessage ? (
+    return !isModerator && !disclaimerConfirmed ? (
+        <JobBoardIntro onConfirm={() => setDisclaimerConfirmed(true)} />
+    ) : confirmationMessage ? (
         <div
             className={`p-4 rounded-md border ${
                 confirmationMessage.type === 'success'
@@ -1184,7 +1224,6 @@ export default function JobsPage() {
     const [companyFilters, setCompanyFilters] = useState<FiltersType>([])
     const [jobFilters, setJobFilters] = useState<FiltersType>([])
     const [filtersOpen, setFiltersOpen] = useState(false)
-    const [applyModalOpen, setApplyModalOpen] = useState(false)
     const [issueModalOpen, setIssueModalOpen] = useState(false)
     const [addAJobModalOpen, setAddAJobModalOpen] = useState(false)
     const [companyId, setCompanyId] = useState<number>()
@@ -1195,7 +1234,7 @@ export default function JobsPage() {
         mutate,
         deleteCompany,
     } = useCompanies({ companyFilters, jobFilters, search })
-    const { isModerator, user } = useUser()
+    const { isModerator } = useUser()
 
     return (
         <Layout>
@@ -1221,7 +1260,7 @@ export default function JobsPage() {
                             Work at a company with great perks?{' '}
                             <button
                                 className="text-red dark:text-yellow font-semibold"
-                                onClick={() => setApplyModalOpen(true)}
+                                onClick={() => setAddAJobModalOpen(true)}
                             >
                                 Apply to get your jobs listed here.
                             </button>
@@ -1236,21 +1275,15 @@ export default function JobsPage() {
                             </button>
                             .
                         </p>
-                        {user && (
+                        {isModerator && (
                             <CallToAction
                                 onClick={() => setAddAJobModalOpen(true)}
                                 size="sm"
                                 width="full"
                                 childClassName="flex items-center justify-center gap-1"
                             >
-                                {isModerator ? (
-                                    <>
-                                        <IconShield className="size-5" />
-                                        Add a company
-                                    </>
-                                ) : (
-                                    'Add your company'
-                                )}
+                                <IconShield className="size-5" />
+                                Add a company
                             </CallToAction>
                         )}
                     </div>
@@ -1298,49 +1331,6 @@ export default function JobsPage() {
                     </div>
                 </div>
             </section>
-
-            <SideModal open={applyModalOpen} setOpen={setApplyModalOpen} title="List your cool tech jobs">
-                <div className="prose dark:prose-dark">
-                    <p className="mb-2">
-                        Our job board is designed to help product engineers (and other tech-adjacent candidates) find
-                        companies that have a similar vibe to PostHog – where employees are empowered to do their best
-                        work.
-                    </p>
-                    <p className="mb-2">
-                        To qualify to have your open roles listed, you'll need to meet the following criteria:
-                    </p>
-                    <ul className="mb-4">
-                        <li>
-                            At least one unique perk listed in our filters
-                            <br />{' '}
-                            <span className="text-[15px] opacity-80">
-                                (Have a great perk we don't list? Let us know!)
-                            </span>
-                        </li>
-                        <li>
-                            A public job board (like Ashby or Greenhouse) so we can automatically keep our job board up
-                            to date
-                        </li>
-                        <li>
-                            <em>Actually be</em> a cool tech company where product engineers enjoy working!
-                        </li>
-                    </ul>
-                    <p>
-                        <a
-                            href="#"
-                            className="text-red dark:text-yellow font-semibold"
-                            onClick={(e) => {
-                                e.preventDefault()
-                                const parts = ['cory', '@', 'posthog', '.', 'com?subject=Cool%20tech%20jobs']
-                                window.location.href = `mailto:${parts.join('')}`
-                            }}
-                        >
-                            Send us an email
-                        </a>{' '}
-                        with the info above to apply to be listed.
-                    </p>
-                </div>
-            </SideModal>
             <SideModal className="w-full" open={issueModalOpen} setOpen={setIssueModalOpen} title="Report an issue">
                 <IssueForm />
             </SideModal>
