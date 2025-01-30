@@ -10,14 +10,13 @@ availability:
 
 import { ProductScreenshot } from 'components/ProductScreenshot'
 
-PostHog can automatically capture [web vitals](https://web.dev/explore/learn-core-web-vitals) like largest contentful paint,
-first input delay, cumulative layout shift, and first contentful paint.
-This means you don't need to manually add web vitals logging.
+PostHog can automatically capture [web vitals](https://web.dev/explore/learn-core-web-vitals) like largest contentful paint, first input delay, cumulative layout shift, and first contentful paint. This means you don't need to manually add web vitals logging.
+
 You can also see them in the [web vitals dashboard](https://app.posthog.com/web/web-vitals) <span className="text-xs font-semibold text-opacity-60 bg-yellow px-1 py-0.5 rounded-sm uppercase text-primary">Beta</span>.
 
 ## What are Web vitals?
 
-**Web Vitals** are a set of metrics that measure the performance of your site. PostHog provides a dashboard for the following:
+**Web vitals** are a set of metrics that measure the performance of your site. PostHog provides a dashboard for the following:
 
 - **FCP**: First Contentful Paint
 - **LCP**: Largest Contentful Paint
@@ -60,9 +59,9 @@ To improve CLS, always include width and height attributes on images and video e
 
 
 
-## Web vitals dashboard <span className="absolute top-1/2 -translate-y-1/2 text-xs font-semibold text-opacity-60 bg-yellow px-1 py-0.5 ml-2 rounded-sm uppercase text-primary">Beta</span>
+## Web vitals dashboard
 
-> **Note:** Web vitals is currently in open beta. You can enable it by toggling it on in the [Feature Previews panel](https://app.posthog.com#panel=feature-previews). You'll need to refresh your browser to see it in the sidebar.
+> **Note:** The web vitals dashboard is currently in open beta. You can enable it by toggling it on in the [feature previews panel](https://app.posthog.com#panel=feature-previews). You'll need to refresh your browser to see it in the sidebar.
 
 You can access web vitals in PostHog by opening **Web Analytics** and clicking the **Web Vitals** tab at the top left.
 
@@ -80,7 +79,7 @@ In this dashboard, you can see how that data changed over time for the 4 differe
 At the bottom of the dashboard, you can see a table with a breakdown of the pages with good, needs improvement, and poor scores. You should focus on optimizing the pages with poor scores.
 
 
-### What are the thresholds for good Web Vitals?
+### What are the thresholds for good web vitals?
 
 Web vitals can be categorized in 3 categories: **Good**, **Needs improvement**, and **Poor**.
 
@@ -104,7 +103,7 @@ PostHog allows you to look at performance for p75, p90 and p99. We suggest you t
 
 ## How to enable web vitals autocapture
 
-Go to your [Autocapture settings](https://app.posthog.com/settings/project-autocapture#web-vitals-autocapture). Then, in the **Web vitals autocapture** section, click **Enable**.
+Go to your [autocapture settings](https://app.posthog.com/settings/project-autocapture#web-vitals-autocapture). Then, in the **Web vitals autocapture** section, click **Enable**.
 
 > **Note:** Web vitals autocapture is separate from our regular [autocapture](/docs/product-analytics/autocapture) feature. Web vitals can be captured regardless of whether autocapture is enabled.
 
@@ -148,4 +147,3 @@ You can look at our Web vitals capturing code in [web-vitals/index.ts](https://g
 ## Pricing
 
 Web vitals (`$web_vitals`) events are charged as regular events, and the first 1M are free. Check our [pricing page](/pricing) for more information, and we have a calculator there too!
-
