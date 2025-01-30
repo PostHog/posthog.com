@@ -2,17 +2,29 @@
 title: Managing cool tech jobs
 ---
 
-### Create a company/jobs:
+## Create a company/jobs:
 
-- Login to PostHog.com as a moderator
-- Navigate to `/cool-tech-jobs`
-- Click “Add a company”
-- Fill out the fields in the side modal
-- Click Create company
+### Non-moderator flow
 
-When a company is created, its jobs are automatically scraped based on the job board URL/slug provided. If no jobs are found, the company doesn’t appear on `/cool-tech-jobs` (unless you’re a moderator, in which case it will appear semi-transparent).
+- Visit `/cool-tech-jobs`
+- Click "Apply to get your jobs listed here." If you're not already signed in, you'll be prompted to sign in
+- Read the disclaimer and click next
+- Fill out the required fields (non-moderators have an additional field - "Why is your company cool?")
+- Click "Submit application"
+- A message is fired off in the `#cool-tech-jobs` Slack channel with the details of the application
+- A moderator approves and publishes the company from `/cool-tech-jobs`
 
-### Edit a company
+### Moderator flow
+
+- Visit `/cool-tech-jobs`
+- Click "Add a company"
+- From here, you can either continue with a pending company (one that has a pending application) or create a company from scratch
+- Fill out the required fields. If continuing from a pending company, verify the company details are correct before continuing
+- Click "Publish company"
+
+When a company is created, its jobs are automatically scraped based on the job board URL/slug provided. If no jobs are found, the company is still created (appears semi-transparent for moderators), but a warning message appears that suggests verifying the job board URL.
+
+## Edit a company
 
 - Login to PostHog.com as a moderator
 - Navigate to `/cool-tech-jobs`
@@ -22,7 +34,7 @@ When a company is created, its jobs are automatically scraped based on the job b
 
 Jobs will be re-scraped when a company is edited.
 
-### Delete a company
+## Delete a company
 
 - Login to PostHog.com as a moderator
 - Navigate to `/cool-tech-jobs`
@@ -31,7 +43,7 @@ Jobs will be re-scraped when a company is edited.
 
 All jobs associated with the deleted company will be deleted along with the original company record.
 
-### Company fields
+## Company fields
 
 - **Company name**
 - **Company website URL** - Used for the “Learn more” link
@@ -43,6 +55,6 @@ All jobs associated with the deleted company will be deleted along with the orig
 
 Unless required conditionally (job board URL/slug), every company field is required.
 
-### Scraping
+## Scraping
 
 Jobs are scraped hourly based on the provided job board URL/slug. Jobs are individually checked for freshness hourly. If a job URL 404s, it is deleted.
