@@ -21,7 +21,7 @@ For languages like Python the stack trace and code context can be gathered clien
 
 Compiled or minified languages requires additional information to perform a process called symbolification to produce the same stack trace and code context output shown above. The additional information is known as a symbol set.
 
-For example, in the case of minified Javascript a source map is needed as a symbol set. We currently rely on source maps being publicly available as we do not (yet) support uploading symbol sets during the build phase of your application.
+For example, in the case of minified JavaScript, a source map is needed as a symbol set. We currently rely on source maps being publicly available as we do not (yet) support uploading symbol sets during the build phase of your application.
 
 The `source` of a frame in the exception stack trace should point to the minified code of your application which should contain the `sourceMappingUrl` parameter denoting the location of the source map. Both of these files must be publicly accessible for PostHog to fetch and symbolify the stack trace.
 
