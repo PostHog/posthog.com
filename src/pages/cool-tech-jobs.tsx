@@ -36,6 +36,7 @@ import Spinner from 'components/Spinner'
 import { useUser } from 'hooks/useUser'
 import uploadImage from 'components/Squeak/util/uploadImage'
 import { debounce } from 'lodash'
+import { Authentication } from 'components/Squeak'
 dayjs.extend(relativeTime)
 
 const toggleFilters = [
@@ -691,6 +692,24 @@ const JobBoardIntro = ({ onConfirm }: { onConfirm: () => void }) => {
     )
 }
 
+const Auth = () => {
+    return (
+        <>
+            <div className="bg-border dark:bg-border-dark p-4 mt-0 mb-2">
+                <p className="text-sm mb-2">
+                    <strong>Note: PostHog.com authentication is separate from your PostHog app.</strong>
+                </p>
+
+                <p className="text-sm mb-0">
+                    We suggest signing up with your personal email. Soon you'll be able to link your PostHog app
+                    account.
+                </p>
+            </div>
+            <Authentication initialView="sign-in" showBanner={false} showProfile={false} />
+        </>
+    )
+}
+
 const CompanyForm = ({ onSuccess, companyId }: { onSuccess?: () => void; companyId?: number }) => {
     const { user, getJwt, isModerator } = useUser()
     const [slugExists, setSlugExists] = useState<boolean | undefined>(undefined)
@@ -986,7 +1005,9 @@ const CompanyForm = ({ onSuccess, companyId }: { onSuccess?: () => void; company
         }
     }, [companyId])
 
-    return !isModerator && !disclaimerConfirmed ? (
+    return !user ? (
+        <Auth />
+    ) : !isModerator && !disclaimerConfirmed ? (
         <JobBoardIntro onConfirm={() => setDisclaimerConfirmed(true)} />
     ) : confirmationMessage ? (
         <div
@@ -1234,7 +1255,7 @@ export default function JobsPage() {
         mutate,
         deleteCompany,
     } = useCompanies({ companyFilters, jobFilters, search })
-    const { isModerator } = useUser()
+    const { isModerator, user } = useUser()
 
     return (
         <Layout>
@@ -1341,7 +1362,7 @@ export default function JobsPage() {
                     setAddAJobModalOpen(open)
                     setCompanyId(undefined)
                 }}
-                title="Add a company"
+                title={!user ? 'Sign into PostHog.com' : 'Add a company'}
             >
                 <CompanyForm
                     companyId={companyId}
