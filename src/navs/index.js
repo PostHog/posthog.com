@@ -758,6 +758,10 @@ export const handbookSidebar = [
                 url: '/handbook/growth/sales/expansion-and-retention',
             },
             {
+                name: 'Customer Success',
+                url: '/handbook/growth/sales/customer-success',
+            },
+            {
                 name: 'How we work',
                 url: '/handbook/growth/sales/how-we-work',
             },
@@ -2265,6 +2269,16 @@ export const docsMenu = {
                 },
                 {
                     name: 'Tools',
+                },
+                {
+                    name: 'LLM insights',
+                    url: '/docs/ai-engineering/llms',
+                    icon: 'IconAIText',
+                    color: 'yellow',
+                    badge: {
+                        title: 'Beta',
+                        className: 'uppercase !bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',
+                    },
                 },
                 {
                     name: 'Autocapture',
