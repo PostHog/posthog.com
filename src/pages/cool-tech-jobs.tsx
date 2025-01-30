@@ -551,11 +551,13 @@ const Input = ({ label, error, touched, multiline, className = '', rows = 4, ...
 const jobBoardBaseURLs = {
     ashby: 'https://jobs.ashbyhq.com/',
     greenhouse: 'https://boards.greenhouse.io/',
+    gem: 'https://jobs.gem.com/',
 }
 
 const supportedJobBoardTypes = [
     { value: 'ashby', label: 'Ashby' },
     { value: 'greenhouse', label: 'Greenhouse' },
+    { value: 'gem', label: 'Gem' },
 ]
 
 const CompanyFormSkeleton = () => {
@@ -809,7 +811,11 @@ const CompanyForm = ({ onSuccess, companyId }: { onSuccess?: () => void; company
             <div>
                 <Select
                     className="!p-0"
-                    options={[...supportedJobBoardTypes, { value: 'other', label: 'Other' }]}
+                    options={[
+                        ...supportedJobBoardTypes,
+                        { value: 'kadoa', label: 'Kadoa' },
+                        { value: 'other', label: 'Other' },
+                    ]}
                     value={values.jobBoardType}
                     onChange={(value) => setFieldValue('jobBoardType', value)}
                     placeholder="Job board type"
@@ -843,6 +849,16 @@ const CompanyForm = ({ onSuccess, companyId }: { onSuccess?: () => void; company
                     <Input
                         label="Job board URL"
                         placeholder="https://bobloblawlawblog.com/jobs"
+                        {...getFieldProps('jobBoardURL')}
+                        error={errors.jobBoardURL}
+                        touched={touched.jobBoardURL}
+                        className="mt-2"
+                    />
+                )}
+                {values.jobBoardType === 'kadoa' && (
+                    <Input
+                        label="Kadoa endpoint URL"
+                        placeholder="https://api.kadoa.com/v4/workflows/123456789/data"
                         {...getFieldProps('jobBoardURL')}
                         error={errors.jobBoardURL}
                         touched={touched.jobBoardURL}

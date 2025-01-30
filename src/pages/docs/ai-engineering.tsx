@@ -67,56 +67,6 @@ export const Content = ({ quickLinks = false }) => {
                     Explore guides
                 </CallToAction>
             </section>
-
-            <section>
-                <h3 className="mb-1 text-xl">Dashboards</h3>
-                <p className="text-[15px]">
-                    Choose from a variety of pre-built integrations to get insights quickly from existing tools.
-                </p>
-
-                <ul className="m-0 mb-3 p-0 flex flex-col gap-4 md:grid md:grid-cols-2 xl:grid-cols-2">
-                    <ResourceItem
-                        title="Langfuse"
-                        description="Bring Langfuse tracing information into PostHog and track essential metrics"
-                        Image={
-                            <CloudinaryImage
-                                alt=""
-                                className="h-full"
-                                placeholder="none"
-                                objectFit="contain"
-                                quality={100}
-                                src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/pages/docs/images/template-product-analytics.png"
-                            />
-                        }
-                        url="/docs/ai-engineering/langfuse-posthog"
-                    />
-                    <ResourceItem
-                        title="Helicone"
-                        description="Integrate with Helicone and export data to a convenient dashboard"
-                        Image={
-                            <CloudinaryImage
-                                alt=""
-                                className="h-full"
-                                placeholder="none"
-                                objectFit="contain"
-                                quality={100}
-                                src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/pages/docs/images/template-website-traffic.png"
-                            />
-                        }
-                        url="/docs/ai-engineering/helicone-posthog"
-                    />
-                </ul>
-                <CallToAction
-                    to="/templates"
-                    type="custom"
-                    size="md"
-                    className="group !bg-accent dark:!bg-accent-dark !border-light dark:!border-dark"
-                    childClassName="text-primary/75 dark:text-primary-dark/75 group-hover:text-primary/100 dark:group-hover:text-primary-dark/100 !bg-white dark:!bg-dark !border-light dark:!border-dark"
-                    width="[calc(100%_+_3px)]"
-                >
-                    Browse templates
-                </CallToAction>
-            </section>
         </>
     )
 }
