@@ -34,6 +34,8 @@ pip install posthog
 npm install @posthog/ai posthog-node
 ```
 
+> **Note:** You can use LLM observability with any of our SDK's however you will need to capture the data manually via the capture method. See schema of event [here](#manual-capture).
+
 </MultiLanguage>
 
 The rest of the setup depends on the LLM platform you're using. These SDKs _do not_ proxy your calls, they only fire off an async call to PostHog in the background to send the data.
@@ -44,7 +46,7 @@ import AnthropicInstall from "./_snippets/anthropic.mdx"
 import LangChainInstall from "./_snippets/langchain.mdx"
 import VercelAISDKInstall from "./_snippets/vercelai.mdx"
 
-<!-- prettier-ignore -->
+{/* <!-- prettier-ignore --> */}
 <Tab.Group tabs={['OpenAI', 'Anthropic', 'Langchain', 'Vercel AI SDK']}>
     <Tab.List>
         <Tab>OpenAI</Tab>
@@ -132,3 +134,52 @@ callback_handler = PosthogCallbackHandler(
 ```
 
 </MultiLanguage>
+
+## Manual capture
+
+If you're using a different SDK, you can manually capture the data by calling the `capture` method.
+
+{/* <!-- prettier-ignore --> */}
+<Tab.Group tabs={['Generation', 'Trace', 'Span', 'Embedding']}>
+    <Tab.List>
+        <Tab>Generation</Tab>
+        <Tab>Trace</Tab>
+        <Tab>Span</Tab>
+        <Tab>Embedding</Tab>
+    </Tab.List>
+    <Tab.Panels>
+        <Tab.Panel>
+            A generation is a single call to an LLM.
+            ```
+            Event Name: $ai_generation
+            Distinct ID: User ID or Anonymous ID (optional)
+            Properties:
+                - $ai_trace_id # The trace ID of the request (a UUID to group ai events)
+                - $ai_model # The model used (e.g. `gpt-3.5-turbo`)
+                - $ai_provider # The LLM provider
+                - $ai_input # List of messages
+                    - e.g. `[{"role": "user", "content": "Tell me a fun fact about hedgehogs"}]`
+                - $ai_input_tokens # The number of tokens in the input (often found in response.usage)
+                - $ai_output_choices # List of choices
+                    - e.g. `[{"role": "assistant", "content": "Hedgehogs are small mammals with spines on their back."}]`
+                - $ai_output_tokens # The number of tokens in the output (often found in response.usage)
+                - $ai_latency # The latency of the LLM call (tracked yourself)
+                - $ai_http_status # The HTTP status code of the response
+                - $ai_base_url # The base URL of the LLM provider
+                - $ai_is_error # boolean to indicate if the request was an error
+                - $ai_error # The error message or object 
+            ```
+        </Tab.Panel>
+        <Tab.Panel>
+            The trace event is used to store additional context about for a given traceID.
+        </Tab.Panel>
+        <Tab.Panel>
+            A span is a single action withing your application i.e. a function call or vector database search.
+        </Tab.Panel>
+        <Tab.Panel>
+            An embedding is a way to track the embedding of a given text.
+        </Tab.Panel>
+    </Tab.Panels>
+</Tab.Group>
+
+test
