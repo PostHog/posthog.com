@@ -29,7 +29,7 @@ The color themes are also used when displaying shared insights or dashboards.
 
 ### Creating color themes
 
-To create a custom color theme in PostHog, open the "Data color" settings. Click "Add theme", give it a name, and customize the colors to match your preferred palette. Click "Save" to create the theme.
+To create a custom color theme in PostHog, open the "Data colors" settings. Click "Add theme", give it a name, and customize the colors to match your preferred palette. Click "Save" to create the theme.
 
 Insight results use the theme's colors in order. Once all colors are used, the cycle restarts from the first. You can add or remove colors as needed.
 
@@ -41,11 +41,11 @@ Insight results use the theme's colors in order. Once all colors are used, the c
 />
 
 
-### Setting the project wide default
+### Setting the project-wide default
 
 To set the default color theme for a project, simply select your preferred theme from the dropdown in the "Data colors" settings.
 
-### Setting a custom theme override for a single insight (advanced)
+### Setting a custom theme override (advanced) for a single insight
 
 To override the color theme for a single insight, click "..." in the top bar and toggle "View source". In the source, find the insight query node (e.g., `TrendsQuery`) — this is typically where `dateRange` or `properties` are defined. Add `"dataColorTheme": _id_`, replacing `_id_` with the id of your desired theme. 
 
@@ -55,7 +55,7 @@ To override the color theme for a single insight, click "..." in the top bar and
 
 > This feature is available for everyone, and doesn't require a Teams or an Enterprise plan. Only trend and funnel insights support this feature.
 
-For consistency of charts across multiple insights, it is often useful to assign the same color for the same (or similar) results. By default colors are assigned to results in their order. The order can be different between insights e.g., when a breakdown is used and the breakdown results appear in a different order due to their values. It would now be desirable to have the same colors for the same breakdown result.
+For consistency of charts across multiple insights, it is often useful to assign the same color for the same (or similar) results. By default, colors are assigned to results in their order. The order can be different between insights, e.g., when a breakdown is used and the breakdown results appear in a different order due to their values. It would now be desirable to have the same colors for the same breakdown result.
 
 To change a result's color, click the color icon next to it in the **Detailed results** table, then select a new color.
 
@@ -66,4 +66,4 @@ To change a result's color, click the color icon next to it in the **Detailed re
     alt= "Add theme"
 />
 
-Colors that aren't assigned, are getting the color they would regularly (in order). 
+Unassigned results follow the default color order.
