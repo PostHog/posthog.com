@@ -19,8 +19,8 @@ PostHog allows you to customize color themes for your insights, making it easier
 You can find the setting related to color themes under [Project settings > Product analytics > Data colors](https://us.posthog.com/settings/project-product-analytics#data-theme).
 
 <ProductScreenshot
-    imageLight = {"http://localhost:8001/images/products/product-analytics/screenshot-theme-settings-light.png"} 
-    imageDark = {"http://localhost:8001/images/products/product-analytics/screenshot-theme-settings-dark.png"}
+    imageLight = {"https://res.cloudinary.com/dmukukwp6/image/upload/screenshot_theme_settings_light_77cbc98f41.png"} 
+    imageDark = {"https://res.cloudinary.com/dmukukwp6/image/upload/screenshot_theme_settings_dark_457240427f.png"}
     classes="rounded"
     alt= "Theme settings"
 />
@@ -29,13 +29,13 @@ The color themes are also used when displaying shared insights or dashboards.
 
 ### Creating color themes
 
-To create a custom color theme in PostHog, open the "Data colors" settings. Click "Add theme", give it a name, and customize the colors to match your preferred palette. Click "Save" to create the theme.
+To create a custom color theme in PostHog, open the **Data colors** settings. Click **Add theme**, give it a name, and customize the colors to match your preferred palette. Click **Save** to create the theme.
 
 Insight results use the theme's colors in order. Once all colors are used, the cycle restarts from the first. You can add or remove colors as needed.
 
 <ProductScreenshot
-    imageLight = {"http://localhost:8001/images/products/product-analytics/screenshot-add-theme-light.png"} 
-    imageDark = {"http://localhost:8001/images/products/product-analytics/screenshot-add-theme-dark.png"}
+    imageLight = {"https://res.cloudinary.com/dmukukwp6/image/upload/screenshot_add_theme_light_3b6614e537.png"} 
+    imageDark = {"https://res.cloudinary.com/dmukukwp6/image/upload/screenshot_add_theme_dark_2717171086.png"}
     classes="rounded"
     alt= "Add theme"
 />
@@ -43,11 +43,11 @@ Insight results use the theme's colors in order. Once all colors are used, the c
 
 ### Setting the project-wide default
 
-To set the default color theme for a project, simply select your preferred theme from the dropdown in the "Data colors" settings.
+To set the default color theme for a project, simply select your preferred theme from the dropdown in the **Data colors** settings.
 
 ### Setting a custom theme override (advanced) for a single insight
 
-To override the color theme for a single insight, click "..." in the top bar and toggle "View source". In the source, find the insight query node (e.g., `TrendsQuery`) — this is typically where `dateRange` or `properties` are defined. Add `"dataColorTheme": _id_`, replacing `_id_` with the id of your desired theme. 
+To override the color theme for a single insight, click **...** in the top bar and toggle **View source**. In the source, find the insight query node (e.g., `TrendsQuery`) — this is typically where `dateRange` or `properties` are defined. Add `"dataColorTheme": _id_`, replacing `_id_` with the id of your desired theme. 
 
 ---
 
@@ -60,8 +60,8 @@ For consistency of charts across multiple insights, it is often useful to assign
 To change a result's color, click the color icon next to it in the **Detailed results** table, then select a new color.
 
 <ProductScreenshot
-    imageLight = {"http://localhost:8001/images/products/product-analytics/screenshot-result-color-light.png"} 
-    imageDark = {"http://localhost:8001/images/products/product-analytics/screenshot-result-color-dark.png"}
+    imageLight = {"https://res.cloudinary.com/dmukukwp6/image/upload/screenshot_result_color_light_0195607fd5.png"} 
+    imageDark = {"https://res.cloudinary.com/dmukukwp6/image/upload/screenshot_result_color_dark_d24a637cfa.png"}
     classes="rounded"
     alt= "Add theme"
 />
