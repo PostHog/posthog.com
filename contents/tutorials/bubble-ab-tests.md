@@ -114,12 +114,12 @@ Finally, deploy your changes to live.
 
 That's it! Your A/B test is now live. PostHog will split your users so half see the updated button text and tracks whether it has an impact on your click-through rate. You can [view your test results](/docs/experiments/testing-and-launching#viewing-experiment-results) on the experiment page in PostHog.
 
-If you want to test each variant of your experiment to make sure it is working correctly, add the line `posthog.featureFlags.override({'bubble-button-experiment': 'variant_name'})` to your code:
+If you want to test each variant of your experiment to make sure it is working correctly, add the line `posthog.featureFlags.overrideFeatureFlags({ flags: {'bubble-button-experiment': 'variant_name'}})` to your code:
 
 ```js
 posthog.onFeatureFlags(() => {
    // Override the feature flag
-   posthog.featureFlags.override({'bubble-button-experiment': 'test'}) // or 'control' 
+   posthog.featureFlags.overrideFeatureFlags({ flags: {'bubble-button-experiment': 'test'}}) // or 'control' 
        
    // rest of your code...
 });    
