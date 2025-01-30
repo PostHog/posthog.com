@@ -23,7 +23,7 @@ curl -X POST "<ph_client_api_host>/capture/" \
          "event": "$ai_trace",
          "properties": {
              "distinct_id": "distinct_id_of_your_user",
-             "$ai_trace_id": "trace_id_of_your_request",
+             "$ai_trace_id": "trace_id",
              "$ai_input_state": "[{\"role\": \"user\", \"content\": \"Tell me a fun fact about hedgehogs\"}]",
              "$ai_output_state": "[{\"role\": \"assistant\", \"content\": \"Hedgehogs are small mammals with spines on their back.\"}]",
              "$ai_latency": 100,
