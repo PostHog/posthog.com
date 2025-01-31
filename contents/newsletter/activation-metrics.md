@@ -1,5 +1,5 @@
 ---
-title: The first metric product engineers should care about
+title: A crash course in activation metrics
 date: 2025-01-21
 author:
  - ian-vanagas
@@ -14,13 +14,7 @@ crosspost:
   - Blog
 ---
 
-In your journey to become a world-class product engineer, there is one metric that stands out in its early relevance to both product and business decisions: **activation**.
-
-Let me explain why.
-
-## The mysterious definition of activation
-
-Your journey to understand activation starts with a definition, but when you look around you'll find a bunch of different advice. Some say it's your "aha" moment, others, when you show your product's value, and others, when you make your users happy, but none of these are definitive.
+When you look around to define activation, you'll find a bunch of different advice. Some say it's your "aha" moment, others, when you show your product's value, and others, when you make your users happy, but none of these are definitive.
 
 So why isn't there a simple, shared definition?
 
@@ -31,6 +25,10 @@ So why isn't there a simple, shared definition?
 3. **Activating may mean doing something multiple times.** Adding to the complexity is that someone might need to do something multiple times in order to get it. For example, to activate into our session replay product means analyzing not one but five replays. 
 
 ![Replay](https://res.cloudinary.com/dmukukwp6/image/upload/replay_bc46055955.png)
+
+One thing that is clear is that activation is a metric that stands out in its early relevance to both product and business decisions.
+
+Let me explain why.
 
 ## Why you should care about activation metrics
 
@@ -72,24 +70,32 @@ Next, we create groups of 3-5 events to test together. We aimed for 5-10 differe
 
 With our potential activation event groups, we write a query to test how they correlate with retention:
 
-1. Get companies that start with our product broken down by month. We use group analytics for this, but you could just do users too.
+1. Get companies that start with our product broken down by month. We use [group analytics](/docs/product-analytics/group-analytics) to track company usage for this, but you could just do users too.
 
-2. Filter for companies who completed the activation event group in the required time. We require companies to activate within 30 days of signing up. 
+2. Filter for companies who completed the activation event group in the required time. This varies by the natural product lifecycle. For example, it takes longer to capture events and have enough data to analyze than create an A/B test. This means product analytics has a 30 day activation window while experimentation only has 14 days.
 
 3. Calculate retention for successful companies. We check to see how many of them are still using the product 3 months after starting.
 
 ![Activation](https://res.cloudinary.com/dmukukwp6/image/upload/image_17_a3f3ac0bfe.png)
 
-We then compare the retention against our product's average retention rate for all companies. We look for a retention percentage that's nominally higher than our average retention rate. 
+We then compare the retention against our product's average retention rate for all companies. We look for a retention percentage that's higher than our average retention rate. 
 
 Because we retained two of the three activated companies in the above example, we have a retention rate of 66% for activated companies. This means:
 
-- If our average retention was 50%, this would be a good activation metric 🥳
-- If our average retention was 75%, this would be a bad activation metric 😭
+- If our average retention was lower than 66%, this would be a good activation metric 🥳
+- If our average retention was higher than 66%, this would be a bad activation metric 😭
 
 We repeat to ensure there is a large enough sample of activated companies in the retention calculation and that one potential activation event group is dramatically better than the others.
 
-> **Want to see the full real SQL query we used for this?** Check out our post on [How we found our activation metric (and how you can too)](/product-engineers/activation-metrics).
+Some activation metrics we found with this method:
+
+- Experimentation: 1 `experiment launched` within 14 days. 
+- Feature flags: 2 `feature flag created` and 2 `feature flag updated` with property filters within 14 days. 
+- Product analytics: `first team event ingested`, 1 `dashboard created`, and 3 `insight_saved` within 30 days.
+- Surveys: 1 `survey launched` within 30 days.
+- Session replay: 5 `recording analyzed` and 1 `recording list filters changed` within 14 days.
+
+> **Want to see the full real SQL query we used for these?** Check out our post on [How we found our activation metric (and how you can too)](/product-engineers/activation-metrics).
 
 ## What to do with activation metric once you have it
 
@@ -121,12 +127,12 @@ As activation is one part of the funnel, you can use it to evaluate and improve 
 
 1. Find out what marketing activities have an impact on activation. For example, we found that viewing two web pages before signing up leads to a dramatically higher activation rate. 
 2. Target marketing and onboarding work to improve activation rates.
-3. Improve sales results by using activation as a sales lead health check.
+3. Improve sales results by using (lack of) activation as a sales lead health check.
 
 In the down-funnel:
 
 1. Look at activation's impact on retention beyond 3 months.
-2. Compare revenue for activated vs non-activated users.
+2. Using activation to look for opportunities to do sales-assist.
 3. Finding ways to convert activated users into referrers.
 
 A special, related one for us (and other multi-product companies) is **cross-sell**. Getting people to activate into multiple products is extremely valuable to us, they are much more likely to pay and pay much more when they do.
