@@ -93,7 +93,7 @@ Sometimes customers will be locked into a contract with a competitor, but want t
 
 Some rules:
 
-* They need share a copy of their current contract/pricing/bank statement as proof.
+* They need to share a copy of their current contract/pricing/bank statement as proof.
 * They sign up to an annual contract worth $20k+/year, paid up front. Their PostHog contract starts when their current one expires. 
 * Their usage in the overlap period needs to be proportionate to the contract they've signed, ie. if they sign a $50k contract and have 6 months to run, they get $25k of PostHog credit for free.
 * The competitor they're using has to be 'real', ie. not some random side project. As a general rule, anyone we have written a [comparison article](/blog/tags/comparisons) about counts.
