@@ -7,6 +7,7 @@ import { CallToAction } from 'components/CallToAction'
 import { IconArrowLeft, IconArrowRight } from '@posthog/icons'
 import { heading } from '../classes'
 import Slider from 'components/Slider'
+import { MenuContainer } from 'components/PostLayout/MobileNav'
 
 const getFirstYear = (roadmaps: any) => Object.keys(roadmaps)[0]
 const getFirstMonth = (roadmaps: any, year: string) => Object.keys(roadmaps[year])[0]
@@ -25,6 +26,70 @@ const groupRoadmaps = (roadmaps: any) =>
         return acc
     }, {})
 const filters = ['All highlights', 'Launched a product', 'Major new feature', 'Something cool happened']
+
+function RoadmapDetail({
+    activeRoadmap,
+    activeMonth,
+    activeYear,
+    hasPrevious,
+    hasNext,
+    allRoadmaps,
+    setActiveRoadmap,
+    className = '',
+}: {
+    activeRoadmap: any
+    activeMonth: string
+    activeYear: string
+    hasPrevious: boolean
+    hasNext: boolean
+    allRoadmaps: any[]
+    setActiveRoadmap: (roadmap: any) => void
+    className?: string
+}) {
+    return (
+        <div className={`md:col-span-5 border border-border dark:border-border-dark w-full ${className}`}>
+            <div className="flex justify-between items-center py-2 px-4 border-b border-light dark:border-dark bg-accent dark:bg-accent-dark">
+                <CallToAction
+                    size="xs"
+                    type="outline"
+                    disabled={!hasPrevious}
+                    onClick={() => {
+                        const previousRoadmap =
+                            allRoadmaps[allRoadmaps.findIndex((node) => node.squeakId === activeRoadmap.squeakId) - 1]
+                        setActiveRoadmap(previousRoadmap)
+                    }}
+                >
+                    <span className="flex items-center space-x-1">
+                        <IconArrowLeft className="size-4 rotate-90" />
+                        <span>Previous</span>
+                    </span>
+                </CallToAction>
+                <h3 className="m-0 text-sm font-normal opacity-70">
+                    {activeMonth} {activeYear}
+                </h3>
+                <CallToAction
+                    size="xs"
+                    type="outline"
+                    disabled={!hasNext}
+                    onClick={() => {
+                        const nextRoadmap =
+                            allRoadmaps[allRoadmaps.findIndex((node) => node.squeakId === activeRoadmap.squeakId) + 1]
+                        setActiveRoadmap(nextRoadmap)
+                    }}
+                >
+                    <span className="flex items-center space-x-1">
+                        <span>Next</span>
+                        <IconArrowRight className="size-4 rotate-90" />
+                    </span>
+                </CallToAction>
+            </div>
+            <div className="p-4 bg-white dark:bg-dark">
+                <h3 className="text-lg font-bold mb-1">{activeRoadmap.title}</h3>
+                <Markdown>{activeRoadmap.description}</Markdown>
+            </div>
+        </div>
+    )
+}
 
 export default function TimelineNew() {
     const {
@@ -56,6 +121,7 @@ export default function TimelineNew() {
     const [activeMonth, setActiveMonth] = useState(firstMonth)
     const [activeRoadmap, setActiveRoadmap] = useState(firstRoadmap)
     const [activeFilter, setActiveFilter] = useState('All highlights')
+    const [mobileDetailsOpen, setMobileDetailsOpen] = useState(false)
     const hasPrevious = useMemo(() => {
         return allRoadmaps.findIndex((node) => node.squeakId === activeRoadmap.squeakId) > 0
     }, [allRoadmaps, activeRoadmap])
@@ -163,6 +229,12 @@ export default function TimelineNew() {
                                         <li className="text-sm px-2 py-1 rounded-md opacity-70" key={month}>
                                             {month}
                                         </li>
+                                        {!isLastMonth &&
+                                            new Array(roadmaps.length - 1).fill(null).map((_, index) => (
+                                                <li className="text-sm px-2 py-1 rounded-md opacity-70" key={index}>
+                                                    <br />
+                                                </li>
+                                            ))}
                                     </>
                                 )
                             })}
@@ -174,11 +246,14 @@ export default function TimelineNew() {
                                         <button
                                             className={`text-left text-sm hover:bg-accent/60 dark:hover:bg-accent-dark px-2 py-1 rounded-md text-ellipsis overflow-hidden ${
                                                 node.squeakId === activeRoadmap.squeakId
-                                                    ? 'bg-accent dark:bg-accent-dark font-bold'
+                                                    ? 'md:bg-accent md:dark:bg-accent-dark md:font-bold'
                                                     : ''
                                             }`}
                                             onClick={() => {
                                                 setActiveRoadmap(node)
+                                                if (window.innerWidth < 768) {
+                                                    setMobileDetailsOpen(true)
+                                                }
                                             }}
                                         >
                                             {node.title}
@@ -187,8 +262,8 @@ export default function TimelineNew() {
                                 ))
                             )}
                         </ul>
-                        <div className="col-span-3"></div>
-                        <div className="col-span-9">
+                        <div className="col-span-4 md:col-span-3"></div>
+                        <div className="col-span-8 md:col-span-9">
                             {Object.entries(roadmapsGrouped[activeYear]).map(([month, roadmaps], index) => {
                                 const isLastMonth = index === Object.keys(roadmapsGrouped[activeYear]).length - 1
                                 const nextYear = `${Number(activeYear) + 1}`
@@ -219,52 +294,30 @@ export default function TimelineNew() {
                         </div>
                     </div>
                 </div>
+                <RoadmapDetail
+                    activeRoadmap={activeRoadmap}
+                    activeMonth={activeMonth}
+                    activeYear={activeYear}
+                    hasPrevious={hasPrevious}
+                    hasNext={hasNext}
+                    allRoadmaps={allRoadmaps}
+                    setActiveRoadmap={setActiveRoadmap}
+                    className="md:block hidden"
+                />
 
-                <div className="md:col-span-5 border border-border dark:border-border-dark w-full">
-                    <div className="flex justify-between items-center py-2 px-4 border-b border-light dark:border-dark bg-accent dark:bg-accent-dark">
-                        <CallToAction
-                            size="xs"
-                            type="outline"
-                            disabled={!hasPrevious}
-                            onClick={() => {
-                                const previousRoadmap =
-                                    allRoadmaps[
-                                        allRoadmaps.findIndex((node) => node.squeakId === activeRoadmap.squeakId) - 1
-                                    ]
-                                setActiveRoadmap(previousRoadmap)
-                            }}
-                        >
-                            <span className="flex items-center space-x-1">
-                                <IconArrowLeft className="size-4 rotate-90" />
-                                <span>Previous</span>
-                            </span>
-                        </CallToAction>
-                        <h3 className="m-0 text-sm font-normal opacity-70">
-                            {activeMonth} {activeYear}
-                        </h3>
-                        <CallToAction
-                            size="xs"
-                            type="outline"
-                            disabled={!hasNext}
-                            onClick={() => {
-                                const nextRoadmap =
-                                    allRoadmaps[
-                                        allRoadmaps.findIndex((node) => node.squeakId === activeRoadmap.squeakId) + 1
-                                    ]
-                                setActiveRoadmap(nextRoadmap)
-                            }}
-                        >
-                            <span className="flex items-center space-x-1">
-                                <span>Next</span>
-                                <IconArrowRight className="size-4 rotate-90" />
-                            </span>
-                        </CallToAction>
-                    </div>
-                    <div className="p-4 bg-white dark:bg-dark">
-                        <h3 className="text-lg font-bold mb-1">{activeRoadmap.title}</h3>
-                        <Markdown>{activeRoadmap.description}</Markdown>
-                    </div>
-                </div>
+                {mobileDetailsOpen && (
+                    <MenuContainer onClose={() => setMobileDetailsOpen(false)} className="mb-[75.75px]">
+                        <RoadmapDetail
+                            activeRoadmap={activeRoadmap}
+                            activeMonth={activeMonth}
+                            activeYear={activeYear}
+                            hasPrevious={hasPrevious}
+                            hasNext={hasNext}
+                            allRoadmaps={allRoadmaps}
+                            setActiveRoadmap={setActiveRoadmap}
+                        />
+                    </MenuContainer>
+                )}
             </div>
         </div>
     )
