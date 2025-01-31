@@ -38,7 +38,7 @@ We’ve found that the best way to review what is a quite long list of metrics i
 To make growth reviews more actionable, each of the three growth reviews per quarter should have a slightly different angle:
 
 **First growth review of the quarter (1 week in):**
-- Review the [product / research goal](handbook/product/product-team#product-goals) planned as part of the team's quarterly planning
+- Review the [product / research goal](/handbook/product/product-team#product-goals) planned as part of the team's quarterly planning
     - If we have answered this, have we answered the biggest unknown for the product?
     - Are there any other topics / research we could work on as a secondary priority?
 

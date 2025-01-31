@@ -758,6 +758,10 @@ export const handbookSidebar = [
                 url: '/handbook/growth/sales/expansion-and-retention',
             },
             {
+                name: 'Customer Success',
+                url: '/handbook/growth/sales/customer-success',
+            },
+            {
                 name: 'How we work',
                 url: '/handbook/growth/sales/how-we-work',
             },
@@ -1505,6 +1509,10 @@ export const docsMenu = {
                         {
                             name: 'Nuxt',
                             url: '/docs/advanced/proxy/nuxt',
+                        },
+                        {
+                            name: 'Pomerium',
+                            url: '/docs/advanced/proxy/pomerium',
                         },
                         {
                             name: 'Remix',
@@ -2267,6 +2275,16 @@ export const docsMenu = {
                     name: 'Tools',
                 },
                 {
+                    name: 'LLM insights',
+                    url: '/docs/ai-engineering/llms',
+                    icon: 'IconAIText',
+                    color: 'yellow',
+                    badge: {
+                        title: 'Beta',
+                        className: 'uppercase !bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',
+                    },
+                },
+                {
                     name: 'Autocapture',
                     url: '/docs/product-analytics/autocapture',
                     icon: 'IconBolt',
@@ -2301,6 +2319,16 @@ export const docsMenu = {
                     url: '/docs/product-analytics/sampling',
                     icon: 'IconSampling',
                     color: 'purple',
+                    badge: {
+                        title: 'Beta',
+                        className: 'uppercase !bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',
+                    },
+                },
+                {
+                    name: 'Color themes',
+                    url: '/docs/product-analytics/color-themes',
+                    icon: 'IconPalette',
+                    color: 'seagreen',
                     badge: {
                         title: 'Beta',
                         className: 'uppercase !bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',
@@ -2991,6 +3019,10 @@ export const docsMenu = {
                             url: '/docs/cdp/destinations/intercom',
                         },
                         {
+                            name: 'June',
+                            url: '/docs/cdp/destinations/june',
+                        },
+                        {
                             name: 'Klaviyo',
                             url: '/docs/cdp/destinations/klaviyo',
                         },
@@ -3297,6 +3329,12 @@ export const docsMenu = {
                     url: '/docs/error-tracking/monitoring',
                     icon: 'IconGraph',
                     color: 'orange',
+                },
+                {
+                    name: 'Stack traces',
+                    url: '/docs/error-tracking/stack-traces',
+                    icon: 'IconCode',
+                    color: 'seagreen',
                 },
                 {
                     name: 'Troubleshooting and FAQs',

@@ -79,9 +79,9 @@ export default function NotFoundPage(): JSX.Element {
                         </CallToAction>
 
                         <p className="mt-8 text-sm text-white/70">
-                            Think this is a mistake? Email{' '}
-                            <a href="mailto:hey@posthog.com" className="text-yellow">
-                                hey@posthog.com
+                            Think this is a mistake? {' '}
+                            <a href="https://github.com/PostHog/posthog.com/issues" className="text-yellow">
+                                Raise an issue
                             </a>{' '}
                             and we'll fix it!
                         </p>

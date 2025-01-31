@@ -377,10 +377,15 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
         // need to use slugger for header links to match
         const slugger = new Slugger()
         return headings.map((heading) => {
+            // Strip HTML tags from heading value
+            // Useful if we wanna add a beta label to a header
+            const cleanValue = heading.value.replace(/\s*<([a-z]+).+?>.+?<\/\1>/g, '')
+
             return {
                 ...heading,
                 depth: heading.depth - 2,
-                url: slugger.slug(heading.value),
+                url: slugger.slug(cleanValue),
+                value: cleanValue,
             }
         })
     }

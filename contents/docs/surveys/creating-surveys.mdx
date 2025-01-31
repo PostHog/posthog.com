@@ -100,13 +100,13 @@ You can display your survey to specific users based on:
 
 - **Linked feature flag:** Whether a user has a specific [feature flag](/docs/feature-flags) enabled. For example, if you're rolling out a new landing page using a feature flag `new-landing-page`, you can gather feedback only from users who have that flag enabled. This is also a way to show surveys to cohorts (but it must be a [non-behavioral one](/docs/feature-flags/common-questions#why-cant-i-use-a-cohort-with-behavioral-filters-in-my-feature-flag)).
 
-- **URL targeting:** Show when URL either contains a string, exactly matches a string, matches a regex.
+- **URL targeting:** Show when URL either contains a string, exactly matches a string, matches a regex. The URL targeting is evaluated against `window.location.href`.
 
 - **Selector matches:** Whether a specific element exists or appears on the page with the specified class name or ID. For example, you can display a survey with `#my-button` or `.my-button` selector. This is useful for showing a survey after a user action.
 
 - **Wait period**: Hide surveys from users who have seen a survey in the last X days. Note that a user who completes a survey are never shown the same survey again, even if no wait period is set.
 
-- **Person and group properties:** If you are capturing identified events, you can display a survey to users who have specific [person](/docs/product-analytics/person-properties) or [group properties](/docs/product-analytics/group-analytics#how-to-set-group-properties). For example, you can target a survey to users who have a property `is_paying=true`. This also includes a percentage rollout option.
+- **Person and group properties:** If you are capturing identified events, you can display a survey to users who have specific [person](/docs/product-analytics/person-properties) or [group properties](/docs/product-analytics/group-analytics#how-to-set-group-properties). For example, you can target a survey to users who have a property `is_paying=true`. This also includes a percentage rollout option. The person and group properties are evaluated with internal feature flags.
 
 - **User sends events:** Display a survey to users who have sent a specific event during their session.
 
@@ -119,7 +119,7 @@ You can display your survey to specific users based on:
 
 ### Completion conditions
 
-This enables you to stop your survey once you receive a specific number of responses. Note that because it takes time for PostHog to process responses, this is a rough guideline. Your survey might receive slightly more responses than you set.
+This enables you to stop your survey once you receive a specific number of responses. Note that because it takes time for PostHog to process responses, this is a rough guideline. Your survey might receive slightly more responses than you set. The completion conditions properties are evaluated with internal feature flags.
 
 ## Repeating surveys
 

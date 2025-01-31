@@ -1,6 +1,10 @@
 ---
-title: Error monitoring
+title: Error monitoring and issue management
 ---
+
+import BetaFeedbackBanner from './_snippets/beta-feedback-banner.mdx'
+
+<BetaFeedbackBanner />
 
 Errors are captured as `$exception` events which means that you can create insights, filter recordings, trigger surveys, and more in the same way you can for any other type of event.
 
@@ -26,7 +30,32 @@ Clicking through to an individual group shows you all the associated exceptions,
     classes="rounded"
 />
 
-## Custom issue grouping
+## Managing issues
+
+Our error tracking product gives you multiple ways to manage issues towards resolution.
+
+### User groups
+
+Error tracking enables you to assign issues to individual users, but what if you want to assign issues to a group? You can create a group in [your project settings](https://us.posthog.com/settings/project-error-tracking) under **Error tracking**.
+
+<ProductScreenshot
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_01_24_at_11_32_25_99a9f9d6af.png"
+  imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_01_24_at_11_32_06_84f92a4751.png"
+  alt="Error tracking user groups"
+  classes="rounded"
+/>
+
+### Merging issues
+
+You can merge issues representing the same problem by:
+
+1. Selecting the primary issue others should be merged into
+2. Selecting the issue(s) to merge into the primary issue
+3. Clicking the **Merge** button
+
+After merging, all events and properties from the merged issues are added to the primary issue. The merged issues are then deleted.
+
+### Custom issue grouping
 
 PostHog attempts to group the same exceptions as a single issue. An `$exception_fingerprint` property is generated during ingestion by PostHog and used to perform this grouping. Setting the `$exception_fingerprint` property on the frontend will override the default flow to allow for custom grouping of certain exceptions.
 
@@ -53,10 +82,3 @@ posthog.init("<ph_project_api_key>", {
   }
 })
 ```
-
-## Upcoming features
-
-There is a long list of features on our roadmap but we're primarily working towards:
-
-* Actioning exceptions (merging, assigning, resolving, etc)
-* Alerting

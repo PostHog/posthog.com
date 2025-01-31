@@ -1,0 +1,40 @@
+A span is a single action within your application i.e. a function call or vector database search.
+
+Event Name: `$ai_span`  
+
+| Property | Description |
+|----------|-------------|
+| `$ai_trace_id` | The trace ID (a UUID to group AI events) like `conversation_id` |
+| `$ai_input_state` | The input of the span |
+| `$ai_output_state` | The output of the span |
+| `$ai_latency` | The latency of the span (ms) |
+| `$ai_span_name` | The name of the span |
+| `$ai_span_id` | The ID of the span |
+| `$ai_parent_id` | The parent ID e.g. trace_id or another span_id |
+| `$ai_error` | The error of the span |
+| `$ai_is_error` | Whether the span was an error |
+
+### Example
+```bash
+POST https://[your-instance].com/capture/
+Content-Type: application/json
+Body:
+{
+    "api_key": "sTMFPsFhdP1Ssg",
+    "event": "$ai_span",
+    "properties": {
+        "distinct_id": "distinct_id_of_your_user",
+        "$ai_trace_id": "trace_id",
+        "$ai_input_state": "[{\"role\": \"user\", \"content\": \"Tell me a fun fact about hedgehogs\"}]",
+        "$ai_latency": 100,
+        "$ai_span_name": "span_name",
+        "$ai_span_id": "span_id",
+        "$ai_parent_id": "parent_id",
+        "$ai_error": "error",
+        # if the span was an error
+        "$ai_is_error": true,
+        "$ai_output_state": "[{\"role\": \"assistant\", \"content\": \"Hedgehogs are small mammals with spines on their back.\"}]",
+    },
+    "timestamp": "[optional timestamp in ISO 8601 format]"
+}
+```

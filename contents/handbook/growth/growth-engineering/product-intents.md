@@ -40,11 +40,25 @@ Nope. Lots of people join PostHog with a single product in mind - and then later
 Generally we've made the plumbing such that recording these product intents is quite easy.
 
 1. Figure out where you think the product intent event should happen.
-2. When someone clicks that button / views that page / does that thing, then simply call [`addProductIntent` in the `teamLogic`](https://github.com/PostHog/posthog/blob/b4d51e3b746e6174a7d60c525ea22387f00dcafe/frontend/src/scenes/teamLogic.tsx#L151-L161). That fires off an API request that records the product intent in the [database](https://github.com/PostHog/posthog/blob/master/posthog/models/product_intent/product_intent.py) and sends the event for you. You don't need to send the event yourself - it's all handled.
-    - If you want, you can include the _context_ of the intent with this API call. Maybe you are recording multiple intents for your product and want to track exactly where the intents are happening or for what reason - you can store that in the `intent_context`.
-3. (optional but recommended) track activation for the product intents [here](https://github.com/PostHog/posthog/blob/b4d51e3b746e6174a7d60c525ea22387f00dcafe/posthog/models/product_intent/product_intent.py#L77-L82).
-    - This code is run every time an intent is updated. For example, if the activation criteria is "save 4 insights", and we send a product intent every time someone clicks "new insight", we'll also check at that time if they have 4 insights saved, and if so mark them as activated.
-    - This part of the product intent plumbing needs some work - we should be able to manually trigger activation checks whenever someone does a certain action (not an Action like a grouping of events but a generic action like something that you just do). If you want to make that change, please do - and update these docs!
+2. When someone clicks that button / views that page / does that thing, then simply call [`addProductIntent` in the `teamLogic`](https://github.com/PostHog/posthog/blob/master/frontend/src/scenes/teamLogic.tsx#L155). That fires off an API request that records the product intent in the [database](https://github.com/PostHog/posthog/blob/master/posthog/models/product_intent/product_intent.py) and sends the event for you. You don't need to send the event yourself - it's all handled.
+    - You must include the _context_ of the intent with this API call, this is so that you can understand what is driving product intent in the analytics. You can store this in the `intent_context` - and you can find existing intent contexts [here](https://github.com/PostHog/posthog/blob/master/frontend/src/lib/utils/product-intents.ts).
+
+## Product Activation
+
+Every product should have activation criteria - these are used to determine if a user has activated for a specific product yet. If they haven't, and they've showed intent for that product, we can nudge them in the right direction. These are also used to understand what retention looks like for the product, and to figure out what PostHog can do to offer a better experience!
+
+To add a new product to this, you can add the activation criteria [here](https://github.com/PostHog/posthog/blob/master/posthog/models/product_intent/product_intent.py#L77-L82).
+
+This code is run every time an intent is updated. For example, if the activation criteria is "save 4 insights", and we send a product intent every time someone clicks "new insight", we'll also check at that time if they have 4 insights saved, and if so mark them as activated.
+
+This part of the product intent plumbing needs some work - we should be able to manually trigger activation checks whenever someone does a certain action (not an Action like a grouping of events but a generic action like something that you just do). If you want to make that change, please do - and update these docs!
+
+
+## Cross Sells
+
+As well as understanding what actions users take when trying out a product, it's also useful to encourage users to try out other products that would be helpful for them. If you are using product analytics for example, session replay is a really helpful way to understand *why* a metric is what it is. If you are creating an onboarding funnel to understand your conversion, running an experiment to improve that conversion would be helpful.
+
+We track cross-sells within the product using the same product intent framework. There is a helper for this in the `teamsLogic` called [`addProductIntentForCrossSell`](https://github.com/PostHog/posthog/blob/master/frontend/src/scenes/teamLogic.tsx#L158), which you can use to track cross sells. You can find these in analytics using the usual event for product intent (`user showed product intent`) and filtering by `type=cross_sell`.
 
 ## Why does this matter?
 
