@@ -128,11 +128,11 @@ Alternatively, if you'd prefer not to use [Flox-based instant setup](#instant-se
 
 In this step we will start all the external services needed by PostHog to work.
 
-First, append line `127.0.0.1 kafka clickhouse` to `/etc/hosts`. Our ClickHouse and Kafka data services won't be able to talk to each other without these mapped hosts.  
+First, append line `127.0.0.1 kafka clickhouse clickhouse-coordinator` to `/etc/hosts`. Our ClickHouse and Kafka data services won't be able to talk to each other without these mapped hosts.  
 You can do this in one line with:
 
 ```bash
-echo '127.0.0.1 kafka clickhouse' | sudo tee -a /etc/hosts
+echo '127.0.0.1 kafka clickhouse clickhouse-coordinator' | sudo tee -a /etc/hosts
 ```
 
 > If you are using a newer (>=4.1) version of Podman instead of Docker, the host machine's `/etc/hosts` is used as the base hosts file for containers by default, instead of container's `/etc/hosts` like in Docker. This can make hostname resolution fail in the ClickHouse container, and can be mended by setting `base_hosts_file="none"` in [`containers.conf`](https://github.com/containers/common/blob/main/docs/containers.conf.5.md#containers-table).
@@ -365,6 +365,7 @@ Open [http://localhost:8010](http://localhost:8010) to see the app.
 
 To get some practical test data into your brand-new instance of PostHog, run `DEBUG=1 ./manage.py generate_demo_data`. For a list of useful arguments of the command, run `DEBUG=1 ./manage.py generate_demo_data --help`.
 
+> **Friendly Tip** The first time you run the app, you can log in with a test account: _user_:`test@posthog.com` _pwd_:`12345678`.
 
 #### 7. Develop
 
@@ -467,6 +468,14 @@ With PyCharm's built in support for Django, it's fairly easy to setup debugging 
    - "Celery" and click on debug (optional)
    - "Frontend" and click on run
    - "Plugin server" and click on run
+
+## Extra: Accessing Postgres
+
+While developing, there are times you may want to connect to the database to query the local database, make changes, etc. To connect to the database, use a tool like pgAdmin and enter these connection details: _host_:`localhost` _port_:`5432` _database_:`posthog`, _username_:`posthog`, _pwd_:`posthog`.
+
+## Extra: Accessing the Django Admin
+
+If you cannot access the Django admin http://localhost:8000/admin/, it could be that your local user is not set up as a staff user. You can connect to the database, find your `posthog_user` and set `is_staf` to `true`. This should make the admin page accessible.
 
 ## Extra: Developing paid features (PostHog employees only)
 

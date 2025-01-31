@@ -1,0 +1,38 @@
+A trace is a group that contains multiple spans, generation, and embeddings.
+
+Event Name: `$ai_trace`  
+
+| Property | Description |
+|----------|-------------|
+| `$ai_trace_id` | The trace ID of the request (a UUID to group AI events) |
+| `$ai_input_state` | The input of the whole trace |
+| `$ai_output_state` | The output of the whole trace |
+| `$ai_latency` | The latency of the trace (ms) |
+| `$ai_span_name` | The name of the span |
+| `$ai_span_id` | The ID of the span |
+| `$ai_error` | The error of the trace |
+| `$ai_is_error` | Whether the trace was an error |
+
+### Example
+
+```bash
+curl -X POST "<ph_client_api_host>/capture/" \
+     -H "Content-Type: application/json" \
+     -d '{
+         "api_key": "<ph_project_api_key>",
+         "event": "$ai_trace",
+         "properties": {
+             "distinct_id": "distinct_id_of_your_user",
+             "$ai_trace_id": "trace_id",
+             "$ai_input_state": "[{\"role\": \"user\", \"content\": \"Tell me a fun fact about hedgehogs\"}]",
+             "$ai_output_state": "[{\"role\": \"assistant\", \"content\": \"Hedgehogs are small mammals with spines on their back.\"}]",
+             "$ai_latency": 100,
+             "$ai_span_name": "Trace Name",
+             "$ai_span_id": "Trace Id",
+             "$ai_error": "error",
+             "$ai_is_error": true
+         },
+         "timestamp": "2025-01-30T12:00:00Z"
+     }'
+
+```

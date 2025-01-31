@@ -1,5 +1,5 @@
 ---
-title: LLM insights (beta)
+title: LLM observability integrations (beta)
 availability:
     free: full
     selfServe: full

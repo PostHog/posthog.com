@@ -106,7 +106,7 @@ const subfeatures = [
     },
     {
         title: 'Web or mobile session recording',
-        description: 'Web or Android (beta) available',
+        description: 'Your choice of web and mobile SDKs',
         icon: <IconPhone />,
     },
     {
@@ -220,7 +220,7 @@ const comparison = [
             LogRocket: true,
             Matomo: false,
             FullStory: true,
-            PostHog: '<a href="https://github.com/PostHog/posthog/issues/12344">In beta</a>',
+            PostHog: true,
         },
     },
     {
@@ -230,7 +230,7 @@ const comparison = [
             LogRocket: true,
             Matomo: false,
             FullStory: true,
-            PostHog: '<a href="https://github.com/PostHog/posthog/issues/13267">In beta</a>',
+            PostHog: true,
         },
     },
     {

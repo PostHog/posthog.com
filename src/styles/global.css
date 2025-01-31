@@ -1115,7 +1115,7 @@ ul {
     animation-iteration-count: infinite;
 }
 
-.mermaid {
+.mermaid-container {
     .messageText,
     tspan {
         @apply dark:!fill-white;

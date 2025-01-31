@@ -758,6 +758,10 @@ export const handbookSidebar = [
                 url: '/handbook/growth/sales/expansion-and-retention',
             },
             {
+                name: 'Customer Success',
+                url: '/handbook/growth/sales/customer-success',
+            },
+            {
                 name: 'How we work',
                 url: '/handbook/growth/sales/how-we-work',
             },
@@ -1501,6 +1505,10 @@ export const docsMenu = {
                         {
                             name: 'Nuxt',
                             url: '/docs/advanced/proxy/nuxt',
+                        },
+                        {
+                            name: 'Pomerium',
+                            url: '/docs/advanced/proxy/pomerium',
                         },
                         {
                             name: 'Remix',
@@ -2312,6 +2320,16 @@ export const docsMenu = {
                         className: 'uppercase !bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',
                     },
                 },
+                {
+                    name: 'Color themes',
+                    url: '/docs/product-analytics/color-themes',
+                    icon: 'IconPalette',
+                    color: 'seagreen',
+                    badge: {
+                        title: 'Beta',
+                        className: 'uppercase !bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',
+                    },
+                },
             ],
         },
         {
@@ -2421,10 +2439,6 @@ export const docsMenu = {
                     url: '/docs/session-replay/mobile',
                     icon: 'IconPhone',
                     color: 'blue',
-                    badge: {
-                        title: 'Beta',
-                        className: 'uppercase !bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',
-                    },
                 },
                 {
                     name: 'Troubleshooting and FAQs',
@@ -2574,6 +2588,12 @@ export const docsMenu = {
                     url: '/docs/feature-flags/bootstrapping',
                     icon: 'IconLaptop',
                     color: 'salmon',
+                },
+                {
+                    name: 'Remote config',
+                    url: '/docs/feature-flags/remote-config',
+                    icon: 'IconGear',
+                    color: 'green',
                 },
                 {
                     name: 'Early access feature management',
@@ -2995,6 +3015,10 @@ export const docsMenu = {
                             url: '/docs/cdp/destinations/intercom',
                         },
                         {
+                            name: 'June',
+                            url: '/docs/cdp/destinations/june',
+                        },
+                        {
                             name: 'Klaviyo',
                             url: '/docs/cdp/destinations/klaviyo',
                         },
@@ -3233,45 +3257,41 @@ export const docsMenu = {
                     color: 'red',
                 },
                 {
+                    name: 'Traces and generations',
+                    url: '/docs/ai-engineering/traces-generations',
+                    icon: 'IconTarget',
+                    color: 'orange',
+                },
+                {
                     name: 'Tutorials and guides',
                     url: '/docs/ai-engineering/tutorials',
                     icon: 'IconGraduationCap',
-                    color: 'yellow',
+                    color: 'salmon',
                     featured: true,
                 },
                 {
-                    name: 'Integrations',
-                },
-                {
-                    name: 'LLM insights',
+                    name: 'Observability integrations',
                     url: '/docs/ai-engineering/llm-insights',
                     icon: 'IconAIText',
-                    color: 'blue',
-                    featured: true,
-                },
-                {
-                    name: 'Helicone',
-                    url: '/docs/ai-engineering/helicone-posthog',
-                    icon: 'IconWrench',
-                    color: 'green',
-                },
-                {
-                    name: 'Keywords AI',
-                    url: '/docs/ai-engineering/keywords-ai-posthog',
-                    icon: 'IconWrench',
-                    color: 'blue',
-                },
-                {
-                    name: 'Langfuse',
-                    url: '/docs/ai-engineering/langfuse-posthog',
-                    icon: 'IconWrench',
-                    color: 'red',
-                },
-                {
-                    name: 'Traceloop',
-                    url: '/docs/ai-engineering/traceloop-posthog',
-                    icon: 'IconWrench',
                     color: 'purple',
+                    children: [
+                        {
+                            name: 'Helicone',
+                            url: '/docs/ai-engineering/helicone-posthog',
+                        },
+                        {
+                            name: 'Langfuse',
+                            url: '/docs/ai-engineering/langfuse-posthog',
+                        },
+                        {
+                            name: 'Traceloop',
+                            url: '/docs/ai-engineering/traceloop-posthog',
+                        },
+                        {
+                            name: 'Keywords AI',
+                            url: '/docs/ai-engineering/keywords-ai-posthog',
+                        },
+                    ],
                 },
             ],
         },
@@ -3305,6 +3325,12 @@ export const docsMenu = {
                     url: '/docs/error-tracking/monitoring',
                     icon: 'IconGraph',
                     color: 'orange',
+                },
+                {
+                    name: 'Stack traces',
+                    url: '/docs/error-tracking/stack-traces',
+                    icon: 'IconCode',
+                    color: 'seagreen',
                 },
                 {
                     name: 'Troubleshooting and FAQs',

@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from 'react'
+import React, { useEffect, useMemo, useRef, useState } from 'react'
 import ReactDOM from 'react-dom'
 import {
     IconBrowser,
@@ -49,16 +49,22 @@ import {
     IconLlmObservability,
     IconListCheck,
     IconApp,
+    IconPhone,
+    IconArrowLeft,
+    IconArrowRight,
+    IconHeadset,
 } from '@posthog/icons'
 import CloudinaryImage from 'components/CloudinaryImage'
 import useProducts from 'hooks/useProducts'
 import { CallToAction } from 'components/CallToAction'
 import { Feature } from 'components/Roadmap'
 import { useRoadmaps } from 'hooks/useRoadmaps'
-import { graphql, Link } from 'gatsby'
+import { graphql } from 'gatsby'
 import { useStaticQuery } from 'gatsby'
 import { AnimatePresence, motion } from 'framer-motion'
 import Slider from 'components/Slider'
+import { PlayerEvents, DotLottiePlayer } from '@dotlottie/react-player'
+import { MenuContainer } from 'components/PostLayout/MobileNav'
 
 type Product = {
     name: string
@@ -152,13 +158,14 @@ const products: Product[] = [
         color: 'yellow',
         Icon: IconRewindPlay,
         description:
-            'Watch users interacting with your app or website. Available for web, Android (beta), and iOS (alpha).',
+            'Watch users interacting with your app or website. Available for web, Android, iOS, React Native, and Flutter.',
         pricingKey: 'session_replay',
         types: ['Product', 'Engineering'],
         features: [
             { title: 'Event timeline', Icon: IconClock },
             { title: 'Console logs', Icon: IconTerminal },
             { title: 'Network requests', Icon: IconPulse },
+            { title: 'Mobile SDKs', Icon: IconPhone },
         ],
         Images: () => {
             return (
@@ -298,7 +305,7 @@ const products: Product[] = [
         colorDark: '[#C170E8]',
         Icon: IconLlmObservability,
         description: 'Build AI features with full visibility – both in development and production.',
-        pricingKey: 'llm-observability',
+        pricingKey: 'product_analytics',
         types: ['AI'],
         features: [
             { title: 'LLM traces', Icon: IconDecisionTree },
@@ -320,19 +327,9 @@ const products: Product[] = [
         status: 'WIP',
         badge: 'ALPHA',
         pricing: {
-            FreeTier: () => (
-                <p className="text-base m-0">
-                    <strong>Unlimited</strong> during beta
-                </p>
-            ),
-            StartsAt: () => (
-                <p className="text-base m-0">
-                    <strong>Free</strong> during beta
-                </p>
-            ),
             cta: {
-                url: '/pricing',
-                text: 'Request access',
+                url: 'https://app.posthog.com/home#panel=feature-previews',
+                text: 'Try it out',
             },
         },
     },
@@ -353,12 +350,23 @@ const products: Product[] = [
         roadmapID: 2111,
     },
     {
-        name: 'Heatmaps 2.0',
+        name: 'Heatmaps',
         Icon: IconApp,
         color: 'yellow',
         types: ['Marketing'],
-        status: 'WIP',
-        roadmapID: 2165,
+        status: 'Production',
+        description: 'Visually track user interactions, clicks, and scrolling behavior.',
+        Images: () => {
+            return (
+                <CloudinaryImage src="https://res.cloudinary.com/dmukukwp6/image/upload/v1716592885/posthog.com/contents/docs/toolbar/settings.png" />
+            )
+        },
+        features: [
+            { title: 'Click tracking', Icon: IconApp },
+            { title: 'Scroll depth', Icon: IconApp },
+            { title: 'Rage clicks', Icon: IconApp },
+            { title: 'Mouse movement', Icon: IconApp },
+        ],
     },
     {
         name: 'Product roadmaps',
@@ -424,6 +432,14 @@ const products: Product[] = [
         status: 'Roadmap',
         roadmapID: 2171,
     },
+    {
+        name: 'CRM',
+        Icon: IconHeadset,
+        color: 'green',
+        types: ['Sales'],
+        status: 'Roadmap',
+        roadmapID: 2110,
+    },
 ]
 
 const legend = [
@@ -449,7 +465,15 @@ const numberToWords = (num: number) => {
     return num.toString()
 }
 
-const RoadmapProductDetails = ({ product }: { product: Product }) => {
+const RoadmapProductDetails = ({
+    product,
+    onNext,
+    onPrev,
+}: {
+    product: Product
+    onNext: () => void
+    onPrev: () => void
+}) => {
     const { name, description, Icon, color, colorDark, roadmapID } = product
     const { roadmaps, mutate, isLoading } = useRoadmaps({
         params: {
@@ -466,7 +490,8 @@ const RoadmapProductDetails = ({ product }: { product: Product }) => {
 
     return (
         <div className="bg-white dark:bg-accent-dark border border-border dark:border-dark md:max-w-[700px] w-full overflow-hidden">
-            <div className="p-6">
+            <div className="p-6 relative">
+                <ProductNavButtons onNext={onNext} onPrev={onPrev} />
                 <h2 className="text-xl m-0 flex space-x-2">
                     <Icon className={`size-8 text-${color} ${colorDark ? 'dark:text-${colorDark}' : ''}`} />
                     <span>{name}</span>
@@ -475,7 +500,7 @@ const RoadmapProductDetails = ({ product }: { product: Product }) => {
                 <div className="mt-4">
                     {isLoading ? (
                         <div className="h-64 bg-accent dark:bg-dark rounded-md animate-pulse" />
-                    ) : (
+                    ) : roadmap ? (
                         <Feature
                             id={roadmap.id}
                             {...roadmap.attributes}
@@ -483,23 +508,82 @@ const RoadmapProductDetails = ({ product }: { product: Product }) => {
                             onLike={mutate}
                             onUpdate={mutate}
                         />
-                    )}
+                    ) : null}
                 </div>
             </div>
         </div>
     )
 }
 
-const ProductDetails = ({ product }: { product: Product }) => {
-    const { name, description, features, Images, Icon, color, colorDark, pricingKey, pricing, badge } = product
+const Lottie = ({ lottieRef, src, PlaceholderIcon }) => {
+    const [ready, setReady] = useState(false)
+
+    return (
+        <>
+            {src && (
+                <DotLottiePlayer
+                    autoplay={true}
+                    style={{ display: ready ? 'inline-block' : 'none' }}
+                    lottieRef={lottieRef}
+                    src={src}
+                    onEvent={(event) => {
+                        if (event === PlayerEvents.Ready) {
+                            setReady(true)
+                        }
+                    }}
+                    className="size-8"
+                />
+            )}
+            {!ready && <PlaceholderIcon />}
+        </>
+    )
+}
+
+const ProductNavButtons = ({ onNext, onPrev }: { onNext: () => void; onPrev: () => void }) => {
+    return (
+        <div className="flex space-x-1 absolute top-2 right-2">
+            <button
+                className="flex items-start gap-1 text-sm font-medium click rounded-md px-1.5 py-0.5 transition-all w-full border border-b-3 border-light dark:border-dark hover:translate-y-[-1px] active:translate-y-[1px] active:transition-all"
+                onClick={onPrev}
+            >
+                <IconArrowLeft className="size-5" />
+            </button>
+            <button
+                className="flex items-start gap-1 text-sm font-medium click rounded-md px-1.5 py-0.5 transition-all w-full border border-b-3 border-light dark:border-dark hover:translate-y-[-1px] active:translate-y-[1px] active:transition-all"
+                onClick={onNext}
+            >
+                <IconArrowRight className="size-5" />
+            </button>
+        </div>
+    )
+}
+
+const ProductDetails = ({ product, onNext, onPrev }: { product: Product; onNext: () => void; onPrev: () => void }) => {
+    const { name, description, features, Images, Icon, color, colorDark, pricingKey, pricing, badge, lottieSrc } =
+        product
     const products = useProducts()
     const billingData = products.products.find((billingProduct) => billingProduct.type === pricingKey)
+    const lottieRef = useRef()
 
     return (
         <div className="@container bg-white dark:bg-accent-dark border border-border dark:border-dark md:max-w-[700px] w-full overflow-hidden">
-            <div className="px-6 pt-6">
+            <div className="px-6 pt-6 relative">
+                <ProductNavButtons onNext={onNext} onPrev={onPrev} />
                 <h2 className="text-xl m-0 flex space-x-2 items-center">
-                    <Icon className={`size-8 text-${color} ${colorDark ? 'dark:text-${colorDark}' : ''}`} />
+                    {lottieSrc ? (
+                        <Lottie
+                            lottieRef={lottieRef}
+                            src={lottieSrc}
+                            PlaceholderIcon={() => (
+                                <Icon
+                                    className={`!m-0 size-8 text-${color} ${colorDark ? `dark:text-${colorDark}` : ''}`}
+                                />
+                            )}
+                        />
+                    ) : (
+                        <Icon className={`size-8 text-${color} ${colorDark ? `dark:text-${colorDark}` : ''}`} />
+                    )}
+
                     <span>{name}</span>
                     {badge && (
                         <span className="bg-accent dark:bg-accent-dark rounded-md px-2 py-1 text-sm">{badge}</span>
@@ -608,8 +692,69 @@ const ProductModal = ({
     )
 }
 
-const sorted = ['Product', 'Marketing', 'Support', 'AI', 'Data', 'Engineering']
+const sorted = ['Product', 'Marketing', 'Support', 'Sales', 'AI', 'Data', 'Engineering']
 
+const ProductButton = ({
+    type,
+    products,
+    activeProduct,
+    activeStatus,
+    setActiveProduct,
+    setProductModalOpen,
+}: {
+    type: string
+    products: Product[]
+    activeProduct: Product | null
+    activeStatus: string
+    setActiveProduct: (product: Product) => void
+    setProductModalOpen: (open: boolean) => void
+}) => {
+    return (
+        <>
+            <p className="text-sm opacity-70 m-0 mb-1 px-3">{type}</p>
+            <ul className="list-none m-0 p-0 space-y-px">
+                {products.map((product) => {
+                    const { Icon, name, color, colorDark, status } = product
+                    const active = activeProduct?.name === product.name
+                    const isInActiveStatus = activeStatus === 'All products' || activeStatus === status
+                    const statusColor = legend.find(
+                        (legend) => legend.name.toLowerCase() === status.toLowerCase()
+                    )?.color
+                    return (
+                        <li key={name}>
+                            <button
+                                className={`flex items-start gap-1 text-sm font-medium click rounded-md px-3 py-1.5 transition-all w-full 
+                        border border-b-3 border-transparent hover:border-light dark:hover:border-dark hover:translate-y-[-1px] active:translate-y-[1px] active:transition-all
+                        ${active ? 'md:!border-light md:dark:!border-dark md:!bg-accent md:dark:!bg-accent-dark' : ''}
+                        ${isInActiveStatus ? '' : 'opacity-30'} ${status === 'Roadmap' ? 'italic' : ''}`}
+                                onClick={() => {
+                                    setActiveProduct(product)
+                                    if (window.innerWidth < 768) {
+                                        setProductModalOpen(true)
+                                    }
+                                }}
+                                onFocus={(e) => {
+                                    if (e.type === 'focus' && !e.currentTarget.matches(':focus-visible')) {
+                                        return
+                                    }
+                                    setActiveProduct(product)
+                                }}
+                            >
+                                <Icon className={`size-5 text-${color} ${colorDark ? 'dark:text-${colorDark}' : ''}`} />
+                                <div className="text-left">
+                                    <span className="text-left">{name}</span>
+                                    <span
+                                        className={`inline-block mt-1.5 ml-1 size-2 bg-${statusColor} rounded-full`}
+                                    />
+                                </div>
+                            </button>
+                        </li>
+                    )
+                })}
+            </ul>
+        </>
+    )
+}
 export default function Hero(): JSX.Element {
     const { staticRoadmaps } = useStaticQuery(graphql`
         {
@@ -627,7 +772,6 @@ export default function Hero(): JSX.Element {
     `)
 
     const [productModalOpen, setProductModalOpen] = useState(false)
-    const [activeProduct, setActiveProduct] = useState<Product | null>(products[0])
     const [activeStatus, setActiveStatus] = useState<string>('All products')
     const groupedProducts = useMemo(() => {
         const groupedProducts: { [key: string]: Product[] } = {}
@@ -643,18 +787,46 @@ export default function Hero(): JSX.Element {
                 })
             })
         })
-        return groupedProducts
+        return [...Object.entries(groupedProducts)].sort(
+            ([typeA], [typeB]) => sorted.indexOf(typeA) - sorted.indexOf(typeB)
+        )
     }, [])
+    const [activeProduct, setActiveProduct] = useState<Product | null>(groupedProducts[0][1][0])
+
+    const handleNext = () => {
+        const products = groupedProducts
+            .flatMap(([_type, products]) => products)
+            .filter((product) => activeStatus === 'All products' || activeStatus === product.status)
+        const nextIndex = products.findIndex((product) => product === activeProduct) + 1
+        setActiveProduct(products[nextIndex] || products[0])
+    }
+
+    const handlePrev = () => {
+        const products = groupedProducts
+            .flatMap(([_type, products]) => products)
+            .filter((product) => activeStatus === 'All products' || activeStatus === product.status)
+        const prevIndex = products.findIndex((product) => product === activeProduct) - 1
+        setActiveProduct(products[prevIndex] || products[products.length - 1])
+    }
 
     const checkMobile = () => {
         const isMobile = window.innerWidth < 768
-        setActiveProduct(isMobile ? null : products[0])
+        setActiveProduct(isMobile ? null : groupedProducts[0][1][0])
     }
 
     useEffect(() => {
         window.addEventListener('resize', checkMobile)
         return () => window.removeEventListener('resize', checkMobile)
     }, [])
+
+    useEffect(() => {
+        if (activeStatus !== 'All products' && activeProduct?.status !== activeStatus) {
+            const newActiveProduct = groupedProducts
+                .flatMap(([_type, products]) => products)
+                .find((product) => product.status === activeStatus)
+            setActiveProduct(newActiveProduct || groupedProducts[0][1][0])
+        }
+    }, [activeStatus])
 
     return (
         <section className="max-w-screen-2xl mx-auto py-12 md:px-4">
@@ -668,7 +840,7 @@ export default function Hero(): JSX.Element {
                         return (
                             <div className="relative" key={name}>
                                 <button
-                                    className={`text-[15px] font-semibold flex space-x-2 items-center px-3 py-1.5 whitespace-nowrap ${
+                                    className={`text-[15px] font-semibold flex space-x-2 items-center px-3 py-1 whitespace-nowrap ${
                                         active ? 'font-bold' : 'opacity-75 hover:opacity-100'
                                     }`}
                                     onClick={() => setActiveStatus(name)}
@@ -691,98 +863,62 @@ export default function Hero(): JSX.Element {
                 </Slider>
             </div>
             <div className="flex px-2 md:px-0 md:space-x-6 items-start">
-                <div className="flex-1">
-                    <ul className="grid grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-x-2 gap-y-6 lg:gap-y-8 md:gap-4 list-none m-0 p-0 flex-grow flex-shrink-0">
-                        {[...Object.entries(groupedProducts)]
-                            .sort(([typeA], [typeB]) => sorted.indexOf(typeA) - sorted.indexOf(typeB))
-                            .map(([type, products]) => (
-                                <li key={type}>
-                                    <p className="text-sm opacity-70 m-0 mb-1 px-3">{type}</p>
-                                    <ul className="list-none m-0 p-0 space-y-px">
-                                        {products.map((product) => {
-                                            const { Icon, name, color, colorDark, status } = product
-                                            const active = activeProduct?.name === product.name
-                                            const isInActiveStatus =
-                                                activeStatus === 'All products' || activeStatus === status
-                                            const statusColor = legend.find(
-                                                (legend) => legend.name.toLowerCase() === status.toLowerCase()
-                                            )?.color
-                                            return (
-                                                <li key={name}>
-                                                    <button
-                                                        className={`flex items-start gap-1 text-sm font-medium click rounded-md px-3 py-1.5 transition-all w-full 
-                                                            border border-b-3 border-transparent hover:border-light dark:hover:border-dark hover:translate-y-[-1px] active:translate-y-[1px] active:transition-all
-                                                            ${
-                                                                active
-                                                                    ? '!border-light dark:!border-dark bg-accent dark:bg-accent-dark'
-                                                                    : ''
-                                                            }
-                                                            ${isInActiveStatus ? '' : 'opacity-30'} ${
-                                                            status === 'Roadmap' ? 'italic' : ''
-                                                        }`}
-                                                        onClick={() => {
-                                                            setActiveProduct(product)
-                                                            if (window.innerWidth < 768) {
-                                                                setProductModalOpen(true)
-                                                            }
-                                                        }}
-                                                        onFocus={(e) => {
-                                                            if (
-                                                                e.type === 'focus' &&
-                                                                !e.currentTarget.matches(':focus-visible')
-                                                            ) {
-                                                                return
-                                                            }
-                                                            setActiveProduct(product)
-                                                        }}
-                                                    >
-                                                        <Icon
-                                                            className={`size-5 text-${color} ${
-                                                                colorDark ? 'dark:text-${colorDark}' : ''
-                                                            }`}
-                                                        />
-                                                        <div className="text-left">
-                                                            <span className="text-left">{name}</span>
-                                                            <span
-                                                                className={`inline-block mt-1.5 ml-1 size-2 bg-${statusColor} rounded-full`}
-                                                            />
-                                                        </div>
-                                                    </button>
-                                                </li>
-                                            )
-                                        })}
-                                    </ul>
-                                </li>
-                            ))}
-                    </ul>
-                    <div>
-                        <p className="text-sm text-primary/70 dark:text-primary-dark/70 mt-12">
-                            Each product is guaranteed to offer the lowest pricing vs. every competitor at scale.
-                        </p>
-                    </div>
-                    <div className="border-t border-border dark:border-dark pt-4 text-sm text-primary/70 dark:text-primary-dark/70">
-                        Just starting out? <Link to="/founder-stack">Explore our founder stack.</Link>
-                    </div>
-                </div>
+                <ul className="flex-1 grid grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-x-2 gap-y-6 lg:gap-y-8 md:gap-4 list-none m-0 p-0 flex-grow flex-shrink-0">
+                    {groupedProducts.map(([type, products]) =>
+                        type === 'Sales' ? null : (
+                            <li key={type}>
+                                <ProductButton
+                                    type={type}
+                                    products={products}
+                                    activeProduct={activeProduct}
+                                    activeStatus={activeStatus}
+                                    setActiveProduct={setActiveProduct}
+                                    setProductModalOpen={setProductModalOpen}
+                                />
+                                {type === 'Support' ? (
+                                    <div className="mt-2">
+                                        <ProductButton
+                                            type={'Sales'}
+                                            products={groupedProducts.find(([type]) => type === 'Sales')[1]}
+                                            activeProduct={activeProduct}
+                                            activeStatus={activeStatus}
+                                            setActiveProduct={setActiveProduct}
+                                            setProductModalOpen={setProductModalOpen}
+                                        />
+                                    </div>
+                                ) : null}
+                            </li>
+                        )
+                    )}
+                </ul>
                 <div className="hidden md:block flex-[0_0_550px]">
                     {activeProduct && (
                         <div>
                             {activeProduct.roadmapID ? (
-                                <RoadmapProductDetails product={activeProduct} />
+                                <RoadmapProductDetails
+                                    product={activeProduct}
+                                    onNext={handleNext}
+                                    onPrev={handlePrev}
+                                />
                             ) : (
-                                <ProductDetails product={activeProduct} />
+                                <ProductDetails onNext={handleNext} onPrev={handlePrev} product={activeProduct} />
                             )}
                         </div>
                     )}
                 </div>
-                {activeProduct && (
-                    <ProductModal productModalOpen={productModalOpen} setProductModalOpen={setProductModalOpen}>
+
+                {productModalOpen && activeProduct && (
+                    <MenuContainer
+                        onClose={() => setProductModalOpen(false)}
+                        backgroundClassName="top-auto bottom-[75px]"
+                        cardContainerClassName="top-auto bottom-[75px]"
+                    >
                         {activeProduct.roadmapID ? (
-                            <RoadmapProductDetails product={activeProduct} />
+                            <RoadmapProductDetails product={activeProduct} onNext={handleNext} onPrev={handlePrev} />
                         ) : (
-                            <ProductDetails product={activeProduct} />
+                            <ProductDetails onNext={handleNext} onPrev={handlePrev} product={activeProduct} />
                         )}
-                    </ProductModal>
+                    </MenuContainer>
                 )}
             </div>
         </section>
