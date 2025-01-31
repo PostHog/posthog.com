@@ -87,7 +87,7 @@ Our strong preference is for customers to pay by credit card, as this is easier 
 
 If a customer wants to pay by ACH or bank transfer, we will usually only consider this if they are paying for 1 year or more up front. This is more likely to be the case for very large customers.
 
-## Contract Buyouts
+## Contract buyouts
 
 Sometimes customers will be locked into a contract with a competitor and don't have the budget to pay for two solutions at the same time.  In exchange for them sharing the details of their existing pricing and contract structure, we can offset the contract start date by up to 6 months from the day they wish to start using us.  
 
