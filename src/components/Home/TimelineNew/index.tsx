@@ -308,8 +308,8 @@ export default function TimelineNew() {
                 {mobileDetailsOpen && (
                     <MenuContainer
                         onClose={() => setMobileDetailsOpen(false)}
-                        backgroundClassName="top-auto bottom-[75.75px]"
-                        cardContainerClassName="top-auto bottom-[75.75px]"
+                        backgroundClassName="top-auto bottom-[75px]"
+                        cardContainerClassName="top-auto bottom-[75px]"
                     >
                         <RoadmapDetail
                             activeRoadmap={activeRoadmap}

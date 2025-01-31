@@ -116,7 +116,7 @@ export const MenuContainer: React.FC<{
                     dragControls={dragControls}
                     drag="y"
                     dragListener={false}
-                    className={`bg-white dark:bg-accent-dark pb-4 pt-2 px-4 border-t border-border dark:border-dark shadow ${className}`}
+                    className={`bg-white dark:bg-accent-dark pb-4 pt-2 px-4 border-t border-border dark:border-dark ${className}`}
                 >
                     <div
                         onPointerDown={startDrag}

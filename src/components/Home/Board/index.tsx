@@ -896,11 +896,11 @@ export default function Hero(): JSX.Element {
                     )}
                 </div>
 
-                {productModalOpen && (
+                {productModalOpen && activeProduct && (
                     <MenuContainer
                         onClose={() => setProductModalOpen(false)}
-                        backgroundClassName="top-auto bottom-[75.75px]"
-                        cardContainerClassName="top-auto bottom-[75.75px]"
+                        backgroundClassName="top-auto bottom-[75px]"
+                        cardContainerClassName="top-auto bottom-[75px]"
                     >
                         {activeProduct.roadmapID ? (
                             <RoadmapProductDetails product={activeProduct} onNext={handleNext} onPrev={handlePrev} />
