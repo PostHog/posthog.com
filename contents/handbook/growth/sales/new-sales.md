@@ -66,6 +66,8 @@ Most companies add friction here by making customers jump on a call first to qua
 
 If you're pretty sure that they should be qualified out, you should still be helpful over email - some customers just use the form to get in touch and don't want to actually have a demo (e.g. they have a billing question or are asking about compliance things like HIPAA.)
 
+If they're eligible for the [Startup Plan](/startups), route them to the application form and disqualify them as it's not an immediate opportunity (but we sincerely hope they grow into loyal PostHog customers). If their usage will burn through their credits quickly, you should feel free to switch their lead status to `Nurture` and keep close tabs on them. Per our [usual approach to sales](/handbook/growth/sales/overview), we want to make sure they're successful in this "high-use" scenario and are building with us for the long-term.
+
 You can also redirect them to use the In-app support modal if they have a product-related question - this will then be routed to the right team, as well as showing them CTAs to upgrade for high priority support.
 
 > **Examples of good discovery questions - this is not a script, just ideas!**
