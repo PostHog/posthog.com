@@ -355,7 +355,7 @@ const products: Product[] = [
         roadmapID: 2111,
     },
     {
-        name: 'Heatmaps 2.0',
+        name: 'Heatmaps',
         Icon: IconApp,
         color: 'yellow',
         types: ['Marketing'],
