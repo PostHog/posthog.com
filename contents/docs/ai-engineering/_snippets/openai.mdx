@@ -42,6 +42,11 @@ const openai = new OpenAI({
   apiKey: 'your_openai_api_key',
   posthog: phClient,
 });
+
+// ... your code here ...
+
+// IMPORTANT: Shutdown the client when you're done to ensure all events are sent
+phClient.shutdown()
 ```
 
 </MultiLanguage>
