@@ -89,7 +89,7 @@ If a customer wants to pay by ACH or bank transfer, we will usually only conside
 
 ## Contract buyouts
 
-Sometimes customers will be locked into a contract with a competitor and don't have the budget to pay for two solutions at the same time.  In exchange for them sharing the details of their existing pricing and contract structure, we can offset the contract start date by up to 6 months from the day they wish to start using us.  
+Sometimes customers will be locked into a contract with a competitor and don't have the budget to pay for two solutions at the same time.  In exchange for them sharing the details of their existing pricing and contract structure, we can offset the contract start date by up to 6 months from the day they wish to start using us, and provide enough credit to cover their projected usage for that period (e.g. PostHog for free for them until their contract start date).  
 
 * We will still need them to sign an order form to gain access to our paid features.  
 * We can only make this accommodation for annual paid up-front plans.
