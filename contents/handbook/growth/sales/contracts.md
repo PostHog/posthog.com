@@ -89,13 +89,17 @@ If a customer wants to pay by ACH or bank transfer, we will usually only conside
 
 ## Contract buyouts
 
-Sometimes customers will be locked into a contract with a competitor and don't have the budget to pay for two solutions at the same time.  In exchange for them sharing the details of their existing pricing and contract structure, we can offset the contract start date by up to 6 months from the day they wish to start using us, and provide enough credit to cover their projected usage for that period (e.g. PostHog for free for them until their contract start date).  
+Sometimes customers will be locked into a contract with a competitor, but want to switch to PostHog when their contract is up. In this case, we are willing to let them use PostHog for free for up to 6 months. This is beneficial to PostHog as well, as we can get them set up and using PostHog sooner, capitalizing on the momentum of their interest today, and giving them more time to get comfortable with the platform.
 
-* We will still need them to sign an order form to gain access to our paid features.  
-* We can only make this accommodation for annual paid up-front plans.
-* We will only do this where the contract value is above $20K/year.
+Some rules:
 
-> Normal commission rules apply here - commission won't be paid until the quarter in which the customer pay their annual invoice.
+* They need share a copy of their current contract/pricing/bank statement as proof.
+* They sign up to an annual contract worth $20k+/year, paid up front. Their PostHog contract starts when their current one expires. 
+* Their usage in the overlap period needs to be proportionate to the contract they've signed, ie. if they sign a $50k contract and have 6 months to run, they get $25k of PostHog credit for free.
+* The competitor they're using has to be 'real', ie. not some random side project. As a general rule, anyone we have written a [comparison article](/blog/tags/comparisons) about counts.
+* We have final discretion on deciding who gets the deal.
+
+> Normal commission rules apply here - commission is paid in the quarter in which the customer pay their annual invoice.
 
 ## Order Form
 
