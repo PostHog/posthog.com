@@ -92,6 +92,7 @@ export type Company = {
         publishedAt: string
         createdAt: string
         updatedAt: string
+        jobBoardURL?: string
     }
 }
 

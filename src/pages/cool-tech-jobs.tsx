@@ -5,7 +5,16 @@ import useCompanies, { Company, Filters as FiltersType } from 'hooks/useCompanie
 import Layout from 'components/Layout'
 import { layoutLogic } from 'logic/layoutLogic'
 import { useValues } from 'kea'
-import { IconChevronDown, IconArrowUpRight, IconX, IconPencil, IconTrash, IconShield } from '@posthog/icons'
+import {
+    IconChevronDown,
+    IconArrowUpRight,
+    IconX,
+    IconPencil,
+    IconTrash,
+    IconShield,
+    IconArrowLeft,
+    IconArrowRight,
+} from '@posthog/icons'
 import Link from 'components/Link'
 import dayjs from 'dayjs'
 import relativeTime from 'dayjs/plugin/relativeTime'
@@ -27,6 +36,7 @@ import Spinner from 'components/Spinner'
 import { useUser } from 'hooks/useUser'
 import uploadImage from 'components/Squeak/util/uploadImage'
 import { debounce } from 'lodash'
+import { Authentication } from 'components/Squeak'
 dayjs.extend(relativeTime)
 
 const toggleFilters = [
@@ -80,7 +90,7 @@ const Perks = ({ company, className }: { company: Company; className?: string })
     return (
         <ul className={`list-none p-0 m-0 ${className}`}>
             {perks.filter(Boolean).map((perk) => (
-                <li key={`${company.id}-${perk}`} className="flex gap-1.5 items-start">
+                <li key={`${company.id}-${perk.key}`} className="flex gap-1.5 items-start">
                     {perk.icon}
                     <span className="text-[15px] font-medium pt-1">{perk.label}</span>
                 </li>
@@ -587,10 +597,133 @@ const CompanyFormSkeleton = () => {
     )
 }
 
+const ModeratorInitialView = ({
+    onStartFromPendingCompany,
+    onAddNewCompany,
+}: {
+    onStartFromPendingCompany: (company: Company) => void
+    onAddNewCompany: () => void
+}) => {
+    const { getJwt } = useUser()
+    const [pendingCompanies, setPendingCompanies] = useState<Company[]>([])
+    const [selectedCompany, setSelectedCompany] = useState<Company | null>(null)
+
+    const getPendingCompanies = async () => {
+        const jwt = await getJwt()
+        const response = await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/pending-companies?populate=*`, {
+            headers: {
+                Authorization: `Bearer ${jwt}`,
+            },
+        })
+        const data = await response.json()
+        if (data.data?.length > 0) {
+            setPendingCompanies(data.data)
+            setSelectedCompany(data.data[0])
+        } else {
+            onAddNewCompany()
+        }
+    }
+
+    useEffect(() => {
+        getPendingCompanies()
+    }, [])
+
+    return pendingCompanies.length > 0 ? (
+        <div>
+            <Select
+                className="!p-0"
+                options={pendingCompanies.map((company) => ({ label: company.attributes.name, value: company.id }))}
+                value={selectedCompany?.id}
+                onChange={(value) => {
+                    setSelectedCompany(pendingCompanies.find((company) => company.id === value) || null)
+                }}
+                placeholder="Continue with a pending company"
+            />
+            {selectedCompany && (
+                <div className="mt-4">
+                    <CallToAction onClick={() => onStartFromPendingCompany(selectedCompany)} size="md" width="full">
+                        Continue with {selectedCompany?.attributes.name}
+                    </CallToAction>
+                </div>
+            )}
+            <h4 className="opacity-70 py-3 my-3 relative before:w-full before:h-[1px] before:bg-border dark:before:bg-dark before:absolute flex items-center justify-center text-base">
+                <span className="bg-white dark:bg-accent-dark px-2 relative">or</span>
+            </h4>
+            <CallToAction size="md" width="full" type="secondary" onClick={onAddNewCompany}>
+                Add a new company
+            </CallToAction>
+        </div>
+    ) : null
+}
+
+const JobBoardIntro = ({ onConfirm }: { onConfirm: () => void }) => {
+    return (
+        <div className="prose dark:prose-dark">
+            <p className="mb-2">
+                Our job board is designed to help product engineers (and other tech-adjacent candidates) find companies
+                that have a similar vibe to PostHog – where employees are empowered to do their best work.
+            </p>
+            <p className="mb-2">
+                To qualify to have your open roles listed, you'll need to meet the following criteria:
+            </p>
+            <ul className="mb-4">
+                <li>
+                    At least one unique perk listed in our filters
+                    <br />{' '}
+                    <span className="text-[15px] opacity-80">(Have a great perk we don't list? Let us know!)</span>
+                </li>
+                <li>
+                    A public job board (like Ashby or Greenhouse) so we can automatically keep our job board up to date
+                </li>
+                <li>
+                    <em>Actually be</em> a cool tech company where product engineers enjoy working!
+                </li>
+            </ul>
+            <CallToAction
+                onClick={onConfirm}
+                size="md"
+                width="full"
+                childClassName="flex items-center justify-center gap-1"
+            >
+                Next
+                <IconArrowRight className="size-5" />
+            </CallToAction>
+        </div>
+    )
+}
+
+const Auth = () => {
+    return (
+        <>
+            <div className="bg-border dark:bg-border-dark p-4 mt-0 mb-2">
+                <p className="text-sm mb-2">
+                    <strong>Note: PostHog.com authentication is separate from your PostHog app.</strong>
+                </p>
+
+                <p className="text-sm mb-0">
+                    We suggest signing up with your personal email. Soon you'll be able to link your PostHog app
+                    account.
+                </p>
+            </div>
+            <Authentication initialView="sign-in" showBanner={false} showProfile={false} />
+        </>
+    )
+}
+
 const CompanyForm = ({ onSuccess, companyId }: { onSuccess?: () => void; companyId?: number }) => {
-    const { user, getJwt } = useUser()
+    const { user, getJwt, isModerator } = useUser()
     const [slugExists, setSlugExists] = useState<boolean | undefined>(undefined)
+    const [nameExists, setNameExists] = useState<boolean | undefined>(undefined)
     const [company, setCompany] = useState<Company | null>(null)
+    const [usingPending, setUsingPending] = useState<boolean | null>(null)
+    const [disclaimerConfirmed, setDisclaimerConfirmed] = useState<boolean>(false)
+    const [confirmationMessage, setConfirmationMessage] = useState<{
+        type: 'success' | 'error' | 'warning'
+        title: string
+        description: string
+    } | null>(null)
+    const canUpdate = isModerator && companyId
+
     const debouncedCheckSlugExists = useCallback(
         debounce(async (slug: string) => {
             try {
@@ -604,6 +737,24 @@ const CompanyForm = ({ onSuccess, companyId }: { onSuccess?: () => void; company
                 validateField('slug')
             } catch (error) {
                 console.error('Error checking slug:', error)
+            }
+        }, 1000),
+        []
+    )
+
+    const debouncedCheckNameExists = useCallback(
+        debounce(async (name: string) => {
+            try {
+                if (!name) return
+                const response = await fetch(
+                    `${process.env.GATSBY_SQUEAK_API_HOST}/api/companies?filters[name][$eq]=${name}`
+                )
+                const data = await response.json()
+                const exists = data?.data?.length > 0
+                setNameExists(exists)
+                validateField('name')
+            } catch (error) {
+                console.error('Error checking name:', error)
             }
         }, 1000),
         []
@@ -643,20 +794,21 @@ const CompanyForm = ({ onSuccess, companyId }: { onSuccess?: () => void; company
                 ? { file: null, objectURL: company?.attributes?.logomark?.data?.attributes?.url }
                 : undefined,
             jobBoardURL: company?.attributes?.jobBoardURL || '',
+            why: '',
         },
         validationSchema: Yup.object({
-            name: Yup.string().required('Company name is required'),
+            name: Yup.string()
+                .required('Company name is required')
+                .test('unique-name', 'Company already exists', () => {
+                    return !!companyId || nameExists === undefined || nameExists === false
+                }),
             url: Yup.string().url('Must be a valid URL').required('Company website URL is required'),
             slug: Yup.string().when('jobBoardType', {
                 is: (value: string) => value !== 'other',
                 then: Yup.string()
                     .required('Job board slug is required')
-                    .test('unique-slug', 'Company already exists', () => {
-                        return (
-                            company?.attributes?.slug === values.slug ||
-                            slugExists === undefined ||
-                            slugExists === false
-                        )
+                    .test('unique-slug', 'Slug already exists', () => {
+                        return !!companyId || slugExists === undefined || slugExists === false
                     }),
                 otherwise: Yup.string(),
             }),
@@ -667,9 +819,10 @@ const CompanyForm = ({ onSuccess, companyId }: { onSuccess?: () => void; company
             }),
             description: Yup.string().required('Company description is required'),
             jobBoardType: Yup.string().required('Job board type is required'),
-            logoLight: Yup.mixed().required('Light logo is required'),
-            logoDark: Yup.mixed().required('Dark logo is required'),
-            logomark: Yup.mixed().required('Logomark is required'),
+            logoLight: Yup.mixed().required('Logo is required'),
+            logoDark: Yup.mixed(),
+            logomark: Yup.mixed(),
+            why: Yup.string().test('why', "C'mon, gas yourself up", (value) => !!value || isModerator),
         }),
         validateOnChange: true,
         validateOnBlur: false,
@@ -679,25 +832,32 @@ const CompanyForm = ({ onSuccess, companyId }: { onSuccess?: () => void; company
                 const jwt = await getJwt()
                 const profileID = user?.profile?.id
                 if (!profileID || !jwt) return
+                const endpoint = isModerator ? 'companies' : 'pending-companies'
+                const jobBoardChanged =
+                    values.jobBoardType !== company?.attributes?.jobBoardType ||
+                    values.jobBoardURL !== company?.attributes?.jobBoardURL ||
+                    values.slug !== company?.attributes?.slug
                 // Create initial company without images in case of failure
                 const companyResponse = await fetch(
-                    `${process.env.GATSBY_SQUEAK_API_HOST}/api/companies${companyId ? `/${companyId}` : ''}`,
+                    `${process.env.GATSBY_SQUEAK_API_HOST}/api/${endpoint}${
+                        canUpdate ? `/${companyId}` : ''
+                    }?populate=*`,
                     {
-                        method: companyId ? 'PUT' : 'POST',
+                        method: canUpdate ? 'PUT' : 'POST',
                         headers: {
                             Authorization: `Bearer ${jwt}`,
                             'content-type': 'application/json',
                         },
                         body: JSON.stringify({
-                            data: rest,
+                            data: { ...rest, profile: profileID },
                         }),
                     }
                 )
                 if (!companyResponse.ok) {
                     throw new Error('Failed to create company')
                 }
-                const company = await companyResponse.json()
-                if (!company?.data?.id) {
+                const createdCompany = await companyResponse.json()
+                if (!createdCompany?.data?.id) {
                     throw new Error('Failed to create company')
                 }
                 // Upload images and update the company
@@ -723,7 +883,7 @@ const CompanyForm = ({ onSuccess, companyId }: { onSuccess?: () => void; company
                         type: 'api::profile.profile',
                     }))
                 const updateResponse = await fetch(
-                    `${process.env.GATSBY_SQUEAK_API_HOST}/api/companies/${company.data.id}`,
+                    `${process.env.GATSBY_SQUEAK_API_HOST}/api/${endpoint}/${createdCompany.data.id}`,
                     {
                         method: 'PUT',
                         headers: {
@@ -732,9 +892,21 @@ const CompanyForm = ({ onSuccess, companyId }: { onSuccess?: () => void; company
                         },
                         body: JSON.stringify({
                             data: {
-                                ...(uploadedLogoLight ? { logoLight: uploadedLogoLight.id } : {}),
-                                ...(uploadedLogoDark ? { logoDark: uploadedLogoDark.id } : {}),
-                                ...(uploadedLogomark ? { logomark: uploadedLogomark.id } : {}),
+                                ...(uploadedLogoLight
+                                    ? { logoLight: uploadedLogoLight.id }
+                                    : usingPending && logoLight
+                                    ? { logoLight: company?.attributes.logoLight.data?.id }
+                                    : {}),
+                                ...(uploadedLogoDark
+                                    ? { logoDark: uploadedLogoDark.id }
+                                    : usingPending && logoDark
+                                    ? { logoDark: company?.attributes.logoDark.data?.id }
+                                    : {}),
+                                ...(uploadedLogomark
+                                    ? { logomark: uploadedLogomark.id }
+                                    : usingPending && logomark
+                                    ? { logomark: company?.attributes.logomark.data?.id }
+                                    : {}),
                             },
                         }),
                     }
@@ -742,15 +914,48 @@ const CompanyForm = ({ onSuccess, companyId }: { onSuccess?: () => void; company
                 if (!updateResponse.ok) {
                     throw new Error('Failed to update company')
                 }
-                await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/scrape-jobs/${company.data.id}`, {
-                    headers: {
-                        Authorization: `Bearer ${jwt}`,
-                        'content-type': 'application/json',
-                    },
-                })
+                if (isModerator) {
+                    const { jobsCreated } = await fetch(
+                        `${process.env.GATSBY_SQUEAK_API_HOST}/api/scrape-jobs/${createdCompany.data.id}`,
+                        {
+                            headers: {
+                                Authorization: `Bearer ${jwt}`,
+                                'content-type': 'application/json',
+                            },
+                        }
+                    ).then((response) => response.json())
+                    if ((jobBoardChanged && !jobsCreated) || !canUpdate) {
+                        setConfirmationMessage({
+                            type: canUpdate ? 'warning' : 'error',
+                            title: canUpdate ? 'No new jobs found' : 'Failed to create jobs',
+                            description: canUpdate
+                                ? "The company was updated, but we couldn't find any new jobs. If you're expecting new jobs, double check the job board URL and try again."
+                                : "The company was created, but we couldn't find any jobs. Double check the job board URL and try again.",
+                        })
+                    } else {
+                        setConfirmationMessage({
+                            type: 'success',
+                            title: canUpdate ? 'Company updated' : 'Company added',
+                            description: canUpdate
+                                ? `Updated <strong>${createdCompany.data.attributes.name}</strong> and added <strong>${jobsCreated}</strong> jobs.`
+                                : `Added <strong>${createdCompany.data.attributes.name}</strong> with <strong>${jobsCreated}</strong> jobs.`,
+                        })
+                    }
+                } else {
+                    setConfirmationMessage({
+                        type: 'success',
+                        title: 'Application submitted',
+                        description:
+                            "Thanks for applying to be a part of Cool tech jobs! We'll review your application and get back to you as soon as possible.",
+                    })
+                }
                 onSuccess?.()
             } catch (error) {
-                console.error('Error submitting form:', error)
+                setConfirmationMessage({
+                    type: 'error',
+                    title: 'Failed to submit application',
+                    description: 'Something went wrong. Please try again later.',
+                })
             } finally {
                 setSubmitting(false)
             }
@@ -758,7 +963,11 @@ const CompanyForm = ({ onSuccess, companyId }: { onSuccess?: () => void; company
     })
 
     useEffect(() => {
-        setFieldValue('slug', slugify(values.name || '', { lower: true }))
+        if (values.name) {
+            setTouched({ name: true })
+            setNameExists(undefined)
+            debouncedCheckNameExists(values.name)
+        }
     }, [values.name])
 
     useEffect(() => {
@@ -781,14 +990,62 @@ const CompanyForm = ({ onSuccess, companyId }: { onSuccess?: () => void; company
         setCompany(data.data)
     }, [companyId, user])
 
+    const handleStartFromPendingCompany = (company: Company) => {
+        setCompany(company)
+        setUsingPending(true)
+    }
+
+    const handleAddNewCompany = () => {
+        setUsingPending(false)
+    }
+
     useEffect(() => {
         if (companyId) {
             getCompany()
         }
     }, [companyId])
 
-    return companyId && !company ? (
+    return !user ? (
+        <Auth />
+    ) : !isModerator && !disclaimerConfirmed ? (
+        <JobBoardIntro onConfirm={() => setDisclaimerConfirmed(true)} />
+    ) : confirmationMessage ? (
+        <div
+            className={`p-4 rounded-md border ${
+                confirmationMessage.type === 'success'
+                    ? 'border-green bg-green/20'
+                    : confirmationMessage.type === 'warning'
+                    ? 'border-yellow bg-yellow/20'
+                    : 'border-red bg-red/20'
+            }`}
+        >
+            <h4 className="text-base m-0">{confirmationMessage.title}</h4>
+            <p
+                className="text-sm opacity-70 m-0"
+                dangerouslySetInnerHTML={{ __html: confirmationMessage.description }}
+            />
+            {(confirmationMessage.type === 'error' || confirmationMessage.type === 'warning') &&
+                (canUpdate || !isModerator) && (
+                    <CallToAction
+                        size="sm"
+                        type="secondary"
+                        className="mt-2"
+                        onClick={() => setConfirmationMessage(null)}
+                    >
+                        <span className="flex items-center gap-1">
+                            <IconArrowLeft className="size-4" />
+                            Go back
+                        </span>
+                    </CallToAction>
+                )}
+        </div>
+    ) : companyId && !company ? (
         <CompanyFormSkeleton />
+    ) : isModerator && !companyId && usingPending === null ? (
+        <ModeratorInitialView
+            onStartFromPendingCompany={handleStartFromPendingCompany}
+            onAddNewCompany={handleAddNewCompany}
+        />
     ) : (
         <form onSubmit={handleSubmit} className="space-y-4 m-0">
             <Input
@@ -813,7 +1070,7 @@ const CompanyForm = ({ onSuccess, companyId }: { onSuccess?: () => void; company
                     className="!p-0"
                     options={[
                         ...supportedJobBoardTypes,
-                        { value: 'kadoa', label: 'Kadoa' },
+                        ...(isModerator ? [{ value: 'kadoa', label: 'Kadoa' }] : []),
                         { value: 'other', label: 'Other' },
                     ]}
                     value={values.jobBoardType}
@@ -877,6 +1134,18 @@ const CompanyForm = ({ onSuccess, companyId }: { onSuccess?: () => void; company
                 touched={touched.description}
             />
 
+            {!isModerator && (
+                <Input
+                    label="Why is your company cool?"
+                    placeholder="We have a great culture and a great product"
+                    multiline
+                    rows={4}
+                    {...getFieldProps('why')}
+                    error={errors.why}
+                    touched={touched.why}
+                />
+            )}
+
             <div className="space-y-2">
                 <h4 className="text-base font-semibold m-0">Company perks</h4>
                 {toggleFilters
@@ -902,7 +1171,7 @@ const CompanyForm = ({ onSuccess, companyId }: { onSuccess?: () => void; company
 
                 <div className="grid grid-cols-3 gap-4">
                     <label className="block">
-                        <span className="text-base font-semibold mb-1 block">Light logo</span>
+                        <span className="text-base font-semibold mb-1 block">Logo</span>
                         <ImageDrop
                             className={`h-auto aspect-square rounded-sm border border-border dark:border-dark ${
                                 touched.logoLight && errors.logoLight ? 'border-red' : ''
@@ -915,7 +1184,7 @@ const CompanyForm = ({ onSuccess, companyId }: { onSuccess?: () => void; company
                     </label>
 
                     <label className="block">
-                        <span className="text-base font-semibold mb-1 block">Dark logo</span>
+                        <span className="text-base font-semibold mb-1 block">Logo (dark)</span>
                         <ImageDrop
                             className={`h-auto aspect-square rounded-sm border border-border dark:border-dark ${
                                 touched.logoDark && errors.logoDark ? 'border-red' : ''
@@ -943,7 +1212,13 @@ const CompanyForm = ({ onSuccess, companyId }: { onSuccess?: () => void; company
                 {(touched.logoLight && errors.logoLight) ||
                 (touched.logoDark && errors.logoDark) ||
                 (touched.logomark && errors.logomark) ? (
-                    <p className="text-red text-sm m-0 mt-1">All logos are required</p>
+                    <p className="text-red text-sm m-0 mt-1">
+                        {touched.logoLight && errors.logoLight
+                            ? errors.logoLight
+                            : touched.logoDark && errors.logoDark
+                            ? errors.logoDark
+                            : errors.logomark}
+                    </p>
                 ) : null}
             </div>
             <div className="!mt-8">
@@ -952,8 +1227,12 @@ const CompanyForm = ({ onSuccess, companyId }: { onSuccess?: () => void; company
                         <div className="flex items-center justify-center">
                             <Spinner className="!size-6" />
                         </div>
+                    ) : companyId ? (
+                        'Update company'
+                    ) : isModerator ? (
+                        'Publish company'
                     ) : (
-                        `${companyId ? 'Update' : 'Create'} company`
+                        'Submit application'
                     )}
                 </CallToAction>
             </div>
@@ -966,7 +1245,6 @@ export default function JobsPage() {
     const [companyFilters, setCompanyFilters] = useState<FiltersType>([])
     const [jobFilters, setJobFilters] = useState<FiltersType>([])
     const [filtersOpen, setFiltersOpen] = useState(false)
-    const [applyModalOpen, setApplyModalOpen] = useState(false)
     const [issueModalOpen, setIssueModalOpen] = useState(false)
     const [addAJobModalOpen, setAddAJobModalOpen] = useState(false)
     const [companyId, setCompanyId] = useState<number>()
@@ -977,7 +1255,7 @@ export default function JobsPage() {
         mutate,
         deleteCompany,
     } = useCompanies({ companyFilters, jobFilters, search })
-    const { isModerator } = useUser()
+    const { isModerator, user } = useUser()
 
     return (
         <Layout>
@@ -1003,7 +1281,7 @@ export default function JobsPage() {
                             Work at a company with great perks?{' '}
                             <button
                                 className="text-red dark:text-yellow font-semibold"
-                                onClick={() => setApplyModalOpen(true)}
+                                onClick={() => setAddAJobModalOpen(true)}
                             >
                                 Apply to get your jobs listed here.
                             </button>
@@ -1074,49 +1352,6 @@ export default function JobsPage() {
                     </div>
                 </div>
             </section>
-
-            <SideModal open={applyModalOpen} setOpen={setApplyModalOpen} title="List your cool tech jobs">
-                <div className="prose dark:prose-dark">
-                    <p className="mb-2">
-                        Our job board is designed to help product engineers (and other tech-adjacent candidates) find
-                        companies that have a similar vibe to PostHog – where employees are empowered to do their best
-                        work.
-                    </p>
-                    <p className="mb-2">
-                        To qualify to have your open roles listed, you'll need to meet the following criteria:
-                    </p>
-                    <ul className="mb-4">
-                        <li>
-                            At least one unique perk listed in our filters
-                            <br />{' '}
-                            <span className="text-[15px] opacity-80">
-                                (Have a great perk we don't list? Let us know!)
-                            </span>
-                        </li>
-                        <li>
-                            A public job board (like Ashby or Greenhouse) so we can automatically keep our job board up
-                            to date
-                        </li>
-                        <li>
-                            <em>Actually be</em> a cool tech company where product engineers enjoy working!
-                        </li>
-                    </ul>
-                    <p>
-                        <a
-                            href="#"
-                            className="text-red dark:text-yellow font-semibold"
-                            onClick={(e) => {
-                                e.preventDefault()
-                                const parts = ['cory', '@', 'posthog', '.', 'com?subject=Cool%20tech%20jobs']
-                                window.location.href = `mailto:${parts.join('')}`
-                            }}
-                        >
-                            Send us an email
-                        </a>{' '}
-                        with the info above to apply to be listed.
-                    </p>
-                </div>
-            </SideModal>
             <SideModal className="w-full" open={issueModalOpen} setOpen={setIssueModalOpen} title="Report an issue">
                 <IssueForm />
             </SideModal>
@@ -1127,13 +1362,12 @@ export default function JobsPage() {
                     setAddAJobModalOpen(open)
                     setCompanyId(undefined)
                 }}
-                title="Add a company"
+                title={!user ? 'Sign into PostHog.com' : 'Add a company'}
             >
                 <CompanyForm
                     companyId={companyId}
                     onSuccess={() => {
                         mutate()
-                        setAddAJobModalOpen(false)
                     }}
                 />
             </SideModal>
