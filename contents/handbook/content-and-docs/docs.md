@@ -134,6 +134,17 @@ Use the following settings:
 - Remove any zooming-in for clicks, as this can sometimes make videos hard to follow.
 - For exporting: use MP4, 720, 60 fps, and "web" quality
 
+## Docs gardener
+
+Each week the content & docs crew picks someone to review the state of feedback across these channels:
+
+- #docs-feedback
+- #content-docs-ideas
+- #ask-max for questions missing content
+- Zendesk tickets [where **root cause** is `documentation unclear`](https://posthoghelp.zendesk.com/agent/filters/33465387985947)
+
+Where appropriate and actionable, the gardener should create new issues to capture what surfaces from such feedback. This should occupy no more than 2-4 hours of effort each week.
+
 ## FAQ
 
 ### I'm really busy, can the content team write docs for me?
