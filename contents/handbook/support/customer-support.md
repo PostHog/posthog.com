@@ -28,8 +28,6 @@ Your objective should be to get the conversation into Zendesk ASAP, because it's
 
 > Sometimes users ask about the progress of [certain issues](https://github.com/PostHog/posthog) that are important to them on GitHub. We don't consider GitHub to be a proper 'support' channel, but it is a useful place to gauge the popularity of feature requests or the prevalence of issues. 
 
-We send out CSAT surveys after a ticket has been closed for at least 3 days using [this Automation](https://posthoghelp.zendesk.com/admin/objects-rules/rules/automations/22328357692571). The emails contain a link to https://survey.posthog.com/ with their `distinct_id`, `ticketId`, and the assigned team as query parameters, which are being used alongside their satisfaction rating to capture a `survey sent` event. The code for the survey website is in the [PostHog-csat](https://github.com/PostHog/posthog-csat) repo and the responses can be viewed in [this dashboard](https://us.posthog.com/project/2/dashboard/130687).
-
 ### Support is done by actual engineers
 
 All support at PostHog is done by actual, full-time engineers. We have two types of engineers: 
@@ -44,10 +42,12 @@ Right now, support engineers provide the first level of support for the followin
 - Product analytics
 - Web analytics
 - Session replay
-- Feature success
-- Support
+- Feature Flags
+- Surveys
+- Experiments
 - Data warehouse
 - Customer Success
+- Data Pipelines
 
 Support engineers respond to and solve as many tickets as they can for these products, or escalate tickets to the appropriate product engineer if needed. For all other products, the engineers on those teams are directly responsible for support. The support runbook is maintained on the [Support Hero page](/handbook/engineering/support-hero). 
 
@@ -82,7 +82,7 @@ Note that tickets are automatically prioritized in Zendesk and users are updated
 The response targets listed below are our minimums for an initial response, and we often respond far faster. Please note that we do not offer any level of weekend customer support.
 
 #### High priority
-**Response target: 12 hours**
+**Response target: 24 hours**
 
 Tickets are considered high priority if they fulfill ANY of the following conditions:
 
@@ -94,7 +94,7 @@ Tickets are considered high priority if they fulfill ANY of the following condit
 This ensures that users who pay for support or which are otherwise considered a priority customer are prioritized and get the best possible support experience. Free users can raise critical impact bugs or issues to an appropriate level.
 
 #### Normal priority
-**Response target: 24 hours**
+**Response target: 48 hours**
 
 Tickets are considered normal priority if they fulfill ANY of the following conditions but the user does NOT qualify as a high-paying org:
 
@@ -110,11 +110,11 @@ This ensures that most paying users get appropriately rapid support and that all
 
 Tickets are considered low priority if they fulfill none of the conditions for High or Normal priority. This includes tickets raised in the PostHog community, and is mostly users who are on a free plan and who have not entered a card.
 
-We always aim to respond to low priority tickets and will often read and consider them, but we do not set a response target or promise to respond due to the high volume and our need to focus on paying users. 
+We aim to respond to low priority tickets and will often read and consider them, but we do not set a response target or promise to respond due to the high volume and our need to focus on paying users. 
 
 ### Follow-up / next reply response targets
 
-After our initial response, our follow-up response targets are double those of our initial response targets. For example, if a user replies to our initial response on a high priority ticket (12 hours), our follow-up / next reply response target is within 24 hours.
+After our initial response, our follow-up response targets are double those of our initial response targets. For example, if a user replies to our initial response on a high priority ticket (24 hours), our follow-up / next reply response target is within 48 hours.
 
 ### Escalated ticket response targets
 
@@ -137,7 +137,7 @@ As an incentive, we offer to feed one hedgehog for every survey sent. <TeamMembe
 
 We very occasionally receive messages from people who are abusive, or who we suspect may have a mental illness. These can come via the app, or [Community Questions](/questions). We do not expect support engineers to deal with abuse of any kind, ever. 
 
-If this happens, notify <TeamMember name="Charles Cook" photo />, <TeamMember name="Joe Martin"/> or <TeamMember name="Fraser Hopper" photo />. They will either take this on, or advise you on how to reply.
+If this happens, notify <TeamMember name="Charles Cook" photo />, <TeamMember name="Abigail Richardson"/> or <TeamMember name="Fraser Hopper" photo />. They will either take this on, or advise you on how to reply.
 
 ### Dealing with legal requests from users
 
