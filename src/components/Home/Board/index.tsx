@@ -864,8 +864,8 @@ export default function Hero(): JSX.Element {
                 </Slider>
             </div>
             <div className="flex px-2 md:px-0 md:space-x-6 items-start">
-                <div className="flex-1">
-                    <ul className="grid grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-x-2 gap-y-6 lg:gap-y-8 md:gap-4 list-none m-0 p-0 flex-grow flex-shrink-0">
+                <div className="@container flex-1">
+                    <ul className="grid @sm:grid-cols-2 @xl:grid-cols-3 md:gap-x-2 gap-y-6 @2xl:gap-y-8 @3xl:gap-y-10 list-none m-0 p-0 flex-grow flex-shrink-0 md:max-h-[65vh] md:overflow-y-auto">
                         {groupedProducts.map(([type, products]) =>
                             type === 'Sales' ? null : (
                                 <li key={type}>
@@ -895,7 +895,7 @@ export default function Hero(): JSX.Element {
                     </ul>
 
                     <div className="mr-8">
-                        <p className="text-sm text-primary/70 dark:text-primary-dark/70 mt-12 pb-3 mb-0">
+                        <p className="text-sm text-primary/70 dark:text-primary-dark/70 mt-8 pb-3 mb-0">
                             Each product offers the lowest pricing vs. every competitor at scale.
                         </p>
                     </div>
