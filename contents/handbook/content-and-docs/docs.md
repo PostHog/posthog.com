@@ -140,6 +140,8 @@ Each week the content & docs crew picks someone to review the state of feedback 
 
 - #docs-feedback
 - #content-docs-ideas
+- #ask-max for questions missing content
+- [Inkeep](https://dashboard-9txgpp4yi.preview.inkeep.com/posthog/projects/clz7fyu8i001bomqpr7t8lds8/reports)
 - Zendesk tickets where **root cause** is `documentation unclear`
 
 Where appropriate and actionable, the gardener should create new issues to capture what surfaces from such feedback. This should occupy no more than 2-4 hours of effort each week.
