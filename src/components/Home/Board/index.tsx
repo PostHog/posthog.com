@@ -65,6 +65,7 @@ import { AnimatePresence, motion } from 'framer-motion'
 import Slider from 'components/Slider'
 import { PlayerEvents, DotLottiePlayer } from '@dotlottie/react-player'
 import { MenuContainer } from 'components/PostLayout/MobileNav'
+import Link from 'components/Link'
 
 type Product = {
     name: string
@@ -863,34 +864,45 @@ export default function Hero(): JSX.Element {
                 </Slider>
             </div>
             <div className="flex px-2 md:px-0 md:space-x-6 items-start">
-                <ul className="flex-1 grid grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-x-2 gap-y-6 lg:gap-y-8 md:gap-4 list-none m-0 p-0 flex-grow flex-shrink-0">
-                    {groupedProducts.map(([type, products]) =>
-                        type === 'Sales' ? null : (
-                            <li key={type}>
-                                <ProductButton
-                                    type={type}
-                                    products={products}
-                                    activeProduct={activeProduct}
-                                    activeStatus={activeStatus}
-                                    setActiveProduct={setActiveProduct}
-                                    setProductModalOpen={setProductModalOpen}
-                                />
-                                {type === 'Support' ? (
-                                    <div className="mt-2">
-                                        <ProductButton
-                                            type={'Sales'}
-                                            products={groupedProducts.find(([type]) => type === 'Sales')[1]}
-                                            activeProduct={activeProduct}
-                                            activeStatus={activeStatus}
-                                            setActiveProduct={setActiveProduct}
-                                            setProductModalOpen={setProductModalOpen}
-                                        />
-                                    </div>
-                                ) : null}
-                            </li>
-                        )
-                    )}
-                </ul>
+                <div className="flex-1">
+                    <ul className="grid grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-x-2 gap-y-6 lg:gap-y-8 md:gap-4 list-none m-0 p-0 flex-grow flex-shrink-0">
+                        {groupedProducts.map(([type, products]) =>
+                            type === 'Sales' ? null : (
+                                <li key={type}>
+                                    <ProductButton
+                                        type={type}
+                                        products={products}
+                                        activeProduct={activeProduct}
+                                        activeStatus={activeStatus}
+                                        setActiveProduct={setActiveProduct}
+                                        setProductModalOpen={setProductModalOpen}
+                                    />
+                                    {type === 'Support' ? (
+                                        <div className="mt-2">
+                                            <ProductButton
+                                                type={'Sales'}
+                                                products={groupedProducts.find(([type]) => type === 'Sales')[1]}
+                                                activeProduct={activeProduct}
+                                                activeStatus={activeStatus}
+                                                setActiveProduct={setActiveProduct}
+                                                setProductModalOpen={setProductModalOpen}
+                                            />
+                                        </div>
+                                    ) : null}
+                                </li>
+                            )
+                        )}
+                    </ul>
+
+                    <div className="mr-8">
+                        <p className="text-sm text-primary/70 dark:text-primary-dark/70 mt-12 pb-3 mb-0">
+                            Each product offers the lowest pricing vs. every competitor at scale.
+                        </p>
+                    </div>
+                    <div className="border-t border-border dark:border-dark pt-3 text-sm text-primary/70 dark:text-primary-dark/70">
+                        Just starting out? <Link to="/founder-stack">Explore our founder stack.</Link>
+                    </div>
+                </div>
                 <div className="hidden md:block flex-[0_0_550px]">
                     {activeProduct && (
                         <div>
