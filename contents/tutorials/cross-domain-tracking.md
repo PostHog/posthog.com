@@ -24,7 +24,7 @@ First-party cookies ensure you get the most data possible, as third-party cookie
 
 Tracking users across different domains, like `posthog.com` and `hogflix.com`, requires some extra work. You need to pass users' `distinct_id` and `session_id` between PostHog initializations to ensure they are connected. This not only ensures tracking is accurate and consistent, but [session replays](/docs/session-replay/installation#how-to-record-sessions-across-different-domains) and [feature flag evaluations](/docs/feature-flags/bootstrapping) work across domains too.
 
-If you are using anonymous events, call `posthog.identify()` pr `posthog.createPersonProfile()` before leaving the first site, to make sure that initial person properties like `$initial_referrer` are set correctly. 
+If you are using anonymous events, call `posthog.identify()` or `posthog.createPersonProfile()` before leaving the first site, to make sure that initial person properties like `$initial_referrer` are set correctly. 
 
 ### Getting IDs on the first website 
 
