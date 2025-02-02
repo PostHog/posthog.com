@@ -1116,6 +1116,7 @@ ul {
 }
 
 .mermaid-container {
+    @apply my-4;
     .messageText,
     tspan {
         @apply dark:!fill-white;
