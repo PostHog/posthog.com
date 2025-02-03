@@ -344,6 +344,11 @@ export default function Reply({ reply, badgeText }: ReplyProps) {
                                         </div>
                                     )}
                                     <Markdown>{body}</Markdown>
+                                    {!publishedAt && isModerator && (
+                                        <p className="font-bold text-sm mt-2 mb-4 italic p-2 bg-accent dark:bg-accent-dark border border-light dark:border-dark rounded">
+                                            This reply is unpublished and only visible to moderators
+                                        </p>
+                                    )}
                                 </div>
                                 {profile.data.id === Number(process.env.GATSBY_AI_PROFILE_ID) && helpful && (
                                     <div className="border-t border-light dark:border-dark pt-2 mt-2">
