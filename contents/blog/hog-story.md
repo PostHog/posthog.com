@@ -47,7 +47,7 @@ This, it turns out, is a problem difficult enough to kill a company.
 
 Marius, like most of my colleagues, has certain values-driven absolutes. One of them is empowerment of the customer.
 
-“The data belongs to you. We should let you ask whatever you want of it,” he says. To his eye this is obvious, factual, on the same shelf as gravity and thermodynamics. “But letting people send SQL connection strings to our database isn’t good for shareholder value,” he sighs, an edge of wryness to this. He means it could knock our business out of existence.
+“The data belongs to you. We should let you ask whatever you want of it,” he says. To his eye this is obvious, factual, on the same shelf as gravity and thermodynamics. “But giving our database's connection string to our users isn’t good for shareholder value,” he sighs, an edge of wryness to this. He means it could knock our business out of existence.
 
 “All of our customers are in one giant table, anyone could break things.”
 
@@ -95,7 +95,7 @@ An obvious and reasonable objection that came up in one of Marius’s [RFC’s](
 
 But there were also rewards for this complexity. For one thing, a fully realized HogQL would enable us to nuke a huge pile of technical debt.
 
-A central feature of PostHog product analytics is *insights*: these are the various graphs and tables you can customize and attach to dashboards. Each insight was a tangle of duplicated JavaScript, and working with them was a pain.
+A central feature of PostHog product analytics is *insights*: these are the various graphs and tables you can customize and attach to dashboards. Each insight was a tangle of duplicated Python, and working with them was a pain.
 
 The proposed HogQL was powerful enough to both use ourselves – to replace the internals of these [insights]() – while also being something our customers could use to perfectly tailor their own reporting.
 
