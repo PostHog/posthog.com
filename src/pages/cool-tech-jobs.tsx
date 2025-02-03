@@ -128,23 +128,32 @@ const JobsByDepartment = ({
                 className="list-none p-0 m-0 overflow-hidden @2xl:ml-7"
                 animate={open ? { height: 'auto' } : { height: 0 }}
             >
-                {jobs.map((job) => (
-                    <li key={job.id} className="flex justify-between gap-1 items-start last:mb-6 mt-2 first:mt-0">
-                        <Link
-                            externalNoIcon
-                            className="group !text-inherit underline"
-                            to={`${job.attributes.url}?utm_source=posthog`}
-                        >
-                            <span className="relative">
-                                {job.attributes.title}
-                                <IconArrowUpRight className="inline-block size-4 opacity-0 group-hover:opacity-50 text-primary dark:text-primary-dark absolute left-full top-0.5 ml-0.5" />
-                            </span>
-                        </Link>
-                        <p className="m-0 pt-1 opacity-60 text-sm flex-[0_0_6rem] text-right">
-                            {dayjs(job.attributes.postedDate).fromNow()}
-                        </p>
-                    </li>
-                ))}
+                {jobs.map((job) => {
+                    const isPostHog = job.attributes.company.data.attributes.name.toLowerCase() === 'posthog'
+                    const url = isPostHog
+                        ? `/careers/${slugify(job.attributes.title.replace(' (Remote)', ''), { lower: true })}`
+                        : job.attributes.url
+
+                    return (
+                        <li key={job.id} className="flex justify-between gap-1 items-start last:mb-6 mt-2 first:mt-0">
+                            <Link
+                                externalNoIcon={!isPostHog}
+                                className="group !text-inherit underline"
+                                to={url + (isPostHog ? '' : '?utm_source=posthog')}
+                            >
+                                <span className="relative">
+                                    {job.attributes.title}
+                                    {!isPostHog && (
+                                        <IconArrowUpRight className="inline-block size-4 opacity-0 group-hover:opacity-50 text-primary dark:text-primary-dark absolute left-full top-0.5 ml-0.5" />
+                                    )}
+                                </span>
+                            </Link>
+                            <p className="m-0 pt-1 opacity-60 text-sm flex-[0_0_6rem] text-right">
+                                {dayjs(job.attributes.postedDate).fromNow()}
+                            </p>
+                        </li>
+                    )
+                })}
             </motion.ul>
         </div>
     )
@@ -924,7 +933,7 @@ const CompanyForm = ({ onSuccess, companyId }: { onSuccess?: () => void; company
                             },
                         }
                     ).then((response) => response.json())
-                    if ((jobBoardChanged && !jobsCreated) || !canUpdate) {
+                    if (jobBoardChanged && !jobsCreated) {
                         setConfirmationMessage({
                             type: canUpdate ? 'warning' : 'error',
                             title: canUpdate ? 'No new jobs found' : 'Failed to create jobs',
