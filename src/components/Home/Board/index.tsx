@@ -325,7 +325,7 @@ const products: Product[] = [
             )
         },
         status: 'WIP',
-        badge: 'ALPHA',
+        badge: 'BETA',
         pricing: {
             cta: {
                 url: 'https://app.posthog.com/home#panel=feature-previews',
