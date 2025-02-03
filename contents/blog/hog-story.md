@@ -165,7 +165,7 @@ But crucially, the handbook [says](https://posthog.com/handbook/company/communic
 >
 > As the decision maker, you should use your judgment as to which comments you want to respond fully to. It's fine to politely decline a question if you think it's not required for the decision being made.
 
-This policy is organizational insurance against the sort of committee thinking and filibustering that details bold decisions. Instead, PostHog explicitly empowers the prime mover of a new direction to take action regardless of opinion.
+This policy is organizational insurance against the sort of committee thinking and filibustering that de-rails bold decisions. Instead, PostHog explicitly empowers the prime mover of a new direction to take action regardless of opinion.
  
 Personal judgment matters, of course. You could use this policy self-destructively, shredding important relationships and social fabric.
  
