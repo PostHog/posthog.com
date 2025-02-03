@@ -7,6 +7,7 @@ import { navigate } from 'gatsby'
 import slugify from 'slugify'
 import { useLayoutData } from 'components/Layout/hooks'
 import * as Icons from '@posthog/icons'
+import { createPortal } from 'react-dom'
 
 interface IGetActiveMenu {
     menu: IMenu[]
@@ -57,17 +58,13 @@ const DropdownContainer = forwardRef(function DropdownContainer(props, ref) {
     )
 })
 
-export const MenuContainer = ({
-    children,
-    setOpen,
-    className = '',
-    onClose,
-}: {
+export const MenuContainer: React.FC<{
     children: React.ReactNode
-    setOpen: (open: null | string) => void
     className?: string
     onClose: () => void
-}) => {
+    backgroundClassName?: string
+    cardContainerClassName?: string
+}> = ({ children, className = '', onClose, backgroundClassName = '', cardContainerClassName = '' }) => {
     const dragControls = useDragControls()
     const y = useMotionValue(0)
     const input = [0, 200]
@@ -77,7 +74,6 @@ export const MenuContainer = ({
 
     const handleClose = () => {
         onClose?.()
-        setOpen(null)
     }
 
     const handleDragEnd = () => {
@@ -98,20 +94,20 @@ export const MenuContainer = ({
         return unsubscribe
     }, [])
 
-    return (
+    return createPortal(
         <motion.div
             onClick={handleClose}
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed w-full h-full bg-accent/60 dark:bg-accent-dark/60 top-0 left-0 z-[99999999]"
+            className={`fixed w-full h-full bg-accent/60 dark:bg-accent-dark/60 top-0 left-0 z-[99999999] ${backgroundClassName}`}
         >
             <motion.div
                 onClick={(e) => e.stopPropagation()}
                 initial={{ translateY: '100%', opacity: 0 }}
                 animate={{ translateY: 0, opacity: 1 }}
                 exit={{ translateY: '100%', opacity: 0 }}
-                className="fixed bottom-0 w-full left-0"
+                className={`fixed bottom-0 w-full left-0 ${cardContainerClassName}`}
             >
                 <motion.div
                     dragConstraints={{ top: 0 }}
@@ -120,7 +116,7 @@ export const MenuContainer = ({
                     dragControls={dragControls}
                     drag="y"
                     dragListener={false}
-                    className={`bg-white dark:bg-accent-dark pb-4 pt-2 px-4 border-t border-border dark:border-dark shadow ${className}`}
+                    className={`bg-white dark:bg-accent-dark pb-4 pt-2 px-4 border-t border-border dark:border-dark ${className}`}
                 >
                     <div
                         onPointerDown={startDrag}
@@ -133,7 +129,8 @@ export const MenuContainer = ({
                     <div className="h-[40vh] overflow-auto">{children}</div>
                 </motion.div>
             </motion.div>
-        </motion.div>
+        </motion.div>,
+        document.body
     )
 }
 
@@ -149,7 +146,7 @@ export default function MobileNav({ className = '', menu: postMenu }) {
     const [activeMenuItem, setActiveMenuItem] = useState(menu.menuItem)
     const menuRef = useRef(null)
     const handleClick = (menuItem: IMenu) => {
-        const { children, url } = menuItem
+        const { children, url, name } = menuItem
         if (children) {
             const newMenu = getActiveMenu({
                 menu: postMenu,
@@ -163,6 +160,10 @@ export default function MobileNav({ className = '', menu: postMenu }) {
             navigate(url)
             setOpen(null)
             setActiveMenuItem(menuItem)
+        } else if (menuItem.onClick) {
+            menuItem.onClick({ name, url })
+            setActiveMenuItem(menuItem)
+            setOpen(null)
         }
         setTimeout(() => {
             menuRef?.current?.scrollTo({ top: 0 })
@@ -184,6 +185,10 @@ export default function MobileNav({ className = '', menu: postMenu }) {
             }
         }
     }, [menu])
+
+    useEffect(() => {
+        setMenu(getActiveMenu({ menu: postMenu, url: pathname }) || { menu: postMenu, menuItem: postMenu[0] })
+    }, [postMenu])
 
     const Container = compact ? DropdownContainer : MenuContainer
     const ActiveIcon = Icons[activeMenuItem.icon]
@@ -207,7 +212,7 @@ export default function MobileNav({ className = '', menu: postMenu }) {
             </button>
             <AnimatePresence>
                 {open === 'menu' && (
-                    <Container ref={menuRef} setOpen={setOpen}>
+                    <Container ref={menuRef} onClose={() => setOpen(null)}>
                         <ul key={menu?.parent?.name} className="list-none m-0 p-0">
                             {menu?.parent?.menu && (
                                 <li className="pb-1 mb-2 flex flex-start items-center relative">
@@ -223,7 +228,7 @@ export default function MobileNav({ className = '', menu: postMenu }) {
                                 </li>
                             )}
                             {menu?.menu?.map((menuItem, index) => {
-                                const { name, url, children, icon, color } = menuItem
+                                const { name, url, children, icon, color, active } = menuItem
                                 const Icon = Icons[icon]
                                 return (
                                     <li
@@ -231,7 +236,7 @@ export default function MobileNav({ className = '', menu: postMenu }) {
                                         key={name + index + url}
                                     >
                                         <div className={`text-base`}>
-                                            {url === undefined ? (
+                                            {url === undefined && !menuItem.onClick ? (
                                                 <h5
                                                     id={`mobile-nav-${slugify(name, { lower: true })}`}
                                                     className="m-0 text-lg pb-2"
@@ -241,7 +246,9 @@ export default function MobileNav({ className = '', menu: postMenu }) {
                                             ) : (
                                                 <button
                                                     className={`${
-                                                        url === pathname ? 'active-product opacity-90' : 'opacity-50'
+                                                        active || url === pathname
+                                                            ? 'active-product opacity-90'
+                                                            : 'opacity-50'
                                                     } hover:opacity-100 border-b border-gray-accent-light/50 dark:border-gray-accent-dark border-solid font-semibold flex w-full justify-between space-x-1 items-center py-2`}
                                                     onClick={() => {
                                                         handleClick(menuItem)

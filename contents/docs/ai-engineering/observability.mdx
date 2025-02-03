@@ -1,0 +1,168 @@
+---
+title: LLM observability installation (beta)
+availability:
+    free: full
+    selfServe: full
+    enterprise: full
+---
+
+> 🚧 **Note:** LLM observability is currently considered in `beta`. To access it, enable the [feature preview](https://us.posthog.com#panel=feature-previews) in your PostHog account.
+>
+> We are keen to gather as much feedback as possible so if you try this out please let us know. You can email [peter@posthog.com](mailto:peter@posthog.com), send feedback via the [in-app support panel](https://us.posthog.com#panel=support%3Afeedback%3Aexperiments%3Alow), or use one of our other [support options](/docs/support-options).
+
+LLM observability gives you x-ray vision into your LLM applications. Here's what you can track:
+
+- Every conversation (inputs, outputs, and tokens) 🗣️
+- Model performance (cost, latency and error rates) 🤖
+- Full traces for when you need to go detective mode 🔍
+- How much each chat/user/organization is costing you 💰
+
+The best part? All this data gets sent as regular PostHog events, where you can slice, dice, and analyze it in dashboards, insights, and alerts. And because we charge the same as regular PostHog events, it's roughly **10x cheaper** than other LLM observability tools.
+
+## Observability installation
+
+Setting up observability starts with installing the PostHog SDK for your language. LLM observability works best with our Python and Node SDKs.
+
+<MultiLanguage>
+
+```bash file=Python
+pip install posthog
+```
+
+```bash file=TypeScript
+npm install @posthog/ai posthog-node
+```
+
+</MultiLanguage>
+
+> **Note:** You can use LLM observability with any of our SDKs, however you will need to capture the data manually via the capture method. See schema in the [manual capture section](#manual-capture).
+
+The rest of the setup depends on the LLM platform you're using. These SDKs _do not_ proxy your calls, they only fire off an async call to PostHog in the background to send the data.
+
+import Tab from "components/Tab"
+import OpenAIInstall from "./_snippets/openai.mdx"
+import AnthropicInstall from "./_snippets/anthropic.mdx"
+import LangChainInstall from "./_snippets/langchain.mdx"
+import VercelAISDKInstall from "./_snippets/vercelai.mdx"
+
+<!-- prettier-ignore -->
+<Tab.Group tabs={['OpenAI', 'Anthropic', 'Langchain', 'Vercel AI SDK']}>
+    <Tab.List>
+        <Tab>OpenAI</Tab>
+        <Tab>Anthropic</Tab>
+        <Tab>LangChain</Tab>
+        <Tab>Vercel AI SDK</Tab>
+    </Tab.List>
+    <Tab.Panels>
+        <Tab.Panel>
+            <OpenAIInstall />
+        </Tab.Panel>
+        <Tab.Panel>
+            <AnthropicInstall />
+        </Tab.Panel>
+        <Tab.Panel>
+            <LangChainInstall />
+        </Tab.Panel>
+        <Tab.Panel>
+            <VercelAISDKInstall />
+        </Tab.Panel>
+    </Tab.Panels>
+</Tab.Group>
+
+## Privacy mode
+
+To avoid storing potentially sensitive prompt and completion data, you can enable privacy mode. This excludes the `$ai_input` and `$ai_output_choices` properties from being captured.
+
+This can be done either by setting the `privacy_mode` config option in the SDK like this:
+
+<MultiLanguage>
+
+```python
+import posthog
+
+posthog.project_api_key = "<ph_project_api_key>"
+posthog.host = "<ph_client_api_host>"
+posthog.privacy_mode = True
+```
+
+```ts
+const phClient = new PostHog(
+  '<ph_project_api_key>',
+  { 
+    host: '<ph_client_api_host>',
+    privacyMode: true
+  }
+)
+```
+
+</MultiLanguage>
+
+It can also be on at the request level by including setting the `privacy_mode` parameter to `True` in the request. The exact setup depends on the LLM platform you're using:
+
+<MultiLanguage>
+
+```python file=OpenAI.py
+client.chat.completions.create(
+    model="gpt-3.5-turbo",
+    messages=[...],
+    posthog_privacy_mode=True
+)
+```
+
+```typescript file=OpenAI.ts
+const completion = await openai.chat.completions.create({
+    model: "gpt-3.5-turbo",
+    messages: [...],
+    posthogPrivacyMode: true
+});
+```
+
+```python file=Anthropic
+response = client.messages.create(
+    model="claude-3-opus-20240229",
+    messages=[...],
+    posthog_privacy_mode=True
+)
+```
+
+```python file=LangChain
+callback_handler = PosthogCallbackHandler(
+    client,
+    privacy_mode=True
+)
+```
+
+</MultiLanguage>
+
+## Manual capture
+
+If you're using a different SDK or the API, you can manually capture the data by calling the `capture` method.
+
+import GenerationEvent from "./_snippets/generation-event.mdx"
+import TraceEvent from "./_snippets/trace-event.mdx"
+import SpanEvent from "./_snippets/span-event.mdx"
+import EmbeddingEvent from "./_snippets/embedding-event.mdx"
+
+<!-- prettier-ignore -->
+<Tab.Group tabs={['Generation', 'Trace', 'Span', 'Embedding']}>
+    <Tab.List>
+        <Tab>Generation</Tab>
+        <Tab>Trace</Tab>
+        <Tab>Span</Tab>
+        <Tab>Embedding</Tab>
+    </Tab.List>
+    <Tab.Panels>
+        <Tab.Panel>
+            <GenerationEvent />
+        </Tab.Panel>
+        <Tab.Panel>
+            <TraceEvent />
+        </Tab.Panel>
+        <Tab.Panel>
+            <SpanEvent />
+        </Tab.Panel>
+        <Tab.Panel>
+            <EmbeddingEvent />
+        </Tab.Panel>
+    </Tab.Panels>
+</Tab.Group>

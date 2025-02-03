@@ -1,0 +1,90 @@
+---
+title: Web analytics installation
+sidebar: Docs
+showTitle: true
+availability:
+    free: full
+    selfServe: full
+    enterprise: full
+---
+import Tab from "components/Tab"
+import WebInstall from '../integrate/_snippets/install-web.mdx'
+import ReactInstall from '../integrate/_snippets/install-react.mdx'
+import NextJSInstall from '../integrate/_snippets/nextjs/install-nextjs.mdx'
+import GTMInstall from '../integrate/_snippets/install-gtm.mdx'
+import VueInstall from '../integrate/_snippets/vuejs/install-vue.mdx'
+import NuxtInstall from '../integrate/_snippets/install-nuxt.mdx'
+import SvelteInstall from '../integrate/_snippets/install-svelte.mdx'
+import WordPressInstall from '../integrate/_snippets/install-wordpress.mdx'
+import AstroInstall from '../integrate/_snippets/install-astro.mdx'
+import FramerInstall from '../integrate/_snippets/install-framer.mdx'
+import WebflowInstall from '../integrate/_snippets/install-webflow.mdx'
+
+Web analytics enables you to easily track and monitor many of the most important metrics for your website. 
+
+Unlike [product analytics](/docs/product-analytics), web analytics offers a more streamlined and focused experience. This is especially useful for marketers, content creators, or anyone used to tools like [Google Analytics](/blog/google-analytics-to-posthog). It includes a [dashboard](/docs/web-analytics/dashboard) that offers essential metrics, such as visitors, views, sessions, session duration, bounce rate, [conversions](/docs/web-analytics/conversion-goals), paths, referrers, and more.
+
+<ProductScreenshot
+    imageLight = "https://res.cloudinary.com/dmukukwp6/image/upload/web_analytics_light_mode_2024_10_d830a26db4.png" 
+    imageDark = "https://res.cloudinary.com/dmukukwp6/image/upload/web_analytics_dark_mode_2024_10_d0ca2f7053.png"
+    alt="Web analytics" 
+    classes="rounded"
+/>
+
+To get started with web analytics, install PostHog on the site or app you want to track.
+
+<!-- prettier-ignore -->
+<Tab.Group tabs={['Web', 'React', 'Next.js', 'GTM', 'Vue', 'Nuxt', 'Svelte', 'WordPress', 'Astro', 'Framer', 'Webflow']}>
+    <Tab.List>
+        <Tab>Web</Tab>
+        <Tab>React</Tab>
+        <Tab>Next.js</Tab>
+        <Tab>GTM</Tab>
+        <Tab>Vue</Tab>
+        <Tab>Nuxt</Tab>
+        <Tab>Svelte</Tab>
+        <Tab>WordPress</Tab>
+        <Tab>Astro</Tab>
+        <Tab>Framer</Tab>
+        <Tab>Webflow</Tab>
+    </Tab.List>
+    <Tab.Panels>
+        <Tab.Panel>
+            <WebInstall />
+        </Tab.Panel>
+        <Tab.Panel>
+            <ReactInstall />
+        </Tab.Panel>
+        <Tab.Panel>
+            <NextJSInstall />
+        </Tab.Panel>
+        <Tab.Panel>
+            <GTMInstall />
+        </Tab.Panel>
+        <Tab.Panel>
+            <VueInstall />
+        </Tab.Panel>
+        <Tab.Panel>
+            <NuxtInstall />
+        </Tab.Panel>
+        <Tab.Panel>
+            <SvelteInstall />
+        </Tab.Panel>
+        <Tab.Panel>
+            <WordPressInstall />
+        </Tab.Panel>
+        <Tab.Panel>
+            <AstroInstall />
+        </Tab.Panel>
+        <Tab.Panel>
+            <FramerInstall />
+        </Tab.Panel>
+        <Tab.Panel>
+            <WebflowInstall />
+        </Tab.Panel>
+    </Tab.Panels>
+</Tab.Group>
+
+After installing PostHog and ensuring [autocapture](/docs/data/autocapture) is enabled, head to your [web analytics dashboard](/docs/web-analytics/dashboard) to see your data. And then check out our [getting started](/docs/web-analytics/getting-started) guide.
+
+> 💡**PostHog tip:** Web analytics works with [anonymous events](/docs/data/anonymous-vs-identified-events). This means if you are primarily using PostHog for web analytics, it can be significantly cheaper for you. 

@@ -7,12 +7,15 @@ import Posts from './src/components/Edition/Posts'
 import { Provider as ToastProvider } from './src/context/toast'
 import { RouteUpdateArgs } from 'gatsby'
 import { UserProvider } from './src/hooks/useUser'
+import { ChatProvider } from './src/hooks/useChat'
 
 initKea(false)
 
 export const wrapRootElement = ({ element }) => (
     <UserProvider>
-        <ToastProvider>{wrapElement({ element })}</ToastProvider>
+        <ToastProvider>
+            <ChatProvider>{wrapElement({ element })}</ChatProvider>
+        </ToastProvider>
     </UserProvider>
 )
 export const onRouteUpdate = ({ location, prevLocation }: RouteUpdateArgs) => {

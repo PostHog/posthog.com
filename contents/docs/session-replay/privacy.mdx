@@ -7,15 +7,17 @@ import WebPrivacy from "./_snippets/web-privacy.mdx"
 import AndroidPrivacy from "./_snippets/android-privacy.mdx"
 import IOSPrivacy from "./_snippets/ios-privacy.mdx"
 import ReactNativePrivacy from "./_snippets/react-native-privacy.mdx"
+import FlutterPrivacy from "./_snippets/flutter-privacy.mdx"
 
 PostHog offers a range of controls to limit what data is captured by session recordings. Our privacy controls run in the browser or mobile app. So, masked data is never sent over the network to PostHog.
 
-<Tab.Group tabs={['Web', 'Android', 'iOS', 'React Native']}>
+<Tab.Group tabs={['Web', 'Android', 'iOS', 'React Native', 'Flutter']}>
     <Tab.List>
         <Tab>Web</Tab>
         <Tab>Android</Tab>
         <Tab>iOS</Tab>
         <Tab>React Native</Tab>
+        <Tab>Flutter</Tab>
     </Tab.List>
     <Tab.Panels>
         <Tab.Panel>
@@ -29,6 +31,9 @@ PostHog offers a range of controls to limit what data is captured by session rec
         </Tab.Panel>
         <Tab.Panel>
             <ReactNativePrivacy />
+        </Tab.Panel>
+        <Tab.Panel>
+            <FlutterPrivacy />
         </Tab.Panel>
     </Tab.Panels>
 </Tab.Group>

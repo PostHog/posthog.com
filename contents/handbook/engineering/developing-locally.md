@@ -55,9 +55,11 @@ This is a faster option to get up and running. If you don't want to or can't use
 ![](https://user-images.githubusercontent.com/890921/231490278-140f814e-e77b-46d5-9a4f-31c1b1d6956a.png)
 3. Open the codespace, using one of the "Open in" options from the list.
 4. In the codespace, open a terminal window and run `docker compose -f docker-compose.dev.yml up`.
-5. Also in the codespace, open another terminal window and run `./bin/migrate` and then `./bin/start`.
-6. Open browser to http://localhost:8000/.
-7. To get some practical test data into your brand-new instance of PostHog, run `DEBUG=1 ./manage.py generate_demo_data`.
+5. In another terminal, run `pnpm i` (and use the same terminal for the following commands)
+6. Then run `pip install -r requirements.txt -r requirements-dev.txt`
+7. Now run `./bin/migrate` and then `./bin/start`.
+8. Open browser to http://localhost:8010/.
+9. To get some practical test data into your brand-new instance of PostHog, run `DEBUG=1 ./manage.py generate_demo_data`.
 
 ## Option 2: Developing locally
 
@@ -69,14 +71,14 @@ This is a faster option to get up and running. If you don't want to or can't use
 
 2. Install the package manager Homebrew by following the [instructions here](https://brew.sh/).
 
-<blockquote class="warning-note">
-    After installation, make sure to follow the instructions printed in your terminal to add Homebrew to your{' '}
-    <code>$PATH</code>. Otherwise the command line will not know about packages installed with <code>brew</code>.
-</blockquote>
+    <blockquote class="warning-note">
+        After installation, make sure to follow the instructions printed in your terminal to add Homebrew to your{' '}
+        <code>$PATH</code>. Otherwise the command line will not know about packages installed with <code>brew</code>.
+    </blockquote>
 
 3. Install [OrbStack](https://orbstack.dev/) – a more performant Docker Desktop alternative – with `brew install orbstack`. Go to OrbStack settings and set the memory usage limit to **at least 4 GB** (or 8 GB if you can afford it) + the CPU usage limit to at least 4 cores (i.e. 400%). You'll want to use Brex for the license if you work at PostHog.
 
-4. Continue with the [common prerequisites for both macOS and Linux](#common-prerequisites-for-both-macos--linux).
+4. Continue with [cloning the repository](#cloning-the-repository).
 
 #### Ubuntu
 
@@ -87,31 +89,55 @@ This is a faster option to get up and running. If you don't want to or can't use
     ```bash
     sudo apt install -y build-essential
     ```
-3. Continue with the [common prerequisites for both macOS and Linux](#common-prerequisites-for-both-macos--linux).
+3. Continue with [cloning the repository](#cloning-the-repository).
 
-#### Common prerequisites for both macOS & Linux
+#### Cloning the repository
 
-1. Append line `127.0.0.1 kafka clickhouse` to `/etc/hosts`. You can do it in one line with:
+
+Clone the [PostHog repo](https://github.com/posthog/posthog). All future commands assume you're inside the `posthog/` folder.
+
+```bash
+git clone https://github.com/PostHog/posthog && cd posthog/
+```
+
+### Instant setup
+
+You can set your development environment up instantly using [Flox](https://flox.dev/). Flox is a dev environment manager, which takes care of the whole dependency graph needed to develop PostHog – all declared in the repo's `.flox/manifest.toml`. To get this environment going:
+
+1. Install Flox (plus `ruff` and `rustup` for pre-commit checks outside of the Flox env).
 
     ```bash
-    echo '127.0.0.1 kafka clickhouse' | sudo tee -a /etc/hosts
+    brew install flox ruff rustup && rustup-init && rustup default stable
     ```
 
-    ClickHouse and Kafka won't be able to talk to each other without these mapped hosts.
-
-    > If you are using a newer (>=4.1) version of Podman instead of Docker, the host machine's `/etc/hosts` is used as the base hosts file for containers by default, instead of container's `/etc/hosts` like in Docker. This can make hostname resolution fail in the ClickHouse container, and can be mended by setting `base_hosts_file="none"` in [`containers.conf`](https://github.com/containers/common/blob/main/docs/containers.conf.5.md#containers-table).
-
-2. Clone the [PostHog repository](https://github.com/posthog/posthog). All future commands assume you're inside the `posthog/` folder.
+2. From the root of the repository, activate the environment. (On first activation, you'll be prompted if you'd like the environment to be activated automatically using `direnv`.)
 
     ```bash
-    git clone https://github.com/PostHog/posthog && cd posthog/
+    flox activate
     ```
 
-### Get things up and running
+This gets you a fully fledged environment, with its executables and linked libraries stored under `.flox/`. You should now be seeing instructions for migrations and running the app.
+
+That's it! You can now change PostHog in any way you want. See [Project structure](/handbook/engineering/project-structure) for an intro to the repository's contents. To commit changes, create a new branch based on `master` for your intended change, and develop away.
+
+### Manual setup
+
+Alternatively, if you'd prefer not to use [Flox-based instant setup](#instant-setup), you can set the environment up manually:
 
 #### 1. Spin up external services
 
 In this step we will start all the external services needed by PostHog to work.
+
+First, append line `127.0.0.1 kafka clickhouse clickhouse-coordinator` to `/etc/hosts`. Our ClickHouse and Kafka data services won't be able to talk to each other without these mapped hosts.  
+You can do this in one line with:
+
+```bash
+echo '127.0.0.1 kafka clickhouse clickhouse-coordinator' | sudo tee -a /etc/hosts
+```
+
+> If you are using a newer (>=4.1) version of Podman instead of Docker, the host machine's `/etc/hosts` is used as the base hosts file for containers by default, instead of container's `/etc/hosts` like in Docker. This can make hostname resolution fail in the ClickHouse container, and can be mended by setting `base_hosts_file="none"` in [`containers.conf`](https://github.com/containers/common/blob/main/docs/containers.conf.5.md#containers-table).
+
+Now, start the Docker Compose stack:
 
 ```bash
 docker compose -f docker-compose.dev.yml up
@@ -196,7 +222,7 @@ On Linux you often have separate packages: `postgres` for the tools, `postgres-s
 
 2. Install the latest Node.js 18 (the version used by PostHog in production) with `nvm install 18`. You can start using it in the current shell with `nvm use 18`.
 
-3. Install pnpm with `corepack enable` and check it with `pnpm --version`.
+3. Install pnpm by running `corepack enable` and then running `corepack prepare pnpm@8.10.5 --activate`. Validate the installation with `pnpm --version`.
 
 4. Install Node packages by running `pnpm i`.
 
@@ -223,11 +249,16 @@ On Linux you often have separate packages: `postgres` for the tools, `postgres-s
     ```
 2. Run `pnpm i --dir plugin-server` to install all required packages. We'll actually run the plugin server in a later step.
 
-> Note: If you face an error like `ld: symbol(s) not found for architecture arm64`, most probably your openssl build flags are coming from the wrong place. To fix this, run:
+> **Note:** If you face an error like `ld: symbol(s) not found for architecture arm64`, most probably your openssl build flags are coming from the wrong place. To fix this, run:
 ```bash
 export CPPFLAGS=-I/opt/homebrew/opt/openssl/include
 export LDFLAGS=-L/opt/homebrew/opt/openssl/lib
 pnpm i --dir plugin-server
+```
+
+> **Note:** If you face an error like `import gyp  # noqa: E402`, most probably need to install `python-setuptools`. To fix this, run:
+```bash
+brew install python-setuptools
 ```
 
 #### 4. Prepare the Django server
@@ -324,19 +355,21 @@ Now start all of PostHog (backend, worker, plugin server, and frontend – simul
 ./bin/start
 ```
 
+> **Note:** This command uses [mprocs](https://github.com/pvolok/mprocs) to run all development processes in a single terminal window.
+
 > **Friendly tip:** If you get the error `Configuration property "enable.ssl.certificate.verification" not supported in this build: OpenSSL not available at build time`, make sure your environment is using the right `openssl` version by setting [those](https://github.com/xmlsec/python-xmlsec/issues/261#issuecomment-1630889826) environment variables, and then run `./bin/start` again.
 
-Open [http://localhost:8000](http://localhost:8000) to see the app.
+Open [http://localhost:8010](http://localhost:8010) to see the app.
 
 > **Note:** The first time you run this command you might get an error that says "layout.html is not defined". Make sure you wait until the frontend is finished compiling and try again.
 
 To get some practical test data into your brand-new instance of PostHog, run `DEBUG=1 ./manage.py generate_demo_data`. For a list of useful arguments of the command, run `DEBUG=1 ./manage.py generate_demo_data --help`.
 
+> **Friendly Tip** The first time you run the app, you can log in with a test account: _user_:`test@posthog.com` _pwd_:`12345678`.
+
 #### 7. Develop
 
-This is it! You can now change PostHog in any way you want. See [Project Structure](/handbook/engineering/project-structure) for an intro to the repository's contents.
-
-To commit changes, create a new branch based on `master` for your intended change, and develop away. Just make sure not use to use `release-*` patterns in your branches unless putting out a new version of PostHog, as such branches have special handling related to releases.
+That's it! You can now change PostHog in any way you want. See [Project structure](/handbook/engineering/project-structure) for an intro to the repository's contents. To commit changes, create a new branch based on `master` for your intended change, and develop away.
 
 ## Testing
 
@@ -401,13 +434,13 @@ all analytics inside your local PostHog instance is based on that instance itsel
 This means that your activity is immediately reflected in the current project, which is potentially useful for testing features
 – for example, which feature flags are currently enabled for your development instance is decided by the project you have open at the very same time.
 
-So, when working with a feature based on feature flag `foo-bar`, [add a feature flag with this key to your local instance](http://localhost:8000/feature_flags/new) and release it there.
+So, when working with a feature based on feature flag `foo-bar`, [add a feature flag with this key to your local instance](http://localhost:8010/feature_flags/new) and release it there.
 
 If you'd like to have ALL feature flags that exist in PostHog at your disposal right away, run `DEBUG=1 python3 manage.py sync_feature_flags` – they will be added to each project in the instance, fully rolled out by default.
 
 This command automatically turns any feature flag ending in `_EXPERIMENT` as a multivariate flag with `control` and `test` variants.
 
-Backend side flags are only evaluated locally, which requires the `POSTHOG_PERSONAL_API_KEY` env var to be set. Generate the key in [your user settings](http://localhost:8000/settings/user#personal-api-keys).
+Backend side flags are only evaluated locally, which requires the `POSTHOG_PERSONAL_API_KEY` env var to be set. Generate the key in [your user settings](http://localhost:8010/settings/user#personal-api-keys).
 
 ## Extra: Debugging with VS Code
 
@@ -435,6 +468,14 @@ With PyCharm's built in support for Django, it's fairly easy to setup debugging 
    - "Celery" and click on debug (optional)
    - "Frontend" and click on run
    - "Plugin server" and click on run
+
+## Extra: Accessing Postgres
+
+While developing, there are times you may want to connect to the database to query the local database, make changes, etc. To connect to the database, use a tool like pgAdmin and enter these connection details: _host_:`localhost` _port_:`5432` _database_:`posthog`, _username_:`posthog`, _pwd_:`posthog`.
+
+## Extra: Accessing the Django Admin
+
+If you cannot access the Django admin http://localhost:8000/admin/, it could be that your local user is not set up as a staff user. You can connect to the database, find your `posthog_user` and set `is_staf` to `true`. This should make the admin page accessible.
 
 ## Extra: Developing paid features (PostHog employees only)
 

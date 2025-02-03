@@ -11,6 +11,9 @@ features:
   userIdentification: true
   featureFlags: true
   groupAnalytics: true
+  surveys: false
+  llmObservability: false
+  errorTracking: false
 ---
 
 This is an optional library you can install if you're working with PHP. It uses an internal queue to make calls fast and non-blocking. It also batches requests and flushes asynchronously, making it perfect to use in any part of your web app or other server-side application that needs performance.
@@ -29,7 +32,7 @@ import PHPSendEvents from '../../integrate/send-events/_snippets/send-events-php
 
 ## Person profiles and properties
 
-PostHog captures identified events by default. These create [person profiles](/docs/data/persons). To set [person properties](/docs/data/user-properties) in these profiles, include them when capturing an event:
+The PHP SDK captures identified events by default. These create [person profiles](/docs/data/persons). To set [person properties](/docs/data/user-properties) in these profiles, include them when capturing an event:
 
 ```php
 PostHog::capture(array(
@@ -133,7 +136,7 @@ PostHog::groupIdentify(array(
 ));
 ```
 
-The `name` is a special property which is used in the PostHog UI for the name of the Group. If you don't specify a `name` property, the group ID will be used instead.
+The `name` is a special property which is used in the PostHog UI for the name of the group. If you don't specify a `name` property, the group ID will be used instead.
 
 ## Config options
 

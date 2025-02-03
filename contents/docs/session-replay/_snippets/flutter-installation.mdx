@@ -1,0 +1,101 @@
+> 🚧 **NOTE:** Flutter is considered `beta` and is free while in beta. We are keen to gather as much feedback as possible so if you try this out please let us know. You can send feedback via the [in-app support panel](https://us.posthog.com#panel=support%3Afeedback%3Asession_replay%3Alow) or one of our other [support options](/docs/support-options).
+
+## Step one: Add PostHog to your app
+
+> Session replay requires PostHog Flutter SDK version >= [4.7.0](https://github.com/PostHog/posthog-flutter/releases), and it's recommended to always use the latest version.
+
+import FlutterInstall from "../../integrate/_snippets/install-flutter.mdx"
+
+export const EnableSessionReplayDark = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/session-replay/enable-session-replay-in-project-settings-dark-mode.png"
+export const EnableSessionReplayLight = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/session-replay/enable-session-replay-in-project-settings-light-mode.png"
+
+
+<FlutterInstall />
+
+#### Widget and Observer setup
+
+Wrap your app with the `PostHogWidget` Widget and Install the `PosthogObserver` Observer.
+
+```dart
+import 'package:flutter/material.dart';
+
+import 'package:posthog_flutter/posthog_flutter.dart';
+
+class MyApp extends StatefulWidget {
+  const MyApp({super.key});
+
+  @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+  @override
+  void initState() {
+    super.initState();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return PostHogWidget(
+      child: MaterialApp(
+        navigatorObservers: [PosthogObserver()],
+        title: 'My App',
+        home: const HomeScreen(),
+      ),
+    );
+  }
+}
+```
+
+## Step two: Enable session recordings in your project settings
+
+Enable session recordings in your PostHog [Project Settings](https://app.posthog.com/project/settings).
+
+If you're using Flutter Web, also enable the [Canvas capture](/docs/session-replay/canvas-recording) in [your project settings](https://us.posthog.com/settings/project-replay).  
+This is needed as Flutter renders your app using a browser canvas element.
+
+<ProductScreenshot
+  imageLight={EnableSessionReplayLight} 
+  imageDark={EnableSessionReplayDark} 
+  alt="Enable session recordings in your PostHog'"
+  classes="rounded"
+/>
+
+## Step three: Configure replay settings  
+
+Add `sessionReplay = true` to your PostHog configuration alongside any of your other configuration options:
+
+```dart
+final config = PostHogConfig('<ph_project_api_key>');
+/// Enable Recording of Session replay for Android and iOS.
+/// Requires Record user sessions to be enabled in the PostHog Project Settings.
+/// Experimental support.
+/// Defaults to false.
+config.sessionReplay = true;
+/// Enable masking of all text and text input fields.
+/// Default: true.
+config.sessionReplayConfig.maskAllTexts = false;
+/// Enable masking of all images.
+/// Default: true.
+config.sessionReplayConfig.maskAllImages = false;
+/// Throttling delay used to reduce the number of snapshots captured and reduce performance impact.
+/// This is used for capturing the view as a screenshot.
+/// The lower the number, the more snapshots will be captured but higher the performance impact.
+/// Experimental support.
+/// Defaults to 1s.
+/// Ps: it was called [debouncerDelay] until version 4.7.1
+config.sessionReplayConfig.throttleDelay = const Duration(milliseconds: 1000);
+```
+
+## Limitations
+
+- On Android, requires API >= 26.
+- On iOS, minimum deployment target is [iOS13](/docs/libraries/ios)
+- Wireframe mode isn't supported, only screenshot mode.
+- [Network performance recording](docs/session-replay/network-recording) isn't supported yet.
+
+## Troubleshooting
+
+- Run a clean build if you experience issues.
+- Update your iOS Pods.
+- For blank recordings, be sure to set up the [Widget and Observer](/docs/session-replay/installation?tab=Flutter#widget-and-observer-setup)

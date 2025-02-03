@@ -141,7 +141,10 @@ posthog.overrideFeatureFlag('my-feature-flag', true)
 ```
 
 ```js-web
-posthog.feature_flags.override({'my-feature-flag': 'variant-1', 'other-feature': true})
+posthog.feature_flags.overrideFeatureFlags({flags: {'my-feature-flag': 'variant-1', 'other-feature': true}})
+
+// you can also override feature flag payloads
+posthog.feature_flags.overrideFeatureFlags({flags: {'my-feature-flag': 'variant-1'}, payloads: {'my-feature-flag': {someData: true}}})
 ```
 
 </MultiLanguage>

@@ -1,0 +1,74 @@
+---
+title: Statistical methodology for count trend metrics
+---
+
+Trends metrics for count-based data use Bayesian statistics with a gamma-poisson model to evaluate the **win probabilities** and **credible intervals**. [Read the statistics overview](/docs/experiments/statistics) if you haven't already.
+
+## What is a gamma-poisson model?
+
+Imagine you run a pizza shop and want to know how many slices a customer typically orders. Some days customers might order 1 slice, others 3 slices, and occasionally someone might order 6 slices! This kind of count data (1, 2, 3, etc.) follows what's called a **poisson distribution**.
+
+The poisson distribution has one key number: the average rate. In our pizza example, maybe it's 2.5 slices per customer. But here's the catch - we don't know the true rate for sure. We only have our observations to guess from.
+
+This is where the **gamma distribution** comes in. It helps us model our uncertainty about the true rate:
+
+- When we have very little data, the gamma distribution is wide, saying "hey, the true rate could be anywhere in this broad range".
+- As we collect more data, the gamma distribution gets narrower, saying "we're getting more confident about what the true rate is".
+
+So when we say we're using a gamma-poisson model for count metrics, we're:
+
+1. Using the poisson distribution to model how count data naturally varies.
+2. Using the gamma distribution to express our uncertainty about the true rate.
+3. Getting more confident in our estimates over time.
+
+One more thing worth noting: Bayesian inference starts with an initial guess that then gets updated as more data comes in. Our model uses a "minimally informative prior" of `ALPHA_PRIOR = 1` and `BETA_PRIOR = 1`, which is like starting with a blank slate instead of making an upfront assumption about the results.
+
+## Win probabilities
+
+The **win probability** tells you how likely it is that a given variant produces a higher rate compared to the control. It helps you determine whether the metric shows a **statistically significant** real effect vs. simply random chance.
+
+Let's say you're testing a new menu design and have these results:
+
+- Control (old menu): 250 slices ordered by 100 customers (rate of 2.5 slices per customer)
+- Test (new menu): 300 slices ordered by 100 customers (rate of 3.0 slices per customer)
+
+To calculate the win probabilities, our methodology:
+
+1. Models each variant's rate using a gamma distribution:
+	- Control: Gamma(250 + ALPHA_PRIOR, 100 + BETA_PRIOR)
+	- Test: Gamma(300 + ALPHA_PRIOR, 100 + BETA_PRIOR)
+
+2. Takes 10,000 random samples from each distribution.
+
+3. Checks which variant had the higher rate for each sample.
+
+4. Calculates the final win probabilities:
+	- Control wins in 154 out of 10,000 samples = 1.54% probability
+	- Test wins in 9,846 out of 10,000 samples = 98.46% probability
+
+These results tell us we can be 98.46%% confident that the new menu design leads to more slice orders per customer than the old menu.
+
+## Credible intervals
+
+We use Bayesian methodology, so we report **credible intervals** rather than the more commonly known **confidence intervals**.
+
+A 95% credible interval means we believe there’s a **95% probability that the true conversion rate lies within that interval**. In other words, it directly reflects our uncertainty about where the true conversion rate might be based on the data we’ve observed.
+
+> If you’re familiar with frequentist methods, you’ve probably heard of confidence intervals. Although they may look similar in graphs, a confidence interval doesn’t mean “there’s a 95% probability that the true rate lies in this range.” Instead, it reflects how often such intervals would contain the true rate if the experiment were repeated many times. In contrast, a **credible interval is the Bayesian version of a confidence interval**, offering a more intuitive probability statement about the metric you care about.
+
+For example, if you have these results:
+
+- Control (old menu): 250 slices ordered by 100 customers (rate of 2.5 slices per customer)
+- Test (new menu): 300 slices ordered by 100 customers (rate of 3.0 slices per customer)
+
+To calculate the credible intervals, our methodology will:
+
+1. Create a gamma distribution for each variant:
+	- Control: Gamma(250 + ALPHA_PRIOR, 100 + BETA_PRIOR)
+	- Test: Gamma(300 + ALPHA_PRIOR, 100 + BETA_PRIOR)
+
+2. Find the 2.5th and 97.5% percentiles of each distribution:
+	- Control: [2.2, 2.8] = "You can be 95% confident customers order between 2.2 and 2.8 slices on average with the old menu"
+	- Test: [2.7, 3.3] = "You can be 95% confident customers order between 2.7 and 3.3 slices on average with the new menu"
+
+Since these intervals barely overlap, you can be quite confident that the new menu design results in more slice orders per customer. The intervals will become narrower as you collect more data, reflecting your increasing certainty about the true rates.

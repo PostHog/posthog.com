@@ -126,11 +126,16 @@ Click the button on each page to capture a custom event in PostHog.
 
 ## Creating our A/B test
 
-Our A/B test will compare these two pages to see which drives more button clicks. To do this, we go to the [experiment tab](https://app.posthog.com/experiments) (what we call A/B tests in PostHog) in PostHog and click "New experiment." Name your experiment and feature flag key (like `main-redirect`), set your experiment goal to `main_button_clicked`, and click "Save as draft."
+Our A/B test will compare these two pages to see which drives more button clicks. To do this, we go to the [experiment tab](https://app.posthog.com/experiments) (what we call A/B tests in PostHog) in PostHog and click "New experiment." Name your experiment and feature flag key (like `main-redirect`) and click "Save as draft."
 
-![A/B test set up](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/redirect-testing/test.png)
+<ProductScreenshot
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_01_16_at_09_44_17_2x_c9f85a2c46.png"
+  imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_01_16_at_09_44_06_2x_d7b288e617.png"
+  alt="Experiment setup in PostHog"
+  classes="rounded"
+/>
 
-Because we are working locally, you can launch the experiment immediately.
+Because we are working locally, you then set your experiment goal to `main_button_clicked` and click **Launch**.
 
 ## Setting up the redirect test middleware
 
@@ -189,7 +194,7 @@ export async function middleware(request) {
 
 With our distinct ID, we use the PostHog API to check the value of the `main-redirect` feature flag for a user (because [we can’t use PostHog SDKs in Next.js middleware](https://vercel.com/docs/functions/edge-functions/edge-runtime#supported-apis)). This is known as evaluating the feature flag.
 
-Specifically, we evaluate the flag by making a POST request to the `[https://us.posthog.com/decide?v=3](/docs/api/decide)` route with your project API key and user distinct ID. From the response, we get the value of the `main-redirect` feature flag and use it to redirect to the right page. Altogether, it looks like this:
+Specifically, we evaluate the flag by making a POST request to the [decide](/docs/api/decide) route with your project API key and user distinct ID. From the response, we get the value of the `main-redirect` feature flag and use it to redirect to the right page. Altogether, it looks like this:
 
 ```js
 // redirect-test/middleware.js

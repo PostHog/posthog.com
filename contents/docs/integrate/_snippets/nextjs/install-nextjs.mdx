@@ -1,0 +1,41 @@
+Install `posthog-js` using your package manager:
+
+```shell
+yarn add posthog-js
+# or
+npm install --save posthog-js
+# or
+pnpm add posthog-js
+```
+
+Add your environment variables to your `.env.local` file and to your hosting provider (e.g. Vercel, Netlify, AWS). You can find your project API key in your [project settings](https://app.posthog.com/project/settings).
+
+```shell file=.env.local
+NEXT_PUBLIC_POSTHOG_KEY=<ph_project_api_key>
+NEXT_PUBLIC_POSTHOG_HOST=<ph_client_api_host>
+```
+
+These values need to start with `NEXT_PUBLIC_` to be accessible on the client-side.
+
+## Router-specific instructions
+
+import Tab from "components/Tab"
+import AppRouterSetup from "./app-router-setup.mdx"
+import PagesRouterSetup from "./pages-router-setup.mdx"
+
+<Tab.Group tabs={[
+    'App router', 
+    'Pages router']}>
+    <Tab.List>
+        <Tab>App router</Tab>
+        <Tab>Pages router</Tab>
+    </Tab.List>
+    <Tab.Panels>
+        <Tab.Panel>
+            <AppRouterSetup />
+        </Tab.Panel>
+        <Tab.Panel>
+            <PagesRouterSetup />
+        </Tab.Panel>
+    </Tab.Panels>
+</Tab.Group>

@@ -57,34 +57,6 @@ Turns are taken randomly so that you are incentivized to turn up to every meetin
 
 The objective of the meeting is to hold each other to account, provide direct feedback, and also support each other. It is a great place to ask for help from the team with thorny problems - [you should not let your team mates fail](/culture#dont-let-others-fail). 
 
-## New sales team hire ramp up
-- Day 1
-  - Read the whole sales playbook (and updating it throughout as you learn more)
-  - Get using PostHog - start making insights and dashboards
-  - Assigned your customers
-- Week 1
-  - Reviewed your account list and prioritized/asked questions about them internally 
-  - Delivered a standard demo to the PostHog team and got feedback
-  - Introduced yourself to your customers
-  - Shadowed new inbound demos 
-- Week 2
-  - Contributed to customer calls with backup from an existing team member
-  - Understand how to work PandaDoc, HubSpot, Vitally, Stripe, Metabase (ie. contracts, billing, reporting)
-  - Built a plan for which customers to prioritize
-  - Completed 1-1s with anyone relevant at PostHog
-- Month 1
-  - Leading customer calls and demos on your own
-  - Have evaluations in flight with support from team if needed (AE)
-  - Had contact with _everyone_ in your book of business in some form
-  - Starting to solve technical problems for your book with occasional help (CSM)
-- Month 2
-  - Closed your first Medium annual deal (new or conversion to annual) (AE)
-  - Leading evaluations on your own (AE)
-  - Identified some opportunities to add to your book from self-serve signups who aren't paying yet (AE)
-- Month 3-4
-  - Closed multiple contracts by this point (either new or expansion/renewal) through the whole process (AE)
-  - Independently working with your entire book to solve tricky technical problems with minimal assistant (CSM)
- 
 ## How commission works - Technical AEs
 
 **General principles**
@@ -167,3 +139,24 @@ You will run into questions that you don't know the answer to from time to time 
 
 - Try to solve your own problems. Deep dive the docs, ask Max AI, ask the rest of the sales team first - a bit of digging is a valuable opportunity for you to learn.
 - Similar to the above, don't just copy and paste questions from Slack with no context. Add some commentary - 'they have asked X, their use case is generally Y, I think the answer might be Z - is that right?'. Do some of the lifting here, rather than putting all the mental load on an engineering team.
+
+## Working with customers in Slack
+
+Most of our customers use Slack, and it's a great way for us to be responsive to them.  Everyone has the permission in Slack to 
+create a Connect channel with a customer, and you should do this as early as possible in your relationship with them.
+
+When you've created the channel you should also add Pylon, which is used to sync Slack conversations with Zendesk so that our 
+Support and Engineering teams can work on customer issues in a familiar context.
+
+To add Pylon to your customer channel:
+
+1. In the Slack desktop app, click the channel name.
+2. On the Settings tab, click Add apps.
+3. Type Pylon and click Add.
+4. In the popup that appears in the Slack channel, select Customer Channel.
+5. Add yourself as the Account Owner, and set the Triage channel to #support-customer-success.
+6. Click Enable.
+
+Once enabled, you can add the :ticket: emoji to a Slack thread to create a new Ticket in Zendesk.  Customers can also do this.  Make sure that a Group and Severity are selected or the ticket won't be routed properly.
+
+> It's your job to ensure your customer issues are resolved, make sure you follow up with Support and Engineering if you feel like the issue isn't getting the right level of attention.

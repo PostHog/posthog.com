@@ -87,6 +87,20 @@ Our strong preference is for customers to pay by credit card, as this is easier 
 
 If a customer wants to pay by ACH or bank transfer, we will usually only consider this if they are paying for 1 year or more up front. This is more likely to be the case for very large customers.
 
+## Contract buyouts
+
+Sometimes customers will be locked into a contract with a competitor, but want to switch to PostHog when their contract is up. In this case, we are willing to let them use PostHog for free for up to 6 months. This is beneficial to PostHog as well, as we can get them set up and using PostHog sooner, capitalizing on the momentum of their interest today, and giving them more time to get comfortable with the platform.
+
+Some rules:
+
+* They need to share a copy of their current contract/pricing/bank statement as proof.
+* They sign up to an annual contract worth $20k+/year, paid up front. Their PostHog contract starts when their current one expires. 
+* Their usage in the overlap period needs to be proportionate to the contract they've signed, ie. if they sign a $50k contract and have 6 months to run, they get $25k of PostHog credit for free.
+* The competitor they're using has to be 'real', ie. not some random side project. As a general rule, anyone we have written a [comparison article](/blog/tags/comparisons) about counts.
+* We have final discretion on deciding who gets the deal.
+
+> Normal commission rules apply here - commission is paid in the quarter in which the customer pay their annual invoice.
+
 ## Order Form
 
 An Order Form is a lightweight document that captures the customer details, credit amount, discount, term, and signatures from both
@@ -129,7 +143,7 @@ We use [PandaDoc](https://app.pandadoc.com/a/#/) to handle document generation, 
 
    > PostHog Cloud License Terms executed by and between PostHog, Inc. and CUSTOMER LEGAL NAME (the “Agreement”)
 
-8. You should link the order form to the HubSpot deal using the sidebar on the right so that we have a reference to the completed paperwork from our CRM.
+8. You should link the order form to the opportunity record in Salesforce using the `Contract Link` field in the "Opportunity Closure Details" so that we have a reference to the completed paperwork from our CRM.
 
 ### Routing an Order Form for review and signature
 
@@ -177,15 +191,15 @@ Sometimes large customers will ask for changes to our MSA. We have a list of the
 
 ## Business Associate Agreement (BAA)
 
-We offer HIPAA Compliance on PostHog Cloud and as such health companies will require us to sign a Business Associate Agreement with them.  As this means we take on increased financial risk in case of a breach we ask them as a minimum to subscribe to the Teams plan which is a guaranteed monthly payment.
+We offer HIPAA Compliance on PostHog Cloud and as such health companies will require us to sign a Business Associate Agreement with them. As this means we take on increased financial risk in case of a breach we ask them as a minimum to subscribe to the Teams plan which is a guaranteed monthly payment. A maximum of one BAA per organization will be signed. Under most circumstances, it should be the company that owns the org/pays us.
 
 1. Ask the customer to subscribe to the Teams plan (as well as any other paid plans they wish to use).
 2. Create a new document from the [PandaDoc Template](https://app.pandadoc.com/a/#/templates/4psCXzU527sNE6WEbFBg3a).
 3. All you need to do it set the `Client.Company` variable and then send it to them for review and signature.
 4. Once the client has signed it then it will get routed to Fraser for countersignature.
-5. You'll get a notification when everybody has signed it - _don't forget to update the *BAA Signed Date* property on the HubSpot company record,_ so we can keep track of who we have signed a BAA with.
+5. You'll get a notification when everybody has signed it - _don't forget to update the *HIPAA BAA Signed Date* property on the customer's Salesforce Accountrecord,_ so we can keep track of who we have signed a BAA with.
 
-> We only provide our default BAA for Teams plan subscribers - customization requires >$20k annual spend. The BAA only remains active for as long as the customer is subscribed to Teams - if they unsubscribe, we send them a message that their BAA will become inactive at the end of the month in which they cancelled. If the lead is not sure whether they will need a custom BAA and their usage wouldn't put them at $20K, then it is worth pushing them to get legal feedback by sending them our BAA before moving forward, else you risk spending a lot of time on an evaluation that ends up at $450/month.
+> We only provide our default BAA for Teams plan subscribers - customization requires >$20k annual spend. The BAA only remains active for as long as the customer is subscribed to Teams - if they unsubscribe, we send them a message that their BAA will become inactive at the end of the month in which they cancelled. A customer who is on a Teams trial (with a credit card in PostHog) is eligible to sign a default BAA, but you should make it clear to them that the default BAA will be voided if/when the Teams subscription lapses. If the lead is not sure whether they will need a custom BAA and their usage wouldn't put them at $20K, then it is worth pushing them to get legal feedback by sending them our BAA before moving forward, else you risk spending a lot of time on an evaluation that ends up at $450/month.
 
 ## Non-PostHog contracts
 

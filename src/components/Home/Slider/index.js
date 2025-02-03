@@ -10,7 +10,7 @@ import {
     DataPipeline,
     DataWarehouse,
     WebAnalytics,
-    AIEngineering,
+    LLMObservability,
 } from './Slides'
 import { useInView } from 'react-intersection-observer'
 import { DotLottiePlayer, PlayerEvents } from '@dotlottie/react-player'
@@ -51,7 +51,7 @@ const enterpriseModeProductNames = {
     'Data pipelines': 'CDP/ETL',
     CDP: 'CDP/ETL',
     'Data warehouse': 'Secure data vault',
-    'AI engineering': 'Artificial intelligence',
+    'LLM observability': 'Artificial intelligence',
 }
 
 const SlideButton = ({ title, lottieSrc, color, colorDark, label, activeSlide, index, placeholderIcon }) => {
@@ -126,7 +126,7 @@ const slides = [
     Surveys,
     DataPipeline,
     DataWarehouse,
-    AIEngineering,
+    LLMObservability,
 ]
 
 const SlideContainer = ({ children, index, setActiveSlide }) => {

@@ -11,14 +11,32 @@ const teamQuery = (slug: string) =>
                 },
             },
             publicationState: 'preview',
-            populate: [
-                'profiles.avatar',
-                'profiles.leadTeams.name',
-                'leadProfiles',
-                'crest',
-                'crestOptions',
-                'teamImage.image',
-            ],
+            populate: {
+                profiles: {
+                    filters: {
+                        startDate: {
+                            $lte: new Date(),
+                        },
+                    },
+                    populate: {
+                        avatar: true,
+                        leadTeams: {
+                            populate: {
+                                name: true,
+                            },
+                        },
+                    },
+                },
+                leadProfiles: true,
+                crest: true,
+                crestOptions: true,
+                teamImage: {
+                    populate: {
+                        image: true,
+                    },
+                },
+                miniCrest: true,
+            },
         },
         { encodeValuesOnly: true }
     )

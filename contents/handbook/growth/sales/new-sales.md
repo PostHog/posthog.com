@@ -66,6 +66,8 @@ Most companies add friction here by making customers jump on a call first to qua
 
 If you're pretty sure that they should be qualified out, you should still be helpful over email - some customers just use the form to get in touch and don't want to actually have a demo (e.g. they have a billing question or are asking about compliance things like HIPAA.)
 
+If they're eligible for the [Startup Plan](/startups), route them to the application form and disqualify them as it's not an immediate opportunity (but we sincerely hope they grow into loyal PostHog customers). If their usage will burn through their credits quickly, you should feel free to switch their lead status to `Nurture` and keep close tabs on them. Per our [usual approach to sales](/handbook/growth/sales/overview), we want to make sure they're successful in this "high-use" scenario and are building with us for the long-term.
+
 You can also redirect them to use the In-app support modal if they have a product-related question - this will then be routed to the right team, as well as showing them CTAs to upgrade for high priority support.
 
 > **Examples of good discovery questions - this is not a script, just ideas!**
@@ -184,6 +186,7 @@ By this point, you may have started running into some objections. These are the 
 - Pricing issue - understand their budget; our [discounts](/handbook/growth/sales/contracts#discounts) section had the different levers you can pull to get a customer to the right price point. You can also help them tune their usage to lower costs. We don't buy customers out of existing contracts, and we don't do deals where year 1 is super cheap then we ratchet up the price in year 2.
 - Performance (e.g. slow dashboards) - for Extra Large, usually get Tim involved, or he can loop in the right engineer to help.
 - Confidence in PostHog - often [this Handbook page](/handbook/finance) is enough. For Very Large companies who need to be sold a bit more on the company vision, you can get James H involved.
+- Unsure how much credit they need - suggesting the customer pay monthly for one or two months can help here, especially when there is not a technical driver that can do the mental math to figure out volumes. It's also a good expectation to set at the end of the trial that they will roll onto monthly, which can be pitched as a way to de-risk for the customer if there are still loose ends or a deal is dragging. 
 
 > Ahead of the contract being signed, you'll also need to understand the customer's invoicing process.  Companies will typically have a Finance or AP team who should be the billing contact in Stripe.  Make sure you are also aware of any special invoicing requirements (e.g. a Purchase Order number) well ahead of the invoice being generated.  In addition, we only accept annual plan payments via Bank Transfer (no checks).
 

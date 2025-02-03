@@ -111,7 +111,6 @@ We use a number of different tools to organise our work and communicate at PostH
 - Slack - we have an internal workspace and a users Slack as well
 - Brex (US, RoW) or Revolut (UK, EU) - company cards and expenses tracking
 - Shopify - powers our merch store
-- Printfection - merch inventory management, [YC onboarding](/handbook/growth/sales/yc-onboarding) merch, and merch [drop-shipping for small events](https://github.com/PostHog/meta/issues/31)
 - CharlieHR - holiday tracking, personal details
 - Gusto - payroll and benefits (US)
 - Deel - contractor payroll (EU and special arrangements)
@@ -136,6 +135,7 @@ We use a number of different tools to organise our work and communicate at PostH
 - Gusto - US payroll and benefits management
 - Deel - international payroll and contracts management
 - Ashby - recruitment
+- Brilliant - merch inventory management, [YC onboarding](/handbook/growth/sales/yc-onboarding) merch, and merch [drop-shipping for small events](https://github.com/PostHog/meta/issues/31)
 
 ## Signatories
 
@@ -172,7 +172,7 @@ Each Small Team has its own Project for tracking their Issues - [full list here]
 
 Employees are occasionally called upon to act as [support heroes](/handbook/engineering/support-hero), or need to deal with support tickets that are escalated to them. This most often applies to engineers, but can include any employee regardless of their team. For this reason, we need everyone to have a broad idea of our support processes and know how we deal with customers.
 
-All new hires should schedule a 30 minute session with the [support engineer closest to their timezone](/teams/comms) within their first three weeks at PostHog. 
+All new hires should schedule a 30 minute session with the [support engineer closest to their timezone](/teams/support) within their first three weeks at PostHog. 
 
 In this call the support engineer will be able to answer any questions, as well as demonstrate how we deal with support at PostHog. In particular, the support engineer should cover:
 

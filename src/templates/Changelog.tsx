@@ -31,10 +31,11 @@ const Select = ({ onChange, values, ...other }) => {
                 {({ open }) => (
                     <>
                         <Listbox.Button
-                            className={`group py-1 px-2 hover:bg-accent dark:hover:bg-accent-dark rounded-sm text-left border hover:border-light dark:hover:border-dark flex justify-between items-center font-semibold text-sm text-primary/75 hover:text-primary/100 dark:text-primary-dark/75 dark:hover:text-primary-dark/100 relative hover:scale-[1.02] active:top-[.5px] active:scale-[.99] ${open
-                                ? 'scale-[1.02] bg-accent dark:bg-accent-dark border-light dark:border-dark text-primary/100 dark:text-primary-dark/100'
-                                : 'border-transparent'
-                                }`}
+                            className={`group py-1 px-2 hover:bg-accent dark:hover:bg-accent-dark rounded-sm text-left border hover:border-light dark:hover:border-dark flex justify-between items-center font-semibold text-sm text-primary/75 hover:text-primary/100 dark:text-primary-dark/75 dark:hover:text-primary-dark/100 relative hover:scale-[1.02] active:top-[.5px] active:scale-[.99] ${
+                                open
+                                    ? 'scale-[1.02] bg-accent dark:bg-accent-dark border-light dark:border-dark text-primary/100 dark:text-primary-dark/100'
+                                    : 'border-transparent'
+                            }`}
                         >
                             {({ value }) => (
                                 <>
@@ -49,10 +50,11 @@ const Select = ({ onChange, values, ...other }) => {
                                     {({ selected }) => {
                                         return (
                                             <li
-                                                className={`!m-0 py-1.5 px-3 !text-sm cursor-pointer rounded-sm hover:bg-light active:bg-accent dark:hover:bg-light/10 dark:active:bg-light/5 transition-colors hover:transition-none whitespace-nowrap ${(other.value ? value.label === other.value : selected)
-                                                    ? 'font-bold'
-                                                    : ''
-                                                    }`}
+                                                className={`!m-0 py-1.5 px-3 !text-sm cursor-pointer rounded-sm hover:bg-light active:bg-accent dark:hover:bg-light/10 dark:active:bg-light/5 transition-colors hover:transition-none whitespace-nowrap ${
+                                                    (other.value ? value.label === other.value : selected)
+                                                        ? 'font-bold'
+                                                        : ''
+                                                }`}
                                             >
                                                 {value.label}
                                             </li>
@@ -92,7 +94,7 @@ export const Change = ({ title, teamName, media, description, cta }) => {
             ) : media?.data?.attributes?.url ? (
                 <div className="my-4">
                     <ZoomImage>
-                        <CloudinaryImage src={media?.data?.attributes?.url} className="w-full" width={650} />
+                        <CloudinaryImage src={media?.data?.attributes?.url} className="w-full" width={1500} />
                     </ZoomImage>
                 </div>
             ) : null}
@@ -195,11 +197,11 @@ export default function Changelog({ pageContext }) {
             filterKeys.length <= 0
                 ? initialRoadmaps
                 : initialRoadmaps.filter((roadmap) =>
-                    filterKeys.every((filter) => {
-                        const { value, field } = filters[filter]
-                        return get(roadmap, field) === value
-                    })
-                )
+                      filterKeys.every((filter) => {
+                          const { value, field } = filters[filter]
+                          return get(roadmap, field) === value
+                      })
+                  )
         setRoadmaps(newRoadmaps)
     }, [filters])
 
@@ -251,6 +253,7 @@ export default function Changelog({ pageContext }) {
                         value={pageContext.year}
                         onChange={({ value }) => navigate(value)}
                         values={[
+                            { label: 2025, value: '/changelog/2025' },
                             { label: 2024, value: '/changelog/2024' },
                             { label: 2023, value: '/changelog/2023' },
                             { label: 2022, value: '/changelog/2022' },

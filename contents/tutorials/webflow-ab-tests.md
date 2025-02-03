@@ -17,7 +17,7 @@ Optimizing your marketing site often requires testing small changes against each
 
 This tutorial shows how to set up A/B tests with Webflow and PostHog to get the most out of your marketing site.
 
-> Thanks to Julia at [Mayan](https://www.mayan.co/) for inspiring this tutorial.
+> **Looking for a no-code option for A/B testing?** Check out our recently released [no-code web experiments](/docs/experiments/no-code-web-experiments) feature.
 
 ## Setup Webflow and PostHog
 
@@ -61,13 +61,15 @@ Back in the Webflow site designer, click the "Pages" tab on the left panel, hove
 </script>
 ```
 
-Once you do this, go back to PostHog and click "Launch" on the experiment. When you publish the changes and reload your Webflow page, there should be a 50% chance you see the new CTA. If not, add `posthog.featureFlags.override({'cta': 'test'})` to the custom code you just added (but don’t forget to remove it). You can check the variations in incognito windows in your browser.
+Once you do this, go back to PostHog and click "Launch" on the experiment. When you publish the changes and reload your Webflow page, there should be a 50% chance you see the new CTA. If not, add `posthog.featureFlags.overrideFeatureFlags({ flags: {'cta': 'test'}})` to the custom code you just added (but don’t forget to remove it). You can check the variations in incognito windows in your browser.
 
 ![CTA changed](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/webflow-ab-tests/cta.png)
 
 Once you launch this experiment, PostHog automatically tracks the results and make a suggestion about which variation performs best. It uses the goals you set in the experiment to decide this. 
 
 Now that you set up an A/B test in Webflow with PostHog, you can use this same pattern to run experiments and A/B tests throughout your site. Happy testing!
+
+> Thanks to Julia at [Mayan](https://www.mayan.co/) for inspiring this tutorial.
 
 ## Further reading
 

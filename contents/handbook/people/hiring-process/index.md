@@ -136,7 +136,7 @@ You'll get paid the bonus 3 months from the new team member's start date, and it
 We also welcome external referrals, e.g. from:
 
 *   From our investors
-*   From the PostHog community (the users Slack Group, and posting on our social media profiles for our followers to see)
+*   From the PostHog community (by posting on our social media profiles for our followers to see)
 *   From the YC community (Slack / WhatsApp / Forum)
 
 As a thank you, we will give you $50 credit for our [merch shop](https://merch.posthog.com/).
@@ -174,8 +174,6 @@ The People & Ops team reviews applications and resumes/portfolios carefully and 
 If a candidate hasn't customized the application or resume to the role, it is a flag they aren't that excited about working at PostHog. Cover letters are definitely _not_ mandatory, but at an interview stage, it's important to note how passionate they seem about the company. Did they try out the software already? Did they read the handbook? Are they in [our community forum](/questions)?
 
 Candidates who are unsuccessful at this stage will receive an automated rejection email. Due to the volume of applications we receive, we usually don't provide personalized feedback.
-
-We also review every single speculative application weekly and if there is a possible fit for future openings, we will place the applicant into the appropriate [Ashby talent project](https://app.ashbyhq.com/projects) (i.e. full stack engineers, platform, product, website & docs, customer success, people & ops, and marketing) and notify the applicant of this via email. 
 
 ### Interviews
 
