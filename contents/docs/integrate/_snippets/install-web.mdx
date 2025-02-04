@@ -38,9 +38,15 @@ If you're using React or Next.js, checkout our [React SDK](/docs/libraries/react
 <details>
 <summary>Bundle all required extensions (advanced)</summary>
 
-By default, the JavaScript Web library will only load the core functionality. It lazy-loads extensions such as surveys or the session replay 'recorder' when needed. 
+By default, the JavaScript Web library only loads the core functionality. It lazy-loads extensions such as surveys or the session replay 'recorder' when needed. 
 
-This can cause issues if you have a Content Security Policy (CSP) that blocks inline scripts or if you want to optimize your bundle at build time to ensure all dependencies are ready immediately. In addition, environments like the Chrome Extension store will reject code that loads remote code. To solve this issue, we have multiple import options available below.
+This can cause issues if:
+
+- You have a Content Security Policy (CSP) that blocks inline scripts. 
+- You want to optimize your bundle at build time to ensure all dependencies are ready immediately.
+- Your app is running in environments like the Chrome Extension store or [Electron](/tutorials/electron-analytics) that reject or block remote code loading.
+
+To solve these issues, we have multiple import options available below.
 
 > **Note:** With any of the `no-external` options, the toolbar will be unavailable as this is only possible as a runtime dependency loaded directly from `us.posthog.com`.
 
