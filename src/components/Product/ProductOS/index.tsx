@@ -397,6 +397,8 @@ export const ProductOS = () => {
                                 <li>Visually define events</li>
                                 <li>Toggle feature flags on or off</li>
                                 <li>See a click map showing what people are clicking</li>
+                                <li>Visualize your experiments</li>
+                                <li>Understand your Web Vitals metrics</li>
                             </ul>
                             <div>
                                 <CallToAction to="/docs/toolbar" type="secondary" size="sm">
