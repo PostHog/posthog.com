@@ -2,13 +2,19 @@ const MapboxClient = require('@mapbox/mapbox-sdk')
 const { chunk } = require('lodash')
 
 const locationForProfile = (profile) => {
-    return profile.location ?
-        { q: profile.location, types: ['place', 'region', 'country'] } :
-        { q: profile.country, types: ['country'] }
+    return profile.location
+        ? { q: profile.location, types: ['place', 'region', 'country'] }
+        : { q: profile.country, types: ['country'] }
 }
 
 const sourceNodes = async (options, pluginOptions) => {
-    const { actions: { createNode }, createNodeId, createContentDigest, getNodes, reporter } = options
+    const {
+        actions: { createNode },
+        createNodeId,
+        createContentDigest,
+        getNodes,
+        reporter,
+    } = options
     const { mapboxToken } = pluginOptions
 
     if (!mapboxToken) {
@@ -23,12 +29,13 @@ const sourceNodes = async (options, pluginOptions) => {
     // Implement the filter below to guarantee we're not processing profiles that don't have a team
 
     const profiles = getNodes()
-        .filter(node =>
-            node.internal.type === 'SqueakProfile' && // For all Squeak profiles
-            node.teams?.data?.length > 0 &&           // Implement the following to avoid old profiles: filter: { teams: { data: { elemMatch: { id: { ne: null } } } } }
-            (node.location || node.country)           // Only process profiles with a location or country
+        .filter(
+            (node) =>
+                node.internal.type === 'SqueakProfile' && // For all Squeak profiles
+                node.teams?.data?.length > 0 && // Implement the following to avoid old profiles: filter: { teams: { data: { elemMatch: { id: { ne: null } } } } }
+                (node.location || node.country) // Only process profiles with a location or country
         )
-        .map(node => ({
+        .map((node) => ({
             id: node.id,
             location: node.location,
             country: node.country,
@@ -45,11 +52,13 @@ const sourceNodes = async (options, pluginOptions) => {
         reporter.info(`Processing batch ${index + 1}/${batches.length}`)
 
         try {
-            const response = await mapboxClient.createRequest({
-                method: 'POST',
-                path: '/search/geocode/v6/batch',
-                body: batch.map(locationForProfile)
-            }).send()
+            const response = await mapboxClient
+                .createRequest({
+                    method: 'POST',
+                    path: '/search/geocode/v6/batch',
+                    body: batch.map(locationForProfile),
+                })
+                .send()
 
             console.log(JSON.stringify(response.body.batch, null, 2))
 
@@ -63,8 +72,8 @@ const sourceNodes = async (options, pluginOptions) => {
                             location: locationForProfile(batch[i]).q,
                             coordinates: {
                                 latitude,
-                                longitude
-                            }
+                                longitude,
+                            },
                         })
                     }
                 }
@@ -77,7 +86,7 @@ const sourceNodes = async (options, pluginOptions) => {
     reporter.info(`Successfully processed ${locations.length} locations`)
 
     // Create nodes directly here, not in a separate function
-    locations.forEach(location => {
+    locations.forEach((location) => {
         const nodeContent = {
             ...location,
         }

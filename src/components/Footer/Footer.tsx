@@ -67,6 +67,10 @@ const linklist: IProps[] = [
                 title: 'How we do "sales"',
                 url: '/sales',
             },
+            {
+                title: 'Founder stack',
+                url: '/founder-stack',
+            },
         ],
     },
     {

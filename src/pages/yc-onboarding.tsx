@@ -22,7 +22,7 @@ enum YCBatch {
     W22 = 'W22',
     S21 = 'S21',
     W21 = 'W21',
-    Earlier = 'Earlier'
+    Earlier = 'Earlier',
 }
 
 const features = [
@@ -50,7 +50,11 @@ export const YCOnboarding = () => {
                         <h1 className="text-3xl md:text-5xl mt-4 mb-2">You've found our secret Y Combinator offer!</h1>
                         <p className="m-0 text-lg">
                             We offer special benefits for teams in the current batch - things we'd have found useful
-                            during <Link to="/blog/yc-2-years-on" external>our W20 batch</Link>.{' '}
+                            during{' '}
+                            <Link to="/blog/yc-2-years-on" external>
+                                our W20 batch
+                            </Link>
+                            .{' '}
                         </p>
                     </div>
                 </section>
@@ -150,7 +154,7 @@ export const YCOnboarding = () => {
                                             { label: 'Summer 2025 (S25)', value: YCBatch.S25 },
                                             { label: 'Spring 2025 (X25)', value: YCBatch.X25 },
                                             { label: 'Winter 2025 (W25)', value: YCBatch.W25 },
-         			                        { label: 'Fall 2024 (F24)', value: YCBatch.F24 },
+                                            { label: 'Fall 2024 (F24)', value: YCBatch.F24 },
                                             { label: 'Summer 2024 (S24)', value: YCBatch.S24 },
                                             { label: 'Winter 2024 (W24)', value: YCBatch.W24 },
                                             { label: 'Summer 2023 (S23)', value: YCBatch.S23 },
@@ -160,7 +164,7 @@ export const YCOnboarding = () => {
                                             { label: 'Summer 2021 (S21)', value: YCBatch.S21 },
                                             { label: 'Winter 2021 (W21)', value: YCBatch.W21 },
                                             { label: 'Earlier batches', value: YCBatch.Earlier },
-                                        ]
+                                        ],
                                     },
                                     {
                                         label: 'Are you building LLM-powered features?',
