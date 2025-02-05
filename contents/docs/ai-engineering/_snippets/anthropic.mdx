@@ -75,7 +75,7 @@ print(response.content[0].text)
 
 ```typescript
 const response = await client.messages.create({
-  model: "claude-3-opus-20240229",
+  model: "claude-3-5-sonnet-latest",
   messages: [
     {
       role: "user",
@@ -90,6 +90,7 @@ const response = await client.messages.create({
 })
 
 console.log(response.content[0].text)
+phClient.shutdown() 
 ```
 
 </MultiLanguage>
