@@ -128,10 +128,13 @@ For details on how to implement local evaluation, see our [local evaluation guid
 Since [experiments](/docs/experiments/manual) use feature flags, the code for running an experiment is very similar to the feature flags code:
 
 ```csharp
-variant = posthog.get_feature_flag('experiment-feature-flag-key', 'user_distinct_id')
-
-if variant == 'variant-name':
-    # Do something
+if (await posthog.GetFeatureFlagAsync(
+        "experiment-feature-flag-key",
+        "user_distinct_id")
+    is { VariantKey: "variant-name" })
+{
+    // Do something
+}
 ```
 
 It's also possible to [run experiments without using feature flags](/docs/experiments/running-experiments-without-feature-flags). 
