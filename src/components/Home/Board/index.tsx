@@ -865,7 +865,7 @@ export default function Hero(): JSX.Element {
             </div>
             <div className="flex px-2 md:px-0 md:space-x-6 items-start">
                 <div className="@container flex-1">
-                    <ul className="grid @sm:grid-cols-2 @xl:grid-cols-3 md:gap-x-2 gap-y-6 @2xl:gap-y-8 @3xl:gap-y-10 list-none m-0 p-0 flex-grow flex-shrink-0 max-h-[65vh] @sm:max-h-none overflow-y-auto">
+                    <ul className="grid @sm:grid-cols-2 @xl:grid-cols-3 md:gap-x-2 gap-y-6 @2xl:gap-y-8 @3xl:gap-y-10 list-none m-0 p-0 flex-grow flex-shrink-0 sm:max-h-[65vh] overflow-y-auto">
                         {groupedProducts.map(([type, products]) =>
                             type === 'Sales' ? null : (
                                 <li key={type}>
