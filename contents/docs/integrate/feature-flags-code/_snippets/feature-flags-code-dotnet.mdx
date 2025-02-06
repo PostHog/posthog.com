@@ -5,7 +5,10 @@ There are 2 steps to implement feature flags in .NET:
 #### Boolean feature flags
 
 ```csharp
-var isMyFlagEnabled = await posthog.IsFeatureEnabledAsync("flag-key", "distinct_id_of_your_user");
+var isMyFlagEnabled = await posthog.IsFeatureEnabledAsync(
+    "flag-key",
+    "distinct_id_of_your_user"
+);
 if (isMyFlagEnabled.GetValueOrDefault())
 {
     // Feature is enabled
@@ -21,9 +24,13 @@ else
 #### Multivariate feature flags
 
 ```csharp
-var flag = await posthog.GetFeatureFlagAsync("flag-key", "distinct_id_of_your_user");
+var flag = await posthog.GetFeatureFlagAsync(
+    "flag-key",
+    "distinct_id_of_your_user"
+);
 
-if (flag is { VariantKey: "variant-key"} ) { // replace "variant-key" with the key of your variant
+// replace "variant-key" with the key of your variant
+if (flag is { VariantKey: "variant-key"} ) {
     // Do something differently for this user
     // Optional: fetch the payload
     var matchedPayload = flag.Payload;
@@ -33,7 +40,11 @@ if (flag is { VariantKey: "variant-key"} ) { // replace "variant-key" with the k
 The `GetFeatureFlagAsync` method returns a nullable `FeatureFlag` object. If the flag is not found or evaluating it is inconclusive, it returns `null`. However, there is an implicit conversion to bool to make comparisons easier.
 
 ```csharp
-if (await posthog.GetFeatureFlagAsync("flag-key", "distinct_id_of_your_user")) {
+if (await posthog.GetFeatureFlagAsync(
+    "flag-key",
+    "distinct_id_of_your_user")
+)
+{
     // Do something differently for this user
 }
 ```
@@ -53,7 +64,9 @@ posthog.CaptureEvent(
     "distinct_id_of_your_user",
     "event_name",
     properties: new() {
-        ["$feature/feature-flag-key"] = "variant-key" // replace feature-flag-key with your flag key. Replace 'variant-key' with the key of your variant
+        // replace feature-flag-key with your flag key.
+        // Replace 'variant-key' with the key of your variant
+        ["$feature/feature-flag-key"] = "variant-key"
     }
 );
 ```
@@ -71,7 +84,9 @@ You can fetch all flag values for a single user by calling `GetAllFeatureFlagsAs
 This is useful when you need to fetch multiple flag values and don't want to make multiple requests.
 
 ```csharp  
-var flags = await posthog.GetAllFeatureFlagsAsync("distinct_id_of_your_user");
+var flags = await posthog.GetAllFeatureFlagsAsync(
+    "distinct_id_of_your_user"
+);
 ```
 
 ### Sending `$feature_flag_called` events

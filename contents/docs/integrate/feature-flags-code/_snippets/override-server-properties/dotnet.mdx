@@ -14,10 +14,14 @@ var flag = await posthog.GetFeatureFlagAsync(
             {
                 ["group_property_name"] = "your group value"
             },
-            new Group("another_group_type", "another_group_id", new Dictionary<string, object?>
-            {
-                ["group_property_name"] = "another group value"
-            })
+            new Group(
+                "another_group_type",
+                "another_group_id",
+                new Dictionary<string, object?>
+                {
+                    ["group_property_name"] = "another group value"
+                }
+            )
         ]
     });
 ```
