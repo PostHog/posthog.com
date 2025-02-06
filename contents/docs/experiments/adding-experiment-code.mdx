@@ -140,9 +140,18 @@ if variant == "variant-name" {
     // Do something
 }
 ```
+
+```elixir
+{:ok, feature_flag} = PostHog.feature_flag("experiment-feature-flag-key", "user_distinct_id")
+
+if feature_flag.enabled == "variant-name" do
+    # Do something
+end
+```
+
 </MultiLanguage>
 
-> Since feature flags are not supported yet in our Java, Rust, and Elixir SDKs, to run an experiment using these SDKs see our docs on [how to run experiments without feature flags](/docs/experiments/running-experiments-without-feature-flags). This also applies to running experiments using our API.
+> Since feature flags are not supported yet in our Java and Rust SDKs, to run an experiment using these SDKs see our docs on [how to run experiments without feature flags](/docs/experiments/running-experiments-without-feature-flags). This also applies to running experiments using our API.
 
 ## Step 2 (server-side only): Add the feature flag to your events 
 
