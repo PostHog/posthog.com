@@ -865,7 +865,7 @@ export default function Hero(): JSX.Element {
             </div>
             <div className="flex px-2 md:px-0 md:space-x-6 items-start">
                 <div className="@container flex-1">
-                    <ul className="grid @sm:grid-cols-2 @xl:grid-cols-3 md:gap-x-2 gap-y-6 @2xl:gap-y-8 @3xl:gap-y-10 list-none m-0 p-0 flex-grow flex-shrink-0 md:max-h-[65vh] md:overflow-y-auto">
+                    <ul className="grid @sm:grid-cols-2 @xl:grid-cols-3 md:gap-x-2 gap-y-6 @2xl:gap-y-8 @3xl:gap-y-10 list-none m-0 p-0 flex-grow flex-shrink-0 max-h-[65vh] @sm:max-h-none overflow-y-auto">
                         {groupedProducts.map(([type, products]) =>
                             type === 'Sales' ? null : (
                                 <li key={type}>
@@ -894,12 +894,12 @@ export default function Hero(): JSX.Element {
                         )}
                     </ul>
 
-                    <div className="mr-8">
+                    <div className="mr-8 mx-4 md:mx-0">
                         <p className="text-sm text-primary/70 dark:text-primary-dark/70 mt-8 pb-3 mb-0">
                             Each product offers the lowest pricing vs. every competitor at scale.
                         </p>
                     </div>
-                    <div className="border-t border-border dark:border-dark pt-3 text-sm text-primary/70 dark:text-primary-dark/70">
+                    <div className="border-t border-border dark:border-dark pt-3 mx-4 md:mx-0 text-sm text-primary/70 dark:text-primary-dark/70">
                         Just starting out? <Link to="/founder-stack">Explore our founder stack.</Link>
                     </div>
                 </div>
