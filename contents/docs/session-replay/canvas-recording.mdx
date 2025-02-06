@@ -34,7 +34,7 @@ posthog.init('<ph_project_api_key>', {
   session_recording: {
     captureCanvas: {
       canvasFps: 2, // default is 4, accepts a number between 0 and 12
-      canvasQuality: 0.2, // default is 0.4, accepts a number between 0 and 1 
+      canvasQuality: "0.2", // default is 0.4, accepts a decimal number between 0 and 1 as a string
     }
   }
 })
