@@ -51,7 +51,6 @@ export const AboutTeam = (): JSX.Element => {
                                 name={name}
                                 country={country}
                             />
-
                         )
                     })}
                 </div>

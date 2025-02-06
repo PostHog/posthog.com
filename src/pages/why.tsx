@@ -157,13 +157,14 @@ const Teams: React.FC = () => {
                                 </p>
                                 <p>
                                     And every product has a generous free tier, so you can always try it out before
-                                    paying anything at all. Without talking to sales, because our pricing is completely transparent. 
+                                    paying anything at all. Without talking to sales, because our pricing is completely
+                                    transparent.
                                 </p>
 
                                 <h2 id="we-just-do-the-right-thing">We just do the right thing</h2>
                                 <p>
-                                    We asked our customers - one of the top reasons they recommend PostHog is
-                                    our brand. To us that means we do the right thing for our customers:
+                                    We asked our customers - one of the top reasons they recommend PostHog is our brand.
+                                    To us that means we do the right thing for our customers:
                                 </p>
                                 <ul>
                                     <li>
@@ -329,7 +330,8 @@ const Teams: React.FC = () => {
                                     PostHog is more popular than every other product
                                 </h2>
                                 <p>
-                                    Nobody wants to be a sheep, but it's probably a good sign when something is very popular.
+                                    Nobody wants to be a sheep, but it's probably a good sign when something is very
+                                    popular.
                                 </p>
                                 <p>
                                     We have over 100,000 customers using our products. Just under a quarter of a million
@@ -341,10 +343,8 @@ const Teams: React.FC = () => {
                                     products.
                                 </p>
 
-                                <h2 id="all-your-user-context-in-one-place">
-                                    All your user context in one place
-                                </h2>
-                            
+                                <h2 id="all-your-user-context-in-one-place">All your user context in one place</h2>
+
                                 <p>
                                     We put all the context you need in one place, so you can focus on your users instead
                                     of fixing endless data integrations.
@@ -363,7 +363,7 @@ const Teams: React.FC = () => {
                                     can <Link to="/roadmap">see our entire public roadmap</Link> and ask for what you
                                     need.
                                 </p>
-                                
+
                                 <RoadmapPreview />
 
                                 <div className="text-center mb-8">
