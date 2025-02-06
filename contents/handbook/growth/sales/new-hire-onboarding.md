@@ -88,7 +88,7 @@ By the end of month 4 - you should:
 - [Cal.com](https://app.cal.com/) for shared meeting booking links
 - [Loom](https://www.loom.com/) for short videos (Simon can invite you to the company account)
 - [Trumpet](https://www.sendtrumpet.com/) for sales rooms
-- [LinkedIn Sales Navigator] (https://www.linkedin.com/sales/home) for account intelligence
+- [LinkedIn Sales Navigator](https://www.linkedin.com/sales/home) for account intelligence
 - [Clay](https://www.clay.com/) for account and contact enrichment
 - [Scratchpad](https://www.scratchpad.com/) for AI agents and a friendlier SFDC UI (AEs sign up as part of their software budget)
 
