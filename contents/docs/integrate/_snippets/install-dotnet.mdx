@@ -1,0 +1,55 @@
+<DotNetInstall />
+
+At the moment, ASP.NET Core is the only supported platform for the PostHog .NET SDK.
+
+```bash
+dotnet add package PostHog.AspNetCore
+```
+
+In your `Program.cs` file, add the following code:
+
+```csharp
+using PostHog.AspNetCore;
+
+var builder = WebApplication.CreateBuilder(args);
+
+builder.AddPostHog();
+```
+
+Make sure to configure PostHog with your project API key, instance address, and optional personal API key. For example, in appsettings.json:
+
+```json
+{
+  "PostHog": {
+    "ProjectApiKey": "phc_...",
+    "Host": "https://us.i.posthog.com"
+  }
+}
+```
+
+> **Note:** If the host is not specified, the default host `https://us.i.posthog.com` is used.
+
+Use a secrets manager to store your personal API key. For example, when developing locally you can use the `UserSecrets` feature of the `dotnet` CLI:
+
+```bash
+dotnet user-secrets init
+dotnet user-secrets set "PostHog:PersonalApiKey" "phc_..."
+```
+
+You can find your project API key and instance address in the [project settings](https://app.posthog.com/project/settings) page in PostHog.
+
+To see detailed logging, set the log level to `Debug` or `Trace` in appsettings.json:
+
+```json
+{
+  "DetailedErrors": true,
+  "Logging": {
+    "LogLevel": {
+      "Default": "Information",
+      "Microsoft.AspNetCore": "Warning",
+      "PostHog": "Trace"
+    }
+  },
+  ...
+}
+```

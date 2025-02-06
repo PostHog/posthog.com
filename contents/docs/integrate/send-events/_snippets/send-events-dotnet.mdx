@@ -1,0 +1,35 @@
+import SettingProperties from "./setting-properties-text.mdx" 
+import NamingTip from "./naming-tip.mdx" 
+import Intro from "./intro.mdx" 
+
+<Intro />
+
+```csharp
+posthog.CaptureEvent("distinct_id_of_the_user", "user_signed_up");
+```
+
+<NamingTip />
+
+<SettingProperties />
+
+```csharp
+posthog.CaptureEvent(
+    "distinct_id_of_the_user", 
+    "user_signed_up", 
+    properties: new() {
+        ["login_type"] = "email", 
+        ["is_free_trial"] = "true"
+    }
+);
+```
+
+### Sending page views
+
+If you're aiming for a backend-only implementation of PostHog and won't be capturing events from your frontend, you can send `pageviews` from your backend like so:
+
+```csharp
+using PostHog;
+using Microsoft.AspNetCore.Http.Extensions;
+
+posthog.CapturePageView("distinct_id_of_the_user", context.HttpContext.Request.GetDisplayUrl());
+```

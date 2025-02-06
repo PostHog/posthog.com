@@ -1,0 +1,27 @@
+import OverrideServerPropertiesIntro from './override-server-properties-intro.mdx'
+
+<OverrideServerPropertiesIntro />
+
+```csharp
+var flag = await posthog.GetFeatureFlagAsync(
+    "flag-key",
+    "distinct_id_of_the_user",
+    options: new FeatureFlagOptions
+    {
+        PersonProperties = new() { ["property_name"] = "value" },
+        Groups = [
+            new Group("your_group_type", "your_group_id")
+            {
+                ["group_property_name"] = "your group value"
+            },
+            new Group("another_group_type", "another_group_id", new Dictionary<string, object?>
+            {
+                ["group_property_name"] = "another group value"
+            })
+        ]
+    });
+```
+
+import OverrideGeoIPPropertiesSDK from './override-geoip-properties-SDKs.mdx'
+
+<OverrideGeoIPPropertiesSDK />
