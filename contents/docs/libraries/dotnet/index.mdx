@@ -40,7 +40,7 @@ import DotNetSendEvents from '../../integrate/send-events/_snippets/send-events-
 The .NET SDK captures identified events by default. These create [person profiles](/docs/data/persons). To set [person properties](/docs/data/user-properties) in these profiles, include them when capturing an event:
 
 ```csharp
-posthog.CaptureEvent(
+posthog.Capture(
     "distinct_id",
     "event_name",
     personPropertiesToSet: new() { ["name"] = "Max Hedgehog" },
@@ -53,7 +53,7 @@ For more details on the difference between `$set` and `$set_once`, see our [pers
 To capture [anonymous events](/docs/data/anonymous-vs-identified-events) without person profiles, set the event's `$process_person_profile` property to `false`:
 
 ```csharp
-posthog.CaptureEvent(
+posthog.Capture(
     "distinct_id",
     "event_name",
     properties: new() {
@@ -83,7 +83,7 @@ Group analytics allows you to associate an event with a group (e.g. teams, organ
 -   Capture an event and associate it with a group
 
 ```csharp
-postHogClient.CaptureEvent(
+postHogClient.Capture(
     "user_distinct_id", 
     "some_event", 
     groups: [new Group("company", "company_id_in_your_db")]);
@@ -92,7 +92,7 @@ postHogClient.CaptureEvent(
 -   Update properties on a group
 
 ```csharp
-await postHogClient.IdentifyGroupAsync(
+await postHogClient.GroupIdentifyAsync(
     type: "company",
     key: "company_id_in_your_db",
     name: "Awesome Inc.",
@@ -150,4 +150,4 @@ By default, the library buffers events before sending them to the `/batch` endpo
 lead to lost events in serverless environments, if the .NET process is terminated by the platform before the buffer
 is fully flushed. To avoid this, you can:
 
-- ensure that `await posthog.FlushAsync()` is called after processing every request, by adding a middleware to your server: this allows `posthog.CaptureEvent()` to remain asynchronous for better performance.
+- ensure that `await posthog.FlushAsync()` is called after processing every request, by adding a middleware to your server: this allows `posthog.Capture()` to remain asynchronous for better performance.

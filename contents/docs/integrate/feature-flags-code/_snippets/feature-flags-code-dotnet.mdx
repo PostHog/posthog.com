@@ -60,7 +60,7 @@ There are two methods you can use to include feature flag information in your ev
  In the event properties, include `$feature/feature_flag_name: variant_key`:
 
 ```csharp
-posthog.CaptureEvent(
+posthog.Capture(
     "distinct_id_of_your_user",
     "event_name",
     properties: new() {

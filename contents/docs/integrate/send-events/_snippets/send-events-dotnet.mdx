@@ -5,7 +5,7 @@ import Intro from "./intro.mdx"
 <Intro />
 
 ```csharp
-posthog.CaptureEvent("distinct_id_of_the_user", "user_signed_up");
+posthog.Capture("distinct_id_of_the_user", "user_signed_up");
 ```
 
 <NamingTip />
@@ -13,7 +13,7 @@ posthog.CaptureEvent("distinct_id_of_the_user", "user_signed_up");
 <SettingProperties />
 
 ```csharp
-posthog.CaptureEvent(
+posthog.Capture(
     "distinct_id_of_the_user", 
     "user_signed_up", 
     properties: new() {
