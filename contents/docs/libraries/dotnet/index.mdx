@@ -92,11 +92,6 @@ postHogClient.CaptureEvent(
 -   Update properties on a group
 
 ```csharp
-posthog.group_identify('company', 'company_id_in_your_db', {
-    'name': 'Awesome Inc.',
-    'employees': 11
-})
-
 await postHogClient.IdentifyGroupAsync(
     type: "company",
     key: "company_id_in_your_db",
