@@ -1223,9 +1223,32 @@ export const docsMenu = {
                     name: 'New to PostHog?',
                 },
                 {
-                    name: 'Start here',
-                    url: '/docs/getting-started/install',
+                    name: 'Analytics basics',
+                    url: '/docs/analytics-intro/winning-on-purpose',
                     icon: 'IconFlag',
+                    children: [
+                        {
+                            name: 'Winning on purpose',
+                            url: '/docs/analytics-intro/winning-on-purpose',
+                        },
+                        {
+                            name: 'Measuring activation',
+                            url: '/docs/analytics-intro/activation',
+                        },
+                        {
+                            name: 'Tracking retention',
+                            url: '/docs/analytics-intro/retention',
+                        },
+                        {
+                            name: 'Capturing revenue',
+                            url: '/docs/analytics-intro/revenue',
+                        },
+                    ],
+                },
+                {
+                    name: 'Install and configure',
+                    url: '/docs/getting-started/install',
+                    icon: 'IconWrench',
                     children: [
                         {
                             name: 'Install PostHog',
