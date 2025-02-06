@@ -33,8 +33,12 @@ posthog.init('<ph_project_api_key>', {
   api_host: '<ph_client_api_host>',
   session_recording: {
     captureCanvas: {
-      canvasFps: 2, // default is 4, accepts a number between 0 and 12
-      canvasQuality: "0.2", // default is 0.4, accepts a decimal number between 0 and 1 as a string
+      // accepts a number between 0 and 12
+      // if not set locally, when canvas recording is enabled, remote config sets this to 4
+      canvasFps: 2,
+      // accepts a decimal number between 0 and 1 as a string
+      // if not set locally, when canvas recording is enabled, remote config sets this to "0.4"
+      canvasQuality: "0.2",
     }
   }
 })
