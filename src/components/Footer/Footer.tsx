@@ -228,10 +228,6 @@ const linklist: IProps[] = [
                 url: '/handbook/team-structure',
             },
             {
-                title: 'People & Ops',
-                url: '/handbook/people/compensation',
-            },
-            {
                 title: 'Engineering',
                 url: '/handbook/engineering/developing-locally',
             },
