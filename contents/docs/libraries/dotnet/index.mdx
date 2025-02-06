@@ -68,7 +68,7 @@ Sometimes, you want to assign multiple distinct IDs to a single user. This is he
 
 In this case, you can use `alias` to assign another distinct ID to the same user.
 
-```python
+```csharp
 await posthog.AliasAsync('current_distinct_id', 'new_distinct_id');
 ```
 
@@ -116,7 +116,7 @@ import FeatureFlagsLibsIntro from "../_snippets/feature-flags-libs-intro.mdx"
 
 <FeatureFlagsLibsIntro />
 
-import DotNetFeatureFlagsCode from '../../integrate/feature-flags-code/_snippets/feature-flags-code-python.mdx'
+import DotNetFeatureFlagsCode from '../../integrate/feature-flags-code/_snippets/feature-flags-code-dotnet.mdx'
 
 <DotNetFeatureFlagsCode />
 
@@ -148,8 +148,8 @@ The posthog-dotnet library disregards the server IP, does not add the GeoIP prop
 
 ## Serverless environments (Azure Functions/Render/Lambda/...)
 
-By default, the library buffers events before sending them to the capture endpoint, for better performance. This can
-lead to lost events in serverless environments, if the python process is terminated by the platform before the buffer
+By default, the library buffers events before sending them to the `/batch` endpoint, for better performance. This can
+lead to lost events in serverless environments, if the .NET process is terminated by the platform before the buffer
 is fully flushed. To avoid this, you can:
 
 - ensure that `await posthog.FlushAsync()` is called after processing every request, by adding a middleware to your server: this allows `posthog.CaptureEvent()` to remain asynchronous for better performance.

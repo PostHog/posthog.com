@@ -31,5 +31,7 @@ If you're aiming for a backend-only implementation of PostHog and won't be captu
 using PostHog;
 using Microsoft.AspNetCore.Http.Extensions;
 
-posthog.CapturePageView("distinct_id_of_the_user", context.HttpContext.Request.GetDisplayUrl());
+posthog.CapturePageView(
+    "distinct_id_of_the_user",
+    context.HttpContext.Request.GetDisplayUrl());
 ```
