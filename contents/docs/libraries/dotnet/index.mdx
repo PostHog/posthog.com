@@ -86,7 +86,7 @@ postHogClient.Capture(
     groups: [new Group("company", "company_id_in_your_db")]);
 ```
 
--   Update properties on a group
+Update properties on a group, use the `GroupIdentifyAsync` method:
 
 ```csharp
 await postHogClient.GroupIdentifyAsync(
