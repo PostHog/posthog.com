@@ -77,7 +77,7 @@ Group analytics allows you to associate an event with a group (e.g. teams, organ
 
 > **Note:** This is a paid feature and is not available on the open-source or free cloud plan. Learn more on our [pricing page](/pricing).
 
--   Capture an event and associate it with a group
+To capture an event and associate it with a group, add the `groups` argument to your `Capture` call:
 
 ```csharp
 postHogClient.Capture(
