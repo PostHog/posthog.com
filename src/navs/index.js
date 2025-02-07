@@ -1271,7 +1271,7 @@ export const docsMenu = {
                     icon: 'IconBox',
                     children: [
                         {
-                            name: 'Library comparison',
+                            name: 'SDK comparison',
                             url: '/docs/libraries',
                         },
                         {
