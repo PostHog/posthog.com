@@ -347,6 +347,7 @@
         { "source": "/bytegrad", "destination": "/?utm_source=bytegrad&utm_campaign=bytegrad" },
         { "source": "/fireship", "destination": "/?utm_source=fireship&utm_campaign=fireship" },
         { "source": "/jesseshowalter", "destination": "/?utm_source=jesseshowalter&utm_campaign=jesseshowalter" },
+        { "source": "/benjamincode", "destination": "/?utm_source=benjamincode&utm_campaign=benjamincode" },
         { "source": "/blog/the-posthog-array-1-36-1", "destination": "/blog/the-posthog-array-1-36-0" },
         { "source": "/tutorials/b2b", "destination": "/blog/b2b-saas-product-metrics" },
         { "source": "/docs/self-host/migrate-to-cloud", "destination": "/docs/migrate/migrate-to-cloud" },
