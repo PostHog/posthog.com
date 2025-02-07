@@ -1494,6 +1494,10 @@ export const docsMenu = {
                             url: '/docs/advanced/proxy/cloudflare',
                         },
                         {
+                            name: 'Kubernetes',
+                            url: '/docs/advanced/proxy/kubernetes-ingress-controller',
+                        },
+                        {
                             name: 'Netlify',
                             url: '/docs/advanced/proxy/netlify',
                         },
