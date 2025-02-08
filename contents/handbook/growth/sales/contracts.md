@@ -22,7 +22,17 @@ Anyone on a monthly plan simply agrees to our [Terms](/terms) and [Privacy Polic
 
 ## Pricing calculator
 
-While we have a transparent pricing available, you'll need to use our [pricing calculator](https://docs.google.com/spreadsheets/d/1ynNM9tbWsWki2Q0vhwCV0iYNtJ1NHz4eXtUvZDw_sjA/edit?usp=sharing) (internal only) for customers with very high volumes or bespoke needs.
+While we have a transparent pricing available, you'll need to use [QuoteHog](https://quote.posthog.net) (internal only) for customers with very high volumes or bespoke needs.
+
+Quotes can be shared externally or embedeed in Trumpet by clicking the Dot Menu from a Quote and then clicking "Share"
+
+To view Stripe reported usage and spend for an existing customer, or to connect a Quoteto a Salesforce Opportunity or Account, first connect QuoteHog to Salesforce from your [Profile page](https://quote.posthog.net/profile).
+
+Be sure to always click the "Save" button after making changes to a quote.
+
+If someone asks for a PDF version of a quote, you can view the external version and then print it to PDFfrom there.
+
+The legacy pricing calculator is available [here](https://docs.google.com/spreadsheets/d/1ynNM9tbWsWki2Q0vhwCV0iYNtJ1NHz4eXtUvZDw_sjA/edit?usp=sharing).
 
 ## Discounts
 
