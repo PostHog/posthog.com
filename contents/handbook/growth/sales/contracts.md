@@ -20,19 +20,23 @@ Payments for annual plans are via Bank Transfer only (no checks).
 
 Anyone on a monthly plan simply agrees to our [Terms](/terms) and [Privacy Policy](/privacy) when they sign up.
 
-## Pricing calculator
+## QuoteHog pricing calculator
 
-While we have a transparent pricing available, you'll need to use [QuoteHog](https://quote.posthog.net) (internal only) for customers with very high volumes or bespoke needs.
+While we offer [transparent pricing available to all](/pricing), you are able to use [QuoteHog](https://quote.posthog.net) (internal only) for customers who need a "formal quote," or who have very high volumes, or otherwise have bespoke needs.
 
-Quotes can be shared externally or embedeed in Trumpet by clicking the Dot Menu from a Quote and then clicking "Share"
+You sign into QuoteHog via your PostHog Google account/SSO. Upon login, you will see a list of quotes that have been prepared, sorted by the date created. You can access a previously created quote, or create a new quote with the "New Quote" button at the top right. 
 
-To view Stripe reported usage and spend for an existing customer, or to connect a Quoteto a Salesforce Opportunity or Account, first connect QuoteHog to Salesforce from your [Profile page](https://quote.posthog.net/profile).
+The quoting interface is intuitive and, of course, uses the same pricing we display publicly. We should feel free to involve a customer in creating a quote if the opportunity presents itself and you think it would build trust. 
 
-Be sure to always click the "Save" button after making changes to a quote.
+Quotes can be shared externally or embeded in Trumpet (or any other external source) by clicking the Dot Menu from a Quote and then clicking "Share"
 
-If someone asks for a PDF version of a quote, you can view the external version and then print it to PDFfrom there.
+To view Stripe reported usage and spend for an existing customer, or to connect a Quote to a Salesforce Opportunity or Account, first connect QuoteHog to Salesforce from your [Profile page](https://quote.posthog.net/profile).
 
-The legacy pricing calculator is available [here](https://docs.google.com/spreadsheets/d/1ynNM9tbWsWki2Q0vhwCV0iYNtJ1NHz4eXtUvZDw_sjA/edit?usp=sharing).
+If someone asks for a PDF version of a quote, you can view the external version and then print it to PDF from there.
+
+The legacy pricing calculator is available [here](https://docs.google.com/spreadsheets/d/1ynNM9tbWsWki2Q0vhwCV0iYNtJ1NHz4eXtUvZDw_sjA/edit?usp=sharing) (internal only).
+
+> Be sure to always click the "Save" button after making changes to a quote. QuoteHog does not autosave.
 
 ## Discounts
 
