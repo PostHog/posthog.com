@@ -28,7 +28,7 @@ You sign into QuoteHog via your PostHog Google account/SSO. Upon login, you will
 
 The quoting interface is intuitive and, of course, uses the same pricing we display publicly. We should feel free to involve a customer in creating a quote if the opportunity presents itself and you think it would build trust. 
 
-Quotes can be shared externally or embeded in Trumpet (or any other external source) by clicking the Dot Menu from a Quote and then clicking "Share"
+Quotes can be shared externally or embedded in Trumpet (or any other external source) by clicking the Dot Menu from a Quote and then clicking "Share"
 
 To view Stripe reported usage and spend for an existing customer, or to connect a Quote to a Salesforce Opportunity or Account, first connect QuoteHog to Salesforce from your [Profile page](https://quote.posthog.net/profile).
 
