@@ -11,7 +11,7 @@ icon: >-
 features:
   eventCapture: true
   userIdentification: true
-  featureFlags: false
+  featureFlags: true
   groupAnalytics: true
   surveys: false
   llmObservability: false
@@ -38,7 +38,9 @@ import FeatureFlagsLibsIntro from "../_snippets/feature-flags-libs-intro.mdx"
 
 <FeatureFlagsLibsIntro />
 
-Feature flags are not supported yet in our Elixir SDK. However, you can integrate them into your project by using the [PostHog API](/docs/feature-flags/adding-feature-flag-code?tab=api).
+import ElixirFeatureFlagsCode from '../../integrate/feature-flags-code/_snippets/feature-flags-code-elixir.mdx'
+
+<ElixirFeatureFlagsCode />
 
 ## Thanks
 

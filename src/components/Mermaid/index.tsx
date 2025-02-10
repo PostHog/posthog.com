@@ -1,5 +1,36 @@
 import React, { useEffect, useRef, useState } from 'react'
 import mermaid from 'mermaid'
+import { TransformWrapper, TransformComponent, useControls } from 'react-zoom-pan-pinch'
+import { IconMinus, IconPlus, IconRefresh } from '@posthog/icons'
+
+const ControlButton = ({ children, onClick }: { children: React.ReactNode; onClick: () => void }) => {
+    return (
+        <button
+            onClick={onClick}
+            className="p-2 border border-light dark:border-dark rounded-md bg-accent dark:bg-accent-dark"
+        >
+            {children}
+        </button>
+    )
+}
+
+const Controls = () => {
+    const { zoomIn, zoomOut, resetTransform } = useControls()
+
+    return (
+        <div className="opacity-0 group-hover:opacity-100 transition-opacity space-x-1 absolute bottom-0 right-0 z-10">
+            <ControlButton onClick={() => zoomIn()}>
+                <IconPlus className="w-4" />
+            </ControlButton>
+            <ControlButton onClick={() => zoomOut()}>
+                <IconMinus className="w-4" />
+            </ControlButton>
+            <ControlButton onClick={() => resetTransform()}>
+                <IconRefresh className="w-4" />
+            </ControlButton>
+        </div>
+    )
+}
 
 export default function Mermaid({ children }: { children: string }): JSX.Element {
     const [loading, setLoading] = useState(true)
@@ -17,13 +48,18 @@ export default function Mermaid({ children }: { children: string }): JSX.Element
         }
     }, [])
     return (
-        <div className="relative">
+        <div className="relative group">
             {loading && (
                 <div className="bg-accent dark:bg-accent-dark flex items-center justify-center size-full rounded-md animate-pulse absolute inset-0" />
             )}
-            <div ref={mermaidRef} className={`${loading ? 'invisible' : ''} mermaid-container`}>
-                {children}
-            </div>
+            <TransformWrapper>
+                <Controls />
+                <TransformComponent contentStyle={{ width: '100%' }} wrapperStyle={{ width: '100%' }}>
+                    <div ref={mermaidRef} className={`${loading ? 'invisible' : ''} mermaid-container w-full`}>
+                        {children}
+                    </div>
+                </TransformComponent>
+            </TransformWrapper>
         </div>
     )
 }

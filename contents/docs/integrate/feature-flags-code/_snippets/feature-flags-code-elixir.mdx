@@ -1,0 +1,42 @@
+Elixir supports a subset of what our [feature flag API](/docs/api/decide) provides.
+
+#### Boolean feature flags
+
+```elixir
+is_my_flag_enabled = Posthog.feature_flag_enabled?("flag-key", "distinct_id_of_your_user")
+
+if is_my_flag_enabled
+    # Do something differently for this user
+    # Optional: fetch the payload
+    {:ok, feature_flag} = Posthog.feature_flag("flag-key", "distinct_id_of_your_user")
+end
+```
+
+#### Multivariate feature flags
+
+```elixir
+{:ok, feature_flag} = Posthog.feature_flag("flag-key", "distinct_id_of_your_user")
+#  %Posthog.FeatureFlag{ name: "flag-key", value: %{"variant-1" => "value-1", "variant-2" => "value-2"}, enabled: "variant-2" }
+
+if feature_flag.enabled == 'variant-2' # replace 'variant-2' with the key of your variant
+    # Do something differently for this user
+end
+```
+
+#### Fetching all feature flags
+
+```elixir
+Posthog.feature_flags("distinct_id_of_your_user")
+
+{:ok,
+ %{
+   "featureFlagPayloads" => %{
+     "feature-1" => 1,
+     "feature-2" => %{"variant-1" => "value-1", "variant-2" => "value-2"}
+   },
+   "featureFlags" => %{"feature-1" => true, "feature-2" => "variant-2"}
+ }}
+
+```
+
+More documentation can be found in the [repository](https://github.com/nkezhaya/posthog).

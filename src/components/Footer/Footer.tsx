@@ -67,6 +67,10 @@ const linklist: IProps[] = [
                 title: 'How we do "sales"',
                 url: '/sales',
             },
+            {
+                title: 'Founder stack',
+                url: '/founder-stack',
+            },
         ],
     },
     {
@@ -226,10 +230,6 @@ const linklist: IProps[] = [
             {
                 title: 'Team structure',
                 url: '/handbook/team-structure',
-            },
-            {
-                title: 'People & Ops',
-                url: '/handbook/people/compensation',
             },
             {
                 title: 'Engineering',

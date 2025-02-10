@@ -6,7 +6,7 @@ import { AdjustedLineItems } from './AdjustedLineItems'
 import { LoaderIcon } from './LoaderIcon'
 import { useCartStore } from './store'
 import type { AdjustedLineItem, Cart } from './types'
-import { getCartVariables, itemIsAvailableForSale } from './utils'
+import { getAvailableQuantity, getCartVariables } from './utils'
 
 type CheckoutProps = {
     className?: string
@@ -66,34 +66,23 @@ export function Checkout(props: CheckoutProps): React.ReactElement {
             for (const item of cartItems) {
                 // first check if it's available for sale. If not, then add to the list
                 // with flag for removal from cart
-                if (!(await itemIsAvailableForSale(item))) {
-                    itemsExceedingQuantityAvailable.push({
-                        item,
-                        remove: true,
-                        newCount: null,
-                    })
-                    continue
-                }
+                const quantityAvailable = await getAvailableQuantity(item)
 
                 // if it is available for sale, then check if the quantity available is less than
                 // the quantity in the cart. If so, then add to the list with the new quantity
-                const matchingItem = cart?.lines?.edges?.find((edge) => {
-                    return edge?.node?.merchandise?.id === item.shopifyId
-                })
-                if (!!matchingItem && matchingItem.node.merchandise.quantityAvailable < item.count) {
-                    const quantityAvailable = matchingItem.node.merchandise.quantityAvailable
+                if (quantityAvailable < item.count) {
                     if (quantityAvailable <= 0) {
                         // if the new quantity available is zero, remove
                         itemsExceedingQuantityAvailable.push({
                             item,
                             remove: true,
-                            newCount: matchingItem.node.merchandise.quantityAvailable,
+                            newCount: quantityAvailable,
                         })
                     } else {
                         itemsExceedingQuantityAvailable.push({
                             item,
                             remove: false,
-                            newCount: matchingItem.node.merchandise.quantityAvailable,
+                            newCount: quantityAvailable,
                         })
                     }
                 }

@@ -20615,10 +20615,10 @@ postcss@^8.4.31, postcss@^8.4.48:
     picocolors "^1.1.1"
     source-map-js "^1.2.1"
 
-posthog-js@1.215.4:
-  version "1.215.4"
-  resolved "https://registry.yarnpkg.com/posthog-js/-/posthog-js-1.215.4.tgz#cc4a6dd793372451017f7d4de5ff85701a770bec"
-  integrity sha512-FlPITI3dVPBRMQGk+jbJcL4Z1FXDyc7O2vNfsspNV2C6dKIJ4F1cTkxhQBEdG5jV1nJ6ZQjgZz1LxbbkSgx9Bg==
+posthog-js@1.215.7:
+  version "1.215.7"
+  resolved "https://registry.yarnpkg.com/posthog-js/-/posthog-js-1.215.7.tgz#4fd10df151ad93aa4f1f00792470beba3bd041a0"
+  integrity sha512-b6JRXlIHM/aWLPnYt+4N93XkhMkZ2/0Z9G4Pxeq7GOh4ILvbsU2yuvP/X9za23zP+0kprhkB9bIqoj5834xmZA==
   dependencies:
     core-js "^3.38.1"
     fflate "^0.4.8"
@@ -21664,6 +21664,11 @@ react-tsparticles@^2.11.0:
   integrity sha512-/nrEbyL8UROXKIMXe+f+LZN2ckvkwV2Qa+GGe/H26oEIc+wq/ybSG9REDwQiSt2OaDQGu0MwmA4BKmkL6wAWcA==
   dependencies:
     tsparticles-engine "^2.12.0"
+
+react-zoom-pan-pinch@^3.7.0:
+  version "3.7.0"
+  resolved "https://registry.yarnpkg.com/react-zoom-pan-pinch/-/react-zoom-pan-pinch-3.7.0.tgz#7db4d2ec49c316eb20f71c56e9012eeb3ef4b504"
+  integrity sha512-UmReVZ0TxlKzxSbYiAj+LeGRW8s8LraAFTXRAxzMYnNRgGPsxCudwZKVkjvGmjtx7SW/hZamt69NUmGf4xrkXA==
 
 react@^16.13.1:
   version "16.14.0"

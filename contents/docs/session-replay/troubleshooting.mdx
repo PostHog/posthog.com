@@ -83,6 +83,12 @@ Session replay relies on the `$session_id` property added to events by the web S
 
 To workaround this, you can use the `posthog.onSessionId` method in the web SDK to register a callback that will be called each time the session ID changes. You can send this to your backend and add the `$session_id` property to your backend events. 
 
+## Person not found
+
+If you are able to capture a replay, but the entry says "person not found," this is replay has been captured from an anonymous user and a [person profile](/docs/data/persons) has **not** been created for them. 
+
+To fix this, either call a method that creates a person profile (like `identify()`) or set the `person_profiles` value to `always`. See our doc on [anonymous vs identified events](/docs/data/anonymous-vs-identified-events) for more.
+
 ## Browser freezes or crashes when recordings are enabled
 
 Some Cookie banners or "CMP"s modify the webpage in reaction to any changes to cookies, which can cause an infinite loop. If you are using a tool like this and experience the webpage becoming unresponsive or slow then try [configuring posthog](/docs/integrate/client/js#persistence) to use `persistence: "localStorage+cookie"`. This will use localStorage for the majority of storage needs, bypassing the infinite loop issue sometimes caused by cookie management tools.

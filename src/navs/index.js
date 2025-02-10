@@ -1271,7 +1271,7 @@ export const docsMenu = {
                     icon: 'IconBox',
                     children: [
                         {
-                            name: 'Library comparison',
+                            name: 'SDK comparison',
                             url: '/docs/libraries',
                         },
                         {
@@ -1300,6 +1300,9 @@ export const docsMenu = {
                         {
                             name: 'Elixir',
                             url: '/docs/libraries/elixir',
+                            badge: {
+                                title: '3rd party',
+                            },
                         },
                         {
                             name: 'Flutter',
@@ -1493,6 +1496,10 @@ export const docsMenu = {
                         {
                             name: 'Cloudflare',
                             url: '/docs/advanced/proxy/cloudflare',
+                        },
+                        {
+                            name: 'Kubernetes',
+                            url: '/docs/advanced/proxy/kubernetes-ingress-controller',
                         },
                         {
                             name: 'Netlify',
@@ -3385,6 +3392,12 @@ export const pricingMenu = {
             icon: 'IconPercentage',
             color: 'green',
             url: '/sales',
+        },
+        {
+            name: 'Founder stack',
+            icon: 'IconStack',
+            color: 'salmon',
+            url: '/founder-stack',
         },
     ],
 }

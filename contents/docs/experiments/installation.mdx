@@ -29,9 +29,10 @@ import GoInstall from '../integrate/_snippets/install-go.mdx'
 import ReactNativeInstall from '../integrate/_snippets/install-react-native.mdx'
 import AndroidInstall from '../integrate/_snippets/install-android.mdx'
 import IOSInstall from '../integrate/_snippets/install-ios.mdx'
+import ElixirInstall from '../integrate/_snippets/install-elixir.mdx'
 
 <!-- prettier-ignore -->
-<Tab.Group tabs={['Web', 'React', 'Node.js', 'Python', 'PHP', 'Ruby', 'Go', 'React Native', 'Android', 'iOS']}>
+<Tab.Group tabs={['Web', 'React', 'Node.js', 'Python', 'PHP', 'Ruby', 'Go', 'React Native', 'Android', 'iOS', 'Java', 'Rust', 'Elixir', 'api']}>
     <Tab.List>
         <Tab>Web</Tab>
         <Tab>React</Tab>
@@ -90,9 +91,7 @@ import IOSInstall from '../integrate/_snippets/install-ios.mdx'
             </blockquote>
         </Tab.Panel>
         <Tab.Panel>
-            <blockquote class='warning-note'>
-                Since feature flags are not supported yet in our <a href="/docs/libraries/elixir">Elixir SDK</a>, see our docs on <a href="/docs/experiments/running-experiments-without-feature-flags">how to run experiments without feature flags</a>. 
-            </blockquote>
+            <ElixirInstall />
         </Tab.Panel>
         <Tab.Panel>
             <blockquote class='warning-note'>
