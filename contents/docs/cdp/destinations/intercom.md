@@ -1,5 +1,5 @@
 ---
-title: Send PostHog contacts and events to Intercom
+title: Send PostHog events to Intercom
 templateId: template-intercom
 ---
 
@@ -30,6 +30,8 @@ Access the **Developer hub** to create a new app. Name it something like "PostHo
 <HideOnCDPIndex>
 
 ## Configuration
+
+The Intercom destination requires that contacts **already exist** in Intercom before you can send events attached to them.
 
 <TemplateParameters />
 
