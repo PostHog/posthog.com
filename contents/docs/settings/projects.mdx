@@ -1,0 +1,46 @@
+---
+title: Projects
+sidebar: Docs
+showTitle: true
+availability:
+    free: partial
+    selfServe: partial
+    enterprise: full
+
+    features:
+        multipleProjects:
+            free: false
+            selfServe: true
+            teams: true
+            enterprise: true
+        privateProjects:
+            free: false
+            selfServe: false
+            enterprise: true
+---
+
+A project is a silo of data within PostHog. All data belongs to a single project and all queries are project-specific.
+
+Every project has its own distinct write-only token, which you can use to initialize your [integration of choice](/docs/integrate), as well as to connect to our [API](/docs/api). You can always regenerate this token, but keep in mind that the old one will be immediately revoked.
+
+Every new organization (including the one created for you on account creation) comes with a fresh project named "Default Project". You can rename or delete it as you see fit.
+
+To switch between projects, navigate to project settings, or create new projects, use the project switcher in the middle of the top bar. You can also quickly go to the current project's settings from the sidebar.
+
+### How to organize projects
+
+For most companies, we recommend creating **three projects**:
+1. Local Development - when you're running the app on your own device
+2. Staging - when you're running your app on a staging server
+3. Production - for all your production data (e.g. your live website/app)
+
+> We are working on a new feature called 'Environments' that will make this easier. It's currently in alpha and only available to PostHog Cloud users. If you'd like to try it out, you can opt in to the early access program. See "Feature previews" in the PostHog settings for more.
+
+This way you can test out analytics in development and staging environments, while keeping that test data separate from production.
+
+We also **strongly recommend** keeping your apps and marketing website on the same production project. This way you can track the user journey holistically (e.g. how many blog readers convert to paid product users) and see all the relevant events for a person in one place.
+
+It's best to use separate projects for:
+- Apps that are entirely separate products with unlinked authentication systems
+- Admin apps that aren't customer-facing products
+- Internal websites and services

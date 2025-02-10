@@ -169,8 +169,8 @@
             "source": "/handbook/people/team-structure/growth-engineering",
             "destination": "/handbook/people/team-structure/growth"
         },
-        { "source": "/docs/user-guides/projects", "destination": "/docs/user-guides/organizations-and-projects" },
-        { "source": "/docs/user-guides/organizations", "destination": "/docs/user-guides/organizations-and-projects" },
+        { "source": "/docs/user-guides/projects", "destination": "/docs/settings/organizations" },
+        { "source": "/docs/user-guides/organizations", "destination": "/docs/settings/projects" },
         {
             "source": "/handbook/engineering/enterprise-prioritization",
             "destination": "/handbook/product/enterprise-features-prioritization"
@@ -689,7 +689,7 @@
         { "source": "/manual/data-management", "destination": "/docs/data" },
         { "source": "/manual/events", "destination": "/docs/data/events" },
         { "source": "/manual/notifications-and-alerts", "destination": "/docs/product-analytics/subscriptions" },
-        { "source": "/manual/organizations-and-projects", "destination": "/docs/data/organizations-and-projects" },
+        { "source": "/manual/organizations-and-projects", "destination": "/docs/settings/organizations" },
         { "source": "/manual/persons", "destination": "/docs/data/persons" },
         { "source": "/manual/role-based-access", "destination": "/docs/data/role-based-access" },
         { "source": "/manual/sessions", "destination": "/docs/data/sessions" },
@@ -1222,7 +1222,7 @@
         { "source": "/docs/data/application-settings", "destination": "/docs" },
         {
             "source": "/docs/data/organizations-and-projects",
-            "destination": "/docs/settings/organizations-and-projects"
+            "destination": "/docs/settings/organizations"
         },
         { "source": "/docs/data/role-based-access", "destination": "/docs/settings/role-based-access" },
         { "source": "/docs/data/sso", "destination": "/docs/settings/sso" },
@@ -1477,6 +1477,14 @@
         {
             "source": "/features/self-hosted",
             "destination": "/docs/self-host"
+        },
+        {
+            "source": "/docs/settings/organizations-and-projects",
+            "destination": "/docs/settings/organizations"
+        },
+        {
+            "source": "/docs/settings/role-based-access",
+            "destination": "/docs/settings/access-control"
         }
     ]
 }
