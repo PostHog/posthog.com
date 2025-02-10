@@ -81,31 +81,33 @@ As an example, creating a batch export of events with daily frequency today will
 
 On each batch export view, you are presented with a list of the latest executed runs:
 
-![batch export runs](https://res.cloudinary.com/dmukukwp6/image/upload/2024_08_09_at_14_52_19_98dde216b8.png)
+![batch export runs](https://res.cloudinary.com/dmukukwp6/image/upload/runs_tracking_progress_3268c67863.png)
 
 Each run has:
 1. A state indicator which can be either "Starting", "Running", "Failed", or "Completed."
 2. The exported data start and end intervals.
 3. When the run actually started.
-4. The option of retrying a specific run.
+4. The option of retrying or cancelling a specific run.
 
-## Exporting historical data
+## Backfills (exporting historical data)
 
-You can use batch exports for past data stored in PostHog, known as historical data. For this, you don't need to create a new batch export. The batch export already knows the destination where we wish to send historical data. It only requires the boundaries for the data you want to export, in other words, a start and an end date.
+When you create a batch export, it will start exporting data from the current time interval. If you want to export historical data, you can run a backfill.
+A backfill is a batch export that exports data from a specific start and end date.
 
-A "Backfill batch export" button can be found in the UI:
+To view your existing backfills or to start a new one, you can navigate to the "Backfills" tab of the destination:
 
-![batch exports ui](https://res.cloudinary.com/dmukukwp6/image/upload/2024_08_09_at_14_56_27_8f4f6c7430.png)
+![batch exports backfills ui](https://res.cloudinary.com/dmukukwp6/image/upload/backfills_8b11ff45ec.png)
 
-Which will let you input the start and end date of the historical export:
+From here, you can create a new backfill by clicking the "Start backfill" button, which will let you input the start and end date of the historical export:
 
 ![create historic export](https://res.cloudinary.com/dmukukwp6/image/upload/2024_08_09_at_14_54_54_90338968ac.png)
 
-Immediately afterwards, the historical export runs that fall within the bounds selected are scheduled.
+This will immediately schedule a series of batch export runs that fall within the bounds selected, based on the batch export's frequency.
 
-> **Note:** A historical export does not check if the data already exists in the destination. Doing so would negatively impact the performance of the batch export, and potentially require more permissions on the user's database or storage. Moreover, we can never be sure if the data was moved somewhere else. Instead, we assume that users who request a historic export want all their historic data, which means that multiple historical exports over the same time period will produce duplicates.
+The start date of a backfill may be adjusted depending on when the earliest available data is. For example, if you choose a start date of 01-01-2024 but the earliest event captured in PostHog is 01-02-2024, the start date will be adjusted to 01-02-2024.
 
-> **Note:** A batch export may optionally be created with an end date: Batch exports will never export data past this end date, even if requesting a historical export which exceeds this upper bound.
+> **Note:** A backfill does not check if the data already exists in the destination. Doing so would negatively impact the performance of the batch export, and potentially require more permissions on the user's database or storage. Moreover, we can never be sure if the data was moved somewhere else. Instead, we assume that users who request a historic export want all their historic data, which means that multiple historical exports over the same time period will produce duplicates.
+
 
 ## FAQ
 
