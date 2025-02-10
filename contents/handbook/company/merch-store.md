@@ -4,7 +4,7 @@ sidebar: Handbook
 showTitle: true
 ---
 
-We have a [merch store](/merch) where our community can purchase high quality PostHog-branded merch.
+We have a [merch store](/merch) where our community can purchase high quality PostHog-branded merch. The People & Ops team is responsible for managing merch inventory, fulfilment etc. even though multiple people contribute, and Kendal is the point person. 
 
 Instructions for how to get a merch code to our customers is [below](https://posthog.com/handbook/company/merch-store#customers), however if you need any help just send a message to the <PrivateLink url="https://posthog.slack.com/archives/C04DWKH7DM3">#merch</PrivateLink> channel and somebody will be happy to help.
 
