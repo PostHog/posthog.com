@@ -1,5 +1,5 @@
 ---
-title: Send PostHog event data to Intercom
+title: Send PostHog contacts and events to Intercom
 templateId: template-intercom
 ---
 
@@ -11,7 +11,13 @@ import PostHogMaintained from "../_snippets/posthog-maintained.mdx"
 
 You'll also need access to the relevant Intercom account.
 
-## Installation
+## Configuring Intercom
+
+In your Intercom account, go to **Settings** and then **Integrations.**
+
+Access the **Developer hub** to create a new app. Name it something like "PostHog" for your future reference. Once created, Intercom will give you an access token. Copy it for the next step.
+
+## Configuring PostHog's Intercom destination
 
 1. In PostHog, click the "[Data pipeline](https://us.posthog.com/pipeline/overview)" tab in the left sidebar.
 2. Click the 'Destinations' tab.
