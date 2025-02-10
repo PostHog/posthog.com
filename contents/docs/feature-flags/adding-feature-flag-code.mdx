@@ -25,9 +25,10 @@ import AndroidFeatureFlagsCode from '../integrate/feature-flags-code/_snippets/f
 import IOSFeatureFlagsCode from '../integrate/feature-flags-code/_snippets/feature-flags-code-ios.mdx'
 import FlutterFeatureFlagsCode from '../integrate/feature-flags-code/_snippets/feature-flags-code-flutter.mdx'
 import ElixirFeatureFlagsCode from '../integrate/feature-flags-code/_snippets/feature-flags-code-elixir.mdx'
+import DotNetFeatureFlagsCode from '../integrate/feature-flags-code/_snippets/feature-flags-code-dotnet.mdx'
 
 <!-- prettier-ignore -->
-<Tab.Group tabs={['Web', 'React', 'Node.js', 'Python', 'PHP', 'Ruby', 'Go', 'React Native', 'Android', 'iOS', 'Flutter', 'Java', 'Rust', 'Elixir', 'api']}>
+<Tab.Group tabs={['Web', 'React', 'Node.js', 'Python', 'PHP', 'Ruby', 'Go', 'React Native', 'Android', 'iOS', 'Flutter', 'Java', 'Rust', 'Elixir', '.NET', 'api']}>
     <Tab.List>
         <Tab>Web</Tab>
         <Tab>React</Tab>
@@ -43,6 +44,7 @@ import ElixirFeatureFlagsCode from '../integrate/feature-flags-code/_snippets/fe
         <Tab>Java</Tab>
         <Tab>Rust</Tab>
         <Tab>Elixir</Tab>
+        <Tab>.NET</Tab>
         <Tab>API</Tab>
     </Tab.List>
     <Tab.Panels>
@@ -91,6 +93,9 @@ import ElixirFeatureFlagsCode from '../integrate/feature-flags-code/_snippets/fe
         </Tab.Panel>
         <Tab.Panel>
             <ElixirFeatureFlagsCode />
+        </Tab.Panel>
+        <Tab.Panel>
+            <DotNetFeatureFlagsCode />
         </Tab.Panel>
         <Tab.Panel>
             <APIFeatureFlagsCode />

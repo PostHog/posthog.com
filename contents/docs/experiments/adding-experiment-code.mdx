@@ -149,6 +149,14 @@ if feature_flag.enabled == "variant-name" do
 end
 ```
 
+```dotnet
+var featureFlag = await posthog.GetFeatureFlagAsync("experiment-feature-flag-key", "user_distinct_id");
+
+if (featureFlag is { VariantKey: "variant-name" })
+{
+    // Do something
+}
+```
 </MultiLanguage>
 
 > Since feature flags are not supported yet in our Java and Rust SDKs, to run an experiment using these SDKs see our docs on [how to run experiments without feature flags](/docs/experiments/running-experiments-without-feature-flags). This also applies to running experiments using our API.
@@ -230,6 +238,13 @@ posthog.capture(
 );
 ```
 
+```dotnet
+posthog.Capture(
+    "distinct_id",
+    "event_name_of_your_goal_metric",
+    properties: new() { ["$feature/experiment-feature-flag-key"] = "variant-name" }
+);
+```
 </MultiLanguage>
 
 import Tab from "components/Tab"
@@ -238,6 +253,7 @@ import NodeMethod2 from "../integrate/feature-flags-code/_snippets/feature-flags
 import GoMethod2 from "../integrate/feature-flags-code/_snippets/feature-flags-code-go-set-send-feature-flags-to-true.mdx"
 import PythonMethod2 from "../integrate/feature-flags-code/_snippets/feature-flags-code-python-set-send-feature-flags-to-true.mdx"
 import PHPMethod2 from "../integrate/feature-flags-code/_snippets/feature-flags-code-php-set-send-feature-flags-to-true.mdx"
+import DotNetMethod2 from "../integrate/feature-flags-code/_snippets/feature-flags-code-dotnet-set-send-feature-flags-to-true.mdx"
 
 ### Method 2: Set `send_feature_flags` to `true`
 
@@ -264,6 +280,9 @@ import PHPMethod2 from "../integrate/feature-flags-code/_snippets/feature-flags-
         </Tab.Panel>
         <Tab.Panel>
             <GoMethod2 />
+        </Tab.Panel>
+        <Tab.Panel>
+            <DotNetMethod2 />
         </Tab.Panel>
     </Tab.Panels>
 </Tab.Group>

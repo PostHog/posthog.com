@@ -31,9 +31,10 @@ import JavaInstall from '../integrate/_snippets/install-java.mdx'
 import RustInstall from '../integrate/_snippets/install-rust.mdx'
 import FlutterInstall from '../integrate/_snippets/install-flutter.mdx'
 import ElixirInstall from '../integrate/_snippets/install-elixir.mdx'
+import DotNetInstall from '../integrate/_snippets/install-dotnet.mdx'
 
 <!-- prettier-ignore -->
-<Tab.Group tabs={['Web', 'React', 'Node.js', 'Python', 'PHP', 'Ruby', 'Go', 'React Native', 'Android', 'iOS', 'Java', 'Rust', 'Flutter', 'Elixir', 'api']}>
+<Tab.Group tabs={['Web', 'React', 'Node.js', 'Python', 'PHP', 'Ruby', 'Go', 'React Native', 'Android', 'iOS', 'Java', 'Rust', 'Flutter', 'Elixir', '.NET', 'api']}>
     <Tab.List>
         <Tab>Web</Tab>
         <Tab>React</Tab>
@@ -49,6 +50,7 @@ import ElixirInstall from '../integrate/_snippets/install-elixir.mdx'
         <Tab>Rust</Tab>
         <Tab>Flutter</Tab>
         <Tab>Elixir</Tab>
+        <Tab>.NET</Tab>
         <Tab>API</Tab>
     </Tab.List>
     <Tab.Panels>
@@ -97,6 +99,9 @@ import ElixirInstall from '../integrate/_snippets/install-elixir.mdx'
         </Tab.Panel>
         <Tab.Panel>
             <ElixirInstall />
+        </Tab.Panel>
+        <Tab.Panel>
+            <DotNetInstall />
         </Tab.Panel>
         <Tab.Panel>
             <APIInstall />

@@ -1360,6 +1360,10 @@ export const docsMenu = {
                             name: 'Rust',
                             url: '/docs/libraries/rust',
                         },
+                        {
+                            name: '.NET',
+                            url: '/docs/libraries/dotnet',
+                        },
                     ],
                 },
                 {
