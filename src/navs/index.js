@@ -1300,9 +1300,6 @@ export const docsMenu = {
                         {
                             name: 'Elixir',
                             url: '/docs/libraries/elixir',
-                            badge: {
-                                title: '3rd party',
-                            },
                         },
                         {
                             name: 'Flutter',
