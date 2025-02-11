@@ -181,7 +181,7 @@ function FounderStack() {
                             interested in our <Link to="/merch?product=copy-pasta-t-shirt">Copy/Pasta shirt</Link> or{' '}
                             <Link to="/merch?product=copy-pasta-hoodie">hoodie</Link>, or perhaps you want to go a bit
                             nerdier with the{' '}
-                            <Link to="/merch?product=data-warehouse-t-shirt">My other name is a data warehouse</Link>{' '}
+                            <Link to="/merch?product=data-warehouse-t-shirt">My other home is a data warehouse</Link>{' '}
                             shirt.
                         </p>
                     </div>
