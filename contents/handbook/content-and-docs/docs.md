@@ -66,6 +66,7 @@ Each week the Content & Docs crew picks someone to review the state of feedback 
 - #content-docs-ideas
 - #ask-max for questions missing content
 - Zendesk tickets [where **root cause** is `documentation unclear`](https://posthoghelp.zendesk.com/agent/filters/33465387985947)
+- [Inkeep chat sessions](https://portal.inkeep.com/posthog/projects/clz7fyu8i001bomqpr7t8lds8/chat/chat-sessions?filters={%22isOnTopic%22:%22yes%22,%22isClear%22:%22yes%22,%22firstMessageTime%22:%2230d%22,%22isDocumented%22:%22no%22}) where there is a documentation gap
 
 Where appropriate and actionable, the gardener should create new issues to capture what surfaces from such feedback. This should occupy no more than 2-4 hours of effort each week.
 
