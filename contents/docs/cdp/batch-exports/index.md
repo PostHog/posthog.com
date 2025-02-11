@@ -96,7 +96,7 @@ A backfill is a batch export that exports data from a specific start and end dat
 
 To view your existing backfills or to start a new one, you can navigate to the "Backfills" tab of the destination:
 
-![batch exports backfills ui](https://res.cloudinary.com/dmukukwp6/image/upload/backfills_8b11ff45ec.png)
+![batch exports backfills ui](https://res.cloudinary.com/dmukukwp6/image/upload/backfill_ui_c8cc586478.png)
 
 From here, you can create a new backfill by clicking the "Start backfill" button, which will let you input the start and end date of the historical export:
 
@@ -105,8 +105,6 @@ From here, you can create a new backfill by clicking the "Start backfill" button
 This will immediately schedule a series of batch export runs that fall within the bounds selected, based on the batch export's frequency.
 
 The start date of a backfill may be adjusted depending on when the earliest available data is. For example, if you choose a start date of 01-01-2024 but the earliest event captured in PostHog is 01-02-2024, the start date will be adjusted to 01-02-2024.
-
-> **Note:** A backfill does not check if the data already exists in the destination. Doing so would negatively impact the performance of the batch export, and potentially require more permissions on the user's database or storage. Moreover, we can never be sure if the data was moved somewhere else. Instead, we assume that users who request a historic export want all their historic data, which means that multiple historical exports over the same time period will produce duplicates.
 
 
 ## FAQ
@@ -165,3 +163,11 @@ sequenceDiagram
 If no data is found for a particular batch period, then the batch export run will immediately succeed. No data to export is not considered a failure, as it is expected that there may be times of low or no volume of events coming into PostHog, and it is particularly relevant when filtering the batch export to only export very low volume events.
 
 > **Note:** This could mean that underlying configuration issues are not surfaced early, as we do not attempt to connect to a destination if there is nothing to export. It is recommended to confirm there is data to export to ensure a batch export has been configured correctly. This can be done by checking batch export debug logs as they will display how many rows are exported. So, if no debug logs appear, it means there is no data to export, so we haven't had a chance to validate the batch export configuration.
+
+### Why do I see duplicate data when running a backfill?
+
+A backfill does not check if the data already exists in the destination. Doing so would negatively impact the performance of the batch export, and potentially require more permissions on the user's database or storage. Moreover, we can never be sure if the data was moved somewhere else. Instead, we assume that users who request a historic export want all their historic data, which means that multiple historical exports over the same time period will produce duplicates.
+
+One other case in which you may see duplicate events is when the batch export runs transition from backfills to regular runs (for example, if you create a backfill to export all your historical data, and then you enable the batch export to start exporting data from the current time). The reason for this is as follows: If the batch export is for the events model and the interval start is older than 6 days ago then the event data will be queried based on the `timestamp` column (this is for performance reasons). In all other cases, we use an internal `inserted_at` column, which is based on when the event was ingested into PostHog's ClickHouse database (this prevents issues related to replication lag).
+
+For these reasons, we recommend that you set up processes to de-duplicate the data in your destination if duplicates are undesirable.
