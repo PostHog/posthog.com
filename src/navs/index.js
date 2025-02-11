@@ -2418,7 +2418,7 @@ export const docsMenu = {
             url: '/docs/session-replay',
             color: 'yellow',
             icon: 'IconRewindPlay',
-            description: 'Watch how users interact with your app in a DVR-like playback experience.',
+            description: 'Watch how users interact with your app in a DVR-like playback experience',
             children: [
                 {
                     name: 'Session replay',
@@ -2526,7 +2526,7 @@ export const docsMenu = {
             icon: 'IconToggle',
             color: 'seagreen',
             url: '/docs/feature-flags',
-            description: 'Safely roll out features to specific users or groups.',
+            description: 'Safely roll out features to specific users or groups',
             children: [
                 {
                     name: 'Feature flags',
@@ -2635,7 +2635,7 @@ export const docsMenu = {
             icon: 'IconFlask',
             color: 'purple',
             url: '/docs/experiments',
-            description: 'Test changes with statistical significance with multivariate tests and robust targeting.',
+            description: 'Test changes with statistical significance with multivariate tests and robust targeting',
             children: [
                 {
                     name: 'Experiments',
@@ -2853,7 +2853,7 @@ export const docsMenu = {
             url: '/docs/cdp',
             color: 'sky-blue',
             icon: 'IconPlug',
-            description: 'Collect, enrich, and send data to your destinations.',
+            description: 'Collect, enrich, and send data to your destinations',
             children: [
                 {
                     name: 'Data pipelines integrations',
@@ -3187,7 +3187,7 @@ export const docsMenu = {
             url: '/docs/data-warehouse',
             color: 'lilac',
             icon: 'IconDatabase',
-            description: 'Unify and query data from any source and analyze it alongside your product data.',
+            description: 'Unify and query data from any source and analyze it alongside your product data',
             children: [
                 {
                     name: 'Data warehouse',
@@ -3264,6 +3264,7 @@ export const docsMenu = {
                     url: '/docs/ai-engineering/observability',
                     icon: 'IconBook',
                     color: 'blue',
+                    featured: true,
                 },
                 {
                     name: 'Dashboard',
@@ -3288,6 +3289,7 @@ export const docsMenu = {
                     name: 'Observability integrations',
                     url: '/docs/ai-engineering/llm-insights',
                     icon: 'IconAIText',
+                    featured: true,
                     color: 'purple',
                     children: [
                         {
@@ -3315,6 +3317,7 @@ export const docsMenu = {
             url: '/docs/error-tracking',
             icon: 'IconWarning',
             color: 'salmon',
+            description: 'Track and monitor errors and exceptions in your code.',
             children: [
                 {
                     name: 'Error tracking',
@@ -3334,12 +3337,14 @@ export const docsMenu = {
                     url: '/docs/error-tracking/installation',
                     icon: 'IconBook',
                     color: 'blue',
+                    featured: true,
                 },
                 {
                     name: 'Monitor errors',
                     url: '/docs/error-tracking/monitoring',
                     icon: 'IconGraph',
                     color: 'orange',
+                    featured: true,
                 },
                 {
                     name: 'Stack traces',
@@ -3352,6 +3357,7 @@ export const docsMenu = {
                     url: '/docs/error-tracking/common-questions',
                     icon: 'IconQuestion',
                     color: 'purple',
+                    featured: true,
                 },
             ],
         },
