@@ -68,6 +68,15 @@ In these cases, the process is:
   - Issue them a Brex card to their work email with a sufficiently high temporary balance to cover travel costs
   - Have the new team member book travel as usual
 
+While there is no fixed budget for onboardings they should be relatively less expensive than a small team offsite. Some considerations:
+
+  - Avoid intercontinental or choose a location that limits it to the minimum number of people
+  - You should not need to plan a social activity
+  - Limit attendees to team members
+  - See if there are any other onboardings at the same time
+
+Aim to keep things sensible and cheap. As always, use your best judgement when [spending money](/handbook/people/spending-money)
+
 > You should by default avoid combining in-person onboarding with [small team offsites](/handbook/company/offsites#small-team-offsites) as they serve different purposes. The focus of onboarding is generally on making the new team member successful, but offsites feature things like hackathons and 360 feedback which aren't usually helpful for this and detract from useful onboarding time. However, it may occasionally make sense to combine the two - just use your judgement. 
 
 ### Engineering
