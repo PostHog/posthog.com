@@ -160,3 +160,11 @@ To add Pylon to your customer channel:
 Once enabled, you can add the :ticket: emoji to a Slack thread to create a new Ticket in Zendesk.  Customers can also do this.  Make sure that a Group and Severity are selected or the ticket won't be routed properly.
 
 > It's your job to ensure your customer issues are resolved, make sure you follow up with Support and Engineering if you feel like the issue isn't getting the right level of attention.
+
+## Passing customers to us
+
+Sometimes, customers get in touch with other members of the team directly. This often happens with the [Words & Pictures team](/teams/words-pictures), as new teams will respond to onboarding emails or notifications about credits from their [startup plan](/startups), for example. 
+
+If you need to pass a customer to the Sales & CS team, the best way to do this is to simply forward their email to `sales@posthog.com` and let them know that we'll be in touch.
+
+If you can't forward an email (e.g. if they're in your DMs) then you can either ask the customer to reach out to us, or flag it with us by posting in the `#team-sales-and-cs` Slack channel. 
