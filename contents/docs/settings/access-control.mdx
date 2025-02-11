@@ -7,8 +7,8 @@ availability:
     selfServe: none
     enterprise: full
 ---
-export const organizationMemberSettingsLight = "https://res.cloudinary.com/dmukukwp6/image/upload/access_control_organization_light_5774d4da82.png"
-export const organizationMemberSettingsDark = "https://res.cloudinary.com/dmukukwp6/image/upload/access_control_organization_dark_a2f3786867.png"
+export const rbacSettingsLight = "https://res.cloudinary.com/dmukukwp6/image/upload/access_control_organization_light_5774d4da82.png"
+export const rbacSettingsDark = "https://res.cloudinary.com/dmukukwp6/image/upload/access_control_organization_dark_a2f3786867.png"
 export const projectAccessControlLight = "https://res.cloudinary.com/dmukukwp6/image/upload/access_control_project_light_b3afca7e77.png"
 export const projectAccessControlDark = "https://res.cloudinary.com/dmukukwp6/image/upload/access_control_project_dark_d05334884e.png"
 
@@ -37,13 +37,6 @@ There are three access levels in PostHog: Member, Admin, and Owner. An organizat
 | Leaving an organization                                                               | <span className="text-green text-lg">✔</span>                | <span className="text-green text-lg">✔</span>          | <span className="text-red text-lg">✖</span>      |
 | Transferring organization ownership                                                   | <span className="text-red text-lg">✖</span>                  | <span className="text-red text-lg">✖</span>            | <span className="text-green text-lg">✔</span>    |
 | Deleting an organization                                                              | <span className="text-red text-lg">✖</span>                  | <span className="text-red text-lg">✖</span>            | <span className="text-green text-lg">✔</span>    |
-
-<ProductScreenshot
-    imageLight = {organizationMemberSettingsLight} 
-    imageDark = {organizationMemberSettingsDark}
-    alt="Organization member settings" 
-    classes="rounded"
-/>
 
 Access levels can be viewed and changed in the [Members section](https://app.posthog.com/settings/organization-members) of organization settings.
 
@@ -97,6 +90,13 @@ Resource creators and project admins can always view and edit resources as well 
 > RBAC is only available on Enterprise plans
 
 Instead of managing permissions individually, you can create roles to group users together. Roles can be assigned permissions at both the project and resource level.
+
+<ProductScreenshot
+    imageLight = {rbacSettingsLight} 
+    imageDark = {rbacSettingsDark}
+    alt="RBAC settings" 
+    classes="rounded"
+/>
 
 ## Feature availability
 
