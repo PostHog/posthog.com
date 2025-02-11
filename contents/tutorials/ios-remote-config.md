@@ -60,10 +60,10 @@ struct PostHogRemoteConfigApp: App {
 With this, you can build and run your app. Once launched, you should see events autocaptured into PostHog.
 
 <ProductScreenshot
-    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_02_11_at_10_46_17_2x_13073f4f5e.png"
-    imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_02_11_at_10_45_53_2x_82ad60a5b7.png"
-    alt="Events autocaptured into PostHog"
-    classes="rounded"
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_02_11_at_10_46_17_2x_13073f4f5e.png"
+  imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_02_11_at_10_45_53_2x_82ad60a5b7.png"
+  alt="Events autocaptured into PostHog"
+  classes="rounded"
 />
 
 ## 3. Creating our remote config
@@ -78,10 +78,10 @@ Now, let's set up the remote config flag in PostHog to control our welcome messa
 6. Click **Save**
 
 <ProductScreenshot
-    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_02_11_at_10_36_23_2x_c7ec443c95.png"
-    imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_02_11_at_10_36_39_2x_63251770aa.png"
-    alt="Remote config flag created in PostHog"
-    classes="rounded"
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_02_11_at_10_36_23_2x_c7ec443c95.png"
+  imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_02_11_at_10_36_39_2x_63251770aa.png"
+  alt="Remote config flag created in PostHog"
+  classes="rounded"
 />
 
 ## 4. Setting up the app UI
