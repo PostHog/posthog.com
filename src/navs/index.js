@@ -1895,16 +1895,20 @@ export const docsMenu = {
                 },
                 {
                     name: 'Settings',
-                    url: '/docs/settings/organizations-and-projects',
+                    url: '/docs/settings/organizations',
                     icon: 'IconGear',
                     children: [
                         {
-                            name: 'Organizations & projects',
-                            url: '/docs/settings/organizations-and-projects',
+                            name: 'Organizations',
+                            url: '/docs/settings/organizations',
                         },
                         {
-                            name: 'Role-based access',
-                            url: '/docs/settings/role-based-access',
+                            name: 'Projects',
+                            url: '/docs/settings/projects',
+                        },
+                        {
+                            name: 'Access control',
+                            url: '/docs/settings/access-control',
                         },
                         {
                             name: 'SSO & SAML',
