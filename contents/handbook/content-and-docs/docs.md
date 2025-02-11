@@ -38,28 +38,36 @@ This doesn't preclude anyone from submitting new or improved docs for any produc
 
 | &nbsp                           | **Individual owner** |
 |---------------------------------|----------------------|
-| **Overview**                    | Website & Vibes      |
-| **Start here**                  | Lior                 |
 | **SDKs and frameworks**         | Ian                  |
 | **Reverse proxy**               | Ian                  |
 | **Migrate**                     | Ian                  |
 | **Data**                        | Danilo               |
 | **HogQL**                       | Ian                  |
 | **API**                         | Ian                  |
-| **Alerts**                      | Bijan                |
 
 ### Products
 
 | &nbsp                           | **Individual owner** |
 |---------------------------------|----------------------|
-| **Product analytics**           | Lior                 |
-| **Web analytics**               | Bijan                |
-| **Session replay**              | Bijan                |
+| **Product analytics**           | Ian                  |
+| **Web analytics**               | Andy                 |
+| **Session replay**              | Ian                  |
 | **Feature flags**               | Ian                  |
 | **Experiments**                 | Lior                 |
-| **Surveys**                     | Bijan                |
+| **Surveys**                     | Andy                 |
 | **Data pipelines**              | Danilo               |
-| **Data warehouse**              | Danilo                  |
+| **Data warehouse**              | Danilo               |
+
+### Docs gardener
+
+Each week the Content & Docs crew picks someone to review the state of feedback across these channels:
+
+- #docs-feedback
+- #content-docs-ideas
+- #ask-max for questions missing content
+- Zendesk tickets [where **root cause** is `documentation unclear`](https://posthoghelp.zendesk.com/agent/filters/33465387985947)
+
+Where appropriate and actionable, the gardener should create new issues to capture what surfaces from such feedback. This should occupy no more than 2-4 hours of effort each week.
 
 ## Docs style guide
 
@@ -133,17 +141,6 @@ Use the following settings:
 - [Preset](https://posthog.slack.com/archives/C01FHN8DNN6/p1729759474007969)
 - Remove any zooming-in for clicks, as this can sometimes make videos hard to follow.
 - For exporting: use MP4, 720, 60 fps, and "web" quality
-
-## Docs gardener
-
-Each week the content & docs crew picks someone to review the state of feedback across these channels:
-
-- #docs-feedback
-- #content-docs-ideas
-- #ask-max for questions missing content
-- Zendesk tickets [where **root cause** is `documentation unclear`](https://posthoghelp.zendesk.com/agent/filters/33465387985947)
-
-Where appropriate and actionable, the gardener should create new issues to capture what surfaces from such feedback. This should occupy no more than 2-4 hours of effort each week.
 
 ## FAQ
 

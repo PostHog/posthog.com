@@ -255,6 +255,10 @@ export const handbookSidebar = [
                 url: '/handbook/content-and-docs/docs',
             },
             {
+                name: 'Docs style guide',
+                url: '/handbook/content-and-docs/docs-style-guide',
+            },
+            {
                 name: 'Newsletter',
                 url: '/handbook/content-and-docs/newsletter',
             },
