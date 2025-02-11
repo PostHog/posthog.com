@@ -329,7 +329,7 @@ const products: Product[] = [
         badge: 'BETA',
         pricing: {
             cta: {
-                url: 'https://app.posthog.com/home#panel=feature-previews',
+                url: 'https://app.posthog.com/#panel=feature-previews%3Allm-observability',
                 text: 'Try it out',
             },
         },
