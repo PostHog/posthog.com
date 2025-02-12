@@ -92,7 +92,7 @@ Now, PostHog is ready to use in your app.
 
 With PostHog installed and ready to go, we just need to go to `Program.cs` to set up an event capture.
 
-In `Program.cs`, register the PostHog and `HttpContextAccessor` services to your app in `Program.cs`, inject PostHog into the route handler, and then use it to capture a `forecasted weather` event when someone makes a weather forecast request. We’ll also use `$set` to set the [person property](/docs/product-analytics/person-properties) with the on the person. This makes it easier to filter for events based on email later.
+In `Program.cs`, register the PostHog service to your app, inject PostHog into the route handler, and then use it to capture a `forecasted weather` event when someone makes a weather forecast request. We’ll also use `$set` to set the [person property](/docs/product-analytics/person-properties) with the on the person. This makes it easier to filter for events based on email later.
 
 Altogether, this looks like this:
 
@@ -103,7 +103,6 @@ using PostHog;
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddOpenApi();
-builder.Services.AddHttpContextAccessor();
 builder.AddPostHog();
 
 var app = builder.Build();
