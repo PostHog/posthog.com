@@ -42,16 +42,16 @@ LLMs are great for a few types of needs:
 - Executing tasks based on natural language (typically using tool calling)
 - Translation (both between human and programming languages)
 
-LLMs still struggle with: 1. coming up with original and novel ideas, 2. reasoning through complex problems (though reasoning is improved with models like R1 or o3).
+LLMs still struggle with: 1. coming up with original and novel ideas, 2. reasoning through complex problems (though reasoning is improved with models like R1 or o3), 3. making decisions.
 
 ### We use whatever tech that gets the job done
 
 OpenAI's offerings are typically at the frontier of progress, and scale well. There is no OpenAI monopoly though. Feel free to build with Anthropic (Claude), Perplexity (Sonar), or whatever models and tools that fit the task best. Use the latest releases, as the field moves fast.
 
 > **Should we be fine-tuning models?**  
-> According to research, few-shot learning (i.e. a few examples of input and expected output in the prompt) is typically similarly effective as time-consuming fine-tuning. For reasoning models like DeepSeek R1 or OpenAI o3, even few-short learning is typically avoided, as it's better to let the model reason itself. Therefore, we rarely recommend fine-tuning.
+> According to our experience, few-shot learning (i.e. a few examples of input and expected output in the prompt) is typically similarly effective as time-consuming fine-tuning. For reasoning models like DeepSeek R1 or OpenAI o3, even few-short learning is typically avoided, as it's better to let the model reason itself. Therefore, we rarely recommend fine-tuning.
 
-### We eat our dog food
+### We eat our hog food
 
 This goes for everything at PostHog, but in AI features specifically, we use [our own LLM observability product](https://posthog.com/docs/ai-engineering/observability):
 
