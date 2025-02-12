@@ -4,7 +4,7 @@ date: 2025-02-11
 author:
  - ian-vanagas
 tags:
- - feature flags
+ - product analytics
 ---
 
 .NET is one of the most powerful and diverse programming platforms. It used to build web apps, microservices, mobile apps, and even games. 
