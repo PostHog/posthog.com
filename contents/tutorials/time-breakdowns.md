@@ -64,13 +64,13 @@ order by count(*) desc
   limit 100
 ```
 
-SQL also includes functions to get events for every 5, 10, and 15 minutes. To do this, replace `toStartOfMinute` with `toStartOfFiveMinutes`, `toStartOfTenMinutes`, and `toStartOfFifteenMinutes` .
+Our SQL flavor also includes functions to get events for every 5, 10, and 15 minutes. To do this, replace `toStartOfMinute` with `toStartOfFiveMinutes`, `toStartOfTenMinutes`, and `toStartOfFifteenMinutes` .
 
 ## Real time filtering
 
 Even minute-by-minute analysis might not be good enough for some people. They want a real time understanding of their analytics. To do this in PostHog, we can filter for events within a time frame. Because it takes time to ingest events into PostHog, we recommend using a 5-30 minutes filter as "real time."
 
-To set up one of these filters, add a filter to your series or dashboard, select SQL, then use a `dateDiff()` comparing the timestamp to the current time like this:
+To set up one of these filters, add a filter to your series or dashboard, select **SQL expression**, then use a `dateDiff()` comparing the timestamp to the current time like this:
 
 ```sql
 dateDiff('minute', timestamp, now()) < 5

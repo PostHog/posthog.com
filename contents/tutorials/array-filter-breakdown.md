@@ -32,7 +32,7 @@ Once you can access the array, you can breakdown or filter using it.
 
 ## Breaking down arrays
 
-Once we have our array, we can break it down further. To do this, [create an insight](https://app.posthog.com/insights/new), click "Add breakdown" under "Breakdown by," and select SQL. Here we can write our SQL expressions to break down arrays. 
+Once we have our array, we can break it down further. To do this, [create an insight](https://app.posthog.com/insights/new), click **Add breakdown** under **Breakdown by** and select **SQL expression**. Here we can write our SQL to break down arrays. 
 
 The most useful breakdown with arrays is `arrayJoin`. This is a [special expression](https://clickhouse.com/docs/en/sql-reference/functions/array-join) that "unfolds" an array into multiple rows. and helps us access each value from within an array. For example, to get a count of the usage of different `$active_feature_flags`, you can use this SQL expression breakdown:
 
@@ -61,7 +61,7 @@ Once you get individual number or string values from the breakdown, you can modi
 
 Once you break down your array, you might find it contains values you don't care about. You can use filters to remove them. Filtering arrays is relatively similar to breaking down, except you must provide values you want to filter out.
 
-To add a filter, click the filter dropdown next to your data series, click "Add filter," select SQL, and add your expression. You can also use filters in the [events explorer tab](https://app.posthog.com/events).
+To add a filter, click the filter dropdown next to your data series, click **Add filter**, select **SQL expression**, and add your expression. You can also use filters in the [events explorer tab](https://app.posthog.com/events).
 
 To start, you can remove empty arrays with a `notEmpty()` check. For example, to remove empty arrays from the `$active_feature_flags` by filtering for the SQL expression:
 

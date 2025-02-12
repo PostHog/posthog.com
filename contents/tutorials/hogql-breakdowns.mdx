@@ -13,13 +13,13 @@ export const MultiLight = 'https://res.cloudinary.com/dmukukwp6/image/upload/pos
 
 SQL opens limitless possibilities for how you can breakdown your trends, funnels, and more. This tutorial showcases some of the advanced breakdowns you can create using SQL.
 
-To create a breakdown using [SQL](/docs/product-analytics/sql), create an insight then under "Breakdown by," click "Add breakdown," select SQL from the options, and add your [expression](/docs/sql/expressions).
+To create a breakdown using [SQL](/docs/product-analytics/sql), create an insight then under **Breakdown by**, click **Add breakdown**, select **SQL expression** from the options, and add your [expression](/docs/sql/expressions).
 
 > To understand the full possibilities of SQL, check out the [available functions in our docs](/docs/sql/clickhouse-functions) as well as the [events](https://app.posthog.com/data-management/events) and [properties](https://app.posthog.com/data-management/properties) lists from your PostHog instance.
 
 ## Multiple properties
 
-sql can access multiple properties at once for use in your breakdowns. For example, to break down by the combination of browser and operating system, you can use the following expression:
+SQL can access multiple properties at once for use in your breakdowns. For example, to break down by the combination of browser and operating system, you can use the following expression:
 
 ```
 concat(properties.$browser, ' - ', properties.$os)

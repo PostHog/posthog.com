@@ -175,7 +175,7 @@ const PairsWithArray = [
     },
     {
         icon: <IconHogQL />,
-        product: 'SQL',
+        product: 'SQL access',
         color: 'black dark:text-white',
         description: 'Create entirely custom queries, join sources, and get the answers you need.',
         url: '/docs/sql',

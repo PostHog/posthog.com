@@ -16,7 +16,7 @@ Since there are infinite ways to break down time, there are infinite ways to fil
 To add a SQL filter:
 1. Create a [new insight](https://app.posthog.com/insights/new)
 2. Open the filter dropdown, and click "Add filter" below your data series
-3. Select SQL from the options
+3. Select **SQL expression** from the options
 4. Write your [expression](/docs/sql/expressions), and click "Add SQL expression" to apply it
 
 SQL filters are available on every type of insight from trends to funnels to lifecycle.
