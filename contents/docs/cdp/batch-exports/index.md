@@ -104,7 +104,7 @@ From here, you can create a new backfill by clicking the "Start backfill" button
 
 This will immediately schedule a series of batch export runs that fall within the bounds selected, based on the batch export's frequency.
 
-The start date of a backfill may be adjusted depending on when the earliest available data is. For example, if you choose a start date of 01-01-2024 but the earliest event captured in PostHog is 01-02-2024, the start date will be adjusted to 01-02-2024.
+The start date of a backfill may be adjusted depending on when the earliest available data is. For example, if you choose a start date of 2024-01-01 but the earliest event captured in PostHog is 2024-01-02, the start date will be adjusted to 2024-01-02.
 
 
 ## FAQ
@@ -166,7 +166,7 @@ If no data is found for a particular batch period, then the batch export run wil
 
 ### Why do I see duplicate data when running a backfill?
 
-A backfill does not check if the data already exists in the destination. Doing so would negatively impact the performance of the batch export, and potentially require more permissions on the user's database or storage. Moreover, we can never be sure if the data was moved somewhere else. Instead, we assume that users who request a historic export want all their historic data, which means that multiple historical exports over the same time period will produce duplicates.
+A backfill does not check if the data already exists in the destination. Doing so would negatively impact performance of each batch export run, and potentially require more permissions on the destination. Moreover, we can never be sure if the data was moved somewhere else. Instead, we assume that users who start a backfill want all their historic data, which means that multiple batch export runs over the same time period will produce duplicates.
 
 One other case in which you may see duplicate events is when the batch export runs transition from backfills to regular runs (for example, if you create a backfill to export all your historical data, and then you enable the batch export to start exporting data from the current time). The reason for this is as follows: If the batch export is for the events model and the interval start is older than 6 days ago then the event data will be queried based on the `timestamp` column (this is for performance reasons). In all other cases, we use an internal `inserted_at` column, which is based on when the event was ingested into PostHog's ClickHouse database (this prevents issues related to replication lag).
 
