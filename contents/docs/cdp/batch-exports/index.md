@@ -92,7 +92,6 @@ Each run has:
 ## Backfills (exporting historical data)
 
 When you create a batch export, it will start exporting data from the current time interval. If you want to export historical data, you can run a backfill.
-A backfill is a batch export that exports data from a specific start and end date.
 
 To view your existing backfills or to start a new one, you can navigate to the "Backfills" tab of the destination:
 
