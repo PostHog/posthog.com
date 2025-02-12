@@ -11,28 +11,173 @@ const aspectRatio = 3 / 4
 const numImages = 4
 const initialCount = 3
 
+const BasicOverlay = ({ src, className = '' }: { src: any; className?: string }) => {
+    return <CloudinaryImage src={src} className={`absolute inset-0 size-full ${className}`} imgClassName="size-full" />
+}
+
+const BasicPreview = ({ src, className = '' }: { src: any; className?: string }) => {
+    return (
+        <CloudinaryImage
+            src={src}
+            className={`absolute inset-0 size-full pointer-events-none ${className}`}
+            imgClassName="size-full object-contain"
+        />
+    )
+}
+
 const templates: Record<string, Overlay[]> = {
     love: [
-        'https://res.cloudinary.com/dmukukwp6/image/upload/Frame_13_01edf38d9a.png',
-        'https://res.cloudinary.com/dmukukwp6/image/upload/Frame_11_23c7f086da.png',
-        'https://res.cloudinary.com/dmukukwp6/image/upload/Frame_14_ab070af9e7.png',
-        'https://res.cloudinary.com/dmukukwp6/image/upload/Frame_12_1c1178e761.png',
+        {
+            previewComponent: (
+                <BasicPreview src="https://res.cloudinary.com/dmukukwp6/image/upload/Frame_13_01edf38d9a.png" />
+            ),
+            stripComponent: (
+                <BasicOverlay src="https://res.cloudinary.com/dmukukwp6/image/upload/Frame_13_01edf38d9a.png" />
+            ),
+        },
+        {
+            previewComponent: (
+                <BasicPreview src="https://res.cloudinary.com/dmukukwp6/image/upload/Frame_11_23c7f086da.png" />
+            ),
+            stripComponent: (
+                <BasicOverlay src="https://res.cloudinary.com/dmukukwp6/image/upload/Frame_11_23c7f086da.png" />
+            ),
+        },
+        {
+            previewComponent: (
+                <BasicPreview src="https://res.cloudinary.com/dmukukwp6/image/upload/Frame_14_ab070af9e7.png" />
+            ),
+            stripComponent: (
+                <BasicOverlay src="https://res.cloudinary.com/dmukukwp6/image/upload/Frame_14_ab070af9e7.png" />
+            ),
+        },
+        {
+            previewComponent: (
+                <BasicPreview src="https://res.cloudinary.com/dmukukwp6/image/upload/Frame_12_1c1178e761.png" />
+            ),
+            stripComponent: (
+                <BasicOverlay src="https://res.cloudinary.com/dmukukwp6/image/upload/Frame_12_1c1178e761.png" />
+            ),
+        },
+    ],
+    love2: [
+        {
+            stripComponent: (
+                <CloudinaryImage
+                    src="https://res.cloudinary.com/dmukukwp6/image/upload/Group_12_65315f7c08.png"
+                    className="absolute inset-0 size-full"
+                    imgClassName="absolute -bottom-2 w-full"
+                />
+            ),
+        },
+        {
+            stripComponent: (
+                <CloudinaryImage
+                    src="https://res.cloudinary.com/dmukukwp6/image/upload/Group_17_6d2499a7d1.png"
+                    className="absolute inset-0 size-full"
+                    imgClassName="absolute top-0 right-0 -translate-x-[20%] translate-y-[40%] w-1/2"
+                />
+            ),
+        },
+        {
+            stripComponent: (
+                <CloudinaryImage
+                    src="https://res.cloudinary.com/dmukukwp6/image/upload/Group_16_e28a6a688c.png"
+                    className="absolute inset-0 size-full z-10"
+                    imgClassName="absolute bottom-0 translate-y-1/2 w-full"
+                />
+            ),
+        },
+        {
+            stripComponent: (
+                <CloudinaryImage
+                    src="https://res.cloudinary.com/dmukukwp6/image/upload/Group_15_33efd70659.png"
+                    className="absolute inset-0 size-full z-10"
+                    imgClassName="absolute -bottom-2 -right-2 w-1/2"
+                />
+            ),
+        },
     ],
     vince: [
-        'https://res.cloudinary.com/dmukukwp6/image/upload/Frame_13_69ad22caa6.png',
-        'https://res.cloudinary.com/dmukukwp6/image/upload/Frame_11_261551b354.png',
-        'https://res.cloudinary.com/dmukukwp6/image/upload/Frame_12_2a1882e191.png',
-        'https://res.cloudinary.com/dmukukwp6/image/upload/Frame_14_74e168672c.png',
+        {
+            previewComponent: (
+                <BasicPreview src="https://res.cloudinary.com/dmukukwp6/image/upload/Frame_13_69ad22caa6.png" />
+            ),
+            stripComponent: (
+                <BasicOverlay src="https://res.cloudinary.com/dmukukwp6/image/upload/Frame_13_69ad22caa6.png" />
+            ),
+        },
+        {
+            previewComponent: (
+                <BasicPreview src="https://res.cloudinary.com/dmukukwp6/image/upload/Frame_11_261551b354.png" />
+            ),
+            stripComponent: (
+                <BasicOverlay src="https://res.cloudinary.com/dmukukwp6/image/upload/Frame_11_261551b354.png" />
+            ),
+        },
+        {
+            previewComponent: (
+                <BasicPreview src="https://res.cloudinary.com/dmukukwp6/image/upload/Frame_12_2a1882e191.png" />
+            ),
+            stripComponent: (
+                <BasicOverlay src="https://res.cloudinary.com/dmukukwp6/image/upload/Frame_12_2a1882e191.png" />
+            ),
+        },
+        {
+            previewComponent: (
+                <BasicPreview
+                    className="bg-[#FF0000]/30"
+                    src="https://res.cloudinary.com/dmukukwp6/image/upload/Frame_14_74e168672c.png"
+                />
+            ),
+            stripComponent: (
+                <BasicOverlay
+                    className="bg-[#FF0000]/30"
+                    src="https://res.cloudinary.com/dmukukwp6/image/upload/Frame_14_74e168672c.png"
+                />
+            ),
+        },
     ],
     clipart: [
-        'https://res.cloudinary.com/dmukukwp6/image/upload/Frame_13_1_ef16644fc4.png',
-        'https://res.cloudinary.com/dmukukwp6/image/upload/Frame_12_0870369297.png',
-        'https://res.cloudinary.com/dmukukwp6/image/upload/Frame_11_b69f777fc2.png',
-        'https://res.cloudinary.com/dmukukwp6/image/upload/Frame_14_ce48756999.png',
+        {
+            previewComponent: (
+                <BasicPreview src="https://res.cloudinary.com/dmukukwp6/image/upload/Frame_13_1_ef16644fc4.png" />
+            ),
+            stripComponent: (
+                <BasicOverlay src="https://res.cloudinary.com/dmukukwp6/image/upload/Frame_13_1_ef16644fc4.png" />
+            ),
+        },
+        {
+            previewComponent: (
+                <BasicPreview src="https://res.cloudinary.com/dmukukwp6/image/upload/Frame_12_0870369297.png" />
+            ),
+            stripComponent: (
+                <BasicOverlay src="https://res.cloudinary.com/dmukukwp6/image/upload/Frame_12_0870369297.png" />
+            ),
+        },
+        {
+            previewComponent: (
+                <BasicPreview src="https://res.cloudinary.com/dmukukwp6/image/upload/Frame_11_b69f777fc2.png" />
+            ),
+            stripComponent: (
+                <BasicOverlay src="https://res.cloudinary.com/dmukukwp6/image/upload/Frame_11_b69f777fc2.png" />
+            ),
+        },
+        {
+            previewComponent: (
+                <BasicPreview src="https://res.cloudinary.com/dmukukwp6/image/upload/Frame_14_ce48756999.png" />
+            ),
+            stripComponent: (
+                <BasicOverlay src="https://res.cloudinary.com/dmukukwp6/image/upload/Frame_14_ce48756999.png" />
+            ),
+        },
     ],
 }
 
-type Overlay = `https://res.cloudinary.com/${string}`
+type Overlay = {
+    previewComponent?: React.ReactNode
+    stripComponent?: React.ReactNode
+}
 
 interface PhotoBoothImage {
     src?: string
@@ -121,14 +266,7 @@ const Camera = ({
                     className="size-full object-contain"
                     onUserMedia={onUserMedia}
                 />
-                {overlay && (
-                    <CloudinaryImage
-                        src={overlay}
-                        alt="Overlay"
-                        className="absolute inset-0 size-full pointer-events-none"
-                        imgClassName="size-full object-contain"
-                    />
-                )}
+                {overlay?.previewComponent && overlay.previewComponent}
                 {count <= 0 && (
                     <div className="absolute size-full bg-white inset-0 opacity-0 animate-fade animate-duration-700" />
                 )}
@@ -198,20 +336,13 @@ const PhotoStrip = ({
                                 }`}
                             />
                         )}
-                        {image?.overlay && (
-                            <CloudinaryImage
-                                src={image.overlay}
-                                alt="Photobooth"
-                                className="absolute inset-0 size-full"
-                                imgClassName="size-full"
-                            />
-                        )}
+                        {image?.overlay?.stripComponent && image.overlay.stripComponent}
                         {image?.src && onRetake && retaking === undefined && (
                             <button
                                 onClick={() => {
                                     onRetake(index)
                                 }}
-                                className="absolute inset-0 size-full bg-black/50 text-white text-lg font-bold opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                                className="absolute inset-0 size-full bg-black/50 text-white text-lg font-bold opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-20"
                             >
                                 Retake
                             </button>
@@ -344,7 +475,7 @@ const PhotoModal = ({
                             onCapture={handleCapture}
                             overlay={overlay}
                         />
-                        {images.every((image) => image.src) && (
+                        {!retaking && images.every((image) => image.src) && (
                             <div className="absolute inset-0 flex flex-col items-center justify-center py-8 bg-black/50">
                                 <div className="relative pb-4 mb-auto">
                                     <h1 className="m-0 text-white text-2xl">Click a photo to retake</h1>
@@ -411,7 +542,7 @@ const FinalPhotoStrip = ({ images }: { images: PhotoBoothImage[] }) => {
     const [dataURL, setDataURL] = useState<string>()
 
     return (
-        <div ref={ref} className="flex space-x-4 items-center h-[80vh]">
+        <div ref={ref} className="flex space-x-4 items-center h-[800px]">
             <motion.div
                 initial={{
                     opacity: 0,
