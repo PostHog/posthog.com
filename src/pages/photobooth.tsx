@@ -4,6 +4,7 @@ import Layout from 'components/Layout'
 import { AnimatePresence, motion } from 'framer-motion'
 import React, { useEffect, useState } from 'react'
 import Webcam from 'react-webcam'
+import { useInView } from 'react-intersection-observer'
 
 const aspectRatio = 3 / 4
 const numImages = 4
@@ -33,11 +34,13 @@ const templates = {
 const Camera = ({
     onCapture,
     overlay,
-    onReady,
+    onUserReady,
+    onWebcamReady,
 }: {
     onCapture: (image: { src: string; overlay: string }) => void
     overlay?: string
-    onReady: () => void
+    onUserReady: () => void
+    onWebcamReady: () => void
 }) => {
     const webcamRef = React.useRef<Webcam>(null)
     const [count, setCount] = useState(initialCount)
@@ -55,8 +58,7 @@ const Camera = ({
     }
 
     const onUserMedia = () => {
-        setReady(true)
-        onReady()
+        onWebcamReady()
     }
 
     const capture = React.useCallback(() => {
@@ -65,6 +67,11 @@ const Camera = ({
             onCapture({ src: imageSrc, overlay })
         }
     }, [webcamRef, overlay])
+
+    const handleReady = () => {
+        onUserReady()
+        setReady(true)
+    }
 
     useEffect(() => {
         if (count === 0) {
@@ -79,14 +86,10 @@ const Camera = ({
             setCount(initialCount)
             startCountdown()
         }
-    }, [overlay])
+    }, [overlay, ready])
 
     return (
-        <div
-            className={`relative bg-black size-full flex items-center justify-center transition-opacity ${
-                ready ? 'opacity-100' : 'opacity-0'
-            }`}
-        >
+        <div className={`relative bg-black size-full flex items-center justify-center transition-opacity`}>
             {ready && count > 0 && (
                 <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 text-white text-[50vh] font-bold z-50 opacity-50">
                     {count}
@@ -120,6 +123,41 @@ const Camera = ({
                 )}
                 {count <= 0 && (
                     <div className="absolute size-full bg-white inset-0 opacity-0 animate-fade animate-duration-700" />
+                )}
+                {!ready && (
+                    <div className="absolute inset-0 flex flex-col items-center justify-center py-8 bg-black/50">
+                        <div className="relative mb-auto pb-4">
+                            <h1 className="m-0 text-white text-2xl">Scroll to select a template</h1>
+                            <svg
+                                fill="none"
+                                xmlns="http://www.w3.org/2000/svg"
+                                viewBox="0 0 170 64"
+                                className="absolute top-0 right-0 translate-x-[38%] translate-y-[-47%] rotate-[28deg]"
+                            >
+                                <g clipPath="url(#a)">
+                                    <path
+                                        d="M162.96 28.09c.646-1.39 1.299-2.8 1.806-4.246.102-.287.194-.6.259-.915a.99.99 0 0 0 .036-.205c.118-.717.073-1.45-.358-2.055-.688-.958-2.019-1.094-3.089-1.233a93.837 93.837 0 0 0-4.517-.48 93.874 93.874 0 0 0-9.336-.308c-.808.013-2.149.351-2.366 1.283-.217.93.994 1.275 1.681 1.266a93.537 93.537 0 0 1 7.569.176c1.173.08 2.344.186 3.513.318.5.056 1.004.114 1.501.18l1.004.136c.327-.07.443.036.351.312.02.048.033.097.046.155-15.284 8.622-31.794 15-48.933 18.802-.703.156-1.995.62-1.832 1.57.152.898 1.57 1.028 2.25.88 16.44-3.648 32.331-9.496 47.171-17.428a56.745 56.745 0 0 1-1.087 2.4 68.137 68.137 0 0 1-3.755 6.706c-1.129 1.785 2.9 1.957 3.732.641a70.072 70.072 0 0 0 4.354-7.955Z"
+                                        fill="#F1A82C"
+                                    />
+                                </g>
+
+                                <defs>
+                                    <clipPath id="a">
+                                        <path
+                                            fill="#fff"
+                                            transform="matrix(.9415 .337 .337 -.9415 106 47.075)"
+                                            d="M0 0h50v50H0z"
+                                        />
+                                    </clipPath>
+                                </defs>
+                            </svg>
+                        </div>
+                        <div className="mb-auto">
+                            <CallToAction onClick={handleReady} type="outline" size="absurd">
+                                <span>Ready?</span>
+                            </CallToAction>
+                        </div>
+                    </div>
                 )}
             </div>
         </div>
@@ -178,6 +216,47 @@ const PhotoStrip = ({
     )
 }
 
+const VerticalPhotoStrip = ({
+    images,
+    template,
+    selectedTemplate,
+    onRetake,
+    onSelect,
+    disabled,
+}: {
+    images: { src?: string; overlay: string }[]
+    template: string
+    selectedTemplate: string
+    onRetake?: (index: number) => void
+    onSelect: (template: string) => void
+    disabled: boolean
+}) => {
+    const [ref, inView] = useInView({ threshold: 1 })
+    const overlays = templates[template]
+    const active = selectedTemplate === template
+
+    useEffect(() => {
+        if (inView) {
+            onSelect(template)
+        }
+    }, [inView])
+
+    return (
+        <div
+            ref={ref}
+            className={`h-[70vh] snap-center flex-grow ${disabled && !active ? 'opacity-50' : ''} rounded-md`}
+        >
+            <PhotoStrip
+                images={images.map((image, index) => ({
+                    src: active ? image.src : undefined,
+                    overlay: overlays[index],
+                }))}
+                onRetake={onRetake}
+            />
+        </div>
+    )
+}
+
 const PhotoModal = ({
     onClose,
     template,
@@ -188,10 +267,12 @@ const PhotoModal = ({
     onDone: (images: { src: string; overlay: string }[]) => void
 }) => {
     const [step, setStep] = useState(0)
+    const [capturing, setCapturing] = useState(false)
+    const [selectedTemplate, setSelectedTemplate] = useState<keyof typeof templates>(template)
     const [overlayIndex, setOverlayIndex] = useState<number>()
     const [overlay, setOverlay] = useState<string>()
     const [images, setImages] = useState<{ src: string; overlay: string }[]>(
-        templates[template].map((overlay) => ({ overlay }))
+        templates[selectedTemplate].map((overlay) => ({ overlay }))
     )
 
     const handleCapture = (image: { src: string; overlay: string }) => {
@@ -200,7 +281,7 @@ const PhotoModal = ({
         newImages[overlayIndex] = image
         setImages(newImages)
         const nextIndex = overlayIndex !== undefined ? overlayIndex + 1 : 0
-        if (retaking || nextIndex >= templates[template].length) {
+        if (retaking || nextIndex >= templates[selectedTemplate].length) {
             setOverlayIndex(undefined)
             setOverlay(undefined)
             onDone(newImages)
@@ -209,7 +290,7 @@ const PhotoModal = ({
         }
     }
 
-    const handleReady = () => {
+    const handleWebcamReady = () => {
         setOverlayIndex(0)
     }
 
@@ -218,25 +299,52 @@ const PhotoModal = ({
     }
 
     useEffect(() => {
-        if (overlayIndex !== undefined && templates[template][overlayIndex]) {
-            setOverlay(templates[template][overlayIndex])
+        if (overlayIndex !== undefined && templates[selectedTemplate][overlayIndex]) {
+            setOverlay(templates[selectedTemplate][overlayIndex])
         }
     }, [overlayIndex])
 
+    useEffect(() => {
+        if (selectedTemplate) {
+            setOverlayIndex(0)
+            setOverlay(templates[selectedTemplate][0])
+        }
+    }, [selectedTemplate])
+
     return (
         <motion.div
-            className="fixed size-full inset-0 bg-black/75 flex justify-center items-start z-[999999] py-10"
+            className="fixed size-full inset-0 bg-black/75 flex justify-center items-center z-[999999] py-10"
             onClick={onClose}
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
         >
-            <div onClick={(e) => e.stopPropagation()} className="h-full">
-                {step === 0 && (
-                    <div className="flex space-x-2 items-center h-full">
-                        <Camera onReady={handleReady} onCapture={handleCapture} overlay={overlay} />
+            <div onClick={(e) => e.stopPropagation()} className="h-[70vh]">
+                <div className="flex space-x-2 items-center h-full">
+                    <Camera
+                        onWebcamReady={handleWebcamReady}
+                        onUserReady={() => setCapturing(true)}
+                        onCapture={handleCapture}
+                        overlay={overlay}
+                    />
+                    <div
+                        className={`flex flex-col space-y-6 h-screen ${
+                            capturing ? 'overflow-y-hidden' : 'overflow-y-auto'
+                        } snap-y snap-mandatory py-[70vh] flex-shrink-0`}
+                    >
+                        {Object.keys(templates).map((key) => (
+                            <VerticalPhotoStrip
+                                disabled={capturing}
+                                key={key}
+                                images={images}
+                                template={key}
+                                selectedTemplate={selectedTemplate}
+                                onRetake={handleRetake}
+                                onSelect={(template) => setSelectedTemplate(template as keyof typeof templates)}
+                            />
+                        ))}
                     </div>
-                )}
+                </div>
             </div>
         </motion.div>
     )
