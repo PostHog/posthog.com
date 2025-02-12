@@ -324,7 +324,7 @@ const PhotoModal = ({
 
     return (
         <motion.div
-            className="fixed size-full inset-0 bg-black/75 flex justify-center items-center z-[999999] py-10"
+            className="flex justify-center items-center py-12 overflow-hidden"
             onClick={onClose}
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
@@ -340,8 +340,8 @@ const PhotoModal = ({
                             overlay={overlay}
                         />
                         {images.every((image) => image.src) && (
-                            <div className="absolute inset-0 flex flex-col items-center justify-end py-8 bg-black/50">
-                                <div className="relative pb-4">
+                            <div className="absolute inset-0 flex flex-col items-center justify-center py-8 bg-black/50">
+                                <div className="relative pb-4 mb-auto">
                                     <h1 className="m-0 text-white text-2xl">Click a photo to retake</h1>
                                     <svg
                                         fill="none"
@@ -367,16 +367,18 @@ const PhotoModal = ({
                                         </defs>
                                     </svg>
                                 </div>
-                                <CallToAction onClick={handleDone} type="outline" size="absurd">
-                                    <span>Done</span>
-                                </CallToAction>
+                                <div className="mt-auto">
+                                    <CallToAction onClick={handleDone} type="outline" size="absurd">
+                                        <span>Done</span>
+                                    </CallToAction>
+                                </div>
                             </div>
                         )}
                     </div>
                     <div
-                        className={`flex flex-col space-y-6 h-screen ${
+                        className={`flex flex-col space-y-4 h-screen ${
                             capturing ? 'overflow-y-hidden' : 'overflow-y-auto'
-                        } snap-y snap-mandatory py-[70vh] flex-shrink-0`}
+                        } snap-y snap-mandatory py-[70vh] flex-shrink-0 z-[999999]`}
                     >
                         {Object.keys(templates).map((key) => (
                             <div ref={selectedTemplate === key ? photoStripRef : null} key={key}>
@@ -463,16 +465,21 @@ export default function Photobooth(): JSX.Element {
     return (
         <Layout>
             <AnimatePresence>
-                {modalOpen && (
-                    <PhotoModal onClose={() => setModalOpen(false)} template={template} onDone={handleDone} />
+                {images.length > 0 ? (
+                    <motion.div
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        exit={{ opacity: 0 }}
+                        className="flex justify-center items-center py-12"
+                    >
+                        <FinalPhotoStrip images={images} />
+                    </motion.div>
+                ) : (
+                    <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
+                        <PhotoModal onClose={() => setModalOpen(false)} template={template} onDone={handleDone} />
+                    </motion.div>
                 )}
             </AnimatePresence>
-
-            <section className="px-5 py-12">
-                <div className="flex justify-center items-center">
-                    {images.length > 0 && <FinalPhotoStrip images={images} />}
-                </div>
-            </section>
         </Layout>
     )
 }
