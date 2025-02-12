@@ -72,10 +72,10 @@ While there is no fixed budget for onboardings they should be relatively less ex
 
   - Avoid intercontinental travel or choose a location that limits it to the minimum number of people possible
   - You should not need to plan a social activity
-  - Limit attendees to team members
+  - Limit attendees to members of your Small Team
   - See if there are any other onboardings at the same time you could pair up with
 
-Aim to keep things sensible and cheap. As always, use your best judgement when [spending money](/handbook/people/spending-money)
+Aim to keep things sensible and cheap. As always, use your best judgement when [spending money](/handbook/people/spending-money). Request a budget in Brex for any onboardings you are doing. 
 
 > You should by default avoid combining in-person onboarding with [small team offsites](/handbook/company/offsites#small-team-offsites) as they serve different purposes. The focus of onboarding is generally on making the new team member successful, but offsites feature things like hackathons and 360 feedback which aren't usually helpful for this and detract from useful onboarding time. However, it may occasionally make sense to combine the two - just use your judgement. 
 
