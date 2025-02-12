@@ -1,31 +1,31 @@
 ---
-title: Using HogQL for advanced time and date filters
+title: Using SQL for advanced time and date filters
 date: 2023-05-30
 author:
   - ian-vanagas
 showTitle: true
 sidebar: Docs
 tags:
-  - hogql
+  - sql
   - insights
   - product analytics
 ---
 
-Since there are infinite ways to break down time, there are infinite ways to filter based on time. HogQL unlocks more of these in PostHog, and in this tutorial we'll go through examples of how to use do that.
+Since there are infinite ways to break down time, there are infinite ways to filter based on time. SQL unlocks more of these in PostHog, and in this tutorial we'll go through examples of how to use do that.
 
-To add a HogQL filter:
+To add a SQL filter:
 1. Create a [new insight](https://app.posthog.com/insights/new)
 2. Open the filter dropdown, and click "Add filter" below your data series
-3. Select HogQL from the options
-4. Write your [expression](/docs/hogql/expressions), and click "Add HogQL expression" to apply it
+3. Select SQL from the options
+4. Write your [expression](/docs/sql/expressions), and click "Add SQL expression" to apply it
 
-HogQL filters are available on every type of insight from trends to funnels to lifecycle.
+SQL filters are available on every type of insight from trends to funnels to lifecycle.
 
 ![hogql.mp4](https://res.cloudinary.com/dmukukwp6/video/upload/v1710055416/posthog.com/contents/images/tutorials/hogql-date-time-filters/hogql.mp4)
 
 ## Accessing your data’s dates and times
 
-Below is a non-exhaustive list of time properties that are commonly used in HogQL (You can find a full list of events, properties, and types in your [data management tab](https://app.posthog.com/data-management/events)):
+Below is a non-exhaustive list of time properties that are commonly used in SQL (You can find a full list of events, properties, and types in your [data management tab](https://app.posthog.com/data-management/events)):
 
 - The `timestamp` property indicates what time an event occurred, and is generally [automatically set](/docs/data/timestamps).
 - [Persons](/docs/data/persons) have a `created_at` property, which you can access with `person.created_at`.
@@ -33,7 +33,7 @@ Below is a non-exhaustive list of time properties that are commonly used in HogQ
 
 > **Note:** if the type of your property is a string, rather than a `DateTime`, you can convert it using `toDateTime()`, and vice versa with `toString()`. You can view the type of your properties in your [data management tab](https://app.posthog.com/data-management/properties).
 
-The [ClickHouse SQL statements](https://clickhouse.com/docs/en/sql-reference) we built HogQL on also have useful helper functions that are good to know when working with dates. These include:
+The [ClickHouse SQL statements](https://clickhouse.com/docs/en/sql-reference) we built SQL on also have useful helper functions that are good to know when working with dates. These include:
 
 - `now()`: the current date and time at the moment of query analysis.
 - `today()`: the current date at the moment of query analysis.
@@ -76,7 +76,7 @@ You can also replace `day` with `second`, `minute`, `hour`, `week`, `month`, `qu
 
 ## Weekly and quarterly reports
 
-Many companies report on a weekly or quarterly basis. A simple filter, such as `events in the last 7 days` or `events in the last 90 days`, likely includes events from the previous week or quarter, making these reports inaccurate. HogQL provides an alternative filter to get events from specific weeks and quarters.
+Many companies report on a weekly or quarterly basis. A simple filter, such as `events in the last 7 days` or `events in the last 90 days`, likely includes events from the previous week or quarter, making these reports inaccurate. SQL provides an alternative filter to get events from specific weeks and quarters.
 
 For example, if we wanted events for this quarter, we can use the expression:
 
@@ -98,7 +98,7 @@ toDayOfWeek(timestamp) != 6 and toDayOfWeek(timestamp) != 7
 
 ## Analyzing subscribers or trial users
 
-HogQL lets you filter users properties too. A use case of this is filtering for events based on users in trial or recently subscribed.
+SQL lets you filter users properties too. A use case of this is filtering for events based on users in trial or recently subscribed.
 
 For example, you may want to filter events from users who are in the last 3 days of their trial period, but you only have a `trial_started` person property. Using [`interval`](https://clickhouse.com/docs/en/sql-reference/data-types/special-data-types/interval) type, you can to add 30 days and use `dateDiff()` to check if that date is less than or equal to 3 days away from `now()` like this: 
 
@@ -112,9 +112,9 @@ dateDiff(
 
 A use case for this is creating an action for `pricing pageviews` during the last days of the trial, then posting to a [webhook](/docs/webhooks) to notify your team to reach out to the user.
 
-![Action](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/hogql-date-time-filters/action.png)
+![Action](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/SQL-date-time-filters/action.png)
 
-Another similar example is using HogQL to understand usage in the first two weeks after subscribing. To do this, use `dateDiff()` again but with `'week'`, your signed up property, and `now()` like this:
+Another similar example is using SQL to understand usage in the first two weeks after subscribing. To do this, use `dateDiff()` again but with `'week'`, your signed up property, and `now()` like this:
 
 ```
 dateDiff('week', person.properties.signed_up_at, now()) <= 2
@@ -124,8 +124,8 @@ This is useful to learn what features are used immediately after sign up and oth
 
 ## Further reading
 
-- [Using HogQL for advanced breakdowns](/tutorials/hogql-breakdowns)
+- [Using SQL for advanced breakdowns](/tutorials/hogql-breakdowns)
 - [Running experiments on new users](/tutorials/new-user-experiments)
-- [The power of HogQL’s sum() aggregation](/tutorials/hogql-sum-aggregation)
+- [The power of SQL’s sum() aggregation](/tutorials/hogql-sum-aggregation)
 
 <NewsletterForm />

@@ -97,13 +97,13 @@ const subfeatures = [
         icon: <IconDecisionTree />,
     },
     {
-        title: 'Query with HogQL',
-        description: 'Use our take on SQL to interrogate data and build custom queries',
+        title: 'Query with SQL',
+        description: 'Directly access your data, join sources, and build custom queries',
         icon: <IconHogQL />,
     },
     {
         title: 'Save queries as views',
-        description: 'Save time by saving visualized data as tables, graphcs, and more',
+        description: 'Save time by saving visualized data as tables, graphics, and more',
         icon: <IconGraph />,
     },
     {
@@ -175,10 +175,10 @@ const PairsWithArray = [
     },
     {
         icon: <IconHogQL />,
-        product: 'HogQL',
+        product: 'SQL',
         color: 'black dark:text-white',
-        description: 'Use our take on SQL to create entirely custom queries and get the answers you need.',
-        url: '/docs/hogql',
+        description: 'Create entirely custom queries, join sources, and get the answers you need.',
+        url: '/docs/sql',
     },
 ]
 

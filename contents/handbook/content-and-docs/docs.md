@@ -42,7 +42,7 @@ This doesn't preclude anyone from submitting new or improved docs for any produc
 | **Reverse proxy**               | Ian                  |
 | **Migrate**                     | Ian                  |
 | **Data**                        | Danilo               |
-| **HogQL**                       | Ian                  |
+| **SQL**                       | Ian                  |
 | **API**                         | Ian                  |
 
 ### Products
