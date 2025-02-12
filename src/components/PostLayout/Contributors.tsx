@@ -71,12 +71,13 @@ export const ContributorImage = ({ image, name, compact, rounded }) => {
                 rounded
                     ? `rounded-full overflow-hidden border-2 border-tan dark:border-primary ${compact ? 'mr-1' : ''}`
                     : ''
-            }`}
+            } mb-0`}
         >
             {typeof image === 'string' ? (
                 <CloudinaryImage
                     width={200}
-                    className={compact ? 'absolute w-full h-full object-cover' : 'w-24 h-24'}
+                    className={compact ? 'absolute size-full' : 'w-24 h-24'}
+                    imgClassName={compact ? 'size-full object-cover' : ''}
                     src={image}
                 />
             ) : gatsbyImage ? (
