@@ -25,6 +25,18 @@ We use [Brilliant](https://www.brilliantmade.com/) to manufacture and fulfill ou
 1. The Words & Pictures team ultimately decide on what items we wish to sell or give away (including how many and sizes)
 2. Lottie provide assets to produce and order these items in to stock
 
+We generally try to launch new products in line with the typical fashion cycle (spring/summer and fall/winter). However, this doesn't mean we can't do fun side quests! If you are looking to do an off-cycle merch run, just make sure you keep Kendal in the loop so the admin side goes smoothly.
+
+## How do we reorder merch?
+
+All of our permanent merch items are reordered via Brilliant. To do this you need to:
+
+1. Request a restock quote for the item(s) and enter the quantity you need
+2. Approve the estimate that will be sent from Brilliant (this will trigger the order to start being worked on)
+3. Pay the invoice via Brex once it comes in (usually in 1-2 days after estimate approval)
+
+It's really important that we do not allow stock levels to run low as restocking items can take a couple of weeks, so the Ops team will regularly check inventory levels. However if you happen to see anything looking amiss, or you know you want to place a big order for a customer that may affect our stock levels a lot, just let Kendal know ahead of time!
+
 ## How do we ship merch?
 
 Shipping is also done through Brilliant - they can ship to over 200 territories worldwide:
