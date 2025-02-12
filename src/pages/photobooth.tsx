@@ -11,7 +11,7 @@ const aspectRatio = 3 / 4
 const numImages = 4
 const initialCount = 3
 
-const templates = {
+const templates: Record<string, Overlay[]> = {
     love: [
         'https://res.cloudinary.com/dmukukwp6/image/upload/Frame_13_01edf38d9a.png',
         'https://res.cloudinary.com/dmukukwp6/image/upload/Frame_11_23c7f086da.png',
@@ -32,14 +32,21 @@ const templates = {
     ],
 }
 
+type Overlay = `https://res.cloudinary.com/${string}`
+
+interface PhotoBoothImage {
+    src?: string
+    overlay: Overlay
+}
+
 const Camera = ({
     onCapture,
     overlay,
     onUserReady,
     onWebcamReady,
 }: {
-    onCapture: (image: { src: string; overlay: string }) => void
-    overlay?: string
+    onCapture: (image: PhotoBoothImage) => void
+    overlay?: Overlay
     onUserReady: () => void
     onWebcamReady: () => void
 }) => {
@@ -171,7 +178,7 @@ const PhotoStrip = ({
     retaking,
     animate = true,
 }: {
-    images: { src?: string; overlay: string }[]
+    images: PhotoBoothImage[]
     onRetake?: (index: number) => void
     retaking?: number
     animate?: boolean
@@ -226,7 +233,7 @@ const VerticalPhotoStrip = ({
     active,
     retaking,
 }: {
-    images: { src?: string; overlay: string }[]
+    images: PhotoBoothImage[]
     template: string
     selectedTemplate: string
     onRetake?: (index: number) => void
@@ -268,22 +275,20 @@ const PhotoModal = ({
 }: {
     onClose: () => void
     template: any
-    onDone: (images: { src: string; overlay: string }[]) => void
+    onDone: (images: PhotoBoothImage[]) => void
 }) => {
     const [step, setStep] = useState(0)
     const [capturing, setCapturing] = useState(false)
     const [selectedTemplate, setSelectedTemplate] = useState<keyof typeof templates>(template)
     const [overlayIndex, setOverlayIndex] = useState<number>()
-    const [overlay, setOverlay] = useState<string>()
+    const [overlay, setOverlay] = useState<Overlay>()
     const [retaking, setRetaking] = useState<number>()
     const photoStripRef = useRef<HTMLDivElement>(null)
-    const [images, setImages] = useState<{ src: string; overlay: string }[]>(
-        templates[selectedTemplate].map((overlay) => ({ overlay }))
-    )
+    const [images, setImages] = useState<PhotoBoothImage[]>(templates[selectedTemplate].map((overlay) => ({ overlay })))
 
-    const handleCapture = async (image: { src: string; overlay: string }) => {
+    const handleCapture = async (image: PhotoBoothImage) => {
         const newImages = [...images]
-        const retaking = !!newImages[overlayIndex]?.src
+        const retaking = overlayIndex !== undefined && !!newImages[overlayIndex]?.src
         newImages[overlayIndex] = image
         setImages(newImages)
         const nextIndex = overlayIndex !== undefined ? overlayIndex + 1 : 0
@@ -401,8 +406,7 @@ const PhotoModal = ({
     )
 }
 
-const FinalPhotoStrip = ({ images }: { images: { src: string; overlay: string }[] }) => {
-    console.log(images)
+const FinalPhotoStrip = ({ images }: { images: PhotoBoothImage[] }) => {
     const ref = useRef<HTMLDivElement>(null)
     const [dataURL, setDataURL] = useState<string>()
 
@@ -455,9 +459,9 @@ const FinalPhotoStrip = ({ images }: { images: { src: string; overlay: string }[
 export default function Photobooth(): JSX.Element {
     const [modalOpen, setModalOpen] = useState(true)
     const [template, setTemplate] = useState<keyof typeof templates>('love')
-    const [images, setImages] = useState<{ src: string; overlay: string }[]>([])
+    const [images, setImages] = useState<PhotoBoothImage[]>([])
 
-    const handleDone = (images: { src: string; overlay: string }[]) => {
+    const handleDone = (images: PhotoBoothImage[]) => {
         setImages(images)
         setModalOpen(false)
     }
