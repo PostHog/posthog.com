@@ -4,30 +4,15 @@ sidebar: Handbook
 showTitle: true
 ---
 
-We have a [merch store](/merch) where our community can purchase high quality PostHog-branded merch. The People & Ops team is responsible for managing merch inventory, fulfillment etc. even though multiple people contribute, and Kendal is the point person. 
-
-Instructions for how to get a merch code to our customers is [below](https://posthog.com/handbook/company/merch-store#customers), however if you need any help just send a message to the <PrivateLink url="https://posthog.slack.com/archives/C04DWKH7DM3">#merch</PrivateLink> channel and somebody will be happy to help.
-
-Merch codes can also be generated directly from within Zendesk.
-
-## How do we think about merch?
-
-We care about:
-
-* **Quality** - our merch _must_ be something you would personally want to wear or use
-* **Sustainability** - our merch shouldn't be something that's never used or made in an unsustainable way
-* **Shippability** - we should do our best to ensure anyone in our community anywhere in the world can receive merch easily
-
-## How do we manufacture merch?
+We have a [merch store](/merch) where our community can purchase high quality PostHog-branded merch. The People & Ops team is responsible for managing merch inventory, fulfillment etc. even though multiple people contribute, and Kendal is the point person.
 
 We use [Brilliant](https://www.brilliantmade.com/) to manufacture and fulfill our merch. Anyone can suggest a product for us to sell or give away. 
 
-1. The Words & Pictures team ultimately decide on what items we wish to sell or give away (including how many and sizes)
-2. Lottie provide assets to produce and order these items in to stock
+The Words & Pictures team ultimately decide on what items we wish to sell or give away (including how many and sizes), and Lottie provide assets to produce and order these items in to stock.
 
 We generally try to launch new products in line with the typical fashion cycle (spring/summer and fall/winter). However, this doesn't mean we can't do fun side quests! If you are looking to do an off-cycle merch run, just make sure you keep Kendal in the loop so the admin side goes smoothly.
 
-## How do we reorder merch?
+## How to reorder merch
 
 All of our permanent merch items are reordered via Brilliant. To do this you need to:
 
@@ -37,21 +22,24 @@ All of our permanent merch items are reordered via Brilliant. To do this you nee
 
 It's really important that we do not allow stock levels to run low as restocking items can take a couple of weeks, so the Ops team will regularly check inventory levels. However if you happen to see anything looking amiss, or you know you want to place a big order for a customer that may affect our stock levels a lot, just let Kendal know ahead of time!
 
-## How do we ship merch?
+## Adding new items
+
+The Website & Vibes team built the integration with Brilliant. It relies on webhooks to check stock levels and sends orders to Brilliant via their API. To add new products to Shopify, [follow these instructions.](/handbook/engineering/posthog-com/merch-store).
+
+## Shipping
 
 Shipping is also done through Brilliant - they can ship to over 200 territories worldwide:
 
 * When orders come in from our Shopify store they will automatically be shipped to the people who order them via Brilliant
 * If you want to ship merch for an event or as part of a giveaway, do this from the Brilliant dashboard.
 
-## How do we sell merch?
-We sell it through our [merch store](/merch) store on Shopify - access details are in 1Password.
-
-## How do we give away merch for free?
+## Merch giveaways
 
 ### Customers
 
 Create a discount code in <PrivateLink url="https://admin.shopify.com/store/posthog/discounts">Shopify admin</PrivateLink>. When creating the discount, select "amount off products" then choose if it is a percentage off or a fixed amount - usually we do fixed amounts of $50 or $100 depending on the purpose. The you can choose "specific collections" and choose "All Products". Limit the use to one use per customer, otherwise it's unlimited free stuff for them, unlimited high cost for us! For code contributions we tend to do $50, with no expiration date.
+
+If you need any help just send a message to the <PrivateLink url="https://posthog.slack.com/archives/C04DWKH7DM3">#merch</PrivateLink> channel and somebody will be happy to help. Merch codes can also be generated directly from within Zendesk.
 
 ### PostHog team
 
@@ -62,14 +50,6 @@ As always, we expect you to use this with restraint and with your own good judge
 ### YC Deal
 
 You can find instructions for this on the dedicated [YC Deal page](/handbook/growth/sales/yc-onboarding).
-
-## How are Brilliant and Shopify connected?
-
-The Website & Vibes team built the integration with Brilliant. It relies on webhooks to check stock levels and sends orders to Brilliant via their API.
-
-## How do I add a new product to Shopify?
-
-[Follow these instructions.](/handbook/engineering/posthog-com/merch-store)
 
 ## Troubleshooting customer orders
 
