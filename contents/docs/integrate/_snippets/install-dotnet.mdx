@@ -16,13 +16,13 @@ var builder = WebApplication.CreateBuilder(args);
 builder.AddPostHog();
 ```
 
-Make sure to configure PostHog with your project API key, instance address, and optional personal API key. For example, in appsettings.json:
+Make sure to configure PostHog with your project API key, instance address, and optional personal API key. For example, in `appsettings.json`:
 
 ```json
 {
   "PostHog": {
-    "ProjectApiKey": "phc_...",
-    "Host": "https://us.i.posthog.com"
+    "ProjectApiKey": "<ph_project_api_key>",
+    "Host": "<ph_client_api_host>"
   }
 }
 ```

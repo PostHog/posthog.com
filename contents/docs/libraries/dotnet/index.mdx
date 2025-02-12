@@ -139,12 +139,10 @@ It's also possible to [run experiments without using feature flags](/docs/experi
 
 ## GeoIP properties
 
-The posthog-dotnet library disregards the server IP, does not add the GeoIP properties, and does not use the values for feature flag evaluations.
+The `posthog-dotnet` library disregards the server IP, does not add the GeoIP properties, and does not use the values for feature flag evaluations.
 
 ## Serverless environments (Azure Functions/Render/Lambda/...)
 
-By default, the library buffers events before sending them to the `/batch` endpoint, for better performance. This can
-lead to lost events in serverless environments, if the .NET process is terminated by the platform before the buffer
-is fully flushed. To avoid this, you can:
+By default, the library buffers events before sending them to the `/batch` endpoint for better performance. This can lead to lost events in serverless environments if the .NET process is terminated by the platform before the buffer is fully flushed. 
 
-- ensure that `await posthog.FlushAsync()` is called after processing every request, by adding a middleware to your server: this allows `posthog.Capture()` to remain asynchronous for better performance.
+To avoid this, call `await posthog.FlushAsync()` after processing every request by adding it as a middleware to your server. This allows `posthog.Capture()` to remain asynchronous for better performance.
