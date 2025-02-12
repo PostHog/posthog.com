@@ -2,9 +2,10 @@ import { CallToAction } from 'components/CallToAction'
 import CloudinaryImage from 'components/CloudinaryImage'
 import Layout from 'components/Layout'
 import { AnimatePresence, motion } from 'framer-motion'
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import Webcam from 'react-webcam'
 import { useInView } from 'react-intersection-observer'
+import { toJpeg } from 'html-to-image'
 
 const aspectRatio = 3 / 4
 const numImages = 4
@@ -167,16 +168,14 @@ const Camera = ({
 const PhotoStrip = ({
     images,
     onRetake,
+    retaking,
+    animate = true,
 }: {
     images: { src?: string; overlay: string }[]
     onRetake?: (index: number) => void
+    retaking?: number
+    animate?: boolean
 }) => {
-    const [retaking, setRetaking] = useState()
-
-    useEffect(() => {
-        setRetaking(undefined)
-    }, [images])
-
     return (
         <div className={`grid items-center gap-2 bg-white rounded-md p-2 h-full`}>
             {Array.from({ length: numImages }).map((_, index) => {
@@ -187,7 +186,9 @@ const PhotoStrip = ({
                             <img
                                 src={image.src}
                                 alt="Photobooth"
-                                className="size-full absolute inset-0 opacity-0 animate-develop duration-1000 animate-delay-1000"
+                                className={`size-full absolute inset-0 ${
+                                    animate ? 'opacity-0 animate-develop duration-1000 animate-delay-1000' : ''
+                                }`}
                             />
                         )}
                         {image?.overlay && (
@@ -198,10 +199,9 @@ const PhotoStrip = ({
                                 imgClassName="size-full"
                             />
                         )}
-                        {image?.src && onRetake && (
+                        {image?.src && onRetake && retaking === undefined && (
                             <button
                                 onClick={() => {
-                                    setRetaking(index)
                                     onRetake(index)
                                 }}
                                 className="absolute inset-0 size-full bg-black/50 text-white text-lg font-bold opacity-0 group-hover:opacity-100 transition-opacity duration-300"
@@ -223,6 +223,8 @@ const VerticalPhotoStrip = ({
     onRetake,
     onSelect,
     disabled,
+    active,
+    retaking,
 }: {
     images: { src?: string; overlay: string }[]
     template: string
@@ -230,10 +232,11 @@ const VerticalPhotoStrip = ({
     onRetake?: (index: number) => void
     onSelect: (template: string) => void
     disabled: boolean
+    active: boolean
+    retaking?: number
 }) => {
     const [ref, inView] = useInView({ threshold: 1 })
     const overlays = templates[template]
-    const active = selectedTemplate === template
 
     useEffect(() => {
         if (inView) {
@@ -252,6 +255,7 @@ const VerticalPhotoStrip = ({
                     overlay: overlays[index],
                 }))}
                 onRetake={onRetake}
+                retaking={retaking}
             />
         </div>
     )
@@ -271,11 +275,13 @@ const PhotoModal = ({
     const [selectedTemplate, setSelectedTemplate] = useState<keyof typeof templates>(template)
     const [overlayIndex, setOverlayIndex] = useState<number>()
     const [overlay, setOverlay] = useState<string>()
+    const [retaking, setRetaking] = useState<number>()
+    const photoStripRef = useRef<HTMLDivElement>(null)
     const [images, setImages] = useState<{ src: string; overlay: string }[]>(
         templates[selectedTemplate].map((overlay) => ({ overlay }))
     )
 
-    const handleCapture = (image: { src: string; overlay: string }) => {
+    const handleCapture = async (image: { src: string; overlay: string }) => {
         const newImages = [...images]
         const retaking = !!newImages[overlayIndex]?.src
         newImages[overlayIndex] = image
@@ -284,7 +290,7 @@ const PhotoModal = ({
         if (retaking || nextIndex >= templates[selectedTemplate].length) {
             setOverlayIndex(undefined)
             setOverlay(undefined)
-            onDone(newImages)
+            setRetaking(undefined)
         } else {
             setOverlayIndex(nextIndex)
         }
@@ -295,7 +301,12 @@ const PhotoModal = ({
     }
 
     const handleRetake = (index: number) => {
+        setRetaking(index)
         setOverlayIndex(index)
+    }
+
+    const handleDone = async () => {
+        onDone(images)
     }
 
     useEffect(() => {
@@ -321,27 +332,65 @@ const PhotoModal = ({
         >
             <div onClick={(e) => e.stopPropagation()} className="h-[70vh]">
                 <div className="flex space-x-2 items-center h-full">
-                    <Camera
-                        onWebcamReady={handleWebcamReady}
-                        onUserReady={() => setCapturing(true)}
-                        onCapture={handleCapture}
-                        overlay={overlay}
-                    />
+                    <div className="relative size-full">
+                        <Camera
+                            onWebcamReady={handleWebcamReady}
+                            onUserReady={() => setCapturing(true)}
+                            onCapture={handleCapture}
+                            overlay={overlay}
+                        />
+                        {images.every((image) => image.src) && (
+                            <div className="absolute inset-0 flex flex-col items-center justify-end py-8 bg-black/50">
+                                <div className="relative pb-4">
+                                    <h1 className="m-0 text-white text-2xl">Click a photo to retake</h1>
+                                    <svg
+                                        fill="none"
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        viewBox="0 0 170 64"
+                                        className="absolute top-0 right-0 translate-x-[38%] translate-y-[-47%] rotate-[28deg]"
+                                    >
+                                        <g clipPath="url(#a)">
+                                            <path
+                                                d="M162.96 28.09c.646-1.39 1.299-2.8 1.806-4.246.102-.287.194-.6.259-.915a.99.99 0 0 0 .036-.205c.118-.717.073-1.45-.358-2.055-.688-.958-2.019-1.094-3.089-1.233a93.837 93.837 0 0 0-4.517-.48 93.874 93.874 0 0 0-9.336-.308c-.808.013-2.149.351-2.366 1.283-.217.93.994 1.275 1.681 1.266a93.537 93.537 0 0 1 7.569.176c1.173.08 2.344.186 3.513.318.5.056 1.004.114 1.501.18l1.004.136c.327-.07.443.036.351.312.02.048.033.097.046.155-15.284 8.622-31.794 15-48.933 18.802-.703.156-1.995.62-1.832 1.57.152.898 1.57 1.028 2.25.88 16.44-3.648 32.331-9.496 47.171-17.428a56.745 56.745 0 0 1-1.087 2.4 68.137 68.137 0 0 1-3.755 6.706c-1.129 1.785 2.9 1.957 3.732.641a70.072 70.072 0 0 0 4.354-7.955Z"
+                                                fill="#F1A82C"
+                                            />
+                                        </g>
+
+                                        <defs>
+                                            <clipPath id="a">
+                                                <path
+                                                    fill="#fff"
+                                                    transform="matrix(.9415 .337 .337 -.9415 106 47.075)"
+                                                    d="M0 0h50v50H0z"
+                                                />
+                                            </clipPath>
+                                        </defs>
+                                    </svg>
+                                </div>
+                                <CallToAction onClick={handleDone} type="outline" size="absurd">
+                                    <span>Done</span>
+                                </CallToAction>
+                            </div>
+                        )}
+                    </div>
                     <div
                         className={`flex flex-col space-y-6 h-screen ${
                             capturing ? 'overflow-y-hidden' : 'overflow-y-auto'
                         } snap-y snap-mandatory py-[70vh] flex-shrink-0`}
                     >
                         {Object.keys(templates).map((key) => (
-                            <VerticalPhotoStrip
-                                disabled={capturing}
-                                key={key}
-                                images={images}
-                                template={key}
-                                selectedTemplate={selectedTemplate}
-                                onRetake={handleRetake}
-                                onSelect={(template) => setSelectedTemplate(template as keyof typeof templates)}
-                            />
+                            <div ref={selectedTemplate === key ? photoStripRef : null} key={key}>
+                                <VerticalPhotoStrip
+                                    active={selectedTemplate === key}
+                                    disabled={capturing}
+                                    images={images}
+                                    template={key}
+                                    selectedTemplate={selectedTemplate}
+                                    onRetake={handleRetake}
+                                    retaking={retaking}
+                                    onSelect={(template) => setSelectedTemplate(template as keyof typeof templates)}
+                                />
+                            </div>
                         ))}
                     </div>
                 </div>
@@ -350,14 +399,64 @@ const PhotoModal = ({
     )
 }
 
-export default function Photobooth(): JSX.Element {
-    const [modalOpen, setModalOpen] = useState(false)
-    const [template, setTemplate] = useState<keyof typeof templates>('love')
-    const [images, setImages] = useState<{ src: string; overlay: string }[][]>([])
+const FinalPhotoStrip = ({ images }: { images: { src: string; overlay: string }[] }) => {
+    console.log(images)
+    const ref = useRef<HTMLDivElement>(null)
+    const [dataURL, setDataURL] = useState<string>()
 
-    const handleDone = (capturedImages: { src: string; overlay: string }[]) => {
-        const newImages = [...images, capturedImages]
-        setImages(newImages)
+    return (
+        <div ref={ref} className="flex space-x-4 items-center h-[80vh]">
+            <motion.div
+                initial={{
+                    opacity: 0,
+                    y: 50,
+                    rotate: -10,
+                    scale: 0.9,
+                }}
+                onAnimationComplete={() => {
+                    toJpeg(ref.current, {
+                        quality: 1,
+                        backgroundColor: 'white',
+                    }).then((dataURL) => {
+                        setDataURL(dataURL)
+                    })
+                }}
+                animate={{
+                    opacity: 1,
+                    y: 0,
+                    rotate: 0,
+                    scale: 1,
+                    transition: {
+                        type: 'spring',
+                        duration: 0.7,
+                        delay: 0.2,
+                        y: {
+                            type: 'spring',
+                            stiffness: 300,
+                            damping: 15,
+                        },
+                    },
+                }}
+                exit={{ opacity: 0 }}
+                className="h-full"
+            >
+                {dataURL ? (
+                    <img src={dataURL} alt="Photobooth" className="size-full" />
+                ) : (
+                    <PhotoStrip animate={false} images={images} />
+                )}
+            </motion.div>
+        </div>
+    )
+}
+
+export default function Photobooth(): JSX.Element {
+    const [modalOpen, setModalOpen] = useState(true)
+    const [template, setTemplate] = useState<keyof typeof templates>('love')
+    const [images, setImages] = useState<{ src: string; overlay: string }[]>([])
+
+    const handleDone = (images: { src: string; overlay: string }[]) => {
+        setImages(images)
         setModalOpen(false)
     }
 
@@ -370,57 +469,8 @@ export default function Photobooth(): JSX.Element {
             </AnimatePresence>
 
             <section className="px-5 py-12">
-                <div className="flex">
-                    <div className="flex flex-col">
-                        <h1 className="text-2xl font-bold">Choose a template</h1>
-                        <div className="flex space-x-4 items-center h-[80vh]">
-                            {Object.entries(templates).map(([key, overlays]) => (
-                                <button
-                                    className="h-full hover:scale-[1.02] transition-transform duration-100 active:scale-100"
-                                    key={key}
-                                    onClick={() => {
-                                        setTemplate(key as keyof typeof templates)
-                                        setModalOpen(true)
-                                    }}
-                                >
-                                    <PhotoStrip images={overlays.map((overlay) => ({ overlay }))} />
-                                </button>
-                            ))}
-                        </div>
-                    </div>
-                    {images.length > 0 && (
-                        <div className="pl-6 ml-6 border-l border-light dark:border-dark flex flex-col">
-                            <h1 className="text-2xl font-bold">Your photos</h1>
-                            <div className="flex space-x-4 items-center h-[80vh]">
-                                {images.map((strip, index) => (
-                                    <motion.div
-                                        key={index}
-                                        initial={{ opacity: 0, y: -200, rotate: -15, scale: 1.2 }}
-                                        animate={{
-                                            opacity: 1,
-                                            y: 0,
-                                            rotate: 0,
-                                            scale: 1,
-                                            transition: {
-                                                type: 'spring',
-                                                duration: 0.7,
-                                                delay: 0.2,
-                                                y: {
-                                                    type: 'spring',
-                                                    stiffness: 300,
-                                                    damping: 15,
-                                                },
-                                            },
-                                        }}
-                                        exit={{ opacity: 0 }}
-                                        className="h-full"
-                                    >
-                                        <PhotoStrip images={strip} />
-                                    </motion.div>
-                                ))}
-                            </div>
-                        </div>
-                    )}
+                <div className="flex justify-center items-center">
+                    {images.length > 0 && <FinalPhotoStrip images={images} />}
                 </div>
             </section>
         </Layout>
