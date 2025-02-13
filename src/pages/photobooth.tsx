@@ -25,6 +25,25 @@ const BasicPreview = ({ src, className = '' }: { src: any; className?: string })
     )
 }
 
+const cardTypes = [
+    { logo: 'https://res.cloudinary.com/dmukukwp6/image/upload/Logo_9de16e50ae.png', className: 'bg-[#FFF6EC]' },
+    {
+        logo: 'https://res.cloudinary.com/dmukukwp6/image/upload/Logo_1_dd78611ddb.png',
+        className: 'bg-[#EC1111] text-white',
+    },
+    {
+        logo: 'https://res.cloudinary.com/dmukukwp6/image/upload/Logo_1_dd78611ddb.png',
+        className: 'bg-dark text-primary-dark',
+    },
+]
+
+const cardImages = {
+    love: 'https://res.cloudinary.com/dmukukwp6/image/upload/Untitled_Artwork_821_077d3abca8.png',
+    love2: 'https://res.cloudinary.com/dmukukwp6/image/upload/Untitled_Artwork_821_077d3abca8.png',
+    vince: 'https://res.cloudinary.com/dmukukwp6/image/upload/Untitled_Artwork_811_fc96a8e723.png',
+    clipart: 'https://res.cloudinary.com/dmukukwp6/image/upload/Untitled_Artwork_821_077d3abca8.png',
+}
+
 const templates: Record<string, Overlay[]> = {
     love: [
         {
@@ -189,12 +208,15 @@ const Camera = ({
     overlay,
     onUserReady,
     onWebcamReady,
+    onNameChange,
 }: {
     onCapture: (image: PhotoBoothImage) => void
     overlay?: Overlay
     onUserReady: () => void
     onWebcamReady: () => void
+    onNameChange: (name: string) => void
 }) => {
+    const [name, setName] = useState<string>()
     const webcamRef = React.useRef<Webcam>(null)
     const [count, setCount] = useState(initialCount)
     const [ready, setReady] = useState(false)
@@ -298,11 +320,29 @@ const Camera = ({
                                 </defs>
                             </svg>
                         </div>
-                        <div className="mb-auto">
-                            <CallToAction onClick={handleReady} type="outline" size="absurd">
+                        <form
+                            className="mb-auto flex flex-col items-center space-y-2 m-0"
+                            onSubmit={(e) => {
+                                e.preventDefault()
+                                if (name?.trim()) {
+                                    handleReady()
+                                }
+                            }}
+                        >
+                            <input
+                                type="text"
+                                className="bg-transparent border-none outline-none focus:ring-0 text-white text-5xl text-center placeholder:text-white/80 mb-1"
+                                placeholder="Enter your name"
+                                onChange={(e) => {
+                                    setName(e.target.value)
+                                    onNameChange(e.target.value)
+                                }}
+                                value={name}
+                            />
+                            <CallToAction disabled={!name?.trim()} onClick={handleReady} type="outline" size="absurd">
                                 <span>Ready?</span>
                             </CallToAction>
-                        </div>
+                        </form>
                     </div>
                 )}
             </div>
@@ -357,7 +397,6 @@ const PhotoStrip = ({
 const VerticalPhotoStrip = ({
     images,
     template,
-    selectedTemplate,
     onRetake,
     onSelect,
     disabled,
@@ -366,7 +405,6 @@ const VerticalPhotoStrip = ({
 }: {
     images: PhotoBoothImage[]
     template: string
-    selectedTemplate: string
     onRetake?: (index: number) => void
     onSelect: (template: string) => void
     disabled: boolean
@@ -403,10 +441,14 @@ const PhotoModal = ({
     onClose,
     template,
     onDone,
+    onSelectTemplate,
+    onNameChange,
 }: {
     onClose: () => void
     template: any
     onDone: (images: PhotoBoothImage[]) => void
+    onSelectTemplate: (template: string) => void
+    onNameChange: (name: string) => void
 }) => {
     const [step, setStep] = useState(0)
     const [capturing, setCapturing] = useState(false)
@@ -474,6 +516,7 @@ const PhotoModal = ({
                             onUserReady={() => setCapturing(true)}
                             onCapture={handleCapture}
                             overlay={overlay}
+                            onNameChange={onNameChange}
                         />
                         {!retaking && images.every((image) => image.src) && (
                             <div className="absolute inset-0 flex flex-col items-center justify-center py-8 bg-black/50">
@@ -526,7 +569,10 @@ const PhotoModal = ({
                                     selectedTemplate={selectedTemplate}
                                     onRetake={handleRetake}
                                     retaking={retaking}
-                                    onSelect={(template) => setSelectedTemplate(template as keyof typeof templates)}
+                                    onSelect={(template) => {
+                                        setSelectedTemplate(template as keyof typeof templates)
+                                        onSelectTemplate(template)
+                                    }}
                                 />
                             </div>
                         ))}
@@ -537,9 +583,16 @@ const PhotoModal = ({
     )
 }
 
-const FinalPhotoStrip = ({ images }: { images: PhotoBoothImage[] }) => {
+const FinalPhotoStrip = ({
+    images,
+    dataURL,
+    onImageReady,
+}: {
+    images: PhotoBoothImage[]
+    dataURL?: string
+    onImageReady: (dataURL: string) => void
+}) => {
     const ref = useRef<HTMLDivElement>(null)
-    const [dataURL, setDataURL] = useState<string>()
 
     return (
         <div ref={ref} className="flex space-x-4 items-center h-[800px]">
@@ -555,7 +608,7 @@ const FinalPhotoStrip = ({ images }: { images: PhotoBoothImage[] }) => {
                         quality: 1,
                         backgroundColor: 'white',
                     }).then((dataURL) => {
-                        setDataURL(dataURL)
+                        onImageReady(dataURL)
                     })
                 }}
                 animate={{
@@ -587,10 +640,126 @@ const FinalPhotoStrip = ({ images }: { images: PhotoBoothImage[] }) => {
     )
 }
 
+const preloadImage = (src: string): Promise<void> => {
+    return new Promise((resolve, reject) => {
+        const img = new Image()
+        img.onload = () => resolve()
+        img.onerror = reject
+        img.src = src
+    })
+}
+
+const Card = ({
+    stripDataURL,
+    template,
+    logo,
+    className,
+    name,
+    index,
+}: {
+    stripDataURL: string
+    template: string
+    logo: string
+    className: string
+    name: string
+    index: number
+}) => {
+    const [dataURL, setDataURL] = useState<string>()
+    const cardRef = useRef<HTMLDivElement>(null)
+
+    useEffect(() => {
+        if (cardRef.current) {
+            toJpeg(cardRef.current, {
+                quality: 1,
+                backgroundColor: 'white',
+            }).then((dataURL) => {
+                setDataURL(dataURL)
+            })
+        }
+    }, [])
+
+    return dataURL ? (
+        <motion.img
+            initial={{
+                opacity: 0,
+                y: 50,
+                rotate: -10,
+                scale: 0.9,
+            }}
+            animate={{
+                opacity: 1,
+                y: 0,
+                rotate: 0,
+                scale: 1,
+                transition: {
+                    type: 'spring',
+                    duration: 0.7,
+                    delay: 0.2 + index * 0.15,
+                    y: {
+                        type: 'spring',
+                        stiffness: 300,
+                        damping: 15,
+                    },
+                },
+            }}
+            src={dataURL}
+            className="w-[800px] aspect-video flex-shrink-0 snap-center first:mt-0 mt-4"
+        />
+    ) : (
+        <div className="relative">
+            <div ref={cardRef} className="relative w-[800px] aspect-video flex-shrink-0 flex snap-center">
+                <div className={`absolute inset-0 bg-accent overflow-hidden ${className}`}>
+                    <img
+                        src={stripDataURL}
+                        alt="Photobooth"
+                        className="absolute w-1/5 rotate-[3deg] left-0 bottom-[5%] translate-x-[122%]"
+                    />
+                    <img
+                        src={stripDataURL}
+                        alt="Photobooth"
+                        className="absolute w-1/5 rotate-[355deg] left-[7%] top-[5%]"
+                    />
+                </div>
+                <div
+                    className={`w-1/2 absolute right-0 px-12 pb-4 pt-12 h-full flex flex-col justify-between items-center ${className}`}
+                >
+                    <CloudinaryImage src={logo} className="w-[90%] relative" />
+                    <CloudinaryImage
+                        src="https://res.cloudinary.com/dmukukwp6/image/upload/Vector_3_08d92bba48.png"
+                        className="w-1/6"
+                    />
+                    <p className="text-6xl font-bold p-0 text-center m-0">{name}</p>
+                    <div className="w-1/2 relative">
+                        <CloudinaryImage src={cardImages[template]} className="w-full !block" />
+                        <div className="w-full h-1 bg-black rounded-full absolute bottom-0" />
+                    </div>
+
+                    <p className="text-sm text-center opacity-90 m-0 !text-inherit">Get yours at posthog.com/love</p>
+                </div>
+            </div>
+            <div className="absolute inset-0 size-full bg-light dark:bg-dark" />
+        </div>
+    )
+}
+
 export default function Photobooth(): JSX.Element {
     const [modalOpen, setModalOpen] = useState(true)
     const [template, setTemplate] = useState<keyof typeof templates>('love')
     const [images, setImages] = useState<PhotoBoothImage[]>([])
+    const [dataURL, setDataURL] = useState<string>()
+    const [name, setName] = useState<string>('')
+
+    useEffect(() => {
+        const preloadAllImages = async () => {
+            try {
+                await Promise.all(Object.values(cardImages).map(preloadImage))
+            } catch (error) {
+                console.error('Error preloading images:', error)
+            }
+        }
+
+        preloadAllImages()
+    }, [])
 
     const handleDone = (images: PhotoBoothImage[]) => {
         setImages(images)
@@ -601,17 +770,42 @@ export default function Photobooth(): JSX.Element {
         <Layout>
             <AnimatePresence>
                 {images.length > 0 ? (
-                    <motion.div
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: 1 }}
-                        exit={{ opacity: 0 }}
-                        className="flex justify-center items-center py-12"
-                    >
-                        <FinalPhotoStrip images={images} />
-                    </motion.div>
+                    <div className="py-12 flex justify-center items-center space-x-2">
+                        <div className="flex flex-col h-[800px] overflow-y-auto snap-y snap-mandatory">
+                            {dataURL ? (
+                                cardTypes.map((cardType, index) => (
+                                    <Card
+                                        key={index}
+                                        stripDataURL={dataURL}
+                                        template={template}
+                                        name={name}
+                                        index={index}
+                                        {...cardType}
+                                    />
+                                ))
+                            ) : (
+                                <div className="w-[800px] aspect-video flex-shrink-0" />
+                            )}
+                        </div>
+
+                        <motion.div
+                            initial={{ opacity: 0 }}
+                            animate={{ opacity: 1 }}
+                            exit={{ opacity: 0 }}
+                            className="flex justify-center items-center flex-shrink-0"
+                        >
+                            <FinalPhotoStrip dataURL={dataURL} onImageReady={setDataURL} images={images} />
+                        </motion.div>
+                    </div>
                 ) : (
                     <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
-                        <PhotoModal onClose={() => setModalOpen(false)} template={template} onDone={handleDone} />
+                        <PhotoModal
+                            onClose={() => setModalOpen(false)}
+                            template={template}
+                            onDone={handleDone}
+                            onSelectTemplate={setTemplate}
+                            onNameChange={setName}
+                        />
                     </motion.div>
                 )}
             </AnimatePresence>
