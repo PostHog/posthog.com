@@ -212,12 +212,14 @@ const Camera = ({
     onUserReady,
     onWebcamReady,
     onNameChange,
+    onVideoRef,
 }: {
     onCapture: (image: PhotoBoothImage) => void
     overlay?: Overlay
     onUserReady: () => void
     onWebcamReady: () => void
     onNameChange: (name: string) => void
+    onVideoRef?: (ref: HTMLVideoElement) => void
 }) => {
     const [name, setName] = useState<string>()
     const webcamRef = React.useRef<Webcam>(null)
@@ -255,8 +257,12 @@ const Camera = ({
         checkCameraPermission()
     }, [])
 
-    const onUserMedia = () => {
+    const onUserMedia = (stream: MediaStream) => {
         onWebcamReady()
+        const video = webcamRef.current?.video
+        if (video && onVideoRef) {
+            onVideoRef(video)
+        }
     }
 
     const onUserMediaError = (err: string | DOMException) => {
@@ -405,11 +411,15 @@ const PhotoStrip = ({
     onRetake,
     retaking,
     animate = true,
+    videoRef,
+    showLivePreview = false,
 }: {
     images: PhotoBoothImage[]
     onRetake?: (index: number) => void
     retaking?: number
     animate?: boolean
+    videoRef?: HTMLVideoElement
+    showLivePreview?: boolean
 }) => {
     return (
         <div className={`grid items-center gap-2 bg-white rounded-md p-2 h-full`}>
@@ -417,6 +427,20 @@ const PhotoStrip = ({
                 const image = images[index]
                 return (
                     <div key={index} className="relative aspect-[3/4] size-full group bg-accent dark:bg-accent-dark">
+                        {showLivePreview && videoRef && (
+                            <video
+                                ref={(el) => {
+                                    if (el) {
+                                        el.srcObject = videoRef.srcObject
+                                        el.play()
+                                    }
+                                }}
+                                className="absolute inset-0 size-full object-cover [transform:scaleX(-1)]"
+                                autoPlay
+                                playsInline
+                                muted
+                            />
+                        )}
                         {retaking !== index && image?.src && (
                             <img
                                 src={image.src}
@@ -452,6 +476,8 @@ const VerticalPhotoStrip = ({
     disabled,
     active,
     retaking,
+    videoRef,
+    showLivePreview,
 }: {
     images: PhotoBoothImage[]
     template: string
@@ -460,6 +486,8 @@ const VerticalPhotoStrip = ({
     disabled: boolean
     active: boolean
     retaking?: number
+    videoRef?: HTMLVideoElement
+    showLivePreview?: boolean
 }) => {
     const [ref, inView] = useInView({ threshold: 1 })
     const overlays = templates[template]
@@ -489,6 +517,8 @@ const VerticalPhotoStrip = ({
                 }))}
                 onRetake={onRetake}
                 retaking={retaking}
+                videoRef={videoRef}
+                showLivePreview={showLivePreview}
             />
         </div>
     )
@@ -516,6 +546,7 @@ const PhotoModal = ({
     const [cameraPermission, setCameraPermission] = useState<boolean>()
     const photoStripRef = useRef<HTMLDivElement>(null)
     const [images, setImages] = useState<PhotoBoothImage[]>(templates[selectedTemplate].map((overlay) => ({ overlay })))
+    const [videoRef, setVideoRef] = useState<HTMLVideoElement>()
 
     const checkCameraPermission = async () => {
         try {
@@ -603,6 +634,7 @@ const PhotoModal = ({
                                 onCapture={handleCapture}
                                 overlay={overlay}
                                 onNameChange={onNameChange}
+                                onVideoRef={setVideoRef}
                             />
                             {!retaking && images.every((image) => image.src) && (
                                 <div className="absolute inset-0 flex flex-col items-center justify-center py-8 bg-black/50">
@@ -654,6 +686,8 @@ const PhotoModal = ({
                                         template={key}
                                         onRetake={handleRetake}
                                         retaking={retaking}
+                                        videoRef={videoRef}
+                                        showLivePreview={!capturing}
                                         onSelect={(template) => {
                                             setSelectedTemplate(template as keyof typeof templates)
                                             onSelectTemplate(template)
