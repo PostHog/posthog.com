@@ -1485,6 +1485,10 @@
         {
             "source": "/docs/settings/role-based-access",
             "destination": "/docs/settings/access-control"
+        },
+        {
+            "source": "/community/profiles/59",
+            "destination": "/community/profiles/29070"
         }
     ]
 }
