@@ -8,7 +8,6 @@ import { useInView } from 'react-intersection-observer'
 import { toJpeg } from 'html-to-image'
 import { IconDownload } from '@posthog/icons'
 
-const aspectRatio = 3 / 4
 const numImages = 4
 const initialCount = 3
 
@@ -313,7 +312,7 @@ const Camera = ({
                             {count}
                         </div>
                     )}
-                    <div className="relative w-auto h-full" style={{ aspectRatio }}>
+                    <div className="relative w-auto h-full">
                         <Webcam
                             ref={webcamRef}
                             audio={false}
@@ -328,7 +327,7 @@ const Camera = ({
                                 width: { min: 640, ideal: 810, max: 1920 },
                                 height: { min: 480, ideal: 1080, max: 1920 },
                             }}
-                            className="size-full object-contain"
+                            className="size-full object-contain aspect-[0.75]"
                             onUserMedia={onUserMedia}
                             onUserMediaError={onUserMediaError}
                         />
