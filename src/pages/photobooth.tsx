@@ -213,6 +213,7 @@ const Camera = ({
     onWebcamReady,
     onNameChange,
     onVideoRef,
+    startImmediately = false,
 }: {
     onCapture: (image: PhotoBoothImage) => void
     overlay?: Overlay
@@ -220,6 +221,7 @@ const Camera = ({
     onWebcamReady: () => void
     onNameChange: (name: string) => void
     onVideoRef?: (ref: HTMLVideoElement) => void
+    startImmediately?: boolean
 }) => {
     const [name, setName] = useState<string>()
     const webcamRef = React.useRef<Webcam>(null)
@@ -256,6 +258,12 @@ const Camera = ({
     useEffect(() => {
         checkCameraPermission()
     }, [])
+
+    useEffect(() => {
+        if (startImmediately) {
+            handleReady()
+        }
+    }, [startImmediately])
 
     const onUserMedia = (stream: MediaStream) => {
         onWebcamReady()
@@ -303,7 +311,7 @@ const Camera = ({
     }, [overlay, ready])
 
     return (
-        <div className={`relative bg-black size-full flex items-center justify-center transition-opacity`}>
+        <div className="relative bg-black size-full flex items-center justify-center transition-opacity">
             {permissionError ? (
                 <div className="absolute inset-0 flex flex-col items-center justify-center bg-black/90 text-white p-8 text-center">
                     <p className="text-xl mb-4">{permissionError}</p>
@@ -318,7 +326,7 @@ const Camera = ({
                             {count}
                         </div>
                     )}
-                    <div className="relative w-auto h-full overflow-hidden">
+                    <div className="relative w-full h-full overflow-hidden">
                         <Webcam
                             ref={webcamRef}
                             audio={false}
@@ -333,71 +341,17 @@ const Camera = ({
                                 width: { min: 640, ideal: 810, max: 1920 },
                                 height: { min: 480, ideal: 1080, max: 1920 },
                             }}
-                            className="size-full object-contain aspect-[0.75] [scale:1.8]"
+                            className="absolute h-full w-full object-cover [transform:scale(1.8)]"
                             onUserMedia={onUserMedia}
                             onUserMediaError={onUserMediaError}
                         />
-                        {overlay?.previewComponent && overlay.previewComponent}
+                        {overlay?.previewComponent && (
+                            <div className="absolute inset-0 flex items-center justify-center">
+                                {overlay.previewComponent}
+                            </div>
+                        )}
                         {count <= 0 && (
                             <div className="absolute size-full bg-white inset-0 opacity-0 animate-fade animate-duration-700" />
-                        )}
-                        {!ready && (
-                            <div className="absolute inset-0 flex flex-col items-center justify-center py-8 bg-black/50">
-                                <div className="relative mb-auto pb-4">
-                                    <h1 className="m-0 text-white text-2xl">Scroll to select a template</h1>
-                                    <svg
-                                        fill="none"
-                                        xmlns="http://www.w3.org/2000/svg"
-                                        viewBox="0 0 170 64"
-                                        className="absolute top-0 right-0 translate-x-[38%] translate-y-[-47%] rotate-[28deg]"
-                                    >
-                                        <g clipPath="url(#a)">
-                                            <path
-                                                d="M162.96 28.09c.646-1.39 1.299-2.8 1.806-4.246.102-.287.194-.6.259-.915a.99.99 0 0 0 .036-.205c.118-.717.073-1.45-.358-2.055-.688-.958-2.019-1.094-3.089-1.233a93.837 93.837 0 0 0-4.517-.48 93.874 93.874 0 0 0-9.336-.308c-.808.013-2.149.351-2.366 1.283-.217.93.994 1.275 1.681 1.266a93.537 93.537 0 0 1 7.569.176c1.173.08 2.344.186 3.513.318.5.056 1.004.114 1.501.18l1.004.136c.327-.07.443.036.351.312.02.048.033.097.046.155-15.284 8.622-31.794 15-48.933 18.802-.703.156-1.995.62-1.832 1.57.152.898 1.57 1.028 2.25.88 16.44-3.648 32.331-9.496 47.171-17.428a56.745 56.745 0 0 1-1.087 2.4 68.137 68.137 0 0 1-3.755 6.706c-1.129 1.785 2.9 1.957 3.732.641a70.072 70.072 0 0 0 4.354-7.955Z"
-                                                fill="#F1A82C"
-                                            />
-                                        </g>
-
-                                        <defs>
-                                            <clipPath id="a">
-                                                <path
-                                                    fill="#fff"
-                                                    transform="matrix(.9415 .337 .337 -.9415 106 47.075)"
-                                                    d="M0 0h50v50H0z"
-                                                />
-                                            </clipPath>
-                                        </defs>
-                                    </svg>
-                                </div>
-                                <form
-                                    className="mb-auto flex flex-col items-center space-y-2 m-0"
-                                    onSubmit={(e) => {
-                                        e.preventDefault()
-                                        if (name?.trim()) {
-                                            handleReady()
-                                        }
-                                    }}
-                                >
-                                    <input
-                                        type="text"
-                                        className="bg-transparent border-none outline-none focus:ring-0 text-white text-5xl text-center placeholder:text-white/30 mb-1"
-                                        placeholder="Enter your name"
-                                        onChange={(e) => {
-                                            setName(e.target.value)
-                                            onNameChange(e.target.value)
-                                        }}
-                                        value={name}
-                                    />
-                                    <CallToAction
-                                        disabled={!name?.trim()}
-                                        onClick={handleReady}
-                                        type="outline"
-                                        size="absurd"
-                                    >
-                                        <span>Ready?</span>
-                                    </CallToAction>
-                                </form>
-                            </div>
                         )}
                     </div>
                 </>
@@ -421,20 +375,28 @@ const PhotoStrip = ({
     videoRef?: HTMLVideoElement
     showLivePreview?: boolean
 }) => {
+    const videoRefs = useRef<(HTMLVideoElement | null)[]>([])
+
+    useEffect(() => {
+        if (showLivePreview && videoRef) {
+            videoRefs.current.forEach((el) => {
+                if (el && videoRef.srcObject) {
+                    el.srcObject = videoRef.srcObject
+                    el.play().catch(console.error)
+                }
+            })
+        }
+    }, [videoRef, showLivePreview])
+
     return (
-        <div className={`grid items-center gap-2 bg-white rounded-md p-2 h-full`}>
+        <div className="grid grid-rows-4 gap-2 bg-white rounded-md p-2 h-full">
             {Array.from({ length: numImages }).map((_, index) => {
                 const image = images[index]
                 return (
-                    <div key={index} className="relative aspect-[3/4] size-full group bg-accent dark:bg-accent-dark">
-                        {showLivePreview && videoRef && (
+                    <div key={index} className="relative aspect-[3/4] w-full bg-accent dark:bg-accent-dark">
+                        {showLivePreview && (
                             <video
-                                ref={(el) => {
-                                    if (el) {
-                                        el.srcObject = videoRef.srcObject
-                                        el.play()
-                                    }
-                                }}
+                                ref={(el) => (videoRefs.current[index] = el)}
                                 className="absolute inset-0 size-full object-cover [transform:scaleX(-1)]"
                                 autoPlay
                                 playsInline
@@ -450,7 +412,9 @@ const PhotoStrip = ({
                                 }`}
                             />
                         )}
-                        {image?.overlay?.stripComponent && image.overlay.stripComponent}
+                        {image?.overlay?.stripComponent && (
+                            <div className="absolute inset-0">{image.overlay.stripComponent}</div>
+                        )}
                         {image?.src && onRetake && retaking === undefined && images.every((image) => image.src) && (
                             <button
                                 onClick={() => {
@@ -524,29 +488,99 @@ const VerticalPhotoStrip = ({
     )
 }
 
+const TemplateSelector = ({
+    onSelect,
+    videoRef,
+}: {
+    onSelect: (template: string) => void
+    videoRef?: HTMLVideoElement
+}) => {
+    return (
+        <div className="flex justify-center items-stretch gap-8 p-4 max-w-7xl mx-auto">
+            {Object.keys(templates).map((key) => (
+                <button
+                    key={key}
+                    onClick={() => onSelect(key)}
+                    className="w-[200px] hover:scale-105 transition-transform cursor-pointer"
+                >
+                    <div className="h-[70vh]">
+                        <PhotoStrip
+                            images={templates[key].map((overlay) => ({ overlay }))}
+                            videoRef={videoRef}
+                            showLivePreview={true}
+                        />
+                    </div>
+                </button>
+            ))}
+        </div>
+    )
+}
+
+const NameInput = ({ onSubmit, onBack }: { onSubmit: (name: string) => void; onBack: () => void }) => {
+    const [name, setName] = useState('')
+
+    const handleSubmit = (e?: React.FormEvent) => {
+        e?.preventDefault()
+        if (name.trim()) {
+            onSubmit(name.trim())
+        }
+    }
+
+    const handleKeyDown = (e: React.KeyboardEvent) => {
+        if (e.key === 'Enter' && name.trim()) {
+            handleSubmit()
+        }
+    }
+
+    return (
+        <div className="flex flex-col items-center justify-center">
+            <h2 className="text-3xl">What's your name?</h2>
+            <form className="flex flex-col items-center space-y-4" onSubmit={handleSubmit}>
+                <input
+                    type="text"
+                    className="bg-white dark:bg-accent-dark rounded border border-light dark:border-dark outline-none focus:ring-0 text-center w-full"
+                    placeholder="Enter your name"
+                    value={name}
+                    onChange={(e) => setName(e.target.value)}
+                    onKeyDown={handleKeyDown}
+                    autoFocus
+                />
+                <div className="flex gap-4">
+                    <CallToAction onClick={onBack} type="outline">
+                        <span>Back</span>
+                    </CallToAction>
+                    <CallToAction disabled={!name.trim()} type="primary" onClick={() => handleSubmit()}>
+                        <span>Let's take some photos</span>
+                    </CallToAction>
+                </div>
+            </form>
+        </div>
+    )
+}
+
 const PhotoModal = ({
     onClose,
-    template,
+    template: initialTemplate,
     onDone,
     onSelectTemplate,
     onNameChange,
 }: {
     onClose: () => void
-    template: any
+    template: string
     onDone: (images: PhotoBoothImage[]) => void
     onSelectTemplate: (template: string) => void
     onNameChange: (name: string) => void
 }) => {
-    const [step, setStep] = useState(0)
+    const [step, setStep] = useState<'select' | 'name' | 'capture'>('select')
+    const [selectedTemplate, setSelectedTemplate] = useState<keyof typeof templates>(initialTemplate)
     const [capturing, setCapturing] = useState(false)
-    const [selectedTemplate, setSelectedTemplate] = useState<keyof typeof templates>(template)
     const [overlayIndex, setOverlayIndex] = useState<number>()
     const [overlay, setOverlay] = useState<Overlay>()
     const [retaking, setRetaking] = useState<number>()
     const [cameraPermission, setCameraPermission] = useState<boolean>()
-    const photoStripRef = useRef<HTMLDivElement>(null)
-    const [images, setImages] = useState<PhotoBoothImage[]>(templates[selectedTemplate].map((overlay) => ({ overlay })))
     const [videoRef, setVideoRef] = useState<HTMLVideoElement>()
+    const [images, setImages] = useState<PhotoBoothImage[]>(templates[selectedTemplate].map((overlay) => ({ overlay })))
+    const [cameraReady, setCameraReady] = useState(false)
 
     const checkCameraPermission = async () => {
         try {
@@ -567,10 +601,14 @@ const PhotoModal = ({
         newImages[overlayIndex] = image
         setImages(newImages)
         const nextIndex = overlayIndex !== undefined ? overlayIndex + 1 : 0
+
         if (retaking || nextIndex >= templates[selectedTemplate].length) {
             setOverlayIndex(undefined)
             setOverlay(undefined)
             setRetaking(undefined)
+            if (!retaking) {
+                handleDone()
+            }
         } else {
             setOverlayIndex(nextIndex)
         }
@@ -602,6 +640,39 @@ const PhotoModal = ({
         }
     }, [selectedTemplate])
 
+    const handleTemplateSelect = (template: string) => {
+        setSelectedTemplate(template as keyof typeof templates)
+        onSelectTemplate(template)
+        setStep('name')
+    }
+
+    const startCountdown = () => {
+        setOverlayIndex(0)
+        setOverlay(templates[selectedTemplate][0])
+        setCapturing(true)
+    }
+
+    const handleNameSubmit = (name: string) => {
+        onNameChange(name)
+        setStep('capture')
+        startCountdown()
+    }
+
+    const handleVideoRef = (ref: HTMLVideoElement) => {
+        setVideoRef(ref)
+        setCameraReady(true)
+    }
+
+    const handleHiddenCameraCapture = () => {
+        // This camera is only used for preview, so we ignore capture events
+        setCameraReady(true)
+    }
+
+    const handleHiddenCameraReady = () => {
+        // When the hidden camera is ready, we can show the template selector
+        setCameraReady(true)
+    }
+
     return (
         <motion.div
             className="flex justify-center items-center overflow-hidden"
@@ -626,77 +697,48 @@ const PhotoModal = ({
                 </div>
             ) : cameraPermission === true ? (
                 <div onClick={(e) => e.stopPropagation()} className="h-[70vh]">
-                    <div className="flex space-x-2 items-center h-full">
-                        <div className="relative size-full">
-                            <Camera
-                                onWebcamReady={handleWebcamReady}
-                                onUserReady={() => setCapturing(true)}
-                                onCapture={handleCapture}
-                                overlay={overlay}
-                                onNameChange={onNameChange}
-                                onVideoRef={setVideoRef}
-                            />
-                            {!retaking && images.every((image) => image.src) && (
-                                <div className="absolute inset-0 flex flex-col items-center justify-center py-8 bg-black/50">
-                                    <div className="relative pb-4 mb-auto">
-                                        <h1 className="m-0 text-white text-2xl">Click a photo to retake</h1>
-                                        <svg
-                                            fill="none"
-                                            xmlns="http://www.w3.org/2000/svg"
-                                            viewBox="0 0 170 64"
-                                            className="absolute top-0 right-0 translate-x-[38%] translate-y-[-47%] rotate-[28deg]"
-                                        >
-                                            <g clipPath="url(#a)">
-                                                <path
-                                                    d="M162.96 28.09c.646-1.39 1.299-2.8 1.806-4.246.102-.287.194-.6.259-.915a.99.99 0 0 0 .036-.205c.118-.717.073-1.45-.358-2.055-.688-.958-2.019-1.094-3.089-1.233a93.837 93.837 0 0 0-4.517-.48 93.874 93.874 0 0 0-9.336-.308c-.808.013-2.149.351-2.366 1.283-.217.93.994 1.275 1.681 1.266a93.537 93.537 0 0 1 7.569.176c1.173.08 2.344.186 3.513.318.5.056 1.004.114 1.501.18l1.004.136c.327-.07.443.036.351.312.02.048.033.097.046.155-15.284 8.622-31.794 15-48.933 18.802-.703.156-1.995.62-1.832 1.57.152.898 1.57 1.028 2.25.88 16.44-3.648 32.331-9.496 47.171-17.428a56.745 56.745 0 0 1-1.087 2.4 68.137 68.137 0 0 1-3.755 6.706c-1.129 1.785 2.9 1.957 3.732.641a70.072 70.072 0 0 0 4.354-7.955Z"
-                                                    fill="#F1A82C"
-                                                />
-                                            </g>
+                    {step === 'select' && (
+                        <>
+                            <div className="hidden">
+                                <Camera
+                                    onWebcamReady={handleWebcamReady}
+                                    onUserReady={handleHiddenCameraReady}
+                                    onCapture={handleHiddenCameraCapture}
+                                    onVideoRef={handleVideoRef}
+                                />
+                            </div>
+                            {cameraReady && <TemplateSelector onSelect={handleTemplateSelect} videoRef={videoRef} />}
+                        </>
+                    )}
 
-                                            <defs>
-                                                <clipPath id="a">
-                                                    <path
-                                                        fill="#fff"
-                                                        transform="matrix(.9415 .337 .337 -.9415 106 47.075)"
-                                                        d="M0 0h50v50H0z"
-                                                    />
-                                                </clipPath>
-                                            </defs>
-                                        </svg>
-                                    </div>
-                                    <div className="mt-auto">
-                                        <CallToAction onClick={handleDone} type="outline" size="absurd">
-                                            <span>Done</span>
-                                        </CallToAction>
-                                    </div>
-                                </div>
-                            )}
-                        </div>
-                        <div
-                            className={`flex flex-col space-y-4 h-screen ${
-                                capturing ? 'overflow-y-hidden' : 'overflow-y-auto'
-                            } snap-y snap-mandatory py-[70vh] flex-shrink-0 z-[999999]`}
-                        >
-                            {Object.keys(templates).map((key) => (
-                                <div ref={selectedTemplate === key ? photoStripRef : null} key={key}>
-                                    <VerticalPhotoStrip
-                                        active={selectedTemplate === key}
-                                        disabled={capturing}
+                    {step === 'name' && <NameInput onSubmit={handleNameSubmit} onBack={() => setStep('select')} />}
+
+                    {step === 'capture' && (
+                        <div className="flex gap-8 items-center justify-center h-full w-full max-w-7xl mx-auto px-4">
+                            <div className="h-full aspect-[3/4] flex-shrink-0">
+                                <Camera
+                                    onWebcamReady={handleWebcamReady}
+                                    onUserReady={() => setCapturing(true)}
+                                    onCapture={handleCapture}
+                                    overlay={overlay}
+                                    onVideoRef={setVideoRef}
+                                    onNameChange={onNameChange}
+                                    startImmediately={true}
+                                />
+                            </div>
+                            <div className="h-[70vh] overflow-y-auto w-[200px] flex-shrink-0">
+                                <div className="h-full">
+                                    <PhotoStrip
                                         images={images}
-                                        template={key}
                                         onRetake={handleRetake}
                                         retaking={retaking}
                                         videoRef={videoRef}
                                         showLivePreview={!capturing}
-                                        onSelect={(template) => {
-                                            setSelectedTemplate(template as keyof typeof templates)
-                                            onSelectTemplate(template)
-                                        }}
                                     />
                                 </div>
-                            ))}
+                            </div>
                         </div>
-                    </div>
+                    )}
                 </div>
             ) : (
                 <div className="bg-accent dark:bg-accent-dark pt-4 px-8 rounded border border-light dark:border-dark max-w-xl flex flex-col items-center">
@@ -906,11 +948,6 @@ export default function Photobooth(): JSX.Element {
     return (
         <Layout>
             <div className="py-12">
-                <h1 className="text-3xl font-bold px-4 text-center">Welcome to the PostHog photo booth</h1>
-                <p className="text-center text-[15px]">
-                    We've assembled four Valentines-themed photo booth templates. Choose your favorite and get to
-                    snappin'.
-                </p>
                 <AnimatePresence>
                     {images.length > 0 ? (
                         <div className="flex justify-center items-center space-x-2">
@@ -942,6 +979,11 @@ export default function Photobooth(): JSX.Element {
                         </div>
                     ) : (
                         <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
+                            <h1 className="text-3xl font-bold px-4 text-center">Welcome to the PostHog photo booth</h1>
+                            <p className="text-center text-[15px]">
+                                We've assembled four Valentines-themed photo booth templates. Choose your favorite and
+                                get to snappin'.
+                            </p>
                             <PhotoModal
                                 onClose={() => setModalOpen(false)}
                                 template={template}
