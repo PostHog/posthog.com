@@ -1223,27 +1223,32 @@ export const docsMenu = {
                     name: 'New to PostHog?',
                 },
                 {
-                    name: 'Analytics basics',
-                    url: '/docs/analytics-intro/winning-on-purpose',
-                    icon: 'IconFlag',
-                    children: [
-                        {
-                            name: 'Winning on purpose',
-                            url: '/docs/analytics-intro/winning-on-purpose',
-                        },
-                        {
-                            name: 'Measuring activation',
-                            url: '/docs/analytics-intro/activation',
-                        },
-                        {
-                            name: 'Tracking retention',
-                            url: '/docs/analytics-intro/retention',
-                        },
-                        {
-                            name: 'Capturing revenue',
-                            url: '/docs/analytics-intro/revenue',
-                        },
-                    ],
+                    name: 'Winning on purpose',
+                    url: '/docs/new-to-posthog/winning-on-purpose',
+                    icon: 'IconCrown',
+                },
+                {
+                    name: 'Measuring activation',
+                    url: '/docs/new-to-posthog/activation',
+                    icon: 'IconLightBulb',
+                },
+                {
+                    name: 'Tracking retention',
+                    url: '/docs/new-to-posthog/retention',
+                    icon: 'IconLineGraph',
+                },
+                {
+                    name: 'Capturing revenue',
+                    url: '/docs/new-to-posthog/revenue',
+                    icon: 'IconHandMoney',
+                },
+                {
+                    name: 'Understanding these docs',
+                    url: '/docs/new-to-posthog/understand-posthog',
+                    icon: 'IconNotebook',
+                },
+                {
+                    name: 'Integration',
                 },
                 {
                     name: 'Install and configure',

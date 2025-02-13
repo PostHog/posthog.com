@@ -1,0 +1,41 @@
+---
+title: Understanding PostHog
+---
+
+PostHog is a lot of power, but we should review the key ideas about how it all works.
+
+## Properties
+
+Properties show up on many PostHog data types. They're a great way to sift through large volumes of user activity, segment behavior and users, and otherwise make sense of your data.
+
+## Events
+
+[Events](/docs/data/events) are the breadcrumbs of user activity.
+
+They show you what happened, when it happened, and who it happened to.
+
+Events have properties, and you can use these to filter and query them. PostHog will gather several automatically, and you can add your own as well.
+
+## Actions
+
+[Actions](/docs/data/actions) are a layer on top of events. Define actions to aggregate multiple events, extract a specific kind of event according to its properties, or give an event a more useful name.
+
+## Sessions
+
+A [session](/docs/data/sessions) is a stream of events corresponding to a specfic usage session of a product. Sessions have properties, and you can query them.
+
+## Persons
+
+This is a real [person](/docs/data/persons) who uses a product. A person has a stream of events associated with their profile, along with a history of sessions. Like events and sessions, they have properties. Some are automatically gathered, and product-specific properties can be attached as part of an integration.
+
+## Cohorts
+
+A [cohort](/docs/data/cohorts) gathers person profiles. You can create cohorts manually, or generate them by building queries against person properties or events.
+
+## Groups
+
+[Groups](/docs/data/groups) enable reporting on subsets of your users, for example, all users from a given company using a product.
+
+## Data model
+
+Learn more about the [data model](/docs/how-posthog-works/data-model) to understand more about data types and how they're related.
