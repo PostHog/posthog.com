@@ -102,9 +102,13 @@ git clone https://github.com/PostHog/posthog && cd posthog/
 
 ### Instant setup
 
-You can set your development environment up instantly using [Flox](https://flox.dev/). Flox is a dev environment manager, which takes care of the whole dependency graph needed to develop PostHog – all declared in the repo's `.flox/manifest.toml`. To get this environment going:
+You can set your development environment up instantly using [Flox](https://flox.dev/).
 
-1. Install Flox (plus `ruff` and `rustup` for pre-commit checks outside of the Flox env).
+Flox is a development environment manager – it ensures we all have the same right system-level dependencies when developing PostHog. It's pretty much an npm for runtimes and libraries: `.flox/env/manifest.toml` is like `package.json`, `.flox/env/manifest.lock` is akin to `package-lock.json`, and `.flox/cache/` resembles `node_modules/`.
+
+To get PostHog running in a dev environment:
+
+1. Install Flox (plus `ruff` and `rustup` for pre-commit checks outside the Flox env).
 
     ```bash
     brew install flox ruff rustup && rustup-init && rustup default stable
@@ -116,9 +120,15 @@ You can set your development environment up instantly using [Flox](https://flox.
     flox activate
     ```
 
-This gets you a fully fledged environment, with its executables and linked libraries stored under `.flox/`. You should now be seeing instructions for migrations and running the app.
+    This gets you a fully fledged environment, with linked packages stored under `.flox/`. Might take a moment to run the first time, as dependencies get downloaded.
 
-That's it! You can now change PostHog in any way you want. See [Project structure](/handbook/engineering/project-structure) for an intro to the repository's contents. To commit changes, create a new branch based on `master` for your intended change, and develop away.
+    > Note on app dependencies: Python requirements get updated every time the environment is activated (`uv pip install` is lightning fast). JS dependencies only get installed if `node_modules/` is not present (`pnpm install` still takes a couple lengthy seconds). Dependencies for other languages currently don't get auto-installed.
+
+3. After successful environment activation, just look at its welcome message in the terminal. It contains all the commands for running the stack. Run those commands in the suggested order.
+
+This is it – you should be seeing the PostHog app at <a href="http://localhost:8010" target="_blank">http://localhost:8010</a>.
+
+You can now change PostHog in any way you want. See [Project structure](/handbook/engineering/project-structure) for an intro to the repository's contents. To commit changes, create a new branch based on `master` for your intended change, and develop away.
 
 ### Manual setup
 
@@ -369,7 +379,9 @@ To get some practical test data into your brand-new instance of PostHog, run `DE
 
 #### 7. Develop
 
-That's it! You can now change PostHog in any way you want. See [Project structure](/handbook/engineering/project-structure) for an intro to the repository's contents. To commit changes, create a new branch based on `master` for your intended change, and develop away.
+This is it – you should be seeing the PostHog app at <a href="http://localhost:8010" target="_blank">http://localhost:8010</a>.
+
+You can now change PostHog in any way you want. See [Project structure](/handbook/engineering/project-structure) for an intro to the repository's contents. To commit changes, create a new branch based on `master` for your intended change, and develop away.
 
 ## Testing
 
