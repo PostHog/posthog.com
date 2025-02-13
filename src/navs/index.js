@@ -1243,7 +1243,7 @@ export const docsMenu = {
                     icon: 'IconHandMoney',
                 },
                 {
-                    name: 'Understanding these docs',
+                    name: 'Understanding PostHog',
                     url: '/docs/new-to-posthog/understand-posthog',
                     icon: 'IconNotebook',
                 },
