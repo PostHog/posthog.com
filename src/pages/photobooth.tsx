@@ -223,6 +223,7 @@ const Camera = ({
     const webcamRef = React.useRef<Webcam>(null)
     const [count, setCount] = useState(initialCount)
     const [ready, setReady] = useState(false)
+    const [permissionError, setPermissionError] = useState<string>()
 
     const startCountdown = () => {
         const interval = setInterval(() => {
@@ -235,8 +236,37 @@ const Camera = ({
         }, 1000)
     }
 
+    const checkCameraPermission = async () => {
+        try {
+            await navigator.mediaDevices.getUserMedia({ video: true })
+            setPermissionError(undefined)
+        } catch (err) {
+            if (err instanceof Error) {
+                setPermissionError(
+                    err.name === 'NotAllowedError'
+                        ? 'Camera access was denied. Please enable camera access to use the photobooth.'
+                        : 'Unable to access camera. Please make sure your camera is connected and try again.'
+                )
+            }
+        }
+    }
+
+    useEffect(() => {
+        checkCameraPermission()
+    }, [])
+
     const onUserMedia = () => {
         onWebcamReady()
+    }
+
+    const onUserMediaError = (err: string | DOMException) => {
+        if (err instanceof DOMException) {
+            setPermissionError(
+                err.name === 'NotAllowedError'
+                    ? 'Camera access was denied. Please enable camera access to use the photobooth.'
+                    : 'Unable to access camera. Please make sure your camera is connected and try again.'
+            )
+        }
     }
 
     const capture = React.useCallback(() => {
@@ -268,87 +298,104 @@ const Camera = ({
 
     return (
         <div className={`relative bg-black size-full flex items-center justify-center transition-opacity`}>
-            {ready && count > 0 && (
-                <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 text-white text-[50vh] font-bold z-50 opacity-50">
-                    {count}
+            {permissionError ? (
+                <div className="absolute inset-0 flex flex-col items-center justify-center bg-black/90 text-white p-8 text-center">
+                    <p className="text-xl mb-4">{permissionError}</p>
+                    <CallToAction onClick={checkCameraPermission} type="outline" size="absurd">
+                        <span>Try Again</span>
+                    </CallToAction>
                 </div>
-            )}
-            <div className="relative w-auto h-full" style={{ aspectRatio }}>
-                <Webcam
-                    ref={webcamRef}
-                    audio={false}
-                    screenshotFormat="image/jpeg"
-                    mirrored
-                    forceScreenshotSourceSize
-                    screenshotQuality={1}
-                    imageSmoothing={false}
-                    videoConstraints={{
-                        facingMode: 'user',
-                        aspectRatio: 0.75,
-                        width: { min: 640, ideal: 810, max: 1920 },
-                        height: { min: 480, ideal: 1080, max: 1920 },
-                    }}
-                    className="size-full object-contain"
-                    onUserMedia={onUserMedia}
-                />
-                {overlay?.previewComponent && overlay.previewComponent}
-                {count <= 0 && (
-                    <div className="absolute size-full bg-white inset-0 opacity-0 animate-fade animate-duration-700" />
-                )}
-                {!ready && (
-                    <div className="absolute inset-0 flex flex-col items-center justify-center py-8 bg-black/50">
-                        <div className="relative mb-auto pb-4">
-                            <h1 className="m-0 text-white text-2xl">Scroll to select a template</h1>
-                            <svg
-                                fill="none"
-                                xmlns="http://www.w3.org/2000/svg"
-                                viewBox="0 0 170 64"
-                                className="absolute top-0 right-0 translate-x-[38%] translate-y-[-47%] rotate-[28deg]"
-                            >
-                                <g clipPath="url(#a)">
-                                    <path
-                                        d="M162.96 28.09c.646-1.39 1.299-2.8 1.806-4.246.102-.287.194-.6.259-.915a.99.99 0 0 0 .036-.205c.118-.717.073-1.45-.358-2.055-.688-.958-2.019-1.094-3.089-1.233a93.837 93.837 0 0 0-4.517-.48 93.874 93.874 0 0 0-9.336-.308c-.808.013-2.149.351-2.366 1.283-.217.93.994 1.275 1.681 1.266a93.537 93.537 0 0 1 7.569.176c1.173.08 2.344.186 3.513.318.5.056 1.004.114 1.501.18l1.004.136c.327-.07.443.036.351.312.02.048.033.097.046.155-15.284 8.622-31.794 15-48.933 18.802-.703.156-1.995.62-1.832 1.57.152.898 1.57 1.028 2.25.88 16.44-3.648 32.331-9.496 47.171-17.428a56.745 56.745 0 0 1-1.087 2.4 68.137 68.137 0 0 1-3.755 6.706c-1.129 1.785 2.9 1.957 3.732.641a70.072 70.072 0 0 0 4.354-7.955Z"
-                                        fill="#F1A82C"
-                                    />
-                                </g>
-
-                                <defs>
-                                    <clipPath id="a">
-                                        <path
-                                            fill="#fff"
-                                            transform="matrix(.9415 .337 .337 -.9415 106 47.075)"
-                                            d="M0 0h50v50H0z"
-                                        />
-                                    </clipPath>
-                                </defs>
-                            </svg>
+            ) : (
+                <>
+                    {ready && count > 0 && (
+                        <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 text-white text-[50vh] font-bold z-50 opacity-50">
+                            {count}
                         </div>
-                        <form
-                            className="mb-auto flex flex-col items-center space-y-2 m-0"
-                            onSubmit={(e) => {
-                                e.preventDefault()
-                                if (name?.trim()) {
-                                    handleReady()
-                                }
+                    )}
+                    <div className="relative w-auto h-full" style={{ aspectRatio }}>
+                        <Webcam
+                            ref={webcamRef}
+                            audio={false}
+                            screenshotFormat="image/jpeg"
+                            mirrored
+                            forceScreenshotSourceSize
+                            screenshotQuality={1}
+                            imageSmoothing={false}
+                            videoConstraints={{
+                                facingMode: 'user',
+                                aspectRatio: 0.75,
+                                width: { min: 640, ideal: 810, max: 1920 },
+                                height: { min: 480, ideal: 1080, max: 1920 },
                             }}
-                        >
-                            <input
-                                type="text"
-                                className="bg-transparent border-none outline-none focus:ring-0 text-white text-5xl text-center placeholder:text-white/30 mb-1"
-                                placeholder="Enter your name"
-                                onChange={(e) => {
-                                    setName(e.target.value)
-                                    onNameChange(e.target.value)
-                                }}
-                                value={name}
-                            />
-                            <CallToAction disabled={!name?.trim()} onClick={handleReady} type="outline" size="absurd">
-                                <span>Ready?</span>
-                            </CallToAction>
-                        </form>
+                            className="size-full object-contain"
+                            onUserMedia={onUserMedia}
+                            onUserMediaError={onUserMediaError}
+                        />
+                        {overlay?.previewComponent && overlay.previewComponent}
+                        {count <= 0 && (
+                            <div className="absolute size-full bg-white inset-0 opacity-0 animate-fade animate-duration-700" />
+                        )}
+                        {!ready && (
+                            <div className="absolute inset-0 flex flex-col items-center justify-center py-8 bg-black/50">
+                                <div className="relative mb-auto pb-4">
+                                    <h1 className="m-0 text-white text-2xl">Scroll to select a template</h1>
+                                    <svg
+                                        fill="none"
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        viewBox="0 0 170 64"
+                                        className="absolute top-0 right-0 translate-x-[38%] translate-y-[-47%] rotate-[28deg]"
+                                    >
+                                        <g clipPath="url(#a)">
+                                            <path
+                                                d="M162.96 28.09c.646-1.39 1.299-2.8 1.806-4.246.102-.287.194-.6.259-.915a.99.99 0 0 0 .036-.205c.118-.717.073-1.45-.358-2.055-.688-.958-2.019-1.094-3.089-1.233a93.837 93.837 0 0 0-4.517-.48 93.874 93.874 0 0 0-9.336-.308c-.808.013-2.149.351-2.366 1.283-.217.93.994 1.275 1.681 1.266a93.537 93.537 0 0 1 7.569.176c1.173.08 2.344.186 3.513.318.5.056 1.004.114 1.501.18l1.004.136c.327-.07.443.036.351.312.02.048.033.097.046.155-15.284 8.622-31.794 15-48.933 18.802-.703.156-1.995.62-1.832 1.57.152.898 1.57 1.028 2.25.88 16.44-3.648 32.331-9.496 47.171-17.428a56.745 56.745 0 0 1-1.087 2.4 68.137 68.137 0 0 1-3.755 6.706c-1.129 1.785 2.9 1.957 3.732.641a70.072 70.072 0 0 0 4.354-7.955Z"
+                                                fill="#F1A82C"
+                                            />
+                                        </g>
+
+                                        <defs>
+                                            <clipPath id="a">
+                                                <path
+                                                    fill="#fff"
+                                                    transform="matrix(.9415 .337 .337 -.9415 106 47.075)"
+                                                    d="M0 0h50v50H0z"
+                                                />
+                                            </clipPath>
+                                        </defs>
+                                    </svg>
+                                </div>
+                                <form
+                                    className="mb-auto flex flex-col items-center space-y-2 m-0"
+                                    onSubmit={(e) => {
+                                        e.preventDefault()
+                                        if (name?.trim()) {
+                                            handleReady()
+                                        }
+                                    }}
+                                >
+                                    <input
+                                        type="text"
+                                        className="bg-transparent border-none outline-none focus:ring-0 text-white text-5xl text-center placeholder:text-white/30 mb-1"
+                                        placeholder="Enter your name"
+                                        onChange={(e) => {
+                                            setName(e.target.value)
+                                            onNameChange(e.target.value)
+                                        }}
+                                        value={name}
+                                    />
+                                    <CallToAction
+                                        disabled={!name?.trim()}
+                                        onClick={handleReady}
+                                        type="outline"
+                                        size="absurd"
+                                    >
+                                        <span>Ready?</span>
+                                    </CallToAction>
+                                </form>
+                            </div>
+                        )}
                     </div>
-                )}
-            </div>
+                </>
+            )}
         </div>
     )
 }
@@ -461,8 +508,22 @@ const PhotoModal = ({
     const [overlayIndex, setOverlayIndex] = useState<number>()
     const [overlay, setOverlay] = useState<Overlay>()
     const [retaking, setRetaking] = useState<number>()
+    const [cameraPermission, setCameraPermission] = useState<boolean>()
     const photoStripRef = useRef<HTMLDivElement>(null)
     const [images, setImages] = useState<PhotoBoothImage[]>(templates[selectedTemplate].map((overlay) => ({ overlay })))
+
+    const checkCameraPermission = async () => {
+        try {
+            await navigator.mediaDevices.getUserMedia({ video: true })
+            setCameraPermission(true)
+        } catch (err) {
+            setCameraPermission(false)
+        }
+    }
+
+    useEffect(() => {
+        checkCameraPermission()
+    }, [])
 
     const handleCapture = async (image: PhotoBoothImage) => {
         const newImages = [...images]
@@ -513,77 +574,91 @@ const PhotoModal = ({
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
         >
-            <div onClick={(e) => e.stopPropagation()} className="h-[70vh]">
-                <div className="flex space-x-2 items-center h-full">
-                    <div className="relative size-full">
-                        <Camera
-                            onWebcamReady={handleWebcamReady}
-                            onUserReady={() => setCapturing(true)}
-                            onCapture={handleCapture}
-                            overlay={overlay}
-                            onNameChange={onNameChange}
-                        />
-                        {!retaking && images.every((image) => image.src) && (
-                            <div className="absolute inset-0 flex flex-col items-center justify-center py-8 bg-black/50">
-                                <div className="relative pb-4 mb-auto">
-                                    <h1 className="m-0 text-white text-2xl">Click a photo to retake</h1>
-                                    <svg
-                                        fill="none"
-                                        xmlns="http://www.w3.org/2000/svg"
-                                        viewBox="0 0 170 64"
-                                        className="absolute top-0 right-0 translate-x-[38%] translate-y-[-47%] rotate-[28deg]"
-                                    >
-                                        <g clipPath="url(#a)">
-                                            <path
-                                                d="M162.96 28.09c.646-1.39 1.299-2.8 1.806-4.246.102-.287.194-.6.259-.915a.99.99 0 0 0 .036-.205c.118-.717.073-1.45-.358-2.055-.688-.958-2.019-1.094-3.089-1.233a93.837 93.837 0 0 0-4.517-.48 93.874 93.874 0 0 0-9.336-.308c-.808.013-2.149.351-2.366 1.283-.217.93.994 1.275 1.681 1.266a93.537 93.537 0 0 1 7.569.176c1.173.08 2.344.186 3.513.318.5.056 1.004.114 1.501.18l1.004.136c.327-.07.443.036.351.312.02.048.033.097.046.155-15.284 8.622-31.794 15-48.933 18.802-.703.156-1.995.62-1.832 1.57.152.898 1.57 1.028 2.25.88 16.44-3.648 32.331-9.496 47.171-17.428a56.745 56.745 0 0 1-1.087 2.4 68.137 68.137 0 0 1-3.755 6.706c-1.129 1.785 2.9 1.957 3.732.641a70.072 70.072 0 0 0 4.354-7.955Z"
-                                                fill="#F1A82C"
-                                            />
-                                        </g>
-
-                                        <defs>
-                                            <clipPath id="a">
+            {cameraPermission === false ? (
+                <div onClick={(e) => e.stopPropagation()} className="text-center bg-white p-8 rounded-lg max-w-xl">
+                    <h2 className="text-2xl font-bold mb-4">Camera Access Required</h2>
+                    <p className="mb-6">
+                        Please enable camera access to use the photobooth. Once enabled, click the button below to try
+                        again.
+                    </p>
+                    <CallToAction onClick={checkCameraPermission} type="outline" size="absurd">
+                        <span>Try Again</span>
+                    </CallToAction>
+                </div>
+            ) : cameraPermission === true ? (
+                <div onClick={(e) => e.stopPropagation()} className="h-[70vh]">
+                    <div className="flex space-x-2 items-center h-full">
+                        <div className="relative size-full">
+                            <Camera
+                                onWebcamReady={handleWebcamReady}
+                                onUserReady={() => setCapturing(true)}
+                                onCapture={handleCapture}
+                                overlay={overlay}
+                                onNameChange={onNameChange}
+                            />
+                            {!retaking && images.every((image) => image.src) && (
+                                <div className="absolute inset-0 flex flex-col items-center justify-center py-8 bg-black/50">
+                                    <div className="relative pb-4 mb-auto">
+                                        <h1 className="m-0 text-white text-2xl">Click a photo to retake</h1>
+                                        <svg
+                                            fill="none"
+                                            xmlns="http://www.w3.org/2000/svg"
+                                            viewBox="0 0 170 64"
+                                            className="absolute top-0 right-0 translate-x-[38%] translate-y-[-47%] rotate-[28deg]"
+                                        >
+                                            <g clipPath="url(#a)">
                                                 <path
-                                                    fill="#fff"
-                                                    transform="matrix(.9415 .337 .337 -.9415 106 47.075)"
-                                                    d="M0 0h50v50H0z"
+                                                    d="M162.96 28.09c.646-1.39 1.299-2.8 1.806-4.246.102-.287.194-.6.259-.915a.99.99 0 0 0 .036-.205c.118-.717.073-1.45-.358-2.055-.688-.958-2.019-1.094-3.089-1.233a93.837 93.837 0 0 0-4.517-.48 93.874 93.874 0 0 0-9.336-.308c-.808.013-2.149.351-2.366 1.283-.217.93.994 1.275 1.681 1.266a93.537 93.537 0 0 1 7.569.176c1.173.08 2.344.186 3.513.318.5.056 1.004.114 1.501.18l1.004.136c.327-.07.443.036.351.312.02.048.033.097.046.155-15.284 8.622-31.794 15-48.933 18.802-.703.156-1.995.62-1.832 1.57.152.898 1.57 1.028 2.25.88 16.44-3.648 32.331-9.496 47.171-17.428a56.745 56.745 0 0 1-1.087 2.4 68.137 68.137 0 0 1-3.755 6.706c-1.129 1.785 2.9 1.957 3.732.641a70.072 70.072 0 0 0 4.354-7.955Z"
+                                                    fill="#F1A82C"
                                                 />
-                                            </clipPath>
-                                        </defs>
-                                    </svg>
+                                            </g>
+
+                                            <defs>
+                                                <clipPath id="a">
+                                                    <path
+                                                        fill="#fff"
+                                                        transform="matrix(.9415 .337 .337 -.9415 106 47.075)"
+                                                        d="M0 0h50v50H0z"
+                                                    />
+                                                </clipPath>
+                                            </defs>
+                                        </svg>
+                                    </div>
+                                    <div className="mt-auto">
+                                        <CallToAction onClick={handleDone} type="outline" size="absurd">
+                                            <span>Done</span>
+                                        </CallToAction>
+                                    </div>
                                 </div>
-                                <div className="mt-auto">
-                                    <CallToAction onClick={handleDone} type="outline" size="absurd">
-                                        <span>Done</span>
-                                    </CallToAction>
+                            )}
+                        </div>
+                        <div
+                            className={`flex flex-col space-y-4 h-screen ${
+                                capturing ? 'overflow-y-hidden' : 'overflow-y-auto'
+                            } snap-y snap-mandatory py-[70vh] flex-shrink-0 z-[999999]`}
+                        >
+                            {Object.keys(templates).map((key) => (
+                                <div ref={selectedTemplate === key ? photoStripRef : null} key={key}>
+                                    <VerticalPhotoStrip
+                                        active={selectedTemplate === key}
+                                        disabled={capturing}
+                                        images={images}
+                                        template={key}
+                                        onRetake={handleRetake}
+                                        retaking={retaking}
+                                        onSelect={(template) => {
+                                            setSelectedTemplate(template as keyof typeof templates)
+                                            onSelectTemplate(template)
+                                        }}
+                                    />
                                 </div>
-                            </div>
-                        )}
-                    </div>
-                    <div
-                        className={`flex flex-col space-y-4 h-screen ${
-                            capturing ? 'overflow-y-hidden' : 'overflow-y-auto'
-                        } snap-y snap-mandatory py-[70vh] flex-shrink-0 z-[999999]`}
-                    >
-                        {Object.keys(templates).map((key) => (
-                            <div ref={selectedTemplate === key ? photoStripRef : null} key={key}>
-                                <VerticalPhotoStrip
-                                    active={selectedTemplate === key}
-                                    disabled={capturing}
-                                    images={images}
-                                    template={key}
-                                    selectedTemplate={selectedTemplate}
-                                    onRetake={handleRetake}
-                                    retaking={retaking}
-                                    onSelect={(template) => {
-                                        setSelectedTemplate(template as keyof typeof templates)
-                                        onSelectTemplate(template)
-                                    }}
-                                />
-                            </div>
-                        ))}
+                            ))}
+                        </div>
                     </div>
                 </div>
-            </div>
+            ) : (
+                <div className="animate-pulse">Loading...</div>
+            )}
         </motion.div>
     )
 }
