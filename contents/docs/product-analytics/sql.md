@@ -1,12 +1,12 @@
 ---
-title: SQL (beta)
+title: SQL insights (beta)
 availability:
     free: full
     selfServe: full
     enterprise: full
 ---
 
-SQL insights enable you to directly access data in PostHog using [SQL queries](/blog/sql-for-analytics). They're powered by [HogQL](/docs/hogql).
+SQL insights enable you to directly access data in PostHog using [SQL queries](/blog/sql-for-analytics).
 
 ## SQL commands
 
@@ -296,7 +296,7 @@ FROM events
 
 ## Useful functions
 
-HogQL includes many functions to aggregate and manipulate queried data. Below are some examples of some of the most popular SQL functions you can use in your insights. 
+Our SQL flavor includes many functions to aggregate and manipulate queried data. Below are some examples of some of the most popular SQL functions you can use in your insights. 
 
 ### Aggregate functions
 
@@ -316,7 +316,7 @@ FROM events
 WHERE event = '$pageview' AND properties.$screen_height IS NOT NULL
 ```
 
-You can find a full list of these in [supported aggregations](/docs/hogql/aggregations).
+You can find a full list of these in [supported aggregations](/docs/sql/aggregations).
 
 #### Count
 
@@ -324,9 +324,9 @@ Use `count()` to count the number of rows in a particular column. `count(*)` cou
 
 ### Regular functions
 
-HogQL provides many functions for accessing, modifying, and calculating data from queries. Along with the ones listed below, many basics include calculation operators (`+`, `-`, `/`, `*`), type conversions (`toInt`, `toString`), conditional statements (`if`, `multiIf`), and rounding (`floor`, `round`).
+Our SQL flavor provides many functions for accessing, modifying, and calculating data from queries. Along with the ones listed below, many basics include calculation operators (`+`, `-`, `/`, `*`), type conversions (`toInt`, `toString`), conditional statements (`if`, `multiIf`), and rounding (`floor`, `round`).
 
-You can find a full list of these in [supported ClickHouse functions](/docs/hogql/clickhouse-functions).
+You can find a full list of these in [supported ClickHouse functions](/docs/sql/clickhouse-functions).
 
 #### Date and time
 
@@ -346,7 +346,7 @@ FROM events
 WHERE timestamp > now() - interval 1 day
 ```
 
-> Read more examples in [How to do time-based breakdowns (hour, minute, real time)](/tutorials/time-breakdowns) and [Using HogQL for advanced time and date filters](/tutorials/hogql-date-time-filters).
+> Read more examples in [How to do time-based breakdowns (hour, minute, real time)](/tutorials/time-breakdowns) and [Using SQL for advanced time and date filters](/tutorials/hogql-date-time-filters).
 
 #### String
 
@@ -367,7 +367,7 @@ from events
 where event = '$autocapture'
 ```
 
-> Read more in [How to analyze autocapture events with HogQL](/tutorials/hogql-autocapture).
+> Read more in [How to analyze autocapture events with SQL](/tutorials/hogql-autocapture).
 
 #### JSON
 
@@ -410,7 +410,7 @@ GROUP BY flag
 ORDER BY count() desc
 ```
 
-> Read more in [How to filter and breakdown arrays with HogQL](/tutorials/array-filter-breakdown).
+> Read more in [How to filter and breakdown arrays with SQL](/tutorials/array-filter-breakdown).
 
 #### Sparkline
 

@@ -240,7 +240,7 @@ const PairsWithArray = [
         icon: <IconGraph />,
         color: 'blue',
         product: 'Product analytics',
-        description: 'Need to go deeper than a dashboard? Building your own insights and HogQL queries from scratch!',
+        description: 'Need to go deeper than a dashboard? Building your own insights and SQL queries from scratch!',
         url: '/product-analytics',
     },
     {

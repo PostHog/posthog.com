@@ -94,8 +94,8 @@ const linklist: IProps[] = [
                 url: '/docs/data',
             },
             {
-                title: 'HogQL',
-                url: '/docs/hogql',
+                title: 'SQL access',
+                url: '/docs/sql',
             },
             {
                 title: 'Toolbar',

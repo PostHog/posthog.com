@@ -60,7 +60,7 @@ export const slideButtons = [
         color: 'seagreen',
     },
     {
-        title: 'HogQL',
+        title: 'SQL',
         Icon: IconHogQL,
         color: 'red',
     },

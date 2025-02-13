@@ -200,13 +200,14 @@ export const ProductOS = () => {
                                 data
                             </h2>
                             <p>
-                                We created <Link to="/docs/hogql">HogQL</Link>, a translation layer over ClickHouse SQL.
-                                (You can use most ClickHouse features in HogQL, including JOINs and subqueries.)
+                                We created <Link to="/docs/sql">SQL access</Link>, a translation layer over ClickHouse
+                                SQL. (You can use most ClickHouse features in our SQL insights, including JOINs and
+                                subqueries.)
                             </p>
 
                             <p>
-                                Everything you see in PostHog relies on HogQL queries. If you aren't able to run a query
-                                in a PostHog UI, just enter HogQL mode to write the exact query you need.
+                                Everything you see in PostHog relies on SQL queries. If you aren't able to run a query
+                                in a PostHog UI, just enter SQL mode to write the exact query you need.
                             </p>
 
                             <p>You can also query directly from our data warehouse (powered by ClickHouse).</p>
@@ -345,7 +346,7 @@ export const ProductOS = () => {
                     <h2 className="text-4xl mb-2">API</h2>
                     <p className="max-w-2xl mb-2">
                         If your business has bespoke data visualization needs that aren't covered by a PostHog product,
-                        you can build your own interface with queries using the API and HogQL.
+                        you can build your own interface with queries using the API and SQL.
                     </p>
                     <div className="mb-8">
                         <CallToAction to="/docs/api" type="secondary" size="sm">

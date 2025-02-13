@@ -14,7 +14,7 @@ Enter Hog: the language that drives our [realtime destinations](/docs/cdp/destin
 
 We’ve written Hog destination templates for dozens of services. But you can also write destinations yourself. Here’s how it works.
 
-> **Note:** Hog shouldn't be confused with [HogQL](/docs/hogql), our SQL-like query language used inside PostHog. If you're looking to query data in PostHog, see those docs.
+> **Note:** Hog shouldn't be confused with HogQL, the former name of our SQL-like query language used inside PostHog. If you're looking to query data in PostHog, see our [SQL docs](/docs/sql).
 
 ## Hog by example: webhook
 
@@ -88,7 +88,7 @@ let table_patch := {
 ```
 ### Keep in mind
 
-Hog was designed to be syntax-compatible with SQL / HogQL. This means all HogQL expressions work as Hog code.
+Hog was designed to be syntax-compatible with our SQL flavor. This means all our SQL expressions work as Hog code.
 
 This compatibility imposes a few key differences comparted to other programming languages:
 
@@ -115,7 +115,7 @@ blocks */
 
 ### Variables
 
-Use `:=` to assign a value to a variable because `=` is just equals in SQL and HogQL.
+Use `:=` to assign a value to a variable because `=` is just equals in SQL.
 
 ```rust
 // assign 12 to myVar
@@ -152,7 +152,7 @@ print('string' !~* 'I.G$') // false, case insensitive
 
 Supports both dot notation and bracket notation.
 
-Arrays in Hog (and HogQL) are **1-indexed**!
+Arrays in Hog (and our SQL flavor) are **1-indexed**!
 
 ```rust
 let myArray := [1,2,3]
@@ -164,7 +164,7 @@ print(myArray[2]) // prints 2
 
 Supports both dot notation and bracket notation.
 
-Tuples in Hog (and HogQL) are **1-indexed**!
+Tuples in Hog (and our SQL flavor) are **1-indexed**!
 
 ```rust
 let myTuple := (1,2,3)
@@ -366,7 +366,7 @@ Truth be told, we didn't set out to build our own programming language. We actua
 
 The HogVM is a stack-based bytecode virtual machine (VM). It was built to power event filtering in our real-time delivery system.
 
-It's paired with a compiler that converts HogQL expressions like `properties.$screen_width < properties.$screen_height` into bytecode like `["_H", 1, 32, "$screen_height", 32, "properties", 1, 2, 32, "$screen_width", 32, "properties", 1, 2, 15, 35]`. The HogVM then executes that bytecode.
+It's paired with a compiler that converts SQL expressions like `properties.$screen_width < properties.$screen_height` into bytecode like `["_H", 1, 32, "$screen_height", 32, "properties", 1, 2, 32, "$screen_width", 32, "properties", 1, 2, 15, 35]`. The HogVM then executes that bytecode.
 
 The HogVM had a few design constraints:
 
@@ -375,9 +375,9 @@ The HogVM had a few design constraints:
 - Runtime flexibility: the ability to embed Hog in many target languages like Python, NodeJS and the browser.
 - Small surface area that makes it easy maintain multiple implementations.
 - Secure enough to run user provided code.
-- Syntax compatible with HogQL.
+- Syntax compatible with SQL.
 
-Effectively, we wanted to run HogQL synchronously within a NodeJS process, at scale. So that's what we built, twice.
+Effectively, we wanted to run SQL (AKA HogQL) synchronously within a NodeJS process, at scale. So that's what we built, twice.
 
 We now have two identical HogVMs: one in [Python](https://github.com/PostHog/posthog/blob/master/hogvm/python/execute.py) (to run alongside queries, unreleased), and one in [TypeScript](https://github.com/PostHog/posthog/blob/master/hogvm/typescript/src/execute.ts) (to run in the pipeline, and in the browser). We might even build a third version in Rust soon. The surface area for the VM is really that small.
 

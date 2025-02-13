@@ -947,8 +947,8 @@ export const ProductProductAnalytics = () => {
                             url="/tutorials/churn-rate"
                         />
                         <TutorialCard
-                            title="How to filter and breakdown arrays with HogQL"
-                            description="Arrays (AKA lists) are a useful way to store multiple values related to each other under the same key. PostHog's HogQL expressions unlock the ability to make full use of them."
+                            title="How to filter and breakdown arrays with SQL"
+                            description="Arrays (AKA lists) are a useful way to store multiple values related to each other under the same key. PostHog's SQL expressions unlock the ability to make full use of them."
                             url="/tutorials/array-filter-breakdown"
                         />
                         <TutorialCard

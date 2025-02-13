@@ -237,7 +237,7 @@ This makes it an easy way to track new and returning visitors to your website, a
 
 - [Data connections](/docs/cdp) to import events from sources [Segment](/cdp/segment) and to export to destinations like [BigQuery](/cdp/bigquery-export) and [Snowflake](/cdp/snowflake-export).
 
-- Direct SQL querying and customization with [HogQL](/docs/product-analytics/hogql).
+- Direct [SQL querying](/docs/product-analytics/sql) and customization.
 
 - Free for 1 million events and 5,000 session recordings per month, see [pricing for more](/pricing).
 

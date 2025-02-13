@@ -1,5 +1,5 @@
 ---
-title: How to filter and breakdown arrays with HogQL
+title: How to filter and breakdown arrays with SQL
 date: 2023-10-05
 author:
   - ian-vanagas
@@ -8,11 +8,11 @@ sidebar: Docs
 featuredImage: >-
   https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/tutorials/banners/tutorial-17.png
 tags:
-  - hogql
+  - sql
   - insights
 ---
 
-Arrays (AKA lists) are a useful way to store multiple values related to each other under the same key. Although arrays can be a bit tricky to utilize with standard PostHog filters, [HogQL expressions](/docs/hogql/expressions) unlock the ability to make full use of them. 
+Arrays (AKA lists) are a useful way to store multiple values related to each other under the same key. Although arrays can be a bit tricky to utilize with standard PostHog filters, [SQL expressions](/docs/sql/expressions) unlock the ability to make full use of them. 
 
 This tutorial shows you how to access arrays in your data, use them in breakdowns, and set up filters with and for them.
 
@@ -32,9 +32,9 @@ Once you can access the array, you can breakdown or filter using it.
 
 ## Breaking down arrays
 
-Once we have our array, we can break it down further. To do this, [create an insight](https://app.posthog.com/insights/new), click "Add breakdown" under "Breakdown by," and select HogQL. Here we can write our HogQL expressions to break down arrays. 
+Once we have our array, we can break it down further. To do this, [create an insight](https://app.posthog.com/insights/new), click **Add breakdown** under **Breakdown by** and select **SQL expression**. Here we can write our SQL to break down arrays. 
 
-The most useful breakdown with arrays is `arrayJoin`. This is a [special expression](https://clickhouse.com/docs/en/sql-reference/functions/array-join) that "unfolds" an array into multiple rows. and helps us access each value from within an array. For example, to get a count of the usage of different `$active_feature_flags`, you can use this HogQL expression breakdown:
+The most useful breakdown with arrays is `arrayJoin`. This is a [special expression](https://clickhouse.com/docs/en/sql-reference/functions/array-join) that "unfolds" an array into multiple rows. and helps us access each value from within an array. For example, to get a count of the usage of different `$active_feature_flags`, you can use this SQL expression breakdown:
 
 ```sql
 arrayJoin(
@@ -55,15 +55,15 @@ More useful array breakdowns include:
 - `arrayElement(arr, 1)` for breaking down the first elements in the array.
 - `arrayElement(arr, -1)` for breaking down the last elements in the array.
 
-Once you get individual number or string values from the breakdown, you can modify these values further too. Read our [HogQL expression docs](/docs/hogql/expressions) for more useful functions for doing this.
+Once you get individual number or string values from the breakdown, you can modify these values further too. Read our [SQL expression docs](/docs/sql/expressions) for more useful functions for doing this.
 
 ## Filtering arrays
 
 Once you break down your array, you might find it contains values you don't care about. You can use filters to remove them. Filtering arrays is relatively similar to breaking down, except you must provide values you want to filter out.
 
-To add a filter, click the filter dropdown next to your data series, click "Add filter," select HogQL, and add your expression. You can also use filters in the [events explorer tab](https://app.posthog.com/events).
+To add a filter, click the filter dropdown next to your data series, click **Add filter**, select **SQL expression**, and add your expression. You can also use filters in the [events explorer tab](https://app.posthog.com/events).
 
-To start, you can remove empty arrays with a `notEmpty()` check. For example, to remove empty arrays from the `$active_feature_flags` by filtering for the HogQL expression:
+To start, you can remove empty arrays with a `notEmpty()` check. For example, to remove empty arrays from the `$active_feature_flags` by filtering for the SQL expression:
 
 ```sql
 notEmpty(
@@ -87,14 +87,14 @@ If you want to filter arrays for specific values you can use `has`, `hasAll`, an
 >
 > - If you get the error "Nested type Array(String) cannot be inside Nullable type" (or similar), you can wrap your property value in a `assumeNotNull` expression like `has(assumeNotNull(arr), 'test')`.
 > 
-> - When selecting a number, you need to wrap it in [single quotes](/docs/hogql/guide#strings-and-quotes). For example, `has(arr, '1')` matches arrays containing the number `1`.
+> - When selecting a number, you need to wrap it in [single quotes](/docs/sql/expressions#accessible-data). For example, `has(arr, '1')` matches arrays containing the number `1`.
 
 If you want to filter arrays by the first, last, or specific index value, you can use `arrayElement(arr, n)` again too.
 
 ## Further reading
 
-- [Using HogQL for advanced time and date filters](/tutorials/hogql-date-time-filters)
-- [Using HogQL for advanced breakdowns](/tutorials/hogql-breakdowns)
+- [Using SQL for advanced time and date filters](/tutorials/hogql-date-time-filters)
+- [Using SQL for advanced breakdowns](/tutorials/hogql-breakdowns)
 - [How to do time-based breakdowns (hour, minute, real time)](/tutorials/time-breakdowns)
 
 <NewsletterForm />
