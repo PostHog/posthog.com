@@ -463,6 +463,8 @@ const VerticalPhotoStrip = ({
 }) => {
     const [ref, inView] = useInView({ threshold: 1 })
     const overlays = templates[template]
+    const templateIndex = Object.keys(templates).indexOf(template) + 1
+    const totalTemplates = Object.keys(templates).length
 
     useEffect(() => {
         if (inView) {
@@ -473,10 +475,13 @@ const VerticalPhotoStrip = ({
     return (
         <div
             ref={ref}
-            className={`h-[70vh] snap-center flex-grow border-2 ${disabled && !active ? 'opacity-50' : ''} ${
+            className={`h-[70vh] snap-center flex-grow border-2 relative ${disabled && !active ? 'opacity-50' : ''} ${
                 active ? 'border-green' : 'border-transparent'
             } transition-all rounded-md`}
         >
+            <div className="absolute top-2 right-2 bg-black/50 text-white px-2 py-1 rounded text-sm z-10">
+                {templateIndex} of {totalTemplates}
+            </div>
             <PhotoStrip
                 images={images.map((image, index) => ({
                     src: active ? image.src : undefined,
@@ -568,7 +573,7 @@ const PhotoModal = ({
 
     return (
         <motion.div
-            className="flex justify-center items-center py-12 overflow-hidden"
+            className="flex justify-center items-center overflow-hidden"
             onClick={onClose}
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
@@ -660,7 +665,16 @@ const PhotoModal = ({
                     </div>
                 </div>
             ) : (
-                <div>Please enable camera access to continue</div>
+                <div className="bg-accent dark:bg-accent-dark pt-4 px-8 rounded border border-light dark:border-dark max-w-xl flex flex-col items-center">
+                    <h3 className="text-xl font-bold mt-2 mb-0">Is this thing on?!</h3>
+                    <p className="text-[15px]">Please enable camera access to continue.</p>
+
+                    <CloudinaryImage
+                        src="https://res.cloudinary.com/dmukukwp6/image/upload/binoculars_de6c3b3595.png"
+                        className="-mb-1.5"
+                        imgClassName="max-h-44 w-auto"
+                    />
+                </div>
             )}
         </motion.div>
     )
@@ -857,47 +871,54 @@ export default function Photobooth(): JSX.Element {
 
     return (
         <Layout>
-            <AnimatePresence>
-                {images.length > 0 ? (
-                    <div className="py-12 flex justify-center items-center space-x-2">
-                        <div className="flex flex-col h-[800px] overflow-y-auto snap-y snap-mandatory flex-shrink-0">
-                            {dataURL ? (
-                                cardTypes.map((cardType, index) => (
-                                    <Card
-                                        key={index}
-                                        stripDataURL={dataURL}
-                                        template={template}
-                                        name={name}
-                                        index={index}
-                                        {...cardType}
-                                    />
-                                ))
-                            ) : (
-                                <div className="w-[800px] aspect-video flex-shrink-0" />
-                            )}
-                        </div>
+            <div className="py-12">
+                <h1 className="text-3xl font-bold px-4 text-center">Welcome to the PostHog photo booth</h1>
+                <p className="text-center text-[15px]">
+                    We've assembled four Valentines-themed photo booth templates. Choose your favorite and get to
+                    snappin'.
+                </p>
+                <AnimatePresence>
+                    {images.length > 0 ? (
+                        <div className="flex justify-center items-center space-x-2">
+                            <div className="flex flex-col h-[800px] overflow-y-auto snap-y snap-mandatory flex-shrink-0">
+                                {dataURL ? (
+                                    cardTypes.map((cardType, index) => (
+                                        <Card
+                                            key={index}
+                                            stripDataURL={dataURL}
+                                            template={template}
+                                            name={name}
+                                            index={index}
+                                            {...cardType}
+                                        />
+                                    ))
+                                ) : (
+                                    <div className="w-[800px] aspect-video flex-shrink-0" />
+                                )}
+                            </div>
 
-                        <motion.div
-                            initial={{ opacity: 0 }}
-                            animate={{ opacity: 1 }}
-                            exit={{ opacity: 0 }}
-                            className="flex justify-center items-center flex-shrink-0"
-                        >
-                            <FinalPhotoStrip dataURL={dataURL} onImageReady={setDataURL} images={images} />
+                            <motion.div
+                                initial={{ opacity: 0 }}
+                                animate={{ opacity: 1 }}
+                                exit={{ opacity: 0 }}
+                                className="flex justify-center items-center flex-shrink-0"
+                            >
+                                <FinalPhotoStrip dataURL={dataURL} onImageReady={setDataURL} images={images} />
+                            </motion.div>
+                        </div>
+                    ) : (
+                        <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
+                            <PhotoModal
+                                onClose={() => setModalOpen(false)}
+                                template={template}
+                                onDone={handleDone}
+                                onSelectTemplate={setTemplate}
+                                onNameChange={setName}
+                            />
                         </motion.div>
-                    </div>
-                ) : (
-                    <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
-                        <PhotoModal
-                            onClose={() => setModalOpen(false)}
-                            template={template}
-                            onDone={handleDone}
-                            onSelectTemplate={setTemplate}
-                            onNameChange={setName}
-                        />
-                    </motion.div>
-                )}
-            </AnimatePresence>
+                    )}
+                </AnimatePresence>
+            </div>
         </Layout>
     )
 }
