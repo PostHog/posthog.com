@@ -334,7 +334,7 @@ const Camera = ({
                         >
                             <input
                                 type="text"
-                                className="bg-transparent border-none outline-none focus:ring-0 text-white text-5xl text-center placeholder:text-white/80 mb-1"
+                                className="bg-transparent border-none outline-none focus:ring-0 text-white text-5xl text-center placeholder:text-white/30 mb-1"
                                 placeholder="Enter your name"
                                 onChange={(e) => {
                                     setName(e.target.value)
@@ -426,7 +426,9 @@ const VerticalPhotoStrip = ({
     return (
         <div
             ref={ref}
-            className={`h-[70vh] snap-center flex-grow ${disabled && !active ? 'opacity-50' : ''} rounded-md`}
+            className={`h-[70vh] snap-center flex-grow border-2 ${disabled && !active ? 'opacity-50' : ''} ${
+                active ? 'border-green' : 'border-transparent'
+            } transition-all rounded-md`}
         >
             <PhotoStrip
                 images={images.map((image, index) => ({
@@ -633,11 +635,7 @@ const FinalPhotoStrip = ({
                 exit={{ opacity: 0 }}
                 className="h-full"
             >
-                {dataURL ? (
-                    <img src={dataURL} alt="Photobooth" className="size-full" />
-                ) : (
-                    <PhotoStrip animate={false} images={images} />
-                )}
+                <PhotoStrip animate={false} images={images} />
             </motion.div>
         </div>
     )
@@ -681,34 +679,7 @@ const Card = ({
         }
     }, [])
 
-    return dataURL ? (
-        <motion.img
-            initial={{
-                opacity: 0,
-                y: 50,
-                rotate: -10,
-                scale: 0.9,
-            }}
-            animate={{
-                opacity: 1,
-                y: 0,
-                rotate: 0,
-                scale: 1,
-                transition: {
-                    type: 'spring',
-                    duration: 0.7,
-                    delay: 0.2 + index * 0.15,
-                    y: {
-                        type: 'spring',
-                        stiffness: 300,
-                        damping: 15,
-                    },
-                },
-            }}
-            src={dataURL}
-            className="w-[800px] aspect-video flex-shrink-0 snap-center first:mt-0 mt-4"
-        />
-    ) : (
+    return (
         <div className="relative">
             <div ref={cardRef} className="relative w-[800px] aspect-video flex-shrink-0 flex snap-center">
                 <div className={`absolute inset-0 bg-accent overflow-hidden ${className}`}>
@@ -740,7 +711,6 @@ const Card = ({
                     <p className="text-sm text-center opacity-90 m-0 !text-inherit">Get yours at posthog.com/love</p>
                 </div>
             </div>
-            <div className="absolute inset-0 size-full bg-light dark:bg-dark" />
         </div>
     )
 }
@@ -755,7 +725,10 @@ export default function Photobooth(): JSX.Element {
     useEffect(() => {
         const preloadAllImages = async () => {
             try {
-                await Promise.all(Object.values(cardImages).map(preloadImage))
+                await Promise.all([
+                    ...Object.values(cardImages).map(preloadImage),
+                    ...cardTypes.map(({ logo }) => preloadImage(logo)),
+                ])
             } catch (error) {
                 console.error('Error preloading images:', error)
             }
