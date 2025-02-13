@@ -26,7 +26,10 @@ const BasicPreview = ({ src, className = '' }: { src: any; className?: string })
 }
 
 const cardTypes = [
-    { logo: 'https://res.cloudinary.com/dmukukwp6/image/upload/Logo_9de16e50ae.png', className: 'bg-[#FFF6EC]' },
+    {
+        logo: 'https://res.cloudinary.com/dmukukwp6/image/upload/Logo_9de16e50ae.png',
+        className: 'bg-[#FFF6EC] text-primary',
+    },
     {
         logo: 'https://res.cloudinary.com/dmukukwp6/image/upload/Logo_1_dd78611ddb.png',
         className: 'bg-[#EC1111] text-white',
@@ -281,7 +284,7 @@ const Camera = ({
                     imageSmoothing={false}
                     videoConstraints={{
                         facingMode: 'user',
-                        aspectRatio,
+                        aspectRatio: 0.75,
                         width: { min: 640, ideal: 810, max: 1920 },
                         height: { min: 480, ideal: 1080, max: 1920 },
                     }}
@@ -371,13 +374,13 @@ const PhotoStrip = ({
                             <img
                                 src={image.src}
                                 alt="Photobooth"
-                                className={`size-full absolute inset-0 ${
+                                className={`size-full absolute object-cover inset-0 ${
                                     animate ? 'opacity-0 animate-develop duration-1000 animate-delay-1000' : ''
                                 }`}
                             />
                         )}
                         {image?.overlay?.stripComponent && image.overlay.stripComponent}
-                        {image?.src && onRetake && retaking === undefined && (
+                        {image?.src && onRetake && retaking === undefined && images.every((image) => image.src) && (
                             <button
                                 onClick={() => {
                                     onRetake(index)
@@ -771,7 +774,7 @@ export default function Photobooth(): JSX.Element {
             <AnimatePresence>
                 {images.length > 0 ? (
                     <div className="py-12 flex justify-center items-center space-x-2">
-                        <div className="flex flex-col h-[800px] overflow-y-auto snap-y snap-mandatory">
+                        <div className="flex flex-col h-[800px] overflow-y-auto snap-y snap-mandatory flex-shrink-0">
                             {dataURL ? (
                                 cardTypes.map((cardType, index) => (
                                     <Card
