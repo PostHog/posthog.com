@@ -200,9 +200,9 @@ It can be especially helpful for new hires if support engineers demonstrate how 
 
 ## 30/60/90 day check-ins
 
-As part of the onboarding checklist, the Ops team will schedule reminders for a new team member's manager at the 30, 60 & 90 day mark to simply serve as a reminder that these checkpoints have arrived. 
-
 A manager's [responsibilities](/handbook/company/management) for a new hire are the same as for the rest of their team though with a little extra scrutiny. During this period there is an even greater importance on 1) providing feedback to the new team member, and 2) communicating with execs about performance issues early and often, so that there is enough time for action. Managers are, again, not responsible for hiring or firing, nor communicating these possibilities directly to teammates - this is handled by the exec team.
+
+As part of the onboarding checklist, the Ops team will schedule reminders for a new team member's manager at the 30, 60 & 90 day mark to simply serve as a reminder that these checkpoints have arrived. 
 
 We prompt these important steps by scheduling 30, 60 & 90 day reminders to check in on the team member's performance to make sure everything is on track with the onboarding and the [first 3 months probationary period](/handbook/people/compensation#notice-period) will be passed.
 
