@@ -312,7 +312,7 @@ const Camera = ({
                             {count}
                         </div>
                     )}
-                    <div className="relative w-auto h-full">
+                    <div className="relative w-auto h-full overflow-hidden">
                         <Webcam
                             ref={webcamRef}
                             audio={false}
@@ -327,7 +327,7 @@ const Camera = ({
                                 width: { min: 640, ideal: 810, max: 1920 },
                                 height: { min: 480, ideal: 1080, max: 1920 },
                             }}
-                            className="size-full object-contain aspect-[0.75]"
+                            className="size-full object-contain aspect-[0.75] [scale:1.8]"
                             onUserMedia={onUserMedia}
                             onUserMediaError={onUserMediaError}
                         />
