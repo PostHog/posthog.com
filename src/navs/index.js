@@ -1223,8 +1223,8 @@ export const docsMenu = {
                     name: 'New to PostHog?',
                 },
                 {
-                    name: 'Winning on purpose',
-                    url: '/docs/new-to-posthog/winning-on-purpose',
+                    name: 'Getting HogPilled',
+                    url: '/docs/new-to-posthog/getting-hogpilled',
                     icon: 'IconCrown',
                 },
                 {
