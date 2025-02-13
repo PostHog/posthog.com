@@ -6,6 +6,7 @@ import React, { useEffect, useRef, useState } from 'react'
 import Webcam from 'react-webcam'
 import { useInView } from 'react-intersection-observer'
 import { toJpeg } from 'html-to-image'
+import { IconDownload } from '@posthog/icons'
 
 const aspectRatio = 3 / 4
 const numImages = 4
@@ -676,45 +677,68 @@ const FinalPhotoStrip = ({
     onImageReady: (dataURL: string) => void
 }) => {
     const ref = useRef<HTMLDivElement>(null)
+    const [downloading, setDownloading] = useState(false)
 
+    const handleDownload = async () => {
+        setDownloading(true)
+        const dataURL = await toJpeg(ref.current, {
+            quality: 1,
+            backgroundColor: 'white',
+        })
+        const link = document.createElement('a')
+        link.download = `posthog_photobooth.jpeg`
+        link.href = dataURL
+        link.click()
+        link.remove()
+        setDownloading(false)
+    }
     return (
-        <div ref={ref} className="flex space-x-4 items-center h-[800px]">
-            <motion.div
-                initial={{
-                    opacity: 0,
-                    y: 50,
-                    rotate: -10,
-                    scale: 0.9,
-                }}
-                onAnimationComplete={() => {
-                    toJpeg(ref.current, {
-                        quality: 1,
-                        backgroundColor: 'white',
-                    }).then((dataURL) => {
-                        onImageReady(dataURL)
-                    })
-                }}
-                animate={{
-                    opacity: 1,
-                    y: 0,
-                    rotate: 0,
-                    scale: 1,
-                    transition: {
-                        type: 'spring',
-                        duration: 0.7,
-                        delay: 0.2,
-                        y: {
-                            type: 'spring',
-                            stiffness: 300,
-                            damping: 15,
-                        },
-                    },
-                }}
-                exit={{ opacity: 0 }}
-                className="h-full"
+        <div className="relative">
+            <button
+                disabled={downloading}
+                onClick={handleDownload}
+                className="absolute -top-3 -right-3 z-10 bg-white rounded-full p-1.5 shadow-lg hover:scale-[1.1] transition-transform active:scale-100"
             >
-                <PhotoStrip animate={false} images={images} />
-            </motion.div>
+                <IconDownload className="size-5" />
+            </button>
+            <div ref={ref} className="flex space-x-4 items-center h-[800px]">
+                <motion.div
+                    initial={{
+                        opacity: 0,
+                        y: 50,
+                        rotate: -10,
+                        scale: 0.9,
+                    }}
+                    onAnimationComplete={() => {
+                        toJpeg(ref.current, {
+                            quality: 1,
+                            backgroundColor: 'white',
+                        }).then((dataURL) => {
+                            onImageReady(dataURL)
+                        })
+                    }}
+                    animate={{
+                        opacity: 1,
+                        y: 0,
+                        rotate: 0,
+                        scale: 1,
+                        transition: {
+                            type: 'spring',
+                            duration: 0.7,
+                            delay: 0.2,
+                            y: {
+                                type: 'spring',
+                                stiffness: 300,
+                                damping: 15,
+                            },
+                        },
+                    }}
+                    exit={{ opacity: 0 }}
+                    className="h-full"
+                >
+                    <PhotoStrip animate={false} images={images} />
+                </motion.div>
+            </div>
         </div>
     )
 }
@@ -743,22 +767,34 @@ const Card = ({
     name: string
     index: number
 }) => {
-    const [dataURL, setDataURL] = useState<string>()
+    const [downloading, setDownloading] = useState(false)
     const cardRef = useRef<HTMLDivElement>(null)
 
-    useEffect(() => {
-        if (cardRef.current) {
-            toJpeg(cardRef.current, {
-                quality: 1,
-                backgroundColor: 'white',
-            }).then((dataURL) => {
-                setDataURL(dataURL)
-            })
-        }
-    }, [])
+    const handleDownload = async () => {
+        setDownloading(true)
+        const dataURL = await toJpeg(cardRef.current, {
+            quality: 1,
+            backgroundColor: 'white',
+        })
+        const link = document.createElement('a')
+        link.download = `${name}.jpeg`
+        link.href = dataURL
+        link.click()
+        link.remove()
+        setDownloading(false)
+    }
 
     return (
         <div className="relative">
+            <button
+                disabled={downloading}
+                onClick={handleDownload}
+                className={`absolute top-2 right-2 z-10 opacity-70 hover:opacity-100 transition-opacity ${
+                    className?.includes('bg-dark') ? 'text-white' : ''
+                }`}
+            >
+                <IconDownload className="w-6 h-6" />
+            </button>
             <div ref={cardRef} className="relative w-[800px] aspect-video flex-shrink-0 flex snap-center">
                 <div className={`absolute inset-0 bg-accent overflow-hidden ${className}`}>
                     <img
