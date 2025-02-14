@@ -99,7 +99,7 @@ To best capture data about users, you must understand who they are.
 
 Every event you capture must have a user distinct ID. Autocapture handles this for you, while custom events require you to do this yourself. Examples of identifiers for users include `UUID` values and emails.
 
-To connect an anonymous user distinct ID created by autocapture with a user distinct ID you created, you can use the [`identify`])(/docs/product-analytics/identify)  method:
+To connect an anonymous user distinct ID created by autocapture with a user distinct ID you created, you can use the [`identify`](/docs/product-analytics/identify)  method:
 
 ```js
 function loginRequest(user) {
