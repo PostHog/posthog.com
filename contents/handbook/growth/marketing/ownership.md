@@ -53,7 +53,7 @@ showTitle: true
 | **Homepage**                            | Cory & Eli           |
 | **Merch store frontend**                | Cory & Eli           |
 | **Merch store backend**                 | Eli                  |
-| **Max AI**                              | Cory & Eli           |
+| **Min AI**                              | Cory & Eli           |
 | **Pricing page**                        | Cory & Eli           |
 | **Product page design**                 | Cory & Eli           |
 | **Website backend**                     | Eli                  |

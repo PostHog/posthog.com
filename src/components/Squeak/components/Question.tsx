@@ -24,6 +24,7 @@ import Logomark from 'components/Home/images/Logomark'
 import Avatar from './Avatar'
 import { DotLottiePlayer } from '@dotlottie/react-player'
 import EditWrapper from './EditWrapper'
+import { AIBadge } from 'components/AIBadge'
 
 type QuestionProps = {
     // TODO: Deal with id possibly being undefined at first
@@ -236,7 +237,7 @@ const MaxReply = ({ children }: { children: React.ReactNode }) => {
                 <Tooltip
                     content={() => (
                         <div className="text-sm max-w-64">
-                            Max AI is our resident AI assistant. Double-check responses for accuracy.
+                            Min <AIBadge /> is our resident AI assistant. Double-check responses for accuracy.
                         </div>
                     )}
                     placement="top"
@@ -252,7 +253,9 @@ const MaxReply = ({ children }: { children: React.ReactNode }) => {
                                     <Logomark className="w-[16px]" />
                                 </span>
                             </div>
-                            <strong>Max AI</strong>
+                            <strong>
+                                Min <AIBadge />
+                            </strong>
                         </div>
                     </div>
                 </Tooltip>

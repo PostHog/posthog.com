@@ -53,7 +53,7 @@ const useInkeepSettings = (): InkeepSharedSettings => {
 
     const aiChatSettings: InkeepAIChatSettings = {
         botAvatarSrcUrl: 'https://res.cloudinary.com/dmukukwp6/image/upload/v1688579513/max_c5dd553db8.png',
-        botName: 'Max AI',
+        botName: 'Min',
         quickQuestions: defaultQuickQuestions,
         shouldHighlightFirstQuickQuestion: false,
     }

@@ -36,7 +36,7 @@ import MediaUploadModal from 'components/MediaUploadModal'
 import SideModal from 'components/Modal/SideModal'
 import { Authentication } from 'components/Squeak'
 import { useChat } from 'hooks/useChat'
-import { useSearch } from 'components/Search/SearchContext'
+import { AIBadge } from 'components/AIBadge'
 
 export const Avatar = (props: { className?: string; src?: string }) => {
     return (
@@ -558,7 +558,10 @@ export const Main = () => {
                         <HoverTooltip
                             content={() => (
                                 <div className="text-xs">
-                                    Chat with <strong>Max AI</strong>{' '}
+                                    Chat with{' '}
+                                    <strong>
+                                        Min <AIBadge />
+                                    </strong>{' '}
                                     <kbd className={`${keyboardShortcut} py-0 ml-0.5`}>?</kbd>
                                 </div>
                             )}

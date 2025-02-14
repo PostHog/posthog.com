@@ -6,6 +6,7 @@ import { IconLightBulb, IconSidebarOpen } from '@posthog/icons'
 import { CallToAction } from 'components/CallToAction'
 import { useLayoutData } from 'components/Layout/hooks'
 import usePostHog from 'hooks/usePostHog'
+import { AIBadge } from 'components/AIBadge'
 
 interface AskMaxProps {
     border?: boolean
@@ -65,7 +66,10 @@ export default function AskMax({
 
                     <div className="flex flex-col text-center @lg:text-left">
                         <h3 className="mb-0 !text-2xl @lg:!text-xl leading-tight">
-                            Questions? <span className="text-red dark:text-yellow">Ask Max AI.</span>
+                            Questions?{' '}
+                            <span className="text-red dark:text-yellow">
+                                Ask Min <AIBadge />
+                            </span>
                         </h3>
                         <p className="text-[15px] mb-0 opacity-75 text-balance">
                             It's easier than reading through <strong>{totalDocsCount} docs articles</strong>.
@@ -79,7 +83,7 @@ export default function AskMax({
                         className="group [&>span]:flex [&>span]:items-center [&>span]:gap-1.5 [&>span]:px-3"
                         onClick={handleChatOpen}
                     >
-                        Chat with Max AI
+                        Chat with Min <AIBadge />
                         <IconSidebarOpen className="size-6 inline-block opacity-75 group-hover:opacity-100" />
                     </CallToAction>
                 </div>

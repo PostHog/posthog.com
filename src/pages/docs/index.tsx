@@ -4,7 +4,6 @@ import Layout from 'components/Layout'
 import { SEO } from 'components/seo'
 import Link from 'components/Link'
 import PostLayout from 'components/PostLayout'
-import List from 'components/List'
 import { CallToAction } from 'components/CallToAction'
 import { IconLightBulb } from '@posthog/icons'
 import KeyboardShortcut from 'components/KeyboardShortcut'
@@ -12,7 +11,7 @@ import { docsMenu } from '../../navs'
 import * as Icons from '@posthog/icons'
 import SidebarSearchBox from 'components/Search/SidebarSearchBox'
 import AskMax from 'components/AskMax'
-import { defaultQuickQuestions } from 'hooks/useInkeepSettings'
+import { AIBadge } from 'components/AIBadge'
 
 const ProductLink = ({ icon, name, url, color }) => {
     const Icon = Icons[icon]
@@ -103,7 +102,7 @@ export const DocsIndex = () => {
                             <p className="text-sm m-0 text-left leading-relaxed">
                                 <strong>Tip:</strong>{' '}
                                 <AskMax linkOnly className="text-red dark:text-yellow font-semibold">
-                                    Chat with Max AI
+                                    Chat with Min <AIBadge />
                                 </AskMax>{' '}
                                 for quick answers to questions.{' '}
                                 <span className="@md:inline-block">

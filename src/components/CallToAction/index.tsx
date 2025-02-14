@@ -191,7 +191,7 @@ export type CTAPropsType = {
     href?: string
     to?: string
     onClick?: () => void
-    children?: JSX.Element | string
+    children?: React.ReactChild
     className?: string
     childClassName?: string
     external?: boolean
@@ -209,7 +209,11 @@ export interface TrackedCTAPropsType extends CTAPropsType {
     }
 }
 
-export const TrackedCTA = ({ width, event: { name: eventName, ...event }, ...props }: TrackedCTAPropsType): JSX.Element => {
+export const TrackedCTA = ({
+    width,
+    event: { name: eventName, ...event },
+    ...props
+}: TrackedCTAPropsType): JSX.Element => {
     const posthog = usePostHog()
 
     return (
