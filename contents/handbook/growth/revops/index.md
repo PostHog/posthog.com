@@ -26,7 +26,7 @@ This means:
 - Finding useful patterns in customer behavior
 - Showing how each team's work affects our customers
 
-Creating views to show total monthly MRR, per product MRR, and per product usage, and filters out the anomalies to make sure make sure analyses are accurate and consistent across teams was one of the early steps we took in this direction. Unifying data from our billing system, salesforce, and vitally to have full context on biggest [gainers](https://us.posthog.com/project/2/insights/ZcynB70W) and [losers](https://us.posthog.com/project/2/insights/5V4mvAej) queries to show full context on which customers' spend changed the most was another one to simplify access to this info and quickly take action when needed.
+Creating views to show total monthly MRR, per product MRR, and per product usage, and filters out the anomalies to make sure make sure analyses are accurate and consistent across teams was one of the early steps we took in this direction. Unifying data from our billing system, Salesforce, and Vitally to have full context on biggest [gainers](https://us.posthog.com/project/2/insights/ZcynB70W) and [losers](https://us.posthog.com/project/2/insights/5V4mvAej) queries to show full context on which customers' spend changed the most was another one to simplify access to this info and quickly take action when needed.
 
 
 ### 2. Build for self service
