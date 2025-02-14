@@ -1,6 +1,6 @@
 <DotNetInstall />
 
-At the moment, ASP.NET Core is the only supported platform for the PostHog .NET SDK.
+At the moment, ASP.NET Core is the only supported platform for the PostHog .NET SDK. However, we do have experimental support for other platforms mentioned later in this document.
 
 ```bash
 dotnet add package PostHog.AspNetCore
@@ -9,10 +9,11 @@ dotnet add package PostHog.AspNetCore
 In your `Program.cs` file, add the following code:
 
 ```csharp
-using PostHog.AspNetCore;
+using PostHog;
 
 var builder = WebApplication.CreateBuilder(args);
 
+// Add PostHog to the dependency injection container as a singleton.
 builder.AddPostHog();
 ```
 
@@ -53,3 +54,33 @@ To see detailed logging, set the log level to `Debug` or `Trace` in `appsettings
   ...
 }
 ```
+
+## Experimental support for other platforms
+
+The PostHog package is multi-targeted to support `net8.0` and `dotnetstandard2.1`. This means it can be used in a wider range of projects than just ASP.NET Core. However, this support is experimental and not officially supported.
+
+If you are using a different platform, you can install the `PostHog` package instead of `PostHog.AspNetCore`. This package does not depend on ASP.NET Core and can be used in any .NET project.
+
+```bash
+dotnet add package PostHog
+```
+
+The `PostHogClient` class must be implemented as a singleton in your project. For PostHog.AspNetCore, this is handled by the `builder.AddPostHog();` method. For the `PostHog` package, you can do the following if you're using dependency injection:
+
+```csharp
+builder.Services.AddSingleton<IPostHogClient, PostHogClient>();
+```
+
+If you're not using dependency injection, you can create a static instance of the `PostHogClient` class and use that everywhere in your project:
+
+```csharp
+using PostHog;
+
+public static readonly PostHogClient PostHog = new(new PostHogOptions {
+    ProjectApiKey = "<ph_project_api_key>",
+    HostUrl = new Uri("<ph_client_api_host>"),
+    PersonalApiKey = Environment.GetEnvironmentVariable(
+      "PostHog__PersonalApiKey")
+});
+```
+

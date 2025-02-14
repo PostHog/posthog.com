@@ -5,21 +5,17 @@ There are 2 steps to implement feature flags in .NET:
 #### Boolean feature flags
 
 ```csharp
-var isMyFlagEnabled = await posthog.IsFeatureEnabledAsync(
+if (await posthog.IsFeatureEnabledAsync(
     "flag-key",
-    "distinct_id_of_your_user"
-);
-if (isMyFlagEnabled.GetValueOrDefault())
+    "distinct_id_of_your_user"))
 {
     // Feature is enabled
 }
 else
 {
-    // Feature is disabled    
+    // Feature is disabled
 }
 ```
-
-> **Note:** The `IsFeatureEnabledAsync` method returns a nullable boolean. If the flag is not found or evaluating it is inconclusive, it returns `null`.
 
 #### Multivariate feature flags
 
@@ -37,7 +33,8 @@ if (flag is { VariantKey: "variant-key"} ) {
 }
 ```
 
-The `GetFeatureFlagAsync` method returns a nullable `FeatureFlag` object. If the flag is not found or evaluating it is inconclusive, it returns `null`. However, there is an implicit conversion to bool to make comparisons easier.
+> **Note:** The `GetFeatureFlagAsync` method returns a nullable `FeatureFlag` object. If the flag is not found or evaluating it is inconclusive, it returns `null`. However, there is an implicit conversion to bool to make comparisons easier.
+
 
 ```csharp
 if (await posthog.GetFeatureFlagAsync(
@@ -65,7 +62,7 @@ posthog.Capture(
     "event_name",
     properties: new() {
         // replace feature-flag-key with your flag key.
-        // Replace 'variant-key' with the key of your variant
+        // Replace "variant-key" with the key of your variant
         ["$feature/feature-flag-key"] = "variant-key"
     }
 );

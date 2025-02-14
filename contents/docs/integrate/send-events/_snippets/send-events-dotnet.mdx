@@ -33,5 +33,5 @@ using Microsoft.AspNetCore.Http.Extensions;
 
 posthog.CapturePageView(
     "distinct_id_of_the_user",
-    context.HttpContext.Request.GetDisplayUrl());
+    HttpContext.Request.GetDisplayUrl());
 ```
