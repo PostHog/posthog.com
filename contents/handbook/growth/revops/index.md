@@ -116,4 +116,4 @@ Product operations: Product teams own their metrics and experimentation, but we 
 ### What RevOps doesn't do
 - Financial accounting (though we work closely with Finance)
 - Individual sales deal management
-- Billing/invoicing platforms, and data infrastructure for revenue reporting owned by growth team
+- Billing/invoicing platforms, and data infrastructure for revenue reporting owned by the Growth team
