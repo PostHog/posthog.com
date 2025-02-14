@@ -7,6 +7,7 @@ import Webcam from 'react-webcam'
 import { useInView } from 'react-intersection-observer'
 import { toJpeg } from 'html-to-image'
 import { IconDownload } from '@posthog/icons'
+import Link from 'components/Link'
 
 const numImages = 4
 const initialCount = 3
@@ -28,7 +29,7 @@ const BasicPreview = ({ src, className = '' }: { src: any; className?: string })
 const cardTypes = [
     {
         logo: 'https://res.cloudinary.com/dmukukwp6/image/upload/Logo_9de16e50ae.png',
-        className: 'bg-[#FFF6EC] text-primary',
+        className: 'bg-accent text-primary',
     },
     {
         logo: 'https://res.cloudinary.com/dmukukwp6/image/upload/Logo_1_dd78611ddb.png',
@@ -786,7 +787,7 @@ const FinalPhotoStrip = ({
             <button
                 disabled={downloading}
                 onClick={handleDownload}
-                className="absolute -top-3 -right-3 z-10 bg-white rounded-full p-1.5 shadow-lg hover:scale-[1.1] transition-transform active:scale-100"
+                className="absolute -top-3 -right-3 z-10 bg-white rounded-full p-1.5 shadow-lg hover:scale-[1.1] transition-transform active:scale-100 dark:text-dark"
             >
                 <IconDownload className="size-5" />
             </button>
@@ -878,7 +879,7 @@ const Card = ({
             <button
                 disabled={downloading}
                 onClick={handleDownload}
-                className={`absolute top-2 right-2 z-10 opacity-70 hover:opacity-100 transition-opacity ${
+                className={`absolute top-2 right-2 z-10 opacity-70 hover:opacity-100 transition-opacity bg-black/50 rounded-full p-1.5 ${
                     className?.includes('bg-dark') ? 'text-white' : ''
                 }`}
             >
@@ -908,7 +909,7 @@ const Card = ({
                         src="https://res.cloudinary.com/dmukukwp6/image/upload/Vector_3_08d92bba48.png"
                         className="w-1/6"
                     />
-                    <p className="text-6xl font-bold p-0 text-center m-0">{name}</p>
+                    <p className="text-6xl font-bold p-0 text-center m-0 leading-none">{name}</p>
                     <div className="w-1/2 relative">
                         <CloudinaryImage src={cardImages[template]} className="w-full !block" />
                         <div className="w-full h-1 bg-black rounded-full absolute bottom-0" />
@@ -956,10 +957,16 @@ export default function Photobooth(): JSX.Element {
                 <AnimatePresence>
                     {images.length > 0 ? (
                         <>
-                            <h2 className="text-4xl font-bold px-4 text-center mb-1">Share with your friends</h2>
-                            <p className="text-center text-[15px]">Ideally on X would be cool.</p>
-                            <div className="flex justify-center items-center gap-8">
-                                <div className="flex flex-col h-[800px] overflow-y-auto snap-y snap-mandatory flex-shrink-0 gap-8">
+                            <h2 className="text-5xl font-bold px-4 text-center mb-2">Share with your friends</h2>
+                            <p className="text-center text-[15px] text-opacity-75">
+                                Ideally on X would be cool. (Don't forget to tag{' '}
+                                <Link href="@posthog" externalNoIcon to="https://x.com/posthog">
+                                    @posthog
+                                </Link>
+                                !)
+                            </p>
+                            <div className="flex justify-center items-start gap-8">
+                                <div className="flex flex-col snap-y snap-mandatory flex-shrink-0 gap-8">
                                     {dataURL ? (
                                         cardTypes.map((cardType, index) => (
                                             <Card
