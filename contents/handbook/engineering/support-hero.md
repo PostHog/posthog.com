@@ -36,15 +36,15 @@ Swap with a teammate in advance! Find a volunteer by asking in Slack, then use P
 
 Each engineering team has its own list of tickets in Zendesk:
 
-- [Product Analytics](https://posthoghelp.zendesk.com/agent/filters/17989255082139) (escalated only)
-- [Web Analytics](https://posthoghelp.zendesk.com/agent/filters/21786368880027) (escalated only)
-- [Experiments](https://posthoghelp.zendesk.com/agent/filters/30579720982299) (escalated only)
-- [Feature Flags](https://posthoghelp.zendesk.com/agent/filters/30579605742363) (escalated only)
-- [Replay](https://posthoghelp.zendesk.com/agent/filters/25210723706907) (escalated only)
-- [Surveys](https://posthoghelp.zendesk.com/agent/filters/30579650784411) (escalated only)
-- [CDP](https://posthoghelp.zendesk.com/agent/filters/28134703633179) (escalated only)
-- [Infrastructure](https://posthoghelp.zendesk.com/agent/filters/14507148758939)
-- [Auth & Billing, handled by Growth](https://posthoghelp.zendesk.com/agent/filters/14507107058843)
+- [Product Analytics](https://posthoghelp.zendesk.com/agent/filters/32900866985627)
+- [Web Analytics](https://posthoghelp.zendesk.com/agent/filters/33125274470683)
+- [Experiments](https://posthoghelp.zendesk.com/agent/filters/32903339439771)
+- [Feature Flags](https://posthoghelp.zendesk.com/agent/filters/32901789360411)
+- [Replay](https://posthoghelp.zendesk.com/agent/filters/32901709536027)
+- [Surveys](https://posthoghelp.zendesk.com/agent/filters/32901891815067)
+- [CDP](https://posthoghelp.zendesk.com/agent/filters/32901936992155)
+- [Infrastructure](https://posthoghelp.zendesk.com/agent/filters/33125360060571)
+- [Auth & Billing, handled by Growth](https://posthoghelp.zendesk.com/agent/filters/33125190975131)
 
 Your job is simple: ship features and fixes, and resolve ticket after ticket from your team's list.
 
