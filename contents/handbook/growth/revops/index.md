@@ -107,7 +107,7 @@ Sales tech stack including:
 
 ### What RevOps supports but doesn't own
 
-Revenue reporting and forecasting: RevOps provides recommendations and improvements but does not own implementation and maintenance. This is currently owned by growth team. 
+Revenue reporting and forecasting: RevOps provides recommendations and improvements but does not own implementation and maintenance. This is currently owned by the Growth team. 
 
 Marketing operations: Marketing owns their campaigns and analytics, we help connect marketing data with revenue outcomes.
 
