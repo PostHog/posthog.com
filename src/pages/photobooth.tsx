@@ -935,6 +935,7 @@ export default function Photobooth(): JSX.Element {
     const [images, setImages] = useState<PhotoBoothImage[]>([])
     const [dataURL, setDataURL] = useState<string>()
     const [name, setName] = useState<string>('')
+    const [mobile, setMobile] = useState(false)
 
     useEffect(() => {
         const preloadAllImages = async () => {
@@ -956,6 +957,10 @@ export default function Photobooth(): JSX.Element {
         setModalOpen(false)
     }
 
+    useEffect(() => {
+        setMobile(typeof window !== 'undefined' && window.innerWidth < 768)
+    }, [])
+
     return (
         <Layout>
             <SEO
@@ -974,7 +979,7 @@ export default function Photobooth(): JSX.Element {
                     </h1>
                 </div>
                 <AnimatePresence>
-                    {typeof window !== 'undefined' && window.innerWidth < 768 ? (
+                    {mobile ? (
                         <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
                             <div className="bg-accent dark:bg-accent-dark p-4 rounded border border-light dark:border-dark max-w-xl mx-auto mt-4">
                                 <h1 className="text-3xl font-bold text-center">Mobile devices not supported</h1>
