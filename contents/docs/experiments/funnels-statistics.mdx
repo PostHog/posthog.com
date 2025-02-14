@@ -26,7 +26,7 @@ One more thing worth noting: Bayesian inference starts with an initial guess tha
 
 ## Win probabilities
 
-The **win probability** tells you how likely it is that a given variant has the highest conversion rate compared to all other variants. It helps you determine whether the metric shows a **statistically significant** real effect vs. simply random chance.
+The **win probability** tells you how likely it is that a given variant produces a higher conversion rate compared to the control. It helps you determine whether the metric shows a **statistically significant** real effect vs. simply random chance.
 
 Let's say you're testing a new way of presenting pineapple on the website and have these results:
 
@@ -51,7 +51,11 @@ These results tell us we can be 99.6% confident that showing photos of pineapple
 
 ## Credible intervals
 
-A **credible interval** tells you the range where the true conversion rate lies with 95% probability. This is different than a confidence interval, which describes how often such intervals would contain the true rate if you repeated the experiment many times (not a direct probability statement about where the rate lies).
+We use Bayesian methodology, so we report **credible intervals** rather than the more commonly known **confidence intervals**.
+
+A 95% credible interval means we believe there’s a **95% probability that the true conversion rate lies within that interval**. In other words, it directly reflects our uncertainty about where the true conversion rate might be based on the data we’ve observed.
+
+> If you’re familiar with frequentist methods, you’ve probably heard of confidence intervals. Although they may look similar in graphs, a confidence interval doesn’t mean “there’s a 95% probability that the true rate lies in this range.” Instead, it reflects how often such intervals would contain the true rate if the experiment were repeated many times. In contrast, a **credible interval is the Bayesian version of a confidence interval**, offering a more intuitive probability statement about the metric you care about.
 
 For example, if you have these results:
 

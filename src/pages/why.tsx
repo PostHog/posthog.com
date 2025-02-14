@@ -102,23 +102,13 @@ const Teams: React.FC = () => {
                 menu={[{ name: 'Explore products', url: undefined }, ...productMenu.children]}
                 tableOfContents={[
                     {
-                        url: 'posthog-is-literally-designed-to-be-a-no-brainer',
-                        value: 'PostHog is literally designed to be a no-brainer',
-                        depth: 0,
-                    },
-                    {
-                        url: 'popular-roadmap-items',
-                        value: 'Popular roadmap items',
-                        depth: 0,
-                    },
-                    {
                         url: 'posthog-has-the-lowest-pricing-for-every-product',
-                        value: 'PostHog has the lowest pricing for every product',
+                        value: 'We have the lowest pricing for every product',
                         depth: 0,
                     },
                     {
-                        url: 'posthog-just-does-the-right-thing',
-                        value: 'PostHog just does the right thing',
+                        url: 'we-just-do-the-right-thing',
+                        value: 'We just do the right thing',
                         depth: 0,
                     },
                     {
@@ -129,6 +119,11 @@ const Teams: React.FC = () => {
                     {
                         url: 'posthog-is-more-popular-than-every-other-product',
                         value: 'PostHog is more popular than every other product',
+                        depth: 0,
+                    },
+                    {
+                        url: 'all-your-user-context-in-one-place',
+                        value: 'All your user context in one place',
                         depth: 0,
                     },
                     {
@@ -148,50 +143,9 @@ const Teams: React.FC = () => {
                         <div className="md:flex-1">
                             <div className="@container article-content">
                                 <div className="opacity-70 text-[15px] font-medium">Why PostHog?</div>
-                                <h1 id="posthog-is-literally-designed-to-be-a-no-brainer" className="text-2xl">
-                                    PostHog is literally designed to be a no-brainer
-                                </h1>
-                                <p>
-                                    <strong>
-                                        PostHog is an entire suite of products that help you build successful products –{' '}
-                                        <em>we have more products than anyone else.</em>
-                                    </strong>
-                                </p>
-                                <p>
-                                    We put all the context you need in one place, so you can focus on your users instead
-                                    of fixing endless data integrations.
-                                </p>
-                                <p>
-                                    <strong>We have {PRODUCT_COUNT}+ products today,</strong> but even if we don't offer
-                                    it <em>yet</em>, we will eventually.
-                                </p>
-                                <p>
-                                    We're going to build every piece of SaaS you need to make your product successful.
-                                    You read that right. We've already got the world's best track record at delivering
-                                    them by being the widest with so many customers.
-                                </p>
-                                <p>
-                                    You've probably already seen the products we do have. For the stuff we don't, you
-                                    can <Link to="/roadmap">see our entire public roadmap</Link> and ask for what you
-                                    need.
-                                </p>
-
-                                <h3 id="popular-roadmap-items" className="mb-3">
-                                    Popular roadmap items
-                                </h3>
-                                <RoadmapPreview />
-
-                                <div className="text-center mb-8">
-                                    <Link
-                                        href="/roadmap"
-                                        className="border border-b-3 border-light dark:border-dark p-2 rounded text-center text-sm w-full block hover:bg-white hover:dark:bg-accent-dark hover:border-border hover:dark:border-border-dark hover:border-b-3 relative hover:-top-px active:top-px"
-                                    >
-                                        Explore the roadmap
-                                    </Link>
-                                </div>
 
                                 <h2 id="posthog-has-the-lowest-pricing-for-every-product">
-                                    PostHog has the lowest pricing for every product
+                                    We have the lowest pricing for every product
                                 </h2>
                                 <p>
                                     Sure, it's great to have everything you need in one place, but only if you know
@@ -203,13 +157,14 @@ const Teams: React.FC = () => {
                                 </p>
                                 <p>
                                     And every product has a generous free tier, so you can always try it out before
-                                    paying anything at all.
+                                    paying anything at all. Without talking to sales, because our pricing is completely
+                                    transparent.
                                 </p>
 
-                                <h2 id="posthog-just-does-the-right-thing">PostHog just does the right thing</h2>
+                                <h2 id="we-just-do-the-right-thing">We just do the right thing</h2>
                                 <p>
-                                    We polled our customers - one of the top four reasons they recommend PostHog is
-                                    "developer brand". To us that means we do the right thing for our customers:
+                                    We asked our customers - one of the top reasons they recommend PostHog is our brand.
+                                    To us that means we do the right thing for our customers:
                                 </p>
                                 <ul>
                                     <li>
@@ -217,11 +172,8 @@ const Teams: React.FC = () => {
                                         entire existing customer base
                                     </li>
                                     <li>
-                                        We have{' '}
-                                        <Link href="/side-project-insurance">
-                                            side hustle insurance
-                                        </Link>{' '}
-                                        - we refund if your thing goes viral by accident on HackerNews
+                                        We have <Link href="/side-project-insurance">side hustle insurance</Link> - we
+                                        refund if your thing goes viral by accident on HackerNews
                                     </li>
                                     <li>
                                         We've got{' '}
@@ -251,7 +203,7 @@ const Teams: React.FC = () => {
                                     </li>
                                     <li>
                                         The way we write our content. <Link href="/posts">Just read it</Link> and you’ll
-                                        get what I mean. It’s more honest and not like marketing-speak you've come to
+                                        get what we mean. It’s more honest and not like marketing-speak you've come to
                                         expect from other companies - it actively helps developers build successful
                                         products. That’s our mission.
                                     </li>
@@ -378,8 +330,8 @@ const Teams: React.FC = () => {
                                     PostHog is more popular than every other product
                                 </h2>
                                 <p>
-                                    We get that you aren't a lemming (they refuse to type in our url with their little
-                                    paws), but it's probably a good sign when something is very popular.
+                                    Nobody wants to be a sheep, but it's probably a good sign when something is very
+                                    popular.
                                 </p>
                                 <p>
                                     We have over 100,000 customers using our products. Just under a quarter of a million
@@ -391,10 +343,42 @@ const Teams: React.FC = () => {
                                     products.
                                 </p>
 
+                                <h2 id="all-your-user-context-in-one-place">All your user context in one place</h2>
+
+                                <p>
+                                    We put all the context you need in one place, so you can focus on your users instead
+                                    of fixing endless data integrations.
+                                </p>
+                                <p>
+                                    <strong>We have {PRODUCT_COUNT}+ products today,</strong> but even if we don't offer
+                                    it <em>yet</em>, we will eventually.
+                                </p>
+                                <p>
+                                    We're going to build every piece of SaaS you need to make your product successful.
+                                    You read that right. We've already got the world's best track record at delivering
+                                    them by being the widest with so many customers.
+                                </p>
+                                <p>
+                                    You've probably already seen the products we do have. For the stuff we don't, you
+                                    can <Link to="/roadmap">see our entire public roadmap</Link> and ask for what you
+                                    need.
+                                </p>
+
+                                <RoadmapPreview />
+
+                                <div className="text-center mb-8">
+                                    <Link
+                                        href="/roadmap"
+                                        className="border border-b-3 border-light dark:border-dark p-2 rounded text-center text-sm w-full block hover:bg-white hover:dark:bg-accent-dark hover:border-border hover:dark:border-border-dark hover:border-b-3 relative hover:-top-px active:top-px"
+                                    >
+                                        Explore the roadmap
+                                    </Link>
+                                </div>
+
                                 <h2 id="who-doesnt-posthog-work-well-for">Who doesn't PostHog work well for?</h2>
                                 <p>
                                     People who don't like letting their engineering teams make decisions. If you are
-                                    happy to let engineering drive in your organization then we're usually a slam dunk.
+                                    happy to let engineering drive in your organization, then we're usually a slam dunk.
                                 </p>
                                 <p>
                                     Sometimes we might not have <em>every</em> feature compared to a leading competitor,

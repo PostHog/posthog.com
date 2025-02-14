@@ -15,6 +15,13 @@ import staples from './images/customers/staples.svg'
 import trustwallet from './images/customers/trustwallet.svg'
 import yCombinator from './images/customers/y-combinator.svg'
 
+import mistral from './images/customers/mistral.svg'
+import elevenlabs from './images/customers/elevenlabs.svg'
+import raycast from './images/customers/raycast.svg'
+import startengine from './images/customers/startengine.svg'
+import zendesk from './images/customers/zendesk.svg'
+import researchgate from './images/customers/researchgate.svg'
+
 import { useValues } from 'kea'
 import { layoutLogic } from 'logic/layoutLogic'
 import Link from 'components/Link'
@@ -106,29 +113,39 @@ export default function Customers() {
                         image={yCombinator}
                         alt="Y Combinator"
                     />
-                    <Customer className="max-h-[40px]" image={staples} alt="Staples" />
+                    <Customer className="max-h-[55px]" image={mistral} alt="Mistral AI" />
+                    <Customer
+                        url="/customers/elevenlabs"
+                        className="max-h-[40px]"
+                        image={elevenlabs}
+                        alt="ElevenLabs"
+                    />
+                    <Customer className="max-h-[60px]" image={raycast} alt="Raycast" />
                     <Customer className="max-h-[36px]" image={airbus} alt="Airbus" />
-                    <Customer className="max-h-[35px]" image={dhl} alt="DHL" />
-                    <Customer className="max-h-[50px]" image={outbrain} alt="Outbrain" />
-                    <Customer className="max-h-[40px]" image={mux} alt="Mux.com" />
+                    <Customer className="max-h-[30px]" image={dhl} alt="DHL" />
+                    <Customer className="max-h-[60px]" image={startengine} alt="StartEngine" />
+                    <Customer
+                        url="/customers/assemblyai"
+                        className="max-h-[45px]"
+                        image={assemblyai}
+                        alt="Assembly AI"
+                    />
                     <Customer
                         url="/customers/hasura"
-                        className="max-h-[60px] relative -top-1"
+                        className="max-h-[45px] relative -top-1"
                         image={hasura}
                         alt="Hasura"
                     />
-                    <Customer url="/customers/phantom" className="max-h-[50px]" image={phantom} alt="Phantom.app" />
-                    <Customer className="max-h-[55px]" image={joybird} alt="Joybird" />
-                    <Customer
-                        url="/customers/assemblyai"
-                        className="max-h-[55px]"
-                        image={assemblyai}
-                        alt="AssemblyAI"
-                    />
                     <Customer className="max-h-[50px]" image={trustwallet} alt="Trust Wallet" />
                     <Customer
+                        url="/customers/researchgate"
+                        className="max-h-[30px]"
+                        image={researchgate}
+                        alt="ResearchGate"
+                    />
+                    <Customer
                         url="/blog/posthog-marketing"
-                        className="max-h-[45px]"
+                        className="max-h-[40px]"
                         image={posthog}
                         alt="PostHog - so meta!"
                     />

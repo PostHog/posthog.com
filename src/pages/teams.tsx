@@ -104,17 +104,34 @@ const Teams: React.FC = () => {
 
                                             <div className="absolute -bottom-4 left-0 right-0 justify-center -mr-3 transform transition-all duration-100">
                                                 <div className="flex flex-wrap justify-center" dir="rtl">
+                                                    {profiles.data.length > 6 && (
+                                                        <span
+                                                            className={`invisible group-hover:visible cursor-default -ml-3 relative hover:z-10 rounded-full border-1 border-accent dark:border-accent-dark animate-jump-out transform scale-[0%] group-hover:animate-jump-in group-hover:animate-once group-hover:animate-duration-500 group-hover:animate-delay-[${
+                                                                5 * 100
+                                                            }ms]`}
+                                                        >
+                                                            <Tooltip
+                                                                content={`${profiles.data.length - 5} more`}
+                                                                placement="bottom"
+                                                            >
+                                                                <div className="size-10 rounded-full bg-accent dark:bg-accent-dark border border-light dark:border-dark flex items-center justify-center text-sm font-semibold transform scale-100 hover:scale-125 transition-all">
+                                                                    {profiles.data.length - 5}+
+                                                                </div>
+                                                            </Tooltip>
+                                                        </span>
+                                                    )}
                                                     {profiles.data
                                                         .slice()
-                                                        .sort((a, b) => {
+                                                        .sort((a: any, b: any) => {
                                                             const aIsLead = leadProfiles.data.some(
-                                                                ({ id: leadID }) => leadID === a.id
+                                                                ({ id: leadID }: { id: string }) => leadID === a.id
                                                             )
                                                             const bIsLead = leadProfiles.data.some(
-                                                                ({ id: leadID }) => leadID === b.id
+                                                                ({ id: leadID }: { id: string }) => leadID === b.id
                                                             )
                                                             return aIsLead === bIsLead ? 0 : aIsLead ? -1 : 1
                                                         })
+                                                        .slice(0, profiles.data.length > 6 ? 5 : undefined)
                                                         .reverse()
                                                         .map(
                                                             (
@@ -122,19 +139,27 @@ const Teams: React.FC = () => {
                                                                     id,
                                                                     attributes: { firstName, lastName, avatar, color },
                                                                 },
-                                                                index
+                                                                index: number
                                                             ) => {
                                                                 const name = [firstName, lastName]
                                                                     .filter(Boolean)
                                                                     .join(' ')
                                                                 const isTeamLead = leadProfiles.data.some(
-                                                                    ({ id: leadID }) => leadID === id
+                                                                    ({ id: leadID }: { id: string }) => leadID === id
                                                                 )
                                                                 return (
                                                                     <span
                                                                         key={`${name}-${index}`}
                                                                         className={`invisible group-hover:visible cursor-default -ml-3 relative hover:z-10 rounded-full border-1 border-accent dark:border-accent-dark animate-jump-out transform scale-[0%] group-hover:animate-jump-in group-hover:animate-once group-hover:animate-duration-500 group-hover:animate-delay-[${
-                                                                            (profiles.data.length - index - 1) * 100
+                                                                            (Math.min(
+                                                                                profiles.data.length > 6
+                                                                                    ? 5
+                                                                                    : profiles.data.length,
+                                                                                6
+                                                                            ) -
+                                                                                index -
+                                                                                1) *
+                                                                            100
                                                                         }ms]`}
                                                                     >
                                                                         <Tooltip

@@ -1,0 +1,84 @@
+---
+title: Error monitoring and issue management
+---
+
+import BetaFeedbackBanner from './_snippets/beta-feedback-banner.mdx'
+
+<BetaFeedbackBanner />
+
+Errors are captured as `$exception` events which means that you can create insights, filter recordings, trigger surveys, and more in the same way you can for any other type of event.
+
+## Issue list
+
+In addition to using events in insights, replays, and surveys as mentioned above customers can also visit the [error tracking page](https://us.posthog.com/error_tracking).
+
+Exceptions are grouped by type, each with aggregated counts and sparklines providing an indication of the severity of each group. You can also search for exceptions containing specific text and filter to see which exceptions affect certain users.
+
+<ProductScreenshot
+    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_01_20_at_10_15_21_2x_f4848a78c6.png"
+    imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_01_20_at_10_15_46_2x_f1f5e7f31b.png"
+    alt="Error tracking overview"
+    classes="rounded"
+/>
+
+Clicking through to an individual group shows you all the associated exceptions, including the associated stack trace, active feature flags when the exception was captured, and a link to the relevant session replay.
+
+<ProductScreenshot
+    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_01_20_at_10_19_44_2x_0d99749100.png"
+    imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_01_20_at_10_19_29_2x_4c508f3506.png"
+    alt="Error tracking details"
+    classes="rounded"
+/>
+
+## Managing issues
+
+Our error tracking product gives you multiple ways to manage issues towards resolution.
+
+### User groups
+
+Error tracking enables you to assign issues to individual users, but what if you want to assign issues to a group? You can create a group in [your project settings](https://us.posthog.com/settings/project-error-tracking) under **Error tracking**.
+
+<ProductScreenshot
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_01_24_at_11_32_25_99a9f9d6af.png"
+  imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_01_24_at_11_32_06_84f92a4751.png"
+  alt="Error tracking user groups"
+  classes="rounded"
+/>
+
+### Merging issues
+
+You can merge issues representing the same problem by:
+
+1. Selecting the primary issue others should be merged into
+2. Selecting the issue(s) to merge into the primary issue
+3. Clicking the **Merge** button
+
+After merging, all events and properties from the merged issues are added to the primary issue. The merged issues are then deleted.
+
+### Custom issue grouping
+
+PostHog attempts to group the same exceptions as a single issue. An `$exception_fingerprint` property is generated during ingestion by PostHog and used to perform this grouping. Setting the `$exception_fingerprint` property on the frontend will override the default flow to allow for custom grouping of certain exceptions.
+
+When using the `captureException` method you can provide `$exception_fingerprint` as an additional property in the functions second argument.
+
+```js
+posthog.captureException(error, { $exception_fingerprint: "MyCustomGroup" })
+```
+
+Should an exception be autocaptured, you will need to modify the properties before the event is sent. The PostHog config offers a [`before_send`](/docs/libraries/js#amending-events-before-they-are-captured) hook that fires for each event. You can alter the event as part of this callback to add the property:
+
+```javascript
+posthog.init("<ph_project_api_key>", {
+  before_send: (event) => {
+    if (event.event === "$exception") {
+      const exceptionList = event.properties["$exception_list"] || []
+      const exception = exceptionList.length > 0 ? exceptionList[0] : null;
+
+      if (exception && exception["$exception_type"] == "SyntaxError") {
+        event.properties["$exception_fingerprint"] = "MyCustomGroup"
+      }    
+    }
+    return event
+  }
+})
+```

@@ -1,0 +1,43 @@
+---
+title: Error tracking installation
+---
+
+import BetaFeedbackBanner from './_snippets/beta-feedback-banner.mdx'
+import Tab from "components/Tab"
+import WebInstall from '../integrate/_snippets/install-web.mdx'
+import JSWebErrorTracking from './_snippets/web-install-error-tracking.mdx'
+import ReactInstall from '../integrate/_snippets/install-react.mdx'
+import PythonInstall from '../integrate/_snippets/install-python.mdx'
+import PythonErrorTracking from './_snippets/python-install-error-tracking.mdx'
+import SentryInstall from '../libraries/_snippets/install-sentry.mdx'
+
+<BetaFeedbackBanner />
+
+Error tracking enables you to track, investigate, and resolve exceptions your customers face. Getting this working requires installing PostHog: 
+
+<!-- prettier-ignore -->
+<Tab.Group tabs={['Web', 'React', 'Python', 'Sentry']}>
+    <Tab.List>
+      <Tab>Web</Tab>
+      <Tab>React</Tab>
+      <Tab>Python</Tab>
+      <Tab>Sentry</Tab>
+    </Tab.List>
+    <Tab.Panels>
+        <Tab.Panel>
+          <WebInstall />
+          <JSWebErrorTracking />
+        </Tab.Panel>
+        <Tab.Panel>
+          <ReactInstall />
+          <JSWebErrorTracking />
+        </Tab.Panel>
+        <Tab.Panel>
+          <PythonInstall />
+          <PythonErrorTracking />
+        </Tab.Panel>
+        <Tab.Panel>
+          <SentryInstall />
+        </Tab.Panel>
+    </Tab.Panels>
+</Tab.Group>

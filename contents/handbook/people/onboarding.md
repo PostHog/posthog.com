@@ -68,6 +68,15 @@ In these cases, the process is:
   - Issue them a Brex card to their work email with a sufficiently high temporary balance to cover travel costs
   - Have the new team member book travel as usual
 
+While there is no fixed budget for onboardings they should be relatively less expensive than a small team offsite. Some considerations to reduce the cost:
+
+  - Avoid intercontinental travel or choose a location that limits it to the minimum number of people possible
+  - You should not need to plan a social activity
+  - Limit attendees to members of your Small Team
+  - See if there are any other onboardings at the same time you could pair up with
+
+Aim to keep things sensible and cheap. As always, use your best judgement when [spending money](/handbook/people/spending-money). Request a budget in Brex for any onboardings you are doing. 
+
 > You should by default avoid combining in-person onboarding with [small team offsites](/handbook/company/offsites#small-team-offsites) as they serve different purposes. The focus of onboarding is generally on making the new team member successful, but offsites feature things like hackathons and 360 feedback which aren't usually helpful for this and detract from useful onboarding time. However, it may occasionally make sense to combine the two - just use your judgement. 
 
 ### Engineering
@@ -111,7 +120,6 @@ We use a number of different tools to organise our work and communicate at PostH
 - Slack - we have an internal workspace and a users Slack as well
 - Brex (US, RoW) or Revolut (UK, EU) - company cards and expenses tracking
 - Shopify - powers our merch store
-- Printfection - merch inventory management, [YC onboarding](/handbook/growth/sales/yc-onboarding) merch, and merch [drop-shipping for small events](https://github.com/PostHog/meta/issues/31)
 - CharlieHR - holiday tracking, personal details
 - Gusto - payroll and benefits (US)
 - Deel - contractor payroll (EU and special arrangements)
@@ -136,6 +144,7 @@ We use a number of different tools to organise our work and communicate at PostH
 - Gusto - US payroll and benefits management
 - Deel - international payroll and contracts management
 - Ashby - recruitment
+- Brilliant - merch inventory management, [YC onboarding](/handbook/growth/sales/yc-onboarding) merch, and merch [drop-shipping for small events](https://github.com/PostHog/meta/issues/31)
 
 ## Signatories
 

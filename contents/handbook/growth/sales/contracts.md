@@ -8,7 +8,7 @@ showTitle: true
 
 For customers who want to sign up for an annual (or longer) plan there is some additional paperwork needed to capture their contractual commitment to a minimum term, and likely custom pricing as well. At a minimum, they should sign an Order Form which references our standard [terms](/terms) and [privacy notice](/privacy). In addition, they may want a custom Master Services Agreement (MSA) or Data Processing Agreement (DPA).
 
-> If a customer wants to vary either our DPA, BAA, or MSA terms, it is a substantial effort for our legal team to review these changes.  At a minimum, we should only do this for contracts above $20k a year, and even higher if they are asking for big changes (e.g. adding a Service Level Agreements). The minimum is $100k to bring your own contract instead of our template - see 'Non PostHog Contracts' below.
+> If a customer wants to vary either our DPA, BAA, or MSA terms, it is a substantial effort for our legal team to review these changes.  At a minimum, we should only do this for contracts above $20k a year, and even higher if they are asking for big changes (e.g. adding a Service Level Agreements). The minimum is $100k to bring your own contract instead of our template - see 'Non PostHog Contracts' below. A customer needs to either be spending this amount at present, or agree to commit to this spend via an annual contract, in order to initiate legal review of potential changes. 
 
 In addition, customers requiring our Enterprise plan need to sign up for a minimum of $20k of PostHog Cloud Credit for a year, as well as adding the Teams plan to their subscription.
 
@@ -20,9 +20,23 @@ Payments for annual plans are via Bank Transfer only (no checks).
 
 Anyone on a monthly plan simply agrees to our [Terms](/terms) and [Privacy Policy](/privacy) when they sign up.
 
-## Pricing calculator
+## QuoteHog pricing calculator
 
-While we have a transparent pricing available, you'll need to use our [pricing calculator](https://docs.google.com/spreadsheets/d/1ynNM9tbWsWki2Q0vhwCV0iYNtJ1NHz4eXtUvZDw_sjA/edit?usp=sharing) (internal only) for customers with very high volumes or bespoke needs.
+While we offer [transparent pricing available to all](/pricing), you are able to use [QuoteHog](https://quote.posthog.net) (internal only) for customers who need a "formal quote," or who have very high volumes, or otherwise have bespoke needs.
+
+You sign into QuoteHog via your PostHog Google account/SSO. Upon login, you will see a list of quotes that have been prepared, sorted by the date created. You can access a previously created quote, or create a new quote with the "New Quote" button at the top right. 
+
+The quoting interface is intuitive and, of course, uses the same pricing we display publicly. We should feel free to involve a customer in creating a quote if the opportunity presents itself and you think it would build trust. 
+
+Quotes can be shared externally or embedded in Trumpet (or any other external source) by clicking the Dot Menu from a Quote and then clicking "Share"
+
+To view Stripe reported usage and spend for an existing customer, or to connect a Quote to a Salesforce Opportunity or Account, first connect QuoteHog to Salesforce from your [Profile page](https://quote.posthog.net/profile).
+
+If someone asks for a PDF version of a quote, you can view the external version and then print it to PDF from there.
+
+The legacy pricing calculator is available [here](https://docs.google.com/spreadsheets/d/1ynNM9tbWsWki2Q0vhwCV0iYNtJ1NHz4eXtUvZDw_sjA/edit?usp=sharing) (internal only).
+
+> Be sure to always click the "Save" button after making changes to a quote. QuoteHog does not autosave.
 
 ## Discounts
 
@@ -87,6 +101,21 @@ Our strong preference is for customers to pay by credit card, as this is easier 
 
 If a customer wants to pay by ACH or bank transfer, we will usually only consider this if they are paying for 1 year or more up front. This is more likely to be the case for very large customers.
 
+## Contract buyouts
+
+Sometimes customers will be locked into a contract with a competitor, but want to switch to PostHog when their contract is up. In this case, we are willing to let them use PostHog for free for up to 6 months. This is beneficial to PostHog as well, as we can get them set up and using PostHog sooner, capitalizing on the momentum of their interest today, and giving them more time to get comfortable with the platform.
+
+Some rules:
+
+* They need to share a copy of their current contract/pricing/bank statement as proof.
+* They sign up to an annual contract worth $20k+/year, paid up front. Their PostHog contract starts when their current one expires. 
+* Their usage in the overlap period needs to be proportionate to the contract they've signed, ie. if they sign a $50k contract and have 6 months to run, they get $25k of PostHog credit for free.
+* The competitor they're using has to be 'real', ie. not some random side project. As a general rule, anyone we have written a [comparison article](/blog/tags/comparisons) about counts.
+* We have final discretion on deciding who gets the deal.
+* We can still provide a standard free trial period of 2-4 weeks before they sign the contract, as they will likely need to figure out whether PostHog is right for them before committing.
+
+> Normal commission rules apply here - commission is paid in the quarter in which the customer pay their annual invoice.
+
 ## Order Form
 
 An Order Form is a lightweight document that captures the customer details, credit amount, discount, term, and signatures from both
@@ -129,7 +158,7 @@ We use [PandaDoc](https://app.pandadoc.com/a/#/) to handle document generation, 
 
    > PostHog Cloud License Terms executed by and between PostHog, Inc. and CUSTOMER LEGAL NAME (the “Agreement”)
 
-8. You should link the order form to the HubSpot deal using the sidebar on the right so that we have a reference to the completed paperwork from our CRM.
+8. You should link the order form to the opportunity record in Salesforce using the `Contract Link` field in the "Opportunity Closure Details" so that we have a reference to the completed paperwork from our CRM.
 
 ### Routing an Order Form for review and signature
 
@@ -183,9 +212,9 @@ We offer HIPAA Compliance on PostHog Cloud and as such health companies will req
 2. Create a new document from the [PandaDoc Template](https://app.pandadoc.com/a/#/templates/4psCXzU527sNE6WEbFBg3a).
 3. All you need to do it set the `Client.Company` variable and then send it to them for review and signature.
 4. Once the client has signed it then it will get routed to Fraser for countersignature.
-5. You'll get a notification when everybody has signed it - _don't forget to update the *BAA Signed Date* property on the HubSpot company record,_ so we can keep track of who we have signed a BAA with.
+5. You'll get a notification when everybody has signed it - _don't forget to update the *HIPAA BAA Signed Date* property on the customer's Salesforce Accountrecord,_ so we can keep track of who we have signed a BAA with.
 
-> We only provide our default BAA for Teams plan subscribers - customization requires >$20k annual spend. The BAA only remains active for as long as the customer is subscribed to Teams - if they unsubscribe, we send them a message that their BAA will become inactive at the end of the month in which they cancelled. If the lead is not sure whether they will need a custom BAA and their usage wouldn't put them at $20K, then it is worth pushing them to get legal feedback by sending them our BAA before moving forward, else you risk spending a lot of time on an evaluation that ends up at $450/month.
+> We only provide our default BAA for Teams plan subscribers - customization requires >$20k annual spend. The BAA only remains active for as long as the customer is subscribed to Teams - if they unsubscribe, we send them a message that their BAA will become inactive at the end of the month in which they cancelled. A customer who is on a Teams trial (with a credit card in PostHog) is eligible to sign a default BAA, but you should make it clear to them that the default BAA will be voided if/when the Teams subscription lapses. If the lead is not sure whether they will need a custom BAA and their usage wouldn't put them at $20K, then it is worth pushing them to get legal feedback by sending them our BAA before moving forward, else you risk spending a lot of time on an evaluation that ends up at $450/month.
 
 ## Non-PostHog contracts
 

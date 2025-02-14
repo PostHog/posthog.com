@@ -13,7 +13,7 @@ featuredImageType: full
 category: Inside PostHog
 ---
 
-Before joining PostHog, [Joe Martin](/community/profiles/59) had never owned a Mac.
+Before joining PostHog, <TeamMember name="Joe Martin" photo /> had never owned a Mac.
 
 The former tech and games journalist previously did everything on PC, but joining PostHog’s [Apple-dominated](https://posthog.com/handbook/people/spending-money#laptop) culture came with a few… necessary adjustments.
 

@@ -20,7 +20,7 @@ The PostHog team includes a number of voracious readers — we even have [our ow
 If you're looking for more startup advice or support, don't forget to check out [PostHog for Startups](/startups), our program for helping early-stage teams get to product market fit. Our startup program includes $50,000 in PostHog credit, exclusive events and promotional opportunities, and is available to any company less than 2 years old and with less than $5M in funding. 
 ![Ask Iwata](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tracks/ask-iwata.jpg)
 ## [Ask Iwata: Words of Wisdom from Nintendo’s Legendary CEO by Hobonichi](https://www.goodreads.com/book/show/54736620-ask-iwata)
-**Recommended by [Joe Martin, Product Marketing](/community/profiles/59)**
+**Recommended by [Joe Martin, Product Marketing](/community/profiles/29070)**
 
 Former games journalist Joe has repeatedly recommended this collection of essays by Satoro Iwata in our book club Slack group. It’s one of the only books about management that he’s ever been able to finish. 
 

@@ -24,15 +24,16 @@ import JavaInstall from '../integrate/_snippets/install-java.mdx'
 import RustInstall from '../integrate/_snippets/install-rust.mdx'
 import FlutterInstall from '../integrate/_snippets/install-flutter.mdx'
 import ElixirInstall from '../integrate/_snippets/install-elixir.mdx'
+import DotNetInstall from '../integrate/_snippets/install-dotnet.mdx'
 
 Product analytics enable you to gather and analyze data about how users interact with your product. 
 
 To start, install PostHog in the app you want to collect data in.
 
-> **Tip**: Even if you have multiple customer-facing products (e.g., a marketing website + iOS app + web app), it's best to have them share the same project. This enables you to track the user across their journey across different platforms. See [organizations & projects docs](/manual/organizations-and-projects) for more.
+> **Tip**: Even if you have multiple customer-facing products (e.g., a marketing website + iOS app + web app), it's best to have them share the same project. This enables you to track the user across their journey across different platforms. See [organizations](/docs/settings/organizations) and [projects](/docs/settings/projects) docs for more.
 
 <!-- prettier-ignore -->
-<Tab.Group tabs={['Web', 'React', 'Node.js', 'Python', 'PHP', 'Ruby', 'Go', 'React Native', 'Android', 'iOS', 'Java', 'Rust', 'Elixir', 'Flutter', 'guides', 'api']}>
+<Tab.Group tabs={['Web', 'React', 'Node.js', 'Python', 'PHP', 'Ruby', 'Go', 'React Native', 'Android', 'iOS', 'Java', 'Rust', 'Elixir', 'Flutter', '.NET', 'guides', 'api']}>
     <Tab.List>
         <Tab>Web</Tab>
         <Tab>React</Tab>
@@ -48,6 +49,7 @@ To start, install PostHog in the app you want to collect data in.
         <Tab>Rust</Tab>
         <Tab>Elixir</Tab>
         <Tab>Flutter</Tab>
+        <Tab>.NET</Tab>
         <Tab count="11">Framework guides</Tab>
         <Tab>API</Tab>
     </Tab.List>
@@ -93,6 +95,9 @@ To start, install PostHog in the app you want to collect data in.
         </Tab.Panel>
         <Tab.Panel>
            <FlutterInstall />
+        </Tab.Panel>
+        <Tab.Panel>
+            <DotNetInstall />
         </Tab.Panel>
         <Tab.Panel>
             <Frameworks />

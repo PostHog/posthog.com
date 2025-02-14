@@ -36,7 +36,7 @@ Welcome to the PostHog Sales and Customer Success team!  We only hire about 1 in
 ### Week 2
 
 - During your first week, Simon will figure out your initial book of business (around 10-15 accounts for AEs, 30 for CSMs).  We will review these at the start of your second week.
-- Shadow more live calls and listen to more [Jimminy](https://app.jiminny.eu/dashboard) recordings.
+- Shadow more live calls and listen to more [Jiminny](https://app.jiminny.eu/dashboard) recordings. There is [a Jiminny playlist with sub-folders containing Sales calls and PostHog knowledge calls](https://app.jiminny.eu/playlists#playlist-355cdc2a-1326-4ea6-97e3-e7749800fc8a), add to it as you listen! 
 - Towards the end of the week, schedule a demo and feedback session with Simon.  We might need to do a couple of iterations over the next few weeks as you take onboard feedback, don't worry if that's the case!
 - Review your current book of customers, and prioritize who you want to reach out to first.
 - Get comfortable with the PostHog [Docs](/docs).
@@ -88,6 +88,9 @@ By the end of month 4 - you should:
 - [Cal.com](https://app.cal.com/) for shared meeting booking links
 - [Loom](https://www.loom.com/) for short videos (Simon can invite you to the company account)
 - [Trumpet](https://www.sendtrumpet.com/) for sales rooms
+- [LinkedIn Sales Navigator](https://www.linkedin.com/sales/home) for account intelligence
+- [Clay](https://www.clay.com/) for account and contact enrichment
+- [Scratchpad](https://www.scratchpad.com/) for AI agents and a friendlier SFDC UI (AEs sign up as part of their software budget)
 
 ## New hire frequently asked questions
 
@@ -99,3 +102,7 @@ By the end of month 4 - you should:
 ### Can I login as a customer?
 
 - Visit the /admin/ endpoint on the cloud they are on.  You can then search for them via email and log in.  Be careful clicking around here as you can accidentally delete a person/organization! You should get their permission first unless it's an emergency, i.e. to resolve an incident. 
+
+### Are there any influential folks in our space I should read/listen to?
+
+- Join the `#newsletters` channel in Slack for updates from a curated collection of influential folks in our industry.

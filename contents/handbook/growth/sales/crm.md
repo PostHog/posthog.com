@@ -69,6 +69,8 @@ Our preferred way to keep track of outreach is by creating Salesforce Leads, Con
 
 If you add "sf-lead" tag to a ticket in Zendesk, a new lead will be automatically created in Salesforce. This helps streamline the process of converting support questions or tickets into potential sales opportunities directly from Zendesk.
 
+If you see "Zendesk" as the lead source, please review the ticket under the Zendesk widget in Salesforce which allows you to view the full context within salesforce. It will also appear in sales_form_message field for quick review of last request before the Zendesk ticket is converted to a lead.
+
 ### Forwarding Sales Opportunities
 If you are not in the sales team but are engaged with a client and identify a sales opportunity, forward the email chain to sales@posthog.com. A new lead will be automatically created in salesforce and assigned to the appropriate AE based on existing criteria. This way we can smoothly hand off potential opportunities and track things properly!
 
@@ -131,6 +133,14 @@ Converted: A lead that has been qualified and is ready to become an opportunity.
 Unqualified: A lead that does not meet the criteria to become an opportunity.
 - Document the reasons for disqualification in the “Disqualification reason” field in Salesforce (e.g., budget constraints, lack of fit, self serve customer, non-opportunity-related inquiries, support requests).
 - Update the lead status to 'Unqualified'.
+
+### Support Requests
+
+If you receive a lead for a self-serve customer who has used the Sales Contact Form to submit a support request, you should:
+- Set the 'Disqualification reason' to 'Support Request'
+- Update the lead status to 'Unqualified'
+
+This will [automatically create a ticket](https://zapier.com/editor/274433115/published) in Zendesk for the Comms team to review and address. You will be CC'd on the ticket and the ticket link will be added to the Lead's 'Next Steps' field in Salesforce.
 
 ### Lead Qualification Criteria
 - Do they match our ideal customer profile?

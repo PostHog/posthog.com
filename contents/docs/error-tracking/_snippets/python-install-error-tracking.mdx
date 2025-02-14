@@ -1,0 +1,25 @@
+### Setting up Python exception autocapture
+
+> **Note:** A minimum SDK version of v3.7.0 is required, but we recommend keeping up to date with the latest version to ensure you have all of error tracking's features.
+
+Exception autocapture can be enabled during initialization of the PostHog client to automatically capture any exception thrown by your Python application.
+
+```python
+from posthog import Posthog
+
+posthog = Posthog("<ph_project_api_key>", enable_exception_autocapture=True, ...)
+```
+
+If you're using Django 4.2+, you can enable the exception autocapture integration which will also automatically capture Django errors.
+
+```python
+from posthog.exception_capture import Integrations
+
+Posthog("<ph_project_api_key>", enable_exception_autocapture=True, exception_autocapture_integrations = [Integrations.Django])
+```
+
+For exceptions handled by your application that you would still like sent to PostHog, you can manually call the capture method:
+
+```python
+posthog.capture_exception(e, 'user_distinct_id', properties=additional_properties)
+```

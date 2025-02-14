@@ -1,0 +1,39 @@
+An embedding is a way to track the embedding of a given text.
+
+Event Name: `$ai_embedding`  
+
+| Property | Description |
+|----------|-------------|
+| `$ai_trace_id` | The trace ID (a UUID to group AI events) |
+| `$ai_model` | The model used <br/>`text-embedding-3-small` |
+| `$ai_provider` | The LLM provider |
+| `$ai_input` | The text to embed <br/>`Tell me a fun fact about hedgehogs` |
+| `$ai_input_tokens` | The number of tokens in the input |
+| `$ai_latency` | The latency of the embedding (ms) |
+| `$ai_http_status` | The HTTP status code of the response |
+| `$ai_base_url` | The base URL of the LLM provider |
+| `$ai_is_error` | Boolean to indicate if the request was an error |
+| `$ai_error` | The error message or object | 
+
+### Example
+```bash
+curl -X POST "<ph_client_api_host>/capture/" \
+     -H "Content-Type: application/json" \
+     -d '{
+         "api_key": "<ph_project_api_key>",
+         "event": "$ai_embedding",
+         "properties": {
+             "distinct_id": "distinct_id",
+             "$ai_trace_id": "trace_id",
+             "$ai_model": "text-embedding-3-small",
+             "$ai_provider": "openai",
+             "$ai_input": "Tell me a fun fact about hedgehogs",
+             "$ai_input_tokens": 100,
+             "$ai_latency": 100,
+             "$ai_http_status": 200,
+             "$ai_base_url": "https://api.openai.com/v1"
+         },
+         "timestamp": "[optional timestamp in ISO 8601 format]"
+     }'
+
+```

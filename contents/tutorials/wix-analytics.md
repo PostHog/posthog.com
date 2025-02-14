@@ -29,7 +29,7 @@ After [signing up for PostHog](https://us.posthog.com/signup) (which you can do 
 </script>
 ```
 
-With this, go to your Wix settings, scroll down and choose **Custom code**, click the **+** for the header, paste in your web snippet, and click **Apply**. 
+With this, go to your Wix settings, scroll down and choose **Custom code**, click the **+** for the header, paste in your web snippet, and click **Apply**. Also under **Add Code To Pages**, change **Load code on each new page** to **Load code once**.
 
 ![Wix code](https://res.cloudinary.com/dmukukwp6/image/upload/wix_code_2683d43eca.png)
 

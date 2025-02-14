@@ -1,0 +1,43 @@
+A generation is a single call to an LLM.
+
+Event Name: `$ai_generation`  
+
+| Property | Description |
+|----------|-------------|
+| `$ai_trace_id` | The trace ID (a UUID to group AI events) like `conversation_id` |
+| `$ai_model` | The model used <br/>`gpt-3.5-turbo` |
+| `$ai_provider` | The LLM provider |
+| `$ai_input` | List of messages <br/>`[{"role": "user", "content": "Tell me a fun fact about hedgehogs"}]` |
+| `$ai_input_tokens` | The number of tokens in the input (often found in response.usage) |
+| `$ai_output_choices` | List of choices <br/>`[{"role": "assistant", "content": "Hedgehogs are small mammals with spines on their back."}]` |
+| `$ai_output_tokens` | The number of tokens in the output (often found in response.usage) |
+| `$ai_latency` | The latency of the LLM call (ms) |
+| `$ai_http_status` | The HTTP status code of the response |
+| `$ai_base_url` | The base URL of the LLM provider |
+| `$ai_is_error` | Boolean to indicate if the request was an error |
+| `$ai_error` | The error message or object | 
+
+### Example
+```bash
+curl -X POST "<ph_client_api_host>/capture/" \
+     -H "Content-Type: application/json" \
+     -d '{
+         "api_key": "<ph_project_api_key>",
+         "event": "$ai_generation",
+         "properties": {
+             "distinct_id": "distinct_id_of_your_user",
+             "$ai_trace_id": "trace_id",
+             "$ai_model": "gpt-3.5-turbo",
+             "$ai_provider": "openai",
+             "$ai_input": "[{\"role\": \"user\", \"content\": \"Tell me a fun fact about hedgehogs\"}]",
+             "$ai_input_tokens": 100,
+             "$ai_output_choices": "[{\"role\": \"assistant\", \"content\": \"Hedgehogs are small mammals with spines on their back.\"}]",
+             "$ai_output_tokens": 100,
+             "$ai_latency": 100,
+             "$ai_http_status": 200,
+             "$ai_base_url": "https://api.openai.com/v1"
+         },
+         "timestamp": "2025-01-30T12:00:00Z"
+     }'
+
+```
