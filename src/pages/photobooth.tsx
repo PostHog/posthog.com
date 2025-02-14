@@ -416,16 +416,6 @@ const PhotoStrip = ({
                         {image?.overlay?.stripComponent && (
                             <div className="absolute inset-0">{image.overlay.stripComponent}</div>
                         )}
-                        {image?.src && onRetake && retaking === undefined && images.every((image) => image.src) && (
-                            <button
-                                onClick={() => {
-                                    onRetake(index)
-                                }}
-                                className="absolute inset-0 size-full bg-black/50 text-white text-lg font-bold opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-20"
-                            >
-                                Retake
-                            </button>
-                        )}
                     </div>
                 )
             })}
@@ -612,7 +602,9 @@ const PhotoModal = ({
             setOverlay(undefined)
             setRetaking(undefined)
             if (!retaking) {
-                onDone(newImages)
+                setTimeout(() => {
+                    onDone(newImages)
+                }, 2500)
             }
         } else {
             setOverlayIndex(nextIndex)
@@ -875,13 +867,31 @@ const Card = ({
     }
 
     return (
-        <div className="relative">
+        <motion.div
+            className="relative"
+            initial={{
+                opacity: 0,
+                x: -20,
+                scale: 0.95,
+                rotate: -2,
+            }}
+            animate={{
+                opacity: 1,
+                x: 0,
+                scale: 1,
+                rotate: 0,
+                transition: {
+                    type: 'spring',
+                    bounce: 0.2,
+                    duration: 0.4,
+                    delay: index * 0.1,
+                },
+            }}
+        >
             <button
                 disabled={downloading}
                 onClick={handleDownload}
-                className={`absolute top-2 right-2 z-10 opacity-70 hover:opacity-100 transition-opacity bg-black/50 rounded-full p-1.5 ${
-                    className?.includes('bg-dark') ? 'text-white' : ''
-                }`}
+                className={`absolute -top-3 -right-3 z-10 bg-white rounded-full p-1.5 shadow-lg hover:scale-[1.1] transition-transform active:scale-100`}
             >
                 <IconDownload className="w-6 h-6" />
             </button>
@@ -920,7 +930,7 @@ const Card = ({
                     </p>
                 </div>
             </div>
-        </div>
+        </motion.div>
     )
 }
 
