@@ -8,6 +8,7 @@ import { useInView } from 'react-intersection-observer'
 import { toJpeg } from 'html-to-image'
 import { IconDownload } from '@posthog/icons'
 import Link from 'components/Link'
+import { SEO } from 'components/seo'
 
 const numImages = 4
 const initialCount = 3
@@ -963,15 +964,31 @@ export default function Photobooth(): JSX.Element {
 
     return (
         <Layout>
-            <div className="py-12 px-5">
+            <SEO
+                title="PostHog photo booth"
+                description="A Valentine's Day photo booth"
+                image={`/images/og/photobooth.png`}
+            />
+
+            <div className="pt-12 pb-24 px-5">
+                <div className="flex flex-col items-center">
+                    <h2 className="text-3xl font-bold inline-flex bg-red-2-dark text-white rounded-sm py-1 px-2 -rotate-2 mb-0">
+                        Valentine's Day edition
+                    </h2>
+                    <h1 className="text-5xl font-bold md:px-4 mb-3 mt-3 text-center">
+                        Welcome to the <span className="text-red dark:text-yellow">PostHog photo booth</span>
+                    </h1>
+                </div>
                 <AnimatePresence>
                     {typeof window !== 'undefined' && window.innerWidth < 768 ? (
                         <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
-                            <h1 className="text-3xl font-bold px-4 text-center">Mobile devices not supported</h1>
-                            <p className="text-center text-[15px] max-w-md mx-auto mt-4">
-                                Sorry! The PostHog photo booth is designed for desktop use only. Please visit this page
-                                on your computer for the best experience.
-                            </p>
+                            <div className="bg-accent dark:bg-accent-dark p-4 rounded border border-light dark:border-dark max-w-xl mx-auto mt-4">
+                                <h1 className="text-3xl font-bold text-center">Mobile devices not supported</h1>
+                                <p className="text-center text-[15px] max-w-md mx-auto mt-4">
+                                    Sorry! The PostHog photo booth is designed for desktop use only. Please visit this
+                                    page on your computer for the best experience.
+                                </p>
+                            </div>
                         </motion.div>
                     ) : images.length > 0 ? (
                         <>
@@ -982,6 +999,21 @@ export default function Photobooth(): JSX.Element {
                                     @posthog
                                 </Link>
                                 !)
+                            </p>
+                            <p>
+                                <div className="flex justify-center mt-4 mb-8">
+                                    <CallToAction
+                                        onClick={() => {
+                                            setImages([])
+                                            setDataURL(undefined)
+                                            setModalOpen(true)
+                                        }}
+                                        type="secondary"
+                                        size="sm"
+                                    >
+                                        <span>Start over</span>
+                                    </CallToAction>
+                                </div>
                             </p>
                             <div className="flex justify-center items-start gap-8">
                                 <div className="flex flex-col snap-y snap-mandatory flex-shrink-0 gap-8">
@@ -1013,9 +1045,8 @@ export default function Photobooth(): JSX.Element {
                         </>
                     ) : (
                         <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
-                            <h1 className="text-3xl font-bold px-4 text-center">Welcome to the PostHog photo booth</h1>
-                            <p className="text-center text-[15px]">
-                                We've assembled four Valentines-themed photo booth templates. Choose your favorite and
+                            <p className="font-medium opacity-80 text-center md:px-4">
+                                We've assembled four Valentines-themed photo booth templates. Click your favorite and
                                 get to snappin'.
                             </p>
                             <PhotoModal

@@ -43,22 +43,21 @@ export default function Banner() {
         <>
             {!compact && (
                 <div
-                    className={`${isCookieSet ? 'h-0' : '!max-h-96'} transition-all overflow-hidden relative`}
+                    className={`${
+                        isCookieSet ? 'h-0' : '!max-h-96'
+                    } transition-all overflow-hidden relative hidden md:block border-b border-black/50`}
                     style={{ maxHeight: '0px' }}
                 >
-                    <div className="bg-yellow/75 dark:bg-yellow/90 md:text-center text-sm dark:text-primary pl-4 pr-10 md:px-10 py-2">
-                        <strong>We've decided to make less money:</strong> We've slashed our pricing for session replay.
-                        They're now{' '}
-                        <Link
-                            to="/blog/session-replay-pricing"
-                            className="underline font-semibold hover:text-red  dark:hover:text-red"
+                    <div className="bg-red-2-dark md:text-center text-sm text-white pl-4 pr-10 md:px-10 py-2 font-semibold">
+                        Why are you on a B2B Saas website on Valentine’s Day? Are you here for the{' '}
+                        <Link to="/photobooth" className="underline font-bold hover:text-white" onClick={handleDismiss}>
+                            photobooth?
+                        </Link>
+                        <button
                             onClick={handleDismiss}
+                            className="absolute right-2 top-2 md:top-1.5 p-1 cursor-pointer"
                         >
-                            more than 50% cheaper
-                        </Link>{' '}
-                        for most customers.
-                        <button onClick={handleDismiss} className="absolute right-2 top-2 md:top-1 p-1 cursor-pointer">
-                            <IconX className="size-5" />
+                            <IconX className="size-4" />
                         </button>
                     </div>
                 </div>
