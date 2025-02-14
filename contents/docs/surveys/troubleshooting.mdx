@@ -28,6 +28,8 @@ Surveys are enabled through the surveys opt in toggle in the [app](https://app.p
 
 You can read more about [`posthog-js` configurations here](/docs/integrate/client/js#config).
 
+> **Note:** Surveys make use of feature flags internally when determining if a user should be presented with a survey. If your SDK configuration sets `advanced_disable_feature_flags` to `true`, this will also disable surveys for all users.
+
 ### 2. Content security policy
 
 When surveys are enabled, `posthog-js` will fetch a `survey.js` script from the PostHog server. It is not included in the default `posthog-js` installation to minimize the default bundle size.
@@ -71,7 +73,7 @@ Check your `posthog-js` version.  If its lower than `v1.151.0`, please upgrade y
 
 If you're seeing: `Update survey failed: Cohort with behavioral filters cannot be used in feature flags.` or similar, it's because surveys are powered by feature flags for person property targeting.
 
-Currently we do not support behavioral cohorts in flags which is why you might see an error if setting a person property that contains a behavioral cohort in your survey.
+Currently [we do not support dynamic cohorts in flags](/docs/data/cohorts#can-you-use-a-dynamic-behavioral-cohort-as-a-feature-flag-target) which is why you might see an error if setting a person property that contains a dynamic cohort in your survey.
 
 #### Will I be double charged for feature flags if I use surveys?
 

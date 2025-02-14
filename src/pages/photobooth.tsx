@@ -963,9 +963,17 @@ export default function Photobooth(): JSX.Element {
 
     return (
         <Layout>
-            <div className="py-12">
+            <div className="py-12 px-5">
                 <AnimatePresence>
-                    {images.length > 0 ? (
+                    {typeof window !== 'undefined' && window.innerWidth < 768 ? (
+                        <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
+                            <h1 className="text-3xl font-bold px-4 text-center">Mobile devices not supported</h1>
+                            <p className="text-center text-[15px] max-w-md mx-auto mt-4">
+                                Sorry! The PostHog photo booth is designed for desktop use only. Please visit this page
+                                on your computer for the best experience.
+                            </p>
+                        </motion.div>
+                    ) : images.length > 0 ? (
                         <>
                             <h2 className="text-5xl font-bold px-4 text-center mb-2">Share with your friends</h2>
                             <p className="text-center text-[15px] text-opacity-75">

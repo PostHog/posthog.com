@@ -14,6 +14,8 @@ export const EnableSessionReplayLight = "https://res.cloudinary.com/dmukukwp6/im
 
 #### Widget and Observer setup
 
+> This configuration is only needed for mobile session replay.
+
 Wrap your app with the `PostHogWidget` Widget and Install the `PosthogObserver` Observer.
 
 ```dart
@@ -51,6 +53,9 @@ class _MyAppState extends State<MyApp> {
 
 Enable session recordings in your PostHog [Project Settings](https://app.posthog.com/project/settings).
 
+If you're using Flutter Web, also enable the [Canvas capture](/docs/session-replay/canvas-recording) in [your project settings](https://us.posthog.com/settings/project-replay).  
+This is needed as Flutter renders your app using a browser canvas element.
+
 <ProductScreenshot
   imageLight={EnableSessionReplayLight} 
   imageDark={EnableSessionReplayDark} 
@@ -84,14 +89,20 @@ config.sessionReplayConfig.maskAllImages = false;
 config.sessionReplayConfig.throttleDelay = const Duration(milliseconds: 1000);
 ```
 
-## Limitations
+## Limitations for mobile session replay
 
 - On Android, requires API >= 26.
-- On iOS, minimum deployment target is [iOS13](/docs/libraries/ios)
+- On iOS, minimum deployment target is [iOS13](/docs/libraries/ios).
 - Wireframe mode isn't supported, only screenshot mode.
 - [Network performance recording](docs/session-replay/network-recording) isn't supported yet.
+
+## Limitations for flutter web session replay
+
+- The [Canvas capture](/docs/session-replay/canvas-recording) enabled is required.
 
 ## Troubleshooting
 
 - Run a clean build if you experience issues.
 - Update your iOS Pods.
+- For blank recordings for mobile session replay, be sure to set up the [Widget and Observer](/docs/session-replay/installation?tab=Flutter#widget-and-observer-setup).
+- For blank recordings for flutter web session replay, be sure to enable [Canvas capture](/docs/session-replay/canvas-recording).

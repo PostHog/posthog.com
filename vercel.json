@@ -128,7 +128,6 @@
         { "source": "/docs/features/cohorts", "destination": "/docs/user-guides/cohorts" },
         { "source": "/docs/features/dashboards", "destination": "/docs/user-guides/dashboards" },
         { "source": "/docs/features/events", "destination": "/docs/user-guides/events" },
-        { "source": "/docs/features/feature-flags", "destination": "/docs/user-guides/feature-flags" },
         { "source": "/docs/features/funnels", "destination": "/docs/user-guides/funnels" },
         { "source": "/docs/features/organizations", "destination": "/docs/user-guides/organizations" },
         { "source": "/docs/features/paths", "destination": "/docs/user-guides/paths" },
@@ -170,8 +169,8 @@
             "source": "/handbook/people/team-structure/growth-engineering",
             "destination": "/handbook/people/team-structure/growth"
         },
-        { "source": "/docs/user-guides/projects", "destination": "/docs/user-guides/organizations-and-projects" },
-        { "source": "/docs/user-guides/organizations", "destination": "/docs/user-guides/organizations-and-projects" },
+        { "source": "/docs/user-guides/projects", "destination": "/docs/settings/organizations" },
+        { "source": "/docs/user-guides/organizations", "destination": "/docs/settings/projects" },
         {
             "source": "/handbook/engineering/enterprise-prioritization",
             "destination": "/handbook/product/enterprise-features-prioritization"
@@ -348,6 +347,7 @@
         { "source": "/bytegrad", "destination": "/?utm_source=bytegrad&utm_campaign=bytegrad" },
         { "source": "/fireship", "destination": "/?utm_source=fireship&utm_campaign=fireship" },
         { "source": "/jesseshowalter", "destination": "/?utm_source=jesseshowalter&utm_campaign=jesseshowalter" },
+        { "source": "/benjamincode", "destination": "/?utm_source=benjamincode&utm_campaign=benjamincode" },
         { "source": "/blog/the-posthog-array-1-36-1", "destination": "/blog/the-posthog-array-1-36-0" },
         { "source": "/tutorials/b2b", "destination": "/blog/b2b-saas-product-metrics" },
         { "source": "/docs/self-host/migrate-to-cloud", "destination": "/docs/migrate/migrate-to-cloud" },
@@ -646,6 +646,10 @@
             "source": "/docs/product-analytics/start",
             "destination": "/docs/getting-started/send-events"
         },
+        {
+            "source": "/docs/product-analytics/web-vitals",
+            "destination": "/docs/web-analytics/web-vitals"
+        },
         { "source": "/docs/getting-started/user-properties", "destination": "/docs/getting-started/person-properties" },
         {
             "source": "/docs/feature-flags/multivariate-flags",
@@ -672,7 +676,9 @@
         { "source": "/docs/experiments/under-the-hood", "destination": "/docs/experiments/experiment-significance" },
         { "source": "/docs/experiments/significance", "destination": "/docs/experiments/experiment-significance" },
         { "source": "/docs/session-replay/manual", "destination": "/docs/session-replay/installation" },
-        { "source": "/docs/user-guides/feature-flags", "destination": "/docs/feature-flags/manual" },
+        { "source": "/docs/features/feature-flags", "destination": "/docs/feature-flags" },
+        { "source": "/docs/user-guides/feature-flags", "destination": "/docs/feature-flags" },
+        { "source": "/docs/feature-flags/manual", "destination": "/docs/feature-flags" },
         { "source": "/manual/group-analytics", "destination": "/docs/product-analytics/group-analytics" },
         { "source": "/docs/product-analytics/hogql", "destination": "/docs/hogql" },
         { "source": "/docs/hogql/guide", "destination": "/docs/product-analytics/sql" },
@@ -683,7 +689,7 @@
         { "source": "/manual/data-management", "destination": "/docs/data" },
         { "source": "/manual/events", "destination": "/docs/data/events" },
         { "source": "/manual/notifications-and-alerts", "destination": "/docs/product-analytics/subscriptions" },
-        { "source": "/manual/organizations-and-projects", "destination": "/docs/data/organizations-and-projects" },
+        { "source": "/manual/organizations-and-projects", "destination": "/docs/settings/organizations" },
         { "source": "/manual/persons", "destination": "/docs/data/persons" },
         { "source": "/manual/role-based-access", "destination": "/docs/data/role-based-access" },
         { "source": "/manual/sessions", "destination": "/docs/data/sessions" },
@@ -1216,7 +1222,7 @@
         { "source": "/docs/data/application-settings", "destination": "/docs" },
         {
             "source": "/docs/data/organizations-and-projects",
-            "destination": "/docs/settings/organizations-and-projects"
+            "destination": "/docs/settings/organizations"
         },
         { "source": "/docs/data/role-based-access", "destination": "/docs/settings/role-based-access" },
         { "source": "/docs/data/sso", "destination": "/docs/settings/sso" },
@@ -1471,6 +1477,18 @@
         {
             "source": "/features/self-hosted",
             "destination": "/docs/self-host"
+        },
+        {
+            "source": "/docs/settings/organizations-and-projects",
+            "destination": "/docs/settings/organizations"
+        },
+        {
+            "source": "/docs/settings/role-based-access",
+            "destination": "/docs/settings/access-control"
+        },
+        {
+            "source": "/community/profiles/59",
+            "destination": "/community/profiles/29070"
         }
     ]
 }

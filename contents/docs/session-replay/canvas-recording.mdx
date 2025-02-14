@@ -21,3 +21,25 @@ Canvas elements are recorded at a rate of **4 frames per second** which may lead
     alt="Enable canvas recording in your PostHog" 
     classes="rounded"
 />
+
+## Canvas recording performance
+
+Canvas recording normally has no impact on your site, but it does need to capture the canvas as an image which can have a performance impact on some sites.
+
+You can override the frequency the image is captured and the quality of the captured image when initializing PostHog on your site:
+
+```
+posthog.init('<ph_project_api_key>', {
+  api_host: '<ph_client_api_host>',
+  session_recording: {
+    captureCanvas: {
+      // accepts a number between 0 and 12
+      // if not set locally, when canvas recording is enabled, remote config sets this to 4
+      canvasFps: 2,
+      // accepts a decimal number between 0 and 1 as a string
+      // if not set locally, when canvas recording is enabled, remote config sets this to "0.4"
+      canvasQuality: "0.2",
+    }
+  }
+})
+```

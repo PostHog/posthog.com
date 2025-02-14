@@ -121,24 +121,24 @@ const Surveys: React.FC<SurveysProps> = () => {
             <SEO title="Surveys - Docs - PostHog" />
 
             <PostLayout title={'Surveys'} hideSurvey hideSidebar>
-            <Intro
-                subheader="Getting started"
-                title="Surveys"
-                description="Collect feedback from your users."
-                buttonText="Create your first survey"
-                buttonLink="/docs/surveys/installation"
-                imageColumnClasses="mt-8 md:mt-0 max-w-96"
-                imageUrl="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Home/Slider/images/surveys-hog.png"
-                imageClasses=""
-            />
+                <Intro
+                    subheader="Getting started"
+                    title="Surveys"
+                    description="Collect feedback from your users."
+                    buttonText="Create your first survey"
+                    buttonLink="/docs/surveys/installation"
+                    imageColumnClasses="mt-8 md:mt-0 max-w-96"
+                    imageUrl="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Home/Slider/images/surveys-hog.png"
+                    imageClasses=""
+                />
 
-            <AskMax 
-                quickQuestions={[
-                    'Can I target a survey based on user behavior?',
-                    'How do I create my own survey UI?',
-                    'Why won\'t my survey appear?',
-                ]}
-            />
+                <AskMax
+                    quickQuestions={[
+                        'Can I target a survey based on user behavior?',
+                        'How do I create my own survey UI?',
+                        "Why won't my survey appear?",
+                    ]}
+                />
                 <Content />
             </PostLayout>
         </Layout>

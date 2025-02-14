@@ -24,6 +24,7 @@ Most engineering teams run a PagerDuty schedule:
 - [CDP](https://posthog.pagerduty.com/schedules#PM8YSH8)
 - [Infrastructure](https://posthog.pagerduty.com/schedules#P78OOWZ)
 - [Growth](https://posthog.pagerduty.com/schedules#PN1Q6BO)
+- [Surveys](https://posthog.pagerduty.com/schedules#P04FUTJ)
 
 The schedules consist of contiguous blocks, but that definitely doesn't mean working 24/7 – you should just work your normal hours.
 
@@ -83,6 +84,7 @@ Your primary responsibility is simply to make sure SDK questions get some love. 
   - [posthog-java](https://github.com/PostHog/posthog-java)
   - [posthog-rs (Rust)](https://posthog.com/docs/libraries/rust)
   - [posthog-go](https://posthog.com/docs/libraries/go)
+  - [posthog-dotnet](https://github.com/PostHog/posthog-dotnet)
   - Others, see https://posthog.com/docs/libraries
 
 You don't have to be an expert in all of the SDKs, but it can be a great opportunity to dive into parts unknown.

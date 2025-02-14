@@ -24,6 +24,7 @@ import JavaSendEvent from '../integrate/send-events/_snippets/send-events-java.m
 import RustSendEvent from '../integrate/send-events/_snippets/send-events-rust.mdx'
 import FlutterSendEvent from '../integrate/send-events/_snippets/send-events-flutter.mdx'
 import ElixirSendEvent from '../integrate/send-events/_snippets/send-events-elixir.mdx'
+import DotNetSendEvent from '../integrate/send-events/_snippets/send-events-dotnet.mdx'
 
 Once your PostHog instance is up and running, the next step is to start sending events.
 
@@ -43,6 +44,7 @@ Once your PostHog instance is up and running, the next step is to start sending 
     'Rust', 
     'Elixir', 
     'Flutter', 
+    '.NET', 
     'api']}>
     <Tab.List>
         <Tab>Web</Tab>
@@ -59,6 +61,7 @@ Once your PostHog instance is up and running, the next step is to start sending 
         <Tab>Rust</Tab>
         <Tab>Elixir</Tab>
         <Tab>Flutter</Tab>
+        <Tab>.NET</Tab>
         <Tab>API</Tab>
     </Tab.List>
     <Tab.Panels>
@@ -103,6 +106,9 @@ Once your PostHog instance is up and running, the next step is to start sending 
         </Tab.Panel>
         <Tab.Panel>
            <FlutterSendEvent />
+        </Tab.Panel>
+        <Tab.Panel>
+            <DotNetSendEvent />
         </Tab.Panel>
         <Tab.Panel>
             <APISendEvent />

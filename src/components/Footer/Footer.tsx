@@ -67,6 +67,10 @@ const linklist: IProps[] = [
                 title: 'How we do "sales"',
                 url: '/sales',
             },
+            {
+                title: 'Founder stack',
+                url: '/founder-stack',
+            },
         ],
     },
     {
@@ -193,6 +197,10 @@ const linklist: IProps[] = [
                 title: 'PostHog on GitHub',
                 url: 'https://github.com/PostHog/posthog',
             },
+            {
+                title: 'Cool tech jobs',
+                url: '/cool-tech-jobs',
+            },
         ],
     },
     {
@@ -222,10 +230,6 @@ const linklist: IProps[] = [
             {
                 title: 'Team structure',
                 url: '/handbook/team-structure',
-            },
-            {
-                title: 'People & Ops',
-                url: '/handbook/people/compensation',
             },
             {
                 title: 'Engineering',

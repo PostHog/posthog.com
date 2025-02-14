@@ -13,6 +13,9 @@ features:
   sessionRecording: true
   featureFlags: true
   groupAnalytics: true
+  surveys: true
+  llmObservability: false
+  errorTracking: true
 ---
 
 PostHog makes it easy to get data about traffic and usage of your React app. Integrating PostHog into your site enables analytics about user behavior, custom events capture, session recordings, feature flags, and more.
@@ -197,7 +200,7 @@ function App() {
 }
 
 // You can also test your code by overriding the feature flag:
-// e.g., posthog.featureFlags.override({'experiment-feature-flag-key': 'test'})
+// e.g., posthog.featureFlags.overrideFeatureFlags({ flags: {'experiment-feature-flag-key': 'test'}})
 ```
 
 It's also possible to [run experiments without using feature flags](/docs/experiments/running-experiments-without-feature-flags).

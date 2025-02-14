@@ -8,7 +8,7 @@ import { Provider as ToastProvider } from './src/context/toast'
 import { RouteUpdateArgs } from 'gatsby'
 import { UserProvider } from './src/hooks/useUser'
 import { ChatProvider } from './src/hooks/useChat'
-import Chat from './src/components/Chat'
+
 initKea(false)
 
 export const wrapRootElement = ({ element }) => (

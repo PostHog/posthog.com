@@ -58,6 +58,12 @@ module.exports = {
             },
         },
         {
+            resolve: `gatsby-mapbox-locations`,
+            options: {
+                mapboxToken: process.env.MAPBOX_TOKEN,
+            },
+        },
+        {
             resolve: 'gatsby-plugin-mailchimp',
             options: {
                 endpoint:
@@ -98,9 +104,6 @@ module.exports = {
                 extensions: ['.mdx', '.md'],
                 gatsbyRemarkPlugins: [
                     { resolve: 'gatsby-remark-autolink-headers', options: { icon: false } },
-                    {
-                        resolve: require.resolve(`./plugins/gatsby-remark-mermaid`),
-                    },
                     {
                         resolve: require.resolve('./plugins/gatsby-remark-video'),
                     },

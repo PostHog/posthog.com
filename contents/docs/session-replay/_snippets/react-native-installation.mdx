@@ -2,8 +2,6 @@
 title: React Native session replay
 ---
 
-> 🚧 **NOTE:** React Native session replay is considered `beta` and is free while in beta. We are keen to gather as much feedback as possible so if you try this out please let us know. You can send feedback via the [in-app support panel](https://us.posthog.com#panel=support%3Afeedback%3Asession_replay%3Alow) or one of our other [support options](/docs/support-options).
-
 ## Step one: Add PostHog to your app
 
 import ReactNativeInstall from "../../integrate/_snippets/install-react-native.mdx"
@@ -112,6 +110,7 @@ npx expo run:ios --no-build-cache --device
 - Keyboard is not supported. A placeholder will be shown.
 - Wireframe mode isn't supported, only screenshot mode.
 - Expo Go isn't supported since it uses Native plugins, please use development build.
+- Masking individual view components within a WebView isn't supported, if your WebView displays sensitive view components, you've to [mask](/docs/session-replay/privacy?tab=React+Native) the whole WebView.
 
 ## Troubleshooting
 

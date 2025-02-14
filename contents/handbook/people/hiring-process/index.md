@@ -30,17 +30,8 @@ We are all-remote, but we have a few limitations on the countries we are able to
 - Due to US sanctions, we can't hire folks in Cuba, Iran, North Korea, or Syria. 
 - We don't currently employ people via EOR in France, Italy, Iceland, Belgium, Luxembourg, Uruguay, Bolivia, or Brazil, mainly due to the very high employer costs. In some of these countries we _may_ consider hiring as a contractor, provided there is no misclassification risk. 
 
-## Hiring Process
+## Hiring Process         
 
-Our hiring process follows a relatively standard structure. However, please check the individual job posting on the [careers page](/careers) as there is occasionally changes. 
-
-Our process is as follows:- 
-
-1. Application - you let us know via the job posting you're interested in the role
-2. Culture Interview (20 mins)- you've made it to the next stage, this is a call with one our Ops team members. Our goal is to explore your motivations to join our team, learn why you’d be a great fit, and answer questions about us.
-3. Technical Interview (45-60 mins) - This stage is to assess your suitability for the role. For engineering roles, this is not a live coding interview.
-4. Founder Interview (20-30 mins) - You have reached the final boss. It's time to chat with James or Tim.
-5. SuperDay (Paid day of work) - You’ll meet a few more members of the team and work on a independent project. It's challenging, but most people say it's fun! Please note that for engineering roles this is not working on the live codebase. 
 
 ### External recruiters
 
@@ -227,7 +218,8 @@ The final stage of our interview process is what we call a PostHog SuperDay. Thi
 
 The candidate will be working on a task that is similar to the day-to-day work someone in this role does at PostHog. They will also have the chance to meet a few of their potential direct team members, and if they haven’t already, our founders. This gives the candidate a chance to show off their skills, and for us to see the quality, speed and communication of the candidate. It is a demanding day of work.
 
-We will pay the candidate their 'normal day rate.' If they have done contracting before they will have one, but if not we can use [this formula](https://www.ellwoodatfield.com/day-rate-caluclator) to calculate it. If the candidate is unable to accept payment for the SuperDay, we will donate the amount to a charity of their choice from our [Project list](/handbook/growth/marketing/open-source-sponsorship) of sponsorships.
+
+We will pay the candidate their 'normal day rate' with the caveat that we do cap the superday payouts to $1000. We will use this [calculator](https://www.xe.com/) to convert for GBP/EUR currencies. If they have done contracting before they will have one, but if not we can use [this formula](https://www.ellwoodatfield.com/day-rate-caluclator) to calculate it. If the candidate is unable to accept payment for the SuperDay, we will donate the amount to a charity of their choice from our [Project list](/handbook/growth/marketing/open-source-sponsorship) of sponsorships. 
 
 This day will be _the same_ task each time for a given role, to be shared with the candidate at the start of the day. The task is generally designed to be _too much_ work for one person to complete in a day, in order to get a sense of the person's ability to prioritize and get things done. 
 
@@ -237,11 +229,13 @@ Overall, the candidate should aim to spend at least 80% of their time and energy
 
 In advance of the SuperDay, we will need to do some additional prep to ensure that the candidate has a great experience:
 
+*   Send the candidate, Tim, James, two people from Ops, and the SuperDay buddy (technical roles) or the lead (for all other non-technical roles) a Google calendar invite to remind the team when the SuperDay will take place (mark the invite free and all day or split days)
 *   Send them an email in the first instance to schedule the SuperDay - we aim to  do this as soon as possible, as candidates often will need to book a day off work. Use the Ashby email template for this. If the task involves them doing 'real' work for PostHog, we should ask them to check that their current employment contract permits this - we try to create fake tasks for this reason. For all US candidates there is a requirement we collect a [W9](https://www.irs.gov/forms-pubs/about-form-w-9) from the candidate for accounting and tax purposes (_this doesn't apply if the US candidate decides to donate the funds to one of our sponsored projects_) 
 *   We also send the candidate a follow up email with details of the task, and ask them for their day rate and bank details right away so the candidate can fully prepared what to expect and who they will meet. There is a template for this email in Ashby, depending on the role - this will probably need customising.
 *   (One day before the SuperDay) Create a private channel in Slack for the candidate and all relevant people - this will be where they can chat to us over the course of the day if they have any questions etc. Invite the candidate as a single channel guest. We might need to add the candidate to one of our systems depending on the role, e.g. Ashby for a recruiter SuperDay, but on the whole this should be minimized.
-*   (One day before the SuperDay) Invite the candidate to a kickoff meeting with the hiring manager at the start of the day. On days when we have a company-wide meeting scheduled, invite them along. On days without standup, schedule an informal session with some team members to give them a chance to learn more about our culture. We may also want to have a proper wrap up with them at the end of their day.
-*   (On the SuperDay) Send the candidate the task - aim to send this before the kick-off session so if the candidate has any questions they are able to go through them during the kick-off session. We encourage the candidate to ask questions throughout their SuperDay, but sometimes it is nice to have any questions answered in advance so they can kick off their task appropriately.
+*   (One day before the SuperDay) For Product Engineer SuperDays, upload the zip file by going into the the [Git SuperDay task](https://github.com/PostHog/superday-interview-test/blob/main/.github/workflows/generate-full-stack-package.yml) then hover over the "Actions" tab and click on "Generate Full Stack Package" and click on "Run Workflow" then name the file under the candidate's first name. Once the zip file has completed, click into the file and hit the download button and upload the zip file into the candidate's slack channel to go out the morning of the SuperDay by 8:00 am in the candidate's timezone. 
+*           * For the Clickhouse Engineer task, please follow this [task](https://github.com/PostHog/clickhouse-superday) and click on the "Code" button and hit download button and upload the zip file into the candidate's slack channel to go out the morning of the SuperDay by 8:00 am in the candidate's timezone. 
+*   (One day before the SuperDay) For non-technical roles, invite the candidate to a kickoff meeting with the hiring manager at the start of the day and send the candidate the task - aim to send this before the kick-off session so if the candidate has any questions they are able to go through them during the kick-off session. We encourage the candidate to ask questions throughout their SuperDay, but sometimes it is nice to have any questions answered in advance so they can kick off their task appropriately.
 *   (On the SuperDay) Give the candidate a warm welcome! Make it clear that the team is here to answer any questions, and they should feel free to reach out any time! Otherwise don't feel like we need to check in with them - let them get on with the task and trust that they will message us.
 *   (One day after the SuperDay) Pay the candidate using the bank details they provided.
 

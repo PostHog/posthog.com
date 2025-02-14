@@ -23,33 +23,37 @@ export const TeamMemberLink = ({
     return (
         <span className="relative inline-block">
             <a href={squeakId && `/community/profiles/${squeakId}`}>
-                {photo && <span
-                    className={`invisible max-h-4 inline-flex items-center ${photo
-                        ? 'gap-1.5 p-0.5 pr-1.5 border border-light hover:border-bg-dark/50 dark:border-dark dark:hover:border-bg-light/50 rounded-full'
-                        : 'border-b border-light dark:border-dark border-dashed hover:border-bg-dark/50 dark:hover:border-bg-light/50'
+                {photo && (
+                    <span
+                        className={`invisible max-h-4 inline-flex items-center ${
+                            photo
+                                ? 'gap-1.5 p-0.5 pr-1.5 border border-light hover:border-bg-dark/50 dark:border-dark dark:hover:border-bg-light/50 rounded-full'
+                                : 'border-b border-light dark:border-dark border-dashed hover:border-bg-dark/50 dark:hover:border-bg-light/50'
                         }`}
-                >
-                    <span className="h-6 shrink-0 rounded-full overflow-hidden">
-                        {avatarUrl ? (
-                            <img src={avatarUrl} alt="" className={`w-6 bg-${color ? color : 'red'}`} />
-                        ) : (
-                            <CloudinaryImage
-                                alt=""
-                                width={40}
-                                src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/pages-content/images/hog-9.png"
-                                className="w-6 bg-red"
-                            />
-                        )}
+                    >
+                        <span className="h-6 shrink-0 rounded-full overflow-hidden">
+                            {avatarUrl ? (
+                                <img src={avatarUrl} alt="" className={`w-6 bg-${color ? color : 'red'}`} />
+                            ) : (
+                                <CloudinaryImage
+                                    alt=""
+                                    width={40}
+                                    src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/pages-content/images/hog-9.png"
+                                    className="w-6 bg-red"
+                                />
+                            )}
+                        </span>
+                        <span className="!text-sm text-red dark:text-yellow font-semibold inline-flex">
+                            {displayName}
+                        </span>
                     </span>
-                    <span className="!text-sm text-red dark:text-yellow font-semibold inline-flex">
-                        {displayName}
-                    </span>
-                </span>}
+                )}
                 <span
-                    className={`inline-flex items-center ${photo
-                        ? 'absolute top-0 left-0 whitespace-nowrap gap-1.5 p-0.5 pr-1.5 border border-light hover:border-bg-dark/50 dark:border-dark dark:hover:border-bg-light/50 rounded-full'
-                        : 'border-b border-light dark:border-dark border-dashed hover:border-bg-dark/50 dark:hover:border-bg-light/50'
-                        } ${className}`}
+                    className={`inline-flex items-center ${
+                        photo
+                            ? 'absolute top-0 left-0 whitespace-nowrap gap-1.5 p-0.5 pr-1.5 border border-light hover:border-bg-dark/50 dark:border-dark dark:hover:border-bg-light/50 rounded-full'
+                            : 'border-b border-light dark:border-dark border-dashed hover:border-bg-dark/50 dark:hover:border-bg-light/50'
+                    } ${className}`}
                 >
                     {photo ? (
                         <>
@@ -76,8 +80,9 @@ export const TeamMemberLink = ({
                                     {avatarUrl ? (
                                         <div className="inline-block size-24 rounded-full p-[2px] bg-white dark:bg-accent-dark border border-light dark:border-dark">
                                             <div
-                                                className={`bg-${color ? color : 'red'
-                                                    }r} rounded-full overflow-hidden w-full aspect-square`}
+                                                className={`bg-${
+                                                    color ? color : 'red'
+                                                }r} rounded-full overflow-hidden w-full aspect-square`}
                                             >
                                                 <img
                                                     src={avatarUrl}
