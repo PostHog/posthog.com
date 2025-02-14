@@ -65,7 +65,7 @@ If you are using a different platform, you can install the `PostHog` package ins
 dotnet add package PostHog
 ```
 
-The `PostHogClient` class must be implemented as a singleton in your project. For PostHog.AspNetCore, this is handled by the `builder.AddPostHog();` method. For the `PostHog` package, you can do the following if you're using dependency injection:
+The `PostHogClient` class must be implemented as a singleton in your project. For `PostHog.AspNetCore`, this is handled by the `builder.AddPostHog();` method. For the `PostHog` package, you can do the following if you're using dependency injection:
 
 ```csharp
 builder.Services.AddSingleton<IPostHogClient, PostHogClient>();
