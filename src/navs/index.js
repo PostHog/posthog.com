@@ -845,7 +845,7 @@ export const handbookSidebar = [
         children: [
             {
                 name: 'Overview',
-                url: '/handbook/growth/revops/index',
+                url: '/handbook/growth/revops/',
             }
         ]
     },
