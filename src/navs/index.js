@@ -944,7 +944,7 @@ export const communityMenu = {
                         { name: 'Data management', url: '/tutorials/categories/data-management' },
                         { name: 'Events', url: '/tutorials/categories/events' },
                         { name: 'Heatmaps', url: '/tutorials/categories/heatmaps' },
-                        { name: 'HogQL', url: '/tutorials/categories/hogql' },
+                        { name: 'SQL', url: '/tutorials/categories/sql' },
                         { name: 'Insights', url: '/tutorials/categories/insights' },
                         { name: 'Persons', url: '/tutorials/categories/persons' },
                         { name: 'Sessions', url: '/tutorials/categories/sessions' },
@@ -1885,8 +1885,8 @@ export const docsMenu = {
                     ],
                 },
                 {
-                    name: 'HogQL',
-                    url: '/docs/hogql',
+                    name: 'SQL access',
+                    url: '/docs/sql',
                     icon: 'IconHogQL',
                     badge: {
                         title: 'Beta',
@@ -1895,23 +1895,23 @@ export const docsMenu = {
                     children: [
                         {
                             name: 'Overview',
-                            url: '/docs/hogql',
+                            url: '/docs/sql',
                         },
                         {
-                            name: 'Expressions',
-                            url: '/docs/hogql/expressions',
+                            name: 'SQL expressions',
+                            url: '/docs/sql/expressions',
                         },
                         {
                             name: 'Supported functions',
-                            url: '/docs/hogql/clickhouse-functions',
+                            url: '/docs/sql/clickhouse-functions',
                         },
                         {
                             name: 'Supported aggregations',
-                            url: '/docs/hogql/aggregations',
+                            url: '/docs/sql/aggregations',
                         },
                         {
                             name: 'Tutorials',
-                            url: '/docs/hogql/tutorials',
+                            url: '/docs/sql/tutorials',
                         },
                     ],
                 },
@@ -2299,7 +2299,7 @@ export const docsMenu = {
                     color: 'yellow',
                 },
                 {
-                    name: 'SQL',
+                    name: 'SQL insights',
                     url: '/docs/product-analytics/sql',
                     icon: 'IconHogQL',
                     color: 'purple',
