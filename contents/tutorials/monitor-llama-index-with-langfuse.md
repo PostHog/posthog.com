@@ -190,8 +190,7 @@ The last step is to set up a PostHog dashboard so that you can view your LLM ins
 
 ## Further reading
 
-- [How to compare AWS Bedrock prompts](/tutorials/compare-aws-bedrock-prompts)
-- [How to set up LLM analytics for ChatGPT](/tutorials/chatgpt-analytics) 
-- [How to compare AWS Bedrock foundational models](/tutorials/compare-aws-bedrock-foundational-models)
+- [How to set up LLM analytics for ChatGPT](/tutorials/chatgpt-analytics)
+- [How to set up LLM analytics for Anthropic's Claude](/tutorials/anthropic-analytics)
 
 <NewsletterForm />
