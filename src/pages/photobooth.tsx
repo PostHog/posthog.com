@@ -779,7 +779,7 @@ const FinalPhotoStrip = ({
             <button
                 disabled={downloading}
                 onClick={handleDownload}
-                className="absolute -top-3 -right-3 z-10 bg-white rounded-full p-1.5 shadow-lg hover:scale-[1.1] transition-transform active:scale-100 dark:text-dark"
+                className="absolute -top-3 -right-3 z-10 bg-white rounded-full p-1.5 shadow-lg hover:scale-[1.1] transition-transform active:scale-100 text-primary"
             >
                 <IconDownload className="size-5" />
             </button>
@@ -891,7 +891,7 @@ const Card = ({
             <button
                 disabled={downloading}
                 onClick={handleDownload}
-                className={`absolute -top-3 -right-3 z-10 bg-white rounded-full p-1.5 shadow-lg hover:scale-[1.1] transition-transform active:scale-100`}
+                className={`absolute -top-3 -right-3 z-10 bg-white rounded-full p-1.5 shadow-lg hover:scale-[1.1] transition-transform active:scale-100 text-primary dark:text-primary`}
             >
                 <IconDownload className="w-6 h-6" />
             </button>
