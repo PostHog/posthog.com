@@ -774,7 +774,7 @@ export const handbookSidebar = [
                 url: '/handbook/growth/sales/new-hire-onboarding',
             },
             {
-                name: 'RevOps',
+                name: 'SalesOps',
                 url: '',
                 children: [
                     {
@@ -838,6 +838,16 @@ export const handbookSidebar = [
                 ],
             },
         ],
+    },
+    {
+        name: 'RevOps',
+        url: '',
+        children: [
+            {
+                name: 'Overview',
+                url: '/handbook/growth/revops/',
+            }
+        ]
     },
     {
         name: 'Words & Pictures',
