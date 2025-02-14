@@ -389,7 +389,7 @@ const PhotoStrip = ({
     }, [videoRef, showLivePreview])
 
     return (
-        <div className="grid grid-rows-4 gap-2 bg-white rounded-md p-2 h-full">
+        <div className="grid grid-rows-4 gap-2 bg-white rounded-md p-2 h-full rounded shadow-xl">
             {Array.from({ length: numImages }).map((_, index) => {
                 const image = images[index]
                 return (
@@ -884,7 +884,10 @@ const Card = ({
             >
                 <IconDownload className="w-6 h-6" />
             </button>
-            <div ref={cardRef} className="relative w-[800px] aspect-video flex-shrink-0 flex snap-center">
+            <div
+                ref={cardRef}
+                className="relative w-[800px] aspect-video flex-shrink-0 flex snap-center border border-light dark:border-dark shadow-xl rounded overflow-hidden"
+            >
                 <div className={`absolute inset-0 bg-accent overflow-hidden ${className}`}>
                     <img
                         src={stripDataURL}
@@ -911,7 +914,9 @@ const Card = ({
                         <div className="w-full h-1 bg-black rounded-full absolute bottom-0" />
                     </div>
 
-                    <p className="text-sm text-center opacity-90 m-0 !text-inherit">Get yours at posthog.com/love</p>
+                    <p className="text-sm text-center opacity-90 m-0 !text-inherit">
+                        Get yours at posthog.com/photobooth
+                    </p>
                 </div>
             </div>
         </div>
@@ -950,33 +955,37 @@ export default function Photobooth(): JSX.Element {
             <div className="py-12">
                 <AnimatePresence>
                     {images.length > 0 ? (
-                        <div className="flex justify-center items-center space-x-2">
-                            <div className="flex flex-col h-[800px] overflow-y-auto snap-y snap-mandatory flex-shrink-0">
-                                {dataURL ? (
-                                    cardTypes.map((cardType, index) => (
-                                        <Card
-                                            key={index}
-                                            stripDataURL={dataURL}
-                                            template={template}
-                                            name={name}
-                                            index={index}
-                                            {...cardType}
-                                        />
-                                    ))
-                                ) : (
-                                    <div className="w-[800px] aspect-video flex-shrink-0" />
-                                )}
-                            </div>
+                        <>
+                            <h2 className="text-4xl font-bold px-4 text-center mb-1">Share with your friends</h2>
+                            <p className="text-center text-[15px]">Ideally on X would be cool.</p>
+                            <div className="flex justify-center items-center gap-8">
+                                <div className="flex flex-col h-[800px] overflow-y-auto snap-y snap-mandatory flex-shrink-0 gap-8">
+                                    {dataURL ? (
+                                        cardTypes.map((cardType, index) => (
+                                            <Card
+                                                key={index}
+                                                stripDataURL={dataURL}
+                                                template={template}
+                                                name={name}
+                                                index={index}
+                                                {...cardType}
+                                            />
+                                        ))
+                                    ) : (
+                                        <div className="w-[800px] aspect-video flex-shrink-0" />
+                                    )}
+                                </div>
 
-                            <motion.div
-                                initial={{ opacity: 0 }}
-                                animate={{ opacity: 1 }}
-                                exit={{ opacity: 0 }}
-                                className="flex justify-center items-center flex-shrink-0"
-                            >
-                                <FinalPhotoStrip dataURL={dataURL} onImageReady={setDataURL} images={images} />
-                            </motion.div>
-                        </div>
+                                <motion.div
+                                    initial={{ opacity: 0 }}
+                                    animate={{ opacity: 1 }}
+                                    exit={{ opacity: 0 }}
+                                    className="flex justify-center items-center flex-shrink-0"
+                                >
+                                    <FinalPhotoStrip dataURL={dataURL} onImageReady={setDataURL} images={images} />
+                                </motion.div>
+                            </div>
+                        </>
                     ) : (
                         <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
                             <h1 className="text-3xl font-bold px-4 text-center">Welcome to the PostHog photo booth</h1>
