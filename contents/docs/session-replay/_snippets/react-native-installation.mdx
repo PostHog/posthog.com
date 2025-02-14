@@ -37,7 +37,7 @@ Enable session recordings in your PostHog [Project Settings](https://app.posthog
 
 Add `enableSessionReplay: true` to your PostHog configuration alongside any of your other configuration options:
 
-```js
+```ts
 export const posthog = new PostHog(
   '<ph_project_api_key>',
   {
@@ -73,7 +73,7 @@ export const posthog = new PostHog(
 
 Or using the `PostHogProvider`:
 
-```js
+```ts
 <PostHogProvider
         apiKey="<ph_project_api_key>"
         options={{

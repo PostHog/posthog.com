@@ -6,7 +6,7 @@ Password inputs are always masked no matter your config.
 
 You can configure masking levels when you initialise PostHog
 
-```ReactNative
+```ts
 export const posthog = new PostHog(
   '<the magic string>',
   {
@@ -29,6 +29,6 @@ export const posthog = new PostHog(
 
 To replace any type of `React.Component` with a redacted version in the replay, set the [accessibilityLabel](https://reactnative.dev/docs/accessibility#accessibilitylabel) to `ph-no-capture`:
 
-```js
+```ts
 <Text accessibilityLabel="ph-no-capture">Sensitive!</Text>
 ```
