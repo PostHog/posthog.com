@@ -7,7 +7,7 @@ showTitle: true
 ## How RevOps works
 RevOps at PostHog is the Product Manager for Sales, Marketing, and Executive teams. Just as PMs help engineering teams build better products by connecting user needs with technical solutions, RevOps helps go to market teams make better decisions by connecting different parts of the business together.
 
-We do this by combining data from marketing, sales, product usage, and customer success to show what's working and what isn't. While individual teams deeply understand their specific areas, we provide insights about how different parts of the business affect each other and help teams see these connections to drive better outcomes.
+We do this by combining data from marketing, sales, product usage, and customer success to show what's working and what isn't. While individual teams deeply understand their specific areas, we provide insights about how different parts of the business affect each other and help teams see these connections to drive revenue growth for PostHog.
 
 ## RevOps values
 1. Make data simple
