@@ -501,7 +501,7 @@ const TemplateSelector = ({
                 <button
                     key={key}
                     onClick={() => onSelect(key)}
-                    className="w-[200px] hover:scale-105 transition-transform cursor-pointer"
+                    className="hover:scale-105 transition-transform cursor-pointer"
                 >
                     <div className="h-[70vh]">
                         <PhotoStrip
@@ -579,8 +579,12 @@ const PhotoModal = ({
     const [retaking, setRetaking] = useState<number>()
     const [cameraPermission, setCameraPermission] = useState<boolean>()
     const [videoRef, setVideoRef] = useState<HTMLVideoElement>()
-    const [images, setImages] = useState<PhotoBoothImage[]>(templates[selectedTemplate].map((overlay) => ({ overlay })))
+    const [images, setImages] = useState<PhotoBoothImage[]>([])
     const [cameraReady, setCameraReady] = useState(false)
+
+    useEffect(() => {
+        setImages(templates[selectedTemplate].map((overlay) => ({ overlay })))
+    }, [selectedTemplate])
 
     const checkCameraPermission = async () => {
         try {
@@ -607,7 +611,7 @@ const PhotoModal = ({
             setOverlay(undefined)
             setRetaking(undefined)
             if (!retaking) {
-                handleDone()
+                onDone(newImages)
             }
         } else {
             setOverlayIndex(nextIndex)
@@ -621,10 +625,6 @@ const PhotoModal = ({
     const handleRetake = (index: number) => {
         setRetaking(index)
         setOverlayIndex(index)
-    }
-
-    const handleDone = async () => {
-        onDone(images)
     }
 
     useEffect(() => {
@@ -675,7 +675,7 @@ const PhotoModal = ({
 
     return (
         <motion.div
-            className="flex justify-center items-center overflow-hidden"
+            className="flex justify-center items-center"
             onClick={onClose}
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
@@ -726,7 +726,7 @@ const PhotoModal = ({
                                     startImmediately={true}
                                 />
                             </div>
-                            <div className="h-[70vh] overflow-y-auto w-[200px] flex-shrink-0">
+                            <div className="h-[70vh] flex-shrink-0">
                                 <div className="h-full">
                                     <PhotoStrip
                                         images={images}
