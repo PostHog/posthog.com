@@ -3,7 +3,35 @@ import OverrideServerPropertiesIntro from './override-server-properties-intro.md
 <OverrideServerPropertiesIntro />
 
 ```csharp
-var flag = await posthog.GetFeatureFlagAsync(
+
+// Overriding Person Properties
+var personFlag = await posthog.GetFeatureFlagAsync(
+    "flag-key",
+    "distinct_id_of_the_user",
+    personProperties: new() {["property_name"] = "value"});
+
+// Overriding Group Properties
+var groupFlag = await posthog.GetFeatureFlagAsync(
+    "flag-key",
+    "distinct_id_of_the_user",
+    options: new FeatureFlagOptions
+    {
+        Groups = [
+            new Group("your_group_type", "your_group_id")
+            {
+                ["group_property_name"] = "your group value"
+            },
+            new Group(
+                "another_group_type",
+                "another_group_id")
+                {
+                    ["group_property_name"] = "another group value"
+                }
+        ]
+    });
+
+// Overriding both Person and Group Properties
+var bothFlag = await posthog.GetFeatureFlagAsync(
     "flag-key",
     "distinct_id_of_the_user",
     options: new FeatureFlagOptions
@@ -16,12 +44,10 @@ var flag = await posthog.GetFeatureFlagAsync(
             },
             new Group(
                 "another_group_type",
-                "another_group_id",
-                new Dictionary<string, object?>
+                "another_group_id")
                 {
                     ["group_property_name"] = "another group value"
                 }
-            )
         ]
     });
 ```
