@@ -256,6 +256,20 @@ module.exports = {
                         '100%': { 'background-position-x': '100%' },
                     },
                 },
+                develop: {
+                    '0%': {
+                        opacity: '0',
+                        filter: 'grayscale(100%) brightness(200%)',
+                    },
+                    '30%': {
+                        opacity: '1',
+                        filter: 'grayscale(100%) brightness(150%)',
+                    },
+                    '100%': {
+                        opacity: '1',
+                        filter: 'grayscale(0%) brightness(100%)',
+                    },
+                },
             },
             animation: {
                 wiggle: 'wiggle .2s ease-in-out 3',
@@ -264,6 +278,7 @@ module.exports = {
                 flash: 'flash 1s ease-in-out 2',
                 reveal: 'reveal 1s ease-in-out',
                 'text-gradient': 'text-gradient 2500ms linear infinite',
+                develop: 'develop 1.5s ease-out forwards',
             },
             containers: {
                 '2xs': '16rem',
