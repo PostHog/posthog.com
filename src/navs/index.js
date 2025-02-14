@@ -2034,7 +2034,7 @@ export const docsMenu = {
                             url: '/docs/how-posthog-works',
                         },
                         {
-                            name: 'Data model',
+                            name: 'Data model: fields',
                             url: '/docs/how-posthog-works/data-model',
                         },
                         {
