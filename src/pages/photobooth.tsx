@@ -972,7 +972,7 @@ export default function Photobooth(): JSX.Element {
 
             <div className="pt-12 pb-24 px-5">
                 <div className="flex flex-col items-center">
-                    <h2 className="text-3xl font-bold inline-flex bg-red-2-dark rounded-sm py-1 px-2 -rotate-2 mb-0">
+                    <h2 className="text-3xl font-bold inline-flex bg-red-2-dark text-white rounded-sm py-1 px-2 -rotate-2 mb-0">
                         Valentine's Day edition
                     </h2>
                     <h1 className="text-5xl font-bold md:px-4 mb-3 mt-3 text-center">
@@ -1046,7 +1046,7 @@ export default function Photobooth(): JSX.Element {
                     ) : (
                         <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
                             <p className="font-medium opacity-80 text-center md:px-4">
-                                We've assembled four Valentines-themed photo booth templates. Choose your favorite and
+                                We've assembled four Valentines-themed photo booth templates. Click your favorite and
                                 get to snappin'.
                             </p>
                             <PhotoModal
