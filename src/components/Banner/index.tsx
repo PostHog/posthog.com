@@ -49,7 +49,7 @@ export default function Banner() {
                     style={{ maxHeight: '0px' }}
                 >
                     <div className="bg-red-2-dark md:text-center text-sm text-white pl-4 pr-10 md:px-10 py-2 font-semibold">
-                        Why are you on a B2B Saas website on Valentine’s Day? Are you here for the{' '}
+                        Why are you on a B2B Saas website on Valentine’s Day weekend? Are you here for the{' '}
                         <Link to="/photobooth" className="underline font-bold hover:text-white" onClick={handleDismiss}>
                             photobooth?
                         </Link>
