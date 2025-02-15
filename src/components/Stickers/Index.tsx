@@ -1565,6 +1565,32 @@ export const StickerFlagPR: StickerComponent<StickerProps> = forwardRef(function
     )
 })
 
+export const StickerFlagSE: StickerComponent<StickerProps> = forwardRef(function StickerAdvanced(
+    props,
+    ref
+): JSX.Element {
+    return (
+        <BaseSticker ref={ref} {...props}>
+            <path
+                fill="#000"
+                d="M31.86 5.04H4.14c-1.29 0-2.34 1.05-2.34 2.34v19.8c0 1.29 1.05 2.34 2.34 2.34h27.72c1.29 0 2.34-1.05 2.34-2.34V7.38c0-1.29-1.05-2.34-2.34-2.34Z"
+                opacity=".35"
+            />
+            <path
+                fill="#F2F2F2"
+                d="M31.14 4.32H3.42c-1.29 0-2.34 1.05-2.34 2.34v19.8c0 1.29 1.05 2.34 2.34 2.34h27.72c1.29 0 2.34-1.05 2.34-2.34V6.66c0-1.29-1.05-2.34-2.34-2.34Z"
+            />
+            <path fill="#2785BD" d="M3.24 6.84h28.08v19.8H3.24V6.84Z" />
+            <path fill="#F9B84F" d="M14.76 6.84h-3.6v19.8h3.6V6.84Z" />
+            <path fill="#F9B84F" d="M3.24 14.76v3.6h27.72v-3.6H3.24Z" />
+            <path
+                fill="#40396E"
+                d="M31.14 27H3.42a.54.54 0 0 1-.54-.54V6.66a.54.54 0 0 1 .54-.54h27.72a.54.54 0 0 1 .54.54v19.8a.54.54 0 0 1-.54.54ZM3.96 25.92H30.6V7.2H3.96v18.72Z"
+            />
+        </BaseSticker>
+    )
+})
+
 export const StickerFlagUnknown: StickerComponent<StickerProps> = forwardRef(function StickerAdvanced(
     props,
     ref
