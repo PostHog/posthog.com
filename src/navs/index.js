@@ -1241,9 +1241,37 @@ export const docsMenu = {
                     name: 'New to PostHog?',
                 },
                 {
-                    name: 'Start here',
+                    name: 'Getting HogPilled',
+                    url: '/docs/new-to-posthog/getting-hogpilled',
+                    icon: 'IconCrown',
+                },
+                {
+                    name: 'Measuring activation',
+                    url: '/docs/new-to-posthog/activation',
+                    icon: 'IconLightBulb',
+                },
+                {
+                    name: 'Tracking retention',
+                    url: '/docs/new-to-posthog/retention',
+                    icon: 'IconLineGraph',
+                },
+                {
+                    name: 'Capturing revenue',
+                    url: '/docs/new-to-posthog/revenue',
+                    icon: 'IconHandMoney',
+                },
+                {
+                    name: 'Understanding PostHog',
+                    url: '/docs/new-to-posthog/understand-posthog',
+                    icon: 'IconNotebook',
+                },
+                {
+                    name: 'Integration',
+                },
+                {
+                    name: 'Install and configure',
                     url: '/docs/getting-started/install',
-                    icon: 'IconFlag',
+                    icon: 'IconWrench',
                     children: [
                         {
                             name: 'Install PostHog',
@@ -2047,7 +2075,7 @@ export const docsMenu = {
                             url: '/docs/how-posthog-works',
                         },
                         {
-                            name: 'Data model',
+                            name: 'Data model: fields',
                             url: '/docs/how-posthog-works/data-model',
                         },
                         {
