@@ -45,7 +45,9 @@ export default function App() {
         <Links />
       </head>
       <body>
-        <Outlet />
+        <PosthogProvider>
+          <Outlet />
+        </PosthogProvider>
         <ScrollRestoration />
         <script
           dangerouslySetInnerHTML={{
@@ -59,7 +61,7 @@ export default function App() {
 }
 ```
 
-Next, create a new PostHog context in `app/contexts/posthog-context.tsx`. This is necessary because of a [missing export statement](https://github.com/PostHog/posthog-js/issues/908) in `posthog-js`'s `package.json`. 
+Next, create a new PostHog context in `app/contexts/posthog-context.tsx`. This is necessary because of a [missing export statement](https://github.com/PostHog/posthog-js/issues/908) in `posthog-js`'s `package.json`.
 
 ```ts file=app/contexts/posthog-context.tsx
 import posthog from "posthog-js";
@@ -79,6 +81,9 @@ export function PosthogProvider({ children }: PosthogProviderProps) {
   // https://react.dev/reference/react/useRef#avoiding-recreating-the-ref-contents
   // Note that in StrictMode, this will run twice.
   function getPosthogInstance() {
+    // https://remix.run/docs/en/main/guides/constraints#document-guard
+    if (typeof document === 'undefined') return;
+    if (typeof window === 'undefined') return;
     if (posthogInstanceRef.current) return posthogInstanceRef.current;
     if (!window.ENV.POSTHOG_API_KEY) return undefined;
 
@@ -99,7 +104,7 @@ export function PosthogProvider({ children }: PosthogProviderProps) {
 export const usePosthog = () => useContext(PosthogContext);
 ```
 
-Lastly, we need to add this context to your React tree. Go to `app/entry.client.tsx` and add the following: 
+Lastly, we need to add this context to your React tree. Go to `app/entry.client.tsx` and add the following:
 
 ```ts file=app/entry.client.tsx
 import { RemixBrowser } from "@remix-run/react";
@@ -107,21 +112,28 @@ import { startTransition, StrictMode, useEffect } from "react";
 import { hydrateRoot } from "react-dom/client";
 import { PosthogProvider } from "./contexts/posthog-context";
 
+// Declared in root.tsx
+declare global {
+  interface Window {
+    ENV: {
+      POSTHOG_API_KEY?: string;
+    };
+  }
+}
+
 startTransition(() => {
   hydrateRoot(
     document,
     <StrictMode>
-      <PosthogProvider>
-        <RemixBrowser />
-      </PosthogProvider>
+      <RemixBrowser />
     </StrictMode>,
   );
 });
 ```
 
-### Identifying Users 
+### Identifying Users
 
-To [identify users](/docs/product-analytics/identify) call `posthog?.identify()` when you have a distinct ID. 
+To [identify users](/docs/product-analytics/identify) call `posthog?.identify()` when you have a distinct ID.
 
 ```ts
 import { usePosthog } from "./contexts/posthog-context";
@@ -131,14 +143,14 @@ function SomeAuthedComponent() {
   useEffect(() => {
     posthog?.identify(user.distinctId);
   }, [posthog, user.distinctId]);
- 
+
   // ...
 }
 ```
 
 ### Setting up Pageviews
 
-Because Remix is a single-page app that uses client-side routing, we need to track pageviews whenever the page location changes. In `app/root.tsx`: 
+Because Remix is a single-page app that uses client-side routing, we need to track pageviews whenever the page location changes. In `app/root.tsx`:
 
 ```ts file=app/root.tsx
 
