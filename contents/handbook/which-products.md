@@ -24,11 +24,12 @@ Later on, you can then _innovate_ several ways:
 
 Products we build into the platform must:
 
-* Be a product that our ICP could use, and there already is a $1bn competitor in the market (ie a company with around $100M in revenue). This guarantees what you build will be useful.
+* Be a product that our ICP could use, and there already is evidence of significant successful competitors - for example, a competitor making $100M in revenue. This guarantees what you build will be useful.
 * Be something that you are very excited to build. People pursuing their interests get more done, go much further and execute to a better standard.
 
 Ideally, but not necessarily, products we build should:
 
+* Be closely related to customer or product data. This is so each product we ship can improve all the others. Or at the very least have a clear path to us doing a better versiom of it by integrating it with our existing products natively.
 * Help customers to build more successful products. This doesn't _just_ mean writing code, it means commercial stuff too.
 * Help us to offer all the tools in one - help us as quickly as possible cover the "major" pieces of software that every startup uses
 * Help us to get in first - some tools are adopted earlier in the customer lifecycle than others. Starting with these avoids customers moving to competitors' products then us having to migrate them over.
