@@ -83,6 +83,7 @@ export const query = graphql`
                     handle
                     shopifyId
                     description
+                    descriptionHtml
                     priceRangeV2 {
                         maxVariantPrice {
                             amount

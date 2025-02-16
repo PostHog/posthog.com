@@ -13,22 +13,43 @@ const librariesData = {
             {
                 name: 'JavaScript',
                 url: '/docs/libraries/js',
-                icon: <CloudinaryImage src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/integrate/js.svg" alt="JavaScript" />,
+                icon: (
+                    <CloudinaryImage
+                        src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/integrate/js.svg"
+                        alt="JavaScript"
+                    />
+                ),
             },
             {
                 name: 'React',
                 url: '/docs/libraries/react',
-                icon: <CloudinaryImage src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/integrate/react.svg" alt="React" />,
+                icon: (
+                    <CloudinaryImage
+                        src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/integrate/react.svg"
+                        alt="React"
+                    />
+                ),
             },
             {
                 name: 'Next.js',
                 url: '/docs/libraries/next-js',
-                icon: <CloudinaryImage src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/integrate/frameworks/nextjs.svg" alt="Next.js" />,
+                icon: (
+                    <CloudinaryImage
+                        src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/integrate/frameworks/nextjs.svg"
+                        alt="Next.js"
+                    />
+                ),
             },
             {
                 name: 'Vue',
                 url: '/docs/libraries/vue-js',
-                icon: <CloudinaryImage src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/integrate/frameworks/vue.svg" alt="Vue" />,
+                icon: (
+                    <CloudinaryImage
+                        src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/integrate/frameworks/vue.svg"
+                        alt="Vue"
+                        imgClassName="w-full"
+                    />
+                ),
             },
             {
                 name: 'More',
@@ -44,27 +65,63 @@ const librariesData = {
             {
                 name: 'Node.js',
                 url: '/docs/libraries/node',
-                icon: <CloudinaryImage src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/integrate/nodejs.svg" alt="Node.js" />,
+                icon: (
+                    <CloudinaryImage
+                        src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/integrate/nodejs.svg"
+                        alt="Node.js"
+                    />
+                ),
             },
             {
                 name: 'Python',
                 url: '/docs/libraries/python',
-                icon: <CloudinaryImage src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/integrate/python.svg" alt="Python" />,
+                icon: (
+                    <CloudinaryImage
+                        src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/integrate/python.svg"
+                        alt="Python"
+                    />
+                ),
             },
             {
                 name: 'Java',
                 url: '/docs/libraries/java',
-                icon: <CloudinaryImage src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/integrate/java.svg" alt="Java" height={32} />,
+                icon: (
+                    <CloudinaryImage
+                        src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/integrate/java.svg"
+                        alt="Java"
+                        height={32}
+                    />
+                ),
             },
             {
                 name: 'PHP',
                 url: '/docs/libraries/php',
-                icon: <CloudinaryImage src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/integrate/php.svg" alt="PHP" />,
+                icon: (
+                    <CloudinaryImage
+                        src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/integrate/php.svg"
+                        alt="PHP"
+                    />
+                ),
             },
             {
                 name: 'Ruby',
                 url: '/docs/libraries/ruby',
-                icon: <CloudinaryImage src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/integrate/ruby.svg" alt="Ruby" />,
+                icon: (
+                    <CloudinaryImage
+                        src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/integrate/ruby.svg"
+                        alt="Ruby"
+                    />
+                ),
+            },
+            {
+                name: '.NET',
+                url: '/docs/libraries/dotnet',
+                icon: (
+                    <CloudinaryImage
+                        src="https://res.cloudinary.com/dmukukwp6/image/upload/dotnet_logo_7e446176f2.svg"
+                        alt=".NET"
+                    />
+                ),
             },
             {
                 name: 'More',
@@ -80,7 +137,12 @@ const librariesData = {
             {
                 name: 'Android',
                 url: '/docs/libraries/android',
-                icon: <CloudinaryImage src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/integrate/android.svg" alt="Android" />,
+                icon: (
+                    <CloudinaryImage
+                        src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/integrate/android.svg"
+                        alt="Android"
+                    />
+                ),
             },
             {
                 name: 'iOS',
@@ -96,12 +158,23 @@ const librariesData = {
             {
                 name: 'React Native',
                 url: '/docs/libraries/react-native',
-                icon: <CloudinaryImage src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/integrate/react.svg" alt="React Native" />,
+                icon: (
+                    <CloudinaryImage
+                        src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/integrate/react.svg"
+                        alt="React Native"
+                    />
+                ),
             },
             {
                 name: 'Flutter',
                 url: '/docs/libraries/flutter',
-                icon: <CloudinaryImage src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/integrate/flutter.svg" alt="Flutter" />,
+                icon: (
+                    <CloudinaryImage
+                        imgClassName="w-full"
+                        src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/integrate/flutter.svg"
+                        alt="Flutter"
+                    />
+                ),
             },
         ],
     },
@@ -113,11 +186,15 @@ export default function Libraries() {
             <div className="sm:grid grid-cols-12">
                 <div className="col-span-5">
                     <div className="rotate-3">
-                        <CloudinaryImage src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Home/images/hogflix-mobile.png" alt="Hogflix mobile" placeholder="blurred" />
+                        <CloudinaryImage
+                            src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Home/images/hogflix-mobile.png"
+                            alt="Hogflix mobile"
+                            placeholder="blurred"
+                        />
                     </div>
                 </div>
 
-                <div className="col-span-7 -mt-48 sm:mt-0 relative z-10 after:absolute after:left-0 after:w-full after:-top-60 after:h-60 after:bg-gradient-to-b after:from-tan/0 after:via-tan/75 after:to-tan dark:after:from-dark/0 dark:after:via-bg/75 dark:after:to-dark sm:overflow-hidden bg-tan dark:bg-dark">
+                <div className="col-span-7 -mt-48 sm:mt-0 pl-1 relative z-10 after:absolute after:left-0 after:w-full after:-top-60 after:h-60 after:bg-gradient-to-b after:from-tan/0 after:via-tan/75 after:to-tan dark:after:from-dark/0 dark:after:via-bg/75 dark:after:to-dark sm:overflow-hidden bg-tan dark:bg-dark">
                     <h3 className="text-5xl xl:text-6xl text-center sm:text-left mb-8">
                         SDKs for <span className="text-blue">web</span> and{' '}
                         <span className="text-red dark:text-yellow">mobile</span>
@@ -128,7 +205,7 @@ export default function Libraries() {
                             <div key={category.name}>
                                 <h4 className="mb-0">{category.name}</h4>
                                 <p className="opacity-70 mb-4">{category.description}</p>
-                                <ul className="flex gap-3 sm:gap-4 list-none p-0 pb-2 m-0">
+                                <ul className="flex gap-3 sm:gap-4 list-none p-0 pb-2 m-0 flex-wrap">
                                     {category.items.map((item) => (
                                         <li key={item.name}>
                                             <Link

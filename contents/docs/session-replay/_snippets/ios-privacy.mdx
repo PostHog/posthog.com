@@ -7,17 +7,21 @@ imvProfilePhoto.accessibilityIdentifier = "ph-no-capture"
 
 > **Note:** For SwiftUI please refer to the [Masking in SwiftUI](#masking-in-swiftui) section below
 
-> **Note:** A technical issue is causing the [SwiftUI Text](https://developer.apple.com/documentation/swiftui/text) view to be detected as a `SwiftUI Image` view. This means that it'll be automatically masked if `maskAllImages` is set to `true`, even if the `maskAllTextInputs` is disabled. We're investigating this [issue](https://github.com/PostHog/posthog-ios/issues/163).
-
-
 ### Masking in SwiftUI
 
 - When using the [SwiftUI TextField](https://developer.apple.com/documentation/swiftui/textfield) with [UITextInputTraits](https://developer.apple.com/documentation/uikit/uitextinputtraits), setting traits such as `TextField("Email", text: ...).keyboardType(.emailAddress)` will always be automatically masked since it's for private text.
 - The [SwiftUI SecureField](https://developer.apple.com/documentation/swiftui/securefield) view is always automatically masked.
-- You can manually mark a SwiftUI View for masking using the `postHogMask(_:)` view modifier:
+- You can manually mark a SwiftUI View for masking using the `postHogMask()` view modifier:
 
   ```swift
-  // This view will be masked in session replay recordings
+  // This view (and children) will *always* be masked in session replay recordings
   MyCoolView()
     .postHogMask()
+  ```
+- The `postHogNoMask()` view modifier can be used to prevent a view from being masked in session recordings, regardless of any default masking behavior:
+
+  ```swift
+  // This view (and children) will *never* be masked in session replay recordings
+  MyCoolView()
+    .postHogNoMask()
   ```

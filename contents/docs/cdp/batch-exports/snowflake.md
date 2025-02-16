@@ -13,20 +13,30 @@ With batch exports, data can be exported to a Snowflake database table.
 ## Creating the batch export
 
 1. Subscribe to data pipelines add-on in [your billing settings](https://us.posthog.com/organization/billing) if you haven't already.
-2. Click [Data pipelines](https://app.posthog.com/pipeline) in the navigation and go to the exports tab in your PostHog instance.
-3. Click "Create export workflow".
-4. Select **Snowflake** as the batch export destination.
+2. Click [Data pipelines](https://app.posthog.com/pipeline) in the navigation and go to the **Destinations** tab in your PostHog instance.
+3. Search for **Snowflake**.
+4. Click the **+ Create** button. 
 5. Fill in the necessary [configuration details](#snowflake-configuration).
 6. Finalize the creation by clicking on "Create".
 7. Done! The batch export will schedule its first run on the start of the next period.
 
+## Authentication
+
+PostHog supports two authentication methods for Snowflake:
+
+1. **Password:** This is the simplest method, and just requires a password for the user.
+2. **Key pair:** For enhanced security, you can use a key pair to authenticate with Snowflake. For information on how to set this up, see [Snowflake's documentation](https://docs.snowflake.com/en/user-guide/key-pair-auth#configuring-key-pair-authentication). We support both encrypted and unencrypted key pairs.
+
 ## Snowflake configuration
 
 Configuring a batch export targeting Snowflake requires the following Snowflake-specific configuration values:
-* **User:** A Snowflake user name with permissions to insert data into the provided table and, if the table is meant to be created, permissions to create the table.
-* **Password:** The password of the Snowflake user provided.
-* **Role (optional):** A role to assume for the required permissions.
 * **Account:** A [Snowflake account identifier](https://docs.snowflake.com/en/user-guide/admin-account-identifier) without the `snowflakecomputing.com` suffix (if any).
+* **User:** A Snowflake user name with permissions to insert data into the provided table and, if the table is meant to be created, permissions to create the table.
+* **Authentication type:** The authentication method to use: password or key pair.
+* **Password:** The password of the Snowflake user provided, if using password authentication.
+* **Private key:** The private key of the Snowflake user provided, if using key pair authentication.
+* **Private key passphrase (optional):** The private key passphrase, if using an encrypted key pair.
+* **Role (optional):** A role to assume for the required permissions.
 * **Database:** The Snowflake database where the table provided to insert data is located (and created if not present).
 * **Schema:** The Snowflake database schema where the table provided to insert data is located (and created if not present).
 * **Table name:** The name of a Snowflake table where to export the data.
@@ -42,9 +52,11 @@ Batch exports use Snowflake's [internal table stages](https://docs.snowflake.com
 
 This section describes the models that can be exported to Snowflake.
 
+> **Note:** New fields may be added to these models over time. To maintain consistency, these fields are not automatically added to the destination tables. If a particular field is missing in your Snowflake tables, you can manually add the field, and it will be populated in future exports.
+
 ### Events model
 
-This is the default model for Snowflake batch exports. The schema of the model as created in BigQuery is:
+This is the default model for Snowflake batch exports. The schema of the model as created in Snowflake is:
 
 | Field           | Type        | Description                                                               |
 |-----------------|-------------|---------------------------------------------------------------------------|
@@ -83,9 +95,7 @@ COMMENT = 'PostHog events table'
 
 ### Persons model
 
-The schema of the model as created in BigQuery is:
-
-The schema of the model as created in BigQuery is:
+The schema of the model as created in Snowflake is:
 
 | Field                      | Type      | Description                                                                                          |
 |----------------------------|-----------|------------------------------------------------------------------------------------------------------|
@@ -95,6 +105,7 @@ The schema of the model as created in BigQuery is:
 | properties                 | `VARIANT` | A JSON object with all the latest properties of the person                                           |
 | person_version             | `INTEGER` | The version of the person properties associated with a (`team_id`, `distinct_id`) pair               |
 | person_distinct_id_version | `INTEGER` | The version of the person to `distinct_id` mapping associated with a (`team_id`, `distinct_id`) pair |
+| created_at                 | `TIMESTAMP` | The timestamp when the person was created                                                                                          |
 
 The Snowflake table will contain one row per `(team_id, distinct_id)` pair, and each pair is mapped to their corresponding `person_id` and latest `properties`.
 
@@ -108,6 +119,7 @@ CREATE TABLE IF NOT EXISTS "{database}"."{schema}"."{table_name}" (
     "properties" VARIANT,
     "person_version" INTEGER,
     "person_distinct_id_version" INTEGER,
+    "created_at" TIMESTAMP
 )
 COMMENT = 'PostHog persons table'
 ```

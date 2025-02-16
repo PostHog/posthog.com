@@ -75,8 +75,6 @@ Other options include:
 
 Why do this? FWIW, a single *Product for Engineers* newsletter drives more clicks to our website than a $5,000 newsletter sponsorship we ran recently.
 
-<NewsletterForm />
-
 ## 4. Make your website genuinely different 🙃
 This means:
 

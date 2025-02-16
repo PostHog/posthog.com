@@ -1,0 +1,49 @@
+Start by installing the Vercel AI SDK:
+
+```bash
+npm install ai @ai-sdk/openai
+```
+
+In the spot where you initialize the Vercel AI SDK, import PostHog and our `withTracing` wrapper, initialize PostHog with your project API key and host (from [your project settings](https://us.posthog.com/settings/project)), and pass it to the `withTracing` wrapper.
+
+```ts
+import { PostHog } from "posthog-node";
+import { withTracing } from "@posthog/ai"
+import { generateText } from "ai"
+import { createOpenAI } from "@ai-sdk/openai"
+
+const phClient = new PostHog(
+  '<ph_project_api_key>',
+  { host: '<ph_client_api_host>' }
+);
+
+const openaiClient = createOpenAI({
+  apiKey: 'your_openai_api_key',
+  compatibility: 'strict'
+});
+
+const model = withTracing(openaiClient("gpt-4-turbo"), phClient, {
+  posthogDistinctId: "user_123", // optional
+  posthogTraceId: "trace_123", // optional
+  posthogProperties: { "conversation_id": "abc123", "paid": true }, // optional
+  posthogPrivacyMode: false, // optional
+  posthogGroups: { "company": "company_id_in_your_db" }, // optional
+});
+
+phClient.shutdown()
+``` 
+
+Now, when you use the Vercel AI SDK, it automatically captures many properties into PostHog including `$ai_input`, `$ai_input_tokens`, `$ai_latency`, `$ai_model`, `$ai_model_parameters`, `$ai_output_choices`, and `$ai_output_tokens`.
+
+You can also capture or modify additional properties with the `posthogDistinctId`, `posthogTraceId`, `posthogProperties`, `posthogGroups`, and `posthogPrivacyMode` parameters.
+
+```ts
+const { text } = await generateText({
+  model: model,
+  prompt: message
+});
+
+console.log(text)
+```
+
+> **Note:** If you want to capture LLM events anonymously, **don't** pass a distinct ID to the request. See our docs on [anonymous vs identified events](/docs/data/anonymous-vs-identified-events) to learn more. 

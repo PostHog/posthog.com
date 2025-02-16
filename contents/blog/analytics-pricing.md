@@ -148,11 +148,9 @@ We would never fight hedgehogs, how dare you.
 > 
 > ###  How do I start using anonymous events?
 >
-> For most users, it only requires a simple config change to include `process_persons: "identified_only"` in the initialization of your JavaScript Web SDK or snippet.
+> Anonymous events are the default for the JavaScript Web SDK and snippet.
 > 
-> This will track anonymous events until an identifying action is taken – i.e. using `identify()`, `group()`, setting person properties with `$set`, etc.
->
-> Soon, we will be making `identified_only` the default for all users. We'll let you know when that change happens, but you can make the change now if you prefer.
+> They will track anonymous events until an identifying action is taken – i.e. using `identify()`, `group()`, setting person properties with `$set`, etc.
 >
 > You can get more details on this and other use cases, like server-side events, in our [persons documentation](/docs/data/persons).
 >

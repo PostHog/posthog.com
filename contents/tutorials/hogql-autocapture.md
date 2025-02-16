@@ -1,18 +1,18 @@
 ---
-title: How to analyze autocapture events with HogQL
+title: How to analyze autocapture events with SQL
 date: 2023-06-07
 author:
   - ian-vanagas
 showTitle: true
 sidebar: Docs
 tags:
-  - hogql
+  - sql
   - trends
   - product analytics
 ---
  
 
-[Autocapture](/docs/data/autocapture) is a powerful way to capture usage data without having to implement any tracking yourself. [HogQL](/docs/product-analytics/hogql) unlocks more of that data for analysis. In this tutorial, we go over examples of how you can use HogQL to analyze autocapture events.
+[Autocapture](/docs/data/autocapture) is a powerful way to capture usage data without having to implement any tracking yourself. [SQL](/docs/product-analytics/sql) unlocks more of that data for analysis. In this tutorial, we go over examples of how you can use SQL to analyze autocapture events.
 
 > **Don't want to write SQL?** You can use autocapture element properties like tag name, text, `href` target, and/or CSS selector to filter autocapture events in trends, funnels, and more. See our [autocapture docs](/docs/data/autocapture) for more.
 
@@ -20,15 +20,15 @@ tags:
 
 Every autocapture event contains data on the "location" of that event in your code. It does this by creating an element chain from the specific element a user interacted with like `<a>`, `<input>`, or `<button>` to highest-level components like a `<body>` or `<div>` tag.
 
-We can access the element chain by using the autocapture series, then using `elements_chain`  in our [HogQL expression](/docs/hogql/expressions).
+We can access the element chain by using the autocapture series, then using `elements_chain`  in our [SQL expression](/docs/sql/expressions).
 
 ![Element chain](https://res.cloudinary.com/dmukukwp6/video/upload/v1710055416/posthog.com/contents/images/tutorials/hogql-autocapture/element-chain.mp4)
 
-In its default form, this data isn’t super useful. When we begin to use HogQL’s functions, it becomes incredibly powerful.
+In its default form, this data isn’t super useful. When we begin to use SQL's functions, it becomes incredibly powerful.
 
 ## Breaking down by first and last elements
 
-We can use HogQL to turn the element chain into an array with `splitByChar()`. From this array, we can get the element at any index. To get the element at the first index, use the expression `arrayElement(splitByChar('.', elements_chain), 1)`.
+We can use SQL to turn the element chain into an array with `splitByChar()`. From this array, we can get the element at any index. To get the element at the first index, use the expression `arrayElement(splitByChar('.', elements_chain), 1)`.
 
 ![Broken down elements](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/hogql-autocapture/elements.png)
 
@@ -52,7 +52,7 @@ Examples of attribute breakdowns include:
 
 ## Filter for specific components
 
-We can use HogQL to filter for events where the elements or components contain a certain value. We can filter using `match` against the whole element chain, or we can use the same `splitByChar()`  method as before. 
+We can use SQL to filter for events where the elements or components contain a certain value. We can filter using `match` against the whole element chain, or we can use the same `splitByChar()`  method as before. 
 
 For example, if we want to compare components with `collapsed` vs `not-collapsed` classes, we can create two series. One filtered for `collapsed` with the expression:
 
@@ -98,5 +98,7 @@ match(
 ## Further reading
 
 - [Complete guide to event tracking](/tutorials/event-tracking-guide)
-- [Using HogQL for advanced time and date filters](/tutorials/hogql-date-time-filters)
-- [Using HogQL for advanced breakdowns](/tutorials/hogql-breakdowns)
+- [Using SQL for advanced time and date filters](/tutorials/hogql-date-time-filters)
+- [Using SQL for advanced breakdowns](/tutorials/hogql-breakdowns)
+
+<NewsletterForm />

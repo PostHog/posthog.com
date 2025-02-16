@@ -1,0 +1,34 @@
+---
+title: Sentry
+icon: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/integrate/frameworks/sentry.svg
+---
+
+## Why does this exist?
+
+Our Sentry integration is a two-way integration which works on JavaScript & Python. Once installed, it will:
+
+- Add a direct link in Sentry to the profile of the person affected in PostHog.
+- Send an `$exception` event to PostHog with a direct link to Sentry.
+
+This way, debugging issues becomes a lot easier, and you can also correlate error data with your product metrics.
+
+> If you're looking for the PostHog + Sentry integration for Python, please check out the [Python docs](/docs/integrate/server/python#sentry).
+
+## Installation
+
+import SentryInstall from './_snippets/install-sentry.mdx'
+
+<SentryInstall />
+
+### Usage
+
+In PostHog, you'll now have `$exception` events, which have a "Sentry URL" link to take you to the exception:
+
+![Sentry exception event in PostHog](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/sentry_posthog_exception.png)
+
+You can also monitor and manage these events in the [error tracking issue list](https://us.posthog.com/error_tracking).
+
+From Sentry, you will now be able to go directly to the affected person in PostHog and watch the session recording for when the exception happened, see what else the user has done, and find their details. Don't forget to click the little icon to the side of the URL, not the URL itself.
+
+![PostHog user profile URL in Sentry](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/sentry_exception.png)

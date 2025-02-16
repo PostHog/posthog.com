@@ -32,16 +32,18 @@ To do this:
     classes = "rounded"
 />
 
-## Method 2: Use `posthog.featureFlags.override()`
+## Method 2: Use `posthog.featureFlags.overrideFeatureFlags()`
 
-> **Note:** The `posthog.featureFlags.override()` method is only available in the [JavaScript web](/docs/libraries/js) and [React Native](/docs/libraries/react-native) SDKs.
+> **Note:** The `posthog.featureFlags.overrideFeatureFlags()` method is only available in the [JavaScript web](/docs/libraries/js) and [React Native](/docs/libraries/react-native) SDKs.
 
-You can add a manual override directly in your code by calling `posthog.featureFlags.override()`:
+You can add a manual override directly in your code by calling `posthog.featureFlags.overrideFeatureFlags()`:
 
 ```javascript
-posthog.featureFlags.override({
-    'your_boolean_feature_flag_key': true // for boolean feature flags
-    'your_multivariate_feature_flag_key': 'your_variant_name', // for multivariate feature flags
+posthog.featureFlags.overrideFeatureFlags( {
+    flags: {
+        'your_boolean_feature_flag_key': true // for boolean feature flags
+        'your_multivariate_feature_flag_key': 'your_variant_name', // for multivariate feature flags
+    }
 })
 ```
 

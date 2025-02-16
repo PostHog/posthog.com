@@ -29,9 +29,11 @@ import GoInstall from '../integrate/_snippets/install-go.mdx'
 import ReactNativeInstall from '../integrate/_snippets/install-react-native.mdx'
 import AndroidInstall from '../integrate/_snippets/install-android.mdx'
 import IOSInstall from '../integrate/_snippets/install-ios.mdx'
+import ElixirInstall from '../integrate/_snippets/install-elixir.mdx'
+import DotNetInstall from '../integrate/_snippets/install-dotnet.mdx'
 
 <!-- prettier-ignore -->
-<Tab.Group tabs={['Web', 'React', 'Node.js', 'Python', 'PHP', 'Ruby', 'Go', 'React Native', 'Android', 'iOS']}>
+<Tab.Group tabs={['Web', 'React', 'Node.js', 'Python', 'PHP', 'Ruby', 'Go', 'React Native', 'Android', 'iOS', 'Java', 'Rust', 'Elixir', '.NET', 'api']}>
     <Tab.List>
         <Tab>Web</Tab>
         <Tab>React</Tab>
@@ -46,6 +48,7 @@ import IOSInstall from '../integrate/_snippets/install-ios.mdx'
         <Tab>Java</Tab>
         <Tab>Rust</Tab>
         <Tab>Elixir</Tab>
+        <Tab>.NET</Tab>
         <Tab>API</Tab>
     </Tab.List>
     <Tab.Panels>
@@ -90,9 +93,10 @@ import IOSInstall from '../integrate/_snippets/install-ios.mdx'
             </blockquote>
         </Tab.Panel>
         <Tab.Panel>
-            <blockquote class='warning-note'>
-                Since feature flags are not supported yet in our <a href="/docs/libraries/elixir">Elixir SDK</a>, see our docs on <a href="/docs/experiments/running-experiments-without-feature-flags">how to run experiments without feature flags</a>. 
-            </blockquote>
+            <ElixirInstall />
+        </Tab.Panel>
+        <Tab.Panel>
+            <DotNetInstall />
         </Tab.Panel>
         <Tab.Panel>
             <blockquote class='warning-note'>

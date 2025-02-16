@@ -64,7 +64,7 @@ export const fetchQuery = async (payload) => {
 }
 ```
 
-Finally, in our client component, we make the query request using [HogQL](/docs/product-analytics/sql) and display the data:
+Finally, in our client component, we make the query request using PostHog's [query API](/docs/api/query#post-api-projects-project_id-query) and display the data:
 
 ```js
 // app/page.js
@@ -449,3 +449,5 @@ This creates a stacked area chart like this:
 - [The basics of SQL for analytics](/product-engineers/sql-for-analytics)
 - [How Mintlify launched user-facing analytics, powered by PostHog](/customers/mintlify)
 - [How to use Recharts to visualize analytics data (with examples)](/tutorials/recharts)
+
+<NewsletterForm />

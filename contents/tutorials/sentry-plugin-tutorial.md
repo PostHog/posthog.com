@@ -22,6 +22,8 @@ PostHog offers a variety of tools which are useful for [real user monitoring](/b
 
 In this tutorial, we’ll demonstrate how connecting PostHog and Sentry enables you to correlate errors in Sentry with other product metrics, and to debug issues more easily. 
 
+> **Interested in capturing errors in PostHog?** Our new error tracking product is currently in beta. Learn more about it in [our docs](/docs/error-tracking).
+
 ## Step 1: Connect PostHog with Sentry
 
 First, we need to connect Sentry and PostHog via a two-way integration so that they can share data directly. PostHog offers [Sentry integrations via Javascript](/docs/libraries/sentry#installation) and [Python](/docs/integrate/server/python#sentry) — though note that the Javascript integration requires that both PostHog and Sentry are using JS modules. 
@@ -57,3 +59,5 @@ Connecting PostHog and Sentry also makes it easier to debug issues and explore t
 For example, you can jump directly from an error in Sentry to a view of the specific person in PostHog in order to view the recording directly. This enables you to view the error as it happens, with the ```$exception``` event clearly shown on the timeline — a useful tool for understanding the steps leading up to an error and getting full context. 
 
 There are many other ways to explore ```$exception``` events sent by Sentry and debug errors using tools such as [Funnels](/docs/user-guides/funnels), [Cohorts](/docs/user-guides/cohorts), [Lifecycle](/docs/user-guides/lifecycle) and more. [Check the docs for more ideas and inspiration](/docs)!
+
+<NewsletterForm />

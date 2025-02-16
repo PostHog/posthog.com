@@ -59,7 +59,6 @@ export function PHProvider({ children }) {
   useEffect(() => {
     posthog.init(process.env.NEXT_PUBLIC_POSTHOG_KEY, {
       api_host: process.env.NEXT_PUBLIC_POSTHOG_HOST,
-      person_profiles: 'identified_only'
     })
   }, []);
 
@@ -199,7 +198,6 @@ Once done, you should see pageview events for individual pages in your PostHog i
 > ```js
 > posthog.init(process.env.NEXT_PUBLIC_POSTHOG_KEY, {
 >   api_host: process.env.NEXT_PUBLIC_POSTHOG_HOST,
->   person_profiles: 'identified_only',
 >   capture_pageview: false
 > })
 > ```
@@ -294,3 +292,5 @@ With this, you have the basics of PostHog set up on both the client and server s
 - [How to set up Next.js analytics, feature flags, and more](/tutorials/nextjs-analytics)
 - [How to set up Next.js A/B tests](/tutorials/nextjs-ab-tests)
 - [An introductory guide to identifying users in PostHog](/tutorials/identifying-users-guide)
+
+<NewsletterForm />

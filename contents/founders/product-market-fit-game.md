@@ -54,7 +54,7 @@ Here are some pointers:
 
 - **Be careful when validating problems no one else has worked on.** Maybe you see something others are missing, but it's more likely the problem isn't important.
 
-- **Be wary about building what's trendy.** It's easier to beat unsexy, badly run, non-innovative companies than software companies with VC funding _and_ using the latest technology. Do not be fooled huge fundraises by startups working in these areas: `big funding rounds + press ≠ product-market fit`. In fact, the trendier the space, the less likely a big round means the company is succeeding.[^1]
+- **Be wary about building what's trendy.** It's easier to beat unsexy, badly run, non-innovative companies than software companies with VC funding _and_ [using the latest technology](/newsletter/choosing-technologies). Do not be fooled huge fundraises by startups working in these areas: `big funding rounds + press ≠ product-market fit`. In fact, the trendier the space, the less likely a big round means the company is succeeding.[^1]
 
 - **Conservative buyers demand differentiation.** You could probably get someone to try a new social app, but you won't get an enterprise to use an unproven CRM. A rip and replace strategy is harder to execute than a blue ocean strategy. It is easier to sell a product to someone who hasn't got anything in place.
 
@@ -186,7 +186,7 @@ Closing the loop above is the way to cement your product-market fit because:
 
   1. Activate your users manually. The classic example is the founders of Stripe, who [used to visit their first users in person](http://paulgraham.com/ds.html#Manual) to set up their product for them. Do things that don't scale. You'll develop a closer relationship doing this, which helps you get more feedback.
   
-  2. Make your activation/onboarding simpler. Can you make it 10x simpler?
+  2. Make your [activation/onboarding](/product-engineers/activation-metrics) simpler. Can you make it 10x simpler?
 
 * **You are getting conflicting feedback on what to build.** Go to level 5, this will help clarify which users are your Ideal Customer Profile, and which aren't. This provides a clearer direction.
  

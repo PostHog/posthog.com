@@ -22,7 +22,6 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
     const ChangelogTemplate = path.resolve(`src/templates/Changelog.tsx`)
     const PostListingTemplate = path.resolve(`src/templates/PostListing.tsx`)
     const PaginationTemplate = path.resolve(`src/templates/Pagination.tsx`)
-    const TeamTemplate = path.resolve(`src/templates/Team.tsx`)
 
     // Tutorials
     const TutorialsTemplate = path.resolve(`src/templates/tutorials/index.tsx`)
@@ -37,7 +36,7 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
         {
             allMdx(
                 filter: {
-                    fileAbsolutePath: { regex: "/^((?!contents/team/).)*$/" }
+                    fileAbsolutePath: { regex: "/^((?!contents/teams/).)*$/" }
                     frontmatter: { title: { ne: "" } }
                 }
             ) {
@@ -316,17 +315,6 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
                     fieldValue
                 }
             }
-            teams: allMdx(filter: { frontmatter: { template: { eq: "team" } } }) {
-                nodes {
-                    id
-                    fields {
-                        slug
-                    }
-                    frontmatter {
-                        title
-                    }
-                }
-            }
         }
     `)) as GatsbyContentResponse
 
@@ -389,10 +377,15 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
         // need to use slugger for header links to match
         const slugger = new Slugger()
         return headings.map((heading) => {
+            // Strip HTML tags from heading value
+            // Useful if we wanna add a beta label to a header
+            const cleanValue = heading.value.replace(/\s*<([a-z]+).+?>.+?<\/\1>/g, '')
+
             return {
                 ...heading,
                 depth: heading.depth - 2,
-                url: slugger.slug(heading.value),
+                url: slugger.slug(cleanValue),
+                value: cleanValue,
             }
         })
     }
@@ -566,6 +559,7 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
                 slug,
                 post: true,
                 article: true,
+                askMax: true,
             },
         })
     })
@@ -729,20 +723,6 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
             component: ChangelogTemplate,
             context: {
                 year: Number(year),
-            },
-        })
-    })
-
-    result.data.teams.nodes.forEach(({ id, frontmatter: { title }, fields: { slug } }) => {
-        createPage({
-            path: slug,
-            component: TeamTemplate,
-            context: {
-                id,
-                slug,
-                teamName: title,
-                ignoreWrapper: true,
-                objectives: `${slug}/objectives`,
             },
         })
     })

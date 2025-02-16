@@ -4,28 +4,30 @@ sidebar: Handbook
 showTitle: true
 ---
 
-We do three types of sponsorships - commercial, charitable, and open source. Our current objectives with commercial sponsorships are to:
-
-- Drive subscriptions to our newsletter [Product for Engineers](https://newsletter.posthog.com/)
-- Enhance word of mouth - this is our most effective acquisition channel.
-- Reach more relevant communities, especially those users that are not active on social media
-- Make more effective use of our budget in less popular channels 
+We do three types of sponsorships - commercial, charitable, and open source.
 
 Measuring attribution directly is basically impossible with sponsorship activities, so we try hard to make sure we are targeting the right channels by validating opportunities properly first. We like to make sure their target audience is in [our ICP](/handbook/who-we-are-building-for) and test with smaller amounts when possible.
 
 ## Commercial sponsorship
 
-We currently sponsor a mixture of newsletters and influencers. Where possible, we default to an audience we know is as close to 100% engineers as possible, rather than a massive audience where engineers are a smaller %.
+Our current objectives with commercial sponsorships are to:
 
-Charles and Ian have the contacts for these people if you want to email them. 
+1. Drive subscriptions to our [newsletter](/handbook/content-and-docs/newsletter) [Product for Engineers](https://newsletter.posthog.com/)
+2. Create awareness, enhance word of mouth, and drive signups to PostHog
+
+To do this, we sponsor a mixture of newsletter and influencer sponsorships. Where possible, we default to an audience we know is as close to 100% engineers as possible, rather than a massive audience where engineers are a smaller %.
+
+We track these sponsorships in our <PrivateLink url="https://docs.google.com/spreadsheets/d/1MmNUd9fFlZM3-SDk-HQ9cOmBY8XtqT7F97JFOAehxh8/edit?gid=702711155#gid=702711155">marketing budget and spending spreadsheet</PrivateLink>.
+
+<TeamMember name="Ian Vanagas" /> has the contacts for these people if you want them.
 
 ### Newsletters
 
-We sponsor newsletters to drive subscriptions to our newsletter. We have tried to sponsor newsletter to drive awareness or subscriptions to the main PostHog app, but [conversion is not good enough](https://us.posthog.com/project/2/dashboard/114489) for it to be worth it.
+We sponsor newsletters to drive subscriptions to our newsletter. We have tried to sponsor newsletter to drive awareness or sign ups to the main PostHog app, but [conversion is not good enough](https://us.posthog.com/project/2/dashboard/114489) for it to be worth it.
 
-As for measuring newsletter conversion, Substack's attribution sucks. To measure the success of a newsletter sponsorship, we take the cost and divide the difference between subscribers one day before the ad runs with subscribers two days after. This gives us a very rough estimate of cost per subscriber. If you're on the PostHog team, you can see a full list of the ads we have run and this calculation on our [sponsorship result spreadsheet](https://docs.google.com/spreadsheets/d/1CxuZ9G4JIcCeQyQhulpK75_doxjfGI7a0gy3Igk2Ik0/edit).
+As for measuring newsletter conversion, Substack's attribution sucks. We instead create a custom link for each campaign using Dub.co and calculate cost per click to measure success.
 
-Some newsletters we like working with and sponsoring include:
+We look for newsletters that focus on software development and engineering. We don't care about list size or reach as much as we care about clickthrough rate (you can ask for their average CTR). Some we like working with and sponsoring include:
 
 - [Pointer](https://www.pointer.io/)
 - [Bytes](https://bytes.dev/), [React newsletter](https://reactnewsletter.com/) (same publisher for both)
@@ -48,22 +50,47 @@ Smaller newsletters that we also have supported:
 - [Fullstack Bulletin](https://fullstackbulletin.com/)
 - [freek.dev](https://freek.dev/)
 
-Our copy is roughly:
+#### Newsletter sponsorship content
 
-> **Product for Engineers: A newsletter helping flex your product muscles**
-> Product for Engineers is PostHog’s newsletter dedicated to helping engineers improve their product skills. Learn how to talk to users, build new features users love, and find product market fit. Subscribe for free to get curated advice on building great products, lessons (and mistakes) from building PostHog, and deep dives into the strategies of top startups.
+Titles that work well include:
+
+- Product for Engineers: A newsletter helping flex your product muscles
+- Product for Engineers: The first newsletter dedicated to product engineers
+
+The main copy is some variation of:
+
+> Product for Engineers is PostHog's newsletter dedicated to helping engineers improve their product skills. Learn how to talk to users, build new features users love, and find product market fit. Subscribe for free to get curated advice on building great products, lessons (and mistakes) from building PostHog, and deep dives into the strategies of top startups.
+
+We have also found that linking to an article directly converts better than just a generic "subscribe to our newsletter" link.
+
+If you need images, there is a <PrivateLink url="https://www.figma.com/design/HwUmk7WqccLkGgNNGAs4zN/Art-board?node-id=10059-57205">collection of many sizes of them in Figma</PrivateLink>.
 
 ### Influencers
+
+We sponsor influencers to drive awareness and signups to PostHog. We look for ones who are already PostHog users and have large, engaged audiences (on social, Discord, YouTube comments). 
+
+We find that spending more money on larger influencers converts better than sponsoring many smaller ones. We experimented with short-form video, but it was difficult to measure and didn't convert well.
 
 Some of the influencers we sponsor include:
 
 - [Theo](https://www.youtube.com/watch?v=6xXSsu0YXWo). He is a great partner for us. His audience is ideal, he is doing YouTube right, and he's a PostHog user.
 
-- [Morning Maker Show](https://morningmakershow.com/) across their podcast, Twitter, and newsletter. They are also avid PostHog users who have an audience of indie makers. 
+- [Fireship](https://www.youtube.com/@Fireship)
 
-We are also experimenting with other influencers, specifically in short-form video. We've tried YouTube a couple of times but they were extremely expensive and the audience isn't technical enough. We think short-form video could provide better ROI. 
+- [Chris Raroque](https://www.youtube.com/@raroque)
 
-We make sure to tell these influencers to have people mention them on signup. We then measure their impact by looking at [where people hear about us](https://us.posthog.com/project/2/insights/jdJgByZC). 
+We measure impact by looking at clicks on the custom link as well as <PrivateLink url="https://us.posthog.com/project/2/insights/jdJgByZC">where people hear about us on signup</PrivateLink>. This is tracked between PostHog and our <PrivateLink url="https://docs.google.com/spreadsheets/d/1MmNUd9fFlZM3-SDk-HQ9cOmBY8XtqT7F97JFOAehxh8/edit?gid=702711155#gid=702711155">marketing budget and spending spreadsheet</PrivateLink>.
+
+#### Influencer sponsorship content
+
+As guidance for what the ad should look like, we ask the following:
+
+- Be at least 45 seconds long
+- Be included in the first 2 minutes of the video
+- Custom link that redirects to UTM URL in the top 3 lines of the description
+- Mention you heard about PostHog from them
+
+Beyond this, we are flexible and suggest that influencers talk about how they use PostHog.
 
 ### Podcasts
 
@@ -71,10 +98,6 @@ We've sponsored podcasts one-off in the past, but have no plans to do them again
 
 - [Lenny's Podcast](https://www.lennyspodcast.com/)
 - [Data Engineering podcast](https://www.dataengineeringpodcast.com/)
-
-### Copy bank
-
-We maintain [a sheet here](https://docs.google.com/spreadsheets/d/1VOwyDs8qmXw38KgCiPeJMIGS-SedSAZLXfb2zvB_1jE/edit#gid=0) of various types and lengths of copy that we use for our campaigns - if you end up creating new copy, please add it to this sheet!
 
 ## Charitable sponsorship
 
@@ -99,17 +122,24 @@ In addition to sponsoring key projects, we also provide a $100/month budget for 
 
 ### Projects we sponsor regularly
 
-| Project               | Author     | Why does PostHog sponsor                                                  | Sponsored via                           | Amount/month           |
-| ---------------------------- | ---------- | ------------------------------------------------------------------------- | --------------------------------------- | ---------------------- |
-| [rrweb]                      | [yz-yu]    | Powers our session recording functionality                                | [Open Collective][open-collective]      | $1000                   |
-| [graphile/worker]            | [benjie]   | Powering scheduled jobs, retries and other logic for the [plugin-server]  | [GitHub Sponsors][github-sponsors]      | $100                   |
-| [Django REST Framework][drf] | [encode]   | Powers the PostHog REST APIs                                              | Directly                                | $400                   |
-| [Webdriver manager for python] | [SergeyPirogov]   | Powers parts of our subscriptions and exports                    | [GitHub Sponsors][github-sponsors]      | $15                     |
-| [alex]                       | [wooorm]   | We use it for improving the content we write                              | [GitHub Sponsors][github-sponsors]      | $5                     |
-| [Caddy]                      | [mholt]   | We recommend it as a [reverse proxy](/docs/advanced/proxy#deploying-a-reverse-proxy). | [GitHub Sponsors][github-sponsors]      | $50                     |
-| [Tiptap]                     | [ueberdosis]   | The headless editor framework for web artisans                        | [GitHub Sponsors][github-sponsors]      | $149                     |
-| [Next.js Boilerplate]        | [ixartz]   | Boilerplate and Starter for Next JS 14+, Tailwind CSS 3.3 and TypeScript  | [GitHub Sponsors][github-sponsors]      | $100                     |
-| [Refined GitHub]             | [fregante] | Browser extension that simplifies the GitHub interface and adds useful features  | [GitHub Sponsors][github-sponsors]      | $100                     |
+| Project                        | Author           | Why does PostHog sponsor                                                              | Sponsored via                           | Amount/month           |
+| -------------------------------| ---------------- | ------------------------------------------------------------------------------------- | --------------------------------------- | ---------------------- |
+| [rrweb]                        | [yz-yu]          | Powers our session recording functionality                                            | [Open Collective][open-collective]      | $1000                  |
+| [graphile/worker]              | [benjie]         | Powering scheduled jobs, retries and other logic for the [plugin-server]              | [GitHub Sponsors][github-sponsors]      | $100                   |
+| [Django REST Framework][drf]   | [encode]         | Powers the PostHog REST APIs                                                          | Directly                                | $400                   |
+| [Webdriver manager for python] | [SergeyPirogov]  | Powers parts of our subscriptions and exports                                         | [GitHub Sponsors][github-sponsors]      | $15                    |
+| [alex]                         | [wooorm]         | We use it for improving the content we write                                          | [GitHub Sponsors][github-sponsors]      | $5                     |
+| [Caddy]                        | [mholt]          | We recommend it as a [reverse proxy](/docs/advanced/proxy#deploying-a-reverse-proxy). | [GitHub Sponsors][github-sponsors]      | $50                    |
+| [Tiptap]                       | [ueberdosis]     | The headless editor framework for web artisans                                        | [GitHub Sponsors][github-sponsors]      | $149                   |
+| [Next.js Boilerplate]          | [ixartz]         | Boilerplate and Starter for Next JS 14+, Tailwind CSS 3.3 and TypeScript              | [GitHub Sponsors][github-sponsors]      | $100                   |
+| [Refined GitHub]               | [fregante]       | Browser extension that simplifies the GitHub interface and adds useful features       | [GitHub Sponsors][github-sponsors]      | $100                   |
+| [detekt]                       | [arturbosch]     | Static code analysis for Kotlin                                                       | [GitHub Sponsors][github-sponsors]      | $10                    |
+| [Periphery]                    | [ileitch]        | A tool to identify unused code in Swift projects.                                     | [GitHub Sponsors][github-sponsors]      | $5                     |
+| [ESLint]                       | [nzakas]         | Find and fix problems in your JavaScript code.                                        | [GitHub Sponsors][github-sponsors]      | $10                    |
+| [Prettier]                     | [jlongster]      | Prettier is an opinionated code formatter.                                            | [GitHub Sponsors][github-sponsors]      | $10                    |
+| [Jest]                         | [cpojer]         | Delightful JavaScript Testing.                                                        | [Open Collective][open-collective]      | $10                    |
+| [Rollup]                       | [Rollup]         | Next-generation ES module bundler.                                                    | [Open Collective][open-collective]      | $5                     |
+| [SwiftFormat]                  | [nicklockwood]   | A command-line tool and Xcode Extension for formatting Swift code.                    | Directly                                | $10                    |
 
 
 
@@ -124,6 +154,13 @@ In addition to sponsoring key projects, we also provide a $100/month budget for 
 [Tiptap]: https://github.com/ueberdosis/tiptap
 [Next.js Boilerplate]: https://github.com/ixartz/Next-js-Boilerplate
 [Refined GitHub]: https://github.com/refined-github/refined-github
+[detekt]: https://github.com/detekt/detekt
+[Periphery]: https://github.com/peripheryapp/periphery
+[ESLint]: https://github.com/eslint/eslint
+[Prettier]: https://github.com/prettier/prettier
+[Jest]: https://github.com/jestjs/jest
+[Rollup]: https://github.com/rollup/rollup
+[SwiftFormat]: https://github.com/nicklockwood/SwiftFormat
 
 <!-- authors -->
 [yz-yu]: https://github.com/yz-yu
@@ -135,6 +172,12 @@ In addition to sponsoring key projects, we also provide a $100/month budget for 
 [ueberdosis]: https://github.com/ueberdosis
 [ixartz]: https://github.com/ixartz
 [fregante]: https://github.com/fregante
+[arturbosch]: https://github.com/arturbosch
+[ileitch]: https://github.com/ileitch
+[nzakas]: https://github.com/nzakas
+[jlongster]: https://github.com/jlongster
+[cpojer]: https://github.com/cpojer
+[nicklockwood]: https://github.com/nicklockwood
 
 <!-- other links -->
 [github-sponsors]: https://github.com/orgs/PostHog/sponsoring

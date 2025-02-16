@@ -84,7 +84,7 @@ export function PosthogProvider({ children }: PosthogProviderProps) {
 
     posthogInstanceRef.current = posthog.init(window.ENV.POSTHOG_API_KEY, {
       api_host: '<ph_client_api_host>',
-      person_profiles: 'identified_only'
+      person_profiles: 'identified_only',
     });
     return posthogInstanceRef.current;
   }

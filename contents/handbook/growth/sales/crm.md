@@ -69,6 +69,13 @@ Our preferred way to keep track of outreach is by creating Salesforce Leads, Con
 
 If you add "sf-lead" tag to a ticket in Zendesk, a new lead will be automatically created in Salesforce. This helps streamline the process of converting support questions or tickets into potential sales opportunities directly from Zendesk.
 
+If you see "Zendesk" as the lead source, please review the ticket under the Zendesk widget in Salesforce which allows you to view the full context within salesforce. It will also appear in sales_form_message field for quick review of last request before the Zendesk ticket is converted to a lead.
+
+### Forwarding Sales Opportunities
+If you are not in the sales team but are engaged with a client and identify a sales opportunity, forward the email chain to sales@posthog.com. A new lead will be automatically created in salesforce and assigned to the appropriate AE based on existing criteria. This way we can smoothly hand off potential opportunities and track things properly!
+
+**Important:** The email must be forwarded (not replied to), and sales@posthog.com must be in the "To:" field—not CC or BCC—for the automation to work correctly.
+
 ## How we do lead assignments
 Any user who submits a “contact sales” form on our website shows up as a lead in Salesforce and gets assigned to an Account Executive (AE). This is how we do lead assignment within our sales team:
 - Based on Territory: Leads are assigned based on their geographical location.
@@ -77,6 +84,28 @@ Any user who submits a “contact sales” form on our website shows up as a lea
   - Territory 3: All other geographies, or if the country information is missing, assigned to this territory.
 
 - Round Robin Within Territory: Leads are assigned in a round-robin fashion to the AEs who own that territory, ensuring equal distribution among them.
+- Reassignment Logic for Returning Leads: If a lead incoming from a specific domain later submits another contact sales form, the new lead is reassigned to the original owner if the old lead came in within the last 4 months. This ensures continuity in discussions with different leads from same company while preventing spam leads from being reassigned to the original owner.
+
+### Lead Pool Process (Experimental)
+We’re testing a **new process** for handling **product-led leads** that haven’t been acted on within **7 days**. If a lead is assigned to an AE but hasn’t been updated for **7 days**, it will:
+1. Automatically unassign from the AE.
+2. Move to a shared lead pool where anyone can pick it up and take action.
+
+#### Why Are We Doing This?
+- **Keeps leads active:** Ensures leads don’t go stale and slip through the cracks.
+- **Encourages responsiveness:** AEs are motivated to act quickly to keep their assigned leads.
+- **Creates shared accountability:** Gives others a chance to work leads that need attention.
+- **Helps identify patterns:** Tracks unqualified leads and informs adjustments to our lead routing.
+
+#### What You Should Do
+- **Prioritize your assigned leads** to avoid them being reassigned. ✅
+- **Check the lead pool regularly**—there might be great leads waiting for you to pick up. 🚀
+- **Mark unqualified leads** in Salesforce instead of leaving them in the pool. ❌ Flagging them helps us track trends and improve lead quality.
+
+#### What *Not* to Do
+- **Ignore assigned leads.** Leads that sit untouched will be unassigned and go to the pool.
+- **Dump bad leads into the pool.** If you’ve reviewed a lead and it’s not a fit, mark it appropriately in Salesforce.
+
 
 ### How we assess leads in our pipeline
 We have the following lead statuses to manage the lead assessment process before we decide if a user is a right fit to use PostHog.
@@ -105,6 +134,14 @@ Unqualified: A lead that does not meet the criteria to become an opportunity.
 - Document the reasons for disqualification in the “Disqualification reason” field in Salesforce (e.g., budget constraints, lack of fit, self serve customer, non-opportunity-related inquiries, support requests).
 - Update the lead status to 'Unqualified'.
 
+### Support Requests
+
+If you receive a lead for a self-serve customer who has used the Sales Contact Form to submit a support request, you should:
+- Set the 'Disqualification reason' to 'Support Request'
+- Update the lead status to 'Unqualified'
+
+This will [automatically create a ticket](https://zapier.com/editor/274433115/published) in Zendesk for the Comms team to review and address. You will be CC'd on the ticket and the ticket link will be added to the Lead's 'Next Steps' field in Salesforce.
+
 ### Lead Qualification Criteria
 - Do they match our ideal customer profile?
 - Do they have a need that PostHog can help with?
@@ -115,6 +152,9 @@ Unqualified: A lead that does not meet the criteria to become an opportunity.
 - Make sure all new leads are contacted within 24 hours.
 - Keep all lead information up-to-date and accurate in Salesforce.
 - Periodically review lead statuses and update them as needed.
+
+### Which Leads Should Go to RevOps?
+Some incoming leads are better suited for RevOps, for example questions related to refunds, invoices, startup plan credits or eligibility. To ensure these leads are routed correctly, please create a zendesk ticket by leaving the :ticket: emoji in the relevant thread in the #website-contact-sales Slack channel. This will automatically create a ticket for RevOps to review and address.
 
 ## Opportunities
 
@@ -186,6 +226,14 @@ The renewal pipeline stages are:
 The "Opportunity Notes" section is to track key actions and next steps to manage an opportunity and avoid missed follow-ups. It has the following fields:
 - Next Steps: Add actions or tasks required to move the opportunity forward. Be clear and concise to ensure anyone reviewing the opportunity understands what needs to happen next.
 - Next Step Date: Enter the date by which the next step should be completed. This helps in maintaining timelines and keeping follow-ups on track.
+
+### Opportunity Closure Details
+This section is to add additional information for opportunities that are won or lost to capture context and details to setup customer account correctly:
+- Loss Reason: A required field for any opportunity marked as "Closed - Lost." Pick the most appropriate option from the dropdown to help identify patterns.
+- Additional Loss Context: Optional field to add further insights into the loss. It's great to include specific customer feedback if available.
+- Contract Start Date: Especially important for correct account setup and tracking renewals.
+- Products: Select the products discussed/planned to be used as part of the opportunity. Make sure to include all addons so RevOps can ensure the customer’s subscription is set up correctly.
+- Contract Link: Link to the contract in PandaDoc for easy access and reference.
 
 ### Self-Serve Opportunities
 If you feel like a customer doesn't fit a hands-on flow, then you mark the lead or opportunity as self serve. There are two ways to do this:

@@ -35,7 +35,7 @@ Autocapture can also capture non-event data like session duration, mouse movemen
 
 Although autocapture is a great way to get started, it can be limiting for more advanced event tracking. This is for three reasons:
 
-1. **Lack of signal**. Since autocapture captures everything, it can be difficult to know what events matter, especially for high-traffic sites and apps. You need to have an idea of what you care about and then use filters, [actions](/docs/data/actions), and [insights](/docs/product-analytics/insights) to focus on it. The web analytics dashboard does this well.
+1. **Lack of signal**. Since autocapture captures everything, it can be difficult to know what events matter, especially for high-traffic sites and apps. You need to have an idea of what you care about and then use filters, [actions](/docs/data/actions), and [insights](/docs/product-analytics/insights) to focus on it. The [web analytics dashboard](/docs/web-analytics/dashboard) does this well.
 
 2. **Frontend only**. Autocapture only works on the frontend. This enables you to capture events from your website or app, but not your server.
 
@@ -99,7 +99,7 @@ To best capture data about users, you must understand who they are.
 
 Every event you capture must have a user distinct ID. Autocapture handles this for you, while custom events require you to do this yourself. Examples of identifiers for users include `UUID` values and emails.
 
-To connect an anonymous user distinct ID created by autocapture with a user distinct ID you created, you can use the [`identify`])(/docs/product-analytics/identify)  method:
+To connect an anonymous user distinct ID created by autocapture with a user distinct ID you created, you can use the [`identify`](/docs/product-analytics/identify)  method:
 
 ```js
 function loginRequest(user) {
@@ -287,3 +287,5 @@ analytics.track('event_name', {
 - [What to do after installing PostHog in 5 steps](/tutorials/next-steps-after-installing)
 - [5 ways to improve your product analytics data](/product-engineers/5-ways-to-improve-analytics-data)
 - [What engineers get wrong about analytics](/newsletter/misconceptions-about-analytics)
+
+<NewsletterForm />

@@ -1,0 +1,117 @@
+PostHog autocapture automatically tracks the following events for you:
+
+-   **Application Opened** - when the app is opened from a closed state or when the app comes to the foreground (e.g. from the app switcher)
+-   **Application Backgrounded** - when the app is sent to the background by the user
+-   **Application Installed** - when the app is installed
+-   **Application Updated** - when the app is updated
+-   **$screen** - when the user navigates (if using `UIViewController`)
+-   **$autocapture** - when the user interacts with elements in a screen (if using `UIKit`)
+
+> 🚧 **Note:** `$autocapture` is currently supported only in UIKit and remains in an experimental state, with the feature disabled by default. SwiftUI support is planned for an upcoming release.
+
+### Autocapture configuration
+
+You can enable or disable autocapture through the `PostHogConfig` object.
+
+```swift file=AppDelegate.swift
+let POSTHOG_API_KEY = "<ph_project_api_key>"
+// usually 'https://us.i.posthog.com' or 'https://eu.i.posthog.com'
+let POSTHOG_HOST = "<ph_client_api_host>"
+
+let config = PostHogConfig(apiKey: POSTHOG_API_KEY, host: POSTHOG_HOST)
+
+// capture screen views
+config.captureScreenViews = true 
+// capture application lifecycle events (installed, updated, opened, backgrounded)
+config.captureApplicationLifecycleEvents = true
+// capture element interactions (button presses, text input changes, etc.)
+config.captureElementInteractions = true // TIP: Disabled by default
+
+PostHogSDK.shared.setup(config)
+```
+
+### Capturing screen views
+
+With [`configuration.captureScreenViews`](/docs/libraries/ios#all-configuration-options) set as `true`, PostHog will try to record all screen changes automatically.
+
+If you want to manually send a new screen capture event, use the `screen` function.
+
+```swift
+PostHogSDK.shared.screen("Dashboard", properties: ["fromIcon": "bottom"])
+```
+
+> **Important:** Please note that `captureScreenViews` configuration is intented for `UIKit` use. For `SwiftUI` screen captures, please see the following section.
+
+### Capturing screen views in SwiftUI
+
+To track a screen view in `SwiftUI`, apply the `postHogScreenView` modifier to your full-screen views. 
+PostHog will send a `$screen` event when the `onAppear` action is executed and will infer a screen name based on the view’s type. You can provide a custom name and event properties if needed.
+
+```swift file=HomeView.swift
+// This will trigger a screen view event with $screen_name: "HomeViewContent"
+struct HomeView: View {
+    var body: some View {
+        HomeViewContent()
+            .postHogScreenView()
+    }
+}
+
+// This will trigger a screen view event with $screen_name: "My Home View" and an additional event property from_button: "start"
+struct HomeView: View {
+    var body: some View {
+        HomeViewContent()
+            .postHogScreenView("My Home View", ["from_button": "start"])
+    }
+}
+```
+
+In SwiftUI, views can range from entire screens to small UI components. Unlike UIKit, SwiftUI doesn’t clearly distinguish between these levels, which makes automatic tracking of full-screen views harder.
+
+### Adding a custom label on autocaptured elements
+
+PostHog automatically captures interactions with various UI elements in your app, but these interactions are often identified by element type names (e.g., UIButton, UITextField, UILabel). 
+
+While this provides basic tracking, it can be challenging to pinpoint specific interactions with particular elements in your analytics. To make your data more meaningful and actionable, you can assign custom labels to any autocaptured element. These labels act as descriptive identifiers, making it easier to identify, filter, and analyze events in your reports.
+
+** Adding a custom label in UIKit **
+
+To assign a custom label to a UIView, use the `postHogLabel` property:
+
+```swift
+let view = UIView()
+view.postHogLabel = "usernameTextField"
+```
+
+In this example, interactions with the UITextField will be captured with an additional identifier "usernameTextField".
+
+** Adding a custom label in SwiftUI **
+
+In SwiftUI, use the `.postHogLabel(_:)` modifier instead:
+
+```swift
+var body: some View {
+    ...
+    TextField("username", text: $username)
+        .postHogLabel("usernameTextField")
+}
+```
+
+In this example, interactions with the _underlying_ UITextField will be captured with an additional identifier "usernameTextField".
+
+**Example of generated analytics data**
+
+The generated analytics element in the examples above will have the following form: 
+
+```html
+<UITextField id="usernameTextField">text value</UITextField>
+```
+
+**Filtering for labeled autocaptured elements in reports**
+
+To locate and filter interactions with specific elements in PostHog reports, you can use Autocapture element filters, such as:
+
+- Tag Name (`UITextField` in this example)
+- Text (`text value` in this example)
+- CSS Selector (the generated `id` attribute in this example)
+
+In the examples above, we can filter for the specific text field using the CSS Selector `#usernameTextField`

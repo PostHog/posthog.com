@@ -1,117 +1,73 @@
 ---
 title: How to set up LLM analytics for ChatGPT
-date: 2024-04-05
+date: 2025-01-24
 author:
   - lior-neu-ner
 tags:
   - product analytics
-  - AI engineering
+  - LLM observability
 ---
 
-import { ProductScreenshot } from 'components/ProductScreenshot'
-export const EventsLight = "https://res.cloudinary.com/dmukukwp6/image/upload/v1712237431/posthog.com/contents/blog/chatgpt-events-light.png"
-export const EventsDark = "https://res.cloudinary.com/dmukukwp6/image/upload/v1712237432/posthog.com/contents/blog/chatgpt-events-dark.png"
-export const TotalCostLight = "https://res.cloudinary.com/dmukukwp6/image/upload/v1712238421/posthog.com/contents/blog/total-cost-light.png"
-export const TotalCostDark = "https://res.cloudinary.com/dmukukwp6/image/upload/v1712238420/posthog.com/contents/blog/total-cost-dark.png"
-export const CostPerUserLight = "https://res.cloudinary.com/dmukukwp6/image/upload/v1712239679/posthog.com/contents/blog/cost-per-user-light.png"
-export const CostPerUserDark = "https://res.cloudinary.com/dmukukwp6/image/upload/v1712239680/posthog.com/contents/blog/cost-per-user-dark.png"
-export const ResponseTimeLight = "https://res.cloudinary.com/dmukukwp6/image/upload/v1712240925/posthog.com/contents/blog/response-time-light.png"
-export const ResponseTimeDark = "https://res.cloudinary.com/dmukukwp6/image/upload/v1712240925/posthog.com/contents/blog/response-time-dark.png"
 
+Tracking your ChatGPT or OpenAI API usage, costs, and latency is crucial to understanding how your users are interacting with your AI and LLM-powered features. 
 
-Tracking your ChatGPT API usage, costs, and latency is crucial to understanding how your users are interacting with your AI and LLM powered features. In this tutorial, we show you how to monitor important metrics such as:
+In this tutorial, we show you how to monitor important metrics such as:
 
 - Total cost
 - Average cost per user
 - Average API response time
 
-We'll build a basic React app, implement the ChatGPT API, and capture these events using PostHog. 
+We'll build a basic Next.js app, implement the ChatGPT API, and capture these events automatically using PostHog. 
 
-## 1. Create a React app
+## 1. Creating a Next.js app
 
 To showcase how to track important metrics, we create a simple one-page React app with the following:
 
-- A form with textfield and button for user input.
+- A form with a textfield and button for user input.
 - A label to show ChatGPT output.
 - A dropdown to select different [OpenAI models](https://platform.openai.com/docs/models).
+- An API route to call the ChatGPT API and generate a response.
 
-First, ensure [Node.js is installed](https://nodejs.dev/en/learn/how-to-install-nodejs/) (version 18.0 or newer). Then run the following script to create a new React app and install both the [OpenAI JavaScript](https://platform.openai.com/docs/libraries/typescript-javascript-library) and [PostHog Web](/docs/libraries/js) SDKs:
+First, ensure [Node.js is installed](https://nodejs.dev/en/learn/how-to-install-nodejs/) (version 18.0 or newer) then run the following script to create a new Next.js app. Say **no** to TypeScript, **yes** to app router, and the defaults for all the other options.
 
 ```bash
-npx create-react-app chatgpt-analytics
+npx create-next-app@latest chatgpt-analytics
+```
+
+After creating your app, go into the newly created `chatgpt-analytics` directory and install the PostHog [Node SDK](/docs/libraries/node) and `ai` [package](/docs/ai-engineering/observability) as well as OpenAI's [JavaScript SDK](https://platform.openai.com/docs/libraries/typescript-javascript-library).
+
+```bash
 cd chatgpt-analytics
-npm install --save openai
-npm install --save posthog-js
+npm install --save posthog-node @posthog/ai openai
 ```
 
-Next, we set up Posthog using our API key and host (You can find these in [your project settings](https://us.posthog.com/settings/project)). Replace the code in `src/index.js` with the following:
+Next, we'll create our frontend by replacing the placeholder code in `app/page.js`. Our frontend will be a simple form with an input, model selector, and response label. Each of these will need a state. We'll also set up an API call to `/api/generate` with the user's input and model.
 
-```js file=src/index.js
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import './index.css';
-import App from './App';
-import { PostHogProvider } from 'posthog-js/react'
-
-
-const root = ReactDOM.createRoot(document.getElementById('root'));
-root.render(
-  <React.StrictMode>
-    <PostHogProvider 
-      apiKey={'<ph_project_api_key>'}
-      options={{
-        api_host: '<ph_client_api_host>',
-      }}
-    >
-      <App />
-    </PostHogProvider>
-  </React.StrictMode>
-);
-```
-
-Lastly, replace the code in `App.js` with our basic layout and functionality. You can find your Open AI API key [here](https://platform.openai.com/api-keys).
-
-```js file=src/App.js
+```js file=app/page.js
+'use client'
 import React, { useState } from 'react';
-import { usePostHog } from 'posthog-js/react'
-import OpenAI from "openai";
 
-const models = [
-  {
-    name: 'gpt-4',
-    token_input_cost: 0.00003,
-    token_output_cost: 0.00006
-  },
-  {
-    name: 'gpt-3.5-turbo-0125',
-    token_input_cost: 0.0000005,
-    token_output_cost: 0.0000015
-  },
-]
+const models = ['gpt-4o', 'chatgpt-4o-latest', 'gpt-4o-mini'];
 
-const App = () => {
+export default function Home() {
   const [userInput, setUserInput] = useState('');
   const [chatGPTResponse, setChatGPTResponse] = useState('');
   const [selectedModel, setSelectedModel] = useState(models[0]);
-  const posthog = usePostHog()
 
   const fetchChatGPTResponse = async () => {
     try {
-      const openai = new OpenAI({
-        apiKey: '<your_open_api_key>',
-        dangerouslyAllowBrowser: true
-      });
 
       setChatGPTResponse('Generating...');
-      const chatCompletion = await openai.chat.completions.create({
-        messages: [{ 
-          role: "user",
-          content: userInput }],
-        model: selectedModel.name,
-      });
 
-      const response = chatCompletion.choices[0].message.content
-      setChatGPTResponse(response);
+      const res = await fetch('/api/generate', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ input: userInput, model: selectedModel }),
+      })
+      const response = await res.json();
+      setChatGPTResponse(response.content);
     } catch (error) {
       setChatGPTResponse(error.message);
     }
@@ -122,7 +78,7 @@ const App = () => {
   };
 
   const handleModelChange = (event) => {
-    setSelectedModel(models.filter(m => (m.name === event.target.value))[0]);
+    setSelectedModel(event.target.value);
   };
 
   const handleSubmit = (event) => {
@@ -141,10 +97,10 @@ const App = () => {
         />
         <button type="submit">Send</button>
       </form>
-      <select value={selectedModel.name} onChange={handleModelChange}>
+      <select value={selectedModel} onChange={handleModelChange}>
         {models.map((model, index) => (
-          <option key={index} value={model.name}>
-            {model.name}
+          <option key={index} value={model}>
+            {model}
           </option>
         ))}
       </select>     
@@ -153,170 +109,92 @@ const App = () => {
     </div>
   );
 };
-
-export default App;
 ```
 
-Run `npm start` to see our app action:
+Run `npm run dev` to see our app in action:
 
-![Basic React app with ChatGPT](https://res.cloudinary.com/dmukukwp6/video/upload/v1712158963/posthog.com/contents/blog/sample-app.mp4)
+![Basic Next.js app with ChatGPT](https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_01_23_at_10_50_12_2x_482fd1852c.png)
 
-## 2. Capture chat completion events
+## 2. Adding and tracking the generate API route
 
-With our app set up, we can begin [capturing events](/docs/product-analytics/capture-events) with PostHog. To start, we capture a `chat_completion` event with properties related to the API request. We find the following properties useful to capture:
+In the `app` folder, create an `api` folder, a `generate` folder inside it, and then a `route.js` file in that. This is our `/api/generate` API route that calls the ChatGPT API and returns the response. 
 
-- `prompt`
-- `model`
-- `prompt_tokens`
-- `completion_tokens`
-- `total_tokens`
-- `input_cost_in_dollars` i.e. `prompt_tokens` * `token_input_cost`
-- `output_cost_in_dollars` i.e. `completion_tokens` * `token_input_cost`
-- `total_cost_in_dollars` i.e. `input_cost_in_dollars + output_cost_in_dollars`
+Next, set up:
 
-Update your `fetchChatGPTResponse()` function in `App.js` to capture this event:
+1. The PostHog Node client using our project API key and instance address which you can get from [your project settings](https://us.posthog.com/settings/project). 
+2. The OpenAI client which requires an API key.
 
-```js file=App.js
-const fetchChatGPTResponse = async () => {
-    try {
+With both of these set up, we simply call the `openai.chat.completions.create` method with the input and model then return the response.
 
-      // your existing code...
+```js file=app/api/generate.js
+import { NextResponse } from 'next/server';
+import { OpenAI } from '@posthog/ai'
+import { PostHog } from 'posthog-node'
 
-      const chatCompletion = await openai.chat.completions.create({
-        messages: [{ 
-          role: "user",
-          content: userInput }],
-        model: selectedModel.name,
-      });
-      const inputCostInDollars = chatCompletion.usage.prompt_tokens * selectedModel.token_input_cost
-      const outputCostInDollars = chatCompletion.usage.completion_tokens * selectedModel.token_output_cost
-      posthog.capture('chat_completion', {
-        model: chatCompletion.model,
-        prompt: userInput,
-        prompt_tokens: chatCompletion.usage.prompt_tokens,
-        completion_tokens: chatCompletion.usage.completion_tokens,
-        total_tokens: chatCompletion.usage.total_tokens,
-        input_cost_in_dollars: inputCostInDollars,
-        output_cost_in_dollars: outputCostInDollars,
-        total_cost_in_dollars: inputCostInDollars + outputCostInDollars
-      })
+const phClient = new PostHog(
+  '<ph_project_api_key>',
+  { host: '<ph_api_client_host>' }
+)
 
-      // your existing code...
+const openai = new OpenAI({
+  apiKey: '<openai_api_key>',
+  posthog: phClient,
+});
+
+export async function POST(request) {
+  try {
+    const body = await request.json();
+    const { input, model } = body;
+
+    const completion = await openai.chat.completions.create({
+      messages: [{ role: "user", content: input }],
+      model: model,
+    });
+
+    return NextResponse.json({ 
+      content: completion.choices[0].message.content 
+    });
+
+  } catch (error) {
+    console.error('OpenAI API error:', error);
+    return NextResponse.json(
+      { error: 'There was an error processing your request' },
+      { status: 500 }
+    );
+  }
+}
 ```
 
-Refresh your app and submit a few prompts. You should then see your events captured in the [PostHog activity tab](https://us.posthog.com/events).
+Now, when we run `npm run dev` again and submit an input, we should see a response as well as the generation autocaptured into PostHog as a `$ai_generation` event.
+
+![Generated](https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_01_23_at_10_50_43_2x_9cb0149c7e.png)
+
+## 3. Viewing generations in PostHog
+
+Once you generate a few responses, go to PostHog and enable the [LLM observability feature preview](https://app.posthog.com/#panel=feature-previews%3Allm-observability). Once enabled, go to the LLM observability tab to get an overview of traces, users, costs, and more.
 
 <ProductScreenshot
-  imageLight={EventsLight} 
-  imageDark={EventsDark} 
-  alt="ChatGPT completion events in PostHog" 
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_01_23_at_10_58_04_2x_a87f97d692.png" 
+  imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_01_23_at_10_57_32_2x_f8d6385951.png"
+  alt="LLM observability dashboard" 
   classes="rounded"
 />
 
-## 3. Create insights
-
-Now that we're capturing events, we can create [insights](/docs/product-analytics/insights). Below are three examples of useful metrics you should monitor:
-
-### Total cost
-
-To create this insight, go the [Product analytics tab](https://us.posthog.com/insights) and click **+ New insight**. Then:
-
-1. Set the event to `chat_completion`
-2. Click on **Total count** to show a dropdown. Click on **Property value (sum)**.
-3. Select the `total_cost_in_dollars` property.
-
-Then, change the chart type from **Line chart** to **Number** (or however else you'd like to visualize your data). Note that it may show `0` if your total cost is smaller than `0.01`.
-
-Additionally, you can also breakdown your costs by model. To do this, click **+ Add breakdown** and select `model` from the event properties list.
+You can also go into more detail by clicking on the [generations tab](https://us.posthog.com/llm-observability/generations). This shows each generation as well as model, cost, token usage, latency, and more. You can even see the conversation input and output.
 
 <ProductScreenshot
-  imageLight={TotalCostLight} 
-  imageDark={TotalCostDark} 
-  alt="Total ChatGPT model costs in PostHog" 
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_01_23_at_11_05_47_2x_31ac89084d.png" 
+  imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_01_23_at_11_04_38_2x_4029e378cb.png"
+  alt="LLM observability dashboard" 
   classes="rounded"
 />
 
-### Average cost per user
-
-This metric helps give you an idea of how your costs will scale as your product grows. Creating this insight is similar to creating the one above, however we use **formula mode** to divide the total cost by the total number of users:
-
-1. Set the event to `chat_completion`
-2. Click on **Total count** to show a dropdown. Click on **Property value (sum)**.
-3. Select the `total_cost_in_dollars` property.
-4. Click **+ Add graph series** (if your visual is set to `number`, switch it back to `trend` first).
-5. Keep the event name as `All events`, but change the value from `Total count` to `Unique users`.
-6. Click **Enable formula mode**.
-7. In the formula box, enter `A/B`.
-
-Once again, note that it may show `0` if the number is smaller than `0.01`.
-
-<ProductScreenshot
-  imageLight={CostPerUserLight} 
-  imageDark={CostPerUserDark} 
-  alt="Total ChatGPT costs per user in PostHog" 
-  classes="rounded"
-/>
-
-### Average API response time
-
-ChatGPT's API response time can take long, especially for longer outputs, so it's useful to keep an eye on this. To do this, first we need to modify our event capturing to also include the response time:
-
-```js file=App.js
-const fetchChatGPTResponse = async () => {
-    try {
-
-      // your existing code...
-
-      const startTime = performance.now(); 
-      const chatCompletion = await openai.chat.completions.create({
-        messages: [{ 
-          role: "user",
-          content: userInput }],
-        model: selectedModel.name,
-      });
-      const endTime = performance.now();
-      const responseTime = endTime - startTime;
-
-      const inputCostInDollars = chatCompletion.usage.prompt_tokens * selectedModel.token_input_cost
-      const outputCostInDollars = chatCompletion.usage.completion_tokens * selectedModel.token_output_cost
-      posthog.capture('chat_completion', {
-        model: chatCompletion.model,
-        prompt: userInput,
-        prompt_tokens: chatCompletion.usage.prompt_tokens,
-        completion_tokens: chatCompletion.usage.completion_tokens,
-        total_tokens: chatCompletion.usage.total_tokens,
-        input_cost_in_dollars: chatCompletion.usage.prompt_tokens * selectedModel.token_input_cost,
-        output_cost_in_dollars: chatCompletion.usage.prompt_tokens * selectedModel.token_output_cost,
-        total_cost_in_dollars: inputCostInDollars + outputCostInDollars,
-        response_time_in_ms: responseTime
-      })
-
-      // your existing code...
-```
-
-Then, after capturing a few events, create a new insight to calculate the average response time:
-
-1. Set the event to `chat_completion`
-2. Click on **Total count** to show a dropdown. Click on **Property value (average)**.
-3. Select the `response_time_in_ms` property.
-
-<ProductScreenshot
-  imageLight={ResponseTimeLight} 
-  imageDark={ResponseTimeDark} 
-  alt="Average API response time in PostHog" 
-  classes="rounded"
-/>
-
-## Next steps
-
-We've shown you the basics of creating insights from your product's ChatGPT API usage.  Below are more examples of product questions you may want to investigate:
-
-- How many of my users are interacting with my LLM features?
-- Are there generation latency spikes?
-- Does interacting with LLM features correlate with other metrics e.g. retention, usage, or revenue?
+From here, you can go further by filtering your LLM observability dashboard, use the `$ai_generation` event to [create insights](/docs/product-analytics/insights), [A/B test models](/tutorials/llm-ab-tests), and more.
 
 ## Further reading
 
-- [Product metrics to track for LLM apps](/product-engineers/llm-product-metrics)
 - [How to set up LLM analytics for Anthropic's Claude](/tutorials/anthropic-analytics) 
 - [How to set up LLM analytics for Cohere](/tutorials/cohere-analytics)
+- [How to monitor LlamaIndex apps with Langfuse and PostHog](/tutorials/monitor-llama-index-with-langfuse)
+
+<NewsletterForm />

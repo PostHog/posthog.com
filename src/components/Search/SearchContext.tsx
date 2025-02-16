@@ -4,6 +4,7 @@ import SearchResults from './SearchResults'
 import { InstantSearch } from 'react-instantsearch-hooks-web'
 import algoliasearch from 'algoliasearch/lite'
 import usePostHog from '../../hooks/usePostHog'
+import { useChat } from 'hooks/useChat'
 
 type SearchContextValue = {
     isVisible: boolean
@@ -40,6 +41,7 @@ const SearchContext = React.createContext<SearchContextValue>({
 
 export const SearchProvider: React.FC = ({ children }) => {
     const posthog = usePostHog()
+    const { closeChat } = useChat()
     const [isVisible, setIsVisible] = React.useState<boolean>(false)
     const [initialFilter, setInitialFilter] = React.useState<SearchResultType | undefined>(undefined)
 
@@ -76,6 +78,7 @@ export const SearchProvider: React.FC = ({ children }) => {
 
         setInitialFilter(filter)
         setIsVisible(true)
+        closeChat()
     }
 
     const close = () => {

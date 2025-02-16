@@ -365,5 +365,13 @@
         "link_type": "twitter",
         "link_url": "https://twitter.com/bijanbwb",
         "profile_id": 31729
+    },
+    {
+        "handle": "daniel-bachhuber",
+        "name": "Daniel Bachhuber",
+        "role": "Product Engineer",
+        "link_type": "linkedin",
+        "link_url": "https://www.linkedin.com/in/danielbachhuber/",
+        "profile_id": 31992
     }
 ]

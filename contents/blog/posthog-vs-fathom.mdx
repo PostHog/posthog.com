@@ -1,0 +1,171 @@
+---
+title: "In-depth: PostHog vs Fathom"
+date: 2024-11-13
+author:
+ - bijan-boustani
+rootpage: /blog
+featuredImage: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/posthog_vs_fathom_analytics_e327b58767.jpg
+featuredImageType: full
+category: General
+tags:
+  - Comparisons
+---
+
+import { ComparisonTable } from 'components/ComparisonTable'
+import { ComparisonHeader } from 'components/ComparisonTable/header'
+import { ComparisonRow } from 'components/ComparisonTable/row'
+
+PostHog and Fathom Analytics are both alternatives to Google Analytics. In fact, both explicitly call this out on their websites with marketing copy like "Switch to a better Google Analytics alternative."
+
+Both products have web analytics dashboards with an emphasis on simplicity and privacy. They're ideal choices for customers that want to analyze and understand web traffic but find Google Analytics to be too complicated.
+
+## How is PostHog different?
+
+### 1. PostHog offers web analytics, and a lot more
+
+[Web analytics](/web-analytics) is a core feature of PostHog, but we offer many more tools to help you analyze, test, and observe your site and your product.
+
+These include [product analytics](/product-analytics), [session replay](/session-replay), [surveys](/surveys), [experiments](/experiments), [feature flags](/feature-flags), a [data warehouse](/data-warehouse), and more.
+
+### 2. PostHog has a generous free tier
+
+PostHog's ["ridiculously cheap" tier](/pricing) includes all of our features for free with an allowance of 1M events per month. For Fathom, pricing starts at $15 per month for 100K data points, increases to $60 per month for 1M data points, and more from there.
+
+Beyond PostHog's free tier, we try to be as cheap as possible and [transparent](/docs/billing/estimating-usage-costs). Want to know how much we'll charge? See our [pricing calculator](/pricing#calculator). PostHog also does not require a credit card to sign up and try the free tier.
+
+## Web analytics
+
+Both Fathom and PostHog are [Google Analytics alternatives](/blog/ga4-alternatives), so they're ideal for tracking and analyzing your website.
+
+<ComparisonTable column1="PostHog" column2="Fathom">
+  <ComparisonRow column1={true} column2={true} feature="Pageviews" description="Track visitors and their views" />
+  <ComparisonRow column1={true} column2={false} feature="Sessions" description="Track unique sessions and their durations" />
+  <ComparisonRow column1={true} column2={true} feature="Traffic breakdown" description="See where your visitors and conversions are coming from" />
+  <ComparisonRow column1={true} column2={true} feature="Conversions" description="Track actions you want users to take" />
+  <ComparisonRow column1={true} column2={true} feature="Bounce rate" description="See the percentage of users that leave after one pageview" />
+  <ComparisonRow column1={true} column2={false} feature="Entry and exit paths" description="See the pages users first visit and the last ones before they leave" />
+  <ComparisonRow column1={true} column2={false} feature="Outbound clicks" description="See the links that take users away" />
+  <ComparisonRow column1={true} column2={true} feature="UTM tracking" description="Track marketing campaigns with UTM tags" />
+  <ComparisonRow column1={true} column2={true} feature="Cookieless tracking" description="Track users without cookies" />
+  <ComparisonRow column1={true} column2={true} feature="Snippet install" description="Install HTML snippet" />
+  <ComparisonRow column1={true} column2={true} feature="Migration" description="Migrate data from Google Analytics" />
+  <ComparisonRow column1={"50.6 kb"} column2={"<2 kB"} feature="Script size" description="Size of the script that runs on your site" />
+</ComparisonTable>
+
+In terms of design, both PostHog and Fathom's [web analytics dashboards](/docs/web-analytics/dashboard) look similar, which we can see in the screenshots below:
+
+<ProductScreenshot
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/web_analytics_dashboard_light_bc76a94566.png"
+  imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/web_analytics_dashboard_dark_42ac39a5f7.png"
+  classes="rounded"
+  alt="PostHog web analytics dashboard"
+/>
+
+The big difference is that PostHog includes sessions, where Fathom only includes visitors:
+
+![Fathom Analytics dashboard](https://res.cloudinary.com/dmukukwp6/image/upload/fathom_analytics_dashboard_195049b289.png)
+
+## Product analytics
+
+Teams rely on [product analytics](/product-analytics) when they need more customization in both capturing and analyzing data. Although not a focus of Fathom, it does have offer some basic product analytics features like custom event tracking, but doesn't include any of the custom visualizations of PostHog.
+
+<ComparisonTable column1="PostHog" column2="Fathom">
+  <ComparisonRow column1={true} column2={true} feature="Custom events" description="Capture and analyze any type of event" />
+  <ComparisonRow column1={true} column2={true} feature="Custom properties" description="Add more data to custom events or users" />
+  <ComparisonRow column1={true} column2={false} feature="Autocapture" description="Capture frontend clicks and events automatically" />
+  <ComparisonRow column1={true} column2={false} feature="Custom graphs and trends" description="Build custom insights and visualizations" />
+  <ComparisonRow column1={true} column2={false} feature="Funnels" description="Track users through a sequence of events" />
+  <ComparisonRow column1={true} column2={false} feature="Retention" description="Visualize which users stay, for how long" />
+  <ComparisonRow column1={true} column2={false} feature="Custom dashboards" description="Build a custom dashboard of your own or use a template" />
+  <ComparisonRow column1={true} column2={false} feature="Cohorts" description="Combine users based on properties and events for group analysis" />
+  <ComparisonRow column1={true} column2={false} feature="User profiles" description="View user demographic data such as country, language, and device type" />
+  <ComparisonRow column1={true} column2={false} feature="Group analytics" description="Track metrics at a company and account level" />
+  <ComparisonRow column1={true} column2={false} feature="Paths" description="Track user flows and where they drop off" />
+  <ComparisonRow column1={true} column2={false} feature="SQL" description="Query your data with SQL" />
+</ComparisonTable>
+
+## Platform
+
+Beyond web analytics is where PostHog really shines. We provide all of the tools developers need to build a successful product (and they all work together).
+
+<ComparisonTable column1="PostHog" column2="Fathom">
+  <ComparisonRow column1={true} column2={true} feature="EU hosting" description="Access and store your data in the EU" />
+  <ComparisonRow column1={true} column2={true} feature="API" description="Capture events, get stats, and make changes via API" />
+  <ComparisonRow column1="Invite teammates to collaborate on all features" column2="Share web analytics with or without a password" feature="Collaboration" description="Share your projects and sites with teammates" />
+  <ComparisonRow column1={true} column2={false} feature="Open source" description="View code, comment on roadmap, and contribute" />
+  <ComparisonRow column1={true} column2={false} feature="Heatmaps" description="Visualize where users click in your app or website" />
+  <ComparisonRow column1={true} column2={false} feature="Session replay" description="Watch real users use your product, diagnose bugs" />
+  <ComparisonRow column1={true} column2={false} feature="Experiments" description="Run A/B/n tests on new features, optimize conversion funnels" />
+  <ComparisonRow column1={true} column2={false} feature="Surveys" description="Collect and analyze feedback, run NPS and PMF surveys" />
+  <ComparisonRow column1={true} column2={false} feature="Feature flags" description="Roll out features safely, toggle features for cohorts or individuals" />
+  <ComparisonRow column1={true} column2={false} feature="Server-side SDKs" description="Capture events and use features from Python, Node, and more" />
+  <ComparisonRow column1={true} column2={false} feature="Mobile SDKs" description="Capture events and use features from Android, iOS, and more" />
+</ComparisonTable>
+
+## Integrations
+
+<ComparisonTable column1="PostHog" column2="Fathom">
+  <ComparisonRow column1={true} column2={true} feature="CSV exports" description="Export your data as a CSV" />
+  <ComparisonRow column1={true} column2={true} feature="Email" description="Send reports to email" />
+  <ComparisonRow column1={true} column2={false} feature="Warehouse exports" description="Export data to warehouses like S3 and BigQuery for storage and analysis" />
+  <ComparisonRow column1={true} column2={false} feature="Warehouse import" description="Import and query data from third-party sources like Postgres, S3, and GCS" />
+  <ComparisonRow column1={true} column2={false} feature="Slack" description="Send events and reports to Slack" />
+  <ComparisonRow column1={true} column2={false} feature="Stripe" description="Import charges, customers, invoices, subscriptions, and more" />
+  <ComparisonRow column1={true} column2={false} feature="HubSpot" description="Import contacts, companies, deals, and more" />
+  <ComparisonRow column1={true} column2={false} feature="Zapier" description="Trigger Zapier automations" />
+  <ComparisonRow column1={true} column2={false} feature="Zendesk" description="Import organizations, tickets, users, and more" />
+  <ComparisonRow column1={true} column2={false} feature="Sentry" description="Send and receive error data with Sentry" />
+  <ComparisonRow column1={true} column2={true} feature="WordPress" description="Easily capture data from your Wordpress site" />
+</ComparisonTable>
+
+## Security, compliance, privacy
+
+Fathom prides itself on being privacy-friendly, but PostHog stands toe-to-toe with it in terms of features. On top of that, PostHog includes many of the features enterprises need for compliance.
+
+<ComparisonTable column1="PostHog" column2="Fathom">
+  <ComparisonRow column1="7 years" column2="Forever (as long as you're a customer)" feature="Data retention" description="The length of time event data is retained" />
+  <ComparisonRow column1={true} column2={true} feature="Bot blocking" description="Block scrapers, crawlers, and other unwanted traffic from stats" />
+  <ComparisonRow column1={true} column2={false} feature="Reverse proxy" description="Avoid tracking blockers and capture more data" />
+  <ComparisonRow column1={true} column2={false} feature="HIPAA-ready" description="Can be compliant with HIPAA" />
+  <ComparisonRow column1={true} column2={true} feature="GDPR-ready" description="Can be compliant with GDPR" />
+  <ComparisonRow column1={true} column2={false} feature="SOC 2" description="SOC 2 security certification" />
+  <ComparisonRow column1={true} column2={true} feature="2FA" description="Enforce login with two-factor authentication" />
+  <ComparisonRow column1="Enterprise" column2={false} feature="SAML/SSO" description="Use SAML or single sign-on authentication" />
+</ComparisonTable>
+
+## Frequently asked questions
+
+### How much do PostHog and Fathom cost?
+
+Fathom is a monthly subscription based on usage. Plans start at $15 per month for 100k data points. 1M data points is $60 per month. Price maxes out at $470 per month for 25M data points, beyond which you need to contact them.
+
+PostHog is [entirely usage-based](/pricing). Its free tier includes:
+
+| Feature                         | Free usage per month  | Additional cost        |
+|---------------------------------|:---------------------:|:----------------------:|
+| Product analytics               | 1 million events      | From $0.00005/event    |
+| Session replay                  | 5,000 recordings      | From $0.005/recording  |
+| Surveys                         | 250 responses         | From $0.20/response    |
+| Feature flags and A/B testing   | 1 million API requests| From $0.0001/request   |
+| Data warehouse                  | 1 million synced rows | From $0.000015/row     |
+
+Basically, we aim to give you the tools you want for as cheap as possible. We split out the products, and features like [group analytics](/docs/product-analytics/group-analytics) and [pipelines](/docs/cdp) within products, to do this.
+
+### Does PostHog offer a free trial?
+
+Fathom offers a free trial, but PostHog doesn't, what gives?
+
+Instead of a free trial, PostHog offers a free forever tier as long as you stay under the free limits. You don't even need a credit card, but adding one unlocks all the features (we have billing limits you can use too).
+
+### Can I migrate from Google Analytics to PostHog?
+
+Yes, see our [Google Analytics to PostHog migration guide](/docs/migrate/google-analytics) for more details.
+
+## Further Reading
+
+- [The best Fathom alternatives & competitors, compared](/blog/best-fathom-alternatives)
+- [The 9 best GA4 alternatives for apps and websites](/blog/ga4-alternatives)
+- [The 9 best GDPR-compliant analytics tools](/blog/best-fathom-alternatives)
+
+<ArrayCTA />

@@ -193,5 +193,7 @@ The `zendesk_ticket_metric_events` also contains data you can use to calculate m
 ## Furthering reading
 
 - [The basics of SQL for analytics](/product-engineers/sql-for-analytics)
-- [Using HogQL for advanced breakdowns](/tutorials/hogql-breakdowns)
+- [Using SQL for advanced breakdowns](/tutorials/hogql-breakdowns)
 - [How to set up Hubspot reports](/tutorials/hubspot-reports)
+
+<NewsletterForm />

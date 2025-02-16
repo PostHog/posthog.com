@@ -7,16 +7,10 @@ hideAnchor: true
 ---
 
 
-> **Tip**: If you have multiple customer-facing products (e.g. a marketing website + iOS app + web app), it's best to install PostHog on them all and [group them in one project](/docs/data/organizations-and-projects). This way you can track the user across their entire journey.
+> **Tip**: If you have multiple customer-facing products (e.g. a marketing website + iOS app + web app), it's best to install PostHog on them all and [group them in one project](/docs/settings/projects). This way you can track the user across their entire journey.
 
 <h3 class="mb-0 mt-6">Installation</h3>
 
 import Install from "./\_snippets/install.mdx"
 
 <Install />
-
-#### Set up a reverse proxy (optional)
-
-We recommend setting up a reverse proxy so that events are less likely to be intercepted by tracking blockers. We have our [own managed reverse proxy service included in the Teams plan](/docs/advanced/proxy/managed-reverse-proxy), which routes through our infrastructure and makes setting up your proxy easy. 
-
-If you don't want to use our managed service then there are several other [options for creating a reverse proxy](/docs/advanced/proxy), including using [Cloudflare](/docs/advanced/proxy/cloudflare), [AWS Cloudfront](/docs/advanced/proxy/cloudfront), and [Vercel](/docs/advanced/proxy/vercel). 

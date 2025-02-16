@@ -147,7 +147,6 @@ export default function TeamUpdate({
                         <RichText
                             key={updateCount}
                             onSubmit={submitForm}
-                            autoFocus
                             setFieldValue={setFieldValue}
                             initialValue={initialValues?.body}
                             values={values}

@@ -111,3 +111,5 @@ Nothing comes for free and limiting what PostHog can store between page loads do
 - [Building a tracking cookies consent banner in React](/tutorials/react-cookie-banner)
 - [Building a Vue cookie consent banner](/tutorials/vue-cookie-banner)
 - [Building a Next.js cookie consent banner](/tutorials/nextjs-cookie-banner)
+
+<NewsletterForm />

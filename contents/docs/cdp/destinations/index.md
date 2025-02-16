@@ -5,132 +5,66 @@ showTitle: true
 
 > Destinations require the data pipeline add-on in [your billing settings](https://us.posthog.com/organization/billing).
 
-## Template library
 
-To get started, you can create a new destination from the [Data pipelines](https://us.posthog.com/pipeline/destinations) page and choose from a range of available **templates**. Depending on the destination, there are a range of configuration options, such as credentials needed or where to find certain properties from the event being processed. 
+As PostHog data arrives, you can export it *immediately* to other tools. You can use this for things like:
 
-## Input formatting
+- Conversion tracking
+- Monitoring key events with your chat platform
+- Enriching customer data in your CRM
+- Triggering automations
 
-Any configuration input for a destination can have its values formatted using our [Hog](/docs/hog) language to include data from the `event`, `person` and more.
+PostHog enables you to send realtime data to dozens of pre-configured destinations. Check out the [data pipeline tab](https://us.posthog.com/pipeline/overview) and choose **destinations** to get started.
 
-You can template any input using curly brackets `{}`. Many inputs default to a formatted value indicating a recommended configuration that you can modify if needed. 
+![Destinations list in PostHog](https://res.cloudinary.com/dmukukwp6/image/upload/destinations_list_acc7e07ae7.png)
 
-For example given the incoming event:
+Missing a destination you need? Our [webhook destination](/docs/cdp/destinations/webhook) enables you to send events to any HTTP endpoint, using whatever request method, URL parameter values, and JSON payload structure your application requires. You can mix hard-coded keys and values with any person or event data. This integrates PostHog with yet more tools, or even your own internal services.
 
-```ts
-{
-    event: {
-        name: "$pageview",
-        properties: {
-            $current_url: "https://posthog.com"
-        }
-    },
-    person: {
-        name: "max@posthog.com",
-        properties: {
-            email: "max@posthog.com",
-            first_name: "Max",
-            last_name: "the Hedgehog"
-        }
-    }
-}
-```
+Wherever your data is going, we’ve built destinations for many popular tools to get you up and running with just a few minutes of effort.
 
-You can create a template such as this:
+## Filtering
 
-```
-{event.name} was triggered by {person.properties.first_name} {person.properties.last_name}
+Instead of the firehose of all your PostHog data, you can construct a query that filters by event types, properties, or any SQL statement you can come up with, so that only the information you care about is sent to your destination.
 
-// Outputs: $pageview was triggered by Max the Hedgehog
-```
+![Filtering destinations](https://res.cloudinary.com/dmukukwp6/image/upload/filter_ui_8c7b1fb3be.png)
 
-### Global object
+## Testing
 
-Below is a the structure of the global variables available whenever templating a destination.
+The hardest part of integrating two services is making sure everything works as you expect. Every destination includes a built-in testing interface, enabling you to send real data from PostHog on-demand to your target service and debug any errors.
 
-```ts
-{
-    event: {
-        uuid: string // The unique ID of the event
-        name: string // The event name (e.g. $pageview)
-        distinct_id: string // The distinct_id of the identity that created the event
-        properties: Record<string, any>
-        timestamp: string
-        url: string // A URL to view it in PostHog
-    }
-    person?: {
-        uuid: string // The UUID of the Person associated with the distinct_id of the event
-        name: string // Configured based on your "Display name" property in PostHog
-        url: string  // A URL to view it in PostHog
-        properties: Record<string, any>
-    }
-    groups?: {
-        [id: string]: {
-            id: string
-            type: string
-            index: number
-            url: string  // A URL to view it in PostHog
-            properties: Record<string, any>
-        }
-    }
-    project: {
-        id: number  // The ID of the PostHog project
-        name: string  // The name of the PostHog project
-        url: string  // A URL to view it in PostHog
-    }
-    source?: {
-        name: string // The name of the source (typically the destination name)
-        url: string  // A URL to view it in PostHog
-    }
-}
-```
+![Destination testing UI](https://res.cloudinary.com/dmukukwp6/image/upload/destination_testing_ui_e95cff873b.png)
 
-## Testing it out
+## Keep an eye on things
 
-Once you have saved your destination, you can test it by invoking it with an example payload. You can choose whether to mock out the `async` calls (e.g. HTTP API calls) or not.
+Once your destination is up and running, the **metrics** and **logs** tabs will let you monitor usage and inspect errors.
 
-> **⚠️ Warning:** If you do not mock out the API call, it will call your destination. Make sure this is definitely okay and check your example data so that you don't mess up your production data.
+![Destination logs](https://res.cloudinary.com/dmukukwp6/image/upload/destination_logs_4c9c2ca6b2.png)
 
-## Advanced - custom code
+## Going deeper
 
-For most use cases, we recommend using one of the templates. These take care of a lot of the logic for you and expose simple inputs for you to configure. 
+For complete control of your destination’s behavior, you can view and edit the underlying Hog code that drives it. Experiment with rewriting your destination’s implementation to better address your needs, if the pre-built templates don’t quite do the job.
 
-You can, however, modify any destination by clicking the `show source code` option. From here you can modify the inputs (for example marking an input as secret so that it is encrypted) or the code of the function itself.
+Learn more about this in [customizing destinations](/docs/cdp/destinations/customizing-destinations).
 
-The code is written in our Hog language with further documentation of available features [here](/docs/hog). The majority of destinations are simply wrappers around `fetch` - a provided function for safely doing async, retriable HTTP calls.
-
-```rust
-let res := fetch(inputs.url, {
-  'headers': inputs.headers,
-  'body': inputs.body,
-  'method': inputs.method
-});
-
-if (res.status >= 400) {
-  print('Bad response', res.status, res.body)
-}
-```
-
-### Guidelines
-
-- **Start from an existing template:** Check out existing templates that are close to your kind of use case and work from there.
-
-- **Rely on filters:** Offload as much as possible to the built in `filters` and `inputs`. This will make modifying your destination later much simpler (as well as being more performant)
-
-- **Use `inputs` wherever possible:** These are great for secrets such as API credentials. You can mark them as secret and they will not be returned to the UI in the future and will be encrypted.
-
-- **Keep it short:** We have tight controls on execution time, memory usage etc.
-
-- **Do not do more than 2 `fetch` calls:** The function will error if you do. If you have a need for more than 2 calls, please [contact support](https://us.posthog.com/#panel=support%3Asupport%3Aapps%3A%3Atrue).
-
-## FAQ
+## Caveats
 
 ### How up-to-date is the person information?
 
-The `person` object contains the latest information for the [person profile](/docs/data/persons) associated with the `distinct_id` of the event **at the time the event is processed**. You should make sure to use events that occur on or after person properties would be merged (such as `$identify`) if you need this information for your event.
+The `person` object contains the latest information for the [person profile](/docs/data/persons) associated with the `distinct_id` of the event **at the time the event is processed**. You should make sure to filter for events that occur on or after person properties would be merged (such as `$identify`) if you need this information for your event.
 
 ### How many events can I send to a destination?
 
-There is no limit on the number of events to be processed but the system requires that the destination responds with healthy status codes (2xx) and in a timely fashion. 
+There is no limit on the number of events to be processed but the system requires that the destination responds with healthy status codes (non 5xx) and in a timely fashion. 
+
+### What can cause a destination to be automatically disabled?
 
 If the destination performs poorly (too many errors, too slow) for a prolonged period, your destination will be quarantined and eventually disabled. We will try to re-enable it automatically after a temporary disabled period before stopping it entirely. You then need to modify either the filters or the destination and re-enable it in the UI to try again.
+
+The key metrics that we observe to determine poor performance are:
+1. Errors thrown within the code (for example if you try to access a property that doesn't exist).
+2. Repeatedly slow responses from the destination. Some slow HTTP calls are fine but if you send thousands of events and the destination can't keep up, we will eventually disable it to protect ourselves and the destination.
+
+We **do not** consider 4xx HTTP codes to be poor performance. Some destinations utilize these responses to determine if a follow up HTTP call is required (for example a 409 conflict indicating a record already exists). Non "OK" statuses will however be logged in order to help debugging potential issues.
+
+### How do you handle retries?
+
+By default, all HTTP calls (`fetch` calls in Hog) are expected to return a 2xx response. If we get a non-OK response we will retry up to 3 times depending on the error codes. We may modify this logic as we make improvements to try and balance reliability and speed.

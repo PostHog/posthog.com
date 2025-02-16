@@ -6,7 +6,7 @@ import { AdjustedLineItems } from './AdjustedLineItems'
 import { LoaderIcon } from './LoaderIcon'
 import { useCartStore } from './store'
 import type { AdjustedLineItem, Cart } from './types'
-import { getCartVariables } from './utils'
+import { getAvailableQuantity, getCartVariables } from './utils'
 
 type CheckoutProps = {
     className?: string
@@ -63,41 +63,30 @@ export function Checkout(props: CheckoutProps): React.ReactElement {
 
             if (cart === null) return
 
-            cartItems.forEach((item) => {
+            for (const item of cartItems) {
                 // first check if it's available for sale. If not, then add to the list
                 // with flag for removal from cart
-                if (!item.availableForSale) {
-                    itemsExceedingQuantityAvailable.push({
-                        item,
-                        remove: true,
-                        newCount: null,
-                    })
-                    return
-                }
+                const quantityAvailable = await getAvailableQuantity(item)
 
                 // if it is available for sale, then check if the quantity available is less than
                 // the quantity in the cart. If so, then add to the list with the new quantity
-                const matchingItem = cart?.lines?.edges?.find((edge) => {
-                    return edge?.node?.merchandise?.id === item.shopifyId
-                })
-                if (!!matchingItem && matchingItem.node.merchandise.quantityAvailable < item.count) {
-                    const quantityAvailable = matchingItem.node.merchandise.quantityAvailable
+                if (quantityAvailable < item.count) {
                     if (quantityAvailable <= 0) {
                         // if the new quantity available is zero, remove
                         itemsExceedingQuantityAvailable.push({
                             item,
                             remove: true,
-                            newCount: matchingItem.node.merchandise.quantityAvailable,
+                            newCount: quantityAvailable,
                         })
                     } else {
                         itemsExceedingQuantityAvailable.push({
                             item,
                             remove: false,
-                            newCount: matchingItem.node.merchandise.quantityAvailable,
+                            newCount: quantityAvailable,
                         })
                     }
                 }
-            })
+            }
 
             if (itemsExceedingQuantityAvailable.length > 0) {
                 setAdjustedItems(itemsExceedingQuantityAvailable)
@@ -136,7 +125,7 @@ export function Checkout(props: CheckoutProps): React.ReactElement {
     }, [setIsCheckingOut, discountCode, cartItems])
 
     const classes = cn(
-        'rounded-md px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black',
+        'rounded-md px-3.5 py-2.5 text-sm font-semibold text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black',
         className
     )
 

@@ -50,7 +50,7 @@ Start by creating a personal API key. You can do this by going to [personal API 
 
 > **⚠️ Warning:** The following is a simplified example. Exposing your personal API key (like we do below) exposes your private PostHog data to the public internet, so don't do this in real life. Make sure your personal API key isn't exposed and your query request happens securely on the server side.
 
-With this personal API key, we can set up a request in our React app to PostHog's [query API endpoint](/docs/api/query) using your project ID. We use [HogQL](/docs/product-analytics/sql) in the payload to get the data we want and display it unformatted in our app for now:
+With this personal API key, we can set up a request in our React app to PostHog's [query API endpoint](/docs/api/query) using your project ID. We use SQL in the payload to get the data we want and display it unformatted in our app for now:
 
 ```js
 import { useState, useEffect } from 'react'
@@ -453,3 +453,5 @@ This creates a nice-looking pie chart with labels like this:
 - [The basics of SQL for analytics](/product-engineers/sql-for-analytics)
 - [How Mintlify launched user-facing analytics, powered by PostHog](/customers/mintlify)
 - [How to use React Charts to visualize analytics data (with examples)](/tutorials/react-charts)
+
+<NewsletterForm />

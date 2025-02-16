@@ -49,6 +49,7 @@ import Tooltip from 'components/Tooltip'
 import { TextCard } from 'components/Products/TextCard'
 import { SEO } from 'components/seo'
 import { useLayoutData } from 'components/Layout/hooks'
+import { PRODUCT_COUNT } from '../../../constants'
 
 const ProductIcon = ({ name, url, color, icon }) => {
     return (
@@ -144,7 +145,11 @@ export const ProductOS = () => {
                 />
 
                 <div className="text-center mb-12">
-                    <CloudinaryImage src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Product/ProductOS/images/product-os.png" alt="" className="w-full max-w-[423px]" />
+                    <CloudinaryImage
+                        src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Product/ProductOS/images/product-os.png"
+                        alt=""
+                        className="w-full max-w-[423px]"
+                    />
                 </div>
             </div>
 
@@ -195,19 +200,24 @@ export const ProductOS = () => {
                                 data
                             </h2>
                             <p>
-                                We created <Link to="/docs/hogql">HogQL</Link>, a translation layer over ClickHouse SQL.
-                                (You can use most ClickHouse features in HogQL, including JOINs and subqueries.)
+                                We created <Link to="/docs/sql">SQL access</Link>, a translation layer over ClickHouse
+                                SQL. (You can use most ClickHouse features in our SQL insights, including JOINs and
+                                subqueries.)
                             </p>
 
                             <p>
-                                Everything you see in PostHog relies on HogQL queries. If you aren't able to run a query
-                                in a PostHog UI, just enter HogQL mode to write the exact query you need.
+                                Everything you see in PostHog relies on SQL queries. If you aren't able to run a query
+                                in a PostHog UI, just enter SQL mode to write the exact query you need.
                             </p>
 
                             <p>You can also query directly from our data warehouse (powered by ClickHouse).</p>
                         </div>
                         <aside className="shrink-0 md:basis-[500px]">
-                            <CloudinaryImage src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Product/ProductOS/images/sql-hog.png" alt="" className="w-full max-w-[562px]" />
+                            <CloudinaryImage
+                                src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Product/ProductOS/images/sql-hog.png"
+                                alt=""
+                                className="w-full max-w-[562px]"
+                            />
                         </aside>
                     </div>
 
@@ -218,7 +228,7 @@ export const ProductOS = () => {
                                     One platform, <span className="text-red dark:text-yellow">loads of products</span>
                                 </h2>
                                 <p className="max-w-2xl">
-                                    PostHog offers 7+ products in one (and counting).{' '}
+                                    PostHog offers {PRODUCT_COUNT}+ products in one (and counting).{' '}
                                     <strong>Use only what you want. But...</strong> if you want to try a new PostHog
                                     product, there are benefits of using Product OS as your platform for all your
                                     product data.
@@ -323,7 +333,11 @@ export const ProductOS = () => {
                             </p>
                         </div>
                         <aside className="shrink-0 md:basis-[300px] xl:basis-[500px]">
-                            <CloudinaryImage src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Product/ProductOS/images/alert.png" alt="" className="w-full max-w-[262px]" />
+                            <CloudinaryImage
+                                src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Product/ProductOS/images/alert.png"
+                                alt=""
+                                className="w-full max-w-[262px]"
+                            />
                         </aside>
                     </div>
                 </section>
@@ -332,7 +346,7 @@ export const ProductOS = () => {
                     <h2 className="text-4xl mb-2">API</h2>
                     <p className="max-w-2xl mb-2">
                         If your business has bespoke data visualization needs that aren't covered by a PostHog product,
-                        you can build your own interface with queries using the API and HogQL.
+                        you can build your own interface with queries using the API and SQL.
                     </p>
                     <div className="mb-8">
                         <CallToAction to="/docs/api" type="secondary" size="sm">
@@ -384,6 +398,8 @@ export const ProductOS = () => {
                                 <li>Visually define events</li>
                                 <li>Toggle feature flags on or off</li>
                                 <li>See a click map showing what people are clicking</li>
+                                <li>Visualize your experiments</li>
+                                <li>Understand your Web Vitals metrics</li>
                             </ul>
                             <div>
                                 <CallToAction to="/docs/toolbar" type="secondary" size="sm">

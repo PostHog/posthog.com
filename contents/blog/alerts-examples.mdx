@@ -1,0 +1,205 @@
+---
+title: 5 ways to monitor key metrics using PostHog alerts
+date: 2025-01-09
+author:
+ - bijan-boustani
+rootpage: /blog
+featuredImage: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/posthog-engineering-blog.png
+featuredImageType: full
+category: General
+tags:
+  - Alerts
+  - Product updates
+---
+
+To keep life interesting, it's important to live in a state of perpetual ignorance. When things are going well, there's no need to find out why. When things go downhill, let anxiety run its course. After all, who needs data and insights when you have hope?
+
+![Driving blind](https://res.cloudinary.com/dmukukwp6/image/upload/319051_c8e072f85e.gif)
+
+An alternative, more effective approach is to use [PostHog alerts](/docs/alerts) to get notified when important metrics change.
+
+Alerts will send you an email notification when an insight crosses a threshold that you specify, such as an absolute value (e.g. pageviews exceeded 1,000), or a relative amount (e.g. conversion rate increased by 10%).
+
+We'll start with how to set up a new alert and then we'll share some ideas for how you can use alerts, so you're never caught out again.
+
+## How to create alerts
+
+Alerts are based on your insights. You can set them with your existing [trends](/docs/product-analytics/trends/overview), or create a new one.
+
+To create an alert, click the **Alerts** button on the top right of the insight page.
+
+<ProductScreenshot
+    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/alerts_button_4ecd022cd6.png"
+    imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/alert_button_dark_c2f642fde3.png"
+    alt="alerts button"
+    classes="rounded"
+/>
+
+To configure the alert, set the following:
+
+- **Name:** The name you'll see when the alert is triggered.
+
+- **When:** The data points the alert will be based on. The drop-down contains a list of all the series in your insight's graph. For example, if you have an insight that tracks the number of pageviews and signups, you can use either of these series as the basis for the alert threshold.
+
+- **Type:** Select "has value" to check if the series is more or less than an absolute amount. Or, select "increases by/decreases by" to check if the series increased or decreased by a relative amount. These can also be configured with a percentage instead of a static value (e.g. signups increased by 10%).
+
+- **Frequency:** Set how often you want to check the alert threshold (hourly, daily, weekly, monthly).
+
+- **Who to notify:** Select who should receive an email when the alert is triggered.
+
+<ProductScreenshot
+    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/filled_alert_627158e6bb.png"
+    imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/alert_people_dark_0ccd7611bd.png"
+    alt="filled alert"
+    classes="rounded"
+/>
+
+Then, click **Create alert** and you'll see the new alert:
+
+<ProductScreenshot
+    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/insight_alerts_5k_daef47ade1.png"
+    imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/created_alert_dark_1710da74dc.png"
+    alt="insight alerts"
+    classes="rounded"
+/>
+
+For a more detailed walkthrough, you can also check out our [Alerts docs](/docs/alerts), which we'll update as we add new features.
+
+## Practical uses for alerts
+
+Now that we can create alerts, let's take a look at a handful of practical examples.
+
+### 1. Get alerts when traffic spikes
+
+Traffic spike alerts are useful when this happens unexpectedly. We often see this at PostHog when our content gets featured in a popular email newsletter or shared on Hacker News. When we notice an influx of new signups, it can be fun to dig in and try to figure out where they came from.
+
+For example, we can set up an alert when the number of pageviews for our [pricing page](/pricing) rises above 8,000 views for the week. First, we [create a new trend](/docs/product-analytics/trends/overview#1-creating-a-new-trend) insight to track pageviews where "Path Name" equals "/pricing". To get a good baseline for comparison, we'll filter the data to show the year-to-date and group it by week to see weekly patterns in our pricing page traffic.
+
+Then, set up an alert using the steps listed above to trigger a notification when the number of pageviews rises above 8,000.
+
+<ProductScreenshot
+    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/new_alert_light_cd963284a3.png"
+    imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/new_alert_dark_1fbcadad90.png"
+    alt="New alert"
+    classes="rounded"
+/>
+
+When the threshold is crossed, we'll receive an email email alert like this:
+
+<ProductScreenshot
+    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/posthog_alert_df58e89828.png"
+    imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/posthog_alert_df58e89828.png"
+    alt="Pricing pageviews alert"
+    classes="rounded"
+/>
+
+### 2. Get notified for errors and 404s
+
+You can also use alerts to track down errors. For example, you can track the number of visits to your 404 page. If someone visits `posthog.com/some-nonexistent-url`, they will land on our 404 page. Some number of these kinds of visits to this page is to be expected. Anyone that misspells a URL or finds a dead link is bound to land here at some point.
+
+But what about anomalous spikes in 404s? It might mean you accidentally deployed a broken link. Or a page has been moved and you need to set up a redirect to prevent users from missing it.
+
+In this case, you can set up another trend insight to graph the number of pageviews for your 404 page. You can examine the graph to establish a baseline for a standard amount of traffic to the 404 page.
+
+<ProductScreenshot
+    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/404_graph_light_089709bc1e.png"
+    imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/404_graph_79107f52bb.png"
+    alt="404 graph"
+    classes="rounded"
+/>
+
+Now, we can set up an alert to check when 404s are significantly higher than this baseline.
+
+<ProductScreenshot
+    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/404_alert_light_c16295d3e4.png"
+    imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/404_alert_dark_a014c1aa46.png"
+    alt="404 alert"
+    classes="rounded"
+/>
+
+### 3. Alert if important emails are not delivered
+
+Alerts can also be used to check for the _absence_ of something happening.
+
+For example, PostHog tracks the number of transactional billing emails that get sent out every day. If these emails aren't getting sent, it would be a big deal.
+
+![Ignoring warnings](https://frinkiac.com/video/S08E23/XOUcScbq8W_7yoA6nti16cCC31A=.gif)
+
+To do something similar, you can track events when you trigger transactional emails. Then, create an insight to track the number of emails sent every day.
+
+Then, we can set up an alert called "No billing events sent" that gets triggered when the transactional emails have a value less than 1. In other words, it will trigger the alert if no emails get sent.
+
+<ProductScreenshot
+    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/transactional_email_alert_light_57017a6227.png"
+    imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/transactional_email_alert_dark_1fda09248e.png"
+    alt="Billing email alert"
+    classes="rounded"
+/>
+
+We can set the frequency to check this daily. And for critical alerts like this, you can add more than one email to the notification list and ensure the entire billing team receives the alert.
+
+### 4. Alert on changes in conversion rates
+
+To set alerts when our conversion rate changes, we can set up an insight that tracks pricing page to signup conversion.
+
+For example, we can create a trend insight filtered by unique pricing pageviews and a [`user_signed_up` event](/docs/getting-started/send-events#2-capture-custom-events), which is triggered whenever a user completes our signup flow and creates their account.
+
+In this example, we enable [formula mode](/docs/product-analytics/trends/formulas) and divide the number of signups by the total number of unique visitors that visit the pricing page, which gives us a conversion rate to work with.
+
+<ProductScreenshot
+    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/conversion_formula_light_d0869f0480.png"
+    imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/conversion_formula_dark_104fdcdcb7.png"
+    alt="Conversions"
+    classes="rounded"
+/>
+
+To find out when the conversion rate increases or decreases by 10%, we can set up multiple alerts based on the formula above.
+
+<ProductScreenshot
+    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/increase_alert_light_6aad9ad763.png"
+    imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/increase_alert_dark_4e94fe15bb.png"
+    alt="Conversion alert setup"
+    classes="rounded"
+/>
+
+We can set up one alert for when the `user_sign_up` event increases by 10% and a separate alert for when the event decreases by 10%.
+
+<ProductScreenshot
+    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/multiple_alerts_light_431156475b.png"
+    imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/multiple_alerts_dark_e2982a022e.png"
+    alt="Multiple alerts"
+    classes="rounded"
+/>
+
+### 5. Alert on breakdown in referral sources
+
+We also have the ability to trigger alerts on trends with breakdowns. For example, you can track all the traffic to your website broken down by the referral source (e.g. google, substack, direct).
+
+If there's a major change in where the traffic is coming from, we want to trigger an alert. Traffic could surge from a new source, or an existing source of traffic could disappear, even if the overall traffic remains the same.
+
+Here's an example where we set up an alert when any of those breakdown values increases by 10% or more:
+
+<ProductScreenshot
+    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/breakdown_light_a6de1bd240.png"
+    imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/breakdown_dark_5d2300b6cd.png"
+    alt="Breakdown alerts"
+    classes="rounded"
+/>
+
+> 📝 **Note:** For trends with a breakdown, the alert will fire if _any_ of the breakdown values breaches the threshold.
+
+When there's a change in the breakdown of the referral sources, we'll get an email that looks like this:
+
+<ProductScreenshot
+    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/utm_source_change_6d56142060.png"
+    imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/utm_source_change_6d56142060.png"
+    alt="Breakdown alert email"
+    classes="rounded"
+/>
+
+## Upcoming improvements and suggestions
+
+Alerts are currently available for trends insights. But we're currently working on adding alerts for [funnels](/docs/product-analytics/funnels), which will make it easier to track conversions across various stages. For example, we can create a funnel to see how many users are following through and signing up after visiting our pricing page.
+
+Thanks to [Anirudh](/community/profiles/30974) for making this much-requested feature a reality. The idea for threshold-based alerts started as a [GitHub issue](https://github.com/PostHog/posthog/issues/14331), so if you have other interesting use cases and suggestions for how to improve the features, be sure to let us know!

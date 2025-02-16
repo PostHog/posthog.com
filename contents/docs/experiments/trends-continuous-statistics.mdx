@@ -1,0 +1,86 @@
+---
+title: Statistical methodology for property value trend metrics
+---
+
+Trends metrics for property values use Bayesian statistics with a lognormal model and normal-inverse-gamma prior to evaluate the **win probabilities** and **credible intervals**. [Read the statistics overview](/docs/experiments/statistics) if you haven't already.
+
+## What is a lognormal model with normal-inverse-gamma prior?
+
+A lognormal model with normal-inverse-gamma prior sounds like something you'd learn about in a quantum physics class, but its a lot less intimidating than it seems. The model is great for analyzing metrics like revenue or other property values that are always positive and often have a "long tail" of high values.
+
+Imagine you're looking at daily revenue from your customers:
+
+- Most customers might spend $20-100.
+- Some customers spend $200-500.
+- A few customers spend $1000+.
+
+This creates what we call a "right-skewed" distribution - lots of smaller values, with a long tail stretching to the right. This is where the log-normal model shines:
+
+- When we take the logarithm of these values, they follow a nice bell curve (normal distribution).
+- This makes it much easier to analyze the data mathematically.
+- We can transform back to regular dollars for our final results.
+
+The "normal-inverse-gamma prior" part helps us handle uncertainty:
+
+- When we have very little data, it keeps our estimates reasonable.
+- As we collect more data, it lets the actual data drive our conclusions.
+- It accounts for uncertainty in both the average value AND how spread out the values are.
+- We use a fixed log-space variance (`LOG_VARIANCE = 0.75`) based on typical patterns in property value data.
+
+For example:
+
+- Day 1: 5 customers spend an average of $50, but we're very uncertain about whether this represents the true average spending.
+- Day 30: 500 customers spend an average of $50, and we're much more confident about this average value.
+
+One more thing worth noting: Bayesian inference starts with an initial guess that then gets updated as more data comes in. Our model uses a "minimally informative prior" of `MU_0 = 0.0`, `KAPPA_0 = 1.0`, `ALPHA_0 = 1.0`, and `BETA_0 = 1.0`, which is like starting with a blank slate instead of making an upfront assumption about the results.
+
+## Win probabilities
+
+The **win probability** tells you how likely it is that a given variant produces a higher value compared to the control. It helps you determine whether the metric shows a **statistically significant** real effect vs. simply random chance.
+
+Let's say you're testing a new pricing page and have these results:
+
+- Control: $50 average revenue per user (500 users)
+- Test: $60 average revenue per user (500 users)
+
+To calculate the win probabilities, our methodology:
+
+1. Models each variant's value using a lognormal distribution (which works well for metrics like revenue that are always positive and often right-skewed):
+   - We transform the data to log-space where it follows a normal distribution.
+   - We use a normal-inverse-gamma prior to handle uncertainty about both the mean and variance.
+
+2. Takes 10,000 random samples from each variant's posterior distribution.
+
+3. Checks which variant had the higher value for each sample.
+
+4. Calculates the final win probabilities:
+   - Control wins in 5 out of 10,000 samples = 0.5% probability.
+   - Test wins in 9,995 out of 10,000 samples = 99.5% probability.
+
+These results tell us we can be 98.5% confident that the test variant performs better than the control.
+
+## Credible intervals
+
+We use Bayesian methodology, so we report **credible intervals** rather than the more commonly known **confidence intervals**.
+
+A 95% credible interval means we believe there’s a **95% probability that the true conversion rate lies within that interval**. In other words, it directly reflects our uncertainty about where the true conversion rate might be based on the data we’ve observed.
+
+> If you’re familiar with frequentist methods, you’ve probably heard of confidence intervals. Although they may look similar in graphs, a confidence interval doesn’t mean “there’s a 95% probability that the true rate lies in this range.” Instead, it reflects how often such intervals would contain the true rate if the experiment were repeated many times. In contrast, a **credible interval is the Bayesian version of a confidence interval**, offering a more intuitive probability statement about the metric you care about.
+
+For example, if you have these results:
+
+- Control: $50 average revenue per user (500 users)
+- Test: $60 average revenue per user (500 users)
+
+To calculate the credible intervals, our methodology will:
+
+1. Transform the data to log-space and model each variant using a t-distribution:
+   - We use log transformation because metrics like revenue are often right-skewed
+   - The t-distribution parameters come from our Normal-Inverse-Gamma model
+   - This handles uncertainty about both the mean and variance
+
+2. Find the 2.5th and 97.5% percentiles of each distribution:
+   - Control: [45.98, 55.1] = "You can be 95% confident the true average revenue is between $45.98 and $53.53"
+   - Test: [55.15, 64.22] = "You can be 95% confident the true average revenue is between $55.15 and $64.22"
+
+Since these intervals don't overlap, you can be quite confident that the test variant performs better than the control. The intervals will become narrower as you collect more data, reflecting your increasing certainty about the true values.

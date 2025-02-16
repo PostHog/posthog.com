@@ -17,3 +17,35 @@ export function toFixedMin(num: number, minDecimals: number): string {
     }
     return str
 }
+
+export function flattenStrapiResponse(response: any): any {
+    if (!response) return null
+
+    if (Array.isArray(response)) {
+        return response.map((item) => flattenStrapiResponse(item))
+    }
+
+    if (typeof response === 'object') {
+        if (response.data) {
+            const flattened = flattenStrapiResponse(response.data)
+            return { ...flattened }
+        }
+
+        if (response.attributes) {
+            return {
+                id: response.id,
+                ...flattenStrapiResponse(response.attributes),
+            }
+        }
+
+        const flattened = {}
+        for (const [key, value] of Object.entries(response)) {
+            if (key !== 'data' && key !== 'attributes') {
+                flattened[key] = flattenStrapiResponse(value)
+            }
+        }
+        return flattened
+    }
+
+    return response
+}

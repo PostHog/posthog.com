@@ -4,7 +4,8 @@ date: 2024-02-27
 author:
   - lior-neu-ner
 tags:
-  - feature flags
+  - product analytics
+  - web analytics
 ---
 
 import { ProductScreenshot } from 'components/ProductScreenshot'
@@ -273,7 +274,7 @@ In this tutorial, we create a simple trend insight:
 2. Under the **Series** header select the `home_button_clicked` event. 
 3. Click the **Total count** dropdown to change how events are aggregated. You can choose options such as `Count per user`, `Unique users`, `Unique company(s)`, and more. You can also add filters or breakdown based on properties. 
 
-For example, in the image below we set our insight to show number of unique users that captured the `home_button_clicked` event where the toggled is enabed:
+For example, in the image below we set our insight to show number of unique users that captured the `home_button_clicked` event where the toggled is enabled:
 
 <ProductScreenshot
   imageLight={InsightLight} 
@@ -289,3 +290,5 @@ That's it! Feel free to play around in your dashboard and explore the different 
 - [How to run A/B tests in iOS](/tutorials/ios-ab-tests)
 - [How to set up feature flags in iOS](/tutorials/ios-feature-flags)
 - [How to set up iOS session replay](/tutorials/ios-session-replay)
+
+<NewsletterForm />

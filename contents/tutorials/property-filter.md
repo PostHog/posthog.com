@@ -9,81 +9,124 @@ tags:
   - configuration
   - data management
   - product os
-date: 2022-07-01
+date: 2024-12-09
 ---
 
-_Estimated reading time: 2 minutes_ ☕
+When collecting data with PostHog, you may want to avoid collecting certain properties for privacy reasons. For example, you may want to ensure you never collect IP addresses or exact locations.
 
-By default, PostHog has the ability to gather IP data on users to determine their location, via the [GeoIP Enricher app](/apps/geoip-enrichment). 
+That's where the [property filter app](/apps/property-filter), which was created by the team at [Witty Works](https://www.witty.works/), comes in. It gives you fine-grained control over which properties are kept or discarded from your events, helping you balance data collection needs with privacy requirements. Here's how to use it.
 
-It also has the ability to discard IP data by default. However, if this option is used then the GeoIP Enricher is unable to identify the country of origin for users - either _all_ the data is collected via the GeoIP Enricher, or all of it is discarded. 
+> **Note:** If you prefer not to use the property filter app, you can also filter properties by using the `sanitize` configuration option when initializing the PostHog client. See the [sanitize docs](/docs/product-analytics/privacy#sanitize-properties) for more details.
 
-That's where the Property Filter, which was created by the team at [Witty Works](https://www.witty.works/), comes in. Witty Works see privacy as a core feature, but also needs to collect some data to develop data-driven solutions. 
+## How to set up the property filter app
 
-For this reason Witty Works created the [Property Filter app](/apps/property-filter) as a way to determine the _country_ from which requests are coming, while discarding all other data to protect users privacy. Here's how!
+The property filter app works by setting the selected properties to `null` when events are ingested. Here's how to set it up:
 
-# 1. Install the Property Filter app
+1. Navigate to the [data pipelines](https://us.posthog.com/pipeline) tab in PostHog.
+2. Click the **+ New** button in the top right.
+3. Select **Transformation** from the dropdown.
+4. Next to the **Property Filter** app, click **+ Create**.
+5. Click **Enabled** to turn on the app.
+6. Type the properties you want to filter out in the text field. Separate properties with commas, without using spaces, like so: `foo,bar,baz`.
 
-First, install the [Property Filter](/apps/property-filter) to your PostHog instance. You can find it in the Apps Library by following these steps:
+<ProductVideo
+    videoLight= "https://res.cloudinary.com/dmukukwp6/video/upload/property_light_6cf45cedd1.mp4" 
+    videoDark= "https://res.cloudinary.com/dmukukwp6/video/upload/property_dark_aa6e41f5b2.mp4"
+    alt="How to set up the property filter app" 
+    classes="rounded"
+/>
 
-- Log in to your PostHog instance
--  Click "[Data pipeline](https://us.posthog.com/pipeline)" in the left sidebar
-- Search for 'Property Filter' press 'Install'
+## List of default PostHog properties
 
-It's important to note that this app effectively removes information from PostHog events by setting properties to null. Apps on PostHog run in sequence, so it usually makes sense to place this app at the end of a sequence. If you are filtering `$ip`, `event.ip` will also be set to `null`.
+Below is a list of some of the properties that PostHog captures by default. You can see the full list of properties that PostHog captures by default in [GitHub](https://github.com/PostHog/posthog-js/blob/main/src/utils/event-utils.ts). 
 
-# 2. Configure the app chain
+Note that PostHog's default properties begin with `$`, so you'll need to include this when adding them to the property filter app. For example, `$ip,$os`.
 
-Apps on PostHog run in a sequential chain and in order for the Property Filter to remove unwanted information, that information first has to be present. In short: Ensure that the Property Filter runs _after_ the GeoIP Enricher. 
+| Name                        | Key                      | Example value                  |
+|-----------------------------|--------------------------|--------------------------------|
+| Timestamp                   | `$timestamp`             | `2024-05-29T17:32:07.202Z`     |
+| OS                          | `$os`                    | `Mac OS X`                     |
+| OS Version                  | `$os_version`            | `10.15.7`                      |
+| Browser                     | `$browser`               | `Chrome`                       |
+| Browser Version             | `$browser_version`       | `125`                          |
+| Device Type                 | `$device_type`           | `Desktop`                      |
+| Current URL                 | `$current_url`           | `https://example.com/page`     |
+| Host                        | `$host`                  | `example.com`                  |
+| Path Name                   | `$pathname`              | `/page`                        |
+| Screen Height               | `$screen_height`         | `1080`                         |
+| Screen Width                | `$screen_width`          | `1920`                         |
+| Viewport Height             | `$viewport_height`       | `950`                          |
+| Viewport Width              | `$viewport_width`        | `1903`                         |
+| Library                     | `$lib`                   | `web`                          |
+| Library Version             | `$lib_version`           | `1.31.0`                       |
+| Search Engine               | `$search_engine`         | `google`                       |
+| Referrer URL                | `$referrer`              | `https://google.com`           |
+| Referring Domain            | `$referring_domain`      | `www.google.com`               |
+| Active Feature Flags        | `$active_feature_flags`  | `['beta_feature']`             |
+| Event Type                  | `$event_type`            | `click`                        |
+| UTM Source                  | `$utm_source`            | `newsletter`                   |
+| UTM Medium                  | `$utm_medium`            | `email`                        |
+| UTM Campaign                | `$utm_campaign`          | `product_launch`               |
+| UTM Term                    | `$utm_term`              | `new+product`                  |
+| UTM Content                 | `$utm_content`           | `logolink`                     |
+| Google Click ID             | `$gclid`                 | `TeSter-123`                   |
+| Google Ads Source           | `$gad_source`            | `google_ads`                   |
+| Google Search Ads 360 Click | `$gclsrc`                | `dsa`                          |
+| Google DoubleClick Click ID | `$dclid`                 | `testDclid123`                 |
+| Google Web-to-app Measure   | `$wbraid`                | `testWbraid123`                |
+| Google App-to-web Measure   | `$gbraid`                | `testGbraid123`                |
+| Facebook Click ID           | `$fbclid`                | `testFbclid123`                |
+| Microsoft Click ID          | `$msclkid`               | `testMsclkid123`               |
+| Twitter Click ID            | `$twclid`                | `testTwclid123`                |
+| LinkedIn Ad Tracking ID     | `$la_fat_id`             | `testLaFatId123`               |
+| Mailchimp Campaign ID       | `$mc_cid`                | `testMcCid123`                 |
+| Instagram Share Id          | `$igshid`                | `testIgshid123`                |
+| TikTok Click ID             | `$ttclid`                | `testTtclid123`                |
+| Plugins Succeeded           | `$plugins_succeeded`     | `['GeoIP (56578)']`            |
+| Plugins Failed              | `$plugins_failed`        | `['plugin3']`                  |
+| Plugins Deferred            | `$plugins_deferred`      | `['plugin4']`                  |
+| IP Address                  | `$ip`                    | `192.168.1.1`                  |
 
-![PostHog Property Filter](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/property-filter/property-filter-tutorial.png)
+### Filtering GeoIP properties
 
-You can reorder the app chain simply by selecting 'Edit Order' and dragging the apps to run in any order you want. Apps at the top of the list run first, while those at the bottom run last. 
+PostHog enriches events with the [GeoIP app](/cdp/geoip-enrichment) based on the IP address. You either disable this app completely or filter out specific properties using the property filter app.
 
-# 3. Configure the filter to remove selected GeoIP info
+The current list of GeoIP properties is shown below. For the most up-to-date list, see the [source code](https://github.com/PostHog/posthog-plugin-geoip).
 
-This app sets all specified properties on ingested events to `null`, effectively preventing PostHog from collecting information you do not want it to use.
+- `$geoip_city_name`
+- `$geoip_country_name`
+- `$geoip_country_code`
+- `$geoip_continent_name`
+- `$geoip_continent_code`
+- `$geoip_latitude`
+- `$geoip_longitude`
+- `$geoip_time_zone`
+- `$geoip_subdivision_1_code`
+- `$geoip_subdivision_1_name`
+- `$geoip_subdivision_2_code`
+- `$geoip_subdivision_2_name`
+- `$geoip_subdivision_3_code`
+- `$geoip_subdivision_3_name`
 
-To configure the app to remove selected properties, simply select the blue gear icon and enter the properties you wish to remove.
+## (Optional) Configure the order of transformations
 
-![PostHog Property Filter](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/property-filter/property-filter-tutorial-2.png)
+Transformations in PostHog run in sequential order, so you should carefully consider where you place the property filter app. For example, you may want to place it after other apps that might need the data.
 
-> **Note:** The GeoIP transformation adds event and person properties (`$set` and `$set_once`), so you'll want to filter those out as well. [See below](#event-and-person-properties).
+Here's how to reorder transformations:
 
-## The full list of GeoIP properties
+1. Go to the [transformations tab](https://us.posthog.com/pipeline/transformations).
+2. Click **Change order** just above the table.
+3. Drag and drop apps to change their order.
 
-...at time of writing are
+<ProductVideo
+    videoLight= "https://res.cloudinary.com/dmukukwp6/video/upload/change_order_light_7ae51452d1.mp4" 
+    videoDark= "https://res.cloudinary.com/dmukukwp6/video/upload/change_order_dark_e7df6040ef.mp4"
+    alt="Change order of transformations" 
+    classes="rounded"
+/>
 
-* $geoip_city_name
-* $geoip_country_name
-* $geoip_country_code
-* $geoip_continent_name
-* $geoip_continent_code
-* $geoip_postal_code
-* $geoip_latitude
-* $geoip_longitude
-* $geoip_time_zone
-* $geoip_subdivision_1_name
-* $geoip_subdivision_1_code
-* $geoip_subdivision_2_name
-* $geoip_subdivision_2_code
-* $geoip_subdivision_3_code
-* $geoip_subdivision_3_name
+## Further reading
 
-You can [check the current list in the source code for the app.](https://github.com/PostHog/posthog-plugin-geoip)
-
-## Event and Person properties
-
-The GeoIP app sets [person properties using `$set` and `$set_once`](https://posthog.com/docs/integrate/user-properties). If you want to drop those properties prefix the geoip property name with either `$set` or `$set_once`.
-
-For example to ensure `$geoip_cityname` is _never_ stored on either events or persons you would configure:
-
-* $geoip_city_name (the event property)
-* $set.$geoip_city_name (the person proprty)
-* $set_once.$initial_geoip_city_name (the initial and never updated person property)
-
-## A working example
-
-Below is the full configuration Witty Works uses to filter out unwanted data before it is written to PostHog's event log:
-
-```$geoip_city_name,$geoip_longitude,$geoip_latitude,$ip,$geoip_postal_code,$current_url,$performance_raw,$referrer,$initial_referrer,$pathname```
+- [Property filter app docs](/docs/cdp/property-filter)
+- [GeoIP enrichment docs](/docs/cdp/geoip-enrichment)
+- [Product analytics privacy controls docs](/docs/product-analytics/privacy)

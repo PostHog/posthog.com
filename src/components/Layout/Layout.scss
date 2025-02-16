@@ -132,11 +132,12 @@ button::-moz-focus-inner {
     border-style: none;
     padding: 0;
 }
-[type='button']:-moz-focusring,
-[type='reset']:-moz-focusring,
-[type='submit']:-moz-focusring,
-button:-moz-focusring {
-    outline: 1px dotted ButtonText;
+button,
+a {
+    &:focus-visible {
+        outline: 2px solid $primary;
+        outline-offset: 2px;
+    }
 }
 fieldset {
     border: 1px solid silver;
@@ -1276,10 +1277,6 @@ for all other rows the portrait image wraps above bio*/
 }
 
 .main-nav-cta-wrapper:hover {
-    .main-nav-cta-light-bg {
-        background-color: darken($primary, 5%);
-    }
-
     .main-nav-cta-dark-bg {
         background-color: #fff !important;
         color: #222d5b !important;

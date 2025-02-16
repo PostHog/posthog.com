@@ -12,8 +12,6 @@ tags:
 import { ProductScreenshot } from 'components/ProductScreenshot'
 export const EventsInPostHogLight = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/tutorials/bubble-ab-tests/events-in-posthog-light.png"
 export const EventsInPostHogDark = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/tutorials/bubble-ab-tests/events-in-posthog-dark.png"
-export const TestSetupLight = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/tutorials/bubble-ab-tests/test-setup-light.png"
-export const TestSetupDark = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/tutorials/bubble-ab-tests/test-setup-dark.png"
 
 [Bubble](https://bubble.io/) is a great tool for building marketing websites. However, sometimes you may be unsure if a change actually improves your conversion rate. This is where [A/B testing](/experiments) is helpful. It enables you to test and compare the results of your changes.
 
@@ -71,17 +69,17 @@ Next, go to the [A/B testing tab](https://us.posthog.com/experiments) and create
 
 1. Name it "Bubble button experiment".
 2. Set "Feature flag key" to `bubble-button-experiment`.
-3. Under the experiment goal, select the `ab_test_button_clicked` event we created in the previous step.
-4. Use the default values for all other fields.
-
-Click "Save as draft" and then click "Launch".
+3. Use the default values for all other fields.
+4. Click **Save as draft**.
 
 <ProductScreenshot
-  imageLight={TestSetupLight} 
-  imageDark={TestSetupDark} 
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_01_16_at_09_18_48_2x_d13954c3a3.png" 
+  imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_01_16_at_09_19_03_2x_4965c8dd01.png" 
   alt="Experiment setup in PostHog" 
   classes="rounded"
 />
+
+Once created, set the primary metric to a trend of `ab_test_button_clicked` and then click **Launch**.
 
 ## 4. Implement the A/B test in Bubble
 
@@ -116,12 +114,12 @@ Finally, deploy your changes to live.
 
 That's it! Your A/B test is now live. PostHog will split your users so half see the updated button text and tracks whether it has an impact on your click-through rate. You can [view your test results](/docs/experiments/testing-and-launching#viewing-experiment-results) on the experiment page in PostHog.
 
-If you want to test each variant of your experiment to make sure it is working correctly, add the line `posthog.featureFlags.override({'bubble-button-experiment': 'variant_name'})` to your code:
+If you want to test each variant of your experiment to make sure it is working correctly, add the line `posthog.featureFlags.overrideFeatureFlags({ flags: {'bubble-button-experiment': 'variant_name'}})` to your code:
 
 ```js
 posthog.onFeatureFlags(() => {
    // Override the feature flag
-   posthog.featureFlags.override({'bubble-button-experiment': 'test'}) // or 'control' 
+   posthog.featureFlags.overrideFeatureFlags({ flags: {'bubble-button-experiment': 'test'}}) // or 'control' 
        
    // rest of your code...
 });    
@@ -132,3 +130,5 @@ posthog.onFeatureFlags(() => {
 - [How to set up Bubble analytics, session replays, and more](/tutorials/bubble-analytics)
 - [How to create surveys in Bubble](/tutorials/bubble-surveys)
 - [A software engineer's guide to A/B testing](/product-engineers/ab-testing-guide-for-engineers)
+
+<NewsletterForm />

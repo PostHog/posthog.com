@@ -29,7 +29,7 @@ Google recently changed its settings for 2FA and Yubikeys and you may struggle t
 
 PostHog is certified as SOC 2 Type II compliant, following an external audit. 
 
-Our latest [security report](https://drive.google.com/file/d/1uLBE83_pN5q7p7IA-Ut85ArQh9BBzEdw/view?usp=drive_link) is publicly available (covering controls as of May 31st, 2024). 
+Our latest [security report](https://drive.google.com/file/d/1uLBE83_pN5q7p7IA-Ut85ArQh9BBzEdw/view?usp=drive_link) is publicly available (covering controls as of May 31st, 2024). Our [bridge letter]([https://drive.google.com/drive/folders/1sr1YgD2JQrC6OATteuJv_MBf9ICpsUJX](https://drive.google.com/file/d/1NYT0MNNDK-RXoQNIY_hqo5eygTTH5on7/view?usp=sharing) is also available until we receive our next report.
 
 ### Policies
 
@@ -102,4 +102,4 @@ We receive data collected by our customers from end-users and allow them to unde
 
 ## Pen tests
 
-We conduct these annually, most recently in April 2024  - see [here](https://github.com/PostHog/company-internal/issues/1577) for a link to the latest report and statuses (internally viewable only). 
+We conduct these annually, most recently in April 2024  - <PrivateLink url="https://github.com/PostHog/company-internal/issues/1577">see here</PrivateLink> for a link to the latest report and statuses. 

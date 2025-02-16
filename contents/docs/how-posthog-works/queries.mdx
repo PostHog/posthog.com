@@ -79,7 +79,8 @@ To achieve this, we filter based on the `Subscription plan` person property, whi
 
 You may have noticed that user `3` actually upgraded from the `free` plan to the `enterprise` plan over this period. Despite this, the event they sent for when they viewed the docs still reflects that they were on the `free` plan at the time, and is thus filtered out.
 
-In most cases, this is exactly what we want, as it means that we can update the properties for a person without worrying about messing up our past data points. However, if instead you do want to filter based on a person's current properties, you can do so by using `person.current_properties.<property>` in HogQL or creating a [cohort](/manual/cohorts).
+In most cases, this is exactly what we want, as it means that we can update the properties for a person without worrying about messing up our past data points.
+However, if instead you do want to filter based on a person's current properties, you can do so by using `pdi.person.properties.<property>` in SQL or creating a [cohort](/manual/cohorts). Note that this is slower than filtering on person properties.
 
 ### Filtering with cohorts
 

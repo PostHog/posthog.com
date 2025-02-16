@@ -87,40 +87,42 @@ Finally, we use formula mode to divide the amount by 100 and then multiply by th
 
 [Stripe calculates MRR](https://support.stripe.com/questions/calculating-monthly-recurring-revenue-(mrr)-in-billing) by "summing the monthly-normalized amounts of all active subscriptions at that time." 
 
-To mimic this calculation in PostHog, we need to write an [SQL query](/docs/product-analytics/sql) that gets all the subscription items, normalizes the subscription amount, and then sums them up for each month. Because a lot of this data is in `JSON`, we need to extract the values.
+To mimic this calculation in PostHog, we need to write an [SQL query](/docs/product-analytics/sql) that gets all the subscription items, normalizes the subscription amount, and then sums them up. Because a lot of this data is in `JSON`, we need to extract the values.
 
 ```sql
 WITH subscription_items AS (
-    SELECT
-        id,
-        current_period_start,
-        JSONExtractArrayRaw(items ?? '[]', 'data') AS data_items
-    FROM stripe_subscription
+   SELECT
+       id,
+       current_period_start, 
+       JSONExtractArrayRaw(items ?? '[]', 'data') AS data_items
+   FROM stripe_subscription
+   WHERE status = 'active'
+   AND (trial_end IS NULL OR trial_end < now())
 ),
 flattened_items AS (
-    SELECT
-        id,
-        current_period_start,
-        arrayJoin(data_items) AS item
-    FROM subscription_items
+   SELECT
+       id,
+       current_period_start,
+       arrayJoin(data_items) AS item
+   FROM subscription_items
 )
 SELECT
-    toStartOfMonth(current_period_start) AS month,
-    sum(
-        case
-            when JSONExtractString(JSONExtractRaw(item, 'plan'), 'interval') = 'month' 
-                then JSONExtractFloat(JSONExtractRaw(item, 'plan'), 'amount')
-            when JSONExtractString(JSONExtractRaw(item, 'plan'), 'interval') = 'year' 
-                then JSONExtractFloat(JSONExtractRaw(item, 'plan'), 'amount') / 12
-            else 0
-        end
-    ) / 100 AS MRR
+   sum(
+       case
+           when JSONExtractString(JSONExtractRaw(item, 'plan'), 'interval') = 'month' 
+               then JSONExtractFloat(JSONExtractRaw(item, 'plan'), 'amount')
+           when JSONExtractString(JSONExtractRaw(item, 'plan'), 'interval') = 'year' 
+               then JSONExtractFloat(JSONExtractRaw(item, 'plan'), 'amount') / 12
+           else 0
+       end
+   ) / 100 AS current_mrr,
+   count(DISTINCT id) as subscription_count 
 FROM flattened_items
-WHERE 
-    JSONExtractBool(JSONExtractRaw(item, 'plan'), 'active') = true
-GROUP BY month
-ORDER BY month DESC
+WHERE JSONExtractBool(JSONExtractRaw(item, 'plan'), 'active') = true
+AND JSONExtractFloat(JSONExtractRaw(item, 'plan'), 'amount') > 0
 ```
+
+> **Why can't we get a rolling MRR?** Due to a Stripe API limitation, we only sync new records, not update existing ones. This means when a subscription was created in July but is still active in November, we can't see that it was active for all those months, we only see its current state. For an accurate rolling MRR calculation, we need to know the active state of each subscription for every month in history, but this data isn't available with our current setup.
 
 ### Revenue churn
 
@@ -230,5 +232,7 @@ You can further break this down by filtering for specific events like `home_api_
 ## Further reading
 
 - [The basics of SQL for analytics](/product-engineers/sql-for-analytics)
-- [Using HogQL for advanced breakdowns](/tutorials/hogql-breakdowns)
+- [Using SQL for advanced breakdowns](/tutorials/hogql-breakdowns)
 - [Adventures in null handling: Null money, null problems](/blog/null-handling-hogql)
+
+<NewsletterForm />

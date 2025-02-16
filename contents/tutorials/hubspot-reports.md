@@ -145,5 +145,7 @@ You can modify this to fit the financial and sales metrics you want to track.
 ## Further reading
 
 - [The basics of SQL for analytics](/product-engineers/sql-for-analytics)
-- [Using HogQL for advanced breakdowns](/tutorials/hogql-breakdowns)
+- [Using SQL for advanced breakdowns](/tutorials/hogql-breakdowns)
 - [How to set up Stripe reports](/tutorials/stripe-reports)
+
+<NewsletterForm />

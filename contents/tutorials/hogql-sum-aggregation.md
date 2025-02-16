@@ -1,22 +1,22 @@
 ---
-title: The power of HogQL’s sum() aggregation
+title: The power of SQL’s sum() aggregation
 date: 2023-06-06
 author:
   - ian-vanagas
 showTitle: true
 sidebar: Docs
 tags:
-  - hogql
+  - sql
   - trends
   - insights
   - product analytics
 ---
 
-PostHog provides multiple options for aggregating data series including total count, count per user, unique sessions, property values, and more. HogQL unlocks a new level of aggregation customization, enabling you to use [expressions](/docs/hogql/expressions) to aggregate your data however you want. To showcase this, this tutorial goes over one of the most powerful aggregations: `sum()`.
+PostHog provides multiple options for aggregating data series including total count, count per user, unique sessions, property values, and more. SQL unlocks a new level of aggregation customization, enabling you to use [expressions](/docs/sql/expressions) to aggregate your data however you want. To showcase this, this tutorial goes over one of the most powerful aggregations: `sum()`.
 
 ## The basics of sum()
 
-Sum is simple: it calculates the sum of the numbers it is provided. In its simplest form, we can use it to sum event properties (or nested ones). For example, to sum your revenue, chose your payment event, then sum the `amount_paid` property. The HogQL expression for this is `sum(properties.amount_paid)`
+Sum is simple: it calculates the sum of the numbers it is provided. In its simplest form, we can use it to sum event properties (or nested ones). For example, to sum your revenue, chose your payment event, then sum the `amount_paid` property. The SQL expression for this is `sum(properties.amount_paid)`
 
 ![Sum](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/hogql-sum-aggregation/sum.png)
 
@@ -46,7 +46,7 @@ For example, if you wanted to rank sign up events based on specific criteria, yo
 - 5 for `realm = ‘cloud’`
 - -1 if `team_member_count_all > 1`
 
-As a HogQL expression, this looks like:
+As a SQL expression, this looks like:
 
 ```
 sumIf(
@@ -65,7 +65,7 @@ When we breakdown by `person_id`, this gives us a list of users with the highest
 
 ![Score](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/hogql-sum-aggregation/score.png)
 
-> **Note:** [Person properties](/docs/getting-started/person-properties) can’t be used with HogQL expression series, only event properties.
+> **Note:** [Person properties](/docs/getting-started/person-properties) can’t be used with SQL expression series, only event properties.
 
 ## Sum with percentages
 
@@ -103,7 +103,7 @@ Finally, chose the time series bar, and set the Y-axis to "Percent (0-1)."
 
 A similar use case for `sumIf()` is calculating your [NPS score](/blog/b2b-saas-product-metrics#net-promoter-score-nps). NPS asks how likely would you recommend a product to a friend or colleague on a scale of 1-10. 9s and 10s are promoters, 7s and 8s are passives, and 6s and below are detractors. To calculate your NPS score, subtract your detractors percentage from your promoters percentage.
 
-To do this in a HogQL expression, use `sumIf` to check your score, add 1 for promoters, 0 for passives, and -1 for detractors. Divide each by the total number of responses (`properties.score is not null`) to get your score.
+To do this in a SQL expression, use `sumIf` to check your score, add 1 for promoters, 0 for passives, and -1 for detractors. Divide each by the total number of responses (`properties.score is not null`) to get your score.
 
 ```
 sumIf(
@@ -133,6 +133,8 @@ This gives us a trend of our NPS score over time, which we can breakdown using d
 
 ## Further reading
 
-- [Using HogQL for advanced time and date filters](/tutorials/hogql-date-time-filters)
-- [Using HogQL for advanced breakdowns](/tutorials/hogql-breakdowns)
+- [Using SQL for advanced time and date filters](/tutorials/hogql-date-time-filters)
+- [Using SQL for advanced breakdowns](/tutorials/hogql-breakdowns)
 - [Calculating average session duration, time on site, and other session-based metrics](/tutorials/session-metrics)
+
+<NewsletterForm />
