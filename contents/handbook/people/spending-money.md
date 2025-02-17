@@ -185,8 +185,7 @@ We do not pre-approve your travel expenses, and trust team members to make the r
 - We all travel economy by default- we cannot afford for folks to fly premium or business class. Feel free to upgrade using your personal money/airmiles if you’d like to. If you are particularly tall and struggle to fit into an economy seat, PostHog will cover the cost of an emergency exit seat. 
 - Be sensible when considering the value of your time, and avoid over-optimizing for cost. It is probably not worth saving $100 to take a non-direct flight that takes you 5hrs extra. Similarly, it doesn’t make sense to save $50 by taking a flight that leaves at 6am, only to have to expense a taxi to get to the airport.
 - Related to the above, consider signing up for programs like Global Entry if you are regularly travelling to countries that offer it- these can pay for themselves in one trip with the amount of time saved, particularly when travelling to the US. PostHog will cover costs here.
-
-If you have any questions about this stuff, or are unsure what is reasonable here, feel free to check in with Fraser.
+- When travelling internationally, PostHog does not cover roaming charges for your phone. You can expense a reasonanle e-sim which usually is no more than $20. 
 
 ### Budget for working together/socializing
 
