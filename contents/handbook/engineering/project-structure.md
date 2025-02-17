@@ -4,7 +4,7 @@ sidebar: Docs
 showTitle: true
 ---
 
-> **Note:** This page refers to our [main product repository](https://github.com/PostHog/posthog), not our website. 
+> **Note:** This page refers to our [main product repository](https://github.com/PostHog/posthog), not our website. You can find this page on our [website](https://github.com/PostHog/posthog.com/blob/90f7faf915c4723367c9ecdcb75c8e37c4e869ae/contents/handbook/engineering/project-structure.md) repo.
 
 ## Directory tree 
 
@@ -24,6 +24,7 @@ showTitle: true
 │       └── scenes
 │       └── style
 │       └── toolbar
+├── livestream
 ├── posthog
 │   └── api
 │   └── management
@@ -96,6 +97,10 @@ Components referring to specific pages of the PostHog app. Mostly non-reusable.
 ##### `toolbar`
 
 All code related exclusively to the [PostHog Toolbar](/docs/user-guides/toolbar).
+
+## `livestream`
+
+Backend for live events, for live demo check Activity tab in PostHog.
 
 ## `posthog`
 
