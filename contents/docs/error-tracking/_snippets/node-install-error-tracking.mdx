@@ -1,4 +1,4 @@
-### Setting up Python exception autocapture
+### Setting up Node exception autocapture
 
 > **Note:** A minimum SDK version of v4.5.2 is required, but we recommend keeping up to date with the latest version to ensure you have all of error tracking's features.
 
@@ -18,6 +18,6 @@ const client = new PostHog(
 
 For exceptions handled by your application that you would still like sent to PostHog, you can manually call the capture method:
 
-```python
+```node
 posthog.captureException(e, 'user_distinct_id', additionalProperties)
 ```
