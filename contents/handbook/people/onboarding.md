@@ -218,7 +218,7 @@ As part of the onboarding checklist, the Ops team will schedule reminders for a 
 
 Feedback is a really important part of the onboarding process and as a manager it's a good idea to ensure the new team member receives feedback from their peers - either from you collecting it or them receiving it directly from their peers. It won't always be possible or necessary to do a 360 feedback session within the first 3 months, so it's up to you as a manager how best to approach that. As a manager you can also have blind spots on performance, so checking in with their peers can be helpful and can be done during your normal 1-1s.
 
-These check-ins are designed to ensure every new starter is set up for success. Every manager will deal with these slightly differently, but it will hopefully be clear to everybody by around the 60 day mark how things are going and what needs to be worked on, if anything. 
+These check-ins are designed to ensure every new starter is set up for success. Every manager will deal with these slightly differently, but it will hopefully be clear to everybody by around the 60 day mark how things are going and what needs to be worked on, if anything. It is important for a manager to ensure that they do not wait for one of these check-ins to communicate with an exec team member that there could be issues with the team member passing probation. They should let them know immediately, so that a fair and reasonable plan can be put in action ASAP. 
 
 ## Team intros
 
