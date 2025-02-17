@@ -222,6 +222,18 @@ const products: Product[] = [
             { title: 'Targeting & exclusion rules ', Icon: IconTarget },
             { title: 'Dynamic cohort support', Icon: IconPeople },
         ],
+        Images: () => {
+            return (
+                <>
+                    <div className="block dark:hidden">
+                        <CloudinaryImage src="https://res.cloudinary.com/dmukukwp6/image/upload/exp_screenshot_light_9c4b4890a5.png" />
+                    </div>
+                    <div className="hidden dark:block">
+                        <CloudinaryImage src="https://res.cloudinary.com/dmukukwp6/image/upload/exp_screenshot_dark_a595173bb4.png" />
+                    </div>
+                </>
+            )
+        },
         status: 'Production',
     },
     {
