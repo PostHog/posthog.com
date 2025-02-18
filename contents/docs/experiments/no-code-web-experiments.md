@@ -14,7 +14,7 @@ showTitle: true
 >
 > ✅ **Server-rendered web applications (e.g., Next.js)**: Because the page doesn’t typically re-render on the client, your changes are less likely to be overwritten.
 >
-> ❌ **Complex changes or interactions**: While possible, making multiple or intricate CSS and HTML modifications at once can introduce more risk and requires careful management.
+> ❌ **Complex changes or interactions**: While possible, making multiple or intricate CSS and HTML modifications can introduce more risk and requires careful management.
 >
 > ❌ **Single-page applications (e.g., React, Vue, Angular)**: Frameworks that frequently re-render or replace DOM elements may overwrite any no-code changes you apply.
 
