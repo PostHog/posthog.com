@@ -154,6 +154,42 @@ Metrics are made available when the [web vitals library](https://github.com/Goog
 You can look at our Web vitals capturing code in [web-vitals/index.ts](https://github.com/PostHog/posthog-js/blob/main/src/extensions/web-vitals/index.ts).
 
 
+### Sampling `$web_vitals` events
+
+If you're concerned about the cost of `$web_vitals` events, you can enable [sampling](/docs/libraries/js#sampling-events) for `$web_vitals` events.
+This will reduce the amount of events you send at the cost of some accuracy.
+
+We offer a pre-built function to sample by event name.
+You can import this using a package manager, or add the customization script to your site.
+You can also roll your own function if you prefer a tighter control over the sampling rate.
+
+<MultiLanguage>
+
+```ts file=Import
+import { sampleByEvent } from 'posthog-js/lib/src/customizations'
+
+posthog.init('<ph_project_api_key>', {
+    // Capture only half of web vitals events
+    before_send: sampleByEvent(['$web_vitals'], 0.5)
+})
+```
+
+```tsx file=Script
+// Add this script to your site, may need to change the script src to match your API host (`us` vs `eu`):
+// <script type="text/javascript" src="https://us.i.posthog.com/static/customizations.full.js"></script>
+
+posthog.init('<ph_project_api_key>', {
+    // Capture only half of web vitals events
+    before_send: posthogCustomizations.sampleByEvent(['$web_vitals'], 0.5)
+})
+```
+
+</MultiLanguage>
+
+
 ## Pricing
 
-Web vitals (`$web_vitals`) events are charged as regular events, and the first 1M are free. Check our [pricing page](/pricing) for more information, and we have a calculator there too!
+Web vitals (`$web_vitals`) events are charged as regular events, and the first 1M are free.
+On average, you'll send 30% of the amount of `$pageview` events as `$web_vitals` events.
+
+Check our [pricing page](/pricing) for more information, and we have a calculator there too!
