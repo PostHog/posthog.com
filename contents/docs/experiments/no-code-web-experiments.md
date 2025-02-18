@@ -4,9 +4,19 @@ sidebar: Docs
 showTitle: true
 ---
 
-> 🚧 **Note:** No-code web experiments are currently considered in `beta`. To access them, enable the [feature preview](https://app.posthog.com/#panel=feature-previews%3Aweb-experiments) in your PostHog account. You'll also need to define `disable_web_experiments: false` in your Posthog web snippet configuration. 
+> 🚧 **Note:** No-code web experiments are currently considered in `beta`. To access them, enable the [feature preview](https://app.posthog.com/#panel=feature-previews%3Aweb-experiments) in your PostHog account. You'll also need to define `disable_web_experiments: false` in your Posthog web snippet configuration.
 >
 > We are keen to gather as much feedback as possible so if you try this out please let us know. You can email [daniel.b@posthog.com](mailto:daniel.b@posthog.com), send feedback via the [in-app support panel](https://us.posthog.com#panel=support%3Afeedback%3Aexperiments%3Alow), or use one of our other [support options](/docs/support-options).
+
+> **Note:** No-code experiments are great because they’re quick to set up and require no coding, but it’s important to understand their limitations and ensure they’re the right fit for your website.
+>
+> ✅ **Simple layout changes**: Small edits to text or basic formatting are easy to manage and less likely to break anything.
+>
+> ✅ **Server-rendered web applications (e.g., Next.js)**: Because the page doesn’t typically re-render on the client, your changes are less likely to be overwritten.
+>
+> ❌ **Complex changes or interactions**: While possible, making multiple or intricate CSS and HTML modifications can introduce more risk and requires careful management.
+>
+> ❌ **Single-page applications (e.g., React, Vue, Angular)**: Frameworks that frequently re-render or replace DOM elements may overwrite any no-code changes you apply.
 
 No-code web experiments enable you to run A/B tests, multivariate tests, and other experiments that modify your website without writing a single line of code.
 
@@ -37,6 +47,7 @@ After enabling the **No Code Web experiments** feature preview, go to the [exper
 >   disable_web_experiments: false,
 > })
 > ```
+>
 > Otherwise, you'll be able to set up the experiment in the toolbar but it won't actually run on your live site.
 
 Once you've created your no-code web experiment, click **Launch toolbar on your website** under the **Implementation** section.
@@ -62,10 +73,10 @@ The toolbar enables you to select elements and apply transformations for each va
 
 The toolbar also enables further editing of your experiment. For example, you can:
 
-- Add multiple element changes to a variant by clicking **+ Add element**. Elements are buttons, headers, images, and more.
-- Remove an element from a variant by clicking the trash bin icon.
-- Add more versions of your experiment by clicking **+ Add variant**.
-- Change all elements, headers, buttons, and/or images by clicking the **Change element** dropdown.
+-   Add multiple element changes to a variant by clicking **+ Add element**. Elements are buttons, headers, images, and more.
+-   Remove an element from a variant by clicking the trash bin icon.
+-   Add more versions of your experiment by clicking **+ Add variant**.
+-   Change all elements, headers, buttons, and/or images by clicking the **Change element** dropdown.
 
 ## How to see how your experiment will look
 
@@ -78,7 +89,7 @@ To preview the different versions of your experiment, go back to your experiment
   classes="rounded"
 />
 
-Doing this enables you to verify their configuration and ensure that the changes are displayed and functioning as expected before the experiment goes live. 
+Doing this enables you to verify their configuration and ensure that the changes are displayed and functioning as expected before the experiment goes live.
 
 ### Final touches
 
@@ -88,4 +99,4 @@ Before launching, ensure the following:
 
 1. **Test thoroughly**: Verify that all variants display and function as expected across devices and browsers. See our [testing feature flags doc](/docs/feature-flags/testing) for more details.
 
-2. **Document changes**: Record the modifications made to each variant and their goals. Add a description of the changes to your experiment as well as screenshots of each of the variants. 
+2. **Document changes**: Record the modifications made to each variant and their goals. Add a description of the changes to your experiment as well as screenshots of each of the variants.
