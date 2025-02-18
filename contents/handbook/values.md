@@ -40,11 +40,11 @@ We judge your performance based on the impact you deliver overall, no matter wha
 
 We have learned the clearest lessons at PostHog by doing things, not from hypothesizing about them. If we're debating doing something, just trying it is the best way to learn.
 
-Bias for action means getting things done _proactively_. You do not need consensus to do things - focus your energy on shipping what's most valuable for our customers and the company, then take ownership of making it happen, not on getting buy in from others.
+Bias for action means getting things done _proactively_. You do not need consensus to do things – focus your energy on shipping what's most valuable for our customers and the company, then take ownership of making it happen, not on getting buy in from others.
 
-Sometimes this approach might mean you ship something that others don't agree with. You will need to be willing to throw away work sometimes, because the upside - not needing to get lots of approval to do stuff, and being able to take more bets, means we all move so much faster that mistakes are a lot less costly.
+Sometimes this approach might mean you ship something that others don't agree with. You will need to be willing to throw away work sometimes, because the upside – not needing to get lots of approval to do stuff and being able to take more bets – means we all move so much faster that mistakes are a lot less costly.
 
-Bias for action doesn't just mean shipping huge product features. It may mean diving into a small customer support issue quickly to delight them - this is one of the main reasons people recommend us to others.
+Bias for action doesn't just mean shipping huge product features. It may mean diving into a small customer support issue quickly to delight them – this is one of the main reasons people recommend us to others.
 
 ## 6. Talent compounds
 
