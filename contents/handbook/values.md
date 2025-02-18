@@ -36,17 +36,15 @@ We expect you to pick out the very most important thing you can think of and wor
 
 We judge your performance based on the impact you deliver overall, no matter what your role.
 
-## 5. Bias for impact
+## 5. Bias for action
 
-Proactive people are the most successful at PostHog. Prioritize hard and make sure you focus your energy on what's most valuable for our customers and the company, then take ownership of making it happen.
+We have learned the clearest lessons at PostHog by doing things, not from hypothesizing about them. If we're debating doing something, just trying it is the best way to learn.
 
-Today, across many product areas, we deliver the most impact when we move fast and maintain a high bar for quality. It improves retention and accelerates word-of-mouth growth.
+Bias for action means getting things done _proactively_. You do not need consensus to do things - focus your energy on shipping what's most valuable for our customers and the company, then take ownership of making it happen, not on getting buy in from others.
 
-In engineering, this means that bias for impact is likely to involve putting more effort into prioritization, scoping out the problem, and designing before implementation. It doesn't mean we aim to spend weeks in slow feedback loops. Instead, we get together and focus all our energy on rapidly understanding the problem and solution upfront. 
+Sometimes this approach might mean you ship something that others don't agree with. You will need to be willing to throw away work sometimes, because the upside - not needing to get lots of approval to do stuff, and being able to take more bets, means we all move so much faster that mistakes are a lot less costly.
 
-Solving a small customer support issue quickly to delight them is also highly impactful since we know this is a strong contributor to our word-of-mouth growth.
-
-For other areas of PostHog, this is likely to involve prioritizing and focusing our efforts on bigger bets which we believe can have an outsized impact (e.g. increasing sign-ups, getting a new large enterprise to start paying, increasing our rank on Google, etc.)
+Bias for action doesn't just mean shipping huge product features. It may mean diving into a small customer support issue quickly to delight them - this is one of the main reasons people recommend us to others.
 
 ## 6. Talent compounds
 
