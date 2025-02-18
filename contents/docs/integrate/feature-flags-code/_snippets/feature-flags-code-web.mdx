@@ -29,13 +29,24 @@ This means that for most pages, the feature flags are available immediately – 
 To handle this, you can use the `onFeatureFlags` callback to wait for the feature flag request to finish:
 
 ```js-web
-posthog.onFeatureFlags(function () {
+posthog.onFeatureFlags(function (featureFlags, flagVariants, { errorsLoading }) {
     // feature flags are guaranteed to be available at this point
     if (posthog.isFeatureEnabled('flag-key')) {
         // do something
     }
 })
 ```
+
+#### Callback parameters
+
+The `onFeatureFlags` callback receives the following parameters:
+
+- `flags: string[]`: An object containing the feature flags that apply to the user.
+- `flagVariants: Record<string, string | boolean>`: An object containing the variants that apply to the user.
+- `{ errorsLoading }: { errorsLoading?: boolean }`: An object containing a boolean indicating if an error occurred during the request to load the feature flags. This is `true` if the request timed out or if there was an error. It will be `false` or `undefined` if the request was successful.
+
+You won't usually need to use these, but they are useful if you want to be extra careful about feature flags not being loaded yet because of a network error and/or a network timeout (see `feature_flag_request_timeout_ms`).
+
 
 ### Reloading feature flags
 
