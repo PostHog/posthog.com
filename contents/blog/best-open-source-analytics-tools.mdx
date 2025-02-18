@@ -1,5 +1,5 @@
 ---
-date: 2023-11-22
+date: 2025-02-18
 title: The 12 best open source analytics tools you can self-host
 rootPage: /blog
 sidebar: Blog
@@ -17,7 +17,7 @@ tags:
 ---
 
 <details>
-  <summary> What are the criteria for this guide?</summary>
+  <summary>What are the criteria for this guide?</summary>
 
 This guide only includes open-source analytics tools that:
 
@@ -27,7 +27,6 @@ This guide only includes open-source analytics tools that:
 
 3. **Are free to self-host.** Tools that are "open core" but don't offer a free, self-hostable deployment option are not included.
 
-  />
 </details>  
 
 <details>
@@ -37,7 +36,6 @@ This guide is maintained by [PostHog](https://posthog.com/), an open-source anal
 
 We maintain separate guides on [open-source feature flag tools](/blog/best-open-source-feature-flag-tools),  [open-source AB testing products](/blog/best-open-source-ab-testing-tools), and [open-source session replay tools](/blog/best-open-source-session-replay-tools).
 
-/>
 </details>
 
 <details>
@@ -48,9 +46,8 @@ We maintain separate guides on [open-source feature flag tools](/blog/best-open-
   - **Aug 24, 2022:** Removed Fathom Lite (dormant), added Apache Superset, Redash
   - **Sep 13, 2023:** Added Ackee and Open Web Analytics
   - **Nov 22, 2023:** Added inclusion criteria, removed Ackee (dormant)
-  - **Feb 17, 2025:** Complete guide overhaul. Added OpenPanel and Swetrix
+  - **Feb 18, 2025:** Complete guide overhaul. Removed some entries. Added OpenPanel
 
-  />
 </details>
 
 ## The best open source analytics tools
@@ -178,21 +175,26 @@ Yes. There's no free tier, but it's cheap even at high volumes. Pricing starts a
 
 [SCREENSHOT]
 
+- **GitHub Stars:** 3.6k
+- **License:** AGPLv3
+- **Category:** Product analytics
+- [OpenPanel on Github](https://github.com/Openpanel-dev/openpanel)
 
 #### What is OpenPanel?
-
+OpenPanel is inspired by Mixpanel and Plausible. It aims to offer the core features of a product analytics tool, but with the speed,  simiplicity, and privacy-friendly features Plausible brings to web analytics.
 
 #### What closed-source tools can it replace?
-
+OpenPanel could replace Mixpanel, Amplitude, and Google Analytics. It isn't as advanced as any of these tools, but it covers most of the essential features they offer. Unlike PostHog, OpenPanel is focused soley on product analytics, so doesn't include things like session replay or A/B testing features.
 
 #### What's included?
-
+The open source version is available with no limitations. Features include custom dashboards and charts (line, bar, area, map, pie, funnels, histograms, and retention), user profiles, a realtime analytics view, and tracking scripts for a hanfdul of popular frameworks, including Next.js, React, and React Native.
 
 #### What are the hosting requirements?
 
+OpenPanel doesn't provide minimum requirements, but recommends hosting using Hetzner, and notes it'll work on any server where you have pre-installed Docker, Docker Compose, Node and pnpm.
 
 #### Is there a hosted option?
-
+Yes. There is no free tier, but 100k events a month cost just $20, and 1 million events are $90 per month.
 
 ### 6. Umami
 
@@ -278,7 +280,7 @@ While there is a Docker Compose deployment, it's not recommended for production 
 
 #### Is there a hosted option?
 
-Not directly, though third-parties to offer managed instances.
+Not directly, though third-parties offer managed instances.
 
 ### 8. Redash
 ![Redash - open source analytics tools](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/open-source-analytics-tools/redash.png)
@@ -307,22 +309,5 @@ Redash [documentation](https://redash.io/help/open-source/setup/) suggests a min
 #### Is there a hosted option?
 
 No. Redash is entirely community supported with no hosted option available.
-
-### 10. Swetrix
-
-
-#### What is OpenPanel
-
-
-#### What closed-source tools can it replace?
-
-
-#### What's included?
-
-
-#### What are the hosting requirements?
-
-
-#### Is there a hosted option?
 
 <NewsletterForm />
