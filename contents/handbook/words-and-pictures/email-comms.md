@@ -54,7 +54,7 @@ The latest revision is [Onboarding 7](https://github.com/PostHog/meta/issues/289
 
 The onboarding flow regularly changes as we test new ideas. Any changes to it are, as with all other email campaigns, documented in [the Meta repo](https://github.com/PostHog/meta/). 
 
-We aim for all content in this flow to be relevant and helpful to users, without being salesy. All emails come directly from Joe and he triages replies on a daily basis, answering or redirecting as needed. The campaign is triggered when a user signs up for the first time and has a goal of users acheiving `billing product activated` within 7 days of opening any email in the flow. 
+We aim for all content in this flow to be relevant and helpful to users, without being salesy. All emails come directly from Joe and he triages replies on a daily basis, answering or redirecting as needed. The campaign is triggered when a user signs up for the first time and has a goal of users achieving `billing product activated` within 7 days of opening any email in the flow. 
 
 We tag all these email flows as `onboarding` in Customer.io and categorize them as `Welcome emails` so that users can easily manage their preferences.
 
