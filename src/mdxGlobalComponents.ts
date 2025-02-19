@@ -16,6 +16,7 @@ import { PrivateLink } from './components/PrivateLink'
 import { ProductScreenshot } from './components/ProductScreenshot'
 import { ProductVideo } from './components/ProductVideo'
 import { StarRepoButton } from './components/StarRepoButton'
+import { Admonition } from './components/Docs/Admonition'
 
 export const shortcodes = {
     ArrayCTA,
@@ -36,4 +37,5 @@ export const shortcodes = {
     ProductScreenshot,
     ProductVideo,
     StarRepoButton,
+    Admonition,
 }
