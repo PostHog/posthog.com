@@ -5,7 +5,6 @@ const typeStyles = {
     info: 'bg-yellow/10 border-l-yellow',
     tip: 'bg-gray/10 border-l-gray',
     success: 'bg-green/10 border-l-green',
-    warning: 'bg-orange/10 border-l-orange',
     caution: 'bg-red/10 border-l-red',
 }
 
