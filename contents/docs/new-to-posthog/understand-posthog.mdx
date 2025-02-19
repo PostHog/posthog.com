@@ -2,6 +2,8 @@
 title: Understanding PostHog
 ---
 
+import { Admonition } from 'components/Docs/Admonition'
+
 PostHog is a lot of power, so to get the most from it, we should review how data is structured, grouped, and related.
 
 ![PostHog data flow](https://res.cloudinary.com/dmukukwp6/image/upload/posthog_data_diagram_84bf3b121b.png)
@@ -37,10 +39,22 @@ If a user upgrades to a paid tier, for example, you could set a property called 
 
 Person profiles need [distinct identifiers](/docs/getting-started/identify-users), so PostHog can accurately track behavior. You might see a few identifiers on each profile: anonymous IDs created before a user has been identified, an ID you set after they log in, and IDs that are created on the client and backend, later merged together into a single profile.
 
-> **Further reading:**
->
-> - [How data is stored in ClickHouse](/docs/how-posthog-works/clickhouse)
-> - [How person properties are added to events](/docs/how-posthog-works/ingestion-pipeline#2-person-processing)
+<Admonition icon="IconBook" title="Further reading" type="tip">
+
+- [How data is stored in ClickHouse](/docs/how-posthog-works/clickhouse)
+- [How person properties are added to events](/docs/how-posthog-works/ingestion-pipeline#2-person-processing)
+
+</Admonition>
+
+## Displaying and organizing data
+
+To make sense of the many events and person profiles flowing through your product, use:
+
+**[Insights](/docs/product-analytics/insights)** to create charts, tables and more that summarize your data.
+
+**[Dashboards](/docs/product-analytics/dashboards)** to assemble insights into a cohesive, customizable view.
+
+**[Notebooks](/docs/notebooks)** to contextualize insights and share analysis with your teammates.
 
 ## Discovering activity with cohorts and groups
 
