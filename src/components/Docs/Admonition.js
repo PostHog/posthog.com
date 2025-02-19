@@ -18,7 +18,7 @@ export const Admonition = ({ icon, title, type = 'info', children }) => {
                 {Icon && <Icon className="w-5 h-5" />}
                 <strong>{title}</strong>
             </div>
-            <div className="[&>p:last-child]:mb-0">{children}</div>
+            <div className="[&>*:last-child]:mb-0">{children}</div>
         </div>
     )
 }
