@@ -14,8 +14,6 @@ A beta doesn't need to be perfect, but it should provide value to the user and h
 
 Betas do not need to be performant for high-volume users and can have big bugs, but should be clearly marked as such in the UI. 
 
-We aim not to have a beta label on features for more than two releases. 
-
 ## Launching as a beta
 
 <CloudinaryImage
