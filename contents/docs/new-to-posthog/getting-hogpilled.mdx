@@ -5,6 +5,7 @@ nextPage: ./activation.mdx
 
 import { AnalyticsPlannerTip } from 'components/Docs/AnalyticsPlannerTip'
 import { PencilInput } from 'components/Docs/PencilInput'
+import { Admonition } from 'components/Docs/Admonition'
 
 <AnalyticsPlannerTip />
 
@@ -34,11 +35,12 @@ See how easy it is to understand these numbers? A good North Star is measurable 
 
 If you're *super* early, you could start with a metric like signups: how many people care enough to try your product?
 
-## Our North Star
+<Admonition icon="IconPencil" title="Plan your North Star">
 
-Right now, traction for our business looks like [Traction goal]
+What does traction look like for your business?
 
-We can't get there without growth in North Star metric, so that's what we'll measure to determine success.
+Which metric corresponds to traction right now? Call that your **North Star metric**.
+</Admonition>
 
 # Defining our v0 metrics tree
 
@@ -74,19 +76,13 @@ If there's a sharp drop between, say, accepting a ride and starting one, that co
 
 Funnels give us the information we need to diagnose problems and measure the impact of new solutions. We'll want to make sure we capture just enough event data to measure the critical path between starting in our product and succeeding with it.
 
-## Our metrics tree
+<Admonition icon="IconPencil" title="Planning a metrics tree">
 
-So: to define the path between a user starting in our product and then taking the actions that move our North Star up and to the right, let's list some necessary events.
+Recap your traction goal and North Star metric, then think about the events that drive that metric.
 
-<PencilInput />
+These are the events that must be captured as part of integrating PostHog.
 
-**Traction:** [Traction goal]  
-**North Star metric:** [North Star metric]  
-**3-5 events that drive this metric:**
-
-- [Event]  
-- [Event]  
-- [Event]
+</Admonition>
 
 # Integration planning
 
@@ -100,29 +96,14 @@ With these details in-hand, we can make a plan to capture the data we need. This
 
 Ideal event names are self-explanatory. Don't stuff data into event names – they should be **comparable across all users** of your product. Instead, we want to tuck additional data into properties *on* events.
 
-## Identifying users
 
-<PencilInput />
+<Admonition icon="IconPencil" title="Planning user identification">
 
-| `Unique ID` | `Where/when to call identify()` | `Properties to attach` |
-| :---- | :---- | :---- |
-|[identifier]|  |  |
+What **unique identifier** should be used to identify users? Ideally, this is an ID from the database that won't change, but an email address can work too.
 
-*Unique ID: Ideally, an ID from your database that won't change, but you can use something else, like an email address, if that's not feasible*
+Where will `identify()` be called? Typically `identify()` is invoked in the client, but some architectures, like SSR web apps, will call it on the server.
 
-*Typically `identify()` is called in the client, but some architectures, like SSR web apps, will call it on the server*
-
-## First round of events to capture
-
-<PencilInput />
-
-| `Event name` | `Server or client?` | `Properties to attach` |
-| :---- | :---- | :---- |
-| `event_name` |  |  |
-|  |  |  |
-|  |  |  |
-|  |  |  |
-|  |  |  |
+</Admonition>
 
 ## Integration references
 
