@@ -71,5 +71,3 @@ Other than this, PostHog for YC runs similarly to PostHog for Startups.
 ## Reporting
 [We have a dashboard for this](https://us.posthog.com/project/2/dashboard/188364).
 
-## Targeting
-
