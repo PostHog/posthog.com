@@ -4,7 +4,7 @@ nextPage: ./retention.mdx
 ---
 
 import { AnalyticsPlannerTip } from 'components/Docs/AnalyticsPlannerTip'
-import { PencilInput } from 'components/Docs/PencilInput'
+import { Admonition } from 'components/Docs/Admonition'
 
 <AnalyticsPlannerTip />
 
@@ -34,25 +34,13 @@ Quantity is a totally reasonable factor in activation! For **PostHog's** session
 
 Activation looks different for every product. It can be expressed as a quantity of events, or even as a composite of multiple events.
 
-# Activation worksheet
+<Admonition icon="IconPencil" title="Activation planning">
 
-So let's think about activation for our product. What event or events correspond to seriously *getting* what we do and cementing why a customer would want to keep using us?
+Let's think about activation for our product. What event or events correspond to seriously *getting* what we do and cementing why a customer would want to keep using us?
 
-## For us, activation looks like...
+Which events tracked in PostHog correspond to activation? Do we need to track more?
 
-<PencilInput />
-
-[Document activation behavior here. If you're not yet certain, a hypothesis is fine.]
-
-## Activation events
-
-<PencilInput />
-
-| `Activation event` | `Quantity (optional)` | `Timeframe (optional)` | `Already tracking?` |
-| :---- | :---- | :---- | :---- |
-|  |  |  |  |
-|  |  |  |  |
-|  |  |  |  |
+</Admonition>
 
 # Tracking activation
 
@@ -70,7 +58,7 @@ Once your funnel is created, add it to your project's [dashboard](/docs/product-
 
 ## Advanced activation tracking
 
-If you have a more complex activation sequence, where the intermediate steps could happen in any order, you may need to write a custom query. This post [on how we found our activation metric](product-engineers/activation-metrics) walks through the thinking and the queries behind this approach.
+A more complex activation sequence – where the intermediate steps could happen in any order – may need a custom query. This post [on how we found our activation metric](product-engineers/activation-metrics) walks through the thinking and queries behind this approach.
 
 # Next steps
 
