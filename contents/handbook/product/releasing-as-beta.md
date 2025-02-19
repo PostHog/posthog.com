@@ -17,7 +17,7 @@ Betas do not need to be performant for high-volume users and can have big bugs, 
 ## Launching as a beta
 
 <CloudinaryImage
-  src="https://res.cloudinary.com/dmukukwp6/image/upload/goodbeta_daa2ddca2a.pngg"
+  src="https://res.cloudinary.com/dmukukwp6/image/upload/goodbeta_daa2ddca2a.png"
   alt="An example of a good beta"
   className="dark:hidden"
 />
