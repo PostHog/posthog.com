@@ -1,5 +1,5 @@
 ---
-title: Timestamp Parser
+title: Parse event timestamps
 github: 'https://github.com/PostHog/timestamp-parser-plugin'
 installUrl: 'https://app.posthog.com/project/apps?name=Timestamp%20Parser'
 thumbnail: >-
@@ -27,11 +27,13 @@ This transformation parses the timestamp of each event that comes in to PostHog 
 
 ## Installation
 
-1. In PostHog, click the "[Data pipeline](https://us.posthog.com/apps)" tab in the left sidebar.
-2. Search for 'Timestamp Parser'.
-3. Click on the toggle to enable the transformation.
+1. In PostHog, click the "[Data pipeline](https://us.posthog.com/pipeline)" tab in the left sidebar.
+2. Click the 'Transformations tab'.
+3. Click the '+ New Transformation' button.
+4. Look for the 'Timestamp Parser' and click the '+ Create' button.
+5. Click on the toggle to enable the transformation and then click 'Create'.
 
-Any new events that come in to PostHog will now be automatically parsed!
+Any new events that come into PostHog will now be automatically parsed!
 
 ## Using the Timestamp Parser
 

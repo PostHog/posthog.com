@@ -16,6 +16,8 @@ Here are examples of the types of events you can send:
 
 Every event request must contain an `api_key`, `distinct_id`, and `event` field with the name. Both the `properties` and `timestamp` fields are optional. 
 
+> **Note:** By default, events captured via the API are [identified events](/docs/data/anonymous-vs-identified-events). See the section on [how to capture anonymous events](#anonymous-event-capture) for more.
+
 <MultiLanguage>
 
 ```bash
@@ -46,6 +48,107 @@ payload = {
 }
 response = requests.post(url, headers=headers, data=json.dumps(payload))
 print(response)
+```
+
+```node
+import fetch from "node-fetch";
+
+async function sendPosthogEvent() {
+  const url = "<ph_client_api_host>/capture/";
+  const headers = {
+      "Content-Type": "application/json",
+  };
+  const payload = {
+    api_key: "<ph_project_api_key>",
+    event: "event name",
+    distinct_id: "user distinct id",
+    properties: {
+      account_type: "pro",
+    },
+    timestamp: "[optional timestamp in ISO 8601 format]",
+  };
+
+  const response = await fetch(url, {
+    method: "POST",
+    headers: headers,
+    body: JSON.stringify(payload),
+  });
+
+  const data = await response.json();
+  console.log(data);
+}
+
+sendPosthogEvent()
+```
+
+</MultiLanguage>
+
+### Anonymous event capture
+
+To capture [anonymous events](/docs/data/anonymous-vs-identified-events), add the `$process_person_profile` property to the event and set it to `false`.
+
+<MultiLanguage>
+
+```bash
+curl -v -L --header "Content-Type: application/json" -d '{
+  "api_key": "<ph_project_api_key>",
+  "event": "event name",
+  "distinct_id": "user distinct id",
+  "properties": {
+    "$process_person_profile": false
+  },
+  "timestamp": "2020-08-16T09:03:11.913767"
+}' <ph_client_api_host>/capture/
+```
+
+```python
+import requests
+import json
+
+url = "<ph_client_api_host>/capture/"
+headers = {
+    "Content-Type": "application/json"
+}
+payload = {
+    "api_key": "<ph_project_api_key>",
+    "event": "event name",
+    "distinct_id": "user distinct id",
+    "properties": {
+      "$process_person_profile": False
+    }
+}
+response = requests.post(url, headers=headers, data=json.dumps(payload))
+print(response)
+```
+
+```node
+import fetch from "node-fetch";
+
+async function sendAnonymousPosthogEvent() {
+  const url = "<ph_client_api_host>/capture/";
+  const headers = {
+      "Content-Type": "application/json",
+  };
+  const payload = {
+    api_key: "<ph_project_api_key>",
+    event: "event name",
+    distinct_id: "user distinct id",
+    properties: {
+      $process_person_profile: false
+    }
+  };
+
+  const response = await fetch(url, {
+    method: "POST",
+    headers: headers,
+    body: JSON.stringify(payload),
+  });
+
+  const data = await response.json();
+  console.log(data);
+}
+
+sendAnonymousPosthogEvent()
 ```
 
 </MultiLanguage>

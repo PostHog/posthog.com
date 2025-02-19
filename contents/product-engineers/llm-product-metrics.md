@@ -26,7 +26,8 @@ This means that in addition to [regular product metrics](/product-engineers/prod
 
 The metrics are grouped into three categories: [cost](#cost-related-metrics), [usage](#usage-metrics), and [debugging](#debug-metrics).
 
-> **💡 PostHog tip**: Use our [Langfuse](/docs/product-analytics/llms#langfuse) and [Helicone](/docs/product-analytics/llms#helicone) integrations to bring your LLM data into PostHog. Alternatively, we have tutorials on how to capture LLM events from [OpenAI](/tutorials/chatgpt-analytics), [Anthropic](/tutorials/anthropic-analytics), and [Cohere](/tutorials/cohere-analytics).
+> **💡 PostHog tip**: We recently launched our own built-in [LLM observability feature](/docs/ai-engineering/observability). It can automatically capture many of the metrics detailed in this post.
+> Alternatively, we have tutorials on how to capture LLM events from [OpenAI](/tutorials/chatgpt-analytics), [Anthropic](/tutorials/anthropic-analytics), and [Cohere](/tutorials/cohere-analytics).
 
 ## Cost-related metrics
 
@@ -105,9 +106,9 @@ The metrics are grouped into three categories: [cost](#cost-related-metrics), [u
 
 ### Generation count
 
-**What is it** The total number of outputs your LLM generates per day, week, or month.
+**What is it?** The total number of outputs your LLM generates per day, week, or month.
 
-**Why it's useful** Helps assess the workload and demand placed on your LLMs, which directly impacts costs and performance.
+**Why it's useful:** Helps assess the workload and demand placed on your LLMs, which directly impacts costs and performance.
 
 **Questions to ask**
 - How has the generation count changed over time, and does this correlate with user growth or engagement?
@@ -197,3 +198,5 @@ The metrics are grouped into three categories: [cost](#cost-related-metrics), [u
 - [PostHog LLM docs](/docs/product-analytics/llms) 
 - [How to analyze surveys with ChatGPT](/tutorials/analyze-surveys-with-chatgpt)
 - [The most useful B2B SaaS metrics](/blog/b2b-saas-product-metrics)
+
+<NewsletterForm />

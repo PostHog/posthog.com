@@ -1,3 +1,4 @@
+import CloudinaryImage from 'components/CloudinaryImage'
 import {
     IconBadge,
     IconBrackets,
@@ -95,7 +96,7 @@ export const Funnels = () => {
         {
             name: 'Filtering',
             description:
-                'Set filters for individual steps – or the entire funnel – by user property, group or cohort, or event property',
+                'Set filters for individual steps – or the entire funnel – by person property, group or cohort, or event property',
         },
         {
             name: 'Graph types',
@@ -119,10 +120,18 @@ export const Funnels = () => {
             <h2 className="text-3xl md:text-4xl text-center">Find drop-off across a series of actions</h2>
             <div className="grid md:grid-cols-12 gap-4">
                 <div className="md:col-span-5">
-                    <StaticImage src="./images/funnel-basic.png" className="w-full shadow-xl" height={335} />
+                    <CloudinaryImage
+                        src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Products/Slider/images/funnel-basic.png"
+                        className="w-full shadow-xl"
+                        height={335}
+                    />
                 </div>
                 <div className="md:col-span-7">
-                    <StaticImage src="./images/funnel-grouped.png" className="w-full shadow-xl" height={335} />
+                    <CloudinaryImage
+                        src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Products/Slider/images/funnel-grouped.png"
+                        className="w-full shadow-xl"
+                        height={335}
+                    />
                 </div>
             </div>
 
@@ -165,47 +174,47 @@ export const Trends = () => {
             </div>
             <div className="product-slider overflow-x-auto flex gap-8 pb-4 -mx-8 px-8 product-scrollbar">
                 <div className="flex-shrink-0 w-full md:w-3/5">
-                    <StaticImage
+                    <CloudinaryImage
                         objectPosition="left"
                         height={420}
                         objectFit="cover"
-                        src="../../Product/ProductAnalytics/images/screenshot-trend-bar.png"
+                        src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Product/ProductAnalytics/images/screenshot-trend-bar.png"
                         className="shadow-xl h-full"
                     />
                 </div>
                 <div className="flex-shrink-0 w-full md:w-3/5">
-                    <StaticImage
+                    <CloudinaryImage
                         objectPosition="left"
                         height={420}
                         objectFit="cover"
-                        src="../../Product/ProductAnalytics/images/screenshot-trend-multiple-sparklines.png"
+                        src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Product/ProductAnalytics/images/screenshot-trend-multiple-sparklines.png"
                         className="shadow-xl h-full"
                     />
                 </div>
                 <div className="flex-shrink-0 w-full md:w-3/5">
-                    <StaticImage
+                    <CloudinaryImage
                         objectPosition="left"
                         height={420}
                         objectFit="cover"
-                        src="../../Product/ProductAnalytics/images/screenshot-trend-area.png"
+                        src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Product/ProductAnalytics/images/screenshot-trend-area.png"
                         className="shadow-xl h-full"
                     />
                 </div>
                 <div className="flex-shrink-0 w-full md:w-3/5">
-                    <StaticImage
+                    <CloudinaryImage
                         objectPosition="left"
                         height={420}
                         objectFit="cover"
-                        src="../../Product/ProductAnalytics/images/screenshot-trend-sparkline.png"
+                        src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Product/ProductAnalytics/images/screenshot-trend-sparkline.png"
                         className="shadow-xl h-full"
                     />
                 </div>
                 <div className="flex-shrink-0 w-full md:w-3/5">
-                    <StaticImage
+                    <CloudinaryImage
                         objectPosition="left"
                         height={420}
                         objectFit="cover"
-                        src="../../Product/ProductAnalytics/images/screenshot-trend-map.png"
+                        src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Product/ProductAnalytics/images/screenshot-trend-map.png"
                         className="shadow-xl h-full"
                     />
                 </div>
@@ -248,8 +257,8 @@ export const UserPaths = () => {
                 </p>
             </div>
 
-            <StaticImage
-                src="../../Product/ProductAnalytics/images/screenshot-paths.png"
+            <CloudinaryImage
+                src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Product/ProductAnalytics/images/screenshot-paths.png"
                 className="w-full shadow-xl"
             />
 
@@ -292,8 +301,8 @@ export const CorrelationAnalysis = () => {
             </div>
 
             <div className="md:!-mb-20">
-                <StaticImage
-                    src="../../Product/ProductAnalytics/images/screenshot-correlation-analysis.png"
+                <CloudinaryImage
+                    src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Product/ProductAnalytics/images/screenshot-correlation-analysis.png"
                     className="w-full"
                 />
             </div>
@@ -318,8 +327,8 @@ export const Retention = () => {
                 </p>
             </div>
 
-            <StaticImage
-                src="../../Product/ProductAnalytics/images/screenshot-retention.png"
+            <CloudinaryImage
+                src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Product/ProductAnalytics/images/screenshot-retention.png"
                 className="w-full shadow-xl mb-4"
             />
 
@@ -343,8 +352,8 @@ export const Stickiness = () => {
                 </p>
             </div>
 
-            <StaticImage
-                src="../../Product/ProductAnalytics/images/screenshot-stickiness.png"
+            <CloudinaryImage
+                src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Product/ProductAnalytics/images/screenshot-stickiness.png"
                 className="w-full shadow-xl mb-4"
             />
 
@@ -369,8 +378,8 @@ export const Lifecycle = () => {
                 </p>
             </div>
 
-            <StaticImage
-                src="../../Product/ProductAnalytics/images/screenshot-lifecycle.png"
+            <CloudinaryImage
+                src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Product/ProductAnalytics/images/screenshot-lifecycle.png"
                 className="w-full shadow-xl mb-4"
             />
 
@@ -388,7 +397,7 @@ export const Dashboards = () => {
         {
             name: 'Dashboard filtering',
             description:
-                'Filter saved insights on a dashboard by anything - event properties, user properties, cohorts - even if a feature flag was active during a user’s session.',
+                'Filter saved insights on a dashboard by anything - event properties, person properties, cohorts - even if a feature flag was active during a user’s session.',
         },
         {
             name: 'Embeddable dashboards with auto-refresh',
@@ -416,8 +425,8 @@ export const Dashboards = () => {
                 <p className="opacity-75 mb-2">(They're exactly what they sound like.)</p>
             </div>
 
-            <StaticImage
-                src="../../Product/ProductAnalytics/images/screenshot-dashboards.png"
+            <CloudinaryImage
+                src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Product/ProductAnalytics/images/screenshot-dashboards.png"
                 className="w-full shadow-xl mb-4"
             />
 
@@ -460,8 +469,8 @@ export const HogQL = () => {
             </div>
 
             <div className="md:overflow-hidden relative md:after:absolute after:bg-gradient-to-b after:from-accent/0 after:to-accent/100 dark:after:from-accent-dark/0 dark:after:to-accent-dark/100 after:h-40 after:bottom-0 after:left-0 after:w-full after:content-[''] after:z-10">
-                <StaticImage
-                    src="../../Product/ProductAnalytics/images/screenshot-hogql.png"
+                <CloudinaryImage
+                    src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Product/ProductAnalytics/images/screenshot-hogql.png"
                     className="w-full shadow-xl"
                 />
             </div>

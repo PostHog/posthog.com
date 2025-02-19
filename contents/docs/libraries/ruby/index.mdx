@@ -9,10 +9,11 @@ icon: >-
 features:
   eventCapture: true
   userIdentification: true
-  autoCapture: false
-  sessionRecording: false
   featureFlags: true
   groupAnalytics: true
+  surveys: false
+  llmObservability: false
+  errorTracking: false
 ---
 
 The `posthog-ruby` library provides tracking functionality on the server-side for applications built in Ruby.
@@ -35,26 +36,47 @@ import RubySendEvents from '../../integrate/send-events/_snippets/send-events-ru
 
 <RubySendEvents />
 
-## Setting user properties
+## Person profiles and properties
 
-To set [user properties](/docs/data/user-properties), include the properties you'd like to set when capturing an event: 
+The Ruby SDK captures identified events by default. These create [person profiles](/docs/data/persons). To set [person properties](/docs/data/user-properties) in these profiles, include them when capturing an event:
 
 ```ruby
-posthog.capture({
+posthog.capture(
     distinct_id: 'distinct_id',
     event: 'event_name',
     properties: {
         '$set': { name: 'Max Hedgehog' },
         '$set_once': { initial_url: '/blog' }
     }
-})
+)
 ```
 
-For more details on the difference between `$set` and `$set_once`, see our [user properties docs](/docs/data/user-properties#what-is-the-difference-between-set-and-set_once).
+For more details on the difference between `$set` and `$set_once`, see our [person properties docs](/docs/data/user-properties#what-is-the-difference-between-set-and-set_once).
+
+To capture [anonymous events](/docs/data/anonymous-vs-identified-events) without person profiles, set the event's `$process_person_profile` property to `false`:
+
+```ruby
+posthog.capture(
+    distinct_id: 'distinct_id',
+    event: 'event_name',
+    properties: {
+        '$process_person_profile': false
+    }
+)
+```
 
 ## Alias
 
-Sometimes, you may want to assign multiple distinct IDs to a single user. This is helpful in scenarios where your primary distinct ID may be inaccessible. For example, if a distinct ID which is typically used on the frontend is not available in certain parts of your backend code. In this case, you can use `alias` to assign another distinct ID to the same user.
+Sometimes, you want to assign multiple distinct IDs to a single user. This is helpful when your primary distinct ID is inaccessible. For example, if a distinct ID used on the frontend is not available in your backend. 
+
+In this case, you can use `alias` to assign another distinct ID to the same user.
+
+```ruby
+posthog.alias(
+  distinct_id: "distinct_id",
+  alias: "alias_id"
+)
+```
 
 We strongly recommend reading our docs on [alias](/docs/data/identify#alias-assigning-multiple-distinct-ids-to-the-same-user) to best understand how to correctly use this method.
 
@@ -155,7 +177,9 @@ posthog.group_identify(
 )
 ```
 
-The `name` is a special property which is used in the PostHog UI for the name of the Group. If you don't specify a `name` property, the group ID will be used instead.
+The `name` is a special property which is used in the PostHog UI for the name of the group. If you don't specify a `name` property, the group ID will be used instead.
+
+If the optional `distinct_id` is not provided in the group identify call, it defaults to `${groupType}_${groupKey}` (e.g., `$company_company_id_in_your_db` in the example above). This default behavior will result in each group appearing as a separate person in PostHog. To avoid this, it's often more practical to use a consistent `distinct_id`, such as `group_identifier`.
 
 ## Thank you
 

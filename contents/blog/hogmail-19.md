@@ -71,4 +71,4 @@ John Cutler explores this idea further in [Product GTM Fitness](https://cutlefis
  
 - [How employees can think like shareholders](https://www.mostlymetrics.com/p/questions-to-ask-before-taking-a) – Or, to use the post's original title, "the REAL questions you should ask before taking a job", though the questions here are still relevant outside of that context. CEO James has written about this in the past, too.
 
-> We send HogMail every two weeks. [Signup here](https://newsletter.posthog.com/subscribe) so you don't miss it.
+<NewsletterForm />

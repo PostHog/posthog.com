@@ -1,4 +1,5 @@
-import React from 'react'
+import CloudinaryImage from 'components/CloudinaryImage'
+import React, { useState } from 'react'
 import Link from 'components/Link'
 import { StaticImage } from 'gatsby-plugin-image'
 import {
@@ -44,6 +45,8 @@ import MobileSlides from 'components/Products/MobileSlides'
 import { SEO } from 'components/seo'
 import { useLayoutData } from 'components/Layout/hooks'
 import Plans from 'components/Pricing/Plans'
+import SideModal from '../../Modal/SideModal'
+import Profile from '../../Team/Profile'
 
 const product = {
     slug: 'product-analytics',
@@ -66,7 +69,7 @@ const subfeatures = [
     {
         icon: <IconPieChart />,
         title: 'Data visualization',
-        description: 'Filter data by user property, group data, and use formulas in queries',
+        description: 'Filter data by person property, group data, and use formulas in queries',
     },
     {
         icon: <SQL />,
@@ -85,20 +88,12 @@ const subfeatures = [
     },
     {
         icon: <IconAI />,
-        title: 'AI engineering',
+        title: 'LLM observability',
         description: 'Integrate with existing monitoring tools and track latency, cost, and model performance',
     },
 ]
 
 const questions = [
-    {
-        question: 'Where are people getting stuck in my flow?',
-        url: '/tutorials/guide-to-funnels',
-    },
-    {
-        question: 'Where are users dropping off?',
-        url: '/tutorials/guide-to-funnels#step-3-explore-user-paths-between-steps-in-the-funnel',
-    },
     {
         question: 'How do I calculate new vs returning users?',
         url: '/tutorials/track-new-returning-users',
@@ -147,10 +142,6 @@ const questions = [
         question: 'What long-term patterns are we seeing?',
     },
     {
-        question: 'What are possible causes of success or failure?',
-        url: '/tutorials/funnels#step-2-evaluate-correlated-events',
-    },
-    {
         question: 'Which cohorts can we find from usage patterns?',
     },
     {
@@ -191,14 +182,6 @@ const questions = [
         question: 'What properties correlate to success in my product?',
     },
     {
-        question: 'What events mean users are less likely to complete a funnel?',
-        url: '/tutorials/guide-to-funnels#step-2-evaluate-correlated-events',
-    },
-    {
-        question: 'What properties mean users are less likely to complete a funnel?',
-        url: '/tutorials/guide-to-funnels#step-2-evaluate-correlated-events',
-    },
-    {
         question: 'How many users return to use my product each day?',
         url: '/tutorials/track-new-returning-users#calculating-returning-users',
     },
@@ -230,7 +213,7 @@ const faqs = [
     {
         question: 'Is there a free trial on paid plans?',
         children:
-            'We have a generous free tier on every paid plan so you can try out the features before paying any money. (You\'ll need to enter your credit card info, but you can set a billing limit). If you have additional needs, such as enterprise features, please <a href="/contact-sales">get in touch</a>.',
+            'We have a generous free tier on every paid plan so you can try out the features before paying any money. (You\'ll need to enter your credit card info, but you can set a billing limit). If you have additional needs, such as enterprise features, please <a href="/talk-to-a-human">get in touch</a>.',
     },
     {
         question: 'What currency are your prices in?',
@@ -239,7 +222,7 @@ const faqs = [
     {
         question: 'Do you offer a discount for non-profits?',
         children:
-            'Yes in most cases - 50% off any plan. Create your account, then email <a href="mailto:sales@posthog.com?subject=Non-profit%20discount">sales@posthog.com</a> from the same email address with some basic details on your organization. We will then apply a discount.',
+            'Yes in most cases - 25% off any plan. Create your account, then email <a href="mailto:sales@posthog.com?subject=Non-profit%20discount">sales@posthog.com</a> from the same email address with some basic details on your organization. We will then apply a discount.',
     },
     {
         question: 'Are there any minimums or annual commitments?',
@@ -381,7 +364,7 @@ const comparison = [
         },
     },
     {
-        feature: 'Filter by user property',
+        feature: 'Filter by person property',
         companies: {
             Amplitude: true,
             Mixpanel: true,
@@ -391,7 +374,7 @@ const comparison = [
         },
     },
     {
-        feature: 'Breakdown by user property',
+        feature: 'Breakdown by person property',
         companies: {
             Amplitude: true,
             Mixpanel: true,
@@ -521,7 +504,7 @@ const comparison = [
         },
     },
     {
-        feature: 'Filter by events or user property',
+        feature: 'Filter by events or person property',
         companies: {
             Amplitude: true,
             Mixpanel: true,
@@ -727,22 +710,25 @@ const PairsWithArray = [
     {
         icon: <IconRewindPlay />,
         product: 'Session replay',
+        color: 'yellow',
         description:
             'Jump into a playlist of session recordings directly from any point in a graph, or segment of a funnel',
         url: '/session-replay',
     },
     {
         icon: <IconToggle />,
+        color: 'seagreen',
         product: 'Feature flags',
         description: 'See which feature flags were enabled for a user during a session',
         url: '/feature-flags',
     },
     {
         icon: <IconFlask />,
-        product: 'A/B testing',
+        color: 'purple',
+        product: 'Experiments',
         description:
             'Filter data down to users within an active experiment, whether part of a control group or a test variant',
-        url: '/ab-testing',
+        url: '/experiments',
     },
 ]
 
@@ -777,27 +763,31 @@ export const ProductProductAnalytics = () => {
         }
     `)
     const { fullWidthContent } = useLayoutData()
+    const [activeProfile, setActiveProfile] = useState(false)
     return (
         <>
             <SEO
                 title="Product Analytics - PostHog"
-                description="PostHog is the only product analytics platform built to natively work with Session Replay, Feature Flags, A/B Testing, and Surveys."
+                description="PostHog is the only product analytics platform built to natively work with Session Replay, Feature Flags, Experiments, and Surveys."
                 image={`/images/og/product-analytics.jpg`}
             />
+            <SideModal open={!!activeProfile} setOpen={setActiveProfile}>
+                {activeProfile && <Profile profile={{ ...activeProfile }} />}
+            </SideModal>
             <div className={`${fullWidthContent ? 'max-w-full px-8' : 'max-w-7xl mx-auto'} px-5 py-10 md:pt-20 pb-0`}>
                 <Hero
                     color="blue"
                     icon={<IconGraph />}
                     product={product.capitalized}
                     title="Product analytics with autocapture"
-                    description="PostHog is the only product analytics platform built to natively work with <a href='/session-replay'>session replay</a>, <a href='/feature-flags'>feature flags</a>, <a href='/ab-testing'>A/B testing</a>, and <a href='/surveys'>surveys</a>."
+                    description="PostHog is the only product analytics platform built to natively work with <a href='/session-replay'>session replay</a>, <a href='/feature-flags'>feature flags</a>, <a href='/experiments'>experiments</a>, and <a href='/surveys'>surveys</a>."
                 />
 
                 <div className="text-center">
-                    <StaticImage
-                        src="./images/screenshot-product-analytics.png"
+                    <CloudinaryImage
+                        src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Product/ProductAnalytics/images/screenshot-product-analytics.png"
                         alt="Screenshot of PostHog Product Analytics"
-                        className="w-full max-w-[1360px]"
+                        className="w-full max-w-[1360px]]"
                         placeholder="none"
                     />
                 </div>
@@ -867,7 +857,12 @@ export const ProductProductAnalytics = () => {
                         </p>
                     </div>
                     <div className="md:w-96">
-                        <StaticImage placeholder="none" quality={100} src="../hogs/product-analytics-hog.png" alt="" />
+                        <CloudinaryImage
+                            placeholder="none"
+                            quality={100}
+                            src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Product/hogs/product-analytics-hog.png"
+                            alt=""
+                        />
                     </div>
                 </div>
 
@@ -895,10 +890,10 @@ export const ProductProductAnalytics = () => {
                         <h3 className="text-center mb-8">So, what's best for you?</h3>
                         <div className="mb-8 mx-5 md:mx-0 grid md:grid-cols-2 gap-4">
                             <VsCompetitor
-                                title="Reasons a competitor might be better for you (for now...)"
+                                title="Reasons a competitor may be best for you (for now...)"
                                 image={
-                                    <StaticImage
-                                        src="../../../images/products/competitors-pa.png"
+                                    <CloudinaryImage
+                                        src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/images/products/competitors-pa.png"
                                         className="max-w-[171px]"
                                     />
                                 }
@@ -934,7 +929,7 @@ export const ProductProductAnalytics = () => {
                         <p className="text-center text-sm font-medium">
                             Have questions about PostHog? <br className="md:hidden" />
                             <Link to={`/questions/${product.slug}`}>Ask the community</Link> or{' '}
-                            <Link to="/contact-sales">book a demo</Link>.
+                            <Link to="/talk-to-a-human">book a demo</Link>.
                         </p>
                     </section>
                 </div>
@@ -952,8 +947,8 @@ export const ProductProductAnalytics = () => {
                             url="/tutorials/churn-rate"
                         />
                         <TutorialCard
-                            title="How to filter and breakdown arrays with HogQL"
-                            description="Arrays (AKA lists) are a useful way to store multiple values related to each other under the same key. PostHog's HogQL expressions unlock the ability to make full use of them."
+                            title="How to filter and breakdown arrays with SQL"
+                            description="Arrays (AKA lists) are a useful way to store multiple values related to each other under the same key. PostHog's SQL expressions unlock the ability to make full use of them."
                             url="/tutorials/array-filter-breakdown"
                         />
                         <TutorialCard
@@ -1007,7 +1002,7 @@ export const ProductProductAnalytics = () => {
                         PostHog works in small teams. The <Link to={teamSlug}>{team}</Link> team is responsible for
                         building {product.lowercase}.
                     </p>
-                    <TeamMembers teamName={team} />
+                    <TeamMembers teamName={team} setActiveProfile={setActiveProfile} />
                 </section>
 
                 <section id="roadmap" className="mb-20 px-5">

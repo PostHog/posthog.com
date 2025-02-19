@@ -1,6 +1,6 @@
 ---
-date: 2023-05-02
-title: 8 annoying A/B testing mistakes every engineer should know
+date: 2024-08-06
+title: A/B testing mistakes I learned the hard way
 author:
   - lior-neu-ner
 featuredImage: >-
@@ -8,11 +8,19 @@ featuredImage: >-
 featuredImageType: full
 tags:
   - Product engineers
-  - AB testing
+  - Experiments
 crosspost:
   - Blog
+  - Newsletter
 ---
 
+Running experiments is equal parts powerful and terrifying.
+
+Powerful because you can validate changes that will transform your product for the better; terrifying because there are so many ways to mess them up.
+
+I’ve run hundreds of A/B tests, both in my previous life as a [growth engineer](/newsletter/think-like-a-growth-engineer) at Meta, and on my personal side project.
+
+These are some classic mistakes I’ve learned the hard way and how to avoid them.
 
 ## 1. Including unaffected users in your experiment
 
@@ -87,8 +95,6 @@ Depending on your app and experiment, here's a list of aggregate metrics you wan
 * Device type, e.g., desktop or mobile, iOS or Android
 * Acquisition channel, e.g., organic search, paid ads, or referrals, 
 * User role or job function, e.g., manager, executive, or individual contributor.
-
-<NewsletterForm />
 
 ## 3. Conducting an experiment without a predetermined duration
 

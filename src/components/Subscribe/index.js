@@ -1,3 +1,4 @@
+import CloudinaryImage from 'components/CloudinaryImage'
 import { Check } from 'components/Icons/Icons'
 import { StaticImage } from 'gatsby-plugin-image'
 import addToMailchimp from 'gatsby-plugin-mailchimp'
@@ -73,7 +74,7 @@ export default function Subscribe() {
         <div className="max-w-[800px] sm:mt-0 mt-12 w-full flex sm:space-x-9 sm:space-y-0 space-y-4 relative bg-white py-9 px-7 border border-gray-accent-light rounded-md sm:flex-row flex-col">
             <div className="w-[233px] sm:mt-0 -mt-24">
                 <div className="sm:absolute bottom-0">
-                    <StaticImage width={233} src="./hog-the-builder.png" />
+                    <CloudinaryImage width={233} src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Subscribe/hog-the-builder.png" />
                 </div>
             </div>
             <div className="flex-grow">

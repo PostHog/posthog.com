@@ -73,3 +73,5 @@ As we get bigger, and we ship more products, each one will get more traction wit
 ## What's the catch?
 
 We have a hideously complex internal billing and reporting system – it needs to be hyper-flexible to cope with a wide range of differently-structured pricing mechanisms, hence the decision to build it. We keep adding more functionality into it. Send help! We'd love any recommendations you may have. We know usage based pricing is becoming much more normal, thankfully.
+
+<NewsletterForm />

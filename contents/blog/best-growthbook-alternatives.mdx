@@ -40,7 +40,7 @@ As of April 2024, 4,661 of the top million websites use PostHog according to [Bu
 
 - 📺 **Session replays:** View exactly how users are using your site. Includes event timelines, console logs, network activity, and 90-day data retention.
 
-- 💬 **Surveys:** Target surveys by event or user properties. Templates for [net promoter score (NPS)](/templates/nps-survey), [product-market fit (PMF)](/templates/pmf-survey) surveys, and more.
+- 💬 **Surveys:** Target surveys by event or person properties. Templates for [net promoter score (NPS)](/templates/nps-survey), [product-market fit (PMF)](/templates/pmf-survey) surveys, and more.
 
 ### How does PostHog compare to GrowthBook?
 
@@ -75,8 +75,6 @@ According to [reviews on G2](https://www.g2.com/products/posthog/reviews), compa
 > #### Bottom line
 > PostHog is an ideal alternative to GrowthBook. It includes both feature flags and an experimentation suite as well as being open-sourced and free to use.
 
-<NewsletterForm />
-
 ## 2. LaunchDarkly
 
 - **Founded:** 2014
@@ -88,7 +86,7 @@ According to [reviews on G2](https://www.g2.com/products/posthog/reviews), compa
 
 ### What is LaunchDarkly?
 
-[LaunchDarkly](/blog/posthog-vs-launchdarkly) is a feature flag and A/B testing platform helping developers de-risk releases, target experiences, and optimize their product. For enterprises, it includes features like automation and governance to ensure they are following [engineering best practices](/product-engineers/feature-flag-best-practices).
+[LaunchDarkly](/blog/posthog-vs-launchdarkly) is a feature flag and A/B testing platform helping developers de-risk releases, target experiences, and optimize their product. For enterprises, it includes features like automation and governance to ensure they are following [engineering best practices](/docs/feature-flags/best-practices).
 
 According to [BuiltWith](https://trends.builtwith.com/analytics/LaunchDarkly), as of April 2024, 1,072 of the top million websites deploy LaunchDarkly.
 
@@ -144,7 +142,7 @@ According to [G2 reviews](https://www.g2.com/products/launchdarkly/reviews#revie
 
 ### What is Flagsmith?
 
-Flagsmith is an open source feature flag and [remote configuration](/product-engineers/feature-flags-vs-configuration) service. It enables developers to release and manage features across web, mobile, and server apps. Along with a cloud hosted option, you can host Flagsmith in your own private cloud or on-premise.
+[Flagsmith](/blog/best-flagsmith-alternatives) is an open source feature flag and [remote configuration](/product-engineers/feature-flags-vs-configuration) service. It enables developers to release and manage features across web, mobile, and server apps. Along with a cloud hosted option, you can host Flagsmith in your own private cloud or on-premise.
 
 As of April 2024, Flagsmith has 4.3k stars on GitHub, just under GrowthBook's 5.5k.
 
@@ -270,7 +268,7 @@ As of April 2024, Unleash has 10.3k stars on its GitHub repo, nearly double Grow
 
 - 🙋 **Self-hostable:** Choose either fully managed or self-hosted to fit with your needs.
 
-- 🌴 **Environments: Configure flags, targeting, and approvals differently for dev, staging, prod.
+- 🌴 **Environments:** Configure flags, targeting, and approvals differently for dev, staging, prod.
 
 ### How does Unleash compare to GrowthBook?
 
@@ -336,7 +334,7 @@ DevCycle has similar upsides and downsides to GrowthBook, but is not open source
   <ComparisonRow column1={true} column2={true} feature="Feature flags" description="Deploy features safely with targeting and percentage rollouts" />
   <ComparisonRow column1={true} column2={false} feature="Local evaluation" description="Use local, cached flag values to increase speed" />
   <ComparisonRow column1={true} column2={true} feature="Automations" description="Trigger flag states based on schedules, triggers" />
-  <ComparisonRow column1={true} column2={true} feature="A/B testing" description="Run multivariate tests and see the impact of changes with custom goals and reports" />
+  <ComparisonRow column1={false} column2={true} feature="A/B testing" description="Run multivariate tests and see the impact of changes with custom goals and reports" />
   <ComparisonRow column1={false} column2={false} feature="Funnel tests" description="Use conversion funnels as goals for your A/B test" />
   <ComparisonRow column1={false} column2={false} feature="Advanced analytics" description="Custom SQL, paths, and retention analysis with flag data and beyond." />
   <ComparisonRow column1={"Edit only"} column2={"Edit only"} feature="API" description="Evaluate and edit flags and A/B tests with an API" />
@@ -423,4 +421,6 @@ We're biased, obviously, but we think PostHog is the perfect GrowthBook replacem
 - You want all the tools you need to build a better product like product analytics, session replay, and surveys.
 - You want to try before you buy. We're self-serve with a [generous free tier](/pricing).
 
-Check out [our product pages](/ab-testing) and [read our docs](/docs) to learn more.
+Check out [our product pages](/experiments) and [read our docs](/docs) to learn more.
+
+<NewsletterForm />

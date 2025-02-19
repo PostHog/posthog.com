@@ -21,7 +21,7 @@ const Image = ({ name, previewUrl, provider_metadata: { public_id, resource_type
                 <img src={resource_type === 'video' ? previewUrl : mediaURL} />
             </div>
             <div className="flex-grow line-clamp-1">
-                <p className="m-0 font-bold">{name}</p>
+                <p className="m-0 font-bold line-clamp-1">{name}</p>
                 <div className="flex space-x-2">
                     <p className="text-sm line-clamp-1 m-0" title={mediaURL}>
                         {mediaURL}

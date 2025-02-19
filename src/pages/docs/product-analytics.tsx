@@ -1,6 +1,5 @@
+import CloudinaryImage from 'components/CloudinaryImage'
 import React from 'react'
-import { StaticImage } from 'gatsby-plugin-image'
-
 import Layout from 'components/Layout'
 import { SEO } from 'components/seo'
 import PostLayout from 'components/PostLayout'
@@ -10,6 +9,12 @@ import List from 'components/List'
 import { docsMenu } from '../../navs'
 import { useLayoutData } from 'components/Layout/hooks'
 import QuickLinks from 'components/QuickLinks'
+import { useChat } from 'hooks/useChat'
+import { useStaticQuery } from 'gatsby'
+import { graphql } from 'gatsby'
+import { IconLightBulb, IconSidebarOpen } from '@posthog/icons'
+import AskMax from 'components/AskMax'
+import Intro from 'components/Docs/Intro'
 
 type ProductAnalyticsProps = {
     data: {
@@ -21,20 +26,39 @@ type ProductAnalyticsProps = {
     }
 }
 
-export const Intro = () => (
-    <header className="pb-8">
-        <h1 className="text-4xl mt-0 mb-2">Product analytics</h1>
-        <h3 className="text-lg font-semibold text-primary/60 dark:text-primary-dark/75 leading-tight">
-            Learn how to use product analytics to understand your users.
-        </h3>
-    </header>
-)
-
 export const Content = ({ quickLinks = false }) => {
     const { compact } = useLayoutData()
+    const {
+        allDocsPages: { totalDocsCount },
+    } = useStaticQuery(graphql`
+        query {
+            allDocsPages: allMdx(filter: { slug: { regex: "^/docs/" } }) {
+                totalDocsCount: totalCount
+            }
+        }
+    `)
+
     return (
         <>
-            <Intro />
+            <Intro
+                subheader="Getting started"
+                title="Product analytics"
+                description="Learn how to use product analytics to understand your users."
+                buttonText="Installation guide"
+                buttonLink="/docs/product-analytics/installation"
+                imageColumnClasses="max-w-96"
+                imageUrl="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Home/Slider/images/product-analytics-hog.png"
+            />
+
+            <AskMax
+                quickQuestions={[
+                    "Why aren't my events showing up?",
+                    'How do I send custom properties with an event?',
+                    "What's the difference between events and actions?",
+                    'What are person profiles and how are they billed?',
+                ]}
+            />
+
             {(quickLinks || compact) && (
                 <QuickLinks
                     items={docsMenu.children.find(({ name }) => name.toLowerCase() === 'product analytics')?.children}
@@ -47,98 +71,38 @@ export const Content = ({ quickLinks = false }) => {
                 <ul className="m-0 mb-3 p-0 flex flex-col gap-4 md:grid md:grid-cols-2 xl:grid-cols-3">
                     <ResourceItem
                         type="Guide"
-                        title="Conversion funnels"
-                        description="Build, analyze, and optimize funnels"
-                        Image={
-                            <StaticImage
-                                alt=""
-                                className="h-full"
-                                placeholder="none"
-                                objectFit="contain"
-                                quality={100}
-                                src="../../components/Home/Slider/images/product-analytics-hog.png"
-                            />
-                        }
-                        url="/tutorials/guide-to-funnels"
+                        title="The complete guide to event tracking"
+                        description="Set up your analytics foundation"
+                        url="/tutorials/event-tracking-guide"
                     />
                     <ResourceItem
                         type="Guide"
                         title="Track performance marketing"
                         description="Optimize ads and marketing channels"
-                        Image={
-                            <StaticImage
-                                alt=""
-                                className="h-full"
-                                placeholder="none"
-                                objectFit="contain"
-                                quality={100}
-                                src="../../components/Home/Slider/images/product-analytics-hog.png"
-                            />
-                        }
                         url="/tutorials/performance-marketing"
                     />
                     <ResourceItem
                         type="Guide"
                         title="Reduce churn"
                         description="The bread and butter of long-term growth"
-                        Image={
-                            <StaticImage
-                                alt=""
-                                className="h-full"
-                                placeholder="none"
-                                objectFit="contain"
-                                quality={100}
-                                src="../../components/Home/Slider/images/product-analytics-hog.png"
-                            />
-                        }
                         url="/tutorials/churn-rate"
                     />
                     <ResourceItem
                         type="Guide"
                         title="Track new and returning users"
                         description="Build cohorts and compare users"
-                        Image={
-                            <StaticImage
-                                alt=""
-                                className="h-full"
-                                placeholder="none"
-                                objectFit="contain"
-                                quality={100}
-                                src="../../components/Home/Slider/images/product-analytics-hog.png"
-                            />
-                        }
                         url="/tutorials/track-new-returning-users"
                     />
                     <ResourceItem
                         type="Guide"
                         title="Identify and analyze power users"
                         description="Find and understand your most engaged users"
-                        Image={
-                            <StaticImage
-                                alt=""
-                                className="h-full"
-                                placeholder="none"
-                                objectFit="contain"
-                                quality={100}
-                                src="../../components/Home/Slider/images/product-analytics-hog.png"
-                            />
-                        }
                         url="/tutorials/power-users"
                     />
                     <ResourceItem
                         type="Guide"
                         title="Calculate DAU/MAU ratio"
                         description="Popular engagement metrics that measure stickiness"
-                        Image={
-                            <StaticImage
-                                alt=""
-                                className="h-full"
-                                placeholder="none"
-                                objectFit="contain"
-                                quality={100}
-                                src="../../components/Home/Slider/images/product-analytics-hog.png"
-                            />
-                        }
                         url="/tutorials/dau-mau-ratio"
                     />
                 </ul>
@@ -161,15 +125,15 @@ export const Content = ({ quickLinks = false }) => {
                 <ul className="m-0 mb-3 p-0 flex flex-col gap-4 md:grid md:grid-cols-2 xl:grid-cols-3">
                     <ResourceItem
                         title="Product analytics"
-                        description="Active users, feature flags frowth accounting, traffic sources"
+                        description="Active users, feature flags, growth accounting, traffic sources"
                         Image={
-                            <StaticImage
+                            <CloudinaryImage
                                 alt=""
                                 className="h-full"
                                 placeholder="none"
                                 objectFit="contain"
                                 quality={100}
-                                src="./images/template-product-analytics.png"
+                                src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/pages/docs/images/template-product-analytics.png"
                             />
                         }
                         url="/templates/product-analytics"
@@ -178,13 +142,13 @@ export const Content = ({ quickLinks = false }) => {
                         title="Website traffic"
                         description="User, sessions, content performance"
                         Image={
-                            <StaticImage
+                            <CloudinaryImage
                                 alt=""
                                 className="h-full"
                                 placeholder="none"
                                 objectFit="contain"
                                 quality={100}
-                                src="./images/template-website-traffic.png"
+                                src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/pages/docs/images/template-website-traffic.png"
                             />
                         }
                         url="/templates/website-dashboard"
@@ -193,13 +157,13 @@ export const Content = ({ quickLinks = false }) => {
                         title="Realtime analytics"
                         description="Live users, sessions, traffic, sources"
                         Image={
-                            <StaticImage
+                            <CloudinaryImage
                                 alt=""
                                 className="h-full"
                                 placeholder="none"
                                 objectFit="contain"
                                 quality={100}
-                                src="./images/template-realtime-analytics.png"
+                                src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/pages/docs/images/template-realtime-analytics.png"
                             />
                         }
                         url="/templates/real-time-dashboard"

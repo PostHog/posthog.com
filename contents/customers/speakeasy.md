@@ -6,7 +6,7 @@ logo: >-
 logoDark: >-
   https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/customers/speakeasy/speakeasy-logo-dark.png
 featuredImage: >-
-  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/customers/speakeasy/speakeasy-featured.png
+  https://res.cloudinary.com/dmukukwp6/image/upload/speakeasy_posthog_b507cb0b92.png
 industries:
   - Devtool
 users:

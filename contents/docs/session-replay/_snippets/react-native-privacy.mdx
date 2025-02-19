@@ -1,0 +1,34 @@
+# Masking
+
+By default all text, inputs, and images are masked. 
+
+Password inputs are always masked no matter your config.
+
+You can configure masking levels when you initialise PostHog
+
+```ts
+export const posthog = new PostHog(
+  '<ph_project_api_key>',
+  {
+    enableSessionReplay: true,
+    sessionReplayConfig: {
+      // Whether text and text input fields are masked. Default is true.
+      // Password inputs are always masked regardless
+      maskAllTextInputs: false,
+      // Whether images are masked. Default is true.
+      maskAllImages: true,
+      // Enable masking of all sandboxed system views like UIImagePickerController, PHPickerViewController and CNContactPickerViewController. Default is true.
+      // iOS only
+      maskAllSandboxedViews = true,
+      // rest of your config
+  }
+}
+```
+
+# Manual Masking
+
+To replace any type of `React.Component` with a redacted version in the replay, set the [accessibilityLabel](https://reactnative.dev/docs/accessibility#accessibilitylabel) to `ph-no-capture`:
+
+```ts
+<Text accessibilityLabel="ph-no-capture">Sensitive!</Text>
+```

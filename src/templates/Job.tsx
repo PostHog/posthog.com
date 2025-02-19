@@ -19,7 +19,7 @@ import groupBy from 'lodash.groupby'
 const Detail = ({ icon, title, value }: { icon: React.ReactNode; title: string; value: string }) => {
     return (
         <li className="flex space-x-2">
-            <span className="w-6 h-6 text-black dark:text-white">{icon}</span>
+            <span className="w-6 h-6 text-black dark:text-white flex-shrink-0">{icon}</span>
             <span className="grid">
                 <h4 className="text-sm m-0 font-normal leading-none pt-1">
                     <span>{title}</span>
@@ -53,9 +53,8 @@ export default function Job({
             departmentName,
             info,
             id,
-            locationName,
             parent,
-            fields: { tableOfContents, html, title, slug },
+            fields: { tableOfContents, html, title, slug, locations },
         },
     },
     pageContext: { gitHubIssues },
@@ -64,12 +63,13 @@ export default function Job({
     const salaryRole = parent?.customFields?.find(({ title }) => title === 'Salary')?.value || title
     const missionAndObjectives = parent?.customFields?.find(({ title }) => title === 'Mission & objectives')?.value
     const showObjectives = missionAndObjectives !== 'false'
-    const availableTeams = groupBy(allJobPostings.nodes, ({ parent }) => {
+    const availableTeams = groupBy(allJobPostings.nodes, ({ parent, departmentName }) => {
         const teams = JSON.parse(parent?.customFields?.find(({ title }) => title === 'Teams')?.value || '[]')
-        return teams.length > 1 ? 'Multiple teams' : `Team ${teams[0]}`
+        const speculative = departmentName?.toLowerCase() === 'speculative'
+        return speculative ? 'Speculative' : teams.length > 1 ? 'Multiple teams' : `Team ${teams[0]}`
     })
     const multipleTeams = teams?.nodes?.length > 1
-    const teamName = multipleTeams ? 'Multiple teams' : `Team ${teams?.nodes?.[0]?.name}`
+    const teamName = multipleTeams ? 'Multiple teams' : teams?.nodes?.[0]?.name ? `Team ${teams?.nodes?.[0]?.name}` : ''
 
     const openRolesMenu = []
     Object.keys(availableTeams)
@@ -109,8 +109,15 @@ export default function Job({
     const [jobTitle] = title.split(' - ')
 
     return (
-        <Layout parent={companyMenu} activeInternalMenu={companyMenu.children[6]}>
-            <SEO title={`${title} - PostHog`} image={`/og-images/${slug.replace(/\//g, '')}.jpeg`} />
+        <Layout
+            parent={companyMenu}
+            activeInternalMenu={companyMenu.children.find(({ name }) => name.toLowerCase() === 'careers')}
+        >
+            <SEO
+                title={`${title} - PostHog`}
+                image={`${process.env.GATSBY_CLOUDFRONT_OG_URL}/${slug.replace(/\//g, '')}.jpeg`}
+                imageType="absolute"
+            />
             <div className="">
                 <PostLayout
                     tableOfContents={[
@@ -138,13 +145,17 @@ export default function Job({
                 >
                     <div className="relative">
                         <div>
-                            <p className="m-0 opacity-60 pb-2">{teamName}</p>
+                            {teamName && <p className="m-0 opacity-60 pb-2">{teamName}</p>}
                             <h1 className="m-0 text-5xl">{jobTitle}</h1>
                             <ul className="list-none m-0 p-0 md:items-center text-black/50 dark:text-white/50 mt-6 flex md:flex-row flex-col md:space-x-12 md:space-y-0 space-y-6">
                                 {departmentName?.toLowerCase() !== 'speculative' && (
                                     <Detail title="Department" value={departmentName} icon={<Department />} />
                                 )}
-                                <Detail title="Location" value={locationName} icon={<Location />} />
+                                <Detail
+                                    title="Location"
+                                    value={`Remote${locations?.length > 0 ? ` (${locations.join(', ')})` : ''}`}
+                                    icon={<Location />}
+                                />
                                 {timezone && <Detail title="Timezone(s)" value={timezone} icon={<Timezone />} />}
                             </ul>
                             <div className="job-content mt-12 w-full flex-shrink-0 transition-all">
@@ -165,15 +176,7 @@ export default function Job({
                                             </Link>
                                         </p>
                                         <div className="mb-6">
-                                            <CompensationCalculator
-                                                descriptions={{
-                                                    step: `We hire into the Established step by default and believe there's a place to have incremental steps to allow for more flexibility.`,
-                                                    location: `The benchmark for each role we are hiring for is based on the market rate in San Francisco.`,
-                                                    level: `We pay more experienced team members a greater amount since it is reasonable to expect this correlates with an increase in skill`,
-                                                }}
-                                                hideRole
-                                                initialJob={salaryRole}
-                                            />
+                                            <CompensationCalculator hideRole initialJob={salaryRole} />
                                         </div>
                                     </Accordion>
                                 )}
@@ -238,9 +241,11 @@ export default function Job({
                                 {!multipleTeams && showObjectives && objectives && (
                                     <Accordion title="Your team's mission and objectives" id="mission-objectives">
                                         <div className="mb-6">
-                                            <MDXProvider components={{ HideFromJobPosting: () => null }}>
-                                                <MDXRenderer>{mission.body}</MDXRenderer>
-                                            </MDXProvider>
+                                            {mission?.body && (
+                                                <MDXProvider components={{ HideFromJobPosting: () => null }}>
+                                                    <MDXRenderer>{mission.body}</MDXRenderer>
+                                                </MDXProvider>
+                                            )}
                                             <MDXProvider components={{ HideFromJobPosting: () => null }}>
                                                 <MDXRenderer>{objectives.body}</MDXRenderer>
                                             </MDXProvider>
@@ -249,7 +254,11 @@ export default function Job({
                                 )}
                                 <Accordion title="Interview process" id="interview-process">
                                     <div className="mb-6">
-                                        <InterviewProcess role={title} />
+                                        <p>
+                                            We do 2-3 short interviews, then pay you to do some real-life (or close to
+                                            real-life) work.
+                                        </p>
+                                        <InterviewProcess role={title} inApplicationProcess />
                                     </div>
                                 </Accordion>
                                 <Accordion title="Apply" id="apply">
@@ -271,7 +280,6 @@ export const query = graphql`
         ashbyJobPosting(id: { eq: $id }) {
             id
             departmentName
-            locationName
             fields {
                 tableOfContents {
                     value
@@ -281,6 +289,7 @@ export const query = graphql`
                 html
                 title
                 slug
+                locations
             }
             parent {
                 ... on AshbyJob {
@@ -314,6 +323,7 @@ export const query = graphql`
         }
         allJobPostings: allAshbyJobPosting {
             nodes {
+                departmentName
                 fields {
                     title
                     slug

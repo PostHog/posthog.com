@@ -16,7 +16,14 @@ const teamQuery = (name: string) =>
                     $eqi: name,
                 },
             },
-            populate: ['profiles.avatar', 'profiles.leadTeams.name'],
+            populate: [
+                'profiles.avatar',
+                'profiles.leadTeams.name',
+                'leadProfiles',
+                'crest',
+                'crestOptions',
+                'teamImage.image',
+            ],
         },
         { encodeValuesOnly: true }
     )

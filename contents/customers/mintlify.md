@@ -6,7 +6,7 @@ logo: >-
 logoDark: >-
   https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/customers/mintlify/logo_dark.svg
 featuredImage: >-
-  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/customers/mintlify/featured.png
+  https://res.cloudinary.com/dmukukwp6/image/upload/mintlify_posthog_f60afa6a38.png
 industries:
   - 'SaaS, DevTool'
 users:

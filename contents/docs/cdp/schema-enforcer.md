@@ -1,5 +1,5 @@
 ---
-title: Schema Enforcer
+title: Enforce a schema on ingested events
 github: 'https://github.com/PostHog/schema-enforcer-plugin'
 installUrl: 'https://app.posthog.com/project/apps?name=Schema%20Enforcer'
 thumbnail: >-
@@ -28,7 +28,7 @@ It also:
 ## Installation
 
 1. Log in to your PostHog instance
-2.  Click "[Data pipeline](https://us.posthog.com/apps)" in the left sidebar
+2.  Click "[Data pipeline](https://us.posthog.com/pipeline)" in the left sidebar
 3. Search for 'Schema Enforcer'
 4. Select the transformation, press 'Install' and follow the on-screen instructions
 

@@ -8,7 +8,7 @@ showTitle: true
 
 PostHog provides a free basic level of support to everyone via the community, with additional support options available for paying customers depending on product. 
 
-<div className="overflow-x-auto -mx-5 px-5">
+<OverflowXSection>
 <table className="text-sm">
 <thead>
 <tr>
@@ -69,7 +69,7 @@ PostHog provides a free basic level of support to everyone via the community, wi
 </tr>
 </tbody>
 </table>
-</div>
+</OverflowXSection>
 
 ## Official Support
 

@@ -30,19 +30,19 @@ npm i posthog-js
 
 Next, go into your `app` folder and create a `providers.js` file. Create a client-side PostHog initialization using the project API key and instance address (from your [project settings](https://app.posthog.com/project/settings)). Make sure to add the `use client` directive and a check for the window. Altogether, this looks like this:
 
-```js-web
+```js
 // app/providers.js
 'use client'
 import posthog from 'posthog-js'
 import { PostHogProvider } from 'posthog-js/react'
-
-if (typeof window !== 'undefined') {
-  posthog.init('<ph_project_api_key>', {
-    api_host: '<ph_client_api_host>'
-  })
-}
+import { useEffect } from 'react'
 
 export function PHProvider({ children }) {
+    useEffect(() => {
+      posthog.init('<ph_project_api_key>', {
+        api_host: '<ph_client_api_host>'
+      })
+  }, []);
   return <PostHogProvider client={posthog}>{children}</PostHogProvider>
 }
 ```
@@ -72,7 +72,7 @@ With our app and PostHog set up, we can go to the [surveys tab](https://app.post
 
 ![Enable surveys](https://res.cloudinary.com/dmukukwp6/video/upload/v1710055416/posthog.com/contents/images/tutorials/survey/enable.mp4)
 
-Aftwards click "Create survey." Enter a name, question, and any of the other details you want (like targeting). Once done, click "Save as draft," make sure everything looks good, then click "Launch."
+Aftwards click "Create survey." Enter a name, question, and any of the other details you want (like display conditions). Once done, click "Save as draft," make sure everything looks good, then click "Launch."
 
 ![Feedback survey video](https://res.cloudinary.com/dmukukwp6/video/upload/v1710055416/posthog.com/contents/images/tutorials/survey/create-survey.mp4)
 
@@ -303,3 +303,5 @@ This completes an introduction to our custom survey functionality, which you can
 - [Get feedback and book user interviews with surveys](/tutorials/feedback-interviews-site-apps)
 - [The Product-Market Fit Game](/blog/product-market-fit-game)
 - [How we made something people want](/blog/making-something-people-want)
+
+<NewsletterForm />

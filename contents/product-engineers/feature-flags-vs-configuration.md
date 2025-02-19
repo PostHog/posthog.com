@@ -72,7 +72,7 @@ A problem both face is testing, as both require different testing strategies tha
 
 Like many tech choices, you should think about what is the simplest solution for your objective. This table summarizes the differences between the two:
 
-<div className="overflow-x-auto -mx-5 px-5">
+<OverflowXSection>
 <table className="w-full mt-4" style="min-width: 600px;">
   <thead>
     <tr>
@@ -119,7 +119,7 @@ Like many tech choices, you should think about what is the simplest solution for
     </tr>
   </tbody>
 </table>
-</div>
+</OverflowXSection>
 
 Another key part of the decision is figuring out what works well with the stack you have now:
 
@@ -133,6 +133,10 @@ You can find more comparisons on [our feature flag comparisons page](/feature-fl
 
 ## Further reading
 
+> **Want to get started with remote configs?** We wrote tutorials on how to set them up for [iOS](/tutorials/ios-remote-config), [Android](/tutorials/android-remote-config), [React Native](/tutorials/react-native-remote-config), and even [Flutter](/tutorials/flutter-remote-config).
+
 - [Why use feature flags? Benefits, types and use cases, explained](/blog/feature-flag-benefits-use-cases)
 - [Feature flag best practices and tips (with examples)](/blog/feature-flag-best-practices)
 - [How to do a canary release with feature flags in PostHog](/tutorials/canary-release)
+
+<NewsletterForm />

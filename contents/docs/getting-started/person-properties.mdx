@@ -1,0 +1,34 @@
+---
+title: Person profiles and properties
+sidebarTitle: Person profiles and properties
+featuredImage: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/docs/getting-started/images/docs-properties.png
+nextPage: ./actions-and-insights.mdx
+sidebar: Docs
+showTitle: true
+---
+
+import UserPropertiesHowToSet from "./\_snippets/user-properties-how-to-set.mdx"
+import UserPropertiesSetVsSetOnce from "./\_snippets/user-properties-set-vs-set-once.mdx"
+
+[Person profiles](/docs/data/persons) are collections of properties about the users behind the events. You can use these person properties to better capture, analyze, and utilize user data.
+
+For example, you can create [filters](/docs/product-analytics/trends#filtering-events-based-on-properties) or [cohorts](/docs/data/cohorts) based on person properties, which can then be used to [create insights](/docs/product-analytics/insights), [feature flags](/docs/feature-flags), and more. 
+
+By default, PostHog's client-side SDKs will send [anonymous events](/docs/data/anonymous-vs-identified-events), meaning that your users will not have a [person profile](/docs/data/persons), unless you call `.identify()`, `.set()`, or another method that uses person profiles. You can change this by setting your snippet or frontend SDK initialization's `person_profiles` value to `always`
+
+For backwards compatibility, PostHog's server-side SDKs will send [identified events](/docs/data/anonymous-vs-identified-events), meaning that your users *will* have a [person profile](/docs/data/persons). You can override this by changing a server-side SDK or API event's `$process_person_profile` property to `false`.
+
+> **Note:** Capturing identified events and setting person properties creates a person profile. Under our current [pricing](/pricing), anonymous events can be up to 4x cheaper than identified events (due to the cost of processing them), so it's recommended only to capture identified events when needed.
+
+## How to set person properties
+
+<UserPropertiesHowToSet/>
+
+### What is the difference between `set` and `set_once`?
+
+<UserPropertiesSetVsSetOnce/>
+
+## Further reading
+
+See our full documentation on [persons](/docs/data/persons) and [person properties](/docs/data/user-properties) for more details.

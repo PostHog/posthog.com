@@ -67,9 +67,7 @@ export const onPreInit: GatsbyNode['onPreInit'] = async function ({ actions }) {
         const { resources, next_cursor } = await fetch(
             `https://${process.env.CLOUDINARY_API_KEY}:${process.env.CLOUDINARY_API_SECRET}@api.cloudinary.com/v1_1/${
                 process.env.GATSBY_CLOUDINARY_CLOUD_NAME
-            }/resources/image?prefix=posthog.com&type=upload&max_results=500${
-                nextCursor ? `&next_cursor=${nextCursor}` : ``
-            }`
+            }/resources/image?type=upload&max_results=500${nextCursor ? `&next_cursor=${nextCursor}` : ``}`
         )
             .then((res) => res.json())
             .catch((e) => console.error(e))
@@ -102,12 +100,7 @@ export const onCreateNode: GatsbyNode['onCreateNode'] = async ({
 
     if (node.internal.type === `MarkdownRemark` || node.internal.type === 'Mdx') {
         const parent = getNode(node.parent)
-        if (
-            parent?.internal.type === 'SqueakReply' ||
-            parent?.internal.type === 'PostHogPull' ||
-            parent?.internal.type === 'PostHogIssue'
-        )
-            return
+        if (parent?.internal.type === 'PostHogPull' || parent?.internal.type === 'PostHogIssue') return
 
         const imageFields = ['featuredImage', 'thumbnail', 'logo', 'logoDark', 'icon']
         imageFields.forEach((field) => {
@@ -222,6 +215,33 @@ export const onCreateNode: GatsbyNode['onCreateNode'] = async ({
                 console.error(`Error fetching plugin.json from ${owner}/${name}: ${error}`)
             }
         }
+
+        if (/^\/docs\/(apps|cdp)/.test(slug) && node?.frontmatter?.templateId) {
+            const templateId = node.frontmatter.templateId
+
+            try {
+                const res = await fetch(`https://us.posthog.com/api/public_hog_function_templates/`)
+
+                if (res.status !== 200) {
+                    throw `Got status code ${res.status}`
+                }
+
+                const body = await res.json()
+                const config = body.results.find(
+                    (template: { id: string }) => template?.id === templateId
+                ).inputs_schema
+
+                if (config) {
+                    createNodeField({
+                        node,
+                        name: `templateConfig`,
+                        value: config,
+                    })
+                }
+            } catch (error) {
+                console.error(`Error fetching input_schema for ${templateId}: ${error}`)
+            }
+        }
     }
 
     if (node.internal.type === 'Plugin' && node.url.includes('github.com') && process.env.GITHUB_API_KEY) {
@@ -274,9 +294,33 @@ export const onCreateNode: GatsbyNode['onCreateNode'] = async ({
         }
     }
 
+    const getAshbyLocationName = async (id) =>
+        fetch(`https://api.ashbyhq.com/location.info`, {
+            method: 'POST',
+            headers: {
+                Accept: 'application/json',
+                'Content-Type': 'application/json',
+                Authorization: `Basic ${Buffer.from(`${process.env.ASHBY_API_KEY}:`).toString('base64')}`,
+            },
+            body: JSON.stringify({ locationId: id }),
+        })
+            .then((res) => res.json())
+            .then((data) => data.results.name)
+
     if (node.internal.type === 'AshbyJobPosting') {
         const title = node.title.replace(' (Remote)', '')
         const slug = `/careers/${slugify(title, { lower: true })}`
+        const locations = [
+            await getAshbyLocationName(node.locationIds.primaryLocationId),
+            ...(await Promise.all(node.locationIds.secondaryLocationIds.map((id) => getAshbyLocationName(id)))),
+        ]
+            .map((location) => location.replace(/\(|\)|remote/gi, '').trim())
+            .filter(Boolean)
+        createNodeField({
+            node,
+            name: 'locations',
+            value: locations,
+        })
         createNodeField({
             node,
             name: `title`,

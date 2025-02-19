@@ -105,3 +105,5 @@ Each team will focus more or less on different members of the product team. This
 ### What about marketing?
 
 - The features should be usable by the marketing team, but we shouldn’t focus on building features specifically _for_ them. Generally, they have a different level of technical ability to our core power users.
+
+- There is an exception to the rule: If a feature will make PostHog more widely adopted in a company, and will decrease the risk of the company moving to a competitor, we should build the feature. Ultimately, this is in line with our wider strategy, because the more teams in a company use the same set of product data stored in PostHog vs a second tool, the more successfully the company will operate. Anti goal: Make PostHog _harder_ to use for product engineers by supporting features for non-ICP users.

@@ -5,47 +5,39 @@ availability:
   selfServe: full
   enterprise: full
 ---
-import { ProductScreenshot } from 'components/ProductScreenshot'
-export const EnableSessionReplayDark = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/session-replay/enable-session-replay-in-project-settings-dark-mode.png"
-export const EnableSessionReplayLight = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/session-replay/enable-session-replay-in-project-settings-light-mode.png"
+
+import Tab from "components/Tab"
+import Web from "./_snippets/web-installation.mdx"
+import ReactNative from "./_snippets/react-native-installation.mdx"
+import Android from "./_snippets/android-installation.mdx"
+import IOS from "./_snippets/ios-installation.mdx"
+import Flutter from "./_snippets/flutter-installation.mdx"
 
 Session replay enables you to record users navigating through your website or mobile app and play back the individual sessions to watch how real users use your product.
 
-<iframe width="100%" height="400" frameborder="0" allowfullscreen src="https://us.posthog.com/embedded/5MD_5wwnZHBFZPnNltkZgik3i5fqJA"></iframe>
-
-<Caption>
-Above is a recording of posthog.com… on posthog.com - very meta.
-</Caption>
-
-> 🚧 **NOTE:** Mobile recording is currently **only available on Android** and is considered `beta`. Check out the [mobile recording page](/docs/session-replay/mobile).
-
-## Step one: Install our JavaScript web library
-
-If you already have our JavaScript library or snippet installed, you can skip this step.
-
-import JSInstallWeb from "../integrate/\_snippets/install-web.mdx"
-
-<JSInstallWeb />
-
-## Step two: Enable session recordings in your project settings
-
-Enable session recordings in your PostHog [Project Settings](https://app.posthog.com/project/settings).
-
-<ProductScreenshot
-  imageLight={EnableSessionReplayLight} 
-  imageDark={EnableSessionReplayDark} 
-  alt="Enable session recordings in your PostHog'"
-  classes="rounded"
-/>
-
-Once enabled, the library will start recording sessions by default.
-
-They can be toggled off in the by setting the `disable_session_recording: true` flag in the [config](/docs/integrate/client/js/#config). 
-
-Users who [opt out](/docs/libraries/js#opt-users-out) of event capturing will not have their sessions recorded.
-
-> **Note on using Segment's SDK**: Session Replay does not work if you send data using [Segment's SDK](/docs/libraries/segment) as this data is not collected. If you use Segment, you may want to add the PostHog library as well – (make sure to only send regular event data from one source).
-
-## How to ignore sensitive elements
-
-You may want to hide sensitive text or elements in your replays. See our [privacy controls](/docs/session-replay/privacy) docs for how to do this.
+<Tab.Group tabs={['Web', 'Android', 'iOS', 'React Native', 'Flutter']}>
+    <Tab.List>
+        <Tab>Web</Tab>
+        <Tab>Android</Tab>
+        <Tab>iOS</Tab>
+        <Tab>React Native</Tab>
+        <Tab>Flutter</Tab>
+    </Tab.List>
+    <Tab.Panels>
+        <Tab.Panel>
+            <Web />
+        </Tab.Panel>
+        <Tab.Panel>
+            <Android />
+        </Tab.Panel>
+        <Tab.Panel>
+            <IOS />
+        </Tab.Panel>
+        <Tab.Panel>
+            <ReactNative />
+        </Tab.Panel>
+        <Tab.Panel>
+            <Flutter />
+        </Tab.Panel>
+    </Tab.Panels>
+</Tab.Group>

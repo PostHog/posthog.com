@@ -38,7 +38,7 @@ James found Marius via a [hobby project](https://github.com/mariusandra/insights
 
 It didn’t take long to realize they should hire Marius full time. “Just from watching him do some actual work with us, it was really clear that he was very talented.”
 
-Today, Marius leads our [Product Analytics Team](https://posthog.com/teams/product-analytics). He’s been instrumental in refactoring all our insights to use [HogQL](https://posthog.com/docs/hogql), which fixes whole classes of bugs, and enables engineers to do [cool things in PostHog using SQL](https://posthog.com/tutorials/hogql-sum-aggregation).
+Today, Marius leads our [Product Analytics Team](/teams/product-analytics). He’s been instrumental in refactoring all our insights to use [SQL](/docs/sql), which fixes whole classes of bugs, and enables engineers to do [cool things in PostHog using SQL](/tutorials/hogql-sum-aggregation).
 
 > **What we learned:** Great people will find ways to shine if you give them the chance. Contract work is a great way to do this, especially for early-stage companies. This initial trial with Marius was the genesis of our [SuperWeek / SuperDay process](/handbook/people/hiring-process#4-posthog-superday), which we use to make final decision on potential hires.
 
@@ -56,17 +56,15 @@ Eric was the first employee to apply for a job at PostHog and do a SuperWeek. Ja
 
 James on Eric: “He was supposed to start on a Monday, but over the weekend he’d already shipped a bunch of stuff. So, before he even started, we already knew that we were going to end up hiring Eric, too.”
 
-Eric has worn many hats since joining PostHog, building many of our user-facing features and dabbling a little in the backend, too. He’s currently [building our data warehouse for startups](https://posthog.com/docs/data-warehouse), which is in feature preview/beta.
+Eric has worn many hats since joining PostHog, building many of our user-facing features and dabbling a little in the backend, too. He’s currently [building our data warehouse for startups](/docs/data-warehouse), which is in feature preview/beta.
 
 > **What we learned:** Define what you value before you start hiring. Creating the handbook helped James and Tim understand the kind of people who would make PostHog a success, which made choosing Eric easy. It's hard to retrofit a culture when you've already hired a dozen or so people, so don’t delay.
-
-<NewsletterForm />
 
 ## 3. James Greenhill
 
 ![James](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/posthog-first-five/james.png)
 
-In the early days, James would check out people who starred the GitHub repo and sometimes get in touch to gather feedback. One day, he spied a data engineer at Uber, [James Greenhill](/community/profiles/90) (aka Jams), had left a star and this piqued his interest.
+In the early days, James would check out people who starred the GitHub repo and sometimes get in touch to gather feedback. One day, he spied a data engineer at Uber, [James Greenhill](/community/profiles/30174) (aka Jams), had left a star and this piqued his interest.
 
 On a call, Jams explained Uber had built a bunch of internal tools like PostHog for data control reasons. He found the project interesting and wanted to work on it, so he did a SuperWeek like Eric and Marius.
 
@@ -94,7 +92,7 @@ Tim found Lottie on Twitter and loved her “really weird” and “kinda cool�
 
 Like previous hires, Lottie did some paid contract work first and immediately impressed. Tim: “Watching Lottie do her job felt like watching someone perform magic to us.”
 
-Lottie is responsible for all the cool artwork and [branding on our website](https://posthog.com/), our [awesome merch](/merch), and so much more. You can see how it’s evolved over time below.
+Lottie is responsible for all the cool artwork and [branding on our website](/), our [awesome merch](/merch), and so much more. You can see how it’s evolved over time below.
 
 > **What we learned:** [Talent compounds](/handbook/company/values#talent-compounds). Lottie was early in her career when she joined PostHog, but she quickly showed she had bags of talent. Don't just look for plausible looking resume, look for talent that will motivate others to do their best work.
 

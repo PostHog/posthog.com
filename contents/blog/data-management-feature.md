@@ -20,7 +20,7 @@ PostHog is growing fast. In just the last year we've measured ~36.5B total event
 
 This is a sign of the superb growth we're seeing as a business, but data explosion is real and can be a nightmare to scale in the context of a product analytics tool. Furthermore, poor data management can seriously harm your business as it can lead to inaccurate analyses and poor business decisions.
 
-As the biggest dogfooder of our own product, we (and many other teams) were beginning to see the consequences of the lack of in-house tools to manage our data. All the use cases we saw boiled down to a few common pain points:
+As the [biggest dogfooder of our own product](/product-engineers/dogfooding), we (and many other teams) were beginning to see the consequences of the lack of in-house tools to manage our data. All the use cases we saw boiled down to a few common pain points:
 
 1. It is hard to understand events, actions, and properties that you yourself didn't set up.
 2. Data decays quickly, and most of the time fails to stay up-to-date with instrumentation.

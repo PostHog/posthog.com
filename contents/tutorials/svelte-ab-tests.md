@@ -10,8 +10,6 @@ tags:
 import { ProductScreenshot } from 'components/ProductScreenshot'
 export const EventsInPostHogLight = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/tutorials/svelte-ab-tests/events-light.png"
 export const EventsInPostHogDark = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/tutorials/svelte-ab-tests/events-dark.png"
-export const TestSetupLight = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/tutorials/svelte-ab-tests/experiment-setup-light.png"
-export const TestSetupDark = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/tutorials/svelte-ab-tests/experiment-setup-dark.png"
 
 A/B tests help you make your Svelte app better by enabling you to compare the impact of changes on key metrics. To show you how to set one up, we create a basic SvelteKit app, add PostHog, create an A/B test, and implement the code for it.
 
@@ -114,23 +112,21 @@ With this set up, refresh your app and click the button a few times to see the e
 
 ## 4. Create an A/B test in PostHog
 
-If you haven't done so already, you'll need to [upgrade](https://us.posthog.com/organization/billing) your PostHog account to include A/B testing. This requires entering your credit card, but don't worry, we have a [generous free tier](/pricing) of 1 million requests per month – so you won't be charged anything yet.
-
 Next, go to the [A/B testing tab](https://us.posthog.com/experiments) and create an A/B test by clicking the **New experiment** button. Add the following details to your experiment:
 
 1. Name it "My cool experiment".
 2. Set "Feature flag key" to `my-cool-experiment`.
-3. Under the experiment goal, select the `home_button_clicked` event we created in the previous step.
-4. Use the default values for all other fields.
-
-Click "Save as draft" and then click "Launch".
+3. Use the default values for all other fields.
+4. Click **Save as draft**.
 
 <ProductScreenshot
-  imageLight={TestSetupLight} 
-  imageDark={TestSetupDark} 
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_01_16_at_09_12_54_2x_77d8ed96f6.png" 
+  imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_01_16_at_09_12_34_2x_03ede9e28c.png"
   alt="Experiment setup in PostHog" 
   classes="rounded"
 />
+
+Once created, set the primary metric to a trend of `home_button_clicked` and then click **Launch**.
 
 ## 5. Implement the A/B test code
 
@@ -271,3 +267,5 @@ export async function load({ request }) {
 - [How to set up Svelte analytics, feature flags, and more](/tutorials/svelte-analytics)
 - [How to set up surveys in Svelte](/tutorials/svelte-surveys)
 - [A software engineer's guide to A/B testing](/product-engineers/ab-testing-guide-for-engineers)
+
+<NewsletterForm />

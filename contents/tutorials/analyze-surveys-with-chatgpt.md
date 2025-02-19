@@ -9,6 +9,7 @@ featuredImage: >-
   https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/tutorials/banners/tutorial-14.png
 tags:
   - surveys
+  - LLM observability
 ---
 
 Surveys are a great way of collecting feedback from your users, especially if you ask your users like "How can we improve our product?". However, they can be hard to analyze if you receive hundreds or more answers. Fortunately, [OpenAI's ChatGPT](https://openai.com/chatgpt) is great at doing this.
@@ -383,3 +384,5 @@ Now, running `node reduce-themes.js` will aggregate similar themes. If you re-im
 - [How to set up surveys in Next.js](/tutorials/nextjs-surveys)
 - [How to set up LLM analytics for ChatGPT](/tutorials/chatgpt-analytics) 
 - [How to set up LLM analytics for Anthropic's Claude](/tutorials/anthropic-analytics) 
+
+<NewsletterForm />

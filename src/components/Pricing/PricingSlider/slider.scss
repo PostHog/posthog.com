@@ -32,3 +32,9 @@
         }
     }
 }
+
+.rc-slider-mark .rc-slider-mark-text:last-child {
+    left: initial !important;
+    right: 0;
+    transform: none !important;
+}

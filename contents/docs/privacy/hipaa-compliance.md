@@ -5,7 +5,7 @@ sidebar: Docs
 showTitle: true
 ---
 
-> **Important:** PostHog only offers Business Associate Agreements (BAAs) for PostHog Cloud to users on [an Enterprise plan](/pricing). To enquire about BAAs, HIPAA compliance, or an Enterprise plan, please [contact us directly](/contact-sales). 
+> **Important:** PostHog only offers Business Associate Agreements (BAAs) for PostHog Cloud to users on [a Teams or an Enterprise plan](/pricing). To enquire about BAAs, HIPAA compliance, or an Enterprise plan, please [contact us directly](/talk-to-a-human). 
 
 HIPAA is the Health Insurance Portability and Accountability Act. It’s a piece of legislation that applies to certain [covered entities](https://www.hhs.gov/hipaa/for-professionals/covered-entities/index.html) operating in the United States of America (e.g. healthcare providers).
 
@@ -39,13 +39,13 @@ PostHog offers a third approach without either of these downsides: hosting the p
 
 ## Does PostHog offer a BAA for PostHog Cloud?
 
-Yes. If you're interested in a BAA for HIPAA compliance, please [contact us with information about your requirements](/contact-sales).  
+Yes. If you're interested in a BAA for HIPAA compliance, please [contact us with information about your requirements](/talk-to-a-human).  
 
 ## How to set PostHog up for HIPAA compliance
 
 > We strongly recommend teams which need HIPAA compliance use PostHog Cloud under a BAA, rather than the legacy self-hosted product or Hobby versions. 
 
-The best way to use PostHog in a way which is HIPAA compliant is with a BAA covering a PostHog Cloud instance. This ensures that PostHog remains scalable and that you have access to all premium features and security enhancements. BAAs are only available to users on an [Enterprise plan](/pricing).
+The best way to use PostHog in a way which is HIPAA compliant is with a BAA covering a PostHog Cloud instance. This ensures that PostHog remains scalable and that you have access to all premium features and security enhancements. BAAs are only available to users with a [Teams add-on for our standard BAA, or the Enterprise plan for a custom BAA](/pricing).
 
 However, it is possible to host PostHog yourself using our open-source hobby deployment. It is important to note that the hobby deployment is **only suitable for smaller event volumes** and provided without guarantee. It also lacks many of the advanced features available under PostHog Cloud. 
 

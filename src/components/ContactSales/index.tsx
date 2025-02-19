@@ -1,114 +1,210 @@
+import CloudinaryImage from 'components/CloudinaryImage'
 import { Check2 } from 'components/Icons'
 import Layout from 'components/Layout'
 import Link from 'components/Link'
 import SEO from 'components/seo'
 import { StaticImage } from 'gatsby-plugin-image'
-import React from 'react'
-import airbus from './images/airbus.svg'
-import airbusDark from './images/airbus_dark.svg'
-import phantom from './images/phantom.svg'
-import phantomDark from './images/phantom_dark.svg'
-import landmark from './images/landmark.svg'
-import landmarkDark from './images/landmark_dark.svg'
+import React, { useState, useRef, useEffect } from 'react'
 import { useValues } from 'kea'
 import { layoutLogic } from 'logic/layoutLogic'
-import HubSpotForm from 'components/HubSpotForm'
 import KeyboardShortcut from 'components/KeyboardShortcut'
+import SalesforceForm from 'components/SalesforceForm'
+import TeamMember from 'components/TeamMember'
 
 const features = [
-    'SSO SAML',
-    'Advanced permissions',
-    'B2C discounts',
-    'Team training',
+    'Volume discounts',
+    'SAML SSO',
+    'Custom MSA',
     'Dedicated support',
-    'Custom data retention',
+    'Personalized onboarding',
+    'Advanced permissions & audit logs',
 ]
 
+const VideoSection = () => (
+    <section
+        id="demo-video"
+        className={`overflow-hidden transition-all duration-300 h-auto max-h-[90vh] border border-light dark:border-dark rounded leading-[0] shadow-xl mb-8`}
+    >
+        <iframe
+            src="https://www.youtube-nocookie.com/embed/2jQco8hEvTI?autoplay=1"
+            className="rounded w-full aspect-video m-0"
+            allow="autoplay"
+        />
+    </section>
+)
+
 export default function ContactSales({ location }) {
-    const search = location?.search
-    const params = new URLSearchParams(search)
-    const { websiteTheme } = useValues(layoutLogic)
-    const darkMode = websiteTheme === 'dark'
+    const [showVideo, setShowVideo] = useState(false)
+    const [isMobile, setIsMobile] = useState(false)
+
+    useEffect(() => {
+        const checkMobile = () => {
+            setIsMobile(window.innerWidth < 768)
+        }
+        checkMobile()
+        window.addEventListener('resize', checkMobile)
+        return () => window.removeEventListener('resize', checkMobile)
+    }, [])
+
+    const handleShowVideo = () => {
+        setShowVideo(true)
+        if (!isMobile) {
+            setTimeout(() => {
+                window.scrollTo({
+                    top: document.getElementById('demo-video').offsetTop - 80,
+                    behavior: 'smooth',
+                })
+            }, 100)
+        }
+    }
+
     return (
         <Layout>
-            <SEO title="Contact Sales - PostHog" />
+            <SEO
+                title="Talk to a human - PostHog"
+                description="PostHog is self-serve, but you can talk to a real person if you need to!"
+                image={`/images/og/talk-to-a-human.png`}
+            />
+
             <div className="lg:py-12 py-4 px-5">
-                <section className="mb-12">
+                <section className="mb-6">
                     <div className="text-center">
-                        <StaticImage
+                        <CloudinaryImage
                             loading="eager"
                             placeholder="none"
-                            width={750}
+                            width={600}
+                            height={309}
                             alt="Sales hedgehogs"
-                            src="./images/sales-hogs.png"
+                            src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/ContactSales/images/sales-hogs.png"
                         />
                         <h1 className="text-3xl md:text-5xl mt-4 mb-2">Let's chat</h1>
-                        <p className="m-0">
-                            PostHog Cloud is self-serve (
-                            <Link to="https://app.posthog.com/signup">get started here</Link>), but we’re here to chat
-                            if you have bespoke needs.
-                        </p>
                     </div>
                 </section>
+                {!isMobile && showVideo && <VideoSection />}
                 <section className="grid md:grid-cols-2 max-w-5xl mx-auto md:gap-x-16 gap-y-12">
-                    <div className="order-2 md:order-1">
-                        <h3 className="text-lg mt-1 mb-4">Benefits of a PostHog Enterprise plan:</h3>
+                    <div className="">
+                        <div
+                            className={`space-y-3 transition-all duration-300 ${
+                                showVideo
+                                    ? isMobile
+                                        ? 'h-0 opacity-0 overflow-hidden'
+                                        : 'opacity-0 h-0'
+                                    : 'h-auto opacity-100 mb-6'
+                            }`}
+                        >
+                            <h3 className="text-lg mb-3 text-center md:text-left">Quick demo first?</h3>
+
+                            <button
+                                className="aspect-video cursor-pointer relative hover:-top-0.5 active:top-[2px] hover:scale-[1.005] active:scale-[.995] transition-all hover:duration-100 rounded border border-light dark:border-dark p-1 leading-[0] bg-accent dark:bg-accent-dark shadow-xl !m-0"
+                                onClick={handleShowVideo}
+                            >
+                                <CloudinaryImage
+                                    src="https://res.cloudinary.com/dmukukwp6/image/upload/demo_thumb_68d0d8d56d.jpg"
+                                    className="rounded"
+                                />
+                            </button>
+                        </div>
+                        {isMobile && showVideo && <VideoSection />}
+                        <div className="border border-light dark:border-dark px-4 py-3 mb-6 bg-accent dark:bg-accent-dark rounded">
+                            <p className="m-0 text-[15px]">
+                                <strong>Need help with your bill?</strong>{' '}
+                                <Link
+                                    to="/docs/billing/estimating-usage-costs#how-to-reduce-your-posthog-costs"
+                                    className="inline-block"
+                                >
+                                    Learn how to reduce your costs.
+                                </Link>
+                            </p>
+                        </div>
+                        <h3 className="text-lg mt-1 mb-3">Benefits of an enterprise plan</h3>
                         <ul className="list-none m-0 p-0 mt-2 grid sm:grid-flow-col sm:grid-rows-3 space-y-1">
                             {features.map((feature) => {
                                 return (
                                     <li key={feature} className="flex space-x-2">
-                                        <Check2 className="w-4 opacity-60" />
+                                        <Check2 className="w-4 opacity-60 text-green" />
                                         <span>{feature}</span>
                                     </li>
                                 )
                             })}
                         </ul>
-                        <h3 className="text-lg mt-14 mb-12">Who's using PostHog Cloud?</h3>
-
-                        <div className="grid sm:grid-cols-2 sm:gap-x-12 gap-y-12">
-                            <div>
-                                <div className="text-center bg-[#2D2D2D] p-2 sm:p-3 rounded-md relative sm:rotate-6 sm:-mr-8 flex-shrink-0 sm:max-w-full max-w-[200px]">
-                                    <p className="text-white leading-tight m-0 text-xs sm:text-base font-bold font-comic">
-                                        Whoa, industry leaders!
-                                    </p>
-                                    <svg
-                                        className="absolute right-6 -bottom-5 -scale-x-1"
-                                        width="35"
-                                        height="29"
-                                        viewBox="0 0 35 29"
-                                        fill="none"
-                                        xmlns="http://www.w3.org/2000/svg"
-                                    >
-                                        <path
-                                            d="M34.0329 28.7305L28.9422 2.03952L0.169405 0.617765C0.169405 0.617765 12.4378 8.50347 18.738 13.9774C25.0381 19.4513 34.0329 28.7305 34.0329 28.7305Z"
-                                            fill="#2D2D2D"
-                                        />
-                                    </svg>
-                                </div>
-                                <StaticImage
-                                    src="../Pricing/images/vacation-hog.png"
-                                    alt="Vacation Hog"
-                                    width={252}
-                                    placeholder="none"
-                                />
-                            </div>
-                            <div className="flex flex-wrap md:flex-col gap-4 md:gap-0  md:space-y-12 justify-center md:justify-start sm:order-last order-first">
-                                <img src={darkMode ? airbusDark : airbus} className="max-w-[150px] md:max-w-auto" />
-                                <img src={darkMode ? phantomDark : phantom} className="max-w-[150px] md:max-w-auto" />
-                                <img src={darkMode ? landmarkDark : landmark} className="max-w-[150px] md:max-w-auto" />
-                            </div>
-                        </div>
                     </div>
-                    <div className="order-1 md:order-2">
-                        <h3 className="mb-1">Contact us</h3>
-                        <p className="text-sm">
-                            <strong>Tip:</strong> Press <KeyboardShortcut text="Tab" size="sm" /> to advance through the
-                            form at a breakneck pace!
-                        </p>
-                        <HubSpotForm
-                            autoValidate
-                            formID="32d0b55f-9de6-4c40-a6ec-ddfd2c39578b"
-                            formOptions={{ cols: 1 }}
+                    <div className="">
+                        <h3 className="mb-3">Contact us</h3>
+                        <SalesforceForm
+                            type="lead"
+                            buttonOptions={{
+                                size: 'lg',
+                            }}
+                            form={{
+                                fields: [
+                                    {
+                                        label: 'Email',
+                                        type: 'string',
+                                        name: 'email',
+                                        required: true,
+                                        fieldType: 'email',
+                                    },
+                                    {
+                                        label: 'Company',
+                                        type: 'string',
+                                        name: 'company',
+                                        required: true,
+                                    },
+                                    {
+                                        label: 'Role',
+                                        name: 'role',
+                                        type: 'enumeration',
+                                        options: [
+                                            {
+                                                label: 'Engineering',
+                                                value: 'Engineering',
+                                            },
+                                            {
+                                                label: 'Founder',
+                                                value: 'Founder',
+                                            },
+                                            {
+                                                label: 'Leadership',
+                                                value: 'Leadership',
+                                            },
+                                            {
+                                                label: 'Marketing',
+                                                value: 'Marketing',
+                                            },
+                                            {
+                                                label: 'Product',
+                                                value: 'Product',
+                                            },
+                                            {
+                                                label: 'Sales',
+                                                value: 'Sales',
+                                            },
+                                            {
+                                                label: 'Other',
+                                                value: 'Other',
+                                            },
+                                        ],
+                                        required: true,
+                                    },
+                                    {
+                                        label: 'Monthly active users',
+                                        name: 'monthly_active_users',
+                                        type: 'string',
+                                        fieldType: 'number',
+                                        required: true,
+                                    },
+                                    {
+                                        label: 'What do you want to talk about on the call?',
+                                        name: 'talk_about',
+                                        type: 'string',
+                                        required: true,
+                                        fieldType: 'textarea',
+                                    },
+                                ],
+                                buttonText: 'Submit',
+                                message: "Message received. We'll be in touch!",
+                                name: 'Contact sales',
+                            }}
                         />
                     </div>
                 </section>

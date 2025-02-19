@@ -37,7 +37,7 @@ const features: IFeature[] = [
     { title: 'Session recording', icon: <SessionRecording /> },
     { title: 'Feature flags', icon: <FeatureFlags /> },
     { title: 'Heatmaps', icon: <Heatmaps /> },
-    { title: 'A/B testing', icon: <AbTesting /> },
+    { title: 'Experiments', icon: <AbTesting /> },
     { title: 'Correlation analysis', icon: <CorrelationAnalysis /> },
     { title: 'Group analytics', icon: <GroupAnalytics /> },
     { title: 'Team collaboration', icon: <TeamCollaboration /> },

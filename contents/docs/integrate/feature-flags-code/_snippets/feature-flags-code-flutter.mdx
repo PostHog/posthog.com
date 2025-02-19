@@ -2,10 +2,10 @@
 
 ```dart
 if (await Posthog().isFeatureEnabled('flag-key')) {
-    // Do something differently for this user
+  // Do something differently for this user
 
-    // Optional: fetch the payload
-    final matchedFlagPayload = await Posthog().getFeatureFlagPayload('flag-key');
+  // Optional: fetch the payload
+  final matchedFlagPayload = await Posthog().getFeatureFlagPayload('flag-key');
 }
 ```
 
@@ -13,16 +13,16 @@ if (await Posthog().isFeatureEnabled('flag-key')) {
 
 ```dart
 if (await Posthog().getFeatureFlag('flag-key') == 'variant-key') { // replace 'variant-key' with the key of your variant
-    // Do something differently for this user
+  // Do something differently for this user
 
-    // Optional: fetch the payload
-    final matchedFlagPayload = await Posthog().getFeatureFlagPayload('flag-key');
+  // Optional: fetch the payload
+  final matchedFlagPayload = await Posthog().getFeatureFlagPayload('flag-key');
 }
 ```
 
 ### Ensuring flags are loaded before usage
 
-Every time a user loads a screen, we send a request in the background to fetch the feature flags that apply to that user. We store those flags in the storage.
+Every time a user opens the app, we send a request in the background to fetch the feature flags that apply to that user. We store those flags in the storage.
 
 This means that for most screens, the feature flags are available immediately – **except for the first time a user visits**.
 

@@ -20,7 +20,7 @@ Contrast it with the PostHog interface not loading, where the problem is constra
 
 Further, flags are very sensitive to latency. If it takes 5 seconds for your flags to evaluate, that holds up your customer's application for 5 seconds. You can't wait to load them asynchronously, either, as you need this result to determine what to show. Your business logic depends on the flag.
 
-This is why the [Feature Success team](/teams/feature-success) has spent the last few months making PostHog's feature flags fast and resilient. Our goal was to ensure that:
+This is why the [Feature Flags team](/teams/feature-flags) has spent the last few months making PostHog's feature flags fast and resilient. Our goal was to ensure that:
 
 1. Neither the SDKs that query flags, nor the API interface, should go down if the PostHog interface does
 2. Latency-sensitive flags resolve in 50ms or less. 
@@ -154,3 +154,5 @@ As you can imagine, the p90 is so low because these requests don't touch the dat
 When we are in incident mode, i.e. the app is down completely, feature flag p99 latency drops down to ~80ms as well, because we start skipping all database related flags where these properties weren't sent.
 
 You can see a similar story on [our status page](https://status.posthog.com/uptime/1t4b8gf5psbc?page=3), where feature flags related incidents went down.
+
+<NewsletterForm />

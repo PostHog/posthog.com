@@ -6,14 +6,12 @@ availability:
     enterprise: full
 ---
 
-> This feature is currently in public beta. This means it's not yet a perfect experience, but we'd love to know your thoughts. Please [share your feedback](http://app.posthog.com/home#supportModal) and [follow our roadmap](https://github.com/PostHog/posthog/issues/18547).
-
 You can integrate with [Helicone](https://www.helicone.ai/) and bring data into PostHog for analysis. Additionally, we offer a dashboard template to help you quickly get insights into your LLM product. 
 
-## Integrating with Helicone
+## How to install the integration
 
 1. Sign up for [Helicone](https://www.helicone.ai/) and add it to your app.
-2. Similar to how you set `Helicone-Auth` [header](https://docs.helicone.ai/getting-started/integration-method/openai-proxy#openai-v1) when configuring your LLM client, add two new headers `Helicone-Posthog-Key` and `Helicone-Posthog-Host` with your PostHog host and API key (you can find these in your [PostHog project settings](https://us.posthog.com/settings/project)):
+2. Similar to how you set `Helicone-Auth` [header](https://docs.helicone.ai/helicone-headers/header-directory#supported-headers) when configuring your LLM client, add two new headers `Helicone-Posthog-Key` and `Helicone-Posthog-Host` with your PostHog host and API key (you can find these in your [PostHog project settings](https://us.posthog.com/settings/project)):
 
 <MultiLanguage>
 
@@ -80,6 +78,6 @@ To create your own dashboard from a template:
 
 1. Go the [dashboard tab](https://us.posthog.com/dashboard) in PostHog.
 2. Click the **New dashboard** button in the top right.
-3. Select **LLM metrics – [name of the integration you installed]** from the list of templates.
+3. Select **LLM metrics – Helicone** from the list of templates.
 
 ![How to create an LLM analytics dashboard using the template](https://res.cloudinary.com/dmukukwp6/video/upload/v1713967763/posthog.com/contents/docs/langfuse-dash.mp4)

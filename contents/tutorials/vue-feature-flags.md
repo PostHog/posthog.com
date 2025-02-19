@@ -122,7 +122,7 @@ With PostHog set up, your app is ready for feature flags. To create one, go to t
   classes="rounded"
 />
 
-You can customize your [release conditions](/docs/feature-flags/creating-feature-flags#release-conditions) with rollout percentages, and [user](/docs/product-analytics/user-properties) or [group properties](/docs/product-analytics/group-analytics) to fit your needs.
+You can customize your [release conditions](/docs/feature-flags/creating-feature-flags#release-conditions) with rollout percentages, and [user](/docs/product-analytics/person-properties) or [group properties](/docs/product-analytics/group-analytics) to fit your needs.
 
 ## Implementing our flag code
 
@@ -198,3 +198,5 @@ To ensure you are bootstrapping PostHog with the correct flag values, we recomme
 - [How to set up analytics in Vue](/tutorials/vue-analytics)
 - [How to set up A/B tests in Vue](/tutorials/vue-ab-tests)
 - [How to set up surveys in Vue](/tutorials/vue-surveys)
+
+<NewsletterForm />

@@ -1,0 +1,192 @@
+---
+title: Next.js
+icon: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/integrate/frameworks/nextjs.svg
+features:
+  eventCapture: true
+  userIdentification: true
+  autoCapture: true
+  sessionRecording: true
+  featureFlags: true
+  groupAnalytics: true
+  surveys: true
+  llmObservability: true
+  errorTracking: true
+---
+
+PostHog makes it easy to get data about traffic and usage of your [Next.js](https://nextjs.org/) app. Integrating PostHog into your site enables analytics about user behavior, custom events capture, session recordings, feature flags, and more.
+
+This guide walks you through integrating PostHog into your Next.js app using the [React](/docs/libraries/react) and the [Node.js](/docs/libraries/node) SDKs.
+
+> You can see a working example of this integration in our [Next.js demo app](https://github.com/PostHog/posthog-js/tree/master/playground/nextjs).
+
+Next.js has both client and server-side rendering, as well as pages and app routers. We'll cover all of these options in this guide.
+
+## Prerequisites
+
+To follow this guide along, you need:
+
+1. A PostHog instance (either [Cloud](https://app.posthog.com/signup) or [self-hosted](/docs/self-host))
+2. A Next.js application
+
+## Client-side setup
+
+import NextJSInstall from "../../integrate/_snippets/nextjs/install-nextjs.mdx"
+
+<NextJSInstall />
+
+### Accessing PostHog using the provider
+
+PostHog can then be accessed throughout your Next.js app by using the `usePostHog` hook. See the [React SDK docs](/docs/libraries/react) for examples of how to use:
+
+- [`posthog-js` functions like custom event capture, user identification, and more.](/docs/libraries/react#using-posthog-js-functions)
+- [Feature flags including variants and payloads.](/docs/libraries/react#feature-flags)
+
+You can also read [the full posthog-js documentation](/docs/libraries/js) for all the usable functions.
+
+## Server-side analytics
+
+Server-side rendering enables you to render pages on the server instead of the client. This can be useful for SEO, performance, and user experience.
+
+To integrate PostHog into your Next.js app on the server-side, you can use the [Node SDK](/docs/libraries/node).
+
+First, install the `posthog-node` library:
+
+```shell
+yarn add posthog-node
+# or
+npm install --save posthog-node
+```
+
+### Router-specific instructions
+
+import Tab from "components/Tab"
+import AppRouterServerSetup from "./_snippets/app-router-server-setup.mdx"
+import PagesRouterServerSetup from "./_snippets/pages-router-server-setup.mdx"
+
+<Tab.Group tabs={[
+    'App router', 
+    'Pages router']}>
+    <Tab.List>
+        <Tab>App router</Tab>
+        <Tab>Pages router</Tab>
+    </Tab.List>
+    <Tab.Panels>
+        <Tab.Panel>
+            <AppRouterServerSetup />
+        </Tab.Panel>
+        <Tab.Panel>
+            <PagesRouterServerSetup />
+        </Tab.Panel>
+    </Tab.Panels>
+</Tab.Group>
+
+### Server-side Configuration
+
+NextJS overrides the default `fetch` behaviour on the server to introduce their own cache. Posthog will ignore that cache by default, as this is also NextJS's default behavior to any fetch call.
+
+You can override that configuration when initializing Posthog if you wish, but make sure you understand the pros/cons of using NextJS's cache and are aware that you might get cached results rather than the actual result our server would be returning - for feature flags, for example.
+
+```tsx
+posthog.init(process.env.NEXT_PUBLIC_POSTHOG_KEY, {
+  // ... your configuration
+  fetch_options: {
+    cache: 'force-cache', // Use NextJS cache
+    next_options: {       // Passed to the `next` option for `fetch`
+      revalidate: 60,     // Cache for 60 seconds
+      tags: ['posthog'],  // Can be used with NextJS `revalidateTag` function
+    },
+  }
+})
+```
+
+## Configuring a reverse proxy to PostHog
+
+To improve the reliability of client-side tracking and make requests less likely to be intercepted by tracking blockers, you can setup a reverse proxy in Next.js. Read more about deploying a reverse proxy using [Next.js rewrites](/docs/advanced/proxy/nextjs), [Next.js middleware](/docs/advanced/proxy/nextjs-middleware), and [Vercel rewrites](/docs/advanced/proxy/vercel).
+
+## Frequently asked questions
+
+### Does wrapping my app in the PostHog provider de-opt it to client-side rendering?
+
+No. Even though the PostHog provider is a client component, since we pass the `children` prop to it, any component inside the children tree can still be a server component. Next.js creates a boundary between server-run and client-run code. 
+
+The [`use client` reference](https://react.dev/reference/rsc/use-client) says that it "defines the boundary between server and client code on the module dependency tree, not the render tree." It also says that "During render, the framework will server-render the root component and continue through the render tree, opting-out of evaluating any code imported from client-marked code."
+
+Pages router components are client components by default.
+
+### What does wrapping my app in the PostHog provider do?
+
+On top of the standard features like autocapture, custom events, session recording, and more, wrapping your app in the PostHog provider gives you:
+
+1. The `usePostHog`, `useFeatureFlagEnabled`, and other hooks in any component.
+2. A PostHog context you can access in any component.
+3. The `<PostHogFeature>` component which simplifies feature flag logic.
+
+See the [React SDK docs](/docs/libraries/react) for more details.
+
+### Why use a `useEffect` hook to initialize PostHog?
+
+We want to initialize PostHog when the app is loaded. The [React docs](https://react.dev/learn/synchronizing-with-effects) recommend using a `useEffect` hook to do this:
+
+> Effects let you specify side effects that are caused by rendering itself, rather than by a particular event. 
+
+Technically, you can also use a `window` object check to initialize PostHog. This happens outside the React lifecycle, meaning it happens earlier and it looks like this:
+
+<MultiLanguage>
+
+```js
+// app/providers.js
+'use client'
+import posthog from 'posthog-js'
+import { PostHogProvider } from 'posthog-js/react'
+
+if (typeof window !== 'undefined') {
+  posthog.init(process.env.NEXT_PUBLIC_POSTHOG_KEY, {
+    api_host: process.env.NEXT_PUBLIC_POSTHOG_HOST,
+    capture_pageview: false // Disable automatic pageview capture, as we capture manually
+  })
+}
+
+export function PHProvider({ children }) {
+  return <PostHogProvider client={posthog}>{children}</PostHogProvider>
+}
+```
+
+```tsx
+// app/providers.tsx
+'use client'
+import posthog from 'posthog-js'
+import { PostHogProvider } from 'posthog-js/react'
+
+if (typeof window !== 'undefined') {
+  posthog.init(process.env.NEXT_PUBLIC_POSTHOG_KEY!, {
+    api_host: process.env.NEXT_PUBLIC_POSTHOG_HOST,
+    capture_pageview: false // Disable automatic pageview capture, as we capture manually
+  })
+}
+
+export function PHProvider({
+  children,
+}: {
+  children: React.ReactNode
+}) {
+  return <PostHogProvider client={posthog}>{children}</PostHogProvider>
+}
+```
+
+</MultiLanguage>
+
+The problem with this is that it can cause a [hydration and/or mismatch error](https://nextjs.org/docs/messages/react-hydration-error) like `Warning: Prop dangerouslySetInnerHTML did not match.`.
+
+### Why does the pageview component need a `useEffect`? 
+
+Using a `useEffect` hook is the simplest way to accurately capture pageviews. Other approaches include:
+
+1. Not using a `useEffect` hook, but this might lead to duplicate page views being tracked if the component re-renders for reasons other than navigation. It might work depending on your implementation. 
+2. Using `window.navigation` to track pageviews, but this approach is more complex and is [not supported](https://developer.mozilla.org/en-US/docs/Web/API/Window/navigation) in all browsers. 
+
+## Further reading
+
+- [How to set up Next.js app router analytics, feature flags, and more](/tutorials/nextjs-app-directory-analytics)
+- [How to set up Next.js analytics, feature flags, and more](/tutorials/nextjs-analytics)
+- [How to set up Next.js A/B tests](/tutorials/nextjs-ab-tests)

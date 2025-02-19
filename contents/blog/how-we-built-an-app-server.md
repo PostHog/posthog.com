@@ -317,3 +317,5 @@ The ability to leverage PostHog to customize, control, and fully utilize your da
 - Feeling inspired? [Learn how to make your own app](/tutorials/build-your-own-posthog-app).
 - More of a frontend person? Check out our tutorial on [building site apps](/tutorials/build-site-app).
 - Want to dive deeper into apps? [Check out our app docs](/docs/apps)
+
+<NewsletterForm />

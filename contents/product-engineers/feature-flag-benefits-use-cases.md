@@ -124,7 +124,7 @@ There are many tools you can use to leverage feature flags and capture their ben
 
 Each has different features, here's a comparison of them:
 
-<div className="overflow-x-auto -mx-5 px-5">
+<OverflowXSection>
 <table className="w-full mt-4" style="min-width: 600px;">
     <thead>
         <tr>
@@ -227,7 +227,7 @@ Each has different features, here's a comparison of them:
         </tr>   
     </tbody>
 </table>
-</div>
+</OverflowXSection>
 
 Except for PostHog, each of these tools focuses specifically on feature flags. In doing so, they miss out on the benefits of having all of your data in one place. For example, to get data on the usage of a feature flag, you would need to integrate a third-party analytics platform. 
 
@@ -238,3 +238,5 @@ PostHog has all the tools you need to build a great product, and they are integr
 - [Master Feature Flags: Best practice, tips and examples](/blog/feature-flag-best-practices)
 - [How to do a canary release with feature flags](/tutorials/canary-release)
 - [Running experiments on new users](/tutorials/new-user-experiments)
+
+<NewsletterForm />

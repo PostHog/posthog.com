@@ -75,4 +75,4 @@ Before PostHog started, James had to sell to get Tim to join. After the company 
 
 On the ops and product side, it involves thinking about how the company and our business model should work - including our [product](/handbook/strategy/roadmap), financing, [deployment](/docs/self-host), [team structure](/handbook/team-structure), and [pricing](/pricing) strategies.
 
-_Enjoyed this? Subscribe to our [newsletter](/newsletter) to hear more from us twice a month!_
+<NewsletterForm />

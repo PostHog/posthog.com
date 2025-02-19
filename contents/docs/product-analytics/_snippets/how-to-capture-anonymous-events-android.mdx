@@ -1,0 +1,18 @@
+The Android SDK captures anonymous events by default. However, this may change depending on your `personProfiles` [config](/docs/libraries/android#all-configuration-options) when initializing PostHog:
+
+1. `personProfiles = PersonProfiles.IDENTIFIED_ONLY` _(recommended)_ _(default)_ - Anonymous events are captured by default. PostHog only captures identified events for users where [person profiles](/docs/data/persons) have already been created.
+
+2. `personProfiles = PersonProfiles.ALWAYS` - Capture identified events for all events.
+
+3. `personProfiles = PersonProfiles.NEVER` - Capture anonymous events for all events.
+
+For example:
+
+```kotlin
+val config = PostHogAndroidConfig(
+   apiKey = POSTHOG_API_KEY,
+   host = POSTHOG_HOST,
+).apply {
+   personProfiles = PersonProfiles.IDENTIFIED_ONLY
+}
+```

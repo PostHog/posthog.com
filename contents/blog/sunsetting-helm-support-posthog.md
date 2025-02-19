@@ -67,3 +67,5 @@ Finally, there will no longer be numbered releases of PostHog. Instead, we'll bu
 Thank you to everyone who continues to support and contribute to PostHog. We'll continue to build in public and work transparently, and I highly recommend you check out [our public roadmap](/roadmap) to see and give feedback on the exciting things we're building right now.
 
 – Tim Glaser, Co-founder and CTO
+
+<NewsletterForm />

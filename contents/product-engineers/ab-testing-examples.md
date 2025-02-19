@@ -7,12 +7,12 @@ featuredImage: >-
   https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/experiment-hog.jpg
 featuredImageType: full
 tags:
-  - AB testing
+  - Experiments
   - Y Combinator
   - Product engineers
 ---
 
-[A/B testing](/ab-testing) is powerful when used correctly, but it's easily misused. Only comparing the old version with a new feature, copy change, or query does not create success.
+[A/B testing](/experiments) is powerful when used correctly, but it's easily misused. Only comparing the old version with a new feature, copy change, or query does not create success.
 
 In the wise words of Picasso: "Good artists copy, great artists steal." So, to help you become a great A/B test "artist," we’ve researched how some of Y Combinator’s most successful companies do A/B tests.
 

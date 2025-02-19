@@ -1,3 +1,4 @@
+import CloudinaryImage from 'components/CloudinaryImage'
 import { Quote } from 'components/Pricing/Quote'
 import { StaticImage } from 'gatsby-plugin-image'
 import React from 'react'
@@ -16,7 +17,7 @@ export default function Intro({ name }: { name: string }) {
             <Quote
                 name="James Hawkins"
                 title="Co-founder & CEO"
-                image={<StaticImage alt="James Hawkins" width={80} src="../../images/james.png" />}
+                image={<CloudinaryImage alt="James Hawkins" width={80} src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/images/james.png" />}
             />
         </Card>
     )

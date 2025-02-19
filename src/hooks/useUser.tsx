@@ -38,7 +38,12 @@ type UserContextValue = {
         lastName: string
     }) => Promise<User | null | { error: string }>
     isSubscribed: (contentType: 'topic' | 'question', id: number | string) => Promise<boolean>
-    setSubscription: (contentType: 'topic' | 'question', id: number | string, subscribe: boolean) => Promise<void>
+    setSubscription: (args: {
+        contentType: 'topic' | 'question'
+        id: number | string
+        subscribe: boolean
+        user?: User
+    }) => Promise<void>
     likePost: (id: number, unlike?: boolean, slug?: string) => Promise<void>
     likeRoadmap: ({
         id,
@@ -53,6 +58,7 @@ type UserContextValue = {
     }) => Promise<void>
     notifications: any
     setNotifications: any
+    isValidating: boolean
 }
 
 export const UserContext = createContext<UserContextValue>({
@@ -75,6 +81,7 @@ export const UserContext = createContext<UserContextValue>({
     likeRoadmap: async () => undefined,
     notifications: [],
     setNotifications: () => undefined,
+    isValidating: true,
 })
 
 type UserProviderProps = {
@@ -83,6 +90,7 @@ type UserProviderProps = {
 
 export const UserProvider: React.FC<UserProviderProps> = ({ children }) => {
     const [isLoading, setIsLoading] = useState(false)
+    const [isValidating, setIsValidating] = useState(true)
     const [user, setUser] = useState<User | null>(null)
     const [jwt, setJwt] = useState<string | null>(null)
     const [notifications, setNotifications] = useState<any>([])
@@ -96,6 +104,7 @@ export const UserProvider: React.FC<UserProviderProps> = ({ children }) => {
         } else {
             logout()
         }
+        setIsValidating(false)
     }
 
     useEffect(() => {
@@ -354,11 +363,8 @@ export const UserProvider: React.FC<UserProviderProps> = ({ children }) => {
 
         // We don't want any error thrown here to bubble up to the caller.
         try {
-            // We use the existing distinct_id here so we don't clobber the currently identified user.
-            const distinctId = posthog?.get_distinct_id?.()
-
-            if (distinctId && meData?.profile) {
-                posthog?.identify(distinctId, {
+            if (meData?.profile) {
+                posthog?.setPersonProperties({
                     // IMPORTANT: Make sure all properties start with `squeak` so we don't override any existing properties!
                     squeakEmail: meData.email,
                     squeakUsername: meData.username,
@@ -414,12 +420,18 @@ export const UserProvider: React.FC<UserProviderProps> = ({ children }) => {
         return data?.length > 0
     }
 
-    const setSubscription = async (
-        contentType: 'topic' | 'question',
-        id: number | string,
+    const setSubscription = async ({
+        contentType,
+        id,
+        subscribe,
+        ...other
+    }: {
+        contentType: 'topic' | 'question'
+        id: number | string
         subscribe: boolean
-    ): Promise<void> => {
-        const profileID = user?.profile?.id
+        user?: User
+    }): Promise<void> => {
+        const profileID = other?.user?.profile?.id || user?.profile?.id
         if (!profileID || !contentType || !id) return
 
         const body = {
@@ -430,12 +442,14 @@ export const UserProvider: React.FC<UserProviderProps> = ({ children }) => {
             },
         }
 
+        const jwt = await getJwt()
+
         const subscriptionRes = await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/profiles/${profileID}`, {
             method: 'PUT',
             body: JSON.stringify(body),
             headers: {
                 'Content-Type': 'application/json',
-                Authorization: `Bearer ${await getJwt()}`,
+                Authorization: `Bearer ${jwt}`,
             },
         })
 
@@ -562,6 +576,7 @@ export const UserProvider: React.FC<UserProviderProps> = ({ children }) => {
         likeRoadmap,
         notifications,
         setNotifications: updateNotifications,
+        isValidating,
     }
 
     return <UserContext.Provider value={contextValue}>{children}</UserContext.Provider>

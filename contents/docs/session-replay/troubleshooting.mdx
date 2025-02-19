@@ -40,13 +40,15 @@ You can read more about [posthog-js configurations here](/docs/integrate/client/
 
 When recordings are enabled, postHog-js will fetch a `recorder.js` script from the PostHog server. (This is not included in the default posthog-js to minimize the default bundle size)
 
-Depending on your content security policy, this script may be blocked. If you have a `default-src`, `script-src`, `script-src-elem`, or `connect-src` directive in your CSP, you may need to ensure that PostHog doamins are permitted (see [CSP documentation](/docs/advanced/content-security-policy)).
+Depending on your content security policy, this script may be blocked. If you have a `default-src`, `script-src`, `script-src-elem`, or `connect-src` directive in your CSP, you may need to ensure that PostHog domains are permitted (see [CSP documentation](/docs/advanced/content-security-policy)).
 
 If PostHog is being blocked by your content security policy, you should see an error message in your developer console with more details.
 
 ### 4. Ad/tracking blockers
 
 Some ad/tracking blockers will block PostHog from fetching `posthog-js`. If you're testing your app locally, you may need to disable any ad/tracking blockers that you're running in your browser.
+
+[Deploying a reverse proxy](https://posthog.com/docs/advanced/proxy) is the best way to avoid tracking blockers intercepting calls to PostHog.
 
 ## Replay of recording looks incorrect or buggy
 
@@ -68,6 +70,11 @@ If the `crossorigin` attribute is not set on `link` elements a Chrome specific p
 
 Setting `crossorigin="anonymous"` is the safest value you can set for the parameter as [no user credentials are added to the request](https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/crossorigin#anonymous).
 
+### Ensure assets are imported from the base URL in Svelte
+By default, `base` and `assets` imported from `$app/paths` in Svelte use relative asset paths during server-side rendering.
+
+For apps with SSR enabled you should set `relative` to `false` in the [`paths` object of your config](https://kit.svelte.dev/docs/configuration#paths). This ensures all asset URLs will correctly be resolved against the base URL rather than the current page.
+
 ## Filtering can't find my custom events
 
 The most common reason for this is that you're trying to filter by events that weren't sent by the web SDK. For example, from another tool like Segment or one of our backend SDKs.
@@ -76,9 +83,21 @@ Session replay relies on the `$session_id` property added to events by the web S
 
 To workaround this, you can use the `posthog.onSessionId` method in the web SDK to register a callback that will be called each time the session ID changes. You can send this to your backend and add the `$session_id` property to your backend events. 
 
+## Person not found
+
+If you are able to capture a replay, but the entry says "person not found," this is replay has been captured from an anonymous user and a [person profile](/docs/data/persons) has **not** been created for them. 
+
+To fix this, either call a method that creates a person profile (like `identify()`) or set the `person_profiles` value to `always`. See our doc on [anonymous vs identified events](/docs/data/anonymous-vs-identified-events) for more.
+
 ## Browser freezes or crashes when recordings are enabled
 
 Some Cookie banners or "CMP"s modify the webpage in reaction to any changes to cookies, which can cause an infinite loop. If you are using a tool like this and experience the webpage becoming unresponsive or slow then try [configuring posthog](/docs/integrate/client/js#persistence) to use `persistence: "localStorage+cookie"`. This will use localStorage for the majority of storage needs, bypassing the infinite loop issue sometimes caused by cookie management tools.
+
+## Network payload capture is not capturing headers
+
+Browser do not automatically allow JS to read headers from cross-origin requests. So, when making a request from app.mywebsite.example to api.mywebsite.example headers are not available to be copied and reported.
+
+You need to add `Access-Control-Expose-Headers: *` as a header on responses from api.mywebsite.example to allow all headers to be read cross origin. You can specify which headers you want to be available `Access-Control-Expose-Headers: Content-Encoding, X-Correlation-Id` if you don't want all headers to be accessible.
 
 ## Recorder Limitations
 
@@ -87,6 +106,10 @@ Due to the complexity of browser rendering and replay, some web resources are un
 - **Object elements** - Most object elements cannot be played back. Non-HTML native plugins such as Flash or Silverlight cannot be recorded
 - **Heavy animations** - Some heavier animations such as SVG or Lottie animations may be _throttled_ or ignored entirely due to the performance overhead in recording and replaying
 - **Iframes** - iframes from the origins under your control **can** be recorded and played back. See [iframe recording](/docs/session-replay/iframes) for more info.
+
+## Angular performance
+
+It is sometimes necessary to run session replay outside of the Angular zone. See the [PostHog Angular docs for more detail](/docs/libraries/angular#session-replay)
 
 ## Report your specific issue
 

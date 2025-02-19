@@ -76,7 +76,7 @@ More pleasingly, we had a bunch of GitHub issues raised, and even a PR or two fr
 
 We were off to the races!
 
-_Enjoyed this? Subscribe to our [newsletter](https://newsletter.posthog.com/subscribe) to hear more from us twice a month!_
+<NewsletterForm />
 
 
 

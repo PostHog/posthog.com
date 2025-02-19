@@ -23,7 +23,9 @@ PostHog provides options to capture fewer events and limit the number of unwante
 
 ## Configuring autocapture
 
-Autocapture enables you to start capturing events on your site quickly, but this can lead to large numbers of events. 
+[Autocapture](/docs/product-analytics/autocapture) is a powerful way to capture user behavior and interactions without needing to manually set up events. It captures data you didn't know you need before you realize you need it. This helps you do analysis without waiting days or weeks for manually instrumented events to show up.
+
+The potential challenge for high-traffic apps and sites is too many events being captured.
 
 To counteract this, autocapture is configurable. For example, you can use the frontend JavaScript library without enabling autocapture. Just set `autocapture` to `false` when initializing the library (this still captures `pageview` and `pageleave`).
 
@@ -89,7 +91,7 @@ PostHog has apps that enable you to modify the events flowing into your instance
 
 The first app is the "Filter Out" app. It is used to filter out (or in) events matching certain conditions. This includes filters like number comparison, string regex, and boolean checks.
 
-To set it up, go to Browse Apps, search for "Filter Out Plugin," and upload JSON matching the schema detailed in the [README](https://github.com/posthog/posthog-filter-out-plugin). This will look something like:
+To set it up, navigate to Data Pipeline, select the Transformations tab, select the **+ New transformation** button (in the top right hand corner), and search for "Filter Out Plugin". Upload JSON matching the schema detailed in the [README](https://github.com/posthog/posthog-filter-out-plugin). This will look something like:
 
 ```js
 [
@@ -134,5 +136,7 @@ On top of this, you must guess what percentage you need. A percentage of a large
 Hopefully, these options helped you get your event data ingestion and costs in control. From that, you can increase the amount you are capturing again. Here are some recommendations to help you out:
 
 - Not getting enough events? Check out our [event tracking guide](/tutorials/event-tracking-guide).
-- Trouble with pageview captures on your single page app? Check out our [tutorial on how to set it up](/tutorials/spa).
+- Trouble with pageview captures on your single-page app? Check out our [tutorial on how to set it up](/tutorials/spa).
 - Want to avoid using cookies in your tracking? Follow our [cookieless tracking tutorial](/tutorials/cookieless-tracking).
+
+<NewsletterForm />

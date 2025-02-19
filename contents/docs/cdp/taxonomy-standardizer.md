@@ -1,5 +1,5 @@
 ---
-title: Taxonomy Standardizer
+title: Standardize event names
 installUrl: 'https://app.posthog.com/project/apps?name=Taxonomy+Plugin'
 github: 'https://github.com/PostHog/taxonomy-plugin'
 thumbnail: >-
@@ -28,7 +28,7 @@ This transformation can convert from any of these taxonomies, to any other.
 
 ## Installation
 
-1. In PostHog, click the "[Data pipeline](https://us.posthog.com/apps)" tab in the left sidebar.
+1. In PostHog, click the "[Data pipeline](https://us.posthog.com/pipeline)" tab in the left sidebar.
 2. Search for 'Taxonomy Standardizer' and select the transformation, press Install.
 3. Follow the on-screen steps to configure the transformation.
 

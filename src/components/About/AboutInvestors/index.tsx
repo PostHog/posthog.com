@@ -94,7 +94,7 @@ export const AboutInvestors = () => {
                     role="Perfect Audience Founder, YC Group Partner"
                     photo="/images/investors/brad-flora.jpg"
                 />
-                <Investor name="Adam Goldsteim" role="Hipmunk Founder" photo="/images/investors/adam-goldstein.jpg" />
+                <Investor name="Adam Goldstein" role="Hipmunk Founder" photo="/images/investors/adam-goldstein.jpg" />
                 <Investor name="Solomon Hykes" role="Docker Founder" photo="/images/investors/solomon-hykes.jpg" />
                 <Investor name="Rujul Zaparde" role="Flightcar Founder" photo="/images/investors/rujul-zaparde.jpg" />
 

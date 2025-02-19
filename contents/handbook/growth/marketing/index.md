@@ -4,64 +4,17 @@ sidebar: Handbook
 showTitle: true
 ---
 
-The Marketing & Content team exist to drive organic, word-of-mouth growth by:
-
-1. Producing world-class top-of-funnel content for our ICP
-2. Ensuring the information users need is easy to find and maintained to a high standard
-
-Marketing is the [newsroom](https://en.wikipedia.org/wiki/Newsroom) of PostHog. This means:
-
-- A small, talented team of in-house content creators with strong editorial capability – our default is to keep writing in-house, not farm it out to a network of freelancers.
- 
-- Building a reputation for high-quality, trustworthy content that is a go-to resource for our users and wider reading audience. 
-
-- Extreme responsiveness to opportunities, both internal and external (e.g. cool Hackathon projects, GDPR rulings).
- 
-- Proactively reporting and amplifying company and product news, rather than [artificially creating news](https://en.wikipedia.org/wiki/Tomorrow_Never_Dies) or buzz by telling people what to build.
-
-The latest goals for marketing can be found on the [Marketing Small Team page](/teams/marketing).
-
-## Marketing & content vision 
-
-PostHog's [vision](/handbook/strategy/overview#long-term-vision-for-2026) is to IPO in 2026 with $100m ARR. This is what we think marketing & content at PostHog will look like at that point. 
-
-### Things we want to be brilliant at
-
-- **Acting as the newsroom of PostHog:** We actively engage with engineering teams (like a journalist would engage with subjects), find out what they’re working on and partner with them to amplify what they are doing.
- 
-- **Word of mouth mindset:** By IPO, we want to have built a hugely successful company driven primarily by word of mouth, rather than paid ads or PR.
-
-- **Speed:** We want to be highly reactive, low process, and reliant on other teams as little as possible to ship things. We want to get stuff wrong quickly, then iterate. 
-
-- **Content for our ideal customer:** We deliver genuinely useful insights about things those customers care about (can be purely product-related, but also general advice). We're pitching our content at ‘self-servers’. Ahrefs and HubSpot are examples of companies who do this brilliantly for their audience.
-
-- **Documentation** We work with Website & Docs, and product teams, to maintain docs to a high standard, and ensure users can easily find answers to their questions
- 
-### Things we want to be good at
-
-- **Social media:** Specifically Twitter, where we've seen good traction posting on James' personal account and the PostHog brand account. We do a minimal amount of posting on PostHog's LinkedIn account to keep it active, but it's not an important channel for us. We don't use any other social media channels. 
-
-- **Paid ads:** An agency should keep handling this for us, but we shouldn’t get better at it internally. This includes out of home, should we ever decide to do this. We see paid ads as a hygiene factor. 
-
-### Things we might want to be good at but haven't tested yet
-
-- **Developer influencers:** A small but growing trend in the industry, most of these are very expensive and overwhelmingly focused on teaching people how to code (i.e. not our target audience). We tried this with an agency and didn't get traction, but have seen some early promising signs going to developers directly. 
-
-- **Highly visible at industry events:** We could become known for giving good talks at events, because this enhances word of mouth and is a natural extension of being good at creating good content.
- 
-- **Being cool and interesting people in online communities:** We could do a lot more of this in relevant communities in Slack/Discord/Stack Overflow etc., and it's more engaging than one-way social media. We also increase awareness in relevant communities by sponsoring them. Overall, we want to be a net contributor to those communities.
-
-### Things we don't want to spend time on
-
-- **Big, highly coordinated marketing campaigns:** We can do them, but our reactive, short turnaround campaigns have been far more successful. 
-
-- **PR:** If we do word of mouth well, our community will be far more valuable/credible than an appearance in TechCrunch.
-
-- **Incentivised campaigns** - e.g. GitHub stars campaign. It's not clear how these can be repeatable sources of successful word of mouth growth for us, but they will occasionally be useful.
-
 ## How marketing works
 
-These are our main values:
+Marketing at PostHog is a collaborative effort dispersed across three teams:
+
+- **Content & Docs:** Responsible for content marketing, SEO, and maintaining documentation.
+- **Words & Pictures:** Responsible for product marketing, artwork, paid ads, events, and email marketing.
+- **Website & Vibes:** Responsible for website design, community, and backend.
+
+See [Marketing ownership](/handbook/growth/marketing/ownership) for more.
+
+## Marketing values
 
 1. Be opinionated
 2. Pull, don’t push
@@ -81,7 +34,7 @@ It's ok to have a sense of humor. We are more likely to die because we are forge
 
 ### 2. Pull, don't push
 
-_We focus on word of mouth by default._ We believe customers will judge us first and foremost on our product (ie. our app, our website, and our docs). We won’t set ourselves up for long-term success if we push customers into using us. 
+_We focus on word of mouth by default._ We believe customers will judge us first and foremost on our product (i.e. our app, our website, and our docs). We won’t set ourselves up for long-term success if we push customers into using us. 
  
 If a customer doesn't choose PostHog, that means either:
  
@@ -117,24 +70,37 @@ For these reasons, we:
  
 - Don't pretend our customers are different from us – i.e. more gullible, more susceptible to marketing. We are an engineering-led team building products for other engineers. If you wouldn't like it, assume our customers wouldn't either. 
 
-## Marketing channels and tactics today
+## Marketing vision 
 
-The Marketing team's main focus is acquisition of customers in our [ideal customer profile](/handbook/strategy/ideal-customer-persona) (ICP). 
+### Things we want to be brilliant at
+ 
+- **Word of mouth mindset:** By IPO, we want to build a hugely successful company driven primarily by word of mouth, rather than paid ads or PR.
 
-We have established that _word of mouth_ is the most effective way to do this – virtually all of our high quality signups have come organically. 
+- **Speed:** We want to be highly reactive, low process, and reliant on other teams as little as possible to ship things. We want to get stuff wrong quickly, then iterate.
 
-Our channels are listed in the sidebar, including those currently on hiatus. By far, our most important channel is Content & SEO.  
+- **Helping PostHog users be successful:** Through our docs, tutorials, [newsletter](/handbook/content-and-docs/newsletter) and beyond, we help PostHog users be more successful, both generally in their goals, but also more successful and powerful users of PostHog.
 
-## Competitors
+- **Content for our ideal customer:** We deliver genuinely useful insights about things those customers care about (can be purely product-related, but also general advice). We're pitching our content at ‘self-servers’.
 
-Sometimes we summarise our findings into internal reports to help us stay informed and understand how other products are developing. Our collection of summaries isn't exhaustive and cannot be shared publicly as it often includes details of the experiences of individual user experiences whose privacy we don't want to sacrifice. However, PostHog team members can find our competitor summaries in [the relevant folder of the Marketing shared drive](https://drive.google.com/drive/folders/1RdzCKhGjJ3f7RbzvBkVjKfPXZ0lbBefY?usp=sharing). 
+- **Documentation** We work with product teams to maintain update-to-date, high quality docs. We work with Website & Docs to ensure users can discover what they want to know. 
+ 
+### Things we want to be good at
 
-## Who the marketing team are
+- **Social media:** Specifically Twitter, where we've seen good traction posting on [James' personal account](https://x.com/james406) and the PostHog brand account. We do a minimal amount of posting on PostHog's LinkedIn account to keep it active, but it's not an important channel for us. We don't use any other social media channels. 
 
-The Marketing Small Team page is maintained [here](/teams/marketing). By 2026, we still want to be a very small but highly effective and responsive team (15-20 people), rather than a very large marketing team with all the traditional functions and hierarchy. In addition to people who share PostHog's culture, we also value:
 
-- Strong opinions 
-- People who like to choose their own objectives 
-- T-shaped people (wide breadth with a spike), rather than specialists
-- Hands-on people not motivated by managing a team
-- We're agnostic as to experience 
+- **Developer influencers:** We sponsor creators like Theo and Fireship to drive awareness and signups to PostHog. Many of the influencers we sponsor don't work out, but the ones that work drive great results. 
+
+### Things we might want to be good at but haven't tested yet
+
+- **Highly visible at industry events:** We could become known for giving good talks at events, because this enhances word of mouth and is a natural extension of being good at creating good content.
+ 
+- **Being cool and interesting people in online communities:** We could do a lot more of this in relevant communities in Slack/Discord/Stack Overflow etc., and it's more engaging than one-way social media. We also increase awareness in relevant communities by sponsoring them. Overall, we want to be a net contributor to those communities.
+
+### Things we don't want to spend time on
+
+- **Big, highly coordinated marketing campaigns:** We can do them, but our reactive, short turnaround campaigns have been far more successful. 
+
+- **PR:** If we do word of mouth well, our community will be far more valuable/credible than an appearance in TechCrunch.
+
+- **Incentivised campaigns** - e.g. GitHub stars campaign. It's not clear how these can be repeatable sources of successful word of mouth growth for us, but they will occasionally be useful.

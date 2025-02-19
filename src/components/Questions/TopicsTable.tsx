@@ -18,6 +18,7 @@ import {
     IconPeople,
     IconPieChart,
     IconPhone,
+    IconPlug,
     IconPrivacy,
     IconPulse,
     IconRewindPlay,
@@ -35,6 +36,7 @@ import {
     IconMapPin,
     IconHandwave,
     IconCoffee,
+    IconWarning,
 } from '@posthog/icons'
 
 import { Megaphone, SparksJoy } from 'components/NotProductIcons'
@@ -45,16 +47,18 @@ import { API, DataManagement, DataWarehouse } from 'components/ProductIcons'
 dayjs.extend(relativeTime)
 
 export const topicIcons = {
-    'a/b testing': IconFlask,
+    experiments: IconFlask,
     api: IconTerminal,
     apps: IconApps,
     cohorts: Cohorts, // to be replaced or removed
     configuration: IconGear,
     dashboards: IconDashboard,
+    cdp: IconPlug,
     'data pipelines': IconDecisionTree,
     'data warehouse': IconDatabase,
     deployment: IconRocket,
     '#devrel': IconCoffee,
+    'error tracking': IconWarning,
     'events & actions': IconCursor,
     'feature flags': IconToggle,
     funnels: IconFunnels,

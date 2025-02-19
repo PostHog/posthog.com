@@ -1,0 +1,32 @@
+To capture custom events, evaluate feature flags, and use any of the other PostHog features, you can use the `$posthog` object returned from the plugin like this:
+
+```js
+// src/components/AboutPage.vue
+<template>
+  <div class="about">
+    <h1>About Page</h1>
+    <button @click="handleClick">Test PostHog</button>
+    <router-link to="/">Go to Home</router-link>
+    <p>Feature enabled? {{ isFeatureEnabled ? 'Yes' : 'No' }}</p>
+  </div>
+</template>
+
+<script>
+export default {
+  name: 'AboutPage',
+  data() {
+    return {
+      isFeatureEnabled: false
+    }
+  },
+  created() {
+    this.isFeatureEnabled = this.$posthog.isFeatureEnabled('test-flag')
+  },
+  methods: {
+    handleClick() {
+      this.$posthog.capture('button_clicked')
+    }
+  }
+}
+</script>
+```

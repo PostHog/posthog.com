@@ -1,12 +1,12 @@
 ---
-title: SQL (beta)
+title: SQL insights (beta)
 availability:
     free: full
     selfServe: full
     enterprise: full
 ---
 
-SQL insights enable you to directly access data in PostHog using [SQL queries](/blog/sql-for-analytics). They're powered by [HogQL](/docs/hogql).
+SQL insights enable you to directly access data in PostHog using [SQL queries](/blog/sql-for-analytics).
 
 ## SQL commands
 
@@ -110,6 +110,16 @@ FROM events
 WHERE event = '$pageview'
    AND toDate(timestamp) = today()
    AND properties.$current_url LIKE '%/blog%'
+```
+
+To have the insight or dashboard date range selector apply to the insight, include `{filters}` in query like this:
+
+```sql
+SELECT *
+FROM events
+WHERE event = '$pageview'
+   AND properties.$current_url LIKE '%/blog%'
+   AND {filters}
 ```
 
 `WHERE` is also useful for querying across multiple tables. For example, if you have the Hubspot connector set up, you can get a count of events for contacts with a query like this:
@@ -286,7 +296,7 @@ FROM events
 
 ## Useful functions
 
-HogQL includes many functions to aggregate and manipulate queried data. Below are some examples of some of the most popular SQL functions you can use in your insights. 
+Our SQL flavor includes many functions to aggregate and manipulate queried data. Below are some examples of some of the most popular SQL functions you can use in your insights. 
 
 ### Aggregate functions
 
@@ -306,7 +316,7 @@ FROM events
 WHERE event = '$pageview' AND properties.$screen_height IS NOT NULL
 ```
 
-You can find a full list of these in [supported aggregations](/docs/hogql/aggregations).
+You can find a full list of these in [supported aggregations](/docs/sql/aggregations).
 
 #### Count
 
@@ -314,9 +324,9 @@ Use `count()` to count the number of rows in a particular column. `count(*)` cou
 
 ### Regular functions
 
-HogQL provides many functions for accessing, modifying, and calculating data from queries. Along with the ones listed below, many basics include calculation operators (`+`, `-`, `/`, `*`), type conversions (`toInt`, `toString`), conditional statements (`if`, `multiIf`), and rounding (`floor`, `round`).
+Our SQL flavor provides many functions for accessing, modifying, and calculating data from queries. Along with the ones listed below, many basics include calculation operators (`+`, `-`, `/`, `*`), type conversions (`toInt`, `toString`), conditional statements (`if`, `multiIf`), and rounding (`floor`, `round`).
 
-You can find a full list of these in [supported ClickHouse functions](/docs/hogql/clickhouse-functions).
+You can find a full list of these in [supported ClickHouse functions](/docs/sql/clickhouse-functions).
 
 #### Date and time
 
@@ -336,7 +346,7 @@ FROM events
 WHERE timestamp > now() - interval 1 day
 ```
 
-> Read more examples in [How to do time-based breakdowns (hour, minute, real time)](/tutorials/time-breakdowns) and [Using HogQL for advanced time and date filters](/tutorials/hogql-date-time-filters).
+> Read more examples in [How to do time-based breakdowns (hour, minute, real time)](/tutorials/time-breakdowns) and [Using SQL for advanced time and date filters](/tutorials/hogql-date-time-filters).
 
 #### String
 
@@ -357,7 +367,7 @@ from events
 where event = '$autocapture'
 ```
 
-> Read more in [How to analyze autocapture events with HogQL](/tutorials/hogql-autocapture).
+> Read more in [How to analyze autocapture events with SQL](/tutorials/hogql-autocapture).
 
 #### JSON
 
@@ -400,7 +410,7 @@ GROUP BY flag
 ORDER BY count() desc
 ```
 
-> Read more in [How to filter and breakdown arrays with HogQL](/tutorials/array-filter-breakdown).
+> Read more in [How to filter and breakdown arrays with SQL](/tutorials/array-filter-breakdown).
 
 #### Sparkline
 
@@ -442,6 +452,25 @@ select
 from events
 ```
 
+#### Session replays
+
+You can create a button to view the replay for a session by using the `recording_button()` function with the `session_id`. For example, to get a list of recent replays, you can use:
+
+```sql
+SELECT
+    person.properties.email,
+    min_first_timestamp AS start,
+    recording_button(session_id)
+FROM
+    raw_session_replay_events
+WHERE
+    min_first_timestamp >= now() - INTERVAL 1 DAY
+    AND min_first_timestamp <= now()
+ORDER BY
+    min_first_timestamp DESC
+LIMIT 10
+```
+
 ## Accessing data
 
 ### Strings and quotes
@@ -463,9 +492,9 @@ Types (and names) for the accessible data can be found in the [database](https:/
 
 - `STRING` (default)
 - `JSON` (accessible with dot or bracket notation)
-- `DATETIME`(in `ISO-8601`, [read more in our data docs](/docs/data/timestamps))
+- `DATETIME`(in `ISO 8601`, [read more in our data docs](/docs/data/timestamps))
 - `INTEGER`
-- `NUMERIC`(AKA float)
+- `FLOAT`
 - `BOOLEAN`
 
 For example:
@@ -492,7 +521,7 @@ Some queries can error when accessing null values. To avoid this, use the `COALE
 
 ### Actions
 
-To use [actions](/docs/actions) in SQL insights, use the `matchesAction()` function. For example, to get a count of the action `clicked homepage button`, you can do:
+To use [actions](/docs/data/actions) in SQL insights, use the `matchesAction()` function. For example, to get a count of the action `clicked homepage button`, you can do:
 
 ```sql
 SELECT count() 

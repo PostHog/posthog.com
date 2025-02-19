@@ -95,7 +95,7 @@ Dubbed DataBeach because Frank and Harry started building the feature while sipp
 
 ![databeach](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/aruba/data-beach.png)
 
-They teamed up with Marius to an build MVP consisting of custom tables that are created and queried through the PostHog UI and API. These tables provide a way to store and query data from sources such as Stripe, Hubspot (see above), Intercom, and more, along with data from PostHog.
+They teamed up with Marius to an build MVP consisting of custom tables that are created and queried through the PostHog UI and API. These tables provide a way to store and query data from sources such as Stripe, [Hubspot](/tutorials/hubspot-reports) (see above), Intercom, and more, along with data from PostHog.
 
 There's more to build before PostHog is ready to be your data warehouse, but we're working on it. Keep an eye on our [public roadmap](/roadmap) for updates.
 

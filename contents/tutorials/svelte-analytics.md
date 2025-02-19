@@ -222,7 +222,9 @@ export const load = async () => {
   if (browser) {
     posthog.init(
       '<ph_project_api_key>',
-      { api_host: '<ph_client_api_host>' }
+      {
+        api_host: '<ph_client_api_host>',
+      }
     )
   }
   return
@@ -235,7 +237,7 @@ After restarting your app and going back to your site, you should start to see e
 
 ## Capturing pageviews and pageleaves
 
-For your app, PostHog only captures the initial page load as a pageview and the final pageleave. This is because Svelte acts as a [single page app](/tutorials/single-page-app-pageviews). To capture every pageviews and pageleaves, we check for navigation and then capture custom events.
+For your app, PostHog only captures the initial page load as a pageview and the final pageleave. This is because Svelte acts as a [single-page app](/tutorials/single-page-app-pageviews). To capture every pageviews and pageleaves, we check for navigation and then capture custom events.
 
 We can set this up by creating one more file, a `+layout.svelte` file in `src/routes`. In this file, we set up a browser check then use the `beforeNavigate` and `afterNavigate` interceptors to capture a `$pageleave` or `$pageview` event.
 
@@ -390,3 +392,5 @@ With this done, you built a Svelte app with all the basics of PostHog set up. To
 - [How to set up A/B tests in Svelte](/tutorials/svelte-ab-tests)
 - [How to set up surveys in Svelte](/tutorials/svelte-surveys)
 - [An introductory guide to identifying users in PostHog](/tutorials/identifying-users-guide)
+
+<NewsletterForm />

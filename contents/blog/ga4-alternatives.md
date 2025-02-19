@@ -27,7 +27,7 @@ In this guide we'll cover:
 - The best GA4 alternatives for different use cases
 
 > **Changelog:**
-> - **Aug 24, 2023:** Added Kissmetrics and Vercel Web Analytics; updated info on EU-U.S. privacy framework.  
+> - **Aug 24, 2023:** Added Kissmetrics and Vercel Web Analytics; updated info on EU-U.S. privacy framework.
 
 ## GA4 vs Universal Analytics... what's the difference?
 
@@ -72,7 +72,7 @@ See [GDPR-compliant analytics tools](/blog/best-gdpr-compliant-analytics-tools) 
 
 #### PostHog vs Google Analytics 4
 
-<div className="overflow-x-auto -mx-5 px-5">
+<OverflowXSection>
 <table className="w-full mt-4" style="min-width: 600px;">
 	<thead>
     	<tr>
@@ -144,7 +144,7 @@ See [GDPR-compliant analytics tools](/blog/best-gdpr-compliant-analytics-tools) 
     	</tr>
 	</tbody>
 </table>
-</div>
+</OverflowXSection>
 
 Read our [PostHog and Google Analytics comparison](/blog/posthog-vs-ga4) for an in-depth look at the differences
 
@@ -163,11 +163,11 @@ Read our [PostHog and Google Analytics comparison](/blog/posthog-vs-ga4) for an 
 
 [Matomo](/blog/posthog-vs-matomo) is one of the most popular Google Analytics alternatives around. Like UA, it's based on a session-based tracking model, and it even allows new users to import data from an existing Google Analytics account.
 
-It also shares some weaknesses inherent in Universal Analytics. While Matomo has added more advanced analytics features, it's better suited to traditional website analytics than tracking desktop and mobile apps. Like PostHog, it's open source, so can be self-hosted if you prefer.
+It also shares some weaknesses inherent in Universal Analytics. While [Matomo](/blog/best-matomo-alternatives) has added more advanced analytics features, it's better suited to traditional website analytics than tracking desktop and mobile apps. Like PostHog, it's open source, so can be self-hosted if you prefer.
 
 #### Matomo vs Google Analytics 4  
 
-<div className="overflow-x-auto -mx-5 px-5">
+<OverflowXSection>
 <table className="w-full mt-4" style="min-width: 600px;">
 	<thead>
     	<tr>
@@ -234,7 +234,7 @@ It also shares some weaknesses inherent in Universal Analytics. While Matomo has
     	</tr>
 	</tbody>
 </table>
-</div>
+</OverflowXSection>
 
 > #### Verdict
 > 
@@ -255,7 +255,7 @@ One of its key features is the Populations report, which groups users into key c
 
 #### Kissmetrics vs Google Analytics 4
 
-<div className="overflow-x-auto -mx-5 px-5">
+<OverflowXSection>
 <table className="w-full mt-4" style="min-width: 600px;">
 	<thead>
     	<tr>
@@ -327,7 +327,7 @@ One of its key features is the Populations report, which groups users into key c
     	</tr>
 	</tbody>
 </table>
-</div>
+</OverflowXSection>
 
 > #### Verdict
 > 
@@ -348,7 +348,7 @@ TelemetryDeck makes it easy for app developers to track things like active users
 
 #### TelemetryDeck vs Google Analytics 4
 
-<div className="overflow-x-auto -mx-5 px-5">
+<OverflowXSection>
 <table className="w-full mt-4" style="min-width: 600px;">
 	<thead>
     	<tr>
@@ -415,7 +415,7 @@ TelemetryDeck makes it easy for app developers to track things like active users
     	</tr>
 	</tbody>
 </table>
-</div>
+</OverflowXSection>
 
 > #### Verdict
 > 
@@ -430,15 +430,15 @@ TelemetryDeck makes it easy for app developers to track things like active users
 - **GDPR compliance:** <span className="text-green text-lg">✔</span>
 - **GA data import:** <span className="text-green text-lg">✔</span>
 
-[Plausible](https://plausible.io/) is a leader in the trend of lightweight, privacy-orientated analytics tools. It's easy to use and doesn't collect any personally identifiable information. This makes it ideal for complying with GDPR, but this comes at the cost of functionality. 
+[Plausible](/blog/posthog-vs-plausible) is a leader in the trend of lightweight, privacy-orientated analytics tools. It's easy to use and doesn't collect any personally identifiable information. This makes it ideal for complying with GDPR, but this comes at the cost of functionality. 
 
-Plausible, and others like it, can only track very basic website metrics like pageviews, session duration, and referrer information. This makes it useless for apps, and significantly less powerful than Google Analytics and other alternatives in this list.
+[Plausible](/blog/best-plausible-alternatives), and others like it, can only track very basic website metrics like pageviews, session duration, and referrer information. This makes it useless for apps, and significantly less powerful than Google Analytics and other alternatives in this list.
 
 But, if you just want basic website analytics, it gets the job done, and won't adversely impact the performance of your website thanks to its lightweight tracking script.
 
 #### Plausible vs Google Analytics 4
 
-<div className="overflow-x-auto -mx-5 px-5">
+<OverflowXSection>
 <table className="w-full mt-4" style="min-width: 600px;">
 	<thead>
     	<tr>
@@ -505,7 +505,7 @@ But, if you just want basic website analytics, it gets the job done, and won't a
     	</tr>
 	</tbody>
 </table>
-</div>
+</OverflowXSection>
 
 > #### Verdict
 >
@@ -528,7 +528,7 @@ Vercel acquired another popular analytics tool, Splitbee, in 2022. Splitbee's te
 
 #### Vercel vs Google Analytics 4
 
-<div className="overflow-x-auto -mx-5 px-5">
+<OverflowXSection>
 <table className="w-full mt-4" style="min-width: 600px;">
 	<thead>
     	<tr>
@@ -595,7 +595,7 @@ Vercel acquired another popular analytics tool, Splitbee, in 2022. Splitbee's te
     	</tr>
 	</tbody>
 </table>
-</div>
+</OverflowXSection>
 
 > #### Verdict
 >
@@ -616,7 +616,7 @@ Piwik PRO's main differentiators are enterprise level support and the integratio
 
 #### Piwik PRO vs Google Analytics 4
 
-<div className="overflow-x-auto -mx-5 px-5">
+<OverflowXSection>
 <table className="w-full mt-4" style="min-width: 600px;">
 	<thead>
     	<tr>
@@ -683,7 +683,7 @@ Piwik PRO's main differentiators are enterprise level support and the integratio
     	</tr>
 	</tbody>
 </table>
-</div>
+</OverflowXSection>
 
 > #### Verdict
 >
@@ -698,11 +698,13 @@ Piwik PRO's main differentiators are enterprise level support and the integratio
 - **GDPR compliance:** <span className="text-green text-lg">✔</span>
 - **GA data import:** <span className="text-green text-lg">✔</span>
 
-[Fathom](https://usefathom.com/) is another leading privacy-focused analytics tool that's similar in scope to Plausible. It's ideal for small and medium-size marketing websites, but it lacks the deeper features typical Google Analytics users will demand.
+[Fathom](/blog/best-fathom-alternatives) is another leading privacy-focused analytics tool that's similar in scope to Plausible. It's ideal for small and medium-size marketing websites, but it lacks the deeper features typical Google Analytics users will demand.
+
+For a deep dive, check out [PostHog vs Fathom Analytics](/blog/posthog-vs-fathom) too.
 
 #### Fathom vs Google Analytics 4
 
-<div className="overflow-x-auto -mx-5 px-5">
+<OverflowXSection>
 <table className="w-full mt-4" style="min-width: 600px;">
 	<thead>
     	<tr>
@@ -769,7 +771,7 @@ Piwik PRO's main differentiators are enterprise level support and the integratio
     	</tr>
 	</tbody>
 </table>
-</div>
+</OverflowXSection>
 
 > #### Verdict
 >
@@ -790,7 +792,7 @@ Counter's creators can offer it for free because it only collects aggregated dat
 
 #### Counter vs Google Analytics 4
 
-<div className="overflow-x-auto -mx-5 px-5">
+<OverflowXSection>
 <table className="w-full mt-4" style="min-width: 600px;">
 	<thead>
     	<tr>
@@ -857,7 +859,7 @@ Counter's creators can offer it for free because it only collects aggregated dat
     	</tr>
 	</tbody>
 </table>
-</div>
+</OverflowXSection>
 
 > #### Verdict
 >

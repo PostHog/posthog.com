@@ -113,11 +113,11 @@ We feel retaining users is the first step on the path to profitability and a met
 
 ## How to track your North Star metric
 
-Needless to say, a product analytics platform like PostHog is essential for tracking any North Star metric. Tools like Google Analytics simply don't offer the [depth of insight needed](https://posthog.com/customers/mention-me), which also rules out popular privacy-first alternatives like Plausible, Fathom, and Umami.
+Needless to say, a product analytics platform like PostHog is essential for tracking any North Star metric. Tools like Google Analytics simply don't offer the [depth of insight needed](/customers/mention-me), which also rules out popular privacy-first alternatives like [Plausible](/blog/posthog-vs-plausible), [Fathom](/blog/best-fathom-alternatives), and Umami.
 
 **If you're already using PostHog**, we recommend creating a dashboard featuring your chosen North Star metric (plus other [key product metrics](/blog/b2b-saas-product-metrics)) and adding it to your PostHog project homepage. This ensures you and your team can keep an eye on progress each time you login. Better still, you can have regular updates on any insight or dashboard delivered to a Slack group on any schedule you choose – subscriptions are accessible via the '...' menu. Read our [product manual](/using-posthog) for guidance on the different types of insights you can create.
 
-**If you're not a PostHog user**, we recommend silently contemplating the consequences of this grievous error, and then reading our [product detail pages](/product) or [sign up for PostHog Cloud](/signup). If you have questions, [book a demo](/book-a-demo) with our customer success team.
+**If you're not a PostHog user**, we recommend silently contemplating the consequences of this grievous error, and then reading our [product detail pages](/product) or [sign up for PostHog Cloud](/signup). If you have questions, [book a demo](/demo) with our customer success team.
 
 ## Further reading
 
@@ -127,4 +127,4 @@ Needless to say, a product analytics platform like PostHog is essential for trac
 
 - [How to measure product engagement](/blog/how-to-measure-product-engagement): How to define engagement for your platform, and how to use analytics tools to measure and build on the results
 
-<ArrayCTA />
+<NewsletterForm />

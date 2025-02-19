@@ -65,8 +65,6 @@ YC invests in startups. Their advice and network help startups grow and succeed.
 
 YC differentiates itself from other accelerators by being extremely startup-friendly, focused on San Francisco, and having a strong founder network. Each of these is core to the success of their growth loop.
 
-<NewsletterForm />
-
 ## Types of growth loops
 
 There are many types of growth loops, but five of the most important are:
@@ -87,7 +85,7 @@ This is generally good for two types of products:
 
 The performance marketing growth loop is using [paid marketing](/founders/dev-marketing-paid-ads) to acquire customers, then using the new revenue to fund more marketing. It's reliant on connecting marketing to acquire users (performance) with value (revenue) captured. It's useful for both B2C and [B2B startup marketing][/newsletter/b2b-startup-marketing-strategy].
 
-For example, with Google Ad Words, companies pay per click on specific keywords related to potential customers’ searches. With the correct math figured out (cost of acquisition), this can lead to a growth loop of increasing ad spend and revenue growth.
+For example, with [Google Ads](/tutorials/google-ads-reports), companies pay per click on specific keywords related to potential customers’ searches. With the correct math figured out (cost of acquisition), this can lead to a growth loop of increasing ad spend and revenue growth.
 
 ![Performance marketing with Google growth loop](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/growth-loops/google.png)
 
@@ -174,12 +172,12 @@ Companies often use both:
 
 Network effects focus on users. With network effects, the value of a product increases as more users join. A network effect can be a part of a growth loop, but it doesn’t have to be.
 
-Growth loops focus on the product or business. They don't necessarily have relate to users. For example, sales or organic content growth loops focus on internal processses. This makes growth loops more strategic and planned than network effects are. 
+Growth loops focus on the product or business. They don't necessarily have to relate to users. For example, sales or organic content growth loops focus on internal processes. This makes growth loops more strategic and planned than network effects are. 
 
 ## Further reading
 
 - [How to write great product survey questions (with examples)](/product-engineers/product-survey-questions)
-- [How to start a growth team (as an engineer)](/product-engineers/how-to-start-a-growth-team)
+- [How to do startup sales with no experience](/founders/startup-sales-strategy)
 - [The most useful product health metrics](/product-engineers/product-health-metrics)
 
 <NewsletterForm />

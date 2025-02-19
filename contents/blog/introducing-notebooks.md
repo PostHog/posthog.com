@@ -41,3 +41,4 @@ We’ve been testing notebooks internally and with some users for the past few w
 
 Best of all, we’re just getting started. We have a _lot_ [more planned for notebooks](https://github.com/PostHog/posthog/issues/15680), including more templates, more sharing options, and built-in cheatsheets to help you get even more from PostHog. We’d love to know any feedback or ideas you have — or you can just jump straight in and [start creating your own notebooks immediately](https://app.posthog.com/notebooks). 
 
+<NewsletterForm />

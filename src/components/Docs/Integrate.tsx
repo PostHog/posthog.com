@@ -37,6 +37,9 @@ type LibraryFeatures = {
     groupAnalytics: boolean
     sessionRecording: boolean
     userIdentification: boolean
+    surveys: boolean
+    llmObservability: boolean
+    errorTracking: boolean
 }
 
 type LibraryData = {
@@ -136,6 +139,7 @@ const query = graphql`
                             "/docs/libraries/svelte"
                             "/docs/libraries/vue-js"
                             "/docs/libraries/webflow"
+                            "/docs/libraries/woocommerce"
                             "/docs/libraries/wordpress"
                         ]
                     }
@@ -177,6 +181,9 @@ const query = graphql`
                 sessionRecording
                 featureFlags
                 groupAnalytics
+                surveys
+                llmObservability
+                errorTracking
             }
         }
     }

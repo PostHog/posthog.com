@@ -4,7 +4,8 @@ date: 2024-03-01
 author:
   - lior-neu-ner
 tags:
-  - feature flags
+  - product analytics
+  - web analytics
 ---
 
 import { ProductScreenshot } from 'components/ProductScreenshot'
@@ -426,4 +427,6 @@ That's it! Feel free to play around in your dashboard and explore the different 
 
 - [How to run A/B tests in Android](/tutorials/android-ab-tests)
 - [How to set up feature flags in Android](/tutorials/android-feaure-flags)
-- [How to run A/B tests in iOS](/tutorials/ios-ab-tests)
+- [How to set up session replays in Android](/tutorials/android-session-replay)
+
+<NewsletterForm />

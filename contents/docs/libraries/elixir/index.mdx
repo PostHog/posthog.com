@@ -3,21 +3,20 @@ title: Elixir
 sidebarTitle: Elixir
 sidebar: Docs
 showTitle: true
-tags:
-  - community
-github: 'https://github.com/whitepaperclip/posthog'
+github: 'https://github.com/posthog/posthog-elixir'
 icon: >-
   https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/integrate/elixir.svg
 features:
   eventCapture: true
   userIdentification: true
-  autoCapture: false
-  sessionRecording: false
-  featureFlags: false
+  featureFlags: true
   groupAnalytics: true
+  surveys: false
+  llmObservability: false
+  errorTracking: false
 ---
 
-This library provides an Elixir HTTP client for PostHog. [See the repository](https://github.com/whitepaperclip/posthog) for more information.
+This library provides an Elixir HTTP client for PostHog. [See the repository](https://github.com/posthog/posthog-elixir) for more information.
 
 ## Installation
 
@@ -37,8 +36,10 @@ import FeatureFlagsLibsIntro from "../_snippets/feature-flags-libs-intro.mdx"
 
 <FeatureFlagsLibsIntro />
 
-Feature flags are not supported yet in our Elixir SDK. However, you can integrate them into your project by using the [PostHog API](/docs/feature-flags/adding-feature-flag-code?tab=api).
+import ElixirFeatureFlagsCode from '../../integrate/feature-flags-code/_snippets/feature-flags-code-elixir.mdx'
+
+<ElixirFeatureFlagsCode />
 
 ## Thanks
 
-Thanks to [nkezhaya](https://github.com/nkezhaya) for contributing this library.
+Thanks to [nkezhaya](https://github.com/nkezhaya) for initially contributing this library. The library is maintained by the PostHog team since February 2025.

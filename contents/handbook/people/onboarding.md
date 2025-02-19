@@ -35,7 +35,7 @@ With default styling set, you can now choose the 'Call to action' template.
 
 ![google email layouts](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/handbook/layout-email.png)
 
-With an email template chosen, you can then enter the copy you want to send. [This doc is a suggested template](https://docs.google.com/document/d/1O3_d4v3xgOr1awKkJb8K3xj8-6VV_fHsPkwtgaEhWKI/edit?usp=sharing) with important actions specified, though we recommend personalizing it to the individual. We've linked to these as docs and direct images to make the formatting easier for you, but here is an accompanying image for use in emails. 
+With an email template chosen, you can then enter the copy you want to send. <PrivateLink url="https://docs.google.com/document/d/1O3_d4v3xgOr1awKkJb8K3xj8-6VV_fHsPkwtgaEhWKI/edit?usp=sharing">This doc is a suggested template</PrivateLink> with important actions specified, though we recommend personalizing it to the individual. We've linked to these as docs and direct images to make the formatting easier for you, but here is an accompanying image for use in emails. 
 
 ![onboarding image](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/handbook/handbook-onboarding-email.jpg)
 
@@ -43,23 +43,41 @@ With an email template chosen, you can then enter the copy you want to send. [Th
 
 Every new joiner at PostHog has an onboarding buddy. If possible, a new joiner will meet their onboarding buddy in person during their first week. In case in-person onboarding isn't an option, we will make alternative arrangements. The onboarding buddy is usually a member of the team a new joiner is joining - ideally the team lead - and they can help with any questions that pop up and with socializing during the first couple of weeks at PostHog. Of course, everyone is available to help, but it’s nice to have a dedicated person to help.
 
+## Onboarding intros
+
+We have onboarding intro calls which give new starters a personal intro to each Small Team, where they can learn about what they do, the history of the team, the team members, what they are working on, their challenges, etc. These are 15 minute calls held once a month by the team leads. 
+
+When you start, you will be automatically invited to these. They are totally optional so if you can't make it, that's fine! You can always join the next month - just invite yourself using this [calendar](https://calendar.google.com/calendar/u/0?cid=Y18yNWNlYjI4MTI5YjQ0ZDNlOWM1NThjMzYxY2M1NjVmZGU3NWM5NWNjZjgyOTg4NTdjNGM1OWY5YzFmMTUzOWY4QGdyb3VwLmNhbGVuZGFyLmdvb2dsZS5jb20) 
+
 ### Guidance for onboarding buddies
 
 - Once we have decided which team a new joiner will join, the People & Ops team will reach out to the team to find an onboarding buddy. _Please make sure if don't have any leave booked in the week before and the two weeks after the new starter joins_
 - We will intro the new joiner and the onboarding buddy via email - please say hi and decide together where and when the in person onboarding will happen. 
  > If any travel is needed for the in-person onboarding, please check our [Spending Money page](/handbook/people/spending-money) and book your travel accordingly. _You don't need to let us team know, just use your Brex/Revolut card._
-- Please make sure you spend at least 3 days together, working through the [first week onboarding list](/handbook/people/onboarding#during-their-first-week) and spending time working on any role-specific tasks that are outlined in the new joiner's personal onboarding issue. 
+- Please make sure you spend at least 3 days together, working through the [first week onboarding list](/handbook/people/onboarding#during-their-first-week) and spending time working on any role-specific tasks that are outlined in the new joiner's personal onboarding issue.
+    - Make sure to add the details of the in-person onboarding to the [In-person Onboarding Calendar](https://calendar.google.com/calendar/u/0?cid=Y19lMzdjNjE0NzM0NDAyOGJlY2ZkMTc0Y2MxZjUxZjY5ZTkxMzY0NzVlNTFjMTE3MjA4OGM2NWQwNjE1YTczNmRlQGdyb3VwLmNhbGVuZGFyLmdvb2dsZS5jb20) so that other PostHog team members can join, if possible. Simply create an event in your calendar and then invite the in-person onboarding calendar as a guest.
 - You will remain the new joiner's main point of contact for the first few weeks, so please continue to check in with them at least once a week for the first month or so. 
 
 ## In-person onboarding
 
-Except under special circumstances, new joiners meet with members of their team in-person to go through the onboarding process. Upon acceptance of an offer, your Team Lead will notify the People & Operations team who will help you coordinate travel if necessary.
+Except under special circumstances, new joiners meet with members of their team in-person to go through the onboarding process. Upon acceptance of an offer, your Team Lead will notify the People & Operations team who will help you coordinate travel if necessary. We encourage team leads to consider the Hedgehouse as a location for in-person onboarding. Regardless of location, everyone should have their own bedroom.
 
 In these cases, the process is:
 
   - Preemptively create the new team member a Google account
   - Issue them a Brex card to their work email with a sufficiently high temporary balance to cover travel costs
   - Have the new team member book travel as usual
+
+While there is no fixed budget for onboardings they should be relatively less expensive than a small team offsite. Some considerations to reduce the cost:
+
+  - Avoid intercontinental travel or choose a location that limits it to the minimum number of people possible
+  - You should not need to plan a social activity
+  - Limit attendees to members of your Small Team
+  - See if there are any other onboardings at the same time you could pair up with
+
+Aim to keep things sensible and cheap. As always, use your best judgement when [spending money](/handbook/people/spending-money). Request a budget in Brex for any onboardings you are doing. 
+
+> You should by default avoid combining in-person onboarding with [small team offsites](/handbook/company/offsites#small-team-offsites) as they serve different purposes. The focus of onboarding is generally on making the new team member successful, but offsites feature things like hackathons and 360 feedback which aren't usually helpful for this and detract from useful onboarding time. However, it may occasionally make sense to combine the two - just use your judgement. 
 
 ### Engineering
 
@@ -102,7 +120,6 @@ We use a number of different tools to organise our work and communicate at PostH
 - Slack - we have an internal workspace and a users Slack as well
 - Brex (US, RoW) or Revolut (UK, EU) - company cards and expenses tracking
 - Shopify - powers our merch store
-- Printfection - merch inventory management, [YC onboarding](/handbook/growth/sales/yc-onboarding) merch, and merch [drop-shipping for small events](https://github.com/PostHog/meta/issues/31)
 - CharlieHR - holiday tracking, personal details
 - Gusto - payroll and benefits (US)
 - Deel - contractor payroll (EU and special arrangements)
@@ -121,12 +138,13 @@ We use a number of different tools to organise our work and communicate at PostH
 - HubSpot - customer CRM
 - Zendesk - our support platform
 - Pry - financial modelling
-- LTSE Equity - cap table management
+- Carta - cap table management
 - Fondo - US accounting
 - Calendly - external meeting scheduling (e.g. demos, sales)
 - Gusto - US payroll and benefits management
 - Deel - international payroll and contracts management
 - Ashby - recruitment
+- Brilliant - merch inventory management, [YC onboarding](/handbook/growth/sales/yc-onboarding) merch, and merch [drop-shipping for small events](https://github.com/PostHog/meta/issues/31)
 
 ## Signatories
 
@@ -163,7 +181,7 @@ Each Small Team has its own Project for tracking their Issues - [full list here]
 
 Employees are occasionally called upon to act as [support heroes](/handbook/engineering/support-hero), or need to deal with support tickets that are escalated to them. This most often applies to engineers, but can include any employee regardless of their team. For this reason, we need everyone to have a broad idea of our support processes and know how we deal with customers.
 
-All new hires should schedule a 30 minute session with the [support engineer closest to their timezone](/teams/sales-cs) within their first three weeks at PostHog. 
+All new hires should schedule a 30 minute session with the [support engineer closest to their timezone](/teams/support) within their first three weeks at PostHog. 
 
 In this call the support engineer will be able to answer any questions, as well as demonstrate how we deal with support at PostHog. In particular, the support engineer should cover:
 
@@ -190,3 +208,11 @@ As part of the onboarding checklist, the Ops team will schedule reminders for a 
 - Feedback is a really important part of the onboarding process and as a manager it's a good idea to ensure the new team member receives feedback from their peers - either from you collecting it or them receiving it directly from their peers. It won't always be possible or necessary to do a 360 feedback session within the first 3 months, so it's up to you as a manager how best to approach that. As a manager you can also have blind spots on performance, so checking in with their peers can be helpful and can be done during your normal 1-1s.
 
 These check-ins are designed to ensure every new starter is set up for success. Every manager will deal with these slightly differently, but it will hopefully be clear to everybody by around the 60 day mark how things are going and what needs to be worked on, if anything. 
+
+## Team intros
+
+PostHog has lots of small teams and each team has it's own unique history and culture. Throughout your first and second month, you can join 15 minute intro calls to learn more about each team as these are led by the respective team lead. 
+
+All you need to do is add the [onboarding intros calendar](https://calendar.google.com/calendar/u/0?cid=Y18yNWNlYjI4MTI5YjQ0ZDNlOWM1NThjMzYxY2M1NjVmZGU3NWM5NWNjZjgyOTg4NTdjNGM1OWY5YzFmMTUzOWY4QGdyb3VwLmNhbGVuZGFyLmdvb2dsZS5jb20) to your google calendar and then you will see these on Mondays and Wednesdays throughout the month. Just add yourself to these during your first week and if you can't make one, just add yourself to the next month. 
+
+If you have any issues or any feedback on how to improve a specific intro just post in the #team-people-and-ops slack channel and tag the relevant people

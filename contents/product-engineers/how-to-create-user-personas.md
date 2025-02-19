@@ -155,7 +155,7 @@ Your user persona is the voice of your user. It should guide your product develo
 
 Incorporate them into team meetings and encourage your team to always ask, "How will this benefit our key user personas?". By doing so, you build a culture of empathy for your users, ensuring that you make the best products for them.
 
-For instance, at PostHog our product teams use our personas to create their team mission, values, and quarterly goals. Since our company handbook is public, you can view precisely how by visiting each team's page – e.g., our [Feature Success](/teams/feature-success#personas) and [Web Analytics](/teams/web-analytics#who-are-we-building-for) teams.
+For instance, at PostHog our product teams use our personas to create their team mission, values, and quarterly goals. Since our company handbook is public, you can view precisely how by visiting each team's page – e.g., our [Experiments](/teams/experiments#personas) and [Web Analytics](/teams/web-analytics#who-are-we-building-for) teams.
 
 ## Frequently asked questions
 
@@ -189,3 +189,5 @@ Here the key benefits of having user personas:
 - [10x engineers talk to users](/product-engineers/10x-engineers-do-user-interviews)
 - [How to turn user interviews into actionable snapshots](/product-engineers/interview-snapshot-guide)
 - [How to write great product survey questions (with examples)](/product-engineers/product-survey-questions)
+
+<NewsletterForm />

@@ -10,17 +10,25 @@ Equip every developer to build successful products
 
 ## Our strategy
 
-### Provide every tool needed to build successful products
+### 1. Provide every tool needed to build successful products
 
-Building a successful product is hard. It gets harder when you don't understand how your customers are using your product.
+Building a successful product is hard; doing so when you don't understand your customers is even harder.
 
-PostHog includes all the tools you need to understand how people use your product. All with one simple snippet.
+We aim to offer every tool software teams need to find, sell to, get users, understand who they are, support them and improve their product experience.
 
-### Start from the start
+### 2. Get in first
 
 The tools we build help you from your first user to when your product is everything it could be.
 
-This means PostHog gives you the best practices and the industry standard tools so that you can focus on what you do best - build successful products. There's a generous free tier, no-brainer pricing and data infrastructure that scales until IPO and beyond.
+This means PostHog gives you the best practices, and the industry standard tools, so you can focus on what you do best: building successful products. 
 
-### Be the source of truth for customer and product data
+We offer a generous free tier, no-brainer pricing, and data infrastructure that scales until IPO and beyond.
 
+### 3. Be the source of truth for customer and product data
+
+Traditionally, as companies scale, their data warehouse becomes the source of truth, and non-warehouse native tools (like product analytics) become less relevant as people lose trust in the data in them.
+
+By providing the data and data-intense tools in one place, we can:
+- Enhance the utility of our products when used together
+- Increase trust in data by eliminating complex data stacks
+- Provide all the tools companies need as they grow

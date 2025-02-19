@@ -1,0 +1,250 @@
+If your Next.js app to uses the [app router](https://nextjs.org/docs/app), you can integrate PostHog by creating a `providers` file in your app folder. This is because the `posthog-js` library needs to be initialized on the client-side using the Next.js [`'use client'` directive](https://nextjs.org/docs/getting-started/react-essentials#client-components).
+
+<MultiLanguage>
+
+```jsx
+// app/providers.jsx
+'use client'
+
+import posthog from 'posthog-js'
+import { PostHogProvider as PHProvider } from 'posthog-js/react'
+import { useEffect } from 'react'
+
+export function PostHogProvider({ children }) {
+  useEffect(() => {
+    posthog.init(process.env.NEXT_PUBLIC_POSTHOG_KEY, {
+      api_host: process.env.NEXT_PUBLIC_POSTHOG_HOST,
+      capture_pageview: false // Disable automatic pageview capture, as we capture manually
+    })
+  }, [])
+
+  return (
+    <PHProvider client={posthog}>
+      {children}
+    </PHProvider>
+  )
+}
+```
+
+```tsx
+// app/providers.tsx
+'use client'
+
+import posthog from 'posthog-js'
+import { PostHogProvider as PHProvider } from 'posthog-js/react'
+import { useEffect } from 'react'
+
+export function PostHogProvider({ children }: { children: React.ReactNode }) {
+    useEffect(() => {
+      posthog.init(process.env.NEXT_PUBLIC_POSTHOG_KEY, {
+        api_host: process.env.NEXT_PUBLIC_POSTHOG_HOST,
+        capture_pageview: false // Disable automatic pageview capture, as we capture manually
+      })
+  }, [])
+
+  return (
+    <PHProvider client={posthog}>
+      {children}
+    </PHProvider>
+  )
+}
+```
+
+</MultiLanguage>
+
+Then, import the `PostHogProvider` component into your `app/layout` file and wrap your app with it.
+
+<MultiLanguage>
+
+```jsx
+// app/layout.jsx
+
+import './globals.css'
+import { PostHogProvider } from './providers'
+
+export default function RootLayout({ children }) {
+  return (
+    <html lang="en">
+      <body>
+        <PostHogProvider>
+          {children}
+        </PostHogProvider>
+      </body>
+    </html>
+  )
+}
+```
+
+```tsx
+// app/layout.tsx
+
+import './globals.css'
+import { PostHogProvider } from './providers'
+
+export default function RootLayout({ children }: { children: React.ReactNode }) {
+  return (
+    <html lang="en">
+      <body>
+        <PostHogProvider>
+          {children}
+        </PostHogProvider>
+      </body>
+    </html>
+  )
+}
+```
+
+</MultiLanguage>
+
+PostHog is now set up and ready to go. Files and components accessing PostHog on the client-side need the `'use client'` directive.
+
+#### Capturing pageviews
+
+PostHog's `$pageview` autocapture relies on page load events. Since Next.js acts as a single-page app, this event doesn't trigger on navigation and we need to capture `$pageview` events manually. 
+
+To do this, we set up a `PostHogPageView` component to listen to URL path changes:
+
+<MultiLanguage>
+
+```jsx
+// app/PostHogPageView.jsx
+'use client'
+
+import { usePathname, useSearchParams } from "next/navigation"
+import { useEffect, Suspense } from "react"
+import { usePostHog } from 'posthog-js/react'
+
+function PostHogPageView() {
+  const pathname = usePathname()
+  const searchParams = useSearchParams()
+  const posthog = usePostHog()
+
+  // Track pageviews
+  useEffect(() => {
+    if (pathname && posthog) {
+      let url = window.origin + pathname
+      if (searchParams.toString()) {
+        url = url + `?${searchParams.toString()}`
+      }
+
+      posthog.capture('$pageview', { '$current_url': url })
+    }
+  }, [pathname, searchParams, posthog])
+  
+  return null
+}
+
+// Wrap this in Suspense to avoid the `useSearchParams` usage above
+// from de-opting the whole app into client-side rendering
+// See: https://nextjs.org/docs/messages/deopted-into-client-rendering
+export default function SuspendedPostHogPageView() {
+  return <Suspense fallback={null}>
+    <PostHogPageView />
+  </Suspense>
+}
+```
+
+```tsx
+// app/PostHogPageView.tsx
+'use client'
+
+import { usePathname, useSearchParams } from "next/navigation"
+import { useEffect, Suspense } from "react"
+import { usePostHog } from 'posthog-js/react'
+
+function PostHogPageView() : null {
+  const pathname = usePathname()
+  const searchParams = useSearchParams()
+  const posthog = usePostHog()
+
+  // Track pageviews
+  useEffect(() => {
+    if (pathname && posthog) {
+      let url = window.origin + pathname
+      if (searchParams.toString()) {
+        url = url + `?${searchParams.toString()}`
+      }
+
+      posthog.capture('$pageview', { '$current_url': url })
+    }
+  }, [pathname, searchParams, posthog])
+  
+  return null
+}
+
+// Wrap this in Suspense to avoid the `useSearchParams` usage above
+// from de-opting the whole app into client-side rendering
+// See: https://nextjs.org/docs/messages/deopted-into-client-rendering
+export default function SuspendedPostHogPageView() {
+  return <Suspense fallback={null}>
+    <PostHogPageView />
+  </Suspense>
+}
+```
+</MultiLanguage>
+
+We can then update our `PostHogProvider` to include this component in all of our pages.
+
+```diff
+  // app/providers.js
+  'use client'
+
+  import posthog from 'posthog-js'
+  import { PostHogProvider as PHProvider } from 'posthog-js/react'
+  import { useEffect } from 'react'
++ import PostHogPageView from "./PostHogPageView"
+
+
+  export function PostHogProvider({ children }) {
+    useEffect(() => {
+      posthog.init(process.env.NEXT_PUBLIC_POSTHOG_KEY, {
+        api_host: process.env.NEXT_PUBLIC_POSTHOG_HOST,
+        capture_pageview: false // Disable automatic pageview capture, as we capture manually
+      })
+    }, [])
+  
+    return (
+      <PHProvider client={posthog}>
++       <PostHogPageView />
+        {children}
+      </PHProvider>
+    )
+  }
+```
+
+> **Note:** Make sure you list `<PostHogPageView />` **above** `{children}` or else you might find your application
+> is not keeping track of the initial `$pageview` event
+
+> **Note:** For older versions of Next.js (< 15), you might need to **dynamically import** `PostHogPageView` instead of using a `<Suspense>`. This is because of a [known issue](https://github.com/vercel/next.js/issues/51581) where server rendering a `<Suspense>` throws an error.
+>
+> ```js
+> import dynamic from 'next/dynamic'
+>
+> const PostHogPageView = dynamic(() => import('./PostHogPageView'), {
+>   ssr: false,
+> })
+> ```
+
+#### Capturing pageleave events (optional)
+
+To capture pageleave events, we need to set `capture_pageleave: true` in the initialization because setting `capture_pageview: false` disables it.
+
+```diff
+  // app/providers.js
+  'use client'
+  import posthog from 'posthog-js'
+  import { PostHogProvider as PHProvider } from 'posthog-js/react'
+  import { useEffect } from 'react'
+
+  export function PostHogProvider({ children }) {
+    useEffect(() => {
+      posthog.init(process.env.NEXT_PUBLIC_POSTHOG_KEY, {
+        api_host: process.env.NEXT_PUBLIC_POSTHOG_HOST,
+        capture_pageview: false,
++       capture_pageleave: true, // Enable pageleave capture
+      })
+    }, [])
+
+    return <PHProvider client={posthog}>{children}</PHProvider>
+  }
+```

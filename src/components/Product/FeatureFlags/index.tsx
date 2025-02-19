@@ -1,4 +1,5 @@
-import React from 'react'
+import CloudinaryImage from 'components/CloudinaryImage'
+import React, { useState } from 'react'
 import Link from 'components/Link'
 import { StaticImage } from 'gatsby-plugin-image'
 import {
@@ -44,6 +45,8 @@ import Install from '../Install'
 import { SEO } from 'components/seo'
 import { useLayoutData } from 'components/Layout/hooks'
 import Plans from 'components/Pricing/Plans'
+import SideModal from '../../Modal/SideModal'
+import Profile from '../../Team/Profile'
 
 const product = {
     slug: 'feature-flags',
@@ -52,41 +55,66 @@ const product = {
     freeTier: '1,000,000 requests',
 }
 
-const team = 'Feature Success'
-const teamSlug = '/teams/feature-success'
+const team = 'Feature Flags'
+const teamSlug = '/teams/feature-flags'
 
 const featuresPerRow = 3
 const features = [
     {
         title: 'Release conditions',
-        description: 'Customize your rollout strategy by user or group properties, cohort, or trafic percentage',
-        image: <StaticImage src="./images/release-conditions.png" width={420} />,
+        description: 'Customize your rollout strategy by user or group properties, cohort, or traffic percentage',
+        image: (
+            <CloudinaryImage
+                src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Product/FeatureFlags/images/release-conditions.png"
+                width={420}
+            />
+        ),
         border: true,
     },
     {
         title: 'Multivariate feature flags',
         description: 'Simultaneously test multiple versions against a control group',
-        image: <StaticImage src="./images/multivariate.png" width={420} />,
+        image: (
+            <CloudinaryImage
+                src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Product/FeatureFlags/images/multivariate.png"
+                width={420}
+            />
+        ),
         border: true,
     },
     {
         title: 'Test changes without touching your codebase',
         description:
             'JSON payloads let you change text, visuals, or entire blocks of code without subsequent deployments',
-        image: <StaticImage src="./images/payloads.png" width={420} />,
+        image: (
+            <CloudinaryImage
+                src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Product/FeatureFlags/images/payloads.png"
+                width={420}
+            />
+        ),
         border: true,
     },
     {
         title: 'Developer-friendly automation',
         description:
-            'Automated usage reports, IP address resolution (for location-based targeting), and recall user properties to avoid passing them manually every time',
-        image: <StaticImage src="./images/reports.png" width={420} />,
+            'Automated usage reports, IP address resolution (for location-based targeting), and recall person properties to avoid passing them manually every time',
+        image: (
+            <CloudinaryImage
+                src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Product/FeatureFlags/images/reports.png"
+                width={420}
+            />
+        ),
         border: true,
     },
     {
         title: 'Early access feature opt-in widget',
         description: 'Allow users to opt in to (or out of) specified features. Or use the API to build your own UI.',
-        image: <StaticImage src="./images/early-access.png" width={420} />,
+        image: (
+            <CloudinaryImage
+                src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Product/FeatureFlags/images/early-access.png"
+                width={420}
+            />
+        ),
         border: true,
     },
 ]
@@ -179,7 +207,7 @@ const faqs = [
     {
         question: 'Is there a free trial on paid plans?',
         children:
-            'We have a generous free tier on every paid plan so you can try out the features before paying any money. (You\'ll need to enter your credit card info, but you can set a billing limit). If you have additional needs, such as enterprise features, please <a href="/contact-sales">get in touch</a>.',
+            'We have a generous free tier on every paid plan so you can try out the features before paying any money. (You\'ll need to enter your credit card info, but you can set a billing limit). If you have additional needs, such as enterprise features, please <a href="/talk-to-a-human">get in touch</a>.',
     },
     {
         question: 'What currency are your prices in?',
@@ -188,7 +216,7 @@ const faqs = [
     {
         question: 'Do you offer a discount for non-profits?',
         children:
-            'Yes in most cases - 50% off any plan. Create your account, then email <a href="mailto:sales@posthog.com?subject=Non-profit%20discount">sales@posthog.com</a> from the same email address with some basic details on your organization. We will then apply a discount.',
+            'Yes in most cases - 25% off any plan. Create your account, then email <a href="mailto:sales@posthog.com?subject=Non-profit%20discount">sales@posthog.com</a> from the same email address with some basic details on your organization. We will then apply a discount.',
     },
     {
         question: 'Are there any minimums or annual commitments?',
@@ -210,7 +238,7 @@ const comparison = [
         },
     },
     {
-        feature: 'Target by user properties',
+        feature: 'Target by person properties',
         companies: {
             LaunchDarkly: true,
             Optimizely: true,
@@ -310,7 +338,7 @@ const comparison = [
         },
     },
     {
-        feature: 'Recall user properties by default',
+        feature: 'Recall person properties by default',
         companies: {
             LaunchDarkly: false,
             Optimizely: false,
@@ -325,6 +353,7 @@ const pairsWithItemCount = 3
 const PairsWithArray = [
     {
         icon: <IconGraph />,
+        color: 'blue',
         product: 'Product analytics',
         description:
             "Run any insight filtered by a flag's value, or group by flag to see usage across a flag's variants",
@@ -332,12 +361,14 @@ const PairsWithArray = [
     },
     {
         icon: <IconUserPaths />,
+        color: 'primary dark:text-primary-dark',
         product: 'User paths',
         description: 'See how a flag’s value influenced an intended outcome',
         url: '/product-analytics',
     },
     {
         icon: <IconRewindPlay />,
+        color: 'yellow',
         product: 'Session replay',
         description: 'Filter recordings down to only when a feature flag was called, or to a specific value of a flag',
         url: '/session-replay',
@@ -375,6 +406,7 @@ export const ProductFeatureFlags = () => {
         }
     `)
     const { fullWidthContent } = useLayoutData()
+    const [activeProfile, setActiveProfile] = useState(false)
     return (
         <>
             <SEO
@@ -382,6 +414,9 @@ export const ProductFeatureFlags = () => {
                 description="Safely roll out features to specific users or groups."
                 image={`/images/og/feature-flags.jpg`}
             />
+            <SideModal open={!!activeProfile} setOpen={setActiveProfile}>
+                {activeProfile && <Profile profile={{ ...activeProfile }} />}
+            </SideModal>
             <div className={`${fullWidthContent ? 'max-w-full px-8' : 'max-w-7xl mx-auto'} px-5 py-10 md:pt-20 pb-0`}>
                 <Hero
                     color="seagreen"
@@ -392,8 +427,8 @@ export const ProductFeatureFlags = () => {
                 />
 
                 <div className="text-center">
-                    <StaticImage
-                        src="./images/screenshot-feature-flags.png"
+                    <CloudinaryImage
+                        src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Product/FeatureFlags/images/screenshot-feature-flags.png"
                         alt="Screenshot of a feature flag in PostHog"
                         className="w-full max-w-[1361px]"
                         placeholder="none"
@@ -464,13 +499,18 @@ export const ProductFeatureFlags = () => {
                             Either way, your first {product.freeTier} are free – every month.
                         </p>
                         <div className="bg-accent dark:bg-accent-dark border border-light dark:border-dark rounded-md px-8 py-4 mb-2 text-sm">
-                            <strong>Note:</strong> Feature flags and A/B testing are currently packaged together and
+                            <strong>Note:</strong> Feature flags and Experiments are currently packaged together and
                             share volume limits.
                         </div>
                     </div>
 
                     <div className="md:w-96">
-                        <StaticImage placeholder="none" quality={100} src="../hogs/feature-flags-hog.png" alt="" />
+                        <CloudinaryImage
+                            placeholder="none"
+                            quality={100}
+                            src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Product/hogs/feature-flags-hog.png"
+                            alt=""
+                        />
                     </div>
                 </div>
 
@@ -498,10 +538,10 @@ export const ProductFeatureFlags = () => {
                         <h3 className="text-center mb-8">So, what's best for you?</h3>
                         <div className="mb-8 mx-5 md:mx-0 grid md:grid-cols-2 gap-4">
                             <VsCompetitor
-                                title="Reasons a competitor might be better for you (for now...)"
+                                title="Reasons a competitor may be best for you (for now...)"
                                 image={
-                                    <StaticImage
-                                        src="../../../images/products/competitors-ff.png"
+                                    <CloudinaryImage
+                                        src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/images/products/competitors-ff.png"
                                         className="max-w-[176px]"
                                     />
                                 }
@@ -539,7 +579,7 @@ export const ProductFeatureFlags = () => {
                         <p className="text-center text-sm font-medium">
                             Have questions about PostHog? <br className="md:hidden" />
                             <Link to={`/questions/${product.slug}`}>Ask the community</Link> or{' '}
-                            <Link to="/contact-sales">book a demo</Link>.
+                            <Link to="/talk-to-a-human">book a demo</Link>.
                         </p>
                     </section>
                 </div>
@@ -600,7 +640,7 @@ export const ProductFeatureFlags = () => {
                         PostHog works in small teams. The <Link to={teamSlug}>{team}</Link> team is responsible for
                         building {product.lowercase}.
                     </p>
-                    <TeamMembers teamName={team} />
+                    <TeamMembers teamName={team} setActiveProfile={setActiveProfile} />
                 </section>
 
                 <section id="roadmap" className="mb-20 px-5">

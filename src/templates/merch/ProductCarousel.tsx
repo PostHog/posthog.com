@@ -5,6 +5,7 @@ import React, { useState } from 'react'
 import { cn } from '../../utils'
 import { ShopifyProduct } from './types'
 import { getProductImages } from './utils'
+import { getShopifyImage } from 'gatsby-source-shopify'
 
 type ProductCarouselProps = {
     className?: string
@@ -28,7 +29,7 @@ export function ProductCarousel(props: ProductCarouselProps): React.ReactElement
         },
     })
 
-    const classes = cn('relative', className)
+    const classes = cn('relative rounded overflow-hidden', className)
 
     if (!images || images.length === 0) return null
 
@@ -36,7 +37,7 @@ export function ProductCarousel(props: ProductCarouselProps): React.ReactElement
         return (
             <GatsbyImage
                 className="w-full rounded-md overflow-hidden aspect-square"
-                image={product.featuredMedia.preview.image.localFile.childImageSharp.gatsbyImageData}
+                image={getShopifyImage({ image: product.featuredMedia.preview.image })}
                 alt={product.title}
             />
         )
@@ -48,8 +49,8 @@ export function ProductCarousel(props: ProductCarouselProps): React.ReactElement
                     return (
                         <div className={`keen-slider__slide number-slide${i}} max-w-full bg-white`} key={i}>
                             <GatsbyImage
-                                className="w-full rounded-md overflow-hidden aspect-square"
-                                image={image.preview.image.localFile.childImageSharp.gatsbyImageData}
+                                className="w-full aspect-square"
+                                image={getShopifyImage({ image: image.preview.image })}
                                 alt={title}
                             />
                         </div>

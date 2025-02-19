@@ -78,3 +78,5 @@ Take a screenshot of your completed interview snapshot and share it with your te
 To conclude, interview snapshots are a great way of quickly capturing the gist of a user interview and sharing those insights with your team. Remember, this is just how **we** do them – you can adapt this template however you want to suit your needs. 
 
 If you're new to doing user interviews, read our [guide to talking to users as an engineer](/blog/10x-engineers-do-user-interviews) for more tips on how to plan your interviews and find people to talk to.
+
+<NewsletterForm />

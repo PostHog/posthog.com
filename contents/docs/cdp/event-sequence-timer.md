@@ -15,7 +15,7 @@ import TransformationDisabled from "./_snippets/transformation-disabled.mdx"
 
 <TransformationDisabled />
 
-> You can still analyze the timing of event sequences using [HogQL](/docs/hogql). For example, to get the average time between a `$pageview` and `$pageleave` events this year, [create an SQL insight](https://app.posthog.com/insights/new) and use the following SQL statement:
+> You can still analyze the timing of event sequences using [SQL](/docs/product-analytics/sql). For example, to get the average time between a `$pageview` and `$pageleave` events this year, [create an SQL insight](https://app.posthog.com/insights/new) and use the following SQL statement:
 >
 >```sql
 >SELECT avg(time_between) AS avg_time_between
@@ -53,7 +53,7 @@ This transformation measures the time it takes for a user to perform one event (
 
 ## Installation
 
-1. In PostHog, click the "[Data pipeline](https://us.posthog.com/apps)" tab in the left sidebar.
+1. In PostHog, click the "[Data pipeline](https://us.posthog.com/pipeline)" tab in the left sidebar.
 2. Search for 'Event Sequence Timer' and select the transformation, press Install.
 3. Follow the on-screen steps to configure the transformation.
 

@@ -10,7 +10,7 @@ Sprints are shared transparently inside the company, for every team – includin
 
 * There should be a GitHub issue for the sprint up in advance and everyone should add their notes to it before the meeting starts.
 
-* Each _individual_ should come having written up what they specific suggestions for what they'll work on over the next sprint. Note: if you're in an engineering role, product won't dictate to you what to build – it is up to you to drive this.
+* Each _individual_ should come with specific written suggestions for what they'll work on over the next sprint. Note: if you're in an engineering role, product won't dictate to you what to build – it is up to you to drive this.
 
 * The _team leader_ for a small team is responsible for making sure the sprint takes place regularly.
 

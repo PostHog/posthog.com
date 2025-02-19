@@ -1,0 +1,189 @@
+---
+title: "In-depth: PostHog vs Plausible"
+date: 2024-10-01
+author:
+ - ian-vanagas
+rootpage: /blog
+featuredImage: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/plausible_5d7d99ef07.jpg
+featuredImageType: full
+category: General
+tags:
+  - Comparisons
+---
+
+import { ComparisonTable } from 'components/ComparisonTable'
+import { ComparisonHeader } from 'components/ComparisonTable/header'
+import { ComparisonRow } from 'components/ComparisonTable/row'
+
+## How is PostHog different?
+
+### 1. We're free (forever)
+
+Our ["ridiculously cheap" tier](/pricing) includes all of the features of PostHog for free with an allowance of 1M events per month. For Plausible, this would cost a minimum of $69/m. 
+
+Beyond PostHog's free tier, we try to be as cheap as possible and transparent. Want to know how much we'll charge? See our [pricing calculator](/pricing).
+
+### 2. We're more than just web analytics
+
+[Web analytics](/web-analytics) is a core feature of PostHog, but we offer many more tools to help you analyze, test, observe, and deploy your site and app.
+
+These include [product analytics](/product-analytics), [session replay](/session-replay), [surveys](/surveys), [experiments](/experiments), [feature flags](/feature-flags), a [data warehouse](/data-warehouse), and more.
+
+### 3. We're multi-platform
+
+[Plausible](/blog/best-plausible-alternatives) is entirely focused on the web, whereas PostHog supports both web tracking and other platforms, like mobile, backend, and [API](/docs/api).
+
+This isn't limited to event capture and features either. Our [data warehouse](/data-warehouse) lets you import and query data from sources like [Stripe](/docs/data-warehouse/setup/stripe), [Hubspot](/docs/data-warehouse/setup/hubspot), and [Postgres](/docs/data-warehouse/setup/postgres), and our data pipelines let you send data to destinations like [Slack](/docs/cdp/destinations/slack), [S3](/docs/cdp/batch-exports/s3), or a custom [HTTP webhook](/docs/cdp/destinations/webhook).
+
+## Web analytics
+
+Both Plausible and PostHog are [Google Analytics alternatives](/blog/ga4-alternatives), so they're ideal for tracking and analyzing your website. 
+
+<ComparisonTable column1="PostHog" column2="Plausible">
+  <ComparisonRow column1={true} column2={true} feature="Pageviews" description="Track visitors and their views" />
+  <ComparisonRow column1={true} column2={true} feature="Sessions" description="Track unique sessions and their durations" />
+  <ComparisonRow column1={true} column2={true} feature="Traffic breakdown" description="See where your visitors and conversions are coming from" />
+  <ComparisonRow column1={true} column2={true} feature="Conversions" description="Track actions you want users to take" />
+  <ComparisonRow column1={true} column2={true} feature="Bounce rate" description="See the percentage of users that leave after one pageview" />
+  <ComparisonRow column1={true} column2={true} feature="Entry and exit paths" description="See the pages users first visit and the last ones before they leave" />
+  <ComparisonRow column1={true} column2={true} feature="Outbound clicks" description="See the links that take users away" />
+  <ComparisonRow column1={true} column2={true} feature="UTM tracking" description="Track marketing campaigns with UTM tags" />
+  <ComparisonRow column1={true} column2={true} feature="Cookieless tracking" description="Track users without cookies" />
+  <ComparisonRow column1={true} column2={true} feature="Snippet install" description="Install HTML snippet" />
+  <ComparisonRow column1={"56.8 kb"} column2={"<1 kB"} feature="Script size" description="Size of the script that runs on your site" />
+</ComparisonTable>
+
+## Product analytics
+
+Teams rely on [product analytics](/product-analytics) when they need more customization in both capturing and analyzing date. Although not a focus of Plausible, it does have offer some basic product analytics features for those that need them.
+
+<ComparisonTable column1="PostHog" column2="Plausible">
+  <ComparisonRow column1={true} column2={true} feature="Custom events" description="Capture and analyze any type of event" />
+  <ComparisonRow column1={true} column2="Events only" feature="Custom properties" description="Add more data to custom events or users" />
+  <ComparisonRow column1={true} column2={false} feature="Autocapture" description="Capture frontend clicks and events automatically" />
+  <ComparisonRow column1={true} column2={false} feature="Graphs and trends" description="Build custom insights and visualizations" />
+  <ComparisonRow column1={true} column2="Limited" feature="Funnels" description="Track users through a sequence of events" />
+  <ComparisonRow column1={true} column2={false} feature="Retention" description="Visualize which users stay, for how long" />
+  <ComparisonRow column1={true} column2={false} feature="Custom dashboards" description="Build a custom dashboard of your own or use a template" />
+  <ComparisonRow column1={true} column2={false} feature="Cohorts" description="Combine users based on properties and events for group analysis" />
+  <ComparisonRow column1={true} column2={false} feature="User profiles" description="View user demographic data such as country, language, and device type" />
+  <ComparisonRow column1={true} column2={false} feature="Group analytics" description="Track metrics at a company and account level" />
+  <ComparisonRow column1={true} column2={false} feature="Paths" description="Track user flows and where they drop off" />
+  <ComparisonRow column1={true} column2={false} feature="SQL" description="Query your data with SQL" />
+</ComparisonTable>
+
+> 💡 **Good to know:** Many of Plausible's product analytics features, like custom properties and [funnels](/docs/product-analytics/funnels), are on its more expensive "Business" plan. It's roughly twice the price of the Growth plan and includes up to 10 team members and priority support.
+
+## Platform
+
+Beyond web analytics is where PostHog really shines. We provide all of the tools developers need to build a successful product (and they all work together). 
+
+<ComparisonTable column1="PostHog" column2="Plausible">
+  <ComparisonRow column1={true} column2={true} feature="EU hosting" description="Access and store your data in the EU" />
+  <ComparisonRow column1={true} column2={true} feature="Open source" description="View code, comment on roadmap, and contribute" />
+  <ComparisonRow column1={true} column2={false} feature="Free collaboration" description="Add unlimited teammates to your project" />
+  <ComparisonRow column1={true} column2={false} feature="Heatmaps" description="Visualize where users click in your app or website" />
+  <ComparisonRow column1={true} column2={false} feature="Session replay" description="Watch real users use your product, diagnose bugs" />
+  <ComparisonRow column1={true} column2={false} feature="Experiments" description="Run A/B/n tests on new features, optimize conversion funnels" />
+  <ComparisonRow column1={true} column2={false} feature="Surveys" description="Collect and analyze feedback, run NPS and PMF surveys" />
+  <ComparisonRow column1={true} column2={false} feature="Feature flags" description="Roll out features safely, toggle features for cohorts or individuals" />
+  <ComparisonRow column1={true} column2={false} feature="Server-side SDKs" description="Capture events and use features from Python, Node, and more" />
+  <ComparisonRow column1={true} column2={false} feature="Mobile SDKs" description="Capture events and use features from Android, iOS, and more" />
+  <ComparisonRow column1={true} column2="Partial" feature="API" description="Capture events, get stats, and make changes via API" />
+</ComparisonTable>
+
+> 💡 **Good to know:** 
+> 1. Plausible's API is limited to capturing events and querying aggregate metrics. PostHog's API provides capture, full SQL querying, feature flags, and CRUD operations for all metadata.
+> 2. You can add unlimited teammates to your project in PostHog. Plausible limits you to 3 on their growth plan and 10 on their business plan. For more than that, you need a custom enterprise plan.
+
+## Integrations
+
+Although Plausible has some integrations with other tools, it mostly stands on its own. PostHog has many more features for importing data from other sources as well as sending it to other destinations.
+
+<ComparisonTable column1="PostHog" column2="Plausible">
+  <ComparisonRow column1={true} column2={true} feature="CSV exports" description="Export your data as a CSV" />
+  <ComparisonRow column1={true} column2={false} feature="Warehouse exports" description="Export data to warehouses like S3 and BigQuery for storage and analysis" />
+  <ComparisonRow column1={true} column2={false} feature="Data warehouse" description="Query customer and product data together" />
+  <ComparisonRow column1={true} column2={false} feature="Warehouse import" description="Import data from third-party sources like Postgres, S3, and GCS" />
+  <ComparisonRow column1="Events, reports" column2="Reports, anomalies" feature="Slack" description="Send events, reports, and anomalies to Slack" />
+  <ComparisonRow column1={true} column2={true} feature="Email" description="Send reports to email" />
+  <ComparisonRow column1={false} column2={true} feature="Google Search Console" description="See search queries that sent traffic to your site" />
+  <ComparisonRow column1={true} column2={false} feature="Stripe" description="Import charges, customers, invoices, subscriptions, and more" />
+  <ComparisonRow column1={true} column2={false} feature="Hubspot" description="Import contacts, companies, deals, and more" />
+  <ComparisonRow column1={true} column2={false} feature="Zapier" description="Trigger Zapier automations" />
+  <ComparisonRow column1={true} column2={false} feature="Zendesk" description="Import organizations, tickets, users, and more" />
+  <ComparisonRow column1={true} column2={false} feature="Sentry" description="Send and receive error data with Sentry" />
+</ComparisonTable>
+
+## Security, compliance, privacy
+
+Plausible prides itself on being privacy-friendly, but PostHog stands toe-to-toe with it in terms of features. On top of that, PostHog includes many of the features enterprises need for compliance.
+
+<ComparisonTable column1="PostHog" column2="Plausible">
+  <ComparisonRow column1="7 years" column2="3 years" feature="Data retention" description="The length of time event data is retained" />
+  <ComparisonRow column1={true} column2={true} feature="Bot blocking" description="Block scrapers, crawlers, and other unwanted traffic from stats" />
+  <ComparisonRow column1={true} column2={true} feature="Reverse proxy" description="Avoid tracking blockers and capture more data" />
+  <ComparisonRow column1={true} column2={false} feature="HIPAA-ready" description="Can be compliant with HIPAA" />
+  <ComparisonRow column1={true} column2={true} feature="GDPR-ready" description="Can be compliant with GDPR" />
+  <ComparisonRow column1={true} column2={true} feature="Data anonymization" description="Options to anonymize user data" />
+  <ComparisonRow column1={true} column2={false} feature="SOC 2" description="SOC 2 security certification" />
+  <ComparisonRow column1={true} column2={true} feature="2FA" description="Enforce login with two-factor authentication" />
+  <ComparisonRow column1="Enterprise" column2={false} feature="SAML/SSO" description="Use SAML or single sign-on authentication" />
+</ComparisonTable>
+
+## Frequently asked questions
+
+### How much do PostHog and Plausible cost?
+
+Plausible is a monthly subscription based on usage. Plans start at $9/m for 10k events. Its Business plan unlocks more team members, custom properties, funnels, and more for a minimum of $10/m more.
+
+PostHog is [entirely usage-based](/pricing). Its free tier includes:
+
+| Feature                         | Free usage per month  | Additional cost        |
+|---------------------------------|:---------------------:|:----------------------:|
+| Product analytics               | 1 million events      | From $0.00005/event    |
+| Session replay                  | 5,000 recordings      | From $0.005/recording  |
+| Surveys                         | 250 responses         | From $0.20/response    |
+| Feature flags and A/B testing   | 1 million API requests| From $0.0001/request   |
+| Data warehouse                  | 1 million synced rows | From $0.000015/row     |
+
+Basically, we aim to give you the tools you want for as cheap as possible. We split out the products, and features like [group analytics](/docs/product-analytics/group-analytics) and [pipelines](/docs/cdp) within products, to do this.
+
+### Does PostHog offer a free trial?
+
+Plausible offers a free trial, but PostHog doesn't, what gives? 
+
+Instead of a free trial, PostHog offers a free forever tier as long as you stay under the free limits. You don't even need a credit card, but adding one unlocks all the features (we have billing limits you can use too).
+
+### Can I migrate from Google Analytics to PostHog?
+
+Yes, see our [Google Analytics to PostHog migration guide](/docs/migrate/google-analytics) for more details.
+
+### Isn't Plausible simpler than PostHog?
+
+Although PostHog has many more features than Plausible, it isn't necessarily more complicated. Our [web analytics](/web-analytics) dashboard is similar to Plausible's:
+
+<ProductScreenshot
+    imageLight = "https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2024_10_01_at_11_39_58_2x_5dff6baf53.png"
+    imageDark = "https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2024_10_01_at_11_40_26_2x_76efad2201.png"
+    classes="rounded"
+    alt="PostHog web analytics dashboard"
+/>
+
+Our [install snippet](/docs/getting-started/install?tab=snippet) is also only a couple of lines:
+
+```html
+<script>
+    !function(t,e){var o,n,p,r;e.__SV||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}(p=t.createElement("script")).type="text/javascript",p.crossOrigin="anonymous",p.async=!0,p.src=s.api_host+"/static/array.js",(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r);var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString(1)+".people (stub)"},o="capture identify alias people.set people.set_once set_config register register_once unregister opt_out_capturing has_opted_out_capturing opt_in_capturing reset isFeatureEnabled onFeatureFlags getFeatureFlag getFeatureFlagPayload reloadFeatureFlags group updateEarlyAccessFeatureEnrollment getEarlyAccessFeatures getActiveMatchingSurveys getSurveys getNextSurveyStep onSessionId".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
+    posthog.init('<ph_project_api_key>', {api_host: '<ph_client_api_host>'})
+</script>
+```
+
+Our users range from [individual indie hackers](/customers/headshot-pro) to [YC-backed startups](/customers/mintlify) to [massive enterprises](/customers/researchgate).
+
+### Can I migrate from Plausible?
+
+Yes. See our [Plausible to PostHog migration guide](/docs/migrate/plausible) for more.
+
+<ArrayCTA />

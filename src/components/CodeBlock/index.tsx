@@ -10,6 +10,7 @@ import languageMap from './languages'
 import { useValues } from 'kea'
 import { layoutLogic } from 'logic/layoutLogic'
 import Tooltip from 'components/Tooltip'
+import Mermaid from 'components/Mermaid'
 
 type LanguageOption = {
     label?: string
@@ -74,6 +75,9 @@ type MdxCodeBlockChildren = {
 }
 
 export const MdxCodeBlock = ({ children, ...props }: MdxCodeBlock) => {
+    if (children?.props?.className?.includes('language-mermaid')) {
+        return <Mermaid>{children.props.children}</Mermaid>
+    }
     const childArray = Array.isArray(children) ? children : [children]
 
     const languages = childArray
@@ -126,6 +130,10 @@ export const SingleCodeBlock = ({ label, language, children, ...props }: SingleC
 
 const tooltipKey = '// TIP:'
 
+const removeQuotes = (str?: string | null): string | null | undefined => {
+    return str?.replace(/['"]/g, '')
+}
+
 export const CodeBlock = ({
     label,
     selector = 'tabs',
@@ -165,14 +173,11 @@ export const CodeBlock = ({
     }, [])
 
     const replaceProjectInfo = (code: string) => {
-        if (!projectName || !projectToken) {
-            return code
-        }
-
         return code
-            .replace('<ph_project_api_key>', projectToken)
-            .replace('<ph_project_name>', projectName)
-            .replace('<ph_client_api_host>', clientApiHost || 'https://us.i.posthog.com')
+            .replace('<ph_project_api_key>', removeQuotes(projectToken) || '<ph_project_api_key>')
+            .replace('<ph_project_name>', removeQuotes(projectName) || '<ph_project_name>')
+            .replace('<ph_app_host>', removeQuotes(appHost) || '<ph_app_host>')
+            .replace('<ph_client_api_host>', removeQuotes(clientApiHost) || 'https://us.i.posthog.com')
     }
 
     const copyToClipboard = () => {
@@ -308,7 +313,7 @@ export const CodeBlock = ({
 
             <Highlight
                 {...defaultProps}
-                code={currentLanguage.code.trim()}
+                code={replaceProjectInfo(currentLanguage.code.trim())}
                 language={(languageMap[currentLanguage.language]?.language || currentLanguage.language) as Language}
                 theme={websiteTheme === 'dark' ? darkTheme : lightTheme}
             >
@@ -377,14 +382,7 @@ export const CodeBlock = ({
                                                                 className={`${className} text-shadow-none`}
                                                                 {...props}
                                                             >
-                                                                {children === "'<ph_project_api_key>'" && projectToken
-                                                                    ? `'${projectToken}'`
-                                                                    : children === "'<ph_client_api_host>'" &&
-                                                                      clientApiHost
-                                                                    ? clientApiHost
-                                                                    : children === "'<ph_app_host>'" && appHost
-                                                                    ? appHost
-                                                                    : children}
+                                                                {children}
                                                             </span>
                                                         </span>
                                                     )

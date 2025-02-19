@@ -69,3 +69,5 @@ If you want to go further, I recommend checking out:
 - [The Pragmatic Engineer](https://newsletter.pragmaticengineer.com/) - Gergely is the gold standard in high quality writing about engineering culture
 - [Lenny's Newsletter](https://www.lennysnewsletter.com/) - yes I know Lenny is product-focused, but he covers a lot of the same culture ground
 - [Technically](https://technically.substack.com/) - Justin explains technical concepts really well, which can help you demystify engineering culture a lil' bit
+
+<NewsletterForm />

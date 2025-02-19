@@ -1,0 +1,29 @@
+To replace any type of `View` with a redacted version in the recording, set the [tag](https://developer.android.com/reference/android/view/View#tags) to `ph-no-capture`.
+
+```xml
+<ImageView
+    android:id="@+id/imvProfilePhoto"
+    android:layout_width="200dp"
+    android:layout_height="200dp"
+    android:tag="ph-no-capture"
+/>
+```
+
+### Masking in Jetpack Compose
+
+- You can manually mark a Compose View for masking using the `postHogMask()` view modifier:
+
+```android_kotlin
+...
+    Text(
+        text = AnnotatedString(text),
+        modifier =
+            modifier
+                .wrapContentSize()
+                .postHogMask()
+                .clickable {
+                    text = "Sensitive!"
+                },
+    )
+...
+```

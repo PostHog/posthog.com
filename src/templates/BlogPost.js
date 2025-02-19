@@ -5,7 +5,7 @@ import Link from 'components/Link'
 import { Contributor } from 'components/PostLayout/Contributors'
 import { SEO } from 'components/seo'
 import { ZoomImage } from 'components/ZoomImage'
-import { graphql } from 'gatsby'
+import { graphql, useStaticQuery } from 'gatsby'
 import { GatsbyImage, getImage } from 'gatsby-plugin-image'
 import { MDXRenderer } from 'gatsby-plugin-mdx'
 import React, { useEffect, useState } from 'react'
@@ -25,6 +25,10 @@ import Breadcrumbs from 'components/Edition/Breadcrumbs'
 import { CallToAction } from 'components/CallToAction'
 import { IconMap, IconOpenSidebar } from '@posthog/icons'
 import { NewsletterForm } from 'components/NewsletterForm'
+import BuiltBy from '../components/BuiltBy'
+import TeamMember from 'components/TeamMember'
+import CloudinaryImage from 'components/CloudinaryImage'
+import AskMax from 'components/AskMax'
 
 const A = (props) => <Link {...props} className="text-red hover:text-red font-semibold" />
 
@@ -61,16 +65,18 @@ export const Contributors = ({ contributors }) => {
         <>
             <div className="text-sm opacity-50 px-4 mb-2">Posted by</div>
             <div className={`mb-4 flex flex-col gap-4`}>
-                {contributors.map(({ profile_id, image, name, role }) => (
-                    <Contributor
-                        url={profile_id && `/community/profiles/${profile_id}`}
-                        image={image}
-                        name={name}
-                        key={name}
-                        role={role}
-                        text
-                    />
-                ))}
+                {contributors.map(({ profile_id, image, name, role, profile }) => {
+                    return (
+                        <Contributor
+                            url={profile_id && `/community/profiles/${profile_id}`}
+                            image={profile?.avatar?.url || image}
+                            name={profile ? [profile.firstName, profile.lastName].filter(Boolean).join(' ') : name}
+                            key={name}
+                            role={profile?.companyRole || role}
+                            text
+                        />
+                    )
+                })}
             </div>
         </>
     ) : null
@@ -83,7 +89,8 @@ const ContributorsSmall = ({ contributors }) => {
 
             <div>
                 <ul className="flex list-none !m-0 !p-0 space-x-2">
-                    {contributors.map(({ profile_id, image, name, role }) => {
+                    {contributors.map(({ profile_id, name, profile, ...other }) => {
+                        const image = profile?.avatar?.url || other?.image
                         const url = profile_id && `/community/profiles/${profile_id}`
                         const Container = url ? Link : 'div'
                         const gatsbyImage = image && getImage(image)
@@ -92,7 +99,11 @@ const ContributorsSmall = ({ contributors }) => {
                                 <Container className="flex space-x-2 items-center" {...(url ? { to: url } : {})}>
                                     <span>
                                         {typeof image === 'string' ? (
-                                            <img src={image} />
+                                            <CloudinaryImage
+                                                width={50}
+                                                className="w-6 h-6 border-border border dark:border-dark rounded-full"
+                                                src={image}
+                                            />
                                         ) : gatsbyImage ? (
                                             <GatsbyImage
                                                 image={gatsbyImage}
@@ -142,10 +153,12 @@ export default function BlogPost({ data, pageContext, location, mobile = false }
         a: A,
         TutorialsSlider,
         NewsletterForm,
+        BuiltBy,
+        TeamMember,
         ...shortcodes,
     }
-    const { tableOfContents } = pageContext
-    const { fullWidthContent } = useLayoutData()
+    const { tableOfContents, askMax } = pageContext
+    const { fullWidthContent, theoMode } = useLayoutData()
     const { pathname } = useLocation()
     const [postID, setPostID] = useState()
     const [posthogInstance, setPosthogInstance] = useState()
@@ -190,7 +203,8 @@ export default function BlogPost({ data, pageContext, location, mobile = false }
                 title={seo?.metaTitle || title + ' - PostHog'}
                 description={seo?.metaDescription || excerpt}
                 article
-                image={`/og-images/${fields.slug.replace(/\//g, '')}.jpeg`}
+                image={`${process.env.GATSBY_CLOUDFRONT_OG_URL}/${fields.slug.replace(/\//g, '')}.jpeg`}
+                imageType="absolute"
             />
 
             <div className="flex flex-col-reverse @3xl:flex-row">
@@ -206,7 +220,6 @@ export default function BlogPost({ data, pageContext, location, mobile = false }
                             featuredImage={featuredImage}
                             featuredVideo={featuredVideo}
                             featuredImageType={featuredImageType}
-                            contributors={contributors}
                             date={date}
                             tags={tags}
                         />
@@ -219,7 +232,9 @@ export default function BlogPost({ data, pageContext, location, mobile = false }
                             <MDXRenderer>{body}</MDXRenderer>
                         </MDXProvider>
                         <Upvote className="mt-6" />
-                        <div className={`mt-12 mx-auto pb-20 ${fullWidthContent ? 'max-w-full' : 'max-w-4xl'}`}>
+                        {askMax && <AskMax />}
+                        <div className={`mt-8 mx-auto pb-20 ${fullWidthContent ? 'max-w-full' : 'max-w-4xl'}`}>
+                            <h3>Comments</h3>
                             <Questions
                                 disclaimer={false}
                                 subject={false}
@@ -229,29 +244,33 @@ export default function BlogPost({ data, pageContext, location, mobile = false }
                         </div>
                     </div>
                 </div>
-                <aside
-                    className={`shrink-0 basis-72 @3xl:reasonable:sticky @3xl:reasonable:overflow-auto max-h-64 overflow-auto @3xl:max-h-[calc(100vh_-_108px)] @3xl:top-[108px] w-full border-x border-border dark:border-dark pt-4 xl:block hidden`}
-                >
-                    {category === 'Tutorials' && posthogInstance && (
-                        <div className="border border-light dark:border-dark rounded bg-accent dark:bg-accent-dark p-4 mx-4 mb-4">
-                            <h3 className="text-[15px] mb-1 flex items-center gap-1">
-                                <IconMap className="w-6 h-6 opacity-60" /> <span>Follow along in the app</span>
-                            </h3>
-                            <p className="mb-2 text-sm">Open this guide in PostHog and follow along step-by-step.</p>
-                            <CallToAction
-                                to={`https://app.posthog.com/#panel=docs:${fields.slug}`}
-                                size="sm"
-                                externalNoIcon
-                            >
-                                Open in app
-                                <IconOpenSidebar className="w-4 h-4 inline-block ml-2" />
-                            </CallToAction>
-                        </div>
-                    )}
-                    <Upvote id={postID} slug={fields.slug} className="px-4 mb-4" />
-                    <Contributors contributors={contributors} />
-                    <MobileSidebar tableOfContents={tableOfContents} />
-                </aside>
+                {!theoMode && (
+                    <aside
+                        className={`shrink-0 basis-72 @3xl:reasonable:sticky @3xl:reasonable:overflow-auto max-h-64 overflow-auto @3xl:max-h-[calc(100vh_-_108px)] @3xl:top-[108px] w-full border-x border-border dark:border-dark pt-4 xl:block hidden`}
+                    >
+                        {category === 'Tutorials' && posthogInstance && (
+                            <div className="border border-light dark:border-dark rounded bg-accent dark:bg-accent-dark p-4 mx-4 mb-4">
+                                <h3 className="text-[15px] mb-1 flex items-center gap-1">
+                                    <IconMap className="w-6 h-6 opacity-60" /> <span>Follow along in the app</span>
+                                </h3>
+                                <p className="mb-2 text-sm">
+                                    Open this guide in PostHog and follow along step-by-step.
+                                </p>
+                                <CallToAction
+                                    to={`https://app.posthog.com/#panel=docs:${fields.slug}`}
+                                    size="sm"
+                                    externalNoIcon
+                                >
+                                    Open in app
+                                    <IconOpenSidebar className="w-4 h-4 inline-block ml-2" />
+                                </CallToAction>
+                            </div>
+                        )}
+                        <Upvote id={postID} slug={fields.slug} className="px-4 mb-4" />
+                        <Contributors contributors={contributors} />
+                        <MobileSidebar tableOfContents={tableOfContents} />
+                    </aside>
+                )}
             </div>
         </article>
     )
@@ -293,14 +312,17 @@ export const query = graphql`
                 }
                 contributors: authorData {
                     id
-                    image {
-                        childImageSharp {
-                            gatsbyImageData
-                        }
-                    }
                     name
                     profile_id
                     role
+                    profile {
+                        firstName
+                        lastName
+                        companyRole
+                        avatar {
+                            url
+                        }
+                    }
                 }
                 seo {
                     ...SEOFragment

@@ -2,7 +2,7 @@
 title: Annual plans
 ---
 
-We offer annual plans to companies who are looking to commit to using PostHog longer term, as well as save some money whilst doing so.  If you're interested in learning more then [Get in touch](/contact-sales) with our Sales team.
+We offer annual plans to companies who are looking to commit to using PostHog longer term, as well as save some money whilst doing so.  If you're interested in learning more then [Get in touch](/talk-to-a-human) with our Sales team.
 
 ## Benefits
 
@@ -23,7 +23,7 @@ With an annual plan you'll:
 
 ## Getting started
 
-It's easy - [Contact Sales](/contact-sales) and we'll get the ball rolling!  We will also need to know:
+It's easy - [talk to a human](/talk-to-a-human) and we'll get the ball rolling!  We will also need to know:
 
 * Official company name and address.
 * Contact details for your finance team.

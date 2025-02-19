@@ -146,7 +146,7 @@ function App() {
 export default App;
 ```
 
-These are basic implementations of React feature flags setup. From here, you can set up [A/B tests](/ab-testing), a [public beta program](/tutorials/public-beta-program), or [canary releases](/tutorials/canary-release).
+These are basic implementations of React feature flags setup. From here, you can set up [A/B tests](/experiments), a [public beta program](/tutorials/public-beta-program), or [canary releases](/tutorials/canary-release).
 
 ## Further reading
 

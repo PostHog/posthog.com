@@ -77,6 +77,11 @@ export default function Questions(): JSX.Element {
                     $notContainsi: '/community/profiles',
                 },
             },
+            topics: {
+                label: {
+                    $notContainsi: '#',
+                },
+            },
         },
         revalidateOnFocus: false,
     })

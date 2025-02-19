@@ -5,6 +5,9 @@ showTitle: true
 ---
 
 import RegionWarning from "../_snippets/region-warning.mdx"
+import ProxyWarning from "../_snippets/proxy-usage-warning.mdx"
+
+<ProxyWarning />
 
 <RegionWarning />
 
@@ -23,6 +26,10 @@ const nextConfig = {
         source: "/ingest/:path*",
         destination: "https://us.i.posthog.com/:path*",
       },
+      {
+        source: "/ingest/decide",
+        destination: "https://us.i.posthog.com/decide",
+      },
     ];
   },
   // This is required to support PostHog trailing slash API requests
@@ -36,11 +43,12 @@ Then configure the PostHog client to send requests via your rewrite.
 ```js
 posthog.init(process.env.NEXT_PUBLIC_POSTHOG_KEY, {
   api_host: "/ingest",
-  ui_host: 'https://us.posthog.com' // or 'https://eu.posthog.com' if your PostHog is hosted in Europe
+  ui_host: '<ph_app_host>'
 })
 ```
 
-> If this isn't working for you (returning `503` errors), it may be an issue with how your hosting service (such as Heroku) handles rewrites. You can write [Next.js middleware to proxy requests](/docs/advanced/proxy/nextjs-middleware) instead.
+> If this isn't working for you (returning `503` or `400` errors), it may be an issue with how your hosting service (such as Heroku or Netlify) handles rewrites. You can write [Next.js middleware](/docs/advanced/proxy/nextjs-middleware) or use a host-specific proxy (like [Netlify](/docs/advanced/proxy/netlify)) instead.
+> For example, Netlify modifies the `Content-Encoding` header when using `rewrites()`, which causes PostHog to fail to parse the request. This doesn't happen if you use their `_redirects` file or `netlify.toml` options.
 
 ## Setup video
 

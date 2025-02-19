@@ -6,7 +6,7 @@ logo: >-
 logoDark: >-
   https://res.cloudinary.com/dmukukwp6/image/upload/v1711377739/posthog.com/contents/images/customers/elevenlabs/ElevenLabs_logo-dark.png
 featuredImage: >-
-  https://res.cloudinary.com/dmukukwp6/image/upload/v1711377962/posthog.com/contents/images/customers/elevenlabs/elevenlabs.png
+  https://res.cloudinary.com/dmukukwp6/image/upload/eleven_labs_b5853d00b7.png
 industries:
   - AI
 users:

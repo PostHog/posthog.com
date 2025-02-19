@@ -1,0 +1,260 @@
+---
+title: Anonymous vs identified events
+sidebar: Docs
+showTitle: true
+availability:
+  free: full
+  selfServe: full
+  enterprise: full
+---
+
+import Tab from "components/Tab"
+
+import IdentifiedVsAnonymousIntro from '../product-analytics/_snippets/identified-vs-anonymous-intro.mdx'
+
+<iframe
+    src="https://www.youtube-nocookie.com/embed/U2Ac4w5flJQ"
+    className="rounded shadow-xl"
+/>
+
+<IdentifiedVsAnonymousIntro />
+
+![Anonymous vs identified events](https://res.cloudinary.com/dmukukwp6/image/upload/v1727855989/posthog.com/contents/anon-vs-identifd.png)
+
+## How to capture anonymous events
+
+import HowToCaptureAnonymousEventsBackend from '../product-analytics/_snippets/how-to-capture-anonymous-backend-and-api.mdx'
+import HowToCaptureAnonymousEventsIOS from '../product-analytics/_snippets/how-to-capture-anonymous-events-ios.mdx'
+import HowToCaptureAnonymousEventsWeb from '../product-analytics/_snippets/how-to-capture-anonymous-events-web.mdx'
+import HowToCaptureAnonymousEventsAndroid from '../product-analytics/_snippets/how-to-capture-anonymous-events-android.mdx'
+import HowToCaptureAnonymousEventsFlutter from '../product-analytics/_snippets/how-to-capture-anonymous-events-flutter.mdx'
+
+<Tab.Group tabs={[
+    'Web', 
+    'Backend', 
+    'Android', 
+    'iOS',
+    'Flutter']}>
+    <Tab.List>
+        <Tab>Web</Tab>
+        <Tab>Backend</Tab>
+        <Tab>Android</Tab>
+        <Tab>iOS</Tab>
+        <Tab>Flutter</Tab>
+    </Tab.List>
+    <Tab.Panels>
+        <Tab.Panel>
+            <HowToCaptureAnonymousEventsWeb />
+        </Tab.Panel>
+        <Tab.Panel>
+            <HowToCaptureAnonymousEventsBackend />
+        </Tab.Panel>
+        <Tab.Panel>
+           <HowToCaptureAnonymousEventsAndroid />
+        </Tab.Panel>
+        <Tab.Panel>
+           <HowToCaptureAnonymousEventsIOS />
+        </Tab.Panel>
+        <Tab.Panel>
+           <HowToCaptureAnonymousEventsFlutter />
+        </Tab.Panel>
+    </Tab.Panels>
+</Tab.Group>
+
+## How to capture identified events
+
+import HowToCaptureIdentifiedEventsFrontend from '../product-analytics/_snippets/how-to-capture-identified-events-frontend.mdx'
+
+import HowToCaptureIdentifiedEventsBackend from '../product-analytics/_snippets/how-to-capture-identified-events-backend.mdx'
+
+import HowToCaptureIdentifiedEventsAndroid from '../product-analytics/_snippets/how-to-capture-identified-events-android.mdx'
+
+import HowToCaptureIdentifiedEventsiOS from '../product-analytics/_snippets/how-to-capture-identified-events-ios.mdx'
+
+import HowToCaptureIdentifiedEventsFlutter from '../product-analytics/_snippets/how-to-capture-identified-events-flutter.mdx'
+
+<Tab.Group tabs={[
+    'Web', 
+    'Backend', 
+    'Android', 
+    'iOS',
+    'Flutter']}>
+    <Tab.List>
+        <Tab>Web</Tab>
+        <Tab>Backend</Tab>
+        <Tab>Android</Tab>
+        <Tab>iOS</Tab>
+        <Tab>Flutter</Tab>
+    </Tab.List>
+    <Tab.Panels>
+        <Tab.Panel>
+            <HowToCaptureIdentifiedEventsFrontend />
+        </Tab.Panel>
+        <Tab.Panel>
+            <HowToCaptureIdentifiedEventsBackend />
+        </Tab.Panel>
+        <Tab.Panel>
+            <HowToCaptureIdentifiedEventsAndroid />
+        </Tab.Panel>
+        <Tab.Panel>
+           <HowToCaptureIdentifiedEventsiOS />
+        </Tab.Panel>
+        <Tab.Panel>
+           <HowToCaptureIdentifiedEventsFlutter />
+        </Tab.Panel>
+    </Tab.Panels>
+</Tab.Group>
+
+## Mobile SDK version considerations
+
+When using PostHog's mobile SDKs, any changes made to `personProfiles` configuration will only apply to users who have updated their app to the latest version. This is because mobile SDKs are bundled with your app and cannot be updated dynamically.
+
+**Impact on existing users:**
+
+Users running older versions of your app will continue using the `personProfiles` configuration that was bundled with their installed version, even after you release updates with new configurations.
+
+**Managing version differences:**
+
+To ensure consistent behavior across your user base, you can:
+
+1. Use feature flags (with a version payload) to detect users running outdated app versions
+2. Implement an update flow to guide users to install the latest version
+3. Consider making app updates mandatory for critical changes
+
+This will help maintain consistency in how person profiles are handled across your entire user base.
+
+## Frequently asked questions
+
+### General questions
+
+<details>
+<summary> What can I do with anonymous events?</summary>
+
+You **can**:
+
+- Set [event properties](/docs/product-analytics/capture-events#setting-event-properties)
+- Aggregate and filter events by event properties (e.g. URL, location, UTM source)
+- Create insights like [trends](/docs/product-analytics/trends/overview), [funnels](/docs/product-analytics/funnels), [SQL insights](/docs/product-analytics/sql) and more
+
+You **cannot**:
+
+- Set [person properties](/docs/product-analytics/person-properties)
+- Create [cohorts](/docs/data/cohorts)
+- Use Lifecycle insights
+- Filter on person properties
+- Use person properties for targeting feature flags, A/B tests, or surveys
+- Query the `persons` table using [SQL insights](/docs/product-analytics/sql)
+- Use group analytics
+
+</details>
+
+<details>
+<summary>What can I do with identified events?</summary>
+
+You can use all of PostHog's features with identified events. There are no restrictions.
+</details>
+
+<details> 
+<summary>What happens to events when an anonymous user is identified?</summary> 
+
+All future events are associated with their person profile and are captured and billed as identified events.
+
+Past events are attributed to the person, but are otherwise unchanged. This means that past events remain billed as anonymous.
+</details>
+
+<details>
+<summary>Can I specify some events to be identified and others to be anonymous for the same users?</summary>
+
+Not if you already identified them. Once a user is identified, all _future_ events for that user are associated with their person profile and are captured as identified events.
+</details>
+
+<details>
+<summary>How do I revert back to anonymous events after identifying?</summary>
+
+Calling [`reset()`](/docs/product-analytics/identify#3-reset-after-logout) will unlink the person profile from the user and create a new PostHog anonymous ID for capturing events. Any future events are captured as anonymous events. 
+
+However, if you capture events using the `distinct_id` used in their previously identified person profile, the events are captured as identified events. You need to use a new `distinct_id` to capture events as anonymous events.
+</details>
+
+### Data questions
+
+<details>
+<summary>Can identified events still be "anonymous"?</summary>
+
+Yes, identified events can still be "anonymous" in the sense that they don't need to contain personal information such as name, email, or phone number. A person profile is still created for    them, but it doesn't need to include any personal information.
+</details>
+
+<details>
+<summary>How are initial person properties set when an anonymous user is identified?</summary>
+
+As person properties are not stored on anonymous events, we cannot get any initial person properties directly from those events. Instead, we retrieve the initial person properties based on the values in the [persistence store](/docs/libraries/js#persistence).
+
+We derive the following values from the persistence store:
+- `$initial_current_url`
+- `$initial_pathname`
+- `$initial_referrer`
+- `$initial_referring_domain`
+- `$initial_host`
+- and any initial properties that can be derived from the URL e.g., `$initial_utm_campaign`, `$initial_utm_content`, `$initial_utm_medium`, `$initial_utm_source`
+
+Note that the above initial parameters will only work across subdomains if you're using `persistence: "localStorage+cookie"` (default) or `persistence: "cookie"`.
+
+For cross-domain traffic, or when tracking users between web and mobile, cookie-based data wouldn't be available on the new site, so it's advised to call one of:
+  * `posthog.identify()` if you have a persistent user ID available, or
+  * `posthog.createPersonProfile()` if you don't have a persistent user ID. Make sure that you are bootstrapping the PostHog SDK on the new second or mobile app with the anonymous distinct ID from the first site.
+
+Any other initial [person properties](/docs/product-analytics/person-properties#default-person-properties), including initial [GeoIP properties](/docs/product-analytics/person-properties#geoip-properties) will be set from the values in the event at the time that the person profile was created i.e. when the events became identified.
+</details>
+
+<details>
+<summary>If we change our `person_profiles` config from `identified_only'`to `always`, will we get all the person data from the previously captured anonymous events?</summary>
+
+No, anonymous events only capture the event data and none of the person data. If that person is identified at a later date – either by identifying them or changing your configuration settings – there isn't a way to retrieve the person properties from the previously captured anonymous events.
+</details>
+
+### Insights questions
+
+<details>
+<summary>Are there any insights that behave differently?</summary>
+
+Most insights make use of both anonymous and identified events. The exception to this is [lifecycle insights](/docs/product-analytics/lifecycle), as anonymous events are excluded from this calculation. Users who first appear as 'new' might have had prior anonymous events, but their lifecycle starts only when they are identified.
+
+</details>
+
+<details>
+<summary>Why am I seeing "Person without distinct_id" in my insights?</summary>
+
+These are users who do not have a person profile and are anonymous users. We're aware that the wording here is confusing and are looking into updating this.
+</details>
+
+<details>
+<summary>Why am I seeing drops in my insights that rely on person properties?</summary>
+
+If you have previously had your `person_profiles` config set to `always` and your `person_profiles` config is now set to `identified_only`, you will likely see a dip in your insights graph if the filter settings include a person property.
+
+Insights using person properties in the filter settings will essentially be filtering on identified events, where the person profile linked to that event has the relevant property set.
+
+Changing your `person_profiles` config to `identified_only` now means that there are fewer person profiles being created and being associated with events, and therefore fewer events to be included in your insight. The person profile won't exist until the person has been identified, which may happen at a later date or not happen at all. 
+
+Depending on what you're trying to visualize, you may be able to use some of the properties on the events themselves to achieve a similar outcome – e.g. by filtering on the referring domain on the first ever pageview for each user, instead of the initial referrer person property.
+</details>
+
+###  Billing questions
+
+<details>
+<summary>Why are identified events more expensive?</summary>
+
+Since identified events are associated with a person profile, processing and querying them requires using resource intensive table JOINs. On the other hand, anonymous events are stored in a single table, and are more efficient to query. [Read this post](/blog/analytics-pricing#why-are-anonymous-events-so-much-cheaper) for more detail on this.
+</details>
+
+<details>
+<summary>Why am I being charged for both "events" and "persons"</summary>
+
+We're not charging you for both. The person profiles line item you see on your invoice is a number of identified events captured. The events line item is the total number of anonymous events captured.
+</details>
+
+<details>
+<summary>How does my free allowance work for anonymous vs identified events?</summary>
+
+Your first one million events each month are free, regardless if they are anonymous or identified.
+</details>

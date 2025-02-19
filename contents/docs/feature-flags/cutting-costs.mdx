@@ -1,0 +1,30 @@
+---
+title: Cutting feature flag costs
+sidebar: Docs
+showTitle: true
+---
+
+We aim to be significantly cheaper than our competitors. In addition to our [ridiculously cheap pricing](/pricing), below are tips to reduce your feature flag costs:
+
+## Reduce client-side feature flag requests
+
+In our [JavaScript web](/docs/libraries/js) and [React Native](/docs/libraries/react-native) SDKs, you can reduce the cost of feature flags by reducing the number of requests your client makes to fetch feature flag values for your users.
+
+1. Using the the [advanced configuration](/docs/libraries/js#advanced-configuration), set `advanced_disable_feature_flags_on_first_load` to `true`. This stops automatically requesting feature flags whenever a page loads. This is useful when you're immediately calling `posthog.identify()` anyway, which requests flags again.
+
+2. Using the the [advanced configuration](/docs/libraries/js#advanced-configuration), set `advanced_disable_feature_flags` to `true`. This stops PostHog automatically requesting feature flags. Instead, use [bootstrapping](/docs/feature-flags/bootstrapping) to load flags exactly once.
+
+> **Note:** Use of `advanced_disable_feature_flags` will disable surveys for all users, as surveys rely on feature flags internally.
+
+## Reduce local evaluation costs
+
+If you're using [local evaluation](/docs/feature-flags/local-evaluation), your bill may be high because of too many requests to fetch feature flag definitions. By default, PostHog fetches these every 30 seconds.
+
+Each request charges 10 credits, so assuming your server is constantly running and making 2 requests per minute (the default setting), this will charge `10 * 2 * 60 * 24 * 30 = 864,000 credits` each month.
+
+You can reduce this by increasing the [feature flag polling interval](/docs/feature-flags/local-evaluation#step-2-initialize-posthog-with-your-personal-api-key) when initializing PostHog. For example, every 5 minutes instead of every 30 seconds.
+
+The drawback of this approach is that whenever you make an update to a feature flag using the PostHog UI, it takes 5 minutes (instead of 30 seconds) for that change to roll to your server.
+
+> **Note:** Do not use local evaluation in an edge / lambda environment, as this initializes a PostHog instance on every call, which can raise your bill drastically. It's best to use regular flag evaluation instead.
+

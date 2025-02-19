@@ -122,3 +122,5 @@ In more complex situations, the costs of building and maintaining your own featu
 - [Feature flag best practices and tips (with examples)](/blog/feature-flag-best-practices)
 - [Why use feature flags? Benefits, types and use cases, explained](/blog/feature-flag-benefits-use-cases)
 - [What you can learn from how GitHub and GitLab use feature flags](/blog/github-gitlab-feature-flags)
+
+<NewsletterForm />

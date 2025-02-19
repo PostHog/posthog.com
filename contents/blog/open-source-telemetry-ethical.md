@@ -90,7 +90,7 @@ Some users are happy to be tracked personally in return for a great project, but
 
 An easy step is not to use third party software to do this.
 
-We built PostHog for this reason. It means you can grab everything you need to do event-based analytics, designed to track a product's use, on your own infrastructure. You can choose to send or not send personal data to your instance too. Given you've got full access to the code and database, you can also plug in things like Metabase or your data lake if you need them. There are some less product-focused, more website-based analytics libraries that are also pretty cool - Matomo or Plausible are definitely worth a look, depending on your use case.
+We built PostHog for this reason. It means you can grab everything you need to do event-based analytics, designed to track a product's use, on your own infrastructure. You can choose to send or not send personal data to your instance too. Given you've got full access to the code and database, you can also plug in things like Metabase or your data lake if you need them. There are some less product-focused, more website-based analytics libraries that are also pretty cool - Matomo or [Plausible](/blog/posthog-vs-plausible) are definitely worth a look, depending on your use case.
 
 There are many third party SaaS tools (Amplitude/Mixpanel/Heap) that can provide tracking, but a project would have to send user data to them to use them, we think hence why they're rarely (ever?) seen in the open source world.
 
@@ -108,4 +108,4 @@ With that in mind, we felt we'd get a better and happier community by thinking a
 
 For PostHog, that meant being up front about what we track and what we don't track, and giving users the choice if they opt themselves into full user tracking. Most don't, and that's ok!
 
-<ArrayCTA />
+<NewsletterForm />

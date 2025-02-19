@@ -11,9 +11,18 @@ interface SEOProps {
     article?: boolean
     canonicalUrl?: string
     noindex?: boolean
+    imageType?: 'absolute' | 'relative'
 }
 
-export const SEO = ({ title, description, image, article, canonicalUrl, noindex }: SEOProps): JSX.Element => {
+export const SEO = ({
+    title,
+    description,
+    image,
+    article,
+    canonicalUrl,
+    noindex,
+    imageType = 'relative',
+}: SEOProps): JSX.Element => {
     const { pathname } = useLocation()
     const { site } = useStaticQuery(query)
 
@@ -23,7 +32,10 @@ export const SEO = ({ title, description, image, article, canonicalUrl, noindex 
     const seo = {
         title: title || defaultTitle,
         description: description || defaultDescription,
-        image: `${process.env.GATSBY_DEPLOY_PRIME_URL || siteUrl}${image || defaultImage}`,
+        image:
+            imageType === 'absolute'
+                ? image
+                : `${process.env.GATSBY_DEPLOY_PRIME_URL || siteUrl}${image || defaultImage}`,
         url: `${siteUrl}${pathname}`,
     }
 

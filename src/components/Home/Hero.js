@@ -12,7 +12,7 @@ import Modal from 'components/Modal'
 import { IconX } from '@posthog/icons'
 import { motion } from 'framer-motion'
 import { StaticImage } from 'gatsby-plugin-image'
-
+import Board from './Board'
 export const FeatureStrip = ({ className = '' }) => {
     return (
         <div className="text-center mt-0 mb-4">
@@ -287,20 +287,20 @@ export default function Hero() {
                         </h2>
                         <div className="flex justify-center items-center gap-2 home-hero-cta">
                             {enterpriseMode ? (
-                                <CallToAction size="lg" to="/book-a-demo">
-                                    Contact sales
+                                <CallToAction size="lg" to="/demo">
+                                    Contact Sales
                                 </CallToAction>
                             ) : (
                                 <SignupCTA />
                             )}
                             <TrackedCTA
-                                key={enterpriseMode ? 'talk-to-sales' : 'get-a-demo'}
-                                event={{ name: `clicked Get a demo` }}
-                                href="/book-a-demo"
+                                key={enterpriseMode ? 'talk-to-sales' : 'talk-to-a-human'}
+                                event={{ name: `clicked Talk to a human` }}
+                                href="/talk-to-a-human"
                                 type="secondary"
                                 size="lg"
                             >
-                                {enterpriseMode ? 'Contact enterprise sales' : 'Get a demo'}
+                                {enterpriseMode ? 'Contact enterprise sales' : 'Talk to a human'}
                             </TrackedCTA>
                         </div>
                         {enterpriseMode && (
@@ -309,8 +309,7 @@ export default function Hero() {
                             </div>
                         )}
                     </div>
-                    <Slider />
-                    <Accordion />
+                    <Board />
                 </div>
             </section>
         </>

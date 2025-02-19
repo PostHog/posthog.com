@@ -12,6 +12,9 @@ import { useCartStore } from './store'
 import { ShopifyProduct } from './types'
 import { getProductMetafield } from './utils'
 import { GatsbyImage, getImage } from 'gatsby-plugin-image'
+import { getShopifyImage } from 'gatsby-source-shopify'
+import { IconSpinner } from '@posthog/icons'
+import SizeGuide from './SizeGuide'
 
 type ProductPanelProps = {
     className?: string
@@ -35,7 +38,7 @@ export function ProductPanel(props: ProductPanelProps): React.ReactElement {
 
     /**
      * The product.variant option from props is a different shape from the
-     * slectedVariant (which comes directly from the Storefront API). We
+     * selectedVariant (which comes directly from the Storefront API). We
      * only want the ID from selectedVariant and will add the corresponding
      * variant in product.variants.
      */
@@ -60,11 +63,10 @@ export function ProductPanel(props: ProductPanelProps): React.ReactElement {
                         New
                     </div>
                 )}
-
                 <ProductCarousel product={product} />
             </div>
             <div className="space-y-0.5">
-                <h3 className="text-xl [&_a]:text-primary dark:[&_a]:text-primary-dark leading-snug">
+                <h3 className="text-xl [&_a]:text-primary dark:[&_a]:text-primary-dark leading-snug mb-0">
                     {product.title}
                 </h3>
                 <p className="leading-tight">{subtitle}</p>
@@ -101,12 +103,25 @@ export function ProductPanel(props: ProductPanelProps): React.ReactElement {
                     })
                     .filter(Boolean)}
 
+            <SizeGuide title={product.title} />
+
             <Quantity value={quantity} onChange={setQuantity} />
 
-            <CallToAction disabled={outOfStock} onClick={handleAddToCart} type="primary" className="relative w-full">
+            <CallToAction
+                disabled={loading || outOfStock}
+                onClick={handleAddToCart}
+                type="primary"
+                className="relative w-full"
+            >
                 <>
                     <span className={cn('', isAdding && 'invisible')}>
-                        {outOfStock ? 'Out of Stock' : 'Add to Cart'}
+                        {loading ? (
+                            <IconSpinner className="w-5 mx-auto animate-spin" />
+                        ) : outOfStock ? (
+                            'Out of Stock'
+                        ) : (
+                            'Add to Cart'
+                        )}
                     </span>
                     <LoaderIcon
                         className={cn(
@@ -117,12 +132,12 @@ export function ProductPanel(props: ProductPanelProps): React.ReactElement {
                 </>
             </CallToAction>
 
-            {outOfStock && <BackInStockForm />}
+            {!loading && outOfStock && <BackInStockForm variant={variantForCart} />}
 
             {product.description && (
                 <div className="border-t border-light dark:border-dark pt-4">
                     <h3 className="text-lg mb-0">Description</h3>
-                    <p className="text-[15px]">{product.description}</p>
+                    <div dangerouslySetInnerHTML={{ __html: product.descriptionHtml }} />
                 </div>
             )}
             {product.imageProducts?.length > 0 && (
@@ -137,7 +152,7 @@ export function ProductPanel(props: ProductPanelProps): React.ReactElement {
                             return (
                                 <li key={handle}>
                                     <a href={`?product=${handle}`}>
-                                        <GatsbyImage alt={handle} image={getImage(featuredImage?.localFile)} />
+                                        <GatsbyImage alt={handle} image={getShopifyImage({ image: featuredImage })} />
                                     </a>
                                 </li>
                             )

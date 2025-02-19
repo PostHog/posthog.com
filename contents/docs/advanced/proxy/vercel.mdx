@@ -5,6 +5,9 @@ showTitle: true
 ---
 
 import RegionWarning from "../_snippets/region-warning.mdx"
+import ProxyWarning from "../_snippets/proxy-usage-warning.mdx"
+
+<ProxyWarning />
 
 <RegionWarning />
 
@@ -50,7 +53,7 @@ Once done, set the `/ingest` route of your domain as the API host in your PostHo
 posthog.init('<ph_project_api_key>',
   {
     api_host: 'https://www.your-domain.com/ingest',
-    ui_host: 'https://us.posthog.com' // or 'https://eu.posthog.com' if your PostHog is hosted in Europe
+    ui_host: '<ph_app_host>'
   }
 )
 ```

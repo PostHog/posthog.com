@@ -6,7 +6,7 @@ logo: >-
 logoDark: >-
   https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/customers/4dayweek/4dayweek-logo-dark.png
 featuredImage: >-
-  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/customers/4dayweek/4dayweek_featured.png
+  https://res.cloudinary.com/dmukukwp6/image/upload/4_day_week_posthog_1d6e6cdf06.png
 industries:
   - Recruitment
 users:

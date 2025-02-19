@@ -24,7 +24,11 @@ In this article we’ll take a look at why strong customer engagement metrics ar
 
 - [What is product engagement?](#what-is-product-engagement)
 - [What are product engagement metrics?](#what-are-product-engagement-metrics)
+  - [Common engagement metrics](#common-engagement-metrics)
 - [What is the best way to measure product engagement?](#what-is-the-best-way-to-measure-product-engagement)
+  - [Active users](#active-users)
+  - [Stickiness](#stickiness)
+  - [Adoption](#adoption)
 - [What tools are good for tracking product engagement?](#what-tools-are-good-for-tracking-product-engagement)
 - [Further reading](#further-reading)
 
@@ -88,7 +92,7 @@ An easier way to track this is to use a tool such as PostHog, which has a dedica
 Adoption represents the number of users using key features in your product.
 Each new feature presents an opportunity for additional customer value. Low adoption implies that you’re offering something which users don’t need, or that there’s something wrong with the feature itself. High adoption means users are flocking to a new feature.
 
-If users are paying for features they don’t use then it lowers the perceived value, so it’s essential to keep an eye on what isn’t working and rollback where necessary. That’s why PostHog offers tools like [feature flags](https://posthog.com/docs/user-guides/feature-flags), which help you to incrementally roll out new features and key an eye on adoption progress. If something isn’t working, you can roll it back instantly. 
+If users are paying for features they don’t use then it lowers the perceived value, so it’s essential to keep an eye on what isn’t working and rollback where necessary. That’s why PostHog offers tools like [feature flags](https://posthog.com/docs/feature-flags/tutorials), which help you to incrementally roll out new features and key an eye on adoption progress. If something isn’t working, you can roll it back instantly. 
 
 [Flagging the use of specific features as a key event](https://posthog.com/docs/user-guides/events) per user type will also help you to track adoption.whether you’re successfully reaching the users they were intended for.
 
@@ -111,7 +115,5 @@ Paying attention to engagement and building more of what your customers love is 
 
 - [B2B Product Metrics 101:](/blog/b2b-saas-product-metrics): Everything you need to know about metrics for B2B SaaS products
 
-> PostHog is an open source analytics platform you can host yourself. We help you build better products faster, without user data ever leaving your infrastructure.
-
-<ArrayCTA />
+<NewsletterForm />
 

@@ -50,6 +50,4 @@ Group Analytics has been released as a [premium feature](/pricing) and is availa
 
 As always, we welcome any feedback you have as an issue in [the GitHub repo](https://github.com/PostHog), or in [our community page](/posts).  
 
-> PostHog is an open source analytics platform you can host yourself. We help you build better products faster, without user data ever leaving your infrastructure.
-
-<ArrayCTA />
+<NewsletterForm />

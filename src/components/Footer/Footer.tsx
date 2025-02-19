@@ -9,8 +9,12 @@ import { GitHub, LinkedIn, YouTube, SlackMonochrome, Twitter } from 'components/
 const linklist: IProps[] = [
     {
         title: 'Products',
-        url: '/products/product-analytics',
+        url: '/products',
         items: [
+            {
+                title: 'All products',
+                url: '/products',
+            },
             {
                 title: 'Product analytics',
                 url: '/product-analytics',
@@ -28,8 +32,8 @@ const linklist: IProps[] = [
                 url: '/feature-flags',
             },
             {
-                title: 'A/B testing',
-                url: '/ab-testing',
+                title: 'Experiments',
+                url: '/experiments',
             },
             {
                 title: 'Surveys',
@@ -59,6 +63,14 @@ const linklist: IProps[] = [
                 title: 'Pricing',
                 url: '/pricing',
             },
+            {
+                title: 'How we do "sales"',
+                url: '/sales',
+            },
+            {
+                title: 'Founder stack',
+                url: '/founder-stack',
+            },
         ],
     },
     {
@@ -82,8 +94,8 @@ const linklist: IProps[] = [
                 url: '/docs/data',
             },
             {
-                title: 'HogQL',
-                url: '/docs/hogql',
+                title: 'SQL access',
+                url: '/docs/sql',
             },
             {
                 title: 'Toolbar',
@@ -92,10 +104,6 @@ const linklist: IProps[] = [
             {
                 title: 'API',
                 url: '/docs/api',
-            },
-            {
-                title: 'Webhooks',
-                url: '/docs/webhooks',
             },
         ],
     },
@@ -108,7 +116,7 @@ const linklist: IProps[] = [
                 url: '/docs/product-analytics/',
             },
             {
-                title: 'Session recording',
+                title: 'Session replay',
                 url: '/docs/session-replay',
             },
             {
@@ -116,7 +124,7 @@ const linklist: IProps[] = [
                 url: '/docs/feature-flags',
             },
             {
-                title: 'A/B testing',
+                title: 'Experiments',
                 url: '/docs/experiments',
             },
             {
@@ -132,8 +140,8 @@ const linklist: IProps[] = [
                 url: '/docs/data-warehouse',
             },
             {
-                title: 'Build an app',
-                url: '/docs/apps/build',
+                title: 'Migrate',
+                url: '/docs/migrate',
             },
         ],
     },
@@ -150,8 +158,8 @@ const linklist: IProps[] = [
                 url: '/tutorials',
             },
             {
-                title: 'Apps',
-                url: '/apps',
+                title: 'Integrations',
+                url: '/cdp',
             },
             {
                 title: 'Dashboard templates',
@@ -189,6 +197,10 @@ const linklist: IProps[] = [
                 title: 'PostHog on GitHub',
                 url: 'https://github.com/PostHog/posthog',
             },
+            {
+                title: 'Cool tech jobs',
+                url: '/cool-tech-jobs',
+            },
         ],
     },
     {
@@ -220,10 +232,6 @@ const linklist: IProps[] = [
                 url: '/handbook/team-structure',
             },
             {
-                title: 'People & Ops',
-                url: '/handbook/people/compensation',
-            },
-            {
                 title: 'Engineering',
                 url: '/handbook/engineering/developing-locally',
             },
@@ -251,7 +259,7 @@ const linklist: IProps[] = [
             },
             {
                 title: 'Changelog',
-                url: '/changelog',
+                url: '/changelog/2025',
             },
             {
                 title: 'People',

@@ -65,7 +65,7 @@ export const VoteBox = ({ likeCount, liked }) => {
     )
 }
 
-const Feature = ({ id, title, teams, description, likeCount, onLike, onUpdate, githubUrls }) => {
+export const Feature = ({ id, title, teams, description, likeCount, onLike, onUpdate, githubUrls }) => {
     const { user, likeRoadmap } = useUser()
     const { search } = useLocation()
     const [authModalOpen, setAuthModalOpen] = useState(false)
@@ -141,7 +141,7 @@ const Feature = ({ id, title, teams, description, likeCount, onLike, onUpdate, g
                                 Learn more on GitHub
                             </Link>
                         )}
-                        <div className="mt-2 flex space-x-2">
+                        <div className="flex space-x-2">
                             <CallToAction
                                 disabled={loading}
                                 onClick={() => {
@@ -247,6 +247,7 @@ export default function Roadmap() {
                 },
             },
         },
+        limit: 100,
     })
 
     const fuse = useMemo(

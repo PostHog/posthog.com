@@ -64,13 +64,13 @@ posthog.getFeatureFlagPayload('key-for-your-multivariate-flag')
 
 PostHog loads feature flags when instantiated and refreshes whenever methods are called that affect the flag. 
 
-If you have the need to forcefully trigger the refresh however you can use `reloadFeatureFlagsAsync()`:
+If want to manually trigger a refresh, you can call `reloadFeatureFlagsAsync()`:
 
 ```react-native
 posthog.reloadFeatureFlagsAsync().then((refreshedFlags) => console.log(refreshedFlags))
 ```
 
-Or when you want to trigger the reload but you don't care about the result:
+Or when you want to trigger the reload, but don't care about the result:
 
 ```react-native
 posthog.reloadFeatureFlags()
@@ -83,10 +83,45 @@ You can configure the `featureFlagsRequestTimeoutMs` parameter when initializing
 ```react-native
 export const posthog = new PostHog('<ph_project_api_key>', {
   // usually 'https://us.i.posthog.com' or 'https://eu.i.posthog.com'  
-  host: '<ph_client_api_host>', // TIP: host is optional if you use https://us.i.posthog.com
+  host: '<ph_client_api_host>',
   featureFlagsRequestTimeoutMs: 10000 // Time in milliseconds. Default is 10000 (10 seconds).
 })
 ```
+
+### Error handling
+
+When using the PostHog SDK, it's important to handle potential errors that may occur during feature flag operations. Here's an example of how to wrap PostHog SDK methods in an error handler:
+
+```react-native
+function handleFeatureFlag(client, flagKey, distinctId) {
+    try {
+        const isEnabled = client.isFeatureEnabled(flagKey, distinctId);
+        console.log(`Feature flag '${flagKey}' for user '${distinctId}' is ${isEnabled ? 'enabled' : 'disabled'}`);
+        return isEnabled;
+    } catch (error) {
+        console.error(`Error fetching feature flag '${flagKey}': ${error.message}`);
+        // Optionally, you can return a default value or throw the error
+        // return false; // Default to disabled
+        throw error;
+    }
+}
+
+// Usage example
+try {
+    const flagEnabled = handleFeatureFlag(client, 'new-feature', 'user-123');
+    if (flagEnabled) {
+        // Implement new feature logic
+    } else {
+        // Implement old feature logic
+    }
+} catch (error) {
+    // Handle the error at a higher level
+    console.error('Feature flag check failed, using default behavior');
+    // Implement fallback logic
+}
+```
+
+
 
 ### Overriding server properties
 
@@ -110,14 +145,11 @@ At any point, you can reset these properties by calling `resetPersonPropertiesFo
 posthog.resetPersonPropertiesForFlags()
 ```
 
-The same holds for [group](/manual/group-analytics) properties:
+The same holds for [group](/docs/product-analytics/group-analytics) properties:
 
 ```react-native
 // set properties for a group
 posthog.setGroupPropertiesForFlags({'company': {'property1': 'value', property2: 'value2'}})
-
-// reset properties for a given group:
-posthog.resetGroupPropertiesForFlags('company')
 
 // reset properties for all groups:
 posthog.resetGroupPropertiesForFlags()

@@ -3,6 +3,8 @@ import menu, { docsMenu } from '../../navs'
 import { IMenu } from 'components/PostLayout/types'
 import { useLocation } from '@reach/router'
 import { navigate } from 'gatsby'
+import { useActions } from 'kea'
+import { layoutLogic } from 'logic/layoutLogic'
 
 export const Context = createContext<any>(undefined)
 
@@ -33,11 +35,14 @@ export interface IProps {
 
 export const LayoutProvider = ({ children, ...other }: IProps) => {
     const { pathname, search } = useLocation()
+    const { setWebsiteTheme } = useActions(layoutLogic)
     const compact = typeof window !== 'undefined' && window !== window.parent
     const [fullWidthContent, setFullWidthContent] = useState<boolean>(
         compact || (typeof window !== 'undefined' && localStorage.getItem('full-width-content') === 'true')
     )
     const [enterpriseMode, setEnterpriseMode] = useState(false)
+    const [theoMode, setTheoMode] = useState(false)
+    const [post, setPost] = useState<boolean>(false)
     const parent =
         other.parent ??
         menu.find(({ children, url }) => {
@@ -83,6 +88,12 @@ export const LayoutProvider = ({ children, ...other }: IProps) => {
     }, [activeInternalMenu])
 
     useEffect(() => {
+        if (window) {
+            setWebsiteTheme(window.__theme)
+            window.__onThemeChange = () => {
+                setWebsiteTheme(window.__theme)
+            }
+        }
         if (compact) {
             window.parent.postMessage(
                 {
@@ -130,6 +141,16 @@ export const LayoutProvider = ({ children, ...other }: IProps) => {
         if (pathname === '/' && search.includes('synergy=true')) {
             setEnterpriseMode(true)
         }
+        if (
+            ['/blog/', '/founders/', '/product-engineers/', '/newsletter/'].some((prefix) =>
+                pathname.startsWith(prefix)
+            )
+        ) {
+            setPost(true)
+        } else {
+            setPost(false)
+            setTheoMode(false)
+        }
     }, [pathname])
 
     return (
@@ -144,6 +165,9 @@ export const LayoutProvider = ({ children, ...other }: IProps) => {
                 compact,
                 enterpriseMode,
                 setEnterpriseMode,
+                theoMode,
+                setTheoMode,
+                post,
             }}
         >
             {children}

@@ -18,7 +18,7 @@ tags:
 
 With the sunsetting of the Google Analytics Universal Analytics platform and unhappiness with its replacement, Google Analytics 4 (GA4), many are [looking for alternatives](/blog/ga4-alternatives). 
 
-We’re biased, but PostHog is a great one. When compared with Google Analytics, it is:
+We’re biased, but PostHog is a great one. When [compared with Google Analytics](/blog/posthog-vs-ga4), it is:
 
 - Easier to set up and capture data about traffic and usage.
 - Provides all the same reports, views, and filters.
@@ -26,7 +26,7 @@ We’re biased, but PostHog is a great one. When compared with Google Analytics,
 
 This post will go over the basics you must know to make the transition from Google Analytics to PostHog.
 
-> Read our [PostHog and Google Analytics comparison](/blog/posthog-vs-ga4) for an in-depth look at the differences
+> **Want to track website visitors in PostHog?** Find out [how to migrate from Google Analytics to PostHog](/migrate/google-analytics) and start using [our new web analytics tool](/web-analytics). 
 
 ## Initial PostHog setup
 
@@ -35,7 +35,7 @@ If you’ve set up Google Analytics, PostHog’s setup won’t look too differen
 ```html
 <!-- PostHog snippet -->
 <script>
-    !function(t,e){var o,n,p,r;e.__SV||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}(p=t.createElement("script")).type="text/javascript",p.async=!0,p.src=s.api_host+"/static/array.js",(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r);var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString(1)+".people (stub)"},o="capture identify alias people.set people.set_once set_config register register_once unregister opt_out_capturing has_opted_out_capturing opt_in_capturing reset isFeatureEnabled onFeatureFlags getFeatureFlag getFeatureFlagPayload reloadFeatureFlags group updateEarlyAccessFeatureEnrollment getEarlyAccessFeatures getActiveMatchingSurveys getSurveys".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
+    !function(t,e){var o,n,p,r;e.__SV||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}(p=t.createElement("script")).type="text/javascript",p.crossOrigin="anonymous",p.async=!0,p.src=s.api_host+"/static/array.js",(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r);var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString(1)+".people (stub)"},o="capture identify alias people.set people.set_once set_config register register_once unregister opt_out_capturing has_opted_out_capturing opt_in_capturing reset isFeatureEnabled onFeatureFlags getFeatureFlag getFeatureFlagPayload reloadFeatureFlags group updateEarlyAccessFeatureEnrollment getEarlyAccessFeatures getActiveMatchingSurveys getSurveys getNextSurveyStep".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
     posthog.init('<ph_project_api_key>',{api_host:'<ph_client_api_host>'})
 </script>
 
@@ -49,7 +49,7 @@ If you’ve set up Google Analytics, PostHog’s setup won’t look too differen
 </script>
 ```
 
-This works wherever code you can add code to your `<head>` tag, for example, site builders like [WordPress](/docs/libraries/wordpress) and [Webflow](/tutorials/webflow). Alternatively, you can add the PostHog snippet through [Google Tag Manager](/docs/libraries/google-tag-manager) or install the [JavaScript library](/docs/libraries/js) in your app. 
+This works wherever code you can add code to your `<head>` tag, for example, site builders like [WordPress](/docs/libraries/wordpress), [Webflow](/tutorials/webflow), and [Squarespace](/tutorials/squarespace-analytics). Alternatively, you can add the PostHog snippet through [Google Tag Manager](/docs/libraries/google-tag-manager) or install the [JavaScript library](/docs/libraries/js) in your app. 
 
 When you set up the snippet or JS library, it autocaptures events (similar to GA4’s [enhanced measurement](https://support.google.com/analytics/answer/9216061)) and they start showing up in your PostHog instance. Pageviews, clicks, inputs, and sessions are all captured without needing to create "properties," "streams," or instrument events yourself.
 
@@ -57,7 +57,7 @@ When you set up the snippet or JS library, it autocaptures events (similar to GA
 
 PostHog has much of the same functionality as Google Analytics, but much of it is tweaked and named differently. Here’s a quick comparison of the two:
 
-<div className="overflow-x-auto -mx-5 px-5">
+<OverflowXSection>
 <table className="w-full mt-4" style="min-width: 600px;">
   <thead>
     <tr>
@@ -109,7 +109,7 @@ PostHog has much of the same functionality as Google Analytics, but much of it i
     </tr>
   </tbody>
 </table>
-</div>
+</OverflowXSection>
 
 ## Creating your first dashboard
 
@@ -177,7 +177,7 @@ You can also use properties to create [cohorts](/docs/data/cohorts). These are l
 
 The PostHog equivalent to goals and conversions are [actions](/docs/data/actions). An action is one or more events with filters matching a user’s behavior. For example, a "shown interest" action could include a visit to the pricing page, clicking a book demo button, or signing up.
 
-You create actions in the [data management tab](https://app.posthog.com/data-management/actions). Once created, you can use them in insights. For example, if you want to track conversion, they are especially useful in the funnel-type insight. Actions can also trigger [webhooks](/docs/webhooks) and send messages in [Slack](/docs/webhooks/slack) or [Teams](/docs/webhooks/microsoft-teams).
+You create actions in the [data management tab](https://app.posthog.com/data-management/actions). Once created, you can use them in insights. For example, if you want to track conversion, they are especially useful in the funnel-type insight. Actions can also be used in destinations to send messages in [Slack](/docs/cdp/destinations/slack) or data to [custom webhooks](/docs/cdp/destinations/webhook).
 
 Beyond actions, PostHog also can run A/B tests, which compare "test" and "control" variants to calculate whether a change impacts a goal metric. This is our version of Google Optimize. For an example, see "[How to run A/B tests in Webflow with PostHog](/tutorials/webflow-ab-tests)."
 
@@ -237,7 +237,7 @@ This makes it an easy way to track new and returning visitors to your website, a
 
 - [Data connections](/docs/cdp) to import events from sources [Segment](/cdp/segment) and to export to destinations like [BigQuery](/cdp/bigquery-export) and [Snowflake](/cdp/snowflake-export).
 
-- Direct SQL querying and customization with [HogQL](/docs/product-analytics/hogql).
+- Direct [SQL querying](/docs/product-analytics/sql) and customization.
 
 - Free for 1 million events and 5,000 session recordings per month, see [pricing for more](/pricing).
 
@@ -246,3 +246,5 @@ This makes it an easy way to track new and returning visitors to your website, a
 - [What to do after installing PostHog in 5 steps](/tutorials/next-steps-after-installing)
 - [Complete guide to event tracking](/tutorials/event-tracking-guide)
 - [A non-technical guide to understanding data in PostHog](/tutorials/non-technical-guide-to-data)
+
+<NewsletterForm />

@@ -17,11 +17,14 @@ import ApiExamples from './ApiExamples'
 import HogQL from './HogQL'
 import CustomerData from './CustomerData'
 import CodeBlocks from './CodeBlocks'
+import Libraries from './Libraries'
 import OnePlatform from './OnePlatform'
-import NoHatingAllowed from './NoHatingAllowed'
+import NoHatingAllowed from './../NoHatingAllowed'
 import { RenderInClient } from 'components/RenderInClient'
 import BillboardTruck from './BillboardTruck'
 import Spinner from 'components/Spinner'
+import { HomepageCards } from '../NoHatingAllowed/data.js'
+import TimelineNew from './TimelineNew'
 
 const GlobeScene = React.lazy(() =>
     import('./Globe').then((module) => ({
@@ -44,15 +47,18 @@ const Home = () => {
             <Layout>
                 <SEO
                     title="PostHog - How developers build successful products"
-                    description="PostHog is the only all-in-one platform for product analytics, feature flags, session replays, A/B testing, and surveys that's built for developers."
+                    description="PostHog is the only all-in-one platform for product analytics, feature flags, session replays, experiments, and surveys that's built for developers."
                     image="/images/home.png"
                 />
                 <Hero />
                 <Customers />
                 <AllInOne />
+                <TimelineNew />
+                <Libraries />
                 <CodeBlocks />
                 <OnePlatform />
-                <NoHatingAllowed />
+                <NoHatingAllowed data={HomepageCards} youllHate="PostHog" size="text-4xl lg:text-6xl" />
+
                 <RenderInClient
                     render={() => {
                         return posthog?.getFeatureFlag?.('homepage-billboard-truck') === true ? (
@@ -71,6 +77,7 @@ const Home = () => {
                 <ApiExamples />
                 <HogQL />
                 <Community />
+                <OnePlatform />
                 <CustomerData />
                 {typeof window !== 'undefined' && (
                     <React.Suspense fallback={<GlobeSkeleton />}>

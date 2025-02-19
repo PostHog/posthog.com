@@ -10,13 +10,23 @@ import SidebarSection from 'components/PostLayout/SidebarSection'
 import getAvatarURL from 'components/Squeak/util/getAvatar'
 import { User } from '../../hooks/useUser'
 
-export const Avatar = (props: { className?: string; src?: string }) => {
+export const Avatar = (props: { className?: string; src?: string; color?: string }) => {
     return (
         <div
-            className={`overflow-hidden p-px border border-light dark:border-dark rounded-full bg-accent dark:bg-accent-dark ${props.className}`}
+            className={`overflow-hidden p-px border rounded-full bg-accent dark:bg-accent-dark border-light dark:border-dark ${
+                props.color
+                    ? `group-hover:!border-${props.color}`
+                    : 'hover:border-[rgba(0,0,0,0.2)] dark:hover:border-[rgba(255,255,255,0.2)]'
+            } ${props.className}`}
         >
             {props.src ? (
-                <img className="inline-flex w-full aspect-cover rounded-full" alt="" src={props.src} />
+                <img
+                    className={`inline-flex w-full aspect-cover rounded-full ${
+                        props.color ? `bg-${props.color}` : 'bg-white dark:bg-dark'
+                    }`}
+                    alt=""
+                    src={props.src}
+                />
             ) : (
                 <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path
@@ -74,7 +84,7 @@ export const Login = ({ onSubmit = () => undefined }: { onSubmit?: () => void })
     )
 }
 
-export const Profile = ({ user, setEditModalOpen }: { user: User; setEditModalOpen: (open: boolean) => void }) => {
+export const Profile = ({ user }: { user: User }) => {
     const { profile, email } = user
     const { id } = profile
     const name = [profile.firstName, profile.lastName].filter(Boolean).join(' ')
@@ -83,9 +93,9 @@ export const Profile = ({ user, setEditModalOpen }: { user: User; setEditModalOp
         <div>
             <Link
                 to={`/community/profiles/${id}`}
-                className="flex items-center space-x-2 mt-2 mb-1 -mx-2 relative active:top-[1px] active:scale-[.99] hover:bg-gray-accent-light dark:hover:bg-gray-accent-dark rounded p-2"
+                className="group flex items-center space-x-2 mt-2 mb-1 -mx-2 relative active:top-[1px] active:scale-[.99] hover:bg-gray-accent-light dark:hover:bg-gray-accent-dark rounded p-2"
             >
-                <Avatar src={getAvatarURL(user?.profile)} className="w-[40px] h-[40px]" />
+                <Avatar src={getAvatarURL(user?.profile)} className={`w-[40px] h-[40px]`} color={profile.color} />
                 <div>
                     {name && <p className="m-0 font-bold">{name}</p>}
                     {email && (
@@ -94,13 +104,7 @@ export const Profile = ({ user, setEditModalOpen }: { user: User; setEditModalOp
                 </div>
             </Link>
 
-            <CallToAction
-                onClick={() => setEditModalOpen(true)}
-                width="full"
-                size="sm"
-                type="secondary"
-                className="mt-2"
-            >
+            <CallToAction to="/community/profile/edit" width="full" size="sm" type="secondary" className="mt-2">
                 Edit profile
             </CallToAction>
         </div>
@@ -109,24 +113,10 @@ export const Profile = ({ user, setEditModalOpen }: { user: User; setEditModalOp
 
 export default function Sidebar() {
     const { user, logout } = useUser()
-    const [editModalOpen, setEditModalOpen] = useState(false)
     const topicSubscriptions = user?.profile?.topicSubscriptions
 
     return (
         <>
-            <Modal setOpen={setEditModalOpen} open={editModalOpen}>
-                <div
-                    onClick={() => setEditModalOpen(false)}
-                    className="flex flex-start justify-center absolute w-full p-4"
-                >
-                    <div
-                        className="max-w-xl bg-white dark:bg-black rounded-md relative w-full p-5"
-                        onClick={(e) => e.stopPropagation()}
-                    >
-                        <EditProfile onSubmit={() => setEditModalOpen(false)} />
-                    </div>
-                </div>
-            </Modal>
             <SidebarSection>
                 <div className="mb-2 flex items-baseline justify-between">
                     <h4 className="m-0">My profile</h4>
@@ -136,7 +126,7 @@ export default function Sidebar() {
                         </button>
                     )}
                 </div>
-                {user?.profile ? <Profile setEditModalOpen={setEditModalOpen} user={user} /> : <Login />}
+                {user?.profile ? <Profile user={user} /> : <Login />}
             </SidebarSection>
 
             {user?.profile && (

@@ -38,7 +38,7 @@ We've also integrated the forum into other parts of the site. You can, for examp
 
 Profiles are also a big part of the forum; a place where you can add info, track discussions you're involved in, and display achievements earned through the community. In fact, we're giving everyone who joins the PostHog community from the public Slack a unique achievement to say thanks for the support!
 
-You can even open your profile to function as an Ask Me Anything (AMA) - something [James](https://posthog.com/community/profiles/71), [Cory](https://posthog.com/community/profiles/2), and [myself](https://posthog.com/community/profiles/59) have already done.
+You can even open your profile to function as an Ask Me Anything (AMA) - something [James](/james), [Cory](/community/profiles/30200), and [myself](https://posthog.com/community/profiles/29070) have already done.
 
 > **Ready to join the community?** [Create an account today](/questions) and, if you've previously signed up to the public Slack group, you'll get a unique achievement to display on your community profile!
 

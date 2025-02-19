@@ -8,7 +8,7 @@ featuredImage: >-
 featuredImageType: full
 tags:
   - Product engineers
-  - AB testing
+  - Experiments
   - Growth engineering
 crosspost:
   - Blog
@@ -49,8 +49,6 @@ When an A/B test triggers a guardrail metric at Airbnb, it's immediately escalat
 ![Airbnb guardrail process](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/guardrail-metrics/trigger.png)
 
 Out of the thousands of experiments that run at Airbnb each month, guardrails trigger ~25 for review. 80% of these rollout after stakeholder discussion. They decide to pause ~5 experiments per month, which prevents 5 potentially major impacts to critical metrics and product areas.
-
-<NewsletterForm />
 
 ## How to choose your guardrail metrics
 

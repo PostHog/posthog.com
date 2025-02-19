@@ -1,4 +1,5 @@
-import React from 'react'
+import CloudinaryImage from 'components/CloudinaryImage'
+import React, { useState } from 'react'
 import Link from 'components/Link'
 import { StaticImage } from 'gatsby-plugin-image'
 import {
@@ -41,6 +42,8 @@ import Install from '../Install'
 import { SEO } from 'components/seo'
 import { useLayoutData } from 'components/Layout/hooks'
 import Plans from 'components/Pricing/Plans'
+import SideModal from '../../Modal/SideModal'
+import Profile from '../../Team/Profile'
 
 const product = {
     slug: 'session-replay',
@@ -57,19 +60,34 @@ const features = [
     {
         title: 'Event timeline',
         description: "History of everything that happened in a user's session",
-        image: <StaticImage src="./images/timeline.png" width={420} />,
+        image: (
+            <CloudinaryImage
+                src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Product/SessionReplay/images/timeline.png"
+                width={420}
+            />
+        ),
         border: true,
     },
     {
         title: 'Console logs',
         description: "Debug issues faster by browsing the user's console",
-        image: <StaticImage src="./images/console.png" width={420} />,
+        image: (
+            <CloudinaryImage
+                src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Product/SessionReplay/images/console.png"
+                width={420}
+            />
+        ),
         border: true,
     },
     {
         title: 'Network monitor',
         description: 'Analyze performance and network calls',
-        image: <StaticImage src="./images/network.png" width={420} />,
+        image: (
+            <CloudinaryImage
+                src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Product/SessionReplay/images/network.png"
+                width={420}
+            />
+        ),
         border: true,
     },
 ]
@@ -88,7 +106,7 @@ const subfeatures = [
     },
     {
         title: 'Web or mobile session recording',
-        description: 'Web or Android (beta) available',
+        description: 'Your choice of web and mobile SDKs',
         icon: <IconPhone />,
     },
     {
@@ -165,7 +183,7 @@ const faqs = [
     {
         question: 'Is there a free trial on paid plans?',
         children:
-            'We have a generous free tier on every paid plan so you can try out the features before paying any money. (You\'ll need to enter your credit card info, but you can set a billing limit). If you have additional needs, such as enterprise features, please <a href="/contact-sales">get in touch</a>.',
+            'We have a generous free tier on every paid plan so you can try out the features before paying any money. (You\'ll need to enter your credit card info, but you can set a billing limit). If you have additional needs, such as enterprise features, please <a href="/talk-to-a-human">get in touch</a>.',
     },
     {
         question: 'What currency are your prices in?',
@@ -174,7 +192,7 @@ const faqs = [
     {
         question: 'Do you offer a discount for non-profits?',
         children:
-            'Yes in most cases - 50% off any plan. Create your account, then email <a href="mailto:sales@posthog.com?subject=Non-profit%20discount">sales@posthog.com</a> from the same email address with some basic details on your organization. We will then apply a discount.',
+            'Yes in most cases - 25% off any plan. Create your account, then email <a href="mailto:sales@posthog.com?subject=Non-profit%20discount">sales@posthog.com</a> from the same email address with some basic details on your organization. We will then apply a discount.',
     },
     {
         question: 'Are there any minimums or annual commitments?',
@@ -202,7 +220,7 @@ const comparison = [
             LogRocket: true,
             Matomo: false,
             FullStory: true,
-            PostHog: '<a href="https://github.com/PostHog/posthog/issues/12344">On the roadmap</a>',
+            PostHog: true,
         },
     },
     {
@@ -212,7 +230,27 @@ const comparison = [
             LogRocket: true,
             Matomo: false,
             FullStory: true,
-            PostHog: '<a href="https://github.com/PostHog/posthog/issues/13267">In beta</a>',
+            PostHog: true,
+        },
+    },
+    {
+        feature: 'React Native recordings',
+        companies: {
+            Hotjar: false,
+            LogRocket: true,
+            Matomo: false,
+            FullStory: false,
+            PostHog: '<a href="https://github.com/PostHog/posthog/issues/13269">In beta</a>',
+        },
+    },
+    {
+        feature: 'Flutter recordings',
+        companies: {
+            Hotjar: false,
+            LogRocket: false,
+            Matomo: false,
+            FullStory: false,
+            PostHog: '<a href="https://github.com/PostHog/posthog-flutter/issues/69">In beta</a>',
         },
     },
     {
@@ -301,22 +339,25 @@ const pairsWithItemCount = 3
 const PairsWithArray = [
     {
         icon: <IconGraph />,
+        color: 'blue',
         product: 'Product analytics',
         description: 'Jump into a playlist of session recordings directly from any time series in a graph',
         url: '/product-analytics',
     },
     {
         icon: <IconToggle />,
+        color: 'seagreen',
         product: 'Feature flags',
         description: "See which feature flags are enabled for a user's session",
         url: '/feature-flags',
     },
     {
         icon: <IconFlask />,
-        product: 'A/B testing',
+        color: 'purple',
+        product: 'Experiments',
         description:
             'Generate a playlist of recordings limited to an A/B test or specific group within a multivariate experiment.',
-        url: '/ab-testing',
+        url: '/experiments',
     },
 ]
 
@@ -351,6 +392,7 @@ export const ProductSessionReplay = () => {
         }
     `)
     const { fullWidthContent } = useLayoutData()
+    const [activeProfile, setActiveProfile] = useState(false)
     return (
         <>
             <SEO
@@ -358,6 +400,9 @@ export const ProductSessionReplay = () => {
                 description="Session Replay helps you diagnose issues and understand user behavior in your product, mobile app, or website."
                 image={`/images/og/session-replay.jpg`}
             />
+            <SideModal open={!!activeProfile} setOpen={setActiveProfile}>
+                {activeProfile && <Profile profile={{ ...activeProfile }} />}
+            </SideModal>
             <div className={`${fullWidthContent ? 'max-w-full px-8' : 'max-w-7xl mx-auto'} px-5 py-10 md:pt-20 pb-0`}>
                 <Hero
                     color="yellow"
@@ -369,8 +414,8 @@ export const ProductSessionReplay = () => {
                 />
 
                 <div className="text-center">
-                    <StaticImage
-                        src="../../../images/products/screenshot-session-replay.png"
+                    <CloudinaryImage
+                        src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/images/products/screenshot-session-replay.png"
                         alt="Screenshot of Session Replay in PostHog"
                         className="w-full max-w-[1360.5px]"
                         placeholder="none"
@@ -442,7 +487,12 @@ export const ProductSessionReplay = () => {
                         </p>
                     </div>
                     <div className="md:w-96">
-                        <StaticImage placeholder="none" quality={100} src="../hogs/session-replay-hog.png" alt="" />
+                        <CloudinaryImage
+                            placeholder="none"
+                            quality={100}
+                            src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Product/hogs/session-replay-hog.png"
+                            alt=""
+                        />
                     </div>
                 </div>
 
@@ -470,42 +520,24 @@ export const ProductSessionReplay = () => {
                         <h3 className="text-center mb-8">So, what's best for you?</h3>
                         <div className="mb-8 mx-5 md:mx-0 grid md:grid-cols-2 gap-4">
                             <VsCompetitor
-                                title="Reasons a competitor might be better for you (for now...)"
+                                title="Reasons a competitor may be best for you (for now...)"
                                 image={
-                                    <StaticImage
-                                        src="../../../images/products/competitors-sr.png"
+                                    <CloudinaryImage
+                                        src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/images/products/competitors-sr.png"
                                         className="max-w-[167px]"
                                     />
                                 }
                             >
                                 <ul>
                                     <li>
-                                        You need heatmaps or scrollmaps
-                                        <ul className="pl-6">
-                                            <li className="text-sm">PostHog is currently limited to clickmaps</li>
-                                        </ul>
+                                        <Link to="https://github.com/PostHog/posthog/issues/23400" external>
+                                            Error tracking (in progress...)
+                                        </Link>
                                     </li>
-                                    <li>Error tracking and alerting</li>
                                     <li>
-                                        Mobile SDKs (in progress...)
-                                        <ul className="pl-6">
-                                            <li className="text-sm">
-                                                <Link to="https://github.com/PostHog/posthog/issues/13269" external>
-                                                    React Native
-                                                </Link>{' '}
-                                                |&nbsp;
-                                                <Link to="https://github.com/PostHog/posthog/issues/12344" external>
-                                                    iOS
-                                                </Link>{' '}
-                                                |&nbsp;
-                                                <Link
-                                                    to="https://github.com/PostHog/posthog-flutter/issues/69"
-                                                    external
-                                                >
-                                                    Flutter
-                                                </Link>
-                                            </li>
-                                        </ul>
+                                        <Link to="https://github.com/PostHog/posthog/issues/14331" external>
+                                            Alerting (in progress...)
+                                        </Link>
                                     </li>
                                 </ul>
                             </VsCompetitor>
@@ -526,7 +558,7 @@ export const ProductSessionReplay = () => {
                         <p className="text-center text-sm font-medium">
                             Have questions about PostHog? <br className="md:hidden" />
                             <Link to={`/questions/${product.slug}`}>Ask the community</Link> or{' '}
-                            <Link to="/contact-sales">book a demo</Link>.
+                            <Link to="/talk-to-a-human">book a demo</Link>.
                         </p>
                     </section>
                 </div>
@@ -587,7 +619,7 @@ export const ProductSessionReplay = () => {
                         PostHog works in small teams. The <Link to={teamSlug}>{team}</Link> team is responsible for
                         building {product.lowercase}.
                     </p>
-                    <TeamMembers teamName={team} />
+                    <TeamMembers teamName={team} setActiveProfile={setActiveProfile} />
                 </section>
 
                 <section id="roadmap" className="mb-20 px-5">

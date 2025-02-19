@@ -105,7 +105,7 @@ You can look at [a pull request on our repo](https://github.com/PostHog/posthog/
 
 [Feature flags](/feature-flags) enable us to include code in the "trunk" without immediately releasing it to users. This [decouples deployment from release](/product-engineers/decouple-deployment-from-release). 
 
-Once deployed, we can then test in production, dogfood, beta test, get feedback, and progressively roll out the feature. 
+Once deployed, we can then [test in production](/product-engineers/testing-in-production), [dogfood](/product-engineers/dogfooding), beta test, get feedback, and progressively roll out the feature. 
 
 We currently have [67 feature flags](https://github.com/PostHog/posthog/blob/249d82043bcd70bb3e95a0553551246998d0d160/frontend/src/lib/constants.tsx#L125C1-L198C3) in various stages of release in our main PostHog repo.
 
@@ -127,3 +127,5 @@ The combination of a philosophy shift and the implementation of the right tools 
 - [Feature flag best practices and tips (with examples)](/blog/feature-flag-best-practices)
 - [Why use feature flags? Benefits, types and use cases, explained](/blog/feature-flag-benefits-use-cases)
 - [Why we test in production (and you should too)](/product-engineers/testing-in-production)
+
+<NewsletterForm />

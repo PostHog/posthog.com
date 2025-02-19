@@ -1,0 +1,264 @@
+---
+title: Migrate from LaunchDarkly to PostHog
+sidebar: Docs
+showTitle: true
+---
+
+## Differences between LaunchDarkly and PostHog
+
+PostHog and LaunchDarkly have many of the same features and concepts, but different names and slight variations.
+
+- Flags in LaunchDarkly can be used across environments (such as `Test` and `Production`). In PostHog, they belong to a single project and need to be [copied between them](/docs/feature-flags/multi-project-feature-flags).
+
+- By default, flags in PostHog are available across client, mobile, and server-side SDKs as well as the API. LaunchDarkly only makes flags available on the server-side by default.
+
+- In LaunchDarkly, you use **rules** to target your flag, which are set up after creating the flag. In PostHog, you use **release conditions** which are set up during flag creation (but can be edited later). For example, rollout percentages are front and center for PostHog but hidden in LaunchDarkly.
+
+- LaunchDarkly relies on **contexts** to evaluate flags. PostHog evaluates based on users (but you can use “users” [however you want](/tutorials/group-page-machine-flags)).
+
+- A lot of LaunchDarkly's targeting, tracking, and metrics relies on importing data from 3rd party tools. This is all first party in PostHog.
+
+- Experiments in both LaunchDarkly and PostHog are built on top of feature flags. In LaunchDarkly, you need to create a flag before creating an experiment. In PostHog, creating an experiment automatically creates a flag.
+
+Learn more about how they compare in our [PostHog vs LaunchDarkly comparison](/blog/posthog-vs-launchdarkly).
+
+## Migrating flags and experiments from LaunchDarkly
+
+Migrating flags and experiments from LaunchDarkly to PostHog is a multi-step process:
+
+1. Get experiments and feature flags from LaunchDarkly
+2. Converting experiments and flags to the PostHog format
+3. Creating experiments and flags in PostHog using the [API](/docs/api)
+
+### 1. Getting API keys and project data
+
+To start, you need API keys as well as project and environment data from both products.
+
+From LaunchDarkly, you need:
+
+1. **Project key**: Like `default`, from the [projects tab](https://app.launchdarkly.com/settings/projects) of your organization settings.
+
+2. **Environment key**: Like `production` or `test`, from the [environments tab](https://app.launchdarkly.com/projects/default/settings) of your project settings.
+
+3. **API key**: To create one, go to the [authorization tab](https://app.launchdarkly.com/settings/authorization), create **Create token**, add a name, and click **Save token**. Make sure to save it somewhere secure because you cannot access it later.
+
+![LaunchDarkly API key](https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2024_08_05_at_15_27_30_2x_83f634ee2b.png)
+
+From PostHog, you need:
+
+1. **Project ID**: A number, likely 5 digits, that you can find in the URL of your project or your project settings.
+
+2. **Personal API key**: To create one, go to the [personal API key section](https://us.posthog.com/settings/user-api-keys) of your project settings and click **Create personal API key**. Give it a label, write access to both experiments and feature flags, and then click **Create key**. Make sure to save it somewhere secure because you cannot access it later.
+
+![PostHog personal API key](https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2024_08_08_at_11_40_17_2x_6237d9eab7.png)
+
+### 2. Getting experiments and flags from LaunchDarkly
+
+With your API keys and project data, you can get your experiments and flags from the LaunchDarkly API.
+
+```python
+import requests
+
+project_key = "default"
+environment_key = "test"
+ld_api_key = "api-1a234567-89ab-cdef-1234-567890abcdef"
+
+# Get LaunchDarkly experiments
+url = "https://app.launchdarkly.com/api/v2/projects/" + project_key + "/environments/" + environment_key + "/experiments"
+headers = {
+  "Authorization": ld_api_key,
+  "LD-API-Version": "beta"
+}
+
+experiment_response = requests.get(url, headers=headers)
+experiment_data = experiment_response.json()
+
+# Get LaunchDarkly flags
+flags_url = f"https://app.launchdarkly.com/api/v2/flags/{project_key}?env={environment_key}"
+headers = {"Authorization": ld_api_key}
+
+flag_response = requests.get(flags_url, headers=headers)
+flag_data = flag_response.json()
+```
+
+### 3. Converting and creating experiments and flags in PostHog
+
+You can then convert this data into the PostHog format. This requires:
+
+1. Getting experiment keys so you know which flags are experiments.
+
+2. Looping through each flag and converting the variations to PostHog variants, values to payloads, and other details.
+
+3. If the flag is an experiment, format the data to match the PostHog experiment format and create it with the [PostHog API](/docs/api/experiments#post-api-projects-project_id-experiments).
+
+4. If the flag is not an experiment, format the data to match the PostHog flag format and create it with the [PostHog API](/docs/api/feature-flags#post-api-projects-project_id-feature_flags).
+
+Including the LaunchDarkly requests, this looks like this:
+
+```python
+import requests
+
+project_key = "default"
+environment_key = "test"
+ld_api_key = "api-1a234567-89ab-cdef-1234-567890abcdef"
+ph_api_key = "phx_abc123def456ghi789jkl123mno456pqr789stu123vwx"
+ph_project_id = "12345"
+
+# Get LaunchDarkly experiments
+url = "https://app.launchdarkly.com/api/v2/projects/" + project_key + "/environments/" + environment_key + "/experiments"
+headers = {
+  "Authorization": ld_api_key,
+  "LD-API-Version": "beta"
+}
+
+experiment_response = requests.get(url, headers=headers)
+experiment_data = experiment_response.json()
+
+# Get keys from LaunchDarkly experiments
+experiment_keys = []
+for experiment in experiment_data['items']:
+  flags = experiment['currentIteration']['flags']
+  if flags:
+    flag_key = next(iter(flags))
+    experiment_keys.append(flag_key)
+
+# Get LaunchDarkly flags
+flags_url = f"https://app.launchdarkly.com/api/v2/flags/{project_key}?env={environment_key}"
+headers = {"Authorization": ld_api_key}
+
+flag_response = requests.get(flags_url, headers=headers)
+flag_data = flag_response.json()
+
+# Loop through the flags to convert and create experiments and flags in PostHog
+for flag in flag_data['items']:
+  
+  variants = []
+  payloads = {}
+  total_percentage = 0
+  for i, variation in enumerate(flag['variations']):
+    if 'name' not in variation:
+      # Basic boolean flag
+      continue
+    variant = {
+      "key": variation['name'].lower().replace(' ', '_'),
+      "rollout_percentage": 100 // len(flag['variations'])
+    }
+    # Rollout percentage must sum to 100
+    total_percentage += variant["rollout_percentage"]
+    if i == len(flag['variations']) - 1 and total_percentage < 100:
+      variant["rollout_percentage"] += 100 - total_percentage
+    variants.append(variant)
+    
+    # If the value is JSON, convert to string
+    payloads[variant["key"]] = json.dumps(variation['value']) if isinstance(variation['value'], dict) else variation['value']
+
+  if flag['key'] in experiment_keys:
+    # Convert to PostHog experiment
+    ph_experiment = {
+      "name": flag['name'],
+      "description": flag['description'],
+      "feature_flag_key": flag['key'],
+      # Use pageview trend goal as default
+      "filters": {
+        "events": [
+          {
+            "id": "$pageview",
+            "math": "total",
+            "name": "$pageview",
+            "type": "events",
+            "order": 0
+          }
+        ],
+        "display": "ActionsLineGraph",
+        "insight": "TRENDS",
+        "entity_type": "events",
+      },
+      "parameters": {
+        "feature_flag_variants": variants
+      }
+    }
+
+    # Create experiment in PostHog
+    response = requests.post(
+      "<ph_app_host>/api/projects/{project_id}/experiments/".format(
+        project_id=ph_project_id
+      ),
+      headers={"Authorization": "Bearer {}".format(ph_api_key)},
+      json=ph_experiment
+    ).json()
+
+    print(response)
+    continue
+
+  # Convert to PostHog flag
+  ph_flag = {
+    "created_by": {
+      "first_name": flag['_maintainer']['firstName'],
+      "last_name": flag['_maintainer']['lastName'],
+      "email": flag['_maintainer']['email']
+    },
+    "deleted": flag['archived'],
+    "name": flag['name'] + "\n\n" + flag['description'],
+    "key": flag['key'],
+    "active": flag['environments'][environment_key]['on'],
+    "filters": {
+        # Default release condition to all users
+        "groups": [
+          {
+            "properties": [],
+            "rollout_percentage": 100
+          }
+        ],
+        "multivariate": {"variants": variants} if variants else None,
+        "payloads": payloads
+    }
+  }
+
+  # Create flag in PostHog
+  response = requests.post(
+    "<ph_app_host>/api/projects/{ph_project_id}/feature_flags/".format(
+        ph_project_id=ph_project_id
+    ),
+    headers={"Authorization": "Bearer {}".format(ph_api_key)},
+    json=ph_flag
+  ).json()
+  
+  print(response)
+```
+
+This script may need modification depending on the structure of your LaunchDarkly data, but it gives you a start.
+
+### 4. Editing goals and release conditions
+
+Because of the differences between LaunchDarkly and PostHog as well as the uniqueness of your data, metrics, and release conditions, you need to manually edit the release conditions and goals for your flags and experiments.
+
+## Switching to PostHog
+
+Once you migrate your flags and experiments, you can replace:
+
+1. Your LaunchDarkly client or provider initialization with the equivalent [PostHog initialization](/docs/feature-flags/installation).
+
+2. Your `variation` calls with PostHog's `isFeatureEnabled` calls (or [equivalent](/docs/feature-flags/adding-feature-flag-code)).
+
+For example: 
+
+```js
+// LaunchDarkly initialization
+const ldclient = LDClient.initialize(clientSideID, context);
+
+function render() {
+  const flagValue = ldclient.variation(flagKey, false);
+}
+
+// PostHog initialization
+posthog.init('<ph_project_api_key>', {
+  api_host: '<ph_client_api_host>'
+})
+
+function render() {
+  const flagValue = posthog.isFeatureEnabled(flagKey);
+}
+
+```
+
+Once done and deployed, you can rollout and activate your flags and launch your experiments.

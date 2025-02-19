@@ -43,6 +43,17 @@ For _everything else_, you and/or your small team should be able to decide this 
 
 PostHog is _not_ a good place for managers who are territorial and prefer for all communication to go through them for 'efficiency'. Over time, doing this would undermine autonomy and cause our best people to quit!
 
+## Titles based on what you do
+
+Companies give out titles to people that primarily show how senior they are. 
+
+This means titles, as adopted by the wider world, imply that _seniority_ is more important than what people do. We do not believe that seniority should determine how decisions get made - people should own decisions in their area of the business. We trust every employee to fully own their area of the business.
+
+When you are prompted to put your title somewhere like LinkedIn, please just say as clearly as you can what you are focused on. Please do not focus on how senior you are. Feel free to be weird with it.
+
+Before "Senior Engineer at PostHog" (this is not a title that exists at PostHog anyway)
+After "Product Analytics Engineer at PostHog"
+
 ## Goal setting
 
 When you build a startup from scratch, you are in an existential crisis. One day you might be building a gym, the next day a software product for accountants. The problem changes. At PostHog, we give each small team a product to build. (James and Tim focus on _which_ products we should build, as they often need sequencing.)

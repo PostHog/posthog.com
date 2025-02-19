@@ -124,7 +124,7 @@ function App() {
   
   const posthog = usePostHog();
 
-  posthog.featureFlags.override('home-button-test', 'test')
+  posthog.featureFlags.overrideFeatureFlags('home-button-test', 'test')
   const flagValue = useFeatureFlagVariantKey('home-button-test')
 
   const handleClick = () => {
@@ -152,15 +152,17 @@ To test that it works, override the feature flag with the test value.
 
 ```js
 //...
-posthog.featureFlags.override({'home-button-test': 'test'})
+posthog.featureFlags.overrideFeatureFlags({ flags: {'home-button-test': 'test'}})
 const flagValue = useFeatureFlagVariantKey('home-button-test')
 //...
 ```
 
-After confirming it works, remove the `featureFlags.override` call, go back to your experiment in PostHog, and click "Launch." The A/B test is then running to get results on which version is best.
+After confirming it works, remove the `featureFlags.overrideFeatureFlags` call, go back to your experiment in PostHog, and click "Launch." The A/B test is then running to get results on which version is best.
 
 ## Further reading
 
 - [How to bootstrap feature flags in React and Express](/tutorials/bootstrap-feature-flags-react)
 - [How to do holdout testing](/tutorials/holdout-testing)
 - [How to set up analytics in React](/tutorials/react-analytics)
+
+<NewsletterForm />

@@ -1,10 +1,10 @@
 import { TooltipContent, TooltipContentProps } from 'components/GlossaryElement'
-import { ExternalLink } from 'components/Icons/Icons'
 import { useLayoutData } from 'components/Layout/hooks'
 import Tooltip from 'components/Tooltip'
 import { Link as GatsbyLink } from 'gatsby'
 import React from 'react'
 import usePostHog from '../../hooks/usePostHog'
+import { IconArrowUpRight } from '@posthog/icons'
 
 export interface Props {
     to: string
@@ -52,7 +52,7 @@ export default function Link({
 
     const handleClick = async (e: React.MouseEvent<HTMLButtonElement> | React.MouseEvent<HTMLAnchorElement>) => {
         if (isPostHogAppUrl) {
-            posthog?.createPersonProfile()
+            posthog?.createPersonProfile?.()
         }
         if (event && posthog) {
             posthog.capture(event)
@@ -81,6 +81,7 @@ export default function Link({
     ) : internal ? (
         preview ? (
             <Tooltip
+                tooltipClassName={compact ? 'hidden' : ''}
                 offset={[0, 0]}
                 placement="left-start"
                 content={(setOpen) => (
@@ -112,10 +113,10 @@ export default function Link({
             target={external || externalNoIcon ? '_blank' : ''}
         >
             {external ? (
-                <span className="inline-flex justify-center items-center space-x-1 group">
+                <span className="inline-flex justify-center items-center group">
                     <span className="font-semibold">{children}</span>
-                    <ExternalLink
-                        className={`text-primary dark:text-primary-dark opacity-30 group-hover:opacity-50 ${iconClasses}`}
+                    <IconArrowUpRight
+                        className={`size-4 text-primary dark:text-primary-dark opacity-50 group-hover:opacity-90 relative ${iconClasses}`}
                     />
                 </span>
             ) : (

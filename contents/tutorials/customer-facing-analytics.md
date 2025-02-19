@@ -94,7 +94,7 @@ NEXT_POSTHOG_PERSONAL_KEY=<ph_personal_api_key>
 
 In the `pages` folder, create a new file named `insights.js` and add a `getServerSideProps` function at the bottom of the file that:
 
-1. gets group or user property to filter from the URL (context)
+1. gets group or person property to filter from the URL (context)
 2. sets our `events`, `display`, and `properties` params 
 3. formats the `fetch` `GET` request to `<ph_app_host>/api/projects/<project_id>/insights/trend?${params}`
 4. passes the response data as a prop to our component
@@ -294,7 +294,7 @@ const trendsParams = new URLSearchParams();
       ]
     }
   ));
-  const trendsUrl = `<ph_client_api_host>/api/projects/<project_id>/insights/trend?${trendsParams}`;
+  const trendsUrl = `<ph_app_host>/api/projects/<project_id>/insights/trend?${trendsParams}`;
   
   const trendsRequest = await fetch(trendsUrl, {
     method: 'GET',
@@ -370,4 +370,6 @@ From here, you can add other charts and metrics. See the [PostHog API](/docs/api
 
 - [How to add popups to your React app with feature flags](/tutorials/react-popups)
 - [How to set up Next.js analytics, feature flags, and more](/tutorials/nextjs-analytics)
-- [Get feedback and book user interviews with surveys](/tutorials/feedback-interviews-site-apps)
+- [How to use Recharts to visualize analytics data](/tutorials/recharts)
+
+<NewsletterForm />

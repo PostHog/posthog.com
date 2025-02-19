@@ -1,0 +1,28 @@
+---
+title: Managed reverse proxy
+sidebar: Docs
+showTitle: true
+---
+
+PostHog's managed reverse proxy service enables you to route traffic through PostHog's infrastructure, simplifying the deployment and management of your PostHog reverse proxy. This guide will walk you through the setup and configuration process.
+
+## Prerequisites
+
+Before setting up the managed reverse proxy, ensure you have the following:
+- A PostHog Cloud account with the [Teams add-on](https://posthog.com/pricing#addons)
+- Access to your domain's DNS settings.
+
+## Creating a managed reverse proxy
+
+1. Navigate to [organization proxy](https://us.posthog.com/settings/organization-proxy) settings
+2. Click "New Managed Proxy"
+3. Enter a subdomain that you control. For example if you run posthog on `myapp.com`, you could use `ph.myapp.com`
+4. Go to your DNS provider and create a new CNAME record:
+  - The `@` or target should be set to the subdomain you chose in the previous step
+  - You will be shown a domain to use as the CNAME value when creating the record. It will look something like `4854cf84789d8596ad01.proxy-us.posthog.com.`
+5. Wait for the proxy to be created. It will go from "Waiting", to "Issuing" and finally "Live" once everything is set up. There is no further action required after creating the DNS record.
+6. Update your PostHog snippet or SDK to use the subdomain chosen in step 3 as the `api_host`. Make sure to also update the PostHog SDK's `ui_host` config property to `https://us.posthog.com` or `https://eu.posthog.com` depending on your Cloud region.
+
+### Setting DNS records in Cloudflare
+
+If you are using Cloudflare as your DNS provider, please ensure you have disabled proxying on the CNAME record (DNS only)

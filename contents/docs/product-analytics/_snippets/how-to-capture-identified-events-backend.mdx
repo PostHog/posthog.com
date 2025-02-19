@@ -1,0 +1,66 @@
+PostHog's backend SDKs and API capture identified events by default.
+
+<MultiLanguage>
+
+```node
+client.capture({
+    distinctId: 'distinct_id_of_the_user',
+    event: 'your_event_name',
+})
+```
+
+```python
+posthog.capture(
+    "distinct_id_of_the_user", 
+    "your_event_name", 
+)
+```
+
+```php
+PostHog::capture(array(
+  'distinctId' => 'distinct_id_of_the_user',
+  'event' => 'your_event_name',
+));
+```
+
+```ruby
+posthog.capture({
+    distinct_id: 'distinct_id_of_the_user',
+    event: 'your_event_name',
+})
+```
+
+```go
+client.Enqueue(posthog.Capture{
+    DistinctId: "distinct_id_of_the_user",
+    Event:      "your_event_name",
+})
+```
+
+```java
+posthog.capture("distinct_id_of_the_user", "your_event_name", new HashMap<String, Object>() {});
+```
+
+```rust
+let mut event = Event::new("your_event_name", "distinct_id_of_the_user");
+
+client.capture(event).unwrap();
+```
+
+```elixir
+Posthog.capture("your_event_name", %{
+  distinct_id: distinct_id_of_the_user
+})
+```
+
+```API
+curl -v -L --header "Content-Type: application/json" -d '{
+    "api_key": "<ph_project_api_key>",
+    "distinct_id": "distinct_id_of_the_user",
+    "event": "your_event_name"
+}' <ph_client_api_host>/capture/
+```
+
+</MultiLanguage>
+
+

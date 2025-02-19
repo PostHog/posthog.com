@@ -36,7 +36,7 @@ PostHog is an open-source product that combines product analytics, session repla
 
 - 🧪 **A/B tests** with up to 9 test variations, primary and secondary metrics. Automatically calculates recommended duration, sample size, and statistical significance.
 
-- 💬 **Surveys**, including open text, link with custom CTA, ratings (for [NPS, CSAT, and CES surveys](/product-engineers/nps-vs-csat-vs-ces)), single and multiple choice. Target users based on user properties, URL, or using existing feature flags.
+- 💬 **Surveys**, including open text, link with custom CTA, ratings (for [NPS, CSAT, and CES surveys](/product-engineers/nps-vs-csat-vs-ces)), single and multiple choice. Target users based on person properties, URL, or using existing feature flags.
 
 ### Who uses PostHog?
 
@@ -52,7 +52,8 @@ Customers include [AssemblyAI](/customers/assemblyai), [Hasura](/customers/hasur
 
 <ComparisonTable column1="PostHog" column2="Mixpanel">
   <ComparisonRow column1={true} column2={true} feature="Product analytics" description="Custom trends, funnels, and retention analysis" />
-  <ComparisonRow column1={true} column2={false} feature="Session replays" description="Watch real users use your product; diagnose bugs" />
+  <ComparisonRow column1={true} column2={true} feature="Web analytics" description="Simple dashboard of aggregated traffic, sources, campaigns, and session metrics" />
+  <ComparisonRow column1={true} column2={true} feature="Session replays" description="Watch real users use your product; diagnose bugs" />
   <ComparisonRow column1={true} column2={false} feature="Feature flags" description="Roll out features safely; toggle features for cohorts or individuals" />
   <ComparisonRow column1={true} column2={false} feature="A/B testing" description="Create A/B tests using feature flags" />
   <ComparisonRow column1={true} column2={false} feature="User surveys" description="Ask users for qualitative feedback and gather responses" />
@@ -88,8 +89,6 @@ According to [reviews on G2](https://www.g2.com/products/posthog/reviews), compa
 > #### Bottom line 
 > PostHog is the best Mixpanel alternative for startups and mid-size companies. It replaces Mixpanel and numerous other tools, saving money and time. Power user features, like an SQL insight builder and session replay logs, make it a good choice for engineering-led teams, too.
 
-<NewsletterForm />
-
 <br />
 
 ## 2. Google Analytics 4 (GA4)
@@ -123,6 +122,7 @@ Google's huge scale means GA4 is used by both the biggest global corporations to
 
 <ComparisonTable column1="GA4" column2="Mixpanel">
   <ComparisonRow column1={true} column2={true} feature="Product analytics" description="Custom trends, funnels, and retention analysis" />
+  <ComparisonRow column1={true} column2={true} feature="Web analytics" description="Simple dashboard of aggregated traffic, sources, campaigns, and session metrics" />
   <ComparisonRow column1={true} column2={true} feature="Marketing analytics" description="Track content and advertising performance" />
   <ComparisonRow column1={false} column2={true} feature="Notebooks" description="Collaborate on analysis in shareable notebooks" />
   <ComparisonRow column1={true} column2={true} feature="Google Ads integration" description="Track ROI on Google marketing campaigns" />
@@ -150,7 +150,7 @@ As of July 2023, [30.5% of the top 1 million websites](https://www.linkedin.com/
 
 1. **Because it's Google:** It's not an original reason, but it holds true. Using Google Analytics makes a lot of sense for teams who rely on other Google platforms, like Google Ads and BigQuery.
 
-2. **It's powerful and free:** Likewise, Google's scale means GA4 is completely free to most small and medium-sized businesses. This, combined with strong analytical tools and the large ecosystem of GA experts to call upon, makes it a safe choice.
+2. **It's powerful and free:** Likewise, Google's scale means [GA4 is completely free](/blog/google-analytics-cost) to most small and medium-sized businesses. This, combined with strong analytical tools and the large ecosystem of GA experts to call upon, makes it a safe choice.
 
 3. **To track marketing ROI:** GA4 is predominantly used by marketing and e-commerce teams to track campaign ROI. It's also popular among large content publishers for its scalability.
 
@@ -192,6 +192,7 @@ While it offers a limited free tier for startups, high prices are a barrier. As 
 
 <ComparisonTable column1="Amplitude" column2="Mixpanel">
   <ComparisonRow column1={true} column2={true} feature="Product analytics" description="Custom trends, funnels, and retention analysis" />
+  <ComparisonRow column1={true} column2={true} feature="Web analytics" description="Simple dashboard of aggregated traffic, sources, campaigns, and session metrics" />
   <ComparisonRow column1={true} column2={false} feature="A/B testing" description="Create A/B tests using feature flags" />
   <ComparisonRow column1={true} column2={true} feature="Notebooks" description="Collaborate on analysis in shareable notebooks" />
   <ComparisonRow column1={true} column2={false} feature="Natural language insights" description="Fetch insights using natural language queries" />
@@ -255,6 +256,7 @@ Customers include Amway, Eventbrite, and Freshworks.
 
 <ComparisonTable column1="Heap" column2="Mixpanel">
   <ComparisonRow column1={true} column2={true} feature="Product analytics" description="Custom trends, funnels, and retention analysis" />
+  <ComparisonRow column1={true} column2={true} feature="Web analytics" description="Simple dashboard of aggregated traffic, sources, campaigns, and session metrics" />
   <ComparisonRow column1={true} column2={false} feature="Autocapture" description="Capture events without manual instrumentation" />
   <ComparisonRow column1={true} column2={false} feature="Session replay" description="Watch real users use your product; diagnose bugs" />
   <ComparisonRow column1={false} column2={true} feature="Notebooks" description="Collaborate on analysis in shareable notebooks" />
@@ -299,4 +301,4 @@ This guide focuses on the most popular Mixpanel alternatives, but these aren't t
 
 - **[June](https://www.june.so/)**, a lightweight take on product analytics that focuses on auto generated reports. It's popular among seed stage and Series A B2B SaaS startups, though its free tier includes only 1,000 active monthly users.
 
-<ArrayCTA />
+<NewsletterForm />

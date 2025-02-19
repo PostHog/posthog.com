@@ -104,3 +104,5 @@ In many other companies, only people who voluntarily resign are considered "good
 As an open-source company, we are transparent about compensation including equity, because we believe that everyone who contributes to our success should reap the benefits. 
 
 For more information about how PostHog thinks about equity, check out our [compensation page](/handbook/people/compensation) and [equity FAQ](/handbook/people/share-options) in our handbook.
+
+<NewsletterForm />

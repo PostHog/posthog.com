@@ -11,7 +11,7 @@ tags:
   - feature flags
 ---
 
-A/B testing enables you to experiment with how changes to your app affect metrics you care about. PostHog makes it easy to set up [A/B tests](/ab-testing) in Python. This tutorial shows you how to create a basic Python app with Flask, add PostHog to it, and then set up an A/B test to compare button variants.
+A/B testing enables you to experiment with how changes to your app affect metrics you care about. PostHog makes it easy to set up [A/B tests](/experiments) in Python. This tutorial shows you how to create a basic Python app with Flask, add PostHog to it, and then set up an A/B test to compare button variants.
 
 ## Creating a basic Flask app
 
@@ -142,9 +142,16 @@ Rerun your app with `flask --app hello run`, go to a blog route like `http://127
 
 ## Creating an A/B test
 
-We are now ready to create and set up our A/B test. To do this, go to the [experiments tab](https://app.posthog.com/experiments) in PostHog and click "New experiment." Enter a name, feature flag key (we use `blog-like`), and set the "Experiment goal" to a trend of the "liked post" event. Edit any more details and click "Save as draft." Because we are just testing locally, click "Launch" right away on the next screen. 
+We are now ready to create and set up our A/B test. To do this, go to the [experiments tab](https://app.posthog.com/experiments) in PostHog and click "New experiment." 
 
-![A/B test in PostHog](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/python-ab-testing/ab-test.png)
+Enter a name, feature flag key (we use `blog-like`), edit any more details, and click **Save as draft**. Set the primary metric to a trend of the "liked post" event and then click **Launch**.
+
+<ProductScreenshot
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_01_16_at_09_39_30_2x_a436c75796.png" 
+  imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_01_16_at_09_39_11_2x_c1a2392612.png" 
+  alt="Experiment setup in PostHog" 
+  classes="rounded"
+/>
 
 ## Implementing our A/B test
 
@@ -220,3 +227,4 @@ This is a basic implementation of Python A/B testing in Flask set up. From here,
 - [How to set up analytics in Python and Flask](/tutorials/python-analytics)
 - [How to set up feature flags in Python and Flask](/tutorials/python-feature-flags)
 
+<NewsletterForm />

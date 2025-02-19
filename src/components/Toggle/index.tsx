@@ -11,6 +11,8 @@ export default function Toggle({
     iconRight,
     label,
     tooltip,
+    position = 'left',
+    activeOpacity = true,
 }: {
     checked: boolean
     onChange: (checked: boolean) => void
@@ -18,19 +20,34 @@ export default function Toggle({
     iconRight?: React.ReactNode
     label?: string
     tooltip?: string
+    position?: 'left' | 'right'
+    activeOpacity?: boolean
 }) {
     return (
-        <span className="flex space-x-1.5 items-center">
-            {iconLeft && (
-                <span className={`${checked ? 'opacity-50' : 'opacity-80'} font-semibold transition-opacity`}>
-                    {iconLeft}
-                </span>
-            )}
+        <span className="flex space-x-1.5 items-center justify-between">
             <Switch.Group>
+                {((position === 'right' && label) || iconLeft) && (
+                    <span className="flex items-center">
+                        {iconLeft && (
+                            <span
+                                className={`${
+                                    activeOpacity && checked ? 'opacity-50' : 'opacity-80'
+                                } font-semibold transition-opacity`}
+                            >
+                                {iconLeft}
+                            </span>
+                        )}
+                        {position === 'right' && label && (
+                            <Switch.Label>
+                                <span className="ml-1 font-semibold text-sm">{label}</span>
+                            </Switch.Label>
+                        )}
+                    </span>
+                )}
                 <Switch
                     checked={checked}
                     onChange={onChange}
-                    className="flex-shrink-0 group relative rounded-full inline-flex items-center justify-center h-2 w-8 cursor-pointer focus:outline-none"
+                    className="group flex-shrink-0 group relative rounded-full inline-flex items-center justify-center h-2 w-8 cursor-pointer focus:outline-none"
                 >
                     <span className="sr-only">Use setting</span>
                     <span
@@ -40,15 +57,30 @@ export default function Toggle({
                     <span
                         aria-hidden="true"
                         className={classNames(
-                            checked ? 'translate-x-5 bg-teal dark:bg-teal' : 'translate-x-0 bg-[#555] dark:bg-[#999]',
+                            checked
+                                ? 'translate-x-5 bg-teal dark:bg-teal'
+                                : 'translate-x-0 bg-[#555] hover:bg-[#222] dark:bg-[#999] dark:group-hover:bg-[#ddd]',
                             'pointer-events-none absolute left-0 inline-block h-4 w-4 rounded-full transform ring-0 transition-transform ease-in-out duration-200'
                         )}
                     />
                 </Switch>
-                {label && (
-                    <Switch.Label>
-                        <span className="ml-1 font-semibold text-sm">{label}</span>
-                    </Switch.Label>
+                {((position === 'left' && label) || iconRight) && (
+                    <span className="flex items-center">
+                        {position === 'left' && label && (
+                            <Switch.Label>
+                                <span className="ml-1 font-semibold text-sm">{label}</span>
+                            </Switch.Label>
+                        )}
+                        {iconRight && (
+                            <span
+                                className={`${
+                                    activeOpacity && !checked ? 'opacity-50' : 'opacity-80'
+                                } font-semibold transition-opacity`}
+                            >
+                                {iconRight}
+                            </span>
+                        )}
+                    </span>
                 )}
                 {tooltip && (
                     <Tooltip content={tooltip} contentContainerClassName="max-w-xs">
@@ -58,11 +90,6 @@ export default function Toggle({
                     </Tooltip>
                 )}
             </Switch.Group>
-            {iconRight && (
-                <span className={`${!checked ? 'opacity-50' : 'opacity-80'} font-semibold transition-opacity`}>
-                    {iconRight}
-                </span>
-            )}
         </span>
     )
 }

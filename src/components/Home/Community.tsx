@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useRef, useState } from 'react'
+import React, { useCallback, useEffect, useRef } from 'react'
 import Link from 'components/Link'
 import Particles from 'react-tsparticles'
 import { loadStarsPreset } from 'tsparticles-preset-stars'
@@ -7,49 +7,32 @@ import { layoutLogic } from 'logic/layoutLogic'
 import { useInView } from 'react-intersection-observer'
 import { motion } from 'framer-motion'
 import { useBreakpoint } from 'gatsby-plugin-breakpoints'
+import { DotLottiePlayer } from '@dotlottie/react-player'
 
-const CommunityHogs = ({ name, className = '' }) => {
-    const [ready, setReady] = useState(false)
-    const [containerRef, inView] = useInView({ threshold: 0 })
-    const videoRef = useRef<HTMLVideoElement>(null)
+const CommunityHogs = () => {
+    const { websiteTheme } = useValues(layoutLogic)
+    const lottieRef = useRef<null>()
+    const [ref, inView] = useInView({ threshold: 0 })
 
     useEffect(() => {
         if (inView) {
-            videoRef?.current?.play()
+            lottieRef.current?.play()
         } else {
-            videoRef?.current?.pause()
+            lottieRef.current?.stop()
         }
-    }, [inView, ready])
+    }, [inView])
 
     return (
-        <div className="w-[70vw] mx-auto absolute bottom-0 left-1/2 -translate-x-1/2" ref={containerRef}>
-            <video
-                ref={videoRef}
-                onCanPlay={() => {
-                    setReady(true)
-                }}
+        <div ref={ref} className="w-[70vw] mx-auto absolute bottom-0 left-1/2 -translate-x-1/2">
+            <DotLottiePlayer
+                lottieRef={lottieRef}
                 loop
-                playsInline
-                muted
-                preload="none"
-                className={`w-full ${className}`}
-            >
-                <source
-                    className="hidden"
-                    src={`${process.env.GATSBY_CLOUDFRONT_URL}/${name}.webm`}
-                    type="video/webm"
-                />
-                <source className="hidden" src={`${process.env.GATSBY_CLOUDFRONT_URL}/${name}.mp4`} type="video/mp4" />
-            </video>
-        </div>
-    )
-}
-
-const CommunityStat = ({ count, label, className }) => {
-    return (
-        <div className={`absolute text-center text-[#392116] dark:text-[#E7F1FF] ${className}`}>
-            <h4 className="text-[2.5vw] lg:text-[2.75vw] xl:text-[3vw] leading-none mb-0.5">{count}</h4>
-            <p className="text-[1.5vw] lg:text-[1.25vw] xl:text-[1vw] m-0 leading-tight whitespace-nowrap">{label}</p>
+                src={
+                    websiteTheme === 'dark'
+                        ? 'https://lottie.host/0b5196fb-89df-4d4d-b93c-cf69e0e8a608/0jsTIuWyDQ.lottie'
+                        : 'https://lottie.host/8a8166a0-6c2a-4944-a36e-67e5a124846f/1y1Pk6eZuo.lottie'
+                }
+            />
         </div>
     )
 }
@@ -85,6 +68,7 @@ export const Stars = () => {
 export default function Community() {
     const { websiteTheme } = useValues(layoutLogic)
     const [ref, inView] = useInView({ threshold: 0 })
+
     return (
         <div
             ref={ref}
@@ -115,11 +99,17 @@ export default function Community() {
                     </p>
                 </div>
                 <section className="relative sm:scale-100 scale-[1.2] sm:origin-center origin-bottom">
-                    <img src="/images/campfire-light.png" alt="campfire-light" className="dark:hidden block w-full" />
-                    <img src="/images/campfire-dark.png" alt="campfire-dark" className="hidden dark:block w-full" />
-
-                    <CommunityHogs name="campfire-light" className="dark:hidden block" />
-                    <CommunityHogs name="campfire-dark" className="hidden dark:block" />
+                    <img
+                        src="https://res.cloudinary.com/dmukukwp6/image/upload/v1718854771/posthog.com/campfire-light.png"
+                        alt="campfire-light"
+                        className="dark:hidden block w-full"
+                    />
+                    <img
+                        src="https://res.cloudinary.com/dmukukwp6/image/upload/v1718854772/posthog.com/campfire-dark.png"
+                        alt="campfire-dark"
+                        className="hidden dark:block w-full"
+                    />
+                    <CommunityHogs />
                 </section>
             </div>
         </div>

@@ -12,6 +12,13 @@ import React, { useEffect, useRef, useState } from 'react'
 import ReactMarkdown from 'react-markdown'
 import PostLayout from 'components/PostLayout'
 import CommunityQuestions from 'components/CommunityQuestions'
+import { MDXProvider } from '@mdx-js/react'
+import { MDXRenderer } from 'gatsby-plugin-mdx'
+import { shortcodes } from '../mdxGlobalComponents'
+import { MdxCodeBlock } from 'components/CodeBlock'
+import { InlineCode } from 'components/InlineCode'
+import { docsMenu } from '../navs'
+import { CallToAction } from 'components/CallToAction'
 
 const mapVerbsColor = {
     get: 'blue',
@@ -366,7 +373,7 @@ curl ${item.httpVerb === 'delete' ? ' -X DELETE ' : item.httpVerb == 'patch' ? '
                 item.httpVerb === 'post' ? "\n    -H 'Content-Type: application/json'" : ''
             }\\
     -H "Authorization: Bearer $POSTHOG_PERSONAL_API_KEY" \\
-    https://app.posthog.com${path}${params.map((item) => `\\\n\t-d ${item[0]}=${JSON.stringify(item[1])}`)}
+    <ph_app_host>${path}${params.map((item) => `\\\n\t-d ${item[0]}=${JSON.stringify(item[1])}`)}
             `,
         },
         {
@@ -376,7 +383,7 @@ curl ${item.httpVerb === 'delete' ? ' -X DELETE ' : item.httpVerb == 'patch' ? '
 api_key = "[your personal api key]"
 project_id = "[your project id]"
 response = requests.${item.httpVerb}(
-    "https://app.posthog.com${item.pathName.replace('{id}', `{${object}_id}`)}".format(
+    "<ph_app_host>${item.pathName.replace('{id}', `{${object}_id}`)}".format(
         project_id=project_id${item.pathName.includes('{id}') ? `,\n\t\t${object}_id="the ${object} id"` : ''}${
                 additionalPathParams.length > 0
                     ? additionalPathParams.map(
@@ -482,10 +489,18 @@ const pathDescription = (item) => {
 
 export default function ApiEndpoint({ data, pageContext: { menu, breadcrumb, breadcrumbBase, tableOfContents } }) {
     const {
-        components: { components },
+        apiComponents: { components: apiComponents },
+        allMdx,
     } = data
     const name = humanReadableName(data.data.name)
+    const nextURL = data.data.nextURL
     const paths = {}
+    const components = {
+        inlineCode: InlineCode,
+        pre: MdxCodeBlock,
+        MultiLanguage: MdxCodeBlock,
+        ...shortcodes,
+    }
     // Filter PUT as it's basically the same as PATCH
     const items = JSON.parse(data.data.items).filter((item) => item.httpVerb !== 'put')
     items.map((item) => {
@@ -494,7 +509,7 @@ export default function ApiEndpoint({ data, pageContext: { menu, breadcrumb, bre
         }
         paths[item.path][item.httpVerb] = item.operationSpec
     })
-    const objects = JSON.parse(components)
+    const objects = JSON.parse(apiComponents)
 
     const [exampleLanguage, setExampleLanguageState] = useState()
 
@@ -510,7 +525,7 @@ export default function ApiEndpoint({ data, pageContext: { menu, breadcrumb, bre
     }, [])
 
     return (
-        <Layout>
+        <Layout parent={docsMenu} activeInternalMenu={docsMenu.children.find(({ name }) => name === 'Product OS')}>
             <SEO title={`${name} API Reference - PostHog`} />
             <PostLayout
                 title={name}
@@ -537,6 +552,7 @@ export default function ApiEndpoint({ data, pageContext: { menu, breadcrumb, bre
 
                 {items.map((item) => {
                     item = item.operationSpec
+                    const mdxNode = allMdx.nodes?.find((node) => node.slug.split('/').pop() === item.operationId)
 
                     return (
                         <div className="mt-8" key={item.operationId}>
@@ -546,6 +562,13 @@ export default function ApiEndpoint({ data, pageContext: { menu, breadcrumb, bre
                             >
                                 <div className="space-y-6">
                                     <h2>{generateName(item)}</h2>
+                                    {mdxNode?.body && (
+                                        <div className="article-content">
+                                            <MDXProvider components={components}>
+                                                <MDXRenderer>{mdxNode.body}</MDXRenderer>
+                                            </MDXProvider>
+                                        </div>
+                                    )}
                                     <ReactMarkdown>
                                         {!item.description || item.description === items[0].operationSpec?.description
                                             ? pathDescription(item)
@@ -558,7 +581,7 @@ export default function ApiEndpoint({ data, pageContext: { menu, breadcrumb, bre
 
                                     <ResponseBody item={item} objects={objects} />
                                 </div>
-                                <div className="lg:sticky top-0">
+                                <div className="lg:sticky top-[108px]">
                                     <h4>Request</h4>
                                     <RequestExample
                                         name={name}
@@ -601,13 +624,25 @@ export default function ApiEndpoint({ data, pageContext: { menu, breadcrumb, bre
                         </div>
                     )
                 })}
+
+                {nextURL && (
+                    <CallToAction className="mt-8" to={nextURL}>
+                        Next page →
+                    </CallToAction>
+                )}
             </PostLayout>
         </Layout>
     )
 }
 
 export const query = graphql`
-    query ApiEndpoint($id: String!) {
+    query ApiEndpoint($id: String!, $regex: String!) {
+        allMdx(filter: { fields: { slug: { regex: $regex } } }) {
+            nodes {
+                slug
+                body
+            }
+        }
         data: apiEndpoint(id: { eq: $id }) {
             id
             internal {
@@ -619,8 +654,9 @@ export const query = graphql`
             items
             name
             url
+            nextURL
         }
-        components: apiComponents {
+        apiComponents: apiComponents {
             components
         }
     }

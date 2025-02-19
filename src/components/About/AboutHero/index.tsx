@@ -1,3 +1,4 @@
+import CloudinaryImage from 'components/CloudinaryImage'
 import React from 'react'
 import { StaticImage } from 'gatsby-plugin-image'
 import Lottie from 'react-lottie'
@@ -17,16 +18,35 @@ const LazyHog = ({ data, placeholder }: { data: any; placeholder: React.ReactEle
 }
 
 export const AboutHero = () => {
-    const [hog1Data, setHog1Data] = React.useState<any | null>(null)
-    const [hog2Data, setHog2Data] = React.useState<any | null>(null)
-    const [hog3Data, setHog3Data] = React.useState<any | null>(null)
-    const [hog4Data, setHog4Data] = React.useState<any | null>(null)
+    const [hogData, setHogData] = React.useState<(any | null)[]>([null, null, null, null])
 
     React.useEffect(() => {
-        import('../../../../static/lotties/about-hog-1.json').then((data) => setHog1Data(data.default))
-        import('../../../../static/lotties/about-hog-2.json').then((data) => setHog2Data(data.default))
-        import('../../../../static/lotties/about-hog-3.json').then((data) => setHog3Data(data.default))
-        import('../../../../static/lotties/about-hog-4.json').then((data) => setHog4Data(data.default))
+        const hogFiles = [
+            'about_hog_1_1731825e07.json',
+            'about_hog_2_099aab2326.json',
+            'about_hog_3_60946cdf0a.json',
+            'about_hog_4_d76ef8db00.json'
+        ];
+
+        const loadHogData = async () => {
+            const newHogData = await Promise.all(
+                hogFiles.map(async (file) => {
+                    try {
+                        const response = await fetch(`https://res.cloudinary.com/dmukukwp6/raw/upload/${file}`);
+                        if (!response.ok) {
+                            throw new Error(`HTTP error! status: ${response.status}`);
+                        }
+                        return await response.json();
+                    } catch (error) {
+                        console.error(`Failed to load ${file}:`, error);
+                        return null;
+                    }
+                })
+            );
+            setHogData(newHogData);
+        };
+
+        loadHogData();
     }, [])
 
     return (
@@ -39,7 +59,7 @@ export const AboutHero = () => {
                 <h3 className="text-center opacity-60 font-semibold">
                     <p className="pb-0 mb-0 text-xl">
                         PostHog started as open source product analytics. <br className="hidden md:block" />
-                        We've grown into a product &amp; data toolkit, used by 10,000+ customers.
+                        We've grown into a product &amp; data toolkit, used by 70,000+ teams.
                     </p>
                 </h3>
             </header>
@@ -47,17 +67,17 @@ export const AboutHero = () => {
                 <div className="flex justify-between items-center">
                     <div className="">
                         <LazyHog
-                            data={hog1Data}
+                            data={hogData[0]}
                             placeholder={
-                                <StaticImage src="../../../images/about-hog-1.svg" alt="Hog" placeholder="blurred" />
+                                <CloudinaryImage src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/images/about-hog-1.svg" alt="Hog" placeholder="blurred" />
                             }
                         />
                     </div>
                     <div className="">
                         <LazyHog
-                            data={hog2Data}
+                            data={hogData[1]}
                             placeholder={
-                                <StaticImage src="../../../images/about-hog-2.svg" alt="Hog" placeholder="blurred" />
+                                <CloudinaryImage src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/images/about-hog-2.svg" alt="Hog" placeholder="blurred" />
                             }
                         />
                     </div>
@@ -65,17 +85,17 @@ export const AboutHero = () => {
                 <div className="flex justify-between items-center">
                     <div className="">
                         <LazyHog
-                            data={hog3Data}
+                            data={hogData[2]}
                             placeholder={
-                                <StaticImage src="../../../images/about-hog-3.svg" alt="Hog" placeholder="blurred" />
+                                <CloudinaryImage src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/images/about-hog-3.svg" alt="Hog" placeholder="blurred" />
                             }
                         />
                     </div>
                     <div className="">
                         <LazyHog
-                            data={hog4Data}
+                            data={hogData[3]}
                             placeholder={
-                                <StaticImage src="../../../images/about-hog-4.svg" alt="Hog" placeholder="blurred" />
+                                <CloudinaryImage src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/images/about-hog-4.svg" alt="Hog" placeholder="blurred" />
                             }
                         />
                     </div>

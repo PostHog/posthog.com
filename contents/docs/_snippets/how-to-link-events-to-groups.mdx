@@ -1,7 +1,3 @@
-In our client-side SDKs, any event captured after calling `posthog.group` will automatically be linked to the group during that session.
-
-To link an event to a group in our server-side SDKs or API, set the key-value pair `<group type>: <group_id>` to the `groups` property of the event.
-
 Below are code examples of how to do it in our various SDKs. Notice that it is the exact same code as creating a group.
 
 import JSGroupEventCodeSnippet from "../\_snippets/capture-group-event-code.mdx"

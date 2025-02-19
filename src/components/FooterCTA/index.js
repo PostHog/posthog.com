@@ -1,3 +1,4 @@
+import CloudinaryImage from 'components/CloudinaryImage'
 import AnimateIntoView from 'components/AnimateIntoView'
 import { CallToAction } from 'components/CallToAction'
 import { SignupCTA } from 'components/SignupCTA'
@@ -13,7 +14,7 @@ export default function FooterCTA() {
                 <p className="w-">It takes less than 5 minutes.</p>
                 <div className="flex flex-col sm:flex-row sm:space-x-2 space-y-2 sm:space-y-0 items-center">
                     <SignupCTA className="w-full sm:w-48" size="md" />
-                    <CallToAction to="/book-a-demo" type="secondary" size="md">
+                    <CallToAction to="/demo" type="secondary" size="md">
                         Schedule a demo
                     </CallToAction>
                 </div>
@@ -22,7 +23,7 @@ export default function FooterCTA() {
                 <AnimateIntoView className="absolute -left-20">
                     <img src={blurb} />
                 </AnimateIntoView>
-                <StaticImage width={252} src="./images/surprised-hog.png" />
+                <CloudinaryImage width={252} src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/FooterCTA/images/surprised-hog.png" />
             </div>
         </div>
     )

@@ -74,7 +74,7 @@ npm i posthog-node
 
 We set up the PostHog client with our project API key, instance address, and personal API key. The first two you can get from your [project settings](https://app.posthog.com/project/settings). The personal API key can be created in your [account settings](https://app.posthog.com/me/settings).
 
- We add a `client.capture()` call to our `/big` route. The capture call includes the route distinct ID and an event name. We also include a `firstRouteCalled` user property to use for a filter later. 
+ We add a `client.capture()` call to our `/big` route. The capture call includes the route distinct ID and an event name. We also include a `firstRouteCalled` person property to use for a filter later. 
 
 ```node
 const express = require('express');
@@ -280,3 +280,5 @@ Since we included an ID in the event property, we can use it to break down the s
 - [Using the PostHog API to capture events](/tutorials/api-capture-events)
 - [How to evaluate and update feature flags with the PostHog API](/tutorials/api-feature-flags)
 - [How to set up Node.js (Express) analytics, feature flags, and more](/tutorials/node-express-analytics)
+
+<NewsletterForm />

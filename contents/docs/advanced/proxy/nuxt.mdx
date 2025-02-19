@@ -5,6 +5,9 @@ showTitle: true
 ---
 
 import RegionWarning from "../_snippets/region-warning.mdx"
+import ProxyWarning from "../_snippets/proxy-usage-warning.mdx"
+
+<ProxyWarning />
 
 <RegionWarning />
 
@@ -27,6 +30,6 @@ Then configure the PostHog client to send requests via your new proxy:
 ```js
 const posthogClient = posthog.init(runtimeConfig.public.posthogPublicKey, {
     api_host: 'https://your-host.com/ingest',
-    ui_host: 'https://us.posthog.com', // or https://eu.posthog.com if your PostHog is hosted in Europe
+    ui_host: '<ph_app_host>',
 });
 ```

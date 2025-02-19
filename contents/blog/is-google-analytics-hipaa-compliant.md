@@ -52,4 +52,4 @@ HIPAA fines operate on a sliding scale based on the severity of the breach and t
 
 Fines aren't limited to large businesses. In 2017, a [children's charity was fined](https://www.hhs.gov/hipaa/for-professionals/compliance-enforcement/agreements/ccdh/index.html) due to storing PHI on a third-party platform without a BAA.
 
-<ArrayCTA />
+<NewsletterForm />

@@ -1,3 +1,4 @@
+import CloudinaryImage from 'components/CloudinaryImage'
 import { StaticImage } from 'gatsby-plugin-image'
 import React from 'react'
 import { AppLibrary, EventPipelines, SQL } from 'components/ProductIcons'
@@ -37,15 +38,15 @@ export default function HogQL() {
         <section className="px-5 mb-10 md:mb-20 md:mb-0 max-w-6xl mx-auto">
             <h2 className="text-4xl lg:text-5xl mb-4">HogQL</h2>
             <p className="text-lg md:font-semibold opacity-75">
-                HogQL is our translation layer over ClickHouse SQL. Use HogQL expressions to use JOINs and subqueries,
+                PostHog provides complete SQL access to your data. Use SQL expressions to use JOINs and subqueries,
                 filter event lists, and write complex queries (that aren't supported by the PostHog UI) to analyze data
                 in any way you want.
             </p>
 
             <div className="md:grid grid-cols-2 gap-8 pt-8">
                 <div className="mb-8 md:mb-0">
-                    <StaticImage
-                        src="./images/mission-control-hog.png"
+                    <CloudinaryImage
+                        src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Home/images/mission-control-hog.png"
                         alt="A hog standing in front of mission control controls"
                         className="max-w-[494px] md:ml-8"
                     />
@@ -74,7 +75,7 @@ export default function HogQL() {
                         })}
                     </ul>
                     <CallToAction to="/blog/introducing-hogql" type="secondary" className="">
-                        Learn more about HogQL
+                        Learn more about SQL access
                     </CallToAction>
                 </div>
             </div>

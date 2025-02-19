@@ -1,8 +1,8 @@
 import { IconX } from '@posthog/icons'
 import React, { useCallback } from 'react'
-import { useDropzone } from 'react-dropzone'
+import { Accept, FileError, FileRejection, useDropzone } from 'react-dropzone'
 
-type Image = {
+export type Image = {
     file: File
     objectURL: string
 }
@@ -11,18 +11,26 @@ export default function ImageDrop({
     image,
     onDrop,
     onRemove,
+    className = '',
+    accept = { 'image/png': ['.png'], 'image/jpeg': ['.jpg', '.jpeg'] },
+    onDropRejected,
 }: {
     image?: Image
-    onDrop: (image: Image) => void
+    onDrop: (image: Image | undefined) => void
     onRemove: () => void
+    className?: string
+    accept?: Accept
+    onDropRejected?: (fileRejections: FileRejection[]) => void
 }): JSX.Element {
     const handleDrop = useCallback(
         async (acceptedFiles) => {
             const file = acceptedFiles[0]
-            onDrop({
-                file,
-                objectURL: URL.createObjectURL(file),
-            })
+            if (file) {
+                onDrop({
+                    file,
+                    objectURL: URL.createObjectURL(file),
+                })
+            }
         },
         [image]
     )
@@ -32,11 +40,12 @@ export default function ImageDrop({
         noClick: true,
         noKeyboard: true,
         multiple: false,
-        accept: { 'image/png': ['.png'], 'image/jpeg': ['.jpg', '.jpeg'] },
+        accept,
+        onDropRejected,
     })
 
     return (
-        <div className="relative h-[200px] w-full bg-border/20 group" {...getRootProps()}>
+        <div className={`relative h-[200px] w-full bg-border/20 group ${className}`} {...getRootProps()}>
             <input className="hidden" {...getInputProps()} />
             <button className="w-full h-full flex justify-center items-center" type="button" onClick={() => open()}>
                 {image ? (
@@ -62,11 +71,14 @@ export default function ImageDrop({
                 )}
             </button>
             {image && (
-                <div className="hidden group-hover:flex absolute h-full w-full inset-0 bg-border/70 justify-center items-center z-10">
+                <div className="hidden group-hover:flex absolute h-full w-full inset-0 bg-border/70 dark:bg-border-dark/70 justify-center items-center z-10">
                     <button
                         type="button"
                         className="p-2 border border-black/50 rounded-full bg-white"
-                        onClick={onRemove}
+                        onClick={(e) => {
+                            e.preventDefault()
+                            onRemove()
+                        }}
                     >
                         <IconX className="w-5 h-5 text-black/50" />
                     </button>

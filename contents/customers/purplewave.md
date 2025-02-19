@@ -6,7 +6,7 @@ logo: >-
 logoDark: >-
   https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/customers/purplewave/purplewave_logo_dark.png
 featuredImage: >-
-  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/customers/purplewave/purplewave.jpg
+  https://res.cloudinary.com/dmukukwp6/image/upload/purple_wave_014d7446a1.png
 industries:
   - ECommerce
 users:

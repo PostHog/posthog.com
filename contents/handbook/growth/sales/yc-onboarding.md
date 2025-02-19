@@ -6,19 +6,17 @@ showTitle: true
 
 We want to support other YC companies using PostHog because:
 
-- Many of these companies will quickly grow into [our ICP](/handbook/strategy/ideal-customer-persona) and we have an opportunity to get in early with them. 
+- Many of these companies will quickly grow into [our ICP](/handbook/who-we-are-building-for) and we have an opportunity to get in early with them. 
 - A lot of our most helpful and direct product feedback has generally come from other YC companies. 
 - It's nice to give back to the YC community. 
 
 ## The YC deal
 
-For startups in the W23 batch:
+For startups in the current batch:
 
 - Get $50k of credit for PostHog Cloud for 12 months
 - _All founders_ get a Timbuk2 backpack
-- Book into a free YC group setup session where we will…
-  - Build a dashboard for the batch with your product growth metrics
-  - Pair with you to ensure you pass calls correctly
+- A private YC Slack channel for priority support
 - Get the batphone - CEO on whatsapp/text
 
 If a founder refers us to another YC company, both founders get an additional $5k of credit for PostHog Cloud plus a copy of the PMF guide. 
@@ -49,7 +47,7 @@ There are three Approve buttons for each row in the table corresponding to the d
 * Stripe Customer ID (for Stripe credit)
 * Company Name (for Zendesk tagging)
 * Domain (for Zendesk tagging)
-* Email (for confirmation and to share Printfection giveaway links)
+* Email (for confirmation and to share Brilliant giveaway links)
 
 If the Stripe Customer ID is set to `unknown` it's because we couldn't automatically find a Stripe subscription for the email they used.  You need to populate it yourself or ask the customer to subscribe if they've not yet set up billing.  There's a handy *Subscribe Please* button in each table row which will email them asking to subscribe.
 
@@ -57,7 +55,7 @@ Once you click the correct Approve button the [Zap](https://zapier.com/editor/19
 
 1. Apply the correct credit amount to their Stripe customer object, and also update the plan expiry data metadata
 2. Set up their org on Zendesk and tag them as on the startup plan (meaning their tickets will be tagged with Normal priority)
-3. (Current batch only) Generate a Printfection giveaway link
+3. (Current batch only) Generate a Brilliant giveaway link
 4. Email the details of the plan and giveaway link to the customer (from Cameron)
 
 ### If we need to send giveaways outside of the Zapier automation
@@ -91,7 +89,7 @@ Please do _not_ send Airpods or Timbuk2 outside of the US and Canada - this crea
 </thead>
 <tbody>
 
-<!-- AirPods or Timbuk2 backpack via Printfection -->
+<!-- AirPods or Timbuk2 backpack via Brilliant -->
 <tr>
 <td valign="top">
 
@@ -108,10 +106,11 @@ US and Canada addresses only*
 
 To create a one-time giveaway link:
 
-- [Login to Printfection](https://app.printfection.com/account/secure_login.php)
-- Go to **Campaigns** -> **Giveaways** -> **The PostHog YC Program**.
-- Click the **Get New Link** button and copy the link.
-- Send the link to the YC contact and mark the link as sent in Printfection.
+- Login to Brilliant ([details](/handbook/company/merch-store)).
+- _These instructions need updating._
+- ~~Go to **Campaigns** -> **Giveaways** -> **The PostHog YC Program**.~~
+- ~~Click the **Get New Link** button and copy the link.~~
+- ~~Send the link to the YC contact and mark the link as sent in Printfection.~~
 
 </td>
 </tr>

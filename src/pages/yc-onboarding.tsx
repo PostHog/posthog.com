@@ -7,13 +7,30 @@ import { StaticImage } from 'gatsby-plugin-image'
 import { Check2 } from 'components/Icons'
 import { useValues } from 'kea'
 import { layoutLogic } from 'logic/layoutLogic'
+import SalesforceForm from 'components/SalesforceForm'
+
+enum YCBatch {
+    S25 = 'S25',
+    X25 = 'X25',
+    W25 = 'W25',
+    F24 = 'F24',
+    S24 = 'S24',
+    W24 = 'W24',
+    S23 = 'S23',
+    W23 = 'W23',
+    S22 = 'S22',
+    W22 = 'W22',
+    S21 = 'S21',
+    W21 = 'W21',
+    Earlier = 'Earlier',
+}
 
 const features = [
     '$50,000 in PostHog credit for 12 months<sup>1</sup>',
     'Exclusive PostHog merch for founders<sup>2</sup>',
     'Access to our YC founder Slack community',
-    'Onboarding session to get you started',
-    'Our CEO on WhatsApp or SMS',
+    'Monthly newsletter of advice for founders',
+    'Priority support (if needed)',
 ]
 
 export const YCOnboarding = () => {
@@ -33,7 +50,11 @@ export const YCOnboarding = () => {
                         <h1 className="text-3xl md:text-5xl mt-4 mb-2">You've found our secret Y Combinator offer!</h1>
                         <p className="m-0 text-lg">
                             We offer special benefits for teams in the current batch - things we'd have found useful
-                            during our W20 batch.
+                            during{' '}
+                            <Link to="/blog/yc-2-years-on" external>
+                                our W20 batch
+                            </Link>
+                            .{' '}
                         </p>
                     </div>
                 </section>
@@ -87,14 +108,84 @@ export const YCOnboarding = () => {
                                 in your product
                             </li>
                         </ol>
-                        <HubSpotForm
-                            customFields={{
-                                yc_reason: {
-                                    type: 'radioGroup',
-                                    cols: 1,
-                                },
+                        <SalesforceForm
+                            type="contact"
+                            source="YC"
+                            form={{
+                                fields: [
+                                    {
+                                        label: 'Email',
+                                        name: 'email',
+                                        type: 'string',
+                                        fieldType: 'email',
+                                        required: true,
+                                    },
+                                    {
+                                        label: 'First name',
+                                        name: 'first_name',
+                                        type: 'string',
+                                        required: true,
+                                    },
+                                    {
+                                        label: 'Last name',
+                                        name: 'last_name',
+                                        type: 'string',
+                                        required: true,
+                                    },
+                                    {
+                                        label: 'Company name',
+                                        type: 'string',
+                                        name: 'company',
+                                        required: true,
+                                    },
+                                    {
+                                        label: 'Company domain name',
+                                        type: 'string',
+                                        name: 'startup_domain',
+                                        required: true,
+                                    },
+                                    {
+                                        label: 'Which YC batch are you?',
+                                        type: 'enumeration',
+                                        name: 'yc_batch',
+                                        required: true,
+                                        options: [
+                                            { label: 'Select your batch', value: '' },
+                                            { label: 'Summer 2025 (S25)', value: YCBatch.S25 },
+                                            { label: 'Spring 2025 (X25)', value: YCBatch.X25 },
+                                            { label: 'Winter 2025 (W25)', value: YCBatch.W25 },
+                                            { label: 'Fall 2024 (F24)', value: YCBatch.F24 },
+                                            { label: 'Summer 2024 (S24)', value: YCBatch.S24 },
+                                            { label: 'Winter 2024 (W24)', value: YCBatch.W24 },
+                                            { label: 'Summer 2023 (S23)', value: YCBatch.S23 },
+                                            { label: 'Winter 2023 (W23)', value: YCBatch.W23 },
+                                            { label: 'Summer 2022 (S22)', value: YCBatch.S22 },
+                                            { label: 'Winter 2022 (W22)', value: YCBatch.W22 },
+                                            { label: 'Summer 2021 (S21)', value: YCBatch.S21 },
+                                            { label: 'Winter 2021 (W21)', value: YCBatch.W21 },
+                                            { label: 'Earlier batches', value: YCBatch.Earlier },
+                                        ],
+                                    },
+                                    {
+                                        label: 'Are you building LLM-powered features?',
+                                        name: 'is_building_with_llms',
+                                        type: 'enumeration',
+                                        required: true,
+                                        options: [
+                                            { label: 'Yes', value: 'true' },
+                                            { label: 'No', value: 'false' },
+                                        ],
+                                    },
+                                    {
+                                        label: 'Anything to add?',
+                                        type: 'string',
+                                        name: 'yc_notes',
+                                        required: true,
+                                    },
+                                ],
+                                name: 'YC onboarding',
+                                message: 'Thanks for applying! We will get back to you shortly.',
                             }}
-                            formID="1c421f4a-320a-4c2a-8879-e37ccfcdea87"
                         />
                     </div>
                 </section>

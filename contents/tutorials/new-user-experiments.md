@@ -27,7 +27,7 @@ In our example project, we have a Dropbox-like product that allows users to uplo
 
 We’ve already set up PostHog ([on a paid plan](/pricing), to get access to experiments), and have custom events set up for both `signed_up` and `uploaded_file`. Both have a significant amount of events coming in. 
 
-We’ll also need a `joined_at` user property. Autocapture does not capture this detail so we’ll need to set it up somewhere in our code. We can use `$set_once` in the event capture for `signed_up` to make this happen (find more details on setting [user properties here](/docs/integrate/client/js#set_once))
+We’ll also need a `joined_at` person property. Autocapture does not capture this detail so we’ll need to set it up somewhere in our code. Make sure you are capturing identified events and then use `$set_once` in the event capture for `signed_up` to make this happen (find more details on setting [person properties here](/docs/integrate/client/js#set_once)).
 
 This is all we need to start setting up our experiment.
 
@@ -55,7 +55,7 @@ Finally, we’ll set the minimum acceptable improvement to 20%. This is a lot, b
 
 We’ll add our new experiment feature flags to our codebase on a page with the file upload many new users see. We’ll need to create the two changes and add them behind feature flags. 
 
-It’s [best practice](/product-engineers/feature-flag-best-practices) to ensure we fall back on the standard component. The standard component is the "control" (default) for the experiment. We want to only make changes if the feature flags are active and working.
+It’s [best practice](/docs/feature-flags/best-practices) to ensure we fall back on the standard component. The standard component is the "control" (default) for the experiment. We want to only make changes if the feature flags are active and working.
 
 Here’s what a standard React component looks like before implementing feature flags:
 
@@ -194,3 +194,5 @@ Once results start to show up in PostHog, we can say we’ve successfully set up
 If you’re looking to learn more about feature flags, check out our [product manual](/manual/experimentation) to learn all about their features.
 
 You can also learn about how to run Experiments without feature flags in [this tutorial](/docs/experiments/running-experiments-without-feature-flags).
+
+<NewsletterForm />

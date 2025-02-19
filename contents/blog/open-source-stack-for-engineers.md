@@ -162,4 +162,4 @@ ClickHouse is a database system which is so quick that it’s an order of magnit
 - Columnar database structure; easily scales
 - Deployed with a single binary; no need for multiple layers
 
-<ArrayCTA />
+<NewsletterForm />

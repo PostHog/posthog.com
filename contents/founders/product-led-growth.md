@@ -19,7 +19,7 @@ You will need sales, but do you need a sales team to achieve revenue?
 
 Let's say you are the founder of a new tech startup. 
 
-A few months back, you and a couple of friends (all developers) built an amazing tool and have now received Seed funding. 
+A few months back, you and a couple of friends (all developers) built an amazing tool and have now received seed funding. 
 
 As a result, you're under some pressure to grow. You took a few million from some VCs here and there, and they want to see some results.
 
@@ -29,7 +29,7 @@ Before, you were just a group of friends working your ass off to build an amazin
 
 You call in a founders meeting to discuss next steps, and a conclusion is reached: you can't spend all your budget on engineers, which is what you wanted to do. 
 
-Instead, you need to hire some Sales people. Or some Marketing people. Or both. Whoever can get you some users that pay for your product. Or do you? Could you invest in engineering instead to drive more revenue, and perhaps building a better company along the way?
+Instead, you need to hire some Sales people. Or some Marketing people. Or both. Whoever can get you some users that pay for your product and create a [sales strategy for your startup](/founders/startup-sales-strategy). Or do you? Could you invest in engineering instead to drive more revenue, and perhaps building a better company along the way? 
 
 ## Getting People to Pay You
 
@@ -200,7 +200,4 @@ And that's what we're doing at PostHog.
 
 Like what we're building? We'd appreciate a star on our [GitHub repo](https://github.com/PostHog/posthog).
 
-> PostHog is an open source analytics platform you can host yourself. We help you build better products faster, without user data ever leaving your infrastructure.
-
-<ArrayCTA />
-
+<NewsletterForm />

@@ -15,6 +15,7 @@ import { useCartStore } from './store'
 import { ShopifyProduct } from './types'
 import { getProductMetafield } from './utils'
 import SEO from 'components/seo'
+import { IconSpinner } from '@posthog/icons'
 
 type ProductPageProps = {
     className?: string
@@ -48,7 +49,7 @@ export default function Product(props: ProductPageProps): React.ReactElement {
 
     /**
      * The product.variant option from props is a different shape from the
-     * slectedVariant (which comes directly from the Storefront API). We
+     * selectedVariant (which comes directly from the Storefront API). We
      * only want the ID from selectedVariant and will add the corresponding
      * variant in product.variants.
      */
@@ -120,14 +121,20 @@ export default function Product(props: ProductPageProps): React.ReactElement {
                         <Quantity value={quantity} onChange={setQuantity} />
 
                         <CallToAction
-                            disabled={outOfStock}
+                            disabled={loading || outOfStock}
                             onClick={handleAddToCart}
                             type="primary"
                             className="relative w-full"
                         >
                             <>
                                 <span className={cn('', isAdding && 'invisible')}>
-                                    {outOfStock ? 'Out of Stock' : 'Add to Cart'}
+                                    {loading ? (
+                                        <IconSpinner className="w-5 mx-auto animate-spin" />
+                                    ) : outOfStock ? (
+                                        'Out of Stock'
+                                    ) : (
+                                        'Add to Cart'
+                                    )}
                                 </span>
                                 <LoaderIcon
                                     className={cn(
@@ -161,15 +168,14 @@ export const query = graphql`
             handle
             shopifyId
             description
+            descriptionHtml
             media {
                 mediaContentType
                 preview {
                     image {
-                        localFile {
-                            childImageSharp {
-                                gatsbyImageData
-                            }
-                        }
+                        width
+                        height
+                        originalSrc
                     }
                 }
             }
@@ -189,11 +195,9 @@ export const query = graphql`
             featuredMedia {
                 preview {
                     image {
-                        localFile {
-                            childImageSharp {
-                                gatsbyImageData
-                            }
-                        }
+                        width
+                        height
+                        originalSrc
                     }
                 }
             }
@@ -215,11 +219,9 @@ export const query = graphql`
                     featuredMedia {
                         preview {
                             image {
-                                localFile {
-                                    childImageSharp {
-                                        gatsbyImageData
-                                    }
-                                }
+                                width
+                                height
+                                originalSrc
                             }
                         }
                     }
@@ -227,11 +229,9 @@ export const query = graphql`
                 media {
                     preview {
                         image {
-                            localFile {
-                                childImageSharp {
-                                    gatsbyImageData
-                                }
-                            }
+                            width
+                            height
+                            originalSrc
                         }
                     }
                 }

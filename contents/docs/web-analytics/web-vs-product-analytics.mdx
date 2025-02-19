@@ -1,0 +1,241 @@
+---
+title: What is the difference between web analytics and product analytics?
+sidebar: Docs
+showTitle: true
+---
+
+import { ComparisonTable } from 'components/ComparisonTable'
+import { ComparisonRow } from 'components/ComparisonTable/row'
+
+In a nutshell:
+
+- [Web analytics](/web-analytics) is good for tracking and monitoring high-level website metrics like page views, bounce rate, and the top sources of traffic. It's a pre-defined dashboard, so it's easy to quickly dip into and find what you need.
+
+- [Product analytics](/product-analytics) is good for diving deep into how specific users, or groups of users, behave. There are [dashboard templates](/templates) to help you get started, but you can build custom insights and dashboards to your precise needs, and use [notebooks](/docs/notebooks) for adhoc analysis.
+
+Here's a quick comparison:
+
+<ComparisonTable column1="Web analytics" column2="Product analytics">
+  <ComparisonRow column1={"One, pre-built"} column2={"Unlimited, customizable"} feature="Dashboards" />
+  <ComparisonRow column1={false} column2={true} feature="Custom insights" />
+  <ComparisonRow column1={"Pageview, pageleave, conversions"} column2={"Any, custom"} feature="Events" />
+  <ComparisonRow column1={"Limited, pre-defined"} column2={"Any, custom"} feature="Properties" />
+  <ComparisonRow column1={"Small teams, marketers"} column2={"Engineering, product, data teams"} feature="Built for" />
+  <ComparisonRow column1={"At-a-glance view of website traffic"} column2={"Analysis of product usage and user behavior"} feature="Use case" />
+</ComparisonTable>
+
+## When should you use web analytics?
+
+Web analytics gives you a single, pre-built [dashboard](https://us.posthog.com/web) for a high-level overview of your site. It's about collecting data in the aggregate, as opposed to tracking specific interactions from specific users.
+
+It can help you figure out which pages and products are most popular and resonate the most with people.
+
+<ProductScreenshot
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/web_analytics_top_light_mode_2024_10_be53cf5325.png"
+  imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/web_analytics_top_dark_mode_2024_10_6aa6dc9aeb.png"
+  alt="Web analytics dashboard"
+  classes="rounded"
+/>
+
+You can use web analytics to find out:
+
+<details>
+  <summary>How many visitors were there in recent days, weeks, and months?</summary>
+
+  Use the [web analytics dashboard](/docs/web-analytics/dashboard) to see the number of visitors currently online. Or filter by a specific time period like the last 14 days. You can also filter by unique visitors, pageviews, and sessions.
+
+  <ProductScreenshot
+    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/web_analytics_top_light_mode_2024_10_be53cf5325.png"
+    imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/web_analytics_top_dark_mode_2024_10_6aa6dc9aeb.png"
+    alt="Web analytics dashboard"
+    classes="rounded"
+  />
+</details>
+
+<details>
+  <summary>Which pages are people visiting?</summary>
+
+  Use the [paths](/docs/web-analytics/dashboard#paths) section on the dashboard to see which paths people are navigating to. You can also filter by the entry path, end path, and outbound clicks.
+
+  <ProductScreenshot
+    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/v1711580005/posthog.com/contents/images/docs/web-analytics/dashboard/paths-light.png"
+    imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/v1711580004/posthog.com/contents/images/docs/web-analytics/dashboard/paths-dark.png"
+    alt="Web analytics dashboard"
+    classes="rounded"
+  />
+</details>
+
+<details>
+  <summary>What is the bounce rate for pages on the site?</summary>
+
+  You can see the bounce rate percentage in the [paths](/docs/web-analytics/dashboard#paths) section in the web analytics dashboard.
+
+  <ProductScreenshot
+    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/v1711580005/posthog.com/contents/images/docs/web-analytics/dashboard/paths-light.png"
+    imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/v1711580004/posthog.com/contents/images/docs/web-analytics/dashboard/paths-dark.png"
+    alt="Web analytics dashboard"
+    classes="rounded"
+  />
+</details>
+
+<details>
+  <summary>What are the top sources of traffic?</summary>
+
+  List the top [referrers, channels, and UTM sources](/docs/web-analytics/dashboard#referrers-channels-utms) for the traffic to your website.
+
+  <ProductScreenshot
+    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/v1711580002/posthog.com/contents/images/docs/web-analytics/dashboard/referrers-light.png"
+    imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/v1711580002/posthog.com/contents/images/docs/web-analytics/dashboard/referrers-dark.png"
+    alt="Web analytics referrers"
+    classes="rounded"
+  />
+</details>
+
+<details>
+  <summary>Where are visitors located geographically?</summary>
+
+  Use the [world map](/docs/web-analytics/dashboard#world-map) to visualize where visitors are located. You can also filter by the top countries, regions, and cities.
+
+  <ProductScreenshot
+    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/v1711579999/posthog.com/contents/images/docs/web-analytics/dashboard/regions-light.png"
+    imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/v1711580000/posthog.com/contents/images/docs/web-analytics/dashboard/regions-dark.png"
+    alt="Web analytics regions"
+    classes="rounded"
+  />
+</details>
+
+<details>
+  <summary>Which device types, browsers, and operating systems are visitors using?</summary>
+
+  <ProductScreenshot
+    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/device_type_light_ce42d4cd93.png"
+    imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/device_type_dark_5abbf3a671.png"
+    alt="Web analytics regions"
+    classes="rounded"
+  />
+</details>
+
+<details>
+  <summary>How long do sessions last on average?</summary>
+
+  You can use the web analytics dashboard to see how long sessions last on average over a given period of time, and also see how that duration is increasing or decreasing from the previous period.
+
+  <ProductScreenshot
+    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/web_analytics_top_light_mode_2024_10_be53cf5325.png"
+    imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/web_analytics_top_dark_mode_2024_10_6aa6dc9aeb.png"
+    alt="Web analytics dashboard"
+    classes="rounded"
+  />
+</details>
+
+<details>
+  <summary>How many people are converting?</summary>
+
+  Use the **Add conversion goal** button to view conversion rates for particular events or groups of events.
+
+  <ProductScreenshot
+    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/conversion_rate_light_7e2eee73a2.png"
+    imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/conversion_rate_dark_afc4fee674.png"
+    alt="Conversion rate example"
+    classes="rounded"
+  />
+</details>
+
+<br />
+
+For more on web analytics, check out our [getting started](/docs/web-analytics/getting-started) guide.
+
+## When should you use product analytics?
+
+When you want to dive deeper into user behavior in your app and how they are interacting with features. It gives you insights into metrics such as feature adoption rate, user retention, and churn.
+
+<ProductScreenshot
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/user-guides/funnels/funnel-steps-breakdown-light-mode.png"
+  imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/user-guides/funnels/funnel-steps-breakdown-dark-mode.png"
+  classes="rounded"
+  alt="Product analytics example"
+/>
+
+You can use product analytics to:
+
+<details>
+  <summary>Build custom dashboards</summary>
+
+  You can create custom [dashboards](/docs/product-analytics/dashboards) to track all your most important product and performance metrics.
+
+  <ProductScreenshot
+    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/dashboard_light_61b3bab3b6.png"
+    imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/dashboard_dark_5f2002f750.png"
+    classes="rounded"
+    alt="Dashboard example"
+  />
+</details>
+
+<details>
+  <summary>Analyze trends and patterns in usage data</summary>
+
+  Use [trends](/docs/product-analytics/trends/overview) to plot data and find patterns.
+
+  <ProductScreenshot
+    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/docs/product-analytics/trends/active-viewers-trend-light.png"
+    imageDark="https://res.cloudinary.com/dmukukwp6/image/upload//posthog.com/contents/docs/product-analytics/trends/active-viewers-dark.png"
+    classes="rounded"
+    alt="Trend insight example"
+  />
+</details>
+
+<details>
+  <summary>Find where people are getting stuck during onboarding with funnels</summary>
+
+  Use [funnels](/docs/product-analytics/funnels) to understand where people are getting stuck or dropping off in your flow.
+
+  <ProductScreenshot
+    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/user-guides/funnels/identifying-drop-offs-light-mode.png"
+    imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/user-guides/funnels/identifying-drop-offs-dark-mode.png"
+    classes="rounded"
+    alt="Funnel insight example"
+  />
+</details>
+
+<details>
+  <summary>Follow users along their journey through your product with user paths</summary>
+
+  Use [user paths](/docs/product-analytics/paths) to find which parts of your product people are actually using, where users are getting confused or stuck, etc.
+
+  <ProductScreenshot
+    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/docs/user-guides/paths/example-light-mode.png"
+    imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/docs/user-guides/paths/example-dark-mode.png"
+    classes="rounded"
+    alt= "User path insight example"
+  />
+</details>
+
+<details>
+  <summary>Look for particularly engaging features with stickiness</summary>
+
+  Use [stickiness](/docs/product-analytics/stickiness) to find engaging features by seeing how many times users perform an event within a specific time period.
+
+  <ProductScreenshot
+    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/v1716289464/posthog.com/contents/stickiness-light.png"
+    imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/v1716289465/posthog.com/contents/stickiness-dark.png"
+    alt="Stickiness insight example"
+    classes="rounded"
+  />
+</details>
+
+<details>
+  <summary>Visualize user cohorts and retention metrics</summary>
+
+  Use [retention](/docs/product-analytics/retention) insights to find how many users sign up and come back to use your product after trying it.
+
+  <ProductScreenshot
+    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/retention_light_805120c74c.png"
+    imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/retention_dark_c319006162.png"
+    alt="Retention insight example"
+    classes="rounded"
+  />
+</details>
+
+<br />
+
+Check out the [product analytics docs](/docs/product-analytics) for more examples and guides.

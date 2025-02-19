@@ -5,7 +5,7 @@ showTitle: true
 ---
 
 > ❗️ This guide is intended only for development of PostHog itself. 
-> If you're looking for documentation on writing HogQL queries, go to [HogQL](/manual/hogql).
+> If you're looking for documentation on writing HogQL (or SQL) queries, go to the [SQL](/docs/sql) docs.
 
 HogQL is our layer on top of ClickHouse SQL which provides nice features such as:
 
@@ -117,7 +117,7 @@ class EventsTable(Table):
     person_id: FieldTraverser = FieldTraverser(chain=["pdi", "person_id"])
 ```
 
-If you access `pdi.person.properties.$browser`, we make a join via `person_distinct_ids` and `persons` (these are HogQL table names, not ClickHouse names). We do a bunch of `argmax` magic in the joins, and inline all accessed properties within the subquery for performance. For the user, it looks just like simple property access.
+If you access `pdi.person.properties.$browser`, we make a join via `persons` (this is a HogQL table name, not ClickHouse name). We do a bunch of `argmax` magic in the join, and inline all accessed properties within the subquery for performance. For the user, it looks just like simple property access.
 
 If you access `poe.properties.$browser`, we will actually access the field `person_properties` on the events table.
 

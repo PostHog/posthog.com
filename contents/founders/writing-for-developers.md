@@ -117,3 +117,5 @@ Being concise means giving a lot of information clearly and in a few words. It d
 ## Start
 
 Whatever you do, make sure you actually get something out. You can't improve something that doesn't exist.
+
+<NewsletterForm />

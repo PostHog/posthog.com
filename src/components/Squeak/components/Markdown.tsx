@@ -6,14 +6,25 @@ import { ZoomImage } from 'components/ZoomImage'
 import { TransformImage } from 'react-markdown/lib/ast-to-react'
 import remarkGfm from 'remark-gfm'
 
+const replaceMentions = (body: string) => {
+    return body.replace(/@([a-zA-Z0-9-]+\/[0-9]+|max)/g, (match, username) => {
+        if (username === 'max') {
+            return `[${match}](/community/profiles/${process.env.GATSBY_AI_PROFILE_ID})`
+        }
+        return `[${match}](/community/profiles/${username.split('/')[1]})`
+    })
+}
+
 export const Markdown = ({
     children,
     transformImageUri,
     allowedElements,
+    regularText,
 }: {
     children: string
     transformImageUri?: TransformImage | undefined
     allowedElements?: string[]
+    regularText?: 'false'
 }) => {
     return (
         <ReactMarkdown
@@ -21,7 +32,8 @@ export const Markdown = ({
             remarkPlugins={[remarkGfm]}
             transformImageUri={transformImageUri}
             rehypePlugins={[rehypeSanitize]}
-            className="question-content flex-1 !text-sm overflow-hidden text-ellipsis community-post-markdown mr-1 !pb-0 text-primary/75 dark:text-primary-dark/75 font-normal"
+            className={`flex-1 !text-sm overflow-hidden text-ellipsis !pb-0 mr-1 text-primary/75 dark:text-primary-dark/75 font-normal [&_p:last-child]:mb-0 ${regularText ? '' : 'question-content community-post-markdown'
+                }`}
             components={{
                 pre: ({ children }) => {
                     return (
@@ -47,7 +59,7 @@ export const Markdown = ({
                     )
                 },
                 code: ({ node, ...props }) => {
-                    return <code {...props} className="break-all" />
+                    return <code {...props} className="break-all inline-block" />
                 },
                 a: ({ node, ...props }) => {
                     return <a rel="nofollow" {...props} />
@@ -55,7 +67,7 @@ export const Markdown = ({
                 img: ZoomImage,
             }}
         >
-            {children}
+            {replaceMentions(children)}
         </ReactMarkdown>
     )
 }

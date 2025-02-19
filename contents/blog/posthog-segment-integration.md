@@ -39,7 +39,7 @@ Are you convinced yet? Ready to start your journey with a self-hosted open sourc
 
 If so, check out our [new Docs page about integrating PostHog with Segment](/docs/libraries/segment).
 
-_Enjoyed this? Subscribe to our [newsletter](https://newsletter.posthog.com/subscribe) to hear more from us twice a month!_
+<NewsletterForm />
 
 
 

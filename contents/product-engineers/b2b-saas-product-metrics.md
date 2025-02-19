@@ -75,8 +75,6 @@ Your adoption rate is `(new active users / signups) x 100`, so 40 new active use
 
 **Is it useful?** We'd argue not. There are better, more specific measures for product health, like [new user activation](#new-user-activation).
 
-<NewsletterForm />
-
 ### Customer retention rate
 
 **What is it?** Customer retention rate is a classic metric that calculates the proportion of customers you retain from one period to the next. 
@@ -131,7 +129,7 @@ The formula is `(new users who completed key action / total number of new users)
 
 You want new users to find the value in your product as quickly as possible, and this is the perfect metric to measure that. 
 
-Improving activation is widely regarded as one of the best ways to improve monthly recurring revenue (MRR).
+[Improving activation](/product-engineers/activation-metrics) is widely regarded as one of the best ways to improve monthly recurring revenue (MRR).
 
 ### Productivity
 
@@ -201,8 +199,6 @@ What makes this a good product metric for us? Let's break it down:
 
 Not all useful product metrics follow this trend – active users is a notable exception – but it's a good acid test to apply to any metric you're considering.
 
-<NewsletterForm />
-
 ### Recommended B2B product metrics
 
 To help get you started, we've chosen five metrics that are useful for any B2B product. You will want to augment and adapt these for your specific needs, but 
@@ -232,3 +228,5 @@ You may also find the following guides useful:
 - [Finding your north star metric](/blog/north-star-metrics): All SaaS products can benefit from a north star metric and this guide will help you find one
 
 - [How to measure product-market fit](/blog/measure-product-market-fit): Product-market fit isn't just an ephemeral gut feeling. You can measure it, and it moves as your customer's needs change. 
+
+<NewsletterForm />

@@ -209,7 +209,7 @@ export interface TrackedCTAPropsType extends CTAPropsType {
     }
 }
 
-export const TrackedCTA = ({ event: { name: eventName, ...event }, ...props }: TrackedCTAPropsType): JSX.Element => {
+export const TrackedCTA = ({ width, event: { name: eventName, ...event }, ...props }: TrackedCTAPropsType): JSX.Element => {
     const posthog = usePostHog()
 
     return (
@@ -244,7 +244,7 @@ export const CallToAction = ({
 
     const posthog = usePostHog()
     const wrappedOnClick = () => {
-        posthog?.createPersonProfile()
+        posthog?.createPersonProfile?.()
         onClick && onClick()
     }
     return (
@@ -256,6 +256,7 @@ export const CallToAction = ({
             onClick={wrappedOnClick}
             to={url}
             event={event}
+            width={width}
             className={`${container(type, size, width)} ${className}`}
         >
             <span

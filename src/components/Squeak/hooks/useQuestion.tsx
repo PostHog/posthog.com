@@ -11,6 +11,7 @@ type UseQuestionOptions = {
 const query = (id: string | number, isModerator: boolean) =>
     qs.stringify(
         {
+            publicationState: isModerator ? 'preview' : 'live',
             filters: {
                 ...(typeof id === 'string'
                     ? {
@@ -25,11 +26,24 @@ const query = (id: string | number, isModerator: boolean) =>
                       }),
             },
             populate: {
+                edits: {
+                    sort: ['date:desc'],
+                    populate: {
+                        by: {
+                            fields: ['firstName', 'lastName', 'color', 'gravatarURL'],
+                            populate: {
+                                avatar: {
+                                    fields: ['url'],
+                                },
+                            },
+                        },
+                    },
+                },
                 resolvedBy: {
                     select: ['id'],
                 },
                 profile: {
-                    select: ['id', 'firstName', 'lastName'],
+                    select: ['id', 'firstName', 'lastName', 'color'],
                     populate: {
                         avatar: {
                             select: ['id', 'url'],
@@ -44,11 +58,23 @@ const query = (id: string | number, isModerator: boolean) =>
                     },
                 },
                 replies: {
-                    publicationState: 'preview',
                     sort: ['createdAt:asc'],
                     populate: {
+                        edits: {
+                            sort: ['date:desc'],
+                            populate: {
+                                by: {
+                                    fields: ['firstName', 'lastName', 'color', 'gravatarURL'],
+                                    populate: {
+                                        avatar: {
+                                            fields: ['url'],
+                                        },
+                                    },
+                                },
+                            },
+                        },
                         profile: {
-                            fields: ['id', 'firstName', 'lastName', 'gravatarURL', 'pronouns'],
+                            fields: ['id', 'firstName', 'lastName', 'gravatarURL', 'pronouns', 'color', 'startDate'],
                             populate: {
                                 avatar: {
                                     fields: ['id', 'url'],
@@ -71,10 +97,13 @@ const query = (id: string | number, isModerator: boolean) =>
     )
 
 export const useQuestion = (id: number | string, options?: UseQuestionOptions) => {
-    const { getJwt, fetchUser, user, isModerator } = useUser()
+    const { getJwt, fetchUser, user, isModerator, isValidating } = useUser()
     const posthog = usePostHog()
 
-    const key = options?.data ? null : `${process.env.GATSBY_SQUEAK_API_HOST}/api/questions?${query(id, isModerator)}`
+    const key =
+        isValidating || options?.data
+            ? null
+            : `${process.env.GATSBY_SQUEAK_API_HOST}/api/questions?${query(id, isModerator)}`
 
     const {
         data: question,
@@ -117,7 +146,7 @@ export const useQuestion = (id: number | string, options?: UseQuestionOptions) =
 
             const token = await getJwt()
 
-            await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/replies`, {
+            const data = await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/replies`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -139,7 +168,7 @@ export const useQuestion = (id: number | string, options?: UseQuestionOptions) =
                         },
                     },
                 }),
-            })
+            }).then((res) => res.json())
 
             posthog?.capture('squeak reply', {
                 questionId: questionID,
@@ -148,6 +177,8 @@ export const useQuestion = (id: number | string, options?: UseQuestionOptions) =
             await fetchUser()
 
             await mutate()
+
+            return data
         } catch (error) {
             posthog?.capture('squeak error', {
                 source: 'useQuestion.reply',
@@ -390,7 +421,7 @@ export const useQuestion = (id: number | string, options?: UseQuestionOptions) =
         question: questionData,
         reply,
         error,
-        isLoading: isLoading && !questionData,
+        isLoading: isValidating || (isLoading && !questionData),
         isError: error,
         handlePublishReply,
         handleResolve,

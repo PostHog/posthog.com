@@ -25,7 +25,7 @@ In this tutorial we’ll explore how to achieve this with PostHog’s Zapier plu
 
 First, we need to create the action which we want to use as a trigger in PostHog.
 
-In this example we’ll use the [toolbar](/docs/user-guides/toolbar) to create a simple action based on a form submission on [PostHog’s Contact Sales form](https://posthog.com/contact-sales), but you can also check [the Actions docs](/docs/user-guides/actions) for information about creating custom actions, or understanding how actions differ from events.
+In this example we’ll use the [toolbar](/docs/user-guides/toolbar) to create a simple action based on a form submission on [PostHog’s Contact Sales form](/talk-to-a-human), but you can also check [the Actions docs](/docs/user-guides/actions) for information about creating custom actions, or understanding how actions differ from events.
 
 ![Create action](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/discord/discord-create-action.png)
 
@@ -54,3 +54,5 @@ Using Zapier’s workflow builder it’s very easy to create the workflow you wa
 As an output, we want to use Discord’s ‘Send Channel Message’ behavior as a result and specify the channel where we want to send a message — in this case a ‘Sales-Contacts’ channel.
 
 Once the workflow is created, we’re done. Now, whenever a user submits the form on PostHog’s Contact Sales page it will trigger the ‘_Submitted Contact Sales Form_’  action and send a notification to the ‘Sales-Contacts’ channel in our Discord chat. We can also track the action in PostHog using product analytics tools such as [funnels](/docs/user-guides/funnels), [trends](/docs/user-guides/trends) and [paths](/docs/user-guides/paths) to understand more about user behavior!
+
+<NewsletterForm />

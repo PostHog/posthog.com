@@ -32,15 +32,6 @@ export const query = graphql`
                 frontmatter {
                     title
                     tags
-                    authors: authorData {
-                        id
-                        image {
-                            childImageSharp {
-                                gatsbyImageData(width: 36, height: 36)
-                            }
-                        }
-                        name
-                    }
                     featuredImage {
                         childImageSharp {
                             gatsbyImageData(width: 514, height: 289)

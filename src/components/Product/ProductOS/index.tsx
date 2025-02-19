@@ -1,3 +1,4 @@
+import CloudinaryImage from 'components/CloudinaryImage'
 import React from 'react'
 import Link from 'components/Link'
 import { StaticImage } from 'gatsby-plugin-image'
@@ -48,6 +49,7 @@ import Tooltip from 'components/Tooltip'
 import { TextCard } from 'components/Products/TextCard'
 import { SEO } from 'components/seo'
 import { useLayoutData } from 'components/Layout/hooks'
+import { PRODUCT_COUNT } from '../../../constants'
 
 const ProductIcon = ({ name, url, color, icon }) => {
     return (
@@ -102,7 +104,7 @@ const subfeatures = [
 ]
 
 export const ProductOS = () => {
-    const { contra, hasura, netdata, pry } = useStaticQuery(graphql`
+    const { researchgate, elevenlabs } = useStaticQuery(graphql`
         fragment ProductCustomerFragment on Mdx {
             fields {
                 slug
@@ -117,16 +119,10 @@ export const ProductOS = () => {
             }
         }
         {
-            contra: mdx(slug: { eq: "customers/contra" }) {
+            researchgate: mdx(slug: { eq: "customers/researchgate" }) {
                 ...ProductCustomerFragment
             }
-            hasura: mdx(slug: { eq: "customers/hasura" }) {
-                ...ProductCustomerFragment
-            }
-            netdata: mdx(slug: { eq: "customers/netdata" }) {
-                ...ProductCustomerFragment
-            }
-            pry: mdx(slug: { eq: "customers/pry" }) {
+            elevenlabs: mdx(slug: { eq: "customers/elevenlabs" }) {
                 ...ProductCustomerFragment
             }
         }
@@ -149,35 +145,12 @@ export const ProductOS = () => {
                 />
 
                 <div className="text-center mb-12">
-                    <StaticImage src="./images/product-os.png" alt="" className="w-full max-w-[423px]" />
+                    <CloudinaryImage
+                        src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Product/ProductOS/images/product-os.png"
+                        alt=""
+                        className="w-full max-w-[423px]"
+                    />
                 </div>
-
-                {/*
-        <section>
-          <ul className="list-none p-0 grid md:grid-cols-4 gap-4 mb-10 md:mb-20">
-            <CustomerCard
-              outcome="improved conversion rates by 10-20%"
-              quote="We wouldn't have noticed that needed fixing without PostHog's session replays."
-              customer={hasura}
-            />
-            <CustomerCard
-              outcome="increased registrations by 30%"
-              quote="From [funnels], we could easily jump to session replays to see the drop-off point."
-              customer={contra}
-            />
-            <CustomerCard
-              outcome="reduced back-and-forth in community support"
-              quote="Session replay is... an essential tool for Netdata."
-              customer={netdata}
-            />
-            <CustomerCard
-              outcome="improved registrations by 20-30%"
-              quote="Even Pry's support team... uses replays to understand how... bug occurred."
-              customer={pry}
-            />
-          </ul>
-        </section>
-        */}
             </div>
 
             {/* <SmoothScroll /> */}
@@ -193,7 +166,7 @@ export const ProductOS = () => {
                     </ul>
                     */}
 
-                    <div className="mb-16">
+                    <div className="mb-4">
                         <h2 className="text-4xl text-center mb-8">
                             A single <span className="text-red dark:text-yellow">home</span> for all product usage data
                         </h2>
@@ -204,6 +177,22 @@ export const ProductOS = () => {
                         </ul>
                     </div>
 
+                    <section id="customers" className="-mt-36 pt-36">
+                        <h3 className="text-3xl text-center my-4 md:my-8">Customer stories</h3>
+                        <ul className="list-none p-0 grid md:grid-cols-2 gap-4 mb-10 md:mb-20">
+                            <CustomerCard
+                                outcome="tracks over 25M users accessing more than 160M publications"
+                                quote="We have 100s of millions of pageviews, but it still only takes 10 minutes to set up really detailed insights and funnels"
+                                customer={researchgate}
+                            />
+                            <CustomerCard
+                                outcome="uses every single tool PostHog has to launch new features"
+                                quote="We used to have dashboards in Looker, GA4, and lots of other tools. Now, it's just PostHog and Stripe."
+                                customer={elevenlabs}
+                            />
+                        </ul>
+                    </section>
+
                     <div className="flex flex-col-reverse items-center md:flex-row gap-8 mb-20">
                         <div className="flex-1">
                             <h2 className="text-4xl">
@@ -211,19 +200,24 @@ export const ProductOS = () => {
                                 data
                             </h2>
                             <p>
-                                We created <Link to="/docs/hogql">HogQL</Link>, a translation layer over ClickHouse SQL.
-                                (You can use most ClickHouse features in HogQL, including JOINs and subqueries.)
+                                We created <Link to="/docs/sql">SQL access</Link>, a translation layer over ClickHouse
+                                SQL. (You can use most ClickHouse features in our SQL insights, including JOINs and
+                                subqueries.)
                             </p>
 
                             <p>
-                                Everything you see in PostHog relies on HogQL queries. If you aren't able to run a query
-                                in a PostHog UI, just enter HogQL mode to write the exact query you need.
+                                Everything you see in PostHog relies on SQL queries. If you aren't able to run a query
+                                in a PostHog UI, just enter SQL mode to write the exact query you need.
                             </p>
 
                             <p>You can also query directly from our data warehouse (powered by ClickHouse).</p>
                         </div>
                         <aside className="shrink-0 md:basis-[500px]">
-                            <StaticImage src="./images/sql-hog.png" alt="" className="w-full max-w-[562px]" />
+                            <CloudinaryImage
+                                src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Product/ProductOS/images/sql-hog.png"
+                                alt=""
+                                className="w-full max-w-[562px]"
+                            />
                         </aside>
                     </div>
 
@@ -234,13 +228,13 @@ export const ProductOS = () => {
                                     One platform, <span className="text-red dark:text-yellow">loads of products</span>
                                 </h2>
                                 <p className="max-w-2xl">
-                                    PostHog offers 7+ products in one (and counting).{' '}
+                                    PostHog offers {PRODUCT_COUNT}+ products in one (and counting).{' '}
                                     <strong>Use only what you want. But...</strong> if you want to try a new PostHog
                                     product, there are benefits of using Product OS as your platform for all your
                                     product data.
                                 </p>
                             </div>
-                            <div className="shrink-0 flex gap-2">
+                            <div className="shrink-0 flex flex-wrap gap-2">
                                 <ProductIcon
                                     name="Product analytics"
                                     url="/product-analytics"
@@ -259,7 +253,12 @@ export const ProductOS = () => {
                                     color="seagreen"
                                     icon={<IconToggle />}
                                 />
-                                <ProductIcon name="A/B testing" url="/ab-testing" color="purple" icon={<IconFlask />} />
+                                <ProductIcon
+                                    name="Experiments"
+                                    url="/experiments"
+                                    color="purple"
+                                    icon={<IconFlask />}
+                                />
                                 <ProductIcon name="CDP" url="/cdp" color="yellow" icon={<IconPerson />} />
                                 <ProductIcon
                                     name="Data warehouse"
@@ -310,9 +309,9 @@ export const ProductOS = () => {
                                 users or groups using feature flags.
                             </p>
                         </div>
-                        <div className="order-1 md:order-2 col-span-7">
-                            <StaticImage
-                                src="./images/site-widget.png"
+                        <div className="order-1 md:order-2 col-span-7 max-w-screen overflow-hidden md:overflow-visible">
+                            <CloudinaryImage
+                                src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Product/ProductOS/images/site-widget.png"
                                 alt=""
                                 className="relative w-[125%] left-[-12.5%] md:left-0 md:w-full max-w-[780px] top-12 md:top-16"
                             />
@@ -328,13 +327,17 @@ export const ProductOS = () => {
                             </h2>
                             <p>
                                 We poke fun at a lot of things, but we take security seriously. We're{' '}
-                                <b>SOC 2 Type-1 certified, GDPR ready, HIPAA compliant</b>, and we share our security
+                                <b>SOC 2 Type II certified, GDPR ready, HIPAA compliant</b>, and we share our security
                                 reports publicly. Check <a href="/handbook/company/security">our security docs</a> for
                                 more!
                             </p>
                         </div>
                         <aside className="shrink-0 md:basis-[300px] xl:basis-[500px]">
-                            <StaticImage src="./images/alert.png" alt="" className="w-full max-w-[262px]" />
+                            <CloudinaryImage
+                                src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Product/ProductOS/images/alert.png"
+                                alt=""
+                                className="w-full max-w-[262px]"
+                            />
                         </aside>
                     </div>
                 </section>
@@ -343,7 +346,7 @@ export const ProductOS = () => {
                     <h2 className="text-4xl mb-2">API</h2>
                     <p className="max-w-2xl mb-2">
                         If your business has bespoke data visualization needs that aren't covered by a PostHog product,
-                        you can build your own interface with queries using the API and HogQL.
+                        you can build your own interface with queries using the API and SQL.
                     </p>
                     <div className="mb-8">
                         <CallToAction to="/docs/api" type="secondary" size="sm">
@@ -395,6 +398,8 @@ export const ProductOS = () => {
                                 <li>Visually define events</li>
                                 <li>Toggle feature flags on or off</li>
                                 <li>See a click map showing what people are clicking</li>
+                                <li>Visualize your experiments</li>
+                                <li>Understand your Web Vitals metrics</li>
                             </ul>
                             <div>
                                 <CallToAction to="/docs/toolbar" type="secondary" size="sm">
@@ -402,9 +407,9 @@ export const ProductOS = () => {
                                 </CallToAction>
                             </div>
                         </div>
-                        <div className="order-1 mb-10 md:mb-0 md:order-2 text-center">
-                            <StaticImage
-                                src="./images/toolbar.png"
+                        <div className="order-1 mb-10 md:mb-0 md:order-2 text-center max-w-screen overflow-hidden md:overflow-visible">
+                            <CloudinaryImage
+                                src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Product/ProductOS/images/toolbar.png"
                                 alt=""
                                 className="relative rounded w-[110%] left-[-5%] sm:left-0 md:w-full max-w-[614px] top-12 md:top-16"
                             />

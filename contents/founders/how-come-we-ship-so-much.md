@@ -23,7 +23,7 @@ Our first line of code was January 22nd, 2020, after a pivot during a YC batch. 
 * [Product analytics](/product-analytics)
 * [Session replay](/session-replay)
 * [Feature flags](/feature-flags)
-* [A/B testing](/ab-testing)
+* [A/B testing](/experiments)
 * [User surveys](/docs/surveys)
 * [Heatmaps](/docs/toolbar/heatmaps)
 * [SDKs](/docs/libraries) for all the above
@@ -154,3 +154,5 @@ Likewise, if you're building a small software product that has better UX than an
 The most important thing is to figure out if you value speed and autonomy over polish and control. Which path will help you achieve your company's mission better?
 
 Once you've done that, optimize how your company works around that, and accept there are trade-offs! Just make them consciously.
+
+<NewsletterForm />

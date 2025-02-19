@@ -192,7 +192,7 @@ With PostHog set up, your app is ready for feature flags. To create one, go to t
   classes="rounded"
 />
 
-You can customize your [release conditions](/docs/feature-flags/creating-feature-flags#release-conditions) with rollout percentages, and [user](/docs/product-analytics/user-properties) or [group properties](/docs/product-analytics/group-analytics) to fit your needs.
+You can customize your [release conditions](/docs/feature-flags/creating-feature-flags#release-conditions) with rollout percentages, and [user](/docs/product-analytics/person-properties) or [group properties](/docs/product-analytics/group-analytics) to fit your needs.
 
 ## 4. Implement the flag code
 
@@ -232,6 +232,8 @@ That's it! When you restart your app and click the button, you should see the gr
 
 ## Further reading
 
-- [How to set up one-time feature flags](/tutorials/one-time-feature-flags)
+- [How to set up session replays in Android](/tutorials/android-session-replay)
 - [How to run A/B tests in Android](/tutorials/android-ab-tests)
 - [How to set up analytics in Android](/tutorials/android-analytics)
+- [How to set up remote config in Android](/tutorials/android-remote-config)
+<NewsletterForm />

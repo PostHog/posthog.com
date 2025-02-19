@@ -123,16 +123,23 @@ With this set up, refresh your app and click the button a few times to capture t
 
 The next step is to set up an A/B test (we call them experiments in PostHog).
 
-Go to the [A/B testing tab](https://app.posthog.com/experiments) in PostHog and click "New experiment". Add the following details to your experiment:
+Go to the [experiments tab](https://app.posthog.com/experiments) in PostHog and click "New experiment". Add the following details to your experiment:
 
 1. Name it "Vue button text experiment".
 2. Set "Feature flag key" to `vue-button-text-experiment`.
-3. Under the experiment goal, select the `home_button_clicked` event we created in the previous step.
-4. Use the default values for all other fields.
+3. Use the default values for all other fields.
+4. Click **Save as draft**.
 
 Click "Save as draft" and then click "Launch".
 
-![Vue.js experiment setup in PostHog](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/vue-ab-tests/new-experiment.png)
+<ProductScreenshot
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_01_16_at_09_41_08_2x_ab389aa77c.png"
+  imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_01_16_at_09_41_24_2x_05aba5f65f.png"
+  alt="Experiment setup in PostHog"
+  classes="rounded"
+/>
+
+Once created, set the primary metric to a trend of `home_button_clicked` and then click **Launch**.
 
 ## Implementing the A/B test code
 
@@ -182,3 +189,5 @@ With this, you’re ready to launch your experiment!
 - [How to set up surveys in Vue](/tutorials/vue-surveys)
 - [How to set up feature flags in Vue](/tutorials/vue-feature-flags)
 - [How to set up analytics in Vue](/tutorials/vue-analytics)
+
+<NewsletterForm />

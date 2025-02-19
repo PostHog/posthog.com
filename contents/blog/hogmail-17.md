@@ -37,7 +37,7 @@ Charles shares his practical guide to how we run finance without a dedicated fin
 
 ## #tutorials-and-guides
 
-🧰 [How to set up cross domain tracking in PostHog](https://posthog.com/tutorials/cross-domain-tracking): Do you use multiple domains or subdomains? This guide explains how to track users across them.
+🧰 [How to set up cross-domain tracking in PostHog](https://posthog.com/tutorials/cross-domain-tracking): Do you use multiple domains or subdomains? This guide explains how to track users across them.
 
 👯‍♀️ [Understanding group analytics: frontend vs backend implementations](https://posthog.com/tutorials/frontend-vs-backend-group-analytics): The two different ways to implement group analytics, so you can understand how companies use your product.
 
@@ -82,4 +82,4 @@ Charles shares his practical guide to how we run finance without a dedicated fin
 
 - [Marie Kondo your software stack with open source](https://github.com/readme/featured/open-source-minimalism) (17 min read)
 
-> We send HogMail every two weeks. [Signup here](https://newsletter.posthog.com/subscribe) so you don't miss it.
+<NewsletterForm />

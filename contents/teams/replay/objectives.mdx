@@ -1,24 +1,46 @@
-### 🎯 Goal 1: Quality and Consolidation for Session Replay (web & mobile)
+# 🚀 Goal 1: Get Alex rocketing
 
-Why? 
+it's great to have Alex on the team... let's make it a success
 
-We've done a lot of investigation and preparation work and we want to capitalize on that
+# 👩‍🔬 Goal 2: Churn and retention exploration
 
-* Mobile replay out of beta for Android/iOS
-* Make capture and playback as complete, performant and easy as possible
-* Build the best UX for finding and playing recordings
+We've had a lot of technology focus, let's have some product focus
 
-### 🎯 Goal 2: Error tracking MVP
+This is a relatively vague goal, because we don't know enough to be specific. The goal is at a minimum to get to a place where we're operating from good knowledge
 
-Why? PostHog is "The single platform to analyze, test, observe, and deploy new features". Having network timings, network payloads, and console errors in Session Replay is a great developer tool. We want to learn by doing to understand how we could capture and expose even more information here to help people dig into what is happening with their products
+* Bucket users into "contracted, but still using the product", "churned (from paying), but still using the product" and "churned, and stopped using the product"
+* Interview 5 customers in each bucket, try survey/email outreach if necessary to increase amount of feedback
+* Run 5+ experiments based on learnings
+* come out of this quarter either happy we can focus elsewhere or with a strong understanding of where to go next
+* talk to those users
+* find good metrics
+* run experiments to improve things
+* come out of this quarter either happy we can focus elsewhere or with a strong understanding of where to go next
 
-* Building on top of the existing `$exception` ingestion
-* Getting it in the hands of real users, so that we can collect feedback on how to best solve their problems
-* This can't be a fully featured error tracking product at first release but it can be a valuable increment
-* see https://github.com/PostHog/product-internal/pull/569
+# 🎤 Goal 3: Watch less and get more value
 
-### Goal 3: Hire two more people into the team (1 full-stack/product and 1 mobile engineer)
+We've got good evidence that some customers need help finding which recordings to watch. We want to help people more quickly find the right recordings to watch.
+And logically once you have more than ~1 hour of recordings a day you can't watch them all and need help finding the valuable ones
 
-Why? We want to do even more than we already do, but with just three engineers if someone were to be ill we lose a third of our throughput. Let's reduce the bus factor by adding 2 amazing new colleagues
+* HogBot 
+    * part 1 was very simple but people liked it... let's grow HogBot
+    * bring people back into the product from email or slack by highlighting what they want to watch
+* Magic playlists
+    * playlists are not used much but people who use them like them and have diverse reasons
+    * we can autogenerate useful playlists and prompt you when they have new recordings
+* Filtering
+    * if you have more recordings captured than you can watch in the time you have available, how can we guide you to watch the most valuable recordings
 
-Follow along in [our Q2 MegaIssue](https://github.com/PostHog/posthog/issues/21078)
+# 💀 Goal 4: Squash distractions
+
+1) Get our deployment of rrweb under control
+    2024 was interrupted by tech twiddling of rrweb. Ugrades, patching, contributing upstream.
+
+    It was unpredictable and disruptive. We've got a good relationship with the contributors and made some improvements but we need to get past this!
+
+    * incremental rollouts of rrweb and recorder changes
+    * no more patching of npm packages
+
+2) Write optimised blob-ingestion
+
+    CDP are going to do this but will take at least @pauldambra's time in support

@@ -117,7 +117,7 @@ With PostHog set up, your app is ready for feature flags. To create one, go to t
   classes="rounded"
 />
 
-You can customize your [release conditions](/docs/feature-flags/creating-feature-flags#release-conditions) with rollout percentages, and [user](/docs/product-analytics/user-properties) or [group properties](/docs/product-analytics/group-analytics) to fit your needs.
+You can customize your [release conditions](/docs/feature-flags/creating-feature-flags#release-conditions) with rollout percentages, and [user](/docs/product-analytics/person-properties) or [group properties](/docs/product-analytics/group-analytics) to fit your needs.
 
 ## Implementing flag code on the client side
 
@@ -247,3 +247,5 @@ const title = computed(() => titleData.value);
 - [How to set up analytics in Nuxt](/tutorials/nuxt-analytics)
 - [How to set up A/B tests in Nuxt](/tutorials/nuxtjs-ab-tests)
 - [How to set up surveys in Nuxt](/tutorials/nuxt-surveys)
+
+<NewsletterForm />

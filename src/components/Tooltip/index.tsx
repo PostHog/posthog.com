@@ -1,5 +1,5 @@
 import { Placement, reference } from '@popperjs/core'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { usePopper } from 'react-popper'
 import { createPortal } from 'react-dom'
 
@@ -12,6 +12,8 @@ export default function Tooltip({
     placement = 'bottom',
     title,
     contentContainerClassName = '',
+    controlled,
+    ...other
 }: {
     children: JSX.Element
     content: string | ((setOpen: React.Dispatch<React.SetStateAction<boolean>>) => React.ReactNode)
@@ -21,8 +23,10 @@ export default function Tooltip({
     placement?: Placement
     title?: string
     contentContainerClassName?: string
+    open?: boolean
+    controlled?: boolean
 }): JSX.Element {
-    const [open, setOpen] = useState(false)
+    const [open, setOpen] = useState(other.open ?? false)
     const [referenceElement, setReferenceElement] = useState(null)
     const [popperElement, setPopperElement] = useState(null)
     const { styles, attributes } = usePopper(referenceElement, popperElement, {
@@ -34,14 +38,30 @@ export default function Tooltip({
         ],
     })
 
+    useEffect(() => {
+        if (controlled && other.open !== undefined) {
+            setOpen(other.open)
+        }
+    }, [other.open])
+
     return (
-        <span onMouseEnter={() => setOpen(true)} onMouseLeave={() => setOpen(false)} className={className}>
+        <span
+            onMouseEnter={() => !controlled && setOpen(true)}
+            onMouseLeave={() => !controlled && setOpen(false)}
+            className={className}
+            onClick={() => {
+                if (!controlled) {
+                    setOpen(false)
+                }
+            }}
+        >
             {React.cloneElement(children, {
                 ref: setReferenceElement,
             })}
             {open &&
                 createPortal(
                     <div
+                        id="portal-tooltip"
                         className="z-[9999999999] print:hidden"
                         role="tooltip"
                         ref={setPopperElement}
@@ -63,7 +83,8 @@ export default function Tooltip({
                                 placement === 'top' ||
                                 placement === 'right' ||
                                 placement === 'bottom' ||
-                                placement === 'left'
+                                placement === 'left' ||
+                                placement === 'right-start'
                                     ? 'before:bg-accent dark:before:bg-accent-dark before:border-light dark:before:border-dark before:block before:h-3 before:w-3 before:absolute before:rotate-45'
                                     : ''
                             }
@@ -86,6 +107,11 @@ export default function Tooltip({
                             ${
                                 placement === 'left'
                                     ? 'before:rounded-tr-sm before:top-[calc(50%_-_4px)] before:-right-1.5 before:border-t before:border-r mr-2'
+                                    : ''
+                            }
+                            ${
+                                placement === 'right-start'
+                                    ? 'before:rounded-tl-sm before:top-[calc(0%_+_5px)] before:-right-1.5 before:border-t before:border-r mr-2 -top-1'
                                     : ''
                             }
                                     

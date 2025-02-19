@@ -97,3 +97,36 @@ posthog = PostHog::Client.new({
    feature_flag_request_timeout_seconds: 3 # Time in seconds. Default is 3.
 })
 ```
+
+### Error handling
+
+When using the PostHog SDK, it's important to handle potential errors that may occur during feature flag operations. Here's an example of how to wrap PostHog SDK methods in an error handler:
+
+```ruby
+def handle_feature_flag(client, flag_key, distinct_id)
+    begin
+        is_enabled = client.is_feature_enabled(flag_key, distinct_id)
+        puts "Feature flag '#{flag_key}' for user '#{distinct_id}' is #{is_enabled ? 'enabled' : 'disabled'}"
+        return is_enabled
+    rescue => e
+        puts "Error fetching feature flag '#{flag_key}': #{e.message}"
+        # Optionally, you can return a default value or throw the error
+        # return false # Default to disabled
+        raise e
+    end
+end
+
+# Usage example
+try
+    flag_enabled = handle_feature_flag(client, 'new-feature', 'user-123') 
+    if flag_enabled
+        # Implement new feature logic
+    else
+        # Implement old feature logic
+    end
+rescue => e
+    # Handle the error at a higher level
+    puts 'Feature flag check failed, using default behavior'
+    # Implement fallback logic  
+end
+```

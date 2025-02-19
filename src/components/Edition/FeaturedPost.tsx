@@ -30,7 +30,7 @@ export default function FeaturedPost({ title, date, authors, featuredImage, slug
                 <Skeleton />
             ) : (
                 <>
-                    <div className="w-full aspect-video rounded-md overflow-hidden">
+                    <div className="w-full aspect-[600/315] rounded-md overflow-hidden">
                         <Link to={slug}>
                             <img className="w-full h-full object-cover" src={imageURL || '/banner.png'} />
                         </Link>

@@ -10,8 +10,6 @@ tags:
 import { ProductScreenshot } from 'components/ProductScreenshot'
 export const EventsInPostHogLight = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/tutorials/laravel-ab-tests/events-light.png"
 export const EventsInPostHogDark = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/tutorials/laravel-ab-tests/events-dark.png"
-export const TestSetupLight = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/tutorials/laravel-ab-tests/experiment-setup-light.png"
-export const TestSetupDark = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/tutorials/laravel-ab-tests/experiment-setup-dark.png"
 export const ResultsLight = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/tutorials/laravel-ab-tests/results-light.png"
 export const ResultsDark = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/tutorials/laravel-ab-tests/results-dark.png"
 
@@ -119,23 +117,21 @@ With this set up, restart your app and then refresh your browser a few times. Yo
 
 ## 3. Create an A/B test in PostHog
 
-If you haven't done so already, you'll need to [upgrade](https://us.posthog.com/organization/billing) your PostHog account to include A/B testing. This requires entering your credit card, but don't worry, we have a [generous free tier](/pricing) of 1 million requests per month – so you won't be charged anything yet.
-
 Next, go to the [A/B testing tab](https://us.posthog.com/experiments) and create an A/B test by clicking the **New experiment** button. Add the following details to your experiment:
 
 1. Name it "My cool experiment".
 2. Set "Feature flag key" to `my-cool-experiment`.
-3. Under the experiment goal, select the `pageview` event we captured in the previous step.
-4. Use the default values for all other fields.
-
-Click "Save as draft" and then click "Launch".
+3. Use the default values for all other fields.
+4. Click **Save as draft**.
 
 <ProductScreenshot
-  imageLight={TestSetupLight} 
-  imageDark={TestSetupDark} 
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_01_16_at_09_53_57_2x_2b998be1a8.png" 
+  imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_01_16_at_09_20_55_2x_4be4106819.png" 
   alt="Experiment setup in PostHog" 
   classes="rounded"
 />
+
+Once created, set the primary metric to a trend of `pageview` and then click **Launch**.
 
 ## 4. Implement the A/B test code
 
@@ -213,3 +209,5 @@ Now PostHog is able to calculate our goal metric for our experiment results.
 - [A software engineer's guide to A/B testing](/product-engineers/ab-testing-guide-for-engineers)
 - [How to set up feature flags in Laravel](/tutorials/laravel-feature-flags)
 - [How to set up analytics in Laravel](/tutorials/laravel-analytics)
+
+<NewsletterForm />

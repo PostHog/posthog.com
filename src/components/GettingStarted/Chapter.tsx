@@ -167,7 +167,7 @@ export const IdentifyUsersChapter: React.FC = () => {
 
 export const UserPropertiesChapter: React.FC = () => {
     const data = useStaticQuery(query)
-    const node = data.allMdx.nodes.find((node: any) => node.fields.slug === '/docs/getting-started/user-properties')
+    const node = data.allMdx.nodes.find((node: any) => node.fields.slug === '/docs/getting-started/person-properties')
     const {
         frontmatter: { title, description, featuredImage },
         headings,

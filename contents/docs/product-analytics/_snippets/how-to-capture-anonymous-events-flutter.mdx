@@ -1,0 +1,15 @@
+The Flutter SDK captures anonymous events by default. However, this may change depending on your `personProfiles` [config](/docs/libraries/flutter#person-profiles-anonymous-vs-identified-persons) when initializing PostHog:
+
+1. `personProfiles: PostHogPersonProfiles.identifiedOnly` _(recommended)_ _(default)_ - Anonymous events are captured by default. PostHog only captures identified events for users where [person profiles](/docs/data/persons) have already been created.
+
+2. `personProfiles: PostHogPersonProfiles.always` - Capture identified events for all events.
+
+3. `personProfiles: PostHogPersonProfiles.never` - Capture anonymous events for all events.
+
+For example:
+
+```dart
+final config = PostHogConfig(POSTHOG_API_KEY);
+config.host = POSTHOG_HOST;
+config.personProfiles = PostHogPersonProfiles.identifiedOnly;
+```

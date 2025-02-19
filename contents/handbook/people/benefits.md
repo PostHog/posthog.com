@@ -24,7 +24,7 @@ In countries where you are employed under Deel's EOR service, we make pension co
 
 We offer private health insurance in countries where the health system struggles with long wait times for appointments or high out-of-pocket costs. Currently, we provide private health insurance in the US and UK.
 
-In the US, our medical insurance is provided via UnitedHealthcare and managed via our payroll provider [Gusto](https://app.gusto.com/). We also offer dental and vision insurance via Guardian. PostHog pays 100% of the premium of the Platinum plan for team members, and 75% for dependents.
+In the US, our medical insurance is provided via UnitedHealthcare and managed via our payroll provider [Deel](https://app.deel.com/). We also offer dental and vision insurance via Guardian. PostHog pays 100% of the premium of the Platinum plan for team members, and 75% for dependents. Manage your benefits through [Employee Navigator](https://www.employeenavigator.com/).
 
 In the UK, we use [Aviva](https://www.aviva.co.uk/business/health-protection-wellbeing/health-insurance/) for private healthcare (£100 excess per policy year) and [Medicash](https://www.medicash.org/) as our cash plan for dental and vision. Children are included for free. Both of these are taxable benefits which will affect your Personal Allowance each tax year, and you can opt out at any time with 1 month notice. 
 
@@ -59,6 +59,9 @@ As we are fully remote, we provide [all equipment](/handbook/people/spending-mon
 If you ever need change of scenery, we offer a monthly budget towards [coworking or café working](/handbook/people/spending-money#work-space), or [WeWork All Access](https://www.wework.com/solutions/wework-all-access).
 
 > Please message Kendal to get added to our company WeWork account. 
+
+### Cyclescheme
+In the UK we offer [Cyclescheme](https://www.cyclescheme.co.uk/) to save money on new cycling gear. To get started, activate your cyclescheme account [here](https://app.workplaceextras.com/employee-register/9a1bc53).
 
 ### Meeting up 
 

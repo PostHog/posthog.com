@@ -34,7 +34,7 @@ Slow velocity is usually a result of over-engineering. "Growth engineering is co
 
 First, sit with the engineering team and [prioritize your technical debt](https://alexeymk.com/2021/04/01/a-toolset-for-tackling-technical-debt.html). Figure out what is *actually* slowing you down (or likely to) and by how much. Once you have a ranked list, empower your team to fix it and assign 10%-20% of engineering time to do so.
 
-Second (and more importantly), urge your team to take shortcuts. The role of a growth engineer isn't necessarily to build features, but to validate whether a feature should exist or not. 
+Second (and more importantly), urge your team to take shortcuts. The role of a [growth engineer](/newsletter/think-like-a-growth-engineer) isn't necessarily to build features, but to validate whether a feature should exist or not. 
 
 As a team, look at your last 20 experiments and identify which ones you could have validated faster. Thomas Owers, former growth lead at [Let's Do This](https://www.letsdothis.com/), has [good advice](/blog/how-to-start-a-growth-team#thomass-golden-rule-make-your-code-changes-as-small-as-possible) on this:
 
@@ -113,7 +113,7 @@ In the context of growth teams, there are a few ways to do this:
 
 - Monitor critical metrics and set up alerts. Ensure you can quickly roll back changes using [feature flags](/blog/feature-flags-vs-configuration).
 
-- Set up [review apps](https://seanconnolly.dev/review-applications) so your team can easily test and dogfood your experiments.
+- Set up [review apps](https://seanconnolly.dev/review-applications) so your team can easily test and [dogfood your experiments](/product-engineers/dogfooding).
 
 - To test releases in production, set up [conditional overrides](/docs/experiments/testing-and-launching) so you can quickly test each experiment variant.
 
@@ -136,3 +136,5 @@ This has many benefits, like knowledge sharing across teams and diversifying ski
 - [Alexey's growth engineering newsletter](https://alexeymk.com/growth-eng/)
 - [What is a growth engineer? (And why they're awesome)](/blog/what-is-a-growth-engineer)
 - [How to start a growth team (as an engineer)](/blog/how-to-start-a-growth-team)
+
+<NewsletterForm />

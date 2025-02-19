@@ -82,3 +82,5 @@ Now you have a better idea of the features that drive user retention and keep th
 
 - [How to calculate and lower churn rate](/tutorials/churn-rate)
 - [Our complete guide to churn analysis](/blog/customer-churn-analysis-guide)
+
+<NewsletterForm />

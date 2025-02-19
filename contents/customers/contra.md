@@ -6,7 +6,7 @@ logo: >-
 logoDark: >-
   https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/customers/contra/contra_logo_dark.svg
 featuredImage: >-
-  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/customers/contra/contra_featured.png
+  https://res.cloudinary.com/dmukukwp6/image/upload/posthog_contra_aaaf94b243.png
 industries:
   - Saas
 users:

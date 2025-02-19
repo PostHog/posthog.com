@@ -75,7 +75,7 @@ In production, we learn how new code and features interact with production data 
 
 ### 2. Dogfooding and collaboration
 
-We are our own best customers at PostHog. Many of the features we develop are the ones most useful to us. Testing in production enables us to use the features we develop before releasing them, also known as dogfooding.
+We are our own best customers at PostHog. Many of the features we develop are the ones most useful to us. Testing in production enables us to use the features we develop before releasing them, also known as [dogfooding](/product-engineers/dogfooding).
 
 For example, we used the [early access management feature](/docs/feature-flags/early-access-feature-management) to manage the beta of early access management (very meta). This enabled us to both test the feature and have the structure in place to roll it out to users. By solving issues that arose in beta, we released a more polished final feature to users.
 
@@ -111,7 +111,7 @@ For others, this is where spike, soak, shadowing, mirroring, and integration tes
 
 Once the production tests related to deployment pass, we expand the release. This usually means rolling out the feature flag further and getting more users to try it.
 
-This is where you use the rest of the production testing techniques. They include usage analytics, session replays, monitoring, feedback, and surveys. This goes along with error tracking and bug reports.
+This is where you use the rest of the production testing techniques. They include usage analytics, session replays, monitoring, feedback, and surveys. This goes along with [error tracking](/docs/error-tracking) and bug reports.
 
 By testing in production, we uncover issues and get feedback fast. This is its major benefit. For teams wanting to get to the heart of the issue faster and ship more, testing in production might be right for you.
 
@@ -120,3 +120,5 @@ By testing in production, we uncover issues and get feedback fast. This is its m
 - [What is real user monitoring (and how to set it up)](/blog/real-user-monitoring)
 - [How to do a canary release with feature flags in PostHog](/tutorials/canary-release)
 - [How we build features users love (really fast)](/blog/measuring-feature-success)
+
+<NewsletterForm />

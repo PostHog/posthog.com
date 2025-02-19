@@ -80,8 +80,6 @@ PostHog is useful for engineering, data science, and product teams. As an all-in
 
 Subscribing to PostHog Cloud removes the project limit and adds numerous paid-only features, including experimentation, correlation analysis, group analytics for tracking organizations, and advanced cohorts. PostHog Cloud is [free up to 1 million events per month](/pricing).
 
-<NewsletterForm />
-
 ### 2. Matomo
 ![Matomo - open source analytics tools](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/open-source-analytics-tools/matomo-screenshot.png)
 
@@ -96,7 +94,8 @@ Subscribing to PostHog Cloud removes the project limit and adds numerous paid-on
 [Matomo](/blog/posthog-vs-matomo) is an open-source platform for website analytics. It's one of the most popular open-source [alternatives to Google Analytics 4](/blog/ga4-alternatives) for website owners and marketing teams. It even offers a data import tool for Google Analytics, so you can bring your data with you. You can run it on-premise or use Matomo's own cloud hosting service.
 
 #### Who is Matomo for?
-Matomo is intended for marketing and website teams looking to track content performance and marketing attribution. It's suitable for both SMBs and enterprises – the European Union runs a version of Matomo on all its websites.
+
+[Matomo](/blog/best-matomo-alternatives) is intended for marketing and website teams looking to track content performance and marketing attribution. It's suitable for both SMBs and enterprises – the European Union runs a version of Matomo on all its websites.
 
 #### Strengths
 - Google Analytics data importer
@@ -147,12 +146,12 @@ Metabase is available under a AGPL license. A limited version of the product is 
 
 #### What is Plausible Analytics?
 
-[Plausible Analytics](https://plausible.io/) is focused on providing website analytics that don’t infringe on user privacy. That means Plausible doesn’t rely on cookies and is naturally compliant with regulations like GDPR. 
+[Plausible Analytics](/blog/posthog-vs-plausible) is focused on providing website analytics that don’t infringe on user privacy. That means Plausible doesn’t rely on cookies and is naturally compliant with regulations like GDPR. 
 
 Unlike Matomo, Plausible is a very streamlined tool rather than a feature-equivalent Google Analytics alternative. As a result, it's a great fit for smaller teams who prefer ease of use to in-depth reporting, or hobby deployments if you just want basic analytics for a website or blog.
 
 #### Who is Plausible Analytics for?
-Plausible is intended for marketing teams and website owners who want to track top-level website metrics, such as pageviews, bounce rate and visit duration, but it's not an ideal tool for understanding user behavior.
+[Plausible](/blog/posthog-vs-plausible) is intended for marketing teams and website owners who want to track top-level website metrics, such as pageviews, bounce rate and visit duration, but it's not an ideal tool for understanding user behavior.
 
 #### Strengths
 - Easy to use and focused on essential web metrics
@@ -261,7 +260,7 @@ OpenReplay is available under the ELv2 license. An Enterprise version adds addit
 
 [GrowthBook](/blog/posthog-vs-growthbook) is an [open source A/B testing](/blog/best-open-source-ab-testing-tools) and feature flag tool for teams who want granular control over rolling out new features, and the ability to validate those changes through experiments. 
 
-It supports multiple development environments, each with a unique API endpoint, and its comprehensive feature flag functionality allows for targeting based on user properties.
+It supports multiple development environments, each with a unique API endpoint, and its comprehensive feature flag functionality allows for targeting based on person properties.
 
 You don't need to import metric data into GrowthBook as it works with your data wherever it lives, be that a data warehouse or an analytics tool like Mixpanel, but it lacks any additional analytical features.
 

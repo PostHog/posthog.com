@@ -60,7 +60,7 @@ ORDER BY count() desc
 1. Aggregate values like `avg()`, `sum()`, `max()`
 2. Modify or calculate values like `extract()`, `dateDiff()`, `multiIf()`
 
-To learn more about SQL queries, commands, and useful functions, check out our [SQL insights](/docs/product-analytics/sql) and [expressions](/docs/hogql/expressions) documentation.
+To learn more about SQL queries, commands, and useful functions, check out our [SQL insights](/docs/product-analytics/sql) and [expressions](/docs/sql/expressions) documentation.
 
 > **Where are queries written?** Queries are generally written in a UI connected to the database. This could be a CLI for a framework, a UI in a database service, or a visualization tool. Examples include PostHog, Metabase, MySQL WorkBench, and psql.
 
@@ -104,7 +104,7 @@ Although analytics platforms try to cover as many types of analysis and data as 
 
 The second reason to use SQL in analytics is its **availability**. SQL is one of the most popular programming languages and is the standard way to interact with data in databases. There is a massive amount of content about best practices and how to learn it. The syntax is relatively simple and intuitive too. Many people and platforms already use it. This makes it easier to adopt and work on as a team.
 
-For example, you can write [SQL insights](/docs/product-analytics/sql) in PostHog and also use [SQL expressions](/docs/hogql/expressions) as filters elsewhere. Beyond our user-facing app, in our backend, we write SQL to query our non-product data as well as [power our visualizations](/docs/how-posthog-works/queries) by interfacing with ClickHouse.
+For example, you can write [SQL insights](/docs/product-analytics/sql) in PostHog and also use [SQL expressions](/docs/sql/expressions) as filters elsewhere. Beyond our user-facing app, in our backend, we write SQL to query our non-product data as well as [power our visualizations](/docs/how-posthog-works/queries) by interfacing with ClickHouse.
 
 ## How to analyze your analytics with SQL
 
@@ -129,5 +129,7 @@ SQL is a powerful tool for analyzing analytics. Although it can be intimidating 
 ## Further reading
 
 - [Adventures in null handling: Null money, null problems](/blog/null-handling-hogql)
-- [Using HogQL for advanced breakdowns](/tutorials/hogql-breakdowns)
+- [Using SQL for advanced breakdowns](/tutorials/hogql-breakdowns)
 - [In-depth: ClickHouse vs PostgreSQL](/blog/clickhouse-vs-postgres)
+
+<NewsletterForm />

@@ -1,17 +1,15 @@
+import CloudinaryImage from 'components/CloudinaryImage'
 import React from 'react'
 import Link from 'components/Link'
-import { StaticImage } from 'gatsby-plugin-image'
 import {
     IconPieChart,
     IconTarget,
     IconMouseScrollDown,
     IconArrowUpLeftDiagonal,
     IconClock,
-    IconDownload,
-    IconPassword,
     IconGraph,
-    IconFlask,
-    IconToggle,
+    IconMessage,
+    IconRewindPlay,
 } from '@posthog/icons'
 import { CallToAction } from 'components/CallToAction'
 import { CustomerCard } from 'components/Products/CustomerCard'
@@ -21,12 +19,9 @@ import { Feature } from 'components/Products/Feature'
 import { Subfeature } from 'components/Products/Subfeature'
 import { Marquee } from 'components/Products/Marquee'
 import { graphql, useStaticQuery } from 'gatsby'
-import ContentViewer from 'components/ContentViewer'
-import SessionReplay from 'components/Home/CodeBlocks/SessionReplay'
 import { docsMenu } from '../../../navs'
 import TeamRoadmap from 'components/TeamRoadmap'
 import RecentChange from '../RecentChange'
-import TeamMembers from '../TeamMembers'
 import Questions from '../Questions'
 import CTA from 'components/Home/CTA'
 import Comparison from '../Comparison'
@@ -37,11 +32,8 @@ import { VsCompetitor } from 'components/Products/Competitor'
 import { VsPostHog } from 'components/Products/Competitor/VsPostHog'
 import { DocLinks } from 'components/Products/DocsLinks'
 import { SmoothScroll } from 'components/Products/SmoothScroll'
-import { FAQ } from 'components/Products/FAQ'
-import Install from '../Install'
 import { SEO } from 'components/seo'
 import { useLayoutData } from 'components/Layout/hooks'
-import Plans from 'components/Pricing/Plans'
 
 const product = {
     slug: 'web-analytics',
@@ -51,38 +43,37 @@ const product = {
 }
 
 const team = 'Web Analytics'
-const teamSlug = '/teams/web-analytics'
 
 const featuresPerRow = 3
 const features = [
     {
         title: 'Top paths',
         description: 'See the most visited pages on your site',
-        image: <StaticImage src="../../../../static/images/products/web-analytics/top-paths.jpg" width={420} />,
+        image: <img src="/images/products/web-analytics/top-paths.jpg" width={420} />,
         border: true,
     },
     {
         title: 'Top referrers',
         description: 'Discover where traffic is coming from',
-        image: <StaticImage src="../../../../static/images/products/web-analytics/top-referrers.jpg" width={420} />,
+        image: <img src="/images/products/web-analytics/top-referrers.jpg" width={420} />,
         border: true,
     },
     {
         title: 'Device types',
         description: 'Break down traffic by device',
-        image: <StaticImage src="../../../../static/images/products/web-analytics/device-types.jpg" width={420} />,
+        image: <img src="/images/products/web-analytics/device-types.jpg" width={420} />,
         border: true,
     },
     {
         title: 'World map',
         description: 'Visualize users across planet earth',
-        image: <StaticImage src="../../../../static/images/products/web-analytics/world-map.jpg" width={420} />,
+        image: <img src="/images/products/web-analytics/world-map.jpg" width={420} />,
         border: true,
     },
     {
         title: 'Retention cohorts',
         description: 'Analyze retention by week',
-        image: <StaticImage src="../../../../static/images/products/web-analytics/retention-cohorts.jpg" width={420} />,
+        image: <img src="/images/products/web-analytics/retention-cohorts.jpg" width={420} />,
         border: true,
     },
 ]
@@ -135,43 +126,6 @@ const questions = [
     },
 ]
 
-const faqs = [
-    {
-        question: 'How do I know what my recording volume is?',
-        children:
-            "The easiest way is to sign up for the Free plan - no credit card required. You'll get an accurate volume projection after just a few days.",
-    },
-    {
-        question: 'Do I pay anything for stored recordings?',
-        children:
-            'No, you only pay the fee per captured recording in a given month. There are no additional costs or fees.',
-    },
-    {
-        question: 'How long do you retain session recordings?',
-        children:
-            'Recordings are kept on Clickhouse-based installations for 1 month. For paid customers on PostHog Cloud, recordings are kept for 3 months.',
-    },
-    {
-        question: 'Is there a free trial on paid plans?',
-        children:
-            'We have a generous free tier on every paid plan so you can try out the features before paying any money. (You\'ll need to enter your credit card info, but you can set a billing limit). If you have additional needs, such as enterprise features, please <a href="/contact-sales">get in touch</a>.',
-    },
-    {
-        question: 'What currency are your prices in?',
-        children: 'All prices are in US Dollars (USD), excluding taxes.',
-    },
-    {
-        question: 'Do you offer a discount for non-profits?',
-        children:
-            'Yes in most cases - 50% off any plan. Create your account, then email <a href="mailto:sales@posthog.com?subject=Non-profit%20discount">sales@posthog.com</a> from the same email address with some basic details on your organization. We will then apply a discount.',
-    },
-    {
-        question: 'Are there any minimums or annual commitments?',
-        children:
-            'Nope. We can, however, offer annual commitments (for example, to maintain pricing) if you need them as part of an enterprise agreement.',
-    },
-]
-
 const comparisonColumnCount = 4
 const comparison = [
     {
@@ -218,6 +172,14 @@ const comparison = [
         feature: 'Breakdown by device and browser',
         companies: {
             Matomo: true,
+            GA4: true,
+            PostHog: true,
+        },
+    },
+    {
+        feature: 'Web Vitals reporting',
+        companies: {
+            Matomo: '<a href="https://matomo.org/guide/reports/seo-web-vitals/">On-Premise only</a>',
             GA4: true,
             PostHog: true,
         },
@@ -276,19 +238,22 @@ const pairsWithItemCount = 3
 const PairsWithArray = [
     {
         icon: <IconGraph />,
+        color: 'blue',
         product: 'Product analytics',
-        description: 'Need to go deeper than a dashboard? Building your own insights and HogQL queries from scratch!',
+        description: 'Need to go deeper than a dashboard? Building your own insights and SQL queries from scratch!',
         url: '/product-analytics',
     },
     {
-        icon: <IconToggle />,
-        product: 'Session replays',
+        icon: <IconRewindPlay />,
+        color: 'yellow',
+        product: 'Session replay',
         description:
-            "Get more context by watching what users actually do on your site. It's not creepy if you have permission.",
+            "Get more context by watching what users actually do on your site. Spot the nuances that quantifiable data doesn't tell you.",
         url: '/session-replays',
     },
     {
-        icon: <IconFlask />,
+        icon: <IconMessage />,
+        color: 'salmon',
         product: 'Surveys',
         description:
             'Get even more context by sending surveys to users. Arrange interviews. Ask questions. Serve pop-ups.',
@@ -296,7 +261,7 @@ const PairsWithArray = [
     },
 ]
 
-export const ProductWebAnalytics = () => {
+export const ProductWebAnalytics = (): JSX.Element => {
     const { ycombinator, significa, creatify } = useStaticQuery(graphql`
         fragment ProductCustomerFragment on Mdx {
             fields {
@@ -323,7 +288,9 @@ export const ProductWebAnalytics = () => {
             }
         }
     `)
+
     const { fullWidthContent } = useLayoutData()
+
     return (
         <>
             <SEO
@@ -335,18 +302,16 @@ export const ProductWebAnalytics = () => {
                 <Hero
                     color="[#36C46F]"
                     icon={<IconPieChart />}
-                    beta={true}
                     product={product.capitalized}
                     title="Monitor your website traffic"
                     description="Web analytics for people who really liked GA3..."
                 />
 
-                <div className="text-center -mb-24">
-                    <StaticImage
-                        src="../../../../static/images/products/web-analytics/screenshot-web-analytics.png"
+                <div className="text-center">
+                    <CloudinaryImage
+                        src="https://res.cloudinary.com/dmukukwp6/image/upload/screenshot_web_analytics_2a101a8558.png"
                         alt="Screenshot of web analytics in PostHog"
-                        className="w-full max-w-[1440px]"
-                        placeholder="none"
+                        className="w-full max-w-[1360.5px]"
                     />
                 </div>
 
@@ -403,9 +368,6 @@ export const ProductWebAnalytics = () => {
             >
                 <h2 className="text-3xl md:text-4xl text-center">Usage-based pricing</h2>
                 <div className="max-w-3xl mx-auto bg-accent dark:bg-accent-dark border border-light dark:border-dark rounded p-8 mt-1">
-                    <p className="mb-1">
-                        <strong>While in beta...</strong>
-                    </p>
                     <p className="mb-2">
                         Web analytics is currently bundled with <Link to="/product-analytics">product analytics</Link>.
                     </p>
@@ -418,36 +380,11 @@ export const ProductWebAnalytics = () => {
                             access to web analytics at no additional cost.
                         </li>
                     </ul>
-                    <p className="mb-0">Cheaper, dedicated pricing for web analytics is coming soon.</p>
+                    <p className="mb-2">
+                        Web analytics is designed to work well with{' '}
+                        <Link to={'/blog/analytics-pricing'}>anonymous events</Link>.
+                    </p>
                 </div>
-
-                {/*}
-                <div className="flex flex-col-reverse md:flex-row md:gap-12">
-                    <div className="flex-1">
-                        <h2 className="text-4xl md:text-5xl">Usage-based pricing</h2>
-                        <p className="">
-                            Use {product.lowercase} free. Or enter a credit card for advanced features.{' '}
-                            <br className="hidden lg:block" />
-                            Either way, your first {product.freeTier} are free – every month.
-                        </p>
-                    </div>
-                    <div className="md:w-96">
-                        <StaticImage placeholder="none" quality={100} src="../hogs/session-replay-hog.png" alt="" />
-                    </div>
-                </div>
-
-                <div className="lg:flex justify-between items-start gap-12 -mx-5 md:mx-0">
-                    <div className="flex-grow overflow-auto px-5 md:px-0">
-                        <Plans showHeaders={false} showCTA={false} groupsToShow={['session_replay']} />
-                    </div>
-                    <div className="px-5 md:px-0 lg:w-96 lg:mt-4">
-                        <h4 className="text-3xl">FAQs</h4>
-                        {faqs.map((faq, index) => {
-                            return <FAQ {...faq} key={index} />
-                        })}
-                    </div>
-                </div>
-                */}
             </section>
 
             <div className={`${fullWidthContent ? 'max-w-full px-0 md:px-8' : 'max-w-7xl'} mx-auto mt-12 `}>
@@ -461,10 +398,10 @@ export const ProductWebAnalytics = () => {
                         <h3 className="text-center mb-8">So, what's best for you?</h3>
                         <div className="mb-8 mx-5 md:mx-0 grid md:grid-cols-2 gap-4">
                             <VsCompetitor
-                                title="Reasons a competitor might be better for you (for now...)"
+                                title="Reasons a competitor may be best for you (for now...)"
                                 image={
-                                    <StaticImage
-                                        src="../../../images/products/competitors-sr.png"
+                                    <CloudinaryImage
+                                        src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/images/products/competitors-sr.png"
                                         className="max-w-[167px]"
                                     />
                                 }
@@ -491,7 +428,7 @@ export const ProductWebAnalytics = () => {
                         <p className="text-center text-sm font-medium">
                             Have questions about PostHog? <br className="md:hidden" />
                             <Link to={`/questions/${product.slug}`}>Ask the community</Link> or{' '}
-                            <Link to="/contact-sales">book a demo</Link>.
+                            <Link to="/talk-to-a-human">book a demo</Link>.
                         </p>
                     </section>
                 </div>
@@ -526,40 +463,15 @@ export const ProductWebAnalytics = () => {
                     </ul>
                 </section>
 
-                {/*
-
-                <section id="installation" className="mb-20 px-5 md:px-0">
-                    <h3 className="text-3xl lg:text-4xl text-center mb-2">Install &amp; customize</h3>
-                    <p className="mt-0 opacity-50 text-center mb-12">
-                        Here are some ways you can fine tune how you implement {product.lowercase}.
-                    </p>
-
-                    <ContentViewer sticky={false} scrollToTop={false} content={[Install, ...SessionReplay]} />
-                </section>
-
-                */}
-
                 <section id="docs" className="mb-20 px-5 md:px-0">
                     <h3 className="text-3xl lg:text-4xl text-center mb-2">Explore the docs</h3>
                     <p className="mt-0 text-opacity-70 text-center">
                         Get a more technical overview of how everything works <Link to="/docs">in our docs</Link>.
                     </p>
                     <DocLinks
-                        menu={docsMenu.children.find(({ name }) => name.toLowerCase() === 'web analytics').children}
+                        menu={docsMenu.children.find(({ name }) => name.toLowerCase() === 'web analytics')?.children}
                     />
                 </section>
-
-                {/*
-                <section id="team" className="mb-20 px-5">
-                    <h3 className="text-3xl lg:text-4xl text-center">Meet the team</h3>
-
-                    <p className="text-center mb-2">
-                        PostHog works in small teams. The <Link to={teamSlug}>{team}</Link> team is responsible for
-                        building {product.lowercase}.
-                    </p>
-                    <TeamMembers teamName={team} />
-                </section>
-                */}
 
                 <section id="roadmap" className="mb-20 px-5">
                     <h3 className="text-3xl lg:text-4xl text-center mb-2">Roadmap &amp; changelog</h3>

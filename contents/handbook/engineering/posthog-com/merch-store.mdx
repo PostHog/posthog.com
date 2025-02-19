@@ -1,0 +1,49 @@
+---
+title: Merch store development
+---
+
+> [Read this primer](/handbook/company/merch-store) on how our merch store works.
+
+## Adding new products
+
+Products need to be first created in Brilliant, then added to Shopify.
+
+### Create the product in Brilliant
+
+Brilliant handles adding products in inventory. Once the product appears in [inventory](https://app.brilliantmade.com/store/3002/inventory), it needs to be linked to the product in Shopify.
+
+After the product is created, you'll need to find the `variant_id`. If the product has no variants (ie: a sticker), you'll only need to enter one `variant_id` to Shopify. If the product has variants (ie: a t-shirt with sizes like S, M, L, etc.), you'll need to enter one `variant_id` per variant.
+
+To find the `variant_id`, click **Download CSV** from the inventory page.
+
+### Create the product in Shopify
+
+1. Give the product a name
+1. Description appears when the product sidebar is opened
+1. Add photos
+1. Set the product category
+1. Set the product status to **Active**
+1. For sales channels, make sure it's available in **Shop**, **Headless PostHog Merch Store**, and **Shopify GraphQL API**.
+1. Set the price
+1. Uncheck **Track quantity** as this is handled through the Brilliant API.
+1. Under **Metafields**, add a **Product subtitle**. This appears in the index view for the product.
+1. Save the product
+
+### Link the product to Brilliant
+
+1. Reference the CSV downloaded from Brilliant and look for the `variant_id` column.
+  - For single variant products, find the **Variant metafields** section and enter it in the `BrilliantID` field.
+  - For multi-variant products, first create the variants and save the product. Then click into the variant, scroll to the **Metafields** section and enter the `BrilliantID` from the CSV. Do this for each variant, as the `variant_id` will be unique for each variant.
+1. Add the product to the **Home page** collection.
+1. Save the product
+1. Note: the website needs to be rebuilt for the product to appear. Run the `/rebuild-website` command in Slack. The site is typically rebuilt within 20 minutes.
+
+## Running the merch store locally
+You'll need to set environment variables to source products from Shopify and build [the merch store](/merch).
+
+```
+SHOPIFY_APP_PASSWORD=
+GATSBY_SHOPIFY_STOREFRONT_TOKEN=
+```
+
+We don't include these by default as sourcing the products from Shopify takes an absurd amount of time. Ask the [Website & Vibes](/teams/website-vibes) team if you need these values.

@@ -3,14 +3,14 @@
 ```js-web
 posthog.identify(
   'distinct_id',  // Replace 'distinct_id' with your user's unique identifier
-  { email: 'max@hedgehogmail.com', name: 'Max Hedgehog' } // optional: set additional user properties
+  { email: 'max@hedgehogmail.com', name: 'Max Hedgehog' } // optional: set additional person properties
 );
 ```
 
 ```android_kotlin
 PostHog.identify(
     distinctId = distinctID, // Replace 'distinctID' with your user's unique identifier
-    // optional: set additional user properties
+    // optional: set additional person properties
     userProperties = mapOf(
         "name" to "Max Hedgehog", 
         "email" to "max@hedgehogmail.com"
@@ -20,12 +20,12 @@ PostHog.identify(
 
 ```ios_swift
 PostHogSDK.shared.identify("distinct_id", // Replace "distinct_id" with your user's unique identifier
-                           userProperties: ["name": "Max Hedgehog", "email": "max@hedgehogmail.com"]) // optional: set additional user properties
+                           userProperties: ["name": "Max Hedgehog", "email": "max@hedgehogmail.com"]) // optional: set additional person properties
 ```
 
 ```react-native
 posthog.identify('distinct_id', { // Replace "distinct_id" with your user's unique identifier
-    email: 'max@hedgehogmail.com', // optional: set additional user properties
+    email: 'max@hedgehogmail.com', // optional: set additional person properties
     name: 'Max Hedgehog'
 })
 ```
@@ -34,7 +34,7 @@ posthog.identify('distinct_id', { // Replace "distinct_id" with your user's uniq
 await Posthog().identify(
   userId: 'distinct_id', // Replace "distinct_id" with your user's unique identifier
   userProperties: {
-    email: "max@hedgehogmail.com", // optional: set additional user properties
+    email: "max@hedgehogmail.com", // optional: set additional person properties
     name: "Max Hedgehog"
 });
 ```

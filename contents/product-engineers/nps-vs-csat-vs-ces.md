@@ -261,3 +261,5 @@ Here's a table summarizing their differences:
 - [How to write great product survey questions (with examples)](/product-engineers/product-survey-questions)
 - [How to analyze surveys with ChatGPT](/tutorials/analyze-surveys-with-chatgpt)
 
+<NewsletterForm />
+

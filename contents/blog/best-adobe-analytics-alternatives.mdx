@@ -1,0 +1,454 @@
+---
+title: 'The best Adobe Analytics alternatives & competitors, compared'
+date: 2024-10-17
+author:
+  - ian-vanagas
+rootpage: /blog
+featuredImage: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/posthog-alternatives/posthog-alternatives.jpeg
+featuredImageType: full
+category: General
+tags:
+  - Comparisons
+---
+
+import { ComparisonTable } from 'components/ComparisonTable'
+import { ComparisonRow } from 'components/ComparisonTable/row'
+
+## 1. PostHog
+
+- **Founded:** 2020
+- **Similar to:** Heap, Amplitude
+- **Typical users:** Engineers and product teams
+- **Typical customers:** Mid-size B2Bs and startups
+
+<ProductScreenshot
+  imageLight = "https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2024_10_01_at_11_39_58_2x_5dff6baf53.png"
+  imageDark = "https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2024_10_01_at_11_40_26_2x_76efad2201.png"
+  classes="rounded"
+  alt="PostHog web analytics dashboard"
+/>
+
+### What is PostHog?
+
+[PostHog](/) (that's us 👋) is an open-source platform combining web and product analytics, session replay, heatmaps, A/B testing, feature flags, and user surveys into one product. This means it's not only an alternative to Adobe Analytics but also tools like [Hotjar](/blog/posthog-vs-hotjar) and [VWO](/blog/posthog-vs-vwo).
+
+According to [BuiltWith](https://trends.builtwith.com/analytics/PostHog), as of October 2024, 5,330 of the top 1 million websites deploy PostHog. This is significantly more than the 3,259 who use Adobe Analytics.
+
+#### Key features
+
+- 📊 **Web analytics:** Monitor your [web traffic](/docs/web-analytics) by automatically capturing and calculating metrics like visitors, pageviews, session duration, and bounce rate. Easily see the sources, entry and exit paths, [channels](/docs/data/channel-type), and more.
+
+- 📈 **Product analytics:** Visualize your data with custom trends, funnels, user paths, retention analysis, and segment user cohorts. Also, direct [SQL querying](/docs/product-analytics/sql) for power users.
+
+- 📺 **Session replays:** See exactly how users are using your site. Includes event timelines, console logs, network activity, and 90-day data retention.
+
+- 🧪 **A/B tests:** Optimize your app and website with up to nine test variations and track impact on primary and secondary metrics. Automatically calculate test duration, sample size, and statistical significance.
+
+- 💬 **Surveys:** Target surveys by event or user properties. Templates for [net promoter score (NPS)](/templates/nps-survey), [product-market fit (PMF)](/templates/pmf-survey) surveys, and more.
+
+### How does PostHog compare to Adobe Analytics?
+
+PostHog has a significantly larger feature set than Adobe Analytics. It offers the event capture and visualizations of Adobe Analytics along with a suite of tools to help you understand how people use your product and measure your attempts to improve it.
+
+<ComparisonTable column1="PostHog" column2="Adobe Analytics">
+  <ComparisonRow column1={true} column2={false} feature="Self-serve" description="Free to try, no mandatory sales calls" />
+  <ComparisonRow column1={true} column2={false} feature="Web analytics" description="Pre-built dashboard of aggregate traffic, sources, campaigns, and session metrics" />
+  <ComparisonRow column1={true} column2={true} feature="Product analytics" description="Custom events, trends, funnels, paths, and retention" />
+  <ComparisonRow column1={true} column2={false} feature="Autocapture" description="Capture events without manual instrumentation" />
+  <ComparisonRow column1={true} column2={true} feature="Cohort analysis" description="Combine users into cohorts for analysis" />
+  <ComparisonRow column1={true} column2={false} feature="Session replay" description="Watch real users on your site; discover friction points" />
+  <ComparisonRow column1={true} column2={false} feature="Heatmaps" description="Visualize where users click and interact on your site" />
+  <ComparisonRow column1={true} column2={false} feature="A/B testing" description="Run multivariate tests and see the impact of changes with custom goals and reports" />
+  <ComparisonRow column1={true} column2={false} feature="Script install" description="Start capturing data by adding a simple script to your site" />
+  <ComparisonRow column1={true} column2={false} feature="EU hosting" description="Store your data in the EU for compliance" />
+  <ComparisonRow column1={true} column2={false} feature="Open source" description="Audit code, contribute to roadmap, and build integrations" />
+</ComparisonTable>
+
+> 💡 **Good to know:** Adobe Analytics has visualizations you can use for web analytics, but doesn't have a simple pre-built dashboard for you to use.
+
+### Why do companies use PostHog?
+
+According to [reviews on G2](https://www.g2.com/products/posthog/reviews), companies use PostHog because:
+
+1. **It replaces multiple tools:** PostHog can replace Adobe Analytics (product analytics), [Fullstory](/blog/posthog-vs-fullstory) (session replay), and [LaunchDarkly](/blog/posthog-vs-launchdarkly) (feature flags and A/B testing). This simplifies workflows and ensures product data is all in one place.
+
+2. **Pricing is transparent and scalable:** Reviewers appreciate how PostHog's pricing scales as they grow. There's a [generous free tier](/pricing) they can use forever. Companies eligible for [PostHog for Startups](/startups) also get $50k in additional free credits.
+
+3. **They need a complete picture of users:** PostHog includes every tool necessary to understand users and improve products. This means creating funnels to track conversion, watching replays to see where users get stuck, testing solutions with A/B tests, and gathering feedback with user surveys.
+
+> #### Bottom line
+> PostHog makes for a great all-in-one tool for tracking and improving your product. Unlike Adobe Analytics, it also has a generous free tier and is self-serve (no mandatory demo calls), so it's easy to get started. PostHog is an especially great choice for startups and scaleups.
+
+<br />
+
+## 2. Matomo
+
+- **Founded:** 2007
+- **Similar to:** Google Analytics, 
+- **Typical users:** Marketing and ecommerce teams
+- **Typical customers:** Privacy-focused former GA users
+
+![Matomo](https://res.cloudinary.com/dmukukwp6/image/upload/matomo_8d74c7fc2c.png)
+
+### What is Matomo?
+
+[Matomo](/blog/posthog-vs-matomo) is a fully-featured, privacy-focused Google Analytics alternative. It contains basic web analytics along with more advanced product and behavioral analytics features. This includes features like funnels, cohorts, session recordings, and heatmaps (although some of these are paid add-ons).
+
+According to [BuiltWith](https://trends.builtwith.com/analytics/Matomo), Matomo is much more popular than Adobe Analytics. As of October 2024, 20,816 of the top 1 million websites deploy Matomo and only 3,259 use Adobe Analytics.
+
+#### Key features
+
+- 🌐 **Web analytics:** Get an overview of your traffic, popular pages, sources, referrers, and more.
+
+- 📊 **Custom reports:** Visualize your data with detailed reports on product usage, cohorts, funnels, and conversion goals. 
+
+- 📋 **Marketing analysis:** Combine traffic insights with channel attribution, keyword data, ad performance, and more.
+
+- 💸 **Ecommerce:** Integrate with popular ecommerce platforms and track sales, products, and conversions.
+
+### How does Matomo compare to Adobe Analytics?
+
+Like Adobe Analytics, Matomo positions itself as a [Google Analytics alternative](/blog/ga4-alternatives). Unlike Adobe Analytics, it includes a range of add-ons and compliance features that make it a more comprehensive tool.
+
+<ComparisonTable column1="Matomo" column2="Adobe Analytics">
+  <ComparisonRow column1={"Trial Only"} column2={false} feature="Self-serve" description="Free to try, no mandatory sales calls" />
+  <ComparisonRow column1={true} column2={false} feature="Web analytics" description="Pre-built dashboard of aggregate traffic, sources, campaigns, and session metrics" />
+  <ComparisonRow column1={true} column2={true} feature="Product analytics" description="Custom events, trends, funnels, paths, and retention" />
+  <ComparisonRow column1={false} column2={false} feature="Autocapture" description="Capture events without manual instrumentation" />
+  <ComparisonRow column1={true} column2={true} feature="Cohort analysis" description="Combine users into cohorts for analysis" />
+  <ComparisonRow column1={true} column2={false} feature="Session replay" description="Watch real users on your site; discover friction points" />
+  <ComparisonRow column1={true} column2={false} feature="Heatmaps" description="Visualize where users click and interact on your site" />
+  <ComparisonRow column1={true} column2={false} feature="A/B testing" description="Run multivariate tests and see the impact of changes with custom goals and reports" />
+  <ComparisonRow column1={true} column2={false} feature="Script install" description="Start capturing data by adding a simple script to your site" />
+  <ComparisonRow column1={true} column2={false} feature="EU hosting" description="Store your data in the EU for compliance" />
+  <ComparisonRow column1={true} column2={false} feature="Open source" description="Audit code, contribute to roadmap, and build integrations" />
+</ComparisonTable>
+
+### Why do companies use Matomo?
+
+According to reviews on [G2](https://www.g2.com/products/matomo-formerly-piwik/reviews), people choose Matomo because:
+
+1. **On-premise:** Reviewers appreciate that they can use their own servers to host and run Matomo. This keeps them in full control of their data.
+
+2. **Privacy:** Matomo is open-source, self-hostable, and community-focused. The combination of these creates a privacy-focused platform reviewers appreciate.
+
+3. **GA-like:** Matomo's feature set is very similar to Google Analytics. This means users can do the analysis they are familiar with on a more privacy-friendly platform.
+
+> #### Bottom line
+> For privacy-focused teams looking for a Google Analytics alternative, Matomo makes a good choice. It's open-source, privacy-friendly, and shares the event capture and visualization capabilities of Adobe Analytics.
+
+<br />
+
+## 3. Amplitude
+
+- **Founded:** 2012
+- **Similar to:** PostHog, Heap
+- **Typical users:** Product managers, data analysts, marketing teams
+- **Typical customers:** Mid-size and large enterprises
+
+![Amplitude](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/best-fullstory-alternatives/amplitude.png)
+
+### What is Amplitude?
+
+[Amplitude](/blog/posthog-vs-amplitude) is one of the original product analytics tools. Many large enterprise customers, like Ford, NBCUniversal, and Walmart rely on it. In recent years, it also added A/B testing, session replay, and a customer data platform to its offering.
+
+According to [BuiltWith](https://trends.builtwith.com/analytics/Amplitude), as of October 2024, 19,098 of the top 1 million websites deploy Amplitude. Many more than the 3,259 who use Adobe Analytics.
+
+#### Key features
+
+- 📈 **Product analytics:** Funnel and retention analysis, user paths, behavioral cohorts, custom dashboards, and more.
+
+- 🧪 **A/B testing:** Test new features on specific targets and analyze with primary, secondary, and counter metrics.
+
+- 💁‍♂️ **Customer data platform:** Combine analytics data with third-party tools for data governance, identity resolution, and data federation.
+
+- 🤖 **AI insight builder:** Generate insights based on natural language requests, like "What is my purchase conversion rate?".
+
+- 📹 **Session replay:** Reconstruct user sessions to understand how people interact with your site and app. Visualize the reality behind user journeys and metrics.
+
+### How does Amplitude compare to Adobe Analytics?
+
+Amplitude offers the product analytics capabilities of Adobe Analytics along with session replay, A/B testing, and more.
+
+<ComparisonTable column1="Amplitude" column2="Adobe Analytics">
+  <ComparisonRow column1={"Starter plans only"} column2={false} feature="Self-serve" description="Free to try, no mandatory sales calls" />
+  <ComparisonRow column1={true} column2={false} feature="Web analytics" description="Pre-built dashboard of aggregate traffic, sources, campaigns, and session metrics" />
+  <ComparisonRow column1={true} column2={true} feature="Product analytics" description="Custom events, trends, funnels, paths, and retention" />
+  <ComparisonRow column1={false} column2={false} feature="Autocapture" description="Capture events without manual instrumentation" />
+  <ComparisonRow column1={true} column2={true} feature="Cohort analysis" description="Combine users into cohorts for analysis" />
+  <ComparisonRow column1={true} column2={false} feature="Session replay" description="Watch real users on your site; discover friction points" />
+  <ComparisonRow column1={false} column2={false} feature="Heatmaps" description="Visualize where users click and interact on your site" />
+  <ComparisonRow column1={true} column2={false} feature="A/B testing" description="Run multivariate tests and see the impact of changes with custom goals and reports" />
+  <ComparisonRow column1={true} column2={false} feature="Script install" description="Start capturing data by adding a simple script to your site" />
+  <ComparisonRow column1={true} column2={false} feature="EU hosting" description="Store your data in the EU for compliance" />
+  <ComparisonRow column1={false} column2={false} feature="Open source" description="Audit code, contribute to roadmap, and build integrations" />
+</ComparisonTable>
+
+### Why do companies use Amplitude?
+
+According to G2 reviews, Amplitude users appreciate three key aspects:
+
+1. **Simple to use:** Amplitude makes it easy for non-technical users to get insights about their product and make improvements. Amplitude is built for users like product managers and marketers, making it a popular choice for them.
+
+2. **Built-in A/B testing:** Amplitude offers integrated experimentation features. This enables companies to run experiments on existing cohorts, and then analyze the data in a single place.
+
+3. **Become data-driven:** Amplitude users appreciate it helps them become data-driven. It becomes easy to add data, visualize it, and make decisions. It makes data accessible to them.
+
+> #### Bottom line
+> Amplitude is a popular Adobe Analytics alternative. Both offer tools to capture and analyze analytics data. Amplitude does lack a fully-featured free plan, however.
+
+<br />
+
+## 4. Heap
+
+- **Founded:** 2013
+- **Similar to:** PostHog, Amplitude
+- **Typical users:** Product and marketing teams
+- **Typical customers:** B2C SaaS and ecommerce companies with a user experience focus.
+
+![Heap](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/best-amplitude-alternatives/heap.png)
+
+### What is Heap?
+
+[Heap](/blog/posthog-vs-heap) describes itself as a digital insights platform. This means it offers both product analytics and session replay and supports marketing use cases with multi-touch attribution. Contentsquare, a marketing and ecommerce analytics firm, acquired Heap in September 2023 and has been integrating it with their suite of tools.
+
+According to [BuiltWith](https://trends.builtwith.com/analytics/Heap), Heap and Adobe Analytics have roughly the same number of users as of October 2024. Heap has 2,824 of the top 1 million websites, while 3,259 use Adobe Analytics.
+
+#### Key features
+
+- ✅ **Event autocapture:** Product teams don't need to rely on engineers to instrument all events. Heap has a visual editor for teams to tag events directly on-page for analysis.
+
+- 📺 **Session replay:** Get qualitative insights about user behavior by replaying their session – although this lacks the debugging tools typical of most replay tools.
+
+- 🔥 **Heatmaps:** See where people click, what point they scroll to, and the areas that get the most attention.
+
+- 🤖 **Analysis suggestions**: Advanced data science capabilities discover hidden interactions, friction points, and knowledge about key paths.
+
+- 🔁 **Managed ETL:** Connect to data warehouses, so you can combine your analytics with other sources and get a fuller picture of the entire user journey.
+
+### How does Heap compare to Adobe Analytics?
+
+Both Heap and Adobe Analytics are focused on product analytics and visualizations. Heap adds session replay, autocapture, and some platform features on top of what Adobe Analytics offers.
+
+<ComparisonTable column1="Heap" column2="Adobe Analytics">
+  <ComparisonRow column1={true} column2={false} feature="Self-serve" description="Free to try, no mandatory sales calls" />
+  <ComparisonRow column1={false} column2={false} feature="Web analytics" description="Pre-built dashboard of aggregate traffic, sources, campaigns, and session metrics" />
+  <ComparisonRow column1={true} column2={true} feature="Product analytics" description="Custom events, trends, funnels, paths, and retention" />
+  <ComparisonRow column1={true} column2={false} feature="Autocapture" description="Capture events without manual instrumentation" />
+  <ComparisonRow column1={true} column2={true} feature="Cohort analysis" description="Combine users into cohorts for analysis" />
+  <ComparisonRow column1={true} column2={false} feature="Session replay" description="Watch real users on your site; discover friction points" />
+  <ComparisonRow column1={true} column2={false} feature="Heatmaps" description="Visualize where users click and interact on your site" />
+  <ComparisonRow column1={false} column2={false} feature="A/B testing" description="Run multivariate tests and see the impact of changes with custom goals and reports" />
+  <ComparisonRow column1={true} column2={false} feature="Script install" description="Start capturing data by adding a simple script to your site" />
+  <ComparisonRow column1={false} column2={false} feature="EU hosting" description="Store your data in the EU for compliance" />
+  <ComparisonRow column1={false} column2={false} feature="Open source" description="Audit code, contribute to roadmap, and build integrations" />
+</ComparisonTable>
+
+### Why do companies use Heap?
+
+According to G2 reviews, companies enjoy these three areas of Heap:
+
+1. **Autocapture:** Non-technical users love how easy autocapture makes tracking on their site. Along with the element data included, this provides a huge amount of useful analytics data with little setup.
+
+2. **Simple setup:** It does not take a big technical effort to set Heap up. Users can add a single script and begin collecting data. They then make it easy to visualize that data through user paths, funnels, and session replays.
+
+3. **Streamlining analysis:** By having analytics and session replay data in one place, Heap makes it easy to understand the usage of their app or site. This replaces interviews or user testing and makes the development cycle faster.
+
+> #### Bottom line
+> Because of its similar focus on product analytics along with autocapture and being self-serve, Heap makes for a good Adobe Analytics alternative. It still lacks the simple web analytics view that Adobe Analytics users might want.
+
+<br />
+
+## 5. Google Analytics
+
+- **Founded:** 2005
+- **Similar to:** Matomo
+- **Typical users:** Marketing and business teams reliant on Google's ecosystem
+- **Typical customers:** Small businesses and massive enterprises
+
+![Google Analytics](https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2024_10_02_at_14_54_37_25bd7082b7.png)
+
+### What is Google Analytics?
+
+[Google Analytics](/blog/posthog-vs-ga4) has long been the go-to choice for website and app analytics thanks to Google's huge market share, a large amount of informational content, and its connection with the rest of the Google suite.
+
+Google Analytics recently switched fully over from session-based Universal Analytics (GA3) to event-based GA4. This introduced conversion funnels and retention tables that some teams are fans of, but many users also miss the simplicity of session-based analytics.
+
+Google Analytics is the most popular analytics tool. According to [BuiltWith](https://trends.builtwith.com/analytics/Google-Analytics), as of October 2024, a huge 489,524 of the top 1 million websites deploy Google Analytics. Adobe Analytics looks tiny in comparison with only 3,259.
+
+#### Key features
+
+- 📊 **Flexible reporting:** GA has pre-built insights as well as fully customizable ones to fit your reporting requirements.
+
+- 🤖 **Predictive insights:** Alert you to trends you're not aware of, like an increase in traffic to a specific landing page, or an anomalous decline in conversion from one period to another.
+
+- 🔁 **Integration with Google tools:** It's easy to combine and analyze your GA4 data with tools like Looker Studio, Google Ads, BigQuery, and Firebase.
+
+- ⌨️ **Natural language search:** Ask specific questions, like "MoM growth in users on iOS", rather than searching existing reports.
+
+- 💸 **Revenue metrics:** Connect metrics to marketing spend and revenue conversion to get a full picture of ROI.
+
+### How does Google Analytics compare to Adobe Analytics?
+
+Adobe Analytics is Adobe's answer to Google Analytics, and this shows in terms of features. Both have become primarily tools for capturing and visualizing analytics data, but don't include the expanded feature set of other alternatives on this list.
+
+<ComparisonTable column1="Google Analytics" column2="Adobe Analytics">
+  <ComparisonRow column1={true} column2={false} feature="Self-serve" description="Free to try, no mandatory sales calls" />
+  <ComparisonRow column1={true} column2={false} feature="Web analytics" description="Pre-built dashboard of aggregate traffic, sources, campaigns, and session metrics" />
+  <ComparisonRow column1={true} column2={true} feature="Product analytics" description="Custom events, trends, funnels, paths, and retention" />
+  <ComparisonRow column1={true} column2={false} feature="Autocapture" description="Capture events without manual instrumentation" />
+  <ComparisonRow column1={true} column2={true} feature="Cohort analysis" description="Combine users into cohorts for analysis" />
+  <ComparisonRow column1={false} column2={false} feature="Session replay" description="Watch real users on your site; discover friction points" />
+  <ComparisonRow column1={false} column2={false} feature="Heatmaps" description="Visualize where users click and interact on your site" />
+  <ComparisonRow column1={false} column2={false} feature="A/B testing" description="Run multivariate tests and see the impact of changes with custom goals and reports" />
+  <ComparisonRow column1={false} column2={false} feature="Script install" description="Start capturing data by adding a simple script to your site" />
+  <ComparisonRow column1={false} column2={false} feature="EU hosting" description="Store your data in the EU for compliance" />
+  <ComparisonRow column1={false} column2={false} feature="Open source" description="Audit code, contribute to roadmap, and build integrations" />
+</ComparisonTable>
+
+### Why do companies use Google Analytics?
+
+According to [G2](https://www.g2.com/products/google-analytics/reviews), users choose Google Analytics for:
+
+1. **Website traffic:** The main use case reviewers praise GA for simply understanding their website's traffic, where it comes from, and what they do on the site.
+
+2. **Connection to marketing:** Marketers like that it connects to marketing tools like Ads and Search Console. This helps them analyze the overall effectiveness of marketing efforts.
+
+3. **AI insights:** Reviewers appreciate the fact that GA surfaces insights automatically and makes predictions. This helps them find new ways of improving their site.
+
+> #### Bottom line
+> Google Analytics is the most obvious alternative to Adobe Analytics, but it isn't necessarily the best. Although it includes the simplified web analytics dashboard, it lacks the expanded feature set modern product and engineering teams might expect. 
+
+<br />
+
+## 6. Plausible
+
+- **Founded:** 2019
+- **Similar to:** Fathom, Matomo
+- **Typical users:** Small SaaS companies
+- **Typical customers:** Privacy-focused indiehackers and founders
+
+![Plausible](https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2024_10_03_at_10_03_23_2x_9ee8616ddf.png)
+
+### What is Plausible?
+
+[Plausible](/blog/best-plausible-alternatives) is a lightweight, privacy-friendly, EU-hosted Google Analytics alternative. It helps teams comply with regulations like GDPR and CCPA while still giving them the key traffic metrics they care about.
+
+Plausible is also open source and self-hostable. This makes it a popular choice with indiehackers.
+
+According to [BuiltWith](https://trends.builtwith.com/analytics/Plausible-Analytics), Plausible and Adobe Analytics are neck and neck. As of October 2024, 3,500 of the top 1 million websites deploy Plausible. 3,259 use Adobe Analytics.
+
+#### Key features
+
+- 📈 **Traffic analysis:** An overview of traffic, sources, sessions, and more in a simple, easy-to-understand dashboard.
+
+- 🇪🇺 **EU hosting:** Comply with regulations by storing all your data in the EU (and never having it leave).
+
+- 🍪 **Cookieless:** Capture data about your traffic without needing cookies (or cookie banners). 
+
+- 🏋️ **Lightweight:** Plausible's script is less than1kB, making it significantly smaller than competitors. 
+
+### How does Plausible compare to Adobe Analytics?
+
+Although Plausible has a smaller feature set than many competitors on this list, it sizes up well against Adobe Analytics. The core analytics features are similar, while Plausible focuses more on simplicity and privacy.
+
+<ComparisonTable column1="Plausible" column2="Adobe Analytics">
+  <ComparisonRow column1={"Trial Only"} column2={false} feature="Self-serve" description="Free to try, no mandatory sales calls" />
+  <ComparisonRow column1={true} column2={false} feature="Web analytics" description="Pre-built dashboard of aggregate traffic, sources, campaigns, and session metrics" />
+  <ComparisonRow column1={false} column2={true} feature="Product analytics" description="Custom events, trends, funnels, paths, and retention" />
+  <ComparisonRow column1={"Pageviews"} column2={false} feature="Autocapture" description="Capture events without manual instrumentation" />
+  <ComparisonRow column1={false} column2={true} feature="Cohort analysis" description="Combine users into cohorts for analysis" />
+  <ComparisonRow column1={false} column2={false} feature="Session replay" description="Watch real users on your site; discover friction points" />
+  <ComparisonRow column1={false} column2={false} feature="Heatmaps" description="Visualize where users click and interact on your site" />
+  <ComparisonRow column1={false} column2={false} feature="A/B testing" description="Run multivariate tests and see the impact of changes with custom goals and reports" />
+  <ComparisonRow column1={true} column2={false} feature="Script install" description="Start capturing data by adding a simple script to your site" />
+  <ComparisonRow column1={true} column2={false} feature="EU hosting" description="Store your data in the EU for compliance" />
+  <ComparisonRow column1={true} column2={false} feature="Open source" description="Audit code, contribute to roadmap, and build integrations" />
+</ComparisonTable>
+
+### Why do companies use Plausible?
+
+According to social media, users choose Plausible for the following reasons:
+
+1. **Simplicity:** Plausible's pared-down feature set makes it easier for bloggers, indiehackers, and smaller teams to get an understanding of their traffic.
+
+2. **Self-hostable:** Many like that Plausible is self-hostable, meaning they are fully in control of their data and costs.
+
+3. **Privacy-focused:** Privacy-conscious developers like they can still track their site while remaining compliant with regulations.
+
+> #### Bottom line
+> If you are looking for a simple, privacy-focused analytics tool, Plausible is one to consider. Its lack of a free tier does hurt its appeal, but it is self-hostable. 
+
+<br />
+
+## 7. Fathom
+
+- **Founded:** 2018
+- **Similar to:** Plausible, Matomo
+- **Typical users:** Founders and content teams
+- **Typical customers:** Privacy-conscious, content-focused websites
+
+![Fathom](https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2024_10_02_at_16_12_06_c41b89ea2f.png)
+
+### What is Fathom?
+
+[Fathom](/blog/best-fathom-alternatives) is a privacy-focused Google Analytics alternative. It is a simple web analytics tool that captures details on traffic, sessions, referrers, sources, and campaigns. It does this while helping users stay compliant and avoid cookies.
+
+According to [BuiltWith](https://trends.builtwith.com/analytics/Fathom-Analytics), as of October 2024, 1832 of the top 1 million websites deploy Fathom. 3,259 use Adobe Analytics.
+
+#### Key features
+
+- 🧑‍🎨 **Simple web analytics:** Fathom provides a simple, GA-like experience to monitor your website.
+
+- 🍪 **Cookieless:** Avoid cookie banners and track your site without using cookies.
+
+- 📊 **Marketing metrics:** Track the sources, devices, browsers, locations, UTMs, and more for your traffic. 
+
+- ⭐ **Conversions:** Track custom events and analyze them as conversions towards a goal.
+
+### How does Fathom compare to Adobe Analytics?
+
+Fathom is in a similar spot to Plausible. Although it has fewer features than other alternatives on this list, it stacks up well against Adobe Analytics as a privacy and compliance-focused alternative.
+
+<ComparisonTable column1="Fathom" column2="Adobe Analytics">
+  <ComparisonRow column1={"Trial Only"} column2={false} feature="Self-serve" description="Free to try, no mandatory sales calls" />
+  <ComparisonRow column1={true} column2={false} feature="Web analytics" description="Pre-built dashboard of aggregate traffic, sources, campaigns, and session metrics" />
+  <ComparisonRow column1={"Limited"} column2={true} feature="Product analytics" description="Custom events, trends, funnels, paths, and retention" />
+  <ComparisonRow column1={"Pageviews"} column2={false} feature="Autocapture" description="Capture events without manual instrumentation" />
+  <ComparisonRow column1={false} column2={true} feature="Cohort analysis" description="Combine users into cohorts for analysis" />
+  <ComparisonRow column1={false} column2={false} feature="Session replay" description="Watch real users on your site; discover friction points" />
+  <ComparisonRow column1={false} column2={false} feature="Heatmaps" description="Visualize where users click and interact on your site" />
+  <ComparisonRow column1={false} column2={false} feature="A/B testing" description="Run multivariate tests and see the impact of changes with custom goals and reports" />
+  <ComparisonRow column1={true} column2={false} feature="Script install" description="Start capturing data by adding a simple script to your site" />
+  <ComparisonRow column1={false} column2={false} feature="EU hosting" description="Store your data in the EU for compliance" />
+  <ComparisonRow column1={false} column2={false} feature="Open source" description="Audit code, contribute to roadmap, and build integrations" />
+</ComparisonTable>
+
+### Why do companies use Fathom?
+
+Fathom has limited reviews on G2, but much more praise on social. The reasons people seem to choose Fathom are:
+
+1. **Privacy focus:** Fathom reviewers almost always praise their focus on privacy. This allows users to stay compliant with regulations like GDPR, CCPA, and more.
+
+2. **Ease of use:** Reviewers find Fathom is simple to set up and simple to understand. Less technical users find this especially helpful.
+
+3. **Migration from GA:** Thanks to both its Google Analytics importer and its relatively similar interface, reviewers find the migration from GA to Fathom relatively easy.
+
+> #### Bottom line
+> Although Fathom does not offer a free tier and has fewer features than other alternatives, for teams wanting a privacy-focused web analytics tool, it is one to consider. It is a lot simpler than Adobe Analytics which makes it easier to get started and understand.
+
+<br />
+
+## Is PostHog right for you?
+
+Here's the (short) sales pitch.
+
+We're biased, obviously, but we think PostHog is the perfect Adobe Analytics replacement if:
+
+- You value transparency. We're open source and open core.
+- You want all the tools to help you build a better product (like session replay and A/B testing).
+- You want to try before you buy. We're self-serve with a [generous free tier](/pricing).
+
+Check out [our product pages](/web-analytics) and [read our docs](/docs) to learn more.
+

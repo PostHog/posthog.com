@@ -14,11 +14,14 @@ Batch exports can be used to export data to a Postgres table.
 
 1. Make sure PostHog can access your Postgres database.
 
-> **Note:** Wherever your Postgres database is hosted, make sure the host is set to accept all incoming connections so that PostHog can connect to the database and insert events. PostHog does not guarantee a static list of IP addresses to whitelist. If this is not possible in your case, consider exporting data to a different destination (like [S3](./s3.md)) and then setting up your own system for getting data into your Postgres database.
+> **Notes:** 
+> - Wherever your Postgres database is hosted, make sure the host is set to accept all incoming connections so that PostHog can connect to the database and insert events. PostHog does not guarantee a static list of IP addresses to whitelist. If this is not possible in your case, consider exporting data to a different destination (like [S3](/docs/cdp/batch-exports/s3)) and then setting up your own system for getting data into your Postgres database.
+>
+> -  We only support connections using SSL/TLS. This [provides protection against various types of attacks](https://www.postgresql.org/docs/current/libpq-ssl.html#LIBPQ-SSL-PROTECTION).
 
 2. Create a Postgres user with table creation privileges.
 
-When executing a batch export, if the destination table doesn't exist, it will be created. `CREATE TABLE` and `USAGE` permissions are required for this reason. You can and should block PostHog from doing anything else on any other tables. In particular, we recommend creating a new schema and only granting PostHog `CREATE TABLE` and `USAGE` access limited to that schema:
+When executing a batch export, if the destination table doesn't exist, it will be created. `CREATE TABLE` and `USAGE` permissions are required for this reason. The other permissions that are required on the destination table are `INSERT`, `SELECT`, and `UPDATE`. You can and should block PostHog from doing anything else on any other tables. In particular, we recommend creating a new schema and only granting PostHog `CREATE TABLE` and `USAGE` access limited to that schema:
 
 ```sql
 CREATE USER posthog WITH PASSWORD 'insert-a-strong-password-here';
@@ -27,9 +30,13 @@ GRANT CREATE ON SCHEMA posthog_exports TO posthog;
 GRANT USAGE ON SCHEMA posthog_exports TO posthog;
 ```
 
-## Event schema
+## Models
 
-This is the schema of all the fields that are exported to Postgres.
+> **Note:** New fields may be added to these models over time. To maintain consistency, these fields are not automatically added to the destination tables. If a particular field is missing in your Postgres tables, you can manually add the field, and it will be populated in future exports.
+
+### Events model
+
+This is the default model for Postgres batch exports. The schema of the model as created in Postgres is:
 
 | Field       | Type           | Description                                                               |
 |-------------|----------------|---------------------------------------------------------------------------|
@@ -45,10 +52,26 @@ This is the schema of all the fields that are exported to Postgres.
 | site_url    | `VARCHAR(200)` | This field is present for backwards compatibility but has been deprecated |
 | timestamp   | `TIMESTAMP WITH TIME ZONE`    | The timestamp associated with an event                                    |
 
+### Persons model
+
+The schema of the model as created in Postgres is:
+
+| Field                      | Type               | Description                                                                                                                        |
+|----------------------------|--------------------|------------------------------------------------------------------------------------------------------------------------------------|
+| team_id                    | `INTEGER`        | The id of the project (team) the person belongs to                                                                                 |
+| distinct_id                | `TEXT`           | A `distinct_id` associated with the person                                                                                         |
+| person_id                  | `TEXT`           | The id of the person associated to this (`team_id`, `distinct_id`) pair                                                            |
+| properties                 | `JSONB`          | A JSON object with all the latest properties of the person                                                                         |
+| person_distinct_id_version | `INTEGER`        | Internal version of the person to `distinct_id` mapping associated with a (`team_id`, `distinct_id`) pair, used by batch export in merge operation |
+| person_version             | `INTEGER`        | Internal version of the person properties associated with a (`team_id`, `distinct_id`) pair, used by batch export in merge operation               |
+| created_at                 | `TIMESTAMP WITH TIME ZONE`   | The timestamp when the person was created                                                                                          |
+
+The Postgres table will contain one row per `(team_id, distinct_id)` pair, and each pair is mapped to their corresponding `person_id` and latest `properties`.
+
 ## Creating the batch export
 
 1. Subscribe to data pipelines add-on in [your billing settings](https://us.posthog.com/organization/billing) if you haven't already.
-2. Click [Data pipelines](https://app.posthog.com/apps) in the navigation and go to the exports tab in your PostHog instance.
+2. Click [Data pipelines](https://app.posthog.com/pipeline) in the navigation and go to the exports tab in your PostHog instance.
 3. Click "Create export workflow".
 4. Select **Postgres** as the batch export destination.
 5. Fill in the necessary [configuration details](#postgres-configuration).

@@ -36,7 +36,7 @@ PostHog’s co-founders, Tim and James, wrote [our public handbook](/handbook/) 
 
 ## 2. Your early users could be your best hires
 
-In the early days, PostHog’s CEO, [James Hawkins](/community/profiles/71), would check out people who starred the repo and sometimes get in touch to gather feedback. One such call resulted in our third hire, [James Greenhill](/community/profiles/90).
+In the early days, PostHog’s CEO, [James Hawkins](/james), would check out people who starred the repo and sometimes get in touch to gather feedback. One such call resulted in our third hire, [James Greenhill](/jams).
 
 On the call, James G explained Uber (where he worked) had built a bunch of internal tools like PostHog for data control reasons. He found the project interesting and wanted to work on it. He ended up doing a few days of paid work and the rest is history.
 

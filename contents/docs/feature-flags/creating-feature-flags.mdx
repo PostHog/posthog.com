@@ -45,31 +45,38 @@ This determines whether your flag is enabled. Disabled flags return `undefined` 
 
 ### Persisting feature flags across authentication steps
 
-> This is only relevant if your feature flag is shown to both logged out AND logged in users.
+
+> **Note:** This is only relevant if your feature flag is shown to both logged out AND logged in users.
 
 Feature flag values are calculated based on a user's properties. Since it's possible for a user to have different properties before and after login, they may receive different feature flag values before and after logging in.
 
 By enabling the option to persist feature flags across authentication, you ensure that the flag value remains the same. 
 
-There are trade-offs to enabling this:
+> **Note:** This feature requires `person_profiles: 'always'` to function as expected. [Learn more about anonymous vs identified events here](/docs/data/anonymous-vs-identified-events).
 
-1. It slows down the feature flag response.
-2. It disables [local evaluation](/docs/feature-flags/local-evaluation) of the feature flag.
-3. It disables [bootstrapping](/docs/feature-flags/bootstrapping) the feature flag.
+In our experience, the tradeoffs to enabling this are **not** worthwhile for the majority of our users. They include:
+
+1. **Slower feature flag response:** Enabling this option introduces additional checks, which can slow down the response time when fetching feature flags.
+2. **Incompatible with [local evaluation](/docs/feature-flags/local-evaluation):** It is necessary to perform the additional checks on the PostHog servers.
+3. **Incompatible with [bootstrapping](/docs/feature-flags/bootstrapping):** Bootstrapping relies on local evaluation, which cannot correctly calculate persistent flag values.
 
 ### Served value
 
-There are two types of feature flags:
+There are three types of feature flags:
 
 #### 1. Boolean flags. 
 
-These return `true` or `false`.
+These return `false` if the flag is disabled, `true` if the flag is enabled and has a matching release condition, and `null` or `undefined` if no release condition matches.
 
 #### 2. Multiple variant flags (multivariate flags). 
 
-Instead of returning true or false, multivariate flags return a key – for example, `control` or `test`. 
+Instead of indicating enabled vs. disabled, multivariate flags return a key – for example, `control` or `test`. 
 
 You can choose the rollout percentage for each variant key, where each is given a specific percentage of the total audience. Users will then be randomly assigned to each variant based on these percentages.
+
+#### 3. Remote config flags. 
+
+While boolean and multivariate flags can be set up to serve different values to different users, remote config flags are meant to pass static configuration values to your applications at runtime. The config value is **always** passed in the flag's payload. You can use remote config flags to tweak application configs on the fly without deploying code changes.
 
 ### Payloads
 
@@ -77,13 +84,17 @@ A payload is an additional piece of information sent to your app when a flag is 
 
 They enable you to configure functionality related to your flag inside PostHog, instead of having to make code changes or redeploy your app.
 
-> **Note**: Payloads are only available in our JavaScript web, Node, Python, Ruby, and React libraries.
-
 ### Release conditions
 
 This specifies the conditions a user must meet to access the feature flag and receive a value.
 
-You can create conditions based on [user properties](/docs/product-analytics/user-properties), [group properties](/docs/product-analytics/group-analytics#how-to-set-group-properties), or [cohorts](/docs/data/cohorts).
+Percentage rollouts are available for all flags. More options depend on your PostHog setup:
+
+- If GeoIP is enabled, you can target based on geographic location.
+
+- If you capture identified events, you can target based on [person properties](/docs/product-analytics/person-properties) and [cohorts](/docs/data/cohorts).
+
+- If you enabled group analytics, you can target based on [group properties](/docs/product-analytics/group-analytics#how-to-set-group-properties).
 
 <ProductScreenshot
     imageLight={ReleaseConditionLight} 
@@ -91,3 +102,5 @@ You can create conditions based on [user properties](/docs/product-analytics/use
     alt="Feature flags release conditions" 
     classes="rounded"
 />
+
+> **Can I migrate my feature flags from another tool?** If you can pull feature flag data from them, you can use [our API](/docs/api/feature-flags) to migrate them. We even wrote guides for doing this with [LaunchDarkly](/docs/migrate/launchdarkly) and [Statsig](/docs/migrate/statsig).
