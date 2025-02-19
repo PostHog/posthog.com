@@ -16,7 +16,7 @@ Betas do not need to be performant for high-volume users and can have big bugs, 
 
 We aim not to have a beta label on features for more than two releases. 
 
-## What's required for a beta?
+## Launching as a beta
 
 <CloudinaryImage
   src="https://res.cloudinary.com/dmukukwp6/image/upload/goodbeta_daa2ddca2a.pngg"
@@ -28,16 +28,21 @@ We aim not to have a beta label on features for more than two releases.
   alt="An example of a good beta"
   className="hidden dark:block"
 /> 
-<Caption>Betas should include a title, description, feedback button, and basic docs</Caption>
+<Caption>Betas should include a title, description, feedback button, and link to basic docs</Caption>
 
-There are some best practices which all betas should follow in order to provide a minimum amount of information and usability for customers.
+If you're launching or planning a beta then it can be to start with [a new product RFC](https://github.com/PostHog/product-internal/blob/main/requests-for-comments/templates/request-for-comments-new-product.md). In any case, there are some things you'll need to do as part of the beta process if you're launching a major feature. 
 
-- Betas in the feature preview menu must include a title and short description
-- Betas in the feature preview menu must include a 'Give feedback' button
-- Betas in the feature preview menu should have documentation linked to them 
+- If the product will be metered, talk to billing team about getting the usage added to usage reports
+- Create a dashboard/notebook to track usage and opt-ins
+
+There are also some best practices which all betas should follow in order to provide a minimum amount of information and usability for customers.
+
+- Betas in the feature preview menu should include a title and short description 
+- Betas in the feature preview menu should include a 'Give feedback' button
+- Betas in the feature preview menu should have documentation (marked as beta) linked to them
 - Betas should have a [feature owner](/handbook/engineering/feature-ownership)
 
-The [Content & Docs team](/teams/marketing) can help build out any documentation, if needed. 
+The [Content & Docs team](/teams/marketing) can help build out any documentation, if needed. Titles, descriptions, and links can be added using [the early access menu](https://us.posthog.com/project/2/early_access_features).
 
 > **Launching a new beta?** It's helpful to let [the Words & Pictures team](/teams/words-pictures) know when it launches. They'll then add the beta to [the changelog](https://posthog.com/changelog/), organize any marketing announcements, plan [a full announcement](https://github.com/PostHog/meta/issues/new?template=launch-plan-.md) for full release, create an email onboarding flow to help you collect user feedback, and anything else you need. You can let them know via [the team Slack channel](https://posthog.slack.com/archives/C083V7C6GKE).
 
