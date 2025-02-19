@@ -24,7 +24,7 @@ Real user monitoring is tracking the usage, performance, and quality of your pro
 
 Because it tracks real user behavior, it is a closer representation of reality. It identifies real issues, largely broken down into two classes:
 
-- Performance: loading, page, and query speed, core web vitals
+- Performance: loading, page, and query speed, web vitals
 - Usability: errors, confusion, bugs, rageclicks, unclear UI
 
 ![Types](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/real-user-monitoring/classes.png)
