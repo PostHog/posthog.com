@@ -93,7 +93,7 @@ Additional notes on self-serve discounts:
 
 ### Nonprofit discounts
 
-We do offer additional discounts to nonprofits - these are entirely at your discretion, depending on the margin of the particular product(s) you are selling. We no longer offer a straight X% across all products, as they all have slightly different pricing.
+We do offer additional discounts to nonprofits - these are entirely at your discretion, depending on the margin of the particular product(s) you are selling. We no longer offer a straight X% across all products, as they all have slightly different pricing. Instead the discount depends on factors such as the contract size and the customer’s anticipated volume. There is no set minimum spend or mandatory annual term. When evaluating a discount, it’s important to review our margin calculations (available in [this sheet](https://docs.google.com/spreadsheets/d/1ynNM9tbWsWki2Q0vhwCV0iYNtJ1NHz4eXtUvZDw_sjA/edit?usp=sharing)) to ensure we remain margin positive, especially for larger accounts.
 
 ## Payment method
 
