@@ -45,7 +45,7 @@ Referred customers should apply for the PostHog for Startups program as normal, 
 Customer can also refer an investor, or startup accelerator. If an investor or accelerator signs up as a PostHog for Startups partner, we will double the credits of the referring customer to a total of $100,000.
 
 ### Credit usage
-Teams in the startup plan can use their credit for any PostHog product or add-on, including the Teams plan. The only limitation on credits is that they cannot be used towards a BAA. 
+Teams in the startup plan can use their credit for any PostHog product or add-on, including the Teams plan. Teams within PostHog for Startups cannot use credits towards a BAA however due to the legal risk to PostHog. If a startup requires a BAA, they should speak to the CS & Sales team to find a solution. 
 
 Unused credits do not carry over past 12 months and can not be converted into cash or other rewards. If credits are used up then the team will automatically trigger email warnings and move to a standard, paid plan. 
 
@@ -63,6 +63,7 @@ In addition to [our startups](/startups) program, we also run a similar program 
 - We offer teams in YC an enhanced package of merch
 - We offer teams in YC a variable amount of credit based on which batch they are in ($50,000 for 12 months for the current batch, $25,0000 for six months for older batches)
 - We invite founders for these teams into [our private Founder community](https://posthog.slack.com/archives/C04J1TJ11UZ)
+- Teams in YC can use credits towards a BAA via the Teams add-on
 
 Teams in the YC program also have a different application process. They must apply via [our secret YC page](/yc-onboarding) and provide a screenshot of Bookface to prove they are part of the YC community. 
 
