@@ -49,6 +49,10 @@ More examples of this flexibility include PostHog's simpler [custom event captur
 
 ## Comparing PostHog and Sentry
 
+Tracking exceptions within PostHog allows you to easily integrate with all of the other products we offer. You can easily create insights to report errors over time, watch replays of users encountering an exception or target surveys when a user faces a bug.
+
+Given PostHog already tracks context about your users it is possible to understand the impact of exceptions more accurately. For example, you can filter issues affecting VIP user cohorts or find those affecting the most amount of sessions.
+
 ### Core features
 
 The core of PostHog and Sentry are different. Sentry focuses entirely on error and performance monitoring, while PostHog has a broader suite of tools to help developers build better products.
@@ -104,9 +108,9 @@ Replays enable you to watch how users experience your app, diagnose issues, impr
 
 <ComparisonTable column1="PostHog" column2="Sentry">
   <ComparisonRow column1={true} column2={true} feature="Web" description="Record sessions from web apps" />
-  <ComparisonRow column1="Beta" column2={true} feature="iOS" description="Record sessions from iOS apps" />
-  <ComparisonRow column1="Beta" column2={true} feature="Android" description="Record sessions from Android apps" />
-  <ComparisonRow column1="Beta" column2={true} feature="React Native" description="Record sessions from React Native apps" />
+  <ComparisonRow column1={true} column2={true} feature="iOS" description="Record sessions from iOS apps" />
+  <ComparisonRow column1={true} column2={true} feature="Android" description="Record sessions from Android apps" />
+  <ComparisonRow column1={true} column2={true} feature="React Native" description="Record sessions from React Native apps" />
   <ComparisonRow column1="Beta" column2="Beta" feature="Flutter" description="Record sessions from Flutter apps" />
   <ComparisonRow column1={true} column2={true} feature="Sampling" description="Choose what sessions you record" />
   <ComparisonRow column1={true} column2={true} feature="Privacy" description="Censor private or personal information" />
