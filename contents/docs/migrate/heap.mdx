@@ -36,7 +36,7 @@ With this event data, you can then go through each row and convert it to PostHog
 - Properties like `landing_page` to `$current_url`
 - Event `time` to an ISO 8601 timestamp
 
-Once done, you can capture the data into PostHog using the [Python SDK](/docs/libraries/python#historical-migrations) or the `capture` [API endpoint](/docs/api/capture) with `historical_migration` set to `true`. 
+Once done, you can capture the data into PostHog using the [Python SDK](/docs/libraries/python#historical-migrations) or the [event capture API endpoint](/docs/api/capture) with `historical_migration` set to `true`. 
 
 Here's an example version of a Python script assuming the data is in `.csv` file:
 

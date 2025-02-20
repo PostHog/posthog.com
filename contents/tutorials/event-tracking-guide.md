@@ -45,7 +45,7 @@ Although autocapture is a great way to get started, it can be limiting for more 
 
 In addition to autocapture, PostHog enables you to set up custom events in your product. This enables you to capture whatever data you want wherever in your codebase. This ensures correct and comprehensive event tracking.
 
-To set up custom events, first you need to install the SDK for the language you are using. We have built SDKs for a range of languages and frameworks including [Node](/docs/libraries/node), [Python](/docs/libraries/python), [iOS](/docs/libraries/ios), [Android](/docs/libraries/android), and more. You can even use our [capture API](/docs/api/capture) directly.
+To set up custom events, first you need to install the SDK for the language you are using. We have built SDKs for a range of languages and frameworks including [Node](/docs/libraries/node), [Python](/docs/libraries/python), [iOS](/docs/libraries/ios), [Android](/docs/libraries/android), and more. You can even use our [event capture API](/docs/api/capture) directly.
 
 For example, with Python (and frameworks like [Django](/docs/libraries/django) or [Flask](/docs/libraries/flask)), setting up custom events starts with installing the PostHog with `pip` (or your package manager of choice). 
 

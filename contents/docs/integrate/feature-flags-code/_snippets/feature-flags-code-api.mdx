@@ -118,14 +118,14 @@ curl -v -L --header "Content-Type: application/json" -d '  {
     "properties": {
       "$feature/feature-flag-key": "variant-key" # Replace feature-flag-key with your flag key. Replace 'variant-key' with the key of your variant
     }
-}' <ph_client_api_host>/capture/ 
+}' <ph_client_api_host>/i/v0/e/ 
 ```
 
 ```python
 import requests
 import json
 
-url = "<ph_client_api_host>/capture/"
+url = "<ph_client_api_host>/i/v0/e/"
 headers = {
     "Content-Type": "application/json"
 }
@@ -163,14 +163,14 @@ curl -v -L --header "Content-Type: application/json" -d '  {
       "$feature_flag": "feature-flag-key",
       "$feature_flag_response": "variant-name"
     }
-}' <ph_client_api_host>/capture/ 
+}' <ph_client_api_host>/i/v0/e/ 
 ```
 
 ```python
 import requests
 import json
 
-url = "<ph_client_api_host>/capture/"
+url = "<ph_client_api_host>/i/v0/e/"
 headers = {
     "Content-Type": "application/json"
 }
