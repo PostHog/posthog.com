@@ -22,7 +22,7 @@ posthog.init('<ph_project_api_key>', { api_host: '<https://webhook.site/843c9506
 ```node
 const client = new PostHog(
     '_6SG-F7I1vCuZ-HdJL3VZQqjBlaSb1_20hDPwqMNnGI',
-    
+
 { host: '<https://webhook.site/843c9506-b845-4ce4-af46-d04022279393>' } // Replace with the URL you copied from webhook.site
 )
 ```
@@ -42,7 +42,7 @@ const options = {
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <PostHogProvider 
+    <PostHogProvider
       apiKey={process.env.REACT_APP_PUBLIC_POSTHOG_KEY}
       options={options}
     >
@@ -72,9 +72,9 @@ If events are visible in webhook.site, it means that you have configured PostHog
 
 #### 2. PostHog is adblocked
 
-PostHog can be adblocked, even locally. This prevents requests from being sent from your app to PostHog. If you're just testing your setup in development, disable your browser ad blocker and make sure you can see PostHog requests succeeding in the network tab of your browser's developer tools. 
+PostHog can be adblocked, even locally. This prevents requests from being sent from your app to PostHog. If you're just testing your setup in development, disable your browser ad blocker and make sure you can see PostHog requests succeeding in the network tab of your browser's developer tools.
 
-For production, the best way to limit the impact of ad blockers is to [set up a reverse proxy](/docs/advanced/proxy). 
+For production, the best way to limit the impact of ad blockers is to [set up a reverse proxy](/docs/advanced/proxy).
 
 #### 3. An app has been configured incorrectly
 
@@ -137,7 +137,7 @@ curl 'http://localhost:3000/e?ip=1&_=1691496272289&ver=1.53.4' \
 4. Click decode and paste the decoded output into this format:
 
 ```
-POST https://[your-instance].com/capture/
+POST https://[your-instance].com/i/v0/e/
 Content-Type: application/json
 Body:
 {
@@ -168,10 +168,10 @@ Body:
 # What was called:
 // e.g.
 // posthog.capture(
-//     "Bob", 
-//     "user_signed_up", 
+//     "Bob",
+//     "user_signed_up",
 //     {
-//         "login_type": "email", 
+//         "login_type": "email",
 //         "is_free_trial": "true"
 //     }
 // )
@@ -256,7 +256,7 @@ You can find more details about how these modes works in our doc on [how queryin
 
 #### 4. Use sampling
 
-[Sampling](/docs/product-analytics/sampling) speeds up insights and queries by taking a portion of your data to calculate aggregate results. 
+[Sampling](/docs/product-analytics/sampling) speeds up insights and queries by taking a portion of your data to calculate aggregate results.
 
 This can be enabled on insights by clicking the "Sampling" toggle on insights or the prompt when they are querying.
 
@@ -267,4 +267,3 @@ This can be enabled on insights by clicking the "Sampling" toggle on insights or
 To combine events, you can use [actions](/docs/data/actions). This enables you to combine and filter events for use in insights and other areas of PostHog.
 
 Note that actions are different from [group analytics](/docs/product-analytics/group-analytics), which enable you to aggregate events at an entity-level, such as organizations or companies
-

@@ -11,9 +11,9 @@ Part of that range are web and product analytics, which send usage event reporti
 
 Nevertheless, privacy-focused users of the web may wish to prevent any such data collection. Ad and tracking blockers should target these endpoints:
 
-`https://us.i.posthog.com/capture`
+`https://us.i.posthog.com/i/v0/e`
 
-`https://eu.i.posthog.com/capture`
+`https://eu.i.posthog.com/i/v0/e`
 
 PostHog provides other tools unrelated to event reporting and analytics. These can be vital to the sites which rely on them. You **should not block** these endpoints, at risk of breaking site functionality:
 
