@@ -846,8 +846,8 @@ export const handbookSidebar = [
             {
                 name: 'Overview',
                 url: '/handbook/growth/revops/',
-            }
-        ]
+            },
+        ],
     },
     {
         name: 'Words & Pictures',
@@ -1118,6 +1118,10 @@ export const companyMenu = {
                 {
                     name: 'Infrastructure',
                     url: '/teams/infrastructure',
+                },
+                {
+                    name: 'LLM Observability',
+                    url: '/teams/llm-observability',
                 },
                 {
                     name: 'Product Analytics',
