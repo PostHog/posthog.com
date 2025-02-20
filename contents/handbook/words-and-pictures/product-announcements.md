@@ -4,7 +4,7 @@ sidebar: Handbook
 showTitle: true
 ---
 
-> **Have something you want to announce?** Drop a message in the #team-words-and-pictures Slack channel so Comms can assist and prevent overlapping messages. If it's an iterative update, you can also demo it in the all-hands, or post in the #tell-posthog-anything Slack channel. 
+> **Have something you want to announce?** Drop a message in the #team-comms Slack channel so Comms can assist and prevent overlapping messages. If it's an iterative update, you can also demo it in the all-hands, or post in the #tell-posthog-anything Slack channel. 
 
 Comms takes responsibility for coordinating and publicizing news about PostHog, including product announcements. We also help with [incident](/handbook/engineering/incidents) and [maintenance announcements](/handbook/words-and-pictures/product-announcements#announcing-scheduled-maintenance), if needed. 
 
