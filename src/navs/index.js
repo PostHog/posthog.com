@@ -846,11 +846,11 @@ export const handbookSidebar = [
             {
                 name: 'Overview',
                 url: '/handbook/growth/revops/',
-            }
-        ]
+            },
+        ],
     },
     {
-        name: 'Words & Pictures',
+        name: 'Comms',
         url: '',
         children: [
             {
@@ -1163,7 +1163,7 @@ export const companyMenu = {
                     url: '/teams/website-vibes',
                 },
                 {
-                    name: 'Words & Pictures',
+                    name: 'Comms',
                     url: '/teams/words-and-pictures',
                 },
             ],
