@@ -52,6 +52,8 @@ Feature flag values are calculated based on a user's properties. Since it's poss
 
 By enabling the option to persist feature flags across authentication, you ensure that the flag value remains the same. 
 
+> **Note:** This feature requires `person_profiles: 'always'` to function as expected. [Learn more about anonymous vs identified events here](/docs/data/anonymous-vs-identified-events).
+
 In our experience, the tradeoffs to enabling this are **not** worthwhile for the majority of our users. They include:
 
 1. **Slower feature flag response:** Enabling this option introduces additional checks, which can slow down the response time when fetching feature flags.
@@ -60,25 +62,27 @@ In our experience, the tradeoffs to enabling this are **not** worthwhile for the
 
 ### Served value
 
-There are two types of feature flags:
+There are three types of feature flags:
 
 #### 1. Boolean flags. 
 
-These return `true` or `false`.
+These return `false` if the flag is disabled, `true` if the flag is enabled and has a matching release condition, and `null` or `undefined` if no release condition matches.
 
 #### 2. Multiple variant flags (multivariate flags). 
 
-Instead of returning true or false, multivariate flags return a key – for example, `control` or `test`. 
+Instead of indicating enabled vs. disabled, multivariate flags return a key – for example, `control` or `test`. 
 
 You can choose the rollout percentage for each variant key, where each is given a specific percentage of the total audience. Users will then be randomly assigned to each variant based on these percentages.
+
+#### 3. Remote config flags. 
+
+While boolean and multivariate flags can be set up to serve different values to different users, remote config flags are meant to pass static configuration values to your applications at runtime. The config value is **always** passed in the flag's payload. You can use remote config flags to tweak application configs on the fly without deploying code changes.
 
 ### Payloads
 
 A payload is an additional piece of information sent to your app when a flag is matched for a user. The returned value can be any valid JSON type (object, array, number, string, boolean, or null).
 
 They enable you to configure functionality related to your flag inside PostHog, instead of having to make code changes or redeploy your app.
-
-> **Note**: Payloads are only available in our JavaScript web, Node, Python, Ruby, and React libraries.
 
 ### Release conditions
 

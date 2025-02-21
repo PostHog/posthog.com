@@ -13,6 +13,9 @@ features:
   sessionRecording: true
   featureFlags: true
   groupAnalytics: true
+  surveys: false
+  llmObservability: false
+  errorTracking: false
 ---
 
 import IOSInstall from '../../integrate/_snippets/install-ios.mdx'
@@ -136,6 +139,35 @@ This will remove the Super Property and subsequent events will not include it.
 
 If you are doing this as part of a user logging out you can instead simply use `PostHogSDK.shared.reset` which takes care of clearing all stored Super Properties and more.
 
+## Amending event properties before they are captured
+
+In case you need to modify or process event properties before they are captured, cached, and sent to PostHog, you can use the `config.propertiesSanitizer` option. 
+
+This feature allows you to define custom logic for sanitizing or transforming properties, ensuring that your event data meets your specific requirements before it is sent over the wire.
+
+To implement this, define a custom sanitizer by creating a class or struct that conforms to the `PostHogPropertiesSanitizer` protocol and implement the `sanitize()` method. 
+
+The `sanitize()` method receives a dictionary of event properties and should return a modified version of the dictionary. 
+
+Then pass your custom sanitizer to `config.propertiesSanitizer` option.  
+
+```swift
+class ExampleSanitizer: PostHogPropertiesSanitizer {
+    public func sanitize(_ properties: [String: Any]) -> [String: Any] {
+        // Create a mutable copy
+        var sanitizedProperties = properties
+        // Perform sanitization
+        // For example, removing keys with empty values
+        for (key, value) in properties {
+            if let stringValue = value as? String, stringValue.isEmpty {
+                sanitizedProperties.removeValue(forKey: key)
+            }
+        }
+        return sanitizedProperties
+    }
+}
+```
+
 ## Flush
 
 You can set the number of events in the configuration that should queue before flushing.
@@ -210,7 +242,7 @@ PostHogSDK.shared.group(type: "company", key: "company_id_in_your_db", groupProp
 ])
 ```
 
-The `name` is a special property which is used in the PostHog UI for the name of the Group. If you don't specify a `name` property, the group ID will be used instead.
+The `name` is a special property which is used in the PostHog UI for the name of the group. If you don't specify a `name` property, the group ID will be used instead.
 
 ## Feature Flags
 
@@ -241,6 +273,8 @@ Starting with iOS 14, Apple will further restrict apps that track users. Any ref
 Hence **starting with posthog-ios version 1.2.0** we have removed all references to Apple's AdSupport framework.
 
 ## Session replay
+
+> **Note:** Session replay is currently only available on iOS. For future macOS support, please follow and upvote [this GitHub issue](https://github.com/PostHog/posthog-ios/issues/200).
 
 To set up [session replay](/docs/session-replay/mobile) in your project, all you need to do is install the iOS SDK, enable "Record user sessions" in [your project settings](https://us.posthog.com/settings/project-replay) and enable the `sessionReplay` option.
 
@@ -342,13 +376,11 @@ configuration.personProfiles = .identifiedOnly
 
 /**
  * Enable Recording of Session Replays. (off/false by default)
- * Experimental support
  */
 configuration.sessionReplay = false
 
 /**
  * Session Replay configuration
- * Experimental support
  */
 configuration.sessionReplayConfig = .init()
 

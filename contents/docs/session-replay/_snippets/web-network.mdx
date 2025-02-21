@@ -33,7 +33,6 @@ We have a deny-list of headers that we will never capture (even if you provide a
 
 * authorization
 * x-forwarded-for
-* authorization
 * cookie
 * set-cookie
 * x-api-key
@@ -97,7 +96,7 @@ posthog.init('<ph_project_api_key>', {
 
 ### Recording from localhost
 
-Due the very high volume of network requests that some tools can make (for example when running hot-reload during development) PostHog does not capture network requests when running on localhost
+Due to the very high volume of network requests that some tools can make (for example when running hot-reload during development) PostHog does not capture network requests when running on localhost
 
 ### Requests early in the page lifecycle don't capture all information
 

@@ -1,0 +1,60 @@
+---
+title: Managing cool tech jobs
+---
+
+## Create a company/jobs:
+
+### Non-moderator flow
+
+- Visit `/cool-tech-jobs`
+- Click "Apply to get your jobs listed here." If you're not already signed in, you'll be prompted to sign in
+- Read the disclaimer and click next
+- Fill out the required fields (non-moderators have an additional field - "Why is your company cool?")
+- Click "Submit application"
+- A message is fired off in the `#cool-tech-jobs` Slack channel with the details of the application
+- A moderator approves and publishes the company from `/cool-tech-jobs`
+
+### Moderator flow
+
+- Visit `/cool-tech-jobs`
+- Click "Add a company"
+- From here, you can either continue with a pending company (one that has a pending application) or create a company from scratch
+- Fill out the required fields. If continuing from a pending company, verify the company details are correct before continuing
+- Click "Publish company"
+
+When a company is created, its jobs are automatically scraped based on the job board URL/slug provided. If no jobs are found, the company is still created (appears semi-transparent for moderators), but a warning message appears that suggests verifying the job board URL.
+
+## Edit a company
+
+- Login to PostHog.com as a moderator
+- Navigate to `/cool-tech-jobs`
+- Click “Edit” under the desired company
+- Fill out the fields in the side modal
+- Click Update company
+
+Jobs will be re-scraped when a company is edited.
+
+## Delete a company
+
+- Login to PostHog.com as a moderator
+- Navigate to `/cool-tech-jobs`
+- Click “Delete” under the desired company
+- Confirm that you want to delete that company
+
+All jobs associated with the deleted company will be deleted along with the original company record.
+
+## Company fields
+
+- **Company name**
+- **Company website URL** - Used for the “Learn more” link
+- **Job board type** (Ashby, Greenhouse, Other) - If “Other” is selected, a custom scraper will need to be built. When the company is published, it will be hidden as no jobs will be scraped.
+- **Job board URL** (if Job board type is set to “Other”) - we’ll use this to build a custom scraper
+- **Job board slug** (if Job board type is *not* “Other”) - the job board’s slug. This is automatically created as you type the company name, as these usually mirror each other. Must be unique and is checked for uniqueness as you type.
+- **Company perks**
+- **Company logos** - SVG/PNG only
+
+Unless required conditionally (job board URL/slug), every company field is required.
+
+## Scraping
+
+Jobs are scraped hourly based on the provided job board URL/slug. Jobs are individually checked for freshness hourly. If a job URL 404s, it is deleted.

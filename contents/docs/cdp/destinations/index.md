@@ -23,7 +23,7 @@ Wherever your data is going, we’ve built destinations for many popular tools t
 
 ## Filtering
 
-Instead of the firehose of all your PostHog data, you can construct a query that filters by event types, properties, or any HogQL statement you can come up with, so that only the information you care about is sent to your destination.
+Instead of the firehose of all your PostHog data, you can construct a query that filters by event types, properties, or any SQL statement you can come up with, so that only the information you care about is sent to your destination.
 
 ![Filtering destinations](https://res.cloudinary.com/dmukukwp6/image/upload/filter_ui_8c7b1fb3be.png)
 

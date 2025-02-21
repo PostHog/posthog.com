@@ -19,7 +19,7 @@ So, you’ve installed your snippet and started tracking data in PostHog. What�
 
 Before forging ahead into the heady world of [insights](/manual/funnels), [session recordings](/manual/recordings), [experimentation](/manual/experimentation) and [feature flags](/manual/feature-flags), we suggest taking a second to invite your teammates to join you. After all, PostHog is better with friends and the more collaborators you have, the more value you can get from your data!
 
-[Inviting teammates to join you](/manual/organizations-and-projects#adding-new-members) is easy, but because the data you’re dealing with may be sensitive it’s worth taking a second to learn about organizations, projects and user permissions first…
+[Inviting teammates to join you](/docs/settings/organizations#adding-new-members) is easy, but because the data you’re dealing with may be sensitive it’s worth taking a second to learn about organizations, projects and user permissions first…
 
 ## Organizations
 Starting at the top, organizations are the highest level of abstraction within PostHog — most commonly consisting of an entire company. Everyone who uses PostHog is part of an organization, even if the organization only has one person in it. 
@@ -36,7 +36,7 @@ Everyone in an organization has the ability to add new members to that organizat
 ## Projects
 A step down from organizations, projects are where the real magic happens and is best defined as where PostHog groups data and queries. Any information in a project is limited to that project and can’t be accessed in another project. 
 
-Projects are also nested within organizations and, while there are several [ways to organize projects](/manual/organizations-and-projects#ways-of-organizing-projects), the most common approach is to have one project per unlinked project within an organization. One exception to this however would be if you only have one product and one marketing website — in which case [we recommend compiling both into a single project](/blog/track-your-website-with-posthog).
+Projects are also nested within organizations and, while there are several [ways to organize projects](/docs/settings/projects), the most common approach is to have one project per unlinked project within an organization. One exception to this however would be if you only have one product and one marketing website — in which case [we recommend compiling both into a single project](/blog/track-your-website-with-posthog).
 
 ### How to create private projects
 Normally, when a user joins an organization they get access to all projects within it. But what if you want to keep some things a secret? That’s when private projects are useful. 

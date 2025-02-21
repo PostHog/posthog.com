@@ -11,11 +11,16 @@ import KeyboardShortcut from 'components/KeyboardShortcut'
 import { docsMenu } from '../../navs'
 import * as Icons from '@posthog/icons'
 import SidebarSearchBox from 'components/Search/SidebarSearchBox'
+import AskMax from 'components/AskMax'
+import { defaultQuickQuestions } from 'hooks/useInkeepSettings'
 
 const ProductLink = ({ icon, name, url, color }) => {
     const Icon = Icons[icon]
     return (
-        <Link to={url} className="flex items-center border border-light dark:border-dark hover:border-black/50 dark:hover:border-white/50 px-1 py-0.5 rounded-sm text-primary/75 dark:text-primary-dark/75 hover:text-primary dark:hover:text-primary-dark relative hover:top-[-.5px] active:top-[.5px] hover:scale-[1.01] active:scale-[.995]">
+        <Link
+            to={url}
+            className="flex items-center border border-light dark:border-dark hover:border-black/50 dark:hover:border-white/50 px-1 py-0.5 rounded-sm text-primary/75 dark:text-primary-dark/75 hover:text-primary dark:hover:text-primary-dark relative hover:top-[-.5px] active:top-[.5px] hover:scale-[1.01] active:scale-[.995]"
+        >
             <Icon className={`w-4 h-4 mr-1 text-${color}`} />
             <span className="text-sm">{name}</span>
         </Link>
@@ -31,7 +36,12 @@ const ProductItem = ({ product }) => {
                     <Icon className={`w-6 h-6 text-${product.color}`} />
                 </div>
                 <div className="flex-1">
-                    <strong>{product.name}</strong>
+                    <Link
+                        href={product.url}
+                        className="text-primary dark:text-primary-dark hover:underline hover:text-primary dark:hover:text-primary-dark"
+                    >
+                        <strong>{product.name}</strong>
+                    </Link>
                     <p className="mb-0 text-[15px] opacity-75">{product.description}</p>
                     <div className="flex flex-wrap gap-2 pt-2">
                         {product.children
@@ -71,10 +81,10 @@ export const DocsIndex = () => {
             <SEO title="Documentation - PostHog" />
 
             <PostLayout article={false} title={'Docs'} hideSidebar hideSurvey>
-                <section className="mb-8 flex flex-col-reverse lg:flex-row gap-4 bg-white dark:bg-accent-dark border border-light dark:border-dark rounded-md p-4 md:p-8 lg:pr-0 shadow-xl">
+                <section className="mb-8 flex flex-col-reverse lg:flex-row bg-white dark:bg-accent-dark border border-light dark:border-dark rounded-md p-4 md:p-8 lg:pr-0 shadow-xl">
                     <div className="@container flex-1 text-center sm:text-left">
                         <h2>New to PostHog?</h2>
-                        <p className="text-[15px]">
+                        <p className="text-[15px] md:pr-4">
                             The getting started guide covers adding PostHog to your app or site, sending events,
                             identifying users, creating actions and insights, and assigning properties to users and
                             users to groups.
@@ -88,11 +98,18 @@ export const DocsIndex = () => {
                             Get started
                         </CallToAction>
 
-                        <div className="flex gap-1 justify-center @md:justify-start lg:justify-start @sm:items-center mt-6">
-                            <IconLightBulb className="w-6 h-6 text-primary dark:text-primary-dark opacity-50" />
-                            <p className="text-sm m-0 text-left @sm:text-center">
-                                <strong>Tip:</strong> Open search with <KeyboardShortcut text="/" /> , then{' '}
-                                <KeyboardShortcut text="Tab" size="sm" /> to search docs
+                        <div className="flex gap-2 justify-center @md:justify-start lg:justify-start @sm:items-center mt-6">
+                            <IconLightBulb className="size-8 flex-[0_0_2rem] @md:flex-[0_0_auto] @md:size-10 text-primary dark:text-primary-dark opacity-50 bg-accent dark:bg-accent-dark rounded-sm p-2" />
+                            <p className="text-sm m-0 text-left leading-relaxed">
+                                <strong>Tip:</strong>{' '}
+                                <AskMax linkOnly className="text-red dark:text-yellow font-semibold">
+                                    Chat with Max AI
+                                </AskMax>{' '}
+                                for quick answers to questions.{' '}
+                                <span className="@md:inline-block">
+                                    Open by typing <KeyboardShortcut text="?" /> or search with{' '}
+                                    <KeyboardShortcut text="/" />.
+                                </span>
                             </p>
                         </div>
                     </div>
@@ -111,9 +128,7 @@ export const DocsIndex = () => {
                 </section>
 
                 <section className="@container">
-
                     <h4 className="mb-2">Product documentation</h4>
-
                     <div className="max-w-4xl">
                         <SidebarSearchBox filter="docs" />
                     </div>
@@ -153,8 +168,6 @@ export const DocsIndex = () => {
                         </div>
                     </div>
                 </section>
-
-
             </PostLayout>
         </Layout>
     )

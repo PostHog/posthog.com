@@ -28,7 +28,7 @@ This means expenses that are under $75 one off or under $20/month recurring that
 
 Make sure you *keep copies for all receipts*. If you expense something on a company card and cannot provide a receipt, this may be deducted from your pay.
 
-You should default to using your company card in all cases - it has no transaction fees. If using your personal card is unavoidable, please post in the #team-people-and-ops channel in Slack afterwards and tag Fraser to get reimbursed manually. 
+You should default to using your company card in all cases - it has no transaction fees. If using your personal card is unavoidable, please save receipts and request a reimbursement through Brex.
 
 ### Brex
 
@@ -86,7 +86,9 @@ If you are in the US only, when buying something at Apple we can get 3% cashback
 
 Also, Amazon regularly offer discounts on Apple products of around 10%, so always worth a check before buying direct from Apple. If you buy from Apple, you may be asked if you wanted to purchase Apple Care - please don't buy this as it's not great value for money.
 
-> You can request a budget to buy a new laptop every 4 years - you can do this in Brex. If you are having issues with your laptop before that and a genuine exception needs to be made, drop a note in the #team-people-and-ops channel. 
+> You can request a budget to buy a new laptop if your laptop is over 4 years old - you can do this in Brex. We do ask that you do some diligence to make sure it's not a setup issue though - ie other applications aren't hogging the memory, etc. We recommend wiping + reinstalling a minimum set of apps to verify this. 
+>
+> If you are having issues with your laptop before your laptop is old enough and a genuine exception needs to be made, drop a note in the #team-people-and-ops channel. 
 
 ### Monitor
 
@@ -173,7 +175,7 @@ We care about you being healthy, happy and productive.
 
 While PostHog will use the money saved from not having office space for real life meetups, we are happy to cover some expenses related to where you work. Most people do most of their work from home, but we understand that getting out of the house from time to time can help you escape cabin fever!
 
-You can spend up to $300/month to work in cafés or coworking spaces. You must provide receipts if applicable, and in this case, they must only be for yourself.
+You can spend up to $300/month to work in cafés or coworking spaces. You must provide receipts if applicable, and in this case, they must only be for yourself. If your workspace is over $300, please pay for this yourself and request a reimbursement through Brex for the $300 per month.
 
 We have a company WeWork All Access account that allows you to book desks in any of their worldwide locations. If you wish to take advantage of this, post in #team-people-and-ops and Kendal will add you. This membership costs the full budget per month, so please keep that in mind when opting in.
 
@@ -185,8 +187,7 @@ We do not pre-approve your travel expenses, and trust team members to make the r
 - We all travel economy by default- we cannot afford for folks to fly premium or business class. Feel free to upgrade using your personal money/airmiles if you’d like to. If you are particularly tall and struggle to fit into an economy seat, PostHog will cover the cost of an emergency exit seat. 
 - Be sensible when considering the value of your time, and avoid over-optimizing for cost. It is probably not worth saving $100 to take a non-direct flight that takes you 5hrs extra. Similarly, it doesn’t make sense to save $50 by taking a flight that leaves at 6am, only to have to expense a taxi to get to the airport.
 - Related to the above, consider signing up for programs like Global Entry if you are regularly travelling to countries that offer it- these can pay for themselves in one trip with the amount of time saved, particularly when travelling to the US. PostHog will cover costs here.
-
-If you have any questions about this stuff, or are unsure what is reasonable here, feel free to check in with Fraser.
+- When travelling internationally, PostHog does not cover roaming charges for your phone. You can expense a reasonable eSIM, which usually is no more than $20. 
 
 ### Budget for working together/socializing
 

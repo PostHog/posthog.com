@@ -10,6 +10,7 @@ import {
     StickerFlagCO,
     StickerFlagCY,
     StickerFlagDE,
+    StickerFlagDO,
     StickerFlagIE,
     StickerFlagES,
     StickerFlagFI,
@@ -21,6 +22,7 @@ import {
     StickerFlagNO,
     StickerFlagPL,
     StickerFlagPR,
+    StickerFlagSE,
     StickerFlagUnknown,
     StickerFlagUS,
     StickerPineappleYes,
@@ -49,6 +51,8 @@ const Stickers = ({ location, country, pineappleOnPizza, isTeamLead, editing, id
                     <StickerFlagGB className="w-8 h-8" />
                 ) : country === 'DE' ? (
                     <StickerFlagDE className="w-8 h-8" />
+                ) : country === 'DO' ? (
+                    <StickerFlagDO className="w-8 h-8" />
                 ) : country === 'ES' ? (
                     <StickerFlagES className="w-8 h-8" />
                 ) : country === 'FI' ? (
@@ -79,6 +83,8 @@ const Stickers = ({ location, country, pineappleOnPizza, isTeamLead, editing, id
                     <StickerFlagPL className="w-8 h-8" />
                 ) : country === 'PR' ? (
                     <StickerFlagPR className="w-8 h-8" />
+                ) : country === 'SE' ? (
+                    <StickerFlagSE className="w-8 h-8" />
                 ) : (
                     <StickerFlagUnknown className="w-8 h-8" />
                 )}

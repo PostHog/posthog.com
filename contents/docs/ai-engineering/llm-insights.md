@@ -1,12 +1,12 @@
 ---
-title: LLM insights (beta)
+title: LLM observability integrations (beta)
 availability:
     free: full
     selfServe: full
     enterprise: full
 ---
 
-We've teamed up with various LLM platforms to track metrics for LLM apps. This makes it easy to answer questions like:
+Beyond our native [LLM observability product](/docs/ai-engineering/observability), we've teamed up with various LLM platforms to track metrics for LLM apps. This makes it easy to answer questions like:
 
 - What are my LLM costs by customer, model, and in total?
 - How many of my users are interacting with my LLM features?
@@ -17,10 +17,10 @@ We've teamed up with various LLM platforms to track metrics for LLM apps. This m
 
 Currently, we support integrations for the following platforms:
 
-- [Langfuse](https://langfuse.com) ([instructions](/docs/ai-engineering/langfuse-posthog))
-- [Helicone](https://www.helicone.ai/) ([instructions](/docs/ai-engineering/helicone-posthog))
-- [Traceloop](https://www.traceloop.com/) ([instructions](/docs/ai-engineering/traceloop-posthog))
-- [Keywords AI](https://keywordsai.co/) ([instructions](/docs/ai-engineering/keywords-ai-posthog))
+- [Langfuse](/docs/ai-engineering/langfuse-posthog)
+- [Helicone](/docs/ai-engineering/helicone-posthog) 
+- [Traceloop](/docs/ai-engineering/traceloop-posthog)
+- [Keywords AI](/docs/ai-engineering/keywords-ai-posthog)
 
 ## Dashboard templates
 

@@ -66,6 +66,10 @@ Most companies add friction here by making customers jump on a call first to qua
 
 If you're pretty sure that they should be qualified out, you should still be helpful over email - some customers just use the form to get in touch and don't want to actually have a demo (e.g. they have a billing question or are asking about compliance things like HIPAA.)
 
+If it's an unsolicited Request For Proposal (RFP) where we haven't had any prior contact or usage from the company then it is **highly likely** that you will burn a lot of time for nothing.  The suggested approach here is to see if anyone from the company has recently signed up to PostHog, if so then make contact with them to see if they are aware of the RFP and can provide more information.  If not then ask the person who sent you the RFP for a call to gather more context before making a decision on whether to fill it in.  If they aren't willing to get on a call then it's likely that we are not their vendor of choice, and they are using us to make up the numbers in a tender process.  As such, we shouldn't spend time on this kind of activity.
+
+If they're eligible for the [Startup Plan](/startups), route them to the application form and disqualify them as it's not an immediate opportunity (but we sincerely hope they grow into loyal PostHog customers). If their usage will burn through their credits quickly, you should feel free to switch their lead status to `Nurture` and keep close tabs on them. Per our [usual approach to sales](/handbook/growth/sales/overview), we want to make sure they're successful in this "high-use" scenario and are building with us for the long-term.
+
 You can also redirect them to use the In-app support modal if they have a product-related question - this will then be routed to the right team, as well as showing them CTAs to upgrade for high priority support.
 
 > **Examples of good discovery questions - this is not a script, just ideas!**
@@ -123,7 +127,7 @@ If you realize that they will be too small (<$20k) to go through our sales-led p
 
 If you think they are a good prospect for our sales-led process, your first priority is to try and get them into a shared Slack channel as quickly as possible. If you close them, this will also be their primary channel for support. Add the Pylon app to the channel and it will automate the support bot and channel description. React with a 🎫 to customer messages or tag `@support` to create a ticket in a thread.
 
-Some customers may wish to use MS Teams rather than Slack - we can sync our Slack with Teams via Pylon to do this. First you will need an MS Teams licence - ask Simon for one. Then, [follow the instructions here](https://docs.usepylon.com/bridges/microsoft-teams/setup) to get set up. Before adding the customer into the channel, remember to test it on both sides to ensure the integration is working correctly.
+Some customers may wish to use MS Teams rather than Slack - we can sync our Slack with Teams via Pylon to do this. First you will need an MS Teams licence - ask Simon for one. Then, [follow the instructions here](https://docs.usepylon.com/pylon-docs/integrations/chat/microsoft-teams)) to get set up. Before adding the customer into the channel, remember to test it on both sides to ensure the integration is working correctly.
 
 You should then follow up with a standard email/Slack message that:
 
@@ -184,6 +188,7 @@ By this point, you may have started running into some objections. These are the 
 - Pricing issue - understand their budget; our [discounts](/handbook/growth/sales/contracts#discounts) section had the different levers you can pull to get a customer to the right price point. You can also help them tune their usage to lower costs. We don't buy customers out of existing contracts, and we don't do deals where year 1 is super cheap then we ratchet up the price in year 2.
 - Performance (e.g. slow dashboards) - for Extra Large, usually get Tim involved, or he can loop in the right engineer to help.
 - Confidence in PostHog - often [this Handbook page](/handbook/finance) is enough. For Very Large companies who need to be sold a bit more on the company vision, you can get James H involved.
+- Unsure how much credit they need - suggesting the customer pay monthly for one or two months can help here, especially when there is not a technical driver that can do the mental math to figure out volumes. It's also a good expectation to set at the end of the trial that they will roll onto monthly, which can be pitched as a way to de-risk for the customer if there are still loose ends or a deal is dragging. 
 
 > Ahead of the contract being signed, you'll also need to understand the customer's invoicing process.  Companies will typically have a Finance or AP team who should be the billing contact in Stripe.  Make sure you are also aware of any special invoicing requirements (e.g. a Purchase Order number) well ahead of the invoice being generated.  In addition, we only accept annual plan payments via Bank Transfer (no checks).
 

@@ -1,0 +1,50 @@
+---
+title: Organizations
+sidebar: Docs
+showTitle: true
+availability:
+    free: partial
+    selfServe: partial
+    enterprise: full
+
+    features:
+        multipleOrgs:
+            openSource: false
+            free: true
+            selfServe: true
+            enterprise: true
+---
+
+> Multiple organizations and projects aren't available on open source hobby deployments.
+
+## Organizations
+
+An organization is the highest abstraction level within a PostHog instance. It's made up of projects (see more on them [here](/docs/settings/projects)) and members.
+
+Most commonly a PostHog organization represents a real-world company or other type of isolated grouping.
+
+Use the organization dropdown in the top bar to switch between organizations or create a new one.
+
+PostHog Cloud users can create, manage, and join organizations without limits.
+
+Organization members have different access levels based on their membership type. See more in our [access control docs](/docs/settings/access-control).
+
+### Adding new members
+
+Any organization member can create organization invites. Such an invite is valid **for 3 days** after creation and **only for the specified email**.
+In an [email-enabled PostHog instance](/docs/self-host/configure/email) (including PostHog Cloud) the invite is sent automatically to the specified email. If the PostHog instance can't send emails, remember to share the invite link yourself.
+
+If there's no account associated with that email, the invited person will have to create an account. Otherwise, they'll be able to join with their existing account.
+
+Newly-joined users get the basic Member access level.
+
+### Deleting an organization
+
+Organization can be deleted by any organization Owner. This action is irreversible. See the Danger Zone in your settings for more information.
+
+### Notifications
+
+By default every time a member joins an organization in an [email-enabled PostHog instance](/docs/self-host/configure/email) (including PostHog Cloud), all existing members of the organization get notified about this with an email. This increases security by making it explicit who gains access to your product data.
+
+If you'd rather not get such notifications, you can disable them in the "Notification Preferences" section of organization settings.
+

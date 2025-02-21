@@ -47,7 +47,8 @@ posthog.init(process.env.NEXT_PUBLIC_POSTHOG_KEY, {
 })
 ```
 
-> If this isn't working for you (returning `503` errors), it may be an issue with how your hosting service (such as Heroku) handles rewrites. You can write [Next.js middleware to proxy requests](/docs/advanced/proxy/nextjs-middleware) instead.
+> If this isn't working for you (returning `503` or `400` errors), it may be an issue with how your hosting service (such as Heroku or Netlify) handles rewrites. You can write [Next.js middleware](/docs/advanced/proxy/nextjs-middleware) or use a host-specific proxy (like [Netlify](/docs/advanced/proxy/netlify)) instead.
+> For example, Netlify modifies the `Content-Encoding` header when using `rewrites()`, which causes PostHog to fail to parse the request. This doesn't happen if you use their `_redirects` file or `netlify.toml` options.
 
 ## Setup video
 

@@ -2,11 +2,13 @@
 title: React Native session replay
 ---
 
-> 🚧 **NOTE:** React Native session replay is considered `beta` and is free while in beta. We are keen to gather as much feedback as possible so if you try this out please let us know. You can send feedback via the [in-app support panel](https://us.posthog.com#panel=support%3Afeedback%3Asession_replay%3Alow) or one of our other [support options](/docs/support-options).
-
 ## Step one: Add PostHog to your app
 
 import ReactNativeInstall from "../../integrate/_snippets/install-react-native.mdx"
+
+export const EnableSessionReplayDark = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/session-replay/enable-session-replay-in-project-settings-dark-mode.png"
+export const EnableSessionReplayLight = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/session-replay/enable-session-replay-in-project-settings-light-mode.png"
+
 
 <ReactNativeInstall />
 
@@ -20,11 +22,22 @@ yarn add posthog-react-native-session-replay
 npm i -s posthog-react-native-session-replay
 ```
 
-## Step two: Configure replay settings
+## Step two: Enable session recordings in your project settings
+
+Enable session recordings in your PostHog [Project Settings](https://app.posthog.com/project/settings).
+
+<ProductScreenshot
+  imageLight={EnableSessionReplayLight} 
+  imageDark={EnableSessionReplayDark} 
+  alt="Enable session recordings in your PostHog'"
+  classes="rounded"
+/>
+
+## Step three: Configure replay settings
 
 Add `enableSessionReplay: true` to your PostHog configuration alongside any of your other configuration options:
 
-```js
+```ts
 export const posthog = new PostHog(
   '<ph_project_api_key>',
   {
@@ -60,7 +73,7 @@ export const posthog = new PostHog(
 
 Or using the `PostHogProvider`:
 
-```js
+```ts
 <PostHogProvider
         apiKey="<ph_project_api_key>"
         options={{
@@ -97,6 +110,7 @@ npx expo run:ios --no-build-cache --device
 - Keyboard is not supported. A placeholder will be shown.
 - Wireframe mode isn't supported, only screenshot mode.
 - Expo Go isn't supported since it uses Native plugins, please use development build.
+- Masking individual view components within a WebView isn't supported, if your WebView displays sensitive view components, you've to [mask](/docs/session-replay/privacy?tab=React+Native) the whole WebView.
 
 ## Troubleshooting
 

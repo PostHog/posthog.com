@@ -152,12 +152,12 @@ In many ways, mobile has been neglected by the analytics industry. Tools like se
   classes="rounded"
 />
 
-We want to change this. Mobile replay is free while in beta, and once it's out of beta, we'll follow [our pricing principles](/handbook/engineering/feature-pricing), making it as affordable as possible.
+We want to change this. Mobile replay was free while in beta, and now that it's out of beta, we provide a free tier of 2,500 mobile recordings per month.
 
 This enables us to help more developers have the tools they need to build successful products.
 
 ## Further reading
 
-- [The 80/20 of early-stage startup analytics](/founders/early-stage-analytics)
+- [What's the best Hotjar for mobile apps?](/blog/hotjar-for-mobile-ios-android-react-native-flutter)
 - [We decided to make session replay cheaper](/blog/session-replay-pricing)
 - How to set up [Android](/tutorials/android-session-replay), [iOS](/tutorials/ios-session-replay), and [React Native](/docs/session-replay/react-native) session replay

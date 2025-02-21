@@ -6,9 +6,15 @@
 
 import FlutterInstall from "../../integrate/_snippets/install-flutter.mdx"
 
+export const EnableSessionReplayDark = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/session-replay/enable-session-replay-in-project-settings-dark-mode.png"
+export const EnableSessionReplayLight = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/session-replay/enable-session-replay-in-project-settings-light-mode.png"
+
+
 <FlutterInstall />
 
 #### Widget and Observer setup
+
+> This configuration is only needed for mobile session replay.
 
 Wrap your app with the `PostHogWidget` Widget and Install the `PosthogObserver` Observer.
 
@@ -43,7 +49,21 @@ class _MyAppState extends State<MyApp> {
 }
 ```
 
-## Step two: Configure replay settings
+## Step two: Enable session recordings in your project settings
+
+Enable session recordings in your PostHog [Project Settings](https://app.posthog.com/project/settings).
+
+If you're using Flutter Web, also enable the [Canvas capture](/docs/session-replay/canvas-recording) in [your project settings](https://us.posthog.com/settings/project-replay).  
+This is needed as Flutter renders your app using a browser canvas element.
+
+<ProductScreenshot
+  imageLight={EnableSessionReplayLight} 
+  imageDark={EnableSessionReplayDark} 
+  alt="Enable session recordings in your PostHog'"
+  classes="rounded"
+/>
+
+## Step three: Configure replay settings  
 
 Add `sessionReplay = true` to your PostHog configuration alongside any of your other configuration options:
 
@@ -60,21 +80,29 @@ config.sessionReplayConfig.maskAllTexts = false;
 /// Enable masking of all images.
 /// Default: true.
 config.sessionReplayConfig.maskAllImages = false;
-/// Debouncer delay used to reduce the number of snapshots captured and reduce performance impact.
+/// Throttling delay used to reduce the number of snapshots captured and reduce performance impact.
 /// This is used for capturing the view as a screenshot.
 /// The lower the number, the more snapshots will be captured but higher the performance impact.
+/// Experimental support.
 /// Defaults to 1s.
-config.sessionReplayConfig.debouncerDelay = const Duration(milliseconds: 1000);
+/// Ps: it was called [debouncerDelay] until version 4.7.1
+config.sessionReplayConfig.throttleDelay = const Duration(milliseconds: 1000);
 ```
 
-## Limitations
+## Limitations for mobile session replay
 
 - On Android, requires API >= 26.
-- On iOS, minimum deployment target is [iOS13](/docs/libraries/ios)
+- On iOS, minimum deployment target is [iOS13](/docs/libraries/ios).
 - Wireframe mode isn't supported, only screenshot mode.
 - [Network performance recording](docs/session-replay/network-recording) isn't supported yet.
+
+## Limitations for flutter web session replay
+
+- The [Canvas capture](/docs/session-replay/canvas-recording) enabled is required.
 
 ## Troubleshooting
 
 - Run a clean build if you experience issues.
 - Update your iOS Pods.
+- For blank recordings for mobile session replay, be sure to set up the [Widget and Observer](/docs/session-replay/installation?tab=Flutter#widget-and-observer-setup).
+- For blank recordings for flutter web session replay, be sure to enable [Canvas capture](/docs/session-replay/canvas-recording).

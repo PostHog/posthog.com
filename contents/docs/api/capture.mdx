@@ -4,7 +4,7 @@ sidebar: Docs
 showTitle: true
 ---
 
-The `capture` and `batch` endpoints are the main way to send events to PostHog. Beyond user behavior, they are also used to identify users, update person or group properties, migrate from other platforms, and more. [Our SDKs](/docs/libraries) handle the different event types for you, but with the API, you need to send the right type of event (listed below) to trigger the functionality you want. 
+The `/i/v0/e` and `/batch` endpoints are the main way to send events to PostHog. Beyond user behavior, they are also used to identify users, update person or group properties, migrate from other platforms, and more. [Our SDKs](/docs/libraries) handle the different event types for you, but with the API, you need to send the right type of event (listed below) to trigger the functionality you want. 
 
 Both are POST-only public endpoints that use your [project API key](https://app.posthog.com/project/settings) and do not return any sensitive data from your PostHog instance.
 
@@ -15,6 +15,8 @@ Here are examples of the types of events you can send:
 ## Single event
 
 Every event request must contain an `api_key`, `distinct_id`, and `event` field with the name. Both the `properties` and `timestamp` fields are optional. 
+
+> **Note:** By default, events captured via the API are [identified events](/docs/data/anonymous-vs-identified-events). See the section on [how to capture anonymous events](#anonymous-event-capture) for more.
 
 <MultiLanguage>
 
@@ -27,11 +29,11 @@ curl -v -L --header "Content-Type: application/json" -d '{
     "account_type": "pro"
   },
   "timestamp": "[optional timestamp in ISO 8601 format]"
-}' <ph_client_api_host>/capture/ 
+}' <ph_client_api_host>/i/v0/e/ 
 ```
 
 ```python
-url = "<ph_client_api_host>/capture/"
+url = "<ph_client_api_host>/i/v0/e/"
 headers = {
     "Content-Type": "application/json"
 }
@@ -52,7 +54,7 @@ print(response)
 import fetch from "node-fetch";
 
 async function sendPosthogEvent() {
-  const url = "<ph_client_api_host>/capture/";
+  const url = "<ph_client_api_host>/i/v0/e/";
   const headers = {
       "Content-Type": "application/json",
   };
@@ -77,6 +79,76 @@ async function sendPosthogEvent() {
 }
 
 sendPosthogEvent()
+```
+
+</MultiLanguage>
+
+### Anonymous event capture
+
+To capture [anonymous events](/docs/data/anonymous-vs-identified-events), add the `$process_person_profile` property to the event and set it to `false`.
+
+<MultiLanguage>
+
+```bash
+curl -v -L --header "Content-Type: application/json" -d '{
+  "api_key": "<ph_project_api_key>",
+  "event": "event name",
+  "distinct_id": "user distinct id",
+  "properties": {
+    "$process_person_profile": false
+  },
+  "timestamp": "2020-08-16T09:03:11.913767"
+}' <ph_client_api_host>/i/v0/e/
+```
+
+```python
+import requests
+import json
+
+url = "<ph_client_api_host>/i/v0/e/"
+headers = {
+    "Content-Type": "application/json"
+}
+payload = {
+    "api_key": "<ph_project_api_key>",
+    "event": "event name",
+    "distinct_id": "user distinct id",
+    "properties": {
+      "$process_person_profile": False
+    }
+}
+response = requests.post(url, headers=headers, data=json.dumps(payload))
+print(response)
+```
+
+```node
+import fetch from "node-fetch";
+
+async function sendAnonymousPosthogEvent() {
+  const url = "<ph_client_api_host>/i/v0/e/";
+  const headers = {
+      "Content-Type": "application/json",
+  };
+  const payload = {
+    api_key: "<ph_project_api_key>",
+    event: "event name",
+    distinct_id: "user distinct id",
+    properties: {
+      $process_person_profile: false
+    }
+  };
+
+  const response = await fetch(url, {
+    method: "POST",
+    headers: headers,
+    body: JSON.stringify(payload),
+  });
+
+  const data = await response.json();
+  console.log(data);
+}
+
+sendAnonymousPosthogEvent()
 ```
 
 </MultiLanguage>
@@ -174,14 +246,14 @@ curl -v -L --header "Content-Type: application/json" -d '{
   "properties": {
     "alias": "456"
   }
-}' <ph_client_api_host>/capture/
+}' <ph_client_api_host>/i/v0/e/
 ```
 
 ```python
 import requests
 import json
 
-url = "<ph_client_api_host>/capture/"
+url = "<ph_client_api_host>/i/v0/e/"
 headers = {
     "Content-Type": "application/json"
 }
@@ -219,7 +291,7 @@ curl -v -L --header "Content-Type: application/json" -d '{
       "date_joined": "[optional timestamp in ISO 8601 format]"
     }
   }
-}' <ph_client_api_host>/capture/
+}' <ph_client_api_host>/i/v0/e/
 ```
 
 ```python
@@ -227,7 +299,7 @@ import json
 import requests
 from datetime import datetime
 
-url = "<ph_client_api_host>/capture/"
+url = "<ph_client_api_host>/i/v0/e/"
 headers = {
     "Content-Type": "application/json"
 }
@@ -267,14 +339,14 @@ curl -v -L --header "Content-Type: application/json" -d '{
   "properties": {
     "$groups": {"company": "<company_name>"}
   }
-}' <ph_client_api_host>/capture/
+}' <ph_client_api_host>/i/v0/e/
 ```
 
 ```python
 import requests
 import json
 
-url = "<ph_client_api_host>/capture/"
+url = "<ph_client_api_host>/i/v0/e/"
 headers = {
     "Content-Type": "application/json"
 }
@@ -312,14 +384,14 @@ curl -v -L --header "Content-Type: application/json" -d '{
     }
   },
   "timestamp": "2020-08-16T09:03:11.913767"
-}' <ph_client_api_host>/capture/
+}' <ph_client_api_host>/i/v0/e/
 ```
 
 ```python
 import requests
 import json
 
-url = "<ph_client_api_host>/capture/"
+url = "<ph_client_api_host>/i/v0/e/"
 headers = {
     "Content-Type": "application/json"
 }
@@ -331,46 +403,6 @@ payload = {
       "$set": {
           "is_cool": True
       }
-    }
-}
-response = requests.post(url, headers=headers, data=json.dumps(payload))
-print(response)
-```
-
-</MultiLanguage>
-
-## Anonymous events
-
-To capture [anonymous events](/docs/data/anonymous-vs-identified-events), add the `$process_person_profile` property to the event and set it to `false`.
-
-<MultiLanguage>
-
-```bash
-curl -v -L --header "Content-Type: application/json" -d '{
-  "api_key": "<ph_project_api_key>",
-  "event": "event name",
-  "distinct_id": "user distinct id",
-  "properties": {
-    "$process_person_profile": false
-  },
-  "timestamp": "2020-08-16T09:03:11.913767"
-}' <ph_client_api_host>/capture/
-```
-
-```python
-import requests
-import json
-
-url = "<ph_client_api_host>/capture/"
-headers = {
-    "Content-Type": "application/json"
-}
-payload = {
-    "api_key": "<ph_project_api_key>",
-    "event": "event name",
-    "distinct_id": "user distinct id",
-    "properties": {
-      "$process_person_profile": False
     }
 }
 response = requests.post(url, headers=headers, data=json.dumps(payload))
@@ -393,14 +425,14 @@ curl -v -L --header "Content-Type: application/json" -d '{
   "properties": {
     "$current_url": "https://posthog.com/docs/api/capture"
   }
-}' <ph_client_api_host>/capture/
+}' <ph_client_api_host>/i/v0/e/
 ```
 
 ```python
 import requests
 import json
 
-url = "<ph_client_api_host>/capture/"
+url = "<ph_client_api_host>/i/v0/e/"
 headers = {
     "Content-Type": "application/json"
 }
@@ -432,14 +464,14 @@ curl -v -L --header "Content-Type: application/json" -d '{
   "properties": {
     "$screen_name": "TheScreen"
   }
-}' <ph_client_api_host>/capture/
+}' <ph_client_api_host>/i/v0/e/
 ```
 
 ```python
 import requests
 import json
 
-url = "<ph_client_api_host>/capture/"
+url = "<ph_client_api_host>/i/v0/e/"
 headers = {
     "Content-Type": "application/json"
 }
@@ -472,14 +504,14 @@ curl -v -L --header "Content-Type: application/json" -d '{
     "$survey_id": "survey_id",
     "$survey_response": "Awesome!"
   }
-}' <ph_client_api_host>/capture/
+}' <ph_client_api_host>/i/v0/e/
 ```
 
 ```python
 import requests
 import json
 
-url = "<ph_client_api_host>/capture/"
+url = "<ph_client_api_host>/i/v0/e/"
 headers = {
     "Content-Type": "application/json"
 }

@@ -79,7 +79,9 @@ You can use these signals alongside regular customer interactions to prioritize 
   - Already doing it in house/with something else - demonstrated cool ways in which the products integrate and save their team time
   - May be too far down the line with their own data warehouse - it is hard to do a replacement at this stage, so instead talk about how you can enrich their data in PostHog with what's already in their data warehouse
   - Not ready to invest the time and resources to implement more tools - tie this to the pain of _not_ having an additional solution in place and emphasize time to value is extremely quick with PostHog e.g. with autocapture, session replay, and (soon) no-code experiments. 
- 
+
+> Pro tip - if a customer isn't using a PostHog product and there is no obvious reason why they shouldn't, ask them directly why they're not using it!
+
 These are typically combinations of products that we've seen be successful:
 
 - Product analytics + Web analytics
@@ -99,6 +101,26 @@ The best way to do this is to expand usage of existing product with _new_ teams 
 If you offer to do a meeting in person with a customer, they’ll then feel obliged to introduce you to other people to make good use of your time. Trying to get them to adopt more products can be a good trigger, but generally you should be matching the cadence for in-person meetings with the size of contract (ie. more regular for Very Large, less regular for Large). 
 
 Generally speaking you should be trying to regularly see customers in your book of business who are $60k+ annually, or could get there. Occasionally you can pull in James/Tim if they are traveling to SF/NY especially, or if the customer is in London. 
+
+If you regularly visit customers, you can (and should) take some sweet merch. You can self-serve this using [a discount code pinned in our team Slack channel](https://posthog.slack.com/archives/C01MGUHFH6G/p1734015156043549) to get 100% off your order.
+
+## Renewals for annual contracts
+
+### When they don't have enough credit to cover their term
+
+We have CreditBot alerts set up in [#sales-alerts](https://posthog.slack.com/archives/C071PGWKBQS) when a customer is going to run out of credit before their contract term ends, with the estimated runway remaining.  The Vitally account owner (AE or CSM) will be tagged in this message.  It's best to be proactive here so that the customer is right-sized well before the credit runs out:
+
+* If they will run out of credit or wish to buy more within the **first 6 months** of the contract term, they can still take advantage of their initial discount.  You'll need to have them sign a new order form which adds the additional credit, and it should expire on the date of the original order form.
+  * Example: Their original order form was signed on 1st January with a 12-month term.  Their expansion order form could be signed on 1st June with a 7-month term.  Make sure the end date lines up with the end date of the original contract to avoid any issues with the billing server and ARR calculation.
+* If they will run out of credit with **less than 2 months** remaining on their initial term, as long as they sign a renewal order form to start at the end of the original contract term we will cover their usage for free until the renewal date, assuming the renewal order form is signed before they run out of credit.
+* If they fall **in between** the two cases above (running out of credit with <6 months and >2 months to go) then we need them to sign a new 12 month (or longer) order form lined up with their monthly billing date.  This makes ARR calculation slightly trickier as there are two overlapping contracts in play at the same time.
+  * Example: Their original order form was signed on 1st January with a 12-month term and they run out of credits in September.  We need a new 12-month order form in place with a Contract Start Date of September 1st. 
+ 
+For any of the above scenarios you should use our [discounting principles](/handbook/growth/sales/contracts#discounts) which apply to the annual spend.  In scenario one above if their expansion contract spend takes them over the threshold for additional discounts we should include this discount tier for them in the expansion contract.
+
+### When they will end the contract term with credit remaining
+
+We can roll up to half the amount of credit from the original order form to a new contract term, provided that the customer signs a renewal contract of equal or higher spend than the original contract.
 
 ## Steady state retention
 

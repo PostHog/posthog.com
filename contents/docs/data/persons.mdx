@@ -30,8 +30,6 @@ People have **person profiles** with [properties](/docs/product-analytics/person
 
 When you capture your first [identified event](/docs/data/anonymous-vs-identified-events) for a user, it creates a **person profile** for them. Then, any future events captured are attributed to this profile. You can also [set properties](/docs/product-analytics/person-properties) for the person.
 
-For backward compatibility, PostHog captures [identified events](/docs/data/anonymous-vs-identified-events) that create a person profile by default. You can change this by setting your snippet or frontend SDK initialization's `person_profiles` value to `identified_only` or a server-side SDK or API event's `$process_person_profile` property to `false`.
-
 ## Viewing person profiles
 
 Clicking on a person in the [People tab](https://us.posthog.com/persons) opens their profile and shows all their properties.

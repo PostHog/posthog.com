@@ -328,7 +328,7 @@ Once you confirm that, you successfully set up a React Native along with PostHog
 ## Further reading
 
 - [What to do after installing PostHog in 5 steps](/tutorials/next-steps-after-installing)
-- [Complete guide to event tracking](/tutorials/event-tracking-guide)
+- [How to set up remote config in React Native with Expo Router](/tutorials/react-native-remote-config)
 - [How to set up A/B tests in React Native](/tutorials/react-native-ab-tests)
 
 <NewsletterForm />

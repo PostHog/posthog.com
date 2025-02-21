@@ -12,6 +12,7 @@ require('prismjs/components/prism-elixir')
 require('prismjs/components/prism-rust')
 require('prismjs/components/prism-kotlin')
 require('prismjs/components/prism-groovy')
+require('prismjs/components/prism-csharp')
 
 type LanguageMap = {
     [key: string]: {
@@ -32,6 +33,7 @@ type LanguageMap = {
             | 'vue'
             | 'svelte'
             | 'astro'
+            | 'csharp'
         label: React.ReactNode
     }
 }
@@ -234,6 +236,10 @@ const languageMap: LanguageMap = {
     hog: {
         language: 'rust',
         label: 'Hog',
+    },
+    csharp: {
+        language: 'csharp',
+        label: 'C#',
     },
 }
 

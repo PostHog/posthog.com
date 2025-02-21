@@ -9,6 +9,7 @@ A manager at PostHog has a short list of responsibilities:
 2. Making sure your direct reports are happy and productive
 3. Acting as the [hiring manager](/handbook/people/hiring-process#the-role-of-the-hiring-manager) for new roles in your team
 4. Creating good plans for new person [onboarding](https://github.com/PostHog/company-internal/issues/1517#issuecomment-2411532110) and [small team offsites](/handbook/company/offsites#small-team-offsites)
+5. Escalating performance issues to execs if you've been unable to resolve them with a direct report 
 
 That's it.
 
@@ -90,22 +91,6 @@ Two things:
 - If you think your team needs someone, make a [new hire request](https://github.com/PostHog/company-internal/issues/new/choose). The exec and people team are generally on top of hiring for all teams, but this is a good approach if you think something has been missed. You'll also be asked to do one of these anyway if we're hiring for a new type of role.
 
 See the `#technical-interviewers` channel for more info here. 
-
-## Ongoing support for managers
-
-Charles has 1-1s every 6 weeks with all managers. These meetings are totally optional, and are designed to be a place for you to discuss any management-y related things that are on your mind. In your first session, he'll work with you to figure out a structure. We've found this works better than trying to cover management topics in 1-1s with James and Tim, as those are better used for product and strategy-type work instead. 
-
-> You don't have to wait 6 weeks to bring up any management issues - you can message Charles any time on Slack. 
-
-We also run a monthly, totally optional discussion group for managers, which Charles leads. We follow the same agenda each time:
-- Go around and give an update on how the last month has been for your team, plus any particular challenge you'd like to discuss. You don't always have to bring a discussion topic. - 10min
-- Group selects 1 or 2 challenges to discuss in depth. Usually you'll find there will be a topic applicable to multiple people.
-- Roundtable coaching - 45min
-
-Rules:
-- Assume everything is confidential by default - if you want to raise something outside of the meeting, get permission from the relevant person first. For this reason, we don't take notes - take your own personal notes if you want to remember something. 
-- Make sure everyone gets a chance to speak. If we talked about your topic last time, consider not raising one this time. 
-- The session is about helping you to be a better manager - if you want to solve company-wide/cross-functional problems, there will likely be a better venue for this, e.g. an Issue, Slack, or tech leads meeting.
 
 ## Recommended reading
 
