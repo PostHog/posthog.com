@@ -850,7 +850,7 @@ export const handbookSidebar = [
         ],
     },
     {
-        name: 'Words & Pictures',
+        name: 'Comms',
         url: '',
         children: [
             {
@@ -1167,7 +1167,7 @@ export const companyMenu = {
                     url: '/teams/website-vibes',
                 },
                 {
-                    name: 'Words & Pictures',
+                    name: 'Comms',
                     url: '/teams/words-and-pictures',
                 },
             ],
