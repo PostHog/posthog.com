@@ -68,7 +68,7 @@ Next, I tried to develop and subsequently scratched a [gRPC](https://grpc.io/doc
 
 After these false starts, I found a solution in something we already used: Celery.
 
-In our main PostHog app, we used [Celery](https://docs.celeryproject.org/) to process events asynchronously (we don't anymore). When an event hits `/capture`, our API parsed the request and queued the event into a job queue. I realized I could build a new server with the [Node port of Celery](https://celery-node.js.org/) and plug that in as another step in the existing pipeline.
+In our main PostHog app, we used [Celery](https://docs.celeryproject.org/) to process events asynchronously (we don't anymore). When an event hits `/i/v0/e/`, our API parsed the request and queued the event into a job queue. I realized I could build a new server with the [Node port of Celery](https://celery-node.js.org/) and plug that in as another step in the existing pipeline.
 
 The combination of Celery and Node solved all pending issues: we wouldn't have to worry about Python dependencies, could potentially run untrusted code in a fast sandbox, there would be no process management for a gRPC link, and could eventually rewrite the entire ingestion pipeline in Node to get a speed boost over Python (which we eventually did).
 
