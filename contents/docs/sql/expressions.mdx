@@ -39,7 +39,7 @@ SQL expressions can access data like:
 - event properties (`properties`)
 - [person properties](/docs/product-analytics/person-properties) (`person.properties`)
 - `event`
-- `elements_chain` (from [autocapture](/tutorials/sql-autocapture))
+- `elements_chain` (from [autocapture](/tutorials/hogql-autocapture))
 - `timestamp`
 - `distinct_id`
 - `person_id`
@@ -123,7 +123,7 @@ Here are some of the most common and useful ones:
 
 ## Use cases
 
-- Checking if a property or [autocapture element chain](/tutorials/sql-autocapture) contains a specific value or any of an array of values using `in` or `match`.
+- Checking if a property or [autocapture element chain](/tutorials/hogql-autocapture) contains a specific value or any of an array of values using `in` or `match`.
 
 - Modifying the display string in the visualization by extracting or concatenating properties using `concat()`, `+`, `extract()`, or `replaceOne` like `concat('OS Version: ', properties.$os_version)`.
 
@@ -145,4 +145,4 @@ Here are some of the most common and useful ones:
 
 - Breakdown by values in an [array](/tutorials/array-filter-breakdown) by using a combination of `JSONExtractArrayRaw` and `arrayJoin` like `arrayJoin(JSONExtractArrayRaw(properties.$active_feature_flags ?? '[]'), ',')`.
 
-- Extracting the ID from [autocaptured elements](/tutorials/sql-autocapture) like `extract(elements_chain, '[:|"]attr__id="(.*?)"')`.
+- Extracting the ID from [autocaptured elements](/tutorials/hogql-autocapture) like `extract(elements_chain, '[:|"]attr__id="(.*?)"')`.
