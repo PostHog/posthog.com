@@ -24,7 +24,7 @@ You can also view the list [directly in GitHub](https://github.com/PostHog/posth
 | Async migrations | [Team CDP][Team CDP]  | <span class="lemon-tag gh-tag">feature/async-migrations</span> |
 | Batch exports | [Team Batch Exports](/teams/batch-exports)  | <span class="lemon-tag gh-tag">feature/batch-exports</span> |
 | BI | [Team Data Warehouse][Team Data Warehouse]   |  <span class="lemon-tag gh-tag">feature/dashboards</span> |
-| Billing | [Team Growth][Team Growth]  |  <span class="lemon-tag gh-tag">feature/billing</span> |
+| Billing | [Team Dollars & Cents][Team Dollars & Cents]  |  <span class="lemon-tag gh-tag">feature/dollars-and-cents</span> |
 | Client libraries and SDKs | Shared responsibility with features owned by the relevant Small Team, or try #feature-client-libraries. There is an engineer assigned to SDK support on a rotating schedule. Check [the (private) pager duty schedule](https://posthog.pagerduty.com/schedules#P7B7NTR)  | <span class="lemon-tag gh-tag">feature/pipeline</span> |
 | Cohorts | [Team Product Analytics][Team Product Analytics]  |  <span class="lemon-tag gh-tag">feature/cohorts</span>  |
 | Dashboards | [Team Product Analytics][Team Product Analytics]  |  <span class="lemon-tag gh-tag">feature/dashboards</span> |
@@ -41,10 +41,10 @@ You can also view the list [directly in GitHub](https://github.com/PostHog/posth
 | Ingestion | [Team CDP][Team CDP]  | <span class="lemon-tag gh-tag">feature/pipeline</span> |
 | Insights | [Team Product Analytics][Team Product Analytics]  | <span class="lemon-tag gh-tag">feature/insights</span>  |
 | Live Events | [Team ClickHouse][Team ClickHouse]  | <span class="lemon-tag gh-tag">feature/live-events</span>  |
-| Messaging (Email, Notifications) | [Team Growth][Team Growth]  | <span class="lemon-tag gh-tag">feature/messaging</span>  |
+| Messaging (Email, Notifications) | [Team Dollars & Cents][Team Dollars & Cents]  | <span class="lemon-tag gh-tag">feature/messaging</span>  |
 | Notebooks | [@daibhin][@daibhin]  |  <span class="lemon-tag gh-tag">feature/notebooks</span> |
 | Onboarding | [Team Growth][Team Growth]  | <span class="lemon-tag gh-tag">feature/onboarding</span>  |
-| Permissions | [Team Growth][Team Growth]  | <span class="lemon-tag gh-tag">feature/permissions</span>  |
+| Permissions and access control | [Team Dollars & Cents][Team Dollars & Cents]  | <span class="lemon-tag gh-tag">feature/permissions</span>  |
 | Persons | [Team CDP][Team CDP]  | <span class="lemon-tag gh-tag">feature/persons</span>  |
 | Pipeline Transformations | [Team CDP][Team CDP] | <span class="lemon-tag gh-tag">feature/pipelines</span> |
 | Pipeline Destinations | [Team CDP][Team CDP] | <span class="lemon-tag gh-tag">feature/cdp</span> |
@@ -58,7 +58,7 @@ You can also view the list [directly in GitHub](https://github.com/PostHog/posth
 | Self-hosting | [Team Infrastructure][Team Infrastructure]  |  <span class="lemon-tag gh-tag">feature/self-hosting</span> |
 | Session Analytics | [Team Product Analytics][Team Product Analytics]  |  <span class="lemon-tag gh-tag">feature/sessions</span> |
 | Settings (personal & project) | [@benjackwhite][@benjackwhite]   |  <span class="lemon-tag gh-tag">feature/settings</span> |
-| SSO | [Team Growth][Team Growth]  | <span class="lemon-tag gh-tag">feature/sso</span>  |
+| SSO | [Team Dollars & Cents][Team Dollars & Cents]  | <span class="lemon-tag gh-tag">feature/sso</span>  |
 | Surveys | [Team Surveys][Team Surveys] | <span class="lemon-tag gh-tag">feature/surveys</span> |
 | Toolbar | [Team Replay][Team Replay]  | <span class="lemon-tag gh-tag">feature/toolbar</span>  |
 | Web Analytics                            | [Team Web Analytics][Team Web Analytics]                                                                   | <span class="lemon-tag gh-tag">feature/web-analytics</span>        |
@@ -86,5 +86,6 @@ Some of the features we are building may exist in other products already. It is 
 [Team Infrastructure]: /teams/infrastructure
 [Team Feature Flags]: /teams/feature-flags
 [Team Growth]: /teams/growth
+[Team Dollars & Cents]: /teams/dollars-cents
 [Team ClickHouse]: /teams/clickhouse
 [Team Surveys]: /teams/surveys
