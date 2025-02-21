@@ -46,7 +46,7 @@ The downside of the hosted model is that it’s not very defensible. You’ll li
 
 <iframe src="https://giphy.com/embed/j4ksBQ70a3ECh2VObN" width="480" height="270" frameBorder="0" class="giphy-embed" allowFullScreen></iframe>
 
-The hosting business model is also much harder to pull off without a solid, popular product. [MongoDB](https://www.mongodb.com/) and [Sentry](https://sentry.io) are two examples of products that lets you self-host or host with a 3rd party provider.
+The hosting business model is also much harder to pull off without a solid, popular product. [MongoDB](https://www.mongodb.com/) and [Sentry](/blog/posthog-vs-sentry) are two examples of products that lets you self-host or host with a 3rd party provider.
 
 ## Option #3: Open core
 This option requires you to build and maintain two editions of your product: the open-source edition (under an MIT or Apache-type license), and a ‘source-available’ edition with features designed for larger businesses. Your customers can deploy the source-available edition on their own infrastructure, but they need to pay you to use those added features. This is the approach that PostHog uses; you can access our [community edition](http://github.com/PostHog/) on GitHub.
