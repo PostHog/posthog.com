@@ -1,5 +1,5 @@
 ---
-title: HogQL expressions
+title: SQL expressions
 sidebar: Docs
 showTitle: true
 availability:
@@ -12,7 +12,7 @@ import {ProductScreenshot} from 'components/ProductScreenshot'
 export const trendsbreakdownDark = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/features/hogql/trends-breakdown-dark-mode.png"
 export const trendsbreakdownLight = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/features/hogql/trends-breakdown-light-mode.png"
 
-HogQL expressions enable you to directly access, modify, and aggregate data in many places in PostHog including:
+SQL expressions enable you to directly access, modify, and aggregate data in many places in PostHog including:
 
 - Filters
 - Trends series
@@ -26,7 +26,7 @@ HogQL expressions enable you to directly access, modify, and aggregate data in m
 <ProductScreenshot
     imageLight={trendsbreakdownLight} 
     imageDark={trendsbreakdownDark}
-    alt="HogQL trends breakdown filter" 
+    alt="SQL trends breakdown filter" 
     classes="rounded"
 />
 
@@ -34,12 +34,12 @@ HogQL expressions enable you to directly access, modify, and aggregate data in m
 
 ## Accessible data
 
-HogQL expressions can access data like:
+SQL expressions can access data like:
 
 - event properties (`properties`)
 - [person properties](/docs/product-analytics/person-properties) (`person.properties`)
 - `event`
-- `elements_chain` (from [autocapture](/tutorials/hogql-autocapture))
+- `elements_chain` (from [autocapture](/tutorials/sql-autocapture))
 - `timestamp`
 - `distinct_id`
 - `person_id`
@@ -74,7 +74,7 @@ Expressions can use operators to filter and combine data. These include:
 
 ## Functions and aggregations
 
-You can filter, modify, or aggregate accessed data with [supported ClickHouse functions](/docs/hogql/clickhouse-functions) like `dateDiff()` and `concat()` and [aggregations](/docs/hogql/aggregations) like `sumIf()` and `count()`.
+You can filter, modify, or aggregate accessed data with [supported ClickHouse functions](/docs/sql/clickhouse-functions) like `dateDiff()` and `concat()` and [aggregations](/docs/hogql/aggregations) like `sumIf()` and `count()`.
 
 Here are some of the most common and useful ones:
 
@@ -123,7 +123,7 @@ Here are some of the most common and useful ones:
 
 ## Use cases
 
-- Checking if a property or [autocapture element chain](/tutorials/hogql-autocapture) contains a specific value or any of an array of values using `in` or `match`.
+- Checking if a property or [autocapture element chain](/tutorials/sql-autocapture) contains a specific value or any of an array of values using `in` or `match`.
 
 - Modifying the display string in the visualization by extracting or concatenating properties using `concat()`, `+`, `extract()`, or `replaceOne` like `concat('OS Version: ', properties.$os_version)`.
 
@@ -145,4 +145,4 @@ Here are some of the most common and useful ones:
 
 - Breakdown by values in an [array](/tutorials/array-filter-breakdown) by using a combination of `JSONExtractArrayRaw` and `arrayJoin` like `arrayJoin(JSONExtractArrayRaw(properties.$active_feature_flags ?? '[]'), ',')`.
 
-- Extracting the ID from [autocaptured elements](/tutorials/hogql-autocapture) like `extract(elements_chain, '[:|"]attr__id="(.*?)"')`.
+- Extracting the ID from [autocaptured elements](/tutorials/sql-autocapture) like `extract(elements_chain, '[:|"]attr__id="(.*?)"')`.
