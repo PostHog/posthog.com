@@ -4,7 +4,7 @@ import React, { useEffect, useState } from 'react'
 export default function TeamSelect({ value, onChange }) {
     const [teams, setTeams] = useState([])
     useEffect(() => {
-        fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/teams?populate=*`)
+        fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/teams?populate=*&pagination[limit]=100`)
             .then((res) => res.json())
             .then(({ data }) => {
                 setTeams(data)
