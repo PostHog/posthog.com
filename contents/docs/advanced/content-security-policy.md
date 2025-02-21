@@ -53,19 +53,24 @@ Depending on your compliance needs you can either:
 
 ## Supporting nonce directives
 
-You may choose to use a `nonce` in your CSP in order to ensure every script loaded has the matching `nonce` for the current page load. This can be done via config option in `posthog-js` like so:
+You may choose to use a `nonce` in your CSP in order to ensure every script/style loaded has the matching `nonce` for the current page load. This can be done via two config options in `posthog-js` like so:
 
 ```js
 posthog.init('<ph_project_api_key>', {
   prepare_external_dependency_script = (script) => {
     script.nonce = '<your-nonce-value>'
     return script
+  },
+  prepare_external_dependency_stylesheet = (stylesheet) => {
+    stylesheet.nonce = '<your-nonce-value>'
+    return stylesheet
   }
 })
 ```
 
-This will modify the script to be loaded before they are inserted to the DOM. Be sure to understand fully the implications of using a `nonce` and to ensure that you are using the `npm` install method or modifying the snippet to also include this nonce value.
+This will modify the script/stylesheet to be loaded before they are inserted to the DOM. Be sure to understand fully the implications of using a `nonce` and to ensure that you are using the `npm` install method or modifying the snippet to also include this nonce value.
 
+Make sure you return the script/stylesheet or else we won't append it to the DOM.
 
 ## Domains used by PostHog clients
 
