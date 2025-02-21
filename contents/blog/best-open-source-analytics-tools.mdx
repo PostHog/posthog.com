@@ -1,6 +1,6 @@
 ---
 date: 2025-02-18
-title: 9 best open source analytics tools you can self-host
+title: 8 best open source analytics tools you can self-host
 rootPage: /blog
 sidebar: Blog
 showTitle: true
@@ -43,9 +43,9 @@ We maintain separate guides on [open-source feature flag tools](/blog/best-open-
 
   - **Mar 14, 2022:** Added Umami; updates to copy and screenshots
   - **Jun 16, 2022:** Added Fathom Lite, OpenReplay
-  - **Aug 24, 2022:** Removed Fathom Lite (dormant), added Apache Superset, Redash
+  - **Aug 24, 2022:** Removed Fathom Lite, added Apache Superset, Redash
   - **Sep 13, 2023:** Added Ackee and Open Web Analytics
-  - **Nov 22, 2023:** Added inclusion criteria, removed Ackee (dormant)
+  - **Nov 22, 2023:** Added inclusion criteria, removed Ackee
   - **Feb 18, 2025:** Complete guide overhaul. Removed some entries. Added OpenPanel
 
 </details>
@@ -58,23 +58,22 @@ We maintain separate guides on [open-source feature flag tools](/blog/best-open-
 
 #### What is PostHog?
 
-- **GitHub Stars:** 24.2k
+- **Created:** 2020
 - **License:** MIT
-- **Category:** Product and website analytics
-- [PostHog on GitHub](https://github.com/PostHog/posthog)
+- **GitHub Stars:** 24.2k
 
 [PostHog](https://posthog.com/) is an all-in-one platform that combines product analytics with several other developer-focused tools, such as web analytics, session replay, feature flags, experiments, error tracking, and surveys.
 
 Beyond the core [product analytics features](/product-analytics), it also supports creating [custom insights using SQL](/docs/product-analytics/sql), and offers a [built-in data warehouse](/docs/data-warehouse) so you can import data from external sources like Stripe, Hubspot, and Zendesk.
 
-| **Pros**                               | **Cons**                                                       |
-|----------------------------------------|----------------------------------------------------------------|
-| Powerful product analytics features    | Self-hosting not recommended above 300k events per month       |
-| GA-like web analytics dashboard        | Steeper learning curve compared to lightweight analytics tools |
-| Session replay for web and mobile apps |                                                                |
-| Feature flags and experiments included |                                                                |
-| Replaces multiple tools                |                                                                |
-| Generous free tier on cloud platform   |                                                                |
+| **Pros**                                                    | **Cons**                                                       |
+|-------------------------------------------------------------|-------------------------------------------------------------|
+| Advanced product analytics features                         | Self-hosting not recommended above 300k events per month       |
+| Easy-to-use web analytics dashboard                         | Steeper learning curve compared to lightweight analytics tools |
+| Session replay for web and mobile apps                      |                                                                |
+| Feature flags and experiments included                      |                                                                |
+| Replaces multiple tools                                     |                                                                |
+| Generous free tier on cloud                                 |                                                                |
 
 <details>
     <summary>What closed-source tools can it replace?</summary>
@@ -86,22 +85,19 @@ PostHog also offers session replay for both web and mobile apps, so it can repla
 </details>
 
 <details>
-    <summary>What's included</summary>
-#### What's included?
+    <summary>What's included?</summary>
 
 [PostHog Open Source](https://github.com/PostHog/posthog) is distributed under an MIT license for hobbyists and proof of concepts via a Docker Compose deployment. It includes most features, but is limited to one project per instance.
 </details>
 
 <details>
     <summary>What are the hosting requirements?</summary>
-#### What are the hosting requirements?
 
 The minimum requirements are a Hetzner VM (or equivalent) with 4 vCPU, 16GB RAM, and more than 30GB storage. Note that PostHog only recommends the [self-hosted release](/docs/self-host) for deployments up to ~300k events per month. Above this, it recommends switching to PostHog Cloud.
 </details>
 
 <details>
     <summary>Is there a hosted option?</summary>
-#### Is there a hosted option?
 
 Yes. PostHog offers a managed cloud option with a [generous free tier](/pricing) of 1 million events, 5,000 recordings, and 1 million flag API requests every month, and the option of US or EU-based hosting.
 </details>
@@ -112,86 +108,140 @@ Yes. PostHog offers a managed cloud option with a [generous free tier](/pricing)
 
 #### What is Matomo?
 
-- **GitHub Stars:** 20.2k
+- **Created:** 2007
 - **License:** AGPLv3
-- **Category:** Website analytics
-- [Matomo on GitHub](https://github.com/matomo-org/matomo)
+- **GitHub Stars:** 20.2k
 
-[Matomo](/blog/posthog-vs-matomo) is an open-source platform for website analytics. The user experience is closely modelled on the previous version of Google Analytics, known as Universal Analytics, which many people prefer to Google's current offerring.
+[Matomo](https://github.com/matomo-org/matomo) is an open-source platform for website analytics. The user experience is closely modelled on the previous version of Google Analytics, known as Universal Analytics, which many people prefer to Google's current offerring.
 
-#### What closed-source tools can it replace?
+It looks little dated compared to some tools in this list, but it's a mature and reliable platform used by many large government and non-profit organizations.
+
+| **Pros**                                                    | **Cons**                                                    |
+|-------------------------------------------------------------|-------------------------------------------------------------|
+| Easy GDPR compliance                                        | Features like session replay and heatmaps not included in open-source release |
+| Google Analytics data import                                | Session-based analytics less appropriate for app analytics                    |
+| Easy installation for Wordpress and popular CMS             | Dated user interface                                                          |
+| Used by many large orgs (United Nations & EU)               | More complex to host than lightweight analytics tools                         |
+| Strong web and marketing analytics features                 |                                                                               |
+| Built-in tag manager                                        |                                                                               |
+
+<details>
+    <summary>What closed-source tools can it replace?</summary>
 
 It's primarily pitched as an [alternative to Google Analytics 4](/blog/ga4-alternatives), especially for those looking for ironclad GDPR compliance. Matomo even offers a data import tool for Google Analytics, so you can bring your data with you.
+</details>
 
-#### What's included?
+<details>
+    <summary>What's included?</summary>
 
 Matomo on-premise includes all the core website analytics features, such as user and event tracking, ecommerce tracking, customizable dashboards, user segmentation, scheduled email reports, and alerts. Features like A/B testing and session replay are available as paid add-ons only.
+</details>
 
-#### What are the hosting requirements?
+<details>
+    <summary>What are the hosting requirements?</summary>
 
 The minimum requirements for 100,000 pageviews per month are: one server 2 CPU, 2 GB RAM, 50GB SSD disk. [Matomo recommends](https://matomo.org/faq/on-premise/matomo-requirements/) separate app and database servers for anything over 1 million page views per month.
+</details>
 
-#### Is there a hosted option?
+<details>
+    <summary>Is there a hosted option?</summary>
 
 Yes. Matomo's cloud offereing includes all features and charges by "hits per month". The hosted version unlocks some features, like A/B testing and heatmaps, that are paid add-ons for the on-premise release.
-
-**Related:** [In-depth PostHog vs Matomo comparison](/blog/posthog-vs-matomo)
+</details>
 
 ### 3. Metabase
 ![Metabase - open source analytics tools](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/open-source-analytics-tools/metabase-screenshot.png)
 
 #### What is Metabase?
 
+- **Created:** 2015
 - **GitHub Stars:** 40.7k
 - **License:** AGPLv3
-- **Category:** Dashboarding and business intelligence
-- [Metabase on Github](https://github.com/metabase/metabase)
 
-[Metabase](https://www.metabase.com/) is one of the most popular open-source business intelligence (BI) tools. Metabase's visual query builder enables you to create shareable dashboards in just a few minutes with a drag-and-drop interface — though a native SQL editor is available for advanced users.
+[Metabase](https://www.metabase.com/) is one of the most popular open-source business intelligence (BI) tools. Metabase's visual query builder enables you to create shareable dashboards in just a few minutes with a drag-and-drop interface, and there's a native SQL editor for advanced users.
 
-#### What closed-source tools can it replace?
+Metabase is a great tool for business and revenue reporting, though you can create dashboards for any type of data that's stored in a supported database. Spoiler: Metabase supports lots of database types. It requires more technical knowledge than either PostHog or Matomo, but it's powerful in the right hands.
+
+| **Pros**                                                    | **Cons**                                                    |
+|-------------------------------------------------------------|-------------------------------------------------------------|
+| Connects to all popular closed and open-source databases    | Requires separate event collection and storage setup        |
+| Visual query builder for building simple queries            | Less accessible for non-techincal users                     |
+| Full SQL editor for advanced users and queries              |                                                             |
+| Join and query data from multiple sources                   |                                                             |
+| Light hosting requirements                                  |                                                             |
+
+<details>
+    <summary>What closed-source tools can it replace?</summary>
 
 Metabase is a direct alternative to business intelligence tools like Google's Looker / Looker Studio, Tableau, and Microsoft's Power BI. There are official connectors for all the most popular databases (Redshift, BigQuery, Snowflake, etc), and several community and partner-managed connectors for the likes of ClickHouse and DuckDB.
+</details>
 
-#### What's included?
+<details>
+    <summary>What's included?</summary>
 
 The open-source version includes the same core query and visualization features as paid versions, but without advanced permission and security features tailored to large companies.
+</details>
 
-#### What are the hosting requirements?
+<details>
+    <summary>What are the hosting requirements?</summary>
 
 [Metabase recommends](https://www.metabase.com/learn/metabase-basics/administration/administration-and-operation/metabase-in-production#:~:text=Metabase%20needs%20at%20least%201,and%201%20GB%20of%20RAM.) two servers: one for the application and one for the database. It needs at least 1 core and 1GB of RAM with additional resources required depending on the number of concurrent users.
+</details>
 
-#### Is there a hosted option?
+<details>
+    <summary> Is there a hosted option?</summary>
 
 Yes. The Starter plan includes cloud deployment for $85 per month for five users, with each additional user adding $5 per month.
+</details>
 
 ### 4. Plausible Analytics
 ![Plausible Analytics - open source analytics tools](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/open-source-analytics-tools/plausible-screenshot.png)
 
 #### What is Plausible?
 
-- **GitHub Stars:** 21.4k
+- **Created:** 2019
 - **License:** AGPLv3
-- **Category:** Lightweight website analytics
-- [Plausible on Github](https://github.com/plausible/analytics/)
+- **GitHub Stars:** 21.4k
 
-[Plausible Analytics](/blog/posthog-vs-plausible) is a lightweight web analytics tool focused on providing [GDPR-compliant website analytics](/blog/best-gdpr-compliant-analytics-tools) that doesn't infringe on user privacy. This means Plausible doesn't rely on cookies and is compliant with regulations like GDPR out of the box. 
+[Plausible Analytics](https://github.com/plausible/analytics/) is a lightweight web analytics tool focused on providing [GDPR-compliant website analytics](/blog/best-gdpr-compliant-analytics-tools) that doesn't infringe on user privacy. This means Plausible doesn't rely on cookies and is compliant with regulations like GDPR out of the box. 
 
-#### What closed-source tools can it replace?
+It's very fast and easy to use, though this comes at the expense of features. It's ideal for anyone who just wants simple web analytics features, like tracking top pages and referrers, but it's less useful for app analytics and understanding user behavior.
+
+| **Pros**                                                    | **Cons**                                                    |
+|-------------------------------------------------------------|-------------------------------------------------------------|
+| Fast and easy to use                                        | Limited analytics features                                  |
+| Minimal impact on website performance                       | Open-source release only updated twice a year               |
+| Cookieless GDPR-compliance                                  |                                                             |
+| Google Analytics import available                           |                                                             |
+| Will scale to large traffic requirements                    |                                                             |
+
+<details>
+    <summary>What closed-source tools can it replace?</summary>
 
 It's a popular alternative to Google Analytics for people who want something fast and easy to use. Unlike Google Analyitcs, Plausible's lightweight tracking script has minimal impact on website performance. 
 
-#### What's included?
+</details>
 
-The [community edition](https://plausible.io/self-hosted-web-analytics) offers the same features as paid offerings, including tracking all common website metrics, goal and conversion tracking, basic funnels, and reports in Slack or via email. The only limitation is it's only updated twice a year, whereas the cloud version gets continuous updates.
+<details>
+    <summary>What's included?</summary>
 
-#### What are the hosting requirements?
+The [community edition](https://plausible.io/self-hosted-web-analytics) offers the same features as paid versions, including tracking all common website metrics, goal and conversion tracking, basic funnels, and reports in Slack or via email. The only limitation is it's only updated twice a year, whereas the cloud version gets continuous updates.
+
+</details>
+
+<details>
+    <summary>What are the hosting requirements?</summary>
 
 Plausible recommends at least 2GB of RAM and it requires a CPU that supports SSE 4.2 or NEON instruction set or higher.
 
-#### Is there a hosted option?
+</details>
+
+<details>
+    <summary> Is there a hosted option?</summary>
 
 Yes. There's no free tier, but it's cheap even at high volumes. Pricing starts at €9 per month for 10,000 monthly pageviews.
+
+</details>
 
 ### 5. OpenPanel
 
@@ -199,25 +249,45 @@ Yes. There's no free tier, but it's cheap even at high volumes. Pricing starts a
 
 #### What is OpenPanel?
 
-- **GitHub Stars:** 3.6k
+- **Created:** 2024
+- **GitHub Stars:** 3.7k
 - **License:** AGPLv3
-- **Category:** Product analytics
-- [OpenPanel on Github](https://github.com/Openpanel-dev/openpanel)
 
-OpenPanel is inspired by Mixpanel and Plausible. It aims to offer the core features of a product analytics tool, but with the speed,  simiplicity, and privacy-friendly features Plausible brings to web analytics.
+[OpenPanel](https://github.com/Openpanel-dev/openpanel) is inspired by Mixpanel and Plausible. It aims to offer some tools common of a product analytics tools, but with the speed, simiplicity, and privacy-friendly features Plausible brings to web analytics.
 
-#### What closed-source tools can it replace?
+This means that, unlike Plausible, you can build custom dashboards, as well as build insights that track retention within your app. OpenPanel also creates profiles for individual users that show how often they use your app, events they trigger, and most visited pages.
+
+| **Pros**                                                    | **Cons**                                                    |
+|-------------------------------------------------------------|-------------------------------------------------------------|
+| Fast and easy to use                                        | Young project and small community                           |
+| More analysis options than Plausible                        | Only supports basic product analytics features              |
+| No cookies required                                         |                                                             |
+| Basic funnel and retention analysis                         |                                                             |
+| Cheaper than typical product analytics tools                |                                                             |
+
+<details>
+    <summary>What closed-source tools can it replace?</summary>
 OpenPanel could replace Mixpanel, Amplitude, and Google Analytics. It isn't as advanced as any of these tools, but it covers most of the essential features they offer. Unlike PostHog, OpenPanel is focused solely on product analytics, so doesn't include things like session replay or A/B testing features.
 
-#### What's included?
+</details>
+
+<details>
+    <summary>What's included?</summary>
 The open-source version is available with no limitations. Features include custom dashboards and charts (line, bar, area, map, pie, funnels, histograms, and retention), user profiles, a realtime analytics view, and tracking scripts for most popular frameworks, including Next.js, React, and React Native.
 
-#### What are the hosting requirements?
+</details>
 
+<details>
+    <summary>What are the hosting requirements?</summary>
 OpenPanel doesn't provide minimum requirements, but recommends hosting using Hetzner, and notes it'll work on any server where you have pre-installed Docker, Docker Compose, Node and pnpm.
 
-#### Is there a hosted option?
+</details>
+
+<details>
+    <summary> Is there a hosted option?</summary>
 Yes. There is no free tier, but 100k events a month cost just $20, and 1 million events are $90 per month.
+
+</details>
 
 ### 6. Umami
 
@@ -225,112 +295,127 @@ Yes. There is no free tier, but 100k events a month cost just $20, and 1 million
 
 #### What is Umami?
 
-- **GitHub Stars:** 23k
+- **Founded:** XXXX
 - **License:** MIT
-- **Category:** Website analytics
-- [Umami on GitHub](https://github.com/umami-software/umami)
+- **GitHub Stars:** 23k
 
 [Umami](https://umami.is/) is another popular privacy-first website analytics tool. Like Plausible, it tracks basic website analytics, doesn't collect any personal information, and is extremely fast.
 
-#### What closed-source tools can it replace?
+| **Pros**                                                    | **Cons**                                                    |
+|-------------------------------------------------------------|-------------------------------------------------------------|
+| Easy to use and clean UI                                    | Less polished than Plausible                                |
+| Supports basic event tracking                               | Postgres database less scalable than Plausible's ClickHouse backed event database  |
+| No cookies required                                         |                                                             |
+| Minimal impact on website performance                       |                                                             |
+| Easy to host                                                |                                                             |
 
+<details>
+    <summary>What closed-source tools can it replace?</summary>
 Google Analytics mainly, but also any other tool focused mainly on website analytics, including closed-source alternatives like Fathom.
 
-#### What's included?
+</details>
 
+<details>
+    <summary>What's included?</summary>
 There's no difference between the open source and paid products. Umami tracks all common website metrics, supports custom events, and offers basic funnel, user path, and retention analysis as well.
 
-#### What are the hosting requirements?
+</details>
 
+<details>
+    <summary>What are the hosting requirements?</summary>
 Umami requires a server with Node.js version 18.18 or newer and an SQL database – MySQL (minimum v8.0) and PostgreSQL (minimum v12.14) are supported.
 
-#### Is there a hosted option?
+</details>
 
+<details>
+    <summary> Is there a hosted option?</summary>
 Yes and, unlike Plausible, there's a free tier. You can track up to 100k events per month on Umami Cloud for free. The Pro tier starts at just $20 per month for 1 million events per month.
 
-### 7. OpenReplay
+</details>
+
+### 7. Apache Superset
+![superset - open source analytics tools](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/open-source-analytics-tools/superset.png)
+
+#### What is Apache Superset?
+
+- **Created:** 2016
+- **License:** Apache-2.0
+- **GitHub Stars:** 64.4k
+
+[Superset](https://github.com/apache/superset) is the another of the big open-source business intelligence tools alongside Metabase and Redash. It's also considered the most complex and least accessible for non-technical users, though its range of visualizations and charting options is unmatched. Superset is ideal for enterprises with experienced in-house data teams, or anyone with lots of SQL experience.
+
+| **Pros**                                                    | **Cons**                                                    |
+|-------------------------------------------------------------|-------------------------------------------------------------|
+| Huge range of visualization features                        | Not suitable for non-technical users                        |
+| Highly customizable                                         | Relatively complex to host                                  |
+| Very scalable for large orgs                                |                                                             |
+| Large community                                             |                                                             |
+
+<details>
+    <summary>What closed-source tools can it replace?</summary>
+Looker, Tableau and Power BI.
+
+</details>
+
+<details>
+    <summary>What's included?</summary>
+There's no paid version, so all features are included in the open source release, which includes 40+ pre-installed visualizations and vast options for data scientists to customize them to their needs.
+
+</details>
+
+<details>
+    <summary>What are the hosting requirements?</summary>
+While there is a Docker Compose deployment, it's not recommended for production use cases, which require deploying Superset on Kubernetes. [Superset's FAQ](https://superset.apache.org/docs/faq/) indicates 8GB RAM and 2vCPUs is "adequate to run a moderately-sized instance".
+
+</details>
+
+<details>
+    <summary> Is there a hosted option?</summary>
+Not directly, though third-parties offer managed instances.
+
+</details>
+
+### 8. OpenReplay
 
 ![openreplay - open source analytics tools](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/open-source-analytics-tools/openreplay.png)
 
 #### What is OpenReplay?
 
-- **GitHub Stars:** 9.8kk
+- **Created:** 2021
 - **License:** AGPLv3
-- **Category:** Session replay and funnel analysis
-- [OpenReplay on GitHub](https://github.com/openreplay/openreplay)
+- **GitHub Stars:** 9.8k
 
 [OpenReplay](https://openreplay.com/) is a session replay suite built for developers to find and eliminate problems. It also includes some basic analytics features, such as funnels and path analysis.
 
-#### What closed-source tools can it replace?
+| **Pros**                                                    | **Cons**                                                    |
+|-------------------------------------------------------------|-------------------------------------------------------------|
+| Compregensive session replay features                       | Analytics features are secondary to session replay          |
+| Useful for discovering issues in your app                   | Data export limited Enterprise plans                        |
+| Built-in performance monitoring                             |                                                             |
+| Supports both web and mobile app tracking                   |                                                             |
 
+<details>
+    <summary>What closed-source tools can it replace?</summary>
 OpenReplay is an [alternative to LogRocket](/blog/best-logrocket-alternatives) and other similar dev-focused session replay tools, like PostHog. It can also replace the likes of Hotjar, and includes a co-browsing feature that's similar to Hotjar's.
 
-#### What's included?
+In addition to session replay, it also includes some product analytics features, such as conversion funnels, user paths, heatmaps, trends, and custom dashboards. These features aren't as developed as dedicated analytics tools like Mixpanel or PostHog, but they're a useful augment to the core replay features.
 
+</details>
+
+<details>
+    <summary>What's included?</summary>
 The free community edition includes all OpenReplay's core features for session replay, app monitoring, and analytics with no limits on users or projects. Paying customers gain a handful of advanced features, such as support for data export, extra security features, and dedicated support.
 
-#### What are the hosting requirements?
+</details>
 
+<details>
+    <summary>What are the hosting requirements?</summary>
 OpenReplay [typically recommends](https://docs.openreplay.com/en/deployment/) a minimum of 2 vCPUs, 8 GB of RAM, 50 GB of storage, though this varies depending on the hosting provider.
 
-#### Is there a hosted option?
+</details>
 
+<details>
+    <summary> Is there a hosted option?</summary>
 Yes. There's a free tier that's limited to 1,000 session per month, or you can pay-as-you-go for $5.95 per 1,000 sessions each month.
 
-### 8. Apache Superset
-![superset - open source analytics tools](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/open-source-analytics-tools/superset.png)
-
-#### What is Apache Superset?
-
-- **GitHub Stars:** 64.4k
-- **License:** Apache-2.0
-- **Category:** Dashboarding and business intelligence
-- [Superset on GitHub](https://github.com/apache/superset)
-
-Superset is the third of the big open-source business intelligence tools alongside Metabase and Redash. It's also considered the most complex and least accessible for non-technical users, though its range of visualizations and charting options is unmatched. Superset is ideal for enterprises with experienced in-house data teams, or anyone with lots of SQL experience.
-
-#### What closed-source tools can it replace?
-
-Looker, Tableau and Power BI.
-
-#### What's included?
-
-There's no paid version, so all features are included in the open source release, which includes 40+ pre-installed visualizations and vast options for data scientists to customize them to their needs.
-
-#### What are the hosting requirements?
-
-While there is a Docker Compose deployment, it's not recommended for production use cases, which require deploying Superset on Kubernetes. [Superset's FAQ](https://superset.apache.org/docs/faq/) indicates 8GB RAM and 2vCPUs is "adequate to run a moderately-sized instance".
-
-#### Is there a hosted option?
-
-Not directly, though third-parties offer managed instances.
-
-### 9. Redash
-![Redash - open source analytics tools](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/open-source-analytics-tools/redash.png)
-
-#### What is Redash?
-
-- **GitHub Stars:** 26.9k
-- **License:** BSD-2-Clause
-- **Category:** Dashboarding and business intelligence
-- [Redash on GitHub](https://github.com/getredash/redash)
-
-Like Metabase, Redash is a business intelligence tool for connecting to and visualizing data from a number of different sources. Unlike Metabase, you need to be fluent in SQL to get the most from it.
-
-#### What closed-source tools can it replace?
-
-Tools like Power BI, Looker, and Tableau.
-
-#### What's included?
-
-There is no paid version of Redash, so the open-source release includes everything. There are more than 35 supported data sources and integrations, and a wide range of visualization options, including all common chart types, cohort tables, funnels, pivot tables, and more.
-
-#### What are the hosting requirements?
-
-Redash [documentation](https://redash.io/help/open-source/setup/) suggests a minimum of 4GB of RAM and "reasonable amount of CPU allocation".
-
-#### Is there a hosted option?
-
-No. Redash is entirely community supported with no hosted option available.
-
-<NewsletterForm />
+</details>
