@@ -64,6 +64,9 @@ export function Checkout(props: CheckoutProps): React.ReactElement {
             if (cart === null) return
 
             for (const item of cartItems) {
+                if (item.product.tags.includes('digital')) {
+                    continue
+                }
                 // first check if it's available for sale. If not, then add to the list
                 // with flag for removal from cart
                 const quantityAvailable = await getAvailableQuantity(item)
