@@ -65,25 +65,47 @@ We maintain separate guides on [open-source feature flag tools](/blog/best-open-
 
 [PostHog](https://posthog.com/) is an all-in-one platform that combines product analytics with several other developer-focused tools, such as web analytics, session replay, feature flags, experiments, error tracking, and surveys.
 
-Beyond the core [product analytics features](/product-analytics), it also supports creating [custom insights using SQL](/docs/product-analytics/sql), and offers a [built-in data warehouse](/docs/data-warehouse) so you can import data from external sources like Stripe, Hubspot, and Zendesk. 
+Beyond the core [product analytics features](/product-analytics), it also supports creating [custom insights using SQL](/docs/product-analytics/sql), and offers a [built-in data warehouse](/docs/data-warehouse) so you can import data from external sources like Stripe, Hubspot, and Zendesk.
 
+| **Pros**                               | **Cons**                                                       |
+|----------------------------------------|----------------------------------------------------------------|
+| Powerful product analytics features    | Self-hosting not recommended above 300k events per month       |
+| GA-like web analytics dashboard        | Steeper learning curve compared to lightweight analytics tools |
+| Session replay for web and mobile apps |                                                                |
+| Feature flags and experiments included |                                                                |
+| Replaces multiple tools                |                                                                |
+| Generous free tier on cloud platform   |                                                                |
+
+<details>
+    <summary>What closed-source tools can it replace?</summary>
 #### What closed-source tools can it replace?
 
 Several. The built-in product analytics is an [alternative to Mixpanel](/blog/best-mixpanel-alternatives) and [Amplitude](/blog/best-amplitude-alternatives), and it can replace Google Analytics for website and marketing analytics. 
 
 PostHog also offers session replay for both web and mobile apps, so it can replace the likes of [Hotjar](/blog/best-hotjar-alternatives) and [FullStory](/blog/best-fullstory-alternatives), and feature flag and experiment features like those found in [LaunchDarkly](/blog/best-launchdarkly-alternatives).
+</details>
 
+<details>
+    <summary>What's included</summary>
 #### What's included?
 
-[PostHog Open Source](https://github.com/PostHog/posthog) is distributed under an MIT license for hobbyists via a Docker Compose deployment. It includes most features, but is limited to one project per instance. 
+[PostHog Open Source](https://github.com/PostHog/posthog) is distributed under an MIT license for hobbyists and proof of concepts via a Docker Compose deployment. It includes most features, but is limited to one project per instance.
+</details>
 
+<details>
+    <summary>What are the hosting requirements?</summary>
 #### What are the hosting requirements?
 
-The minimum requirements are a Hetzner VM (or equivalent) with 4 vCPU, 16GB RAM, and more than 30GB storage.
+The minimum requirements are a Hetzner VM (or equivalent) with 4 vCPU, 16GB RAM, and more than 30GB storage. Note that PostHog only recommends the [self-hosted release](/docs/self-host) for deployments up to ~300k events per month. Above this, it recommends switching to PostHog Cloud.
+</details>
 
+<details>
+    <summary>Is there a hosted option?</summary>
 #### Is there a hosted option?
 
 Yes. PostHog offers a managed cloud option with a [generous free tier](/pricing) of 1 million events, 5,000 recordings, and 1 million flag API requests every month, and the option of US or EU-based hosting.
+</details>
+
 
 ### 2. Matomo
 ![Matomo - open source analytics tools](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/open-source-analytics-tools/matomo-screenshot.png)
