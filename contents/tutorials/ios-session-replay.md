@@ -240,8 +240,6 @@ Now, the welcome messages shows up like this in replays:
   classes="rounded"
 />
 
-> **Note:** Masking currently doesn't work with SwiftUI. There's an [open issue](https://github.com/PostHog/posthog-ios/issues/162) to fix this.
-
 ## Further reading
 
 - [How to run A/B tests in iOS](/tutorials/ios-ab-tests)
