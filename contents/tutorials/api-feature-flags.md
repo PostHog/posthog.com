@@ -50,7 +50,7 @@ response = requests.post(url, headers=headers, json=body).json()
 
 </MultiLanguage>
 
-The only potentially tricky part of this is the version param. Use `v=3`, as it is the most recent. Unlike the other versions, it returns the the feature flag values, any errors that occurred when computing, and any payloads for the flags.
+The only potentially tricky part of this is the version param. Use `v=3`, as it is the most recent. Unlike the other versions, it returns the feature flag values, any errors that occurred when computing, and any payloads for the flags.
 
 Also, if doing a `curl` request, make sure to wrap your URL in quotes to ensure your terminal doesn’t think the `?` is a wildcard character.
 

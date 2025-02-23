@@ -104,7 +104,7 @@ Nothing comes for free and limiting what PostHog can store between page loads do
 
 * **Cache optimizations** - PostHog stores some information in browser storage to load faster, for example, the last loaded values for feature flags. Without this, there can be a delay between the page loading and things like feature flags being available to query (unless flags are bootstrapped).
 
-* **Flag consistency** - Because setting peristence to `memory` resets the user `distinct_id`, if you don't implement bootstrapping or another identification method, the same user might see multiple flag variants across sessions. This can lead to an inconsistent experience if you are doing a percentage rollout or running an A/B test.
+* **Flag consistency** - Because setting persistence to `memory` resets the user `distinct_id`, if you don't implement bootstrapping or another identification method, the same user might see multiple flag variants across sessions. This can lead to an inconsistent experience if you are doing a percentage rollout or running an A/B test.
 
 ## Further reading
 

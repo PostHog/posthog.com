@@ -138,7 +138,7 @@ Exporting mutable data (like the persons model) requires executing a merge opera
 
 ## FAQ
 
-### Export is showing up as NULL recods in Snowflake
+### Export is showing up as NULL records in Snowflake
 
 This is most likely because the table's schema is different from what we are sending. To verify, run this command replacing the variables:
 ```

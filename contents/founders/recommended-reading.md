@@ -105,7 +105,7 @@ David's review: “It very simply talks about avoiding ‘work work’. The focu
 ## [Continuous Discovery Habits by Teresa Torres](https://www.goodreads.com/book/show/58046715-continuous-discovery-habits) 
 **Recommended by [Annika Schmid, Product Manager](/community/profiles/221)**
 
-In addition to the The Mom Test, Annika recommends this book for its practical advice on gathering information from users and turning that information into actionable change. 
+In addition to the Mom Test, Annika recommends this book for its practical advice on gathering information from users and turning that information into actionable change. 
 
 “It explains a method around continuously talking to users as opposed to doing interviews in big batches around specific topics, like larger organizations do,” says Annika. “I think it’s particularly useful for startups and it’s something we definitely do at PostHog.”
 

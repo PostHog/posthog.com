@@ -21,7 +21,7 @@ category: Startups
 
 Golioth's solution has been to divide and conquer.
 
-“On the firmware side we have longer release cycles,” says Golioth Product Manager Dylan Swartz. “If we shipped every every single day, customers couldn’t keep up. But on cloud we’re much more agile - and there are four essential principles we apply universally."
+“On the firmware side we have longer release cycles,” says Golioth Product Manager Dylan Swartz. “If we shipped every single day, customers couldn’t keep up. But on cloud we’re much more agile - and there are four essential principles we apply universally."
 
 ## 1. Put customers at the heart of product development
 

@@ -12,7 +12,7 @@ SQL insights enable you to directly access data in PostHog using [SQL queries](/
 
 You create SQL queries out of a list of commands that shape what data, filters, aggregations, and ordering we want to see. 
 
-> SQL queries in PostHog don’t require the trailing semi-colon (`;`) of traditional SQL queries.
+> SQL queries in PostHog don’t require the trailing semicolon (`;`) of traditional SQL queries.
 
 ### SELECT
 
