@@ -126,7 +126,7 @@ Segment doesn't send pageleave data. When using `analytics.page()` only pageview
 
 You have two options to track pageleaves:
 
-**Add `caputure_pageleave: true` to your PostHog configuration**
+**Add `capture_pageleave: true` to your PostHog configuration**
 
 This option uses PostHog's standard `$pageleave` event, but the event will skip sending to Segment and instead only show up in PostHog.
 
