@@ -210,7 +210,7 @@ Best,
 
 ## How do I use Zendesk?
 
-We use [Zendesk Support](https://zendesk.com/) as our internal platform to manage support tickets. This ensures that we don't miss anyone, especially when their request is passed from one person to another at PostHog, or if they message us over the weekend.
+We use [Zendesk Support](https://posthoghelp.zendesk.com) as our internal platform to manage support tickets. This ensures that we don't miss anyone, especially when their request is passed from one person to another at PostHog, or if they message us over the weekend.
 
 Zendesk allows us to manage all our customer conversations in one place and reply through Slack or email.
 
