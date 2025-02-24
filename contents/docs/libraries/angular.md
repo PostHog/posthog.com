@@ -203,7 +203,7 @@ initPostHog() {
 
 ## Idiomatic service for Angular v17 and above
 
-Here is an example of posthog singleton service, that should be called from App like so.
+For larger projects, you might prefer to set up PostHog as a singleton service. To do this, start by creating and injecting a `PosthogService` instance:
 
 ```ts file=main.ts
 import { Component } from "@angular/core";
