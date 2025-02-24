@@ -21,7 +21,7 @@ tags:
 
 This guide only includes open-source analytics tools that:
 
-1. **Have built-in analysis views.** This includes end-to-end analytics, and dashboarding tools that connect to existing data sources, but not data pipeline platforms.
+1. **Have built-in analysis views.** This includes end-to-end analytics, and business intelligence tools that connect to existing data sources, but not data pipeline platforms.
 
 2. **Are actively maintained.** This is subjectively judged based on recently merged pull requests, commits to their repos, and the responsiveness of the maintainer to review requests.
 
@@ -34,7 +34,7 @@ This guide only includes open-source analytics tools that:
 
 This guide is maintained by [PostHog](https://posthog.com/), an open-source analytics platform. You can suggest additions to this guide by opening an issue on our [website repo](https://github.com/PostHog/posthog.com).
 
-We maintain separate guides on [open-source feature flag tools](/blog/best-open-source-feature-flag-tools),  [open-source AB testing products](/blog/best-open-source-ab-testing-tools), and [open-source session replay tools](/blog/best-open-source-session-replay-tools).
+We maintain separate guides on [open-source feature flag tools](/blog/best-open-source-feature-flag-tools), [open-source AB testing products](/blog/best-open-source-ab-testing-tools), and [open-source session replay tools](/blog/best-open-source-session-replay-tools).
 
 </details>
 
@@ -75,7 +75,7 @@ We maintain separate guides on [open-source feature flag tools](/blog/best-open-
 
 [PostHog](https://posthog.com/) is an all-in-one platform that combines product analytics with several other developer-focused tools, such as web analytics, session replay, feature flags, experiments, error tracking, and surveys.
 
-Beyond the core [product analytics features](/product-analytics), it also supports creating [custom insights using SQL](/docs/product-analytics/sql), and offers a [built-in data warehouse](/docs/data-warehouse) so you can import data from external sources like Stripe, Hubspot, and Zendesk.
+Beyond the core [product analytics features](/product-analytics), it also supports creating [custom insights using SQL](/docs/product-analytics/sql), and offers a [built-in data warehouse](/docs/data-warehouse), so you can import data from external sources like Stripe, Hubspot, and Zendesk.
 
 #### Who should use PostHog?
 
@@ -178,7 +178,7 @@ The minimum requirements for 100,000 pageviews per month are: one server 2 CPU, 
 <details>
     <summary>Is there a hosted option?</summary>
 
-Yes. Matomo's cloud offereing includes all features and charges by "hits per month". The hosted version unlocks some features, like A/B testing and heatmaps, that are paid add-ons for the on-premise release.
+Yes. Matomo's cloud offering includes all features and charges by "hits per month". The hosted version unlocks some features, like A/B testing and heatmaps, that are paid add-ons for the on-premise release.
 </details>
 
 ### 3. Metabase
@@ -220,7 +220,7 @@ Companies that want to analyze product and company data that's already stored in
 <details>
     <summary>What closed-source tools can it replace?</summary>
 
-Metabase is a direct alternative to business intelligence tools like Google's Looker / Looker Studio, Tableau, and Microsoft's Power BI. There are official connectors for all the most popular databases (Redshift, BigQuery, Snowflake, etc), and several community and partner-managed connectors for the likes of ClickHouse and DuckDB.
+Metabase is a direct alternative to business intelligence tools like Google's Looker / Looker Studio, Tableau, and Microsoft's Power BI. There are official connectors for all the most popular databases (Redshift, BigQuery, Snowflake, etc), and community and partner-managed connectors for the likes of ClickHouse and DuckDB.
 </details>
 
 <details>
@@ -284,7 +284,7 @@ It's a popular alternative to Google Analytics for people who want something fas
 <details>
     <summary>What's included in the open-source release?</summary>
 
-The [community edition](https://plausible.io/self-hosted-web-analytics) offers the same features as paid versions, including tracking all common website metrics, goal and conversion tracking, basic funnels, and reports in Slack or via email. The only limitation is it's only updated twice a year, whereas the cloud version gets continuous updates.
+The [community edition](https://plausible.io/self-hosted-web-analytics) offers the same features as paid versions, including tracking all common website metrics, goal and conversion tracking, basic funnels, and reports in Slack or via email. The only limitation is that it's only updated twice a year, whereas the cloud version gets continuous updates.
 
 </details>
 
@@ -444,7 +444,7 @@ Yes and, unlike Plausible, there's a free tier. You can track up to 100k events 
 
 #### Who should use Apache Superset?
 
-Companies that want to do advanced analysis and have the internal resources and knowledge to use Superset to its full potential. Superset is better-suited to companies with dedicated data science people, whereas Metabase is more accessible to non-techincal users.
+Companies that want to do advanced analysis and have the internal resources and knowledge to use Superset to its full potential. Superset is better-suited to companies with dedicated data science people, whereas Metabase is more accessible to non-technical users.
 
 <details>
     <summary>What closed-source tools can it replace?</summary>
