@@ -201,6 +201,75 @@ initPostHog() {
 }
 ```
 
+## Idiomatic service for Angular v17 and above
+
+Here is an example of posthog singleton service, that should be called from App like so.
+
+```ts file=main.ts
+import { Component } from "@angular/core";
+import { RouterOutlet } from "@angular/router";
+import { PosthogService } from "./services/posthog.service";
+
+@Component({
+  selector: "app-root",
+  styleUrls: ["./app.component.scss"],
+  template: `
+    <router-outlet />`,
+  imports: [RouterOutlet],
+})
+export class AppComponent {
+  title = "angular-app";
+
+  constructor(posthogService: PosthogService) {}
+}
+```
+
+and definition of posthogService follows.
+```ts file=posthog.service.ts
+import { DestroyRef, Injectable, NgZone } from "@angular/core";
+import posthog from "posthog-js";
+import { environment } from "../../environments/environment";
+import { NavigationEnd, Router } from "@angular/router";
+import { filter } from "rxjs";
+import { takeUntilDestroyed } from "@angular/core/rxjs-interop";
+
+@Injectable({ providedIn: "root" })
+export class PosthogService {
+  constructor(
+    private ngZone: NgZone,
+    private router: Router,
+    private destroyRef: DestroyRef,
+  ) {
+    this.initPostHog();
+  }
+  private initPostHog() {
+    this.ngZone.runOutsideAngular(() => {
+      posthog.init(environment.posthogKey, {
+        api_host: environment.posthogHost,
+        debug: false,
+        cross_subdomain_cookie: true,
+        person_profiles: "always",
+        capture_pageview: false,
+        capture_pageleave: true,
+        loaded: (posthogInstance) => {
+          this.router.events
+            .pipe(
+              filter((event) => event instanceof NavigationEnd),
+              takeUntilDestroyed(this.destroyRef),
+            )
+            .subscribe((event: NavigationEnd) => {
+              posthogInstance.capture("$pageview");
+            });
+        },
+      });
+    });
+  }
+}
+```
+
+This service contains posthog initialization, and upon success, enables pageviews.
+
+
 ## Next steps
 
 For any technical questions for how to integrate specific PostHog features into Angular (such as feature flags, A/B testing, surveys, etc.), have a look at our [JavaScript Web SDK docs](/docs/libraries/js).
