@@ -22,7 +22,12 @@ import { ComparisonRow } from 'components/ComparisonTable/row'
 - **Typical users:** Engineers and product teams
 - **Typical customers:** Mid-size B2Bs and startups
 
-![PostHog](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/screenshots/feature-flags.png)
+<ProductScreenshot
+    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_02_24_at_11_05_43_2x_4bd442ec11.png"
+    imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_02_24_at_11_06_11_2x_e5928d17d7.png"
+    alt="PostHog interface"
+    classes="rounded"
+/>
 
 ### What is PostHog?
 
@@ -54,7 +59,7 @@ According to [BuiltWith](https://trends.builtwith.com/analytics/PostHog), as of 
   <ComparisonRow column1={false} column2={true} feature="Distributed tracing" description="Follow a request across services to identify latency bottlenecks and inter-service dependencies." />
   <ComparisonRow column1={false} column2={true} feature="Profiling" description="Capture detailed CPU, memory, and function-level performance metrics to pinpoint inefficient code segments." />
   <ComparisonRow column1={true} column2={true} feature="Alerting" description="Detect and receive notifications when problems arise" />
-  <ComparisonRow column1={false} column2={true} feature="Release tracking" description="Associate errors and performance issues with specific deployments, making it easier to spot regressions." />
+  <ComparisonRow column1={false} column2={true} feature="Release tracking" description="Associate errors and performance issues with specific deployments" />
   <ComparisonRow column1={false} column2={false} feature="Log management" description="Aggregate and analyze logs in real-time to correlate events, identify issues, and gain insight into system performance." />
   <ComparisonRow column1={true} column2={false} feature="Product analytics" description="Custom events, trends, funnels, paths, and retention" />
   <ComparisonRow column1={true} column2={true} feature="Session replay" description="Watch real users on your site; discover friction points" />
@@ -114,7 +119,7 @@ According to [BuiltWith](https://trends.builtwith.com/widgets/Rollbar), as of Fe
   <ComparisonRow column1={false} column2={true} feature="Distributed tracing" description="Follow a request across services to identify latency bottlenecks and inter-service dependencies." />
   <ComparisonRow column1={false} column2={true} feature="Profiling" description="Capture detailed CPU, memory, and function-level performance metrics to pinpoint inefficient code segments." />
   <ComparisonRow column1={true} column2={true} feature="Alerting" description="Detect and receive notifications when problems arise" />
-  <ComparisonRow column1={true} column2={true} feature="Release tracking" description="Associate errors and performance issues with specific deployments, making it easier to spot regressions." />
+  <ComparisonRow column1={true} column2={true} feature="Release tracking" description="Associate errors and performance issues with specific deployments" />
   <ComparisonRow column1={false} column2={false} feature="Log management" description="Aggregate and analyze logs in real-time to correlate events, identify issues, and gain insight into system performance." />
   <ComparisonRow column1={false} column2={false} feature="Product analytics" description="Custom events, trends, funnels, paths, and retention" />
   <ComparisonRow column1={false} column2={true} feature="Session replay" description="Watch real users on your site; discover friction points" />
@@ -146,7 +151,7 @@ According to [reviews on G2](https://www.g2.com/products/rollbar/reviews), compa
 - **Typical users:** Development teams and SREs
 - **Typical customers:** Ecommerce and media companies
 
-![Raygun](https://res.cloudinary.com/dmukukwp6/image/upload/raygun_ec55696a5a.png)
+![Raygun](https://res.cloudinary.com/dmukukwp6/image/upload/raygun2_1f01c82ebe.png)
 
 ### What is Raygun?
 
@@ -176,7 +181,7 @@ According to [BuiltWith](https://trends.builtwith.com/analytics/Raygun), as of F
   <ComparisonRow column1={true} column2={true} feature="Distributed tracing" description="Follow a request across services to identify latency bottlenecks and inter-service dependencies." />
   <ComparisonRow column1={false} column2={true} feature="Profiling" description="Capture detailed CPU, memory, and function-level performance metrics to pinpoint inefficient code segments." />
   <ComparisonRow column1={true} column2={true} feature="Alerting" description="Detect and receive notifications when problems arise" />
-  <ComparisonRow column1={true} column2={true} feature="Release tracking" description="Associate errors and performance issues with specific deployments, making it easier to spot regressions." />
+  <ComparisonRow column1={true} column2={true} feature="Release tracking" description="Associate errors and performance issues with specific deployments" />
   <ComparisonRow column1={false} column2={false} feature="Log management" description="Aggregate and analyze logs in real-time to correlate events, identify issues, and gain insight into system performance." />
   <ComparisonRow column1={false} column2={false} feature="Product analytics" description="Custom events, trends, funnels, paths, and retention" />
   <ComparisonRow column1={false} column2={true} feature="Session replay" description="Watch real users on your site; discover friction points" />
@@ -214,7 +219,7 @@ According to G2 reviews, Raygun is chosen because:
 
 Datadog is a cloud observability and monitoring platform that provides real-time visibility into infrastructure, applications, logs, and network performance. It enables organizations to ensure performance, security, and reliability across their entire stack.
 
-According to [BuiltWith](https://trends.builtwith.com/analytics/Datadog), as of February 2025, only 4,941 of the top 1 million websites deploy Datadog compared to 73,723 that use Sentry, but this likely underestimates the number of users as much of their usage is in backend systems.
+According to [BuiltWith](https://trends.builtwith.com/analytics/Datadog), as of February 2025, only 4,941 of the top 1 million websites deploy Datadog compared to 73,723 that use Sentry, but this likely underestimates the number of users as much of Datadog's usage is in backend systems.
 
 #### Key features
 
@@ -236,7 +241,7 @@ According to [BuiltWith](https://trends.builtwith.com/analytics/Datadog), as of 
   <ComparisonRow column1={true} column2={true} feature="Distributed tracing" description="Follow a request across services to identify latency bottlenecks and inter-service dependencies." />
   <ComparisonRow column1={true} column2={true} feature="Profiling" description="Capture detailed CPU, memory, and function-level performance metrics to pinpoint inefficient code segments." />
   <ComparisonRow column1={true} column2={true} feature="Alerting" description="Detect and receive notifications when problems arise" />
-  <ComparisonRow column1={true} column2={true} feature="Release tracking" description="Associate errors and performance issues with specific deployments, making it easier to spot regressions." />
+  <ComparisonRow column1={true} column2={true} feature="Release tracking" description="Associate errors and performance issues with specific deployments" />
   <ComparisonRow column1={true} column2={false} feature="Log management" description="Aggregate and analyze logs in real-time to correlate events, identify issues, and gain insight into system performance." />
   <ComparisonRow column1={false} column2={false} feature="Product analytics" description="Custom events, trends, funnels, paths, and retention" />
   <ComparisonRow column1={true} column2={true} feature="Session replay" description="Watch real users on your site; discover friction points" />
@@ -276,7 +281,7 @@ According to G2 reviewers, Datadog is chosen because:
 
 New Relic is a cloud-based observability and analytics platform that provides full-stack visibility into application performance, infrastructure, and user experience. It helps organizations monitor, troubleshoot, and optimize their software in real time, enabling proactive issue resolution and improved customer experiences.
 
-According to [BuiltWith](https://trends.builtwith.com/analytics/New-Relic), as of October 2024, 40,714 of the top 1 million websites deploy New Relic, closest of any of the alternatives on this list to the 73,723 that use Sentry.
+According to [BuiltWith](https://trends.builtwith.com/analytics/New-Relic), as of February 2025, 40,714 of the top 1 million websites deploy New Relic, closest of any of the alternatives on this list to the 73,723 that use Sentry.
 
 #### Key features
 
@@ -300,7 +305,7 @@ According to [BuiltWith](https://trends.builtwith.com/analytics/New-Relic), as o
   <ComparisonRow column1={true} column2={true} feature="Distributed tracing" description="Follow a request across services to identify latency bottlenecks and inter-service dependencies." />
   <ComparisonRow column1={true} column2={true} feature="Profiling" description="Capture detailed CPU, memory, and function-level performance metrics to pinpoint inefficient code segments." />
   <ComparisonRow column1={true} column2={true} feature="Alerting" description="Detect and receive notifications when problems arise" />
-  <ComparisonRow column1={true} column2={true} feature="Release tracking" description="Associate errors and performance issues with specific deployments, making it easier to spot regressions." />
+  <ComparisonRow column1={true} column2={true} feature="Release tracking" description="Associate errors and performance issues with specific deployments" />
   <ComparisonRow column1={true} column2={false} feature="Log management" description="Aggregate and analyze logs in real-time to correlate events, identify issues, and gain insight into system performance." />
   <ComparisonRow column1={false} column2={false} feature="Product analytics" description="Custom events, trends, funnels, paths, and retention" />
   <ComparisonRow column1={true} column2={true} feature="Session replay" description="Watch real users on your site; discover friction points" />
@@ -330,7 +335,7 @@ G2 reviewers like New Relic because:
 - **Typical users:** Product managers, engineers, support teams
 - **Typical customers:** B2B SaaS, B2C retail companies
 
-![LogRocket](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/best-fullstory-alternatives/logrocket.webp)
+![LogRocket](https://res.cloudinary.com/dmukukwp6/image/upload/logrocket_f81ee0a53e.png)
 
 ### What is LogRocket?
 
@@ -358,7 +363,7 @@ According to [BuiltWith](https://trends.builtwith.com/widgets/LogRocket), as of 
   <ComparisonRow column1={false} column2={true} feature="Distributed tracing" description="Follow a request across services to identify latency bottlenecks and inter-service dependencies." />
   <ComparisonRow column1={false} column2={true} feature="Profiling" description="Capture detailed CPU, memory, and function-level performance metrics to pinpoint inefficient code segments." />
   <ComparisonRow column1={true} column2={true} feature="Alerting" description="Detect and receive notifications when problems arise" />
-  <ComparisonRow column1={false} column2={true} feature="Release tracking" description="Associate errors and performance issues with specific deployments, making it easier to spot regressions." />
+  <ComparisonRow column1={false} column2={true} feature="Release tracking" description="Associate errors and performance issues with specific deployments" />
   <ComparisonRow column1={false} column2={false} feature="Log management" description="Aggregate and analyze logs in real-time to correlate events, identify issues, and gain insight into system performance." />
   <ComparisonRow column1={true} column2={false} feature="Product analytics" description="Custom events, trends, funnels, paths, and retention" />
   <ComparisonRow column1={true} column2={true} feature="Session replay" description="Watch real users on your site; discover friction points" />
@@ -396,7 +401,7 @@ According to G2 reviews, customers use LogRocket because:
 
 AppSignal is an application performance monitoring (APM) and error tracking tool designed for developers. It offers insight into errors, performance issues, host metrics, uptime monitoring, and logs in one unified platform. It's known for its ease of setup, developer-friendly experience, and real-time alerting.
 
-AppSignal isn't listed on BuiltWith, as it's largely backend focused. Ahrefs has its monthly organic visits at 1.7k visitors per month compared to the 277k of Sentry.
+AppSignal isn't listed on BuiltWith, as it's largely backend focused, but organic traffic can give us a rough estimate of its popularity. Ahrefs has its monthly organic visits at 1.7k visitors per month compared to the 277k of Sentry.
 
 #### Key features
 
@@ -420,7 +425,7 @@ AppSignal isn't listed on BuiltWith, as it's largely backend focused. Ahrefs has
   <ComparisonRow column1={false} column2={true} feature="Distributed tracing" description="Follow a request across services to identify latency bottlenecks and inter-service dependencies." />
   <ComparisonRow column1={true} column2={true} feature="Profiling" description="Capture detailed CPU, memory, and function-level performance metrics to pinpoint inefficient code segments." />
   <ComparisonRow column1={true} column2={true} feature="Alerting" description="Detect and receive notifications when problems arise" />
-  <ComparisonRow column1={true} column2={true} feature="Release tracking" description="Associate errors and performance issues with specific deployments, making it easier to spot regressions." />
+  <ComparisonRow column1={true} column2={true} feature="Release tracking" description="Associate errors and performance issues with specific deployments" />
   <ComparisonRow column1={true} column2={false} feature="Log management" description="Aggregate and analyze logs in real-time to correlate events, identify issues, and gain insight into system performance." />
   <ComparisonRow column1={false} column2={false} feature="Product analytics" description="Custom events, trends, funnels, paths, and retention" />
   <ComparisonRow column1={false} column2={true} feature="Session replay" description="Watch real users on your site; discover friction points" />
