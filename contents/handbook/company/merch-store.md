@@ -37,7 +37,11 @@ Shipping is also done through Brilliant - they can ship to over 200 territories 
 
 ### Customers
 
-Create a discount code in <PrivateLink url="https://admin.shopify.com/store/posthog/discounts">Shopify admin</PrivateLink>. When creating the discount, select "amount off products" then choose if it is a percentage off or a fixed amount - usually we do fixed amounts of $50 or $100 depending on the purpose. The you can choose "specific collections" and choose "All Products". Limit the use to one use per customer, otherwise it's unlimited free stuff for them, unlimited high cost for us! For code contributions we tend to do $50, with no expiration date.
+Create a discount code in <PrivateLink url="https://admin.shopify.com/store/posthog/discounts">Shopify admin</PrivateLink>. You don't need to be invited to Shopify, instead the login details are stored in [1Password](https://start.1password.com/signin?l=en).
+
+When creating the discount, select "amount off products" then choose if it is a percentage off or a fixed amount - usually we do fixed amounts of $30, $50, or $100 depending on the purpose. The you can choose "specific collections" and choose "All Products". Limit the use to one use per customer, otherwise it's unlimited free stuff for them, unlimited high cost for us! 
+
+For feedback or general rewards we typically give users $30, which is enough for a t-shirt. For code contributions we tend to do $50, which is enough for a bigger selection of things. We don't put expiration dates on the codes, typically.
 
 If you need any help just send a message to the <PrivateLink url="https://posthog.slack.com/archives/C04DWKH7DM3">#merch</PrivateLink> channel and somebody will be happy to help. Merch codes can also be generated directly from within Zendesk.
 
