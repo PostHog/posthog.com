@@ -236,7 +236,7 @@ On Linux you often have separate packages: `postgres` for the tools, `postgres-s
 
 4. Install Node packages by running `pnpm i`.
 
-5. Run `pnpm typegen:write` to generate types for [Kea](https://keajs.org/) state management logics used all over the frontend.
+5. Run `pnpm --filter=@posthog/frontend typegen:write` to generate types for [Kea](https://keajs.org/) state management logics used all over the frontend.
 
 > The first time you run typegen, it may get stuck in a loop. If so, cancel the process (`Ctrl+C`), discard all changes in the working directory (`git reset --hard`), and run `pnpm typegen:write` again. You may need to discard all changes once more when the second round of type generation completes.
 
@@ -257,13 +257,13 @@ On Linux you often have separate packages: `postgres` for the tools, `postgres-s
     curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
     # Select 1 to proceed with default installation
     ```
-2. Run `pnpm i --dir plugin-server` to install all required packages. We'll actually run the plugin server in a later step.
+2. Run `pnpm --filter=@posthog/plugin-server install` to install all required packages. We'll actually run the plugin server in a later step.
 
 > **Note:** If you face an error like `ld: symbol(s) not found for architecture arm64`, most probably your openssl build flags are coming from the wrong place. To fix this, run:
 ```bash
 export CPPFLAGS=-I/opt/homebrew/opt/openssl/include
 export LDFLAGS=-L/opt/homebrew/opt/openssl/lib
-pnpm i --dir plugin-server
+pnpm --filter=@posthog/plugin-server install
 ```
 
 > **Note:** If you face an error like `import gyp  # noqa: E402`, most probably need to install `python-setuptools`. To fix this, run:
