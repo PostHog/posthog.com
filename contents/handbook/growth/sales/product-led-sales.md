@@ -16,6 +16,7 @@ Product-led leads can be generated in different ways:
 2. Customers who have high ICP score and subscribe to teams plan.
 4. Customers who have used 50% or more of their startup credits and had a last invoice greater than $5000.
 5. Customers who are set to roll off the startup plan in the next two months and had a last invoice greater than $1500.
+6. Customers who are set to hit their first monthly bill over $500 (to Onboarding Specialists)
 
 They follow the [normal territory assignment rules](https://posthog.com/handbook/growth/sales/crm#how-we-do-lead-assignments) in Salesforce. 
 
@@ -34,3 +35,15 @@ Even if after speaking with them you think they may not end up at $20k+, you sho
 ## Getting recognized on the deal
 
 As they have already shown intent by signing up/subscribing, you will need to demonstrate that you have actively worked on the opportunity to include it in your book of business.  We will use a common sense approach here but sending a couple of emails and 1 call won't be classed as 'actively working'. Simon will make the call here, escalating if needed. 
+
+## Onboarding Specialist Role
+
+For customers with a first bill forecasted over $500, including those rolling off startup plans, they will be routed to an Onboarding Specialist. 
+
+The goal of the onboarding specialists is to retain as many of these logos as possible. In practice, this means:
+
+- Auditing their spend and setup, making sure they don't have any gross errors or aren't paying for products they don't use
+- Figure out if they are committing to PostHog, and offering to run onboarding (usually one to two sessions), or help debug any setup issues
+- Explaining how PostHog billing works, how it scales, offering them annual contracts/billing
+- If they do want annual billing/savings, either handling the order form themselves, or routing to AE if the lift will be heavier (procurement, legal, etc)
+- Serving as "scaled CSM" for the account for the first few months, to make sure they aren't blocked, or have bill spikes they don't know how to handle
