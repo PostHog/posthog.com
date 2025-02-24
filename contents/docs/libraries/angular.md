@@ -224,7 +224,7 @@ export class AppComponent {
 }
 ```
 
-and definition of posthogService follows.
+The service itself looks like this:
 ```ts file=posthog.service.ts
 import { DestroyRef, Injectable, NgZone } from "@angular/core";
 import posthog from "posthog-js";
