@@ -20,7 +20,7 @@ Selling software, especially to larger companies, can be a complex process with 
   * Is it painful enough right now that they are willing to adopt a new solution to solve it?  
   * Will PostHog solve this problem for them?
 * Timeline - When do whey want to have a contract signed/solution in place?
-* Pricing - We should know the rough size of the opportunity, and that is in line with expectations and budget of the customer.
+* Pricing - We should know the rough size of the opportunity, and that that is in line with expectations and budget of the customer.
 * Champion - Are you working with a champion who is going to sell internally?
   * Are they the buyer (see below) or do they know who the buyer is?
 * Decision - How are they evaluating us?  
