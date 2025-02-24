@@ -109,7 +109,7 @@ There’s always tension between being opinionated and building what users want.
 
 ## 6. Waiting “one more week” to ship something
 
-![glengarry glen roses](https://res.cloudinary.com/dmukukwp6/image/upload/glengarry_glen_hog_b952c1fc80.jpg)
+![glengarry glen ross](https://res.cloudinary.com/dmukukwp6/image/upload/glengarry_glen_hog_b952c1fc80.jpg)
 
 One more week sounds harmless enough, right? It’s just ONE week. 
 
