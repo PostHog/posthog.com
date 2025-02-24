@@ -81,19 +81,14 @@ Beyond the core [product analytics features](/product-analytics), it also suppor
 
 Developers and startups who need an in-depth understanding of what users are doing in their app, or want to track the complete journey from their marketing website through to their app.
 
-#### Pros
-
-- Advanced product analytics features
-- Easy-to-use web analytics dashboard 
-- Session replay for web and mobile apps 
-- Feature flags and experiments included
-- Replaces multiple tools
-- Generous free tier on cloud 
-
-#### Cons
-
-- Self-hosting not recommended above 300k events per month
-- Steeper learning curve compared to lightweight analytics tools
+| **Pros**                                                    | **Cons**                                                       |
+|-------------------------------------------------------------|-------------------------------------------------------------|
+| Advanced product analytics features                         | Self-hosting not recommended above 300k events per month       |
+| Easy-to-use web analytics dashboard                         | Steeper learning curve compared to lightweight analytics tools |
+| Session replay for web and mobile apps                      |                                                                |
+| Feature flags and experiments included                      |                                                                |
+| Replaces multiple tools                                     |                                                                |
+| Generous free tier on cloud                                 |                                                                |
 
 <details>
     <summary>What closed-source tools can it replace?</summary>
@@ -122,16 +117,6 @@ Yes. PostHog offers a managed cloud option with a [generous free tier](/pricing)
 </details>
 
 
-| **Pros**                                                    | **Cons**                                                       |
-|-------------------------------------------------------------|-------------------------------------------------------------|
-| Advanced product analytics features                         | Self-hosting not recommended above 300k events per month       |
-| Easy-to-use web analytics dashboard                         | Steeper learning curve compared to lightweight analytics tools |
-| Session replay for web and mobile apps                      |                                                                |
-| Feature flags and experiments included                      |                                                                |
-| Replaces multiple tools                                     |                                                                |
-| Generous free tier on cloud                                 |                                                                |
-
-
 ### 2. Matomo
 
 ![Matomo - open source analytics tools](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/open-source-analytics-tools/matomo-screenshot.png)
@@ -146,6 +131,10 @@ Yes. PostHog offers a managed cloud option with a [generous free tier](/pricing)
 
 It looks little dated compared to some tools in this list, but it's a mature and reliable platform used by many large government and non-profit organizations.
 
+#### Who should use Matomo?
+
+Companies that want comprehensive website and marketing analytics without the privacy implications of using Google Analytics.
+
 | **Pros**                                                    | **Cons**                                                    |
 |-------------------------------------------------------------|-------------------------------------------------------------|
 | Easy GDPR compliance                                        | Features like session replay and heatmaps not included in open-source release |
@@ -154,10 +143,6 @@ It looks little dated compared to some tools in this list, but it's a mature and
 | Used by many large orgs (United Nations & EU)               | More complex to self host than lightweight analytics tools                         |
 | Strong web and marketing analytics features                 |                                                                               |
 | Built-in tag manager                                        |                                                                               |
-
-#### Who should use Matomo?
-
-Companies that want comprehensive website and marketing analytics without the privacy implications of using Google Analytics.
 
 <details>
     <summary>What closed-source tools can it replace?</summary>
@@ -207,6 +192,10 @@ Yes. Matomo's cloud offering includes all features and charges by "hits per mont
 
 Metabase is a great tool for business and revenue reporting, though you can create dashboards for any type of data that's stored in a supported database. Spoiler: Metabase supports lots of database types. It requires more technical knowledge than either PostHog or Matomo, but it's powerful in the right hands.
 
+#### Who should use Metabase?
+
+Companies that want to analyze product and company data that's already stored in data warehouses that have a reasonable degree of internal knowledge of SQL.
+
 | **Pros**                                                    | **Cons**                                                    |
 |-------------------------------------------------------------|-------------------------------------------------------------|
 | Connects to all popular closed and open-source databases    | Requires separate event collection and storage setup        |
@@ -214,10 +203,6 @@ Metabase is a great tool for business and revenue reporting, though you can crea
 | Full SQL editor for advanced users and queries              |                                                             |
 | Join and query data from multiple sources                   |                                                             |
 | Light hosting requirements                                  |                                                             |
-
-#### Who should use Metabase?
-
-Companies that want to analyze product and company data that's already stored in data warehouses that have a reasonable degree of internal knowledge of SQL.
 
 <details>
     <summary>What closed-source tools can it replace?</summary>
@@ -265,6 +250,10 @@ Yes. The Starter plan includes cloud deployment for $85 per month for five users
 
 It's very fast and easy to use, though this comes at the expense of features. It's ideal for anyone who just wants simple web analytics features, like tracking top pages and referrers, but it's less useful for app analytics and understanding user behavior.
 
+#### Who should use Plausible?
+
+Anyone who wants easy-to-use website analytics that doesn't want to use Google Analytics, have cookie banners, or collect any private data.
+
 | **Pros**                                                    | **Cons**                                                    |
 |-------------------------------------------------------------|-------------------------------------------------------------|
 | Fast and easy to use                                        | Limited analytics features                                  |
@@ -272,10 +261,6 @@ It's very fast and easy to use, though this comes at the expense of features. It
 | Cookieless GDPR-compliance                                  |                                                             |
 | Google Analytics import available                           |                                                             |
 | Will scale to large traffic requirements                    |                                                             |
-
-#### Who should use Plausible?
-
-Anyone who wants easy-to-use website analytics that doesn't want to use Google Analytics, have cookie banners, or collect any private data. 
 
 <details>
     <summary>What closed-source tools can it replace?</summary>
@@ -327,6 +312,10 @@ Yes. There's no free tier, but it's cheap even at high volumes. Pricing starts a
 
 This means that, unlike Plausible, you can build custom dashboards, as well as build insights that track retention within your app. OpenPanel also creates profiles for individual users that show how often they use your app, events they trigger, and most visited pages.
 
+#### Who should use OpenPanel?
+
+Developers who want basic product and website analytics for their project, but don't want to the more in-depth analysis of a tool like PostHog.
+
 | **Pros**                                                    | **Cons**                                                    |
 |-------------------------------------------------------------|-------------------------------------------------------------|
 | Fast and easy to use                                        | Young project and small community                           |
@@ -334,10 +323,6 @@ This means that, unlike Plausible, you can build custom dashboards, as well as b
 | No cookies required                                         |                                                             |
 | Basic funnel and retention analysis                         |                                                             |
 | Cheaper than typical product analytics tools                |                                                             |
-
-#### Who should use OpenPanel?
-
-Developers who want basic product and website analytics for their project, but don't want to the more in-depth analysis of a tool like PostHog.
 
 <details>
     <summary>What closed-source tools can it replace?</summary>
@@ -381,17 +366,17 @@ Yes. There is no free tier, but 100k events a month cost just $20, and 1 million
 
 [Umami](https://umami.is/) is another popular privacy-first website analytics tool. Like Plausible, it tracks basic website analytics, doesn't collect any personal information, and is extremely fast. Similar to OpenPanel, it's added some product analytics features, such as user journeys, retention, and funnels, though it only supports very basic analysis.
 
+#### Who should use Umami?
+
+Similar to Plausible, Umami is ideal for Anyone who wants easy-to-use website analytics that respects privacy. The two products are very similar, so which you choose will depend on personal preferences.
+
 | **Pros**                                                    | **Cons**                                                    |
 |-------------------------------------------------------------|-------------------------------------------------------------|
 | Easy to use and clean UI                                    | Less polished than Plausible                                |
 | Supports basic event tracking                               | Postgres database less scalable than Plausible's ClickHouse backed event database  |
 | No cookies required                                         |                                                             |
 | Minimal impact on website performance                       |                                                             |
-| Easy to host                                                |                                                             |
-
-#### Who should use Umami?
-
-Similar to Plausible, Umami is ideal for Anyone who wants easy-to-use website analytics that respects privacy. The two products are very similar, so which you choose will depend on personal preferences.
+| Easy to self host                                           |                                                             |
 
 <details>
     <summary>What closed-source tools can it replace?</summary>
@@ -438,16 +423,16 @@ Yes and, unlike Plausible, there's a free tier. You can track up to 100k events 
 
 [Superset](https://github.com/apache/superset) is the another of the big open-source business intelligence tools alongside Metabase and Redash. It's also considered the most complex and least accessible for non-technical users, though its range of visualizations and charting options is unmatched. Superset is ideal for enterprises with experienced in-house data teams, or anyone with lots of SQL experience.
 
+#### Who should use Apache Superset?
+
+Companies that want to do advanced analysis and have the internal resources and knowledge to use Superset to its full potential. Superset is better-suited to companies with dedicated data science people, whereas Metabase is more accessible to non-technical users.
+
 | **Pros**                                                    | **Cons**                                                    |
 |-------------------------------------------------------------|-------------------------------------------------------------|
 | Huge range of visualization features                        | Not suitable for non-technical users                        |
 | Highly customizable                                         | Relatively complex to host                                  |
 | Very scalable for large orgs                                |                                                             |
 | Large community                                             |                                                             |
-
-#### Who should use Apache Superset?
-
-Companies that want to do advanced analysis and have the internal resources and knowledge to use Superset to its full potential. Superset is better-suited to companies with dedicated data science people, whereas Metabase is more accessible to non-technical users.
 
 <details>
     <summary>What closed-source tools can it replace?</summary>
@@ -492,16 +477,16 @@ Not directly, though third-parties offer managed instances.
 
 [OpenReplay](https://openreplay.com/) is a session replay suite built for developers to find and eliminate problems. It also includes some basic analytics features, such as funnels and path analysis.
 
+#### Who should use OpenReplay?
+
+Companies that want an alternative to LogRocket that they can self-host.
+
 | **Pros**                                                    | **Cons**                                                    |
 |-------------------------------------------------------------|-------------------------------------------------------------|
 | Comprehensive session replay features                       | Analytics features are secondary to session replay          |
 | Useful for discovering issues in your app                   | Data export limited Enterprise plans                        |
 | Built-in performance monitoring                             |                                                             |
 | Supports both web and mobile app tracking                   |                                                             |
-
-#### Who should use OpenReplay?
-
-Companies that want an alternative to LogRocket that they can self-host.
 
 <details>
     <summary>What closed-source tools can it replace?</summary>
