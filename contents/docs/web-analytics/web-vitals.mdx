@@ -12,7 +12,7 @@ import { ProductScreenshot } from 'components/ProductScreenshot'
 
 PostHog can automatically capture [web vitals](https://web.dev/explore/learn-core-web-vitals) like largest contentful paint, first input delay, cumulative layout shift, and first contentful paint. This means you don't need to manually add web vitals logging.
 
-You can also see them in the [web vitals dashboard](https://app.posthog.com/web/web-vitals) <span className="text-xs font-semibold text-opacity-60 bg-yellow px-1 py-0.5 rounded-sm uppercase text-primary">Beta</span>.
+You can also see them in the [web vitals dashboard](https://app.posthog.com/web/web-vitals).
 
 ## What are Web vitals?
 
@@ -61,8 +61,6 @@ To improve CLS, always include width and height attributes on images and video e
 
 ## Web vitals dashboard
 
-> **Note:** The web vitals dashboard is currently in open beta. You can enable it by toggling it on in the [feature previews panel](https://app.posthog.com/#panel=feature-previews%3Aweb-vitals). You'll need to refresh your browser to see it in the sidebar.
-
 You can access web vitals in PostHog by opening **Web Analytics** and clicking the **Web Vitals** tab at the top left.
 
 The dashboard provides you with a summary of your web vitals and allows you to drill down into the data.
@@ -102,7 +100,7 @@ PostHog allows you to look at performance for p75, p90 and p99. We suggest you t
 
 ## Web vitals in the toolbar
 
-Our [toolbar](/docs/toolbar) also includes Web Vitals information  <span className="text-xs font-semibold text-opacity-60 bg-yellow px-1 py-0.5 rounded-sm uppercase text-primary">Beta</span>. In it you can see what the metrics for the current page load are, but also look at historical data for the same page.
+Our [toolbar](/docs/toolbar) also includes Web Vitals information. In it you can see what the metrics for the current page load are, but also look at historical data for the same page.
 
 <ProductScreenshot
   imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/web_analytics_toolbar_light_a617d74897.png"
@@ -154,6 +152,42 @@ Metrics are made available when the [web vitals library](https://github.com/Goog
 You can look at our Web vitals capturing code in [web-vitals/index.ts](https://github.com/PostHog/posthog-js/blob/main/src/extensions/web-vitals/index.ts).
 
 
+### Sampling `$web_vitals` events
+
+If you're concerned about the cost of `$web_vitals` events, you can enable [sampling](/docs/libraries/js#sampling-events) for `$web_vitals` events.
+This will reduce the amount of events you send at the cost of some accuracy.
+
+We offer a pre-built function to sample by event name.
+You can import this using a package manager, or add the customization script to your site.
+You can also roll your own function if you prefer a tighter control over the sampling rate.
+
+<MultiLanguage>
+
+```ts file=Import
+import { sampleByEvent } from 'posthog-js/lib/src/customizations'
+
+posthog.init('<ph_project_api_key>', {
+    // Capture only half of web vitals events
+    before_send: sampleByEvent(['$web_vitals'], 0.5)
+})
+```
+
+```tsx file=Script
+// Add this script to your site, may need to change the script src to match your API host (`us` vs `eu`):
+// <script type="text/javascript" src="https://us.i.posthog.com/static/customizations.full.js"></script>
+
+posthog.init('<ph_project_api_key>', {
+    // Capture only half of web vitals events
+    before_send: posthogCustomizations.sampleByEvent(['$web_vitals'], 0.5)
+})
+```
+
+</MultiLanguage>
+
+
 ## Pricing
 
-Web vitals (`$web_vitals`) events are charged as regular events, and the first 1M are free. Check our [pricing page](/pricing) for more information, and we have a calculator there too!
+Web vitals (`$web_vitals`) events are charged as regular events, and the first 1M are free.
+On average, you'll send 30% of the amount of `$pageview` events as `$web_vitals` events.
+
+Check our [pricing page](/pricing) for more information, and we have a calculator there too!

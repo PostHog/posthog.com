@@ -86,7 +86,9 @@ If you are in the US only, when buying something at Apple we can get 3% cashback
 
 Also, Amazon regularly offer discounts on Apple products of around 10%, so always worth a check before buying direct from Apple. If you buy from Apple, you may be asked if you wanted to purchase Apple Care - please don't buy this as it's not great value for money.
 
-> You can request a budget to buy a new laptop every 4 years - you can do this in Brex. If you are having issues with your laptop before that and a genuine exception needs to be made, drop a note in the #team-people-and-ops channel. 
+> You can request a budget to buy a new laptop if your laptop is over 4 years old - you can do this in Brex. We do ask that you do some diligence to make sure it's not a setup issue though - ie other applications aren't hogging the memory, etc. We recommend wiping + reinstalling a minimum set of apps to verify this. 
+>
+> If you are having issues with your laptop before your laptop is old enough and a genuine exception needs to be made, drop a note in the #team-people-and-ops channel. 
 
 ### Monitor
 
@@ -185,8 +187,7 @@ We do not pre-approve your travel expenses, and trust team members to make the r
 - We all travel economy by default- we cannot afford for folks to fly premium or business class. Feel free to upgrade using your personal money/airmiles if you’d like to. If you are particularly tall and struggle to fit into an economy seat, PostHog will cover the cost of an emergency exit seat. 
 - Be sensible when considering the value of your time, and avoid over-optimizing for cost. It is probably not worth saving $100 to take a non-direct flight that takes you 5hrs extra. Similarly, it doesn’t make sense to save $50 by taking a flight that leaves at 6am, only to have to expense a taxi to get to the airport.
 - Related to the above, consider signing up for programs like Global Entry if you are regularly travelling to countries that offer it- these can pay for themselves in one trip with the amount of time saved, particularly when travelling to the US. PostHog will cover costs here.
-
-If you have any questions about this stuff, or are unsure what is reasonable here, feel free to check in with Fraser.
+- When travelling internationally, PostHog does not cover roaming charges for your phone. You can expense a reasonable eSIM, which usually is no more than $20. 
 
 ### Budget for working together/socializing
 

@@ -15,7 +15,7 @@ import TransformationDisabled from "./_snippets/transformation-disabled.mdx"
 
 <TransformationDisabled />
 
-> You can still analyze the timing of event sequences using [HogQL](/docs/hogql). For example, to get the average time between a `$pageview` and `$pageleave` events this year, [create an SQL insight](https://app.posthog.com/insights/new) and use the following SQL statement:
+> You can still analyze the timing of event sequences using [SQL](/docs/product-analytics/sql). For example, to get the average time between a `$pageview` and `$pageleave` events this year, [create an SQL insight](https://app.posthog.com/insights/new) and use the following SQL statement:
 >
 >```sql
 >SELECT avg(time_between) AS avg_time_between

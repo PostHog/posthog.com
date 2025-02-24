@@ -1703,3 +1703,9 @@ li.squeak-left-border {
         }
     }
 }
+
+.image-slider {
+    .slick-slide {
+        @apply pt-0;
+    }
+}

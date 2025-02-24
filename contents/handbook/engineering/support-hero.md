@@ -142,7 +142,7 @@ As an engineer, when answering a question, your first instinct is to give them a
 - Housekeeping. Once a customer issue/question has been addressed, close the ticket in [Zendesk](#zendesk) (mark it `Solved`) to make it easy to identify outstanding conversations.
 - If a user has been particularly helpful, such as raising a security or bug report, feel free to offer a small credit for the merch store. 
 
-If you have any questions about how or when to communicate with users, you can always ask [the Words & Pictures team](/teams/words-pictures) for help. 
+If you have any questions about how or when to communicate with users, you can always ask [the Comms team](/teams/words-pictures) for help. 
 
 ## How do I prioritize?
 
@@ -210,7 +210,7 @@ Best,
 
 ## How do I use Zendesk?
 
-We use [Zendesk Support]([https://zendesk.com/](https://posthoghelp.zendesk.com)) as our internal platform to manage support tickets. This ensures that we don't miss anyone, especially when their request is passed from one person to another at PostHog, or if they message us over the weekend.
+We use [Zendesk Support](https://posthoghelp.zendesk.com) as our internal platform to manage support tickets. This ensures that we don't miss anyone, especially when their request is passed from one person to another at PostHog, or if they message us over the weekend.
 
 Zendesk allows us to manage all our customer conversations in one place and reply through Slack or email.
 

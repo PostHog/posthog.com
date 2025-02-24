@@ -45,9 +45,13 @@ Sentry is much more focused and opinionated in how you use it. The tools are tai
 
 PostHog offers more flexibility and breadth. It's built for developers but also used by marketing, growth, and data teams. Startups and scaleups use PostHog for tracking [retention](/docs/product-analytics/retention), running targeted [A/B tests](/experiments), [booking user interviews](/tutorials/feedback-interviews-site-apps), and more.
 
-More examples of this flexibility include PostHog's simpler [custom event capture](/docs/getting-started/send-events#2-capture-custom-events), the ability to [import and use data from external sources](/data-warehouse), and [direct SQL querying](/docs/hogql).
+More examples of this flexibility include PostHog's simpler [custom event capture](/docs/getting-started/send-events#2-capture-custom-events), the ability to [import and use data from external sources](/data-warehouse), and [direct SQL querying](/docs/sql).
 
 ## Comparing PostHog and Sentry
+
+Tracking exceptions in PostHog enables you to easily integrate with all of the other products we offer. You can easily create insights to track errors over time, watch replays of users encountering an exception, or target surveys when a user faces a bug.
+
+Given PostHog already tracks context about your users, it is possible to understand the impact of exceptions more accurately. For example, you can filter issues affecting VIP user cohorts or find those affecting the most amount of sessions.
 
 ### Core features
 
@@ -67,7 +71,7 @@ The core of PostHog and Sentry are different. Sentry focuses entirely on error a
 
 - Sentry includes the ability to create and visualize custom metrics as you would do with product analytics, but its visualizations and customizability is limited compared to PostHog.
 
-- PostHog includes [network performance tracking](/docs/session-replay/network-recording) in session replay and [web vitals tracking](/docs/web-analytics/web-vitals) in web analytics. This helps you both analyze performance and requests for specific sessions and get an overview of core web vitals and areas for improvement.
+- PostHog includes [network performance tracking](/docs/session-replay/network-recording) in session replay and [web vitals tracking](/docs/web-analytics/web-vitals) in web analytics. This helps you both analyze performance and requests for specific sessions and get an overview of web vitals and areas for improvement.
 
 ### Platform
 
@@ -104,9 +108,9 @@ Replays enable you to watch how users experience your app, diagnose issues, impr
 
 <ComparisonTable column1="PostHog" column2="Sentry">
   <ComparisonRow column1={true} column2={true} feature="Web" description="Record sessions from web apps" />
-  <ComparisonRow column1="Beta" column2={true} feature="iOS" description="Record sessions from iOS apps" />
-  <ComparisonRow column1="Beta" column2={true} feature="Android" description="Record sessions from Android apps" />
-  <ComparisonRow column1="Beta" column2={true} feature="React Native" description="Record sessions from React Native apps" />
+  <ComparisonRow column1={true} column2={true} feature="iOS" description="Record sessions from iOS apps" />
+  <ComparisonRow column1={true} column2={true} feature="Android" description="Record sessions from Android apps" />
+  <ComparisonRow column1={true} column2={true} feature="React Native" description="Record sessions from React Native apps" />
   <ComparisonRow column1="Beta" column2="Beta" feature="Flutter" description="Record sessions from Flutter apps" />
   <ComparisonRow column1={true} column2={true} feature="Sampling" description="Choose what sessions you record" />
   <ComparisonRow column1={true} column2={true} feature="Privacy" description="Censor private or personal information" />

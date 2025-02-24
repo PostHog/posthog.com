@@ -391,7 +391,7 @@ const PhotoStrip = ({
     }, [videoRef, showLivePreview])
 
     return (
-        <div className="grid grid-rows-4 gap-2 bg-white rounded-md p-2 h-full rounded shadow-xl">
+        <div className="grid grid-rows-4 gap-2 bg-white rounded-md p-2 h-full rounded shadow-xl w-[170px]">
             {Array.from({ length: numImages }).map((_, index) => {
                 const image = images[index]
                 return (
@@ -495,13 +495,11 @@ const TemplateSelector = ({
                     onClick={() => onSelect(key)}
                     className="hover:scale-105 transition-transform cursor-pointer"
                 >
-                    <div className="h-[70vh]">
-                        <PhotoStrip
-                            images={templates[key].map((overlay) => ({ overlay }))}
-                            videoRef={videoRef}
-                            showLivePreview={true}
-                        />
-                    </div>
+                    <PhotoStrip
+                        images={templates[key].map((overlay) => ({ overlay }))}
+                        videoRef={videoRef}
+                        showLivePreview={true}
+                    />
                 </button>
             ))}
         </div>
@@ -690,7 +688,7 @@ const PhotoModal = ({
                     </CallToAction>
                 </div>
             ) : cameraPermission === true ? (
-                <div onClick={(e) => e.stopPropagation()} className="h-[70vh]">
+                <div onClick={(e) => e.stopPropagation()} className="w-full">
                     {step === 'select' && (
                         <>
                             <div className="hidden">
@@ -709,7 +707,7 @@ const PhotoModal = ({
 
                     {step === 'capture' && (
                         <div className="flex gap-8 items-center justify-center h-full w-full max-w-7xl mx-auto px-4">
-                            <div className="h-full aspect-[3/4] flex-shrink-0">
+                            <div className="aspect-[3/4] w-[645px]">
                                 <Camera
                                     onWebcamReady={handleWebcamReady}
                                     onUserReady={() => setCapturing(true)}
@@ -720,17 +718,13 @@ const PhotoModal = ({
                                     startImmediately={true}
                                 />
                             </div>
-                            <div className="h-[70vh] flex-shrink-0">
-                                <div className="h-full">
-                                    <PhotoStrip
-                                        images={images}
-                                        onRetake={handleRetake}
-                                        retaking={retaking}
-                                        videoRef={videoRef}
-                                        showLivePreview={!capturing}
-                                    />
-                                </div>
-                            </div>
+                            <PhotoStrip
+                                images={images}
+                                onRetake={handleRetake}
+                                retaking={retaking}
+                                videoRef={videoRef}
+                                showLivePreview={!capturing}
+                            />
                         </div>
                     )}
                 </div>
@@ -784,7 +778,7 @@ const FinalPhotoStrip = ({
             >
                 <IconDownload className="size-5" />
             </button>
-            <div ref={ref} className="flex space-x-4 items-center h-[800px]">
+            <div ref={ref}>
                 <motion.div
                     initial={{
                         opacity: 0,
@@ -941,6 +935,7 @@ export default function Photobooth(): JSX.Element {
     const [images, setImages] = useState<PhotoBoothImage[]>([])
     const [dataURL, setDataURL] = useState<string>()
     const [name, setName] = useState<string>('')
+    const [mobile, setMobile] = useState(false)
 
     useEffect(() => {
         const preloadAllImages = async () => {
@@ -962,6 +957,10 @@ export default function Photobooth(): JSX.Element {
         setModalOpen(false)
     }
 
+    useEffect(() => {
+        setMobile(typeof window !== 'undefined' && window.innerWidth < 768)
+    }, [])
+
     return (
         <Layout>
             <SEO
@@ -980,7 +979,7 @@ export default function Photobooth(): JSX.Element {
                     </h1>
                 </div>
                 <AnimatePresence>
-                    {typeof window !== 'undefined' && window.innerWidth < 768 ? (
+                    {mobile ? (
                         <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
                             <div className="bg-accent dark:bg-accent-dark p-4 rounded border border-light dark:border-dark max-w-xl mx-auto mt-4">
                                 <h1 className="text-3xl font-bold text-center">Mobile devices not supported</h1>

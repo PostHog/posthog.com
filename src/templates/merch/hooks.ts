@@ -192,19 +192,23 @@ function getVariants(variants: StorefrontProductVariantsEdges): StorefrontProduc
 async function assignBrilliantQuantities(variants: StorefrontProductVariantNode[]): Promise<void> {
     await Promise.all(
         variants.map((v) => {
-            return fetch(
-                `${process.env.GATSBY_SQUEAK_API_HOST}/api/brilliant/inventory/${
-                    v.id.split('gid://shopify/ProductVariant/')[1]
-                }`
-            )
-                .then((res) => res.json())
-                .then((data) => {
-                    v.brilliantQuantity = data?.quantity || 0
-                })
-                .catch((err) => {
-                    console.error('Error fetching quantity:', err)
-                    v.brilliantQuantity = 0
-                })
+            if (v.product.tags.includes('digital')) {
+                v.brilliantQuantity = v.quantityAvailable
+            } else {
+                return fetch(
+                    `${process.env.GATSBY_SQUEAK_API_HOST}/api/brilliant/inventory/${
+                        v.id.split('gid://shopify/ProductVariant/')[1]
+                    }`
+                )
+                    .then((res) => res.json())
+                    .then((data) => {
+                        v.brilliantQuantity = data?.quantity || 0
+                    })
+                    .catch((err) => {
+                        console.error('Error fetching quantity:', err)
+                        v.brilliantQuantity = 0
+                    })
+            }
         })
     )
 }

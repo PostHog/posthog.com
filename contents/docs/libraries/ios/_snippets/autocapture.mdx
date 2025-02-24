@@ -40,7 +40,7 @@ If you want to manually send a new screen capture event, use the `screen` functi
 PostHogSDK.shared.screen("Dashboard", properties: ["fromIcon": "bottom"])
 ```
 
-> **Important:** Please note that `captureScreenViews` configuration is intented for `UIKit` use. For `SwiftUI` screen captures, please see the following section.
+> **Important:** While `captureScreenViews` works with both `UIKit` and `SwiftUI`, the screen names captured in `SwiftUI` may not be very meaningful as they are based on internal SwiftUI view identifiers. For `SwiftUI` applications, we recommend turning this option off and instead using the `.postHogScreenView()` view modifier (see next section) to capture screen views with meaningful names.
 
 ### Capturing screen views in SwiftUI
 

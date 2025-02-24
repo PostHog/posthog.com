@@ -30,7 +30,7 @@ There are a few ways to capture a user doing an event for the first time. We cov
 
 - Create a [cohort](/docs/data/cohorts) matching users who have done an event for the first time recently.
 - Use a custom event to set a [person](/docs/getting-started/person-properties) or [event property](/docs/data/events). For example, you can set a `first_seen` property with the `$set_once` option.
-- Use [HogQL](/docs/product-analytics/sql) to query for the `min(timestamp)` of an event.
+- Use [SQL](/docs/product-analytics/sql) to query for the `min(timestamp)` of an event.
 
 ## How do I migrate events or rows into PostHog?
 

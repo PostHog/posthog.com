@@ -36,7 +36,7 @@ export const Content = ({ quickLinks = false }) => {
                     />
                     <ResourceItem
                         type="Guide"
-                        title="The power of HogQL’s sum() aggregation"
+                        title="The power of SQL's sum() aggregation"
                         description="Unlock a new level of aggregation customization"
                         url="/tutorials/hogql-sum-aggregation"
                     />
@@ -66,7 +66,7 @@ const DataWarehouse: React.FC = () => {
                 <AskMax
                     quickQuestions={[
                         'What are some cool things I can do?',
-                        'What is HogQL and why should I use it?',
+                        'What is SQL access and why should I use it?',
                         'How can I get external data into PostHog?',
                     ]}
                 />

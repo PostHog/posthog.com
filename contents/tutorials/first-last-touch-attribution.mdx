@@ -7,7 +7,7 @@ showTitle: true
 sidebar: Docs
 tags:
   - insights
-  - hogql
+  - sql
   - user paths
   - product analytics
 ---
@@ -48,7 +48,7 @@ Analyzing these values is relatively easy. Create a [new insight](https://app.po
 
 ### First pageview
 
-We can also calculate the first touch as the first page a user lands on. To do this, we can [create an insight](https://app.posthog.com/insights/new), go to the SQL tab, and use [HogQL](/docs/hogql). Here we query for the first `$pageview` event for a user, then get the `$current_url` of this event. This looks like this:
+We can also calculate the first touch as the first page a user lands on. To do this, we can [create an insight](https://app.posthog.com/insights/new), go to the SQL tab, and use [SQL](/docs/sql). Here we query for the first `$pageview` event for a user, then get the `$current_url` of this event. This looks like this:
 
 ```sql
 SELECT 
@@ -89,7 +89,7 @@ Again, you can filter out `none` by filtering for events where your property `is
 
 ### Last pageview event
 
-We can look at the last pageview event before signing up. Like first touch attribution, we can do this by [creating an insight](https://app.posthog.com/insights/new), going to the SQL tab, and using [HogQL](/docs/hogql). 
+We can look at the last pageview event before signing up. Like first touch attribution, we can do this by [creating an insight](https://app.posthog.com/insights/new), going to the SQL tab, and using [SQL](/docs/sql). 
 
 This SQL statement uses a window function to select events `$pageview` events coming directly before a "user signed up" events. We then get a count of the different `current_url` values. This statement looks like this:
 
