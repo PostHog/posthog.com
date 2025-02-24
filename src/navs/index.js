@@ -1383,12 +1383,8 @@ export const docsMenu = {
                             },
                         },
                         {
-                            name: '.NET',
+                            name: 'C#/.NET',
                             url: '/docs/libraries/dotnet',
-                            badge: {
-                                title: 'Beta',
-                                className: '!bg-orange/10 !text-orange !dark:text-white !dark:bg-orange/50',
-                            },
                         },
                     ],
                 },
