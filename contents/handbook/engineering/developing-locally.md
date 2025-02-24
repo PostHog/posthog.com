@@ -236,7 +236,7 @@ On Linux you often have separate packages: `postgres` for the tools, `postgres-s
 
 4. Install Node packages by running `pnpm i`.
 
-5. Run `pnpm typegen:write` to generate types for [Kea](https://keajs.org/) state management logics used all over the frontend.
+5. Run `pnpm --filter=@posthog/frontend typegen:write` to generate types for [Kea](https://keajs.org/) state management logics used all over the frontend.
 
 > The first time you run typegen, it may get stuck in a loop. If so, cancel the process (`Ctrl+C`), discard all changes in the working directory (`git reset --hard`), and run `pnpm typegen:write` again. You may need to discard all changes once more when the second round of type generation completes.
 
