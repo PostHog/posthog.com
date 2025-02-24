@@ -267,7 +267,7 @@ export class PosthogService {
 }
 ```
 
-This service contains posthog initialization, and upon success, enables pageviews.
+This service contains PostHog initialization, and upon success, enables pageviews.
 
 
 ## Next steps
