@@ -1304,6 +1304,10 @@ export const docsMenu = {
                                     name: 'Configuration',
                                     url: '/docs/libraries/js/config',
                                 },
+                                {
+                                    name: 'Persistence',
+                                    url: '/docs/libraries/js/persistence',
+                                },
                             ],
                         },
                         {
