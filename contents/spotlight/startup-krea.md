@@ -20,10 +20,9 @@ The team at [Krea](https://www.krea.ai/) surfed that wave — when their app wen
 
 Diego Rodriguez, cofounder at Krea, senses that startups usually don't need to care about big amounts of data until it’s too late but that way of working may change soon if it didn't do it already.
 
-His advice? If you’re building an AI-first app, you’re going to
- need to be ready for massive surge of data, independently of whether virality is in the equation or not. Here’s how founders can prepare with a stronger foundation.
+His advice? If you’re building an AI-first app then you need to be ready for massive surge of data, regardless of virality. Here’s how founders can prepare with a stronger foundation.
 
-## 1. AI-first apps generate more data than you can dream
+## 1. AI-first apps generate more data than you can imagine
 
 Generative AI presents an entirely different paradigm for managing data such as events. “When you track user events on a finance website,” Diego says. “People don't go to a website and spend money a thousand times on a visit. That just doesn't happen. But people do come to Krea and they may make 1,000 images in a single session.”
 
