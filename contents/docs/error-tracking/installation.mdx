@@ -12,6 +12,8 @@ import NodeErrorTracking from './_snippets/node-install-error-tracking.mdx'
 import PythonInstall from '../integrate/_snippets/install-python.mdx'
 import PythonErrorTracking from './_snippets/python-install-error-tracking.mdx'
 import SentryInstall from '../libraries/_snippets/install-sentry.mdx'
+import AngularInstall from "../integrate/_snippets/install-angular.mdx"
+import AngularErrorTracking from './_snippets/angular-install-error-tracking.mdx'
 
 <BetaFeedbackBanner />
 
@@ -24,6 +26,7 @@ Error tracking enables you to track, investigate, and resolve exceptions your cu
       <Tab>React</Tab>
       <Tab>Python</Tab>
       <Tab>Node</Tab>
+      <Tab>Angular</Tab>
       <Tab>Sentry</Tab>
     </Tab.List>
     <Tab.Panels>
@@ -42,6 +45,10 @@ Error tracking enables you to track, investigate, and resolve exceptions your cu
         <Tab.Panel>
           <NodeInstall />
           <NodeErrorTracking />
+        </Tab.Panel>
+        <Tab.Panel>
+          <AngularInstall />
+          <AngularErrorTracking />
         </Tab.Panel>
         <Tab.Panel>
           <SentryInstall />
