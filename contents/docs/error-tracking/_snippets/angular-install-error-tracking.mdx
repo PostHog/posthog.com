@@ -4,9 +4,7 @@ Exception autocapture can be enabled during initialization of the PostHog client
 
 You will need to override Angular's default ErrorHandler provider:
 
-```angular
-// src/app/posthog-error-handler.ts
-
+```ts file=src/app/posthog-error-handler.ts
 import { HttpErrorResponse } from '@angular/common/http';
 
 import posthog from 'posthog-js';
@@ -119,9 +117,7 @@ export function providePostHogErrorHandler(): Provider {
 
 Then, in your `src/app/app.module.ts`, import the `providePostHogErrorHandler` function and add it to the providers array:
 
-```angular
-// src/app/app.config.ts
-
+```ts file=src/app/app.config.ts
 import { ApplicationConfig, provideZoneChangeDetection } from '@angular/core';
 import { provideRouter } from '@angular/router';
 
@@ -138,6 +134,6 @@ export const appConfig: ApplicationConfig = {
 
 For exceptions handled by your application that you would still like sent to PostHog, you can manually call the capture method:
 
-```node
+```ts
 posthog.captureException(e, 'user_distinct_id', additionalProperties)
 ```
