@@ -21,7 +21,7 @@ Web analytics is no additional cost on top of product analytics. Events are used
 
 ## Where is my world map?
 
-All good web analytics dashboards need to include a world map. Ours includes it too. If you can't see it, you need to enable the [GeoIP app](https://app.posthog.com/project/apps/74).
+All good web analytics dashboards need to include a world map. Ours includes it too. If you can't see it, you need to enable the [GeoIP transformation](https://app.posthog.com/pipeline/transformations?search=GeoIP) in Data pipelines.
 
 ## Do stats include bots and crawlers?
 
@@ -129,4 +129,3 @@ At a more philosophical level, we question the premise of the question. PageSpee
 3. Although we don't recommend it, you could lazy load PostHog by having it trigger on scroll or a timer. This can miss initial events, start session replays later, cause lower event counts, and delay other features. 
 
 4. Utilize server-side tracking. We have a range of SDKs for backend languages and frameworks you can use to capture events and use the features of PostHog without needing to load any code on the client side.
-
