@@ -10,32 +10,15 @@ This guide walks you through integrating PostHog into your Angular app using the
 
 ## Installation
 
-Install `posthog-js` using your package manager:
+import AngularInstall from "../integrate/_snippets/install-angular.mdx"
 
-```bash
-yarn add posthog-js
-# or
-npm install --save posthog-js
-```
+<AngularInstall />
 
-In your `src/main.ts`, initialize PostHog using your project API key and instance address. You can find both in your [project settings](https://us.posthog.com/project/settings).  
-
-```ts file=main.ts
-import { bootstrapApplication } from '@angular/platform-browser';
-import { appConfig } from './app/app.config';
-import { AppComponent } from './app/app.component';
-import posthog from 'posthog-js'
-
-posthog.init(
-  '<ph_project_api_key>',
-  {
-    api_host:'<ph_client_api_host>'
-  }
-)
-
-bootstrapApplication(AppComponent, appConfig)
-  .catch((err) => console.error(err));
-```
+> **Note:** If you're using Typescript, you might have some trouble getting your types to compile because we depend on `rrweb` but don't ship all of their types. To accommodate that, you'll need to add `@rrweb/types@2.0.0-alpha.17` and `rrweb-snapshot@2.0.0-alpha.17` as a dependency if you want your Angular compiler to typecheck correctly.
+>
+> Given the nature of this library, you might need to completely clear your `.npm` cache to get this to work as expected. Make sure your clear your CI's cache as well.
+>
+> In the rare case the versions above get out-of-date, you can check our [JavaScript SDK's `package.json`](https://github.com/PostHog/posthog-js/blob/main/package.json) to understand what's the exact version you need to depend on.
 
 ## Capture custom events
 

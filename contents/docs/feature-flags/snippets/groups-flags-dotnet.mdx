@@ -1,0 +1,14 @@
+To check a flag matching a "company" group, specify the group in relevant call:
+
+```csharp
+if (await client.IsFeatureEnabledAsync(
+        "new-groups-feature",
+        "user_distinct_id",
+        options: new FeatureFlagOptions
+        {
+            Groups = [new Group("company", "id:5")]
+        }))
+{
+    // Do something
+}
+```

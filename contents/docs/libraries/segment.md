@@ -120,6 +120,28 @@ analytics.track('user_signed_up', {
 
 Also, unlike PostHog's JavaScript library's `group` method, you need to pass the `$groups` property on every Segment method call to have that data included.
 
+### Sending pageleaves
+
+Segment doesn't send pageleave data. When using `analytics.page()` only pageviews are tracked. Pageleaves are required for accurately calculating bounce rate, duration on page, and scrollmaps.
+
+You have two options to track pageleaves:
+
+**Add `capture_pageleave: true` to your PostHog configuration**
+
+This option uses PostHog's standard `$pageleave` event, but the event will skip sending to Segment and instead only show up in PostHog.
+
+**Use `analytics.track()` with the event set to `$pageleave`**
+
+This option sends the event to Segment and PostHog, which helps if you want to keep the data flowing through Segment. However, you will need to detect in your code when the user leaves the page. Here's an example:
+
+```js
+// This is an example implementation for tracking $pageleave with Segment
+window.addEventListener("beforeunload", analytics.track({
+    "event": "$pageleave"
+}));
+```
+
+
 ## FAQ
 
 ### Where can I find out more?
