@@ -4,7 +4,7 @@ sidebar: Handbook
 showTitle: true
 ---
 
-This is our playbook for new customer success engagement. These are customers who have been with us for awhile and we are ready to establish an ongoing relationship with them.
+This is our playbook for new customer success engagement. These are customers who have been with us for a while and we are ready to establish an ongoing relationship with them.
 
 The core job of a Customer Success Manager (CSM) is to ensure the longevity of the customer by ensuring their overall success and that they are getting the most value out of using PostHog. This may include helping the customer with onboarding, training, support, strategies, cost-saving, and more. Ultimately, the CSM serves as the customer's champion within the company and advocates on their behalf, and ensures the customer is successful. 
 

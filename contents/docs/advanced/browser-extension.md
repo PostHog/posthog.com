@@ -38,7 +38,7 @@ posthog.capture('custom_event_name', {})
 
 ### Session replay
 
-Due to the new [content security policies](https://developer.chrome.com/docs/extensions/develop/migrate/improve-security) in Manifest v3 about unsafe-eval and remote code execution, importing only `array.js` isn't enough since the `array.js` code will try to load the the recorder from the PostHog CDN. This will be blocked by the browser.
+Due to the new [content security policies](https://developer.chrome.com/docs/extensions/develop/migrate/improve-security) in Manifest v3 about unsafe-eval and remote code execution, importing only `array.js` isn't enough since the `array.js` code will try to load the recorder from the PostHog CDN. This will be blocked by the browser.
 
 To fix this instead of importing the `array.js`, you can import the `array.full.js`, follow the install step 1. but instead of using the former use the latter from PostHog's [full static assets](https://us-assets.i.posthog.com/static/array.full.js), also remember to change the `script src` to `array.full.js` or follow the install step 2. and install the [npm module for posthog.js](https://www.npmjs.com/package/posthog-js).
 

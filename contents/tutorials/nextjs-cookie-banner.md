@@ -130,7 +130,7 @@ This creates an ugly but functional cookie banner at the bottom of our site. You
 
 ## Handling and storing user consent
 
-Next, we add the logic to handle and store the user's consent. We do this in `banner.js` by adding `handleAcceptCookies` and `handleDeclineCookies` functions called when a user chooses to accept or decline cookies. We save this chioce to local storage.
+Next, we add the logic to handle and store the user's consent. We do this in `banner.js` by adding `handleAcceptCookies` and `handleDeclineCookies` functions called when a user chooses to accept or decline cookies. We save this choice to local storage.
 
 We also add a `cookieConsentGiven` function that returns the user's consent state from local storage, which we call on first load. If there isn't a value in local storage, we set the consent state to `undecided`.
 

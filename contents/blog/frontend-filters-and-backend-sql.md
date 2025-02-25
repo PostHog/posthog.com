@@ -164,7 +164,7 @@ Just thinking, the only reason I would see for having the filter logic be separa
  
 **Sam:**
  
-So yeah, I would think that that would be a reason for centralizing the logic further up in the parent. If there's only one set of filters shown at any given time, it's a different type of insight, then, yeah, I would think that Insight should just own the whole thing. But this is like... Again, I know how much work it would be to refactor and go in and do all that because I've done a little bit of it, but yeah.
+So yeah, I would think that would be a reason for centralizing the logic further up in the parent. If there's only one set of filters shown at any given time, it's a different type of insight, then, yeah, I would think that Insight should just own the whole thing. But this is like... Again, I know how much work it would be to refactor and go in and do all that because I've done a little bit of it, but yeah.
  
 **Eric:**
  

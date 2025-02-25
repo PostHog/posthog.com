@@ -433,7 +433,7 @@ This entire website, posthog.com, is stored in a GitHub repository: [PostHog/pos
 
 All in all, we've got quite a bit of copy. All that text is written by humans… And that poses a problem, because humans make mistkes. 
 
-Leters get mixed up, which isn't always easy to spot. It's also a bit of a waste of time for a human to
+Letters get mixed up, which isn't always easy to spot. It's also a bit of a waste of time for a human to
 be spending time looking for that, instead of thinking about the actual style and substance of the text.
 
 For these reasons on every PR we try to fix any typos noticed. For that we use [`codespell`](https://github.com/codespell-project/codespell), in an action looking like this:

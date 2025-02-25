@@ -46,7 +46,7 @@ def hello_world():
   return "<p>Hello, World!</p>"
 ```
 
-Afterward, create a `/blog/<string:slug>` route that returns a response with a "Like" button. Add `POST` handler to the route that returns returns a confirmation when clicked.
+Afterward, create a `/blog/<string:slug>` route that returns a response with a "Like" button. Add `POST` handler to the route that returns a confirmation when clicked.
 
 ```python
 # ab-test-demo/hello.py
