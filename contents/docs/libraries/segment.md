@@ -136,9 +136,20 @@ This option sends the event to Segment and PostHog, which helps if you want to k
 
 ```js
 // This is an example implementation for tracking $pageleave with Segment
-window.addEventListener("beforeunload", analytics.track({
-    "event": "$pageleave"
-}));
+function trackPageLeave(callback) {
+    if (typeof callback !== "function") return;
+
+    const eventName = "onpagehide" in self ? "pagehide" : "unload";
+    window.addEventListener(eventName, callback, { once: true });
+}
+
+function handlePageLeave() {
+    if (window.analytics) {
+        window.analytics.track({ event: "$pageleave" });
+    }
+}
+
+trackPageLeave(handlePageLeave);
 ```
 
 
