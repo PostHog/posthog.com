@@ -1301,6 +1301,14 @@ export const docsMenu = {
                             },
                             children: [
                                 {
+                                    name: 'Setup',
+                                    url: '/docs/libraries/js',
+                                },
+                                {
+                                    name: 'Features',
+                                    url: '/docs/libraries/js/features',
+                                },
+                                {
                                     name: 'Configuration',
                                     url: '/docs/libraries/js/config',
                                 },
