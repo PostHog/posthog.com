@@ -1299,6 +1299,12 @@ export const docsMenu = {
                                 title: 'Popular',
                                 className: '!bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',
                             },
+                            children: [
+                                {
+                                    name: 'Configuration',
+                                    url: '/docs/libraries/js/config',
+                                },
+                            ],
                         },
                         {
                             name: 'Android',
