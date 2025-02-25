@@ -104,7 +104,7 @@ When called, `decide` returns the flag values and payloads, along with more info
 
 #### Quota limiting
 
-If your organization exceeds its feature flag quota, the `/decide` endpoint will return a modified response:
+If your organization exceeds its feature flag quota, the `/decide` endpoint will return a modified response with `quotaLimited`:
 
 ```json
 {
