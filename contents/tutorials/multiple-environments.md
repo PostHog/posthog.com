@@ -80,7 +80,7 @@ posthog.init(
 
 The `loaded` method enables you to run code after PostHog has loaded. This makes it useful for changing PostHog's behavior between environments by using methods like `set_config`.
 
-If you wanted to make opting in conditional, call `opt_in_capturing()` instead. You can see the full list of config options in [our JavaScript docs](/docs/integrate/client/js#config).
+If you wanted to make opting in conditional, call `opt_in_capturing()` instead. You can see the full list of config options in [our JavaScript docs](/docs/libraries/js/config).
 
 ### Opt-out of capturing based on URL
 

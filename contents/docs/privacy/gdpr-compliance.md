@@ -109,7 +109,7 @@ If a user **opts out** then you must stop data capturing and processing. Here ar
 
 - If posthog-js has been initialized, call `posthog.opt_out_capturing()`. See the [posthog-js docs](https://posthog.com/docs/integrate/client/js#opt-users-out)
 
-- Ensure [posthog-js is configured](https://posthog.com/docs/integrate/client/js#config) not to auto-capture and do not make [capture](https://posthog.com/docs/integrate/ingest-live-data#capture-user-events) calls using the installed PostHog SDK on any client
+- Ensure [posthog-js is configured](/docs/libraries/js/config) not to autocapture and do not make [capture](/docs/integrate/ingest-live-data#capture-user-events) calls using the installed PostHog SDK on any client
 
 - Do not load the posthog-js SDK. If you do this you should ensure your application logic always performs conditional checks for the availability of the PostHog SDK. This may not be possible in modern JavaScript applications.
 

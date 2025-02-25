@@ -1,8 +1,14 @@
-import SettingProperties from "./setting-properties-text.mdx" 
-import NamingTip from "./naming-tip.mdx" 
-import Intro from "./intro.mdx" 
+import SettingProperties from "./setting-properties-text.mdx"
+import NamingTip from "./naming-tip.mdx"
+import CustomEventIntro from "./intro.mdx" 
 
-<Intro />
+By default, PostHog automatically captures pageviews and pageleaves as well as clicks, change of inputs, and form submissions associated with `a`, `button`, `form`, `input`, `select`, `textarea`, and `label` tags. See our [autocapture docs](/docs/product-analytics/autocapture) for more details on this.
+
+If you prefer to disable or filter these, set the appropriate values in your [configuration options](/docs/libraries/js/config).
+
+### Custom event capture
+
+<CustomEventIntro />
 
 ```js-web
 posthog.capture('user_signed_up');
@@ -19,20 +25,11 @@ posthog.capture('user_signed_up', {
 })
 ```
 
-### Page views and autocapture 
-
-By default, PostHog automatically captures the following frontend events:
-
-- **Pageviews**, including the URL.
-- [**Autocaptured events**](/docs/product-analytics/autocapture), such as any `click`, `change of input`, or submission associated with `a`, `button`, `form`, `input`, `select`, `textarea`, and `label` tags.
-
-If you prefer to disable these, set the appropriate values in your [configuration options](/docs/libraries/js#config).
-
 ### Manually capturing pageviews and pageleaves in single-page apps
 
-PostHog automatically sends `$pageview` events whenever it gets loaded and `$pageleave` when they leaves. If you have a single-page app, that means it only sends pageview and pageleave once (when your app loads and when they leave).
+PostHog automatically captures `$pageview` events on page load and `$pageleave` events on page unload. If you have a single-page app, that means it only sends pageview and pageleave once (when your app loads and when users leave).
 
-To make sure any navigating a user does within your app gets captured, you can make pageview and pageleave calls manually.
+To make sure any navigating a user does within your app gets captured, you can make pageview and pageleave calls manually like this:
 
 ```js-web
 // Capture pageview

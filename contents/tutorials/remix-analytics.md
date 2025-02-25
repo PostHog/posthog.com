@@ -224,7 +224,7 @@ When you relaunch your app and navigate between pages, you now capture `$pagevie
 
 ![Pageview events](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/remix-analytics/pageview.png)
 
-> **Why is it double capturing the pageviews?** There are two reasons this might happen. First, you need to set the `capture_pageview` [config option](/docs/libraries/js#config) in the PostHog initialization to `false` so we don’t double capture the initial pageview. Second, in strict mode, React renders twice. This triggers two pageview events, but doesn’t happen in production mode. You can also remove the `<StrictMode>` component in `app/entry.client.tsx` to stop it in development.
+> **Why is it double capturing the pageviews?** There are two reasons this might happen. First, you need to set the `capture_pageview` [config option](/docs/libraries/js/config) in the PostHog initialization to `false` so we don’t double capture the initial pageview. Second, in strict mode, React renders twice. This triggers two pageview events, but doesn’t happen in production mode. You can also remove the `<StrictMode>` component in `app/entry.client.tsx` to stop it in development.
 
 ## Capturing custom events
 
