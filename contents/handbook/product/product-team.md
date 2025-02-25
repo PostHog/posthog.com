@@ -33,7 +33,7 @@ Here is a overview that shows which of our PMs currently works with which team:
 **Teams with no PM currently**
 - [Data Warehouse](/teams/data-warehouse)
 - [Error Tracking](/teams/error-tracking)
-- [AI Product Manager](/teams/ai-product-manager)
+- [Max AI](/teams/max-ai)
 - [Surveys](/teams/surveys) (light support from Annika)
 
 ## Product goals
