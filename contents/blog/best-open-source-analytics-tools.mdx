@@ -86,7 +86,7 @@ Beyond the core [product analytics features](/product-analytics), it also suppor
 
 #### Who should use PostHog?
 
-Developers and startups who need an in-depth understanding of what users are doing in their app, or want to track the complete journey from their marketing website through to their app.
+Developers and startups who need an in-depth understanding of what users are doing in their app, or want to track the complete journey from their marketing website through to their app. There's a [generous free tier](/pricing), which means ~90% of users use PostHog for free.
 
 #### Pros and cons
 
@@ -95,7 +95,6 @@ Developers and startups who need an in-depth understanding of what users are doi
 | Advanced product analytics features                         | Self-hosting not recommended above 300k events per month       |
 | Easy-to-use web analytics dashboard                         | Steeper learning curve compared to lightweight analytics tools |
 | Session replay for web and mobile apps                      |                                                                |
-| Feature flags and experiments included                      |                                                                |
 | Replaces multiple tools                                     |                                                                |
 | Generous free tier on cloud                                 |                                                                |
 
@@ -111,9 +110,9 @@ PostHog also offers session replay for both web and mobile apps, so it can repla
 </details>
 
 <details>
-    <summary>What's included in the open-source release?</summary>
+    <summary>What's included in open source?</summary>
 
-[PostHog Open Source](https://github.com/PostHog/posthog) is distributed under an MIT license for hobbyists and proof of concepts via a Docker Compose deployment. It includes most features, but is limited to one project per instance.
+[PostHog Open Source](https://github.com/PostHog/posthog) is distributed under an MIT license for hobbyists and proof of concepts via a Docker Compose deployment. It includes most features, but is limited to one project per instance and is provided without guarantee.
 
 </details>
 
@@ -172,7 +171,7 @@ It's primarily pitched as an [alternative to Google Analytics 4](/blog/ga4-alter
 </details>
 
 <details>
-    <summary>What's included in the open-source release?</summary>
+    <summary>hat's included in open source?</summary>
 
 Matomo on-premise includes all the core website analytics features, such as user and event tracking, e-commerce tracking, customizable dashboards, user segmentation, scheduled email reports, and alerts. Features like A/B testing and session replay are available as paid add-ons only.
 </details>
@@ -205,7 +204,7 @@ Yes. Matomo's cloud offering includes all features and charges by "hits per mont
 
 [Metabase](https://www.metabase.com/) is one of the most popular open-source business intelligence (BI) tools. Metabase's visual query builder enables you to create shareable dashboards in just a few minutes with a drag-and-drop interface, and there's a native SQL editor for advanced users.
 
-Metabase is a great tool for business and revenue reporting, though you can create dashboards for any type of data that's stored in a supported database. Spoiler: Metabase supports lots of database types. It requires more technical knowledge than either PostHog or Matomo, but it's powerful in the right hands.
+Metabase is a great tool for business and revenue reporting. It requires more technical knowledge than either PostHog or Matomo, but it's powerful in the right hands.
 
 #### Who should use Metabase?
 
@@ -230,7 +229,7 @@ Metabase is a direct alternative to business intelligence tools like Google's Lo
 </details>
 
 <details>
-    <summary>What's included in the open-source release?</summary>
+    <summary>What's included in open source?</summary>
 
 The open-source version includes the same core query and visualization features as paid versions, but without advanced permission and security features tailored to large companies.
 
@@ -288,7 +287,7 @@ It's a popular alternative to Google Analytics for people who want something fas
 </details>
 
 <details>
-    <summary>What's included in the open-source release?</summary>
+    <summary>What's included in open source?</summary>
 
 The [community edition](https://plausible.io/self-hosted-web-analytics) offers the same features as paid versions, including tracking all common website metrics, goal and conversion tracking, basic funnels, and reports in Slack or via email. The only limitation is it's only updated twice a year, whereas the cloud version gets continuous updates.
 
@@ -348,7 +347,7 @@ OpenPanel could replace Mixpanel, Amplitude, and Google Analytics. It isn't as a
 </details>
 
 <details>
-    <summary>What's included in the open-source release?</summary>
+    <summary>What's included in open source?</summary>
 
 The open-source version is available with no limitations. Features include custom dashboards and charts (line, bar, area, map, pie, funnels, histograms, and retention), user profiles, a realtime analytics view, and tracking scripts for most popular frameworks, including Next.js, React, and React Native.
 
@@ -405,7 +404,7 @@ Google Analytics mainly, but also any other tool focused mainly on website analy
 </details>
 
 <details>
-    <summary>What's included in the open-source release?</summary>
+    <summary>What's included in open source?</summary>
 
 There's no difference between the open source and paid products. Umami tracks all common website metrics, supports custom events, and offers basic funnel, user path, and retention analysis as well.
 
@@ -462,7 +461,7 @@ Looker, Tableau and Power BI.
 </details>
 
 <details>
-    <summary>What's included in the open-source release?</summary>
+    <summary>What's included in open source?</summary>
 
 There's no paid version, so all features are included in the open source release, which includes 40+ pre-installed visualizations and vast options for data scientists to customize them to their needs.
 
@@ -494,18 +493,20 @@ Not directly, though third-parties offer managed instances.
 - **License:** AGPLv3
 - **GitHub Stars:** 9.8k
 
-[OpenReplay](https://openreplay.com/) is a session replay suite built for developers to find and eliminate problems. It also includes some basic analytics features, such as funnels and path analysis.
+[OpenReplay](https://openreplay.com/) is a session replay suite built for developers to find and eliminate problems. 
+
+In addition to session replay, it also includes some product analytics features, such as conversion funnels, user paths, heatmaps, trends, and custom dashboards. These features aren't as developed as dedicated analytics tools like Mixpanel or PostHog, but they're a useful augment to the core replay features.
 
 #### Who should use OpenReplay?
 
-Companies that want an alternative to LogRocket that they can self-host.
+Companies that want an [alternative to LogRocket](/blog/best-logrocket-alternatives) that they can self-host.
 
 #### Pros and cons
 
 | **Pros**                                                    | **Cons**                                                    |
 |-------------------------------------------------------------|-------------------------------------------------------------|
 | Comprehensive session replay features                       | Analytics features are secondary to session replay          |
-| Useful for discovering issues in your app                   | Data export limited Enterprise plans                        |
+| Useful for discovering issues in your app                   | Data export limited to Enterprise plans                     |
 | Built-in performance monitoring                             |                                                             |
 | Supports both web and mobile app tracking                   |                                                             |
 
@@ -514,14 +515,12 @@ Companies that want an alternative to LogRocket that they can self-host.
 <details>
     <summary>What closed-source tools can it replace?</summary>
 
-OpenReplay is an [alternative to LogRocket](/blog/best-logrocket-alternatives) and other similar dev-focused session replay tools, like PostHog. It can also replace the likes of Hotjar, and includes a co-browsing feature that's similar to Hotjar's.
-
-In addition to session replay, it also includes some product analytics features, such as conversion funnels, user paths, heatmaps, trends, and custom dashboards. These features aren't as developed as dedicated analytics tools like Mixpanel or PostHog, but they're a useful augment to the core replay features.
+OpenReplay is an alternative to LogRocket and other similar dev-focused session replay tools, like PostHog. It can also replace the likes of Hotjar, and includes a co-browsing feature that's similar to Hotjar's.
 
 </details>
 
 <details>
-    <summary>What's included in the open-source release?</summary>
+    <summary>What's included in open source?</summary>
 
 The free community edition includes all OpenReplay's core features for session replay, app monitoring, and analytics with no limits on users or projects. Paying customers gain a handful of advanced features, such as support for data export, extra security features, and dedicated support.
 
