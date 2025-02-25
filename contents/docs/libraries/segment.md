@@ -139,6 +139,7 @@ This option sends the event to Segment and PostHog, which helps if you want to k
 function trackPageLeave(callback) {
     if (typeof callback !== "function") return;
 
+    // Use "pagehide" if supported (better for mobile Safari), otherwise fallback to "unload". See https://calendar.perfplanet.com/2020/beaconing-in-practice/#beaconing-reliability-avoiding-abandons
     const eventName = "onpagehide" in self ? "pagehide" : "unload";
     window.addEventListener(eventName, callback, { once: true });
 }
