@@ -115,7 +115,7 @@ export function providePostHogErrorHandler(): Provider {
 }
 ```
 
-Then, in your `src/app/app.module.ts`, import the `providePostHogErrorHandler` function and add it to the providers array:
+Then, in your `src/app/app.config.ts`, import the `providePostHogErrorHandler` function and add it to the providers array:
 
 ```ts file=src/app/app.config.ts
 import { ApplicationConfig, provideZoneChangeDetection } from '@angular/core';
