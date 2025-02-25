@@ -1715,10 +1715,6 @@ export const docsMenu = {
                             url: '/docs/api/feature-flags',
                         },
                         {
-                            name: 'Funnels',
-                            url: '/docs/api/funnel',
-                        },
-                        {
                             name: 'Groups',
                             url: '/docs/api/groups',
                         },
@@ -1781,10 +1777,6 @@ export const docsMenu = {
                         {
                             name: 'Surveys',
                             url: '/docs/api/surveys',
-                        },
-                        {
-                            name: 'Trends',
-                            url: '/docs/api/trend',
                         },
                         {
                             name: 'Users',
