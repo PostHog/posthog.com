@@ -40,7 +40,7 @@ export default function GlobalError({
 }
 ```
 
-Note that `error.tsx` files take precendence over the Global error component. Therefore if you use `Error` components to handle uncaught exceptions at different levels of you route heirarchy and want to capture the associated exception you will need to do so manually:
+Note that `error.tsx` files take precedence over the Global error component. Therefore if you use `Error` components to handle uncaught exceptions at different levels of you route hierarchy and want to capture the associated exception you will need to do so manually:
 
 ```tsx file=error.tsx
 "use client";  // Error boundaries must be Client Components
