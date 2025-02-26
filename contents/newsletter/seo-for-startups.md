@@ -26,7 +26,7 @@ This kind of generic, table stakes stuff gives you lots of problems to obsess ov
 
 What follows is my opinionated take on how startups should think about SEO, particularly the content marketing side of things.
 
-It’s based on ~20 years experience working in publishing as a writer, editor, and #thinkboi, and what we’ve learned growing [PostHog](https://posthog.com/) to 10s of millions in revenue.[1](https://newsletter.posthog.com/p/non-obvious-seo-advice-for-startups#footnote-1-156101009)
+It’s based on ~20 years experience working in publishing as a writer, editor, and #thinkboi, and what we’ve learned growing [PostHog](https://posthog.com/) to 10s of millions in revenue.[^1]
 
 It’s meant for early-stage software startups, though it’s hopefully broadly applicable to any startup that’s scaling up, too.
 
@@ -52,7 +52,7 @@ Only #SEOgurus need a complex stack of SEO tools. Here’s what I recommend for 
 
 *   **An all-in-one SEO tool** – We use [Ahrefs](https://ahrefs.com/), but SEMrush or another may be as good or better. These tools cover most bases, such as rank tracking, keyword research, and competitor research.
     
-*   **Google Search Console** – This is free and useful for finding problems and opportunities, including technical stuff like website performance.[2](https://newsletter.posthog.com/p/non-obvious-seo-advice-for-startups#footnote-2-156101009)
+*   **Google Search Console** – This is free and useful for finding problems and opportunities, including technical stuff like website performance.[^2]
     
 *   **Keywords Everywhere** – An [inexpensive browser extension](https://keywordseverywhere.com/) that augments Google search, Trends, and Search Console with keyword data. It creates serendipity by putting useful data everywhere you go.
     
@@ -160,7 +160,7 @@ Be honest with yourself because “our content is great but it doesn’t rank”
 
 Some mental checklists I like here:
 
-*   Does it go beyond explaining a thing? AI can explain stuff, so this isn’t leveraged.[3](https://newsletter.posthog.com/p/non-obvious-seo-advice-for-startups#footnote-3-156101009)
+*   Does it go beyond explaining a thing? AI can explain stuff, so this isn’t leveraged.[^3]
 *   Is it opinionated? Make a recommendation. Hedging is boring / not useful.
 *   Would someone who knows a lot about the topic share this?
 *   Will it help someone make a decision about what to do?
@@ -232,8 +232,8 @@ _Words by [Andy Vandervell](https://www.linkedin.com/in/andyvandervell/), who ra
 *   **[13 Undesirable Behaviors in Software Engineers](https://newsletter.techleadmentor.com/p/13-undesirable-behaviors-in-software) –**
 
 
-1 I’m not going to list my CV here – see LinkedIn for that – but websites I’ve managed have ranked top of Google for “best black Friday deals” on Black Friday, “best Netflix series” in the middle of the pandemic, and “iPhone rumors” back when a new iPhone was still a big deal. I view myself as a writer and editor with a lot of SEO knowledge, rather than a full-time SEO expert, but I’ve been at this for a while.
+[^1]: I’m not going to list my CV here – see LinkedIn for that – but websites I’ve managed have ranked top of Google for “best black Friday deals” on Black Friday, “best Netflix series” in the middle of the pandemic, and “iPhone rumors” back when a new iPhone was still a big deal. I view myself as a writer and editor with a lot of SEO knowledge, rather than a full-time SEO expert, but I’ve been at this for a while.
 
-2 Here’s a good example: I recently noticed people searching for “posthog SDK” were ending up at this forum index page instead of our docs. To fix this, I opened a PR on our repo that renamed an existing docs page to ‘PostHog SDK comparison’. Within days, it was ranking top for that search, so people will end up in the right place now.
+[^2]: Here’s a good example: I recently noticed people searching for “posthog SDK” were ending up at this forum index page instead of our docs. To fix this, I opened a PR on our repo that renamed an existing docs page to ‘PostHog SDK comparison’. Within days, it was ranking top for that search, so people will end up in the right place now.
 
-3 This is particularly pertinent given all studies of AI Overviews in Google indicate they show most often on information keywords (i.e. questions, definitions, etc.).
+[^3]: This is particularly pertinent given all studies of AI Overviews in Google indicate they show most often on information keywords (i.e. questions, definitions, etc.).
