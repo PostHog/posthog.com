@@ -10,19 +10,19 @@ import WebSendEvents from '../../integrate/send-events/_snippets/send-events-web
 
 <WebSendEvents />
 
-## Identifying users
+## Anonymous and identified events
 
 import IdentifiedVsAnonymousIntro from '../../product-analytics/_snippets/identified-vs-anonymous-intro.mdx'
 
 <IdentifiedVsAnonymousIntro />
 
-### How to capture anonymous events
+### Capturing anonymous events
 
 import HowToCaptureAnonymousEventsWeb from '../../product-analytics/_snippets/how-to-capture-anonymous-events-web.mdx'
 
 <HowToCaptureAnonymousEventsWeb />
 
-### How to capture identified events
+### Capturing identified events
 
 import HowToCaptureIdentifiedEventsWeb from '../../product-analytics/_snippets/how-to-capture-identified-events-frontend.mdx'
 
@@ -578,7 +578,7 @@ posthog.init('<ph_project_api_key>', {
 
 </details>
 
-### Providing more than one before_send function
+### Chaining before_send functions
 
 You can provide an array of functions to be called one after the other:
 
