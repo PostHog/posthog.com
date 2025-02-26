@@ -6,11 +6,12 @@ import JSWebErrorTracking from './_snippets/web-install-error-tracking.mdx'
 
 ### Capturing React component render errors
 
-Override the [global error handler](https://nextjs.org/docs/app/building-your-application/routing/error-handling#handling-global-errors) component to capture exceptions
+Next.js uses [error boundaries](https://nextjs.org/docs/app/building-your-application/routing/error-handling#using-error-boundaries) to handle uncaught exceptions by rendering a fallback UI instead of the crashing components.
 
+Create a [Global Error component](https://nextjs.org/docs/app/building-your-application/routing/error-handling#handling-global-errors) in your root layout to capture unhandled exceptions.
 
-```tsx file=src/app/posthog-error-handler.tsx
-"use client";
+```tsx file=app/global-error.tsx
+'use client' // Error boundaries must be Client Components
 
 import posthog from "posthog-js";
 import NextError from "next/error";
@@ -18,21 +19,61 @@ import { useEffect } from "react";
 
 export default function GlobalError({
   error,
+  reset,
 }: {
-  error: Error & { digest?: string };
+  error: Error & { digest?: string }
+  reset: () => void
 }) {
   useEffect(() => {
     posthog.captureException(error);
   }, [error]);
 
   return (
+    // global-error must include html and body tags
     <html>
       <body>
+        {/* `NextError` is the default Next.js error page component */}
         <NextError statusCode={0} />
       </body>
     </html>
+  )
+}
+```
+
+Note that `error.tsx` files take precendence over the Global error component. Therefore if you use `Error` components to handle uncaught exceptions at different levels of you route heirarchy and want to capture the associated exception you will need to do so manually:
+
+```tsx file=error.tsx
+"use client";  // Error boundaries must be Client Components
+
+import posthog from "posthog-js";
+import { useEffect } from "react";
+
+export default function Error({
+  error,
+  reset,
+}: {
+  error: Error & { digest?: string }
+  reset: () => void
+}) {
+  useEffect(() => {
+    posthog.captureException(error);
+  }, [error]);
+
+  return (
+    ...
   );
 }
 ```
 
-> Note: if you override the global error page with [error boundaries](https://nextjs.org/docs/app/building-your-application/routing/error-handling#using-error-boundaries) these take precedence over the global handler, hence you will need to re-implement the exception in those files too.
+### Capturing server errors
+
+Next.js offers the `onRequestError` hook in `instrumentation.ts` to capture errors that occur during server-side rendering.
+
+```tsx file=instrumentation.ts
+import { type Instrumentation } from 'next'
+import posthog from "posthog-js";
+
+export const onRequestError: Instrumentation.onRequestError = async (err) => {
+  posthog.captureException(error);
+}
+```
