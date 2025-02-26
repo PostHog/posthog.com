@@ -135,7 +135,7 @@ Really good search-optimized content is highly leveraged – it’s cheaper than
 
 ![SEO journey](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/newsletter/startup-marketing/seo-journey.png)
 
-That said, don’t delay once you do have product-market fit. It’ll be tempting to use AI to scale SEO quickly. This is a great strategy if you want to murder your growth every six months when Google tweaks its algorithm.
+That said, don’t delay once you do have product-market fit. It’ll be tempting to use AI to scale [SEO for your startup](/newsletter/seo-for-startups) quickly. This is a great strategy if you want to murder your growth every six months when Google tweaks its algorithm.
 
 ## 8. Own your branded search 🔍
 
