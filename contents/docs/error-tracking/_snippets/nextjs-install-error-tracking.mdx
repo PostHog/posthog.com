@@ -1,0 +1,38 @@
+import JSWebErrorTracking from './_snippets/web-install-error-tracking.mdx'
+
+> You should first follow the [Next.js integration guide](/docs/integrate/next-js) to capture client and server side events.
+
+<JSWebErrorTracking />
+
+### Capturing React component render errors
+
+Override the [global error handler](https://nextjs.org/docs/app/building-your-application/routing/error-handling#handling-global-errors) component to capture exceptions
+
+
+```tsx file=src/app/posthog-error-handler.tsx
+"use client";
+
+import posthog from "posthog-js";
+import NextError from "next/error";
+import { useEffect } from "react";
+
+export default function GlobalError({
+  error,
+}: {
+  error: Error & { digest?: string };
+}) {
+  useEffect(() => {
+    posthog.captureException(error);
+  }, [error]);
+
+  return (
+    <html>
+      <body>
+        <NextError statusCode={0} />
+      </body>
+    </html>
+  );
+}
+```
+
+> Note: if you override the global error page with [error boundaries](https://nextjs.org/docs/app/building-your-application/routing/error-handling#using-error-boundaries) these take precedence over the global handler, hence you will need to re-implement the exception in those files too.
