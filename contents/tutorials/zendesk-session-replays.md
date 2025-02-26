@@ -186,7 +186,7 @@ Now when we go to our app and submit a value, it creates a ticket in Zendesk.
 
 ## 4. Add the session replay link to the ticket
 
-The final piece is including a link to the session replay in the ticket. The JavaScript SDK makes this easy with the [`get_session_replay_url()`](/docs/libraries/js#session-replay) method. We just add PostHog and then modify the content value we pass to `submitTicket` .
+The final piece is including a link to the session replay in the ticket. The JavaScript SDK makes this easy with the [`get_session_replay_url()`](/docs/libraries/js/features#session-replay) method. We just add PostHog and then modify the content value we pass to `submitTicket` .
 
 ```js
 "use client"

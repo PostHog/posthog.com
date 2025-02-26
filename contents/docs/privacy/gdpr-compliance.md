@@ -107,7 +107,7 @@ Within the consent you should identify the types of personal data that are being
 
 If a user **opts out** then you must stop data capturing and processing. Here are some ways PostHog makes this possible:
 
-- If posthog-js has been initialized, call `posthog.opt_out_capturing()`. See the [posthog-js docs](https://posthog.com/docs/integrate/client/js#opt-users-out)
+- If posthog-js has been initialized, call `posthog.opt_out_capturing()`. See the [posthog-js docs](/docs/libraries/js#opt-out-of-data-capture)
 
 - Ensure [posthog-js is configured](/docs/libraries/js/config) not to autocapture and do not make [capture](/docs/integrate/ingest-live-data#capture-user-events) calls using the installed PostHog SDK on any client
 
