@@ -47,7 +47,7 @@ What does traction look like for your business? Which metric corresponds to trac
 Call that your **North Star metric**. You metric can change as your product evolves, but there only be one.
 </Admonition>
 
-# Defining our v0 metrics tree
+## Defining our v0 metrics tree
 
 With a North Star in mind, we can back out to the **user behavior** that feeds it.
 
@@ -55,11 +55,15 @@ With a North Star in mind, we can back out to the **user behavior** that feeds i
 
 **Events** are things that users do that we can track in code, and then measure across all usage of the product.
 
-## Example: ride sharing
+And numerous singular events have to occur to drive your North star metric. Let's go back to the Uber example.
 
-Uber can't make money if no one launches the app. `app_launched`, then, becomes, an essential event for them keep track of.
+### Example: ride sharing
 
-But there's still no money until `ride_requested` happens.
+Uber's North star metric is `Number of rides`. This is both the value they give to Uber users, and how it makes money. 
+
+But Uber can't make money if no one launches the app, so `app_launched` is an essential event for it to track.
+
+There's still no money until `ride_requested` happens, either.
 
 Even that doesn't quite get us to a ride. We need a couple more: `ride_accepted`  and `ride_began`
 
