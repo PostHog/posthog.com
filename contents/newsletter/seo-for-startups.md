@@ -38,7 +38,7 @@ Sometimes you just need to rank for things, so others don’t, such as:
 *   How to integrate your product with other popular ones
 *   The best tools in your product category
     
-This is why we have articles comparing [PostHog and Sentry](https://posthog.com/blog/posthog-vs-sentry), or guides to [open source analytics tools](https://posthog.com/blog/best-open-source-analytics-tools).
+This is why we have articles comparing [PostHog and Sentry](/blog/posthog-vs-sentry), or guides to [open source analytics tools](/blog/best-open-source-analytics-tools).
 
 Content like this can serve as sales collateral, but it’s also high-intent, so it helps you acquire new users and supports word-of-mouth. Even if someone doesn’t end up using your product, they might tell someone else about it.
 
@@ -70,7 +70,7 @@ It’s way easier to rank for 100 low volume searches than a handful of lucrativ
 
 Here’s an example:
 
-*   We recently published a tutorial on setting up [analytics for Electron apps](https://posthog.com/tutorials/electron-analytics).
+*   We recently published a tutorial on setting up [analytics for Electron apps](/tutorials/electron-analytics).
 *   There’s an estimated 30 searches a month for “electron analytics”. That’s tiny.
 *   Ahrefs gives every search a keyword difficulty score out of 100. This scores 0.
 *   We’re already seeing ~five unique users visiting this page each day.
@@ -120,7 +120,7 @@ You can stumble upon small SEO wins by creating content that helps solve the rea
 
 So, before you dive into keyword research, topic clusters, topical authority, and other buzzy SEO-isms, go talk to your users and help them out.
 
-One of the first tutorials anyone wrote for PostHog was this [event tracking guide](https://posthog.com/tutorials/event-tracking-guide).
+One of the first tutorials anyone wrote for PostHog was this [event tracking guide](/tutorials/event-tracking-guide).
 
 It now generates around 1,000 visitors from search every month, but it was never written with ranking in Google in mind.
 
@@ -191,11 +191,11 @@ We didn’t start investing in SEO at PostHog until January 2022, two years afte
 
 1.  Real revenue and a product people definitely wanted.
     
-2.  A clear and tested [ideal customer profile](https://posthog.com/newsletter/ideal-customer-profile-framework) to work from.
+2.  A clear and tested [ideal customer profile](/newsletter/ideal-customer-profile-framework) to work from.
     
 3.  Strong retention in that cohort – i.e. the funnel wasn’t leaking from the bottom.
     
-In short, we had [rock solid product-market fit](https://posthog.com/founders/product-market-fit-game).
+In short, we had [rock solid product-market fit](/founders/product-market-fit-game).
 
 This made my job much easier. I didn’t have to throw mud at a wall, and we already had a good website with some authority on the right topics thanks to our public docs.
 
