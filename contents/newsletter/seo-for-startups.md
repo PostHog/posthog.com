@@ -46,6 +46,8 @@ Do this stuff early, so competitors don’t swoop in first.
 
 > **Remember This:** People aren’t stupid, so don’t oversell your product. Our philosophy is to focus more on how our product is different, not why it’s better. “Better” is subjective anyway, so let people figure that out for themselves.
 
+<br/>
+
 ## 2. Use as few SEO tools as possible
 
 Only #SEOgurus need a complex stack of SEO tools. Here’s what I recommend for everyone else who is getting started:
@@ -59,6 +61,8 @@ Only #SEOgurus need a complex stack of SEO tools. Here’s what I recommend for 
 That’s it. There are dozens of tools you can use for different tasks, but 90% of your problems can be solved using the above.
 
 > **Remember This:** SEO tools are just that: tools. They might make your life a little easier, but they won’t magically generate growth. An easy way to fail is to spend too much time learning or researching SEO tools, and not enough doing the important bit: the content.
+
+<br/>
 
 ## 3. Low volume + a problem you solve = winning
 
@@ -79,6 +83,8 @@ This is the ultimate power of SEO and why it’s worthwhile. There are a near in
 Getting good at ranking for low competition keywords will make it easier to rank for high competition ones, too.
 
 > **Try This:** Use Keywords Everywhere to see what people search for, try different variations, and look at the related searches. Ahrefs has a good primer on [finding low competition keywords](https://ahrefs.com/blog/low-competition-keywords/), too.
+
+<br/>
 
 ## 4. Google is dumber than you think
 
@@ -106,6 +112,8 @@ What does this mean for you?
 > **Go Deeper:** I recommend reading [Turns out, Google is all about Links and Clicks](https://www.seoforgooglenews.com/p/google-is-all-about-links-clicks-keywords)  
 > by Barry Adams, who knows way more about SEO than me, for more on how Google uses human behavior to qualify search results.
 
+<br/>
+
 ## 5. Solve your user’s real problems
 
 You can stumble upon small SEO wins by creating content that helps solve the real problems of your actual users.
@@ -117,6 +125,8 @@ One of the first tutorials anyone wrote for PostHog was this [event tracking gui
 It now generates around 1,000 visitors from search every month, but it was never written with ranking in Google in mind.
 
 > **Remember This:** Your docs are both a resource for your users and an influential acquisition channel. Any time spent expanding and improving them is time well spent, and useful docs are naturally SEO-optimized.
+
+<br/>
 
 ## 6. You don't need perfect Core Web Vitals
 
@@ -148,6 +158,8 @@ We need to improve our “Interaction to Next Paint” further, but this hasn’
 
 > **Do This:** Your web vitals are a good proxy for the general user experience, but the algorithm cares more about the subjective experience of real people**.** Get your scores in a decent place, but put more time into your content and website UX.
 
+<br/>
+
 ## 7. Your "great content" probably sucks
 
 I can’t sugarcoat this one.
@@ -166,6 +178,8 @@ Some mental checklists I like here:
 *   Will it help someone make a decision about what to do?
 
 > **Try This:** Go read and evaluate the top results for searches you’re interested in. What makes them stickier than other similar pages? How would you improve them? The more you do this, the better you’ll get at judging what good looks like.
+
+<br/>
 
 ## 8. Double down when you have product-market fit
 
@@ -188,11 +202,12 @@ This made my job much easier. I didn’t have to throw mud at a wall, and we alr
 Above all, there was no danger of pivoting to a new product or audience, so I knew my long-term bets would have time to pay off.
 
 ![posthog seo](https://res.cloudinary.com/dmukukwp6/image/upload/posthog_seo_2bdba1ba71.png)
-[Caption]Click data from Google Search Console[/Caption]
 
 It took three months for our earliest work to show meaningful results. We started to see serious growth after six months. After a year we’d tripled traffic from SEO.
 
 > **Remember This:** Focus on the basics until you have product-market fit. Build an easy-to-use website Google can index, write content that helps your users, and do some defensive SEO. Double down when you’re confident you have real traction.
+
+<br/>
 
 ## 9. Yes, your startup still needs SEO
 
@@ -207,6 +222,8 @@ AI is the future right, so why bother investing in SEO? I suck at predicting the
 Obviously, it would be foolish to bet the farm on SEO, but that would still be true if LLMs didn’t exist.
 
 > **Do This:** Think about how you can create owned audiences and distribution channels. This newsletter is one method, an active Discord / Slack community could be another. SEO is an important channel, but it’s one of many.
+
+<br/>
 
 ## 10. SEO is mostly about good habits
 
@@ -223,6 +240,8 @@ Successful SEO strategies are built on being relentless and disciplined. This me
 And, yes, while there are ways to cheat your way to the top, I guarantee Google will find you out eventually.
 
 _Words by [Andy Vandervell](https://www.linkedin.com/in/andyvandervell/), who ranks top of Google for his own name._
+
+<br/>
 
 ## Certified #greatcontent
 
