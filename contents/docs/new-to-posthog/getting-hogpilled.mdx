@@ -69,9 +69,11 @@ But even that doesn't quite get us to a ride. We need a couple more: `ride_accep
 
 <img width="1688" alt="ride-sharing-metrics-tree" src="https://res.cloudinary.com/dmukukwp6/image/upload/ride_sharing_metrics_tree_a0a1560337.png" />
 
-It's these events *together* that give us a picture of how people use the product to get a ride. While counting only `ride_began` would give us enough to measure our North Star, it would *not* be enough to learn how to influence it.
+It's these events *together* that give us a picture of how people use the product to get a ride. 
 
-## Funnels
+While counting only `ride_started` would give us enough to measure our North Star, it would *not* be enough to learn how to influence it.
+
+### Think about funnels
 
 <img height="500" alt="ride-sharing-funnel" src="https://res.cloudinary.com/dmukukwp6/image/upload/ride_sharing_funnel_7e4f6b19eb.png" />
 
@@ -91,9 +93,11 @@ Recap your traction goal and North Star metric, then think about the events that
 
 These are the events that must be captured as part of integrating PostHog.
 
+Your app will have numerous critical paths and funnels within it, but start with the most important one and then add more later. 
+
 </Admonition>
 
-# Integration planning
+## Integration planning
 
 Now:
 
@@ -117,15 +121,14 @@ Where will `identify()` be called? Typically `identify()` is invoked in the clie
 
 </Admonition>
 
-## Integration references
+### Integration references
 
 For more detail on PostHog's data model, identifying users, and general integration guidance, check out our docs:
 
 - [PostHog data model](/docs/how-posthog-works/data-model)  
 - [Identifying users](/docs/getting-started/identify-users)  
 - [Event tracking](/tutorials/event-tracking-guide)  
-- [SDKs](/docs/libraries)  
-- [Framework guides](/docs/frameworks)
+- [SDKs](/docs/libraries) and [Framework guides](/docs/frameworks)
 
 ## Gotchas
 
