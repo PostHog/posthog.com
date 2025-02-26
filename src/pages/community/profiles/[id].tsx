@@ -434,7 +434,7 @@ export const AchievementModal = ({
                                                 key={button.label}
                                                 {...(button.url ? { to: button.url, state: button.state } : undefined)}
                                                 {...(button.onClick ? { onClick: button.onClick } : undefined)}
-                                                className="text-sm font-bold text-red dark:text-yellow even:pl-2 even:border-l border-border dark:border-dark odd:pr-2 leading-none"
+                                                className="text-sm font-bold text-red dark:text-yellow even:pl-2 even:border-l border-border/30 dark:border-dark/30 odd:pr-2 leading-none"
                                             >
                                                 {button.label}
                                             </Container>
