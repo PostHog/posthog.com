@@ -50,7 +50,7 @@ To enable session replays, go to [your project settings](https://app.posthog.com
 
 ## Adding a custom event
 
-We'll use [custom code components](https://www.framer.com/developers/components/introduction) in Framer to set up [custom event capture](/docs/libraries/js#capturing-events). We will create a basic button that captures a `clicked_homepage_button` event.
+We'll use [custom code components](https://www.framer.com/developers/components/introduction) in Framer to set up [custom event capture](/docs/libraries/js/features#capturing-events). We will create a basic button that captures a `clicked_homepage_button` event.
 
 To do this, go to the **Assets** tab in the top left of your project. Next to the **Code** tab, click the plus icon to create a code file. Name the file `CaptureButton`, set it as a **New component** and press **Create**.
 

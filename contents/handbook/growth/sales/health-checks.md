@@ -64,9 +64,4 @@ You should get in touch and let them know that they only need to call `posthog.g
 
 `Posthog.reset()` will generate a new anonymous distinct ID.  If this is called before a user is identified then two anonymous unlinked user may be created.  There is no easy way to proactively diagnose this however if a customer says that their tracking between web and app is off, this is a common culprit.
 
-We have guidance on when to call `posthog.reset()` [here](/docs/libraries/js#reset-after-logout).
-
-
-
-
-
+We have guidance on when to call `posthog.reset()` [here](/docs/libraries/js/features#resetting-a-user).

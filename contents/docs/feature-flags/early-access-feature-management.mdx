@@ -8,7 +8,7 @@ export const CreateNewFeatureFlagDark = "https://res.cloudinary.com/dmukukwp6/im
 export const SiteAppDark = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/features/feature-flags/site-app-light-mode.png"
 export const SiteAppLight = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/features/feature-flags/site-app-dark-mode.png"
 
-> **Note:** Early access management is only available in the [JavaScript web SDK](/docs/libraries/js).
+> **Note:** Early access management is only available in the [JavaScript Web SDK](/docs/libraries/js).
 
 Early access feature management enables your users to opt in (and out) of betas and other in-progress features. 
 
@@ -46,7 +46,7 @@ We've prebuilt a site app that adds an early access feature modal to your site.
 
 To use it:
 
-1. Ensure you set `opt_in_site_apps: true` in your PostHog [initialization configuration](/docs/libraries/js#config).
+1. Ensure you set `opt_in_site_apps: true` in your PostHog [initialization configuration](/docs/libraries/js/config).
 
 2. Search for [Early Access Features App](https://app.posthog.com/project/apps?name=Early%20Access) in the [Browse Apps](https://app.posthog.com/project/apps) tab.
 
@@ -65,7 +65,7 @@ Once set up, early access features appear on this panel for users to opt in or o
 
 ### Option 2: Custom implementation
 
-You can fully customize your early access management experience using `getEarlyAccessFeatures` and `updateEarlyAccessFeatureEnrollment` from PostHog's [JavaScript Web library](/docs/libraries/js#early-access-feature-management).
+You can fully customize your early access management experience using `getEarlyAccessFeatures` and `updateEarlyAccessFeatureEnrollment` from PostHog's [JavaScript Web library](/docs/libraries/js/features#early-access-feature-management).
 
 - `getEarlyAccessFeatures` is called with a callback function that receives a list of early access features with their flag key, name, description, and documentation link. You can use this to build a UI for users to opt in or out of features.
 

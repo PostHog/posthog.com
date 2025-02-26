@@ -1315,6 +1315,24 @@ export const docsMenu = {
                                 title: 'Popular',
                                 className: '!bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',
                             },
+                            children: [
+                                {
+                                    name: 'Setup',
+                                    url: '/docs/libraries/js',
+                                },
+                                {
+                                    name: 'Features',
+                                    url: '/docs/libraries/js/features',
+                                },
+                                {
+                                    name: 'Configuration',
+                                    url: '/docs/libraries/js/config',
+                                },
+                                {
+                                    name: 'Persistence',
+                                    url: '/docs/libraries/js/persistence',
+                                },
+                            ],
                         },
                         {
                             name: 'Android',
