@@ -34,7 +34,7 @@ Returning `null` for a given event in the [`before_send`](/docs/libraries/js#ame
 
 For security purposes, errors sent from a JavaScript file served on a different domain hide the original error to avoid unintentionally leaking sensitive information to any `onerror` handler. This is often the case for third party scripts running on a site and results in an obfuscated 'Script error.' with no associated stack trace.
 
-In order to see the actual error the erroring script needs to be loaded `anonymously` which excludes potentially user-identifying information such as cookies from being transmitted when requesting the file.
+To see the actual error, the erroring script needs to be loaded `anonymously` which excludes potentially user-identifying information such as cookies from being transmitted when requesting the file.
 
 ```
 <script src="https://third-party.domain/script.js" crossorigin="anonymous"></script>
