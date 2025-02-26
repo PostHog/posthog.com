@@ -14,9 +14,7 @@ import posthog from 'posthog-js';
  * Implementation of Angular's ErrorHandler provider that can be used as a drop-in replacement for the stock one.
  */
 @Injectable({ providedIn: 'root' })
-class PostHogErrorHandler implements ErrorHandler, OnDestroy {
-  public ngOnDestroy(): void {}
-
+class PostHogErrorHandler implements ErrorHandler {
   public constructor() {}
 
   /**
