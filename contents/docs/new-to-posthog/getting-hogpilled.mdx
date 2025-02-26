@@ -111,6 +111,8 @@ With these details in-hand, we can make a plan to capture the data we need. This
 
 Ideal event names are self-explanatory, avoiding strange abbreviations or codes. Don't stuff data into event names – they should be **comparable across all users** of your product. Instead, we want to tuck additional data into [properties](/docs/data/events#event-properties) *on* events.
 
+Be warned: PostHog's event storage is 'write only' for all practical purposes. You can't edit existing events, so it's important to design against naming drift. Pick a [naming convention](/docs/product-analytics/best-practices#3-implement-a-naming-convention) and stick with it.
+
 </Admonition>
 
 <Admonition icon="IconPencil" title="Planning user identification">
@@ -121,6 +123,14 @@ Where will `identify()` be called? Typically `identify()` is invoked in the clie
 
 </Admonition>
 
+### User identity
+
+Complex authentication flows and tracking anonymous users from both client and server can complicate identifying users.
+
+PostHog enforces some rules use of the identify function to prevent users from being merged incorrectly. 
+
+Learn more about [Alias](/docs/product-analytics/identify#alias-assigning-multiple-distinct-ids-to-the-same-user) if you intend to provide more than one of your own IDs for a user, or you need to merge identities on the server.
+
 ### Integration references
 
 For more detail on PostHog's data model, identifying users, and general integration guidance, check out our docs:
@@ -129,23 +139,3 @@ For more detail on PostHog's data model, identifying users, and general integrat
 - [Identifying users](/docs/getting-started/identify-users)  
 - [Event tracking](/tutorials/event-tracking-guide)  
 - [SDKs](/docs/libraries) and [Framework guides](/docs/frameworks)
-
-## Gotchas
-
-Integration is straightforward, but things can get messier as time goes on. Here are a few things to watch out for.
-
-### Event naming
-
-Pick a [naming convention](/docs/product-analytics/best-practices#3-implement-a-naming-convention) and stick with it! 
-
-There isn't a right choice here, only a wrong choice: different people on your team using different event names, or conventions to describe the same behavior.
-
-Be warned: PostHog's event storage is 'write only' for all practical purposes. You can't edit existing events, so it's important to design against naming drift. Otherwise, you may find queries much harder to work with down the road. 
-
-### User identity
-
-Complex authentication flows and tracking anonymous users from both client and server can complicate identifying users.
-
-PostHog enforces some rules use of the identify function to prevent users from being merged incorrectly. 
-
-Learn more about [Alias](/docs/product-analytics/identify#alias-assigning-multiple-distinct-ids-to-the-same-user) if you intend to provide more than one of your own IDs for a user, or you need to merge identities on the server.
