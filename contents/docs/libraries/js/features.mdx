@@ -359,11 +359,11 @@ It is also possible to manually capture exceptions using the `captureException` 
 posthog.captureException(error, additionalProperties)
 ```
 
-## Amending or sampling events before capture
+## Amending or sampling events
 
 Since version 1.187.0, you can provide a `before_send` function when initializing the SDK to amend, filter, sample, or reject events before they are sent to PostHog. 
 
-> **🚨 Warning:** Amending and rejecting events is advanced functionality and should be done with care. It can cause unexpected results in parts of PostHog.
+> **🚨 Warning:** Amending and sampling events is advanced functionality and should be done with care. It can cause unexpected results in parts of PostHog.
 
 ### Redacting information in events
 
