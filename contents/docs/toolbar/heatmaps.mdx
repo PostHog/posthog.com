@@ -15,7 +15,7 @@ availability:
 
 Heatmaps shows you how users are interacting with elements on your website or app. 
 
-To start, ensure you enable the capturing of heatmap data in [your project settings](https://us.posthog.com/settings/project-autocapture#heatmaps) or with the `enable_heatmaps` key in the [JavaScript Web SDK initialization config](/docs/libraries/js#config). Heatmap data is captured along with other events, so it doesn't contribute to your bill, but the clickmap requires [autocapture](/docs/product-analytics/autocapture) and the scrollmap requires [pageleave events](/docs/product-analytics/capture-events#manually-capturing-pageviews-and-pageleaves-in-single-page-apps). 
+To start, ensure you enable the capturing of heatmap data in [your project settings](https://us.posthog.com/settings/project-autocapture#heatmaps) or with the `enable_heatmaps` key in the [JavaScript Web SDK initialization config](/docs/libraries/js#config). Heatmap data is captured along with other events, so it doesn't contribute to your bill, but the clickmap requires [autocapture](/docs/product-analytics/autocapture) and the scrollmap requires pageleave events. 
 
 To view your heatmaps, click the heatmap icon on the toolbar.
 
@@ -73,7 +73,7 @@ With the clickmap, clickable elements on your website will have a red overlay wi
 
 ![An example from the PostHog website showing the click map highlighting a number of page elements. Some showing a count of clicks and one also showing a rageclick](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/toolbar/posthog-heatmap-example.png)
 
-Each number in the top right box of each element represents the total number of clicks in the last 7 days. The number in the top left of the element is the number of rageclicks. A rageclick is collected when a user clicks on an a static element more than three times in a one-second window.
+Each number in the top right box of each element represents the total number of clicks in the last 7 days. The number in the top left of the element is the number of rageclicks. A rageclick is collected when a user clicks on a static element more than three times in a one-second window.
 
 Numbers at the bottom or top of the screen indicate that there are more elements that are not currently being displayed on the page.
 
