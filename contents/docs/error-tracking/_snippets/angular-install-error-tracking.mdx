@@ -116,17 +116,18 @@ export function providePostHogErrorHandler(): Provider {
 
 Then, in your `src/app/app.config.ts`, import the `providePostHogErrorHandler` function and add it to the providers array:
 
-```ts file=src/app/app.config.ts
+```diff
+// src/app/app.config.ts
 import { ApplicationConfig, provideZoneChangeDetection } from '@angular/core';
 import { provideRouter } from '@angular/router';
 
 import { routes } from './app.routes';
-import { providePostHogErrorHandler } from './posthog-error-handler';
++import { providePostHogErrorHandler } from './posthog-error-handler';
 
 export const appConfig: ApplicationConfig = {
   providers: [
     ...
-    providePostHogErrorHandler(),
++   providePostHogErrorHandler(),
   ],
 };
 ```
