@@ -1591,7 +1591,7 @@ export const docsMenu = {
                     ],
                 },
                 {
-                    name: 'Getting started',
+                    name: 'New to PostHog',
                 },
                 {
                     name: 'Getting HogPilled',
