@@ -10,32 +10,9 @@ This guide walks you through integrating PostHog into your Angular app using the
 
 ## Installation
 
-Install `posthog-js` using your package manager:
+import AngularInstall from "../integrate/_snippets/install-angular.mdx"
 
-```bash
-yarn add posthog-js
-# or
-npm install --save posthog-js
-```
-
-In your `src/main.ts`, initialize PostHog using your project API key and instance address. You can find both in your [project settings](https://us.posthog.com/project/settings).  
-
-```ts file=main.ts
-import { bootstrapApplication } from '@angular/platform-browser';
-import { appConfig } from './app/app.config';
-import { AppComponent } from './app/app.component';
-import posthog from 'posthog-js'
-
-posthog.init(
-  '<ph_project_api_key>',
-  {
-    api_host:'<ph_client_api_host>'
-  }
-)
-
-bootstrapApplication(AppComponent, appConfig)
-  .catch((err) => console.error(err));
-```
+<AngularInstall />
 
 > **Note:** If you're using Typescript, you might have some trouble getting your types to compile because we depend on `rrweb` but don't ship all of their types. To accommodate that, you'll need to add `@rrweb/types@2.0.0-alpha.17` and `rrweb-snapshot@2.0.0-alpha.17` as a dependency if you want your Angular compiler to typecheck correctly.
 >
@@ -206,6 +183,75 @@ initPostHog() {
   }
 }
 ```
+
+## Idiomatic service for Angular v17 and above
+
+For larger projects, you might prefer to set up PostHog as a singleton service. To do this, start by creating and injecting a `PosthogService` instance:
+
+```ts file=main.ts
+import { Component } from "@angular/core";
+import { RouterOutlet } from "@angular/router";
+import { PosthogService } from "./services/posthog.service";
+
+@Component({
+  selector: "app-root",
+  styleUrls: ["./app.component.scss"],
+  template: `
+    <router-outlet />`,
+  imports: [RouterOutlet],
+})
+export class AppComponent {
+  title = "angular-app";
+
+  constructor(posthogService: PosthogService) {}
+}
+```
+
+The service itself looks like this:
+```ts file=posthog.service.ts
+import { DestroyRef, Injectable, NgZone } from "@angular/core";
+import posthog from "posthog-js";
+import { environment } from "../../environments/environment";
+import { NavigationEnd, Router } from "@angular/router";
+import { filter } from "rxjs";
+import { takeUntilDestroyed } from "@angular/core/rxjs-interop";
+
+@Injectable({ providedIn: "root" })
+export class PosthogService {
+  constructor(
+    private ngZone: NgZone,
+    private router: Router,
+    private destroyRef: DestroyRef,
+  ) {
+    this.initPostHog();
+  }
+  private initPostHog() {
+    this.ngZone.runOutsideAngular(() => {
+      posthog.init(environment.posthogKey, {
+        api_host: environment.posthogHost,
+        debug: false,
+        cross_subdomain_cookie: true,
+        person_profiles: "always",
+        capture_pageview: false,
+        capture_pageleave: true,
+        loaded: (posthogInstance) => {
+          this.router.events
+            .pipe(
+              filter((event) => event instanceof NavigationEnd),
+              takeUntilDestroyed(this.destroyRef),
+            )
+            .subscribe((event: NavigationEnd) => {
+              posthogInstance.capture("$pageview");
+            });
+        },
+      });
+    });
+  }
+}
+```
+
+This service contains PostHog initialization, and upon success, enables pageviews.
+
 
 ## Next steps
 

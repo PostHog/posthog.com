@@ -73,7 +73,7 @@ For example, while you can use a retention insight to discover which **features*
 
 We're confident SQL insights will unlock deep analysis into how users use your products, and we can't wait to hear [your feedback](http://app.posthog.com/home#supportModal) and see how you use SQL access in PostHog. 
 
-To get a flavor, here's an example query summarizing survey data. It's purpose? Determining which countries prefer pineapple on a pizza. This is serious analysis:[^1]
+To get a flavor, here's an example query summarizing survey data. Its purpose? Determining which countries prefer pineapple on a pizza. This is serious analysis:[^1]
 
 ![PostHog SQL insights](https://res.cloudinary.com/dmukukwp6/video/upload/v1710055416/posthog.com/contents/images/blog/array/pineapple_sql.mp4)
 

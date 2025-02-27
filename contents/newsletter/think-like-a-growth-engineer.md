@@ -60,7 +60,7 @@ Growth engineers often say "everything is an experiment." This is the elusive "e
 
 Instead of blindly shipping the next feature on your list, think about the hypothesis behind it and the “dumbest” way to test that hypothesis. For example, instead of building out a full feature, run a [fake door test](/tutorials/fake-door-test) to check if users click the option if it’s available.
 
-[MasterClass took this approach](/product-engineers/fixing-growth-problems) when testing tiered pricing. As Alexey, their former former head of growth engineering, said:
+[MasterClass took this approach](/product-engineers/fixing-growth-problems) when testing tiered pricing. As Alexey, their former head of growth engineering, said:
 
 >I knew we needed a dollar estimate, so we created a simple fake door test. Users could select their preferred tier – but at checkout, we let them know they were being upgraded to the best tier and at the cheapest price. In reality, this was the existing one-size-fits-all pricing, and we hadn't actually built any of the functionality to support these new tiers.
 >

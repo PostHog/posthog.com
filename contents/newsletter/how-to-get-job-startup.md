@@ -53,7 +53,7 @@ Truly great applications are read for up to five minutes.
 
 Contrary to rumor, cover letters still matter, but they need to be short. Five to ten sentences is fine.
 
-Don’t rewrite your resume, or start it with with ‘Dear Sir/Madam’. Never, ever, use ChatGPT. Not even to help you with a draft. We’ll know, it’s always obvious.
+Don’t rewrite your resume, or start it with ‘Dear Sir/Madam’. Never, ever, use ChatGPT. Not even to help you with a draft. We’ll know, it’s always obvious.
 
 ![Google Gemini's cover letter](https://res.cloudinary.com/dmukukwp6/image/upload/gemini2_154939763f.png)
 

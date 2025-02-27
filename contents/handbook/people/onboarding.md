@@ -222,7 +222,7 @@ These check-ins are designed to ensure every new starter is set up for success. 
 
 ## Team intros
 
-PostHog has lots of small teams and each team has it's own unique history and culture. Throughout your first and second month, you can join 15 minute intro calls to learn more about each team as these are led by the respective team lead. 
+PostHog has lots of small teams and each team has its own unique history and culture. Throughout your first and second month, you can join 15 minute intro calls to learn more about each team as these are led by the respective team lead. 
 
 All you need to do is add the [onboarding intros calendar](https://calendar.google.com/calendar/u/0?cid=Y18yNWNlYjI4MTI5YjQ0ZDNlOWM1NThjMzYxY2M1NjVmZGU3NWM5NWNjZjgyOTg4NTdjNGM1OWY5YzFmMTUzOWY4QGdyb3VwLmNhbGVuZGFyLmdvb2dsZS5jb20) to your google calendar and then you will see these on Mondays and Wednesdays throughout the month. Just add yourself to these during your first week and if you can't make one, just add yourself to the next month. 
 

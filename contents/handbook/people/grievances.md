@@ -49,7 +49,7 @@ If the matter cannot be resolved informally, you should put the details of your 
 To make sure we can investigate your grievance properly:
 * Try and raise your grievance as soon as possible - it's easier to figure out what happened that way. 
 * Give specific examples of the behavior that you felt was misconduct. Try to avoid sweeping statements.
-* Avoid including heresay or other people’s comments in your grievance.
+* Avoid including hearsay or other people’s comments in your grievance.
 * While this process is confidential, our default assumption is that grievances are not made anonymously as this makes it harder for us to investigate or to report back to those raising the complaint. 
 * Please be understanding with those dealing with your grievance. We take these issues very, very seriously, and likely any action we take is difficult in one way or another.
 
