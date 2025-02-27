@@ -514,10 +514,6 @@ export const handbookSidebar = [
                 url: '/handbook/engineering/development-process',
             },
             {
-                name: 'Feature flags specification',
-                url: '/handbook/engineering/feature-flags-spec',
-            },
-            {
                 name: 'Setting up SSL locally',
                 url: '/handbook/engineering/setup-ssl-locally',
             },
