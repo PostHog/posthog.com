@@ -163,7 +163,7 @@ The first way is to add the session replay link is as a people data attribute. T
 
 ![Adding an attribute](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/intercom-session-replays/attribute.png)
 
-Back in your app, add PostHog to your component in `app/page.js`, call the `[get_session_replay_url()](/docs/libraries/js#session-replay)` method, and add the link as `recent_replay` in your `boot` call like this:
+Back in your app, add PostHog to your component in `app/page.js`, call the [`get_session_replay_url()`](/docs/libraries/js/features#session-replay) method, and add the link as `recent_replay` in your `boot` call like this:
 
 ```js
 // app/page.js
