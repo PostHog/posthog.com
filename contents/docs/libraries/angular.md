@@ -255,7 +255,7 @@ This service contains PostHog initialization, and upon success, enables pageview
 
 ## Next steps
 
-For any technical questions for how to integrate specific PostHog features into Angular (such as feature flags, A/B testing, surveys, etc.), have a look at our [JavaScript Web SDK docs](/docs/libraries/js).
+For any technical questions for how to integrate specific PostHog features into Angular (such as feature flags, A/B testing, surveys, etc.), have a look at our [JavaScript Web SDK docs](/docs/libraries/js/features).
 
 Alternatively, the following tutorials can help you get started:
 

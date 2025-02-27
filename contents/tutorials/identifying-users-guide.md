@@ -35,7 +35,7 @@ For example, if a user browses your marketing site, then signs up and you call `
 
 > Be sure to call `posthog.reset()` on logout (or when users change) to ensure events captures disconnect from the old user and can connect to a new (right) one.
 
-You can also use `posthog.identify()` to add properties to the user, such as their signup source, plan, or website link. You can see more details on the JavaScript `posthog.identify()` call [in the docs](/docs/integrate/client/js#identifying-users).
+You can also use `posthog.identify()` to add properties to the user, such as their signup source, plan, or website link. You can see more details on the JavaScript `posthog.identify()` call [in the docs](/docs/libraries/js/features#identifying-users).
 
 ## Identifying and setting user IDs for every other library
 

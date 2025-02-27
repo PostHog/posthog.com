@@ -95,7 +95,7 @@ Our client SDKs (where appropriate) will take care of selecting the correct doma
 
 If you really want to have a restrictive CSP with the absolute bare minimum changes, you can bundle all required `posthog-js` dependencies as part of your own application JavaScript, ensuring there is no need to load extra scripts at runtime.
 
-1. Follow the instructions [here](/docs/libraries/js#advanced-option---bundle-all-required-extensions) to install `posthog-js` via npm with all bundled dependencies that you require.
+1. Follow the instructions to **bundle all required extensions** when [installing PostHog via a package manager](/docs/libraries/js#option-2-install-via-package-manager) or [install the snippet](/docs/libraries/js#option-1-install-via-snippet).
 2. Update your content security policy to only include the `connect-src` directive as below
 
 ```html
@@ -105,7 +105,7 @@ If you really want to have a restrictive CSP with the absolute bare minimum chan
 ">
 ```
 
-**NOTE**: This will not work with the toolbar and generally means your initial bundled JavaScript will be much larger depending on the dependencies you are including. It also means you will need to keep your version of `posthog-js` up to date. 
+**Note**: This will not work with the toolbar and generally means your initial bundled JavaScript will be much larger depending on the dependencies you are including. It also means you will need to keep your version of `posthog-js` up to date. 
 
 ### What if I use a reverse proxy?
 

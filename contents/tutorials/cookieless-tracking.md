@@ -38,10 +38,10 @@ It is helpful first to know what data is being stored and why. Specifically, Pos
 - Session ID
 - Device ID
 - Active [feature flags](/docs/user-guides/feature-flags)
-- [Super properties](/docs/integrate/client/js#super-properties)
+- [Super properties](/docs/libraries/js/features#super-properties)
 - Configuration options (e.g., whether [session recording](/docs/user-guides/recordings) is enabled)
 
-If you want to use PostHog without cookies, you must store some of this data elsewhere. Although PostHog has [multiple persistence options](/docs/libraries/js#persistence), the most straightforward is to store it in page memory. We show you how to do this in the next step.
+If you want to use PostHog without cookies, you must store some of this data elsewhere. Although PostHog has [multiple persistence options](/docs/libraries/js/persistence), the most straightforward is to store it in page memory. We show you how to do this in the next step.
 
 Storing in memory avoids cookies, but once the user leaves the page, the data isn't saved. Returning users get new IDs, flags must be re-fetched, and configuration options are reset.
 

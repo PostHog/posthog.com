@@ -8,11 +8,11 @@ We aim to be significantly cheaper than our competitors. In addition to our [rid
 
 ## Reduce client-side feature flag requests
 
-In our [JavaScript web](/docs/libraries/js) and [React Native](/docs/libraries/react-native) SDKs, you can reduce the cost of feature flags by reducing the number of requests your client makes to fetch feature flag values for your users.
+In our [JavaScript Web](/docs/libraries/js) and [React Native](/docs/libraries/react-native) SDKs, you can reduce the cost of feature flags by reducing the number of requests your client makes to fetch feature flag values for your users.
 
-1. Using the the [advanced configuration](/docs/libraries/js#advanced-configuration), set `advanced_disable_feature_flags_on_first_load` to `true`. This stops automatically requesting feature flags whenever a page loads. This is useful when you're immediately calling `posthog.identify()` anyway, which requests flags again.
+1. Using the the [advanced configuration](/docs/libraries/js/config#advanced-configuration), set `advanced_disable_feature_flags_on_first_load` to `true`. This stops automatically requesting feature flags whenever a page loads. This is useful when you're immediately calling `posthog.identify()` anyway, which requests flags again.
 
-2. Using the the [advanced configuration](/docs/libraries/js#advanced-configuration), set `advanced_disable_feature_flags` to `true`. This stops PostHog automatically requesting feature flags. Instead, use [bootstrapping](/docs/feature-flags/bootstrapping) to load flags exactly once.
+2. Using the the [advanced configuration](/docs/libraries/js/config#advanced-configuration), set `advanced_disable_feature_flags` to `true`. This stops PostHog automatically requesting feature flags. Instead, use [bootstrapping](/docs/feature-flags/bootstrapping) to load flags exactly once.
 
 > **Note:** Use of `advanced_disable_feature_flags` will disable surveys for all users, as surveys rely on feature flags internally.
 

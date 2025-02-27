@@ -24,9 +24,9 @@ Enable session recordings in your PostHog [Project Settings](https://app.posthog
 
 Once enabled, the library will start recording sessions by default.
 
-They can be toggled off in the by setting the `disable_session_recording: true` flag in the [config](/docs/integrate/client/js/#config). 
+They can be toggled off in the by setting the `disable_session_recording: true` flag in the [config](/docs/libraries/js/config). 
 
-Users who [opt out](/docs/libraries/js#opt-users-out) of event capturing will not have their sessions recorded.
+Users who [opt out](/docs/libraries/js#opt-out-of-data-capture) of event capturing will not have their sessions recorded.
 
 > **Note on using Segment's SDK**: Session Replay does not work if you send data using [Segment's SDK](/docs/libraries/segment) as this data is not collected. If you use Segment, you may want to add the PostHog library as well – (make sure to only send regular event data from one source).
 

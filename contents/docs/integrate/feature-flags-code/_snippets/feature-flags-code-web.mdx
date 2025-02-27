@@ -24,7 +24,7 @@ if (posthog.getFeatureFlag('flag-key')  == 'variant-key') { // replace 'variant-
 
 Every time a user loads a page, we send a request in the background to fetch the feature flags that apply to that user. We store those flags in your chosen persistence option (local storage by default).
 
-This means that for most pages, the feature flags are available immediately – **except for the first time a user visits**.
+This means that for most pages, the feature flags are available immediately — **except for the first time a user visits**.
 
 To handle this, you can use the `onFeatureFlags` callback to wait for the feature flag request to finish:
 
@@ -42,11 +42,12 @@ posthog.onFeatureFlags(function (featureFlags, flagVariants, { errorsLoading }) 
 The `onFeatureFlags` callback receives the following parameters:
 
 - `flags: string[]`: An object containing the feature flags that apply to the user.
+
 - `flagVariants: Record<string, string | boolean>`: An object containing the variants that apply to the user.
+
 - `{ errorsLoading }: { errorsLoading?: boolean }`: An object containing a boolean indicating if an error occurred during the request to load the feature flags. This is `true` if the request timed out or if there was an error. It will be `false` or `undefined` if the request was successful.
 
 You won't usually need to use these, but they are useful if you want to be extra careful about feature flags not being loaded yet because of a network error and/or a network timeout (see `feature_flag_request_timeout_ms`).
-
 
 ### Reloading feature flags
 
@@ -90,6 +91,7 @@ posthog.resetGroupPropertiesForFlags('company')
 // reset properties for all groups:
 posthog.resetGroupPropertiesForFlags()
 ```
+
 > **Note:** You don't need to add the group names here, since these properties are automatically attached to the current group (set via `posthog.group()`). When you change the group, these properties are reset.
 
 #### Automatic overrides
@@ -118,41 +120,41 @@ You can configure the `feature_flag_request_timeout_ms` parameter when initializ
 
 ```js
 posthog.init('<ph_project_api_key>', { 
-        api_host: '<ph_client_api_host>',
-        feature_flag_request_timeout_ms: 3000 // Time in milliseconds. Default is 3000 (3 seconds).
-    }
+    api_host: '<ph_client_api_host>',
+    feature_flag_request_timeout_ms: 3000 // Time in milliseconds. Default is 3000 (3 seconds).
+  }
 )
 ```
 
-### Error handling
+### Feature flag error handling
 
 When using the PostHog SDK, it's important to handle potential errors that may occur during feature flag operations. Here's an example of how to wrap PostHog SDK methods in an error handler:
 
 ```js
 function handleFeatureFlag(client, flagKey, distinctId) {
-    try {
-        const isEnabled = client.isFeatureEnabled(flagKey, distinctId);
-        console.log(`Feature flag '${flagKey}' for user '${distinctId}' is ${isEnabled ? 'enabled' : 'disabled'}`);
-        return isEnabled;
-    } catch (error) {
-        console.error(`Error fetching feature flag '${flagKey}': ${error.message}`);
-        // Optionally, you can return a default value or throw the error
-        // return false; // Default to disabled
-        throw error;
-    }
+  try {
+    const isEnabled = client.isFeatureEnabled(flagKey, distinctId);
+    console.log(`Feature flag '${flagKey}' for user '${distinctId}' is ${isEnabled ? 'enabled' : 'disabled'}`);
+    return isEnabled;
+  } catch (error) {
+    console.error(`Error fetching feature flag '${flagKey}': ${error.message}`);
+    // Optionally, you can return a default value or throw the error
+    // return false; // Default to disabled
+    throw error;
+  }
 }
 
 // Usage example
 try {
-    const flagEnabled = handleFeatureFlag(client, 'new-feature', 'user-123');
-    if (flagEnabled) {  
-        // Implement new feature logic
-    } else {
-        // Implement old feature logic
-    }
+  const flagEnabled = handleFeatureFlag(client, 'new-feature', 'user-123');
+  if (flagEnabled) {  
+    // Implement new feature logic
+  } else {
+    // Implement old feature logic
+  }
 } catch (error) {
-    // Handle the error at a higher level
-    console.error('Feature flag check failed, using default behavior');
-    // Implement fallback logic
+  // Handle the error at a higher level
+  console.error('Feature flag check failed, using default behavior');
+  // Implement fallback logic
 }
 ```

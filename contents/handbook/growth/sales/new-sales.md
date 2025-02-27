@@ -149,7 +149,7 @@ If the customer isn't super clear on how to articulate the success criteria then
 
 1. Guide them on how to set up tracking depending on their app paying attention to common points of friction such as:
    * [Anonymous vs Identified](/docs/product-analytics/identify#anonymous-and-identified-events) events.
-   * Tracking pageviews in [single page apps](/docs/libraries/js#single-page-apps-and-pageviews).
+   * Tracking pageviews in [single page apps](/docs/libraries/js/features#manually-capturing-pageviews-and-pageleaves-in-single-page-apps).
    * Deploying a [reverse proxy](/docs/advanced/proxy).
 2. Guide them on creating insights either based on:
    * Metrics they've shared that they need to see or;
