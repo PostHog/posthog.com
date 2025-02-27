@@ -1,6 +1,6 @@
 import JSWebErrorTracking from './_snippets/web-install-error-tracking.mdx'
 
-> You should first follow the [Next.js integration guide](/docs/integrate/next-js) to capture client and server side events.
+> You should first follow the [Next.js integration guide](/docs/libraries/next-js) to capture client and server side events.
 
 <JSWebErrorTracking />
 
@@ -40,7 +40,7 @@ export default function GlobalError({
 }
 ```
 
-Note that `error.tsx` files take precedence over the Global error component. Therefore if you use `Error` components to handle uncaught exceptions at different levels of you route hierarchy and want to capture the associated exception you will need to do so manually:
+`error.tsx` files take precedence over the Global error component. If you use `Error` components to handle uncaught exceptions at different levels of you route hierarchy and want to capture the associated exception, you will need to do so manually:
 
 ```tsx file=error.tsx
 "use client";  // Error boundaries must be Client Components
