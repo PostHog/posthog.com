@@ -89,7 +89,7 @@ Note that PostHog's default properties begin with `$`, so you'll need to include
 
 ### Filtering GeoIP properties
 
-PostHog enriches events with the [GeoIP app](/cdp/geoip-enrichment) based on the IP address. You either disable this app completely or filter out specific properties using the property filter app.
+PostHog enriches events based on IP addresses, with the [GeoIP transformation](https://app.posthog.com/pipeline/transformations?search=GeoIP). You either disable this app completely or filter out specific properties using the property filter app.
 
 The current list of GeoIP properties is shown below. For the most up-to-date list, see the [source code](https://github.com/PostHog/posthog-plugin-geoip).
 
