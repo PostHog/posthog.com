@@ -137,6 +137,10 @@ export const handbookSidebar = [
                         name: 'Security',
                         url: '/handbook/company/security',
                     },
+                    {
+                        name: 'Adding tools',
+                        url: '/handbook/company/adding-tools',
+                    },
                 ],
             },
             {
@@ -714,8 +718,20 @@ export const handbookSidebar = [
                 url: '/handbook/product/building-new-products-fast',
             },
             {
+                name: 'Product manager role',
+                url: '/handbook/product/product-manager-role',
+            },
+            {
                 name: 'Per-product growth reviews',
                 url: '/handbook/product/per-product-growth-reviews',
+            },
+            {
+                name: 'In-product AI playbook',
+                url: '/handbook/product/ai-playbook',
+            },
+            {
+                name: 'Prioritizing work for mature products',
+                url: '/handbook/product/prioritizing-work-for-mature-products',
             },
         ],
     },
