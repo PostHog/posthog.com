@@ -94,7 +94,7 @@ Or, to filter out all traffic from a particular IP address, you could use a conf
 
 Make sure to enable the `Keep event if any of the filtered properties are undefined?` option, otherwise, any events where the `$host` property is undefined will be filtered out.
 
-### Do you pay for filtered events?
+### Do you pay for events filtered out?
 
 **No**. Since PostHog doesn't ingest the events you filter out, you don't pay for them.
 
