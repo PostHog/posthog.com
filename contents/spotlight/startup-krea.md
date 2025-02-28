@@ -14,7 +14,7 @@ category: Startups
 ---
 The irony of going viral is that everybody wants it, but nobody’s ready for it. 
 
-There is often such a sudden increase in data usage that servers strain, performance degrades and costs can shoot up for founding teams.
+There is often such a sudden increase in data usage that servers strain, performance degrades, and costs can shoot up for founding teams.
 
 The team at [Krea](https://www.krea.ai/) surfed that wave — when their app went viral in Southeast Asia, hitting 200,000 sign-ups in a single day. Having already [set up PostHog to track events](/product-analytics#installation), Krea was ready in advance for such a surge.
 
