@@ -30,6 +30,7 @@ import Tooltip from 'components/Tooltip'
 import NotFoundPage from 'components/NotFoundPage'
 import { IconX } from '@posthog/icons'
 import Confetti from 'react-confetti'
+import dayjs from 'dayjs'
 
 const Avatar = (props: { className?: string; src?: string }) => {
     return (
@@ -126,6 +127,53 @@ const Bio = ({ biography, readme }) => {
                 </>
             )}
         </section>
+    )
+}
+
+const TransactionTitle = ({ type, metadata }: {}) => {
+    return <p className="text-sm capitalize m-0 font-semibold">{type.replace(/_/g, ' ').toLowerCase()}</p>
+}
+
+const Points = () => {
+    const { user } = useUser()
+    return (
+        <div className="max-w-xl">
+            <div className="bg-accent dark:bg-accent-dark rounded p-4 border border-light dark:border-dark">
+                <div className="flex items-center justify-between mb-1">
+                    <h2 className="text-2xl font-bold m-0">Points balance</h2>
+                    <span className="text-3xl font-bold text-green">{user?.wallet?.balance || 0}</span>
+                </div>
+                <p className="text-sm text-primary/70 dark:text-primary-dark/70 m-0">
+                    Earn points by contributing to discussions, helping others, and achieving milestones in the PostHog
+                    community. <Link to="/community">Redeem your points</Link> for merch and other cool stuff.
+                </p>
+                {user?.wallet?.transactions && user?.wallet?.transactions?.length > 0 && (
+                    <div className="mt-4 pt-4 border-t border-light dark:border-dark">
+                        <ul className="list-none m-0 p-0 space-y-3">
+                            {user?.wallet?.transactions?.map(({ id, amount, date, type, metadata }) => {
+                                return (
+                                    <li key={id} className="flex items-center justify-between">
+                                        <div className="flex items-center space-x-2 justify-between w-full">
+                                            <div>
+                                                <TransactionTitle type={type} metadata={metadata} />
+                                                <p className="text-xs text-primary/50 dark:text-primary-dark/50 m-0">
+                                                    {dayjs(date).format('MMM D, YYYY')}
+                                                </p>
+                                            </div>
+
+                                            <p className={`font-bold m-0 ${amount > 0 ? 'text-green' : 'text-red'}`}>
+                                                {amount > 0 ? '+' : ''}
+                                                {amount}
+                                            </p>
+                                        </div>
+                                    </li>
+                                )
+                            })}
+                        </ul>
+                    </div>
+                )}
+            </div>
+        </div>
     )
 }
 
@@ -349,6 +397,18 @@ export default function ProfilePage({ params, location }: PageProps) {
                                             )}
                                         </AnimatePresence>
                                     </div>
+                                    {user?.profile?.id === id && (
+                                        <button
+                                            className={`px-3 pb-2 text-base font-semibold border-b-2 relative top-px ${
+                                                view !== 'points'
+                                                    ? 'border-transparent hover:border-light dark:hover:border-dark text-primary/50 hover:text-primary/75 dark:text-primary-dark/50 dark:hover:text-primary-dark/75 transition-opacity'
+                                                    : 'border-red'
+                                            } p-4 transition-opacity`}
+                                            onClick={() => setView('points')}
+                                        >
+                                            Points
+                                        </button>
+                                    )}
                                 </div>
                                 {(view === 'discussions' || view === 'ama') && (
                                     <Questions
@@ -365,6 +425,7 @@ export default function ProfilePage({ params, location }: PageProps) {
                                         <PostsTable {...posts} />
                                     </ul>
                                 )}
+                                {view === 'points' && <Points />}
                             </div>
                         </>
                     ) : null}

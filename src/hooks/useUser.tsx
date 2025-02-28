@@ -20,6 +20,16 @@ export type User = {
     role: {
         type: 'authenticated' | 'public' | 'moderator'
     }
+    wallet: {
+        balance: number
+        transactions: {
+            id: number
+            amount: number
+            date: Date
+            type: 'achievement' | 'gift'
+            metadata: any
+        }[]
+    }
 }
 
 type UserContextValue = {
@@ -277,6 +287,11 @@ export const UserProvider: React.FC<UserProviderProps> = ({ children }) => {
         const meQuery = qs.stringify(
             {
                 populate: {
+                    wallet: {
+                        populate: {
+                            transactions: true,
+                        },
+                    },
                     profile: {
                         populate: {
                             images: {
