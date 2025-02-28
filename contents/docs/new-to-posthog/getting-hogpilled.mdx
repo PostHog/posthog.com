@@ -4,7 +4,7 @@ nextPage: ./activation.mdx
 ---
 
 import { AnalyticsPlannerTip } from 'components/Docs/AnalyticsPlannerTip'
-import { Admonition } from 'components/Docs/Admonition'
+import { CalloutBox } from 'components/Docs/CalloutBox'
 
 <AnalyticsPlannerTip />
 
@@ -48,12 +48,12 @@ But, as soon as possible, you need a hypothesis of what your users are trying to
 
 It doesn't need to be perfect – a good guess is enough to help you understand what events and actions you need to track – so pick the first thing that feels right and iterate from there.
 
-<Admonition icon="IconPencil" title="Plan your North Star">
+<CalloutBox icon="IconPencil" title="Plan your North Star">
 
 What does traction look like for your business? Which metric corresponds to traction right now? 
 
 Call that your **North Star metric**. Your metric can change as your product evolves, but there should only be one.
-</Admonition>
+</CalloutBox>
 
 ## Defining your v0 metrics tree
 
@@ -99,7 +99,7 @@ If there's a sharp drop between, say, accepting a ride and starting one, that co
 
 Funnels give us the information we need to diagnose problems and measure the impact of new solutions. We'll want to make sure we capture just enough event data to measure the critical path between starting in our product and succeeding with it.
 
-<Admonition icon="IconPencil" title="Planning a metrics tree">
+<CalloutBox icon="IconPencil" title="Planning a metrics tree">
 
 Recap your version of success and your North Star metric, then think about the events that drive that metric.
 
@@ -107,7 +107,7 @@ These are the events that must be captured as part of integrating PostHog.
 
 Your app will have numerous critical paths and funnels within it, but start with the most important one and then add more later. 
 
-</Admonition>
+</CalloutBox>
 
 ## Integration planning
 
@@ -123,23 +123,23 @@ This data collection will help you understand how users interact with your produ
 
 See our docs on [sending events](/docs/getting-started/send-events) and [identifying users](/docs/getting-started/identify-users) for more integration guidance. 
 
-<Admonition icon="IconWarning" title="Avoid event pitfalls" type="caution">
+<CalloutBox icon="IconWarning" title="Avoid event pitfalls" type="caution">
 
 Ideal event names are self-explanatory, avoiding strange abbreviations or codes. Don't stuff data into event names – they should be **comparable across all users** of your product. Instead, we want to tuck additional data into [properties](/docs/data/events#event-properties) *on* events.
 
 Be warned: PostHog's event storage is 'write only' for all practical purposes. You can't edit existing events, so it's important to design against naming drift. Pick a [naming convention](/docs/product-analytics/best-practices#3-implement-a-naming-convention) and stick with it.
 
-</Admonition>
+</CalloutBox>
 
 ### User identity
 
-<Admonition icon="IconPencil" title="Planning user identification">
+<CalloutBox icon="IconPencil" title="Planning user identification">
 
 What **unique identifier** should be used to identify users? Ideally, this is an ID from the database that won't change, but an email address can work too.
 
 Where will `identify()` be called? Typically `identify()` is invoked in the client, but some architectures, like SSR web apps, will call it on the server.
 
-</Admonition>
+</CalloutBox>
 
 Complex authentication flows and tracking anonymous users from both client and server can complicate identifying users.
 

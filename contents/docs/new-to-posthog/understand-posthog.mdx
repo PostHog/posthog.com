@@ -2,7 +2,7 @@
 title: Understanding PostHog
 ---
 
-import { Admonition } from 'components/Docs/Admonition'
+import { CalloutBox } from 'components/Docs/CalloutBox'
 
 PostHog is a lot of power, so to get the most from it, we should review how data is structured, grouped, and related.
 
@@ -37,12 +37,12 @@ If a user upgrades to a paid tier, for example, you could set a property called 
 
 Person profiles need [distinct identifiers](/docs/getting-started/identify-users), so PostHog can accurately track behavior. You might see a few identifiers on each profile: anonymous IDs created before a user has been identified, an ID you set after they log in, and IDs that are created on the client and backend, later merged together into a single profile.
 
-<Admonition icon="IconBook" title="Further reading" type="tip">
+<CalloutBox icon="IconBook" title="Further reading" type="tip">
 
 - [How data is stored in ClickHouse](/docs/how-posthog-works/clickhouse)
 - [How person properties are added to events](/docs/how-posthog-works/ingestion-pipeline#2-person-processing)
 
-</Admonition>
+</CalloutBox>
 
 ### Displaying and organizing data
 

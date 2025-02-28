@@ -8,7 +8,7 @@ const typeStyles = {
     caution: 'bg-red/10 border-l-red',
 }
 
-export const Admonition = ({ icon, title, type = 'info', children }) => {
+export const CalloutBox = ({ icon, title, type = 'info', children }) => {
     const Icon = Icons[icon]
     const styles = typeStyles[type] || typeStyles.info
 
@@ -23,4 +23,4 @@ export const Admonition = ({ icon, title, type = 'info', children }) => {
     )
 }
 
-export default Admonition
+export default CalloutBox
