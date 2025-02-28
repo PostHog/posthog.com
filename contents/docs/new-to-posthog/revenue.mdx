@@ -15,9 +15,9 @@ Either someone has given us money or they have not.
 
 There are two options for tracking revenue in PostHog.
 
-### Option 1 – Manual revenue capture
+## Option 1 – Manual revenue capture
 
-Gathering data about revenue can be straightforward: you know exactly when the event happens, and hopefully you can back out from that event to imagine the precursor events you should also measure.
+Gathering data about revenue can be straightforward: you know exactly when you get paid, and hopefully you can work backwards from that to the precursor events you should also measure.
 
 Start with the place in the product where money changes hands. Put an event there. In addition, capture metadata using event properties: how much money the customer paid and what they paid for. 
 
@@ -32,15 +32,15 @@ posthog.capture('subscription_purchased', {
 
 Try to keep property values strictly numeric – `months: 12` instead of `term: 12_months` – to preserve flexibility in building reports later on.
 
-Even if we don't have a lot of variation in what we're selling at first, record the details now so that later expansions, experiments or sales compare easily with historical data.
+Even if you don't have a lot of variation in what you're selling at first, record the details now so that later expansions, experiments, or sales compare easily with historical data.
 
-Now let's think about the critical path before payment happens. What are the stages or actions that are impossible to bypass to make a purchase?
+Now, let's think about the critical path before payment happens. What are the stages or actions that are impossible to bypass to make a purchase?
 
 These should have events tracked as well. Again, adding metadata to the event properties can help build better reporting and answer questions in the future.
 
-If we've got an upsell or call to action that lists a specific price, that's a great property to include in the event properties
+If we've got an upsell or call to action that lists a specific price, that's great to include as an event property
 
-### Option 2 – Automating revenue capture with data warehouse
+## Option 2 – Automating revenue capture with data warehouse
 
 Even at the earliest stages of a business, data can be scattered between multiple services, forcing you to constantly open multiple browser tabs just to keep up, which means your events might not give you all the data you need. 
 
@@ -48,9 +48,9 @@ Instead of setting up complex event-sending pipelines, you can bring the data di
 
 PostHog's **data warehouse** solves this problem by aggregating multiple data sources. Your dashboards can then report everything captured from data warehouse and analytics events in a single view. You can even build insights that traverse both.
 
-You can query *anything* from your app database with [data warehouse](https://posthog.com/docs/data-warehouse/query). Data warehouse also provides quick setup for ongoing capture of revenue events from [Stripe](https://posthog.com/docs/cdp/sources/stripe) and [Chargebee](https://posthog.com/docs/cdp/sources/chargebee). 
+You can query *anything* from your app database with [data warehouse](/docs/data-warehouse/query). Data warehouse also provides quick setup for ongoing capture of revenue events from [Stripe](/docs/cdp/sources/stripe) and [Chargebee](/docs/cdp/sources/chargebee). 
 
-Just don't forget to capture the actions *leading* to revenue.
+Just don't forget to capture the events *leading* to revenue.
 
 <CalloutBox icon="IconPencil" title="Planning revenue reporting">
 

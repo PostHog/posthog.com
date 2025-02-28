@@ -12,7 +12,7 @@ With integration complete and activation defined, we turn our sights toward meas
 
 This is **retention**. Much like activation, retention can vary from product to product.
 
-Once more, we need to think about retention as a *precursor to revenue*. What kind of ongoing usage can we use to measure that people are happy with what they get from us, and will be just as happy to pay for it?
+Once more, we need to think about retention as a *precursor to revenue*. How can we measure that people are happy with us, and will be just as happy to pay for it?
 
 Activation is a good sign, but if someone doesn't use our product on an ongoing basis, that could be a problem.
 
@@ -20,9 +20,9 @@ The lower our product's retention, the more we have to keep acquiring new custom
 
 ## Thinking about retention
 
-What does retention mean for a social app like **Instagram**? If a user signs up and follows a bunch of people (activation), all of our effort is for nothing if they never come back. We'll have an empty room, no matter how many new rows are added to our users table. In this case, a user returning within a few days, probably several times, would represent strong retention.
+What does retention mean for a social app like **Instagram**? If a user signs up and follows a bunch of people (activation), all of our effort is for nothing if they never come back. We'll have an empty room, no matter how many new rows are added to our users table. In this case, a user returning several times within a few days would represent strong retention.
 
-Actions that show up in your activation metric could also pull double-duty in a retention metric. In the **Uber** example, taking one ride is activation, while taking three rides in a month would demonstrate retention.
+Events that show up in your activation metric could also pull double-duty in a retention metric. In the **Uber** example, taking one ride is activation, while taking three rides in a month would demonstrate retention.
 
 It's also important to think about retention over different periods. Once users remain sticky through the first thirty days, measuring retention over months can also be revealing.
 
@@ -32,12 +32,12 @@ Different products will have different usage patterns. A social app with only on
 
 We can measure retention in PostHog using a **retention insight**.
 
-This works by picking two events, and choosing a timeframe to measure against.
-
 Let's say we want to measure retention of new users, based on whether they return to the product at all over the week after signing up.
 
 1. **Baseline event:** This is where we start measuring. We could choose an event like identify, or a custom event that's created to represent a signup. We could also start from an event that represents activation.  
+
 2. **Retention event:** Something we can measure related to the ongoing usage we hope to see. For our simple example, any pageview would work fine. But you could also be more specific, choosing a defined action or adding filters. This is helpful if there's a high value activity you want to measure, rather than any usage at all.  
+
 3. **Timeframe:** We'd set this for **any of the next 7 days**. Retention measurement is granular: you can choose a timeframe from hours to months.
 
 The result is a table that shows you, for any given day, what percentage of users returned, and how long it took them.
@@ -48,7 +48,7 @@ The result is a table that shows you, for any given day, what percentage of user
 
 Each day in the reporting period of a retention table gives us a cohort of users who did our baseline event. That's why Day 0 is always 100%: it's where we start measuring.
 
-For each period after day zero, the table reports the percentage of users who performed the retention event.
+For each period after day 0, the table reports the percentage of users who performed the retention event.
 
 Days marked with dotted lines represent incomplete data.
 
@@ -66,7 +66,6 @@ Put these into a retention insight and look for signs of a flat curve – i.e. r
 
 </CalloutBox>
 
-### Further reading
 ## Next steps
 
 With activation and retention in place, you're ready to start [tracking revenue with PostHog](/docs/new-to-posthog/revenue).

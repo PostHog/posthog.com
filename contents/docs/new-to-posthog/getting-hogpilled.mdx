@@ -28,7 +28,7 @@ Let's get started.
 
 ## Choosing your North Star metric
 
-We start with a number that represents the health of your immediate goals.
+We start with a number that represents the success of your product.
 
 It's not going to be revenue.
 
@@ -40,7 +40,7 @@ Examples from businesses you've heard of:
 - **Airbnb**: Nights booked  
 - **Uber**: Number of rides
 
-See how easy it is to understand these numbers? A good North Star is measurable and easy to communicate. Everyone on your team, no matter their role, will grasp their relationship to it.
+See how easy it is to understand these numbers? A good North Star is measurable and easy to communicate. Everyone on your team should grasp their relationship to it.
 
 If you're *super* early, you could start with a metric like signups: how many people care enough to try your product? 
 
@@ -65,11 +65,11 @@ Below is a simple version of a metrics tree: events influence your North Star me
 
 **Events** are things that users do that we can track in code, and then measure across all usage of the product.
 
-Several distinct events have to occur to drive your North star metric. Let's go back to the Uber example.
+Several distinct events have to occur to drive your North Star metric. Let's go back to the Uber example.
 
 ### Example: ride sharing
 
-Uber's North star metric is `Number of rides`. This is both the value they give to Uber users, and how it makes money. 
+Uber's North Star metric is `Number of rides`. This is both the value they give to Uber users, and how it makes money. 
 
 But Uber can't make money if no one launches the app, so `app_launched` is an essential event for it to track.
 
@@ -83,7 +83,7 @@ It's these events *together* that give us a picture of how people use the produc
 
 While counting only `ride_started` would give us enough to measure our North Star, it would *not* be enough to learn how to influence it.
 
-What does this look for your product?
+What does this look like for your product?
 
 ### Think about funnels
 
@@ -93,7 +93,7 @@ Because events often happen in a predictable sequence, we can use that sequence 
 
 This is called a **funnel**.
 
-Funnels are simple: they measure successful progress between events. More people will launch the app than start a ride, but you still want to maximize the progress from one to the other. A funnel lets you understand how well that's going.
+Funnels are simple: they measure progress between events. More people launch the app than start a ride, but you still want to maximize the progress from one to the other. A funnel lets you understand how well that's going.
 
 If there's a sharp drop between, say, accepting a ride and starting one, that could point to an issue that needs to be fixed in the product.
 
@@ -125,7 +125,7 @@ See our docs on [sending events](/docs/getting-started/send-events) and [identif
 
 <CalloutBox icon="IconWarning" title="Avoid event pitfalls" type="caution">
 
-Ideal event names are self-explanatory, avoiding strange abbreviations or codes. Don't stuff data into event names – they should be **comparable across all users** of your product. Instead, we want to tuck additional data into [properties](/docs/data/events#event-properties) *on* events.
+Ideal event names are self-explanatory and avoid strange abbreviations or codes. Don't stuff data into event names – they should be **comparable across all users** of your product. Instead, we want to tuck additional data into [properties](/docs/data/events#event-properties) *on* events.
 
 Be warned: PostHog's event storage is 'write only' for all practical purposes. You can't edit existing events, so it's important to design against naming drift. Pick a [naming convention](/docs/product-analytics/best-practices#3-implement-a-naming-convention) and stick with it.
 
@@ -145,7 +145,7 @@ Complex authentication flows and tracking anonymous users from both client and s
 
 PostHog enforces some rules use on how you use the identify function to prevent users from being merged incorrectly. 
 
-Learn more about [Alias](/docs/product-analytics/identify#alias-assigning-multiple-distinct-ids-to-the-same-user) if you intend to provide more than one of your own IDs for a user, or you need to merge identities on the server.
+Learn more about [alias](/docs/product-analytics/identify#alias-assigning-multiple-distinct-ids-to-the-same-user) if you intend to provide more than one of your own IDs for a user, or you need to merge identities on the server.
 
 ## Next steps
 
