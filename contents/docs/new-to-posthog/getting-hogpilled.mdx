@@ -26,7 +26,7 @@ By the end, you'll have everything you need to build a dashboard that captures t
 
 Let's get started.
 
-## North Star metric
+## Choosing your North Star metric
 
 We start with a number that represents the health of your immediate goals.
 
@@ -52,18 +52,20 @@ It doesn't need to be perfect – a good guess is enough to help you understand 
 
 What does traction look like for your business? Which metric corresponds to traction right now? 
 
-Call that your **North Star metric**. You metric can change as your product evolves, but there only be one.
+Call that your **North Star metric**. Your metric can change as your product evolves, but there should only be one.
 </Admonition>
 
-## Defining our v0 metrics tree
+## Defining your v0 metrics tree
 
-With a North Star in mind, we can back out to the **user behavior** that feeds it.
+Once you've chosen your North Star metric, you can back out to the **user behavior** that feeds it.
+
+Below is a simple version of metrics tree where events influence your North Star metric.
 
 <img height="700" alt="abstract-metrics-tree" src="https://res.cloudinary.com/dmukukwp6/image/upload/abstract_metrics_tree_c737164554.png" />
 
 **Events** are things that users do that we can track in code, and then measure across all usage of the product.
 
-And numerous singular events have to occur to drive your North star metric. Let's go back to the Uber example.
+Several distinct events have to occur to drive your North star metric. Let's go back to the Uber example.
 
 ### Example: ride sharing
 
@@ -80,6 +82,8 @@ But even that doesn't quite get us to a ride. We need a couple more: `ride_accep
 It's these events *together* that give us a picture of how people use the product to get a ride. 
 
 While counting only `ride_started` would give us enough to measure our North Star, it would *not* be enough to learn how to influence it.
+
+What does this look for your product?
 
 ### Think about funnels
 
@@ -117,19 +121,13 @@ You're ready to make a plan to capture the data you need need.
 
 This data collection will help you understand how users interact with your product, and how well your product meets your goals.
 
+See our docs on [sending events](/docs/getting-started/send-events) and [identifying users](/docs/getting-started/identify-users) for more integration guidance. 
+
 <Admonition icon="IconWarning" title="Avoid event pitfalls" type="caution">
 
 Ideal event names are self-explanatory, avoiding strange abbreviations or codes. Don't stuff data into event names – they should be **comparable across all users** of your product. Instead, we want to tuck additional data into [properties](/docs/data/events#event-properties) *on* events.
 
 Be warned: PostHog's event storage is 'write only' for all practical purposes. You can't edit existing events, so it's important to design against naming drift. Pick a [naming convention](/docs/product-analytics/best-practices#3-implement-a-naming-convention) and stick with it.
-
-</Admonition>
-
-<Admonition icon="IconPencil" title="Planning user identification">
-
-What **unique identifier** should be used to identify users? Ideally, this is an ID from the database that won't change, but an email address can work too.
-
-Where will `identify()` be called? Typically `identify()` is invoked in the client, but some architectures, like SSR web apps, will call it on the server.
 
 </Admonition>
 
@@ -141,14 +139,13 @@ PostHog enforces some rules use on how you use the identify function to prevent 
 
 Learn more about [Alias](/docs/product-analytics/identify#alias-assigning-multiple-distinct-ids-to-the-same-user) if you intend to provide more than one of your own IDs for a user, or you need to merge identities on the server.
 
-### Integration references
+<Admonition icon="IconPencil" title="Planning user identification">
 
-For more detail on PostHog's data model, identifying users, and general integration guidance, check out our docs:
+What **unique identifier** should be used to identify users? Ideally, this is an ID from the database that won't change, but an email address can work too.
 
-- [PostHog data model](/docs/how-posthog-works/data-model)  
-- [Identifying users](/docs/getting-started/identify-users)  
-- [Event tracking](/tutorials/event-tracking-guide)  
-- [SDKs](/docs/libraries) and [Framework guides](/docs/frameworks)
+Where will `identify()` be called? Typically `identify()` is invoked in the client, but some architectures, like SSR web apps, will call it on the server.
+
+</Admonition>
 
 ## Next steps
 
