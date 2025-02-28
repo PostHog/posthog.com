@@ -23,10 +23,11 @@ Start with the place in the product where money changes hands. Put an event ther
 
 If you're selling subscriptions, record the subscription timeframe. If you're selling products, include the products they purchased. For example:
 
-```
-subscription_purchased  
-months: 12  
-price: 19.99
+```javascript
+posthog.capture('subscription_purchased', {
+	months: 12,
+	price: 19.99
+})
 ```
 
 Try to keep property values strictly numeric – `months: 12` instead of `term: 12_months` – to preserve flexibility in building reports later on.
