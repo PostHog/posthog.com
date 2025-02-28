@@ -15,17 +15,13 @@ availability:
             enterprise: true
 ---
 
-> Multiple organizations and projects aren't available on open source hobby deployments.
-
-## Organizations
-
 An organization is the highest abstraction level within a PostHog instance. It's made up of projects (see more on them [here](/docs/settings/projects)) and members.
 
-Most commonly a PostHog organization represents a real-world company or other type of isolated grouping.
+Most commonly, a PostHog organization represents a real-world company or another type of isolated grouping.
 
-Use the organization dropdown in the top bar to switch between organizations or create a new one.
+You can switch between organizations – or create a new one – from the account popover in the bottom left corner of the screen (marked by your name).
 
-PostHog Cloud users can create, manage, and join organizations without limits.
+PostHog Cloud users can create, manage, and join organizations without limits. In open-source hobby deployments, only one organization is available.
 
 Organization members have different access levels based on their membership type. See more in our [access control docs](/docs/settings/access-control).
 
@@ -40,11 +36,10 @@ Newly-joined users get the basic Member access level.
 
 ### Deleting an organization
 
-Organization can be deleted by any organization Owner. This action is irreversible. See the Danger Zone in your settings for more information.
+An organization can be deleted by the organization owner. Go to the organization settings' "Danger zone" section to do so. This action is irreversible.
 
 ### Notifications
 
-By default every time a member joins an organization in an [email-enabled PostHog instance](/docs/self-host/configure/email) (including PostHog Cloud), all existing members of the organization get notified about this with an email. This increases security by making it explicit who gains access to your product data.
+By default, every time a member joins an organization in an [email-enabled PostHog instance](/docs/self-host/configure/email) (including PostHog Cloud), all existing members of the organization get notified about this with an email. This increases security by making it explicit who gains access to your product data.
 
-If you'd rather not get such notifications, you can disable them in the "Notification Preferences" section of organization settings.
-
+If you'd rather not get such notifications, you can disable them in the "Notification preferences" section of organization settings.
