@@ -1,0 +1,79 @@
+import JSWebErrorTracking from './web-install-error-tracking.mdx'
+
+> You should first follow the [Next.js integration guide](/docs/libraries/next-js) to capture client and server side events.
+
+<JSWebErrorTracking />
+
+### Capturing React component render errors
+
+Next.js uses [error boundaries](https://nextjs.org/docs/app/building-your-application/routing/error-handling#using-error-boundaries) to handle uncaught exceptions by rendering a fallback UI instead of the crashing components.
+
+Create a [Global Error component](https://nextjs.org/docs/app/building-your-application/routing/error-handling#handling-global-errors) in your root layout to capture unhandled exceptions.
+
+```tsx file=app/global-error.tsx
+'use client' // Error boundaries must be Client Components
+
+import posthog from "posthog-js";
+import NextError from "next/error";
+import { useEffect } from "react";
+
+export default function GlobalError({
+  error,
+  reset,
+}: {
+  error: Error & { digest?: string }
+  reset: () => void
+}) {
+  useEffect(() => {
+    posthog.captureException(error);
+  }, [error]);
+
+  return (
+    // global-error must include html and body tags
+    <html>
+      <body>
+        {/* `NextError` is the default Next.js error page component */}
+        <NextError statusCode={0} />
+      </body>
+    </html>
+  )
+}
+```
+
+`error.tsx` files take precedence over the Global error component. If you use `Error` components to handle uncaught exceptions at different levels of you route hierarchy and want to capture the associated exception, you will need to do so manually:
+
+```tsx file=error.tsx
+"use client";  // Error boundaries must be Client Components
+
+import posthog from "posthog-js";
+import { useEffect } from "react";
+
+export default function Error({
+  error,
+  reset,
+}: {
+  error: Error & { digest?: string }
+  reset: () => void
+}) {
+  useEffect(() => {
+    posthog.captureException(error);
+  }, [error]);
+
+  return (
+    ...
+  );
+}
+```
+
+### Capturing server errors
+
+Next.js offers the `onRequestError` hook in `instrumentation.ts` to capture errors that occur during server-side rendering.
+
+```tsx file=instrumentation.ts
+import { type Instrumentation } from 'next'
+import posthog from "posthog-js";
+
+export const onRequestError: Instrumentation.onRequestError = async (err) => {
+  posthog.captureException(error);
+}
+```

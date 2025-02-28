@@ -72,7 +72,7 @@ While there is no fixed budget for onboardings they should be relatively less ex
 
   - Avoid intercontinental travel or choose a location that limits it to the minimum number of people possible
   - You should not need to plan a social activity
-  - Limit attendees to members of your Small Team
+  - Limit attendees to the members of your Small Team only that you think are needed to make it successful (e.g. if your team is 3+ people, not everyone needs to come - you have Offsites as well)
   - See if there are any other onboardings at the same time you could pair up with
 
 Aim to keep things sensible and cheap. As always, use your best judgement when [spending money](/handbook/people/spending-money). Request a budget in Brex for any onboardings you are doing. 
