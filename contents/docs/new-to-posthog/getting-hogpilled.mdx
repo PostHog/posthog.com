@@ -61,7 +61,7 @@ Once you've chosen your North Star metric, you can back out to the **user behavi
 
 Below is a simple version of metrics tree where events influence your North Star metric.
 
-<img height="700" alt="abstract-metrics-tree" src="https://res.cloudinary.com/dmukukwp6/image/upload/abstract_metrics_tree_c737164554.png" />
+<img height="700" alt="abstract-metrics-tree" src="https://res.cloudinary.com/dmukukwp6/image/upload/abstract_metrics_tree_8941f5f0c4.png" />
 
 **Events** are things that users do that we can track in code, and then measure across all usage of the product.
 
@@ -77,7 +77,7 @@ There's still no money until `ride_requested` happens, either.
 
 But even that doesn't quite get us to a ride. We need a couple more: `ride_accepted`  and `ride_started`.
 
-<img width="1688" alt="ride-sharing-metrics-tree" src="https://res.cloudinary.com/dmukukwp6/image/upload/ride_sharing_metrics_tree_a0a1560337.png" />
+<img width="1688" alt="ride-sharing-metrics-tree" src="https://res.cloudinary.com/dmukukwp6/image/upload/ride_share_metrics_f1737bdb62.png" />
 
 It's these events *together* that give us a picture of how people use the product to get a ride. 
 
@@ -87,7 +87,7 @@ What does this look for your product?
 
 ### Think about funnels
 
-<img height="500" alt="ride-sharing-funnel" src="https://res.cloudinary.com/dmukukwp6/image/upload/ride_sharing_funnel_7e4f6b19eb.png" />
+<img height="500" alt="ride-sharing-funnel" src="https://res.cloudinary.com/dmukukwp6/image/upload/ride_share_funnel_f588b22f75.png" />
 
 Because events often happen in a predictable sequence, we can use that sequence to learn if users are getting stuck or bailing out.
 
@@ -133,12 +133,6 @@ Be warned: PostHog's event storage is 'write only' for all practical purposes. Y
 
 ### User identity
 
-Complex authentication flows and tracking anonymous users from both client and server can complicate identifying users.
-
-PostHog enforces some rules use on how you use the identify function to prevent users from being merged incorrectly. 
-
-Learn more about [Alias](/docs/product-analytics/identify#alias-assigning-multiple-distinct-ids-to-the-same-user) if you intend to provide more than one of your own IDs for a user, or you need to merge identities on the server.
-
 <Admonition icon="IconPencil" title="Planning user identification">
 
 What **unique identifier** should be used to identify users? Ideally, this is an ID from the database that won't change, but an email address can work too.
@@ -146,6 +140,12 @@ What **unique identifier** should be used to identify users? Ideally, this is an
 Where will `identify()` be called? Typically `identify()` is invoked in the client, but some architectures, like SSR web apps, will call it on the server.
 
 </Admonition>
+
+Complex authentication flows and tracking anonymous users from both client and server can complicate identifying users.
+
+PostHog enforces some rules use on how you use the identify function to prevent users from being merged incorrectly. 
+
+Learn more about [Alias](/docs/product-analytics/identify#alias-assigning-multiple-distinct-ids-to-the-same-user) if you intend to provide more than one of your own IDs for a user, or you need to merge identities on the server.
 
 ## Next steps
 
