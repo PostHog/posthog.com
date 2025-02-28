@@ -1,6 +1,6 @@
 import React from 'react'
 import Tooltip from 'components/Tooltip'
-import { kebabCase } from 'lib/utils'
+import { kebabCase, slugifyTeamName } from 'lib/utils'
 import Link from 'components/Link'
 import ReactCountryFlag from 'react-country-flag'
 import { ContributorImageSmall } from 'components/PostLayout/Contributors'
@@ -66,7 +66,9 @@ export const TeamMembers = ({ profiles }) => {
                                         <ContributorImageSmall
                                             name={name}
                                             image={avatar}
-                                            className={`!w-10 !h-10 border-[2.5px] border-solid border-white dark:border-primary bg-${color ? color : 'accent'} dark:bg-${color ? color : 'accent-dark'}`}
+                                            className={`!w-10 !h-10 border-[2.5px] border-solid border-white dark:border-primary bg-${
+                                                color ? color : 'accent'
+                                            } dark:bg-${color ? color : 'accent-dark'}`}
                                             imgClassName={``}
                                         />
                                     </span>
@@ -87,7 +89,7 @@ const Team = ({ profiles, leadProfiles, className = '' }) => {
         teamLength > 0 &&
         Math.round(
             (profiles?.data?.filter(({ attributes: { pineappleOnPizza } }) => pineappleOnPizza).length / teamLength) *
-            100
+                100
         )
     const teamLead = profiles?.data?.find(({ id }) => leadProfiles?.data?.[0]?.id === id)
     const teamLeadName = [teamLead?.attributes.firstName, teamLead?.attributes.lastName].filter(Boolean).join(' ')
@@ -159,7 +161,7 @@ export default function Sidebar({ teams }: ISidebarProps) {
                     <>
                         <h3 className="font-semibold text-sm m-0 mb-2">
                             <Link
-                                to={`/teams/${slugify(teams[0].name, { lower: true })}`}
+                                to={`/teams/${slugifyTeamName(teams[0].name)}`}
                                 className="flex w-full justify-between items-center group leading-none rounded p-2 -mx-2 -my-1 hover:bg-gray-accent/50 
                     relative
                     active:top-[0.5px]

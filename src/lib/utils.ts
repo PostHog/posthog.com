@@ -1,4 +1,5 @@
 import { IMenu } from 'components/PostLayout/types'
+import slugify from 'slugify'
 import { AuthorsData, LibraryPluginType } from 'types'
 
 export const unsafeHash = (str: string) => {
@@ -125,4 +126,11 @@ export const groupMenuItems = (items: IMenu[]) => {
         }
     })
     return grouped
+}
+
+export const slugifyTeamName = (name: string) => {
+    return slugify(name.toLowerCase().replace('ops', ''), {
+        lower: true,
+        remove: /and/,
+    })
 }

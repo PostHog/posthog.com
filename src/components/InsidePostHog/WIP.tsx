@@ -4,6 +4,7 @@ import Link from 'components/Link'
 import slugify from 'slugify'
 import { InProgress } from 'components/Roadmap/InProgress'
 import { CallToAction } from 'components/CallToAction'
+import { slugifyTeamName } from 'lib/utils'
 
 const Skeleton = () => <div className="w-full h-96 animate-pulse bg-accent dark:bg-accent-dark rounded-md" />
 
@@ -66,12 +67,7 @@ export default function WIP() {
                             {name}
                         </Link>{' '}
                         <span className="opacity-50">posted on behalf of</span>{' '}
-                        <Link
-                            className="font-bold"
-                            to={`/teams/${slugify(team?.name.toLowerCase().replace('ops', ''), {
-                                remove: /and/,
-                            })}`}
-                        >
+                        <Link className="font-bold" to={`/teams/${slugifyTeamName(team?.name)}`}>
                             {team?.name}
                         </Link>
                     </p>
