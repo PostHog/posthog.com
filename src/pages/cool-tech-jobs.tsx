@@ -39,6 +39,8 @@ import { debounce } from 'lodash'
 import { Authentication } from 'components/Squeak'
 dayjs.extend(relativeTime)
 
+type JobBoardType = 'ashby' | 'greenhouse' | 'gem' | 'kadoa' | 'other'
+
 const toggleFilters = [
     {
         icon: <StickerLaptop className="size-8" />,
@@ -792,7 +794,7 @@ const CompanyForm = ({ onSuccess, companyId }: { onSuccess?: () => void; company
             highEngineerRatio: company?.attributes?.highEngineerRatio || false,
             noDeadlines: company?.attributes?.noDeadlines || false,
             description: company?.attributes?.description || '',
-            jobBoardType: company?.attributes?.jobBoardType || 'ashby',
+            jobBoardType: company?.attributes?.jobBoardType || ('ashby' as JobBoardType),
             logoLight: company?.attributes?.logoLight?.data
                 ? { file: null, objectURL: company?.attributes?.logoLight?.data?.attributes?.url }
                 : undefined,
@@ -858,7 +860,14 @@ const CompanyForm = ({ onSuccess, companyId }: { onSuccess?: () => void; company
                             'content-type': 'application/json',
                         },
                         body: JSON.stringify({
-                            data: { ...rest, profile: profileID },
+                            data: {
+                                ...rest,
+                                slug:
+                                    values.jobBoardType === 'other'
+                                        ? slugify(values.name, { lower: true })
+                                        : values.slug,
+                                profile: profileID,
+                            },
                         }),
                     }
                 )
