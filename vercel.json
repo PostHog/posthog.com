@@ -169,8 +169,9 @@
             "source": "/handbook/people/team-structure/growth-engineering",
             "destination": "/handbook/people/team-structure/growth"
         },
-        { "source": "/docs/user-guides/projects", "destination": "/docs/settings/organizations" },
-        { "source": "/docs/user-guides/organizations", "destination": "/docs/settings/projects" },
+        { "source": "/docs/settings/projects", "destination": "/docs/settings/projects-and-environments" },
+        { "source": "/docs/user-guides/projects", "destination": "/docs/settings/projects-and-environments" },
+        { "source": "/docs/user-guides/organizations", "destination": "/docs/settings/organizations" },
         {
             "source": "/handbook/engineering/enterprise-prioritization",
             "destination": "/handbook/product/enterprise-features-prioritization"
