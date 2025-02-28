@@ -12,11 +12,11 @@ You've should have the basics of your PostHog integration up and rolling now.
 
 Next you need to define and track the behavior that indicates a user is actually getting something from your product.
 
-We call this **activation**: once someone passes this threshold, they're likely to keep coming back, building their skills and otherwise making progress with your product. 
+We call this **activation**: once someone passes this threshold, they're likely to keep coming back and making progress with your product. 
 
 If someone *does not* pass this threshold, they still don't know why you're valuable, and they won't retain.
 
-Like our North Star, we want to think about activation as a precursor to revenue. What steps must someone take in our product to reach the point where they would be happy to pay for it, understanding the value it provides?
+Like your North Star, you need to think about activation as a precursor to revenue. What steps must someone take in your product to understand its value, and become a paying customer?
 
 Just because someone has signed up or logged in doesn't mean they're *using* our tools. That's where measuring activation comes in.
 
@@ -24,7 +24,7 @@ Once we know how many people do or don't activate, we can adjust our product des
 
 ## Activation by example
 
-Let's talk through a few cases of activation you might have seen yourself:
+Let's talk through a few cases of activation you might have seen yourself.
 
 For **Dropbox**, activation was simple: a user who stored one file within the first week was likely to become a long-term customer. Seeing your files sync so seamlessly is persuasive, and likely sparks more ideas about how to use the product. If you never get there, you don't understand the value firsthand.
 
@@ -32,7 +32,7 @@ In **Uber's** case, activation was taking a first ride. Once you understand the 
 
 Some products have wide variability in how they get used, like **Pinterest**. Rather than focus on a specific behavior, they counted activation according to the number of days within a month someone used the product. Anything more than four counted as activation.
 
-Quantity is a totally reasonable factor in activation! For **PostHog's** session replay product, we count activation as anyone who has watched at least five replays. Just looking at one or two is more like kicking the tires.
+Quantity is a totally reasonable factor in activation, too. For **PostHog's** session replay product, we count activation as anyone who has watched at least five replays. Just looking at one or two is more like kicking the tires.
 
 Activation looks different for every product. It can be expressed as a quantity of events, or even as a composite of multiple events.
 
@@ -57,6 +57,10 @@ One good way to start is to use a **funnel**. This will show you progression fro
 You'll see the percentage of dropoff for each step, and this will give you something to chip away at with your product design and development.
 
 Each step in a funnel can be finely constrained using filters, so you're measuring exactly the behavior that you described in the above planning step.
+
+In the above example, an imaginary streaming service called Hogflix, the funnel has three events: `started_trial`, `viewed_content`, and `completed_trial`.
+
+The final event, `completed_trial`, is the activation event here because this is when you can be confident a user has experience the full value of the service.
 
 Read our [Funnel documentation](/docs/product-analytics/funnels) for more on building funnel insights. 
 
