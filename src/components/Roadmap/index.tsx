@@ -20,6 +20,7 @@ import { companyMenu } from '../../navs'
 import Fuse from 'fuse.js'
 import Tooltip from 'components/Tooltip'
 import Spinner from 'components/Spinner'
+import { slugifyTeamName } from 'lib/utils'
 
 interface IGitHubPage {
     title: string
@@ -125,9 +126,7 @@ export const Feature = ({ id, title, teams, description, likeCount, onLike, onUp
                         <h3 className="text-lg m-0 leading-tight">{title}</h3>
                         {teamName && (
                             <Link
-                                to={`/teams/${slugify(teamName.toLowerCase().replace('ops', ''), {
-                                    remove: /and/,
-                                })}`}
+                                to={`/teams/${slugifyTeamName(teamName)}`}
                                 className="text-sm opacity-70 text-inherit hover:opacity-100 hover:text-red dark:hover:text-yellow mt-0.5"
                             >
                                 {teamName} Team

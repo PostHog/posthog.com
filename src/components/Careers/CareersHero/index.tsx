@@ -9,6 +9,7 @@ import slugify from 'slugify'
 import { IconPineapple } from '@posthog/icons'
 import { StickerPineapple, StickerPineappleNo, StickerPineappleYes } from 'components/Stickers/Index'
 import TeamPatch from 'components/TeamPatch'
+import { slugifyTeamName } from 'lib/utils'
 
 const query = graphql`
     query CareersHero {
@@ -150,10 +151,7 @@ export const CareersHero = () => {
     const [selectedTeamName, setSelectedTeamName] = useState(teams[0])
     const selectedTeam = allTeams.find((team) => team.name.toLowerCase() === selectedTeamName.toLowerCase())
     const teamLength = selectedTeam?.profiles?.data?.length
-    const teamURL = `/teams/${slugify((selectedTeam?.name || '').toLowerCase().replace('ops', ''), {
-        lower: true,
-        remove: /and/,
-    })}`
+    const teamURL = `/teams/${slugifyTeamName(selectedTeam?.name || '')}`
     const pineapplePercentage =
         teamLength &&
         teamLength > 0 &&
