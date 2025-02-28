@@ -146,7 +146,7 @@ Ask for access in <PrivateLink url="https://posthog.slack.com/archives/C017WDX3B
 
 - <Link to="https://www.loom.com" external>Loom</Link>
 
-  You'll be added as a _Creator Lite_ which allows you to record 25 videos/mo at up to 5 minutes in length. Should you need a full Creator account (unlimited videos, advanced features), ask <TeamMember name="Simon Fisher" photo />.
+  You'll be added as a _Creator Lite_ which allows you to record 25 videos/mo at up to 5 minutes in length. Should you need a full Creator account (unlimited videos, advanced features), ask <TeamMember name="Mine Kansu" photo /> or <TeamMember name="Simon Fisher" photo />.
 
 - <Link to="https://www.zoom.us" external>Zoom</Link>
   
