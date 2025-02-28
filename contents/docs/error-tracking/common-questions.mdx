@@ -4,6 +4,10 @@ title: Troubleshooting and FAQs
 
 ## FAQs
 
+### How much does error tracking cost?
+
+While in beta, error tracking is **free**. That means `$exception` events **do not** count as events towards your bill. 
+
 ### Are web workers supported?
 
 Yes. Error tracking will work as long as you initialize PostHog in the [web worker](/tutorials/web-worker). You will need to disable any features that rely on the `window` object:
