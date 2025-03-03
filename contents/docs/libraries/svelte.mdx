@@ -91,7 +91,7 @@ export async function load() {
 
 ## Feature flags
 
-To use feature flags in the client-side, import PostHog into your Svelte component and check if the feature is enabled (while ensuring the code only runs in the browser).
+To use client-side feature flags, import PostHog into your Svelte component and check if the feature is enabled (while ensuring the code only runs in the browser).
 
 ```js file=routes/+page.svelte
 <script>
@@ -113,7 +113,7 @@ To use feature flags in the client-side, import PostHog into your Svelte compone
 {/if}
 ```
 
-To use feature flags in the server-side, import PostHog into your SvelteKit `load` function and check if the feature is enabled. 
+To use server-side feature flags, import PostHog into your SvelteKit `load` function and check if the feature is enabled. 
 
 ```js file=routes/+page.server.js
 import { PostHog } from 'posthog-node';
