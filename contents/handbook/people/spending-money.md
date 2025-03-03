@@ -69,6 +69,12 @@ PostHog is an all-remote company. This means it's important you have an ergonomi
 
 PostHog will provide you with office equipment. Please note that it remains PostHog's property.
 
+### YubiKey
+
+We take security seriously, and that means two-factor authentication (2FA). Posthog uses YubiKeys serve as a physical "something you have" factor, providing significantly stronger security than SMS codes or authenticator apps.
+
+Please purchase a YubiKey of your choosing from Amazon. There are several form factors available, so select the one that best suits you and your laptop.
+
 ### Laptop
 
 We'd prefer you to use a laptop. This is so when we host meetups in real life, you can easily bring your work with you. You should use an Apple laptop unless there is an exceptional reason why you can't, just to keep life simpler - for example, that means everyone can use the same software, and as we get bigger, it'll mean we're dealing with one supplier, not many. Please make sure you order a laptop with a keyboard that is US/UK/International English - this makes it much easier for us to reuse your laptop if you upgrade to another model or leave PostHog. 
