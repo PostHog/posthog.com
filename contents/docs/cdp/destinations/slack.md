@@ -1,6 +1,7 @@
 ---
 title: Send PostHog event data to Slack webhooks
-templateId: template-slack
+templateId:
+    - template-slack
 ---
 
 import Requirements from "../_snippets/requirements.mdx"

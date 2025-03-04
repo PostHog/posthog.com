@@ -1,6 +1,7 @@
 ---
 title: Send analytics events to June
-templateId: template-june
+templateId:
+    - template-june
 ---
 
 import Requirements from "../_snippets/requirements.mdx"

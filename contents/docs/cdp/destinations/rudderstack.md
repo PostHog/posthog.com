@@ -1,6 +1,7 @@
 ---
 title: Send PostHog event data to RudderStack
-templateId: template-rudderstack
+templateId:
+    - template-rudderstack
 ---
 
 import Requirements from "../_snippets/requirements.mdx"

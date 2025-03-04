@@ -1,6 +1,7 @@
 ---
 title: Send PostHog events to Intercom
-templateId: template-intercom
+templateId:
+    - template-intercom
 ---
 
 import Requirements from "../_snippets/requirements.mdx"

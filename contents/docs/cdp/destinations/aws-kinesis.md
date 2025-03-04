@@ -1,6 +1,7 @@
 ---
 title: Send PostHog event data to AWS Kinesis
-templateId: template-aws-kinesis
+templateId:
+    - template-aws-kinesis
 ---
 
 import Requirements from "../_snippets/requirements.mdx"
