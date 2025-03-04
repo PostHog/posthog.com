@@ -243,7 +243,11 @@ export default function Reply({ reply, badgeText }: ReplyProps) {
         () => reply?.attributes?.downvoteProfiles?.data?.some((profile) => profile?.id === user?.profile?.id),
         [reply?.attributes?.downvoteProfiles, user?.profile?.id]
     )
-
+    const upvotes = useMemo(() => reply?.attributes?.upvoteProfiles?.data?.length, [reply?.attributes?.upvoteProfiles])
+    const downvotes = useMemo(
+        () => reply?.attributes?.downvoteProfiles?.data?.length,
+        [reply?.attributes?.downvoteProfiles]
+    )
     return profile?.data ? (
         <div onClick={handleContainerClick}>
             <div className="pb-1 flex items-center space-x-2">
@@ -402,7 +406,7 @@ export default function Reply({ reply, badgeText }: ReplyProps) {
                                             ) : (
                                                 <IconThumbsUp className="size-4 mr-1 text-primary/70 dark:text-primary-dark/70 inline-block" />
                                             )}
-                                            Upvote
+                                            {upvotes}
                                         </button>
                                         <button
                                             onClick={async () => {
@@ -416,7 +420,7 @@ export default function Reply({ reply, badgeText }: ReplyProps) {
                                             ) : (
                                                 <IconThumbsDown className="size-4 mr-1 text-primary/70 dark:text-primary-dark/70 inline-block" />
                                             )}
-                                            Downvote
+                                            {downvotes}
                                         </button>
                                         {isReplyAuthor && (
                                             <button
