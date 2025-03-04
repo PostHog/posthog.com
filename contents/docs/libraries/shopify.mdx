@@ -56,11 +56,11 @@ for further reading refer to [PixieHog documentation](https://pxhog.com/docs/int
 
 > To confirm PostHog is configured correctly, visit your store and then check if the events from your session appear in the [PostHog activity tab](https://us.posthog.com/events). This may take a few minutes.
 
-## Tracking conversions
+### Tracking conversions
 
 Shopify's checkout flow doesn't allow arbitrary JavaScript to be run, so the PostHog JavaScript snippet cannot be used directly on the checkout page or post-purchase page. However, you can still track conversions by using a [custom web pixel](https://shopify.dev/docs/api/web-pixels-api#custom-web-pixels).
 
-### Setting up a custom web pixel
+#### Setting up a custom web pixel
 
 To set this up, first, go to the [customer events](https://admin.shopify.com/settings/customer_events) tab in your store settings, click "Add custom pixel," and give your pixel a name.
 
