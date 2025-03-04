@@ -71,9 +71,7 @@ PostHog will provide you with office equipment. Please note that it remains Post
 
 ### YubiKey
 
-We take security seriously, and that means two-factor authentication (2FA). Posthog uses YubiKeys serve as a physical "something you have" factor, providing significantly stronger security than SMS codes or authenticator apps.
-
-Please purchase a YubiKey of your choosing from Amazon. There are several form factors available, so select the one that best suits you and your laptop.
+We enforce the use of hardware security keys wherever we can. Every team member needs two Yubikeys. You can find them on Amazon, and we suggest you order them at the same time you purchase your laptop. You can read more about security keys in the [multi-factor authentication entry](https://posthog.com/handbook/company/security#multi-factor-authentication). 
 
 ### Laptop
 
