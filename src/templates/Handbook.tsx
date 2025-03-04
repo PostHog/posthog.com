@@ -227,7 +227,7 @@ export const AppParametersFactory: (params: AppParametersProps) => React.FC = ({
 export const TemplateParametersFactory: (params: TemplateParametersProps) => React.FC = (templateConfigs) => {
     const TemplateParameters = ({ templateId }: { templateId?: string }) => {
         const input_schema =
-            templateConfigs.find((t) => t.templateId === templateId)?.config || templateConfigs?.[0]?.config
+            templateConfigs?.find((t) => t.templateId === templateId)?.config || templateConfigs?.[0]?.config
         if (!input_schema) {
             return null
         }
