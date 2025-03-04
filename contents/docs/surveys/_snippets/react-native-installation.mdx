@@ -1,0 +1,45 @@
+## Step one: Add PostHog to your app
+
+> Requires PostHog React Native SDK version >= [3.12.0](https://github.com/PostHog/posthog-js-lite/releases), and it's recommended to always use the latest version.
+
+import ReactNativeInstall from "../../integrate/_snippets/install-react-native.mdx"
+
+<ReactNativeInstall />
+
+## Step two: Add the Surveys Provider
+
+Add `PostHogSurveyProvider` to your app anywhere inside `PostHogProvider`. This component fetches surveys. It also acts as the root for where popover surveys are rendered.
+
+```ts
+<PostHogProvider /*... your config ...*/>
+  <PostHogSurveyProvider>{children}</PostHogSurveyProvider>
+</PostHogProvider>
+```
+
+## Supported Features
+
+| Feature                           | Support                            |
+| --------------------------------- | ---------------------------------- |
+| **Questions**                     |                                    |
+| All question types                | ✅                                 |
+| Multi-question surveys            | ✅                                 |
+| Confirmation message              | ✅                                 |
+| Feedback Button Presentation      | ❌                                 |
+| **Customization / Appearance**    |                                    |
+| Set colors in PostHog Dashboard   | ✅ Or override with your app theme |
+| Shuffle Questions                 | ❌                                 |
+| PostHog branding                  | ❌                                 |
+| Delay popup after page load       | ❌                                 |
+| Position config                   | ❌ Always bottom center            |
+| **Display conditions**            |                                    |
+| Feature flag & property targeting | ✅                                 |
+| URL Targeting                     | ❌                                 |
+| Device type Targeting             | ✅                                 |
+| CSS Selector Matches              | ❌                                 |
+| Survey Wait period                | ❌                                 |
+| Event Triggers                    | ✅                                 |
+| Action Triggers                   | ❌                                 |
+
+## Troubleshooting
+
+- Alpha state
