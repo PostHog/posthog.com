@@ -1,6 +1,7 @@
 ---
 title: Create and update Attio CRM contacts from analytics events
-templateId: template-attio
+templateId:
+    - template-attio
 ---
 
 import Requirements from "../_snippets/requirements.mdx"

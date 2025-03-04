@@ -1,6 +1,8 @@
 ---
 title: Send PostHog person data to Mailjet
-templateId: template-mailjet-create-contact
+templateId:
+    - template-mailjet-create-contact
+    - template-mailjet-update-contact-list
 ---
 
 import Requirements from "../_snippets/requirements.mdx"

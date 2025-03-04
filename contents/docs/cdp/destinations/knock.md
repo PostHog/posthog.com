@@ -1,6 +1,7 @@
 ---
 title: Send PostHog event data to Knock
-templateId: template-knock
+templateId:
+    - template-knock
 ---
 
 import Requirements from "../_snippets/requirements.mdx"

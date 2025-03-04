@@ -1,6 +1,7 @@
 ---
 title: Create and update Mailchimp contacts from analytics events
-templateId: template-mailchimp
+templateId:
+    - template-mailchimp
 ---
 
 import Requirements from "../_snippets/requirements.mdx"

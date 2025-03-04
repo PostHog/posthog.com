@@ -217,27 +217,32 @@ export const onCreateNode: GatsbyNode['onCreateNode'] = async ({
         }
 
         if (/^\/docs\/(apps|cdp)/.test(slug) && node?.frontmatter?.templateId) {
-            const templateId = node.frontmatter.templateId
+            const templateIds = node.frontmatter.templateId
 
             try {
-                const res = await fetch(`https://us.posthog.com/api/public_hog_function_templates/`)
+                const templateConfigs = []
+                for (const templateId of templateIds) {
+                    const res = await fetch(`https://us.posthog.com/api/public_hog_function_templates/`)
 
-                if (res.status !== 200) {
-                    throw `Got status code ${res.status}`
+                    if (res.status !== 200) {
+                        throw `Got status code ${res.status}`
+                    }
+
+                    const body = await res.json()
+                    const config = body.results.find(
+                        (template: { id: string }) => template?.id === templateId
+                    ).inputs_schema
+
+                    if (config) {
+                        templateConfigs.push({ templateId, config })
+                    }
                 }
 
-                const body = await res.json()
-                const config = body.results.find(
-                    (template: { id: string }) => template?.id === templateId
-                ).inputs_schema
-
-                if (config) {
-                    createNodeField({
-                        node,
-                        name: `templateConfig`,
-                        value: config,
-                    })
-                }
+                createNodeField({
+                    node,
+                    name: `templateConfigs`,
+                    value: templateConfigs,
+                })
             } catch (error) {
                 console.error(`Error fetching input_schema for ${templateId}: ${error}`)
             }
