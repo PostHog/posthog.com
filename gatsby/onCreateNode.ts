@@ -244,7 +244,7 @@ export const onCreateNode: GatsbyNode['onCreateNode'] = async ({
                     value: templateConfigs,
                 })
             } catch (error) {
-                console.error(`Error fetching input_schema for ${templateId}: ${error}`)
+                console.error(`Error fetching input_schema for ${templateIds}: ${error}`)
             }
         }
     }
