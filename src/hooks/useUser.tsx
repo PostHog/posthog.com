@@ -59,7 +59,7 @@ type UserContextValue = {
     notifications: any
     setNotifications: any
     isValidating: boolean
-    voteReply: (id: number, vote: 'up' | 'down', unvote?: boolean) => Promise<void>
+    voteReply: (id: number, vote: 'up' | 'down', unvote?: boolean, user?: User) => Promise<void>
 }
 
 export const UserContext = createContext<UserContextValue>({
@@ -558,8 +558,11 @@ export const UserProvider: React.FC<UserProviderProps> = ({ children }) => {
         })
     }
 
-    const voteReply = async (id: number, vote: 'up' | 'down', unvote = false) => {
-        await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/profiles/${user?.profile.id}`, {
+    const voteReply = async (id: number, vote: 'up' | 'down', unvote = false, user: User) => {
+        const profileID = user?.profile?.id
+        if (!profileID) return
+        const jwt = await getJwt()
+        await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/profiles/${profileID}`, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',

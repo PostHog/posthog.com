@@ -1,5 +1,5 @@
 import React, { useContext, useMemo, useState } from 'react'
-import { useUser } from 'hooks/useUser'
+import { User, useUser } from 'hooks/useUser'
 import Days from './Days'
 import Markdown from './Markdown'
 import { StrapiRecord, ReplyData } from 'lib/strapi'
@@ -24,6 +24,8 @@ import usePostHog from 'hooks/usePostHog'
 import { IconFeatures } from '@posthog/icons'
 import Tooltip from 'components/Tooltip'
 import EditWrapper from './EditWrapper'
+import { Authentication } from '..'
+import SideModal from 'components/Modal/SideModal'
 
 type ReplyProps = {
     reply: StrapiRecord<ReplyData>
@@ -195,6 +197,89 @@ const AIDisclaimer = ({ replyID, mutate, topic, confidence, resolvable }) => {
     )
 }
 
+const AuthModal = ({
+    authModalOpen,
+    setAuthModalOpen,
+    onAuth,
+}: {
+    authModalOpen: boolean
+    setAuthModalOpen: React.Dispatch<React.SetStateAction<boolean>>
+    onAuth: (user: User) => void
+}) => {
+    return (
+        <SideModal open={authModalOpen} setOpen={setAuthModalOpen}>
+            <h4 className="mb-4">Sign into PostHog.com</h4>
+            <div className="bg-border dark:bg-border-dark p-4 mb-2">
+                <p className="text-sm mb-2">
+                    <strong>Note: PostHog.com authentication is separate from your PostHog app.</strong>
+                </p>
+
+                <p className="text-sm mb-0">
+                    We suggest signing up with your personal email. Soon you'll be able to link your PostHog app
+                    account.
+                </p>
+            </div>
+
+            <Authentication onAuth={onAuth} initialView="sign-in" showBanner={false} showProfile={false} />
+        </SideModal>
+    )
+}
+
+const VoteButton = ({
+    id,
+    type,
+    voted,
+    votes,
+    onVote,
+}: {
+    id: number
+    type: 'up' | 'down'
+    voted: boolean
+    votes: number
+    onVote: () => void
+}) => {
+    const [authModalOpen, setAuthModalOpen] = useState(false)
+    const { voteReply, user } = useUser()
+
+    const vote = async (user: User) => {
+        await voteReply(id, type, voted, user)
+        onVote?.()
+    }
+
+    const handleClick = () => {
+        if (!user) {
+            setAuthModalOpen(true)
+        } else {
+            vote(user)
+        }
+    }
+
+    const Icon =
+        type === 'up' ? (voted ? IconThumbsUpFilled : IconThumbsUp) : voted ? IconThumbsDownFilled : IconThumbsDown
+
+    return (
+        <>
+            <AuthModal
+                authModalOpen={authModalOpen}
+                setAuthModalOpen={setAuthModalOpen}
+                onAuth={(user) => {
+                    if (user) {
+                        vote(user)
+                        setAuthModalOpen(false)
+                    }
+                }}
+            />
+            <button
+                onClick={handleClick}
+                className="text-red dark:text-yellow font-semibold text-sm flex items-center py-1 px-1.5 rounded hover:bg-accent dark:hover:bg-border-dark/50"
+            >
+                <Icon className="size-4 mr-1 text-primary/70 dark:text-primary-dark/70 inline-block" />
+                {votes}
+            </button>
+        </>
+    )
+}
+
 export default function Reply({ reply, badgeText }: ReplyProps) {
     const {
         id,
@@ -248,6 +333,7 @@ export default function Reply({ reply, badgeText }: ReplyProps) {
         () => reply?.attributes?.downvoteProfiles?.data?.length,
         [reply?.attributes?.downvoteProfiles]
     )
+
     return profile?.data ? (
         <div onClick={handleContainerClick}>
             <div className="pb-1 flex items-center space-x-2">
@@ -394,34 +480,20 @@ export default function Reply({ reply, badgeText }: ReplyProps) {
                                             isModerator ? `bg-light dark:bg-dark px-1 mr-4 -mt-5` : ''
                                         }`}
                                     >
-                                        <button
-                                            onClick={async () => {
-                                                await voteReply(id, 'up', upvoted)
-                                                mutate()
-                                            }}
-                                            className="text-red dark:text-yellow font-semibold text-sm flex items-center py-1 px-1.5 rounded hover:bg-accent dark:hover:bg-border-dark/50"
-                                        >
-                                            {upvoted ? (
-                                                <IconThumbsUpFilled className="size-4 mr-1 text-primary/70 dark:text-primary-dark/70 inline-block" />
-                                            ) : (
-                                                <IconThumbsUp className="size-4 mr-1 text-primary/70 dark:text-primary-dark/70 inline-block" />
-                                            )}
-                                            {upvotes}
-                                        </button>
-                                        <button
-                                            onClick={async () => {
-                                                await voteReply(id, 'down', downvoted)
-                                                mutate()
-                                            }}
-                                            className="text-red dark:text-yellow font-semibold text-sm flex items-center py-1 px-1.5 rounded hover:bg-accent dark:hover:bg-border-dark/50"
-                                        >
-                                            {downvoted ? (
-                                                <IconThumbsDownFilled className="size-4 mr-1 text-primary/70 dark:text-primary-dark/70 inline-block" />
-                                            ) : (
-                                                <IconThumbsDown className="size-4 mr-1 text-primary/70 dark:text-primary-dark/70 inline-block" />
-                                            )}
-                                            {downvotes}
-                                        </button>
+                                        <VoteButton
+                                            id={id}
+                                            type="up"
+                                            voted={upvoted}
+                                            votes={upvotes}
+                                            onVote={() => mutate()}
+                                        />
+                                        <VoteButton
+                                            id={id}
+                                            type="down"
+                                            voted={downvoted}
+                                            votes={downvotes}
+                                            onVote={() => mutate()}
+                                        />
                                         {isReplyAuthor && (
                                             <button
                                                 onClick={() => setEditing(true)}
