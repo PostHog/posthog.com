@@ -21,7 +21,7 @@ By default, CloudFront doesn't forward headers, cookies, or query parameters rec
 2. Set the origin domain to your PostHog instance `us.i.posthog.com` or `eu.i.posthog.com` for PostHog Cloud).
 3. Select HTTPS only.
 4. Under Default cache behavior, go to Viewer. “Under Allowed HTTP methods,” select “GET, HEAD, OPTIONS, PUT, POST, PATCH, DELETE,” and check OPTIONS under “Cache HTTP methods.” This allows all HTTP methods.
-5. Under [Cache policy](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/controlling-origin-requests.html#origin-request-create-origin-request-policy), click “Create policy.” On the “Create cache policy” page:
+5. Under [Cache policy](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/controlling-origin-requests.html#origin-request-create-origin-request-policy), click “Create cache policy.” On the “Create cache policy” page:
     1. Name your policy “origin-cors.” 
     2. Scroll to “Cache key settings,” click the dropdown for “Headers” that says “Include the following headers,” select Origin and Authorization. 
     3. Under “Query strings,” select “All.”
@@ -37,11 +37,17 @@ export const diagram = "https://res.cloudinary.com/dmukukwp6/image/upload/postho
 9. Do not enable AWS Web Application Firewall (WAF).
 10. Click “Create distribution” at bottom of the page.
 11. Edit the Cloudfront Distribution and add the assets origin `us-assets.i.posthog.com` or `eu-assets.i.posthog.com`.
-14. Add another behavior the path will be `/static/*`.
-15. Under "Origin,", choose the one created above.
-17. Under “cache policy,” choose “origin-cors”
-18. Under “Origin request policy,” choose “CORS-CustomOrigin.”
-19. Under “Response headers policy,” choose “CORS-with-preflight-and-SecurityHeadersPolicy.”
+12. Add another behavior the path will be `/static/*`.
+13. Under "Origin,", choose the one created above.
+14. Under “cache policy,” choose “origin-cors”
+15. Under “Origin request policy,” click “Create origin request policy.” On the “Create origin request policy” page:
+    1. Name your policy "origin-request-policy."
+    2. Under "Headers," select "Include the following headers."
+    3. Under "Add header", select "Origin."
+    4. Under "Query strings", select "All."
+    5. Click “Create” at bottom of the page.
+16. Under Origin request policy,” choose "origin-request-policy."
+17. Under “Response headers policy,” choose “CORS-with-preflight-and-SecurityHeadersPolicy.”
 
 Once created, copy the distribution domain name, and set it as your API host in your PostHog initialization like this:
 
@@ -55,10 +61,3 @@ posthog.init('<ph_project_api_key>',
 ```
 
 You can find out about [CloudFront pricing on the AWS website](https://aws.amazon.com/cloudfront/pricing/).
-
-## Setup video
-
-<iframe
-  src="https://www.youtube-nocookie.com/embed/FzMtbhEQDCM"
-  className="rounded shadow-xl"
-/>
