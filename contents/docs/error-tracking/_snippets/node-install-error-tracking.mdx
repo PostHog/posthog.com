@@ -14,6 +14,18 @@ const client = new PostHog(
 
 ```
 
+Express handles uncaught errors by default. You will need to call `setupExpressErrorHandler` with your PostHog client and Express app if you are using the Express framework and want to autocapture exceptions.
+
+```node file=server.ts
+import express from 'express'
+import { PostHog, setupExpressErrorHandler } from 'posthog-node'
+
+const app = express()
+const posthog = new PostHog(PH_API_KEY)
+
+setupExpressErrorHandler(posthog, app)
+```
+
 > ⚠️ Error tracking requires access the file system to process stack traces. Cloudflare workers do not support Node.js runtime APIs by default and need to be [included as per their documentation](https://developers.cloudflare.com/workers/runtime-apis/nodejs/#nodejs-compatibility).
 
 For exceptions handled by your application that you would still like sent to PostHog, you can manually call the capture method:
