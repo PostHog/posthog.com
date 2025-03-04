@@ -9,7 +9,7 @@ import PostHogMaintained from "../_snippets/posthog-maintained.mdx"
 
 <Requirements />
 
-You'll also need access to the relevant Google Cloud, Google Ads and Google Ads Manager account.
+You'll also need access to the relevant Google Ads account.
 
 ## Installation
 
@@ -32,11 +32,13 @@ You'll also need access to the relevant Google Cloud, Google Ads and Google Ads 
 7. Create a conversion action inside Google Ads
    1. Under [Goals > Conversions > Summary](https://ads.google.com/aw/conversions), you'll need to create a conversion action
    2. Click **New conversion action**
-   3. Select **Import**
-   4. Click **CRMs, files, or other data sources** and **Track conversions from clicks**
-   5. Under data source, select **skip this step and set up a data source later**
-   6. Click **Continue**, fill in the conversion type and name
-   7. Press **Save and continue**
+   3. Enable **Conversions offline** and click **Add data source**
+      1. Click **Skip this step and set up a data source later**
+      2. Click **Done**
+   4. Select the conversion type that you want to capture
+   5. Click **Add a conversion action** and select **Add data source later**
+   6. Click **Settings**, edit the **Conversion name** and click **Done**
+   7. Click **Save and continue** and **Finish**
 
 ![Steps to create a conversion action inside Google Ads](https://res.cloudinary.com/dmukukwp6/image/upload/2024_11_09_at_14_52_07_dfb486cd19.gif)
 
