@@ -7,14 +7,43 @@ icon: >-
 export const eventLight = 'https://res.cloudinary.com/dmukukwp6/image/upload/v1711383938/posthog.com/contents/images/tutorials/shopify/event-light.png'
 export const eventDark = 'https://res.cloudinary.com/dmukukwp6/image/upload/v1711383938/posthog.com/contents/images/tutorials/shopify/event-dark.png'
 
-## Installing PostHog in a Shopify theme
+PostHog makes it easy to get data about traffic and usage of your Shopify store. Integrating PostHog into your site enables analytics about user behavior, custom events capture, session recordings, feature flags, and more.
 
-To have unrestricted access to the features of PostHog in your Shopify store, you can install PostHog in your Shopify theme. To do this:
+This guide walks you through integrating PostHog into your Shopify store using [PixieHog](https://pixiehog.com/) Shopify app or the manual option.
 
-1. Get your PostHog JavaScript snippet from [your project settings](https://us.posthog.com/settings/project#snippet)
-1. Login to your Shopify dashboard
-1. Go to 'Online Store' -> 'Themes' 
-1. On your theme, click 'Actions' -> 'Edit code'
+## Option 1: PixieHog Shopify app
+
+PixieHog is a GUI to setup PostHog with [Shopify Customer Privacy API](https://shopify.dev/docs/api/customer-privacy) and [Shopify Web Pixels API](https://shopify.dev/docs/api/web-pixels-api).
+
+1. Install PixieHog from the Shopify App Store: [here](https://apps.shopify.com/pixiehog)
+2. Configure app general settings
+   - Retrieve and set [PostHog Project API Key](https://app.posthog.com/settings/project#variables)
+   - Retrieve and choose your PostHog API host
+      - Recommendation: Setup a [reverse proxy](https://posthog.com/docs/advanced/proxy) to capture more usage data
+
+![PixieHog - Home UI](https://cdn.shopify.com/s/files/1/0890/6276/8969/files/home-min.png)
+
+3. Go to 'Web Pixels Events'
+   - Turn on the channel
+   - Choose the relevant events for your use case.
+      - Events documentation is available at Shopify -> Web Pixels API -> [Standard Events](https://shopify.dev/docs/api/web-pixels-api/standard-events)
+
+![PixieHog - Web Pixel Events UI](https://cdn.shopify.com/s/files/1/0890/6276/8969/files/web-pixel-events-min.png)
+
+4. Go to 'JS Web Config'
+   - Turn on the channel
+   - Enable PixieHog app embed on your live theme - Make sure to save the theme editor session.
+   - Set `ui_host` to match your PostHog Cloud region.
+   - Choose the relevant settings for your use case.
+      - Settings documentation is available at Posthog -> Javascript Web SDK -> [Configuration](https://posthog.com/docs/libraries/js/config)
+
+![PixieHog - JS Web Config UI](https://cdn.shopify.com/s/files/1/0890/6276/8969/files/js-web-config-min.png)
+
+The app source code is available for self-hosting on [Github](https://github.com/celadonworks/pixiehog-app).
+
+for further reading refer to [PixieHog documentation](https://pxhog.com/docs/introduction).
+
+## Option 2: Installing PostHog manually into the theme
 
 ![Shopify Dashboard](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/shopify/shopify-dashboard.png)
 
