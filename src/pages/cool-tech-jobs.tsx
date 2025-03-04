@@ -14,6 +14,7 @@ import {
     IconShield,
     IconArrowLeft,
     IconArrowRight,
+    IconSpinner,
 } from '@posthog/icons'
 import Link from 'components/Link'
 import dayjs from 'dayjs'
@@ -38,6 +39,8 @@ import uploadImage from 'components/Squeak/util/uploadImage'
 import { debounce } from 'lodash'
 import { Authentication } from 'components/Squeak'
 dayjs.extend(relativeTime)
+
+type JobBoardType = 'ashby' | 'greenhouse' | 'gem' | 'kadoa' | 'other'
 
 const toggleFilters = [
     {
@@ -181,6 +184,9 @@ const Companies = ({
     onEdit,
     onDelete,
     hasFilters,
+    fetchMore,
+    hasMore,
+    companiesValidating,
 }: {
     companiesLoading: boolean
     companies: Company[]
@@ -189,6 +195,9 @@ const Companies = ({
     onEdit: (companyId: number) => void
     onDelete: (companyId: number, companyName: string) => void
     hasFilters: boolean
+    fetchMore: () => void
+    hasMore: boolean
+    companiesValidating: boolean
 }) => {
     const { isModerator } = useUser()
     const { websiteTheme } = useValues(layoutLogic)
@@ -224,89 +233,105 @@ const Companies = ({
                     </button>
                 )}
             </div>
-            <ul
-                className={`@container list-none p-0 m-0 space-y-8 pt-4 pb-12 mt-2 mx-auto transition-all ${
-                    fullWidthContent ? 'max-w-full' : ' max-w-4xl'
-                }`}
-            >
-                {companies.map((company) => {
-                    const { name } = company.attributes
-                    const logoLight = company.attributes.logoLight?.data?.attributes?.url
-                    const logoDark = company.attributes.logoDark?.data?.attributes?.url
-                    const hasJobs = company.attributes.jobs.data.length > 0
-                    return (isModerator && !search && !hasFilters) || hasJobs ? (
-                        <li
-                            className={`@2xl:flex @2xl:space-x-8 items-start ${!hasJobs ? 'opacity-60' : ''}`}
-                            key={company.id}
-                        >
-                            <div className="@2xl:sticky top-0 reasonable:top-[142px] pb-4 z-10 bg-light dark:bg-dark @2xl:flex-[0_0_230px]">
-                                {(logoLight || logoDark) && (
-                                    <>
-                                        {company.attributes.url ? (
-                                            <Link to={`${company.attributes.url}?utm_source=posthog`} externalNoIcon>
+            <div className={`pt-4 pb-12 mt-2 mx-auto transition-all ${fullWidthContent ? 'max-w-full' : ' max-w-4xl'}`}>
+                <ul className={`@container list-none p-0 m-0 space-y-8`}>
+                    {companies.map((company) => {
+                        const { name } = company.attributes
+                        const logoLight = company.attributes.logoLight?.data?.attributes?.url
+                        const logoDark = company.attributes.logoDark?.data?.attributes?.url
+                        const hasJobs = company.attributes.jobs.data.length > 0
+                        return (isModerator && !search && !hasFilters) || hasJobs ? (
+                            <li
+                                className={`@2xl:flex @2xl:space-x-8 items-start ${!hasJobs ? 'opacity-60' : ''}`}
+                                key={company.id}
+                            >
+                                <div className="@2xl:sticky top-0 reasonable:top-[142px] pb-4 z-10 bg-light dark:bg-dark @2xl:flex-[0_0_230px]">
+                                    {(logoLight || logoDark) && (
+                                        <>
+                                            {company.attributes.url ? (
+                                                <Link
+                                                    to={`${company.attributes.url}?utm_source=posthog`}
+                                                    externalNoIcon
+                                                >
+                                                    <img
+                                                        className="max-w-40 mb-3"
+                                                        src={logoDark && websiteTheme === 'dark' ? logoDark : logoLight}
+                                                        alt={name}
+                                                    />
+                                                </Link>
+                                            ) : (
                                                 <img
                                                     className="max-w-40 mb-3"
                                                     src={logoDark && websiteTheme === 'dark' ? logoDark : logoLight}
                                                     alt={name}
                                                 />
-                                            </Link>
-                                        ) : (
-                                            <img
-                                                className="max-w-40 mb-3"
-                                                src={logoDark && websiteTheme === 'dark' ? logoDark : logoLight}
-                                                alt={name}
-                                            />
-                                        )}
-                                    </>
-                                )}
-                                {company.attributes.description && (
-                                    <p className="m-0 text-sm font-medium text-primary/75 dark:text-primary-dark/75">
-                                        {company.attributes.description}
-                                    </p>
-                                )}
+                                            )}
+                                        </>
+                                    )}
+                                    {company.attributes.description && (
+                                        <p className="m-0 text-sm font-medium text-primary/75 dark:text-primary-dark/75">
+                                            {company.attributes.description}
+                                        </p>
+                                    )}
 
-                                {company.attributes.url && (
-                                    <Link
-                                        href={`${company.attributes.url}?utm_source=posthog`}
-                                        className="group flex items-center gap-0.5 text-sm text-red dark:text-yellow font-semibold mb-2"
-                                        externalNoIcon
-                                    >
-                                        Learn more
-                                        <IconArrowUpRight className="size-4 opacity-0 group-hover:opacity-50 text-primary dark:text-primary-dark" />
-                                    </Link>
-                                )}
+                                    {company.attributes.url && (
+                                        <Link
+                                            href={`${company.attributes.url}?utm_source=posthog`}
+                                            className="group flex items-center gap-0.5 text-sm text-red dark:text-yellow font-semibold mb-2"
+                                            externalNoIcon
+                                        >
+                                            Learn more
+                                            <IconArrowUpRight className="size-4 opacity-0 group-hover:opacity-50 text-primary dark:text-primary-dark" />
+                                        </Link>
+                                    )}
 
-                                <h4 className="text-sm font-medium text-primary/50 dark:text-primary-dark/50 border-b border-light dark:border-dark pb-2 mt-4 mb-2">
-                                    Unique perks
-                                </h4>
-                                <Perks
-                                    className="grid @sm:grid-cols-2 @2xl:grid-cols-1 xl:[&>li]:ml-0 gap-1 [&>li]:ml-2 xl:ml-0 -ml-2"
-                                    company={company}
-                                />
-                                {isModerator && (
-                                    <div className="border-t border-border dark:border-dark pt-2 mt-3 flex justify-end items-center">
-                                        <button
-                                            className="font-bold text-red dark:text-yellow text-sm flex items-center space-x-1 bg-transparent hover:bg-accent dark:hover:bg-accent-dark rounded-md px-1.5 py-1 click"
-                                            onClick={() => onEdit(company.id)}
-                                        >
-                                            <IconPencil className="size-3" />
-                                            <span>Edit</span>
-                                        </button>
-                                        <button
-                                            className="font-bold text-red dark:text-yellow text-sm flex items-center space-x-1 bg-transparent hover:bg-accent dark:hover:bg-accent-dark rounded-md px-1.5 py-1 click"
-                                            onClick={() => onDelete(company.id, name)}
-                                        >
-                                            <IconTrash className="size-3" />
-                                            <span>Delete</span>
-                                        </button>
-                                    </div>
-                                )}
-                            </div>
-                            {hasJobs && <JobList jobs={company.attributes.jobs.data} />}
-                        </li>
-                    ) : null
-                })}
-            </ul>
+                                    <h4 className="text-sm font-medium text-primary/50 dark:text-primary-dark/50 border-b border-light dark:border-dark pb-2 mt-4 mb-2">
+                                        Unique perks
+                                    </h4>
+                                    <Perks
+                                        className="grid @sm:grid-cols-2 @2xl:grid-cols-1 xl:[&>li]:ml-0 gap-1 [&>li]:ml-2 xl:ml-0 -ml-2"
+                                        company={company}
+                                    />
+                                    {isModerator && (
+                                        <div className="border-t border-border dark:border-dark pt-2 mt-3 flex justify-end items-center">
+                                            <button
+                                                className="font-bold text-red dark:text-yellow text-sm flex items-center space-x-1 bg-transparent hover:bg-accent dark:hover:bg-accent-dark rounded-md px-1.5 py-1 click"
+                                                onClick={() => onEdit(company.id)}
+                                            >
+                                                <IconPencil className="size-3" />
+                                                <span>Edit</span>
+                                            </button>
+                                            <button
+                                                className="font-bold text-red dark:text-yellow text-sm flex items-center space-x-1 bg-transparent hover:bg-accent dark:hover:bg-accent-dark rounded-md px-1.5 py-1 click"
+                                                onClick={() => onDelete(company.id, name)}
+                                            >
+                                                <IconTrash className="size-3" />
+                                                <span>Delete</span>
+                                            </button>
+                                        </div>
+                                    )}
+                                </div>
+                                {hasJobs && <JobList jobs={company.attributes.jobs.data} />}
+                            </li>
+                        ) : null
+                    })}
+                </ul>
+                {hasMore && (
+                    <div className="mt-4">
+                        <CallToAction
+                            disabled={companiesLoading || companiesValidating}
+                            onClick={fetchMore}
+                            width="full"
+                        >
+                            {companiesLoading || companiesValidating ? (
+                                <IconSpinner className="size-5 mx-auto animate-spin" />
+                            ) : (
+                                'Load more'
+                            )}
+                        </CallToAction>
+                    </div>
+                )}
+            </div>
         </div>
     )
 }
@@ -792,7 +817,7 @@ const CompanyForm = ({ onSuccess, companyId }: { onSuccess?: () => void; company
             highEngineerRatio: company?.attributes?.highEngineerRatio || false,
             noDeadlines: company?.attributes?.noDeadlines || false,
             description: company?.attributes?.description || '',
-            jobBoardType: company?.attributes?.jobBoardType || 'ashby',
+            jobBoardType: company?.attributes?.jobBoardType || ('ashby' as JobBoardType),
             logoLight: company?.attributes?.logoLight?.data
                 ? { file: null, objectURL: company?.attributes?.logoLight?.data?.attributes?.url }
                 : undefined,
@@ -858,7 +883,14 @@ const CompanyForm = ({ onSuccess, companyId }: { onSuccess?: () => void; company
                             'content-type': 'application/json',
                         },
                         body: JSON.stringify({
-                            data: { ...rest, profile: profileID },
+                            data: {
+                                ...rest,
+                                slug:
+                                    values.jobBoardType === 'other'
+                                        ? slugify(values.name, { lower: true })
+                                        : values.slug,
+                                profile: profileID,
+                            },
                         }),
                     }
                 )
@@ -1262,7 +1294,10 @@ export default function JobsPage() {
         companies,
         isLoading: companiesLoading,
         mutate,
+        fetchMore,
+        hasMore,
         deleteCompany,
+        isValidating: companiesValidating,
     } = useCompanies({ companyFilters, jobFilters, search })
     const { isModerator, user } = useUser()
 
@@ -1330,6 +1365,9 @@ export default function JobsPage() {
                                 }}
                                 onDelete={deleteCompany}
                                 hasFilters={companyFilters.length > 0 || jobFilters.length > 0}
+                                fetchMore={fetchMore}
+                                hasMore={hasMore}
+                                companiesValidating={companiesValidating}
                             />
                         ) : (
                             <Jobs companyFilters={companyFilters} jobFilters={jobFilters} />
