@@ -1,8 +1,9 @@
 ---
-title: Send PostHog events to Intercom
+title: Send contacts and PostHog events to Intercom
 templateId:
     - template-intercom
     - template-intercom-event
+---
 
 import Requirements from "../_snippets/requirements.mdx"
 import FeedbackQuestions from "../_snippets/feedback-questions.mdx"
