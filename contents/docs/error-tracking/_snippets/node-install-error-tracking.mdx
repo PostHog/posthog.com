@@ -14,7 +14,7 @@ const client = new PostHog(
 
 ```
 
-Express handles uncaught errors by default. You will need to call `setupExpressErrorHandler` with your PostHog client and Express app if you are using the Express framework and want to autocapture exceptions.
+If you are using the Express framework you will need to call `setupExpressErrorHandler` with your PostHog client and Express app. This is because Express handles uncaught errors internally meaning exception autocapture will not work by default.
 
 ```node file=server.ts
 import express from 'express'
