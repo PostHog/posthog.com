@@ -242,7 +242,7 @@ const VoteButton = ({
     const { voteReply, user } = useUser()
 
     const vote = async (user: User) => {
-        await voteReply(id, type, voted, user)
+        await voteReply(id, type, user)
         onVote?.()
     }
 
@@ -295,7 +295,7 @@ export default function Reply({ reply, badgeText }: ReplyProps) {
     } = useContext(CurrentQuestionContext)
 
     const [confirmDelete, setConfirmDelete] = useState(false)
-    const { user, voteReply } = useUser()
+    const { user } = useUser()
     const isModerator = user?.role?.type === 'moderator'
     const isAuthor = user?.profile?.id === questionProfile?.data?.id
     const isReplyAuthor = user?.profile?.id === profile?.data?.id
