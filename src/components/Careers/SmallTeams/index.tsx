@@ -4,6 +4,7 @@ import { GatsbyImage, getImage } from 'gatsby-plugin-image'
 import Link from 'components/Link'
 import slugify from 'slugify'
 import CloudinaryImage from 'components/CloudinaryImage'
+import { slugifyTeamName } from 'lib/utils'
 
 export const SmallTeams = () => {
     const {
@@ -60,9 +61,7 @@ export const SmallTeams = () => {
                             const gatsbyImageMiniCrest = getImage(miniCrest)
                             return (
                                 <Link
-                                    to={`/teams/${slugify(name.toLowerCase().replace('ops', ''), {
-                                        remove: /and/,
-                                    })}`}
+                                    to={`/teams/${slugifyTeamName(name)}`}
                                     key={id}
                                     className="items-start md:items-center text-left flex gap-2 w-full px-2 py-1 rounded-md border border-b-3 hover:bg-white/50 hover:dark:bg-accent-dark border-transparent md:hover:border-light dark:md:hover:border-dark hover:translate-y-[-1px] active:translate-y-[1px] active:transition-all"
                                 >
