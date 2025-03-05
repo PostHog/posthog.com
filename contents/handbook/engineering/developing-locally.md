@@ -201,7 +201,14 @@ Saved preprocessed configuration to '/var/lib/clickhouse/preprocessed_configs/us
 # Because ClickHouse and Kafka connect to Zookeeper, there will be a lot of noise here. That's good.
 ```
 
-> **Friendly tip:** Kafka is currently the only x86 container used, and might segfault randomly when running on ARM. Restart it when that happens.
+> **Friendly tip 1:** Kafka is currently the only x86 container used, and might segfault randomly when running on ARM. Restart it when that happens.
+
+> **Friendly tip 2:** Checking the last Clickhouse log could show a `get_mempolicy: Operation not permitted` message. However, it shouldn't affect the app startup - checking the whole log should clarify that Clickhouse started properly. To double-check you can get into the container and run a basic query.
+>
+> ```bash
+> # docker logs posthog-clickhouse-1
+> # docker exec -it posthog-clickhouse-1 bash
+> # clickhouse-client --query "SELECT 1"
 
 Finally, install Postgres locally. Even if you are planning to run Postgres inside Docker, we need a local copy of Postgres (version 11+) for its CLI tools and development libraries/headers. These are required by `pip` to install `psycopg2`.
 
@@ -217,7 +224,15 @@ This installs both the Postgres server and its tools. DO NOT start the server af
     sudo apt install -y postgresql-client postgresql-contrib libpq-dev
     ```
 
-This intentionally only installs the Postgres client and drivers, and not the server. If you wish to install the server, or have it installed already, you will want to stop it, because the TCP port it uses conflicts with the one used by the Postgres Docker container. On Linux, this can be done with `sudo systemctl disable postgresql.service`.
+This intentionally only installs the Postgres client and drivers, and not the server. If you wish to install the server, or have it installed already, you will want to stop it, because the TCP port it uses conflicts with the one used by the Postgres Docker container. 
+
+On Linux, it's recommended to disable Postgres service by default, to ensure no port conflict arises. If `postgres` is already running on the port `5432`, you can confirm it by checking the port, and then kill it manually.
+
+```bash
+sudo systemctl disable postgresql.service
+sudo lsof -i :5432
+sudo kill -9 `sudo lsof -t -i :5432`
+```
 
 On Linux you often have separate packages: `postgres` for the tools, `postgres-server` for the server, and `libpostgres-dev` for the `psycopg2` dependencies. Consult your distro's list for an up-to-date list of packages.
 
@@ -310,6 +325,8 @@ You can also use [pyenv](https://github.com/pyenv/pyenv) if you wish to manage m
     ```bash
     uv venv env --python 3.11
     ```
+   
+   > **Friendly tip:** Creating an env could raise a `Failed to parse` warning related to `pyproject.toml`. However, you should still see the `Activate with:` line at the very end, which means that your env was created successfully.
 
 1. Activate the virtual environment:
 
@@ -353,9 +370,11 @@ cargo install sqlx-cli # If you haven't already
 DEBUG=1 ./bin/migrate
 ```
 
-> **Friendly tip:** The error `fe_sendauth: no password supplied` connecting to Postgres happens when the database is set up with a password and the user:pass isn't specified in `DATABASE_URL`. Try `export DATABASE_URL=postgres://posthog:posthog@localhost:5432/posthog`.
+> **Friendly tip 1:** The error `fe_sendauth: no password supplied` connecting to Postgres happens when the database is set up with a password and the user:pass isn't specified in `DATABASE_URL`. Try `export DATABASE_URL=postgres://posthog:posthog@localhost:5432/posthog`.
 
-> **Another friendly tip:** You may run into `psycopg2` errors while migrating on an ARM machine. Try out the steps in this [comment](https://github.com/psycopg/psycopg2/issues/1216#issuecomment-820556849) to resolve this.
+> **Friendly tip 2:** You may run into `psycopg2` errors while migrating on an ARM machine. Try out the steps in this [comment](https://github.com/psycopg/psycopg2/issues/1216#issuecomment-820556849) to resolve this.
+
+> **Friendly tip 3:** When migrating, make sure the containers are running (detached or in a separate terminal tab). 
 
 #### 6. Start PostHog
 
@@ -365,7 +384,7 @@ Now start all of PostHog (backend, worker, plugin server, and frontend – simul
 ./bin/start
 ```
 
-> **Note:** This command uses [mprocs](https://github.com/pvolok/mprocs) to run all development processes in a single terminal window.
+> **Note:** This command uses [mprocs](https://github.com/pvolok/mprocs) to run all development processes in a single terminal window. It will be installed automatically for macOS, while for Linux you can install it manually (`cargo` or `npm`) using the official repo guide.
 
 > **Friendly tip:** If you get the error `Configuration property "enable.ssl.certificate.verification" not supported in this build: OpenSSL not available at build time`, make sure your environment is using the right `openssl` version by setting [those](https://github.com/xmlsec/python-xmlsec/issues/261#issuecomment-1630889826) environment variables, and then run `./bin/start` again.
 
