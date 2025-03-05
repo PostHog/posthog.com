@@ -15,7 +15,13 @@ category: General
 
 We sponsored the [recent hackathon hosted by ElevenLabs](https://elevenlabs.io/blog/announcing-the-winners-of-the-elevenlabs-worldwide-hackathon) – and I got to be in the room in San Francisco as it unfolded, and behind-the-scenes during the planning and judging. The two days saw furious sprints of heads-down building, punctuated by kitchen snack breaks and hallway pacing, leading to pre-demo jitters and delirious applause as it all came to an end (while the same flow played out in cities around the world). 
 
-What I noticed was the thread of humanity that flowed through the whole thing, even while next-generation AI technology demos played out in front of us. Here are some of the highlights and lessons I noticed from my part in the event. (And [here's the 51-second video version](https://drive.google.com/file/d/1QGWudDAVhZPmgWWjXJuvIPn43cvfOf0N/view?usp=drive_link), if you're less of a words-person.)
+<iframe
+    src="https://www.youtube-nocookie.com/embed/eFsQqTqnfz4"
+    className="rounded shadow-xl"
+/>
+
+  
+What I noticed was the thread of humanity that flowed through the whole thing, even while next-generation AI technology demos played out in front of us. Here are some of the highlights and lessons I noticed from my part in the event. 
 
 ## 1. Imperfection is trustable 
 **Project:** [DealWise](https://devpost.com/software/john-ai) (San Francisco winner)
