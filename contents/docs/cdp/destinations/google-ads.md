@@ -1,6 +1,7 @@
 ---
 title: Send PostHog conversion events to Google Ads
-templateId: template-google-ads
+templateId:
+    - template-google-ads
 ---
 
 import Requirements from "../_snippets/requirements.mdx"

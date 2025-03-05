@@ -1,10 +1,18 @@
-Below are code examples of how to do it in our various SDKs. Notice that it is the exact same code as creating a group.
+How you capture events with groups depends whether you're using the JavaScript Web SDK or not. 
+
+1. If you're using the JavaScript Web SDK (or snippet), you can call `posthog.group()`  and all of that **session's** events will be associated with that group.
+
+2. If you're using any other SDK (or the API), you need to pass the group information in the `groups` parameter (or `$groups` property) for **every event you capture**.
+
+Below are code examples of how to do it in our various SDKs.
 
 import JSGroupEventCodeSnippet from "../\_snippets/capture-group-event-code.mdx"
 
 <JSGroupEventCodeSnippet />
 
-Note that it is **NOT** possible to assign the a single event to two groups of the same type. However, it is possible to assign an event to multiple groups as long as the groups are of different types.
+> **Want to learn more about group analytics implementation differences?** Check out our [guide on frontend vs backend group analytics implementations](/tutorials/frontend-vs-backend-group-analytics).
+
+It is **NOT** possible to assign a single event to two groups of the same type. However, it is possible to assign an event to multiple groups as long as the groups are of different types.
 
 <MultiLanguage>
 
@@ -89,4 +97,3 @@ PostHog::capture(array(
 ));
 ```
 </MultiLanguage>
-

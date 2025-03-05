@@ -1,6 +1,7 @@
 ---
 title: Send PostHog event data to Zapier
-templateId: template-zapier
+templateId:
+    - template-zapier
 ---
 
 import Requirements from "../_snippets/requirements.mdx"

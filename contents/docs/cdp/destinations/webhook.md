@@ -1,6 +1,7 @@
 ---
 title: Send PostHog event data to any webhook
-templateId: template-webhook
+templateId:
+    - template-webhook
 ---
 
 import Requirements from "../_snippets/requirements.mdx"
