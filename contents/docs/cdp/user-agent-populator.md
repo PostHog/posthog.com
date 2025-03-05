@@ -6,6 +6,8 @@ thumbnail: >-
   https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/cdp/thumbnails/user-agent-enhancer.png
 tags:
   - user-agent
+templateId: 
+  - plugin-user-agent-plugin
 ---
 
 import Requirements from "./_snippets/requirements.mdx"
