@@ -100,7 +100,7 @@ All code related exclusively to the [PostHog Toolbar](/docs/user-guides/toolbar)
 
 ## `livestream`
 
-Backend for live events, for live demo check Activity tab in PostHog.
+The live events API, a Golang service (used in the Live tab of Activity in the app).
 
 ## `posthog`
 
