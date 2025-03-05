@@ -24,7 +24,7 @@ If updating PostHog doesn't solve your problem, there are a few reasons why your
 
 ### 1. Configuration is off
 
-Surveys are enabled through the surveys opt in toggle in the [app](https://app.posthog.com/surveys). If you're not seeing any surveys, make sure that this toggle is enabled.
+If you're not seeing any surveys, make sure that the `disable_surveys` SDK configuration isn't set to `true`.
 
 You can read more about [`posthog-js` configurations here](/docs/libraries/js/config).
 
@@ -74,6 +74,8 @@ Check your `posthog-js` version.  If its lower than `v1.151.0`, please upgrade y
 If you're seeing: `Update survey failed: Cohort with behavioral filters cannot be used in feature flags.` or similar, it's because surveys are powered by feature flags for person property targeting.
 
 Currently [we do not support dynamic cohorts in flags](/docs/data/cohorts#can-you-use-a-dynamic-behavioral-cohort-as-a-feature-flag-target) which is why you might see an error if setting a person property that contains a dynamic cohort in your survey.
+
+Dynamic cohorts aren't supported yet, upvote this [issue](https://github.com/PostHog/posthog/issues/19031) if that would be useful for you.
 
 #### Will I be double charged for feature flags if I use surveys?
 
