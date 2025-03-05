@@ -6,6 +6,8 @@ thumbnail: >-
   https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/cdp/thumbnails/filter-out.png
 tags:
   - filter-out
+templateId:
+  - plugin-posthog-filter-out-plugin
 ---
 
 import Requirements from "./_snippets/requirements.mdx"

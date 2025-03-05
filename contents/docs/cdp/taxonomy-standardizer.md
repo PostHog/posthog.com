@@ -6,6 +6,8 @@ thumbnail: >-
   https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/cdp/thumbnails/taxonomy-standardizer.png
 tags:
   - taxonomy-standardizer
+templateId:
+  - plugin-taxonomy-plugin
 ---
 
 import Requirements from "./_snippets/requirements.mdx"

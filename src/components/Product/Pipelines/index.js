@@ -442,9 +442,14 @@ const CDPFlowChart = () => {
     )
 }
 
+const getIconUrl = (iconUrl) => {
+    return iconUrl?.startsWith('http') ? iconUrl : `https://app.posthog.com${iconUrl}`
+}
+
 function PipelinesPage({ location }) {
     const {
         destinations: { nodes },
+        transformations: { nodes: transformations },
     } = useStaticQuery(query)
 
     const [searchValue, setSearchValue] = React.useState('')
@@ -455,6 +460,7 @@ function PipelinesPage({ location }) {
     const pipelines = {
         Sources: sources,
         Destinations: nodes,
+        Transformations: transformations,
     }
 
     const nodesByCategory = useMemo(() => {
@@ -496,7 +502,7 @@ function PipelinesPage({ location }) {
                             <div className="size-7 flex-shrink-0">
                                 <img
                                     className="w-full"
-                                    src={`https://app.posthog.com/${selectedDestination.icon_url}`}
+                                    src={getIconUrl(selectedDestination.icon_url)}
                                     alt={selectedDestination.name}
                                 />
                             </div>
@@ -597,7 +603,7 @@ function PipelinesPage({ location }) {
 
             <div id="library" className="@container max-w-screen-2xl px-5 mx-auto grid md:grid-cols-4 pt-12 relative">
                 <div className="md:col-span-4 md:mb-4">
-                    <h2 className="text-center text-2xl lg:text-4xl">Sources &amp; destinations library</h2>
+                    <h2 className="text-center text-2xl lg:text-4xl">Sources, destinations, and transformations</h2>
 
                     <div className="md:max-w-lg mx-auto mb-5 rounded-md border border-border dark:border-dark py-3 px-4 bg-white dark:bg-accent-dark flex space-x-1.5">
                         <IconSearch className="w-5 opacity-60" />
@@ -605,14 +611,14 @@ function PipelinesPage({ location }) {
                             value={searchValue}
                             onChange={(e) => setSearchValue(e.target.value)}
                             className="bg-transparent w-full border-none outline-none"
-                            placeholder="Search sources & destinations"
+                            placeholder="Search sources, destinations, and transformations"
                         />
                     </div>
                 </div>
                 <aside className="md:col-span-1 md:sticky top-[120px] self-start">
                     <Category
                         active={selectedType === 'All' && selectedCategory === 'All'}
-                        value="All sources & destinations"
+                        value="All integrations"
                         onClick={() => {
                             setSelectedType('All')
                             setSelectedCategory('All')
@@ -680,7 +686,7 @@ function PipelinesPage({ location }) {
                                                         <div className="size-7 flex-shrink-0">
                                                             <img
                                                                 className="w-full"
-                                                                src={`https://app.posthog.com${icon_url}`}
+                                                                src={getIconUrl(icon_url)}
                                                                 alt={name}
                                                             />
                                                         </div>
@@ -794,6 +800,28 @@ const query = graphql`
                     type
                     label
                     secret
+                    required
+                    description
+                }
+            }
+        }
+        transformations: allPostHogTransformation {
+            nodes {
+                id
+                name
+                category
+                description
+                icon_url
+                mdx {
+                    body
+                    fields {
+                        slug
+                    }
+                }
+                inputs_schema {
+                    key
+                    type
+                    label
                     required
                     description
                 }
