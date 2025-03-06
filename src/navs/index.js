@@ -1509,6 +1509,9 @@ export const docsMenu = {
                         {
                             name: 'Shopify',
                             url: '/docs/libraries/shopify',
+                            badge: {
+                                title: '3rd party',
+                            },
                         },
                         {
                             name: 'Svelte',

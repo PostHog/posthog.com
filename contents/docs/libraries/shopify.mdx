@@ -7,14 +7,34 @@ icon: >-
 export const eventLight = 'https://res.cloudinary.com/dmukukwp6/image/upload/v1711383938/posthog.com/contents/images/tutorials/shopify/event-light.png'
 export const eventDark = 'https://res.cloudinary.com/dmukukwp6/image/upload/v1711383938/posthog.com/contents/images/tutorials/shopify/event-dark.png'
 
-## Installing PostHog in a Shopify theme
+PostHog makes it easy to get data about traffic and usage of your Shopify store. Integrating PostHog into your site enables analytics about user behavior, custom events capture, session recordings, A/B testing, and more.
 
-To have unrestricted access to the features of PostHog in your Shopify store, you can install PostHog in your Shopify theme. To do this:
+This guide walks you through integrating PostHog into your Shopify store using either the [PixieHog](https://pixiehog.com/) Shopify app or a manual option.
 
-1. Get your PostHog JavaScript snippet from [your project settings](https://us.posthog.com/settings/project#snippet)
-1. Login to your Shopify dashboard
-1. Go to 'Online Store' -> 'Themes' 
-1. On your theme, click 'Actions' -> 'Edit code'
+## Option 1: PixieHog Shopify app
+
+PixieHog is a Shopify app that sets up PostHog with [Shopify Customer Privacy API](https://shopify.dev/docs/api/customer-privacy) and [Shopify Web Pixels API](https://shopify.dev/docs/api/web-pixels-api). To do this:
+
+1. Install PixieHog from the [Shopify App Store](https://apps.shopify.com/pixiehog)
+2. Get your PostHog project API key and client host from [your project settings](https://app.posthog.com/settings/project#variables) and enter these into the account setup section. We also recommend setting up a [reverse proxy](/docs/advanced/proxy) to capture more usage data
+
+![PixieHog - Home UI](https://res.cloudinary.com/dmukukwp6/image/upload/home_min_359bf3d7a4.png)
+
+3. Go to **Web Pixels Events**, turn on the channel, and choose the relevant events for your use case. You can find events documentation in the Shopify docs -> Web Pixels API -> [Standard Events](https://shopify.dev/docs/api/web-pixels-api/standard-events).
+
+![PixieHog - Web Pixel Events UI](https://res.cloudinary.com/dmukukwp6/image/upload/web_pixel_events_min_2fb7e52152.png)
+
+4. Go to **JS Web Config**, turn on the channel, enable PixieHog app embed on your live theme, and make sure to save the theme editor session.
+ 
+ 5. Set `ui_host` to match your PostHog Cloud region.
+ 
+ 6. Choose the relevant config for your use case.  You can find these in PostHog's [JavaScript Web configuration docs](/docs/libraries/js/config).
+
+![PixieHog - JS Web Config UI](https://res.cloudinary.com/dmukukwp6/image/upload/js_web_config_min_1810179fd3.png)
+
+For more details, see the [PixieHog documentation](https://pixiehog.com/docs/introduction) or check out the [source code on GitHub](https://github.com/celadonworks/pixiehog-app). PixieHog is also self-hostable if you prefer.
+
+## Option 2: Installing PostHog manually into the theme
 
 ![Shopify Dashboard](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/shopify/shopify-dashboard.png)
 
@@ -23,15 +43,15 @@ To have unrestricted access to the features of PostHog in your Shopify store, yo
 
 ![Shopify Snippet](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/shopify/snippet.png)
 
-1. Click the green save button on the top right and you're good to go - PostHog should now capturing events on your Shopify store!
+3. Click the green save button on the top right and you're good to go - PostHog should now be capturing events on your Shopify store!
 
 > To confirm PostHog is configured correctly, visit your store and then check if the events from your session appear in the [PostHog activity tab](https://us.posthog.com/events). This may take a few minutes.
 
-## Tracking conversions
+### Tracking conversions
 
 Shopify's checkout flow doesn't allow arbitrary JavaScript to be run, so the PostHog JavaScript snippet cannot be used directly on the checkout page or post-purchase page. However, you can still track conversions by using a [custom web pixel](https://shopify.dev/docs/api/web-pixels-api#custom-web-pixels).
 
-### Setting up a custom web pixel
+#### Setting up a custom web pixel
 
 To set this up, first, go to the [customer events](https://admin.shopify.com/settings/customer_events) tab in your store settings, click "Add custom pixel," and give your pixel a name.
 
