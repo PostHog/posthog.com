@@ -46,7 +46,7 @@ The [Content & Docs team](/teams/marketing) can help build out any documentation
 
 ## Announcing a beta
 
-When we're ready to launch a new beta, it's helpful to let [the Comms team](/teams/words-pictures) know. They can then go through the beta announcement checklist, if appopriate. 
+When we're ready to launch a new beta, it's helpful to let [the Comms team](/teams/words-pictures) know. They can then go through the beta announcement checklist, if appropriate. 
 
 - [ ] Announce the beta to the changelog in a stand-alone post
 - [ ] Announce the beta to users in the monthly changelog email
