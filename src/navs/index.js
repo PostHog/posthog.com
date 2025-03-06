@@ -1108,6 +1108,10 @@ export const companyMenu = {
                     url: '/teams/clickhouse',
                 },
                 {
+                    name: 'CRM',
+                    url: '/teams/crm',
+                },
+                {
                     name: 'Data Warehouse',
                     url: '/teams/data-warehouse',
                 },
