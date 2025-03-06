@@ -4,7 +4,7 @@ sidebar: Docs
 showTitle: true
 ---
 
-> **Note:** This page refers to our [main product repository](https://github.com/PostHog/posthog), not our website. 
+> **Note:** This page refers to our [main product repository](https://github.com/PostHog/posthog), not our website.
 
 ## Directory tree 
 
@@ -24,6 +24,7 @@ showTitle: true
 │       └── scenes
 │       └── style
 │       └── toolbar
+├── livestream
 ├── posthog
 │   └── api
 │   └── management
@@ -96,6 +97,10 @@ Components referring to specific pages of the PostHog app. Mostly non-reusable.
 ##### `toolbar`
 
 All code related exclusively to the [PostHog Toolbar](/docs/user-guides/toolbar).
+
+## `livestream`
+
+The live events API, a Golang service (used in the Live tab of Activity in the app).
 
 ## `posthog`
 
