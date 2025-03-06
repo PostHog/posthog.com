@@ -4,7 +4,7 @@ sidebar: Docs
 showTitle: true
 ---
 
-> **Note:** This page refers to our [main product repository](https://github.com/PostHog/posthog), not our website. You can find this page on our [website](https://github.com/PostHog/posthog.com/blob/90f7faf915c4723367c9ecdcb75c8e37c4e869ae/contents/handbook/engineering/project-structure.md) repo.
+> **Note:** This page refers to our [main product repository](https://github.com/PostHog/posthog), not our website.
 
 ## Directory tree 
 
