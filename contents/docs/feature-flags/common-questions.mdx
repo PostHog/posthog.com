@@ -108,7 +108,7 @@ posthog.capture(
 )
 ```
 
-If you plan to call the flag immediately after the event, you will likely need to [set the property for the flag manually](/docs/libraries/js#overriding-server-properties) with `setPersonPropertiesForFlags()`.
+If you plan to call the flag immediately after the event, you will likely need to [set the property for the flag manually](/docs/libraries/js/features#overriding-server-properties) with `setPersonPropertiesForFlags()`.
 
 ```js
 posthog.setPersonPropertiesForFlags({
@@ -133,6 +133,10 @@ If your flag is returning false and you expect it to return another value, check
 - You are evaluating the flag with all the information and arguments it needs in the correct order. For example, in Python, you need both the flag key and distinct ID to call `feature_enabled()`.
 
 - Your flags are loaded before you evaluate them. Test this by evaluating the flag in the `onFeatureFlags()` callback.
+
+## If a user matches multiple release conditions, which one is used?
+
+During feature flag evaluation, condition sets are evaluated from top to bottom as seen in your flag configuration. The first condition set that matches will be used.
 
 ## Why does it take so long for flag properties to appear in filters and breakdowns?
 

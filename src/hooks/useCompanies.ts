@@ -111,10 +111,12 @@ export default function useCompanies({
     fetchMore: () => void
     mutate: () => void
     deleteCompany: (companyId: number, companyName: string) => void
+    hasMore: boolean
+    isValidating: boolean
 } {
     const { getJwt } = useUser()
     const [search, setSearch] = useState('')
-    const { data, size, setSize, isLoading, error, mutate } = useSWRInfinite(
+    const { data, size, setSize, isLoading, error, mutate, isValidating } = useSWRInfinite(
         (offset) => `${process.env.GATSBY_SQUEAK_API_HOST}/api/companies?${query(offset, companyFilters, jobFilters)}`,
         async (url: string) => {
             return fetch(url).then((r) => r.json())
@@ -184,6 +186,9 @@ export default function useCompanies({
         debouncedSearch(other.search)
     }, [other.search])
 
+    const total = data && data[0]?.meta?.pagination?.total
+    const hasMore = total ? companies?.length < total : false
+
     return {
         companies,
         isLoading,
@@ -191,5 +196,7 @@ export default function useCompanies({
         fetchMore: () => setSize(size + 1),
         mutate,
         deleteCompany,
+        hasMore,
+        isValidating,
     }
 }

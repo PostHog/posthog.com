@@ -1,0 +1,69 @@
+---
+title: Understanding PostHog
+---
+
+import { CalloutBox } from 'components/Docs/CalloutBox'
+
+PostHog is a lot of power, so to get the most from it, we should review how data is structured, grouped, and related.
+
+### Events
+
+PostHog's data model starts with **[events](/docs/data/events)**, single actions that a user triggered at a specific point in time. These are sent either from one of our [SDKs](/docs/libraries) or directly via our [API](/docs/api).
+
+Events are flexible: they can be captured automatically via [autocapture](/docs/product-analytics/autocapture), or you can capture your own [custom events](/docs/getting-started/send-events) and attach additional metadata via [properties](/docs/data/events#event-properties).
+
+You might create an event to represent purchasing an upgrade, with custom properties like `price` or `renewal_period`.
+
+### Actions
+
+[Actions](/docs/data/actions) are a layer on top of events. Define actions to aggregate multiple events, extract a specific kind of event according to its properties, or give an event a more useful name.
+
+### Sessions
+
+A [session](/docs/data/sessions) is a collection of events corresponding to a specific usage session of a product. Sessions have properties, and you can query them.
+
+### Person profiles
+
+Meanwhile, users of your product are given a **[person profile](/docs/data/persons)**, which gather these events. Person profiles similarly contain properties. Some are set automatically:
+
+- Browser details
+- Geo IP data
+- Referrers
+- UTM values
+
+You can also set your own properties on person profiles, which will appear in reports and data tables.
+
+If a user upgrades to a paid tier, for example, you could set a property called `paid_tier` with the details.
+
+Person profiles need [distinct identifiers](/docs/getting-started/identify-users), so PostHog can accurately track behavior. You might see a few identifiers on each profile: anonymous IDs created before a user has been identified, an ID you set after they log in, and IDs that are created on the client and backend, later merged together into a single profile.
+
+<CalloutBox icon="IconBook" title="Further reading" type="tip">
+
+- [How data is stored in ClickHouse](/docs/how-posthog-works/clickhouse)
+- [How person properties are added to events](/docs/how-posthog-works/ingestion-pipeline#2-person-processing)
+
+</CalloutBox>
+
+### Displaying and organizing data
+
+To make sense of the many events and person profiles flowing through your product, use:
+
+**[Insights](/docs/product-analytics/insights)** to create charts, tables and more that summarize your data.
+
+**[Dashboards](/docs/product-analytics/dashboards)** to assemble insights into a cohesive, customizable view.
+
+**[Notebooks](/docs/notebooks)** to contextualize insights and share analysis with your teammates.
+
+### Discovering activity with cohorts and groups
+
+You can create ongoing queries to surface person profiles either according to their properties, or the details of their events. We call these **[cohorts](/docs/data/cohorts)**. If you want to see a list of every user in your paid tier, you could query for all profiles where that `paid_tier` property has been set. Your cohort would then show you a periodically-updated listing of your paid customers.
+
+Alternatively, you might want to understand *group behavior*. By defining **[groups](/docs/product-analytics/group-analytics)**, you can see a cross-section of events across multiple person profiles. This can be helpful if you're selling to multi-seat customers, and want to understand the overall behavior of their users.
+
+Groups require that you have the [Group analytics add-on](/addons#group-analytics) and that you enable person profiles.
+
+### Data model
+
+![PostHog data flow](https://res.cloudinary.com/dmukukwp6/image/upload/posthog_data_diagram_84bf3b121b.png)
+
+Dig into the details of the [data model](/docs/how-posthog-works/data-model) to learn more about the fields on each data type.

@@ -10,15 +10,11 @@ import { HttpErrorResponse } from '@angular/common/http';
 
 import posthog from 'posthog-js';
 
-import posthog from 'posthog-js';
-
 /**
  * Implementation of Angular's ErrorHandler provider that can be used as a drop-in replacement for the stock one.
  */
 @Injectable({ providedIn: 'root' })
-class PostHogErrorHandler implements ErrorHandler, OnDestroy {
-  public ngOnDestroy(): void {}
-
+class PostHogErrorHandler implements ErrorHandler {
   public constructor() {}
 
   /**
@@ -120,17 +116,18 @@ export function providePostHogErrorHandler(): Provider {
 
 Then, in your `src/app/app.config.ts`, import the `providePostHogErrorHandler` function and add it to the providers array:
 
-```ts file=src/app/app.config.ts
+```diff
+// src/app/app.config.ts
 import { ApplicationConfig, provideZoneChangeDetection } from '@angular/core';
 import { provideRouter } from '@angular/router';
 
 import { routes } from './app.routes';
-import { providePostHogErrorHandler } from './posthog-error-handler';
++import { providePostHogErrorHandler } from './posthog-error-handler';
 
 export const appConfig: ApplicationConfig = {
   providers: [
     ...
-    providePostHogErrorHandler(),
++   providePostHogErrorHandler(),
   ],
 };
 ```

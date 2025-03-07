@@ -1,6 +1,7 @@
 ---
 title: Send PostHog event data to Google Cloud Storage
-templateId: template-google-cloud-storage
+templateId:
+    - template-google-cloud-storage
 ---
 
 import Requirements from "../_snippets/requirements.mdx"

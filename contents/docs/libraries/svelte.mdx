@@ -89,6 +89,56 @@ export async function load() {
 
 > **Note:** Make sure to always call `posthog.shutdown()` after capturing events from the server-side. PostHog queues events into larger batches, and this call forces all batched events to be flushed immediately.
 
+## Feature flags
+
+To use client-side feature flags, import PostHog into your Svelte component and check if the feature is enabled (while ensuring the code only runs in the browser).
+
+```js file=routes/+page.svelte
+<script>
+  import posthog from 'posthog-js'
+  import { browser } from '$app/environment'
+  import { onMount } from 'svelte'
+  
+  let coolFeature = false
+  
+  onMount(() => {
+    if (browser) {
+      coolFeature = posthog.isFeatureEnabled('cool-feature')
+    }
+  })
+</script>
+
+{#if coolFeature}
+  <p>Welcome to the cool feature!</p>
+{/if}
+```
+
+To use server-side feature flags, import PostHog into your SvelteKit `load` function and check if the feature is enabled. 
+
+```js file=routes/+page.server.js
+import { PostHog } from 'posthog-node';
+
+const client = new PostHog(
+  '<ph_project_api_key>',
+  { host: '<ph_client_api_host>' }
+);
+
+export async function load() {
+  const distinctId = 'distinct_id_of_the_user';
+  
+  const megaFeature = await client.isFeatureEnabled(
+    'mega-feature',
+    distinctId
+  );
+
+  return {
+    megaFeature
+  };
+}
+```
+
+See our [JavaScript Web](/docs/libraries/js/features#feature-flags) and [Node](/docs/libraries/node#feature-flags) docs for more details.
+
 ## Configuring session replay for server-side rendered apps
 
 By default, [Svelte uses relative asset paths](https://kit.svelte.dev/docs/configuration) during server-side rending. This causes issues with PostHog's ability to record sessions.
@@ -105,7 +155,7 @@ To fix this, set the config to not use relative paths in `svelte.config.js`:
 
 ## Next steps
 
-For any technical questions for how to integrate specific PostHog features into Svelte (such as analytics, feature flags, A/B testing, surveys, etc.), have a look at our [JavaScript Web](/docs/libraries/js) and [Node]((/docs/libraries/node)) SDK docs.
+For any technical questions for how to integrate specific PostHog features into Svelte (such as analytics, feature flags, A/B testing, surveys, etc.), have a look at our [JavaScript Web](/docs/libraries/js/features) and [Node]((/docs/libraries/node)) SDK docs.
 
 Alternatively, the following tutorials can help you get started:
 

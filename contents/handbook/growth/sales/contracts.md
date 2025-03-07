@@ -10,7 +10,6 @@ For customers who want to sign up for an annual (or longer) plan there is some a
 
 > If a customer wants to vary either our DPA, BAA, or MSA terms, it is a substantial effort for our legal team to review these changes.  At a minimum, we should only do this for contracts above $20k a year, and even higher if they are asking for big changes (e.g. adding a Service Level Agreements). The minimum is $100k to bring your own contract instead of our template - see 'Non PostHog Contracts' below. A customer needs to either be spending this amount at present, or agree to commit to this spend via an annual contract, in order to initiate legal review of potential changes. 
 
-In addition, customers requiring our Enterprise plan need to sign up for a minimum of $20k of PostHog Cloud Credit for a year, as well as adding the Teams plan to their subscription.
 
 If you are discussing any annual plan that deviates from our standard terms, such as a plan with monthly payments or other custom terms, please consult with Simon and Mine beforehand. This is to ensure we have the capacity and resources to support the proposed terms.
 
@@ -93,7 +92,7 @@ Additional notes on self-serve discounts:
 
 ### Nonprofit discounts
 
-We do offer additional discounts to nonprofits - these are entirely at your discretion, depending on the margin of the particular product(s) you are selling. We no longer offer a straight X% across all products, as they all have slightly different pricing. Instead the discount depends on factors such as the contract size and the customer’s anticipated volume. There is no set minimum spend or mandatory annual term. When evaluating a discount, it’s important to review our margin calculations (available in [this sheet](https://docs.google.com/spreadsheets/d/1ynNM9tbWsWki2Q0vhwCV0iYNtJ1NHz4eXtUvZDw_sjA/edit?usp=sharing)) to ensure we remain margin positive, especially for larger accounts.
+We do offer additional discounts to nonprofits - these are entirely at your discretion, depending on the margin of the particular product(s) you are selling. We no longer offer a straight X% across all products, as they all have slightly different pricing. Instead the discount depends on factors such as the contract size and the customer’s anticipated volume. There is no set minimum spend or mandatory annual term. When evaluating a discount, it’s important to review our margin calculations (available in [this sheet](https://docs.google.com/spreadsheets/d/1ynNM9tbWsWki2Q0vhwCV0iYNtJ1NHz4eXtUvZDw_sjA/edit?usp=sharing)) to ensure we remain margin positive, especially for larger accounts. We use tax law in the country of origin to determine what is a not for profit entity. If a customer can provide proof they fit their country's definition, the discount is applicable subject to the guidance above. 
 
 ## Payment method
 

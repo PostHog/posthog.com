@@ -186,7 +186,7 @@ Now, when we run our task, we'll also see a `worker_task_completed` event captur
   alt="PostHog web worker event capture"
 />
 
-You can use this strategy of posting messages back and forth to use any of [PostHog's functionality](/docs/libraries/js) like feature flags or A/B testing. 
+You can use this strategy of posting messages back and forth to use any of [PostHog's functionality](/docs/libraries/js/features) like feature flags or A/B testing. 
 
 ## Further reading
 

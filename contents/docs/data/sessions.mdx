@@ -30,7 +30,7 @@ Our [JavaScript Web library](/docs/libraries/js) and mobile SDKs (Android, iOS, 
 
 A session can span multiple tabs and windows, but only on the same browser and device. For example, if a user goes from one Chrome tab to another, it counts as a single session. If they go from Chrome to Firefox, a new session is created. You can also create a new session by calling `posthog.reset()` (which also starts a new session replay).
 
-Activity is defined as any event sent from the client including autocapture events and replay activity like mouse movement. The inactivity period can be configured using the `session_idle_timeout_seconds` [configuration option](/docs/libraries/js#config).
+Activity is defined as any event sent from the client including autocapture events and replay activity like mouse movement. The inactivity period can be configured using the `session_idle_timeout_seconds` [configuration option](/docs/libraries/js/config).
 
 > **Note:** If you are [migrating data](/docs/migrate) or [using a CDP](/docs/advanced/cdp), you may need to manually set the `$session_id` property if you want to query sessions or connect them to session replays. 
 > If you are using the JavaScript Web SDK alongside your CDP, you can get this value by calling `posthog.get_session_id()`.

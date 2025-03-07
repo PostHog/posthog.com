@@ -26,7 +26,7 @@ Make sure you have a [Segment account](https://segment.com/docs/#getting-started
 
 The simple Segment destination only supports tracking of pageviews, custom events, and identifying users. To use the full feature set of PostHog like autocapture, session recording, feature flags, heatmaps, surveys, or the toolbar we need to load our own Javascript snippet directly.
 
-1. In addition to Segment, install your [PostHog snippet](/docs/integrate/client/js#installation).
+1. In addition to Segment, install your [PostHog snippet](/docs/libraries/js#installation).
 
 2. Modify the initialization to pass the Segment `analytics` object through for PostHog to sync with:
 
@@ -136,9 +136,21 @@ This option sends the event to Segment and PostHog, which helps if you want to k
 
 ```js
 // This is an example implementation for tracking $pageleave with Segment
-window.addEventListener("beforeunload", analytics.track({
-    "event": "$pageleave"
-}));
+function trackPageLeave(callback) {
+    if (typeof callback !== "function") return;
+
+    // Use "pagehide" if supported (better for mobile Safari), otherwise fallback to "unload". See https://calendar.perfplanet.com/2020/beaconing-in-practice/#beaconing-reliability-avoiding-abandons
+    const eventName = "onpagehide" in self ? "pagehide" : "unload";
+    window.addEventListener(eventName, callback, { once: true });
+}
+
+function handlePageLeave() {
+    if (window.analytics) {
+        window.analytics.track({ event: "$pageleave" });
+    }
+}
+
+trackPageLeave(handlePageLeave);
 ```
 
 
