@@ -1,6 +1,6 @@
 ---
-date: 2025-03-03
-title: 11 things I learned from from the ElevenLabs hackathon
+date: 2025-03-07
+title: What I learned attending my first ever hackathon
 rootPage: /blog
 sidebar: Blog
 showTitle: true
