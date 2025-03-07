@@ -16,7 +16,7 @@ You can connect your BigQuery tables to PostHog by configuring it as a source. Y
 - Google Cloud JSON Key file for that account's Dataset ID
 - (Optional) A Dataset ID for temporary tables
 
-## Service account setup
+## Configuring BigQuery
 
 To securely connect your BigQuery account to PostHog, create a dedicated service account with the minimum required permissions:
 
