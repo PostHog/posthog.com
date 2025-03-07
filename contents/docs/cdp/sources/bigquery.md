@@ -8,7 +8,7 @@ availability:
   enterprise: full
 ---
 
-The BigQuery connector links your tables to PostHog. You must grant a limited set of permissions so the connector can create, query, and delete temporary tables without exposing your entire BigQuery environment.
+You can connect your BigQuery tables to PostHog by configuring it as a source. You must grant a limited set of permissions so the connector can create, query, and delete temporary tables without exposing your entire BigQuery environment.
 
 ## Requirements
 
