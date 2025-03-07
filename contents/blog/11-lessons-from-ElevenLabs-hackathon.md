@@ -13,7 +13,9 @@ featuredImageType: full
 category: General
 ---
 
-We sponsored the [recent hackathon hosted by ElevenLabs](https://elevenlabs.io/blog/announcing-the-winners-of-the-elevenlabs-worldwide-hackathon) – and I got to be in the room in San Francisco as it unfolded, and behind-the-scenes during the planning and judging. The two days saw furious sprints of heads-down building, punctuated by kitchen snack breaks and hallway pacing, leading to pre-demo jitters and delirious applause as it all came to an end (while the same flow played out in cities around the world). 
+We sponsored the [recent hackathon hosted by ElevenLabs](https://elevenlabs.io/blog/announcing-the-winners-of-the-elevenlabs-worldwide-hackathon) – and I got to be in the room in San Francisco as it unfolded, and behind-the-scenes during the planning and judging. 
+
+The two days saw furious sprints of heads-down building, punctuated by kitchen snack breaks and hallway pacing, leading to pre-demo jitters and delirious applause as it all came to an end (while the same flow played out in cities around the world). 
 
 <iframe
     src="https://www.youtube-nocookie.com/embed/eFsQqTqnfz4"
@@ -21,7 +23,7 @@ We sponsored the [recent hackathon hosted by ElevenLabs](https://elevenlabs.io/b
 />
 
   
-What I noticed was the thread of humanity that flowed through the whole thing, even while next-generation AI technology demos played out in front of us. Here are some of the highlights and lessons I noticed from my part in the event. 
+What I noticed was the thread of humanity that flowed through the whole thing, even while next-generation AI demos played out in front of us. Here are some of the highlights and lessons I noticed from my part in the event. 
 
 ## 1. Imperfection is trustable 
 **Project:** [DealWise](https://devpost.com/software/john-ai) (San Francisco winner)
@@ -43,7 +45,7 @@ But what inspired this direction? There was nothing about road trips, car hardwa
 
 It was chosen because William's own friend had been in an accident while driving the week prior, losing control due to drowsiness (injured, though thankfully not seriously). The picture of the accident scene was in the pitch deck. 
 
-It wasn’t pretty, but was a reminder that problem solving means noticing pain – and that means being open to what’s actually hitting you in life. 
+It wasn’t pretty, but it was a reminder that problem solving means noticing pain – and that means being open to what’s actually hitting you in life. 
 
 ![Roadmate](https://res.cloudinary.com/dmukukwp6/image/upload/roadmate2_d4c0167b6e.png)
 
@@ -61,9 +63,13 @@ They called their app HIPPO — a reference to the term for how a meeting’s en
 ## 4. Accessibility will be the default
 **Project:** [Badgermole](https://devpost.com/software/badgermole-ai) 
 
-Benedict, Jennifer and Wei built an application that could use your phone’s camera, identify and speak out any scene it saw, in the language of your choosing. Seen as an aid for those with visual impairments, [Badgermole](https://devpost.com/software/badgermole-ai) was a see-and-speak agent was a clear breakthrough for accessibility. 
+Benedict, Jennifer and Wei built an application that could use your phone’s camera, identify and speak out any scene it saw, in the language of your choosing. Seen as an aid for those with visual impairments, [Badgermole](https://devpost.com/software/badgermole-ai) was a see-and-speak agent that was a clear breakthrough for accessibility. 
 
-Why didn’t it win? Strangely, it’s because these features are becoming default settings out of the box already, when you use OpenAI tools, or even Apple’s emerging accessibility features. The team’s social impact insight into the need for accessibility aids across cultures was spot-on, and the demo showed a ready-to-rock instance of real-world applicability. The only hazard was: this already exists. A loss for the team, but a win for humans as a whole.
+Why didn’t it win? Strangely, it’s because these features are becoming default settings out of the box already, when you use OpenAI tools, or even Apple’s emerging accessibility features. 
+
+The team’s social impact insight into the need for accessibility aids across cultures was spot-on, and the demo showed a ready-to-rock instance of real-world applicability. The only hazard was: this already exists. 
+
+A loss for the team, but a win for humans as a whole.
 
 ![Badgermole in action](https://res.cloudinary.com/dmukukwp6/image/upload/badgermole_dacf3196f7.jpg)
 
@@ -83,7 +89,7 @@ Though the visual of a stuffed dino with its computer-innards splayed out during
 
 20 hours? Where did the surplus time get spent?  From the range of human-centered products being displayed at the hackathon, it was clear the time went instead towards user testing, iteration and fine-tuning models to meet human needs. 
 
-Speed already matters at a hackathon, and sponsor Lovable made their platform credits readily available for participants. This meant that every hacker was able to spend zero dollars to spin up a workable codebase for their web apps, get to something testable in much less time than usual — saving the rest for the evergreen question of “Does this meet a real human need?”
+Speed already matters at a hackathon, and sponsor Lovable made its platform credits readily available for participants. This meant that every hacker was able to spend zero dollars to spin up a workable codebase for their web apps, get to something testable in much less time than usual — saving the rest for the evergreen question of “Does this meet a real human need?”
 
 ## 7. PostHog is for when you’re ready to ask that 👆
 Hackers burnt through their Lovable, ElevenLabs, Fal.ai and Make.com credits like they grew on trees; the Discord channels lit up with platform-specific participant questions, all weekend long. Meanwhile, over in the PostHog channel, it was relatively quiet. Until the very end.
@@ -95,12 +101,20 @@ The feature set in [PostHog’s suite of products](/products) is all about gathe
 ## 8. People LOVE PostHog (and joy is not proprietary)
 I’m new to PostHog, so I was surprised when I showed up to the event in my [PostHog hoodie](/merch), and somebody asked for a selfie — as if I’d built the thing! “You work for PostHog?” somebody else asked, seeing my backpack. “That’s sick.” 
 
-I asked a few people why that mattered to them, and the fandom seems to have a few roots: first, people told me they loved that the product is completely free to use, and have really maxed out access to these credits for their personal projects (like Maria, whose clever drinking games app is tracked with PostHog.) Second, people appreciate the allegiance to technical users; it really allows for depth and customization. Lastly, well, it’s the brand: billboards, hedgehogs, vibe and all. 
+I asked a few people why that mattered to them, and the fandom seems to have a few roots: first, people told me they loved that the product is completely free to use, and have really maxed out access to these credits for their personal projects (like Maria, whose clever drinking games app is tracked with PostHog.) 
 
-It makes me wonder, what would happen if more brands were powered by values like generosity, open source-ness, and humour? Would it get old? Or would it mean more places are sparking more joy? If you can believe it, PostHog doesn’t actually have a monopoly on those things...you, too, can bring them to what you make.
+Second, people appreciate the allegiance to technical users; it really allows for depth and customization. Lastly, well, it’s the brand: billboards, hedgehogs, vibe and all. 
+
+It makes me wonder, what would happen if more brands were powered by values like generosity, open source-ness, and humour? Would it get old? Or would it mean more places are sparking more joy? 
+
+If you can believe it, PostHog doesn’t actually have a monopoly on those things...you, too, can bring them to what you make.
 
 ## 9. Meatspace matters
-Meatspace: the cyberspace-inspired word for people interacting with real bodies in the physical realm. This hackathon could have taken place online (and one chapter did), but the chemistry of in-person just hits different. From sharing food to overhearing an idea, to on-the-spot testing, to the contagion of energy as the submission deadline approaches, there is something unleashed when people choose to work in proximity. [This isn’t a rallying cry for RTO](/founders/remote-culture), it’s an invitation to be co-located when it really matters. Whether for social connection or a focused sprint, getting off of the screen and into real-life can help with a lot of stuckness. 
+Meatspace: the cyberspace-inspired word for people interacting with real bodies in the physical realm. 
+
+This hackathon could have taken place online (and one chapter did), but the chemistry of in-person just hits different. From sharing food to overhearing an idea, to on-the-spot testing, to the contagion of energy as the submission deadline approaches, there is something unleashed when people choose to work in proximity. 
+
+[This isn’t a rallying cry for RTO](/founders/remote-culture), it’s an invitation to be co-located when it really matters. Whether for social connection or a focused sprint, getting off of the screen and into real-life can help with a lot of stuckness. 
 
 ## 10. Related: There really is a “room where it happens”
 The hackathon was hosted at Intercom’s offices, and running point on tech that day was unsung hero Alan McGlinchey, head of startups at Intercom. He ensured people had access to the space, ferried mics back and forth during the demos, and even brought his kiddo to work on a Saturday. As I thanked him for his work, I remarked at how physically-bound this whole thing was:
@@ -110,4 +124,9 @@ The hackathon was hosted at Intercom’s offices, and running point on tech that
 Alan agreed emphatically. “There really is a centre of gravity that San Francisco has. If you’re serious about moving things forward in tech, the people, the money, and the decisions all happen physically here.” 
 
 ## 11. Talent isn’t bound by geography
-While some folks I met have been working in startups for years — I talked to folks who were ex-Uber, ex-Meta — there are others who are just getting started. People with talent, ideas, perspective and grit, who can hack with the best of ‘em, but don’t happen to live in the right city or know the right people. I talked to one participant who was here from India, building an incident-response app for infrastructure teams, who was curious to learn more about product marketing. Some of the teams that blew us away as judges consisted of new grads who had not yet had a “real job,” yet ended up landing in second place, leaving us judges wide-eyed and amazed. It was a reminder to me of the importance of hiring globally and working remotely ([as we do at PostHog](/handbook/company/culture)), and trying to find ways to make sure future-making events can hold the door open for talent no matter where it finds you.
+
+While some folks I met have been working in startups for years — I talked to folks who were ex-Uber, ex-Meta — there are others who are just getting started. People with talent, ideas, perspective and grit, who can hack with the best of ‘em, but don’t happen to live in the right city or know the right people. 
+
+I talked to one participant who was here from India, building an incident-response app for infrastructure teams, who was curious to learn more about product marketing. Some of the teams that blew us away as judges consisted of new grads who had not yet had a “real job,” yet ended up landing in second place, leaving us judges wide-eyed and amazed. 
+
+It was a reminder to me of the importance of hiring globally and working remotely ([as we do at PostHog](/handbook/company/culture)), and trying to find ways to make sure future-making events can hold the door open for talent no matter where it finds you.
