@@ -82,10 +82,10 @@ Your primary responsibility is simply to make sure SDK questions get some love. 
   - [posthog-php](https://github.com/PostHog/posthog-php)
   - [posthog-ruby](https://github.com/PostHog/posthog-ruby)
   - [posthog-java](https://github.com/PostHog/posthog-java)
-  - [posthog-rs (Rust)](https://posthog.com/docs/libraries/rust)
-  - [posthog-go](https://posthog.com/docs/libraries/go)
+  - [posthog-rs (Rust)](/docs/libraries/rust)
+  - [posthog-go](/docs/libraries/go)
   - [posthog-dotnet](https://github.com/PostHog/posthog-dotnet)
-  - Others, see https://posthog.com/docs/libraries
+  - Others, see /docs/libraries
 
 You don't have to be an expert in all of the SDKs, but it can be a great opportunity to dive into parts unknown.
 
