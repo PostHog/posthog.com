@@ -18,7 +18,7 @@ You can connect your BigQuery tables to PostHog by configuring it as a source. Y
 
 ## Service account setup
 
-To securely connect your BigQuery account with PostHog, you should create a dedicated service account with the minimum required permissions.
+To securely connect your BigQuery account to PostHog, create a dedicated service account with the minimum required permissions:
 
 1. **Create a service account:**
 - Go to the [**Google Cloud Console.**](https://console.cloud.google.com/)
