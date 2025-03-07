@@ -12,9 +12,6 @@
         "gatsby"
     ],
     "private": true,
-    "engines": {
-        "node": "^18.18.0"
-    },
     "scripts": {
         "build-move": "gatsby build && bash ./src/scripts/move-index.sh",
         "build": "gatsby build",
