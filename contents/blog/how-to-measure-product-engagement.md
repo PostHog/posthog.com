@@ -69,7 +69,7 @@ A good way to get started is to use some basic metrics to create a broad framewo
 
 ### Active users
 Active users are those who perform valuable actions on your platform. 
-Daily Active Users (DAU) is a key metric for subscription services and is expressed as a percentage of total users. High DAU is evidence that you’ve been successful in attracting customers. On PostHog, you can track this by [defining actions for key activities, such as daily sign-ins](https://posthog.com/docs/user-guides/actions).
+Daily Active Users (DAU) is a key metric for subscription services and is expressed as a percentage of total users. High DAU is evidence that you’ve been successful in attracting customers. On PostHog, you can track this by [defining actions for key activities, such as daily sign-ins](https://posthog.com/docs/data/actions).
 
 This metric is particularly important if you’re working with an ad-based revenue model. The number of daily users you see is directly linked to your profitability, so you should be keeping a close eye on DAU.
 
