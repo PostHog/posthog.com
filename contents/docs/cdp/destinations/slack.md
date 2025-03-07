@@ -34,11 +34,10 @@ You'll also need access to the relevant Slack account.
 
 6. Choose your event or action matching and customize your message using Slack's [block kit](https://api.slack.com/block-kit/building). 
 
-7. When selecting a Slack channel, you can either:
-   - Search for channels by name in the dropdown
-   - Paste a channel ID (e.g., `C1234567890`) to find specific channels, which is useful if you have a large number of Slack channels
+7. When selecting a Slack channel, you can either search for channels by name in the dropdown or paste a channel ID (e.g., `C1234567890`).
 
 8. Once done, press **Create & Enable** and watch your messages appear in Slack.
+
 <img alt="Example Slack message" src="https://res.cloudinary.com/dmukukwp6/image/upload/slack_example_80bff761a9.png"/>
 
 You can see a full example of this in our tutorial on [how to send survey responses to Slack](/tutorials/slack-surveys)
