@@ -423,7 +423,7 @@ curl -v -L --header "Content-Type: application/json" -d '{
   "event": "$pageview",
   "distinct_id": "user distinct id",
   "properties": {
-    "$current_url": "https://posthog.com/docs/api/capture"
+    "$current_url": "/docs/api/capture"
   }
 }' <ph_client_api_host>/i/v0/e/
 ```
@@ -441,7 +441,7 @@ payload = {
     "event": "$pageview",
     "distinct_id": "user distinct id",
     "properties": {
-        "$current_url": "https://posthog.com/docs/api/capture",
+        "$current_url": "/docs/api/capture",
     }
 }
 response = requests.post(url, headers=headers, data=json.dumps(payload))
