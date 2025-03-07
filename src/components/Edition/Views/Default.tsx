@@ -11,7 +11,7 @@ import isToday from 'dayjs/plugin/isToday'
 import { useLayoutData } from 'components/Layout/hooks'
 import { CallToAction } from 'components/CallToAction'
 import { Menu } from '@headlessui/react'
-import { IconChevronDown, IconFilter, IconX, IconSort } from '@posthog/icons'
+import { IconChevronDown, IconFilter, IconX, IconSort, IconExpand } from '@posthog/icons'
 import { Icon } from 'components/PostLayout/Menu'
 import { navigate } from 'gatsby'
 import { postsMenu as menu } from '../../../navs/posts'
@@ -19,6 +19,7 @@ import Intro from '../Intro'
 import Tags from '../Tags'
 import Tooltip from 'components/Tooltip'
 import PostsTable from '../PostsTable'
+import { Resizable } from 'react-resizable'
 dayjs.extend(relativeTime)
 dayjs.extend(isToday)
 
@@ -281,54 +282,91 @@ const Title = () => {
 function PostsListing() {
     const { posts, fetchMore, isValidating, isLoading, articleView, hasMore, sort, setSort } = useContext(PostsContext)
     const breakpoints = useBreakpoint()
+    const [width, setWidth] = useState(articleView ? 384 : null)
+    const [collapsed, setCollapsed] = useState(false)
+
+    const onResize = (_e, { size }) => {
+        setWidth(size.width)
+        setCollapsed(size.width <= 320)
+    }
 
     return articleView && breakpoints.sm ? null : (
-        <div
-            className={`
+        <Resizable
+            width={width || 0}
+            height={0}
+            onResize={onResize}
+            resizeHandles={['e']}
+            handle={
+                <div className="absolute right-0 top-0 bottom-0 w-2 cursor-col-resize hover:bg-border/50 dark:hover:bg-border-dark/50" />
+            }
+            minConstraints={[320, 0]}
+            maxConstraints={[640, 0]}
+        >
+            <div
+                style={{ width: width && !collapsed ? `${width}px` : 'auto' }}
+                className={`
                 min-w-0
-                transition-all 
                 ${
                     articleView
-                        ? 'hidden md:flex flex-col h-auto sticky top-0 z-10 reasonable:top-[108px] w-full md:w-[20rem] lg:w-[24rem] flex-shrink-0 border-r border-border dark:border-dark 2xl:border-l'
+                        ? 'hidden md:flex flex-col h-auto sticky top-0 z-10 reasonable:top-[108px] flex-shrink-0 border-r border-border dark:border-dark 2xl:border-l'
                         : 'flex-grow md:px-8 2xl:px-12'
                 }
             `}
-        >
-            {articleView && (
-                <>
-                    <CommunityBar />
-                    <PostFilters />
-                </>
-            )}
-            <div
-                className={
-                    articleView
-                        ? 'after:absolute after:w-full after:h-24 after:bottom-0 after:bg-gradient-to-b after:from-transparent dark:after:via-dark/80 dark:after:to-dark after:via-light/80 after:to-light after:z-10 relative '
-                        : ''
-                }
             >
-                {!articleView && (
+                {collapsed ? (
+                    <div className="[writing-mode:vertical-lr] h-full flex items-center justify-start text-sm p-1.5">
+                        <Tooltip content="Expand posts" placement="right">
+                            <button
+                                onClick={() => {
+                                    setCollapsed(false)
+                                    setWidth(384)
+                                }}
+                                className="text-sm border border-b-2 border-light dark:border-dark rounded p-0.5 active:translate-y-[1px] active:transition-all"
+                            >
+                                <IconExpand className="w-6 h-6 rotate-90" />
+                            </button>
+                        </Tooltip>
+                    </div>
+                ) : (
                     <>
-                        <Title />
-                        <Intro />
+                        {articleView && (
+                            <>
+                                <CommunityBar />
+                                <PostFilters />
+                            </>
+                        )}
+                        <div
+                            className={
+                                articleView
+                                    ? 'after:absolute after:w-full after:h-24 after:bottom-0 after:bg-gradient-to-b after:from-transparent dark:after:via-dark/80 dark:after:to-dark after:via-light/80 after:to-light after:z-10 relative '
+                                    : ''
+                            }
+                        >
+                            {!articleView && (
+                                <>
+                                    <Title />
+                                    <Intro />
+                                </>
+                            )}
+                            <ul
+                                className={`list-none p-0 m-0 snap-y snap-proximity overflow-x-hidden mt-4 ${
+                                    articleView && !breakpoints.sm ? 'h-[85vh] overflow-auto mt-[-2px]' : ''
+                                }`}
+                            >
+                                <PostsTable
+                                    posts={posts}
+                                    fetchMore={fetchMore}
+                                    isValidating={isValidating}
+                                    isLoading={isLoading}
+                                    hasMore={hasMore}
+                                    articleView={articleView}
+                                />
+                            </ul>
+                        </div>
                     </>
                 )}
-                <ul
-                    className={`list-none p-0 m-0 snap-y snap-proximity overflow-x-hidden mt-4 ${
-                        articleView && !breakpoints.sm ? 'h-[85vh] overflow-auto mt-[-2px]' : ''
-                    }`}
-                >
-                    <PostsTable
-                        posts={posts}
-                        fetchMore={fetchMore}
-                        isValidating={isValidating}
-                        isLoading={isLoading}
-                        hasMore={hasMore}
-                        articleView={articleView}
-                    />
-                </ul>
             </div>
-        </div>
+        </Resizable>
     )
 }
 
