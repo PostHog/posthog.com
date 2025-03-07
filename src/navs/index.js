@@ -3002,6 +3002,10 @@ export const docsMenu = {
                             url: '/docs/cdp/sources/chargebee',
                         },
                         {
+                            name: 'BigQuery',
+                            url: '/docs/cdp/sources/bigquery',
+                        },
+                        {
                             name: 'Self-managed',
                         },
                         {
