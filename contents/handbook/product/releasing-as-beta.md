@@ -42,7 +42,18 @@ There are also some best practices which all betas should follow in order to pro
 
 The [Content & Docs team](/teams/marketing) can help build out any documentation, if needed. Titles, descriptions, and links can be added using [the early access menu](https://us.posthog.com/project/2/early_access_features).
 
-> **Launching a new beta?** It's helpful to let [the Words & Pictures team](/teams/words-pictures) know when it launches. They'll then add the beta to [the changelog](https://posthog.com/changelog/), organize any marketing announcements, plan [a full announcement](https://github.com/PostHog/meta/issues/new?template=launch-plan-.md) for full release, create an email onboarding flow to help you collect user feedback, and anything else you need. You can let them know via [the team Slack channel](https://posthog.slack.com/archives/C083V7C6GKE).
+> **Launching a new beta?** It's helpful to let  know when it launches. They'll then add the beta to [the changelog](https://posthog.com/changelog/), organize any marketing announcements, plan [a full announcement](https://github.com/PostHog/meta/issues/new?template=launch-plan-.md) for full release, create an email onboarding flow to help you collect user feedback, and anything else you need. You can let them know via [the team Slack channel](https://posthog.slack.com/archives/C083V7C6GKE).
+
+## Announcing a beta
+
+When we're ready to launch a new beta, it's helpful to let [the Comms team](/teams/words-pictures) know. They can then go through the beta announcement checklist, if appropriate. 
+
+- [ ] Announce the beta to the changelog in a stand-alone post
+- [ ] Announce the beta to users in the monthly changelog email
+- [ ] Send a personal (non-designed, personally addressed) email to the `Beta Feedback - Power Users` segment in Customer.io, encouraging early beta adoption with previous beta users
+- [ ] If the beta exists on [the roadmap](/roadmap), export that waitlist to a segment, email them too
+- [ ] Announce the beta in-app with a changelog notification
+- [ ] Add the beta as a variant path in the beta feedback flow, in Customer.io
 
 ## Activation criteria
 
