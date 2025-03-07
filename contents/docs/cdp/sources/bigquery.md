@@ -45,7 +45,7 @@ To securely connect your BigQuery account to PostHog, create a dedicated service
 
 ## Configuring PostHog
 
-1. Go to the [Data pipeline page](https://us.posthog.com/pipeline/sources) and the sources tab in PostHog
+1. In PostHog, go to the **[Data pipelines](https://us.posthog.com/pipeline/sources)** tab, then choose **sources**
 2. Click **New source** and select BigQuery
 3. Drag or drop the **Google Cloud JSON Key file** to upload
 4. Enter the **Dataset ID** you want to import
