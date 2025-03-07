@@ -43,7 +43,7 @@ To securely connect your BigQuery account to PostHog, create a dedicated service
 - Click **Add Key > Create new key**, choose **JSON**, and download the key file.
 - **Important:** Store the JSON key securely, as it contains sensitive credentials.
 
-## How to link
+## Configuring PostHog
 
 1. Go to the [Data pipeline page](https://us.posthog.com/pipeline/sources) and the sources tab in PostHog
 2. Click **New source** and select BigQuery
