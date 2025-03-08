@@ -6,6 +6,8 @@ thumbnail: >-
   https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/cdp/thumbnails/geoip.png
 tags:
   - geoip
+templateId: 
+  - plugin-posthog-plugin-geoip
 ---
 
 import Requirements from "./_snippets/requirements.mdx"

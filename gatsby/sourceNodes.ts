@@ -636,4 +636,23 @@ export const sourceNodes: GatsbyNode['sourceNodes'] = async ({ actions, createCo
         })
     }
     await fetchPostHogDestinations()
+
+    const fetchPostHogTransformations = async () => {
+        const { results } = await fetch(
+            `https://us.posthog.com/api/public_hog_function_templates?type=transformation`
+        ).then((res) => res.json())
+        results.forEach((transformation) => {
+            const node = {
+                id: createNodeId(`posthog-transformation-${transformation.id}`),
+                internal: {
+                    type: 'PostHogTransformation',
+                    contentDigest: createContentDigest(transformation),
+                },
+                transformationId: transformation.id,
+                ...transformation,
+            }
+            createNode(node)
+        })
+    }
+    await fetchPostHogTransformations()
 }
