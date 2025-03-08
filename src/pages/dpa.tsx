@@ -1635,7 +1635,7 @@ function DpaGenerator() {
                                     the signature of the data importer and the date of signature shall be as signed
                                     above;
                                 </li>
-                                <li>the role of the exporter is processor;</li>
+                                <li>the role of the importer is processor;</li>
                                 <li>the activities relate to the provision of the Services.</li>
                             </ul>
 
