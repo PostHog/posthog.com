@@ -5,7 +5,6 @@ author:
   - ian-vanagas
 showTitle: true
 sidebar: Docs
-featuredVideo: 'https://www.youtube-nocookie.com/embed/cKaQ2mR4sSc'
 tags:
   - feature flags
 ---
