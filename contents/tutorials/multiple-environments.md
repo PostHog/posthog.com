@@ -1,12 +1,13 @@
 ---
 title: >-
-  How to setup PostHog for multiple environments (development, staging,
+  How to set up PostHog for multiple environments (development, staging,
   production)
 sidebar: Docs
 showTitle: true
 author:
   - ian-vanagas
-date: 2024-05-30
+  - michael-matloka
+date: 2025-02-28
 featuredTutorial: false
 tags:
   - configuration
@@ -20,11 +21,13 @@ Many software development teams use multiple environments to split up their code
 
 Using multiple environments requires splitting the data from each of them. If not, development and staging data combine with production data and can cause inaccuracy and issues. This tutorial goes over how to prevent those issues by setting up PostHog for use in multiple environments.
 
-## Using multiple projects
+## Using multiple environments
 
-The best practice for using PostHog across multiple environments is to use multiple projects. This enables developers to test [event capture](/docs/product-analytics/capture-events), [session replays](/docs/session-replay), and [feature flags](/docs/feature-flags) without polluting the data in production.
+The best practice for using PostHog across multiple environments is to use [PostHog's environments feature](/docs/settings/projects-and-environments#what-are-environments). This enables developers to test [event capture](/docs/product-analytics/capture-events), [session replays](/docs/session-replay), or [feature flags](/docs/feature-flags) without polluting the data in production.
 
-To create a new project, in your [PostHog instance](https://us.posthog.com/), click your project name and then the **New project** button. Be sure to name your project to make it clear it is not production, like `development` or `staging`.
+To create a new environment, in your [PostHog instance](https://us.posthog.com/), click your project name and then the **New environment** button. Be sure to name your environment clearly and without duplicating the project name, for example just `development` or `staging`.
+
+// TODO: Rewrite everything below too once final Environments UI improvements are in
 
 <ProductVideo
     videoLight="https://res.cloudinary.com/dmukukwp6/video/upload/v1716972205/posthog.com/contents/Create-environment-light.mp4"  
