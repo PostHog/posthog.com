@@ -51,7 +51,7 @@ When you start, you will be automatically invited to these. They are totally opt
 
 ### Guidance for onboarding buddies
 
-- Once we have decided which team a new joiner will join, the People & Ops team will reach out to the team to find an onboarding buddy. _Please make sure if don't have any leave booked in the week before and the two weeks after the new starter joins_
+- Once we have decided which team a new joiner will join, the People & Ops team will reach out to the team to find an onboarding buddy. _Please make sure that you don't have any leave booked in the week before and the two weeks after the new starter joins_
 - We will intro the new joiner and the onboarding buddy via email - please say hi and decide together where and when the in person onboarding will happen. 
  > If any travel is needed for the in-person onboarding, please check our [Spending Money page](/handbook/people/spending-money) and book your travel accordingly. _You don't need to let us team know, just use your Brex/Revolut card._
 - Please make sure you spend at least 3 days together, working through the [first week onboarding list](/handbook/people/onboarding#during-their-first-week) and spending time working on any role-specific tasks that are outlined in the new joiner's personal onboarding issue.
