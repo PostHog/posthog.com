@@ -258,7 +258,7 @@ export default function Home() {
   useEffect(() => {
     const flag = posthog.getFeatureFlag('main-cta')
     setText(flag === 'test' ? 'Click this button for free money' : 'Click me');
-  }, [])
+  }, []) // This effect gives `PHProvider` time to initialize `posthog`.
 
   return (
     <main>
