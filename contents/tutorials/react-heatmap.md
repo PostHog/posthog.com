@@ -91,8 +91,8 @@ ReactDOM.createRoot(document.getElementById('root')).render(
 Once done, run `npm run dev` again then go to your app and click the button, enter some text into the input, and click the link. You should see events for these in your PostHog instance.
 
 <ProductScreenshot
-  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_03_07_at_11_05_46_2x_8e363e9e25.png"
-  imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_03_07_at_11_05_34_2x_65b7249857.png"
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_03_07_at_11_05_34_2x_65b7249857.png"
+  imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_03_07_at_11_05_46_2x_8e363e9e25.png"
   alt="Events in PostHog"
   classes="rounded"
 />
@@ -101,7 +101,7 @@ Once done, run `npm run dev` again then go to your app and click the button, ent
 
 With our React app and PostHog set up as well as some data, we can get a heatmap of this data using the toolbar. 
 
-In PostHog, click the **Toolbar** tab on the left menu, then add `http://localhost:5173` to the authorized URLs, and click **Launch**. This takes you to your site with the PostHog toolbar active.
+In PostHog, click the [Toolbar tab](https://us.posthog.com/toolbar) on the left menu, then add `http://localhost:5173` to the authorized URLs, and click **Launch**. This takes you to your site with the PostHog toolbar active.
 
 ![Toolbar](https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_03_07_at_11_09_51_2x_8b962cbfd6.png)
 
