@@ -8,12 +8,23 @@ availability:
     enterprise: full
 ---
 
-> **Important:** When installing PostHog via a package manager, surveys require `posthog-js v1.81.1+`.
+import Tab from "components/Tab"
+import WebSurveys from "./_snippets/web-surveys-installation.mdx"
+import ReactNativeSurveys from "./_snippets/react-native-surveys-installation.mdx"
 
 Surveys are a great tool to collect qualitative feedback from your users.
 
-To get started with surveys, add PostHog to your web app by installing our [Javascript web SDK](/docs/libraries/js) (if you haven't already). There are two methods to do so:
-
-import WebInstall from '../integrate/_snippets/install-web.mdx'
-
-<WebInstall />
+<Tab.Group tabs={['Web', 'React Native']}>
+    <Tab.List>
+        <Tab>Web</Tab>
+        <Tab>React Native</Tab>
+    </Tab.List>
+    <Tab.Panels>
+        <Tab.Panel>
+            <WebSurveys />
+        </Tab.Panel>
+        <Tab.Panel>
+            <ReactNativeSurveys />
+        </Tab.Panel>
+    </Tab.Panels>
+</Tab.Group>
