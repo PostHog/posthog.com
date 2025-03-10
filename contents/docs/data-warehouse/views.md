@@ -20,6 +20,14 @@ For a query to be a valid view, all fields being accessed must be aliased (with 
 
 ![valid view](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/features/data-warehouse/valid-view.png)
 
+### Materializing and scheduling a view
+
+Views can be materialized and stored in the PostHog data warehouse. This means that the view is precomputed, which can significantly improve query performance.
+
+After you create a view, you can also schedule it to be updated at a specific interval. This is useful when you have a view that is used frequently, and you want to ensure that the data synced at a specified cadence. For example, a materialized view can be scheduled for an expensive query that is used in multiple dashboards.
+
+![materialized view](https://res.cloudinary.com/dmukukwp6/image/upload/materialized_view_6ba7a6b53d.png)
+
 ### Extending PostHog models with views
 
 Views are a powerful tool for extending existing PostHog models for easier data access. For example, if you wanted to associate your Stripe customer data with product usage data of your users, you would normally need to manually set up a join. With views, you can attach views to PostHog models so that you can directly access those fields on the PostHog table. 
