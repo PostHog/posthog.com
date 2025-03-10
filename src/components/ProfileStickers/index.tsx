@@ -25,6 +25,7 @@ import {
     StickerFlagSE,
     StickerFlagUnknown,
     StickerFlagUS,
+    StickerFlagUY,
     StickerPineappleYes,
     StickerPineappleNo,
     StickerPineappleUnknown,
@@ -85,6 +86,8 @@ const Stickers = ({ location, country, pineappleOnPizza, isTeamLead, editing, id
                     <StickerFlagPR className="w-8 h-8" />
                 ) : country === 'SE' ? (
                     <StickerFlagSE className="w-8 h-8" />
+                ) : country === 'UY' ? (
+                    <StickerFlagUY className="w-8 h-8" />
                 ) : (
                     <StickerFlagUnknown className="w-8 h-8" />
                 )}
