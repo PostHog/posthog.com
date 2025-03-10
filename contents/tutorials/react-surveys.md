@@ -427,7 +427,7 @@ You can capture these events using `posthog.capture()`:
 ```
 
 <details>
-<summary>Final `App.jsx` code</summary>
+<summary>Final App.jsx code</summary>
 
 ```jsx
 // src/App.jsx
