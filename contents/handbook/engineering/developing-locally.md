@@ -510,12 +510,22 @@ With PyCharm's built in support for Django, it's fairly easy to setup debugging 
 
 ### Start the debugging environment
 
-1. Instead of manually running `docker compose` you can open the `docker-compose.dev.yml` file and click on the double play icon next to `services`
-2. From the run configurations select:
-   - "PostHog" and click on debug
-   - "Celery" and click on debug (optional)
-   - "Frontend" and click on run
-   - "Plugin server" and click on run
+If you are using the `mprocs` approach to Posthog (`DEBUG=1 ./bin/start`) and want to debug backend service through PyCharm, you need to:
+
+1. Start containers through Docker (for example, using regular `docker compose -f docker-compose.dev.yml -v up`).
+2. Create a Pycharm configuration to start `uvicorn` manually (instead of the `mprocs` script).
+   - Select configurations in the top right corner > `Edit Configurations...`.
+   - Add new `Python` configuration (`+` button in the top left corner of the `Configurations` window).
+   - Set `module` (instead of `script`) to `uvicorn`.
+   - Set script parameters (should be identical to `mprocs` backend script parameters at `posthog/bin/start-backend`): 
+     ```
+     --reload posthog.asgi:application --host 0.0.0.0 --log-level debug --reload-include "posthog/" --reload-include "ee/" --reload-include "products/"
+     ```
+   - Set the working directory to the `posthog` root.
+   - Add `DEBUG=1` to the configuration's environmental variables (if you want to replicate the default behavior),
+3. Start `posthog` through `DEBUG=1 ./bin/start`.
+
+> **Note:** The logic is to start `uvicorn` manually the same way and in the same environment as it would be started by `mprocs`. It also means that the `backend` could be colored red when starting the service (as `mprocs` won't be able to start `uvicorn` at the proper port). However, using this approach you should be able to debug any backend process properly.
 
 ## Extra: Accessing Postgres
 
