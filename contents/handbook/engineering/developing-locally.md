@@ -531,6 +531,33 @@ If you are using the `mprocs` approach to Posthog (`DEBUG=1 ./bin/start`) and wa
 
 While developing, there are times you may want to connect to the database to query the local database, make changes, etc. To connect to the database, use a tool like pgAdmin and enter these connection details: _host_:`localhost` _port_:`5432` _database_:`posthog`, _username_:`posthog`, _pwd_:`posthog`.
 
+## Extra: Accessing ClickHouse
+
+The same goes for Clickhouse. If you want to query the local database, you can:
+
+- Access it through a CLI, by going inside the container and enabling client () to query from.
+  ```bash
+  docker exec -it posthog-clickhouse-1 bash
+  > clickhouse-client --user default --password ""
+  ```
+  
+- Access it through a GUI, like DBeaver/DataGrip/IDE extensions/etc. by setting in the connection configuration:
+  ```yaml
+  host: localhost
+  port: 8123
+  user: default
+  password: 
+  database: 
+  ```
+  For example, `jdbc` connection string would be `jdbc:clickhouse://localhost:8123/`.
+
+> **Note:** Some ClickHouse tables aren't intended to be used with GUI, so you can get errors trying to display it (for example, the amount of data is too large or the structure doesn't fit GUI expectations). It could lead to errors, like `Only groupMap is supported at this point` when using JetBrains products. However, it doesn't mean that the data isn't there - you can still query it directly.
+> ```sql
+> SELECT session_id FROM session_replay_events; -- Will work properly
+> SELECT session_id, first_url FROM session_replay_events; -- Could fail in PyCharm
+> SELECT s.session_id, argMinMerge(s.first_url) as first_url FROM session_replay_events s GROUP BY session_id; -- Will work properly
+> ```
+
 ## Extra: Accessing the Django Admin
 
 If you cannot access the Django admin http://localhost:8000/admin/, it could be that your local user is not set up as a staff user. You can connect to the database, find your `posthog_user` and set `is_staf` to `true`. This should make the admin page accessible.
