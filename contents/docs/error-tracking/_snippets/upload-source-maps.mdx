@@ -1,6 +1,6 @@
 ### Uploading source maps
 
-If your source maps are not publicly hosted you will need to upload them during your build process to see unminified code in your stack traces. 
+If your source maps are not publicly hosted, you will need to upload them during your build process to see unminified code in your stack traces. 
 
 The `posthog-cli` handles this process. You will need to install it via Cargo and complete the necessary authentication
 
@@ -10,7 +10,7 @@ cargo install posthog-cli
 posthog-cli login
 ```
 
-Once you've built your application and have bundled assets that serve your site you will need to inject the context required by PostHog to associate the maps with the served code.
+Once you've built your application and have bundled assets that serve your site, inject the context required by PostHog to associate the maps with the served code.
 You will then need to upload the modified assets to PostHog. Both of these operations can be done by running the respective `sourcemap` commands.
 
 ```bash
