@@ -311,7 +311,7 @@ Once we have them, we'll inject them into the HTML and send it back to the clien
   // ... existing code
 ```
 <details>
-<summary>See the full `index.js` file</summary>
+<summary>See the full index.js file</summary>
 
 ```js
 // server/index.js
@@ -472,7 +472,7 @@ nodemon --watch server --watch src/entry-server.jsx server/index.js
 
 When you visit `http://localhost:3000`, you should see that feature flags are loaded immediately on the first page load. Open up the site on an incognito or guest window, and you'll see that the flag returns `true` on the first load without any delay.
 
-![It's working](https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_03_06_at_11_06_19_2x_f9bda663bb.png)
+![It's working](https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_03_06_at_11_36_43_2x_476a2f9c96.png)
 
 This is feature flag bootstrapping working successfully. From here, you can make the flag redirect to specific pages, control session recordings, or run an A/B test on your home page call to action.
 
