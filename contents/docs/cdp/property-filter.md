@@ -6,6 +6,8 @@ thumbnail: >-
   https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/cdp/thumbnails/property-filter.png
 tags:
   - property-filter
+templateId:
+  - plugin-property-filter-plugin
 ---
 
 import Requirements from "./_snippets/requirements.mdx"

@@ -6,6 +6,8 @@ thumbnail: >-
   https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/cdp/thumbnails/timestamp-parser.png
 tags:
   - timestamp-parser
+templateId: 
+  - plugin-timestamp-parser-plugin
 ---
 
 import Requirements from "./_snippets/requirements.mdx"

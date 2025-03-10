@@ -6,6 +6,8 @@ thumbnail: >-
   https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/cdp/thumbnails/url_normalizer.png
 tags:
   - url-normalizer
+templateId:
+  - plugin-posthog-url-normalizer-plugin
 ---
 
 import Requirements from "./_snippets/requirements.mdx"
