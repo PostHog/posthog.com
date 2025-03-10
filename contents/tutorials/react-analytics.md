@@ -7,7 +7,7 @@ tags:
   - product analytics
 ---
 
-[Product analytics](/product-analytics) enable you to gather and analyze data about how users interact with your React app. To show you how to set up analytics, in this tutorial we create a basic React app with Vite, add PostHog, and use it to capture pageviews and custom events.
+[Product analytics](/product-analytics) enables you to gather and analyze data about how users interact with your React app. To show you how to set up analytics, in this tutorial we create a basic React app with Vite, add PostHog, and use it to capture pageviews and custom events.
 
 ## Creating a React app with Vite
 
