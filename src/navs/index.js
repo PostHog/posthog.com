@@ -924,7 +924,7 @@ export const communityMenu = {
             name: 'Posts',
             icon: 'IconBook',
             color: 'red',
-            url: '/posts',
+            url: 'https://posthog.com/posts',
         },
         {
             name: 'Questions',
@@ -936,7 +936,7 @@ export const communityMenu = {
             name: 'Guides',
             icon: 'IconMap',
             color: 'red',
-            url: '/tutorials',
+            url: 'https://posthog.com/tutorials',
             children: [
                 {
                     name: 'All guides',
