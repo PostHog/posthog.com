@@ -8,7 +8,7 @@ yarn add posthog-js
 npm install --save posthog-js
 ```
 
-2. Add your environment variables to your `.env.local` file and to your hosting provider (e.g. Vercel, Netlify, AWS). You can find your project API key and host in [your project settings](https://us.posthog.com/settings/project). Make sure they are "public" or accessible in the frontend.
+2. Add your environment variables to your `.env.local` file and to your hosting provider (e.g. Vercel, Netlify, AWS). You can find your project API key and host in [your project settings](https://us.posthog.com/settings/project). Including `VITE_PUBLIC_` in their names ensures they are accessible in the frontend.
 
 ```shell file=.env.local
 VITE_PUBLIC_POSTHOG_KEY=<ph_project_api_key>
