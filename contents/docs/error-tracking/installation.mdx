@@ -15,6 +15,7 @@ import SentryInstall from '../libraries/_snippets/install-sentry.mdx'
 import AngularInstall from "../integrate/_snippets/install-angular.mdx"
 import AngularErrorTracking from './_snippets/angular-install-error-tracking.mdx'
 import NextJSErrorTracking from './_snippets/nextjs-install-error-tracking.mdx'
+import SvelteErrorTracking from './_snippets/svelte-install-error-tracking.mdx'
 
 <BetaFeedbackBanner />
 
@@ -28,6 +29,7 @@ Error tracking enables you to track, investigate, and resolve exceptions your cu
       <Tab>Python</Tab>
       <Tab>Node</Tab>
       <Tab>Next.js</Tab>
+      <Tab>SvelteKit</Tab>
       <Tab>Angular</Tab>
       <Tab>Sentry</Tab>
     </Tab.List>
@@ -50,6 +52,9 @@ Error tracking enables you to track, investigate, and resolve exceptions your cu
         </Tab.Panel>
         <Tab.Panel>
           <NextJSErrorTracking />
+        </Tab.Panel>
+        <Tab.Panel>
+          <SvelteErrorTracking />
         </Tab.Panel>
         <Tab.Panel>
           <AngularInstall />
