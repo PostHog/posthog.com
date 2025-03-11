@@ -21,7 +21,7 @@ You'll also need access to the relevant Snapchat Business account.
 
 4. Connect your Snapchat Business account at the configuration step.
 
-5. Visit the [Snapchat Ads Manager](https://business.snapchat.com/).
+5. Visit the [Snapchat Business Manager](https://business.snapchat.com/).
    1. If you’ve already set up a Pixel for your website, we recommend that you use the same Pixel ID for your browser and server events.
       1. To create a new Pixel, click **Pixels** and then click **Create Pixel** button.
       2. Choose a name for your Pixel, and then click **Create**.
