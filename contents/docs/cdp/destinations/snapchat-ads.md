@@ -1,6 +1,7 @@
 ---
 title: Send PostHog conversion events to Snapchat Ads
-templateId: template-snapchat-ads
+templateId: 
+   - template-snapchat-ads
 ---
 
 import Requirements from "../_snippets/requirements.mdx"
