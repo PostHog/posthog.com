@@ -15,7 +15,7 @@ We plan objectives every quarter. The exec team set the direction and overall ob
 
 In terms of accountability, Scott will notify all the small teams and make sure that the quarterly meetings happen (and that each small team has a PR), but he will not schedule the meetings for you. 
 
-> If you prep properly (see below), planning meetings should take 1 hour max.
+> If you prep properly (see below), planning meetings should take 1 hour max. The meeting is not the end of the process - you may still have some back and forth on the PR, but the meeting should give the team lead enough info to write a good PR. 
 
 ### Planning template
 
