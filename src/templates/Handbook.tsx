@@ -159,6 +159,7 @@ type TemplateParametersProps =
     | {
           templateId: string
           name: string
+          type: string
           inputs_schema:
               | {
                     key: string
@@ -284,7 +285,12 @@ export const TemplateParametersFactory: (params: TemplateParametersProps) => Rea
                         })}
                     </tbody>
                 </table>
-                <APIExamples name={template?.name} inputs_schema={inputs_schema} id={template?.templateId} />
+                <APIExamples
+                    name={template?.name}
+                    inputs_schema={inputs_schema}
+                    id={template?.templateId}
+                    type={template?.type}
+                />
             </div>
         )
     }
@@ -529,6 +535,7 @@ export const query = graphql`
                 templateConfigs {
                     templateId
                     name
+                    type
                     inputs_schema {
                         key
                         type

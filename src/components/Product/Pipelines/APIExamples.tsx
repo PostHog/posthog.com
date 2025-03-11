@@ -24,10 +24,17 @@ type APIExamplesProps = {
     name: string
     inputs_schema: any[]
     id: string
+    type: string
     initialOpen?: boolean
 }
 
-export default function APIExamples({ name, inputs_schema, id, initialOpen = false }: APIExamplesProps): JSX.Element {
+export default function APIExamples({
+    name,
+    inputs_schema,
+    id,
+    type,
+    initialOpen = false,
+}: APIExamplesProps): JSX.Element {
     const languages = [
         {
             label: 'cURL',
@@ -37,7 +44,7 @@ curl --location '<ph_client_api_host>/api/environments/:project_id/hog_functions
 --header 'Content-Type: application/json' \\
 --header 'Authorization: <ph_project_api_key>' \\
 --data '{
-    "type": "destination",
+    "type": "${type}",
     "name": "${name}",
     "inputs": ${generateConfigInputs(inputs_schema)},
     "enabled": true,
@@ -47,7 +54,7 @@ curl --location '<ph_client_api_host>/api/environments/:project_id/hog_functions
     ]
 
     return (
-        <Accordion initialOpen={initialOpen} label="API examples">
+        <Accordion initialOpen={initialOpen} label="API example">
             <CodeBlock currentLanguage={languages[0]}>{languages}</CodeBlock>
         </Accordion>
     )

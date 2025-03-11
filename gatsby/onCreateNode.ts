@@ -220,7 +220,7 @@ export const onCreateNode: GatsbyNode['onCreateNode'] = async ({
             const templateIds = node.frontmatter.templateId
 
             try {
-                const templateConfigs: { templateId: string; inputs_schema: any; name: string }[] = []
+                const templateConfigs: { templateId: string; inputs_schema: any; name: string; type: string }[] = []
                 for (const templateId of templateIds) {
                     const res = await fetch(`https://us.posthog.com/api/public_hog_function_templates/`)
 
@@ -232,9 +232,10 @@ export const onCreateNode: GatsbyNode['onCreateNode'] = async ({
                     const config = body.results.find((template: { id: string }) => template?.id === templateId)
                     const inputs_schema = config?.inputs_schema
                     const name = config?.name
+                    const type = config?.type
 
                     if (config) {
-                        templateConfigs.push({ templateId, inputs_schema, name })
+                        templateConfigs.push({ templateId, inputs_schema, name, type })
                     }
                 }
 

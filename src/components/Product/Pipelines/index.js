@@ -535,6 +535,7 @@ function PipelinesPage({ location }) {
                                 name={selectedDestination.name}
                                 inputs_schema={selectedDestination.inputs_schema}
                                 id={selectedDestination.id}
+                                type="destination"
                                 initialOpen
                             />
                         </div>
