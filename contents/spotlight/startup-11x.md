@@ -21,7 +21,7 @@ It's in their engineers' workflows: "Customer encountering an error? Check the P
 
 It's in their leadership mindset: "Got a goal to meet? Track it in PostHog."
 
-It's even on physical screens at the front of their office: live PostHog dashboards showing the company's North Star metrics.
+It's even on physical screens at the front of their office: live PostHog dashboards showing the company's North Star metrics. 
 
 ## From basic tracking to company cockpit
 
@@ -71,6 +71,8 @@ Keith's favorite use case is their office dashboard display. An automation runs 
 While 11x is getting tremendous value from PostHog, Keith feels they're "barely using it." They haven't yet implemented [surveys](//surveys) or [A/B experiments](/experiments), and only recently discovered [LLM observability](/docs/ai-engineering/observability) - particularly relevant for an AI company.
 
 As 11x continues growing (they've relocated from London to San Francisco, raised $76 million, and now serve nearly 600 customers), PostHog remains central to their product-led approach.
+
+“PostHog is the ten-in-one product thing that helps us get so much done,” Keith declares. “You guys have it all.”
 
 ## Build your own office dashboard
 
