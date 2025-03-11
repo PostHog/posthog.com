@@ -100,6 +100,17 @@ The objective of the meeting is to hold each other to account, provide direct fe
 
 > Your quota and assigned customers are likely to change slightly from quarter to quarter. In any case, your quota will be amended appropriately (up or down) to account for any movement. We will also be flexible in making changes mid-quarter if it's obviously the sensible thing to do. If you inherit a new account, you have a 3 month grace period - if they churn in that initial period, they won't be counted against your quota.
 
+### Team target
+
+To calculate the team quota we combine the quota of all team members, with proration applied if they are still ramping:
+
+ - For fully-ramped team members we add 100% of their quota to the team quota.
+ - For team members who begin the quarter still in their first three months in the role we add 50% of their quota to the team quota.
+
+Example: With a flat quota per AE of $250,000 and 3 fully-ramped AEs, and 1 ramping, the team quota would be $875,000 (($250,000 * 3) + $125,000)
+
+> If someone leaves the team we don't recalculate the team quota as their accounts and opportunities will be reallocated to others in the team.
+
 ## How contractual bonus works - Technical CSMs
 
 CSMs are responsible for ensuring that a larger book of existing customers - both annual and monthly - continue to use PostHog successfully. They nurture customers and are product experts - this isn't a role of just going back and forth between customers and support engineers, or collecting feedback. 
