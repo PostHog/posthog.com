@@ -23,7 +23,7 @@ It’s in their leadership mindsets. Got a goal to meet? Track it in PostHog.
 
 A little context first: 11x is an AI-focused company, where tailored agents will get specific jobs done for their customers. Primarily, these agents focus on sales tasks: outreach and customer care. A customer will calibrate their bot to suit their brand, train it on their knowledge base, and with 11x, the bot will perform the tasks assigned. That means that the customers of 11x are people who are training, monitoring and “supervising” a new generation of automated workers. 
 
-As a company, 11x has been around for two years. Having started in London, they relocated to San Francisco recently, and now are serving just shy of 600 customers. Meanwhile, 11x has neeed to somehow keep an eye on how all their customers, and all those bots, are all getting their jobs done. It’s a lot to keep track of: you're gonna need a product for that.
+As a company, 11x has been around for two years. Having started in London, they relocated to San Francisco recently, and now are serving just shy of 600 customers. Meanwhile, 11x has need to somehow keep an eye on how all their customers, and all those bots, are all getting their jobs done. It’s a lot to keep track of: you're gonna need a product for that.
 
 I asked him what they had been using previously, and Keith begins counting them off:
 * For [feature flags](/docs/feature-flags), they were building in-house.
