@@ -8,13 +8,18 @@ We plan objectives every quarter. The exec team set the direction and overall ob
 
 ## How quarterly planning works
 
-1. James runs this process every three months.
-2. ~3 weeks before the end of each quarter, the Exec team meet to come up with initial ideas for objectives for each small team.
-3. ~2 weeks before the end of the quarter, Kendal schedules planning meetings with each small team to go through these - these will be run by the Team Lead and include the relevant Exec team member, following the template below. Each small team can change or propose alternate objectives, goals, and/or key results (we are not prescriptive about the exact terms used here - use these as a starting point). 
-4. The outcome of these meetings should be a PR to the relevant small team page. The Team Lead is responsible for creating this and getting it merged. Make sure you tag the relevant member of the Exec team for review.
-5. PRs get merged before the next quarter starts. We usually then run through the objectives in the first all hands of the next quarter.
+1. ~3 weeks before the end of each quarter, the Exec team meet to come up with initial ideas for objectives for each small team.
+3. ~2 weeks before the end of the quarter, team leads should schedule planning meetings with each small team to go through these - these will be run by the team lead and include the relevant Exec team member, following the template below. Each small team can change or propose alternate objectives, goals, and/or key results (we are not prescriptive about the exact terms used here - use these as a starting point). 
+5. The outcome of these meetings should be a PR to the relevant small team page. The team lead is responsible for creating this and getting it merged. Make sure you tag the relevant member of the Exec team for review at a minimum.
+6. PRs get merged before the next quarter starts. We usually then run through the objectives in the first all hands of the next quarter.
+
+In terms of accountability, Scott will notify all the small teams and make sure that the quarterly meetings happen (and that each small team has a PR), but he will not schedule the meetings for you. 
+
+> If you prep properly (see below), planning meetings should take 1 hour max.
 
 ### Planning template
+
+Teams should fill in the previous quarter and HOGS sections async in the doc before the meeting starts. The meeting itself should be 20% reviewing the past, and 80% talking about goals for next quarter. Don't fall into the trap of spending most of your time reviewing and then rushing the goals right at the end. 
 
 ```md
 ## Previous quarter reflection
@@ -54,6 +59,8 @@ What we'll ship:
   - Maybe another thing (Name)
 ```  
 
+If you donaren't on a product team, replace 'product' with the equivalent 'thing' on your team - e.g. if you do recruitment, your 'product' is how we do recruitment at PostHog and your users are job applicants. 
+
 ## Why we do this
 
 - Sense of winning / losing - this bonds teams, increases urgency and creates satisfaction when we achieve things
@@ -61,12 +68,12 @@ What we'll ship:
 
 ## Good goal setting
 
-- As few Objectives as possible
+- As few objectives as possible
 - Motivation - explains why the objective is set
-- Thing's we'll ship that show if we're en route to achieving an Objective
+- Thing's we'll ship that show if we're en route to achieving an objective
 - Objectives are simple - it's really clear if you are/aren't hitting them
 - Objectives are ambitious - they move the needle for PostHog
-- Hitting an overarching Objective is more important than shipping specific things
+- Hitting an overarching objective is more important than shipping specific things
 - Things we'll ship are leading indicators and can be achieved quickly
 - If you set specific targets, they should be specific and measurable if possible
 - Setting anti-goals can be helpful to clarify what you are _not_ working on
@@ -74,21 +81,19 @@ What we'll ship:
 Bear the following in mind:
 
 - Use metrics only if they help you
-- Don't fall into an existential crisis every time we do this exercise - while Objectives are important, they're easy to change, so iterate if you need to mid-quarter
-- All Objectives are bad - they have many compromises, are fallible, easy to game, or may be affected by external factors, so use the least bad ones
+- Don't fall into an existential crisis every time we do this exercise - while objectives are important, they're easy to change, so iterate if you need to mid-quarter
+- All objectives are bad - they have many compromises, are fallible, easy to game, or may be affected by external factors, so use the least bad ones
 - Use counter metrics where needed (X happens, but Y shouldn't happen)
 - Don't have a lot of things to ship if you can't capture everything in one - just pick the most important one or two
 - Don't set arbitrary targets that a team cannot achieve
-- Consistently hitting ambitious Objectives over the long term is an important factor in the pay review process, but if you miss extremely tough Objectives but still achieve great things en route, that's great
+- Consistently hitting ambitious objectives over the long term is an important factor in the pay review process, but if you miss extremely tough objectives and still achieve great things en route, that's also fine
 
 ## FAQ
 
-### What if I don't have time to do work towards my objectives because of X (X = customer support / urgent board reporting / something else)?
+### What if I don't have time to do work towards my objectives because of customer support/urgent board reporting/something else?
 
 Picking up the occasional thing that isn't technically going to help your goal is ok. This is because we're small and may not set 100% perfect goals. As ever, prioritize as you see fit. However, spending a bunch of time on a pet project is not - this means the planning process has failed. 
 
 ## If my team repeatedly miss objectives, what happens?
 
-Objectives should be ambitious but achievable - you should be able to hit them by challenging yourself, but not to the point of burnout.
-
-If your team is consistently missing objectives, they are too hard or possibly the wrong objectives for PostHog/your team. 
+Objectives should be ambitious but achievable - you should be able to hit them by challenging yourself, but not to the point of burnout. If your team is consistently missing objectives, they are too hard or possibly the wrong objectives for PostHog/your team. 
