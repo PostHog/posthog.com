@@ -39,6 +39,7 @@ import CopyCode from 'components/CopyCode'
 import TeamMember from 'components/TeamMember'
 import { Contributor, ContributorImageSmall } from 'components/PostLayout/Contributors'
 import { OverflowXSection } from 'components/OverflowXSection'
+import APIConfig from 'components/Product/Pipelines/APIConfig'
 
 const renderAvailabilityIcon = (availability: 'full' | 'partial' | 'none') => {
     switch (availability) {
@@ -156,13 +157,19 @@ type AppParametersProps = {
 
 type TemplateParametersProps =
     | {
-          key: string
-          type: string | null
-          label: string | null
-          description: string | null
-          default: string | null
-          secret: boolean | null
-          required: boolean | null
+          templateId: string
+          name: string
+          inputs_schema:
+              | {
+                    key: string
+                    type: string | null
+                    label: string | null
+                    description: string | null
+                    default?: string | null
+                    secret?: boolean | null
+                    required?: boolean | null
+                }[]
+              | null
       }[]
     | null
 
@@ -224,56 +231,61 @@ export const AppParametersFactory: (params: AppParametersProps) => React.FC = ({
     return AppParameters
 }
 
-export const TemplateParametersFactory: (params: TemplateParametersProps) => React.FC = (templateConfigs) => {
+export const TemplateParametersFactory: (params: TemplateParametersProps) => React.FC<{ templateId?: string }> = (
+    templateConfigs
+) => {
     const TemplateParameters = ({ templateId }: { templateId?: string }) => {
-        const input_schema =
-            templateConfigs?.find((t) => t.templateId === templateId)?.config || templateConfigs?.[0]?.config
-        if (!input_schema) {
+        const template = templateConfigs?.find((t) => t.templateId === templateId) || templateConfigs?.[0]
+        const inputs_schema = template?.inputs_schema
+        if (!inputs_schema) {
             return null
         }
 
         return (
-            <table>
-                <thead>
-                    <tr>
-                        <th>Option</th>
-                        <th>Description</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {input_schema.map((input) => {
-                        if (!input.label) {
-                            return null
-                        }
+            <div>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Option</th>
+                            <th>Description</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {inputs_schema.map((input) => {
+                            if (!input.label) {
+                                return null
+                            }
 
-                        return (
-                            <tr key={input.key}>
-                                <td>
-                                    <div className="mb-6 w-40">
-                                        <code className="dark:bg-gray-accent-dark dark:text-white bg-gray-accent-light text-inherit p-1 rounded">
-                                            {input.label}
-                                        </code>
-                                    </div>
-
-                                    {input.type && (
-                                        <div>
-                                            <strong>Type: </strong>
-                                            <span>{input.type}</span>
+                            return (
+                                <tr key={input.key}>
+                                    <td>
+                                        <div className="mb-6 w-40">
+                                            <code className="dark:bg-gray-accent-dark dark:text-white bg-gray-accent-light text-inherit p-1 rounded">
+                                                {input.label}
+                                            </code>
                                         </div>
-                                    )}
 
-                                    <div>
-                                        <strong>Required: </strong>
-                                        <span>{input.required ? 'True' : 'False'}</span>
-                                    </div>
-                                </td>
+                                        {input.type && (
+                                            <div>
+                                                <strong>Type: </strong>
+                                                <span>{input.type}</span>
+                                            </div>
+                                        )}
 
-                                <td>{input.description ? <Markdown>{input.description || ''}</Markdown> : null}</td>
-                            </tr>
-                        )
-                    })}
-                </tbody>
-            </table>
+                                        <div>
+                                            <strong>Required: </strong>
+                                            <span>{input.required ? 'True' : 'False'}</span>
+                                        </div>
+                                    </td>
+
+                                    <td>{input.description ? <Markdown>{input.description || ''}</Markdown> : null}</td>
+                                </tr>
+                            )
+                        })}
+                    </tbody>
+                </table>
+                <APIConfig name={template?.name} inputs_schema={inputs_schema} id={template?.templateId} />
+            </div>
         )
     }
 
@@ -516,7 +528,8 @@ export const query = graphql`
                 }
                 templateConfigs {
                     templateId
-                    config {
+                    name
+                    inputs_schema {
                         key
                         type
                         label

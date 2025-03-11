@@ -38,7 +38,6 @@ import {
     IconGraph,
     IconPeople,
     IconPerson,
-    IconPlus,
     IconRevert,
     IconRewindPlay,
     IconServer,
@@ -63,6 +62,7 @@ import ReactFlow, {
 } from 'reactflow'
 import 'reactflow/dist/style.css'
 import Profile from '../../Team/Profile'
+import APIConfig from './APIConfig'
 
 const team = 'CDP'
 const teamSlug = '/teams/cdp'
@@ -515,24 +515,36 @@ function PipelinesPage({ location }) {
                 }
                 open={modalOpen}
                 setOpen={setModalOpen}
-                className="max-w-screen-md"
+                className="max-w-screen-md w-full"
             >
                 {selectedDestination && (
                     <>
                         <div className="article-content">
-                            <MDXProvider
-                                components={{
-                                    HideOnCDPIndex: () => null,
-                                }}
-                            >
-                                <MDXRenderer>{selectedDestination.mdx.body}</MDXRenderer>
-                            </MDXProvider>
+                            {selectedDestination.mdx ? (
+                                <MDXProvider
+                                    components={{
+                                        HideOnCDPIndex: () => null,
+                                    }}
+                                >
+                                    <MDXRenderer>{selectedDestination.mdx.body}</MDXRenderer>
+                                </MDXProvider>
+                            ) : (
+                                <p>{selectedDestination.description}</p>
+                            )}
+                            <APIConfig
+                                name={selectedDestination.name}
+                                inputs_schema={selectedDestination.inputs_schema}
+                                id={selectedDestination.id}
+                                initialOpen
+                            />
                         </div>
-                        <div className="border-t border-border dark:border-dark pt-4 mt-4">
-                            <CallToAction to={selectedDestination.mdx.fields.slug} type="secondary">
-                                Learn more in docs
-                            </CallToAction>
-                        </div>
+                        {selectedDestination.mdx && (
+                            <div className="border-t border-border dark:border-dark pt-4">
+                                <CallToAction to={selectedDestination.mdx.fields.slug} type="secondary">
+                                    Learn more in docs
+                                </CallToAction>
+                            </div>
+                        )}
                     </>
                 )}
             </SideModal>
@@ -657,11 +669,12 @@ function PipelinesPage({ location }) {
                                 .sort((a, b) => a.name.localeCompare(b.name))
                                 .map((destination) => {
                                     const { id, name, description, icon_url } = destination
-                                    const Container = destination.mdx ? 'button' : 'div'
+                                    const hasDocs = destination.mdx || destination.inputs_schema
+                                    const Container = hasDocs ? 'button' : 'div'
                                     return (
                                         <li key={id}>
                                             <Container
-                                                {...(destination.mdx
+                                                {...(hasDocs
                                                     ? {
                                                           onClick: () => {
                                                               setSelectedDestination(destination)
@@ -670,7 +683,7 @@ function PipelinesPage({ location }) {
                                                       }
                                                     : {})}
                                                 className={`flex items-start text-left size-full border border-light dark:border-dark rounded-md bg-white dark:bg-accent-dark p-4 relative border-b-3 ${
-                                                    destination.mdx
+                                                    hasDocs
                                                         ? 'click hover:top-[-1px] active:top-[1px] transition-all duration-75'
                                                         : ''
                                                 }`}
