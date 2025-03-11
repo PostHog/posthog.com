@@ -39,7 +39,7 @@ import CopyCode from 'components/CopyCode'
 import TeamMember from 'components/TeamMember'
 import { Contributor, ContributorImageSmall } from 'components/PostLayout/Contributors'
 import { OverflowXSection } from 'components/OverflowXSection'
-import APIConfig from 'components/Product/Pipelines/APIConfig'
+import APIExamples from 'components/Product/Pipelines/APIExamples'
 
 const renderAvailabilityIcon = (availability: 'full' | 'partial' | 'none') => {
     switch (availability) {
@@ -284,7 +284,7 @@ export const TemplateParametersFactory: (params: TemplateParametersProps) => Rea
                         })}
                     </tbody>
                 </table>
-                <APIConfig name={template?.name} inputs_schema={inputs_schema} id={template?.templateId} />
+                <APIExamples name={template?.name} inputs_schema={inputs_schema} id={template?.templateId} />
             </div>
         )
     }

@@ -62,7 +62,7 @@ import ReactFlow, {
 } from 'reactflow'
 import 'reactflow/dist/style.css'
 import Profile from '../../Team/Profile'
-import APIConfig from './APIConfig'
+import APIExamples from './APIExamples'
 
 const team = 'CDP'
 const teamSlug = '/teams/cdp'
@@ -531,7 +531,7 @@ function PipelinesPage({ location }) {
                             ) : (
                                 <p>{selectedDestination.description}</p>
                             )}
-                            <APIConfig
+                            <APIExamples
                                 name={selectedDestination.name}
                                 inputs_schema={selectedDestination.inputs_schema}
                                 id={selectedDestination.id}

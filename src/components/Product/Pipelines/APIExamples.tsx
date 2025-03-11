@@ -20,14 +20,14 @@ const generateConfigInputs = (schema: any[]) => {
         .join('\n')
 }
 
-type APIConfigProps = {
+type APIExamplesProps = {
     name: string
     inputs_schema: any[]
     id: string
     initialOpen?: boolean
 }
 
-export default function APIConfig({ name, inputs_schema, id, initialOpen = false }: APIConfigProps): JSX.Element {
+export default function APIExamples({ name, inputs_schema, id, initialOpen = false }: APIExamplesProps): JSX.Element {
     const languages = [
         {
             label: 'cURL',
@@ -47,7 +47,7 @@ curl --location '<ph_client_api_host>/api/environments/:project_id/hog_functions
     ]
 
     return (
-        <Accordion initialOpen={initialOpen} label="API configuration">
+        <Accordion initialOpen={initialOpen} label="API examples">
             <CodeBlock currentLanguage={languages[0]}>{languages}</CodeBlock>
         </Accordion>
     )
