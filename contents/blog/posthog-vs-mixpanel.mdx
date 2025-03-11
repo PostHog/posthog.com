@@ -34,7 +34,7 @@ PostHog puts all your data in one place and combines it with every tool you need
 - **Surveys** for capturing user feedback, tracking NPS, and booking interviews
 - **A built-in data warehouse** for analyzing your business and event data together
 
-In other words, it's everything you need from one app with a single log-in and contract. A _genuine_ single source of truth for your product and customer data.
+In other words, it's everything you need in one app with a single login and contract. A _genuine_ single source of truth for your product and customer data.
 
 ### 2. We build for developers
 
@@ -42,7 +42,7 @@ This means you get support from the engineers who _actually build the product_, 
 
 ### 3. We promise transparent and cheap pricing (forever)
 
-We default to charging as little as possible while still making a profit – we also have a generous free tier on all our products. We can do this because we're efficient. We don't splurge on outbound sales, or D-list comedians to host an annual convention you'll never attend. We also have a [generous free tier](/pricing) and our pricing is 100% transparent.
+We default to charging as little as possible while still making a profit – we also have a generous free tier on all our products. We can do this because we're efficient. We don't splurge on outbound sales, or D-list comedians to host an annual convention you'll never attend. Our [pricing](/pricing] is also 100% transparent.
 
 ## Comparing PostHog and Mixpanel
 
@@ -88,7 +88,7 @@ PostHog and Mixpanel offer broadly similar product analytics features, including
   <ComparisonRow column1={true} column2={true} feature="Graphs and trends" description="Build custom insights and visualizations" />
   <ComparisonRow column1={true} column2={false} feature="Heatmaps" description="Visualize where users click in your app" />
   <ComparisonRow column1={true} column2={true} feature="Lifecycle analysis" description="Understand who is dormant, churning, and thriving" />
-  <ComparisonRow column1={true} column2={true} feature="Retention" description="Visualize rerention for users and groups" />
+  <ComparisonRow column1={true} column2={true} feature="Retention" description="Visualize retention for users and groups" />
   <ComparisonRow column1={true} column2={false} feature="Scrollmaps" description="Visualize how far users scroll in your app" />
   <ComparisonRow column1={true} column2={true} feature="Stickiness insights" description="See how many times users perform an event in a period of time." />
   <ComparisonRow column1={true} column2={false} feature="SQL query editor" description="Write your own queries in SQL" />
@@ -102,8 +102,6 @@ PostHog and Mixpanel offer broadly similar product analytics features, including
 ### Website analytics
 
 PostHog is also a powerful [alternative to Google Analytics](/blog/ga4-alternatives) that bridges the gap between lightweight tools like [Plausible](/blog/best-plausible-alternatives). 
-
-We charge [up to 80% less](#price-comparison) for anonymous events on your website and your first 1 million events every month are free, so you won't rack up a massive bill.
 
 <ComparisonTable column1="PostHog" column2="Mixpanel">
   <ComparisonRow column1={true} column2={true} feature="Bounce rate" description="See the percentage of users that leave after one pageview" />
@@ -122,7 +120,7 @@ We charge [up to 80% less](#price-comparison) for anonymous events on your websi
 
 </ComparisonTable>
 
-> **Good to know:** You can use the [PostHog Toolbar](/docs/toolbar) to [view clickmaps, heatmaps, and scrollmaps](/docs/toolbar/heatmaps) for your website. You can also use the Toolbar to turn feature flags on and off, debug events, and create no-code experiments. 
+> **Good to know:** You can use the [PostHog toolbar](/docs/toolbar) to [view clickmaps, heatmaps, and scrollmaps](/docs/toolbar/heatmaps) for your website. You can also use the toolbar to turn feature flags on and off, debug events, and create no-code experiments. 
 
 <br />
 
@@ -145,10 +143,10 @@ PostHog's session replay can be used by anyone, but it includes numerous develop
   <ComparisonRow column1={true} column2={false} feature="Playlists" description="Sort recordings into static and dynamic playlists" />
   <ComparisonRow column1={true} column2={true} feature="Privacy masking" description="Censor personal information from playback" />
   <ComparisonRow column1={true} column2={false} feature="Record via feature flag" description="Only record sessions for users that have the flag enabled" />
-  <ComparisonRow column1={true} column2={true} feature="Sample recorded sessions" description="Restrict the percentage of sessions that will be recorded" />
+  <ComparisonRow column1={true} column2={true} feature="Sample recorded sessions" description="Limit the percentage of sessions recorded" />
 </ComparisonTable>
 
-#### Libraries
+#### Library support for replays
 
 Mixpanel only recently introduced session replay, so its mobile SDKs are still in development. PostHog has wide support for all popular web and mobile SDKs.
 
@@ -172,12 +170,12 @@ Mixpanel only recently introduced session replay, so its mobile SDKs are still i
 Feature flags make it easy to roll out features to specific users or groups, and [safely test in production](/product-engineers/testing-in-production). You can also use them [control access to beta features](/docs/feature-flags/early-access-feature-management), and make [scheduled changes to your app](/docs/feature-flags/scheduled-flag-changes). 
 
 <ComparisonTable column1="PostHog" column2="Mixpanel">
-  <ComparisonRow column1={true} column2={false} feature="Boolean flags" description="Simple flags returning true or flag" />
+  <ComparisonRow column1={true} column2={false} feature="Boolean flags" description="Simple flags returning true or false" />
   <ComparisonRow column1={true} column2={false} feature="Bootstrapping" description="Flags available on frontend application load" />
   <ComparisonRow column1={true} column2={false} feature="Custom targeting" description="Target users based on user properties, custom contexts" />
   <ComparisonRow column1={true} column2={false} feature="Early access" description="Manage betas, test features" />
   <ComparisonRow column1="Partial" column2={false} feature="Environments" description="Manage flags for dev, staging, prod" />
-  <ComparisonRow column1={true} column2={false} feature="Flag history" description="Timeline and flag changes and who made them" />
+  <ComparisonRow column1={true} column2={false} feature="Flag history" description="Timeline of flag changes and who made them" />
   <ComparisonRow column1={true} column2={false} feature="Local evaluation" description="Store flag definitions locally" />
   <ComparisonRow column1={true} column2={false} feature="Multivariate flags" description="Flags with multiple customizable values" />
   <ComparisonRow column1={true} column2={false} feature="Payloads" description="Flags with string, number, or JSON payloads" />
@@ -221,7 +219,7 @@ You can't build a successful product on data alone. Surveys are useful for [gath
 
 <ComparisonTable column1="PostHog" column2="Mixpanel">
   <ComparisonRow column1={true} column2={false} feature="AI response summaries" description="Automated summary of user feedback" />
-  <ComparisonRow column1={true} column2={false} feature="API mode" description="Create surveys via the API" />
+  <ComparisonRow column1={true} column2={false} feature="API mode" description="Get survey details via the API and display however you like" />
   <ComparisonRow column1={true} column2={false} feature="Cohort targeting" description="Show surveys to predefined static list of users" />
   <ComparisonRow column1={true} column2={false} feature="Custom HTML" description="Add custom HTML to your survey text" />
   <ComparisonRow column1={true} column2={false} feature="Custom colors & positioning" description="Customize the colors of your surveys to match your brand" />
@@ -236,7 +234,7 @@ You can't build a successful product on data alone. Surveys are useful for [gath
   <ComparisonRow column1={true} column2={false} feature="PMF surveys" description="Product-market fit survey template" />
   <ComparisonRow column1={true} column2={false} feature="Product rating" description="Rank using emojis or number" />
   <ComparisonRow column1={true} column2={false} feature="Single choice" description="Select one answer from multiple" />
-  <ComparisonRow column1={true} column2={false} feature="User property targeting" description="Display surveys based on user properties (e.g. country, email, etc" />
+  <ComparisonRow column1={true} column2={false} feature="User property targeting" description="Display surveys based on user properties (e.g. country, email, etc.)" />
 
 </ComparisonTable>
 
