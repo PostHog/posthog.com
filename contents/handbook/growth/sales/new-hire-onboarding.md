@@ -159,6 +159,7 @@ By the end of month 3:
   - Be independently working with your entire book to solve tricky technical problems with minimal assistant (CSM)
   - On track to consistently hit your retention targets
   - You've suggested and made changes to our systems that enable you to do your job better
+  - Think about customer health scores and add/change anything you learn here
 
 ## Onboarding Specialist ramp
 
