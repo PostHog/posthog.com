@@ -59,7 +59,7 @@ What we'll ship:
   - Maybe another thing (Name)
 ```  
 
-If you donaren't on a product team, replace 'product' with the equivalent 'thing' on your team - e.g. if you do recruitment, your 'product' is how we do recruitment at PostHog and your users are job applicants. 
+If you aren't on a product team, replace 'product' with the equivalent 'thing' on your team - e.g. if you do recruitment, your 'product' is how we do recruitment at PostHog and your users are job applicants. 
 
 ## Why we do this
 
