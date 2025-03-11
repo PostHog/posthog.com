@@ -1,6 +1,6 @@
 ---
-title: How to communicate like a product engineer
-date: 2025-03-04
+title: Communication mistakes for engineers to avoid
+date: 2025-03-11
 author:
  - ian-vanagas
 featuredImage: >-
@@ -14,25 +14,27 @@ crosspost:
   - Blog
 ---
 
-### Subtitle: Non-obvious lessons from how engineers communicate at PostHog
+### Subtitle: The do's and don'ts of communication for product engineers
 
-Engineers spend a majority of their time doing two things: coding and communicating. The first has seemingly endless amounts written about it, but the second has relatively little.
+Engineers spend most of their time doing two things: coding and communicating. The first has seemingly endless amounts written about it, but the second has relatively little.
 
-To help change this, we’re sharing how our team of product engineers communicate effectively as a fully remote and async team. 
+To address this injustice, we’re sharing the biggest mistakes we've seen engineers make when communicating in a remote, async, engineering-led company (and what we've done to fix them).
 
-Unlike other posts on communication, we’re only including the strategies and tactics we actually use. No elaborate frameworks to help you say “no blockers from me” in your daily standup.
+## 1. Forgetting about your users
 
-## Start with the user in mind
+It is easy to get caught up in technical details of a project. You tunnel vision on overcoming constraints, optimizing performance, and following best practices. In the process of doing this, you lose what matters most: your user.
 
-Underlying every interaction at PostHog is a user focus. Our mission is to equip every developer to build successful products and communication should help us do this.
+Remember, companies don't succeed based on their ability to solve technical problems. They succeed based on their ability to solve user problems. This should reflect in your communication.
 
-This means a majority of communication is directly connected to users in one of two ways:
+At PostHog, our communication connects to users in one of two ways:
 
-1. **It’s about a user issue.** Solving customer confusion about a feature, fixing a bug affecting them, or prioritizing a feature request for a customer. Each of these potentially require coordination and collaboration. 
+1. **It’s about a user issue.** Top priorities for us include prioritizing feature requests from customers, solving confusions about a feature, or fixing a bug affecting them. Each of these potentially require coordination and collaboration. 
 
-2. **It’s backed by a user experience.** We build features because users want them and their specific needs often guide our implementation. We decide what to work on or how to implement something, the experience of a user is often our best guide.
+2. **It’s backed by a user experience.** We build features because users want them and their specific needs often guide our implementation. The experiences of users are often our best guide when we're deciding what to work on or how to implement it.
 
-To get a better sense of what this actually looks like, we can look at the actual Slack messages of one of our product teams. For example, the last 10 messages for `#team-product-analytics` look like:
+![Facts](https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_03_11_at_10_43_31_2x_9726c09b98.png)
+
+To give you a sense of what this actually looks like, a snapshot of the last 10 Slack messages in our `#team-product-analytics` channel include:
 
 - Two bugs from support
 - Two feature requests from other members of our team
@@ -40,77 +42,87 @@ To get a better sense of what this actually looks like, we can look at the actua
 - One change needing a review
 - One general team announcement
 
-This focus on information from users really sets product engineers apart from more traditional software engineering teams.
+Of course, this user focus has tradeoffs. We spend less time talking about technical details, figuring out the best way to do things, and collecting input from stakeholders. This means we need to rely on:
 
-![Information sources](https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_03_04_at_09_54_13_ae899358ee.png)
-
-### What’s the tradeoff to this user focus?
-
-Of course, this user focus isn’t without tradeoffs. Simply, we spend less time talking about technical details, figuring out the best way to do things, and collecting input from stakeholders. Less communication is better here.
-
-Instead, we rely on:
-
-- Hiring great people who have experience solving the technical problems we are trying to solve.
+- Hiring great people with experience solving the technical problems we are trying to solve.
 - Making ownership clear. It lies with individuals (or at most, a small team).
-- Focusing on shipping things users will actually see (repeatedly). We focus on outcomes, not implementation.
+- Focusing on shipping things users will actually see. We care about outcomes over implementation.
 
 Although this means we might not ship a perfectly polished feature right away, it does mean we can get to something that users actually care about faster.
 
-## Work in public
+## 2. Hiding communication in private
 
-There is a saying teachers tell you in school: “If you have a question, ask it, because it’s very likely others have the same question too.” Well, it turns out this is true in real life as well, and a key part in communicating effectively.
+There is an old way of thinking that if you keep knowledge to yourself, you'll have more power. In well-functioning organizations, this doesn't work. It leads to silos and confusion. You don't need to hoard information, you're not a squirrel.
 
-Communicating publicly has a lot of benefits:
+![Squirrel](https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_03_11_at_11_29_13_2x_d5fd501927.png)
 
-1. It prevents unnecessary communication like people repeatedly asking about a process or policy.
-2. Improves discoverability of information. Helps people find the knowledge and context they need immediately. 
-3. Creates transparency and trust within the organization.
+Hiding information in private causes three problems:
 
-For most companies, communicating publicly means avoiding private Slack conversations and using an internal repo, but we take it a step further than this by making as much as possible public, including our code, roadmap, and even strategy. 
+1. It creates unnecessary communication like people repeatedly asking about a process or policy. In a remote company, this can also block you from getting work done and break the flow of others.
+
+2. It reduces discoverability of information. People can't find the knowledge and context they need immediately. 
+
+3. It creates silos and reduces transparency and trust within the organization.
+
+The solution is to make communication legible: write it down and work in public.
+
+This means avoiding meetings, private Slack conversations, and email threads whenever possible. Instead, move communication to public channels, have an accessible wiki or handbook, and default to giving everyone access to everything. 
+
+At PostHog, we take this a step further by making as much as possible public to people outside of our company, including our code, roadmap, and even strategy. 
 
 ![Work in public](https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_03_04_at_09_59_36_ddc180f325.png)
 
 This gives our communication further bang for its buck. It has helped us build a brand and trust with our users.
 
-## Give the full context
+We realize this brand of external openness doesn't work for everyone, but that doesn't mean you need to hide information. Companies like Palantir, Pixar, and Apple are all secretive externally, but have internal openness. This has helped them build the massively successful companies they are today.
 
-When you have smart, talented people around you, lazy thinking won’t do it. You can’t make baseless claims, you will get called out. You need to back what you’re saying and your opinion with evidence. This is why one of our communication values is **form an opinion.**
+## 3. Not giving the receiver the context they need
 
-And once you’ve done the work to form that opinion, you might as well share it. Sharing this context can save a significant amount of time for the ones receiving the information and help them form their own opinion.
+Everyone's been on the receiving end of a low context message like “this isn’t working” or “what do you think of this?” It then becomes your responsibility to figure out the context so you can work towards a solution.
 
-This usually means sharing:
+This sucks, and if you don't like being subjected to it, you shouldn't do it to others.
 
-1. **Data.** Messages often include the link to the query, insight, dashboard, or error trace. Say what metric you care about. ****
+This problem is especially prevalent in remote companies as you can't tell if people understand the context. When in-person, you can tell if you are losing people or if they don't understand.
+
+The fix is to include all the context a reader needs to succeed. This usually means sharing:
+
+1. **Data.** Messages often include the link to the query, insight, dashboard, or error trace. Say what metric you care about.
 
 2. **Feedback.** A common sentence we see at PostHog is “X gave feedback that…” followed by a potential solution for that feedback.
 
 3. **Experience.** We care about what the end user experience actually is. Examples and anecdotes from users are hugely valuable.
 
-The opposite of this is just saying “this isn’t working” or “what do you think of this?” Low context communication like this puts all of the work onto the receiver, leaves more room for ambiguity, and is simply less effective. 
+## 4. Being completely unstructured
 
-## Have rituals
+People want to communicate. They want to distribute information with each other. Information wants to be free.
 
-People want to communicate. They want to distribute information with each other. Information wants to be free. 
+It can be tempting to let people do whatever they want, but this can quickly devolve into one of two things:
 
-Rituals help you communicate at the right time and place. They help structure communication so you stay aligned and make sure everyone has what they need to succeed. Our most important ones at PostHog:
+- **Overcommunication.** Noise and mess that makes finding the information you need difficult.
 
-1. **All hands.** Where the most important updates are shared with the team. Q&A with James and Tim. Demos of what anyone built in the last week.
+- **Undercommunication.** Not sharing information others need to succeed, getting unnecessary blocked or stuck because others don't know what you're working on.
 
-2. **Sprint planning.** A [bi-weekly review](https://github.com/PostHog/posthog/issues/28840) combination of retrospective and planning done by each team. 
+Creating "rituals" help you communicate at the right time and place. They are repeated, formatted moments to encourage communication so you stay aligned and make sure everyone has what they need to succeed. 
 
-3. **Daily huddles.** Within small teams, each member shares what they did yesterday, what you’re doing today, and gets any support they need.
+Our most important ones at PostHog include:
 
-4. **Request for comments.** A large document related to a big decision that shares a problem, a potential solution, and gathers feedback. This is how we coordinate big problems across teams.
+1. **All hands.** Where the most important updates are shared with the team like revenue and hiring. A Q&A with our founders, James and Tim. Demos of what anyone built in the last week.
 
-5. **Incidents.** When something bad and unexpected happens, anyone can start an incident where a channel is created, the problem is identified, and the team works towards a solution.
+2. **Sprint planning.** A [review](https://github.com/PostHog/posthog/issues/28840) done by each product team every two weeks. Combines retrospective, planning for the next two weeks, and progress of quarterly goals.
 
-Broadly, these aren’t unique to PostHog. Zapier requires [Friday Updates](https://zapier.com/blog/friday-updates-at-work/) from everyone on their internal blog. [Basecamp](https://github.com/basecamp/handbook/blob/master/how-we-work.md) has daily and weekly check-ins as well as kickoffs and heartbeats. [Linear](https://linear.app/method/introduction) works in 2 week cycles, writes project specs, and keeps an updated changelog.
+3. **Daily huddles.** An optional meeting within small teams where each member shares what they did yesterday, what they're doing today, and any blockers.
+
+4. **Request for comments.** A proposal related to a big decision that shares a problem, a potential solution, and gathers feedback. Team members share opinions and feedback, then the owner makes a decision. This is how we coordinate large, cross-team decisions async.
+
+5. **Incidents.** When something bad and unexpected happens, a new Slack channel is created to identify the problem and bring together a small group to work towards a solution.
+
+Rituals aren’t unique to PostHog. Zapier requires [Friday Updates](https://zapier.com/blog/friday-updates-at-work/) from everyone on their internal blog. [Basecamp](https://github.com/basecamp/handbook/blob/master/how-we-work.md) has daily and weekly check-ins as well as kickoffs and heartbeats. [Linear](https://linear.app/method/introduction) works in 2 week cycles, writes project specs, and keeps an updated changelog.
 
 All rituals, including ours, are downstream from the culture you want to create. For us, that means they are as async as possible and involve as few meetings as possible. This ensures that we have enough time to work on what’s important.
 
-## Make communication actionable
+## 5. Not making communication actionable
 
-The goal of communication is to help us get something shipped. Although ideally, we would need little to no communication to do this, eventually it happens. The best we can do once this is the case is make it actionable. 
+As organizations grow, they have a tendency to add process and structure which puts blockers in the way of shipping. Communication is one of the areas that can pop up, but thinking about the actionability of your communication can prevent this.
 
 We do this by:
 
@@ -120,7 +132,7 @@ We do this by:
     
 2. **Have a clear owner, next steps, and deadline.** This makes it clear how progress is going to lead from communication. Without this, communication is often wasted and becomes noise. If you send a message without a purpose, you are creating noise.
 
-3. **Be understood.** You must communicate differently depending on the context your recipient has. ****You need to communicate differently with non-technical people than with technical ones. Avoid acronyms whenever possible. 
+3. **Be understood.** You must communicate differently depending on the context your recipient has. You need to communicate differently with non-technical people than with technical ones. Avoid acronyms whenever possible. 
 
 4. **Be direct.** At PostHog, we assume positive intent and realize that feedback is essential (these are two of our communication values). If you’re not direct, you’re wasting time and doing more harm than good. 
 
@@ -128,4 +140,4 @@ Ideally, communication is a sort of funnel that guides people towards action lik
 
 ![Funnel](https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_02_27_at_15_45_54_2x_0acb51a9ec.png)
 
-This is important to always keep in mind. As organizations grow, they have a tendency to add process and structure which puts blockers in the way of shipping. Communication is one of the areas that can pop up, but thinking about the actionability of your communication can prevent this.
+The goal of communication is to help us get something shipped. Although ideally, we would need little to no communication to do this, eventually it happens. The best we can do once this is the case is make it actionable.
