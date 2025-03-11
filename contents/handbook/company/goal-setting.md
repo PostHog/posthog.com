@@ -70,7 +70,7 @@ If you aren't on a product team, replace 'product' with the equivalent 'thing' o
 
 - As few objectives as possible
 - Motivation - explains why the objective is set
-- Thing's we'll ship that show if we're en route to achieving an objective
+- Things we'll ship that show if we're en route to achieving an objective
 - Objectives are simple - it's really clear if you are/aren't hitting them
 - Objectives are ambitious - they move the needle for PostHog
 - Hitting an overarching objective is more important than shipping specific things
