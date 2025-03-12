@@ -172,16 +172,11 @@
             "source": "/handbook/engineering/enterprise-prioritization",
             "destination": "/handbook/product/enterprise-features-prioritization"
         },
-        { "source": "/blog/titles", "destination": "/blog/startup-job-titles" },
         {
             "source": "/handbook/growth/marketing/Customer-personas",
             "destination": "/handbook/growth/marketing/customer-personas"
         },
         { "source": "/handbook/engineering/product-team", "destination": "/handbook/product/product-team" },
-        {
-            "source": "/blog/Building-the-future-of-game-analytics-pureskill",
-            "destination": "/blog/building-the-future-of-game-analytics-pureskill"
-        },
         {
             "source": "/handbook/product/scale-features-prioritization",
             "destination": "/handbook/product/enterprise-features-prioritization"
@@ -194,10 +189,6 @@
         { "source": "/docs/user-guides/session-recording", "destination": "/docs/user-guides/recordings" },
         { "source": "/blog/sessions-deprecation", "destination": "/blog/sessions-removal" },
         { "source": "/docs/self-host/runbook/overview", "destination": "/docs/self-host/runbook" },
-        {
-            "source": "/blog/aarrr-how-to-build-pirate-funnel-posthog-with-posthog",
-            "destination": "/docs/tutorials/aarrr-how-to-build-pirate-funnel-posthog-with-posthog"
-        },
         { "source": "/docs/user-guides/users", "destination": "/docs/user-guides/persons" },
         { "source": "/docs/integrations/api", "destination": "/docs/api" },
         { "source": "/docs/features/sso", "destination": "/docs/user-guides/sso" },
@@ -227,10 +218,6 @@
             "source": "/docs/self-host/docs/self-host/postgres-vs-clickhouse",
             "destination": "/docs/self-host/postgres-vs-clickhouse"
         },
-        { "source": "/blog/the-posthog-array-1-29-1", "destination": "/blog/the-posthog-array-1-29-0" },
-        { "source": "/blog/the-posthog-array-1-28-1", "destination": "/blog/the-posthog-array-1-28-0" },
-        { "source": "/blog/the-posthog-array-1-23-1", "destination": "/blog/the-posthog-array-1-23-0" },
-        { "source": "/blog/the-posthog-array-1-15-1", "destination": "/blog/the-posthog-array-1-15-0" },
         { "source": "/handbook/people/team-structure/design", "destination": "/handbook/design/philosophy" },
         { "source": "/handbook/design/about-design", "destination": "/handbook/design/philosophy" },
         { "source": "/product-features/self-hosted", "destination": "/product-os" },
@@ -908,15 +895,10 @@
         { "source": "/docs/surveys/events", "destination": "/docs/surveys/implementing-custom-surveys" },
         { "source": "/blog/how-we-do-hiring-and-hr-at-posthog", "destination": "/handbook/people/hiring-process" },
         { "source": "/api", "destination": "/docs/api" },
-        {
-            "source": "/tutorials/experiments",
-            "destination": "/docs/experiments/running-experiments-without-feature-flags"
-        },
         { "source": "/docs/data/subscriptions", "destination": "/docs/product-analytics/subscriptions" },
         { "source": "/docs/apps/feedback-widget", "destination": "/templates/in-app-feedback-survey" },
         { "source": "/apps/feedback-widget", "destination": "/templates/in-app-feedback-survey" },
         { "source": "/apps/user-interviewer", "destination": "/templates/user-interview" },
-        { "source": "/jobs", "destination": "/careers" },
         {
             "source": "/docs/getting-started/estimating-usage-costs",
             "destination": "/docs/billing/estimating-usage-costs"
@@ -1113,7 +1095,6 @@
         { "source": "/handbook/growth/marketing/blog", "destination": "/handbook/growth/marketing/content" },
         { "source": "/handbook/small-teams/website-docs/community", "destination": "/handbook/community" },
         { "source": "/logo", "destination": "/handbook/company/brand-assets" },
-        { "source": "/docs/getting-started/next-steps", "destination": "/tutorials/next-steps-after-installing" },
         { "source": "/blog/tags/product-engineer", "destination": "/product-engineers/all" },
         { "source": "/blog/categories/company-and-culture", "destination": "/founders/culture" },
         { "source": "/docs/runbook/upgrading-posthog", "destination": "/docs/self-host" },
