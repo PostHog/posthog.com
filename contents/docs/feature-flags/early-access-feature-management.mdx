@@ -10,7 +10,7 @@ export const SiteAppLight = "https://res.cloudinary.com/dmukukwp6/image/upload/p
 
 > **Note:** Early access management is only available in the [JavaScript Web SDK](/docs/libraries/js).
 
-Early access feature management enables your users to opt in (and out) of betas and in-progress features as well as notify them when ready.
+Early access feature management enables your users to opt in (and out) of betas and in-progress features as well as collect details for users interested in items on your roadmap.
 
 This is useful if you want to:
 - Run a beta program without building a custom solution
@@ -24,9 +24,11 @@ Early access features can be created and edited from the [Early Access Managemen
 
 Features can be in different stages:
 
-- **Coming soon**: Features that are in development but not yet available for testing. Users can register interest to be notified when the feature becomes available.
+- **Concept**: Features that are not yet available for testing. These are added to the Coming Soon tab, so users can register interest in advance.
 - **Beta**: Features that are available for testing. Users can opt in to try them out.
 - **Alpha** and **General availability** are also available for more granular feature lifecycle management.
+
+> **Note:** Early access features must currently be released before they can assigned to a stage. 
 
 For beta features, feature flags are automatically created when a feature is created (based on the name of the feature), or you can link an existing feature flag to a feature. Each feature can also contain a description and documentation link to help users understand what the feature is for.
 
