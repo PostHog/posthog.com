@@ -1159,6 +1159,14 @@ export const companyMenu = {
                     name: 'Not engineering',
                 },
                 {
+                    name: 'Comms',
+                    url: '/teams/words-pictures',
+                },
+                {
+                    name: 'Content & Docs',
+                    url: '/teams/marketing',
+                },
+                {
                     name: 'Exec',
                     url: '/teams/exec',
                 },
