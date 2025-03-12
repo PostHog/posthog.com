@@ -59,7 +59,6 @@ Sales at PostHog isn't like most other software companies! These are some of the
 - Towards the end of the week, schedule a demo and feedback session with Simon.  We might need to do a couple of iterations over the next few weeks as you take on board feedback, don't worry if that's the case!
 - Prioritize your current book of customers, and start reaching out!
 - Get comfortable with the PostHog [Docs](/docs) around our main products. 
-- Consider attending the Onboarding Intros meetings [via this Google Calendar](https://calendar.google.com/calendar/embed?src=c_25ceb28129b44d3e9c558c361cc565fde75c95ccf8298857c4c59f9c1f1539f8%40group.calendar.google.com) on Monday and Wednesday, to meet the product teams and learn about the current state of each product/feature. 
 - We'll start routing new Salesforce Leads to you at the end of week 1.  Start to review these and reach out, using a shared booking link with someone else from your region so they can back you up in the first few weeks. This is a great option to practise and fail. 
 
 ### In-person onboarding
@@ -127,7 +126,6 @@ By the end of month 4:
 - Towards the end of the week, schedule a demo and feedback session with Simon.  We might need to do a couple of iterations over the next few weeks as you take on board feedback, don't worry if that's the case!
 - Prioritize your current book of customers, and start reaching out!
 - Get comfortable with the PostHog [Docs](/docs) around our main products. 
-- Consider attending the Onboarding Intros meetings [via this Google Calendar](https://calendar.google.com/calendar/embed?src=c_25ceb28129b44d3e9c558c361cc565fde75c95ccf8298857c4c59f9c1f1539f8%40group.calendar.google.com) on Monday and Wednesday, to meet the product teams and learn about the current state of each product/feature. 
 
 ### In-person onboarding
 
@@ -191,7 +189,6 @@ By the end of month 3:
 - Shadow more live calls and listen to more [Jiminny](https://app.jiminny.eu/dashboard) recordings. There is [a Jiminny playlist with sub-folders containing Sales calls and PostHog knowledge calls](https://app.jiminny.eu/playlists#playlist-355cdc2a-1326-4ea6-97e3-e7749800fc8a), add to it as you listen! 
 - Towards the end of the week, schedule a demo and feedback session with Simon.  We might need to do a couple of iterations over the next few weeks as you take on board feedback, don't worry if that's the case!
 - Get comfortable with the PostHog [Docs](/docs) around our main products. 
-- Consider attending the Onboarding Intros meetings [via this Google Calendar](https://calendar.google.com/calendar/embed?src=c_25ceb28129b44d3e9c558c361cc565fde75c95ccf8298857c4c59f9c1f1539f8%40group.calendar.google.com) on Monday and Wednesday, to meet the product teams and learn about the current state of each product/feature. 
 - We'll start routing new leads to you at the end of week 1.  Start to review these and reach out, using a shared booking link with someone else from your region so they can back you up in the first few weeks. This is a great option to practise and fail.
 
 ### In-person onboarding
@@ -218,7 +215,7 @@ By the end of month 2:
  - You're a PostHog power user - most questions you raise can only be answered by product engineers rather than the support team
 
 By the end of month 3:
- - You've implemented process and system-level changes to make your job better/more effective. 
+ - You've implemented process and system-level changes to make your job better/more effective
 
 ## Tools that you may find useful
 
