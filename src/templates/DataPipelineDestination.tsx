@@ -21,7 +21,7 @@ export default function DataPipelineDestination({
             activeInternalMenu={docsMenu.children.find((child) => child.name === 'Data pipelines')}
         >
             <PostLayout title={name} menu={dataPipelines.children} menuWidth={{ left: 400 }} hideSidebar hideSurvey>
-                <h1>{name}</h1>
+                <h1 className="mt-0">{name}</h1>
                 <div className="article-content">
                     <p>{description}</p>
                     <h2>Configuration</h2>
