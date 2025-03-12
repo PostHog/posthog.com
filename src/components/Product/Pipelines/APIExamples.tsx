@@ -54,7 +54,8 @@ curl --location '<ph_client_api_host>/api/environments/:project_id/hog_functions
     ]
 
     return (
-        <Accordion initialOpen={initialOpen} label="API example">
+        <Accordion initialOpen={initialOpen} label="How to create this via the API">
+            <p>Using our REST API you can create this {type} like so:</p>
             <CodeBlock currentLanguage={languages[0]}>{languages}</CodeBlock>
         </Accordion>
     )
