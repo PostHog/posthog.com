@@ -3153,6 +3153,10 @@ export const docsMenu = {
                             url: '/docs/cdp/destinations/meta-ads',
                         },
                         {
+                            name: 'Microsoft Teams',
+                            url: '/docs/cdp/destinations/microsoft-teams',
+                        },
+                        {
                             name: 'RudderStack',
                             url: '/docs/cdp/destinations/rudderstack',
                         },
