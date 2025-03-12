@@ -3303,7 +3303,7 @@ export const docsMenu = {
                             name: 'URL normalizer',
                         },
                         {
-                            url: '/docs/cdp/url-normalizer',
+                            url: '/docs/cdp/url-query',
                             name: 'URL query',
                         },
                     ],
