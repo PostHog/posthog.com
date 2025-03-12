@@ -1171,10 +1171,6 @@ export const companyMenu = {
                     url: '/teams/exec',
                 },
                 {
-                    name: 'Marketing',
-                    url: '/teams/marketing',
-                },
-                {
                     name: 'People & Ops',
                     url: '/teams/people',
                 },
@@ -1189,10 +1185,6 @@ export const companyMenu = {
                 {
                     name: 'Website & Vibes',
                     url: '/teams/website-vibes',
-                },
-                {
-                    name: 'Comms',
-                    url: '/teams/words-and-pictures',
                 },
             ],
         },
