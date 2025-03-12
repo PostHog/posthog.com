@@ -3273,6 +3273,10 @@ export const docsMenu = {
                         {
                             url: '/docs/cdp/geoip-enrichment',
                             name: 'GeoIP enricher',
+                            badge: {
+                                title: 'Popular',
+                                className: '!bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',
+                            },
                         },
                         {
                             url: '/docs/cdp/property-filter',
