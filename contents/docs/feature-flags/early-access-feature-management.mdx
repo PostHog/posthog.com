@@ -76,14 +76,13 @@ Once set up, early access features appear on this panel for users to opt in or o
 
 You can fully customize your early access management experience using `getEarlyAccessFeatures` and `updateEarlyAccessFeatureEnrollment` from PostHog's [JavaScript Web library](/docs/libraries/js/features#early-access-feature-management).
 
-- `getEarlyAccessFeatures` is called with a callback function that receives a list of early access features with their flag key, name, description, documentation link, and stage. You can use this to build a UI for users to opt in or out of features or register interest features coming soon.
+`getEarlyAccessFeatures` is called with a callback function that receives a list of early access features with their flag key, name, description, documentation link, and stage. You can use this to build a UI for users to opt in or out of features or register interest features coming soon.
 
-> *Note:* Available early access features are cached per browser load. This means if you have a browser open and create a new early access feature, you wouldn't see it until you refresh. 
+You can also specify which stages of features to retrieve by passing an array of stages as the third parameter, e.g., `getEarlyAccessFeatures(callback, force_reload, ['concept', 'beta'])`.
+
+> **Note:** Available early access features are cached per browser load. This means if you have a browser open and create a new early access feature, you wouldn't see it until you refresh. 
 > 
 > If you want the latest values always available, include the `force_reload` parameter in your `getEarlyAccessFeatures` call. This makes a network request to get the updated list instead of using the cache. The downside is that this can delay when early access features are available on load.
->
-> You can also specify which stages of features to retrieve by passing an array of stages as the third parameter, e.g., `getEarlyAccessFeatures(callback, force_reload, ['concept', 'beta'])`.
-
 
 ```react
 const posthog = usePostHog()
@@ -118,7 +117,7 @@ useEffect(() => {
 }, [activeFlags])
 ```
 
-- `updateEarlyAccessFeatureEnrollment` is called with a feature flag key and a boolean value to opt in or out of the feature or to register interest in a feature coming soon. This updates the user's opt-in status for the feature.
+`updateEarlyAccessFeatureEnrollment` is called with a feature flag key and a boolean value to opt in or out of the feature or to register interest in a feature coming soon. This updates the user's opt-in status for the feature.
 
 ```react
 const toggleBeta = (betaKey) => {
