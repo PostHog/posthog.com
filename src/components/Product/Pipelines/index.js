@@ -63,6 +63,7 @@ import ReactFlow, {
 import 'reactflow/dist/style.css'
 import Profile from '../../Team/Profile'
 import APIExamples from './APIExamples'
+import Configuration from './Configuration'
 
 const team = 'CDP'
 const teamSlug = '/teams/cdp'
@@ -529,14 +530,15 @@ function PipelinesPage({ location }) {
                                     <MDXRenderer>{selectedDestination.mdx.body}</MDXRenderer>
                                 </MDXProvider>
                             ) : (
-                                <p>{selectedDestination.description}</p>
+                                <p className="!-mb-4">{selectedDestination.description}</p>
                             )}
+                            <h2>Configuration</h2>
+                            <Configuration inputs_schema={selectedDestination.inputs_schema} />
                             <APIExamples
                                 name={selectedDestination.name}
                                 inputs_schema={selectedDestination.inputs_schema}
                                 id={selectedDestination.id}
                                 type="destination"
-                                initialOpen
                             />
                         </div>
                         {selectedDestination.mdx && (

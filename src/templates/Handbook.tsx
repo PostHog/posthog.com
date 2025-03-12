@@ -40,6 +40,7 @@ import TeamMember from 'components/TeamMember'
 import { Contributor, ContributorImageSmall } from 'components/PostLayout/Contributors'
 import { OverflowXSection } from 'components/OverflowXSection'
 import APIExamples from 'components/Product/Pipelines/APIExamples'
+import Configuration from 'components/Product/Pipelines/Configuration'
 
 const renderAvailabilityIcon = (availability: 'full' | 'partial' | 'none') => {
     switch (availability) {
@@ -244,47 +245,7 @@ export const TemplateParametersFactory: (params: TemplateParametersProps) => Rea
 
         return (
             <div>
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Option</th>
-                            <th>Description</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {inputs_schema.map((input) => {
-                            if (!input.label) {
-                                return null
-                            }
-
-                            return (
-                                <tr key={input.key}>
-                                    <td>
-                                        <div className="mb-6 w-40">
-                                            <code className="dark:bg-gray-accent-dark dark:text-white bg-gray-accent-light text-inherit p-1 rounded">
-                                                {input.label}
-                                            </code>
-                                        </div>
-
-                                        {input.type && (
-                                            <div>
-                                                <strong>Type: </strong>
-                                                <span>{input.type}</span>
-                                            </div>
-                                        )}
-
-                                        <div>
-                                            <strong>Required: </strong>
-                                            <span>{input.required ? 'True' : 'False'}</span>
-                                        </div>
-                                    </td>
-
-                                    <td>{input.description ? <Markdown>{input.description || ''}</Markdown> : null}</td>
-                                </tr>
-                            )
-                        })}
-                    </tbody>
-                </table>
+                <Configuration inputs_schema={inputs_schema} />
                 <APIExamples
                     name={template?.name}
                     inputs_schema={inputs_schema}
