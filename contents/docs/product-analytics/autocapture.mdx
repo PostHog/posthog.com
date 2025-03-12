@@ -50,7 +50,7 @@ posthog.init('<ph_project_api_key>', {
 ```
 Allow and ignorelists only filter autocapture events. They don't affect the data collected by session recordings or custom events.
 
-> **Note:** When using `element_allowlist` or `css_selector_allowlist`, PostHog considers the entire tree of elements from the root to the target element of the click event, not just the element that was directly clicked. If any element or selector in the tree and allow list, the click is captured.
+> **Note:** When using `element_allowlist` or `css_selector_allowlist`, PostHog considers the entire tree of elements from the root to the target element of the click event, not just the element that was directly clicked. If *any* element or selector is in the tree *and* allow list, the click is captured.
 
 ### Preventing sensitive data capture
 
