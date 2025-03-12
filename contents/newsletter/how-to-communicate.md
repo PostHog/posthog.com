@@ -18,7 +18,7 @@ crosspost:
 
 Engineers spend most of their time doing two things: coding and communicating. The first has seemingly endless amounts written about it, but the second has relatively little.
 
-To address this injustice, we’re sharing the biggest mistakes we've seen engineers make when communicating in a remote, async, engineering-led company (and what we've done to fix them).
+To address this injustice, we're sharing the biggest mistakes we've seen engineers make when communicating in a remote, async, engineering-led company (and what we've done to fix them).
 
 ## 1. Forgetting about your users
 
@@ -28,9 +28,9 @@ Remember, companies don't succeed based on their ability to solve technical prob
 
 At PostHog, our communication connects to users in one of two ways:
 
-1. **It’s about a user issue.** Top priorities for us include prioritizing feature requests from customers, solving confusions about a feature, or fixing a bug affecting them. Each of these potentially require coordination and collaboration. 
+1. **It's about a user issue.** Top priorities for us include prioritizing feature requests from customers, solving confusions about a feature, or fixing a bug affecting them. Each of these potentially require coordination and collaboration. 
 
-2. **It’s backed by a user experience.** We build features because users want them and their specific needs often guide our implementation. The experiences of users are often our best guide when we're deciding what to work on or how to implement it.
+2. **It's backed by a user experience.** We build features because users want them and their specific needs often guide our implementation. The experiences of users are often our best guide when we're deciding what to work on or how to implement it.
 
 ![Facts](https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_03_11_at_10_43_31_2x_9726c09b98.png)
 
@@ -78,7 +78,7 @@ We realize this brand of external openness doesn't work for everyone, but that d
 
 ## 3. Not giving the receiver the context they need
 
-Everyone's been on the receiving end of a low context message like “this isn’t working” or “what do you think of this?” It then becomes your responsibility to figure out the context so you can work towards a solution.
+Everyone's been on the receiving end of a low context message like “this isn't working” or “what do you think of this?” It then becomes your responsibility to figure out the context so you can work towards a solution.
 
 This sucks, and if you don't like being subjected to it, you shouldn't do it to others.
 
@@ -116,9 +116,9 @@ Our most important ones at PostHog include:
 
 5. **Incidents.** When something bad and unexpected happens, a new Slack channel is created to identify the problem and bring together a small group to work towards a solution.
 
-Rituals aren’t unique to PostHog. Zapier requires [Friday Updates](https://zapier.com/blog/friday-updates-at-work/) from everyone on their internal blog. [Basecamp](https://github.com/basecamp/handbook/blob/master/how-we-work.md) has daily and weekly check-ins as well as kickoffs and heartbeats. [Linear](https://linear.app/method/introduction) works in 2 week cycles, writes project specs, and keeps an updated changelog.
+Rituals aren't unique to PostHog. Zapier requires [Friday Updates](https://zapier.com/blog/friday-updates-at-work/) from everyone on their internal blog. [Basecamp](https://github.com/basecamp/handbook/blob/master/how-we-work.md) has daily and weekly check-ins as well as kickoffs and heartbeats. [Linear](https://linear.app/method/introduction) works in 2 week cycles, writes project specs, and keeps an updated changelog.
 
-All rituals, including ours, are downstream from the culture you want to create. For us, that means they are as async as possible and involve as few meetings as possible. This ensures that we have enough time to work on what’s important.
+All rituals, including ours, are downstream from the culture you want to create. For us, that means they are as async as possible and involve as few meetings as possible. This ensures that we have enough time to work on what's important.
 
 ## 5. Not making communication actionable
 
@@ -134,10 +134,25 @@ We do this by:
 
 3. **Be understood.** You must communicate differently depending on the context your recipient has. You need to communicate differently with non-technical people than with technical ones. Avoid acronyms whenever possible. 
 
-4. **Be direct.** At PostHog, we assume positive intent and realize that feedback is essential (these are two of our communication values). If you’re not direct, you’re wasting time and doing more harm than good. 
+4. **Be direct.** At PostHog, we assume positive intent and realize that feedback is essential (these are two of our communication values). If you're not direct, you're wasting time and doing more harm than good. 
 
 Ideally, communication is a sort of funnel that guides people towards action like this:
 
 ![Funnel](https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_02_27_at_15_45_54_2x_0acb51a9ec.png)
 
 The goal of communication is to help us get something shipped. Although ideally, we would need little to no communication to do this, eventually it happens. The best we can do once this is the case is make it actionable.
+
+## What happens when you avoid these mistakes?
+
+- It creates a culture of communication that prioritizes shipping features that users actually care about, rather than planning or theorizing them.
+- Because the information you need is available at the right time, everyone can work more autonomously with fewer meetings and less back and forth.
+- When making decisions, more perspectives are taken into account, not just the "highest paid person's opinion."
+- Knowledge you've gained gets shared and built upon, rather than lost and forgotten.
+
+Don't believe this is real? This is largely how communication works at PostHog and based on a recent internal survey, it seems to be working.
+
+- 95% of people said PostHog has open and honest two-way communication
+- 97% of people said leaders at PostHog keep people informed about what is happening.
+- 98% of people said they understand PostHog's goals and can see how their work contributes to them.
+
+Although communication can always be improved, avoiding these mistakes goes a long way in doing it as well as possible.
