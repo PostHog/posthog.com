@@ -7,10 +7,7 @@
         { "source": "/posts/:path*", "destination": "/posts/[slug]/index.html" }
     ],
     "redirects": [
-        {
-            "source": "/youreastar",
-            "destination": "https://www.youtube.com/watch?v=SD7B2teuLXk"
-        },
+        { "source": "/youreastar", "destination": "https://www.youtube.com/watch?v=SD7B2teuLXk" },
         {
             "source": "/handbook/growth/marketing/product-announcements",
             "destination": "/handbook/words-and-pictures/product-announcements"
@@ -557,10 +554,7 @@
             "source": "/handbook/people/team-structure/session-recording",
             "destination": "/handbook/small-teams/replay"
         },
-        {
-            "source": "/handbook/small-teams/monitoring",
-            "destination": "/handbook/small-teams/replay"
-        },
+        { "source": "/handbook/small-teams/monitoring", "destination": "/handbook/small-teams/replay" },
         {
             "source": "/handbook/people/team-structure/website-docs",
             "destination": "/handbook/small-teams/website-docs"
@@ -584,14 +578,8 @@
             "destination": "/handbook/small-teams/product-analytics"
         },
         { "source": "/docs/self-host/postgres-vs-clickhouse", "destination": "/blog/clickhouse-vs-postgres" },
-        {
-            "source": "/handbook/people/team-structure/team-structure",
-            "destination": "/handbook/team-structure"
-        },
-        {
-            "source": "/handbook/small-teams/team-structure",
-            "destination": "/handbook/team-structure"
-        },
+        { "source": "/handbook/people/team-structure/team-structure", "destination": "/handbook/team-structure" },
+        { "source": "/handbook/small-teams/team-structure", "destination": "/handbook/team-structure" },
         { "source": "/eu-cloud", "destination": "/eu" },
         { "source": "/handbook/strategy/roadmap", "destination": "/roadmap" },
         { "source": "/handbook/company/diversity", "destination": "/handbook/company/grown-ups" },
@@ -640,14 +628,8 @@
             "source": "/docs/product-analytics/user-properties",
             "destination": "/docs/product-analytics/person-properties"
         },
-        {
-            "source": "/docs/product-analytics/start",
-            "destination": "/docs/getting-started/send-events"
-        },
-        {
-            "source": "/docs/product-analytics/web-vitals",
-            "destination": "/docs/web-analytics/web-vitals"
-        },
+        { "source": "/docs/product-analytics/start", "destination": "/docs/getting-started/send-events" },
+        { "source": "/docs/product-analytics/web-vitals", "destination": "/docs/web-analytics/web-vitals" },
         { "source": "/docs/getting-started/user-properties", "destination": "/docs/getting-started/person-properties" },
         {
             "source": "/docs/feature-flags/multivariate-flags",
@@ -919,7 +901,6 @@
         { "source": "/lottie", "destination": "/community/profiles/27881" },
         { "source": "/joe", "destination": "/community/profiles/29070" },
         { "source": "/cory", "destination": "/community/profiles/30200" },
-
         { "source": "/docs/surveys/manual", "destination": "/docs/surveys" },
         { "source": "/docs/surveys/setup", "destination": "/docs/surveys/installation" },
         { "source": "/docs/surveys/new", "destination": "/docs/surveys/creating-surveys" },
@@ -1029,10 +1010,7 @@
             "source": "/blog/churn-rate-vs-retention-rate",
             "destination": "/product-engineers/churn-rate-vs-retention-rate"
         },
-        {
-            "source": "/product-engineers/ab-testing",
-            "destination": "/product-engineers/experiments"
-        },
+        { "source": "/product-engineers/ab-testing", "destination": "/product-engineers/experiments" },
         {
             "source": "/blog/feature-flag-benefits-use-cases",
             "destination": "/product-engineers/feature-flag-benefits-use-cases"
@@ -1064,7 +1042,6 @@
             "destination": "/product-engineers/running-group-targeted-ab-tests"
         },
         { "source": "/blog/sql-for-analytics", "destination": "/product-engineers/sql-for-analytics" },
-
         { "source": "/docs/cdp/unduplicator", "destination": "/docs/cdp" },
         { "source": "/cdp/unduplicator", "destination": "/docs/cdp" },
         { "source": "/handbook/strategy/overview", "destination": "/handbook/future" },
@@ -1222,10 +1199,7 @@
         { "source": "/docs/cdp/build/tutorial", "destination": "/docs/cdp/destinations" },
         { "source": "/blog/learnings-from-elon", "destination": "/founders/learnings-from-elon" },
         { "source": "/docs/data/application-settings", "destination": "/docs" },
-        {
-            "source": "/docs/data/organizations-and-projects",
-            "destination": "/docs/settings/organizations"
-        },
+        { "source": "/docs/data/organizations-and-projects", "destination": "/docs/settings/organizations" },
         { "source": "/docs/data/role-based-access", "destination": "/docs/settings/role-based-access" },
         { "source": "/docs/data/sso", "destination": "/docs/settings/sso" },
         { "source": "/docs/ab-testing", "destination": "/docs/experiments" },
@@ -1256,10 +1230,7 @@
         },
         { "source": "/docs/product-analytics/llms", "destination": "/docs/ai-engineering" },
         { "source": "/docs/ai-engineering/llms", "destination": "/docs/ai-engineering/llm-insights" },
-        {
-            "source": "/docs/product-analytics/trends",
-            "destination": "/docs/product-analytics/trends/overview"
-        },
+        { "source": "/docs/product-analytics/trends", "destination": "/docs/product-analytics/trends/overview" },
         { "source": "/book-a-demo", "destination": "/demo" },
         { "source": "/contact-sales", "destination": "/talk-to-a-human" },
         { "source": "/teams/customer-success", "destination": "/teams/sales-cs" },
@@ -1289,18 +1260,9 @@
             "destination": "/surveys#pricing",
             "has": [{ "type": "query", "key": "product", "value": "surveys" }]
         },
-        {
-            "source": "/handbook/growth/sales/icp",
-            "destination": "/handbook/growth/marketing/icp"
-        },
-        {
-            "source": "/teams/pipeline",
-            "destination": "/teams/cdp"
-        },
-        {
-            "source": "/teams/feature-success",
-            "destination": "/teams/feature-flags"
-        },
+        { "source": "/handbook/growth/sales/icp", "destination": "/handbook/growth/marketing/icp" },
+        { "source": "/teams/pipeline", "destination": "/teams/cdp" },
+        { "source": "/teams/feature-success", "destination": "/teams/feature-flags" },
         { "source": "/docs/cdp/airbyte-export", "destination": "/docs/cdp/batch-exports" },
         { "source": "/docs/cdp/avo-inspector", "destination": "/docs/cdp/destinations/avo" },
         { "source": "/docs/cdp/customer-io", "destination": "/docs/cdp/destinations/customerio" },
@@ -1360,107 +1322,35 @@
             "source": "/docs/session-replay/react-native",
             "destination": "/docs/session-replay/installation?tab=React+Native"
         },
-        {
-            "source": "/teams/comms",
-            "destination": "/teams/support"
-        },
-        {
-            "source": "/docs/session-replay/flutter",
-            "destination": "/docs/session-replay/installation?tab=Flutter"
-        },
-        {
-            "source": "/teams/customer-comms",
-            "destination": "/teams/support"
-        },
+        { "source": "/teams/comms", "destination": "/teams/support" },
+        { "source": "/docs/session-replay/flutter", "destination": "/docs/session-replay/installation?tab=Flutter" },
+        { "source": "/teams/customer-comms", "destination": "/teams/support" },
         { "source": "/apps", "destination": "/cdp", "statusCode": 302 },
-        {
-            "source": "/docs/data-warehouse/setup/azure-blob",
-            "destination": "/docs/cdp/sources/azure-blob"
-        },
-        {
-            "source": "/docs/data-warehouse/setup/azure-db",
-            "destination": "/docs/cdp/sources/azure-db"
-        },
-        {
-            "source": "/docs/data-warehouse/setup/chargebee",
-            "destination": "/docs/cdp/sources/chargebee"
-        },
-        {
-            "source": "/docs/data-warehouse/setup/gcs",
-            "destination": "/docs/cdp/sources/gcs"
-        },
-        {
-            "source": "/docs/data-warehouse/setup/hubspot",
-            "destination": "/docs/cdp/sources/hubspot"
-        },
-        {
-            "source": "/docs/data-warehouse/setup/index",
-            "destination": "/docs/cdp/sources"
-        },
-        {
-            "source": "/docs/data-warehouse/setup/mysql",
-            "destination": "/docs/cdp/sources/mysql"
-        },
-        {
-            "source": "/docs/data-warehouse/setup/postgres",
-            "destination": "/docs/cdp/sources/postgres"
-        },
-        {
-            "source": "/docs/data-warehouse/setup/r2",
-            "destination": "/docs/cdp/sources/r2"
-        },
-        {
-            "source": "/docs/data-warehouse/setup/s3",
-            "destination": "/docs/cdp/sources/s3"
-        },
-        {
-            "source": "/docs/data-warehouse/setup/salesforce",
-            "destination": "/docs/cdp/sources/salesforce"
-        },
-        {
-            "source": "/docs/data-warehouse/setup/snowflake",
-            "destination": "/docs/cdp/sources/snowflake"
-        },
-        {
-            "source": "/docs/data-warehouse/setup/stripe",
-            "destination": "/docs/cdp/sources/stripe"
-        },
-        {
-            "source": "/docs/data-warehouse/setup/vitally",
-            "destination": "/docs/cdp/sources/vitally"
-        },
-        {
-            "source": "/docs/data-warehouse/setup/zendesk",
-            "destination": "/docs/cdp/sources/zendesk"
-        },
-        {
-            "source": "/docs/data-warehouse/setup/",
-            "destination": "/docs/data-warehouse/query/"
-        },
-        {
-            "source": "/handbook/growth/marketing/content",
-            "destination": "/handbook/content-and-docs"
-        },
-        {
-            "source": "/handbook/company/docs",
-            "destination": "/handbook/content-and-docs/docs"
-        },
-        {
-            "source": "/handbook/growth/marketing/newsletter",
-            "destination": "/handbook/content-and-docs/newsletter"
-        },
-        {
-            "source": "/handbook/growth/marketing/youtube",
-            "destination": "/handbook/content-and-docs/youtube"
-        },
+        { "source": "/docs/data-warehouse/setup/azure-blob", "destination": "/docs/cdp/sources/azure-blob" },
+        { "source": "/docs/data-warehouse/setup/azure-db", "destination": "/docs/cdp/sources/azure-db" },
+        { "source": "/docs/data-warehouse/setup/chargebee", "destination": "/docs/cdp/sources/chargebee" },
+        { "source": "/docs/data-warehouse/setup/gcs", "destination": "/docs/cdp/sources/gcs" },
+        { "source": "/docs/data-warehouse/setup/hubspot", "destination": "/docs/cdp/sources/hubspot" },
+        { "source": "/docs/data-warehouse/setup/index", "destination": "/docs/cdp/sources" },
+        { "source": "/docs/data-warehouse/setup/mysql", "destination": "/docs/cdp/sources/mysql" },
+        { "source": "/docs/data-warehouse/setup/postgres", "destination": "/docs/cdp/sources/postgres" },
+        { "source": "/docs/data-warehouse/setup/r2", "destination": "/docs/cdp/sources/r2" },
+        { "source": "/docs/data-warehouse/setup/s3", "destination": "/docs/cdp/sources/s3" },
+        { "source": "/docs/data-warehouse/setup/salesforce", "destination": "/docs/cdp/sources/salesforce" },
+        { "source": "/docs/data-warehouse/setup/snowflake", "destination": "/docs/cdp/sources/snowflake" },
+        { "source": "/docs/data-warehouse/setup/stripe", "destination": "/docs/cdp/sources/stripe" },
+        { "source": "/docs/data-warehouse/setup/vitally", "destination": "/docs/cdp/sources/vitally" },
+        { "source": "/docs/data-warehouse/setup/zendesk", "destination": "/docs/cdp/sources/zendesk" },
+        { "source": "/docs/data-warehouse/setup/", "destination": "/docs/data-warehouse/query/" },
+        { "source": "/handbook/growth/marketing/content", "destination": "/handbook/content-and-docs" },
+        { "source": "/handbook/company/docs", "destination": "/handbook/content-and-docs/docs" },
+        { "source": "/handbook/growth/marketing/newsletter", "destination": "/handbook/content-and-docs/newsletter" },
+        { "source": "/handbook/growth/marketing/youtube", "destination": "/handbook/content-and-docs/youtube" },
         {
             "source": "/handbook/growth/marketing/writing-for-posthog",
             "destination": "/handbook/content-and-docs/writing-for-posthog"
         },
-        {
-            "source": "/handbook/growth/marketing/seo-guide",
-            "destination": "/handbook/content-and-docs/seo-guide"
-        },
+        { "source": "/handbook/growth/marketing/seo-guide", "destination": "/handbook/content-and-docs/seo-guide" },
         {
             "source": "/handbook/growth/marketing/posthog-style-guide",
             "destination": "/handbook/content-and-docs/posthog-style-guide"
@@ -1469,101 +1359,29 @@
             "source": "/handbook/growth/marketing/tags-and-categories",
             "destination": "/handbook/content-and-docs/tags-and-categories"
         },
-        {
-            "source": "/handbook/growth/marketing/components",
-            "destination": "/handbook/content-and-docs/components"
-        },
-        {
-            "source": "/handbook/growth/marketing/paid",
-            "destination": "/handbook/words-and-pictures/paid"
-        },
-        {
-            "source": "/features/self-hosted",
-            "destination": "/docs/self-host"
-        },
-        {
-            "source": "/docs/settings/organizations-and-projects",
-            "destination": "/docs/settings/organizations"
-        },
-        {
-            "source": "/docs/settings/role-based-access",
-            "destination": "/docs/settings/access-control"
-        },
-        {
-            "source": "/community/profiles/59",
-            "destination": "/community/profiles/29070"
-        },
-        {
-            "source": "/cdp/avo-inspector",
-            "destination": "/docs/cdp/destinations/avo"
-        },
-        {
-            "source": "/cdp/customer-io",
-            "destination": "/docs/cdp/destinations/customerio"
-        },
-        {
-            "source": "/cdp/downsampling",
-            "destination": "/docs/cdp/downsampling"
-        },
-        {
-            "source": "/cdp/engage-connector",
-            "destination": "/docs/cdp/destinations/engage"
-        },
-        {
-            "source": "/cdp/filter-out",
-            "destination": "/docs/cdp/filter-out"
-        },
-        {
-            "source": "/cdp/geoip-enrichment",
-            "destination": "/docs/cdp/geoip-enrichment"
-        },
-        {
-            "source": "/cdp/hubspot-connector",
-            "destination": "/docs/cdp/sources/hubspot"
-        },
-        {
-            "source": "/cdp/intercom",
-            "destination": "/docs/cdp/destinations/intercom"
-        },
-        {
-            "source": "/cdp/property-filter",
-            "destination": "/docs/cdp/property-filter"
-        },
-        {
-            "source": "/cdp/rudderstack-export",
-            "destination": "/docs/cdp/destinations/rudderstack"
-        },
-        {
-            "source": "/cdp/salesforce-connector",
-            "destination": "/docs/cdp/destinations/salesforce"
-        },
-        {
-            "source": "/cdp/schema-enforcer",
-            "destination": "/docs/cdp/schema-enforcer"
-        },
-        {
-            "source": "/cdp/sendgrid-connector",
-            "destination": "/docs/cdp/destinations/sendgrid"
-        },
-        {
-            "source": "/cdp/taxonomy-standardizer",
-            "destination": "/docs/cdp/taxonomy-standardizer"
-        },
-        {
-            "source": "/cdp/timestamp-parser",
-            "destination": "/docs/cdp/timestamp-parser"
-        },
-        {
-            "source": "/cdp/url-normalizer",
-            "destination": "/docs/cdp/url-normalizer"
-        },
-        {
-            "source": "/cdp/url-query",
-            "destination": "/docs/cdp/url-query"
-        },
-        {
-            "source": "/cdp/user-agent-populator",
-            "destination": "/docs/cdp/user-agent-populator"
-        }
+        { "source": "/handbook/growth/marketing/components", "destination": "/handbook/content-and-docs/components" },
+        { "source": "/handbook/growth/marketing/paid", "destination": "/handbook/words-and-pictures/paid" },
+        { "source": "/features/self-hosted", "destination": "/docs/self-host" },
+        { "source": "/docs/settings/organizations-and-projects", "destination": "/docs/settings/organizations" },
+        { "source": "/docs/settings/role-based-access", "destination": "/docs/settings/access-control" },
+        { "source": "/community/profiles/59", "destination": "/community/profiles/29070" },
+        { "source": "/cdp/avo-inspector", "destination": "/docs/cdp/destinations/avo" },
+        { "source": "/cdp/customer-io", "destination": "/docs/cdp/destinations/customerio" },
+        { "source": "/cdp/downsampling", "destination": "/docs/cdp/downsampling" },
+        { "source": "/cdp/engage-connector", "destination": "/docs/cdp/destinations/engage" },
+        { "source": "/cdp/filter-out", "destination": "/docs/cdp/filter-out" },
+        { "source": "/cdp/geoip-enrichment", "destination": "/docs/cdp/geoip-enrichment" },
+        { "source": "/cdp/hubspot-connector", "destination": "/docs/cdp/sources/hubspot" },
+        { "source": "/cdp/intercom", "destination": "/docs/cdp/destinations/intercom" },
+        { "source": "/cdp/property-filter", "destination": "/docs/cdp/property-filter" },
+        { "source": "/cdp/rudderstack-export", "destination": "/docs/cdp/destinations/rudderstack" },
+        { "source": "/cdp/salesforce-connector", "destination": "/docs/cdp/destinations/salesforce" },
+        { "source": "/cdp/schema-enforcer", "destination": "/docs/cdp/schema-enforcer" },
+        { "source": "/cdp/sendgrid-connector", "destination": "/docs/cdp/destinations/sendgrid" },
+        { "source": "/cdp/taxonomy-standardizer", "destination": "/docs/cdp/taxonomy-standardizer" },
+        { "source": "/cdp/timestamp-parser", "destination": "/docs/cdp/timestamp-parser" },
+        { "source": "/cdp/url-normalizer", "destination": "/docs/cdp/url-normalizer" },
+        { "source": "/cdp/url-query", "destination": "/docs/cdp/url-query" },
+        { "source": "/cdp/user-agent-populator", "destination": "/docs/cdp/user-agent-populator" }
     ]
 }
