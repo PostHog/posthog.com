@@ -348,8 +348,6 @@
         { "source": "/fireship", "destination": "/?utm_source=fireship&utm_campaign=fireship" },
         { "source": "/jesseshowalter", "destination": "/?utm_source=jesseshowalter&utm_campaign=jesseshowalter" },
         { "source": "/benjamincode", "destination": "/?utm_source=benjamincode&utm_campaign=benjamincode" },
-        { "source": "/blog/the-posthog-array-1-36-1", "destination": "/blog/the-posthog-array-1-36-0" },
-        { "source": "/tutorials/b2b", "destination": "/blog/b2b-saas-product-metrics" },
         { "source": "/docs/self-host/migrate-to-cloud", "destination": "/docs/migrate/migrate-to-cloud" },
         { "source": "/tutorials/categories/plugins", "destination": "/tutorials/categories/apps" },
         { "source": "/trial", "destination": "/pricing" },
@@ -1494,6 +1492,78 @@
         {
             "source": "/community/profiles/59",
             "destination": "/community/profiles/29070"
+        },
+        {
+            "source": "/cdp/avo-inspector",
+            "destination": "/docs/cdp/destinations/avo"
+        },
+        {
+            "source": "/cdp/customer-io",
+            "destination": "/docs/cdp/destinations/customerio"
+        },
+        {
+            "source": "/cdp/downsampling",
+            "destination": "/docs/cdp/downsampling"
+        },
+        {
+            "source": "/cdp/engage-connector",
+            "destination": "/docs/cdp/destinations/engage"
+        },
+        {
+            "source": "/cdp/filter-out",
+            "destination": "/docs/cdp/filter-out"
+        },
+        {
+            "source": "/cdp/geoip-enrichment",
+            "destination": "/docs/cdp/geoip-enrichment"
+        },
+        {
+            "source": "/cdp/hubspot-connector",
+            "destination": "/docs/cdp/sources/hubspot"
+        },
+        {
+            "source": "/cdp/intercom",
+            "destination": "/docs/cdp/destinations/intercom"
+        },
+        {
+            "source": "/cdp/property-filter",
+            "destination": "/docs/cdp/property-filter"
+        },
+        {
+            "source": "/cdp/rudderstack-export",
+            "destination": "/docs/cdp/destinations/rudderstack"
+        },
+        {
+            "source": "/cdp/salesforce-connector",
+            "destination": "/docs/cdp/destinations/salesforce"
+        },
+        {
+            "source": "/cdp/schema-enforcer",
+            "destination": "/docs/cdp/schema-enforcer"
+        },
+        {
+            "source": "/cdp/sendgrid-connector",
+            "destination": "/docs/cdp/destinations/sendgrid"
+        },
+        {
+            "source": "/cdp/taxonomy-standardizer",
+            "destination": "/docs/cdp/taxonomy-standardizer"
+        },
+        {
+            "source": "/cdp/timestamp-parser",
+            "destination": "/docs/cdp/timestamp-parser"
+        },
+        {
+            "source": "/cdp/url-normalizer",
+            "destination": "/docs/cdp/url-normalizer"
+        },
+        {
+            "source": "/cdp/url-query",
+            "destination": "/docs/cdp/url-query"
+        },
+        {
+            "source": "/cdp/user-agent-populator",
+            "destination": "/docs/cdp/user-agent-populator"
         }
     ]
 }
