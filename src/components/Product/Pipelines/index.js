@@ -541,13 +541,18 @@ function PipelinesPage({ location }) {
                                 type="destination"
                             />
                         </div>
-                        {selectedDestination.mdx && (
-                            <div className="border-t border-border dark:border-dark pt-4">
-                                <CallToAction to={selectedDestination.mdx.fields.slug} type="secondary">
-                                    Learn more in docs
-                                </CallToAction>
-                            </div>
-                        )}
+
+                        <div className="border-t border-border dark:border-dark pt-4">
+                            <CallToAction
+                                to={
+                                    selectedDestination.mdx?.fields?.slug ||
+                                    `/docs/cdp/destinations/${selectedDestination.slug}`
+                                }
+                                type="secondary"
+                            >
+                                Learn more in docs
+                            </CallToAction>
+                        </div>
                     </>
                 )}
             </SideModal>
@@ -795,6 +800,7 @@ const query = graphql`
         destinations: allPostHogDestination {
             nodes {
                 id
+                slug
                 name
                 category
                 description

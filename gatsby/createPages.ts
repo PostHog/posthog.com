@@ -32,6 +32,8 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
     const ApiEndpoint = path.resolve(`src/templates/ApiEndpoint.tsx`)
     const HandbookTemplate = path.resolve(`src/templates/Handbook.tsx`)
 
+    const DataPipelineDestination = path.resolve(`src/templates/DataPipelineDestination.tsx`)
+
     const result = (await graphql(`
         {
             allMdx(
@@ -313,6 +315,13 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
             roadmapYears: allRoadmap {
                 group(field: year) {
                     fieldValue
+                }
+            }
+            postHogDestinations: allPostHogDestination(filter: { mdx: { id: { eq: null } } }) {
+                nodes {
+                    id
+                    name
+                    slug
                 }
             }
         }
@@ -724,6 +733,14 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
             context: {
                 year: Number(year),
             },
+        })
+    })
+
+    result.data.postHogDestinations.nodes.forEach((node) => {
+        createPage({
+            path: `/docs/cdp/destinations/${node.slug}`,
+            component: DataPipelineDestination,
+            context: { id: node.id, ignoreWrapper: true },
         })
     })
 }

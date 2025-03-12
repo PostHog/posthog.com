@@ -1,6 +1,7 @@
-import React, { createContext, useEffect, useState } from 'react'
+import React, { createContext, useEffect, useMemo, useState } from 'react'
 import { IProps } from './types'
 import { useLayoutData } from 'components/Layout/hooks'
+import useDestinationsNav from '../../navs/useDestinationsNav'
 
 export const Context = createContext<IProps | undefined>(undefined)
 
@@ -25,9 +26,23 @@ export const PostProvider: React.FC<ProviderProps> = ({
     },
     children,
 }) => {
+    const dynamicMenus = useMemo(
+        () => ({
+            'data-pipeline-destinations': useDestinationsNav(),
+        }),
+        []
+    )
     const { activeInternalMenu, fullWidthContent } = useLayoutData()
 
-    const menu = other.menu || activeInternalMenu?.children
+    const menu = useMemo(() => {
+        const menu = other.menu || activeInternalMenu?.children
+        return menu?.map((item) => {
+            if (item.dynamicChildren && dynamicMenus[item.dynamicChildren]) {
+                return { ...item, children: [...(item.children || []), ...dynamicMenus[item.dynamicChildren]] }
+            }
+            return item
+        })
+    }, [other.menu, activeInternalMenu])
 
     const tableOfContents = other.tableOfContents?.filter((item) => item.depth > -1 && item.depth < 2)
     const contentContainerClasses =

@@ -1,3 +1,347 @@
+export const dataPipelines = {
+    name: 'Data pipelines',
+    url: '/docs/cdp',
+    color: 'sky-blue',
+    icon: 'IconPlug',
+    description: 'Collect, enrich, and send data to your destinations',
+    children: [
+        {
+            name: 'Data pipelines integrations',
+        },
+        {
+            name: 'Overview',
+            url: '/docs/cdp',
+            icon: 'IconHome',
+            color: 'seagreen',
+        },
+        {
+            name: 'Sources',
+            url: '/docs/cdp/sources',
+            icon: 'IconBook',
+            color: 'blue',
+            featured: true,
+            children: [
+                {
+                    name: 'Overview',
+                    url: '/docs/cdp/sources/',
+                },
+                {
+                    name: 'Managed',
+                },
+                {
+                    name: 'Stripe',
+                    url: '/docs/cdp/sources/stripe',
+                },
+                {
+                    name: 'Hubspot',
+                    url: '/docs/cdp/sources/hubspot',
+                },
+                {
+                    name: 'Zendesk',
+                    url: '/docs/cdp/sources/zendesk',
+                },
+                {
+                    name: 'Postgres',
+                    url: '/docs/cdp/sources/postgres',
+                },
+                {
+                    name: 'Salesforce',
+                    url: '/docs/cdp/sources/salesforce',
+                },
+                {
+                    name: 'MySQL',
+                    url: '/docs/cdp/sources/mysql',
+                },
+                {
+                    name: 'Azure SQL Server',
+                    url: '/docs/cdp/sources/azure-db',
+                },
+                {
+                    name: 'Snowflake',
+                    url: '/docs/cdp/sources/snowflake',
+                },
+                {
+                    name: 'Vitally',
+                    url: '/docs/cdp/sources/vitally',
+                },
+                {
+                    name: 'Chargebee',
+                    url: '/docs/cdp/sources/chargebee',
+                },
+                {
+                    name: 'BigQuery',
+                    url: '/docs/cdp/sources/bigquery',
+                },
+                {
+                    name: 'Self-managed',
+                },
+                {
+                    name: 'S3',
+                    url: '/docs/cdp/sources/s3',
+                },
+                {
+                    name: 'Azure Blob',
+                    url: '/docs/cdp/sources/azure-blob',
+                },
+                {
+                    name: 'Cloudflare R2',
+                    url: '/docs/cdp/sources/r2',
+                },
+                {
+                    name: 'Google Cloud Storage',
+                    url: '/docs/cdp/sources/gcs',
+                },
+            ],
+        },
+        {
+            name: 'Realtime destinations',
+            url: '/docs/cdp/destinations',
+            badge: {
+                title: 'Beta',
+                className: 'uppercase !bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',
+            },
+            icon: 'IconLive',
+            color: 'salmon',
+            featured: true,
+            dynamicChildren: 'data-pipeline-destinations',
+            children: [
+                {
+                    name: 'Overview',
+                    url: '/docs/cdp/destinations',
+                },
+                {
+                    name: 'Customization',
+                    url: '/docs/cdp/destinations/customizing-destinations',
+                },
+                {
+                    name: 'Destinations',
+                },
+                {
+                    name: 'Slack',
+                    url: '/docs/cdp/destinations/slack',
+                },
+                {
+                    name: 'Webhook',
+                    url: '/docs/cdp/destinations/webhook',
+                },
+                {
+                    name: 'ActiveCampaign',
+                    url: '/docs/cdp/destinations/activecampaign',
+                },
+                {
+                    name: 'Airtable',
+                    url: '/docs/cdp/destinations/airtable',
+                },
+                {
+                    name: 'Attio',
+                    url: '/docs/cdp/destinations/attio',
+                },
+                {
+                    name: 'Avo',
+                    url: '/docs/cdp/destinations/avo',
+                },
+                {
+                    name: 'AWS Kinesis',
+                    url: '/docs/cdp/destinations/aws-kinesis',
+                },
+                {
+                    name: 'Braze',
+                    url: '/docs/cdp/destinations/braze',
+                },
+                {
+                    name: 'Brevo',
+                    url: '/docs/cdp/destinations/brevo',
+                },
+                {
+                    name: 'Customer.io',
+                    url: '/docs/cdp/destinations/customerio',
+                },
+                {
+                    name: 'Discord',
+                    url: '/docs/cdp/destinations/discord',
+                },
+                {
+                    name: 'Engage.so',
+                    url: '/docs/cdp/destinations/engage',
+                },
+                {
+                    name: 'Gleap',
+                    url: '/docs/cdp/destinations/gleap',
+                },
+                {
+                    name: 'Google Cloud Storage',
+                    url: '/docs/cdp/destinations/google-cloud-storage',
+                },
+                {
+                    name: 'Google Pub/Sub',
+                    url: '/docs/cdp/destinations/google-pubsub',
+                },
+                {
+                    name: 'Hubspot',
+                    url: '/docs/cdp/destinations/hubspot',
+                },
+                {
+                    name: 'Intercom',
+                    url: '/docs/cdp/destinations/intercom',
+                },
+                {
+                    name: 'June',
+                    url: '/docs/cdp/destinations/june',
+                },
+                {
+                    name: 'Klaviyo',
+                    url: '/docs/cdp/destinations/klaviyo',
+                },
+                {
+                    name: 'Knock',
+                    url: '/docs/cdp/destinations/knock',
+                },
+                {
+                    name: 'Loops',
+                    url: '/docs/cdp/destinations/loops',
+                },
+                {
+                    name: 'Mailchimp',
+                    url: '/docs/cdp/destinations/mailchimp',
+                },
+                {
+                    name: 'Mailgun',
+                    url: '/docs/cdp/destinations/mailgun',
+                },
+                {
+                    name: 'Mailjet',
+                    url: '/docs/cdp/destinations/mailjet',
+                },
+                {
+                    name: 'Make',
+                    url: '/docs/cdp/destinations/make',
+                },
+                {
+                    name: 'Meta Ads',
+                    url: '/docs/cdp/destinations/meta-ads',
+                },
+                {
+                    name: 'RudderStack',
+                    url: '/docs/cdp/destinations/rudderstack',
+                },
+                {
+                    name: 'Salesforce',
+                    url: '/docs/cdp/destinations/salesforce',
+                },
+                {
+                    name: 'Sendgrid',
+                    url: '/docs/cdp/destinations/sendgrid',
+                },
+                {
+                    name: 'Snapchat Ads',
+                    url: '/docs/cdp/destinations/snapchat-ads',
+                },
+                {
+                    name: 'Twilio',
+                    url: '/docs/cdp/destinations/twilio',
+                },
+                {
+                    name: 'Zapier',
+                    url: '/docs/cdp/destinations/zapier',
+                },
+                {
+                    name: 'Zendesk',
+                    url: '/docs/cdp/destinations/zendesk',
+                },
+            ],
+        },
+        {
+            name: 'Batch exports',
+            url: '/docs/cdp/batch-exports',
+            badge: {
+                title: 'Beta',
+                className: 'uppercase !bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',
+            },
+            icon: 'IconShare',
+            color: 'purple',
+            featured: true,
+            children: [
+                {
+                    name: 'Amazon S3',
+                    url: '/docs/cdp/batch-exports/s3',
+                },
+                {
+                    name: 'Snowflake',
+                    url: '/docs/cdp/batch-exports/snowflake',
+                },
+                {
+                    name: 'BigQuery',
+                    url: '/docs/cdp/batch-exports/bigquery',
+                },
+                {
+                    name: 'Postgres',
+                    url: '/docs/cdp/batch-exports/postgres',
+                },
+                {
+                    name: 'Redshift',
+                    url: '/docs/cdp/batch-exports/redshift',
+                },
+            ],
+        },
+        {
+            name: 'Transformations',
+            url: '/docs/cdp/geoip-enrichment',
+            icon: 'IconWrench',
+            color: 'yellow',
+            featured: true,
+            children: [
+                {
+                    url: '/docs/cdp/geoip-enrichment',
+                    name: 'GeoIP Enricher',
+                },
+                {
+                    url: '/docs/cdp/timestamp-parser',
+                    name: 'Timestamp Parser',
+                },
+                {
+                    url: '/docs/cdp/url-normalizer',
+                    name: 'URL Normalizer',
+                },
+                {
+                    url: '/docs/cdp/user-agent-populator',
+                    name: 'User Agent Populator',
+                },
+                {
+                    url: '/docs/cdp/event-sequence-timer',
+                    name: 'Event Sequence Timer',
+                },
+                {
+                    url: '/docs/cdp/property-filter',
+                    name: 'Property Filter',
+                },
+                {
+                    url: '/docs/cdp/taxonomy-standardizer',
+                    name: 'Taxonomy Standardizer',
+                },
+                {
+                    url: '/docs/cdp/downsampling',
+                    name: 'Downsampler',
+                },
+                {
+                    url: '/docs/cdp/filter-out',
+                    name: 'Filter Out',
+                },
+                {
+                    url: '/docs/cdp/schema-enforcer',
+                    name: 'Schema Enforcer',
+                },
+            ],
+        },
+        {
+            name: 'Troubleshooting and FAQs',
+            url: '/docs/cdp/common-questions',
+            icon: 'IconQuestion',
+            color: 'blue',
+            featured: true,
+        },
+    ],
+}
+
 export const handbookSidebar = [
     {
         name: 'Handbook',
@@ -2931,348 +3275,7 @@ export const docsMenu = {
                 },
             ],
         },
-        {
-            name: 'Data pipelines',
-            url: '/docs/cdp',
-            color: 'sky-blue',
-            icon: 'IconPlug',
-            description: 'Collect, enrich, and send data to your destinations',
-            children: [
-                {
-                    name: 'Data pipelines integrations',
-                },
-                {
-                    name: 'Overview',
-                    url: '/docs/cdp',
-                    icon: 'IconHome',
-                    color: 'seagreen',
-                },
-                {
-                    name: 'Sources',
-                    url: '/docs/cdp/sources',
-                    icon: 'IconBook',
-                    color: 'blue',
-                    featured: true,
-                    children: [
-                        {
-                            name: 'Overview',
-                            url: '/docs/cdp/sources/',
-                        },
-                        {
-                            name: 'Managed',
-                        },
-                        {
-                            name: 'Stripe',
-                            url: '/docs/cdp/sources/stripe',
-                        },
-                        {
-                            name: 'Hubspot',
-                            url: '/docs/cdp/sources/hubspot',
-                        },
-                        {
-                            name: 'Zendesk',
-                            url: '/docs/cdp/sources/zendesk',
-                        },
-                        {
-                            name: 'Postgres',
-                            url: '/docs/cdp/sources/postgres',
-                        },
-                        {
-                            name: 'Salesforce',
-                            url: '/docs/cdp/sources/salesforce',
-                        },
-                        {
-                            name: 'MySQL',
-                            url: '/docs/cdp/sources/mysql',
-                        },
-                        {
-                            name: 'Azure SQL Server',
-                            url: '/docs/cdp/sources/azure-db',
-                        },
-                        {
-                            name: 'Snowflake',
-                            url: '/docs/cdp/sources/snowflake',
-                        },
-                        {
-                            name: 'Vitally',
-                            url: '/docs/cdp/sources/vitally',
-                        },
-                        {
-                            name: 'Chargebee',
-                            url: '/docs/cdp/sources/chargebee',
-                        },
-                        {
-                            name: 'BigQuery',
-                            url: '/docs/cdp/sources/bigquery',
-                        },
-                        {
-                            name: 'Self-managed',
-                        },
-                        {
-                            name: 'S3',
-                            url: '/docs/cdp/sources/s3',
-                        },
-                        {
-                            name: 'Azure Blob',
-                            url: '/docs/cdp/sources/azure-blob',
-                        },
-                        {
-                            name: 'Cloudflare R2',
-                            url: '/docs/cdp/sources/r2',
-                        },
-                        {
-                            name: 'Google Cloud Storage',
-                            url: '/docs/cdp/sources/gcs',
-                        },
-                    ],
-                },
-                {
-                    name: 'Realtime destinations',
-                    url: '/docs/cdp/destinations',
-                    badge: {
-                        title: 'Beta',
-                        className: 'uppercase !bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',
-                    },
-                    icon: 'IconLive',
-                    color: 'salmon',
-                    featured: true,
-                    children: [
-                        {
-                            name: 'Overview',
-                            url: '/docs/cdp/destinations',
-                        },
-                        {
-                            name: 'Customization',
-                            url: '/docs/cdp/destinations/customizing-destinations',
-                        },
-                        {
-                            name: 'Destinations',
-                        },
-                        {
-                            name: 'Slack',
-                            url: '/docs/cdp/destinations/slack',
-                        },
-                        {
-                            name: 'Webhook',
-                            url: '/docs/cdp/destinations/webhook',
-                        },
-                        {
-                            name: 'ActiveCampaign',
-                            url: '/docs/cdp/destinations/activecampaign',
-                        },
-                        {
-                            name: 'Airtable',
-                            url: '/docs/cdp/destinations/airtable',
-                        },
-                        {
-                            name: 'Attio',
-                            url: '/docs/cdp/destinations/attio',
-                        },
-                        {
-                            name: 'Avo',
-                            url: '/docs/cdp/destinations/avo',
-                        },
-                        {
-                            name: 'AWS Kinesis',
-                            url: '/docs/cdp/destinations/aws-kinesis',
-                        },
-                        {
-                            name: 'Braze',
-                            url: '/docs/cdp/destinations/braze',
-                        },
-                        {
-                            name: 'Brevo',
-                            url: '/docs/cdp/destinations/brevo',
-                        },
-                        {
-                            name: 'Customer.io',
-                            url: '/docs/cdp/destinations/customerio',
-                        },
-                        {
-                            name: 'Discord',
-                            url: '/docs/cdp/destinations/discord',
-                        },
-                        {
-                            name: 'Engage.so',
-                            url: '/docs/cdp/destinations/engage',
-                        },
-                        {
-                            name: 'Gleap',
-                            url: '/docs/cdp/destinations/gleap',
-                        },
-                        {
-                            name: 'Google Cloud Storage',
-                            url: '/docs/cdp/destinations/google-cloud-storage',
-                        },
-                        {
-                            name: 'Google Pub/Sub',
-                            url: '/docs/cdp/destinations/google-pubsub',
-                        },
-                        {
-                            name: 'Hubspot',
-                            url: '/docs/cdp/destinations/hubspot',
-                        },
-                        {
-                            name: 'Intercom',
-                            url: '/docs/cdp/destinations/intercom',
-                        },
-                        {
-                            name: 'June',
-                            url: '/docs/cdp/destinations/june',
-                        },
-                        {
-                            name: 'Klaviyo',
-                            url: '/docs/cdp/destinations/klaviyo',
-                        },
-                        {
-                            name: 'Knock',
-                            url: '/docs/cdp/destinations/knock',
-                        },
-                        {
-                            name: 'Loops',
-                            url: '/docs/cdp/destinations/loops',
-                        },
-                        {
-                            name: 'Mailchimp',
-                            url: '/docs/cdp/destinations/mailchimp',
-                        },
-                        {
-                            name: 'Mailgun',
-                            url: '/docs/cdp/destinations/mailgun',
-                        },
-                        {
-                            name: 'Mailjet',
-                            url: '/docs/cdp/destinations/mailjet',
-                        },
-                        {
-                            name: 'Make',
-                            url: '/docs/cdp/destinations/make',
-                        },
-                        {
-                            name: 'Meta Ads',
-                            url: '/docs/cdp/destinations/meta-ads',
-                        },
-                        {
-                            name: 'RudderStack',
-                            url: '/docs/cdp/destinations/rudderstack',
-                        },
-                        {
-                            name: 'Salesforce',
-                            url: '/docs/cdp/destinations/salesforce',
-                        },
-                        {
-                            name: 'Sendgrid',
-                            url: '/docs/cdp/destinations/sendgrid',
-                        },
-                        {
-                            name: 'Snapchat Ads',
-                            url: '/docs/cdp/destinations/snapchat-ads',
-                        },
-                        {
-                            name: 'Twilio',
-                            url: '/docs/cdp/destinations/twilio',
-                        },
-                        {
-                            name: 'Zapier',
-                            url: '/docs/cdp/destinations/zapier',
-                        },
-                        {
-                            name: 'Zendesk',
-                            url: '/docs/cdp/destinations/zendesk',
-                        },
-                    ],
-                },
-                {
-                    name: 'Batch exports',
-                    url: '/docs/cdp/batch-exports',
-                    badge: {
-                        title: 'Beta',
-                        className: 'uppercase !bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',
-                    },
-                    icon: 'IconShare',
-                    color: 'purple',
-                    featured: true,
-                    children: [
-                        {
-                            name: 'Amazon S3',
-                            url: '/docs/cdp/batch-exports/s3',
-                        },
-                        {
-                            name: 'Snowflake',
-                            url: '/docs/cdp/batch-exports/snowflake',
-                        },
-                        {
-                            name: 'BigQuery',
-                            url: '/docs/cdp/batch-exports/bigquery',
-                        },
-                        {
-                            name: 'Postgres',
-                            url: '/docs/cdp/batch-exports/postgres',
-                        },
-                        {
-                            name: 'Redshift',
-                            url: '/docs/cdp/batch-exports/redshift',
-                        },
-                    ],
-                },
-                {
-                    name: 'Transformations',
-                    url: '/docs/cdp/geoip-enrichment',
-                    icon: 'IconWrench',
-                    color: 'yellow',
-                    featured: true,
-                    children: [
-                        {
-                            url: '/docs/cdp/geoip-enrichment',
-                            name: 'GeoIP Enricher',
-                        },
-                        {
-                            url: '/docs/cdp/timestamp-parser',
-                            name: 'Timestamp Parser',
-                        },
-                        {
-                            url: '/docs/cdp/url-normalizer',
-                            name: 'URL Normalizer',
-                        },
-                        {
-                            url: '/docs/cdp/user-agent-populator',
-                            name: 'User Agent Populator',
-                        },
-                        {
-                            url: '/docs/cdp/event-sequence-timer',
-                            name: 'Event Sequence Timer',
-                        },
-                        {
-                            url: '/docs/cdp/property-filter',
-                            name: 'Property Filter',
-                        },
-                        {
-                            url: '/docs/cdp/taxonomy-standardizer',
-                            name: 'Taxonomy Standardizer',
-                        },
-                        {
-                            url: '/docs/cdp/downsampling',
-                            name: 'Downsampler',
-                        },
-                        {
-                            url: '/docs/cdp/filter-out',
-                            name: 'Filter Out',
-                        },
-                        {
-                            url: '/docs/cdp/schema-enforcer',
-                            name: 'Schema Enforcer',
-                        },
-                    ],
-                },
-                {
-                    name: 'Troubleshooting and FAQs',
-                    url: '/docs/cdp/common-questions',
-                    icon: 'IconQuestion',
-                    color: 'blue',
-                    featured: true,
-                },
-            ],
-        },
+        ...[dataPipelines],
         {
             name: 'Data warehouse',
             url: '/docs/data-warehouse',
