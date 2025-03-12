@@ -243,27 +243,7 @@
         { "source": "/ab-testing", "destination": "/experiments" },
         { "source": "/product/heatmaps", "destination": "/tutorials/toolbar", "statusCode": 301 },
         { "source": "/heatmaps", "destination": "/tutorials/toolbar" },
-        { "source": "/docs/tutorials/aarrr-framework", "destination": "/tutorials/aarrr-framework" },
-        {
-            "source": "/docs/tutorials/aarrr-how-to-build-pirate-funnel-posthog-with-posthog",
-            "destination": "/tutorials/aarrr-how-to-build-pirate-funnel-posthog-with-posthog"
-        },
         { "source": "/docs/tutorials/b2b", "destination": "/tutorials/b2b" },
-        { "source": "/docs/tutorials/deleting-data", "destination": "/tutorials/deleting-data" },
-        { "source": "/docs/tutorials/event-tracking-guide", "destination": "/tutorials/event-tracking-guide" },
-        { "source": "/docs/tutorials/feature-flags", "destination": "/manual/feature-flags" },
-        { "source": "/docs/tutorials/funnels", "destination": "/tutorials/funnels" },
-        {
-            "source": "/docs/tutorials/how-to-embed-shared-dashboard",
-            "destination": "/tutorials/how-to-embed-shared-dashboard"
-        },
-        {
-            "source": "/docs/tutorials/nextjs-supabase-signup-funnel",
-            "destination": "/tutorials/nextjs-supabase-signup-funnel"
-        },
-        { "source": "/docs/tutorials/spa", "destination": "/tutorials/spa" },
-        { "source": "/docs/tutorials/survey", "destination": "/tutorials/survey" },
-        { "source": "/docs/tutorials/toolbar", "destination": "/tutorials/toolbar" },
         { "source": "/handbook/company/branding", "destination": "/handbook/company/brand-assets" },
         { "source": "/docs/tutorials/:path*", "destination": "/tutorials/:path*" },
         { "source": "/docs/self-host/hobby-deployment", "destination": "/docs/self-host/deploy/hobby" },
