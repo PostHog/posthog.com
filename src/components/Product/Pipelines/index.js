@@ -38,7 +38,6 @@ import {
     IconGraph,
     IconPeople,
     IconPerson,
-    IconPlus,
     IconRevert,
     IconRewindPlay,
     IconServer,
@@ -63,6 +62,8 @@ import ReactFlow, {
 } from 'reactflow'
 import 'reactflow/dist/style.css'
 import Profile from '../../Team/Profile'
+import APIExamples from './APIExamples'
+import Configuration from './Configuration'
 
 const team = 'CDP'
 const teamSlug = '/teams/cdp'
@@ -515,21 +516,40 @@ function PipelinesPage({ location }) {
                 }
                 open={modalOpen}
                 setOpen={setModalOpen}
-                className="max-w-screen-md"
+                className="max-w-screen-md w-full"
             >
                 {selectedDestination && (
                     <>
                         <div className="article-content">
-                            <MDXProvider
-                                components={{
-                                    HideOnCDPIndex: () => null,
-                                }}
-                            >
-                                <MDXRenderer>{selectedDestination.mdx.body}</MDXRenderer>
-                            </MDXProvider>
+                            {selectedDestination.mdx ? (
+                                <MDXProvider
+                                    components={{
+                                        HideOnCDPIndex: () => null,
+                                    }}
+                                >
+                                    <MDXRenderer>{selectedDestination.mdx.body}</MDXRenderer>
+                                </MDXProvider>
+                            ) : (
+                                <p className="!-mb-4">{selectedDestination.description}</p>
+                            )}
+                            <h2>Configuration</h2>
+                            <Configuration inputs_schema={selectedDestination.inputs_schema} />
+                            <APIExamples
+                                name={selectedDestination.name}
+                                inputs_schema={selectedDestination.inputs_schema}
+                                id={selectedDestination.id}
+                                type="destination"
+                            />
                         </div>
-                        <div className="border-t border-border dark:border-dark pt-4 mt-4">
-                            <CallToAction to={selectedDestination.mdx.fields.slug} type="secondary">
+
+                        <div className="border-t border-border dark:border-dark pt-4">
+                            <CallToAction
+                                to={
+                                    selectedDestination.mdx?.fields?.slug ||
+                                    `/docs/cdp/destinations/${selectedDestination.slug}`
+                                }
+                                type="secondary"
+                            >
                                 Learn more in docs
                             </CallToAction>
                         </div>
@@ -657,11 +677,12 @@ function PipelinesPage({ location }) {
                                 .sort((a, b) => a.name.localeCompare(b.name))
                                 .map((destination) => {
                                     const { id, name, description, icon_url } = destination
-                                    const Container = destination.mdx ? 'button' : 'div'
+                                    const hasDocs = destination.mdx || destination.inputs_schema
+                                    const Container = hasDocs ? 'button' : 'div'
                                     return (
                                         <li key={id}>
                                             <Container
-                                                {...(destination.mdx
+                                                {...(hasDocs
                                                     ? {
                                                           onClick: () => {
                                                               setSelectedDestination(destination)
@@ -670,7 +691,7 @@ function PipelinesPage({ location }) {
                                                       }
                                                     : {})}
                                                 className={`flex items-start text-left size-full border border-light dark:border-dark rounded-md bg-white dark:bg-accent-dark p-4 relative border-b-3 ${
-                                                    destination.mdx
+                                                    hasDocs
                                                         ? 'click hover:top-[-1px] active:top-[1px] transition-all duration-75'
                                                         : ''
                                                 }`}
@@ -779,6 +800,7 @@ const query = graphql`
         destinations: allPostHogDestination {
             nodes {
                 id
+                slug
                 name
                 category
                 description

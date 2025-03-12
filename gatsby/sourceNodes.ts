@@ -623,6 +623,7 @@ export const sourceNodes: GatsbyNode['sourceNodes'] = async ({ actions, createCo
             res.json()
         )
         results.forEach((destination) => {
+            const slug = destination.id.replace('template-', '')
             const node = {
                 id: createNodeId(`posthog-destination-${destination.id}`),
                 internal: {
@@ -630,6 +631,7 @@ export const sourceNodes: GatsbyNode['sourceNodes'] = async ({ actions, createCo
                     contentDigest: createContentDigest(destination),
                 },
                 destinationId: destination.id,
+                slug,
                 ...destination,
             }
             createNode(node)

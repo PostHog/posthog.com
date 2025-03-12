@@ -11,7 +11,7 @@ export const Accordion = ({ children, label, initialOpen = false, className = ''
                 className={`py-3 w-full border-t first:border-0 border-border dark:border-dark ${className}`}
             >
                 <div className={`flex justify-between items-center text-left gap-4`}>
-                    <p className="m-0 font-bold text-[15px] text-red dark:text-yellow leading-tight">{label}</p>
+                    <p className="!m-0 font-bold text-[15px] text-red dark:text-yellow leading-tight">{label}</p>
                     {open ? <IconMinus className="w-4" /> : <IconPlus className="w-4" />}
                 </div>
             </button>
