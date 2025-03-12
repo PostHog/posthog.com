@@ -3153,6 +3153,10 @@ export const docsMenu = {
                             url: '/docs/cdp/destinations/meta-ads',
                         },
                         {
+                            name: 'PostHog',
+                            url: '/docs/cdp/destinations/posthog',
+                        },
+                        {
                             name: 'RudderStack',
                             url: '/docs/cdp/destinations/rudderstack',
                         },
