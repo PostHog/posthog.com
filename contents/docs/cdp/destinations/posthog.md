@@ -14,7 +14,7 @@ You'll also need access to the destination PostHog account.
 
 ## Installation
 
-1. In PostHog, click the "[Data pipeline](https://us.posthog.com/pipeline/overview)" tab in the left sidebar.
+1. In PostHog, click the **[Data pipelines](https://us.posthog.com/pipeline/overview)** tab in the left sidebar.
 2. Click the 'Destinations' tab.
 3. Search for 'PostHog' and select the destination.
 4. Add the Host and API Key of the destination at the configuration step.
