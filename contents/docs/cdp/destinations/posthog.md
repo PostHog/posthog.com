@@ -18,7 +18,7 @@ You'll also need access to the destination PostHog account.
 2. Click the **Destinations** tab.
 3. Search for 'PostHog' and select the destination.
 4. Add the Host and API Key of the destination at the configuration step.
-5. Press 'Create & Enable' and watch your 'Events' list get populated in the destination PostHog instance!
+5. Press **Create & Enable** and watch your 'Events' list get populated in the destination PostHog instance!
 
 <HideOnCDPIndex>
 
