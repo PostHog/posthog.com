@@ -41,7 +41,7 @@ You'll also need access to the relevant Google Ads account.
    6. Click **Settings**, edit the **Conversion name** and click **Done**
    7. Click **Save and continue** and **Finish**
 
-![Steps to create a conversion action inside Google Ads](https://res.cloudinary.com/dmukukwp6/image/upload/2024_11_09_at_14_52_07_dfb486cd19.gif)
+![Steps to create a conversion action inside Google Ads](https://res.cloudinary.com/dmukukwp6/image/upload/2025_03_04_at_10_35_07_932d14fe5f.gif)
 
 8. Back in PostHog, select the conversion action in the destination configuration.
 
