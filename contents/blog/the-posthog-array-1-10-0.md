@@ -78,7 +78,7 @@ Learn more about [how to use feature flags](/docs/user-guides/feature-flags), an
 
 ### Flutter Integration
 
-You asked for it and now [it's here](https://posthog.com/docs/integrate/client/flutter)!
+You asked for it and now [it's here](/docs/integrate/client/flutter)!
 
 ### Retention page
 

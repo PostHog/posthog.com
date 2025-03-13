@@ -35,7 +35,7 @@ This article explores the different types of North Star metrics using examples f
 > - Set 14, 2022: Added how to subscribe to insights and dashboards
 
 ## What is a North Star metric?
-In its simplest form, a North Star is a metric which provides a singular focus for a company or product's growth and success. Every department should understand it and how they influence it – either directly or indirectly. It's something you should monitor regularly - perhaps by [adding it to a PostHog dashboard](https://posthog.com/docs/user-guides/dashboards), for example. 
+In its simplest form, a North Star is a metric which provides a singular focus for a company or product's growth and success. Every department should understand it and how they influence it – either directly or indirectly. It's something you should monitor regularly - perhaps by [adding it to a PostHog dashboard](/docs/user-guides/dashboards), for example. 
 
 North Star metrics can and should change over time. What makes sense for an early-stage start-up won't be the same for an established business, so it's a metric that should be interrogated frequently to ensure it's still the right one for you. North Star metrics are also a way to [measure product-market fit](/blog/measure-product-market-fit).
 
@@ -98,8 +98,8 @@ That's why we've chosen a user experience North Star metric: Discoveries.
 
 We define Discoveries as:
 
- 1. **Analyzing any insight** (e.g. [trends](https://posthog.com/docs/user-guides/trends), [funnels](https://posthog.com/docs/user-guides/funnels), [paths](https://posthog.com/docs/user-guides/paths), and [lifecycle](https://posthog.com/docs/user-guides/lifecycle) for 10 seconds or more
- 2. **Analyzing a [session recording](https://posthog.com/docs/user-guides/recordings)** for 10 seconds or more.
+ 1. **Analyzing any insight** (e.g. [trends](/docs/user-guides/trends), [funnels](/docs/user-guides/funnels), [paths](/docs/user-guides/paths), and [lifecycle](/docs/user-guides/lifecycle) for 10 seconds or more
+ 2. **Analyzing a [session recording](/docs/user-guides/recordings)** for 10 seconds or more.
 
 ### Why did we choose a user experience metric?
 

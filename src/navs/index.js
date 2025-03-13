@@ -1108,6 +1108,10 @@ export const companyMenu = {
                     url: '/teams/clickhouse',
                 },
                 {
+                    name: 'CRM',
+                    url: '/teams/crm',
+                },
+                {
                     name: 'Data Warehouse',
                     url: '/teams/data-warehouse',
                 },
@@ -1155,12 +1159,16 @@ export const companyMenu = {
                     name: 'Not engineering',
                 },
                 {
-                    name: 'Exec',
-                    url: '/teams/exec',
+                    name: 'Comms',
+                    url: '/teams/words-pictures',
                 },
                 {
-                    name: 'Marketing',
+                    name: 'Content & Docs',
                     url: '/teams/marketing',
+                },
+                {
+                    name: 'Exec',
+                    url: '/teams/exec',
                 },
                 {
                     name: 'People & Ops',
@@ -1177,10 +1185,6 @@ export const companyMenu = {
                 {
                     name: 'Website & Vibes',
                     url: '/teams/website-vibes',
-                },
-                {
-                    name: 'Comms',
-                    url: '/teams/words-and-pictures',
                 },
             ],
         },
@@ -1505,6 +1509,9 @@ export const docsMenu = {
                         {
                             name: 'Shopify',
                             url: '/docs/libraries/shopify',
+                            badge: {
+                                title: '3rd party',
+                            },
                         },
                         {
                             name: 'Svelte',
@@ -2995,6 +3002,10 @@ export const docsMenu = {
                             url: '/docs/cdp/sources/chargebee',
                         },
                         {
+                            name: 'BigQuery',
+                            url: '/docs/cdp/sources/bigquery',
+                        },
+                        {
                             name: 'Self-managed',
                         },
                         {
@@ -3142,6 +3153,14 @@ export const docsMenu = {
                             url: '/docs/cdp/destinations/meta-ads',
                         },
                         {
+                            name: 'Microsoft Teams',
+                            url: '/docs/cdp/destinations/microsoft-teams',
+                        },
+                        {
+                            name: 'PostHog',
+                            url: '/docs/cdp/destinations/posthog',
+                        },
+                        {
                             name: 'RudderStack',
                             url: '/docs/cdp/destinations/rudderstack',
                         },
@@ -3152,6 +3171,10 @@ export const docsMenu = {
                         {
                             name: 'Sendgrid',
                             url: '/docs/cdp/destinations/sendgrid',
+                        },
+                        {
+                            name: 'Snapchat Ads',
+                            url: '/docs/cdp/destinations/snapchat-ads',
                         },
                         {
                             name: 'Twilio',

@@ -91,6 +91,8 @@ export type ReplyData = {
     updatedAt: string
     publishedAt: string
     profile?: StrapiData<Pick<ProfileData, 'firstName' | 'lastName' | 'avatar' | 'gravatarURL' | 'teams' | 'pronouns'>>
+    upvoteProfiles: StrapiData<ProfileData[]>
+    downvoteProfiles: StrapiData<ProfileData[]>
 }
 
 export type TopicData = {
