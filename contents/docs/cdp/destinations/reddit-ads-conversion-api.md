@@ -44,7 +44,7 @@ You'll also need access to the relevant Reddit Ads account.
 
 ### Is the source code for this destination available?
 
-PostHog is open-source and so are all the destination on the platform. The [source code](https://github.com/PostHog/posthog/blob/master/posthog/cdp/templates/reddit/template-reddit-conversions-api.py) is available on GitHub.
+PostHog is open-source and so are all the destination on the platform. The [source code](https://github.com/PostHog/posthog/blob/master/posthog/cdp/templates/reddit/template_reddit_conversions_api.py) is available on GitHub.
 
 <PostHogMaintained />
 
