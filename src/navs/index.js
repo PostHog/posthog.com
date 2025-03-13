@@ -3051,10 +3051,18 @@ export const docsMenu = {
                         {
                             name: 'Slack',
                             url: '/docs/cdp/destinations/slack',
+                            badge: {
+                                title: 'Popular',
+                                className: '!bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',
+                            },
                         },
                         {
                             name: 'Webhook',
                             url: '/docs/cdp/destinations/webhook',
+                            badge: {
+                                title: 'Popular',
+                                className: '!bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',
+                            },
                         },
                         {
                             name: 'ActiveCampaign',
@@ -3087,10 +3095,18 @@ export const docsMenu = {
                         {
                             name: 'Customer.io',
                             url: '/docs/cdp/destinations/customerio',
+                            badge: {
+                                title: 'Popular',
+                                className: '!bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',
+                            },
                         },
                         {
                             name: 'Discord',
                             url: '/docs/cdp/destinations/discord',
+                            badge: {
+                                title: 'Popular',
+                                className: '!bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',
+                            },
                         },
                         {
                             name: 'Engage.so',
@@ -3111,10 +3127,18 @@ export const docsMenu = {
                         {
                             name: 'Hubspot',
                             url: '/docs/cdp/destinations/hubspot',
+                            badge: {
+                                title: 'Popular',
+                                className: '!bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',
+                            },
                         },
                         {
                             name: 'Intercom',
                             url: '/docs/cdp/destinations/intercom',
+                            badge: {
+                                title: 'Popular',
+                                className: '!bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',
+                            },
                         },
                         {
                             name: 'June',
@@ -3131,6 +3155,10 @@ export const docsMenu = {
                         {
                             name: 'Loops',
                             url: '/docs/cdp/destinations/loops',
+                            badge: {
+                                title: 'Popular',
+                                className: '!bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',
+                            },
                         },
                         {
                             name: 'Mailchimp',
@@ -3151,6 +3179,10 @@ export const docsMenu = {
                         {
                             name: 'Meta Ads',
                             url: '/docs/cdp/destinations/meta-ads',
+                            badge: {
+                                title: 'Popular',
+                                className: '!bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',
+                            },
                         },
                         {
                             name: 'Microsoft Teams',
@@ -3183,6 +3215,10 @@ export const docsMenu = {
                         {
                             name: 'Zapier',
                             url: '/docs/cdp/destinations/zapier',
+                            badge: {
+                                title: 'Popular',
+                                className: '!bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',
+                            },
                         },
                         {
                             name: 'Zendesk',
@@ -3231,44 +3267,52 @@ export const docsMenu = {
                     featured: true,
                     children: [
                         {
-                            url: '/docs/cdp/geoip-enrichment',
-                            name: 'GeoIP Enricher',
-                        },
-                        {
-                            url: '/docs/cdp/timestamp-parser',
-                            name: 'Timestamp Parser',
-                        },
-                        {
-                            url: '/docs/cdp/url-normalizer',
-                            name: 'URL Normalizer',
-                        },
-                        {
-                            url: '/docs/cdp/user-agent-populator',
-                            name: 'User Agent Populator',
-                        },
-                        {
-                            url: '/docs/cdp/event-sequence-timer',
-                            name: 'Event Sequence Timer',
-                        },
-                        {
-                            url: '/docs/cdp/property-filter',
-                            name: 'Property Filter',
-                        },
-                        {
-                            url: '/docs/cdp/taxonomy-standardizer',
-                            name: 'Taxonomy Standardizer',
-                        },
-                        {
                             url: '/docs/cdp/downsampling',
                             name: 'Downsampler',
                         },
                         {
+                            url: '/docs/cdp/event-sequence-timer',
+                            name: 'Event sequence timer',
+                        },
+                        {
                             url: '/docs/cdp/filter-out',
-                            name: 'Filter Out',
+                            name: 'Filter out',
+                        },
+                        {
+                            url: '/docs/cdp/geoip-enrichment',
+                            name: 'GeoIP enricher',
+                            badge: {
+                                title: 'Popular',
+                                className: '!bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',
+                            },
+                        },
+                        {
+                            url: '/docs/cdp/property-filter',
+                            name: 'Property filter',
                         },
                         {
                             url: '/docs/cdp/schema-enforcer',
-                            name: 'Schema Enforcer',
+                            name: 'Schema enforcer',
+                        },
+                        {
+                            url: '/docs/cdp/taxonomy-standardizer',
+                            name: 'Taxonomy standardizer',
+                        },
+                        {
+                            url: '/docs/cdp/timestamp-parser',
+                            name: 'Timestamp parser',
+                        },
+                        {
+                            url: '/docs/cdp/user-agent-populator',
+                            name: 'User agent populator',
+                        },
+                        {
+                            url: '/docs/cdp/url-normalizer',
+                            name: 'URL normalizer',
+                        },
+                        {
+                            url: '/docs/cdp/url-query',
+                            name: 'URL query',
                         },
                     ],
                 },
