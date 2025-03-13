@@ -124,7 +124,7 @@ By the end of month 4:
 - During your first week, Simon will figure out your initial book of business (around 30 accounts).  We will review these at the start of your second week, and make sure you understand how your targets are set. 
 - Shadow more live calls and listen to more [Jiminny](https://app.jiminny.eu/dashboard) recordings. There is [a Jiminny playlist with sub-folders containing Sales calls and PostHog knowledge calls](https://app.jiminny.eu/playlists#playlist-355cdc2a-1326-4ea6-97e3-e7749800fc8a), add to it as you listen! 
 - Towards the end of the week, schedule a demo and feedback session with Simon.  We might need to do a couple of iterations over the next few weeks as you take on board feedback, don't worry if that's the case!
-- Prioritize your current book of customers, and start reaching out!
+- Prioritize your current book of customers, and start reaching out! (can check conversations vitally to see if someone else has a relationship + can make a warm intro)
 - Get comfortable with the PostHog [Docs](/docs) around our main products. 
 
 ### In-person onboarding
@@ -182,7 +182,8 @@ By the end of month 3:
  - Check out some [Jimminy](https://app.jiminny.eu/dashboard) calls and add yourself to a bunch of Slack channels - get immersed in what our customers are saying. 
  - Learn and practise a [demo](https://youtu.be/2jQco8hEvTI) of PostHog.
  - Read all of the Sales and CS section in the Handbook, and update it as you learn more.
- - Meet with [Charles](/community/profiles/28625), the exec responsible for Sales and CS. 
+ - Meet with [Charles](/community/profiles/28625), the exec responsible for Sales and CS.
+ - Book time with Cameron to go over nuts and bolts of the role: which leads get onboarding, what signals are we looking for, how to reach out. Start working through leads together.
 
 ### Week 2
 
@@ -190,6 +191,7 @@ By the end of month 3:
 - Towards the end of the week, schedule a demo and feedback session with Simon.  We might need to do a couple of iterations over the next few weeks as you take on board feedback, don't worry if that's the case!
 - Get comfortable with the PostHog [Docs](/docs) around our main products. 
 - We'll start routing new leads to you at the end of week 1.  Start to review these and reach out, using a shared booking link with someone else from your region so they can back you up in the first few weeks. This is a great option to practise and fail.
+- Schedule a Deep dive on PostHog billing, sales process/routing with Cameron. This will help you understand how your role fits in the broader context of the CS/Sales team
 
 ### In-person onboarding
 
@@ -209,7 +211,8 @@ Ideally, this will happen in Week 3 or 4, and will be with a few existing team m
 
 By the end of month 1:
  - Be leading customer calls and demos on your own
- - Converting high value opportunities to Leads in Salesforce
+ - Converting leads from your book to 'onboarded' in Vitally. This means you've spoken with them (call or email) and have confirmation they will pay, or they have signed an annual contract.
+ - Passing off large contracts to AEs via Salesforce
 
 By the end of month 2:
  - You're a PostHog power user - most questions you raise can only be answered by product engineers rather than the support team
