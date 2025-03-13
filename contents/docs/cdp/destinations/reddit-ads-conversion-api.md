@@ -1,7 +1,7 @@
 ---
 title: Send PostHog conversion events to Reddit Ads (Conversions API)
 templateId: 
-   - template-reddit-pixel
+   - template-reddit-conversions-api
 ---
 
 import Requirements from "../_snippets/requirements.mdx"
