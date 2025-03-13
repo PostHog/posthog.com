@@ -8,7 +8,7 @@ showTitle: true
 
 Welcome to the PostHog Sales and Customer Success team!  We only hire about 1 in 400 applicants, so you've done well to make it here!  Unlike a lot of companies, we don't have a super-long onboarding process and would prefer you to be up and running with your customer base as quickly as possible.  Here are the things you should focus on in your first few weeks at PostHog to help you achieve that.
 
-Ramping up as an AE is self serve - we won't sit you down in a room for training for 2 weeks. If you're not sure who is supposed to make something below happen, the person responsible is almost certainly you!
+Ramping up is mostly self serve - we won't sit you down in a room for training for 2 weeks. If you're not sure who is supposed to make something below happen, the person responsible is almost certainly you!
 
 ## How to fail
 
@@ -124,7 +124,7 @@ By the end of month 4:
 - During your first week, Simon will figure out your initial book of business (around 30 accounts).  We will review these at the start of your second week, and make sure you understand how your targets are set. 
 - Shadow more live calls and listen to more [Jiminny](https://app.jiminny.eu/dashboard) recordings. There is [a Jiminny playlist with sub-folders containing Sales calls and PostHog knowledge calls](https://app.jiminny.eu/playlists#playlist-355cdc2a-1326-4ea6-97e3-e7749800fc8a), add to it as you listen! 
 - Towards the end of the week, schedule a demo and feedback session with Simon.  We might need to do a couple of iterations over the next few weeks as you take on board feedback, don't worry if that's the case!
-- Prioritize your current book of customers, and start reaching out! (can check conversations vitally to see if someone else has a relationship + can make a warm intro)
+- Prioritize your current book of customers, and start reaching out! You should check conversations in Vitally to see if someone else has a prior relationship as they can make a warm intro for you.
 - Get comfortable with the PostHog [Docs](/docs) around our main products. 
 
 ### In-person onboarding
@@ -183,7 +183,7 @@ By the end of month 3:
  - Learn and practise a [demo](https://youtu.be/2jQco8hEvTI) of PostHog.
  - Read all of the Sales and CS section in the Handbook, and update it as you learn more.
  - Meet with [Charles](/community/profiles/28625), the exec responsible for Sales and CS.
- - Book time with Cameron to go over nuts and bolts of the role: which leads get onboarding, what signals are we looking for, how to reach out. Start working through leads together.
+ - Book time with Cameron to go over the nuts and bolts of the role - which leads get onboarding, what signals we're looking for, how to reach out. Start working through leads together.
 
 ### Week 2
 
@@ -191,7 +191,7 @@ By the end of month 3:
 - Towards the end of the week, schedule a demo and feedback session with Simon.  We might need to do a couple of iterations over the next few weeks as you take on board feedback, don't worry if that's the case!
 - Get comfortable with the PostHog [Docs](/docs) around our main products. 
 - We'll start routing new leads to you at the end of week 1.  Start to review these and reach out, using a shared booking link with someone else from your region so they can back you up in the first few weeks. This is a great option to practise and fail.
-- Schedule a Deep dive on PostHog billing, sales process/routing with Cameron. This will help you understand how your role fits in the broader context of the CS/Sales team
+- Do a deep dive on PostHog billing, sales process/routing with Cameron. This will help you understand how your role fits in the broader context of the Sales and CS team
 
 ### In-person onboarding
 
@@ -211,7 +211,7 @@ Ideally, this will happen in Week 3 or 4, and will be with a few existing team m
 
 By the end of month 1:
  - Be leading customer calls and demos on your own
- - Converting leads from your book to 'onboarded' in Vitally. This means you've spoken with them (call or email) and have confirmation they will pay, or they have signed an annual contract.
+ - Converting leads from your book to 'onboarded' in Vitally. This means you've spoken with them (call, email, Slack) and have confirmation they will pay, or they have signed an annual contract.
  - Passing off large contracts to AEs via Salesforce
 
 By the end of month 2:
