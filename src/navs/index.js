@@ -1159,12 +1159,16 @@ export const companyMenu = {
                     name: 'Not engineering',
                 },
                 {
-                    name: 'Exec',
-                    url: '/teams/exec',
+                    name: 'Comms',
+                    url: '/teams/words-pictures',
                 },
                 {
-                    name: 'Marketing',
+                    name: 'Content & Docs',
                     url: '/teams/marketing',
+                },
+                {
+                    name: 'Exec',
+                    url: '/teams/exec',
                 },
                 {
                     name: 'People & Ops',
@@ -1181,10 +1185,6 @@ export const companyMenu = {
                 {
                     name: 'Website & Vibes',
                     url: '/teams/website-vibes',
-                },
-                {
-                    name: 'Comms',
-                    url: '/teams/words-and-pictures',
                 },
             ],
         },
@@ -3155,6 +3155,10 @@ export const docsMenu = {
                         {
                             name: 'Microsoft Teams',
                             url: '/docs/cdp/destinations/microsoft-teams',
+                        },
+                        {
+                            name: 'PostHog',
+                            url: '/docs/cdp/destinations/posthog',
                         },
                         {
                             name: 'RudderStack',

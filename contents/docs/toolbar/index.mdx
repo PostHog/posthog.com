@@ -55,6 +55,10 @@ If you are having issues authenticating your toolbar and are using a [reverse pr
 
 The PostHog toolbar currently doesn't work for Nuxt users because Nuxt overrides the URL of our static asset URL from `https://app-static-prod.posthog.com` to `https:/app-static-prod.posthog.com`, removing the second `/`. If you have a solution, [please let us know](https://app.posthog.com/home#supportModal=feedback%3A).
 
+### Toolbar non-functional on Wordpress website
+
+Some Wordpress plugins, notably WPCodebox, rewrite the CSS of our toolbar. If you're running PostHog on a Wordpress website and run into issues with formatting in the toolbar, it's possible a plugin is to blame.
+
 ### Toolbar disppearing on transition with Astro
 
 [Astro](/tutorials/astro-analytics) with [view transitions enabled](https://docs.astro.build/en/guides/view-transitions/) can cause the toolbar to disappear on transition. To prevent this, you can: 
