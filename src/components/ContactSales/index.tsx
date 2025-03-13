@@ -10,7 +10,8 @@ import { layoutLogic } from 'logic/layoutLogic'
 import KeyboardShortcut from 'components/KeyboardShortcut'
 import SalesforceForm from 'components/SalesforceForm'
 import TeamMember from 'components/TeamMember'
-
+import * as Yup from 'yup'
+import freeEmailDomains from 'free-email-domains'
 const features = [
     'Volume discounts',
     'SAML SSO',
@@ -143,6 +144,31 @@ export default function ContactSales({ location }) {
                                         name: 'email',
                                         required: true,
                                         fieldType: 'email',
+                                        validationSchema: Yup.string()
+                                            .required('Email is required')
+                                            .email('Invalid email')
+                                            .test(
+                                                'no-public-email',
+                                                ({ value }) => {
+                                                    return (
+                                                        <>
+                                                            Oops! Business emails only. No worries -{' '}
+                                                            <a
+                                                                className="underline"
+                                                                href={`https://app.posthog.com/signup?email=${value}`}
+                                                            >
+                                                                sign up here
+                                                            </a>{' '}
+                                                            instead!
+                                                        </>
+                                                    )
+                                                },
+                                                (value) => {
+                                                    if (!value) return true
+                                                    const domain = value.split('@')[1]?.toLowerCase()
+                                                    return domain && !freeEmailDomains.includes(domain)
+                                                }
+                                            ),
                                     },
                                     {
                                         label: 'Company',
