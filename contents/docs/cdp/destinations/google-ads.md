@@ -8,6 +8,8 @@ import Requirements from "../_snippets/requirements.mdx"
 import FeedbackQuestions from "../_snippets/feedback-questions.mdx"
 import PostHogMaintained from "../_snippets/posthog-maintained.mdx"
 
+> **IMPORTANT:** Check [this page](https://github.com/PostHog/posthog/issues/27712#issuecomment-2615849798) for details on installing the integration.
+
 <Requirements />
 
 You'll also need access to the relevant Google Ads account.
