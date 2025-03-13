@@ -1,6 +1,6 @@
 ---
 title: Communication mistakes for engineers to avoid
-date: 2025-03-11
+date: 2025-03-13
 author:
  - ian-vanagas
 featuredImage: >-
@@ -18,7 +18,7 @@ crosspost:
 
 Engineers spend most of their time doing two things: coding and communicating. The first has seemingly endless amounts written about it, but the second has relatively little.
 
-To address this injustice, we're sharing the biggest mistakes we've seen engineers make when communicating in a remote, async, engineering-led company (and what we've done to fix them).
+To address this injustice, we're sharing the biggest mistakes we've seen engineers make when communicating and what we've done as a remote, async, engineering-led company to fix them.
 
 ## 1. Forgetting about your users
 
@@ -28,11 +28,9 @@ Remember, companies don't succeed based on their ability to solve technical prob
 
 At PostHog, our communication connects to users in one of two ways:
 
-1. **It's about a user issue.** Top priorities for us include prioritizing feature requests from customers, solving confusions about a feature, or fixing a bug affecting them. Each of these potentially require coordination and collaboration. 
+1. **It's about a user issue.** Top priorities for us include feature requests from customers, solving confusions about features, or fixing bugs affecting them. These often require coordination and collaboration. 
 
-2. **It's backed by a user experience.** We build features because users want them and their specific needs often guide our implementation. The experiences of users are often our best guide when we're deciding what to work on or how to implement it.
-
-![Facts](https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_03_11_at_10_43_31_2x_9726c09b98.png)
+2. **It's backed by a user experience.** We build features because users want them. This means their specific needs are often our best guide for what to work on or how to implement it.
 
 To give you a sense of what this actually looks like, a snapshot of the last 10 Slack messages in our `#team-product-analytics` channel include:
 
@@ -42,67 +40,90 @@ To give you a sense of what this actually looks like, a snapshot of the last 10 
 - One change needing a review
 - One general team announcement
 
-Of course, this user focus has tradeoffs. We spend less time talking about technical details, figuring out the best way to do things, and collecting input from stakeholders. This means we need to rely on:
+![Pie chart](https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_03_13_at_14_51_31_2x_593239b0fd.png)
+
+Of course, this user focus has tradeoffs. We spend less time discussing technical details, figuring out the best way to do things, and collecting input from stakeholders. We instead rely on:
 
 - Hiring great people with experience solving the technical problems we are trying to solve.
 - Making ownership clear. It lies with individuals (or at most, a small team).
 - Focusing on shipping things users will actually see. We care about outcomes over implementation.
 
-Although this means we might not ship a perfectly polished feature right away, it does mean we can get to something that users actually care about faster.
+Although this means we aren't shipping a perfectly polished feature right away, it does mean we can get to something that users actually care about faster.
 
-## 2. Hiding communication in private
+## 2. Going squirrel mode and hoarding information
 
-There is an old way of thinking that if you keep knowledge to yourself, you'll have more power. In well-functioning organizations, this doesn't work. It leads to silos and confusion. You don't need to hoard information, you're not a squirrel.
+People have a tendency to hoard information. They're scared that if they share it, they'll either look silly or lose the power they think it provides. If you want your organization to work well, this is a mistake. You aren't a squirrel.
 
 ![Squirrel](https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_03_11_at_11_29_13_2x_d5fd501927.png)
 
-Hiding information in private causes three problems:
+Hoarding information privately causes three problems:
 
-1. It creates unnecessary communication like people repeatedly asking about a process or policy. In a remote company, this can also block you from getting work done and break the flow of others.
+1. It creates unnecessary communication like people repeatedly asking about a process or policy. This blocks people from getting work done and breaks the flow of others.
 
-2. It reduces discoverability of information. People can't find the knowledge and context they need immediately. 
+2. It reduces discoverability of information. People can't find the knowledge and context they need immediately. This causes people to redo work others have already done.
 
-3. It creates silos and reduces transparency and trust within the organization.
+3. It creates silos and reduces transparency and trust within the organization. It creates a negative feedback loop where sharing information is seen as a sign of weakness.
 
 The solution is to make communication legible: write it down and work in public.
 
-This means avoiding meetings, private Slack conversations, and email threads whenever possible. Instead, move communication to public channels, have an accessible wiki or handbook, and default to giving everyone access to everything. 
+This means avoiding closed door meetings, private Slack conversations, and email threads whenever possible. Instead, move communication to public channels, have an accessible wiki or handbook, and default to giving everyone access to everything.
 
-At PostHog, we take this a step further by making as much as possible public to people outside of our company, including our code, roadmap, and even strategy. 
+This starts by leading by example. At PostHog, leaders share details that are often private at other companies, like company finances or the reasons for letting people go. By doing this, they encourage everyone else to do the same. Hiding engineering knowledge looks trivial in comparison.
+
+We also take "working in public" a step further by sharing as much as possible publicly, outside our company. This includes our code, roadmap, and even strategy. This gives our communication further bang for its buck and helps us build trust with our users.
 
 ![Work in public](https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_03_04_at_09_59_36_ddc180f325.png)
 
-This gives our communication further bang for its buck. It has helped us build a brand and trust with our users.
+We realize external openness doesn't work for everyone, but that doesn't mean you should return to hoarding information. Companies like Palantir, Pixar, and Apple are all secretive externally, but have internal openness. This has helped them build the massively successful companies they are today.
 
-We realize this brand of external openness doesn't work for everyone, but that doesn't mean you need to hide information. Companies like Palantir, Pixar, and Apple are all secretive externally, but have internal openness. This has helped them build the massively successful companies they are today.
+## 3. Vibe communicating (AKA lacking an opinion)
 
-## 3. Not giving the receiver the context they need
+One of the most important forms of communication is sharing opinions. Opinions are direction. They are what your product and company become.
+
+It is then critical to do the work to **form an opinion**. Relying on whatever comes to mind (or whatever ChatGPT tells you) will leave you directionless and undifferentiated.
+
+![Self proclaimed free thinkers](https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_03_13_at_14_58_45_2x_fd6326ed59.png)
+
+When sharing an opinion, ask yourself:
+
+1. Is this really true?
+2. What evidence do I have to support this?
+
+Steelmanning is a great way to do this. It means thinking about the best opposing arguments and ensuring your opinion is strong enough to hold up to them. I like to think of what my smartest coworkers (or competitors) might say in opposition and then ensure I back up my points with enough to stand up to them.
+
+Our request for comments (RFC) process exemplifies this approach. When someone creates an RFC, they don't just say there is a problem, they propose a specific solution, take a stand on why it's right, mention alternatives, and invite feedback.
+
+Being opinionated enables us to move faster and more autonomously. Teams don't wait to be assigned tasks or told what to do. They identify problems and go solve them.
+
+> **Bonus point: Don't hedge.** Once you've done the work to form an opinion, be confident and direct in sharing it. Don't hedge by saying "maybe" or "I'm not sure." Vague, non-committal communication might feel safer, but it rarely leads to action.
+
+## 4. Not giving the receiver the context they need
 
 Everyone's been on the receiving end of a low context message like “this isn't working” or “what do you think of this?” It then becomes your responsibility to figure out the context so you can work towards a solution.
 
 This sucks, and if you don't like being subjected to it, you shouldn't do it to others.
 
-This problem is especially prevalent in remote companies as you can't tell if people understand the context. When in-person, you can tell if you are losing people or if they don't understand.
+This problem is especially prevalent in remote companies. In-person, you can see the blank stares and distracted looks when you're losing people, but these are invisible remotely.
 
-The fix is to include all the context a reader needs to succeed. This usually means sharing:
+You need to account for this by including all the context a reader needs to succeed. This usually means sharing:
 
-1. **Data.** Messages often include the link to the query, insight, dashboard, or error trace. Say what metric you care about.
+1. **Data.** Communication often includes the link to the query, insight, dashboard, or error trace. Say what metric you care about. Query performance, revenue churn, error volumes, and conversion are all common metrics at PostHog.
 
-2. **Feedback.** A common sentence we see at PostHog is “X gave feedback that…” followed by a potential solution for that feedback.
+2. **Feedback.** It is common to see “X gave feedback that…” or "X is having trouble with Y" when communicating at PostHog. This often includes a link to the message from the user or the problem area in-app as well as a potential solution for it. 
 
-3. **Experience.** We care about what the end user experience actually is. Examples and anecdotes from users are hugely valuable.
+Sharing the context gives the receiver more of the information they need to evaluate the problem as well as a jumping off point for finding a solution.
 
-## 4. Being completely unstructured
+## 5. Being completely unstructured
 
 People want to communicate. They want to distribute information with each other. Information wants to be free.
 
-It can be tempting to let people do whatever they want, but this can quickly devolve into one of two things:
+It can be tempting to let people do whatever they feel is best, but this can quickly devolve into one of two problems:
 
-- **Overcommunication.** Noise and mess that makes finding the information you need difficult.
+- **Overcommunication.** Noise and mess makes it difficult to find what's actually relevant and valuable.
 
-- **Undercommunication.** Not sharing information others need to succeed, getting unnecessary blocked or stuck because others don't know what you're working on.
+- **Undercommunication.** Others become unnecessarily blocked or stuck because others don't know what you're working on and don't have all the information they need to succeed.
 
-Creating "rituals" help you communicate at the right time and place. They are repeated, formatted moments to encourage communication so you stay aligned and make sure everyone has what they need to succeed. 
+Fixing this requires giving people a time and place to communicate. You can think of these at "rituals," repeated, formatted moments to encourage communication. They help teams stay aligned and make sure everyone has what they need to succeed. 
 
 Our most important ones at PostHog include:
 
@@ -112,7 +133,7 @@ Our most important ones at PostHog include:
 
 3. **Daily huddles.** An optional meeting within small teams where each member shares what they did yesterday, what they're doing today, and any blockers.
 
-4. **Request for comments.** A proposal related to a big decision that shares a problem, a potential solution, and gathers feedback. Team members share opinions and feedback, then the owner makes a decision. This is how we coordinate large, cross-team decisions async.
+4. **Request for comments.** The way we coordinate large, cross-team decisions async. A proposal that shares a problem, a potential solution, and gathers feedback. Team members share opinions and feedback, then the owner makes a decision. 
 
 5. **Incidents.** When something bad and unexpected happens, a new Slack channel is created to identify the problem and bring together a small group to work towards a solution.
 
@@ -120,9 +141,9 @@ Rituals aren't unique to PostHog. Zapier requires [Friday Updates](https://zapie
 
 All rituals, including ours, are downstream from the culture you want to create. For us, that means they are as async as possible and involve as few meetings as possible. This ensures that we have enough time to work on what's important.
 
-## 5. Not making communication actionable
+## 6. Not making communication actionable
 
-As organizations grow, they have a tendency to add process and structure which puts blockers in the way of shipping. Communication is one of the areas that can pop up, but thinking about the actionability of your communication can prevent this.
+As organizations grow, they have a tendency to add process and structure which puts blockers in the way of shipping. Communication is one of the areas that this can pop up, so you need to be constantly fighting against this tendency.
 
 We do this by:
 
@@ -130,11 +151,11 @@ We do this by:
     
     ![Tier list](https://res.cloudinary.com/dmukukwp6/image/upload/image_aa634fbdf0.png)
     
-2. **Have a clear owner, next steps, and deadline.** This makes it clear how progress is going to lead from communication. Without this, communication is often wasted and becomes noise. If you send a message without a purpose, you are creating noise.
+2. **Having a clear owner, next steps, and deadline.** This makes it clear how progress is going to follow from communication. Without this purpose, communication is often wasted and becomes noise.
 
-3. **Be understood.** You must communicate differently depending on the context your recipient has. You need to communicate differently with non-technical people than with technical ones. Avoid acronyms whenever possible. 
+3. **Having empathy.** Take the perspective of the recipient into account. Communicate like you'd want to be communicated with. For example, you need to communicate differently with non-technical people than with technical ones.
 
-4. **Be direct.** At PostHog, we assume positive intent and realize that feedback is essential (these are two of our communication values). If you're not direct, you're wasting time and doing more harm than good. 
+4. **Being direct.** At PostHog, we assume positive intent and realize that feedback is essential (these are two of our communication values). If you're not direct, you're wasting time and doing more harm than good. 
 
 Ideally, communication is a sort of funnel that guides people towards action like this:
 
@@ -144,9 +165,12 @@ The goal of communication is to help us get something shipped. Although ideally,
 
 ## What happens when you avoid these mistakes?
 
-- It creates a culture of communication that prioritizes shipping features that users actually care about, rather than planning or theorizing them.
+- You create a culture of communication that prioritizes shipping features that users actually care about, rather than planning or theorizing them.
+
 - Because the information you need is available at the right time, everyone can work more autonomously with fewer meetings and less back and forth.
+
 - When making decisions, more perspectives are taken into account, not just the "highest paid person's opinion."
+
 - Knowledge you've gained gets shared and built upon, rather than lost and forgotten.
 
 Don't believe this is real? This is largely how communication works at PostHog and based on a recent internal survey, it seems to be working.
