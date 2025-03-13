@@ -31,12 +31,12 @@ const defaultInterviewProcess: IInterviewProcess[] = [
     },
     {
         title: 'PostHog SuperDay',
-        description: `You’ll meet a few more members of the team and work on a independent project. It's challenging, but most people say it's fun!`,
+        description: `You’ll meet a few more members of the team and work on an independent project. It's challenging, but most people say it's fun!`,
         badge: 'Paid day of work',
     },
     {
         title: 'Offer',
-        description: `If everyone’s happy, we’ll make you an offer to join us - YAY!`,
+        description: `If everyone is happy, we’ll make you an offer to join us - YAY!`,
         badge: 'Pop the champagne (after you sign)',
     },
 ]
