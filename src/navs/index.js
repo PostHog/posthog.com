@@ -3188,6 +3188,14 @@ export const docsMenu = {
                             name: 'Zendesk',
                             url: '/docs/cdp/destinations/zendesk',
                         },
+                        {
+                            name: 'Reddit Pixel',
+                            url: '/docs/cdp/destinations/reddit-ads-pixel',
+                        },
+                        {
+                            name: 'Reddit Conversions API',
+                            url: '/docs/cdp/destinations/reddit-ads-conversion-api',
+                        },
                     ],
                 },
                 {
