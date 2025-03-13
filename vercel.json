@@ -309,6 +309,7 @@
         { "source": "/jesseshowalter", "destination": "/?utm_source=jesseshowalter&utm_campaign=jesseshowalter" },
         { "source": "/benjamincode", "destination": "/?utm_source=benjamincode&utm_campaign=benjamincode" },
         { "source": "/travismedia", "destination": "/?utm_source=travismedia&utm_campaign=travismedia" },
+        { "source": "/viktor", "destination": "/?utm_source=viktor&utm_campaign=viktor" },
         { "source": "/docs/self-host/migrate-to-cloud", "destination": "/docs/migrate/migrate-to-cloud" },
         { "source": "/tutorials/categories/plugins", "destination": "/tutorials/categories/apps" },
         { "source": "/trial", "destination": "/pricing" },
