@@ -1492,6 +1492,30 @@
         {
             "source": "/community/profiles/59",
             "destination": "/community/profiles/29070"
+        },
+        {
+            "source": "/startups-alif",
+            "destination": "/startups"
+        },
+        {
+            "source": "/startups-antler",
+            "destination": "/startups"
+        },
+        {
+            "source": "/startups-clerky",
+            "destination": "/startups"
+        },
+        {
+            "source": "/startups-concept",
+            "destination": "/startups"
+        },
+        {
+            "source": "/startups-mintlify",
+            "destination": "/startups"
+        },
+        {
+            "source": "/startups-sse",
+            "destination": "/startups"
         }
     ]
 }
