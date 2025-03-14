@@ -76,58 +76,6 @@ For a complete list of supported currencies, see our [currencies.py file](https:
 We'll track that revenue event as if it had 0 value. You can always open a feature request to have us include a new currency to our list.
 We're always monitoring new currencies and adding them as we see fit.
 
-## Troubleshooting
-
-### Why isn't my revenue appearing in the web analytics overview?
-
-If your revenue isn't appearing in your web analytics dashboard, there are a few common issues to check:
-
-1. **Check the Revenue tab in Data Management**: First, verify if your revenue events are being captured correctly by checking the [Revenue tab](https://app.posthog.com/data-management/revenue) in Data Management.
-
-2. **Missing session ID**: Revenue events must include a session ID to appear in web analytics. Without this identifier, PostHog cannot associate the revenue with a particular web session.
-
-## Advanced usage
-
-### Querying converted rates
-
-Yes, you can query converted rates yourself in SQL using the `convertCurrency` function. This is useful for custom queries and advanced analytics.
-
-Example:
-
-```sql
-SELECT 
-    *,
-    properties.$currency as original_currency,
-    properties.value as original_value,
-    convertCurrency(original_currency, 'USD', original_value, timestamp) as value_usd
-FROM events
-WHERE event = 'purchase'
-```
-
-### Integrating with payment platforms
-
-PostHog can integrate with various payment platforms to automatically import revenue data:
-
-- **Stripe**: Currently supported. You can import your Stripe payment data directly into PostHog.
-- **RevenueCat**: Coming soon. Integration is currently in development.
-- **LemonSqueezy**: Coming soon. Integration is currently in development.
-
-For detailed instructions on setting up these integrations, refer to our [app integrations documentation](/docs/apps).
-
-### Correlating revenue with ad expenses
-
-The ability to correlate revenue with advertising expenses is currently a work in progress. Soon, PostHog will support sources for importing ad expense data, allowing you to analyze return on ad spend directly within the platform.
-
-### Computing CAC and CPC
-
-Computing Customer Acquisition Cost (CAC) and Cost Per Click (CPC) will be possible once we've completed integrations with ad expense platforms. These metrics will provide valuable insights into your marketing efficiency and return on investment.
-
-### Can I use custom currency conversion data?
-
-Currently, PostHog does not support using custom currency conversion data. We rely on the exchange rates provided by Open Exchange Rates.
-
-If you need support for custom conversion rates, please [create a feature request](https://github.com/PostHog/posthog/issues/new?assignees=&labels=feature&template=feature_request.md&title=) so our team can consider adding this functionality.
-
 ## Using revenue data beyond web analytics
 
 ### Using revenue data in product analytics
@@ -161,4 +109,44 @@ posthog.capture({
 })
 ```
 
+## Troubleshooting & FAQ
 
+### Why isn't my revenue appearing in the web analytics overview?
+
+If your revenue isn't appearing in your web analytics dashboard, there are a few common issues to check:
+
+1. **Check the Revenue tab in Data Management**: First, verify if your revenue events are being captured correctly by checking the [Revenue tab](https://app.posthog.com/data-management/revenue) in Data Management.
+
+2. **Missing session ID**: Revenue events must include a session ID to appear in web analytics. Without this identifier, PostHog cannot associate the revenue with a particular web session.
+
+## Advanced usage
+
+### Can I querying converted rates?
+
+Yes, you can query converted rates yourself in SQL using the `convertCurrency` function. This is useful for custom queries and advanced analytics.
+
+Example:
+
+```sql
+SELECT 
+    *,
+    properties.$currency as original_currency,
+    properties.value as original_value,
+    convertCurrency(original_currency, 'USD', original_value, timestamp) as value_usd
+FROM events
+WHERE event = 'purchase'
+```
+
+### Can I correlate revenue with paid ads data?
+
+This feature is current under development. Soon, PostHog will support sources for importing ad expense data, allowing you to analyze return on ad spend directly within the platform.
+
+###  Can I compute cost CAC and CPC?
+
+Computing Customer Acquisition Cost (CAC) and Cost Per Click (CPC) will be possible once we've completed integrations with ad expense platforms. These metrics will provide valuable insights into your marketing efficiency and return on investment.
+
+### Can I use custom currency conversion data?
+
+Currently, PostHog does not support using custom currency conversion data. We rely on the exchange rates provided by Open Exchange Rates.
+
+If you need support for custom conversion rates, please [create a feature request](https://github.com/PostHog/posthog/issues/new?assignees=&labels=feature&template=feature_request.md&title=), so our team can consider adding this functionality.
