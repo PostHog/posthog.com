@@ -1341,6 +1341,54 @@
         { "source": "/cdp/timestamp-parser", "destination": "/docs/cdp/timestamp-parser" },
         { "source": "/cdp/url-normalizer", "destination": "/docs/cdp/url-normalizer" },
         { "source": "/cdp/url-query", "destination": "/docs/cdp/url-query" },
-        { "source": "/cdp/user-agent-populator", "destination": "/docs/cdp/user-agent-populator" }
+        { "source": "/cdp/user-agent-populator", "destination": "/docs/cdp/user-agent-populator" },
+        {
+            "source": "/handbook/growth/marketing/components",
+            "destination": "/handbook/content-and-docs/components"
+        },
+        {
+            "source": "/handbook/growth/marketing/paid",
+            "destination": "/handbook/words-and-pictures/paid"
+        },
+        {
+            "source": "/features/self-hosted",
+            "destination": "/docs/self-host"
+        },
+        {
+            "source": "/docs/settings/organizations-and-projects",
+            "destination": "/docs/settings/organizations"
+        },
+        {
+            "source": "/docs/settings/role-based-access",
+            "destination": "/docs/settings/access-control"
+        },
+        {
+            "source": "/community/profiles/59",
+            "destination": "/community/profiles/29070"
+        },
+        {
+            "source": "/startups-alif",
+            "destination": "/startups"
+        },
+        {
+            "source": "/startups-antler",
+            "destination": "/startups"
+        },
+        {
+            "source": "/startups-clerky",
+            "destination": "/startups"
+        },
+        {
+            "source": "/startups-concept",
+            "destination": "/startups"
+        },
+        {
+            "source": "/startups-mintlify",
+            "destination": "/startups"
+        },
+        {
+            "source": "/startups-sse",
+            "destination": "/startups"
+        }
     ]
 }
