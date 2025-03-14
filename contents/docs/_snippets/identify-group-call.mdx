@@ -7,7 +7,7 @@ curl -v -L --header "Content-Type: application/json" -d '{
   "distinct_id": "groups_setup_id",
   "properties": {
     "$group_type": "<group_type>",
-    "$group_key": "<company_name>",
+    "$group_key": "<company_id>",
     "$group_set": {
       "name": "<company_name>",
       "subscription": "premium"
@@ -32,7 +32,7 @@ payload = {
     "distinct_id": "groups_setup_id",
     "properties": {
         "$group_type": "<group_type>",
-        "$group_key": "<company_name>",
+        "$group_key": "<company_id>",
         "$group_set": {
             "name": "<company_name>",
             "subscription": "premium",
