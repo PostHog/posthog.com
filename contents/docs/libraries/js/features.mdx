@@ -591,3 +591,40 @@ posthog.init('<ph_project_api_key>', {
   ]
 })
 ```
+
+## Blocking bad actors
+
+PostHog tries to automatically block known crawlers and web/AI agents. It's a fact, however, that not every crawler will advertise themselves as a crawler.
+
+If you see an unusual number of visitors in your project, you can try and understand where they're coming from by using Web Analytics.
+
+It's common, however, that they will all contain the exact same user agent string. You can verify the most common user agents by using [this Trend insight](https://app.posthog.com/insights/new#q=%7B%22kind%22%3A%22InsightVizNode%22%2C%22source%22%3A%7B%22kind%22%3A%22TrendsQuery%22%2C%22series%22%3A%5B%7B%22kind%22%3A%22EventsNode%22%2C%22name%22%3A%22%24pageview%22%2C%22event%22%3A%22%24pageview%22%2C%22math%22%3A%22total%22%7D%5D%2C%22trendsFilter%22%3A%7B%7D%2C%22breakdownFilter%22%3A%7B%22breakdowns%22%3A%5B%7B%22property%22%3A%22%24raw_user_agent%22%2C%22type%22%3A%22event%22%7D%5D%7D%7D%7D%20)
+
+If a specific user agent is causing you problems (many more accesses than other user agents), you can block it by adding the following to your `posthog.init` call:
+
+```ts
+posthog.init('<ph_project_api_key>', {
+  custom_blocked_useragents: ['<user_agent_string>']
+})
+```
+
+### Lighthouse audits
+
+Lighthouse is known for not advertising itself, which implies that if you're using any tool that uses Lighthouse to monitor your website (or if a competitor does), PostHog won't be able to prevent those events by default, which might skew your numbers. Some example of tools that use Lighthouse but don't identify themselves are Ahrefs and Semrush.
+
+Lighthouse user agents are well-known but they're not blocked by default because they represent possibly-legitimate users. If you're experiencing a high number of events from these sources, you can block them by adding the following to your `posthog.init` call:
+
+```ts
+const LIGHTHOUSE_USER_AGENTS = [
+  'Mozilla/5.0 (Linux; Android 11; moto g power (2022)) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/119.0.0.0 Mobile Safari/537.36',
+  'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/119.0.0.0 Safari/537.36',
+]
+
+posthog.init('<ph_project_api_key>', {
+  custom_blocked_useragents: LIGHTHOUSE_USER_AGENTS
+})
+```
+
+### Removing already ingested events
+
+Deleting already ingested events is complicated, but you can add those user agents to the "internal and test accounts" setting to desconsider them from your analytics.
