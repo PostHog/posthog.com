@@ -9,7 +9,7 @@ const RoadmapColumn = ({ children }) => {
 
 const RoadmapItem = ({ children }) => {
     return (
-        <li className="list-none m-0 pt-2 px-1 pb-3 text-[15px] text-primary/75 dark:text-primary-dark/75 w-full font-semibold border-light dark:border-dark border-b last:border-b-0 whitespace-nowrap overflow-hidden text-ellipsis">
+        <li className="list-none m-0 pt-2 px-1 pb-3 text-[15px] text-primary/75 dark:text-primary-dark/75 w-full font-semibold border-light dark:border-dark border-b last:border-b-0 whitespace-normal md:whitespace-nowrap overflow-hidden text-ellipsis">
             {children}
         </li>
     )

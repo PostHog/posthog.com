@@ -24,6 +24,7 @@ import JavaSendEvent from '../integrate/send-events/_snippets/send-events-java.m
 import RustSendEvent from '../integrate/send-events/_snippets/send-events-rust.mdx'
 import FlutterSendEvent from '../integrate/send-events/_snippets/send-events-flutter.mdx'
 import ElixirSendEvent from '../integrate/send-events/_snippets/send-events-elixir.mdx'
+import DotNetSendEvent from '../integrate/send-events/_snippets/send-events-dotnet.mdx'
 
 Once your PostHog instance is up and running, the next step is to start sending events.
 
@@ -43,6 +44,7 @@ Once your PostHog instance is up and running, the next step is to start sending 
     'Rust', 
     'Elixir', 
     'Flutter', 
+    '.NET', 
     'api']}>
     <Tab.List>
         <Tab>Web</Tab>
@@ -59,6 +61,7 @@ Once your PostHog instance is up and running, the next step is to start sending 
         <Tab>Rust</Tab>
         <Tab>Elixir</Tab>
         <Tab>Flutter</Tab>
+        <Tab>.NET</Tab>
         <Tab>API</Tab>
     </Tab.List>
     <Tab.Panels>
@@ -105,6 +108,9 @@ Once your PostHog instance is up and running, the next step is to start sending 
            <FlutterSendEvent />
         </Tab.Panel>
         <Tab.Panel>
+            <DotNetSendEvent />
+        </Tab.Panel>
+        <Tab.Panel>
             <APISendEvent />
         </Tab.Panel>
     </Tab.Panels>
@@ -126,17 +132,20 @@ import HowToCaptureAnonymousEventsBackend from './_snippets/how-to-capture-anony
 import HowToCaptureAnonymousEventsIOS from './_snippets/how-to-capture-anonymous-events-ios.mdx'
 import HowToCaptureAnonymousEventsWeb from './_snippets/how-to-capture-anonymous-events-web.mdx'
 import HowToCaptureAnonymousEventsAndroid from './_snippets/how-to-capture-anonymous-events-android.mdx'
+import HowToCaptureAnonymousEventsFlutter from '../product-analytics/_snippets/how-to-capture-anonymous-events-flutter.mdx'
 
 <Tab.Group tabs={[
     'Web', 
     'Backend', 
     'Android', 
-    'iOS']}>
+    'iOS',
+    'Flutter']}>
     <Tab.List>
         <Tab>Web</Tab>
         <Tab>Backend</Tab>
         <Tab>Android</Tab>
         <Tab>iOS</Tab>
+        <Tab>Flutter</Tab>
     </Tab.List>
     <Tab.Panels>
         <Tab.Panel>
@@ -151,38 +160,52 @@ import HowToCaptureAnonymousEventsAndroid from './_snippets/how-to-capture-anony
         <Tab.Panel>
            <HowToCaptureAnonymousEventsIOS />
         </Tab.Panel>
+        <Tab.Panel>
+           <HowToCaptureAnonymousEventsFlutter />
+        </Tab.Panel>
     </Tab.Panels>
 </Tab.Group>
 
 ### How to capture identified events
 
-import HowToCaptureIdentifiedEvents from './_snippets/how-to-capture-identified-events-frontend.mdx'
+import HowToCaptureIdentifiedEventsFrontend from './_snippets/how-to-capture-identified-events-frontend.mdx'
 
 import HowToCaptureIdentifiedEventsBackend from './_snippets/how-to-capture-identified-events-backend.mdx'
+
+import HowToCaptureIdentifiedEventsAndroid from './_snippets/how-to-capture-identified-events-android.mdx'
+
+import HowToCaptureIdentifiedEventsiOS from './_snippets/how-to-capture-identified-events-ios.mdx'
+
+import HowToCaptureIdentifiedEventsFlutter from './_snippets/how-to-capture-identified-events-flutter.mdx'
 
 <Tab.Group tabs={[
     'Web', 
     'Backend', 
     'Android', 
-    'iOS']}>
+    'iOS',
+    'Flutter']}>
     <Tab.List>
         <Tab>Web</Tab>
         <Tab>Backend</Tab>
         <Tab>Android</Tab>
         <Tab>iOS</Tab>
+        <Tab>Flutter</Tab>
     </Tab.List>
     <Tab.Panels>
         <Tab.Panel>
-            <HowToCaptureIdentifiedEvents />
+            <HowToCaptureIdentifiedEventsFrontend />
         </Tab.Panel>
         <Tab.Panel>
             <HowToCaptureIdentifiedEventsBackend />
         </Tab.Panel>
         <Tab.Panel>
-            <HowToCaptureIdentifiedEvents />
+            <HowToCaptureIdentifiedEventsAndroid />
         </Tab.Panel>
         <Tab.Panel>
-           <HowToCaptureIdentifiedEvents />
+           <HowToCaptureIdentifiedEventsiOS />
+        </Tab.Panel>
+        <Tab.Panel>
+           <HowToCaptureIdentifiedEventsFlutter />
         </Tab.Panel>
     </Tab.Panels>
 </Tab.Group>

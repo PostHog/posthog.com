@@ -38,6 +38,7 @@ import TeamUpdate from 'components/TeamUpdate'
 import CopyCode from 'components/CopyCode'
 import TeamMember from 'components/TeamMember'
 import { Contributor, ContributorImageSmall } from 'components/PostLayout/Contributors'
+import { OverflowXSection } from 'components/OverflowXSection'
 
 const renderAvailabilityIcon = (availability: 'full' | 'partial' | 'none') => {
     switch (availability) {
@@ -223,8 +224,10 @@ export const AppParametersFactory: (params: AppParametersProps) => React.FC = ({
     return AppParameters
 }
 
-export const TemplateParametersFactory: (params: TemplateParametersProps) => React.FC = (input_schema) => {
-    const TemplateParameters = () => {
+export const TemplateParametersFactory: (params: TemplateParametersProps) => React.FC = (templateConfigs) => {
+    const TemplateParameters = ({ templateId }: { templateId?: string }) => {
+        const input_schema =
+            templateConfigs?.find((t) => t.templateId === templateId)?.config || templateConfigs?.[0]?.config
         if (!input_schema) {
             return null
         }
@@ -285,7 +288,7 @@ export default function Handbook({
     const {
         body,
         frontmatter,
-        fields: { slug, contributors, appConfig, templateConfig },
+        fields: { slug, contributors, appConfig, templateConfigs },
     } = post
     const {
         title,
@@ -336,7 +339,7 @@ export default function Handbook({
         a: A,
         TestimonialsTable,
         AppParameters: AppParametersFactory({ config: appConfig }),
-        TemplateParameters: TemplateParametersFactory(templateConfig),
+        TemplateParameters: TemplateParametersFactory(templateConfigs),
         TeamRoadmap: (props) => TeamRoadmap({ team: title?.replace(/team/gi, '').trim(), ...props }),
         TeamMembers: (props) => TeamMembers({ team: title?.replace(/team/gi, '').trim(), ...props }),
         CategoryData,
@@ -345,6 +348,11 @@ export default function Handbook({
         TeamUpdate: (props) => TeamUpdate({ teamName: title?.replace(/team/gi, '').trim(), ...props }),
         CopyCode,
         TeamMember,
+        table: (props) => (
+            <OverflowXSection>
+                <table {...props} />
+            </OverflowXSection>
+        ),
         ...shortcodes,
     }
 
@@ -382,6 +390,7 @@ export default function Handbook({
                     breadcrumb={[breadcrumbBase, ...(breadcrumb?.slice(0, breadcrumb.length - 1) || [])]}
                     hideSidebar={hideAnchor}
                     nextPost={nextPost}
+                    askMax
                 >
                     <section>
                         <div className="mb-8 relative">
@@ -505,13 +514,16 @@ export const query = graphql`
                         }
                     }
                 }
-                templateConfig {
-                    key
-                    type
-                    label
-                    secret
-                    required
-                    description
+                templateConfigs {
+                    templateId
+                    config {
+                        key
+                        type
+                        label
+                        secret
+                        required
+                        description
+                    }
                 }
             }
             frontmatter {
@@ -529,6 +541,9 @@ export const query = graphql`
                     sessionRecording
                     featureFlags
                     groupAnalytics
+                    surveys
+                    llmObservability
+                    errorTracking
                 }
                 availability {
                     free

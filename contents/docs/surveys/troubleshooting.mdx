@@ -8,7 +8,7 @@ The most common solution is...
 
 ### Update the PostHog snippet or JavaScript Web SDK
 
-Surveys requires either the latest version of the [PostHog snippet](/docs/libraries/js#option-1-add-the-javascript-snippet-to-your-html) or version 1.81.3 or greater of `posthog-js` to be installed on your website.
+Surveys requires either the latest version of the [PostHog snippet](/docs/libraries/js#installation) or version 1.81.3 or greater of `posthog-js` to be installed on your website.
 
 We're always making improvements to the surveys feature, so you'll want to make sure that you're running the latest version.
 
@@ -24,15 +24,17 @@ If updating PostHog doesn't solve your problem, there are a few reasons why your
 
 ### 1. Configuration is off
 
-Surveys are enabled through the surveys opt in toggle in the [app](https://app.posthog.com/surveys). If you're not seeing any surveys, make sure that this toggle is enabled.
+If you're not seeing any surveys, make sure that the `disable_surveys` SDK configuration isn't set to `true`.
 
-You can read more about [`posthog-js` configurations here](/docs/integrate/client/js#config).
+You can read more about [`posthog-js` configurations here](/docs/libraries/js/config).
+
+> **Note:** Surveys make use of feature flags internally when determining if a user should be presented with a survey. If your SDK configuration sets `advanced_disable_feature_flags` to `true`, this will also disable surveys for all users.
 
 ### 2. Content security policy
 
 When surveys are enabled, `posthog-js` will fetch a `survey.js` script from the PostHog server. It is not included in the default `posthog-js` installation to minimize the default bundle size.
 
-Depending on your content security policy, this script may be blocked. If you have a `default-src`, `script-src`, `script-src-elem`, or `connect-src` directive in your CSP, you may need to ensure that PostHog doamins are permitted (see [CSP documentation](/docs/advanced/content-security-policy)).
+Depending on your content security policy, this script may be blocked. If you have a `default-src`, `script-src`, `script-src-elem`, or `connect-src` directive in your CSP, you may need to ensure that PostHog domains are permitted (see [CSP documentation](/docs/advanced/content-security-policy)).
 
 If PostHog is being blocked by your content security policy, you should see an error message in your developer console with more details.
 
@@ -49,6 +51,8 @@ In production, using a [reverse proxy](/docs/advanced/proxy) can help prevent th
 
 ## Debugging surveys in console
 
+[Enable debugging](/docs/libraries/js#debugging) to check the dev logs in your dev console.
+
 You can call `getActiveMatchingSurveys` in your browser console to see which surveys are currently active for the user. If the method doesn't exist, it means that you're not running the latest version of `posthog-js`.  
 
 ```js
@@ -59,6 +63,10 @@ posthog.getActiveMatchingSurveys(surveys => console.log(surveys))
 
 Check your `posthog-js` version. If its lower than `v1.143.0`, please upgrade your installation of `posthog-js` to the latest to support event based surveys.
 
+The event must be captured on the user's session by the `posthog-js` SDK.
+
+Backend events aren't supported yet, upvote this [issue](https://github.com/PostHog/posthog/issues/25433) if that would be useful for you.
+
 ### I set a survey to be activated based on an action. Why does it shows up to users who haven't performed that action?
 
 Check your `posthog-js` version.  If its lower than `v1.151.0`, please upgrade your installation of `posthog-js` to the latest to support action based surveys.
@@ -67,7 +75,7 @@ Check your `posthog-js` version.  If its lower than `v1.151.0`, please upgrade y
 
 If you're seeing: `Update survey failed: Cohort with behavioral filters cannot be used in feature flags.` or similar, it's because surveys are powered by feature flags for person property targeting.
 
-Currently we do not support behavioral cohorts in flags which is why you might see an error if setting a person property that contains a behavioral cohort in your survey.
+Currently [we do not support dynamic cohorts in flags](/docs/data/cohorts#can-you-use-a-dynamic-behavioral-cohort-as-a-feature-flag-target), which is why you might see an error if setting a person property that contains a dynamic cohort in your survey. Upvote [this issue](https://github.com/PostHog/posthog/issues/19031) if this would be useful for you.
 
 #### Will I be double charged for feature flags if I use surveys?
 

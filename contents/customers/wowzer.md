@@ -17,7 +17,7 @@ toolsUsed:
   - Experimentation
   - Product analytics
   - Surveys
-  - AI engineering
+  - LLM observability
 date: 2024-05-29
 ---
 
@@ -52,6 +52,6 @@ Wowzer also uses PostHog [surveys](/surveys) to collect feedback and [find out w
 
 This prompted Wowzer to create a referral program, which is now one of their biggest growth drivers. They also tested giving users 20 free credits daily instead of 100 credits monthly, which had a big effect on the number of returning users in the product.
 
-"We track the number _one-time users_ (users who only use the app once and never come back) using [cohorts](https://posthog.com/docs/data/cohorts). By switching to daily credit refreshes, we saw 15% decrease in these users. This is because they were converting into repeat users, ultimately leading to an increase in our overall conversion rate!"
+"We track the number _one-time users_ (users who only use the app once and never come back) using [cohorts](/docs/data/cohorts). By switching to daily credit refreshes, we saw 15% decrease in these users. This is because they were converting into repeat users, ultimately leading to an increase in our overall conversion rate!"
 
 "To summarize," Amin says, "if we weren't using PostHog, we wouldn't be able to uncover the amount of insights we do!"

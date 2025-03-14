@@ -98,8 +98,7 @@ With our app set up, the next step is to add PostHog to it. To start, create a n
   posthog.init(
     '<ph_project_api_key>',
     {
-      api_host:'<ph_client_api_host>',
-      person_profiles: 'identified_only'
+      api_host:'<ph_client_api_host>'
     }
   )
 </script>
@@ -175,7 +174,7 @@ When you go back to your app and click the button, you then see a `praise_receiv
 
 To use a feature flag in your app, first, you must create it in PostHog. Go to the [feature flags tab](https://app.posthog.com/feature_flags), click "New feature flag," add a key (we chose `new-button`), set the release condition to 100% of users, and click "Save."
 
-With the feature flag, go back to your home page at `components/posthog.astro`. Add the `loaded:` argument to your snippet and implement the [`posthog.onFeatureFlags`](/docs/libraries/js#ensuring-flags-are-loaded-before-usage) callback to update the button text depending on the flag value. If enabled, change the `innerText` of your button.
+With the feature flag, go back to your home page at `components/posthog.astro`. Add the `loaded:` argument to your snippet and implement the [`posthog.onFeatureFlags`](/docs/libraries/js/features#ensuring-flags-are-loaded-before-usage) callback to update the button text depending on the flag value. If enabled, change the `innerText` of your button.
 
 ```js
 ---
@@ -187,7 +186,6 @@ With the feature flag, go back to your home page at `components/posthog.astro`. 
     '<ph_project_api_key>',
     {
       api_host:'<ph_client_api_host>',
-      person_profiles: 'identified_only',
       loaded: (posthog) => {
         posthog.onFeatureFlags(() => {
           const button = document.querySelector('.main');
@@ -337,7 +335,6 @@ Finally, in `posthog.astro`, we add logic to get the distinct ID, check if it’
     '<ph_project_api_key>',
     {
       api_host:'<ph_client_api_host>',
-			person_profiles: 'identified_only',
       loaded: function(posthog) {
         const button = document.querySelector('.main');
         if (posthog.isFeatureEnabled('new-button')) {
@@ -402,7 +399,6 @@ Lastly, remove the `posthog.onFeatureFlags()` code we added in `posthog.astro`:
     '<ph_project_api_key>',
     {
       api_host:'<ph_client_api_host>',
-      person_profiles: 'identified_only',
       loaded: function(posthog) {
         // posthog.onFeatureFlags has been removed
 

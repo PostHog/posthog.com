@@ -26,7 +26,7 @@ Make sure you have a [Segment account](https://segment.com/docs/#getting-started
 
 The simple Segment destination only supports tracking of pageviews, custom events, and identifying users. To use the full feature set of PostHog like autocapture, session recording, feature flags, heatmaps, surveys, or the toolbar we need to load our own Javascript snippet directly.
 
-1. In addition to Segment, install your [PostHog snippet](/docs/integrate/client/js#installation).
+1. In addition to Segment, install your [PostHog snippet](/docs/libraries/js#installation).
 
 2. Modify the initialization to pass the Segment `analytics` object through for PostHog to sync with:
 
@@ -39,12 +39,17 @@ The simple Segment destination only supports tracking of pageviews, custom event
     analytics.load("<your-segment-key>");
 
     analytics.ready(() => {
-        window.posthog.init("<your-posthog-key>", {
+        window.posthog.init("<ph_project_api_key>", {
             api_host: '<ph_client_api_host>', // Use eu.i.posthog.com for EU instances
             segment: window.analytics, // Pass window.analytics here - NOTE: `window.` is important
             capture_pageview: false, // You want this false if you are going to use segment's `analytics.page()` for pageviews
-            // When the posthog library has loaded, call `analytics.page()` explicitly.
-            loaded: () => window.analytics.page(),
+            
+            loaded: (posthog) => {
+              // When the posthog library has loaded, call `analytics.page()` explicitly.
+              window.analytics.page()
+              // If you're calling analytics.identify, you still need to call posthog.identify too
+              // posthog.identify('[user unique id]')
+            }
         });
     })
     ```
@@ -70,7 +75,7 @@ Similarly, the `analytics.page()` function sends `$pageview` events and the `ana
 
 ### Identifying users
 
-To add identify users and add person properties, you can use Segment's `identify` function:
+To add identify users and add person properties, you can use Segment's `identify` function.
 
 ```js
 analytics.identify('userId123', {
@@ -82,6 +87,8 @@ This works similarly to PostHog's [`identify` function](/docs/product-analytics/
 
 1. It identifies anonymous users with a distinct ID, creating a person in PostHog.
 2. It sets the person properties.
+
+> If you're also using the PostHog SDK or snippet for the other PostHog functionality, you also need to call `posthog.identify`
 
 ### Aliasing users
 
@@ -112,6 +119,40 @@ analytics.track('user_signed_up', {
 ```
 
 Also, unlike PostHog's JavaScript library's `group` method, you need to pass the `$groups` property on every Segment method call to have that data included.
+
+### Sending pageleaves
+
+Segment doesn't send pageleave data. When using `analytics.page()` only pageviews are tracked. Pageleaves are required for accurately calculating bounce rate, duration on page, and scrollmaps.
+
+You have two options to track pageleaves:
+
+**Add `capture_pageleave: true` to your PostHog configuration**
+
+This option uses PostHog's standard `$pageleave` event, but the event will skip sending to Segment and instead only show up in PostHog.
+
+**Use `analytics.track()` with the event set to `$pageleave`**
+
+This option sends the event to Segment and PostHog, which helps if you want to keep the data flowing through Segment. However, you will need to detect in your code when the user leaves the page. Here's an example:
+
+```js
+// This is an example implementation for tracking $pageleave with Segment
+function trackPageLeave(callback) {
+    if (typeof callback !== "function") return;
+
+    // Use "pagehide" if supported (better for mobile Safari), otherwise fallback to "unload". See https://calendar.perfplanet.com/2020/beaconing-in-practice/#beaconing-reliability-avoiding-abandons
+    const eventName = "onpagehide" in self ? "pagehide" : "unload";
+    window.addEventListener(eventName, callback, { once: true });
+}
+
+function handlePageLeave() {
+    if (window.analytics) {
+        window.analytics.track({ event: "$pageleave" });
+    }
+}
+
+trackPageLeave(handlePageLeave);
+```
+
 
 ## FAQ
 

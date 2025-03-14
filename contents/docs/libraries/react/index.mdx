@@ -13,6 +13,9 @@ features:
   sessionRecording: true
   featureFlags: true
   groupAnalytics: true
+  surveys: true
+  llmObservability: false
+  errorTracking: true
 ---
 
 PostHog makes it easy to get data about traffic and usage of your React app. Integrating PostHog into your site enables analytics about user behavior, custom events capture, session recordings, feature flags, and more.
@@ -44,7 +47,6 @@ posthog.init(
   process.env.REACT_APP_PUBLIC_POSTHOG_KEY,
   {
     api_host: process.env.REACT_APP_PUBLIC_POSTHOG_HOST,
-    person_profiles: 'identified_only',
   }
 );
 
@@ -83,7 +85,7 @@ root.render(
 
 ### Using posthog-js functions
 
-By default, the `posthog-js` library automatically captures pageviews, element clicks, inputs, and more. Autocapture can be tuned in with [the configuration options](/docs/libraries/js#tuning-autocapture).
+By default, the `posthog-js` library automatically captures pageviews, element clicks, inputs, and more. Autocapture can be tuned in with [the configuration options](/docs/product-analytics/autocapture#configuring-autocapture).
 
 If you want to use the library to identify users, capture events, use feature flags, or use other features, you can access the initialized `posthog-js` library using the `usePostHog` hook.
 
@@ -174,7 +176,7 @@ Since [experiments](/docs/experiments/manual) use feature flags, the code for ru
 
 ```react
 // You can either use the `useFeatureFlagVariantKey` hook,
-// or you can use the feature flags component - https://posthog.com/docs/libraries/react#feature-flags-react-component
+// or you can use the feature flags component - /docs/libraries/react#feature-flags-react-component
 
 // Method one: using the useFeatureFlagVariantKey hook
 import { useFeatureFlagVariantKey } from 'posthog-js/react'
@@ -198,7 +200,7 @@ function App() {
 }
 
 // You can also test your code by overriding the feature flag:
-// e.g., posthog.featureFlags.override({'experiment-feature-flag-key': 'test'})
+// e.g., posthog.featureFlags.overrideFeatureFlags({ flags: {'experiment-feature-flag-key': 'test'}})
 ```
 
 It's also possible to [run experiments without using feature flags](/docs/experiments/running-experiments-without-feature-flags).

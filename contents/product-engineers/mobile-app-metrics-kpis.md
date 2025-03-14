@@ -116,7 +116,7 @@ Jump to a specific category:
 
 ### 5. Average time to activation
 
-**What is it?** The average time it takes for a user to reach activation.
+**What is it?** The average time it takes for a user to reach [activation](/product-engineers/activation-metrics).
 
 **Why is it useful?** Gives you a sense of how long it takes for a user to get value from your app.
 

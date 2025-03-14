@@ -1,0 +1,173 @@
+<DotNetInstall />
+
+At the moment, ASP.NET Core is the only supported platform for the PostHog .NET SDK. However, we do have experimental support for other platforms mentioned later in this document.
+
+```bash
+dotnet add package PostHog.AspNetCore
+```
+
+In your `Program.cs` (or `Startup.cs` for ASP.NET Core 2.x) file, add the following code:
+
+```csharp
+using PostHog;
+
+var builder = WebApplication.CreateBuilder(args);
+
+// Add PostHog to the dependency injection container as a singleton.
+builder.AddPostHog();
+```
+
+Make sure to configure PostHog with your project API key, instance address, and optional personal API key. For example, in `appsettings.json`:
+
+```json
+{
+  "PostHog": {
+    "ProjectApiKey": "<ph_project_api_key>",
+    "Host": "<ph_client_api_host>"
+  }
+}
+```
+
+> **Note:** If the host is not specified, the default host `https://us.i.posthog.com` is used.
+
+Use a secrets manager to store your personal API key. For example, when developing locally you can use the `UserSecrets` feature of the `dotnet` CLI:
+
+```bash
+dotnet user-secrets init
+dotnet user-secrets set "PostHog:PersonalApiKey" "phc_..."
+```
+
+You can find your project API key and instance address in the [project settings](https://app.posthog.com/project/settings) page in PostHog.
+
+To see detailed logging, set the log level to `Debug` or `Trace` in `appsettings.json`:
+
+```json
+{
+  "DetailedErrors": true,
+  "Logging": {
+    "LogLevel": {
+      "Default": "Information",
+      "Microsoft.AspNetCore": "Warning",
+      "PostHog": "Trace"
+    }
+  },
+  ...
+}
+```
+
+## Working with .NET Feature Management
+
+`PostHog.AspNetCore` supports [.NET Feature Management](https://learn.microsoft.com/en-us/azure/azure-app-configuration/feature-management-dotnet-reference). This enables you to use the &lt;feature /&gt; tag helper and the `FeatureGateAttribute` in your ASP.NET Core applications to gate access to certain features using PostHog feature flags.
+
+To use feature flags with the .NET Feature Management library, you'll need to implement the `IPostHogFeatureFlagContextProvider` interface. The quickest way to do that is to inherit from the `PostHogFeatureFlagContextProvider` class and override the `GetDistinctId` and `GetFeatureFlagOptionsAsync` methods.
+
+```csharp
+public class MyFeatureFlagContextProvider(IHttpContextAccessor httpContextAccessor)
+    : PostHogFeatureFlagContextProvider
+{
+    protected override string? GetDistinctId()
+        => httpContextAccessor.HttpContext?.User.Identity?.Name;
+    
+    protected override ValueTask<FeatureFlagOptions> GetFeatureFlagOptionsAsync()
+    {
+        // In a real app, you might get this information from a 
+        // database or other source for the current user.
+        return ValueTask.FromResult(
+            new FeatureFlagOptions
+            {
+                PersonProperties = new Dictionary<string, object?>
+                {
+                    ["email"] = "some-test@example.com"
+                },
+                OnlyEvaluateLocally = true
+            });
+    }
+}
+```
+
+Then, register your implementation in `Program.cs` (or `Startup.cs`):
+
+```csharp
+var builder = WebApplication.CreateBuilder(args);
+builder.AddPostHog(options => {
+    options.UseFeatureManagement<MyFeatureFlagContextProvider>();
+});
+```
+
+With this in place, you can now use `feature` tag helpers in your Razor views:
+
+```html
+<feature name="awesome-new-feature">
+    <p>This is the new feature!</p>
+</feature>
+<feature name="awesome-new-feature" negate="true">
+    <p>Sorry, no awesome new feature for you.</p>
+</feature>
+```
+
+Multivariate feature flags are also supported:
+
+```html
+<feature name="awesome-new-feature" value="variant-a">
+    <p>This is the new feature variant A!</p>
+</feature>
+<feature name="awesome-new-feature" value="variant-b">
+    <p>This is the new feature variant B!</p>
+</feature>
+```
+
+You can also use the `FeatureGateAttribute` to gate access to controllers or actions:
+
+```csharp
+[FeatureGate("awesome-new-feature")]
+public class NewFeatureController : Controller
+{
+    public IActionResult Index()
+    {
+        return View();
+    }
+}
+```
+
+## Experimental support for other platforms
+
+The PostHog package is multi-targeted to support `net8.0` and `dotnetstandard2.1`. This means it can be used in a wider range of projects than just ASP.NET Core. However, this support is experimental and not officially supported.
+
+If you are using a different platform, you can install the `PostHog` package instead of `PostHog.AspNetCore`. This package does not depend on ASP.NET Core and can be used in any .NET project.
+
+```bash
+dotnet add package PostHog
+```
+
+The `PostHogClient` class must be implemented as a singleton in your project. For `PostHog.AspNetCore`, this is handled by the `builder.AddPostHog();` method. For the `PostHog` package, you can do the following if you're using dependency injection:
+
+```csharp
+builder.Services.AddPostHog();
+```
+
+If you're not using a `builder` (such as in a console application), you can do the following:
+
+```csharp
+using PostHog;
+
+var services = new ServiceCollection();
+services.AddPostHog();
+var serviceProvider = services.BuildServiceProvider();
+var posthog = serviceProvider.GetRequiredService<IPostHogClient>();
+```
+
+The `AddPostHog` methods accept an optional `Action<PostHogOptions>` parameter that you can use to configure the client.
+
+If you're not using dependency injection, you can create a static instance of the `PostHogClient` class and use that everywhere in your project:
+
+```csharp
+using PostHog;
+
+public static readonly PostHogClient PostHog = new(new PostHogOptions {
+    ProjectApiKey = "<ph_project_api_key>",
+    HostUrl = new Uri("<ph_client_api_host>"),
+    PersonalApiKey = Environment.GetEnvironmentVariable(
+      "PostHog__PersonalApiKey")
+});
+```
+

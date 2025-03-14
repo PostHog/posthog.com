@@ -48,3 +48,13 @@ Let us know [on this GitHub issue](https://github.com/PostHog/posthog/issues/127
 11. Once merged, click the three dots on the far right again, and click “Make visible to everyone.”
 
 12. To add to EU Cloud, click the three dots to edit the template and copy the JSON. Go to the [PostHog EU Cloud instance](https://eu.posthog.com/project/1/dashboard), create a new blank dashboard, click "Save as template", paste the JSON (minus `deleted`, `created_at`, `created_by`, `team_id`, and `scope`), and "Create new template." Add `image_url`, edit, and test if needed. Finally, make visible to everyone.
+
+## Removing a dashboard template
+
+If you ever need to remove a dashboard template, you need to:
+
+1. Open [the templates list](https://us.posthog.com/project/2/dashboard?tab=templates)
+2. Click on the three dots to the right of the template you want to remove and then click **Make visible to this team only**. This is a required step before you can delete it.
+3. Click on the three dots again and then click **Delete Dashboard**.
+
+Be sure of what you're doing as this is a non-reversible action.

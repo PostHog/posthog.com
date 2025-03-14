@@ -21,8 +21,6 @@ tags:
 We learned an interesting fact recently: only 20% of our users track their marketing website **and** their product using PostHog. This is our fault. We market to engineers at PostHog, so it's not a surprise we're less used for marketing.
 
 But here's another fact: all the things that make PostHog great for understanding your product also apply to your marketing website. To demonstrate, we're sharing how we use PostHog for marketing.
-
-> Andy Vandervell is Content Marketing Lead at PostHog. He edits and writes the blog and runs our newsletter, HogMail. Prior to PostHog, Andy was a journalist and editorial strategist at WIRED, Time Inc. UK and others. He's all about them words and those SEO keywords, basically.
  
 ## The goals of our marketing team
 
@@ -136,7 +134,7 @@ In a nutshell, 'Showed Intent' applies to any user who triggers an event we know
 
 - Visiting the [PostHog Cloud signup page](https://app.posthog.com/signup)
 - Visiting the [self-host license page](https://license.posthog.com/)
-- Visiting the [self-host section](https://posthog.com/docs/self-host) of our docs
+- Visiting the [self-host section](/docs/self-host) of our docs
 - Booking a demo.
 
 We track these by using an 'action' – a way of combining similar events into single event you can use in insights. You can create actions [using the PostHog Toolbar](/tutorials/toolbar) or via the Data Management tab in PostHog – it's dead easy.
@@ -221,7 +219,7 @@ In summary, there are a few important reasons why we use PostHog instead of trad
 
 We hope this look at how we use PostHog will inspire you (and your marketing teams) to experiment with what's possible in PostHog. If you found this useful, here's some suggested further reading:
 
-- [PostHog product manual](/using-posthog): Need to learn how to build an insight, a cohort, or how different insights work? This is the place to start.
+- [Non-obvious SEO advice for startups](/newsletter/seo-for-startups): Some more in-depth SEO advice based on our experience growing PostHog.
 
 - [Using the PostHog Toolbar to visualize behavior and create actions](/tutorials/toolbar): The PostHog Toolbar is a useful way to understand how users interact with your website. You can also use it to create actions.
 

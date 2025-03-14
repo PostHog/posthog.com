@@ -24,7 +24,11 @@ In this article we’ll take a look at why strong customer engagement metrics ar
 
 - [What is product engagement?](#what-is-product-engagement)
 - [What are product engagement metrics?](#what-are-product-engagement-metrics)
+  - [Common engagement metrics](#common-engagement-metrics)
 - [What is the best way to measure product engagement?](#what-is-the-best-way-to-measure-product-engagement)
+  - [Active users](#active-users)
+  - [Stickiness](#stickiness)
+  - [Adoption](#adoption)
 - [What tools are good for tracking product engagement?](#what-tools-are-good-for-tracking-product-engagement)
 - [Further reading](#further-reading)
 
@@ -65,7 +69,7 @@ A good way to get started is to use some basic metrics to create a broad framewo
 
 ### Active users
 Active users are those who perform valuable actions on your platform. 
-Daily Active Users (DAU) is a key metric for subscription services and is expressed as a percentage of total users. High DAU is evidence that you’ve been successful in attracting customers. On PostHog, you can track this by [defining actions for key activities, such as daily sign-ins](https://posthog.com/docs/user-guides/actions).
+Daily Active Users (DAU) is a key metric for subscription services and is expressed as a percentage of total users. High DAU is evidence that you’ve been successful in attracting customers. On PostHog, you can track this by [defining actions for key activities, such as daily sign-ins](/docs/data/actions).
 
 This metric is particularly important if you’re working with an ad-based revenue model. The number of daily users you see is directly linked to your profitability, so you should be keeping a close eye on DAU.
 
@@ -88,9 +92,9 @@ An easier way to track this is to use a tool such as PostHog, which has a dedica
 Adoption represents the number of users using key features in your product.
 Each new feature presents an opportunity for additional customer value. Low adoption implies that you’re offering something which users don’t need, or that there’s something wrong with the feature itself. High adoption means users are flocking to a new feature.
 
-If users are paying for features they don’t use then it lowers the perceived value, so it’s essential to keep an eye on what isn’t working and rollback where necessary. That’s why PostHog offers tools like [feature flags](https://posthog.com/docs/user-guides/feature-flags), which help you to incrementally roll out new features and key an eye on adoption progress. If something isn’t working, you can roll it back instantly. 
+If users are paying for features they don’t use then it lowers the perceived value, so it’s essential to keep an eye on what isn’t working and rollback where necessary. That’s why PostHog offers tools like [feature flags](/docs/feature-flags/tutorials), which help you to incrementally roll out new features and key an eye on adoption progress. If something isn’t working, you can roll it back instantly. 
 
-[Flagging the use of specific features as a key event](https://posthog.com/docs/user-guides/events) per user type will also help you to track adoption.whether you’re successfully reaching the users they were intended for.
+[Flagging the use of specific features as a key event](/docs/user-guides/events) per user type will also help you to track adoption.whether you’re successfully reaching the users they were intended for.
 
 By comparing the values of these metrics against each other you can begin to get an idea of where you’re winning on product engagement, and where you might be losing out. 
 
@@ -99,7 +103,7 @@ By comparing the values of these metrics against each other you can begin to get
 ## What tools are good for tracking product engagement?
 Naturally, we think PostHog is the best tool for tracking product engagement. 
 
-This is because, in addition to tracking the metrics above, PostHog enables you to understand their context through tools such as  [Session Recording](https://posthog.com/docs/user-guides/sessions), [Heatmaps](https://posthog.com/docs/user-guides/toolbar#inspecting-elements), [Cohorts](https://posthog.com/docs/user-guides/cohorts) and [Correlation analysis](https://posthog.com/docs/user-guides/correlation). You can also [create dashboards](/templates) to monitor engagement continuously.
+This is because, in addition to tracking the metrics above, PostHog enables you to understand their context through tools such as  [Session Recording](/docs/user-guides/sessions), [Heatmaps](/docs/user-guides/toolbar#inspecting-elements), [Cohorts](/docs/user-guides/cohorts) and [Correlation analysis](/docs/user-guides/correlation). You can also [create dashboards](/templates) to monitor engagement continuously.
 
 Paying attention to engagement and building more of what your customers love is a sure way to turn them from regular users into fans and advocates. Stay on top of your user engagement, listen and respond, and you’ll turn casual customers into product champions.
 

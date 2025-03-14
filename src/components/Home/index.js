@@ -24,6 +24,7 @@ import { RenderInClient } from 'components/RenderInClient'
 import BillboardTruck from './BillboardTruck'
 import Spinner from 'components/Spinner'
 import { HomepageCards } from '../NoHatingAllowed/data.js'
+import TimelineNew from './TimelineNew'
 
 const Home = () => {
     const posthog = usePostHog()
@@ -40,6 +41,7 @@ const Home = () => {
                 <Hero />
                 <Customers />
                 <AllInOne />
+                <TimelineNew />
                 <Libraries />
                 <CodeBlocks />
                 <NoHatingAllowed data={HomepageCards} youllHate="PostHog" size="text-4xl lg:text-6xl" />
@@ -64,7 +66,6 @@ const Home = () => {
                 <Community />
                 <OnePlatform />
                 <CustomerData />
-                <Timeline />
                 <Roadmap />
                 <Startups />
                 {/*<Tutorials

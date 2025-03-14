@@ -1,6 +1,7 @@
 ---
 title: Send PostHog person data to Gleap
-templateId: template-gleap
+templateId:
+    - template-gleap
 ---
 
 import Requirements from "../_snippets/requirements.mdx"

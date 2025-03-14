@@ -102,6 +102,33 @@ When called, `decide` returns the flag values and payloads, along with more info
 > 
 > This enables partial updates to currently active flags in your clients.
 
+#### Quota limiting
+
+If your organization exceeds its feature flag quota, the `/decide` endpoint will return a modified response with `quotaLimited`:
+
+```json
+{
+  "config": {
+    "enable_collect_everything": true
+  },
+  "toolbarParams": {},
+  "isAuthenticated": false,
+  "supportedCompression": [
+    "gzip",
+    "lz64"
+  ],
+  "featureFlags": {},
+  "errorsWhileComputingFlags": false,
+  "featureFlagPayloads": {},
+  "quotaLimited": ["feature_flags"]
+  // ... other fields, not relevant to feature flags
+}
+```
+
+When you receive a response with `quotaLimited` containing `"feature_flags"`, it means:
+1. Your feature flag evaluations have been temporarily paused because you've exceeded your feature flag quota
+2. If you want to continue evaluating feature flags, you can increase your quota in [your billing settings](https://us.posthog.com/organization/billing) under **Feature flags & Experiments** or [contact support](https://us.posthog.com/#panel=support%3Asupport%3Abilling%3A%3Atrue)
+
 import IncludePropertyInEvents from "./include-feature-flag-property-in-backend-events.mdx" 
 
 <IncludePropertyInEvents />
@@ -118,14 +145,14 @@ curl -v -L --header "Content-Type: application/json" -d '  {
     "properties": {
       "$feature/feature-flag-key": "variant-key" # Replace feature-flag-key with your flag key. Replace 'variant-key' with the key of your variant
     }
-}' <ph_client_api_host>/capture/ 
+}' <ph_client_api_host>/i/v0/e/ 
 ```
 
 ```python
 import requests
 import json
 
-url = "<ph_client_api_host>/capture/"
+url = "<ph_client_api_host>/i/v0/e/"
 headers = {
     "Content-Type": "application/json"
 }
@@ -163,14 +190,14 @@ curl -v -L --header "Content-Type: application/json" -d '  {
       "$feature_flag": "feature-flag-key",
       "$feature_flag_response": "variant-name"
     }
-}' <ph_client_api_host>/capture/ 
+}' <ph_client_api_host>/i/v0/e/ 
 ```
 
 ```python
 import requests
 import json
 
-url = "<ph_client_api_host>/capture/"
+url = "<ph_client_api_host>/i/v0/e/"
 headers = {
     "Content-Type": "application/json"
 }

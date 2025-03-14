@@ -10,6 +10,7 @@ import {
     StickerFlagCO,
     StickerFlagCY,
     StickerFlagDE,
+    StickerFlagDO,
     StickerFlagIE,
     StickerFlagES,
     StickerFlagFI,
@@ -18,10 +19,13 @@ import {
     StickerFlagHU,
     StickerFlagHR,
     StickerFlagNL,
+    StickerFlagNO,
     StickerFlagPL,
     StickerFlagPR,
+    StickerFlagSE,
     StickerFlagUnknown,
     StickerFlagUS,
+    StickerFlagUY,
     StickerPineappleYes,
     StickerPineappleNo,
     StickerPineappleUnknown,
@@ -48,6 +52,8 @@ const Stickers = ({ location, country, pineappleOnPizza, isTeamLead, editing, id
                     <StickerFlagGB className="w-8 h-8" />
                 ) : country === 'DE' ? (
                     <StickerFlagDE className="w-8 h-8" />
+                ) : country === 'DO' ? (
+                    <StickerFlagDO className="w-8 h-8" />
                 ) : country === 'ES' ? (
                     <StickerFlagES className="w-8 h-8" />
                 ) : country === 'FI' ? (
@@ -62,6 +68,8 @@ const Stickers = ({ location, country, pineappleOnPizza, isTeamLead, editing, id
                     <StickerFlagFR className="w-8 h-8" />
                 ) : country === 'NL' ? (
                     <StickerFlagNL className="w-8 h-8" />
+                ) : country === 'NO' ? (
+                    <StickerFlagNO className="w-8 h-8" />
                 ) : country === 'AR' ? (
                     <StickerFlagAR className="w-8 h-8" />
                 ) : country === 'AT' ? (
@@ -76,6 +84,10 @@ const Stickers = ({ location, country, pineappleOnPizza, isTeamLead, editing, id
                     <StickerFlagPL className="w-8 h-8" />
                 ) : country === 'PR' ? (
                     <StickerFlagPR className="w-8 h-8" />
+                ) : country === 'SE' ? (
+                    <StickerFlagSE className="w-8 h-8" />
+                ) : country === 'UY' ? (
+                    <StickerFlagUY className="w-8 h-8" />
                 ) : (
                     <StickerFlagUnknown className="w-8 h-8" />
                 )}

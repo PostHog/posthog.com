@@ -8,20 +8,29 @@ export const CreateNewFeatureFlagDark = "https://res.cloudinary.com/dmukukwp6/im
 export const SiteAppDark = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/features/feature-flags/site-app-light-mode.png"
 export const SiteAppLight = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/features/feature-flags/site-app-dark-mode.png"
 
-> **Note:** Early access management is only available in the [JavaScript web SDK](/docs/libraries/js).
+> **Note:** Early access management is only available in the [JavaScript Web SDK](/docs/libraries/js).
 
-Early access feature management enables your users to opt in (and out) of betas and other in-progress features. 
+Early access feature management enables your users to opt in (and out) of betas and in-progress features as well as collect details for users interested in items on your roadmap.
 
 This is useful if you want to:
 - Run a beta program without building a custom solution
 - Provide access to features that are not yet ready for general release
 - Allow users to control their own product experience
+- Create waitlists for features in development
 
 ## How it works
 
 Early access features can be created and edited from the [Early Access Management](https://app.posthog.com/early_access_features) tab in PostHog.
 
-Features are powered by feature flags. Flags are automatically created when a feature is created (based on the name of the feature), or you can link an existing feature flag to a feature. Each feature can also contain a description and documentation link to help users understand what the feature is for.
+Features can be in different stages:
+
+- **Concept**: Features that are not yet available for testing. These are added to the Coming Soon tab, so users can register interest in advance.
+- **Beta**: Features that are available for testing. Users can opt in to try them out.
+- **Alpha** and **General availability** are also available for more granular feature lifecycle management.
+
+> **Note:** Early access features must currently be released before they can assigned to a stage. 
+
+For beta features, feature flags are automatically created when a feature is created (based on the name of the feature), or you can link an existing feature flag to a feature. Each feature can also contain a description and documentation link to help users understand what the feature is for.
 
 <ProductScreenshot
     imageLight={CreateNewFeatureFlagLight} 
@@ -46,7 +55,7 @@ We've prebuilt a site app that adds an early access feature modal to your site.
 
 To use it:
 
-1. Ensure you set `opt_in_site_apps: true` in your PostHog [initialization configuration](/docs/libraries/js#config).
+1. Ensure you set `opt_in_site_apps: true` in your PostHog [initialization configuration](/docs/libraries/js/config).
 
 2. Search for [Early Access Features App](https://app.posthog.com/project/apps?name=Early%20Access) in the [Browse Apps](https://app.posthog.com/project/apps) tab.
 
@@ -61,17 +70,19 @@ To use it:
 
 4. If you did set an HTML attribute selector, add a component with that selector into your app. For example, if you set your selector to `#beta-button`, you need to add an element like `<button id="beta-button">Public Betas</button>`.
 
-Once set up, early access features appear on this panel for users to opt in or out of.
+Once set up, early access features appear on this panel for users to opt in or out of. The panel includes tabs for both **Previews** (beta features) and **Coming soon**** features, enabling users to either try available features or register interest in upcoming ones.
 
 ### Option 2: Custom implementation
 
-You can fully customize your early access management experience using `getEarlyAccessFeatures` and `updateEarlyAccessFeatureEnrollment` from PostHog's [JavaScript Web library](/docs/libraries/js#early-access-feature-management).
+You can fully customize your early access management experience using `getEarlyAccessFeatures` and `updateEarlyAccessFeatureEnrollment` from PostHog's [JavaScript Web library](/docs/libraries/js/features#early-access-feature-management).
 
-- `getEarlyAccessFeatures` is called with a callback function that receives a list of early access features with their flag key, name, description, and documentation link. You can use this to build a UI for users to opt in or out of features.
+`getEarlyAccessFeatures` is called with a callback function that receives a list of early access features with their flag key, name, description, documentation link, and stage. You can use this to build a UI for users to opt in or out of features or register interest features coming soon.
 
-> *Note:* Available early access features are cached per browser load. This means if you have a browser open and create a new early access feature, you wouldn't see it until you refresh. 
+You can also specify which stages of features to retrieve by passing an array of stages as the third parameter, e.g., `getEarlyAccessFeatures(callback, force_reload, ['concept', 'beta'])`.
+
+> **Note:** Available early access features are cached per browser load. This means if you have a browser open and create a new early access feature, you wouldn't see it until you refresh. 
+> 
 > If you want the latest values always available, include the `force_reload` parameter in your `getEarlyAccessFeatures` call. This makes a network request to get the updated list instead of using the cache. The downside is that this can delay when early access features are available on load.
-
 
 ```react
 const posthog = usePostHog()
@@ -79,28 +90,34 @@ const activeFlags = useActiveFeatureFlags()
 
 const [activeBetas, setActiveBetas] = useState([])
 const [inactiveBetas, setInactiveBetas] = useState([])
+const [comingSoonFeatures, setComingSoonFeatures] = useState([])
 
 useEffect(() => {
   posthog.getEarlyAccessFeatures((features) => {
+    // Filter features by stage
+    const betaFeatures = features.filter(feature => feature.stage === 'beta')
+    const conceptFeatures = features.filter(feature => feature.stage === 'concept')
+    
+    setComingSoonFeatures(conceptFeatures)
 
     if (!activeFlags || activeFlags.length === 0) {
-      setInactiveBetas(features)
+      setInactiveBetas(betaFeatures)
       return
     }
 
-    const activeBetas = features.filter(
+    const activeBetas = betaFeatures.filter(
 			beta => activeFlags.includes(beta.flagKey)
 		);
-    const inactiveBetas = features.filter(
+    const inactiveBetas = betaFeatures.filter(
 			beta => !activeFlags.includes(beta.flagKey)
 		);
     setActiveBetas(activeBetas)
     setInactiveBetas(inactiveBetas)
-  }, true)
+  }, true, ['concept', 'beta'])
 }, [activeFlags])
 ```
 
-- `updateEarlyAccessFeatureEnrollment` is called with a feature flag key and a boolean value to opt in or out of the feature. This updates the user's opt-in status for the feature.
+`updateEarlyAccessFeatureEnrollment` is called with a feature flag key and a boolean value to opt in or out of the feature or to register interest in a feature coming soon. This updates the user's opt-in status for the feature.
 
 ```react
 const toggleBeta = (betaKey) => {
@@ -128,6 +145,14 @@ const toggleBeta = (betaKey) => {
       item => item.flagKey !== betaKey
     )
   );
+}
+
+const registerInterest = (featureKey) => {
+  posthog.updateEarlyAccessFeatureEnrollment(
+    featureKey,
+    true
+  )
+  // Update UI to show user has registered
 }
 ```
 

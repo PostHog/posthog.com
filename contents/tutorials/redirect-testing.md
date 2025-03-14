@@ -14,7 +14,7 @@ tags:
 
 Redirect testing is a way to [A/B test](/experiments) web pages by redirecting users to one or the other.
 
-To show you how to do a redirect test with PostHog, we set up a two-page Next.js app, create an A/B test in PostHog, and then implement it in our app using middleware and feature flags. 
+To show you how to do a redirect test with PostHog, we set up a two-page Next.js app, create an A/B test in PostHog, and then implement it in our app using middleware and feature flags.
 
 > **Note:** Although we are using Next.js in this tutorial, this method works with any framework where you can do server-side redirects.
 
@@ -118,7 +118,7 @@ export default function Test() {
 }
 ```
 
-Now run `npm run dev`. Go to each of our pages to see that they work: `http://localhost:3000/control` and `http://localhost:3000/test`. 
+Now run `npm run dev`. Go to each of our pages to see that they work: `http://localhost:3000/control` and `http://localhost:3000/test`.
 
 Click the button on each page to capture a custom event in PostHog.
 
@@ -126,11 +126,16 @@ Click the button on each page to capture a custom event in PostHog.
 
 ## Creating our A/B test
 
-Our A/B test will compare these two pages to see which drives more button clicks. To do this, we go to the [experiment tab](https://app.posthog.com/experiments) (what we call A/B tests in PostHog) in PostHog and click "New experiment." Name your experiment and feature flag key (like `main-redirect`), set your experiment goal to `main_button_clicked`, and click "Save as draft."
+Our A/B test will compare these two pages to see which drives more button clicks. To do this, we go to the [experiment tab](https://app.posthog.com/experiments) (what we call A/B tests in PostHog) in PostHog and click "New experiment." Name your experiment and feature flag key (like `main-redirect`) and click "Save as draft."
 
-![A/B test set up](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/redirect-testing/test.png)
+<ProductScreenshot
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_01_16_at_09_44_17_2x_c9f85a2c46.png"
+  imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_01_16_at_09_44_06_2x_d7b288e617.png"
+  alt="Experiment setup in PostHog"
+  classes="rounded"
+/>
 
-Because we are working locally, you can launch the experiment immediately.
+Because we are working locally, you then set your experiment goal to `main_button_clicked` and click **Launch**.
 
 ## Setting up the redirect test middleware
 
@@ -176,7 +181,7 @@ export async function middleware(request) {
 
   let distinct_id;
   if (cookie) {
-    // Use PostHog distinct_id 
+    // Use PostHog distinct_id
     distinct_id = JSON.parse(cookie.value).distinct_id;
   } else {
     // Create new distinct_id
@@ -189,7 +194,7 @@ export async function middleware(request) {
 
 With our distinct ID, we use the PostHog API to check the value of the `main-redirect` feature flag for a user (because [we can’t use PostHog SDKs in Next.js middleware](https://vercel.com/docs/functions/edge-functions/edge-runtime#supported-apis)). This is known as evaluating the feature flag.
 
-Specifically, we evaluate the flag by making a POST request to the `[https://us.posthog.com/decide?v=3](/docs/api/decide)` route with your project API key and user distinct ID. From the response, we get the value of the `main-redirect` feature flag and use it to redirect to the right page. Altogether, it looks like this:
+Specifically, we evaluate the flag by making a POST request to the [decide](/docs/api/decide) route with your project API key and user distinct ID. From the response, we get the value of the `main-redirect` feature flag and use it to redirect to the right page. Altogether, it looks like this:
 
 ```js
 // redirect-test/middleware.js
@@ -205,7 +210,7 @@ Specifically, we evaluate the flag by making a POST request to the `[https://us.
       distinct_id: distinct_id
     })
   };
-  
+
   // Evaluate experiment flag
   const ph_request = await fetch(
     'https://us.i.posthog.com/decide?v=3', // or eu.i.posthog.com
@@ -253,7 +258,7 @@ const eventOptions = {
 };
 
 const eventRequest = await fetch(
-  'https://us.i.posthog.com/capture',
+  'https://us.i.posthog.com/i/v0/e',
   eventOptions
 );
 
@@ -262,7 +267,7 @@ const eventRequest = await fetch(
 
 ## Bootstrapping the data
 
-The final piece to our redirect test is [bootstrapping](/docs/feature-flags/bootstrapping) the user distinct ID and feature flags. Bootstrapping is when you initialize PostHog with precomputed user data so that it is available as soon as PostHog loads, without needing to make additional API calls 
+The final piece to our redirect test is [bootstrapping](/docs/feature-flags/bootstrapping) the user distinct ID and feature flags. Bootstrapping is when you initialize PostHog with precomputed user data so that it is available as soon as PostHog loads, without needing to make additional API calls
 
 > **Why is bootstrapping necessary?** If we didn't bootstrap the distinct ID, PostHog would set a second distinct ID for the same user on the frontend. When calculating the results of the experiment, PostHog wouldn't know the two were connected, creating a broken test.
 
@@ -271,7 +276,7 @@ We create a `bootstrapData` cookie with the flags and distinct ID data and then 
 When put together with everything else, our final `middleware.js` file looks like this:
 
 ```js
-// middleware.js 
+// middleware.js
 import { NextResponse } from 'next/server'
 
 export async function middleware(request) {
@@ -300,7 +305,7 @@ export async function middleware(request) {
       distinct_id: distinct_id
     })
   };
-  
+
   const ph_request = await fetch(
     'https://us.i.posthog.com/decide?v=3', // or eu
     requestOptions
@@ -327,7 +332,7 @@ export async function middleware(request) {
   };
 
   const eventRequest = await fetch(
-    'https://us.i.posthog.com/capture',
+    'https://us.i.posthog.com/i/v0/e',
     eventOptions
   );
 

@@ -1,5 +1,5 @@
 ---
-title: JavaScript Web
+title: JavaScript Web setup
 sidebarTitle: JavaScript Web
 sidebar: Docs
 showTitle: true
@@ -13,6 +13,9 @@ features:
   sessionRecording: true
   featureFlags: true
   groupAnalytics: true
+  surveys: true
+  llmObservability: false
+  errorTracking: true
 ---
 
 > **Note:** This doc refers to our [posthog-js](https://github.com/PostHog/posthog-js) library for use on the browser. For server-side JavaScript, see our [Node SDK](/docs/libraries/node).
@@ -23,754 +26,66 @@ import JSInstall from '../../integrate/_snippets/install-web.mdx'
 
 <JSInstall />
 
+Once you've installed PostHog, see our [features doc](/docs/libraries/js/features) for more information about what you can do with it.
+
 ### Track across marketing website &amp; app
 
 We recommend putting PostHog both on your homepage and your application if applicable. That means you'll be able to follow a user from the moment they come onto your website, all the way through signup and actually using your product.
 
-> PostHog automatically sets a cross-domain cookie, so if your website is `yourapp.com` and your app is on `app.yourapp.com` users will be followed when they go from one to the other.
+> PostHog automatically sets a cross-domain cookie, so if your website is `yourapp.com` and your app is on `app.yourapp.com` users will be followed when they go from one to the other. See our tutorial on [cross-website tracking](/tutorials/cross-domain-tracking) if you need to track users across different domains.
 
 ### Permitted domains
 
 You can also configure "permitted domains" in your [project settings](https://app.posthog.com/project/settings). These are domains where you'll be able to record user sessions and use the PostHog toolbar.
 
-## Capturing events
+## Opt out of data capture
 
-import WebSendEvents from '../../integrate/send-events/_snippets/send-events-web.mdx'
+You can completely opt-out users from data capture. To do this, there are two options:
 
-<WebSendEvents />
-
-## Identifying users
-
-> We strongly recommend reading our docs on [identifying users](/docs/integrate/identifying-users) to better understand how to correctly use this method.
-
-import JSIdentify from './\_snippets/identify.mdx'
-
-<JSIdentify />
-
-## Alias
-
-Sometimes, you want to assign multiple distinct IDs to a single user. This is helpful when your primary distinct ID is inaccessible. For example, if a distinct ID used on the frontend is not available in your backend.
-
-In this case, you can use `alias` to assign another distinct ID to the same user.
+1. Opt users out by default by setting `opt_out_capturing_by_default` to `true` in your [PostHog config](/docs/libraries/js/config).
 
 ```js-web
-posthog.alias('alias_id', 'distinct_id');
+posthog.init('<ph_project_api_key>', {
+    opt_out_capturing_by_default: true,
+});
 ```
 
-We strongly recommend reading our docs on [alias](/docs/data/identify#alias-assigning-multiple-distinct-ids-to-the-same-user) to best understand how to correctly use this method.
+2. Opt users out on a per-person basis by calling `posthog.opt_out_capturing()`.
 
-## Reset after logout
-
-If a user logs out, you should call `reset` to unlink any future events made on that device with that user.
-
-This is important if your users are sharing a computer, as otherwise all of those users are grouped together into a single user due to shared cookies between sessions. **We strongly recommend you call `reset` on logout even if you don't expect users to share a computer.**
-
-You can do that like so:
-
-```js-web
-posthog.reset()
-```
-
-If you _also_ want to reset `device_id`, you can pass `true` as a parameter:
-
-```js-web
-posthog.reset(true)
-```
-
-## Anonymous vs identfied events
-
-import IdentifiedVsAnonymousIntro from '../../product-analytics/_snippets/identified-vs-anonymous-intro.mdx'
-
-<IdentifiedVsAnonymousIntro />
-
-### How to capture anonymous events
-
-import HowToCaptureAnonymousEventsWeb from '../../product-analytics/_snippets/how-to-capture-anonymous-events-web.mdx'
-
-<HowToCaptureAnonymousEventsWeb />
-
-### How to capture identified events
-
-import HowToCaptureIdentifiedEventsWeb from '../../product-analytics/_snippets/how-to-capture-identified-events-frontend.mdx'
-
-<HowToCaptureIdentifiedEventsWeb />
-
-## Setting person properties
-
-To set [person properties](/docs/data/user-properties) in these profiles, include them when capturing an event:
-
-```js-web
-posthog.capture(
-  'event_name',
-  {
-    $set: { name: 'Max Hedgehog'  },
-    $set_once: { initial_url: '/blog' },
-  }
-)
-```
-
-Typically, person properties are set when an event occurs like `user updated email` but there may be occasions where you want to set person properties as its own event. 
-
-```js
-posthog.setPersonProperties(
-    { name: "Max Hedgehog" }, // These properties are like the `$set` from above
-    { initial_url: "/blog" }  // These properties are like the `$set_once` from above
-)
-```
-
-This creates a special `$set` event that is sent to PostHog. For more details on the difference between `$set` and `$set_once`, see our [person properties docs](/docs/data/user-properties#what-is-the-difference-between-set-and-set_once).
-
-## Super Properties
-
-Super Properties are properties associated with events that are set once and then sent with every `capture` call, be it a $pageview, an autocaptured button click, or anything else.
-
-They are set using `posthog.register`, which takes a properties object as a parameter, and they persist across sessions.
-
-For example, take a look at the following call:
-
-```js-web
-posthog.register({
-    'icecream pref': 'vanilla',
-    team_id: 22,
-})
-```
-
-The call above ensures that every event sent by the user will include `"icecream pref": "vanilla"` and `"team_id": 22`. This way, if you filtered events by property using `icecream_pref = vanilla`, it would display all events captured on that user after the `posthog.register` call, since they all include the specified Super Property.
-
-This does **not** set the user's properties. It only sets the properties for their events. To store person properties, see the [setting person properties docs](/docs/product-analytics/person-properties).
-
-Furthermore, if you register the same property multiple times, the next event will use the new value of that property. If you want to register a property only once (e.g. for ad campaign properties) you can use `register_once`, like so:
-
-```js-web
-posthog.register_once({
-    'campaign source': 'twitter',
-})
-```
-
-Using `register_once` will ensure that if a property is already set, it will not be set again. For example, if the user already has property `"icecream pref": "vanilla"`, calling `posthog.register_once({"icecream pref": "chocolate"})` will **not** update the property.
-
-### Removing stored Super Properties
-
-Setting Super Properties creates a cookie on the client with the respective properties and their values. In order to stop sending a Super Property with events and remove the cookie, you can use `posthog.unregister`, like so:
-
-```js-web
-posthog.unregister('icecream pref')
-```
-
-This will remove the Super Property and subsequent events will not include it.
-
-## Opt users out
-
-PostHog JS offers a function to opt users out based on your cookie settings definition (e.g. preferences set via a cookie banner).
-
-This is also the suggested way to prevent capturing _any data_ from the admin on the page, as well as from team members of your organization. A simple way to do this is to access the page as the admin (or any other user on your team you wish to stop capturing data on), and call `posthog.opt_out_capturing();` on the developer console. You can also add this logic in your app and call it directly after an admin/team member logs in.
-
-If you still wish to capture these events but want to create a distinction between users and team in PostHog, you should look into [Cohorts](/docs/user-guides/cohorts#differentiating-team-vs-users-traffic).
-
-With PostHog, you can:
-
-Opt a user out:
-
-```js-web
-posthog.opt_out_capturing()
-```
-
-See if a user has opted out:
-
-```js-web
-posthog.has_opted_out_capturing()
-```
-
-Opt a user back in:
+Similarly, you can opt users in:
 
 ```js-web
 posthog.opt_in_capturing()
 ```
 
-## Feature Flags
-
-import FeatureFlagsLibsIntro from "../_snippets/feature-flags-libs-intro.mdx"
-
-<FeatureFlagsLibsIntro />
-
-import WebFeatureFlagsCode from '../../integrate/feature-flags-code/_snippets/feature-flags-code-web.mdx'
-
-<WebFeatureFlagsCode />
-
-### Bootstrapping Flags
-
-import BootstrappingIntro from "../../feature-flags/snippets/bootstrapping-intro.mdx"
-
-<BootstrappingIntro />
-
-For details on how to implement bootstrapping, see our [bootstrapping guide](/docs/feature-flags/bootstrapping).
-
-### Enriched analytics
-
-You can send enriched analytics data for feature flags, which helps uncover replays where people interact with a flag, target people who've interacted with a feature, or build cohorts of people who've viewed a feature.
-
-To enable this, you can either use our `<PosthogFeature>` [React component](/docs/libraries/react#feature-flags-react-component) (which implements this for you), or implement it on your own if you're not using react.
-
-To implement it on your own, there are 3 things you need to do:
-
-1. Whenever a feature is viewed, send the `$feature_view` event with the property `feature_flag` set to the name of the flag.
-
-```javascript
-posthog.capture('$feature_view', { feature_flag: flag })
-```
-2. Whenever someone interacts with a feature, send the `$feature_interaction` event with the property `feature_flag` set to the name of the flag.
-3. At the same time, set the person property `$feature_interaction/<flag-key>` to true. [Here's a code example](https://github.com/PostHog/posthog-js/blob/master/react/src/components/PostHogFeature.tsx#L48C10-L48C35).
-
-```javascript
-posthog.capture('$feature_interaction', { feature_flag: flag, $set: { [`$feature_interaction/${flag}`]: true } })
-```
-
-[Here's a code example for the entire React component](https://github.com/PostHog/posthog-js/blob/master/react/src/components/PostHogFeature.tsx).
-
-## Experiments (A/B tests)
-
-Since [experiments](/docs/experiments/manual) use feature flags, the code for running an experiment is very similar to the feature flags code:
+To check if a user is opted out:
 
 ```js-web
-// Ensure flags are loaded before usage.
-// You'll only need to call this on the code the first time a user visits.
-// See this doc for more details: https://posthog.com/docs/feature-flags/manual#ensuring-flags-are-loaded-before-usage
-posthog.onFeatureFlags(function() {
-    // feature flags should be available at this point
-    if (posthog.getFeatureFlag('experiment-feature-flag-key')  == 'variant-name') {
-        // do something
-    }
-})
-
-// Otherwise, you can just do:
-if (posthog.getFeatureFlag('experiment-feature-flag-key')  == 'variant-name') {
-    // do something
-}
-
-// You can also test your code by overriding the feature flag:
-// e.g., posthog.featureFlags.override({'experiment-feature-flag-key': 'test'})
+posthog.has_opted_out_capturing()
 ```
 
-It's also possible to [run experiments without using feature flags](/docs/experiments/running-experiments-without-feature-flags).
+## Running more than one instance of PostHog at the same time
 
-## Early access feature management
+While not a first-class citizen, PostHog allows you to run more than one instance of PostHog at the same time if you, for example, want to track different events in different posthog instances/projects.
 
-Early access features give you the option to release feature flags that can be controlled by your users. More information on this can be found [here](/docs/feature-flags/early-access-feature-management).
-
-```js-web
-posthog.getEarlyAccessFeatures((previewItemData) => {
-    // do something with early access feature
-})
-```
-
-```js-web
-posthog.updateEarlyAccessFeatureEnrollment(flagKey, 'true')
-```
-
-## Group analytics
-
-Group analytics allows you to associate the events for that person's session with a group (e.g. teams, organizations, etc.). Read the [Group Analytics](/docs/user-guides/group-analytics) guide for more information.
-
-> **Note: ** This is a paid feature and is not available on the open-source or free cloud plan. Learn more [here](/pricing).
-
--   Associate the events for this session with a group
-
-```js-web
-posthog.group('company', 'company_id_in_your_db')
-
-posthog.capture('upgraded_plan') // this event is associated with company ID `company_id_in_your_db`
-```
-
--   Associate the events for this session with a group AND update the properties of that group
-
-```js-web
-posthog.group('company', 'company_id_in_your_db', {
-    name: 'Awesome Inc.',
-    employees: 11,
-})
-```
-
-The `name` is a special property which is used in the PostHog UI for the name of the Group. If you don't specify a `name` property, the group ID will be used instead.
-
-#### Handling logging out
-
-When the user logs out it's important to call `posthog.reset()` to avoid new events being registered under the previously active group.
-
-#### Integrating groups with feature flags
-
-If you have updated tracking, you can use group-based feature flags as normal.
-
-```js-web
-if (posthog.isFeatureEnabled('new-groups-feature')) {
-    // do something
-}
-```
-
-To check flag status for a different group, first switch the active group by calling `posthog.group()`.
-
-## Surveys
-
-[Surveys](/docs/surveys) launched with [popover presentation](/docs/surveys/creating-surveys#presentation) are automatically shown to users matching the [display conditions](/docs/surveys/creating-surveys#display-conditions) you set up.
-
-To disable loading surveys in a specific client, you can set the `disable_surveys` [config option](#config).
-
-Surveys using the **API** presentation enable you to implement your own survey UI and use PostHog to handle display logic, capturing results, and analytics.
-
-To implement **API** surveys, start by fetching active surveys for a user using either of the methods below:
-
-```js-web
-// Fetch enabled surveys for the current user
-posthog.getActiveMatchingSurveys(callback, forceReload)
-
-// Fetch all surveys
-posthog.getSurveys(callback, forceReload)
-```
-
-The response returns an array of survey objects and is cached by default. To force a reload, pass `true` as the `forceReload` argument.
-
-The survey objects look like this:
-
-```json
-[{
-  "id": "your_survey_id",
-  "name": "Your survey name",
-  "description": "Metadata describing your survey",
-  "type": "api", // either "api", "popover", or "widget"
-  "linked_flag_key": null, // linked feature flag key, if any.
-  "targeting_flag_key": "your_survey_targeting_flag_key",
-  "questions": [
-    {
-      "type": "single_choice",
-      "choices": [
-        "Yes",
-        "No"
-      ],
-      "question": "Are you enjoying PostHog?"
-    }
-  ],
-  "conditions": null,
-  "start_date": "2023-09-19T13:10:49.505000Z",
-  "end_date": null
-}]
-```
-
-### Capturing survey events
-
-To display survey results in PostHog, you need to capture 3 types of events:
-
-```js-web
-// 1. When a user is shown a survey
-posthog.capture("survey shown", {
-    $survey_id: survey.id // required
-})
-
-// 2. When a user has dismissed a survey
-posthog.capture("survey dismissed", {
-    $survey_id: survey.id // required
-})
-
-// 3. When a user has responded to a survey
-posthog.capture("survey sent", {
-    $survey_id: survey.id, // required
-    $survey_response: survey_response // required. `survey_response` must be a text value.
-    // Convert numbers to text e.g. 8 should be converted "8".
-    // For multiple choice select surveys, `survey_response` must be an array of values with the selected choices.
-    // e.g., $survey_response: ["response_1", "response_2"]
-})
-```
-
-## Session replay
-
-To set up [session replay](/docs/session-replay) in your project, all you need to do is install the JavaScript web library and enable "Record user sessions" in [your project settings](https://us.posthog.com/settings/project-replay).
-
-For [fine-tuning control](/docs/session-replay/how-to-control-which-sessions-you-record) of which sessions you record, you can use [feature flags](/docs/session-replay/how-to-control-which-sessions-you-record#with-feature-flags), [sampling](/docs/session-replay/how-to-control-which-sessions-you-record#sampling), [minimum duration](/docs/session-replay/how-to-control-which-sessions-you-record#minimum-duration), or set the `disable_session_recording` [config option](#config) and use the following methods:
-
-```js-web
-// Turns session recording on
-posthog.startSessionRecording()
-
-// Turns session recording off
-posthog.stopSessionRecording()
-
-// Check if session recording is currently running
-posthog.sessionRecordingStarted()
-```
-
-If you are using feature flags or sampling to control which sessions you record, you can override the default behavior (and start a recording regardless) by passing the `linked_flag` or `sampling` overrides. The following would start a recording for all users, even if they don't match the flag or aren't in the sample:
-
-```js-web
-posthog.startSessionRecording({ linked_flag: true, sampling: true })
-```
-
-To get the playback URL of the current session replay, you can use the following method:
-
-```js-web
-posthog.get_session_replay_url(
-    { withTimestamp: true, timestampLookBack: 30 }
-)
-```
-
-It has two optional parameters:
-
--  `withTimestamp` (default: `false`): When set to `true`, the URL includes a timestamp that takes you to the session at the time of the event.
--  `timestampLookBack` (default: `10`): The number of seconds back the timestamp links to.
-
-## Persistence
-
-For PostHog to work optimally, we store small amount of information about the user on the user's browser. This ensures we identify users properly if they navigates away from your site and come back later. We store the following information in the user's browser:
-
--   User's ID
--   Session ID & Device ID
--   Active & enabled feature flags
--   Any super properties you have defined.
--   Some PostHog configuration options (e.g. whether session recording is enabled)
-
-By default, we store all this information in both a `cookie` and `localStorage`, which means PostHog can identify your users across subdomains. By default, this cookie is set to expire after `365` days and is named with your Project API key e.g. `ph_<project_api_key>_posthog`.
-
-If you want to change how PostHog stores this information, you can do so with the `persistence` configuration option:
-
-- `persistence: "localStorage+cookie"` (default): Limited things are stored in the cookie such as the distinctID and the sessionID, and everything else in the browser's <a href="https://developer.mozilla.org/en-US/docs/Web/API/Window/localStorage" target="_blank">`localStorage`</a>.
-
-- `persistence: "cookie"` : Stores all data in a cookie.
-
-- `persistence: "localStorage"`: Stores everything in `localStorage`.
-
-- `persistence: "sessionStorage"`: Stores everything in `sessionStorage`.
-
-- `persistence: "memory"`: Stores everything in page memory, which means data is only persisted for the duration of the page view.
-
-To change `persistence` values without reinitializing PostHog, you can use the `posthog.set_config()` method. This enables you to switch from memory to cookies to better comply with privacy regulations.
-
-```js-web
-const handleCookieConsent = (consent) => {
-    posthog.set_config({ persistence: consent === 'yes' ? 'localStorage+cookie' : 'memory' });
-    localStorage.setItem('cookie_consent', consent);
-};
-```
-
-### Persistence caveats
-
-- Be aware that `localStorage` and `sessionStorage` can't be used across subdomains. If you have multiple sites on the same domain, you may want to consider a `cookie` option or make sure to set all super properties across each subdomain.
-
-- Due to the size limitation of cookies you may run into `431 Request Header Fields Too Large` errors (e.g. if you have a lot of feature flags). In that case, use `localStorage+cookie`.
-
-- If you don't want PostHog to store anything on the user's browser (e.g. if you want to rely on your own identification mechanism only or want completely anonymous users), you can set `disable_persistence: true` in PostHog's config. If you do this, remember to call [`posthog.identify`](#identifying-users) **every time** your app loads. If you don't, every page refresh is treated as a new and different user.
-
-## Amending events before they are captured
-
-Since version 1.187.0, when initializing the SDK, you can provide a `before_send` function.  This can be used to amend or reject events before they are sent to PostHog. 
-
-> **Note:** Amending and rejecting events is advanced functionality and should be done with care. It can cause unexpected results in parts of PostHog.
-
-### Redacting information in events
-
-`before_send` gives you one place to edit or redact information before it is sent to PostHog.
-
-#### Redact URLs in event properties
+`posthog.init` accepts a third parameter that can be used to create named instances.
 
 ```ts
-posthog.init('<ph_project_api_key>', {
-    before_send: (event: CaptureResult): CaptureResult | null => {
-        // redacting URLs will be specific to your site structure
-        function redactUrl(value: string): string {
-            return value.replace(/project\/\d+/, 'project/1234567');
-        }
-
-        function redactObject(objectToRedact: Record<string, any>): Record<string, any> {
-            return Object.entries(objectToRedact).reduce((acc, [key, value]) => {
-                const redactedValue = key.includes("url") && typeof value === "string" ? redactUrl(value) : value;
-                acc[redactUrl(key)] = redactedValue;
-                return acc;
-            }, {});
-        }
-
-        const redactedProperties = redactObject(event.properties || {});
-        event.properties = redactedProperties
-
-        if (event.event === '$$heatmap') {
-            // $heatmap data is keyed by url
-            event.properties.$heatmap_data = redactObject(event.properties.$heatmap_data || {});
-        }
-
-        const redactedSet = redactObject(event.$set || {});
-        event.$set = redactedSet
-
-        const redactedSetOnce = redactObject(event.$set_once || {});
-        event.$set_once = redactedSetOnce
-
-        return event
-    }
-})
+posthog.init('<ph_project_api_key>', {}, 'project1')
+posthog.init('<ph_project_api_key>', {}, 'project2')
 ```
 
-#### Redact person properties in $set or $set_once
+You can then call these different instances by accessing it on the global `posthog` object
 
 ```ts
-posthog.init('<ph_project_api_key>', {
-    before_send: (event: CaptureResult): CaptureResult | null => {
-        event.$set = {
-            ...event.$set,
-            name: 'secret name'
-        }
-        event.$set_once = {
-            ...event.$set_once,
-            initial_name: 'secret name'
-        }
-
-        return event
-    }
-})
+posthog.project1.capture("some_event")
+posthog.project2.capture("other_event")
 ```
-
-### Sampling events
-
-Sampling lets you choose to send only a percentage of events to PostHog. It is a good way to control your costs without having to completely turn off features of the SDK.
-
-Some functions of PostHog - for example much of web analytics - relies on receiving all events. Sampling `$pageview `or `$pageleave` events in particular can cause unexpected results.
-
-#### Sampling events using our provided customization
-
-We offer a pre-built function to sample by event name. You can import this using a package manager, or add the customization script to your site.
-
-<MultiLanguage>
-
-```ts file=Import
-import { sampleByEvent } from 'posthog-js/lib/src/customizations'
-
-posthog.init('<ph_project_api_key>', {
-    // capture only half of dead click and web vitals events
-    before_send: sampleByEvent(['$dead_click', '$web_vitals'], 0.5)
-})
-```
-
-```tsx file=Script
-// Add this script to your site, may need to change the script src to match your API host:
-// <script type="text/javascript" src="https://us.i.posthog.com/static/customizations.full.js"></script>
-
-posthog.init('<ph_project_api_key>', {
-    // capture only half of dead click and web vitals events
-    before_send: posthogCustomizations.sampleByEvent(['$dead_click', '$web_vitals'], 0.5)
-})
-```
-
-</MultiLanguage>
-
-#### Sampling events using a custom function
-
-```ts
-posthog.init('<ph_project_api_key>', {
-    before_send: (event: CaptureResult): CaptureResult | null => {
-        let sampleRate = 1.0 // default to always returning the event
-        if (event.event === '$heatmap') {
-            sampleRate = 0.1
-        }
-        if (event.event === '$dead_click') {
-            sampleRate = 0.01
-        }
-        return Math.random() < sampleRate ? event : null
-    }
-})
-```
-
-#### Sampling to receive only 40% of events by person distinct ID
-
-A particular distinct ID will always either send all events or no events.
-
-You can import this using a package manager, or add the customization script to your site.
-
-<MultiLanguage>
-
-```ts file=Import
-import { sampleByDistinctId } from 'posthog-js/lib/src/customizations'
-
-posthog.init('<ph_project_api_key>', {
-    before_send: sampleByDistinctId(0.4)
-})
-```
-
-```ts file=Script
-// Add this script to your site, may need to change the script src to match your API host:
-// <script type="text/javascript" src="https://us.i.posthog.com/static/customizations.full.js"></script>
-
-posthog.init('<ph_project_api_key>', {
-    before_send: posthogCustomizations.sampleByDistinctId(0.4)
-})
-```
-
-</MultiLanguage>
-
-
-#### Sampling to receive only 25% of events by session ID
-
-A particular session ID will always either send all events or no events.
-
-You can import this using a package manager, or add the customization script to your site.
-
-<MultiLanguage>
-
-```ts file=Import
-import { sampleBySessionId } from 'posthog-js/lib/src/customizations'
-
-posthog.init('<ph_project_api_key>', {
-    before_send: sampleBySessionId(0.25)
-})
-```
-
-```ts file=Script
-// Add this script to your site, may need to change the script src to match your API host:
-// <script type="text/javascript" src="https://us.i.posthog.com/static/customizations.full.js"></script>
-
-posthog.init('<ph_project_api_key>', {
-    before_send: posthogCustomizations.sampleBySessionId(0.25)
-})
-```
-
-</MultiLanguage>
-
-### Providing more than one before_send function
-
-You can provide an array of functions to be called one after the other
-
-
-```ts
-posthog.init('<ph_project_api_key>', {
-    before_send: [
-        sampleByDistinctId(0.5), // only half of people
-        sampleByEvent(['$web_vitals'], 0.1), // and they capture all events except 10% of web vitals
-        sampleByEvent(['$$heatmap'], 0.5), // and 50% of heatmaps
-    ]
-})
-```
-
-### Or send no events while developing
-
-When working locally it can be useful to see what posthog would do, without actually sending the data to PostHog
-
-```ts
-posthog.init('<ph_project_api_key>', {
-    before_send: (event: CaptureResult): CaptureResult | null => {
-        console.log('posthog event: ' + event.event, event)
-        return null
-    }
-})
-```
-
-## Config
-
-When calling `posthog.init`, there are various configuration options you can set in addition to `loaded` and `api_host`.
-
-To configure these options, pass them as an object to the `posthog.init` call, like so:
-
-```ts
-posthog.init('<ph_project_api_key>', {
-    api_host: '<ph_client_api_host>',
-    loaded: function (posthog) {
-        posthog.identify('[user unique id]')
-    },
-    autocapture: false,
-    // ... more options
-})
-```
-
-There are multiple different configuration options, most of which you do not have to ever worry about. For brevity, only the most relevant ones are used here. However you can view all the configuration options in [the SDK's source code](https://github.com/PostHog/posthog-js/blob/921f5cfbfb0b33c1f862e81f99e0763d08ee69af/src/types.ts#L142-L254).
-
-Some of the most relevant options are:
-
-| Attribute                                                                                                                                                                                 | Description                                                                                                                    |
-| ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------ |
-| `api_host`<br/><br/>**Type:** String<br/>**Default:** `https://us.i.posthog.com`                                                                                                          | URL of your PostHog instance.                                                                                                  |
-| `ui_host`<br/><br/>**Type:** String<br/>**Default:** undefined                                                                                                                            | If using a [reverse proxy](/docs/advanced/proxy) for `api_host` then this should be the actual PostHog app URL (e.g. https://us.posthog.com). This ensures that links to PostHog point to the correct host. |
-| `autocapture`<br/><br/>**Type:** Boolean or AutocaptureConfig<br/>**Default:** `true`                                                                                                     | Determines if PostHog should [autocapture](#autocapture) events. This setting does not affect capturing pageview events (see `capture_pageview`).  [See below for `AutocaptureConfig`](#autocaptureconfig))          |
-| `bootstrap`<br/><br/>**Type:** Object<br/>**Default:** `{}`                                                                                                                               | An object containing the `distinctID`, `isIdentifiedID`, and `featureFlags` keys, where `distinctID` is a string, and `featureFlags` is an object of key-value pairs |
-| `capture_pageview`<br/><br/>**Type:** Boolean<br/>**Default:** `true`                                                                                                                     | Determines if PostHog should automatically capture pageview events.                                                            |
-| `capture_pageleave`<br/><br/>**Type:** Boolean<br/>**Default:** `true`                                                                                                                    | Determines if PostHog should automatically capture pageleave events.                                                            |
-| `capture_dead_clicks`<br/><br/>**Type:** Boolean<br/>**Default:** `true`                                                                                                                    | Determines if PostHog should automatically capture dead click events.                                                            |
-| `cross_subdomain_cookie`<br/><br/>**Type:** Boolean<br/>**Default:** `true`                                                                                                               | Determines if cookie should be set on the top level domain (example.com). If PostHog-js is loaded on a subdomain (test.example.com), _and_ `cross_subdomain_cookie` is set to false, it'll set the cookie on the subdomain only (test.example.com).                                                           |
-| `disable_persistence`<br/><br/>**Type:** Boolean<br/>**Default:** `false`                                                                                                                 | Disable persisting user data across pages. This will disable cookies, session storage and local storage.                       |
-| `disable_surveys`<br/><br/>**Type:** Boolean<br/>**Default:** `false`                                                                                                                     | Determines if surveys script should load which controls whether they show up for users, and whether requests for API surveys return valid data  |
-| `disable_session_recording`<br/><br/>**Type:** Boolean<br/>**Default:** `false`                                                                                                           | Determines if users should be opted out of session recording.                                                                  |
-| `enable_recording_console_log`<br/><br/>**Type:** Boolean<br/>**Default:** `false`                                                                                                        | Determines if console logs should be recorded as part of the session recording. [More information](/docs/session-replay/manual#console-logs-recording).                                               |
-| `enable_heatmaps`<br/><br/>**Type:** Boolean<br/>**Default:** undefined                                                                                                                   | Determines if heatmap data should be captured.                                                                                      |
-| `loaded`<br/><br/>**Type:** Function<br/>**Default:** `function () {}`                                                                                                                    | A function to be called once the PostHog scripts have loaded successfully.                                                     |
-| `mask_all_text`<br/><br/>**Type:** Boolean<br/>**Default:** `false`                                                                                                                       | Prevent PostHog autocapture from capturing any text from your elements.                                                        |
-| `mask_all_element_attributes`<br/><br/>**Type:** Boolean<br/>**Default:** `false`                                                                                                         | Prevent PostHog autocapture from capturing any attributes from your elements.                                                  |
-| `opt_out_capturing_by_default`<br/><br/>**Type:** Boolean<br/>**Default:** `false`                                                                                                        | Determines if users should be opted out of PostHog tracking by default, requiring additional logic to opt them into capturing by calling `posthog.opt_in_capturing`. |
-| `opt_out_persistence_by_default`<br/><br/>**Type:** Boolean<br/>**Default:** `false`                                                                                                      | Determines if users should be opted out of browser data storage by this PostHog instance by default, requiring additional logic to opt them into capturing by calling `posthog.opt_in_capturing`. |
-| `persistence`<br/><br/>**Type:** `localStorage` or `sessionStorage` or `cookie` or `memory` or `localStorage+cookie`<br/>**Default:** `localStorage+cookie`                               | Determines how PostHog stores information about the user. See [persistence](#persistence) for details.                         |
-| `property_denylist`<br/><br/>**Type:** Array<br/>**Default:** `[]`                                                                                                                        | A list of properties that should never be sent with `capture` calls.                                                           |
-| `person_profiles`<br /><br />**Type:** Enum: `always`, `identified_only`<br/>**Default:** `identified_only`                                                                                | Set whether events should capture identified events and process person profiles |
-| `rate_limiting`<br/><br/>**Type:** Object<br/>**Default:** `{ events_per_second: 10, events_burst_limit: events_per_second * 10 }`                                                        | Controls event rate limiting to help you avoid accidentally sending too many events. `events_per_second` determines how many events can be sent per second on average (default: 10). `events_burst_limit` sets the maximum events that can be sent at once (default: 10 times the `events_per_second` value). |
-| `sanitize_properties`<br/><br/>**Type:** Function<br/>**Default:** `null`                                                                                                                 | A function that allows you to sanitize or modify the properties that get sent. Example: `sanitize_properties: function(properties, event) { if(properties['$ip']) { properties['$ip'] = null } return properties }` |
-| `session_recording`<br/><br/>**Type:** Object<br/>**Default:** [See here.](https://github.com/PostHog/posthog-js/blob/96fa9339b9c553a1c69ec5db9d282f31a65a1c25/src/posthog-core.js#L1032) | Configuration options for recordings. More details [found here](/docs/session-replay/manual)         |
-| `session_idle_timeout_seconds`<br/><br/>**Type:** Integer<br/>**Default:** `1800`                                                                                                         | The maximum amount of time a session can be inactive before it is split into a new session.                                    |
-| `xhr_headers`<br/><br/>**Type:** Object<br/>**Default:** `{}`                                                                                                                             | Any additional headers you wish to pass with the XHR requests to the PostHog API.                                              |
-
-
-### Advanced configuration
-
-In this section we describe some additional details on advanced configuration available.
-
-| Attribute                                                                     | Description                                                                                                    |
-| ----------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------- |
-| `advanced_disable_decide`<br/><br/>**Type:** Boolean<br/>**Default:** `false` | Will completely disable the `/decide` endpoint request (and features that rely on it). More details below.     |
-| `advanced_disable_feature_flags`<br/><br/>**Type:** Boolean<br/>**Default:** `false` | Will keep `/decide` running, but without any feature flag requests     |
-| `advanced_disable_feature_flags_on_first_load`<br/><br/>**Type:** Boolean<br/>**Default:** `false` | Stops from firing feature flag requests on first page load. Only requests feature flags when user identity or properties are updated, or you manually request for flags to be loaded.  |
-| `feature_flag_request_timeout_ms`<br/><br/>**Type:** Integer<br/>**Default:** `3000` | Sets timeout for fetching feature flags  |
-| `secure_cookie` <br/><br/>**Type:** Boolean<br/>**Default:** `false`          | If this is `true`, PostHog cookies will be marked as secure, meaning they will only be transmitted over HTTPS. |
-| `custom_campaign_params` <br/><br/>**Type:** Array<br/>**Default:** `[]`      | List of query params to be automatically captured (see [UTM Segmentation](/docs/data/utm-segmentation) ) |
-
-<blockquote class="warning-note">
-    These are features for advanced users and may lead to unintended side effects if not reviewed carefully. If you are
-    unsure about something, just{' '}
-    <a href="/slack" target="_blank">
-        reach out
-    </a>
-    .
-</blockquote>
-
-### Disable `/decide` endpoint
-
-<blockquote>
-    This feature was introduced in posthog-js 1.10.0. Previously, disabling autocapture would inherently disable the
-    /decide endpoint altogether. This meant that disabling autocapture would inadvertenly turn off session recording,
-    feature flags, compression and the toolbar too.
-</blockquote>
-
-One of the very first things the PostHog library does when `init()` is called is make a request to the `/decide` endpoint on PostHog's backend. This endpoint contains information on how to run the PostHog library so events are properly received in the backend. This endpoint is required to run most features of the library (detailed below). However, if you're not using any of the described features, you may wish to turn off the call completely to avoid an extra request and reduce resource usage on both the client and the server.
-
-The `/decide` endpoint can be disabled by setting `advanced_disable_decide = true` in PostHog config.
-
-**Resources dependent on `/decide`**
-
-<blockquote class="warning-note">
-    These are features/resources that will be fully disabled when the /decide endpoint is disabled.
-</blockquote>
-
--   **Autocapture**. The `/decide` endpoint contains information on whether autocapture should be enabled or not (apart from local configuration).
--   **Session recording**. The endpoint contains information on where to send relevant session recording events.
--   **Compression**. The endpoint contains information on what compression methods are supported on the backend (e.g. LZ64, gzip) for event payloads.
--   **Feature flags**. The endpoint contains the feature flags enabled for the current person.
--   **Surveys**. The endpoint contains information on whether surveys should be enabled or not.
--   **Toolbar**. The endpoint contains authentication information and other toolbar capabilities information required to run it.
-
-Any custom event capturing (`posthog.capture`), `$identify`, `$set`, `$set_once` and basically any other calls not detailed above will work as expected when `/decide` is disabled.
-
-## AutocaptureConfig
-
-The `autocapture` config takes an object providing full control of autocapture's behavior.
-
-| Attribute                                                                                                                                                                                 | Description                                                                                                                    |
-| ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------ |
-| `url_allowlist`<br/><br/>**Type:** Array of Strings or Regexp<br/>**Default:** `undefined`                                                                                                          | List of URLs to enable autocapture on, can be string or regex matches e.g. `['https://example.com', 'test.com/.*']`. An empty list means no URLs are allowed for capture, `undefined` means all URLs are.                                                                                                 |
-| `dom_event_allowlist`<br/><br/>**Type:** Array of Strings <br/>**Default:** `undefined`                                                                                                          | An array of DOM events, like 'click', 'change', 'submit',  to enable autocapture on. An empty array means no events are enable for capture, `undefined` means all are.                                                                                            |
-| `element_allowlist`<br/><br/>**Type:** Array of Strings <br/>**Default:** `undefined`                                                                                                          | An array of DOM elements, like 'a', 'button', 'form', 'input', 'select', 'textarea', or 'label', to allow autocapture on. An empty array means no elements are enabled for capture, `undefined` means all elements are enabled.                                                                                            |
-| `css_selector_allowlist`<br/><br/>**Type:** Array of Strings <br/>**Default:** `undefined`                                                                                                          | An array of CSS selectors to enable autocapture on. An empty array means no CSS selectors are allowed for capture, `undefined` means all CSS selectors are.                                                                                            |
-| `element_attribute_ignorelist`<br/><br/>**Type:** Array of Strings <br/>**Default:** `undefined` |  An array of element attributes that autocapture will not capture. Both an empty array and `undefined` mean any of the attributes from the element are captured. |
-| `capture_copied_text`<br/><br/>**Type:** Boolean<br/>**Default:** `false` | When set to true, autocapture will capture the text of any element that is cut or copied. |
+> **Note:** You'll probably want to disable autocapture (and some other events) to avoid them from being sent to both instances. Check all of our [config options](/docs/libraries/js/config) to better understand that.
 
 ## Debugging
 
-In your dev console you can run `posthog.debug()`. This will enable debugging, easily allowing you to see all data that is being sent to PostHog.
+To see all the data that is being sent to PostHog, you can run `posthog.debug()` in your dev console or set the `debug` option to `true` in the `init` call.
 
 ## Development
 

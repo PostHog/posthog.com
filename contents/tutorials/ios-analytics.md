@@ -231,7 +231,7 @@ To test this, press logout, fill the form in and press login. Then, in the home 
   classes="rounded"
 />
 
-Lastly, when the user logs out, you should call [`PostHogSDK.shared.reset()`](https://posthog.com/docs/libraries/ios#reset). This resets the PostHog ID and ensures that events are associated to the correct user.
+Lastly, when the user logs out, you should call [`PostHogSDK.shared.reset()`](/docs/libraries/ios#reset). This resets the PostHog ID and ensures that events are associated to the correct user.
 ```swift file=ContentView.swift
      Button("Logout") {
                 isAuthenticated = false
@@ -274,7 +274,7 @@ In this tutorial, we create a simple trend insight:
 2. Under the **Series** header select the `home_button_clicked` event. 
 3. Click the **Total count** dropdown to change how events are aggregated. You can choose options such as `Count per user`, `Unique users`, `Unique company(s)`, and more. You can also add filters or breakdown based on properties. 
 
-For example, in the image below we set our insight to show number of unique users that captured the `home_button_clicked` event where the toggled is enabed:
+For example, in the image below we set our insight to show number of unique users that captured the `home_button_clicked` event where the toggled is enabled:
 
 <ProductScreenshot
   imageLight={InsightLight} 

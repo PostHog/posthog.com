@@ -73,7 +73,6 @@ export function PHProvider({ children }) {
   useEffect(() => {
     posthog.init('<ph_project_api_key>', {
       api_host: '<ph_client_api_host>',
-      person_profiles: 'identified_only'
     })
   }, []);
   return <PostHogProvider client={posthog}>{children}</PostHogProvider>
@@ -194,7 +193,7 @@ export default function Home() {
   // rest of your existing code
 ```
 
-Lastly, when a user log outs we call [`posthog.reset()`](/docs/libraries/js#reset-after-logout) to unlink any future events. Update the `handleLogout` function in `recipe-builder/page.js` to do this:
+Lastly, when a user log outs we call [`posthog.reset()`](/docs/libraries/js/features#resetting-a-user) to unlink any future events. Update the `handleLogout` function in `recipe-builder/page.js` to do this:
 
 ```js file=recipe-builder/page.js
   // existing code...

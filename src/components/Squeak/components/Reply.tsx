@@ -1,5 +1,5 @@
 import React, { useContext, useMemo, useState } from 'react'
-import { useUser } from 'hooks/useUser'
+import { User, useUser } from 'hooks/useUser'
 import Days from './Days'
 import Markdown from './Markdown'
 import { StrapiRecord, ReplyData } from 'lib/strapi'
@@ -9,10 +9,23 @@ import { CurrentQuestionContext } from './Question'
 import Link from 'components/Link'
 import Logomark from 'components/Home/images/Logomark'
 import { CallToAction } from 'components/CallToAction'
-import { IconArchive, IconCheck, IconInfo, IconThumbsDown, IconThumbsUp, IconTrash } from '@posthog/icons'
+import {
+    IconArchive,
+    IconCheck,
+    IconInfo,
+    IconPencil,
+    IconThumbsDown,
+    IconThumbsDownFilled,
+    IconThumbsUp,
+    IconThumbsUpFilled,
+    IconTrash,
+} from '@posthog/icons'
 import usePostHog from 'hooks/usePostHog'
 import { IconFeatures } from '@posthog/icons'
 import Tooltip from 'components/Tooltip'
+import EditWrapper from './EditWrapper'
+import { Authentication } from '..'
+import SideModal from 'components/Modal/SideModal'
 
 type ReplyProps = {
     reply: StrapiRecord<ReplyData>
@@ -168,8 +181,9 @@ const AIDisclaimer = ({ replyID, mutate, topic, confidence, resolvable }) => {
                         return (
                             <li className="ml-2 mt-2" key={label}>
                                 <button
-                                    className={`click px-3 py-1 bg-white dark:bg-dark rounded-full text-sm font-semibold border ${helpful ? 'border-green' : 'border-red'
-                                        }`}
+                                    className={`click px-3 py-1 bg-white dark:bg-dark rounded-full text-sm font-semibold border ${
+                                        helpful ? 'border-green' : 'border-red'
+                                    }`}
                                     onClick={() => handleHelpful(helpful, label)}
                                 >
                                     {label}
@@ -183,10 +197,93 @@ const AIDisclaimer = ({ replyID, mutate, topic, confidence, resolvable }) => {
     )
 }
 
+const AuthModal = ({
+    authModalOpen,
+    setAuthModalOpen,
+    onAuth,
+}: {
+    authModalOpen: boolean
+    setAuthModalOpen: React.Dispatch<React.SetStateAction<boolean>>
+    onAuth: (user: User) => void
+}) => {
+    return (
+        <SideModal open={authModalOpen} setOpen={setAuthModalOpen}>
+            <h4 className="mb-4">Sign into PostHog.com</h4>
+            <div className="bg-border dark:bg-border-dark p-4 mb-2">
+                <p className="text-sm mb-2">
+                    <strong>Note: PostHog.com authentication is separate from your PostHog app.</strong>
+                </p>
+
+                <p className="text-sm mb-0">
+                    We suggest signing up with your personal email. Soon you'll be able to link your PostHog app
+                    account.
+                </p>
+            </div>
+
+            <Authentication onAuth={onAuth} initialView="sign-in" showBanner={false} showProfile={false} />
+        </SideModal>
+    )
+}
+
+const VoteButton = ({
+    id,
+    type,
+    voted,
+    votes,
+    onVote,
+}: {
+    id: number
+    type: 'up' | 'down'
+    voted: boolean
+    votes: number
+    onVote: () => void
+}) => {
+    const [authModalOpen, setAuthModalOpen] = useState(false)
+    const { voteReply, user } = useUser()
+
+    const vote = async (user: User) => {
+        await voteReply(id, type, user)
+        onVote?.()
+    }
+
+    const handleClick = () => {
+        if (!user) {
+            setAuthModalOpen(true)
+        } else {
+            vote(user)
+        }
+    }
+
+    const Icon =
+        type === 'up' ? (voted ? IconThumbsUpFilled : IconThumbsUp) : voted ? IconThumbsDownFilled : IconThumbsDown
+
+    return (
+        <>
+            <AuthModal
+                authModalOpen={authModalOpen}
+                setAuthModalOpen={setAuthModalOpen}
+                onAuth={(user) => {
+                    if (user) {
+                        vote(user)
+                        setAuthModalOpen(false)
+                    }
+                }}
+            />
+            <button
+                onClick={handleClick}
+                className="text-red dark:text-yellow font-semibold text-sm flex items-center py-1 px-1.5 rounded hover:bg-accent dark:hover:bg-border-dark/50"
+            >
+                <Icon className="size-4 mr-1 text-primary/70 dark:text-primary-dark/70 inline-block" />
+                {votes}
+            </button>
+        </>
+    )
+}
+
 export default function Reply({ reply, badgeText }: ReplyProps) {
     const {
         id,
-        attributes: { body, createdAt, profile, publishedAt, meta },
+        attributes: { body, createdAt, profile, publishedAt, meta, edits },
     } = reply
 
     const {
@@ -201,6 +298,7 @@ export default function Reply({ reply, badgeText }: ReplyProps) {
     const { user } = useUser()
     const isModerator = user?.role?.type === 'moderator'
     const isAuthor = user?.profile?.id === questionProfile?.data?.id
+    const isReplyAuthor = user?.profile?.id === profile?.data?.id
     const isTeamMember = profile?.data?.attributes?.teams?.data?.length > 0
     const resolvable =
         !resolved &&
@@ -222,6 +320,19 @@ export default function Reply({ reply, badgeText }: ReplyProps) {
 
     const pronouns = profile?.data?.attributes?.pronouns
     const helpful = useMemo(() => reply?.attributes?.helpful, [])
+    const upvoted = useMemo(
+        () => reply?.attributes?.upvoteProfiles?.data?.some((profile) => profile?.id === user?.profile?.id),
+        [reply?.attributes?.upvoteProfiles, user?.profile?.id]
+    )
+    const downvoted = useMemo(
+        () => reply?.attributes?.downvoteProfiles?.data?.some((profile) => profile?.id === user?.profile?.id),
+        [reply?.attributes?.downvoteProfiles, user?.profile?.id]
+    )
+    const upvotes = useMemo(() => reply?.attributes?.upvoteProfiles?.data?.length, [reply?.attributes?.upvoteProfiles])
+    const downvotes = useMemo(
+        () => reply?.attributes?.downvoteProfiles?.data?.length,
+        [reply?.attributes?.downvoteProfiles]
+    )
 
     return profile?.data ? (
         <div onClick={handleContainerClick}>
@@ -268,8 +379,9 @@ export default function Reply({ reply, badgeText }: ReplyProps) {
                     >
                         <div className="mr-2 relative ml-[-2px]">
                             <Avatar
-                                className={`w-[25px] h-[25px] rounded-full ${profile?.data.attributes.color ? `bg-${profile.data.attributes.color}` : ''
-                                    }`}
+                                className={`w-[25px] h-[25px] rounded-full ${
+                                    profile?.data.attributes.color ? `bg-${profile.data.attributes.color}` : ''
+                                }`}
                                 image={getAvatarURL(profile?.data?.attributes)}
                                 color={profile?.data.attributes.color}
                             />
@@ -288,7 +400,7 @@ export default function Reply({ reply, badgeText }: ReplyProps) {
                         {badgeText}
                     </span>
                 )}
-                <Days created={createdAt} />
+                <Days created={createdAt} edits={edits} profile={profile?.data} />
                 {resolved && resolvedBy?.data?.id === id && (
                     <>
                         <span className="border rounded-sm text-[#008200cc] text-xs font-semibold py-0.5 px-1 uppercase">
@@ -326,66 +438,104 @@ export default function Reply({ reply, badgeText }: ReplyProps) {
                             resolvable={resolvable}
                         />
                     ))}
-                <div className={reply?.attributes?.helpful === false || !publishedAt ? 'opacity-70' : ''}>
-                    {reply?.attributes?.helpful === false && (
-                        <div className="p-2 rounded border border-light dark:border-dark mb-2 text-sm bg-accent dark:bg-accent-dark">
-                            <IconInfo className="size-5 inline-block" /> This answer was marked as unhelpful and is only
-                            visible to you.
-                        </div>
-                    )}
-                    <Markdown>{body}</Markdown>
-                </div>
-                {profile.data.id === Number(process.env.GATSBY_AI_PROFILE_ID) && helpful && (
-                    <div className="border-t border-light dark:border-dark pt-2 mt-2">
-                        <p className="m-0 text-sm text-primary/60 dark:text-primary-dark/60 pb-4">
-                            Max AI's response was generated by{' '}
-                            <Link to="https://inkeep.com?utm_source=posthog" externalNoIcon>
-                                Inkeep
-                            </Link>
-                            . Double-check for accuracy.
-                        </p>
-                    </div>
-                )}
-
-                {(isModerator || resolvable) && (
-                    <div className={`flex ${isModerator ? 'justify-end border-t border-light dark:border-dark' : ''}  mt-4 -mb-4 pt-1 pb-2`}>
-                        {!isModerator && resolvable && (
-                            <div className="-mt-4 -ml-1">
-                                <button
-                                    onClick={() => handleResolve(true, id)}
-                                    className="text-red dark:text-yellow font-semibold text-sm flex items-center py-1 px-1.5 rounded hover:bg-accent dark:hover:bg-border-dark/50"
+                <EditWrapper data={reply} type="reply" onSubmit={() => mutate()}>
+                    {({ setEditing }) => {
+                        return (
+                            <>
+                                <div
+                                    className={reply?.attributes?.helpful === false || !publishedAt ? 'opacity-70' : ''}
                                 >
-                                    <IconCheck className="size-4 mr-1 text-green inline-block" />
-                                    Mark as solution
-                                </button>
-                            </div>
-                        )}
-                        {isModerator && (
-                            <div className="inline-flex space-x-1 bg-light dark:bg-dark px-1 mr-4 -mt-5">
-                                {resolvable && (
-                                    <button
-                                        onClick={() => handleResolve(true, id)}
-                                        className="text-red dark:text-yellow font-semibold text-sm flex items-center py-1 px-1.5 rounded hover:bg-accent dark:hover:bg-border-dark/50"
-                                    >
-                                        <IconCheck className="size-4 mr-1 text-green inline-block" />
-                                        Mark as solution
-                                    </button>
+                                    {reply?.attributes?.helpful === false && (
+                                        <div className="p-2 rounded border border-light dark:border-dark mb-2 text-sm bg-accent dark:bg-accent-dark">
+                                            <IconInfo className="size-5 inline-block" /> This answer was marked as
+                                            unhelpful.
+                                        </div>
+                                    )}
+                                    <Markdown>{body}</Markdown>
+                                    {!publishedAt && isModerator && (
+                                        <p className="font-bold text-sm mt-2 mb-4 italic p-2 bg-accent dark:bg-accent-dark border border-light dark:border-dark rounded">
+                                            This reply is unpublished and only visible to moderators
+                                        </p>
+                                    )}
+                                </div>
+                                {profile.data.id === Number(process.env.GATSBY_AI_PROFILE_ID) && helpful && (
+                                    <div className="border-t border-light dark:border-dark pt-2 mt-2">
+                                        <p className="m-0 text-sm text-primary/60 dark:text-primary-dark/60 pb-4">
+                                            Max AI's response was generated by{' '}
+                                            <Link to="https://inkeep.com?utm_source=posthog" externalNoIcon>
+                                                Inkeep
+                                            </Link>
+                                            . Double-check for accuracy.
+                                        </p>
+                                    </div>
                                 )}
-                                <button
-                                    onClick={() => handlePublishReply(!!publishedAt, id)}
-                                    className="text-red dark:text-yellow font-semibold text-sm flex items-center py-1 px-1.5 rounded hover:bg-accent dark:hover:bg-border-dark/50"
+
+                                <div
+                                    className={`flex ${
+                                        isModerator ? 'justify-end border-t border-light dark:border-dark mt-4' : ''
+                                    } mt-1 pt-1 pb-2`}
                                 >
-                                    <IconArchive className="size-4 mr-1 text-primary/50 dark:text-primary-dark/50 inline-block" />
-                                    {publishedAt ? 'Unpublish' : 'Publish'}
-                                </button>
-                                <button onClick={handleDelete} className="text-red font-semibold text-sm flex items-center py-1 px-1.5 rounded hover:bg-accent dark:hover:bg-border-dark/50">
-                                    <IconTrash className="size-4 mr-1 text-primary/50 dark:text-primary-dark/50 inline-block" />
-                                    {confirmDelete ? 'Click again to confirm' : 'Delete'}
-                                </button>
-                            </div>
-                        )}
-                    </div>
-                )}
+                                    <div
+                                        className={`inline-flex space-x-1 ${
+                                            isModerator ? `bg-light dark:bg-dark px-1 mr-4 -mt-5` : ''
+                                        }`}
+                                    >
+                                        <VoteButton
+                                            id={id}
+                                            type="up"
+                                            voted={upvoted}
+                                            votes={upvotes}
+                                            onVote={() => mutate()}
+                                        />
+                                        <VoteButton
+                                            id={id}
+                                            type="down"
+                                            voted={downvoted}
+                                            votes={downvotes}
+                                            onVote={() => mutate()}
+                                        />
+                                        {isReplyAuthor && (
+                                            <button
+                                                onClick={() => setEditing(true)}
+                                                className="text-red dark:text-yellow font-semibold text-sm flex items-center py-1 px-1.5 rounded hover:bg-accent dark:hover:bg-border-dark/50"
+                                            >
+                                                <IconPencil className="size-4 mr-1 text-primary/70 dark:text-primary-dark/70 inline-block" />
+                                                Edit
+                                            </button>
+                                        )}
+                                        {(isModerator || resolvable) && (
+                                            <button
+                                                onClick={() => handleResolve(true, id)}
+                                                className="text-red dark:text-yellow font-semibold text-sm flex items-center py-1 px-1.5 rounded hover:bg-accent dark:hover:bg-border-dark/50"
+                                            >
+                                                <IconCheck className="size-4 mr-1 text-green inline-block" />
+                                                Mark as solution
+                                            </button>
+                                        )}
+                                        {isModerator && (
+                                            <button
+                                                onClick={() => handlePublishReply(!!publishedAt, id)}
+                                                className="text-red dark:text-yellow font-semibold text-sm flex items-center py-1 px-1.5 rounded hover:bg-accent dark:hover:bg-border-dark/50"
+                                            >
+                                                <IconArchive className="size-4 mr-1 text-primary/50 dark:text-primary-dark/50 inline-block" />
+                                                {publishedAt ? 'Unpublish' : 'Publish'}
+                                            </button>
+                                        )}
+                                        {isModerator && (
+                                            <button
+                                                onClick={handleDelete}
+                                                className="text-red font-semibold text-sm flex items-center py-1 px-1.5 rounded hover:bg-accent dark:hover:bg-border-dark/50"
+                                            >
+                                                <IconTrash className="size-4 mr-1 text-primary/50 dark:text-primary-dark/50 inline-block" />
+                                                {confirmDelete ? 'Click again to confirm' : 'Delete'}
+                                            </button>
+                                        )}
+                                    </div>
+                                </div>
+                            </>
+                        )
+                    }}
+                </EditWrapper>
             </div>
         </div>
     ) : null

@@ -1,17 +1,10 @@
 ---
-title: Data model
+title: "Data model: fields"
 ---
 
-This provides a high-level overview of the various objects and primitives that make up the PostHog data model. 
+Here's a look at the fields on each data type. To learn more about how to think about data in PostHog, see [understanding PostHog](/docs/new-to-posthog/understand-posthog).
 
-The two most basic entities in PostHog are the [event](#event) and [person](#person) objects. They represent the core of our analytics functionalities.
-
-
-> **Further reading:** [How data is stored in ClickHouse](/docs/how-posthog-works/clickhouse)
-
-## Event
-
-An [event](/docs/data/events) is the most important object in PostHog. It represents a single action that a user performed at a specific point in time. These events are sent either from one of our [SDKs](/docs/libraries) or directly via our [API](/docs/api).
+## Event fields
 
 Each event contains the following base fields within ClickHouse:
 
@@ -32,9 +25,7 @@ Each event contains the following base fields within ClickHouse:
 
 Events are _only_ stored within ClickHouse, and once they have been written they can't be changed. This limitation comes from a trade-off in the design of ClickHouse: inserting data and running queries on large tables is extremely fast, but updating or deleting specific rows is generally not efficient.
 
-## Person
-
-In PostHog, a [person](/docs/data/persons) is an entity which sends events and typically represents a user in most implementations.
+## Person fields
 
 Each person contains the following base fields within PostgreSQL:
 
@@ -52,5 +43,3 @@ Persons are stored in PostgreSQL but are additionally replicated into ClickHouse
 Person properties are also stored directly on each event. Their value is determined during ingestion by looking up the person who sent the event in PostgreSQL and combining these values with any updates from the event itself.
 
 The `properties` field on each person object can be updated at any time. As a result, the PostgreSQL table represents the one source of truth for the most up-to-date values for the properties of a person.
-
-> **Further reading:** [How person properties are added to events](/docs/how-posthog-works/ingestion-pipeline#2-person-processing)

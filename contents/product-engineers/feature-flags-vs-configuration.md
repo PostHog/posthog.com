@@ -133,6 +133,8 @@ You can find more comparisons on [our feature flag comparisons page](/feature-fl
 
 ## Further reading
 
+> **Want to get started with remote configs?** We wrote tutorials on how to set them up for [iOS](/tutorials/ios-remote-config), [Android](/tutorials/android-remote-config), [React Native](/tutorials/react-native-remote-config), and even [Flutter](/tutorials/flutter-remote-config).
+
 - [Why use feature flags? Benefits, types and use cases, explained](/blog/feature-flag-benefits-use-cases)
 - [Feature flag best practices and tips (with examples)](/blog/feature-flag-best-practices)
 - [How to do a canary release with feature flags in PostHog](/tutorials/canary-release)

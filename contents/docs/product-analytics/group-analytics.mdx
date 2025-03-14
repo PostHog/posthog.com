@@ -12,7 +12,7 @@ import JSGroupsVSCohorts from "../\_snippets/groups-vs-cohorts.mdx"
 import JSCreateGroups from "../\_snippets/how-to-create-groups.mdx"
 import JSSetGroupProperties from "../\_snippets/setting-group-properties.mdx"
 import JSLinkEventsToGroups from "../\_snippets/how-to-link-events-to-groups.mdx"
-
+import JSGroupsUseCases from "../\_snippets/groups-use-cases.mdx"
 export const viewGroupLight = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/user-guides/group-analytics/view-groups-light-mode.png"
 export const viewGroupDark = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/user-guides/group-analytics/view-groups-dark-mode.png"
 export const relatedLight = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/user-guides/group-analytics/related-people-and-groups-light-mode.png"
@@ -26,7 +26,16 @@ export const groupsInFeatureDark = "https://res.cloudinary.com/dmukukwp6/video/u
 export const groupsProjectSettingLight = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/user-guides/group-analytics/groups-project-settings-light-mode.png"
 export const groupsProjectSettingDark = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/user-guides/group-analytics/groups-project-settings-dark-mode.png"
 
+<iframe
+    src="https://www.youtube-nocookie.com/embed/9mCWbVNzn4c"
+    className="rounded shadow-xl"
+/>
+
 <JSGroupsIntro />
+
+## Use cases
+
+<JSGroupsUseCases />
 
 ## The difference between groups and cohorts
 
@@ -90,7 +99,7 @@ curl -v -L --header "Content-Type: application/json" -d '{
     "properties": {
         "$groups": {"company": "company_id_in_your_db"}
     }
-}' <ph_client_api_host>/capture/
+}' <ph_client_api_host>/i/v0/e/
 ```
 
 </MultiLanguage >
@@ -215,7 +224,7 @@ You can change how group types are displayed in the insights interface and throu
 -   Groups are not currently supported for the following insights:
     -   Lifecycle - Expected soon.
     -   User paths - These only support user level analytics.
--   Only groups with known properties are shown under 'Persons & groups'.
+-   Only groups with known properties are shown under [People and groups](https://us.posthog.com/persons) .
 - Currently there is no functionality within the app to delete groups. If you need to delete a group for privacy or security reasons, please [use the support modal](https://app.posthog.com/home#supportModal=support%3Adata_management).
 
 ## Further reading

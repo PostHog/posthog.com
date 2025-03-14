@@ -36,7 +36,7 @@ If you’ve set up Google Analytics, PostHog’s setup won’t look too differen
 <!-- PostHog snippet -->
 <script>
     !function(t,e){var o,n,p,r;e.__SV||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}(p=t.createElement("script")).type="text/javascript",p.crossOrigin="anonymous",p.async=!0,p.src=s.api_host+"/static/array.js",(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r);var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString(1)+".people (stub)"},o="capture identify alias people.set people.set_once set_config register register_once unregister opt_out_capturing has_opted_out_capturing opt_in_capturing reset isFeatureEnabled onFeatureFlags getFeatureFlag getFeatureFlagPayload reloadFeatureFlags group updateEarlyAccessFeatureEnrollment getEarlyAccessFeatures getActiveMatchingSurveys getSurveys getNextSurveyStep".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
-    posthog.init('<ph_project_api_key>',{api_host:'<ph_client_api_host>', person_profiles: 'identified_only'})
+    posthog.init('<ph_project_api_key>',{api_host:'<ph_client_api_host>'})
 </script>
 
 <!-- Google tag (gtag.js) -->
@@ -165,7 +165,7 @@ You can then use all of this data in your insights. For example, you can aggrega
 
 Like Google Analytics, each of the event series, insights, and dashboards is filterable. Filters are largely created with our version of "dimensions," named [properties](/docs/data/events#event-properties). 
 
-Properties are keys and values set on events, persons, and groups adding more details about them. For example, the pageview event contains properties for the timestamp, OS, browser, current URL, referring domain, geographic data, and more. PostHog automatically adds some properties, but if you capture [custom events](/docs/libraries/js#send-custom-events-with-posthogcapture), you can also send as many custom properties as you want.
+Properties are keys and values set on events, persons, and groups adding more details about them. For example, the pageview event contains properties for the timestamp, OS, browser, current URL, referring domain, geographic data, and more. PostHog automatically adds some properties, but if you capture [custom events](/docs/libraries/js/features#custom-event-capture), you can also send as many custom properties as you want.
 
 ```js
 posthog.capture('signed up', {email: 'ian@posthog.com', paid: true});
@@ -231,13 +231,13 @@ This makes it an easy way to track new and returning visitors to your website, a
 
 ## Added benefits of PostHog
 
-- Easy [custom event capture](/docs/libraries/js#send-custom-events-with-posthogcapture) with nearly limitless custom properties.
+- Easy [custom event capture](/docs/libraries/js/features#custom-event-capture) with nearly limitless custom properties.
 
 - [Session replays](/docs/session-replay) with visuals of actual user behavior on your site and performance stats.
 
 - [Data connections](/docs/cdp) to import events from sources [Segment](/cdp/segment) and to export to destinations like [BigQuery](/cdp/bigquery-export) and [Snowflake](/cdp/snowflake-export).
 
-- Direct SQL querying and customization with [HogQL](/docs/product-analytics/hogql).
+- Direct [SQL querying](/docs/product-analytics/sql) and customization.
 
 - Free for 1 million events and 5,000 session recordings per month, see [pricing for more](/pricing).
 

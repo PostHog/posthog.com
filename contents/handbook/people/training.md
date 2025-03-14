@@ -31,4 +31,4 @@ If possible, please share your learnings with the team afterwards!
 
 Time spent talking at conferences and user groups, and time spent coaching others at organizations like [Code Nation](https://codenation.org/), is part of your training. You're not expected to use your own time for this. We think that activities like these help you get better at your job, advertise PostHog, and help increase the diversity of the tech industry - all things we value! 
 
-It is expected that that you would spend up to half a day a month on these activities. Like the training budget, this isn't a hard limit. If you think you need more than that talk to your manager.
+It is expected that you would spend up to half a day a month on these activities. Like the training budget, this isn't a hard limit. If you think you need more than that talk to your manager.

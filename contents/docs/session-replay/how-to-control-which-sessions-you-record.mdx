@@ -19,7 +19,7 @@ There are several ways to control which sessions you record:
 1. Ensure your domain is added to the [authorized domains list](https://us.posthog.com/settings/project-replay#replay-authorized-domains).
 
 
-2. Set `disable_session_recording: true` in your [config](/docs/integrate/client/js/#config).
+2. Set `disable_session_recording: true` in your [config](/docs/libraries/js/config).
 
 ```js-web
 posthog.init('<ph_project_api_key>', {
@@ -30,6 +30,21 @@ posthog.init('<ph_project_api_key>', {
 ```
 
 3. Manually start recording by calling `posthog.startSessionRecording()`. Similarly, you can stop the recording at any point by calling `posthog.stopSessionRecording()`.
+
+By default, `startSessionRecording` obeys any ingestion controls you've set - so you might call start and not record a session because of sampling or some other control.
+
+You can pass override options to `startSessionRecording` to change this. 
+
+```
+posthog.startSessionRecording(true) // start ignoring all ingestion controls
+posthog.startSessionRecording({
+  // you don't have to send all of these
+  sampling: true || false; 
+  linked_flag: true || false; 
+  url_trigger: true || false; 
+  event_trigger: true || false 
+})
+```
 
 ## With URL trigger conditions
 

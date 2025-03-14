@@ -1,0 +1,52 @@
+---
+title: Remote config
+sidebar: Docs
+showTitle: true
+availability:
+    free: full
+    selfServe: full
+    enterprise: full
+---
+
+Boolean and multivariate flags are helpful for dynamic values that differ from user to user, but sometimes you need a simple way to pass configuration related to your application without having to make code changes or redeploy your app.
+
+Remote config flags enable you to configure a simple flag that always returns the same payload wherever it is called:
+
+<MultiLanguage>
+
+```js-web
+const themedLogoUrl = posthog.getFeatureFlagPayload('company-holiday-logo-url')
+```
+
+```node
+const remoteConfigValue = posthog.getFeatureFlagPayload({
+    key: 'current-chat-completion-model',
+    distinctId: '_irrelevant_',
+})
+```
+
+```ios_swift
+let themedLogoUrl = PostHogSDK.shared.getFeatureFlagPayload('company-holiday-logo-url')
+```
+
+```android_kotlin
+val themedLogoUrl = PostHog.getFeatureFlagPayload('company-holiday-logo-url')
+```
+
+```react-native
+const themedLogoUrl = useFeatureFlagWithPayload('company-holiday-logo-url')
+```
+
+```flutter
+final themedLogoUrl = await Posthog().getFeatureFlagPayload('company-holiday-logo-url')
+```
+
+</MultiLanguage>
+
+You can think of remote config flags as multivariate flags with a single variant which is served for all flag requests. By default, enabled remote config flags roll out to 100% of all users.
+
+> **Note**: Remote config flags are meant to always serve payloads and be called with the flag payload function in each SDK. If `getFeatureFlag` is called instead, the SDK simply returns `true`
+
+## Related
+
+- [Feature flags vs configuration: Which should you choose?](/product-engineers/feature-flags-vs-configuration)

@@ -1115,7 +1115,8 @@ ul {
     animation-iteration-count: infinite;
 }
 
-.mermaid {
+.mermaid-container {
+    @apply my-4;
     .messageText,
     tspan {
         @apply dark:!fill-white;
@@ -1482,7 +1483,7 @@ iframe[src*='youtube-nocookie.com'] {
 }
 
 .squeak-left-border {
-    @apply before:border-l before:border-b before:border-solid before:border-light dark:before:border-dark before:rounded-bl-md before:h-[20px] before:top-0 before:absolute before:w-[30px] before:-left-px;
+    @apply before:border-l before:border-b before:border-solid before:border-light dark:before:border-dark before:rounded-bl-md before:h-[20px] before:top-0 before:absolute before:w-[30px] before:left-0;
 }
 
 li.squeak-left-border {
@@ -1700,5 +1701,11 @@ li.squeak-left-border {
         code {
             @apply whitespace-nowrap text-sm;
         }
+    }
+}
+
+.image-slider {
+    .slick-slide {
+        @apply pt-0;
     }
 }

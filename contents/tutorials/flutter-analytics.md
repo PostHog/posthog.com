@@ -412,7 +412,7 @@ To test this, press logout, fill the form in and press login. Then, in the home 
   classes="rounded"
 />
 
-Lastly, when the user logs out, you should call [`Posthog().reset()`](https://posthog.com/docs/libraries/flutter#reset). This resets the PostHog ID and ensures that events are associated to the correct user.
+Lastly, when the user logs out, you should call [`Posthog().reset()`](/docs/libraries/flutter#reset). This resets the PostHog ID and ensures that events are associated to the correct user.
 ```dart file=main.dart
 class _HomePageState extends State<HomePage> {
     // ...

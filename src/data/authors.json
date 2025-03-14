@@ -373,5 +373,13 @@
         "link_type": "linkedin",
         "link_url": "https://www.linkedin.com/in/danielbachhuber/",
         "profile_id": 31992
+    },
+    {
+        "handle": "kevan-gilbert",
+        "name": "Kevan Gilbert",
+        "role": "Product Marketer",
+        "link_type": "linkedin",
+        "link_url": "https://www.linkedin.com/in/kevangilbert/",
+        "profile_id": 32499
     }
 ]

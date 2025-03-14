@@ -35,7 +35,7 @@ Autocapture can also capture non-event data like session duration, mouse movemen
 
 Although autocapture is a great way to get started, it can be limiting for more advanced event tracking. This is for three reasons:
 
-1. **Lack of signal**. Since autocapture captures everything, it can be difficult to know what events matter, especially for high-traffic sites and apps. You need to have an idea of what you care about and then use filters, [actions](/docs/data/actions), and [insights](/docs/product-analytics/insights) to focus on it. The web analytics dashboard does this well.
+1. **Lack of signal**. Since autocapture captures everything, it can be difficult to know what events matter, especially for high-traffic sites and apps. You need to have an idea of what you care about and then use filters, [actions](/docs/data/actions), and [insights](/docs/product-analytics/insights) to focus on it. The [web analytics dashboard](/docs/web-analytics/dashboard) does this well.
 
 2. **Frontend only**. Autocapture only works on the frontend. This enables you to capture events from your website or app, but not your server.
 
@@ -45,7 +45,7 @@ Although autocapture is a great way to get started, it can be limiting for more 
 
 In addition to autocapture, PostHog enables you to set up custom events in your product. This enables you to capture whatever data you want wherever in your codebase. This ensures correct and comprehensive event tracking.
 
-To set up custom events, first you need to install the SDK for the language you are using. We have built SDKs for a range of languages and frameworks including [Node](/docs/libraries/node), [Python](/docs/libraries/python), [iOS](/docs/libraries/ios), [Android](/docs/libraries/android), and more. You can even use our [capture API](/docs/api/capture) directly.
+To set up custom events, first you need to install the SDK for the language you are using. We have built SDKs for a range of languages and frameworks including [Node](/docs/libraries/node), [Python](/docs/libraries/python), [iOS](/docs/libraries/ios), [Android](/docs/libraries/android), and more. You can even use our [event capture API](/docs/api/capture) directly.
 
 For example, with Python (and frameworks like [Django](/docs/libraries/django) or [Flask](/docs/libraries/flask)), setting up custom events starts with installing the PostHog with `pip` (or your package manager of choice). 
 
@@ -99,7 +99,7 @@ To best capture data about users, you must understand who they are.
 
 Every event you capture must have a user distinct ID. Autocapture handles this for you, while custom events require you to do this yourself. Examples of identifiers for users include `UUID` values and emails.
 
-To connect an anonymous user distinct ID created by autocapture with a user distinct ID you created, you can use the [`identify`])(/docs/product-analytics/identify)  method:
+To connect an anonymous user distinct ID created by autocapture with a user distinct ID you created, you can use the [`identify`](/docs/product-analytics/identify)  method:
 
 ```js
 function loginRequest(user) {

@@ -56,7 +56,7 @@ You won’t see any UI changes as a result of this change — persons will still
 
 ![count events per user](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/array/1-41-0-count-events-per-user.png)
 
-Have you ever asked yourself '*What's the average average number of purchases per user?*' or '*What's the maximum number of forms submitted per user?'* 
+Have you ever asked yourself '*What's the average number of purchases per user?*' or '*What's the maximum number of forms submitted per user?'* 
 
 Questions like these used to be hard to answer with PostHog, but no more! Use the new "Count per user" aggregation mode available in Trends to analyze _how intensely_ your users use the product and its features. "Count per user" supports common statistical functions for crunching the per-user numbers: average, median, minimum, maximum, 90th/95th/99th percentile.
 
@@ -88,7 +88,7 @@ We've added a new page to the Data Management section which lists warnings relat
 
 ![app metrics](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/array/1-41-0-app-metrics-insight.png)
 
-Curious how well your apps are doing? Previously, you may have had to pour over the AWS logs, but now you can head to the new app metrics page to find out how many events an app has processed, how many retries were attempted and what errors may have occured. Very handy. Want to take a look? Head to the apps page in your instance and click the chart symbol for any installed app.  
+Curious how well your apps are doing? Previously, you may have had to pour over the AWS logs, but now you can head to the new app metrics page to find out how many events an app has processed, how many retries were attempted and what errors may have occurred. Very handy. Want to take a look? Head to the apps page in your instance and click the chart symbol for any installed app.  
 
 App metrics are only available for users on Scale or Enterprise plans. 
 

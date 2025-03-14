@@ -59,7 +59,6 @@ export function PHProvider({ children }) {
   useEffect(() => {
     posthog.init(process.env.NEXT_PUBLIC_POSTHOG_KEY, {
       api_host: process.env.NEXT_PUBLIC_POSTHOG_HOST,
-      person_profiles: 'identified_only'
     })
   }, []);
 
@@ -199,7 +198,6 @@ Once done, you should see pageview events for individual pages in your PostHog i
 > ```js
 > posthog.init(process.env.NEXT_PUBLIC_POSTHOG_KEY, {
 >   api_host: process.env.NEXT_PUBLIC_POSTHOG_HOST,
->   person_profiles: 'identified_only',
 >   capture_pageview: false
 > })
 > ```

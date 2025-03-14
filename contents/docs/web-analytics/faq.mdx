@@ -13,7 +13,7 @@ Have a question not covered here? [Let us know](http://app.posthog.com/home#supp
 
 Web analytics is a streamlined experience for tracking and monitoring your most important website metrics. Product analytics is a more powerful and flexible experience for tracking your product.
 
-For a more detailed description of the difference, check out [Web vs. product analytics](/docs/web-analytics/web-vs-product-analytics).
+For a more detailed description of the difference, check out our page on [web vs product analytics](/docs/web-analytics/web-vs-product-analytics).
 
 ## How much does web analytics cost?
 
@@ -21,7 +21,7 @@ Web analytics is no additional cost on top of product analytics. Events are used
 
 ## Where is my world map?
 
-All good web analytics dashboards need to include a world map. Ours includes it too. If you can't see it, you need to enable the [GeoIP app](https://app.posthog.com/project/apps/74).
+All good web analytics dashboards need to include a world map. Ours includes it too. If you can't see it, you need to enable the [GeoIP transformation](https://app.posthog.com/pipeline/transformations?search=GeoIP) in Data pipelines.
 
 ## Do stats include bots and crawlers?
 
@@ -61,6 +61,8 @@ Some traffic to your site might be bots like search engines crawlers, archivers,
 
 Our client-side bot detection code is available on [GitHub](https://github.com/PostHog/posthog-js/blob/main/src/utils/blocked-uas.ts) (pull requests welcome!) and we automatically prevent detected bots from sending events.
 
+You can also block custom user agents by setting the `custom_blocked_useragents` [config](/docs/libraries/js/config) option if there's a specific user agent that you don't want to track - your custom user agent or maybe a bad actor you want to block.
+
 ## Why am I getting a lot of direct traffic?
 
 Direct traffic usually refers to when a user enters the address to your website directly, but it also includes any traffic where the referrer is unknown or impossible to calculate. We use the `document.referrer` property, which might be hidden for a few reasons:
@@ -78,7 +80,7 @@ This is called self-referral traffic, having a small amount (less than 5%) of se
 
 ### Cross-domain tracking
 
-If you track multiple domains, you might need to set up [cross-domain tracking](/tutorials/cross-domain-tracking) to ensure that sessions are correctly attributed.
+If you track multiple domains or websites, you might need to set up [cross-domain tracking](/tutorials/cross-domain-tracking) to ensure that sessions are correctly attributed.
 
 ### Session timeout
 
@@ -90,7 +92,7 @@ If you track multiple domains, you might need to set up [cross-domain tracking](
 
 4. User comes back to their computer, goes to the already-open browser tab with your site, and clicks an internal link. A new session starts and the referrer is your own site.
 
-If your users are typically inactive for longer than 30 minutes within one period of activity, you can increase the `session_idle_timeout_seconds` setting in your [posthog-js configuration](/docs/libraries/js#config).
+If your users are typically inactive for longer than 30 minutes within one period of activity, you can increase the `session_idle_timeout_seconds` setting in your [posthog-js configuration](/docs/libraries/js/config).
 
 ## Why does PostHog impact my PageSpeed score?
 
@@ -109,7 +111,7 @@ We also optimize our assets specifically for PageSpeed Insights whenever possibl
 At a more philosophical level, we question the premise of the question. PageSpeed score isn't an objective judge of quality or performance for the following reasons:
 
 1. **It's not realistic.** PageSpeed judges your website on its performance for an underpowered device with a bad internet connection. For example, on mobile, it uses a broadband speed of ~1.6 Mbps, which is significantly slower than the typical 5-50 Mbps (5G can be faster than this too)**.
-    - You can use PostHog to [autocapture core web vitals](/docs/product-analytics/web-vitals) to give you a more realistic picture of your users' experiences.  
+    - You can use PostHog to [autocapture web vitals](/docs/web-analytics/web-vitals) to give you a more realistic picture of your users' experiences.  
 
 2. **It doesn't directly impact search rankings.** Although speed matters for user experience, there is no evidence to suggest Google uses data from PageSpeed Insight directly in its search ranking algorithm. [Leaks about the search ranking algorithm](https://ipullrank.com/google-algo-leak) don't mention PageSpeed as important to search rankings. Optimizing your site speed can improve your user experience and lead to more clicks and fewer bounces, which can improve your search rankings, but any positive or negative impact on rankings is based on user behavior, not this arbitrary score.
   - Google Ads' [Quality Score](https://support.google.com/google-ads/answer/6167118?hl=en) is a similar situation where loading speed and user experience impact your CPC, CTR, impressions, paid ranking, and more. This doesn't mean your PageSpeed score directly impacts these either.
@@ -128,3 +130,4 @@ At a more philosophical level, we question the premise of the question. PageSpee
 
 4. Utilize server-side tracking. We have a range of SDKs for backend languages and frameworks you can use to capture events and use the features of PostHog without needing to load any code on the client side.
 
+5. Keep an eye on your [web vitals](/docs/web-analytics/web-vitals) to see if there are any pages with worse performance.

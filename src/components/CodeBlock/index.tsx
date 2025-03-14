@@ -10,6 +10,7 @@ import languageMap from './languages'
 import { useValues } from 'kea'
 import { layoutLogic } from 'logic/layoutLogic'
 import Tooltip from 'components/Tooltip'
+import Mermaid from 'components/Mermaid'
 
 type LanguageOption = {
     label?: string
@@ -74,6 +75,9 @@ type MdxCodeBlockChildren = {
 }
 
 export const MdxCodeBlock = ({ children, ...props }: MdxCodeBlock) => {
+    if (children?.props?.className?.includes('language-mermaid')) {
+        return <Mermaid>{children.props.children}</Mermaid>
+    }
     const childArray = Array.isArray(children) ? children : [children]
 
     const languages = childArray
@@ -292,12 +296,12 @@ export const CodeBlock = ({
                                 {tooltipVisible && (
                                     <AnimatePresence>
                                         <motion.div
-                                            className="absolute top-full mt-2 -right-2 bg-black text-white font-semibold px-2 py-1 rounded"
+                                            className="absolute top-full mt-2 -right-2 bg-black text-white font-semibold px-2 py-1 rounded z-10"
                                             initial={{ translateY: '-50%', opacity: 0 }}
                                             animate={{ translateY: 0, opacity: 1 }}
                                             exit={{ opacity: 0 }}
                                         >
-                                            Copied
+                                            Copied!
                                         </motion.div>
                                     </AnimatePresence>
                                 )}

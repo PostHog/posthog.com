@@ -122,7 +122,7 @@ const MegaQuote: React.FC = () => {
             <p className="text-center text-lg">(It was so good we just couldn't cut it down.)</p>
             <div className="max-w-7xl mx-auto flex flex-col-reverse gap-8 md:gap-12 items-center md:flex-row p-6 md:p-8 bg-white dark:bg-accent-dark rounded shadow-lg dark:border dark:border-dark">
                 <aside className="w-full md:w-auto min-w-48 max-w-full text-center">
-                    <TeamMember name="Raquel Smith" />
+                    <TeamMember name="Dylan Martin" />
                 </aside>
                 <div className="flex-1 [&_p]:text-lg [&_p]:mb-3 [&_p:last-child]:mb-0 md:columns-2 gap-8">
                     <p>

@@ -1,0 +1,75 @@
+---
+title: Statistical methodology for funnel metrics
+---
+
+Funnel metrics use Bayesian statistics with a beta model to evaluate the **win probabilities** and **credible intervals**. [Read the statistics overview](/docs/experiments/statistics) if you haven't already.
+
+## What is a beta model?
+
+Imagine you run a pizza shop and want to know if customers say "yes" to adding pineapple. Some customers will say yes, others will say no. Knowing what percentage of customers want pineapple on their pizza helps you decide how much to order and what options to offer.
+
+The beta model is a statistical approach that's great for analyzing proportions or probabilities. It uses a **beta distribution** to model the uncertainty in conversion rates and helps us understand:
+
+1. Our best estimate of the _true_ probability that a customer will say "yes" to adding pineapple (vs. the probability we observe).
+2. How certain we are about that estimate.
+
+For example, if:
+
+- Only 2 out of 4 customers (50%) say yes, the beta distribution will be wide, indicating high uncertainty.
+- 150 out of 300 customers (50%) say yes, the beta distribution will be narrow, showing we're more confident about that 50% rate.
+
+So when we say we're using a beta model for funnel metrics, we're:
+1. Using the beta distribution to model conversion rates between 0% and 100%.
+2. Getting more confident in our estimates as we collect more data.
+
+One more thing worth noting: Bayesian inference starts with an initial guess that then gets updated as more data comes in. Our model uses a "minimally informative prior" of `ALPHA_PRIOR = 1` and `BETA_PRIOR = 1`, which is like starting with a blank slate instead of making an upfront assumption about the results.
+
+## Win probabilities
+
+The **win probability** tells you how likely it is that a given variant produces a higher conversion rate compared to the control. It helps you determine whether the metric shows a **statistically significant** real effect vs. simply random chance.
+
+Let's say you're testing a new way of presenting pineapple on the website and have these results:
+
+- Control (current design): 100 pineapple orders from 1000 customers (10% acceptance)
+- Test (suggesting pineapple with a photo): 150 pineapple orders from 1000 customers (15% acceptance)
+
+To calculate the win probabilities, our methodology will:
+
+1. Model each variant's conversion rate using a beta distribution:
+	- Control: Beta(100 + ALPHA_PRIOR, 900 + BETA_PRIOR)
+	- Test: Beta(150 + ALPHA_PRIOR, 850 + BETA_PRIOR)
+
+2. Take 10,000 random samples from each distribution.
+
+3. Check which variant had the higher conversion rate for each sample.
+
+4. Calculate the final win probabilities:
+	- Control wins in 40 out of 10,000 samples = 0.4% probability
+	- Test wins in 9,960 out of 10,000 samples = 99.6% probability
+
+These results tell us we can be 99.6% confident that showing photos of pineapple pizza performs better than the current design.
+
+## Credible intervals
+
+We use Bayesian methodology, so we report **credible intervals** rather than the more commonly known **confidence intervals**.
+
+A 95% credible interval means we believe there’s a **95% probability that the true conversion rate lies within that interval**. In other words, it directly reflects our uncertainty about where the true conversion rate might be based on the data we’ve observed.
+
+> If you’re familiar with frequentist methods, you’ve probably heard of confidence intervals. Although they may look similar in graphs, a confidence interval doesn’t mean “there’s a 95% probability that the true rate lies in this range.” Instead, it reflects how often such intervals would contain the true rate if the experiment were repeated many times. In contrast, a **credible interval is the Bayesian version of a confidence interval**, offering a more intuitive probability statement about the metric you care about.
+
+For example, if you have these results:
+
+- Control (current design): 100 pineapple orders from 1000 customers (10% acceptance)
+- Test (suggesting pineapple with a photo): 150 pineapple orders from 1000 customers (15% acceptance)
+
+To calculate the credible intervals, our methodology will:
+
+1. Create a beta distribution for each variant:
+	- Control: Beta(100 + ALPHA_PRIOR, 900 + BETA_PRIOR)
+	- Test: Beta(150 + ALPHA_PRIOR, 850 + BETA_PRIOR)
+
+2. Find the 2.5th and 97.5% percentiles of each distribution:
+	- Control: [8.3%, 12%] = "You can be 95% confident the true conversion rate is between 8.3% and 12.0%"
+	- Test: [12.9%, 17.3%] = "You can be 95% confident the true conversion rate is between 12.9% and 17.3%"
+
+Since these intervals don't overlap, you can be quite confident that the test variant performs better than the control. The intervals will become narrower as you collect more data, reflecting your increasing certainty about the true conversion rates.

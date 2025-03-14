@@ -1,3 +1,5 @@
 In your frontend, you should call `identify` as soon as you're able to. Typically, this is every time your app loads for the first time, and directly after your users log in. This ensures that events sent during your users' sessions are correctly associated with them. 
 
-You only need to call `identify` once per session.
+You only need to call `identify` once per session, and you should avoid calling it multiple times unnecessarily.
+
+If you call `identify` multiple times with the same data without reloading the page in between, PostHog will ignore the subsequent calls.

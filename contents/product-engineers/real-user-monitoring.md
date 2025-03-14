@@ -24,7 +24,7 @@ Real user monitoring is tracking the usage, performance, and quality of your pro
 
 Because it tracks real user behavior, it is a closer representation of reality. It identifies real issues, largely broken down into two classes:
 
-- Performance: loading, page, and query speed, core web vitals
+- Performance: loading, page, and query speed, web vitals
 - Usability: errors, confusion, bugs, rageclicks, unclear UI
 
 ![Types](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/real-user-monitoring/classes.png)
@@ -53,7 +53,7 @@ Real user monitoring helps you get the information to understand and prioritize 
 
 Real user monitoring uncovers potential risks, provides details for planning, and is part of the incident alerting process.
 
-By knowing error rates, page and query speeds, and product usage, teams are able to monitor the the health of the product and prevent incidents. These metrics also enables companies to make promises about their experience quality, and back those promises with data. 
+By knowing error rates, page and query speeds, and product usage, teams are able to monitor the health of the product and prevent incidents. These metrics also enables companies to make promises about their experience quality, and back those promises with data. 
 
 For large companies, this is critical. These promises are often solidified in a service-level agreement, or SLA, which is a contract defining the expected service levels an application must provide (such as uptime and performance).
 

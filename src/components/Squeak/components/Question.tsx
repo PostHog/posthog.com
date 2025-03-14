@@ -11,7 +11,7 @@ import QuestionSkeleton from './QuestionSkeleton'
 import SubscribeButton from './SubscribeButton'
 import Link from 'components/Link'
 import { useUser } from 'hooks/useUser'
-import { IconArchive, IconPin, IconSparkles, IconTrash, IconUndo } from '@posthog/icons'
+import { IconArchive, IconPencil, IconPin, IconSparkles, IconTrash, IconUndo } from '@posthog/icons'
 import Tooltip from 'components/Tooltip'
 import { Listbox } from '@headlessui/react'
 import { fetchTopicGroups, topicGroupsSorted } from '../../../pages/questions'
@@ -19,11 +19,11 @@ import { Check2, Close } from 'components/Icons'
 import Modal from 'components/Modal'
 import Checkbox from 'components/Checkbox'
 import { CallToAction } from 'components/CallToAction'
-import { StaticImage } from 'gatsby-plugin-image'
 import { navigate } from 'gatsby'
 import Logomark from 'components/Home/images/Logomark'
 import Avatar from './Avatar'
 import { DotLottiePlayer } from '@dotlottie/react-player'
+import EditWrapper from './EditWrapper'
 
 type QuestionProps = {
     // TODO: Deal with id possibly being undefined at first
@@ -398,7 +398,7 @@ const AskMax = ({
 export const Question = (props: QuestionProps) => {
     const { id, question, showSlug, buttonText, showActions = true, ...other } = props
     const [expanded, setExpanded] = useState(props.expanded || false)
-    const { user, notifications, setNotifications } = useUser()
+    const { user, notifications, setNotifications, isModerator } = useUser()
     const [maxQuestions, setMaxQuestions] = useState(other.askMax ? [{ manual: false, withContext: false }] : [])
 
     useEffect(() => {
@@ -452,6 +452,8 @@ export const Question = (props: QuestionProps) => {
     const archived = questionData?.attributes.archived
     const slugs = questionData?.attributes?.slugs
     const escalated = questionData?.attributes.escalated
+    const isQuestionAuthor = questionData?.attributes.profile?.data?.id === user?.profile?.id
+    const publishedAt = questionData?.attributes?.publishedAt
 
     return (
         <CurrentQuestionContext.Provider
@@ -464,7 +466,7 @@ export const Question = (props: QuestionProps) => {
                 mutate,
             }}
         >
-            <div>
+            <div className={`${isModerator && !publishedAt ? 'opacity-70' : ''}`}>
                 {archived && (
                     <div className="font-medium text-sm m-0 mb-6 bg-accent dark:bg-accent-dark border border-light dark:border-dark p-4 rounded text-center">
                         <p className="font-bold !m-0 !p-0">The following thread has been archived.</p>
@@ -475,6 +477,11 @@ export const Question = (props: QuestionProps) => {
                     </div>
                 )}
                 <div className={`flex flex-col w-full`}>
+                    {!publishedAt && isModerator && (
+                        <p className="font-bold text-sm m-0 mb-4 italic p-2 bg-accent dark:bg-accent-dark border border-light dark:border-dark rounded">
+                            This thread is unpublished and only visible to moderators
+                        </p>
+                    )}
                     <div
                         className={`flex items-center space-x-2 w-full ${!questionData.attributes.subject && '-mb-2'}`}
                     >
@@ -482,7 +489,11 @@ export const Question = (props: QuestionProps) => {
                             profile={questionData.attributes.profile?.data}
                             className={archived ? 'opacity-50' : ''}
                         />
-                        <Days created={questionData.attributes.createdAt} />
+                        <Days
+                            created={questionData.attributes.createdAt}
+                            profile={questionData.attributes.profile?.data}
+                            edits={questionData.attributes.edits}
+                        />
                         <div className="!ml-auto flex space-x-2">
                             {user?.role?.type === 'moderator' && showActions && (
                                 <>
@@ -537,9 +548,28 @@ export const Question = (props: QuestionProps) => {
                                     </Link>
                                 </h3>
                             )}
-
-                            <Markdown className="question-content">{questionData.attributes.body}</Markdown>
-
+                            <EditWrapper data={questionData} type="question" onSubmit={() => mutate()}>
+                                {({ setEditing }) => {
+                                    return (
+                                        <>
+                                            <Markdown className="question-content">
+                                                {questionData.attributes.body}
+                                            </Markdown>
+                                            {isQuestionAuthor && (
+                                                <div className="mt-2">
+                                                    <button
+                                                        onClick={() => setEditing(true)}
+                                                        className="text-red dark:text-yellow font-semibold text-sm flex items-center py-1 px-1.5 rounded hover:bg-accent dark:hover:bg-border-dark/50"
+                                                    >
+                                                        <IconPencil className="size-4 mr-1 text-primary/70 dark:text-primary-dark/70 inline-block" />
+                                                        Edit
+                                                    </button>
+                                                </div>
+                                            )}
+                                        </>
+                                    )
+                                }}
+                            </EditWrapper>
                             {showSlug && slugs?.length > 0 && slugs[0]?.slug !== '/questions' && (
                                 <p className="text-xs text-primary/60 dark:text-primary-dark/60 pb-4 mb-0 mt-1">
                                     <span>Originally posted on</span>{' '}

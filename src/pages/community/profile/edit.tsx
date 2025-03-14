@@ -13,6 +13,7 @@ import { CallToAction } from 'components/CallToAction'
 import { useToast } from 'hooks/toast'
 import { navigate } from 'gatsby'
 import SEO from 'components/seo'
+import { flattenStrapiResponse } from '../../../utils'
 
 function convertCentimetersToInches(centimeters: number): number {
     return centimeters / 2.54
@@ -72,11 +73,11 @@ const Toggle = ({ name, label, checked, onChange, options }) => {
             <div className="grid grid-cols-2 rounded-md bg-accent dark:bg-accent-dark relative text-center overflow-hidden mt-1 text-base border border-border dark:border-dark">
                 <span
                     className={`bg-red dark:bg-yellow w-1/2 h-full absolute transition-all left-0 ${
-                        checked ? '' : 'translate-x-full'
+                        checked === null ? 'hidden' : checked ? '' : 'translate-x-full'
                     }`}
                 />
-                <ToggleButton onClick={() => onChange(true)} active={checked} label={options[0]} />
-                <ToggleButton onClick={() => onChange(false)} active={!checked} label={options[1]} />
+                <ToggleButton onClick={() => onChange(true)} active={checked === true} label={options[0]} />
+                <ToggleButton onClick={() => onChange(false)} active={checked === false} label={options[1]} />
             </div>
         </div>
     )
@@ -426,13 +427,13 @@ const ValidationSchema = Yup.object().shape({
     biography: Yup.string().max(3000, 'Please limit your bio to 3,000 characters, you wordsmith!').nullable(),
 })
 
-function EditProfile() {
+function EditProfile({ profile, mutate }) {
     const { addToast } = useToast()
-    const { user, fetchUser, getJwt } = useUser()
+    const { getJwt, user } = useUser()
     const posthog = usePostHog()
 
     const onSubmit = async ({ avatar, ...values }, { setSubmitting }) => {
-        const id = user?.profile?.id
+        const id = profile?.id
         setSubmitting(true)
 
         try {
@@ -478,7 +479,7 @@ function EditProfile() {
             }).then((res) => res.json())
 
             if (data) {
-                await fetchUser(JWT)
+                await mutate()
             }
 
             posthog?.capture('squeak profile update', {
@@ -505,7 +506,7 @@ function EditProfile() {
         onSubmit,
         initialValues: formSections.reduce((acc, section) => {
             Object.keys(section.fields).forEach((key) => {
-                acc[key] = user?.profile[key]
+                acc[key] = profile[key]
             })
             return acc
         }, {}),
@@ -561,18 +562,33 @@ function EditProfile() {
     )
 }
 
-export default function EditProfilePage() {
+export default function EditProfilePage({ location }) {
     const [ready, setReady] = useState(false)
+    const [profile, setProfile] = useState<any>()
     const { fetchUser } = useUser()
-    useEffect(() => {
-        fetchUser().then((user) => {
-            if (user) {
-                setReady(true)
+
+    const getProfile = async () => {
+        const user = await fetchUser()
+        let editProfile
+        if (user) {
+            if (location?.state?.profileID && user?.role?.type === 'moderator' && user?.webmaster) {
+                const profile = await fetch(
+                    `${process.env.GATSBY_SQUEAK_API_HOST}/api/profiles/${location?.state?.profileID}?populate=*`
+                ).then((res) => res.json())
+                editProfile = flattenStrapiResponse(profile)
             } else {
-                navigate('/community')
+                editProfile = user.profile
             }
-        })
+            setProfile(editProfile)
+            setReady(true)
+        } else {
+            navigate('/community')
+        }
+    }
+
+    useEffect(() => {
+        getProfile()
     }, [])
 
-    return ready ? <EditProfile /> : null
+    return ready ? <EditProfile profile={profile} mutate={getProfile} /> : null
 }

@@ -65,7 +65,7 @@ Here are some ways we got more specific for this audience after we zeroed-in on 
 
 * **We chose a transparent, flexible pricing model.** It's more complex, but also [much better value](/blog/analytics-pricing). We’ve found technical users tolerate a little more complexity if it helps them save money, and only pay for what they use.
 
-* **We focused on power user features**, such as [SQL access](/docs/hogql) and a [built-in data warehouse](/data-warehouse), so technical people can get to the underlying data and debug things.
+* **We focused on power user features**, such as [SQL access](/docs/sql) and a [built-in data warehouse](/data-warehouse), so technical people can get to the underlying data and debug things.
 
 * **We redesigned our entire UX** to have more flexibility, greater information density, and a dark mode. We want PostHog to [look like a dev tool](/blog/posthog-as-a-dev-tool), not an analytics product.
 
@@ -103,7 +103,7 @@ It's how your company is experienced by others. Your company is the product and:
 - What [you look for when you hire people](https://newsletter.posthog.com/p/hiring-and-managing-cracked-engineers), and the process you use to hire them.
 - [How you decide what to build](https://newsletter.posthog.com/p/how-we-decide-what-to-build). Do you ship features early, or do you focus on meeting the needs of your largest customer with every new thing?
 - The degree to which you’re led by design, engineering product, sales, or marketing. How many people are in each function, but also your processes for deciding what to work on.
-- The frequency and style with which you [email your customers](https://posthog.com/blog/how-we-built-email-onboarding), for marketing, product updates or your activation flow.
+- The frequency and style with which you [email your customers](/blog/how-we-built-email-onboarding), for marketing, product updates or your [activation](/product-engineers/activation-metrics) flow.
 - The kind of people you hire into customer success or sales.
 - The background and experience of those in your marketing team.
 - The tone of voice on your website.

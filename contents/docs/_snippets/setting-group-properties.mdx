@@ -2,15 +2,30 @@ In the same way that every person can have [properties](/docs/getting-started/pe
 
 Continuing with the previous example of using `company` as our group type, we'll add `company_name`, `date_joined`, and `subscription` as additional properties.
 
-> **Note:** You must include at least one group property for a group to be visible in the "Persons & Groups" tab.
+> **Note:** You must include at least one group property for a group to be visible in the [People and groups tab](https://app.posthog.com/persons).
 
 <MultiLanguage>
 
 ```js-web
+// Option 1 (recommended): Set properties in posthog.group()
+// This has the side-effect that all subsequent events in the session are associated to the group
 posthog.group('company', 'company_id_in_your_db', {
     name: 'PostHog',
     subscription: "subscription",
     date_joined: '2020-01-23'
+});
+
+// Option 2: 
+// Set properties in posthog.capture()
+// This method doesn't have the side-effect of associating all future events to the group.
+posthog.capture('$groupidentify', {
+    '$group_type': 'company',
+    '$group_key': 'company_id_in_your_db',
+    '$group_set': {
+        name: 'PostHog',
+        subscription: "subscription",
+        date_joined: '2020-01-23'
+    }
 });
 ```
 
@@ -53,6 +68,64 @@ PostHog::groupIdentify([
 ]);
 ```
 
+```ios_swift
+// Option 1 (recommended): Set properties in group()
+// This has the side-effect that all subsequent events in the session are associated to the group
+PostHogSDK.shared.group(
+    type: "company", 
+    key: "company_id_in_your_db",
+    properties: [
+        "name": "PostHog",
+        "subscription": "subscription",
+        "date_joined": "2020-01-23"
+    ]
+)
+
+// Option 2: Set properties using capture
+// This method doesn't have the side-effect of associating the session's events to the group
+PostHogSDK.shared.capture(
+    event: "$groupidentify",
+    properties: [
+        "$group_type": "company",
+        "$group_key": "company_id_in_your_db",
+        "$group_set": [
+            "name": "PostHog",
+            "subscription": "subscription",
+            "date_joined": "2020-01-23"
+        ]
+    ]
+)
+```
+
+```android_kotlin
+// Option 1 (recommended): Set properties in group()
+// This has the side-effect that all subsequent events in the session are associated to the group
+PostHog.group(
+    type = "company", 
+    key = "company_id_in_your_db",
+    properties = mapOf(
+        "name" to "PostHog",
+        "subscription" to "subscription",
+        "date_joined" to "2020-01-23"
+    )
+)
+
+// Option 2: Set properties using capture
+// This method doesn't have the side-effect of associating the session's events to the group
+PostHog.capture(
+    event = "\$groupidentify",
+    properties = mapOf(
+        "\$group_type" to "company",
+        "\$group_key" to "company_id_in_your_db",
+        "\$group_set" to mapOf(
+            "name" to "PostHog",
+            "subscription" to "subscription",
+            "date_joined" to "2020-01-23"
+        )
+    )
+)
+```
+
 ```segment
 analytics.group('company_id_in_your_db', {
     "name": "PostHog",
@@ -75,7 +148,7 @@ curl -v -L --header "Content-Type: application/json" -d '{
             "date_joined": "2020-01-23"
         }
     }
-}' <ph_client_api_host>/capture/
+}' <ph_client_api_host>/i/v0/e/
 ```
 
 </MultiLanguage>
@@ -83,5 +156,3 @@ curl -v -L --header "Content-Type: application/json" -d '{
 Properties on groups behave in the same way as properties on [persons](/docs/data/persons). They can also be used within experiments and feature flags to rollout features to specific groups.
 
 > **Note:** The PostHog UI identifies a group using the `name` property. If the `name` property is not found, it falls back to the group key.
-
-For more on implementing group analytics, check out our [guide on frontend vs backend group analytics implementations](/tutorials/frontend-vs-backend-group-analytics).

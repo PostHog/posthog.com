@@ -19,7 +19,7 @@ In your experiment, each user is randomly assigned to a variant (usually either 
 ```js-web
 // Ensure flags are loaded before usage.
 // You only need to call this on the code the first time a user visits.
-// See this doc for more details: https://posthog.com/docs/feature-flags/manual#ensuring-flags-are-loaded-before-usage
+// See this doc for more details: /docs/feature-flags/manual#ensuring-flags-are-loaded-before-usage
 posthog.onFeatureFlags(function() {
     // feature flags should be available at this point
     if (posthog.getFeatureFlag('experiment-feature-flag-key')  == 'variant-name') {
@@ -33,12 +33,12 @@ if (posthog.getFeatureFlag('experiment-feature-flag-key')  == 'variant-name') {
 }
 
 // You can also test your code by overriding the feature flag:
-// e.g., posthog.featureFlags.override({'experiment-feature-flag-key': 'test'})
+// e.g., posthog.featureFlags.overrideFeatureFlags({ flags: {'experiment-feature-flag-key': 'test'}})
 ```
 
 ```react
 // You can either use the `useFeatureFlagVariantKey` hook,
-// or you can use the feature flags component - https://posthog.com/docs/libraries/react#feature-flags-react-component
+// or you can use the feature flags component - /docs/libraries/react#feature-flags-react-component
 
 // Method one: using the useFeatureFlagVariantKey hook
 import { useFeatureFlagVariantKey } from 'posthog-js/react'
@@ -65,7 +65,7 @@ function App() {
 
 
 // You can also test your code by overriding the feature flag:
-// e.g., posthog.featureFlags.override({'experiment-feature-flag-key': 'test'})
+// e.g., posthog.featureFlags.overrideFeatureFlags({ flags: {'experiment-feature-flag-key': 'test'}})
 ```
 
 ```react-native
@@ -140,9 +140,26 @@ if variant == "variant-name" {
     // Do something
 }
 ```
+
+```elixir
+{:ok, feature_flag} = PostHog.feature_flag("experiment-feature-flag-key", "user_distinct_id")
+
+if feature_flag.enabled == "variant-name" do
+    # Do something
+end
+```
+
+```dotnet
+var featureFlag = await posthog.GetFeatureFlagAsync("experiment-feature-flag-key", "user_distinct_id");
+
+if (featureFlag is { VariantKey: "variant-name" })
+{
+    // Do something
+}
+```
 </MultiLanguage>
 
-> Since feature flags are not supported yet in our Java, Rust, and Elixir SDKs, to run an experiment using these SDKs see our docs on [how to run experiments without feature flags](/docs/experiments/running-experiments-without-feature-flags). This also applies to running experiments using our API.
+> Since feature flags are not supported yet in our Java and Rust SDKs, to run an experiment using these SDKs see our docs on [how to run experiments without feature flags](/docs/experiments/running-experiments-without-feature-flags). This also applies to running experiments using our API.
 
 ## Step 2 (server-side only): Add the feature flag to your events 
 
@@ -221,6 +238,13 @@ posthog.capture(
 );
 ```
 
+```dotnet
+posthog.Capture(
+    "distinct_id",
+    "event_name_of_your_goal_metric",
+    properties: new() { ["$feature/experiment-feature-flag-key"] = "variant-name" }
+);
+```
 </MultiLanguage>
 
 import Tab from "components/Tab"
@@ -229,6 +253,7 @@ import NodeMethod2 from "../integrate/feature-flags-code/_snippets/feature-flags
 import GoMethod2 from "../integrate/feature-flags-code/_snippets/feature-flags-code-go-set-send-feature-flags-to-true.mdx"
 import PythonMethod2 from "../integrate/feature-flags-code/_snippets/feature-flags-code-python-set-send-feature-flags-to-true.mdx"
 import PHPMethod2 from "../integrate/feature-flags-code/_snippets/feature-flags-code-php-set-send-feature-flags-to-true.mdx"
+import DotNetMethod2 from "../integrate/feature-flags-code/_snippets/feature-flags-code-dotnet-set-send-feature-flags-to-true.mdx"
 
 ### Method 2: Set `send_feature_flags` to `true`
 
@@ -255,6 +280,9 @@ import PHPMethod2 from "../integrate/feature-flags-code/_snippets/feature-flags-
         </Tab.Panel>
         <Tab.Panel>
             <GoMethod2 />
+        </Tab.Panel>
+        <Tab.Panel>
+            <DotNetMethod2 />
         </Tab.Panel>
     </Tab.Panels>
 </Tab.Group>

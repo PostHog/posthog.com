@@ -1,6 +1,7 @@
 ---
 title: Send PostHog analytics to Airtable
-templateId: template-airtable
+templateId:
+    - template-airtable
 ---
 
 import Requirements from "../_snippets/requirements.mdx"
@@ -68,7 +69,7 @@ Where possible, Airtable will convert values into native datatypes set in your c
 
 ### Is the source code for this destination available?
 
-PostHog is open-source and so are all the destination on the platform. The [source code](https://github.com/PostHog/posthog/blob/master/posthog/cdp/templates/webhook/template_airtable.py) is available on GitHub.
+PostHog is open-source and so are all the destination on the platform. The [source code](https://github.com/PostHog/posthog/blob/master/posthog/cdp/templates/airtable/template_airtable.py) is available on GitHub.
 
 <PostHogMaintained />
 

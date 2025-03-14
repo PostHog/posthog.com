@@ -29,8 +29,7 @@ Filter groups support `AND` and `OR` operators – i.e. events will be included 
 
 Filters are comprised of three elements, a property, an operation, and a value.
 
-> **Note:** You can also fully customize your filter by writing them as a [HogQL expression](/docs/hogql/expressions). See our tutorial on [using HogQL for advanced time and date filters](/tutorials/hogql-date-time-filters) for an example.
-
+> **Note:** You can also fully customize your filter by writing them as a [SQL expression](/docs/sql/expressions). See our tutorial on [using SQL for advanced time and date filters](/tutorials/hogql-date-time-filters) for an example.
 
 ### 1. The filter property
 
@@ -63,8 +62,8 @@ This is what PostHog uses to compare the property value to determine whether an 
 | ≁ doesn't match regex | The property doesn't matches a regex _(only available for strings)_                     |
 | > greater than        | The property is greater than a specific value _(only available for numeric properties)_ |
 | &lt; less than        | The property is less than a specific value _(only available for numeric properties)_    |
-| ✓ is set              | The property was not set on a specific event                                            |
-| ✕ is not set          | The property has been set on a specific event                                           |
+| ✓ is set              | The property has been set on a specific event                                           |
+| ✕ is not set          | The property was not set on a specific event                                            |
 
 ### 3. The comparison value
 

@@ -10,8 +10,6 @@ tags:
 import { ProductScreenshot } from 'components/ProductScreenshot'
 export const EventsInPostHogLight = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/tutorials/astro-ab-tests/events-light.png"
 export const EventsInPostHogDark = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/tutorials/astro-ab-tests/events-dark.png"
-export const TestSetupLight = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/tutorials/astro-ab-tests/experiment-setup-light.png"
-export const TestSetupDark = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/tutorials/astro-ab-tests/experiment-setup-dark.png"
 
 A/B tests help you make your Astro app better by enabling you to compare the impact of changes on key metrics. To show you how to set one up, we create a basic Astro app, add PostHog, create an A/B test, and implement the code for it.
 
@@ -176,17 +174,17 @@ Next, go to the [A/B testing tab](https://us.posthog.com/experiments) and create
 
 1. Name it "My cool experiment".
 2. Set "Feature flag key" to `my-cool-experiment`.
-3. Under the experiment goal, select the `home_button_clicked` event we created in the previous step.
-4. Use the default values for all other fields.
-
-Click "Save as draft" and then click "Launch".
+3. Use the default values for all other fields.
+4. Click **Save as draft**.
 
 <ProductScreenshot
-  imageLight={TestSetupLight} 
-  imageDark={TestSetupDark} 
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_01_16_at_09_53_57_2x_2b998be1a8.png" 
+  imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_01_16_at_09_53_32_2x_0b8f1da910.png"
   alt="Experiment setup in PostHog" 
   classes="rounded"
 />
+
+Once created, set the primary metric to a trend of `home_button_clicked` and then click **Launch**.
 
 ## 5. Implement the A/B test code
 
@@ -199,7 +197,7 @@ We'll show you how to implement both.
 
 ### Client-side rendering
 
-To implement the A/B test, we use the [`posthog.onFeatureFlags`](/docs/libraries/js#ensuring-flags-are-loaded-before-usage) callback to update the button text based on whether the user is in the `control` or `test` variant of the experiment.
+To implement the A/B test, we use the [`posthog.onFeatureFlags`](/docs/libraries/js/features#ensuring-flags-are-loaded-before-usage) callback to update the button text based on whether the user is in the `control` or `test` variant of the experiment.
 
 Update the code in `/components/posthog.astro` to implement `posthog.onFeatureFlags` code inside PostHog's `loaded` callback:
 

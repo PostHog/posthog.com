@@ -9,6 +9,9 @@ features:
   sessionRecording: true
   featureFlags: true
   groupAnalytics: true
+  surveys: true
+  llmObservability: true
+  errorTracking: true
 ---
 
 PostHog makes it easy to get data about traffic and usage of your [Next.js](https://nextjs.org/) app. Integrating PostHog into your site enables analytics about user behavior, custom events capture, session recordings, feature flags, and more.
@@ -28,47 +31,9 @@ To follow this guide along, you need:
 
 ## Client-side setup
 
-Install `posthog-js` using your package manager:
+import NextJSInstall from "../../integrate/_snippets/nextjs/install-nextjs.mdx"
 
-```shell
-yarn add posthog-js
-# or
-npm install --save posthog-js
-# or
-pnpm add posthog-js
-```
-
-Add your environment variables to your `.env.local` file and to your hosting provider (e.g. Vercel, Netlify, AWS). You can find your project API key in your [project settings](https://app.posthog.com/project/settings).
-
-```shell file=.env.local
-NEXT_PUBLIC_POSTHOG_KEY=<ph_project_api_key>
-NEXT_PUBLIC_POSTHOG_HOST=<ph_client_api_host>
-```
-
-These values need to start with `NEXT_PUBLIC_` to be accessible on the client-side.
-
-### Router-specific instructions
-
-import Tab from "components/Tab"
-import AppRouterSetup from "./_snippets/app-router-setup.mdx"
-import PagesRouterSetup from "./_snippets/pages-router-setup.mdx"
-
-<Tab.Group tabs={[
-    'App router', 
-    'Pages router']}>
-    <Tab.List>
-        <Tab>App router</Tab>
-        <Tab>Pages router</Tab>
-    </Tab.List>
-    <Tab.Panels>
-        <Tab.Panel>
-            <AppRouterSetup />
-        </Tab.Panel>
-        <Tab.Panel>
-            <PagesRouterSetup />
-        </Tab.Panel>
-    </Tab.Panels>
-</Tab.Group>
+<NextJSInstall />
 
 ### Accessing PostHog using the provider
 
@@ -77,7 +42,7 @@ PostHog can then be accessed throughout your Next.js app by using the `usePostHo
 - [`posthog-js` functions like custom event capture, user identification, and more.](/docs/libraries/react#using-posthog-js-functions)
 - [Feature flags including variants and payloads.](/docs/libraries/react#feature-flags)
 
-You can also read [the full posthog-js documentation](/docs/libraries/js) for all the usable functions.
+You can also read [the full `posthog-js` documentation](/docs/libraries/js/features) for all the usable functions.
 
 ## Server-side analytics
 
@@ -95,6 +60,7 @@ npm install --save posthog-node
 
 ### Router-specific instructions
 
+import Tab from "components/Tab"
 import AppRouterServerSetup from "./_snippets/app-router-server-setup.mdx"
 import PagesRouterServerSetup from "./_snippets/pages-router-server-setup.mdx"
 
@@ -114,6 +80,25 @@ import PagesRouterServerSetup from "./_snippets/pages-router-server-setup.mdx"
         </Tab.Panel>
     </Tab.Panels>
 </Tab.Group>
+
+### Server-side Configuration
+
+NextJS overrides the default `fetch` behaviour on the server to introduce their own cache. Posthog will ignore that cache by default, as this is also NextJS's default behavior to any fetch call.
+
+You can override that configuration when initializing Posthog if you wish, but make sure you understand the pros/cons of using NextJS's cache and are aware that you might get cached results rather than the actual result our server would be returning - for feature flags, for example.
+
+```tsx
+posthog.init(process.env.NEXT_PUBLIC_POSTHOG_KEY, {
+  // ... your configuration
+  fetch_options: {
+    cache: 'force-cache', // Use NextJS cache
+    next_options: {       // Passed to the `next` option for `fetch`
+      revalidate: 60,     // Cache for 60 seconds
+      tags: ['posthog'],  // Can be used with NextJS `revalidateTag` function
+    },
+  }
+})
+```
 
 ## Configuring a reverse proxy to PostHog
 
@@ -158,7 +143,6 @@ import { PostHogProvider } from 'posthog-js/react'
 if (typeof window !== 'undefined') {
   posthog.init(process.env.NEXT_PUBLIC_POSTHOG_KEY, {
     api_host: process.env.NEXT_PUBLIC_POSTHOG_HOST,
-    person_profiles: 'identified_only',
     capture_pageview: false // Disable automatic pageview capture, as we capture manually
   })
 }
@@ -177,7 +161,6 @@ import { PostHogProvider } from 'posthog-js/react'
 if (typeof window !== 'undefined') {
   posthog.init(process.env.NEXT_PUBLIC_POSTHOG_KEY!, {
     api_host: process.env.NEXT_PUBLIC_POSTHOG_HOST,
-    person_profiles: 'identified_only',
     capture_pageview: false // Disable automatic pageview capture, as we capture manually
   })
 }

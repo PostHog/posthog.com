@@ -13,7 +13,19 @@ const getCloudinaryPublicId = (url: string): string | null => {
     return match ? match[1] : null
 }
 
-export default function CloudinaryImage({ src, width, placeholder, className = '', imgClassName = '', ...other }) {
+export default function CloudinaryImage({
+    src,
+    width,
+    className = '',
+    imgClassName = '',
+    placeholder,
+    ...other
+}: {
+    src: `https://res.cloudinary.com/${string}`
+    width?: number
+    className?: string
+    imgClassName?: string
+} & React.ImgHTMLAttributes<HTMLImageElement>): JSX.Element {
     const cloudinaryPublicId = isCloudinaryImage(src) && getCloudinaryPublicId(src)
     return cloudinaryPublicId ? (
         <div className={`inline-block ${className}`}>
@@ -22,8 +34,9 @@ export default function CloudinaryImage({ src, width, placeholder, className = '
                 publicId={cloudinaryPublicId}
                 cloudName={process.env.GATSBY_CLOUDINARY_CLOUD_NAME}
                 className={imgClassName}
+                secure
             >
-                <Transformation width={width} crop="scale" />
+                {width && <Transformation width={width} crop="scale" />}
             </Image>
         </div>
     ) : (

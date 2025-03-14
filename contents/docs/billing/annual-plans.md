@@ -2,7 +2,7 @@
 title: Annual plans
 ---
 
-We offer annual plans to companies who are looking to commit to using PostHog longer term, as well as save some money whilst doing so.  If you're interested in learning more then [Get in touch](/talk-to-a-human) with our Sales team.
+We offer annual plans to companies who are looking to commit to using PostHog longer term, as well as save some money whilst doing so.  If you're interested in learning more then [get in touch](/talk-to-a-human) with our Sales team.
 
 ## Benefits
 

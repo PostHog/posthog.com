@@ -110,7 +110,7 @@ It may also be prudent to add a quality metric here, too. Tracking signups based
 
 Some users create accounts but never use your product. Tracking activation helps you isolate onboarding issues from long term retention issues.
 
-Don't be afraid to go deep here. Good activation metrics capture the "aha" moment a user has when they get value from your product.
+Don't be afraid to go deep here. Good [activation metrics](/newsletter/wtf-is-activation) capture the "aha" moment a user has when they get value from your product.
 
 > 💡 **PostHog Tip:** It's a good idea to double check your chosen activation metric leads to increased retention. To do so, [create a cohort of activated users](/docs/user-guides/cohorts) and check you retain them significantly better than non-activated but signed-up users. If your retention doesn't change, you need to rethink your activation metric.
 

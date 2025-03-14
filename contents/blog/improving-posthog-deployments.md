@@ -115,7 +115,7 @@ We create new templated dashboards when we identify better metrics to monitor, a
 
 ![PostHog - built-in Redis dashboard](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/improving-posthog-deployments/redis.png)
 
-Thanks to this work, you can now get critical insights about the majority of PostHog services by simply enabling the monitoring features in the Helm chart. You can read more about these in our [chart configuration docs](https://posthog.com/docs/self-host/deploy/configuration).
+Thanks to this work, you can now get critical insights about the majority of PostHog services by simply enabling the monitoring features in the Helm chart. You can read more about these in our [chart configuration docs](/docs/self-host/deploy/configuration).
 
 ## What’s next?
 

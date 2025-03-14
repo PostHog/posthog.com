@@ -39,7 +39,6 @@ export default function PHProvider({ children }) {
   useEffect(() => {
     posthog.init('<ph_project_api_key>', {
       api_host: '<ph_client_api_host>',
-      person_profiles: 'identified_only'
     })
   }, []);
   return <PostHogProvider client={posthog}>{children}</PostHogProvider>
@@ -71,7 +70,7 @@ Finally, we can run the app with `npm run dev`. When we go to the page running l
 
 ## Set up the banner feature flag
 
-First, make sure that the [GeoIP app](https://app.posthog.com/project/apps?name=geoip) is enabled (it should be by default).
+First, make sure that the [GeoIP transformation](https://app.posthog.com/pipeline/transformations?search=GeoIP) is enabled (it should be by default).
 
 Once you have confirmed that, we can create our feature flag controlling the site banner. Go to [feature flags](https://app.posthog.com/feature_flags), click "Create new flag," and name the key as "site-banner." For release conditions, match users where the continent code equals NA (or whichever geography you want), roll out to 100% of users, and press save.
 

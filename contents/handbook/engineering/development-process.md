@@ -106,7 +106,7 @@ PRs should ideally be sized to be doable in one day, including code review and Q
 Sometimes, tasks need a few review cycles to get resolved, and PRs remain open for days. This is not ideal, but it happens. What else can you do to make sure your code gets merged quickly? 
 
 - First, start your own day by responding to review requests from colleagues, and unblocking their work. This builds goodwill and encourages them to also review your code in priority. Otherwise, if everybody jumps to implement new features before reviewing WIP, we will end up with [three](https://github.com/PostHog/posthog/pull/6717), [different](https://github.com/PostHog/posthog/pull/6722), [PRs](https://github.com/PostHog/posthog/pull/6766), all for the same thing.
-- Test your code. Always read through your PR's changed lines, and test everything yourself, before handing it over for review. Remember that your colleagues are busy people, and you must do what you can to save their time. There's nothing more annoying than an extra 30min review cycle that starts with *"Almost there, just it's all black now, and remove that console.log please"*.
+- Test your code. Always read through your PR's changed lines, and test everything yourself, before handing it over for review. Remember that your colleagues are busy people, and you must do what you can to save their time. There's nothing more annoying than an extra 30 min review cycle that starts with *"Almost there, just it's all black now, and remove that console.log please"*.
 - Help your reviewer by leaving comments that help them review trickier bits. Better yet, write these directly into the code, either as comments or by clearly labelling your variables.
 - It's always good to put new features behind [feature flags](/docs/user-guides/feature-flags). It's even better to develop partial features behind feature flags. As long as it's clear what needs to be done before a flag can be lifted, you can usually get the smallest bit of any new feature out in a day this way.
 - Don't be afraid to restart from scratch if the PR gets out of hand. It's a bit of time lost for you, but a lot of time saved for the reviewer if they get a clean PR to review.
@@ -130,7 +130,32 @@ git commit -m "Closes #289 add posthog logo to website"
 
 ## Testing code
 
-See: [How to test](/docs/contributing#testing).
+See: [How we review](/handbook/engineering/how-we-review).
+
+### Storybook Visual Regression Tests
+
+In our CI pipeline, we use [Playwright](https://playwright.dev/) to load our Storybook stories and take snapshots. If any changes are detected, the updated snapshots are automatically committed to the PR. This helps you quickly verify whether you've introduced unexpected changes or if the UI has been altered in the intended way.
+
+Check the `test-runner.ts` file to see how this is configured. We use the `@storybook/test-runner` package; you can find more details in the [official Storybook documentation](https://storybook.js.org/docs/writing-tests/test-runner).
+
+#### Running Tests Locally
+
+1. **Start Storybook** in one terminal:
+
+   ```bash
+   pnpm storybook
+   ```
+
+2. **Install Playwright and run the visual tests in debug mode** in another terminal:
+
+   ```bash
+   pnpm exec playwright install
+   pnpm test:visual:debug
+   ```
+
+This setup will help catch unintended UI regressions and ensure consistent visual quality.
+
+[Learn more](https://github.com/PostHog/posthog/blob/master/.storybook/README.md)
 
 ## Reviewing code
 
@@ -147,8 +172,6 @@ Things we do not care about during review:
 
 - Syntax. If we're arguing about syntax, that means we should install a code formatter.
 
-See: [How we review](/handbook/engineering/how-we-review).
-
 ## Merging
 
 Merge anytime. Friday afternoon? Merge.
@@ -164,6 +187,8 @@ Once you merge a pull request, it will automatically deploy to all environments.
 If you build it, [document it](/docs). You're in the best position to do this, and it forces you to think things through from a user perspective.
 
 It's not the responsibility of either [Website & Vibes](/teams/website-vibes) or [Marketing](/teams/marketing) teams to document features.
+
+See our [docs style guide](/handbook/content-and-docs/posthog-style-guide) for tips on how to write great docs.
 
 ## Releasing
 

@@ -1,6 +1,7 @@
 ---
 title: Send PostHog person data to Engage
-templateId: template-engage-so
+templateId:
+    - template-engage-so
 ---
 
 import Requirements from "../_snippets/requirements.mdx"

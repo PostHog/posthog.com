@@ -114,6 +114,16 @@ const librariesData = {
                 ),
             },
             {
+                name: 'C#/.NET',
+                url: '/docs/libraries/dotnet',
+                icon: (
+                    <CloudinaryImage
+                        src="https://res.cloudinary.com/dmukukwp6/image/upload/dotnet_logo_7e446176f2.svg"
+                        alt="C#/.NET"
+                    />
+                ),
+            },
+            {
                 name: 'More',
                 url: '/docs/libraries',
                 icon: <IconEllipsis />,
@@ -184,7 +194,7 @@ export default function Libraries() {
                     </div>
                 </div>
 
-                <div className="col-span-7 -mt-48 sm:mt-0 relative z-10 after:absolute after:left-0 after:w-full after:-top-60 after:h-60 after:bg-gradient-to-b after:from-tan/0 after:via-tan/75 after:to-tan dark:after:from-dark/0 dark:after:via-bg/75 dark:after:to-dark sm:overflow-hidden bg-tan dark:bg-dark">
+                <div className="col-span-7 -mt-48 sm:mt-0 pl-1 relative z-10 after:absolute after:left-0 after:w-full after:-top-60 after:h-60 after:bg-gradient-to-b after:from-tan/0 after:via-tan/75 after:to-tan dark:after:from-dark/0 dark:after:via-bg/75 dark:after:to-dark sm:overflow-hidden bg-tan dark:bg-dark">
                     <h3 className="text-5xl xl:text-6xl text-center sm:text-left mb-8">
                         SDKs for <span className="text-blue">web</span> and{' '}
                         <span className="text-red dark:text-yellow">mobile</span>
@@ -195,7 +205,7 @@ export default function Libraries() {
                             <div key={category.name}>
                                 <h4 className="mb-0">{category.name}</h4>
                                 <p className="opacity-70 mb-4">{category.description}</p>
-                                <ul className="flex gap-3 sm:gap-4 list-none p-0 pb-2 m-0">
+                                <ul className="flex gap-3 sm:gap-4 list-none p-0 pb-2 m-0 flex-wrap">
                                     {category.items.map((item) => (
                                         <li key={item.name}>
                                             <Link

@@ -354,7 +354,7 @@ To test this, press logout, fill the form in and press login. Then, in the home 
   classes="rounded"
 />
 
-Lastly, when the user logs out, you should call [`PostHog.reset()`](https://posthog.com/docs/libraries/android#reset). This resets the PostHog ID and ensures that events are associated to the correct user.
+Lastly, when the user logs out, you should call [`PostHog.reset()`](/docs/libraries/android#reset). This resets the PostHog ID and ensures that events are associated to the correct user.
 
 ```kotlin file=HomeActivity.kt
         logoutButton.setOnClickListener {

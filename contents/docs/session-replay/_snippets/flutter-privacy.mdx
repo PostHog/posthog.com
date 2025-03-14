@@ -1,0 +1,22 @@
+### Masking All Texts and Images
+
+```dart
+final config = PostHogConfig('<ph_project_api_key>');
+config.sessionReplay = true;
+/// Enable masking of all text and text input fields.
+/// Default: true.
+config.sessionReplayConfig.maskAllTexts = false;
+/// Enable masking of all images.
+/// Default: true.
+config.sessionReplayConfig.maskAllImages = false;
+```
+
+### Masking in Flutter
+
+- You can manually mark a Widget for masking using the `PostHogMaskWidget` Widget:
+
+```dart
+...
+    const PostHogMaskWidget(child: Text('Sensitive!'))
+...
+```

@@ -1,0 +1,53 @@
+1. Install `posthog-js` using your package manager:
+
+```shell
+yarn add posthog-js
+# or
+npm install --save posthog-js
+```
+
+2. Add your PostHog API key and host to your `nuxt.config.js` file. You can find your project API key in the PostHog app under Project Settings > Project Variables.
+
+```js file=nuxt.config.js
+export default defineNuxtConfig({
+  runtimeConfig: {
+    public: {
+      posthogPublicKey: '<ph_project_api_key>',
+      posthogHost: '<ph_client_api_host>'
+    }
+  }
+})
+```
+
+3. Create a new plugin by creating a new file `posthog.client.js` in your [plugins directory](https://nuxt.com/docs/guide/directory-structure/plugins).
+
+```js file=plugins/posthog.client.js
+import { defineNuxtPlugin } from '#app'
+import posthog from 'posthog-js'
+export default defineNuxtPlugin(nuxtApp => {
+  const runtimeConfig = useRuntimeConfig();
+  const posthogClient = posthog.init(runtimeConfig.public.posthogPublicKey, {
+    api_host: runtimeConfig.public.posthogHost || '<ph_client_api_host>',
+    capture_pageview: false, // we add manual pageview capturing below
+    loaded: (posthog) => {
+      if (import.meta.env.MODE === 'development') posthog.debug();
+    }
+  })
+
+  // Make sure that pageviews are captured with each route change
+  const router = useRouter();
+  router.afterEach((to) => {
+    nextTick(() => {
+      posthog.capture('$pageview', {
+        current_url: to.fullPath
+      });
+    });
+  });
+
+  return {
+    provide: {
+      posthog: () => posthogClient
+    }
+  }
+})
+```

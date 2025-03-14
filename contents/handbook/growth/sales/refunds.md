@@ -41,13 +41,13 @@ Subsequent incidents:
 Refund requests can come through different channels:
 
 In-app ticket
-- Comms team reviews the request, issues refund or credits based on the eligibility and criteria outlined above, and responds to customer.
+- Support team reviews the request, issues refund or credits based on the eligibility and criteria outlined above, and responds to customer.
 
 Contact sales form or email to sales@posthog.com
-Account Executives can direct these to comms team using the ticket emoji in the #website-contact-sales Slack channel to auto-create a Zendesk ticket
+Account Executives can direct these to the Support team using the ticket emoji in the #website-contact-sales Slack channel to auto-create a Zendesk ticket
 
 Large account requests
-- For large accounts managed by an AE, AE may lead the customer conversation and can loop in Comms or RevOps team as needed to process credits or refund in Stripe.
+- For large accounts managed by an AE, AE may lead the customer conversation and can loop in Support or RevOps team as needed to process credits or refund in Stripe.
 
 
 # Processing credits or refunds
@@ -117,7 +117,7 @@ You need Support specialist level access to Stripe, ask Simon for access.
 - They've asked for multiple refunds lately
 - The case doesn't match the simple cases above
 - It's a big customer (spending $1,667+ monthly)
-- Need to create or modify an invoice for the correction. Comms team should not create or modify invoices. Invoicing responsibilities will be handled by RevOps to maintain accuracy.
+- Need to create or modify an invoice for the correction. Support team should not create or modify invoices. Invoicing responsibilities will be handled by RevOps to maintain accuracy.
 
   
-Tag Mine in Zendesk and share what you checked, what you think we should do, and any other relevant context. RevOps will review review usage trends and customer lifecycle (e.g. new client, high-value account) to figure out next steps.
+Tag Mine in Zendesk and share what you checked, what you think we should do, and any other relevant context. RevOps will review usage trends and customer lifecycle (e.g. new client, high-value account) to figure out next steps.

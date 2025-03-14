@@ -14,6 +14,7 @@ import { useLayoutData } from './hooks'
 import SearchBox from 'components/Search/SearchBox'
 import Toggle from 'components/Toggle'
 import Tooltip from 'components/Tooltip'
+import Banner from 'components/Banner'
 
 const TheoToggle = () => {
     const { theoMode, setTheoMode } = useLayoutData()

@@ -577,7 +577,11 @@ const ProfileSidebar: React.FC<ProfileSidebarProps> = ({ profile, mutate }) => {
                                       <SidebarSection title="Teammates">
                                           <ul className="p-0 grid gap-y-2">
                                               {profiles.data
-                                                  .filter(({ id }) => id !== profile.id)
+                                                  .filter(
+                                                      ({ id, attributes }) =>
+                                                          id !== profile.id &&
+                                                          new Date(attributes.startDate) <= new Date()
+                                                  )
                                                   .map((profile) => {
                                                       return (
                                                           <li key={profile.id} className="flex items-center space-x-2">
@@ -602,11 +606,12 @@ const ProfileSidebar: React.FC<ProfileSidebarProps> = ({ profile, mutate }) => {
                       })
                     : null}
 
-                {user?.profile?.id === profile.id && (
+                {(user?.profile?.id === profile.id || (user?.role?.type === 'moderator' && user?.webmaster)) && (
                     <SidebarSection>
                         <Link
                             to="/community/profile/edit"
                             className="text-base text-red dark:text-yellow font-semibold"
+                            state={{ profileID: profile.id }}
                         >
                             Edit profile
                         </Link>

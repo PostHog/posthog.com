@@ -20,6 +20,7 @@ import { companyMenu } from '../../navs'
 import Fuse from 'fuse.js'
 import Tooltip from 'components/Tooltip'
 import Spinner from 'components/Spinner'
+import { slugifyTeamName } from 'lib/utils'
 
 interface IGitHubPage {
     title: string
@@ -65,7 +66,7 @@ export const VoteBox = ({ likeCount, liked }) => {
     )
 }
 
-const Feature = ({ id, title, teams, description, likeCount, onLike, onUpdate, githubUrls }) => {
+export const Feature = ({ id, title, teams, description, likeCount, onLike, onUpdate, githubUrls }) => {
     const { user, likeRoadmap } = useUser()
     const { search } = useLocation()
     const [authModalOpen, setAuthModalOpen] = useState(false)
@@ -125,9 +126,7 @@ const Feature = ({ id, title, teams, description, likeCount, onLike, onUpdate, g
                         <h3 className="text-lg m-0 leading-tight">{title}</h3>
                         {teamName && (
                             <Link
-                                to={`/teams/${slugify(teamName.toLowerCase().replace('ops', ''), {
-                                    remove: /and/,
-                                })}`}
+                                to={`/teams/${slugifyTeamName(teamName)}`}
                                 className="text-sm opacity-70 text-inherit hover:opacity-100 hover:text-red dark:hover:text-yellow mt-0.5"
                             >
                                 {teamName} Team
@@ -199,10 +198,11 @@ const SortButton = ({ active, onClick, children, className = '' }) => {
     return (
         <button
             onClick={onClick}
-            className={`px-3 py-2 md:py-1 rounded flex-1 text-[15px] md:text-sm border relative opacity-75 ${active
-                ? 'bg-white hover:bg-white dark:bg-dark dark:hover:bg-dark text-primary dark:text-primary-dark font-bold border border-light dark:border-dark'
-                : 'border-transparent hover:border-light dark:hover:border-dark hover:scale-[1.01] hover:top-[-.5px] active:top-[.5px] active:scale-[.99] font-semibold text-primary/75 dark:text-primary-dark/75 hover:text-primary dark:hover:text-primary-dark'
-                } ${className}`}
+            className={`px-3 py-2 md:py-1 rounded flex-1 text-[15px] md:text-sm border relative opacity-75 ${
+                active
+                    ? 'bg-white hover:bg-white dark:bg-dark dark:hover:bg-dark text-primary dark:text-primary-dark font-bold border border-light dark:border-dark'
+                    : 'border-transparent hover:border-light dark:hover:border-dark hover:scale-[1.01] hover:top-[-.5px] active:top-[.5px] active:scale-[.99] font-semibold text-primary/75 dark:text-primary-dark/75 hover:text-primary dark:hover:text-primary-dark'
+            } ${className}`}
         >
             {children}
         </button>
@@ -246,6 +246,7 @@ export default function Roadmap() {
                 },
             },
         },
+        limit: 100,
     })
 
     const fuse = useMemo(
@@ -340,10 +341,11 @@ export default function Roadmap() {
                                 <button
                                     key={team}
                                     onClick={() => navigate(`?sort=team&team=${encodeURIComponent(team)}`)}
-                                    className={`px-2 py-1 text-sm border border-border dark:border-dark rounded-md relative hover:scale-[1.01] active:top-[.5px] active:scale-[.99] ${selectedTeam === team
-                                        ? 'bg-accent dark:bg-accent-dark font-bold'
-                                        : 'text-primary-75 dark:hover:text-primary-dark-75 hover:bg-accent/75 dark:hover:bg-accent-dark'
-                                        }`}
+                                    className={`px-2 py-1 text-sm border border-border dark:border-dark rounded-md relative hover:scale-[1.01] active:top-[.5px] active:scale-[.99] ${
+                                        selectedTeam === team
+                                            ? 'bg-accent dark:bg-accent-dark font-bold'
+                                            : 'text-primary-75 dark:hover:text-primary-dark-75 hover:bg-accent/75 dark:hover:bg-accent-dark'
+                                    }`}
                                 >
                                     {team.replace(' Team', '')}
                                 </button>

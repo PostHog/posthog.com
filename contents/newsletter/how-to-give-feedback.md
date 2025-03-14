@@ -130,7 +130,7 @@ This is a mistake. Without consistent, intentional feedback, you're leaving grow
 Here are a few strategies to ensure you and your team are regularly sharing quality feedback:
 
 - Schedule monthly or quarterly 1-on-1 feedback sessions with the people you work most closely.
-- When doing project retrospectives, dedicate time where everyone can share what they thought each person did well and what they can improve on.
+- When doing project retrospectives, dedicate time when everyone can share what they thought each person did well and what they can improve on.
 - Allocate a few minutes at the end of your regular team meetings to discuss team wins and areas of improvement.
 
 At PostHog, our approach is to have [feedback dinners](/handbook/people/feedback#full-team-feedback-sessions) with the entire team. It gives everyone a chance to share feedback with each other in front of the rest of the team.

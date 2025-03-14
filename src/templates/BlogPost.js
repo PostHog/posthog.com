@@ -28,7 +28,8 @@ import { NewsletterForm } from 'components/NewsletterForm'
 import BuiltBy from '../components/BuiltBy'
 import TeamMember from 'components/TeamMember'
 import CloudinaryImage from 'components/CloudinaryImage'
-
+import AskMax from 'components/AskMax'
+import ImageSlider from 'components/ImageSlider'
 const A = (props) => <Link {...props} className="text-red hover:text-red font-semibold" />
 
 export const Intro = ({
@@ -154,9 +155,10 @@ export default function BlogPost({ data, pageContext, location, mobile = false }
         NewsletterForm,
         BuiltBy,
         TeamMember,
+        ImageSlider,
         ...shortcodes,
     }
-    const { tableOfContents } = pageContext
+    const { tableOfContents, askMax } = pageContext
     const { fullWidthContent, theoMode } = useLayoutData()
     const { pathname } = useLocation()
     const [postID, setPostID] = useState()
@@ -231,6 +233,7 @@ export default function BlogPost({ data, pageContext, location, mobile = false }
                             <MDXRenderer>{body}</MDXRenderer>
                         </MDXProvider>
                         <Upvote className="mt-6" />
+                        {askMax && <AskMax />}
                         <div className={`mt-8 mx-auto pb-20 ${fullWidthContent ? 'max-w-full' : 'max-w-4xl'}`}>
                             <h3>Comments</h3>
                             <Questions

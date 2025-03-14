@@ -29,6 +29,15 @@ Netlify supports [redirects and rewrites](https://docs.netlify.com/routing/redir
   force = true
 ```
 
+> **Note:** If deploying SvelteKit on Netlify use `_redirects` file and place it in `static` folder, as redirects in `netlify.toml` configuration [are not supported](https://docs.netlify.com/frameworks/sveltekit/#limitations).
+
+```js
+/ingest/static/*  https://us-assets.i.posthog.com/static/:splat  200!
+/ingest/*         https://us.i.posthog.com/:splat  200!
+```
+
+> **Note:** This proxy configuration works with custom domains but may not work correctly with the default `.netlify.app` domain. If you're experiencing issues with PostHog requests being blocked, ensure you're using a custom domain rather than the default Netlify domain.
+
 Once done, set the `/ingest` route of your domain as the API host in your PostHog initialization like this:
 
 ```js

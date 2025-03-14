@@ -39,6 +39,19 @@ const query = (offset: number, options?: UseQuestionsOptions, isModerator?: bool
             ],
         },
         populate: {
+            edits: {
+                sort: ['date:desc'],
+                populate: {
+                    by: {
+                        fields: ['firstName', 'lastName', 'color', 'gravatarURL'],
+                        populate: {
+                            avatar: {
+                                fields: ['url'],
+                            },
+                        },
+                    },
+                },
+            },
             resolvedBy: {
                 select: ['id'],
             },
@@ -63,6 +76,19 @@ const query = (offset: number, options?: UseQuestionsOptions, isModerator?: bool
                     profile: {
                         fields: ['id', 'firstName', 'lastName', 'gravatarURL', 'pronouns'],
                         populate: {
+                            edits: {
+                                sort: ['date:desc'],
+                                populate: {
+                                    by: {
+                                        fields: ['firstName', 'lastName', 'color', 'gravatarURL'],
+                                        populate: {
+                                            avatar: {
+                                                fields: ['url'],
+                                            },
+                                        },
+                                    },
+                                },
+                            },
                             avatar: {
                                 fields: ['id', 'url'],
                             },

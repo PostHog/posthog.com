@@ -75,9 +75,10 @@ Cohorts are sometimes confused with [groups](/docs/product-analytics/group-analy
 
 - **Groups** aggregate events based on entities, such as organizations or companies, but do not necessarily connect to a user. They enable you to analyze trends, insights, and dashboards at an entity-level (like a company or organization), as opposed to a user-level.
  
+ If your only goal is to create a **list of users** with something in common, we recommend cohorts instead of groups.
+
 Groups require additional code in your app to set up, while cohorts are created in PostHog and don't require additional code. This makes cohorts easier to use and quicker to get started. 
 
-If your only goal is to create a **list of users** with something in common, we recommend cohorts instead of groups.
 
 ## How to create a cohort
 
@@ -166,7 +167,7 @@ Has or doesn't have a person property with the following operators:
 
 | **Criteria**                       | **Example**                                                                                         |
 |----------------------------------------|-----------------------------------------------------------------------------------------------------|
-| **Completed and event for first time** | Completed `shared insight` event for the first time in the "last 30 days"                           |
+| **Completed an event for first time**  | Completed `shared insight` event for the first time in the "last 30 days"                           |
 | **Completed an event regularly**       | Completed `shared insight` at least "3 times per week" for at least "3 of the last 5 periods"       |
 | **Stopped doing an event**             | Stopped doing `shared insight` event in the "last 5 days" but had done it in the "5 days prior"     |
 | **Started doing event again**          | Started doing `shared insight` event in the "last 5 days" but had not done it in the "5 days prior" |
@@ -185,7 +186,7 @@ Dynamic cohorts are updated once every 24 hours.
  
  ### Can you use groups in cohorts?
  
- Not yet, but we are working on [rewriting cohort calculations in HogQL](/teams/product-analytics#goals) which will unlock your ability to do this. 
+ Not yet, but we are working on [rewriting cohort calculations in SQL](/teams/product-analytics#goals) which will unlock your ability to do this. 
  
 ### Further reading
 

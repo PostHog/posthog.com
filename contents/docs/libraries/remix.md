@@ -30,7 +30,6 @@ function PosthogInit() {
   useEffect(() => {
     posthog.init('<ph_project_api_key>', {
       api_host: '<ph_client_api_host>',
-      person_profiles: 'identified_only',
     });
   }, []);
 
@@ -50,7 +49,7 @@ startTransition(() => {
 
 ## Next steps
 
-For any technical questions for how to integrate specific PostHog features into Remix (such as analytics, feature flags, A/B testing, surveys, etc.), have a look at our [JavaScript Web SDK docs](/docs/libraries/js).
+For any technical questions for how to integrate specific PostHog features into Remix (such as analytics, feature flags, A/B testing, surveys, etc.), have a look at our [JavaScript Web SDK docs](/docs/libraries/js/features).
 
 Alternatively, the following tutorials can help you get started:
 
