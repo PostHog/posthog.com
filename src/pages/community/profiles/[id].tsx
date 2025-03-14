@@ -512,27 +512,11 @@ export const AchievementModal = ({
 }
 
 const Achievement = ({ title, description, image, icon, id, mutate, profile, highlight, points }) => {
-    const [modalOpen, setModalOpen] = useState(false)
     const { user } = useUser()
     const isCurrentUser = user?.profile?.id === profile.id
-    const handleClick = async () => {
-        if (isCurrentUser) {
-            setModalOpen(true)
-        }
-    }
-
-    const ImageContainer = isCurrentUser ? 'button' : 'span'
 
     return (
         <>
-            <AchievementModal
-                setModalOpen={setModalOpen}
-                modalOpen={modalOpen}
-                imageURL={image?.data?.attributes?.url}
-                title={title}
-                description={description}
-                points={points}
-            />
             <Tooltip
                 content={() => (
                     <div>
@@ -542,12 +526,9 @@ const Achievement = ({ title, description, image, icon, id, mutate, profile, hig
                 )}
                 placement="bottom"
             >
-                <ImageContainer
-                    onClick={handleClick}
-                    className={`relative transition-opacity ${highlight ? 'animate-jump-in' : ''}`}
-                >
+                <span className={`relative transition-opacity ${highlight ? 'animate-jump-in' : ''}`}>
                     <img className={`w-full`} src={icon?.data?.attributes?.url} />
-                </ImageContainer>
+                </span>
             </Tooltip>
         </>
     )

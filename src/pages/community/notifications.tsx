@@ -11,7 +11,6 @@ import Tooltip from 'components/Tooltip'
 import { navigate } from 'gatsby'
 import SEO from 'components/seo'
 import CloudinaryImage from 'components/CloudinaryImage'
-import { AchievementModal } from './profiles/[id]'
 dayjs.extend(relativeTime)
 dayjs.extend(isSameOrAfter)
 
@@ -86,7 +85,6 @@ const Question = ({ id, subject, activeAt, permalink, replies, date }) => {
 }
 
 const Achievement = ({ id, title, date, icon, image, description, points }) => {
-    const [modalOpen, setModalOpen] = useState(false)
     const { notifications, setNotifications, user } = useUser()
 
     const dismiss = async () => {
@@ -96,32 +94,6 @@ const Achievement = ({ id, title, date, icon, image, description, points }) => {
 
     return (
         <>
-            <AchievementModal
-                highlight
-                setModalOpen={setModalOpen}
-                modalOpen={modalOpen}
-                imageURL={image?.url}
-                title={title}
-                description={description}
-                points={points}
-                actionButtons={[
-                    {
-                        label: 'View profile',
-                        url: `/community/profiles/${user?.profile?.id}`,
-                        state: { achievement: { id } },
-                        onClick: () => {
-                            dismiss()
-                        },
-                    },
-                    {
-                        label: 'Dismiss',
-                        onClick: () => {
-                            dismiss()
-                            setModalOpen(false)
-                        },
-                    },
-                ]}
-            />
             <Notification
                 title={title}
                 excerpt="Achievement"
@@ -129,9 +101,8 @@ const Achievement = ({ id, title, date, icon, image, description, points }) => {
                 onDismiss={dismiss}
                 imageURL={icon?.url}
                 state={{ achievement: { id } }}
-                onClick={() => {
-                    setModalOpen(true)
-                }}
+                url={`/community/profiles/${user?.profile?.id}`}
+                onClick={dismiss}
             />
         </>
     )
