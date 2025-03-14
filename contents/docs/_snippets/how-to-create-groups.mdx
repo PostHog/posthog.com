@@ -1,4 +1,10 @@
-Groups are created and defined in your code when capturing events. 
+Groups are created with a `$groupidentify` call.
+
+import JSGroupIdentifyCodeSnippet from "../\_snippets/identify-group-call.mdx"
+
+<JSGroupIdentifyCodeSnippet />
+
+Events can then be associated with the group with a `posthog.group()` call, or by including the `$groups` property in an event.
 
 import JSGroupEventCodeSnippet from "../\_snippets/capture-group-event-code.mdx"
 
