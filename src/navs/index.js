@@ -3491,17 +3491,17 @@ export const docsMenu = {
                     featured: true,
                 },
                 {
+                    name: 'Stack traces',
+                    url: '/docs/error-tracking/stack-traces',
+                    icon: 'IconCode',
+                    color: 'seagreen',
+                },
+                {
                     name: 'Monitor errors',
                     url: '/docs/error-tracking/monitoring',
                     icon: 'IconGraph',
                     color: 'orange',
                     featured: true,
-                },
-                {
-                    name: 'Stack traces',
-                    url: '/docs/error-tracking/stack-traces',
-                    icon: 'IconCode',
-                    color: 'seagreen',
                 },
                 {
                     name: 'Troubleshooting and FAQs',

@@ -16,6 +16,7 @@ import AngularInstall from "../integrate/_snippets/install-angular.mdx"
 import AngularErrorTracking from './_snippets/angular-install-error-tracking.mdx'
 import NextJSErrorTracking from './_snippets/nextjs-install-error-tracking.mdx'
 import SvelteErrorTracking from './_snippets/svelte-install-error-tracking.mdx'
+import UploadSourceMaps from './_snippets/upload-source-maps.mdx'
 
 <BetaFeedbackBanner />
 
@@ -37,10 +38,12 @@ Error tracking enables you to track, investigate, and resolve exceptions your cu
         <Tab.Panel>
           <WebInstall />
           <JSWebErrorTracking />
+          <UploadSourceMaps />
         </Tab.Panel>
         <Tab.Panel>
           <ReactInstall />
           <JSWebErrorTracking />
+          <UploadSourceMaps />
         </Tab.Panel>
         <Tab.Panel>
           <PythonInstall />
@@ -49,9 +52,11 @@ Error tracking enables you to track, investigate, and resolve exceptions your cu
         <Tab.Panel>
           <NodeInstall />
           <NodeErrorTracking />
+          <UploadSourceMaps />
         </Tab.Panel>
         <Tab.Panel>
           <NextJSErrorTracking />
+          <UploadSourceMaps />
         </Tab.Panel>
         <Tab.Panel>
           <SvelteErrorTracking />
@@ -59,6 +64,7 @@ Error tracking enables you to track, investigate, and resolve exceptions your cu
         <Tab.Panel>
           <AngularInstall />
           <AngularErrorTracking />
+          <UploadSourceMaps />
         </Tab.Panel>
         <Tab.Panel>
           <SentryInstall />
