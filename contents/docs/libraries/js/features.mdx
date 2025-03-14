@@ -203,7 +203,7 @@ Since [experiments](/docs/experiments/manual) use feature flags, the code for ru
 ```js-web
 // Ensure flags are loaded before usage.
 // You'll only need to call this on the code the first time a user visits.
-// See this doc for more details: https://posthog.com/docs/feature-flags/manual#ensuring-flags-are-loaded-before-usage
+// See this doc for more details: /docs/feature-flags/manual#ensuring-flags-are-loaded-before-usage
 posthog.onFeatureFlags(function() {
   // feature flags should be available at this point
   if (posthog.getFeatureFlag('experiment-feature-flag-key')  == 'variant-name') {

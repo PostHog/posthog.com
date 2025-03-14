@@ -101,7 +101,7 @@ Attribution has always been hard, and it’s only getting harder because traditi
 
 1. Setup some basic tracking ([multi-touch attribution](https://www.linkedin.com/advice/1/what-pros-cons-using-first-touch-last-touch-multi-touch) is more of late-stage thing)
 
-2. You’ll get much better data if you [deploy a reverse proxy](https://posthog.com/docs/advanced/proxy).
+2. You’ll get much better data if you [deploy a reverse proxy](/docs/advanced/proxy).
 
 3. Add a free text “where did you hear about us” box to your onboarding.
 

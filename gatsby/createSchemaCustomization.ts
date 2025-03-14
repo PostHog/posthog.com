@@ -51,6 +51,7 @@ export const createSchemaCustomization: GatsbyNode['createSchemaCustomization'] 
       badge: String
       seo: FrontmatterSEO
       hideFromIndex: Boolean
+      price: String
     }
     type TeamData {
       name: String
