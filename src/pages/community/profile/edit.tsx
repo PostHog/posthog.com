@@ -73,11 +73,11 @@ const Toggle = ({ name, label, checked, onChange, options }) => {
             <div className="grid grid-cols-2 rounded-md bg-accent dark:bg-accent-dark relative text-center overflow-hidden mt-1 text-base border border-border dark:border-dark">
                 <span
                     className={`bg-red dark:bg-yellow w-1/2 h-full absolute transition-all left-0 ${
-                        checked ? '' : 'translate-x-full'
+                        checked === null ? 'hidden' : checked ? '' : 'translate-x-full'
                     }`}
                 />
-                <ToggleButton onClick={() => onChange(true)} active={checked} label={options[0]} />
-                <ToggleButton onClick={() => onChange(false)} active={!checked} label={options[1]} />
+                <ToggleButton onClick={() => onChange(true)} active={checked === true} label={options[0]} />
+                <ToggleButton onClick={() => onChange(false)} active={checked === false} label={options[1]} />
             </div>
         </div>
     )

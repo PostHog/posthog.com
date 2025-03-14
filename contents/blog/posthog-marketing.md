@@ -134,7 +134,7 @@ In a nutshell, 'Showed Intent' applies to any user who triggers an event we know
 
 - Visiting the [PostHog Cloud signup page](https://app.posthog.com/signup)
 - Visiting the [self-host license page](https://license.posthog.com/)
-- Visiting the [self-host section](https://posthog.com/docs/self-host) of our docs
+- Visiting the [self-host section](/docs/self-host) of our docs
 - Booking a demo.
 
 We track these by using an 'action' – a way of combining similar events into single event you can use in insights. You can create actions [using the PostHog Toolbar](/tutorials/toolbar) or via the Data Management tab in PostHog – it's dead easy.

@@ -28,3 +28,21 @@ The drawback of this approach is that whenever you make an update to a feature f
 
 > **Note:** Do not use local evaluation in an edge / lambda environment, as this initializes a PostHog instance on every call, which can raise your bill drastically. It's best to use regular flag evaluation instead.
 
+## Quota limiting
+
+Like all PostHog products, you can set a [billing limit](https://us.posthog.com/organization/billing) for feature flags. When a project exceeds this limit, the `/decide` endpoint will return a `quota_limited` response like this:
+
+```json
+{
+  "quota_limited": true,
+  "featureFlags": {}
+}
+```
+
+In this case, SDKs will:
+
+1. Return the default value for the feature flag, like `false` for `isFeatureEnabled()` and `null` for `getFeatureFlag()`
+2. Include a `quota_limited` property in the response
+3. Log a warning message if debug mode is enabled
+
+This ensures that your application continues to function even when feature flag quotas are exceeded, falling back to default behavior rather than failing.

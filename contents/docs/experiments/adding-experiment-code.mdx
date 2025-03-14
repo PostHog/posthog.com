@@ -19,7 +19,7 @@ In your experiment, each user is randomly assigned to a variant (usually either 
 ```js-web
 // Ensure flags are loaded before usage.
 // You only need to call this on the code the first time a user visits.
-// See this doc for more details: https://posthog.com/docs/feature-flags/manual#ensuring-flags-are-loaded-before-usage
+// See this doc for more details: /docs/feature-flags/manual#ensuring-flags-are-loaded-before-usage
 posthog.onFeatureFlags(function() {
     // feature flags should be available at this point
     if (posthog.getFeatureFlag('experiment-feature-flag-key')  == 'variant-name') {
@@ -38,7 +38,7 @@ if (posthog.getFeatureFlag('experiment-feature-flag-key')  == 'variant-name') {
 
 ```react
 // You can either use the `useFeatureFlagVariantKey` hook,
-// or you can use the feature flags component - https://posthog.com/docs/libraries/react#feature-flags-react-component
+// or you can use the feature flags component - /docs/libraries/react#feature-flags-react-component
 
 // Method one: using the useFeatureFlagVariantKey hook
 import { useFeatureFlagVariantKey } from 'posthog-js/react'
