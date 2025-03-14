@@ -8,8 +8,6 @@ availability:
     enterprise: full
 ---
 
-> Custom surveys is currently supported only with the [JavaScript Web SDK](/docs/libraries/js).
-
 At its most basic level, a survey is a collection of response events. If you wanted to, you could capture events from anywhere, like in this example of a hardcoded Next.js feedback survey:
 
 ```js-web
@@ -217,14 +215,23 @@ For multiple choice surveys, `survey_response` must be an array of values with t
 
 ### Capturing multiple responses
 
-If you have a survey with multiple questions, you can capture the responses to each question using the following syntax:
+If you have a survey with multiple questions, you can capture the responses to each question using both ID-based and index-based properties for backwards compatability:
 
 ```js-web
 posthog.capture("survey sent", {
     $survey_id: survey.id, // required
-    $survey_response: survey_response,
-    $survey_response_1: survey_response_1,
-    $survey_response_2: survey_response_2
+    
+    // First question responses
+    $survey_response: first_question_response, // Index-based
+    $survey_response_open_text_1: first_question_response, // ID-based
+    
+    // Second question responses
+    $survey_response_1: second_question_response,
+    $survey_response_nps_rating_1: second_question_response,
+    
+    // Third question responses
+    $survey_response_2: third_question_response,
+    $survey_response_multiple_choice_1: third_question_response
 })
 ```
 
