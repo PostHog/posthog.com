@@ -50,27 +50,6 @@ You'll first want to connect your Stripe account to PostHog. You can follow our 
 Once you've connected your Stripe account, you'll be able to choose the `stripe_price` table and the `amount`, `currency` and `created_at` columns from the Stripe data.
 And that's all, you'll immediately see your revenue data in your Web Analytics dashboard.
 
-## Base currency
-
-In our Revenue configuration tab you'll also be able to choose the base currency for your revenue data.
-
-This is the currency we'll **report** your revenue in our web analytics dashboard.
-
-## Currency data
-
-PostHog's currency conversion data is sourced from [Open Exchange Rates](https://openexchangerates.org/). The exchange rate data is:
-
-- Updated at an hourly frequency
-- Stored with daily granularity
-
-This ensures that your revenue data is converted using recent exchange rates, providing reliable revenue analytics across different currencies.
-
-### Supported currencies
-
-PostHog supports a wide range of global currencies for revenue tracking. 
-
-For a complete list of supported currencies, see our [currencies.py file](https://github.com/PostHog/posthog/blob/master/posthog/models/exchange_rate/currencies.py).
-
 #### What if you don't support the currency on my revenue event?
 
 We'll track that revenue event as if it had 0 value. You can always open a feature request to have us include a new currency to our list.
@@ -110,6 +89,22 @@ posthog.capture({
 ```
 
 ## Troubleshooting & FAQ
+
+### Can I change the default reporting currency in PostHog?
+
+Yes. You can select your desired currency in the **Revenue** tab in data management. This is the currency we'll **report** your revenue in our web analytics dashboard.
+
+### How do you convert renvenue in different currencies?
+
+We automatically convert revenue from other currencies into your chosen reporting currency – i.e. if someone makes a purchase in Candian Dollars (CAD) and your reporting currency is US Dollars (USD), it's converted into USD in PostHog to consistency in reporting.
+
+PostHog's currency conversion data is sourced from [Open Exchange Rates](https://openexchangerates.org/). The exchange rate data is updated at hourly and stored with daily granularity.
+
+This ensures that your revenue data is converted using recent exchange rates, providing reliable revenue analytics across different currencies.
+
+### Which currencies do you support?
+
+PostHog supports a wide range of global currencies for revenue tracking. For a complete list of supported currencies, see our [currencies.py file](https://github.com/PostHog/posthog/blob/master/posthog/models/exchange_rate/currencies.py).
 
 ### Why isn't my revenue appearing in the web analytics overview?
 
