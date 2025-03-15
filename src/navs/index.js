@@ -2482,6 +2482,12 @@ export const docsMenu = {
                     url: '/docs/web-analytics/web-vitals',
                     icon: 'IconWrench',
                     color: 'seagreen',
+                },
+                {
+                    name: 'Revenue tracking',
+                    url: '/docs/web-analytics/revenue-tracking',
+                    icon: 'IconPiggyBank',
+                    color: 'salmon',
                     badge: {
                         title: 'Beta',
                         className: 'uppercase !bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',

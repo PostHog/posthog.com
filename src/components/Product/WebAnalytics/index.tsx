@@ -185,6 +185,15 @@ const comparison = [
         },
     },
     {
+        feature: 'Revenue tracking',
+        companies: {
+            Matomo: true,
+            GA4: true,
+            PostHog:
+                '<span className="text-xs font-semibold text-opacity-60 bg-yellow px-1 py-0.5 rounded-sm uppercase text-primary">Beta</span>',
+        },
+    },
+    {
         feature: 'Real-time reporting',
         companies: {
             Matomo: true,
@@ -209,7 +218,7 @@ const comparison = [
         },
     },
     {
-        feature: 'No-cookie option',
+        feature: 'Cookieless tracking',
         companies: {
             Matomo: true,
             GA4: true,
