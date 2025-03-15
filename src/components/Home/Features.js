@@ -117,17 +117,62 @@ export default function Features({ title }) {
             />
             <div className="max-w-screen-2xl mx-auto">
                 <Slider beforeChange={handleChange} ref={sliderRef} {...sliderSettings}>
-                    <SliderItem image={<CloudinaryImage {...sliderImageProps} src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Home/images/slide-trends.png" />} />
-                    <SliderItem image={<CloudinaryImage {...sliderImageProps} src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Home/images/slide-funnels.png" />} />
                     <SliderItem
-                        image={<CloudinaryImage {...sliderImageProps} src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Home/images/slide-session-recordings.png" />}
+                        image={
+                            <CloudinaryImage
+                                {...sliderImageProps}
+                                src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Home/images/slide-trends.png"
+                            />
+                        }
                     />
-                    <SliderItem image={<CloudinaryImage {...sliderImageProps} src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Home/images/slide-feature-flags.png" />} />
                     <SliderItem
-                        image={<CloudinaryImage {...sliderImageProps} src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Home/images/slide-experimentation-suite.png" />}
+                        image={
+                            <CloudinaryImage
+                                {...sliderImageProps}
+                                src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Home/images/slide-funnels.png"
+                            />
+                        }
                     />
-                    <SliderItem image={<CloudinaryImage {...sliderImageProps} src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Home/images/slide-collaboration.png" />} />
-                    <SliderItem image={<CloudinaryImage {...sliderImageProps} src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Home/images/slide-plugins.png" />} />
+                    <SliderItem
+                        image={
+                            <CloudinaryImage
+                                {...sliderImageProps}
+                                src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Home/images/slide-session-recordings.png"
+                            />
+                        }
+                    />
+                    <SliderItem
+                        image={
+                            <CloudinaryImage
+                                {...sliderImageProps}
+                                src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Home/images/slide-feature-flags.png"
+                            />
+                        }
+                    />
+                    <SliderItem
+                        image={
+                            <CloudinaryImage
+                                {...sliderImageProps}
+                                src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Home/images/slide-experimentation-suite.png"
+                            />
+                        }
+                    />
+                    <SliderItem
+                        image={
+                            <CloudinaryImage
+                                {...sliderImageProps}
+                                src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Home/images/slide-collaboration.png"
+                            />
+                        }
+                    />
+                    <SliderItem
+                        image={
+                            <CloudinaryImage
+                                {...sliderImageProps}
+                                src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Home/images/slide-plugins.png"
+                            />
+                        }
+                    />
                 </Slider>
             </div>
             <div className="px-4 text-center my-16">
