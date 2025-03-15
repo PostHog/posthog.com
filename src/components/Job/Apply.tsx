@@ -5,7 +5,7 @@ import Link from 'components/Link'
 import Modal from 'components/Modal'
 import { AnimatePresence, motion } from 'framer-motion'
 import { StaticImage } from 'gatsby-plugin-image'
-import React, { useRef, useState } from 'react'
+import React, { useState, useCallback } from 'react'
 import Confetti from 'react-confetti'
 import GitHubButton from 'react-github-btn'
 import { NewsletterForm } from 'components/NewsletterForm'
@@ -13,6 +13,7 @@ import { Close } from 'components/NotProductIcons'
 import usePostHog from '../../hooks/usePostHog'
 import { RenderInClient } from 'components/RenderInClient'
 import { IconExternal } from '@posthog/icons'
+import { useDropzone } from 'react-dropzone'
 const allowedFileTypes = ['application/pdf']
 
 interface IResumeComponentProps {
@@ -71,43 +72,50 @@ const components = {
             name={title}
         />
     ),
-    file: ({ title, required, path, placeholder }: IResumeComponentProps) => {
+    file: ({ title, required, path }: IResumeComponentProps) => {
         const [fileName, setFileName] = useState()
-        const inputRef = useRef(null)
 
-        const handleDrop = (e) => {
-            setFileName(e.target.files.item(0).name)
-        }
+        const onDrop = useCallback((acceptedFiles) => {
+            if (acceptedFiles.length > 0) {
+                setFileName(acceptedFiles[0].name)
+                const dataTransfer = new DataTransfer()
+                dataTransfer.items.add(acceptedFiles[0])
+                if (inputRef.current) {
+                    inputRef.current.files = dataTransfer.files
+                }
+            }
+        }, [])
+
+        const { getRootProps, getInputProps, isDragActive, inputRef, open } = useDropzone({
+            onDrop,
+            accept: {
+                'application/pdf': ['.pdf'],
+            },
+            maxFiles: 1,
+            multiple: false,
+            noClick: true,
+        })
 
         return (
-            <div className="relative h-24 w-full border border-light dark:border-dark bg-accent dark:bg-accent-dark rounded-md flex justify-center items-center text-black/50 dark:text-white/50">
+            <div
+                {...getRootProps()}
+                className={`relative h-24 w-full border border-light dark:border-dark ${
+                    isDragActive ? 'bg-blue/10' : 'bg-accent dark:bg-accent-dark'
+                } rounded-md flex justify-center items-center text-black/50 dark:text-white/50`}
+            >
                 <div className="absolute">
                     {fileName ? (
                         <p className="!m-0">{fileName}</p>
                     ) : (
                         <p className="flex space-x-3 items-center !m-0">
-                            <button
-                                onClick={() => inputRef?.current.click()}
-                                type="button"
-                                className={container('primary', 'sm')}
-                            >
+                            <button type="button" className={container('primary', 'sm')} onClick={open}>
                                 <span className={child('primary', undefined, undefined, 'sm')}>Upload file</span>
                             </button>
                             <span className="text-sm">or drag and drop here</span>
                         </p>
                     )}
                 </div>
-                <input
-                    ref={inputRef}
-                    onChange={handleDrop}
-                    data-path={path}
-                    required={required}
-                    className="opacity-0 absolute w-full h-full inset-0 cursor-pointer"
-                    placeholder={placeholder || title}
-                    name={title}
-                    type="file"
-                    accept={allowedFileTypes.join(',')}
-                />
+                <input {...getInputProps()} ref={inputRef} data-path={path} required={required} name={title} />
             </div>
         )
     },
