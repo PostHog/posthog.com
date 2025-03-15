@@ -54,6 +54,7 @@
         "dotenv": "^10.0.0",
         "formik": "^2.2.9",
         "framer-motion": "^4.1.17",
+        "free-email-domains": "^1.2.16",
         "fuse.js": "^6.6.2",
         "gatsby": "4.25.9",
         "gatsby-cli": "^4.20.0",
