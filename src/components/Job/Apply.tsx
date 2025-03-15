@@ -28,7 +28,7 @@ const components = {
             name={title}
             data-path={path}
             required={required}
-            className="flex-grow w-full block !bg-white dark:!bg-white/10 box-border px-3 py-2 rounded-sm focus:shadow-xl border border-black/20 text-[17px] font-medium dark:bg-white box-border/10 dark:text-white"
+            className="w-full block !bg-white dark:!bg-white/10 box-border px-3 py-2 rounded-sm focus:shadow-xl border border-black/20 text-[17px] font-medium dark:bg-white box-border/10 dark:text-white"
         >
             <option disabled selected value="">
                 Select an option
@@ -46,7 +46,7 @@ const components = {
         <input
             data-path={path}
             required={required}
-            className="flex-grow w-full block !bg-white dark:!bg-white/10 box-border px-3 py-2 rounded-sm focus:shadow-xl border border-black/20 text-[17px] font-medium dark:bg-white box-border/10 dark:text-white"
+            className="w-full block !bg-white dark:!bg-white/10 box-border px-3 py-2 rounded-sm focus:shadow-xl border border-black/20 text-[17px] font-medium dark:bg-white box-border/10 dark:text-white"
             placeholder={typeof placeholder === 'string' ? placeholder : title}
             name={title}
         />
@@ -55,7 +55,7 @@ const components = {
         <input
             data-path={path}
             required={required}
-            className="flex-grow w-full block !bg-white dark:!bg-white/10 box-border px-3 py-2 rounded-sm focus:shadow-xl border border-black/20 text-[17px] font-medium dark:bg-white box-border/10 dark:text-white"
+            className="w-full block !bg-white dark:!bg-white/10 box-border px-3 py-2 rounded-sm focus:shadow-xl border border-black/20 text-[17px] font-medium dark:bg-white box-border/10 dark:text-white"
             type="email"
             placeholder={placeholder || title}
             name={title}
@@ -168,12 +168,14 @@ const Form = ({ setSubmitted, info, id }) => {
                                     }
                                     key={field?.path}
                                 >
-                                    <label
-                                        className={`opacity-70 mb-1 inline-block ${required ? 'font-bold' : ''}`}
-                                        htmlFor={field?.title}
-                                    >
-                                        {field?.title}
-                                    </label>
+                                    <div className="flex-grow">
+                                        <label
+                                            className={`opacity-70 mb-1 inline-block ${required ? 'font-bold' : ''}`}
+                                            htmlFor={field?.title}
+                                        >
+                                            {field?.title}
+                                        </label>
+                                    </div>
                                     {components[type] &&
                                         components[type]({
                                             title: field?.title,
