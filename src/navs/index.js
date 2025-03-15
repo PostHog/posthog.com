@@ -3209,6 +3209,10 @@ export const docsMenu = {
                             url: '/docs/cdp/destinations/snapchat-ads',
                         },
                         {
+                            name: 'TikTok Ads',
+                            url: '/docs/cdp/destinations/tiktok-ads',
+                        },
+                        {
                             name: 'Twilio',
                             url: '/docs/cdp/destinations/twilio',
                         },
