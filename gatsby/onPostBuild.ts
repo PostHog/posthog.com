@@ -251,11 +251,6 @@ export const onPostBuild: GatsbyNode['onPostBuild'] = async ({ graphql }) => {
 
     console.log('Running onPostBuild tasks')
 
-    // Copy hedgehog mode assets to public folder
-    const source = path.resolve('node_modules/@posthog/hedgehog-mode/assets')
-    const hedgehogModeDir = path.resolve(__dirname, '../public/hedgehog-mode')
-    await fs.cpSync(source, hedgehogModeDir, { recursive: true })
-
     const { data } = await graphql(`
         query {
             allRoadmap(filter: { complete: { ne: false } }) {
