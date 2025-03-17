@@ -20,7 +20,7 @@ PostHog can collect revenue from two sources:
 
 ### Option 1: Properties on events
 
-The simplest way to send us revenue data is to add it as properties on revenue generating events, such as when a purchase is completed, a subscription is renewed, or a user subscribes to a newsletter.
+The simplest way to send us revenue data is to add it as properties on revenue generating events, such as when a purchase is completed, a subscription is renewed, or a user subscribes for the first time.
 
 When you do so, you need to include two properties:
 
@@ -40,7 +40,7 @@ The configuration for these is similar to the events configuration, but you'll n
 - `currency`: The currency of the revenue in ISO 4217 format (USD, EUR, GBP, etc.).
 - `timestamp`: The timestamp of when the revenue was generated.
 
-For Data Warehouse tables, you're **required** to choose a currency from one of its columns. This restriction might be lifted in the future. We don't support custom SQL at the moment.
+For Data Warehouse tables, you're **required** to choose a currency from one of its columns.
 
 We currently have a built-in connection to Stripe, which will allow you to import your Stripe payment data directly into PostHog.
 Integrations with other payment platforms such as RevenueCat and LemonSqueezy are coming soon.
@@ -48,6 +48,7 @@ Integrations with other payment platforms such as RevenueCat and LemonSqueezy ar
 You'll first want to connect your Stripe account to PostHog. You can follow our [Stripe integration docs](/tutorials/stripe-reports) to do so.
 
 Once you've connected your Stripe account, you'll be able to choose the `stripe_price` table and the `amount`, `currency` and `created_at` columns from the Stripe data.
+
 And that's all, you'll immediately see your revenue data in your Web Analytics dashboard.
 
 #### What if you don't support the currency on my revenue event?
