@@ -63,12 +63,11 @@ export default function HedgeHogModeEmbed(): JSX.Element {
                 skin: 'default',
                 controls_enabled: true,
                 player: true,
-                accessories: getRandomAccesoryCombo(),
             })
 
             // spawnHedgehog(20, game)
         }
     }, [game])
 
-    return <div id="game" className="fixed inset-0 z-20 pointer-events-none" ref={(r) => setRef(r)}></div>
+    return <div id="game" className="fixed inset-0 z-[999998] pointer-events-none" ref={(r) => setRef(r)}></div>
 }
