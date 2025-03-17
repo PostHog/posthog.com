@@ -2,7 +2,7 @@
 
 > **Note:** A minimum SDK version of v3.7.0 is required, but we recommend keeping up to date with the latest version to ensure you have all of error tracking's features.
 
-Exception autocapture can be enabled during initialization of the PostHog client to automatically capture any exception thrown by your Python application.
+Exception autocapture can be enabled during initialization of the PostHog client to automatically capture any unhandled exceptions thrown by your Python application. It works by setting Python's built-in exception hooks, such as `sys.excepthook` and `threading.excepthook`.
 
 ```python
 from posthog import Posthog
