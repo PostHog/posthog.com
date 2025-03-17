@@ -36,9 +36,6 @@ import MediaUploadModal from 'components/MediaUploadModal'
 import SideModal from 'components/Modal/SideModal'
 import { Authentication } from 'components/Squeak'
 import { useChat } from 'hooks/useChat'
-import { useSearch } from 'components/Search/SearchContext'
-import HedgehogMode from 'components/HedgehogMode'
-import HedgeHogModeEmbed from 'components/HedgehogMode'
 
 export const Avatar = (props: { className?: string; src?: string }) => {
     return (
@@ -496,7 +493,6 @@ export const Main = () => {
                 />
             </SideModal>
             <MediaUploadModal open={mediaModalOpen} setOpen={setMediaModalOpen} />
-            <HedgeHogModeEmbed />
             <div className="border-b border-light dark:border-dark bg-accent dark:bg-accent-dark mb-1">
                 <div
                     className={`flex mx-auto px-2 md:px-0 mdlg:px-5 justify-between transition-all ${

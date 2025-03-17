@@ -60,14 +60,13 @@ export default function HedgeHogModeEmbed(): JSX.Element {
         if (game) {
             game.spawnHedgehog({
                 id: 'hedgehog-1',
-                skin: 'spiderhog', // TODO: Remove
+                skin: 'default',
                 controls_enabled: true,
                 player: true,
-                color: 'rainbow',
                 accessories: getRandomAccesoryCombo(),
             })
 
-            spawnHedgehog(20, game)
+            // spawnHedgehog(20, game)
         }
     }, [game])
 
