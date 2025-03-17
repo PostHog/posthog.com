@@ -257,9 +257,6 @@ export const createSchemaCustomization: GatsbyNode['createSchemaCustomization'] 
     type PostHogPipeline implements Node {
       mdx: Mdx @link(by: "frontmatter.templateId", from: "pipelineId")
     }
-    type PostHogTransformation implements Node {
-      mdx: Mdx @link(by: "frontmatter.templateId", from: "transformationId")
-    }
   `)
     createTypes([
         schema.buildObjectType({
