@@ -201,19 +201,21 @@ export default function Feedback() {
 
 ## Capture survey responses
 
-The main event you must capture to track survey results is `survey sent`. PostHog sends survey responses in two formats to maintain backward compatibility:
+The main event you must capture to track survey results is `survey sent`. PostHog supports two formats for survey responses, but we strongly recommend using ID-based responses as they are more reliable and resistant to changes in question ordering:
 
 ```js-web
 posthog.capture("survey sent", {
     $survey_id: survey.id, // required
-    
-    // For the first question:
-    $survey_response: survey_response, // Index-based (position 0)
-    $survey_response_question_id: survey_response, // ID-based (using the question ID)
-    
-    // For additional questions:
-    $survey_response_1: second_question_response, // Index-based (position 1)
-    $survey_response_question_id_2: second_question_response // ID-based (using the question ID)
+    $survey_response_question_id: survey_response // ID-based (recommended)
+})
+```
+
+For backward compatibility, PostHog also supports index-based responses, but these are more fragile as they depend on question order:
+
+```js-web
+posthog.capture("survey sent", {
+    $survey_id: survey.id,
+    $survey_response: survey_response // Index-based (legacy, position 0)
 })
 ```
 
@@ -221,33 +223,36 @@ posthog.capture("survey sent", {
 
 Survey responses expect text, so you should convert numbers to text e.g. `8` should be converted to `"8"`.
 
-For multiple choice surveys, the response must be an array of values with the selected choices e.g., `$survey_response: ["response_1", "response_2"]`.
+For multiple choice surveys, the response must be an array of values with the selected choices e.g., `$survey_response_multiple_choice_1: ["response_1", "response_2"]`.
 
 ### Capturing multiple responses
 
-If you have a survey with multiple questions, you can capture the responses to each question using both ID-based and index-based properties:
+For surveys with multiple questions, use ID-based properties to ensure your responses remain valid even if questions are reordered:
 
 ```js-web
 posthog.capture("survey sent", {
     $survey_id: survey.id, // required
     
-    // First question responses
-    $survey_response: first_question_response, // Index-based
-    $survey_response_open_text_1: first_question_response, // ID-based
-    
-    // Second question responses
-    $survey_response_1: second_question_response, // Index-based
-    $survey_response_nps_rating_1: second_question_response, // ID-based
-    
-    // Third question responses
-    $survey_response_2: third_question_response, // Index-based
-    $survey_response_multiple_choice_1: third_question_response // ID-based
+    // Using question IDs (recommended)
+    $survey_response_open_text_1: first_question_response,
+    $survey_response_nps_rating_1: second_question_response,
+    $survey_response_multiple_choice_1: third_question_response
 })
 ```
 
-This dual approach ensures backward compatibility for existing implementations while providing more reliable question identification through question IDs. The question IDs are automatically generated based on the question type (e.g., `open_text_1`, `nps_rating_1`, `multiple_choice_1`) and are available in the survey response from the API.
+While index-based responses are still supported, we recommend using ID-based responses for all new implementations:
 
-If you want to make the most of PostHog's automatic survey analysis and results visualizations page, you'll need to capture survey responses in the above formats.
+```js-web
+// Legacy format (not recommended for new implementations)
+posthog.capture("survey sent", {
+    $survey_id: survey.id,
+    $survey_response: first_question_response,
+    $survey_response_1: second_question_response,
+    $survey_response_2: third_question_response
+})
+```
+
+> **Note:** While PostHog's survey results page supports both formats, custom dashboards and insights might need updates if you switch from index-based to ID-based responses. We recommend planning this transition carefully if you have existing custom analytics based on survey responses.
 
 ## Capture survey lifecycle events
 
