@@ -14,6 +14,13 @@ import { ProductScreenshot } from 'components/ProductScreenshot'
 
 Our revenue tracking feature enables you to capture revenue from your website via the events you are already sending us, or an integration with a payment platform, which you can then track in your [web analytics dashboard](https://app.posthog.com/web).
 
+<ProductScreenshot
+    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/Captura_de_tela_2025_03_17_200924_dc0a883144.png" 
+    imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/Captura_de_tela_2025_03_17_200946_38e146bad3.png"
+    alt="web analytics dashboard"
+    classes="rounded"
+/>
+
 ## Choosing a revenue data source
 
 PostHog can collect revenue from two sources:
@@ -53,9 +60,23 @@ We currently have a built-in connection to Stripe, which will allow you to impor
 
 First, need to connect your Stripe account to PostHog. You can follow our [Stripe integration docs](/tutorials/stripe-reports) to do so.
 
-Once you've connected your Stripe account, go to the **Revenue** tab in **Data management** and choose the `stripe_price` table and the `amount`, `currency` and `created_at` columns from the Stripe data.
+Once you've connected your Stripe account, go to the **Revenue** tab in **Data management** and choose the `stripe_charge` table and the `amount`, `currency` and `created_at` columns from the Stripe data.
+
+<ProductScreenshot
+    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/Captura_de_tela_2025_03_17_201438_0328f03c28.png" 
+    imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/Captura_de_tela_2025_03_17_201457_1d9f93a89a.png"
+    alt="revenue data source configuration"
+    classes="rounded"
+/>
 
 And that's all, you'll immediately see your revenue data in your Web Analytics dashboard.
+
+<ProductScreenshot
+    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/Captura_de_tela_2025_03_17_201351_d65e1393df.png" 
+    imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/Captura_de_tela_2025_03_17_201403_98af416521.png"
+    alt="revenue data source"
+    classes="rounded"
+/>
 
 ## Using revenue data in product analytics
 
@@ -65,7 +86,7 @@ You can use your revenue data for deeper product analytics insights beyond the w
 - Analyze user journeys that lead to purchases
 - Segment users by revenue contribution
 
-When working with revenue data in product analytics, you may want to use the [`convertCurrency` function](#querying-converted-rates) for accurate reporting across different currencies.
+When working with revenue data in product analytics, you may want to use the [`convertCurrency` function](#can-i-query-converted-rates) for accurate reporting across different currencies.
 
 ## Sending backend events for revenue tracking
 
@@ -85,7 +106,9 @@ posthog.capture({
     distinct_id: posthog_distinct_id,
     event: 'Purchase Succeeded',
     properties: {
-        '$session_id': posthog_session_id
+        '$session_id': posthog_session_id,
+        value: 100,
+        currency: 'USD',
     }
 })
 ```
@@ -95,6 +118,13 @@ posthog.capture({
 ### Can I change the default reporting currency in PostHog?
 
 Yes. You can select your desired currency in the **Revenue** tab in **Data management**. This is the currency we'll use to *report* revenue in our web analytics dashboard.
+
+<ProductScreenshot
+    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/Captura_de_tela_2025_03_17_201104_33977aba84.png" 
+    imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/Captura_de_tela_2025_03_17_201051_e412bbb268.png"
+    alt="base currency configuration"
+    classes="rounded"
+/>
 
 ### How do you convert renvenue in different currencies?
 
@@ -134,6 +164,17 @@ SELECT
     convertCurrency(original_currency, 'USD', original_value, timestamp) as value_usd
 FROM events
 WHERE event = 'purchase'
+```
+
+The signature for the `convertCurrency` function is:
+
+```
+convertCurrency(
+    from_currency: string,
+    to_currency: string,
+    value: Decimal,
+    timestamp: Date | DateTime
+) -> Decimal
 ```
 
 ### Can I correlate revenue with paid ads data?
