@@ -50,26 +50,26 @@ Once you've connected your Stripe account, go to the **Revenue** tab in **Data m
 
 And that's all, you'll immediately see your revenue data in your Web Analytics dashboard.
 
-## Using revenue data beyond web analytics
+## Using revenue data in product analytics
 
-### Using revenue data in product analytics
-
-You can absolutely use your revenue data for deeper Product Analytics beyond the Web Analytics dashboard. This allows you to:
+You can use your revenue data for deeper product analytics insights beyond the web analytics dashboard, too. This allows you to:
 
 - Create custom revenue funnels
 - Analyze user journeys that lead to purchases
 - Segment users by revenue contribution
 
-When working with revenue data in Product Analytics, you may want to use the [`convertCurrency` function](#querying-converted-rates) for accurate reporting across different currencies.
+When working with revenue data in product analytics, you may want to use the [`convertCurrency` function](#querying-converted-rates) for accurate reporting across different currencies.
 
-### Sending backend events for revenue tracking
+## Sending backend events for revenue tracking
 
 You can send revenue tracking events from your backend systems, which is especially useful for tracking purchases that complete outside of the browser.
 
-When sending backend events, you must include a `session_id` to ensure they appear in Web Analytics. The session ID connects the backend purchase event with the user's web session.
+When sending backend events, you must include a `session_id` to ensure they appear in web analytics. The session ID connects the backend purchase event with the user's web session.
 
 The `session_id` should be a UUID V7 that uniquely identifies the user's session.
-You can either generate a random one, but ideally you should reuse the same value we generated in our Frontend SDK so that all events belong to the same session in our UI.
+
+You can generate a random one, but ideally you should reuse the same value we generated in our Frontend SDK, so that all events belong to the same session in our UI.
+
 You can learn more about how to do this in the [session docs](/docs/data/sessions#server-sdks-and-sessions).
 
 Example backend event:
