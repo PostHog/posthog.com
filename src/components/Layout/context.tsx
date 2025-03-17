@@ -68,6 +68,10 @@ export const LayoutProvider = ({ children, ...other }: IProps) => {
     }, [fullWidthContent])
 
     useEffect(() => {
+        localStorage.setItem('hedgehog-mode-enabled', hedgehogModeEnabled + '')
+    }, [hedgehogModeEnabled])
+
+    useEffect(() => {
         if (compact) {
             window.parent.postMessage(
                 {
