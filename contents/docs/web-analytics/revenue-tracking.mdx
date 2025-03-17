@@ -10,7 +10,7 @@ availability:
 
 import { ProductScreenshot } from 'components/ProductScreenshot'
 
-> This feature is currently in beta.
+> **Important:** This feature is currently in beta. Please leave a comment on this page if you have feedback or questions, or leave feedback via the in-app support modal.
 
 Our revenue tracking feature enables you to capture revenue from your website via the events you are already sending us, or an integration with a payment platform, which you can then track in your [web analytics dashboard](https://app.posthog.com/web).
 
@@ -20,7 +20,7 @@ PostHog can collect revenue from two sources:
 
 ### Option 1: Properties on events
 
-The simplest way to send us revenue data is to add it as properties on revenue generating events, such as when a purchase is completed, a subscription is renewed, or a user subscribes for the first time.
+The simplest way to send us revenue data is to add it as properties on revenue generating events, such as when a purchase is completed, a user starts a subscription, or a subscription is renewed.
 
 When you do so, you need to include two properties:
 
@@ -29,7 +29,7 @@ When you do so, you need to include two properties:
 
 You can choose any name you like for these properties – you can customize them in the **Revenue** tab in [data management](https://app.posthog.com/data-management/revenue).
 
-The `currency` property is optional as you can choose a static currency when configuring your revenue event in your dashboard, but we recommend sending it if you can.
+You `currency` property is technically optional as you can choose a static currency when configuring your revenue event in your dashboard, but we recommend sending it if you can to ensure backward compatability should you ever take payments in a different currency.
 
 ### Option 2: Data warehouse tables
 
@@ -40,21 +40,15 @@ The configuration for these is similar to the events configuration, but you'll n
 - `currency`: The currency of the revenue in ISO 4217 format (USD, EUR, GBP, etc.).
 - `timestamp`: The timestamp of when the revenue was generated.
 
-For Data Warehouse tables, you're **required** to choose a currency from one of its columns.
+For data Warehouse tables, you're **required** to choose a currency from one of its columns.
 
-We currently have a built-in connection to Stripe, which will allow you to import your Stripe payment data directly into PostHog.
-Integrations with other payment platforms such as RevenueCat and LemonSqueezy are coming soon.
+We currently have a built-in connection to Stripe, which will allow you to import your Stripe payment data directly into PostHog. Integrations with other payment platforms, such as RevenueCat and LemonSqueezy, are coming soon.
 
-You'll first want to connect your Stripe account to PostHog. You can follow our [Stripe integration docs](/tutorials/stripe-reports) to do so.
+First, need to connect your Stripe account to PostHog. You can follow our [Stripe integration docs](/tutorials/stripe-reports) to do so.
 
-Once you've connected your Stripe account, you'll be able to choose the `stripe_price` table and the `amount`, `currency` and `created_at` columns from the Stripe data.
+Once you've connected your Stripe account, go to the **Revenue** tab in **Data management** and choose the `stripe_price` table and the `amount`, `currency` and `created_at` columns from the Stripe data.
 
 And that's all, you'll immediately see your revenue data in your Web Analytics dashboard.
-
-#### What if you don't support the currency on my revenue event?
-
-We'll track that revenue event as if it had 0 value. You can always open a feature request to have us include a new currency to our list.
-We're always monitoring new currencies and adding them as we see fit.
 
 ## Using revenue data beyond web analytics
 
@@ -93,7 +87,7 @@ posthog.capture({
 
 ### Can I change the default reporting currency in PostHog?
 
-Yes. You can select your desired currency in the **Revenue** tab in data management. This is the currency we'll **report** your revenue in our web analytics dashboard.
+Yes. You can select your desired currency in the **Revenue** tab in **Data management**. This is the currency we'll use to *report* revenue in our web analytics dashboard.
 
 ### How do you convert renvenue in different currencies?
 
@@ -105,7 +99,11 @@ This ensures that your revenue data is converted using recent exchange rates, pr
 
 ### Which currencies do you support?
 
-PostHog supports a wide range of global currencies for revenue tracking. For a complete list of supported currencies, see our [currencies.py file](https://github.com/PostHog/posthog/blob/master/posthog/models/exchange_rate/currencies.py).
+PostHog supports a wide range of global currencies for revenue tracking. See our [currencies.py file](https://github.com/PostHog/posthog/blob/master/posthog/models/exchange_rate/currencies.py) for a complete list.
+
+### What if you don't support the currency on my revenue event?
+
+This is unlikely given the large range of currencies we support, but in this event we'd track that revenue event as if it had `0` value. We welcome [feature requests](https://github.com/PostHog/posthog/issues/new?assignees=&labels=feature&template=feature_request.md&title=) for currencies you'd like us to support.
 
 ### Why isn't my revenue appearing in the web analytics overview?
 
@@ -115,7 +113,7 @@ If your revenue isn't appearing in your web analytics dashboard, there are a few
 
 2. **Missing session ID**: Revenue events must include a session ID to appear in web analytics. Without this identifier, PostHog cannot associate the revenue with a particular web session.
 
-### Can I querying converted rates?
+### Can I query converted rates?
 
 Yes, you can query converted rates yourself in SQL using the `convertCurrency` function. This is useful for custom queries and advanced analytics.
 
