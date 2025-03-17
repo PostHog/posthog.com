@@ -1,11 +1,10 @@
 import React, { useEffect, useState } from 'react'
 
-import { getRandomAccesoryCombo, HedgeHogMode } from "@posthog/hedgehog-mode";
+import { getRandomAccesoryCombo, HedgeHogMode } from '@posthog/hedgehog-mode'
 import { useLayoutData } from 'components/Layout/hooks'
 
-
 export default function HedgeHogModeEmbed(): JSX.Element {
-    const { hedgehogModeEnabled, setHedgehogModeEnabled} = useLayoutData()
+    const { hedgehogModeEnabled, setHedgehogModeEnabled } = useLayoutData()
 
     const [ref, setRef] = useState<HTMLDivElement | null>(null)
     const [game, setGame] = useState<HedgeHogMode | null>(null)
@@ -32,7 +31,7 @@ export default function HedgeHogModeEmbed(): JSX.Element {
     }
 
     const setupHedgehogMode = async () => {
-        const { HedgeHogMode } = await import("@posthog/hedgehog-mode")
+        const { HedgeHogMode } = await import('@posthog/hedgehog-mode')
         if (ref) {
             const hedgeHogMode = new HedgeHogMode({
                 assetsUrl: '/hedgehog-mode',
@@ -44,8 +43,18 @@ export default function HedgeHogModeEmbed(): JSX.Element {
     }
 
     useEffect(() => {
-        setupHedgehogMode()
-    }, [ref])
+        if (hedgehogModeEnabled && ref) {
+            setupHedgehogMode()
+        }
+    }, [ref, hedgehogModeEnabled])
+
+    useEffect(() => {
+        if (!hedgehogModeEnabled && game) {
+            game.destroy()
+            setGame(null)
+        }
+    }, [hedgehogModeEnabled, game])
+
 
     useEffect(() => {
         if (game) {
@@ -62,12 +71,5 @@ export default function HedgeHogModeEmbed(): JSX.Element {
         }
     }, [game])
 
-
-    return (
-        <div
-          id="game"
-          className="fixed inset-0 z-20"
-          ref={(r) => setRef(r)}
-        ></div>
-    )
+    return <div id="game" className="fixed inset-0 z-20 pointer-events-none" ref={(r) => setRef(r)}></div>
 }
