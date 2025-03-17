@@ -618,43 +618,31 @@ export const sourceNodes: GatsbyNode['sourceNodes'] = async ({ actions, createCo
             createNode(node)
         })
     }
-    const fetchPostHogDestinations = async () => {
-        const { results } = await fetch(`https://us.posthog.com/api/public_hog_function_templates`).then((res) =>
-            res.json()
-        )
-        results.forEach((destination) => {
-            const slug = destination.id.replace('template-', '')
-            const node = {
-                id: createNodeId(`posthog-destination-${destination.id}`),
-                internal: {
-                    type: 'PostHogDestination',
-                    contentDigest: createContentDigest(destination),
-                },
-                destinationId: destination.id,
-                slug,
-                ...destination,
-            }
-            createNode(node)
-        })
-    }
-    await fetchPostHogDestinations()
 
-    const fetchPostHogTransformations = async () => {
-        const { results } = await fetch(
-            `https://us.posthog.com/api/public_hog_function_templates?type=transformation`
-        ).then((res) => res.json())
-        results.forEach((transformation) => {
+    const fetchPostHogPipelines = async (
+        type: 'transformation' | 'destination',
+        generateSlug: (pipeline: any) => string
+    ) => {
+        const { results } = await fetch(`https://us.posthog.com/api/public_hog_function_templates?type=${type}`).then(
+            (res) => res.json()
+        )
+        results.forEach((pipeline) => {
+            const slug = generateSlug(pipeline)
             const node = {
-                id: createNodeId(`posthog-transformation-${transformation.id}`),
+                id: createNodeId(`posthog-pipeline-${pipeline.id}`),
                 internal: {
-                    type: 'PostHogTransformation',
-                    contentDigest: createContentDigest(transformation),
+                    type: 'PostHogPipeline',
+                    contentDigest: createContentDigest(pipeline),
                 },
-                transformationId: transformation.id,
-                ...transformation,
+                pipelineId: pipeline.id,
+                slug,
+                type,
+                ...pipeline,
             }
             createNode(node)
         })
     }
-    await fetchPostHogTransformations()
+
+    await fetchPostHogPipelines('transformation', (pipeline) => pipeline.id.replace('plugin-', ''))
+    await fetchPostHogPipelines('destination', (pipeline) => pipeline.id.replace('template-', ''))
 }

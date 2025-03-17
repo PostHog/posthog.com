@@ -289,6 +289,7 @@ export const dataPipelines = {
             icon: 'IconWrench',
             color: 'yellow',
             featured: true,
+            dynamicChildren: 'data-pipeline-transformations',
             children: [
                 {
                     url: '/docs/cdp/geoip-enrichment',

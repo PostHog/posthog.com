@@ -544,7 +544,7 @@ function PipelinesPage({ location }) {
                                 name={selectedDestination.name}
                                 inputs_schema={selectedDestination.inputs_schema}
                                 id={selectedDestination.id}
-                                type="destination"
+                                type={selectedDestination.type}
                             />
                         </div>
 
@@ -552,7 +552,7 @@ function PipelinesPage({ location }) {
                             <CallToAction
                                 to={
                                     selectedDestination.mdx?.fields?.slug ||
-                                    `/docs/cdp/destinations/${selectedDestination.slug}`
+                                    `/docs/cdp/${selectedDestination.type}s/${selectedDestination.slug}`
                                 }
                                 type="secondary"
                             >
@@ -803,7 +803,7 @@ function PipelinesPage({ location }) {
 
 const query = graphql`
     query {
-        destinations: allPostHogDestination {
+        destinations: allPostHogPipeline(filter: { type: { eq: "destination" } }) {
             nodes {
                 id
                 slug
@@ -811,6 +811,7 @@ const query = graphql`
                 category
                 description
                 icon_url
+                type
                 mdx {
                     body
                     fields {
@@ -827,13 +828,15 @@ const query = graphql`
                 }
             }
         }
-        transformations: allPostHogTransformation {
+        transformations: allPostHogPipeline(filter: { type: { eq: "transformation" } }) {
             nodes {
                 id
+                slug
                 name
                 category
                 description
                 icon_url
+                type
                 mdx {
                     body
                     fields {

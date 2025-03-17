@@ -1,9 +1,9 @@
 import { useStaticQuery, graphql } from 'gatsby'
 
 export default function useDestinationsNav(): { slug: string; name: string }[] {
-    const { allPostHogDestination } = useStaticQuery(graphql`
+    const { allPostHogPipeline } = useStaticQuery(graphql`
         query {
-            allPostHogDestination(filter: { mdx: { id: { eq: null } } }) {
+            allPostHogPipeline(filter: { type: { eq: "destination" } }) {
                 nodes {
                     slug
                     name
@@ -12,7 +12,7 @@ export default function useDestinationsNav(): { slug: string; name: string }[] {
         }
     `)
 
-    return allPostHogDestination.nodes.map((node) => ({
+    return allPostHogPipeline.nodes.map((node) => ({
         url: `/docs/cdp/destinations/${node.slug}`,
         name: node.name,
     }))

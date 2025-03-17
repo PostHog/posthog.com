@@ -254,8 +254,8 @@ export const createSchemaCustomization: GatsbyNode['createSchemaCustomization'] 
       secure_url: String
       public_id: String
     }
-    type PostHogDestination implements Node {
-      mdx: Mdx @link(by: "frontmatter.templateId", from: "destinationId")
+    type PostHogPipeline implements Node {
+      mdx: Mdx @link(by: "frontmatter.templateId", from: "pipelineId")
     }
     type PostHogTransformation implements Node {
       mdx: Mdx @link(by: "frontmatter.templateId", from: "transformationId")

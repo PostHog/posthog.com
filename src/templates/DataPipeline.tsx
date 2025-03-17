@@ -6,13 +6,13 @@ import { graphql } from 'gatsby'
 import APIExamples from 'components/Product/Pipelines/APIExamples'
 import Configuration from 'components/Product/Pipelines/Configuration'
 
-export default function DataPipelineDestination({
+export default function DataPipeline({
     data,
 }: {
-    data: { postHogDestination: { name: string; description: string; inputs_schema: any; id: string } }
+    data: { postHogPipeline: { name: string; description: string; inputs_schema: any; id: string; type: string } }
 }): JSX.Element {
     const {
-        postHogDestination: { name, description, inputs_schema, id },
+        postHogPipeline: { name, description, inputs_schema, id, type },
     } = data
 
     return (
@@ -26,7 +26,7 @@ export default function DataPipelineDestination({
                     <p>{description}</p>
                     <h2>Configuration</h2>
                     <Configuration inputs_schema={inputs_schema} />
-                    <APIExamples initialOpen id={id} name={name} inputs_schema={inputs_schema} type="destination" />
+                    <APIExamples initialOpen id={id} name={name} inputs_schema={inputs_schema} type={type} />
                 </div>
             </PostLayout>
         </Layout>
@@ -35,10 +35,11 @@ export default function DataPipelineDestination({
 
 export const query = graphql`
     query ($id: String!) {
-        postHogDestination(id: { eq: $id }) {
+        postHogPipeline(id: { eq: $id }) {
             id
             name
             description
+            type
             inputs_schema {
                 key
                 type
