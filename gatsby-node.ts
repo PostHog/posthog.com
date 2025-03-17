@@ -1,4 +1,5 @@
 import path from 'path'
+import fs from 'fs/promises'
 import { GatsbyNode } from 'gatsby'
 const axios = require('axios')
 
@@ -43,6 +44,7 @@ export const onCreateWebpackConfig: GatsbyNode['onCreateWebpackConfig'] = ({ sta
         },
     })
 }
+
 
 exports.createPages = async ({ actions }) => {
     const { createPage } = actions

@@ -37,6 +37,8 @@ import SideModal from 'components/Modal/SideModal'
 import { Authentication } from 'components/Squeak'
 import { useChat } from 'hooks/useChat'
 import { useSearch } from 'components/Search/SearchContext'
+import HedgehogMode from 'components/HedgehogMode'
+import HedgeHogModeEmbed from 'components/HedgehogMode'
 
 export const Avatar = (props: { className?: string; src?: string }) => {
     return (
@@ -435,6 +437,8 @@ export const Main = () => {
         theoMode,
         setTheoMode,
         post,
+        hedgehogModeEnabled,
+        setHedgehogModeEnabled,
     } = useLayoutData()
     const { pathname } = useLocation()
     const { websiteTheme } = useValues(layoutLogic)
@@ -492,6 +496,7 @@ export const Main = () => {
                 />
             </SideModal>
             <MediaUploadModal open={mediaModalOpen} setOpen={setMediaModalOpen} />
+            <HedgeHogModeEmbed />
             <div className="border-b border-light dark:border-dark bg-accent dark:bg-accent-dark mb-1">
                 <div
                     className={`flex mx-auto px-2 md:px-0 mdlg:px-5 justify-between transition-all ${
@@ -749,6 +754,16 @@ export const Main = () => {
                                                 </button>
                                             </li>
                                         )}
+                                        {/* Hedgehog mode */}
+                                        <li className="px-1 whitespace-nowrap">
+                                            <button
+                                                onClick={() => setHedgehogModeEnabled(!hedgehogModeEnabled)}
+                                                className="flex items-center justify-between w-full px-2 py-2 text-sm rounded-sm group/item hover:bg-border dark:hover:bg-border-dark"
+                                            >
+                                                <span>Hedgehog mode</span>
+                                                <Toggle checked={hedgehogModeEnabled} />
+                                            </button>
+                                        </li>
                                         <Orders />
                                     </ul>
                                 )

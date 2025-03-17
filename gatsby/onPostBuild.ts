@@ -5,7 +5,6 @@ import blogTemplate from '../src/templates/OG/blog.js'
 import docsHandbookTemplate from '../src/templates/OG/docs-handbook.js'
 import customerTemplate from '../src/templates/OG/customer.js'
 import careersTemplate from '../src/templates/OG/careers.js'
-import tutorialTemplate from '../src/templates/OG/tutorial.js'
 import jobTemplate from '../src/templates/OG/job.js'
 import { flattenMenu } from './utils'
 import fetch from 'node-fetch'
@@ -251,6 +250,11 @@ export const onPostBuild: GatsbyNode['onPostBuild'] = async ({ graphql }) => {
     }
 
     console.log('Running onPostBuild tasks')
+
+    // Copy hedgehog mode assets to public folder
+    const source = path.resolve('node_modules/@posthog/hedgehog-mode/assets')
+    const hedgehogModeDir = path.resolve(__dirname, '../public/hedgehog-mode')
+    await fs.cpSync(source, hedgehogModeDir, { recursive: true })
 
     const { data } = await graphql(`
         query {

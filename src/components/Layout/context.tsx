@@ -40,6 +40,10 @@ export const LayoutProvider = ({ children, ...other }: IProps) => {
     const [fullWidthContent, setFullWidthContent] = useState<boolean>(
         compact || (typeof window !== 'undefined' && localStorage.getItem('full-width-content') === 'true')
     )
+
+    const [hedgehogModeEnabled, setHedgehogModeEnabled] = useState<boolean>(
+        compact || (typeof window !== 'undefined' && localStorage.getItem('hedgehog-mode-enabled') === 'true')
+    )
     const [enterpriseMode, setEnterpriseMode] = useState(false)
     const [theoMode, setTheoMode] = useState(false)
     const [post, setPost] = useState<boolean>(false)
@@ -168,6 +172,8 @@ export const LayoutProvider = ({ children, ...other }: IProps) => {
                 theoMode,
                 setTheoMode,
                 post,
+                hedgehogModeEnabled,
+                setHedgehogModeEnabled,
             }}
         >
             {children}
