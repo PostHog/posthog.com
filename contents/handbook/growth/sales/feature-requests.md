@@ -32,18 +32,3 @@ If you've checked the list above and can't see an existing request then you shou
 2. When looking at an account, you can see the feature requests they are connected to in the related objects section of the UI.  There's a Create new button at the top of that UI as well.
 
 Most of the fields are self-explanatory, and the status should almost always be set to `Requested` if it's a new one, unless the team is actively working on it.  Make sure you add as much context in the text area at the bottom as possible, with links to Slack/Zendesk tickets.
-
-# Collaborating with product teams
-
-It's on us to represent our customers to the wider PostHog and as such we should communicate these back to product teams.
-
-## Urgent requests
-
-If a customer is at risk of churn, or otherwise unhappy about the missing feature, then we should communicate this to the relevant team in their Slack channel (usually #team-xyz).  Adding in the urgency, ARR and tagging the team lead is a good approach here to get some focus.
-
-## Non-urgent requests
-
-We should also review the list of requests with teams on an ongoing basis:
-
-1. Monthly on the Product &lt;&gt; CS Call
-2. When teams are doing quarterly planning
