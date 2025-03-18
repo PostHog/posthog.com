@@ -1,7 +1,7 @@
 import CloudinaryImage from 'components/CloudinaryImage'
 import React, { useState } from 'react'
 import Link from 'components/Link'
-import { IconWarning, IconGraph, IconHogQL, IconClock, IconToggle, IconDecisionTree, IconRewindPlay } from '@posthog/icons'
+import { IconWarning, IconGraph, IconHogQL, IconClock, IconToggle, IconDecisionTree, IconRewindPlay, IconCheck, IconAI, IconPerson, IconPencil } from '@posthog/icons'
 import { CallToAction } from 'components/CallToAction'
 import { CustomerCard } from 'components/Products/CustomerCard'
 import { TutorialCard } from 'components/Products/TutorialCard'
@@ -26,6 +26,9 @@ import { useLayoutData } from 'components/Layout/hooks'
 import Plans from 'components/Pricing/Plans'
 import Profile from '../../Team/Profile'
 import SideModal from '../../Modal/SideModal'
+import { VsCompetitor } from 'components/Products/Competitor'
+import { VsPostHog } from 'components/Products/Competitor/VsPostHog'
+import Comparison from '../Comparison'
 
 interface ProfileData {
     firstName: string
@@ -109,24 +112,24 @@ const features = [
 const subfeaturesItemCount = 4
 const subfeatures = [
     {
-        title: 'Real-time alerts',
-        description: 'Get notified when error rates spike or new issues are discovered',
-        icon: <IconDecisionTree />,
+        title: 'Detect exception events',
+        description: 'Keep an eye on volumes with sparklines, or get email alerts when issues occur.',
+        icon: <IconWarning />,
     },
     {
-        title: 'Error analytics',
-        description: 'Analyze error patterns and trends with PostHog\'s powerful analytics',
-        icon: <IconHogQL />,
+        title: 'Assign <s>blame</s> an owner',
+        description: "Assign issues to an individual, or a group, so everyone knows who's responsible.",
+        icon: <IconPerson />,
     },
     {
-        title: 'Session replay',
-        description: 'Watch the exact user session where an error occurred',
-        icon: <IconGraph />,
+        title: 'Investigate errors',
+        description: 'Examine the code with stack trace, or jump to a session replay to see bugs in action.',
+        icon: <IconPencil />,
     },
     {
-        title: 'Custom retention',
-        description: 'Configure how long to keep error data based on your needs',
-        icon: <IconClock />,
+        title: 'Solve issues',
+        description: 'Debug and test fixes with feature flags to ensure you solve errors for good. ',
+        icon: <IconCheck />,
     },
 ]
 
@@ -208,6 +211,90 @@ const PairsWithArray = [
     },
 ]
 
+const comparisonColumnCount = 4
+const comparison = [
+    {
+        feature: 'Error alerts',
+        companies: {
+            Sentry: true,
+            LogRocket: true,
+            PostHog: true,
+        },
+    },
+    {
+        feature: 'Exception capture',
+        companies: {
+            Sentry: true,
+            LogRocket: true,
+            PostHog: true,
+        },
+    },
+    {
+        feature: 'Issue management',
+        companies: {
+            Sentry: true,
+            LogRocket: false,
+            PostHog: true,
+        },
+    },
+    {
+        feature: 'Network performance monitoring',
+        companies: {
+            Sentry: true,
+            LogRocket: true,
+            PostHog: true,
+        },
+    },
+    {
+        feature: 'Error grouping',
+        companies: {
+            Sentry: true,
+            LogRocket: true,
+            PostHog: true,
+        },
+    },
+    {
+        feature: 'Source map support',
+        companies: {
+            Sentry: true,
+            LogRocket: true,
+            PostHog: true,
+        },
+    },
+    {
+        feature: 'Stack tracing',
+        companies: {
+            Sentry: true,
+            LogRocket: false,
+            PostHog: true,
+        },
+    },
+    {
+        feature: 'Integration with product analytics',
+        companies: {
+            Sentry: false,
+            LogRocket: true,
+            PostHog: true,
+        },
+    },
+    {
+        feature: 'Integration with session replays',
+        companies: {
+            Sentry: false,
+            LogRocket: true,
+            PostHog: true,
+        },
+    },
+    {
+        feature: 'Boring, purple website with corporate vibes',
+        companies: {
+            Sentry: true,
+            LogRocket: true,
+            PostHog: false,
+        },
+    },
+]
+
 export const ProductErrorTracking = () => {
     const { fullWidthContent } = useLayoutData()
     const [activeProfile, setActiveProfile] = useState<ProfileData | null>(null)
@@ -243,36 +330,47 @@ export const ProductErrorTracking = () => {
 
                 <div className="grid md:grid-cols-2 gap-8 mt-20">
                     <div>
-                        <h2 className="text-4xl md:text-5xl">Track errors in real-time</h2>
+                        <h2 className="text-4xl md:text-5xl">Great on it's own</h2>
                         <p className="text-lg opacity-75">
-                            Get instant notifications when errors occur and see exactly what happened with detailed stack traces and session replays.
+                            Comprehensive error tracking out of the box, with issue management and stack tracing that just works.
                         </p>
                     </div>
                     <div>
-                        <h2 className="text-4xl md:text-5xl">Analyze error patterns</h2>
+                        <h2 className="text-4xl md:text-5xl">Better with <span class="text-red dark:text-yellow">Product OS</span></h2>
                         <p className="text-lg opacity-75">
-                            Use PostHog's powerful analytics to identify trends, track error rates, and understand the impact of issues on your users.
+                            Usable alongside other PostHog products, including session replay, product analytics, feature flags, and more.
                         </p>
                     </div>
                 </div>
 
                 <div className="mt-20">
-                    <h2 className="text-4xl md:text-5xl text-center">Features</h2>
-                    <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 mt-12">
-                        {features.map((feature, index) => (
-                            <Feature key={index} {...feature} />
-                        ))}
-                    </div>
-                </div>
-
-                <div className="mt-20">
-                    <h2 className="text-4xl md:text-5xl text-center">How it works</h2>
+                    <h2 className="text-4xl md:text-5xl text-center">Detect, debug, and destroy errors</h2>
                     <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 mt-12">
                         {subfeatures.map((subfeature, index) => (
                             <Subfeature key={index} {...subfeature} />
                         ))}
                     </div>
                 </div>
+
+                <div className="mt-20">
+                    <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+                        {features.map((feature, index) => (
+                            <Feature key={index} {...feature} />
+                        ))}
+                    </div>
+                </div>
+
+                <section className={`${fullWidthContent ? 'max-w-full px-8' : 'max-w-7xl mx-auto'} px-5 py-10 md:pt-20 pb-0`}>
+                    <div className={`${fullWidthContent ? 'max-w-full px-8' : 'max-w-7xl mx-auto'} px-5 pb-0`}>
+                        <div className="bg-accent dark:bg-accent-dark -mx-5 md:-mx-8">
+                            <Marquee product={product.capitalized} shortFade>
+                                {questions.map((question, index) => {
+                                    return <Question {...question} key={index} />
+                                })}
+                            </Marquee>
+                        </div>
+                    </div>
+                </section>
 
                 <section
                     id="pricing"
@@ -287,8 +385,8 @@ export const ProductErrorTracking = () => {
                             <CloudinaryImage
                                 alt="Just another hedgehog"
                                 placeholder="blurred"
-                                className="w-full max-w-[140px]"
-                                src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/products/error-tracking/error-hog.png"
+                                className="w-full max-w-[250px]"
+                                src="https://res.cloudinary.com/dmukukwp6/image/upload/error_hog_c2eff84e29.png"
                             />
                         </div>
                     </div>
@@ -307,50 +405,13 @@ export const ProductErrorTracking = () => {
                     </div>
                 </section>
 
-                <section
-                    id="tutorials"
-                    className={`${
-                        fullWidthContent ? 'max-w-full px-8' : 'max-w-7xl mx-auto'
-                    } px-5 py-10 md:pt-0 md:-mt-12 pb-0`}
-                >
-                    <div className={`${fullWidthContent ? 'max-w-full px-8' : 'max-w-7xl mx-auto'} px-5 pb-0`}>
-                        <h3 className="text-3xl lg:text-4xl text-center mb-2">Featured tutorials</h3>
-                        <p className="mt-0 text-opacity-75 text-center mb-6">
-                            Visit the <Link to="/tutorials">tutorials</Link> section for more.
-                        </p>
-
-                        <ul className="list-none p-0 grid md:grid-cols-3 gap-4 mb-10 md:mb-20mx-5 md:mx-0">
-                            <TutorialCard
-                                title="Can I upload my own source maps?"
-                                description="Uploading source maps allows you to see the exact line of code that caused the error"
-                                url="/docs/error-tracking/stack-traces#uploading-source-maps"
-                            />
-                            <TutorialCard
-                                title="Can exceptions be sampled / ignored?"
-                                description="Find out how to sample or ignore exceptions"
-                                url="/docs/error-tracking/common-questions#can-exceptions-be-sampled--ignored"
-                            />
-                            <TutorialCard
-                                title="Can I merge multiple issues into one?"
-                                description="Find out how to merge issues, to avoid panic"
-                                url="/docs/error-tracking/monitoring#merging-issues"
-                            />
-                        </ul>
-                    </div>
-                </section>
-
-                <section
-                    id="docs"
-                    className={`${fullWidthContent ? 'max-w-full px-8' : 'max-w-7xl mx-auto'} px-5 py-10 md:pt-20 pb-0`}
-                >
-                    <h3 className="text-3xl lg:text-4xl text-center mb-2">Explore the docs</h3>
-                    <p className="mt-0 text-opacity-70 text-center">
-                        Get a more technical overview of how everything works <Link to="/docs">in our docs</Link>.
-                    </p>
-                    <DocLinks
-                        menu={docsMenu.children.find(({ name }) => name.toLowerCase() === 'error tracking')?.children || []}
-                    />
-                </section>
+                <div className={`${fullWidthContent ? 'max-w-full px-8' : 'max-w-7xl mx-auto'} px-5 py-10 md:pt-20 pb-0`}>
+                    <PairsWith items={pairsWithItemCount}>
+                        {PairsWithArray.map((card, index) => {
+                            return <PairsWithItem {...card} key={index} />
+                        })}
+                    </PairsWith>
+                </div>
 
                 <section
                     id="team"
@@ -367,12 +428,90 @@ export const ProductErrorTracking = () => {
                     </div>
                 </section>
 
-                <div className={`${fullWidthContent ? 'max-w-full px-8' : 'max-w-7xl mx-auto'} px-5 py-10 md:pt-20 pb-0`}>
-                    <PairsWith items={pairsWithItemCount}>
-                        {PairsWithArray.map((card, index) => {
-                            return <PairsWithItem {...card} key={index} />
-                        })}
-                    </PairsWith>
+                <section
+                    id="docs"
+                    className={`${fullWidthContent ? 'max-w-full px-8' : 'max-w-7xl mx-auto'} px-5 py-10 md:pt-20 pb-0`}
+                >
+                    <h3 className="text-3xl lg:text-4xl text-center mb-2">Explore the docs</h3>
+                    <p className="mt-0 text-opacity-70 text-center">
+                        Get a more technical overview of how everything works <Link to="/docs">in our docs</Link>.
+                    </p>
+                    <DocLinks
+                        menu={docsMenu.children.find(({ name }) => name.toLowerCase() === 'error tracking')?.children || []}
+                    />
+                </section>
+
+                <div className={`${fullWidthContent ? 'max-w-full px-0 md:px-8' : 'max-w-7xl'} mx-auto`}>
+                    <div id="posthog-vs">
+                        <section>
+                            <h2 className="text-center text-3xl lg:text-4xl">PostHog vs...</h2>
+                            <Comparison comparison={comparison} columnCount={comparisonColumnCount} truncate />
+                        </section>
+
+                        <section className="mb-20">
+                            <h3 className="text-center mb-8">So, what's best for you?</h3>
+                            <div className="mb-8 mx-5 md:mx-0 grid md:grid-cols-2 gap-4">
+                                <VsCompetitor
+                                    title="Reasons a competitor may be best for you (for now...)"
+                                    image={
+                                        <CloudinaryImage
+                                        src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/images/products/competitors-ff.png"
+                                        className="max-w-[176px]"
+                                    />
+                                    }
+                                >
+                                    <ul>
+                                        <li>
+                                            Uptime monitoring
+                                            <ul className="pl-6">
+                                                <li className="text-sm">
+                                                    We don't have uptime monitoring. Yet. 
+                                                </li>
+                                            </ul>
+                                        </li>
+                                        <li>
+                                            Advanced alerting
+                                            <ul className="pl-6">
+                                                <li className="text-sm">
+                                                    We currently only support Slack and email alerts on custom criteria.
+                                                </li>
+                                            </ul>
+                                        </li>
+                                        <li>
+                                            Advanced error grouping systems
+                                        </li>
+                                    </ul>
+                                </VsCompetitor>
+                                <VsPostHog>
+                                    <ul>
+                                        <li>
+                                            Integration with other PostHog products
+                                            <ul className="pl-6">
+                                                <li className="text-sm">
+                                                    View replays attached to errors, analyze error patterns with analytics, etc.
+                                                </li>
+                                            </ul>
+                                        </li>
+                                        <li>
+                                            Feature flags for error recovery
+                                            <ul className="pl-6">
+                                                <li className="text-sm">
+                                                    Quickly roll back features that cause errors
+                                                </li>
+                                            </ul>
+                                        </li>
+                                        <li>Simple, transparent pricing</li>
+                                    </ul>
+                                </VsPostHog>
+                            </div>
+
+                            <p className="text-center text-sm font-medium">
+                                Have questions about PostHog? <br className="md:hidden" />
+                                <Link to={`/questions/${product.slug}`}>Ask the community</Link> or{' '}
+                                <Link to="/talk-to-a-human">book a demo</Link>.
+                            </p>
+                        </section>
+                    </div>
                 </div>
 
                 <div className={`${fullWidthContent ? 'max-w-full px-8' : 'mx-auto'} relative px-5 py-10 pb-0`}>

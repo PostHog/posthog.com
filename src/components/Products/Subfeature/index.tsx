@@ -3,7 +3,7 @@ import * as PostHogIcons from '@posthog/icons'
 import { IFeature, IFeatureGridProps } from '../../../types'
 
 export const FeatureTitle = ({ children, className = '' }: { children: React.ReactNode; className?: string }) => (
-    <h3 className={`text-[17px] mb-1 leading-tight ${className}`}>{children}</h3>
+    <h3 className={`text-[17px] mb-1 leading-tight ${className}`} dangerouslySetInnerHTML={{ __html: children }} />
 )
 
 export const FeatureDescription = ({ children, className = '' }: { children: React.ReactNode; className?: string }) => (
