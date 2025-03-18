@@ -30,7 +30,7 @@ For Product-led leads we will only add them to your book for quota purposes if y
 
 For Inbound leads we will add them to your book of business once they are closed on an annual plan, or subscribed monthly with a plan to get them to an annual contract.  It's expected that you will own these for a minimum of three months after they sign to make sure they are properly onboarded before handing off the account.
 
-At tne end of each quarter we will review your accounts and look to hand off some to bring your focus account list back down to 10.  Simon and Charles will also review everyone's accounts each month proactively to make sure that the balance of accounts across the team makes sense. 
+At the end of each quarter we will review your accounts and look to hand off some to bring your focus account list back down to 10.  Simon and Charles will also review everyone's accounts each month proactively to make sure that the balance of accounts across the team makes sense. 
 
 
 ### Customer Success Managers
