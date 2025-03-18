@@ -1,6 +1,6 @@
 ---
 title: How to set up Next.js error monitoring
-date: 2025-03-14
+date: 2025-03-18
 author:
  - ian-vanagas
 tags:
