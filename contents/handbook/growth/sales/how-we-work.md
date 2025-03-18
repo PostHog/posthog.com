@@ -60,7 +60,7 @@ If the answer to any of the above questions is 'no' then it's likely that there 
 In addition to the weekly sprint planning meeting on a Monday, we do a weekly sales standups on Wednesday. A Technical AE is picked at random, and we spend 30 min on each going in depth through:
 
 - What has closed since you last reviewed your book?
-- What is your path to quota this quarter? Talk through your oops closing this quarter.
+- What is your path to quota this quarter? Talk through your ops closing this quarter.
 - What is the plan for any customers over $100k?  Do you have a visit planned?
 - Which accounts are at risk? Look at red health score or sentiment in Vitally.
 - How is cross-adoption going in your existing accounts? Check against Vitally goals.
