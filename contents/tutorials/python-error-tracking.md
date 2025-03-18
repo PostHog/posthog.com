@@ -100,7 +100,7 @@ You can then run `python app.py` and go to `http://localhost:5000/error` to see 
 
 ### Setting up PostHog
 
-Because we already installed PostHog, all we need to do now is initialize it with your project API key and host from your project setting and calling `capture_exception()` like this:  
+Because we already installed PostHog, all we need to do now is initialize it with your project API key and host from [your project settings](https://us.posthog.com/settings/project), calling `capture_exception()` like this:  
 
 ```python
 from flask import Flask, jsonify
