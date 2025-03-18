@@ -85,6 +85,7 @@ Some of the features we are building may exist in other products already. It is 
 [Team Web Analytics]: /teams/web-analytics
 [Team Replay]: /teams/replay
 [Team CDP]: /teams/cdp
+[Team CRM]: /teams/crm
 [Team Data Warehouse]: /teams/data-warehouse
 [Team Infrastructure]: /teams/infrastructure
 [Team Feature Flags]: /teams/feature-flags
