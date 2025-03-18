@@ -177,7 +177,7 @@ posthog.captureException(e, 'user_distinct_id', additionalProperties)
 
 </MultiLanguage>
 
-Doing this for every possible error is a hassle though and you’ll inevitably miss errors we’re not expecting. Our frontend implementation automatically captures errors thrown and caught by `onError` and `onUnhandledRejection` listeners, but this doesn’t cover everything.
+Doing this for every possible error is a hassle though and we'll inevitably miss errors we’re not expecting. Our frontend implementation automatically captures errors thrown and caught by `onError` and `onUnhandledRejection` listeners, but this doesn’t cover everything.
 
 To capture more, we can set up some more boundaries and instrumentation.
 
@@ -273,7 +273,7 @@ export const onRequestError = async (err, request, context) => {
 }
 ```
 
-Now, when you click the **Click me for a backend API error** button, it will trigger and error, and that error will be automatically captured by PostHog. 
+Now, when you click the **Click me for a backend API error** button, it will trigger an error which will be automatically captured by PostHog. 
 
 <ProductScreenshot
   imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_03_14_at_15_30_05_2x_e99f29a546.png"
@@ -284,7 +284,7 @@ Now, when you click the **Click me for a backend API error** button, it will tri
 
 ## 4. Monitoring errors in PostHog
 
-Once you’ve set up error capture in your app, you can head to the [error tracking tab](https://us.posthog.com/error_tracking) in PostHog to few the issues popping up along with their frequency.
+Once you’ve set up error capture in your app, you can head to the [error tracking tab](https://us.posthog.com/error_tracking) in PostHog to review the issues popping up along with their frequency.
 
 <ProductScreenshot
   imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_03_14_at_15_39_23_2x_04c490c326.png"
