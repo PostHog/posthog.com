@@ -27,6 +27,7 @@ You can also view the list [directly in GitHub](https://github.com/PostHog/posth
 | Billing | [Team Dollars & Cents][Team Dollars & Cents]  |  <span class="lemon-tag gh-tag">feature/dollars-and-cents</span> |
 | Client libraries and SDKs | Shared responsibility with features owned by the relevant Small Team, or try #feature-client-libraries. There is an engineer assigned to SDK support on a rotating schedule. Check [the (private) pager duty schedule](https://posthog.pagerduty.com/schedules#P7B7NTR)  | <span class="lemon-tag gh-tag">feature/pipeline</span> |
 | Cohorts | [Team Product Analytics][Team Product Analytics]  |  <span class="lemon-tag gh-tag">feature/cohorts</span>  |
+| CRM | [Team CRM][Team CRM]  |  <span class="lemon-tag gh-tag">feature/crm</span>  |
 | Dashboards | [Team Product Analytics][Team Product Analytics]  |  <span class="lemon-tag gh-tag">feature/dashboards</span> |
 | Data Management | [Team Product Analytics][Team Product Analytics]  | <span class="lemon-tag gh-tag">feature/data-management</span>  |
 | Data Warehouse | [Team Data Warehouse][Team Data Warehouse]  | <span class="lemon-tag gh-tag">feature/data-warehouse</span> |
@@ -36,7 +37,7 @@ You can also view the list [directly in GitHub](https://github.com/PostHog/posth
 | Experimentation | [Team Experiments](/teams/experiments) |  <span class="lemon-tag gh-tag">feature/experimentation</span> |
 | Early Access Features | [Team Feature Flags][Team Feature Flags] | <span class="lemon-tag gh-tag">feature/feature-flags</span> |
 | Feature Flags | [Team Feature Flags][Team Feature Flags]  |  <span class="lemon-tag gh-tag">feature/feature-flags</span> |
-| Group Analytics | [Team Product Analytics][Team Product Analytics]  |  <span class="lemon-tag gh-tag">feature/group-analytics</span> |
+| Group Analytics | [Team CRM][Team CRM]  |  <span class="lemon-tag gh-tag">feature/group-analytics</span> |
 | HogQL | [Team Product Analytics][Team Product Analytics]  |  <span class="lemon-tag gh-tag">feature/dashboards</span> |
 | Heatmaps | [Team Replay][Team Replay] | <span class="lemon-tag gh-tag">feature/heatmaps</span> |
 | Ingestion | [Team CDP][Team CDP]  | <span class="lemon-tag gh-tag">feature/pipeline</span> |
