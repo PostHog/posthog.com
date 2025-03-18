@@ -3626,7 +3626,7 @@ export const productMenu = {
         },
         {
             name: 'Error tracking',
-            icon: 'IconBug',
+            icon: 'IconWarning',
             color: 'red',
             url: '/error-tracking',
         },
