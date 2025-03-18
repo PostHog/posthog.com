@@ -57,7 +57,7 @@ This is a faster option to get up and running. If you don't want to or can't use
 4. In the codespace, open a terminal window and run `docker compose -f docker-compose.dev.yml up`.
 5. In another terminal, run `pnpm i` (and use the same terminal for the following commands)
 6. Then run `pip install -r requirements.txt -r requirements-dev.txt`
-7. Now run `./bin/migrate` and then `./bin/start`.
+7. Now run `DEBUG=1 ./bin/migrate` and then `./bin/start`.
 8. Open browser to http://localhost:8010/.
 9. To get some practical test data into your brand-new instance of PostHog, run `DEBUG=1 ./manage.py generate_demo_data`.
 

@@ -20,11 +20,22 @@ Other metrics we generally care about:
 
 ## Book of business
 
-Each AE is assigned ~10 existing customer accounts to work with. Additionally, you will manage inbound leads as they are assigned to you in your territory. Overall, the hard cap on existing book + new leads is 20 accounts, so staying extremely focused is important. 
+### Account Executives
 
-Each CSM is assigned ~50 existing customer accounts to work with.
+Each AE is assigned up to 10 existing customer accounts to work with. Additionally, you will manage inbound leads as they are assigned to you in your territory. Overall, the hard cap on existing book + new leads is 15 accounts, so staying extremely focused is important. 
 
-Simon and Charles will also review everyone's accounts each month proactively to make sure that the balance of accounts across the team makes sense. 
+We use the AE Managed Segment in Vitally to show that an account is part of somebody's book of business and therefore included in individual and team quota calculations.  AEs should not assign this themselves (that's up to Simon or Charles), but can add themselves as the Account Executive in Vitally to make it easier to track things you're working on.
+
+For Product-led leads we will only add them to your book for quota purposes if you have a solid plan in place for conversion to annual or cross-product adoption.
+
+For Inbound leads we will add them to your book of business once they are closed on an annual plan, or subscribed monthly with a plan to get them to an annual contract.  It's expected that you will own these for a minimum of three months after they sign to make sure they are properly onboarded before handing off the account.
+
+At the end of each quarter we will review your accounts and look to hand off some to bring your focus account list back down to 10.  Simon and Charles will also review everyone's accounts each month proactively to make sure that the balance of accounts across the team makes sense. 
+
+
+### Customer Success Managers
+
+Each CSM is assigned ~30 existing customer accounts to work with.  We use the CSM Managed Segment in Vitally to track this against goals and CSMs should not assign this themselve (that's up to Simon or Charles).
 
 ### Handing-off customers from Technical AE to Technical CSM
 
@@ -46,9 +57,11 @@ If the answer to any of the above questions is 'no' then it's likely that there 
 
 ## Weekly sales standup
 
-In addition to the weekly sprint planning meeting on a Monday, we do a weekly sales standups on Wednesday (Europe) and Friday (US). A Technical AE is picked at random, and we spend 30 min on each going in depth through:
+In addition to the weekly sprint planning meeting on a Monday, we do a weekly sales standups on Wednesday. A Technical AE is picked at random, and we spend 30 min on each going in depth through:
 
-- What is your path to quota this quarter? Talk through your oops closing this quarter.
+- What has closed since you last reviewed your book?
+- What is your path to quota this quarter? Talk through your ops closing this quarter.
+- What is the plan for any customers over $100k?  Do you have a visit planned?
 - Which accounts are at risk? Look at red health score or sentiment in Vitally.
 - How is cross-adoption going in your existing accounts? Check against Vitally goals.
 
