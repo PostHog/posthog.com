@@ -1,7 +1,7 @@
 import CloudinaryImage from 'components/CloudinaryImage'
 import React, { useState } from 'react'
 import Link from 'components/Link'
-import { IconWarning, IconGraph, IconHogQL, IconClock, IconToggle, IconDecisionTree } from '@posthog/icons'
+import { IconWarning, IconGraph, IconHogQL, IconClock, IconToggle, IconDecisionTree, IconRewindPlay } from '@posthog/icons'
 import { CallToAction } from 'components/CallToAction'
 import { CustomerCard } from 'components/Products/CustomerCard'
 import { TutorialCard } from 'components/Products/TutorialCard'
@@ -57,12 +57,12 @@ const teamSlug = '/teams/error-tracking'
 const featuresPerRow = 4
 const features = [
     {
-        title: 'Stack traces',
-        name: 'Stack traces',
-        description: 'Get detailed stack traces and error context to quickly identify issues.',
+        title: 'Get alerts',
+        name: 'Get alerts',
+        description: 'Get email alerts when something goes wrong. Or lots of somethings. ',
         image: (
             <CloudinaryImage
-                src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Product/ErrorTracking/images/stack-trace.png"
+                src="JOETBD"
                 width={428}
                 placeholder="none"
             />
@@ -71,37 +71,35 @@ const features = [
     {
         title: 'Error monitoring',
         name: 'Error monitoring',
-        description: 'Track error rates, frequencies, and impact across your application.',
+        description: 'Visually track error rates and impact across your product',
         image: (
             <CloudinaryImage
-                src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Product/ErrorTracking/images/monitoring.png"
-                width={428}
-                height={312}
-                placeholder="none"
-            />
-        ),
-    },
-    {
-        title: 'Error grouping',
-        name: 'Error grouping',
-        description: 'Automatically group similar errors to reduce noise and focus on real issues.',
-        image: (
-            <CloudinaryImage
-                src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Product/ErrorTracking/images/grouping.png"
+                src="JOETBD"
                 width={428}
                 placeholder="none"
             />
         ),
     },
     {
-        title: 'Custom integrations',
-        name: 'Custom integrations',
-        description: 'Integrate with your existing error tracking tools or build custom integrations.',
+        title: 'Stack traces',
+        name: 'Stack traces',
+        description: 'Upload source maps so you can follow the error path to the end of the line',
         image: (
             <CloudinaryImage
-                src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Product/ErrorTracking/images/integrations.png"
+                src="JOETBD"
                 width={428}
-                height={312}
+                placeholder="none"
+            />
+        ),
+    },
+    {
+        title: 'Issue assignment',
+        name: 'Issue assignment',
+        description: 'Assign issues to individuals or groups, so everyone knows who to blame',
+        image: (
+            <CloudinaryImage
+                src="JOETBD"
+                width={428}
                 placeholder="none"
             />
         ),
@@ -186,27 +184,27 @@ const pairsWithItemCount = 3
 const PairsWithArray = [
     {
         title: 'Session Replay',
-        description: 'Watch the exact user session where an error occurred',
-        icon: <IconGraph />,
+        description: 'Watch exactly how an error occurred for a specific user',
+        icon: <IconRewindPlay />,
         product: 'Session Replay',
         url: '/session-replay',
-        color: 'blue',
+        color: 'yellow',
     },
     {
         title: 'Product Analytics',
-        description: 'Analyze error patterns and trends with PostHog\'s powerful analytics',
-        icon: <IconHogQL />,
+        description: 'Analyze trends over time and get alerts when things go wrong',
+        icon: <IconGraph />,
         product: 'Product Analytics',
         url: '/product-analytics',
-        color: 'green',
+        color: 'blue',
     },
     {
         title: 'Feature Flags',
-        description: 'Roll back features that are causing errors',
+        description: 'Roll back features cause errors, or test fixes with slow rollouts',
         icon: <IconToggle />,
         product: 'Feature Flags',
         url: '/feature-flags',
-        color: 'purple',
+        color: 'seagreen',
     },
 ]
 
@@ -218,7 +216,7 @@ export const ProductErrorTracking = () => {
         <>
             <SEO
                 title="Error Tracking - PostHog"
-                description="Track and monitor errors and exceptions in your code."
+                description="Track errors and exceptions in your code, then assign them as issues."
                 image={`/images/og/error-tracking.jpg`}
             />
             <SideModal open={!!activeProfile} setOpen={(open) => setActiveProfile(open ? activeProfile : null)}>
@@ -226,11 +224,12 @@ export const ProductErrorTracking = () => {
             </SideModal>
             <div className={`${fullWidthContent ? 'max-w-full px-8' : 'max-w-7xl mx-auto'} px-5 py-10 md:pt-20 pb-0`}>
                 <Hero
-                    icon="warning"
+                    color="red"
+                    icon={<IconWarning />}
                     product={product.capitalized}
-                    title='Track and fix errors <span class="text-red dark:text-yellow">in real-time</span>'
-                    description="Track and monitor errors and exceptions in your code."
-                    image="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/images/products/screenshot-error-tracking.png"
+                    title='Track errors and assign issues to <span class="text-red dark:text-yellow">build better products</span>'
+                    description="Take your product from exception to exceptional"
+                    image="JOETBD"
                 />
 
                 <div className="text-center">
