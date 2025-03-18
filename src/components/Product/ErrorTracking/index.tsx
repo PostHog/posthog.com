@@ -83,7 +83,7 @@ const features = [
     {
         title: 'Stack traces',
         name: 'Stack traces',
-        description: 'Upload source maps so you can follow the error path to the end of the line',
+        description: 'Upload source maps and follow the error path to the end of line',
         image: (
             <CloudinaryImage
                 src="JOETBD"
@@ -321,19 +321,19 @@ export const ProductErrorTracking = () => {
 
                         <ul className="list-none p-0 grid md:grid-cols-3 gap-4 mb-10 md:mb-20mx-5 md:mx-0">
                             <TutorialCard
-                                title="How to set up error tracking"
-                                description="Get started with error tracking in your application"
-                                url="/tutorials/error-tracking-setup"
+                                title="Can I upload my own source maps?"
+                                description="Uploading source maps allows you to see the exact line of code that caused the error"
+                                url="/docs/error-tracking/stack-traces#uploading-source-maps"
                             />
                             <TutorialCard
-                                title="How to analyze error patterns"
-                                description="Use PostHog's analytics to understand error trends"
-                                url="/tutorials/error-tracking-analysis"
+                                title="Can exceptions be sampled / ignored?"
+                                description="Find out how to sample or ignore exceptions"
+                                url="/docs/error-tracking/common-questions#can-exceptions-be-sampled--ignored"
                             />
                             <TutorialCard
-                                title="How to set up error alerts"
-                                description="Configure notifications for critical errors"
-                                url="/tutorials/error-tracking-alerts"
+                                title="Can I merge multiple issues into one?"
+                                description="Find out how to merge issues, to avoid panic"
+                                url="/docs/error-tracking/monitoring#merging-issues"
                             />
                         </ul>
                     </div>
