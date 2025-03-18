@@ -1140,6 +1140,10 @@ export const companyMenu = {
                     url: '/teams/llm-observability',
                 },
                 {
+                    name: 'Messaging',
+                    url: '/teams/messaging',
+                },
+                {
                     name: 'Product Analytics',
                     url: '/teams/product-analytics',
                 },
