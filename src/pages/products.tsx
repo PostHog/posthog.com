@@ -159,6 +159,15 @@ const productDetails: Record<
         goals: ['Data ops and monitoring', 'Diagnose issues'],
         complexity: ['People who code'],
     },
+    'error-tracking': {
+        freeTierLimit: '10,000',
+        denominator: 'event',
+        startingPrice: '$0.0001',
+        description: 'Find and track errors in your product, then assign them as issues',
+        roles: ['Product engineers'],
+        goals: ['Find errors', 'Solve performance issues'],
+        complexity: ['People who code'],
+    },
 }
 
 const filters = [
@@ -266,7 +275,7 @@ const Teams: React.FC = () => {
                             </p>
 
                             <p className="text-[15px] mb-0">
-                                <strong>We have 10+ products today</strong> – but even if we don’t have it yet, we will
+                                <strong>We have 10+ products today</strong> – but even if we don't have it yet, we will
                                 eventually. We are going to build every piece of SaaS you need to make your product
                                 successful. Learn more about{' '}
                                 <Link href="/why">why picking PostHog is a no-brainer</Link>.

@@ -3625,6 +3625,12 @@ export const productMenu = {
             url: '/data-warehouse',
         },
         {
+            name: 'Error tracking',
+            icon: 'IconBug',
+            color: 'red',
+            url: '/error-tracking',
+        },
+        {
             name: 'Product OS',
             icon: 'IconStack',
             color: 'blue',
