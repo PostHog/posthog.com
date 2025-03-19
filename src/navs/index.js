@@ -2016,7 +2016,7 @@ export const docsMenu = {
                 },
                 {
                     name: 'Max',
-                    url: '/docs/max',
+                    url: '/docs/max-ai',
                     icon: 'IconSparkles',
                     badge: {
                         title: 'Beta',
