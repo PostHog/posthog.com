@@ -52,7 +52,7 @@ import {
     IconArrowLeft,
     IconArrowRight,
     IconHeadset,
-    IconBag,
+    IconPiggyBank,
 } from '@posthog/icons'
 import CloudinaryImage from 'components/CloudinaryImage'
 import useProducts from 'hooks/useProducts'
@@ -351,13 +351,13 @@ const products: Product[] = [
         color: 'blue',
         Icon: IconSend,
         types: ['Marketing'],
-        status: 'Roadmap',
+        status: 'WIP',
         roadmapID: 1999,
     },
 
     {
         name: 'Revenue Analytics',
-        Icon: IconBag,
+        Icon: IconPiggyBank,
         color: 'darkorange',
         types: ['Business'],
         status: 'WIP',
@@ -459,7 +459,7 @@ const products: Product[] = [
         Icon: IconHeadset,
         color: 'green',
         types: ['Sales'],
-        status: 'Roadmap',
+        status: 'WIP',
         roadmapID: 2110,
     },
 ]
