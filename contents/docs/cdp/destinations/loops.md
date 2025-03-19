@@ -1,6 +1,8 @@
 ---
 title: Send PostHog person data to Loops
-templateId: template-loops
+templateId:
+    - template-loops
+    - template-loops-event
 ---
 
 import Requirements from "../_snippets/requirements.mdx"

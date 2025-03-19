@@ -15,6 +15,7 @@ import 'swiper/css'
 import 'swiper/css/pagination'
 import { IconChevronDown } from '@posthog/icons'
 import CloudinaryImage from 'components/CloudinaryImage'
+import { slugifyTeamName } from 'lib/utils'
 
 interface FullscreenModalProps {
     image: { image: React.ReactNode; pineapple: boolean }
@@ -325,10 +326,7 @@ export const Pizza = () => {
                                         )}
                                         <div className="flex-1">
                                             <Link
-                                                to={`/teams/${slugify(team.name.toLowerCase().replace('ops', ''), {
-                                                    lower: true,
-                                                    remove: /and/,
-                                                })}`}
+                                                to={`/teams/${slugifyTeamName(team.name)}`}
                                                 className="text-[15px] font-semibold text-primary dark:text-primary-dark hover:text-red dark:hover:text-yellow"
                                             >
                                                 {team.name}
@@ -387,10 +385,7 @@ export const Pizza = () => {
                                         )}
                                         <div className="flex-1">
                                             <Link
-                                                to={`/teams/${slugify(team.name.toLowerCase().replace('ops', ''), {
-                                                    lower: true,
-                                                    remove: /and/,
-                                                })}`}
+                                                to={`/teams/${slugifyTeamName(team.name)}`}
                                                 className="text-[15px] font-semibold text-primary dark:text-primary-dark hover:text-red dark:hover:text-yellow"
                                             >
                                                 {team.name}
@@ -447,10 +442,7 @@ export const Pizza = () => {
                                         )}
                                         <div className="flex-1">
                                             <Link
-                                                to={`/teams/${slugify(team.name.toLowerCase().replace('ops', ''), {
-                                                    lower: true,
-                                                    remove: /and/,
-                                                })}`}
+                                                to={`/teams/${slugifyTeamName(team.name)}`}
                                                 className="text-[15px] font-semibold text-primary dark:text-primary-dark hover:text-red dark:hover:text-yellow"
                                             >
                                                 {team.name}

@@ -1,0 +1,77 @@
+---
+title: "Users getting value: Measuring activation with PostHog"
+nextPage: ./retention.mdx
+---
+
+import { AnalyticsPlannerTip } from 'components/Docs/AnalyticsPlannerTip'
+import { CalloutBox } from 'components/Docs/CalloutBox'
+
+<AnalyticsPlannerTip />
+
+You should have the basics of your PostHog integration up and rolling now.
+
+Next you need to define and track the behavior that indicates a user is actually getting something from your product.
+
+We call this **activation**: once someone passes this threshold, they're likely to keep coming back and making progress with your product. 
+
+If someone *does not* pass this threshold, they still don't know why you're valuable, and they may not come back.
+
+Like your North Star, you need to think about activation as a precursor to revenue. What steps must someone take in your product to understand its value, and become a paying customer?
+
+Just because someone has signed up or logged in doesn't mean they're *using* our tools. That's where measuring activation comes in.
+
+Once we know how many people do or don't activate, we can adjust our product design to influence that number.
+
+## Activation by example
+
+Let's talk through a few cases of activation you might have seen yourself.
+
+For **Dropbox**, activation was simple: a user who stored one file within the first week was likely to become a long-term customer. Seeing your files sync so seamlessly is persuasive, and likely sparks more ideas about how to use the product. If you never get there, you don't understand the value firsthand.
+
+In **Uber's** case, activation was taking a first ride. Once you understand the simplicity of pushing a button and receiving transportation, you'll likely do it again.
+
+Some products have wide variability in how they get used, like **Pinterest**. Rather than focus on a specific behavior, they counted activation according to the number of days within a month someone used the product. Anything more than four counted as activation.
+
+Quantity is a totally reasonable factor in activation, too. For **PostHog's** session replay product, we count activation as anyone who has watched at least five replays. Just looking at one or two is more like kicking the tires.
+
+Activation looks different for every product. It can be expressed as a quantity of events, or even as a composite of multiple events.
+
+<CalloutBox icon="IconPencil" title="Activation planning">
+
+Think about activation for your product. 
+
+What event or events correspond to seriously *getting* what you do and cementing why a customer would want to continue using your product?
+
+Which events tracked in PostHog correspond to activation? Do you need to track more?
+
+</CalloutBox>
+
+## Tracking activation
+
+With the product emitting events we need to measure activation, we can create a new **insight** to provide ongoing measurement and reporting.  
+
+![funnel](https://res.cloudinary.com/dmukukwp6/image/upload/funnel_cee686d36d.png)
+
+One good start is the **funnel** insight. This will show you progression from the total population of users – for example, people who have logged in – toward the events that represent your activation. 
+
+You'll see the percentage of dropoff for each step, and this will give you something to chip away at with your product design and development.
+
+Each step in a funnel can be finely constrained using filters, so you're measuring exactly the behavior that you described in the above planning step.
+
+In the above example, an imaginary streaming service called Hogflix, the funnel has three events: `started_trial`, `viewed_content`, and `completed_trial`.
+
+The final event, `completed_trial`, is the activation event here because this is when you can be confident a user has experience the full value of the service.
+
+Read our [funnel documentation](/docs/product-analytics/funnels) for more on building funnel insights. 
+
+Once your funnel is created, add it to your project's [dashboard](/docs/product-analytics/dashboards) alongside insights tracking the events that influence your North star metric.
+
+### Advanced activation tracking
+
+- A more complex activation sequence – where the intermediate steps could be one of many events – may need a custom query. This post [on how we found our activation metric](/product-engineers/activation-metrics) walks through the thinking and queries behind this approach.
+
+- Our [newsletter on activation metrics](/newsletter/wtf-is-activation) goes deeper into why you should care about activation, and the different factors you should consider when choosing your activation metric.
+
+## Next steps
+
+With event data ingesting reliably into PostHog, and a clear sense of your activation criteria now reporting for your team, it's time to [think about retention](/docs/new-to-posthog/retention): how many of your users *continue using your product.*

@@ -34,7 +34,7 @@ If you'd like to instrument your own custom events, all you need to do is:
 posthog.capture('custom_event_name', {})
 ```
 
-[See our browser JS library guide for](https://posthog.com/docs/integrate/client/js) more details
+[See our browser JS library guide for](/docs/integrate/client/js) more details
 
 ### Session replay
 

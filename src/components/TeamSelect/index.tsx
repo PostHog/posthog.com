@@ -13,6 +13,7 @@ export default function TeamSelect({ value, onChange }) {
 
     return (
         <Select
+            search
             value={(teams.includes(value) ? value : teams.find((team) => team.id === value?.id)) || {}}
             onChange={onChange}
             options={teams.map((team) => ({ label: team.attributes.name, value: team }))}

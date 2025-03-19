@@ -10,9 +10,9 @@ This guide walks you through integrating PostHog into your SvelteKit app using t
 
 ## Client-side setup
 
-import SvelteInstall from "../integrate/_snippets/install-svelte.mdx"
+import SvelteInstallClient from "../integrate/_snippets/install-svelte-client.mdx"
 
-<SvelteInstall />
+<SvelteInstallClient />
 
 > ❗️ If you intend on using session replays with a server-side rendered Svelte app ensure that your [asset URLs are configured to be relative](/docs/session-replay/troubleshooting#ensure-assets-are-imported-from-the-base-URL-in-Svelte).
 
@@ -62,32 +62,59 @@ export const load = async () => {
 
 ## Server-side setup
 
-Install `posthog-node` using your package manager:
+import SvelteInstallServer from "../integrate/_snippets/install-svelte-server.mdx"
 
-```bash
-yarn add posthog-node
-# or
-npm install --save posthog-node
+<SvelteInstallServer />
+
+## Feature flags
+
+To use client-side feature flags, import PostHog into your Svelte component and check if the feature is enabled (while ensuring the code only runs in the browser).
+
+```js file=routes/+page.svelte
+<script>
+  import posthog from 'posthog-js'
+  import { browser } from '$app/environment'
+  import { onMount } from 'svelte'
+  
+  let coolFeature = false
+  
+  onMount(() => {
+    if (browser) {
+      coolFeature = posthog.isFeatureEnabled('cool-feature')
+    }
+  })
+</script>
+
+{#if coolFeature}
+  <p>Welcome to the cool feature!</p>
+{/if}
 ```
 
-Then, initialize the PostHog Node client where you'd like to use it on the server side. For example, in a [load function](https://kit.svelte.dev/docs/load#page-data):
+To use server-side feature flags, import PostHog into your SvelteKit `load` function and check if the feature is enabled. 
 
 ```js file=routes/+page.server.js
 import { PostHog } from 'posthog-node';
 
+const client = new PostHog(
+  '<ph_project_api_key>',
+  { host: '<ph_client_api_host>' }
+);
+
 export async function load() {
-  const posthog = new PostHog('<ph_project_api_key>', { host: '<ph_client_api_host>' });
+  const distinctId = 'distinct_id_of_the_user';
+  
+  const megaFeature = await client.isFeatureEnabled(
+    'mega-feature',
+    distinctId
+  );
 
-  posthog.capture({
-    distinctId: 'distinct_id_of_the_user',
-    event: 'event_name',
-  })
-
-  await posthog.shutdown()
+  return {
+    megaFeature
+  };
 }
 ```
 
-> **Note:** Make sure to always call `posthog.shutdown()` after capturing events from the server-side. PostHog queues events into larger batches, and this call forces all batched events to be flushed immediately.
+See our [JavaScript Web](/docs/libraries/js/features#feature-flags) and [Node](/docs/libraries/node#feature-flags) docs for more details.
 
 ## Configuring session replay for server-side rendered apps
 

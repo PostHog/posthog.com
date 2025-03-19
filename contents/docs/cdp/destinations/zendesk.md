@@ -1,6 +1,7 @@
 ---
 title: Send PostHog person data to Zendesk
-templateId: template-zendesk
+templateId:
+    - template-zendesk
 ---
 
 import Requirements from "../_snippets/requirements.mdx"
