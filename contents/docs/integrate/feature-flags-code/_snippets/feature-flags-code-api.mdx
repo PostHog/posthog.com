@@ -15,14 +15,14 @@ curl -v -L --header "Content-Type: application/json" -d '  {
     "groups" : {
         "group_type": "group_id"
     }
-}' "<ph_client_api_host>/decide?v=3"
+}' "<ph_client_api_host>/decide?v=4"
 ```
 
 ```python
 import requests
 import json
 
-url = "<ph_client_api_host>/decide?v=3"
+url = "<ph_client_api_host>/decide?v=4"
 headers = {
     "Content-Type": "application/json"
 }
@@ -41,7 +41,7 @@ print(response.json())
 import fetch from "node-fetch";
 
 async function sendDecideRequest() {
-    const url = "<ph_client_api_host>/decide?v=3";
+    const url = "<ph_client_api_host>/decide?v=4";
     const headers = {
         "Content-Type": "application/json",
     };
