@@ -29,7 +29,6 @@ import {
     IconDownload,
     IconDatabase,
     IconHandMoney,
-    IconAI,
     IconDecisionTree,
     IconRetention,
     IconUserPaths,
@@ -53,6 +52,7 @@ import {
     IconArrowLeft,
     IconArrowRight,
     IconHeadset,
+    IconBag,
 } from '@posthog/icons'
 import CloudinaryImage from 'components/CloudinaryImage'
 import useProducts from 'hooks/useProducts'
@@ -353,6 +353,15 @@ const products: Product[] = [
         types: ['Marketing'],
         status: 'Roadmap',
         roadmapID: 1999,
+    },
+
+    {
+        name: 'Revenue Analytics',
+        Icon: IconBag,
+        color: 'darkorange',
+        types: ['Business'],
+        status: 'WIP',
+        roadmapID: 2206,
     },
     {
         name: 'Product tours',
@@ -705,7 +714,7 @@ const ProductModal = ({
     )
 }
 
-const sorted = ['Product', 'Marketing', 'Support', 'Sales', 'AI', 'Data', 'Engineering']
+const sorted = ['Product', 'Marketing', 'Support', 'Sales', 'Business', 'AI', 'Data', 'Engineering']
 
 const ProductButton = ({
     type,
@@ -879,7 +888,7 @@ export default function Hero(): JSX.Element {
                 <div className="@container flex-1">
                     <ul className="grid @sm:grid-cols-2 @xl:grid-cols-3 md:gap-x-2 gap-y-6 @2xl:gap-y-8 @3xl:gap-y-10 list-none m-0 p-0 flex-grow flex-shrink-0 sm:max-h-[65vh] overflow-y-auto">
                         {groupedProducts.map(([type, products]) =>
-                            type === 'Sales' ? null : (
+                            type === 'Sales' || type === 'Business' ? null : (
                                 <li key={type}>
                                     <ProductButton
                                         type={type}
@@ -890,16 +899,28 @@ export default function Hero(): JSX.Element {
                                         setProductModalOpen={setProductModalOpen}
                                     />
                                     {type === 'Support' ? (
-                                        <div className="mt-2">
-                                            <ProductButton
-                                                type={'Sales'}
-                                                products={groupedProducts.find(([type]) => type === 'Sales')[1]}
-                                                activeProduct={activeProduct}
-                                                activeStatus={activeStatus}
-                                                setActiveProduct={setActiveProduct}
-                                                setProductModalOpen={setProductModalOpen}
-                                            />
-                                        </div>
+                                        <>
+                                            <div className="mt-6">
+                                                <ProductButton
+                                                    type={'Sales'}
+                                                    products={groupedProducts.find(([type]) => type === 'Sales')[1]}
+                                                    activeProduct={activeProduct}
+                                                    activeStatus={activeStatus}
+                                                    setActiveProduct={setActiveProduct}
+                                                    setProductModalOpen={setProductModalOpen}
+                                                />
+                                            </div>
+                                            <div className="mt-6">
+                                                <ProductButton
+                                                    type={'Business'}
+                                                    products={groupedProducts.find(([type]) => type === 'Business')[1]}
+                                                    activeProduct={activeProduct}
+                                                    activeStatus={activeStatus}
+                                                    setActiveProduct={setActiveProduct}
+                                                    setProductModalOpen={setProductModalOpen}
+                                                />
+                                            </div>
+                                        </>
                                     ) : null}
                                 </li>
                             )
