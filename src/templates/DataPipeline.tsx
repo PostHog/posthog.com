@@ -6,14 +6,24 @@ import { graphql } from 'gatsby'
 import APIExamples from 'components/Product/Pipelines/APIExamples'
 import Configuration from 'components/Product/Pipelines/Configuration'
 import SEO from 'components/seo'
+import { getIconUrl } from 'components/Product/Pipelines'
 
 export default function DataPipeline({
     data,
 }: {
-    data: { postHogPipeline: { name: string; description: string; inputs_schema: any; id: string; type: string } }
+    data: {
+        postHogPipeline: {
+            name: string
+            description: string
+            inputs_schema: any
+            id: string
+            type: string
+            icon_url: string
+        }
+    }
 }): JSX.Element {
     const {
-        postHogPipeline: { name, description, inputs_schema, id, type },
+        postHogPipeline: { name, description, inputs_schema, id, type, icon_url },
     } = data
 
     return (
@@ -23,7 +33,10 @@ export default function DataPipeline({
         >
             <SEO title={`${name} - Docs - PostHog`} description={description} />
             <PostLayout title={name} menu={dataPipelines.children} menuWidth={{ left: 400 }} hideSidebar hideSurvey>
-                <h1 className="mt-0">{name}</h1>
+                <div className="flex items-center space-x-2">
+                    <img src={getIconUrl(icon_url)} alt={name} className="w-10 h-10" />
+                    <h1 className="m-0">{name}</h1>
+                </div>
                 <div className="article-content">
                     <p>{description}</p>
                     {inputs_schema?.length > 0 && (
@@ -46,6 +59,7 @@ export const query = graphql`
             name
             description
             type
+            icon_url
             inputs_schema {
                 key
                 type

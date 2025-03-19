@@ -443,7 +443,7 @@ const CDPFlowChart = () => {
     )
 }
 
-const getIconUrl = (iconUrl) => {
+export const getIconUrl = (iconUrl) => {
     return iconUrl?.startsWith('http') ? iconUrl : `https://app.posthog.com${iconUrl}`
 }
 
