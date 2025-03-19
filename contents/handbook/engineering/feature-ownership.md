@@ -55,6 +55,8 @@ You can also view the list [directly in GitHub](https://github.com/PostHog/posth
 | Project Home Page | [Team Product Analytics][Team Product Analytics]  | <span class="lemon-tag gh-tag">feature/home</span> |
 | Property Filters | [Team Product Analytics][Team Product Analytics]  | <span class="lemon-tag gh-tag">feature/filters</span>  |
 | Queries as a Service | [Team Clickhouse][Team Clickhouse]  | <span class="lemon-tag gh-tag">feature/qaas</span>  |
+| Revenue Analytics | [Team Revenue Analytics][Team Revenue Analytics] | <span class="lemon-tag gh-tag">feature/revenue-analytics</span>  |
+| Revenue Data Management | [Team Revenue Analytics][Team Revenue Analytics] | <span class="lemon-tag gh-tag">feature/revenue-data-management</span>  |
 | Replay | [Team Replay][Team Replay]  |  <span class="lemon-tag gh-tag">feature/replay</span> |
 | Security | [Team Infrastructure][Team Infrastructure] though it is every teams job to consider and react to security issues |  <span class="lemon-tag gh-tag">feature/security</span> |
 | Self-hosting | [Team Infrastructure][Team Infrastructure]  |  <span class="lemon-tag gh-tag">feature/self-hosting</span> |
@@ -80,15 +82,16 @@ Some of the features we are building may exist in other products already. It is 
 [@Twixes]: https://github.com/Twixes
 [@daibhin]: https://github.com/daibhin
 [@timgl]: https://github.com/timgl
-[Team Product Analytics]: /teams/product-analytics
-[Team Web Analytics]: /teams/web-analytics
-[Team Replay]: /teams/replay
 [Team CDP]: /teams/cdp
+[Team ClickHouse]: /teams/clickhouse
 [Team CRM]: /teams/crm
 [Team Data Warehouse]: /teams/data-warehouse
-[Team Infrastructure]: /teams/infrastructure
+[Team Dollars & Cents]: /teams/dollars-cents
 [Team Feature Flags]: /teams/feature-flags
 [Team Growth]: /teams/growth
-[Team Dollars & Cents]: /teams/dollars-cents
-[Team ClickHouse]: /teams/clickhouse
+[Team Infrastructure]: /teams/infrastructure
+[Team Product Analytics]: /teams/product-analytics
+[Team Replay]: /teams/replay
+[Team Revenue Analytics]: /teams/revenue-analytics
+[Team Web Analytics]: /teams/web-analytics
 [Team Surveys]: /teams/surveys
