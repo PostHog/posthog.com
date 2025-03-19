@@ -32,10 +32,10 @@ export default function Feedback() {
     <div>
       <h1>Give us feedback</h1>
       <form onSubmit={handleFeedbackSubmit}>
-        <textarea 
-          id="feedbackInput" 
-          name="feedback" 
-          placeholder="Enter your feedback here..." 
+        <textarea
+          id="feedbackInput"
+          name="feedback"
+          placeholder="Enter your feedback here..."
           required
         ></textarea>
         <button type="submit">Submit Feedback</button>
@@ -94,13 +94,13 @@ export default App;
 This renders an unstyled survey in the `#survey-container` element that looks like this:
 
 <ProductScreenshot
-    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_01_03_at_15_01_34_2x_761478ffdc.png" 
+    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_01_03_at_15_01_34_2x_761478ffdc.png"
     imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_01_03_at_15_01_34_2x_761478ffdc.png"
-    alt="Survey templates" 
+    alt="Survey templates"
     classes="rounded"
 />
 
-You can then style the survey by targeting the classes like `survey-box`, `survey-question`, `textarea`, `buttons`, `footer-branding`, and `thank-you-message`. 
+You can then style the survey by targeting the classes like `survey-box`, `survey-question`, `textarea`, `buttons`, `footer-branding`, and `thank-you-message`.
 
 ## Fetching surveys manually
 
@@ -131,7 +131,7 @@ Both methods return a callback with an array of surveys in this format:
         "No"
       ],
       "question": "Are you enjoying PostHog?",
-      "id": "single_choice_1" // Each question has a unique ID
+      "id": "7ce5b831-dc71-4648-b6b0-b583d48a0c11" // Each question has a UUID
     }
   ],
   "conditions": null,
@@ -149,7 +149,7 @@ import { usePostHog } from 'posthog-js/react';
 import { useEffect, useState } from 'react';
 
 export default function Feedback() {
-  const [survey, setSurvey] = useState({})  
+  const [survey, setSurvey] = useState({})
   const posthog = usePostHog()
 
   useEffect(() => {
@@ -158,15 +158,16 @@ export default function Feedback() {
         const survey = surveys[0];
         setSurvey(survey)
       }
-    }); 
+    });
   }, [posthog]);
 
   const handleFeedbackSubmit = (e) => {
     e.preventDefault();
     const feedback = e.target.elements.feedback.value;
+    const responseKey = `$survey_response_${survey.questions[0].id}`; // $survey_response_7ce5b831-dc71-4648-b6b0-b583d48a0c11
     posthog.capture("survey sent", {
       $survey_id: survey.id,
-      $survey_response: feedback
+      [responseKey]: feedback
     })
   }
 
@@ -176,10 +177,10 @@ export default function Feedback() {
         <>
           <h1>{survey.questions[0].question}</h1>
           <form onSubmit={handleFeedbackSubmit}>
-            <textarea 
-              id="feedbackInput" 
-              name="feedback" 
-              placeholder={survey.appearance.placeholder} 
+            <textarea
+              id="feedbackInput"
+              name="feedback"
+              placeholder={survey.appearance.placeholder}
               required
             ></textarea>
             <button type="submit">Submit Feedback</button>
@@ -196,7 +197,7 @@ export default function Feedback() {
 > //... other code
 > posthog.capture("survey sent", {
 >   $survey_id: survey.id,
->   $survey_response: feedback
+>   $survey_response_7ce5b831-dc71-4648-b6b0-b583d48a0c11: feedback
 > })
 > localStorage.setItem(`hasInteractedWithSurvey_${survey.id}`, 'true');
 > ```
@@ -206,9 +207,37 @@ export default function Feedback() {
 The main event you must capture to track survey results is `survey sent`. PostHog supports two formats for survey responses, but we strongly recommend using ID-based responses as they are more reliable and resistant to changes in question ordering:
 
 ```js-web
+/**
+ * Example survey response:
+ *
+ * [{
+ *   "id": "your_survey_id",
+ *   ...otherFields,
+ *   "questions": [
+ *     {
+ *       ...otherQuestionFields,
+ *       "question": "Are you enjoying PostHog?",
+ *       "id": "7ce5b831-dc71-4648-b6b0-b583d48a0c11" // Each question has a UUID
+ *     },
+ *     {
+ *       ...otherQuestionFields,
+ *       "question": "What is your favorite color?",
+ *       "id": "cbeee176-54e0-4757-befd-f4e8fb33b9a9"
+ *     }
+ *   ],
+ * }]
+ */
+
+const responses = survey.questions.map((question) => {
+  const responseKey = `$survey_response_${question.id}`;
+  return {
+    [responseKey]: questionResponse // this is the response you're tracking in your survey implementation
+  }
+})
+
 posthog.capture("survey sent", {
     $survey_id: survey.id, // required
-    $survey_response_question_id: survey_response // ID-based (recommended)
+    ...responses
 })
 ```
 
@@ -217,7 +246,8 @@ For backward compatibility, PostHog also supports index-based responses, but the
 ```js-web
 posthog.capture("survey sent", {
     $survey_id: survey.id,
-    $survey_response: survey_response // Index-based (legacy, position 0)
+    $survey_response: questionResponseForFirstQuestion, // Index-based (legacy, position 0)
+    $survey_response_1: questionResponseForSecondQuestion // Index-based (legacy, position 1)
 })
 ```
 
@@ -232,13 +262,54 @@ For multiple choice surveys, the response must be an array of values with the se
 For surveys with multiple questions, use ID-based properties to ensure your responses remain valid even if questions are reordered:
 
 ```js-web
+/**
+ * Example survey response:
+ *
+ * [{
+ *   "id": "your_survey_id",
+ *   ...otherFields,
+ *   "questions": [
+ *     {
+ *       ...otherQuestionFields,
+ *       "question": "What can we do to improve our product?",
+ *       "type": "open_text",
+ *       "id": "cbeee176-54e0-4757-befd-f4e8fb33b9a9"
+ *     },
+ *     {
+ *       ...otherQuestionFields,
+ *       "question": "How can we improve our Surveys product?",
+ *       "type": "rating",
+ *       scale: 10,
+ *       "id": "7ce5b831-dc71-4648-b6b0-b583d48a0c11" // Each question has a UUID
+ *     },
+ *     {
+ *       ...otherQuestionFields,
+ *       "question": "What should we build next?",
+ *       "type": "multiple_choice",
+ *       "choices": ["Better analysis tools", "Better documentation and more examples", "More templates"],
+ *       "id": "cbeee176-54e0-4757-befd-f4e8fb33b9a9"
+ *     }
+ *   ],
+ * }]
+ */
+
+const responses = survey.questions.map((question) => {
+  const responseKey = `$survey_response_${question.id}`;
+
+  if (question.type === 'multiple_choice') {
+    return {
+      [responseKey]: ["Better analysis tools", "More templates"] // this is the response you're tracking in your survey implementation
+    }
+  }
+
+  return {
+    [responseKey]: questionResponse // this is the response you're tracking in your survey implementation
+  }
+})
+
 posthog.capture("survey sent", {
     $survey_id: survey.id, // required
-    
-    // Using question IDs (recommended)
-    $survey_response_open_text_1: first_question_response,
-    $survey_response_nps_rating_1: second_question_response,
-    $survey_response_multiple_choice_1: third_question_response
+    ...responses
 })
 ```
 
@@ -248,9 +319,9 @@ While index-based responses are still supported, we recommend using ID-based res
 // Legacy format (not recommended for new implementations)
 posthog.capture("survey sent", {
     $survey_id: survey.id,
-    $survey_response: first_question_response,
-    $survey_response_1: second_question_response,
-    $survey_response_2: third_question_response
+    $survey_response: "PostHog is a great tool",
+    $survey_response_1: 10,
+    $survey_response_2: ["More templates"]
 })
 ```
 
