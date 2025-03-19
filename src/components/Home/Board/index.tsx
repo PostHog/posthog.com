@@ -358,7 +358,7 @@ const products: Product[] = [
     {
         name: 'Revenue Analytics',
         Icon: IconPiggyBank,
-        color: 'darkorange',
+        color: 'orange',
         types: ['Business'],
         status: 'WIP',
         roadmapID: 2206,
@@ -900,7 +900,7 @@ export default function Hero(): JSX.Element {
                                     />
                                     {type === 'Support' ? (
                                         <>
-                                            <div className="mt-6">
+                                            <div className="mt-6 md:mt-2">
                                                 <ProductButton
                                                     type={'Sales'}
                                                     products={groupedProducts.find(([type]) => type === 'Sales')[1]}
@@ -910,7 +910,7 @@ export default function Hero(): JSX.Element {
                                                     setProductModalOpen={setProductModalOpen}
                                                 />
                                             </div>
-                                            <div className="mt-6">
+                                            <div className="mt-6 md:mt-2">
                                                 <ProductButton
                                                     type={'Business'}
                                                     products={groupedProducts.find(([type]) => type === 'Business')[1]}
