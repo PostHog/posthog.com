@@ -1963,6 +1963,10 @@ export const docsMenu = {
                             url: '/docs/sql/aggregations',
                         },
                         {
+                            name: 'Variables',
+                            url: '/docs/sql/variables',
+                        },
+                        {
                             name: 'Tutorials',
                             url: '/docs/sql/tutorials',
                         },
