@@ -85,15 +85,49 @@ When called, `decide` returns the flag values and payloads, along with more info
     "gzip",
     "lz64"
   ],
-  "featureFlags": {
-    "my-awesome-flag": true,
-    "my-awesome-flag-2": true,
-    "my-multivariate-flag": "some-string-value",
-    "flag-thats-not-on": false,
-  },
-  "featureFlagPayloads": {
-    "my-awesome-flag": "example-payload-string",
-    "my-awesome-flag-2": "{\"color\": \"blue\", \"animal\": \"hedgehog\"}"
+  "flags": {
+    "my-awesome-flag": {
+      "key": "my-awesome-flag",
+      "enabled": true,
+      "reason": {
+        "code": "condition_match",
+        "condition_index": 0,
+        "description": "Condition set 1 matched"
+      },
+      "metadata": {
+        "id": 1,
+        "version": 1,
+        "payload": "{\"example\": \"json\", \"payload\": \"value\"}"
+      }
+    },
+    "my-multivariate-flag" :{
+      "key":"my-multivariate-flag",
+      "enabled": true,
+      "variant": "some-string-value",
+      "reason": {
+        "code": "condition_match",
+        "condition_index": 1,
+        "description": "Condition set 2 matched"
+      },
+      "metadata": {
+        "id": 2,
+        "version": 42,
+        "description": "My Multivariate flag"
+      }
+    },
+    "flag-thats-not-on": {
+      "key": "flag-thats-not-on",
+      "enabled": false,
+      "reason": {
+        "code": "no_condition_match",
+        "condition_index": 0,
+        "description": "No condition sets matched"
+      },
+      "metadata": {
+        "id": 3,
+        "version": 1
+      }
+    }
   }
 }
 ```
@@ -117,9 +151,8 @@ If your organization exceeds its feature flag quota, the `/decide` endpoint will
     "gzip",
     "lz64"
   ],
-  "featureFlags": {},
+  "flags": {},
   "errorsWhileComputingFlags": false,
-  "featureFlagPayloads": {},
   "quotaLimited": ["feature_flags"]
   // ... other fields, not relevant to feature flags
 }
