@@ -2,7 +2,7 @@
 
 > **Note:** A minimum SDK version of v4.5.2 is required, but we recommend keeping up to date with the latest version to ensure you have all of error tracking's features.
 
-Exception autocapture can be enabled during initialization of the PostHog client to automatically capture any exception thrown by your Node application.
+You can enable exception autocapture when initializing the PostHog client to automatically capture uncaught exceptions and unhandled rejections in your Node app. 
 
 ```node
 import { PostHog } from 'posthog-node'
@@ -11,10 +11,9 @@ const client = new PostHog(
     '<ph_project_api_key>',
     { enableExceptionAutocapture: true }
 )
-
 ```
 
-If you are using the Express framework you will need to call `setupExpressErrorHandler` with your PostHog client and Express app. This is because Express handles uncaught errors internally meaning exception autocapture will not work by default.
+If you are using the Express framework, you will need to import and call `setupExpressErrorHandler` with your PostHog client and Express app. This is because Express handles uncaught exceptions internally meaning exception autocapture will not work by default.
 
 ```node file=server.ts
 import express from 'express'
@@ -26,10 +25,14 @@ const posthog = new PostHog(PH_API_KEY)
 setupExpressErrorHandler(posthog, app)
 ```
 
-> ⚠️ Error tracking requires access the file system to process stack traces. Cloudflare workers do not support Node.js runtime APIs by default and need to be [included as per their documentation](https://developers.cloudflare.com/workers/runtime-apis/nodejs/#nodejs-compatibility).
+> **Note:** Error tracking requires access the file system to process stack traces. Some providers, like Cloudflare workers, do not support Node.js runtime APIs by default and need to be [included as per their documentation](https://developers.cloudflare.com/workers/runtime-apis/nodejs/#nodejs-compatibility).
 
-For exceptions handled by your application that you would still like sent to PostHog, you can manually call the capture method:
+### Capturing exceptions manually
+
+If you need to manually capture exceptions, you can do so by calling the `captureException` method:
 
 ```node
 posthog.captureException(e, 'user_distinct_id', additionalProperties)
 ```
+
+This is helpful if you've built your own error handling logic or want to capture exceptions normally handled by the framework. 
