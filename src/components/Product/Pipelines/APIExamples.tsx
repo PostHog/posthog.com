@@ -42,7 +42,7 @@ export default function APIExamples({
             code: `# Create a new destination
 curl --location '<ph_client_api_host>/api/environments/:project_id/hog_functions' \\
 --header 'Content-Type: application/json' \\
---header 'Authorization: <ph_project_api_key>' \\
+--header 'Authorization: Bearer <POSTHOG_PERSONAL_API_KEY>' \\
 --data '{
     "type": "${type}",
     "name": "${name}",
