@@ -285,53 +285,11 @@ export const dataPipelines = {
         },
         {
             name: 'Transformations',
-            url: '/docs/cdp/geoip-enrichment',
+            url: '/docs/cdp/transformations/downsampling-plugin',
             icon: 'IconWrench',
             color: 'yellow',
             featured: true,
             dynamicChildren: 'data-pipeline-transformations',
-            children: [
-                {
-                    url: '/docs/cdp/geoip-enrichment',
-                    name: 'GeoIP Enricher',
-                },
-                {
-                    url: '/docs/cdp/timestamp-parser',
-                    name: 'Timestamp Parser',
-                },
-                {
-                    url: '/docs/cdp/url-normalizer',
-                    name: 'URL Normalizer',
-                },
-                {
-                    url: '/docs/cdp/user-agent-populator',
-                    name: 'User Agent Populator',
-                },
-                {
-                    url: '/docs/cdp/event-sequence-timer',
-                    name: 'Event Sequence Timer',
-                },
-                {
-                    url: '/docs/cdp/property-filter',
-                    name: 'Property Filter',
-                },
-                {
-                    url: '/docs/cdp/taxonomy-standardizer',
-                    name: 'Taxonomy Standardizer',
-                },
-                {
-                    url: '/docs/cdp/downsampling',
-                    name: 'Downsampler',
-                },
-                {
-                    url: '/docs/cdp/filter-out',
-                    name: 'Filter Out',
-                },
-                {
-                    url: '/docs/cdp/schema-enforcer',
-                    name: 'Schema Enforcer',
-                },
-            ],
         },
         {
             name: 'Troubleshooting and FAQs',

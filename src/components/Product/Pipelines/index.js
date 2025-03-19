@@ -536,15 +536,20 @@ function PipelinesPage({ location }) {
                                     <MDXRenderer>{selectedDestination.mdx.body}</MDXRenderer>
                                 </MDXProvider>
                             ) : (
-                                <p className="!-mb-4">{selectedDestination.description}</p>
+                                <p>{selectedDestination.description}</p>
                             )}
-                            <h2>Configuration</h2>
-                            <Configuration inputs_schema={selectedDestination.inputs_schema} />
+                            {selectedDestination.inputs_schema?.length > 0 && (
+                                <>
+                                    <h2 className="!mt-2">Configuration</h2>
+                                    <Configuration inputs_schema={selectedDestination.inputs_schema} />
+                                </>
+                            )}
                             <APIExamples
                                 name={selectedDestination.name}
                                 inputs_schema={selectedDestination.inputs_schema}
                                 id={selectedDestination.id}
                                 type={selectedDestination.type}
+                                initialOpen={selectedDestination.inputs_schema?.length <= 0}
                             />
                         </div>
 

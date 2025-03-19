@@ -1494,6 +1494,17 @@
         {
             "source": "/community/profiles/59",
             "destination": "/community/profiles/29070"
-        }
+        },
+        { "source": "/docs/cdp/geoip-enrichment", "destination": "/docs/cdp/transformations/posthog-plugin-geoip" },
+        { "source": "/docs/cdp/timestamp-parser", "destination": "/docs/cdp/transformations/timestamp-parser-plugin" },
+        {
+            "source": "/docs/cdp/url-normalizer",
+            "destination": "/docs/cdp/transformations/posthog-url-normalizer-plugin"
+        },
+        { "source": "/docs/cdp/user-agent-populator", "destination": "/docs/cdp/transformations/user-agent-plugin" },
+        { "source": "/docs/cdp/property-filter", "destination": "/docs/cdp/transformations/property-filter-plugin" },
+        { "source": "/docs/cdp/taxonomy-standardizer", "destination": "/docs/cdp/transformations/taxonomy-plugin" },
+        { "source": "/docs/cdp/downsampling", "destination": "/docs/cdp/transformations/downsampling-plugin" },
+        { "source": "/docs/cdp/filter-out", "destination": "/docs/cdp/transformations/posthog-filter-out-plugin" }
     ]
 }
