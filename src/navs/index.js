@@ -1148,6 +1148,10 @@ export const companyMenu = {
                     url: '/teams/replay',
                 },
                 {
+                    name: 'Revenue Analytics',
+                    url: '/teams/revenue-analytics',
+                },
+                {
                     name: 'Surveys',
                     url: '/teams/surveys',
                 },
