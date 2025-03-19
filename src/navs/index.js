@@ -1945,10 +1945,6 @@ export const docsMenu = {
                     name: 'SQL access',
                     url: '/docs/sql',
                     icon: 'IconHogQL',
-                    badge: {
-                        title: 'Beta',
-                        className: 'uppercase !bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',
-                    },
                     children: [
                         {
                             name: 'Overview',
@@ -2017,6 +2013,15 @@ export const docsMenu = {
                             url: '/docs/toolbar/override-feature-flags',
                         },
                     ],
+                },
+                {
+                    name: 'Max',
+                    url: '/docs/max',
+                    icon: 'IconSparkles',
+                    badge: {
+                        title: 'Beta',
+                        className: 'uppercase !bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',
+                    },
                 },
                 {
                     name: 'Resources',
@@ -2360,10 +2365,6 @@ export const docsMenu = {
                     url: '/docs/product-analytics/sql',
                     icon: 'IconHogQL',
                     color: 'purple',
-                    badge: {
-                        title: 'Beta',
-                        className: 'uppercase !bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',
-                    },
                 },
                 {
                     name: 'Tools',
