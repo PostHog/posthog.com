@@ -1136,6 +1136,10 @@ export const companyMenu = {
                     url: '/teams/infrastructure',
                 },
                 {
+                    name: 'Ingestion',
+                    url: '/teams/ingestion',
+                },
+                {
                     name: 'LLM Observability',
                     url: '/teams/llm-observability',
                 },
