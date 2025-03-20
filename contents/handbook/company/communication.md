@@ -193,10 +193,11 @@ We use RFCs to communicate and gather feedback on a decision. RFCs are useful be
 Here are the steps for an RFC:
 1. Identify a problem and a decision to be made
 2. Create an RFC as a pull request using one of the [RFC templates](https://github.com/PostHog/product-internal/tree/main/requests-for-comments/templates).
+    - Using a template isn't a requirement, though it is a helpful and recommended starting place if you haven't written many RFCs here before. You can also get inspiration from other RFCs, as many have different sections and styles depending on the type of thing being discussed.
 3. Share the RFC:
-   1. Assign people whom this RFC will impact, or who may have good opinions on the topic, as reviews to the pull request.
-   2. Post in the relevant Slack channel (normally the teams slack channel, or `#tell-posthog-anything` if it's a bigger cross-team RFC)
-   3. Tag the people you need input from in the slack thread or DM them - it's your responsibility to nudge the relevant people for their input
+    - Assign people whom this RFC will impact, or who may have good opinions on the topic, as reviews to the pull request.
+    - Post in the relevant Slack channel (normally the teams slack channel, or `#tell-posthog-anything` if it's a bigger cross-team RFC)
+    - Tag the people you need input from in the slack thread or DM them - it's your responsibility to nudge the relevant people for their input
 4. If an RFC is cross-team and is causing a large amount of disagreement, it might be worth having a sync meeting to reach a decision
 5. Once a decision is made, include the decision in the pull request, merge it in and share this in the relevant channel and `#github-rfcs` again.
 
