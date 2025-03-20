@@ -42,7 +42,7 @@ You can also view the list [directly in GitHub](https://github.com/PostHog/posth
 | Heatmaps | [Team Replay][Team Replay] | <span class="lemon-tag gh-tag">feature/heatmaps</span> |
 | Ingestion | [Team CDP][Team CDP]  | <span class="lemon-tag gh-tag">feature/pipeline</span> |
 | Insights | [Team Product Analytics][Team Product Analytics]  | <span class="lemon-tag gh-tag">feature/insights</span>  |
-| Internal Messaging (Email, Notifications) | [Team Dollars & Cents][Team Dollars & Cents]  | <span class="lemon-tag gh-tag">feature/dollars-and-cents</span>  |
+| Internal Messaging (Email, Notifications) | [Team Dollars & Cents][Team Dollars & Cents]  | <span class="lemon-tag gh-tag">feature/notifications</span>  |
 | Live Events | [Team ClickHouse][Team ClickHouse]  | <span class="lemon-tag gh-tag">feature/live-events</span>  |
 | Messaging | [Team Messaging][Team Messaging]  | <span class="lemon-tag gh-tag">feature/messaging</span>  |
 | Notebooks | [@daibhin][@daibhin]  |  <span class="lemon-tag gh-tag">feature/notebooks</span> |
