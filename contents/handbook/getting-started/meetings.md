@@ -20,6 +20,22 @@ You should have been invited to any relevant meetings as part of your [onboardin
 - **Thursday** - Meeting-free - no regularly scheduled internal meetings allowed. [Learn more](#no-recurring-meeting-days-tuesdaysthursdays).
 - **Friday** - These alternate between Sprint Planning and Life Stories.
 
+## The all-hands
+
+The Monday all-hands features a few regular sections and is recorded in [this document](https://docs.google.com/document/d/1JbA2W1CP2sA5vRVnS0UgyDgRz88mKpEVeinW6SYjO74/edit?usp=sharing).
+
+- **Announcements:** Revenue and churn updates, plus other major news
+- **Hiring:** Updates about headcount, who is starting soon, and new hiring roles
+- **Releases:** Updates about what we're working on, with updates in the following categories:
+    - _Roadmap_: Things we're working on, but aren't available yet. 
+    - _Beta_: Things which are available, but aren't ready for release yet.
+    - _Prepping for launch_: Things which are ready and we have a pricing RFC and target release date for. 
+It's the responsibility of team leads to update this section for their products, so supporting teams (e.g. Billing, Comms, Support) can assist in a successful launch.
+- **Acknowledgements:** Opportunity to give kudos to your colleagues
+- **Topic of the day:** [Exec team talks around a particular topic](/handbook/exec/all-hands-topics)
+- **Q&A with James & Tim:** Ask the founders anything you want
+- **Demos:** Show us what you've worked on last week
+
 ### No recurring meeting days (Tuesdays/Thursdays)
 
 We try to keep these days focused on deep work. Therefore, we run no regularly scheduled meetings on these days.
