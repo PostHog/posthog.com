@@ -15,20 +15,20 @@ In service of this mission, our goals are:
 **Goals for Q2 2025:**
 
 - Query Observability and Performance Improvements
-  - we want to know where the query is coming from and why. Is it per team or posthog wide, is it by our system or by customer?
-  - system.query_log table, log_comment column should have proper tags: tag_queries(team_id, issuer, product)
-  - Add additional metadata tags to better identify and categorize API query sources
+    - we want to know where the query is coming from and why. Is it per team or posthog wide, is it by our system or by customer?
+    - system.query_log table, log_comment column should have proper tags: tag_queries(team_id, issuer, product)
+    - Add additional metadata tags to better identify and categorize API query sources
 
 
 - Make ClickHouse ops easy
-  - Complete cluster management through Infrastructure as Code (IaC)
-  - Optimize speed of critical operational procedures incl. automation for common operations (e.g. ZK)
-  - Implement ClickHouseKeeping automation via Dagster (cleanup jobs, backups, improve replication performance)
-  - Better runbooks for everyone
-  - Build automation for handling ad-hoc deletion requests and disk provisioning  
-  - Storage infrastructure improvements (s3-backed events, get rid of io2)
+    - Complete cluster management through Infrastructure as Code (IaC)
+    - Optimize speed of critical operational procedures incl. automation for common operations (e.g. ZK)
+    - Implement ClickHouseKeeping automation via Dagster (cleanup jobs, backups, improve replication performance)
+    - Better runbooks for everyone
+    - Build automation for handling ad-hoc deletion requests and disk provisioning  
+    - Storage infrastructure improvements (s3-backed events, get rid of io2)
 
 - Use Altinity Antalya in production for events
-  1) upgrade clusters to Antalya 
-  2) get DW queries running through Antalya Swarm
-  3) Backfill all events onto Iceberg in S3
+    - upgrade clusters to Antalya 
+    - get DW queries running through Antalya Swarm
+    - Backfill all events onto Iceberg in S3
