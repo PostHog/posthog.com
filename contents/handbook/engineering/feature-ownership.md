@@ -91,6 +91,7 @@ Some of the features we are building may exist in other products already. It is 
 [Team Feature Flags]: /teams/feature-flags
 [Team Growth]: /teams/growth
 [Team Infrastructure]: /teams/infrastructure
+[Team Ingestion]: /teams/ingestion
 [Team Product Analytics]: /teams/product-analytics
 [Team Replay]: /teams/replay
 [Team Revenue Analytics]: /teams/revenue-analytics
