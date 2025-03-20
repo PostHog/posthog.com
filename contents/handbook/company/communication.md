@@ -191,23 +191,14 @@ James (H) and Cory are admins on the Pitch account. Because Pitch charges per se
 We use RFCs to communicate and gather feedback on a decision. RFCs are useful because they help us stay transparent, and the process of writing them forces you to clearly articulate your thoughts in a structured way. 
 
 Here are the steps for an RFC:
-1. Someone identifies a problem and a decision to be made
-2. They create an RFC as a pull request (normally into PostHog/posthog or PostHog/posthog.com unless in the rare case it's confidential where we use PostHog/product-internal) with the title `RFC: ...`. The RFC should include:
-   1. The decision to be made
-   2. Who will make the decision
-      - By default this should be the person who will own the project and do the work. In the rare case that it's a non-reversible decision it might be more appropriate to have the team lead be the decision maker.
-   3. When the decision will be made by (normally less than 1 week). You don't need to wait for this date if you've already received input from the key people you need.
-   4. The specific people that you want feedback from (as GitHub assignees)
-      - It can be useful to say which people are required vs which are welcome but optional so others know if they need to respond
-   5. The problem
-   6. The recommendation
-   7. Useful context for the people giving feedback (for product decisions, [this GitHub template](https://github.com/PostHog/product-internal/blob/main/.github/ISSUE_TEMPLATE/request-for-comments.md) is useful)
+1. Identify a problem and a decision to be made
+2. Create an RFC as a pull request using one of the [RFC templates](https://github.com/PostHog/product-internal/tree/main/requests-for-comments/templates).
 3. Share the RFC:
-   1. Post in the relevant Slack channel (normally the teams slack channel, or `#general` if it's a bigger cross-team RFC)
-   2. Tag the people you need input from in the slack thread or DM them - it's your responsibility to nudge the relevant people for their input
-   3. Post in `#github-rfcs` if it isn't already there automatically (so that people interested in RFCs across the company can stay in the loop)
+   1. Assign people whom this RFC will impact, or who may have good opinions on the topic, as reviews to the pull request.
+   2. Post in the relevant Slack channel (normally the teams slack channel, or `#tell-posthog-anything` if it's a bigger cross-team RFC)
+   3. Tag the people you need input from in the slack thread or DM them - it's your responsibility to nudge the relevant people for their input
 4. If an RFC is cross-team and is causing a large amount of disagreement, it might be worth having a sync meeting to reach a decision
-5. Once a decision is made, the person making the decision should include the decision in the pull request, merge it in and share this in the relevant channel and `#github-rfcs` again.
+5. Once a decision is made, include the decision in the pull request, merge it in and share this in the relevant channel and `#github-rfcs` again.
 
 ### When does it work best to write an RFC?
 
