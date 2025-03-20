@@ -3491,10 +3491,6 @@ export const docsMenu = {
             children: [
                 {
                     name: 'Error tracking',
-                    badge: {
-                        title: 'Beta',
-                        className: 'uppercase !bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',
-                    },
                 },
                 {
                     name: 'Overview',
@@ -3636,6 +3632,12 @@ export const productMenu = {
             icon: 'IconDatabase',
             color: 'lilac',
             url: '/data-warehouse',
+        },
+        {
+            name: 'Error tracking',
+            icon: 'IconWarning',
+            color: 'red',
+            url: '/error-tracking',
         },
         {
             name: 'Product OS',

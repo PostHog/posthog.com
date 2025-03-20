@@ -32,6 +32,10 @@ const linklist: IProps[] = [
                 url: '/feature-flags',
             },
             {
+                title: 'Error tracking',
+                url: '/error-tracking',
+            },
+            {
                 title: 'Experiments',
                 url: '/experiments',
             },
@@ -122,6 +126,10 @@ const linklist: IProps[] = [
             {
                 title: 'Feature flags',
                 url: '/docs/feature-flags',
+            },
+            {
+                title: 'Error tracking',
+                url: '/docs/error-tracking',
             },
             {
                 title: 'Experiments',
