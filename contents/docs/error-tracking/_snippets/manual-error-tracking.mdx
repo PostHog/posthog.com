@@ -3,16 +3,7 @@ If you're using a different SDK or the API, you can manually capture errors by u
 | Property | Description |
 |----------|-------------|
 | `$exception_list` | A list of exception objects with detailed information about each error |
-| `$exception_fingerprint` | A unique hash identifying the exception pattern |
-| `$exception_proposed_fingerprint` | Suggested fingerprint for grouping similar exceptions |
-| `$exception_issue_id` | Unique identifier for the exception instance (`c5d4387a-1c32-4132-9511-264268a8099f`) |
-| `$exception_level` | Severity level of the exception (e.g., `error`) |
-| `$exception_types` | List of error types encountered (e.g., `["RangeError"]`) |
-| `$exception_values` | List of error messages (e.g., `["Maximum call stack size exceeded"]`) |
-| `$exception_sources` | List of source files where exceptions occurred |
-| `$exception_functions` | List of functions involved in the exception |
-| `$exception_personURL` | URL to view the affected user's profile |
-| `$exception_capture_enabled_server_side` | Flag indicating if exception capturing is enabled |
+| `$exception_fingerprint` | (Optional) The identifier used to group issues. If not set, a unique hash based on the exception pattern will be generated during ingestion |
 
 ### Example
 ```bash
