@@ -36,7 +36,7 @@ We expect you to pick out the very most important thing you can think of and wor
 
 We judge your performance based on the impact you deliver overall, no matter what your role.
 
-> Not all process is bad. There are processes like our issue templates for new teams or our hiring process that, without being defined, would leave things in a confusing mess. Processes that speed us up are great. Processes that slow us down should be avoided.
+> Not all process is bad. There are processes like our [issue templates for new teams](https://github.com/PostHog/company-internal/blob/master/.github/ISSUE_TEMPLATE/new-small-team.md) or our [quarterly planning process](/handbook/company/goal-setting) that, without being defined, would leave things in a confusing mess. Processes that speed us up are great. Processes that slow us down should be avoided.
 
 ## 5. Bias for action
 
