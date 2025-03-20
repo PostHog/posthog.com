@@ -1,0 +1,10 @@
+export const RegionCommand = () => {
+  const region = process.env.NEXT_PUBLIC_POSTHOG_HOST === 'https://eu.posthog.com' ? 'eu' : 'us'
+  return `npx --yes @posthog/wizard@latest --default --region ${region}`
+}
+
+Let's add PostHog to this project. We'll use the PostHog wizard to ensure the integration is handled correctly. Use this command:
+
+<RegionCommand />
+
+Do not generate any file changes yourself. This CLI command will do all the work. Wait for it to finish and test the setup once the wizard is complete.
