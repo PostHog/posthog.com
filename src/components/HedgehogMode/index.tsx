@@ -1,73 +1,28 @@
-import React, { useEffect, useState } from 'react'
+import React, { lazy, Suspense } from 'react'
 
-import { getRandomAccesoryCombo, HedgeHogMode } from '@posthog/hedgehog-mode'
 import { useLayoutData } from 'components/Layout/hooks'
 
-export default function HedgeHogModeEmbed(): JSX.Element {
-    const { hedgehogModeEnabled, setHedgehogModeEnabled } = useLayoutData()
 
-    const [ref, setRef] = useState<HTMLDivElement | null>(null)
-    const [game, setGame] = useState<HedgeHogMode | null>(null)
+const HedgeHogModeRenderer = lazy(() => import('@posthog/hedgehog-mode').then((module) => ({ default: module.HedgehogModeRenderer })))
 
-    // const [randomBoxes, setRandomBoxes] = useState<
-    //     {
-    //         x: number
-    //         y: number
-    //         w: number
-    //         h: number
-    //     }[]
-    // >([])
-
-    const spawnHedgehog = async (count: number, hedgehogMode = game) => {
-        for (let i = 0; i < count; i++) {
-            hedgehogMode?.spawnHedgehog({
-                id: `hedgehog-${i}`,
-                controls_enabled: false,
-                accessories: getRandomAccesoryCombo(),
-            })
-
-            await new Promise((resolve) => setTimeout(resolve, 50))
-        }
-    }
-
-    const setupHedgehogMode = async () => {
-        const { HedgeHogMode } = await import('@posthog/hedgehog-mode')
-        if (ref) {
-            const hedgeHogMode = new HedgeHogMode({
-                assetsUrl: '/hedgehog-mode',
-                platformSelector: '.border',
-            })
-            await hedgeHogMode.render(ref)
-            setGame(hedgeHogMode)
-        }
-    }
-
-    useEffect(() => {
-        if (hedgehogModeEnabled && ref) {
-            setupHedgehogMode()
-        }
-    }, [ref, hedgehogModeEnabled])
-
-    useEffect(() => {
-        if (!hedgehogModeEnabled && game) {
-            game.destroy()
-            setGame(null)
-        }
-    }, [hedgehogModeEnabled, game])
+export default function HedgeHogModeEmbed(): JSX.Element | null {
+    const { hedgehogModeEnabled } = useLayoutData()
 
 
-    useEffect(() => {
-        if (game) {
-            game.spawnHedgehog({
-                id: 'hedgehog-1',
-                skin: 'default',
-                controls_enabled: true,
-                player: true,
-            })
+    return hedgehogModeEnabled ? (
+        <Suspense fallback={<span>Loading...</span>}>
+            <HedgeHogModeRenderer
+                config={{
+                    assetsUrl: '/hedgehog-mode',
+                    platformSelector: '.border',
+                }}
+                onGameReady={() => {}}
+                style={{
+                    zIndex: 999998,
+                }}
+            />
+        </Suspense>
+    ) : null
 
-            // spawnHedgehog(20, game)
-        }
-    }, [game])
 
-    return <div id="game" className="fixed inset-0 z-[999998] pointer-events-none" ref={(r) => setRef(r)}></div>
 }

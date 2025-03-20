@@ -3513,15 +3513,16 @@
   resolved "https://registry.yarnpkg.com/@popperjs/core/-/core-2.11.8.tgz#6b79032e760a0899cd4204710beede972a3a185f"
   integrity sha512-P1st0aksCrn9sGZhp8GMYwBnQsbvAWsZAX44oXNNvLHGqAOcoVxmjZiohstwQ7SqKnbR47akdNi+uleWD8+g6A==
 
-"@posthog/hedgehog-mode@^0.0.15":
-  version "0.0.15"
-  resolved "https://registry.yarnpkg.com/@posthog/hedgehog-mode/-/hedgehog-mode-0.0.15.tgz#3deb3a4d885a08257bf418bfd2a800288146b137"
-  integrity sha512-PEP5c0eGdG+Bl4KzlRDyaHh5rrIZs5Slmsc9I8jDMWeSUsSiA9ybws3BwIxsgcKkyimRYDWH2k3jCz2hsIm8Ew==
+"@posthog/hedgehog-mode@^0.0.18":
+  version "0.0.18"
+  resolved "https://registry.yarnpkg.com/@posthog/hedgehog-mode/-/hedgehog-mode-0.0.18.tgz#7af6419947543cdf37a193271f8840a5a6c9204b"
+  integrity sha512-DpjnIr2OoXuZP10HmHFlW5ZfxcRS/q61Qz71YMS5BiVteYRcd1lWGGTHoun+z+yZzYmkzABYrOspdeOJgySLrg==
   dependencies:
     gsap "^3.12.7"
     lodash "^4.17.21"
     matter-js "^0.20.0"
     pixi.js "^8.4.0"
+    react-shadow "^20.6.0"
 
 "@posthog/icons@0.11.1":
   version "0.11.1"
@@ -21658,6 +21659,13 @@ react-server-dom-webpack@0.0.0-experimental-c8b778b7f-20220825:
     acorn "^6.2.1"
     loose-envify "^1.1.0"
     neo-async "^2.6.1"
+
+react-shadow@^20.6.0:
+  version "20.6.0"
+  resolved "https://registry.yarnpkg.com/react-shadow/-/react-shadow-20.6.0.tgz#13c11ec50787ba6ab637381814562066be368d49"
+  integrity sha512-kY+w4OMNZ8Nj9YI9eiTgvvJ/wYO7XyX1D/LYhvwQZv5vw69iCiDtGB0BX/2U8gLUuZAMN+x/7rHJKqHh8wXFHQ==
+  dependencies:
+    humps "^2.0.1"
 
 react-shallow-renderer@^16.15.0:
   version "16.15.0"
