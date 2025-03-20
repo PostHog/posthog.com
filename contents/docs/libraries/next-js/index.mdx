@@ -22,6 +22,20 @@ This guide walks you through integrating PostHog into your Next.js app using the
 
 Next.js has both client and server-side rendering, as well as pages and app routers. We'll cover all of these options in this guide.
 
+## Alpha: integration via LLM
+
+Try out this prompt-based integration for Next.js using Cursor, Bolt, and other agent-like tools that can run terminal commands:
+
+```Agent
+Let's add PostHog to this project. We'll use the PostHog wizard to ensure the integration is handled correctly. Use this command:
+
+npx --yes @posthog/wizard@latest --default --region us
+
+Wait for the CLI command to finish before executing anything, test the setup once the wizard is complete.
+
+DO NOT GENERATE ANY FILE CHANGES YOURSELF. THIS CLI COMMAND WILL DO ALL THE WORK. WAIT FOR IT TO FINISH
+```
+
 ## Prerequisites
 
 To follow this guide along, you need:
