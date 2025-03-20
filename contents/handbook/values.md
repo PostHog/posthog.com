@@ -36,6 +36,8 @@ We expect you to pick out the very most important thing you can think of and wor
 
 We judge your performance based on the impact you deliver overall, no matter what your role.
 
+> Not all process is bad. There are processes like our issue templates for new teams or our hiring process that, without being defined, would leave things in a confusing mess. Processes that speed us up are great. Processes that slow us down should be avoided.
+
 ## 5. Bias for action
 
 We have learned the clearest lessons at PostHog by doing things, not from hypothesizing about them. If we're debating doing something, just trying it is the best way to learn.
