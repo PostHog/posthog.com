@@ -79,6 +79,7 @@ analytics.subscribe("checkout_completed", (event) => {
   )
   posthog.capture('merch store order submitted', {
     value: checkout.totalPrice.amount,
+    currency: checkout.totalPrice.currencyCode,
     created_at: event.timestamp,
     order_number: checkout.order.id,
     userId: event.clientId,

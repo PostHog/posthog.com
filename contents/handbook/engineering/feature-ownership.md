@@ -27,8 +27,10 @@ You can also view the list [directly in GitHub](https://github.com/PostHog/posth
 | Billing | [Team Dollars & Cents][Team Dollars & Cents]  |  <span class="lemon-tag gh-tag">feature/dollars-and-cents</span> |
 | Client libraries and SDKs | Shared responsibility with features owned by the relevant Small Team, or try #feature-client-libraries. There is an engineer assigned to SDK support on a rotating schedule. Check [the (private) pager duty schedule](https://posthog.pagerduty.com/schedules#P7B7NTR)  | <span class="lemon-tag gh-tag">feature/pipeline</span> |
 | Cohorts | [Team Product Analytics][Team Product Analytics]  |  <span class="lemon-tag gh-tag">feature/cohorts</span>  |
+| CRM | [Team CRM][Team CRM]  |  <span class="lemon-tag gh-tag">feature/crm</span>  |
 | Dashboards | [Team Product Analytics][Team Product Analytics]  |  <span class="lemon-tag gh-tag">feature/dashboards</span> |
 | Data Management | [Team Product Analytics][Team Product Analytics]  | <span class="lemon-tag gh-tag">feature/data-management</span>  |
+| Data Pipelines | [Team CDP][Team CDP] | <span class="lemon-tag gh-tag">feature/pipeline</span> |
 | Data Warehouse | [Team Data Warehouse][Team Data Warehouse]  | <span class="lemon-tag gh-tag">feature/data-warehouse</span> |
 | Error tracking | [Team Error Tracking](/teams/error-tracking)  |  <span class="lemon-tag gh-tag">feature/error-tracking</span>  |
 | Sentry integration | [Team Error Tracking](/teams/error-tracking)  |  <span class="lemon-tag gh-tag">feature/error-tracking</span>  |
@@ -36,13 +38,14 @@ You can also view the list [directly in GitHub](https://github.com/PostHog/posth
 | Experimentation | [Team Experiments](/teams/experiments) |  <span class="lemon-tag gh-tag">feature/experimentation</span> |
 | Early Access Features | [Team Feature Flags][Team Feature Flags] | <span class="lemon-tag gh-tag">feature/feature-flags</span> |
 | Feature Flags | [Team Feature Flags][Team Feature Flags]  |  <span class="lemon-tag gh-tag">feature/feature-flags</span> |
-| Group Analytics | [Team Product Analytics][Team Product Analytics]  |  <span class="lemon-tag gh-tag">feature/group-analytics</span> |
+| Group Analytics | [Team CRM][Team CRM]  |  <span class="lemon-tag gh-tag">feature/group-analytics</span> |
 | HogQL | [Team Product Analytics][Team Product Analytics]  |  <span class="lemon-tag gh-tag">feature/dashboards</span> |
 | Heatmaps | [Team Replay][Team Replay] | <span class="lemon-tag gh-tag">feature/heatmaps</span> |
-| Ingestion | [Team CDP][Team CDP]  | <span class="lemon-tag gh-tag">feature/pipeline</span> |
+| Ingestion | [Team Ingestion][Team Ingestion]  | <span class="lemon-tag gh-tag">feature/team-ingestion</span> |
 | Insights | [Team Product Analytics][Team Product Analytics]  | <span class="lemon-tag gh-tag">feature/insights</span>  |
+| Internal Messaging (Email, Notifications) | [Team Dollars & Cents][Team Dollars & Cents]  | <span class="lemon-tag gh-tag">feature/notifications</span>  |
 | Live Events | [Team ClickHouse][Team ClickHouse]  | <span class="lemon-tag gh-tag">feature/live-events</span>  |
-| Messaging (Email, Notifications) | [Team Dollars & Cents][Team Dollars & Cents]  | <span class="lemon-tag gh-tag">feature/messaging</span>  |
+| Messaging | [Team Messaging][Team Messaging]  | <span class="lemon-tag gh-tag">feature/messaging</span>  |
 | Notebooks | [@daibhin][@daibhin]  |  <span class="lemon-tag gh-tag">feature/notebooks</span> |
 | Onboarding | [Team Growth][Team Growth]  | <span class="lemon-tag gh-tag">feature/onboarding</span>  |
 | Permissions and access control | [Team Dollars & Cents][Team Dollars & Cents]  | <span class="lemon-tag gh-tag">feature/permissions</span>  |
@@ -54,6 +57,8 @@ You can also view the list [directly in GitHub](https://github.com/PostHog/posth
 | Project Home Page | [Team Product Analytics][Team Product Analytics]  | <span class="lemon-tag gh-tag">feature/home</span> |
 | Property Filters | [Team Product Analytics][Team Product Analytics]  | <span class="lemon-tag gh-tag">feature/filters</span>  |
 | Queries as a Service | [Team Clickhouse][Team Clickhouse]  | <span class="lemon-tag gh-tag">feature/qaas</span>  |
+| Revenue Analytics | [Team Revenue Analytics][Team Revenue Analytics] | <span class="lemon-tag gh-tag">feature/revenue-analytics</span>  |
+| Revenue Data Management | [Team Revenue Analytics][Team Revenue Analytics] | <span class="lemon-tag gh-tag">feature/revenue-data-management</span>  |
 | Replay | [Team Replay][Team Replay]  |  <span class="lemon-tag gh-tag">feature/replay</span> |
 | Security | [Team Infrastructure][Team Infrastructure] though it is every teams job to consider and react to security issues |  <span class="lemon-tag gh-tag">feature/security</span> |
 | Self-hosting | [Team Infrastructure][Team Infrastructure]  |  <span class="lemon-tag gh-tag">feature/self-hosting</span> |
@@ -79,14 +84,18 @@ Some of the features we are building may exist in other products already. It is 
 [@Twixes]: https://github.com/Twixes
 [@daibhin]: https://github.com/daibhin
 [@timgl]: https://github.com/timgl
-[Team Product Analytics]: /teams/product-analytics
-[Team Web Analytics]: /teams/web-analytics
-[Team Replay]: /teams/replay
 [Team CDP]: /teams/cdp
+[Team ClickHouse]: /teams/clickhouse
+[Team CRM]: /teams/crm
 [Team Data Warehouse]: /teams/data-warehouse
-[Team Infrastructure]: /teams/infrastructure
+[Team Dollars & Cents]: /teams/dollars-cents
 [Team Feature Flags]: /teams/feature-flags
 [Team Growth]: /teams/growth
-[Team Dollars & Cents]: /teams/dollars-cents
-[Team ClickHouse]: /teams/clickhouse
+[Team Infrastructure]: /teams/infrastructure
+[Team Ingestion]: /teams/ingestion
+[Team Product Analytics]: /teams/product-analytics
+[Team Replay]: /teams/replay
+[Team Revenue Analytics]: /teams/revenue-analytics
+[Team Web Analytics]: /teams/web-analytics
 [Team Surveys]: /teams/surveys
+[Team Messaging]: /teams/messaging

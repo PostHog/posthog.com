@@ -1,11 +1,15 @@
+import AngularInstall from "../../integrate/_snippets/install-angular.mdx"
+
+<AngularInstall />
+
 ### Setting up Angular exception autocapture
 
 Exception autocapture can be enabled during initialization of the PostHog client to automatically capture any exception thrown by your Angular application.
 
-You will need to override Angular's default ErrorHandler provider:
+This requires overriding Angular's default `ErrorHandler` provider:
 
 ```ts file=src/app/posthog-error-handler.ts
-import { ErrorHandler, Injectable, OnDestroy, Provider } from '@angular/core';
+import { ErrorHandler, Injectable, Provider } from '@angular/core';
 import { HttpErrorResponse } from '@angular/common/http';
 
 import posthog from 'posthog-js';
@@ -43,7 +47,7 @@ class PostHogErrorHandler implements ErrorHandler {
 // https://github.com/angular/angular/blob/master/packages/core/src/util/errors.ts
 function tryToUnwrapZonejsError(error: unknown): unknown | Error {
   // TODO: once Angular14 is the minimum requirement ERROR_ORIGINAL_ERROR and
-  //  getOriginalError from error.ts can be used directly.
+  // getOriginalError from error.ts can be used directly.
   return error && (error as { ngOriginalError: Error }).ngOriginalError
     ? (error as { ngOriginalError: Error }).ngOriginalError
     : error;
@@ -132,8 +136,8 @@ export const appConfig: ApplicationConfig = {
 };
 ```
 
-For exceptions handled by your application that you would still like sent to PostHog, you can manually call the capture method:
+If there are more errors you'd like to capture, you can manually call the `captureException` method:
 
 ```ts
-posthog.captureException(e, 'user_distinct_id', additionalProperties)
+posthog.captureException(e, additionalProperties)
 ```

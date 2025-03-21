@@ -7,7 +7,12 @@ export const ZoomImage = ({ children, noZoom, ...other }: { children: any }) => 
         <img {...other} />
     ) : (
         <span>
-            <Zoom wrapElement="span" overlayBgColorEnd="rgb(0 0 0 / 85%)" overlayBgColorStart="rgb(0 0 0 / 80%)">
+            <Zoom
+                wrapElement="span"
+                overlayBgColorEnd="rgb(0 0 0 / 85%)"
+                overlayBgColorStart="transparent"
+                zoomMargin={12}
+            >
                 {children || <img {...other} />}
             </Zoom>
         </span>

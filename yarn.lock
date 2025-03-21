@@ -20615,10 +20615,10 @@ postcss@^8.4.31, postcss@^8.4.48:
     picocolors "^1.1.1"
     source-map-js "^1.2.1"
 
-posthog-js@1.230.4:
-  version "1.230.4"
-  resolved "https://registry.yarnpkg.com/posthog-js/-/posthog-js-1.230.4.tgz#516e2ad74d43e25e79d7cf5bf00c335015030028"
-  integrity sha512-mxugFjLif0pSlwQ1vYHj92xA0x86foKsRir/IO7TowFzIPk7YL8+nfNvoihmq4ZRomUbQhgzHildsAQDfj6j9w==
+posthog-js@1.232.3:
+  version "1.232.3"
+  resolved "https://registry.yarnpkg.com/posthog-js/-/posthog-js-1.232.3.tgz#95e7a0a37ad50a3895dc2f9ab36cf993f9045941"
+  integrity sha512-rzSMhz0Pe52OM20TyL6isbAOw+ewvie9zUxPwITRGkphPxNzwsTqEoCU7H3pj0+Fs+Qb8kKLjNnwYnx+Zmk0DA==
   dependencies:
     core-js "^3.38.1"
     fflate "^0.4.8"
@@ -21497,7 +21497,7 @@ react-masonry-css@^1.0.16:
   resolved "https://registry.yarnpkg.com/react-masonry-css/-/react-masonry-css-1.0.16.tgz#72b28b4ae3484e250534700860597553a10f1a2c"
   integrity sha512-KSW0hR2VQmltt/qAa3eXOctQDyOu7+ZBevtKgpNDSzT7k5LA/0XntNa9z9HKCdz3QlxmJHglTZ18e4sX4V8zZQ==
 
-react-medium-image-zoom@^4.3.5:
+react-medium-image-zoom@^4.4.3:
   version "4.4.3"
   resolved "https://registry.yarnpkg.com/react-medium-image-zoom/-/react-medium-image-zoom-4.4.3.tgz#d5e3074becef7be4bfe35ebcd291eac462093bf5"
   integrity sha512-I928Z6mEMRUup4CPa+XtASiSuFzdVb1ecztXpF7xAJddXv4XZSE4n5gleZNYCn5wEU1LQY5LiN4aNW4KgrOVIA==
