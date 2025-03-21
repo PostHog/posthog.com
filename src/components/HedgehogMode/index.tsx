@@ -26,6 +26,4 @@ export default function HedgeHogModeEmbed(): JSX.Element | null {
             />
         </Suspense>
     ) : null
-
-
 }
