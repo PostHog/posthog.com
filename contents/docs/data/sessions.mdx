@@ -64,6 +64,21 @@ Session properties are data about the session that is autocaptured by PostHog an
 
 You can query all of these from the `sessions` table using [SQL insights](/docs/product-analytics/sql).
 
+## Session entry properties on events
+
+For ease of use, some session properties are also available as event properties. These properties are prefixed with `$session_entry_` and are captured at the start of the session. They remain constant on all events for the duration of the session.
+
+The following session entry properties are automatically captured:
+
+| Event property | Description |
+|----------------|-------------|
+| `$session_entry_url` | Full URL captured at the start of the session |
+| `$session_entry_host` | Host captured at the start of the session |
+| `$session_entry_pathname` | Pathname captured at the start of the session |
+| `$session_entry_referrer` | Referrer captured at the start of the session |
+
+Additionally, UTM parameters and other attribution properties (like `gclid`) are also available as event properties with the `$session_entry_` prefix. This means you can access these properties directly when querying events, without needing to join with the sessions table.
+
 ## Using session data
 
 The easiest way to analyze a session is to view a [session replay](/docs/session-replay). This enables you to playback and watch exactly what happened in that session. This includes events, navigation, mouse movement, console logs, and more.
