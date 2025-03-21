@@ -16,7 +16,9 @@ export default function HedgeHogModeEmbed(): JSX.Element | null {
                     assetsUrl: '/hedgehog-mode',
                     platformSelector: '.border',
                 }}
-                onGameReady={() => {}}
+                onGameReady={() => {
+                    console.log('Hedgehog mode ready')
+                }}
                 style={{
                     zIndex: 999998,
                 }}
