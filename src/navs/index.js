@@ -3081,7 +3081,7 @@ export const docsMenu = {
                             url: '/docs/cdp/destinations/avo',
                         },
                         {
-                            name: 'AWS Kinesis',
+                            name: 'AWS kinesis',
                             url: '/docs/cdp/destinations/aws-kinesis',
                         },
                         {
@@ -3117,11 +3117,11 @@ export const docsMenu = {
                             url: '/docs/cdp/destinations/gleap',
                         },
                         {
-                            name: 'Google Cloud Storage',
+                            name: 'Google cloud storage',
                             url: '/docs/cdp/destinations/google-cloud-storage',
                         },
                         {
-                            name: 'Google Pub/Sub',
+                            name: 'Google pub/sub',
                             url: '/docs/cdp/destinations/google-pubsub',
                         },
                         {
@@ -3177,7 +3177,7 @@ export const docsMenu = {
                             url: '/docs/cdp/destinations/make',
                         },
                         {
-                            name: 'Meta Ads',
+                            name: 'Meta ads',
                             url: '/docs/cdp/destinations/meta-ads',
                             badge: {
                                 title: 'Popular',
@@ -3185,7 +3185,7 @@ export const docsMenu = {
                             },
                         },
                         {
-                            name: 'Microsoft Teams',
+                            name: 'Microsoft teams',
                             url: '/docs/cdp/destinations/microsoft-teams',
                         },
                         {
@@ -3197,6 +3197,14 @@ export const docsMenu = {
                             url: '/docs/cdp/destinations/rudderstack',
                         },
                         {
+                            name: 'Reddit ads',
+                            url: '/docs/cdp/destinations/reddit-ads-conversion-api',
+                        },
+                        {
+                            name: 'Reddit pixel',
+                            url: '/docs/cdp/destinations/reddit-ads-pixel',
+                        },
+                        {
                             name: 'Salesforce',
                             url: '/docs/cdp/destinations/salesforce',
                         },
@@ -3205,11 +3213,11 @@ export const docsMenu = {
                             url: '/docs/cdp/destinations/sendgrid',
                         },
                         {
-                            name: 'Snapchat Ads',
+                            name: 'Snapchat ads',
                             url: '/docs/cdp/destinations/snapchat-ads',
                         },
                         {
-                            name: 'TikTok Ads',
+                            name: 'TikTok ads',
                             url: '/docs/cdp/destinations/tiktok-ads',
                         },
                         {
@@ -3227,14 +3235,6 @@ export const docsMenu = {
                         {
                             name: 'Zendesk',
                             url: '/docs/cdp/destinations/zendesk',
-                        },
-                        {
-                            name: 'Reddit Pixel',
-                            url: '/docs/cdp/destinations/reddit-ads-pixel',
-                        },
-                        {
-                            name: 'Reddit Conversions API',
-                            url: '/docs/cdp/destinations/reddit-ads-conversion-api',
                         },
                     ],
                 },
