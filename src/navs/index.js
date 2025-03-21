@@ -1136,8 +1136,16 @@ export const companyMenu = {
                     url: '/teams/infrastructure',
                 },
                 {
+                    name: 'Ingestion',
+                    url: '/teams/ingestion',
+                },
+                {
                     name: 'LLM Observability',
                     url: '/teams/llm-observability',
+                },
+                {
+                    name: 'Messaging',
+                    url: '/teams/messaging',
                 },
                 {
                     name: 'Product Analytics',
@@ -1146,6 +1154,10 @@ export const companyMenu = {
                 {
                     name: 'Replay',
                     url: '/teams/replay',
+                },
+                {
+                    name: 'Revenue Analytics',
+                    url: '/teams/revenue-analytics',
                 },
                 {
                     name: 'Surveys',
@@ -1945,10 +1957,6 @@ export const docsMenu = {
                     name: 'SQL access',
                     url: '/docs/sql',
                     icon: 'IconHogQL',
-                    badge: {
-                        title: 'Beta',
-                        className: 'uppercase !bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',
-                    },
                     children: [
                         {
                             name: 'Overview',
@@ -1965,6 +1973,10 @@ export const docsMenu = {
                         {
                             name: 'Supported aggregations',
                             url: '/docs/sql/aggregations',
+                        },
+                        {
+                            name: 'Variables',
+                            url: '/docs/sql/variables',
                         },
                         {
                             name: 'Tutorials',
@@ -2017,6 +2029,15 @@ export const docsMenu = {
                             url: '/docs/toolbar/override-feature-flags',
                         },
                     ],
+                },
+                {
+                    name: 'Max',
+                    url: '/docs/max-ai',
+                    icon: 'IconSparkles',
+                    badge: {
+                        title: 'Beta',
+                        className: 'uppercase !bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',
+                    },
                 },
                 {
                     name: 'Resources',
@@ -2360,10 +2381,6 @@ export const docsMenu = {
                     url: '/docs/product-analytics/sql',
                     icon: 'IconHogQL',
                     color: 'purple',
-                    badge: {
-                        title: 'Beta',
-                        className: 'uppercase !bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',
-                    },
                 },
                 {
                     name: 'Tools',

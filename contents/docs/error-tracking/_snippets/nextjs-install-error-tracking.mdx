@@ -1,6 +1,10 @@
 import JSWebErrorTracking from './web-install-error-tracking.mdx'
+import NextJSInstall from '../../integrate/_snippets/nextjs/install-nextjs.mdx'
+import NextJSInstallServer from '../../integrate/_snippets/nextjs/install-nextjs-server.mdx'
 
-> You should first follow the [Next.js integration guide](/docs/libraries/next-js) to capture client and server side events.
+## Client-side installation
+
+<NextJSInstall />
 
 <JSWebErrorTracking />
 
@@ -64,6 +68,10 @@ export default function GlobalError({
   )
 }
 ```
+
+## Server-side installation
+
+<NextJSInstallServer />
 
 ### Capturing server errors
 
