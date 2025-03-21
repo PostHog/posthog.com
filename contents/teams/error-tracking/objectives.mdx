@@ -1,15 +1,31 @@
-### Q1 2025 Objectives
+### Q2 2025 Objectives
 
-#### Ship the damn thing
+#### Launch with pricing
+* Decide on tiers and implement billing changes
+* Remove plugin server from ingestion pipeline (realise cost savings)
+* Work with comms on rollout
 
-* Cymbal metric dashboards & alerts
-* Exclude $exception events from analytics billing
-* Fix query performance to make UI snappier
-* Implement issue threshold based alerting (time and volume)
-* Add build time symbol set upload support
+#### Make it easier to integrate
+* CLI download URL that points to the latest version
+* Add more source map upload options
+    * GitHub action
+    * NextJS config wrapper
+    * Bundler plugins for at least Webpack and Vite
+* Stretch: Isometric SDK for NextJS
 
-#### Migrate PostHog off Sentry
+#### Product quality
+* Performance
+* UI improvements to issue page
+* Intentionally gather more feedback from customers
+    * Measure grouping signal / noise ratio and impact of the problem
+    * Ensure each small team in PostHog is setup to use error tracking
+* Stretch: Omnisearch
 
-* Figure out why it breaks billing
-* Get to the bottom of data discrepancy issues
-* Implement automatic team based issue assignment
+#### Build advanced features for larger customers
+* Support tags for issue
+* Add versioning to symbol set uploads
+* Add Hog based control rules
+    * Auto assignment
+    * Custom server side grouping
+    * Alert filtering
+    * Inbound issue filtering / suppression
