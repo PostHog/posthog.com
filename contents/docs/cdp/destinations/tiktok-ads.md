@@ -1,6 +1,7 @@
 ---
 title: Send PostHog conversion events to TikTok Ads
-templateId: template-tiktok-ads
+templateId: 
+   - template-tiktok-ads
 ---
 
 import Requirements from "../_snippets/requirements.mdx"
