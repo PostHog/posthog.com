@@ -26,12 +26,14 @@ Once created, go to the [data pipeline destinations tab](https://us.posthog.com/
 ```json
 {
   "text": {
-    "text": "*{person.name}* sent a response to {event.properties.$survey_name}: {event.properties.$survey_response}",
+    "text": "*{person.name}* sent a response to {event.properties.$survey_name}: {event.properties.$survey_response_{{question_id}}}",
     "type": "mrkdwn"
   },
   "type": "section"
 },
 ```
+
+Note that you will need to replace `{{question_id}}` with the ID of the question response you would like sent to Slack - the ID can be found in the survey response event.
 
 5. Customize the name and description, and press **Create & enable**.
 
