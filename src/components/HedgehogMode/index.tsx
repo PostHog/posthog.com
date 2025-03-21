@@ -20,6 +20,7 @@ export default function HedgeHogModeEmbed(): JSX.Element | null {
                     console.log('Hedgehog mode ready')
                 }}
                 style={{
+                    position: 'fixed',
                     zIndex: 999998,
                 }}
             />
