@@ -349,6 +349,21 @@ It has two optional parameters:
 - `withTimestamp` (default: `false`): When set to `true`, the URL includes a timestamp that takes you to the session at the time of the event.
 - `timestampLookBack` (default: `10`): The number of seconds back the timestamp links to.
 
+Session replay uses [rrweb](https://github.com/rrweb-io/rrweb) under the hood, which is configurable with the `session_recording` parameter.
+
+The documentation and defaults for these options can be found in the [rrweb docs](https://github.com/rrweb-io/rrweb/blob/master/guide.md#options).
+
+The defaults are the same as in rrweb, except for these fields:
+
+| key                      | PostHog default    | description                                                                                                                                                                                   |
+| ------------------------ | ------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| blockClass               | 'ph-no-capture'    | Use a string or RegExp to configure which elements should be blocked, refer to the [privacy](https://github.com/rrweb-io/rrweb/blob/master/guide.md#privacy) chapter                          |
+| ignoreClass              | 'ph-ignore-input'  | Use a string or RegExp to configure which elements should be ignored, refer to the [privacy](https://github.com/rrweb-io/rrweb/blob/master/guide.md#privacy) chapter                          |
+| maskTextClass            | 'ph-mask'          | Use a string or RegExp to configure which elements should be masked, refer to the [privacy](https://github.com/rrweb-io/rrweb/blob/master/guide.md#privacy) chapter                           |
+| maskAllInputs            | true               | mask all input content as \*                                                                                                                                                                  |
+
+The defaults for `maskAllInputs`, `maskTextSelector` and `blockSelector` will change depending on your Masking configuration in the Session Replay section of [your project settings](https://eu.posthog.com/project/4662/settings/project-replay#replay-masking).
+
 ## Error tracking
 
 You can enable [exception autocapture](/docs/error-tracking/installation) in the **Autocapture & heatmaps** section of [your project settings](https://us.posthog.com/settings/project-autocapture#exception-autocapture). When enabled, this automatically captures `$exception` events when errors are thrown.
