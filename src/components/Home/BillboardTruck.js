@@ -43,7 +43,12 @@ export default function BillboardTruck({ leftHandDrive }) {
                             leftHandDrive ? 'transform -scale-x-100' : ''
                         }`}
                     >
-                        <CloudinaryImage src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Home/images/billboard-truck.png" alt="" quality={100} placeholder="tracedSVG" />
+                        <CloudinaryImage
+                            src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Home/images/billboard-truck.png"
+                            alt=""
+                            quality={100}
+                            placeholder="tracedSVG"
+                        />
                     </div>
                     <div
                         className={`absolute top-[16.25%] w-[341px] md:w-[495px] h-[239px] ${

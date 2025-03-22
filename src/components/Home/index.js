@@ -26,6 +26,18 @@ import Spinner from 'components/Spinner'
 import { HomepageCards } from '../NoHatingAllowed/data.js'
 import TimelineNew from './TimelineNew'
 
+const GlobeScene = React.lazy(() =>
+    import('./Globe').then((module) => ({
+        default: module.GlobeScene,
+    }))
+)
+
+const GlobeSkeleton = () => (
+    <div className="px-5">
+        <div className="bg-accent dark:bg-accent-dark rounded-md max-w-screen-lg mx-auto h-[50rem] mb-16 mt-12 pt-20 pb-16" />
+    </div>
+)
+
 const Home = () => {
     const posthog = usePostHog()
 
@@ -44,6 +56,7 @@ const Home = () => {
                 <TimelineNew />
                 <Libraries />
                 <CodeBlocks />
+                <OnePlatform />
                 <NoHatingAllowed data={HomepageCards} youllHate="PostHog" size="text-4xl lg:text-6xl" />
 
                 <RenderInClient
@@ -66,6 +79,12 @@ const Home = () => {
                 <Community />
                 <OnePlatform />
                 <CustomerData />
+                {typeof window !== 'undefined' && (
+                    <React.Suspense fallback={<GlobeSkeleton />}>
+                        <GlobeScene />
+                    </React.Suspense>
+                )}
+                <Timeline />
                 <Roadmap />
                 <Startups />
                 {/*<Tutorials

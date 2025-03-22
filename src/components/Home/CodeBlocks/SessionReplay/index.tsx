@@ -68,7 +68,11 @@ function ConsoleLogs() {
                 </div>
                 <div className="flex-1">
                     <h4 className="text-lg">Console logs in a session replay</h4>
-                    <CloudinaryImage src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Home/CodeBlocks/SessionReplay/console-logs.png" alt="Console logs in PostHog" placeholder="blurred" />
+                    <CloudinaryImage
+                        src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Home/CodeBlocks/SessionReplay/console-logs.png"
+                        alt="Console logs in PostHog"
+                        placeholder="blurred"
+                    />
                 </div>
             </div>
         </div>
