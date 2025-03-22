@@ -21,7 +21,14 @@ To link MySQL:
     - **User:** The username with the necessary permissions to access the database.
     - **Password:** The password for the user.
     - **Schema:** The schema for your database where your tables are located. The default is `public`.
-4. Click **Link**
+    - **Use SSL:** Whether to use SSL for the connection. Default is enabled.
+4. If you need to connect through an SSH tunnel, enable and configure it (optional):
+    - **Tunnel host:** The hostname of your SSH server.
+    - **Tunnel port:** The port your SSH server is listening on.
+    - **Authentication type:**
+        - For password authentication, enter your SSH username and password.
+        - For key-based authentication, enter your SSH username, private key, and optional passphrase.
+5. Click **Next**
 
 The data warehouse then starts syncing your MySQL data. You can see details and progress in the [sources tab](https://us.posthog.com/pipeline/sources).
 
