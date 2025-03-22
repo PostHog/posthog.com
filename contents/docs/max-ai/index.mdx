@@ -4,12 +4,12 @@ sidebar: Docs
 showTitle: true
 ---
 
-Say hello to Max, your product analyst and assistant living in PostHog.  
-Max is an AI sidekick that can:
-- research answers to product questions by querying the data,
-- get things done quickly in the PostHog UI for you (such as updating filters),
-- tell you all about PostHog features and how to use them (based on our docs),
-- chit-chat.
+Max is an AI-powered product analyst and assistant that lives in PostHog. Max can:
+
+- Research answers to product questions by querying the data.
+- Get things done quickly in the PostHog UI for you (such as updating filters).
+- Tell you all about PostHog features and how to use them (based on our docs).
+- Chit-chat about anything really.
 
 <ProductScreenshot
     imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/max_preview_side_9365f7d4b2.png"
@@ -20,31 +20,32 @@ Max is an AI sidekick that can:
 
 ## How do I access Max?
 
-To use Max, first personally opt into the PostHog AI beta [in the app's Feature previews](https://us.posthog.com/#panel=feature-previews%3Aartificial-hog).
+To use Max, you first have to personally opt into the PostHog AI beta [via the Feature previews menu](https://us.posthog.com/#panel=feature-previews%3Aartificial-hog).
 
 Once opted in, you can pop Max open wherever you are in PostHog! Just click on "Max" in the top right corner of the app. Then get to chatting.
 
-> First use of Max in the organization requires org admin approval, because PostHog AI features use third-party LLM providers (see details below). In most cases this is just a formality, but we've made it explicit, as we know PostHog customers that strictly limit data subprocessors.
+> **Important:** Because PostHog AI features use third-party LLM providers (see details below), the first use of Max in your organization requires org admin approval. In most cases this is just a formality, but we've made it explicit as we know many PostHog customers strictly limit data sub-processors.
 
 ## What access does Max have to my data?
 
 While working with Max, you will certainly share some information with him. Data analysis is a core feature. When doing research, Max can read the following data in your project:
 
-- events, persons, sessions, and data warehouse tables,
-- actions and cohorts,
-- event and property definitions,
-- data warehouse schema.
+- Events, persons, sessions, groups
+- Actions and cohorts
+- Event and property definitions
+- Data warehouse schema
 
 Based on that context, Max comes up with queries, runs them, and summarizes the results. Those results can be as high-level as a single number, or as detailed as a list of users with all their properties.
 
 ## Is my data shared with third parties?
 
 We use third-party LLM providers to power Max, so messages and all data accessed by Max (see list above) is passed through them.
+
 Our LLM providers are:
-- OpenAI and Anthropic – responsible for the core of Max's functionality, access to all data types,
-- Cohere – responsible for semantic search across PostHog, access to actions and cohorts,
-- Perplexity – responsible for providing context about your product and/or company, access to domain name (for websites) or application bundle ID (for mobile applications).
+- OpenAI and Anthropic – responsible for the core of Max's functionality, access to all data types
+- Cohere – responsible for semantic search across PostHog, access to actions and cohorts (including their filters)
+- Perplexity – responsible for providing context about your product and/or company, access to domain name (for websites) or application bundle ID (for mobile applications)
 
 ## How can I get Max to remember information?
 
-Max has a memory tied to your project and tries to remember relevant information from your chats naturally. You can also ask him to remember specific details explicitly.
+Max has a memory tied to your project and naturally tries to remember relevant information from your chats. You can also explicitly ask him to remember specific details using verbs like "remember" or "save."
