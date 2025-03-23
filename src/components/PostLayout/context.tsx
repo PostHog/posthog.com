@@ -41,12 +41,17 @@ export const PostProvider: React.FC<ProviderProps> = ({
             if (item.dynamicChildren && dynamicMenus[item.dynamicChildren]) {
                 return {
                     ...item,
-                    children: [
-                        ...(item.children || []),
-                        ...dynamicMenus[item.dynamicChildren]?.filter(
-                            (menuItem) => !item.children?.some((child) => child.name === menuItem.name)
-                        ),
-                    ],
+                    children: item.dynamicChildren
+                        ? [
+                              ...(item.children || []),
+                              ...dynamicMenus[item.dynamicChildren]?.filter(
+                                  (menuItem) => !item.children?.some((child) => child.name === menuItem.name)
+                              ),
+                          ].sort((a, b) => {
+                              if (!a.url || !b.url) return 0
+                              return a.name.localeCompare(b.name)
+                          })
+                        : item.children,
                 }
             }
             return item
