@@ -26,7 +26,9 @@ const Notification = ({ url, title, excerpt, date, count, onDismiss, imageURL, s
                 >
                     <div className="flex items-center justify-between w-full">
                         <div className="flex items-center space-x-4">
-                            {imageURL && <CloudinaryImage src={imageURL} className="size-12 flex-shrink-0" />}
+                            {imageURL && (
+                                <CloudinaryImage src={imageURL} width={48} className="size-12 flex-shrink-0" />
+                            )}
                             <div className="w-full">
                                 <span className="text-sm text-red dark:text-yellow line-clamp-1 font-bold">
                                     {title}

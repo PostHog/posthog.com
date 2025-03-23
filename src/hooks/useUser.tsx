@@ -169,10 +169,9 @@ export const UserProvider: React.FC<UserProviderProps> = ({ children }) => {
 
             try {
                 const distinctId = posthog?.get_distinct_id?.()
-
-                if (distinctId) {
-                    await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/users/${user.id}`, {
-                        method: 'PUT',
+                if (distinctId && !user.distinctId) {
+                    await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/users-permissions/distinct-id`, {
+                        method: 'POST',
                         headers: {
                             'Content-Type': 'application/json',
                             Authorization: `Bearer ${userData.jwt}`,
@@ -182,6 +181,14 @@ export const UserProvider: React.FC<UserProviderProps> = ({ children }) => {
                         }),
                     })
                 }
+
+                await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/achievements/check`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        Authorization: `Bearer ${userData.jwt}`,
+                    },
+                })
             } catch (error) {
                 console.error(error)
             }
