@@ -655,7 +655,12 @@ function PipelinesPage({ location }) {
                             return (
                                 <Categories
                                     key={type}
-                                    categories={[...new Set(values.flatMap((value) => value.category))].sort()}
+                                    categories={
+                                        // Transforms only have a couple of categories so we don't need to show them
+                                        type === 'Transformations'
+                                            ? []
+                                            : [...new Set(values.flatMap((value) => value.category))].sort()
+                                    }
                                     selectedCategory={selectedCategory}
                                     selectedType={selectedType}
                                     onClick={(value) => {
