@@ -3264,10 +3264,6 @@ export const docsMenu = {
                 {
                     name: 'Batch exports',
                     url: '/docs/cdp/batch-exports',
-                    badge: {
-                        title: 'Beta',
-                        className: 'uppercase !bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',
-                    },
                     icon: 'IconShare',
                     color: 'purple',
                     featured: true,
