@@ -160,7 +160,7 @@ They don’t even need to be code.
 
 Months before the iPad launched in 2010, the OmniGroup [built a prototype iPad app](https://www.omnigroup.com/blog/Designing_OmniGraphSketcher_for_the_iPad_) with nothing but pen, paper, and a 3D-printed iPad model.
 
-![](https://res.cloudinary.com/dmukukwp6/image/upload/3ada65f1_e519_467e_ae41_c1276b23b03d_400x300_b71e1097ea.jpg) ![](https://res.cloudinary.com/dmukukwp6/image/upload/50d46707_2115_4154_8fb5_95631d8dceb7_400x310_a38bcf4061.jpg)
+![](https://res.cloudinary.com/dmukukwp6/image/upload/3ada65f1_e519_467e_ae41_c1276b23b03d_400x300_b71e1097ea.jpg) 
 
 Prototypes are great because they pull ideas out of your head, so people can use them, and their feedback helps you make better decisions sooner.
 
@@ -198,7 +198,7 @@ You won’t use everything that inspires you, but feeding your imagination will 
 
 In the end, people embrace and elevate the products that make them feel good. The job is to learn how to channel those feelings into your own work.
 
- _Words by Danilo Campos, who is building[a hardware terminal for PostHog](https://x.com/posthog/status/1890442157883871282) just for the fun of it._
+ _Words by Danilo Campos, who is building [a hardware terminal for PostHog](https://x.com/posthog/status/1890442157883871282) just for the fun of it._
 
 * * *
 
