@@ -90,10 +90,10 @@ const Teams: React.FC = () => {
                     <SidebarSection title="From the desk of...">
                         <div className="-mx-4 pt-1">
                             <Contributor
-                                url={james.squeakId && `/community/profiles/${james.squeakId}`}
-                                image={james.avatar?.url}
-                                name={`${james.firstName} ${james.lastName}`}
-                                role={james.companyRole}
+                                url={james?.squeakId && `/community/profiles/${james?.squeakId}`}
+                                image={james?.avatar?.url}
+                                name={`${james?.firstName} ${james?.lastName}`}
+                                role={james?.companyRole}
                                 text
                             />
                         </div>
@@ -248,11 +248,11 @@ const Teams: React.FC = () => {
                                 <div className="@lg:float-right ml-2 @lg:ml-8 mb-6 mt-2 @lg:mb-2 px-2 py-4 max-w-sm rounded border border-light dark:border-dark bg-accent dark:bg-accent-dark">
                                     <div className="grid grid-cols-2 @lg:grid-cols-5 group gap-12">
                                         <div className="max-w-32 mx-auto @lg:col-span-2 scale-150 @lg:scale-[1.65] @lg:hover:scale-[1.68] @lg:active:scale-[1.65] relative hover:-top-0.5 active:top-0.5 transition-all duration-100 ml-2 -mt-2 @lg:mt-0">
-                                            <Link to={`/teams/${supportTeam.slug}`}>
+                                            <Link to={`/teams/${supportTeam?.slug}`}>
                                                 <TeamPatch
-                                                    name={supportTeam.name}
-                                                    imageUrl={supportTeam.crest?.data?.attributes?.url}
-                                                    {...supportTeam.crestOptions}
+                                                    name={supportTeam?.name}
+                                                    imageUrl={supportTeam?.crest?.data?.attributes?.url}
+                                                    {...supportTeam?.crestOptions}
                                                     className="w-full"
                                                 />
                                             </Link>
@@ -264,13 +264,13 @@ const Teams: React.FC = () => {
                                             </p>
 
                                             <div className="flex flex-wrap justify-end -space-x-3 ml-3 mb-3" dir="rtl">
-                                                {supportTeam.profiles.data
+                                                {supportTeam?.profiles?.data
                                                     .slice()
                                                     .sort((a, b) => {
-                                                        const aIsLead = supportTeam.leadProfiles.data.some(
+                                                        const aIsLead = supportTeam?.leadProfiles?.data?.some(
                                                             ({ id: leadID }) => leadID === a.id
                                                         )
-                                                        const bIsLead = supportTeam.leadProfiles.data.some(
+                                                        const bIsLead = supportTeam?.leadProfiles?.data?.some(
                                                             ({ id: leadID }) => leadID === b.id
                                                         )
                                                         return aIsLead === bIsLead ? 0 : aIsLead ? -1 : 1
@@ -302,7 +302,7 @@ const Teams: React.FC = () => {
                                                     )}
                                             </div>
 
-                                            <CallToAction to={`/teams/${supportTeam.slug}`} type="secondary" size="xs">
+                                            <CallToAction to={`/teams/${supportTeam?.slug}`} type="secondary" size="xs">
                                                 Learn about this team
                                             </CallToAction>
                                         </div>
