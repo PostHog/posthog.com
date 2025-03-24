@@ -38,11 +38,7 @@ See our [migration docs](/docs/migrate) for the full details.
 
 ## How do I do real time exports?
 
-We don't currently support real time exports. 
-
-If you need more than the hourly interval [batch exports](/docs/cdp/batch-exports) and are on the enterprise plan, please contact our team (or email [sales@posthog.com](mailto:sales@posthog.com)). 
-
-If you're not on the enterprise plan, check out our [webhook issue](https://github.com/PostHog/posthog/issues/16976) on GitHub.
+If you need real time exports, check out our list of [realtime destinations](/docs/cdp/destinations).
 
 ## Where are my missing events?
 

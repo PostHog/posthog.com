@@ -1,5 +1,5 @@
 import CloudinaryImage from 'components/CloudinaryImage'
-import React from 'react'
+import React, { useState } from 'react'
 import Link from 'components/Link'
 import {
     IconPieChart,
@@ -34,6 +34,9 @@ import { DocLinks } from 'components/Products/DocsLinks'
 import { SmoothScroll } from 'components/Products/SmoothScroll'
 import { SEO } from 'components/seo'
 import { useLayoutData } from 'components/Layout/hooks'
+import SideModal from 'components/Modal/SideModal'
+import Profile from '../../Team/Profile'
+import TeamMembers from '../TeamMembers'
 
 const product = {
     slug: 'web-analytics',
@@ -43,6 +46,7 @@ const product = {
 }
 
 const team = 'Web Analytics'
+const teamSlug = '/teams/web-analytics'
 
 const featuresPerRow = 3
 const features = [
@@ -185,6 +189,15 @@ const comparison = [
         },
     },
     {
+        feature: 'Revenue tracking',
+        companies: {
+            Matomo: true,
+            GA4: true,
+            PostHog:
+                '<span className="text-xs font-semibold text-opacity-60 bg-yellow px-1 py-0.5 rounded-sm uppercase text-primary">Beta</span>',
+        },
+    },
+    {
         feature: 'Real-time reporting',
         companies: {
             Matomo: true,
@@ -209,7 +222,7 @@ const comparison = [
         },
     },
     {
-        feature: 'No-cookie option',
+        feature: 'Cookieless tracking',
         companies: {
             Matomo: true,
             GA4: true,
@@ -290,6 +303,7 @@ export const ProductWebAnalytics = (): JSX.Element => {
     `)
 
     const { fullWidthContent } = useLayoutData()
+    const [activeProfile, setActiveProfile] = useState(false)
 
     return (
         <>
@@ -298,6 +312,9 @@ export const ProductWebAnalytics = (): JSX.Element => {
                 description="It's like Google Analytics 3, but it still exists..."
                 image={`/images/og/web-analytics.jpg`}
             />
+            <SideModal open={!!activeProfile} setOpen={setActiveProfile}>
+                {activeProfile && <Profile profile={{ ...activeProfile }} />}
+            </SideModal>
             <div className={`${fullWidthContent ? 'max-w-full px-8' : 'max-w-7xl mx-auto'} px-5 py-10 md:pt-20 pb-0`}>
                 <Hero
                     color="[#36C46F]"
@@ -336,7 +353,7 @@ export const ProductWebAnalytics = (): JSX.Element => {
                 </section>
             </div>
 
-            <SmoothScroll exclude={['Installation', 'Meet the team']} />
+            <SmoothScroll exclude={['Installation']} />
 
             <div id="features">
                 <section className="max-w-7xl mx-auto px-5 mb-10 md:mb-20">
@@ -471,6 +488,16 @@ export const ProductWebAnalytics = (): JSX.Element => {
                     <DocLinks
                         menu={docsMenu.children.find(({ name }) => name.toLowerCase() === 'web analytics')?.children}
                     />
+                </section>
+
+                <section id="team" className="mb-20 px-5">
+                    <h3 className="text-3xl lg:text-4xl text-center">Meet the team</h3>
+
+                    <p className="text-center mb-2">
+                        PostHog works in small teams. The <Link to={teamSlug}>{team}</Link> team is responsible for
+                        building {product.lowercase}.
+                    </p>
+                    <TeamMembers teamName={team} setActiveProfile={setActiveProfile} />
                 </section>
 
                 <section id="roadmap" className="mb-20 px-5">

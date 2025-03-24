@@ -40,15 +40,15 @@ export const Content = ({ quickLinks = false }) => {
                 <ul className="m-0 mb-3 p-0 flex flex-col gap-4 md:grid md:grid-cols-2 xl:grid-cols-3">
                     <ResourceItem
                         type="Guide"
-                        title="How to correlate errors with product performance using Sentry"
-                        description="Learn how to combine Sentry errors with PostHog data"
-                        url="/tutorials/sentry-plugin-tutorial"
+                        title="How to set up Next.js error monitoring"
+                        description="Track client and server errors in Next.js"
+                        url="/tutorials/nextjs-error-monitoring"
                     />
                     <ResourceItem
-                        type="Article"
-                        title="In-depth: PostHog vs Sentry"
-                        description="Get a full overview of how PostHog and Sentry compare"
-                        url="/blog/posthog-vs-sentry"
+                        type="Guide"
+                        title="How to set up Python error tracking"
+                        description="Learn how to track basic errors in Python and Flask"
+                        url="/tutorials/python-error-tracking"
                     />
                     <ResourceItem
                         type="Article"

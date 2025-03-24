@@ -53,7 +53,7 @@ phClient.shutdown()
 
 > **Note:** This also works with the `AsyncOpenAI` client. 
 
-Now, when you use the OpenAI SDK, it automatically captures many properties into PostHog including `$ai_input`, `$ai_input_tokens`, `$ai_latency`, `$ai_model`, `$ai_model_parameters`, `$ai_output_choices`, and `$ai_output_tokens`.
+Now, when you use the OpenAI SDK, it automatically captures many properties into PostHog including `$ai_input`, `$ai_input_tokens`, `$ai_cache_read_input_tokens`, `$ai_latency`, `$ai_model`, `$ai_model_parameters`, `$ai_reasoning_tokens`, `$ai_tools`, `$ai_output_choices`, and `$ai_output_tokens`.
 
 You can also capture or modify additional properties with the distinct ID, trace ID, properties, groups, and privacy mode parameters.
 
