@@ -1499,6 +1499,10 @@ export const companyMenu = {
                     url: '/teams/llm-observability',
                 },
                 {
+                    name: 'Max AI',
+                    url: '/teams/max-ai',
+                },
+                {
                     name: 'Messaging',
                     url: '/teams/messaging',
                 },
