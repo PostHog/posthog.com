@@ -38,8 +38,7 @@ See our [migration docs](/docs/migrate) for the full details.
 
 ## How do I do real time exports?
 
-If you need real time exports, check out our list of [realtime destinations](https://posthog.com/docs/cdp/destinations).
-
+If you need real time exports, check out our list of [realtime destinations](/docs/cdp/destinations).
 
 ## Where are my missing events?
 
