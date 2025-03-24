@@ -27,7 +27,7 @@ In other words, taste is a muscle you can train.
 
 * * *
 
-##  **1. Understand and embrace affordances**
+##  1. Understand and embrace affordances
 
 An **affordance** is the way an object communicates how it works. In _[The Design of Everyday Things](https://www.amazon.com/Design-Everyday-Things-Revised-Expanded/dp/0465050654)_, Don Norman provides the example of a door handle.
 
@@ -80,7 +80,7 @@ The more you do this, the more you’ll instinctively build them into your work,
 
 * * *
 
-##  **2. Detect and eliminate obvious jank**
+##  2. Detect and eliminate obvious jank
 
 You don’t need to be the most talented designer on earth to have taste.
 
@@ -92,7 +92,7 @@ In contrast, pleasant software suggests care and attention, and earns loyalty. B
 
 You can spend a lifetime learning design, but you can learn how to spot jankiness right now.
 
-###  **Make friends with the grid**
+###  Make friends with the grid
 
 Grids make things look tidy and deliberate. If something feels _vaguely janky,_ it might be because visual elements aren’t lining up according to any rules. 
 
@@ -100,7 +100,7 @@ Grids make things look tidy and deliberate. If something feels _vaguely janky,_ 
 
 Scattered elements laying everywhere are janky. Even aligning things by their leading or trailing edges can get you pretty far out of jank debt.
 
-###  **Be disciplined in your typography**
+###  Be disciplined in your typography
 
 ![](https://res.cloudinary.com/dmukukwp6/image/upload/6119a619_3e6a_47c8_a218_b525db48f8cc_1458x706_edb5d2b620.png)
 
@@ -110,7 +110,7 @@ Instead of going wild with multiple typefaces, try using a single typeface with 
 
 >  **Recommended reading:** Typography is a huge subject, [but here’s a great start](https://www.interaction-design.org/literature/topics/typography?srsltid=AfmBOoqjW0UJxE_dKkPai6HgXGrHXxSicAlWEu2AFIP3PPtVQNLwuggc) on the basics from the Interaction Design Foundation. [Typography in ten minutes](https://practicaltypography.com/typography-in-ten-minutes.html) from Practical Typography is an excellent read, too.
 
-###  **Mind your hierarchy**
+###  Mind your hierarchy
 
 Speaking of hierarchy, where we position things communicates their importance. If something is essential for your users to see or interact with, don’t bury it.
 
@@ -122,7 +122,7 @@ For desktop layouts, establishing hierarchy can mean placing elements at the top
 
 Just don’t gobble up too much real estate with an immovable element. No one wants to work in a tiny viewport.
 
-###  **It can be hard to attach meaning to colors**
+###  It can be hard to attach meaning to colors
 
 ![](https://res.cloudinary.com/dmukukwp6/image/upload/9d5ba50f_27d7_421e_8211_dee1432219ab_1456x762_11e8d37db9.png)
 
@@ -132,7 +132,7 @@ Don’t assume your user will grasp particular _meanings_ of colors, either. It�
 
 Red can be a good indicator for declining values and destructive actions, but did you know that in some cultures, red can be a color for _gains_ rather than losses? 📈
 
-###  **Maintain consistency**
+###  Maintain consistency
 
 Visual consistency can reduce the burden of understanding an interface.
 
@@ -148,7 +148,7 @@ Tighten up your consistency by reusing the same styles as appropriate.
 
 * * *
 
-##  **3.** Validate big swings with cheap prototypes
+##  3. Validate big swings with cheap prototypes
 
 Why? Because once you’ve built software that even _sort of_ works, it has inertia. It becomes resistant to change, which means jankiness _can fossilize_.
 
@@ -182,7 +182,7 @@ Code generation tools like Cursor and Lovable make rich, complex design experime
 
 * * *
 
-##  **4. You have to play with lots of things**
+##  4. You have to play with lots of things
 
 You can’t be an island on this stuff. You need to feed your sense of taste by experiencing many products, all the time.
 
