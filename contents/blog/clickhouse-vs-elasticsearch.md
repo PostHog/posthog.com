@@ -175,7 +175,7 @@ But ClickHouse truly makes materialized views **dynamic**. ClickHouse doesn’t 
 
 #### Component 3: Specialized engines
 
-ClickHouse has a series of specialized engines that enable developers to take advantage of multiple CPUs in parallel on the **same** machine. For instance, there is an engine for summing data (`SummingMergeTree`) and removing duplicates (`ReplacingMergeTree`). This technique has some resemblance to Elasticsearch’s parallelization across multiple **machines** to expedite search; ClickHouse is does it at a more granular, per-machine level.
+ClickHouse has a series of specialized engines that enable developers to take advantage of multiple CPUs in parallel on the **same** machine. For instance, there is an engine for summing data (`SummingMergeTree`) and removing duplicates (`ReplacingMergeTree`). This technique has some resemblance to Elasticsearch’s parallelization across multiple **machines** to expedite search; ClickHouse does it at a more granular, per-machine level.
 
 #### Sharding
 

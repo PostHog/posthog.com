@@ -369,7 +369,7 @@ print(response)
 
 Updates person properties. Read more in our [identify docs](/docs/product-analytics/identify).
 
-> **Note:** The `$identify` event works differently from the `identify()` method in the [JavaScript SDK](/docs/libraries/js#identifying-users). This event updates the person properties, while the JavaScript `identify()` method connects an anonymous user and a distinct ID.
+> **Note:** The `$identify` event works differently from the `identify()` method in the [JavaScript SDK](/docs/libraries/js/features#identifying-users). This event updates the person properties, while the JavaScript `identify()` method connects an anonymous user and a distinct ID.
 
 <MultiLanguage>
 
@@ -423,7 +423,7 @@ curl -v -L --header "Content-Type: application/json" -d '{
   "event": "$pageview",
   "distinct_id": "user distinct id",
   "properties": {
-    "$current_url": "https://posthog.com/docs/api/capture"
+    "$current_url": "/docs/api/capture"
   }
 }' <ph_client_api_host>/i/v0/e/
 ```
@@ -441,7 +441,7 @@ payload = {
     "event": "$pageview",
     "distinct_id": "user distinct id",
     "properties": {
-        "$current_url": "https://posthog.com/docs/api/capture",
+        "$current_url": "/docs/api/capture",
     }
 }
 response = requests.post(url, headers=headers, data=json.dumps(payload))

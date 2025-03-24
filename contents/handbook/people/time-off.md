@@ -70,7 +70,7 @@ If you need extended time for physical or mental health reasons, we will treat i
 
 There are lots of situations where life needs to come first. Please let it - just be communicative with your team and fit your work around it as you need. We trust you will do the right thing here. 
 
-If your are summonsed for jury duty, please let Fraser know right away - we can often get an exception granted if we have enough notice. 
+If you are summonsed for jury duty, please let Fraser know right away - we can often get an exception granted if we have enough notice. 
 
 ## Parental leave
 
@@ -106,9 +106,9 @@ The birthday gift usually arrives on the day of or 1-3 days prior to the birthda
 
 ### Anniversaries
 
-On your first-year anniversary with PostHog, you will receive a giftcard from [Giftogram](https://giftogram.com/) or [Prezzee](https://www.prezzee.uk/business/signin/) (if you are based in the UK) which can be used on a wide selection of brands. On your second-year anniversary you'll be gifted a [customized Lego minifig](https://minifig.fab-bricks.com/) in a display case, and on your third-year anniversary, you'll receive a personalized gift from [Wellbox](https://wellbox.app/). 
+On your first anniversary with PostHog, you will receive a giftcard from [Giftogram](https://giftogram.com/) or [Prezzee](https://www.prezzee.uk/business/signin/) (if you are based in the UK) which can be used on a wide selection of brands. On your second anniversary you'll be gifted a [customized Lego minifig](https://minifig.fab-bricks.com/) in a display case, and on your third anniversary, you'll receive a personalized gift from [Wellbox](https://wellbox.app/). 
 
-1st year anniversary - $50 for US gift cards/$55 for for all other countries gift cards to cover service fees:
+1st year anniversary - $50 for US gift cards/$55 for all other countries gift cards to cover service fees:
 
 1. Login into [Giftogram](https://app.giftogram.com/sign-in) by using your gmail credentials
 2. Two ways to create a new Giftogram, on the tool bar above where it says “Create and Send'' or you can click on the right hand side on the blue button “Send a Giftogram''. 

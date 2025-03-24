@@ -99,6 +99,30 @@ Below is the structure of the global variables available whenever templating a d
 }
 ```
 
+### Adding session replay links to Slack messages
+
+You can enhance your Slack notifications by adding direct links to session recordings. This is particularly useful when you want to quickly investigate the context of an event by watching the session replay.
+
+For example, to add a "Replay" button to your Slack message, you can add this block to your Slack destination's payload:
+
+```json
+{
+    "url": "{project.url}/replay/{event.properties.$session_id}?t={event.timestamp}",
+    "text": {
+        "text": "Replay",
+        "type": "plain_text"
+    },
+    "type": "button"
+}
+```
+
+This creates a button in your Slack message that links directly to the session recording at the exact timestamp when the event occurred. The URL is constructed using:
+- `{project.url}` - The base URL of your PostHog instance
+- `{event.properties.$session_id}` - The session ID from the event
+- `{event.timestamp}` - The timestamp when the event occurred
+
+For this to work the event must have the `session_id` as property on the event as well as a session recording associated with the `session_id`.
+
 ## Modifying destinations with Hog
 
 For most cases, we recommend using one of the templates. These take care of most logic under the hood, exposing simple inputs for you to configure. 

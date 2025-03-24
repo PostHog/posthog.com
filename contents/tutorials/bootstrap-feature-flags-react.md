@@ -1,320 +1,480 @@
 ---
 title: How to bootstrap feature flags in React and Express
-date: 2023-05-02
+date: 2025-03-06
 author:
   - ian-vanagas
 showTitle: true
 sidebar: Docs
-featuredVideo: 'https://www.youtube-nocookie.com/embed/9z1axmXdqV8'
 tags:
   - feature flags
 ---
 
-Bootstrapping feature flags make them available as soon as React and PostHog load on the client side. This enables use cases like routing to different pages on load, all feature flagged content being available on first load, and visual consistency. 
+Bootstrapping feature flags makes them available as soon as React and PostHog load on the client side. This enables use cases like routing to different pages on load, all feature flagged content being available on first load, and visual consistency.
 
-To show you how you can set up bootstrap feature flags, we are going to build a React app, add PostHog, set up an Express server to render our React app on the server-side, and finally bootstrap our flags from the server to the client.
+To show you how you can bootstrap feature flags, we are going to build a React app with Vite, add PostHog, set up an Express server to server-side render our app, and finally bootstrap our flags from the server to the client.
 
 > Already have an app set up? [Skip straight to the feature flag bootstrapping implementation](#handle-feature-flags-on-the-backend).
 
-## Create a React app and add PostHog
+## Create a React app with Vite and add PostHog
 
-Make sure you have [Node installed](https://nodejs.dev/en/learn/how-to-install-nodejs/), then create a new React app named `client`.
+Make sure you have [Node installed](https://nodejs.dev/en/learn/how-to-install-nodejs/), then create a new React app with Vite:
 
 ```bash
-npx create-react-app client
+npm create vite@latest client -- --template react
 ```
 
-Once created, go into the new `client` folder and install `posthog-js`.
+Once created, go into the new `client` folder and install the packages as well as `posthog-js` and its React wrapper:
 
 ```bash
 cd client
+npm install
 npm i posthog-js
 ```
 
-Next, get your PostHog project API key and instance address from the getting started flow or [your project settings](https://app.posthog.com/project/settings). Use them to set up a PostHog initialization in your `index.js` file.
+Next, get your PostHog project API key and instance address from the getting started flow or [your project settings](https://app.posthog.com/project/settings) and set up environment variables to store them. You can do this by creating a `.env.local` file in your project root:
 
-```js
-// src/index.js
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import './index.css';
-import App from './App';
-import posthog from 'posthog-js'
-
-posthog.init(
-  '<ph_project_api_key>', 
-  { 
-    api_host: '<ph_client_api_host>', 
-  }
-);
-
-const root = ReactDOM.createRoot(document.getElementById('root'));
-root.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>
-);
+```bash
+# .env.local
+VITE_PUBLIC_POSTHOG_KEY=<ph_project_api_key>
+VITE_PUBLIC_POSTHOG_HOST=<ph_client_api_host>
 ```
 
-### Create and setup a feature flag
+Next, create your entry point for client-side rendering in `src/entry-client.jsx`:
 
-While we focus on PostHog, we can set up a feature flag to bootstrap later.
+```jsx
+// src/entry-client.jsx
+import { StrictMode } from 'react'
+import { createRoot } from 'react-dom/client'
+import './index.css'
+import App from './App.jsx'
+import { PostHogProvider } from 'posthog-js/react'
 
-In the feature flag tab, create a new flag, set a key (I chose `test-flag`), set the rollout to 100% of users, and save it. Once done, you can check for your flag in the `loaded()` method on initialization like this:
+const options = {
+  api_host: import.meta.env.VITE_PUBLIC_POSTHOG_HOST,
+}
 
-```js
-posthog.init(
-  '<ph_project_api_key>', 
-  { 
-    api_host: '<ph_client_api_host>',
-    loaded(ph) {
-      console.log(ph.isFeatureEnabled('test-flag'))
-    }
-  }
-);
+createRoot(document.getElementById('root')).render(
+  <StrictMode>
+    <PostHogProvider apiKey={import.meta.env.VITE_PUBLIC_POSTHOG_KEY} options={options}>
+      <App />
+    </PostHogProvider>
+  </StrictMode>,
+)
 ```
 
-This also gives us a chance to show why bootstrapping is valuable. On the first load of the site (before the flag is set in cookies), you see `false` in the console even though the flag should return `true`. This is because the flag isn’t loaded yet when you check it. This means the flag might not show the right code on the initial load for that user. Bootstrapping flags solves this.
+Update your `index.html` to point to this file:
 
-![False](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/bootstrap-feature-flags-react/false.png)
+```html
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vite + React</title>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/entry-client.jsx"></script>
+  </body>
+</html>
+```
+
+If you want, you can run `npm run dev` to see the app in action.
+
+## Create and setup a feature flag
+
+If we want to bootstrap a feature flag, we first need to create it in PostHog. To do this, go to the [feature flag tab](https://us.posthog.com/feature_flags?tab=overview), create a new flag, set a key (I chose `test-flag`), set the rollout to 100% of users, and save it. 
+
+Once done, you can evaluate your flag in the `loaded()` method on initialization like this:
+
+```js
+const options = {
+  api_host: import.meta.env.VITE_PUBLIC_POSTHOG_HOST,
+  loaded(ph) {
+    console.log(ph.isFeatureEnabled('test-flag'))
+  }
+}
+```
+
+This shows us bootstrapping is valuable. On the first load of the site (before the flag is set in cookies), you see `undefined` in the console even though the flag should return `true`. This is because the flag isn't loaded yet when you check it, and the flag might not show the right code on the initial load for that user.
+
+![Undefined](https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_03_06_at_11_06_19_2x_f9bda663bb.png)
+
+Bootstrapping flags solves this.
 
 ## Set up the React app for server-side rendering
 
-To bootstrap our flags, we fetch the feature flag data on the backend and pass it to the frontend before it loads. This requires server-side rendering our React app. To do this, we set up:
+To bootstrap our flags, we fetch the feature flag data on the backend and pass it to the frontend before it loads. This requires server-side rendering our React app. 
 
-1. The bundler and build the React app.
-2. An Express server to get feature flag data from PostHog and serve the React app.
+To do this with Vite, we need:
 
-To start, install the package to compile, transform assets, and hot reload the server on file change.
+1. A server entry point for rendering React on the server
+2. A client entry point for hydrating the app in the browser
+3. An Express server to get feature flags from PostHog and serve the React app
 
-```bash
-npm install --save-dev @babel/register babel-plugin-transform-assets
-npm install -g nodemon
+We'll start with the server entry point by creating `src/entry-server.jsx`:
+
+```jsx
+// src/entry-server.jsx
+import React from 'react'
+import { renderToString } from 'react-dom/server'
+import App from './App'
+
+export function render() {
+  const html = renderToString(
+    <React.StrictMode>
+      <App />
+    </React.StrictMode>
+  )
+  
+  return html
+}
 ```
 
-After this, we make one more change to `index.js` to change `ReactDOM.createRoot` to `ReactDOM.hydrateRoot`.
+Next, modify your client entry point to support hydration in `src/entry-client.jsx`:
 
-```js
-// src/index.js
-//...
-const root = ReactDOM.hydrateRoot(document.getElementById('root'));
-root.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>
-);
+```jsx
+// src/entry-client.jsx
+import { StrictMode } from 'react'
+import { hydrateRoot } from 'react-dom/client'
+import './index.css'
+import App from './App'
+import { PostHogProvider } from 'posthog-js/react'
+
+const options = {
+  api_host: import.meta.env.VITE_PUBLIC_POSTHOG_HOST,
+  loaded(ph) {
+    console.log(ph.isFeatureEnabled('test-flag'))
+  }
+}
+
+// Use hydrateRoot instead of createRoot for SSR
+hydrateRoot(
+  document.getElementById('root'),
+  <StrictMode>
+    <PostHogProvider apiKey={import.meta.env.VITE_PUBLIC_POSTHOG_KEY} options={options}>
+      <App />
+    </PostHogProvider>
+  </StrictMode>
+)
 ```
 
-Finally, build the client so we can serve it from the Express server.
-
-```bash
-npm run build
-```
+With this done, we can move on to setting up our server-rendering Express app.
 
 ## Set up our server-rendering Express app
 
-To start, create another folder named `server` in the client folder. Inside this folder, create an `index.js` file. In this file, we:
+To get the feature flags data on the backend and pass it to the frontend, we need to set up an Express server that:
 
-1. Set up Babel.
-2. Import the packages for React, Express, and the file system.
-3. Set up an Express get handler for all routes that:
-    1. Creates a React app from our built client code
-    2. Reads the index file from the built client code
-    3. Replaces the div root with our server-created React app
+1. Gets or creates a distinct ID for PostHog
+2. Uses it to get the feature flags from PostHog
+3. Injects the feature flags data into the HTML
+4. Sends the HTML back to the client
+
+This starts by installing the necessary packages:
+
+```bash
+npm install express cookie-parser posthog-node uuid dotenv
+npm install --save-dev nodemon
+```
+
+Next, create a server directory in the root of your project and a `index.js` file inside it:
+
+```bash
+mkdir server
+touch server/index.js
+```
+
+In this file, start by importing everything we need, setting up the environment variables, and initializing the PostHog client:
 
 ```js
-require('@babel/register')({
-  presets: [
-    '@babel/preset-env',
-    ['@babel/preset-react', { runtime: 'automatic' }],
-  ],
-  plugins: [
-    [
-      'transform-assets',
-      {
-        extensions: ['css', 'svg'],
-        name: 'static/media/[name].6ce24c58023cc2f8fd88fe9d219db6c6.[ext]',
-      },
-    ],
-  ],
-});
+// server/index.js
+import express from 'express';
+import fs from 'fs';
+import path from 'path';
+import { fileURLToPath } from 'url';
+import { createServer as createViteServer } from 'vite';
+import cookieParser from 'cookie-parser';
+import { v4 as uuidv4 } from 'uuid';
+import { PostHog } from 'posthog-node';
 
-const React = require('react');
-const ReactDOMServer = require('react-dom/server');
-const App = require('../src/App').default;
-const express = require('express');
-const path = require('path');
-const fs = require('fs');
+// Import environment variables
+import dotenv from 'dotenv';
+dotenv.config();
 
-const app = express();
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
-app.get('/*', (req, res, next) => {
-  if (req.url !== '/') {
-    return next();
+// Initialize PostHog client
+const client = new PostHog(
+  process.env.VITE_PUBLIC_POSTHOG_KEY,
+  { 
+    host: process.env.VITE_PUBLIC_POSTHOG_HOST,
+    personalApiKey: process.env.POSTHOG_PERSONAL_API_KEY // This one is server-only
   }
-  const reactApp = ReactDOMServer.renderToString(React.createElement(App));
-
-  const indexFile = path.resolve('build/index.html');
-  fs.readFile(indexFile, 'utf8', (err, data) => {
-    if (err) {
-      return res.status(500).send(err);
-    }
-
-    return res.send(
-      data.replace('<div id="root">', `<div id="root">${reactApp}`)
-    );
-  });
-});
-
-app.use(express.static(path.resolve(__dirname, '../build')));
-
-app.listen(8080, () =>
-  console.log('Express server is running')
 );
 ```
 
-Once done, you can run the server with `nodemon server` and see your site in action (it looks the same).
-
-```bash
-nodemon server
-```
-
-## Handle feature flags on the backend
-
-To bootstrap the flags, first, we need the flag data from PostHog. To do this, we install `posthog-node`.
-
-```bash
-npm i posthog-node
-```
-
-Next, set up a PostHog client in your `server.js` file with your project API key, instance address, and a personal API key you can create in your [account settings](https://app.posthog.com/me/settings). We need the personal API key to locally evaluate flags on the backend to make them as fast as possible.
+Next, create a function to create and start the server:
 
 ```js
-// server/index.js
-//...
-const { PostHog } = require('posthog-node')
-const client = new PostHog(
-    '<ph_project_api_key>',
-    { 
-      host: '<ph_client_api_host>',
-      personalApiKey: '<ph_personal_api_key>'
+// ... existing code
+
+async function createServer() {
+  const app = express();
+  
+  // Use cookie parser middleware
+  app.use(cookieParser());
+
+  // Create Vite server in middleware mode
+  const vite = await createViteServer({
+    server: { middlewareMode: true },
+    appType: 'custom'
+  });
+  
+  // Use vite's connect instance as middleware
+  app.use(vite.middlewares);
+  
+  app.use('*', async (req, res, next) => {
+    const url = req.originalUrl;
+
+    try {
+      // More code here soon...
+
+    } catch (e) {
+      // If an error is caught, let Vite fix the stack trace for better debugging
+      vite.ssrFixStacktrace(e);
+      console.error(e);
+      next(e);
     }
-)
-//...
+  });
+
+  app.listen(3000, () => {
+    console.log('Server started at http://localhost:3000');
+  });
+}
+
+createServer();
 ```
 
-### Get or create a user ID
-
-To get the feature flags, we need a distinct user ID. `posthog-js` automatically creates one once users visit, but that isn’t helpful for first-time users where `posthog-js` hasn’t loaded. What we can do is check for a user ID in the cookies of the request. If it doesn’t exist, we can create a UUID for use as one.
-
-First, install the `cookie-parser` library.
-
-```bash
-npm i cookie-parser
-```
-
-Next, set it up for use in `server.js`. Make sure you call `app.use()` after initializing the app. We also add a way to create UUIDs for our distinct user ID.
+In the route's `try` block, we'll get or create a distinct ID and use it to get the feature flags:
 
 ```js
-// server/index.js
-//...
-const cookieParser = require('cookie-parser')
-const { v4: uuidv4 } = require('uuid');
-
-const app = express();
-app.use(cookieParser());
-//...
-```
-
-In the get request below, check for the cookies (using our PostHog project API key). If a PostHog cookie exists, use the distinct ID from it. If it doesn’t, create a new UUID to use as their ID.
-
-```js
-// server/index.js
-//...
-app.get('/*', async (req, res, next) => {
-  let distinctId = null
-  const phCookie = req.cookies[`ph_<ph_project_api_key>_posthog`]
+try {
+  // Get or create distinct ID
+  let distinctId = null;
+  const phCookie = req.cookies[`ph_${process.env.VITE_PUBLIC_POSTHOG_KEY}_posthog`];
   if (phCookie) {
-    distinctId = JSON.parse(phCookie)['distinct_id']
+    distinctId = JSON.parse(phCookie)['distinct_id'];
   }
   if (!distinctId) {
-    distinctId = uuidv4()
+    distinctId = uuidv4();
   }
-  //...
-})
-//...
+  
+  // Get all feature flags for this user
+  const flags = await client.getAllFlags(distinctId);
+
+  // More code here soon...
 ```
 
-### Add the flag data to the React component
+Once we have them, we'll inject them into the HTML and send it back to the client.
 
-With the user ID sorted, we can get the feature flags for the user by calling `await client.getAllFlags()` with their ID. We can then set up the flags and the user ID as window data and include them in our server-rendered HTML.
+```js
+// ... existing code
+
+  // 1. Read index.html
+  let template = fs.readFileSync(
+    path.resolve(__dirname, '../index.html'),
+    'utf-8'
+  );
+
+  // 2. Apply Vite HTML transforms
+  template = await vite.transformIndexHtml(url, template);
+
+  // 3. Load the server entry
+  const { render } = await vite.ssrLoadModule('/src/entry-server.jsx');
+
+  // 4. Render the app HTML
+  const appHtml = await render(url);
+
+  // 5. Inject the app-rendered HTML and feature flag data into the template
+  const serializedFlags = JSON.stringify(flags);
+  const serializedDistinctId = JSON.stringify(distinctId);
+  const scriptTag = `<script>window.__FLAG_DATA__ = ${serializedFlags}; window.__PH_DISTINCT_ID__ = ${serializedDistinctId};</script>`;
+
+  const html = template
+    .replace(`<div id="root"></div>`, `<div id="root">${appHtml}</div>`)
+    .replace('</head>', `${scriptTag}</head>`);
+
+  // 6. Send the rendered HTML back
+  res.status(200).set({ 'Content-Type': 'text/html' }).end(html);
+} catch (e) {
+  // ... existing code
+```
+<details>
+<summary>See the full index.js file</summary>
 
 ```js
 // server/index.js
-//...
-app.get('/*', async (req, res, next) => {
-	//... distinctId get or create
-	const flags = await client.getAllFlags(distinctId)
-	const indexFile = path.resolve('build/index.html');
-  fs.readFile(indexFile, 'utf8', (err, data) => {
-    if (err) {
-      return res.status(500).send(err);
-    }
-		
-    const html = data.replace('<div id="root"></div>', `<div id="root">${reactApp}</div>`);
-    const serializedFlags = JSON.stringify(flags);
-    const serializedDistinctId = JSON.stringify(distinctId);
-    const scriptTag = `<script>window.__FLAG_DATA__ = ${serializedFlags}; window.__PH_DISTINCT_ID__ = ${serializedDistinctId};</script>`;
-    const finalHtml = html.replace('</head>', `${scriptTag}</head>`);
+import express from 'express';
+import fs from 'fs';
+import path from 'path';
+import { fileURLToPath } from 'url';
+import { createServer as createViteServer } from 'vite';
+import cookieParser from 'cookie-parser';
+import { v4 as uuidv4 } from 'uuid';
+import { PostHog } from 'posthog-node';
 
-    return res.send(finalHtml);
+// Import environment variables
+import dotenv from 'dotenv';
+dotenv.config();
+
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
+
+// Initialize PostHog client
+const client = new PostHog(
+  process.env.VITE_PUBLIC_POSTHOG_KEY,
+  { 
+    host: process.env.VITE_PUBLIC_POSTHOG_HOST,
+    personalApiKey: process.env.POSTHOG_PERSONAL_API_KEY // This one is server-only
+  }
+);
+
+async function createServer() {
+  const app = express();
+  
+  // Use cookie parser middleware
+  app.use(cookieParser());
+
+  // Create Vite server in middleware mode
+  const vite = await createViteServer({
+    server: { middlewareMode: true },
+    appType: 'custom'
   });
-});
+  
+  // Use vite's connect instance as middleware
+  app.use(vite.middlewares);
+  
+  app.use('*', async (req, res, next) => {
+    const url = req.originalUrl;
+    
+    try {
+      // Get or create distinct ID
+      let distinctId = null;
+      const phCookie = req.cookies[`ph_${process.env.VITE_PUBLIC_POSTHOG_KEY}_posthog`];
+      if (phCookie) {
+        distinctId = JSON.parse(phCookie)['distinct_id'];
+      }
+      if (!distinctId) {
+        distinctId = uuidv4();
+      }
+      
+      // Get all feature flags for this user
+      const flags = await client.getAllFlags(distinctId);
+      
+      // 1. Read index.html
+      let template = fs.readFileSync(
+        path.resolve(__dirname, '../index.html'),
+        'utf-8'
+      );
+
+      // 2. Apply Vite HTML transforms
+      template = await vite.transformIndexHtml(url, template);
+      
+      // 3. Load the server entry
+      const { render } = await vite.ssrLoadModule('/src/entry-server.jsx');
+      
+      // 4. Render the app HTML
+      const appHtml = await render(url);
+      
+      // 5. Inject the app-rendered HTML and feature flag data into the template
+      const serializedFlags = JSON.stringify(flags);
+      const serializedDistinctId = JSON.stringify(distinctId);
+      const scriptTag = `<script>window.__FLAG_DATA__ = ${serializedFlags}; window.__PH_DISTINCT_ID__ = ${serializedDistinctId};</script>`;
+      
+      const html = template
+        .replace(`<div id="root"></div>`, `<div id="root">${appHtml}</div>`)
+        .replace('</head>', `${scriptTag}</head>`);
+      
+      // 6. Send the rendered HTML back
+      res.status(200).set({ 'Content-Type': 'text/html' }).end(html);
+    } catch (e) {
+      // If an error is caught, let Vite fix the stack trace for better debugging
+      vite.ssrFixStacktrace(e);
+      console.error(e);
+      next(e);
+    }
+  });
+
+  app.listen(3000, () => {
+    console.log('Server started at http://localhost:3000');
+  });
+}
+
+createServer();
 ```
 
-> If your feature flag relies on person or group properties, you need to include them in the `getAllFlags()` call so it can [evaluate locally](/docs/libraries/node#local-evaluation). To do this, add `personProperties` or `groupProperties` to the option argument. Your call looks like this `client.getAllFlags(distinctId, { personProperties: { active: true } })`
+</details>
 
-## Bootstrap flags on the frontend
+Once you got this all set up, you need a PostHog personal API key. To get one, go to [your user settings](https://us.posthog.com/settings/user-api-keys), click **Personal API keys**, then **Create personal API key**, select **All access**, and then select the **Local feature flag evaluation** preset.
 
-On the frontend, we can check for the user ID and flag data in our `index.js` file. We can then add this data to the bootstrap property of our PostHog initialization.
+<ProductScreenshot
+    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_03_06_at_11_15_57_2x_6ef86dd370.png"
+    imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_03_06_at_11_15_40_2x_1e5809b616.png"
+    alt="Creating a personal API key in PostHog"
+    classes="rounded"
+/>
 
-```js
-// src/index.js
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import './index.css';
-import App from './App';
-import posthog from 'posthog-js';
+Add it to your `.env.local` file:
 
+```bash
+# .env.local
+# ... rest of your environment variables
+POSTHOG_PERSONAL_API_KEY=phx_your-personal-api-key
+```
+
+Your React app will now be server-side rendered with the feature flags data injected into the HTML.
+
+## Bootstrapping the feature flags on the client
+
+The last thing we need to do is bootstrap the feature flags on the client. To do this, we'll update our client entry point to use the bootstrapped data:
+
+```jsx
+// src/entry-client.jsx
+import { StrictMode } from 'react'
+import { hydrateRoot } from 'react-dom/client'
+import './index.css'
+import App from './App'
+import { PostHogProvider } from 'posthog-js/react'
+
+// Get bootstrapped data from window
 const flagData = window.__FLAG_DATA__;
 const distinctId = window.__PH_DISTINCT_ID__;
 
-posthog.init(
-  '<ph_project_api_key>', 
-  { 
-    api_host: '<ph_client_api_host>',
-    bootstrap: {
-      distinctID: distinctId,
-      featureFlags: flagData,
-    },
-    loaded(ph) {
-      console.log(ph.isFeatureEnabled('test-flag'))
-    }
+const options = {
+  api_host: import.meta.env.VITE_PUBLIC_POSTHOG_HOST,
+  bootstrap: {
+    distinctID: distinctId,
+    featureFlags: flagData,
+  },
+  loaded(ph) {
+    console.log(ph.isFeatureEnabled('test-flag'))
   }
-);
-const root = ReactDOM.hydrateRoot(document.getElementById('root'));
-root.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>
-);
+}
+
+// rest of your code...
 ```
 
-Once we’ve done this, rebuild your site again with `npm run build` and run `nodemon server`. Open up the site on an incognito or guest window, and we see that the flag returns `true` on the first load. 
+Once this is done, we can run the server:
 
-![True](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/bootstrap-feature-flags-react/true.png)
+```bash
+nodemon --watch server --watch src/entry-server.jsx server/index.js
+```
 
-This is feature flag bootstrapping working successfully. From here, you can make the flag redirect to specific pages, [control session recordings](/tutorials/limit-session-recordings), or run an A/B test on your home page call to action.
+When you visit `http://localhost:3000`, you should see that feature flags are loaded immediately on the first page load. Open up the site on an incognito or guest window, and you'll see that the flag returns `true` on the first load without any delay.
+
+![It's working](https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_03_06_at_11_36_43_2x_476a2f9c96.png)
+
+This is feature flag bootstrapping working successfully. From here, you can make the flag redirect to specific pages, control session recordings, or run an A/B test on your home page call to action.
 
 ## Further reading
 

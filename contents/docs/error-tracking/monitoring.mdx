@@ -32,7 +32,9 @@ Clicking through to an individual group shows you all the associated exceptions,
 
 ## Managing issues
 
-Our error tracking product gives you multiple ways to manage issues towards resolution.
+Our error tracking product gives you multiple ways to manage issues towards resolution. 
+
+The most basic is assigning an error to teammate. To do this, select the profile icon under **assignee** and search for your teammate you want to assign it to, and select them. You can click this again to unassign them. 
 
 ### User groups
 
@@ -65,7 +67,7 @@ When using the `captureException` method you can provide `$exception_fingerprint
 posthog.captureException(error, { $exception_fingerprint: "MyCustomGroup" })
 ```
 
-Should an exception be autocaptured, you will need to modify the properties before the event is sent. The PostHog config offers a [`before_send`](/docs/libraries/js#amending-events-before-they-are-captured) hook that fires for each event. You can alter the event as part of this callback to add the property:
+Should an exception be autocaptured, you will need to modify the properties before the event is sent. The PostHog config offers a [`before_send`](/docs/libraries/js/features#amending-or-sampling-events) hook that fires for each event. You can alter the event as part of this callback to add the property:
 
 ```javascript
 posthog.init("<ph_project_api_key>", {

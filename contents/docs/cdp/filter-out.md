@@ -67,7 +67,7 @@ The followed types and operators are allowed:
 
 ## FAQ
 
-### Q: How can I filter out events from unwanted hostnames or IP addresses?
+### How can I filter out events from unwanted hostnames or IP addresses?
 
 To filter out all traffic from hosts that are not (for example) `posthog.com`, you could use the following config:
 ```
@@ -93,6 +93,10 @@ Or, to filter out all traffic from a particular IP address, you could use a conf
 ```
 
 Make sure to enable the `Keep event if any of the filtered properties are undefined?` option, otherwise, any events where the `$host` property is undefined will be filtered out.
+
+### Do you pay for events filtered out?
+
+**No**. Since PostHog doesn't ingest the events you filter out, you don't pay for them.
 
 <CommunityMaintained />
 

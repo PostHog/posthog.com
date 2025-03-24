@@ -10,7 +10,7 @@ PostHog is a lean organization - the less we spend, the more time we have to mak
 
 **Please spend money in a way that you think is in the best interests of the company. **
 
-If it's a trivial expense, just buy it. We provide you with a company card with a $1,000/month spending limit for this reason. We use Brex for everyone, and also provide UK team members with an additional Revolut card. 
+If it's a trivial expense, just buy it. We provide you with a company card to cover 99% of the spending you might need to do. We use Brex for everyone, and also provide UK team members with an additional Revolut card. 
 
 > Need a one off budget increase? You can do this directly within Brex - just request the amount and duration for the relevant budget in the app, and the People & Ops team will automatically be notified for approval. 
 
@@ -69,12 +69,16 @@ PostHog is an all-remote company. This means it's important you have an ergonomi
 
 PostHog will provide you with office equipment. Please note that it remains PostHog's property.
 
+### YubiKey
+
+We enforce the use of hardware security keys wherever we can. Every team member needs two Yubikeys. You can find them on Amazon, and we suggest you order them at the same time you purchase your laptop. You can read more about security keys in the [multi-factor authentication entry](https://posthog.com/handbook/company/security#multi-factor-authentication). 
+
 ### Laptop
 
 We'd prefer you to use a laptop. This is so when we host meetups in real life, you can easily bring your work with you. You should use an Apple laptop unless there is an exceptional reason why you can't, just to keep life simpler - for example, that means everyone can use the same software, and as we get bigger, it'll mean we're dealing with one supplier, not many. Please make sure you order a laptop with a keyboard that is US/UK/International English - this makes it much easier for us to reuse your laptop if you upgrade to another model or leave PostHog. 
 
 * For engineering roles, we recommend a Macbook Pro 14-inch M4 Pro, with the 12-core CPU, 16-core GPU upgrade and 48GB of RAM. By default grab the smallest SSD (512gb), but you can upgrade if you need to.
-* For all other roles, we currently recommend a Macbook Air with an Apple Silicon (M2) processor and 16GB of RAM.
+* For all other roles, we currently recommend a Macbook Air with the latest Apple Silicon processor and 16GB of RAM.
 
 These are just general guidelines - the most important thing is that you select the model that is appropriate for _your_ needs. If your requirements are different to the guidelines above please just ask Fraser.
 

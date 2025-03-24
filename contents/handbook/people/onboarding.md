@@ -51,7 +51,7 @@ When you start, you will be automatically invited to these. They are totally opt
 
 ### Guidance for onboarding buddies
 
-- Once we have decided which team a new joiner will join, the People & Ops team will reach out to the team to find an onboarding buddy. _Please make sure if don't have any leave booked in the week before and the two weeks after the new starter joins_
+- Once we have decided which team a new joiner will join, the People & Ops team will reach out to the team to find an onboarding buddy. _Please make sure that you don't have any leave booked in the week before and the two weeks after the new starter joins_
 - We will intro the new joiner and the onboarding buddy via email - please say hi and decide together where and when the in person onboarding will happen. 
  > If any travel is needed for the in-person onboarding, please check our [Spending Money page](/handbook/people/spending-money) and book your travel accordingly. _You don't need to let us team know, just use your Brex/Revolut card._
 - Please make sure you spend at least 3 days together, working through the [first week onboarding list](/handbook/people/onboarding#during-their-first-week) and spending time working on any role-specific tasks that are outlined in the new joiner's personal onboarding issue.
@@ -72,7 +72,7 @@ While there is no fixed budget for onboardings they should be relatively less ex
 
   - Avoid intercontinental travel or choose a location that limits it to the minimum number of people possible
   - You should not need to plan a social activity
-  - Limit attendees to members of your Small Team
+  - Limit attendees to the members of your Small Team only that you think are needed to make it successful (e.g. if your team is 3+ people, not everyone needs to come - you have Offsites as well)
   - See if there are any other onboardings at the same time you could pair up with
 
 Aim to keep things sensible and cheap. As always, use your best judgement when [spending money](/handbook/people/spending-money). Request a budget in Brex for any onboardings you are doing. 
@@ -222,7 +222,7 @@ These check-ins are designed to ensure every new starter is set up for success. 
 
 ## Team intros
 
-PostHog has lots of small teams and each team has it's own unique history and culture. Throughout your first and second month, you can join 15 minute intro calls to learn more about each team as these are led by the respective team lead. 
+PostHog has lots of small teams and each team has its own unique history and culture. Throughout your first and second month, you can join 15 minute intro calls to learn more about each team as these are led by the respective team lead. 
 
 All you need to do is add the [onboarding intros calendar](https://calendar.google.com/calendar/u/0?cid=Y18yNWNlYjI4MTI5YjQ0ZDNlOWM1NThjMzYxY2M1NjVmZGU3NWM5NWNjZjgyOTg4NTdjNGM1OWY5YzFmMTUzOWY4QGdyb3VwLmNhbGVuZGFyLmdvb2dsZS5jb20) to your google calendar and then you will see these on Mondays and Wednesdays throughout the month. Just add yourself to these during your first week and if you can't make one, just add yourself to the next month. 
 

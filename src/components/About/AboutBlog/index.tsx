@@ -62,7 +62,7 @@ const query = graphql`
         allMdx(
             filter: {
                 fields: { slug: { regex: "/^/blog/" } }
-                frontmatter: { date: { ne: null } }
+                frontmatter: { date: { ne: null }, tags: { nin: ["Comparisons"] } }
                 isFuture: { ne: true }
             }
             limit: 1

@@ -1,0 +1,156 @@
+---
+title: "Getting HogPilled: Winning with PostHog"
+nextPage: ./activation.mdx
+---
+
+import { AnalyticsPlannerTip } from 'components/Docs/AnalyticsPlannerTip'
+import { CalloutBox } from 'components/Docs/CalloutBox'
+
+<AnalyticsPlannerTip />
+
+Most startups fail. The ones that win often do it by accident.
+
+We can do better. 
+
+This guide will help you **win on purpose**. You'll start by defining success as a number you can measure – your North Star metric.
+
+Then you'll describe the user behavior that feeds that number. This will leave you with a collection of events you can track using insights in PostHog.
+
+After that, we're going to:
+
+- Measure if users find the value of your product – [measuring activation](/docs/new-to-posthog/activation).
+- Determine if they come back and how often – [tracking retention](/docs/new-to-posthog/retention).
+- Track the lifeblood of your business – [capturing revenue](/docs/new-to-posthog/revenue).
+
+By the end, you'll have everything you need to build a dashboard that captures the health of your product.
+
+Let's get started.
+
+## Choosing your North Star metric
+
+We start with a number that represents the success of your product.
+
+It's not going to be revenue.
+
+Instead, we want to count something that's a **precursor to revenue**. Something where, if it doesn't happen, we don't have a business. 
+
+Examples from businesses you've heard of:
+
+- **Facebook**: Daily active users  
+- **Airbnb**: Nights booked  
+- **Uber**: Number of rides
+
+See how easy it is to understand these numbers? A good North Star is measurable and easy to communicate. Everyone on your team should grasp their relationship to it.
+
+If you're *super* early, you could start with a metric like signups: how many people care enough to try your product? 
+
+But, as soon as possible, you need a hypothesis of what your users are trying to achieve, and a metric that describes it. 
+
+This doesn't need to be perfect – a good guess is enough to help you understand what events and actions you need to track – so pick the first thing that feels right and iterate from there.
+
+<CalloutBox icon="IconPencil" title="Plan your North Star">
+
+What does success look like for your business? Which metric corresponds to success right now? 
+
+Call that your **North Star metric**. Your metric can change as your product evolves, but there should only be one.
+</CalloutBox>
+
+## Defining your v0 metrics tree
+
+Once you've chosen your North Star metric, you can back out to the **user behavior** that feeds it.
+
+Below is a simple version of a metrics tree: events influence your North Star metric, feeding your success.
+
+<img height="700" alt="abstract-metrics-tree" src="https://res.cloudinary.com/dmukukwp6/image/upload/abstract_metrics_tree_8941f5f0c4.png" />
+
+**Events** are things that users do that we can track in code, and then measure across all usage of the product.
+
+Several distinct events have to occur to drive your North Star metric. Let's go back to the Uber example.
+
+### Example: ride sharing
+
+Uber's North Star metric is `Number of rides`. This is both the value the app gives to users, and how Uber makes money. 
+
+But Uber can't make money if no one launches the app, so `app_launched` is an essential event for it to track.
+
+There's still no money until `ride_requested` happens.
+
+But even that doesn't quite get us to a ride. We need a couple more: `ride_accepted`  and `ride_started`.
+
+<img width="1688" alt="ride-sharing-metrics-tree" src="https://res.cloudinary.com/dmukukwp6/image/upload/ride_share_metrics_851d75d7fe.png" />
+
+It's these events *together* that give us a picture of how people use the product to get a ride. 
+
+While counting only `ride_started` would give us enough to measure our North Star, it would *not* be enough to learn how to influence it.
+
+What does this look like for your product?
+
+### Think about funnels
+
+<img height="500" alt="ride-sharing-funnel" src="https://res.cloudinary.com/dmukukwp6/image/upload/ride_share_funnel_92f928cd26.png" />
+
+Because events often happen in a predictable sequence, we can use that sequence to learn if users are getting stuck or bailing out.
+
+This is called a **funnel**.
+
+Funnels are simple: they measure progress between events. More people launch the app than start a ride, but you still want to maximize the progress from one to the other. A funnel lets you understand how well that's going.
+
+If there's a sharp drop between, say, accepting a ride and starting one, that could point to an issue that needs to be fixed in the product.
+
+Funnels give us the information we need to diagnose problems and measure the impact of new solutions. We'll want to make sure we capture just enough event data to measure the critical path between starting in our product and succeeding with it.
+
+<CalloutBox icon="IconPencil" title="Planning a metrics tree">
+
+Recap your version of success and your North Star metric, then think about the events that drive that metric.
+
+These are the events that must be captured as part of integrating PostHog.
+
+Your app will have numerous critical paths and funnels within it, but start with the most important one and then add more later. 
+
+</CalloutBox>
+
+## Integration planning
+
+Once you know:
+
+1. What you're measuring  
+2. Why you're measuring it  
+3. What events lead to the outcome you want
+
+You're ready to make a plan to capture the data you need. 
+
+This data collection will help you understand how users interact with your product, and how well your product meets your goals.
+
+See the detailed docs on [sending events](/docs/getting-started/send-events) for more integration guidance.
+
+<CalloutBox icon="IconWarning" title="Avoid event pitfalls" type="caution">
+
+Ideal event names are self-explanatory and avoid strange abbreviations or codes. Don't stuff data into event names – they should be **comparable across all users** of your product. Instead, we want to tuck additional data into [properties](/docs/data/events#event-properties) *on* events.
+
+Be warned: PostHog's event storage is 'write only' for all practical purposes. You can't edit existing events, so it's important to design against naming drift. Pick a [naming convention](/docs/product-analytics/best-practices#3-implement-a-naming-convention) and stick with it.
+
+</CalloutBox>
+
+### User identity
+
+Events don't come out of nowhere: they're created by the behavior of real people. It can be helpful to understand the person behind the behavior, so PostHog enables you to [identify users](/docs/product-analytics/identify).
+
+Identifying users can help you make sense of the data you collect, tying it back to details like how you convinced someone to try your product.
+
+<CalloutBox icon="IconPencil" title="Planning user identification">
+
+What **unique identifier** should be used to identify users? Ideally, this is an ID from the database that won't change, but an email address can work too.
+
+Where will `identify()` be called? Typically `identify()` is invoked in the client, but some architectures, like SSR web apps, will call it on the server.
+
+</CalloutBox>
+
+Complex authentication flows can complicate identifying users.
+
+PostHog enforces some rules use on how you use the identify function to prevent users from being merged incorrectly. 
+
+Learn more about [alias](/docs/product-analytics/identify#alias-assigning-multiple-distinct-ids-to-the-same-user) if you intend to provide more than one of your own IDs for a user, or you need to merge identities on the server.
+
+## Next steps
+
+With a plan to track the basics in place, you can start thinking about counting users who find value in your product: [activation](/docs/new-to-posthog/activation).

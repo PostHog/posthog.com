@@ -224,8 +224,10 @@ export const AppParametersFactory: (params: AppParametersProps) => React.FC = ({
     return AppParameters
 }
 
-export const TemplateParametersFactory: (params: TemplateParametersProps) => React.FC = (input_schema) => {
-    const TemplateParameters = () => {
+export const TemplateParametersFactory: (params: TemplateParametersProps) => React.FC = (templateConfigs) => {
+    const TemplateParameters = ({ templateId }: { templateId?: string }) => {
+        const input_schema =
+            templateConfigs?.find((t) => t.templateId === templateId)?.config || templateConfigs?.[0]?.config
         if (!input_schema) {
             return null
         }
@@ -286,7 +288,7 @@ export default function Handbook({
     const {
         body,
         frontmatter,
-        fields: { slug, contributors, appConfig, templateConfig },
+        fields: { slug, contributors, appConfig, templateConfigs },
     } = post
     const {
         title,
@@ -337,7 +339,7 @@ export default function Handbook({
         a: A,
         TestimonialsTable,
         AppParameters: AppParametersFactory({ config: appConfig }),
-        TemplateParameters: TemplateParametersFactory(templateConfig),
+        TemplateParameters: TemplateParametersFactory(templateConfigs),
         TeamRoadmap: (props) => TeamRoadmap({ team: title?.replace(/team/gi, '').trim(), ...props }),
         TeamMembers: (props) => TeamMembers({ team: title?.replace(/team/gi, '').trim(), ...props }),
         CategoryData,
@@ -512,13 +514,16 @@ export const query = graphql`
                         }
                     }
                 }
-                templateConfig {
-                    key
-                    type
-                    label
-                    secret
-                    required
-                    description
+                templateConfigs {
+                    templateId
+                    config {
+                        key
+                        type
+                        label
+                        secret
+                        required
+                        description
+                    }
                 }
             }
             frontmatter {

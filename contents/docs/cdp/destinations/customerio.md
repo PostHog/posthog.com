@@ -1,6 +1,7 @@
 ---
 title: Send PostHog event data to Customer.io
-templateId: template-customerio
+templateId:
+    - template-customerio
 ---
 
 import Requirements from "../_snippets/requirements.mdx"

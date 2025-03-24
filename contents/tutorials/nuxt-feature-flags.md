@@ -121,7 +121,7 @@ You can customize your [release conditions](/docs/feature-flags/creating-feature
 
 ## Implementing flag code on the client side
 
-Once created, we can add our feature flag to our app. We do this using the [`posthog.onFeatureFlags`](/docs/libraries/js#ensuring-flags-are-loaded-before-usage) callback.
+Once created, we can add our feature flag to our app. We do this using the [`posthog.onFeatureFlags`](/docs/libraries/js/features#ensuring-flags-are-loaded-before-usage) callback.
 
 In our example, we fetch our feature flag and update the text on the page based on its value:
 

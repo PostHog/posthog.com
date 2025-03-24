@@ -643,6 +643,7 @@ function Privacy() {
                         </p>
                         <ul>
                             <li>AWS - cloud data hosting</li>
+                            <li>BuildBetter - product success platform </li>
                             <li>Clearbit - marketing data engine</li>
                             <li>Cloudflare - cloud data hosting</li>
                             <li>Customer.io - email campaign service provider</li>

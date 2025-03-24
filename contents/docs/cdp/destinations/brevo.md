@@ -1,6 +1,7 @@
 ---
 title: Create and update Brevo contacts from analytics events
-templateId: template-brevo
+templateId:
+    - template-brevo
 ---
 
 import Requirements from "../_snippets/requirements.mdx"

@@ -27,7 +27,7 @@ Please also update your `posthog-js` version to at least `1.3.4` if you have it 
 
 ![](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/annotations.png)
 
-Digging through git commits to find out what changed to make the graphs go hay-wire? No more! You can now annotate when something happened (a big release, a bugfix or a launch) and make it super easy for your team-mates to figure out what's going on.
+Digging through git commits to find out what changed to make the graphs go hay-wire? No more! You can now annotate when something happened (a big release, a bugfix or a launch) and make it super easy for your teammates to figure out what's going on.
 
 ### Cohort filters
 

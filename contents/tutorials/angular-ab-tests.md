@@ -138,7 +138,7 @@ Once created, set the primary metric to a trend of `home_button_clicked` and the
 
 To implement the A/B test, we fetch the `my-cool-experiment` feature flag and update the button text based on whether the user is in the `control` or `test` variant of the experiment.
 
-To do this, update your code in `app.component.ts` to use the [`ngOnInit`](https://angular.io/api/core/OnInit) lifecycle hook to implement the [`posthog.onFeatureFlags`](/docs/libraries/js#ensuring-flags-are-loaded-before-usage) callback. Then, we'll update the button text using [`ChangeDetectorRef`](https://angular.io/api/core/ChangeDetectorRef):
+To do this, update your code in `app.component.ts` to use the [`ngOnInit`](https://angular.io/api/core/OnInit) lifecycle hook to implement the [`posthog.onFeatureFlags`](/docs/libraries/js/features#ensuring-flags-are-loaded-before-usage) callback. Then, we'll update the button text using [`ChangeDetectorRef`](https://angular.io/api/core/ChangeDetectorRef):
 
 ```typescript file=app.component.ts
 import { Component, ChangeDetectorRef } from '@angular/core';

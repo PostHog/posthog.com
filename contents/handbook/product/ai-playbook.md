@@ -16,7 +16,7 @@ Product-minded developers want to build the right thing. They already can _build
 
 PostHog's agent helps build _the right thing_. Named Max, this is our core AI product. It's [deep research](https://openai.com/index/introducing-deep-research/) for product questions, with knowledge of data and tools living in PostHog.
 
-Max is owned by the [AI Product Manager team](/teams/ai-product-manager) – see its page for this product's roadmap.
+Max is owned by the [Max AI team](/teams/max-ai) – see its page for this product's roadmap.
 
 ## 2. PostHog Intelligence - acceleration throughout
 
@@ -53,7 +53,7 @@ OpenAI's offerings are typically at the frontier of progress, and scale well. Th
 
 ### We eat our hog food
 
-This goes for everything at PostHog, but in AI features specifically, we use [our own LLM observability product](https://posthog.com/docs/ai-engineering/observability):
+This goes for everything at PostHog, but in AI features specifically, we use [our own LLM observability product](/docs/ai-engineering/observability):
 
 - With OpenAI and Anthropic libraries in Python, use LLM observability wrappers in `posthoganalytics.ai.openai` & `posthoganalytics.ai.anthropic`
 - With LangChain, use the LLM observability callback handler in `posthoganalytics.ai.langchain.callbacks`

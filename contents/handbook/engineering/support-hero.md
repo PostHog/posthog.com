@@ -82,10 +82,10 @@ Your primary responsibility is simply to make sure SDK questions get some love. 
   - [posthog-php](https://github.com/PostHog/posthog-php)
   - [posthog-ruby](https://github.com/PostHog/posthog-ruby)
   - [posthog-java](https://github.com/PostHog/posthog-java)
-  - [posthog-rs (Rust)](https://posthog.com/docs/libraries/rust)
-  - [posthog-go](https://posthog.com/docs/libraries/go)
+  - [posthog-rs (Rust)](/docs/libraries/rust)
+  - [posthog-go](/docs/libraries/go)
   - [posthog-dotnet](https://github.com/PostHog/posthog-dotnet)
-  - Others, see https://posthog.com/docs/libraries
+  - Others, see /docs/libraries
 
 You don't have to be an expert in all of the SDKs, but it can be a great opportunity to dive into parts unknown.
 
@@ -210,7 +210,7 @@ Best,
 
 ## How do I use Zendesk?
 
-We use [Zendesk Support]([https://zendesk.com/](https://posthoghelp.zendesk.com)) as our internal platform to manage support tickets. This ensures that we don't miss anyone, especially when their request is passed from one person to another at PostHog, or if they message us over the weekend.
+We use [Zendesk Support](https://posthoghelp.zendesk.com) as our internal platform to manage support tickets. This ensures that we don't miss anyone, especially when their request is passed from one person to another at PostHog, or if they message us over the weekend.
 
 Zendesk allows us to manage all our customer conversations in one place and reply through Slack or email.
 

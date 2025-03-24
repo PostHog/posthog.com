@@ -50,6 +50,7 @@ def some_request(request):
 If you're using Django 4.2+, you can enable the [exception autocapture integration](/docs/error-tracking/installation) which will automatically capture Django errors.
 
 ```python
+from posthog import Posthog
 from posthog.exception_capture import Integrations
 
 Posthog("<ph_project_api_key>", enable_exception_autocapture=True, exception_autocapture_integrations = [Integrations.Django])

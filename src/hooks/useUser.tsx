@@ -69,6 +69,7 @@ type UserContextValue = {
     notifications: any
     setNotifications: any
     isValidating: boolean
+    voteReply: (id: number, vote: 'up' | 'down', user?: User) => Promise<void>
 }
 
 export const UserContext = createContext<UserContextValue>({
@@ -92,6 +93,7 @@ export const UserContext = createContext<UserContextValue>({
     notifications: [],
     setNotifications: () => undefined,
     isValidating: true,
+    voteReply: async () => undefined,
 })
 
 type UserProviderProps = {
@@ -578,6 +580,19 @@ export const UserProvider: React.FC<UserProviderProps> = ({ children }) => {
         })
     }
 
+    const voteReply = async (id: number, vote: 'up' | 'down', user: User) => {
+        const profileID = user?.profile?.id
+        if (!profileID) return
+        const jwt = await getJwt()
+        await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/replies/${id}/${vote}`, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+                Authorization: `Bearer ${jwt}`,
+            },
+        })
+    }
+
     useEffect(() => {
         localStorage.setItem('user', JSON.stringify(user))
     }, [user])
@@ -599,6 +614,7 @@ export const UserProvider: React.FC<UserProviderProps> = ({ children }) => {
         notifications,
         setNotifications: updateNotifications,
         isValidating,
+        voteReply,
     }
 
     return <UserContext.Provider value={contextValue}>{children}</UserContext.Provider>

@@ -385,7 +385,7 @@ Once saved, back on your site, the CTA added to your blog post.
 
 You can test it works by going back to PostHog, disabling your flag, and seeing the call to action disappear.
 
-With this done, you built a Svelte app with all the basics of PostHog set up. To go further, check out [group analytics](/docs/getting-started/group-analytics), [experimentation](/docs/experiments), and [our configuration options](/docs/libraries/js#config).
+With this done, you built a Svelte app with all the basics of PostHog set up. To go further, check out [group analytics](/docs/getting-started/group-analytics), [experimentation](/docs/experiments), and [our configuration options](/docs/libraries/js/config).
 
 ## Further reading
 

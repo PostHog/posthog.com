@@ -146,7 +146,7 @@ We'll show you how to implement both.
 
 ### Client-side rendering
 
-To implement the A/B test, we fetch the `my-cool-experiment` flag using [`posthog.onFeatureFlags`](/docs/libraries/js#ensuring-flags-are-loaded-before-usage) inside a `useEffect` hook. Then, we update the button text based on whether the user is in the `control` or `test` variant of the experiment:
+To implement the A/B test, we fetch the `my-cool-experiment` flag using [`posthog.onFeatureFlags`](/docs/libraries/js/features#ensuring-flags-are-loaded-before-usage) inside a `useEffect` hook. Then, we update the button text based on whether the user is in the `control` or `test` variant of the experiment:
 
 ```ts file=_index.tsx
 import posthog from 'posthog-js';

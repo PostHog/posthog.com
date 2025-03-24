@@ -1,6 +1,7 @@
 ---
 title: Send PostHog event data to Make
-templateId: template-make
+templateId:
+    - template-make
 ---
 
 import Requirements from "../_snippets/requirements.mdx"

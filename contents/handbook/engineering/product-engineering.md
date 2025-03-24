@@ -15,6 +15,7 @@ showTitle: true
 * Are good at descoping things and getting products or features into people's hands quickly
 * Have users that they're friendly with
 * Manage to build things without lots of internal meetings
+* Dive _deep_ when they need to, because shipping D might also require solving A, B, and C
 
 **Bad product engineers**
 * Consider research something that takes two weeks rather than two hours
@@ -29,6 +30,7 @@ showTitle: true
 * Spend 6 months on a huge feature before a user can try it
 * Never remove features or complexity, often by shipping features that aren't used and leaving them
 * Focus on internal alignment over company strategy and what users need
+* Wait for someone else to fix an adjacent problem
 
 ## How to
 

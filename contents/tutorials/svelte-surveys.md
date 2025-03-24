@@ -240,7 +240,7 @@ This shows a survey popup every time you visit your app's homepage.
 
 #### 2. Fetch the survey from PostHog
 
-To fetch the active surveys, we use [`posthog.getActiveMatchingSurveys()`](/docs/libraries/js#surveys). This returns an array of survey objects that looks like this:
+To fetch the active surveys, we use [`posthog.getActiveMatchingSurveys()`](/docs/libraries/js/features#surveys). This returns an array of survey objects that looks like this:
 
 ```JSON
 [

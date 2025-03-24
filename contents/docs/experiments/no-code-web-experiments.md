@@ -6,7 +6,7 @@ showTitle: true
 
 > 🚧 **Note:** No-code web experiments are currently considered in `beta`. To access them, enable the [feature preview](https://app.posthog.com/#panel=feature-previews%3Aweb-experiments) in your PostHog account. You'll also need to define `disable_web_experiments: false` in your Posthog web snippet configuration.
 >
-> We are keen to gather as much feedback as possible so if you try this out please let us know. You can email [daniel.b@posthog.com](mailto:daniel.b@posthog.com), send feedback via the [in-app support panel](https://us.posthog.com#panel=support%3Afeedback%3Aexperiments%3Alow), or use one of our other [support options](/docs/support-options).
+> We are keen to gather as much feedback as possible so if you try this out please let us know. You can email [anders@posthog.com](mailto:anders@posthog.com), send feedback via the [in-app support panel](https://us.posthog.com#panel=support%3Afeedback%3Aexperiments%3Alow), or use one of our other [support options](/docs/support-options).
 
 > **Note:** No-code experiments are great because they’re quick to set up and require no coding, but it’s important to understand their limitations and ensure they’re the right fit for your website.
 >

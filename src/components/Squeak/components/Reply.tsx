@@ -1,5 +1,5 @@
 import React, { useContext, useMemo, useState } from 'react'
-import { useUser } from 'hooks/useUser'
+import { User, useUser } from 'hooks/useUser'
 import Days from './Days'
 import Markdown from './Markdown'
 import { StrapiRecord, ReplyData } from 'lib/strapi'
@@ -9,11 +9,23 @@ import { CurrentQuestionContext } from './Question'
 import Link from 'components/Link'
 import Logomark from 'components/Home/images/Logomark'
 import { CallToAction } from 'components/CallToAction'
-import { IconArchive, IconCheck, IconInfo, IconPencil, IconThumbsDown, IconThumbsUp, IconTrash } from '@posthog/icons'
+import {
+    IconArchive,
+    IconCheck,
+    IconInfo,
+    IconPencil,
+    IconThumbsDown,
+    IconThumbsDownFilled,
+    IconThumbsUp,
+    IconThumbsUpFilled,
+    IconTrash,
+} from '@posthog/icons'
 import usePostHog from 'hooks/usePostHog'
 import { IconFeatures } from '@posthog/icons'
 import Tooltip from 'components/Tooltip'
 import EditWrapper from './EditWrapper'
+import { Authentication } from '..'
+import SideModal from 'components/Modal/SideModal'
 
 type ReplyProps = {
     reply: StrapiRecord<ReplyData>
@@ -185,6 +197,89 @@ const AIDisclaimer = ({ replyID, mutate, topic, confidence, resolvable }) => {
     )
 }
 
+const AuthModal = ({
+    authModalOpen,
+    setAuthModalOpen,
+    onAuth,
+}: {
+    authModalOpen: boolean
+    setAuthModalOpen: React.Dispatch<React.SetStateAction<boolean>>
+    onAuth: (user: User) => void
+}) => {
+    return (
+        <SideModal open={authModalOpen} setOpen={setAuthModalOpen}>
+            <h4 className="mb-4">Sign into PostHog.com</h4>
+            <div className="bg-border dark:bg-border-dark p-4 mb-2">
+                <p className="text-sm mb-2">
+                    <strong>Note: PostHog.com authentication is separate from your PostHog app.</strong>
+                </p>
+
+                <p className="text-sm mb-0">
+                    We suggest signing up with your personal email. Soon you'll be able to link your PostHog app
+                    account.
+                </p>
+            </div>
+
+            <Authentication onAuth={onAuth} initialView="sign-in" showBanner={false} showProfile={false} />
+        </SideModal>
+    )
+}
+
+const VoteButton = ({
+    id,
+    type,
+    voted,
+    votes,
+    onVote,
+}: {
+    id: number
+    type: 'up' | 'down'
+    voted: boolean
+    votes: number
+    onVote: () => void
+}) => {
+    const [authModalOpen, setAuthModalOpen] = useState(false)
+    const { voteReply, user } = useUser()
+
+    const vote = async (user: User) => {
+        await voteReply(id, type, user)
+        onVote?.()
+    }
+
+    const handleClick = () => {
+        if (!user) {
+            setAuthModalOpen(true)
+        } else {
+            vote(user)
+        }
+    }
+
+    const Icon =
+        type === 'up' ? (voted ? IconThumbsUpFilled : IconThumbsUp) : voted ? IconThumbsDownFilled : IconThumbsDown
+
+    return (
+        <>
+            <AuthModal
+                authModalOpen={authModalOpen}
+                setAuthModalOpen={setAuthModalOpen}
+                onAuth={(user) => {
+                    if (user) {
+                        vote(user)
+                        setAuthModalOpen(false)
+                    }
+                }}
+            />
+            <button
+                onClick={handleClick}
+                className="text-red dark:text-yellow font-semibold text-sm flex items-center py-1 px-1.5 rounded hover:bg-accent dark:hover:bg-border-dark/50"
+            >
+                <Icon className="size-4 mr-1 text-primary/70 dark:text-primary-dark/70 inline-block" />
+                {votes}
+            </button>
+        </>
+    )
+}
+
 export default function Reply({ reply, badgeText }: ReplyProps) {
     const {
         id,
@@ -225,6 +320,19 @@ export default function Reply({ reply, badgeText }: ReplyProps) {
 
     const pronouns = profile?.data?.attributes?.pronouns
     const helpful = useMemo(() => reply?.attributes?.helpful, [])
+    const upvoted = useMemo(
+        () => reply?.attributes?.upvoteProfiles?.data?.some((profile) => profile?.id === user?.profile?.id),
+        [reply?.attributes?.upvoteProfiles, user?.profile?.id]
+    )
+    const downvoted = useMemo(
+        () => reply?.attributes?.downvoteProfiles?.data?.some((profile) => profile?.id === user?.profile?.id),
+        [reply?.attributes?.downvoteProfiles, user?.profile?.id]
+    )
+    const upvotes = useMemo(() => reply?.attributes?.upvoteProfiles?.data?.length, [reply?.attributes?.upvoteProfiles])
+    const downvotes = useMemo(
+        () => reply?.attributes?.downvoteProfiles?.data?.length,
+        [reply?.attributes?.downvoteProfiles]
+    )
 
     return profile?.data ? (
         <div onClick={handleContainerClick}>
@@ -362,56 +470,68 @@ export default function Reply({ reply, badgeText }: ReplyProps) {
                                     </div>
                                 )}
 
-                                {(isModerator || resolvable || isReplyAuthor) && (
+                                <div
+                                    className={`flex ${
+                                        isModerator ? 'justify-end border-t border-light dark:border-dark mt-4' : ''
+                                    } mt-1 pt-1 pb-2`}
+                                >
                                     <div
-                                        className={`flex ${
-                                            isModerator ? 'justify-end border-t border-light dark:border-dark mt-4' : ''
-                                        } mt-1 pt-1 pb-2`}
+                                        className={`inline-flex space-x-1 ${
+                                            isModerator ? `bg-light dark:bg-dark px-1 mr-4 -mt-5` : ''
+                                        }`}
                                     >
-                                        <div
-                                            className={`inline-flex space-x-1 ${
-                                                isModerator ? `bg-light dark:bg-dark px-1 mr-4 -mt-5` : ''
-                                            }`}
-                                        >
-                                            {isReplyAuthor && (
-                                                <button
-                                                    onClick={() => setEditing(true)}
-                                                    className="text-red dark:text-yellow font-semibold text-sm flex items-center py-1 px-1.5 rounded hover:bg-accent dark:hover:bg-border-dark/50"
-                                                >
-                                                    <IconPencil className="size-4 mr-1 text-primary/70 dark:text-primary-dark/70 inline-block" />
-                                                    Edit
-                                                </button>
-                                            )}
-                                            {(isModerator || resolvable) && (
-                                                <button
-                                                    onClick={() => handleResolve(true, id)}
-                                                    className="text-red dark:text-yellow font-semibold text-sm flex items-center py-1 px-1.5 rounded hover:bg-accent dark:hover:bg-border-dark/50"
-                                                >
-                                                    <IconCheck className="size-4 mr-1 text-green inline-block" />
-                                                    Mark as solution
-                                                </button>
-                                            )}
-                                            {isModerator && (
-                                                <button
-                                                    onClick={() => handlePublishReply(!!publishedAt, id)}
-                                                    className="text-red dark:text-yellow font-semibold text-sm flex items-center py-1 px-1.5 rounded hover:bg-accent dark:hover:bg-border-dark/50"
-                                                >
-                                                    <IconArchive className="size-4 mr-1 text-primary/50 dark:text-primary-dark/50 inline-block" />
-                                                    {publishedAt ? 'Unpublish' : 'Publish'}
-                                                </button>
-                                            )}
-                                            {isModerator && (
-                                                <button
-                                                    onClick={handleDelete}
-                                                    className="text-red font-semibold text-sm flex items-center py-1 px-1.5 rounded hover:bg-accent dark:hover:bg-border-dark/50"
-                                                >
-                                                    <IconTrash className="size-4 mr-1 text-primary/50 dark:text-primary-dark/50 inline-block" />
-                                                    {confirmDelete ? 'Click again to confirm' : 'Delete'}
-                                                </button>
-                                            )}
-                                        </div>
+                                        <VoteButton
+                                            id={id}
+                                            type="up"
+                                            voted={upvoted}
+                                            votes={upvotes}
+                                            onVote={() => mutate()}
+                                        />
+                                        <VoteButton
+                                            id={id}
+                                            type="down"
+                                            voted={downvoted}
+                                            votes={downvotes}
+                                            onVote={() => mutate()}
+                                        />
+                                        {isReplyAuthor && (
+                                            <button
+                                                onClick={() => setEditing(true)}
+                                                className="text-red dark:text-yellow font-semibold text-sm flex items-center py-1 px-1.5 rounded hover:bg-accent dark:hover:bg-border-dark/50"
+                                            >
+                                                <IconPencil className="size-4 mr-1 text-primary/70 dark:text-primary-dark/70 inline-block" />
+                                                Edit
+                                            </button>
+                                        )}
+                                        {(isModerator || resolvable) && (
+                                            <button
+                                                onClick={() => handleResolve(true, id)}
+                                                className="text-red dark:text-yellow font-semibold text-sm flex items-center py-1 px-1.5 rounded hover:bg-accent dark:hover:bg-border-dark/50"
+                                            >
+                                                <IconCheck className="size-4 mr-1 text-green inline-block" />
+                                                Mark as solution
+                                            </button>
+                                        )}
+                                        {isModerator && (
+                                            <button
+                                                onClick={() => handlePublishReply(!!publishedAt, id)}
+                                                className="text-red dark:text-yellow font-semibold text-sm flex items-center py-1 px-1.5 rounded hover:bg-accent dark:hover:bg-border-dark/50"
+                                            >
+                                                <IconArchive className="size-4 mr-1 text-primary/50 dark:text-primary-dark/50 inline-block" />
+                                                {publishedAt ? 'Unpublish' : 'Publish'}
+                                            </button>
+                                        )}
+                                        {isModerator && (
+                                            <button
+                                                onClick={handleDelete}
+                                                className="text-red font-semibold text-sm flex items-center py-1 px-1.5 rounded hover:bg-accent dark:hover:bg-border-dark/50"
+                                            >
+                                                <IconTrash className="size-4 mr-1 text-primary/50 dark:text-primary-dark/50 inline-block" />
+                                                {confirmDelete ? 'Click again to confirm' : 'Delete'}
+                                            </button>
+                                        )}
                                     </div>
-                                )}
+                                </div>
                             </>
                         )
                     }}

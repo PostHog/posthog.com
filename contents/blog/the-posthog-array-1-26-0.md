@@ -110,7 +110,7 @@ We've redesigned and significantly improved the performance of the query builder
 
 We’re working hard to improve PostHog and would love to talk to you about your experience with the product.
 
-If you're interested in helping us out, you can schedule a quick 30min call with us [on Calendly](https://calendly.com/posthog-feedback).
+If you're interested in helping us out, you can schedule a quick 30 min call with us [on Calendly](https://calendly.com/posthog-feedback).
 
 To thank you for your time, we're giving away some awesome [PostHog merch](https://merch.posthog.com)!
 

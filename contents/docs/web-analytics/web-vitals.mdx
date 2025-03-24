@@ -98,6 +98,12 @@ PostHog allows you to look at performance for p75, p90 and p99. We suggest you t
 - It provides a good balance between capturing real user issues while filtering out extreme outliers that may be due to factors outside your control (like very poor network conditions or device performance)
 - Looking at p99 may lead to unnecessary over-optimization. Web vitals are a good starting point for improving your site, but they are not the only metrics you should focus on.
 
+### What are the top-level values displayed in the web vitals dashboard?
+
+The top-level values displayed in the web vitals dashboard is the value from the last day in the time period you've currently selected.
+Some people would expect it to be the average of the selected percentile, but that's not the case.
+We want you to easily see the current state of your Web vitals and for that reason displaying the latest (non-zero) value is more useful.
+
 ## Web vitals in the toolbar
 
 Our [toolbar](/docs/toolbar) also includes Web Vitals information. In it you can see what the metrics for the current page load are, but also look at historical data for the same page.
@@ -154,7 +160,7 @@ You can look at our Web vitals capturing code in [web-vitals/index.ts](https://g
 
 ### Sampling `$web_vitals` events
 
-If you're concerned about the cost of `$web_vitals` events, you can enable [sampling](/docs/libraries/js#sampling-events) for `$web_vitals` events.
+If you're concerned about the cost of `$web_vitals` events, you can enable [sampling](/docs/libraries/js/features#amending-or-sampling-events) for `$web_vitals` events.
 This will reduce the amount of events you send at the cost of some accuracy.
 
 We offer a pre-built function to sample by event name.

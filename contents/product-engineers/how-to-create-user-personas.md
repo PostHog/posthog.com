@@ -67,7 +67,7 @@ Here are three key questions you need to ask your users:
 2. What are you using [name of your product] to do right now?
 3. What obstacles do you face when trying to achieve your goals?
 
-This will tell you you who your users are, what motivates them, and what their problems are.
+This will tell you who your users are, what motivates them, and what their problems are.
 
 The quickest and easiest way to ask these questions is with an [in-product survey](/surveys):
 

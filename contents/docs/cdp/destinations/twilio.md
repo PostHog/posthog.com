@@ -1,6 +1,7 @@
 ---
 title: Send SMS messages using Twilio from analytics events
-templateId: template-twilio
+templateId:
+    - template-twilio
 ---
 
 import Requirements from "../_snippets/requirements.mdx"

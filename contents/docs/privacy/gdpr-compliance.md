@@ -86,11 +86,11 @@ We recommend using PostHog Cloud EU for GDPR compliance, though you can use Post
 
 If using PostHog Cloud EU, simply follow the steps in the onboarding process to start sending events. Read our [integration documentation](/docs/integrate) for more information on sending events to PostHog. 
 
-Deploying PostHog onto your own infrastructure is straightforward but we do not provide support for self-hosted instances. You can follow our [standard deployment guides](https://posthog.com/docs/self-host) to get started. 
+Deploying PostHog onto your own infrastructure is straightforward but we do not provide support for self-hosted instances. You can follow our [standard deployment guides](/docs/self-host) to get started. 
 
 ### Step 3: Security configuration
 
-When setting up a PostHog instance **we strongly recommend that you use HTTPS** to secure data in transmission, whether or not your instance has access to the wider internet. We also have a [guide for securing PostHog](https://posthog.com/docs/self-host/configure/securing-posthog) which you should follow to further protect your instance.
+When setting up a PostHog instance **we strongly recommend that you use HTTPS** to secure data in transmission, whether or not your instance has access to the wider internet. We also have a [guide for securing PostHog](/docs/self-host/configure/securing-posthog) which you should follow to further protect your instance.
 
 We also strongly recommend that you limit access to PostHog and the infrastructure it is deployed on only to people who are authorized and need to access the data, including shared dashboard links. Although aggregate data in dashboards should not contain personal data, it may be possible for malicious users to infer personal data unless it is evaluated thoroughly via expert determination.
 
@@ -107,9 +107,9 @@ Within the consent you should identify the types of personal data that are being
 
 If a user **opts out** then you must stop data capturing and processing. Here are some ways PostHog makes this possible:
 
-- If posthog-js has been initialized, call `posthog.opt_out_capturing()`. See the [posthog-js docs](https://posthog.com/docs/integrate/client/js#opt-users-out)
+- If posthog-js has been initialized, call `posthog.opt_out_capturing()`. See the [posthog-js docs](/docs/libraries/js#opt-out-of-data-capture)
 
-- Ensure [posthog-js is configured](https://posthog.com/docs/integrate/client/js#config) not to auto-capture and do not make [capture](https://posthog.com/docs/integrate/ingest-live-data#capture-user-events) calls using the installed PostHog SDK on any client
+- Ensure [posthog-js is configured](/docs/libraries/js/config) not to autocapture and do not make [capture](/docs/integrate/ingest-live-data#capture-user-events) calls using the installed PostHog SDK on any client
 
 - Do not load the posthog-js SDK. If you do this you should ensure your application logic always performs conditional checks for the availability of the PostHog SDK. This may not be possible in modern JavaScript applications.
 

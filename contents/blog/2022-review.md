@@ -33,7 +33,7 @@ We still have work to do. We're working on gross margin – we've done close to 
 
 We remained disciplined and let people go when we needed to. This helps us retain an ambitious and performance-oriented culture. While these moments are painful, we received positive feedback from our team when we explained why we made these decisions, transparently. 
 
-We are compassionate, but reasonable – we pay 4 months severance because our attitude is letting people go earlier is better for everyone and a big payout for them is kinder in return, so having the the latter means the former condition is met.
+We are compassionate, but reasonable – we pay 4 months severance because our attitude is letting people go earlier is better for everyone and a big payout for them is kinder in return, so having the latter means the former condition is met.
 
 ### Tim and I wound up in the wrong roles, but we spotted this and fixed them
 

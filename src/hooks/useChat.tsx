@@ -177,10 +177,10 @@ export function ChatProvider({ children }: { children: ReactNode }): JSX.Element
     useEffect(() => {
         // Open chat on ? key press
         const handleKeyPress = (event: KeyboardEvent) => {
-            // Don't trigger if user is typing in an input or textarea
+            // Don't trigger if user is typing in an input, textarea (including shadow DOM)
             if (
                 event.target instanceof HTMLElement &&
-                (event.target.tagName === 'INPUT' || event.target.tagName === 'TEXTAREA')
+                (event.target.tagName === 'INPUT' || event.target.tagName === 'TEXTAREA' || event.target.shadowRoot)
             ) {
                 return
             }

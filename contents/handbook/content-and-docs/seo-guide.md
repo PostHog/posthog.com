@@ -8,7 +8,7 @@ showTitle: true
 
 ### 1. Think about search intent when choosing what to write
 
-Successful SEO is all about anticipating a searcher's desire and delivering the right answers for them. This means thinking beyond just the initial search term – e.g. someone searching for the difference between retention rate and churn has a deeper desire: "I want to improve retention/churn."
+Successful [SEO for startups](/newsletter/seo-for-startups) is all about anticipating a searcher's desire and delivering the right answers for them. This means thinking beyond just the initial search term – e.g. someone searching for the difference between retention rate and churn has a deeper desire: "I want to improve retention/churn."
 
 ### 2. Get to the point
 
