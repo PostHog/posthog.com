@@ -108,7 +108,7 @@ Our [request for comments](https://newsletter.posthog.com/i/151612502/we-make-de
 
 Once you’ve done the work to form an opinion, be confident and direct in sharing it. Don't hedge by saying "this might be a good idea" or "maybe we could do this." Vague, non-committal communication might feel safer, but it rarely leads to action.  
 
-Being opinionated (and sharing those opinions clearly) enable us to move faster and more autonomously. Teams don't wait to be assigned tasks or told what to do. They identify problems and go solve them.
+Being opinionated (and sharing those opinions clearly) enables us to move faster and more autonomously. Teams don't wait to be assigned tasks or told what to do. They identify problems and go solve them.
 
 > **Remember this:** It’s better to say “I need more time to think about this” than share a vague, uncommitted opinion. We prefer async communication precisely because it gives people the time to digest context and develop informed opinions.
 
@@ -145,15 +145,15 @@ Fixing this requires giving people a time and place to communicate. You can thin
 
 Our rituals include:
 
-1. **Weekly all-hands.** A 30-minute call where the most important updates are shared with the team, like revenue, hiring, and a [topic of the day](/handbook/exec/all-hands-topics). A Q\&A with our founders, James and Tim. Demos of what anyone built in the last week.  
+1. **Weekly all-hands.** A 30-minute call where the most important updates are shared with the team, like revenue, hiring, and a [topic of the day](/handbook/exec/all-hands-topics). A Q&A with our founders, James and Tim. Demos of what anyone built in the last week.  
 
 2. **Sprint planning.** A [review](https://github.com/PostHog/posthog/issues/28840) done by each product team every two weeks. Combines retrospectives, planning for the next two weeks, and progress towards quarterly goals.  
 
 3. **Growth reviews.** For products with product-market fit, we hold [monthly meetings](/handbook/growth/growth-engineering/growth-sessions) to review metrics like revenue, churn, usage, activation, and more. Teams then discuss how they can improve these and agree actions.  
 
-4. **Request for comments.** This how we coordinate large, cross-team decisions async. [An RFC](/handbook/company/communication#requests-for-comment-rfcs) shares a problem, a potential solution, and gathers feedback. Team members share opinions and feedback, then the owner makes a decision.  
+4. **Request for comments.** This is how we coordinate large, cross-team decisions async. [An RFC](/handbook/company/communication#requests-for-comment-rfcs) shares a problem, a potential solution, and gathers feedback. Team members share opinions and feedback, then the owner makes a decision.  
 
-5. **Quarterly planning.** Teams reflect before the meeting using our version of SWOT named [HOGS](/handbook/company/goal-setting) (Hopes, Obstructions, Growth Opportunity, Sneak Attack). We take an hour to brainstorm goals. These are focused what we will ship over with owners, what we’ll ship, and successful metrics.
+5. **Quarterly planning.** Teams reflect before the meeting using our version of SWOT named [HOGS](/handbook/company/goal-setting) (Hopes, Obstructions, Growth Opportunity, Sneak Attack). We take an hour to brainstorm goals. These are focused on what we will ship over with owners, what we’ll ship, and successful metrics.
 
 Rituals aren't unique to PostHog. Zapier requires [Friday Updates](https://zapier.com/blog/friday-updates-at-work/) from everyone on their internal blog. [Basecamp](https://github.com/basecamp/handbook/blob/master/how-we-work.md) has daily and weekly check-ins as well as kickoffs and heartbeats. [Linear](https://linear.app/method/introduction) works in two-week cycles, writes project specs, and keeps an updated changelog.  
 
@@ -186,8 +186,11 @@ This is direct, gives only the important context, and provides clear owners and 
 ## What happens when you avoid these mistakes?
 
 - You create a culture of communication that prioritizes shipping features that users actually care about, rather than planning or theorizing them.  
+
 - Because the information you need is available at the right time, everyone can work more autonomously with fewer meetings and less back and forth.  
+
 - When making decisions, more perspectives are taken into account, not just the "highest paid person's opinion."  
+
 - Knowledge you've gained gets shared and built upon, rather than lost and forgotten.
 
 Don't believe this is real? This is largely how communication works at PostHog and based on a recent [internal survey](/handbook/people/feedback#team-surveys), it seems to be working.
