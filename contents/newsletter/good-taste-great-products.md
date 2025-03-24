@@ -96,7 +96,7 @@ You can spend a lifetime learning design, but you can learn how to spot jankines
 
 Grids make things look tidy and deliberate. If something feels _vaguely janky,_ it might be because visual elements aren’t lining up according to any rules. 
 
-![](https://res.cloudinary.com/dmukukwp6/image/upload/3a940cd7_5227_472c_bf55_d47193d8010d_2020x962_40f183c715.png)
+![](https://res.cloudinary.com/dmukukwp6/image/upload/Janky_vs_nice_a4775caa0d.png)
 
 Scattered elements laying everywhere are janky. Even aligning things by their leading or trailing edges can get you pretty far out of jank debt.
 
@@ -116,9 +116,7 @@ Speaking of hierarchy, where we position things communicates their importance. I
 
 In Stellaris, a strategy game about space exploration and expansion, resources like energy production, minerals, and food are central to every decision, so the UI places them at the top of the screen, visible at all times.
 
-![](https://res.cloudinary.com/dmukukwp6/image/upload/bd7f1a9b_c1c3_40da_9a78_3e233f9326d5_2204x1920_3f630c99b6.png)
-
-
+![](https://res.cloudinary.com/dmukukwp6/image/upload/stellaris_3a4f6c18e4.png)
 
 For desktop layouts, establishing hierarchy can mean placing elements at the top of the screen like this. For mobile, fixed elements at the top or bottom of the screen are easy to see and reach. 
 
