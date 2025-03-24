@@ -8,7 +8,7 @@ featuredImage: >-
 featuredImageType: full
 tags:
   - Engineering
-  - Design
+  - Product
 crosspost:
   - Product engineers
 ---
