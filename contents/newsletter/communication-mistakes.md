@@ -200,3 +200,5 @@ Don't believe this is real? This is largely how communication works at PostHog a
 - 98% of people said they understand PostHog's goals and can see how their work contributes to them.
 
 Although communication can always be improved, avoiding these mistakes goes a long way in doing it as well as possible.
+
+<NewsletterForm />
