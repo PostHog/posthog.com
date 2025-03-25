@@ -184,12 +184,17 @@ export const UserProvider: React.FC<UserProviderProps> = ({ children }) => {
                     })
                 }
 
-                await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/achievements/check`, {
+                fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/achievements/check`, {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
                         Authorization: `Bearer ${userData.jwt}`,
                     },
+                    body: JSON.stringify({
+                        data: {
+                            date: new Date(),
+                        },
+                    }),
                 })
             } catch (error) {
                 console.error(error)
