@@ -13,7 +13,7 @@ crosspost:
   - Product engineers
 ---
 
-When we talk about how to be a good [product engineer](/blog/what-is-a-product-engineer), we often focus on how you need to ship fast, be customer obsessed, and [take extreme ownership of ideas](https://newsletter.posthog.com/p/hiring-and-managing-cracked-engineers). 
+When we talk about how to be a good [product engineer](/blog/what-is-a-product-engineer), we often focus on how you need to ship fast, be customer obsessed, and [take extreme ownership of ideas](/founders/cracked-manifesto). 
 
 But one important quality is subjective: taste.
 
