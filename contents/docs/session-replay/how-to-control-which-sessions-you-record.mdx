@@ -46,6 +46,8 @@ posthog.startSessionRecording({
 })
 ```
 
+> **NOTE:** Session recording triggers work as OR conditions — the recording starts if *any* of the set triggers (URL or event) are matched.
+
 ## With URL trigger conditions
 
 You can opt to only start recordings once your user visits a certain page. After the URL matches, the recording continues even after they leave the matching page.  
