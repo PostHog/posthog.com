@@ -4,21 +4,28 @@ sidebar: Docs
 showTitle: true
 ---
 
-## 1. Add PostHog to your website
+## 1. Migrate historical data from another tool
+
+Are you migrating from another tool like PostHog?
+
+1. Congratulations on a great descision. Go you.
+2. Head to our [docs on historial migrations](/docs/migrate).
+
+## 2. Add PostHog to your website
 
 Installing PostHog on both your app and website enables you track the entire funnel of a user through acquisition, activation, retention, and revenue.
 
 It's cheap, too. You can send us [anonymous events](/docs/data/anonymous-vs-identified-events) from your website, which are up to 4x cheaper than the identified events used for product analytics.
 
-You can then use our [built-in web analytics](/docs/web-analytics) to track your top pages, and how people find your website.
+You can then use our [web analytics](/docs/web-analytics) dashboard to track your top pages, how people find your website, and your [web vitals](/docs/web-analytics/web-vitals).
 
 Read our [web analytics vs product analytics](/docs/web-analytics/web-vs-product-analytics) explainer for more.
 
-## 2. Invite your team
+## 3. Invite your team
 
 PostHog is way more powerful when you're using it with your teammates.
 
-To invite them, go to your instance homepage, click the "Invite" button, and add their email. 
+To invite them, go to your instance homepage, click the **Invite** button, and add their email. 
 
 This will add them to your organization with access to all your projects.
 
@@ -28,26 +35,9 @@ This will add them to your organization with access to all your projects.
 
 You can change their access levels in your organization settings, and set some projects to private if required.
 
-## 3. Filter out internal users
+You'll likely want to [filter out events from internal users](/tutorials/filter-internal-users) if you do this.
 
-You'll likely want to [filter out](/tutorials/filter-internal-users) events from internal users they trigger. 
-
-To set this up, go to **Project Settings**, scroll down to **filter out internal and test users**.
-
-Next, add filters to ignore events from local development addresses, and from users whose email does includes your company’s domain.
-
-//TKTK update screenshot
-
-![Filter](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/next-steps-after-installing/filter.png)
-
-## 4. Migrate historical data from another tool
-
-Are you migrating from another tool like PostHog?
-
-1. Congratulations on a great descision. Go you.
-2. Head to our [docs on historial migrations](/docs/migrate).
-
-## 5. Watch your first session replay
+## 4. Watch your first session replay
 
 Watching people using your product is like magic.
 
@@ -55,7 +45,7 @@ Once you've [enabled session replay](/docs/session-replay/installation) in your 
 
 Warning: watching replays is addictive, but incredibly useful.
 
-## 6. Start sending PostHog data to other tools
+## 5. Start sending PostHog data to other tools
 
 As data arrives in PostHog, you can export it _immediately_ to other tools using [realtime destinations](/docs/cdp/destinations/). 
 
@@ -72,7 +62,7 @@ Head to the [data pipelines](/docs/cdp) docs for more on how you can use PostHog
 
 You can also configure [batch exports](/docs/cdp/batch-exports/s3) to a data warehouse.
 
-## 7. Import revenue and customer data into our data warehouse
+## 6. Import revenue and customer data into our data warehouse
 
 When you choose PostHog, you also get a built-in data warehouse.
 
@@ -84,7 +74,7 @@ We also support important data from most popular data warehouses and databases, 
 
 See the full [list of PostHog data sources](/docs/cdp/sources) for more. 
 
-## 8. Figure out what to track in PostHog
+## 7. Figure out what to track in PostHog
 
 PostHog has [autocapture](/docs/product-analytics/autocapture), so you're already collecting useful data from the moment you install our snippet.
 
@@ -99,28 +89,19 @@ If you have no idea where to start, we recommend reading our guide to [Winning w
 
 ![a complete dashboard](https://res.cloudinary.com/dmukukwp6/image/upload/hogflix_c681b6891d.png)
 
-## 9. Learn more about your data in PostHog
+## 8. Start testing in production
 
-If you're new to analytics, and using PostHog, it's useful to have a basic understanding of what data we capture and how to work with it.
+At PostHog, we test in production. This doesn't mean we:
 
-Read [Your data in PostHog](/docs/new-to-posthog/understand-posthog) for an introduction to our data model. 
-
-## 10. Start testing in production
-
-At PostHog, we test in production. There are many misconceptions about doing this. It does not mean:
-
-- we commit to `main` every time we make a change.
-- we randomly click around once the code releases to make sure it works.
-- we ship code into production without testing it.
+- Commit to `main` every time we make a change.
+- Randomly click around once the code releases to make sure it works.
+- Ship code into production without testing it.
 
 It means we use [feature flags](/docs/feature-flags) to ship changes safely to small internal groups at first, then to select groups of beta testers, and so on.
+
+Feature flags + testing in production = shipping features your uses love faster. 
 
 Read more about:
 - [Installing feature flags](/docs/feature-flags/installation) and [creating your first flag](/docs/feature-flags/creating-feature-flags)
 - [How we test in production](/product-engineers/testing-in-production) at PostHog using feature flags
 - [Best practices for using feature flags](/docs/feature-flags/best-practices) in your product
-
-
-
-
-
