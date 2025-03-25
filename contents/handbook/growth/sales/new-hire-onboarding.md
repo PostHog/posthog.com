@@ -220,6 +220,16 @@ By the end of month 2:
 By the end of month 3:
  - You've implemented process and system-level changes to make your job better/more effective
 
+## Getting your equipment setup right
+
+In addition to following the guidance in the [spending money](/handbook/people/spending-money) section of the Handbook, there are a few things you should do to make sure you're set up to give high quality demos that look professional:
+
+- Buy a webcam. These are cheap, but significantly better than those built into your Macbook. [Logitech](https://www.amazon.com/Logitech-C920S-Pro-HD-Webcam/dp/B07K986YLL?content-id=amzn1.sym.a949ec2f-983d-439e-ae6a-4028e2c2d8cc%3Aamzn1.sym.a949ec2f-983d-439e-ae6a-4028e2c2d8cc&crid=2JZO9SX8OX9D2&cv_ct_cx=logitech+webcam&keywords=logitech+webcam&pd_rd_i=B07K986YLL&pd_rd_r=acf0ebd6-b0cf-45b4-85a5-c4a4b7cff62a&pd_rd_w=EhnEO&pd_rd_wg=kIwxd&pf_rd_p=a949ec2f-983d-439e-ae6a-4028e2c2d8cc&pf_rd_r=QR1RHK24EETND1GFM8YN&qid=1742897445&sbo=RZvfv%2F%2FHxDF%2BO5021pAnSA%3D%3D&sprefix=logite%2Caps%2C195&sr=1-7-c3caa9c6-537b-4b39-bbc5-5db9f871bef5) is perfectly fine here. This should cost up to $100. 
+- Buy a microphone. The mic on your Airpods will not do it. [Rode](https://www.amazon.com/Studio-quality-Microphone-Podcasting-Production-Instrument/dp/B084P1CXFD?crid=126FUMJ08UAYL&dib=eyJ2IjoiMSJ9.pOm-SxBDmRIPQcqOowaImU5idZavVBpSoaMFvRH381KmO88QJ9UWUrMTzKCJpWbLdt2rqRM-_Bfj2e5quBAGm57j4tpfY2wXGxOd3XGSRPG-6iYOkPmhXK4uLpjmufuqUVpUH4NxJlKgSnfShEIfdvonqKIjKOKxoaITqDWDZ31sZa1DKQD9sPFGPITQ5q8G8odWsQ8Bm0ib5IFoXYyhGAYzQ6WC4gTENk74zw0fWrAm8Sxzy5R_R-Br88f6bvwRWaa15Oj_uvSlCbQePum_ax3Br-RTWN49fKIrQQsGDL5w_Xn7IoM_rdhZgLQUbDsVzsR0kcDFoGircwDzAWQg2NMn_InHr_yocAmPfj-HNdI.xIr8jBGZiHdgK8iMbeb3nR2ywvoXSdE5pec4R_wtXNw&dib_tag=se&keywords=rode%2Bmicrophone&qid=1742897499&s=electronics&sprefix=rode%2B%2Celectronics%2C169&sr=1-9&th=1) do good quality, affordable mics - nice thing about these is that you can plug in wired headphones so you can still hear yourself talk. Again, up to $100 should be fine. 
+  - If you prefer to use headphones with a built-in boom mic instead, that's also ok.
+- Take calls at your desk. Don't dial in from your garden because it's a nice day and then spend the call apologizing for the lousy WiFi.
+- You don't have to go all ring light, but think about your background a bit. You don't have to construct some elaborate bookshelf situation behind you, but consider using one of our [nice wallpapers](/blog/posthog-wallpapers). 
+
 ## Tools that you may find useful
 
 - [Cal.com](https://app.cal.com/) for shared meeting booking links
