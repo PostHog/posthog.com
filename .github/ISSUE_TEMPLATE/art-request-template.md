@@ -12,8 +12,8 @@ assignees:
 > - Provide context about what you're trying to convey – i.e. a feeling, reaction, or narrative.
 > - If it's for an article, share the draft headline and some bullet points of what it's about.
 > - Leave reasonable time. A week is the minimum. Two weeks notice is ideal.
-> - Assign / tag Lottie, so she knows about it + and at your issue to the Art & Branding project board.
-> - If your request is genuinely urgent, please share in #website-and-vibes channel and mention Lottie.
+> - Assign / tag Lottie, so she knows about it + and add your issue to the Art & Branding project board.
+> - If your request is genuinely urgent, please share in #website-and-vibes channel and mention Lottie and/or Cory.
 
 ## Outline
 _Explain what you need_
