@@ -9,22 +9,134 @@ availability:
 ---
 export const setupLight = "https://res.cloudinary.com/dmukukwp6/video/upload/posthog.com/contents/images/tutorials/toolbar/setup-toolbar-light-mode.mp4"
 export const setupDark = "https://res.cloudinary.com/dmukukwp6/video/upload/posthog.com/contents/images/tutorials/toolbar/setup-toolbar-dark-mode.mp4"
+export const createNewActionLight = "https://res.cloudinary.com/dmukukwp6/video/upload/posthog.com/contents/images/products/product-analytics/toolbar-create-new-action-light-mode.mp4"
+export const createNewActionDark = "https://res.cloudinary.com/dmukukwp6/video/upload/posthog.com/contents/images/products/product-analytics/toolbar-create-new-action-dark-mode.mp4"
+export const typeItLight = "https://res.cloudinary.com/dmukukwp6/video/upload/posthog.com/contents/images/tutorials/toolbar/type-it-light-mode.mp4"
+export const typeItDark = "https://res.cloudinary.com/dmukukwp6/video/upload/posthog.com/contents/images/tutorials/toolbar/type-it-dark-mode.mp4"
+export const toolbarSelectEditLight = "https://res.cloudinary.com/dmukukwp6/video/upload/posthog.com/contents/images/tutorials/toolbar/toolbar-selector-edit-light-mode.mp4"
+export const toolbarSelectEditDark = "https://res.cloudinary.com/dmukukwp6/video/upload/posthog.com/contents/images/tutorials/toolbar/toolbar-selector-edit-dark-mode.mp4"
+export const toolbarViewActionsLight = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/products/product-analytics/toolbar-view-actions-light-mode.png"
+export const toolbarViewActionsDark = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/products/product-analytics/toolbar-view-actions-dark-mode.png"
+export const toolbarFeatureFlagsLight = "https://res.cloudinary.com/dmukukwp6/video/upload/posthog.com/contents/images/products/product-analytics/toolbar-feature-flags-light-mode.mp4"
+export const toolbarFeatureFlagsDark = "https://res.cloudinary.com/dmukukwp6/video/upload/posthog.com/contents/images/products/product-analytics/toolbar-feature-flags-dark-mode.mp4"
+
+<iframe
+    src="https://www.youtube-nocookie.com/embed/2jQco8hEvTI?start=250"
+    className="rounded shadow-xl"
+/>
 
 > **Note:** The PostHog toolbar is only available for the [JavaScript web SDK](/docs/libraries/js).
 
-The toolbar is like "Inspect Element" for PostHog features and data. When enabled, the toolbar appears as an overlay **on your product or website** (it's not visible to your users). With it, you can interact with elements to [create actions](/tutorials/how-to-capture-events-the-easy-way), visualize heatmaps, override feature flags, and more.
+The toolbar is like "Inspect Element" for PostHog features and data. 
+
+When enabled, the toolbar appears as an overlay **on your product or website** – it's not visible to your users. 
+
+With it, you can interact with elements to [create actions](/tutorials/how-to-capture-events-the-easy-way), visualize heatmaps, override feature flags, and more.
 
 ## How to launch the toolbar
 
-1. In your PostHog instance, go to '[Launch Toolbar](https://app.posthog.com/toolbar)' in the left-hand menu
+1. In your PostHog instance, go to [Launch Toolbar](https://app.posthog.com/toolbar) in the left-hand menu
 2. Add the URLs you wish to enable the toolbar for. Only you will be able to see it – not your users.
-3. Click Save and then Launch.    
+3. Click **Save** and then **Launch**.    
 4. A new window will open with toolbar on your website. Click on the toolbar to interact with it.
 
 <ProductVideo
     videoLight = {setupLight}
     videoDark = {setupDark}
     alt="How to setup the PostHog toolbar" 
+    classes = {"rounded"}
+/>
+
+## Creating actions using the toolbar
+
+The toolbar enables you to easily create [actions](/docs/data/actions) by clicking elements directly on your website. 
+
+To do this, click on the 🔍 Inspect button on the toolbar. This will add a blue overlay to your website. Then, if you click on an element, you will be shown the option to create an action from it.
+
+<ProductVideo
+    videoLight = {createNewActionLight}
+    videoDark = {createNewActionDark}
+    alt="How to create a new action using the toolbar" 
+    classes = {"rounded"}
+/>
+
+You can also create a more advanced action using the following additional options:
+
+### 1. Add another element
+
+If you want your action to cover more than one element, you can click 'Add another element' right above 'Create Action'. 
+
+This is an `OR` operation, meaning that the action will be recorded if either Element A _or_ Element B are clicked. 
+
+This is useful if you have various buttons that take you to the same page, for instance, and only care that the user clicks one of them. A common use case for this is leveraging the action as a [funnel step](/docs/user-guides/funnels). 
+
+### 2. Element filters
+
+These are used by PostHog to find the specific element you're creating the action for. 
+
+- **Link target:** Where a click on the element leads to (if available).
+
+- **Text:** Inner text of the element (if available).
+
+- **Page URL:** If you have the same element at the same position in various pages (e.g. navbar elements), the default action will capture them all. To prevent this, you can set an exact URL or specify a pattern for pages where this exact action should be recorded.
+
+- **Selector:** Path to the element on the page. If you're not happy with the selector PostHog is using automatically, you could, for example, select elements based on their `id` or `data-attr`. You can type a selector into the "Selector" field in the action creation modal to do this.
+
+<ProductVideo
+    videoLight = {typeItLight}
+    videoDark = {typeItDark}
+    alt="The create action modal showing the selector text box being used to edit the selector" 
+    classes = {"rounded"}
+/>
+
+Or in the same modal, click "Edit the selector" to use our element picker to build the selector you want.
+
+<ProductVideo
+    videoLight = {toolbarSelectEditLight}
+    videoDark = {toolbarSelectEditDark}
+    alt="The selector modal being used to discover the more meaningful selector" 
+    classes = {"rounded"}
+/>
+
+## Viewing your existing actions
+
+You can view your existing actions on your page by clicking the "Actions" button on the Toolbar. 
+
+This will highlight any elements that are associated with an action. 
+
+This is a useful way to check that elements are associated with the correct actions.
+
+By clicking on a specific element, you can update or delete the action.
+
+The number in the green box on the top left of the element is the **action's index** in your list of actions (and **does not** represent how many times that action was triggered). 
+
+The number in the yellow box next to the "Actions" button in the toolbar represents the total number of actions you have created.
+
+<ProductScreenshot
+    imageLight = {toolbarViewActionsLight}
+    imageDark = {toolbarViewActionsDark}
+    alt="Viewing actions in the toolbar]" 
+    classes = {"rounded"}
+/>
+
+## Overide feature flags using the toolbar
+
+The toolbar enables you to test your feature flags. 
+
+You can enable, disable, or override your feature flags, and then view how your website or app changes with the new feature flags values.
+
+To do this, click on the "Feature Flags" button in the toolbar, search for any feature flag, and click on the toggles to change its value. 
+
+Overriding feature flags will only affect *your* browser. 
+
+You may also need to refresh the page to see how your change affect your website. 
+
+It does not affect feature flags evaluation for your backend.
+
+<ProductVideo
+    videoLight = {toolbarFeatureFlagsLight}
+    videoDark = {toolbarFeatureFlagsDark}
+    alt="How to override feature flags using the toolbar" 
     classes = {"rounded"}
 />
 
@@ -44,8 +156,6 @@ if (toolbarJSON) {
     posthog.loadToolbar(JSON.parse(toolbarJSON))
 }
 ```
-
-We are also working on other solutions. Go to [the related issue](https://github.com/PostHog/posthog/issues/9100) to see progress updates (and encourage us to get it done faster!).
 
 ### Toolbar authentication issue (with reverse proxy)
 
