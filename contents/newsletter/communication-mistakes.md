@@ -19,13 +19,13 @@ To address this injustice, we're sharing:
 
 1. The biggest mistakes we see engineers make when communicating.
 
-2. What we do as a [remote](https://newsletter.posthog.com/p/habits-of-effective-remote-teams), [async](https://newsletter.posthog.com/p/how-we-work-asynchronously), [engineering-led](https://newsletter.posthog.com/p/the-magic-of-small-engineering-teams) company to eliminate them.
+2. What we do as a [remote](/newsletter/remote-working), [async](/newsletter/how-we-work-async), [engineering-led](/newsletter/small-teams) company to eliminate them.
 
 ## 1. Forgetting about your users
 
-It’s easy to get caught up in the technical details of a project, such as overcoming constraints, optimizing performance, and following best practices.  
+It's easy to get caught up in the technical details of a project, such as overcoming constraints, optimizing performance, and following best practices.  
 
-But companies don’t succeed based on their ability to solve [technical problems](https://newsletter.posthog.com/p/how-we-choose-technologies). They win when they solve their user’s [most painful and valuable problems](https://newsletter.posthog.com/p/how-to-uncover-your-users-real-problems).  
+But companies don't succeed based on their ability to solve [technical problems](/newsletter/choosing-technologies). They win when they solve their user's [most painful and valuable problems](/newsletter/how-to-uncover-your-users-real-problems).  
 This should be reflected in your communication. At PostHog, our communication connects to users in one of two ways:
 
 1. **It's about a user issue.** Top priorities for us include feature requests from customers, solving confusions about features, or fixing bugs affecting them. These often require coordination and collaboration.  
@@ -47,21 +47,21 @@ In other words, 80% of the communication was about problems customers had, or re
 This user focus does have tradeoffs: we spend less time discussing technical details, figuring out the best way to do things, and collecting input from stakeholders.  
 Instead, we rely on:
 
-- [Hiring great people](https://newsletter.posthog.com/p/hiring-and-managing-cracked-engineers) who can deal with technical problems as they arise.  
+- [Hiring great people](/founders/cracked-manifesto) who can deal with technical problems as they arise.  
 
-- Making ownership clear. It lies with individuals, or at most [a small team](https://newsletter.posthog.com/p/the-magic-of-small-engineering-teams).  
+- Making ownership clear. It lies with individuals, or at most [a small team](/newsletter/small-teams).  
 
 - Focusing on [shipping things](/handbook/engineering/development-process) users will actually see. Outcomes > implementation.
 
 Sometimes this means we aren't shipping a perfectly polished feature right away, but the benefit is we can get to something that users actually care about faster.
 
-> **Try this:** Include a link to the Zendesk issue, customer Slack thread, tweet, or [user interview note](/product-engineers/interview-snapshot-guide) in your next message about development. If you don’t have access to these, the first step is changing that.
+> **Try this:** Include a link to the Zendesk issue, customer Slack thread, tweet, or [user interview note](/product-engineers/interview-snapshot-guide) in your next message about development. If you don't have access to these, the first step is changing that.
 
 ## 2. Hoarding information (aka Squirrel Mode)
 
 People tend to hoard information. They are scared sharing it will make them look silly, or lose the power they think it provides.  
 
-But this attitude kills companies. Knowing things isn’t a super power, sharing what you know is. You’re not a squirrel.  
+But this attitude kills companies. Knowing things isn't a super power, sharing what you know is. You're not a squirrel.  
 
 ![Squirrel mode](https://res.cloudinary.com/dmukukwp6/image/upload/image_1_2594402957.png)  
 
@@ -69,11 +69,11 @@ Hoarding information causes three problems:
 
 1. **It creates unnecessary communication**, like people repeatedly asking about a process or policy. Individuals with knowledge become bottlenecks to progress.  
 
-2. **It generates duplication of effort**. When information isn’t freely available, people end up working on solved problems, or features that already exist.  
+2. **It generates duplication of effort**. When information isn't freely available, people end up working on solved problems, or features that already exist.  
 
 3. **It creates silos and reduces trust**, and a negative feedback loop where sharing information is seen as a sign of weakness, and knowledge is wielded as a weapon.
 
-The solution is to make communication legible: [write it down](https://newsletter.posthog.com/i/143650666/they-write-everything-down) and work in public.
+The solution is to make communication legible: [write it down](/newsletter/remote-working#1-they-write-everything-down) and work in public.
 
 This means avoiding closed door meetings, private Slack conversations, and email threads, whenever possible. Instead, move communication to public channels, have an accessible wiki or [handbook](/handbook), and default to giving everyone access to everything.  
 
@@ -87,13 +87,13 @@ Sharing so much context publicly compounds its impact. It builds trust with cust
 
 We realize external openness doesn't work for everyone, but that doesn't mean you should return to hoarding information. Companies like [Palantir](https://nabeelqu.substack.com/i/150188028/secrets), [Pixar](https://hbr.org/2008/09/how-pixar-fosters-collective-creativity), and [Meta](https://alvinwan.com/why-and-why-not-work-at-meta/) are all secretive externally, but have internal openness. This has helped them build the massively successful companies they are today.
 
-> **Try this:** Write a guide or runbook on an undocumented process you’re responsible for. Refer to it the next time someone asks you about it. We have a ton of public examples of these from [making schema changes safely](/handbook/engineering/databases/schema-changes) to [optimizing queries](/handbook/engineering/databases/query-performance-optimization) to [running growth reviews](/handbook/product/per-product-growth-reviews).
+> **Try this:** Write a guide or runbook on an undocumented process you're responsible for. Refer to it the next time someone asks you about it. We have a ton of public examples of these from [making schema changes safely](/handbook/engineering/databases/schema-changes) to [optimizing queries](/handbook/engineering/databases/query-performance-optimization) to [running growth reviews](/handbook/product/per-product-growth-reviews).
 
 ## 3. Lacking an opinion
 
-Opinions are direction. They are what your product and company become. People who don’t communicate in an opinionated way are easily ignored, and often resent their lack of influence.  
+Opinions are direction. They are what your product and company become. People who don't communicate in an opinionated way are easily ignored, and often resent their lack of influence.  
 
-To avoid this outcome, it’s critical to do the work to actually **form an opinion**. Relying on whatever comes to mind (or whatever ChatGPT tells you) will leave you directionless and undifferentiated.  
+To avoid this outcome, it's critical to do the work to actually **form an opinion**. Relying on whatever comes to mind (or whatever ChatGPT tells you) will leave you directionless and undifferentiated.  
 
 ![Self proclaimed free thinkers](https://res.cloudinary.com/dmukukwp6/image/upload/self_proclaimed_b2e77537be.png)  
 
@@ -104,19 +104,19 @@ When sharing an opinion, ask yourself:
 
 One way I do this is to anticipate what my smartest coworkers (or competitors) might say in opposition to an idea or opinion, and then ensure I back up my points with enough to stand them up. A process sometimes referred to as [steelmanning](https://en.wikipedia.org/wiki/Straw_man#Steelmanning).  
 
-Our [request for comments](https://newsletter.posthog.com/i/151612502/we-make-decisions-asynchronously) (RFC) process exemplifies this approach. When someone creates an RFC, they don't just say there is a problem, they propose a specific solution, take a stand on why it's right, mention alternatives, and invite feedback.  
+Our [request for comments](/newsletter/choosing-technologies#4-we-make-decisions-asynchronously) (RFC) process exemplifies this approach. When someone creates an RFC, they don't just say there is a problem, they propose a specific solution, take a stand on why it's right, mention alternatives, and invite feedback.  
 
-Once you’ve done the work to form an opinion, be confident and direct in sharing it. Don't hedge by saying "this might be a good idea" or "maybe we could do this." Vague, non-committal communication might feel safer, but it rarely leads to action.  
+Once you've done the work to form an opinion, be confident and direct in sharing it. Don't hedge by saying "this might be a good idea" or "maybe we could do this." Vague, non-committal communication might feel safer, but it rarely leads to action.  
 
 Being opinionated (and sharing those opinions clearly) enables us to move faster and more autonomously. Teams don't wait to be assigned tasks or told what to do. They identify problems and go solve them.
 
-> **Remember this:** It’s better to say “I need more time to think about this” than share a vague, uncommitted opinion. We prefer async communication precisely because it gives people the time to digest context and develop informed opinions.
+> **Remember this:** It's better to say “I need more time to think about this” than share a vague, uncommitted opinion. We prefer async communication precisely because it gives people the time to digest context and develop informed opinions.
 
 ## 4. Not including enough context
 
 Low context messages like “this isn't working” or “what do you think of this?” suck. They burden the receiver with figuring out the context, so they can work towards a solution. They sap energy out of others.  
 
-This problem is common in [remote companies](https://newsletter.posthog.com/p/habits-of-effective-remote-teams?utm_source=publication-search), especially ones wedded to old habits formed from working in an office. In remote settings, you can’t see the blank stares and distracted looks of people you’re losing.  
+This problem is common in [remote companies](/newsletter/remote-working), especially ones wedded to old habits formed from working in an office. In remote settings, you can't see the blank stares and distracted looks of people you're losing.  
 
 You need to account for this by including all the context a reader needs to succeed. This usually means sharing:
 
@@ -126,9 +126,9 @@ You need to account for this by including all the context a reader needs to succ
 
 Sharing the context gives the receiver more of the information they need to evaluate the problem as well as a jumping off point for finding a solution.  
 
-Likewise, when asking a question, provide both the question you have **AND** the reason you’re asking. This can save a lot of back and forth, and often leads to a better solution than the one you assumed existed.
+Likewise, when asking a question, provide both the question you have **AND** the reason you're asking. This can save a lot of back and forth, and often leads to a better solution than the one you assumed existed.
 
-> **Remember this:** Put yourself in your recipient’s shoes. Would you be able to accomplish what you want them to given the context you provide?
+> **Remember this:** Put yourself in your recipient's shoes. Would you be able to accomplish what you want them to given the context you provide?
 
 ---
 
@@ -153,13 +153,13 @@ Our rituals include:
 
 4. **Request for comments.** This is how we coordinate large, cross-team decisions async. [An RFC](/handbook/company/communication#requests-for-comment-rfcs) shares a problem, a potential solution, and gathers feedback. Team members share opinions and feedback, then the owner makes a decision.  
 
-5. **Quarterly planning.** Teams reflect before the meeting using our version of SWOT named [HOGS](/handbook/company/goal-setting) (Hopes, Obstructions, Growth Opportunity, Sneak Attack). We take an hour to brainstorm goals. These are focused on what we will ship over with owners, what we’ll ship, and successful metrics.
+5. **Quarterly planning.** Teams reflect before the meeting using our version of SWOT named [HOGS](/handbook/company/goal-setting) (Hopes, Obstructions, Growth Opportunity, Sneak Attack). We take an hour to brainstorm goals. These are focused on what we will ship over with owners, what we'll ship, and successful metrics.
 
 Rituals aren't unique to PostHog. Zapier requires [Friday Updates](https://zapier.com/blog/friday-updates-at-work/) from everyone on their internal blog. [Basecamp](https://github.com/basecamp/handbook/blob/master/how-we-work.md) has daily and weekly check-ins as well as kickoffs and heartbeats. [Linear](https://linear.app/method/introduction) works in two-week cycles, writes project specs, and keeps an updated changelog.  
 
 All rituals, including ours, are downstream from the culture you want to create. For us, that means they are as async as possible and involve as few meetings as possible. This ensures that we have enough time to work on what's important.
 
-> **Try this:** Write down the rituals you’re a part of and reflect on their purpose. Do they overlap? Are they all necessary? Would they benefit from a bit more structure?
+> **Try this:** Write down the rituals you're a part of and reflect on their purpose. Do they overlap? Are they all necessary? Would they benefit from a bit more structure?
 
 ## 6. Not making communication actionable
 
@@ -181,7 +181,7 @@ A piece of communication that best represents this action-orientation is our tea
 
 ![James axe](https://res.cloudinary.com/dmukukwp6/image/upload/james_f703debec3.jpg)  
 
-This is direct, gives only the important context, and provides clear owners and next steps. This helps everyone get back to what’s important: shipping.  
+This is direct, gives only the important context, and provides clear owners and next steps. This helps everyone get back to what's important: shipping.  
 
 ## What happens when you avoid these mistakes?
 
