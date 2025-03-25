@@ -38,7 +38,6 @@ import {
     IconGraph,
     IconPeople,
     IconPerson,
-    IconPlus,
     IconRevert,
     IconRewindPlay,
     IconServer,
@@ -63,6 +62,8 @@ import ReactFlow, {
 } from 'reactflow'
 import 'reactflow/dist/style.css'
 import Profile from '../../Team/Profile'
+import APIExamples from './APIExamples'
+import Configuration from './Configuration'
 
 const team = 'CDP'
 const teamSlug = '/teams/cdp'
@@ -442,9 +443,14 @@ const CDPFlowChart = () => {
     )
 }
 
+export const getIconUrl = (iconUrl) => {
+    return iconUrl?.startsWith('http') ? iconUrl : `https://app.posthog.com${iconUrl}`
+}
+
 function PipelinesPage({ location }) {
     const {
         destinations: { nodes },
+        transformations: { nodes: transformations },
     } = useStaticQuery(query)
 
     const [searchValue, setSearchValue] = React.useState('')
@@ -455,6 +461,7 @@ function PipelinesPage({ location }) {
     const pipelines = {
         Sources: sources,
         Destinations: nodes,
+        Transformations: transformations,
     }
 
     const nodesByCategory = useMemo(() => {
@@ -496,7 +503,7 @@ function PipelinesPage({ location }) {
                             <div className="size-7 flex-shrink-0">
                                 <img
                                     className="w-full"
-                                    src={`https://app.posthog.com/${selectedDestination.icon_url}`}
+                                    src={getIconUrl(selectedDestination.icon_url)}
                                     alt={selectedDestination.name}
                                 />
                             </div>
@@ -515,21 +522,45 @@ function PipelinesPage({ location }) {
                 }
                 open={modalOpen}
                 setOpen={setModalOpen}
-                className="max-w-screen-md"
+                className="max-w-screen-md w-full"
             >
                 {selectedDestination && (
                     <>
                         <div className="article-content">
-                            <MDXProvider
-                                components={{
-                                    HideOnCDPIndex: () => null,
-                                }}
-                            >
-                                <MDXRenderer>{selectedDestination.mdx.body}</MDXRenderer>
-                            </MDXProvider>
+                            {selectedDestination.mdx ? (
+                                <MDXProvider
+                                    components={{
+                                        HideOnCDPIndex: () => null,
+                                    }}
+                                >
+                                    <MDXRenderer>{selectedDestination.mdx.body}</MDXRenderer>
+                                </MDXProvider>
+                            ) : (
+                                <p>{selectedDestination.description}</p>
+                            )}
+                            {selectedDestination.inputs_schema?.length > 0 && (
+                                <>
+                                    <h2 className="!mt-2">Configuration</h2>
+                                    <Configuration inputs_schema={selectedDestination.inputs_schema} />
+                                </>
+                            )}
+                            <APIExamples
+                                name={selectedDestination.name}
+                                inputs_schema={selectedDestination.inputs_schema}
+                                id={selectedDestination.id}
+                                type={selectedDestination.type}
+                                initialOpen={selectedDestination.inputs_schema?.length <= 0}
+                            />
                         </div>
-                        <div className="border-t border-border dark:border-dark pt-4 mt-4">
-                            <CallToAction to={selectedDestination.mdx.fields.slug} type="secondary">
+
+                        <div className="border-t border-border dark:border-dark pt-4">
+                            <CallToAction
+                                to={
+                                    selectedDestination.mdx?.fields?.slug ||
+                                    `/docs/cdp/${selectedDestination.type}s/${selectedDestination.slug}`
+                                }
+                                type="secondary"
+                            >
                                 Learn more in docs
                             </CallToAction>
                         </div>
@@ -597,7 +628,7 @@ function PipelinesPage({ location }) {
 
             <div id="library" className="@container max-w-screen-2xl px-5 mx-auto grid md:grid-cols-4 pt-12 relative">
                 <div className="md:col-span-4 md:mb-4">
-                    <h2 className="text-center text-2xl lg:text-4xl">Sources &amp; destinations library</h2>
+                    <h2 className="text-center text-2xl lg:text-4xl">Sources, destinations, and transformations</h2>
 
                     <div className="md:max-w-lg mx-auto mb-5 rounded-md border border-border dark:border-dark py-3 px-4 bg-white dark:bg-accent-dark flex space-x-1.5">
                         <IconSearch className="w-5 opacity-60" />
@@ -605,14 +636,14 @@ function PipelinesPage({ location }) {
                             value={searchValue}
                             onChange={(e) => setSearchValue(e.target.value)}
                             className="bg-transparent w-full border-none outline-none"
-                            placeholder="Search sources & destinations"
+                            placeholder="Search sources, destinations, and transformations"
                         />
                     </div>
                 </div>
                 <aside className="md:col-span-1 md:sticky top-[120px] self-start">
                     <Category
                         active={selectedType === 'All' && selectedCategory === 'All'}
-                        value="All sources & destinations"
+                        value="All integrations"
                         onClick={() => {
                             setSelectedType('All')
                             setSelectedCategory('All')
@@ -624,7 +655,12 @@ function PipelinesPage({ location }) {
                             return (
                                 <Categories
                                     key={type}
-                                    categories={[...new Set(values.flatMap((value) => value.category))].sort()}
+                                    categories={
+                                        // Transforms only have a couple of categories so we don't need to show them
+                                        type === 'Transformations'
+                                            ? []
+                                            : [...new Set(values.flatMap((value) => value.category))].sort()
+                                    }
                                     selectedCategory={selectedCategory}
                                     selectedType={selectedType}
                                     onClick={(value) => {
@@ -657,11 +693,12 @@ function PipelinesPage({ location }) {
                                 .sort((a, b) => a.name.localeCompare(b.name))
                                 .map((destination) => {
                                     const { id, name, description, icon_url } = destination
-                                    const Container = destination.mdx ? 'button' : 'div'
+                                    const hasDocs = destination.mdx || destination.inputs_schema
+                                    const Container = hasDocs ? 'button' : 'div'
                                     return (
                                         <li key={id}>
                                             <Container
-                                                {...(destination.mdx
+                                                {...(hasDocs
                                                     ? {
                                                           onClick: () => {
                                                               setSelectedDestination(destination)
@@ -670,7 +707,7 @@ function PipelinesPage({ location }) {
                                                       }
                                                     : {})}
                                                 className={`flex items-start text-left size-full border border-light dark:border-dark rounded-md bg-white dark:bg-accent-dark p-4 relative border-b-3 ${
-                                                    destination.mdx
+                                                    hasDocs
                                                         ? 'click hover:top-[-1px] active:top-[1px] transition-all duration-75'
                                                         : ''
                                                 }`}
@@ -680,7 +717,7 @@ function PipelinesPage({ location }) {
                                                         <div className="size-7 flex-shrink-0">
                                                             <img
                                                                 className="w-full"
-                                                                src={`https://app.posthog.com${icon_url}`}
+                                                                src={getIconUrl(icon_url)}
                                                                 alt={name}
                                                             />
                                                         </div>
@@ -776,13 +813,15 @@ function PipelinesPage({ location }) {
 
 const query = graphql`
     query {
-        destinations: allPostHogDestination {
+        destinations: allPostHogPipeline(filter: { type: { eq: "destination" } }) {
             nodes {
                 id
+                slug
                 name
                 category
                 description
                 icon_url
+                type
                 mdx {
                     body
                     fields {
@@ -794,6 +833,30 @@ const query = graphql`
                     type
                     label
                     secret
+                    required
+                    description
+                }
+            }
+        }
+        transformations: allPostHogPipeline(filter: { type: { eq: "transformation" } }) {
+            nodes {
+                id
+                slug
+                name
+                category
+                description
+                icon_url
+                type
+                mdx {
+                    body
+                    fields {
+                        slug
+                    }
+                }
+                inputs_schema {
+                    key
+                    type
+                    label
                     required
                     description
                 }
