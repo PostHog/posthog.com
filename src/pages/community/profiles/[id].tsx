@@ -145,7 +145,7 @@ const Points = () => {
                 </div>
                 <p className="text-sm text-primary/70 dark:text-primary-dark/70 m-0">
                     Earn points by contributing to discussions, helping others, and achieving milestones in the PostHog
-                    community. <Link to="/community">Redeem your points</Link> for merch and other cool stuff.
+                    community.
                 </p>
                 {user?.wallet?.transactions && user?.wallet?.transactions?.length > 0 && (
                     <div className="mt-4 pt-4 border-t border-light dark:border-dark">
@@ -374,28 +374,12 @@ export default function ProfilePage({ params, location }: PageProps) {
                                             className={`px-3 pb-2 text-base font-semibold border-b-2 relative top-px ${
                                                 view !== 'user-posts'
                                                     ? 'border-transparent hover:border-light dark:hover:border-dark text-primary/50 hover:text-primary/75 dark:text-primary-dark/50 dark:hover:text-primary-dark/75 transition-opacity'
-                                                    : 'border-red pr-12'
+                                                    : 'border-red'
                                             } p-4 transition-opacity`}
                                             onClick={() => setView('user-posts')}
                                         >
                                             Posts
                                         </button>
-                                        <AnimatePresence>
-                                            {view === 'user-posts' && (
-                                                <motion.div
-                                                    initial={{ opacity: 0, translateY: '100%' }}
-                                                    animate={{ opacity: 1, translateY: 0 }}
-                                                    exit={{ opacity: 0, transition: { duration: 0.2 } }}
-                                                    className={`relative -left-12 top-1 z-[50]`}
-                                                >
-                                                    <SortDropdown
-                                                        sort={sort}
-                                                        setSort={setSort}
-                                                        className="hover:!border-transparent hover:!bg-transparent"
-                                                    />
-                                                </motion.div>
-                                            )}
-                                        </AnimatePresence>
                                     </div>
                                     {user?.profile?.id === id && (
                                         <button
