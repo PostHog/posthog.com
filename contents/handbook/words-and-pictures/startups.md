@@ -49,10 +49,10 @@ Teams in the startup plan can use their credit for any PostHog product or add-on
 
 Unused credits do not carry over past 12 months and can not be converted into cash or other rewards. If credits are used up then the team will automatically trigger email warnings and move to a standard, paid plan. 
 
-### DigitalOcean partnership
-We maintain a partnership with DigitalOcean via [their Hatch program](https://www.digitalocean.com/hatch) which enables teams in PostHog for Startups to claim an $25,000 of infrastructure credit. To claim this credit, teams must apply to the Hatch program after they've been accepted into PostHog for Startups and cite PostHog as their partner during the application process. 
+### Mintlify partnership
+We maintain a partnership with Mintlify to help our users build better documentation. Once a team is accepted into PostHog for Startups we'll automatically send them the voucher code they need in their welcome email. The code gives them 50% for six months. 
 
-Occasionally we receive questions from users about delays processing their Hatch application. We have no visibility or control over DigitalOcean's program (and they have none over ours), but we have [a shared Slack channel](https://posthog.slack.com/archives/C06P34GEXGV) for raising questions if needed. 
+If users have issues with the code, or accessing the benefit, we'll raise this directly with Mintlify's Product Marketing team. 
 
 ### Program extensions
 Extensions aren’t something we usually do because we set the initial terms to keep things fair and consistent for everyone. We recommend using your credits within the deal period to make the most of the program. If you’ve had some unusual circumstances, we’re open to hearing about them. Please make sure your request clearly explains why you couldn’t use the credits as planned and shows recent growth or a change in direction that makes the extension necessary. Our Customer Success team reviews each request on a case-by-case basis.
