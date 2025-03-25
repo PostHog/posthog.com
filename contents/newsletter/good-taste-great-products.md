@@ -198,7 +198,7 @@ In the end, people embrace and elevate the products that make them feel good. Th
 
  _Words by Danilo Campos, who is building [a hardware terminal for PostHog](https://x.com/posthog/status/1890442157883871282) just for the fun of it._
 
-* * *
+<NewsletterForm />
 
 ## 💡 Good reads for people with impeccable taste
 
