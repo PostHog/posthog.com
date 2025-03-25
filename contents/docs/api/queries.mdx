@@ -1,0 +1,263 @@
+---
+title: API queries
+sidebarTitle: Overview
+sidebar: Docs
+showTitle: true
+---
+API queries enable you to query your data in PostHog. This is useful for:
+
+- Building user or [customer-facing analytics](/tutorials/customer-facing-analytics). 
+- Pulling aggregated PostHog data into your own or other apps.
+
+> **When should you _not_ use API queries?**
+> 1. When you want to export large amounts of data. Use [batch exports](/docs/cdp/batch-exports) instead.
+> 2. When you want to send data to destinations like Slack or webhooks immediately. Use [real-time destinations](/docs/cdp/destinations) instead.
+
+## Prerequisites
+
+Using API queries requires:
+
+1. A PostHog project and its project ID which you can get from [your project settings](https://us.posthog.com/settings/project#variables).
+2. A personal API key for your project with the **Query Read** permission. You can create this in [your user settings](https://us.posthog.com/settings/user-api-keys#personal-api-keys).
+
+## Creating a query
+
+To create a query, you make a `POST` request to the `/api/projects/:project_id/query/` endpoint. The body of the request should be a JSON object with a `query` property with a `kind` and `query` property. 
+
+For example, to create a query that gets events where the `$current_url` contains blog, you use `kind: HogQLQuery` and SQL like:
+
+<MultiLanguage>
+
+
+```bash
+curl \
+  -H 'Content-Type: application/json' \
+  -H "Authorization: Bearer $POSTHOG_PERSONAL_API_KEY" \
+  <ph_app_host>/api/projects/:project_id/query/ \
+  -d '{
+        "query": {
+          "kind": "HogQLQuery",
+          "query": "select properties.$current_url from events where properties.$current_url like '\''%/blog%'\'' limit 100"
+        }
+      }'
+```
+
+```python
+import requests
+import json
+
+url = "<ph_app_host>/api/projects/{project_id}/query/"
+headers = {
+    'Content-Type': 'application/json',
+    'Authorization': 'Bearer {POSTHOG_PERSONAL_API_KEY}'
+}
+payload = {
+    "query": {
+        "kind": "HogQLQuery",
+        "query": "select properties.$current_url from events where properties.$current_url like '%/blog%' limit 100"
+    }
+}
+response = requests.post(url, headers=headers, data=json.dumps(payload))
+print(response.json())
+```
+
+```node
+import fetch from "node-fetch";
+
+async function createQuery() {
+  const url = "<ph_app_host>/api/projects/:project_id/query/";
+  const headers = {
+    "Content-Type": "application/json",
+    "Authorization": "Bearer {POSTHOG_PERSONAL_API_KEY}"
+  };
+
+  const payload = {
+    "query": {
+      "kind": "HogQLQuery",
+      "query": "select properties.$current_url from events where properties.$current_url like '%/blog%' limit 100"
+    }
+  }
+
+  const response = await fetch(url, {
+    method: "POST",
+    headers: headers,
+    body: JSON.stringify(payload),
+  });
+
+  const data = await response.json();
+  console.log(data);
+}
+
+createQuery()
+```
+
+</MultiLanguage>
+
+This is also useful for querying non-event data like persons, data warehouse, session replay metadata, and more. For example, to get a list of all people with the `email` property:
+
+<MultiLanguage>
+
+```bash
+curl \
+  -H 'Content-Type: application/json' \
+  -H "Authorization: Bearer $POSTHOG_PERSONAL_API_KEY" \
+  <ph_app_host>/api/projects/:project_id/query/ \
+  -d '{
+        "query": {
+          "kind": "HogQLQuery",
+          "query": "select properties.email from persons where properties.email is not null"
+        }
+      }'
+```
+
+```python
+import requests
+import json
+
+url = "<ph_app_host>/api/projects/{project_id}/query/"
+headers = {
+    'Content-Type': 'application/json',
+    'Authorization': 'Bearer {POSTHOG_PERSONAL_API_KEY}'
+}
+payload = {
+    "query": {
+        "kind": "HogQLQuery",
+        "query": "select properties.email from persons where properties.email is not null"
+    }
+}
+response = requests.post(url, headers=headers, data=json.dumps(payload))
+print(response.json())
+```
+
+```node
+import fetch from "node-fetch";
+
+async function createQuery() {
+  const url = "<ph_app_host>/api/projects/:project_id/query/";
+  const headers = {
+    "Content-Type": "application/json",
+    "Authorization": "Bearer {POSTHOG_PERSONAL_API_KEY}"
+  };
+
+  const payload = {
+    "query": {
+      "kind": "HogQLQuery",
+      "query": "select properties.email from persons where properties.email is not null"
+    }
+  }
+
+  const response = await fetch(url, {
+    method: "POST",
+    headers: headers,
+    body: JSON.stringify(payload),
+  });
+
+  const data = await response.json();
+  console.log(data);
+}
+
+createQuery()
+```
+
+</MultiLanguage>
+
+## Query parameters
+
+Top level request parameters include:
+
+- `query` (required): Specifies what data to retrieve. This must include a `kind` property that defines the query type.
+- `client_query_id` (optional): A client-provided identifier for tracking the query.
+- `refresh` (optional): Controls caching behavior and execution mode (sync vs async).
+- `filters_override` (optional): Dashboard-specific filters to apply.
+- `variables_override` (optional): Variable overrides for queries that support variables.
+- `name` (optional): A name for the query to better identify it in the `query_log` table.
+
+> **Tip:** You can see the details on the queries you run by querying the `query_log` table.
+
+### Caching and execution modes
+
+The `refresh` parameter controls the execution mode of the query. It can be one of the following values:
+
+- `blocking` (default): Executes synchronously unless fresh results exist in cache
+- `async`: Executes asynchronously unless fresh results exist in cache
+- `force_blocking`: Always executes synchronously
+- `force_async`: Always executes asynchronously
+- `force_cache`: Only returns cached results (never calculates)
+- `lazy_async`: Use extended cache period before asynchronous calculation
+- `async_except_on_cache_miss`: Use cache but execute synchronously on cache miss
+
+> **Tip:** To cancel a running query, send a `DELETE` request to the `/api/projects/:project_id/query/:query_id/` endpoint.
+
+### Query types
+
+The `kind` property in the `query` parameter can be one of the following values. 
+
+- `HogQLQuery`: Queries using [PostHog's version of SQL](/docs/sql).
+- `EventsQuery`: Raw event data retrieval
+- `TrendsQuery`: Time-series trend analysis
+- `FunnelsQuery`: Conversion funnel analysis
+- `RetentionQuery`: User retention analysis
+- `PathsQuery`: User journey path analysis
+
+Beyond `HogQLQuery`, these are mostly used to power PostHog internally and are not useful for you, but you can see the [frontend query schema](https://github.com/PostHog/posthog/blob/master/frontend/src/queries/schema/schema-general.ts) for a complete list and more details.
+
+## Response structure
+
+The response format depends on the query type, but all responses include:
+
+- `results`: The data returned by the query
+- `is_cached` (for cached responses): Indicates the result came from cache
+- `timings` (when available): Performance metrics for the query execution
+
+### Cached responses
+
+API queries are cached by default. You can check if a response is cached by checking the `is_cached` property. Responses also contain cache-related details like:
+
+- `cache_key`: A unique identifier for the cached result
+- `cache_target_age`: The timestamp until which the cached result is considered valid
+- `last_refresh`: When the data was last computed
+- `next_allowed_client_refresh`: The earliest time when a client can request a fresh calculation
+
+### Asynchronous queries
+
+For asynchronous queries (like ones with `refresh: async`), the initial response includes a query status with its completion status, query ID, start time, and more:
+
+```json
+{
+  "query_status": {
+    "id": "2fbd4b19413342a4ad08c307155187bc",
+    "team_id": 123,
+    "complete": false
+  }
+}
+```
+
+You can then poll the status by sending a `GET` request to the `/api/projects/:project_id/query/:query_id/` endpoint.
+
+```bash
+curl \
+  -H "Authorization: Bearer $POSTHOG_PERSONAL_API_KEY" \
+  <ph_app_host>/api/projects/:project_id/query/$QUERY_ID/
+```
+
+## Rate limits
+
+API queries on our free plans are limited to:
+
+- 1 queries running concurrently
+- 10,000 rows
+- 120 requests per hour
+
+Our ridiculously cheap plan lifts this to:
+
+- 5 queries running concurrently
+
+If you need higher limits than these, [get in touch with our sales team](/talk-to-a-human). We promise they're friendly and technical enough to know what an API is.
+
+## Further reading
+
+- [How to set up customer-facing analytics with PostHog, Next.js, and Tremor](/tutorials/customer-facing-analytics)
+- [How to use Recharts to visualize analytics data (with examples)](/tutorials/recharts)
+- [How Mintlify launched user-facing analytics, powered by PostHog](/customers/mintlify)
+- [The query endpoint API reference](/docs/api/query/)
+- [The query API endpoint code on GitHub](https://github.com/PostHog/posthog/blob/master/posthog/api/query.py)

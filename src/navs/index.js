@@ -2092,8 +2092,8 @@ export const docsMenu = {
                             url: '/docs/api/decide',
                         },
                         {
-                            name: 'Query',
-                            url: '/docs/api/query',
+                            name: 'Queries',
+                            url: '/docs/api/queries',
                         },
                         {
                             name: 'More endpoints',
@@ -2189,6 +2189,10 @@ export const docsMenu = {
                         {
                             name: 'Property definitions',
                             url: '/docs/api/property-definitions',
+                        },
+                        {
+                            name: 'Query',
+                            url: '/docs/api/query',
                         },
                         {
                             name: 'Roles',
