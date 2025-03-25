@@ -105,7 +105,7 @@ function App() {
 
     useEffect(() => {
         if (user) {
-            // Identify sends an event, so you want may want to limit how often you call it
+            // Identify sends an event, so you may want to limit how often you call it
             posthog?.identify(user.id, {
                 email: user.email,
             })

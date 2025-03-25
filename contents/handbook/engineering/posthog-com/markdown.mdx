@@ -4,33 +4,42 @@ title: MDX components
 
 There are some nifty MDX components available for use in Markdown content. Because these components are included globally, you don't need to do anything special to use them (like renaming `.md` to `.mdx` or manually importing them at the top of the file).
 
-## Product screenshots
+## Images
 
-The `<ProductScreenshot />` component encapsulates an image with a border and background. It's useful since the app's background matches the website background, and without using this component, it can be hard to differentiate between the screenshot and normal page content. ([See an example](/docs/session-replay/how-to-control-which-sessions-you-record) of this component in action.)
+### Product screenshot
 
-It supports dark mode screenshots (optional). Here's how to use it:
+The `<ProductScreenshot />` component encapsulates an image with a border and background. It's useful since the app's background matches the website background, and without using this component, it can be hard to differentiate between the screenshot and normal page content. It also optionally supports dark mode screenshots.
 
-1. Import the image(s) at the top of the post (directly following the MDX file's frontmatter and dashes):
+You use it by passing image URLs to the `imageLight` and `imageDark` props like this:
 
-  ```
-  ---
-export const ImgSampleConfigLight = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/handbook/images/tutorials/limit-session-recordings/sampling-config-light.png"
-export const ImgSampleConfigDark = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/handbook/images/tutorials/limit-session-recordings/sampling-config-dark.png"
-  ```
-1. Use the component wherever you want the image to appear.
+```
+<ProductScreenshot
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/handbook/images/tutorials/limit-session-recordings/sampling-config-light.png" 
+  imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/handbook/images/tutorials/limit-session-recordings/sampling-config-dark.png" 
+  alt="Sampling config shown set to 100% i.e. no sampling" 
+  classes="rounded"
+/>
+```
 
-  ```
-  <ProductScreenshot
-    imageLight={ImgSampleConfigLight} 
-    imageDark={ImgSampleConfigDark} 
-    alt="Sampling config shown set to 100% i.e. no sampling" 
-    classes="rounded"
-  />
-  ```
+Optionally pass `zoom={false}` if you don't want the image to be zoomable, otherwise it will be zoomable by default.
 
-  Optionally pass `zoom={false}` if you don't want the image to be zoomable, otherwise it will be zoomable by default.
+_Note: If you don't have a dark image, just leave out the `imageDark` prop and the light screenshot will be used for both color modes._
 
-  _Note: If you don't have a dark image, just leave out the `imageDark` prop and the light screenshot will be used for both color modes._
+### Image slider
+
+You can create a slider or carousel of images by wrapping them in the `<ImageSlider>` component like this:
+
+```
+<ImageSlider>
+
+![posthog](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/screenshots/hogflix-dashboard.png)
+
+![posthog](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/screenshots/hogflix-dashboard.png)
+
+</ImageSlider>
+```
+
+See an example in our [open-source analytics tools post](/blog/best-open-source-analytics-tools#1-posthog).
 
 ## Product videos
 

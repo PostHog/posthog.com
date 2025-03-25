@@ -310,6 +310,7 @@
         { "source": "/benjamincode", "destination": "/?utm_source=benjamincode&utm_campaign=benjamincode" },
         { "source": "/travismedia", "destination": "/?utm_source=travismedia&utm_campaign=travismedia" },
         { "source": "/viktor", "destination": "/?utm_source=viktor&utm_campaign=viktor" },
+        { "source": "/starterstory", "destination": "/?utm_source=starterstory&utm_campaign=starterstory" },
         { "source": "/docs/self-host/migrate-to-cloud", "destination": "/docs/migrate/migrate-to-cloud" },
         { "source": "/tutorials/categories/plugins", "destination": "/tutorials/categories/apps" },
         { "source": "/trial", "destination": "/pricing" },
@@ -1366,6 +1367,17 @@
             "source": "/community/profiles/59",
             "destination": "/community/profiles/29070"
         },
+        { "source": "/docs/cdp/geoip-enrichment", "destination": "/docs/cdp/transformations/posthog-plugin-geoip" },
+        { "source": "/docs/cdp/timestamp-parser", "destination": "/docs/cdp/transformations/timestamp-parser-plugin" },
+        {
+            "source": "/docs/cdp/url-normalizer",
+            "destination": "/docs/cdp/transformations/posthog-url-normalizer-plugin"
+        },
+        { "source": "/docs/cdp/user-agent-populator", "destination": "/docs/cdp/transformations/user-agent-plugin" },
+        { "source": "/docs/cdp/property-filter", "destination": "/docs/cdp/transformations/property-filter-plugin" },
+        { "source": "/docs/cdp/taxonomy-standardizer", "destination": "/docs/cdp/transformations/taxonomy-plugin" },
+        { "source": "/docs/cdp/downsampling", "destination": "/docs/cdp/transformations/downsampling-plugin" },
+        { "source": "/docs/cdp/filter-out", "destination": "/docs/cdp/transformations/posthog-filter-out-plugin" },
         {
             "source": "/startups-alif",
             "destination": "/startups"
