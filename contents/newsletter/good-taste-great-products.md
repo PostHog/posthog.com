@@ -11,6 +11,7 @@ tags:
   - Product
 crosspost:
   - Product engineers
+  - Blog
 ---
 
 When we talk about how to be a good [product engineer](/blog/what-is-a-product-engineer), we often focus on how you need to ship fast, be customer obsessed, and [take extreme ownership of ideas](/founders/cracked-manifesto). 
