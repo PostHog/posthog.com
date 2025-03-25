@@ -46,10 +46,10 @@ const Teams: React.FC = () => {
                     <SidebarSection title="From the desk of...">
                         <div className="-mx-4 pt-1">
                             <Contributor
-                                url={james.squeakId && `/community/profiles/${james.squeakId}`}
-                                image={james.avatar?.url}
-                                name={`${james.firstName} ${james.lastName}`}
-                                role={james.companyRole}
+                                url={james?.squeakId && `/community/profiles/${james?.squeakId}`}
+                                image={james?.avatar?.url}
+                                name={`${james?.firstName} ${james?.lastName}`}
+                                role={james?.companyRole}
                                 text
                             />
                         </div>
