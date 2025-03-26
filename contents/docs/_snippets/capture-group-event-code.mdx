@@ -9,8 +9,9 @@
 posthog.group('company', 'company_id_in_your_db');
 posthog.capture('user_signed_up'); // This event is associated with the company above
 
-// If the group type is already created, you can simply set the
-// `$groups` property in `capture()` for subsequent sessions.
+// If the group type is already created, you can also manually add
+// the `$groups` property to any event you want to associate with
+// the group.
 posthog.capture('user_signed_up', {
     '$groups': {
         'company': 'company_id_in_your_db'
@@ -99,8 +100,9 @@ PostHog::capture(array(
 PostHogSDK.shared.group(type: "company", key: "company_id_in_your_db")
 PostHogSDK.shared.capture("user_signed_up") // This event is associated with the company above
 
-// If the group type is already created, you can simply set the
-// `$groups` property in `capture()` for subsequent sessions.
+// If the group type is already created, you can also manually add
+// the `$groups` property to any event you want to associate with
+// the group.
 PostHogSDK.shared.capture(
     event: "user_signed_up",
     properties: [
@@ -120,8 +122,9 @@ PostHogSDK.shared.capture(
 PostHog.group(type = "company", key = "company_id_in_your_db")
 PostHog.capture("user_signed_up") // This event is associated with the company above
 
-// If the group type is already created, you can simply set the
-// `$groups` property in `capture()` for subsequent sessions.
+// If the group type is already created, you can also manually add
+// the `$groups` property to any event you want to associate with
+// the group.
 PostHog.capture(
     event = "user_signed_up",
     properties = mapOf(
