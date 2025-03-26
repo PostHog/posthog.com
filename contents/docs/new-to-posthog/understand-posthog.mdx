@@ -1,30 +1,60 @@
 ---
-title: Understanding PostHog
+title: Your data in PostHog
 ---
 
 import { CalloutBox } from 'components/Docs/CalloutBox'
 
-PostHog is a lot of power, so to get the most from it, we should review how data is structured, grouped, and related.
+To get the most from PostHog, it helps to build a picture of how your data in PostHog is structured, grouped, and related.
 
-### Events
+## Events
 
-PostHog's data model starts with **[events](/docs/data/events)**, single actions that a user triggered at a specific point in time. These are sent either from one of our [SDKs](/docs/libraries) or directly via our [API](/docs/api).
+Our data model starts with **[events](/docs/data/events)**, single actions triggered at a specific point in time. 
 
-Events are flexible: they can be captured automatically via [autocapture](/docs/product-analytics/autocapture), or you can capture your own [custom events](/docs/getting-started/send-events) and attach additional metadata via [properties](/docs/data/events#event-properties).
+These are sent either from one of our [SDKs](/docs/libraries), or directly via our [API](/docs/api).
 
-You might create an event to represent purchasing an upgrade, with custom properties like `price` or `renewal_period`.
+Events are flexible: they can be captured automatically via [autocapture](/docs/product-analytics/autocapture), or you can capture your own [custom events](/docs/getting-started/send-events), and attach additional metadata via [properties](/docs/data/events#event-properties).
 
-### Actions
+## Properties
 
-[Actions](/docs/data/actions) are a layer on top of events. Define actions to aggregate multiple events, extract a specific kind of event according to its properties, or give an event a more useful name.
+Properties are metadata that you can attach to many types of data in PostHog. 
 
-### Sessions
+You might, for example, [create a custom event](/docs/getting-started/send-events#2-capture-custom-events) to represent purchasing an upgrade with custom properties like `price` or `renewal_period`.
 
-A [session](/docs/data/sessions) is a collection of events corresponding to a specific usage session of a product. Sessions have properties, and you can query them.
+You could then break down your `upgrade_purchased` event by those properties.
 
-### Person profiles
+We also automatically apply some properties to events, such as:
 
-Meanwhile, users of your product are given a **[person profile](/docs/data/persons)**, which gather these events. Person profiles similarly contain properties. Some are set automatically:
+- the `Browser` used to trigger an event.
+- the `Current URL` where an event occured.
+- or the `Device Type` used.
+
+## Sessions
+
+A [session](/docs/data/sessions) is a collection of events corresponding to a specific usage session of your product or website.
+
+One unique user can have multiple sessions, and each session will contain numerous individual events.
+
+Sessions can also have properties, such as `Session duration`, `Entry URL`, and `Pageview count`, which you can query.
+
+## Actions
+
+Actions are a layer on top of events.
+
+They let you combine several events and treat them as if they're a single event, which you can then analyze in insights and dashboards.
+
+Unlike events, which are captured via code in your product, actions are created within PostHog via the [data management tab](/docs/data), or by [using the toolbar](/docs/toolbar/create-toolbar-actions) on your website or app.
+
+You might create an action to combine a number of events that lead to the same outcome – e.g. all the buttons on your homepage that lead to the pricing page.
+
+Actions are also useful for [renaming events](/tutorials/how-to-rename-events) and giving them a more memorable name.
+
+Unlike events or sessions, actions do not have properties attached to them, though you can filter actions using properties attached to events, sessions, and other types of data in PostHog.
+
+## Person profiles
+
+Users of your product are given a **[person profile](/docs/data/persons)**, which associates all their events, sessions, and actions to them. 
+
+Person profiles similarly contain properties. Some are set automatically, such as:
 
 - Browser details
 - Geo IP data
@@ -35,7 +65,9 @@ You can also set your own properties on person profiles, which will appear in re
 
 If a user upgrades to a paid tier, for example, you could set a property called `paid_tier` with the details.
 
-Person profiles need [distinct identifiers](/docs/getting-started/identify-users), so PostHog can accurately track behavior. You might see a few identifiers on each profile: anonymous IDs created before a user has been identified, an ID you set after they log in, and IDs that are created on the client and backend, later merged together into a single profile.
+Person profiles need [distinct identifiers](/docs/getting-started/identify-users), so PostHog can accurately track behavior. 
+
+You might see a few identifiers on each profile: anonymous IDs created before a user has been identified, an ID you set after they log in, and IDs that are created on the client and backend, later merged together into a single profile.
 
 <CalloutBox icon="IconBook" title="Further reading" type="tip">
 
@@ -44,21 +76,36 @@ Person profiles need [distinct identifiers](/docs/getting-started/identify-users
 
 </CalloutBox>
 
-### Displaying and organizing data
+## Cohorts and groups
 
-To make sense of the many events and person profiles flowing through your product, use:
+There are two ways to analyze groups of users in PostHog:
 
-**[Insights](/docs/product-analytics/insights)** to create charts, tables and more that summarize your data.
+- Cohorts – Dynamic or static lists of users based on shared properties
+- Groups – An aggregate of events captured from a group of users (e.g. a company)
 
-**[Dashboards](/docs/product-analytics/dashboards)** to assemble insights into a cohesive, customizable view.
+### Cohorts
 
-**[Notebooks](/docs/notebooks)** to contextualize insights and share analysis with your teammates.
+[Cohorts](/docs/data/cohorts) enable you to easily create a list of users who have something in common, such as completing an action or having the same property.
 
-### Discovering activity with cohorts and groups
+For example, if you want to see a list of every user in your paid tier, you could query for all profiles where that `paid_tier` property has been set. 
 
-You can create ongoing queries to surface person profiles either according to their properties, or the details of their events. We call these **[cohorts](/docs/data/cohorts)**. If you want to see a list of every user in your paid tier, you could query for all profiles where that `paid_tier` property has been set. Your cohort would then show you a periodically-updated listing of your paid customers.
+Your cohort would then show you a periodically-updated listing of your paid customers.
 
-Alternatively, you might want to understand *group behavior*. By defining **[groups](/docs/product-analytics/group-analytics)**, you can see a cross-section of events across multiple person profiles. This can be helpful if you're selling to multi-seat customers, and want to understand the overall behavior of their users.
+You could then use this cohort in other parts of PostHog, such as:
+
+- In trends, funnels, retention, user paths, stickiness, and lifecycle insights
+- As a filter on any product analytics dashboard
+- To target feature flags, experiments, and user surveys
+- To filter the session replay list and create playlists
+- Filter live events on the **Activity** page
+
+### Groups
+
+Alternatively, you might want to understand *group behavior*. By defining **[groups](/docs/product-analytics/group-analytics)**, you can see a cross-section of events across multiple person profiles. 
+
+This can be helpful if you're selling to companies with multiple individual users, and want to understand the overall behavior of the whole company that uses your product.
+
+Groups are also useful if you want to analyze retention at an account-level – i.e. how long customers use your product before churning.
 
 Groups require that you have the [Group analytics add-on](/addons#group-analytics) and that you enable person profiles.
 
