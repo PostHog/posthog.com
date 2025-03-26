@@ -190,7 +190,7 @@ The last step is to set up a PostHog dashboard so that you can view your LLM ins
 
 ## Further reading
 
-- [How to set up LLM analytics for ChatGPT](/tutorials/chatgpt-analytics)
+- [How to set up OpenAI observability](/tutorials/openai-observability)
 - [How to set up LLM analytics for Anthropic's Claude](/tutorials/anthropic-analytics)
 
 <NewsletterForm />
