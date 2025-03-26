@@ -50,7 +50,7 @@ Teams in the startup plan can use their credit for any PostHog product or add-on
 Unused credits do not carry over past 12 months and can not be converted into cash or other rewards. If credits are used up then the team will automatically trigger email warnings and move to a standard, paid plan. 
 
 ### Mintlify partnership
-We maintain a partnership with Mintlify to help our users build better documentation. Once a team is accepted into PostHog for Startups we'll automatically send them the voucher code they need in their welcome email. The code gives them 50% for six months. 
+We maintain a partnership with Mintlify to help our users build better documentation. Once a team is accepted into PostHog for Startups, we'll automatically send them the voucher code they need in their welcome email. The code gives them 50% for six months. 
 
 If users have issues with the code, or accessing the benefit, we'll raise this directly with Mintlify's Product Marketing team. 
 
