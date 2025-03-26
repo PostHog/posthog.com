@@ -29,7 +29,7 @@ Netlify supports [redirects and rewrites](https://docs.netlify.com/routing/redir
   force = true
 ```
 
-> **Note:** If deploying SvelteKit on Netlify use `_redirects` file and place it in `static` folder, as redirects in `netlify.toml` configuration [are not supported](https://docs.netlify.com/frameworks/sveltekit/#limitations).
+> **Note:** If deploying SvelteKit on Netlify use `_redirects` file and place it in the project root, as redirects in `netlify.toml` configuration [are not supported](https://docs.netlify.com/frameworks/sveltekit/#limitations).
 
 ```js
 /ingest/static/*  https://us-assets.i.posthog.com/static/:splat  200!
