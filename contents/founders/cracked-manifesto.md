@@ -38,7 +38,7 @@ No! You need some anti-goals as well. For example, the following are definitely 
 
 - 🐣 **How experienced you are.** There is no number of years of experience that correlates with crackedness, in either direction. See also: using rank / experience to get your way.
 
-- 📈 **A popular side project.** To be clear, side projects are great signs of crackedness, but success is less important. An interesting project no one knows is about is just as valid. Remember: loving the craft of building something is cracked.
+- 📈 **A popular side project.** To be clear, side projects are great signs of crackedness, but success is less important. An interesting project no one knows about is just as valid. Remember: loving the craft of building something is cracked.
 
 Adopting this mentality has noticeably increased the diversity of people applying to work with us at PostHog.
 
