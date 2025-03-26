@@ -7,7 +7,8 @@
 // web SDK, it also associates all subsequent events in the session
 // with the group.
 posthog.group('company', 'company_id_in_your_db');
-posthog.capture('user_signed_up'); // This event is associated with the company above
+// This event will be associated with the company above.
+posthog.capture('user_signed_up');
 
 // If the group type is already created, you can also manually add
 // the `$groups` property to any event you want to associate with
@@ -98,7 +99,8 @@ PostHog::capture(array(
 // iOS SDK, it also associates all subsequent events in the
 // session with the group.
 PostHogSDK.shared.group(type: "company", key: "company_id_in_your_db")
-PostHogSDK.shared.capture("user_signed_up") // This event is associated with the company above
+// This event will be associated with the company above.
+PostHogSDK.shared.capture("user_signed_up")
 
 // If the group type is already created, you can also manually add
 // the `$groups` property to any event you want to associate with
@@ -120,7 +122,8 @@ PostHogSDK.shared.capture(
 // Android SDK, it also associates all subsequent events in the
 // session with the group.
 PostHog.group(type = "company", key = "company_id_in_your_db")
-PostHog.capture("user_signed_up") // This event is associated with the company above
+// This event will be associated with the company above.
+PostHog.capture("user_signed_up")
 
 // If the group type is already created, you can also manually add
 // the `$groups` property to any event you want to associate with
