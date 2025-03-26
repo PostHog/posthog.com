@@ -2390,7 +2390,7 @@ export const docsMenu = {
                     ],
                 },
                 {
-                    name: 'Max',
+                    name: 'Max AI',
                     url: '/docs/max-ai',
                     icon: 'IconSparkles',
                     badge: {
