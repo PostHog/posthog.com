@@ -68,7 +68,7 @@ In addition to the weekly sprint planning meeting on a Monday, we do a weekly sa
 
 Turns are taken randomly so that you are incentivized to turn up to every meeting fully prepared, in case you are selected!
 
-The objective of the meeting is to hold each other to account, provide direct feedback, and also support each other. It is a great place to ask for help from the team with thorny problems - [you should not let your teammates fail](/culture#dont-let-others-fail). 
+The objective of the meeting is to hold each other to account, provide direct feedback, and also support each other. It is a great place to ask for help from the team with thorny problems - [you should not let your teammates fail](/handbook/company/culture#dont-let-others-fail). 
 
 ## How commission works - Technical AEs
 
