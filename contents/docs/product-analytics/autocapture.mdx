@@ -66,16 +66,17 @@ If there are specific elements you _don't_ want to capture, add the `ph-no-captu
 
 You can disable autocapture in your [project settings](https://us.posthog.com/project/settings) or by setting `autocapture: false` in the [config](/docs/libraries/js/config). If _one_ of these is disabled, autocapture is disabled.
 
+> **Note:** Disabling autocapture in your project settings isn't instant. PostHog will continue to capture events where it is initialized. Instead, autocaptured events will taper off as users trigger reinitialization of PostHog (like when they reload your site). 
+
 You can disable pageviews and pageleaves by setting `capture_pageview: false`. To just disable pageleaves, keep `capture_pageview: true` and set `capture_pageleave: false`.
 
 Disabling autocapture **does not disable [session recording](/docs/session-replay/manual)**. You can disable session recording by turning it off in your [project settings](https://app.posthog.com/project/settings) or using `disable_session_recording: true` in the config.
 
-> **Note:** You can update your config at runtime (e.g. to update an allowlist or disable autocapture) using the `posthog.set_config()` method. 
->
-> For example, to update the `capture_pageview` config:
-> ```js-web
-> posthog.set_config({ capture_pageview: false })
-> ```
+You can update any of these config options at runtime (e.g. to update an allowlist or disable autocapture) using the `posthog.set_config()` method like this:
+
+```js-web
+posthog.set_config({ capture_pageview: false })
+```
 
 ## Capturing additional properties in autocapture events
 
