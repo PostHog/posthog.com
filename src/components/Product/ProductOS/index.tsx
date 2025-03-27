@@ -21,7 +21,6 @@ import {
     IconToggle,
 } from '@posthog/icons'
 import { CallToAction } from 'components/CallToAction'
-import { CustomerCard } from 'components/Products/CustomerCard'
 import { Hero } from 'components/Products/Hero'
 import { Feature } from 'components/Products/Feature'
 import { Subfeature } from 'components/Products/Subfeature'
@@ -104,29 +103,6 @@ const subfeatures = [
 ]
 
 export const ProductOS = () => {
-    const { researchgate, elevenlabs } = useStaticQuery(graphql`
-        fragment ProductCustomerFragment on Mdx {
-            fields {
-                slug
-            }
-            frontmatter {
-                logo {
-                    publicURL
-                }
-                logoDark {
-                    publicURL
-                }
-            }
-        }
-        {
-            researchgate: mdx(slug: { eq: "customers/researchgate" }) {
-                ...ProductCustomerFragment
-            }
-            elevenlabs: mdx(slug: { eq: "customers/elevenlabs" }) {
-                ...ProductCustomerFragment
-            }
-        }
-    `)
     const { fullWidthContent } = useLayoutData()
     return (
         <>
@@ -153,19 +129,8 @@ export const ProductOS = () => {
                 </div>
             </div>
 
-            {/* <SmoothScroll /> */}
-
             <div id="features">
                 <section className="max-w-7xl mx-auto px-5 md:mb-20">
-                    {/*
-                    <h3 className="text-3xl text-center mb-8">Features</h3>
-                    <ul className={`list-none p-0 grid md:grid-cols-${featuresPerRow} gap-12 mb-8`}>
-                        {features.map((feature, index) => {
-                        return <Feature {...feature} key={index} />
-                        })}
-                    </ul>
-                    */}
-
                     <div className="mb-4">
                         <h2 className="text-4xl text-center mb-8">
                             A single <span className="text-red dark:text-yellow">home</span> for all product usage data
@@ -176,22 +141,6 @@ export const ProductOS = () => {
                             })}
                         </ul>
                     </div>
-
-                    <section id="customers" className="-mt-36 pt-36">
-                        <h3 className="text-3xl text-center my-4 md:my-8">Customer stories</h3>
-                        <ul className="list-none p-0 grid md:grid-cols-2 gap-4 mb-10 md:mb-20">
-                            <CustomerCard
-                                outcome="tracks over 25M users accessing more than 160M publications"
-                                quote="We have 100s of millions of pageviews, but it still only takes 10 minutes to set up really detailed insights and funnels"
-                                customer={researchgate}
-                            />
-                            <CustomerCard
-                                outcome="uses every single tool PostHog has to launch new features"
-                                quote="We used to have dashboards in Looker, GA4, and lots of other tools. Now, it's just PostHog and Stripe."
-                                customer={elevenlabs}
-                            />
-                        </ul>
-                    </section>
 
                     <div className="flex flex-col-reverse items-center md:flex-row gap-8 mb-20">
                         <div className="flex-1">
@@ -273,7 +222,7 @@ export const ProductOS = () => {
                         <ul className={`list-none p-0 grid md:grid-cols-2 gap-8`}>
                             <Subfeature
                                 title="Retroactive data with autocapture"
-                                description="If you’re running a web app with <a href='/docs/product-analytics/autocapture'>autocapture</a> enabled, some PostHog products can backfill historical data, meaning you can get value from a new product without waiting for data to trickle in."
+                                description="If you're running a web app with <a href='/docs/product-analytics/autocapture'>autocapture</a> enabled, some PostHog products can backfill historical data, meaning you can get value from a new product without waiting for data to trickle in."
                                 icon={<IconRevert />}
                             />
                             <Subfeature
