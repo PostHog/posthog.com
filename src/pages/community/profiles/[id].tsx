@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { PageProps } from 'gatsby'
+import { graphql, PageProps, useStaticQuery } from 'gatsby'
 import SEO from 'components/seo'
 import Layout from 'components/Layout'
 import PostLayout from 'components/PostLayout'
@@ -31,6 +31,7 @@ import NotFoundPage from 'components/NotFoundPage'
 import { IconX } from '@posthog/icons'
 import Confetti from 'react-confetti'
 import dayjs from 'dayjs'
+import CloudinaryImage from 'components/CloudinaryImage'
 
 const Avatar = (props: { className?: string; src?: string }) => {
     return (
@@ -135,18 +136,73 @@ const TransactionTitle = ({ type, metadata }: {}) => {
 }
 
 const Points = () => {
+    const [showAchievements, setShowAchievements] = useState(false)
     const { user } = useUser()
+    const {
+        allAchievement: { nodes: achievements },
+    } = useStaticQuery(graphql`
+        {
+            allAchievement(filter: { points: { gt: 0 } }, sort: { fields: points, order: ASC }) {
+                nodes {
+                    title
+                    points
+                    description
+                    icon {
+                        data {
+                            attributes {
+                                url
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    `)
+
     return (
         <div className="max-w-xl">
             <div className="bg-accent dark:bg-accent-dark rounded p-4 border border-light dark:border-dark">
                 <div className="flex items-center justify-between mb-1">
-                    <h2 className="text-2xl font-bold m-0">Points balance</h2>
+                    <h2 className="text-2xl font-bold m-0">Your points</h2>
                     <span className="text-3xl font-bold text-green">{user?.wallet?.balance || 0}</span>
                 </div>
                 <p className="text-sm text-primary/70 dark:text-primary-dark/70 m-0">
                     Earn points by contributing to discussions, helping others, and achieving milestones in the PostHog
                     community.
                 </p>
+                <button
+                    onClick={() => setShowAchievements(!showAchievements)}
+                    className="text-sm text-red dark:text-yellow font-bold mt-2"
+                >
+                    {showAchievements ? 'Hide available achievements' : 'Show available achievements'}
+                </button>
+                {showAchievements && (
+                    <ul className="m-0 p-0 list-none mt-4">
+                        {achievements.map((achievement) => {
+                            return (
+                                <li
+                                    className="flex items-end justify-between mt-2 pt-2 border-t border-border dark:border-dark first:mt-0 first:pt-0 first:border-t-0"
+                                    key={achievement.id}
+                                >
+                                    <span className="flex space-x-2">
+                                        <CloudinaryImage
+                                            width={32}
+                                            height={32}
+                                            src={achievement.icon.data.attributes.url}
+                                        />
+                                        <span>
+                                            <h4 className="m-0 text-base leading-none">{achievement.title}</h4>
+                                            <p className="m-0 text-sm">{achievement.description}</p>
+                                        </span>
+                                    </span>
+                                    <p className="text-sm text-primary/50 dark:text-primary-dark/50 m-0">
+                                        {achievement.points} point{achievement.points === 1 ? '' : 's'}
+                                    </p>
+                                </li>
+                            )
+                        })}
+                    </ul>
+                )}
                 {user?.wallet?.transactions && user?.wallet?.transactions?.length > 0 && (
                     <div className="mt-4 pt-4 border-t border-light dark:border-dark">
                         <ul className="list-none m-0 p-0 space-y-3">

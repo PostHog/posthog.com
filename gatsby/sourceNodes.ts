@@ -636,4 +636,22 @@ export const sourceNodes: GatsbyNode['sourceNodes'] = async ({ actions, createCo
         })
     }
     await fetchPostHogDestinations()
+
+    const fetchAchievements = async () => {
+        const { data } = await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/achievements?populate=*`).then((res) =>
+            res.json()
+        )
+        data.forEach((achievement) => {
+            const node = {
+                id: createNodeId(`achievement-${achievement.id}`),
+                internal: {
+                    type: 'Achievement',
+                    contentDigest: createContentDigest(achievement),
+                },
+                ...achievement?.attributes,
+            }
+            createNode(node)
+        })
+    }
+    await fetchAchievements()
 }
