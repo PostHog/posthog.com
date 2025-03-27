@@ -72,7 +72,9 @@ config.sessionReplayConfig.captureNetworkTelemetry = true
 // The screenshot may contain sensitive information, so use with caution
 config.sessionReplayConfig.screenshotMode = true
 
-// Throttle delay used to reduce the number of snapshots captured and reduce performance impact. Default is 1s
+// Sets the minimum time interval (in seconds) between session replay snapshots.
+// A higher value reduces performance impact but decreases replay smoothness. Default is 1.0s.
+// Note: Previously known as `debouncerDelay` before version 3.21.0
 config.sessionReplayConfig.throttleDelay = 1.0
 ```
 
