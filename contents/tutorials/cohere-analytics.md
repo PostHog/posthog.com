@@ -210,6 +210,6 @@ From here, you can go further by filtering your LLM observability dashboard, use
 
 ## Further reading
 
-- [How to set up LLM analytics for ChatGPT](/tutorials/chatgpt-analytics)
+- [How to set up OpenAI observability](/tutorials/openai-observability)
 - [How to set up LLM analytics for Anthropic's Claude](/tutorials/anthropic-analytics)
 - [Product metrics to track for LLM apps](/product-engineers/llm-product-metrics)

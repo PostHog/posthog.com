@@ -1,13 +1,18 @@
 <MultiLanguage>
 
 ```js-web
-// Option 1 (recommended): Call posthog.group()
-// This has the side-effect that all subsequent events in the session are associated to the group
+// Call posthog.group() to create a group before capturing events.
+// It sends a `$groupidentify` event to create or update the group.
+// It will also create the group type if it doesn't exist. In the
+// web SDK, it also associates all subsequent events in the session
+// with the group.
 posthog.group('company', 'company_id_in_your_db');
-posthog.capture('user_signed_up'); // This event is associated with the company above
+// This event will be associated with the company above.
+posthog.capture('user_signed_up');
 
-// Option 2: Set the group property in posthog.capture()
-// This method doesn't have the side-effect of associating the session's events to the group
+// If the group type is already created, you can also manually add
+// the `$groups` property to any event you want to associate with
+// the group.
 posthog.capture('user_signed_up', {
     '$groups': {
         'company': 'company_id_in_your_db'
@@ -16,6 +21,14 @@ posthog.capture('user_signed_up', {
 ```
 
 ```python
+# Call posthog.group_identify() to create a group before capturing events.
+# It sends a `$groupidentify` event to create or update the group.
+# It will also create the group type if it doesn't exist.
+posthog.group_identify('company', 'company_id_in_your_db')
+
+# Once the group is created, you can associate events with it by
+# passing the `group` argument. The `group` argument is required
+# for every event that should be associated with the group.
 posthog.capture(
     'user_distinct_id',
     'user_signed_up',
@@ -24,6 +37,17 @@ posthog.capture(
 ```
 
 ```go
+// Call posthog.GroupIdentify{} to create a group before capturing events.
+// It sends a `$groupidentify` event to create or update the group.
+// It will also create the group type if it doesn't exist.
+client.Enqueue(posthog.GroupIdentify{
+    Type: "company",
+    Key:  "company_id_in_your_db",
+})
+
+// Once the group is created, you can associate events with it by
+// passing the `$groups` property. The `$groups` property is required
+// for every event that should be associated with the group.
 client.Enqueue(posthog.Capture{
     DistinctId: "user_distinct_id",
     Event: "user_signed_up",
@@ -33,6 +57,15 @@ client.Enqueue(posthog.Capture{
 ```
 
 ```node
+// Call posthog.groupIdentifyStateless() to create a group before
+// capturing events. It sends a `$groupidentify` event to create
+// or update the group. It will also create the group type if it
+// doesn't exist.
+posthog.groupIdentifyStateless('company', 'company_id_in_your_db')
+
+// Once the group is created, you can associate events with it by
+// passing the `groups` property. The `groups` property is required
+// for every event that should be associated with the group.
 posthog.capture({
     event: 'user_signed_up',
     distinctId: 'user_distinct_id',
@@ -41,6 +74,17 @@ posthog.capture({
 ```
 
 ```php
+// Call PostHog::groupIdentify() to create a group before capturing events.
+// It sends a `$groupidentify` event to create or update the group.
+// It will also create the group type if it doesn't exist.
+PostHog::groupIdentify(array(
+    'groupType' => 'company',
+    'groupKey' => 'company_id_in_your_db'
+));
+
+// Once the group is created, you can associate events with it by
+// passing the `$groups` property. The `$groups` property is required
+// for every event that should be associated with the group.
 PostHog::capture(array(
     'distinctId' => 'user_distinct_id',
     'event' => 'user_signed_up',
@@ -49,13 +93,18 @@ PostHog::capture(array(
 ```
 
 ```ios_swift
-// Option 1 (recommended): Call group()
-// This has the side-effect that all subsequent events in the session are associated to the group
+// Call PostHogSDK.shared.group() to create a group before capturing events.
+// It sends a `$groupidentify` event to create or update the group.
+// It will also create the group type if it doesn't exist. In the
+// iOS SDK, it also associates all subsequent events in the
+// session with the group.
 PostHogSDK.shared.group(type: "company", key: "company_id_in_your_db")
-PostHogSDK.shared.capture("user_signed_up") // This event is associated with the company above
+// This event will be associated with the company above.
+PostHogSDK.shared.capture("user_signed_up")
 
-// Option 2: Set the group property in capture()
-// This method doesn't have the side-effect of associating the session's events to the group
+// If the group type is already created, you can also manually add
+// the `$groups` property to any event you want to associate with
+// the group.
 PostHogSDK.shared.capture(
     event: "user_signed_up",
     properties: [
@@ -67,13 +116,18 @@ PostHogSDK.shared.capture(
 ```
 
 ```android_kotlin
-// Option 1 (recommended): Call group()
-// This has the side-effect that all subsequent events in the session are associated to the group
+// Call PostHog.group() to create a group before capturing events.
+// It sends a `$groupidentify` event to create or update the group.
+// It will also create the group type if it doesn't exist. In the
+// Android SDK, it also associates all subsequent events in the
+// session with the group.
 PostHog.group(type = "company", key = "company_id_in_your_db")
-PostHog.capture("user_signed_up") // This event is associated with the company above
+// This event will be associated with the company above.
+PostHog.capture("user_signed_up")
 
-// Option 2: Set the group property in capture()
-// This method doesn't have the side-effect of associating the session's events to the group
+// If the group type is already created, you can also manually add
+// the `$groups` property to any event you want to associate with
+// the group.
 PostHog.capture(
     event = "user_signed_up",
     properties = mapOf(
@@ -92,6 +146,21 @@ analytics.track('user_signed_up', {
 ```
 
 ```bash
+# Call $groupidentify to create or update a group.
+# It will also create the group type if it doesn't exist.
+curl -v -L --header "Content-Type: application/json" -d '{
+    "api_key": "<ph_project_api_key>",
+    "event": "$groupidentify",
+    "distinct_id": "static_string_used_for_all_group_events",
+    "properties": {
+        "$group_type": "company",
+        "$group_key": "company_id_in_your_db"
+    }
+}' <ph_client_api_host>/i/v0/e/
+
+# Once the group is created, you can associate events with it by
+# passing the `$groups` property. The `$groups` property is required
+# for every event that should be associated with the group.
 curl -v -L --header "Content-Type: application/json" -d '{
     "api_key": "<ph_project_api_key>",
     "event": "user_signed_up",
