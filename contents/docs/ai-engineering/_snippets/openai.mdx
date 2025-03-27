@@ -92,7 +92,8 @@ console.log(completion.choices[0].message.content)
 </MultiLanguage>
 
 > **Notes:** 
-> - This also works with responses where `stream=True`.
+> - We support the `responses` API in the same way as the `chat.completions` API.
+> - This works with responses where `stream=True`.
 > - If you want to capture LLM events anonymously, **don't** pass a distinct ID to the request. See our docs on [anonymous vs identified events](/docs/data/anonymous-vs-identified-events) to learn more. 
 
 ### Embeddings
