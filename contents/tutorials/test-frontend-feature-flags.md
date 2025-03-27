@@ -26,7 +26,7 @@ Next, in the newly created `flag-test` folder, we install Vitest and its require
 
 ```bash
 cd flag-test
-npm add -D vitest @testing-library/react @testing-library/jest-dom
+npm add -D vitest @testing-library/react @testing-library/jest-dom jsdom
 ```
 
 Since we're about to test `components` directly, we must create a file called `vitest.setup.js` at our project root and import the required dependency:
@@ -106,10 +106,10 @@ Next, add the `PostHogProvider` to `main.jsx`. This enables access to PostHog th
 // src/main.jsx
 import React from 'react';
 import { StrictMode } from 'react';
-import App from './App';
-import posthog from 'posthog-js';
 import { createRoot } from 'react-dom/client';
+import posthog from 'posthog-js';
 import { PostHogProvider } from 'posthog-js/react'
+import App from './App';
 
 posthog.init(
   "<ph_project_api_key>",
@@ -118,8 +118,7 @@ posthog.init(
   }
 );
 
-const root = document.getElementById('root');
-createRoot(root).render(
+createRoot(document.getElementById('root')).render(
   <StrictMode>
   	<PostHogProvider client={posthog}>
 	  <App />
@@ -134,10 +133,10 @@ With this setup, events are automatically captured, and we can set up our [React
 
 In PostHog, go to the "Feature Flags" tab and click the "New feature flag" button. Set the key to `test-flag` and the release condition to 100% of users then click "Save."
 
-With the flag created, go to  `src/App.js` in our React app, import `useFeatureFlagEnabled` from `posthog-js/react`, and use it to check the `test-flag`. We have access to this because we set up the `PostHogProvider` earlier. We then conditionally render either a link to PostHog if the flag is enabled or the default "Learn React" link if not. This looks like this:
+With the flag created, go to  `src/App.jsx` in our React app, import `useFeatureFlagEnabled` from `posthog-js/react`, and use it to check the `test-flag`. We have access to this because we set up the `PostHogProvider` earlier. We then conditionally render either a link to PostHog if the flag is enabled or the default "Learn React" link if not. This looks like this:
 
 ```js
-// src/App.js
+// src/App.jsx
 import './App.css';
 import { useFeatureFlagEnabled } from 'posthog-js/react'
 
@@ -175,7 +174,7 @@ export default App;
 
 When we run the app again, the main link on the page changed to "Go to PostHog."
 
-![Go to PostHog](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/test-frontend-feature-flags/app.png)
+![Go to PostHog](https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_03_27_at_09_52_49_2x_65390628c1.png)
 
 ## Making our tests and feature flags work together
 
@@ -183,10 +182,10 @@ When we run tests now, it still passes, but only tests part of the code. To test
 
 Luckily, Vitest provides a mock service natively. You can use it by importing the `vi` dependency from `vitest`, which is also has compatibility with the Jest API.
 
-In `src/App.test.js`, mock `useFeatureFlagEnabled`. Create a new test where the mocked `useFeatureFlagEnabled` function return `true`, then checks the "Go to PostHog" version of the flag.
+In `src/App.test.jsx`, mock `useFeatureFlagEnabled`. Create a new test where the mocked `useFeatureFlagEnabled` function return `true`, then checks the "Go to PostHog" version of the flag.
 
 ```js
-// src/App.test.js
+// src/App.test.jsx
 import { render, screen } from "@testing-library/react";
 import { expect, test, vi } from 'vitest';
 import App from './App';
