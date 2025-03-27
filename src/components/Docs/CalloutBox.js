@@ -2,23 +2,24 @@ import React from 'react'
 import * as Icons from '@posthog/icons'
 
 const typeStyles = {
-    info: 'bg-yellow/10 border-l-yellow',
-    tip: 'bg-gray/10 border-l-gray',
-    success: 'bg-green/10 border-l-green',
-    caution: 'bg-red/10 border-l-red',
+    action: 'bg-yellow/15 border-none',
+    fyi: 'bg-gray/10 border-none',
+    caution: 'bg-red/15 border-none',
 }
 
-export const CalloutBox = ({ icon, title, type = 'info', children }) => {
+export const CalloutBox = ({ icon, title, type = 'action', children }) => {
     const Icon = Icons[icon]
-    const styles = typeStyles[type] || typeStyles.info
+    const styles = typeStyles[type] || typeStyles.action
 
     return (
-        <div className={`my-4 mb-8 p-4 border-l-[10px] rounded-sm ${styles}`}>
-            <div className="flex items-center gap-2 mb-2">
-                {Icon && <Icon className="w-5 h-5" />}
-                <strong>{title}</strong>
+        <div className={`ph-callout my-4 mb-8 p-4 border rounded-lg ${styles}`}>
+            <div>
+                <div className="flex items-center gap-2 mb-2">
+                    {Icon && <Icon className="w-5 h-5 shrink-0" />}
+                    <strong>{title}</strong>
+                </div>
+                <div className="pl-7 [&>*:last-child]:mb-0 [&_p]">{children}</div>
             </div>
-            <div className="[&>*:last-child]:mb-0 [&_p]:leading-snug [&_li]:leading-snug">{children}</div>
         </div>
     )
 }
