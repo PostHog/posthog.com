@@ -7,7 +7,7 @@ const typeStyles = {
     caution: 'bg-red/15 border-none',
 }
 
-export const CalloutBox = ({ icon, title, type = 'action', children }) => {
+export const CalloutBox = ({ icon = 'IconInfo', title, type = 'fyi', children }) => {
     const Icon = Icons[icon]
     const styles = typeStyles[type] || typeStyles.action
 
