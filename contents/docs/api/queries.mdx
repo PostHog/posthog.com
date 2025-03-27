@@ -161,6 +161,8 @@ createQuery()
 
 </MultiLanguage>
 
+Every query you run is logged in the `query_log` table along with details like duration, read rows, and more.
+
 ## Query parameters
 
 Top level request parameters include:
@@ -171,8 +173,6 @@ Top level request parameters include:
 - `filters_override` (optional): Dashboard-specific filters to apply.
 - `variables_override` (optional): Variable overrides for queries that support variables.
 - `name` (optional): A name for the query to better identify it in the `query_log` table.
-
-> **Tip:** You can see the details on the queries you run by querying the `query_log` table.
 
 ### Caching and execution modes
 
@@ -244,9 +244,10 @@ curl \
 
 API queries on our free plans are limited to:
 
-- 1 queries running concurrently
+- 1 query running concurrently
 - 10,000 rows
-- 120 requests per hour
+- 1TB read bytes during query processing
+
 
 Our ridiculously cheap plan lifts this to:
 
