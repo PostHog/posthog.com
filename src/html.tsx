@@ -65,8 +65,6 @@ export default function HTML(props: HTMLProps): JSX.Element {
                                 person_profiles: 'identified_only',
                                 __preview_heatmaps: true,
                                 opt_in_site_apps: true,
-                                __preview_remote_config: true,
-                                __preview_flags_v2: true,
                             })
                             `,
                         }}
