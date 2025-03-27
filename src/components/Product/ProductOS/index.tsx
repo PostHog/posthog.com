@@ -14,6 +14,8 @@ import {
     IconPeople,
     IconPerson,
     IconPlus,
+    IconMagicWand,
+    IconSparkles,
     IconRevert,
     IconRewindPlay,
     IconServer,
@@ -155,7 +157,9 @@ export const ProductOS = () => {
             <div id="features">
                 <section className="max-w-7xl mx-auto px-5 md:mb-20">
                     <section id="customers" className="-mt-36 pt-36">
-                        <h3 className="text-3xl text-center my-4 md:my-8">Reliable at any scale</h3>
+                        <h3 className="text-3xl text-center my-4 md:my-8">
+                            Product infrastructure that works at any scale
+                        </h3>
                         <ul className="list-none p-0 grid md:grid-cols-2 gap-4 mb-10 md:mb-20">
                             <CustomerCard
                                 outcome="tracks over 25M users accessing more than 160M publications"
@@ -268,6 +272,16 @@ export const ProductOS = () => {
                                 description="Trying a new PostHog product doesn't require new code to be deployed. You don't need to invite your team since they already have PostHog accounts."
                                 icon={<IconCursorClick />}
                             />
+                            <Subfeature
+                                title="Products that are designed to work together"
+                                description="PostHog products share an infrastructure. You can effortlessly switch from an insight to a session replay, trigger surveys based on feature flags, and more."
+                                icon={<IconSparkles />}
+                            />
+                            <Subfeature
+                                title="A constant stream of new betas to try "
+                                description="We ship weirdly fast. Products on our roadmap include a messaging product, a code editor, in-app product tours, and lots more for you to vote on."
+                                icon={<IconMagicWand />}
+                            />
                         </ul>
                     </div>
                 </section>
@@ -313,29 +327,40 @@ export const ProductOS = () => {
                                 This bit is boring, but <span className="text-red dark:text-yellow">important</span>
                             </h2>
                             <p>
-                                We poke fun at a lot of things, but we take security seriously. We're{' '}
-                                <b>SOC 2 Type II certified, GDPR ready, HIPAA compliant</b>, and we share our security
-                                reports publicly. Check <a href="/handbook/company/security">our security docs</a> for
-                                more!
+                                We poke fun at a lot of things, but we take security seriously even if it isn't always
+                                exciting.
+                            </p>
+                            <p>
+                                We're <b>SOC 2 Type II certified, GDPR ready, HIPAA compliant</b>, and we share our
+                                security reports publicly. Check{' '}
+                                <a href="/handbook/company/security">our security docs</a> if you want to read them!
+                            </p>
+                            <p>
+                                We even try to make our privacy and security docs actually fun to use too. Don't believe
+                                it's possible? <a href="/dpa">Try our DP-YAY generator</a>. It's guaranteed fun!
                             </p>
                         </div>
                         <aside className="shrink-0 md:basis-[300px] xl:basis-[500px]">
                             <CloudinaryImage
-                                src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Product/ProductOS/images/alert.png"
-                                alt=""
-                                className="w-full max-w-[262px]"
+                                src="https://res.cloudinary.com/dmukukwp6/image/upload/security_hedgehog_7625539ee5.png"
+                                alt="Security-minded Hedgehogs"
+                                className="w-full max-w-[420px]"
                             />
                         </aside>
                     </div>
                 </section>
 
                 <section className="max-w-7xl mx-auto px-5 mb-10 md:mb-20">
-                    <h2 className="text-4xl mb-2">API</h2>
+                    <h2 className="text-4xl mb-2">An API you'll actually want to use</h2>
                     <p className="max-w-2xl mb-2">
                         If your business has bespoke data visualization needs that aren't covered by a PostHog product,
-                        you can build your own interface with queries using the API and SQL.
+                        you can build your own interface with queries using the API.
                     </p>
-                    <div className="mb-8">
+                    <p className="max-w-2xl mb-2">
+                        There's a generous rate limit to get you started, after which we bill based on usage - just like
+                        we do everywhere else.
+                    </p>
+                    <div className="mb-8 mt-8">
                         <CallToAction to="/docs/api" type="secondary" size="sm">
                             Explore the API
                         </CallToAction>
@@ -370,23 +395,27 @@ export const ProductOS = () => {
                             title="Customized CDP"
                             description="Create a singular customer view by combining event and customer data in one place."
                         />
+                        <TextCard
+                            title="No rate limits"
+                            description="Create a singular customer view by combining event and customer data in one place."
+                        />
                     </ul>
                 </section>
 
                 <section className="max-w-screen md:max-w-7xl mx-auto px-5 -mt-10 md:mt-0 mb-10 md:mb-20">
                     <div className="grid md:grid-cols-2 gap-8 items-center">
                         <div className="order-2 md:order-1">
-                            <h2 className="text-4xl mb-2 relative z-10">Toolbar</h2>
+                            <h2 className="text-4xl mb-2 relative z-10">The Product OS Toolbar</h2>
                             <p className="max-w-2xl">
                                 If you use PostHog on a website or web app, the Product OS Toolbar can run on your site,
                                 letting you:
                             </p>
                             <ul className="mb-6">
-                                <li>Visually define events</li>
-                                <li>Toggle feature flags on or off</li>
-                                <li>See a click map showing what people are clicking</li>
-                                <li>Visualize your experiments</li>
+                                <li>Create new actions by interacting with your app</li>
+                                <li>Visualize experiments and switch variants</li>
+                                <li>See a map of what users are clicking</li>
                                 <li>Understand your Web Vitals metrics</li>
+                                <li>Toggle feature flags on or off</li>
                             </ul>
                             <div>
                                 <CallToAction to="/docs/toolbar" type="secondary" size="sm">
@@ -396,9 +425,9 @@ export const ProductOS = () => {
                         </div>
                         <div className="order-1 mb-10 md:mb-0 md:order-2 text-center max-w-screen overflow-hidden md:overflow-visible">
                             <CloudinaryImage
-                                src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Product/ProductOS/images/toolbar.png"
+                                src="https://res.cloudinary.com/dmukukwp6/image/upload/toolbar_transparent_7e4ef14f83.png"
                                 alt=""
-                                className="relative rounded w-[110%] left-[-5%] sm:left-0 md:w-full max-w-[614px] top-12 md:top-16"
+                                className="relative rounded w-[110%] left-[-5%] sm:left-0 md:w-full max-w-[414px] top-12 md:top-16"
                             />
                         </div>
                     </div>
