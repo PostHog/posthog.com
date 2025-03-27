@@ -21,6 +21,7 @@ import {
     IconToggle,
 } from '@posthog/icons'
 import { CallToAction } from 'components/CallToAction'
+import { CustomerCard } from 'components/Products/CustomerCard'
 import { Hero } from 'components/Products/Hero'
 import { Feature } from 'components/Products/Feature'
 import { Subfeature } from 'components/Products/Subfeature'
@@ -76,23 +77,22 @@ const subfeaturesItemCount = 5
 const subfeatures = [
     {
         title: 'Events',
-        description: 'Raw activity data like clicks, pageviews, and any custom events you send from your codebase',
+        description: 'Raw activity data like clicks, pageviews, and any custom events you want',
         icon: <IconEye />,
     },
     {
         title: 'Actions',
-        description: 'Synthetic events that can be retroactively created from interactions with the DOM',
+        description: 'Combined events that can be retroactively created by interacting with the DOM',
         icon: <IconBolt />,
     },
     {
         title: 'People',
-        description:
-            'Individual level user activity and properties from both identified (logged in) and anonymous users',
+        description: 'Individual users, whether identified (logged in) or anonymous',
         icon: <IconPeople />,
     },
     {
-        title: 'Organizations & groups',
-        description: 'Group users by company to analyze usage or activity in aggregate rather than the individual user',
+        title: 'Groups',
+        description: 'Group users to analyze usage in aggregate, such as by company or team',
         icon: <IconBuilding />,
     },
     {
@@ -103,6 +103,29 @@ const subfeatures = [
 ]
 
 export const ProductOS = () => {
+    const { researchgate, elevenlabs } = useStaticQuery(graphql`
+        fragment ProductCustomerFragment on Mdx {
+            fields {
+                slug
+            }
+            frontmatter {
+                logo {
+                    publicURL
+                }
+                logoDark {
+                    publicURL
+                }
+            }
+        }
+        {
+            researchgate: mdx(slug: { eq: "customers/researchgate" }) {
+                ...ProductCustomerFragment
+            }
+            elevenlabs: mdx(slug: { eq: "customers/elevenlabs" }) {
+                ...ProductCustomerFragment
+            }
+        }
+    `)
     const { fullWidthContent } = useLayoutData()
     return (
         <>
@@ -116,8 +139,8 @@ export const ProductOS = () => {
                     color="blue"
                     icon={<IconStack />}
                     product={product.capitalized}
-                    title="Product data infrastructure"
-                    description="Product OS is the foundation that all PostHog products are built on. You have access to all PostHog data with the API."
+                    title="A single home for all your product data"
+                    description="Product OS is the foundation that all our products are built on and includes access to all PostHog data via the API."
                 />
 
                 <div className="text-center mb-12">
@@ -131,35 +154,42 @@ export const ProductOS = () => {
 
             <div id="features">
                 <section className="max-w-7xl mx-auto px-5 md:mb-20">
-                    <div className="mb-4">
-                        <h2 className="text-4xl text-center mb-8">
-                            A single <span className="text-red dark:text-yellow">home</span> for all product usage data
-                        </h2>
-                        <ul className={`list-none p-0 grid md:grid-cols-${subfeaturesItemCount} gap-4`}>
-                            {subfeatures.map((subfeature, index) => {
-                                return <Subfeature {...subfeature} key={index} />
-                            })}
+                    <section id="customers" className="-mt-36 pt-36">
+                        <h3 className="text-3xl text-center my-4 md:my-8">Reliable at any scale</h3>
+                        <ul className="list-none p-0 grid md:grid-cols-2 gap-4 mb-10 md:mb-20">
+                            <CustomerCard
+                                outcome="tracks over 25M users accessing more than 160M publications"
+                                quote="We have 100s of millions of pageviews, but it still only takes 10 minutes to set up really detailed insights and funnels"
+                                customer={researchgate}
+                            />
+                            <CustomerCard
+                                outcome="uses every single tool PostHog has to launch new features"
+                                quote="We used to have dashboards in Looker, GA4, and lots of other tools. Now, it's just PostHog and Stripe."
+                                customer={elevenlabs}
+                            />
                         </ul>
-                    </div>
+                    </section>
 
-                    <div className="flex flex-col-reverse items-center md:flex-row gap-8 mb-20">
+                    <div className="flex flex-col-reverse items-center md:flex-row gap-8 mb-4">
                         <div className="flex-1">
                             <h2 className="text-4xl">
-                                A unified way to <span className="text-red dark:text-yellow">query</span> product usage
-                                data
+                                A unified view of your data{' '}
+                                <span className="text-red dark:text-yellow">and way to query it</span>
                             </h2>
                             <p>
-                                We created <Link to="/docs/sql">SQL access</Link>, a translation layer over ClickHouse
-                                SQL. (You can use most ClickHouse features in our SQL insights, including JOINs and
-                                subqueries.)
+                                Everything you see in PostHog relies on SQL queries. If you aren't able to run a query
+                                in the PostHog UI, just enter SQL mode to write the exact query you need.
+                            </p>
+                            <p>
+                                We created <Link to="/docs/sql">a translation layer over ClickHouse SQL</Link> that
+                                enables you to use most ClickHouse features, including JOINs and subqueries, in SQL
+                                insights.
                             </p>
 
                             <p>
-                                Everything you see in PostHog relies on SQL queries. If you aren't able to run a query
-                                in a PostHog UI, just enter SQL mode to write the exact query you need.
+                                You can also query directly from <Link to="/data-warehouse">our data warehouse</Link>,
+                                which is also powered by ClickHouse.
                             </p>
-
-                            <p>You can also query directly from our data warehouse (powered by ClickHouse).</p>
                         </div>
                         <aside className="shrink-0 md:basis-[500px]">
                             <CloudinaryImage
@@ -168,6 +198,14 @@ export const ProductOS = () => {
                                 className="w-full max-w-[562px]"
                             />
                         </aside>
+                    </div>
+
+                    <div className="mb-20">
+                        <ul className={`list-none p-0 grid md:grid-cols-${subfeaturesItemCount} gap-4`}>
+                            {subfeatures.map((subfeature, index) => {
+                                return <Subfeature {...subfeature} key={index} />
+                            })}
+                        </ul>
                     </div>
 
                     <div className="mb-20">
