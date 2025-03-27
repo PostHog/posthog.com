@@ -14,29 +14,29 @@ Combining both testing and feature flags can be a bit tricky. Tests generally ch
 
 To do this, you need to mock the flags to access the other variations. This tutorial shows you how to do that by creating a React app with Jest tests, adding PostHog, then setting up tests that work with feature flags by mocking PostHog.
 
-## Creating a Vite-React app and setup Vitest
+## Creating a React app with Vite and setting up Vitest
 
-First, ensure [Node.js is installed](https://nodejs.dev/en/learn/how-to-install-nodejs/) (version 18.0 or newer). Then create a new React app with Vite: We named ours `flag-test`.
+First, ensure [Node.js is installed](https://nodejs.dev/en/learn/how-to-install-nodejs/) (version 18.0 or newer), and then create a new React app with Vite. We named ours `flag-test`.
 
 ```bash
 npm create vite@latest flag-test -- --template react
 ```
 
-After creating the app, in the newly created `flag-test` folder, but by default the test framework isn't installed at the project yet, so let's add it.
+Next, in the newly created `flag-test` folder, we install Vitest and its requirements:
 
 ```bash
 cd flag-test
 npm add -D vitest @testing-library/react @testing-library/jest-dom
 ```
 
-Since we're about to test `components` directly, we must create a file called `vitest.setup.js` at our project root importing the required dependency:
+Since we're about to test `components` directly, we must create a file called `vitest.setup.js` at our project root and import the required dependency:
 
 ```js
 // ./vitest.setup.js
 import '@testing-library/jest-dom'
 ```
 
-With the dependency installed at our project, the next step is to let the `vite.config.js` know the new testing setup configurations by adding the `test` property:
+With the dependency installed in our project, the next step is to let the `vite.config.js` know the new testing setup configurations by adding the `test` property:
 
 ```js
 // ./vite.config.js
@@ -53,11 +53,10 @@ export default defineConfig({
 })
 ```
 
-Now, we're ready to set up our first test. Since the **vite-react** already provided a sample component `src/App.jsx`, we can create a new file called `src/App.test.jsx` and start with this boilerplate:
-
+Now, we're ready to set up our first test. Since **vite-react** already provided a sample component `src/App.jsx`, we can create a new file called `src/App.test.jsx` and test it:
 
 ```js
-// ./src/App.test.js
+// ./src/App.test.jsx
 import { expect, test } from 'vitest'
 import { render, screen } from "@testing-library/react";
 import App from './App';
@@ -104,11 +103,12 @@ npm i posthog-js
 Next, add the `PostHogProvider` to `main.jsx`. This enables access to PostHog throughout your React app.
 
 ```js
-// src/index.js
+// src/main.jsx
 import React from 'react';
-import ReactDOM from 'react-dom/client';
+import { StrictMode } from 'react';
 import App from './App';
 import posthog from 'posthog-js';
+import { createRoot } from 'react-dom/client';
 import { PostHogProvider } from 'posthog-js/react'
 
 posthog.init(
@@ -124,7 +124,7 @@ createRoot(root).render(
   	<PostHogProvider client={posthog}>
 	  <App />
   	</PostHogProvider>
-  </StrictMode>,
+  </StrictMode>
 )
 ```
 
@@ -181,7 +181,7 @@ When we run the app again, the main link on the page changed to "Go to PostHog."
 
 When we run tests now, it still passes, but only tests part of the code. To test all of it, we must handle feature flags by mocking PostHog. 
 
-Luckily, **Vitest provides a mock service natively**, and you can use it by importing the `vi` dependency from `vitest`, which is also has compatibility with the `jest API`.
+Luckily, Vitest provides a mock service natively. You can use it by importing the `vi` dependency from `vitest`, which is also has compatibility with the Jest API.
 
 In `src/App.test.js`, mock `useFeatureFlagEnabled`. Create a new test where the mocked `useFeatureFlagEnabled` function return `true`, then checks the "Go to PostHog" version of the flag.
 
