@@ -43,7 +43,7 @@ On the converse, we expect people to be opinionated about their own work. We wan
 
 ### Be technical in support replies
 
-Our mission is to equip every developer with the tools to build better products. That means the majority of the time you’re talking to customers they will be engineers just like you. Our customers are curious developers just like you, they will appreciate if you explain things. Don’t be afraid to get technical and give them the full context on the issue. Plus it’s often more fun to explain the actual problem than to give some bland canned response like "I've forwarded this onto the approriate team who will investigate". Lean into how open we are as a company. Share the offending line of code causing their bug and link the PR to fix it.
+Our mission is to equip every developer with the tools to build better products. That means the majority of the time you’re talking to customers they will be engineers just like you. Our customers are curious developers just like you, they will appreciate if you explain things. Don’t be afraid to get technical and give them the full context on the issue. Plus it’s often more fun to explain the actual problem than to give some bland canned response like "I've forwarded this onto the appropriate team who will investigate". Lean into how open we are as a company. Share the offending line of code causing their bug and link the PR to fix it.
 
 ### People have atypical roles
 
