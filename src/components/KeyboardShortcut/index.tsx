@@ -4,10 +4,12 @@ export default function KeyboardShortcut({
     text,
     className,
     size = 'md',
+    live,
 }: {
     text: string
     className?: string
     size?: 'xs' | 'sm' | 'md' | 'lg'
+    live?: boolean
 }): JSX.Element {
     const sizeClasses =
         size === 'lg'
@@ -21,7 +23,8 @@ export default function KeyboardShortcut({
         <kbd
             className={`border border-b-2 border-light dark:border-dark rounded-sm px-1.5 text-primary/50 dark:text-primary-dark/50 bg-accent-light dark:bg-accent-dark font-code ${sizeClasses} ${className}`}
         >
-            {text}
+            {live && <div className="inline-block mr-1.5 rounded-full align-middle bg-red size-2" />}
+            <span>{text}</span>
         </kbd>
     )
 }
