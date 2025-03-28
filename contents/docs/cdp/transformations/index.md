@@ -57,6 +57,30 @@ For complete control of your transformation's behavior, you can view and edit th
 
 Learn more about this in [customizing transformations](/docs/cdp/transformations/customizing-transformations).
 
+## Creating transformations via API
+
+You can also create and manage transformations programmatically using our API. This is particularly useful for automating your workflows, such as setting up new projects with predefined transformations.
+
+To use the API, you'll need to:
+1. Enable the `Hog functions` scope in your personal API key
+2. Use the [Hog functions API endpoint](https://us.posthog.com/api/schema/swagger-ui/#/environments/environments_hog_functions_list)
+
+Here's an example of creating a new transformation:
+
+```bash
+# Create a new transformation
+curl --location 'https://us.i.posthog.com/api/environments/:project_id/hog_functions' \
+--header 'Content-Type: application/json' \
+--header 'Authorization: Bearer <POSTHOG_PERSONAL_API_KEY>' \
+--data '{
+    "type": "transformation",
+    "name": "Filter Out Plugin",
+    "inputs": {},
+    "enabled": true,
+    "template_id": "plugin-posthog-filter-out-plugin"
+}'
+```
+
 ### How many events can I transform?
 
 There is no limit on the number of events to be transformed - transformations are completely free! However, the system requires that transformations perform efficiently and don't consume excessive resources (don't worry we have built some rail guards into that and let you know if something is funky).
