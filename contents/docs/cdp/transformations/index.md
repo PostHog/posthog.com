@@ -14,7 +14,7 @@ As PostHog data arrives, you can transform it *immediately* before ingestion. Yo
 
 PostHog enables you to transform your events in realtime using a variety of pre-built transformations. Check out the [data pipelines](https://us.posthog.com/pipeline/overview) tab and choose **transformations** to get started.
 
-![Transformations list in PostHog](https://res.cloudinary.com/dmukukwp6/image/upload/transformation_list_ca5ad86095.png)
+![Transformations list in PostHog](https://res.cloudinary.com/dmukukwp6/image/upload/transformation_list_a15ad4e309.png)
 
 Need more flexibility? Our [custom transformations](/docs/cdp/transformations/customizing-transformations) enable you to write your own Hog code to transform events exactly how you want. You can modify, enrich, or filter your events using our powerful Hog programming language.
 
@@ -22,27 +22,27 @@ Need more flexibility? Our [custom transformations](/docs/cdp/transformations/cu
 
 Filters enable you to target your transformations, affecting only the kinds of events you chose. Filter by event type, properties, or any SQL statement you can come up with.
 
-![Filtering transformations](https://res.cloudinary.com/dmukukwp6/image/upload/filters_738b8029fa.png)
+![Filtering transformations](https://res.cloudinary.com/dmukukwp6/image/upload/filters_b86669f2f9.png)
 
 ## Testing
 
 As you build your transformations, PostHog makes it easy to confirm they do what you expect. Every transformation includes a built-in testing interface, enabling you to instantly send real data through it and verify the results. You can iterate until everything works to your satisfaction.
 
-![Transformation testing UI](https://res.cloudinary.com/dmukukwp6/image/upload/testing_e2e0faf8f3.png)
+![Transformation testing UI](https://res.cloudinary.com/dmukukwp6/image/upload/testing_eb82d9f16b.png)
 
 ## Keep an eye on things
 
 Once your transformation is up and running, the **metrics** and **logs** tabs will let you monitor usage and inspect any errors.
 
-![Transformation logs](https://res.cloudinary.com/dmukukwp6/image/upload/logs_6cb6791b85.png)
+![Transformation logs](https://res.cloudinary.com/dmukukwp6/image/upload/logs_09fa698dd4.png)
 
-![Transformation metrics](https://res.cloudinary.com/dmukukwp6/image/upload/metrics_ca7bd7dd92.png)
+![Transformation metrics](https://res.cloudinary.com/dmukukwp6/image/upload/metrics_7cf05cc3b8.png)
 
 ## History
 
 For projects with the **[teams add-on](https://posthog.com/addons#teams)**, each transformation has a history tab that shows you a complete audit trail of changes. You can see who modified the transformation, what changes were made, and when they occurred.
 
-![Transformation history](https://res.cloudinary.com/dmukukwp6/image/upload/history_97f854fa50.png)
+![Transformation history](https://res.cloudinary.com/dmukukwp6/image/upload/history_e0873f6741.png)
 
 This history helps you:
 - Track changes over time

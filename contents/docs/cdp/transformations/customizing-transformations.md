@@ -24,7 +24,7 @@ For most cases, we recommend using one of the pre-built transformations. These t
 
 You can also use any of these transformations as a starting point for your own code by clicking `edit source code`. From here you can modify the inputs – for example marking an input as `secret` so that it is encrypted at rest – or changing the implementation of the transformation itself.
 
-![Modifying transformation inputs](https://res.cloudinary.com/dmukukwp6/image/upload/inputs_6552db269b.png)
+![Modifying transformation inputs](https://res.cloudinary.com/dmukukwp6/image/upload/inputs_4cedae5a39.png)
 
 Since transformations happen during ingestion, they cannot make external HTTP calls. Instead, they focus on modifying the event object directly.
 
@@ -142,7 +142,7 @@ return returnEvent
 ```
 
 
-![Edit source code](https://res.cloudinary.com/dmukukwp6/image/upload/edit_source_1cd6a7f540.png)
+![Edit source code](https://res.cloudinary.com/dmukukwp6/image/upload/dropping_events_93de04fa29.png)
 
 Important: Returning `undefined` or `null` will drop the event entirely. This means the event will not be ingested into PostHog and the data will be lost forever. Use this feature carefully and only when you are certain you want to permanently discard certain events.
 
