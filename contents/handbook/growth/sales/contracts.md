@@ -21,21 +21,30 @@ Anyone on a monthly plan simply agrees to our [Terms](/terms) and [Privacy Polic
 
 ## QuoteHog pricing calculator
 
-While we offer [transparent pricing available to all](/pricing), you are able to use [QuoteHog](https://quote.posthog.net) (internal only) for customers who need a "formal quote," or who have very high volumes, or otherwise have bespoke needs.
+While we offer [transparent pricing available to all](/pricing), you can use [QuoteHog](https://quote.posthog.net) (internal only) for customers who need a "formal quote," or who have very high volumes, or otherwise have bespoke needs.
 
-You sign into QuoteHog via your PostHog Google account/SSO. Upon login, you will see a list of quotes that have been prepared, sorted by the date created. You can access a previously created quote, or create a new quote with the "New Quote" button at the top right. 
+Sign into QuoteHog via your PostHog Google account/SSO. Upon login, you will see a list of existing quotes, sorted by the  created date. You can view a previously created quote or create a new quote using the "New Quote" button at the top right. 
 
-The quoting interface is intuitive and, of course, uses the same pricing we display publicly. We should feel free to involve a customer in creating a quote if the opportunity presents itself and you think it would build trust. 
-
-Quotes can be shared externally or embedded in Trumpet (or any other external source) by clicking the Dot Menu from a Quote and then clicking "Share"
-
-To view Stripe reported usage and spend for an existing customer, or to connect a Quote to a Salesforce Opportunity or Account, first connect QuoteHog to Salesforce from your [Profile page](https://quote.posthog.net/profile).
-
-If someone asks for a PDF version of a quote, you can view the external version and then print it to PDF from there.
-
-The legacy pricing calculator is available [here](https://docs.google.com/spreadsheets/d/1ynNM9tbWsWki2Q0vhwCV0iYNtJ1NHz4eXtUvZDw_sjA/edit?usp=sharing) (internal only).
+The quoting interface is intuitive and, of course, uses the same pricing we display publicly. Feel free to involve a customer in creating a quote if the opportunity presents itself and you think it would build trust. 
 
 > Be sure to always click the "Save" button after making changes to a quote. QuoteHog does not autosave.
+
+Quotes can be shared externally or embedded in an external source. Clicking the Dot Menu from a Quote and click "Share". If someone asks for a PDF version of a quote, you can view the external version and print it to PDF.
+
+QuoteHog also provides Stripe reported usage and spend for existing customers. To do this, you need to first connect QuoteHog to Salesforce from the [Profile page](https://quote.posthog.net/profile). As you build a quote, click "Add customer info" and search for your customer account. This also allows you to link the quote to an existing Salesforce opportunity.
+
+When building a quote for an annual plan conversion or renewal, consider:
+1. How is usage trending? Looking at the past 6 month's of usage (usage history tab in Quotehog):
+- If usage is trending up, calculate the growth rate and project expected volume for a year.
+- If usage is stable, project based on the latest month's volume or the average or the maximum.
+
+> Note: QuoteHog's input expects monthly volume, so after estimating annual volume, don't forget to convert it to monthly volume.
+
+2. Is there opportunity to adopt additional products? How does that affect future usage?
+
+You can create quotes with multiple options: e.g. one based on current usage, one with a higher tier to account for growth potential.
+
+The legacy pricing calculator is available [here](https://docs.google.com/spreadsheets/d/1ynNM9tbWsWki2Q0vhwCV0iYNtJ1NHz4eXtUvZDw_sjA/edit?usp=sharing) (internal only).
 
 ## Discounts
 
