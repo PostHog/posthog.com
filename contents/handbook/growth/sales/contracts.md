@@ -36,7 +36,7 @@ QuoteHog also provides Stripe reported usage and spend for existing customers. T
 When building a quote for an annual plan conversion or renewal, consider:
 1. How is usage trending? Looking at the past 6 month's of usage (usage history tab in Quotehog)
 - If usage is trending up, calculate the growth rate and project expected volume for a year.
-- If usage is stable, project based on the lastest month's volume or the average or the maximum.
+- If usage is stable, project based on the latest month's volume or the average or the maximum.
 
 > Note: QuoteHog's input expects monthly volume, so after estimating annual volume, don't forget to convert it to monthly volume.
 
