@@ -20,7 +20,7 @@ Need more flexibility? Our [custom transformations](/docs/cdp/transformations/cu
 
 ## Filtering
 
-Instead of transforming all your PostHog events, you can construct a query that filters by event types, properties, or any SQL statement you can come up with, so that transformations are only applied to the events you care about.
+Filters enable you to target your transformations, affecting only the kinds of events you chose. Filter by event type, properties, or any SQL statement you can come up with.
 
 ![Filtering transformations](https://res.cloudinary.com/dmukukwp6/image/upload/filters_738b8029fa.png)
 
