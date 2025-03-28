@@ -131,8 +131,15 @@ const Bio = ({ biography, readme }) => {
     )
 }
 
-const TransactionTitle = ({ type, metadata }: {}) => {
-    return <p className="text-sm capitalize m-0 font-semibold">{type.replace(/_/g, ' ').toLowerCase()}</p>
+const TransactionTitle = ({ type, metadata }) => {
+    return (
+        <>
+            <p className="text-sm capitalize m-0 font-bold">{type.replace(/_/g, ' ').toLowerCase()}</p>
+            {metadata?.achievement?.title && (
+                <p className="text-sm text-primary dark:text-primary-dark m-0 mb-0.5">{metadata.achievement.title}</p>
+            )}
+        </>
+    )
 }
 
 const AchievementRow = ({ achievement, badge }) => {
