@@ -63,7 +63,7 @@ You can also create and manage transformations programmatically using our API. T
 
 To use the API, you'll need to:
 1. Enable the `Hog functions` scope in your personal API key
-2. Use the [Hog functions API endpoint](https://us.posthog.com/api/schema/swagger-ui/#/environments/environments_hog_functions_list)
+2. Use the [Hog functions API endpoints](/docs/api/hog-functions#get-api-projects-project_id-hog_functions-id) to create your transformations. 
 
 Here's an example of creating a new transformation:
 
