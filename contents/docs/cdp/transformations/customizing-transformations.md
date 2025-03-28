@@ -34,7 +34,7 @@ A transformation in PostHog receives an `event` object as input and should retur
 
 Here's a basic transformation template:
 
-```hog
+```Hog
 // Basic transformation template
 // Return the event to keep it, or null to drop it entirely
 return event
@@ -51,7 +51,7 @@ The `event` object is a global that cannot be modified directly. Instead, you ne
 
 Here's the pattern:
 
-```hog
+```Hog
 // Create a copy of the event
 let returnEvent := event
 
@@ -71,7 +71,7 @@ Returning `event` without modification will simply pass the original event throu
 
 Use `print()` statements to debug your transformations. These logs will appear in the Logs tab of your Hog function:
 
-```hog
+```Hog
 print("Processing event", event.event)
 print("Current properties", event.properties)
 
@@ -85,7 +85,7 @@ This is extremely helpful for understanding what data you're working with and ve
 
 You can add inputs to your transformation. You can access them through the `inputs` object. In the default transformation, inputs are named sequentially:
 
-```hog
+```Hog
 // Example of accessing inputs in the default transformation
 let firstInput := inputs.input_1
 let secondInput := inputs.input_2
@@ -106,7 +106,7 @@ This allows you to verify your transformation works correctly before enabling it
 
 Here's a simple example of a custom transformation that anonymizes IP addresses by replacing the last octet with '0' to protect user privacy while still maintaining geographic information:
 
-```hog
+```Hog
 // Check if the event has an IP address
 if (empty(event.properties?.$ip)) {
     print('No IP address found in event')
@@ -134,13 +134,13 @@ for (let i := 1; i <= 4; i := i + 1) {
 // Replace the last octet with '0'
 let anonymizedIp := concat(parts[1], '.', parts[2], '.', parts[3], '.0')
     
+//Note: The global event object is immutable and cannot be modified directly.
+//That's why we create a new returnEvent object to make our changes.
 let returnEvent := event
 returnEvent.properties.$ip := anonymizedIp
 return returnEvent
 ```
 
-Note: The global event object is immutable and cannot be modified directly.
-That's why we create a new returnEvent object to make our changes.
 
 ![Edit source code](https://res.cloudinary.com/dmukukwp6/image/upload/edit_source_1cd6a7f540.png)
 
