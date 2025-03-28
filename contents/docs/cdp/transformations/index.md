@@ -53,7 +53,7 @@ The history tab is particularly useful when multiple team members are working wi
 
 ## Going deeper
 
-For complete control of your transformation's behavior, you can view and edit the underlying Hog code that drives it. Experiment with rewriting your transformation's implementation to better address your needs, if the pre-built templates don't quite do the job.
+If your needs are more specific than our defaults, try customizing your transformation's implementation. You can write, test, and deploy your own transformation in minutes.
 
 Learn more about this in [customizing transformations](/docs/cdp/transformations/customizing-transformations).
 
