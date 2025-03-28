@@ -1,37 +1,61 @@
-# Goal 1: Talk to customers
+# ✅ Goal 1: Mobile surveys, Everywhere
 
-We'll only succeed if we are close to our customers, let's make our relationship with them stronger.
+We’ve already got mobile surveys working in React Native and iOS, and we’ve kicked off work for Flutter and Android [tracking here](https://github.com/PostHog/posthog/issues/25085). Next step: bring everything to feature parity with Web.
 
-- Do 5 customer interviews
-- Find the top 5 reference customers and build a relationship with them
-- Do a case study with a top reference customer
+- ✅ iOS
+- ✅ React Native
+- 🛠️ Android
+- 🛠️ Flutter
 
-# Goal 2: Improve quality
+# 📈 Goal 2: Level up survey analysis
 
-There are a couple of reported bugs that were not addressed quickly, we'd like to speed up this process and fix them.
+You asked — we listened. We're making survey analysis more useful and enjoyable, starting with a brand new global analytics page.
 
-- Reduce [SLA](https://en.wikipedia.org/wiki/Service-level_agreement) to fix bugs from months to weeks
-- Reduce [paper cut](https://en.wikipedia.org/wiki/Lingchi) issues by 50%
-    - Currently around ~30 [open bugs](https://github.com/PostHog/posthog/issues?q=is%3Aopen+is%3Aissue+label%3Afeature%2Fsurveys+label%3Abug)
+- [Global analytics view](https://github.com/PostHog/posthog/issues/28418)
+- A cleaner, more useful survey responses page
+    - [Allow customization on columns for the Survey Table Results](https://github.com/PostHog/posthog/issues/29844)
+- [Be able to see surveys result breakdown by week](https://github.com/PostHog/posthog/issues/30150)
+- [Better results analysis with metric based templates](https://github.com/PostHog/posthog/issues/19517)
+- [Don't calculate NPS score for non-NPS questions](https://github.com/PostHog/posthog/issues/19500)
+- Extra polish and UX improvements across the board, pair up with the Design team to get some ideas
 
-# Goal 3: Finish up [WIP](https://en.wikipedia.org/wiki/Work_in_process) features
+# 🎨 Goal 3: Survey customization
 
-We've started and nearly finished a couple of features our customers requested, but they are not [GA](https://en.wikipedia.org/wiki/Software_release_life_cycle#General_availability_(GA)) yet, the goal is to finish them up, gather feedback and put them in front of customers.
+A lot of people use the API to tweak their surveys. Let’s bring those use cases into the product.
 
-- [Adaptive Sampling](https://github.com/PostHog/posthog/issues/25722)
-    - Currently under a feature flag
-- [Partial Responses](https://github.com/PostHog/posthog/issues/19300)
-    - There are Draft PRs
-- [Survey Actions](https://github.com/PostHog/posthog/issues/27378)
-    - Currently under a feature flag
-- [AI Summaries](https://github.com/PostHog/posthog/issues/27379)
-    - Currently under early access features
+- [Better wait period controls](https://github.com/PostHog/posthog/issues/30379)
+- Alignment customization [here](https://github.com/PostHog/posthog/issues/28479) and [here](https://github.com/PostHog/posthog/issues/28477)
+- [Inline surveys](https://github.com/PostHog/posthog/issues/30097)
+- [Add icons](https://github.com/PostHog/posthog/issues/28478)
+- [Templated strings](https://github.com/PostHog/posthog/issues/26620)
+- [Single-response submit](https://github.com/PostHog/posthog/issues/30196)
 
-# Goal 4: Mobile Surveys
+# 🧩 Goal 4: Templates, Templates, Templates
 
-We want to bring the same functionality to Mobile that we have for Web Surveys, [GH Issue](https://github.com/PostHog/posthog/issues/25085).
+Right now, duplicating and customizing surveys across projects/environments isn’t great. Let’s fix that.
 
-- React Native
-- iOS
-- Android
-- Flutter
+- [Save custom templates](https://github.com/PostHog/posthog/issues/27309)
+- [Duplicate surveys across projects/environments](https://github.com/PostHog/posthog/issues/29138)
+- Add mobile-specific templates
+- Explore using AI to create survey templates
+
+# 💬 Goal 5: Make Key Customers Super Happy
+
+We’ve had some great convos with customers — now let’s turn those into lasting partnerships.
+
+- Build a case study with a power user
+- Be lightning-fast at resolving their issues
+
+# 🧑‍💻 Goal 6: Hire a Cracked Product Engineer
+
+The team’s growing! We’re hiring a Product Engineer to help us build faster and better.
+
+- Hire and onboard our next teammate
+- Make onboarding smooth and fast so they can hit the ground running
+
+# 🎯 Side Quests (Stretch Goals)
+
+We started these, but shifted priorities a bit. Still aiming to wrap them up if time allows.
+
+- [Adaptive survey sampling](https://github.com/PostHog/posthog/issues/25722)
+- [Survey actions](https://github.com/PostHog/posthog/issues/27378)
