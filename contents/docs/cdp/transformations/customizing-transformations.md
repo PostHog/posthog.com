@@ -22,7 +22,7 @@ During ingestion, transformations only have access to the event object. Here's t
 
 For most cases, we recommend using one of the pre-built transformations. These take care of most logic under the hood, exposing simple inputs for you to configure.
 
-You can, however, modify any transformation by clicking `edit source code`. From here you can modify the inputs – for example marking an input as secret so that it is encrypted at rest – or changing the implementation of the transformation itself.
+You can also use any of these transformations as a starting point for your own code by clicking `edit source code`. From here you can modify the inputs – for example marking an input as `secret` so that it is encrypted at rest – or changing the implementation of the transformation itself.
 
 ![Modifying transformation inputs](https://res.cloudinary.com/dmukukwp6/image/upload/inputs_6552db269b.png)
 
