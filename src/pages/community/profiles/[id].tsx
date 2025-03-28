@@ -135,14 +135,54 @@ const TransactionTitle = ({ type, metadata }: {}) => {
     return <p className="text-sm capitalize m-0 font-semibold">{type.replace(/_/g, ' ').toLowerCase()}</p>
 }
 
+const AchievementRow = ({ achievement, badge }) => {
+    return (
+        <div className="flex items-end justify-between w-full">
+            <span className="flex space-x-2">
+                <CloudinaryImage width={32} height={32} src={achievement.icon.data.attributes.url} />
+                <span>
+                    <h4 className="m-0 text-base leading-tight flex space-x-1 items-center">
+                        <span>{achievement.title}</span>
+                        {badge && (
+                            <span className="text-xs bg-accent dark:bg-accent-dark rounded-md px-1 border border-border dark:border-dark">
+                                {badge}
+                            </span>
+                        )}
+                    </h4>
+                    <p className="m-0 text-sm">{achievement.description}</p>
+                </span>
+            </span>
+            <p className="text-sm text-primary/50 dark:text-primary-dark/50 m-0">
+                {achievement.points} point{achievement.points === 1 ? '' : 's'}
+            </p>
+        </div>
+    )
+}
+
+const AchievementGroupRow = ({ achievementGroup }) => {
+    return (
+        <div className="text-left w-full">
+            <AchievementRow achievement={achievementGroup.data[0].attributes} badge="Level 1" />
+            <ul className="m-0 p-0 list-none mt-2">
+                {achievementGroup.data.slice(1).map((achievement, index) => (
+                    <li key={achievement.id} className="mt-2">
+                        <AchievementRow achievement={achievement.attributes} badge={`Level ${index + 2}`} />
+                    </li>
+                ))}
+            </ul>
+        </div>
+    )
+}
+
 const Points = () => {
     const [showAchievements, setShowAchievements] = useState(false)
     const { user } = useUser()
     const {
         allAchievement: { nodes: achievements },
+        allAchievementGroup: { nodes: achievementGroups },
     } = useStaticQuery(graphql`
         {
-            allAchievement(filter: { points: { gt: 0 } }, sort: { fields: points, order: ASC }) {
+            allAchievement(filter: { points: { gt: 0 }, achievement_group: { data: { id: { eq: null } } } }) {
                 nodes {
                     title
                     points
@@ -156,8 +196,34 @@ const Points = () => {
                     }
                 }
             }
+            allAchievementGroup {
+                nodes {
+                    achievements {
+                        data {
+                            attributes {
+                                title
+                                points
+                                description
+                                icon {
+                                    data {
+                                        attributes {
+                                            url
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
         }
     `)
+
+    const allAchievements = [...achievements, ...achievementGroups].sort((a, b) => {
+        const aPoints = a.achievements ? a.achievements.data[0]?.attributes?.points : a.points
+        const bPoints = b.achievements ? b.achievements.data[0]?.attributes?.points : b.points
+        return aPoints - bPoints
+    })
 
     return (
         <div className="max-w-xl">
@@ -178,26 +244,17 @@ const Points = () => {
                 </button>
                 {showAchievements && (
                     <ul className="m-0 p-0 list-none mt-4">
-                        {achievements.map((achievement) => {
+                        {allAchievements.map((achievement) => {
                             return (
                                 <li
-                                    className="flex items-end justify-between mt-2 pt-2 border-t border-border dark:border-dark first:mt-0 first:pt-0 first:border-t-0"
+                                    className="flex mt-2 pt-2 border-t border-border dark:border-dark first:mt-0 first:pt-0 first:border-t-0"
                                     key={achievement.id}
                                 >
-                                    <span className="flex space-x-2">
-                                        <CloudinaryImage
-                                            width={32}
-                                            height={32}
-                                            src={achievement.icon.data.attributes.url}
-                                        />
-                                        <span>
-                                            <h4 className="m-0 text-base leading-none">{achievement.title}</h4>
-                                            <p className="m-0 text-sm">{achievement.description}</p>
-                                        </span>
-                                    </span>
-                                    <p className="text-sm text-primary/50 dark:text-primary-dark/50 m-0">
-                                        {achievement.points} point{achievement.points === 1 ? '' : 's'}
-                                    </p>
+                                    {achievement.achievements ? (
+                                        <AchievementGroupRow achievementGroup={achievement.achievements} />
+                                    ) : (
+                                        <AchievementRow achievement={achievement} />
+                                    )}
                                 </li>
                             )
                         })}

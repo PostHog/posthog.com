@@ -638,7 +638,10 @@ export const sourceNodes: GatsbyNode['sourceNodes'] = async ({ actions, createCo
     await fetchPostHogDestinations()
 
     const fetchAchievements = async () => {
-        const { data } = await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/achievements?populate=*`).then((res) =>
+        const query = qs.stringify({
+            populate: ['icon', 'achievement_group.achievements.icon'],
+        })
+        const { data } = await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/achievements?${query}`).then((res) =>
             res.json()
         )
         data.forEach((achievement) => {
@@ -653,5 +656,27 @@ export const sourceNodes: GatsbyNode['sourceNodes'] = async ({ actions, createCo
             createNode(node)
         })
     }
+
+    const fetchAchievementGroups = async () => {
+        const query = qs.stringify({
+            populate: ['achievements.icon'],
+        })
+        const { data } = await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/achievement-groups?${query}`).then(
+            (res) => res.json()
+        )
+        data.forEach((achievement) => {
+            const node = {
+                id: createNodeId(`achievement-group-${achievement.id}`),
+                internal: {
+                    type: 'AchievementGroup',
+                    contentDigest: createContentDigest(achievement),
+                },
+                ...achievement?.attributes,
+            }
+            createNode(node)
+        })
+    }
+
     await fetchAchievements()
+    await fetchAchievementGroups()
 }
