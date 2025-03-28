@@ -26,7 +26,7 @@ Filters enable you to target your transformations, affecting only the kinds of e
 
 ## Testing
 
-The hardest part of setting up transformations is making sure they work as you expect. Every transformation includes a built-in testing interface, enabling you to send real data through your transformation and see exactly how it affects your events.
+As you build your transformations, PostHog makes it easy to confirm they do what you expect. Every transformation includes a built-in testing interface, enabling you to instantly send real data through it and verify the results. You can iterate until everything works to your satisfaction.
 
 ![Transformation testing UI](https://res.cloudinary.com/dmukukwp6/image/upload/testing_e2e0faf8f3.png)
 
