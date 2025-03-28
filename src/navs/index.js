@@ -2168,6 +2168,10 @@ export const docsMenu = {
                             url: '/docs/api/groups-types',
                         },
                         {
+                            name: 'Hog functions',
+                            url: '/docs/api/hog-functions',
+                        },
+                        {
                             name: 'Insights',
                             url: '/docs/api/insights',
                         },
