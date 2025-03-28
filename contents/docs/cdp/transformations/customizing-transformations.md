@@ -26,7 +26,7 @@ You can also use any of these transformations as a starting point for your own c
 
 ![Modifying transformation inputs](https://res.cloudinary.com/dmukukwp6/image/upload/inputs_6552db269b.png)
 
-Transformations are written in our [Hog language](/docs/hog). Since transformations happen during ingestion, they cannot make external HTTP calls. Instead, they focus on modifying the event object directly.
+Since transformations happen during ingestion, they cannot make external HTTP calls. Instead, they focus on modifying the event object directly.
 
 ## Writing custom Hog transformations
 
