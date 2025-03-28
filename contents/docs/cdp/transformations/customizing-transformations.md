@@ -28,6 +28,82 @@ You can, however, modify any transformation by clicking `edit source code`. From
 
 Transformations are written in our [Hog language](/docs/hog). Since transformations happen during ingestion, they cannot make external HTTP calls. Instead, they focus on modifying the event object directly.
 
+## Writing custom Hog transformations
+
+A transformation in PostHog receives an `event` object as input and should return a modified version of that event (or `null` to drop the event).
+
+Here's a basic transformation template:
+
+```hog
+// Basic transformation template
+// Return the event to keep it, or null to drop it entirely
+return event
+```
+
+> **Important:** Returning `null` will completely drop the event from further processing. Be extremely careful with this as the event will be permanently lost.
+
+### Working with the event object
+
+The `event` object is a global that cannot be modified directly. Instead, you need to:
+1. Create a copy of the event
+2. Modify the copy
+3. Return the modified copy
+
+Here's the pattern:
+
+```hog
+// Create a copy of the event
+let returnEvent := event
+
+// Ensure properties exist
+returnEvent.properties := returnEvent.properties ?? {}
+
+// Modify properties on the copy
+returnEvent.properties.my_custom_property := "new value"
+
+// Return the modified copy
+return returnEvent
+```
+
+Returning `event` without modification will simply pass the original event through unchanged.
+
+### Debugging with print statements
+
+Use `print()` statements to debug your transformations. These logs will appear in the Logs tab of your Hog function:
+
+```hog
+print("Processing event", event.event)
+print("Current properties", event.properties)
+
+// After making changes
+print("Modified event", returnEvent)
+```
+
+This is extremely helpful for understanding what data you're working with and verifying your transformation logic.
+
+### Accessing inputs
+
+You can add inputs to your transformation. You can access them through the `inputs` object. In the default transformation, inputs are named sequentially:
+
+```hog
+// Example of accessing inputs in the default transformation
+let firstInput := inputs.input_1
+let secondInput := inputs.input_2
+let thirdInput := inputs.input_3
+
+print("Using first input", firstInput)
+print("Using second input", secondInput)
+```
+
+### Testing your transformation
+
+You can test your transformation in the testing section with:
+1. Our example event (pre-populated)
+2. A real event from your instance (randomly selected)
+3. Your own custom event JSON
+
+This allows you to verify your transformation works correctly before enabling it.
+
 Here's a simple example of a custom transformation that anonymizes IP addresses by replacing the last octet with '0' to protect user privacy while still maintaining geographic information:
 
 ```hog
