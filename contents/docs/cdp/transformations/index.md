@@ -1,5 +1,5 @@
 ---
-title: Realtime Transformations
+title: Realtime transformations
 showTitle: true
 ---
 
@@ -9,7 +9,7 @@ As PostHog data arrives, you can transform it *immediately* before ingestion. Yo
 - Enriching events with geo information
 - Dropping unnecessary properties
 - Writing custom transformations using our Hog programming language
-- Filtering out Bot traffic
+- Filtering out bot traffic
 - Much more.. 
 
 PostHog enables you to transform your events in realtime using a variety of pre-built transformations. Check out the [data pipeline tab](https://us.posthog.com/pipeline/overview) and choose **transformations** to get started.
@@ -36,7 +36,6 @@ Once your transformation is up and running, the **metrics** and **logs** tabs wi
 
 ![Transformation logs](https://res.cloudinary.com/dmukukwp6/image/upload/logs_6cb6791b85.png)
 
-
 ![Transformation metrics](https://res.cloudinary.com/dmukukwp6/image/upload/metrics_ca7bd7dd92.png)
 
 ## History
@@ -60,7 +59,7 @@ Learn more about this in [customizing transformations](/docs/cdp/transformations
 
 ### How many events can I transform?
 
-There is no limit on the number of events to be transformed - transformations are completely free! However, the system requires that transformations perform efficiently and don't consume excessive resources (don't worry we have build some rail guards into that and let you know if something is funky).
+There is no limit on the number of events to be transformed - transformations are completely free! However, the system requires that transformations perform efficiently and don't consume excessive resources (don't worry we have built some rail guards into that and let you know if something is funky).
 
 ### What can cause a transformation to be automatically disabled?
 

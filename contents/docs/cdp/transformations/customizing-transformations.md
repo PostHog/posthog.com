@@ -26,7 +26,6 @@ You can, however, modify any transformation by clicking `edit source code`. From
 
 ![Modifying transformation inputs](https://res.cloudinary.com/dmukukwp6/image/upload/inputs_6552db269b.png)
 
-
 Transformations are written in our [Hog language](/docs/hog). Since transformations happen during ingestion, they cannot make external HTTP calls. Instead, they focus on modifying the event object directly.
 
 Here's a simple example of a custom transformation that anonymizes IP addresses by replacing the last octet with '0' to protect user privacy while still maintaining geographic information:
@@ -75,7 +74,7 @@ For more details and inspiration, you can always view the source code of any tra
 
 ### Guidelines for modifying a transformation
 
-- **Start from an existing template:** You can either choose the "Custom Transformation" transformation from our transformations list, or check out existing transformations that are close to the problem you're solving and work from there.
+- **Start from an existing template:** You can either choose the "Custom transformation" transformation from our transformations list, or check out existing transformations that are close to the problem you're solving and work from there.
 
 - **Rely on filters:** Offload as much as possible to the built in `filters` and `inputs`. This will make modifying your transformation later much simpler (as well as being more performant). Remember that your transformation will only be applied to events that match the filter criteria.
 
