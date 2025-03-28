@@ -34,7 +34,7 @@ Quotes can be shared externally or embedded in an external source. Clicking the 
 QuoteHog also provides Stripe reported usage and spend for existing customers. To do this, you need to first connect QuoteHog to Salesforce from the [Profile page](https://quote.posthog.net/profile). As you build a quote, click "Add customer info" and search for your customer account. This also allows you to link the quote to an existing Salesforce opportunity.
 
 When building a quote for an annual plan conversion or renewal, consider:
-1. How is usage trending? Looking at the past 6 month's of usage (usage history tab in Quotehog)
+1. How is usage trending? Looking at the past 6 month's of usage (usage history tab in Quotehog):
 - If usage is trending up, calculate the growth rate and project expected volume for a year.
 - If usage is stable, project based on the latest month's volume or the average or the maximum.
 
@@ -42,11 +42,9 @@ When building a quote for an annual plan conversion or renewal, consider:
 
 2. Is there opportunity to adopt additional products? How does that affect future usage?
 
-You can prepare 2 quotes: one based on current usage, one higher tier for growth potential.
+You can create quotes with multiple options: e.g. one based on current usage, one with a higher tier to account for growth potential.
 
 The legacy pricing calculator is available [here](https://docs.google.com/spreadsheets/d/1ynNM9tbWsWki2Q0vhwCV0iYNtJ1NHz4eXtUvZDw_sjA/edit?usp=sharing) (internal only).
-
-
 
 ## Discounts
 
