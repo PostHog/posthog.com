@@ -2,7 +2,7 @@
 title: "Customizing transformations"
 showTitle: true
 ---
-Although we recommend using one of our pre-built transformations, you can also customize them and build your own using our Hog programming language.
+We've got a great library to get you started with the most common transformation needs. If you want to go further, you can write your own using our [Hog](/docs/hog) programming language.
 
 ## Event object
 
