@@ -81,6 +81,8 @@ curl --location 'https://us.i.posthog.com/api/environments/:project_id/hog_funct
 }'
 ```
 
+> **Important:** When creating a transformation from a template, make sure to use the correct `template_id`. You can find the available template IDs by making a GET request to `/api/projects/:project_id/hog_function_templates?types=transformation` or by checking the [Hog functions API documentation](https://us.posthog.com/api/schema/swagger-ui/#/environments/environments_hog_functions_list).
+
 ### How many events can I transform?
 
 There is no limit on the number of events to be transformed - transformations are completely free! However, the system requires that transformations perform efficiently and don't consume excessive resources (don't worry we have built some rail guards into that and let you know if something is funky).
