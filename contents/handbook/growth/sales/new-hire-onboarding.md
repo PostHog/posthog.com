@@ -26,6 +26,7 @@ Sales at PostHog isn't like most other software companies! These are some of the
 - Execute your previous company's playbook. We're trying to do things differently from 90% of the industry. But please do tell us what has _and_ hasn't worked at previous places. 
 - Keep information to yourself - share openly and frequently the things you are learning, what you've got right or wrong. We don't do lone wolfing here. PostHog is a huge product, so it's ok to ask dumb questions - so long as you've tried to figure it out yourself first! 
 - Use sales BS language - if you don't know the answer that's fine! Don't promise features. Don't use vague, non-specific language. Talk to our customers like real human beings, not 'prospects'. And don't be discouraged if they say 'can we talk to someone more technical'!
+- Being slow to reply to customers - even if it's just to acknowledge their message. Make sure you have notifications turned on for _all_ messages in your customer Slack channels (not just for mentions). 
 
 ## Technical Account Executive ramp
 
@@ -54,7 +55,7 @@ Sales at PostHog isn't like most other software companies! These are some of the
 
 ### Week 2
 
-- During your first week, Simon will figure out your initial book of business (around 12 accounts).  We will review these at the start of your second week, and make sure you understand how your targets are set. 
+- During your first week, Simon will figure out your initial book of business (10 accounts).  We will review these at the start of your second week, and make sure you understand how your targets are set. 
 - Shadow more live calls and listen to more [Jiminny](https://app.jiminny.eu/dashboard) recordings. There is [a Jiminny playlist with sub-folders containing Sales calls and PostHog knowledge calls](https://app.jiminny.eu/playlists#playlist-355cdc2a-1326-4ea6-97e3-e7749800fc8a), add to it as you listen! 
 - Towards the end of the week, schedule a demo and feedback session with Simon.  We might need to do a couple of iterations over the next few weeks as you take on board feedback, don't worry if that's the case!
 - Prioritize your current book of customers, and start reaching out!
