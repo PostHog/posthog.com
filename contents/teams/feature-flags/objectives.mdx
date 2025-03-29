@@ -1,58 +1,52 @@
-### Q1 2025 Objectives
+## Q2 2025 Objectives
 
-The theme for Q1 2025 is "pour gasoline on the fire" – we want to accelerate the remarkable growth of feature flags we saw last year.  To do this, we'll focus on five key areas:
+### Flag Stability & Consistency, and Resiliency
+*Goal: Create a highly stable, consistent, and resilient feature flag system capable of supporting 10x growth*
 
-1. Performance & Reliability: Scale our feature flag platform to handle exponential growth while improving speed and dependability
-2. Customer-Driven Innovation: Deliver high-impact features that our users are asking for to drive adoption and provide greater value
-3. Strategic Research: Map the competitive landscape to identify opportunities for breakthrough features and capabilities
-4. SDK Excellence: Strengthen and expand our SDK ecosystem to make feature flag implementation seamless for both new and existing customers
-5. UX Enhancement: Continue refining the feature flag experience to make it more intuitive and powerful for all users
+1. Scale `/flags` service
+   - Complete 100% worldwide rollout of `/flags` endpoint to all customers
+   - Measure and validate improved query performance metrics
+   - Document infrastructure cost savings achieved
 
-More details on each of these areas below.
+2. Standardize SDK Error Handling and UX
+   - Implement unified error handling framework across all SDKs
+   - Develop comprehensive error classification system with standardized messages
+   - Create consistent fallback and default behaviors across platforms
+   - Ensure all SDKs utilize the latest flags response format (v2)
 
-#### 1. Performance & Reliability
-_Owners: @dmarticus, @havenbarnes_
-- [Complete migration of feature flag evaluation traffic from the legacy `/decide` endpoint to the new `/flags` endpoint](https://github.com/PostHog/posthog/issues/22131) (@dmarticus)
-- Establish comprehensive monitoring and observability for the feature flag platform (@dmarticus, @havenbarnes)
-  - Enhance Grafana metrics to differentiate between infrastructure failures and logical errors (@dmarticus)
-  - Collaborate with infrastructure team to create infrastructure cost analysis and dependency mapping with Michi (@dmarticus)
-  - Improve observability of the feature flag evaluation process by tying flag evaluation results to the original request context (@havenbarnes)
-  - Experiment with sampling request parameters for high-value customers to have better observability for support requests (@havenbarnes)
-  - Implement actionable Sentry alerts in #alerts-feature-flags channel (@havenbarnes)
-  - Integrate PostHog error tracking with new flags endpoint (@dmarticus)
-- Implement read-only flags (specifics to be defined, see the following [RFC](https://github.com/PostHog/product-internal/pull/692/files)) (@havenbarnes)
+3. Enhance System Resilience
+   - Decouple flag service from writer DB
+   - Deploy flags on differentiated infrastructure aligned with varying scale needs
+   - Implement circuit breakers for graceful degradation during upstream failures
+   - Establish reliability SLAs and monitoring for flag delivery
 
-#### 2. Customer-Driven Innovation
-_Owners: @dmarticus, @havenbarnes, @haacked_
-- [Behavioral cohort targeting for flags](https://github.com/PostHog/posthog/issues/14796) (RFC [here](https://github.com/PostHog/product-internal/pull/683/)) (@dmarticus)
-- [Feature management](https://github.com/PostHog/posthog/issues?q=is:open+is:issue+label:feature/feature-management) (@havenbarnes)
-- [Automatically manage flag staleness](https://github.com/PostHog/posthog/issues/16497) (@haacked)
-- Customer research-driven features (TBD based on the findings of the market research and customer interviews)
+### Behavioral Cohort Targeting
+*Goal: Enable customers to target feature flags based on user behaviors*
 
-#### 3. Strategic research
-_Owners: @havenbarnes, @annikaschmid_
-- Identify and analyze key user segments:
-  1. Current active users
-  2. Competitor users
-  3. Custom solution implementers
-  4. Potential users unaware of feature flagging
-- Conduct customer interviews to identify gaps and growth opportunities
-- Document findings and recommendations for product roadmap.
-- More context [here](https://github.com/PostHog/posthog/issues/14257)
+1. Ship Beta Release
+   - Develop core behavioral targeting functionality
+   - Create intuitive UI for defining behavioral cohorts
+   - Implement backend services to process and apply cohort rules
 
-#### 4. SDK Spike
-_Owners: @dmarticus, @havenbarnes, @haacked_
-- [Evaluate feasibility and tradeoffs around adding feature flags to the Java SDK](https://github.com/PostHog/posthog/issues/16419)
-- Investigate improving the Rust SDK (add feature flag evaluation, [implement the suggestions from the open issues](https://github.com/PostHog/posthog-rs/issues?q=sort:updated-desc+is:issue+is:open) etc.)
-- [Research .NET SDK demand + feasibility](https://github.com/PostHog/posthog/issues/16339)
-- Fix open issues in the Python and Node SDKs: ([Python](https://github.com/PostHog/posthog-python/issues?q=sort:updated-desc+is:issue+is:open), [Node](https://github.com/PostHog/posthog-js-lite/issues?q=sort:updated-desc+is:issue+is:open+label:nodejs))
+2. Customer Adoption
+   - Identify and onboard 5-10 key customers for beta testing
+   - Establish success metrics and collect usage data
+   - Document use cases and implementation patterns
+   - Create support resources for customer implementation
 
-#### 5. User Experience Improvements
-_Owners: @dmarticus, @havenbarnes, @haacked_
-Low-hanging, medium-impact, and largely context-free fruit that can be picked up by any team member during available capacity:
+## AI IDE Integration
+*Goal: Streamline developer workflow with AI-powered flag implementation*
 
-- UI Changes
-  - [Consolidate boolean and multivariate flag interfaces](https://github.com/PostHog/posthog/issues/26995)
-  - [Show flag evaluation results more clearly in the flag editor UI](https://github.com/PostHog/posthog/issues/26995)
-  - [Improve the experience of syncing flags between environments](https://github.com/PostHog/posthog/issues/21788)
-  - Anything else from the [current feature flag backlog](https://github.com/orgs/PostHog/projects/112/views/2)
+1. Create Intelligent Code Snippets
+   - Develop context-aware code generation system for feature flags
+   - Ensure generated code follows best practices for each language/framework
+
+2. IDE Integration
+   - Build plugins/extensions for AI IDEs (Cursor, Windsurf, potentially our own)
+   - Create seamless workflow from flag creation to code implementation
+   - Implement AI-assisted troubleshooting for flag implementation issues
+
+3. Developer Experience
+   - Measure time-to-implementation improvements
+   - Collect developer feedback on integration experience
+   - Iterate based on usage patterns and pain points
