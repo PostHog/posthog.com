@@ -28,7 +28,7 @@ import { sortOptions } from 'components/Edition/Posts'
 import { AnimatePresence, motion } from 'framer-motion'
 import Tooltip from 'components/Tooltip'
 import NotFoundPage from 'components/NotFoundPage'
-import { IconX } from '@posthog/icons'
+import { IconCheck, IconX } from '@posthog/icons'
 import Confetti from 'react-confetti'
 import dayjs from 'dayjs'
 import CloudinaryImage from 'components/CloudinaryImage'
@@ -142,16 +142,28 @@ const TransactionTitle = ({ type, metadata }) => {
     )
 }
 
-const AchievementRow = ({ achievement, badge }) => {
+const profileHasAchievement = (profile, achievement) => {
+    return profile?.achievements?.some(
+        (profileAchievement) => profileAchievement.achievement?.data?.id === achievement.id
+    )
+}
+
+const AchievementRow = ({ achievement, badge, achieved }: { achievement: any; badge?: string; achieved?: boolean }) => {
     return (
         <div className="flex items-end justify-between w-full">
-            <span className="flex space-x-2">
-                <CloudinaryImage width={32} height={32} src={achievement.icon.data.attributes.url} />
+            <span className="flex space-x-1">
+                <div className="flex-shrink-0">
+                    <CloudinaryImage width={32} height={32} src={achievement.icon.data.attributes.url} />
+                </div>
                 <span>
                     <h4 className="m-0 text-base leading-tight flex space-x-1 items-center">
-                        <span>{achievement.title}</span>
+                        <span className={`${achieved ? 'line-through' : ''}`}>{achievement.title}</span>
                         {badge && (
-                            <span className="text-xs bg-accent dark:bg-accent-dark rounded-md px-1 border border-border dark:border-dark">
+                            <span
+                                className={`${
+                                    achieved ? 'line-through' : ''
+                                } text-xs bg-accent dark:bg-accent-dark rounded-md px-1 border border-border dark:border-dark`}
+                            >
                                 {badge}
                             </span>
                         )}
@@ -159,21 +171,37 @@ const AchievementRow = ({ achievement, badge }) => {
                     <p className="m-0 text-sm">{achievement.description}</p>
                 </span>
             </span>
-            <p className="text-sm text-primary/50 dark:text-primary-dark/50 m-0">
-                {achievement.points} point{achievement.points === 1 ? '' : 's'}
+            <p className="text-sm text-primary/50 dark:text-primary-dark/50 m-0 flex space-x-1 items-center">
+                {achieved && <IconCheck className="size-3 text-green" />}
+                <span className={achieved ? 'text-green font-semibold' : ''}>
+                    {achievement.points} point{achievement.points === 1 ? '' : 's'}
+                </span>
             </p>
         </div>
     )
 }
 
-const AchievementGroupRow = ({ achievementGroup }) => {
+const AchievementGroupRow = ({ achievementGroup, profile }) => {
     return (
         <div className="text-left w-full">
-            <AchievementRow achievement={achievementGroup.data[0].attributes} badge="Level 1" />
-            <ul className="m-0 p-0 list-none mt-2">
+            <AchievementRow
+                achievement={achievementGroup.data[0].attributes}
+                badge="Level 1"
+                achieved={profileHasAchievement(profile, achievementGroup.data[0])}
+            />
+            <ul className="m-0 p-0 list-none mt-2 ml-[16px]">
                 {achievementGroup.data.slice(1).map((achievement, index) => (
-                    <li key={achievement.id} className="mt-2">
-                        <AchievementRow achievement={achievement.attributes} badge={`Level ${index + 2}`} />
+                    <li
+                        key={achievement.id}
+                        className="mt-2 border-l border-border dark:border-dark relative pl-[16px] before:content-[''] before:absolute before:left-[-1px] before:-top-4 before:w-[32px] before:border-l before:h-[calc(50%+1rem)] before:border-b before:border-border dark:before:border-dark before:rounded-bl-md last:border-l-0 last:before:left-0"
+                    >
+                        <div className="relative">
+                            <AchievementRow
+                                achievement={achievement.attributes}
+                                badge={`Level ${index + 2}`}
+                                achieved={profileHasAchievement(profile, achievement)}
+                            />
+                        </div>
                     </li>
                 ))}
             </ul>
@@ -181,8 +209,7 @@ const AchievementGroupRow = ({ achievementGroup }) => {
     )
 }
 
-const Points = () => {
-    const [showAchievements, setShowAchievements] = useState(false)
+const Points = ({ profile }) => {
     const { user } = useUser()
     const {
         allAchievement: { nodes: achievements },
@@ -191,6 +218,7 @@ const Points = () => {
         {
             allAchievement(filter: { points: { gt: 0 }, achievement_group: { data: { id: { eq: null } } } }) {
                 nodes {
+                    id: strapiID
                     title
                     points
                     description
@@ -207,6 +235,7 @@ const Points = () => {
                 nodes {
                     achievements {
                         data {
+                            id
                             attributes {
                                 title
                                 points
@@ -243,31 +272,31 @@ const Points = () => {
                     Earn points by contributing to discussions, helping others, and achieving milestones in the PostHog
                     community.
                 </p>
-                <button
-                    onClick={() => setShowAchievements(!showAchievements)}
-                    className="text-sm text-red dark:text-yellow font-bold mt-2"
-                >
-                    {showAchievements ? 'Hide available achievements' : 'Show available achievements'}
-                </button>
-                {showAchievements && (
-                    <ul className="m-0 p-0 list-none mt-4">
-                        {allAchievements.map((achievement) => {
-                            return (
-                                <li
-                                    className="flex mt-2 pt-2 border-t border-border dark:border-dark first:mt-0 first:pt-0 first:border-t-0"
-                                    key={achievement.id}
-                                >
-                                    {achievement.achievements ? (
-                                        <AchievementGroupRow achievementGroup={achievement.achievements} />
-                                    ) : (
-                                        <AchievementRow achievement={achievement} />
-                                    )}
-                                </li>
-                            )
-                        })}
-                    </ul>
-                )}
-                {user?.wallet?.transactions && user?.wallet?.transactions?.length > 0 && (
+
+                <ul className="m-0 p-0 list-none mt-4">
+                    {allAchievements.map((achievement) => {
+                        return (
+                            <li
+                                className="flex mt-2 pt-2 border-t border-border dark:border-dark first:mt-0 first:pt-0 first:border-t-0"
+                                key={achievement.id}
+                            >
+                                {achievement.achievements ? (
+                                    <AchievementGroupRow
+                                        achievementGroup={achievement.achievements}
+                                        profile={profile}
+                                    />
+                                ) : (
+                                    <AchievementRow
+                                        achievement={achievement}
+                                        achieved={profileHasAchievement(profile, achievement)}
+                                    />
+                                )}
+                            </li>
+                        )
+                    })}
+                </ul>
+
+                {/* {user?.wallet?.transactions && user?.wallet?.transactions?.length > 0 && (
                     <div className="mt-4 pt-4 border-t border-light dark:border-dark">
                         <ul className="list-none m-0 p-0 space-y-3">
                             {user?.wallet?.transactions?.map(({ id, amount, date, type, metadata }) => {
@@ -291,7 +320,7 @@ const Points = () => {
                             })}
                         </ul>
                     </div>
-                )}
+                )} */}
             </div>
         </div>
     )
@@ -529,7 +558,7 @@ export default function ProfilePage({ params, location }: PageProps) {
                                         <PostsTable {...posts} />
                                     </ul>
                                 )}
-                                {view === 'points' && <Points />}
+                                {view === 'points' && <Points profile={profile} />}
                             </div>
                         </>
                     ) : null}

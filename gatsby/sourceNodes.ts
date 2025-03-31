@@ -651,6 +651,7 @@ export const sourceNodes: GatsbyNode['sourceNodes'] = async ({ actions, createCo
                     type: 'Achievement',
                     contentDigest: createContentDigest(achievement),
                 },
+                strapiID: achievement.id,
                 ...achievement?.attributes,
             }
             createNode(node)
