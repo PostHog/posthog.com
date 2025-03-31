@@ -1658,7 +1658,7 @@ export const docsMenu = {
                             url: '/docs/getting-started/identify-users',
                         },
                         {
-                            name: 'Deploy proxy',
+                            name: 'Deploy a proxy',
                             url: '/docs/advanced/proxy',
                         },
                         {
@@ -2225,25 +2225,12 @@ export const docsMenu = {
                             url: '/docs/settings/projects',
                         },
                         {
-                            name: 'Access control',
-                            url: '/docs/settings/access-control',
-                        },
-                        {
-                            name: 'SSO & SAML',
-                            url: '/docs/settings/sso',
-                        },
-                        {
                             name: 'Hog',
                             url: '/docs/hog',
                         },
                         {
-                            name: 'Command palette',
-                            url: '/docs/cmd-k',
-                        },
-                        {
                             name: 'SQL access',
                             url: '/docs/sql',
-                            icon: 'IconHogQL',
                             children: [
                                 {
                                     name: 'Overview',
@@ -2270,6 +2257,18 @@ export const docsMenu = {
                                     url: '/docs/sql/tutorials',
                                 },
                             ],
+                        },
+                        {
+                            name: 'Access control',
+                            url: '/docs/settings/access-control',
+                        },
+                        {
+                            name: 'SSO & SAML',
+                            url: '/docs/settings/sso',
+                        },
+                        {
+                            name: 'Command palette',
+                            url: '/docs/cmd-k',
                         },
                     ],
                 },
