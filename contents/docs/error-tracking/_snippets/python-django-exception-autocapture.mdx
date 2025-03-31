@@ -7,7 +7,7 @@ from posthog.exception_capture import Integrations
 Posthog("<ph_project_api_key>", enable_exception_autocapture=True, exception_autocapture_integrations = [Integrations.Django])
 ```
 
-For older versions of Django you will need to instrument your views individually:
+For older versions of Django, you will need to instrument your views individually:
 
 ``` python
 # urls.py
