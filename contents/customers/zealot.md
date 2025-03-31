@@ -16,7 +16,7 @@ users:
 toolsUsed:
   - LLM observability
   - Session recording
-  - Error
+  - Error tracking
   - Product analytics
 date: 2023-09-15
 ---
