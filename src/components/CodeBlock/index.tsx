@@ -182,11 +182,11 @@ export const CodeBlock = ({
 
     const replaceProjectInfo = (code: string) => {
         return code
-            .replace('<ph_project_api_key>', removeQuotes(projectToken) || '<ph_project_api_key>')
-            .replace('<ph_project_name>', removeQuotes(projectName) || '<ph_project_name>')
-            .replace('<ph_app_host>', removeQuotes(appHost) || '<ph_app_host>')
-            .replace('<ph_client_api_host>', removeQuotes(clientApiHost) || 'https://us.i.posthog.com')
-            .replace('<ph_region>', removeQuotes(region) || '<ph_region>')
+            .replace(/<ph_project_api_key>/g, removeQuotes(projectToken) || '<ph_project_api_key>')
+            .replace(/<ph_project_name>/g, removeQuotes(projectName) || '<ph_project_name>')
+            .replace(/<ph_app_host>/g, removeQuotes(appHost) || '<ph_app_host>')
+            .replace(/<ph_client_api_host>/g, removeQuotes(clientApiHost) || 'https://us.i.posthog.com')
+            .replace(/<ph_region>/g, removeQuotes(region) || '<ph_region>')
     }
 
     const copyToClipboard = () => {

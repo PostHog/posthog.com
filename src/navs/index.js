@@ -96,10 +96,6 @@ export const dataPipelines = {
         {
             name: 'Realtime destinations',
             url: '/docs/cdp/destinations',
-            badge: {
-                title: 'Beta',
-                className: 'uppercase !bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',
-            },
             icon: 'IconLive',
             color: 'salmon',
             featured: true,
@@ -337,10 +333,23 @@ export const dataPipelines = {
         },
         {
             name: 'Transformations',
-            url: '/docs/cdp/geoip-enrichment',
+            url: '/docs/cdp/transformations',
             icon: 'IconWrench',
             color: 'yellow',
             featured: true,
+            children: [
+                {
+                    name: 'Overview',
+                    url: '/docs/cdp/transformations',
+                },
+                {
+                    name: 'Customization',
+                    url: '/docs/cdp/transformations/customizing-transformations',
+                },
+                {
+                    name: 'Transformations',
+                },
+            ],
             dynamicChildren: 'data-pipeline-transformations',
         },
         {
@@ -1980,6 +1989,10 @@ export const docsMenu = {
                         {
                             name: 'Groups types',
                             url: '/docs/api/groups-types',
+                        },
+                        {
+                            name: 'Hog functions',
+                            url: '/docs/api/hog-functions',
                         },
                         {
                             name: 'Insights',

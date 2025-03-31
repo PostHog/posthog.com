@@ -1,5 +1,5 @@
 ---
-title: How to set up LLM analytics for ChatGPT
+title: How to set up OpenAI observability
 date: 2025-01-24
 author:
   - lior-neu-ner
@@ -9,7 +9,7 @@ tags:
 ---
 
 
-Tracking your ChatGPT or OpenAI API usage, costs, and latency is crucial to understanding how your users are interacting with your AI and LLM-powered features. 
+Tracking your OpenAI API usage, costs, and latency is crucial to understanding how your users are interacting with your AI and LLM-powered features. 
 
 In this tutorial, we show you how to monitor important metrics such as:
 
@@ -17,27 +17,27 @@ In this tutorial, we show you how to monitor important metrics such as:
 - Average cost per user
 - Average API response time
 
-We'll build a basic Next.js app, implement the ChatGPT API, and capture these events automatically using PostHog. 
+We'll build a basic Next.js app, implement the OpenAI API, and capture these events automatically using PostHog's LLM observability feature.
 
 ## 1. Creating a Next.js app
 
 To showcase how to track important metrics, we create a simple one-page React app with the following:
 
 - A form with a textfield and button for user input.
-- A label to show ChatGPT output.
+- A label to show model output.
 - A dropdown to select different [OpenAI models](https://platform.openai.com/docs/models).
-- An API route to call the ChatGPT API and generate a response.
+- An API route to call the OpenAI API and generate a response.
 
 First, ensure [Node.js is installed](https://nodejs.dev/en/learn/how-to-install-nodejs/) (version 18.0 or newer) then run the following script to create a new Next.js app. Say **no** to TypeScript, **yes** to app router, and the defaults for all the other options.
 
 ```bash
-npx create-next-app@latest chatgpt-analytics
+npx create-next-app@latest openai-observability
 ```
 
-After creating your app, go into the newly created `chatgpt-analytics` directory and install the PostHog [Node SDK](/docs/libraries/node) and `ai` [package](/docs/ai-engineering/observability) as well as OpenAI's [JavaScript SDK](https://platform.openai.com/docs/libraries/typescript-javascript-library).
+After creating your app, go into the newly created `openai-observability` directory and install the PostHog [Node SDK](/docs/libraries/node) and `ai` [package](/docs/ai-engineering/observability) as well as OpenAI's [JavaScript SDK](https://platform.openai.com/docs/libraries/typescript-javascript-library).
 
 ```bash
-cd chatgpt-analytics
+cd openai-observability
 npm install --save posthog-node @posthog/ai openai
 ```
 
@@ -51,13 +51,13 @@ const models = ['gpt-4o', 'chatgpt-4o-latest', 'gpt-4o-mini'];
 
 export default function Home() {
   const [userInput, setUserInput] = useState('');
-  const [chatGPTResponse, setChatGPTResponse] = useState('');
+  const [modelResponse, setModelResponse] = useState('');
   const [selectedModel, setSelectedModel] = useState(models[0]);
 
-  const fetchChatGPTResponse = async () => {
+  const fetchModelResponse = async () => {
     try {
 
-      setChatGPTResponse('Generating...');
+      setModelResponse('Generating...');
 
       const res = await fetch('/api/generate', {
         method: 'POST',
@@ -67,9 +67,9 @@ export default function Home() {
         body: JSON.stringify({ input: userInput, model: selectedModel }),
       })
       const response = await res.json();
-      setChatGPTResponse(response.content);
+      setModelResponse(response.content);
     } catch (error) {
-      setChatGPTResponse(error.message);
+      setModelResponse(error.message);
     }
   };
 
@@ -83,7 +83,7 @@ export default function Home() {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    fetchChatGPTResponse();
+    fetchModelResponse();
   };
 
   return (
@@ -105,7 +105,7 @@ export default function Home() {
         ))}
       </select>     
       <label>ChatGPT Response:</label>
-      <label>{chatGPTResponse}</label>
+      <label>{modelResponse}</label>
     </div>
   );
 };
@@ -117,7 +117,7 @@ Run `npm run dev` to see our app in action:
 
 ## 2. Adding and tracking the generate API route
 
-In the `app` folder, create an `api` folder, a `generate` folder inside it, and then a `route.js` file in that. This is our `/api/generate` API route that calls the ChatGPT API and returns the response. 
+In the `app` folder, create an `api` folder, a `generate` folder inside it, and then a `route.js` file in that. This is our `/api/generate` API route that calls the OpenAI API and returns the response. 
 
 Next, set up:
 
