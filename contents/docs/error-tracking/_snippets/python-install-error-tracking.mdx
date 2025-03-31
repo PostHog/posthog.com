@@ -10,9 +10,32 @@ from posthog import Posthog
 posthog = Posthog("<ph_project_api_key>", enable_exception_autocapture=True, ...)
 ```
 
-import PythonDjangoExceptionAutocapture from './python-django-exception-autocapture.mdx'
+import Tab from "components/Tab"
+import PythonDjangoExceptionAutocapture from '../docs/error-tracking/_snippets/python-django-exception-autocapture.mdx'
+import PythonFlaskExceptionAutocapture from '../docs/error-tracking/_snippets/python-flask-exception-autocapture.mdx'
+import PythonFastAPIExceptionAutocapture from '../docs/error-tracking/_snippets/python-flask-exception-autocapture.mdx'
 
-<PythonDjangoExceptionAutocapture />
+<Tab.Group tabs={['Django', 'Flask', 'FastAPI']}>
+    <Tab.List>
+      <Tab>Django</Tab>
+      <Tab>Flask</Tab>
+      <Tab>FastAPI</Tab>
+    </Tab.List>
+    <Tab.Panels>
+        <Tab.Panel>
+            <PythonDjangoExceptionAutocapture />
+        </Tab.Panel>
+        <Tab.Panel>
+            <PythonFlaskExceptionAutocapture />
+        </Tab.Panel>
+        <Tab.Panel>
+            <PythonFastAPIExceptionAutocapture />
+        </Tab.Panel>
+    </Tab.Panels>
+</Tab.Group>
+
+
+
 
 ### Manually capturing exceptions in Python
 

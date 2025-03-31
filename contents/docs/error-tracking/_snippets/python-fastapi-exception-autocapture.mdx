@@ -1,6 +1,3 @@
-
-Because we already installed PostHog, all we need to do now is initialize it with your project API key and host from [your project settings](https://us.posthog.com/settings/project), calling `capture_exception()` from within FastAPI's error handler: 
-
 ```python
 from fastapi.responses import JSONResponse
 from posthog import Posthog
