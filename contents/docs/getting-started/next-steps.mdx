@@ -21,29 +21,25 @@ You can then use our [web analytics](/docs/web-analytics) dashboard to track you
 
 Read our [web analytics vs product analytics](/docs/web-analytics/web-vs-product-analytics) explainer for more.
 
-## 3. Invite your team
-
-PostHog is way more powerful when you're using it with your teammates.
-
-To invite them, go to your instance homepage, click the **Invite** button, and add their email. 
-
-This will add them to your organization with access to all your projects.
-
-//TKTK update screenshot
-
-![Invite](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/next-steps-after-installing/invite.png)
-
-You can change their access levels in your organization settings, and set some projects to private if required.
-
-You'll likely want to [filter out events from internal users](/tutorials/filter-internal-users) if you do this.
-
-## 4. Watch your first session replay
+## 3. Watch your first session replay
 
 Watching people using your product is like magic.
 
 Once you've [enabled session replay](/docs/session-replay/installation) in your project, head to the [what to watch tab](https://us.posthog.com/replay/templates) in session replay to watch how users naviagte specific parts of your app.
 
 Warning: watching replays is addictive, but incredibly useful.
+
+## 4. Import revenue and customer data into our data warehouse
+
+When you choose PostHog, you also get a built-in data warehouse.
+
+You can then [link your most valuable data](/docs/data-warehouse/join) from sources like your CRM, payment processor, or database, combine it with the event data already in PostHog, and query across all of it.
+
+We currently offer fully-managed import integrations for the likes of [Stripe](/docs/cdp/sources/stripe), [Hubspot](/docs/cdp/sources/hubspot), and [Salesforce](/docs/cdp/sources/salesforce).
+
+We also support important data from most popular data warehouses and databases, such as [Postgres](/docs/cdp/sources/postgres), [BigQuery](/docs/cdp/sources/bigquery), and [Amazon S3](/docs/cdp/sources/s3).
+
+See the full [list of PostHog data sources](/docs/cdp/sources) for more. 
 
 ## 5. Start sending PostHog data to other tools
 
@@ -62,19 +58,7 @@ Head to the [data pipelines](/docs/cdp) docs for more on how you can use PostHog
 
 You can also configure [batch exports](/docs/cdp/batch-exports/s3) to a data warehouse.
 
-## 6. Import revenue and customer data into our data warehouse
-
-When you choose PostHog, you also get a built-in data warehouse.
-
-You can then [link your most valuable data](/docs/data-warehouse/join) from sources like your CRM, payment processor, or database, combine it with the event data already in PostHog, and query across all of it.
-
-We currently offer fully-managed import integrations for the likes of [Stripe](/docs/cdp/sources/stripe), [Hubspot](/docs/cdp/sources/hubspot), and [Salesforce](/docs/cdp/sources/salesforce).
-
-We also support important data from most popular data warehouses and databases, such as [Postgres](/docs/cdp/sources/postgres), [BigQuery](/docs/cdp/sources/bigquery), and [Amazon S3](/docs/cdp/sources/s3).
-
-See the full [list of PostHog data sources](/docs/cdp/sources) for more. 
-
-## 7. Learn how to win with PostHog
+## 6. Learn how to win with PostHog
 
 PostHog exists to help you build more successful products and we provide a lot of tools to get the job done.
 
@@ -87,7 +71,7 @@ If you have no idea where to start, we recommend reading our guide to [Winning w
 
 ![a complete dashboard](https://res.cloudinary.com/dmukukwp6/image/upload/hogflix_c681b6891d.png)
 
-## 8. Start testing in production
+## 7. Start testing in production
 
 At PostHog, we test in production. This doesn't mean we:
 

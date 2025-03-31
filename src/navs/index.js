@@ -1782,6 +1782,119 @@ export const docsMenu = {
                     ],
                 },
                 {
+                    name: 'Frameworks',
+                    url: '/docs/frameworks',
+                    icon: 'IconBook',
+                    children: [
+                        {
+                            name: 'Overview',
+                            url: '/docs/frameworks',
+                        },
+                        {
+                            name: 'Angular',
+                            url: '/docs/libraries/angular',
+                        },
+                        {
+                            name: 'Astro',
+                            url: '/docs/libraries/astro',
+                        },
+                        {
+                            name: 'Bubble',
+                            url: '/docs/libraries/bubble',
+                        },
+                        {
+                            name: 'Django',
+                            url: '/docs/libraries/django',
+                        },
+                        {
+                            name: 'Docusaurus',
+                            url: '/docs/libraries/docusaurus',
+                        },
+                        {
+                            name: 'Flask',
+                            url: '/docs/libraries/flask',
+                        },
+                        {
+                            name: 'Framer',
+                            url: '/docs/libraries/framer',
+                        },
+                        {
+                            name: 'Gatsby',
+                            url: '/docs/libraries/gatsby',
+                            badge: {
+                                title: '3rd party',
+                            },
+                        },
+                        {
+                            name: 'Google Tag Manager',
+                            url: '/docs/libraries/google-tag-manager',
+                        },
+                        {
+                            name: 'Laravel',
+                            url: '/docs/libraries/laravel',
+                        },
+                        {
+                            name: 'Next.js',
+                            url: '/docs/libraries/next-js',
+                        },
+                        {
+                            name: 'Nuxt.js',
+                            url: '/docs/libraries/nuxt-js',
+                        },
+                        {
+                            name: 'n8n',
+                            url: '/docs/libraries/n8n',
+                        },
+                        {
+                            name: 'Remix',
+                            url: '/docs/libraries/remix',
+                        },
+                        {
+                            name: 'Retool',
+                            url: '/docs/libraries/retool',
+                        },
+                        {
+                            name: 'RudderStack',
+                            url: '/docs/libraries/rudderstack',
+                        },
+                        {
+                            name: 'Segment',
+                            url: '/docs/libraries/segment',
+                        },
+                        {
+                            name: 'Sentry',
+                            url: '/docs/libraries/sentry',
+                        },
+                        {
+                            name: 'Shopify',
+                            url: '/docs/libraries/shopify',
+                            badge: {
+                                title: '3rd party',
+                            },
+                        },
+                        {
+                            name: 'Svelte',
+                            url: '/docs/libraries/svelte',
+                        },
+                        {
+                            name: 'Vue.js',
+                            url: '/docs/libraries/vue-js',
+                        },
+                        {
+                            name: 'Webflow',
+                            url: '/docs/libraries/webflow',
+                        },
+                        {
+                            name: 'WooCommerce',
+                            url: '/docs/libraries/woocommerce',
+                        },
+                        {
+                            name: 'WordPress',
+                            url: '/docs/libraries/wordpress',
+                        },
+                    ],
+                },
+                {
                     name: 'API',
                     url: '/docs/api',
                     icon: 'IconBrackets',
@@ -1934,119 +2047,7 @@ export const docsMenu = {
                         },
                     ],
                 },
-                {
-                    name: 'Frameworks',
-                    url: '/docs/frameworks',
-                    icon: 'IconBook',
-                    children: [
-                        {
-                            name: 'Overview',
-                            url: '/docs/frameworks',
-                        },
-                        {
-                            name: 'Angular',
-                            url: '/docs/libraries/angular',
-                        },
-                        {
-                            name: 'Astro',
-                            url: '/docs/libraries/astro',
-                        },
-                        {
-                            name: 'Bubble',
-                            url: '/docs/libraries/bubble',
-                        },
-                        {
-                            name: 'Django',
-                            url: '/docs/libraries/django',
-                        },
-                        {
-                            name: 'Docusaurus',
-                            url: '/docs/libraries/docusaurus',
-                        },
-                        {
-                            name: 'Flask',
-                            url: '/docs/libraries/flask',
-                        },
-                        {
-                            name: 'Framer',
-                            url: '/docs/libraries/framer',
-                        },
-                        {
-                            name: 'Gatsby',
-                            url: '/docs/libraries/gatsby',
-                            badge: {
-                                title: '3rd party',
-                            },
-                        },
-                        {
-                            name: 'Google Tag Manager',
-                            url: '/docs/libraries/google-tag-manager',
-                        },
-                        {
-                            name: 'Laravel',
-                            url: '/docs/libraries/laravel',
-                        },
-                        {
-                            name: 'Next.js',
-                            url: '/docs/libraries/next-js',
-                        },
-                        {
-                            name: 'Nuxt.js',
-                            url: '/docs/libraries/nuxt-js',
-                        },
-                        {
-                            name: 'n8n',
-                            url: '/docs/libraries/n8n',
-                        },
-                        {
-                            name: 'Remix',
-                            url: '/docs/libraries/remix',
-                        },
-                        {
-                            name: 'Retool',
-                            url: '/docs/libraries/retool',
-                        },
-                        {
-                            name: 'RudderStack',
-                            url: '/docs/libraries/rudderstack',
-                        },
-                        {
-                            name: 'Segment',
-                            url: '/docs/libraries/segment',
-                        },
-                        {
-                            name: 'Sentry',
-                            url: '/docs/libraries/sentry',
-                        },
-                        {
-                            name: 'Shopify',
-                            url: '/docs/libraries/shopify',
-                            badge: {
-                                title: '3rd party',
-                            },
-                        },
-                        {
-                            name: 'Svelte',
-                            url: '/docs/libraries/svelte',
-                        },
-                        {
-                            name: 'Vue.js',
-                            url: '/docs/libraries/vue-js',
-                        },
-                        {
-                            name: 'Webflow',
-                            url: '/docs/libraries/webflow',
-                        },
-                        {
-                            name: 'WooCommerce',
-                            url: '/docs/libraries/woocommerce',
-                        },
-                        {
-                            name: 'WordPress',
-                            url: '/docs/libraries/wordpress',
-                        },
-                    ],
-                },
+
                 {
                     name: 'Advanced',
                     url: '/docs/advanced/cdp',
@@ -2153,7 +2154,7 @@ export const docsMenu = {
                             url: '/docs/data',
                         },
                         {
-                            name: 'Other',
+                            name: 'Properties',
                             url: '/docs/data/event-spec/ecommerce-events',
                             children: [
                                 {
@@ -2226,36 +2227,36 @@ export const docsMenu = {
                             name: 'Command palette',
                             url: '/docs/cmd-k',
                         },
-                    ],
-                },
-                {
-                    name: 'SQL access',
-                    url: '/docs/sql',
-                    icon: 'IconHogQL',
-                    children: [
                         {
-                            name: 'Overview',
+                            name: 'SQL access',
                             url: '/docs/sql',
-                        },
-                        {
-                            name: 'SQL expressions',
-                            url: '/docs/sql/expressions',
-                        },
-                        {
-                            name: 'Supported functions',
-                            url: '/docs/sql/clickhouse-functions',
-                        },
-                        {
-                            name: 'Supported aggregations',
-                            url: '/docs/sql/aggregations',
-                        },
-                        {
-                            name: 'Variables',
-                            url: '/docs/sql/variables',
-                        },
-                        {
-                            name: 'Tutorials',
-                            url: '/docs/sql/tutorials',
+                            icon: 'IconHogQL',
+                            children: [
+                                {
+                                    name: 'Overview',
+                                    url: '/docs/sql',
+                                },
+                                {
+                                    name: 'SQL expressions',
+                                    url: '/docs/sql/expressions',
+                                },
+                                {
+                                    name: 'Supported functions',
+                                    url: '/docs/sql/clickhouse-functions',
+                                },
+                                {
+                                    name: 'Supported aggregations',
+                                    url: '/docs/sql/aggregations',
+                                },
+                                {
+                                    name: 'Variables',
+                                    url: '/docs/sql/variables',
+                                },
+                                {
+                                    name: 'Tutorials',
+                                    url: '/docs/sql/tutorials',
+                                },
+                            ],
                         },
                     ],
                 },
@@ -2315,6 +2316,56 @@ export const docsMenu = {
                     ],
                 },
                 {
+                    name: 'Migrate',
+                    url: '/docs/migrate',
+                    children: [
+                        {
+                            name: 'Overview',
+                            url: '/docs/migrate',
+                        },
+                        {
+                            name: 'Migrate to PostHog Cloud',
+                            url: '/docs/migrate/migrate-to-cloud',
+                        },
+                        {
+                            name: 'Migrate from Amplitude',
+                            url: '/docs/migrate/migrate-from-amplitude',
+                        },
+                        {
+                            name: 'Migrate from Google Analytics',
+                            url: '/docs/migrate/google-analytics',
+                        },
+                        {
+                            name: 'Migrate from Heap',
+                            url: '/docs/migrate/heap',
+                        },
+                        {
+                            name: 'Migrate from LaunchDarkly',
+                            url: '/docs/migrate/launchdarkly',
+                        },
+                        {
+                            name: 'Migrate from Matomo',
+                            url: '/docs/migrate/matomo',
+                        },
+                        {
+                            name: 'Migrate from Mixpanel',
+                            url: '/docs/migrate/mixpanel',
+                        },
+                        {
+                            name: 'Migrate from Pendo',
+                            url: '/docs/migrate/pendo',
+                        },
+                        {
+                            name: 'Migrate from Plausible',
+                            url: '/docs/migrate/plausible',
+                        },
+                        {
+                            name: 'Migrate from Statsig',
+                            url: '/docs/migrate/statsig',
+                        },
+                    ],
+                },
+                {
                     name: 'Reverse proxy',
                     url: '/docs/advanced/proxy/managed-reverse-proxy',
                     children: [
@@ -2369,56 +2420,6 @@ export const docsMenu = {
                         {
                             name: 'Vercel',
                             url: '/docs/advanced/proxy/vercel',
-                        },
-                    ],
-                },
-                {
-                    name: 'Migrate',
-                    url: '/docs/migrate',
-                    children: [
-                        {
-                            name: 'Overview',
-                            url: '/docs/migrate',
-                        },
-                        {
-                            name: 'Migrate to PostHog Cloud',
-                            url: '/docs/migrate/migrate-to-cloud',
-                        },
-                        {
-                            name: 'Migrate from Amplitude',
-                            url: '/docs/migrate/migrate-from-amplitude',
-                        },
-                        {
-                            name: 'Migrate from Google Analytics',
-                            url: '/docs/migrate/google-analytics',
-                        },
-                        {
-                            name: 'Migrate from Heap',
-                            url: '/docs/migrate/heap',
-                        },
-                        {
-                            name: 'Migrate from LaunchDarkly',
-                            url: '/docs/migrate/launchdarkly',
-                        },
-                        {
-                            name: 'Migrate from Matomo',
-                            url: '/docs/migrate/matomo',
-                        },
-                        {
-                            name: 'Migrate from Mixpanel',
-                            url: '/docs/migrate/mixpanel',
-                        },
-                        {
-                            name: 'Migrate from Pendo',
-                            url: '/docs/migrate/pendo',
-                        },
-                        {
-                            name: 'Migrate from Plausible',
-                            url: '/docs/migrate/plausible',
-                        },
-                        {
-                            name: 'Migrate from Statsig',
-                            url: '/docs/migrate/statsig',
                         },
                     ],
                 },
