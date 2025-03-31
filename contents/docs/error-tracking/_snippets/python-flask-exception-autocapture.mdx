@@ -1,0 +1,15 @@
+Because we already installed PostHog, all we need to do now is initialize it with your project API key and host from [your project settings](https://us.posthog.com/settings/project), calling `capture_exception()` from within Flask's error handler:  
+
+```python
+from flask import Flask, jsonify
+from posthog import Posthog
+
+posthog = Posthog('<ph_project_api_key>', host='<ph_client_api_host>')
+
+@app.errorhandler(Exception)
+def handle_exception(e):
+    posthog.capture_exception(e)
+    response = jsonify({'message': str(e)})
+    response.status_code = 500
+    return response
+```

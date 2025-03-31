@@ -10,13 +10,11 @@ from posthog import Posthog
 posthog = Posthog("<ph_project_api_key>", enable_exception_autocapture=True, ...)
 ```
 
-If you're using Django 4.2+, you can enable the exception autocapture integration which will also automatically capture Django errors.
+import PythonDjangoExceptionAutocapture from './python-django-exception-autocapture.mdx'
 
-```python
-from posthog.exception_capture import Integrations
+<PythonDjangoExceptionAutocapture />
 
-Posthog("<ph_project_api_key>", enable_exception_autocapture=True, exception_autocapture_integrations = [Integrations.Django])
-```
+### Manually capturing exceptions in Python
 
 For exceptions handled by your application that you would still like sent to PostHog, you can manually call the capture method:
 
@@ -24,4 +22,4 @@ For exceptions handled by your application that you would still like sent to Pos
 posthog.capture_exception(e, 'user_distinct_id', properties=additional_properties)
 ```
 
-You can find a full example of all of this in our [Python (and Flask) error tracking tutorial](/tutorials/python-error-tracking).
+You can find a full example of all of this in our [Python error tracking tutorial](/tutorials/python-error-tracking).

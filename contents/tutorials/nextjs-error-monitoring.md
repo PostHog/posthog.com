@@ -1,5 +1,5 @@
 ---
-title: How to set up Next.js error monitoring
+title: How to set up Next.js error tracking
 date: 2025-03-18
 author:
  - ian-vanagas

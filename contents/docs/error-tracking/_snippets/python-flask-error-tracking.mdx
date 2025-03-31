@@ -1,0 +1,42 @@
+## Capturing errors in Flask
+
+We’ll build a basic Flask app. To start, ensure your virtual environment is still active then install Flask:
+
+```bash
+pip install flask
+```
+
+Next, create an `app.py` file with the following basic setup:
+
+```python
+from flask import Flask, jsonify
+
+app = Flask(__name__)
+
+@app.route('/')
+def home():
+    return '<h1>Welcome to our Flask app</h1>'
+
+@app.route('/error')
+def trigger_error():
+    raise ValueError('This is a triggered backend error!')
+
+@app.errorhandler(Exception)
+def handle_exception(e):
+    response = jsonify({'message': str(e)})
+    response.status_code = 500
+    return response
+
+if __name__ == '__main__':
+    app.run(debug=True)
+```
+
+You can then run `python app.py` and go to `http://localhost:5000/error` to see your intentional error (that’s handled by Flask).
+
+### Setting up PostHog
+
+import PythonFlaskExceptionAutocapture from './python-flask-exception-autocapture.mdx'
+
+<PythonFlaskExceptionAutocapture />
+
+When you go to `http://localhost:5000/error` now, you’ll see the error captured in PostHog.

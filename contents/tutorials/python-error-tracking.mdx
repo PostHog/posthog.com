@@ -1,5 +1,5 @@
 ---
-title: How to set up Python (and Flask) error tracking
+title: How to set up Python error tracking
 date: 2025-03-17
 author:
  - ian-vanagas
@@ -61,75 +61,31 @@ Now, run `python error.py`. You’ll cause an error that is autocaptured by Post
   classes="rounded"
 />
 
-## Capturing errors in Flask
+Python frameworks often have built-in error handlers. This means PostHog’s default exception autocapture won’t work. Instead, we need to manually capture errors. The exact process changes depending on the framework in question.
 
-Python frameworks like Flask often have built-in error handlers. This means PostHog’s default error autocapture won’t work. Instead, we need to manually capture errors. 
+import Tab from "components/Tab"
+import PythonDjangoExceptionAutocapture from '../docs/error-tracking/_snippets/python-django-exception-autocapture.mdx'
+import PythonFlaskErrorTracking from '../docs/error-tracking/_snippets/python-flask-error-tracking.mdx'
+import PythonFastAPIErrorTracking from '../docs/error-tracking/_snippets/python-fastapi-error-tracking.mdx'
 
-To show this off, we’ll build a basic Flask app. To start, ensure your virtual environment is still active then install Flask:
-
-```bash
-pip install flask
-```
-
-Next, create an `app.py` file with the following basic setup:
-
-```python
-from flask import Flask, jsonify
-
-app = Flask(__name__)
-
-@app.route('/')
-def home():
-    return '<h1>Welcome to our Flask app</h1>'
-
-@app.route('/error')
-def trigger_error():
-    raise ValueError('This is a triggered backend error!')
-
-@app.errorhandler(Exception)
-def handle_exception(e):
-    response = jsonify({'message': str(e)})
-    response.status_code = 500
-    return response
-
-if __name__ == '__main__':
-    app.run(debug=True)
-```
-
-You can then run `python app.py` and go to `http://localhost:5000/error` to see your intentional error (that’s handled by Flask).
-
-### Setting up PostHog
-
-Because we already installed PostHog, all we need to do now is initialize it with your project API key and host from [your project settings](https://us.posthog.com/settings/project), calling `capture_exception()` like this:  
-
-```python
-from flask import Flask, jsonify
-from posthog import Posthog
-
-app = Flask(__name__)
-
-posthog = Posthog('<ph_project_api_key>', host='<ph_client_api_host>')
-
-@app.route('/')
-def home():
-    return '<h1>Welcome to our Flask app</h1>'
-
-@app.route('/error')
-def trigger_error():
-    raise ValueError('This is a triggered backend error!')
-
-@app.errorhandler(Exception)
-def handle_exception(e):
-    posthog.capture_exception(e)
-    response = jsonify({'message': str(e)})
-    response.status_code = 500
-    return response
-
-if __name__ == '__main__':
-    app.run(debug=True)
-```
-
-When you go to `http://localhost:5000/error` now, you’ll see the error captured in PostHog.
+<Tab.Group tabs={['Django', 'Flask', 'FastAPI']}>
+    <Tab.List>
+      <Tab>Django</Tab>
+      <Tab>Flask</Tab>
+      <Tab>FastAPI</Tab>
+    </Tab.List>
+    <Tab.Panels>
+        <Tab.Panel>
+            <PythonDjangoExceptionAutocapture />
+        </Tab.Panel>
+        <Tab.Panel>
+            <PythonFlaskErrorTracking />
+        </Tab.Panel>
+        <Tab.Panel>
+            <PythonFastAPIErrorTracking />
+        </Tab.Panel>
+    </Tab.Panels>
+</Tab.Group>
 
 ## Monitoring errors in PostHog
 
