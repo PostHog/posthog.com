@@ -82,6 +82,8 @@ This is a faster option to get up and running. If you don't want to or can't use
 
 #### Ubuntu
 
+> Note: Importantly, if you're internal to PostHog we are standardised on working on MacOS (not Linux). In part because of SOC2 auditing gains it gives us.
+
 1. Install Docker following [the official instructions here](https://docs.docker.com/engine/install/ubuntu/).
 
 2. Install the `build-essential` package:
