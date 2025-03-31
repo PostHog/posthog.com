@@ -396,7 +396,7 @@ export const ProductOS = () => {
                             description="Create a singular customer view by combining event and customer data in one place."
                         />
                         <TextCard
-                            title="No rate limits"
+                            title="Generous rate limits"
                             description="Create a singular customer view by combining event and customer data in one place."
                         />
                     </ul>
