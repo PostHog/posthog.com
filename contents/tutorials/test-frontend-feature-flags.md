@@ -84,7 +84,7 @@ To run the tests, update your `package.json` with the new script:
 }
 ```
 
-With everything settled up, we can finally run our tests: 
+With everything set up, we can finally run our tests: 
 
 ```bash
 npm test
@@ -180,7 +180,7 @@ When we run the app again, the main link on the page changed to "Go to PostHog."
 
 When we run tests now, it still passes, but only tests part of the code. To test all of it, we must handle feature flags by mocking PostHog. 
 
-Luckily, Vitest provides a mock service natively. You can use it by importing the `vi` dependency from `vitest`, which is also has compatibility with the Jest API.
+Luckily, Vitest provides a mock service natively. You can use it by importing the `vi` dependency from `vitest`, which also has compatibility with the Jest API.
 
 In `src/App.test.jsx`, mock `useFeatureFlagEnabled`. Create a new test where the mocked `useFeatureFlagEnabled` function return `true`, then checks the "Go to PostHog" version of the flag.
 
