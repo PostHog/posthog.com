@@ -15,6 +15,7 @@ import SearchBox from 'components/Search/SearchBox'
 import Toggle from 'components/Toggle'
 import Tooltip from 'components/Tooltip'
 import Banner from 'components/Banner'
+import HedgeHogModeEmbed from 'components/HedgehogMode'
 
 const TheoToggle = () => {
     const { theoMode, setTheoMode } = useLayoutData()
@@ -62,6 +63,7 @@ const Article = ({
                 </>
             )}
             {theoMode && <TheoToggle />}
+            <HedgeHogModeEmbed />
         </div>
     )
 }
