@@ -1217,13 +1217,7 @@ export const handbookSidebar = [
     },
     {
         name: 'RevOps',
-        url: '',
-        children: [
-            {
-                name: 'Overview',
-                url: '/handbook/growth/revops/',
-            },
-        ],
+        url: '/handbook/growth/revops',
     },
     {
         name: 'Comms',
