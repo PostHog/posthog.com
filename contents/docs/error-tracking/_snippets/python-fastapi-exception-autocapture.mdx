@@ -1,3 +1,5 @@
+FastAPI manually captures exceptions, you will need to to call `capture_exception()` from the frameworks custom error handler to capture exceptions:
+
 ```python
 from fastapi.responses import JSONResponse
 from posthog import Posthog

@@ -1,4 +1,4 @@
-If you're using Django 4.2+, you can enable the exception autocapture integration which will also automatically capture Django errors.
+If you're using Django 4.2+, you can enable the [exception autocapture integration](/docs/error-tracking/installation?tab=Python) which will also automatically capture Django errors.
 
 ```python
 from posthog import Posthog
@@ -7,7 +7,7 @@ from posthog.exception_capture import Integrations
 Posthog("<ph_project_api_key>", enable_exception_autocapture=True, exception_autocapture_integrations = [Integrations.Django])
 ```
 
-For older versions of Django, you will need to instrument your views individually:
+For older versions of Django, you will need to instrument your views individually to capture unhandled exceptions:
 
 ``` python
 # urls.py
