@@ -8,9 +8,9 @@ const HedgeHogModeRenderer =
         : () => null
 
 export default function HedgeHogModeEmbed(): JSX.Element | null {
-    const { hedgehogModeEnabled } = useLayoutData()
+    const { hedgehogModeEnabled, compact } = useLayoutData()
 
-    return typeof window !== 'undefined' && hedgehogModeEnabled ? (
+    return typeof window !== 'undefined' && hedgehogModeEnabled && !compact ? (
         <Suspense fallback={<span>Loading...</span>}>
             <HedgeHogModeRenderer
                 config={{
