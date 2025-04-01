@@ -32,7 +32,7 @@ Since we primarily focus on customers who've signed up and have a forecasted bil
 
 ### What does onboarding consist of?
 
-Customers in this bucket essentially get an account manager for the first three months, who will focus on:
+Customers in this bucket essentially get high touch assistance for the first three months, who will focus on:
 
 - **Billing Assistance**: It's easy to configure PostHog poorly, pay for products you don't use (eg Groups, Data Pipelines, Autocapture), or generally misconfigure such that the ROI is poor. Our main objective and first pass outreach is oriented towards trimming unnecessary spend, and communicating our position that [we are the cheapest for every product](/why).
 - **Technical Assistance**: Beyond billing related configuration, we assist customers with any technical questions they have around setup and fitting PostHog into their stack. One 30-minute call discussing customer's architecture/providing suggestions, can go a long way to preventing issues down the road, especially for more complex setups. Misconfiguration (especially for analytics/identity merging) is a known churn risk.
