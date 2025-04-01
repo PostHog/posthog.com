@@ -40,6 +40,8 @@ You can find your project API key and instance address in [your project settings
 
 import PythonFlaskExceptionAutocapture from '../error-tracking/_snippets/python-flask-exception-autocapture.mdx'
 
+Flask has built-in error handlers. This means PostHog’s default exception autocapture won’t work and we need to manually capture errors instead using `capture_exception()`:
+
 <PythonFlaskExceptionAutocapture />
 
 ## Next steps
