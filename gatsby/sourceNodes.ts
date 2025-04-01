@@ -618,22 +618,31 @@ export const sourceNodes: GatsbyNode['sourceNodes'] = async ({ actions, createCo
             createNode(node)
         })
     }
-    const fetchPostHogDestinations = async () => {
-        const { results } = await fetch(`https://us.posthog.com/api/public_hog_function_templates`).then((res) =>
-            res.json()
+
+    const fetchPostHogPipelines = async (
+        type: 'transformation' | 'destination',
+        generateSlug: (pipeline: any) => string
+    ) => {
+        const { results } = await fetch(`https://us.posthog.com/api/public_hog_function_templates?type=${type}`).then(
+            (res) => res.json()
         )
-        results.forEach((destination) => {
+        results.forEach((pipeline) => {
+            const slug = generateSlug(pipeline)
             const node = {
-                id: createNodeId(`posthog-destination-${destination.id}`),
+                id: createNodeId(`posthog-pipeline-${pipeline.id}`),
                 internal: {
-                    type: 'PostHogDestination',
-                    contentDigest: createContentDigest(destination),
+                    type: 'PostHogPipeline',
+                    contentDigest: createContentDigest(pipeline),
                 },
-                destinationId: destination.id,
-                ...destination,
+                pipelineId: pipeline.id,
+                slug,
+                type,
+                ...pipeline,
             }
             createNode(node)
         })
     }
-    await fetchPostHogDestinations()
+
+    await fetchPostHogPipelines('transformation', (pipeline) => pipeline.id.replace('plugin-', ''))
+    await fetchPostHogPipelines('destination', (pipeline) => pipeline.id.replace('template-', ''))
 }

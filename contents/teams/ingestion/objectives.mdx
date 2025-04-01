@@ -1,0 +1,34 @@
+## Q2 objectives
+
+### Fix property definitions service
+
+We identified several problems with the current implementation of property-defs, which we want to fix in Q2:
+
+- Improve scalability
+- Improve data consistency
+- Break out its data store
+- Reduce the troubleshooting effort
+
+### Finish moving to capture-rs
+
+We are still running the Django capture service, and we need to transition away from it. In Q2, we will:
+
+- Move all capture endpoints to capture-rs
+- Improve team's confidence in maintaining the capture layer
+
+### Develop ownership of ingestion incidents
+
+As the product has matured and the traffic has increased, we need to improve our incident response process. This quarter we'll focus on:
+
+- Developing a solid process for managing incidents and followups
+- Bring more discipline to handling alerts, and exceptions
+- Improve documentation on troubleshooting ingestion problems
+- Reducing the incident response times
+
+### Improve infrastructure for deployments
+
+We're too slow and have too little confidence in the ingestion deployment process. Our plan is to:
+
+- Switch to a more feature-flag-oriented development process
+- Move all ingestion components to ArgoCD
+- Investigate other mechanisms to reduce the risk of deployments, e.g. blue/green, faster rollbacks

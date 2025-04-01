@@ -70,7 +70,7 @@ export const AboutStory = () => {
                 <div className="text-primary dark:text-primary-dark absolute bottom-6 md:bottom-12 lg:bottom-6 left-4 md:-left-16 leading-tight">
                     <James />
                     <strong>James Hawkins</strong>
-                    <span className="block text-sm">CEO, Co-founder</span>
+                    <span className="block text-sm">Co-CEO</span>
                 </div>
                 <div className="absolute bottom-0 lg:-bottom-2 right-0 sm:right-12 lg:right-8">
                     <CloudinaryImage
@@ -88,7 +88,7 @@ export const AboutStory = () => {
                 <div className="absolute bottom-8 md:bottom-16 lg:bottom-16 -right-4 text-primary dark:text-primary-dark leading-tight">
                     <Tim />
                     <strong>Tim Glaser</strong>
-                    <span className="block text-sm">CTO, Co-founder</span>
+                    <span className="block text-sm">Co-CEO</span>
                 </div>
             </aside>
         </section>

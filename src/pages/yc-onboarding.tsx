@@ -28,8 +28,9 @@ enum YCBatch {
 const features = [
     '$50,000 in PostHog credit for 12 months<sup>1</sup>',
     'Exclusive PostHog merch for founders<sup>2</sup>',
-    'Access to our YC founder Slack community',
     'Monthly newsletter of advice for founders',
+    '50% off your first six months of Mintlify',
+    'Access to our YC founder Slack community',
     'Priority support (if needed)',
 ]
 

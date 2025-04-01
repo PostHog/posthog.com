@@ -14,6 +14,8 @@ features:
   errorTracking: true
 ---
 
+
+
 PostHog makes it easy to get data about traffic and usage of your [Next.js](https://nextjs.org/) app. Integrating PostHog into your site enables analytics about user behavior, custom events capture, session recordings, feature flags, and more.
 
 This guide walks you through integrating PostHog into your Next.js app using the [React](/docs/libraries/react) and the [Node.js](/docs/libraries/node) SDKs.
@@ -21,6 +23,16 @@ This guide walks you through integrating PostHog into your Next.js app using the
 > You can see a working example of this integration in our [Next.js demo app](https://github.com/PostHog/posthog-js/tree/master/playground/nextjs).
 
 Next.js has both client and server-side rendering, as well as pages and app routers. We'll cover all of these options in this guide.
+
+## Alpha: integration via LLM
+
+Try our prompt-based integration for Next.js using Cursor, Bolt, and other agent-like tools that can run terminal commands. Paste this into your chat:
+
+import AgentPrompt from "./_snippets/agent-prompt.mdx"
+
+<AgentPrompt />
+
+Or, to integrate manually, continue with the rest of this guide.
 
 ## Prerequisites
 
@@ -46,55 +58,24 @@ You can also read [the full `posthog-js` documentation](/docs/libraries/js/featu
 
 ## Server-side analytics
 
-Server-side rendering enables you to render pages on the server instead of the client. This can be useful for SEO, performance, and user experience.
+import NextJSInstallServer from "../../integrate/_snippets/nextjs/install-nextjs-server.mdx"
 
-To integrate PostHog into your Next.js app on the server-side, you can use the [Node SDK](/docs/libraries/node).
+<NextJSInstallServer />
 
-First, install the `posthog-node` library:
+### Server-side configuration
 
-```shell
-yarn add posthog-node
-# or
-npm install --save posthog-node
-```
+Next.js overrides the default `fetch` behavior on the server to introduce their own cache. PostHog ignores that cache by default, as this Next.js's default behavior to any fetch call.
 
-### Router-specific instructions
-
-import Tab from "components/Tab"
-import AppRouterServerSetup from "./_snippets/app-router-server-setup.mdx"
-import PagesRouterServerSetup from "./_snippets/pages-router-server-setup.mdx"
-
-<Tab.Group tabs={[
-    'App router', 
-    'Pages router']}>
-    <Tab.List>
-        <Tab>App router</Tab>
-        <Tab>Pages router</Tab>
-    </Tab.List>
-    <Tab.Panels>
-        <Tab.Panel>
-            <AppRouterServerSetup />
-        </Tab.Panel>
-        <Tab.Panel>
-            <PagesRouterServerSetup />
-        </Tab.Panel>
-    </Tab.Panels>
-</Tab.Group>
-
-### Server-side Configuration
-
-NextJS overrides the default `fetch` behaviour on the server to introduce their own cache. Posthog will ignore that cache by default, as this is also NextJS's default behavior to any fetch call.
-
-You can override that configuration when initializing Posthog if you wish, but make sure you understand the pros/cons of using NextJS's cache and are aware that you might get cached results rather than the actual result our server would be returning - for feature flags, for example.
+You can override that configuration when initializing PostHog, but make sure you understand the pros/cons of using Next.js's cache and that you might get cached results rather than the actual result our server would return. This is important for feature flags, for example.
 
 ```tsx
 posthog.init(process.env.NEXT_PUBLIC_POSTHOG_KEY, {
   // ... your configuration
   fetch_options: {
-    cache: 'force-cache', // Use NextJS cache
+    cache: 'force-cache', // Use Next.js cache
     next_options: {       // Passed to the `next` option for `fetch`
       revalidate: 60,     // Cache for 60 seconds
-      tags: ['posthog'],  // Can be used with NextJS `revalidateTag` function
+      tags: ['posthog'],  // Can be used with Next.js `revalidateTag` function
     },
   }
 })

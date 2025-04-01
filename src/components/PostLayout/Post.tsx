@@ -16,6 +16,7 @@ import { Edit, ExpandDocument, Issue } from 'components/Icons'
 import { DarkModeToggle } from 'components/DarkModeToggle'
 import { useLayoutData } from 'components/Layout/hooks'
 import AskMax from 'components/AskMax'
+import { useUser } from 'hooks/useUser'
 
 export default function Post({ children }: { children: React.ReactNode }) {
     const {
@@ -46,13 +47,15 @@ export default function Post({ children }: { children: React.ReactNode }) {
         }
     }
 
+    const { user } = useUser()
+
     return (
         <div className={!internalMenu ? '-mt-1' : ''}>
             {menu && mobileMenu && <MobileNav className={`flex ${compact ? '' : 'md:hidden'}`} menu={menu} />}
             <div
                 className={`w-full relative md:flex justify-between mx-auto transition-all ${
                     fullWidthContent ? 'max-w-full' : 'max-w-screen-2xl'
-                }`}
+                } ${user?.profile?.id === 21210 ? 'font-fancy' : ''}`}
             >
                 {!compact && menu && (
                     <div

@@ -28,7 +28,12 @@ Before you start, make sure that:
 If you don't do this, your holiday won't show up in the team time off calendar. 
 
 To book a day off:
-- Book it on the PTO by Deel app in Slack. There are various types of time off you can select. It will be automatically approved and added to the team time off calendar (with the exception of longer term leave.) It will also be added to your manager's personal calendar. 
+- Book it on the PTO by Deel app in Slack. There are various types of time off you can select. It will be automatically approved and added to the team time off calendar (with the exception of longer term leave.) It will also be added to your manager's personal calendar.
+- There are four types of time off you can select
+   - PTO - this will be the majority of the time for vacation or any other time off that doesn't fit below
+   - Out Sick - this is when you're sick and will take time off unexpectedly
+   - [Parental Leave](https://posthog.com/handbook/people/time-off#parental-leave)
+   - Medical Leave - this is planned time off for you personally, on medical grounds - if it is a family member who requires support meaning you      will be off, this is PTO. 
 - Block out your own personal GCal to show that you are out. This is because PTO by Deel _only_ books in an all day event in your calendar to show that you are out. If you don't do this, automated meetings such as interviews or demos might still get booked into your cal.  
 - Set an out of office message on your email and have it point to someone else on the team, or hey@posthog.com. PTO by Deel will automatically set your Slack status to out of office and will autorespond to Slack messages. 
 

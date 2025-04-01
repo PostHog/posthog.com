@@ -49,29 +49,21 @@ If this is a big feature which will need an announcement, content, or other mark
 
 The owner turns the ambiguous milestone into a roadmap of ambitious, meaningful, sprint-sized goals, thinking 2 - 3 sprints ahead to give other functions time. [Goal principles](/handbook/engineering/development-process#set-some-milestones) still apply.
 
-### Execute on goals
+### Iterate through the work
 
-Our sprint planning session is where the high-level goals for the next sprint get decided. Each team takes these, breaks them down, and adds their own smaller items, like bugfixes.
+We used to have company-wide sprint planning sessions but as we've grown there were so many teams that it started being plan-reading and not planning.
 
-Sprint planning works like this:
-* During the week of the sprint planning, teams (with the help of the product managers) define one or two big ambitious goals for this sprint that align with major milestones.
-* On Wednesday we get together. We use breakout rooms to split into the small teams, and each team finalizes the ambitious goals that they want to tackle.
-* We come back in the same room, where
-* We do a quick retrospective on the goals for the last sprint (did we get everything done? Should we have prioritized other things?)
-* Each team lead presents the main goals for their team. We have an open discussion about whether the goals are the right goals for this sprint and whether they are ambitious enough.
-* Each goal should have a single owner.
+PostHog works in two week iterations. Each team plans their work together and adds their sprint plan to [a pinned issue in GitHub](https://github.com/PostHog/posthog/issues?q=sort%3Aupdated-desc%20is%3Aissue%20is%3Aopen%20%20). If the issue for the next iteration doesn't exist when you come to comment on it then you create it.
 
-This meeting is also a chance to coordinate any cross-team dependencies. These should be the exception, not the rule. 
+When planning your work you should also have a retrospective for the previous iteration. Like most things at PostHog this can be a very low ceremony retro and ideally checking the team is working on the right things in the right way is a frequent thing not a once a fortnight thing.
 
-As one of our values is [stepping on toes](/handbook/company/values#step-on-toes), during the sprint you might come across something that should be much higher priority than what was already planned. It's up to you to then decide to work on that as opposed to what was agreed in the sprint planning session.
+Work in the iteration should:
 
-After the sprint planning, each team should have their own session (can be async!) where they:
+* be concrete and probably achievable in 2 weeks
+* have a clear owner in the team
+* have a clear link to the team or company goals
 
-* Do a detailed retrospective.
-* Divide up goals between members of the team.
-* Prioritize any other work (Support Hero, smaller features, bug fixes, refactoring, etc.).
-  - The split between big ambitious goals and 'other work' should very roughly be about 2/3 to 1/3
-  - If we only 'scrape' the previous goal, we should split 1/2 on a new big goal and 1/2 on finishing off the previous goal and other work
+As one of our values is [stepping on toes](/handbook/company/values#step-on-toes), during the iteration you might come across something that should be much higher priority than what was already planned. It's up to you to then decide to work on that as opposed to what was agreed in the planning session.
 
 ### Evaluate success 
 
