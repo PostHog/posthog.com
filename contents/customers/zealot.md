@@ -35,7 +35,7 @@ As a result the team quickly doubled down on PostHog and Brandon immediately sta
 
 <BorderWrapper>
 <Quote
-    imageSource="/images/customers/brandon.jpg"
+    imageSource="/images/customers/brandon.png"
     size="md"
     name="Brandon Jakobson"
     title="Co-founder & CTO at Zealot"
@@ -59,7 +59,7 @@ Responding to these BugSnag alerts caused a lot of friction, however. Brandon an
 
 <BorderWrapper>
 <Quote
-    imageSource="/images/customers/brandon.jpg"
+    imageSource="/images/customers/brandon.png"
     size="md"
     name="Brandon Jakobson"
     title="Co-founder & CTO at Zealot"
