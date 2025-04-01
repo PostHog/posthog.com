@@ -64,14 +64,6 @@ Info on how leads are assigned can be [found here](https://posthog.com/handbook/
 
 Most companies add friction here by making customers jump on a call first to qualify them - we don't do this because it's annoying to the customer. However, it's totally fine to ask them questions over email in advance of the demo to make sure you're making the best use of their time - just be specific. A few clarifying questions is fine, a 30 question survey is not.
 
-If you're pretty sure that they should be qualified out, you should still be helpful over email - some customers just use the form to get in touch and don't want to actually have a demo (e.g. they have a billing question or are asking about compliance things like HIPAA.)
-
-If it's an unsolicited Request For Proposal (RFP) where we haven't had any prior contact or usage from the company then it is **highly likely** that you will burn a lot of time for nothing.  The suggested approach here is to see if anyone from the company has recently signed up to PostHog, if so then make contact with them to see if they are aware of the RFP and can provide more information.  If not then ask the person who sent you the RFP for a call to gather more context before making a decision on whether to fill it in.  If they aren't willing to get on a call then it's likely that we are not their vendor of choice, and they are using us to make up the numbers in a tender process.  As such, we shouldn't spend time on this kind of activity.
-
-If they're eligible for the [Startup Plan](/startups), route them to the application form and disqualify them as it's not an immediate opportunity (but we sincerely hope they grow into loyal PostHog customers). If their usage will burn through their credits quickly, you should feel free to switch their lead status to `Nurture` and keep close tabs on them. Per our [usual approach to sales](/handbook/growth/sales/overview), we want to make sure they're successful in this "high-use" scenario and are building with us for the long-term.
-
-You can also redirect them to use the In-app support modal if they have a product-related question - this will then be routed to the right team, as well as showing them CTAs to upgrade for high priority support.
-
 > **Examples of good discovery questions - this is not a script, just ideas!**
 > - What is the problem? What is this problem affecting?
 > - What metric is impacted as a result of this? What metric would be improved as a result of PostHog?
@@ -84,6 +76,22 @@ You can also redirect them to use the In-app support modal if they have a produc
 > - Who will be the consumers of PostHog data? How are they currently answering their questions, and how easy is it for them to do so with existing tooling?
 >
 > (We will flesh this out into something more structured by product eventually.)
+
+If you're pretty sure that they should be qualified out, you should still be helpful over email - some customers just use the form to get in touch and don't want to actually have a demo (e.g. they have a billing question or are asking about compliance things like HIPAA.) 
+
+#### Requests for Proposals (RFPs)
+
+There are two types of RFPs -- 1) those where we have context on what they're trying to accomplish and where we have qualified their specific needs ahead of time. These are *solicited* RFPs. 2) those where we just get an RFP randomly without any context. These are *unsolicited* RFPs. We generally don't respond to unsolicited RFPs and generally do respond to solicited RFPs.
+
+If it's an unsolicited RFP where we haven't had any prior contact or usage from the company then it is **highly likely** that you will burn a lot of time for nothing and you are free to decline.  If you find the unsolicited RFP otherwise compelling and want to proceed, the suggested approach here is to see if anyone from the company has recently signed up to PostHog. If so, then make contact with them to see if they are aware of the RFP and can provide more information on PostHog's inclusion. If you can't identify anyone who has recently signed up to PostHog, then ask the person who sent you the RFP for a call to gather more context before making a decision on whether to fill it in.  If they aren't willing to get on a call then it's likely that we are not their vendor of choice, and they are using us to make up the numbers in a tender process.  As such, we shouldn't spend time on this kind of activity. If you choose to spend time with these, timebox your effort to ensure you are not devoting a week to a 500 question RFP where we have very slim chances of success. Your time is your most valuable asset. 
+
+If it's a solicited RFP, you're free to proceed so long as the opportunity is qualified as a whole and you carefully balance the level of effort required in the RFP against the opportunity for you & PostHog. Again, a 500 question RFP may not be worth it if they plan on spending <$20k for PostHog (a 50 question RFP may not even be worth it in this instance)! Use your best judgement, and it is generally still wise to timebox your effort. 
+
+#### Startups 
+
+If they're eligible for the [Startup Plan](/startups), route them to the application form and disqualify them as it's not an immediate opportunity (but we sincerely hope they grow into loyal PostHog customers). If their usage will burn through their credits quickly, you should feel free to switch their lead status to `Nurture` and keep close tabs on them. Per our [usual approach to sales](/handbook/growth/sales/overview), we want to make sure they're successful in this "high-use" scenario and are building with us for the long-term.
+
+You can also redirect them to use the In-app support modal if they have a product-related question - this will then be routed to the right team, as well as showing them CTAs to upgrade for high priority support.
 
 ### 3. Initial demo
 
