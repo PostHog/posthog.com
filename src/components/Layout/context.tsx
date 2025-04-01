@@ -1,4 +1,4 @@
-import React, { createContext, useEffect, useState } from 'react'
+import React, { createContext, useEffect, useMemo, useState } from 'react'
 import menu, { docsMenu } from '../../navs'
 import { IMenu } from 'components/PostLayout/types'
 import { useLocation } from '@reach/router'
@@ -41,9 +41,22 @@ export const LayoutProvider = ({ children, ...other }: IProps) => {
         compact || (typeof window !== 'undefined' && localStorage.getItem('full-width-content') === 'true')
     )
 
-    const [hedgehogModeEnabled, setHedgehogModeEnabled] = useState<boolean>(
-        (typeof window !== 'undefined' && localStorage.getItem('hedgehog-mode-enabled') === 'true')
-    )
+    const hedgehogModeLocalStorage = useMemo(() => {
+        const today = new Date()
+        const isAprilFirst = today.getMonth() === 3 && today.getDate() === 1
+        let hedgehogModeLocalStorage =
+            typeof window !== 'undefined' && localStorage.getItem('hedgehog-mode-enabled')
+
+        if (isAprilFirst && typeof hedgehogModeLocalStorage !== 'string') {
+            hedgehogModeLocalStorage = 'true'
+        }
+
+        return hedgehogModeLocalStorage
+    }, [])
+
+    // Only default it to be on if it's April 1st but still respect if they turned it off
+
+    const [hedgehogModeEnabled, _setHedgehogModeEnabled] = useState<boolean>(hedgehogModeLocalStorage === 'true')
     const [enterpriseMode, setEnterpriseMode] = useState(false)
     const [theoMode, setTheoMode] = useState(false)
     const [post, setPost] = useState<boolean>(false)
@@ -67,9 +80,11 @@ export const LayoutProvider = ({ children, ...other }: IProps) => {
         localStorage.setItem('full-width-content', fullWidthContent + '')
     }, [fullWidthContent])
 
-    useEffect(() => {
-        localStorage.setItem('hedgehog-mode-enabled', hedgehogModeEnabled + '')
-    }, [hedgehogModeEnabled])
+
+    const setHedgehogModeEnabled = (enabled: boolean) => {
+        _setHedgehogModeEnabled(enabled)
+        localStorage.setItem('hedgehog-mode-enabled', enabled + '')
+    }
 
     useEffect(() => {
         if (compact) {
