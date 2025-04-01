@@ -55,7 +55,7 @@ Overall, the team lead is responsible for ensuring the above happens. They shoul
 
 ## How do small teams and product managers work together?
 
-With our engineering-led culture, the engineers on the small team are normally responsible for their area product.
+With our engineering-led culture, the engineers on the small team are normally responsible for their area of the product.
 
 We have a small number of product managers who support the product small teams in achieving their goals. This includes helping with prioritization, creating/updating dashboards, competitors analysis, speaking to customers etc. However, having product managers doesn't mean that the engineers can abdicate these responsibilities. The engineers should be the experts of the product they are building and their customers.
 
