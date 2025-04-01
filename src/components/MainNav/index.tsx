@@ -751,15 +751,17 @@ export const Main = () => {
                                             </li>
                                         )}
                                         {/* Hedgehog mode */}
-                                        <li className="px-1 whitespace-nowrap">
-                                            <button
-                                                onClick={() => setHedgehogModeEnabled(!hedgehogModeEnabled)}
-                                                className="flex items-center justify-between w-full px-2 py-2 text-sm rounded-sm group/item hover:bg-border dark:hover:bg-border-dark"
-                                            >
-                                                <span>Hedgehog mode</span>
-                                                <Toggle checked={hedgehogModeEnabled} />
-                                            </button>
-                                        </li>
+                                        {!compact && (
+                                            <li className="px-1 whitespace-nowrap">
+                                                <button
+                                                    onClick={() => setHedgehogModeEnabled(!hedgehogModeEnabled)}
+                                                    className="flex items-center justify-between w-full px-2 py-2 text-sm rounded-sm group/item hover:bg-border dark:hover:bg-border-dark"
+                                                >
+                                                    <span>Hedgehog mode</span>
+                                                    <Toggle checked={hedgehogModeEnabled} />
+                                                </button>
+                                            </li>
+                                        )}
                                         <Orders />
                                     </ul>
                                 )
