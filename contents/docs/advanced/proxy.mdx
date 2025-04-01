@@ -4,7 +4,6 @@ sidebar: Docs
 showTitle: true
 ---
 
-## What is a reverse proxy?
 
 A reverse proxy enables you to send events to PostHog Cloud using your own domain. 
 
@@ -43,7 +42,7 @@ Other documented options for deploying a reverse proxy include:
 
 - We require that the proxy sets the `Host` header to the same host it's calling. Check the guides above on how to do that for several proxies.
 - Don't use a subdomain that includes `posthog`, `analytics`, `tracking`, or other similar words which might cause events to be blocked.
-- Make sure to [pass the proper `ui_host` parameter](/docs/libraries/js/config) when initializing PostHog, so that links to PostHog point to the correct host. This is required for tasks like authenticating the toolbar.
+- Make sure to [pass the proper `ui_host` parameter](/docs/libraries/js/config) when initializing PostHog, so that links to PostHog point to the correct host (like `us.posthog.com`). This is required for tasks like authenticating the toolbar.
 
 ## Reverse proxy requirements
 
