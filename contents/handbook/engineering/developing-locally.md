@@ -57,7 +57,7 @@ This is a faster option to get up and running. If you don't want to or can't use
 4. In the codespace, open a terminal window and run `docker compose -f docker-compose.dev.yml up`.
 5. In another terminal, run `pnpm i` (and use the same terminal for the following commands)
 6. Then run `pip install -r requirements.txt -r requirements-dev.txt`
-7. Now run `./bin/migrate` and then `./bin/start`.
+7. Now run `DEBUG=1 ./bin/migrate` and then `./bin/start`.
 8. Open browser to http://localhost:8010/.
 9. To get some practical test data into your brand-new instance of PostHog, run `DEBUG=1 ./manage.py generate_demo_data`.
 
@@ -81,6 +81,8 @@ This is a faster option to get up and running. If you don't want to or can't use
 4. Continue with [cloning the repository](#cloning-the-repository).
 
 #### Ubuntu
+
+> Note: Importantly, if you're internal to PostHog we are standardised on working on MacOS (not Linux). In part because of SOC2 auditing gains it gives us.
 
 1. Install Docker following [the official instructions here](https://docs.docker.com/engine/install/ubuntu/).
 
@@ -138,11 +140,11 @@ Alternatively, if you'd prefer not to use [Flox-based instant setup](#instant-se
 
 In this step we will start all the external services needed by PostHog to work.
 
-First, append line `127.0.0.1 kafka clickhouse clickhouse-coordinator` to `/etc/hosts`. Our ClickHouse and Kafka data services won't be able to talk to each other without these mapped hosts.  
+First, append line `127.0.0.1 kafka clickhouse clickhouse-coordinator objectstorage` to `/etc/hosts`. Our ClickHouse and Kafka data services won't be able to talk to each other without these mapped hosts.  
 You can do this in one line with:
 
 ```bash
-echo '127.0.0.1 kafka clickhouse clickhouse-coordinator' | sudo tee -a /etc/hosts
+echo '127.0.0.1 kafka clickhouse clickhouse-coordinator objectstorage' | sudo tee -a /etc/hosts
 ```
 
 > If you are using a newer (>=4.1) version of Podman instead of Docker, the host machine's `/etc/hosts` is used as the base hosts file for containers by default, instead of container's `/etc/hosts` like in Docker. This can make hostname resolution fail in the ClickHouse container, and can be mended by setting `base_hosts_file="none"` in [`containers.conf`](https://github.com/containers/common/blob/main/docs/containers.conf.5.md#containers-table).

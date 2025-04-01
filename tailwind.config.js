@@ -1,5 +1,5 @@
 module.exports = {
-    content: ['./src/**/*.{js,jsx,ts,tsx}', './safelist.txt'],
+    content: ['./src/**/*.{js,jsx,ts,tsx}', './contents/**/*.{js,jsx,ts,tsx,mdx}', './safelist.txt'],
     options: {
         safelist: [
             // use safelist.txt
@@ -161,6 +161,7 @@ module.exports = {
                     'arial',
                     'sans-serif',
                 ],
+                fancy: ['Zapfino', 'serif'],
                 button: ['MatterVF', 'sans-serif'],
                 nav: ['MatterVF', 'sans-serif'],
                 code: ['Source Code Pro', 'Menlo', 'Consolas', 'monaco', 'monospace'],

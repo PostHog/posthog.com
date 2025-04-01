@@ -310,6 +310,6 @@ And we're done setting up our A/B test! Open your app, log in with a few differe
 
 - [Product metrics to track for LLM apps](/product-engineers/llm-product-metrics)
 - [How to set up LLM analytics for Anthropic's Claude](/tutorials/anthropic-analytics)
-- [How to set up LLM analytics for ChatGPT](/tutorials/chatgpt-analytics) 
+- [How to set up OpenAI observability](/tutorials/openai-observability) 
 
 <NewsletterForm />
