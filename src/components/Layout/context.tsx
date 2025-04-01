@@ -42,10 +42,10 @@ export const LayoutProvider = ({ children, ...other }: IProps) => {
     )
 
     const hedgehogModeLocalStorage = useMemo(() => {
+        // Only default it to be on if it's April 1st but still respect if they turned it off
         const today = new Date()
         const isAprilFirst = today.getMonth() === 3 && today.getDate() === 1
-        let hedgehogModeLocalStorage =
-            typeof window !== 'undefined' && localStorage.getItem('hedgehog-mode-enabled')
+        let hedgehogModeLocalStorage = typeof window !== 'undefined' && localStorage.getItem('hedgehog-mode-enabled')
 
         if (isAprilFirst && typeof hedgehogModeLocalStorage !== 'string') {
             hedgehogModeLocalStorage = 'true'
@@ -54,7 +54,6 @@ export const LayoutProvider = ({ children, ...other }: IProps) => {
         return hedgehogModeLocalStorage
     }, [])
 
-    // Only default it to be on if it's April 1st but still respect if they turned it off
 
     const [hedgehogModeEnabled, _setHedgehogModeEnabled] = useState<boolean>(hedgehogModeLocalStorage === 'true')
     const [enterpriseMode, setEnterpriseMode] = useState(false)
