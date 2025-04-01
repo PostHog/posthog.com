@@ -1,6 +1,6 @@
 ---
 title: 'Testing frontend feature flags with React, Vitest, and PostHog'
-date: 2023-03-16
+date: 2025-04-01
 author:
   - ian-vanagas
 showTitle: true
