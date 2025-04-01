@@ -10,6 +10,10 @@ from posthog import Posthog
 posthog = Posthog("<ph_project_api_key>", enable_exception_autocapture=True, ...)
 ```
 
+### Capturing errors in Python frameworks
+
+Python frameworks often have built-in error handlers. This means PostHog’s default exception autocapture won’t work and we need to manually capture errors instead. The exact process for doing this depends on the framework:
+
 import Tab from "components/Tab"
 import PythonDjangoExceptionAutocapture from './python-django-exception-autocapture.mdx'
 import PythonFlaskExceptionAutocapture from './python-flask-exception-autocapture.mdx'
