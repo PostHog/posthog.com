@@ -1,0 +1,69 @@
+---
+title: Projects & environments
+sidebar: Docs
+showTitle: true
+availability:
+    free: partial
+    selfServe: partial
+    enterprise: full
+
+    features:
+        multipleProjects:
+            free: false
+            selfServe: true
+            teams: true
+            enterprise: true
+        privateProjects:
+            free: false
+            selfServe: false
+            enterprise: true
+---
+
+Organize your PostHog setup and data with projects and environments.
+
+You can switch between projects and environments, create new ones, or go to their settings from the project/environment switcher in the PostHog app's top bar (under the current project's name).
+
+### What are projects?
+
+A PostHog _project_ contains your PostHog setup for a specific product you're building, or for a set of products sharing one customer base.
+
+Most commonly a project represents: a web app, a web app + website, a desktop app + mobile app – or a combination of these. Anything is possible though! Your project can just as well be about your Discord bot or smart fridge OS.
+
+**All your _setup_ is project-level**: dashboards, insights, feature flags, event/property definitions and other things you can set up in the PostHog app.
+
+Every new organization (including the one created for you on account creation) comes with a fresh "Default project". You can rename or delete it as you see fit.
+
+### What are environments?
+
+A PostHog _environment_ is a silo of data within a project. Each project has at least one.
+
+A typical setup is development/staging/production, but you have full flexiblity here as well – for instance, customers strictly separating data by country have region-oriented environments.
+
+**All your _data_ is environment-level**: events, session recordings, data warehouse tables, and other things that are ingested. This means all ways of getting data in and out are environment-level:
+
+- event capture
+- data pipelines – transformations and destinations
+- data warehouse sources
+- batch exports
+- finally, all queries on data (it's not possible to query across environments)
+
+Every environment has its own distinct write-only _environment API key_ (formerly "project API key"), which you can use to initialize your [integration of choice](/docs/integrate), as well as to connect to our [API](/docs/api). You can always regenerate this key, but keep in mind that the old one will be immediately revoked.
+
+Every new project comes with a blank initial environment. You can rename it as you see fit – whether it becomes "prod" or "dev" is up to you.
+
+### Our tips on projects and environments
+
+We **strongly recommend** connecting your apps and marketing website to one project. This way you can track the user journey holistically (say, how many blog readers convert to paid product users) and see all the relevant events for a person in one place.
+
+It's best to use separate projects for:
+
+- apps that are entirely separate products with unlinked authentication systems
+- admin apps that aren't customer-facing products
+- internal websites and services
+
+Most projects benefit from having these two environments at minimum:
+
+1. Local development - when you're running the app on your own device
+2. Production - for all your production data
+
+This makes it easy to test PostHog instrumentation (e.g. analytics) in development and staging, while keeping that test data entirely separate from production.

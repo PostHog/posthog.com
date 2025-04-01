@@ -2308,10 +2308,6 @@ export const docsMenu = {
                     icon: 'IconBell',
                     children: [
                         {
-                            name: 'Alerts',
-                            url: '/docs/alerts',
-                        },
-                        {
                             name: 'Command palette',
                             url: '/docs/cmd-k',
                         },
@@ -2366,8 +2362,8 @@ export const docsMenu = {
                             url: '/docs/settings/organizations',
                         },
                         {
-                            name: 'Projects',
-                            url: '/docs/settings/projects',
+                            name: 'Projects & environments',
+                            url: '/docs/settings/projects-and-environments',
                         },
                         {
                             name: 'Access control',
@@ -2758,16 +2754,6 @@ export const docsMenu = {
                     name: 'Tools',
                 },
                 {
-                    name: 'LLM insights',
-                    url: '/docs/ai-engineering/llms',
-                    icon: 'IconAIText',
-                    color: 'yellow',
-                    badge: {
-                        title: 'Beta',
-                        className: 'uppercase !bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',
-                    },
-                },
-                {
                     name: 'Autocapture',
                     url: '/docs/product-analytics/autocapture',
                     icon: 'IconBolt',
@@ -2796,6 +2782,10 @@ export const docsMenu = {
                     url: '/docs/product-analytics/subscriptions',
                     icon: 'IconBell',
                     color: 'red',
+                },
+                {
+                    name: 'Alerts',
+                    url: '/docs/alerts',
                 },
                 {
                     name: 'Sampling',
