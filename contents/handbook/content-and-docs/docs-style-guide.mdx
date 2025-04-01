@@ -79,19 +79,27 @@ You can add callout boxes to documentation to ensure skimmers don't miss essenti
 </CalloutBox>
 ```
 
-It looks like this:
-
-<CalloutBox icon="IconInfo" title="Here is some information" type="fyi">
-  Provide detail here. You can go on at length if necessary.
-</CalloutBox>
-
 Three styles are available:
 
 - `fyi`: this is for stuff that's helpful but not critical
 - `action`: these are tasks developers should complete and not miss
 - `caution`: these flag the potential for misconfiguration, data loss, and other churn vectors
 
-Valid icons are listed in PostHog's [Icon library](https://www.npmjs.com/package/@posthog/icons?activeTab=code).
+They look like this:
+
+<CalloutBox icon="IconInfo" title="Here is some information" type="fyi">
+  Provide detail here. You can go on at length if necessary.
+</CalloutBox>
+
+<CalloutBox icon="IconInfo" title="Here is some information" type="action">
+  Provide detail here. You can go on at length if necessary.
+</CalloutBox>
+
+<CalloutBox icon="IconWarning" title="Here is some information" type="caution">
+  Provide detail here. You can go on at length if necessary.
+</CalloutBox>
+
+Valid icons are listed in PostHog's <PrivateLink url="https://github.com/posthog/icons#posthogicons">icon library</PrivateLink>.
 
 ### Record videos
 

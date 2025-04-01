@@ -2,9 +2,9 @@ import React from 'react'
 import * as Icons from '@posthog/icons'
 
 const typeStyles = {
-    action: 'bg-yellow/15 border-none',
-    fyi: 'bg-gray/10 border-none',
-    caution: 'bg-red/15 border-none',
+    action: 'bg-yellow/15 border-yellow',
+    fyi: 'bg-gray/10 border-gray',
+    caution: 'bg-red/15 border-red',
 }
 
 export const CalloutBox = ({ icon, title, type, children }) => {
@@ -12,13 +12,17 @@ export const CalloutBox = ({ icon, title, type, children }) => {
     const styles = typeStyles[type] || typeStyles.action
 
     return (
-        <div className={`ph-callout my-4 mb-8 p-4 border rounded-lg ${styles}`}>
-            <div>
-                <div className="flex items-center gap-2 mb-2">
-                    {Icon && <Icon className="w-5 h-5 shrink-0" />}
-                    <strong>{title}</strong>
-                </div>
-                <div className="pl-7 [&>*:last-child]:mb-0 [&_p]">{children}</div>
+        <div className={`ph-callout mt-4 mb-6 p-4 border rounded ${styles}`}>
+            <div className="flex items-center gap-2 mb-0.5">
+                {Icon && (
+                    <div className="shrink-0 opacity-75">
+                        <Icon className="size-6" />
+                    </div>
+                )}
+                <strong className="text-lg">{title}</strong>
+            </div>
+            <div className="ph-text pl-8 text-[15px] [&_p]:text-[15px] [&_*]:text-[15px] [&>*:last-child]:mb-0 !leading-relaxed">
+                {children}
             </div>
         </div>
     )
