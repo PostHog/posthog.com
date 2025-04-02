@@ -79,6 +79,31 @@ const Window = ({ item, onClose, constraintsRef, bringToFront }) => {
     )
 }
 
+const TaskBar = () => {
+    const { windows, focusedWindow, bringToFront } = useApp()
+    return (
+        <div className="fixed bottom-0 left-0 w-full p-2 bg-accent dark:bg-accent-dark z-50">
+            <ul className="m-0 p-0 list-none flex space-x-1">
+                {windows.map((appWindow) => {
+                    const active = focusedWindow === appWindow
+                    return (
+                        <li key={appWindow.key}>
+                            <button
+                                onClick={() => bringToFront(appWindow)}
+                                className={`text-sm py-1 px-2 font-semibold border border-border dark:border-dark ${
+                                    active ? 'bg-white dark:bg-black' : ''
+                                }`}
+                            >
+                                {appWindow.meta?.title}
+                            </button>
+                        </li>
+                    )
+                })}
+            </ul>
+        </div>
+    )
+}
+
 export default function Wrapper() {
     const constraintsRef = useRef(null)
     const { handleClose, bringToFront, windows } = useApp()
@@ -93,6 +118,7 @@ export default function Wrapper() {
                     bringToFront={bringToFront}
                 />
             ))}
+            <TaskBar />
         </div>
     )
 }
