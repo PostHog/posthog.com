@@ -16,8 +16,8 @@ const sizeDefaults = {
     },
 }
 
-const Window = ({ item, onClose, constraintsRef, bringToFront }) => {
-    const { minimizeWindow } = useApp()
+const Window = ({ item, constraintsRef }) => {
+    const { minimizeWindow, bringToFront, closeWindow } = useApp()
     const controls = useDragControls()
     const [size, setSize] = useState({ width: sizeDefaults.max.width, height: sizeDefaults.max.height })
 
@@ -36,8 +36,14 @@ const Window = ({ item, onClose, constraintsRef, bringToFront }) => {
                             height: size.height,
                             zIndex: item.zIndex,
                         }}
-                        initial={{ scale: 0.5, opacity: 0 }}
-                        animate={{ scale: 1, opacity: 1 }}
+                        initial={{
+                            scale: 0.5,
+                            opacity: 0,
+                        }}
+                        animate={{
+                            scale: 1,
+                            opacity: 1,
+                        }}
                         exit={{ scale: 0.5, opacity: 0 }}
                         transition={{ duration: 0.2, ease: 'easeOut' }}
                         drag
@@ -57,7 +63,7 @@ const Window = ({ item, onClose, constraintsRef, bringToFront }) => {
                                 <button onClick={() => minimizeWindow(item)}>
                                     <IconMinus className="size-4" />
                                 </button>
-                                <button onClick={onClose}>
+                                <button onClick={() => closeWindow(item)}>
                                     <IconX className="size-4" />
                                 </button>
                             </div>
@@ -154,18 +160,12 @@ const TaskBar = () => {
 
 export default function Wrapper() {
     const constraintsRef = useRef(null)
-    const { handleClose, bringToFront, windows } = useApp()
+    const { windows } = useApp()
     return (
         <div ref={constraintsRef} className="fixed inset-0 size-full">
             <Desktop />
             {windows.map((item) => (
-                <Window
-                    item={item}
-                    key={item.key}
-                    onClose={() => handleClose(item)}
-                    constraintsRef={constraintsRef}
-                    bringToFront={bringToFront}
-                />
+                <Window item={item} key={item.key} constraintsRef={constraintsRef} />
             ))}
             <TaskBar />
         </div>

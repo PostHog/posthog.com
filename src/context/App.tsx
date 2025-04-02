@@ -3,7 +3,7 @@ import { AppWindow } from './Window'
 
 interface AppContextType {
     windows: AppWindow[]
-    handleClose: (item: AppWindow) => void
+    closeWindow: (item: AppWindow) => void
     bringToFront: (item: AppWindow) => void
     setWindowTitle: (appWindow: AppWindow, title: string) => void
     focusedWindow?: AppWindow
@@ -22,7 +22,7 @@ interface AppProviderProps {
 
 export const Context = createContext<AppContextType>({
     windows: [],
-    handleClose: () => {},
+    closeWindow: () => {},
     bringToFront: () => {},
     setWindowTitle: () => null,
     focusedWindow: undefined,
@@ -39,7 +39,7 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
         )
     }, [windows])
 
-    const handleClose = (item: AppWindow) => {
+    const closeWindow = (item: AppWindow) => {
         const newWindows = windows.filter((el) => el !== item)
         setWindows(newWindows)
     }
@@ -92,7 +92,7 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
 
     return (
         <Context.Provider
-            value={{ windows, handleClose, bringToFront, setWindowTitle, focusedWindow, location, minimizeWindow }}
+            value={{ windows, closeWindow, bringToFront, setWindowTitle, focusedWindow, location, minimizeWindow }}
         >
             {children}
         </Context.Provider>
