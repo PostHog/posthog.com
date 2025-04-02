@@ -18,21 +18,20 @@ const selectOptions = [
             { value: 'error-tracking', label: 'Error Tracking' },
         ],
     },
-    {
-        label: 'Roadmap',
-        items: [
-            { value: 'product-tours', label: 'Product Tours', disabled: true },
-            { value: 'revenue-analytics', label: 'Revenue Analytics', disabled: true },
-            { value: 'crm', label: 'CRM', disabled: true },
-            { value: 'messaging', label: 'Messaging', disabled: true },
-        ],
-    },
 ]
 
 export default function Explorer() {
     return (
         <div className="bg-white dark:bg-accent-dark h-full">
-            <Select groups={selectOptions} placeholder="Select..." ariaLabel="Products" defaultValue="product-os" />
+            <div className="p-1">
+                <Select
+                    groups={selectOptions}
+                    placeholder="Select..."
+                    ariaLabel="Products"
+                    defaultValue="product-analytics"
+                    className="w-full"
+                />
+            </div>
         </div>
     )
 }

@@ -61,10 +61,10 @@ export const Select = React.forwardRef<HTMLButtonElement, SelectProps>(
             >
                 <RadixSelect.Trigger
                     ref={ref}
-                    className={`inline-flex items-center justify-center gap-1 rounded px-2 py-1 text-sm leading-none text-primary dark:text-primary-dark bg-accent dark:bg-accent-dark outline-none hover:bg-accent-2 dark:hover:bg-accent-dark focus:shadow-[0_0_0_2px] focus:shadow-black data-[placeholder]:text-primary/60 ${className}`}
+                    className={`flex justify-between items-center gap-1 rounded px-2 py-1 text-sm leading-none text-primary dark:text-primary-dark bg-accent dark:bg-accent-dark outline-none hover:bg-accent-2 dark:hover:bg-accent-dark focus:shadow-[0_0_0_2px] focus:shadow-black data-[placeholder]:text-primary/60 ${className}`}
                     aria-label={ariaLabel}
                 >
-                    <RadixSelect.Value placeholder={placeholder} />
+                    <RadixSelect.Value placeholder={placeholder} cn />
                     <RadixSelect.Icon className="text-primary/50 dark:text-primary-dark/50">
                         <IconChevronDown className="size-6" />
                     </RadixSelect.Icon>

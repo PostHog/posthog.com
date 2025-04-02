@@ -17,6 +17,8 @@ import { DebugContainerQuery } from 'components/DebugContainerQuery'
 import { IconTextWidth } from '@posthog/icons'
 import { IconTextWidthFixed, IconTableOfContents, IconClockRewind } from 'components/OSIcons'
 import { ToggleGroup, Popover } from 'radix-ui'
+import { Select } from '../RadixUI/Select'
+
 import { useLayoutData } from 'components/Layout/hooks'
 import Link from 'components/Link'
 import { MDXRenderer } from 'gatsby-plugin-mdx'
@@ -74,6 +76,34 @@ interface ReaderViewProps {
     tableOfContents: any
     mdxComponents?: any
 }
+
+const selectOptions = [
+    {
+        label: 'Products',
+        items: [
+            { value: 'product-os', label: 'Product OS' },
+            { value: 'product-analytics', label: 'Product Analytics' },
+            { value: 'web-analytics', label: 'Web Analytics' },
+            { value: 'session-replay', label: 'Session Replay' },
+            { value: 'feature-flags', label: 'Feature Flags' },
+            { value: 'experiments', label: 'Experiments' },
+            { value: 'surveys', label: 'Surveys' },
+            { value: 'data-warehouse', label: 'Data Warehouse' },
+            { value: 'cdp', label: 'Data Pipelines' },
+            { value: 'ai-engineering', label: 'LLM Observability' },
+            { value: 'error-tracking', label: 'Error Tracking' },
+        ],
+    },
+    {
+        label: 'Roadmap',
+        items: [
+            { value: 'product-tours', label: 'Product Tours', disabled: true },
+            { value: 'revenue-analytics', label: 'Revenue Analytics', disabled: true },
+            { value: 'crm', label: 'CRM', disabled: true },
+            { value: 'messaging', label: 'Messaging', disabled: true },
+        ],
+    },
+]
 
 export default function ReaderView({ body, title, tableOfContents, mdxComponents }: ReaderViewProps) {
     const [isNavVisible, setIsNavVisible] = useState(true)
@@ -163,6 +193,13 @@ export default function ReaderView({ body, title, tableOfContents, mdxComponents
                                 }}
                             >
                                 <ScrollArea className="px-4">
+                                    <Select
+                                        groups={selectOptions}
+                                        placeholder="Select..."
+                                        ariaLabel="Products"
+                                        defaultValue="product-os"
+                                        className="w-full"
+                                    />
                                     <p>
                                         In ut tortor eget enim posuere tristique. Sed tortor orci, dignissim at diam eu,
                                         dictum mattis arcu. Pellentesque vel condimentum nulla, at pretium augue. Mauris
