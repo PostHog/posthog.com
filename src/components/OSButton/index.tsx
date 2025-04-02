@@ -70,8 +70,8 @@ export default function OSButton({
         primary:
             'bg-accent text-primary hover:bg-accent-dark active:bg-accent/80 dark:bg-accent-dark dark:hover:bg-accent dark:active:bg-accent-dark/80',
         ghost: `bg-transparent ${
-            active ? '!bg-accent dark:!bg-accent-dark' : 'hover:bg-accent dark:hover:bg-accent-dark'
-        } active:bg-accent/80 dark:active:bg-accent-dark/80`,
+            active ? '!bg-accent-2 dark:!bg-accent-dark' : 'hover:bg-accent-2 dark:hover:bg-accent-dark'
+        } active:bg-accent-2/80 dark:active:bg-accent-dark/80`,
     }
 
     const buttonContent = (

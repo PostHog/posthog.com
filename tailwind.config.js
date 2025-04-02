@@ -71,6 +71,7 @@ module.exports = {
                 primary: '#151515',
                 'primary-dark': '#EEEFE9',
                 accent: '#E5E7E0',
+                'accent-2': '#DCDFD3',
                 'accent-dark': '#232429',
                 border: '#D0D1C9',
                 'border-dark': '#4A4C52',
