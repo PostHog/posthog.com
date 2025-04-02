@@ -4,7 +4,7 @@ sidebar: Docs
 showTitle: true
 ---
 
-The `/i/v0/e` and `/batch` endpoints are the main way to send events to PostHog. Beyond user behavior, they are also used to identify users, update person or group properties, migrate from other platforms, and more. [Our SDKs](/docs/libraries) handle the different event types for you, but with the API, you need to send the right type of event (listed below) to trigger the functionality you want. 
+The `/i/v0/e` and `/batch` endpoints are the main way to send events to PostHog. Beyond user behavior, they are also used to identify users, update person or group properties, migrate from other platforms, and more. [Our SDKs](/docs/libraries) handle the different event types for you, but with the API, you need to send the right type of event (listed below) to trigger the functionality you want.
 
 Both are POST-only public endpoints that use your [project API key](https://app.posthog.com/project/settings) and do not return any sensitive data from your PostHog instance.
 
@@ -14,7 +14,7 @@ Here are examples of the types of events you can send:
 
 ## Single event
 
-Every event request must contain an `api_key`, `distinct_id`, and `event` field with the name. Both the `properties` and `timestamp` fields are optional. 
+Every event request must contain an `api_key`, `distinct_id`, and `event` field with the name. Both the `properties` and `timestamp` fields are optional.
 
 > **Note:** By default, events captured via the API are [identified events](/docs/data/anonymous-vs-identified-events). See the section on [how to capture anonymous events](#anonymous-event-capture) for more.
 
@@ -29,7 +29,7 @@ curl -v -L --header "Content-Type: application/json" -d '{
     "account_type": "pro"
   },
   "timestamp": "[optional timestamp in ISO 8601 format]"
-}' <ph_client_api_host>/i/v0/e/ 
+}' <ph_client_api_host>/i/v0/e/
 ```
 
 ```python
@@ -172,7 +172,7 @@ curl -v -L --header "Content-Type: application/json" -d '{
         "distinct_id": "user distinct id",
         "account_type": "pro"
       },
-      "timestamp": "[optional timestamp in ISO 8601 format]" 
+      "timestamp": "[optional timestamp in ISO 8601 format]"
     },
     {
       "event": "batched_event_name_2",
@@ -182,7 +182,7 @@ curl -v -L --header "Content-Type: application/json" -d '{
       }
     }
   ]
-}' <ph_client_api_host>/batch/ 
+}' <ph_client_api_host>/batch/
 ```
 
 ```python
@@ -203,7 +203,7 @@ payload = {
         "distinct_id": "user distinct id",
         "account_type": "pro"
       },
-      "timestamp": "[optional timestamp in ISO 8601 format]" 
+      "timestamp": "[optional timestamp in ISO 8601 format]"
     },
     {
       "event": "batched_event_name_2",
@@ -502,7 +502,7 @@ curl -v -L --header "Content-Type: application/json" -d '{
   "distinct_id": "user distinct id",
   "properties": {
     "$survey_id": "survey_id",
-    "$survey_response": "Awesome!"
+    "$survey_response_d8462827-1575-4e1e-ab1d-b5fddd9f829c": "Awesome!"
   }
 }' <ph_client_api_host>/i/v0/e/
 ```
@@ -521,7 +521,7 @@ payload = {
     "distinct_id": "user distinct id",
     "properties": {
         "$survey_id": "survey_id",
-        "$survey_response": "Awesome!"
+        "$survey_response_d8462827-1575-4e1e-ab1d-b5fddd9f829c": "Awesome!"
     }
 }
 response = requests.post(url, headers=headers, data=json.dumps(payload))
