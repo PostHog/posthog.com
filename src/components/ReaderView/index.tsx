@@ -150,7 +150,7 @@ export default function ReaderView() {
                         </motion.div>
                     )}
                 </AnimatePresence>
-                <ScrollArea className="flex-grow bg-white dark:bg-accent-dark">
+                <ScrollArea className="flex-grow bg-white dark:bg-accent-dark rounded">
                     <div className="p-4">
                         <h2>Title</h2>
                         <div className="@4xl:hidden bg-tan p-4 mb-4 rounded border border-light dark:border-dark">
