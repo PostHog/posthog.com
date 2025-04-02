@@ -28,7 +28,7 @@ import Tooltip from 'components/Tooltip'
 // </OSButton>
 
 interface OSButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
-    children: React.ReactNode
+    children?: React.ReactNode
     variant?: 'default' | 'primary' | 'ghost'
     size?: 'xs' | 'sm' | 'md' | 'lg'
     icon?: React.ReactNode
@@ -53,9 +53,16 @@ export default function OSButton({
 
     const sizeClasses = {
         xs: 'px-2 py-1 text-xs',
-        sm: 'px-3 py-1.5 text-sm',
-        md: 'px-4 py-2 text-base',
-        lg: 'px-6 py-3 text-lg',
+        sm: 'px-3 py-1.5 text-[13px]',
+        md: 'px-1.5 py-1 text-sm',
+        lg: 'px-6 py-3 text-base',
+    }
+
+    const iconSizeClasses = {
+        xs: 'w-3 h-3',
+        sm: 'w-4 h-4',
+        md: 'w-5 h-5',
+        lg: 'w-6 h-6',
     }
 
     const variantClasses = {
@@ -69,13 +76,13 @@ export default function OSButton({
 
     const buttonContent = (
         <>
-            {icon && <span className="mr-2">{icon}</span>}
+            {icon && <span className={`${iconSizeClasses[size]}`}>{icon}</span>}
             {children}
-            {label && <span className="ml-2 text-sm opacity-75">{label}</span>}
+            {label && <span className="text-sm opacity-75">{label}</span>}
             {tooltip && (
-                <span className="ml-2">
+                <span className="">
                     <Tooltip content={tooltip}>
-                        <IconInfo className="w-4 h-4 opacity-50 hover:opacity-100" />
+                        <IconInfo className={`${iconSizeClasses[size]} opacity-50 hover:opacity-100`} />
                     </Tooltip>
                 </span>
             )}
@@ -83,7 +90,10 @@ export default function OSButton({
     )
 
     return (
-        <button className={`${baseClasses} ${sizeClasses[size]} ${variantClasses[variant]} ${className}`} {...props}>
+        <button
+            className={`flex gap-1 items-center ${baseClasses} ${sizeClasses[size]} ${variantClasses[variant]} ${className}`}
+            {...props}
+        >
             {buttonContent}
         </button>
     )

@@ -1,6 +1,15 @@
 import React, { useState, useCallback } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import OSButton from 'components/OSButton'
+import {
+    IconHome,
+    IconSidebarOpen,
+    IconSidebarClose,
+    IconChevronLeft,
+    IconChevronRight,
+    IconSearch,
+    IconFilter,
+} from '@posthog/icons'
 
 interface SidebarState {
     isOpen: boolean
@@ -51,21 +60,29 @@ export default function ReaderView() {
     return (
         <div className="w-full h-full flex flex-col bg-light dark:bg-dark min-h-1">
             {/* First row - Header */}
-            <div className="flex w-full gap-2 p-2 flex-shrink-0">
+            <div className="flex w-full gap-px p-2 flex-shrink-0">
                 <motion.div
-                    className="flex-shrink-0 overflow-hidden"
+                    className="flex-shrink-0 overflow-hidden flex items-center gap-px"
                     variants={sidebarVariants}
                     custom={leftSidebarWidth}
                     animate={isNavVisible ? 'open' : 'closed'}
                 >
-                    home
-                    <OSButton onClick={toggleNav} variant="ghost" size="sm" active={isNavVisible}>
-                        Toggle
-                    </OSButton>
+                    <OSButton variant="ghost" icon={<IconHome />} />
+                    <OSButton
+                        onClick={toggleNav}
+                        variant="ghost"
+                        active={isNavVisible}
+                        icon={isNavVisible ? <IconSidebarOpen /> : <IconSidebarClose />}
+                    />
                 </motion.div>
-                <div className="flex-grow dark:bg-accent-dark flex justify-between">
-                    <div>back, forward</div>
-                    <div>search</div>
+                <div className="flex-grow dark:bg-accent-dark flex justify-between items-center">
+                    <div className="flex items-center gap-px">
+                        <OSButton variant="ghost" icon={<IconChevronLeft />} />
+                        <OSButton variant="ghost" icon={<IconChevronRight />} />
+                    </div>
+                    <div>
+                        <OSButton variant="ghost" icon={<IconSearch />} />
+                    </div>
                 </div>
                 <motion.div
                     className="flex-shrink-0 flex justify-end"
@@ -73,7 +90,7 @@ export default function ReaderView() {
                     custom={rightSidebarWidth}
                     animate={isTocVisible ? 'open' : 'closed'}
                 >
-                    <button onClick={toggleToc}>toggle ToC</button>
+                    <OSButton variant="ghost" active={isTocVisible} icon={<IconFilter />} onClick={toggleToc} />
                 </motion.div>
             </div>
 
@@ -230,7 +247,7 @@ export default function ReaderView() {
             </div>
 
             {/* Third row - Footer */}
-            <div className="flex w-full gap-2 p-2 flex-shrink-0">
+            <div className="flex w-full gap-px p-2 flex-shrink-0">
                 <motion.div
                     className="flex-shrink-0"
                     variants={sidebarVariants}
