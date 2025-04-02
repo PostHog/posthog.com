@@ -7,6 +7,10 @@ export interface AppWindow {
     meta?: {
         title: string
     }
+    coordinates?: {
+        x: number
+        y: number
+    }
 }
 
 interface WindowProviderProps {

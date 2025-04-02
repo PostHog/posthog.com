@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useEffect, useState } from 'react'
+import React, { createContext, useContext, useEffect, useMemo, useState } from 'react'
 import { AppWindow } from './Window'
 
 interface AppContextType {
@@ -30,10 +30,12 @@ export const Context = createContext<AppContextType>({
 
 export const Provider = ({ children, element, location }: AppProviderProps) => {
     const [windows, setWindows] = useState<AppWindow[]>([])
-    const focusedWindow = windows.reduce<AppWindow | undefined>(
-        (highest, current) => (current.zIndex > (highest?.zIndex ?? -1) ? current : highest),
-        undefined
-    )
+    const focusedWindow = useMemo(() => {
+        return windows.reduce<AppWindow | undefined>(
+            (highest, current) => (current.zIndex > (highest?.zIndex ?? -1) ? current : highest),
+            undefined
+        )
+    }, [windows])
 
     const handleClose = (item: AppWindow) => {
         const newWindows = windows.filter((el) => el !== item)
@@ -67,6 +69,7 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
             element,
             zIndex: windows.length,
             key: element.key,
+            coordinates: location?.state?.coordinates || { x: 0, y: 0 },
         }
 
         if (existingWindow) {
