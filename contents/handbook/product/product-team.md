@@ -39,7 +39,7 @@ Here is a overview that shows which of our PMs currently works with which team:
 - [Max AI](/teams/max-ai)
 - [Messaging](/teams/messaging)
 - [Revenue Analytics](/teams/revenue-analytics)
-- [Surveys](/teams/surveys) (light support from Annika)
+- [Surveys](/teams/surveys)
 
 ## Product goals
 
