@@ -2,9 +2,9 @@
 title: Why Zealot switched to PostHog from Amplitude and BugSnag
 customer: Zealot
 logo: >-
-  https://res.cloudinary.com/dmukukwp6/image/upload/zealot_logo_w_b174eb91bd.jpg
+  https://res.cloudinary.com/dmukukwp6/image/upload/zeal_log_d_a4e7c9c0e8.png
 logoDark: >-
-  https://res.cloudinary.com/dmukukwp6/image/upload/zealot_logo_d_f47cccf783.png
+  https://res.cloudinary.com/dmukukwp6/image/upload/zeal_log_w_29ebef7a67.png
 featuredImage: >-
   https://res.cloudinary.com/dmukukwp6/image/upload/zealot_posthog_error_tracking_14fb1ab6cb.jpg
 industries:
