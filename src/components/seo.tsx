@@ -1,8 +1,10 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import PropTypes from 'prop-types'
 import { Helmet } from 'react-helmet'
 import { useLocation } from '@reach/router'
 import { useStaticQuery, graphql } from 'gatsby'
+import { useApp } from '../context/App'
+import { useWindow } from '../context/Window'
 
 interface SEOProps {
     title: string
@@ -23,6 +25,8 @@ export const SEO = ({
     noindex,
     imageType = 'relative',
 }: SEOProps): JSX.Element => {
+    const { appWindow } = useWindow()
+    const { setWindowTitle } = useApp()
     const { pathname } = useLocation()
     const { site } = useStaticQuery(query)
 
@@ -38,6 +42,12 @@ export const SEO = ({
                 : `${process.env.GATSBY_DEPLOY_PRIME_URL || siteUrl}${image || defaultImage}`,
         url: `${siteUrl}${pathname}`,
     }
+
+    useEffect(() => {
+        if (seo.title && appWindow) {
+            setWindowTitle(appWindow, seo.title)
+        }
+    }, [])
 
     return (
         <Helmet title={seo.title} titleTemplate={titleTemplate}>

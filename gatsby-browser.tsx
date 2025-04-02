@@ -9,6 +9,7 @@ import { RouteUpdateArgs } from 'gatsby'
 import { UserProvider } from './src/hooks/useUser'
 import { ChatProvider } from './src/hooks/useChat'
 import Wrapper from './src/components/Wrapper'
+import { Provider } from './src/context/App'
 initKea(false)
 
 export const wrapRootElement = ({ element }) => (
@@ -41,5 +42,7 @@ export const onRouteUpdate = ({ location, prevLocation }: RouteUpdateArgs) => {
 }
 
 export const wrapPageElement = ({ element, props: { pageContext, location } }) => (
-    <Wrapper element={element} pageContext={pageContext} location={location} />
+    <Provider element={element}>
+        <Wrapper />
+    </Provider>
 )
