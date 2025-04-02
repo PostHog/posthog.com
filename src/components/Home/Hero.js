@@ -270,7 +270,7 @@ export default function Hero() {
             {whitepaperOpen && enterpriseMode && <WhitepaperBanner onClose={() => setWhitepaperOpen(false)} />}
             <section
                 className={`flex flex-col justify-center items-center ${
-                    user?.profile?.id === 21210 ? 'font-fancy' : ''
+                    user?.profile?.id === 29070 ? 'font-fancy' : ''
                 }`}
             >
                 <div className="relative w-full z-10">
