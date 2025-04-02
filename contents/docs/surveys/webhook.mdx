@@ -16,19 +16,30 @@ To do this, go to the [data pipeline destinations tab](https://us.posthog.com/pi
 
 2. Make sure the PostHog integration is added to the channel you want to send messages to and select it.
 
-3. Under **Match event and actions**, select **survey sent**. 
+3. Under **Match event and actions**, select **survey sent**.
 
 4. Under **Blocks**, modify the text to include the survey name and response. For example:
 
 ```json
 {
   "text": {
-    "text": "*{person.name}* sent a response to {event.properties.$survey_name}: {event.properties.$survey_response}",
+    "text": "*{person.name}* sent a response to {event.properties.$survey_name}: {event.properties.$$survey_response_a3071551-d599-4eeb-9ffe-69e93dc647b6}",
     "type": "mrkdwn"
   },
   "type": "section"
 },
 ```
+
+To get the response key, you need to use the its question ID. The format is `$survey_response_{question_id}`.
+
+To easily find the response key, you can go to your survey page, and click on the button 'Copy survey response key'. There's one for each question in your survey.
+
+<ProductScreenshot
+    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2024_09_27_at_11_13_44_2x_c72ef7d42e.png"
+    imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_04_02_at_02_59_04_2x_1b859472c1.jpg"
+    alt="Copy survey response key"
+    classes="rounded"
+/>
 
 5. Customize the name and description, and press **Create & enable**.
 
