@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react'
-import { motion, useDragControls } from 'framer-motion'
+import { AnimatePresence, motion, useDragControls } from 'framer-motion'
 import { IconX } from '@posthog/icons'
 import { useApp } from '../../context/App'
 import { Provider as WindowProvider } from '../../context/Window'
@@ -82,25 +82,34 @@ const Window = ({ item, onClose, constraintsRef, bringToFront }) => {
 const TaskBar = () => {
     const { windows, focusedWindow, bringToFront } = useApp()
     return (
-        <div className="fixed bottom-0 left-0 w-full p-2 bg-accent dark:bg-accent-dark z-50">
-            <ul className="m-0 p-0 list-none flex space-x-1">
-                {windows.map((appWindow) => {
-                    const active = focusedWindow === appWindow
-                    return (
-                        <li key={appWindow.key}>
-                            <button
-                                onClick={() => bringToFront(appWindow)}
-                                className={`text-sm py-1 px-2 font-semibold border border-border dark:border-dark ${
-                                    active ? 'bg-white dark:bg-black' : ''
-                                }`}
-                            >
-                                {appWindow.meta?.title}
-                            </button>
-                        </li>
-                    )
-                })}
-            </ul>
-        </div>
+        <AnimatePresence>
+            {windows.length > 0 && (
+                <motion.div
+                    initial={{ translateY: '100%' }}
+                    animate={{ translateY: 0 }}
+                    exit={{ translateY: '100%' }}
+                    className="fixed bottom-0 left-0 w-full p-2 bg-accent dark:bg-accent-dark z-50"
+                >
+                    <ul className="m-0 p-0 list-none flex space-x-1">
+                        {windows.map((appWindow) => {
+                            const active = focusedWindow === appWindow
+                            return (
+                                <li key={appWindow.key}>
+                                    <button
+                                        onClick={() => bringToFront(appWindow)}
+                                        className={`text-sm py-1 px-2 font-semibold border border-border dark:border-dark ${
+                                            active ? 'bg-white dark:bg-black' : ''
+                                        }`}
+                                    >
+                                        {appWindow.meta?.title}
+                                    </button>
+                                </li>
+                            )
+                        })}
+                    </ul>
+                </motion.div>
+            )}
+        </AnimatePresence>
     )
 }
 
