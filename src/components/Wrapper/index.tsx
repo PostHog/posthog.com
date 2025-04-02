@@ -3,6 +3,7 @@ import { AnimatePresence, motion, useDragControls } from 'framer-motion'
 import { IconX } from '@posthog/icons'
 import { useApp } from '../../context/App'
 import { Provider as WindowProvider } from '../../context/Window'
+import Desktop from 'components/Desktop'
 
 const sizeDefaults = {
     max: {
@@ -17,7 +18,7 @@ const sizeDefaults = {
 
 const Window = ({ item, onClose, constraintsRef, bringToFront }) => {
     const controls = useDragControls()
-    const [size, setSize] = useState({ width: 767, height: 600 })
+    const [size, setSize] = useState({ width: sizeDefaults.max.width, height: sizeDefaults.max.height })
 
     const handleDoubleClick = () => {
         setSize((prev) => (prev.width === sizeDefaults.max.width ? sizeDefaults.min : sizeDefaults.max))
@@ -26,7 +27,7 @@ const Window = ({ item, onClose, constraintsRef, bringToFront }) => {
     return (
         <WindowProvider appWindow={item}>
             <motion.div
-                className="cursor-default absolute bg-light dark:bg-dark flex flex-col border border-border dark:border-border-dark rounded overflow-hidden"
+                className="absolute bg-light dark:bg-dark flex flex-col border border-border dark:border-border-dark rounded overflow-hidden !select-auto"
                 style={{
                     width: size.width,
                     height: size.height,
@@ -118,6 +119,7 @@ export default function Wrapper() {
     const { handleClose, bringToFront, windows } = useApp()
     return (
         <div ref={constraintsRef} className="fixed inset-0 size-full">
+            <Desktop />
             {windows.map((item) => (
                 <Window
                     item={item}
