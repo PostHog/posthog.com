@@ -2119,13 +2119,12 @@ export const docsMenu = {
                 },
                 {
                     name: 'Data types',
-                    url: '/docs/data/events',
+                    url: '/docs/new-to-posthog/understand-posthog',
                     icon: 'IconHardDrive',
                     children: [
                         {
                             name: 'Your data in PostHog',
                             url: '/docs/new-to-posthog/understand-posthog',
-                            icon: 'IconNotebook',
                         },
                         {
                             name: 'Events',
@@ -2134,7 +2133,6 @@ export const docsMenu = {
                         {
                             name: 'Anonymous vs identified events',
                             url: '/docs/data/anonymous-vs-identified-events',
-                            icon: 'IconGear',
                         },
                         {
                             name: 'Actions',
