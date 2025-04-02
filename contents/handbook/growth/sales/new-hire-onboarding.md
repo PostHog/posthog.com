@@ -34,6 +34,7 @@ Sales at PostHog isn't like most other software companies! These are some of the
 - [Salesforce](https://posthog.lightning.force.com/)
 - [BuildBetter](https://app.buildbetter.app)
 - [PandaDoc](https://app.pandadoc.com/)
+- [LinkedIn Sales Navigator](https://www.linkedin.com/sales/home)
 - [Vitally](https://posthog.vitally-eu.io/) - use Google SSO
 - [Zendesk](https://posthoghelp.zendesk.com/agent/dashboard) - use Google SSO
 - [Pitch](https://app.pitch.com/) - use Google SSO
@@ -234,7 +235,6 @@ In addition to following the guidance in the [spending money](/handbook/people/s
 - [Clay](https://www.clay.com/) for account and contact enrichment
 - [Granola](https://www.granola.ai/) (app) for AI note taking in meetings
 - [In Your Face](https://www.inyourface.app/) (app) don't miss meeting notifications
-- [LinkedIn Sales Navigator](https://www.linkedin.com/sales/home) for account intelligence
 - [Loom](https://www.loom.com/) for short videos (Simon can invite you to the company account)
 - [Scratchpad](https://www.scratchpad.com/) for AI agents and a friendlier SFDC UI (sign up as part of your software budget)
 - [spark](https://sparkmailapp.com/) (app) AI powered inbox
