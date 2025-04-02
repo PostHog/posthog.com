@@ -1,5 +1,8 @@
 import React, { useState, useCallback } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
+import '@radix-ui/themes/styles.css'
+import { Theme, Button } from '@radix-ui/themes'
+import './styles.css'
 
 interface SidebarState {
     isOpen: boolean
@@ -48,7 +51,14 @@ export default function ReaderView() {
     }, [])
 
     return (
-        <div className="w-full h-full flex flex-col bg-light dark:bg-dark">
+        <Theme
+            accentColor="gray"
+            grayColor="gray"
+            appearance="light"
+            scaling="100%"
+            radius="medium"
+            className="w-full h-full flex flex-col bg-light dark:bg-dark min-h-1"
+        >
             {/* First row - Header */}
             <div className="flex w-full gap-2 p-2 flex-shrink-0">
                 <motion.div
@@ -58,23 +68,23 @@ export default function ReaderView() {
                     animate={isNavVisible ? 'open' : 'closed'}
                 >
                     home
-                    <button className="border border-light bg-white" onClick={toggleNav}>
+                    <Button variant="soft" color="blue" onClick={toggleNav}>
                         toggle nav
-                    </button>
+                    </Button>
                 </motion.div>
                 <div className="flex-grow dark:bg-accent-dark flex justify-between">
                     <div>back, forward</div>
                     <div>search</div>
                 </div>
                 <motion.div
-                    className="flex-shrink-0 overflow-hidden flex justify-end"
+                    className="flex-shrink-0 flex justify-end"
                     variants={sidebarVariants}
                     custom={rightSidebarWidth}
                     animate={isTocVisible ? 'open' : 'closed'}
                 >
-                    <button className="border border-light bg-white" onClick={toggleToc}>
+                    <Button variant="ghost" className="accent" onClick={toggleToc}>
                         toggle ToC
-                    </button>
+                    </Button>
                 </motion.div>
             </div>
 
@@ -128,6 +138,19 @@ export default function ReaderView() {
                     )}
                 </AnimatePresence>
                 <div className="flex-grow bg-white dark:bg-accent-dark overflow-y-auto p-4">
+                    <h2>Title</h2>
+                    <Button variant="classic" color="blue">
+                        Get started
+                    </Button>
+                    <Button variant="solid" color="blue">
+                        Get started
+                    </Button>
+                    <Button variant="soft" color="blue">
+                        Get started
+                    </Button>
+                    <Button variant="solid" className="accent">
+                        Accent Button
+                    </Button>
                     <p>
                         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean euismod ornare dolor ac luctus.
                         Quisque cursus orci non consectetur interdum. Duis auctor erat vitae suscipit ornare.
@@ -232,7 +255,7 @@ export default function ReaderView() {
             {/* Third row - Footer */}
             <div className="flex w-full gap-2 p-2 flex-shrink-0">
                 <motion.div
-                    className="flex-shrink-0 overflow-hidden"
+                    className="flex-shrink-0"
                     variants={sidebarVariants}
                     custom={leftSidebarWidth}
                     animate={isNavVisible ? 'open' : 'closed'}
@@ -244,7 +267,7 @@ export default function ReaderView() {
                     <div>text sizing</div>
                 </div>
                 <motion.div
-                    className="flex-shrink-0 overflow-hidden flex justify-end"
+                    className="flex-shrink-0 flex justify-end"
                     variants={sidebarVariants}
                     custom={rightSidebarWidth}
                     animate={isTocVisible ? 'open' : 'closed'}
@@ -252,6 +275,6 @@ export default function ReaderView() {
                     edit buttons
                 </motion.div>
             </div>
-        </div>
+        </Theme>
     )
 }

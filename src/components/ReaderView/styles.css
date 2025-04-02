@@ -1,0 +1,79 @@
+/* Custom accent color for the entire theme */
+.rt-ThemeRoot {
+    --accent-9: #e5e7e0;
+    --accent-10: #d0d1c9;
+    --accent-11: #151515;
+    --accent-12: #151515;
+    --accent-a9: #e5e7e0;
+    --accent-a10: #d0d1c9;
+    --accent-a11: #151515;
+    --accent-a12: #151515;
+    --gray-9: #e5e7e0;
+    --gray-10: #d0d1c9;
+    --gray-11: #151515;
+    --gray-12: #151515;
+    --gray-a9: #e5e7e0;
+    --gray-a10: #d0d1c9;
+    --gray-a11: #151515;
+    --gray-a12: #151515;
+}
+
+/* Dark mode support */
+.dark .rt-ThemeRoot {
+    --accent-9: #232429;
+    --accent-10: #1d1f27;
+    --accent-11: #eeefe9;
+    --accent-12: #eeefe9;
+    --accent-a9: #232429;
+    --accent-a10: #1d1f27;
+    --accent-a11: #eeefe9;
+    --accent-a12: #eeefe9;
+    --gray-9: #232429;
+    --gray-10: #1d1f27;
+    --gray-11: #eeefe9;
+    --gray-12: #eeefe9;
+    --gray-a9: #232429;
+    --gray-a10: #1d1f27;
+    --gray-a11: #eeefe9;
+    --gray-a12: #eeefe9;
+}
+
+/* Custom button variant using our accent color */
+.rt-Button.accent {
+    --accent-9: #e5e7e0;
+    --accent-10: #d0d1c9;
+    --accent-11: #151515;
+    --accent-12: #151515;
+    --accent-a9: #e5e7e0;
+    --accent-a10: #d0d1c9;
+    --accent-a11: #151515;
+    --accent-a12: #151515;
+    --gray-9: #e5e7e0;
+    --gray-10: #d0d1c9;
+    --gray-11: #151515;
+    --gray-12: #151515;
+    --gray-a9: #e5e7e0;
+    --gray-a10: #d0d1c9;
+    --gray-a11: #151515;
+    --gray-a12: #151515;
+}
+
+/* Dark mode support */
+.dark .rt-Button.accent {
+    --accent-9: #232429;
+    --accent-10: #1d1f27;
+    --accent-11: #eeefe9;
+    --accent-12: #eeefe9;
+    --accent-a9: #232429;
+    --accent-a10: #1d1f27;
+    --accent-a11: #eeefe9;
+    --accent-a12: #eeefe9;
+    --gray-9: #232429;
+    --gray-10: #1d1f27;
+    --gray-11: #eeefe9;
+    --gray-12: #eeefe9;
+    --gray-a9: #232429;
+    --gray-a10: #1d1f27;
+    --gray-a11: #eeefe9;
+    --gray-a12: #eeefe9;
+}
