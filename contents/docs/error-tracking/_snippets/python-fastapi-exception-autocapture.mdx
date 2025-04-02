@@ -1,0 +1,11 @@
+```python
+from fastapi.responses import JSONResponse
+from posthog import Posthog
+
+posthog = Posthog('<ph_project_api_key>', host='<ph_client_api_host>')
+
+@app.exception_handler(Exception)
+async def http_exception_handler(request, exc):
+    posthog.capture_exception(exc)
+    return JSONResponse(status_code=500, content={'message': str(exc)})
+```
