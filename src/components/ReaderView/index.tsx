@@ -24,6 +24,7 @@ import Link from 'components/Link'
 import { MDXRenderer } from 'gatsby-plugin-mdx'
 import { MDXProvider } from '@mdx-js/react'
 import InternalSidebarLink from 'components/Docs/InternalSidebarLink'
+import HeaderBar from 'components/OSChrome/HeaderBar'
 
 interface SidebarState {
     isOpen: boolean
@@ -122,47 +123,21 @@ export default function ReaderView({ body, title, tableOfContents, mdxComponents
         <div className="@container w-full h-full flex flex-col bg-light dark:bg-dark min-h-1">
             <DebugContainerQuery />
             {/* First row - Header */}
-            <div className="flex w-full gap-px p-2 flex-shrink-0">
-                <motion.div
-                    className="flex-shrink-0 overflow-hidden flex items-center gap-px"
-                    variants={sidebarVariants}
-                    custom={leftSidebarWidth}
-                    animate={isNavVisible ? 'open' : 'closed'}
-                >
-                    <OSButton variant="ghost" icon={<IconHome />} />
-                    <OSButton
-                        onClick={toggleNav}
-                        variant="ghost"
-                        active={isNavVisible}
-                        icon={isNavVisible ? <IconSidebarOpen /> : <IconSidebarClose />}
-                    />
-                </motion.div>
-                <div className="flex-grow flex justify-between items-center">
-                    <div className="flex items-center gap-px">
-                        <OSButton variant="ghost" icon={<IconChevronLeft />} />
-                        <OSButton variant="ghost" icon={<IconChevronRight />} />
-                    </div>
-                    <div>
-                        <OSButton variant="ghost" icon={<IconSearch />} />
-                    </div>
-                </div>
-                <motion.div
-                    className="flex-shrink-0 flex justify-end"
-                    variants={sidebarVariants}
-                    custom={rightSidebarWidth}
-                    animate={isTocVisible ? 'open' : 'closed'}
-                >
-                    <div className="hidden @4xl:block">
-                        <OSButton
-                            variant="ghost"
-                            active={isTocVisible}
-                            icon={<IconTableOfContents />}
-                            onClick={toggleToc}
-                        />
-                    </div>
-                </motion.div>
-            </div>
-
+            <HeaderBar
+                sidebarVariants={sidebarVariants}
+                leftSidebarWidth={leftSidebarWidth}
+                rightSidebarWidth={rightSidebarWidth}
+                isNavVisible={isNavVisible}
+                isTocVisible={isTocVisible}
+                onToggleNav={toggleNav}
+                onToggleToc={toggleToc}
+                showHome
+                showBack
+                showForward
+                showSearch
+                showBookmark
+                showToc
+            />
             {/* Second row - Main Content */}
             <div className="flex w-full gap-2 min-h-0 flex-grow overflow-hidden">
                 <AnimatePresence>
