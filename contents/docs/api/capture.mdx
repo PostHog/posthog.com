@@ -502,7 +502,13 @@ curl -v -L --header "Content-Type: application/json" -d '{
   "distinct_id": "user distinct id",
   "properties": {
     "$survey_id": "survey_id",
-    "$survey_response_d8462827-1575-4e1e-ab1d-b5fddd9f829c": "Awesome!"
+    "$survey_response_d8462827-1575-4e1e-ab1d-b5fddd9f829c": "Awesome!",
+    "$survey_questions": [
+      {
+        "id": "d8462827-1575-4e1e-ab1d-b5fddd9f829c",
+        "question": "How likely are you to recommend us to a friend?"
+      }
+    ]
   }
 }' <ph_client_api_host>/i/v0/e/
 ```
@@ -521,7 +527,13 @@ payload = {
     "distinct_id": "user distinct id",
     "properties": {
         "$survey_id": "survey_id",
-        "$survey_response_d8462827-1575-4e1e-ab1d-b5fddd9f829c": "Awesome!"
+        "$survey_response_d8462827-1575-4e1e-ab1d-b5fddd9f829c": "Awesome!",
+        "$survey_questions": [
+          {
+            "id": "d8462827-1575-4e1e-ab1d-b5fddd9f829c",
+            "question": "How likely are you to recommend us to a friend?"
+          }
+        ]
     }
 }
 response = requests.post(url, headers=headers, data=json.dumps(payload))
