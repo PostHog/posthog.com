@@ -21,7 +21,7 @@ toolsUsed:
 date: 2023-09-15
 ---
 
-As CTO and co-founder of Zealot, an AI-powered customer activation platform, Brandon Jakobson often sweats the details of product improvement. He’s constantly thinking how the team can scale faster, ship more, and do more for users. 
+As CTO and co-founder of Zealot, an AI-powered customer activation platform, Brandon Jakobson often sweats the details of product improvement. He’s constantly thinking about how the team can scale faster, ship more, and do more for users. 
 
 “I’m deeply passionate about it and I have a lot of ideas for the future,” says Brandon. “How can we make sure our systems are always up, and that we’re always getting faster? Truthfully, it keeps me awake at night.”
 
