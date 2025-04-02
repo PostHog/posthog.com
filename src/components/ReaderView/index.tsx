@@ -137,7 +137,7 @@ export default function ReaderView({ body, title, tableOfContents, mdxComponents
                         icon={isNavVisible ? <IconSidebarOpen /> : <IconSidebarClose />}
                     />
                 </motion.div>
-                <div className="flex-grow dark:bg-accent-dark flex justify-between items-center">
+                <div className="flex-grow flex justify-between items-center">
                     <div className="flex items-center gap-px">
                         <OSButton variant="ghost" icon={<IconChevronLeft />} />
                         <OSButton variant="ghost" icon={<IconChevronRight />} />
@@ -198,7 +198,7 @@ export default function ReaderView({ body, title, tableOfContents, mdxComponents
                                         placeholder="Select..."
                                         ariaLabel="Products"
                                         defaultValue="product-os"
-                                        className="w-full"
+                                        className="w-full mb-2"
                                     />
                                     <p>
                                         In ut tortor eget enim posuere tristique. Sed tortor orci, dignissim at diam eu,
