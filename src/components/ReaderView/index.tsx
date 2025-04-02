@@ -114,7 +114,7 @@ export default function ReaderView() {
                             }}
                         >
                             <motion.div
-                                className="overflow-y-auto p-4"
+                                className="overflow-y-auto h-full px-4"
                                 initial={{ opacity: 0 }}
                                 animate={{
                                     opacity: 1,
@@ -215,7 +215,7 @@ export default function ReaderView() {
                             }}
                         >
                             <motion.div
-                                className="overflow-y-auto p-4"
+                                className="overflow-y-auto px-4 h-full"
                                 initial={{ opacity: 0 }}
                                 animate={{
                                     opacity: 1,
