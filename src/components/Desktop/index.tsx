@@ -28,7 +28,7 @@ const AppLink = ({ Icon, type, color, label, url }) => {
                 className="flex flex-col justify-center items-center space-y-1 w-[90px] text-center"
             >
                 <Icon className={`size-7 text-${color}`} />
-                <p className="text-sm">{label}</p>
+                <p className="text-sm font-semibold">{label}</p>
             </Link>
         </span>
     )

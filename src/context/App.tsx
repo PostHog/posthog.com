@@ -8,6 +8,7 @@ interface AppContextType {
     setWindowTitle: (appWindow: AppWindow, title: string) => void
     focusedWindow?: AppWindow
     location: any
+    minimizeWindow: (appWindow: AppWindow) => void
 }
 
 interface AppProviderProps {
@@ -26,6 +27,7 @@ export const Context = createContext<AppContextType>({
     setWindowTitle: () => null,
     focusedWindow: undefined,
     location: {},
+    minimizeWindow: () => {},
 })
 
 export const Provider = ({ children, element, location }: AppProviderProps) => {
@@ -46,6 +48,7 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
         const newWindows = windows.map((el) => ({
             ...el,
             zIndex: el === item ? windows.length : el.zIndex < item.zIndex ? el.zIndex : el.zIndex - 1,
+            minimized: item === el ? false : el.minimized,
         }))
         setWindows(newWindows)
     }
@@ -63,6 +66,11 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
         setWindows(newWindows)
     }
 
+    const minimizeWindow = (appWindow: AppWindow) => {
+        const newWindows = windows.map((w) => (w === appWindow ? { ...appWindow, minimized: true } : w))
+        setWindows(newWindows)
+    }
+
     useEffect(() => {
         const existingWindow = windows.find((w) => w.key === element.key)
         const newWindow: AppWindow = {
@@ -70,6 +78,7 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
             zIndex: windows.length,
             key: element.key,
             coordinates: location?.state?.coordinates || { x: 0, y: 0 },
+            minimized: false,
         }
 
         if (existingWindow) {
@@ -82,7 +91,9 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
     }, [element])
 
     return (
-        <Context.Provider value={{ windows, handleClose, bringToFront, setWindowTitle, focusedWindow, location }}>
+        <Context.Provider
+            value={{ windows, handleClose, bringToFront, setWindowTitle, focusedWindow, location, minimizeWindow }}
+        >
             {children}
         </Context.Provider>
     )

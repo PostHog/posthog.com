@@ -11,6 +11,7 @@ export interface AppWindow {
         x: number
         y: number
     }
+    minimized: boolean
 }
 
 interface WindowProviderProps {
