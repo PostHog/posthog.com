@@ -37,6 +37,13 @@ const AppLink = ({ Icon, type, color, label, url }) => {
 export default function Desktop() {
     return (
         <div className="fixed size-full p-5">
+            <div
+                className="absolute bottom-0 right-0 size-full bg-contain bg-no-repeat bg-right-bottom -z-10"
+                style={{
+                    backgroundImage:
+                        "url('https://res.cloudinary.com/dmukukwp6/image/upload/Frame_10127_b7362fd913.png')",
+                }}
+            />
             <nav>
                 <ul className="p-0 m-0 list-none flex flex-col space-y-4 items-start">
                     {apps.map((app, index) => {
