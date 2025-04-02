@@ -40,7 +40,6 @@ const Window = ({ item, onClose, constraintsRef, bringToFront }) => {
                 dragControls={controls}
                 dragListener={false}
                 dragMomentum={false}
-                whileDrag={{ scale: 1.01 }}
                 dragConstraints={constraintsRef}
                 onMouseDown={() => bringToFront(item)}
             >
