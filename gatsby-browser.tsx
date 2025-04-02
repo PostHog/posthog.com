@@ -40,4 +40,6 @@ export const onRouteUpdate = ({ location, prevLocation }: RouteUpdateArgs) => {
     }
 }
 
-export const wrapPageElement = ({ element }) => <Wrapper element={element} />
+export const wrapPageElement = ({ element, props: { pageContext, location } }) => (
+    <Wrapper element={element} pageContext={pageContext} location={location} />
+)
