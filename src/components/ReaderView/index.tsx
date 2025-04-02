@@ -92,7 +92,9 @@ export default function ReaderView() {
                     custom={rightSidebarWidth}
                     animate={isTocVisible ? 'open' : 'closed'}
                 >
-                    <OSButton variant="ghost" active={isTocVisible} icon={<IconFilter />} onClick={toggleToc} />
+                    <div className="hidden @4xl:block">
+                        <OSButton variant="ghost" active={isTocVisible} icon={<IconFilter />} onClick={toggleToc} />
+                    </div>
                 </motion.div>
             </div>
 
@@ -114,7 +116,7 @@ export default function ReaderView() {
                             }}
                         >
                             <motion.div
-                                className="overflow-y-auto p-4"
+                                className="overflow-y-auto h-full px-4"
                                 initial={{ opacity: 0 }}
                                 animate={{
                                     opacity: 1,
@@ -147,6 +149,9 @@ export default function ReaderView() {
                 </AnimatePresence>
                 <div className="flex-grow bg-white dark:bg-accent-dark overflow-y-auto p-4">
                     <h2>Title</h2>
+                    <div className="@4xl:hidden bg-tan p-4 mb-4 rounded border border-light dark:border-dark">
+                        inline table of contents
+                    </div>
                     <p>
                         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean euismod ornare dolor ac luctus.
                         Quisque cursus orci non consectetur interdum. Duis auctor erat vitae suscipit ornare.
@@ -203,7 +208,7 @@ export default function ReaderView() {
                     {isTocVisible && (
                         <motion.div
                             id="toc"
-                            className="flex-shrink-0 overflow-hidden"
+                            className="hidden @4xl:block flex-shrink-0 overflow-hidden"
                             initial={{ width: 0 }}
                             animate={{
                                 width: rightSidebarWidth,
@@ -215,7 +220,7 @@ export default function ReaderView() {
                             }}
                         >
                             <motion.div
-                                className="overflow-y-auto p-4"
+                                className="overflow-y-auto px-4 h-full"
                                 initial={{ opacity: 0 }}
                                 animate={{
                                     opacity: 1,
