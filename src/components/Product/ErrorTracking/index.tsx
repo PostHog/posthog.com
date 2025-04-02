@@ -1,7 +1,19 @@
 import CloudinaryImage from 'components/CloudinaryImage'
 import React, { useState } from 'react'
 import Link from 'components/Link'
-import { IconWarning, IconGraph, IconHogQL, IconClock, IconToggle, IconDecisionTree, IconRewindPlay, IconCheck, IconAI, IconPerson, IconPencil } from '@posthog/icons'
+import {
+    IconWarning,
+    IconGraph,
+    IconHogQL,
+    IconClock,
+    IconToggle,
+    IconDecisionTree,
+    IconRewindPlay,
+    IconCheck,
+    IconAI,
+    IconPerson,
+    IconPencil,
+} from '@posthog/icons'
 import { CallToAction } from 'components/CallToAction'
 import { CustomerCard } from 'components/Products/CustomerCard'
 import { TutorialCard } from 'components/Products/TutorialCard'
@@ -29,6 +41,7 @@ import SideModal from '../../Modal/SideModal'
 import { VsCompetitor } from 'components/Products/Competitor'
 import { VsPostHog } from 'components/Products/Competitor/VsPostHog'
 import Comparison from '../Comparison'
+import { useStaticQuery, graphql } from 'gatsby'
 
 interface ProfileData {
     firstName: string
@@ -65,7 +78,7 @@ const features = [
         description: 'Get email alerts when something goes wrong. Or lots of somethings. ',
         image: (
             <CloudinaryImage
-                src="JOETBD"
+                src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/images/products/error-tracking-alerts.png"
                 width={428}
                 placeholder="none"
             />
@@ -77,7 +90,7 @@ const features = [
         description: 'Visually track error rates and impact across your product',
         image: (
             <CloudinaryImage
-                src="JOETBD"
+                src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/images/products/error-tracking-monitoring.png"
                 width={428}
                 placeholder="none"
             />
@@ -89,7 +102,7 @@ const features = [
         description: 'Upload source maps and follow the error path to the end of line',
         image: (
             <CloudinaryImage
-                src="JOETBD"
+                src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/images/products/error-tracking-stack.png"
                 width={428}
                 placeholder="none"
             />
@@ -101,7 +114,7 @@ const features = [
         description: 'Assign issues to individuals or groups, so everyone knows who to blame',
         image: (
             <CloudinaryImage
-                src="JOETBD"
+                src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/images/products/error-tracking-assignment.png"
                 width={428}
                 placeholder="none"
             />
@@ -173,7 +186,7 @@ const faqs = [
     },
     {
         question: 'What data is collected?',
-        answer: 'We collect error messages, stack traces, error context, and associated metadata. You can configure what data is sent and how long it\'s retained.',
+        answer: "We collect error messages, stack traces, error context, and associated metadata. You can configure what data is sent and how long it's retained.",
         children: null,
     },
     {
@@ -295,9 +308,38 @@ const comparison = [
     },
 ]
 
+interface HeroProps {
+    color: string
+    icon: React.ReactNode
+    product: string
+    title: string
+    description: string
+    image: string | React.ReactNode
+}
+
 export const ProductErrorTracking = () => {
     const { fullWidthContent } = useLayoutData()
     const [activeProfile, setActiveProfile] = useState<ProfileData | null>(null)
+    const { zealot } = useStaticQuery(graphql`
+        fragment ProductCustomerFragment on Mdx {
+            fields {
+                slug
+            }
+            frontmatter {
+                logo {
+                    publicURL
+                }
+                logoDark {
+                    publicURL
+                }
+            }
+        }
+        {
+            zealot: mdx(slug: { eq: "customers/zealot" }) {
+                ...ProductCustomerFragment
+            }
+        }
+    `)
 
     return (
         <>
@@ -314,9 +356,9 @@ export const ProductErrorTracking = () => {
                     color="red"
                     icon={<IconWarning />}
                     product={product.capitalized}
-                    title='Track errors and assign issues to <span class="text-red dark:text-yellow">build better products</span>'
+                    title='Track errors and assign issues to <span className="text-red dark:text-yellow">build better products</span>'
                     description="Take your product from exception to exceptional"
-                    image="JOETBD"
+                    image="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/images/products/error-tracking.png"
                 />
 
                 <div className="text-center">
@@ -328,17 +370,31 @@ export const ProductErrorTracking = () => {
                     />
                 </div>
 
+                <section id="customers" className="-mt-36 pt-36">
+                    <ul className="list-none p-0 grid md:grid-cols-4 gap-4 mb-10 md:mb-20">
+                        <CustomerCard
+                            outcome="switched to PostHog from BugSnag and Amplitude"
+                            quote="“In two clicks, I can see who had an error, then their replays. The more of PostHog you use, the more powerful it becomes.”"
+                            customer={zealot}
+                        />
+                    </ul>
+                </section>
+
                 <div className="grid md:grid-cols-2 gap-8 mt-20">
                     <div>
                         <h2 className="text-4xl md:text-5xl">Great on it's own</h2>
                         <p className="text-lg opacity-75">
-                            Comprehensive error tracking out of the box, with issue management and stack tracing that just works.
+                            Comprehensive error tracking out of the box, with issue management and stack tracing that
+                            just works.
                         </p>
                     </div>
                     <div>
-                        <h2 className="text-4xl md:text-5xl">Better with <span class="text-red dark:text-yellow">Product OS</span></h2>
+                        <h2 className="text-4xl md:text-5xl">
+                            Better with <span className="text-red dark:text-yellow">Product OS</span>
+                        </h2>
                         <p className="text-lg opacity-75">
-                            Usable alongside other PostHog products, including session replay, product analytics, feature flags, and more.
+                            Usable alongside other PostHog products, including session replay, product analytics,
+                            feature flags, and more.
                         </p>
                     </div>
                 </div>
@@ -360,7 +416,9 @@ export const ProductErrorTracking = () => {
                     </div>
                 </div>
 
-                <section className={`${fullWidthContent ? 'max-w-full px-8' : 'max-w-7xl mx-auto'} px-5 py-10 md:pt-20 pb-0`}>
+                <section
+                    className={`${fullWidthContent ? 'max-w-full px-8' : 'max-w-7xl mx-auto'} px-5 py-10 md:pt-20 pb-0`}
+                >
                     <div className={`${fullWidthContent ? 'max-w-full px-8' : 'max-w-7xl mx-auto'} px-5 pb-0`}>
                         <div className="bg-accent dark:bg-accent-dark -mx-5 md:-mx-8">
                             <Marquee product={product.capitalized} shortFade>
@@ -379,7 +437,9 @@ export const ProductErrorTracking = () => {
                     <div className="flex flex-col-reverse md:flex-row md:gap-12">
                         <div className="flex-1">
                             <h2 className="text-4xl md:text-5xl">Usage-based pricing</h2>
-                            <p className="">Use the {product.lowercase} for free up to {product.freeTier}.</p>
+                            <p className="">
+                                Use the {product.lowercase} for free up to {product.freeTier}.
+                            </p>
                         </div>
                         <div className="md:w-96 md:text-right mb-8 md:mb-0 -mt-8">
                             <CloudinaryImage
@@ -405,7 +465,9 @@ export const ProductErrorTracking = () => {
                     </div>
                 </section>
 
-                <div className={`${fullWidthContent ? 'max-w-full px-8' : 'max-w-7xl mx-auto'} px-5 py-10 md:pt-20 pb-0`}>
+                <div
+                    className={`${fullWidthContent ? 'max-w-full px-8' : 'max-w-7xl mx-auto'} px-5 py-10 md:pt-20 pb-0`}
+                >
                     <PairsWith items={pairsWithItemCount}>
                         {PairsWithArray.map((card, index) => {
                             return <PairsWithItem {...card} key={index} />
@@ -437,7 +499,10 @@ export const ProductErrorTracking = () => {
                         Get a more technical overview of how everything works <Link to="/docs">in our docs</Link>.
                     </p>
                     <DocLinks
-                        menu={docsMenu.children.find(({ name }) => name.toLowerCase() === 'error tracking')?.children || []}
+                        menu={
+                            docsMenu.children.find(({ name }) => name.toLowerCase() === 'error tracking')?.children ||
+                            []
+                        }
                     />
                 </section>
 
@@ -455,18 +520,16 @@ export const ProductErrorTracking = () => {
                                     title="Reasons a competitor may be best for you (for now...)"
                                     image={
                                         <CloudinaryImage
-                                        src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/images/products/competitors-ff.png"
-                                        className="max-w-[176px]"
-                                    />
+                                            src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/images/products/competitors-ff.png"
+                                            className="max-w-[176px]"
+                                        />
                                     }
                                 >
                                     <ul>
                                         <li>
                                             Uptime monitoring
                                             <ul className="pl-6">
-                                                <li className="text-sm">
-                                                    We don't have uptime monitoring. Yet. 
-                                                </li>
+                                                <li className="text-sm">We don't have uptime monitoring. Yet.</li>
                                             </ul>
                                         </li>
                                         <li>
@@ -477,9 +540,7 @@ export const ProductErrorTracking = () => {
                                                 </li>
                                             </ul>
                                         </li>
-                                        <li>
-                                            Advanced error grouping systems
-                                        </li>
+                                        <li>Advanced error grouping systems</li>
                                     </ul>
                                 </VsCompetitor>
                                 <VsPostHog>
@@ -488,7 +549,8 @@ export const ProductErrorTracking = () => {
                                             Integration with other PostHog products
                                             <ul className="pl-6">
                                                 <li className="text-sm">
-                                                    View replays attached to errors, analyze error patterns with analytics, etc.
+                                                    View replays attached to errors, analyze error patterns with
+                                                    analytics, etc.
                                                 </li>
                                             </ul>
                                         </li>
@@ -522,4 +584,6 @@ export const ProductErrorTracking = () => {
             </div>
         </>
     )
-} 
+}
+
+export default ProductErrorTracking
