@@ -1134,6 +1134,10 @@ export const handbookSidebar = [
                 url: '/handbook/growth/sales/product-led-sales',
             },
             {
+                name: 'Onboarding team',
+                url: '/handbook/growth/sales/onboarding-team',
+            },
+            {
                 name: 'Expansion & Retention',
                 url: '/handbook/growth/sales/expansion-and-retention',
             },
