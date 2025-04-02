@@ -18,7 +18,7 @@ toolsUsed:
   - Session recording
   - Error tracking
   - Product analytics
-date: 2023-09-15
+date: 2023-04-02
 ---
 
 As CTO and co-founder of Zealot, an AI-powered customer activation platform, Brandon Jakobson often sweats the details of product improvement. He’s constantly thinking about how the team can scale faster, ship more, and do more for users. 
