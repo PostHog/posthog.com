@@ -2118,23 +2118,23 @@ export const docsMenu = {
                     icon: 'IconInfo',
                 },
                 {
-                    name: 'Your data in PostHog',
-                    url: '/docs/new-to-posthog/understand-posthog',
-                    icon: 'IconNotebook',
-                },
-                {
-                    name: 'Anonymous vs identified events',
-                    url: '/docs/data/anonymous-vs-identified-events',
-                    icon: 'IconGear',
-                },
-                {
                     name: 'Data types',
                     url: '/docs/data/events',
                     icon: 'IconHardDrive',
                     children: [
                         {
+                            name: 'Your data in PostHog',
+                            url: '/docs/new-to-posthog/understand-posthog',
+                            icon: 'IconNotebook',
+                        },
+                        {
                             name: 'Events',
                             url: '/docs/data/events',
+                        },
+                        {
+                            name: 'Anonymous vs identified events',
+                            url: '/docs/data/anonymous-vs-identified-events',
+                            icon: 'IconGear',
                         },
                         {
                             name: 'Actions',
