@@ -10,6 +10,7 @@ import {
     IconSearch,
     IconFilter,
 } from '@posthog/icons'
+import { DebugContainerQuery } from 'components/DebugContainerQuery'
 
 interface SidebarState {
     isOpen: boolean
@@ -58,7 +59,8 @@ export default function ReaderView() {
     }, [])
 
     return (
-        <div className="w-full h-full flex flex-col bg-light dark:bg-dark min-h-1">
+        <div className="@container w-full h-full flex flex-col bg-light dark:bg-dark min-h-1">
+            <DebugContainerQuery />
             {/* First row - Header */}
             <div className="flex w-full gap-px p-2 flex-shrink-0">
                 <motion.div
