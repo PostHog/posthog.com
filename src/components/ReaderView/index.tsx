@@ -12,8 +12,11 @@ import {
 } from '@posthog/icons'
 import ScrollArea from 'components/RadixUI/ScrollArea'
 import { DebugContainerQuery } from 'components/DebugContainerQuery'
-import ToggleGroupDemo from 'components/RadixUI/ToggleGroup'
+import { IconTextWidth } from '@posthog/icons'
 import { IconTextWidthFixed } from 'components/OSIcons'
+import { ToggleGroup } from 'radix-ui'
+import { useLayoutData } from 'components/Layout/hooks'
+
 interface SidebarState {
     isOpen: boolean
     width: number
@@ -37,20 +40,29 @@ const sidebarVariants = {
     },
 }
 
-const contentVariants = {
-    open: {
-        opacity: 1,
-        transition: { duration: 0.1, delay: 0.3 },
-    },
-    closed: {
-        opacity: 0,
-        transition: { duration: 0.1 },
-    },
-}
+const toggleGroupItemClasses =
+    'flex p-1 aspect-square items-center justify-center bg-white leading-4 text-primary dark:text-primary-dark rounded hover:bg-accent-2 dark:hover:bg-accent-dark focus:z-10 focus:shadow-[0_0_0_2px] focus:shadow-black focus:outline-none data-[state=on]:bg-accent-2 data-[state=on]:bg-accent-2'
+
+const TextWidthToggleGroup = () => (
+    <ToggleGroup.Root
+        className="inline-flex space-x-px rounded p-1 bg-white dark:bg-accent-dark border border-light dark:border-dark"
+        type="single"
+        defaultValue="fixed"
+        aria-label="Content width"
+    >
+        <ToggleGroup.Item className={toggleGroupItemClasses} value="fixed" aria-label="Fixed width">
+            <IconTextWidthFixed className="size-5 inline-block" />
+        </ToggleGroup.Item>
+        <ToggleGroup.Item className={toggleGroupItemClasses} value="full" aria-label="Full width">
+            <IconTextWidth className="size-5" />
+        </ToggleGroup.Item>
+    </ToggleGroup.Root>
+)
 
 export default function ReaderView() {
     const [isNavVisible, setIsNavVisible] = useState(true)
     const [isTocVisible, setIsTocVisible] = useState(true)
+    const { fullWidthContent } = useLayoutData()
 
     const toggleNav = useCallback(() => {
         setIsNavVisible((prev) => !prev)
@@ -152,7 +164,7 @@ export default function ReaderView() {
                     )}
                 </AnimatePresence>
                 <ScrollArea className="flex-grow bg-white dark:bg-accent-dark rounded">
-                    <div className="p-4">
+                    <div className={`p-4 mx-auto transition-all ${fullWidthContent ? 'max-w-full' : 'max-w-xl'}`}>
                         <h2>Title</h2>
                         <div className="@4xl:hidden bg-tan p-4 mb-4 rounded border border-light dark:border-dark">
                             inline table of contents
@@ -275,7 +287,7 @@ export default function ReaderView() {
                 <div className="flex-grow dark:bg-accent-dark flex justify-between">
                     <div>Questions?</div>
                     <div>
-                        <ToggleGroupDemo />
+                        <TextWidthToggleGroup />
                     </div>
                 </div>
                 <motion.div
