@@ -49,7 +49,7 @@ export default function OSButton({
     active = false,
     ...props
 }: OSButtonProps) {
-    const baseClasses = 'inline-flex items-center justify-center rounded transition-colors'
+    const baseClasses = 'inline-flex items-center justify-center rounded transition-colors border'
 
     const sizeClasses = {
         xs: 'px-2 py-1 text-xs',
@@ -66,12 +66,14 @@ export default function OSButton({
     }
 
     const variantClasses = {
-        default: 'bg-black text-white hover:bg-black/90 active:bg-black/80',
+        default: 'bg-black border-black text-white hover:bg-black/90 active:bg-black/80',
         primary:
-            'bg-accent text-primary hover:bg-accent-dark active:bg-accent/80 dark:bg-accent-dark dark:hover:bg-accent dark:active:bg-accent-dark/80',
-        ghost: `bg-transparent ${
-            active ? '!bg-accent-2 dark:!bg-accent-dark' : 'hover:bg-accent-2 dark:hover:bg-accent-dark'
-        } active:bg-accent-2/80 dark:active:bg-accent-dark/80`,
+            'bg-accent border-accent dark:border-accent-dark text-primary hover:bg-accent-dark active:bg-accent/80 dark:bg-accent-dark dark:hover:bg-accent dark:active:bg-accent-dark/80',
+        ghost: `bg-transparent border-transparent ${
+            active
+                ? '!bg-accent-2 dark:!bg-accent-dark hover:border-light dark:hover:border-dark'
+                : 'hover:bg-accent-2 dark:hover:bg-accent-dark'
+        } active:bg-accent-2/80 dark:active:bg-accent-dark/80 focus:border-light dark:focus:border-dark`,
     }
 
     const buttonContent = (

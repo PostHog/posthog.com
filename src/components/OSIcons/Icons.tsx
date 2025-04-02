@@ -40,3 +40,36 @@ export const IconTextWidthFixed: IconComponent<IconProps> = forwardRef(function 
         </BaseIcon>
     )
 })
+
+export const IconTableOfContents: IconComponent<IconProps> = forwardRef(function IconTableOfContents(
+    props,
+    ref
+): JSX.Element {
+    return (
+        <BaseIcon ref={ref} {...props}>
+            <path
+                fillRule="evenodd"
+                d="M2 5.75A.75.75 0 0 1 2.75 5h18.5a.75.75 0 0 1 0 1.5H2.75A.75.75 0 0 1 2 5.75ZM7 12a.75.75 0 0 1 .75-.75h13.5a.75.75 0 0 1 0 1.5H7.75A.75.75 0 0 1 7 12Zm0 6.25a.75.75 0 0 1 .75-.75h13.5a.75.75 0 0 1 0 1.5H7.75a.75.75 0 0 1-.75-.75Z"
+                clipRule="evenodd"
+            />
+            <path d="M2 12a.75.75 0 0 1 1.5 0v6.25a.75.75 0 0 1-1.5 0V12Z" />
+        </BaseIcon>
+    )
+})
+
+export const IconClockRewind: IconComponent<IconProps> = forwardRef(function IconClockRewind(props, ref): JSX.Element {
+    return (
+        <BaseIcon ref={ref} {...props}>
+            <path
+                fillRule="evenodd"
+                d="M12 7a.75.75 0 0 1 .75.75v3.94l3.28 3.28a.75.75 0 1 1-1.06 1.06l-3.5-3.5a.75.75 0 0 1-.22-.53V7.75A.75.75 0 0 1 12 7ZM2.75 4a.75.75 0 0 1 .75.75V8h3.25a.75.75 0 0 1 0 1.5h-4A.75.75 0 0 1 2 8.75v-4A.75.75 0 0 1 2.75 4Z"
+                clipRule="evenodd"
+            />
+            <path
+                fillRule="evenodd"
+                d="M11.986 3.5A8.516 8.516 0 0 0 4.14 8.695a.75.75 0 0 1-1.381-.584A10.016 10.016 0 0 1 11.986 2C17.516 2 22 6.476 22 12s-4.484 10-10.014 10c-4.36 0-8.068-2.783-9.443-6.666a.75.75 0 1 1 1.414-.5 8.516 8.516 0 0 0 8.03 5.666c4.702 0 8.513-3.807 8.513-8.5s-3.81-8.5-8.514-8.5Z"
+                clipRule="evenodd"
+            />
+        </BaseIcon>
+    )
+})

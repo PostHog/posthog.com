@@ -8,12 +8,12 @@ import {
     IconChevronLeft,
     IconChevronRight,
     IconSearch,
-    IconFilter,
+    IconPencil,
 } from '@posthog/icons'
 import ScrollArea from 'components/RadixUI/ScrollArea'
 import { DebugContainerQuery } from 'components/DebugContainerQuery'
 import { IconTextWidth } from '@posthog/icons'
-import { IconTextWidthFixed } from 'components/OSIcons'
+import { IconTextWidthFixed, IconTableOfContents, IconClockRewind } from 'components/OSIcons'
 import { ToggleGroup } from 'radix-ui'
 import { useLayoutData } from 'components/Layout/hooks'
 
@@ -107,7 +107,12 @@ export default function ReaderView() {
                     animate={isTocVisible ? 'open' : 'closed'}
                 >
                     <div className="hidden @4xl:block">
-                        <OSButton variant="ghost" active={isTocVisible} icon={<IconFilter />} onClick={toggleToc} />
+                        <OSButton
+                            variant="ghost"
+                            active={isTocVisible}
+                            icon={<IconTableOfContents />}
+                            onClick={toggleToc}
+                        />
                     </div>
                 </motion.div>
             </div>
@@ -296,7 +301,8 @@ export default function ReaderView() {
                     custom={rightSidebarWidth}
                     animate={isTocVisible ? 'open' : 'closed'}
                 >
-                    edit buttons
+                    <OSButton variant="ghost" icon={<IconPencil />} />
+                    <OSButton variant="ghost" icon={<IconClockRewind />} />
                 </motion.div>
             </div>
         </div>
