@@ -4,6 +4,7 @@ import { IconMinus, IconX } from '@posthog/icons'
 import { useApp } from '../../context/App'
 import { Provider as WindowProvider } from '../../context/Window'
 import Desktop from 'components/Desktop'
+import { DarkModeToggle } from 'components/MainNav'
 
 const sizeDefaults = {
     max: {
@@ -133,7 +134,7 @@ const TaskBar = () => {
                     initial={{ translateY: '100%' }}
                     animate={{ translateY: 0 }}
                     exit={{ translateY: '100%' }}
-                    className="fixed bottom-0 left-0 w-full p-2 bg-accent dark:bg-accent-dark z-50"
+                    className="fixed bottom-0 left-0 w-full p-2 bg-accent dark:bg-accent-dark z-50 flex justify-between"
                 >
                     <ul className="m-0 p-0 list-none flex space-x-1">
                         {windows.map((appWindow) => {
@@ -152,6 +153,9 @@ const TaskBar = () => {
                             )
                         })}
                     </ul>
+                    <div className="w-[160px]">
+                        <DarkModeToggle />
+                    </div>
                 </motion.div>
             )}
         </AnimatePresence>

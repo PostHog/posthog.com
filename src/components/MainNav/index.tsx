@@ -108,7 +108,7 @@ export default function Orders() {
     ) : null
 }
 
-const DarkModeToggle = () => {
+export const DarkModeToggle = () => {
     const { websiteTheme } = useValues(layoutLogic)
 
     const handleClick = () => {
