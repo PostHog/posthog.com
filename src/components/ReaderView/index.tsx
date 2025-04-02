@@ -12,7 +12,8 @@ import {
 } from '@posthog/icons'
 import ScrollArea from 'components/RadixUI/ScrollArea'
 import { DebugContainerQuery } from 'components/DebugContainerQuery'
-
+import ToggleGroupDemo from 'components/RadixUI/ToggleGroup'
+import { IconTextWidthFixed } from 'components/OSIcons'
 interface SidebarState {
     isOpen: boolean
     width: number
@@ -273,7 +274,9 @@ export default function ReaderView() {
                 </motion.div>
                 <div className="flex-grow dark:bg-accent-dark flex justify-between">
                     <div>Questions?</div>
-                    <div>text sizing</div>
+                    <div>
+                        <ToggleGroupDemo />
+                    </div>
                 </div>
                 <motion.div
                     className="flex-shrink-0 flex justify-end"
