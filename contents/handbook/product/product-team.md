@@ -31,9 +31,14 @@ Here is a overview that shows which of our PMs currently works with which team:
 - [Experiments](/teams/experiments)
   
 **Teams with no PM currently**
+- [Batch Exports](/teams/batch-exports)
+- [CRM](/teams/crm)
 - [Data Warehouse](/teams/data-warehouse)
 - [Error Tracking](/teams/error-tracking)
+- [LLM Observability](/teams/llm-observability)
 - [Max AI](/teams/max-ai)
+- [Messaging](/teams/messaging)
+- [Revenue Analytics](/teams/revenue-analytics)
 - [Surveys](/teams/surveys) (light support from Annika)
 
 ## Product goals
