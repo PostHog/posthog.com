@@ -42,7 +42,7 @@ export const onRouteUpdate = ({ location, prevLocation }: RouteUpdateArgs) => {
 }
 
 export const wrapPageElement = ({ element, props: { pageContext, location } }) => (
-    <Provider element={element}>
+    <Provider element={element} location={location}>
         <Wrapper />
     </Provider>
 )

@@ -7,10 +7,12 @@ interface AppContextType {
     bringToFront: (item: AppWindow) => void
     setWindowTitle: (appWindow: AppWindow, title: string) => void
     focusedWindow?: AppWindow
+    location: any
 }
 
 interface AppProviderProps {
     children: React.ReactNode
+    location: any
     element: {
         element: React.ReactNode
         key: string
@@ -23,9 +25,10 @@ export const Context = createContext<AppContextType>({
     bringToFront: () => {},
     setWindowTitle: () => null,
     focusedWindow: undefined,
+    location: {},
 })
 
-export const Provider = ({ children, element }: AppProviderProps) => {
+export const Provider = ({ children, element, location }: AppProviderProps) => {
     const [windows, setWindows] = useState<AppWindow[]>([])
     const focusedWindow = windows.reduce<AppWindow | undefined>(
         (highest, current) => (current.zIndex > (highest?.zIndex ?? -1) ? current : highest),
@@ -68,13 +71,15 @@ export const Provider = ({ children, element }: AppProviderProps) => {
 
         if (existingWindow) {
             bringToFront(existingWindow)
+        } else if (location?.state?.newWindow) {
+            setWindows([...windows, newWindow])
         } else {
             replaceFocusedWindow(newWindow)
         }
     }, [element])
 
     return (
-        <Context.Provider value={{ windows, handleClose, bringToFront, setWindowTitle, focusedWindow }}>
+        <Context.Provider value={{ windows, handleClose, bringToFront, setWindowTitle, focusedWindow, location }}>
             {children}
         </Context.Provider>
     )
