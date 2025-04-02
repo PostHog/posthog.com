@@ -1,0 +1,20 @@
+---
+description: 
+globs: 
+alwaysApply: true
+---
+
+# Don't add new Tailwind styles and don't use stock colors
+
+- Check [tailwind.config.js](mdc:tailwind.config.js) for supported colors.
+
+The following colors are primarily used:
+
+- bg-light / bg-dark
+- bg-accent / bg-accent-dark
+- border-light / border-dark
+
+Links are styled with font-semibold and use different colors for light and dark mode:
+
+- text-right
+- dark:text-yellow

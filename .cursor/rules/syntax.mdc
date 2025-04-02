@@ -1,0 +1,9 @@
+---
+description: 
+globs: 
+alwaysApply: true
+---
+
+# Syntax rules
+
+- Always use double quotes (unless something different is necessated by content)
