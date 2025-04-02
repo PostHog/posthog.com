@@ -12,6 +12,8 @@ import JSGroupEventCodeSnippet from "../\_snippets/capture-group-event-code.mdx"
 
 > **Want to learn more about group analytics implementation differences?** Check out our [guide on frontend vs backend group analytics implementations](/tutorials/frontend-vs-backend-group-analytics).
 
+> **Identified events:** Events must be [identified](/docs/data/anonymous-vs-identified-events) in order to be associated with a group. If the `$process_person_events` event property ends up being set to `false`, the event will not be associated with the group.
+
 It is **NOT** possible to assign a single event to two groups of the same type. However, it is possible to assign an event to multiple groups as long as the groups are of different types.
 
 <MultiLanguage>
