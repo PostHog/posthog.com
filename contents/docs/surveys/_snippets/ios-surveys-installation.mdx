@@ -12,11 +12,6 @@ import IOSInstall from "../../integrate/_snippets/install-ios.mdx"
 
 ## Step two: Enable surveys in your configuration
 
-> **⚠️ Caution:**
-> - Surveys are currently in beta and only accessible through the `Experimental` SPI in Swift.
-> - We recommend thorough testing in your development environment before deploying to production.
-> - Survey APIs may change frequently and introduce breaking changes between SDK releases. Consider this when planning updates.
-
 To enable surveys in your iOS app:
 
 1. First, import PostHog with access to its experimental APIs:
@@ -52,13 +47,12 @@ PostHogSDK.shared.setup(config)
 | Set colors in PostHog dashboard   | ✅                                 |
 | Shuffle questions                 | ❌                                 |
 | PostHog branding                  | ❌                                 |
-| Delay popup after page load       | ❌                                 |
+| Delay popup after screen view     | ❌                                 |
 | Position config                   | ❌ Always bottom sheet             |
 | **Display conditions**            |                                    |
 | Feature flag & property targeting | ✅                                 |
-| URL targeting                     | ❌                                 |
+| Screen targeting                  | ❌                                 |
 | Device type targeting             | ✅                                 |
-| CSS selector matches              | ❌                                 |
 | Survey wait period                | ❌                                 |
 | Event triggers                    | ✅                                 |
 | Action triggers                   | ❌                                 |
