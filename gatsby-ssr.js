@@ -15,6 +15,8 @@ import Posts from './src/components/Edition/Posts'
 import { Provider as ToastProvider } from './src/context/toast'
 import { ChatProvider } from './src/hooks/useChat'
 import Chat from './src/components/Chat'
+import Wrapper from './src/components/Wrapper'
+
 export const wrapPageElement = ({ element, props }) => {
     const slug = props.location.pathname.substring(1)
     initKea(true, props.location)
@@ -22,31 +24,7 @@ export const wrapPageElement = ({ element, props }) => {
         <UserProvider>
             <ChatProvider>
                 {wrapElement({
-                    element:
-                        !/^posts\/new|^posts\/(.*)\/edit/.test(slug) &&
-                        (props.pageContext.post || /^posts|^changelog\/(.*?)\//.test(slug)) ? (
-                            <Posts {...props}>{element}</Posts>
-                        ) : props.custom404 || !props.data || props.pageContext.ignoreWrapper ? (
-                            element
-                        ) : /^handbook|^docs\/(?!api)|^manual/.test(slug) &&
-                          ![
-                              'docs/api/post-only-endpoints',
-                              'docs/api/user',
-                              'docs/integrations',
-                              'docs/product-analytics',
-                              'docs/session-replay',
-                              'docs/feature-flags',
-                              'docs/experiments',
-                              'docs/data',
-                          ].includes(slug) ? (
-                            <HandbookLayout {...props} />
-                        ) : /^session-replay|^product-analytics|^feature-flags|^experiments|^product-os/.test(slug) ? (
-                            <Product {...props} />
-                        ) : /^careers\//.test(slug) ? (
-                            <Job {...props} />
-                        ) : (
-                            element
-                        ),
+                    element: <Wrapper element={element} />,
                 })}
             </ChatProvider>
         </UserProvider>
