@@ -1,8 +1,16 @@
 import React, { useState, useCallback } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import '@radix-ui/themes/styles.css'
-import { Theme, Button } from '@radix-ui/themes'
-import './styles.css'
+import OSButton from 'components/OSButton'
+import {
+    IconHome,
+    IconSidebarOpen,
+    IconSidebarClose,
+    IconChevronLeft,
+    IconChevronRight,
+    IconSearch,
+    IconFilter,
+} from '@posthog/icons'
+import { DebugContainerQuery } from 'components/DebugContainerQuery'
 
 interface SidebarState {
     isOpen: boolean
@@ -51,30 +59,32 @@ export default function ReaderView() {
     }, [])
 
     return (
-        <Theme
-            accentColor="gray"
-            grayColor="gray"
-            appearance="light"
-            scaling="100%"
-            radius="medium"
-            className="w-full h-full flex flex-col bg-light dark:bg-dark min-h-1"
-        >
+        <div className="@container w-full h-full flex flex-col bg-light dark:bg-dark min-h-1">
+            <DebugContainerQuery />
             {/* First row - Header */}
-            <div className="flex w-full gap-2 p-2 flex-shrink-0">
+            <div className="flex w-full gap-px p-2 flex-shrink-0">
                 <motion.div
-                    className="flex-shrink-0 overflow-hidden"
+                    className="flex-shrink-0 overflow-hidden flex items-center gap-px"
                     variants={sidebarVariants}
                     custom={leftSidebarWidth}
                     animate={isNavVisible ? 'open' : 'closed'}
                 >
-                    home
-                    <Button variant="soft" color="blue" onClick={toggleNav}>
-                        toggle nav
-                    </Button>
+                    <OSButton variant="ghost" icon={<IconHome />} />
+                    <OSButton
+                        onClick={toggleNav}
+                        variant="ghost"
+                        active={isNavVisible}
+                        icon={isNavVisible ? <IconSidebarOpen /> : <IconSidebarClose />}
+                    />
                 </motion.div>
-                <div className="flex-grow dark:bg-accent-dark flex justify-between">
-                    <div>back, forward</div>
-                    <div>search</div>
+                <div className="flex-grow dark:bg-accent-dark flex justify-between items-center">
+                    <div className="flex items-center gap-px">
+                        <OSButton variant="ghost" icon={<IconChevronLeft />} />
+                        <OSButton variant="ghost" icon={<IconChevronRight />} />
+                    </div>
+                    <div>
+                        <OSButton variant="ghost" icon={<IconSearch />} />
+                    </div>
                 </div>
                 <motion.div
                     className="flex-shrink-0 flex justify-end"
@@ -82,9 +92,7 @@ export default function ReaderView() {
                     custom={rightSidebarWidth}
                     animate={isTocVisible ? 'open' : 'closed'}
                 >
-                    <Button variant="ghost" className="accent" onClick={toggleToc}>
-                        toggle ToC
-                    </Button>
+                    <OSButton variant="ghost" active={isTocVisible} icon={<IconFilter />} onClick={toggleToc} />
                 </motion.div>
             </div>
 
@@ -139,18 +147,6 @@ export default function ReaderView() {
                 </AnimatePresence>
                 <div className="flex-grow bg-white dark:bg-accent-dark overflow-y-auto p-4">
                     <h2>Title</h2>
-                    <Button variant="classic" color="blue">
-                        Get started
-                    </Button>
-                    <Button variant="solid" color="blue">
-                        Get started
-                    </Button>
-                    <Button variant="soft" color="blue">
-                        Get started
-                    </Button>
-                    <Button variant="solid" className="accent">
-                        Accent Button
-                    </Button>
                     <p>
                         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean euismod ornare dolor ac luctus.
                         Quisque cursus orci non consectetur interdum. Duis auctor erat vitae suscipit ornare.
@@ -253,7 +249,7 @@ export default function ReaderView() {
             </div>
 
             {/* Third row - Footer */}
-            <div className="flex w-full gap-2 p-2 flex-shrink-0">
+            <div className="flex w-full gap-px p-2 flex-shrink-0">
                 <motion.div
                     className="flex-shrink-0"
                     variants={sidebarVariants}
@@ -275,6 +271,6 @@ export default function ReaderView() {
                     edit buttons
                 </motion.div>
             </div>
-        </Theme>
+        </div>
     )
 }
