@@ -9,6 +9,32 @@ interface SidebarState {
 const leftSidebarWidth = '250px'
 const rightSidebarWidth = '300px'
 
+const sidebarVariants = {
+    open: (width: string) => ({
+        width: width,
+        transition: {
+            width: { duration: 0.2 },
+        },
+    }),
+    closed: {
+        width: 'auto',
+        transition: {
+            width: { duration: 0.2 },
+        },
+    },
+}
+
+const contentVariants = {
+    open: {
+        opacity: 1,
+        transition: { duration: 0.1, delay: 0.3 },
+    },
+    closed: {
+        opacity: 0,
+        transition: { duration: 0.1 },
+    },
+}
+
 export default function ReaderView() {
     const [isNavVisible, setIsNavVisible] = useState(true)
     const [isTocVisible, setIsTocVisible] = useState(true)
@@ -26,9 +52,10 @@ export default function ReaderView() {
             {/* First row - Header */}
             <div className="flex w-full gap-2 p-2 flex-shrink-0">
                 <motion.div
-                    className="flex-shrink-0"
-                    animate={{ width: isNavVisible ? leftSidebarWidth : 'auto' }}
-                    transition={{ duration: 0.2 }}
+                    className="flex-shrink-0 overflow-hidden"
+                    variants={sidebarVariants}
+                    custom={leftSidebarWidth}
+                    animate={isNavVisible ? 'open' : 'closed'}
                 >
                     home
                     <button className="border border-light bg-white" onClick={toggleNav}>
@@ -40,9 +67,10 @@ export default function ReaderView() {
                     <div>search</div>
                 </div>
                 <motion.div
-                    className="flex-shrink-0 flex justify-end"
-                    animate={{ width: isTocVisible ? rightSidebarWidth : 'auto' }}
-                    transition={{ duration: 0.2 }}
+                    className="flex-shrink-0 overflow-hidden flex justify-end"
+                    variants={sidebarVariants}
+                    custom={rightSidebarWidth}
+                    animate={isTocVisible ? 'open' : 'closed'}
                 >
                     <button className="border border-light bg-white" onClick={toggleToc}>
                         toggle ToC
@@ -56,26 +84,46 @@ export default function ReaderView() {
                     {isNavVisible && (
                         <motion.div
                             id="nav"
-                            initial={{ width: 0, opacity: 0 }}
-                            animate={{ width: leftSidebarWidth, opacity: 1 }}
-                            exit={{ width: 0, opacity: 0 }}
-                            transition={{ duration: 0.2 }}
-                            className="flex-shrink-0 overflow-y-auto p-4"
+                            className="flex-shrink-0 overflow-hidden"
+                            initial={{ width: 0 }}
+                            animate={{
+                                width: leftSidebarWidth,
+                                transition: { duration: 0.2 },
+                            }}
+                            exit={{
+                                width: 0,
+                                transition: { duration: 0.2, delay: 0.05 },
+                            }}
                         >
-                            <p>
-                                In ut tortor eget enim posuere tristique. Sed tortor orci, dignissim at diam eu, dictum
-                                mattis arcu. Pellentesque vel condimentum nulla, at pretium augue. Mauris pellentesque
-                                bibendum cursus. Phasellus vitae mauris vehicula, condimentum diam sit amet, condimentum
-                                nisi. Suspendisse eleifend ante consequat odio euismod, non ultricies ipsum sagittis.
-                                Maecenas quis nisi rutrum, feugiat nunc eget, convallis velit.
-                            </p>
-                            <p>
-                                In ut tortor eget enim posuere tristique. Sed tortor orci, dignissim at diam eu, dictum
-                                mattis arcu. Pellentesque vel condimentum nulla, at pretium augue. Mauris pellentesque
-                                bibendum cursus. Phasellus vitae mauris vehicula, condimentum diam sit amet, condimentum
-                                nisi. Suspendisse eleifend ante consequat odio euismod, non ultricies ipsum sagittis.
-                                Maecenas quis nisi rutrum, feugiat nunc eget, convallis velit.
-                            </p>
+                            <motion.div
+                                className="overflow-y-auto p-4"
+                                initial={{ opacity: 0 }}
+                                animate={{
+                                    opacity: 1,
+                                    transition: { duration: 0.05, delay: 0.2 },
+                                }}
+                                exit={{
+                                    opacity: 0,
+                                    transition: { duration: 0.05 },
+                                }}
+                            >
+                                <p>
+                                    In ut tortor eget enim posuere tristique. Sed tortor orci, dignissim at diam eu,
+                                    dictum mattis arcu. Pellentesque vel condimentum nulla, at pretium augue. Mauris
+                                    pellentesque bibendum cursus. Phasellus vitae mauris vehicula, condimentum diam sit
+                                    amet, condimentum nisi. Suspendisse eleifend ante consequat odio euismod, non
+                                    ultricies ipsum sagittis. Maecenas quis nisi rutrum, feugiat nunc eget, convallis
+                                    velit.
+                                </p>
+                                <p>
+                                    In ut tortor eget enim posuere tristique. Sed tortor orci, dignissim at diam eu,
+                                    dictum mattis arcu. Pellentesque vel condimentum nulla, at pretium augue. Mauris
+                                    pellentesque bibendum cursus. Phasellus vitae mauris vehicula, condimentum diam sit
+                                    amet, condimentum nisi. Suspendisse eleifend ante consequat odio euismod, non
+                                    ultricies ipsum sagittis. Maecenas quis nisi rutrum, feugiat nunc eget, convallis
+                                    velit.
+                                </p>
+                            </motion.div>
                         </motion.div>
                     )}
                 </AnimatePresence>
@@ -136,26 +184,46 @@ export default function ReaderView() {
                     {isTocVisible && (
                         <motion.div
                             id="toc"
-                            initial={{ width: 0, opacity: 0 }}
-                            animate={{ width: rightSidebarWidth, opacity: 1 }}
-                            exit={{ width: 0, opacity: 0 }}
-                            transition={{ duration: 0.2 }}
-                            className="flex-shrink-0 overflow-y-auto p-4"
+                            className="flex-shrink-0 overflow-hidden"
+                            initial={{ width: 0 }}
+                            animate={{
+                                width: rightSidebarWidth,
+                                transition: { duration: 0.2 },
+                            }}
+                            exit={{
+                                width: 0,
+                                transition: { duration: 0.2, delay: 0.05 },
+                            }}
                         >
-                            <p>
-                                In ut tortor eget enim posuere tristique. Sed tortor orci, dignissim at diam eu, dictum
-                                mattis arcu. Pellentesque vel condimentum nulla, at pretium augue. Mauris pellentesque
-                                bibendum cursus. Phasellus vitae mauris vehicula, condimentum diam sit amet, condimentum
-                                nisi. Suspendisse eleifend ante consequat odio euismod, non ultricies ipsum sagittis.
-                                Maecenas quis nisi rutrum, feugiat nunc eget, convallis velit.
-                            </p>
-                            <p>
-                                In ut tortor eget enim posuere tristique. Sed tortor orci, dignissim at diam eu, dictum
-                                mattis arcu. Pellentesque vel condimentum nulla, at pretium augue. Mauris pellentesque
-                                bibendum cursus. Phasellus vitae mauris vehicula, condimentum diam sit amet, condimentum
-                                nisi. Suspendisse eleifend ante consequat odio euismod, non ultricies ipsum sagittis.
-                                Maecenas quis nisi rutrum, feugiat nunc eget, convallis velit.
-                            </p>
+                            <motion.div
+                                className="overflow-y-auto p-4"
+                                initial={{ opacity: 0 }}
+                                animate={{
+                                    opacity: 1,
+                                    transition: { duration: 0.05, delay: 0.2 },
+                                }}
+                                exit={{
+                                    opacity: 0,
+                                    transition: { duration: 0.05 },
+                                }}
+                            >
+                                <p>
+                                    In ut tortor eget enim posuere tristique. Sed tortor orci, dignissim at diam eu,
+                                    dictum mattis arcu. Pellentesque vel condimentum nulla, at pretium augue. Mauris
+                                    pellentesque bibendum cursus. Phasellus vitae mauris vehicula, condimentum diam sit
+                                    amet, condimentum nisi. Suspendisse eleifend ante consequat odio euismod, non
+                                    ultricies ipsum sagittis. Maecenas quis nisi rutrum, feugiat nunc eget, convallis
+                                    velit.
+                                </p>
+                                <p>
+                                    In ut tortor eget enim posuere tristique. Sed tortor orci, dignissim at diam eu,
+                                    dictum mattis arcu. Pellentesque vel condimentum nulla, at pretium augue. Mauris
+                                    pellentesque bibendum cursus. Phasellus vitae mauris vehicula, condimentum diam sit
+                                    amet, condimentum nisi. Suspendisse eleifend ante consequat odio euismod, non
+                                    ultricies ipsum sagittis. Maecenas quis nisi rutrum, feugiat nunc eget, convallis
+                                    velit.
+                                </p>
+                            </motion.div>
                         </motion.div>
                     )}
                 </AnimatePresence>
@@ -164,9 +232,10 @@ export default function ReaderView() {
             {/* Third row - Footer */}
             <div className="flex w-full gap-2 p-2 flex-shrink-0">
                 <motion.div
-                    className="flex-shrink-0"
-                    animate={{ width: isNavVisible ? leftSidebarWidth : 'auto' }}
-                    transition={{ duration: 0.2 }}
+                    className="flex-shrink-0 overflow-hidden"
+                    variants={sidebarVariants}
+                    custom={leftSidebarWidth}
+                    animate={isNavVisible ? 'open' : 'closed'}
                 >
                     home, sidebar
                 </motion.div>
@@ -175,9 +244,10 @@ export default function ReaderView() {
                     <div>text sizing</div>
                 </div>
                 <motion.div
-                    className="flex-shrink-0"
-                    animate={{ width: isTocVisible ? rightSidebarWidth : 'auto' }}
-                    transition={{ duration: 0.2 }}
+                    className="flex-shrink-0 overflow-hidden flex justify-end"
+                    variants={sidebarVariants}
+                    custom={rightSidebarWidth}
+                    animate={isTocVisible ? 'open' : 'closed'}
                 >
                     edit buttons
                 </motion.div>
