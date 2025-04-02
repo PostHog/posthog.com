@@ -21,6 +21,7 @@ import { useLayoutData } from 'components/Layout/hooks'
 import Link from 'components/Link'
 import { MDXRenderer } from 'gatsby-plugin-mdx'
 import { MDXProvider } from '@mdx-js/react'
+import InternalSidebarLink from 'components/Docs/InternalSidebarLink'
 
 interface SidebarState {
     isOpen: boolean
@@ -70,9 +71,11 @@ interface ReaderViewProps {
         content: string
     }
     title: string
+    tableOfContents: any
+    mdxComponents?: any
 }
 
-export default function ReaderView({ body, title }: ReaderViewProps) {
+export default function ReaderView({ body, title, tableOfContents, mdxComponents }: ReaderViewProps) {
     const [isNavVisible, setIsNavVisible] = useState(true)
     const [isTocVisible, setIsTocVisible] = useState(true)
     const { fullWidthContent } = useLayoutData()
@@ -189,7 +192,7 @@ export default function ReaderView({ body, title }: ReaderViewProps) {
                         </div>
                         {body.type === 'mdx' ? (
                             <div className={'article-content'}>
-                                <MDXProvider components={{}}>
+                                <MDXProvider components={mdxComponents}>
                                     <MDXRenderer>{body.content}</MDXRenderer>
                                 </MDXProvider>
                             </div>
@@ -226,22 +229,25 @@ export default function ReaderView({ body, title }: ReaderViewProps) {
                                 }}
                             >
                                 <ScrollArea className="px-4">
-                                    <p>
-                                        In ut tortor eget enim posuere tristique. Sed tortor orci, dignissim at diam eu,
-                                        dictum mattis arcu. Pellentesque vel condimentum nulla, at pretium augue. Mauris
-                                        pellentesque bibendum cursus. Phasellus vitae mauris vehicula, condimentum diam
-                                        sit amet, condimentum nisi. Suspendisse eleifend ante consequat odio euismod,
-                                        non ultricies ipsum sagittis. Maecenas quis nisi rutrum, feugiat nunc eget,
-                                        convallis velit.
-                                    </p>
-                                    <p>
-                                        In ut tortor eget enim posuere tristique. Sed tortor orci, dignissim at diam eu,
-                                        dictum mattis arcu. Pellentesque vel condimentum nulla, at pretium augue. Mauris
-                                        pellentesque bibendum cursus. Phasellus vitae mauris vehicula, condimentum diam
-                                        sit amet, condimentum nisi. Suspendisse eleifend ante consequat odio euismod,
-                                        non ultricies ipsum sagittis. Maecenas quis nisi rutrum, feugiat nunc eget,
-                                        convallis velit.
-                                    </p>
+                                    {tableOfContents && tableOfContents?.length > 0 && (
+                                        <div>
+                                            <h4 className="text-primary dark:text-primary-dark font-semibold opacity-25 m-0 mb-1 text-sm">
+                                                Jump to:
+                                            </h4>
+                                            <ul className="list-none m-0 p-0 flex flex-col">
+                                                {tableOfContents.map((navItem, index) => (
+                                                    <li className="relative leading-none m-0" key={navItem.url}>
+                                                        <InternalSidebarLink
+                                                            url={navItem.url}
+                                                            name={navItem.value}
+                                                            depth={navItem.depth}
+                                                            className="hover:opacity-100 opacity-60 text-[14px] py-1 block relative active:top-[0.5px] active:scale-[.99]"
+                                                        />
+                                                    </li>
+                                                ))}
+                                            </ul>
+                                        </div>
+                                    )}
                                 </ScrollArea>
                             </motion.div>
                         </motion.div>
