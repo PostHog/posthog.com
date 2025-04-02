@@ -56,18 +56,43 @@ const Window = ({ item, onClose, constraintsRef, bringToFront }) => {
                     className="absolute bottom-0 right-0 w-4 h-4 cursor-se-resize"
                     drag
                     dragMomentum={false}
-                    dragConstraints={{
-                        left: 0,
-                        top: 0,
-                        right: 0,
-                        bottom: 0,
-                    }}
+                    dragConstraints={{ left: 0, top: 0, right: 0, bottom: 0 }}
                     onDrag={(_event, info) => {
                         setSize((prev) => ({
                             width: Math.min(
                                 Math.max(prev.width + info.delta.x, sizeDefaults.min.width),
                                 sizeDefaults.max.width
                             ),
+                            height: Math.min(
+                                Math.max(prev.height + info.delta.y, sizeDefaults.min.height),
+                                sizeDefaults.max.height
+                            ),
+                        }))
+                    }}
+                />
+                <motion.div
+                    className="absolute right-0 top-0 w-1 h-full cursor-ew-resize"
+                    drag="x"
+                    dragMomentum={false}
+                    dragConstraints={{ left: 0, right: 0 }}
+                    onDrag={(_event, info) => {
+                        setSize((prev) => ({
+                            ...prev,
+                            width: Math.min(
+                                Math.max(prev.width + info.delta.x, sizeDefaults.min.width),
+                                sizeDefaults.max.width
+                            ),
+                        }))
+                    }}
+                />
+                <motion.div
+                    className="absolute bottom-0 left-0 w-full h-1 cursor-ns-resize"
+                    drag="y"
+                    dragMomentum={false}
+                    dragConstraints={{ top: 0, bottom: 0 }}
+                    onDrag={(_event, info) => {
+                        setSize((prev) => ({
+                            ...prev,
                             height: Math.min(
                                 Math.max(prev.height + info.delta.y, sizeDefaults.min.height),
                                 sizeDefaults.max.height
