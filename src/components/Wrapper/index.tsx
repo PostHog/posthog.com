@@ -27,7 +27,7 @@ const Window = ({ item, onClose, constraintsRef, bringToFront }) => {
     return (
         <WindowProvider appWindow={item}>
             <motion.div
-                className="cursor-default absolute bg-light dark:bg-dark flex flex-col border border-border dark:border-border-dark rounded overflow-hidden"
+                className="absolute bg-light dark:bg-dark flex flex-col border border-border dark:border-border-dark rounded overflow-hidden !select-auto"
                 style={{
                     width: size.width,
                     height: size.height,
