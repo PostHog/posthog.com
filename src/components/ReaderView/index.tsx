@@ -1,8 +1,6 @@
 import React, { useState, useCallback } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import '@radix-ui/themes/styles.css'
-import { Theme, Button } from '@radix-ui/themes'
-import './styles.css'
+import OSButton from 'components/OSButton'
 
 interface SidebarState {
     isOpen: boolean
@@ -51,14 +49,7 @@ export default function ReaderView() {
     }, [])
 
     return (
-        <Theme
-            accentColor="gray"
-            grayColor="gray"
-            appearance="light"
-            scaling="100%"
-            radius="medium"
-            className="w-full h-full flex flex-col bg-light dark:bg-dark min-h-1"
-        >
+        <div className="w-full h-full flex flex-col bg-light dark:bg-dark min-h-1">
             {/* First row - Header */}
             <div className="flex w-full gap-2 p-2 flex-shrink-0">
                 <motion.div
@@ -68,9 +59,9 @@ export default function ReaderView() {
                     animate={isNavVisible ? 'open' : 'closed'}
                 >
                     home
-                    <Button variant="soft" color="blue" onClick={toggleNav}>
-                        toggle nav
-                    </Button>
+                    <OSButton onClick={toggleNav} variant="ghost" size="sm" active={isNavVisible}>
+                        Toggle
+                    </OSButton>
                 </motion.div>
                 <div className="flex-grow dark:bg-accent-dark flex justify-between">
                     <div>back, forward</div>
@@ -82,9 +73,7 @@ export default function ReaderView() {
                     custom={rightSidebarWidth}
                     animate={isTocVisible ? 'open' : 'closed'}
                 >
-                    <Button variant="ghost" className="accent" onClick={toggleToc}>
-                        toggle ToC
-                    </Button>
+                    <button onClick={toggleToc}>toggle ToC</button>
                 </motion.div>
             </div>
 
@@ -139,18 +128,6 @@ export default function ReaderView() {
                 </AnimatePresence>
                 <div className="flex-grow bg-white dark:bg-accent-dark overflow-y-auto p-4">
                     <h2>Title</h2>
-                    <Button variant="classic" color="blue">
-                        Get started
-                    </Button>
-                    <Button variant="solid" color="blue">
-                        Get started
-                    </Button>
-                    <Button variant="soft" color="blue">
-                        Get started
-                    </Button>
-                    <Button variant="solid" className="accent">
-                        Accent Button
-                    </Button>
                     <p>
                         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean euismod ornare dolor ac luctus.
                         Quisque cursus orci non consectetur interdum. Duis auctor erat vitae suscipit ornare.
@@ -275,6 +252,6 @@ export default function ReaderView() {
                     edit buttons
                 </motion.div>
             </div>
-        </Theme>
+        </div>
     )
 }
