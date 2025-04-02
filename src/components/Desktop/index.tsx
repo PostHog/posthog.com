@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useRef } from 'react'
 import { IconGraph, IconPieChart } from '@posthog/icons'
 import Link from 'components/Link'
 
@@ -18,22 +18,38 @@ const apps = [
     },
 ]
 
+const AppLink = ({ Icon, type, color, label, url }) => {
+    const ref = useRef<HTMLSpanElement>(null)
+    return (
+        <span ref={ref}>
+            <Link
+                to={url}
+                state={{ newWindow: true }}
+                className="flex flex-col justify-center items-center space-y-1 w-[90px] text-center"
+            >
+                <Icon className={`size-7 text-${color}`} />
+                <p className="text-sm">{label}</p>
+            </Link>
+        </span>
+    )
+}
+
 export default function Desktop() {
     return (
         <div className="fixed size-full p-5">
+            <div
+                className="absolute bottom-0 right-0 size-full bg-contain bg-no-repeat bg-right-bottom -z-10"
+                style={{
+                    backgroundImage:
+                        "url('https://res.cloudinary.com/dmukukwp6/image/upload/Frame_10127_b7362fd913.png')",
+                }}
+            />
             <nav>
                 <ul className="p-0 m-0 list-none flex flex-col space-y-4 items-start">
-                    {apps.map(({ Icon, type, color, label, url }, index) => {
+                    {apps.map((app, index) => {
                         return (
-                            <li key={label + index}>
-                                <Link
-                                    to={url}
-                                    state={{ newWindow: true }}
-                                    className="flex flex-col justify-center items-center space-y-1 w-[90px] text-center"
-                                >
-                                    <Icon className={`size-7 text-${color}`} />
-                                    <p className="text-sm">{label}</p>
-                                </Link>
+                            <li key={app.label + index}>
+                                <AppLink {...app} />
                             </li>
                         )
                     })}
