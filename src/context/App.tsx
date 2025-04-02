@@ -48,7 +48,7 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
         const newWindows = windows.map((el) => ({
             ...el,
             zIndex: el === item ? windows.length : el.zIndex < item.zIndex ? el.zIndex : el.zIndex - 1,
-            minimized: false,
+            minimized: item === el ? false : el.minimized,
         }))
         setWindows(newWindows)
     }
