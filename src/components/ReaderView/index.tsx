@@ -26,7 +26,7 @@ import { MDXRenderer } from 'gatsby-plugin-mdx'
 import { MDXProvider } from '@mdx-js/react'
 import InternalSidebarLink from 'components/Docs/InternalSidebarLink'
 import HeaderBar from 'components/OSChrome/HeaderBar'
-import ElementScrollLink from 'components/ElementScrollLink'
+import ElementScrollLink, { ScrollSpyProvider } from 'components/ElementScrollLink'
 import { useLocation } from '@reach/router'
 import menu from '../../navs'
 import { TreeMenu } from 'components/TreeMenu'
@@ -285,26 +285,28 @@ export default function ReaderView({ body, title, tableOfContents, mdxComponents
                             >
                                 <ScrollArea className="px-4" fadeOverflow>
                                     {tableOfContents && tableOfContents?.length > 0 && (
-                                        <div>
-                                            <h4 className="font-semibold text-muted m-0 mb-1 text-sm">Jump to:</h4>
-                                            <ul className="list-none m-0 p-0 flex flex-col">
-                                                {tableOfContents.map((navItem) => {
-                                                    return (
-                                                        <li className="relative leading-none m-0" key={navItem.url}>
-                                                            <ElementScrollLink
-                                                                id={navItem.url}
-                                                                label={navItem.value}
-                                                                className={`text-sm text-muted hover:text-primary py-1 block relative active:top-px active:scale-[.99]`}
-                                                                element={contentRef}
-                                                                style={{
-                                                                    paddingLeft: `${navItem.depth || 0}rem`,
-                                                                }}
-                                                            />
-                                                        </li>
-                                                    )
-                                                })}
-                                            </ul>
-                                        </div>
+                                        <ScrollSpyProvider>
+                                            <div>
+                                                <h4 className="font-semibold text-muted m-0 mb-1 text-sm">Jump to:</h4>
+                                                <ul className="list-none m-0 p-0 flex flex-col">
+                                                    {tableOfContents.map((navItem) => {
+                                                        return (
+                                                            <li className="relative leading-none m-0" key={navItem.url}>
+                                                                <ElementScrollLink
+                                                                    id={navItem.url}
+                                                                    label={navItem.value}
+                                                                    className={`text-sm text-muted hover:text-primary py-1 block relative active:top-px active:scale-[.99]`}
+                                                                    element={contentRef}
+                                                                    style={{
+                                                                        paddingLeft: `${navItem.depth || 0}rem`,
+                                                                    }}
+                                                                />
+                                                            </li>
+                                                        )
+                                                    })}
+                                                </ul>
+                                            </div>
+                                        </ScrollSpyProvider>
                                     )}
                                 </ScrollArea>
                             </motion.div>
