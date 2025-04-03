@@ -3550,7 +3550,7 @@
   dependencies:
     "@radix-ui/react-visually-hidden" "1.1.2"
 
-"@radix-ui/react-accordion@1.2.3":
+"@radix-ui/react-accordion@1.2.3", "@radix-ui/react-accordion@^1.2.3":
   version "1.2.3"
   resolved "https://registry.yarnpkg.com/@radix-ui/react-accordion/-/react-accordion-1.2.3.tgz#7768a2d2daea18e5c09809f2c4b8097448ee2ff7"
   integrity sha512-RIQ15mrcvqIkDARJeERSuXSry2N8uYnxkdDetpfmalT/+0ntOXLkFOsh9iwlAsCv+qcmhZjbdJogIm6WBa6c4A==
