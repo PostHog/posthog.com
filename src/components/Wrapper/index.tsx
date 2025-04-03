@@ -18,7 +18,7 @@ const sizeDefaults = {
 }
 
 const Window = ({ item, constraintsRef }) => {
-    const { minimizeWindow, bringToFront, closeWindow } = useApp()
+    const { minimizeWindow, bringToFront, closeWindow, focusedWindow } = useApp()
     const controls = useDragControls()
     const [size, setSize] = useState({ width: 767, height: 600 })
     const [position, setPosition] = useState({ x: 0, y: 0 })
@@ -32,7 +32,9 @@ const Window = ({ item, constraintsRef }) => {
             <AnimatePresence>
                 {!item.minimized && (
                     <motion.div
-                        className="absolute flex flex-col border border-light-7 dark:border-dark-7 rounded overflow-hidden !select-auto shadow-xl"
+                        className={`absolute flex flex-col border border-light-7 dark:border-dark-7 rounded overflow-hidden !select-auto shadow-xl ${
+                            focusedWindow === item ? 'ACTIVE CLASSES HERE CORY' : ''
+                        }`}
                         style={{
                             width: size.width,
                             height: size.height,
