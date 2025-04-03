@@ -1,3 +1,5 @@
+<!-- Keep in sync with https://github.com/PostHog/posthog-js/tree/main/playground/nuxtjs -->
+
 1. Install `posthog-js` using your package manager:
 
 ```shell
@@ -10,44 +12,47 @@ npm install --save posthog-js
 
 ```js file=nuxt.config.js
 export default defineNuxtConfig({
-  runtimeConfig: {
-    public: {
-      posthogPublicKey: '<ph_project_api_key>',
-      posthogHost: '<ph_client_api_host>'
+    runtimeConfig: {
+        public: {
+            posthogPublicKey: process.env.NUXT_PUBLIC_POSTHOG_KEY || '<ph_project_api_key>',
+            posthogHost: process.env.NUXT_PUBLIC_POSTHOG_HOST || '<ph_client_api_host>',
+        },
     }
-  }
 })
 ```
 
 3. Create a new plugin by creating a new file `posthog.client.js` in your [plugins directory](https://nuxt.com/docs/guide/directory-structure/plugins).
 
 ```js file=plugins/posthog.client.js
-import { defineNuxtPlugin } from '#app'
+import { defineNuxtPlugin, useRuntimeConfig, useRouter, nextTick } from '#imports'
+
 import posthog from 'posthog-js'
-export default defineNuxtPlugin(nuxtApp => {
-  const runtimeConfig = useRuntimeConfig();
-  const posthogClient = posthog.init(runtimeConfig.public.posthogPublicKey, {
-    api_host: runtimeConfig.public.posthogHost || '<ph_client_api_host>',
-    capture_pageview: false, // we add manual pageview capturing below
-    loaded: (posthog) => {
-      if (import.meta.env.MODE === 'development') posthog.debug();
-    }
-  })
+export default defineNuxtPlugin(() => {
+    const runtimeConfig = useRuntimeConfig()
+    const posthogClient = posthog.init(runtimeConfig.public.posthogPublicKey, {
+        api_host: runtimeConfig.public.posthogHost,
+        capture_pageview: false, // we add manual pageview capturing below
+        capture_pageleave: true, // automatically capture a pageleave event when the user leaves the site or closes the tab
+        loaded: (posthog) => {
+            if (import.meta.env.MODE === 'development') posthog.debug()
+        },
+    })
 
-  // Make sure that pageviews are captured with each route change
-  const router = useRouter();
-  router.afterEach((to) => {
-    nextTick(() => {
-      posthog.capture('$pageview', {
-        current_url: to.fullPath
-      });
-    });
-  });
+    // Make sure that pageviews are captured with each route change
+    const router = useRouter()
+    router.afterEach((to) => {
+        nextTick(() => {
+            posthog.capture('$pageview', {
+                current_url: to.fullPath,
+            })
+        })
+    })
 
-  return {
-    provide: {
-      posthog: () => posthogClient
+    return {
+        provide: {
+            posthog: () => posthogClient,
+        },
     }
-  }
 })
+
 ```
