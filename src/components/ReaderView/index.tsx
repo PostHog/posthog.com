@@ -16,8 +16,9 @@ import ScrollArea from 'components/RadixUI/ScrollArea'
 import { DebugContainerQuery } from 'components/DebugContainerQuery'
 import { IconTextWidth } from '@posthog/icons'
 import { IconTextWidthFixed, IconTableOfContents, IconClockRewind } from 'components/OSIcons'
-import { ToggleGroup, Popover } from 'radix-ui'
+import { ToggleGroup } from 'radix-ui'
 import { Select } from '../RadixUI/Select'
+import { Popover } from '../RadixUI/Popover'
 
 import { useLayoutData } from 'components/Layout/hooks'
 import Link from 'components/Link'
@@ -303,52 +304,33 @@ export default function ReaderView({ body, title, tableOfContents, mdxComponents
                 >
                     <OSButton variant="ghost" icon={<IconPencil />} />
 
-                    <Popover.Root>
-                        <Popover.Trigger asChild>
-                            <button
-                                className="inline-flex size-[35px] cursor-default items-center justify-center outline-none hover:bg-violet3 focus:shadow-[0_0_0_2px] focus:shadow-black"
-                                aria-label="Update dimensions"
-                            >
+                    <Popover
+                        trigger={
+                            <span>
                                 <OSButton variant="ghost" icon={<IconClockRewind />} />
-                            </button>
-                        </Popover.Trigger>
-                        <Popover.Portal>
-                            <Popover.Content
-                                className="w-[260px] rounded bg-white p-5 shadow-[0_10px_38px_-10px_hsla(206,22%,7%,.35),0_10px_20px_-15px_hsla(206,22%,7%,.2)] will-change-[transform,opacity] focus:shadow-[0_10px_38px_-10px_hsla(206,22%,7%,.35),0_10px_20px_-15px_hsla(206,22%,7%,.2),0_0_0_2px_theme(colors.violet7)] data-[state=open]:data-[side=bottom]:animate-slideUpAndFade data-[state=open]:data-[side=left]:animate-slideRightAndFade data-[state=open]:data-[side=right]:animate-slideLeftAndFade data-[state=open]:data-[side=top]:animate-slideDownAndFade"
-                                sideOffset={5}
-                            >
-                                <div className="flex flex-col gap-2.5">
-                                    <p className="mb-0">Edit history</p>
-
-                                    <div className="flex gap-2 justify-between items-center">
-                                        <div className="flex items-center gap-2">
-                                            <div>
-                                                <div className="size-8 bg-accent rounded-full" />
-                                            </div>
-                                            <div className="text-sm">
-                                                <Link href="#">Ian Vanagas</Link>
-                                            </div>
-                                        </div>
-                                        <div className="flex items-baseline gap-2">
-                                            <div className="text-xs opacity-60">2 days ago</div>
-                                            <div>
-                                                <Link href="#" externalNoIcon>
-                                                    <IconPullRequest className="size-4 relative top-1" />
-                                                </Link>
-                                            </div>
-                                        </div>
-                                    </div>
+                            </span>
+                        }
+                        title="Edit history"
+                    >
+                        <div className="flex gap-2 justify-between items-center">
+                            <div className="flex items-center gap-2">
+                                <div>
+                                    <div className="size-8 bg-accent rounded-full" />
                                 </div>
-                                <Popover.Close
-                                    className="absolute right-[5px] top-[5px] inline-flex size-[25px] cursor-default items-center justify-center rounded-full text-violet11 outline-none hover:bg-violet4 focus:shadow-[0_0_0_2px] focus:shadow-violet7"
-                                    aria-label="Close"
-                                >
-                                    <IconX />
-                                </Popover.Close>
-                                <Popover.Arrow className="fill-white" />
-                            </Popover.Content>
-                        </Popover.Portal>
-                    </Popover.Root>
+                                <div className="text-sm">
+                                    <Link to="#">Ian Vanagas</Link>
+                                </div>
+                            </div>
+                            <div className="flex items-baseline gap-2">
+                                <div className="text-xs opacity-60">2 days ago</div>
+                                <div>
+                                    <Link to="#" externalNoIcon>
+                                        <IconPullRequest className="size-4 relative top-1" />
+                                    </Link>
+                                </div>
+                            </div>
+                        </div>
+                    </Popover>
                 </motion.div>
             </div>
         </div>
