@@ -47,7 +47,10 @@ export default function HeaderBar({
     showSidebar = false,
 }: HeaderBarProps) {
     return (
-        <div className="flex w-full gap-px p-2 flex-shrink-0">
+        <div
+            data-scheme="secondary"
+            className="bg-primary border-t border-primary flex w-full gap-px p-2 flex-shrink-0"
+        >
             {showSidebar && (
                 <motion.div
                     className="flex-shrink-0 overflow-hidden flex items-center gap-px"

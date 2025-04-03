@@ -23,6 +23,7 @@ type SelectProps = {
     name?: string
     ariaLabel?: string
     groups: SelectGroup[]
+    dataScheme?: string
     className?: string
 }
 
@@ -47,63 +48,78 @@ SelectItem.displayName = 'SelectItem'
 
 export const Select = React.forwardRef<HTMLButtonElement, SelectProps>(
     (
-        { value, defaultValue, onValueChange, placeholder, disabled, required, name, ariaLabel, groups, className },
+        {
+            value,
+            defaultValue,
+            onValueChange,
+            placeholder,
+            disabled,
+            required,
+            name,
+            ariaLabel,
+            groups,
+            className,
+            dataScheme,
+        },
         ref
     ) => {
         return (
-            <RadixSelect.Root
-                value={value}
-                defaultValue={defaultValue}
-                onValueChange={onValueChange}
-                disabled={disabled}
-                required={required}
-                name={name}
-            >
-                <RadixSelect.Trigger
-                    ref={ref}
-                    className={`flex justify-between items-center gap-1 rounded px-2 py-1 text-sm leading-none text-primary dark:text-primary-dark bg-accent dark:bg-accent-dark outline-none hover:bg-accent-2 dark:hover:bg-accent-dark focus:shadow-[0_0_0_2px] focus:shadow-black data-[placeholder]:text-primary/60 ${className}`}
-                    aria-label={ariaLabel}
+            <div data-scheme={dataScheme}>
+                <RadixSelect.Root
+                    value={value}
+                    defaultValue={defaultValue}
+                    onValueChange={onValueChange}
+                    disabled={disabled}
+                    required={required}
+                    name={name}
                 >
-                    <RadixSelect.Value placeholder={placeholder} cn />
-                    <RadixSelect.Icon className="text-primary/50 dark:text-primary-dark/50">
-                        <IconChevronDown className="size-6" />
-                    </RadixSelect.Icon>
-                </RadixSelect.Trigger>
-                <RadixSelect.Portal>
-                    <RadixSelect.Content className="overflow-hidden rounded bg-white dark:bg-accent-dark shadow-xl">
-                        <RadixSelect.ScrollUpButton className="flex h-[25px] cursor-default items-center justify-center bg-white dark:bg-accent-dark text-primary/60 dark:text-primary-dark/60">
-                            <IconChevronDown className="size-4 rotate-180" />
-                        </RadixSelect.ScrollUpButton>
-                        <RadixSelect.Viewport className="p-1">
-                            {groups.map((group, index) => (
-                                <React.Fragment key={group.label}>
-                                    <RadixSelect.Group>
-                                        <RadixSelect.Label className="px-8 text-sm leading-[25px] text-primary/60 dark:text-primary-dark/60">
-                                            {group.label}
-                                        </RadixSelect.Label>
-                                        {group.items.map((item) => (
-                                            <SelectItem
-                                                key={item.value}
-                                                value={item.value}
-                                                disabled={item.disabled}
-                                                className="text-primary dark:text-primary-dark"
-                                            >
-                                                {item.label}
-                                            </SelectItem>
-                                        ))}
-                                    </RadixSelect.Group>
-                                    {index < groups.length - 1 && (
-                                        <RadixSelect.Separator className="m-1 h-px bg-border dark:bg-border-dark" />
-                                    )}
-                                </React.Fragment>
-                            ))}
-                        </RadixSelect.Viewport>
-                        <RadixSelect.ScrollDownButton className="flex h-[25px] cursor-default items-center justify-center bg-white dark:bg-accent-dark text-primary dark:text-primary-dark">
-                            <IconChevronDown className="size-4" />
-                        </RadixSelect.ScrollDownButton>
-                    </RadixSelect.Content>
-                </RadixSelect.Portal>
-            </RadixSelect.Root>
+                    <RadixSelect.Trigger
+                        ref={ref}
+                        className={`flex justify-between items-center gap-1 rounded px-2 py-1 text-sm leading-none text-primary bg-primary outline-none hover:bg-input-hover border border-primary focus:shadow-[0_0_0_2px] focus:shadow-black data-[placeholder]:text-muted ${className}`}
+                        aria-label={ariaLabel}
+                        data-scheme={dataScheme}
+                    >
+                        <RadixSelect.Value placeholder={placeholder} />
+                        <RadixSelect.Icon className="text-primary/50 dark:text-primary-dark/50">
+                            <IconChevronDown className="size-6" />
+                        </RadixSelect.Icon>
+                    </RadixSelect.Trigger>
+                    <RadixSelect.Portal>
+                        <RadixSelect.Content className="overflow-hidden rounded bg-white dark:bg-accent-dark shadow-xl">
+                            <RadixSelect.ScrollUpButton className="flex h-[25px] cursor-default items-center justify-center bg-white dark:bg-accent-dark text-primary/60 dark:text-primary-dark/60">
+                                <IconChevronDown className="size-4 rotate-180" />
+                            </RadixSelect.ScrollUpButton>
+                            <RadixSelect.Viewport className="p-1">
+                                {groups.map((group, index) => (
+                                    <React.Fragment key={group.label}>
+                                        <RadixSelect.Group>
+                                            <RadixSelect.Label className="px-8 text-sm leading-[25px] text-primary/60 dark:text-primary-dark/60">
+                                                {group.label}
+                                            </RadixSelect.Label>
+                                            {group.items.map((item) => (
+                                                <SelectItem
+                                                    key={item.value}
+                                                    value={item.value}
+                                                    disabled={item.disabled}
+                                                    className="text-primary dark:text-primary-dark"
+                                                >
+                                                    {item.label}
+                                                </SelectItem>
+                                            ))}
+                                        </RadixSelect.Group>
+                                        {index < groups.length - 1 && (
+                                            <RadixSelect.Separator className="m-1 h-px bg-border dark:bg-border-dark" />
+                                        )}
+                                    </React.Fragment>
+                                ))}
+                            </RadixSelect.Viewport>
+                            <RadixSelect.ScrollDownButton className="flex h-[25px] cursor-default items-center justify-center bg-white dark:bg-accent-dark text-primary dark:text-primary-dark">
+                                <IconChevronDown className="size-4" />
+                            </RadixSelect.ScrollDownButton>
+                        </RadixSelect.Content>
+                    </RadixSelect.Portal>
+                </RadixSelect.Root>
+            </div>
         )
     }
 )

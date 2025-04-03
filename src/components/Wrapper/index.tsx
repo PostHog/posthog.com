@@ -31,7 +31,7 @@ const Window = ({ item, constraintsRef }) => {
             <AnimatePresence>
                 {!item.minimized && (
                     <motion.div
-                        className="absolute bg-light dark:bg-dark flex flex-col border border-border dark:border-border-dark rounded overflow-hidden !select-auto"
+                        className="absolute flex flex-col border border-light-7 dark:border-dark-7 rounded overflow-hidden !select-auto"
                         style={{
                             width: size.width,
                             height: size.height,
@@ -55,8 +55,9 @@ const Window = ({ item, constraintsRef }) => {
                         onMouseDown={() => bringToFront(item)}
                     >
                         <div
+                            data-scheme="tertiary"
                             onDoubleClick={handleDoubleClick}
-                            className="flex-shrink-0 w-full flex items-center justify-between p-2 bg-accent dark:bg-accent-dark border-b border-border dark:border-border-dark cursor-move"
+                            className="flex-shrink-0 w-full flex items-center justify-between p-2 bg-primary cursor-move"
                             onPointerDown={(e) => controls.start(e)}
                         >
                             <p className="m-0 text-sm font-semibold">{item.meta?.title && item.meta.title}</p>

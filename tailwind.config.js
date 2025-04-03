@@ -65,6 +65,19 @@ module.exports = {
                 100: '100%',
             },
             colors: {
+                'light-1': '#FDFDF8',
+                'light-2': '#EEEFE9',
+                'light-3': '#E5E7E0',
+                'light-4': '#D2D3CC',
+                'light-5': '#C8CAC1',
+                'light-6': '#BFC1B7',
+                'light-7': '#B6B7AF',
+                'light-8': '#D0D1C9',
+                'light-9': '#73756B',
+                'light-10': '#9EA096',
+                'light-11': '#4D4F46',
+                'light-12': '#23251D',
+
                 transparent: 'transparent',
                 current: 'currentColor',
 

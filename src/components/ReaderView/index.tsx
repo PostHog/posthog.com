@@ -120,7 +120,7 @@ export default function ReaderView({ body, title, tableOfContents, mdxComponents
     }, [])
 
     return (
-        <div className="@container w-full h-full flex flex-col bg-light dark:bg-dark min-h-1">
+        <div className="@container w-full h-full flex flex-col">
             <DebugContainerQuery />
             {/* First row - Header */}
             <HeaderBar
@@ -140,7 +140,7 @@ export default function ReaderView({ body, title, tableOfContents, mdxComponents
                 showSidebar
             />
             {/* Second row - Main Content */}
-            <div className="flex w-full gap-2 min-h-0 flex-grow overflow-hidden">
+            <div data-scheme="secondary" className="bg-primary flex w-full gap-2 min-h-0 flex-grow overflow-hidden">
                 <AnimatePresence>
                     {isNavVisible && (
                         <motion.div
@@ -197,10 +197,13 @@ export default function ReaderView({ body, title, tableOfContents, mdxComponents
                         </motion.div>
                     )}
                 </AnimatePresence>
-                <ScrollArea className="flex-grow bg-white dark:bg-accent-dark rounded">
+                <ScrollArea dataScheme="primary" className="bg-primary border border-primary flex-grow rounded">
                     <div className={`p-4 mx-auto transition-all ${fullWidthContent ? 'max-w-full' : 'max-w-xl'}`}>
                         <h2>{title}</h2>
-                        <div className="@4xl:hidden bg-tan p-4 mb-4 rounded border border-light dark:border-dark">
+                        <div
+                            data-scheme="secondary"
+                            className="@4xl:hidden p-4 mb-4 bg-primary rounded border border-primary"
+                        >
                             inline table of contents
                         </div>
                         {body.type === 'mdx' ? (
@@ -244,9 +247,7 @@ export default function ReaderView({ body, title, tableOfContents, mdxComponents
                                 <ScrollArea className="px-4">
                                     {tableOfContents && tableOfContents?.length > 0 && (
                                         <div>
-                                            <h4 className="text-primary dark:text-primary-dark font-semibold opacity-25 m-0 mb-1 text-sm">
-                                                Jump to:
-                                            </h4>
+                                            <h4 className="font-semibold text-muted m-0 mb-1 text-sm">Jump to:</h4>
                                             <ul className="list-none m-0 p-0 flex flex-col">
                                                 {tableOfContents.map((navItem, index) => (
                                                     <li className="relative leading-none m-0" key={navItem.url}>
@@ -269,7 +270,7 @@ export default function ReaderView({ body, title, tableOfContents, mdxComponents
             </div>
 
             {/* Third row - Footer */}
-            <div className="flex w-full gap-px p-2 flex-shrink-0">
+            <div data-scheme="secondary" className="bg-primary flex w-full gap-px p-2 flex-shrink-0">
                 <motion.div
                     className="flex-shrink-0"
                     variants={sidebarVariants}
@@ -278,7 +279,7 @@ export default function ReaderView({ body, title, tableOfContents, mdxComponents
                 >
                     home, sidebar
                 </motion.div>
-                <div className="flex-grow dark:bg-accent-dark flex justify-between">
+                <div className="flex-grow flex justify-between">
                     <div>Questions?</div>
                     <div>
                         <TextWidthToggleGroup />
