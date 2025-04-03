@@ -8,11 +8,11 @@ alwaysApply: true
 
 - Check [tailwind.config.js](mdc:tailwind.config.js) for supported colors.
 
-The following colors are primarily used:
+There are two color modes (light and dark) and three color schemes within each:
 
-- bg-light / bg-dark
-- bg-accent / bg-accent-dark
-- border-light / border-dark
+- primary (main content)
+- secondary (aside content)
+- tertiary (not used often)
 
 Links are styled with font-semibold and use different colors for light and dark mode:
 

@@ -16,7 +16,6 @@ import {
 interface HeaderBarProps {
     sidebarVariants?: Variants
     leftSidebarWidth?: string
-    rightSidebarWidth?: string
     isNavVisible?: boolean
     isTocVisible?: boolean
     onToggleNav?: () => void
@@ -33,7 +32,6 @@ interface HeaderBarProps {
 export default function HeaderBar({
     sidebarVariants,
     leftSidebarWidth,
-    rightSidebarWidth,
     isNavVisible,
     isTocVisible,
     onToggleNav,
@@ -51,22 +49,24 @@ export default function HeaderBar({
             data-scheme="secondary"
             className="bg-primary border-t border-primary flex w-full gap-px p-2 flex-shrink-0"
         >
-            {showHome && <OSButton variant="ghost" icon={<IconHome />} />}
-            {showSidebar && (
+            <div>
                 <motion.div
                     className="flex-shrink-0 overflow-hidden flex items-center gap-px"
                     variants={sidebarVariants}
                     custom={leftSidebarWidth}
                     animate={isNavVisible ? 'open' : 'closed'}
                 >
-                    <OSButton
-                        onClick={onToggleNav}
-                        variant="ghost"
-                        active={isNavVisible}
-                        icon={isNavVisible ? <IconSidebarOpen /> : <IconSidebarClose />}
-                    />
+                    {showHome && <OSButton variant="ghost" icon={<IconHome />} />}
+                    {showSidebar && (
+                        <OSButton
+                            onClick={onToggleNav}
+                            variant="ghost"
+                            active={isNavVisible}
+                            icon={isNavVisible ? <IconSidebarOpen /> : <IconSidebarClose />}
+                        />
+                    )}
                 </motion.div>
-            )}
+            </div>
             <div className="flex-grow flex justify-between items-center">
                 <div className="flex items-center gap-px">
                     {showBack && <OSButton variant="ghost" icon={<IconChevronLeft />} />}
@@ -79,9 +79,9 @@ export default function HeaderBar({
             </div>
             {showSidebar && (
                 <motion.div
-                    className="flex-shrink-0 flex justify-end"
-                    variants={sidebarVariants}
-                    custom={rightSidebarWidth}
+                    className={`flex-shrink-0 flex justify-end transition-all min-w-0 ${
+                        isTocVisible ? '@4xl:min-w-[300px]' : 'w-auto'
+                    }`}
                     animate={isTocVisible ? 'open' : 'closed'}
                 >
                     {showToc && (
