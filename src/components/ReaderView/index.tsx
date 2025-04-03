@@ -283,7 +283,7 @@ export default function ReaderView({ body, title, tableOfContents, mdxComponents
                                     transition: { duration: 0.05 },
                                 }}
                             >
-                                <ScrollArea className="px-4">
+                                <ScrollArea className="px-4" fadeOverflow>
                                     {tableOfContents && tableOfContents?.length > 0 && (
                                         <ScrollSpyProvider>
                                             <div>
