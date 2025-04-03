@@ -94,7 +94,24 @@ Remember to add a short summary from meetings in a Note, and if you need to foll
 
 A supplementary view that’s great for getting a general overview of progress.
    
+### How to deal with complex technical issues?
 
+Our role is pretty hybrid and lives at the intersection of other teams. As much as we love solving our own problems, escalations may happen. Here’s a brief guide on how to handle them:
+
+- Do your homework – check our docs, ask Max AI, and search Slack and Zendesk for similar questions. You can also check GitHub to see whether we have a bug or enhancement logged. If that doesn’t bring you closer to a solution, ask in the team Slack channel.
+- Don’t be afraid to admit when you don’t know something. Note it down and circle back once you’ve found the answer! Honesty goes a long way.
+- Consider sharing a Loom recording in your reply to the user – It might be more efficient than a written instruction.
+- If the issue requires in-depth troubleshooting, you can direct the user to create a ticket from the app, or you can do so on their behalf. Just remember to let them know before you do, so they’re not surprised when they see it in the UI!
+- Before escalating the issue to Support, gather as much information and context as possible so your handover is informative and thorough. You can also share a recording of the call with the team, highlighting the relevant timestamp.
+
+**How to deepen my product knowledge?**
+
+- Add yourself to some AEs' Slack channels to see what kinds of questions are being asked and how they’re solved.
+- Go through [Product Homework](https://docs.google.com/document/d/1x8fnUUi5bDGeSYQl_E-_fViuNxi7j_tC0YwhLC5lwv0/edit?tab=t.0#heading=h.cioukeluttdh).
+
+**Teach how to fish**
+
+Ideally, after the meeting with the user, they should know how to seek further help. That includes using Max, consulting the docs, and reaching out to our Support team.
 
 
 
