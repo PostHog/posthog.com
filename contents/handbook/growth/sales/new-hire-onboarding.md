@@ -39,9 +39,9 @@ Sales at PostHog isn't like most other software companies! These are some of the
 - [Zendesk](https://posthoghelp.zendesk.com/agent/dashboard) - use Google SSO
 - [Pitch](https://app.pitch.com/) - use Google SSO
 - [QuoteHog](https://quote.posthog.net/) - use Google SSO
-- [Pylon](https://usepylon.com/) - use Google SSO
+- [Pylon](https://usepylon.com/) - use Slack SSO
 - [Zoom](https://zoom.com/) - use Google SSO
-- [PostHog Billing](https://billing.posthog.com)
+- [PostHog Billing](https://billing.posthog.com)- use Google SSO
 - PostHog [US](https://us.posthog.com/) and [EU](https://eu.posthog.com/) instances - use Google SSO
 - [PostHog App + Website](https://us.posthog.com/project/2) within PostHog US instance - use Google SSO
 - Metabase [US](https://metabase.prod-us.posthog.dev/) and [EU](https://metabase.prod-eu.posthog.dev/) - use Google SSO
