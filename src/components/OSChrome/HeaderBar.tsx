@@ -16,7 +16,6 @@ import {
 interface HeaderBarProps {
     sidebarVariants?: Variants
     leftSidebarWidth?: string
-    rightSidebarWidth?: string
     isNavVisible?: boolean
     isTocVisible?: boolean
     onToggleNav?: () => void
@@ -33,7 +32,6 @@ interface HeaderBarProps {
 export default function HeaderBar({
     sidebarVariants,
     leftSidebarWidth,
-    rightSidebarWidth,
     isNavVisible,
     isTocVisible,
     onToggleNav,
@@ -81,9 +79,9 @@ export default function HeaderBar({
             </div>
             {showSidebar && (
                 <motion.div
-                    className="flex-shrink-0 flex justify-end"
-                    variants={sidebarVariants}
-                    custom={rightSidebarWidth}
+                    className={`flex-shrink-0 flex justify-end transition-all min-w-0 ${
+                        isTocVisible ? '@4xl:min-w-[300px]' : 'w-auto'
+                    }`}
                     animate={isTocVisible ? 'open' : 'closed'}
                 >
                     {showToc && (

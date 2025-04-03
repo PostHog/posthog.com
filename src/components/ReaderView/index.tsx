@@ -34,7 +34,6 @@ interface SidebarState {
 }
 
 const leftSidebarWidth = '250px'
-const rightSidebarWidth = '300px'
 
 const sidebarVariants = {
     open: (width: string) => ({
@@ -129,7 +128,6 @@ export default function ReaderView({ body, title, tableOfContents, mdxComponents
             <HeaderBar
                 sidebarVariants={sidebarVariants}
                 leftSidebarWidth={leftSidebarWidth}
-                rightSidebarWidth={rightSidebarWidth}
                 isNavVisible={isNavVisible}
                 isTocVisible={isTocVisible}
                 onToggleNav={toggleNav}
@@ -230,7 +228,7 @@ export default function ReaderView({ body, title, tableOfContents, mdxComponents
                             className="hidden @4xl:block flex-shrink-0 overflow-hidden"
                             initial={{ width: 0 }}
                             animate={{
-                                width: rightSidebarWidth,
+                                width: '300px',
                                 transition: { duration: 0.2 },
                             }}
                             exit={{
@@ -297,9 +295,9 @@ export default function ReaderView({ body, title, tableOfContents, mdxComponents
                     </div>
                 </div>
                 <motion.div
-                    className="flex-shrink-0 flex justify-end"
-                    variants={sidebarVariants}
-                    custom={rightSidebarWidth}
+                    className={`flex-shrink-0 flex justify-end transition-all min-w-0 ${
+                        isTocVisible ? '@4xl:min-w-[300px]' : 'w-auto'
+                    }`}
                     animate={isTocVisible ? 'open' : 'closed'}
                 >
                     <OSButton variant="ghost" icon={<IconPencil />} />
