@@ -27,6 +27,7 @@ interface HeaderBarProps {
     showSearch?: boolean
     showBookmark?: boolean
     showToc?: boolean
+    showSidebar?: boolean
 }
 
 export default function HeaderBar({
@@ -43,23 +44,26 @@ export default function HeaderBar({
     showSearch = false,
     showBookmark = false,
     showToc = false,
+    showSidebar = false,
 }: HeaderBarProps) {
     return (
         <div className="flex w-full gap-px p-2 flex-shrink-0">
-            <motion.div
-                className="flex-shrink-0 overflow-hidden flex items-center gap-px"
-                variants={sidebarVariants}
-                custom={leftSidebarWidth}
-                animate={isNavVisible ? 'open' : 'closed'}
-            >
-                {showHome && <OSButton variant="ghost" icon={<IconHome />} />}
-                <OSButton
-                    onClick={onToggleNav}
-                    variant="ghost"
-                    active={isNavVisible}
-                    icon={isNavVisible ? <IconSidebarOpen /> : <IconSidebarClose />}
-                />
-            </motion.div>
+            {showSidebar && (
+                <motion.div
+                    className="flex-shrink-0 overflow-hidden flex items-center gap-px"
+                    variants={sidebarVariants}
+                    custom={leftSidebarWidth}
+                    animate={isNavVisible ? 'open' : 'closed'}
+                >
+                    {showHome && <OSButton variant="ghost" icon={<IconHome />} />}
+                    <OSButton
+                        onClick={onToggleNav}
+                        variant="ghost"
+                        active={isNavVisible}
+                        icon={isNavVisible ? <IconSidebarOpen /> : <IconSidebarClose />}
+                    />
+                </motion.div>
+            )}
             <div className="flex-grow flex justify-between items-center">
                 <div className="flex items-center gap-px">
                     {showBack && <OSButton variant="ghost" icon={<IconChevronLeft />} />}
@@ -70,23 +74,25 @@ export default function HeaderBar({
                     {showBookmark && <OSButton variant="ghost" icon={<IconBook />} />}
                 </div>
             </div>
-            <motion.div
-                className="flex-shrink-0 flex justify-end"
-                variants={sidebarVariants}
-                custom={rightSidebarWidth}
-                animate={isTocVisible ? 'open' : 'closed'}
-            >
-                {showToc && (
-                    <div className="hidden @4xl:block">
-                        <OSButton
-                            variant="ghost"
-                            active={isTocVisible}
-                            icon={<IconTableOfContents />}
-                            onClick={onToggleToc}
-                        />
-                    </div>
-                )}
-            </motion.div>
+            {showSidebar && (
+                <motion.div
+                    className="flex-shrink-0 flex justify-end"
+                    variants={sidebarVariants}
+                    custom={rightSidebarWidth}
+                    animate={isTocVisible ? 'open' : 'closed'}
+                >
+                    {showToc && (
+                        <div className="hidden @4xl:block">
+                            <OSButton
+                                variant="ghost"
+                                active={isTocVisible}
+                                icon={<IconTableOfContents />}
+                                onClick={onToggleToc}
+                            />
+                        </div>
+                    )}
+                </motion.div>
+            )}
         </div>
     )
 }

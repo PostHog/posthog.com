@@ -137,6 +137,7 @@ export default function ReaderView({ body, title, tableOfContents, mdxComponents
                 showSearch
                 showBookmark
                 showToc
+                showSidebar
             />
             {/* Second row - Main Content */}
             <div className="flex w-full gap-2 min-h-0 flex-grow overflow-hidden">
