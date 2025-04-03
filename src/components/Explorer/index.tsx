@@ -23,26 +23,50 @@ const selectOptions = [
 
 export default function Explorer() {
     return (
-        <div className="@container w-full h-full flex flex-col bg-light dark:bg-dark min-h-1">
+        <div className="@container w-full h-full flex flex-col min-h-1">
             <HeaderBar showHome showBack showForward showSearch />
-            <div className="p-2">
+            <div data-scheme="secondary" className="bg-primary p-2 border-b border-primary">
                 <Select
                     groups={selectOptions}
                     placeholder="Select..."
                     ariaLabel="Products"
                     defaultValue="product-analytics"
-                    className="w-full bg-white dark:bg-accent-dark border border-light dark:border-dark"
+                    className="w-full"
+                    dataScheme="primary"
                 />
             </div>
             <div className="flex h-full">
-                <aside className="w-64 bg-accent/50 dark:bg-accent-dark px-2">
-                    <div className="bg-white dark:bg-accent-dark p-2 rounded-md border border-light dark:border-dark">
+                <aside data-scheme="secondary" className="w-64 bg-primary p-2 border-r border-primary">
+                    <div data-scheme="primary" className="bg-primary p-2 rounded-md border border-primary">
                         <h2 className="text-lg font-bold">Products</h2>
                         <hr />
                         hello world!
                     </div>
                 </aside>
-                <main className="flex-1 bg-white dark:bg-accent-dark">hello world!</main>
+                <main data-scheme="primary" className="flex-1 bg-primary p-2">
+                    color test:
+                    <div data-scheme="primary" className="bg-primary text-primary border border-primary p-4">
+                        <p className="text-secondary">Primary text</p>
+                        <input
+                            className="bg-input hover:bg-input-hover border-input hover:border-input-hover text-muted"
+                            placeholder="Placeholder text"
+                        />
+                    </div>
+                    <div data-scheme="secondary" className="bg-primary text-primary border border-primary p-4">
+                        <p className="text-secondary">Secondary text</p>
+                        <input
+                            className="bg-input hover:bg-input-hover border-input hover:border-input-hover text-muted"
+                            placeholder="Placeholder text"
+                        />
+                    </div>
+                    <div data-scheme="tertiary" className="bg-primary text-primary border border-primary p-4">
+                        <p className="text-secondary">Tertiary text</p>
+                        <input
+                            className="bg-input hover:bg-input-hover border-input hover:border-input-hover text-muted"
+                            placeholder="Placeholder text"
+                        />
+                    </div>
+                </main>
             </div>
         </div>
     )

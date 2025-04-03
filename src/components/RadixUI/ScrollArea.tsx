@@ -4,10 +4,11 @@ import { ScrollArea as ScrollAreaPrimitive } from 'radix-ui'
 interface ScrollAreaProps {
     children: React.ReactNode
     className?: string
+    dataScheme?: string
 }
 
-const ScrollArea = ({ children, className }: ScrollAreaProps) => (
-    <ScrollAreaPrimitive.Root className={`overflow-hidden h-full ${className}`}>
+const ScrollArea = ({ children, className, dataScheme }: ScrollAreaProps) => (
+    <ScrollAreaPrimitive.Root data-scheme={dataScheme} className={`overflow-hidden h-full ${className}`}>
         <ScrollAreaPrimitive.Viewport className="size-full">{children}</ScrollAreaPrimitive.Viewport>
         <ScrollAreaPrimitive.Scrollbar
             className="flex touch-none select-none p-0.5 transition-colors duration-[160ms] ease-out hover:bg-accent-2 dark:hover:bg-accent-dark data-[orientation=horizontal]:h-2.5 data-[orientation=vertical]:w-2.5 data-[orientation=horizontal]:flex-col"
