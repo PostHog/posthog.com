@@ -32,8 +32,10 @@ const Window = ({ item, constraintsRef }) => {
             <AnimatePresence>
                 {!item.minimized && (
                     <motion.div
-                        className={`absolute flex flex-col border border-light-7 dark:border-dark-7 rounded overflow-hidden !select-auto shadow-xl ${
-                            focusedWindow === item ? 'ACTIVE CLASSES HERE CORY' : ''
+                        className={`absolute flex flex-col border rounded overflow-hidden !select-auto  ${
+                            focusedWindow === item
+                                ? 'shadow-2xl border-light-7 dark:border-dark-7'
+                                : 'shadow-lg border-light-4 dark:border-dark-4'
                         }`}
                         style={{
                             width: size.width,
