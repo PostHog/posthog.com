@@ -969,7 +969,7 @@ function Terms() {
                             - Unavailability caused by Customer’s breach of this Agreement
                         </p>
                     </div>
-                    <div className="md:pt-10">
+                    <div className="md:pt-10 pb-12">
                         <p>
                             If you buy PostHog Enterprise or have a special annual contract with us, we will agree to an SLA with you. 
                         </p>
