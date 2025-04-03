@@ -1,11 +1,15 @@
 import React from 'react'
 import { Select as RadixSelect } from 'radix-ui'
 import { IconCheck, IconChevronDown } from '@posthog/icons'
+import * as NotProductIcons from '../NotProductIcons'
+import * as NewIcons from '@posthog/icons'
 
 type SelectItem = {
     value: string
     label: string
     disabled?: boolean
+    icon?: string
+    color?: string
 }
 
 type SelectGroup = {
@@ -25,6 +29,12 @@ type SelectProps = {
     groups: SelectGroup[]
     dataScheme?: string
     className?: string
+}
+
+const Icon = ({ name, className = '', color }: { name?: string; className?: string; color?: string }) => {
+    if (!name) return null
+    const Icon = NewIcons[name] || NotProductIcons[name]
+    return Icon ? <Icon className={`${color ? `text-${color}` : ''} ${className}`} /> : null
 }
 
 const SelectItem = React.forwardRef(
@@ -103,7 +113,10 @@ export const Select = React.forwardRef<HTMLButtonElement, SelectProps>(
                                                     disabled={item.disabled}
                                                     className="text-primary dark:text-primary-dark"
                                                 >
-                                                    {item.label}
+                                                    <span className="flex space-x-1 items-center">
+                                                        <Icon name={item.icon} color={item.color} className="size-4" />
+                                                        <span>{item.label}</span>
+                                                    </span>
                                                 </SelectItem>
                                             ))}
                                         </RadixSelect.Group>

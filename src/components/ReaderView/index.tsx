@@ -27,6 +27,9 @@ import { MDXProvider } from '@mdx-js/react'
 import InternalSidebarLink from 'components/Docs/InternalSidebarLink'
 import HeaderBar from 'components/OSChrome/HeaderBar'
 import ElementScrollLink from 'components/ElementScrollLink'
+import { useLocation } from '@reach/router'
+import menu from '../../navs'
+import { TreeMenu } from 'components/TreeMenu'
 
 interface SidebarState {
     isOpen: boolean
@@ -107,11 +110,31 @@ const selectOptions = [
     },
 ]
 
+function recursiveSearch(array, value) {
+    for (let i = 0; i < array?.length || 0; i++) {
+        const element = array[i]
+
+        if (typeof element === 'string' && element.split('?')[0] === value) {
+            return true
+        }
+
+        if (typeof element === 'object' && element !== null) {
+            const found = recursiveSearch(Object.values(element), value)
+            if (found) {
+                return true
+            }
+        }
+    }
+
+    return false
+}
+
 export default function ReaderView({ body, title, tableOfContents, mdxComponents }: ReaderViewProps) {
     const [isNavVisible, setIsNavVisible] = useState(true)
     const [isTocVisible, setIsTocVisible] = useState(true)
     const contentRef = useRef(null)
     const { fullWidthContent } = useLayoutData()
+    const { pathname, search } = useLocation()
 
     const toggleNav = useCallback(() => {
         setIsNavVisible((prev) => !prev)
@@ -120,6 +143,20 @@ export default function ReaderView({ body, title, tableOfContents, mdxComponents
     const toggleToc = useCallback(() => {
         setIsTocVisible((prev) => !prev)
     }, [])
+
+    const parent = menu.find(({ children, url }) => {
+        const currentURL = pathname
+        return currentURL === url.split('?')[0] || recursiveSearch(children, currentURL)
+    })
+
+    const internalMenu = parent?.children
+
+    const [activeInternalMenu, setActiveInternalMenu] = useState(
+        internalMenu?.find((menuItem) => {
+            const currentURL = pathname
+            return currentURL === menuItem.url?.split('?')[0] || recursiveSearch(menuItem.children, currentURL)
+        })
+    )
 
     return (
         <div className="@container w-full h-full flex flex-col">
@@ -171,28 +208,26 @@ export default function ReaderView({ body, title, tableOfContents, mdxComponents
                             >
                                 <ScrollArea className="px-4">
                                     <Select
-                                        groups={selectOptions}
+                                        groups={[
+                                            {
+                                                label: null,
+                                                items: parent.children?.map((menuItem) => {
+                                                    return {
+                                                        value: menuItem,
+                                                        label: menuItem.name,
+                                                        icon: menuItem.icon,
+                                                        color: menuItem.color,
+                                                    }
+                                                }),
+                                            },
+                                        ]}
                                         placeholder="Select..."
                                         ariaLabel="Products"
-                                        defaultValue="product-os"
                                         className="w-full mb-2"
+                                        value={activeInternalMenu}
+                                        onValueChange={(value) => setActiveInternalMenu(value)}
                                     />
-                                    <p>
-                                        In ut tortor eget enim posuere tristique. Sed tortor orci, dignissim at diam eu,
-                                        dictum mattis arcu. Pellentesque vel condimentum nulla, at pretium augue. Mauris
-                                        pellentesque bibendum cursus. Phasellus vitae mauris vehicula, condimentum diam
-                                        sit amet, condimentum nisi. Suspendisse eleifend ante consequat odio euismod,
-                                        non ultricies ipsum sagittis. Maecenas quis nisi rutrum, feugiat nunc eget,
-                                        convallis velit.
-                                    </p>
-                                    <p>
-                                        In ut tortor eget enim posuere tristique. Sed tortor orci, dignissim at diam eu,
-                                        dictum mattis arcu. Pellentesque vel condimentum nulla, at pretium augue. Mauris
-                                        pellentesque bibendum cursus. Phasellus vitae mauris vehicula, condimentum diam
-                                        sit amet, condimentum nisi. Suspendisse eleifend ante consequat odio euismod,
-                                        non ultricies ipsum sagittis. Maecenas quis nisi rutrum, feugiat nunc eget,
-                                        convallis velit.
-                                    </p>
+                                    <TreeMenu items={activeInternalMenu.children} />
                                 </ScrollArea>
                             </motion.div>
                         </motion.div>
