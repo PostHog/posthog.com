@@ -178,12 +178,12 @@ export default function ReaderView({ body, title, tableOfContents, mdxComponents
                 showSidebar
             />
             {/* Second row - Main Content */}
-            <div data-scheme="secondary" className="bg-primary flex w-full gap-2 min-h-0 flex-grow overflow-hidden">
+            <div data-scheme="secondary" className="bg-primary flex w-full gap-2 min-h-0 flex-grow">
                 <AnimatePresence>
                     {isNavVisible && (
                         <motion.div
                             id="nav"
-                            className="flex-shrink-0 overflow-hidden"
+                            className="flex-shrink-0 overflow-hidden mb-[-53px]"
                             initial={{ width: 0 }}
                             animate={{
                                 width: leftSidebarWidth,
@@ -323,7 +323,7 @@ export default function ReaderView({ body, title, tableOfContents, mdxComponents
                     custom={leftSidebarWidth}
                     animate={isNavVisible ? 'open' : 'closed'}
                 >
-                    home, sidebar
+                    {/* this space intentionally left blank */}
                 </motion.div>
                 <div className="flex-grow flex justify-between">
                     <div>Questions?</div>
