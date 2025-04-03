@@ -31,7 +31,7 @@ const Window = ({ item, constraintsRef }) => {
             <AnimatePresence>
                 {!item.minimized && (
                     <motion.div
-                        className="absolute flex flex-col border border-light-7 dark:border-dark-7 rounded overflow-hidden !select-auto"
+                        className="absolute flex flex-col border border-light-7 dark:border-dark-7 rounded overflow-hidden !select-auto shadow-xl"
                         style={{
                             width: size.width,
                             height: size.height,
@@ -132,10 +132,11 @@ const TaskBar = () => {
         <AnimatePresence>
             {windows.length > 0 && (
                 <motion.div
+                    data-scheme="secondary"
                     initial={{ translateY: '100%' }}
                     animate={{ translateY: 0 }}
                     exit={{ translateY: '100%' }}
-                    className="fixed bottom-0 left-0 w-full p-2 bg-accent dark:bg-accent-dark z-50 flex justify-between"
+                    className="fixed bottom-0 left-0 w-full p-0.5 bg-primary border-t border-primary z-50 flex justify-between"
                 >
                     <ul className="m-0 p-0 list-none flex space-x-1">
                         {windows.map((appWindow) => {
