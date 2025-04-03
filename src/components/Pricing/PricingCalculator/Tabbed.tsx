@@ -291,10 +291,12 @@ export default function Tabbed() {
     )
 
     const generateURL = () => {
-        const volumes = {}
+        const params = {
+            ...(activeProduct && { active_product: activeProduct.type }),
+        }
         products.forEach((product) => {
             if (product.volume) {
-                volumes[product.type] = { volume: product.volume }
+                params[product.type] = { volume: product.volume }
                 if (product.type === 'product_analytics') {
                     const types = {}
                     Object.keys(analyticsData).forEach((type) => {
@@ -303,11 +305,11 @@ export default function Tabbed() {
                             types[type] = { volume: analyticsData[type].volume }
                         }
                     })
-                    volumes['product_analytics'].types = types
+                    params['product_analytics'].types = types
                 }
             }
         })
-        const URL = `${window.location.origin}${window.location.pathname}?${qs.stringify(volumes, {
+        const URL = `${window.location.origin}${window.location.pathname}?${qs.stringify(params, {
             encodeValuesOnly: true,
         })}`
         navigator.clipboard.writeText(URL)
@@ -315,11 +317,21 @@ export default function Tabbed() {
 
     useEffect(() => {
         const urlParams = new URLSearchParams(window.location.search)
-        const volumes = qs.parse(urlParams.toString())
-        const volumeTypes = Object.keys(volumes)
+        const params = qs.parse(urlParams.toString())
+        const { active_product, ...volumeParams } = params
+
+        if (active_product) {
+            const productIndex = products.findIndex((product) => product.type === active_product)
+            if (productIndex !== -1) {
+                setActiveTab(productIndex)
+            }
+        }
+
+        const volumeTypes = Object.keys(volumeParams)
         volumeTypes.forEach((type) => {
-            setVolume(type, volumes[type].volume)
+            setVolume(type, volumeParams[type].volume)
         })
+
         const el = document.getElementById('calculator')
         if (el && products.some((product) => volumeTypes.includes(product.type))) {
             const y = el.getBoundingClientRect().top + window.scrollY - (window.innerWidth > 767 ? 108 : 57)
