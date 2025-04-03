@@ -14,7 +14,7 @@ export default function ElementScrollLink({ id, label, element, className = '', 
         const scrollViewport = element.current.closest('[data-radix-scroll-area-viewport]')
         const scrollParent = scrollViewport || element.current
 
-        const targetElement = element.current.querySelector(`#${id}`)
+        const targetElement = element.current.querySelector(`#${CSS.escape(id)}`)
         if (targetElement && scrollParent) {
             const parentRect = scrollParent.getBoundingClientRect()
             const targetRect = targetElement.getBoundingClientRect()
