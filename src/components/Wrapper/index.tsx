@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react'
 import { AnimatePresence, motion, useDragControls } from 'framer-motion'
-import { IconMinus, IconX } from '@posthog/icons'
+import { IconCollapse45, IconExpand45, IconMinus, IconX } from '@posthog/icons'
 import { useApp } from '../../context/App'
 import { Provider as WindowProvider } from '../../context/Window'
 import Desktop from 'components/Desktop'
@@ -20,11 +20,26 @@ const sizeDefaults = {
 const Window = ({ item, constraintsRef }) => {
     const { minimizeWindow, bringToFront, closeWindow, focusedWindow } = useApp()
     const controls = useDragControls()
+    const [previousSize, setPreviousSize] = useState({ width: sizeDefaults.max.width, height: sizeDefaults.max.height })
     const [size, setSize] = useState({ width: 767, height: 600 })
+    const [previousPosition, setPreviousPosition] = useState({ x: 0, y: 0 })
     const [position, setPosition] = useState({ x: 0, y: 0 })
 
     const handleDoubleClick = () => {
         setSize((prev) => (prev.width === sizeDefaults.max.width ? sizeDefaults.min : sizeDefaults.max))
+    }
+
+    const expandWindow = () => {
+        setPreviousSize(size)
+        setPreviousPosition(position)
+        const taskbarHeight = document.querySelector('#taskbar')?.getBoundingClientRect().height || 0
+        setPosition({ x: 0, y: 0 })
+        setSize({ width: window.innerWidth, height: window.innerHeight - taskbarHeight })
+    }
+
+    const collapseWindow = () => {
+        setSize(previousSize)
+        setPosition(previousPosition)
     }
 
     return (
@@ -75,6 +90,13 @@ const Window = ({ item, constraintsRef }) => {
                             <div className="flex space-x-2">
                                 <button onClick={() => minimizeWindow(item)}>
                                     <IconMinus className="size-4" />
+                                </button>
+                                <button onClick={size.width >= window?.innerWidth ? collapseWindow : expandWindow}>
+                                    {size.width >= window?.innerWidth ? (
+                                        <IconCollapse45 className="size-4" />
+                                    ) : (
+                                        <IconExpand45 className="size-4" />
+                                    )}
                                 </button>
                                 <button onClick={() => closeWindow(item)}>
                                     <IconX className="size-4" />
@@ -143,6 +165,7 @@ const TaskBar = () => {
         <AnimatePresence>
             {windows.length > 0 && (
                 <motion.div
+                    id="taskbar"
                     data-scheme="secondary"
                     initial={{ translateY: '100%' }}
                     animate={{ translateY: 0 }}
