@@ -187,7 +187,7 @@ Once enabled, you can add the :ticket: emoji to a Slack thread to create a new T
 
 ## Tools we use
 **Gmail**
-We use Gmail for our email and the team uses all sorts of different clients, from [Superhuan](https://superhuman.com/) to [Spark](https://sparkmailapp.com/), to the default Gmail web inferface. Find something that works well for you. To get your own email signature, copy the signature from someone else on the team (like Simon) and then fill in your own details. 
+We use Gmail for our email and the team uses many different clients, from [Superhuan](https://superhuman.com/) to [Spark](https://sparkmailapp.com/), to the default Gmail web inferface. Find something that works well for you. To get your own email signature, copy the signature from someone else on the team (like Simon) and then fill in your own details. 
 
 **Cal.com:**
 We use Cal.com for scheduling meetings. In order to schedule a meeting between a customer and multiple members on the PostHog team, click on the members tab and select the check box next to the the members you want to add, then click “Group Meeting" in the toolbar that pops up on the bottom of the screen.
