@@ -18,16 +18,21 @@ interface TreeMenuProps {
     activeItem?: MenuItem
 }
 
+const getPaddingClass = (index: number) => {
+    return index === 0 ? 'text-red' : index === 1 ? 'pl-6' : 'pl-12'
+}
+
 const TreeLink = ({ menuItem, index }: { menuItem: MenuItem; index: number }) => {
     const location = useLocation()
     const pathname = replacePath(location?.pathname)
     const active = pathname === menuItem.url
+    const paddingClass = getPaddingClass(index)
     return menuItem.url ? (
-        <OSButton variant="ghost" align="left" width="full" asLink to={menuItem.url} className={`pl-${index * 4}`}>
+        <OSButton variant="ghost" align="left" width="full" asLink to={menuItem.url} className={paddingClass}>
             {menuItem.name}
         </OSButton>
     ) : (
-        <div className="text-muted text-sm">{menuItem.name}</div>
+        <div className={`text-muted text-sm ml-2 ${paddingClass}`}>{menuItem.name}</div>
     )
 }
 
@@ -74,7 +79,7 @@ function TreeMenuItem({ item, activeItem, index = 0 }: { item: MenuItem; activeI
     return (
         <Collapsible.Root open={open} onOpenChange={handleOpenChange}>
             <Collapsible.Trigger asChild>
-                <OSButton variant="ghost" align="left" width="full">
+                <OSButton variant="ghost" align="left" width="full" className={getPaddingClass(index)}>
                     {hasChildren && (
                         <motion.div animate={{ rotate: open ? 90 : 0 }}>
                             <IconChevronRight className="size-4" />
