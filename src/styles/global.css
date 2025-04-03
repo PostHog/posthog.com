@@ -1709,3 +1709,17 @@ li.squeak-left-border {
         @apply pt-0;
     }
 }
+
+.ph-callout {
+    .ph-text {
+        p,
+        ul,
+        ol {
+            @apply !mb-2 !leading-relaxed;
+        }
+
+        li {
+            @apply !mb-0 !leading-relaxed !text-[15px];
+        }
+    }
+}

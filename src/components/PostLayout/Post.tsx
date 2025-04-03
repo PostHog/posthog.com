@@ -16,6 +16,7 @@ import { Edit, ExpandDocument, Issue } from 'components/Icons'
 import { DarkModeToggle } from 'components/DarkModeToggle'
 import { useLayoutData } from 'components/Layout/hooks'
 import AskMax from 'components/AskMax'
+import { useUser } from 'hooks/useUser'
 
 export default function Post({ children }: { children: React.ReactNode }) {
     const {
@@ -45,6 +46,8 @@ export default function Post({ children }: { children: React.ReactNode }) {
             document.getElementById(hash?.replace('#', ''))?.scrollIntoView()
         }
     }
+
+    const { user } = useUser()
 
     return (
         <div className={!internalMenu ? '-mt-1' : ''}>

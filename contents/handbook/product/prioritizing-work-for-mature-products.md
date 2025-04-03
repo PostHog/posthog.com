@@ -6,7 +6,7 @@ showTitle: true
 
 There's no golden rule or perfect framework for prioritization. Here are a few things we should keep in mind when building mature products (products with substantial revenue and usage). 
 
-- **Always prioritize our ICP**
+- **Always prioritize our ICP (Ideal Customer Profile)**
     - As products mature, we start to get more and more users who are not strictly within our ICP. Building for these users is great - but only if we've satisfied the core needs of our company-wide ICP first.
     - Should different products have different ICPs?
       - The very first ICP should always be the same. However, some products will fill their needs sooner than others.

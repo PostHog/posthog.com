@@ -39,9 +39,9 @@ export const Content = ({ quickLinks = false }) => {
                 <ul className="m-0 mb-3 p-0 flex flex-col gap-4 md:grid md:grid-cols-2 xl:grid-cols-3">
                     <ResourceItem
                         type="Guide"
-                        title="How to set up LLM analytics for ChatGPT"
+                        title="How to set up OpenAI observability"
                         description="Track API usage, cost, and latency."
-                        url="/tutorials/chatgpt-analytics"
+                        url="/tutorials/openai-observability"
                     />
                     <ResourceItem
                         type="Guide"

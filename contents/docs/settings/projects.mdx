@@ -44,3 +44,15 @@ It's best to use separate projects for:
 - Apps that are entirely separate products with unlinked authentication systems
 - Admin apps that aren't customer-facing products
 - Internal websites and services
+
+### Moving projects between organizations
+
+You can move a project from one organization to another through [project settings](https://app.posthog.com/settings/project#project-move). However, there are a few requirements to keep in mind:
+
+- You need to be an owner or admin of the originating organization to transfer a project
+- You need to be a member of the target organization
+- The originating organization must have at least two projects before you can move one
+- Since free organizations are limited to one project, you may need to temporarily upgrade your plan and add billing details to create a second project
+- After the move is complete, you can downgrade the original organization back to the free plan if desired
+
+> Moving a project will mean all original organization members will lose access (including via things like API keys) unless they also are part of the target organization.

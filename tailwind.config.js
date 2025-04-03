@@ -161,6 +161,7 @@ module.exports = {
                     'arial',
                     'sans-serif',
                 ],
+                fancy: ['Zapfino', 'serif'],
                 button: ['MatterVF', 'sans-serif'],
                 nav: ['MatterVF', 'sans-serif'],
                 code: ['Source Code Pro', 'Menlo', 'Consolas', 'monaco', 'monospace'],

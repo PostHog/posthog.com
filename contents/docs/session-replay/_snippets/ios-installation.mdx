@@ -72,8 +72,10 @@ config.sessionReplayConfig.captureNetworkTelemetry = true
 // The screenshot may contain sensitive information, so use with caution
 config.sessionReplayConfig.screenshotMode = true
 
-// Deboucer delay used to reduce the number of snapshots captured and reduce performance impact. Default is 1s
-config.sessionReplayConfig.debouncerDelay = 1.0
+// Sets the minimum time interval (in seconds) between session replay snapshots.
+// A higher value reduces performance impact but decreases replay smoothness. Default is 1.0s.
+// Note: Previously known as `debouncerDelay` before version 3.21.0
+config.sessionReplayConfig.throttleDelay = 1.0
 ```
 
 ## Limitations
