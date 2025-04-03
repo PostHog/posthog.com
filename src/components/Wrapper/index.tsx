@@ -1,10 +1,11 @@
 import React, { useEffect, useRef, useState } from 'react'
 import { AnimatePresence, motion, useDragControls } from 'framer-motion'
-import { IconCollapse45, IconExpand45, IconMinus, IconX } from '@posthog/icons'
+import { IconCollapse45, IconExpand45, IconMinus, IconX, IconCode } from '@posthog/icons'
 import { useApp } from '../../context/App'
 import { Provider as WindowProvider } from '../../context/Window'
 import Desktop from 'components/Desktop'
-import { DarkModeToggle } from 'components/MainNav'
+import { DarkModeToggle } from 'components/DarkModeToggle'
+import { Popover } from 'components/RadixUI/Popover'
 
 const sizeDefaults = {
     max: {
@@ -159,6 +160,19 @@ const Window = ({ item, constraintsRef }) => {
     )
 }
 
+const SiteOptionsButton = () => {
+    return (
+        <Popover title="Site Options" trigger={<span>Site options</span>}>
+            <div className="w-full h-full bg-white">
+                <div className="flex items-center justify-between space-x-2">
+                    <span>Dark mode</span>
+                    <DarkModeToggle />
+                </div>
+            </div>
+        </Popover>
+    )
+}
+
 const TaskBar = () => {
     const { windows, focusedWindow, bringToFront, minimizeWindow } = useApp()
     return (
@@ -189,9 +203,7 @@ const TaskBar = () => {
                             )
                         })}
                     </ul>
-                    <div className="w-[160px]">
-                        <DarkModeToggle />
-                    </div>
+                    <SiteOptionsButton />
                 </motion.div>
             )}
         </AnimatePresence>
