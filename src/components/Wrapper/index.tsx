@@ -20,7 +20,8 @@ const sizeDefaults = {
 const Window = ({ item, constraintsRef }) => {
     const { minimizeWindow, bringToFront, closeWindow } = useApp()
     const controls = useDragControls()
-    const [size, setSize] = useState({ width: sizeDefaults.max.width, height: sizeDefaults.max.height })
+    const [size, setSize] = useState({ width: 767, height: 600 })
+    const [position, setPosition] = useState({ x: 0, y: 0 })
 
     const handleDoubleClick = () => {
         setSize((prev) => (prev.width === sizeDefaults.max.width ? sizeDefaults.min : sizeDefaults.max))
@@ -37,21 +38,27 @@ const Window = ({ item, constraintsRef }) => {
                             height: size.height,
                             zIndex: item.zIndex,
                         }}
-                        initial={{
-                            scale: 0.5,
-                            opacity: 0,
-                        }}
-                        animate={{
-                            scale: 1,
-                            opacity: 1,
-                        }}
-                        exit={{ scale: 0.5, opacity: 0 }}
-                        transition={{ duration: 0.2, ease: 'easeOut' }}
                         drag
                         dragControls={controls}
                         dragListener={false}
                         dragMomentum={false}
                         dragConstraints={constraintsRef}
+                        onDragEnd={(event, info) => {
+                            if (!constraintsRef.current) return
+
+                            const bounds = constraintsRef.current.getBoundingClientRect()
+                            const newX = position.x + info.offset.x
+                            const newY = position.y + info.offset.y
+
+                            const constrainedX = Math.min(Math.max(0, newX), bounds.width - size.width)
+                            const constrainedY = Math.min(Math.max(0, newY), bounds.height - size.height)
+
+                            setPosition({
+                                x: constrainedX,
+                                y: constrainedY,
+                            })
+                        }}
+                        animate={{ x: position.x, y: position.y }}
                         onMouseDown={() => bringToFront(item)}
                     >
                         <div
