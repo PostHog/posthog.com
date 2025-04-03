@@ -36,6 +36,8 @@ interface OSButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
     label?: string
     className?: string
     active?: boolean
+    align?: 'left' | 'center'
+    width?: 'auto' | 'full'
 }
 
 export default function OSButton({
@@ -47,9 +49,11 @@ export default function OSButton({
     label,
     className = '',
     active = false,
+    align = 'center',
+    width = 'auto',
     ...props
 }: OSButtonProps) {
-    const baseClasses = 'inline-flex items-center justify-center rounded transition-colors border'
+    const baseClasses = 'inline-flex items-center rounded transition-colors transition-50 hover:transition-none border'
 
     const sizeClasses = {
         xs: 'px-2 py-1 text-xs',
@@ -93,7 +97,9 @@ export default function OSButton({
 
     return (
         <button
-            className={`flex gap-1 items-center ${baseClasses} ${sizeClasses[size]} ${variantClasses[variant]} ${className}`}
+            className={`flex gap-1 items-center ${baseClasses} ${sizeClasses[size]} ${variantClasses[variant]} ${
+                align === 'center' ? 'justify-center' : 'justify-start'
+            } ${width === 'full' ? 'w-full' : 'w-auto'} ${className}`}
             {...props}
         >
             {buttonContent}

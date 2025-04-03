@@ -5,6 +5,7 @@ import { motion } from 'framer-motion'
 import Link from 'components/Link'
 import { useLocation } from '@reach/router'
 import { replacePath } from '../../../gatsby/utils'
+import OSButton from 'components/OSButton'
 
 interface MenuItem {
     name: string
@@ -32,7 +33,7 @@ const TreeLink = (menuItem: MenuItem) => {
 
 export function TreeMenu({ items, activeItem }: TreeMenuProps) {
     return (
-        <div className="space-y-1">
+        <div className="space-y-px">
             {items.map((item) => {
                 const hasChildren = item.children && item.children.length > 0
                 return hasChildren ? (
@@ -72,13 +73,15 @@ function TreeMenuItem({ item, activeItem }: { item: MenuItem; activeItem?: MenuI
 
     return (
         <Collapsible.Root open={open} onOpenChange={handleOpenChange}>
-            <Collapsible.Trigger className="flex w-full text-left items-center gap-1">
-                {hasChildren && (
-                    <motion.div animate={{ rotate: open ? 90 : 0 }}>
-                        <IconChevronRight className="size-4" />
-                    </motion.div>
-                )}
-                <span className={`${open ? 'font-semibold' : ''}`}>{item.name}</span>
+            <Collapsible.Trigger asChild>
+                <OSButton variant="ghost" align="left" width="full">
+                    {hasChildren && (
+                        <motion.div animate={{ rotate: open ? 90 : 0 }}>
+                            <IconChevronRight className="size-4" />
+                        </motion.div>
+                    )}
+                    <span className={`${open ? 'font-semibold' : ''}`}>{item.name}</span>
+                </OSButton>
             </Collapsible.Trigger>
 
             {hasChildren && (
