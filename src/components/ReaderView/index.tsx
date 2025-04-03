@@ -259,7 +259,7 @@ export default function ReaderView({ body, title, tableOfContents, mdxComponents
                                                             <ElementScrollLink
                                                                 id={navItem.url}
                                                                 label={navItem.value}
-                                                                className={`hover:opacity-100 opacity-60 text-[14px] py-1 block relative active:top-[0.5px] active:scale-[.99]`}
+                                                                className={`text-sm text-muted hover:text-primary py-1 block relative active:top-px active:scale-[.99]`}
                                                                 element={contentRef}
                                                                 style={{
                                                                     paddingLeft: `${navItem.depth || 0}rem`,
