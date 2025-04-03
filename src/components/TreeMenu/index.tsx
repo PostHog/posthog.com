@@ -23,9 +23,9 @@ const TreeLink = (menuItem: MenuItem) => {
     const pathname = replacePath(location?.pathname)
     const active = pathname === menuItem.url
     return menuItem.url ? (
-        <Link className={`block ${active ? 'bg-accent' : ''}`} to={menuItem.url}>
+        <OSButton variant="ghost" align="left" width="full" asLink to={menuItem.url}>
             {menuItem.name}
-        </Link>
+        </OSButton>
     ) : (
         <span className="opacity-50 block">{menuItem.name}</span>
     )

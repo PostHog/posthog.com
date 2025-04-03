@@ -1,6 +1,7 @@
 import React from 'react'
 import { IconInfo } from '@posthog/icons'
 import Tooltip from 'components/Tooltip'
+import { Link } from 'gatsby'
 
 // Basic usage
 // <OSButton>Click me</OSButton>
@@ -38,6 +39,8 @@ interface OSButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
     active?: boolean
     align?: 'left' | 'center'
     width?: 'auto' | 'full'
+    asLink?: boolean
+    to?: string
 }
 
 export default function OSButton({
@@ -51,6 +54,8 @@ export default function OSButton({
     active = false,
     align = 'center',
     width = 'auto',
+    asLink = false,
+    to,
     ...props
 }: OSButtonProps) {
     const baseClasses = 'inline-flex items-center rounded transition-colors transition-50 hover:transition-none border'
@@ -96,13 +101,31 @@ export default function OSButton({
     )
 
     return (
-        <button
-            className={`flex gap-1 items-center ${baseClasses} ${sizeClasses[size]} ${variantClasses[variant]} ${
-                align === 'center' ? 'justify-center' : 'justify-start'
-            } ${width === 'full' ? 'w-full' : 'w-auto'} ${className}`}
-            {...props}
-        >
-            {buttonContent}
-        </button>
+        <>
+            {asLink ? (
+                <Link
+                    to={to}
+                    {...props}
+                    className={`flex gap-1 items-center ${baseClasses} ${sizeClasses[size]} ${
+                        variantClasses[variant]
+                    } ${align === 'center' ? 'justify-center' : 'justify-start'} ${
+                        width === 'full' ? 'w-full' : 'w-auto'
+                    } ${className}`}
+                >
+                    {buttonContent}
+                </Link>
+            ) : (
+                <button
+                    className={`flex gap-1 items-center ${baseClasses} ${sizeClasses[size]} ${
+                        variantClasses[variant]
+                    } ${align === 'center' ? 'justify-center' : 'justify-start'} ${
+                        width === 'full' ? 'w-full' : 'w-auto'
+                    } ${className}`}
+                    {...props}
+                >
+                    {buttonContent}
+                </button>
+            )}
+        </>
     )
 }
