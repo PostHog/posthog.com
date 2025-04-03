@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from 'react'
+import React, { useState, useCallback, useRef } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import OSButton from 'components/OSButton'
 import {
@@ -25,6 +25,7 @@ import { MDXRenderer } from 'gatsby-plugin-mdx'
 import { MDXProvider } from '@mdx-js/react'
 import InternalSidebarLink from 'components/Docs/InternalSidebarLink'
 import HeaderBar from 'components/OSChrome/HeaderBar'
+import ElementScrollLink from 'components/ElementScrollLink'
 
 interface SidebarState {
     isOpen: boolean
@@ -109,6 +110,7 @@ const selectOptions = [
 export default function ReaderView({ body, title, tableOfContents, mdxComponents }: ReaderViewProps) {
     const [isNavVisible, setIsNavVisible] = useState(true)
     const [isTocVisible, setIsTocVisible] = useState(true)
+    const contentRef = useRef(null)
     const { fullWidthContent } = useLayoutData()
 
     const toggleNav = useCallback(() => {
@@ -198,7 +200,10 @@ export default function ReaderView({ body, title, tableOfContents, mdxComponents
                     )}
                 </AnimatePresence>
                 <ScrollArea dataScheme="primary" className="bg-primary border border-primary flex-grow rounded">
-                    <div className={`p-4 mx-auto transition-all ${fullWidthContent ? 'max-w-full' : 'max-w-xl'}`}>
+                    <div
+                        ref={contentRef}
+                        className={`p-4 mx-auto transition-all ${fullWidthContent ? 'max-w-full' : 'max-w-xl'}`}
+                    >
                         <h2>{title}</h2>
                         <div
                             data-scheme="secondary"
@@ -249,16 +254,21 @@ export default function ReaderView({ body, title, tableOfContents, mdxComponents
                                         <div>
                                             <h4 className="font-semibold text-muted m-0 mb-1 text-sm">Jump to:</h4>
                                             <ul className="list-none m-0 p-0 flex flex-col">
-                                                {tableOfContents.map((navItem, index) => (
-                                                    <li className="relative leading-none m-0" key={navItem.url}>
-                                                        <InternalSidebarLink
-                                                            url={navItem.url}
-                                                            name={navItem.value}
-                                                            depth={navItem.depth}
-                                                            className="hover:opacity-100 opacity-60 text-[14px] py-1 block relative active:top-[0.5px] active:scale-[.99]"
-                                                        />
-                                                    </li>
-                                                ))}
+                                                {tableOfContents.map((navItem) => {
+                                                    return (
+                                                        <li className="relative leading-none m-0" key={navItem.url}>
+                                                            <ElementScrollLink
+                                                                id={navItem.url}
+                                                                label={navItem.value}
+                                                                className={`hover:opacity-100 opacity-60 text-[14px] py-1 block relative active:top-[0.5px] active:scale-[.99]`}
+                                                                element={contentRef}
+                                                                style={{
+                                                                    paddingLeft: `${navItem.depth || 0}rem`,
+                                                                }}
+                                                            />
+                                                        </li>
+                                                    )
+                                                })}
                                             </ul>
                                         </div>
                                     )}
