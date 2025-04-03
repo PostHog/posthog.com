@@ -1,6 +1,6 @@
 ---
-title: How to write docs so good developers will cry
-date: 2025-02-04
+title: What nobody tells developers about documentation
+date: 2025-04-03
 author:
  - ian-vanagas
 featuredImage: >-
@@ -14,139 +14,116 @@ crosspost:
   - Blog
 ---
 
-Two things are true about documentation:
+There’s a lot of misconceptions about docs:
 
-1. It is a critical piece of a successful product. 
-2. Existing guides focus too much on rules and concepts that don't matter.
+1. Good software doesn’t need docs (it documents itself).
+2. Docs aren’t my responsibility (it’s for the marketing or docs team).
+3. It’s not as important as writing code (therefore I should never do it).
 
-Most guides suck. They aren't for busy engineers or founders, so we're changing that here.
+I’m here to give you a reality check. “Build it and they will come” is a lie. Users don’t know what your product does, how to use it, or why they would use it. You need docs to explain this.
 
-We're sharing what we're learned from writing 500+ docs pages that have been viewed 3M+ times in the last year alone.
+The big reason these misconceptions exist: most guides to writing docs suck. They are too conceptual, high-level, and aren’t written for busy engineers or founders. We’re changing that here by giving you a practical guide to documentation. 
 
-## Why is documentation important?
+## 1. It’s ok to start from the start
 
-1. Documentation keeps on answering your users' questions, even when you aren't there to answer them. It enables people to self-serve. No need for sales calls or support tickets. 
+Nothing matters if users can’t use your product. 
 
-2. "Build it and they will come" is a lie. You also need to tell people about it. Documentation is a core part of doing this. Think of users as a blank slate. They don't know what your product does, how to use it, or why they would use it. Documentation helps them fill in this slate.
+When users start with your product, you want them to go from “nothing” to “something” as quickly as possible. The best way to do this is learning by doing. Docs provide the structure to do this.
 
-![Didn't write docs](https://res.cloudinary.com/dmukukwp6/image/upload/didntwritedocs_2ce7a47cde.png)
+Start by writing the stupidest, most basic doc to help someone use your product. What would you send to a friend to help them get started with this feature?
 
-3. Have you ever heard of the "Feynman technique"? It is the process of learning through explaining a concept, seeing where you have knowledge gaps, and working to fill in those gaps. Writing documentation is sort of like this. It is a great way to understand your product and how users will actually use it. 
+If this means helping them install and set up your product, do it. If this means teaching them the concepts necessary to succeed, do it. Either way, having a beginner’s mindset to your own product reveals the most important docs you need to write. 
 
-## What to write about
+For example, our new [error tracking docs](https://posthog.com/docs/error-tracking) have less content than our other products and the structure isn’t perfect either. This is fine with us because we have the details on installation and the features error tracking users are looking for. Users have enough to use error tracking and we have something to build on.
 
-The process of diving into writing documentation can be intimidating. There is seemingly so much you can write about, as shown by other docs you've read and their thousands of pages. 
+![CleanShot 2025-02-04 at 09.04.15.png](Writing%20better%20documentation%20newsletter%2018b7b2876a45808f9790eaaad328434a/CleanShot_2025-02-04_at_09.04.15.png)
 
-When starting, rather than worrying about getting everything correct right away, focus on these three points:
+## 2. Good docs are not written in one day
 
-### 1. Start from the start
+Like a lot of writing, people see the finished post and expect their first copy to be exactly like that. They are discouraged when that isn’t the case, but shouldn’t be. Polished docs aren’t the product of a single stroke of genius, but a result of iterative improvement.
 
-Nothing matters if users can't use your product. When they start reading your docs, you want to get them from "nothing" to "something" as quickly as possible, and the best way to do this is learning by doing. 
+For example, our Next.js doc [started](https://github.com/PostHog/posthog.com/pull/1842) as a simple page with one snippet for installing and another for capturing a custom event. Since then, they changed 49 times to the current version with multiple install methods, details on app and pages routers, frequently asked questions, and more.
 
-If this means helping them install and set up your product, do it. If this means teaching them the concepts necessary to succeed, do it. Either way, having a beginner's mindset to your own product will reveal many of the docs you need to write. 
+![Next.js docs](https://res.cloudinary.com/dmukukwp6/image/upload/image_1_6c2f84d260.png)
 
-![Getting started](https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_02_04_at_08_45_00_9fb032a15d.png)
+This iteration is guided by the feedback we receive. This means reviewing:
 
-This is not only true of your product as a whole, but individual features. When you add a new feature, think about how someone will get started with it. If it requires a prerequisite, make sure it comes after that.
+1. Most popular docs to make sure they are up-to-date.
+2. Comments and questions on the docs page. 
+3. Issues raised by support or on GitHub.
+4. Votes on whether docs pages were useful or not.
 
-Starting from the start also means not assuming your users know too much. Starting with your most complicated use case is probably a bad idea. You need to build up knowledge to get to there. Assume readers don't know a lot, not because they are lazy, but because they are busy, and your product is just one of many tools they need to remember how to use.
+![Our most unhelpful docs](https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_04_02_at_16_05_44_4f40c12dc8.png)
 
-### 2. Become your user (better yet, talk to them)
+<Caption>Our most unhelpful docs</Caption>
 
-Every guide on writing documentation says knowing your "target audience" is critical, but what does that actually mean? 
+We take time every week to review these and make improvements to docs. We also benefit from a huge amount of small fixes from our community. 
 
-First, if you don't know who your audience is, you should read [our guide on defining your ICP](https://newsletter.posthog.com/p/defining-our-icp-is-the-most-important). TL;DR: Start with your best guess, ask questions about users on signup, identify your power users, discern real enthusiasm, and look for patterns. 
+It is the repeated little improvements that creates coveted polished docs experience.
 
-Second, you should talk to users (we have [another guide on that](https://newsletter.posthog.com/p/talk-to-users)). Talk to them about your solution, take notes on what you are telling them, and pay attention to what confuses them. Both of these are excellent potential doc subjects
+## 3. Your readers are in a rush
 
-Third, you should develop a mental model of your users and think about what documentation they would like. For example, we focus a lot on SDKs, APIs, code snippets in our docs because we know our audience is developers. We might care a lot more about pictures and graphics if we were dealing with marketers or white papers if we were dealing with sales people (only half-joking). 
+Reading a book is commonly thought of as a leisurely activity. Docs is sort of the opposite of this.
 
-![Your users on your shoulder](https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_01_31_at_08_43_082x_8c489dbd4f.png)
+![Docs enjoyer](https://res.cloudinary.com/dmukukwp6/image/upload/image_2_3639171928.png)
 
-### 3. Focus on structure (later)
+Docs readers are trying to get what they need as fast as possible and get back to work. Their goal can be anything from figuring out if your product is a good fit to installing your product to debugging an issue they’re having. You want to help them do this as fast as possible.
 
-Stressing out about where documentation goes or what "[types](https://docs.divio.com/documentation-system/)" of documentation to cover isn't worth it early. Just create a bunch of pages and worry about organizing them later. Stub out pages just to get words down if you need to. 
-
-For example, our new [error tracking docs](/docs/error-tracking) have much less content than any of our other products and the structure of the content likely isn't right either. What it does give us is something to build on.
-
-![Error tracking docs](https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_02_04_at_09_04_15_688389c7e3.png)
-
-When you have a bunch of pages that relate to one another, you can create a landing page or section for them. You can reorganize them into categories once there is enough there. Popular categories include getting started, core concepts, and SDK/API references. 
-
-> **Tip:** Search and/or AI chat can make up for a lack of structure. See our post on [the custom AI tool we built to answer community questions using Inkeep](/blog/ai-community-answers).
-
-## How to write it
-
-Now that you have something to write about, it is time to buckle down and write it. The problem is that the blank page is intimidating and you likely have a ton of mental baggage about what writing is supposed to look like. 
-
-The solution is again to start simply and the next three points can help you do that:
-
-### 1. Don't worry too much about "the rules"
-
-We're not in school anymore. Nearly all the rules you learned there about how to write don't apply here. No need to follow five paragraph structure, the MLA style guide, or even "proper" grammar.
-
-![School sux](https://res.cloudinary.com/dmukukwp6/image/upload/image_a50cf738ee.png)
-<Caption>
-What "writing like you were taught in school" makes you look like
-</Caption>
-
-He doesn't write docs, but the person who has the worst spelling and grammar at PostHog is CEO James Hawkins. Yet he is also the person who writes the most viral posts. As a marketer, I would rather he spend his time writing more posts than getting better at grammar.
-
-Just worry about getting the words out of your head onto the page. Write like you talk, make liberal use of the notes you took while talking to users earlier. 
-
-Oh, and don't worry too much about grammar and spelling at the start. Running your work through ChatGPT and a spell checker will fix issues when you're ready to publish.
-
-### 2. Write for the internet
-
-So what should you do instead? Make your writing readable for the medium it's in: the internet. This means your readers:
-
-1. Are busy and don't have time to read long docs.
-2. Are not experts and don't know what we know.
-
-This means:
+This means your docs should not look or read like a book. They should almost be the opposite. Here’s what we’ve found most important for accomplishing this:
 
 - Put the most important information first. Get to the point. No overly long intros.
 - Break up long sections with subheadings for better scanability (like we do in this newsletter).
 - Use short paragraphs (3-4 lines maximum). Break up hard to read or overly long sentences. Avoid walls of text.
 - Use bullet points and numbered lists as these help readers know where they are and create a sense of progress.
-- Add functioning code samples, annotated screenshots, graphics, and even memes. Visuals help keep readers' attention and provide an alternative way to explain a concept.
+- Add functioning code samples, annotated screenshots, graphics, and even memes. Visuals help keep readers’ attention and provide an alternative way to explain a concept.
 
-Ideally, internet writing should have a texture and flow that encourages readers to continue reading. 
+Ideally, your writing should have texture and flow. This helps readers effectively find and understand what they are looking for so they can get back to work.
 
-### 3. Examples are your (best) friend
+![Texture](https://res.cloudinary.com/dmukukwp6/image/upload/image_3_25886bf103.png)
 
-One of the most important things to include in your documentation is examples. Examples tie the features and concepts you are writing about to the real world. It's easy to say things, examples prove it, and they enable your reader to anchor onto something. 
+## 4. Focus on examples over abstractions
 
-For example, when explaining [anonymous vs identified events](/docs/product-analytics/capture-events#advanced-anonymous-vs-identified-events), we provide example scenarios where you would use both. This helps users understand what they are and how they can use them before we even explain how to set them up.
+Developers live in a world of abstractions. On a daily basis, developers use ideas like synchronicity, security, immutability, reactivity, and frameworks make these concepts comprehensible and practical. 
 
-![Anonymous vs identified events](https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_01_31_at_09_25_05_bbf5fe568f.png)
+It’s natural for them to want to bring these abstractions into the docs they write. To do this, developers often think the best path is to take the abstractions in their head and dump them onto the page. The problem with this is that:
 
-The best source for these examples is your own experiences or the experiences of your users (part of the reason [why dogfooding is so important](https://newsletter.posthog.com/p/using-your-own-product-is-a-superpower)). Readers can smell a fake example, and at best, it won't be helpful. At worst, it will ruin the credibility and authority of your docs.
+1. Abstractions are hard to transmit. Readers don’t have the context you do, and they don’t have the time or energy to create that context.
+2. Users don’t care so much about how you solved their problem, only that you actually solved it. You think about how problems are solved 1000x more than they do. 
 
-## How to measure success
+Focusing too much on documenting concepts and abstractions can lead to docs that bore or confuse users instead of helping them.
 
-Once you've written and published a few docs, how to know if you did a good job? These are the things we look at at PostHog:
+The fix to this is realizing one thing: software development is about building useful abstractions, while docs show users how to use them. In this way, docs are a complement to a product’s abstractions. 
 
-1. **Traffic.** At the most basic level, you want to see that people are actually reading your docs. PostHog's [web analytics dashboard](/docs/web-analytics) is great for this. Seeing which docs are popular helps you understand what areas of your product are popular and what areas to invest more time in documenting.
+For example, user identification is a core abstraction for PostHog. If we focused on abstractions, we would explain how it works, how we process identified events, and why it’s important. 
 
-2. **Customer-facing shares.** You want to know if your docs are actually helpful. This can be done by seeing which docs actually get shared by you or your customer-facing team. Ideally, docs should make the jobs of your sales and support teams easier. 
+Instead, we mostly focus on implementation, using `posthog.identify()`, and providing code snippets you can use. You don’t even need to scroll to find the first code snippet.
 
-3. **Feedback.** We have multiple ways users give us feedback on our documentation including comments, "was this page useful?" buttons, and mentions on social media. [Surveys](/docs/surveys) are another option we use, especially for earlier-stage products. 
+![Identify](https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_04_03_at_12_01_092x_01127d03fc.png)
 
-Measuring success helps us figure out what to work on next. For example, if we see a use case or library is popular, we'll invest more time in expanding the docs related to it. 
+To focus more on examples, think about “showing” rather than “telling.”
 
-## Other things we've learned about writing great docs
+- Showing an example JSON structure of a data type rather than giving a summary of it.
+- Showing a screenshot or video of your UI rather than explaining its sections and buttons.
+- Showing a diagram of a workflow rather than walking you through its steps.
 
-- **Make it easy for people to contribute.** Our website is [open source](https://github.com/PostHog/posthog.com). There is an "edit this page" button at the top of each page. Our users end up contributing a bunch of fixes and even entire docs pages. ~10% of pull requests to our website come from the community.
+Explaining your abstractions should be a task well into the future. Some signs it might be the right time to document abstractions:
 
-- **Iterate.** Once you have docs, keep track of which are popular and make sure those are up to date. Good writing is rewriting. Our [Next.js docs](/docs/libraries/next-js) have changed 10+ times (partially because Next.js is a PITA).
+1. When you get big enough that you need to start explaining the “why” behind how things work.
+2. You need to explain abstractions internally to new team members.
+3. You spend a significant amount of time on customer calls explaining abstractions. 
 
-- **Don't worry too much about docs going out of date.** If you try to write docs that never go out of date, you'll be stuck in maintenance mode forever. Docs going out of date is natural. Links break, APIs change, UIs get redesigned.
-    
-![Docs go out of date](https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_01_31_at_09_47_442x_972abf5013.png)
-    
-- **Get an editor.** Just like you review pull requests, you should review new docs. Ask them to tell you what is confusing, where they get bored, and what's awkward. A simple read-through can dramatically improve a doc.
+## 5. Writing great docs is like building a great product
 
-- **Don't reinvent the wheel.** When it comes to docs, your goal should be comprehensibility. Save your showing off in your blog posts. Don't come up with wild names people don't understand, just use Keywords Everywhere and use the ones they expect. You're not Twitter, you can just call it a "post", not a "tweet."
+1. **You need to focus on your users.** This means talking to them and asking what they want. It also means having empathy for their needs. An ICP is useful for products, but it’s just as useful for writing docs. 
+
+2. **Ship quickly and iterate.** The first versions of our docs are often barebones, we don’t expect to have it all figured out in the first version. We also don’t require multiple approvals from stakeholders. We ship something, get feedback, and do it again.
+
+3. **They require design and development investment.** Our docs benefit a lot from all of the work on our website and vibes team. They make the pages and components within those pages look good and work towards our goal. They also help us structure the site to help people find what they need.
+
+4. **They require ownership.** If no one owns a product, it won’t get worked on. The same is true with docs. You can’t expect something to improve if it’s no one’s responsibility to improve it. Product teams are required to contribute but we also [keep a list](https://posthog.com/handbook/content-and-docs/docs) of the docs team members responsible. 
+
+5. **Culture makes a big difference.** Your product is a product of your culture and so is your docs. For example, our values of being open source, everybody codes, trust and feedback over process, and biasing action fully apply to docs as well and ends up shaping how they are worked on.
+
+In a way, docs are your product. The quality and user experience of your docs is a significant part of your overall product experience. Treating docs as any less important than your product means that you’re missing out on huge potential gains.
 
 <NewsletterForm />
