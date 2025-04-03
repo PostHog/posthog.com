@@ -6,7 +6,7 @@ import { IconTextWidthFixed, IconTableOfContents, IconClockRewind } from 'compon
 
 interface PopoverProps {
     trigger: React.ReactNode
-    title: string
+    title?: string
     children: React.ReactNode
     className?: string
     contentClassName?: string
@@ -30,7 +30,7 @@ export const Popover = React.forwardRef<HTMLDivElement, PopoverProps>(
                     >
                         <div className="flex flex-col gap-2.5">
                             <div className="flex justify-between items-center">
-                                <p className="mb-0">{title}</p>
+                                {title && <p className="mb-0">{title}</p>}
                                 <div>
                                     <RadixPopover.Close
                                         className="inline-flex size-[25px] cursor-default items-center justify-center rounded-full text-violet11 outline-none hover:bg-violet4 focus:shadow-[0_0_0_2px] focus:shadow-violet7"
