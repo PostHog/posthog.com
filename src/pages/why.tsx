@@ -381,9 +381,9 @@ const Teams: React.FC = () => {
                                     happy to let engineering drive in your organization, then we're usually a slam dunk.
                                 </p>
                                 <p>
-                                    Sometimes we might not have <em>every</em> feature compared to a leading competitor,
-                                    but we've seen pretty much no one cares about that compared to the advantages of
-                                    having everything in one place – and we'll always keep building!
+                                    Sometimes we might not have <em>every</em> feature a leading competitor offers, but
+                                    we've seen pretty much no one cares about that compared to the advantages of having
+                                    everything in one place – and we'll always keep building!
                                 </p>
 
                                 <h2 id="every-product-has-a-huge-free-tier">Every product has a huge free tier</h2>

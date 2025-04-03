@@ -126,6 +126,39 @@ properties: {
 }
 ```
 
+## Sending custom properties with autocaptured form submissions
+
+To prevent accidental sensitive data capture, we do not automatically capture form values from form submissions. To add custom properties to form submissions, you can use the `data-ph-capture-attribute` attribute on the form element.
+
+In this example, the `product-id` property will be sent with the form submission event. The `product-name` input will not be captured.
+
+```HTML
+<form
+    data-ph-capture-attribute-product-id="12345678"
+>
+    <input name="product-name" placeholder="this input will not be autocaptured"/>
+    <button type="submit">Submit</button>
+</form>
+```
+
+The following example shows how you can use the `data-ph-capture-attribute` attribute dynamically in a React component. The `product-name` property will be sent with the form submission event.
+
+```tsx
+import { useState } from 'react'
+
+const MyForm = () => {
+  const [productName, setProductName] = useState('')
+  return (
+    <form
+        data-ph-capture-attribute-name={productName}
+    >
+        <input name="product-name" onChange={(e) => setProductName(e.target.value)} value={productName}/>
+        <button type="submit">Submit</button>
+    </form>
+  )
+}
+```
+
 ## Autocaptured events
 
 Autocaptured events include:

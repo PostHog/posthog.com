@@ -680,8 +680,8 @@ function Terms() {
                             notice to Customer (which may be sent by email). If Customer believes that PostHog has
                             billed Customer incorrectly, Customer must contact PostHog no later than 60 days after the
                             closing date on the first billing statement in which the error or problem appeared, in order
-                            to receive an adjustment or credit. Inquiries should be submitted via 
-                            an in-app support ticket to the Company's customer success department.
+                            to receive an adjustment or credit. Inquiries should be submitted via an in-app support
+                            ticket to the Company's customer success department.
                         </p>
                     </div>
                     <div className="md:pt-10">
@@ -942,6 +942,40 @@ function Terms() {
                         </p>
                         <p className="!text-base opacity-80">
                             *It's the most fun you'll ever have signing a DPA - <em>guaranteed</em>.
+                        </p>
+                    </div>
+                    <div className="pb-12">
+                        <h2 id="sla">13. Uptime SLA</h2>
+                        <p>
+                            PostHog will use commercially reasonable efforts to make the Software available with all
+                            material features and services operating and available for use, in each calendar month with
+                            an uptime percentage of 99.95% as displayed on status.posthog.com only to those customers
+                            who have purchased the Enterprise add-on or where it has been agreed as a special term in
+                            your annual contract. Uptime SLAs are not otherwise available to customers as standard. If
+                            the uptime percentage for the month is less than 99.95%, we will provide you with credit
+                            during the month as below: - 99.90% to 99.94% inclusive - 5% credit - 99.00% to 99.89%
+                            inclusive - 10% credit - Less than 99% - 20% credit If PostHog fails to maintain an uptime
+                            percentage of greater than 99% for any 3 months in a 6 month period, Customer may terminate
+                            their agreement upon 10 days written notice to PostHog. The calculations of uptime do not
+                            include: - Delays to data ingestion - Scheduled maintenance time: PostHog will notify
+                            Customer in advance of any scheduled routine maintenance - Emergency maintenance time
+                            (non-scheduled): PostHog will promptly notify Customer (via email or through the Software)
+                            of any non-scheduled or emergency maintenance and any other anticipated outages or
+                            performance degradation - Suspension or termination of your account - Failure of Customer or
+                            third-party equipment, software or technology upon which the Software is dependent,
+                            including, but not limited to, cloud infrastructure services upon which the Software
+                            operates, and inaccessibility to the Internet, provided that such failure or inaccessibility
+                            is not caused by PostHog’s infrastructure and is otherwise outside of PostHog’s control -
+                            Force majeure event - An attack on PostHog’s infrastructure, including without limitation, a
+                            denial of service attack or unauthorized access, provided that such attack did not occur as
+                            a result of PostHog’s failure to maintain industry standard organizational controls and
+                            technical measures - Unavailability caused by Customer’s breach of this Agreement
+                        </p>
+                    </div>
+                    <div className="md:pt-10 pb-12">
+                        <p>
+                            If you buy PostHog Enterprise or have a special annual contract with us, we will agree to an
+                            SLA with you.
                         </p>
                     </div>
                 </div>
