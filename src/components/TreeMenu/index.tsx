@@ -25,6 +25,7 @@ const TreeLink = ({ menuItem, index }: { menuItem: MenuItem; index: number }) =>
     return menuItem.url ? (
         <OSButton
             variant="ghost"
+            active={active}
             align="left"
             width="full"
             asLink
@@ -92,6 +93,7 @@ function TreeMenuItem({ item, activeItem, index = 0 }: { item: MenuItem; activeI
                     align="left"
                     width="full"
                     className={index === 0 ? '' : index === 1 ? 'pl-6' : 'pl-11'}
+                    active={activeItem === item}
                 >
                     {hasChildren && (
                         <motion.div animate={{ rotate: open ? 90 : 0 }}>
@@ -104,7 +106,7 @@ function TreeMenuItem({ item, activeItem, index = 0 }: { item: MenuItem; activeI
 
             {hasChildren && (
                 <Collapsible.Content>
-                    <div className="children">
+                    <div className="space-y-px">
                         {item.children?.map((child) => {
                             const hasChildren = child.children && child.children.length > 0
                             return hasChildren ? (

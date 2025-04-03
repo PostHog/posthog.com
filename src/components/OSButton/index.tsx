@@ -80,7 +80,7 @@ export default function OSButton({
             'bg-accent border-accent dark:border-accent-dark text-primary hover:bg-accent-dark active:bg-accent/80 dark:bg-accent-dark dark:hover:bg-accent dark:active:bg-accent-dark/80',
         ghost: `bg-transparent border-transparent ${
             active
-                ? '!bg-accent-2 dark:!bg-accent-dark hover:border-light dark:hover:border-dark'
+                ? 'font-bold !bg-accent-2 dark:!bg-accent-dark hover:border-light dark:hover:border-dark'
                 : 'hover:bg-accent-2 dark:hover:bg-accent-dark'
         } active:bg-accent-2/80 dark:active:bg-accent-dark/80 focus:border-light dark:focus:border-dark`,
     }
