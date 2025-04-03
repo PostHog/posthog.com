@@ -5,6 +5,7 @@ import { motion } from 'framer-motion'
 import Link from 'components/Link'
 import { useLocation } from '@reach/router'
 import { replacePath } from '../../../gatsby/utils'
+import OSButton from 'components/OSButton'
 
 interface MenuItem {
     name: string
@@ -17,28 +18,41 @@ interface TreeMenuProps {
     activeItem?: MenuItem
 }
 
-const TreeLink = (menuItem: MenuItem) => {
+const TreeLink = ({ menuItem, index }: { menuItem: MenuItem; index: number }) => {
     const location = useLocation()
     const pathname = replacePath(location?.pathname)
     const active = pathname === menuItem.url
     return menuItem.url ? (
-        <Link className={`block ${active ? 'bg-accent' : ''}`} to={menuItem.url}>
+        <OSButton
+            variant="ghost"
+            align="left"
+            width="full"
+            asLink
+            to={menuItem.url}
+            className={index === 0 ? '' : index === 1 ? 'pl-7' : 'pl-11'}
+        >
             {menuItem.name}
-        </Link>
+        </OSButton>
     ) : (
-        <span className="opacity-50 block">{menuItem.name}</span>
+        <div
+            className={`text-muted text-sm py-0.5 ${index === 0 ? 'ml-2' : index === 1 ? 'ml-1' : ''} ${
+                index === 0 ? '' : index === 1 ? 'pl-6' : 'pl-11'
+            }`}
+        >
+            {menuItem.name}
+        </div>
     )
 }
 
 export function TreeMenu({ items, activeItem }: TreeMenuProps) {
     return (
-        <div className="space-y-1">
+        <div className="space-y-px">
             {items.map((item) => {
                 const hasChildren = item.children && item.children.length > 0
                 return hasChildren ? (
-                    <TreeMenuItem key={item.name} item={item} activeItem={activeItem} />
+                    <TreeMenuItem key={item.name} item={item} activeItem={activeItem} index={0} />
                 ) : (
-                    <TreeLink {...item} />
+                    <TreeLink menuItem={item} index={0} />
                 )
             })}
         </div>
@@ -54,7 +68,7 @@ const isOpen = (children: MenuItem[], pathname: string): boolean => {
     )
 }
 
-function TreeMenuItem({ item, activeItem }: { item: MenuItem; activeItem?: MenuItem }) {
+function TreeMenuItem({ item, activeItem, index = 0 }: { item: MenuItem; activeItem?: MenuItem; index: number }) {
     const [open, setOpen] = useState(false)
     const hasChildren = item.children && item.children.length > 0
     const location = useLocation()
@@ -72,24 +86,31 @@ function TreeMenuItem({ item, activeItem }: { item: MenuItem; activeItem?: MenuI
 
     return (
         <Collapsible.Root open={open} onOpenChange={handleOpenChange}>
-            <Collapsible.Trigger className="flex w-full text-left items-center gap-1">
-                {hasChildren && (
-                    <motion.div animate={{ rotate: open ? 90 : 0 }}>
-                        <IconChevronRight className="size-4" />
-                    </motion.div>
-                )}
-                <span className={`${open ? 'font-semibold' : ''}`}>{item.name}</span>
+            <Collapsible.Trigger asChild>
+                <OSButton
+                    variant="ghost"
+                    align="left"
+                    width="full"
+                    className={index === 0 ? '' : index === 1 ? 'pl-6' : 'pl-11'}
+                >
+                    {hasChildren && (
+                        <motion.div animate={{ rotate: open ? 90 : 0 }}>
+                            <IconChevronRight className="size-4" />
+                        </motion.div>
+                    )}
+                    <span className={`${open ? 'font-semibold' : ''}`}>{item.name}</span>
+                </OSButton>
             </Collapsible.Trigger>
 
             {hasChildren && (
                 <Collapsible.Content>
-                    <div className="ml-5">
+                    <div className="children">
                         {item.children?.map((child) => {
                             const hasChildren = child.children && child.children.length > 0
                             return hasChildren ? (
-                                <TreeMenuItem key={child.name} item={child} activeItem={activeItem} />
+                                <TreeMenuItem key={child.name} item={child} activeItem={activeItem} index={index + 1} />
                             ) : (
-                                <TreeLink {...child} />
+                                <TreeLink menuItem={child} index={index + 1} />
                             )
                         })}
                     </div>
