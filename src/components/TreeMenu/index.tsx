@@ -18,16 +18,16 @@ interface TreeMenuProps {
     activeItem?: MenuItem
 }
 
-const TreeLink = (menuItem: MenuItem) => {
+const TreeLink = ({ menuItem, index }: { menuItem: MenuItem; index: number }) => {
     const location = useLocation()
     const pathname = replacePath(location?.pathname)
     const active = pathname === menuItem.url
     return menuItem.url ? (
-        <OSButton variant="ghost" align="left" width="full" asLink to={menuItem.url}>
+        <OSButton variant="ghost" align="left" width="full" asLink to={menuItem.url} className={`pl-${index * 4}`}>
             {menuItem.name}
         </OSButton>
     ) : (
-        <span className="opacity-50 block">{menuItem.name}</span>
+        <div className="text-muted text-sm">{menuItem.name}</div>
     )
 }
 
@@ -37,9 +37,9 @@ export function TreeMenu({ items, activeItem }: TreeMenuProps) {
             {items.map((item) => {
                 const hasChildren = item.children && item.children.length > 0
                 return hasChildren ? (
-                    <TreeMenuItem key={item.name} item={item} activeItem={activeItem} />
+                    <TreeMenuItem key={item.name} item={item} activeItem={activeItem} index={0} />
                 ) : (
-                    <TreeLink {...item} />
+                    <TreeLink menuItem={item} index={0} />
                 )
             })}
         </div>
@@ -55,7 +55,7 @@ const isOpen = (children: MenuItem[], pathname: string): boolean => {
     )
 }
 
-function TreeMenuItem({ item, activeItem }: { item: MenuItem; activeItem?: MenuItem }) {
+function TreeMenuItem({ item, activeItem, index = 0 }: { item: MenuItem; activeItem?: MenuItem; index: number }) {
     const [open, setOpen] = useState(false)
     const hasChildren = item.children && item.children.length > 0
     const location = useLocation()
@@ -86,13 +86,13 @@ function TreeMenuItem({ item, activeItem }: { item: MenuItem; activeItem?: MenuI
 
             {hasChildren && (
                 <Collapsible.Content>
-                    <div className="ml-5">
+                    <div className="children">
                         {item.children?.map((child) => {
                             const hasChildren = child.children && child.children.length > 0
                             return hasChildren ? (
-                                <TreeMenuItem key={child.name} item={child} activeItem={activeItem} />
+                                <TreeMenuItem key={child.name} item={child} activeItem={activeItem} index={index + 1} />
                             ) : (
-                                <TreeLink {...child} />
+                                <TreeLink menuItem={child} index={index + 1} />
                             )
                         })}
                     </div>
