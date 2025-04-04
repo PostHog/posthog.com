@@ -9,7 +9,7 @@ tags:
 
 [React Charts](https://react-charts.tanstack.com/) is a popular visualization and charting library for React. It provides a simplified set of performant charts to use with analytics data from PostHog.
 
-To provide examples of what you can do with it, we create a basic Next.js app, set it up to fetch data from [PostHog's query API](/docs/api/query), and visualize it with React Charts.
+To provide examples of what you can do with it, we create a basic Next.js app, set it up to fetch data from [PostHog's query API](/docs/api/queries), and visualize it with React Charts.
 
 > **Don't want to do all the work of querying and visualizing?** You can always share or embed insights, dashboards, and more. See [sharing docs](/docs/product-analytics/sharing) for more.
 
@@ -40,7 +40,7 @@ Start by creating a personal API key. You can do this by going to [personal API 
 
 > **⚠️ Warning:** The following is a simplified example. Exposing your personal API key or an endpoint that accepts arbitrary queries (like we do below) exposes your private PostHog data to the public internet, so don't do this in real life. Make sure your personal API key isn't exposed and your query request happens securely on the server side.
 
-Next, go into your `react-charts-example` folder, then the `app` folder, and create an `api` folder. In the `api` folder, create a `query.js` file. Here we set up a fetch request to PostHog's [query API endpoint](/docs/api/query) using your project ID (from your PostHog URL) and personal API key like this:
+Next, go into your `react-charts-example` folder, then the `app` folder, and create an `api` folder. In the `api` folder, create a `query.js` file. Here we set up a fetch request to PostHog's [query API endpoint](/docs/api/queries) using your project ID (from your PostHog URL) and personal API key like this:
 
 ```js file=app/api/query.js
 export const fetchQuery = async (payload) => {
@@ -64,7 +64,7 @@ export const fetchQuery = async (payload) => {
 }
 ```
 
-Finally, in our client component, we make the query request using PostHog's [query API](/docs/api/query#post-api-projects-project_id-query) and display the data:
+Finally, in our client component, we make the query request using PostHog's [query API](/docs/api/queries#post-api-projects-project_id-query) and display the data:
 
 ```js
 // app/page.js
