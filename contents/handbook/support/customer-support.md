@@ -102,7 +102,6 @@ Tickets are considered normal priority if they fulfill ANY of the following cond
 - The customer is subscribed to the `Ridiculously cheap` plan
 - The customer is on a PostHog for Startups or Y Combinator plan
 - The customer is raising a billing issue
-- The ticket is listed as critical severity
 
 This ensures that most paying users get appropriately rapid support and that all billing issues are ensured to get a response. Free users can raise high impact bugs or issues to an appropriate level.
 
