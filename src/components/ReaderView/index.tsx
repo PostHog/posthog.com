@@ -13,6 +13,7 @@ import {
     IconPullRequest,
     IconTextWidth,
     IconGear,
+    IconInfo,
 } from '@posthog/icons'
 import ScrollArea from 'components/RadixUI/ScrollArea'
 import { DebugContainerQuery } from 'components/DebugContainerQuery'
@@ -32,6 +33,7 @@ import menu from '../../navs'
 import { TreeMenu } from 'components/TreeMenu'
 import { Fieldset } from 'components/OSFieldset'
 import SliderDemo from 'components/RadixUI/Slider'
+import TooltipDemo from 'components/RadixUI/Tooltip'
 
 interface SidebarState {
     isOpen: boolean
@@ -153,6 +155,14 @@ const AppOptionsButton = () => {
                         <ToggleGroup title="Background image" options={backgroundImageOptions} />
                     </div>
                 </Fieldset>
+
+                <p className="text-[13px]">
+                    Toggle light/dark mode in{' '}
+                    <span className="inline-flex items-center gap-0.5">
+                        <button className="font-semibold underline">desktop settings</button>
+                        <TooltipDemo trigger={<IconInfo className="size-4" />}>Lower right!</TooltipDemo>
+                    </span>
+                </p>
             </div>
         </Popover>
     )
