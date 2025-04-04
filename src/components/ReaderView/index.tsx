@@ -18,7 +18,7 @@ import { DebugContainerQuery } from 'components/DebugContainerQuery'
 import { IconClockRewind, IconTextWidthFixed } from 'components/OSIcons'
 import { Select } from '../RadixUI/Select'
 import { Popover } from '../RadixUI/Popover'
-import { ToggleGroup } from 'components/RadixUI/ToggleGroup'
+import { ToggleGroup, ToggleOption } from 'components/RadixUI/ToggleGroup'
 import { useLayoutData } from 'components/Layout/hooks'
 import Link from 'components/Link'
 import { MDXRenderer } from 'gatsby-plugin-mdx'
@@ -108,6 +108,20 @@ function recursiveSearch(array, value) {
 
     return false
 }
+
+const textWidthOptions: ToggleOption[] = [
+    {
+        label: 'Fixed width',
+        value: 'fixed',
+        icon: <IconTextWidthFixed className="size-5 inline-block" />,
+        default: true,
+    },
+    {
+        label: 'Full width',
+        value: 'full',
+        icon: <IconTextWidth className="size-5" />,
+    },
+]
 
 export default function ReaderView({ body, title, tableOfContents, mdxComponents }: ReaderViewProps) {
     const [isNavVisible, setIsNavVisible] = useState(true)
@@ -309,7 +323,7 @@ export default function ReaderView({ body, title, tableOfContents, mdxComponents
                 <div className="flex-grow flex justify-between">
                     <div>Questions?</div>
                     <div>
-                        <ToggleGroup title="Text width" />
+                        <ToggleGroup title="Text width" options={textWidthOptions} />
                     </div>
                 </div>
                 <motion.div
