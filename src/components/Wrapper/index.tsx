@@ -174,8 +174,13 @@ const Window = ({ item, constraintsRef }: { item: any; constraintsRef: any }) =>
 
 const SiteOptionsButton = () => {
     return (
-        <Popover trigger={<span>Site options</span>}>
-            <div className="w-full h-full bg-white">
+        <Popover
+            title="Settings"
+            dataScheme="secondary"
+            trigger={<span>Site options</span>}
+            contentClassName="w-[260px]"
+        >
+            <div data-scheme="secondary" className="w-full h-full bg-primary text-primary">
                 <div className="flex items-center justify-between space-x-2">
                     <span>Dark mode</span>
                     <DarkModeToggle />

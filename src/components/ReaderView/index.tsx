@@ -347,6 +347,8 @@ export default function ReaderView({ body, title, tableOfContents, mdxComponents
                             </span>
                         }
                         title="Edit history"
+                        dataScheme="secondary"
+                        contentClassName="w-[260px]"
                     >
                         <div className="flex gap-2 justify-between items-center">
                             <div className="flex items-center gap-2">
