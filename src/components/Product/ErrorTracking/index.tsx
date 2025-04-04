@@ -319,7 +319,7 @@ export const ProductErrorTracking = () => {
                     product={product.capitalized}
                     title="Track, group, and fix errors" // Alternative here was "Errors: Catch'em, track'em, group'em, fix'em"
                     // Alternatives were: "Don't wait to hear about errors from your users", "You're users won't tell you about every bug they hit, but we will",
-                    // "Because the best support ticket is once you've already solved, and the best bug fix is one you've already deployed"
+                    // "Because the best support ticket is one you've already solved, and the best bug fix is one you've already deployed"
                     // Something about emphasising the "flying blind" aspect of having no error tracking felt right.
                     description="Solve the issues your users see, <span class='text-red dark:text-yellow'>before they report them</span>"
                     image="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/images/products/error-tracking.png"
