@@ -37,8 +37,8 @@ const useInkeepSettings = (): InkeepSharedSettings => {
             },
             tokens: {
                 fonts: {
-                    heading: "'MatterVF', sans-serif",
-                    body: "'MatterVF', sans-serif",
+                    heading: "'IBM Plex Sans', sans-serif",
+                    body: "'IBM Plex Sans', sans-serif",
                     mono: "'Source Code Pro', 'Menlo', 'Consolas', 'monaco', 'monospace'",
                 },
             },

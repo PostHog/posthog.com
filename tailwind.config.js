@@ -159,9 +159,9 @@ module.exports = {
             fontFamily: {
                 'fairytale-title': ['Fairytale', 'sans-serif'],
                 fairytale: ['Computer Modern', 'sans-serif'],
-                serif: ['Times New Roman', 'MatterVF', 'Arial', 'Helvetica', 'sans-serif'],
+                serif: ['Times New Roman', 'Arial', 'Helvetica', 'sans-serif'],
                 sans: [
-                    'MatterVF',
+                    'IBM Plex Sans',
                     '-apple-system',
                     'BlinkMacSystemFont',
                     'avenir next',
@@ -176,8 +176,8 @@ module.exports = {
                     'sans-serif',
                 ],
                 fancy: ['Zapfino', 'serif'],
-                button: ['MatterVF', 'sans-serif'],
-                nav: ['MatterVF', 'sans-serif'],
+                button: ['IBM Plex Sans', 'sans-serif'],
+                nav: ['IBM Plex Sans', 'sans-serif'],
                 code: ['Source Code Pro', 'Menlo', 'Consolas', 'monaco', 'monospace'],
                 squeak: ['Squeak', 'sans-serif'],
                 comic: [
