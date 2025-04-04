@@ -9,12 +9,12 @@ import { Popover } from 'components/RadixUI/Popover'
 
 const getSizeDefaults = () => ({
     max: {
-        width: Math.min(window.innerWidth * 0.9, 1200),
-        height: Math.min(window.innerHeight * 0.8, 800),
+        width: window.innerWidth * 0.9,
+        height: window.innerHeight * 0.9,
     },
     min: {
-        width: Math.max(window.innerWidth * 0.2, 300),
-        height: Math.max(window.innerHeight * 0.2, 200),
+        width: window.innerWidth * 0.2,
+        height: window.innerHeight * 0.2,
     },
 })
 
@@ -23,9 +23,12 @@ const Window = ({ item, constraintsRef }: { item: any; constraintsRef: any }) =>
     const controls = useDragControls()
     const [sizeDefaults, setSizeDefaults] = useState(getSizeDefaults())
     const [previousSize, setPreviousSize] = useState({ width: sizeDefaults.max.width, height: sizeDefaults.max.height })
-    const [size, setSize] = useState({ width: 767, height: 600 })
+    const [size, setSize] = useState({ width: sizeDefaults.max.width, height: sizeDefaults.max.height })
     const [previousPosition, setPreviousPosition] = useState({ x: 0, y: 0 })
-    const [position, setPosition] = useState({ x: 0, y: 0 })
+    const [position, setPosition] = useState(() => ({
+        x: window.innerWidth / 2 - size.width / 2,
+        y: window.innerHeight / 2 - size.height / 2,
+    }))
 
     useEffect(() => {
         const handleResize = () => {
