@@ -22,6 +22,11 @@ Send event data from PostHog into the Microsoft Teams server and channel of your
 4. Click **Next**, then **Add workflow**.
 5. Copy the webhook URL.
 
+> **Note:** The Microsoft Teams destination supports webhook URLs from:
+> - Azure Logic Apps (`logic.azure.com`)
+> - Power Platform (`webhook.office.com`)
+> - Power Automate (`powerautomate.com` or `flow.microsoft.com`)
+
 ### PostHog: create a destination
 
 1. Back in PostHog, click the **[Data pipelines](https://us.posthog.com/pipeline/overview)** tab in the left sidebar.
@@ -31,6 +36,8 @@ Send event data from PostHog into the Microsoft Teams server and channel of your
 5. Use the **Text** field to format your message. You can include any properties that exist on `event` or `person`.
 6. Use the **Filters** panel to set up a query to filter the events you want to send, otherwise you'll get a firehose of all events filling your channel.
 7. Press **Create & enable**. Events will now be sent to Microsoft Teams. If you'd like to send a test event to your channel, hit the **Start testing** button.
+
+> **Note:** For advanced customization, you can click the **Edit source** button to modify the destination's code directly. This allows you to tailor the destination to your specific needs beyond the standard configuration options. See our guide on [customizing destinations](/docs/cdp/destinations/customizing-destinations) for more details.
 
 <HideOnCDPIndex>
 

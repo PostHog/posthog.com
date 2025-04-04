@@ -15,12 +15,13 @@ import AngularInstall from "../integrate/_snippets/install-angular.mdx"
 import AngularErrorTracking from './_snippets/angular-install-error-tracking.mdx'
 import NextJSErrorTracking from './_snippets/nextjs-install-error-tracking.mdx'
 import SvelteErrorTracking from './_snippets/svelte-install-error-tracking.mdx'
+import ManualErrorTracking from './_snippets/manual-error-tracking.mdx'
 import UploadSourceMaps from './_snippets/upload-source-maps.mdx'
 
 Error tracking enables you to track, investigate, and resolve exceptions your customers face. Getting this working requires installing PostHog: 
 
 <!-- prettier-ignore -->
-<Tab.Group tabs={['Web', 'React', 'Python', 'Sentry']}>
+<Tab.Group tabs={['Web', 'React', 'Python', 'Node', 'Next.js', 'SvelteKit', 'Angular', 'Sentry', 'Manual']}>
     <Tab.List>
       <Tab>Web</Tab>
       <Tab>React</Tab>
@@ -30,6 +31,7 @@ Error tracking enables you to track, investigate, and resolve exceptions your cu
       <Tab>SvelteKit</Tab>
       <Tab>Angular</Tab>
       <Tab>Sentry</Tab>
+      <Tab>Manual/API</Tab>
     </Tab.List>
     <Tab.Panels>
         <Tab.Panel>
@@ -65,6 +67,9 @@ Error tracking enables you to track, investigate, and resolve exceptions your cu
         </Tab.Panel>
         <Tab.Panel>
           <SentryInstall />
+        </Tab.Panel>
+        <Tab.Panel>
+          <ManualErrorTracking />
         </Tab.Panel>
     </Tab.Panels>
 </Tab.Group>

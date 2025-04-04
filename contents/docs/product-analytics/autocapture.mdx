@@ -66,16 +66,17 @@ If there are specific elements you _don't_ want to capture, add the `ph-no-captu
 
 You can disable autocapture in your [project settings](https://us.posthog.com/project/settings) or by setting `autocapture: false` in the [config](/docs/libraries/js/config). If _one_ of these is disabled, autocapture is disabled.
 
+> **Note:** Disabling autocapture in your project settings isn't instant. PostHog will continue to capture events where it is initialized. Instead, autocaptured events will taper off as users trigger reinitialization of PostHog (like when they reload your site). 
+
 You can disable pageviews and pageleaves by setting `capture_pageview: false`. To just disable pageleaves, keep `capture_pageview: true` and set `capture_pageleave: false`.
 
 Disabling autocapture **does not disable [session recording](/docs/session-replay/manual)**. You can disable session recording by turning it off in your [project settings](https://app.posthog.com/project/settings) or using `disable_session_recording: true` in the config.
 
-> **Note:** You can update your config at runtime (e.g. to update an allowlist or disable autocapture) using the `posthog.set_config()` method. 
->
-> For example, to update the `capture_pageview` config:
-> ```js-web
-> posthog.set_config({ capture_pageview: false })
-> ```
+You can update any of these config options at runtime (e.g. to update an allowlist or disable autocapture) using the `posthog.set_config()` method like this:
+
+```js-web
+posthog.set_config({ capture_pageview: false })
+```
 
 ## Capturing additional properties in autocapture events
 
@@ -122,6 +123,39 @@ properties: {
     "product-name": "Red t-shirt",
     "product-price": "30",
     "product-quantity": "1"
+}
+```
+
+## Sending custom properties with autocaptured form submissions
+
+To prevent accidental sensitive data capture, we do not automatically capture form values from form submissions. To add custom properties to form submissions, you can use the `data-ph-capture-attribute` attribute on the form element.
+
+In this example, the `product-id` property will be sent with the form submission event. The `product-name` input will not be captured.
+
+```HTML
+<form
+    data-ph-capture-attribute-product-id="12345678"
+>
+    <input name="product-name" placeholder="this input will not be autocaptured"/>
+    <button type="submit">Submit</button>
+</form>
+```
+
+The following example shows how you can use the `data-ph-capture-attribute` attribute dynamically in a React component. The `product-name` property will be sent with the form submission event.
+
+```tsx
+import { useState } from 'react'
+
+const MyForm = () => {
+  const [productName, setProductName] = useState('')
+  return (
+    <form
+        data-ph-capture-attribute-name={productName}
+    >
+        <input name="product-name" onChange={(e) => setProductName(e.target.value)} value={productName}/>
+        <button type="submit">Submit</button>
+    </form>
+  )
 }
 ```
 

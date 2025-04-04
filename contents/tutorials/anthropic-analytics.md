@@ -199,6 +199,6 @@ From here, you can go further by filtering your LLM observability dashboard, use
 
 ## Further reading
 
-- [How to set up LLM analytics for ChatGPT](/tutorials/chatgpt-analytics)
+- [How to set up OpenAI observability](/tutorials/openai-observability)
 - [How to set up LLM analytics for Cohere](/tutorials/cohere-analytics)
 - [How to monitor LlamaIndex apps with Langfuse and PostHog](/tutorials/monitor-llama-index-with-langfuse)

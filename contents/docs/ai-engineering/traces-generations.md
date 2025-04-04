@@ -1,5 +1,5 @@
 ---
-title: LLM traces and generations (beta)
+title: LLM traces and generations
 availability:
   free: full
   selfServe: full

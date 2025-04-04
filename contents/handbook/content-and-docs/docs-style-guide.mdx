@@ -66,6 +66,41 @@ posthog.capture('user_signed_up', {
 })
 ```
 
+### Callout boxes
+
+import { CalloutBox } from '../../../src/components/Docs/CalloutBox'
+
+
+You can add callout boxes to documentation to ensure skimmers don't miss essential information.
+
+```jsx
+<CalloutBox icon="IconInfo" title="Here is some information" type="fyi">
+  Here is some information
+</CalloutBox>
+```
+
+Three styles are available:
+
+- `fyi`: this is for stuff that's helpful but not critical
+- `action`: these are tasks developers should complete and not miss
+- `caution`: these flag the potential for misconfiguration, data loss, and other churn vectors
+
+They look like this:
+
+<CalloutBox icon="IconInfo" title="Here is some information" type="fyi">
+  Provide detail here. You can go on at length if necessary.
+</CalloutBox>
+
+<CalloutBox icon="IconInfo" title="Here is some information" type="action">
+  Provide detail here. You can go on at length if necessary.
+</CalloutBox>
+
+<CalloutBox icon="IconWarning" title="Here is some information" type="caution">
+  Provide detail here. You can go on at length if necessary.
+</CalloutBox>
+
+Valid icons are listed in PostHog's <PrivateLink url="https://github.com/posthog/icons#posthogicons">icon library</PrivateLink>.
+
 ### Record videos
 
 For flows with many steps, it's often more helpful to include a video instead of a screenshot. We use [Screen Studio](https://screen.studio/) to record videos. Feel free to buy yourself a license.

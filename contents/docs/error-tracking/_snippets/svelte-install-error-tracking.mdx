@@ -6,7 +6,7 @@ import SvelteInstallClient from '../../integrate/_snippets/install-svelte-client
 
 <SvelteInstallClient />
 
-Lastly, you will need to capture exceptions in the `handleError` callback in your client-side hooks file.
+Lastly, you will need to capture exceptions in the `handleError` callback in your client-side hooks file:
 
 ```js file=src/hooks.client.js
 import { captureException } from 'posthog-js';
@@ -26,7 +26,7 @@ import SvelteInstallServer from '../../integrate/_snippets/install-svelte-server
 
 <SvelteInstallServer />
 
-To capture exceptions on the server-side, you will also need to implement the `handleError` callback.
+To capture exceptions on the server-side, you will also need to implement the `handleError` callback:
 
 ```js file=src/hooks.server.js
 import type { HandleServerError } from '@sveltejs/kit';
