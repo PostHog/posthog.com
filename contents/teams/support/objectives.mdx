@@ -1,21 +1,35 @@
-### Improve efficiency and consistency of how we use Zendesk (Ben)
-- **Rationale:** Less confusing Zendesk = more consistency across support and more efficient support.
-- **What we'll ship:** Improvements to, simplification of, and clarity around Zendesk procedures and implementation. This will include reviewing the way that we use views, statuses, ticket fields, tags, macros, triggers, and automations. The goal is to streamline our workflow and make it clearer what the support team should be looking at and what engineers should be looking at. The implementation in Zendesk at the moment is a bit cumbersome, leading to some confusion about what support heroes should be looking at, alert fatigue, and occasionally tickets getting lost. This goal will include both changes in Zendesk and handbook updates.
-- **We'll know we're successful when:** The first resolution time and full resolution time metrics are going down. SLA achievement should also be improved.
+### Improve support processes and consistently hit 90% SLA attainment 
+- **Owner:** <TeamMember name="Abigail Richardson" photo />
+- **Rationale:** Improving internal support processes and maintaining 90% SLA attainment will give customers a better support experience.
+- **What we'll ship:** Prioritization of top Sales/CS customers, maintain consistent treatment of priority and severity of tickets, direct free plan customers towards community, implement systems to prevent escalated tickets from going quiet.
+- **We'll know we're successful when:** SLAs attainment is consistently above 90%
 
-### Streamline support workflow by implementing features in ZenHog (Haynes)
-- **Rationale:** Improved support tooling = support can ship things faster.
-- **What we'll ship:** Integration with GitHub issue creation, links to user’s org’s Vitally and Stripe, and information / solution from related tickets.
-- **We'll know we're successful when:** The support team is actively using these tools and feeling less encumbered.
+### Improve prompting in Inkeep Max 
+- **Owner:** <TeamMember name="Steven Shults" photo />
+- **Rationale:** Improved prompting in Inkeep Max will allow Max to more reliably answer a larger number of tickets.
+- **What we'll ship:** Enhancements to the support Max AI.
+- **We'll know we're successful when:** A larger percentage of Max's community responses are marked as solution.
 
-### Optimize Max AI in the sidebar (Steven)
-- **Rationale:** Better Max = more case deflection = more time for support to spend on more complex tickets.
-- **What we'll ship:** Optimized Max (details coming soon to a GitHub issue near you).
-- **We'll know we're successful when:** Max is regularly deflecting a good number of tickets and that number is increasing with optimizations.
+### Deflect more tickets using Max AI 
+- **Owner:** <TeamMember name="Ben Lea" photo />
+- **Rationale:** Encouraging customers to use Max AI will decrease the number of support tickets, allowing us to focus time and effort on more complicated tickets.
+- **What we'll ship:** Improvements to the way Max is used in the support sidebar so that more customers are directed to use Max AI and/or their questions are run through Max AI as a precursor to sending the ticket to support.
+- **We'll know we're successful when:** The support contact rate is decreasing.
 
-### Everyone in support is an SME (Abigail)
-- **Rationale:** SMEs = less escalations to engineering = we ship more things.
-- **What we'll ship:** Framework and resources for developing SMEs in selected product areas. Implement these and train the current team as SMEs.
-- **We'll know we're successful when:** The percentage of escalated tickets is decreasing in areas that we have trained SMEs.
+### Improve how we search and retrieve information from internal knowledge sources 
+- **Owner:** <TeamMember name="Ben Haynes" photo />
+- **Rationale:** Quicker and more accurate access to internal knowledge will help us respond to tickets faster and more effectively, improving both response time and resolution rates.
+- **What we'll ship:** Improved search functionality or workflows for accessing internal documentation, GitHub issues/PRs, and past tickets
+- **We'll know we're successful when:** Support team members can consistently find the information they need without spending time digging through multiple sources. First response time (FRT) should be trending down.
 
+### Create SDK example apps which can be used internally by the support team 
+- **Owner:** <TeamMember name="Joshua Ordehi" photo />
+- **Rationale:** Having SDK example apps available to quickly get up and running will improve support response times and decrease the number of SDK/implementation ticket escalations.
+- **What we'll ship:** 2-3 example apps available in a public repo with fully-fledged examples of how PostHog can be integrated.
+- **We'll know we're successful when:** Support team members are able to use these apps to quickly reproduce customer issues and we're escalating fewer SDK/implementation tickets.
 
+### Better analytics on tickets 
+- **Owner:** <TeamMember name="Luke Belton" photo />
+- **Rationale:** A better understanding of where particular themes are coming up in tickets will allow us to understand what changes need to be made and the areas/products they need to be made in.
+- **What we'll ship:** Analytics and insights on the origins of tickets, what they are about, customer sentiment, etc.
+- **We'll know we're successful when:** We have a set of actionable insights to improve our customer experience and ticket deflection.

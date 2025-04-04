@@ -2,23 +2,28 @@ import React from 'react'
 import * as Icons from '@posthog/icons'
 
 const typeStyles = {
-    info: 'bg-yellow/10 border-l-yellow',
-    tip: 'bg-gray/10 border-l-gray',
-    success: 'bg-green/10 border-l-green',
-    caution: 'bg-red/10 border-l-red',
+    action: 'bg-yellow/15 border-yellow',
+    fyi: 'bg-gray/10 border-gray',
+    caution: 'bg-red/15 border-red',
 }
 
-export const CalloutBox = ({ icon, title, type = 'info', children }) => {
-    const Icon = Icons[icon]
-    const styles = typeStyles[type] || typeStyles.info
+export const CalloutBox = ({ icon, title, type, children }) => {
+    const Icon = Icons[icon] || Icons.IconInfo
+    const styles = typeStyles[type] || typeStyles.action
 
     return (
-        <div className={`my-4 mb-8 p-4 border-l-[10px] rounded-sm ${styles}`}>
-            <div className="flex items-center gap-2 mb-2">
-                {Icon && <Icon className="w-5 h-5" />}
-                <strong>{title}</strong>
+        <div className={`ph-callout mt-4 mb-6 p-4 border rounded ${styles}`}>
+            <div className="flex items-center gap-2 mb-0.5">
+                {Icon && (
+                    <div className="shrink-0 opacity-75">
+                        <Icon className="size-6" />
+                    </div>
+                )}
+                <strong className="text-lg">{title}</strong>
             </div>
-            <div className="[&>*:last-child]:mb-0 [&_p]:leading-snug [&_li]:leading-snug">{children}</div>
+            <div className="ph-text pl-8 text-[15px] [&_p]:text-[15px] [&_*]:text-[15px] [&>*:last-child]:mb-0 !leading-relaxed">
+                {children}
+            </div>
         </div>
     )
 }

@@ -193,7 +193,7 @@ We do not pre-approve your travel expenses, and trust team members to make the r
 - Related to the above, consider signing up for programs like Global Entry if you are regularly travelling to countries that offer it- these can pay for themselves in one trip with the amount of time saved, particularly when travelling to the US. PostHog will cover costs here.
 - When travelling internationally, PostHog does not cover roaming charges for your phone. You can expense a reasonable eSIM, which usually is no more than $20. 
 
-> If you find yourself needing to do extra travel outside of the regular things listed above, e.g. you've been asked to take a last minute trip to work on an emergency project, we may have some flexibility here, especially if you are travelling at very short notice or long haul. Talk to Fraser in the first instance if you think this may apply to you. This is intended for genuine one-offs, not where you've decided you'd like to come along to an extra offsite!
+> If you find yourself needing to do extra travel outside of the regular things listed above, e.g. you've been asked to take a last minute trip to work on an emergency project, we may pay for a nicer seat here, especially if you are travelling at very short notice or long haul. Talk to Fraser in the first instance if you think this may apply to you. This is intended for genuine one-offs, not where you've decided you'd like to come along to an extra offsite!
 
 ### Budget for working together/socializing
 
