@@ -58,7 +58,7 @@ const teamSlug = '/teams/error-tracking'
 const features = [
     {
         title: 'Alert',
-        description: 'Get notified of new issues via email, Slack, or any webhook',
+        description: 'Get notified of new issues by email, Slack, or via any webhook',
         image: (
             <CloudinaryImage
                 src="https://res.cloudinary.com/dmukukwp6/image/upload/screenshot_alerts_00824b03f5.png"
