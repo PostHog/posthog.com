@@ -1,31 +1,14 @@
 import CloudinaryImage from 'components/CloudinaryImage'
 import React, { useState } from 'react'
 import Link from 'components/Link'
-import {
-    IconWarning,
-    IconGraph,
-    IconHogQL,
-    IconClock,
-    IconToggle,
-    IconDecisionTree,
-    IconRewindPlay,
-    IconCheck,
-    IconAI,
-    IconPerson,
-    IconPencil,
-    IconTrends,
-    IconUser,
-} from '@posthog/icons'
+import { IconWarning, IconGraph, IconToggle, IconRewindPlay, IconTrends, IconUser } from '@posthog/icons'
 import { CallToAction } from 'components/CallToAction'
 import { CustomerCard } from 'components/Products/CustomerCard'
-import { TutorialCard } from 'components/Products/TutorialCard'
 import { Hero } from 'components/Products/Hero'
 import { Feature } from 'components/Products/Feature'
 import { Subfeature } from 'components/Products/Subfeature'
 import { docsMenu } from '../../../navs'
-import TeamRoadmap from 'components/TeamRoadmap'
 import { Marquee } from 'components/Products/Marquee'
-import RecentChange from '../RecentChange'
 import TeamMembers from '../TeamMembers'
 import Questions from '../Questions'
 import CTA from 'components/Home/CTA'
@@ -34,7 +17,6 @@ import { PairsWithItem } from 'components/Products/PairsWith/item'
 import { Question } from 'components/Products/Question'
 import { DocLinks } from 'components/Products/DocsLinks'
 import { SmoothScroll } from 'components/Products/SmoothScroll'
-import { FAQ } from 'components/Products/FAQ'
 import { SEO } from 'components/seo'
 import { useLayoutData } from 'components/Layout/hooks'
 import Plans from 'components/Pricing/Plans'
@@ -44,6 +26,7 @@ import { VsCompetitor } from 'components/Products/Competitor'
 import { VsPostHog } from 'components/Products/Competitor/VsPostHog'
 import Comparison from '../Comparison'
 import { useStaticQuery, graphql } from 'gatsby'
+import { FAQ } from 'components/Products/FAQ'
 
 interface ProfileData {
     firstName: string
@@ -66,17 +49,16 @@ const product = {
     slug: 'error-tracking',
     lowercase: 'error tracking',
     capitalized: 'Error tracking',
-    freeTier: '10,000 events',
+    freeTier: '100,000 events',
 }
 
 const team = 'Error Tracking'
 const teamSlug = '/teams/error-tracking'
 
-const featuresPerRow = 4
 const features = [
     {
-        title: 'Alerts',
-        description: 'Get notifications of new errors by email, Slack, or webhook',
+        title: 'Alert',
+        description: 'Get notified of new issues by email, Slack, or any webhook',
         image: (
             <CloudinaryImage
                 src="https://res.cloudinary.com/dmukukwp6/image/upload/screenshot_alerts_00824b03f5.png"
@@ -86,8 +68,8 @@ const features = [
         ),
     },
     {
-        title: 'Assign errors',
-        description: 'Task issues to teams or individual members',
+        title: 'Assign',
+        description: 'Triage issues to teams or colleagues',
         image: (
             <CloudinaryImage
                 src="https://res.cloudinary.com/dmukukwp6/image/upload/screenshot_assign_4c9bb9ee60.png"
@@ -108,9 +90,9 @@ const features = [
         ),
     },
     {
-        title: 'Stack traces',
+        title: 'See the full picture',
         description:
-            "Get code context automatically with PostHog's server-side libraries, or upload source maps for front-end frameworks",
+            "Get code line context automatically with PostHog's server-side libraries, or upload source maps for front-end frameworks",
         image: (
             <CloudinaryImage
                 src="https://res.cloudinary.com/dmukukwp6/image/upload/screenshot_trace_3fc569059c.png"
@@ -121,32 +103,30 @@ const features = [
     },
 ]
 
-const subfeaturesItemCount = 4
 const subfeatures = [
     {
         title: 'Session replay',
-        description:
-            'Watch session recordings of users who triggered errors for more context about how to reproduce an issue',
+        description: 'Watch session recordings of users who hit bugs, to make reproducing a breeze',
         icon: <IconRewindPlay />,
         color: 'yellow',
     },
     {
         title: 'Product analytics',
         description:
-            'Graph the <code>$exception</code> event and use filters and grouping to determine where errors happen and what to prioritize',
+            'Graph your <code>$exception</code> events, and use filters and grouping to see where errors happen, and what to prioritize',
         icon: <IconTrends />,
         color: 'blue',
     },
     {
         title: 'Feature flags',
-        description: 'Test potential fixes by rolling out code changes only to affected users',
+        description: 'Test fixes by rolling out code changes only to affected users',
         icon: <IconToggle />,
         color: 'seagreen',
     },
     {
         title: 'User profiles',
         description:
-            'See all <code>$exception</code> events for specific users in their event history log and find which feature flags were enabled at the time an error occurred',
+            'View all the <code>$exception</code> events for specific users, and which feature flags were enabled at the time an error occurred',
         icon: <IconUser />,
         color: 'purple',
     },
@@ -161,38 +141,22 @@ const questions = [
         question: 'How can I analyze error patterns?',
         url: '/docs/error-tracking/monitoring',
     },
-    {
-        question: 'How do I set up error alerts?',
-        url: '/docs/error-tracking/alerts',
-    },
-    {
-        question: 'How can I integrate with existing tools?',
-        url: '/docs/error-tracking/integrations',
-    },
-    {
-        question: 'How do I manage error retention?',
-        url: '/docs/error-tracking/retention',
-    },
-    {
-        question: 'How can I use session replay with errors?',
-        url: '/docs/error-tracking/session-replay',
-    },
 ]
 
 const faqs = [
     {
         question: 'What is error tracking?',
-        answer: 'Error tracking helps you monitor and analyze errors in your application. It provides detailed stack traces, error context, and analytics to help you identify and fix issues quickly.',
+        answer: 'Error tracking helps you capture and analyze errors in your application. It provides detailed stack traces, error context, and analytics to help you identify and fix issues quickly.',
         children: null,
     },
     {
         question: 'How does pricing work?',
-        answer: 'Error tracking is free up to 10,000 events per month. After that, you pay per event with volume-based discounts.',
+        answer: 'Error tracking is free up to 100,000 events per month. After that, you pay per event with volume-based discounts.',
         children: null,
     },
     {
         question: 'What data is collected?',
-        answer: "We collect error messages, stack traces, error context, and associated metadata. You can configure what data is sent and how long it's retained.",
+        answer: 'We automatically collect error messages, stack traces, error context, and associated metadata, as well as any extra data you attach to the error.',
         children: null,
     },
     {
@@ -314,15 +278,6 @@ const comparison = [
     },
 ]
 
-interface HeroProps {
-    color: string
-    icon: React.ReactNode
-    product: string
-    title: string
-    description: string
-    image: string | React.ReactNode
-}
-
 export const ProductErrorTracking = () => {
     const { fullWidthContent } = useLayoutData()
     const [activeProfile, setActiveProfile] = useState<ProfileData | null>(null)
@@ -362,8 +317,8 @@ export const ProductErrorTracking = () => {
                     color="orange"
                     icon={<IconWarning />}
                     product={product.capitalized}
-                    title="Track errors and resolve issues"
-                    description="Take your product from exception to exceptional"
+                    title="Track, group, and fix errors" // Alternative here was "Errors: Catch'em, track'em, group'em, fix'em"
+                    description="Solve the issues your users see, <span class='text-red dark:text-yellow'>before</span> they report them"
                     image="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/images/products/error-tracking.png"
                 />
 
@@ -455,12 +410,10 @@ export const ProductErrorTracking = () => {
                         </div>
 
                         <div className="px-5 md:px-0 lg:w-96 lg:mt-4">
-                            {/* 
                             <h4 className="text-3xl">FAQs</h4>
                             {faqs.map((faq, index) => {
                                 return <FAQ {...faq} key={index} />
                             })}
-                             */}
                         </div>
                     </div>
                 </section>
