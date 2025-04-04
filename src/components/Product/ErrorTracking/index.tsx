@@ -1,3 +1,23 @@
+// Everything you’d expect in an error tracking product, but *10x better in the PostHog ecosystem*
+
+// Sure you can use error tracking solo, but it's 10x better with other PostHog products.
+
+// - Session replay: Watch session recordings of users who triggered errors for more context about how to reproduce an issue.
+// - Product analytics: Graph the `$exception` event and use filtering and grouping to determine how errors happen and what to prioritize.
+// - Feature flags:  Test potential fixes by rolling out code changes only to affected users.
+// - User profiles: See all `$exception` events for specific users in their event history log and find which feature flags were enabled at the time an error occurred.
+
+// Find, inspect, fix
+
+// - Alerts
+//   Get notified of new errors by email, Slack, or webhook
+// - Assign errors
+//   Task issues to teams or individual members
+// - Organize and prioritize
+//   Merge issues, sort by frequency or recency, or use text search to find specific errors
+// - Stack traces
+//   Get code context automatically with PostHog's server-side libraries, or upload source maps for front-end frameworks
+
 import CloudinaryImage from 'components/CloudinaryImage'
 import React, { useState } from 'react'
 import Link from 'components/Link'
@@ -13,6 +33,8 @@ import {
     IconAI,
     IconPerson,
     IconPencil,
+    IconTrends,
+    IconUser,
 } from '@posthog/icons'
 import { CallToAction } from 'components/CallToAction'
 import { CustomerCard } from 'components/Products/CustomerCard'
@@ -73,9 +95,8 @@ const teamSlug = '/teams/error-tracking'
 const featuresPerRow = 4
 const features = [
     {
-        title: 'Get alerts',
-        name: 'Get alerts',
-        description: 'Get email alerts when something goes wrong. Or lots of somethings.',
+        title: 'Alerts',
+        description: 'Get notifications of new errors by email, Slack, or webhook',
         image: (
             <CloudinaryImage
                 src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/images/products/error-tracking-alerts.png"
@@ -85,9 +106,8 @@ const features = [
         ),
     },
     {
-        title: 'Error monitoring',
-        name: 'Error monitoring',
-        description: 'Visually track error rates and impact across your product',
+        title: 'Assign errors',
+        description: 'Task issues to teams or individual members',
         image: (
             <CloudinaryImage
                 src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/images/products/error-tracking-monitoring.png"
@@ -97,9 +117,8 @@ const features = [
         ),
     },
     {
-        title: 'Stack traces',
-        name: 'Stack traces',
-        description: 'Upload source maps and follow the error path to the end of line',
+        title: 'Organize and prioritize',
+        description: 'Merge issues, sort by frequency or recency, or use text search to find specific errors',
         image: (
             <CloudinaryImage
                 src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/images/products/error-tracking-stack.png"
@@ -109,9 +128,9 @@ const features = [
         ),
     },
     {
-        title: 'Issue assignment',
-        name: 'Issue assignment',
-        description: 'Assign issues to individuals or groups, so everyone knows who to blame',
+        title: 'Stack traces',
+        description:
+            "Get code context automatically with PostHog's server-side libraries, or upload source maps for front-end frameworks",
         image: (
             <CloudinaryImage
                 src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/images/products/error-tracking-assignment.png"
@@ -125,24 +144,31 @@ const features = [
 const subfeaturesItemCount = 4
 const subfeatures = [
     {
-        title: 'Detect exception events',
-        description: 'Keep an eye on volumes with sparklines, or get email alerts when issues occur.',
-        icon: <IconWarning />,
+        title: 'Session replay',
+        description:
+            'Watch session recordings of users who triggered errors for more context about how to reproduce an issue',
+        icon: <IconRewindPlay />,
+        color: 'yellow',
     },
     {
         title: 'Assign <s>blame</s> an owner',
-        description: "Assign issues to an individual, or a group, so everyone knows who's responsible.",
-        icon: <IconPerson />,
+        description:
+            'Graph the <code>$exception</code> event and use filters and grouping to determine where errors happen and what to prioritize',
+        icon: <IconTrends />,
+        color: 'blue',
     },
     {
-        title: 'Investigate errors',
-        description: 'Examine the code with stack trace, or jump to a session replay to see bugs in action.',
-        icon: <IconPencil />,
+        title: 'Feature flags',
+        description: 'Test potential fixes by rolling out code changes only to affected users',
+        icon: <IconToggle />,
+        color: 'seagreen',
     },
     {
-        title: 'Solve issues',
-        description: 'Debug and test fixes with feature flags to ensure you solve errors for good. ',
-        icon: <IconCheck />,
+        title: 'User profiles',
+        description:
+            'See all <code>$exception</code> events for specific users in their event history log and find which feature flags were enabled at the time an error occurred',
+        icon: <IconUser />,
+        color: 'purple',
     },
 ]
 
@@ -216,7 +242,7 @@ const PairsWithArray = [
     },
     {
         title: 'Feature Flags',
-        description: 'Roll back features cause errors, or test fixes with slow rollouts',
+        description: 'Roll back features that cause errors, or test fixes with slow rollouts',
         icon: <IconToggle />,
         product: 'Feature Flags',
         url: '/feature-flags',
@@ -353,54 +379,47 @@ export const ProductErrorTracking = () => {
             </SideModal>
             <div className={`${fullWidthContent ? 'max-w-full px-8' : 'max-w-7xl mx-auto'} px-5 py-10 md:pt-20 pb-0`}>
                 <Hero
-                    color="red"
+                    color="orange"
                     icon={<IconWarning />}
                     product={product.capitalized}
-                    title='Track errors and assign issues to <span className="text-red dark:text-yellow">build better products</span>'
+                    title="Track errors and resolve issues"
                     description="Take your product from exception to exceptional"
                     image="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/images/products/error-tracking.png"
                 />
 
                 <div className="text-center">
                     <CloudinaryImage
-                        src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/images/products/screenshot-error-tracking.png"
+                        src="https://res.cloudinary.com/dmukukwp6/image/upload/screenshot_error_tracking_0f93eb652d.png"
                         alt="Screenshot of the PostHog error tracking"
                         className="w-full max-w-[1440px]"
                         placeholder="none"
                     />
                 </div>
 
-                <section id="customers" className="-mt-36 pt-36">
-                    <ul className="list-none p-0 grid md:grid-cols-4 gap-4 mb-10 md:mb-20">
+                <section id="customers" className="-mt-84 pt-84">
+                    <ul className="list-none p-0 grid-cols-2 md:grid-cols-4 gap-4 mb-10 md:mb-20">
+                        <li className="hidden md:block"></li>
                         <CustomerCard
-                            outcome="switched to PostHog from BugSnag and Amplitude"
-                            quote="“In two clicks, I can see who had an error, then their replays. The more of PostHog you use, the more powerful it becomes.”"
+                            outcome="switched from BugSnag and Amplitude"
+                            quote='"In two clicks, I can see who had an error, then their replays. The more of PostHog you use, the more powerful it becomes."'
                             customer={zealot}
+                            colspan={2}
                         />
+                        <li className="hidden md:block"></li>
                     </ul>
                 </section>
 
-                <div className="grid md:grid-cols-2 gap-8 mt-20">
-                    <div>
-                        <h2 className="text-4xl md:text-5xl">Great on it's own</h2>
-                        <p className="text-lg opacity-75">
-                            Comprehensive error tracking out of the box, with issue management and stack tracing that
-                            just works.
-                        </p>
-                    </div>
-                    <div>
-                        <h2 className="text-4xl md:text-5xl">
-                            Better with <span className="text-red dark:text-yellow">Product OS</span>
-                        </h2>
-                        <p className="text-lg opacity-75">
-                            Usable alongside other PostHog products, including session replay, product analytics,
-                            feature flags, and more.
-                        </p>
-                    </div>
-                </div>
+                <section id="features" className="-mt-36 pt-36">
+                    <h2 className="text-4xl md:text-5xl">
+                        All the features you'd expect, but{' '}
+                        <span className="text-red dark:text-yellow">10x better in the PostHog ecosystem</span>
+                    </h2>
+                    <p className="text-lg opacity-75">
+                        Sure you can use error tracking solo, but it's better with other PostHog products.
+                    </p>
+                </section>
 
                 <div className="mt-20">
-                    <h2 className="text-4xl md:text-5xl text-center">Detect, debug, and destroy errors</h2>
                     <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 mt-12">
                         {subfeatures.map((subfeature, index) => (
                             <Subfeature key={index} {...subfeature} />
@@ -409,11 +428,11 @@ export const ProductErrorTracking = () => {
                 </div>
 
                 <div className="mt-20">
-                    <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+                    <ul className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 list-none p-0">
                         {features.map((feature, index) => (
                             <Feature key={index} {...feature} />
                         ))}
-                    </div>
+                    </ul>
                 </div>
 
                 <section
@@ -446,7 +465,7 @@ export const ProductErrorTracking = () => {
                                 alt="Just another hedgehog"
                                 placeholder="blurred"
                                 className="w-full max-w-[250px]"
-                                src="https://res.cloudinary.com/dmukukwp6/image/upload/error_hog_c2eff84e29.png"
+                                src="https://res.cloudinary.com/dmukukwp6/image/upload/screenshot_error_tracking_0f93eb652d.png"
                             />
                         </div>
                     </div>
@@ -484,7 +503,7 @@ export const ProductErrorTracking = () => {
 
                         <p className="text-center mb-2">
                             PostHog works in small teams. The <Link to={teamSlug}>{team}</Link> team is responsible for
-                            building the {product.lowercase}.
+                            building this product.
                         </p>
                         <TeamMembers teamName={team} setActiveProfile={setActiveProfile} />
                     </div>
@@ -515,7 +534,7 @@ export const ProductErrorTracking = () => {
 
                         <section className="mb-20">
                             <h3 className="text-center mb-8">So, what's best for you?</h3>
-                            <div className="mb-8 mx-5 md:mx-0 grid md:grid-cols-2 gap-4">
+                            <div className="@container mb-8 mx-5 md:mx-0 grid md:grid-cols-2 gap-4">
                                 <VsCompetitor
                                     title="Reasons a competitor may be best for you (for now...)"
                                     image={
@@ -545,20 +564,12 @@ export const ProductErrorTracking = () => {
                                 </VsCompetitor>
                                 <VsPostHog>
                                     <ul>
-                                        <li>
-                                            Integration with other PostHog products
-                                            <ul className="pl-6">
-                                                <li className="text-sm">
-                                                    View replays attached to errors, analyze error patterns with
-                                                    analytics, etc.
-                                                </li>
-                                            </ul>
-                                        </li>
+                                        <li>Integration with other PostHog products</li>
                                         <li>
                                             Feature flags for error recovery
                                             <ul className="pl-6">
                                                 <li className="text-sm">
-                                                    Quickly roll back features that cause errors
+                                                    Quickly roll back features that cause errors.
                                                 </li>
                                             </ul>
                                         </li>
