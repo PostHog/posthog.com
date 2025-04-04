@@ -79,7 +79,7 @@ const features = [
         ),
     },
     {
-        title: 'Organize and prioritize',
+        title: 'Organize and analyze',
         description: 'Merge issues, sort by frequency or recency, or use text search to find specific errors',
         image: (
             <CloudinaryImage
