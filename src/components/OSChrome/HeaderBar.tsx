@@ -55,6 +55,7 @@ export default function HeaderBar({
                     variants={sidebarVariants}
                     custom={leftSidebarWidth}
                     animate={isNavVisible ? 'open' : 'closed'}
+                    initial={{ width: leftSidebarWidth }}
                 >
                     {showHome && <OSButton variant="ghost" icon={<IconHome />} />}
                     {showSidebar && (

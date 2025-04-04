@@ -184,7 +184,7 @@ export default function ReaderView({ body, title, tableOfContents, mdxComponents
                         <motion.div
                             id="nav"
                             className="flex-shrink-0 overflow-hidden mb-[-53px]"
-                            initial={{ width: 0 }}
+                            initial={{ width: leftSidebarWidth }}
                             animate={{
                                 width: leftSidebarWidth,
                                 transition: { duration: 0.2 },
@@ -196,7 +196,7 @@ export default function ReaderView({ body, title, tableOfContents, mdxComponents
                         >
                             <motion.div
                                 className="h-full"
-                                initial={{ opacity: 0 }}
+                                initial={{ opacity: 1 }}
                                 animate={{
                                     opacity: 1,
                                     transition: { duration: 0.05, delay: 0.2 },
@@ -261,7 +261,7 @@ export default function ReaderView({ body, title, tableOfContents, mdxComponents
                         <motion.div
                             id="toc"
                             className="hidden @4xl:block flex-shrink-0 overflow-hidden"
-                            initial={{ width: 0 }}
+                            initial={{ width: '300px' }}
                             animate={{
                                 width: '300px',
                                 transition: { duration: 0.2 },
@@ -273,7 +273,7 @@ export default function ReaderView({ body, title, tableOfContents, mdxComponents
                         >
                             <motion.div
                                 className="h-full"
-                                initial={{ opacity: 0 }}
+                                initial={{ opacity: 1 }}
                                 animate={{
                                     opacity: 1,
                                     transition: { duration: 0.05, delay: 0.2 },
@@ -322,6 +322,7 @@ export default function ReaderView({ body, title, tableOfContents, mdxComponents
                     variants={sidebarVariants}
                     custom={leftSidebarWidth}
                     animate={isNavVisible ? 'open' : 'closed'}
+                    initial={{ width: leftSidebarWidth }}
                 >
                     {/* this space intentionally left blank */}
                 </motion.div>
