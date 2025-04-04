@@ -12,6 +12,7 @@ import {
     IconX,
     IconPullRequest,
     IconTextWidth,
+    IconGear,
 } from '@posthog/icons'
 import ScrollArea from 'components/RadixUI/ScrollArea'
 import { DebugContainerQuery } from 'components/DebugContainerQuery'
@@ -29,6 +30,8 @@ import ElementScrollLink, { ScrollSpyProvider } from 'components/ElementScrollLi
 import { useLocation } from '@reach/router'
 import menu from '../../navs'
 import { TreeMenu } from 'components/TreeMenu'
+import { Fieldset } from 'components/OSFieldset'
+import SliderDemo from 'components/RadixUI/Slider'
 
 interface SidebarState {
     isOpen: boolean
@@ -107,6 +110,52 @@ function recursiveSearch(array, value) {
     }
 
     return false
+}
+
+const backgroundImageOptions: ToggleOption[] = [
+    {
+        label: 'None',
+        value: 'none',
+        // icon: <IconLaptop className="size-5" />,
+        default: true,
+    },
+    {
+        label: '2',
+        value: '2',
+        // icon: <IconDay className="size-5" />,
+    },
+    {
+        label: '3',
+        value: '3',
+        // icon: <IconNight className="size-5" />,
+    },
+]
+
+const AppOptionsButton = () => {
+    return (
+        <Popover
+            title="Options"
+            dataScheme="secondary"
+            trigger={<IconGear className="size-5" />}
+            contentClassName="w-80"
+        >
+            <div className="w-full h-full bg-primary text-primary space-y-2">
+                <Fieldset legend="Paragraphs">
+                    <div className="grid grid-cols-2 gap-2">
+                        <label className="text-[15px]">Line height</label>
+                        <SliderDemo />
+                    </div>
+                </Fieldset>
+
+                <Fieldset legend="Why not?">
+                    <div className="grid grid-cols-2 gap-2">
+                        <label className="pt-1.5 text-[15px]">Background image</label>
+                        <ToggleGroup title="Background image" options={backgroundImageOptions} />
+                    </div>
+                </Fieldset>
+            </div>
+        </Popover>
+    )
 }
 
 const textWidthOptions: ToggleOption[] = [
@@ -320,10 +369,10 @@ export default function ReaderView({ body, title, tableOfContents, mdxComponents
                 >
                     {/* this space intentionally left blank */}
                 </motion.div>
-                <div className="flex-grow flex justify-between">
+                <div className="flex-grow flex justify-between items-center">
                     <div>Questions?</div>
                     <div>
-                        <ToggleGroup title="Text width" options={textWidthOptions} />
+                        <AppOptionsButton />
                     </div>
                 </div>
                 <motion.div

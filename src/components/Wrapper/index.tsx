@@ -18,6 +18,7 @@ import Desktop from 'components/Desktop'
 import { DarkModeToggle } from 'components/DarkModeToggle'
 import { Popover } from 'components/RadixUI/Popover'
 import { ToggleGroup, ToggleOption } from 'components/RadixUI/ToggleGroup'
+import { Fieldset } from 'components/OSFieldset'
 
 const getSizeDefaults = () => ({
     max: {
@@ -205,19 +206,17 @@ const colorModeOptions: ToggleOption[] = [
         icon: <IconNight className="size-5" />,
     },
 ]
+
 const SiteOptionsButton = () => {
     return (
         <Popover title="Settings" dataScheme="secondary" trigger={<span>Site options</span>} contentClassName="w-80">
             <div className="w-full h-full bg-primary text-primary">
-                <fieldset className="p-2">
-                    <legend>Display</legend>
-                    <div className="flex flex-col gap-1">
-                        <div className="grid grid-cols-2 gap-2">
-                            <label className="pt-1.5 text-[15px]">Color mode</label>
-                            <ToggleGroup title="Color mode" options={colorModeOptions} />
-                        </div>
+                <Fieldset legend="Display">
+                    <div className="grid grid-cols-2 gap-2">
+                        <label className="pt-1.5 text-[15px]">Color mode</label>
+                        <ToggleGroup title="Color mode" options={colorModeOptions} />
                     </div>
-                </fieldset>
+                </Fieldset>
 
                 <div className="flex items-center justify-between space-x-2">
                     <span>Dark mode</span>
