@@ -224,6 +224,8 @@ const PricingExperiment = (): JSX.Element => {
     } = useStaticQuery(allProductsData)
 
     const [activePlan, setActivePlan] = useState('free')
+    const [pricingViewers, setPricingViewers] = useState()
+    const [pricingViewersLoading, setPricingViewersLoading] = useState(true)
 
     useEffect(() => {
         const params = new URLSearchParams(window.location.search)
@@ -242,6 +244,25 @@ const PricingExperiment = (): JSX.Element => {
         setActivePlan('paid')
         window.history.pushState(null, '', '?plan=paid')
     }
+
+    useEffect(() => {
+        fetch('/api/pricing-viewers', {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        })
+            .then((res) => res.json())
+            .then((data) => {
+                if (data?.count) {
+                    setPricingViewers(data.count)
+                    setPricingViewersLoading(false)
+                }
+            })
+            .catch(() => {
+                console.error('Error fetching pricing viewers')
+            })
+    }, [])
 
     return (
         <>
@@ -305,7 +326,7 @@ const PricingExperiment = (): JSX.Element => {
                             </div>
                         </div>
 
-                        <ul className="list-none flex flex-col @md:flex-row gap-2 p-0 -mx-4 px-4 md:mx-0 pb-1 md:pb-0 md:px-0 md:mb-6 overflow-x-auto">
+                        <ul className="list-none flex flex-col @md:flex-row gap-2 p-0 -mx-4 px-4 md:mx-0 pb-1 md:pb-0 md:px-0 overflow-x-auto">
                             <li>
                                 <button
                                     onClick={handleFreePlanClick}
@@ -335,6 +356,18 @@ const PricingExperiment = (): JSX.Element => {
                                 </button>
                             </li>
                         </ul>
+                        {!pricingViewersLoading && (
+                            <p className="animate-pulse text-sm text-red font-bold m-0 mt-4">
+                                <span className="text-[13px]">
+                                    Act fast! {pricingViewers} potential customer
+                                    {pricingViewers === 1 ? ' is' : 's are'} LITERALLY looking at this page RIGHT NOW!*
+                                </span>
+                                <br />
+                                <span className="text-[10px] italic opacity-75">
+                                    *Side effects may include increased revenue and customer happiness
+                                </span>
+                            </p>
+                        )}
                     </div>
 
                     <div className="border-t border-light dark:border-dark mt-4 pt-4 h-px"></div>
@@ -450,7 +483,7 @@ const PricingExperiment = (): JSX.Element => {
                                     <Link href="/side-project-insurance">
                                         your side project unexpectedly goes viral
                                     </Link>{' '}
-                                    or you’re unhappy), we’ll pretty much always refund it!
+                                    or you're unhappy), we'll pretty much always refund it!
                                 </SidebarListItem>
                                 <SidebarListItem>
                                     We've also written{' '}
@@ -555,7 +588,7 @@ const PricingExperiment = (): JSX.Element => {
                         <p className="text-white m-0 text-[18px] font-bold font-comic">
                             Looking for the signup button?
                         </p>
-                        <p className="text-[15px] mt-0 mb-2 text-white font-comic">(I’ll take you there.)</p>
+                        <p className="text-[15px] mt-0 mb-2 text-white font-comic">(I'll take you there.)</p>
                         <button
                             onClick={() => scroll.scrollToTop()}
                             className="mx-auto flex space-x-2 items-center bg-red text-[15px] font-bold text-white px-3 py-2 rounded-sm relative active:top-[1px] active:scale-[.97]"
