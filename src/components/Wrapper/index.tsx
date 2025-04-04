@@ -1,11 +1,23 @@
 import React, { useEffect, useRef, useState } from 'react'
 import { AnimatePresence, motion, useDragControls } from 'framer-motion'
-import { IconCollapse45, IconExpand45, IconMinus, IconX, IconCode } from '@posthog/icons'
+import {
+    IconCollapse45,
+    IconExpand45,
+    IconMinus,
+    IconX,
+    IconCode,
+    IconTextWidth,
+    IconLightBulb,
+    IconDay,
+    IconNight,
+    IconLaptop,
+} from '@posthog/icons'
 import { useApp } from '../../context/App'
 import { Provider as WindowProvider } from '../../context/Window'
 import Desktop from 'components/Desktop'
 import { DarkModeToggle } from 'components/DarkModeToggle'
 import { Popover } from 'components/RadixUI/Popover'
+import { ToggleGroup, ToggleOption } from 'components/RadixUI/ToggleGroup'
 
 const getSizeDefaults = () => ({
     max: {
@@ -175,6 +187,24 @@ const Window = ({ item, constraintsRef }: { item: any; constraintsRef: any }) =>
     )
 }
 
+const colorModeOptions: ToggleOption[] = [
+    {
+        label: 'System',
+        value: 'system',
+        icon: <IconLaptop className="size-5" />,
+    },
+    {
+        label: 'Light',
+        value: 'light',
+        icon: <IconDay className="size-5" />,
+        default: true,
+    },
+    {
+        label: 'Dark',
+        value: 'dark',
+        icon: <IconNight className="size-5" />,
+    },
+]
 const SiteOptionsButton = () => {
     return (
         <Popover
@@ -184,6 +214,8 @@ const SiteOptionsButton = () => {
             contentClassName="w-[260px]"
         >
             <div data-scheme="secondary" className="w-full h-full bg-primary text-primary">
+                <ToggleGroup title="Color mode" options={colorModeOptions} />
+
                 <div className="flex items-center justify-between space-x-2">
                     <span>Dark mode</span>
                     <DarkModeToggle />

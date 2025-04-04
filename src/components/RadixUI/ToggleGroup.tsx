@@ -9,7 +9,7 @@ const toggleGroupItemClasses =
 export interface ToggleOption {
     label: string
     value: string
-    icon: React.ReactNode
+    icon?: React.ReactNode
     default?: boolean
 }
 
@@ -35,7 +35,7 @@ export const ToggleGroup = ({ title, options }: ToggleGroupProps) => {
                     value={option.value}
                     aria-label={option.label}
                 >
-                    {option.icon}
+                    {option.icon ? option.icon : option.label}
                 </RadixToggleGroup.Item>
             ))}
         </RadixToggleGroup.Root>
