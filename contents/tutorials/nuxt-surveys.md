@@ -49,7 +49,7 @@ Run `npm run dev` to start your app.
 
 > This tutorial shows how to integrate PostHog with `Nuxt 3`. If you're using `Nuxt 2`, see [our Nuxt docs](/docs/libraries/nuxt-js) for how to integrate PostHog.
 
-We use PostHog to create and control our survey as well as monitor results. If you don't have a PostHog instance, you can [sign up for free here](https://us.posthog.com/signup). 
+We use PostHog to create and control our survey as well as monitor results. If you don't have a PostHog instance, you can [sign up for free here](https://us.posthog.com/signup).
 
 To set it up with your Nuxt app, first install `posthog-js`:
 
@@ -62,7 +62,7 @@ Then, add your PostHog API key and host to your `nuxt.config.ts` file. You can f
 ```ts file=nuxt.config.ts
 export default defineNuxtConfig({
   // ...rest of your config
-  
+
   runtimeConfig: {
     public: {
       posthogPublicKey: '<ph_project_api_key>',
@@ -76,7 +76,7 @@ Create a new [plugin](https://nuxt.com/docs/guide/directory-structure/plugins) b
 
 ```bash
 mkdir plugins
-cd plugins 
+cd plugins
 touch posthog.client.js
 ```
 
@@ -92,7 +92,7 @@ export default defineNuxtPlugin(nuxtApp => {
     api_host: runtimeConfig.public.posthogHost,
   })
 
-  
+
   return {
     provide: {
       posthog: () => posthogClient
@@ -104,9 +104,9 @@ export default defineNuxtPlugin(nuxtApp => {
 Once you’ve done this, reload your app. You should begin seeing events in the [PostHog events explorer](https://us.posthog.com/events).
 
 <ProductScreenshot
-  imageLight={EventsLight} 
-  imageDark={EventsDark} 
-  alt="Events in PostHog" 
+  imageLight={EventsLight}
+  imageDark={EventsDark}
+  alt="Events in PostHog"
   classes="rounded"
 />
 
@@ -122,13 +122,13 @@ This tutorial will cover how to implement both options:
 ### Option 1: Use PostHog's prebuilt survey UI
 
 This is the simplest option. PostHog has a variety of [survey templates](/templates?filter=type&value=survey) to choose from, and handles all the display logic and response capture for you. You can also customize the questions, branding, and display conditions as needed – see our [survey docs](/docs/surveys/creating-surveys) for more details on how to do so.
- 
-To create a survey with a prebuilt UI, go to the [surveys tab](https://us.posthog.com/surveys) in PostHog and click "New survey". 
+
+To create a survey with a prebuilt UI, go to the [surveys tab](https://us.posthog.com/surveys) in PostHog and click "New survey".
 
 <ProductScreenshot
-  imageLight={ImgSurveyTemplatesLight} 
-  imageDark={ImgSurveyTemplatesDark} 
-  alt="PostHog survey templates" 
+  imageLight={ImgSurveyTemplatesLight}
+  imageDark={ImgSurveyTemplatesDark}
+  alt="PostHog survey templates"
   classes="rounded"
 />
 
@@ -262,7 +262,7 @@ This shows a survey popup every time you visit your app's homepage.
 
 #### 2. Fetch the survey from PostHog
 
-PostHog keeps track of all active surveys for a user (this is especially helpful if you set up [custom display conditions](/docs/surveys/creating-surveys#display-conditions)). 
+PostHog keeps track of all active surveys for a user (this is especially helpful if you set up [custom display conditions](/docs/surveys/creating-surveys#display-conditions)).
 
 To fetch the active surveys when the app is mounted, we call `$posthog().getActiveMatchingSurveys()`. This returns a surveys object that looks like this:
 
@@ -384,7 +384,7 @@ const handleSubmit = (value) => {
 
 #### 4. Capture interactions from it.
 
-The final step in setting up our survey is capturing interactions. This enables us to analyze the results in PostHog. 
+The final step in setting up our survey is capturing interactions. This enables us to analyze the results in PostHog.
 
 There are 3 events to capture:
 
@@ -437,7 +437,13 @@ const handleSubmit = (value) => {
   const { $posthog } = useNuxtApp();
   $posthog().capture("survey sent", {
     $survey_id: surveyID, // required
-    $survey_response: value // required
+    $survey_response_a3071551-d599-4eeb-9ffe-69e93dc647b6: value, // required
+    $survey_questions: [
+      {
+        id: "a3071551-d599-4eeb-9ffe-69e93dc647b6",
+        question: "How likely are you to recommend us to a friend?",
+      }
+    ] // required for `getSurveyResponse` to work as expected
   });
 };
 
@@ -500,7 +506,7 @@ const fetchActiveSurveys = () => {
 const handleDismiss = () => {
   showSurvey.value = false;
   localStorage.setItem(`hasInteractedWithSurvey_${surveyID.value}`, 'true');
-  
+
   const { $posthog } = useNuxtApp();
   $posthog().capture("survey dismissed", {
     $survey_id: surveyID // required
@@ -514,7 +520,13 @@ const handleSubmit = (value) => {
   const { $posthog } = useNuxtApp();
   $posthog().capture("survey sent", {
     $survey_id: surveyID, // required
-    $survey_response: value // required
+    $survey_response_a3071551-d599-4eeb-9ffe-69e93dc647b6: value, // required
+    $survey_questions: [
+      {
+        id: "a3071551-d599-4eeb-9ffe-69e93dc647b6",
+        question: "How likely are you to recommend us to a friend?",
+      }
+    ] // required for `getSurveyResponse` to work as expected
   });
 };
 
@@ -534,9 +546,9 @@ After interacting with your survey, you can view results by selecting the survey
 If you capture identified events, you can also filter these results based on [person properties](/docs/product-analytics/person-properties), [cohorts](/docs/data/cohorts), [feature flags](/docs/feature-flags/creating-feature-flags) and more.
 
 <ProductScreenshot
-  imageLight={ImgSurveyResultsLight} 
-  imageDark={ImgSurveyResultsDark} 
-  alt="Survey results" 
+  imageLight={ImgSurveyResultsLight}
+  imageDark={ImgSurveyResultsDark}
+  alt="Survey results"
   classes="rounded"
 />
 
