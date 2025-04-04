@@ -160,9 +160,9 @@ const productDetails: Record<
         complexity: ['People who code'],
     },
     'error-tracking': {
-        freeTierLimit: 'JOETBD',
+        freeTierLimit: '100,000',
         denominator: 'event',
-        startingPrice: 'JOETBD',
+        startingPrice: '$0.00037',
         description: 'Find and track errors in your product, then assign them as issues',
         roles: ['Product engineers'],
         goals: ['Find errors', 'Solve performance issues'],

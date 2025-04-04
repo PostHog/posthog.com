@@ -75,7 +75,7 @@ const features = [
     {
         title: 'Get alerts',
         name: 'Get alerts',
-        description: 'Get email alerts when something goes wrong. Or lots of somethings. ',
+        description: 'Get email alerts when something goes wrong. Or lots of somethings.',
         image: (
             <CloudinaryImage
                 src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/images/products/error-tracking-alerts.png"

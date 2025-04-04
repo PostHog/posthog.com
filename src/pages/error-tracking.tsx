@@ -7,4 +7,4 @@ export default function ErrorTracking(): JSX.Element {
             <ProductErrorTracking />
         </Layout>
     )
-} 
+}
