@@ -159,6 +159,15 @@ const productDetails: Record<
         goals: ['Data ops and monitoring', 'Diagnose issues'],
         complexity: ['People who code'],
     },
+    'error-tracking': {
+        freeTierLimit: '100,000',
+        denominator: 'event',
+        startingPrice: '$0.00037',
+        description: 'Find and track errors in your product, then assign them as issues',
+        roles: ['Product engineers'],
+        goals: ['Find errors', 'Solve performance issues'],
+        complexity: ['People who code'],
+    },
 }
 
 const filters = [

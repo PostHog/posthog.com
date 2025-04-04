@@ -40,6 +40,9 @@ const companies = {
     LogRocket: {
         comparisonURL: '/blog/posthog-vs-logrocket',
     },
+    Sentry: {
+        comparisonURL: '/blog/posthog-vs-sentry',
+    },
     VWO: {
         comparisonURL: '',
     },

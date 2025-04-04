@@ -19,14 +19,15 @@ interface CustomerCardProps {
             }
         }
     }
+    colspan?: number
 }
 
-export const CustomerCard = ({ outcome, quote, customer }: CustomerCardProps): JSX.Element => {
+export const CustomerCard = ({ outcome, quote, customer, colspan }: CustomerCardProps): JSX.Element => {
     const { websiteTheme } = useValues(layoutLogic)
     const darkMode = websiteTheme === 'dark'
 
     return (
-        <li className=" bg-accent dark:bg-accent-dark p-6 rounded">
+        <li className={`bg-accent dark:bg-accent-dark p-6 rounded ${colspan ? 'col-span-' + colspan : ''}`}>
             <img
                 className="mb-4 max-h-8 max-w-[200px] w-full object-contain object-left"
                 src={customer.frontmatter[darkMode ? 'logoDark' : 'logo'].publicURL}
