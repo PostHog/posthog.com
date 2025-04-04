@@ -517,16 +517,53 @@ With PyCharm's built in support for Django, it's fairly easy to setup debugging 
 
 ### Start the debugging environment
 
-1. Instead of manually running `docker compose` you can open the `docker-compose.dev.yml` file and click on the double play icon next to `services`
-2. From the run configurations select:
-   - "PostHog" and click on debug
-   - "Celery" and click on debug (optional)
-   - "Frontend" and click on run
-   - "Plugin server" and click on run
+If you are using the `mprocs` approach to Posthog (`DEBUG=1 ./bin/start`) and want to debug backend service through PyCharm, you need to:
+
+1. Start containers through Docker (for example, using regular `docker compose -f docker-compose.dev.yml -v up`).
+2. Create a Pycharm configuration to start `uvicorn` manually (instead of the `mprocs` script).
+   - Select configurations in the top right corner > `Edit Configurations...`.
+   - Add new `Python` configuration (`+` button in the top left corner of the `Configurations` window).
+   - Set `module` (instead of `script`) to `uvicorn`.
+   - Set script parameters (should be identical to `mprocs` backend script parameters at `posthog/bin/start-backend`): 
+     ```
+     --reload posthog.asgi:application --host 0.0.0.0 --log-level debug --reload-include "posthog/" --reload-include "ee/" --reload-include "products/"
+     ```
+   - Set the working directory to the `posthog` root.
+   - Add `DEBUG=1` to the configuration's environmental variables (if you want to replicate the default behavior),
+3. Start `posthog` through `DEBUG=1 ./bin/start`.
+
+> **Note:** The logic is to start `uvicorn` manually the same way and in the same environment as it would be started by `mprocs`. It also means that the `backend` could be colored red when starting the service (as `mprocs` won't be able to start `uvicorn` at the proper port). However, using this approach you should be able to debug any backend process properly.
 
 ## Extra: Accessing Postgres
 
 While developing, there are times you may want to connect to the database to query the local database, make changes, etc. To connect to the database, use a tool like pgAdmin and enter these connection details: _host_:`localhost` _port_:`5432` _database_:`posthog`, _username_:`posthog`, _pwd_:`posthog`.
+
+## Extra: Accessing ClickHouse
+
+The same goes for Clickhouse. If you want to query the local database, you can:
+
+- Access it through a CLI, by going inside the container and enabling client () to query from.
+  ```bash
+  docker exec -it posthog-clickhouse-1 bash
+  > clickhouse-client --user default --password ""
+  ```
+  
+- Access it through a GUI, like DBeaver/DataGrip/IDE extensions/etc. by setting in the connection configuration:
+  ```yaml
+  host: localhost
+  port: 8123
+  user: default
+  password: 
+  database: 
+  ```
+  For example, `jdbc` connection string would be `jdbc:clickhouse://localhost:8123/`.
+
+> **Note:** Some ClickHouse tables aren't intended to be used with GUI, so you can get errors trying to display it (for example, the amount of data is too large or the structure doesn't fit GUI expectations). It could lead to errors, like `Only groupMap is supported at this point` when using JetBrains products. However, it doesn't mean that the data isn't there - you can still query it directly.
+> ```sql
+> SELECT session_id FROM session_replay_events; -- Will work properly
+> SELECT session_id, first_url FROM session_replay_events; -- Could fail in PyCharm
+> SELECT s.session_id, argMinMerge(s.first_url) as first_url FROM session_replay_events s GROUP BY session_id; -- Will work properly
+> ```
 
 ## Extra: Accessing the Django Admin
 
