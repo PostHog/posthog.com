@@ -505,10 +505,15 @@ With PyCharm's built in support for Django, it's fairly easy to setup debugging 
 ### Setup PyCharm
 
 1. Open the repository folder.
-2. Setup the python interpreter (Settings… > Project: posthog > Python interpreter > Add interpreter): Select "Existing" and set it to `path_to_repo/posthog/env/bin/python`.
+2. Setup the python interpreter (Settings… > Project: posthog > Python interpreter > Add interpreter -> Existing): 
+   - If using manual setup: `path_to_repo/posthog/env/bin/python`.
+   - If using Flox: `path_to_repo/posthog/.flox/cache/venv/bin/python`.
 3. Setup Django support (Settings… > Languages & Frameworks > Django):
    - Django project root: `path_to_repo`
    - Settings: `posthog/settings/__init__py`
+4. To run tests correctly in PyCharm, disable the Django test runner:
+   - Go to Settings… > Languages & Frameworks > Django
+   - Check "Do not use Django test runner"
 
 ### Start the debugging environment
 
