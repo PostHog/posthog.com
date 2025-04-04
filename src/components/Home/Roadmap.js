@@ -101,8 +101,8 @@ const Roadmap = () => {
                             Under consideration
                         </div>
                         <ul className="m-0 px-4 pt-1 bg-accent dark:bg-accent-dark">
-                            {roadmaps.map((roadmap) => (
-                                <RoadmapItem key={roadmap.squeakId}>{roadmap.title}</RoadmapItem>
+                            {roadmaps.map((roadmap, index) => (
+                                <RoadmapItem key={roadmap.squeakId || `idx${index}`}>{roadmap.title}</RoadmapItem>
                             ))}
                         </ul>
                     </RoadmapColumn>
@@ -112,7 +112,7 @@ const Roadmap = () => {
                         </div>
                         <ul className="m-0 px-4 pt-1 bg-accent dark:bg-accent-dark">
                             {wip.map((roadmap) => (
-                                <RoadmapItem key={roadmap.squeakId}>{roadmap.title}</RoadmapItem>
+                                <RoadmapItem key={roadmap.squeakId || `idx${index}`}>{roadmap.title}</RoadmapItem>
                             ))}
                         </ul>
                     </RoadmapColumn>
