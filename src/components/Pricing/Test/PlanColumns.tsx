@@ -144,7 +144,7 @@ const planSummary = [
                 name: 'Dedicated support',
             },
             {
-                name: 'Training & onboarding',
+                name: 'Uptime SLA',
             },
             {
                 name: 'Advanced permissions',
@@ -153,8 +153,8 @@ const planSummary = [
                 name: 'Audit logs',
             },
         ],
-        projects: 'Unlimited',
-        dataRetention: 'Custom',
+        projects: '1,000,000',
+        dataRetention: 'Even more',
         CTAText: 'Talk to a human',
         CTALink: '/talk-to-a-human',
         intent: 'enterprise',
