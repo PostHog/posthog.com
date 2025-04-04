@@ -281,8 +281,16 @@ export const dataPipelines = {
                     url: '/docs/cdp/destinations/snapchat-ads',
                 },
                 {
+                    name: 'Snapchat pixel',
+                    url: '/docs/cdp/destinations/snapchat-pixel',
+                },
+                {
                     name: 'TikTok ads',
                     url: '/docs/cdp/destinations/tiktok-ads',
+                },
+                {
+                    name: 'TikTok pixel',
+                    url: '/docs/cdp/destinations/tiktok-ads-pixel',
                 },
                 {
                     name: 'Twilio',
