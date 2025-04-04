@@ -1,8 +1,7 @@
 import React from 'react'
 import { IconInfo } from '@posthog/icons'
 import Tooltip from 'components/Tooltip'
-import { Link } from 'gatsby'
-
+import Link from 'components/Link'
 // Basic usage
 // <OSButton>Click me</OSButton>
 
