@@ -207,14 +207,17 @@ const colorModeOptions: ToggleOption[] = [
 ]
 const SiteOptionsButton = () => {
     return (
-        <Popover
-            title="Settings"
-            dataScheme="secondary"
-            trigger={<span>Site options</span>}
-            contentClassName="w-[260px]"
-        >
-            <div data-scheme="secondary" className="w-full h-full bg-primary text-primary">
-                <ToggleGroup title="Color mode" options={colorModeOptions} />
+        <Popover title="Settings" dataScheme="secondary" trigger={<span>Site options</span>} contentClassName="w-80">
+            <div className="w-full h-full bg-primary text-primary">
+                <fieldset className="p-2">
+                    <legend>Display</legend>
+                    <div className="flex flex-col gap-1">
+                        <div className="grid grid-cols-2 gap-2">
+                            <label className="pt-1.5 text-[15px]">Color mode</label>
+                            <ToggleGroup title="Color mode" options={colorModeOptions} />
+                        </div>
+                    </div>
+                </fieldset>
 
                 <div className="flex items-center justify-between space-x-2">
                     <span>Dark mode</span>
