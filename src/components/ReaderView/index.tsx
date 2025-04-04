@@ -11,15 +11,14 @@ import {
     IconPencil,
     IconX,
     IconPullRequest,
+    IconTextWidth,
 } from '@posthog/icons'
 import ScrollArea from 'components/RadixUI/ScrollArea'
 import { DebugContainerQuery } from 'components/DebugContainerQuery'
-import { IconTextWidth } from '@posthog/icons'
-import { IconTextWidthFixed, IconTableOfContents, IconClockRewind } from 'components/OSIcons'
-import { ToggleGroup } from 'radix-ui'
+import { IconClockRewind, IconTextWidthFixed } from 'components/OSIcons'
 import { Select } from '../RadixUI/Select'
 import { Popover } from '../RadixUI/Popover'
-
+import { ToggleGroup } from 'components/RadixUI/ToggleGroup'
 import { useLayoutData } from 'components/Layout/hooks'
 import Link from 'components/Link'
 import { MDXRenderer } from 'gatsby-plugin-mdx'
@@ -52,25 +51,6 @@ const sidebarVariants = {
         },
     },
 }
-
-const toggleGroupItemClasses =
-    'flex p-1 aspect-square items-center justify-center bg-white leading-4 text-primary dark:text-primary-dark rounded hover:bg-accent-2 dark:hover:bg-accent-dark focus:z-10 focus:shadow-[0_0_0_2px] focus:shadow-black focus:outline-none data-[state=on]:bg-accent-2 data-[state=on]:bg-accent-2'
-
-const TextWidthToggleGroup = () => (
-    <ToggleGroup.Root
-        className="inline-flex space-x-px rounded p-1 bg-white dark:bg-accent-dark border border-light dark:border-dark"
-        type="single"
-        defaultValue="fixed"
-        aria-label="Content width"
-    >
-        <ToggleGroup.Item className={toggleGroupItemClasses} value="fixed" aria-label="Fixed width">
-            <IconTextWidthFixed className="size-5 inline-block" />
-        </ToggleGroup.Item>
-        <ToggleGroup.Item className={toggleGroupItemClasses} value="full" aria-label="Full width">
-            <IconTextWidth className="size-5" />
-        </ToggleGroup.Item>
-    </ToggleGroup.Root>
-)
 
 interface ReaderViewProps {
     body: {
@@ -329,7 +309,7 @@ export default function ReaderView({ body, title, tableOfContents, mdxComponents
                 <div className="flex-grow flex justify-between">
                     <div>Questions?</div>
                     <div>
-                        <TextWidthToggleGroup />
+                        <ToggleGroup title="Text width" />
                     </div>
                 </div>
                 <motion.div
