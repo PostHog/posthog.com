@@ -84,7 +84,7 @@ const initialProducts = [
         Icon: IconWarning,
         name: 'Error tracking',
         type: 'error_tracking',
-        color: 'red',
+        color: 'orange',
         slider: {
             marks: [100000, 1000000, 10000000, 50000000],
             min: 100000,
