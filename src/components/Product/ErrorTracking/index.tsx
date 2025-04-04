@@ -151,7 +151,7 @@ const subfeatures = [
         color: 'yellow',
     },
     {
-        title: 'Assign <s>blame</s> an owner',
+        title: 'Product analytics',
         description:
             'Graph the <code>$exception</code> event and use filters and grouping to determine where errors happen and what to prioritize',
         icon: <IconTrends />,
@@ -396,12 +396,12 @@ export const ProductErrorTracking = () => {
                     />
                 </div>
 
-                <section id="customers" className="-mt-84 pt-84">
-                    <ul className="list-none p-0 grid-cols-2 md:grid-cols-4 gap-4 mb-10 md:mb-20">
+                <section id="customers" className="-mt-80 pt-48">
+                    <ul className="list-none p-0 grid grid-cols-2 md:grid-cols-4 gap-4 mb-10 md:mb-20">
                         <li className="hidden md:block"></li>
                         <CustomerCard
                             outcome="switched from BugSnag and Amplitude"
-                            quote='"In two clicks, I can see who had an error, then their replays. The more of PostHog you use, the more powerful it becomes."'
+                            quote="In two clicks, I can see who had an error, then their replays. The more of PostHog you use, the more powerful it becomes."
                             customer={zealot}
                             colspan={2}
                         />
@@ -410,7 +410,7 @@ export const ProductErrorTracking = () => {
                 </section>
 
                 <section id="features" className="-mt-36 pt-36">
-                    <h2 className="text-4xl md:text-5xl">
+                    <h2 className="text-4xl md:text-5xl text-center">
                         All the features you'd expect, but{' '}
                         <span className="text-red dark:text-yellow">10x better in the PostHog ecosystem</span>
                     </h2>
@@ -420,11 +420,11 @@ export const ProductErrorTracking = () => {
                 </section>
 
                 <div className="mt-20">
-                    <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 mt-12">
+                    <ul className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 mt-12 list-none p-0">
                         {subfeatures.map((subfeature, index) => (
                             <Subfeature key={index} {...subfeature} />
                         ))}
-                    </div>
+                    </ul>
                 </div>
 
                 <div className="mt-20">
@@ -465,7 +465,7 @@ export const ProductErrorTracking = () => {
                                 alt="Just another hedgehog"
                                 placeholder="blurred"
                                 className="w-full max-w-[250px]"
-                                src="https://res.cloudinary.com/dmukukwp6/image/upload/screenshot_error_tracking_0f93eb652d.png"
+                                src="https://res.cloudinary.com/dmukukwp6/image/upload/error_hog_c2eff84e29.png"
                             />
                         </div>
                     </div>

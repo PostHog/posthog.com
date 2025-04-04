@@ -3432,7 +3432,7 @@ export const docsMenu = {
             name: 'Error tracking',
             url: '/docs/error-tracking',
             icon: 'IconWarning',
-            color: 'salmon',
+            color: 'orange',
             description: 'Track and monitor errors and exceptions in your code.',
             children: [
                 {
@@ -3582,7 +3582,7 @@ export const productMenu = {
         {
             name: 'Error tracking',
             icon: 'IconWarning',
-            color: 'red',
+            color: 'orange',
             url: '/error-tracking',
         },
         {
