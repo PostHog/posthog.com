@@ -9,7 +9,7 @@ tags:
   - surveys
 ---
 
-[Surveys](/docs/surveys) are a great tool to collect qualitative feedback from your users. This tutorial shows you how to easily set up surveys in your React app. 
+[Surveys](/docs/surveys) are a great tool to collect qualitative feedback from your users. This tutorial shows you how to easily set up surveys in your React app.
 
 We'll create a React app with Vite, add PostHog, create a survey, and then add the code to show the survey in-app and collect responses.
 
@@ -42,7 +42,7 @@ export default App
 
 Finally, run `npm run dev` and go to `http://localhost:5173` to see our new homepage.
 
-![Basic react app setup to show surveys](https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_03_07_at_11_30_03_2x_19ff46cead.png) 
+![Basic react app setup to show surveys](https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_03_07_at_11_30_03_2x_19ff46cead.png)
 
 ## Adding PostHog
 
@@ -90,7 +90,7 @@ This tutorial will cover how to implement both options.
 ## Option 1: Use PostHog's prebuilt survey UI
 
 For fast set up, you can use PostHog's prebuilt surveys. There are variety of [survey types](/docs/surveys/creating-surveys#question-type) to choose from, and PostHog handles all the display logic and event capture for you.
- 
+
 To create a survey with a prebuilt UI, go to the [Surveys tab](https://us.posthog.com/surveys) in PostHog and click **New survey**. Select a template like **Open feedback**, customize it how you'd like, click **Save as draft**, and then **Launch**.
 
 <ProductScreenshot
@@ -104,7 +104,7 @@ Your survey is now live and you should see it in your app. There are no further 
 
 ![Popover survey in app](https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_03_07_at_11_38_49_2x_ea59263db5.png)
 
-Popover surveys provide a bunch of customization options like colors, text, position, font, targeting, completion conditions, and more. 
+Popover surveys provide a bunch of customization options like colors, text, position, font, targeting, completion conditions, and more.
 
 ## Option 2: Implement your own survey UI
 
@@ -246,9 +246,9 @@ function App() {
   useEffect(() => {
     posthog.getActiveMatchingSurveys((surveys) => {
       // TODO: configure the survey
-    }) 
+    })
   }, [posthog]) // posthog may be undefined until it's had a chance to initialize. Hence use it as a dependency for useEffect
-  
+
   // ... rest of your code ...
 }
 
@@ -316,9 +316,9 @@ We can use this survey object (especially the `id` and `questions`) to configure
         const survey = surveys.find(s => s.id === surveyID)
         setSurveyTitle(survey.questions[0].question)
       }
-    }) 
+    })
   }, [posthog]) // posthog may be undefined until it's had a chance to initialize. Hence use it as a dependency for useEffect
-  
+
   // ... rest of your code ...
 
  return (
@@ -334,7 +334,7 @@ We can use this survey object (especially the `id` and `questions`) to configure
  </div>
 ```
 
-Finally, we want to make sure we don't show the survey again to users who have either submitted or dismissed it. 
+Finally, we want to make sure we don't show the survey again to users who have either submitted or dismissed it.
 
 We use [`localStorage`](https://developer.mozilla.org/en-US/docs/Web/API/Window/localStorage) to store this data. Then, we'll add a check to show the survey based on whether the user has already interacted with it or not:
 
@@ -361,7 +361,7 @@ function App() {
   const handleSubmit = (value) => {
     setShowSurvey(false)
     console.log("User submitted:", value)
-    localStorage.setItem(`hasInteractedWithSurvey_${surveyID}`, 'true')  
+    localStorage.setItem(`hasInteractedWithSurvey_${surveyID}`, 'true')
   }
 
   return (
@@ -383,7 +383,7 @@ export default App
 
 #### 3. Capture interactions from it.
 
-The final step in setting up our survey is capturing interactions. This enables us to analyze the results in PostHog. 
+The final step in setting up our survey is capturing interactions. This enables us to analyze the results in PostHog.
 
 There are 3 events to capture:
 
@@ -408,10 +408,16 @@ You can capture these events using `posthog.capture()`:
   const handleSubmit = (value) => {
     setShowSurvey(false)
     console.log("User submitted:", value)
-    localStorage.setItem(`hasInteractedWithSurvey_${surveyID}`, 'true')  
+    localStorage.setItem(`hasInteractedWithSurvey_${surveyID}`, 'true')
     posthog.capture("survey sent", {
       $survey_id: surveyID, // required
-      $survey_response: value // required
+      $survey_response_a3071551-d599-4eeb-9ffe-69e93dc647b6: value, // required
+      $survey_questions: [
+        {
+          id: "a3071551-d599-4eeb-9ffe-69e93dc647b6",
+          question: "How likely are you to recommend us to a friend?",
+        }
+      ] // required for `getSurveyResponse` to work as expected
     })
   }
 
@@ -449,7 +455,7 @@ function App() {
         const survey = surveys.find(s => s.id === surveyID)
         setSurveyTitle(survey.questions[0].question)
       }
-    }) 
+    })
   }, [posthog]) // posthog may be undefined until it's had a chance to initialize. Hence use it as a dependency for useEffect
 
   useEffect(() => {
@@ -481,7 +487,13 @@ function App() {
     localStorage.setItem(`hasInteractedWithSurvey_${surveyID}`, 'true')
     posthog.capture("survey sent", {
       $survey_id: surveyID, // required
-      $survey_response: value // required
+      $survey_response_a3071551-d599-4eeb-9ffe-69e93dc647b6: value, // required
+      $survey_questions: [
+        {
+          id: "a3071551-d599-4eeb-9ffe-69e93dc647b6",
+          question: "How likely are you to recommend us to a friend?",
+        }
+      ] // required for `getSurveyResponse` to work as expected
     })
   }
 
