@@ -70,15 +70,15 @@ const Window = ({ item, constraintsRef }) => {
                             const newX = position.x + info.offset.x
                             const newY = position.y + info.offset.y
 
-                            const constrainedX = Math.min(Math.max(0, newX), bounds.width - size.width)
-                            const constrainedY = Math.min(Math.max(0, newY), bounds.height - size.height)
+                            const constrainedX = Math.round(Math.min(Math.max(0, newX), bounds.width - size.width))
+                            const constrainedY = Math.round(Math.min(Math.max(0, newY), bounds.height - size.height))
 
                             setPosition({
                                 x: constrainedX,
                                 y: constrainedY,
                             })
                         }}
-                        animate={{ x: position.x, y: position.y }}
+                        animate={{ x: Math.round(position.x), y: Math.round(position.y) }}
                         onMouseDown={() => bringToFront(item)}
                     >
                         <div
