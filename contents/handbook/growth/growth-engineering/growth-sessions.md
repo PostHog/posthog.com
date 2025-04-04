@@ -11,10 +11,10 @@ We've established a successful pattern for running these meetings every four wee
 ## Attendees
 We find it's important to bring a mixture of technical people, and those with wide context of what the business is working on. Regular attendees include...
 
-* Raquel (Growth Engineer)
-* Tim (Co-founder / CTO)
-* James (Co-founder / CEO)
-* Charles (Marketing)
+* Raquel (Manages lots of engineering teams)
+* Tim (Co-CEO)
+* James (Co-CEO)
+* Charles (Sales/Marketing/Ops Exec)
 
 ## Running a growth review
 
