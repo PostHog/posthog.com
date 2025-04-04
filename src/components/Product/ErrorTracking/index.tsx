@@ -156,7 +156,7 @@ const faqs = [
     },
     {
         question: 'What data is collected?',
-        answer: 'We automatically collect error messages, stack traces, error context, and associated metadata, as well as any extra data you attach to the error.',
+        answer: 'We collect error messages, stack traces, error context, and associated metadata, as well as any extra data you attach to the error.',
         children: null,
     },
     {
