@@ -68,8 +68,8 @@ const features = [
         ),
     },
     {
-        title: 'Assign',
-        description: 'Triage issues, send them to teams or colleagues',
+        title: 'Triage',
+        description: 'Assign issues to teams or colleagues',
         image: (
             <CloudinaryImage
                 src="https://res.cloudinary.com/dmukukwp6/image/upload/screenshot_assign_4c9bb9ee60.png"
