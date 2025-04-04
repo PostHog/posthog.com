@@ -1,4 +1,4 @@
-import React, { ButtonHTMLAttributes, useEffect, useState, useContext, createContext } from 'react'
+import React, { ButtonHTMLAttributes, useEffect, useState, useContext, createContext, useMemo } from 'react'
 
 interface Props extends ButtonHTMLAttributes<HTMLButtonElement> {
     id: string
@@ -7,21 +7,52 @@ interface Props extends ButtonHTMLAttributes<HTMLButtonElement> {
     className?: string
 }
 
-const ScrollSpyContext = createContext<{
+interface SectionData {
+    id: string
+    isIntersecting: boolean
+    distance: number
+}
+
+interface ScrollSpyContextType {
+    sections: Record<string, SectionData>
+    setSectionData: (id: string, data: SectionData) => void
     activeSection: string | null
-    setActiveSection: (id: string) => void
-}>({
+}
+
+const ScrollSpyContext = createContext<ScrollSpyContextType>({
+    sections: {},
+    setSectionData: () => {},
     activeSection: null,
-    setActiveSection: () => {},
 })
 
 export function ScrollSpyProvider({ children }) {
-    const [activeSection, setActiveSection] = useState<string | null>(null)
-    return <ScrollSpyContext.Provider value={{ activeSection, setActiveSection }}>{children}</ScrollSpyContext.Provider>
+    const [sections, setSections] = useState<Record<string, SectionData>>({})
+
+    const setSectionData = (id: string, data: SectionData) => {
+        setSections((prev) => ({
+            ...prev,
+            [id]: data,
+        }))
+    }
+
+    const activeSection = useMemo(() => {
+        const visibleSections = Object.values(sections).filter((section) => section.isIntersecting)
+
+        if (visibleSections.length === 0) return null
+
+        return visibleSections.reduce((closest, current) => (current.distance < closest.distance ? current : closest))
+            .id
+    }, [sections])
+
+    return (
+        <ScrollSpyContext.Provider value={{ sections, setSectionData, activeSection }}>
+            {children}
+        </ScrollSpyContext.Provider>
+    )
 }
 
 export default function ElementScrollLink({ id, label, element, className = '', ...buttonProps }: Props): JSX.Element {
-    const { activeSection, setActiveSection } = useContext(ScrollSpyContext)
+    const { setSectionData, activeSection } = useContext(ScrollSpyContext)
     const isActive = activeSection === id
 
     useEffect(() => {
@@ -33,23 +64,21 @@ export default function ElementScrollLink({ id, label, element, className = '', 
         const observer = new IntersectionObserver(
             (entries) => {
                 entries.forEach((entry) => {
-                    if (entry.isIntersecting) {
-                        if (entry.intersectionRatio > 0.5) {
-                            setActiveSection(id)
-                        }
-                    }
+                    setSectionData(id, {
+                        id,
+                        isIntersecting: entry.isIntersecting,
+                        distance: entry.boundingClientRect.top - (entry.rootBounds?.top ?? 0),
+                    })
                 })
             },
             {
                 root: element.current.closest('[data-radix-scroll-area-viewport]'),
-                threshold: [0, 0.5, 1],
-                rootMargin: '-10% 0px',
+                threshold: [0, 0.1],
             }
         )
-
         observer.observe(targetElement)
         return () => observer.disconnect()
-    }, [id, element, setActiveSection])
+    }, [id, element, setSectionData])
 
     const handleClick = () => {
         if (!element.current) return
