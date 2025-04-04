@@ -7,24 +7,34 @@ import Desktop from 'components/Desktop'
 import { DarkModeToggle } from 'components/DarkModeToggle'
 import { Popover } from 'components/RadixUI/Popover'
 
-const sizeDefaults = {
+const getSizeDefaults = () => ({
     max: {
-        width: 1200,
-        height: 800,
+        width: Math.min(window.innerWidth * 0.9, 1200),
+        height: Math.min(window.innerHeight * 0.8, 800),
     },
     min: {
-        width: 300,
-        height: 200,
+        width: Math.max(window.innerWidth * 0.2, 300),
+        height: Math.max(window.innerHeight * 0.2, 200),
     },
-}
+})
 
-const Window = ({ item, constraintsRef }) => {
+const Window = ({ item, constraintsRef }: { item: any; constraintsRef: any }) => {
     const { minimizeWindow, bringToFront, closeWindow, focusedWindow } = useApp()
     const controls = useDragControls()
+    const [sizeDefaults, setSizeDefaults] = useState(getSizeDefaults())
     const [previousSize, setPreviousSize] = useState({ width: sizeDefaults.max.width, height: sizeDefaults.max.height })
     const [size, setSize] = useState({ width: 767, height: 600 })
     const [previousPosition, setPreviousPosition] = useState({ x: 0, y: 0 })
     const [position, setPosition] = useState({ x: 0, y: 0 })
+
+    useEffect(() => {
+        const handleResize = () => {
+            setSizeDefaults(getSizeDefaults())
+        }
+
+        window.addEventListener('resize', handleResize)
+        return () => window.removeEventListener('resize', handleResize)
+    }, [])
 
     const handleDoubleClick = () => {
         setSize((prev) => (prev.width === sizeDefaults.max.width ? sizeDefaults.min : sizeDefaults.max))
@@ -87,7 +97,9 @@ const Window = ({ item, constraintsRef }) => {
                             className="flex-shrink-0 w-full flex items-center justify-between p-2 bg-primary cursor-move"
                             onPointerDown={(e) => controls.start(e)}
                         >
-                            <p className="m-0 text-sm font-semibold">{item.meta?.title && item.meta.title}</p>
+                            <p className="m-0 text-sm font-semibold line-clamp-1">
+                                {item.meta?.title && item.meta.title}
+                            </p>
                             <div className="flex space-x-2">
                                 <button onClick={() => minimizeWindow(item)}>
                                     <IconMinus className="size-4" />
