@@ -99,32 +99,24 @@ export default function OSButton({
         </>
     )
 
-    return (
-        <>
-            {asLink ? (
-                <Link
-                    to={to}
-                    {...props}
-                    className={`flex gap-1 items-center ${baseClasses} ${sizeClasses[size]} ${
-                        variantClasses[variant]
-                    } ${align === 'center' ? 'justify-center' : 'justify-start'} ${
-                        width === 'full' ? 'w-full' : 'w-auto'
-                    } ${className}`}
-                >
-                    {buttonContent}
-                </Link>
-            ) : (
-                <button
-                    className={`flex gap-1 items-center ${baseClasses} ${sizeClasses[size]} ${
-                        variantClasses[variant]
-                    } ${align === 'center' ? 'justify-center' : 'justify-start'} ${
-                        width === 'full' ? 'w-full' : 'w-auto'
-                    } ${className}`}
-                    {...props}
-                >
-                    {buttonContent}
-                </button>
-            )}
-        </>
+    return asLink ? (
+        <Link
+            to={to}
+            {...props}
+            className={`flex gap-1 items-center ${baseClasses} ${sizeClasses[size]} ${variantClasses[variant]} ${
+                align === 'center' ? 'justify-center' : 'justify-start'
+            } ${width === 'full' ? 'w-full' : 'w-auto'} ${className}`}
+        >
+            {buttonContent}
+        </Link>
+    ) : (
+        <button
+            className={`flex gap-1 items-center ${baseClasses} ${sizeClasses[size]} ${variantClasses[variant]} ${
+                align === 'center' ? 'justify-center' : 'justify-start'
+            } ${width === 'full' ? 'w-full' : 'w-auto'} ${className}`}
+            {...props}
+        >
+            {buttonContent}
+        </button>
     )
 }

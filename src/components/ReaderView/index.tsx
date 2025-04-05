@@ -30,6 +30,10 @@ import ElementScrollLink, { ScrollSpyProvider } from 'components/ElementScrollLi
 import { useLocation } from '@reach/router'
 import menu from '../../navs'
 import { TreeMenu } from 'components/TreeMenu'
+import dayjs from 'dayjs'
+import relativeTime from 'dayjs/plugin/relativeTime'
+
+dayjs.extend(relativeTime)
 
 interface SidebarState {
     isOpen: boolean
@@ -80,6 +84,8 @@ interface ReaderViewProps {
     title: string
     tableOfContents: any
     mdxComponents?: any
+    commits?: any[]
+    filePath?: string
 }
 
 const selectOptions = [
@@ -129,7 +135,14 @@ function recursiveSearch(array, value) {
     return false
 }
 
-export default function ReaderView({ body, title, tableOfContents, mdxComponents }: ReaderViewProps) {
+export default function ReaderView({
+    body,
+    title,
+    tableOfContents,
+    mdxComponents,
+    commits,
+    filePath,
+}: ReaderViewProps) {
     const [isNavVisible, setIsNavVisible] = useState(true)
     const [isTocVisible, setIsTocVisible] = useState(true)
     const contentRef = useRef(null)
@@ -333,42 +346,61 @@ export default function ReaderView({ body, title, tableOfContents, mdxComponents
                     </div>
                 </div>
                 <motion.div
-                    className={`flex-shrink-0 flex justify-end transition-all min-w-0 ${
+                    className={`flex-shrink-0 items-center flex justify-end transition-all min-w-0 ${
                         isTocVisible ? '@4xl:min-w-[300px]' : 'w-auto'
                     }`}
                     animate={isTocVisible ? 'open' : 'closed'}
                 >
-                    <OSButton variant="ghost" icon={<IconPencil />} />
+                    {filePath && (
+                        <OSButton
+                            asLink
+                            to={`https://github.com/PostHog/posthog.com/tree/master/contents/${filePath}`}
+                            variant="ghost"
+                            icon={<IconPencil />}
+                        />
+                    )}
 
-                    <Popover
-                        trigger={
-                            <span>
-                                <OSButton variant="ghost" icon={<IconClockRewind />} />
-                            </span>
-                        }
-                        title="Edit history"
-                        dataScheme="secondary"
-                        contentClassName="w-[260px]"
-                    >
-                        <div className="flex gap-2 justify-between items-center">
-                            <div className="flex items-center gap-2">
-                                <div>
-                                    <div className="size-8 bg-accent rounded-full" />
-                                </div>
-                                <div className="text-sm">
-                                    <Link to="#">Ian Vanagas</Link>
-                                </div>
-                            </div>
-                            <div className="flex items-baseline gap-2">
-                                <div className="text-xs opacity-60">2 days ago</div>
-                                <div>
-                                    <Link to="#" externalNoIcon>
-                                        <IconPullRequest className="size-4 relative top-1" />
-                                    </Link>
-                                </div>
-                            </div>
-                        </div>
-                    </Popover>
+                    {commits?.length && commits.length > 0 && (
+                        <Popover
+                            trigger={
+                                <span>
+                                    <OSButton variant="ghost" icon={<IconClockRewind />} />
+                                </span>
+                            }
+                            title="Edit history"
+                            dataScheme="secondary"
+                            contentClassName="w-[260px]"
+                        >
+                            <ul className="list-none m-0 p-0 space-y-2 max-h-[200px] overflow-y-auto">
+                                {commits.map((commit) => (
+                                    <li key={commit.url} className="flex gap-2 justify-between items-center">
+                                        <Link
+                                            to={commit.author.html_url}
+                                            className="flex items-center gap-2"
+                                            externalNoIcon
+                                        >
+                                            <div>
+                                                <div className="size-7 bg-accent rounded-full relative">
+                                                    <img
+                                                        src={commit.author.avatar_url}
+                                                        alt={commit.author.login}
+                                                        className="size-full rounded-full object-cover"
+                                                    />
+                                                </div>
+                                            </div>
+                                            <p className="text-sm m-0">{commit.author.login}</p>
+                                        </Link>
+                                        <div className="flex items-center gap-2">
+                                            <p className="text-xs opacity-60 m-0">{dayjs(commit.date).fromNow()}</p>
+                                            <Link to={commit.url} externalNoIcon>
+                                                <IconPullRequest className="size-4" />
+                                            </Link>
+                                        </div>
+                                    </li>
+                                ))}
+                            </ul>
+                        </Popover>
+                    )}
                 </motion.div>
             </div>
         </div>

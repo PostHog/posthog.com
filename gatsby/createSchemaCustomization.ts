@@ -15,6 +15,18 @@ export const createSchemaCustomization: GatsbyNode['createSchemaCustomization'] 
       slug: String
       contributors: [Contributors]
       appConfig: [AppConfig]
+      commits: [Commit]
+    }
+    type Commit {
+      author: GitHubUser
+      date: Date
+      message: String
+      url: String
+    }
+    type GitHubUser {
+      avatar_url: String
+      html_url: String
+      login: String
     }
     type AshbyJobPostingTableOfContents {
       value: String,

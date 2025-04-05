@@ -148,7 +148,7 @@ export default function Handbook({
     const {
         body,
         frontmatter: { title },
-        fields: { slug, contributors, appConfig, templateConfigs },
+        fields: { slug, contributors, appConfig, templateConfigs, commits },
     } = post
 
     const components = {
@@ -190,6 +190,8 @@ export default function Handbook({
             title={title}
             tableOfContents={tableOfContents}
             mdxComponents={components}
+            commits={commits}
+            filePath={post.parent?.relativePath}
         />
     )
 }
@@ -223,6 +225,16 @@ export const query = graphql`
             excerpt(pruneLength: 150)
             fields {
                 slug
+                commits {
+                    author {
+                        avatar_url
+                        html_url
+                        login
+                    }
+                    date
+                    message
+                    url
+                }
                 appConfig {
                     key
                     name

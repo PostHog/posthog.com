@@ -24,6 +24,33 @@ const isValidUrl = (url: string): boolean => {
     }
 }
 
+async function getCommits(path: string): Promise<any[] | null> {
+    const url = `https://api.github.com/repos/posthog/posthog.com/commits?path=${path}`
+    try {
+        const response = await fetch(url, {
+            headers: {
+                Authorization: `token ${process.env.GITHUB_API_KEY}`,
+            },
+        })
+
+        if (!response.ok) {
+            throw new Error(`GitHub API error! Status: ${response.status}`)
+        }
+
+        const commits = await response.json()
+
+        return commits?.map((commit) => ({
+            author: commit.author,
+            date: commit.commit.author.date,
+            message: commit.commit.message,
+            url: commit.html_url,
+        }))
+    } catch (err) {
+        console.error(err)
+        return null
+    }
+}
+
 exports.onPreInit = async function (_, options) {
     const { strapiURL, strapiKey } = options
     if (!strapiURL || !strapiKey) return
@@ -247,6 +274,15 @@ export const onCreateNode: GatsbyNode['onCreateNode'] = async ({
             } catch (error) {
                 console.error(`Error fetching input_schema for ${templateIds}: ${error}`)
             }
+        }
+        if (process.env.VERCEL_GIT_COMMIT_REF === 'master' || (process.env.SHOW_COMMITS === '1' && process.env.GITHUB_API_KEY)) {
+            const commits = await getCommits(`${parent?.sourceInstanceName}/${parent?.relativePath}`)
+            if (commits) {
+                createNodeField({
+                node,
+                name: `commits`,
+                value: commits,
+            })
         }
     }
 

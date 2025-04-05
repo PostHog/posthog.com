@@ -34,11 +34,10 @@ export const Popover = React.forwardRef<HTMLDivElement, PopoverProps>(
                             <div className="flex justify-between items-center">
                                 {title && <strong>{title}</strong>}
                                 <div className="flex items-center">
-                                    <RadixPopover.Close
-                                        className="inline-flex size-[25px] cursor-default items-center justify-center rounded-full text-violet11 outline-none hover:bg-violet4 focus:shadow-[0_0_0_2px] focus:shadow-violet7"
-                                        aria-label="Close"
-                                    >
-                                        <IconX />
+                                    <RadixPopover.Close aria-label="Close" asChild>
+                                        <button>
+                                            <IconX className="size-4" />
+                                        </button>
                                     </RadixPopover.Close>
                                 </div>
                             </div>
