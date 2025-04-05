@@ -1,11 +1,24 @@
 import React, { useEffect, useRef, useState } from 'react'
 import { AnimatePresence, motion, useDragControls } from 'framer-motion'
-import { IconCollapse45, IconExpand45, IconMinus, IconX, IconCode } from '@posthog/icons'
+import {
+    IconCollapse45,
+    IconExpand45,
+    IconMinus,
+    IconX,
+    IconCode,
+    IconTextWidth,
+    IconLightBulb,
+    IconDay,
+    IconNight,
+    IconLaptop,
+} from '@posthog/icons'
 import { useApp } from '../../context/App'
 import { Provider as WindowProvider } from '../../context/Window'
 import Desktop from 'components/Desktop'
 import { DarkModeToggle } from 'components/DarkModeToggle'
 import { Popover } from 'components/RadixUI/Popover'
+import { ToggleGroup, ToggleOption } from 'components/RadixUI/ToggleGroup'
+import { Fieldset } from 'components/OSFieldset'
 
 const getSizeDefaults = () => ({
     max: {
@@ -175,15 +188,36 @@ const Window = ({ item, constraintsRef }: { item: any; constraintsRef: any }) =>
     )
 }
 
+const colorModeOptions: ToggleOption[] = [
+    {
+        label: 'System',
+        value: 'system',
+        icon: <IconLaptop className="size-5" />,
+    },
+    {
+        label: 'Light',
+        value: 'light',
+        icon: <IconDay className="size-5" />,
+        default: true,
+    },
+    {
+        label: 'Dark',
+        value: 'dark',
+        icon: <IconNight className="size-5" />,
+    },
+]
+
 const SiteOptionsButton = () => {
     return (
-        <Popover
-            title="Settings"
-            dataScheme="secondary"
-            trigger={<span>Site options</span>}
-            contentClassName="w-[260px]"
-        >
-            <div data-scheme="secondary" className="w-full h-full bg-primary text-primary">
+        <Popover title="Settings" dataScheme="secondary" trigger={<span>Site options</span>} contentClassName="w-80">
+            <div className="w-full h-full bg-primary text-primary">
+                <Fieldset legend="Display">
+                    <div className="grid grid-cols-2 gap-2">
+                        <label className="pt-1.5 text-[15px]">Color mode</label>
+                        <ToggleGroup title="Color mode" options={colorModeOptions} />
+                    </div>
+                </Fieldset>
+
                 <div className="flex items-center justify-between space-x-2">
                     <span>Dark mode</span>
                     <DarkModeToggle />

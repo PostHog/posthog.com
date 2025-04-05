@@ -11,15 +11,16 @@ import {
     IconPencil,
     IconX,
     IconPullRequest,
+    IconTextWidth,
+    IconGear,
+    IconInfo,
 } from '@posthog/icons'
 import ScrollArea from 'components/RadixUI/ScrollArea'
 import { DebugContainerQuery } from 'components/DebugContainerQuery'
-import { IconTextWidth } from '@posthog/icons'
-import { IconTextWidthFixed, IconTableOfContents, IconClockRewind } from 'components/OSIcons'
-import { ToggleGroup } from 'radix-ui'
+import { IconClockRewind, IconTextWidthFixed } from 'components/OSIcons'
 import { Select } from '../RadixUI/Select'
 import { Popover } from '../RadixUI/Popover'
-
+import { ToggleGroup, ToggleOption } from 'components/RadixUI/ToggleGroup'
 import { useLayoutData } from 'components/Layout/hooks'
 import Link from 'components/Link'
 import { MDXRenderer } from 'gatsby-plugin-mdx'
@@ -32,7 +33,9 @@ import menu from '../../navs'
 import { TreeMenu } from 'components/TreeMenu'
 import dayjs from 'dayjs'
 import relativeTime from 'dayjs/plugin/relativeTime'
-
+import { Fieldset } from 'components/OSFieldset'
+import SliderDemo from 'components/RadixUI/Slider'
+import TooltipDemo from 'components/RadixUI/Tooltip'
 dayjs.extend(relativeTime)
 
 interface SidebarState {
@@ -56,25 +59,6 @@ const sidebarVariants = {
         },
     },
 }
-
-const toggleGroupItemClasses =
-    'flex p-1 aspect-square items-center justify-center bg-white leading-4 text-primary dark:text-primary-dark rounded hover:bg-accent-2 dark:hover:bg-accent-dark focus:z-10 focus:shadow-[0_0_0_2px] focus:shadow-black focus:outline-none data-[state=on]:bg-accent-2 data-[state=on]:bg-accent-2'
-
-const TextWidthToggleGroup = () => (
-    <ToggleGroup.Root
-        className="inline-flex space-x-px rounded p-1 bg-white dark:bg-accent-dark border border-light dark:border-dark"
-        type="single"
-        defaultValue="fixed"
-        aria-label="Content width"
-    >
-        <ToggleGroup.Item className={toggleGroupItemClasses} value="fixed" aria-label="Fixed width">
-            <IconTextWidthFixed className="size-5 inline-block" />
-        </ToggleGroup.Item>
-        <ToggleGroup.Item className={toggleGroupItemClasses} value="full" aria-label="Full width">
-            <IconTextWidth className="size-5" />
-        </ToggleGroup.Item>
-    </ToggleGroup.Root>
-)
 
 interface ReaderViewProps {
     body: {
@@ -134,6 +118,74 @@ function recursiveSearch(array, value) {
 
     return false
 }
+
+const backgroundImageOptions: ToggleOption[] = [
+    {
+        label: 'None',
+        value: 'none',
+        // icon: <IconLaptop className="size-5" />,
+        default: true,
+    },
+    {
+        label: '2',
+        value: '2',
+        // icon: <IconDay className="size-5" />,
+    },
+    {
+        label: '3',
+        value: '3',
+        // icon: <IconNight className="size-5" />,
+    },
+]
+
+const AppOptionsButton = () => {
+    return (
+        <Popover
+            title="Options"
+            dataScheme="secondary"
+            trigger={<IconGear className="size-5" />}
+            contentClassName="w-80"
+        >
+            <div className="w-full h-full bg-primary text-primary space-y-2">
+                <Fieldset legend="Paragraphs">
+                    <div className="grid grid-cols-2 gap-2">
+                        <label className="text-[15px]">Line height</label>
+                        <SliderDemo />
+                    </div>
+                </Fieldset>
+
+                <Fieldset legend="Why not?">
+                    <div className="grid grid-cols-2 gap-2">
+                        <label className="pt-1.5 text-[15px]">Background image</label>
+                        <ToggleGroup title="Background image" options={backgroundImageOptions} />
+                    </div>
+                </Fieldset>
+
+                <p className="text-[13px]">
+                    Toggle light/dark mode in{' '}
+                    <span className="inline-flex items-center gap-0.5">
+                        <button className="font-semibold underline">desktop settings</button>
+                        <TooltipDemo trigger={<IconInfo className="size-4" />}>Lower right!</TooltipDemo>
+                    </span>
+                </p>
+            </div>
+        </Popover>
+    )
+}
+
+const textWidthOptions: ToggleOption[] = [
+    {
+        label: 'Fixed width',
+        value: 'fixed',
+        icon: <IconTextWidthFixed className="size-5 inline-block" />,
+        default: true,
+    },
+    {
+        label: 'Full width',
+        value: 'full',
+        icon: <IconTextWidth className="size-5" />,
+    },
+]
 
 export default function ReaderView({
     body,
@@ -339,10 +391,10 @@ export default function ReaderView({
                 >
                     {/* this space intentionally left blank */}
                 </motion.div>
-                <div className="flex-grow flex justify-between">
+                <div className="flex-grow flex justify-between items-center">
                     <div>Questions?</div>
                     <div>
-                        <TextWidthToggleGroup />
+                        <AppOptionsButton />
                     </div>
                 </div>
                 <motion.div
