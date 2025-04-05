@@ -208,20 +208,31 @@ const colorModeOptions: ToggleOption[] = [
 ]
 
 const SiteOptionsButton = () => {
+    const [colorMode, setColorMode] = useState('system')
+    const handleColorModeChange = (value: string) => {
+        window.__setPreferredTheme(value)
+        setColorMode(value)
+    }
+
+    useEffect(() => {
+        const colorMode = localStorage.getItem('theme') || 'system'
+        setColorMode(colorMode)
+    }, [])
+
     return (
         <Popover title="Settings" dataScheme="secondary" trigger={<span>Site options</span>} contentClassName="w-80">
             <div className="w-full h-full bg-primary text-primary">
                 <Fieldset legend="Display">
                     <div className="grid grid-cols-2 gap-2">
                         <label className="pt-1.5 text-[15px]">Color mode</label>
-                        <ToggleGroup title="Color mode" options={colorModeOptions} />
+                        <ToggleGroup
+                            title="Color mode"
+                            options={colorModeOptions}
+                            onValueChange={handleColorModeChange}
+                            value={colorMode}
+                        />
                     </div>
                 </Fieldset>
-
-                <div className="flex items-center justify-between space-x-2">
-                    <span>Dark mode</span>
-                    <DarkModeToggle />
-                </div>
             </div>
         </Popover>
     )

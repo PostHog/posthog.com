@@ -50,7 +50,7 @@ export const onRenderBody = function ({ setPreBodyComponents }) {
     var darkQuery = window.matchMedia('(prefers-color-scheme: dark)')
     darkQuery.addListener(function (e) {
         if (!localStorage.getItem('theme')) {
-            window.__setPreferredTheme(e.matches ? 'dark' : 'light')
+            window.__setPreferredTheme('system')
         }
     })
     try {
@@ -59,12 +59,12 @@ export const onRenderBody = function ({ setPreBodyComponents }) {
             'light'
     } catch (err) {}
     window.__setPreferredTheme = function (newTheme) {
-        setTheme(newTheme)
+        setTheme(newTheme === 'system' ? (darkQuery.matches ? 'dark' : 'light') : newTheme)
         try {
             localStorage.setItem('theme', newTheme)
         } catch (err) {}
     }
-    setTheme(preferredTheme)
+    setTheme(preferredTheme === 'system' ? (darkQuery.matches ? 'dark' : 'light') : preferredTheme)
 })()
       `,
             },

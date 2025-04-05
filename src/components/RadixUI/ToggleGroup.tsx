@@ -16,9 +16,11 @@ export interface ToggleOption {
 export interface ToggleGroupProps {
     title: string
     options: ToggleOption[]
+    onValueChange: (value: string) => void
+    value: string
 }
 
-export const ToggleGroup = ({ title, options }: ToggleGroupProps) => {
+export const ToggleGroup = ({ title, options, onValueChange, value }: ToggleGroupProps) => {
     const defaultValue = options.find((option) => option.default)?.value || options[0]?.value
 
     return (
@@ -27,6 +29,8 @@ export const ToggleGroup = ({ title, options }: ToggleGroupProps) => {
             type="single"
             defaultValue={defaultValue}
             aria-label={title}
+            onValueChange={onValueChange}
+            value={value}
         >
             {options.map((option) => (
                 <RadixToggleGroup.Item
