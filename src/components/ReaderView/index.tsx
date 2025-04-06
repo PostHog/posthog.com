@@ -1,42 +1,25 @@
-import React, { useState, useCallback, useRef, useEffect } from 'react'
+import React, { useRef } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import OSButton from 'components/OSButton'
-import {
-    IconHome,
-    IconSidebarOpen,
-    IconSidebarClose,
-    IconChevronLeft,
-    IconChevronRight,
-    IconSearch,
-    IconPencil,
-    IconX,
-    IconPullRequest,
-    IconTextWidth,
-    IconGear,
-    IconInfo,
-    IconRefresh,
-} from '@posthog/icons'
+import { IconPencil, IconPullRequest, IconTextWidth, IconGear, IconInfo, IconRefresh } from '@posthog/icons'
 import ScrollArea from 'components/RadixUI/ScrollArea'
 import { DebugContainerQuery } from 'components/DebugContainerQuery'
 import { IconClockRewind, IconTextWidthFixed } from 'components/OSIcons'
 import { Select } from '../RadixUI/Select'
 import { Popover } from '../RadixUI/Popover'
 import { ToggleGroup, ToggleOption } from 'components/RadixUI/ToggleGroup'
-import { useLayoutData } from 'components/Layout/hooks'
 import Link from 'components/Link'
 import { MDXRenderer } from 'gatsby-plugin-mdx'
 import { MDXProvider } from '@mdx-js/react'
-import InternalSidebarLink from 'components/Docs/InternalSidebarLink'
 import HeaderBar from 'components/OSChrome/HeaderBar'
 import ElementScrollLink, { ScrollSpyProvider } from 'components/ElementScrollLink'
-import { useLocation } from '@reach/router'
-import menu from '../../navs'
 import { TreeMenu } from 'components/TreeMenu'
 import dayjs from 'dayjs'
 import relativeTime from 'dayjs/plugin/relativeTime'
 import { Fieldset } from 'components/OSFieldset'
 import Slider from 'components/RadixUI/Slider'
 import TooltipDemo from 'components/RadixUI/Tooltip'
+import { ReaderViewProvider, useReaderView } from './context/ReaderViewContext'
 dayjs.extend(relativeTime)
 
 interface SidebarState {
@@ -241,73 +224,34 @@ export default function ReaderView({
     commits,
     filePath,
 }: ReaderViewProps) {
-    const [isNavVisible, setIsNavVisible] = useState(true)
-    const [isTocVisible, setIsTocVisible] = useState(true)
-    const contentRef = useRef(null)
-    const { fullWidthContent } = useLayoutData()
-    const { pathname, search } = useLocation()
-    const [lineHeightMultiplier, setLineHeightMultiplier] = useState<number>(1)
-    const [lineHeightP, setLineHeightP] = useState<number | null>(null)
-    const [lineHeightLi, setLineHeightLi] = useState<number | null>(null)
-
-    const toggleNav = useCallback(() => {
-        setIsNavVisible((prev) => !prev)
-    }, [])
-
-    const toggleToc = useCallback(() => {
-        setIsTocVisible((prev) => !prev)
-    }, [])
-
-    const handleLineHeightChange = (value: number) => {
-        setLineHeightMultiplier(value)
-    }
-
-    useEffect(() => {
-        if (!lineHeightP || !lineHeightLi) return
-        const styleId = 'reader-line-height-style'
-        let style = document.getElementById(styleId) as HTMLStyleElement
-
-        if (!style) {
-            style = document.createElement('style')
-            style.id = styleId
-            document.head.appendChild(style)
-        }
-
-        style.textContent = `
-            .article-content p { line-height: ${lineHeightP * lineHeightMultiplier} !important; }
-            .article-content li { line-height: ${lineHeightLi * lineHeightMultiplier} !important; }
-        `
-        localStorage.setItem('lineHeightMultiplier', lineHeightMultiplier.toString())
-
-        return () => {
-            style.remove()
-        }
-    }, [lineHeightMultiplier, lineHeightLi, lineHeightP])
-
-    useEffect(() => {
-        const baseLineHeightP = getComputedLineHeight('p')
-        const baseLineHeightLi = getComputedLineHeight('li')
-        setLineHeightP(baseLineHeightP)
-        setLineHeightLi(baseLineHeightLi)
-        const storedLineHeightMultiplier = localStorage.getItem('lineHeightMultiplier')
-        if (storedLineHeightMultiplier) {
-            handleLineHeightChange(parseFloat(storedLineHeightMultiplier))
-        }
-    }, [])
-
-    const parent = menu.find(({ children, url }) => {
-        const currentURL = pathname
-        return currentURL === url.split('?')[0] || recursiveSearch(children, currentURL)
-    })
-
-    const internalMenu = parent?.children
-
-    const [activeInternalMenu, setActiveInternalMenu] = useState(
-        internalMenu?.find((menuItem) => {
-            const currentURL = pathname
-            return currentURL === menuItem.url?.split('?')[0] || recursiveSearch(menuItem.children, currentURL)
-        })
+    return (
+        <ReaderViewProvider>
+            <ReaderViewContent
+                body={body}
+                title={title}
+                tableOfContents={tableOfContents}
+                mdxComponents={mdxComponents}
+                commits={commits}
+                filePath={filePath}
+            />
+        </ReaderViewProvider>
     )
+}
+
+function ReaderViewContent({ body, title, tableOfContents, mdxComponents, commits, filePath }) {
+    const contentRef = useRef(null)
+    const {
+        isNavVisible,
+        isTocVisible,
+        lineHeightMultiplier,
+        fullWidthContent,
+        parent,
+        activeInternalMenu,
+        toggleNav,
+        toggleToc,
+        handleLineHeightChange,
+        setActiveInternalMenu,
+    } = useReaderView()
 
     return (
         <div className="@container w-full h-full flex flex-col">
