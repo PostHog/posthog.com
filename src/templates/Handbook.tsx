@@ -22,6 +22,7 @@ import { OverflowXSection } from 'components/OverflowXSection'
 import APIExamples from 'components/Product/Pipelines/APIExamples'
 import Configuration from 'components/Product/Pipelines/Configuration'
 import Link from 'components/Link'
+import SEO from 'components/seo'
 
 type AppParametersProps = {
     config:
@@ -147,8 +148,9 @@ export default function Handbook({
 }) {
     const {
         body,
-        frontmatter: { title },
+        frontmatter: { title, seo },
         fields: { slug, contributors, appConfig, templateConfigs, commits },
+        excerpt,
     } = post
 
     const components = {
@@ -185,14 +187,23 @@ export default function Handbook({
     }
 
     return (
-        <ReaderView
-            body={{ type: 'mdx', content: body }}
-            title={title}
-            tableOfContents={tableOfContents}
-            mdxComponents={components}
-            commits={commits}
-            filePath={post.parent?.relativePath}
-        />
+        <>
+            <SEO
+                title={seo?.metaTitle || `${title} - ${breadcrumbBase.name} - PostHog`}
+                description={seo?.metaDescription || excerpt}
+                article
+                image={`${process.env.GATSBY_CLOUDFRONT_OG_URL}/${slug.replace(/\//g, '')}.jpeg`}
+                imageType="absolute"
+            />
+            <ReaderView
+                body={{ type: 'mdx', content: body }}
+                title={title}
+                tableOfContents={tableOfContents}
+                mdxComponents={components}
+                commits={commits}
+                filePath={post.parent?.relativePath}
+            />
+        </>
     )
 }
 

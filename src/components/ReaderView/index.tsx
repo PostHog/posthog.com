@@ -278,6 +278,10 @@ export default function ReaderView({
             .article-content li { line-height: ${lineHeightLi * lineHeightMultiplier} !important; }
         `
         localStorage.setItem('lineHeightMultiplier', lineHeightMultiplier.toString())
+
+        return () => {
+            style.remove()
+        }
     }, [lineHeightMultiplier, lineHeightLi, lineHeightP])
 
     useEffect(() => {
@@ -330,7 +334,7 @@ export default function ReaderView({
                     {isNavVisible && (
                         <motion.div
                             id="nav"
-                            className="flex-shrink-0 overflow-hidden mb-[-53px]"
+                            className="flex-shrink-0 overflow-hidden mb-[-47px]"
                             initial={{ width: leftSidebarWidth }}
                             animate={{
                                 width: leftSidebarWidth,
