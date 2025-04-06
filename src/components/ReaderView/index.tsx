@@ -22,11 +22,6 @@ import TooltipDemo from 'components/RadixUI/Tooltip'
 import { ReaderViewProvider, useReaderView } from './context/ReaderViewContext'
 dayjs.extend(relativeTime)
 
-interface SidebarState {
-    isOpen: boolean
-    width: number
-}
-
 const leftSidebarWidth = '250px'
 
 const sidebarVariants = {
@@ -56,53 +51,6 @@ interface ReaderViewProps {
     filePath?: string
 }
 
-const selectOptions = [
-    {
-        label: 'Products',
-        items: [
-            { value: 'product-os', label: 'Product OS' },
-            { value: 'product-analytics', label: 'Product Analytics' },
-            { value: 'web-analytics', label: 'Web Analytics' },
-            { value: 'session-replay', label: 'Session Replay' },
-            { value: 'feature-flags', label: 'Feature Flags' },
-            { value: 'experiments', label: 'Experiments' },
-            { value: 'surveys', label: 'Surveys' },
-            { value: 'data-warehouse', label: 'Data Warehouse' },
-            { value: 'cdp', label: 'Data Pipelines' },
-            { value: 'ai-engineering', label: 'LLM Observability' },
-            { value: 'error-tracking', label: 'Error Tracking' },
-        ],
-    },
-    {
-        label: 'Roadmap',
-        items: [
-            { value: 'product-tours', label: 'Product Tours', disabled: true },
-            { value: 'revenue-analytics', label: 'Revenue Analytics', disabled: true },
-            { value: 'crm', label: 'CRM', disabled: true },
-            { value: 'messaging', label: 'Messaging', disabled: true },
-        ],
-    },
-]
-
-function recursiveSearch(array, value) {
-    for (let i = 0; i < array?.length || 0; i++) {
-        const element = array[i]
-
-        if (typeof element === 'string' && element.split('?')[0] === value) {
-            return true
-        }
-
-        if (typeof element === 'object' && element !== null) {
-            const found = recursiveSearch(Object.values(element), value)
-            if (found) {
-                return true
-            }
-        }
-    }
-
-    return false
-}
-
 const backgroundImageOptions: ToggleOption[] = [
     {
         label: 'None',
@@ -121,25 +69,6 @@ const backgroundImageOptions: ToggleOption[] = [
         // icon: <IconNight className="size-5" />,
     },
 ]
-
-const getComputedLineHeight = (selector: string) => {
-    const articleContent = document.querySelector('.article-content')
-    const elements = articleContent?.querySelectorAll(selector)
-
-    if (!elements?.length) return 1
-
-    const computedStyle = window.getComputedStyle(elements[0])
-    const lineHeight = computedStyle.lineHeight
-
-    if (lineHeight === 'normal') return 1.2
-    if (lineHeight.endsWith('px')) {
-        return parseFloat(lineHeight) / parseFloat(computedStyle.fontSize)
-    }
-    if (lineHeight.endsWith('%')) {
-        return parseFloat(lineHeight) / 100
-    }
-    return parseFloat(lineHeight)
-}
 
 const LineHeightSlider = ({ lineHeightMultiplier, onValueChange }) => {
     return (
