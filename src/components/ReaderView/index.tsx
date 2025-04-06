@@ -1,4 +1,4 @@
-import React, { useState, useCallback, useRef } from 'react'
+import React, { useState, useCallback, useRef, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import OSButton from 'components/OSButton'
 import {
@@ -14,6 +14,7 @@ import {
     IconTextWidth,
     IconGear,
     IconInfo,
+    IconRefresh,
 } from '@posthog/icons'
 import ScrollArea from 'components/RadixUI/ScrollArea'
 import { DebugContainerQuery } from 'components/DebugContainerQuery'
@@ -34,7 +35,7 @@ import { TreeMenu } from 'components/TreeMenu'
 import dayjs from 'dayjs'
 import relativeTime from 'dayjs/plugin/relativeTime'
 import { Fieldset } from 'components/OSFieldset'
-import SliderDemo from 'components/RadixUI/Slider'
+import Slider from 'components/RadixUI/Slider'
 import TooltipDemo from 'components/RadixUI/Tooltip'
 dayjs.extend(relativeTime)
 
@@ -138,19 +139,64 @@ const backgroundImageOptions: ToggleOption[] = [
     },
 ]
 
-const AppOptionsButton = () => {
+const getComputedLineHeight = (selector: string) => {
+    const articleContent = document.querySelector('.article-content')
+    const elements = articleContent?.querySelectorAll(selector)
+
+    if (!elements?.length) return 1
+
+    const computedStyle = window.getComputedStyle(elements[0])
+    const lineHeight = computedStyle.lineHeight
+
+    if (lineHeight === 'normal') return 1.2
+    if (lineHeight.endsWith('px')) {
+        return parseFloat(lineHeight) / parseFloat(computedStyle.fontSize)
+    }
+    if (lineHeight.endsWith('%')) {
+        return parseFloat(lineHeight) / 100
+    }
+    return parseFloat(lineHeight)
+}
+
+const LineHeightSlider = ({ lineHeightMultiplier, onValueChange }) => {
+    return (
+        <div className="flex items-center space-x-1">
+            <div className="flex-grow">
+                <Slider
+                    defaultValue={lineHeightMultiplier}
+                    max={3}
+                    step={0.25}
+                    min={1}
+                    value={[lineHeightMultiplier]}
+                    label="Line height"
+                    onValueChange={onValueChange}
+                />
+            </div>
+            <OSButton onClick={() => onValueChange([1])} variant="ghost" icon={<IconRefresh className="size-5" />} />
+        </div>
+    )
+}
+
+const AppOptionsButton = ({ lineHeightMultiplier, handleLineHeightChange }) => {
     return (
         <Popover
             title="Options"
             dataScheme="secondary"
-            trigger={<IconGear className="size-5" />}
+            trigger={
+                <span>
+                    <OSButton variant="ghost" icon={<IconGear className="size-5" />} />
+                </span>
+            }
             contentClassName="w-80"
         >
             <div className="w-full h-full bg-primary text-primary space-y-2">
                 <Fieldset legend="Paragraphs">
                     <div className="grid grid-cols-2 gap-2">
                         <label className="text-[15px]">Line height</label>
-                        <SliderDemo />
+                        <LineHeightSlider
+                            lineHeightMultiplier={lineHeightMultiplier}
+                            onValueChange={handleLineHeightChange}
+                        />
                     </div>
                 </Fieldset>
 
@@ -200,6 +246,9 @@ export default function ReaderView({
     const contentRef = useRef(null)
     const { fullWidthContent } = useLayoutData()
     const { pathname, search } = useLocation()
+    const [lineHeightMultiplier, setLineHeightMultiplier] = useState<number>(1)
+    const [lineHeightP, setLineHeightP] = useState<number | null>(null)
+    const [lineHeightLi, setLineHeightLi] = useState<number | null>(null)
 
     const toggleNav = useCallback(() => {
         setIsNavVisible((prev) => !prev)
@@ -207,6 +256,39 @@ export default function ReaderView({
 
     const toggleToc = useCallback(() => {
         setIsTocVisible((prev) => !prev)
+    }, [])
+
+    const handleLineHeightChange = (value: number) => {
+        setLineHeightMultiplier(value)
+    }
+
+    useEffect(() => {
+        if (!lineHeightP || !lineHeightLi) return
+        const styleId = 'reader-line-height-style'
+        let style = document.getElementById(styleId) as HTMLStyleElement
+
+        if (!style) {
+            style = document.createElement('style')
+            style.id = styleId
+            document.head.appendChild(style)
+        }
+
+        style.textContent = `
+            .article-content p { line-height: ${lineHeightP * lineHeightMultiplier} !important; }
+            .article-content li { line-height: ${lineHeightLi * lineHeightMultiplier} !important; }
+        `
+        localStorage.setItem('lineHeightMultiplier', lineHeightMultiplier.toString())
+    }, [lineHeightMultiplier, lineHeightLi, lineHeightP])
+
+    useEffect(() => {
+        const baseLineHeightP = getComputedLineHeight('p')
+        const baseLineHeightLi = getComputedLineHeight('li')
+        setLineHeightP(baseLineHeightP)
+        setLineHeightLi(baseLineHeightLi)
+        const storedLineHeightMultiplier = localStorage.getItem('lineHeightMultiplier')
+        if (storedLineHeightMultiplier) {
+            handleLineHeightChange(parseFloat(storedLineHeightMultiplier))
+        }
     }, [])
 
     const parent = menu.find(({ children, url }) => {
@@ -394,7 +476,10 @@ export default function ReaderView({
                 <div className="flex-grow flex justify-between items-center">
                     <div>Questions?</div>
                     <div>
-                        <AppOptionsButton />
+                        <AppOptionsButton
+                            lineHeightMultiplier={lineHeightMultiplier}
+                            handleLineHeightChange={handleLineHeightChange}
+                        />
                     </div>
                 </div>
                 <motion.div
