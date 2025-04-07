@@ -3805,7 +3805,7 @@
     aria-hidden "^1.2.4"
     react-remove-scroll "^2.6.3"
 
-"@radix-ui/react-menubar@1.1.6":
+"@radix-ui/react-menubar@1.1.6", "@radix-ui/react-menubar@^1.1.6":
   version "1.1.6"
   resolved "https://registry.yarnpkg.com/@radix-ui/react-menubar/-/react-menubar-1.1.6.tgz#6f8009e7a3a22e5163350fe16e715d6241c99925"
   integrity sha512-FHq7+3DlXwh/7FOM4i0G4bC4vPjiq89VEEvNF4VMLchGnaUuUbE5uKXMUCjdKaOghEEMeiKa5XCa2Pk4kteWmg==
