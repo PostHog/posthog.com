@@ -111,15 +111,15 @@ So, if you want to join a team that ships fast, avoid companies where sales peop
 
 PostHog currently comprises 91 people, the vast majority of whom have "engineer" in their job title. We also:
 
-  * Mainly hire technical people into content and marketing roles.
+* Mainly hire technical people into content and marketing roles.
 
-  * Hire customer success and sales people with a technical background.
+* Hire customer success and sales people with a technical background.
 
-  * Hire support engineers who have software development experience.
+* Hire support engineers who have software development experience.
 
-  * [Use GitHub as our content management system](https://posthog.com/blog/github-cms).
+* [Use GitHub as our content management system](/blog/github-cms).
 
-  * Accept that marketing and our website will sometimes lag our product.
+* Accept that marketing and our website will sometimes lag our product.
 
 ## 5. You actively keep people “in the loop”
 
