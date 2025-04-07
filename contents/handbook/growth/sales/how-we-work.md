@@ -184,3 +184,16 @@ To add Pylon to your customer channel:
 Once enabled, you can add the :ticket: emoji to a Slack thread to create a new Ticket in Zendesk.  Customers can also do this.  Make sure that a Group and Severity are selected or the ticket won't be routed properly.
 
 > It's your job to ensure your customer issues are resolved, make sure you follow up with Support and Engineering if you feel like the issue isn't getting the right level of attention.
+
+## Tools we use
+
+**Cal.com:**
+We use Cal.com for scheduling meetings. In order to schedule a meeting between a customer and multiple members on the PostHog team, click on the members tab and select the check box next to the the members you want to add, then click “Group Meeting" in the toolbar that pops up on the bottom of the screen.
+
+This will take you to a link you can share to the group meeting.
+
+**BuildBetter:**
+We use BuildBetter for call recording and notetaking. You will need to integrate BuildBetter with your calendar in order for it to automatically join your calls. To do so, click on settings and look for the integrations link under account (not the one under organization) and follow the steps from there.
+
+**Zoom:**
+We use Zoom for sales calls, and if you have Cal.com properly integrated, calls that are booked through the tool will default to Zoom. You can find backgrounds to use for the calls here: [This is fine \(and other awesome PostHog wallpapers\)](/blog/posthog-wallpapers)

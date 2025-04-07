@@ -65,10 +65,10 @@ Supporting our customers isn't just about solving tickets, and we don't judge th
 The current rotation for Support Zero is: 
 
 **Monday:** Nobody 
-**Tuesday:** Steven <TeamMember name="Steven Shults" photo />
-**Wednesday:** Abigail <TeamMember name="Abigail Richardson" photo />
-**Thursday:** Ben Haynes <TeamMember name="Ben Haynes" photo />
-**Friday:** Ben Lea <TeamMember name="Ben Lea" photo />
+**Tuesday:** <TeamMember name="Steven Shults" photo /> (NA) & <TeamMember name="Luke Belton" photo /> (EU)
+**Wednesday:** <TeamMember name="Joshua Ordehi" photo /> (NA)
+**Thursday:** <TeamMember name="Ben Haynes" photo /> (NA)
+**Friday:** <TeamMember name="Ben Lea" photo /> (EU)
 
 We may occasionally pause this rotation if we have a big initiative that needs more attention from one person, or if we need to focus on clearing a backlog of tickets. When you are Support Zero you should continue working on tickets that you're currently assigned to (or escalate/reassign as needed) but shouldn't take on new tickets unless you want to. 
 

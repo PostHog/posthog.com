@@ -25,6 +25,7 @@ Below is an example of a relatively restrictive CSP that limits only scripts and
   default-src 'self'; 
   script-src 'self' https://*.posthog.com; 
   connect-src 'self' https://*.posthog.com;
+  worker-src 'self' blob: data:;
 ">
 ```
 
@@ -42,6 +43,7 @@ Depending on your compliance needs you can either:
   default-src 'self'; 
   script-src 'self' https://*.posthog.com; 
   connect-src 'self' https://*.posthog.com;
+  worker-src 'self' blob: data:;
   img-src 'self' https://*.posthog.com; 
   style-src 'self' https://*.posthog.com; 
   font-src https://*.posthog.com;

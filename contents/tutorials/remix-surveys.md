@@ -59,7 +59,7 @@ To start, install the [JavaScript web SDK](/docs/libraries/js):
 npm i posthog-js
 ```
 
-Then, go to `app/entry.client.tsx` and initialize PostHog as a component. You'll need both your API key and instance address (you can find these in your [project settings](https://us.posthog.com/project/settings)).  
+Then, go to `app/entry.client.tsx` and initialize PostHog as a component. You'll need both your API key and instance address (you can find these in your [project settings](https://us.posthog.com/project/settings)).
 
 ```ts file=entry.client.tsx
 import { RemixBrowser } from "@remix-run/react";
@@ -91,9 +91,9 @@ startTransition(() => {
 Once you’ve done this, reload your app and click the button a few times. You should see events appearing in the [PostHog activity tab](https://us.posthog.com/events).
 
 <ProductScreenshot
-  imageLight={EventsLight} 
-  imageDark={EventsDark} 
-  alt="Events captured in PostHog" 
+  imageLight={EventsLight}
+  imageDark={EventsDark}
+  alt="Events captured in PostHog"
   classes="rounded"
 />
 
@@ -109,13 +109,13 @@ This tutorial covers how to implement both options:
 ### Option 1: Use PostHog's prebuilt survey UI
 
 This is the simplest option. PostHog has many [survey templates](/templates?filter=type&value=survey) to choose from, handles all the display logic, and captures responses for you. You can also customize the questions, branding, and display conditions as needed – see our [survey docs](/docs/surveys/creating-surveys) for more details on how to do so.
- 
-To create a survey with a prebuilt UI, go to the [surveys tab](https://us.posthog.com/surveys) in PostHog and click "New survey". 
+
+To create a survey with a prebuilt UI, go to the [surveys tab](https://us.posthog.com/surveys) in PostHog and click "New survey".
 
 <ProductScreenshot
-  imageLight={ImgSurveyTemplatesLight} 
-  imageDark={ImgSurveyTemplatesDark} 
-  alt="PostHog survey templates" 
+  imageLight={ImgSurveyTemplatesLight}
+  imageDark={ImgSurveyTemplatesDark}
+  alt="PostHog survey templates"
   classes="rounded"
 />
 
@@ -300,8 +300,8 @@ export default function Index() {
         setSurveyID(survey.id);
         setSurveyTitle(survey.questions[0].question)
       }
-    }); 
-  }, []);   
+    });
+  }, []);
 
   // ... rest of your code ...
 }
@@ -331,17 +331,17 @@ export default function Index() {
         const hasInteractedWithSurvey = localStorage.getItem(`hasInteractedWithSurvey_${survey.id}`);
         setShowSurvey(!hasInteractedWithSurvey);
       }
-    }); 
-  }, []); 
+    });
+  }, []);
 
   const handleDismiss = () => {
     setShowSurvey(false);
-    localStorage.setItem(`hasInteractedWithSurvey_${surveyID}`, 'true');  
+    localStorage.setItem(`hasInteractedWithSurvey_${surveyID}`, 'true');
   };
 
   const handleSubmit = (value: number) => {
     setShowSurvey(false);
-    localStorage.setItem(`hasInteractedWithSurvey_${surveyID}`, 'true');  
+    localStorage.setItem(`hasInteractedWithSurvey_${surveyID}`, 'true');
   };
 
   // rest of your code
@@ -350,7 +350,7 @@ export default function Index() {
 
 #### 4. Capture survey interactions
 
-The final step in setting up our survey is capturing interactions. This enables us to analyze the results in PostHog. 
+The final step in setting up our survey is capturing interactions. This enables us to analyze the results in PostHog.
 
 There are 3 events to capture:
 
@@ -368,15 +368,21 @@ You can capture these events using `posthog.capture()`:
     localStorage.setItem(`hasInteractedWithSurvey_${surveyID}`, 'true');
     posthog.capture("survey dismissed", {
       $survey_id: surveyID // required
-    })  
+    })
   };
 
   const handleSubmit = (value: number) => {
     setShowSurvey(false);
-    localStorage.setItem(`hasInteractedWithSurvey_${surveyID}`, 'true');  
+    localStorage.setItem(`hasInteractedWithSurvey_${surveyID}`, 'true');
     posthog.capture("survey sent", {
       $survey_id: surveyID, // required
-      $survey_response: value // required
+      $survey_response_a3071551-d599-4eeb-9ffe-69e93dc647b6: value, // required
+      $survey_questions: [
+        {
+          id: "a3071551-d599-4eeb-9ffe-69e93dc647b6",
+          question: "How likely are you to recommend us to a friend?",
+        }
+      ] // required for `getSurveyResponse` to work as expected
     })
   };
 
@@ -414,23 +420,29 @@ export default function Index() {
         const hasInteractedWithSurvey = localStorage.getItem(`hasInteractedWithSurvey_${survey.id}`);
         setShowSurvey(!hasInteractedWithSurvey);
       }
-    }); 
-  }, []); 
+    });
+  }, []);
 
   const handleDismiss = () => {
     setShowSurvey(false);
     localStorage.setItem(`hasInteractedWithSurvey_${surveyID}`, 'true');
     posthog.capture("survey dismissed", {
       $survey_id: surveyID // required
-    })  
+    })
   };
 
   const handleSubmit = (value: number) => {
     setShowSurvey(false);
-    localStorage.setItem(`hasInteractedWithSurvey_${surveyID}`, 'true');  
+    localStorage.setItem(`hasInteractedWithSurvey_${surveyID}`, 'true');
     posthog.capture("survey sent", {
       $survey_id: surveyID, // required
-      $survey_response: value // required
+      $survey_response_a3071551-d599-4eeb-9ffe-69e93dc647b6: value, // required
+      $survey_questions: [
+        {
+          id: "a3071551-d599-4eeb-9ffe-69e93dc647b6",
+          question: "How likely are you to recommend us to a friend?",
+        }
+      ] // required for `getSurveyResponse` to work as expected
     })
   };
 
@@ -440,7 +452,7 @@ export default function Index() {
         $survey_id: surveyID // required
       })
     }
-  }, [showSurvey, surveyID]);  
+  }, [showSurvey, surveyID]);
 
   return (
     <div id="app">
@@ -470,9 +482,9 @@ After interacting with your survey, you can view results by selecting the survey
 If you capture identified events, you can also filter these results based on [person properties](/docs/product-analytics/person-properties), [cohorts](/docs/data/cohorts), [feature flags](/docs/feature-flags/creating-feature-flags) and more.
 
 <ProductScreenshot
-  imageLight={ImgSurveyResultsLight} 
-  imageDark={ImgSurveyResultsDark} 
-  alt="Survey results" 
+  imageLight={ImgSurveyResultsLight}
+  imageDark={ImgSurveyResultsDark}
+  alt="Survey results"
   classes="rounded"
 />
 
