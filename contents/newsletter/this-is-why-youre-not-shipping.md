@@ -183,7 +183,7 @@ First, we regularly apply [the keeper test](https://posthog.com/handbook/company
 
 Second, we act decisively when someone isn't meeting expectations. This means explicitly telling them they're falling short, and what good performance looks like.
 
-If change isn't forthcoming within a few weeks, we let them go immediately and [give them a generous severance](https://posthog.com/handbook/people/offboarding).
+If change isn't forthcoming within a few weeks, we let them go immediately and [give them a generous severance](/handbook/people/offboarding).
 
 We avoid performance improvement plans because it's demeaning for those affected, and excessively time-consuming for managers.
 
