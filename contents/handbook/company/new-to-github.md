@@ -9,7 +9,7 @@ showTitle: true
 
 At its core, GitHub essentially hosts code that helps keep everyone in sync. Each team member can download this code, make changes, and upload their changes back into GitHub.
 
-Code is stored in a “repository” (or “repo” for short) - it’s like a folder for code. (As of writing this, PostHog has [152 repos](https://github.com/posthog) - like the code for [posthog.com](http://posthog.com) and even a repo for internal company discussions that doesn’t actually contain any code.) This is because each repo comes with a handful of collaboration tools. Here’s a list of the key concepts on GitHub:
+Code is stored in a “repository” (or “repo” for short) - it’s like a folder for code. (As of writing this, PostHog has [234 repos](https://github.com/posthog) - like the code for [posthog.com](http://posthog.com) and even a repo for internal company discussions that doesn’t actually contain any code.) This is because each repo comes with a handful of collaboration tools. Here’s a list of the key concepts on GitHub:
 
 1. Discussions
 2. Issues
