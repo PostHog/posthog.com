@@ -205,7 +205,7 @@ TL;DR: The faster we learn, the faster our product improves. Speed, like talent,
 
 ## 🌶️ Spicy reads not written by AI
 
-  *  [Use “but” strategically](https://newsletter.weskao.com/p/use-but-strategically) – Wes Kao
-  *  [Adjacency Matrix: How to expand after PMF](https://longform.asmartbear.com/adjacency/) – Jason Cohen**
+* [Use “but” strategically](https://newsletter.weskao.com/p/use-but-strategically) – Wes Kao
+* [Adjacency Matrix: How to expand after PMF](https://longform.asmartbear.com/adjacency/) – Jason Cohen
 
 [^1]: It’s important to point out that my boss wasn’t at fault here. This culture had developed for over a decade. It had an irresistible gravity that sucked everyone in, like the black hole in _Interstellar_ but without the epic soundtrack. All a single person could do was paddle hard and hope they could achieve escape velocity. 🚀
