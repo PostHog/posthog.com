@@ -4,50 +4,50 @@
 *Goal: Create a highly stable, consistent, and resilient feature flag system capable of supporting 10x growth*
 
 - Scale `/flags` service
-   - Complete 100% worldwide rollout of `/flags` endpoint to all customers
-   - Measure and validate improved query performance metrics
-   - Document infrastructure cost savings achieved
-   - Stretch: Investigate feasibility of decoupling flag evaluation from Postgres entirely
+  - Complete 100% worldwide rollout of `/flags` endpoint to all customers
+  - Measure and validate improved query performance metrics
+  - Document infrastructure cost savings achieved
+  - Stretch: Investigate feasibility of decoupling flag evaluation from Postgres entirely
 
 - Standardize SDK Error Handling and UX
-   - Implement unified error handling framework across all SDKs
-   - Develop comprehensive error classification system with standardized messages
-   - Create consistent fallback and default behaviors across platforms
-   - Ensure all SDKs utilize the latest (v2) flags response format
+  - Move more SDK functionality to the server wherever possible ([reference](https://github.com/PostHog/posthog/issues/30466))
+  - Implement unified error handling framework across all SDKs
+  - Create consistent fallback and default behaviors across platforms
+  - Ensure all SDKs utilize the latest (v2) flags response format
 
 - Enhance System Resilience
-   - Decouple flag service from writer database
-   - Deploy flags on differentiated infrastructure aligned with varying scale needs
-   - Implement circuit breakers for graceful degradation during upstream failures
-   - Establish reliability SLAs and monitoring for flag delivery
+  - Decouple flag service from writer database
+  - Deploy flags on differentiated infrastructure aligned with varying scale needs
+  - Implement circuit breakers for graceful degradation during upstream failures
+  - Establish reliability SLAs and monitoring for flag delivery
   
 ### Behavioral Cohort Targeting
 *Goal: Enable customers to target feature flags based on user behaviors*
 
 - Ship Beta Release
-   - Develop core behavioral targeting functionality
-   - Create intuitive UI for defining behavioral cohorts
-   - Implement backend services to process and apply cohort rules
+  - Develop core behavioral targeting functionality
+  - Create intuitive UI for defining behavioral cohorts
+  - Implement backend services to process and apply cohort rules
 
 - Customer Adoption
-   - Identify and onboard 5-10 key customers for beta testing
-   - Establish success metrics and collect usage data
-   - Document use cases and implementation patterns
-   - Create support resources for customer implementation
+  - Identify and onboard 5-10 key customers for beta testing
+  - Establish success metrics and collect usage data
+  - Document use cases and implementation patterns
+  - Create support resources for customer implementation
 
 ## AI IDE Integration
 *Goal: Streamline developer workflow with AI-powered flag implementation*
 
 - Create Intelligent Code Snippets
-   - Develop context-aware SDK snippet generation system for feature flags
-   - Ensure generated code follows best practices for each language/framework
+  - Develop context-aware SDK snippet generation system for feature flags
+  - Ensure generated code follows best practices for each language/framework
 
 - IDE Integration
-   - Build plugins/extensions for AI IDEs (Cursor, Windsurf, potentially our own)
-   - Create seamless workflow from flag creation to code implementation
-   - Implement AI-assisted troubleshooting for flag implementation issues
+  - Build plugins/extensions for AI IDEs (Cursor, Windsurf, potentially our own)
+  - Create seamless workflow from flag creation to code implementation
+  - Implement AI-assisted troubleshooting for flag implementation issues
 
 - Developer Experience
-   - Measure time-to-implementation improvements
-   - Collect developer feedback on integration experience
-   - Iterate based on usage patterns and pain points
+  - Measure time-to-implementation improvements
+  - Collect developer feedback on integration experience
+  - Iterate based on usage patterns and pain points
