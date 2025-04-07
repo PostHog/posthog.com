@@ -126,4 +126,6 @@ To celebrate 50k subscribers to Product for Engineers, here are the 50 most impo
 
 50. Work on a product [you're excited about](https://newsletter.posthog.com/i/142577602/not-working-on-something-youre-excited-about-pivot). As James, PostHog co-founder, wrote in his [guide to finding product-market fit](/founders/product-market-fit-game): "If you aren't excited about what you're working on, pivot. It's as simple as that. You'll achieve more if you're working on something that feels yours."
 
-*Words by Ian Vanagas, who's glad [no one suggested reading 50,000 email addresses](https://www.youtube.com/watch?v=SD7B2teuLXk) this time.*  
+*Words by Ian Vanagas, who's glad [no one suggested reading 50,000 email addresses](https://www.youtube.com/watch?v=SD7B2teuLXk) this time.* 
+
+<NewsletterForm />
