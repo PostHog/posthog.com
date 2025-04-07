@@ -12,12 +12,13 @@ export type MenuItemType = {
 }
 
 export type MenuType = {
-    label: string
+    trigger: React.ReactNode
+    bold?: boolean
     items: MenuItemType[]
 }
 
 const TriggerClasses =
-    'flex select-none items-center justify-between gap-0.5 rounded px-3 py-2 text-[13px] font-medium leading-none text-primary outline-none data-[highlighted]:bg-accent hover:bg-primary data-[state=open]:bg-accent'
+    'flex select-none items-center justify-between gap-0.5 rounded px-2.5 py-0.5 text-[13px] leading-none text-primary outline-none data-[highlighted]:bg-accent hover:bg-primary data-[state=open]:bg-accent'
 const ItemClasses =
     'hover-invert group relative flex h-[25px] select-none items-center rounded px-2.5 text-[13px] leading-none text-primary hover:bg-primary outline-none data-[disabled]:pointer-events-none data-[state=open]:bg-accent data-[highlighted]:bg-input-bg data-[disabled]:text-muted data-[highlighted]:data-[state=open]:text-secondary data-[highlighted]:bg-text-secondary data-[state=open]:text-secondary'
 const SubTriggerClasses =
@@ -71,7 +72,9 @@ const MenuBar: React.FC<MenuBarProps> = ({ menus }) => {
         <RadixMenubar.Root data-scheme="tertiary" className="flex gap-px">
             {menus.map((menu, index) => (
                 <RadixMenubar.Menu key={index}>
-                    <RadixMenubar.Trigger className={TriggerClasses}>{menu.label}</RadixMenubar.Trigger>
+                    <RadixMenubar.Trigger className={`${TriggerClasses} ${menu.bold ? 'font-bold' : 'font-medium'}`}>
+                        {menu.trigger}
+                    </RadixMenubar.Trigger>
                     <RadixMenubar.Portal>
                         <RadixMenubar.Content
                             className={ContentClasses}

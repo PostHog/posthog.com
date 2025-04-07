@@ -12,6 +12,7 @@ import {
     IconNight,
     IconLaptop,
     IconChevronRight,
+    IconLogomark,
 } from '@posthog/icons'
 import { useApp } from '../../context/App'
 import { Provider as WindowProvider } from '../../context/Window'
@@ -35,7 +36,52 @@ const getSizeDefaults = () => ({
 
 export const menuData: MenuType[] = [
     {
-        label: 'File',
+        trigger: (
+            <>
+                <IconLogomark className="size-6" />
+            </>
+        ),
+        items: [
+            {
+                type: 'item',
+                label: 'New Tab',
+                shortcut: '⌘ T',
+            },
+            {
+                type: 'item',
+                label: 'New Window',
+                shortcut: '⌘ N',
+            },
+            {
+                type: 'item',
+                label: 'New Incognito Window',
+                disabled: true,
+            },
+        ],
+    },
+    {
+        trigger: 'Posts',
+        bold: true,
+        items: [
+            {
+                type: 'item',
+                label: 'New Tab',
+                shortcut: '⌘ T',
+            },
+            {
+                type: 'item',
+                label: 'New Window',
+                shortcut: '⌘ N',
+            },
+            {
+                type: 'item',
+                label: 'New Incognito Window',
+                disabled: true,
+            },
+        ],
+    },
+    {
+        trigger: 'Edit',
         items: [
             {
                 type: 'item',
@@ -80,7 +126,11 @@ export const menuData: MenuType[] = [
         ],
     },
     {
-        label: 'Edit',
+        trigger: (
+            <>
+                <span className="ml-1">View</span>
+            </>
+        ),
         items: [
             {
                 type: 'item',
@@ -96,31 +146,6 @@ export const menuData: MenuType[] = [
                 type: 'item',
                 label: 'New Incognito Window',
                 disabled: true,
-            },
-            { type: 'separator' },
-            {
-                type: 'submenu',
-                label: 'Share',
-                items: [
-                    {
-                        type: 'item',
-                        label: 'Email Link',
-                    },
-                    {
-                        type: 'item',
-                        label: 'Messages',
-                    },
-                    {
-                        type: 'item',
-                        label: 'Notes',
-                    },
-                ],
-            },
-            { type: 'separator' },
-            {
-                type: 'item',
-                label: 'Print…',
-                shortcut: '⌘ P',
             },
         ],
     },
