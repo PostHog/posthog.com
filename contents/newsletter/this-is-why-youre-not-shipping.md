@@ -41,7 +41,7 @@ This is bad on an individual level, but catastrophic when 200 or so people are a
 
 Just like [giving feedback](https://newsletter.posthog.com/p/why-you-suck-at-giving-feedback), the best time to deal with any problem is the moment you encounter it.
 
-### What we do
+#### What we do
 
 We encourage people to have fewer 1:1s. They should be far enough away that waiting until your next one would feel totally wrong.
 
