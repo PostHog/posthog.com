@@ -1,6 +1,7 @@
 import * as React from 'react'
 import { Menubar as RadixMenubar } from 'radix-ui'
 import { IconChevronRight } from '@posthog/icons'
+import Link from 'components/Link'
 
 // Types
 export type MenuItemType = {
@@ -62,9 +63,9 @@ const MenuItem: React.FC<{ item: MenuItemType }> = ({ item }) => {
             <div className="flex items-center gap-2">
                 {item.icon}
                 {item.link ? (
-                    <a href={item.link} className="no-underline text-primary">
+                    <Link to={item.link} state={{ newWindow: true }} className="no-underline text-primary">
                         {item.label}
-                    </a>
+                    </Link>
                 ) : (
                     <span>{item.label}</span>
                 )}

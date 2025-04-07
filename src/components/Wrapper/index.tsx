@@ -296,7 +296,7 @@ export const menuData: MenuType[] = [
     },
 ]
 
-const Window = ({ item, constraintsRef }: { item: any; constraintsRef: any }) => {
+const Window = ({ item, constraintsRef, taskbarHeight }: { item: any; constraintsRef: any; taskbarHeight: number }) => {
     const { minimizeWindow, bringToFront, closeWindow, focusedWindow } = useApp()
     const controls = useDragControls()
     const [sizeDefaults, setSizeDefaults] = useState(getSizeDefaults())
@@ -324,7 +324,6 @@ const Window = ({ item, constraintsRef }: { item: any; constraintsRef: any }) =>
     const expandWindow = () => {
         setPreviousSize(size)
         setPreviousPosition(position)
-        const taskbarHeight = document.querySelector('#taskbar')?.getBoundingClientRect().height || 0
         setPosition({ x: 0, y: 0 })
         setSize({ width: window.innerWidth, height: window.innerHeight - taskbarHeight })
     }
@@ -558,15 +557,30 @@ const TaskBar = () => {
 export default function Wrapper() {
     const constraintsRef = useRef(null)
     const { windows } = useApp()
+    const [taskbarHeight, setTaskbarHeight] = useState(0)
+
+    useEffect(() => {
+        const updateTaskbarHeight = () => {
+            const height = document.querySelector('#taskbar')?.getBoundingClientRect().height || 0
+            setTaskbarHeight(height)
+        }
+
+        // Initial calculation
+        updateTaskbarHeight()
+
+        // Update on window resize
+        window.addEventListener('resize', updateTaskbarHeight)
+        return () => window.removeEventListener('resize', updateTaskbarHeight)
+    }, [])
 
     return (
         <div ref={constraintsRef} className="fixed inset-0 size-full">
             <TaskBarMenu>
                 <SiteOptionsButton />
             </TaskBarMenu>
-            <Desktop />
+            <Desktop menuBarOffset={taskbarHeight} />
             {windows.map((item) => (
-                <Window item={item} key={item.key} constraintsRef={constraintsRef} />
+                <Window item={item} key={item.key} constraintsRef={constraintsRef} taskbarHeight={taskbarHeight} />
             ))}
             <TaskBar />
         </div>

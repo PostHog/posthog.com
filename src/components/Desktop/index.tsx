@@ -34,7 +34,7 @@ const AppLink = ({ Icon, type, color, label, url }) => {
     )
 }
 
-export default function Desktop() {
+export default function Desktop({ menuBarOffset }: { menuBarOffset: number }) {
     return (
         <div className="fixed size-full p-5">
             <div
@@ -44,11 +44,17 @@ export default function Desktop() {
                         "url('https://res.cloudinary.com/dmukukwp6/image/upload/Frame_10127_b7362fd913.png')",
                 }}
             />
-            <nav>
-                <ul className="p-0 m-0 list-none flex flex-col space-y-4 items-start">
+            <nav
+                style={{
+                    paddingTop: `${menuBarOffset}px`,
+                    height: `calc(100vh - ${menuBarOffset}px - 48px)`, // 48px for taskbar
+                }}
+                className="overflow-hidden"
+            >
+                <ul className="p-0 m-0 list-none flex flex-col flex-wrap h-full content-start gap-x-8 gap-y-4">
                     {apps.map((app, index) => {
                         return (
-                            <li key={app.label + index}>
+                            <li key={app.label + index} className="w-[90px]">
                                 <AppLink {...app} />
                             </li>
                         )
