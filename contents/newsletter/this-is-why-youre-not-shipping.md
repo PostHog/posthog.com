@@ -25,7 +25,7 @@ Our only meaningful interaction was the 30 minutes around lunchtime when they'd 
 
 I wasn't alone.
 
-Everyone who did my job had the same relationship with their boss. There were entire layers of people at this company who just went from meeting-to-meeting all day.[1]
+Everyone who did my job had the same relationship with their boss. There were entire layers of people at this company who just went from meeting-to-meeting all day.[^1]
 
 This 1% dictated the pace for everyone else, so everything moved slowly.
 
@@ -201,9 +201,11 @@ TL;DR: The faster we learn, the faster our product improves. Speed, like talent,
 
  _Words by [Andy Vandervell](https://www.linkedin.com/in/andyvandervell/), who wrote this article quite slowly, actually._
 
+ <NewsletterForm />
+
 ## 🌶️ Spicy reads not written by AI
 
-  *  **[Use “but” strategically](https://newsletter.weskao.com/p/use-but-strategically) – [Wes Kao](https://open.substack.com/users/4005715-wes-kao)
-  *  **[Adjacency Matrix: How to expand after PMF](https://longform.asmartbear.com/adjacency/) – Jason Cohen**
+  *  [Use “but” strategically](https://newsletter.weskao.com/p/use-but-strategically) – Wes Kao
+  *  [Adjacency Matrix: How to expand after PMF](https://longform.asmartbear.com/adjacency/) – Jason Cohen**
 
-[1]: It’s important to point out that my boss wasn’t at fault here. This culture had developed for over a decade. It had an irresistible gravity that sucked everyone in, like the black hole in _Interstellar_ but without the epic soundtrack. All a single person could do was paddle hard and hope they could achieve escape velocity. 🚀
+[^1]: It’s important to point out that my boss wasn’t at fault here. This culture had developed for over a decade. It had an irresistible gravity that sucked everyone in, like the black hole in _Interstellar_ but without the epic soundtrack. All a single person could do was paddle hard and hope they could achieve escape velocity. 🚀
