@@ -1,31 +1,14 @@
 import CloudinaryImage from 'components/CloudinaryImage'
 import React, { useState } from 'react'
 import Link from 'components/Link'
-import {
-    IconWarning,
-    IconGraph,
-    IconHogQL,
-    IconClock,
-    IconToggle,
-    IconDecisionTree,
-    IconRewindPlay,
-    IconCheck,
-    IconAI,
-    IconPerson,
-    IconPencil,
-    IconTrends,
-    IconUser,
-} from '@posthog/icons'
+import { IconWarning, IconGraph, IconToggle, IconRewindPlay, IconTrends, IconUser } from '@posthog/icons'
 import { CallToAction } from 'components/CallToAction'
 import { CustomerCard } from 'components/Products/CustomerCard'
-import { TutorialCard } from 'components/Products/TutorialCard'
 import { Hero } from 'components/Products/Hero'
 import { Feature } from 'components/Products/Feature'
 import { Subfeature } from 'components/Products/Subfeature'
 import { docsMenu } from '../../../navs'
-import TeamRoadmap from 'components/TeamRoadmap'
 import { Marquee } from 'components/Products/Marquee'
-import RecentChange from '../RecentChange'
 import TeamMembers from '../TeamMembers'
 import Questions from '../Questions'
 import CTA from 'components/Home/CTA'
@@ -34,7 +17,6 @@ import { PairsWithItem } from 'components/Products/PairsWith/item'
 import { Question } from 'components/Products/Question'
 import { DocLinks } from 'components/Products/DocsLinks'
 import { SmoothScroll } from 'components/Products/SmoothScroll'
-import { FAQ } from 'components/Products/FAQ'
 import { SEO } from 'components/seo'
 import { useLayoutData } from 'components/Layout/hooks'
 import Plans from 'components/Pricing/Plans'
@@ -66,7 +48,7 @@ const product = {
     slug: 'error-tracking',
     lowercase: 'error tracking',
     capitalized: 'Error tracking',
-    freeTier: '10,000 events',
+    freeTier: '100,000 exceptions',
 }
 
 const team = 'Error Tracking'
@@ -75,8 +57,8 @@ const teamSlug = '/teams/error-tracking'
 const featuresPerRow = 4
 const features = [
     {
-        title: 'Alerts',
-        description: 'Get notifications of new errors by email, Slack, or webhook',
+        title: 'Alert',
+        description: 'Get notified of new issues by email, Slack, or webhook',
         image: (
             <CloudinaryImage
                 src="https://res.cloudinary.com/dmukukwp6/image/upload/screenshot_alerts_00824b03f5.png"
@@ -86,8 +68,8 @@ const features = [
         ),
     },
     {
-        title: 'Assign errors',
-        description: 'Task issues to teams or individual members',
+        title: 'Triage',
+        description: 'Assign issues to individuals or groups',
         image: (
             <CloudinaryImage
                 src="https://res.cloudinary.com/dmukukwp6/image/upload/screenshot_assign_4c9bb9ee60.png"
@@ -126,20 +108,20 @@ const subfeatures = [
     {
         title: 'Session replay',
         description:
-            'Watch session recordings of users who triggered errors for more context about how to reproduce an issue',
+            'Watch session recordings of users who caused exceptions for more context about how to reproduce an issue',
         icon: <IconRewindPlay />,
         color: 'yellow',
     },
     {
         title: 'Product analytics',
         description:
-            'Graph the <code>$exception</code> event and use filters and grouping to determine where errors happen and what to prioritize',
+            'Graph your <code>$exception</code> events, use filters and breakdowns to determine where errors happen and what to prioritize',
         icon: <IconTrends />,
         color: 'blue',
     },
     {
         title: 'Feature flags',
-        description: 'Test potential fixes by rolling out code changes only to affected users',
+        description: 'Test fixes by rolling out code changes only to affected users',
         icon: <IconToggle />,
         color: 'seagreen',
     },
@@ -182,17 +164,17 @@ const questions = [
 const faqs = [
     {
         question: 'What is error tracking?',
-        answer: 'Error tracking helps you monitor and analyze errors in your application. It provides detailed stack traces, error context, and analytics to help you identify and fix issues quickly.',
+        answer: 'Error tracking helps you capture and analyze errors in your application. It provides detailed stack traces, error context, and analytics to help you identify and fix issues quickly.',
         children: null,
     },
     {
         question: 'How does pricing work?',
-        answer: 'Error tracking is free up to 10,000 events per month. After that, you pay per event with volume-based discounts.',
+        answer: 'Error tracking is free up to 100,000 exceptions per month. After that, you pay per event with volume-based discounts.',
         children: null,
     },
     {
         question: 'What data is collected?',
-        answer: "We collect error messages, stack traces, error context, and associated metadata. You can configure what data is sent and how long it's retained.",
+        answer: 'We collect error messages, stack traces, error context, and associated metadata, as well as any extra data you attach to the error.',
         children: null,
     },
     {
@@ -314,15 +296,6 @@ const comparison = [
     },
 ]
 
-interface HeroProps {
-    color: string
-    icon: React.ReactNode
-    product: string
-    title: string
-    description: string
-    image: string | React.ReactNode
-}
-
 export const ProductErrorTracking = () => {
     const { fullWidthContent } = useLayoutData()
     const [activeProfile, setActiveProfile] = useState<ProfileData | null>(null)
@@ -404,7 +377,9 @@ export const ProductErrorTracking = () => {
                 </section>
 
                 <div className="mt-12">
-                    <ul className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 mt-12 list-none p-0">
+                    <ul
+                        className={`grid md:grid-cols-2 lg:grid-cols-${subfeaturesItemCount} gap-8 mt-12 list-none p-0`}
+                    >
                         {subfeatures.map((subfeature, index) => (
                             <Subfeature key={index} {...subfeature} />
                         ))}
@@ -412,7 +387,7 @@ export const ProductErrorTracking = () => {
                 </div>
 
                 <div className="py-12">
-                    <ul className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 list-none p-0">
+                    <ul className={`grid md:grid-cols-2 lg:grid-cols-${featuresPerRow} gap-8 list-none p-0`}>
                         {features.map((feature, index) => (
                             <Feature key={index} {...feature} />
                         ))}
