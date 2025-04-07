@@ -87,7 +87,7 @@ It's even harder to move fast when ownership problems become insoluble. People l
 
 ### What we do
 
-We've talked about [how small teams ship faster](https://posthog.com/newsletter/small-teams) before, but there's another important benefit: they're easy to change.
+We've talked about [how small teams ship faster](/newsletter/small-teams) before, but there's another important benefit: they're easy to change.
 
 Whenever a team gets too big, or it makes sense to form a new one to achieve a goal, we just do it. Typically, the process looks something like this:
 
