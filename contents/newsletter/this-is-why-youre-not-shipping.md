@@ -127,10 +127,10 @@ Having to actively push information to other people is a sure sign that keeping 
 
 It means you have to:
 
-  * Figure out who needs to know
-  * What they need to know
-  * When they need to know
-  * How to inform them
+* Figure out who needs to know
+* What they need to know
+* When they need to know
+* How to inform them
 
 This is busy work that slows you down.
 
