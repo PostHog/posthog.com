@@ -93,11 +93,11 @@ Whenever a team gets too big, or it makes sense to form a new one to achieve a g
 
 ![team changes at posthog](https://res.cloudinary.com/dmukukwp6/image/upload/team_change_91f7a8c7dc.png)
 
-A few months ago, for example, we created one team to own both event ingestion and building [our customer data platform](https://posthog.com/docs/cdp) and [realtime destinations](https://posthog.com/docs/cdp/destinations). This made sense because the two systems needed to work well together.
+A few months ago, for example, we created one team to own both event ingestion and building [our customer data platform](/docs/cdp) and [realtime destinations](/docs/cdp/destinations). This made sense because the two systems needed to work well together.
 
 Recently, however, we've split them into two separate teams again: Ingestion and CDP. Why? Because the problem has moved from "how do we make this work?" to "we need to build more integrations".
 
-We also maintain a [public feature ownership doc](https://posthog.com/handbook/company/fuzzy-ownership) that anyone can propose changes to at any time through a PR. Who owns what isn't dictated solely by leadership.
+We also maintain a [public feature ownership doc](/handbook/company/fuzzy-ownership) that anyone can propose changes to at any time through a PR. Who owns what isn't dictated solely by leadership.
 
 ## 4. Sales outnumbers engineering
 
