@@ -20,7 +20,7 @@ import { DarkModeToggle } from 'components/DarkModeToggle'
 import { Popover } from 'components/RadixUI/Popover'
 import { ToggleGroup, ToggleOption } from 'components/RadixUI/ToggleGroup'
 import { Fieldset } from 'components/OSFieldset'
-import MenuBar from 'components/RadixUI/MenuBar'
+import MenuBar, { MenuType } from 'components/RadixUI/MenuBar'
 
 const getSizeDefaults = () => ({
     max: {
@@ -32,6 +32,99 @@ const getSizeDefaults = () => ({
         height: window.innerHeight * 0.2,
     },
 })
+
+export const menuData: MenuType[] = [
+    {
+        label: 'File',
+        items: [
+            {
+                type: 'item',
+                label: 'New Tab',
+                shortcut: '⌘ T',
+            },
+            {
+                type: 'item',
+                label: 'New Window',
+                shortcut: '⌘ N',
+            },
+            {
+                type: 'item',
+                label: 'New Incognito Window',
+                disabled: true,
+            },
+            { type: 'separator' },
+            {
+                type: 'submenu',
+                label: 'Share',
+                items: [
+                    {
+                        type: 'item',
+                        label: 'Email Link',
+                    },
+                    {
+                        type: 'item',
+                        label: 'Messages',
+                    },
+                    {
+                        type: 'item',
+                        label: 'Notes',
+                    },
+                ],
+            },
+            { type: 'separator' },
+            {
+                type: 'item',
+                label: 'Print…',
+                shortcut: '⌘ P',
+            },
+        ],
+    },
+    {
+        label: 'Edit',
+        items: [
+            {
+                type: 'item',
+                label: 'New Tab',
+                shortcut: '⌘ T',
+            },
+            {
+                type: 'item',
+                label: 'New Window',
+                shortcut: '⌘ N',
+            },
+            {
+                type: 'item',
+                label: 'New Incognito Window',
+                disabled: true,
+            },
+            { type: 'separator' },
+            {
+                type: 'submenu',
+                label: 'Share',
+                items: [
+                    {
+                        type: 'item',
+                        label: 'Email Link',
+                    },
+                    {
+                        type: 'item',
+                        label: 'Messages',
+                    },
+                    {
+                        type: 'item',
+                        label: 'Notes',
+                    },
+                ],
+            },
+            { type: 'separator' },
+            {
+                type: 'item',
+                label: 'Print…',
+                shortcut: '⌘ P',
+            },
+        ],
+    },
+]
 
 const Window = ({ item, constraintsRef }: { item: any; constraintsRef: any }) => {
     const { minimizeWindow, bringToFront, closeWindow, focusedWindow } = useApp()
@@ -250,7 +343,7 @@ const TaskBarMenu = ({ children }: { children?: React.ReactNode }) => {
             exit={{ translateY: '100%' }}
             className="fixed top-0 left-0 w-full p-0.5 bg-primary border-b border-primary z-50"
         >
-            <MenuBar>{children}</MenuBar>
+            <MenuBar menus={menuData} />
         </motion.div>
     )
 }

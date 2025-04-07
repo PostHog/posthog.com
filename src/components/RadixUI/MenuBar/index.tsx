@@ -1,21 +1,9 @@
 import * as React from 'react'
 import { Menubar as RadixMenubar } from 'radix-ui'
 import { IconChevronRight } from '@posthog/icons'
+import { MenuItemType, MenuType } from './types'
 
-// Types
-export type MenuItemType = {
-    type: 'item' | 'submenu' | 'separator'
-    label?: string
-    shortcut?: string
-    disabled?: boolean
-    items?: MenuItemType[] // For submenus
-}
-
-export type MenuType = {
-    label: string
-    items: MenuItemType[]
-}
-
+// Extracted Tailwind classes
 const TriggerClasses =
     'flex select-none items-center justify-between gap-0.5 rounded px-3 py-2 text-[13px] font-medium leading-none text-primary outline-none data-[highlighted]:bg-accent hover:bg-primary data-[state=open]:bg-accent'
 const ItemClasses =
@@ -68,7 +56,7 @@ export interface MenuBarProps {
 
 const MenuBar: React.FC<MenuBarProps> = ({ menus }) => {
     return (
-        <RadixMenubar.Root data-scheme="tertiary" className="flex gap-px">
+        <RadixMenubar.Root data-scheme="tertiary" className="flex gap-1">
             {menus.map((menu, index) => (
                 <RadixMenubar.Menu key={index}>
                     <RadixMenubar.Trigger className={TriggerClasses}>{menu.label}</RadixMenubar.Trigger>
