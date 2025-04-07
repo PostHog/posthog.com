@@ -175,11 +175,11 @@ Being 10/10 all the time isn't realistic, but moving fast requires a consistentl
 
 First, we regularly apply [the keeper test](https://posthog.com/handbook/company/management#the-keeper-test), which has three key points:
 
-  1. Team leads should consider "if X was leaving for a similar role at another company, would you try to keep them?"
+1. Team leads should consider "if X was leaving for a similar role at another company, would you try to keep them?"
 
-  2. Dig in where the answer is "no" – what would it take for this to be a "yes"? Is this just temporary, or is there a deeper issue to resolve?
+2. Dig in where the answer is "no" – what would it take for this to be a "yes"? Is this just temporary, or is there a deeper issue to resolve?
 
-  3. Share this feedback with team members to ensure they keep improving.
+3. Share this feedback with team members to ensure they keep improving.
 
 Second, we act decisively when someone isn't meeting expectations. This means explicitly telling them they're falling short, and what good performance looks like.
 
