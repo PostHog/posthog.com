@@ -1,12 +1,9 @@
-import { useStaticQuery } from 'gatsby'
-import { graphql } from 'gatsby'
-import React, { useEffect, useMemo, useState } from 'react'
+import { graphql, useStaticQuery } from 'gatsby'
+import React, { Fragment, useEffect, useMemo, useState } from 'react'
 import moment from 'moment'
 import Markdown from 'components/Squeak/components/Markdown'
 import { CallToAction } from 'components/CallToAction'
 import { IconArrowLeft, IconArrowRight } from '@posthog/icons'
-import { heading } from '../classes'
-import Slider from 'components/Slider'
 import { MenuContainer } from 'components/PostLayout/MobileNav'
 
 const getFirstYear = (roadmaps: any) => Object.keys(roadmaps)[0]
@@ -225,7 +222,7 @@ export default function TimelineNew() {
                                 const isLastMonth = index === Object.keys(roadmapsGrouped[activeYear]).length - 1
                                 const nextYear = `${Number(activeYear) + 1}`
                                 return (
-                                    <>
+                                    <Fragment key={index}>
                                         <li className="text-sm px-2 py-1 rounded-md opacity-70" key={month}>
                                             {month}
                                         </li>
@@ -235,7 +232,7 @@ export default function TimelineNew() {
                                                     <br />
                                                 </li>
                                             ))}
-                                    </>
+                                    </Fragment>
                                 )
                             })}
                         </ul>
@@ -268,7 +265,7 @@ export default function TimelineNew() {
                                 const isLastMonth = index === Object.keys(roadmapsGrouped[activeYear]).length - 1
                                 const nextYear = `${Number(activeYear) + 1}`
                                 return (
-                                    <>
+                                    <Fragment key={index}>
                                         {isLastMonth && roadmapsGrouped[nextYear] && (
                                             <div className="ml-1 mt-2">
                                                 <CallToAction
@@ -288,7 +285,7 @@ export default function TimelineNew() {
                                                 </CallToAction>
                                             </div>
                                         )}
-                                    </>
+                                    </Fragment>
                                 )
                             })}
                         </div>

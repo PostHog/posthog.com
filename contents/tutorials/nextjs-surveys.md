@@ -52,7 +52,7 @@ Finally, run `npm run dev` and go to `http://localhost:3000` to see our new home
 
 ## Adding PostHog
 
-We'll use PostHog to create and control our survey as well as monitor results. If you don't have a PostHog instance, you can [sign up for free here](https://app.posthog.com/signup). 
+We'll use PostHog to create and control our survey as well as monitor results. If you don't have a PostHog instance, you can [sign up for free here](https://app.posthog.com/signup).
 
 First, set up PostHog for use on the [client-side](/docs/libraries/next-js#app-router) by installing the [JavaScript React SDK](/docs/libraries/react):
 
@@ -110,14 +110,14 @@ This tutorial will cover how to implement both options:
 ### Option 1: Use PostHog's prebuilt survey UI
 
 This is the simplest option. PostHog has a variety of [survey types](/docs/surveys/creating-surveys#question-type) to choose from, and handles all the display logic and event capture for you.
- 
+
 To create a survey with a prebuilt UI, go to the [surveys tab](https://app.posthog.com/surveys), click "New survey," and then set up your survey with the following settings:
 
 1. Add a name (like `my-first-survey`).
 2. Set the display mode to `Popover`.
 3. Select the `Rating` question type. Set the question title to `How likely are you to recommend us to a friend?`, display type to `number` and scale to `1-10`.
 4. Leave the remaining optional properties blank (such as `Display conditions` or `Thank you message`).
-5. Click "Save as draft" and then on the next screen click "Launch". 
+5. Click "Save as draft" and then on the next screen click "Launch".
 
 ![Popover survey set up](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/nextjs-surveys/create-popover-survey.png)
 
@@ -269,9 +269,9 @@ export default function Home() {
   const posthog = usePostHog()
   useEffect(() => {
     posthog.getActiveMatchingSurveys((surveys) => {
-    }); 
+    });
   }, [posthog]);
-  
+
   // ... rest of your code ...
 }
 ```
@@ -327,9 +327,9 @@ We can use this survey object to configure our `Survey` component:
         setSurveyID(survey.id);
         setSurveyTitle(survey.questions[0].question)
       }
-    }); 
+    });
   }, [posthog])
-  
+
   // ... rest of your code ...
   return (
     <main className={styles.main}>
@@ -368,7 +368,7 @@ We want to make sure we don't show the survey again to users who have either sub
 
   const handleSubmit = (value) => {
     setShowSurvey(false);
-    localStorage.setItem(`hasInteractedWithSurvey_${surveyID}`, 'true');  
+    localStorage.setItem(`hasInteractedWithSurvey_${surveyID}`, 'true');
   };
 
   // ... rest of your code ...
@@ -376,7 +376,7 @@ We want to make sure we don't show the survey again to users who have either sub
 
 #### 4. Capture interactions from it.
 
-The final step in setting up our survey is capturing interactions. This enables us to analyze the results in PostHog. 
+The final step in setting up our survey is capturing interactions. This enables us to analyze the results in PostHog.
 
 There are 3 events to capture:
 
@@ -399,10 +399,16 @@ You can capture these events using `posthog.capture()`:
 
   const handleSubmit = (value) => {
     setShowSurvey(false);
-    localStorage.setItem(`hasInteractedWithSurvey_${surveyID}`, 'true');  
+    localStorage.setItem(`hasInteractedWithSurvey_${surveyID}`, 'true');
     posthog.capture("survey sent", {
       $survey_id: surveyID, // required
-      $survey_response: value // required
+      $survey_response_a3071551-d599-4eeb-9ffe-69e93dc647b6: value, // required
+      $survey_questions: [
+        {
+          id: "a3071551-d599-4eeb-9ffe-69e93dc647b6",
+          question: "How likely are you to recommend us to a friend?",
+        }
+      ] // required for `getSurveyResponse` to work as expected
     })
   };
 
@@ -441,7 +447,7 @@ export default function Home() {
         setSurveyID(survey.id);
         setSurveyTitle(survey.questions[0].question)
       }
-    }); 
+    });
   }, [posthog])
 
   useEffect(() => {
@@ -460,10 +466,16 @@ export default function Home() {
 
   const handleSubmit = (value) => {
     setShowSurvey(false);
-    localStorage.setItem(`hasInteractedWithSurvey_${surveyID}`, 'true');  
+    localStorage.setItem(`hasInteractedWithSurvey_${surveyID}`, 'true');
     posthog.capture("survey sent", {
       $survey_id: surveyID, // required
-      $survey_response: value // required
+      $survey_response_a3071551-d599-4eeb-9ffe-69e93dc647b6: value, // required
+      $survey_questions: [
+        {
+          id: "a3071551-d599-4eeb-9ffe-69e93dc647b6",
+          question: "How likely are you to recommend us to a friend?",
+        }
+      ] // required for `getSurveyResponse` to work as expected
     })
   };
 

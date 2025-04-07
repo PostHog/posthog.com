@@ -34,9 +34,11 @@ We recommend putting PostHog both on your homepage and your application if appli
 
 > PostHog automatically sets a cross-domain cookie, so if your website is `yourapp.com` and your app is on `app.yourapp.com` users will be followed when they go from one to the other. See our tutorial on [cross-website tracking](/tutorials/cross-domain-tracking) if you need to track users across different domains.
 
-### Permitted domains
+### Replay triggers
 
-You can also configure "permitted domains" in your [project settings](https://app.posthog.com/project/settings). These are domains where you'll be able to record user sessions and use the PostHog toolbar.
+You can configure "replay triggers" in your [project settings](https://app.posthog.com/project/settings). You can configure triggers to enable or pause session recording when the user visit a page that matches the URL(s) you configure.
+
+You are also able to setup "event triggers". Session recording will be started immediately before PostHog queues any of these events to be sent to the backend.
 
 ## Opt out of data capture
 

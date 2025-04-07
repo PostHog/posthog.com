@@ -24,7 +24,13 @@ export default function Feedback() {
     const feedback = e.target.elements.feedback.value;
     posthog.capture("survey sent", {
       $survey_id: '018ed910-3b24-0000-e3fd-d51c59aa74b2',
-      $survey_response: feedback
+      $survey_questions: [
+        {
+          id: "a3071551-d599-4eeb-9ffe-69e93dc647b6",
+          question: "Do you like PostHog?",
+        }
+      ],
+      $survey_response_a3071551-d599-4eeb-9ffe-69e93dc647b6: "Yes!"
     })
   }
 
@@ -56,6 +62,10 @@ If you create a [popover survey](/docs/surveys/creating-surveys#presentation), u
 ## Rendering surveys programmatically
 
 Although we recommend using popover surveys and display conditions, if you want to show surveys programmatically without setting up all the extra logic needed for API surveys, you can render surveys programmatically with the `renderSurvey` method. This takes a survey ID and an HTML selector to render an **unstyled** survey.
+
+import OnSurveysLoaded from './_snippets/onsurveysloaded-callout.md'
+
+<OnSurveysLoaded />
 
 An example implementation in React looks like this:
 

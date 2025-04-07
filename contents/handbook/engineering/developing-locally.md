@@ -82,6 +82,8 @@ This is a faster option to get up and running. If you don't want to or can't use
 
 #### Ubuntu
 
+> Note: Importantly, if you're internal to PostHog we are standardised on working on MacOS (not Linux). In part because of SOC2 auditing gains it gives us.
+
 1. Install Docker following [the official instructions here](https://docs.docker.com/engine/install/ubuntu/).
 
 2. Install the `build-essential` package:
@@ -138,11 +140,11 @@ Alternatively, if you'd prefer not to use [Flox-based instant setup](#instant-se
 
 In this step we will start all the external services needed by PostHog to work.
 
-First, append line `127.0.0.1 kafka clickhouse clickhouse-coordinator` to `/etc/hosts`. Our ClickHouse and Kafka data services won't be able to talk to each other without these mapped hosts.  
+First, append line `127.0.0.1 kafka clickhouse clickhouse-coordinator objectstorage` to `/etc/hosts`. Our ClickHouse and Kafka data services won't be able to talk to each other without these mapped hosts.  
 You can do this in one line with:
 
 ```bash
-echo '127.0.0.1 kafka clickhouse clickhouse-coordinator' | sudo tee -a /etc/hosts
+echo '127.0.0.1 kafka clickhouse clickhouse-coordinator objectstorage' | sudo tee -a /etc/hosts
 ```
 
 > If you are using a newer (>=4.1) version of Podman instead of Docker, the host machine's `/etc/hosts` is used as the base hosts file for containers by default, instead of container's `/etc/hosts` like in Docker. This can make hostname resolution fail in the ClickHouse container, and can be mended by setting `base_hosts_file="none"` in [`containers.conf`](https://github.com/containers/common/blob/main/docs/containers.conf.5.md#containers-table).
@@ -503,10 +505,15 @@ With PyCharm's built in support for Django, it's fairly easy to setup debugging 
 ### Setup PyCharm
 
 1. Open the repository folder.
-2. Setup the python interpreter (Settings… > Project: posthog > Python interpreter > Add interpreter): Select "Existing" and set it to `path_to_repo/posthog/env/bin/python`.
+2. Setup the python interpreter (Settings… > Project: posthog > Python interpreter > Add interpreter -> Existing): 
+   - If using manual setup: `path_to_repo/posthog/env/bin/python`.
+   - If using Flox: `path_to_repo/posthog/.flox/cache/venv/bin/python`.
 3. Setup Django support (Settings… > Languages & Frameworks > Django):
    - Django project root: `path_to_repo`
    - Settings: `posthog/settings/__init__py`
+4. To run tests correctly in PyCharm, disable the Django test runner:
+   - Go to Settings… > Languages & Frameworks > Django
+   - Check "Do not use Django test runner"
 
 ### Start the debugging environment
 
