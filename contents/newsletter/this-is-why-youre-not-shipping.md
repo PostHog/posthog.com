@@ -146,26 +146,26 @@ This makes us faster because it forces individuals to decide for themselves if t
 
 If transparency is the answer, how do you make this happen in a company where it isn't the norm? Here's a good way to start:
 
-  1.  **Share what you're working in one place.** Make sure everyone can access it. Make it easy to subscribe to updates. Make it effortless.
+1. **Share what you're working in one place.** Make sure everyone can access it. Make it easy to subscribe to updates. Make it effortless.
 
-  2.  **Tell everyone about it.** Let them decide whether to subscribe to updates. Resist requests for personalized updates.
+2. **Tell everyone about it.** Let them decide whether to subscribe to updates. Resist requests for personalized updates.
 
-  3.  **Update it consistently.** People will trust it more if they know you take it seriously. How often you do so is up to you, but communicate this, so it's clear to everyone. Don't just share progress, share your ideas and the problems you encounter.
+3. **Update it consistently.** People will trust it more if they know you take it seriously. How often you do so is up to you, but communicate this, so it's clear to everyone. Don't just share progress, share your ideas and the problems you encounter.
 
 Your goal here is to train people in how you want to work, and hopefully convince others to do the same. For inspiration, here are some examples from PostHog:
 
-  * Joe Martin, who runs our Comms Team, creates a GitHub issue every quarter distilling his personal goals, and his progress – [read his Q2 2025 goals](https://github.com/PostHog/meta/issues/301). 
+* Joe Martin, who runs our Comms Team, creates a GitHub issue every quarter distilling his personal goals, and his progress – [read his Q2 2025 goals](https://github.com/PostHog/meta/issues/301). 
 
-  * Cory’s [PostHog 3000 issue](https://github.com/PostHog/posthog/issues/12923), where he shared his ongoing work on a UI overhaul.
+* Cory’s [PostHog 3000 issue](https://github.com/PostHog/posthog/issues/12923), where he shared his ongoing work on a UI overhaul.
 
-  * Team Replay’s [quarterly goals planning issue](https://github.com/PostHog/posthog/issues/30460).
+* Team Replay’s [quarterly goals planning issue](https://github.com/PostHog/posthog/issues/30460).
 
 ## 6. Average performers never leave
 
 People who are obviously bad at their jobs are rarely the problem. They're easy to spot and easy to remove, the real problems come from:
 
-  1. Average performers who deliver 6/10 all the time, but never raise the bar.
-  2. Roles that aren't needed, but stick around because it's easier not to take action.
+1. Average performers who deliver 6/10 all the time, but never raise the bar.
+2. Roles that aren't needed, but stick around because it's easier not to take action.
 
 They both slow you down by needing more oversight, or by not being ambitious enough. 
 
