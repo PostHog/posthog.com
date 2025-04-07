@@ -20,7 +20,7 @@ import { DarkModeToggle } from 'components/DarkModeToggle'
 import { Popover } from 'components/RadixUI/Popover'
 import { ToggleGroup, ToggleOption } from 'components/RadixUI/ToggleGroup'
 import { Fieldset } from 'components/OSFieldset'
-import * as Menubar from '@radix-ui/react-menubar'
+import MenuBar from 'components/RadixUI/MenuBar'
 
 const getSizeDefaults = () => ({
     max: {
@@ -240,7 +240,7 @@ const SiteOptionsButton = () => {
     )
 }
 
-const MenuBar = () => {
+const TaskBarMenu = ({ children }: { children?: React.ReactNode }) => {
     return (
         <motion.div
             id="taskbar"
@@ -250,118 +250,7 @@ const MenuBar = () => {
             exit={{ translateY: '100%' }}
             className="fixed top-0 left-0 w-full p-0.5 bg-primary border-b border-primary z-50"
         >
-            <Menubar.Root data-scheme="tertiary" className="flex gap-1">
-                <Menubar.Menu>
-                    <Menubar.Trigger className="flex select-none items-center justify-between gap-0.5 rounded px-3 py-2 text-[13px] font-medium leading-none text-primary outline-none data-[highlighted]:bg-accent hover:bg-primary data-[state=open]:bg-accent">
-                        File
-                    </Menubar.Trigger>
-                    <Menubar.Portal>
-                        <Menubar.Content
-                            className="min-w-[220px] rounded-md bg-white p-[5px] shadow-[0px_10px_38px_-10px_rgba(22,_23,_24,_0.35),_0px_10px_20px_-15px_rgba(22,_23,_24,_0.2)] will-change-[transform,opacity] [animation-duration:_400ms] [animation-timing-function:_cubic-bezier(0.16,_1,_0.3,_1)]"
-                            align="start"
-                            sideOffset={5}
-                            alignOffset={-3}
-                            data-scheme="primary"
-                        >
-                            <Menubar.Item className="hover-invert group relative flex h-[25px] select-none items-center rounded px-2.5 text-[13px] leading-none text-primary hover:bg-primary outline-none data-[disabled]:pointer-events-none data-[state=open]:bg-accent data-[highlighted]:bg-input-bg data-[disabled]:text-muted data-[highlighted]:data-[state=open]:text-secondary data-[highlighted]:bg-text-secondary data-[state=open]:text-secondary">
-                                New Tab{' '}
-                                <div className="ml-auto pl-5 text-mauve9 group-data-[disabled]:text-mauve8 group-data-[highlighted]:text-white">
-                                    ⌘ T
-                                </div>
-                            </Menubar.Item>
-                            <Menubar.Item className="hover-invert group relative flex h-[25px] select-none items-center rounded px-2.5 text-[13px] leading-none text-primary hover:bg-primary outline-none data-[disabled]:pointer-events-none data-[state=open]:bg-accent data-[disabled]:text-muted data-[highlighted]:data-[state=open]:text-secondary data-[highlighted]:bg-text-secondary data-[state=open]:text-secondary">
-                                New Window{' '}
-                                <div className="ml-auto pl-5 text-mauve9 group-data-[disabled]:text-mauve8 group-data-[highlighted]:text-white">
-                                    ⌘ N
-                                </div>
-                            </Menubar.Item>
-                            <Menubar.Item
-                                className="hover-invert group relative flex h-[25px] select-none items-center rounded px-2.5 text-[13px] leading-none text-muted outline-none data-[disabled]:pointer-events-none data-[state=open]:bg-violet4 data-[highlighted]:bg-gradient-to-br data-[highlighted]:from-violet9 data-[highlighted]:to-violet10 data-[disabled]:text-mauve8 data-[highlighted]:data-[state=open]:text-violet1 data-[highlighted]:text-violet1 data-[state=open]:text-violet11"
-                                disabled
-                            >
-                                New Incognito Window
-                            </Menubar.Item>
-                            <Menubar.Separator className="m-[5px] h-px bg-border" />
-                            <Menubar.Sub>
-                                <Menubar.SubTrigger className="hover-invert group relative flex h-[25px] select-none items-center rounded px-2.5 text-[13px] leading-none text-primary hover:bg-primary outline-none data-[disabled]:pointer-events-none data-[state=open]:bg-primary data-[disabled]:text-muted data-[highlighted]:data-[state=open]:text-secondary data-[highlighted]:bg-text-secondary data-[state=open]:text-secondary">
-                                    Share
-                                    <div className="ml-auto pl-5 text-secondary group-data-[disabled]:text-muted group-data-[highlighted]:text-primary">
-                                        <IconChevronRight className="size-4" />
-                                    </div>
-                                </Menubar.SubTrigger>
-                                <Menubar.Portal>
-                                    <Menubar.SubContent
-                                        className="min-w-[220px] rounded-md bg-white p-[5px] shadow-[0px_10px_38px_-10px_rgba(22,_23,_24,_0.35),_0px_10px_20px_-15px_rgba(22,_23,_24,_0.2)] will-change-[transform,opacity] [animation-duration:_400ms] [animation-timing-function:_cubic-bezier(0.16,_1,_0.3,_1)]"
-                                        alignOffset={-5}
-                                        data-scheme="primary"
-                                    >
-                                        <Menubar.Item className="hover-invert group relative flex h-[25px] select-none items-center rounded px-2.5 text-[13px] leading-none text-primary hover:bg-primary outline-none data-[disabled]:pointer-events-none data-[state=open]:bg-primary data-[disabled]:text-muted data-[highlighted]:data-[state=open]:text-secondary data-[highlighted]:bg-text-secondary data-[state=open]:text-secondary">
-                                            Email Link
-                                        </Menubar.Item>
-                                        <Menubar.Item className="hover-invert group relative flex h-[25px] select-none items-center rounded px-2.5 text-[13px] leading-none text-primary hover:bg-primary outline-none data-[disabled]:pointer-events-none data-[state=open]:bg-primary data-[disabled]:text-muted data-[highlighted]:data-[state=open]:text-secondary data-[highlighted]:bg-text-secondary data-[state=open]:text-secondary">
-                                            Messages
-                                        </Menubar.Item>
-                                        <Menubar.Item className="hover-invert group relative flex h-[25px] select-none items-center rounded px-2.5 text-[13px] leading-none text-primary hover:bg-primary outline-none data-[disabled]:pointer-events-none data-[state=open]:bg-primary data-[disabled]:text-muted data-[highlighted]:data-[state=open]:text-secondary data-[highlighted]:bg-text-secondary data-[state=open]:text-secondary">
-                                            Notes
-                                        </Menubar.Item>
-                                    </Menubar.SubContent>
-                                </Menubar.Portal>
-                            </Menubar.Sub>
-                            <Menubar.Separator className="m-[5px] h-px bg-border" />
-                            <Menubar.Item className="group relative flex h-[25px] select-none items-center rounded px-2.5 text-[13px] leading-none text-violet11 outline-none data-[disabled]:pointer-events-none data-[highlighted]:bg-gradient-to-br data-[highlighted]:from-violet9 data-[highlighted]:to-violet10 data-[disabled]:text-mauve8 data-[highlighted]:text-violet1">
-                                Print…{' '}
-                                <div className="ml-auto pl-5 text-mauve9 group-data-[disabled]:text-mauve8 group-data-[highlighted]:text-white">
-                                    ⌘ P
-                                </div>
-                            </Menubar.Item>
-                        </Menubar.Content>
-                    </Menubar.Portal>
-                </Menubar.Menu>
-                <Menubar.Menu>
-                    <Menubar.Trigger>Edit</Menubar.Trigger>
-                    <Menubar.Portal>
-                        <Menubar.Content>
-                            <Menubar.Label>Options</Menubar.Label>
-                            <Menubar.Item>New Tab</Menubar.Item>
-
-                            <Menubar.Group>
-                                <Menubar.Item>New Window</Menubar.Item>
-                                <Menubar.Item>Open File…</Menubar.Item>
-                            </Menubar.Group>
-
-                            <Menubar.CheckboxItem checked>
-                                Show Toolbar
-                                <Menubar.ItemIndicator>✓</Menubar.ItemIndicator>
-                            </Menubar.CheckboxItem>
-
-                            <Menubar.RadioGroup value="auto">
-                                <Menubar.RadioItem value="auto">
-                                    Auto Save
-                                    <Menubar.ItemIndicator>●</Menubar.ItemIndicator>
-                                </Menubar.RadioItem>
-                                <Menubar.RadioItem value="manual">
-                                    Manual Save
-                                    <Menubar.ItemIndicator>●</Menubar.ItemIndicator>
-                                </Menubar.RadioItem>
-                            </Menubar.RadioGroup>
-
-                            <Menubar.Sub>
-                                <Menubar.SubTrigger>Export</Menubar.SubTrigger>
-                                <Menubar.Portal>
-                                    <Menubar.SubContent>
-                                        <Menubar.Item>As PDF</Menubar.Item>
-                                        <Menubar.Item>As DOCX</Menubar.Item>
-                                    </Menubar.SubContent>
-                                </Menubar.Portal>
-                            </Menubar.Sub>
-
-                            <Menubar.Separator />
-                            <Menubar.Item>Exit</Menubar.Item>
-                            <Menubar.Arrow />
-                        </Menubar.Content>
-                    </Menubar.Portal>
-                </Menubar.Menu>
-            </Menubar.Root>
+            <MenuBar>{children}</MenuBar>
         </motion.div>
     )
 }
@@ -406,9 +295,12 @@ const TaskBar = () => {
 export default function Wrapper() {
     const constraintsRef = useRef(null)
     const { windows } = useApp()
+
     return (
         <div ref={constraintsRef} className="fixed inset-0 size-full">
-            <MenuBar />
+            <TaskBarMenu>
+                <SiteOptionsButton />
+            </TaskBarMenu>
             <Desktop />
             {windows.map((item) => (
                 <Window item={item} key={item.key} constraintsRef={constraintsRef} />
