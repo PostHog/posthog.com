@@ -6,8 +6,10 @@ import { IconChevronRight } from '@posthog/icons'
 export type MenuItemType = {
     type: 'item' | 'submenu' | 'separator'
     label?: string
+    link?: string
     shortcut?: string
     disabled?: boolean
+    icon?: React.ReactNode
     items?: MenuItemType[] // For submenus
 }
 
@@ -57,7 +59,16 @@ const MenuItem: React.FC<{ item: MenuItemType }> = ({ item }) => {
 
     return (
         <RadixMenubar.Item className={ItemClasses} disabled={item.disabled}>
-            {item.label}
+            <div className="flex items-center gap-2">
+                {item.icon}
+                {item.link ? (
+                    <a href={item.link} className="no-underline text-primary">
+                        {item.label}
+                    </a>
+                ) : (
+                    <span>{item.label}</span>
+                )}
+            </div>
             {item.shortcut && <div className={ShortcutClasses}>{item.shortcut}</div>}
         </RadixMenubar.Item>
     )
