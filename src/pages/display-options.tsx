@@ -3,6 +3,7 @@ import WindowTabs from 'components/WindowTabs'
 import { Fieldset } from 'components/OSFieldset'
 import { ToggleGroup, ToggleOption } from 'components/RadixUI/ToggleGroup'
 import { IconDay, IconLaptop, IconNight } from '@posthog/icons'
+import { SEO } from 'components/seo'
 
 const colorModeOptions: ToggleOption[] = [
     {
@@ -35,18 +36,21 @@ export default function DisplayOptions() {
         setColorMode(colorMode)
     }, [])
     return (
-        <div className="w-full h-full bg-primary text-primary">
-            <Fieldset legend="Display">
-                <div className="grid grid-cols-2 gap-2">
-                    <label className="pt-1.5 text-[15px]">Color mode</label>
-                    <ToggleGroup
-                        title="Color mode"
-                        options={colorModeOptions}
-                        onValueChange={handleColorModeChange}
-                        value={colorMode}
-                    />
-                </div>
-            </Fieldset>
-        </div>
+        <>
+            <SEO title="Display options" description="Change the display options for PostHog." />
+            <div data-scheme="secondary" className="w-full h-full bg-primary text-primary p-2">
+                <Fieldset legend="Display">
+                    <div className="bg-primary grid grid-cols-2 gap-2">
+                        <label className="pt-1.5 text-[15px]">Color mode</label>
+                        <ToggleGroup
+                            title="Color mode"
+                            options={colorModeOptions}
+                            onValueChange={handleColorModeChange}
+                            value={colorMode}
+                        />
+                    </div>
+                </Fieldset>
+            </div>
+        </>
     )
 }
