@@ -91,7 +91,7 @@ export default function OSButton({
     const buttonContent = (
         <>
             {icon && <span className={`${iconSizeClasses[size]}`}>{icon}</span>}
-            <span>{children}</span>
+            {children}
             {label && <span className="text-sm opacity-75">{label}</span>}
             {tooltip && (
                 <span className="">
