@@ -9,9 +9,11 @@ export default function Wrapper() {
     const { windows } = useApp()
 
     return (
-        <div ref={constraintsRef} className="fixed inset-0 size-full">
+        <div className="fixed inset-0 size-full flex flex-col">
             <TaskBarMenu />
-            <Desktop />
+            <div ref={constraintsRef} className="flex-grow">
+                <Desktop />
+            </div>
             {windows.map((item) => (
                 <AppWindow item={item} key={item.key} constraintsRef={constraintsRef} />
             ))}

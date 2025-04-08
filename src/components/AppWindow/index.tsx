@@ -117,10 +117,10 @@ export default function AppWindow({ item, constraintsRef }: { item: any; constra
         if (snapIndicator === 'left' || snapIndicator === 'right') {
             finalX = snapIndicator === 'left' ? 0 : bounds.width / 2
             finalWidth = bounds.width / 2
-            finalY = bounds.height - (bounds.height - taskbarHeight)
+            finalY = bounds.top
         } else {
             finalX = Math.round(Math.min(Math.max(0, newX), bounds.width - size.width))
-            finalY = Math.round(Math.min(Math.max(taskbarHeight, newY), bounds.height - size.height))
+            finalY = Math.round(Math.min(Math.max(bounds.top, newY), Math.max(bounds.top, bounds.height - size.height)))
         }
 
         setPosition({
@@ -132,7 +132,7 @@ export default function AppWindow({ item, constraintsRef }: { item: any; constra
             setSize((prev) => ({
                 ...prev,
                 width: finalWidth,
-                height: bounds.height - taskbarHeight,
+                height: bounds.height,
             }))
         }
 
@@ -184,8 +184,8 @@ export default function AppWindow({ item, constraintsRef }: { item: any; constra
                             }}
                             animate={{
                                 scale: 1,
-                                x: Math.round(position.x),
-                                y: Math.round(position.y),
+                                x: position.x,
+                                y: position.y,
                                 transition: {
                                     scale: {
                                         duration: 0.3,
