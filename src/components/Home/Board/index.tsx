@@ -215,7 +215,7 @@ const products: Product[] = [
         color: 'orange',
         Icon: IconWarning,
         description: 'Track errors and resolve issues',
-        pricingKey: 'error_tracking',
+        pricingKey: 'error-tracking',
         types: ['Engineering'],
         features: [
             { title: 'Receive alerts', Icon: IconBell },
