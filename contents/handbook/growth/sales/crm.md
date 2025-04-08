@@ -134,6 +134,14 @@ Unqualified: A lead that does not meet the criteria to become an opportunity.
 - Document the reasons for disqualification in the “Disqualification reason” field in Salesforce (e.g., budget constraints, lack of fit, self serve customer, non-opportunity-related inquiries, support requests).
 - Update the lead status to 'Unqualified'.
 
+### Lead to opportunity conversion guidelines
+Use the following criteria to determine when a lead should be converted to an opportunity:
+- You've had an initial contact and are actively working with the lead on next steps
+- There's a clearly identified problem that PostHog can solve
+- There's a solid next step
+
+Converting at this stage (rather than waiting until later) helps us get a more accurate view of our pipeline and standardize our approach across territories and team members.
+
 ### Support Requests
 
 If you receive a lead for a self-serve customer who has used the Sales Contact Form to submit a support request, you should:
