@@ -237,6 +237,33 @@ const products: Product[] = [
         status: 'Production',
     },
     {
+        name: 'Error tracking',
+        lottieSrc: '/lotties/product-icons/error-tracking.lottie',
+        color: 'yellow',
+        Icon: IconFlask,
+        description: 'Track errors, resolve issues, and assign blame.',
+        pricingKey: 'error_tracking',
+        types: ['Product'],
+        features: [
+            { title: 'Receive alerts', Icon: IconMegaphone },
+            { title: 'Triage errors ', Icon: IconCheckbox },
+            { title: 'Stack traces', Icon: IconDatabase },
+        ],
+        Images: () => {
+            return (
+                <>
+                    <div className="block dark:hidden">
+                        <CloudinaryImage src="https://res.cloudinary.com/dmukukwp6/image/upload/error_light_mode_a8704c77e6.png" />
+                    </div>
+                    <div className="hidden dark:block">
+                        <CloudinaryImage src="https://res.cloudinary.com/dmukukwp6/image/upload/error_dark_mode_390e70af6d.png" />
+                    </div>
+                </>
+            )
+        },
+        status: 'Production',
+    },
+    {
         name: 'Surveys',
         lottieSrc: '/lotties/product-icons/surveys.lottie',
         color: 'salmon',
@@ -405,14 +432,6 @@ const products: Product[] = [
         types: ['Marketing'],
         status: 'WIP',
         roadmapID: 1809,
-    },
-    {
-        name: 'Error tracking',
-        Icon: IconWarning,
-        color: 'yellow',
-        types: ['Engineering'],
-        status: 'WIP',
-        roadmapID: 2017,
     },
     {
         name: 'Prompt evaluation',
