@@ -210,6 +210,34 @@ const products: Product[] = [
         status: 'Production',
     },
     {
+        name: 'Error tracking',
+        // lottieSrc: '/lotties/product-icons/error-tracking.lottie',
+        color: 'orange',
+        Icon: IconWarning,
+        description: 'Track errors and resolve issues',
+        pricingKey: 'error_tracking',
+        types: ['Engineering'],
+        features: [
+            { title: 'Receive alerts', Icon: IconBell },
+            { title: 'Triage & assign', Icon: IconArchive },
+            { title: 'Organize & prioritize', Icon: IconCheck },
+            { title: 'Stack traces', Icon: IconStack },
+        ],
+        Images: () => {
+            return (
+                <>
+                    <div className="block dark:hidden">
+                        <CloudinaryImage src="https://res.cloudinary.com/dmukukwp6/image/upload/error_light_mode_a8704c77e6.png" />
+                    </div>
+                    <div className="hidden dark:block">
+                        <CloudinaryImage src="https://res.cloudinary.com/dmukukwp6/image/upload/error_dark_mode_390e70af6d.png" />
+                    </div>
+                </>
+            )
+        },
+        status: 'Production',
+    },
+    {
         name: 'Experiments',
         lottieSrc: '/lotties/product-icons/ab-testing.lottie',
         color: 'purple',
@@ -230,33 +258,6 @@ const products: Product[] = [
                     </div>
                     <div className="hidden dark:block">
                         <CloudinaryImage src="https://res.cloudinary.com/dmukukwp6/image/upload/exp_screenshot_dark_a595173bb4.png" />
-                    </div>
-                </>
-            )
-        },
-        status: 'Production',
-    },
-    {
-        name: 'Error tracking',
-        lottieSrc: '/lotties/product-icons/error-tracking.lottie',
-        color: 'yellow',
-        Icon: IconFlask,
-        description: 'Track errors, resolve issues, and assign blame.',
-        pricingKey: 'error_tracking',
-        types: ['Product'],
-        features: [
-            { title: 'Receive alerts', Icon: IconMegaphone },
-            { title: 'Triage errors ', Icon: IconCheckbox },
-            { title: 'Stack traces', Icon: IconDatabase },
-        ],
-        Images: () => {
-            return (
-                <>
-                    <div className="block dark:hidden">
-                        <CloudinaryImage src="https://res.cloudinary.com/dmukukwp6/image/upload/error_light_mode_a8704c77e6.png" />
-                    </div>
-                    <div className="hidden dark:block">
-                        <CloudinaryImage src="https://res.cloudinary.com/dmukukwp6/image/upload/error_dark_mode_390e70af6d.png" />
                     </div>
                 </>
             )
