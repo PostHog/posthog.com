@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useEffect, useMemo, useState } from 'react'
+import React, { createContext, useContext, useEffect, useMemo, useState, useCallback } from 'react'
 import { AppWindow } from './Window'
 
 interface AppContextType {
@@ -42,37 +42,40 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
         )
     }, [windows])
 
-    const closeWindow = (item: AppWindow) => {
-        const newWindows = windows.filter((el) => el !== item)
-        setWindows(newWindows)
-    }
+    const closeWindow = useCallback((item: AppWindow) => {
+        setWindows((windows) => windows.filter((el) => el.key !== item.key))
+    }, [])
 
-    const bringToFront = (item: AppWindow) => {
-        const newWindows = windows.map((el) => ({
-            ...el,
-            zIndex: el === item ? windows.length : el.zIndex < item.zIndex ? el.zIndex : el.zIndex - 1,
-            minimized: item === el ? false : el.minimized,
-        }))
-        setWindows(newWindows)
-    }
+    const bringToFront = useCallback((item: AppWindow) => {
+        setWindows((windows) =>
+            windows.map((el) => ({
+                ...el,
+                zIndex: el === item ? windows.length : el.zIndex < item.zIndex ? el.zIndex : el.zIndex - 1,
+                minimized: item === el ? false : el.minimized,
+            }))
+        )
+    }, [])
 
-    const replaceFocusedWindow = (newWindow: AppWindow) => {
-        if (focusedWindow) {
-            setWindows(windows.map((w) => (w === focusedWindow ? { ...w, element: newWindow.element } : w)))
-        } else {
-            setWindows([...windows, newWindow])
-        }
-    }
+    const replaceFocusedWindow = useCallback(
+        (newWindow: AppWindow) => {
+            if (focusedWindow) {
+                setWindows((windows) =>
+                    windows.map((w) => (w === focusedWindow ? { ...w, element: newWindow.element } : w))
+                )
+            } else {
+                setWindows((windows) => [...windows, newWindow])
+            }
+        },
+        [focusedWindow]
+    )
 
-    const setWindowTitle = (appWindow: AppWindow, title: string) => {
-        const newWindows = windows.map((w) => (w === appWindow ? { ...appWindow, meta: { title } } : w))
-        setWindows(newWindows)
-    }
+    const setWindowTitle = useCallback((appWindow: AppWindow, title: string) => {
+        setWindows((windows) => windows.map((w) => (w === appWindow ? { ...appWindow, meta: { title } } : w)))
+    }, [])
 
-    const minimizeWindow = (appWindow: AppWindow) => {
-        const newWindows = windows.map((w) => (w === appWindow ? { ...appWindow, minimized: true } : w))
-        setWindows(newWindows)
-    }
+    const minimizeWindow = useCallback((appWindow: AppWindow) => {
+        setWindows((windows) => windows.map((w) => (w === appWindow ? { ...appWindow, minimized: true } : w)))
+    }, [])
 
     useEffect(() => {
         const existingWindow = windows.find((w) => w.key === element.key)
