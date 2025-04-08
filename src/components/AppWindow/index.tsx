@@ -28,7 +28,7 @@ const fixedAppSizes = {
     },
 }
 
-const snapThreshold = 50
+const snapThreshold = -50
 
 export default function AppWindow({ item, constraintsRef }: { item: any; constraintsRef: any }) {
     const { minimizeWindow, bringToFront, closeWindow, focusedWindow, taskbarHeight } = useApp()
