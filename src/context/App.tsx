@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useEffect, useMemo, useState, useCallback } from 'react'
+import React, { createContext, useContext, useEffect, useMemo, useState } from 'react'
 import { AppWindow } from './Window'
 
 interface AppContextType {
@@ -32,37 +32,26 @@ export const Context = createContext<AppContextType>({
 
 export const Provider = ({ children, element, location }: AppProviderProps) => {
     const [windows, setWindows] = useState<AppWindow[]>([])
-
-    const focusedWindow = useMemo(
-        () =>
-            windows.reduce<AppWindow | undefined>(
-                (highest, current) => (current.zIndex > (highest?.zIndex ?? -1) ? current : highest),
-                undefined
-            ),
-        [windows]
-    )
-
-    const closeWindow = useCallback((item: AppWindow) => {
-        setWindows((windows) => windows.filter((el) => el !== item))
-    }, [])
-
-    const bringToFront = useCallback((item: AppWindow) => {
-        setWindows((windows) =>
-            windows.map((el) => ({
-                ...el,
-                zIndex: el === item ? windows.length : el.zIndex < item.zIndex ? el.zIndex : el.zIndex - 1,
-                minimized: item === el ? false : el.minimized,
-            }))
+    const focusedWindow = useMemo(() => {
+        return windows.reduce<AppWindow | undefined>(
+            (highest, current) => (current.zIndex > (highest?.zIndex ?? -1) ? current : highest),
+            undefined
         )
-    }, [])
+    }, [windows])
 
-    const setWindowTitle = useCallback((appWindow: AppWindow, title: string) => {
-        setWindows((windows) => windows.map((w) => (w === appWindow ? { ...appWindow, meta: { title } } : w)))
-    }, [])
+    const closeWindow = (item: AppWindow) => {
+        const newWindows = windows.filter((el) => el !== item)
+        setWindows(newWindows)
+    }
 
-    const minimizeWindow = useCallback((appWindow: AppWindow) => {
-        setWindows((windows) => windows.map((w) => (w === appWindow ? { ...appWindow, minimized: true } : w)))
-    }, [])
+    const bringToFront = (item: AppWindow) => {
+        const newWindows = windows.map((el) => ({
+            ...el,
+            zIndex: el === item ? windows.length : el.zIndex < item.zIndex ? el.zIndex : el.zIndex - 1,
+            minimized: item === el ? false : el.minimized,
+        }))
+        setWindows(newWindows)
+    }
 
     const replaceFocusedWindow = (newWindow: AppWindow) => {
         if (focusedWindow) {
@@ -70,6 +59,16 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
         } else {
             setWindows([...windows, newWindow])
         }
+    }
+
+    const setWindowTitle = (appWindow: AppWindow, title: string) => {
+        const newWindows = windows.map((w) => (w === appWindow ? { ...appWindow, meta: { title } } : w))
+        setWindows(newWindows)
+    }
+
+    const minimizeWindow = (appWindow: AppWindow) => {
+        const newWindows = windows.map((w) => (w === appWindow ? { ...appWindow, minimized: true } : w))
+        setWindows(newWindows)
     }
 
     useEffect(() => {
