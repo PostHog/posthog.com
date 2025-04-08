@@ -474,7 +474,7 @@ export const ProductErrorTracking = () => {
                                 <li>Better mobile support</li>
                                 <ul className="pl-6">
                                     <li className="text-sm">
-                                        Even our team thinks Sentry does better with mobile support. For now!
+                                        Even our team thinks Sentry is better if you need mobile support. For now!
                                     </li>
                                 </ul>
                             </ul>
