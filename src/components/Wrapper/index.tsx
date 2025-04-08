@@ -17,6 +17,11 @@ import {
     IconSearch,
     IconChatHelp,
     IconUser,
+    IconLetter,
+    IconUpload,
+    IconLock,
+    IconMessage,
+    IconApp,
 } from '@posthog/icons'
 import { useApp } from '../../context/App'
 import { Provider as WindowProvider } from '../../context/Window'
@@ -24,12 +29,25 @@ import Desktop from 'components/Desktop'
 import { DarkModeToggle } from 'components/DarkModeToggle'
 import { Popover } from 'components/RadixUI/Popover'
 import { Root as PopoverRoot } from '@radix-ui/react-popover'
+import { Root as Toggle } from '@radix-ui/react-toggle'
 import { ToggleGroup, ToggleOption } from 'components/RadixUI/ToggleGroup'
 import { Fieldset } from 'components/OSFieldset'
 import MenuBar, { MenuType } from 'components/RadixUI/MenuBar'
 import { productMenu } from '../../navs/index.js'
 import * as Icons from '@posthog/icons'
 import OSButton from 'components/OSButton'
+import { useUser } from 'hooks/useUser'
+import { useLocation } from '@reach/router'
+import { CallToAction } from 'components/CallToAction'
+import { SignupCTA } from 'components/SignupCTA'
+import HoverTooltip from 'components/Tooltip'
+import dayjs from 'dayjs'
+import usePostHog from 'hooks/usePostHog'
+import getAvatarURL from 'components/Squeak/util/getAvatar'
+import MediaUploadModal from 'components/MediaUploadModal'
+import SideModal from 'components/Modal/SideModal'
+import { Authentication } from 'components/Squeak'
+import Link from 'components/Link'
 
 interface ProductMenuItem {
     name: string
@@ -603,6 +621,32 @@ const TaskBarMenu = ({ children }: { children?: React.ReactNode }) => {
     const [isAnimating, setIsAnimating] = useState(false)
     const totalWindows = windows.length
     const [isOpen, setIsOpen] = useState(false)
+    const { user, logout, notifications, fetchUser } = useUser()
+    const [showMediaUploadModal, setShowMediaUploadModal] = useState(false)
+    const [showAuthModal, setShowAuthModal] = useState(false)
+    const [showNotifications, setShowNotifications] = useState(false)
+    const location = useLocation()
+    const posthog = usePostHog()
+    const isLoggedIn = !!user
+    const [fullWidthContent, setFullWidthContent] = useState(true)
+    const [enterpriseMode, setEnterpriseMode] = useState(false)
+    const [hedgehogModeEnabled, setHedgehogModeEnabled] = useState(false)
+    const [compact, setCompact] = useState(false)
+
+    useEffect(() => {
+        let mounted = true
+        if (!user && !isLoggedIn) {
+            fetchUser().catch(() => {
+                if (mounted) {
+                    // Only update state if component is still mounted
+                    setShowAuthModal(true)
+                }
+            })
+        }
+        return () => {
+            mounted = false
+        }
+    }, [user, isLoggedIn, fetchUser])
 
     useEffect(() => {
         // Reset animation state after it completes
@@ -698,9 +742,202 @@ const TaskBarMenu = ({ children }: { children?: React.ReactNode }) => {
                         </div>
                     </Popover>
                 </PopoverRoot>
-                <OSButton variant="ghost" size="md">
-                    <IconUser className="size-5" />
-                </OSButton>
+                <Popover
+                    title={isLoggedIn ? 'Account' : 'Sign in'}
+                    trigger={
+                        <div>
+                            <OSButton variant="ghost" size="md">
+                                {isLoggedIn ? (
+                                    <div className="relative">
+                                        <img
+                                            src={getAvatarURL(user?.profile)}
+                                            className={`size-5 rounded-full bg-${
+                                                user?.profile?.color ?? 'white dark:bg-dark'
+                                            }`}
+                                            alt=""
+                                        />
+                                        {notifications?.length > 0 && (
+                                            <span className="absolute -top-1 -right-1 size-2 bg-red rounded-full" />
+                                        )}
+                                    </div>
+                                ) : (
+                                    <IconUser className="size-5" />
+                                )}
+                            </OSButton>
+                        </div>
+                    }
+                    dataScheme="primary"
+                >
+                    <div className="w-full h-full bg-primary text-primary">
+                        {isLoggedIn ? (
+                            <>
+                                <div className="px-2 py-1.5 border-b border-light dark:border-dark">
+                                    <p className="m-0 text-sm font-semibold">
+                                        {user?.profile?.firstName} {user?.profile?.lastName}
+                                    </p>
+                                    <p className="m-0 text-xs opacity-60">{user?.email}</p>
+                                </div>
+                                <ul className="list-none text-left m-0 p-0 pb-[3px] space-y-[2px]">
+                                    <li className="bg-border/20 dark:bg-border-dark/20 border-b border-light dark:border-dark text-[13px] px-2 py-1.5 text-primary/50 dark:text-primary-dark/60 z-20 m-0 !mb-[3px] font-semibold">
+                                        Go to...
+                                    </li>
+                                    <li className="px-1">
+                                        <Link
+                                            className="group/item text-sm px-2 py-2 rounded-sm hover:bg-accent dark:hover:bg-accent-dark block"
+                                            to="https://app.posthog.com"
+                                        >
+                                            <IconApp className="opacity-50 group-hover/item:opacity-75 inline-block mr-2 w-6" />
+                                            PostHog app
+                                        </Link>
+                                    </li>
+                                    <li className="bg-border/20 dark:bg-border-dark/20 border-y border-light dark:border-dark text-[13px] px-2 py-1.5 !my-1 text-primary/50 dark:text-primary-dark/60 z-20 m-0 font-semibold">
+                                        Community
+                                    </li>
+                                    <li className="px-1">
+                                        <Link
+                                            className="group/item text-sm px-2 py-2 rounded-sm hover:bg-accent dark:hover:bg-accent-dark block"
+                                            to="/questions"
+                                        >
+                                            <IconMessage className="opacity-50 group-hover/item:opacity-75 inline-block mr-2 w-6" />
+                                            Forums
+                                        </Link>
+                                    </li>
+                                    <li className="px-1">
+                                        <Link
+                                            className="group/item flex items-center text-sm px-2 py-2 rounded-sm hover:bg-accent dark:hover:bg-accent-dark justify-between"
+                                            to="/community/notifications"
+                                        >
+                                            <span>
+                                                <IconLetter className="opacity-50 group-hover/item:opacity-75 inline-block mr-2 w-6" />
+                                                Notifications
+                                            </span>
+                                            {notifications?.length > 0 && (
+                                                <span className="ml-auto text-xs bg-red text-white px-1.5 py-0.5 rounded-full">
+                                                    {notifications.length}
+                                                </span>
+                                            )}
+                                        </Link>
+                                    </li>
+                                    <li className="px-1">
+                                        <Link
+                                            className="group/item flex items-center text-sm px-2 py-2 rounded-sm hover:bg-accent dark:hover:bg-accent-dark"
+                                            to={`/community/profiles/${user?.profile?.id}`}
+                                        >
+                                            <IconUser className="opacity-50 inline-block w-6 group-hover/parent:opacity-75 mr-2" />
+                                            My profile
+                                        </Link>
+                                    </li>
+                                    <li className="px-1">
+                                        <button
+                                            onClick={() => {
+                                                setShowMediaUploadModal(true)
+                                                posthog?.capture('opened media upload modal')
+                                            }}
+                                            className="group/item flex items-center text-sm px-2 py-2 rounded-sm hover:bg-accent dark:hover:bg-accent-dark w-full"
+                                        >
+                                            <IconUpload className="opacity-50 inline-block w-6 group-hover/parent:opacity-75 mr-2" />
+                                            Upload media
+                                        </button>
+                                    </li>
+                                    <li className="px-1">
+                                        <button
+                                            onClick={() => {
+                                                logout()
+                                                posthog?.capture('logged out')
+                                            }}
+                                            className="group/item flex items-center text-sm px-2 py-2 rounded-sm hover:bg-accent dark:hover:bg-accent-dark w-full"
+                                        >
+                                            <IconLock className="opacity-50 group-hover/item:opacity-75 inline-block mr-2 w-6" />
+                                            Community logout
+                                        </button>
+                                    </li>
+                                    <li className="bg-border/20 dark:bg-border-dark/20 border-y border-light dark:border-dark text-[13px] px-2 py-1.5 !my-1 text-primary/50 dark:text-primary-dark/60 z-20 m-0 font-semibold">
+                                        Site settings
+                                    </li>
+                                    <li className="px-1">
+                                        <DarkModeToggle />
+                                    </li>
+                                    <li className="hidden md:block px-1">
+                                        <button
+                                            onClick={() => {
+                                                setFullWidthContent(!fullWidthContent)
+                                                if (posthog) {
+                                                    posthog.people.set({
+                                                        preferred_viewing_mode: !fullWidthContent ? 'wide' : 'standard',
+                                                    })
+                                                }
+                                            }}
+                                            className="group/item text-sm px-2 py-2 rounded-sm hover:bg-accent dark:hover:bg-accent-dark flex justify-between items-center w-full"
+                                        >
+                                            <div>
+                                                <IconTextWidth className="opacity-50 group-hover/item:opacity-75 inline-block mr-2 w-6" />
+                                                <span>Wide mode</span>
+                                            </div>
+                                            <Toggle
+                                                pressed={fullWidthContent}
+                                                onPressedChange={(pressed) => {
+                                                    setFullWidthContent(pressed)
+                                                    if (posthog) {
+                                                        posthog.people.set({
+                                                            preferred_viewing_mode: pressed ? 'wide' : 'standard',
+                                                        })
+                                                    }
+                                                }}
+                                                className="group data-[state=on]:bg-green data-[state=off]:bg-accent rounded-full w-8 h-4 relative"
+                                            >
+                                                <span className="block w-3 h-3 bg-white rounded-full absolute top-0.5 left-0.5 transition-all duration-200 ease-in-out group-data-[state=on]:translate-x-4" />
+                                            </Toggle>
+                                        </button>
+                                    </li>
+                                    {location.pathname === '/' && (
+                                        <li className="px-1">
+                                            <button
+                                                onClick={() => setEnterpriseMode(!enterpriseMode)}
+                                                className="group/item text-sm px-2 py-2 rounded-sm hover:bg-accent dark:hover:bg-accent-dark flex justify-between items-center w-full"
+                                            >
+                                                <div>
+                                                    <IconCode className="opacity-50 group-hover/item:opacity-75 inline-block mr-2 w-6" />
+                                                    <span>Enterprise mode</span>
+                                                </div>
+                                                <Toggle
+                                                    pressed={enterpriseMode}
+                                                    onPressedChange={setEnterpriseMode}
+                                                    className="group data-[state=on]:bg-green data-[state=off]:bg-accent rounded-full w-8 h-4 relative"
+                                                >
+                                                    <span className="block w-3 h-3 bg-white rounded-full absolute top-0.5 left-0.5 transition-all duration-200 ease-in-out group-data-[state=on]:translate-x-4" />
+                                                </Toggle>
+                                            </button>
+                                        </li>
+                                    )}
+                                    {!compact && (
+                                        <li className="px-1">
+                                            <button
+                                                onClick={() => setHedgehogModeEnabled(!hedgehogModeEnabled)}
+                                                className="group/item text-sm px-2 py-2 rounded-sm hover:bg-accent dark:hover:bg-accent-dark flex justify-between items-center w-full"
+                                            >
+                                                <div>
+                                                    <IconLightBulb className="opacity-50 group-hover/item:opacity-75 inline-block mr-2 w-6" />
+                                                    <span>Hedgehog mode</span>
+                                                </div>
+                                                <Toggle
+                                                    pressed={hedgehogModeEnabled}
+                                                    onPressedChange={setHedgehogModeEnabled}
+                                                    className="group data-[state=on]:bg-green data-[state=off]:bg-accent rounded-full w-8 h-4 relative"
+                                                >
+                                                    <span className="block w-3 h-3 bg-white rounded-full absolute top-0.5 left-0.5 transition-all duration-200 ease-in-out group-data-[state=on]:translate-x-4" />
+                                                </Toggle>
+                                            </button>
+                                        </li>
+                                    )}
+                                </ul>
+                            </>
+                        ) : (
+                            <div className="p-2">
+                                <SignupCTA />
+                            </div>
+                        )}
+                    </div>
+                </Popover>
             </aside>
         </motion.div>
     )
