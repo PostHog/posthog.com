@@ -29,7 +29,6 @@ import MenuBar, { MenuType } from 'components/RadixUI/MenuBar'
 import { productMenu } from '../../navs/index.js'
 import * as Icons from '@posthog/icons'
 import OSButton from 'components/OSButton'
-import { IconClockRewind } from 'components/OSIcons'
 
 interface ProductMenuItem {
     name: string
@@ -312,6 +311,7 @@ const Window = ({ item, constraintsRef, taskbarHeight }: { item: any; constraint
         x: window.innerWidth / 2 - size.width / 2,
         y: window.innerHeight / 2 - size.height / 2,
     }))
+    const [wasMinimized, setWasMinimized] = useState(false)
 
     useEffect(() => {
         const handleResize = () => {
@@ -321,6 +321,12 @@ const Window = ({ item, constraintsRef, taskbarHeight }: { item: any; constraint
         window.addEventListener('resize', handleResize)
         return () => window.removeEventListener('resize', handleResize)
     }, [])
+
+    useEffect(() => {
+        if (item.minimized) {
+            setWasMinimized(true)
+        }
+    }, [item.minimized])
 
     const handleDoubleClick = () => {
         setSize((prev) => (prev.width === sizeDefaults.max.width ? sizeDefaults.min : sizeDefaults.max))
@@ -338,11 +344,32 @@ const Window = ({ item, constraintsRef, taskbarHeight }: { item: any; constraint
         setPosition(previousPosition)
     }
 
+    const getClockRewindPosition = () => {
+        const activeWindowsButton = document.querySelector('[data-active-windows]')
+        if (!activeWindowsButton) return { x: 0, y: 0 }
+        const rect = activeWindowsButton.getBoundingClientRect()
+        return {
+            x: rect.left + rect.width / 2,
+            y: rect.top + rect.height / 2,
+        }
+    }
+
+    const handleMinimize = () => {
+        minimizeWindow(item)
+        // Trigger the animation in the TaskBarMenu
+        const taskbarMenu = document.querySelector('#taskbar')
+        if (taskbarMenu) {
+            const event = new CustomEvent('windowMinimized')
+            taskbarMenu.dispatchEvent(event)
+        }
+    }
+
     return (
         <WindowProvider appWindow={item}>
             <AnimatePresence>
                 {!item.minimized && (
                     <motion.div
+                        layoutId={`window-${item.key}`}
                         className={`absolute flex flex-col border rounded overflow-hidden !select-auto  ${
                             focusedWindow === item
                                 ? 'shadow-2xl border-light-7 dark:border-dark-7'
@@ -353,7 +380,15 @@ const Window = ({ item, constraintsRef, taskbarHeight }: { item: any; constraint
                             height: size.height,
                             zIndex: item.zIndex,
                         }}
-                        initial={{ scale: 0.005 }}
+                        initial={
+                            wasMinimized
+                                ? {
+                                      scale: 0.005,
+                                      x: getClockRewindPosition().x - size.width / 2,
+                                      y: getClockRewindPosition().y - size.height / 2,
+                                  }
+                                : { scale: 0.005 }
+                        }
                         animate={{
                             scale: 1,
                             x: Math.round(position.x),
@@ -367,10 +402,18 @@ const Window = ({ item, constraintsRef, taskbarHeight }: { item: any; constraint
                         }}
                         exit={{
                             scale: 0.005,
-                            x: Math.round(window.innerWidth / 2 - size.width / 2),
-                            y: Math.round(window.innerHeight / 2 - size.height / 2),
+                            x: getClockRewindPosition().x - size.width / 2,
+                            y: getClockRewindPosition().y - size.height / 2,
                             transition: {
                                 scale: {
+                                    duration: 0.23,
+                                    ease: [0.2, 0.2, 0.8, 1],
+                                },
+                                x: {
+                                    duration: 0.23,
+                                    ease: [0.2, 0.2, 0.8, 1],
+                                },
+                                y: {
                                     duration: 0.23,
                                     ease: [0.2, 0.2, 0.8, 1],
                                 },
@@ -408,7 +451,7 @@ const Window = ({ item, constraintsRef, taskbarHeight }: { item: any; constraint
                                 {item.meta?.title && item.meta.title}
                             </p>
                             <div className="flex space-x-2">
-                                <button onClick={() => minimizeWindow(item)}>
+                                <button onClick={handleMinimize}>
                                     <IconMinus className="size-4" />
                                 </button>
                                 <button onClick={size.width >= window?.innerWidth ? collapseWindow : expandWindow}>
@@ -537,6 +580,36 @@ const SiteOptionsButton = () => {
 }
 
 const TaskBarMenu = ({ children }: { children?: React.ReactNode }) => {
+    const { windows, bringToFront } = useApp()
+    const [isAnimating, setIsAnimating] = useState(false)
+    const totalWindows = windows.length
+
+    useEffect(() => {
+        // Reset animation state after it completes
+        if (isAnimating) {
+            const timer = setTimeout(() => setIsAnimating(false), 500)
+            return () => clearTimeout(timer)
+        }
+    }, [isAnimating])
+
+    useEffect(() => {
+        const handleWindowMinimized = () => {
+            setIsAnimating(true)
+        }
+
+        const taskbar = document.querySelector('#taskbar')
+        if (taskbar) {
+            taskbar.addEventListener('windowMinimized', handleWindowMinimized)
+            return () => {
+                taskbar.removeEventListener('windowMinimized', handleWindowMinimized)
+            }
+        }
+    }, [])
+
+    const handleWindowClick = (window: any) => {
+        bringToFront(window)
+    }
+
     return (
         <motion.div
             id="taskbar"
@@ -554,9 +627,44 @@ const TaskBarMenu = ({ children }: { children?: React.ReactNode }) => {
                 <OSButton variant="ghost" size="md">
                     <IconChatHelp className="size-5" />
                 </OSButton>
-                <OSButton variant="ghost" size="md">
-                    <IconClockRewind className="size-5" />
-                </OSButton>
+                <Popover
+                    trigger={
+                        <motion.div
+                            animate={
+                                isAnimating
+                                    ? {
+                                          scale: [1, 1.2, 1],
+                                          rotate: [0, -5, 5, -5, 5, 0],
+                                      }
+                                    : {}
+                            }
+                            transition={{
+                                duration: 0.5,
+                                ease: 'easeInOut',
+                                times: [0, 0.2, 0.4, 0.6, 0.8, 1],
+                            }}
+                        >
+                            <OSButton variant="ghost" size="md" data-active-windows>
+                                <span className="text-sm font-semibold">{totalWindows}</span>
+                            </OSButton>
+                        </motion.div>
+                    }
+                    title="Active Windows"
+                    dataScheme="primary"
+                >
+                    <div className="flex flex-col gap-1 min-w-[200px]">
+                        {windows.map((window) => (
+                            <button
+                                key={window.key}
+                                onClick={() => handleWindowClick(window)}
+                                className="text-left px-2 py-1.5 rounded hover:bg-accent dark:hover:bg-accent-dark text-sm font-semibold flex items-center gap-2"
+                            >
+                                <span className="truncate">{window.meta?.title || 'Untitled'}</span>
+                                {window.minimized && <span className="text-xs opacity-50">(minimized)</span>}
+                            </button>
+                        ))}
+                    </div>
+                </Popover>
                 <OSButton variant="ghost" size="md">
                     <IconUser className="size-5" />
                 </OSButton>
@@ -583,14 +691,15 @@ const TaskBar = () => {
                             const active = !appWindow.minimized && focusedWindow === appWindow
                             return (
                                 <li key={appWindow.key}>
-                                    <button
+                                    <motion.button
+                                        layoutId={`window-${appWindow.key}`}
                                         onClick={() => (active ? minimizeWindow(appWindow) : bringToFront(appWindow))}
                                         className={`text-sm py-1 px-2 font-semibold border border-border dark:border-dark ${
                                             active ? 'bg-white dark:bg-black' : ''
                                         }`}
                                     >
                                         {appWindow.meta?.title}
-                                    </button>
+                                    </motion.button>
                                 </li>
                             )
                         })}
