@@ -1114,7 +1114,7 @@ export const handbookSidebar = [
         ],
     },
     {
-        name: 'Sales & CS',
+        name: 'Sales',
         url: '',
         children: [
             {
@@ -1140,10 +1140,6 @@ export const handbookSidebar = [
             {
                 name: 'Expansion & Retention',
                 url: '/handbook/growth/sales/expansion-and-retention',
-            },
-            {
-                name: 'Customer Success',
-                url: '/handbook/growth/sales/customer-success',
             },
             {
                 name: 'How we work',
@@ -1200,9 +1196,13 @@ export const handbookSidebar = [
                 ],
             },
             {
-                name: 'CS Operations',
+                name: 'Customer Success',
                 url: '',
                 children: [
+                    {
+                        name: 'Overview',
+                        url: '/handbook/growth/sales/customer-success',
+                    },
                     {
                         name: 'Health tracking',
                         url: '/handbook/growth/sales/health-tracking',
