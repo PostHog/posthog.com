@@ -4,6 +4,9 @@ import { Fieldset } from 'components/OSFieldset'
 import { ToggleGroup, ToggleOption } from 'components/RadixUI/ToggleGroup'
 import { IconDay, IconLaptop, IconNight, IconChevronRight } from '@posthog/icons'
 import { SEO } from 'components/seo'
+import { StaticImage } from 'gatsby-plugin-image'
+
+const XL_CURSOR_SVG = `<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 74 28"><g clip-path="url(#a)"><path fill="#000" stroke="#fff" stroke-width="5" d="m44.77 50.196.024.01.025.008c.48.177 1.014.286 1.58.286.665 0 1.28-.147 1.837-.392l.012-.006.013-.006 8.8-3.997.002-.001a4.5 4.5 0 0 0 2.225-5.968v-.001l-10.73-23.395 16.828-1.446.008-.001a4.504 4.504 0 0 0 2.678-7.78L20.073-37.289a4.51 4.51 0 0 0-4.858-.843l-.011.005A4.499 4.499 0 0 0 12.5-34v66a4.503 4.503 0 0 0 2.715 4.133l.01.003a4.505 4.505 0 0 0 4.86-.859L32.01 24.072l10.259 23.717.005.012.005.011a4.527 4.527 0 0 0 2.492 2.384Z"/></g><defs><clipPath id="a"><path fill="#fff" d="M0 0h74v28H0z"/></clipPath></defs></svg>`
 
 const colorModeOptions: ToggleOption[] = [
     {
@@ -26,19 +29,24 @@ const colorModeOptions: ToggleOption[] = [
 
 const cursorOptions: ToggleOption[] = [
     {
-        label: 'Normal',
+        label: 'Default',
         value: 'default',
-        icon: <IconChevronRight className="size-5" />,
     },
     {
         label: 'XL',
         value: 'xl',
-        icon: <IconChevronRight className="size-5" />,
+        icon: <div dangerouslySetInnerHTML={{ __html: XL_CURSOR_SVG }} className="h-5 w-full relative -top-1" />,
     },
     {
-        label: "James' Face",
+        label: "James' face",
         value: 'james',
-        icon: <IconChevronRight className="size-5" />,
+        icon: (
+            <img
+                src="https://res.cloudinary.com/dmukukwp6/image/upload/james_cursor_default_d6f7983b0a.png"
+                alt="James' Face"
+                className="h-6 -my-1"
+            />
+        ),
     },
 ]
 
@@ -57,7 +65,7 @@ export default function DisplayOptions() {
         // Apply cursor style
         if (value === 'james') {
             document.body.style.cursor =
-                'url(\'data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 30 30"><rect x="0" y="0" width="30" height="30" fill="red" /></svg>\'), auto'
+                'url(https://res.cloudinary.com/dmukukwp6/image/upload/james_cursor_default_d6f7983b0a.png), auto'
         } else if (value === 'xl') {
             // Default XL cursor
             const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><path fill="#000" stroke="#fff" stroke-width="5" d="m57.77 96.196.024.01.025.008c.48.177 1.014.286 1.58.286.665 0 1.28-.147 1.837-.392l.012-.006.013-.006 8.8-3.997.002-.001a4.5 4.5 0 0 0 2.225-5.969l-10.73-23.395 16.828-1.446.008-.001a4.504 4.504 0 0 0 2.678-7.78L33.073 8.712a4.51 4.51 0 0 0-4.858-.844l-.011.006A4.499 4.499 0 0 0 25.5 12v66a4.503 4.503 0 0 0 2.715 4.132l.01.004a4.505 4.505 0 0 0 4.86-.859L45.01 70.072l10.259 23.717.005.012.005.011a4.527 4.527 0 0 0 2.492 2.384Z"/></svg>`
