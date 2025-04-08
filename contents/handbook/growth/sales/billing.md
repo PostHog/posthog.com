@@ -125,7 +125,7 @@ Reach out to all contacts letting them know that due to the failed payment we wi
 
 #### Step 5 - Cancelling their subscription
 
-You can cancel their subscription in Stripe - navigate to their Stripe customer page, and then click the ... next to their active subscription to find the Cancel option.
+You can cancel their subscription in Stripe - navigate to their Stripe customer page, and then click the `...` next to their active subscription to find the Cancel option.
 
 At this point they will be notified about this automatically via the billing service.
 
