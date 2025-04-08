@@ -81,7 +81,7 @@ export interface MenuBarProps {
 
 const MenuBar: React.FC<MenuBarProps> = ({ menus }) => {
     return (
-        <RadixMenubar.Root data-scheme="tertiary" className="flex gap-px">
+        <RadixMenubar.Root data-scheme="tertiary" className="flex gap-px py-0.5">
             {menus.map((menu, index) => (
                 <RadixMenubar.Menu key={index}>
                     <RadixMenubar.Trigger className={`${TriggerClasses} ${menu.bold ? 'font-bold' : 'font-medium'}`}>

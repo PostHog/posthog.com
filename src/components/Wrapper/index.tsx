@@ -14,6 +14,9 @@ import {
     IconChevronRight,
     IconLogomark,
     IconApps,
+    IconSearch,
+    IconChatHelp,
+    IconUser,
 } from '@posthog/icons'
 import { useApp } from '../../context/App'
 import { Provider as WindowProvider } from '../../context/Window'
@@ -25,6 +28,8 @@ import { Fieldset } from 'components/OSFieldset'
 import MenuBar, { MenuType } from 'components/RadixUI/MenuBar'
 import { productMenu } from '../../navs/index.js'
 import * as Icons from '@posthog/icons'
+import OSButton from 'components/OSButton'
+import { IconClockRewind } from 'components/OSIcons'
 
 interface ProductMenuItem {
     name: string
@@ -226,7 +231,7 @@ export const menuData: MenuType[] = [
         ],
     },
     {
-        trigger: 'Edit',
+        trigger: 'Company',
         items: [
             {
                 type: 'item',
@@ -273,7 +278,7 @@ export const menuData: MenuType[] = [
     {
         trigger: (
             <>
-                <span className="ml-1">View</span>
+                <span className="ml-1">More</span>
             </>
         ),
         items: [
@@ -510,9 +515,23 @@ const TaskBarMenu = ({ children }: { children?: React.ReactNode }) => {
             initial={{ translateY: '100%' }}
             animate={{ translateY: 0 }}
             exit={{ translateY: '100%' }}
-            className="fixed top-0 left-0 w-full p-0.5 bg-primary border-b border-primary z-50"
+            className="fixed top-0 left-0 w-full bg-primary border-b border-primary z-50 flex justify-between pl-0.5 pr-2"
         >
             <MenuBar menus={menuData} />
+            <aside className="flex items-center gap-px py-0.5">
+                <OSButton variant="ghost" size="md">
+                    <IconSearch className="size-5" />
+                </OSButton>
+                <OSButton variant="ghost" size="md">
+                    <IconChatHelp className="size-5" />
+                </OSButton>
+                <OSButton variant="ghost" size="md">
+                    <IconClockRewind className="size-5" />
+                </OSButton>
+                <OSButton variant="ghost" size="md">
+                    <IconUser className="size-5" />
+                </OSButton>
+            </aside>
         </motion.div>
     )
 }
