@@ -237,7 +237,7 @@ function ReaderViewContent({ body, title, tableOfContents, mdxComponents, commit
                                                 label: null,
                                                 items: parent.children?.map((menuItem) => {
                                                     return {
-                                                        value: menuItem,
+                                                        value: menuItem.url || menuItem.name,
                                                         label: menuItem.name,
                                                         icon: menuItem.icon,
                                                         color: menuItem.color,
@@ -248,8 +248,13 @@ function ReaderViewContent({ body, title, tableOfContents, mdxComponents, commit
                                         placeholder="Select..."
                                         ariaLabel="Products"
                                         className="w-full mb-2"
-                                        value={activeInternalMenu}
-                                        onValueChange={(value) => setActiveInternalMenu(value)}
+                                        value={activeInternalMenu?.url || activeInternalMenu?.name}
+                                        onValueChange={(value) => {
+                                            const selectedMenu = parent.children?.find(
+                                                (menuItem) => menuItem.url === value || menuItem.name === value
+                                            )
+                                            setActiveInternalMenu(selectedMenu)
+                                        }}
                                     />
                                     <TreeMenu items={activeInternalMenu.children} />
                                 </ScrollArea>

@@ -540,11 +540,11 @@ const TaskBarMenu = ({ children }: { children?: React.ReactNode }) => {
     return (
         <motion.div
             id="taskbar"
-            data-scheme="secondary"
+            data-scheme="primary"
             initial={{ translateY: '100%' }}
             animate={{ translateY: 0 }}
             exit={{ translateY: '100%' }}
-            className="fixed top-0 left-0 w-full bg-primary border-b border-primary z-50 flex justify-between pl-0.5 pr-2"
+            className="fixed top-0 left-0 w-full bg-accent border-b border-primary z-50 flex justify-between pl-0.5 pr-2"
         >
             <MenuBar menus={menuData} />
             <aside className="flex items-center gap-px py-0.5">
