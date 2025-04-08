@@ -7,6 +7,7 @@ import { Link } from 'gatsby'
 import { useLocation } from '@reach/router'
 import OSButton from 'components/OSButton'
 import CloudinaryImage from 'components/CloudinaryImage'
+import { DebugContainerQuery } from 'components/DebugContainerQuery'
 
 const selectOptions = [
     {
@@ -173,9 +174,10 @@ export default function Explorer({
                         </AccordionItem>
                     </Accordion.Root>
                 </aside>
-                <main data-scheme="primary" className="flex-1 bg-primary relative">
+                <main data-scheme="primary" className="@container flex-1 bg-primary relative">
+                    <DebugContainerQuery />
                     {accentImage && (<div className="absolute right-0 top-6">
-                            <div className="relative max-w-md opacity-50">
+                            <div className="relative max-w-md @4xl:max-w-lg @5xl:max-w-xl @6xl:max-w-2xl transition-all duration-1000 ease-in-out opacity-25 @xl:opacity-50">
                                 {accentImage}
                                 <div className="absolute left-0 top-0 w-1/2 h-full bg-gradient-to-r from-[var(--bg)] to-[color-mix(in_srgb,var(--bg)_0%,transparent)]" />
                                 <div className="absolute bottom-0 left-0 h-1/2 w-full bg-gradient-to-b from-[color-mix(in_srgb,var(--bg)_0%,transparent)] to-[var(--bg)]" />
@@ -187,7 +189,7 @@ export default function Explorer({
                         {children}
                     </div>
                     {isMatchingPath && (
-                        <div className="grid grid-cols-2 gap-2 p-2 relative">
+                        <div className="grid grid-cols-1 @md:grid-cols-2 gap-2 p-2 relative max-w-4xl">
                             {features && (
                                 <div>
                                     <OSButton

@@ -31,7 +31,7 @@ export default function ProductAnalytics(): JSX.Element {
             />}
         >
             
-            <p>
+            <p className="max-w-lg">
                 PostHog is the only product analytics platform built to natively work with{' '}
                 <Link to="/session-replay">session replays</Link>,{' '}
                 <Link to="/feature-flags">feature flags</Link>, <Link to="/experiments">experiments</Link>, and{' '}
