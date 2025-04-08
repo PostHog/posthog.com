@@ -253,7 +253,7 @@ export default function AppWindow({ item, constraintsRef }: { item: any; constra
                                     </button>
                                 </div>
                             </div>
-                            <div className="w-full flex-grow overflow-auto">{item.element}</div>
+                            <div className="w-full flex-grow overflow-hidden">{item.element}</div>
                             <motion.div
                                 className="absolute bottom-0 right-0 w-4 h-4 cursor-se-resize"
                                 drag

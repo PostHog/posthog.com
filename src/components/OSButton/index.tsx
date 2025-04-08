@@ -29,7 +29,7 @@ import Link from 'components/Link'
 
 interface OSButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
     children?: React.ReactNode
-    variant?: 'default' | 'primary' | 'ghost'
+    variant?: 'default' | 'primary' | 'underline' |'ghost'
     size?: 'xs' | 'sm' | 'md' | 'lg' | 'xl'
     icon?: React.ReactNode
     tooltip?: string
@@ -58,14 +58,14 @@ export default function OSButton({
     ...props
 }: OSButtonProps) {
     const baseClasses =
-        'inline-flex gap-1 items-center rounded transition-colors transition-50 hover:transition-none border'
+        'inline-flex items-center rounded border transition-colors transition-50 hover:transition-none transition-[font-size,line-height,padding] transition-200'
 
     const sizeClasses = {
-        xs: 'px-2 py-1 text-xs',
-        sm: 'px-3 py-1.5 text-[13px]',
-        md: 'px-1.5 py-1 text-sm',
-        lg: 'px-6 py-3 text-base',
-        xl: 'px-4 py-2 text-base',
+        xs: 'px-2 py-1 text-xs gap-1',
+        sm: 'px-3 py-1.5 text-[13px] gap-1',
+        md: 'px-1.5 py-1 text-sm gap-1',
+        lg: 'px-6 py-3 text-base gap-1.5',
+        xl: 'px-2.5 py-1 text-sm @md:px-3 @md:py-1.5 @md:text-[15px] @lg:px-4 @lg:py-2 text-base gap-2',
     }
 
     const iconSizeClasses = {
@@ -73,13 +73,14 @@ export default function OSButton({
         sm: 'w-4 h-4',
         md: 'w-5 h-5',
         lg: 'w-6 h-6',
-        xl: 'w-10 h-10',
+        xl: 'w-8 h-8',
     }
 
     const variantClasses = {
         default: 'bg-black border-black text-white hover:bg-black/90 active:bg-black/80',
         primary:
             'bg-accent border-accent dark:border-accent-dark text-primary hover:bg-accent-dark active:bg-accent/80 dark:bg-accent-dark dark:hover:bg-accent dark:active:bg-accent-dark/80',
+        underline: 'hover:underline border-transparent',
         ghost: `bg-transparent border-transparent ${
             active
                 ? 'font-bold !bg-accent-2 dark:!bg-accent-dark hover:border-light dark:hover:border-dark'
@@ -90,7 +91,7 @@ export default function OSButton({
     const buttonContent = (
         <>
             {icon && <span className={`${iconSizeClasses[size]}`}>{icon}</span>}
-            <span>{children}</span>
+            {children}
             {label && <span className="text-sm opacity-75">{label}</span>}
             {tooltip && (
                 <span className="">
