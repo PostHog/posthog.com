@@ -106,6 +106,11 @@ export const menuData: MenuType[] = [
                 label: 'New Incognito Window',
                 disabled: true,
             },
+            {
+                type: 'item',
+                label: 'Display options',
+                link: '/display-options',
+            },
         ],
     },
     {
@@ -301,10 +306,23 @@ export const menuData: MenuType[] = [
     },
 ]
 
+const fixedAppSizes = {
+    '/display-options': {
+        max: {
+            width: 600,
+            height: 400,
+        },
+        min: {
+            width: 600,
+            height: 400,
+        },
+    },
+}
+
 const Window = ({ item, constraintsRef, taskbarHeight }: { item: any; constraintsRef: any; taskbarHeight: number }) => {
     const { minimizeWindow, bringToFront, closeWindow, focusedWindow } = useApp()
     const controls = useDragControls()
-    const [sizeDefaults, setSizeDefaults] = useState(getSizeDefaults())
+    const [sizeDefaults, setSizeDefaults] = useState(fixedAppSizes[item.key] || getSizeDefaults())
     const [previousSize, setPreviousSize] = useState({ width: sizeDefaults.max.width, height: sizeDefaults.max.height })
     const [size, setSize] = useState({ width: sizeDefaults.max.width, height: sizeDefaults.max.height })
     const [previousPosition, setPreviousPosition] = useState({ x: 0, y: 0 })
