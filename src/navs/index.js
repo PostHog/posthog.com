@@ -3436,15 +3436,11 @@ export const docsMenu = {
             name: 'Error tracking',
             url: '/docs/error-tracking',
             icon: 'IconWarning',
-            color: 'salmon',
+            color: 'orange',
             description: 'Track and monitor errors and exceptions in your code.',
             children: [
                 {
                     name: 'Error tracking',
-                    badge: {
-                        title: 'Beta',
-                        className: 'uppercase !bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',
-                    },
                 },
                 {
                     name: 'Overview',
@@ -3586,6 +3582,12 @@ export const productMenu = {
             icon: 'IconDatabase',
             color: 'lilac',
             url: '/data-warehouse',
+        },
+        {
+            name: 'Error tracking',
+            icon: 'IconWarning',
+            color: 'orange',
+            url: '/error-tracking',
         },
         {
             name: 'Product OS',
