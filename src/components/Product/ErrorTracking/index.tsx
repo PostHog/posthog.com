@@ -294,14 +294,6 @@ const comparison = [
             PostHog: true,
         },
     },
-    {
-        feature: 'Boring, purple website with corporate vibes',
-        companies: {
-            Sentry: true,
-            LogRocket: true,
-            PostHog: false,
-        },
-    },
 ]
 
 export const ProductErrorTracking = () => {
