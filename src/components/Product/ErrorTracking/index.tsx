@@ -287,6 +287,14 @@ const comparison = [
         },
     },
     {
+        feature: 'Integration with feature flags',
+        companies: {
+            Sentry: false,
+            LogRocket: false,
+            PostHog: true,
+        },
+    },
+    {
         feature: 'Boring, purple website with corporate vibes',
         companies: {
             Sentry: true,
