@@ -287,7 +287,7 @@ const comparison = [
         },
     },
     {
-        feature: 'Integration with feature flags',
+        feature: 'Integration with 100+ other tools',
         companies: {
             Sentry: false,
             LogRocket: false,
