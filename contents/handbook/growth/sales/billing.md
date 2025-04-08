@@ -103,7 +103,7 @@ In either of the above scenarios the account owner as defined in Vitally needs t
 
 You should reach out to any known contacts, as well as any finance email addresses we have in Stripe asking for payment to be made immediately.  For annual customers, you can download the Invoice PDF from the Stripe invoice page, and for monthly customers you can get the payment link from the Stripe invoice page.  Make it easy for them to make payment by including these details in your email.
 
-> Make it clear in this outreach that if we don't receive payment in the next 7 calendar days, their user access will be suspended.
+> Make it clear in this outreach that if we don't receive payment in the next 7 calendar days, their user access will be suspended. If they come back to you with genuine reasons why they need more time, use your discretion with the next steps. 
 
 #### Step 2 - 1 day before suspending user access
 
