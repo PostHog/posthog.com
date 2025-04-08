@@ -29,6 +29,7 @@ import Desktop from 'components/Desktop'
 import { DarkModeToggle } from 'components/DarkModeToggle'
 import { Popover } from 'components/RadixUI/Popover'
 import { Root as PopoverRoot } from '@radix-ui/react-popover'
+import { Root as Toggle } from '@radix-ui/react-toggle'
 import { ToggleGroup, ToggleOption } from 'components/RadixUI/ToggleGroup'
 import { Fieldset } from 'components/OSFieldset'
 import MenuBar, { MenuType } from 'components/RadixUI/MenuBar'
@@ -47,7 +48,6 @@ import MediaUploadModal from 'components/MediaUploadModal'
 import SideModal from 'components/Modal/SideModal'
 import { Authentication } from 'components/Squeak'
 import Link from 'components/Link'
-import Toggle from 'components/Toggle'
 
 interface ProductMenuItem {
     name: string
@@ -856,16 +856,19 @@ const TaskBarMenu = ({ children }: { children?: React.ReactNode }) => {
                                                 <span>Wide mode</span>
                                             </div>
                                             <Toggle
-                                                checked={fullWidthContent}
-                                                onChange={(checked: boolean) => {
-                                                    setFullWidthContent(checked)
+                                                pressed={fullWidthContent}
+                                                onPressedChange={(pressed) => {
+                                                    setFullWidthContent(pressed)
                                                     if (posthog) {
                                                         posthog.people.set({
-                                                            preferred_viewing_mode: checked ? 'wide' : 'standard',
+                                                            preferred_viewing_mode: pressed ? 'wide' : 'standard',
                                                         })
                                                     }
                                                 }}
-                                            />
+                                                className="group data-[state=on]:bg-green data-[state=off]:bg-accent rounded-full w-8 h-4 relative"
+                                            >
+                                                <span className="block w-3 h-3 bg-white rounded-full absolute top-0.5 left-0.5 transition-all duration-200 ease-in-out group-data-[state=on]:translate-x-4" />
+                                            </Toggle>
                                         </button>
                                     </li>
                                     {location.pathname === '/' && (
@@ -879,9 +882,12 @@ const TaskBarMenu = ({ children }: { children?: React.ReactNode }) => {
                                                     <span>Enterprise mode</span>
                                                 </div>
                                                 <Toggle
-                                                    checked={enterpriseMode}
-                                                    onChange={(checked: boolean) => setEnterpriseMode(checked)}
-                                                />
+                                                    pressed={enterpriseMode}
+                                                    onPressedChange={setEnterpriseMode}
+                                                    className="group data-[state=on]:bg-green data-[state=off]:bg-accent rounded-full w-8 h-4 relative"
+                                                >
+                                                    <span className="block w-3 h-3 bg-white rounded-full absolute top-0.5 left-0.5 transition-all duration-200 ease-in-out group-data-[state=on]:translate-x-4" />
+                                                </Toggle>
                                             </button>
                                         </li>
                                     )}
@@ -896,9 +902,12 @@ const TaskBarMenu = ({ children }: { children?: React.ReactNode }) => {
                                                     <span>Hedgehog mode</span>
                                                 </div>
                                                 <Toggle
-                                                    checked={hedgehogModeEnabled}
-                                                    onChange={(checked: boolean) => setHedgehogModeEnabled(checked)}
-                                                />
+                                                    pressed={hedgehogModeEnabled}
+                                                    onPressedChange={setHedgehogModeEnabled}
+                                                    className="group data-[state=on]:bg-green data-[state=off]:bg-accent rounded-full w-8 h-4 relative"
+                                                >
+                                                    <span className="block w-3 h-3 bg-white rounded-full absolute top-0.5 left-0.5 transition-all duration-200 ease-in-out group-data-[state=on]:translate-x-4" />
+                                                </Toggle>
                                             </button>
                                         </li>
                                     )}
