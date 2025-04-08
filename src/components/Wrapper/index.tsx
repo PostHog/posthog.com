@@ -348,7 +348,6 @@ const Window = ({ item, constraintsRef, taskbarHeight }: { item: any; constraint
         x: window.innerWidth / 2 - size.width / 2,
         y: window.innerHeight / 2 - size.height / 2,
     }))
-    const [wasMinimized, setWasMinimized] = useState(false)
 
     useEffect(() => {
         const handleResize = () => {
@@ -358,12 +357,6 @@ const Window = ({ item, constraintsRef, taskbarHeight }: { item: any; constraint
         window.addEventListener('resize', handleResize)
         return () => window.removeEventListener('resize', handleResize)
     }, [])
-
-    useEffect(() => {
-        if (item.minimized) {
-            setWasMinimized(true)
-        }
-    }, [item.minimized])
 
     const handleDoubleClick = () => {
         setSize((prev) => (prev.width === sizeDefaults.max.width ? sizeDefaults.min : sizeDefaults.max))
@@ -406,7 +399,6 @@ const Window = ({ item, constraintsRef, taskbarHeight }: { item: any; constraint
             <AnimatePresence>
                 {!item.minimized && (
                     <motion.div
-                        layoutId={`window-${item.key}`}
                         className={`absolute flex flex-col border rounded overflow-hidden !select-auto  ${
                             focusedWindow === item
                                 ? 'shadow-2xl border-light-7 dark:border-dark-7'
@@ -417,15 +409,11 @@ const Window = ({ item, constraintsRef, taskbarHeight }: { item: any; constraint
                             height: size.height,
                             zIndex: item.zIndex,
                         }}
-                        initial={
-                            wasMinimized
-                                ? {
-                                      scale: 0.005,
-                                      x: getClockRewindPosition().x - size.width / 2,
-                                      y: getClockRewindPosition().y - size.height / 2,
-                                  }
-                                : { scale: 0.005 }
-                        }
+                        initial={{
+                            scale: 0.005,
+                            x: getClockRewindPosition().x - size.width / 2,
+                            y: getClockRewindPosition().y - size.height / 2,
+                        }}
                         animate={{
                             scale: 1,
                             x: Math.round(position.x),
