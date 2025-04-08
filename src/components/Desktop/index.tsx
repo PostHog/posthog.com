@@ -47,7 +47,7 @@ export default function Desktop({ menuBarOffset }: { menuBarOffset: number }) {
             <nav
                 style={{
                     paddingTop: `${menuBarOffset}px`,
-                    height: `calc(100vh - ${menuBarOffset}px - 48px)`, // 48px for taskbar
+                    height: `calc(100vh - ${menuBarOffset}px - 48px)`,
                 }}
                 className="overflow-hidden"
             >

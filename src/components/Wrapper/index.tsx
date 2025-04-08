@@ -943,44 +943,6 @@ const TaskBarMenu = ({ children }: { children?: React.ReactNode }) => {
     )
 }
 
-const TaskBar = () => {
-    const { windows, focusedWindow, bringToFront, minimizeWindow } = useApp()
-    return (
-        <AnimatePresence>
-            {windows.length > 0 && (
-                <motion.div
-                    id="taskbar"
-                    data-scheme="secondary"
-                    initial={{ translateY: '100%' }}
-                    animate={{ translateY: 0 }}
-                    exit={{ translateY: '100%' }}
-                    className="fixed bottom-0 left-0 w-full p-0.5 bg-primary border-t border-primary z-50 flex justify-between"
-                >
-                    <ul className="m-0 p-0 list-none flex space-x-1">
-                        {windows.map((appWindow) => {
-                            const active = !appWindow.minimized && focusedWindow === appWindow
-                            return (
-                                <li key={appWindow.key}>
-                                    <motion.button
-                                        layoutId={`window-${appWindow.key}`}
-                                        onClick={() => (active ? minimizeWindow(appWindow) : bringToFront(appWindow))}
-                                        className={`text-sm py-1 px-2 font-semibold border border-border dark:border-dark ${
-                                            active ? 'bg-white dark:bg-black' : ''
-                                        }`}
-                                    >
-                                        {appWindow.meta?.title}
-                                    </motion.button>
-                                </li>
-                            )
-                        })}
-                    </ul>
-                    <SiteOptionsButton />
-                </motion.div>
-            )}
-        </AnimatePresence>
-    )
-}
-
 export default function Wrapper() {
     const constraintsRef = useRef(null)
     const { windows } = useApp()
@@ -1009,7 +971,6 @@ export default function Wrapper() {
             {windows.map((item) => (
                 <Window item={item} key={item.key} constraintsRef={constraintsRef} taskbarHeight={taskbarHeight} />
             ))}
-            <TaskBar />
         </div>
     )
 }
