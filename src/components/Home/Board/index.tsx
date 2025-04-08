@@ -384,10 +384,10 @@ const products: Product[] = [
     },
 
     {
-        name: 'Revenue Analytics',
+        name: 'Revenue analytics',
         Icon: IconPiggyBank,
         color: 'orange',
-        types: ['Business'],
+        types: ['Sales'],
         status: 'WIP',
         roadmapID: 2206,
     },
@@ -734,7 +734,7 @@ const ProductModal = ({
     )
 }
 
-const sorted = ['Product', 'Marketing', 'Support', 'Sales', 'Business', 'AI', 'Data', 'Engineering']
+const sorted = ['Product', 'Marketing', 'Support', 'Sales', 'AI', 'Data', 'Engineering']
 
 const ProductButton = ({
     type,
