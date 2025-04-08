@@ -353,6 +353,29 @@ const Window = ({ item, constraintsRef, taskbarHeight }: { item: any; constraint
                             height: size.height,
                             zIndex: item.zIndex,
                         }}
+                        initial={{ scale: 0.005 }}
+                        animate={{
+                            scale: 1,
+                            x: Math.round(position.x),
+                            y: Math.round(position.y),
+                            transition: {
+                                scale: {
+                                    duration: 0.3,
+                                    ease: [0.2, 0.2, 0.8, 1],
+                                },
+                            },
+                        }}
+                        exit={{
+                            scale: 0.005,
+                            x: Math.round(window.innerWidth / 2 - size.width / 2),
+                            y: Math.round(window.innerHeight / 2 - size.height / 2),
+                            transition: {
+                                scale: {
+                                    duration: 0.23,
+                                    ease: [0.2, 0.2, 0.8, 1],
+                                },
+                            },
+                        }}
                         drag
                         dragControls={controls}
                         dragListener={false}
@@ -373,7 +396,6 @@ const Window = ({ item, constraintsRef, taskbarHeight }: { item: any; constraint
                                 y: constrainedY,
                             })
                         }}
-                        animate={{ x: Math.round(position.x), y: Math.round(position.y) }}
                         onMouseDown={() => bringToFront(item)}
                     >
                         <div
@@ -396,7 +418,14 @@ const Window = ({ item, constraintsRef, taskbarHeight }: { item: any; constraint
                                         <IconExpand45 className="size-4" />
                                     )}
                                 </button>
-                                <button onClick={() => closeWindow(item)}>
+                                <button
+                                    onClick={() => {
+                                        // Set minimized first to trigger exit animation
+                                        minimizeWindow(item)
+                                        // Then close after animation duration
+                                        setTimeout(() => closeWindow(item), 250)
+                                    }}
+                                >
                                     <IconX className="size-4" />
                                 </button>
                             </div>
