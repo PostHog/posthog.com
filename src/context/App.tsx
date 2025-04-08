@@ -9,6 +9,7 @@ interface AppContextType {
     focusedWindow?: AppWindow
     location: any
     minimizeWindow: (appWindow: AppWindow) => void
+    taskbarHeight: number
 }
 
 interface AppProviderProps {
@@ -28,9 +29,11 @@ export const Context = createContext<AppContextType>({
     focusedWindow: undefined,
     location: {},
     minimizeWindow: () => {},
+    taskbarHeight: 0,
 })
 
 export const Provider = ({ children, element, location }: AppProviderProps) => {
+    const [taskbarHeight, setTaskbarHeight] = useState(0)
     const [windows, setWindows] = useState<AppWindow[]>([])
     const focusedWindow = useMemo(() => {
         return windows.reduce<AppWindow | undefined>(
@@ -90,9 +93,30 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
         }
     }, [element])
 
+    useEffect(() => {
+        const updateTaskbarHeight = () => {
+            const height = document.querySelector('#taskbar')?.getBoundingClientRect().height || 0
+            setTaskbarHeight(height)
+        }
+
+        updateTaskbarHeight()
+
+        window.addEventListener('resize', updateTaskbarHeight)
+        return () => window.removeEventListener('resize', updateTaskbarHeight)
+    }, [])
+
     return (
         <Context.Provider
-            value={{ windows, closeWindow, bringToFront, setWindowTitle, focusedWindow, location, minimizeWindow }}
+            value={{
+                windows,
+                closeWindow,
+                bringToFront,
+                setWindowTitle,
+                focusedWindow,
+                location,
+                minimizeWindow,
+                taskbarHeight,
+            }}
         >
             {children}
         </Context.Provider>
