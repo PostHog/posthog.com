@@ -24,7 +24,11 @@ export const wrapPageElement = ({ element, props }) => {
         <UserProvider>
             <ChatProvider>
                 {wrapElement({
-                    element: <Wrapper element={element} />,
+                    element: (
+                        <Provider element={element} location={props.location}>
+                            <Wrapper element={element} />
+                        </Provider>
+                    ),
                 })}
             </ChatProvider>
         </UserProvider>
