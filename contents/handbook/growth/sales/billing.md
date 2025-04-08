@@ -115,7 +115,7 @@ To prevent users from being able to log in you need to go to the Django admin pa
 
 After completing this, email or Slack all users in the organization letting them know that access has been suspended and what they can do to rectify the situation.  Also make it clear that if this isn't resolved within the next 7 days we will revert them back to the Free tier and they be subjected to the usage limits of that tier (e.g. they are likely to lose tracking data).
 
-> If they do pay after this point make sure to reenable user access by reversing the above in Django admin.
+> If they do pay after this point make sure to re-enable user access by reversing the above in Django admin.
 
 #### Step 4 - 1 day before cancelling their subscription
 
