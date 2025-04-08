@@ -30,7 +30,7 @@ import Link from 'components/Link'
 interface OSButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
     children?: React.ReactNode
     variant?: 'default' | 'primary' | 'ghost'
-    size?: 'xs' | 'sm' | 'md' | 'lg'
+    size?: 'xs' | 'sm' | 'md' | 'lg' | 'xl'
     icon?: React.ReactNode
     tooltip?: string
     label?: string
@@ -57,13 +57,15 @@ export default function OSButton({
     to,
     ...props
 }: OSButtonProps) {
-    const baseClasses = 'inline-flex items-center rounded transition-colors transition-50 hover:transition-none border'
+    const baseClasses =
+        'inline-flex gap-1 items-center rounded transition-colors transition-50 hover:transition-none border'
 
     const sizeClasses = {
         xs: 'px-2 py-1 text-xs',
         sm: 'px-3 py-1.5 text-[13px]',
         md: 'px-1.5 py-1 text-sm',
         lg: 'px-6 py-3 text-base',
+        xl: 'px-4 py-2 text-base',
     }
 
     const iconSizeClasses = {
@@ -71,6 +73,7 @@ export default function OSButton({
         sm: 'w-4 h-4',
         md: 'w-5 h-5',
         lg: 'w-6 h-6',
+        xl: 'w-10 h-10',
     }
 
     const variantClasses = {
@@ -87,7 +90,7 @@ export default function OSButton({
     const buttonContent = (
         <>
             {icon && <span className={`${iconSizeClasses[size]}`}>{icon}</span>}
-            {children}
+            <span>{children}</span>
             {label && <span className="text-sm opacity-75">{label}</span>}
             {tooltip && (
                 <span className="">
@@ -103,7 +106,7 @@ export default function OSButton({
         <Link
             to={to}
             {...props}
-            className={`flex gap-1 items-center ${baseClasses} ${sizeClasses[size]} ${variantClasses[variant]} ${
+            className={`${baseClasses} ${sizeClasses[size]} ${variantClasses[variant]} ${
                 align === 'center' ? 'justify-center' : 'justify-start'
             } ${width === 'full' ? 'w-full' : 'w-auto'} ${className}`}
         >
@@ -111,7 +114,7 @@ export default function OSButton({
         </Link>
     ) : (
         <button
-            className={`flex gap-1 items-center ${baseClasses} ${sizeClasses[size]} ${variantClasses[variant]} ${
+            className={`${baseClasses} ${sizeClasses[size]} ${variantClasses[variant]} ${
                 align === 'center' ? 'justify-center' : 'justify-start'
             } ${width === 'full' ? 'w-full' : 'w-auto'} ${className}`}
             {...props}

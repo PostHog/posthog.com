@@ -2,7 +2,9 @@ import React from 'react'
 import { Accordion } from 'radix-ui'
 import { Select } from '../RadixUI/Select'
 import HeaderBar from 'components/OSChrome/HeaderBar'
-import { IconChevronDown } from '@posthog/icons'
+import { IconChevronDown, IconCreditCard, IconMegaphone, IconPresent } from '@posthog/icons'
+import { Link } from 'gatsby'
+import OSButton from 'components/OSButton'
 
 const selectOptions = [
     {
@@ -126,28 +128,57 @@ export default function Explorer() {
                         </AccordionItem>
                     </Accordion.Root>
                 </aside>
-                <main data-scheme="primary" className="flex-1 bg-primary p-2">
-                    color test:
-                    <div data-scheme="primary" className="bg-primary text-primary border border-primary p-4">
-                        <p className="text-secondary">Primary text</p>
-                        <input
-                            className="bg-input hover:bg-input-hover border-input hover:border-input-hover text-muted"
-                            placeholder="Placeholder text"
-                        />
-                    </div>
-                    <div data-scheme="secondary" className="bg-primary text-primary border border-primary p-4">
-                        <p className="text-secondary">Secondary text</p>
-                        <input
-                            className="bg-input hover:bg-input-hover border-input hover:border-input-hover text-muted"
-                            placeholder="Placeholder text"
-                        />
-                    </div>
-                    <div data-scheme="tertiary" className="bg-primary text-primary border border-primary p-4">
-                        <p className="text-secondary">Tertiary text</p>
-                        <input
-                            className="bg-input hover:bg-input-hover border-input hover:border-input-hover text-muted"
-                            placeholder="Placeholder text"
-                        />
+                <main data-scheme="primary" className="flex-1 bg-primary p-4">
+                    <h1>Product analytics with autocapture</h1>
+                    <p>
+                        PostHog is the only product analytics platform built to natively work with{' '}
+                        <Link to="/session-replay">session replays</Link>,{' '}
+                        <Link to="/feature-flags">feature flags</Link>, <Link to="/experiments">experiments</Link>, and{' '}
+                        <Link to="/surveys">surveys</Link>.
+                    </p>
+                    <div className="grid grid-cols-2 gap-2">
+                        <div>
+                            <OSButton
+                                variant="ghost"
+                                asLink
+                                align="left"
+                                width="full"
+                                size="xl"
+                                icon={<IconPresent className="text-purple" />}
+                                to="/product-analytics/features"
+                                className="text-primary hover:text-primary"
+                            >
+                                Features
+                            </OSButton>
+                        </div>
+                        <div>
+                            <OSButton
+                                variant="ghost"
+                                asLink
+                                align="left"
+                                width="full"
+                                size="xl"
+                                icon={<IconCreditCard className="text-blue" />}
+                                to="/product-analytics/pricing"
+                                className="text-primary hover:text-primary"
+                            >
+                                Pricing
+                            </OSButton>
+                        </div>
+                        <div>
+                            <OSButton
+                                variant="ghost"
+                                asLink
+                                align="left"
+                                width="full"
+                                size="xl"
+                                icon={<IconMegaphone className="text-orange" />}
+                                to="/product-analytics/customers"
+                                className="text-primary hover:text-primary"
+                            >
+                                Social proof
+                            </OSButton>
+                        </div>
                     </div>
                 </main>
             </div>
