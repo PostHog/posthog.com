@@ -339,8 +339,8 @@ const fixedAppSizes = {
 
 const snapThreshold = 50
 
-const Window = ({ item, constraintsRef, taskbarHeight }: { item: any; constraintsRef: any; taskbarHeight: number }) => {
-    const { minimizeWindow, bringToFront, closeWindow, focusedWindow } = useApp()
+const Window = ({ item, constraintsRef }: { item: any; constraintsRef: any }) => {
+    const { minimizeWindow, bringToFront, closeWindow, focusedWindow, taskbarHeight } = useApp()
     const controls = useDragControls()
     const [sizeDefaults, setSizeDefaults] = useState(fixedAppSizes[item.key] || getSizeDefaults())
     const [previousSize, setPreviousSize] = useState({ width: sizeDefaults.max.width, height: sizeDefaults.max.height })
@@ -801,30 +801,15 @@ const TaskBarMenu = ({ children }: { children?: React.ReactNode }) => {
 export default function Wrapper() {
     const constraintsRef = useRef(null)
     const { windows } = useApp()
-    const [taskbarHeight, setTaskbarHeight] = useState(0)
-
-    useEffect(() => {
-        const updateTaskbarHeight = () => {
-            const height = document.querySelector('#taskbar')?.getBoundingClientRect().height || 0
-            setTaskbarHeight(height)
-        }
-
-        // Initial calculation
-        updateTaskbarHeight()
-
-        // Update on window resize
-        window.addEventListener('resize', updateTaskbarHeight)
-        return () => window.removeEventListener('resize', updateTaskbarHeight)
-    }, [])
 
     return (
         <div ref={constraintsRef} className="fixed inset-0 size-full">
             <TaskBarMenu>
                 <SiteOptionsButton />
             </TaskBarMenu>
-            <Desktop menuBarOffset={taskbarHeight} />
+            <Desktop />
             {windows.map((item) => (
-                <Window item={item} key={item.key} constraintsRef={constraintsRef} taskbarHeight={taskbarHeight} />
+                <Window item={item} key={item.key} constraintsRef={constraintsRef} />
             ))}
         </div>
     )

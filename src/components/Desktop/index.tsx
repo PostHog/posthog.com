@@ -1,6 +1,7 @@
 import React, { useRef } from 'react'
 import { IconGraph, IconPieChart } from '@posthog/icons'
 import Link from 'components/Link'
+import { useApp } from '../../context/App'
 
 const apps = [
     {
@@ -34,7 +35,9 @@ const AppLink = ({ Icon, type, color, label, url }) => {
     )
 }
 
-export default function Desktop({ menuBarOffset }: { menuBarOffset: number }) {
+export default function Desktop() {
+    const { taskbarHeight } = useApp()
+
     return (
         <div className="fixed size-full p-5">
             <div
@@ -46,8 +49,8 @@ export default function Desktop({ menuBarOffset }: { menuBarOffset: number }) {
             />
             <nav
                 style={{
-                    paddingTop: `${menuBarOffset}px`,
-                    height: `calc(100vh - ${menuBarOffset}px - 48px)`,
+                    paddingTop: `${taskbarHeight}px`,
+                    height: `calc(100vh - ${taskbarHeight}px - 48px)`,
                 }}
                 className="overflow-hidden"
             >
