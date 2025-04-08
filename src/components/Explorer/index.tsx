@@ -2,7 +2,7 @@ import React from 'react'
 import { Accordion } from 'radix-ui'
 import { Select } from '../RadixUI/Select'
 import HeaderBar from 'components/OSChrome/HeaderBar'
-import { IconBook, IconCalendar, IconChevronDown, IconCreditCard, IconGanttChart, IconListCheck, IconMegaphone, IconMessage, IconPeople, IconPresent } from '@posthog/icons'
+import { IconBook, IconCalendar, IconChevronDown, IconCreditCard, IconGanttChart, IconGraph, IconListCheck, IconMegaphone, IconMessage, IconPeople, IconPresent } from '@posthog/icons'
 import { Link } from 'gatsby'
 import OSButton from 'components/OSButton'
 
@@ -56,7 +56,7 @@ const AccordionTrigger = React.forwardRef<HTMLButtonElement, AccordionTriggerPro
                 {...props}
                 ref={forwardedRef}
             >
-                {children}
+                <span className="flex-1 flex items-center gap-1 text-left">{children}</span>
                 <IconChevronDown
                     className="size-6 transition-transform duration-300 ease-[cubic-bezier(0.87,_0,_0.13,_1)] group-data-[state=open]:rotate-180"
                     aria-hidden
@@ -86,6 +86,7 @@ const AccordionContent = React.forwardRef<HTMLDivElement, AccordionContentProps>
 AccordionContent.displayName = 'AccordionContent'
 
 interface ExplorerProps {
+    children?: React.ReactNode
     features?: boolean
     pricing?: boolean
     customers?: boolean
@@ -103,6 +104,7 @@ interface ExplorerProps {
 }
 
 export default function Explorer({
+    children,
     features = false,
     pricing = false,
     customers = false,
@@ -141,7 +143,10 @@ export default function Explorer({
                         collapsible
                     >
                         <AccordionItem value="item-1">
-                            <AccordionTrigger>Product Analytics</AccordionTrigger>
+                            <AccordionTrigger>
+                                <IconGraph className="text-blue size-5 inline-block" />
+                                <span className="flex-1">Product Analytics</span>
+                            </AccordionTrigger>
                             <AccordionContent>Yes. It adheres to the WAI-ARIA design pattern.</AccordionContent>
                         </AccordionItem>
 
@@ -162,12 +167,10 @@ export default function Explorer({
                 </aside>
                 <main data-scheme="primary" className="flex-1 bg-primary p-4">
                     <h1>Product analytics with autocapture</h1>
-                    <p>
-                        PostHog is the only product analytics platform built to natively work with{' '}
-                        <Link to="/session-replay">session replays</Link>,{' '}
-                        <Link to="/feature-flags">feature flags</Link>, <Link to="/experiments">experiments</Link>, and{' '}
-                        <Link to="/surveys">surveys</Link>.
-                    </p>
+
+
+                    {children}
+
                     <div className="grid grid-cols-2 gap-2">
                         {features && (
                             <div>
