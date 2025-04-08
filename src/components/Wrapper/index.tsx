@@ -365,7 +365,7 @@ const Window = ({ item, constraintsRef, taskbarHeight }: { item: any; constraint
     const expandWindow = () => {
         setPreviousSize(size)
         setPreviousPosition(position)
-        setPosition({ x: 0, y: 0 })
+        setPosition({ x: 0, y: taskbarHeight })
         setSize({ width: window.innerWidth, height: window.innerHeight - taskbarHeight })
     }
 
@@ -457,7 +457,9 @@ const Window = ({ item, constraintsRef, taskbarHeight }: { item: any; constraint
                             const newY = position.y + info.offset.y
 
                             const constrainedX = Math.round(Math.min(Math.max(0, newX), bounds.width - size.width))
-                            const constrainedY = Math.round(Math.min(Math.max(0, newY), bounds.height - size.height))
+                            const constrainedY = Math.round(
+                                Math.min(Math.max(taskbarHeight, newY), bounds.height - size.height)
+                            )
 
                             setPosition({
                                 x: constrainedX,
