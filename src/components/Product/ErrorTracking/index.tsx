@@ -471,6 +471,12 @@ export const ProductErrorTracking = () => {
                                     </ul>
                                 </li>
                                 <li>Advanced error grouping systems</li>
+                                <li>Better mobile support</li>
+                                <ul className="pl-6">
+                                    <li className="text-sm">
+                                        Even our team thinks Sentry does better with mobile support. For now!
+                                    </li>
+                                </ul>
                             </ul>
                         </VsCompetitor>
                         <VsPostHog>
