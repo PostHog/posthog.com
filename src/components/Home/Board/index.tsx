@@ -53,6 +53,10 @@ import {
     IconArrowRight,
     IconHeadset,
     IconPiggyBank,
+    IconBell,
+    IconArchive,
+    IconCheck,
+    IconStack,
 } from '@posthog/icons'
 import CloudinaryImage from 'components/CloudinaryImage'
 import useProducts from 'hooks/useProducts'
@@ -215,7 +219,7 @@ const products: Product[] = [
         color: 'orange',
         Icon: IconWarning,
         description: 'Track errors and resolve issues',
-        pricingKey: 'error-tracking',
+        pricingKey: 'error_tracking',
         types: ['Engineering'],
         features: [
             { title: 'Receive alerts', Icon: IconBell },
@@ -924,16 +928,6 @@ export default function Hero(): JSX.Element {
                                                 <ProductButton
                                                     type={'Sales'}
                                                     products={groupedProducts.find(([type]) => type === 'Sales')[1]}
-                                                    activeProduct={activeProduct}
-                                                    activeStatus={activeStatus}
-                                                    setActiveProduct={setActiveProduct}
-                                                    setProductModalOpen={setProductModalOpen}
-                                                />
-                                            </div>
-                                            <div className="mt-6 md:mt-2">
-                                                <ProductButton
-                                                    type={'Business'}
-                                                    products={groupedProducts.find(([type]) => type === 'Business')[1]}
                                                     activeProduct={activeProduct}
                                                     activeStatus={activeStatus}
                                                     setActiveProduct={setActiveProduct}
