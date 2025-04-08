@@ -4,7 +4,9 @@ import { Select } from '../RadixUI/Select'
 import HeaderBar from 'components/OSChrome/HeaderBar'
 import { IconBook, IconCalendar, IconChevronDown, IconCreditCard, IconGanttChart, IconGraph, IconListCheck, IconMegaphone, IconMessage, IconPeople, IconPresent } from '@posthog/icons'
 import { Link } from 'gatsby'
+import { useLocation } from '@reach/router'
 import OSButton from 'components/OSButton'
+import CloudinaryImage from 'components/CloudinaryImage'
 
 const selectOptions = [
     {
@@ -101,6 +103,7 @@ interface ExplorerProps {
     teamName?: string
     roadmapCategory?: string
     changelogCategory?: string
+    accentImage?: React.ReactNode
 }
 
 export default function Explorer({
@@ -118,8 +121,13 @@ export default function Explorer({
     slug,
     teamName,
     roadmapCategory,
-    changelogCategory
+    changelogCategory,
+    accentImage
 }: ExplorerProps) {
+    const location = useLocation()
+    const currentPath = location.pathname
+    const isMatchingPath = currentPath === `/${slug}` || currentPath.startsWith(`/${slug}/`)
+
     return (
         <div className="@container w-full h-full flex flex-col min-h-1">
             <HeaderBar showHome showBack showForward showSearch />
@@ -165,174 +173,183 @@ export default function Explorer({
                         </AccordionItem>
                     </Accordion.Root>
                 </aside>
-                <main data-scheme="primary" className="flex-1 bg-primary p-4">
-                    <h1>Product analytics with autocapture</h1>
-
-
-                    {children}
-
-                    <div className="grid grid-cols-2 gap-2">
-                        {features && (
-                            <div>
-                                <OSButton
-                                    variant="ghost"
-                                    asLink
-                                    align="left"
-                                    width="full"
-                                    size="xl"
-                                    icon={<IconPresent className="text-purple" />}
-                                    to={`/${slug}/features`}
-                                    className="text-primary hover:text-primary"
-                                >
-                                    Features
-                                </OSButton>
+                <main data-scheme="primary" className="flex-1 bg-primary relative">
+                    {accentImage && (<div className="absolute right-0 top-6">
+                            <div className="relative max-w-md opacity-50">
+                                {accentImage}
+                                <div className="absolute left-0 top-0 w-1/2 h-full bg-gradient-to-r from-[var(--bg)] to-[color-mix(in_srgb,var(--bg)_0%,transparent)]" />
+                                <div className="absolute bottom-0 left-0 h-1/2 w-full bg-gradient-to-b from-[color-mix(in_srgb,var(--bg)_0%,transparent)] to-[var(--bg)]" />
                             </div>
-                        )}
-                        {pricing && (
-                            <div>
-                                <OSButton
-                                    variant="ghost"
-                                    asLink
-                                    align="left"
-                                    width="full"
-                                    size="xl"
-                                    icon={<IconCreditCard className="text-blue" />}
-                                    to={`/${slug}/pricing`}
-                                    className="text-primary hover:text-primary"
-                                >
-                                    Pricing
-                                </OSButton>
-                            </div>
-                        )}
-                        {customers && (
-                            <div>
-                                <OSButton
-                                    variant="ghost"
-                                    asLink
-                                    align="left"
-                                    width="full"
-                                    size="xl"
-                                    icon={<IconMegaphone className="text-orange" />}
-                                    to={`/${slug}/customers`}
-                                    className="text-primary hover:text-primary"
-                                >
-                                    Social proof
-                                </OSButton>
-                            </div>
-                        )}
-                        {comparison && (
-                            <div>
-                                <OSButton
-                                    variant="ghost"
-                                    asLink
-                                    align="left"
-                                    width="full"
-                                    size="xl"
-                                    icon={<IconListCheck className="text-limegreen" />}
-                                    to={`/${slug}/vs`}
-                                    className="text-primary hover:text-primary"
-                                >
-                                    PostHog vs...
-                                </OSButton>
-                            </div>
-                        )}
-                        {docs && (
-                            <div>
-                                <OSButton
-                                    variant="ghost"
-                                    asLink
-                                    align="left"
-                                    width="full"
-                                    size="xl"
-                                    icon={<IconBook className="text-limegreen" />}
-                                    to={`/docs/${slug}`}
-                                    className="text-primary hover:text-primary"
-                                >
-                                    Docs
-                                </OSButton>
-                            </div>
-                        )}
-                        {tutorials && (
-                            <div>
-                                <OSButton
-                                    variant="ghost"
-                                    asLink
-                                    align="left"
-                                    width="full"
-                                    size="xl"
-                                    icon={<IconBook className="text-purple" />}
-                                    to={`/tutorials/${slug}`}
-                                    className="text-primary hover:text-primary"
-                                >
-                                    Tutorials
-                                </OSButton>
-                            </div>
-                        )}
-                        {questions && (
-                            <div>
-                                <OSButton
-                                    variant="ghost"
-                                    asLink
-                                    align="left"
-                                    width="full"
-                                    size="xl"
-                                    icon={<IconMessage className="text-red" />}
-                                    to={`/questions/topic/${slug}`}
-                                    className="text-primary hover:text-primary"
-                                >
-                                    Questions?
-                                </OSButton>
-                            </div>
-                        )}
-                        {team && (
-                            <div>
-                                <OSButton
-                                    variant="ghost"
-                                    asLink
-                                    align="left"
-                                    width="full"
-                                    size="xl"
-                                    icon={<IconPeople className="text-purple" />}
-                                    to={`/teams/${teamName || slug}`}
-                                    className="text-primary hover:text-primary"
-                                >
-                                    Team
-                                </OSButton>
-                            </div>
-                        )}
-                        {roadmap && (
-                            <div>
-                                <OSButton
-                                    variant="ghost"
-                                    asLink
-                                    align="left"
-                                    width="full"
-                                    size="xl"
-                                    icon={<IconGanttChart className="text-seagreen" />}
-                                    to={`/roadmap?product=${roadmapCategory || slug}`}
-                                    className="text-primary hover:text-primary"
-                                >
-                                    Roadmap
-                                </OSButton>
-                            </div>
-                        )}
-                        {changelog && (
-                            <div>
-                                <OSButton
-                                    variant="ghost"
-                                    asLink
-                                    align="left"
-                                    width="full"
-                                    size="xl"
-                                    icon={<IconCalendar className="text-blue" />}
-                                    to={`/changelog?product=${changelogCategory || slug}`}
-                                    className="text-primary hover:text-primary"
-                                >
-                                    Changelog
-                                </OSButton>
-                            </div>
-                        )}
+                        </div>)
+                    }
+                    <div className="p-6 relative">
+                        <h1>Product analytics with autocapture</h1>
+                        {children}
                     </div>
+                    {isMatchingPath && (
+                        <div className="grid grid-cols-2 gap-2 p-2 relative">
+                            {features && (
+                                <div>
+                                    <OSButton
+                                        variant="underline"
+                                        asLink
+                                        align="left"
+                                        width="full"
+                                        size="xl"
+                                        icon={<IconPresent className="text-purple" />}
+                                        to={`/${slug}/features`}
+                                        className="text-primary hover:text-primary"
+                                    >
+                                        Features
+                                    </OSButton>
+                                </div>
+                            )}
+                            {pricing && (
+                                <div>
+                                    <OSButton
+                                        variant="underline"
+                                        asLink
+                                        align="left"
+                                        width="full"
+                                        size="xl"
+                                        icon={<IconCreditCard className="text-blue" />}
+                                        to={`/${slug}/pricing`}
+                                        className="text-primary hover:text-primary"
+                                    >
+                                        Pricing
+                                    </OSButton>
+                                </div>
+                            )}
+                            {customers && (
+                                <div>
+                                    <OSButton
+                                        variant="underline"
+                                        asLink
+                                        align="left"
+                                        width="full"
+                                        size="xl"
+                                        icon={<IconMegaphone className="text-orange" />}
+                                        to={`/${slug}/customers`}
+                                        className="text-primary hover:text-primary"
+                                    >
+                                        Social proof
+                                    </OSButton>
+                                </div>
+                            )}
+                            {comparison && (
+                                <div>
+                                    <OSButton
+                                        variant="underline"
+                                        asLink
+                                        align="left"
+                                        width="full"
+                                        size="xl"
+                                        icon={<IconListCheck className="text-lime-green" />}
+                                        to={`/${slug}/vs`}
+                                        className="text-primary hover:text-primary"
+                                    >
+                                        PostHog vs...
+                                    </OSButton>
+                                </div>
+                            )}
+                            {docs && (
+                                <div>
+                                    <OSButton
+                                        variant="underline"
+                                        asLink
+                                        align="left"
+                                        width="full"
+                                        size="xl"
+                                        icon={<IconBook className="text-blue" />}
+                                        to={`/docs/${slug}`}
+                                        className="text-primary hover:text-primary"
+                                    >
+                                        Docs
+                                    </OSButton>
+                                </div>
+                            )}
+                            {tutorials && (
+                                <div>
+                                    <OSButton
+                                        variant="underline"
+                                        asLink
+                                        align="left"
+                                        width="full"
+                                        size="xl"
+                                        icon={<IconBook className="text-purple" />}
+                                        to={`/tutorials/${slug}`}
+                                        className="text-primary hover:text-primary"
+                                    >
+                                        Tutorials
+                                    </OSButton>
+                                </div>
+                            )}
+                            {questions && (
+                                <div>
+                                    <OSButton
+                                        variant="underline"
+                                        asLink
+                                        align="left"
+                                        width="full"
+                                        size="xl"
+                                        icon={<IconMessage className="text-red" />}
+                                        to={`/questions/topic/${slug}`}
+                                        className="text-primary hover:text-primary"
+                                    >
+                                        Questions?
+                                    </OSButton>
+                                </div>
+                            )}
+                            {team && (
+                                <div>
+                                    <OSButton
+                                        variant="underline"
+                                        asLink
+                                        align="left"
+                                        width="full"
+                                        size="xl"
+                                        icon={<IconPeople className="text-purple" />}
+                                        to={`/teams/${teamName || slug}`}
+                                        className="text-primary hover:text-primary"
+                                    >
+                                        Team
+                                    </OSButton>
+                                </div>
+                            )}
+                            {roadmap && (
+                                <div>
+                                    <OSButton
+                                        variant="underline"
+                                        asLink
+                                        align="left"
+                                        width="full"
+                                        size="xl"
+                                        icon={<IconGanttChart className="text-seagreen" />}
+                                        to={`/roadmap?product=${roadmapCategory || slug}`}
+                                        className="text-primary hover:text-primary"
+                                    >
+                                        Roadmap
+                                    </OSButton>
+                                </div>
+                            )}
+                            {changelog && (
+                                <div>
+                                    <OSButton
+                                        variant="underline"
+                                        asLink
+                                        align="left"
+                                        width="full"
+                                        size="xl"
+                                        icon={<IconCalendar className="text-blue" />}
+                                        to={`/changelog?product=${changelogCategory || slug}`}
+                                        className="text-primary hover:text-primary"
+                                    >
+                                        Changelog
+                                    </OSButton>
+                                </div>
+                            )}
+                        </div>
+                    )}
                 </main>
             </div>
         </div>
