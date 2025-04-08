@@ -23,6 +23,7 @@ import { Provider as WindowProvider } from '../../context/Window'
 import Desktop from 'components/Desktop'
 import { DarkModeToggle } from 'components/DarkModeToggle'
 import { Popover } from 'components/RadixUI/Popover'
+import { Root as PopoverRoot } from '@radix-ui/react-popover'
 import { ToggleGroup, ToggleOption } from 'components/RadixUI/ToggleGroup'
 import { Fieldset } from 'components/OSFieldset'
 import MenuBar, { MenuType } from 'components/RadixUI/MenuBar'
@@ -580,9 +581,10 @@ const SiteOptionsButton = () => {
 }
 
 const TaskBarMenu = ({ children }: { children?: React.ReactNode }) => {
-    const { windows, bringToFront } = useApp()
+    const { windows, bringToFront, focusedWindow } = useApp()
     const [isAnimating, setIsAnimating] = useState(false)
     const totalWindows = windows.length
+    const [isOpen, setIsOpen] = useState(false)
 
     useEffect(() => {
         // Reset animation state after it completes
@@ -608,6 +610,7 @@ const TaskBarMenu = ({ children }: { children?: React.ReactNode }) => {
 
     const handleWindowClick = (window: any) => {
         bringToFront(window)
+        setIsOpen(false)
     }
 
     return (
@@ -627,44 +630,56 @@ const TaskBarMenu = ({ children }: { children?: React.ReactNode }) => {
                 <OSButton variant="ghost" size="md">
                     <IconChatHelp className="size-5" />
                 </OSButton>
-                <Popover
-                    trigger={
-                        <motion.div
-                            animate={
-                                isAnimating
-                                    ? {
-                                          scale: [1, 1.2, 1],
-                                          rotate: [0, -5, 5, -5, 5, 0],
-                                      }
-                                    : {}
-                            }
-                            transition={{
-                                duration: 0.5,
-                                ease: 'easeInOut',
-                                times: [0, 0.2, 0.4, 0.6, 0.8, 1],
-                            }}
-                        >
-                            <OSButton variant="ghost" size="md" data-active-windows>
-                                <span className="text-sm font-semibold">{totalWindows}</span>
-                            </OSButton>
-                        </motion.div>
-                    }
-                    title="Active Windows"
-                    dataScheme="primary"
-                >
-                    <div className="flex flex-col gap-1 min-w-[200px]">
-                        {windows.map((window) => (
-                            <button
-                                key={window.key}
-                                onClick={() => handleWindowClick(window)}
-                                className="text-left px-2 py-1.5 rounded hover:bg-accent dark:hover:bg-accent-dark text-sm font-semibold flex items-center gap-2"
+                <PopoverRoot open={isOpen} onOpenChange={setIsOpen}>
+                    <Popover
+                        trigger={
+                            <motion.div
+                                animate={
+                                    isAnimating
+                                        ? {
+                                              scale: [1, 1.2, 1],
+                                              rotate: [0, -5, 5, -5, 5, 0],
+                                          }
+                                        : {}
+                                }
+                                transition={{
+                                    duration: 0.5,
+                                    ease: 'easeInOut',
+                                    times: [0, 0.2, 0.4, 0.6, 0.8, 1],
+                                }}
                             >
-                                <span className="truncate">{window.meta?.title || 'Untitled'}</span>
-                                {window.minimized && <span className="text-xs opacity-50">(minimized)</span>}
-                            </button>
-                        ))}
-                    </div>
-                </Popover>
+                                <OSButton
+                                    variant="ghost"
+                                    size="md"
+                                    data-active-windows
+                                    className="border-2 border-primary"
+                                >
+                                    <span className="text-sm font-semibold">{totalWindows}</span>
+                                </OSButton>
+                            </motion.div>
+                        }
+                        title="Active Windows"
+                        dataScheme="primary"
+                    >
+                        <div className="flex flex-col gap-1 min-w-[200px]">
+                            {windows.map((window) => (
+                                <button
+                                    key={window.key}
+                                    onClick={() => handleWindowClick(window)}
+                                    className="text-left px-2 py-1.5 rounded hover:bg-accent dark:hover:bg-accent-dark text-sm flex items-center gap-2"
+                                >
+                                    <span
+                                        className={`truncate ${
+                                            window.minimized ? 'italic' : focusedWindow === window ? 'font-bold' : ''
+                                        }`}
+                                    >
+                                        {window.meta?.title || 'Untitled'}
+                                    </span>
+                                </button>
+                            ))}
+                        </div>
+                    </Popover>
+                </PopoverRoot>
                 <OSButton variant="ghost" size="md">
                     <IconUser className="size-5" />
                 </OSButton>
