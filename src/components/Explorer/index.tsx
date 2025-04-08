@@ -2,7 +2,19 @@ import React from 'react'
 import { Accordion } from 'radix-ui'
 import { Select } from '../RadixUI/Select'
 import HeaderBar from 'components/OSChrome/HeaderBar'
-import { IconBook, IconCalendar, IconChevronDown, IconCreditCard, IconGanttChart, IconGraph, IconListCheck, IconMegaphone, IconMessage, IconPeople, IconPresent } from '@posthog/icons'
+import {
+    IconBook,
+    IconCalendar,
+    IconChevronDown,
+    IconCreditCard,
+    IconGanttChart,
+    IconGraph,
+    IconListCheck,
+    IconMegaphone,
+    IconMessage,
+    IconPeople,
+    IconPresent,
+} from '@posthog/icons'
 import { Link } from 'gatsby'
 import { useLocation } from '@reach/router'
 import OSButton from 'components/OSButton'
@@ -124,7 +136,7 @@ export default function Explorer({
     teamName,
     roadmapCategory,
     changelogCategory,
-    accentImage
+    accentImage,
 }: ExplorerProps) {
     const location = useLocation()
     const currentPath = location.pathname
@@ -143,7 +155,7 @@ export default function Explorer({
                     dataScheme="primary"
                 />
             </div>
-            <div className="flex h-full">
+            <div className="flex flex-grow min-h-0">
                 <aside data-scheme="secondary" className="w-64 bg-primary p-2 border-r border-primary h-full">
                     <ScrollArea>
                         <Accordion.Root
@@ -180,14 +192,15 @@ export default function Explorer({
                 <main data-scheme="primary" className="@container flex-1 bg-primary relative h-full">
                     <ScrollArea className="px-4">
                         <DebugContainerQuery />
-                        {accentImage && (<div className="absolute right-0 top-6">
+                        {accentImage && (
+                            <div className="absolute right-0 top-6">
                                 <div className="relative max-w-md @4xl:max-w-lg @5xl:max-w-xl @6xl:max-w-2xl transition-all duration-700 ease-out opacity-25 @xl:opacity-50">
                                     {accentImage}
                                     <div className="absolute left-0 top-0 w-1/2 h-full bg-gradient-to-r from-[var(--bg)] to-[color-mix(in_srgb,var(--bg)_0%,transparent)]" />
                                     <div className="absolute bottom-0 left-0 h-1/2 w-full bg-gradient-to-b from-[color-mix(in_srgb,var(--bg)_0%,transparent)] to-[var(--bg)]" />
                                 </div>
-                            </div>)
-                        }
+                            </div>
+                        )}
                         <div className="p-6 relative">
                             <h1>Product analytics with autocapture</h1>
                             {children}
