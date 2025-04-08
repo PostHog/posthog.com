@@ -49,17 +49,15 @@ The [quarterly per-product planning](/handbook/company/goal-setting) typically h
 
 As the PM team, we are also pursuing a couple of side projects each quarter with the goal of leveling up how we do Product at PostHog.
 
-In Q1 2025, those are:
+In Q2 2025, those are:
 
-**Goal 1: Bring growth and product thinking into teams** -> Raquel
+**Goal 1: V2 growth review and product usage metrics**
+* Define per-product revenue metrics & benchmarks, based on Mine's "all revenue" work -> Anna
+* Define a set of usage metrics we can track across products, consider a dashboard template for this -> Annika
+* Bring it together for V2 growth reviews -> both
 
-**Goal 2: Hire a new PM** -> Annika, with support from Anna
-* Update the superday task to make it more data analysis heavy
-* Hire a third PM
-* New PM is set up successfully with their first team
+**Goal 2: Increase adoption of Buildbetter** -> Anna
+* How can different roles get the most value out of the tool? (PM, Engineering, Sales, ...)
 
-**Goal 3: Identify benchmarks for metrics we should care about to make them more actionable** -> Anna
-* Define what per-product metrics we care about (e.g. activation, churn)
-* Based on industry benchmarks, define what "good" looks like
-* Define a standard how we track these metrics across products (e.g. for churn, do we want to use a rolling 3-month average?)
-* Update [Product Metrics](https://posthog.com/handbook/product/metrics) with agreed-upon definitions
+**Goal 3: Hire a new PM** -> Annika & Raquel
+* Product ownership: CDP, then Error tracking and surveys
