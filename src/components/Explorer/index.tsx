@@ -86,6 +86,7 @@ const AccordionContent = React.forwardRef<HTMLDivElement, AccordionContentProps>
 AccordionContent.displayName = 'AccordionContent'
 
 interface ExplorerProps {
+    children?: React.ReactNode
     features?: boolean
     pricing?: boolean
     customers?: boolean
@@ -103,6 +104,7 @@ interface ExplorerProps {
 }
 
 export default function Explorer({
+    children,
     features = false,
     pricing = false,
     customers = false,
@@ -168,6 +170,9 @@ export default function Explorer({
                         <Link to="/feature-flags">feature flags</Link>, <Link to="/experiments">experiments</Link>, and{' '}
                         <Link to="/surveys">surveys</Link>.
                     </p>
+
+                    {children}
+
                     <div className="grid grid-cols-2 gap-2">
                         {features && (
                             <div>
