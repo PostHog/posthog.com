@@ -3229,6 +3229,51 @@ export const docsMenu = {
             ],
         },
         {
+            name: 'Error tracking',
+            url: '/docs/error-tracking',
+            icon: 'IconWarning',
+            color: 'orange',
+            description: 'Track and monitor errors and exceptions in your code.',
+            children: [
+                {
+                    name: 'Error tracking',
+                },
+                {
+                    name: 'Overview',
+                    url: '/docs/error-tracking',
+                    icon: 'IconHome',
+                    color: 'seagreen',
+                },
+                {
+                    name: 'Installation',
+                    url: '/docs/error-tracking/installation',
+                    icon: 'IconBook',
+                    color: 'blue',
+                    featured: true,
+                },
+                {
+                    name: 'Stack traces',
+                    url: '/docs/error-tracking/stack-traces',
+                    icon: 'IconCode',
+                    color: 'seagreen',
+                },
+                {
+                    name: 'Monitor errors',
+                    url: '/docs/error-tracking/monitoring',
+                    icon: 'IconGraph',
+                    color: 'orange',
+                    featured: true,
+                },
+                {
+                    name: 'Troubleshooting and FAQs',
+                    url: '/docs/error-tracking/common-questions',
+                    icon: 'IconQuestion',
+                    color: 'purple',
+                    featured: true,
+                },
+            ],
+        },
+        {
             name: 'Surveys',
             url: '/docs/surveys',
             icon: 'IconMessage',
@@ -3432,51 +3477,6 @@ export const docsMenu = {
                 },
             ],
         },
-        {
-            name: 'Error tracking',
-            url: '/docs/error-tracking',
-            icon: 'IconWarning',
-            color: 'orange',
-            description: 'Track and monitor errors and exceptions in your code.',
-            children: [
-                {
-                    name: 'Error tracking',
-                },
-                {
-                    name: 'Overview',
-                    url: '/docs/error-tracking',
-                    icon: 'IconHome',
-                    color: 'seagreen',
-                },
-                {
-                    name: 'Installation',
-                    url: '/docs/error-tracking/installation',
-                    icon: 'IconBook',
-                    color: 'blue',
-                    featured: true,
-                },
-                {
-                    name: 'Stack traces',
-                    url: '/docs/error-tracking/stack-traces',
-                    icon: 'IconCode',
-                    color: 'seagreen',
-                },
-                {
-                    name: 'Monitor errors',
-                    url: '/docs/error-tracking/monitoring',
-                    icon: 'IconGraph',
-                    color: 'orange',
-                    featured: true,
-                },
-                {
-                    name: 'Troubleshooting and FAQs',
-                    url: '/docs/error-tracking/common-questions',
-                    icon: 'IconQuestion',
-                    color: 'purple',
-                    featured: true,
-                },
-            ],
-        },
     ],
 }
 
@@ -3566,6 +3566,12 @@ export const productMenu = {
             url: '/experiments',
         },
         {
+            name: 'Error tracking',
+            icon: 'IconWarning',
+            color: 'orange',
+            url: '/error-tracking',
+        },
+        {
             name: 'Surveys',
             icon: 'IconMessage',
             color: 'salmon',
@@ -3582,12 +3588,6 @@ export const productMenu = {
             icon: 'IconDatabase',
             color: 'lilac',
             url: '/data-warehouse',
-        },
-        {
-            name: 'Error tracking',
-            icon: 'IconWarning',
-            color: 'orange',
-            url: '/error-tracking',
         },
         {
             name: 'Product OS',
