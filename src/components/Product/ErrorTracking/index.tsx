@@ -281,7 +281,7 @@ const comparison = [
     {
         feature: 'Integration with session replays',
         companies: {
-            Sentry: false,
+            Sentry: true,
             LogRocket: true,
             PostHog: true,
         },
