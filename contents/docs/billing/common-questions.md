@@ -36,4 +36,6 @@ Non-profits can contact our [sales team](/talk-to-a-human) after signing up to d
 
 ### Can I change the email invoices or billing alerts are sent to?
 
-Yes, contact us through the [in-app support modal](https://app.posthog.com/project/settings#supportModal=support%3Abilling).
+We send billing emails to all owners and administrators in the organization. These are important emails, so we currently don't allow these notification settings to be configured.
+
+If you'd like a specific email address to receive these communications, we recommend inviting that email to your organization and assigning them an administrator role.
