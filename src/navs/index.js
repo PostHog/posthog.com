@@ -2111,9 +2111,12 @@ export const docsMenu = {
                 },
                 {
                     name: 'Switching to PostHog',
-                    url: '/docs/new-to-posthog/switch-guide/switching-to-posthog',
                     icon: 'IconLeave',
                     children: [
+                        {
+                            name: 'Convincing teammates',
+                            url: '/docs/new-to-posthog/switch-guide/switching-to-posthog',
+                        },
                         {
                             name: 'Planning your pilot',
                             url: '/docs/new-to-posthog/switch-guide/planning-your-pilot',
