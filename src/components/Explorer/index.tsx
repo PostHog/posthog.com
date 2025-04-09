@@ -91,44 +91,128 @@ export default function Explorer({
             <div className="flex flex-grow min-h-0">
                 <aside data-scheme="secondary" className="w-64 bg-primary p-2 border-r border-primary h-full">
                     <ScrollArea>
-                        <Accordion
-                            data-scheme="primary"
-                            className="rounded"
-                            defaultValue="item-0"
-                            items={[
-                                {
-                                    trigger: (
-                                        <>
-                                            <ProductIcon className={`text-${product.color} size-5 inline-block`} />
-                                            <span className="flex-1">{product.name}</span>
-                                        </>
-                                    ),
-                                    content: (
-                                        <>
-                                            <p className="text-sm">
-                                                {product.description}
-                                            </p>
-                                            <p>
-                                                <span className="text-sm text-secondary">Pricing starts at</span><br />
-                                                <span className="font-bold text-[15px]">${product.startsAt}</span><span className="text-sm text-secondary">/{product.denomination}</span>
-                                            </p>
-                                            <p>
-                                                <span className="text-sm text-secondary">Monthly free tier</span><br />
-                                                <span className="font-bold text-[15px]">{product.freeTier?.toLocaleString()}</span><span className="text-sm text-secondary">/{product.denomination}</span>
-                                            </p>
-                                        </>
-                                    )
-                                },
-                                {
-                                    trigger: "Is it unstyled?",
-                                    content: "Yes. It's unstyled by default, giving you freedom over the look and feel."
-                                },
-                                {
-                                    trigger: "Can it be animated?",
-                                    content: "Yes! You can animate the Accordion with CSS or JavaScript."
-                                }
-                            ]}
-                        />
+                        <div className="space-y-3">
+                            <Accordion
+                                data-scheme="primary"
+                                className=""
+                                defaultValue="item-0"
+                                items={[
+                                    {
+                                        trigger: (
+                                            <>
+                                                <ProductIcon className={`text-${product.color} size-5 inline-block`} />
+                                                <span className="flex-1">{product.name}</span>
+                                            </>
+                                        ),
+                                        content: (
+                                            <>
+                                                <p className="text-sm">
+                                                    {product.description}
+                                                </p>
+                                                <p>
+                                                    <span className="text-sm text-secondary">Pricing starts at</span><br />
+                                                    <span className="font-bold text-[15px]">${product.startsAt}</span><span className="text-sm text-secondary">/{product.denomination}</span>
+                                                </p>
+                                                <p>
+                                                    <span className="text-sm text-secondary">Monthly free tier</span><br />
+                                                    <span className="font-bold text-[15px]">{product.freeTier?.toLocaleString()}</span><span className="text-sm text-secondary">/{product.denomination}</span>
+                                                </p>
+                                            </>
+                                        )
+                                    },
+                                ]}
+                            />
+
+                            <Accordion
+                                data-scheme="primary"
+                                className=""
+                                defaultValue="item-0"
+                                contentClassName=""
+                                items={[
+                                    {
+                                        trigger: "Learn more",
+                                        content: (
+                                            <div className="space-y-1">
+                                                <OSButton 
+                                                    variant="underline" 
+                                                    asLink 
+                                                    align="left" 
+                                                    width="full" 
+                                                    size="md" 
+                                                    icon={<Icons.IconCursor className="text-green" />} 
+                                                    to="https://app.posthog.com/signup"
+                                                    className="text-primary hover:text-primary"
+                                                >
+                                                    Try it – free
+                                                </OSButton>
+
+                                                <OSButton 
+                                                    variant="underline" 
+                                                    asLink 
+                                                    align="left" 
+                                                    width="full" 
+                                                    size="md" 
+                                                    icon={<Icons.IconHeadset className="text-purple" />} 
+                                                    to="/talk-to-a-human"
+                                                    className="text-primary hover:text-primary"
+                                                >
+                                                    Talk to a human
+                                                </OSButton>
+
+                                                <OSButton 
+                                                    variant="underline" 
+                                                    asLink 
+                                                    align="left" 
+                                                    width="full" 
+                                                    size="md" 
+                                                    icon={<Icons.IconQuestion className="text-blue" />} 
+                                                    to="#"
+                                                    className="text-primary hover:text-primary"
+                                                >
+                                                    FAQ
+                                                </OSButton>
+                                            </div>
+                                        )
+                                    },
+                                ]}
+                            />
+
+                            <Accordion 
+                                data-scheme="primary"
+                                className=""
+                                defaultValue="item-0"
+                                contentClassName=""
+                                items={[
+                                    {
+                                        trigger: "Works with...",
+                                        content: (
+                                            <div className="space-y-1">
+                                                {product.worksWith?.map((productSlug) => {
+                                                    const relatedProduct = productMenu.children.find((item) => item.slug === productSlug)
+                                                    if (!relatedProduct) return null
+                                                    const ProductIcon = Icons[relatedProduct.icon as keyof typeof Icons]
+                                                    return (
+                                                        <OSButton 
+                                                            key={productSlug}
+                                                            variant="underline" 
+                                                            asLink 
+                                                            align="left" 
+                                                            width="full" 
+                                                            size="md" 
+                                                            icon={<ProductIcon className={`text-${relatedProduct.color}`} />} 
+                                                            to={`/${relatedProduct.slug}`} 
+                                                            className="text-primary hover:text-primary"
+                                                        >
+                                                            {relatedProduct.name}
+                                                        </OSButton>
+                                                    )
+                                                })}
+                                            </div>
+                                        )
+                                    },
+                                ]}
+                            />
+                        </div>
                     </ScrollArea>
                 </aside>
                 <main data-scheme="primary" className="@container flex-1 bg-primary relative h-full">
