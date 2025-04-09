@@ -3544,7 +3544,8 @@ export const productMenu = {
             description: 'Understand user behavior with event-based analytics, cohorts, and conversion funnels.',
             startsAt: '0.00005',
             denomination: 'event',
-            freeTier: '1000000',
+            freeTier: 1000000,
+            sharesFreeTier: 'web-analytics',
             worksWith: ['session-replay', 'experiments', 'surveys'],
         },
         {
@@ -3553,6 +3554,12 @@ export const productMenu = {
             color: '[#36C46F]',
             url: '/web-analytics',
             slug: 'web-analytics',
+            description: 'Monitor your website traffic. Built for people who really liked GA3...',
+            startsAt: '0.00005',
+            denomination: 'event',
+            freeTier: 1000000,
+            sharesFreeTier: 'product-analytics',
+            worksWith: ['product-analytics', 'session-replay', 'surveys'],
         },
         {
             name: 'Session replay',

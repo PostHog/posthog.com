@@ -12,7 +12,7 @@
         --input-border: #d2d3cc;
         --input-border-hover: #d2d3cc;
         --text-primary: #4d4f46;
-        --text-secondary: #9ea096;
+        --text-secondary: #65675E;
         --text-muted: #9ea096;
 
         .hover-invert:hover,
@@ -115,7 +115,7 @@
 }
 
 p {
-    margin-bottom: 1.45rem;
+    @apply mb-3;
 }
 
 code {

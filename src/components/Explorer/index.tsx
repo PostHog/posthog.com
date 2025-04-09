@@ -38,7 +38,7 @@ interface AccordionItemProps extends React.ComponentPropsWithoutRef<typeof Accor
 const AccordionItem = React.forwardRef<HTMLDivElement, AccordionItemProps>(
     ({ children, className, ...props }, forwardedRef) => (
         <Accordion.Item
-            className={`border-primary border-x overflow-hidden first:mt-0 first:rounded-t last:rounded-b focus-within:relative focus-within:z-10 focus-within:shadow-[0_0_0_2px] focus-within:shadow-mauve12 [&_h3]:mb-0 ${className}`}
+            className={`border-primary border-x overflow-hidden first:mt-0 first:rounded-t last:rounded-b focus-within:relative focus-within:z-10 focus-within:shadow-[0_0_2px_2px] focus-within:shadow-border [&_h3]:mb-0 ${className}`}
             {...props}
             ref={forwardedRef}
         >
@@ -80,7 +80,7 @@ interface AccordionContentProps extends React.ComponentPropsWithoutRef<typeof Ac
 const AccordionContent = React.forwardRef<HTMLDivElement, AccordionContentProps>(
     ({ children, className, ...props }, forwardedRef) => (
         <Accordion.Content
-            className={`overflow-hidden bg-mauve2 text-[15px] text-mauve11 data-[state=closed]:animate-slideUp data-[state=open]:animate-slideDown data-[state=open]:border-primary data-[state=open]:border-b ${className}`}
+            className={`overflow-hidden bg-primary text-primary data-[state=closed]:animate-slideUp data-[state=open]:animate-slideDown data-[state=open]:border-primary data-[state=open]:border-b ${className}`}
             {...props}
             ref={forwardedRef}
         >
@@ -163,7 +163,19 @@ export default function Explorer({
                                     <ProductIcon className={`text-${product.color} size-5 inline-block`} />
                                     <span className="flex-1">{product.name}</span>
                                 </AccordionTrigger>
-                                <AccordionContent>Yes. It adheres to the WAI-ARIA design pattern.</AccordionContent>
+                                <AccordionContent>
+                                    <p className="text-sm">
+                                    {product.description}
+                                    </p>
+                                    <p>
+                                        <span className="text-sm text-secondary">Pricing starts at</span><br />
+                                        <span className="font-bold text-[15px]">${product.startsAt}</span><span className="text-sm text-secondary">/{product.denomination}</span>
+                                    </p>
+                                    <p>
+                                        <span className="text-sm text-secondary">Monthly free tier</span><br />
+                                        <span className="font-bold text-[15px]">{product.freeTier?.toLocaleString()}</span><span className="text-sm text-secondary">/{product.denomination}</span>
+                                    </p>
+                                </AccordionContent>
                             </AccordionItem>
 
                             <AccordionItem value="item-2">
