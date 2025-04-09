@@ -2,25 +2,14 @@ import React from 'react'
 import { Accordion } from 'radix-ui'
 import { Select } from '../RadixUI/Select'
 import HeaderBar from 'components/OSChrome/HeaderBar'
-import {
-    IconBook,
-    IconCalendar,
-    IconChevronDown,
-    IconCreditCard,
-    IconGanttChart,
-    IconGraph,
-    IconListCheck,
-    IconMegaphone,
-    IconMessage,
-    IconPeople,
-    IconPresent,
-} from '@posthog/icons'
+import * as Icons from '@posthog/icons'
 import { Link } from 'gatsby'
 import { useLocation } from '@reach/router'
 import OSButton from 'components/OSButton'
 import CloudinaryImage from 'components/CloudinaryImage'
 import { DebugContainerQuery } from 'components/DebugContainerQuery'
 import ScrollArea from 'components/RadixUI/ScrollArea'
+import { productMenu } from '../../navs'
 
 const selectOptions = [
     {
@@ -73,7 +62,7 @@ const AccordionTrigger = React.forwardRef<HTMLButtonElement, AccordionTriggerPro
                 ref={forwardedRef}
             >
                 <span className="flex-1 flex items-center gap-1 text-left">{children}</span>
-                <IconChevronDown
+                <Icons.IconChevronDown
                     className="size-6 transition-transform duration-300 ease-[cubic-bezier(0.87,_0,_0.13,_1)] group-data-[state=open]:rotate-180"
                     aria-hidden
                 />
@@ -128,6 +117,13 @@ export default function Explorer({
     const currentPath = location.pathname
     const isMatchingPath = currentPath === `/${slug}` || currentPath.startsWith(`/${slug}/`)
 
+    // Find the product in the menu based on slug
+    const product = productMenu.children.find((item) => item.slug === slug)
+    if (!product) {
+        throw new Error(`Product with slug "${slug}" not found in product menu`)
+    }
+    const ProductIcon = Icons[product.icon as keyof typeof Icons]
+
     // Create a map of options for easy lookup
     const enabledIndexLinks = new Set(indexLinks)
     
@@ -168,8 +164,8 @@ export default function Explorer({
                         >
                             <AccordionItem value="item-1">
                                 <AccordionTrigger>
-                                    <IconGraph className="text-blue size-5 inline-block" />
-                                    <span className="flex-1">Product Analytics</span>
+                                    <ProductIcon className={`text-${product.color} size-5 inline-block`} />
+                                    <span className="flex-1">{product.name}</span>
                                 </AccordionTrigger>
                                 <AccordionContent>Yes. It adheres to the WAI-ARIA design pattern.</AccordionContent>
                             </AccordionItem>
@@ -216,7 +212,7 @@ export default function Explorer({
                                             align="left"
                                             width="full"
                                             size="xl"
-                                            icon={<IconPresent className="text-purple" />}
+                                            icon={<Icons.IconPresent className="text-purple" />}
                                             to={`/${slug}/features`}
                                             className="text-primary hover:text-primary"
                                         >
@@ -232,7 +228,7 @@ export default function Explorer({
                                             align="left"
                                             width="full"
                                             size="xl"
-                                            icon={<IconCreditCard className="text-blue" />}
+                                            icon={<Icons.IconCreditCard className="text-blue" />}
                                             to={`/${slug}/pricing`}
                                             className="text-primary hover:text-primary"
                                         >
@@ -248,7 +244,7 @@ export default function Explorer({
                                             align="left"
                                             width="full"
                                             size="xl"
-                                            icon={<IconMegaphone className="text-orange" />}
+                                            icon={<Icons.IconMegaphone className="text-orange" />}
                                             to={`/${slug}/customers`}
                                             className="text-primary hover:text-primary"
                                         >
@@ -264,7 +260,7 @@ export default function Explorer({
                                             align="left"
                                             width="full"
                                             size="xl"
-                                            icon={<IconListCheck className="text-lime-green" />}
+                                            icon={<Icons.IconListCheck className="text-lime-green" />}
                                             to={`/${slug}/vs`}
                                             className="text-primary hover:text-primary"
                                         >
@@ -280,7 +276,7 @@ export default function Explorer({
                                             align="left"
                                             width="full"
                                             size="xl"
-                                            icon={<IconBook className="text-blue" />}
+                                            icon={<Icons.IconBook className="text-blue" />}
                                             to={`/docs/${slug}`}
                                             className="text-primary hover:text-primary"
                                         >
@@ -296,7 +292,7 @@ export default function Explorer({
                                             align="left"
                                             width="full"
                                             size="xl"
-                                            icon={<IconBook className="text-purple" />}
+                                            icon={<Icons.IconBook className="text-purple" />}
                                             to={`/tutorials/${slug}`}
                                             className="text-primary hover:text-primary"
                                         >
@@ -312,7 +308,7 @@ export default function Explorer({
                                             align="left"
                                             width="full"
                                             size="xl"
-                                            icon={<IconMessage className="text-red" />}
+                                            icon={<Icons.IconMessage className="text-red" />}
                                             to={`/questions/topic/${slug}`}
                                             className="text-primary hover:text-primary"
                                         >
@@ -328,7 +324,7 @@ export default function Explorer({
                                             align="left"
                                             width="full"
                                             size="xl"
-                                            icon={<IconPeople className="text-purple" />}
+                                            icon={<Icons.IconPeople className="text-purple" />}
                                             to={`/teams/${teamName || slug}`}
                                             className="text-primary hover:text-primary"
                                         >
@@ -344,7 +340,7 @@ export default function Explorer({
                                             align="left"
                                             width="full"
                                             size="xl"
-                                            icon={<IconGanttChart className="text-seagreen" />}
+                                            icon={<Icons.IconGanttChart className="text-seagreen" />}
                                             to={`/roadmap?product=${roadmapCategory || slug}`}
                                             className="text-primary hover:text-primary"
                                         >
@@ -360,7 +356,7 @@ export default function Explorer({
                                             align="left"
                                             width="full"
                                             size="xl"
-                                            icon={<IconCalendar className="text-blue" />}
+                                            icon={<Icons.IconCalendar className="text-blue" />}
                                             to={`/changelog?product=${changelogCategory || slug}`}
                                             className="text-primary hover:text-primary"
                                         >
