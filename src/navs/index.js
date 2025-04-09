@@ -2112,6 +2112,7 @@ export const docsMenu = {
                 {
                     name: 'Switching to PostHog',
                     icon: 'IconLeave',
+                    url: '/docs/new-to-posthog/switch-guide/switching-to-posthog'
                     children: [
                         {
                             name: 'Convincing teammates',
