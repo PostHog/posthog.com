@@ -30,19 +30,19 @@ showTitle: true
 | **Changelog**                           | Joe                  |
 | **Emailing customers**                  | Joe                  |
 | **Events**                              | Joe                  |
+| **Growth review**                       | Brian                |
 | **Incident response**                   | Joe                  |
 | **In-app notifications**                | Joe                  |
-| **Merch design**                        | Lottie               |
-| **Merch promotion**                     | Lottie               |
-| **Merch stock / shipping**              | Kendall              |
 | **Onboarding emails**                   | Joe                  |
-| **Paid Ads**                            | Joe/Andy             |
+| **Paid ads strategy and messaging**     | Brian                |
+| **Paid ads design**                     | Hey                  |
+| **Paid ads operations**                 | Hey                  |
+| **Paid ads performance**                | Brian                |
 | **Partnerships**                        | Joe                  |
 | **Product announcements**               | Joe                  |
 | **Reward packages**                     | Joe                  |
-| **Startup program**                     | Kevan                |
-| **Team member profile pics**            | Lottie               |
-| **YC batch engagement**                 | Kevan                |
+| **Startup program**                     | Joe                  |
+| **YC batch engagement**                 | Joe                  |
 
 ## Owned by Website & Vibes
 
@@ -53,9 +53,13 @@ showTitle: true
 | **Homepage**                            | Cory & Eli           |
 | **Merch store frontend**                | Cory & Eli           |
 | **Merch store backend**                 | Eli                  |
+| **Merch design**                        | Lottie               |
+| **Merch promotion**                     | Lottie               |
+| **Merch stock / shipping**              | Kendall              |
 | **Max AI**                              | Cory & Eli           |
 | **Pricing page**                        | Cory & Eli           |
 | **Product page design**                 | Cory & Eli           |
+| **Team member profile pics**            | Lottie               |
 | **Website backend**                     | Eli                  |
 | **Website search**                      | Eli                  |
 
