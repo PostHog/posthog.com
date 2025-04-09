@@ -1,6 +1,7 @@
 import React, { useEffect, useState, useMemo } from 'react'
 import { AnimatePresence, motion, useDragControls } from 'framer-motion'
-import { IconCollapse45, IconExpand45, IconMinus, IconX } from '@posthog/icons'
+import { IconMinus, IconX } from '@posthog/icons'
+import { IconCollapse, IconExpand, IconSquare } from '../OSIcons/Icons'
 import { useApp } from '../../context/App'
 import { Provider as WindowProvider } from '../../context/Window'
 import { ContextMenu } from 'radix-ui'
@@ -261,10 +262,13 @@ export default function AppWindow({ item, constraintsRef }: { item: any; constra
                                 <p className="m-0 text-sm font-semibold line-clamp-1">
                                     {item.meta?.title && item.meta.title}
                                 </p>
-                                <div className="flex space-x-2">
-                                    <button onClick={handleMinimize}>
-                                        <IconMinus className="size-4" />
-                                    </button>
+                                <div className="flex">
+                                    <OSButton
+                                        variant="ghost"
+                                        size="xs"
+                                        onClick={handleMinimize}>
+                                        <IconMinus className="size-4 relative top-1" />
+                                    </OSButton>
 
                                     <ContextMenu.Root onOpenChange={(open) => open ? handleContextMenuOpen() : handleContextMenuClose()}>
                                         <ContextMenu.Trigger className="data-[highlighted]:bg-accent data-[state=open]:bg-accent" asChild>
@@ -272,13 +276,21 @@ export default function AppWindow({ item, constraintsRef }: { item: any; constra
                                                 variant="ghost"
                                                 size="xs"
                                                 onClick={size.width >= window?.innerWidth ? collapseWindow : expandWindow}
-                                                onMouseEnter={() => setTooltipVisible(true)}
-                                                onMouseLeave={() => setTooltipVisible(false)}
+                                                onMouseEnter={() => {
+                                                    setTooltipVisible(true)
+                                                }}
+                                                onMouseLeave={() => {
+                                                    setTooltipVisible(false)
+                                                }}
+                                                className="group"
                                             >
                                                 <Tooltip 
                                                     trigger={
                                                         <span>
-                                                            {size.width >= window?.innerWidth ? <IconCollapse45 className="size-4" /> : <IconExpand45 className="size-4" />}
+                                                            <IconSquare className="size-5 group-hover:hidden" />
+                                                            {
+                                                                size.width >= window?.innerWidth ? <IconCollapse className="size-6 -m-0.5 hidden group-hover:block" /> : <IconExpand className="size-6 -m-0.5 hidden group-hover:block" />
+                                                            }
                                                         </span>
                                                     }
                                                     open={tooltipVisible}
@@ -336,7 +348,9 @@ export default function AppWindow({ item, constraintsRef }: { item: any; constra
                                         </ContextMenu.Portal>
                                     </ContextMenu.Root>
 
-                                    <button
+                                    <OSButton
+                                        variant="ghost"
+                                        size="xs"
                                         onClick={() => {
                                             // Set minimized first to trigger exit animation
                                             minimizeWindow(item)
@@ -345,7 +359,7 @@ export default function AppWindow({ item, constraintsRef }: { item: any; constra
                                         }}
                                     >
                                         <IconX className="size-4" />
-                                    </button>
+                                    </OSButton>
                                 </div>
                             </div>
                             <div className="w-full flex-grow overflow-hidden">{item.element}</div>

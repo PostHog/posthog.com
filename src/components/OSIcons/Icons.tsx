@@ -73,3 +73,39 @@ export const IconClockRewind: IconComponent<IconProps> = forwardRef(function Ico
         </BaseIcon>
     )
 })
+
+export const IconCollapse: IconComponent<IconProps> = forwardRef(function IconCollapse(props, ref): JSX.Element {
+    return (
+        <BaseIcon ref={ref} {...props}>
+            <path
+                fillRule="evenodd"
+                d="M13 4.75a.75.75 0 0 1 .75.75V10c0 .138.112.25.25.25h4.5a.75.75 0 0 1 0 1.5H14A1.75 1.75 0 0 1 12.25 10V5.5a.75.75 0 0 1 .75-.75ZM4.75 13a.75.75 0 0 1 .75-.75H10c.966 0 1.75.784 1.75 1.75v4.5a.75.75 0 0 1-1.5 0V14a.25.25 0 0 0-.25-.25H5.5a.75.75 0 0 1-.75-.75Z"
+                clipRule="evenodd"
+            />
+        </BaseIcon>
+    )
+})
+
+export const IconExpand: IconComponent<IconProps> = forwardRef(function IconExpand(props, ref): JSX.Element {
+    return (
+        <BaseIcon ref={ref} {...props}>
+            <path
+                fillRule="evenodd"
+                d="M7.25 10.5a.75.75 0 0 1 .75.75v4.5c0 .138.112.25.25.25h4.5a.75.75 0 0 1 0 1.5h-4.5a1.75 1.75 0 0 1-1.75-1.75v-4.5a.75.75 0 0 1 .75-.75ZM10.5 7.25a.75.75 0 0 1 .75-.75h4.5c.966 0 1.75.784 1.75 1.75v4.5a.75.75 0 0 1-1.5 0v-4.5a.25.25 0 0 0-.25-.25h-4.5a.75.75 0 0 1-.75-.75Z"
+                clipRule="evenodd"
+            />
+        </BaseIcon>
+    )
+})
+
+export const IconSquare: IconComponent<IconProps> = forwardRef(function IconSquare(props, ref): JSX.Element {
+    return (
+        <BaseIcon ref={ref} {...props}>
+            <path
+                fillRule="evenodd"
+                d="M7 4.5h10A2.5 2.5 0 0 1 19.5 7v10a2.5 2.5 0 0 1-2.5 2.5H7A2.5 2.5 0 0 1 4.5 17V7A2.5 2.5 0 0 1 7 4.5ZM7 6a1 1 0 0 0-1 1v10a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1V7a1 1 0 0 0-1-1H7Z"
+                clipRule="evenodd"
+            />
+        </BaseIcon>
+    )
+})
