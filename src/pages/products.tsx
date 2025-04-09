@@ -169,9 +169,9 @@ const productDetails: Record<
         complexity: ['People who code'],
     },
     'api-queries': {
-        freeTierLimit: 'JOETBD',
-        denominator: 'query',
-        startingPrice: 'JOETBD',
+        freeTierLimit: '1TB of read data',
+        denominator: 'TB',
+        startingPrice: '$12',
         description: 'Capture, query, update, and analyze nearly any PostHog data',
         roles: ['Data engineers'],
         goals: ['Data ops and monitoring'],
