@@ -136,7 +136,7 @@ Unqualified: A lead that does not meet the criteria to become an opportunity.
 
 ### Lead to opportunity conversion guidelines
 Use the following criteria to determine when a lead should be converted to an opportunity:
-- You've had an initial contact and are actively working with the lead on next steps
+- You've had an initial call and have decided to work this as a hands-on sale.
 - There's a clearly identified problem that PostHog can solve.
 - There's a solid next step.
 
