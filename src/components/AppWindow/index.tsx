@@ -304,44 +304,25 @@ export default function AppWindow({ item, constraintsRef }: { item: any; constra
                                                 className="min-w-[220px] rounded-md bg-white dark:bg-accent-dark p-1 shadow-xl"
                                                 data-scheme="primary"
                                             >
+                                                <ContextMenu.Label className="px-2.5 text-[13px] leading-[25px] text-muted">
+                                                    Snap to...
+                                                </ContextMenu.Label>
                                                 <ContextMenu.Item 
-                                                    className="group relative flex h-[25px] select-none items-center rounded px-2.5 text-[13px] leading-none text-primary hover:bg-primary outline-none data-[disabled]:pointer-events-none data-[highlighted]:bg-input-bg data-[disabled]:text-muted"
+                                                    className="group relative flex h-[25px] select-none items-center rounded px-2.5 text-sm leading-none text-primary hover:bg-primary outline-none data-[disabled]:pointer-events-none data-[highlighted]:bg-input-bg data-[disabled]:text-muted"
                                                     onClick={() => handleSnapToSide('left')}
                                                 >
-                                                    Snap to left half
+                                                    Left half
                                                     <div className="ml-auto pl-5 text-secondary group-data-[disabled]:text-muted group-data-[highlighted]:text-primary">
-                                                        ⌘+←
+                                                        Shift+←
                                                     </div>
                                                 </ContextMenu.Item>
                                                 <ContextMenu.Item 
-                                                    className="group relative flex h-[25px] select-none items-center rounded px-2.5 text-[13px] leading-none text-primary hover:bg-primary outline-none data-[disabled]:pointer-events-none data-[highlighted]:bg-input-bg data-[disabled]:text-muted"
+                                                    className="group relative flex h-[25px] select-none items-center rounded px-2.5 text-sm leading-none text-primary hover:bg-primary outline-none data-[disabled]:pointer-events-none data-[highlighted]:bg-input-bg data-[disabled]:text-muted"
                                                     onClick={() => handleSnapToSide('right')}
                                                 >
-                                                    Snap to right half
+                                                    Right half
                                                     <div className="ml-auto pl-5 text-secondary group-data-[disabled]:text-muted group-data-[highlighted]:text-primary">
-                                                        ⌘+→
-                                                    </div>
-                                                </ContextMenu.Item>
-                                                <ContextMenu.Separator className="m-1 h-px bg-border dark:bg-border-dark" />
-                                                <ContextMenu.Item className="group relative flex h-[25px] select-none items-center rounded px-2.5 text-[13px] leading-none text-primary hover:bg-primary outline-none data-[disabled]:pointer-events-none data-[highlighted]:bg-input-bg data-[disabled]:text-muted">
-                                                    Back
-                                                    <div className="ml-auto pl-5 text-secondary group-data-[disabled]:text-muted group-data-[highlighted]:text-primary">
-                                                        ⌘+[
-                                                    </div>
-                                                </ContextMenu.Item>
-                                                <ContextMenu.Item
-                                                    className="group relative flex h-[25px] select-none items-center rounded px-2.5 text-[13px] leading-none text-primary hover:bg-primary outline-none data-[disabled]:pointer-events-none data-[highlighted]:bg-input-bg data-[disabled]:text-muted"
-                                                    disabled
-                                                >
-                                                    Forward
-                                                    <div className="ml-auto pl-5 text-secondary group-data-[disabled]:text-muted group-data-[highlighted]:text-primary">
-                                                        ⌘+]
-                                                    </div>
-                                                </ContextMenu.Item>
-                                                <ContextMenu.Item className="group relative flex h-[25px] select-none items-center rounded px-2.5 text-[13px] leading-none text-primary hover:bg-primary outline-none data-[disabled]:pointer-events-none data-[highlighted]:bg-input-bg data-[disabled]:text-muted">
-                                                    Reload
-                                                    <div className="ml-auto pl-5 text-secondary group-data-[disabled]:text-muted group-data-[highlighted]:text-primary">
-                                                        ⌘+R
+                                                        Shift+→
                                                     </div>
                                                 </ContextMenu.Item>
                                             </ContextMenu.Content>
