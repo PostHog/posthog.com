@@ -57,7 +57,7 @@ const getComputedLineHeight = (selector: string) => {
 
 const ReaderViewContext = createContext<ReaderViewContextType | undefined>(undefined)
 
-export function ReaderViewProvider({ children }) {
+export function ReaderViewProvider({ children }: { children: React.ReactNode }) {
     const [isNavVisible, setIsNavVisible] = useState(true)
     const [isTocVisible, setIsTocVisible] = useState(true)
     const { fullWidthContent } = useLayoutData()
