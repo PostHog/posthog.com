@@ -292,7 +292,7 @@ export default function Tabbed() {
 
     const generateURL = () => {
         const params = {
-            ...(activeProduct && { active_product: activeProduct.type }),
+            ...(activeProduct && { calculator: activeProduct.type }),
         }
         products.forEach((product) => {
             if (product.volume) {
@@ -318,10 +318,10 @@ export default function Tabbed() {
     useEffect(() => {
         const urlParams = new URLSearchParams(window.location.search)
         const params = qs.parse(urlParams.toString())
-        const { active_product, ...volumeParams } = params
+        const { calculator, ...volumeParams } = params
 
-        if (active_product) {
-            const productIndex = products.findIndex((product) => product.type === active_product)
+        if (calculator) {
+            const productIndex = products.findIndex((product) => product.type === calculator)
             if (productIndex !== -1) {
                 setActiveTab(productIndex)
             }
@@ -460,12 +460,10 @@ export default function Tabbed() {
                     <p className="m-0 font-bold text-lg leading-none">${totalPrice.toLocaleString()}</p>
                 </div>
             </div>
-            {user?.role.type === 'moderator' && (
-                <div className="flex justify-end gap-0.5 mt-2 pr-2 md:pr-0">
-                    <IconCopy className="size-5 inline-block text-primary/50 dark:text-primary-dark/50 relative -top-px" />
-                    <CopyURLButton onClick={generateURL} />
-                </div>
-            )}
+            <div className="flex justify-end gap-0.5 mt-2 pr-2 md:pr-0">
+                <IconCopy className="size-5 inline-block text-primary/50 dark:text-primary-dark/50 relative -top-px" />
+                <CopyURLButton onClick={generateURL} />
+            </div>
         </div>
     )
 }
