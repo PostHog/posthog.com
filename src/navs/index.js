@@ -3255,7 +3255,7 @@ export const docsMenu = {
                     name: 'Stack traces',
                     url: '/docs/error-tracking/stack-traces',
                     icon: 'IconCode',
-                    color: 'seagreen',
+                    color: 'purple',
                 },
                 {
                     name: 'Monitor errors',
@@ -3263,6 +3263,12 @@ export const docsMenu = {
                     icon: 'IconGraph',
                     color: 'orange',
                     featured: true,
+                },
+                {
+                    name: 'Alerts',
+                    url: '/docs/error-tracking/alerts',
+                    icon: 'IconBell',
+                    color: 'red',
                 },
                 {
                     name: 'Troubleshooting and FAQs',
