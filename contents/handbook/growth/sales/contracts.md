@@ -58,7 +58,7 @@ Although our standard monthly [pricing](/pricing) has volume discounts built in,
 
 > We don't offer a discount for signing a contract by some fixed date (e.g so the deal closes in a specific quarter).
 
-> If you need to vary these rules to sign a customer up speak to Simon or Charles about it before quoting an additional discount to the customer. We don't want to put a rigorous approval process in place here but equally these rules are in place for a legitimate business reason.
+> If you need to vary these rules to sign a customer up speak to Simon or Charles about it before quoting an additional discount to the customer. We don't want to put a rigorous approval process in place here but equally these rules are in place for a legitimate business reason. If you go outside of these rules without clearing it with one of us first, the deal may not count towards your quota. 
 
 The below table summarizes the discount levels contained in points 2-4:
 
