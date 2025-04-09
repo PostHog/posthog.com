@@ -258,20 +258,21 @@ export default function AppWindow({ item, constraintsRef }: { item: any; constra
                                     </button>
 
                                     <ContextMenu.Root>
-                                        <Tooltip trigger={
-                                            <ContextMenu.Trigger className="data-[highlighted]:bg-accent data-[state=open]:bg-accent" asChild>
-                                                <span>
-                                                    <OSButton
-                                                        variant="ghost"
-                                                        size="sm"
-                                                        onClick={size.width >= window?.innerWidth ? collapseWindow : expandWindow}
-                                                        icon={size.width >= window?.innerWidth ? <IconCollapse45 className="size-4" /> : <IconExpand45 className="size-4" />}
-                                                    />
-                                                </span>
-                                            </ContextMenu.Trigger>
-                                        }>
-                                            Right click for more options
-                                        </Tooltip>
+                                        <ContextMenu.Trigger className="data-[highlighted]:bg-accent data-[state=open]:bg-accent" asChild>
+                                                <OSButton
+                                                    variant="ghost"
+                                                    size="xs"
+                                                    onClick={size.width >= window?.innerWidth ? collapseWindow : expandWindow}
+                                                    >
+                                                <Tooltip trigger={
+                                                    <span>
+                                                        {size.width >= window?.innerWidth ? <IconCollapse45 className="size-4" /> : <IconExpand45 className="size-4" />}
+                                                    </span>
+                                                }>
+                                                    Right click for more options
+                                                </Tooltip>
+                                            </OSButton>
+                                        </ContextMenu.Trigger>
                                         <ContextMenu.Portal>
                                             <ContextMenu.Content
                                                 className="min-w-[220px] rounded-md bg-white dark:bg-accent-dark p-1 shadow-xl"
