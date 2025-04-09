@@ -272,7 +272,7 @@ The definition of a ‘good’ CES score varies between companies and industries
 >
 > Similarly, a low or high CSAT score doesn’t tell you how likely you are to retain a user. They could leave because of pricing, for example. [Dig deeper](https://newsletter.posthog.com/p/how-to-uncover-your-users-real-problems) through surveys, session replays, and user interviews to find the real pain points and the things that spark joy.
 >
-> See our guide to [NPS, CSAT and CES](/product-engineers/nps-vs-csat-vs-ces) surveys for a more in-depth look at how ot use them.
+> See our guide to [NPS, CSAT and CES](/product-engineers/nps-vs-csat-vs-ces) surveys for a more in-depth look at how to use them.
 
 ## 8. Feature adoption rate
 

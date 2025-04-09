@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { Link } from 'gatsby'
 import { useLayoutData } from '../Layout/hooks'
-import { IconX } from '@posthog/icons'
+import { IconWarning, IconX } from '@posthog/icons'
 
 function setCookie(name, value, days) {
     let expires = ''
@@ -43,22 +43,22 @@ export default function Banner() {
         <>
             {!compact && (
                 <div
-                    className={`${isCookieSet ? 'h-0' : '!max-h-96'} transition-all overflow-hidden relative`}
+                    className={`${
+                        isCookieSet ? 'h-0' : '!max-h-96'
+                    } transition-all overflow-hidden relative hidden md:block border-b border-accent dark:border-accent-dark`}
                     style={{ maxHeight: '0px' }}
                 >
-                    <div className="bg-yellow/75 dark:bg-yellow/90 md:text-center text-sm dark:text-primary pl-4 pr-10 md:px-10 py-2">
-                        <strong>We've decided to make less money:</strong> We've slashed our pricing for session replay.
-                        They're now{' '}
-                        <Link
-                            to="/blog/session-replay-pricing"
-                            className="underline font-semibold hover:text-red  dark:hover:text-red"
-                            onClick={handleDismiss}
-                        >
-                            more than 50% cheaper
+                    <div className="bg-yellow md:text-center text-sm text-primary pl-4 pr-10 md:px-10 py-2 font-semibold">
+                        <IconWarning className="size-5 text-primary inline-block mr-1" />
+                        <Link href="/error-tracking" className="text-primary font-bold underline">
+                            Error tracking
                         </Link>{' '}
-                        for most customers.
-                        <button onClick={handleDismiss} className="absolute right-2 top-2 md:top-1 p-1 cursor-pointer">
-                            <IconX className="size-5" />
+                        is now out of beta. Get 100,000 exceptions free, every month.
+                        <button
+                            onClick={handleDismiss}
+                            className="absolute right-2 top-2 md:top-1.5 p-1 cursor-pointer"
+                        >
+                            <IconX className="size-4" />
                         </button>
                     </div>
                 </div>

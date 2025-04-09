@@ -89,7 +89,7 @@ Examples
 
 The person who raised the incident is the incident lead. It’s their responsibility to:
 
-- Make sure the right people join the call. This includes [the current on-call person](https://posthog.pagerduty.com/service-directory/P43Y0E8). Optionally, add people from Infra and [the feature owner](/handbook/engineering/feature-ownership) and Support. Words & Pictures can assist in running communications if required.
+- Make sure the right people join the call. This includes [the current on-call person](https://posthog.pagerduty.com/service-directory/P43Y0E8). Optionally, add people from Infra and [the feature owner](/handbook/engineering/feature-ownership) and Support. Comms can assist in running communications if required.
 - Take notes in the incident channel. This should include timestamps, and is a brain dump of everything that we know, and everything that we are or have tried. This will give us much more of an opportunity to learn from the incident afterwards.
 - Update the [status page](https://status.posthog.com/). This is best done in the incident Slack channel using `/incident statuspage` (`/inc sp`). 
     - We use Atlassian for hosting our status page. It is automatically updated from the incident.io slack command.
@@ -115,7 +115,7 @@ When updating the status page, make sure to mark the affected component appropri
 
 <img width="223" alt="status" src="https://github.com/PostHog/posthog.com/assets/4550621/55fb053a-83f4-44c5-ac12-0a5409f4033f" />
 
-Occasionally it may be desirable to do additional customer communications, such as sending an email to impacted customers or making updates to [the service page](/service-message). Words & Pictures will organize and write these communications for you, so please let them know if this is needed. Joe is usually the best initial point of contact.
+Occasionally it may be desirable to do additional customer communications, such as sending an email to impacted customers or making updates to [the service page](/service-message). Comms will organize and write these communications for you, so please let them know if this is needed. Joe is usually the best initial point of contact.
 
 In the case that we need to update a _specific_ customer, such as when an individual org is causing an incident, we should let them know as soon as possible. Use the following guidelines to ensure smooth communication:
 

@@ -19,4 +19,4 @@ showTitle: true
 * **One person teams are fine to get started, but we should add a second person very quickly.**
   * This avoids the need for hiring to block getting started, and longer term prevents loneliness and helps with shipping speed.
 * **Build "must have" features ahead of more SDK coverage.**
-  * Sometimes we could add more SDKs "to get more growth", but we should start by making sure we can offer the bare minimum within the most populair SDKs we support (posthog-js, python, typescript). Don't default to loads of SDKs if you know you have huge feature gaps as that will disappoint lots of users.
+  * Sometimes we could add more SDKs "to get more growth", but we should start by making sure we can offer the bare minimum within the most popular SDKs we support (posthog-js, python, typescript). Don't default to loads of SDKs if you know you have huge feature gaps as that will disappoint lots of users.

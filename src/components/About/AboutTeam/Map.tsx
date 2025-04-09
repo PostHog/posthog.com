@@ -4,9 +4,11 @@ import { useStaticQuery, graphql } from 'gatsby'
 
 // Avoid displaying two locations that are too close to each other
 const isOverlapping = (location: Location, locations: Location[], offset = 2) => {
-    return locations.some(otherLocation => {
-        return Math.abs(otherLocation.coordinates.latitude - location.coordinates.latitude) < offset &&
+    return locations.some((otherLocation) => {
+        return (
+            Math.abs(otherLocation.coordinates.latitude - location.coordinates.latitude) < offset &&
             Math.abs(otherLocation.coordinates.longitude - location.coordinates.longitude) < offset
+        )
     })
 }
 
@@ -38,8 +40,7 @@ export default function Map(): JSX.Element {
 
     const allLocations: Location[] = data.allMapboxLocation.nodes
     const nonOverlappingLocations: Location[] = allLocations.reduce((otherLocations, location) => {
-        if (isOverlapping(location, otherLocations))
-            return otherLocations
+        if (isOverlapping(location, otherLocations)) return otherLocations
 
         return [...otherLocations, location]
     }, [] as Location[])

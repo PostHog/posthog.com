@@ -57,7 +57,7 @@ This is a faster option to get up and running. If you don't want to or can't use
 4. In the codespace, open a terminal window and run `docker compose -f docker-compose.dev.yml up`.
 5. In another terminal, run `pnpm i` (and use the same terminal for the following commands)
 6. Then run `pip install -r requirements.txt -r requirements-dev.txt`
-7. Now run `./bin/migrate` and then `./bin/start`.
+7. Now run `DEBUG=1 ./bin/migrate` and then `./bin/start`.
 8. Open browser to http://localhost:8010/.
 9. To get some practical test data into your brand-new instance of PostHog, run `DEBUG=1 ./manage.py generate_demo_data`.
 
@@ -82,6 +82,8 @@ This is a faster option to get up and running. If you don't want to or can't use
 
 #### Ubuntu
 
+> Note: Importantly, if you're internal to PostHog we are standardised on working on MacOS (not Linux). In part because of SOC2 auditing gains it gives us.
+
 1. Install Docker following [the official instructions here](https://docs.docker.com/engine/install/ubuntu/).
 
 2. Install the `build-essential` package:
@@ -102,9 +104,13 @@ git clone https://github.com/PostHog/posthog && cd posthog/
 
 ### Instant setup
 
-You can set your development environment up instantly using [Flox](https://flox.dev/). Flox is a dev environment manager, which takes care of the whole dependency graph needed to develop PostHog – all declared in the repo's `.flox/manifest.toml`. To get this environment going:
+You can set your development environment up instantly using [Flox](https://flox.dev/).
 
-1. Install Flox (plus `ruff` and `rustup` for pre-commit checks outside of the Flox env).
+Flox is a development environment manager – it ensures we all have the same right system-level dependencies when developing PostHog. It's pretty much an npm for runtimes and libraries: `.flox/env/manifest.toml` is like `package.json`, `.flox/env/manifest.lock` is akin to `package-lock.json`, and `.flox/cache/` resembles `node_modules/`.
+
+To get PostHog running in a dev environment:
+
+1. Install Flox (plus `ruff` and `rustup` for pre-commit checks outside the Flox env).
 
     ```bash
     brew install flox ruff rustup && rustup-init && rustup default stable
@@ -116,9 +122,15 @@ You can set your development environment up instantly using [Flox](https://flox.
     flox activate
     ```
 
-This gets you a fully fledged environment, with its executables and linked libraries stored under `.flox/`. You should now be seeing instructions for migrations and running the app.
+    This gets you a fully fledged environment, with linked packages stored under `.flox/`. Might take a moment to run the first time, as dependencies get downloaded.
 
-That's it! You can now change PostHog in any way you want. See [Project structure](/handbook/engineering/project-structure) for an intro to the repository's contents. To commit changes, create a new branch based on `master` for your intended change, and develop away.
+    > Note on app dependencies: Python requirements get updated every time the environment is activated (`uv pip install` is lightning fast). JS dependencies only get installed if `node_modules/` is not present (`pnpm install` still takes a couple lengthy seconds). Dependencies for other languages currently don't get auto-installed.
+
+3. After successful environment activation, just look at its welcome message in the terminal. It contains all the commands for running the stack. Run those commands in the suggested order.
+
+This is it – you should be seeing the PostHog app at <a href="http://localhost:8010" target="_blank">http://localhost:8010</a>.
+
+You can now change PostHog in any way you want. See [Project structure](/handbook/engineering/project-structure) for an intro to the repository's contents. To commit changes, create a new branch based on `master` for your intended change, and develop away.
 
 ### Manual setup
 
@@ -128,11 +140,11 @@ Alternatively, if you'd prefer not to use [Flox-based instant setup](#instant-se
 
 In this step we will start all the external services needed by PostHog to work.
 
-First, append line `127.0.0.1 kafka clickhouse clickhouse-coordinator` to `/etc/hosts`. Our ClickHouse and Kafka data services won't be able to talk to each other without these mapped hosts.  
+First, append line `127.0.0.1 kafka clickhouse clickhouse-coordinator objectstorage` to `/etc/hosts`. Our ClickHouse and Kafka data services won't be able to talk to each other without these mapped hosts.  
 You can do this in one line with:
 
 ```bash
-echo '127.0.0.1 kafka clickhouse clickhouse-coordinator' | sudo tee -a /etc/hosts
+echo '127.0.0.1 kafka clickhouse clickhouse-coordinator objectstorage' | sudo tee -a /etc/hosts
 ```
 
 > If you are using a newer (>=4.1) version of Podman instead of Docker, the host machine's `/etc/hosts` is used as the base hosts file for containers by default, instead of container's `/etc/hosts` like in Docker. This can make hostname resolution fail in the ClickHouse container, and can be mended by setting `base_hosts_file="none"` in [`containers.conf`](https://github.com/containers/common/blob/main/docs/containers.conf.5.md#containers-table).
@@ -191,7 +203,14 @@ Saved preprocessed configuration to '/var/lib/clickhouse/preprocessed_configs/us
 # Because ClickHouse and Kafka connect to Zookeeper, there will be a lot of noise here. That's good.
 ```
 
-> **Friendly tip:** Kafka is currently the only x86 container used, and might segfault randomly when running on ARM. Restart it when that happens.
+> **Friendly tip 1:** Kafka is currently the only x86 container used, and might segfault randomly when running on ARM. Restart it when that happens.
+
+> **Friendly tip 2:** Checking the last Clickhouse log could show a `get_mempolicy: Operation not permitted` message. However, it shouldn't affect the app startup - checking the whole log should clarify that Clickhouse started properly. To double-check you can get into the container and run a basic query.
+>
+> ```bash
+> # docker logs posthog-clickhouse-1
+> # docker exec -it posthog-clickhouse-1 bash
+> # clickhouse-client --query "SELECT 1"
 
 Finally, install Postgres locally. Even if you are planning to run Postgres inside Docker, we need a local copy of Postgres (version 11+) for its CLI tools and development libraries/headers. These are required by `pip` to install `psycopg2`.
 
@@ -207,7 +226,15 @@ This installs both the Postgres server and its tools. DO NOT start the server af
     sudo apt install -y postgresql-client postgresql-contrib libpq-dev
     ```
 
-This intentionally only installs the Postgres client and drivers, and not the server. If you wish to install the server, or have it installed already, you will want to stop it, because the TCP port it uses conflicts with the one used by the Postgres Docker container. On Linux, this can be done with `sudo systemctl disable postgresql.service`.
+This intentionally only installs the Postgres client and drivers, and not the server. If you wish to install the server, or have it installed already, you will want to stop it, because the TCP port it uses conflicts with the one used by the Postgres Docker container. 
+
+On Linux, it's recommended to disable Postgres service by default, to ensure no port conflict arises. If `postgres` is already running on the port `5432`, you can confirm it by checking the port, and then kill it manually.
+
+```bash
+sudo systemctl disable postgresql.service
+sudo lsof -i :5432
+sudo kill -9 `sudo lsof -t -i :5432`
+```
 
 On Linux you often have separate packages: `postgres` for the tools, `postgres-server` for the server, and `libpostgres-dev` for the `psycopg2` dependencies. Consult your distro's list for an up-to-date list of packages.
 
@@ -222,11 +249,11 @@ On Linux you often have separate packages: `postgres` for the tools, `postgres-s
 
 2. Install the latest Node.js 18 (the version used by PostHog in production) with `nvm install 18`. You can start using it in the current shell with `nvm use 18`.
 
-3. Install pnpm by running `corepack enable` and then running `corepack prepare pnpm@8.10.5 --activate`. Validate the installation with `pnpm --version`.
+3. Install pnpm by running `corepack enable` and then running `corepack prepare pnpm@9 --activate`. Validate the installation with `pnpm --version`.
 
 4. Install Node packages by running `pnpm i`.
 
-5. Run `pnpm typegen:write` to generate types for [Kea](https://keajs.org/) state management logics used all over the frontend.
+5. Run `pnpm --filter=@posthog/frontend typegen:write` to generate types for [Kea](https://keajs.org/) state management logics used all over the frontend.
 
 > The first time you run typegen, it may get stuck in a loop. If so, cancel the process (`Ctrl+C`), discard all changes in the working directory (`git reset --hard`), and run `pnpm typegen:write` again. You may need to discard all changes once more when the second round of type generation completes.
 
@@ -247,13 +274,13 @@ On Linux you often have separate packages: `postgres` for the tools, `postgres-s
     curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
     # Select 1 to proceed with default installation
     ```
-2. Run `pnpm i --dir plugin-server` to install all required packages. We'll actually run the plugin server in a later step.
+2. Run `pnpm --filter=@posthog/plugin-server install` to install all required packages. We'll actually run the plugin server in a later step.
 
 > **Note:** If you face an error like `ld: symbol(s) not found for architecture arm64`, most probably your openssl build flags are coming from the wrong place. To fix this, run:
 ```bash
 export CPPFLAGS=-I/opt/homebrew/opt/openssl/include
 export LDFLAGS=-L/opt/homebrew/opt/openssl/lib
-pnpm i --dir plugin-server
+pnpm --filter=@posthog/plugin-server install
 ```
 
 > **Note:** If you face an error like `import gyp  # noqa: E402`, most probably need to install `python-setuptools`. To fix this, run:
@@ -300,6 +327,8 @@ You can also use [pyenv](https://github.com/pyenv/pyenv) if you wish to manage m
     ```bash
     uv venv env --python 3.11
     ```
+   
+   > **Friendly tip:** Creating an env could raise a `Failed to parse` warning related to `pyproject.toml`. However, you should still see the `Activate with:` line at the very end, which means that your env was created successfully.
 
 1. Activate the virtual environment:
 
@@ -343,9 +372,11 @@ cargo install sqlx-cli # If you haven't already
 DEBUG=1 ./bin/migrate
 ```
 
-> **Friendly tip:** The error `fe_sendauth: no password supplied` connecting to Postgres happens when the database is set up with a password and the user:pass isn't specified in `DATABASE_URL`. Try `export DATABASE_URL=postgres://posthog:posthog@localhost:5432/posthog`.
+> **Friendly tip 1:** The error `fe_sendauth: no password supplied` connecting to Postgres happens when the database is set up with a password and the user:pass isn't specified in `DATABASE_URL`. Try `export DATABASE_URL=postgres://posthog:posthog@localhost:5432/posthog`.
 
-> **Another friendly tip:** You may run into `psycopg2` errors while migrating on an ARM machine. Try out the steps in this [comment](https://github.com/psycopg/psycopg2/issues/1216#issuecomment-820556849) to resolve this.
+> **Friendly tip 2:** You may run into `psycopg2` errors while migrating on an ARM machine. Try out the steps in this [comment](https://github.com/psycopg/psycopg2/issues/1216#issuecomment-820556849) to resolve this.
+
+> **Friendly tip 3:** When migrating, make sure the containers are running (detached or in a separate terminal tab). 
 
 #### 6. Start PostHog
 
@@ -355,7 +386,7 @@ Now start all of PostHog (backend, worker, plugin server, and frontend – simul
 ./bin/start
 ```
 
-> **Note:** This command uses [mprocs](https://github.com/pvolok/mprocs) to run all development processes in a single terminal window.
+> **Note:** This command uses [mprocs](https://github.com/pvolok/mprocs) to run all development processes in a single terminal window. It will be installed automatically for macOS, while for Linux you can install it manually (`cargo` or `npm`) using the official repo guide.
 
 > **Friendly tip:** If you get the error `Configuration property "enable.ssl.certificate.verification" not supported in this build: OpenSSL not available at build time`, make sure your environment is using the right `openssl` version by setting [those](https://github.com/xmlsec/python-xmlsec/issues/261#issuecomment-1630889826) environment variables, and then run `./bin/start` again.
 
@@ -369,7 +400,9 @@ To get some practical test data into your brand-new instance of PostHog, run `DE
 
 #### 7. Develop
 
-That's it! You can now change PostHog in any way you want. See [Project structure](/handbook/engineering/project-structure) for an intro to the repository's contents. To commit changes, create a new branch based on `master` for your intended change, and develop away.
+This is it – you should be seeing the PostHog app at <a href="http://localhost:8010" target="_blank">http://localhost:8010</a>.
+
+You can now change PostHog in any way you want. See [Project structure](/handbook/engineering/project-structure) for an intro to the repository's contents. To commit changes, create a new branch based on `master` for your intended change, and develop away.
 
 ## Testing
 
@@ -427,6 +460,23 @@ To see debug logs (such as ClickHouse queries), add argument `--log-cli-level=DE
 
 For Cypress end-to-end tests, run `bin/e2e-test-runner`. This will spin up a test instance of PostHog and show you the Cypress interface, from which you'll manually choose tests to run. You'll need `uv` installed (the Python package manager), which you can do so with `brew install uv`. Once you're done, terminate the command with Cmd + C.
 
+## Django migrations
+
+To create a new migration, run `DEBUG=1 ./manage.py makemigrations`.
+
+### Non-blocking migrations
+
+Typically a migration generated by Django will not need to be modified. However, if you're adding a new constraint or index, you must tweak the migration so that it doesn't dangerously lock the affected table. We prevent locking by using the `CONCURRENTLY` keyword in Postgres DDL statements. Don't worry about this too much, a check in our CI will flag necessary tweaks as needed!
+
+For an example of how to update a migration to run concurrently, see `posthog/migrations/0415_pluginconfig_match_action.py`
+
+### Resolving merge conflicts
+
+Our database migrations must be applied linearly in order, to avoid any conflicts. With many developers working on the same codebase, this means it's common to run into merge conflicts when introducing a PR with migrations. 
+
+To help with this, we have introduced a tool called [django-linear-migrations](https://github.com/adamchainz/django-linear-migrations). When a migration-caused merge conflict arises, you can solve it by running `python manage.py rebase_migration <conflicted Django app> && git add <app>/migrations` (in our case the app is either `posthog` or `ee`).
+
+
 ## Extra: Working with feature flags
 
 When developing locally with environment variable `DEBUG=1` (which enables a setting called `SELF_CAPTURE`),
@@ -455,10 +505,15 @@ With PyCharm's built in support for Django, it's fairly easy to setup debugging 
 ### Setup PyCharm
 
 1. Open the repository folder.
-2. Setup the python interpreter (Settings… > Project: posthog > Python interpreter > Add interpreter): Select "Existing" and set it to `path_to_repo/posthog/env/bin/python`.
+2. Setup the python interpreter (Settings… > Project: posthog > Python interpreter > Add interpreter -> Existing): 
+   - If using manual setup: `path_to_repo/posthog/env/bin/python`.
+   - If using Flox: `path_to_repo/posthog/.flox/cache/venv/bin/python`.
 3. Setup Django support (Settings… > Languages & Frameworks > Django):
    - Django project root: `path_to_repo`
    - Settings: `posthog/settings/__init__py`
+4. To run tests correctly in PyCharm, disable the Django test runner:
+   - Go to Settings… > Languages & Frameworks > Django
+   - Check "Do not use Django test runner"
 
 ### Start the debugging environment
 

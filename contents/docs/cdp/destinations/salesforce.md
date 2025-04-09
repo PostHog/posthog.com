@@ -1,6 +1,8 @@
 ---
 title: Send PostHog event data to Salesforce
-templateId: template-salesforce-create
+templateId:
+    - template-salesforce-create
+    - template-salesforce-update
 ---
 
 import Requirements from "../_snippets/requirements.mdx"

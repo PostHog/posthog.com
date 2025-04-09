@@ -8,7 +8,7 @@ We offer our team unlimited time off, but with an expectation that you take _at 
 
 The reason for this policy is that it's critical for PostHog that we hire people we can trust to be responsible with their time off - enough that they can recharge, but not so much that it means we don't get any work done. The People & Ops team will look into holiday usage occasionally to encourage people who haven't taken the minimum time off to do so. The 25 days is a minimum, not a guide.
 
-As general guidance, we don't care about a few days here and there. If you are taking significantly more vacation time than most - for example, 40 days, we would be very surprised if you aren't causing a strain on the rest of your team as a result.
+As general guidance, we don't care about a few days here and there. If you are taking significantly more vacation time than most - for example, 40 days - we would be very surprised if you aren't causing a strain on the rest of your team as a result.
 
 ## Permissionless time off
 
@@ -28,7 +28,12 @@ Before you start, make sure that:
 If you don't do this, your holiday won't show up in the team time off calendar. 
 
 To book a day off:
-- Book it on the PTO by Deel app in Slack. There are various types of time off you can select. It will be automatically approved and added to the team time off calendar (with the exception of longer term leave.) It will also be added to your manager's personal calendar. 
+- Book it on the PTO by Deel app in Slack. There are various types of time off you can select. It will be automatically approved and added to the team time off calendar (with the exception of longer term leave.) It will also be added to your manager's personal calendar.
+- There are four types of time off you can select
+   - PTO - this will be the majority of the time for vacation or any other time off that doesn't fit below
+   - Out Sick - this is when you're sick and will take time off unexpectedly
+   - [Parental Leave](https://posthog.com/handbook/people/time-off#parental-leave)
+   - Medical Leave - this is planned time off for you personally, on medical grounds - if it is a family member who requires support meaning you      will be off, this is PTO. 
 - Block out your own personal GCal to show that you are out. This is because PTO by Deel _only_ books in an all day event in your calendar to show that you are out. If you don't do this, automated meetings such as interviews or demos might still get booked into your cal.  
 - Set an out of office message on your email and have it point to someone else on the team, or hey@posthog.com. PTO by Deel will automatically set your Slack status to out of office and will autorespond to Slack messages. 
 
@@ -70,13 +75,13 @@ If you need extended time for physical or mental health reasons, we will treat i
 
 There are lots of situations where life needs to come first. Please let it - just be communicative with your team and fit your work around it as you need. We trust you will do the right thing here. 
 
-If your are summonsed for jury duty, please let Fraser know right away - we can often get an exception granted if we have enough notice. 
+If you are summonsed for jury duty, please let Fraser know right away - we can often get an exception granted if we have enough notice. 
 
 ## Parental leave
 
 Parental leave is exceptional as it needs to be significantly longer than a typical vacation. Anyone at PostHog, regardless of gender, is able to take parental leave, and regardless of whether you've become a parent through childbirth or adoption. 
 
-If you have been at PostHog for over 1 year as of the date of your child's birth, you can take up to 24 weeks maternity leave or 4 weeks paternity leave on full pay.
+If you have been at PostHog for over 1 year as of the date of your child's birth, you can take up to 24 weeks maternity leave or 4 weeks paternity leave on full base salary pay. 
 
 We only pay this in one continuous block. If you have been at PostHog for under 1 year, we will pay you according to your local jurisdiction's legal requirements. 
 
@@ -106,9 +111,9 @@ The birthday gift usually arrives on the day of or 1-3 days prior to the birthda
 
 ### Anniversaries
 
-On your first-year anniversary with PostHog, you will receive a giftcard from [Giftogram](https://giftogram.com/) or [Prezzee](https://www.prezzee.uk/business/signin/) (if you are based in the UK) which can be used on a wide selection of brands. On your second-year anniversary you'll be gifted a [customized Lego minifig](https://minifig.fab-bricks.com/) in a display case, and on your third-year anniversary, you'll receive a personalized gift from [Wellbox](https://wellbox.app/). 
+On your first anniversary with PostHog, you will receive a giftcard from [Giftogram](https://giftogram.com/) or [Prezzee](https://www.prezzee.uk/business/signin/) (if you are based in the UK) which can be used on a wide selection of brands. On your second anniversary you'll be gifted a [customized Lego minifig](https://minifig.fab-bricks.com/) in a display case, and on your third anniversary, you'll receive a personalized gift from [Wellbox](https://wellbox.app/). 
 
-1st year anniversary - $50 for US gift cards/$55 for for all other countries gift cards to cover service fees:
+1st year anniversary - $50 for US gift cards/$55 for all other countries gift cards to cover service fees:
 
 1. Login into [Giftogram](https://app.giftogram.com/sign-in) by using your gmail credentials
 2. Two ways to create a new Giftogram, on the tool bar above where it says “Create and Send'' or you can click on the right hand side on the blue button “Send a Giftogram''. 

@@ -35,7 +35,7 @@ type Result = Hit<{
     resolutionBody?: string
 }>
 
-type Category = typeof categories[number]
+type Category = (typeof categories)[number]
 
 const categories = [
     {
@@ -102,6 +102,7 @@ export default function SearchResults(props: SearchResultsProps) {
     const posthog = usePostHog()
 
     const onSelect = (result: Result) => {
+        if (!result) return
         posthog?.capture('web search result clicked', {
             objectID: result.objectID,
             title: result.title,
@@ -122,7 +123,7 @@ export default function SearchResults(props: SearchResultsProps) {
             setCategory((category) => {
                 const typeSet = new Set(items.map((item) => item.value))
 
-                const extendedItems = categories.reduce<typeof categories[number][]>((acc, category) => {
+                const extendedItems = categories.reduce<(typeof categories)[number][]>((acc, category) => {
                     if (category.type === 'all' || typeSet.has(category.type)) {
                         return [...acc, category]
                     } else {
@@ -144,11 +145,11 @@ export default function SearchResults(props: SearchResultsProps) {
     }
 
     const compareResults = (a: Result, b: Result) => {
-        return a.objectID === b.objectID
+        return a?.objectID === b?.objectID
     }
 
     return (
-        <Combobox value={{} as Result} onChange={onSelect} by={compareResults}>
+        <Combobox value={null} onChange={onSelect} by={compareResults} nullable>
             {({ activeOption }) => (
                 <div
                     className="search-results z-[50] bg-white rounded overflow-hidden shadow-xl flex flex-col h-full"

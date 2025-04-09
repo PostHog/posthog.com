@@ -120,4 +120,4 @@ You need Support specialist level access to Stripe, ask Simon for access.
 - Need to create or modify an invoice for the correction. Support team should not create or modify invoices. Invoicing responsibilities will be handled by RevOps to maintain accuracy.
 
   
-Tag Mine in Zendesk and share what you checked, what you think we should do, and any other relevant context. RevOps will review review usage trends and customer lifecycle (e.g. new client, high-value account) to figure out next steps.
+Tag Mine in Zendesk and share what you checked, what you think we should do, and any other relevant context. RevOps will review usage trends and customer lifecycle (e.g. new client, high-value account) to figure out next steps.

@@ -1,11 +1,10 @@
 ---
-title: 'Testing frontend feature flags with React, Jest, and PostHog'
-date: 2023-03-16
+title: 'Testing frontend feature flags with React, Vitest, and PostHog'
+date: 2025-04-01
 author:
   - ian-vanagas
 showTitle: true
 sidebar: Docs
-featuredVideo: 'https://www.youtube-nocookie.com/embed/cKaQ2mR4sSc'
 tags:
   - feature flags
 ---
@@ -15,32 +14,79 @@ Combining both testing and feature flags can be a bit tricky. Tests generally ch
 
 To do this, you need to mock the flags to access the other variations. This tutorial shows you how to do that by creating a React app with Jest tests, adding PostHog, then setting up tests that work with feature flags by mocking PostHog.
 
-## Creating a React app
+## Creating a React app with Vite and setting up Vitest
 
-First, create a basic React app. Make sure [Node is installed](https://nodejs.dev/en/learn/how-to-install-nodejs/) then run `npx create-react-app` with the name of your app. We named ours `flag-test`.
+First, ensure [Node.js is installed](https://nodejs.dev/en/learn/how-to-install-nodejs/) (version 18.0 or newer), and then create a new React app with Vite. We named ours `flag-test`.
 
 ```bash
-npx create-react-app flag-test
+npm create vite@latest flag-test -- --template react
 ```
 
-After creating the app, in the newly created `flag-test` folder, a test is automatically created in `src/App.test.js` that looks like this:
+Next, in the newly created `flag-test` folder, we install Vitest and its requirements:
+
+```bash
+cd flag-test
+npm add -D vitest @testing-library/react @testing-library/jest-dom jsdom
+```
+
+Since we're about to test `components` directly, we must create a file called `vitest.setup.js` at our project root and import the required dependency:
 
 ```js
-// src/App.test.js
-import { render, screen } from '@testing-library/react';
+// ./vitest.setup.js
+import '@testing-library/jest-dom'
+```
+
+With the dependency installed in our project, the next step is to let the `vite.config.js` know the new testing setup configurations by adding the `test` property:
+
+```js
+// ./vite.config.js
+import { defineConfig } from 'vite'
+import react from '@vitejs/plugin-react'
+
+export default defineConfig({ 
+  plugins: [react()],
+  test: {
+    globals: true,
+    environment: 'jsdom',
+    setupFiles: './vitest.setup.js'
+  },
+})
+```
+
+Now, we're ready to set up our first test. Since **vite-react** already provided a sample component `src/App.jsx`, we can create a new file called `src/App.test.jsx` and test it:
+
+```js
+// ./src/App.test.jsx
+import { expect, test } from 'vitest'
+import { render, screen } from "@testing-library/react";
 import App from './App';
 
-test('renders learn react link', () => {
+test('renders learn link', () => {
   render(<App />);
-  const linkElement = screen.getByText(/learn react/i);
+  const linkElement = screen.getByText(/learn/i);
   expect(linkElement).toBeInTheDocument();
 });
 ```
 
-This test uses Jest, a popular JavaScript testing library. It passes when all the default code is in place and is a test to build on as we build out our app.
+This test uses **Vitest**, a popular JavaScript testing library. It passes when all the default code is in place and is a test to build on as we build out our app.
+
+To run the tests, update your `package.json` with the new script:
+
+```json
+{
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "lint": "eslint .",
+    "preview": "vite preview",
+    "test": "vitest"
+  }
+}
+```
+
+With everything set up, we can finally run our tests: 
 
 ```bash
-cd flag-test
 npm test
 ```
 
@@ -54,15 +100,16 @@ If we’ve created our React app and run our first test, we want to add PostHog.
 npm i posthog-js
 ```
 
-Next, add the `PostHogProvider` to `index.js`. This enables access to PostHog throughout your React app.
+Next, add the `PostHogProvider` to `main.jsx`. This enables access to PostHog throughout your React app.
 
 ```js
-// src/index.js
+// src/main.jsx
 import React from 'react';
-import ReactDOM from 'react-dom/client';
-import App from './App';
+import { StrictMode } from 'react';
+import { createRoot } from 'react-dom/client';
 import posthog from 'posthog-js';
-import { PostHogProvider} from 'posthog-js/react'
+import { PostHogProvider } from 'posthog-js/react'
+import App from './App';
 
 posthog.init(
   "<ph_project_api_key>",
@@ -71,14 +118,13 @@ posthog.init(
   }
 );
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
-root.render(
-  <React.StrictMode>
-    <PostHogProvider client={posthog}>
-      <App />
-    </PostHogProvider>
-  </React.StrictMode>
-);
+createRoot(document.getElementById('root')).render(
+  <StrictMode>
+  	<PostHogProvider client={posthog}>
+	  <App />
+  	</PostHogProvider>
+  </StrictMode>
+)
 ```
 
 With this setup, events are automatically captured, and we can set up our [React feature flag](/tutorials/react-feature-flags).
@@ -87,10 +133,10 @@ With this setup, events are automatically captured, and we can set up our [React
 
 In PostHog, go to the "Feature Flags" tab and click the "New feature flag" button. Set the key to `test-flag` and the release condition to 100% of users then click "Save."
 
-With the flag created, go to  `src/App.js` in our React app, import `useFeatureFlagEnabled` from `posthog-js/react`, and use it to check the `test-flag`. We have access to this because we set up the `PostHogProvider` earlier. We then conditionally render either a link to PostHog if the flag is enabled or the default "Learn React" link if not. This looks like this:
+With the flag created, go to  `src/App.jsx` in our React app, import `useFeatureFlagEnabled` from `posthog-js/react`, and use it to check the `test-flag`. We have access to this because we set up the `PostHogProvider` earlier. We then conditionally render either a link to PostHog if the flag is enabled or the default "Learn React" link if not. This looks like this:
 
 ```js
-// src/App.js
+// src/App.jsx
 import './App.css';
 import { useFeatureFlagEnabled } from 'posthog-js/react'
 
@@ -128,39 +174,42 @@ export default App;
 
 When we run the app again, the main link on the page changed to "Go to PostHog."
 
-![Go to PostHog](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/test-frontend-feature-flags/app.png)
+![Go to PostHog](https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_03_27_at_09_52_49_2x_65390628c1.png)
 
 ## Making our tests and feature flags work together
 
-When we run tests now, it still passes, but only tests part of the code. To test all of it, we must handle feature flags by mocking PostHog. To do this, first, install `jest-mock`
+When we run tests now, it still passes, but only tests part of the code. To test all of it, we must handle feature flags by mocking PostHog. 
 
-```bash
-npm i jest-mock
-```
+Luckily, Vitest provides a mock service natively. You can use it by importing the `vi` dependency from `vitest`, which also has compatibility with the Jest API.
 
-In `src/App.test.js`, mock `useFeatureFlagEnabled`. Create a new test where the mocked `useFeatureFlagEnabled` function return `true`, then checks the "Go to PostHog" version of the flag.
+In `src/App.test.jsx`, mock `useFeatureFlagEnabled`. Create a new test where the mocked `useFeatureFlagEnabled` function return `true`, then checks the "Go to PostHog" version of the flag.
 
 ```js
-// src/App.test.js
-import { render, screen } from '@testing-library/react';
+// src/App.test.jsx
+import { render, screen } from "@testing-library/react";
+import { expect, test, vi } from 'vitest';
 import App from './App';
-import { useFeatureFlagEnabled } from 'posthog-js/react';
 
-jest.mock('posthog-js/react', () => ({
-  useFeatureFlagEnabled: jest.fn(),
-}));
+const mockUseFeatureFlagEnabled = vi.fn()
+
+vi.mock('posthog-js/react', () => ({
+    useFeatureFlagEnabled: () => mockUseFeatureFlagEnabled(),
+}))
 
 test('renders learn react link', () => {
-  render(<App />);
-  const linkElement = screen.getByText(/learn react/i);
-  expect(linkElement).toBeInTheDocument();
+    mockUseFeatureFlagEnabled.mockReturnValueOnce(false);
+
+    render(<App />);
+    const linkElement = screen.getByText(/learn react/i);
+    expect(linkElement).toBeInTheDocument();
 });
 
 test('renders go to posthog link', () => {
-  useFeatureFlagEnabled.mockReturnValueOnce(true);
-  render(<App />);
-  const linkElement = screen.getByText(/go to posthog/i);
-  expect(linkElement).toBeInTheDocument();
+    mockUseFeatureFlagEnabled.mockReturnValueOnce(true);
+
+    render(<App />);
+    const linkElement = screen.getByText(/go to posthog/i);
+    expect(linkElement).toBeInTheDocument();
 });
 ```
 

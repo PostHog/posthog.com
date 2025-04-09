@@ -50,6 +50,8 @@ posthog.init('<ph_project_api_key>', {
 ```
 Allow and ignorelists only filter autocapture events. They don't affect the data collected by session recordings or custom events.
 
+> **Note:** When using `element_allowlist` or `css_selector_allowlist`, PostHog considers the entire tree of elements from the root to the target element of the click event, not just the element that was directly clicked. If *any* element or selector is in the tree *and* allow list, the click is captured.
+
 ### Preventing sensitive data capture
 
 For security reasons and to prevent sensitive data capture, PostHog is conservative about capturing `input` tags. We specifically only collect the `name`, `id`, and `class` attributes from `input` tags. If you need to collect more data from inputs, you should use [custom events](/docs/product-analytics/capture-events).
@@ -62,18 +64,19 @@ If there are specific elements you _don't_ want to capture, add the `ph-no-captu
 
 ## Disabling autocapture
 
-You can disable autocapture in your [project settings](https://us.posthog.com/project/settings) or by setting `autocapture: false` in the [config](/docs/libraries/js#config). If _one_ of these is disabled, autocapture is disabled.
+You can disable autocapture in your [project settings](https://us.posthog.com/project/settings) or by setting `autocapture: false` in the [config](/docs/libraries/js/config). If _one_ of these is disabled, autocapture is disabled.
+
+> **Note:** Disabling autocapture in your project settings isn't instant. PostHog will continue to capture events where it is initialized. Instead, autocaptured events will taper off as users trigger reinitialization of PostHog (like when they reload your site). 
 
 You can disable pageviews and pageleaves by setting `capture_pageview: false`. To just disable pageleaves, keep `capture_pageview: true` and set `capture_pageleave: false`.
 
 Disabling autocapture **does not disable [session recording](/docs/session-replay/manual)**. You can disable session recording by turning it off in your [project settings](https://app.posthog.com/project/settings) or using `disable_session_recording: true` in the config.
 
-> **Note:** You can update your config at runtime (e.g. to update an allowlist or disable autocapture) using the `posthog.set_config()` method. 
->
-> For example, to update the `capture_pageview` config:
-> ```js-web
-> posthog.set_config({ capture_pageview: false })
-> ```
+You can update any of these config options at runtime (e.g. to update an allowlist or disable autocapture) using the `posthog.set_config()` method like this:
+
+```js-web
+posthog.set_config({ capture_pageview: false })
+```
 
 ## Capturing additional properties in autocapture events
 
@@ -123,20 +126,51 @@ properties: {
 }
 ```
 
+## Sending custom properties with autocaptured form submissions
+
+To prevent accidental sensitive data capture, we do not automatically capture form values from form submissions. To add custom properties to form submissions, you can use the `data-ph-capture-attribute` attribute on the form element.
+
+In this example, the `product-id` property will be sent with the form submission event. The `product-name` input will not be captured.
+
+```HTML
+<form
+    data-ph-capture-attribute-product-id="12345678"
+>
+    <input name="product-name" placeholder="this input will not be autocaptured"/>
+    <button type="submit">Submit</button>
+</form>
+```
+
+The following example shows how you can use the `data-ph-capture-attribute` attribute dynamically in a React component. The `product-name` property will be sent with the form submission event.
+
+```tsx
+import { useState } from 'react'
+
+const MyForm = () => {
+  const [productName, setProductName] = useState('')
+  return (
+    <form
+        data-ph-capture-attribute-name={productName}
+    >
+        <input name="product-name" onChange={(e) => setProductName(e.target.value)} value={productName}/>
+        <button type="submit">Submit</button>
+    </form>
+  )
+}
+```
+
 ## Autocaptured events
 
 Autocaptured events include:
 
-- `$autocapture`: Clicks, inputs, typing, form submissions, and more.
+- `$autocapture`: Clicks, taps, inputs, typing, form submissions, and more.
 - `$pageview`: Triggers on page load. You might need to manually capture these in single-page apps like [React](/docs/libraries/react), [Next.js](/docs/libraries/next-js#pages-router) or [Vue](/docs/libraries/vue-js#capturing-page-views).
 - `$pageleave`: Triggers on `onpagehide` when a user navigates away from a page.
 - `$rageclick`: A second click within 1000ms within 30px of the first click.
 - `$screen`: When a user navigates on a mobile app.
-
-You can learn more about what events are autocaptured in the [JavaScript Web](/docs/libraries/js) and [React Native](/docs/libraries/react-native#autocapture) docs.
+- Application lifecycle events like `Application Opened`, `Application Became Active`, `Application Backgrounded`, `Application Installed`, and `Application Updated` for mobile SDKs like [React Native](/docs/libraries/react-native#autocapture).
 
 > **Note:** Since pageview autocapture relies on the browser page load events, it captures the initial pageview but not subsequent ones. You might need to implement your own pageview capture using custom events. See our guides for doing this in [Next.js](/docs/libraries/next-js#client-side-setup), [React](/tutorials/single-page-app-pageviews), [Vue](/docs/libraries/vue-js#capturing-pageviews), and [Angular](/docs/libraries/angular#tracking-pageviews).
-
 
 ## Autocaptured properties
 
@@ -210,7 +244,7 @@ Autocapture events and properties can be used like any other [event type](/docs/
 
 - Autocapture events can be organized and renamed using [actions](/docs/data/actions).
 
-- You can query autocapture `elements_chain` using [HogQL](/tutorials/hogql-autocapture).
+- You can query autocapture `elements_chain` using [SQL](/tutorials/hogql-autocapture).
 
 
 ## Clipboard autocapture

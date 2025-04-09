@@ -53,7 +53,7 @@ Keep your surveys short so that people can complete them quickly and easily. You
 Another option to a scaled survey is to hold a focus group - a cross between the customer interview and a small survey which can yield high-confidence results. It’s essential to limit the possibility of people influencing each other to give the same answer, and it can be helpful to get people to write down their answers before sharing them with the group.
 
 ### How does PostHog do this?
-In addition to collecting user feedback through direct conversations, we occasionally run surveys via our Slack community to find out how we're doing. We use this primarily as a tool for collecting ideas on topics outside of our core product, such as new community or marketing iniatives. 
+In addition to collecting user feedback through direct conversations, we occasionally run surveys via our Slack community to find out how we're doing. We use this primarily as a tool for collecting ideas on topics outside of our core product, such as new community or marketing initiatives. 
 
 Want to find out more about our community? You can join [our community page](/posts) today!
 

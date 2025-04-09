@@ -77,6 +77,12 @@ export const Content = ({ quickLinks = false }) => {
                 <ul className="m-0 mb-3 p-0 flex flex-col gap-4 md:grid md:grid-cols-2 xl:grid-cols-3">
                     <ResourceItem
                         type="Guide"
+                        title="Best practices for feature flags"
+                        description="Contains 9 examples"
+                        url="/docs/feature-flags/best-practices"
+                    />
+                    <ResourceItem
+                        type="Guide"
                         title="Feature flags API"
                         description="Evaluate and update with the /decide/ endpoint"
                         url="/tutorials/api-feature-flags"
@@ -92,12 +98,6 @@ export const Content = ({ quickLinks = false }) => {
                         title="Bootstrapping feature flags in React"
                         description="Available at client-side load time"
                         url="/tutorials/bootstrap-feature-flags-react"
-                    />
-                    <ResourceItem
-                        type="Article"
-                        title="Best practices for feature flags"
-                        description="Contains 8 examples"
-                        url="/blog/feature-flag-best-practices"
                     />
                     <ResourceItem
                         type="Guide"

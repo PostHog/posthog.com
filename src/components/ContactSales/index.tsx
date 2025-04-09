@@ -200,6 +200,12 @@ export default function ContactSales({ location }) {
                                         required: true,
                                         fieldType: 'textarea',
                                     },
+                                    {
+                                        label: 'Where did you hear about us?',
+                                        type: 'string',
+                                        name: 'where_did_you_hear_about_us',
+                                        required: false,
+                                    },
                                 ],
                                 buttonText: 'Submit',
                                 message: "Message received. We'll be in touch!",

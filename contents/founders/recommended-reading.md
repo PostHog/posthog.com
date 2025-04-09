@@ -20,7 +20,7 @@ The PostHog team includes a number of voracious readers — we even have [our ow
 If you're looking for more startup advice or support, don't forget to check out [PostHog for Startups](/startups), our program for helping early-stage teams get to product market fit. Our startup program includes $50,000 in PostHog credit, exclusive events and promotional opportunities, and is available to any company less than 2 years old and with less than $5M in funding. 
 ![Ask Iwata](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tracks/ask-iwata.jpg)
 ## [Ask Iwata: Words of Wisdom from Nintendo’s Legendary CEO by Hobonichi](https://www.goodreads.com/book/show/54736620-ask-iwata)
-**Recommended by [Joe Martin, Product Marketing](/community/profiles/59)**
+**Recommended by [Joe Martin, Product Marketing](/community/profiles/29070)**
 
 Former games journalist Joe has repeatedly recommended this collection of essays by Satoro Iwata in our book club Slack group. It’s one of the only books about management that he’s ever been able to finish. 
 
@@ -105,7 +105,7 @@ David's review: “It very simply talks about avoiding ‘work work’. The focu
 ## [Continuous Discovery Habits by Teresa Torres](https://www.goodreads.com/book/show/58046715-continuous-discovery-habits) 
 **Recommended by [Annika Schmid, Product Manager](/community/profiles/221)**
 
-In addition to the The Mom Test, Annika recommends this book for its practical advice on gathering information from users and turning that information into actionable change. 
+In addition to The Mom Test, Annika recommends this book for its practical advice on gathering information from users and turning that information into actionable change. 
 
 “It explains a method around continuously talking to users as opposed to doing interviews in big batches around specific topics, like larger organizations do,” says Annika. “I think it’s particularly useful for startups and it’s something we definitely do at PostHog.”
 

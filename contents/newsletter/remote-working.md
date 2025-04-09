@@ -71,7 +71,7 @@ How do you build a culture of trust? Here’s a checklist.
 
 * **Work in public.** At Zapier, trust and transparency are a big part of the [company’s values](https://zapier.com/jobs/culture-and-values-at-zapier). As co-founder and CEO Wade Foster explains: “Transparency promotes equity and inclusion within our team and customer base. So work in public. Have discussions in the open and document your work.” Successful remote companies build everything out in the open. This gives everyone the context they need, and eliminates the political squabbles that plague less transparent companies.
 
-* **Shared values.** The most successful remote teams have a shared set of values and behaviors – and these are often clearly defined in a public handbook. These values and behaviors are more important than dictatorial processes. As Buffer co-founder and CEO Joel Gascoigne wrote [almost a decade ago](https://buffer.com/resources/why-transparency/), “transparency breeds trust, and trust is is the foundation of great teamwork.” It’s still true today.
+* **Shared values.** The most successful remote teams have a shared set of values and behaviors – and these are often clearly defined in a public handbook. These values and behaviors are more important than dictatorial processes. As Buffer co-founder and CEO Joel Gascoigne wrote [almost a decade ago](https://buffer.com/resources/why-transparency/), “transparency breeds trust, and trust is the foundation of great teamwork.” It’s still true today.
 
 ### 4. They make meeting up easy
 

@@ -1,6 +1,7 @@
 ---
 title: Send PostHog event data to Google Pub/Sub
-templateId: template-google-pubsub
+templateId:
+    - template-google-pubsub
 ---
 
 import Requirements from "../_snippets/requirements.mdx"

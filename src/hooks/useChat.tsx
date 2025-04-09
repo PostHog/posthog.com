@@ -13,9 +13,11 @@ interface ChatContextType {
     hasUnread: boolean
     setHasUnread: (unread: boolean) => void
     loading: boolean
-    renderChat: (target: string) => void
+    renderChat: (target: string, conversationId?: string) => void
     inkeep: AIChatFunctions | null
     setQuickQuestions: (questions: string[]) => void
+    conversationHistory: { id: string; question: number; date: string }[]
+    resetConversationHistory: () => void
 }
 
 const ChatContext = createContext<ChatContextType | undefined>(undefined)
@@ -30,12 +32,25 @@ export function ChatProvider({ children }: { children: ReactNode }): JSX.Element
     const [loading, setLoading] = useState(true)
     const [hasFirstResponse, setHasFirstResponse] = useState(false)
     const [quickQuestions, setQuickQuestions] = useState(defaultQuickQuestions)
+    const [conversationHistory, setConversationHistory] = useState<{ id: string; question: number; date: string }[]>([])
 
     const logEventCallback = useCallback(
         (event: any) => {
             if (event?.eventName === 'chat_message_bot_response_received') {
                 if (!hasFirstResponse) {
                     setHasFirstResponse(true)
+                    try {
+                        const newConversation = {
+                            id: event.properties.chatSessionId,
+                            question: event.properties.question,
+                            date: new Date().toISOString(),
+                        }
+                        const conversations = JSON.parse(localStorage.getItem('conversations') || '[]')
+                        conversations.push(newConversation)
+                        localStorage.setItem('conversations', JSON.stringify(conversations))
+                    } catch (error) {
+                        console.error('Error adding conversation to history:', error)
+                    }
                 }
                 if (!chatOpen) {
                     setHasUnread(true)
@@ -53,7 +68,7 @@ export function ChatProvider({ children }: { children: ReactNode }): JSX.Element
         setChatOpen(false)
     }
 
-    const renderChat = (target: string) => {
+    const renderChat = (target: string, conversationId?: string) => {
         // Render chat (usually after the target element is mounted)
         import('@inkeep/uikit-js').then((inkeepJS) => {
             const inkeep = inkeepJS.Inkeep(baseSettings)
@@ -68,11 +83,17 @@ export function ChatProvider({ children }: { children: ReactNode }): JSX.Element
                     aiChatSettings: {
                         ...aiChatSettings,
                         quickQuestions,
+                        ...(conversationId ? { chatId: conversationId } : {}),
                     },
                 },
             })
             setLoading(false)
         })
+    }
+
+    const resetConversationHistory = () => {
+        setConversationHistory([])
+        localStorage.removeItem('conversations')
     }
 
     useEffect(() => {
@@ -81,6 +102,8 @@ export function ChatProvider({ children }: { children: ReactNode }): JSX.Element
         if (params.get('chat') === 'open') {
             openChat()
         }
+        const conversations = JSON.parse(localStorage.getItem('conversations') || '[]')
+        setConversationHistory(conversations)
     }, [])
 
     useEffect(() => {
@@ -154,10 +177,10 @@ export function ChatProvider({ children }: { children: ReactNode }): JSX.Element
     useEffect(() => {
         // Open chat on ? key press
         const handleKeyPress = (event: KeyboardEvent) => {
-            // Don't trigger if user is typing in an input or textarea
+            // Don't trigger if user is typing in an input, textarea (including shadow DOM)
             if (
                 event.target instanceof HTMLElement &&
-                (event.target.tagName === 'INPUT' || event.target.tagName === 'TEXTAREA')
+                (event.target.tagName === 'INPUT' || event.target.tagName === 'TEXTAREA' || event.target.shadowRoot)
             ) {
                 return
             }
@@ -185,6 +208,8 @@ export function ChatProvider({ children }: { children: ReactNode }): JSX.Element
                 renderChat,
                 inkeep: embeddedChatRef.current,
                 setQuickQuestions,
+                conversationHistory,
+                resetConversationHistory,
             }}
         >
             {children}

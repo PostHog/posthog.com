@@ -22,6 +22,16 @@ PostHog makes it easy to get data about traffic and usage of your React app. Int
 
 This guide will walk you through an example integration of PostHog using React and the [posthog-js library](/docs/integrate/client/js).
 
+## Alpha: integration via LLM
+
+Try our prompt-based integration for React using Cursor, Bolt, and other agent-like tools that can run terminal commands. Paste this into your chat:
+
+import AgentPrompt from "../_snippets/agent-prompt.mdx"
+
+<AgentPrompt />
+
+Or, to integrate manually, continue with the rest of this guide.
+
 ## Installation
 
 import ReactInstall from '../../integrate/_snippets/install-react.mdx'
@@ -85,7 +95,7 @@ root.render(
 
 ### Using posthog-js functions
 
-By default, the `posthog-js` library automatically captures pageviews, element clicks, inputs, and more. Autocapture can be tuned in with [the configuration options](/docs/libraries/js#tuning-autocapture).
+By default, the `posthog-js` library automatically captures pageviews, element clicks, inputs, and more. Autocapture can be tuned in with [the configuration options](/docs/product-analytics/autocapture#configuring-autocapture).
 
 If you want to use the library to identify users, capture events, use feature flags, or use other features, you can access the initialized `posthog-js` library using the `usePostHog` hook.
 
@@ -105,7 +115,7 @@ function App() {
 
     useEffect(() => {
         if (user) {
-            // Identify sends an event, so you want may want to limit how often you call it
+            // Identify sends an event, so you may want to limit how often you call it
             posthog?.identify(user.id, {
                 email: user.email,
             })
@@ -176,7 +186,7 @@ Since [experiments](/docs/experiments/manual) use feature flags, the code for ru
 
 ```react
 // You can either use the `useFeatureFlagVariantKey` hook,
-// or you can use the feature flags component - https://posthog.com/docs/libraries/react#feature-flags-react-component
+// or you can use the feature flags component - /docs/libraries/react#feature-flags-react-component
 
 // Method one: using the useFeatureFlagVariantKey hook
 import { useFeatureFlagVariantKey } from 'posthog-js/react'

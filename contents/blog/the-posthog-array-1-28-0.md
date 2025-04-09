@@ -79,7 +79,7 @@ In our [last release](https://posthog.com/blog/the-posthog-array-1-27-0) we ship
 
 ### Breaking changes
 
-⚠️ The previously deprecated `/api/user` endpoint has been removed since this version (1.28.0). Head over to the [User API](https://posthog.com/docs/api/user) docs if you still need to update this endpoint.
+⚠️ The previously deprecated `/api/user` endpoint has been removed since this version (1.28.0). Head over to the [User API](/docs/api/user) docs if you still need to update this endpoint.
 
 ⚠️ We've dropped support for Python 3.7. You'll now need to use Python 3.8 or 3.9. **We recommend using Python 3.9.**
 

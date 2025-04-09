@@ -83,7 +83,7 @@ When we reload our page, we get a title based on the flag key variant.
 
 We can check the other variants by going to the [feature flag page](https://app.posthog.com/feature_flags), searching for the key related to our experiment, and clicking on it to edit it. Scroll down to release conditions and set the **optional override** to any of the flag values. 
 
-If you want the optional override to apply to only you, you can create another condition set and set the condition like `utm_source = awesome` then use use the link `http://localhost:3000/?utm_source=awesome` or [identify](/docs/product-analytics/identify) your user with an email and use `email = your_email@domain.com` . Finally, press save and when you go back to your app, you see the overridden flag value.
+If you want the optional override to apply to only you, you can create another condition set and set the condition like `utm_source = awesome` then use the link `http://localhost:3000/?utm_source=awesome` or [identify](/docs/product-analytics/identify) your user with an email and use `email = your_email@domain.com` . Finally, press save and when you go back to your app, you see the overridden flag value.
 
 ![Overriding our variant](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/abn-testing/override.png)
 

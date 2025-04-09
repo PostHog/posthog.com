@@ -232,7 +232,7 @@ You can further break this down by filtering for specific events like `home_api_
 ## Further reading
 
 - [The basics of SQL for analytics](/product-engineers/sql-for-analytics)
-- [Using HogQL for advanced breakdowns](/tutorials/hogql-breakdowns)
+- [Using SQL for advanced breakdowns](/tutorials/hogql-breakdowns)
 - [Adventures in null handling: Null money, null problems](/blog/null-handling-hogql)
 
 <NewsletterForm />

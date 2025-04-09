@@ -24,6 +24,7 @@ Most engineering teams run a PagerDuty schedule:
 - [CDP](https://posthog.pagerduty.com/schedules#PM8YSH8)
 - [Infrastructure](https://posthog.pagerduty.com/schedules#P78OOWZ)
 - [Growth](https://posthog.pagerduty.com/schedules#PN1Q6BO)
+- [Surveys](https://posthog.pagerduty.com/schedules#P04FUTJ)
 
 The schedules consist of contiguous blocks, but that definitely doesn't mean working 24/7 – you should just work your normal hours.
 
@@ -35,15 +36,15 @@ Swap with a teammate in advance! Find a volunteer by asking in Slack, then use P
 
 Each engineering team has its own list of tickets in Zendesk:
 
-- [Product Analytics](https://posthoghelp.zendesk.com/agent/filters/17989255082139) (escalated only)
-- [Web Analytics](https://posthoghelp.zendesk.com/agent/filters/21786368880027) (escalated only)
-- [Experiments](https://posthoghelp.zendesk.com/agent/filters/30579720982299) (escalated only)
-- [Feature Flags](https://posthoghelp.zendesk.com/agent/filters/30579605742363) (escalated only)
-- [Replay](https://posthoghelp.zendesk.com/agent/filters/25210723706907) (escalated only)
-- [Surveys](https://posthoghelp.zendesk.com/agent/filters/30579650784411) (escalated only)
-- [CDP](https://posthoghelp.zendesk.com/agent/filters/28134703633179) (escalated only)
-- [Infrastructure](https://posthoghelp.zendesk.com/agent/filters/14507148758939)
-- [Auth & Billing, handled by Growth](https://posthoghelp.zendesk.com/agent/filters/14507107058843)
+- [Product Analytics](https://posthoghelp.zendesk.com/agent/filters/32900866985627)
+- [Web Analytics](https://posthoghelp.zendesk.com/agent/filters/33125274470683)
+- [Experiments](https://posthoghelp.zendesk.com/agent/filters/32903339439771)
+- [Feature Flags](https://posthoghelp.zendesk.com/agent/filters/32901789360411)
+- [Replay](https://posthoghelp.zendesk.com/agent/filters/32901709536027)
+- [Surveys](https://posthoghelp.zendesk.com/agent/filters/32901891815067)
+- [CDP](https://posthoghelp.zendesk.com/agent/filters/32901936992155)
+- [Infrastructure](https://posthoghelp.zendesk.com/agent/filters/33125360060571)
+- [Auth & Billing, handled by Growth](https://posthoghelp.zendesk.com/agent/filters/33125190975131)
 
 Your job is simple: ship features and fixes, and resolve ticket after ticket from your team's list.
 
@@ -81,9 +82,10 @@ Your primary responsibility is simply to make sure SDK questions get some love. 
   - [posthog-php](https://github.com/PostHog/posthog-php)
   - [posthog-ruby](https://github.com/PostHog/posthog-ruby)
   - [posthog-java](https://github.com/PostHog/posthog-java)
-  - [posthog-rs (Rust)](https://posthog.com/docs/libraries/rust)
-  - [posthog-go](https://posthog.com/docs/libraries/go)
-  - Others, see https://posthog.com/docs/libraries
+  - [posthog-rs (Rust)](/docs/libraries/rust)
+  - [posthog-go](/docs/libraries/go)
+  - [posthog-dotnet](https://github.com/PostHog/posthog-dotnet)
+  - Others, see /docs/libraries
 
 You don't have to be an expert in all of the SDKs, but it can be a great opportunity to dive into parts unknown.
 
@@ -140,19 +142,22 @@ As an engineer, when answering a question, your first instinct is to give them a
 - Housekeeping. Once a customer issue/question has been addressed, close the ticket in [Zendesk](#zendesk) (mark it `Solved`) to make it easy to identify outstanding conversations.
 - If a user has been particularly helpful, such as raising a security or bug report, feel free to offer a small credit for the merch store. 
 
-If you have any questions about how or when to communicate with users, you can always ask [the Words & Pictures team](/teams/words-pictures) for help. 
+If you have any questions about how or when to communicate with users, you can always ask [the Comms team](/teams/words-pictures) for help. 
 
 ## How do I prioritize?
 
-As a business we need to ensure we are focusing support on our paying customers, as such this is the prioritization order you should apply as Support Hero. At the end of your rotation you need to ensure that any items in 1-4 are resolved or passed to the next Support Hero _as a minimum_.
+As a business we need to ensure we are focusing support on our paying customers, as such this is the prioritization order you should apply as Support Hero. At the end of your rotation you need to ensure that any items in 1-5 are resolved or passed to the next Support Hero _as a minimum_.
 
-1. Any requests where you are tagged by the Customer Success team in a dedicated Slack channel, as there will be some urgency needed. 
-2. `Open`, `escalated` Zendesk tickets for your team that have `High` priority.
-3. `Open`, `escalated` Zendesk tickets for your team that have `Normal` priority.
-4. `New` and `Open`* (non-escalated) Zendesk tickets for your team that are nearing breach or have breached [SLAs](/handbook/support/customer-support#response-targets)
-5. `Open` ZenDesk tickets for your team that have low priority.
+1. Any requests where you are tagged by the Customer Success team in a dedicated Slack channel, as there will be some urgency needed.
+2. `Open`, `escalated` Zendesk tickets for your team that have `Sales/CS Top 20`* priority.
+3. `Open`, `escalated` Zendesk tickets for your team that have `High` priority.
+4. `Open`, `escalated` Zendesk tickets for your team that have `Normal` priority.
+5. `New` and `Open`** (non-escalated) Zendesk tickets for your team that are nearing breach or have breached [SLAs](/handbook/support/customer-support#response-targets)
+6. `Open` Zendesk tickets for your team that have low priority.
 
-\* Due to the way we're using Pylon, "new" tickets from high prio customer Slack channels only appear as `New` in Zendesk for a few seconds, then a webhook updates the ticket and quickly changes it to `Open`.
+\*  Try to be especially responsive to any customers marked as `Sales/CS Top 20`. This set of customers is regularly reviewed by the sales team, and this priority is applied to those customers we'd like to have an especially fantastic support experience.
+
+\** Due to the way we're using Pylon, "new" tickets from high prio customer Slack channels only appear as `New` in Zendesk for a few seconds, then a webhook updates the ticket and quickly changes it to `Open`.
 
 ### What if I need to confirm priority by checking a customer's MRR?
 
@@ -163,7 +168,7 @@ You've got a couple of options.  By order of quickness:
     In any Slack channel, type `@VIP Lookup Bot [Customer]` (without the brackets.) 
     'Customer' can be the organization name (case-sensitive), or their organization ID. It does work, but the results take up to 30s to load. 
 
-2. In ZenDesk: 
+2. In Zendesk: 
 
    Click the org name near the upper-left of the ticket. The left sidebar opens. 
    There you'll see which plan they're on. If they've already paid some bills, you'll also see MRR there.
@@ -208,13 +213,13 @@ Best,
 
 ## How do I use Zendesk?
 
-We use [Zendesk Support]([https://zendesk.com/](https://posthoghelp.zendesk.com)) as our internal platform to manage support tickets. This ensures that we don't miss anyone, especially when their request is passed from one person to another at PostHog, or if they message us over the weekend.
+We use [Zendesk Support](https://posthoghelp.zendesk.com) as our internal platform to manage support tickets. This ensures that we don't miss anyone, especially when their request is passed from one person to another at PostHog, or if they message us over the weekend.
 
 Zendesk allows us to manage all our customer conversations in one place and reply through Slack or email.
 
-Zendesk is populated with new tickets when issues are sent via the in-app [Support panel](https://us.posthog.com/home#panel=support) (the `Help` tab in the righthand sidebar), from people outside the PostHog GitHub organization adding issues to the `posthog` and `posthog.com` repos, and new [community questions](/questions).  High priority customers also have Slack channels they can post support questions in. We can [create ZenDesk tickets from Slack questions via Pylon.](#pylon-to-create-zendesk-tickets-from-slack-posts)
+Zendesk is populated with new tickets when issues are sent via the in-app [Support panel](https://us.posthog.com/home#panel=support) (the `Help` tab in the righthand sidebar), from people outside the PostHog GitHub organization adding issues to the `posthog` and `posthog.com` repos, and new [community questions](/questions).  High priority customers also have Slack channels they can post support questions in. We can [create Zendesk tickets from Slack questions via Pylon.](#pylon-to-create-zendesk-tickets-from-slack-posts)
  
-The ZenDesk tickets will include links to the GitHub issue, Slack thread, or the community question so we can answer in the appropriate platform.  After replying to a community question, make an `internal note` on the ZenDesk ticket confirming that you've replied outside of ZenDesk, and set the [ticket status](#ticket-status) accordingly when submitting the internal note.
+The Zendesk tickets will include links to the GitHub issue, Slack thread, or the community question so we can answer in the appropriate platform.  After replying to a community question, make an `internal note` on the Zendesk ticket confirming that you've replied outside of Zendesk, and set the [ticket status](#ticket-status) accordingly when submitting the internal note.
 
 ### Accessing Zendesk
 
@@ -229,7 +234,7 @@ You’ll spend most of your time in the Views pane, where you’ll find all tick
 Tips:
 
 * Err on the side of Solving tickets (see below) if you expect no further input from the customer, as a lot of them don't reply to confirm that the problem has been solved.
-* Provide actionable information as an _Internal Note_ on the ZenDesk ticket (e.g. links to internal slack threads, partial investigation, ...)
+* Provide actionable information as an _Internal Note_ on the Zendesk ticket (e.g. links to internal slack threads, partial investigation, ...)
 
 ### Creating tickets on behalf of users or from existing tickets
 
@@ -239,9 +244,9 @@ You can ask a user to create a new ticket themselves, but it's best if we do it 
 
 If the user raised the issue in a public forum, such as Twitter, it can be a good idea to tell them you've opened a ticket on their behalf. If the user was replying to an old, already solved ticket, you should mark the old issue to `Closed`. 
 
-#### Avoiding duplication of effort in ZenDesk
+#### Avoiding duplication of effort in Zendesk
 
-Each team handles ZenDesk queues (views) in slightly different ways.  Check in with your team about whether or not to assign tickets to yourself, or keep them assigned to the team/group level. Support team folks, who work on tickets from multiple queues, often assign tickets to themselves, (and when escalating, will assign the ticket back to the team/group.) 
+Each team handles Zendesk queues (views) in slightly different ways.  Check in with your team about whether or not to assign tickets to yourself, or keep them assigned to the team/group level. Support team folks, who work on tickets from multiple queues, often assign tickets to themselves, (and when escalating, will assign the ticket back to the team/group.) 
 
 For unassigned tickets, keep an eye out for whether someone else is already viewing a ticket (will appear in the upper-left of a ticket you're viewing, with their name, avatar and `also viewing`.)  Use those as clues to avoid working on a ticket that someone is already working on (and communicate with each other when in doubt.  Err on the side of making sure the ticket gets responded to within SLA/response target times.)
 
@@ -259,11 +264,11 @@ When responding to a ticket you should also choose an appropriate status accordi
 
 #### Temp orgs for free email users
 
-To reduce some unintended consequences of ZenDesk's unavoidable use of email address domain names to associate users with organizations, we have ZenDesk orgs for common free email providers.  
+To reduce some unintended consequences of Zendesk's unavoidable use of email address domain names to associate users with organizations, we have Zendesk orgs for common free email providers.  
 
 An example of these orgs: `Gmail user - please assign to correct org`
 
-When we get a ticket from a user with an `@gmail.com` address who has not already been manually assigned to an existing ZenDesk org, that user will be assigned to the `Gmail user - ...` org (unless their PostHog org doesn't exist in ZenDesk yet, in which case the correct org will be created in ZenDesk.)
+When we get a ticket from a user with an `@gmail.com` address who has not already been manually assigned to an existing Zendesk org, that user will be assigned to the `Gmail user - ...` org (unless their PostHog org doesn't exist in Zendesk yet, in which case the correct org will be created in Zendesk.)
 
 When you see a user assigned to a free email org on a ticket, and it is not a 'community question' ticket, please assign the user to their correct org, which is found on the `Admin` info line in the body of the ticket:
 
@@ -283,13 +288,13 @@ This looks at the Content Warning field on the Zendesk Organization, and adds th
 If you do discover any potentially offensive content in a customer account then please update this field on the Zendesk Organization so that other team members are aware of the content.
 
 
-### Pylon to create ZenDesk tickets from Slack posts
+### Pylon to create Zendesk tickets from Slack posts
 
-We use [Pylon](https://usepylon.com/) to create Zendesk tickets from Slack posts. To do so, add the `:ticket:` (🎫) emoji reaction to the post that you want to create a ZenDesk ticket from.  
+We use [Pylon](https://usepylon.com/) to create Zendesk tickets from Slack posts. To do so, add the `:ticket:` (🎫) emoji reaction to the post that you want to create a Zendesk ticket from.  
 
-Adding the `:ticket:` emoji reaction will cause Pylon to add a couple of replies in a thread under the post. The last of those replies includes options for the ZenDesk ticket you're creating: Use the `Group` menu to send the ticket to the appropriate team, and the `Severity` menu to set the severity flag on the ZenDesk ticket, then hit the `Submit` button.
+Adding the `:ticket:` emoji reaction will cause Pylon to add a couple of replies in a thread under the post. The last of those replies includes options for the Zendesk ticket you're creating: Use the `Group` menu to send the ticket to the appropriate team, and the `Severity` menu to set the severity flag on the Zendesk ticket, then hit the `Submit` button.
 
-ZenDesk tickets created this way will normally be marked as high priority tickets. You can respond to them either in Zendesk or Slack, as there is a two-way sync.
+Zendesk tickets created this way will normally be marked as high priority tickets. You can respond to them either in Zendesk or Slack, as there is a two-way sync.
 
 ### Adding new teams to Zendesk.
 
@@ -339,7 +344,7 @@ For bug reports from normal and high priority users (assuming you've confirmed i
 
 1. [Open a bug report](https://github.com/PostHog/posthog/issues/new?assignees=&labels=bug&projects=&template=bug_report.yml) on our GitHub repo
 2. Be sure to include a link to the insight (or other), below the repo steps
-3. Include "From: `https://URL_for_ZenDesk_ticket`" in the `additional info` section of the bug comment (where the URL is for the ZenDesk ticket where the customer reported the bug)
+3. Include "From: `https://URL_for_Zendesk_ticket`" in the `additional info` section of the bug comment (where the URL is for the Zendesk ticket where the customer reported the bug)
 4. Reply to the user to thank* them for alerting us to the bug. Let them know you've opened a bug report and provide a link to it.
 5. Let them know they can follow the bug report on GitHub for updates.
 6. When sending the reply, change the ticket from `Open` to `Pending`

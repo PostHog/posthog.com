@@ -32,6 +32,10 @@ const linklist: IProps[] = [
                 url: '/feature-flags',
             },
             {
+                title: 'Error tracking',
+                url: '/error-tracking',
+            },
+            {
                 title: 'Experiments',
                 url: '/experiments',
             },
@@ -67,6 +71,10 @@ const linklist: IProps[] = [
                 title: 'How we do "sales"',
                 url: '/sales',
             },
+            {
+                title: 'Founder stack',
+                url: '/founder-stack',
+            },
         ],
     },
     {
@@ -90,8 +98,8 @@ const linklist: IProps[] = [
                 url: '/docs/data',
             },
             {
-                title: 'HogQL',
-                url: '/docs/hogql',
+                title: 'SQL access',
+                url: '/docs/sql',
             },
             {
                 title: 'Toolbar',
@@ -118,6 +126,10 @@ const linklist: IProps[] = [
             {
                 title: 'Feature flags',
                 url: '/docs/feature-flags',
+            },
+            {
+                title: 'Error tracking',
+                url: '/docs/error-tracking',
             },
             {
                 title: 'Experiments',
@@ -226,10 +238,6 @@ const linklist: IProps[] = [
             {
                 title: 'Team structure',
                 url: '/handbook/team-structure',
-            },
-            {
-                title: 'People & Ops',
-                url: '/handbook/people/compensation',
             },
             {
                 title: 'Engineering',

@@ -1,6 +1,7 @@
 ---
 title: Send PostHog analytics events to your Discord server
-templateId: template-discord
+templateId:
+    - template-discord
 ---
 
 import Requirements from "../_snippets/requirements.mdx"

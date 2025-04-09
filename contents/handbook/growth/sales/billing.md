@@ -41,6 +41,8 @@ If this is a new contract for an existing customer, you will need to add their e
 
 **Do not proceed to the next steps until payment is confirmed.** Any credits added to an account gets automatically applied to outstanding invoices. If you add credits before payment is completed, the credits will settle any existing debts, and customer will not be able to make a payment.
 
+> For customers using Bill.com for payment, when they submit the invoice to the Bill platform it strips out the Stripe virtual account details.  You'll need to ask them to follow the instructions in this [help article](https://help.bill.com/direct/s/article/360000009246) to set the correct bank details for us in the Bill.com platform.  In case they don't do this we have a default customer account on [Stripe](https://dashboard.stripe.com/customers/cus_Rqm805zKTuxdqU) which the money will go to.  If this happens, mark their invoice as paid manually and then generate a new one against our default customer account to use the funds.
+
 ###### Step 4: Apply credits
 - Make sure that the payment is fully processed to avoid any automatic deductions.
 - **If customer wishes to begin using credits immediately:** return to the Zapier table after you’ve verified payment completion and click the "Apply Credit" button.
@@ -87,6 +89,45 @@ If this is a new contract for an existing customer, you will need to add their e
 - Create a new Customer to stripe customer
   - Copy and paste the new stripe customer id and new stripe subscription id
   - Save!
+
+### Failed/late payments
+
+We define late payments as follows:
+
+1. For annual paid up-front customers, that have not made payment and their due date has passed.  Usually this is 30 days from the contract start date (Net 30) although can differ based on other contractual terms.
+2. For monthly usage-based customers, we will attempt 4 automated payments using the card we have on file.  Each failed payment sends an alert to the #sales-alerts Slack channel.  After 4 failed payments we will stop attempting to take further payments.
+
+In either of the above scenarios the account owner as defined in Vitally needs to take action to ensure that payment is made. If there is no owner in Vitally, Simon will handle this process. If you are an AE, remember this also has impact on your commission, as we don't pay out until the customer has paid their invoice.
+
+#### Step 1 - On the day their payment becomes late
+
+You should reach out to any known contacts, as well as any finance email addresses we have in Stripe asking for payment to be made immediately.  For annual customers, you can download the Invoice PDF from the Stripe invoice page, and for monthly customers you can get the payment link from the Stripe invoice page.  Make it easy for them to make payment by including these details in your email.
+
+> Make it clear in this outreach that if we don't receive payment in the next 7 calendar days, their user access will be suspended. If they come back to you with genuine reasons why they need more time, use your discretion with the next steps. 
+
+#### Step 2 - 1 day before suspending user access
+
+Reach out to all active users on the account, and let them know that access will be suspended tomorrow due to the failed payment.  This often creates urgency and will get any late payment resolved.
+
+#### Step 3 - Suspending user access
+
+To prevent users from being able to log in you need to go to the Django admin panel for their organization, then for each user account listed there open the user, uncheck the `Is Active` box and then save the user.
+
+After completing this, email or Slack all users in the organization letting them know that access has been suspended and what they can do to rectify the situation.  Also make it clear that if this isn't resolved within the next 7 days we will revert them back to the Free tier and they be subjected to the usage limits of that tier (e.g. they are likely to lose tracking data).
+
+> If they do pay after this point make sure to re-enable user access by reversing the above in Django admin.
+
+#### Step 4 - 1 day before cancelling their subscription
+
+Reach out to all contacts letting them know that due to the failed payment we will be terminating their subscription tomorrow.
+
+> Make it clear in this outreach that once the subscription is terminated they will be subject to the free tier usage limits and we won't store any data above that limit.
+
+#### Step 5 - Cancelling their subscription
+
+You can cancel their subscription in Stripe - navigate to their Stripe customer page, and then click the `...` next to their active subscription to find the Cancel option.
+
+At this point they will be notified about this automatically via the billing service.
 
 ### Stripe Products & Prices
 

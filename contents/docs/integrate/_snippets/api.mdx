@@ -1,4 +1,4 @@
-Events can be ingested directly using our API and the [`/capture`](/docs/api/capture) endpoint, which is the same endpoint that all of our libraries use behind the scenes.
+Events can be ingested directly using our API and the [`/i/v0/e`](/docs/api/capture) endpoint, which is the same endpoint that all of our libraries use behind the scenes.
 
 Generally, this isn't something you'll need to use when integrating PostHog, but if you're working with a language or framework that PostHog doesn't support yet, this will allow you to still send events.
 
@@ -11,7 +11,7 @@ Events can be sent either one at a time, or together in a batch. There is no lim
 <MultiLanguage>
 
 ```shell label=Single
-POST https://[your-instance].com/capture/
+POST https://[your-instance].com/i/v0/e/
 Content-Type: application/json
 Body:
 {

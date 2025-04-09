@@ -64,8 +64,8 @@ Even though Maria is building her own queries and piping data to other platforms
 />
 </BorderWrapper>
 
-“All the [tutorials and guides](/docs/product-analytics/tutorials) make it really easy,” says Maria. “Everything I need is right there and if I have questions then I can ask at [the bottom of any docs page](https://posthog.com/docs/product-analytics/trends/overview) or look through the comments. I actually sometimes need to kick our guys when they say they’re stuck on something — I tell them: Ask PostHog! They’re really good at answering this stuff!”
+“All the [tutorials and guides](/docs/product-analytics/tutorials) make it really easy,” says Maria. “Everything I need is right there and if I have questions then I can ask at [the bottom of any docs page](/docs/product-analytics/trends/overview) or look through the comments. I actually sometimes need to kick our guys when they say they’re stuck on something — I tell them: Ask PostHog! They’re really good at answering this stuff!”
 
-Armed with this knowledge, Maria is planning to start using [PostHog’s A/B testing tools](https://posthog.com/docs/experiments) on her landing pages, as well as no-code user surveys to gather user feedback. Again, [templates and guides for enabling users to book their own feedback calls](/templates/user-interview) will prove useful — though Maria saves her biggest praise for a different feature altogether. 
+Armed with this knowledge, Maria is planning to start using [PostHog’s A/B testing tools](/docs/experiments) on her landing pages, as well as no-code user surveys to gather user feedback. Again, [templates and guides for enabling users to book their own feedback calls](/templates/user-interview) will prove useful — though Maria saves her biggest praise for a different feature altogether. 
 
 “I always have [hedgehog mode](/blog/rome-hackathon#hedgehog-mode) enabled,” says Maria. “I really love that hedgehog!”

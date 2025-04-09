@@ -1,6 +1,8 @@
 ---
 title: Send PostHog person data to Hubspot
-templateId: template-hubspot
+templateId:
+    - template-hubspot
+    - template-hubspot-event
 ---
 
 import Requirements from "../_snippets/requirements.mdx"

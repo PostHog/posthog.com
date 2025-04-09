@@ -18,7 +18,41 @@ Because we don't manage self-hosted instances or provide paid support plans for 
 
 Good question! We've found that PostHog Cloud is far and away the best experience for the vast majority of our users. However, some people still want to self-host, and we're here for that! Here's a quick flow chart to help you understand if self-hosting PostHog is for you:
 
-![flowchart for deciding if to self-host posthog](https://res.cloudinary.com/dmukukwp6/image/upload/flowchart_ae48a9fc3a.png)
+```mermaid
+flowchart TD
+    start["What makes you interested in <br/>self-hosting PostHog?"] --> diehard["I'm a die-hard self-hoster"] & privacy["I have data privacy requirements / desires"] & worried["I'm worried about cost"]
+    diehard --> B["Do you expect to ingest more than 300k events, 1k recordings, 300k /decide API calls into the instance?"]
+    worried --> events["Will you have more than 1M events, 5k recordings etc per month?"]
+    events -- No --> cloud_free["`PostHog Cloud is free for 1M events, 
+5k recordings, 250 surveys, 
+and more every single month. 
+See posthog.com/pricing for more.`"]
+    cloud_free --> better_cloud["You'll probably be better off with PostHog Cloud"]
+    privacy --> gdpr["PostHog Cloud has both EU and US regions for GDPR and BAAs available for HIPPA-compliant companies."]
+    gdpr -- Cool --> better_cloud
+    B -- Yes --> infra["Is managing infrastructure one of your core competencies?"]
+    B -- No --> risk["Are you okay with accepting the risk for potential data loss? (we have no guarantees for self-hosted instances)"]
+    infra -- No --> better_cloud
+    events -- Yes --> pricing["Have you compared the pricing for your anticipated volume vs the cost of a devops engineer's time?"]
+    pricing -- "Yes, and it's cheaper to do this in-house" --> doubt["We've literally never seen this math work out. However..."]
+    doubt --> infra
+    gdpr -- It's something else --> other_privacy["We host lots of companies with privacy needs, feel free to send a message with your requirements and we can go from there."]
+    other_privacy --> better_cloud
+    pricing -- No --> calculator["Use the calculator on posthog.com/pricing, then come back"]
+    calculator -- "Going back to this question..." --> pricing
+    pricing -- "Yes, and it's cheaper to use PostHog Cloud" --> cloud_cheaper["Because we spread the cost of managing infra across all our customers, PostHog Cloud is usually far cheaper than doing it yourself!"]
+    cloud_cheaper --> better_cloud
+    infra -- Yes --> risk
+    risk -- Yes --> support["We don't offer customer support for product, infrastructure, or other questions for self-hosted instances. That alright with you?"]
+    support -- No --> better_cloud
+    support -- Yes --> features["Are you cool with just using the features that are available on the free plan? All paid-plan features are Cloud-only."]
+    features -- Yep --> try_it["Feel free to give PostHog self-hosting a try!"]
+    features -- No --> better_cloud
+    risk -- No --> better_cloud
+
+    class diehard,privacy,worried,better_cloud,risk,support,try_it decision
+    class cloud_free,cloud_cheaper endpoint
+```
 
 You can follow the rest of the guide for instructions on how to set up self-hosted PostHog. If you want to use Cloud instead, you can sign up for our
  [US](https://us.posthog.com/signup) or [EU](https://eu.posthog.com/signup) cloud instance.

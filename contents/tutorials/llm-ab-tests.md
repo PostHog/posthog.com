@@ -193,7 +193,7 @@ export default function Home() {
   // rest of your existing code
 ```
 
-Lastly, when a user log outs we call [`posthog.reset()`](/docs/libraries/js#reset-after-logout) to unlink any future events. Update the `handleLogout` function in `recipe-builder/page.js` to do this:
+Lastly, when a user log outs we call [`posthog.reset()`](/docs/libraries/js/features#resetting-a-user) to unlink any future events. Update the `handleLogout` function in `recipe-builder/page.js` to do this:
 
 ```js file=recipe-builder/page.js
   // existing code...
@@ -310,6 +310,6 @@ And we're done setting up our A/B test! Open your app, log in with a few differe
 
 - [Product metrics to track for LLM apps](/product-engineers/llm-product-metrics)
 - [How to set up LLM analytics for Anthropic's Claude](/tutorials/anthropic-analytics)
-- [How to set up LLM analytics for ChatGPT](/tutorials/chatgpt-analytics) 
+- [How to set up OpenAI observability](/tutorials/openai-observability) 
 
 <NewsletterForm />

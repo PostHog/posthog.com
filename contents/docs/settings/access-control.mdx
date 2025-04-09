@@ -1,0 +1,112 @@
+---
+title: Access control
+sidebar: Docs
+showTitle: true
+availability:
+    free: none
+    selfServe: none
+    enterprise: full
+---
+export const rbacSettingsLight = "https://res.cloudinary.com/dmukukwp6/image/upload/access_control_organization_light_5774d4da82.png"
+export const rbacSettingsDark = "https://res.cloudinary.com/dmukukwp6/image/upload/access_control_organization_dark_a2f3786867.png"
+export const projectAccessControlLight = "https://res.cloudinary.com/dmukukwp6/image/upload/access_control_project_light_b3afca7e77.png"
+export const projectAccessControlDark = "https://res.cloudinary.com/dmukukwp6/image/upload/access_control_project_dark_d05334884e.png"
+
+PostHog's access control system lets you manage permissions across three levels: organizations, projects, and resources. This hierarchical approach provides granular control over who can view and edit different parts of PostHog.
+
+## Three levels of access control
+
+### 1. Organization level
+
+Organization members have one of three access levels that determine their permissions for organization-wide settings and actions.
+
+There are three access levels in PostHog: Member, Admin, and Owner. An organization must have at lest one Owner.
+
+| Permission                                                                            | Member (base level) | Admin | Owner |
+| ------------------------------------------------------------------------------------- | ------------------- | ------------- | ----- |
+| Viewing and querying project data                                                     | <span className="text-green text-lg">✔</span>                | <span className="text-green text-lg">✔</span>          | <span className="text-green text-lg">✔</span>    |
+| Accessing billing management                                                          | <span className="text-red text-lg">✖</span>                  | <span className="text-green text-lg">✔</span>          | <span className="text-green text-lg">✔</span>    |
+| Managing reverse proxies                                                              | <span className="text-red text-lg">✖</span>                  | <span className="text-green text-lg">✔</span>          | <span className="text-green text-lg">✔</span>    |
+| Creating and deleting projects                                                        | <span className="text-red text-lg">✖</span>                  | <span className="text-green text-lg">✔</span>          | <span className="text-green text-lg">✔</span>    |
+| Managing project access controls (see more below)                                     | <span className="text-red text-lg">✖</span>                  | <span className="text-green text-lg">✔</span>          | <span className="text-green text-lg">✔</span>    |
+| Changing authentication settings (SAML, SSO settings, 2FA enforcement, etc.)          | <span className="text-red text-lg">✖</span>                  | <span className="text-green text-lg">✔</span>          | <span className="text-green text-lg">✔</span>    |
+| Changing organization settings (name, logo, etc.)                                     | <span className="text-red text-lg">✖</span>                  | <span className="text-green text-lg">✔</span>          | <span className="text-green text-lg">✔</span>    |
+| Managing RBAC Roles (creating, editing, deleting, changing members, etc.)             | <span className="text-red text-lg">✖</span>                  | <span className="text-green text-lg">✔</span>          | <span className="text-green text-lg">✔</span>    |
+| Inviting new members (only for current level or below)                                | <span className="text-green text-lg">✔</span>                | <span className="text-green text-lg">✔</span>          | <span className="text-green text-lg">✔</span>    |
+| Managing members (changing roles, removing, etc.)                                     | <span className="text-red text-lg">✖</span>                  | <span className="text-green text-lg">✔</span>          | <span className="text-green text-lg">✔</span>    |
+| Leaving an organization                                                               | <span className="text-green text-lg">✔</span>                | <span className="text-green text-lg">✔</span>          | <span className="text-red text-lg">✖</span>      |
+| Transferring organization ownership                                                   | <span className="text-red text-lg">✖</span>                  | <span className="text-red text-lg">✖</span>            | <span className="text-green text-lg">✔</span>    |
+| Deleting an organization                                                              | <span className="text-red text-lg">✖</span>                  | <span className="text-red text-lg">✖</span>            | <span className="text-green text-lg">✔</span>    |
+
+Access levels can be viewed and changed in the [Members section](https://app.posthog.com/settings/organization-members) of organization settings.
+
+### 2. Project level
+
+> This is currently being rolled out to all users so you may not see this experience yet. If you're interested in trying it out please email zach@posthog.com with "Access control beta" in the subject line.
+
+Each project has a default access level that applies to all organization members:
+
+- **No access** - Members need explicit permission to access the project
+- **Member** - All organization members have member-level access
+- **Admin** - All organization members have admin-level access
+
+Project permissions:
+- **Members** can view and edit resources they create or are explicitly given access to
+- **Admins** can view and edit all resources and manage access control settings
+
+Organization owners and admins automatically receive project admin permissions.
+
+You can override the default access level for specific members or [roles](#role-based-access-control). A user's effective permission is the highest level granted across all sources.
+
+<ProductScreenshot
+    imageLight = {projectAccessControlLight} 
+    imageDark = {projectAccessControlDark}
+    alt="Project access control" 
+    classes="rounded"
+/>
+
+### 3. Resource level
+
+> This is currently being rolled out to all users so you may not see this experience yet. If you're interested in trying it out please email zach@posthog.com with "Access control beta" in the subject line.
+
+Access control is available for:
+- Insights
+- Dashboards
+- Notebooks
+- Feature flags
+- (more resource types coming soon)
+
+Each resource has three possible access levels:
+- **No access** - Cannot view or edit the resource
+- **View** - Can view but not modify the resource
+- **Edit** - Can view and modify the resource
+
+Resources default to "Edit" access when created. You can modify the default and set specific permissions for members and roles.
+
+Resource creators and project admins can always view and edit resources as well as manage access controls.
+
+## Role-based access control (RBAC)
+
+> RBAC is only available on Enterprise plans
+
+Instead of managing permissions individually, you can create roles to group users together. Roles can be assigned permissions at both the project and resource level.
+
+<ProductScreenshot
+    imageLight = {rbacSettingsLight} 
+    imageDark = {rbacSettingsDark}
+    alt="RBAC settings" 
+    classes="rounded"
+/>
+
+## Feature availability
+
+The Teams Add-on includes "Advanced Permissions" - the ability to set default access levels and member-specific access levels for projects and resources.
+
+Enterprise adds role-based access control for managing access for groups of organization members.
+
+| Feature | Free | Teams | Enterprise |
+|---------|------|--------|------------|
+| Organization access levels | <span className="text-green text-lg">✔</span> | <span className="text-green text-lg">✔</span> | <span className="text-green text-lg">✔</span> |
+| Project access control (default and member-specific) | <span className="text-red text-lg">✖</span> | <span className="text-green text-lg">✔</span> | <span className="text-green text-lg">✔</span> |
+| Resource access control (default and member-specific) | <span className="text-red text-lg">✖</span> | <span className="text-green text-lg">✔</span> | <span className="text-green text-lg">✔</span> |
+| Role-based access control (for projects and resources) | <span className="text-red text-lg">✖</span> | <span className="text-red text-lg">✖</span> | <span className="text-green text-lg">✔</span> |

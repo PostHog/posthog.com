@@ -37,9 +37,9 @@ If you're setting up a proxy to protect your PostHog instance and prevent access
 | ------------------ | -------------------------------------------------------------------------------------------- |
 | `/batch`           | Endpoint for ingesting/capturing events.                                                     |
 | `/decide`          | Endpoint that enables autocapture, session recording, feature flags & compression on events. |
-| `/capture`         | Endpoint for ingesting/capturing events.                                                     |
-| `/e`               | Endpoint for ingesting/capturing events.                                                     |
-| `/engage`          | Endpoint for ingesting/capturing events.                                                     |
+| `/i/v0/e`          | Endpoint for ingesting/capturing events.                                                     |
+| `/capture`         | Legacy endpoint for ingesting/capturing events. Use `/i/v0/e` instead.                       |
+| `/engage`          | Legacy endpoint for ingesting/capturing events. Use `/i/v0/e` instead.                       |
 | `/s`               | Endpoint for capturing session recordings.                                                   |
 | `/static/array.js` | Frontend javascript code that loads `posthog-js`.                                            |
 | `/static/recorder-v2.js`| Frontend javascript code that loads recordings v2 in `posthog-js`.                      |

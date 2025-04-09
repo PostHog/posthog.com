@@ -29,7 +29,6 @@ import {
     IconDownload,
     IconDatabase,
     IconHandMoney,
-    IconAI,
     IconDecisionTree,
     IconRetention,
     IconUserPaths,
@@ -53,6 +52,11 @@ import {
     IconArrowLeft,
     IconArrowRight,
     IconHeadset,
+    IconPiggyBank,
+    IconBell,
+    IconArchive,
+    IconCheck,
+    IconStack,
 } from '@posthog/icons'
 import CloudinaryImage from 'components/CloudinaryImage'
 import useProducts from 'hooks/useProducts'
@@ -65,6 +69,7 @@ import { AnimatePresence, motion } from 'framer-motion'
 import Slider from 'components/Slider'
 import { PlayerEvents, DotLottiePlayer } from '@dotlottie/react-player'
 import { MenuContainer } from 'components/PostLayout/MobileNav'
+import Link from 'components/Link'
 
 type Product = {
     name: string
@@ -209,6 +214,34 @@ const products: Product[] = [
         status: 'Production',
     },
     {
+        name: 'Error tracking',
+        // lottieSrc: '/lotties/product-icons/error-tracking.lottie',
+        color: 'orange',
+        Icon: IconWarning,
+        description: 'Track errors and resolve issues',
+        pricingKey: 'error_tracking',
+        types: ['Engineering'],
+        features: [
+            { title: 'Receive alerts', Icon: IconBell },
+            { title: 'Triage & assign', Icon: IconArchive },
+            { title: 'Organize & prioritize', Icon: IconCheck },
+            { title: 'Stack traces', Icon: IconStack },
+        ],
+        Images: () => {
+            return (
+                <>
+                    <div className="block dark:hidden">
+                        <CloudinaryImage src="https://res.cloudinary.com/dmukukwp6/image/upload/error_light_mode_a8704c77e6.png" />
+                    </div>
+                    <div className="hidden dark:block">
+                        <CloudinaryImage src="https://res.cloudinary.com/dmukukwp6/image/upload/error_dark_mode_390e70af6d.png" />
+                    </div>
+                </>
+            )
+        },
+        status: 'Production',
+    },
+    {
         name: 'Experiments',
         lottieSrc: '/lotties/product-icons/ab-testing.lottie',
         color: 'purple',
@@ -221,6 +254,18 @@ const products: Product[] = [
             { title: 'Targeting & exclusion rules ', Icon: IconTarget },
             { title: 'Dynamic cohort support', Icon: IconPeople },
         ],
+        Images: () => {
+            return (
+                <>
+                    <div className="block dark:hidden">
+                        <CloudinaryImage src="https://res.cloudinary.com/dmukukwp6/image/upload/exp_screenshot_light_9c4b4890a5.png" />
+                    </div>
+                    <div className="hidden dark:block">
+                        <CloudinaryImage src="https://res.cloudinary.com/dmukukwp6/image/upload/exp_screenshot_dark_a595173bb4.png" />
+                    </div>
+                </>
+            )
+        },
         status: 'Production',
     },
     {
@@ -325,10 +370,10 @@ const products: Product[] = [
             )
         },
         status: 'WIP',
-        badge: 'ALPHA',
+        badge: 'BETA',
         pricing: {
             cta: {
-                url: 'https://app.posthog.com/home#panel=feature-previews',
+                url: 'https://app.posthog.com/#panel=feature-previews%3Allm-observability',
                 text: 'Try it out',
             },
         },
@@ -338,8 +383,17 @@ const products: Product[] = [
         color: 'blue',
         Icon: IconSend,
         types: ['Marketing'],
-        status: 'Roadmap',
+        status: 'WIP',
         roadmapID: 1999,
+    },
+
+    {
+        name: 'Revenue analytics',
+        Icon: IconPiggyBank,
+        color: 'orange',
+        types: ['Sales'],
+        status: 'WIP',
+        roadmapID: 2206,
     },
     {
         name: 'Product tours',
@@ -350,12 +404,23 @@ const products: Product[] = [
         roadmapID: 2111,
     },
     {
-        name: 'Heatmaps 2.0',
+        name: 'Heatmaps',
         Icon: IconApp,
         color: 'yellow',
         types: ['Marketing'],
-        status: 'WIP',
-        roadmapID: 2165,
+        status: 'Production',
+        description: 'Visually track user interactions, clicks, and scrolling behavior.',
+        Images: () => {
+            return (
+                <CloudinaryImage src="https://res.cloudinary.com/dmukukwp6/image/upload/v1716592885/posthog.com/contents/docs/toolbar/settings.png" />
+            )
+        },
+        features: [
+            { title: 'Click tracking', Icon: IconApp },
+            { title: 'Scroll depth', Icon: IconApp },
+            { title: 'Rage clicks', Icon: IconApp },
+            { title: 'Mouse movement', Icon: IconApp },
+        ],
     },
     {
         name: 'Product roadmaps',
@@ -372,14 +437,6 @@ const products: Product[] = [
         types: ['Marketing'],
         status: 'WIP',
         roadmapID: 1809,
-    },
-    {
-        name: 'Error tracking',
-        Icon: IconWarning,
-        color: 'yellow',
-        types: ['Engineering'],
-        status: 'WIP',
-        roadmapID: 2017,
     },
     {
         name: 'Prompt evaluation',
@@ -426,7 +483,7 @@ const products: Product[] = [
         Icon: IconHeadset,
         color: 'green',
         types: ['Sales'],
-        status: 'Roadmap',
+        status: 'WIP',
         roadmapID: 2110,
     },
 ]
@@ -489,7 +546,7 @@ const RoadmapProductDetails = ({
                 <div className="mt-4">
                     {isLoading ? (
                         <div className="h-64 bg-accent dark:bg-dark rounded-md animate-pulse" />
-                    ) : (
+                    ) : roadmap ? (
                         <Feature
                             id={roadmap.id}
                             {...roadmap.attributes}
@@ -497,7 +554,7 @@ const RoadmapProductDetails = ({
                             onLike={mutate}
                             onUpdate={mutate}
                         />
-                    )}
+                    ) : null}
                 </div>
             </div>
         </div>
@@ -852,34 +909,47 @@ export default function Hero(): JSX.Element {
                 </Slider>
             </div>
             <div className="flex px-2 md:px-0 md:space-x-6 items-start">
-                <ul className="flex-1 grid grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-x-2 gap-y-6 lg:gap-y-8 md:gap-4 list-none m-0 p-0 flex-grow flex-shrink-0">
-                    {groupedProducts.map(([type, products]) =>
-                        type === 'Sales' ? null : (
-                            <li key={type}>
-                                <ProductButton
-                                    type={type}
-                                    products={products}
-                                    activeProduct={activeProduct}
-                                    activeStatus={activeStatus}
-                                    setActiveProduct={setActiveProduct}
-                                    setProductModalOpen={setProductModalOpen}
-                                />
-                                {type === 'Support' ? (
-                                    <div className="mt-2">
-                                        <ProductButton
-                                            type={'Sales'}
-                                            products={groupedProducts.find(([type]) => type === 'Sales')[1]}
-                                            activeProduct={activeProduct}
-                                            activeStatus={activeStatus}
-                                            setActiveProduct={setActiveProduct}
-                                            setProductModalOpen={setProductModalOpen}
-                                        />
-                                    </div>
-                                ) : null}
-                            </li>
-                        )
-                    )}
-                </ul>
+                <div className="@container flex-1">
+                    <ul className="grid @sm:grid-cols-2 @xl:grid-cols-3 md:gap-x-2 gap-y-6 @2xl:gap-y-8 @3xl:gap-y-10 list-none m-0 p-0 flex-grow flex-shrink-0 sm:max-h-[65vh] overflow-y-auto">
+                        {groupedProducts.map(([type, products]) =>
+                            type === 'Sales' || type === 'Business' ? null : (
+                                <li key={type}>
+                                    <ProductButton
+                                        type={type}
+                                        products={products}
+                                        activeProduct={activeProduct}
+                                        activeStatus={activeStatus}
+                                        setActiveProduct={setActiveProduct}
+                                        setProductModalOpen={setProductModalOpen}
+                                    />
+                                    {type === 'Support' ? (
+                                        <>
+                                            <div className="mt-6 md:mt-2">
+                                                <ProductButton
+                                                    type={'Sales'}
+                                                    products={groupedProducts.find(([type]) => type === 'Sales')[1]}
+                                                    activeProduct={activeProduct}
+                                                    activeStatus={activeStatus}
+                                                    setActiveProduct={setActiveProduct}
+                                                    setProductModalOpen={setProductModalOpen}
+                                                />
+                                            </div>
+                                        </>
+                                    ) : null}
+                                </li>
+                            )
+                        )}
+                    </ul>
+
+                    <div className="mr-8 mx-4 md:mx-0">
+                        <p className="text-sm text-primary/70 dark:text-primary-dark/70 mt-8 pb-3 mb-0">
+                            Each product offers the lowest pricing vs. every competitor at scale.
+                        </p>
+                    </div>
+                    <div className="border-t border-border dark:border-dark pt-3 mx-4 md:mx-0 text-sm text-primary/70 dark:text-primary-dark/70">
+                        Just starting out? <Link to="/founder-stack">Explore our founder stack.</Link>
+                    </div>
+                </div>
                 <div className="hidden md:block flex-[0_0_550px]">
                     {activeProduct && (
                         <div>

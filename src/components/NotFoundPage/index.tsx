@@ -14,9 +14,9 @@ export default function NotFoundPage(): JSX.Element {
     useEffect(() => {
         // Fetch the JSON file from the external domain
         fetch('https://res.cloudinary.com/dmukukwp6/raw/upload/astrohog_a46fc15855.json')
-            .then(response => response.json())
-            .then(data => setHogData(data))
-            .catch(error => console.error('Error loading animation data:', error))
+            .then((response) => response.json())
+            .then((data) => setHogData(data))
+            .catch((error) => console.error('Error loading animation data:', error))
 
         // Capture the event only if posthog is available
         if (posthog) {
@@ -79,7 +79,7 @@ export default function NotFoundPage(): JSX.Element {
                         </CallToAction>
 
                         <p className="mt-8 text-sm text-white/70">
-                            Think this is a mistake? {' '}
+                            Think this is a mistake?{' '}
                             <a href="https://github.com/PostHog/posthog.com/issues" className="text-yellow">
                                 Raise an issue
                             </a>{' '}

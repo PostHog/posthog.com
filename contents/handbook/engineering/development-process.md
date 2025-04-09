@@ -49,29 +49,21 @@ If this is a big feature which will need an announcement, content, or other mark
 
 The owner turns the ambiguous milestone into a roadmap of ambitious, meaningful, sprint-sized goals, thinking 2 - 3 sprints ahead to give other functions time. [Goal principles](/handbook/engineering/development-process#set-some-milestones) still apply.
 
-### Execute on goals
+### Iterate through the work
 
-Our sprint planning session is where the high-level goals for the next sprint get decided. Each team takes these, breaks them down, and adds their own smaller items, like bugfixes.
+We used to have company-wide sprint planning sessions but as we've grown there were so many teams that it started being plan-reading and not planning.
 
-Sprint planning works like this:
-* During the week of the sprint planning, teams (with the help of the product managers) define one or two big ambitious goals for this sprint that align with major milestones.
-* On Wednesday we get together. We use breakout rooms to split into the small teams, and each team finalizes the ambitious goals that they want to tackle.
-* We come back in the same room, where
-* We do a quick retrospective on the goals for the last sprint (did we get everything done? Should we have prioritized other things?)
-* Each team lead presents the main goals for their team. We have an open discussion about whether the goals are the right goals for this sprint and whether they are ambitious enough.
-* Each goal should have a single owner.
+PostHog works in two week iterations. Each team plans their work together and adds their sprint plan to [a pinned issue in GitHub](https://github.com/PostHog/posthog/issues?q=sort%3Aupdated-desc%20is%3Aissue%20is%3Aopen%20%20). If the issue for the next iteration doesn't exist when you come to comment on it then you create it.
 
-This meeting is also a chance to coordinate any cross-team dependencies. These should be the exception, not the rule. 
+When planning your work you should also have a retrospective for the previous iteration. Like most things at PostHog this can be a very low ceremony retro and ideally checking the team is working on the right things in the right way is a frequent thing not a once a fortnight thing.
 
-As one of our values is [stepping on toes](/handbook/company/values#step-on-toes), during the sprint you might come across something that should be much higher priority than what was already planned. It's up to you to then decide to work on that as opposed to what was agreed in the sprint planning session.
+Work in the iteration should:
 
-After the sprint planning, each team should have their own session (can be async!) where they:
+* be concrete and probably achievable in 2 weeks
+* have a clear owner in the team
+* have a clear link to the team or company goals
 
-* Do a detailed retrospective.
-* Divide up goals between members of the team.
-* Prioritize any other work (Support Hero, smaller features, bug fixes, refactoring, etc.).
-  - The split between big ambitious goals and 'other work' should very roughly be about 2/3 to 1/3
-  - If we only 'scrape' the previous goal, we should split 1/2 on a new big goal and 1/2 on finishing off the previous goal and other work
+As one of our values is [stepping on toes](/handbook/company/values#step-on-toes), during the iteration you might come across something that should be much higher priority than what was already planned. It's up to you to then decide to work on that as opposed to what was agreed in the planning session.
 
 ### Evaluate success 
 
@@ -106,7 +98,7 @@ PRs should ideally be sized to be doable in one day, including code review and Q
 Sometimes, tasks need a few review cycles to get resolved, and PRs remain open for days. This is not ideal, but it happens. What else can you do to make sure your code gets merged quickly? 
 
 - First, start your own day by responding to review requests from colleagues, and unblocking their work. This builds goodwill and encourages them to also review your code in priority. Otherwise, if everybody jumps to implement new features before reviewing WIP, we will end up with [three](https://github.com/PostHog/posthog/pull/6717), [different](https://github.com/PostHog/posthog/pull/6722), [PRs](https://github.com/PostHog/posthog/pull/6766), all for the same thing.
-- Test your code. Always read through your PR's changed lines, and test everything yourself, before handing it over for review. Remember that your colleagues are busy people, and you must do what you can to save their time. There's nothing more annoying than an extra 30min review cycle that starts with *"Almost there, just it's all black now, and remove that console.log please"*.
+- Test your code. Always read through your PR's changed lines, and test everything yourself, before handing it over for review. Remember that your colleagues are busy people, and you must do what you can to save their time. There's nothing more annoying than an extra 30 min review cycle that starts with *"Almost there, just it's all black now, and remove that console.log please"*.
 - Help your reviewer by leaving comments that help them review trickier bits. Better yet, write these directly into the code, either as comments or by clearly labelling your variables.
 - It's always good to put new features behind [feature flags](/docs/user-guides/feature-flags). It's even better to develop partial features behind feature flags. As long as it's clear what needs to be done before a flag can be lifted, you can usually get the smallest bit of any new feature out in a day this way.
 - Don't be afraid to restart from scratch if the PR gets out of hand. It's a bit of time lost for you, but a lot of time saved for the reviewer if they get a clean PR to review.

@@ -43,41 +43,48 @@ const WelderHog = () => {
 
 const examples = [
     {
-        title: 'Evaluate feature flags from anywhere',
-        endpoint: 'feature_flags',
-        description: (
-            <>
-                If you don't use one of our <Link to="/docs/getting-started/install?tab=sdks">SDKs</Link>, you can get a
-                flag status for a user from the API on-the-fly.
-            </>
-        ),
-    },
-    {
-        title: 'Pull basic site stats from saved insights',
-        endpoint: 'insights',
-        description: (
-            <>
-                Show stats like <em>active users</em>, <em>pageviews</em>, or <em>number of daily signups</em> (like we
-                use near the bottom of this page!).
-            </>
-        ),
-    },
-    {
         title: 'User-facing analytics',
-        endpoint: 'insights',
-        description: 'Build your own visualizations of insights within your own app or internal dashboard.',
+        endpoint: 'query',
+        description:
+            'Query data captured into PostHog to show analytics for your users. Create your own visualizations and let PostHog fill in the data.',
     },
     {
-        title: 'Read/write user properties and display in your app',
-        endpoint: 'persons',
+        title: 'Use event-based functionality',
+        endpoint: 'capture',
         description:
-            'Use PostHog as an external database by storing/reading user data and showing it in their user profile.',
+            'Send events, track behavior, identify users, combine them, update person properties, modify groups, and more all via the API.',
     },
     {
-        title: 'Add high-value users to a cohort',
-        endpoint: 'cohorts',
-        description:
-            "If you're running Clearbit on new signups, you can automatically add them to a cohort based on criteria from enrichment services.",
+        title: 'Evaluate feature flags anywhere',
+        endpoint: 'decide',
+        description: (
+            <>
+                Even if you don't use one of our <Link to="/docs/getting-started/install?tab=sdks">SDKs</Link>, you can
+                get a flag status for a user from the API on-the-fly. Works for all types of flags from boolean to
+                multi-variate.
+            </>
+        ),
+    },
+    {
+        title: 'Migrate from other tools',
+        endpoint: 'batch',
+        description: (
+            <>
+                Batch events to move them en masse <Link to="/docs/migrate">from your old tool</Link> for use in PostHog
+                (for free). Visualize them in PostHog alongside your newly captured events.
+            </>
+        ),
+    },
+    {
+        title: 'Create custom reports',
+        endpoint: 'query',
+        description: (
+            <>
+                Show stats like <em>active users</em>, <em>pageviews</em>, or <em>daily signups</em> (like we use near
+                the bottom of this page). Import data in <Link to="/docs/data-warehouse">our data warehouse</Link> and
+                query together.
+            </>
+        ),
     },
     {
         title: 'Notate when a feature is released',

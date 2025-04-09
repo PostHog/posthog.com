@@ -10,7 +10,7 @@ PostHog is a lean organization - the less we spend, the more time we have to mak
 
 **Please spend money in a way that you think is in the best interests of the company. **
 
-If it's a trivial expense, just buy it. We provide you with a company card with a $1,000/month spending limit for this reason. We use Brex for everyone, and also provide UK team members with an additional Revolut card. 
+If it's a trivial expense, just buy it. We provide you with a company card to cover 99% of the spending you might need to do. We use Brex for everyone, and also provide UK team members with an additional Revolut card. 
 
 > Need a one off budget increase? You can do this directly within Brex - just request the amount and duration for the relevant budget in the app, and the People & Ops team will automatically be notified for approval. 
 
@@ -69,12 +69,16 @@ PostHog is an all-remote company. This means it's important you have an ergonomi
 
 PostHog will provide you with office equipment. Please note that it remains PostHog's property.
 
+### YubiKey
+
+We enforce the use of hardware security keys wherever we can. Every team member needs two Yubikeys. You can find them on Amazon, and we suggest you order them at the same time you purchase your laptop. You can read more about security keys in the [multi-factor authentication entry](https://posthog.com/handbook/company/security#multi-factor-authentication). 
+
 ### Laptop
 
 We'd prefer you to use a laptop. This is so when we host meetups in real life, you can easily bring your work with you. You should use an Apple laptop unless there is an exceptional reason why you can't, just to keep life simpler - for example, that means everyone can use the same software, and as we get bigger, it'll mean we're dealing with one supplier, not many. Please make sure you order a laptop with a keyboard that is US/UK/International English - this makes it much easier for us to reuse your laptop if you upgrade to another model or leave PostHog. 
 
 * For engineering roles, we recommend a Macbook Pro 14-inch M4 Pro, with the 12-core CPU, 16-core GPU upgrade and 48GB of RAM. By default grab the smallest SSD (512gb), but you can upgrade if you need to.
-* For all other roles, we currently recommend a Macbook Air with an Apple Silicon (M2) processor and 16GB of RAM.
+* For all other roles, we currently recommend a Macbook Air with the latest Apple Silicon processor and 16GB of RAM.
 
 These are just general guidelines - the most important thing is that you select the model that is appropriate for _your_ needs. If your requirements are different to the guidelines above please just ask Fraser.
 
@@ -86,7 +90,9 @@ If you are in the US only, when buying something at Apple we can get 3% cashback
 
 Also, Amazon regularly offer discounts on Apple products of around 10%, so always worth a check before buying direct from Apple. If you buy from Apple, you may be asked if you wanted to purchase Apple Care - please don't buy this as it's not great value for money.
 
-> You can request a budget to buy a new laptop every 4 years - you can do this in Brex. If you are having issues with your laptop before that and a genuine exception needs to be made, drop a note in the #team-people-and-ops channel. 
+> You can request a budget to buy a new laptop if your laptop is over 4 years old - you can do this in Brex. We do ask that you do some diligence to make sure it's not a setup issue though - ie other applications aren't hogging the memory, etc. We recommend wiping + reinstalling a minimum set of apps to verify this. 
+>
+> If you are having issues with your laptop before your laptop is old enough and a genuine exception needs to be made, drop a note in the #team-people-and-ops channel. 
 
 ### Monitor
 
@@ -179,14 +185,16 @@ We have a company WeWork All Access account that allows you to book desks in any
 
 ## Travel
 
-If you need to travel on PostHog’s behalf (e.g. in person onboarding, meeting customers, working on a specific project), again please spend money in the best interests of the company. 
+If you need to travel on PostHog’s behalf for in-person onboarding, meeting customers, and offsites, again please spend money in the best interests of the company. 
 
 We do not pre-approve your travel expenses, and trust team members to make the right decisions here. Some guidance:
 - We all travel economy by default- we cannot afford for folks to fly premium or business class. Feel free to upgrade using your personal money/airmiles if you’d like to. If you are particularly tall and struggle to fit into an economy seat, PostHog will cover the cost of an emergency exit seat. 
 - Be sensible when considering the value of your time, and avoid over-optimizing for cost. It is probably not worth saving $100 to take a non-direct flight that takes you 5hrs extra. Similarly, it doesn’t make sense to save $50 by taking a flight that leaves at 6am, only to have to expense a taxi to get to the airport.
 - Related to the above, consider signing up for programs like Global Entry if you are regularly travelling to countries that offer it- these can pay for themselves in one trip with the amount of time saved, particularly when travelling to the US. PostHog will cover costs here.
+- When travelling internationally, PostHog does not cover roaming charges for your phone. You can expense a reasonable eSIM, which usually is no more than $20.
+- PostHog has international insurance for our work trips, so you will not need to buy travel insurance when travelling on behalf of PostHog.
 
-If you have any questions about this stuff, or are unsure what is reasonable here, feel free to check in with Fraser.
+> If you find yourself needing to do extra travel outside of the regular things listed above, e.g. you've been asked to take a last minute trip to work on an emergency project, we may pay for a nicer seat here, especially if you are travelling at very short notice or long haul. Talk to Fraser in the first instance if you think this may apply to you. This is intended for genuine one-offs, not where you've decided you'd like to come along to an extra offsite!
 
 ### Budget for working together/socializing
 

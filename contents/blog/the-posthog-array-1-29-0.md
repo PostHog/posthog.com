@@ -58,7 +58,7 @@ Feature flags just got a lot more powerful! Forget A/B testing, introducing A/B/
 
 ### Private projects
 
-Extra concerns on privacy or compliance? Private projects now allow you to limit access to select team members. Learn more on [our docs](/docs/user-guides/organizations-and-projects#private-projects).
+Extra concerns on privacy or compliance? Private projects now allow you to limit access to select team members. Learn more on [our docs](/docs/settings/access-control).
 
 <img src="https://posthog-static-files.s3.us-east-2.amazonaws.com/Website-Assets/Array/1_29_0-private-project.png" alt="" />
 

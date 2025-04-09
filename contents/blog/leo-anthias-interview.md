@@ -54,7 +54,7 @@ This obsession with fit extends to hiring, too. Leo looks for humility in candid
 
 > _"Sometimes you're interviewing someone and it becomes very obvious that it was everyone else's fault every step of their career where something didn't go a certain way. It's good to have constructive criticism of previous places you've worked, but with some people, it does seem there is a history of them being toxic or negative about previous employers, which isn't really what you want to hear in an interview."_ **- Leo Anthias**
 
-Calling in from his home in [Frome](https://www.discoverfrome.co.uk/frome), about 45mins away from Bristol, England, Leo is a vintage keyboard enthusiast who struggles to find time to play his instruments. 
+Calling in from his home in [Frome](https://www.discoverfrome.co.uk/frome), about 45 mins away from Bristol, England, Leo is a vintage keyboard enthusiast who struggles to find time to play his instruments. 
 
 > _"I would like to play them more, but I find that the more things you have and the more clutter, it's actually harder to produce anything useful."_ **- Leo Anthias**
 

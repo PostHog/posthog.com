@@ -58,7 +58,7 @@ We recommend hosting PostHog on your own infrastructure. If you’re leveraging 
 Follow our [standard deployment guides](/docs/self-host) to get started deploying PostHog. This is a technical task which requires some engineering knowledge. 
 
 **Step 3: Security configuration**
-We strongly recommend that you use HTTPS to secure data in transmission, whether or not your instance has access to the wider internet. We also have a [guide for securing PostHog](https://posthog.com/docs/self-host/configure/securing-posthog) which you should follow to further protect your instance. We recommend you limit access to your self-hosted deployment, including shared dashboard links and subscriptions, as well as caution when installing, building and enabling [apps](/docs/apps).
+We strongly recommend that you use HTTPS to secure data in transmission, whether or not your instance has access to the wider internet. We also have a [guide for securing PostHog](/docs/self-host/configure/securing-posthog) which you should follow to further protect your instance. We recommend you limit access to your self-hosted deployment, including shared dashboard links and subscriptions, as well as caution when installing, building and enabling [apps](/docs/apps).
 
 ### Further reading
 

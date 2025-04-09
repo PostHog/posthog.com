@@ -19,7 +19,7 @@ export function toFixedMin(num: number, minDecimals: number): string {
 }
 
 export function flattenStrapiResponse(response: any): any {
-    if (!response) return null
+    if (response === null) return null
 
     if (Array.isArray(response)) {
         return response.map((item) => flattenStrapiResponse(item))

@@ -8,7 +8,7 @@ The most common solution is...
 
 ### Update the PostHog snippet or JavaScript Web SDK
 
-Surveys requires either the latest version of the [PostHog snippet](/docs/libraries/js#option-1-add-the-javascript-snippet-to-your-html) or version 1.81.3 or greater of `posthog-js` to be installed on your website.
+Surveys requires either the latest version of the [PostHog snippet](/docs/libraries/js#installation) or version 1.81.3 or greater of `posthog-js` to be installed on your website.
 
 We're always making improvements to the surveys feature, so you'll want to make sure that you're running the latest version.
 
@@ -24,9 +24,9 @@ If updating PostHog doesn't solve your problem, there are a few reasons why your
 
 ### 1. Configuration is off
 
-Surveys are enabled through the surveys opt in toggle in the [app](https://app.posthog.com/surveys). If you're not seeing any surveys, make sure that this toggle is enabled.
+If you're not seeing any surveys, make sure that the `disable_surveys` SDK configuration isn't set to `true`.
 
-You can read more about [`posthog-js` configurations here](/docs/integrate/client/js#config).
+You can read more about [`posthog-js` configurations here](/docs/libraries/js/config).
 
 > **Note:** Surveys make use of feature flags internally when determining if a user should be presented with a survey. If your SDK configuration sets `advanced_disable_feature_flags` to `true`, this will also disable surveys for all users.
 
@@ -49,9 +49,25 @@ Some ad or tracking blockers block PostHog from fetching `posthog-js`. If you're
 
 In production, using a [reverse proxy](/docs/advanced/proxy) can help prevent this.
 
+## Survey response is not showing up on my [custom insight, webhook or action]
+
+Since February 25, [we changed the way that survey responses are captured](/docs/surveys/implementing-custom-surveys#survey-response-capture). If you're not seeing them, it's might be because the `$survey_response` property is no longer captured.
+
+To fix this, you need to now use the format `event.properties['$survey_response_<question_id>']` to access the survey response.
+
+For example, if your survey has a single question with the ID `a3071551-d599-4eeb-9ffe-69e93dc647b6`, you need to use `event.properties['$survey_response_a3071551-d599-4eeb-9ffe-69e93dc647b6']` to access the response.
+
+For custom insights or SQL usage, **you can use built-in SQL function `getSurveyResponse(question_index, question_id, is_multiple_choice)`**.
+
+- `question_index` is the 0-based position of the question in the survey. So the first question has an index of 0, the second has an index of 1, etc.
+- `question_id` is the ID of the question. Optional - use if if not all responses are being shown with only the index. This takes precedence over `question_index`. If you use the `question_id` parameter, the value for `question_index` is ignored.
+- `is_multiple_choice` is a boolean that is `true` if the question is a multiple choice question, and `false` otherwise. Optional, only needed for multiple choice questions. This is necessary because multiple choice questions are stored differently - as an array of strings instead of a single string.
+
 ## Debugging surveys in console
 
-You can call `getActiveMatchingSurveys` in your browser console to see which surveys are currently active for the user. If the method doesn't exist, it means that you're not running the latest version of `posthog-js`.  
+[Enable debugging](/docs/libraries/js#debugging) to check the dev logs in your dev console.
+
+You can call `getActiveMatchingSurveys` in your browser console to see which surveys are currently active for the user. If the method doesn't exist, it means that you're not running the latest version of `posthog-js`.
 
 ```js
 posthog.getActiveMatchingSurveys(surveys => console.log(surveys))
@@ -73,7 +89,7 @@ Check your `posthog-js` version.  If its lower than `v1.151.0`, please upgrade y
 
 If you're seeing: `Update survey failed: Cohort with behavioral filters cannot be used in feature flags.` or similar, it's because surveys are powered by feature flags for person property targeting.
 
-Currently we do not support behavioral cohorts in flags which is why you might see an error if setting a person property that contains a behavioral cohort in your survey.
+Currently [we do not support dynamic cohorts in flags](/docs/data/cohorts#can-you-use-a-dynamic-behavioral-cohort-as-a-feature-flag-target), which is why you might see an error if setting a person property that contains a dynamic cohort in your survey. Upvote [this issue](https://github.com/PostHog/posthog/issues/19031) if this would be useful for you.
 
 #### Will I be double charged for feature flags if I use surveys?
 

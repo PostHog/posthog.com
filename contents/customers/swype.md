@@ -28,7 +28,7 @@ Analytics was an early need, but it wasn’t the only tool the team was interest
 
 “The thing about mobile app development is you want to really reduce complexity and the number of buttons per page,” explains David. “But then it’s hard to spot in the data alone when you’re so close to what you’re building. Session replays are great because you can just _see_ what’s happening: I can see them clicking things again and again in frustration.”
 
-Tempted by the monthly allowance of 5,000 free replays, David quickly deployed PostHog mobile replays using [the iOS SDK](/docs/libraries/ios) and using it alongside product
+Tempted by the monthly allowance of 2,500 free replays, David quickly deployed PostHog mobile replays using [the iOS SDK](/docs/libraries/ios) and using it alongside product
 
 ### One reason why PostHog is better than Netflix
 

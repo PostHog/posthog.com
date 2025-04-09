@@ -8,7 +8,7 @@ showTitle: true
 sidebar: Docs
 tags:
   - insights
-  - hogql
+  - sql
   - product analytics
   - web analytics
 ---
@@ -130,7 +130,7 @@ FROM raw_session_replay_events
 ## Further reading
 
 - [Calculating average session duration, time on site, and other session-based metrics](/tutorials/session-metrics)
-- [Using HogQL for advanced time and date filters](/tutorials/hogql-date-time-filters)
-- [Using HogQL for advanced breakdowns](/tutorials/hogql-breakdowns)
+- [Using SQL for advanced time and date filters](/tutorials/hogql-date-time-filters)
+- [Using SQL for advanced breakdowns](/tutorials/hogql-breakdowns)
 
 <NewsletterForm />

@@ -46,8 +46,8 @@ Right now, support engineers provide the first level of support for the followin
 - Surveys
 - Experiments
 - Data warehouse
-- Customer success
-- Data pipelines
+- Customer Success
+- Surveys
 - Batch exports
 
 Support engineers respond to and solve as many tickets as they can for these products, or escalate tickets to the appropriate product engineer if needed. For all other products, the engineers on those teams are directly responsible for support. The support runbook is maintained on the [Support Hero page](/handbook/engineering/support-hero). 
@@ -102,9 +102,8 @@ Tickets are considered normal priority if they fulfill ANY of the following cond
 - The customer is subscribed to the `Ridiculously cheap` plan
 - The customer is on a PostHog for Startups or Y Combinator plan
 - The customer is raising a billing issue
-- The ticket is listed as high severity
 
-This ensures that most paying users get appropriately rapid support and that all billing issues are ensured to get a response. Free users can raise high impact bugs or issues to an appropriate level.
+This ensures that most paying users get appropriately rapid support and that all billing issues are ensured to get a response.
 
 #### Low priority 
 **Response target: N/A**

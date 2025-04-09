@@ -73,6 +73,12 @@ const query = (id: string | number, isModerator: boolean) =>
                                 },
                             },
                         },
+                        upvoteProfiles: {
+                            fields: ['id'],
+                        },
+                        downvoteProfiles: {
+                            fields: ['id'],
+                        },
                         profile: {
                             fields: ['id', 'firstName', 'lastName', 'gravatarURL', 'pronouns', 'color', 'startDate'],
                             populate: {

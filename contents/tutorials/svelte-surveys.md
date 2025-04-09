@@ -31,7 +31,7 @@ First, ensure [Node.js is installed](https://nodejs.dev/en/learn/how-to-install-
 npm create svelte@latest my-svelte-survey
 ```
 
-When prompted in the command line, choose `Skeleton project`, `No` to TypeScript, and none of the additional options. 
+When prompted in the command line, choose `Skeleton project`, `No` to TypeScript, and none of the additional options.
 
 Once created, go into your newly created `my-svelte-survey` folder and install the packages:
 
@@ -54,7 +54,7 @@ Run `npm run dev` and navigate to http://localhost:5173 to see your app in actio
 
 ## 2. Add PostHog
 
-We use PostHog to create and control our survey as well as monitor results. If you don't have a PostHog instance, you can [sign up for free here](https://us.posthog.com/signup). 
+We use PostHog to create and control our survey as well as monitor results. If you don't have a PostHog instance, you can [sign up for free here](https://us.posthog.com/signup).
 
 To start, install the [JavaScript web SDK](/docs/libraries/js):
 
@@ -62,7 +62,7 @@ To start, install the [JavaScript web SDK](/docs/libraries/js):
 npm i posthog-js
 ```
 
-In the `src/routes` folder, create a `+layout.js`. In this file, we check if the environment is the browser, and initialize PostHog if so. You can get both your API key and instance address in your [project settings](https://us.posthog.com/project/settings).  
+In the `src/routes` folder, create a `+layout.js`. In this file, we check if the environment is the browser, and initialize PostHog if so. You can get both your API key and instance address in your [project settings](https://us.posthog.com/project/settings).
 
 ```js file=routes/+layout.js
 import posthog from 'posthog-js'
@@ -83,9 +83,9 @@ export const load = async () => {
 Once you’ve done this, reload your app and click the button a few times. You should see events appearing in the [PostHog events explorer](https://us.posthog.com/events).
 
 <ProductScreenshot
-  imageLight={EventsLight} 
-  imageDark={EventsDark} 
-  alt="Events in PostHog" 
+  imageLight={EventsLight}
+  imageDark={EventsDark}
+  alt="Events in PostHog"
   classes="rounded"
 />
 
@@ -101,13 +101,13 @@ This tutorial will cover how to implement both options:
 ### Option 1: Use PostHog's prebuilt survey UI
 
 This is the simplest option. PostHog has a variety of [survey templates](/templates?filter=type&value=survey) to choose from, and handles all the display logic and response capture for you. You can also customize the questions, branding, and display conditions as needed – see our [survey docs](/docs/surveys/creating-surveys) for more details on how to do so.
- 
-To create a survey with a prebuilt UI, go to the [surveys tab](https://us.posthog.com/surveys) in PostHog and click "New survey". 
+
+To create a survey with a prebuilt UI, go to the [surveys tab](https://us.posthog.com/surveys) in PostHog and click "New survey".
 
 <ProductScreenshot
-  imageLight={ImgSurveyTemplatesLight} 
-  imageDark={ImgSurveyTemplatesDark} 
-  alt="PostHog survey templates" 
+  imageLight={ImgSurveyTemplatesLight}
+  imageDark={ImgSurveyTemplatesDark}
+  alt="PostHog survey templates"
   classes="rounded"
 />
 
@@ -240,7 +240,7 @@ This shows a survey popup every time you visit your app's homepage.
 
 #### 2. Fetch the survey from PostHog
 
-To fetch the active surveys, we use [`posthog.getActiveMatchingSurveys()`](/docs/libraries/js#surveys). This returns an array of survey objects that looks like this:
+To fetch the active surveys, we use [`posthog.getActiveMatchingSurveys()`](/docs/libraries/js/features#surveys). This returns an array of survey objects that looks like this:
 
 ```JSON
 [
@@ -346,7 +346,7 @@ We want to make sure we don't show the survey again to users who have either sub
 
 #### 4. Capture interactions from it.
 
-The final step in setting up our survey is capturing interactions. This enables us to analyze the results in PostHog. 
+The final step in setting up our survey is capturing interactions. This enables us to analyze the results in PostHog.
 
 There are 3 events to capture:
 
@@ -384,7 +384,13 @@ You can capture these events using `posthog.capture()`:
     localStorage.setItem(`hasInteractedWithSurvey_${surveyID}`, 'true');
     posthog.capture("survey sent", {
       $survey_id: surveyID, // required
-      $survey_response: `${event.detail.selectedValue}` // required. Convert numbers to string
+      $survey_response_a3071551-d599-4eeb-9ffe-69e93dc647b6: `${event.detail.selectedValue}`, // required. Convert numbers to string
+      $survey_questions: [
+        {
+          id: "a3071551-d599-4eeb-9ffe-69e93dc647b6",
+          question: "How likely are you to recommend us to a friend?",
+        }
+      ] // required for `getSurveyResponse` to work as expected
     })
   };
 
@@ -445,7 +451,13 @@ Altogether, your code should look like this:
     localStorage.setItem(`hasInteractedWithSurvey_${surveyID}`, 'true');
     posthog.capture("survey sent", {
       $survey_id: surveyID, // required
-      $survey_response: `${event.detail.selectedValue}` // required. Convert numbers to string
+      $survey_response_a3071551-d599-4eeb-9ffe-69e93dc647b6: `${event.detail.selectedValue}`, // required. Convert numbers to string
+      $survey_questions: [
+        {
+          id: "a3071551-d599-4eeb-9ffe-69e93dc647b6",
+          question: "How likely are you to recommend us to a friend?",
+        }
+      ] // required for `getSurveyResponse` to work as expected
     })
   };
 </script>
@@ -475,9 +487,9 @@ After interacting with your survey, you can view results by selecting the survey
 You can also filter these results based on [person properties](/docs/product-analytics/person-properties), [cohorts](/docs/data/cohorts), [feature flags](/docs/feature-flags/creating-feature-flags) and more.
 
 <ProductScreenshot
-  imageLight={ImgSurveyResultsLight} 
-  imageDark={ImgSurveyResultsDark} 
-  alt="Survey results" 
+  imageLight={ImgSurveyResultsLight}
+  imageDark={ImgSurveyResultsDark}
+  alt="Survey results"
   classes="rounded"
 />
 

@@ -33,7 +33,7 @@ Product OS comprises things like:
 
 - [Data pipelines](/docs/cdp), which enable you to transform your PostHog data and send it to other tools for monitoring, marketing automation, sales, and support
 
-- [HogQL](/docs/hogql), which grants you unrestricted access to your data via custom SQL queries for advanced, custom analysis
+- [SQL](/docs/sql), which grants you unrestricted access to your data via custom SQL queries for advanced, custom analysis
 
 - [Our infrastructure](/docs/how-posthog-works), which is built upon [ClickHouse](/handbook/engineering/clickhouse), an ultra-fast open-source database system built specifically for real-time data analysis
 

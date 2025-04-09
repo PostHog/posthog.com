@@ -1,12 +1,12 @@
 ---
-title: LLM traces and generations (beta)
+title: LLM traces and generations
 availability:
   free: full
   selfServe: full
   enterprise: full
 ---
 
-Once you install PostHog's LLM observabilty SDK, it autocaptures LLM generations and traces. You can then view these in PostHog.
+Once you install PostHog's LLM observability SDK, it autocaptures LLM generations and traces. You can then view these in PostHog.
 
 ## Generations
 

@@ -25,6 +25,7 @@ Below is an example of a relatively restrictive CSP that limits only scripts and
   default-src 'self'; 
   script-src 'self' https://*.posthog.com; 
   connect-src 'self' https://*.posthog.com;
+  worker-src 'self' blob: data:;
 ">
 ```
 
@@ -42,6 +43,7 @@ Depending on your compliance needs you can either:
   default-src 'self'; 
   script-src 'self' https://*.posthog.com; 
   connect-src 'self' https://*.posthog.com;
+  worker-src 'self' blob: data:;
   img-src 'self' https://*.posthog.com; 
   style-src 'self' https://*.posthog.com; 
   font-src https://*.posthog.com;
@@ -53,19 +55,24 @@ Depending on your compliance needs you can either:
 
 ## Supporting nonce directives
 
-You may choose to use a `nonce` in your CSP in order to ensure every script loaded has the matching `nonce` for the current page load. This can be done via config option in `posthog-js` like so:
+You may choose to use a `nonce` in your CSP in order to ensure every script/style loaded has the matching `nonce` for the current page load. This can be done via two config options in `posthog-js` like so:
 
 ```js
 posthog.init('<ph_project_api_key>', {
-  prepare_external_dependency_script = (script) => {
+  prepare_external_dependency_script: (script) => {
     script.nonce = '<your-nonce-value>'
     return script
+  },
+  prepare_external_dependency_stylesheet: (stylesheet) => {
+    stylesheet.nonce = '<your-nonce-value>'
+    return stylesheet
   }
 })
 ```
 
-This will modify the script to be loaded before they are inserted to the DOM. Be sure to understand fully the implications of using a `nonce` and to ensure that you are using the `npm` install method or modifying the snippet to also include this nonce value.
+This will modify the script/stylesheet to be loaded before they are inserted to the DOM. Be sure to understand fully the implications of using a `nonce` and to ensure that you are using the `npm` install method or modifying the snippet to also include this nonce value.
 
+Make sure you return the script/stylesheet or else we won't append it to the DOM.
 
 ## Domains used by PostHog clients
 
@@ -90,7 +97,7 @@ Our client SDKs (where appropriate) will take care of selecting the correct doma
 
 If you really want to have a restrictive CSP with the absolute bare minimum changes, you can bundle all required `posthog-js` dependencies as part of your own application JavaScript, ensuring there is no need to load extra scripts at runtime.
 
-1. Follow the instructions [here](/docs/libraries/js#advanced-option---bundle-all-required-extensions) to install `posthog-js` via npm with all bundled dependencies that you require.
+1. Follow the instructions to **bundle all required extensions** when [installing PostHog via a package manager](/docs/libraries/js#option-2-install-via-package-manager) or [install the snippet](/docs/libraries/js#option-1-install-via-snippet).
 2. Update your content security policy to only include the `connect-src` directive as below
 
 ```html
@@ -100,7 +107,7 @@ If you really want to have a restrictive CSP with the absolute bare minimum chan
 ">
 ```
 
-**NOTE**: This will not work with the toolbar and generally means your initial bundled JavaScript will be much larger depending on the dependencies you are including. It also means you will need to keep your version of `posthog-js` up to date. 
+**Note**: This will not work with the toolbar and generally means your initial bundled JavaScript will be much larger depending on the dependencies you are including. It also means you will need to keep your version of `posthog-js` up to date. 
 
 ### What if I use a reverse proxy?
 

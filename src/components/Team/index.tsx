@@ -485,7 +485,7 @@ export default function Team({ body, roadmaps, objectives, emojis, newTeam, slug
                                             {teamEmojis?.map(({ name, localFile }) => (
                                                 <li key={name}>
                                                     <Tooltip content={`:${name}:`}>
-                                                        <img className="w-8 h-8" src={localFile?.publicURL} />
+                                                        <img className="h-8" src={localFile?.publicURL} />
                                                     </Tooltip>
                                                 </li>
                                             ))}

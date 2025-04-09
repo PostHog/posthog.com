@@ -10,7 +10,7 @@ Prerequisites
 - You need access to the billing admin (billing.posthog.com).  Ask Raquel or Simon for access.
 
 Process for giving a customer a free trial:
-1. Log in to [Billing](billing.posthog.com/admin/) with your Google SSO login.
+1. Log in to [Billing](https://billing.posthog.com/admin/) with your Google SSO login.
 2. Click the `Trials` link on the left sidebar.
 3. Click the `Add Trial` button (top right).
 4. Fill out the trial form

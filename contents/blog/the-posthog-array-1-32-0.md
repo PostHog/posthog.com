@@ -76,7 +76,7 @@ Funnels with breakdowns just got a lot better. This new view enables you to quic
 -   Lifecycle query just got faster! We've also clarified how each of the groups (new, returning, resurrecting and dormant) in lifecycle are defined. [Read more](https://github.com/PostHog/posthog/pull/8021) on this.
 -   When your users are in multiple tabs, we'll now properly separate recordings so you can see what users were doing on each tab. Previously this could lead with a botched experience when playing back recordings.
 -   To improve query performance, the "All time" filter will now only consider events from 2015 onwards. We realized some instances had events with incorrect timestamps (frequently UNIX epoch [Jan 1, 1970]), which would lead to performance issues and hard to parse graphs.
--   [Multivariate Feature Flags](https://posthog.com/docs/user-guides/feature-flags#multivariate-feature-flags) are now out of Beta and generally available. This is a premium feature.
+-   [Multivariate Feature Flags](/docs/user-guides/feature-flags#multivariate-feature-flags) are now out of Beta and generally available. This is a premium feature.
 -   Fixed a bug when if a user joined an organization with private projects, they would get a broken experience (from being assigned to a project to which they don't have access).
 -   Improved performance and increase execution size for complex retention queries.
 -   Newly design Preflight page to update with our latest brand.

@@ -29,7 +29,7 @@ import BuiltBy from '../components/BuiltBy'
 import TeamMember from 'components/TeamMember'
 import CloudinaryImage from 'components/CloudinaryImage'
 import AskMax from 'components/AskMax'
-
+import ImageSlider from 'components/ImageSlider'
 const A = (props) => <Link {...props} className="text-red hover:text-red font-semibold" />
 
 export const Intro = ({
@@ -155,6 +155,7 @@ export default function BlogPost({ data, pageContext, location, mobile = false }
         NewsletterForm,
         BuiltBy,
         TeamMember,
+        ImageSlider,
         ...shortcodes,
     }
     const { tableOfContents, askMax } = pageContext

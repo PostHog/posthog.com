@@ -1,6 +1,7 @@
 ---
 title: Send PostHog analytics to Airtable
-templateId: template-airtable
+templateId:
+    - template-airtable
 ---
 
 import Requirements from "../_snippets/requirements.mdx"

@@ -69,7 +69,7 @@ Bugprove has enjoyed great success with its approach to influencer marketing so 
 
 “The challenge with influencer marketing in a niche is that there’s only so much scale before you reach the end of it,” says Dora. “Right now we see it as a great early boost to get the ball rolling, but we don’t have thousands of security research influencers to choose from.”
 
-As a result, Bugprove is always exploring new channels and trying to find new ways to reach its users. PostHog enables them to achieve this by tracking website traffic and conversions, while [HogQL](/docs/hogql) queries enable more powerful analysis when needed.
+As a result, Bugprove is always exploring new channels and trying to find new ways to reach its users. PostHog enables them to achieve this by tracking website traffic and conversions, while [SQL](/docs/sql) queries enable more powerful analysis when needed.
 
 “We use a lot of PostHog’s tools to research our users,” says Dora. “We use [session replays](/session-replay) to find where users get stuck…we use [analytics](/product-analytics) to track UTMs and [surveys](/docs/surveys) are on my to-do list too. Our big goal right now is more user interviews to find other ways to drive word-of-mouth too.”
 

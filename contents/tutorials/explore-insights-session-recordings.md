@@ -15,7 +15,7 @@ One of the biggest benefits of PostHog is the connections from all your product 
 
 In this tutorial, we focus on the connections session replays have with insights and visualizations. These connections enable deeper exploration and understanding of user behavior.
 
-> Session recordings require installing the [JavaScript library](https://posthog.com/docs/integrate/client/js) or [snippet](https://posthog.com/docs/integrate#snippet) and enabling "Record user sessions" in project settings under recordings.
+> Session recordings require installing the [JavaScript library](/docs/integrate/client/js) or [snippet](/docs/integrate#snippet) and enabling "Record user sessions" in project settings under recordings.
 
 ## Watching users through funnels
 

@@ -36,9 +36,9 @@ const examples = [
 export default function HogQL() {
     return (
         <section className="px-5 mb-10 md:mb-20 md:mb-0 max-w-6xl mx-auto">
-            <h2 className="text-4xl lg:text-5xl mb-4">HogQL</h2>
+            <h2 className="text-4xl lg:text-5xl mb-4">SQL access included</h2>
             <p className="text-lg md:font-semibold opacity-75">
-                HogQL is our translation layer over ClickHouse SQL. Use HogQL expressions to use JOINs and subqueries,
+                PostHog provides complete SQL access to your data. Use SQL expressions to use JOINs and subqueries,
                 filter event lists, and write complex queries (that aren't supported by the PostHog UI) to analyze data
                 in any way you want.
             </p>
@@ -75,7 +75,7 @@ export default function HogQL() {
                         })}
                     </ul>
                     <CallToAction to="/blog/introducing-hogql" type="secondary" className="">
-                        Learn more about HogQL
+                        Learn more about SQL access
                     </CallToAction>
                 </div>
             </div>

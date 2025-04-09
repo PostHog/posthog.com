@@ -52,11 +52,11 @@ We recommend using PostHog Cloud US for CCPA compliance. If self-hosting, the st
 
 If using PostHog Cloud, simply follow the steps in the onboarding process to start sending events. Read our [integration documentation](/docs/integrate) for more information on sending events to PostHog.
 
-Deploying PostHog onto your own infrastructure is straightforward but we do not provide support for self-hosted instances. You can follow our [standard deployment guides](https://posthog.com/docs/self-host) to get started. 
+Deploying PostHog onto your own infrastructure is straightforward but we do not provide support for self-hosted instances. You can follow our [standard deployment guides](/docs/self-host) to get started. 
 
 ### Step 3: Security configuration
 
-When setting up a PostHog instance **we strongly recommend that you use HTTPS** to secure data in transmission, whether or not your instance has access to the wider internet. We also have a [guide for securing PostHog](https://posthog.com/docs/self-host/configure/securing-posthog) which you should follow to further protect your instance.
+When setting up a PostHog instance **we strongly recommend that you use HTTPS** to secure data in transmission, whether or not your instance has access to the wider internet. We also have a [guide for securing PostHog](/docs/self-host/configure/securing-posthog) which you should follow to further protect your instance.
 
 We also strongly recommend that you limit access to PostHog and the infrastructure it is deployed on only to people who are authorized and need to access the data, including shared dashboard links. Although aggregate data in dashboards should not contain personal data, it may be possible for malicious users to infer personal data unless it is evaluated thoroughly via expert determination.
 

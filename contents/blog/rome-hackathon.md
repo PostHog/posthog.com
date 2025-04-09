@@ -25,7 +25,7 @@ We are showcasing them here. Some are sneak previews, others are works-in-progre
 
 ## Frontend injected apps
 
-Have you ever wanted to add floating pineapples to every page on your site? Marius worked on a way to make this dream a reality. More specifically, he built the ability to inject code into your page through [posthog-js](https://posthog.com/docs/integrate/client/js).
+Have you ever wanted to add floating pineapples to every page on your site? Marius worked on a way to make this dream a reality. More specifically, he built the ability to inject code into your page through [posthog-js](/docs/integrate/client/js).
 
 ![Pineapple mode](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/rome-hackathon/pineapple-mode.gif)
 

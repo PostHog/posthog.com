@@ -63,3 +63,20 @@ To fix this, you make sure flags are immediately available on a page load. There
 
 1. [Wait for feature flags to load](/docs/feature-flags/adding-feature-flag-code#ensuring-flags-are-loaded-before-usage) before showing the page (low engineering effort, but slows page down by ~200ms).
 2. Use [client-side bootstrapping](/docs/feature-flags/bootstrapping) (high engineering effort, but keeps the page blazing fast).
+
+## Why am I seeing unexpected results in my A/A test?
+
+If you're [running an A/A test](/tutorials/aa-testing) (where both variants are identical) and seeing significant differences between variants, there are a few things to check:
+
+1. **Feature flag calls**: Create a trend insight of unique users for `$feature_flag_called` events and verify they are equally split between variants. An uneven split suggests issues with flag evaluation.
+
+2. **Implementation verification**:
+   - Use feature flag overrides (like `posthog.featureFlags.overrideFeatureFlags({ flags: {'flag-key': 'test'}})`) to test each variant
+   - Check the code runs identically across different states (logged in/out), browsers, and parameters
+   - Verify that user properties and group assignments are set correctly before flag evaluation
+
+3. **Session replays**: Watch session recordings filtered by your feature flag to spot any unexpected differences between variants.
+
+4. **Random variation**: While A/A tests should theoretically show no difference, random chance can sometimes cause temporary statistical significance, especially with smaller sample sizes.
+
+Remember: A successful A/A test validates your experimentation setup, while an "unsuccessful" one helps identify issues you can fix to improve your process. If you're still seeing unexplained significant differences, [contact support](https://app.posthog.com/home#supportModal=bug%3Aexperiments) for help troubleshooting.

@@ -11,6 +11,7 @@ import { useValues } from 'kea'
 import { layoutLogic } from 'logic/layoutLogic'
 import Tooltip from 'components/Tooltip'
 import Mermaid from 'components/Mermaid'
+import usePostHog from 'hooks/usePostHog'
 
 type LanguageOption = {
     label?: string
@@ -153,10 +154,11 @@ export const CodeBlock = ({
     const codeBlockId = generateRandomHtmlId()
 
     const [tooltipVisible, setTooltipVisible] = React.useState(false)
-
+    const posthog = usePostHog()
     const [projectName, setProjectName] = React.useState<string | null>(null)
     const [projectToken, setProjectToken] = React.useState<string | null>(null)
     const [appHost, setAppHost] = React.useState<string | null>(null)
+    const [region, setRegion] = React.useState<string>('us')
     const clientApiHost = appHost?.replace('.posthog.com', '.i.posthog.com') ?? 'https://us.i.posthog.com'
 
     const displayName = label || languageMap[currentLanguage.language]?.label || currentLanguage.language
@@ -172,12 +174,19 @@ export const CodeBlock = ({
         }
     }, [])
 
+    React.useEffect(() => {
+        if (posthog?.isFeatureEnabled('direct-to-eu-cloud')) {
+            setRegion('eu')
+        }
+    }, [posthog])
+
     const replaceProjectInfo = (code: string) => {
         return code
-            .replace('<ph_project_api_key>', removeQuotes(projectToken) || '<ph_project_api_key>')
-            .replace('<ph_project_name>', removeQuotes(projectName) || '<ph_project_name>')
-            .replace('<ph_app_host>', removeQuotes(appHost) || '<ph_app_host>')
-            .replace('<ph_client_api_host>', removeQuotes(clientApiHost) || 'https://us.i.posthog.com')
+            .replace(/<ph_project_api_key>/g, removeQuotes(projectToken) || '<ph_project_api_key>')
+            .replace(/<ph_project_name>/g, removeQuotes(projectName) || '<ph_project_name>')
+            .replace(/<ph_app_host>/g, removeQuotes(appHost) || '<ph_app_host>')
+            .replace(/<ph_client_api_host>/g, removeQuotes(clientApiHost) || 'https://us.i.posthog.com')
+            .replace(/<ph_region>/g, removeQuotes(region) || '<ph_region>')
     }
 
     const copyToClipboard = () => {
@@ -296,12 +305,12 @@ export const CodeBlock = ({
                                 {tooltipVisible && (
                                     <AnimatePresence>
                                         <motion.div
-                                            className="absolute top-full mt-2 -right-2 bg-black text-white font-semibold px-2 py-1 rounded"
+                                            className="absolute top-full mt-2 -right-2 bg-black text-white font-semibold px-2 py-1 rounded z-10"
                                             initial={{ translateY: '-50%', opacity: 0 }}
                                             animate={{ translateY: 0, opacity: 1 }}
                                             exit={{ opacity: 0 }}
                                         >
-                                            Copied
+                                            Copied!
                                         </motion.div>
                                     </AnimatePresence>
                                 )}

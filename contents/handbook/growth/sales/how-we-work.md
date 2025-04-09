@@ -20,11 +20,22 @@ Other metrics we generally care about:
 
 ## Book of business
 
-Each AE is assigned ~10 existing customer accounts to work with. Additionally, you will manage inbound leads as they are assigned to you in your territory. Overall, the hard cap on existing book + new leads is 20 accounts, so staying extremely focused is important. 
+### Account Executives
 
-Each CSM is assigned ~50 existing customer accounts to work with.
+Each AE is assigned up to 10 existing customer accounts to work with. Additionally, you will manage inbound leads as they are assigned to you in your territory. Overall, the hard cap on existing book + new leads is 15 accounts, so staying extremely focused is important. 
 
-Simon and Charles will also review everyone's accounts each month proactively to make sure that the balance of accounts across the team makes sense. 
+We use the AE Managed Segment in Vitally to show that an account is part of somebody's book of business and therefore included in individual and team quota calculations.  AEs should not assign this themselves (that's up to Simon or Charles), but can add themselves as the Account Executive in Vitally to make it easier to track things you're working on.
+
+For Product-led leads we will only add them to your book for quota purposes if you have a solid plan in place for conversion to annual or cross-product adoption.
+
+For Inbound leads we will add them to your book of business once they are closed on an annual plan, or subscribed monthly with a plan to get them to an annual contract.  It's expected that you will own these for a minimum of three months after they sign to make sure they are properly onboarded before handing off the account.
+
+At the end of each quarter we will review your accounts and look to hand off some to bring your focus account list back down to 10.  Simon and Charles will also review everyone's accounts each month proactively to make sure that the balance of accounts across the team makes sense. 
+
+
+### Customer Success Managers
+
+Each CSM is assigned ~30 existing customer accounts to work with.  We use the CSM Managed Segment in Vitally to track this against goals and CSMs should not assign this themselve (that's up to Simon or Charles).
 
 ### Handing-off customers from Technical AE to Technical CSM
 
@@ -46,16 +57,18 @@ If the answer to any of the above questions is 'no' then it's likely that there 
 
 ## Weekly sales standup
 
-In addition to the weekly sprint planning meeting on a Monday, we do a weekly sales standups on Wednesday (Europe) and Friday (US). A Technical AE is picked at random, and we spend 30min on each going in depth through:
+In addition to the weekly sprint planning meeting on a Monday, we do a weekly sales standups on Wednesday. A Technical AE is picked at random, and we spend 30 min on each going in depth through:
 
-- What is your path to quota this quarter? Talk through your oops closing this quarter.
+- What has closed since you last reviewed your book?
+- What is your path to quota this quarter? Talk through your ops closing this quarter.
+- What is the plan for any customers over $100k?  Do you have a visit planned?
 - Which accounts are at risk? Look at red health score or sentiment in Vitally.
 - How is cross-adoption going in your existing accounts? Check against Vitally goals.
 
 
 Turns are taken randomly so that you are incentivized to turn up to every meeting fully prepared, in case you are selected!
 
-The objective of the meeting is to hold each other to account, provide direct feedback, and also support each other. It is a great place to ask for help from the team with thorny problems - [you should not let your team mates fail](/culture#dont-let-others-fail). 
+The objective of the meeting is to hold each other to account, provide direct feedback, and also support each other. It is a great place to ask for help from the team with thorny problems - you should not let your teammates fail.
 
 ## How commission works - Technical AEs
 
@@ -99,6 +112,17 @@ The objective of the meeting is to hold each other to account, provide direct fe
 - In your first 3 months you will not have a set quota but are expected to retain your existing book and have closed at least one Medium deal (either totally new or converting an existing customer to annual) - you'll be paid 100% OTE for this period.
 
 > Your quota and assigned customers are likely to change slightly from quarter to quarter. In any case, your quota will be amended appropriately (up or down) to account for any movement. We will also be flexible in making changes mid-quarter if it's obviously the sensible thing to do. If you inherit a new account, you have a 3 month grace period - if they churn in that initial period, they won't be counted against your quota.
+
+### Team target
+
+To calculate the team quota we combine the quota of all team members, with proration applied if they are still ramping:
+
+ - For fully-ramped team members we add 100% of their quota to the team quota.
+ - For team members who begin the quarter still in their first three months in the role we add 50% of their quota to the team quota.
+
+Example: With a flat quota per AE of $250,000 and 3 fully-ramped AEs, and 1 ramping, the team quota would be $875,000 (($250,000 * 3) + $125,000)
+
+> If someone leaves the team we don't recalculate the team quota as their accounts and opportunities will be reallocated to others in the team.
 
 ## How contractual bonus works - Technical CSMs
 
@@ -160,3 +184,18 @@ To add Pylon to your customer channel:
 Once enabled, you can add the :ticket: emoji to a Slack thread to create a new Ticket in Zendesk.  Customers can also do this.  Make sure that a Group and Severity are selected or the ticket won't be routed properly.
 
 > It's your job to ensure your customer issues are resolved, make sure you follow up with Support and Engineering if you feel like the issue isn't getting the right level of attention.
+
+## Tools we use
+**Gmail**
+We use Gmail for our email and the team uses many different clients from [Superhuman](https://superhuman.com/) to [Spark](https://sparkmailapp.com/) to the default Gmail web interface. Find something that works well for you. To get your own email signature, copy the signature from someone else on the team (like Simon) and then fill in your own details. 
+
+**Cal.com:**
+We use Cal.com for scheduling meetings. In order to schedule a meeting between a customer and multiple members on the PostHog team, click on the members tab and select the check box next to the the members you want to add, then click “Group Meeting" in the toolbar that pops up on the bottom of the screen.
+
+This will take you to a link you can share to the group meeting.
+
+**BuildBetter:**
+We use BuildBetter for call recording and notetaking. You will need to integrate BuildBetter with your calendar in order for it to automatically join your calls. To do so, click on settings and look for the integrations link under account (not the one under organization) and follow the steps from there.
+
+**Zoom:**
+We use Zoom for sales calls, and if you have Cal.com properly integrated, calls that are booked through the tool will default to Zoom. You can find backgrounds to use for the calls here: [This is fine \(and other awesome PostHog wallpapers\)](/blog/posthog-wallpapers).

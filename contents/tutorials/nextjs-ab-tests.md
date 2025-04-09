@@ -123,7 +123,7 @@ Set up a function in `layout.js` that:
 
 1. Checks for the user `distinct_id` in the cookies.
 2. If it doesn't exist, creates one using [`uuidv7`](https://github.com/LiosK/uuidv7).
-3. Uses the [`posthog-node`](/docs/libraries/node) library and the `distinct_id` to [`getAllFlags`](https://posthog.com/docs/libraries/node#fetching-all-flags-for-a-user).
+3. Uses the [`posthog-node`](/docs/libraries/node) library and the `distinct_id` to [`getAllFlags`](/docs/libraries/node#fetching-all-flags-for-a-user).
 4. Passes the flags and `distinct_id` to the `PHProvider`.
 
 Start by installing `uuidv7` and `posthog-node`:

@@ -1,6 +1,7 @@
 ---
 title: Send PostHog event data to Customer.io
-templateId: template-customerio
+templateId:
+    - template-customerio
 ---
 
 import Requirements from "../_snippets/requirements.mdx"
@@ -16,7 +17,7 @@ You'll also need access to the relevant Customer.io account.
 1. In PostHog, click the "[Data pipeline](https://us.posthog.com/pipeline/overview)" tab in the left sidebar.
 2. Click the 'Destinations' tab.
 3. Search for 'Customer.io' and select the destination.
-4. Add your Customer.io site ID and API Key at the configuration step.
+4. Add your Customer.io site ID and API Key at the configuration step. Note that our integration requires Track API credentials.
 5. Press 'Create & Enable' and watch your 'People' list get populated in Customer.io!
 
 <HideOnCDPIndex>

@@ -8,9 +8,8 @@ showTitle: true
 
 For customers who want to sign up for an annual (or longer) plan there is some additional paperwork needed to capture their contractual commitment to a minimum term, and likely custom pricing as well. At a minimum, they should sign an Order Form which references our standard [terms](/terms) and [privacy notice](/privacy). In addition, they may want a custom Master Services Agreement (MSA) or Data Processing Agreement (DPA).
 
-> If a customer wants to vary either our DPA, BAA, or MSA terms, it is a substantial effort for our legal team to review these changes.  At a minimum, we should only do this for contracts above $20k a year, and even higher if they are asking for big changes (e.g. adding a Service Level Agreements). The minimum is $100k to bring your own contract instead of our template - see 'Non PostHog Contracts' below.
+> If a customer wants to vary either our DPA, BAA, or MSA terms, it is a substantial effort for our legal team to review these changes.  At a minimum, we should only do this for contracts above $20k a year, and even higher if they are asking for big changes (e.g. adding a Service Level Agreements). The minimum is $100k to bring your own contract instead of our template - see 'Non PostHog Contracts' below. A customer needs to either be spending this amount at present, or agree to commit to this spend via an annual contract, in order to initiate legal review of potential changes. 
 
-In addition, customers requiring our Enterprise plan need to sign up for a minimum of $20k of PostHog Cloud Credit for a year, as well as adding the Teams plan to their subscription.
 
 If you are discussing any annual plan that deviates from our standard terms, such as a plan with monthly payments or other custom terms, please consult with Simon and Mine beforehand. This is to ensure we have the capacity and resources to support the proposed terms.
 
@@ -20,9 +19,32 @@ Payments for annual plans are via Bank Transfer only (no checks).
 
 Anyone on a monthly plan simply agrees to our [Terms](/terms) and [Privacy Policy](/privacy) when they sign up.
 
-## Pricing calculator
+## QuoteHog pricing calculator
 
-While we have a transparent pricing available, you'll need to use our [pricing calculator](https://docs.google.com/spreadsheets/d/1ynNM9tbWsWki2Q0vhwCV0iYNtJ1NHz4eXtUvZDw_sjA/edit?usp=sharing) (internal only) for customers with very high volumes or bespoke needs.
+While we offer [transparent pricing available to all](/pricing), you can use [QuoteHog](https://quote.posthog.net) (internal only) for customers who need a "formal quote," or who have very high volumes, or otherwise have bespoke needs.
+
+Sign into QuoteHog via your PostHog Google account/SSO. Upon login, you will see a list of existing quotes, sorted by the  created date. You can view a previously created quote or create a new quote using the "New Quote" button at the top right. 
+
+The quoting interface is intuitive and, of course, uses the same pricing we display publicly. Feel free to involve a customer in creating a quote if the opportunity presents itself and you think it would build trust. 
+
+> Be sure to always click the "Save" button after making changes to a quote. QuoteHog does not autosave.
+
+Quotes can be shared externally or embedded in an external source. Clicking the Dot Menu from a Quote and click "Share". If someone asks for a PDF version of a quote, you can view the external version and print it to PDF.
+
+QuoteHog also provides Stripe reported usage and spend for existing customers. To do this, you need to first connect QuoteHog to Salesforce from the [Profile page](https://quote.posthog.net/profile). As you build a quote, click "Add customer info" and search for your customer account. This also allows you to link the quote to an existing Salesforce opportunity.
+
+When building a quote for an annual plan conversion or renewal, consider:
+1. How is usage trending? Looking at the past 6 month's of usage (usage history tab in Quotehog):
+- If usage is trending up, calculate the growth rate and project expected volume for a year.
+- If usage is stable, project based on the latest month's volume or the average or the maximum.
+
+> Note: QuoteHog's input expects monthly volume, so after estimating annual volume, don't forget to convert it to monthly volume.
+
+2. Is there opportunity to adopt additional products? How does that affect future usage?
+
+You can create quotes with multiple options: e.g. one based on current usage, one with a higher tier to account for growth potential.
+
+The legacy pricing calculator is available [here](https://docs.google.com/spreadsheets/d/1ynNM9tbWsWki2Q0vhwCV0iYNtJ1NHz4eXtUvZDw_sjA/edit?usp=sharing) (internal only).
 
 ## Discounts
 
@@ -79,13 +101,28 @@ Additional notes on self-serve discounts:
 
 ### Nonprofit discounts
 
-We do offer additional discounts to nonprofits - these are entirely at your discretion, depending on the margin of the particular product(s) you are selling. We no longer offer a straight X% across all products, as they all have slightly different pricing.
+We do offer additional discounts to nonprofits - these are entirely at your discretion, depending on the margin of the particular product(s) you are selling. We no longer offer a straight X% across all products, as they all have slightly different pricing. Instead the discount depends on factors such as the contract size and the customer’s anticipated volume. There is no set minimum spend or mandatory annual term. When evaluating a discount, it’s important to review our margin calculations (available in [this sheet](https://docs.google.com/spreadsheets/d/1ynNM9tbWsWki2Q0vhwCV0iYNtJ1NHz4eXtUvZDw_sjA/edit?usp=sharing)) to ensure we remain margin positive, especially for larger accounts. We use tax law in the country of origin to determine what is a not for profit entity. If a customer can provide proof they fit their country's definition, the discount is applicable subject to the guidance above. 
 
 ## Payment method
 
 Our strong preference is for customers to pay by credit card, as this is easier to manage in Stripe and has a lower risk of the customer forgetting to make the payment (which means we have to spend more time chasing).
 
 If a customer wants to pay by ACH or bank transfer, we will usually only consider this if they are paying for 1 year or more up front. This is more likely to be the case for very large customers.
+
+## Contract buyouts
+
+Sometimes customers will be locked into a contract with a competitor, but want to switch to PostHog when their contract is up. In this case, we are willing to let them use PostHog for free for up to 6 months. This is beneficial to PostHog as well, as we can get them set up and using PostHog sooner, capitalizing on the momentum of their interest today, and giving them more time to get comfortable with the platform.
+
+Some rules:
+
+* They need to share a copy of their current contract/pricing/bank statement as proof.
+* They sign up to an annual contract worth $20k+/year, paid up front. Their PostHog contract starts when their current one expires. 
+* Their usage in the overlap period needs to be proportionate to the contract they've signed, ie. if they sign a $50k contract and have 6 months to run, they get $25k of PostHog credit for free.
+* The competitor they're using has to be 'real', ie. not some random side project. As a general rule, anyone we have written a [comparison article](/blog/tags/comparisons) about counts.
+* We have final discretion on deciding who gets the deal.
+* We can still provide a standard free trial period of 2-4 weeks before they sign the contract, as they will likely need to figure out whether PostHog is right for them before committing.
+
+> Normal commission rules apply here - commission is paid in the quarter in which the customer pay their annual invoice.
 
 ## Order Form
 
@@ -179,11 +216,11 @@ Sometimes large customers will ask for changes to our MSA. We have a list of the
 
 We offer HIPAA Compliance on PostHog Cloud and as such health companies will require us to sign a Business Associate Agreement with them. As this means we take on increased financial risk in case of a breach we ask them as a minimum to subscribe to the Teams plan which is a guaranteed monthly payment. A maximum of one BAA per organization will be signed. Under most circumstances, it should be the company that owns the org/pays us.
 
-1. Ask the customer to subscribe to the Teams plan (as well as any other paid plans they wish to use).
+1. Ask the customer to subscribe to the Teams plan (as well as any other paid plans they wish to use).  You can verify this in Vitally by ensuring that they are in the `Teams Plan` segment.
 2. Create a new document from the [PandaDoc Template](https://app.pandadoc.com/a/#/templates/4psCXzU527sNE6WEbFBg3a).
 3. All you need to do it set the `Client.Company` variable and then send it to them for review and signature.
-4. Once the client has signed it then it will get routed to Fraser for countersignature.
-5. You'll get a notification when everybody has signed it - _don't forget to update the *HIPAA BAA Signed Date* property on the customer's Salesforce Accountrecord,_ so we can keep track of who we have signed a BAA with.
+4. It has been pre-signed by Fraser and will automatically add today's date as the date of signature for PostHog.
+5. You'll get a notification when everybody has signed it - we have automation in place to ensure that the `HIPAA BAA Signed Date` property on the customer's Salesforce Account record is updated.
 
 > We only provide our default BAA for Teams plan subscribers - customization requires >$20k annual spend. The BAA only remains active for as long as the customer is subscribed to Teams - if they unsubscribe, we send them a message that their BAA will become inactive at the end of the month in which they cancelled. A customer who is on a Teams trial (with a credit card in PostHog) is eligible to sign a default BAA, but you should make it clear to them that the default BAA will be voided if/when the Teams subscription lapses. If the lead is not sure whether they will need a custom BAA and their usage wouldn't put them at $20K, then it is worth pushing them to get legal feedback by sending them our BAA before moving forward, else you risk spending a lot of time on an evaluation that ends up at $450/month.
 

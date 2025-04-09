@@ -9,7 +9,7 @@ hideAnchor: true
 
 We deliberately keep our [structure flat](/handbook/company/culture#structured-for-speed-and-autonomy) and we don’t believe in having a lot of fancy titles early on. However, as we grow, we will hire people into more executive-type positions. 
 
-With our exec hiring, moreso than normal, we are aiming for speed, and as always, quality. If a candidate is amazing but doesn't fit with a specific role need we have _right now_, we still aim to treat the hiring process with the same urgency as if posthog.com has gone down. 
+With our exec hiring, more so than normal, we are aiming for speed, and as always, quality. If a candidate is amazing but doesn't fit with a specific role need we have _right now_, we still aim to treat the hiring process with the same urgency as if posthog.com has gone down. 
 
 ### Executive hiring process
 

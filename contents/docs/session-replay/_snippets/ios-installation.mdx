@@ -7,7 +7,8 @@ export const EnableSessionReplayLight = "https://res.cloudinary.com/dmukukwp6/im
 
 <IOSInstall />
 
-> Requires PostHog iOS SDK version >= [3.6.0](https://github.com/PostHog/posthog-ios/releases), and it's recommended to always use the latest version.
+> - Requires PostHog iOS SDK version >= [3.6.0](https://github.com/PostHog/posthog-ios/releases), and it's recommended to always use the latest version.
+> - Session replay is currently only available on iOS. For future macOS support, please follow and upvote [this GitHub issue](https://github.com/PostHog/posthog-ios/issues/200).
 
 ## Step two: Enable session recordings in your project settings
 
@@ -71,8 +72,10 @@ config.sessionReplayConfig.captureNetworkTelemetry = true
 // The screenshot may contain sensitive information, so use with caution
 config.sessionReplayConfig.screenshotMode = true
 
-// Deboucer delay used to reduce the number of snapshots captured and reduce performance impact. Default is 1s
-config.sessionReplayConfig.debouncerDelay = 1.0
+// Sets the minimum time interval (in seconds) between session replay snapshots.
+// A higher value reduces performance impact but decreases replay smoothness. Default is 1.0s.
+// Note: Previously known as `debouncerDelay` before version 3.21.0
+config.sessionReplayConfig.throttleDelay = 1.0
 ```
 
 ## Limitations
@@ -81,3 +84,4 @@ config.sessionReplayConfig.debouncerDelay = 1.0
 - [SwiftUI](https://developer.apple.com/xcode/swiftui/) is only supported if the `screenshotMode` option is enabled.
 - Custom views are not fully supported if `screenshotMode` is disabled.
 - WebView is not supported. A placeholder will be shown.
+- Currently only available on iOS.

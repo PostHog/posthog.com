@@ -21,7 +21,7 @@ showTitle: true
 | **Product comparisons**         | Andy                 |
 | **Where people hear about us**  | Andy                 |
 
-## Owned by Words & Pictures
+## Owned by Comms
 
 | &nbsp                                   | **Individual owner** |
 |-----------------------------------------|----------------------|
@@ -40,9 +40,9 @@ showTitle: true
 | **Partnerships**                        | Joe                  |
 | **Product announcements**               | Joe                  |
 | **Reward packages**                     | Joe                  |
-| **Startup program**                     | Joe                  |
+| **Startup program**                     | Kevan                |
 | **Team member profile pics**            | Lottie               |
-| **YC batch engagement**                 | Joe                  |
+| **YC batch engagement**                 | Kevan                |
 
 ## Owned by Website & Vibes
 

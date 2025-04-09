@@ -141,13 +141,13 @@ Quoting [Pry CEO and co-founder Andy Su](https://posthog.com/customers/pry):
 
 ![correlation analysis posthog](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/using-posthog/correlation-analysis.png)
 
-Accessible via Funnel insights, [Correlation Analysis](https://posthog.com/docs/user-guides/correlation) shows you the events and person properties that your converting users have in common. Is there an industry that really loves your product that you don't event know about? Correlation Analysis helps surface insights like these, which can change your product strategy completely.
+Accessible via Funnel insights, [Correlation Analysis](/docs/user-guides/correlation) shows you the events and person properties that your converting users have in common. Is there an industry that really loves your product that you don't event know about? Correlation Analysis helps surface insights like these, which can change your product strategy completely.
 
 It's also great for marketing and website teams. For example, we know visitors complete a specific user journey on our website are 5.0x more likely to perform the 'clicked calculate scale price' event, 8x more likely to have used docs search, and 2.9x more likely to have arrived via Google.
 
 ## 11. Track errors as events
 
-You can track any sort of event in PostHog, including failures or other sorts of errors. All you need to do is put an [action](https://posthog.com/docs/user-guides/actions) or [event](https://posthog.com/docs/user-guides/events) next to the error, find some other unique identifier you can use - such as views of a /404 page – or use our [Sentry Connector](/apps/sentry-connector) to track errors as events.  
+You can track any sort of event in PostHog, including failures or other sorts of errors. All you need to do is put an [action](/docs/data/actions) or [event](/docs/user-guides/events) next to the error, find some other unique identifier you can use - such as views of a /404 page – or use our [Sentry Connector](/apps/sentry-connector) to track errors as events.  
 
 Tracking errors can be enormously useful for deciding where to invest engineering time, or when to prioritize areas of your product. [Phantom](https://posthog.com/customers/phantom), for example, used this to prioritize updates to their infrastructure by tracking failure rates for payments across their platform.
 

@@ -125,7 +125,7 @@ We've written a full post on [how GA4 and PostHog compare](/blog/posthog-vs-ga4)
 
 1. **We're transparent.** Everything from our [pricing](/pricing) to [code](https://github.com/PostHog/posthog) to [strategy](/handbook) is open for anyone to see.
 
-2. **We're built for engineers.** This means [SDKs](/docs/libraries) for popular languages, [docs](/docs) for (nearly) everything you want to build, [APIs](/docs/api) you can actually use, and direct [SQL](/docs/hogql) access to your data.
+2. **We're built for engineers.** This means [SDKs](/docs/libraries) for popular languages, [docs](/docs) for (nearly) everything you want to build, [APIs](/docs/api) you can actually use, and direct [SQL](/docs/sql) access to your data.
 
 3. **We integrate with other tools.** Our [data warehouse](/docs/data-warehouse) allows you to import and query data from sources like [Stripe](/tutorials/stripe-reports), [Hubspot](/tutorials/hubspot-reports), and [Zendesk](/tutorials/zendesk-reports) while our [CDP](/docs/cdp) lets you send data anywhere like [Zapier](/docs/cdp/destinations/zapier), [Google Ads](/docs/cdp/destinations/google-ads), and [webhooks](/docs/cdp/destinations/webhook).
 

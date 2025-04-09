@@ -1,6 +1,7 @@
 ---
 title: Send PostHog person data to ActiveCampaign
-templateId: template-activecampaign
+templateId:
+    - template-activecampaign
 ---
 
 import Requirements from "../_snippets/requirements.mdx"

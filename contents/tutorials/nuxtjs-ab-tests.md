@@ -261,7 +261,7 @@ const captureEventInPostHog = () => {
 
 Now, when you refresh the page, the button text is already set when the page loads. 
 
-> **Note:** This only works on subsequence visits to your app where the PostHog cookie is set. Using this method still requires waiting for PostHog and feature flags to load on the first visit.
+> **Note:** This only works on subsequent visits to your app where the PostHog cookie is set. Using this method still requires waiting for PostHog and feature flags to load on the first visit.
 > 
 > The solution to this is to [`identify`](/docs/product-analytics/identify) your users using a distinct ID which is not cookie-based.
 

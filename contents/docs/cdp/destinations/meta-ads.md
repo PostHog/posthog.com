@@ -1,6 +1,7 @@
 ---
 title: Send PostHog conversion events to Meta Ads
-templateId: template-meta-ads
+templateId:
+    - template-meta-ads
 ---
 
 import Requirements from "../_snippets/requirements.mdx"

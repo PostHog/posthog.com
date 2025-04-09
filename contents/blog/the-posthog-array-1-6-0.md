@@ -62,7 +62,7 @@ Now, you can visualize any series of page views or events! This means you can ea
 * [Event partitioning](https://github.com/PostHog/posthog/pull/733), which speeds up trends and paths pages in particular. Learn more about [scaling PostHog](/docs/self-host/deploy/configuration#scaling-up).
 * The component ```Deletewithundo``` wasn't working because of property mixup, [now it is](https://github.com/PostHog/posthog/pull/750)!
 * [Funnels](https://github.com/PostHog/posthog/pull/751) and [Actions](https://github.com/PostHog/posthog/pull/757) now use Ant Design
-* We temporarily [removed stickiness breakdowns](https://github.com/PostHog/posthog/pull/774), as they were causing issues. We'll put this back into our roadmap and will priortize depending on user feedback.
+* We temporarily [removed stickiness breakdowns](https://github.com/PostHog/posthog/pull/774), as they were causing issues. We'll put this back into our roadmap and will prioritize depending on user feedback.
 * We have [better handling of breakdown views](https://github.com/PostHog/posthog/pull/758) when users don't have the property.
 * [Fixed an issue](https://github.com/PostHog/posthog/pull/725) with viewing certain queries over all time.
 * [Resolved an issue](https://github.com/PostHog/posthog/pull/748) with sessions where null conditions were missing

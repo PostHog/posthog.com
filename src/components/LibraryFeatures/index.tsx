@@ -9,16 +9,20 @@ const features = [
     {
         key: 'autoCapture',
         name: 'Autocapture',
-        url: 'https://posthog.com/docs/data/autocapture',
+        url: 'https://posthog.com/docs/product-analytics/autocapture',
     },
     {
         key: 'userIdentification',
         name: 'User identification',
-        url: 'https://posthog.com/docs/integrate/identifying-users',
+        url: 'https://posthog.com/docs/product-analytics/identify',
     },
-    { key: 'sessionRecording', name: 'Session replay', url: 'https://posthog.com/docs/user-guides/recordings' },
-    { key: 'featureFlags', name: 'Feature flags', url: 'https://posthog.com/docs/user-guides/feature-flags' },
-    { key: 'groupAnalytics', name: 'Group analytics', url: 'https://posthog.com/docs/user-guides/group-analytics' },
+    { key: 'sessionRecording', name: 'Session replay', url: 'https://posthog.com/docs/session-replay' },
+    { key: 'featureFlags', name: 'Feature flags', url: 'https://posthog.com/docs/feature-flags' },
+    {
+        key: 'groupAnalytics',
+        name: 'Group analytics',
+        url: 'https://posthog.com/docs/product-analytics/group-analytics',
+    },
     { key: 'surveys', name: 'Surveys', url: 'https://posthog.com/docs/surveys' },
     {
         key: 'llmObservability',
@@ -29,7 +33,7 @@ const features = [
 ] as const
 
 export type LibraryFeaturesProps = {
-    availability?: Record<typeof features[number]['key'], boolean>
+    availability?: Record<(typeof features)[number]['key'], boolean>
 }
 
 export const LibraryFeatures = ({ availability }: LibraryFeaturesProps) => {

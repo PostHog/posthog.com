@@ -1,0 +1,10 @@
+```csharp
+posthog.Capture(
+    distinctId: "distinct_id", 
+    eventName: "movie_played",
+    properties: new() 
+    {
+        ["movie_id"] = 123,
+        ["category"] = "romcom",
+    });
+```

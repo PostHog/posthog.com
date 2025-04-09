@@ -30,7 +30,7 @@ Our [JavaScript Web library](/docs/libraries/js) and mobile SDKs (Android, iOS, 
 
 A session can span multiple tabs and windows, but only on the same browser and device. For example, if a user goes from one Chrome tab to another, it counts as a single session. If they go from Chrome to Firefox, a new session is created. You can also create a new session by calling `posthog.reset()` (which also starts a new session replay).
 
-Activity is defined as any event sent from the client including autocapture events and replay activity like mouse movement. The inactivity period can be configured using the `session_idle_timeout_seconds` [configuration option](/docs/libraries/js#config).
+Activity is defined as any event sent from the client including autocapture events and replay activity like mouse movement. The inactivity period can be configured using the `session_idle_timeout_seconds` [configuration option](/docs/libraries/js/config).
 
 > **Note:** If you are [migrating data](/docs/migrate) or [using a CDP](/docs/advanced/cdp), you may need to manually set the `$session_id` property if you want to query sessions or connect them to session replays. 
 > If you are using the JavaScript Web SDK alongside your CDP, you can get this value by calling `posthog.get_session_id()`.
@@ -63,6 +63,21 @@ Session properties are data about the session that is autocaptured by PostHog an
 | `$is_bounce`           | Indicates if the session was a bounce (single pageview session)             |
 
 You can query all of these from the `sessions` table using [SQL insights](/docs/product-analytics/sql).
+
+## Session entry properties on events
+
+For ease of use, some session properties are also available as event properties. These properties are prefixed with `$session_entry_` and are captured at the start of the session. They remain constant on all events for the duration of the session.
+
+The following session entry properties are automatically captured:
+
+| Event property | Description |
+|----------------|-------------|
+| `$session_entry_url` | Full URL captured at the start of the session |
+| `$session_entry_host` | Host captured at the start of the session |
+| `$session_entry_pathname` | Pathname captured at the start of the session |
+| `$session_entry_referrer` | Referrer captured at the start of the session |
+
+Additionally, UTM parameters and other attribution properties (like `gclid`) are also available as event properties with the `$session_entry_` prefix. This means you can access these properties directly when querying events, without needing to join with the sessions table.
 
 ## Using session data
 

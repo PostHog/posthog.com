@@ -114,6 +114,16 @@ const librariesData = {
                 ),
             },
             {
+                name: 'C#/.NET',
+                url: '/docs/libraries/dotnet',
+                icon: (
+                    <CloudinaryImage
+                        src="https://res.cloudinary.com/dmukukwp6/image/upload/dotnet_logo_7e446176f2.svg"
+                        alt="C#/.NET"
+                    />
+                ),
+            },
+            {
                 name: 'More',
                 url: '/docs/libraries',
                 icon: <IconEllipsis />,

@@ -40,7 +40,7 @@ Want to know the average revenue per user? Want to know the lowest browser versi
 
 ![](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/annotations.png)
 
-Digging through git commits to find out what changed to make the graphs go hay-wire? No more! You can now annotate when something happened (a big release, a bugfix or a launch) and make it super easy for your team-mates to figure out what's going on. Now global.
+Digging through git commits to find out what changed to make the graphs go hay-wire? No more! You can now annotate when something happened (a big release, a bugfix or a launch) and make it super easy for your teammates to figure out what's going on. Now global.
 
 As part of this, you can now also manage, add and delete annotations from a central screen.
 

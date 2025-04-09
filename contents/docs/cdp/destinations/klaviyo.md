@@ -1,6 +1,8 @@
 ---
 title: Send contacts and analytics events to Klaviyo
-templateId: template-klaviyo-event
+templateId:
+    - template-klaviyo-event
+    - template-klaviyo-user
 ---
 
 import Requirements from "../_snippets/requirements.mdx"
@@ -47,7 +49,7 @@ Once you’ve configured your Klaviyo destination, click **Create & enable** the
 ***
 
 <TemplateParameters />
-
+    
 ## FAQ
 
 ### Is the source code for this destination available?

@@ -1592,30 +1592,7 @@ function DpaGenerator() {
                                     above;
                                 </li>
                                 <li>
-                                    the role of the{' '}
-                                    <Tooltip
-                                        content={() => (
-                                            <>
-                                                Fill out the form <span className="md:hidden">at the top</span>
-                                                <span className="hidden md:inline-block">to the left</span> populate
-                                                these fields
-                                            </>
-                                        )}
-                                        placement="top"
-                                        className="[&_button]:cursor-auto"
-                                    >
-                                        <span className="relative">
-                                            <button type="button">
-                                                <label
-                                                    htmlFor="yourTitle"
-                                                    className="bg-yellow/40 font-bold px-0.5 py-0.5"
-                                                >
-                                                    {yourTitle ? yourTitle : '[YOUR TITLE]'}
-                                                </label>
-                                            </button>
-                                        </span>
-                                    </Tooltip>{' '}
-                                    is controller; and
+                                    the role of the exporter is controller; and
                                 </li>
                                 <li>the activities relate to the provision of the Services.</li>
                             </ul>
@@ -1635,7 +1612,7 @@ function DpaGenerator() {
                                     the signature of the data importer and the date of signature shall be as signed
                                     above;
                                 </li>
-                                <li>the role of the exporter is processor;</li>
+                                <li>the role of the importer is processor;</li>
                                 <li>the activities relate to the provision of the Services.</li>
                             </ul>
 

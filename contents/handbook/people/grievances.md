@@ -33,7 +33,7 @@ Serious misconduct includes things such as:
 * Intentional breach of confidentiality
 * A material breach of your employment contract
 
-If you are a person being accused of misconduct, you will be advised in writing prior to any relevant meeting with you of your alleged misconduct, and will be given a reasonable opportunity to respond prior to a formal meeting. Meetings are usually held with Charles. If you are in the UK (or other jurisdictions where the right to bring other people with you is a legal requirement), you are entitled to bring a colleague or trade union representative to these meetings. If this is the case, please let us know who you are bringing in advance. 
+If you are a person being accused of misconduct, you will be advised in writing prior to any relevant meeting with you of your alleged misconduct, and will be given a reasonable opportunity to respond prior to a formal meeting. Meetings are usually held with Fraser. If you are in the UK (or other jurisdictions where the right to bring other people with you is a legal requirement), you are entitled to bring a colleague or trade union representative to these meetings. If this is the case, please let us know who you are bringing in advance. 
 
 We will send round written notes afterwards, which will be kept confidential. 
 
@@ -42,24 +42,24 @@ We will send round written notes afterwards, which will be kept confidential.
 
 > All proceedings are confidential, and you will never be punished for bringing a grievance (unless it’s obviously malicious), even if no action is taken. 
 
-Victims of harassment or bullying should disengage from the situation immediately and seek support. You can speak to Charles about your grievance and he can help you, or James/Tim if Charles is not available/you'd prefer to talk to someone else. 
+Victims of harassment or bullying should disengage from the situation immediately and seek support. You can speak to Fraser about your grievance and he can help you, or Charles if Fraser is not available or you need to talk to someone else. 
 
 If the matter cannot be resolved informally, you should put the details of your grievance in writing and send it to Charles (or if the matter concerns him, please send it to James or Tim). There is no particular format to follow, and you can start at this step if needed. 
 
 To make sure we can investigate your grievance properly:
 * Try and raise your grievance as soon as possible - it's easier to figure out what happened that way. 
 * Give specific examples of the behavior that you felt was misconduct. Try to avoid sweeping statements.
-* Avoid including heresay or other people’s comments in your grievance.
+* Avoid including hearsay or other people’s comments in your grievance.
 * While this process is confidential, our default assumption is that grievances are not made anonymously as this makes it harder for us to investigate or to report back to those raising the complaint. 
 * Please be understanding with those dealing with your grievance. We take these issues very, very seriously, and likely any action we take is difficult in one way or another.
 
-Charles will hold a meeting(s) to discuss further. If you are in the UK (or other certain jurisdictions where the right to bring other people with you is a legal requirement - in which case we require you to confirm the other attendees in advance of the meeting), you are entitled to bring a colleague or trade union representative to these meetings, and we will send round written notes afterwards, which will be kept confidential to those in the meeting and those the complaint is being made about. The number/type of meetings held is flexible depending on the nature of the grievance. You are not obliged to attend a meeting with the person you have a grievance against if you don’t want to. 
+Fraser will hold a meeting(s) to discuss further. If you are in the UK (or other certain jurisdictions where the right to bring other people with you is a legal requirement - in which case we require you to confirm the other attendees in advance of the meeting), you are entitled to bring a colleague or trade union representative to these meetings, and we will send round written notes afterwards, which will be kept confidential to those in the meeting and those the complaint is being made about. The number/type of meetings held is flexible depending on the nature of the grievance. You are not obliged to attend a meeting with the person you have a grievance against if you don’t want to. 
 
 If, following investigation, your grievance is not upheld, then we will support everyone in rebuilding their working relationship to the extent it is possible. We may consider making arrangements to avoid the affected parties working together closely.
 
 ## Whistleblowing
 
-Whistleblowing is where you observe illegal or dangerous behavior, and is different from raising a grievance as it may not affect you directly. In this case, please email James and Charles. This includes things like criminal offences, someone's health and safety being in danger, or damage to the environment. You can also whistleblow about someone trying to cover up information about any of these issues. We will broadly follow the same process outlined above for grievances.
+Whistleblowing is where you observe illegal or dangerous behavior, and is different from raising a grievance as it may not affect you directly. In this case, please email Fraser and Charles. This includes things like criminal offences, someone's health and safety being in danger, or damage to the environment. You can also whistleblow about someone trying to cover up information about any of these issues. We will broadly follow the same process outlined above for grievances.
 
 If your concern is a personal one, it will usually not be covered by whistleblowing. In these cases, you should raise a grievance. 
 

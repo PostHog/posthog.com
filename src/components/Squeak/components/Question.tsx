@@ -398,7 +398,7 @@ const AskMax = ({
 export const Question = (props: QuestionProps) => {
     const { id, question, showSlug, buttonText, showActions = true, ...other } = props
     const [expanded, setExpanded] = useState(props.expanded || false)
-    const { user, notifications, setNotifications } = useUser()
+    const { user, notifications, setNotifications, isModerator } = useUser()
     const [maxQuestions, setMaxQuestions] = useState(other.askMax ? [{ manual: false, withContext: false }] : [])
 
     useEffect(() => {
@@ -453,6 +453,7 @@ export const Question = (props: QuestionProps) => {
     const slugs = questionData?.attributes?.slugs
     const escalated = questionData?.attributes.escalated
     const isQuestionAuthor = questionData?.attributes.profile?.data?.id === user?.profile?.id
+    const publishedAt = questionData?.attributes?.publishedAt
 
     return (
         <CurrentQuestionContext.Provider
@@ -465,7 +466,7 @@ export const Question = (props: QuestionProps) => {
                 mutate,
             }}
         >
-            <div>
+            <div className={`${isModerator && !publishedAt ? 'opacity-70' : ''}`}>
                 {archived && (
                     <div className="font-medium text-sm m-0 mb-6 bg-accent dark:bg-accent-dark border border-light dark:border-dark p-4 rounded text-center">
                         <p className="font-bold !m-0 !p-0">The following thread has been archived.</p>
@@ -476,6 +477,11 @@ export const Question = (props: QuestionProps) => {
                     </div>
                 )}
                 <div className={`flex flex-col w-full`}>
+                    {!publishedAt && isModerator && (
+                        <p className="font-bold text-sm m-0 mb-4 italic p-2 bg-accent dark:bg-accent-dark border border-light dark:border-dark rounded">
+                            This thread is unpublished and only visible to moderators
+                        </p>
+                    )}
                     <div
                         className={`flex items-center space-x-2 w-full ${!questionData.attributes.subject && '-mb-2'}`}
                     >

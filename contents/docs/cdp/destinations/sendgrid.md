@@ -1,6 +1,7 @@
 ---
 title: Send PostHog person data to Sendgrid
-templateId: template-sendgrid
+templateId:
+    - template-sendgrid
 ---
 
 import Requirements from "../_snippets/requirements.mdx"

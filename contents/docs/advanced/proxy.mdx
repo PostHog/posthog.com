@@ -4,23 +4,27 @@ sidebar: Docs
 showTitle: true
 ---
 
-A reverse proxy allows you to send events to PostHog Cloud using your own domain.
 
-This means that events are less likely to be intercepted by tracking blockers. You'll be able to capture more usage data without having to self-host PostHog.
+A reverse proxy enables you to send events to PostHog Cloud using your own domain. 
 
-Setting up a reverse proxy means setting up a service to redirect requests from a subdomain you choose (like `e.yourdomain.com`) to PostHog. It is best practice to use a subdomain that does not include `posthog`, `analytics`, `tracking`, or other similar words. 
-
-> **Note:** PostHog Cloud requires that the proxy sets the `Host` header to the same host it is calling. Check the guides below on how to do that for several proxies.
+This means setting up a service to redirect requests from a subdomain you choose (like `e.yourdomain.com`) to PostHog.
 
 You then use this subdomain as your `api_host` in the initialization of PostHog instead of `us.i.posthog.com` or `eu.i.posthog.com`.
 
-> **Note** Make sure to [pass the proper `ui_host` parameter](/docs/libraries/js#config) when initializing PostHog, so that links to PostHog point to the correct host. This is required for tasks like authenticating the toolbar.
+## Why do we recommend deploying one?
+
+Using a reverse proxy means that events are less likely to be intercepted by tracking blockers. 
+
+You'll be able to capture more usage data without having to self-host PostHog, ensuring you get a complete view of your users.
 
 ## Deploying a reverse proxy
 
-Options for deploying a reverse proxy include:
+Using our [managed reverse proxy](/docs/advanced/proxy/managed-reverse-proxy) is the easiest way to do this.
 
-- [PostHog's managed reverse proxy](/docs/advanced/proxy/managed-reverse-proxy) (Recommended, requires the Teams add-on)
+It's available as part of our [Teams add-on](/addons#teams), which includes automatic provisioning, SSO and 2FA enforcement, priority support, and additional collaboration features.
+
+Other documented options for deploying a reverse proxy include:
+
 - [AWS CloudFront](/docs/advanced/proxy/cloudfront)
 - [Caddy](/docs/advanced/proxy/caddy)
 - [Cloudflare](/docs/advanced/proxy/cloudflare)
@@ -33,6 +37,12 @@ Options for deploying a reverse proxy include:
 - [Vercel](/docs/advanced/proxy/vercel)
 - [Nuxt](/docs/advanced/proxy/nuxt)
 - [Pomerium](/docs/advanced/proxy/pomerium)
+
+## Best practices
+
+- We require that the proxy sets the `Host` header to the same host it's calling. Check the guides above on how to do that for several proxies.
+- Don't use a subdomain that includes `posthog`, `analytics`, `tracking`, or other similar words which might cause events to be blocked.
+- Make sure to [pass the proper `ui_host` parameter](/docs/libraries/js/config) when initializing PostHog, so that links to PostHog point to the correct host (like `us.posthog.com`). This is required for tasks like authenticating the toolbar.
 
 ## Reverse proxy requirements
 

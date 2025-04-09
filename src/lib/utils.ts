@@ -1,33 +1,19 @@
 import { IMenu } from 'components/PostLayout/types'
-import { AuthorsData, LibraryPluginType } from 'types'
+import slugify from 'slugify'
+import { LibraryPluginType } from 'types'
 
-export const unsafeHash = (str: string) => {
-    let a = 1,
-        c = 0,
-        h,
-        o
-    a = 0
-    for (h = str.length - 1; h >= 0; h--) {
-        o = str.charCodeAt(h)
-        a = ((a << 6) & 268435455) + o + (o << 14)
-        c = a & 266338304
-        a = c !== 0 ? a ^ (c >> 21) : a
-    }
-    return String(a)
-}
-
-export const classNames = (...classes: (string | null | undefined | false)[]) => {
+export const classNames = (...classes: (string | null | undefined | false)[]): string => {
     return classes.filter(Boolean).join(' ')
 }
 
-export const getPluginImageSrc = (plugin: LibraryPluginType) =>
+export const getPluginImageSrc = (plugin: LibraryPluginType): string | null =>
     plugin.imageLink
         ? plugin.imageLink
         : plugin.url.includes('github')
         ? `https://raw.githubusercontent.com/${plugin.url.split('hub.com/')[1]}/main/logo.png`
         : null
 
-export const getCookie = (name: string) => {
+export const getCookie = (name: string): string | null => {
     let cookieValue = null
     if (document.cookie && document.cookie !== '') {
         const cookies = document.cookie.split(';')
@@ -43,7 +29,7 @@ export const getCookie = (name: string) => {
     return cookieValue
 }
 
-export const setCookie = (name: string, value: string, days: number) => {
+export const setCookie = (name: string, value: string, days: number): void => {
     let expires = ''
     if (days) {
         const date = new Date()
@@ -53,7 +39,7 @@ export const setCookie = (name: string, value: string, days: number) => {
     document.cookie = name + '=' + (value || '') + expires + '; path=/'
 }
 
-export const generateRandomHtmlId = () =>
+export const generateRandomHtmlId = (): string =>
     Math.random()
         .toString(36)
         .replace(/[^a-z]+/g, '')
@@ -62,11 +48,8 @@ export const generateRandomHtmlId = () =>
 export const mergeClassList = (...args: (string | null | undefined | false)[]): string =>
     args.filter((classList) => !!classList).join(' ')
 
-export const findAuthor = (authors: AuthorsData[]) => (authorKey?: string) =>
-    authors?.find(({ handle }) => handle === authorKey)
-
 // custom function to add scroll offset in the top of section
-export const scrollWithOffset = (id: string, offset: number) => {
+export const scrollWithOffset = (id: string, offset: number): void => {
     const element = document.querySelector(id)
     if (element) {
         const offsetY = offset || -90 // scroll offset (default = -90)
@@ -75,20 +58,13 @@ export const scrollWithOffset = (id: string, offset: number) => {
     }
 }
 
-// tests email address for RFC 5322 compliance
-export function isValidEmailAddress(email: string): boolean {
-    const re =
-        /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
-    return re.test(String(email).toLowerCase())
-}
-
 export interface HubSpotUser {
     firstName: string
     lastName: string
     email: string
 }
 
-export const createHubSpotContact = ({ firstName, lastName, email }: HubSpotUser) => {
+export const createHubSpotContact = ({ firstName, lastName, email }: HubSpotUser): Promise<Response> => {
     return fetch('/api/hubspot', {
         method: 'POST',
         headers: {
@@ -102,20 +78,24 @@ export const createHubSpotContact = ({ firstName, lastName, email }: HubSpotUser
     })
 }
 
-export const kebabCase = (string) =>
-    string
+export const kebabCase = (s: string): string =>
+    s
         .replace(/([a-z])([A-Z])/g, '$1-$2')
         .replace(/[\s_]+/g, '-')
         .toLowerCase()
 
-export const squeakProfileLink = (profile) => (profile ? `/community/profiles/${profile.id}` : '')
+export const isURL = (s: string): boolean => {
+    try {
+        new URL(s)
+        return true
+    } catch (_) {
+        return false
+    }
+}
 
-export const isURL = (text: string) =>
-    /^(http(s):\/\/.)[-a-zA-Z0-9@:%._+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_+.~#?&//=]*)$/gi.test(text)
-
-export const groupMenuItems = (items: IMenu[]) => {
-    const grouped = {}
-    let currGroup
+export const groupMenuItems = (items: IMenu[]): Record<string, IMenu[]> => {
+    const grouped: Record<string, IMenu[]> = {}
+    let currGroup: string
     items.forEach((item) => {
         if (item.url === undefined) {
             currGroup = item.name
@@ -125,4 +105,11 @@ export const groupMenuItems = (items: IMenu[]) => {
         }
     })
     return grouped
+}
+
+export const slugifyTeamName = (name: string): string => {
+    return slugify(name.toLowerCase().replace('ops', ''), {
+        lower: true,
+        remove: /and/,
+    })
 }

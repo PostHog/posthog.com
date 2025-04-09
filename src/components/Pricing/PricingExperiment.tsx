@@ -2,7 +2,6 @@ import CloudinaryImage from 'components/CloudinaryImage'
 import React, { useState, useEffect } from 'react'
 import { FAQs } from 'components/Pricing/FAQs'
 import { Quote } from 'components/Pricing/Quote'
-import 'components/Pricing/styles/index.scss'
 import { SEO } from '../seo'
 import cntl from 'cntl'
 import { animateScroll as scroll } from 'react-scroll'
@@ -280,7 +279,7 @@ const PricingExperiment = (): JSX.Element => {
                         projects. You still keep the same monthly free volume, even after upgrading.
                     </p>
 
-                    <div className="inline-block">
+                    <div className="max-w-xs @sm:min-w-2xs @md:max-w-none @md:inline-block">
                         <div className="flex justify-between items-end gap-4">
                             <div>
                                 {activePlan === 'free' ? (
@@ -310,7 +309,7 @@ const PricingExperiment = (): JSX.Element => {
                             <li>
                                 <button
                                     onClick={handleFreePlanClick}
-                                    className={`w-full flex flex-col py-2 px-4 rounded-md border-2 @md:min-w-56 ${
+                                    className={`w-full flex flex-col py-2 px-4 rounded-md border-2 items-start @md:min-w-56 ${
                                         activePlan === 'free'
                                             ? 'border-yellow bg-white dark:bg-white/5'
                                             : 'border-light hover:border-dark/50 dark:border-dark dark:hover:border-light/50 bg-transparent'
@@ -325,7 +324,7 @@ const PricingExperiment = (): JSX.Element => {
                             <li>
                                 <button
                                     onClick={handlePaidPlanClick}
-                                    className={`w-full flex flex-col py-2 px-4 rounded-md border-2 @md:min-w-56 ${
+                                    className={`w-full flex flex-col py-2 px-4 rounded-md border-2 items-start @md:min-w-56 ${
                                         activePlan === 'free'
                                             ? 'border-light hover:border-dark/50 dark:border-dark dark:hover:border-light/50 bg-transparent'
                                             : 'border-yellow bg-white dark:bg-white/5'
@@ -374,6 +373,11 @@ const PricingExperiment = (): JSX.Element => {
                                 name="Experiments"
                                 description="Billed with feature flags"
                                 icon={<Icons.IconFlask className="text-purple size-5" />}
+                            />
+                            <FreeTierItem
+                                name="Error tracking"
+                                allocation="100K exceptions"
+                                icon={<Icons.IconWarning className="text-orange size-5" />}
                             />
                             <FreeTierItem
                                 name="Surveys"
