@@ -1,5 +1,5 @@
 ---
-title: 7 best free and open source LLM observability tools
+title: 7 best free open source LLM observability tools right now
 date: 2025-04-07
 rootPage: /blog
 sidebar: Blog
@@ -45,7 +45,7 @@ Its [LLM observability product](/docs/ai-engineering) integrates with popular LL
   classes="rounded"
 />
 
-### What makes PostHog special
+### What makes PostHog special?
 
 PostHog’s LLM observability product works with the rest of our product suite. This means you can visualize LLM-related data along product and business data, create custom queries using [SQL](/docs/product-analytics/sql), view [session replays](/docs/session-replay) of AI interactions, [A/B test prompts](/tutorials/llm-ab-tests), and more.
 
@@ -59,9 +59,9 @@ You can [get started right away](http://us.posthog.com/signup), no sales call or
 - GitHub stars: 5.6k
 - [OpenLLMetry on GitHub](https://github.com/traceloop/openllmetry)
 
-OpenLLMetry is an open source observability product for LLM applications based on OpenTelemetry. It was built by Traceloop and recommends using their SDK to capture data. 
+OpenLLMetry is an open-source observability product for LLM applications based on OpenTelemetry. It was built by Traceloop and recommends using its SDK to capture data. 
 
-Traceloop is free up to 50k spans per month and 5 seats, but this only provides 24 hour data retention. Beyond this, you’ll need to talk to sales. 
+Traceloop is free up to 50k spans per month and 5 seats, but this only provides 24-hour data retention. Beyond this, you’ll need to talk to sales. 
 
 OpenLLMetry can capture data from a range of LLM providers, vector DBs, and LLM frameworks. It can then send this data to a range of supported destinations from Traceloop to Datadog to Honeycomb.
 
@@ -79,13 +79,13 @@ It integrates with the broader OpenTelemetry ecosystem, meaning it can instrumen
 
 [Helicone](/docs/ai-engineering/helicone-posthog) is an open source platform for monitoring, debugging, and improving LLM applications. Beyond integrations with popular LLM providers, tracing, and an aggregate analytics dashboard, Helicone provides more tools like prompt management and evals. 
 
-Their hosted version is free up to 10,000 requests with some features limited to their $20/m pro and $200/m team plans. The costs for requests beyond the first 10,000 is unknown though.
+Its hosted version is free up to 10,000 requests with some features limited to the $20/m pro and $200/m team plans. The costs for requests beyond the first 10,000 is unknown, though.
 
 ### What makes Helicone special?
 
-Helicone provides purpose-built tools for improving LLMs like their prompt playground, prompt management, evaluation scoring, and feedback. This helps developers improve their LLM applications.
+Helicone provides purpose-built tools for improving LLMs, like its prompt playground, prompt management, evaluation scoring, and feedback. This helps developers improve their LLM applications.
 
-For developers focused on performance and reliability concerns, Helicone also contains both proxy and async interfaces for integrating with LLM providers. This ensures you Helicone is only on your critical path if you want it to be. 
+For developers focused on performance and reliability concerns, Helicone also contains both proxy and async interfaces for integrating with LLM providers. This ensures Helicone is only on your critical path if you want it to be. 
 
 ## 4. Langfuse
 
@@ -95,13 +95,15 @@ For developers focused on performance and reliability concerns, Helicone also co
 
 [Langfuse](/docs/ai-engineering/langfuse-posthog) is an open source LLM engineering platform. It provides LLM call tracking and tracing, prompt management, evaluation, datasets, and more. These give LLM app developers tools they need for their entire workflow.
 
-Langfuse Cloud is free to use up to 50k events per month and 2 users, but this only includes 30 day data access. Pricing beyond this starts at $59/m for 100k events with additional events at $8/m more. 
+Langfuse can be self-hosted for free. If you prefer a managed service, Langfuse Cloud is free to use up to 50k events per month and 2 users, but this only includes 30 day data access. Pricing beyond this starts at $59/m for 100k events with additional events at $8/m more.
 
 ### What makes Langfuse special?
 
-Langfuse is one of the original tools in the LLM observability space. This means they have a wide range of tools for LLM app developers to use and have been instrumental in defining what they look like. They also claim to be the most used open LLMOps platform
+Langfuse is one of the original tools in the LLM observability space. This means it has a wide range of tools for LLM app developers to use and have been instrumental in defining what they look like. 
 
-Langfuse is also the most fully featured LLM observability tool. Their pricing page lists a huge 78 features from session tracking to batch exports to SOC2 compliance. 
+It also claims to be the most used open LLMOps platform. Beyond its early entry, this is thanks to its integrations with most LLM providers and agent frameworks, native SDKs for Python and JavaScript, and its ability to act as an OpenTelemetry backend
+
+Langfuse is also the most fully-featured LLM observability tool. Its pricing page lists a huge 78 features from session tracking to batch exports to SOC2 compliance. 
 
 ## 5. Opik
 
@@ -111,7 +113,7 @@ Langfuse is also the most fully featured LLM observability tool. Their pricing p
 
 Opik is an open source platform for evaluating, testing, and monitoring LLM apps. It provides tracing, annotations, a prompt and model playground, evaluation, and more. It’s built by Comet, an end-to-end model evaluation platform for developers.
 
-Opik’s free hosted plan provides 25k spans per month with unlimited team members and a 60 day data retention. Beyond this, their Pro plan is $39 per month for 100k spans per month with every extra 100k spans costing $5. 
+Opik’s free hosted plan provides 25k spans per month with unlimited team members and a 60-day data retention. Beyond this, its Pro plan is $39 per month for 100k spans per month with every extra 100k spans costing $5. 
 
 ### What makes Opik special?
 
@@ -141,7 +143,7 @@ Like Opik, Phoenix is connected to a broader AI development platform. Unique to 
 
 Lunary is a toolkit for LLM chatbots. It includes conversation and feedback tracking, analytics, prompt management, and more. It has integrations with the popular LLM providers as well as destinations like PostHog (😄), Snowflake, and Segment. 
 
-Their hosted version has a free tier which offers 10k events per month with 30 day retention. Their team plan raises this to 50k events per month and is $20 per user per month.
+Its hosted version has a free tier, which offers 10k events per month with 30 day retention. The team plan raises this to 50k events per month and is $20 per user per month.
 
 ### What makes Lunary special?
 
