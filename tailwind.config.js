@@ -271,6 +271,14 @@ module.exports = {
                         '100%': { 'background-position-x': '100%' },
                     },
                 },
+                slideDown: {
+                    from: { height: '0px' },
+                    to: { height: 'var(--radix-accordion-content-height)' },
+                },
+                slideUp: {
+                    from: { height: 'var(--radix-accordion-content-height)' },
+                    to: { height: '0px' },
+                },
                 develop: {
                     '0%': {
                         opacity: '0',
@@ -294,6 +302,8 @@ module.exports = {
                 reveal: 'reveal 1s ease-in-out',
                 'text-gradient': 'text-gradient 2500ms linear infinite',
                 develop: 'develop 1.5s ease-out forwards',
+                slideDown: 'slideDown 300ms cubic-bezier(0.87, 0, 0.13, 1)',
+                slideUp: 'slideUp 300ms cubic-bezier(0.87, 0, 0.13, 1)',
             },
             containers: {
                 '2xs': '16rem',

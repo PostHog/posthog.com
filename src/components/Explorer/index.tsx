@@ -10,6 +10,7 @@ import CloudinaryImage from 'components/CloudinaryImage'
 import { DebugContainerQuery } from 'components/DebugContainerQuery'
 import ScrollArea from 'components/RadixUI/ScrollArea'
 import { productMenu } from '../../navs'
+import { RadixAccordion } from '../RadixUI/Accordion'
 
 const selectOptions = [
     {
@@ -29,66 +30,6 @@ const selectOptions = [
         ],
     },
 ]
-
-interface AccordionItemProps extends React.ComponentPropsWithoutRef<typeof Accordion.Item> {
-    children: React.ReactNode
-    className?: string
-}
-
-const AccordionItem = React.forwardRef<HTMLDivElement, AccordionItemProps>(
-    ({ children, className, ...props }, forwardedRef) => (
-        <Accordion.Item
-            className={`border-primary border-x overflow-hidden first:mt-0 first:rounded-t last:rounded-b focus-within:relative focus-within:z-10 focus-within:shadow-[0_0_2px_2px] focus-within:shadow-border [&_h3]:mb-0 ${className}`}
-            {...props}
-            ref={forwardedRef}
-        >
-            {children}
-        </Accordion.Item>
-    )
-)
-AccordionItem.displayName = 'AccordionItem'
-
-interface AccordionTriggerProps extends React.ComponentPropsWithoutRef<typeof Accordion.Trigger> {
-    children: React.ReactNode
-    className?: string
-}
-
-const AccordionTrigger = React.forwardRef<HTMLButtonElement, AccordionTriggerProps>(
-    ({ children, className, ...props }, forwardedRef) => (
-        <Accordion.Header className="flex">
-            <Accordion.Trigger
-                className={`group flex flex-1 cursor-default items-center justify-between bg-primary px-2 py-1 text-sm leading-none text-primary border-b border-primary outline-none hover:bg-mauve2 ${className}`}
-                {...props}
-                ref={forwardedRef}
-            >
-                <span className="flex-1 flex items-center gap-1 text-left">{children}</span>
-                <Icons.IconChevronDown
-                    className="size-6 transition-transform duration-300 ease-[cubic-bezier(0.87,_0,_0.13,_1)] group-data-[state=open]:rotate-180"
-                    aria-hidden
-                />
-            </Accordion.Trigger>
-        </Accordion.Header>
-    )
-)
-AccordionTrigger.displayName = 'AccordionTrigger'
-
-interface AccordionContentProps extends React.ComponentPropsWithoutRef<typeof Accordion.Content> {
-    children: React.ReactNode
-    className?: string
-}
-
-const AccordionContent = React.forwardRef<HTMLDivElement, AccordionContentProps>(
-    ({ children, className, ...props }, forwardedRef) => (
-        <Accordion.Content
-            className={`overflow-hidden bg-primary text-primary data-[state=closed]:animate-slideUp data-[state=open]:animate-slideDown data-[state=open]:border-primary data-[state=open]:border-b ${className}`}
-            {...props}
-            ref={forwardedRef}
-        >
-            <div className="p-2 text-sm">{children}</div>
-        </Accordion.Content>
-    )
-)
-AccordionContent.displayName = 'AccordionContent'
 
 type ExplorerOption = 'features' | 'pricing' | 'customers' | 'comparison' | 'docs' | 'tutorials' | 'questions' | 'team' | 'roadmap' | 'changelog'
 
@@ -151,47 +92,44 @@ export default function Explorer({
             <div className="flex flex-grow min-h-0">
                 <aside data-scheme="secondary" className="w-64 bg-primary p-2 border-r border-primary h-full">
                     <ScrollArea>
-                        <Accordion.Root
+                        <RadixAccordion
                             data-scheme="primary"
-                            className="rounded "
-                            type="single"
-                            defaultValue="item-1"
-                            collapsible
-                        >
-                            <AccordionItem value="item-1">
-                                <AccordionTrigger>
-                                    <ProductIcon className={`text-${product.color} size-5 inline-block`} />
-                                    <span className="flex-1">{product.name}</span>
-                                </AccordionTrigger>
-                                <AccordionContent>
-                                    <p className="text-sm">
-                                    {product.description}
-                                    </p>
-                                    <p>
-                                        <span className="text-sm text-secondary">Pricing starts at</span><br />
-                                        <span className="font-bold text-[15px]">${product.startsAt}</span><span className="text-sm text-secondary">/{product.denomination}</span>
-                                    </p>
-                                    <p>
-                                        <span className="text-sm text-secondary">Monthly free tier</span><br />
-                                        <span className="font-bold text-[15px]">{product.freeTier?.toLocaleString()}</span><span className="text-sm text-secondary">/{product.denomination}</span>
-                                    </p>
-                                </AccordionContent>
-                            </AccordionItem>
-
-                            <AccordionItem value="item-2">
-                                <AccordionTrigger>Is it unstyled?</AccordionTrigger>
-                                <AccordionContent>
-                                    Yes. It's unstyled by default, giving you freedom over the look and feel.
-                                </AccordionContent>
-                            </AccordionItem>
-
-                            <AccordionItem value="item-3">
-                                <AccordionTrigger>Can it be animated?</AccordionTrigger>
-                                <AccordionContent>
-                                    Yes! You can animate the Accordion with CSS or JavaScript.
-                                </AccordionContent>
-                            </AccordionItem>
-                        </Accordion.Root>
+                            className="rounded"
+                            defaultValue="item-0"
+                            items={[
+                                {
+                                    trigger: (
+                                        <>
+                                            <ProductIcon className={`text-${product.color} size-5 inline-block`} />
+                                            <span className="flex-1">{product.name}</span>
+                                        </>
+                                    ),
+                                    content: (
+                                        <>
+                                            <p className="text-sm">
+                                                {product.description}
+                                            </p>
+                                            <p>
+                                                <span className="text-sm text-secondary">Pricing starts at</span><br />
+                                                <span className="font-bold text-[15px]">${product.startsAt}</span><span className="text-sm text-secondary">/{product.denomination}</span>
+                                            </p>
+                                            <p>
+                                                <span className="text-sm text-secondary">Monthly free tier</span><br />
+                                                <span className="font-bold text-[15px]">{product.freeTier?.toLocaleString()}</span><span className="text-sm text-secondary">/{product.denomination}</span>
+                                            </p>
+                                        </>
+                                    )
+                                },
+                                {
+                                    trigger: "Is it unstyled?",
+                                    content: "Yes. It's unstyled by default, giving you freedom over the look and feel."
+                                },
+                                {
+                                    trigger: "Can it be animated?",
+                                    content: "Yes! You can animate the Accordion with CSS or JavaScript."
+                                }
+                            ]}
+                        />
                     </ScrollArea>
                 </aside>
                 <main data-scheme="primary" className="@container flex-1 bg-primary relative h-full">
