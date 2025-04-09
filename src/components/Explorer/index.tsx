@@ -118,7 +118,7 @@ export default function Explorer({
                                                     <span className="font-bold text-[15px]">{product.freeTier?.toLocaleString()}</span><span className="text-sm text-secondary">/{product.denomination}</span>
                                                     {product.sharesFreeTier && (
                                                         <span className="block text-xs italic text-secondary mt-1">
-                                                            Shares free tier with {productMenu.children.find((item) => item.slug === product.sharesFreeTier)?.name}
+                                                            *Shares free tier with {productMenu.children.find((item) => item.slug === product.sharesFreeTier)?.name}
                                                         </span>
                                                     )}
                                                 </p>
