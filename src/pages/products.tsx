@@ -168,6 +168,15 @@ const productDetails: Record<
         goals: ['Find errors', 'Solve performance issues'],
         complexity: ['People who code'],
     },
+    'api-queries': {
+        freeTierLimit: 'JOETBD',
+        denominator: 'query',
+        startingPrice: 'JOETBD',
+        description: 'Capture, query, update, and analyze nearly any PostHog data',
+        roles: ['Data engineers'],
+        goals: ['Data ops and monitoring'],
+        complexity: ['People who code'],
+    },
 }
 
 const filters = [

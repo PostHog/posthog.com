@@ -3477,6 +3477,18 @@ export const docsMenu = {
                 },
             ],
         },
+        {
+            name: 'API',
+            icon: 'IconBrackets',
+            color: 'blue',
+            url: '/api',
+        },
+        {
+            name: 'Product OS',
+            icon: 'IconStack',
+            color: 'blue',
+            url: '/product-os',
+        },
     ],
 }
 
@@ -3588,6 +3600,12 @@ export const productMenu = {
             icon: 'IconDatabase',
             color: 'lilac',
             url: '/data-warehouse',
+        },
+        {
+            name: 'API queries',
+            icon: 'IconBrackets',
+            color: 'blue',
+            url: '/api',
         },
         {
             name: 'Product OS',

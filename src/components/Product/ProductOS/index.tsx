@@ -350,58 +350,6 @@ export const ProductOS = () => {
                     </div>
                 </section>
 
-                <section className="max-w-7xl mx-auto px-5 mb-10 md:mb-20">
-                    <h2 className="text-4xl mb-2">An API you'll actually want to use</h2>
-                    <p className="max-w-2xl mb-2">
-                        If your business has bespoke data visualization needs that aren't covered by a PostHog product,
-                        you can build your own interface with queries using the API.
-                    </p>
-                    <p className="max-w-2xl mb-2">
-                        There's a generous rate limit to get you started, after which we bill based on usage - just like
-                        we do everywhere else.
-                    </p>
-                    <div className="mb-8 mt-8">
-                        <CallToAction to="/docs/api" type="secondary" size="sm">
-                            Explore the API
-                        </CallToAction>
-                    </div>
-
-                    <ul className="list-none p-0 grid md:grid-cols-4 gap-4 mb-10 md:mb-20">
-                        <TextCard
-                            title="Data transformations"
-                            description="Capture the live event stream and do something with it - like munge PII or add geolocation."
-                        />
-                        <TextCard
-                            title="Data out"
-                            description="Access data from dashboards or metrics from saved insights."
-                        />
-                        <TextCard
-                            title="Data augmentation"
-                            description="Augment event data coming into PostHog with more context and detail."
-                        />
-                        <TextCard
-                            title="Reverse ETL"
-                            description="Update and feed context to external products like Hubspot or Salesforce."
-                        />
-                        <TextCard
-                            title="Build apps or pipelines"
-                            description="Create your own interface that uses PostHog event and customer data."
-                        />
-                        <TextCard
-                            title="Marketing or product automation"
-                            description="Activate drip campaign or a push notification based on customer activity."
-                        />
-                        <TextCard
-                            title="Customized CDP"
-                            description="Create a singular customer view by combining event and customer data in one place."
-                        />
-                        <TextCard
-                            title="Generous rate limits"
-                            description="Create a singular customer view by combining event and customer data in one place."
-                        />
-                    </ul>
-                </section>
-
                 <section className="max-w-screen md:max-w-7xl mx-auto px-5 -mt-10 md:mt-0 mb-10 md:mb-20">
                     <div className="grid md:grid-cols-2 gap-8 items-center">
                         <div className="order-2 md:order-1">
