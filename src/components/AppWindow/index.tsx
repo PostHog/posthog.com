@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useMemo } from 'react'
 import { AnimatePresence, motion, useDragControls } from 'framer-motion'
-import { IconChevronDown, IconMinus, IconX } from '@posthog/icons'
+import { IconChevronDown, IconDocument, IconMinus, IconX } from '@posthog/icons'
 import { IconCollapse, IconExpand, IconSquare } from '../OSIcons/Icons'
 import { useApp } from '../../context/App'
 import { Provider as WindowProvider, AppWindow as AppWindowType } from '../../context/Window'
@@ -226,7 +226,7 @@ export default function AppWindow({ item, constraintsRef }: { item: AppWindowTyp
                             />
                         )}
                         <motion.div
-                            className={`absolute flex flex-col border rounded overflow-hidden !select-auto  ${
+                            className={`@container absolute flex flex-col border rounded overflow-hidden !select-auto  ${
                                 focusedWindow === item
                                     ? 'shadow-2xl border-light-7 dark:border-dark-7'
                                     : 'shadow-lg border-light-4 dark:border-dark-4'
@@ -283,13 +283,18 @@ export default function AppWindow({ item, constraintsRef }: { item: AppWindowTyp
                             <div
                                 data-scheme="tertiary"
                                 onDoubleClick={handleDoubleClick}
-                                className="flex-shrink-0 w-full flex items-center justify-between px-2 py-1 bg-primary cursor-move"
+                                className="flex-shrink-0 w-full flex @md:grid grid-cols-[minmax(100px,auto)_1fr_minmax(100px,auto)] gap-1 items-center py-1 pl-1.5 bg-primary cursor-move"
                                 onPointerDown={(e) => controls.start(e)}
                             >
                                 <MenuBar
                                     menus={[
                                         {
-                                            trigger: <IconChevronDown className="size-6 -m-1" />,
+                                            trigger: (
+                                                <>
+                                                    <IconDocument className="size-5" />
+                                                    <IconChevronDown className="size-6 -mx-1.5 text-muted group-hover:text-primary data-[state=open]:text-primary" />
+                                                </>
+                                            ),
                                             items: [
                                                 {
                                                     type: 'submenu',
@@ -330,10 +335,10 @@ export default function AppWindow({ item, constraintsRef }: { item: AppWindowTyp
                                 />
 
                                 {menu && menu.length > 0 && (
-                                    <div className="flex-1 truncate flex items-center justify-center">
+                                    <div className="flex-1 truncate flex items-center justify-start @md:justify-center">
                                         <Popover
                                             trigger={
-                                                <button className="text-primary hover:text-primary dark:text-primary-dark dark:hover:text-primary-dark text-left flex items-center justify-center text-sm font-semibold">
+                                                <button className="text-primary hover:text-primary dark:text-primary-dark dark:hover:text-primary-dark text-left items-center justify-center text-sm font-semibold flex select-none">
                                                     {item.meta?.title && item.meta.title}
                                                     <IconChevronDown className="size-6 -m-1" />
                                                 </button>

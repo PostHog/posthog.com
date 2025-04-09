@@ -23,7 +23,7 @@ export type MenuType = {
 
 const RootClasses = 'flex gap-px py-0.5 h-full'
 const TriggerClasses =
-    'flex select-none items-center justify-between gap-0.5 rounded px-1.5 py-0.5 text-[13px] leading-none text-primary outline-none data-[highlighted]:bg-accent hover:bg-primary data-[state=open]:bg-accent'
+    'group flex select-none items-center justify-between gap-0.5 rounded px-1.5 py-0.5 text-[13px] leading-none text-primary outline-none data-[highlighted]:bg-accent hover:bg-accent-2 data-[state=open]:bg-accent'
 const ItemClasses =
     'hover-invert group relative flex h-[25px] select-none items-center rounded px-2.5 text-[13px] leading-none text-primary hover:bg-primary outline-none data-[disabled]:pointer-events-none data-[state=open]:bg-accent data-[highlighted]:bg-input-bg data-[disabled]:text-muted data-[highlighted]:data-[state=open]:text-secondary data-[highlighted]:bg-text-secondary data-[state=open]:text-secondary'
 const SubTriggerClasses =
@@ -80,14 +80,19 @@ const MenuItem: React.FC<{ item: MenuItemType }> = ({ item }) => {
 export interface MenuBarProps {
     menus: MenuType[]
     className?: string
+    customTriggerClasses?: string
+    triggerAsChild?: boolean
 }
 
-const MenuBar: React.FC<MenuBarProps> = ({ menus, className }) => {
+const MenuBar: React.FC<MenuBarProps> = ({ menus, className, triggerAsChild, customTriggerClasses }) => {
     return (
         <RadixMenubar.Root data-scheme="tertiary" className={`${RootClasses} ${className || ''}`}>
             {menus.map((menu, menuIndex) => (
                 <RadixMenubar.Menu key={`menu-${menuIndex}`}>
-                    <RadixMenubar.Trigger className={`${TriggerClasses} ${menu.bold ? 'font-bold' : 'font-medium'}`}>
+                    <RadixMenubar.Trigger
+                        asChild={triggerAsChild}
+                        className={`${triggerAsChild ? '' : TriggerClasses } ${menu.bold ? 'font-bold' : 'font-medium'} ${customTriggerClasses}`}
+                    >
                         {menu.trigger}
                     </RadixMenubar.Trigger>
                     <RadixMenubar.Portal>
