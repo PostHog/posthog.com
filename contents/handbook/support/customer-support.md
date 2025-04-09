@@ -115,7 +115,7 @@ We aim to respond to low priority tickets and will often read and consider them,
 
 ### Follow-up / next reply response targets
 
-After our initial response, our follow-up response targets are double those of our initial response targets. For example, if a user replies to our initial response on a high priority ticket (1 business day), our follow-up / next reply response target is within 1 business day.
+After our initial response, our follow-up response targets are double those of our initial response targets. For example, if a user replies to our initial response on a high priority ticket (1 business day), our follow-up / next reply response target is within 2 business days.
 
 ### Escalated ticket response targets
 
