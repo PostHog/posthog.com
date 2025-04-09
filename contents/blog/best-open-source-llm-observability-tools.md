@@ -53,41 +53,7 @@ PostHog’s hosted Cloud version and all of its LLM observability features are f
 
 You can [get started right away](http://us.posthog.com/signup), no sales call or elaborate setup needed.
 
-## 2. OpenLLMetry
-
-- License: Apache 2.0
-- GitHub stars: 5.6k
-- [OpenLLMetry on GitHub](https://github.com/traceloop/openllmetry)
-
-OpenLLMetry is an open-source observability product for LLM applications based on OpenTelemetry. It was built by Traceloop and recommends using its SDK to capture data. 
-
-Traceloop is free up to 50k spans per month and 5 seats, but this only provides 24-hour data retention. Beyond this, you’ll need to talk to sales. 
-
-OpenLLMetry can capture data from a range of LLM providers, vector DBs, and LLM frameworks. It can then send this data to a range of supported destinations from Traceloop to Datadog to Honeycomb.
-
-### What makes OpenLLMetry special?
-
-With its range of extensions and destinations, OpenLLMetry is very likely to integrate with the observability tools you already use. 
-
-It integrates with the broader OpenTelemetry ecosystem, meaning it can instrument things like your database, API calls, and more. Their semantic conventions for LLM were also adopted by the OpenTelemetry project. 
-
-## 3. Helicone
-
-- License: Apache 2.0
-- GitHub stars: 3.6k
-- [Helicone on GitHub](https://github.com/Helicone/helicone)
-
-[Helicone](/docs/ai-engineering/helicone-posthog) is an open source platform for monitoring, debugging, and improving LLM applications. Beyond integrations with popular LLM providers, tracing, and an aggregate analytics dashboard, Helicone provides more tools like prompt management and evals. 
-
-Its hosted version is free up to 10,000 requests with some features limited to the $20/m pro and $200/m team plans. The costs for requests beyond the first 10,000 is unknown, though.
-
-### What makes Helicone special?
-
-Helicone provides purpose-built tools for improving LLMs, like its prompt playground, prompt management, evaluation scoring, and feedback. This helps developers improve their LLM applications.
-
-For developers focused on performance and reliability concerns, Helicone also contains both proxy and async interfaces for integrating with LLM providers. This ensures Helicone is only on your critical path if you want it to be. 
-
-## 4. Langfuse
+## 2. Langfuse
 
 - License: MIT
 - GitHub stars: 10.2k
@@ -105,7 +71,7 @@ It also claims to be the most used open LLMOps platform. Beyond its early entry,
 
 Langfuse is also the most fully-featured LLM observability tool. Its pricing page lists a huge 78 features from session tracking to batch exports to SOC2 compliance. 
 
-## 5. Opik
+## 3. Opik
 
 - License: Apache 2.0
 - GitHub stars: 6.2k
@@ -119,7 +85,25 @@ Opik’s free hosted plan provides 25k spans per month with unlimited team membe
 
 Thanks to Opik’s integration with Comet, it’s the only tool on this list that appeals to LLM developers, not just LLM *app* developers. This means it is ideal for teams training and hosting models of their own, not just using the LLM providers. 
 
-## 6. Phoenix
+## 4. OpenLLMetry
+
+- License: Apache 2.0
+- GitHub stars: 5.6k
+- [OpenLLMetry on GitHub](https://github.com/traceloop/openllmetry)
+
+OpenLLMetry is an open-source observability product for LLM applications based on OpenTelemetry. It was built by Traceloop and recommends using its SDK to capture data. 
+
+Traceloop is free up to 50k spans per month and 5 seats, but this only provides 24-hour data retention. Beyond this, you’ll need to talk to sales. 
+
+OpenLLMetry can capture data from a range of LLM providers, vector DBs, and LLM frameworks. It can then send this data to a range of supported destinations from Traceloop to Datadog to Honeycomb.
+
+### What makes OpenLLMetry special?
+
+With its range of extensions and destinations, OpenLLMetry is very likely to integrate with the observability tools you already use. 
+
+It integrates with the broader OpenTelemetry ecosystem, meaning it can instrument things like your database, API calls, and more. Their semantic conventions for LLM were also adopted by the OpenTelemetry project. 
+
+## 5. Phoenix
 
 - License: Elastic License 2.0
 - GitHub stars: 5.3k
@@ -134,6 +118,22 @@ Arize doesn’t provide a free hosted version of Phoenix. Their product, AX Pro,
 Similar to OpenLLMetry, Phoenix works well with OpenTelemetry thanks to a set of conventions and plugins that are complimentary to OpenTelemetry. This means Phoenix can more easily integrate into your existing Telemetry stack. 
 
 Like Opik, Phoenix is connected to a broader AI development platform. Unique to Arize’s platform is their observability tools for ML and computer vision helping developers debug and improve these systems.
+
+## 6. Helicone
+
+- License: Apache 2.0
+- GitHub stars: 3.6k
+- [Helicone on GitHub](https://github.com/Helicone/helicone)
+
+[Helicone](/docs/ai-engineering/helicone-posthog) is an open source platform for monitoring, debugging, and improving LLM applications. Beyond integrations with popular LLM providers, tracing, and an aggregate analytics dashboard, Helicone provides more tools like prompt management and evals. 
+
+Its hosted version is free up to 10,000 requests with some features limited to the $20/m pro and $200/m team plans. The costs for requests beyond the first 10,000 is unknown, though.
+
+### What makes Helicone special?
+
+Helicone provides purpose-built tools for improving LLMs, like its prompt playground, prompt management, evaluation scoring, and feedback. This helps developers improve their LLM applications.
+
+For developers focused on performance and reliability concerns, Helicone also contains both proxy and async interfaces for integrating with LLM providers. This ensures Helicone is only on your critical path if you want it to be. 
 
 ## 7. Lunary
 
