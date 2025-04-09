@@ -256,7 +256,7 @@ export default function AppWindow({ item, constraintsRef }: { item: any; constra
                             <div
                                 data-scheme="tertiary"
                                 onDoubleClick={handleDoubleClick}
-                                className="flex-shrink-0 w-full flex items-center justify-between p-2 bg-primary cursor-move"
+                                className="flex-shrink-0 w-full flex items-center justify-between px-2 py-1 bg-primary cursor-move"
                                 onPointerDown={(e) => controls.start(e)}
                             >
                                 <p className="m-0 text-sm font-semibold line-clamp-1">
@@ -266,7 +266,9 @@ export default function AppWindow({ item, constraintsRef }: { item: any; constra
                                     <OSButton
                                         variant="ghost"
                                         size="xs"
-                                        onClick={handleMinimize}>
+                                        onClick={handleMinimize}
+                                        className="!px-1.5"
+                                    >
                                         <IconMinus className="size-4 relative top-1" />
                                     </OSButton>
 
@@ -282,7 +284,7 @@ export default function AppWindow({ item, constraintsRef }: { item: any; constra
                                                 onMouseLeave={() => {
                                                     setTooltipVisible(false)
                                                 }}
-                                                className="group"
+                                                className="!px-1.5 group"
                                             >
                                                 <Tooltip 
                                                     trigger={
@@ -338,6 +340,7 @@ export default function AppWindow({ item, constraintsRef }: { item: any; constra
                                             // Then close after animation duration
                                             setTimeout(() => closeWindow(item), 250)
                                         }}
+                                        className="!px-1.5"
                                     >
                                         <IconX className="size-4" />
                                     </OSButton>
