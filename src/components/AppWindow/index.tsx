@@ -4,6 +4,7 @@ import { IconCollapse45, IconExpand45, IconMinus, IconX } from '@posthog/icons'
 import { useApp } from '../../context/App'
 import { Provider as WindowProvider } from '../../context/Window'
 import { ContextMenu } from 'radix-ui'
+import Tooltip from 'components/RadixUI/Tooltip'
 
 const getSizeDefaults = () => ({
     max: {
@@ -256,9 +257,21 @@ export default function AppWindow({ item, constraintsRef }: { item: any; constra
                                     </button>
 
                                     <ContextMenu.Root>
-                                        <ContextMenu.Trigger className="flex select-none items-center justify-between gap-0.5 rounded px-2.5 py-0.5 text-[13px] leading-none text-primary outline-none data-[highlighted]:bg-accent hover:bg-primary data-[state=open]:bg-accent">
-                                            options
-                                        </ContextMenu.Trigger>
+                                        <Tooltip trigger={
+                                            <ContextMenu.Trigger className="flex select-none items-center justify-between gap-0.5 rounded px-2.5 py-0.5 text-[13px] leading-none text-primary outline-none data-[highlighted]:bg-accent hover:bg-primary data-[state=open]:bg-accent">
+                                                <span className="flex items-center justify-center">
+                                                    <button onClick={size.width >= window?.innerWidth ? collapseWindow : expandWindow}>
+                                                        {size.width >= window?.innerWidth ? (
+                                                            <IconCollapse45 className="size-4" />
+                                                        ) : (
+                                                            <IconExpand45 className="size-4" />
+                                                        )}
+                                                    </button>
+                                                </span>
+                                            </ContextMenu.Trigger>
+                                        }>
+                                            Right click for more options
+                                        </Tooltip>
                                         <ContextMenu.Portal>
                                             <ContextMenu.Content
                                                 className="min-w-[220px] rounded-md bg-white dark:bg-accent-dark p-1 shadow-xl"
@@ -308,13 +321,6 @@ export default function AppWindow({ item, constraintsRef }: { item: any; constra
                                         </ContextMenu.Portal>
                                     </ContextMenu.Root>
 
-                                    <button onClick={size.width >= window?.innerWidth ? collapseWindow : expandWindow}>
-                                        {size.width >= window?.innerWidth ? (
-                                            <IconCollapse45 className="size-4" />
-                                        ) : (
-                                            <IconExpand45 className="size-4" />
-                                        )}
-                                    </button>
                                     <button
                                         onClick={() => {
                                             // Set minimized first to trigger exit animation
