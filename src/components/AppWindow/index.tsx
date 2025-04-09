@@ -3,12 +3,15 @@ import { AnimatePresence, motion, useDragControls } from 'framer-motion'
 import { IconChevronDown, IconMinus, IconX } from '@posthog/icons'
 import { IconCollapse, IconExpand, IconSquare } from '../OSIcons/Icons'
 import { useApp } from '../../context/App'
-import { Provider as WindowProvider } from '../../context/Window'
+import { Provider as WindowProvider, AppWindow as AppWindowType } from '../../context/Window'
 import { ContextMenu } from 'radix-ui'
 import Tooltip from 'components/RadixUI/Tooltip'
 import OSButton from 'components/OSButton'
 import { Button } from 'components/Squeak/components/SubscribeButton'
 import MenuBar from 'components/RadixUI/MenuBar'
+import { Popover } from '../RadixUI/Popover'
+import { FileMenu } from '../RadixUI/FileMenu'
+import { Link } from 'gatsby'
 
 const getSizeDefaults = () => ({
     max: {
@@ -32,14 +35,16 @@ const fixedAppSizes = {
             height: 400,
         },
     },
-}
+} as const
 
 const snapThreshold = -50
 
-export default function AppWindow({ item, constraintsRef }: { item: any; constraintsRef: any }) {
+export default function AppWindow({ item, constraintsRef }: { item: AppWindowType; constraintsRef: any }) {
     const { minimizeWindow, bringToFront, closeWindow, focusedWindow, taskbarHeight } = useApp()
     const controls = useDragControls()
-    const [sizeDefaults, setSizeDefaults] = useState(fixedAppSizes[item.key] || getSizeDefaults())
+    const initialSizeKey = item.key as keyof typeof fixedAppSizes;
+    const hasFixedSize = Object.prototype.hasOwnProperty.call(fixedAppSizes, initialSizeKey);
+    const [sizeDefaults, setSizeDefaults] = useState(hasFixedSize ? fixedAppSizes[initialSizeKey] : getSizeDefaults())
     const [previousSize, setPreviousSize] = useState({ width: sizeDefaults.max.width, height: sizeDefaults.max.height })
     const [size, setSize] = useState({ width: sizeDefaults.max.width, height: sizeDefaults.max.height })
     const [previousPosition, setPreviousPosition] = useState({ x: 0, y: 0 })
@@ -281,9 +286,20 @@ export default function AppWindow({ item, constraintsRef }: { item: any; constra
                                 />
                                 
                                 
-                                <p className="m-0 text-sm font-semibold line-clamp-1">
-                                    {item.meta?.title && item.meta.title}
-                                </p>
+                                <div className="flex-1 truncate flex items-center justify-center">
+                                    <Popover
+                                        trigger={
+                                            <button className="text-primary hover:text-primary dark:text-primary-dark dark:hover:text-primary-dark text-left flex items-center justify-center text-sm font-semibold">
+                                                {item.meta?.title && item.meta.title}
+                                                <IconChevronDown className="size-6 -m-1" />
+                                            </button>
+                                        }
+                                        dataScheme="primary"
+                                        contentClassName="w-auto p-0 border border-border dark:border-border-dark"
+                                    >
+                                        <FileMenu initialPath={['docs', 'work']} />
+                                    </Popover>
+                                </div>
                                 <div className="flex">
                                     <OSButton variant="ghost" size="xs" onClick={handleMinimize} className="!px-1.5">
                                         <IconMinus className="size-4 relative top-1" />
