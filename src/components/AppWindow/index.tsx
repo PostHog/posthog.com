@@ -3,6 +3,7 @@ import { AnimatePresence, motion, useDragControls } from 'framer-motion'
 import { IconCollapse45, IconExpand45, IconMinus, IconX } from '@posthog/icons'
 import { useApp } from '../../context/App'
 import { Provider as WindowProvider } from '../../context/Window'
+import { ContextMenu } from 'radix-ui'
 
 const getSizeDefaults = () => ({
     max: {
@@ -147,6 +148,25 @@ export default function AppWindow({ item, constraintsRef }: { item: any; constra
         }
     }, [size.width, size.height])
 
+    const handleSnapToSide = (side: 'left' | 'right') => {
+        if (!constraintsRef.current) return
+
+        const bounds = constraintsRef.current.getBoundingClientRect()
+        const finalX = side === 'left' ? 0 : bounds.width / 2
+        const finalWidth = bounds.width / 2
+
+        setPosition({
+            x: finalX,
+            y: bounds.top,
+        })
+
+        setSize((prev) => ({
+            ...prev,
+            width: finalWidth,
+            height: bounds.height,
+        }))
+    }
+
     return (
         <WindowProvider appWindow={item}>
             <AnimatePresence>
@@ -234,6 +254,60 @@ export default function AppWindow({ item, constraintsRef }: { item: any; constra
                                     <button onClick={handleMinimize}>
                                         <IconMinus className="size-4" />
                                     </button>
+
+                                    <ContextMenu.Root>
+                                        <ContextMenu.Trigger className="flex select-none items-center justify-between gap-0.5 rounded px-2.5 py-0.5 text-[13px] leading-none text-primary outline-none data-[highlighted]:bg-accent hover:bg-primary data-[state=open]:bg-accent">
+                                            options
+                                        </ContextMenu.Trigger>
+                                        <ContextMenu.Portal>
+                                            <ContextMenu.Content
+                                                className="min-w-[220px] rounded-md bg-white dark:bg-accent-dark p-1 shadow-xl"
+                                                data-scheme="primary"
+                                            >
+                                                <ContextMenu.Item 
+                                                    className="group relative flex h-[25px] select-none items-center rounded px-2.5 text-[13px] leading-none text-primary hover:bg-primary outline-none data-[disabled]:pointer-events-none data-[highlighted]:bg-input-bg data-[disabled]:text-muted"
+                                                    onClick={() => handleSnapToSide('left')}
+                                                >
+                                                    Snap to left half
+                                                    <div className="ml-auto pl-5 text-secondary group-data-[disabled]:text-muted group-data-[highlighted]:text-primary">
+                                                        ⌘+←
+                                                    </div>
+                                                </ContextMenu.Item>
+                                                <ContextMenu.Item 
+                                                    className="group relative flex h-[25px] select-none items-center rounded px-2.5 text-[13px] leading-none text-primary hover:bg-primary outline-none data-[disabled]:pointer-events-none data-[highlighted]:bg-input-bg data-[disabled]:text-muted"
+                                                    onClick={() => handleSnapToSide('right')}
+                                                >
+                                                    Snap to right half
+                                                    <div className="ml-auto pl-5 text-secondary group-data-[disabled]:text-muted group-data-[highlighted]:text-primary">
+                                                        ⌘+→
+                                                    </div>
+                                                </ContextMenu.Item>
+                                                <ContextMenu.Separator className="m-1 h-px bg-border dark:bg-border-dark" />
+                                                <ContextMenu.Item className="group relative flex h-[25px] select-none items-center rounded px-2.5 text-[13px] leading-none text-primary hover:bg-primary outline-none data-[disabled]:pointer-events-none data-[highlighted]:bg-input-bg data-[disabled]:text-muted">
+                                                    Back
+                                                    <div className="ml-auto pl-5 text-secondary group-data-[disabled]:text-muted group-data-[highlighted]:text-primary">
+                                                        ⌘+[
+                                                    </div>
+                                                </ContextMenu.Item>
+                                                <ContextMenu.Item
+                                                    className="group relative flex h-[25px] select-none items-center rounded px-2.5 text-[13px] leading-none text-primary hover:bg-primary outline-none data-[disabled]:pointer-events-none data-[highlighted]:bg-input-bg data-[disabled]:text-muted"
+                                                    disabled
+                                                >
+                                                    Forward
+                                                    <div className="ml-auto pl-5 text-secondary group-data-[disabled]:text-muted group-data-[highlighted]:text-primary">
+                                                        ⌘+]
+                                                    </div>
+                                                </ContextMenu.Item>
+                                                <ContextMenu.Item className="group relative flex h-[25px] select-none items-center rounded px-2.5 text-[13px] leading-none text-primary hover:bg-primary outline-none data-[disabled]:pointer-events-none data-[highlighted]:bg-input-bg data-[disabled]:text-muted">
+                                                    Reload
+                                                    <div className="ml-auto pl-5 text-secondary group-data-[disabled]:text-muted group-data-[highlighted]:text-primary">
+                                                        ⌘+R
+                                                    </div>
+                                                </ContextMenu.Item>
+                                            </ContextMenu.Content>
+                                        </ContextMenu.Portal>
+                                    </ContextMenu.Root>
+
                                     <button onClick={size.width >= window?.innerWidth ? collapseWindow : expandWindow}>
                                         {size.width >= window?.innerWidth ? (
                                             <IconCollapse45 className="size-4" />
