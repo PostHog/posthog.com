@@ -46,7 +46,7 @@ export default function AppWindow({ item, constraintsRef }: { item: any; constra
         y: window.innerHeight / 2 - size.height / 2,
     }))
     const [snapIndicator, setSnapIndicator] = useState<'left' | 'right' | null>(null)
-    const [tooltipVisible, setTooltipVisible] = useState(false)
+    const [windowOptionsTooltipVisible, setWindowOptionsTooltipVisible] = useState(false)
 
     useEffect(() => {
         const handleResize = () => {
@@ -111,37 +111,20 @@ export default function AppWindow({ item, constraintsRef }: { item: any; constra
     const handleDragEnd = (_event: any, info: any) => {
         if (!constraintsRef.current) return
 
+        if (snapIndicator !== null) {
+            handleSnapToSide(snapIndicator)
+            setSnapIndicator(null)
+            return
+        }
+
         const bounds = constraintsRef.current.getBoundingClientRect()
         const newX = position.x + info.offset.x
         const newY = position.y + info.offset.y
 
-        let finalX = newX
-        let finalWidth = size.width
-        let finalY = newY
-
-        if (snapIndicator === 'left' || snapIndicator === 'right') {
-            finalX = snapIndicator === 'left' ? 0 : bounds.width / 2
-            finalWidth = bounds.width / 2
-            finalY = bounds.top
-        } else {
-            finalX = Math.round(Math.min(Math.max(0, newX), bounds.width - size.width))
-            finalY = Math.round(Math.min(Math.max(bounds.top, newY), Math.max(bounds.top, bounds.height - size.height)))
-        }
-
         setPosition({
-            x: finalX,
-            y: finalY,
+            x: Math.round(Math.min(Math.max(0, newX), bounds.width - size.width)),
+            y: Math.round(Math.min(Math.max(bounds.top, newY), Math.max(bounds.top, bounds.height - size.height))),
         })
-
-        if (snapIndicator) {
-            setSize((prev) => ({
-                ...prev,
-                width: finalWidth,
-                height: bounds.height,
-            }))
-        }
-
-        setSnapIndicator(null)
     }
 
     const windowPosition = useMemo(() => {
@@ -169,14 +152,6 @@ export default function AppWindow({ item, constraintsRef }: { item: any; constra
             width: finalWidth,
             height: bounds.height,
         }))
-    }
-
-    const handleContextMenuOpen = () => {
-        setTooltipVisible(false)
-    }
-
-    const handleContextMenuClose = () => {
-        setTooltipVisible(false)
     }
 
     return (
@@ -263,39 +238,41 @@ export default function AppWindow({ item, constraintsRef }: { item: any; constra
                                     {item.meta?.title && item.meta.title}
                                 </p>
                                 <div className="flex">
-                                    <OSButton
-                                        variant="ghost"
-                                        size="xs"
-                                        onClick={handleMinimize}
-                                        className="!px-1.5"
-                                    >
+                                    <OSButton variant="ghost" size="xs" onClick={handleMinimize} className="!px-1.5">
                                         <IconMinus className="size-4 relative top-1" />
                                     </OSButton>
 
-                                    <ContextMenu.Root onOpenChange={(open) => open ? handleContextMenuOpen() : handleContextMenuClose()}>
-                                        <ContextMenu.Trigger className="data-[highlighted]:bg-accent data-[state=open]:bg-accent" asChild>
+                                    <ContextMenu.Root onOpenChange={() => setWindowOptionsTooltipVisible(false)}>
+                                        <ContextMenu.Trigger
+                                            className="data-[highlighted]:bg-accent data-[state=open]:bg-accent"
+                                            asChild
+                                        >
                                             <OSButton
                                                 variant="ghost"
                                                 size="xs"
-                                                onClick={size.width >= window?.innerWidth ? collapseWindow : expandWindow}
+                                                onClick={
+                                                    size.width >= window?.innerWidth ? collapseWindow : expandWindow
+                                                }
                                                 onMouseEnter={() => {
-                                                    setTooltipVisible(true)
+                                                    setWindowOptionsTooltipVisible(true)
                                                 }}
                                                 onMouseLeave={() => {
-                                                    setTooltipVisible(false)
+                                                    setWindowOptionsTooltipVisible(false)
                                                 }}
                                                 className="!px-1.5 group"
                                             >
-                                                <Tooltip 
+                                                <Tooltip
                                                     trigger={
                                                         <span>
                                                             <IconSquare className="size-5 group-hover:hidden" />
-                                                            {
-                                                                size.width >= window?.innerWidth ? <IconCollapse className="size-6 -m-0.5 hidden group-hover:block" /> : <IconExpand className="size-6 -m-0.5 hidden group-hover:block" />
-                                                            }
+                                                            {size.width >= window?.innerWidth ? (
+                                                                <IconCollapse className="size-6 -m-0.5 hidden group-hover:block" />
+                                                            ) : (
+                                                                <IconExpand className="size-6 -m-0.5 hidden group-hover:block" />
+                                                            )}
                                                         </span>
                                                     }
-                                                    open={tooltipVisible}
+                                                    open={windowOptionsTooltipVisible}
                                                 >
                                                     Right click for more options
                                                 </Tooltip>
@@ -309,7 +286,7 @@ export default function AppWindow({ item, constraintsRef }: { item: any; constra
                                                 <ContextMenu.Label className="px-2.5 text-[13px] leading-[25px] text-muted">
                                                     Snap to...
                                                 </ContextMenu.Label>
-                                                <ContextMenu.Item 
+                                                <ContextMenu.Item
                                                     className="group relative flex h-[25px] select-none items-center rounded px-2.5 text-sm leading-none text-primary hover:bg-primary outline-none data-[disabled]:pointer-events-none data-[highlighted]:bg-input-bg data-[disabled]:text-muted"
                                                     onClick={() => handleSnapToSide('left')}
                                                 >
@@ -318,7 +295,7 @@ export default function AppWindow({ item, constraintsRef }: { item: any; constra
                                                         Shift+←
                                                     </div>
                                                 </ContextMenu.Item>
-                                                <ContextMenu.Item 
+                                                <ContextMenu.Item
                                                     className="group relative flex h-[25px] select-none items-center rounded px-2.5 text-sm leading-none text-primary hover:bg-primary outline-none data-[disabled]:pointer-events-none data-[highlighted]:bg-input-bg data-[disabled]:text-muted"
                                                     onClick={() => handleSnapToSide('right')}
                                                 >
