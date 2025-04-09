@@ -1,34 +1,34 @@
 import React from 'react'
-import * as Accordion from '@radix-ui/react-accordion'
+import { Accordion as RadixAccordion } from 'radix-ui'
 import * as Icons from '@posthog/icons'
 
-interface AccordionItemProps extends React.ComponentPropsWithoutRef<typeof Accordion.Item> {
+interface AccordionItemProps extends React.ComponentPropsWithoutRef<typeof RadixAccordion.Item> {
     children: React.ReactNode
     className?: string
 }
 
 const AccordionItem = React.forwardRef<HTMLDivElement, AccordionItemProps>(
     ({ children, className, ...props }, forwardedRef) => (
-        <Accordion.Item
+        <RadixAccordion.Item
             className={`border-primary border-x overflow-hidden first:mt-0 first:rounded-t last:rounded-b focus-within:relative focus-within:z-10 focus-within:shadow-[0_0_2px_2px] focus-within:shadow-border [&_h3]:mb-0 ${className}`}
             {...props}
             ref={forwardedRef}
         >
             {children}
-        </Accordion.Item>
+        </RadixAccordion.Item>
     )
 )
 AccordionItem.displayName = 'AccordionItem'
 
-interface AccordionTriggerProps extends React.ComponentPropsWithoutRef<typeof Accordion.Trigger> {
+interface AccordionTriggerProps extends React.ComponentPropsWithoutRef<typeof RadixAccordion.Trigger> {
     children: React.ReactNode
     className?: string
 }
 
 const AccordionTrigger = React.forwardRef<HTMLButtonElement, AccordionTriggerProps>(
     ({ children, className, ...props }, forwardedRef) => (
-        <Accordion.Header className="flex">
-            <Accordion.Trigger
+        <RadixAccordion.Header className="flex">
+            <RadixAccordion.Trigger
                 className={`group flex flex-1 cursor-default items-center justify-between bg-primary px-2 py-1 text-sm leading-none text-primary border-b border-primary outline-none hover:bg-mauve2 ${className}`}
                 {...props}
                 ref={forwardedRef}
@@ -38,31 +38,31 @@ const AccordionTrigger = React.forwardRef<HTMLButtonElement, AccordionTriggerPro
                     className="size-6 transition-transform duration-300 ease-[cubic-bezier(0.87,_0,_0.13,_1)] group-data-[state=open]:rotate-180"
                     aria-hidden
                 />
-            </Accordion.Trigger>
-        </Accordion.Header>
+            </RadixAccordion.Trigger>
+        </RadixAccordion.Header>
     )
 )
 AccordionTrigger.displayName = 'AccordionTrigger'
 
-interface AccordionContentProps extends React.ComponentPropsWithoutRef<typeof Accordion.Content> {
+interface AccordionContentProps extends React.ComponentPropsWithoutRef<typeof RadixAccordion.Content> {
     children: React.ReactNode
     className?: string
 }
 
 const AccordionContent = React.forwardRef<HTMLDivElement, AccordionContentProps>(
     ({ children, className, ...props }, forwardedRef) => (
-        <Accordion.Content
+        <RadixAccordion.Content
             className={`overflow-hidden bg-primary text-primary data-[state=closed]:animate-slideUp data-[state=open]:animate-slideDown data-[state=open]:border-primary data-[state=open]:border-b ${className}`}
             {...props}
             ref={forwardedRef}
         >
             <div className="p-2 text-sm">{children}</div>
-        </Accordion.Content>
+        </RadixAccordion.Content>
     )
 )
 AccordionContent.displayName = 'AccordionContent'
 
-interface AccordionRootProps extends Omit<React.ComponentPropsWithoutRef<typeof Accordion.Root>, 'type' | 'value' | 'defaultValue' | 'onValueChange'> {
+interface AccordionRootProps extends Omit<React.ComponentPropsWithoutRef<typeof RadixAccordion.Root>, 'type' | 'value' | 'defaultValue' | 'onValueChange'> {
     items: {
         value?: string
         trigger: React.ReactNode
@@ -73,9 +73,9 @@ interface AccordionRootProps extends Omit<React.ComponentPropsWithoutRef<typeof 
     onValueChange?: (value: string) => void
 }
 
-export const RadixAccordion = ({ items, className, defaultValue, onValueChange, ...props }: AccordionRootProps) => {
+export const Accordion = ({ items, className, defaultValue, onValueChange, ...props }: AccordionRootProps) => {
     return (
-        <Accordion.Root
+        <RadixAccordion.Root
             className={`rounded ${className}`}
             type="single"
             collapsible
@@ -89,7 +89,7 @@ export const RadixAccordion = ({ items, className, defaultValue, onValueChange, 
                     <AccordionContent>{content}</AccordionContent>
                 </AccordionItem>
             ))}
-        </Accordion.Root>
+        </RadixAccordion.Root>
     )
 }
 

@@ -1,5 +1,4 @@
 import React from 'react'
-import { Accordion } from 'radix-ui'
 import { Select } from '../RadixUI/Select'
 import HeaderBar from 'components/OSChrome/HeaderBar'
 import * as Icons from '@posthog/icons'
@@ -10,7 +9,7 @@ import CloudinaryImage from 'components/CloudinaryImage'
 import { DebugContainerQuery } from 'components/DebugContainerQuery'
 import ScrollArea from 'components/RadixUI/ScrollArea'
 import { productMenu } from '../../navs'
-import { RadixAccordion } from '../RadixUI/Accordion'
+import { Accordion } from '../RadixUI/Accordion'
 
 const selectOptions = [
     {
@@ -92,7 +91,7 @@ export default function Explorer({
             <div className="flex flex-grow min-h-0">
                 <aside data-scheme="secondary" className="w-64 bg-primary p-2 border-r border-primary h-full">
                     <ScrollArea>
-                        <RadixAccordion
+                        <Accordion
                             data-scheme="primary"
                             className="rounded"
                             defaultValue="item-0"
