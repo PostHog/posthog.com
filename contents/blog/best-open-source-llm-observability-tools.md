@@ -63,6 +63,8 @@ You can [get started right away](http://us.posthog.com/signup), no sales call or
 
 Langfuse can be self-hosted for free. If you prefer a managed service, Langfuse Cloud is free to use up to 50k events per month and 2 users, but this only includes 30 day data access. Pricing beyond this starts at $59/m for 100k events with additional events at $8/m more.
 
+![Langfuse dashboard](https://res.cloudinary.com/dmukukwp6/image/upload/langfuse_6db7c2d9e7.png)
+
 ### What makes Langfuse special?
 
 Langfuse is one of the original tools in the LLM observability space. This means it has a wide range of tools for LLM app developers to use and have been instrumental in defining what they look like. 
@@ -79,7 +81,9 @@ Langfuse is also the most fully-featured LLM observability tool. Its pricing pag
 
 Opik is an open source platform for evaluating, testing, and monitoring LLM apps. It provides tracing, annotations, a prompt and model playground, evaluation, and more. It’s built by Comet, an end-to-end model evaluation platform for developers.
 
-Opik’s free hosted plan provides 25k spans per month with unlimited team members and a 60-day data retention. Beyond this, its Pro plan is $39 per month for 100k spans per month with every extra 100k spans costing $5. 
+Opik’s free hosted plan provides 25k spans per month with unlimited team members and a 60-day data retention. Beyond this, its Pro plan is $39 per month for 100k spans per month with every extra 100k spans costing $5.
+
+![Opik dashboard](https://res.cloudinary.com/dmukukwp6/image/upload/opik_7fcc9b0840.png)
 
 ### What makes Opik special?
 
@@ -97,6 +101,8 @@ Traceloop is free up to 50k spans per month and 5 seats, but this only provides 
 
 OpenLLMetry can capture data from a range of LLM providers, vector DBs, and LLM frameworks. It can then send this data to a range of supported destinations from Traceloop to Datadog to Honeycomb.
 
+![OpenLLMetry dashboard](https://res.cloudinary.com/dmukukwp6/image/upload/openllmetry_aa916c3921.png)
+
 ### What makes OpenLLMetry special?
 
 With its range of extensions and destinations, OpenLLMetry is very likely to integrate with the observability tools you already use. 
@@ -111,7 +117,9 @@ It integrates with the broader OpenTelemetry ecosystem, meaning it can instrumen
 
 Phoenix is an open source AI observability platform. It provides tracing, evaluation, experiments, prompt management, and more. It works out-of-the-box with frameworks like LlamaIndex and LangChain as well as LLM providers like OpenAI, Bedrock, and more. It’s built by Arize AI, a unified AI observability and evaluation platform. 
 
-Arize doesn’t provide a free hosted version of Phoenix. Their product, AX Pro, starts at $50 per month for 10k spans and up to 3 users. 
+Arize doesn’t provide a free hosted version of Phoenix. Their product, AX Pro, starts at $50 per month for 10k spans and up to 3 users.
+
+![Phoenix](https://res.cloudinary.com/dmukukwp6/image/upload/phoenix_fb7498c189.png)
 
 ### What makes Phoenix special?
 
@@ -129,6 +137,8 @@ Like Opik, Phoenix is connected to a broader AI development platform. Unique to 
 
 Its hosted version is free up to 10,000 requests with some features limited to the $20/m pro and $200/m team plans. The costs for requests beyond the first 10,000 is unknown, though.
 
+![Helicone dashboard](https://res.cloudinary.com/dmukukwp6/image/upload/helicone_0a6eeadac6.png)
+
 ### What makes Helicone special?
 
 Helicone provides purpose-built tools for improving LLMs, like its prompt playground, prompt management, evaluation scoring, and feedback. This helps developers improve their LLM applications.
@@ -144,6 +154,8 @@ For developers focused on performance and reliability concerns, Helicone also co
 Lunary is a toolkit for LLM chatbots. It includes conversation and feedback tracking, analytics, prompt management, and more. It has integrations with the popular LLM providers as well as destinations like PostHog (😄), Snowflake, and Segment. 
 
 Its hosted version has a free tier, which offers 10k events per month with 30 day retention. The team plan raises this to 50k events per month and is $20 per user per month.
+
+![Lunary dashboard](https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_04_09_at_10_21_31_2x_51b9dbad71.png)
 
 ### What makes Lunary special?
 
