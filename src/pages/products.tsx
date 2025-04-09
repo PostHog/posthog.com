@@ -169,9 +169,9 @@ const productDetails: Record<
         complexity: ['People who code'],
     },
     'api-queries': {
-        freeTierLimit: '1TB of read data',
-        denominator: 'TB',
-        startingPrice: '$12',
+        freeTierLimit: '1,000',
+        denominator: 'GB',
+        startingPrice: '$0,012',
         description: 'Capture, query, update, and analyze nearly any PostHog data',
         roles: ['Data engineers'],
         goals: ['Data ops and monitoring'],
