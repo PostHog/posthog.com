@@ -1,73 +1,42 @@
-import React, { useState, useCallback } from 'react';
-import * as ScrollArea from '@radix-ui/react-scroll-area';
-import * as RadioGroup from '@radix-ui/react-radio-group';
-import * as Icons from '@posthog/icons';
+import React, { useState, useCallback } from 'react'
+import * as ScrollArea from '@radix-ui/react-scroll-area'
+import * as RadioGroup from '@radix-ui/react-radio-group'
+import * as Icons from '@posthog/icons'
+import { IMenu } from 'components/PostLayout/types'
 
 // --- Data Structure ---
-interface FileItem {
-    id: string;
-    name: string;
-    type: 'folder' | 'file';
-    children?: FileItem[];
+
+// Custom hook to process file data and provide utility functions
+function useFileData(sampleData: IMenu[]) {
+    const rootItems: IMenu[] = []
+
+    function processData(items: IMenu[], parentId: IMenu | null = null) {
+        items.forEach((item) => {
+            if (!parentId) {
+                rootItems.push(item)
+            }
+            if (item.children) {
+                processData(item.children, item)
+            }
+        })
+    }
+
+    processData(sampleData) // Process sample data into a structure for easier lookup
+
+    const getItemChildren = useCallback((item: IMenu | null): IMenu[] => {
+        if (item === null) return rootItems // Root level
+        return item.children || []
+    }, [])
+
+    return { getItemChildren }
 }
-
-// Sample Data (Replace with your actual data source)
-const sampleData: FileItem[] = [
-    {
-        id: 'docs',
-        name: 'Documents',
-        type: 'folder',
-        children: [
-            { id: 'work', name: 'Work', type: 'folder', children: [
-                { id: 'report.pdf', name: 'report.pdf', type: 'file' },
-                { id: 'notes.txt', name: 'notes.txt', type: 'file' },
-            ]},
-            { id: 'personal', name: 'Personal', type: 'folder', children: [
-                { id: 'vacation.jpg', name: 'vacation.jpg', type: 'file' },
-            ]},
-            { id: 'resume.pdf', name: 'resume.pdf', type: 'file' },
-        ],
-    },
-    {
-        id: 'downloads',
-        name: 'Downloads',
-        type: 'folder',
-        children: [
-            { id: 'app.dmg', name: 'app.dmg', type: 'file' },
-            { id: 'archive.zip', name: 'archive.zip', type: 'file' },
-        ],
-    },
-    { id: 'image.png', name: 'image.png', type: 'file' },
-];
-
-const dataMap = new Map<string, FileItem>();
-const rootItems: FileItem[] = [];
-
-function processData(items: FileItem[], parentId: string | null = null) {
-    items.forEach(item => {
-        dataMap.set(item.id, item);
-        if (!parentId) {
-            rootItems.push(item);
-        }
-        if (item.children) {
-            processData(item.children, item.id);
-        }
-    });
-}
-processData(sampleData); // Process sample data into a map for easier lookup
-
-const getItemChildren = (itemId: string | null): FileItem[] => {
-    if (itemId === null) return rootItems; // Root level
-    const item = dataMap.get(itemId);
-    return item?.type === 'folder' ? item.children || [] : [];
-};
 
 // --- Components ---
 
 interface FileColumnProps {
-    items: FileItem[];
-    selectedId: string | null;
-    onSelect: (id: string) => void;
+    items: IMenu[]
+    selectedId: number | null
+    onSelect: (id: number) => void
 }
 
 const FileColumn: React.FC<FileColumnProps> = ({ items, selectedId, onSelect }) => {
@@ -75,28 +44,28 @@ const FileColumn: React.FC<FileColumnProps> = ({ items, selectedId, onSelect }) 
         <ScrollArea.Root className="h-full w-64 border-r border-border dark:border-border-dark flex-shrink-0">
             <ScrollArea.Viewport className="h-full w-full rounded-lg p-1">
                 <RadioGroup.Root
-                    value={selectedId ?? ''}
+                    value={selectedId?.toString() ?? ''}
                     onValueChange={onSelect}
                     className="flex flex-col space-y-px"
                 >
-                    {items.map((item) => {
-                        const isSelected = item.id === selectedId;
+                    {items.map((item, index) => {
+                        const isSelected = index === selectedId
                         return (
                             <RadioGroup.Item
-                                key={item.id}
-                                value={item.id}
+                                key={index}
+                                value={index.toString()}
                                 className="group relative flex select-none items-center justify-between rounded-sm px-2 py-1.5 text-sm outline-none data-[state=checked]:bg-accent dark:data-[state=checked]:bg-accent-dark hover:bg-accent/50 dark:hover:bg-accent-dark/50 data-[disabled]:pointer-events-none data-[disabled]:opacity-50 focus:relative focus:z-10 focus:ring-1 focus:ring-border dark:focus:ring-border-dark"
                             >
                                 <div className="flex items-center space-x-2 truncate">
                                     {/* Using IconCode as folder placeholder due to persistent linter issues with IconFolder */}
-                                    {item.type === 'folder' ? (
+                                    {item.children ? (
                                         <Icons.IconCode className="w-4 h-4 text-secondary dark:text-secondary-dark flex-shrink-0" />
                                     ) : (
                                         <Icons.IconDocument className="w-4 h-4 text-secondary dark:text-secondary-dark flex-shrink-0" />
                                     )}
                                     <span className="truncate text-primary dark:text-primary-dark">{item.name}</span>
                                 </div>
-                                {item.type === 'folder' && (
+                                {item.children && (
                                     <Icons.IconChevronRight className="w-4 h-4 text-secondary dark:text-secondary-dark opacity-50 group-data-[state=checked]:opacity-100 flex-shrink-0" />
                                 )}
                                 {/* Hidden radio indicator - Radix handles state */}
@@ -106,7 +75,7 @@ const FileColumn: React.FC<FileColumnProps> = ({ items, selectedId, onSelect }) 
                                     </RadioGroup.Indicator>
                                 </div>
                             </RadioGroup.Item>
-                        );
+                        )
                     })}
                 </RadioGroup.Root>
             </ScrollArea.Viewport>
@@ -118,68 +87,77 @@ const FileColumn: React.FC<FileColumnProps> = ({ items, selectedId, onSelect }) 
             </ScrollArea.Scrollbar>
             <ScrollArea.Corner />
         </ScrollArea.Root>
-    );
-};
+    )
+}
 
+export const FileMenu: React.FC<{ initialPath?: IMenu[]; menu: IMenu[] }> = ({ initialPath = [], menu }) => {
+    const { getItemChildren } = useFileData(menu)
+    const [path, setPath] = useState<(IMenu | null)[]>([null, ...initialPath]) // Start with null for root
 
-export const FileMenu: React.FC<{ initialPath?: string[] }> = ({ initialPath = [] }) => {
-    const [path, setPath] = useState<(string | null)[]>([null, ...initialPath]); // Start with null for root
+    const handleSelect = useCallback(
+        (columnIndex: number, item: IMenu) => {
+            const newPath = path.slice(0, columnIndex + 1) // Trim path up to the current column index
+            newPath.push(item) // Add the newly selected item
 
-    const handleSelect = useCallback((columnIndex: number, itemId: string) => {
-        const selectedItem = dataMap.get(itemId);
-        const newPath = path.slice(0, columnIndex + 1); // Trim path up to the current column index
-        newPath.push(itemId); // Add the newly selected item
+            setPath(newPath)
+        },
+        [path]
+    )
 
-        setPath(newPath);
-    }, [path]);
-
-    const columns: { items: FileItem[]; selectedId: string | null }[] = [];
+    const columns: { items: IMenu[]; selectedItem: IMenu | null }[] = []
     for (let i = 0; i < path.length; i++) {
-        const parentId = path[i]; // The item selected in the previous column (or null for root)
-        const items = getItemChildren(parentId);
-        const selectedIdInNextCol = (i + 1 < path.length) ? path[i + 1] : null; // What's selected in the column *we are generating*
+        const parentItem = path[i] // The item selected in the previous column (or null for root)
+        const items = getItemChildren(parentItem)
+        const selectedItemInNextCol = i + 1 < path.length ? path[i + 1] : null // What's selected in the column *we are generating*
 
         // Only add a column if the parent was a folder (or root)
-        if (i === 0 || (parentId && dataMap.get(parentId)?.type === 'folder')) {
-             columns.push({ items, selectedId: selectedIdInNextCol });
+        if (i === 0 || (parentItem && parentItem.children)) {
+            columns.push({ items, selectedItem: selectedItemInNextCol })
         }
 
-         // Stop adding columns if the last selected item was a file
-         if (parentId && dataMap.get(parentId)?.type === 'file') {
-            break;
+        // Stop adding columns if the last selected item was a file
+        if (parentItem && !parentItem.children) {
+            break
         }
     }
 
     // Determine if the very last selected item in the path is a file to show a preview
-    const lastSelectedId = path[path.length - 1];
-    const lastSelectedItem = lastSelectedId ? dataMap.get(lastSelectedId) : null;
-    const showPreview = lastSelectedItem?.type === 'file';
+    const lastSelectedItem = path[path.length - 1]
+    const showPreview = lastSelectedItem && !lastSelectedItem.children
 
+    console.log(path)
 
     return (
-        <div data-scheme="primary" className="h-72 w-full border border-border dark:border-border-dark rounded-md overflow-hidden bg-bg-light dark:bg-bg-dark">
+        <div
+            data-scheme="primary"
+            className="h-72 w-full border border-border dark:border-border-dark rounded-md overflow-hidden bg-bg-light dark:bg-bg-dark"
+        >
             <ScrollArea.Root className="h-full w-full" type="auto">
                 <ScrollArea.Viewport className="h-full w-full">
                     <div className="flex h-full">
                         {columns.map((col, index) => (
-                           <FileColumn
+                            <FileColumn
                                 key={index} // Using index is okay here as columns are added/removed predictably
                                 items={col.items}
-                                selectedId={col.selectedId}
-                                onSelect={(itemId) => handleSelect(index, itemId)}
+                                selectedId={col.selectedItem ? col.items.indexOf(col.selectedItem) : null}
+                                onSelect={(itemId) => handleSelect(index, col.items[itemId])}
                             />
                         ))}
-                         {/* Optional File Preview Column */}
+                        {/* Optional File Preview Column */}
                         {showPreview && lastSelectedItem && (
                             <div className="h-full w-64 border-r border-border dark:border-border-dark flex-shrink-0 p-4">
-                                <h3 className="text-lg font-semibold text-primary dark:text-primary-dark mb-2">{lastSelectedItem.name}</h3>
-                                <p className="text-sm text-secondary dark:text-secondary-dark">Type: {lastSelectedItem.type}</p>
+                                <h3 className="text-lg font-semibold text-primary dark:text-primary-dark mb-2">
+                                    {lastSelectedItem.name}
+                                </h3>
+                                <p className="text-sm text-secondary dark:text-secondary-dark">
+                                    Type: {lastSelectedItem.children ? 'folder' : 'file'}
+                                </p>
                                 {/* Add more file details here */}
                             </div>
                         )}
                     </div>
                 </ScrollArea.Viewport>
-                 <ScrollArea.Scrollbar
+                <ScrollArea.Scrollbar
                     className="flex select-none touch-none p-0.5 bg-black/5 transition-colors duration-[160ms] ease-out data-[orientation=vertical]:w-2.5 data-[orientation=horizontal]:flex-col data-[orientation=horizontal]:h-2"
                     orientation="horizontal"
                 >
@@ -188,7 +166,7 @@ export const FileMenu: React.FC<{ initialPath?: string[] }> = ({ initialPath = [
                 <ScrollArea.Corner />
             </ScrollArea.Root>
         </div>
-    );
-};
+    )
+}
 
-export default FileMenu;
+export default FileMenu

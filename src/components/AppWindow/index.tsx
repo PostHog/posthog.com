@@ -11,7 +11,7 @@ import { Button } from 'components/Squeak/components/SubscribeButton'
 import MenuBar from 'components/RadixUI/MenuBar'
 import { Popover } from '../RadixUI/Popover'
 import { FileMenu } from '../RadixUI/FileMenu'
-import { Link } from 'gatsby'
+import { IMenu } from 'components/PostLayout/types'
 
 const getSizeDefaults = () => ({
     max: {
@@ -42,8 +42,8 @@ const snapThreshold = -50
 export default function AppWindow({ item, constraintsRef }: { item: AppWindowType; constraintsRef: any }) {
     const { minimizeWindow, bringToFront, closeWindow, focusedWindow, taskbarHeight } = useApp()
     const controls = useDragControls()
-    const initialSizeKey = item.key as keyof typeof fixedAppSizes;
-    const hasFixedSize = Object.prototype.hasOwnProperty.call(fixedAppSizes, initialSizeKey);
+    const initialSizeKey = item.key as keyof typeof fixedAppSizes
+    const hasFixedSize = Object.prototype.hasOwnProperty.call(fixedAppSizes, initialSizeKey)
     const [sizeDefaults, setSizeDefaults] = useState(hasFixedSize ? fixedAppSizes[initialSizeKey] : getSizeDefaults())
     const [previousSize, setPreviousSize] = useState({ width: sizeDefaults.max.width, height: sizeDefaults.max.height })
     const [size, setSize] = useState({ width: sizeDefaults.max.width, height: sizeDefaults.max.height })
@@ -54,6 +54,7 @@ export default function AppWindow({ item, constraintsRef }: { item: AppWindowTyp
     }))
     const [snapIndicator, setSnapIndicator] = useState<'left' | 'right' | null>(null)
     const [windowOptionsTooltipVisible, setWindowOptionsTooltipVisible] = useState(false)
+    const [menu, setMenu] = useState<IMenu[]>([])
 
     useEffect(() => {
         const handleResize = () => {
@@ -162,7 +163,7 @@ export default function AppWindow({ item, constraintsRef }: { item: AppWindowTyp
     }
 
     return (
-        <WindowProvider appWindow={item}>
+        <WindowProvider appWindow={item} menu={menu} setMenu={setMenu}>
             <AnimatePresence>
                 {!item.minimized && (
                     <>
@@ -241,7 +242,6 @@ export default function AppWindow({ item, constraintsRef }: { item: AppWindowTyp
                                 className="flex-shrink-0 w-full flex items-center justify-between px-2 py-1 bg-primary cursor-move"
                                 onPointerDown={(e) => controls.start(e)}
                             >
-                                
                                 <MenuBar
                                     menus={[
                                         {
@@ -253,24 +253,24 @@ export default function AppWindow({ item, constraintsRef }: { item: AppWindowTyp
                                                     items: [
                                                         {
                                                             type: 'item',
-                                                            label: 'New Max chat'
+                                                            label: 'New Max chat',
                                                         },
                                                         {
-                                                            type: 'separator'
+                                                            type: 'separator',
                                                         },
                                                         {
                                                             type: 'item',
                                                             label: 'No open chats',
-                                                            disabled: true
-                                                        }
-                                                    ]
+                                                            disabled: true,
+                                                        },
+                                                    ],
                                                 },
                                                 {
                                                     type: 'item',
-                                                    label: 'Bookmark'
+                                                    label: 'Bookmark',
                                                 },
                                                 {
-                                                    type: 'separator'
+                                                    type: 'separator',
                                                 },
                                                 {
                                                     type: 'item',
@@ -278,28 +278,29 @@ export default function AppWindow({ item, constraintsRef }: { item: AppWindowTyp
                                                     onClick: () => {
                                                         minimizeWindow(item)
                                                         setTimeout(() => closeWindow(item), 250)
-                                                    }
-                                                }
-                                            ]
-                                        }
+                                                    },
+                                                },
+                                            ],
+                                        },
                                     ]}
                                 />
-                                
-                                
-                                <div className="flex-1 truncate flex items-center justify-center">
-                                    <Popover
-                                        trigger={
-                                            <button className="text-primary hover:text-primary dark:text-primary-dark dark:hover:text-primary-dark text-left flex items-center justify-center text-sm font-semibold">
-                                                {item.meta?.title && item.meta.title}
-                                                <IconChevronDown className="size-6 -m-1" />
-                                            </button>
-                                        }
-                                        dataScheme="primary"
-                                        contentClassName="w-auto p-0 border border-border dark:border-border-dark"
-                                    >
-                                        <FileMenu initialPath={['docs', 'work']} />
-                                    </Popover>
-                                </div>
+
+                                {menu && menu.length > 0 && (
+                                    <div className="flex-1 truncate flex items-center justify-center">
+                                        <Popover
+                                            trigger={
+                                                <button className="text-primary hover:text-primary dark:text-primary-dark dark:hover:text-primary-dark text-left flex items-center justify-center text-sm font-semibold">
+                                                    {item.meta?.title && item.meta.title}
+                                                    <IconChevronDown className="size-6 -m-1" />
+                                                </button>
+                                            }
+                                            dataScheme="primary"
+                                            contentClassName="w-auto p-0 border border-border dark:border-border-dark"
+                                        >
+                                            <FileMenu menu={menu} />
+                                        </Popover>
+                                    </div>
+                                )}
                                 <div className="flex">
                                     <OSButton variant="ghost" size="xs" onClick={handleMinimize} className="!px-1.5">
                                         <IconMinus className="size-4 relative top-1" />

@@ -1,3 +1,4 @@
+import { IMenu } from 'components/PostLayout/types'
 import React, { createContext, useContext } from 'react'
 
 export interface AppWindow {
@@ -17,16 +18,20 @@ export interface AppWindow {
 interface WindowProviderProps {
     children: React.ReactNode
     appWindow: AppWindow
+    menu: IMenu[]
+    setMenu: (menu: IMenu[]) => void
 }
 
 interface WindowContextType {
     appWindow?: AppWindow
+    menu?: IMenu[]
+    setMenu?: (menu: IMenu[]) => void
 }
 
 export const Context = createContext<WindowContextType>({})
 
-export const Provider = ({ appWindow, children }: WindowProviderProps) => {
-    return <Context.Provider value={{ appWindow }}>{children}</Context.Provider>
+export const Provider = ({ appWindow, menu, setMenu, children }: WindowProviderProps) => {
+    return <Context.Provider value={{ appWindow, menu, setMenu }}>{children}</Context.Provider>
 }
 
 export const useWindow = (): WindowContextType => {

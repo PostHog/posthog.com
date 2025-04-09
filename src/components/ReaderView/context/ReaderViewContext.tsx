@@ -2,6 +2,7 @@ import React, { createContext, useContext, useState, useCallback, useEffect } fr
 import { useLocation } from '@reach/router'
 import { useLayoutData } from 'components/Layout/hooks'
 import menu from '../../../navs'
+import { useWindow } from '../../../context/Window'
 
 interface ReaderViewContextType {
     isNavVisible: boolean
@@ -58,6 +59,7 @@ const getComputedLineHeight = (selector: string) => {
 const ReaderViewContext = createContext<ReaderViewContextType | undefined>(undefined)
 
 export function ReaderViewProvider({ children }: { children: React.ReactNode }) {
+    const { setMenu } = useWindow()
     const [isNavVisible, setIsNavVisible] = useState(true)
     const [isTocVisible, setIsTocVisible] = useState(true)
     const { fullWidthContent } = useLayoutData()
@@ -124,6 +126,10 @@ export function ReaderViewProvider({ children }: { children: React.ReactNode }) 
             return currentURL === menuItem.url?.split('?')[0] || recursiveSearch(menuItem.children, currentURL)
         })
     )
+
+    useEffect(() => {
+        setMenu?.(internalMenu)
+    }, [activeInternalMenu])
 
     const value = {
         isNavVisible,
