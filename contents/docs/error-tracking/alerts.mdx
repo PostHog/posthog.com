@@ -21,13 +21,13 @@ This will then send alerts to your chosen destination when an issue is created o
 
 ## Other alerting options
 
-Since error tracking works by capturing `$exception` events, we can use other features of PostHog to alert you using these events.
+Since error tracking works by capturing `$exception` events, PostHog features that trigger by events can play a role in alerts too.
 
 ### Real time destinations
 
 The first way is using [real time destinations](/docs/cdp/destinations). This enables you to send events (like `$exception`) to other tools as soon as they are ingested.
 
-To create a real time destination, go to the [data pipeline tab](https://us.posthog.com/pipeline/overview) in PostHog, click **+ New**, and then select **Destination**. Choose your destination and press **+ Create**.
+To create a real time destination, go to the [data pipelines tab](https://us.posthog.com/pipeline/overview) in PostHog, click **+ New**, and then select **Destination**. Choose your destination and press **+ Create**.
 
 On the destination creation screen, make sure to add an event matcher for the `$exception` event, filter for the properties you want, and set the trigger options.
 
