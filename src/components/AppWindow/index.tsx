@@ -304,6 +304,20 @@ export default function AppWindow({ item, constraintsRef }: { item: any; constra
                                                         Shift+→
                                                     </div>
                                                 </ContextMenu.Item>
+                                                <ContextMenu.Separator className="m-[5px] h-px bg-border" />
+                                                <ContextMenu.Label className="px-2.5 text-[13px] leading-[25px] text-muted">
+                                                    Resize
+                                                </ContextMenu.Label>
+                                                <ContextMenu.Item
+                                                    disabled={size.width === window?.innerWidth}
+                                                    className="group relative flex h-[25px] select-none items-center rounded px-2.5 text-sm leading-none text-primary hover:bg-primary outline-none data-[disabled]:pointer-events-none data-[highlighted]:bg-input-bg data-[disabled]:text-muted"
+                                                    onClick={expandWindow}
+                                                >
+                                                    Maximize
+                                                    <div className="ml-auto pl-5 text-secondary group-data-[disabled]:text-muted group-data-[highlighted]:text-primary">
+                                                        Shift+↑
+                                                    </div>
+                                                </ContextMenu.Item>
                                             </ContextMenu.Content>
                                         </ContextMenu.Portal>
                                     </ContextMenu.Root>
