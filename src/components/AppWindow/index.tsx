@@ -1,12 +1,14 @@
 import React, { useEffect, useState, useMemo } from 'react'
 import { AnimatePresence, motion, useDragControls } from 'framer-motion'
-import { IconMinus, IconX } from '@posthog/icons'
+import { IconChevronDown, IconMinus, IconX } from '@posthog/icons'
 import { IconCollapse, IconExpand, IconSquare } from '../OSIcons/Icons'
 import { useApp } from '../../context/App'
 import { Provider as WindowProvider } from '../../context/Window'
 import { ContextMenu } from 'radix-ui'
 import Tooltip from 'components/RadixUI/Tooltip'
 import OSButton from 'components/OSButton'
+import { Button } from 'components/Squeak/components/SubscribeButton'
+import MenuBar from 'components/RadixUI/MenuBar'
 
 const getSizeDefaults = () => ({
     max: {
@@ -234,6 +236,51 @@ export default function AppWindow({ item, constraintsRef }: { item: any; constra
                                 className="flex-shrink-0 w-full flex items-center justify-between px-2 py-1 bg-primary cursor-move"
                                 onPointerDown={(e) => controls.start(e)}
                             >
+                                
+                                <MenuBar
+                                    menus={[
+                                        {
+                                            trigger: <IconChevronDown className="size-6 -m-1" />,
+                                            items: [
+                                                {
+                                                    type: 'submenu',
+                                                    label: 'Ask Max about this page',
+                                                    items: [
+                                                        {
+                                                            type: 'item',
+                                                            label: 'New Max chat'
+                                                        },
+                                                        {
+                                                            type: 'separator'
+                                                        },
+                                                        {
+                                                            type: 'item',
+                                                            label: 'No open chats',
+                                                            disabled: true
+                                                        }
+                                                    ]
+                                                },
+                                                {
+                                                    type: 'item',
+                                                    label: 'Bookmark'
+                                                },
+                                                {
+                                                    type: 'separator'
+                                                },
+                                                {
+                                                    type: 'item',
+                                                    label: 'Close',
+                                                    onClick: () => {
+                                                        minimizeWindow(item)
+                                                        setTimeout(() => closeWindow(item), 250)
+                                                    }
+                                                }
+                                            ]
+                                        }
+                                    ]}
+                                />
+                                
+                                
                                 <p className="m-0 text-sm font-semibold line-clamp-1">
                                     {item.meta?.title && item.meta.title}
                                 </p>

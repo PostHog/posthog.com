@@ -5,9 +5,16 @@ import Explorer from 'components/Explorer'
 import { Link } from 'gatsby'
 import { CallToAction } from 'components/CallToAction'
 import CloudinaryImage from 'components/CloudinaryImage'
+import SEO from 'components/seo'
 
 export default function ProductAnalytics(): JSX.Element {
     return (
+        <>
+            <SEO
+                title="Product Analytics - PostHog"
+                description="PostHog is the only product analytics platform built to natively work with Session Replay, Feature Flags, Experiments, and Surveys."
+                image={`/images/og/product-analytics.jpg`}
+            />
         <Explorer
             features
             pricing
@@ -43,5 +50,6 @@ export default function ProductAnalytics(): JSX.Element {
                 <CallToAction href="/talk-to-a-human" type="secondary" size="md">Talk to a human</CallToAction>
             </p>
         </Explorer>
+        </>
     )
 }

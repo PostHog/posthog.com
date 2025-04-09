@@ -12,6 +12,7 @@ export type MenuItemType = {
     disabled?: boolean
     icon?: React.ReactNode
     items?: MenuItemType[] // For submenus
+    onClick?: () => void
 }
 
 export type MenuType = {
@@ -20,8 +21,9 @@ export type MenuType = {
     items: MenuItemType[]
 }
 
+const RootClasses = 'flex gap-px py-0.5 h-full'
 const TriggerClasses =
-    'flex select-none items-center justify-between gap-0.5 rounded px-2.5 py-0.5 text-[13px] leading-none text-primary outline-none data-[highlighted]:bg-accent hover:bg-primary data-[state=open]:bg-accent'
+    'flex select-none items-center justify-between gap-0.5 rounded px-1.5 py-0.5 text-[13px] leading-none text-primary outline-none data-[highlighted]:bg-accent hover:bg-primary data-[state=open]:bg-accent'
 const ItemClasses =
     'hover-invert group relative flex h-[25px] select-none items-center rounded px-2.5 text-[13px] leading-none text-primary hover:bg-primary outline-none data-[disabled]:pointer-events-none data-[state=open]:bg-accent data-[highlighted]:bg-input-bg data-[disabled]:text-muted data-[highlighted]:data-[state=open]:text-secondary data-[highlighted]:bg-text-secondary data-[state=open]:text-secondary'
 const SubTriggerClasses =
@@ -59,7 +61,7 @@ const MenuItem: React.FC<{ item: MenuItemType }> = ({ item }) => {
     }
 
     return (
-        <RadixMenubar.Item className={ItemClasses} disabled={item.disabled}>
+        <RadixMenubar.Item className={ItemClasses} disabled={item.disabled} onClick={item.onClick}>
             <div className="flex items-center gap-2">
                 {item.icon}
                 {item.link ? (
@@ -77,11 +79,12 @@ const MenuItem: React.FC<{ item: MenuItemType }> = ({ item }) => {
 
 export interface MenuBarProps {
     menus: MenuType[]
+    className?: string
 }
 
-const MenuBar: React.FC<MenuBarProps> = ({ menus }) => {
+const MenuBar: React.FC<MenuBarProps> = ({ menus, className }) => {
     return (
-        <RadixMenubar.Root data-scheme="tertiary" className="flex gap-px py-0.5">
+        <RadixMenubar.Root data-scheme="tertiary" className={`${RootClasses} ${className || ''}`}>
             {menus.map((menu, menuIndex) => (
                 <RadixMenubar.Menu key={`menu-${menuIndex}`}>
                     <RadixMenubar.Trigger className={`${TriggerClasses} ${menu.bold ? 'font-bold' : 'font-medium'}`}>

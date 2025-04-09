@@ -56,7 +56,7 @@ export default function TaskBarMenu() {
             exit={{ translateY: '100%' }}
             className="w-full bg-accent border-b border-primary z-50 flex justify-between pl-0.5 pr-2"
         >
-            <MenuBar menus={menuData} />
+            <MenuBar menus={menuData} className="[&_button]:px-2" />
             <aside className="flex items-center gap-px py-0.5">
                 <OSButton variant="ghost" size="md">
                     <IconSearch className="size-5" />
