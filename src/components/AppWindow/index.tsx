@@ -13,6 +13,19 @@ import { Popover } from '../RadixUI/Popover'
 import { FileMenu } from '../RadixUI/FileMenu'
 import { Link } from 'gatsby'
 
+interface MenuItem {
+    id: string
+    name: string
+    type: 'folder' | 'file'
+    children?: MenuItem[]
+}
+
+interface AppWindowProps {
+    item: AppWindowType
+    constraintsRef: any
+    menuData?: MenuItem[]
+}
+
 const getSizeDefaults = () => ({
     max: {
         width: window.innerWidth * 0.9,
@@ -39,7 +52,18 @@ const fixedAppSizes = {
 
 const snapThreshold = -50
 
-export default function AppWindow({ item, constraintsRef }: { item: AppWindowType; constraintsRef: any }) {
+// Determine initial path dynamically based on menuData
+const determineInitialPath = (menuData: MenuItem[]): string[] => {
+    if (!menuData || menuData.length === 0) return [];
+    const firstItem = menuData[0];
+    const path = [firstItem.name];
+    if (firstItem.children && firstItem.children.length > 0) {
+        path.push(firstItem.children[0].name);
+    }
+    return path;
+};
+
+export default function AppWindow({ item, constraintsRef, menuData = [] }: AppWindowProps) {
     const { minimizeWindow, bringToFront, closeWindow, focusedWindow, taskbarHeight } = useApp()
     const controls = useDragControls()
     const initialSizeKey = item.key as keyof typeof fixedAppSizes;
@@ -54,6 +78,8 @@ export default function AppWindow({ item, constraintsRef }: { item: AppWindowTyp
     }))
     const [snapIndicator, setSnapIndicator] = useState<'left' | 'right' | null>(null)
     const [windowOptionsTooltipVisible, setWindowOptionsTooltipVisible] = useState(false)
+
+    console.log("AppWindow menuData:", menuData);
 
     useEffect(() => {
         const handleResize = () => {
@@ -297,7 +323,7 @@ export default function AppWindow({ item, constraintsRef }: { item: AppWindowTyp
                                         dataScheme="primary"
                                         contentClassName="w-auto p-0 border border-border dark:border-border-dark"
                                     >
-                                        <FileMenu initialPath={['docs', 'work']} />
+                                        <FileMenu menuData={menuData} initialPath={determineInitialPath(menuData)} />
                                     </Popover>
                                 </div>
                                 <div className="flex">

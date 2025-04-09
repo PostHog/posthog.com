@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from 'react';
+import React, { useState, useCallback, useMemo } from 'react';
 import * as ScrollArea from '@radix-ui/react-scroll-area';
 import * as RadioGroup from '@radix-ui/react-radio-group';
 import * as Icons from '@posthog/icons';
@@ -11,56 +11,10 @@ interface FileItem {
     children?: FileItem[];
 }
 
-// Sample Data (Replace with your actual data source)
-const sampleData: FileItem[] = [
-    {
-        id: 'docs',
-        name: 'Documents',
-        type: 'folder',
-        children: [
-            { id: 'work', name: 'Work', type: 'folder', children: [
-                { id: 'report.pdf', name: 'report.pdf', type: 'file' },
-                { id: 'notes.txt', name: 'notes.txt', type: 'file' },
-            ]},
-            { id: 'personal', name: 'Personal', type: 'folder', children: [
-                { id: 'vacation.jpg', name: 'vacation.jpg', type: 'file' },
-            ]},
-            { id: 'resume.pdf', name: 'resume.pdf', type: 'file' },
-        ],
-    },
-    {
-        id: 'downloads',
-        name: 'Downloads',
-        type: 'folder',
-        children: [
-            { id: 'app.dmg', name: 'app.dmg', type: 'file' },
-            { id: 'archive.zip', name: 'archive.zip', type: 'file' },
-        ],
-    },
-    { id: 'image.png', name: 'image.png', type: 'file' },
-];
-
-const dataMap = new Map<string, FileItem>();
-const rootItems: FileItem[] = [];
-
-function processData(items: FileItem[], parentId: string | null = null) {
-    items.forEach(item => {
-        dataMap.set(item.id, item);
-        if (!parentId) {
-            rootItems.push(item);
-        }
-        if (item.children) {
-            processData(item.children, item.id);
-        }
-    });
+interface FileMenuProps {
+    initialPath?: string[];
+    menuData?: FileItem[];
 }
-processData(sampleData); // Process sample data into a map for easier lookup
-
-const getItemChildren = (itemId: string | null): FileItem[] => {
-    if (itemId === null) return rootItems; // Root level
-    const item = dataMap.get(itemId);
-    return item?.type === 'folder' ? item.children || [] : [];
-};
 
 // --- Components ---
 
@@ -121,40 +75,79 @@ const FileColumn: React.FC<FileColumnProps> = ({ items, selectedId, onSelect }) 
     );
 };
 
+export function FileMenu({ initialPath = [], menuData }: FileMenuProps) {
+    const [selectedPath, setSelectedPath] = useState<string[]>(initialPath);
 
-export const FileMenu: React.FC<{ initialPath?: string[] }> = ({ initialPath = [] }) => {
-    const [path, setPath] = useState<(string | null)[]>([null, ...initialPath]); // Start with null for root
+    console.log("FileMenu received menuData:", menuData);
+    console.log("FileMenu initialPath:", initialPath);
+    console.log("FileMenu selectedPath:", selectedPath);
+
+    // Process the menu data into a map for easier lookup
+    const menuMap = useMemo(() => {
+        const map = new Map<string, FileItem>();
+        const processItems = (items: FileItem[], parentPath: string[] = []) => {
+            items.forEach((item) => {
+                const path = [...parentPath, item.name];
+                map.set(path.join('/'), item);
+                if (item.children) {
+                    processItems(item.children, path);
+                }
+            });
+        };
+        if (menuData) {
+            processItems(menuData);
+        }
+        console.log("FileMenu processed menuMap:", map);
+        return map;
+    }, [menuData]);
+
+    // Get items for a specific path
+    const getItemsForPath = (path: string[]): FileItem[] => {
+        if (path.length === 0) {
+            return menuData || [];
+        }
+        const parentKey = path.join('/');
+        const parent = menuMap.get(parentKey);
+        return parent?.children || [];
+    };
 
     const handleSelect = useCallback((columnIndex: number, itemId: string) => {
-        const selectedItem = dataMap.get(itemId);
-        const newPath = path.slice(0, columnIndex + 1); // Trim path up to the current column index
-        newPath.push(itemId); // Add the newly selected item
+        const selectedItem = menuMap.get(selectedPath.slice(0, columnIndex + 1).join('/'));
+        const newPath = selectedPath.slice(0, columnIndex + 1); // Trim path up to the current column index
+        newPath[columnIndex] = selectedItem?.name || ''; // Ensure the path is updated with the correct name
 
-        setPath(newPath);
-    }, [path]);
+        if (selectedItem?.type === 'folder') {
+            newPath.push(''); // Prepare for the next level
+        }
+
+        setSelectedPath(newPath);
+    }, [selectedPath, menuMap]);
+
+    // Function to calculate the maximum depth of the menuData
+    const calculateMaxDepth = (items: FileItem[], currentDepth = 0): number => {
+        return items.reduce((maxDepth, item) => {
+            const itemDepth = item.children ? calculateMaxDepth(item.children, currentDepth + 1) : currentDepth;
+            return Math.max(maxDepth, itemDepth);
+        }, currentDepth);
+    };
+
+    const maxDepth = useMemo(() => calculateMaxDepth(menuData || []), [menuData]);
 
     const columns: { items: FileItem[]; selectedId: string | null }[] = [];
-    for (let i = 0; i < path.length; i++) {
-        const parentId = path[i]; // The item selected in the previous column (or null for root)
-        const items = getItemChildren(parentId);
-        const selectedIdInNextCol = (i + 1 < path.length) ? path[i + 1] : null; // What's selected in the column *we are generating*
+    for (let i = 0; i < maxDepth; i++) {
+        const currentPath = selectedPath.slice(0, i);
+        const items = getItemsForPath(currentPath);
+        const selectedIdInNextCol = (i < selectedPath.length) ? selectedPath[i] : null;
 
-        // Only add a column if the parent was a folder (or root)
-        if (i === 0 || (parentId && dataMap.get(parentId)?.type === 'folder')) {
-             columns.push({ items, selectedId: selectedIdInNextCol });
-        }
-
-         // Stop adding columns if the last selected item was a file
-         if (parentId && dataMap.get(parentId)?.type === 'file') {
-            break;
-        }
+        columns.push({ items, selectedId: selectedIdInNextCol });
     }
 
-    // Determine if the very last selected item in the path is a file to show a preview
-    const lastSelectedId = path[path.length - 1];
-    const lastSelectedItem = lastSelectedId ? dataMap.get(lastSelectedId) : null;
-    const showPreview = lastSelectedItem?.type === 'file';
+    console.log("FileMenu columns:", columns);
 
+    // Determine if the very last selected item in the path is a file to show a preview
+    const lastSelectedId = selectedPath[selectedPath.length - 1];
+    const lastSelectedItem = lastSelectedId ? menuMap.get(lastSelectedId) : null;
+    const showPreview = lastSelectedItem?.type === 'file';
 
     return (
         <div data-scheme="primary" className="h-72 w-full border border-border dark:border-border-dark rounded-md overflow-hidden bg-bg-light dark:bg-bg-dark">
@@ -189,6 +182,6 @@ export const FileMenu: React.FC<{ initialPath?: string[] }> = ({ initialPath = [
             </ScrollArea.Root>
         </div>
     );
-};
+}
 
 export default FileMenu;
