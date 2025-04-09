@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from 'react'
+import React, { useState, useCallback, useEffect } from 'react'
 import * as ScrollArea from '@radix-ui/react-scroll-area'
 import * as RadioGroup from '@radix-ui/react-radio-group'
 import * as Icons from '@posthog/icons'
@@ -94,6 +94,31 @@ export const FileMenu: React.FC<{ initialPath?: IMenu[]; menu: IMenu[] }> = ({ i
     const { getItemChildren } = useFileData(menu)
     const [path, setPath] = useState<(IMenu | null)[]>([null, ...initialPath]) // Start with null for root
 
+    useEffect(() => {
+        const findPath = (items: IMenu[], targetPath: string, currentPath: IMenu[] = []): IMenu[] | null => {
+            for (const item of items) {
+                const newPath = [...currentPath, item]
+                if (item.url?.split('?')[0] === targetPath) {
+                    return newPath
+                }
+                if (item.children) {
+                    const foundPath = findPath(item.children, targetPath, newPath)
+                    if (foundPath) {
+                        return foundPath
+                    }
+                }
+            }
+            return null
+        }
+
+        const currentPathname = window.location.pathname
+        const foundPath = findPath(menu, currentPathname)
+
+        if (foundPath) {
+            setPath([null, ...foundPath])
+        }
+    }, [menu])
+
     const handleSelect = useCallback(
         (columnIndex: number, item: IMenu) => {
             const newPath = path.slice(0, columnIndex + 1) // Trim path up to the current column index
@@ -124,8 +149,6 @@ export const FileMenu: React.FC<{ initialPath?: IMenu[]; menu: IMenu[] }> = ({ i
     // Determine if the very last selected item in the path is a file to show a preview
     const lastSelectedItem = path[path.length - 1]
     const showPreview = lastSelectedItem && !lastSelectedItem.children
-
-    console.log(path)
 
     return (
         <div
