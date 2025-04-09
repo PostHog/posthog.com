@@ -14,9 +14,9 @@ export default function Wrapper() {
             <div ref={constraintsRef} className="flex-grow">
                 <Desktop />
             </div>
-            {windows.map((item) => (
-                <AppWindow item={item} key={item.key} constraintsRef={constraintsRef} />
-            ))}
+            {windows.map((item) => {
+                return <AppWindow item={item} key={item.key} constraintsRef={constraintsRef} />
+            })}
         </div>
     )
 }

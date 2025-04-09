@@ -29,7 +29,7 @@ import Link from 'components/Link'
 
 interface OSButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
     children?: React.ReactNode
-    variant?: 'default' | 'primary' | 'underline' |'ghost'
+    variant?: 'default' | 'primary' | 'underline' | 'ghost'
     size?: 'xs' | 'sm' | 'md' | 'lg' | 'xl'
     icon?: React.ReactNode
     tooltip?: string
@@ -58,7 +58,7 @@ export default function OSButton({
     ...props
 }: OSButtonProps) {
     const baseClasses =
-        'inline-flex items-center rounded border transition-colors transition-50 hover:transition-none transition-[font-size,line-height,padding] transition-200'
+        'inline-flex items-center rounded border transition-colors transition-50 hover:transition-none transition-[font-size,line-height,padding] transition-200 disabled:opacity-50 disabled:cursor-not-allowed'
 
     const sizeClasses = {
         xs: 'px-2 py-1 text-xs gap-1',

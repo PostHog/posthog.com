@@ -12,6 +12,7 @@ import MenuBar from 'components/RadixUI/MenuBar'
 import { Popover } from '../RadixUI/Popover'
 import { FileMenu } from '../RadixUI/FileMenu'
 import { IMenu } from 'components/PostLayout/types'
+import { navigate } from 'gatsby'
 
 const getSizeDefaults = () => ({
     max: {
@@ -55,7 +56,8 @@ export default function AppWindow({ item, constraintsRef }: { item: AppWindowTyp
     const [snapIndicator, setSnapIndicator] = useState<'left' | 'right' | null>(null)
     const [windowOptionsTooltipVisible, setWindowOptionsTooltipVisible] = useState(false)
     const [menu, setMenu] = useState<IMenu[]>([])
-
+    const [history, setHistory] = useState<string[]>([])
+    const [activeHistoryIndex, setActiveHistoryIndex] = useState(0)
     useEffect(() => {
         const handleResize = () => {
             setSizeDefaults(getSizeDefaults())
@@ -143,6 +145,9 @@ export default function AppWindow({ item, constraintsRef }: { item: AppWindowTyp
         }
     }, [size.width, size.height])
 
+    const canGoBack = history.length > 0 && activeHistoryIndex > 0
+    const canGoForward = activeHistoryIndex < history.length - 1
+
     const handleSnapToSide = (side: 'left' | 'right') => {
         if (!constraintsRef.current) return
 
@@ -162,8 +167,47 @@ export default function AppWindow({ item, constraintsRef }: { item: AppWindowTyp
         }))
     }
 
+    useEffect(() => {
+        if (!item?.fromHistory) {
+            setHistory((prev) => [...prev, item.path])
+            setActiveHistoryIndex(history.length)
+        }
+    }, [item?.path])
+
+    const goBack = () => {
+        if (canGoBack) {
+            setActiveHistoryIndex(activeHistoryIndex - 1)
+            navigate(history[activeHistoryIndex - 1], {
+                state: {
+                    fromHistory: true,
+                },
+            })
+        }
+    }
+
+    const goForward = () => {
+        if (canGoForward) {
+            setActiveHistoryIndex(activeHistoryIndex + 1)
+            navigate(history[activeHistoryIndex + 1], {
+                state: {
+                    fromHistory: true,
+                },
+            })
+        }
+    }
+
+    console.log(history, activeHistoryIndex)
+
     return (
-        <WindowProvider appWindow={item} menu={menu} setMenu={setMenu}>
+        <WindowProvider
+            appWindow={item}
+            menu={menu}
+            setMenu={setMenu}
+            goBack={goBack}
+            goForward={goForward}
+            canGoBack={canGoBack}
+            canGoForward={canGoForward}
+        >
             <AnimatePresence>
                 {!item.minimized && (
                     <>

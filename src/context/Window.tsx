@@ -13,6 +13,8 @@ export interface AppWindow {
         y: number
     }
     minimized: boolean
+    path: string
+    fromHistory?: boolean
 }
 
 interface WindowProviderProps {
@@ -20,18 +22,39 @@ interface WindowProviderProps {
     appWindow: AppWindow
     menu: IMenu[]
     setMenu: (menu: IMenu[]) => void
+    goBack: () => void
+    goForward: () => void
+    canGoBack: boolean
+    canGoForward: boolean
 }
 
 interface WindowContextType {
     appWindow?: AppWindow
     menu?: IMenu[]
     setMenu?: (menu: IMenu[]) => void
+    goBack: () => void
+    goForward: () => void
+    canGoBack: boolean
+    canGoForward: boolean
 }
 
 export const Context = createContext<WindowContextType>({})
 
-export const Provider = ({ appWindow, menu, setMenu, children }: WindowProviderProps) => {
-    return <Context.Provider value={{ appWindow, menu, setMenu }}>{children}</Context.Provider>
+export const Provider = ({
+    appWindow,
+    menu,
+    setMenu,
+    children,
+    goBack,
+    goForward,
+    canGoBack,
+    canGoForward,
+}: WindowProviderProps) => {
+    return (
+        <Context.Provider value={{ appWindow, menu, setMenu, goBack, goForward, canGoBack, canGoForward }}>
+            {children}
+        </Context.Provider>
+    )
 }
 
 export const useWindow = (): WindowContextType => {

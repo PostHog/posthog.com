@@ -18,6 +18,9 @@ interface AppProviderProps {
     element: {
         element: React.ReactNode
         key: string
+        props: {
+            path: string
+        }
     }
 }
 
@@ -60,7 +63,16 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
         (newWindow: AppWindow) => {
             if (focusedWindow) {
                 setWindows((windows) =>
-                    windows.map((w) => (w === focusedWindow ? { ...w, element: newWindow.element } : w))
+                    windows.map((w) =>
+                        w === focusedWindow
+                            ? {
+                                  ...w,
+                                  element: newWindow.element,
+                                  path: newWindow.path,
+                                  fromHistory: newWindow.fromHistory,
+                              }
+                            : w
+                    )
                 )
             } else {
                 setWindows((windows) => [...windows, newWindow])
@@ -85,6 +97,8 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
             key: element.key,
             coordinates: location?.state?.coordinates || { x: 0, y: 0 },
             minimized: false,
+            path: element.props.path,
+            fromHistory: location?.state?.fromHistory || false,
         }
 
         if (existingWindow) {

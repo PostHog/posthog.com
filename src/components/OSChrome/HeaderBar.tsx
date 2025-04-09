@@ -12,7 +12,7 @@ import {
     IconSearch,
     IconBook,
 } from '@posthog/icons'
-
+import { useWindow } from '../../context/Window'
 interface HeaderBarProps {
     sidebarVariants?: Variants
     leftSidebarWidth?: string
@@ -44,6 +44,7 @@ export default function HeaderBar({
     showToc = false,
     showSidebar = false,
 }: HeaderBarProps) {
+    const { goBack, goForward, canGoBack, canGoForward } = useWindow()
     return (
         <div
             data-scheme="secondary"
@@ -70,8 +71,17 @@ export default function HeaderBar({
             </div>
             <div className="flex-grow flex justify-between items-center">
                 <div className="flex items-center gap-px">
-                    {showBack && <OSButton variant="ghost" icon={<IconChevronLeft />} />}
-                    {showForward && <OSButton variant="ghost" icon={<IconChevronRight />} />}
+                    {showBack && (
+                        <OSButton disabled={!canGoBack} onClick={goBack} variant="ghost" icon={<IconChevronLeft />} />
+                    )}
+                    {showForward && (
+                        <OSButton
+                            disabled={!canGoForward}
+                            onClick={goForward}
+                            variant="ghost"
+                            icon={<IconChevronRight />}
+                        />
+                    )}
                 </div>
                 <div className="flex items-center gap-px">
                     {showSearch && <OSButton variant="ghost" icon={<IconSearch />} />}
