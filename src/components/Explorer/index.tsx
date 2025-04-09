@@ -101,46 +101,47 @@ const AccordionContent = React.forwardRef<HTMLDivElement, AccordionContentProps>
 )
 AccordionContent.displayName = 'AccordionContent'
 
+type ExplorerOption = 'features' | 'pricing' | 'customers' | 'comparison' | 'docs' | 'tutorials' | 'questions' | 'team' | 'roadmap' | 'changelog'
+
 interface ExplorerProps {
-    children?: React.ReactNode
-    features?: boolean
-    pricing?: boolean
-    customers?: boolean
-    comparison?: boolean
-    docs?: boolean
-    tutorials?: boolean
-    questions?: boolean
-    team?: boolean
-    roadmap?: boolean
-    changelog?: boolean
     slug: string
+    title: string
+    accentImage?: React.ReactNode
     teamName?: string
     roadmapCategory?: string
     changelogCategory?: string
-    accentImage?: React.ReactNode
+    indexLinks?: ExplorerOption[]
+    children?: React.ReactNode
 }
 
 export default function Explorer({
-    children,
-    features = false,
-    pricing = false,
-    customers = false,
-    comparison = false,
-    docs = false,
-    tutorials = false,
-    questions = false,
-    team = false,
-    roadmap = false,
-    changelog = false,
     slug,
+    title,
+    accentImage,
     teamName,
     roadmapCategory,
     changelogCategory,
-    accentImage,
+    indexLinks = [],
+    children,
 }: ExplorerProps) {
     const location = useLocation()
     const currentPath = location.pathname
     const isMatchingPath = currentPath === `/${slug}` || currentPath.startsWith(`/${slug}/`)
+
+    // Create a map of options for easy lookup
+    const enabledIndexLinks = new Set(indexLinks)
+    
+    // Replace individual boolean checks with Set.has()
+    const showFeatures = enabledIndexLinks.has('features')
+    const showPricing = enabledIndexLinks.has('pricing')
+    const showCustomers = enabledIndexLinks.has('customers')
+    const showComparison = enabledIndexLinks.has('comparison')
+    const showDocs = enabledIndexLinks.has('docs')
+    const showTutorials = enabledIndexLinks.has('tutorials')
+    const showQuestions = enabledIndexLinks.has('questions')
+    const showTeam = enabledIndexLinks.has('team')
+    const showRoadmap = enabledIndexLinks.has('roadmap')
+    const showChangelog = enabledIndexLinks.has('changelog')
 
     return (
         <div className="@container w-full h-full flex flex-col min-h-1">
@@ -202,12 +203,12 @@ export default function Explorer({
                             </div>
                         )}
                         <div className="p-6 relative">
-                            <h1>Product analytics with autocapture</h1>
+                            <h1>{title}</h1>
                             {children}
                         </div>
                         {isMatchingPath && (
                             <div className="grid grid-cols-1 @sm:grid-cols-2 gap-2 p-2 relative max-w-4xl">
-                                {features && (
+                                {showFeatures && (
                                     <div>
                                         <OSButton
                                             variant="underline"
@@ -223,7 +224,7 @@ export default function Explorer({
                                         </OSButton>
                                     </div>
                                 )}
-                                {pricing && (
+                                {showPricing && (
                                     <div>
                                         <OSButton
                                             variant="underline"
@@ -239,7 +240,7 @@ export default function Explorer({
                                         </OSButton>
                                     </div>
                                 )}
-                                {customers && (
+                                {showCustomers && (
                                     <div>
                                         <OSButton
                                             variant="underline"
@@ -255,7 +256,7 @@ export default function Explorer({
                                         </OSButton>
                                     </div>
                                 )}
-                                {comparison && (
+                                {showComparison && (
                                     <div>
                                         <OSButton
                                             variant="underline"
@@ -271,7 +272,7 @@ export default function Explorer({
                                         </OSButton>
                                     </div>
                                 )}
-                                {docs && (
+                                {showDocs && (
                                     <div>
                                         <OSButton
                                             variant="underline"
@@ -287,7 +288,7 @@ export default function Explorer({
                                         </OSButton>
                                     </div>
                                 )}
-                                {tutorials && (
+                                {showTutorials && (
                                     <div>
                                         <OSButton
                                             variant="underline"
@@ -303,7 +304,7 @@ export default function Explorer({
                                         </OSButton>
                                     </div>
                                 )}
-                                {questions && (
+                                {showQuestions && (
                                     <div>
                                         <OSButton
                                             variant="underline"
@@ -319,7 +320,7 @@ export default function Explorer({
                                         </OSButton>
                                     </div>
                                 )}
-                                {team && (
+                                {showTeam && (
                                     <div>
                                         <OSButton
                                             variant="underline"
@@ -335,7 +336,7 @@ export default function Explorer({
                                         </OSButton>
                                     </div>
                                 )}
-                                {roadmap && (
+                                {showRoadmap && (
                                     <div>
                                         <OSButton
                                             variant="underline"
@@ -351,7 +352,7 @@ export default function Explorer({
                                         </OSButton>
                                     </div>
                                 )}
-                                {changelog && (
+                                {showChangelog && (
                                     <div>
                                         <OSButton
                                             variant="underline"

@@ -16,17 +16,9 @@ export default function ProductAnalytics(): JSX.Element {
                 image={`/images/og/product-analytics.jpg`}
             />
         <Explorer
-            features
-            pricing
-            customers
-            comparison
-            docs
-            tutorials
-            questions
-            team
-            roadmap
-            changelog
             slug="product-analytics"
+            title="Product analytics with autocapture"
+            // options below only needed to override matching the slug
             // teamName="product-analytics"
             // roadmapCategory="product-analytics"
             // changelogCategory="product-analytics"
@@ -36,6 +28,18 @@ export default function ProductAnalytics(): JSX.Element {
                 className="w-full"
                 placeholder="none"
             />}
+            indexLinks={[
+                'features',
+                'pricing',
+                'customers',
+                'comparison',
+                'docs',
+                'tutorials',
+                'questions',
+                'team',
+                'roadmap',
+                'changelog'
+            ]}
         >
             
             <p className="max-w-lg">
