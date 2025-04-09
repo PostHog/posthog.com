@@ -1922,8 +1922,8 @@ export const docsMenu = {
                             url: '/docs/api/decide',
                         },
                         {
-                            name: 'Query',
-                            url: '/docs/api/query',
+                            name: 'Queries',
+                            url: '/docs/api/queries',
                         },
                         {
                             name: 'More endpoints',
@@ -2023,6 +2023,10 @@ export const docsMenu = {
                         {
                             name: 'Property definitions',
                             url: '/docs/api/property-definitions',
+                        },
+                        {
+                            name: 'Query',
+                            url: '/docs/api/query',
                         },
                         {
                             name: 'Roles',
@@ -3225,6 +3229,51 @@ export const docsMenu = {
             ],
         },
         {
+            name: 'Error tracking',
+            url: '/docs/error-tracking',
+            icon: 'IconWarning',
+            color: 'orange',
+            description: 'Track and monitor errors and exceptions in your code.',
+            children: [
+                {
+                    name: 'Error tracking',
+                },
+                {
+                    name: 'Overview',
+                    url: '/docs/error-tracking',
+                    icon: 'IconHome',
+                    color: 'seagreen',
+                },
+                {
+                    name: 'Installation',
+                    url: '/docs/error-tracking/installation',
+                    icon: 'IconBook',
+                    color: 'blue',
+                    featured: true,
+                },
+                {
+                    name: 'Stack traces',
+                    url: '/docs/error-tracking/stack-traces',
+                    icon: 'IconCode',
+                    color: 'seagreen',
+                },
+                {
+                    name: 'Monitor errors',
+                    url: '/docs/error-tracking/monitoring',
+                    icon: 'IconGraph',
+                    color: 'orange',
+                    featured: true,
+                },
+                {
+                    name: 'Troubleshooting and FAQs',
+                    url: '/docs/error-tracking/common-questions',
+                    icon: 'IconQuestion',
+                    color: 'purple',
+                    featured: true,
+                },
+            ],
+        },
+        {
             name: 'Surveys',
             url: '/docs/surveys',
             icon: 'IconMessage',
@@ -3428,55 +3477,6 @@ export const docsMenu = {
                 },
             ],
         },
-        {
-            name: 'Error tracking',
-            url: '/docs/error-tracking',
-            icon: 'IconWarning',
-            color: 'salmon',
-            description: 'Track and monitor errors and exceptions in your code.',
-            children: [
-                {
-                    name: 'Error tracking',
-                    badge: {
-                        title: 'Beta',
-                        className: 'uppercase !bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',
-                    },
-                },
-                {
-                    name: 'Overview',
-                    url: '/docs/error-tracking',
-                    icon: 'IconHome',
-                    color: 'seagreen',
-                },
-                {
-                    name: 'Installation',
-                    url: '/docs/error-tracking/installation',
-                    icon: 'IconBook',
-                    color: 'blue',
-                    featured: true,
-                },
-                {
-                    name: 'Stack traces',
-                    url: '/docs/error-tracking/stack-traces',
-                    icon: 'IconCode',
-                    color: 'seagreen',
-                },
-                {
-                    name: 'Monitor errors',
-                    url: '/docs/error-tracking/monitoring',
-                    icon: 'IconGraph',
-                    color: 'orange',
-                    featured: true,
-                },
-                {
-                    name: 'Troubleshooting and FAQs',
-                    url: '/docs/error-tracking/common-questions',
-                    icon: 'IconQuestion',
-                    color: 'purple',
-                    featured: true,
-                },
-            ],
-        },
     ],
 }
 
@@ -3564,6 +3564,12 @@ export const productMenu = {
             icon: 'IconFlask',
             color: 'purple',
             url: '/experiments',
+        },
+        {
+            name: 'Error tracking',
+            icon: 'IconWarning',
+            color: 'orange',
+            url: '/error-tracking',
         },
         {
             name: 'Surveys',

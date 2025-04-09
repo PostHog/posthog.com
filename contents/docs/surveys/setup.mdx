@@ -14,9 +14,9 @@ There are two ways to set up surveys:
 2. You must have the `opt_in_site_apps` option enabled in your PostHog initialization code and `posthog-js` version 1.67.1+ or the [JavaScript snippet](/docs/getting-started/install#add-to-your-website--app) that includes `getActiveMatchingSurveys` and `getSurveys`.
 
 ```js-web
-posthog.init("<ph_project_api_key>", { 
+posthog.init("<ph_project_api_key>", {
     "api_host": "<ph_client_api_host>",
-    "opt_in_site_apps": true 
+    "opt_in_site_apps": true
 })
 ```
 
@@ -44,8 +44,14 @@ posthog.getActiveMatchingSurveys((surveys) => {
 
 ```js-web
 posthog.capture("survey_sent", {
-    $survey_id: {survey.id} // required
-    $survey_response: {survey_response} // required
+    $survey_id: {survey.id}, // required
+    $survey_response_a3071551-d599-4eeb-9ffe-69e93dc647b6: {survey_response}, // required
+    $survey_questions: [
+        {
+            id: "a3071551-d599-4eeb-9ffe-69e93dc647b6",
+            question: "Do you like PostHog?",
+        }
+    ], // required for `getSurveyResponse` to work as expected
     $survey_name: {survey.name} // optional
 })
 ```

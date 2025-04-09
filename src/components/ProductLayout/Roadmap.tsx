@@ -3,7 +3,6 @@ import { PineappleText } from 'components/Job/Sidebar'
 import { ContributorImageSmall } from 'components/PostLayout/Contributors'
 import TeamRoadmap from 'components/TeamRoadmap'
 import { graphql, useStaticQuery } from 'gatsby'
-import { getImage } from 'gatsby-plugin-image'
 import React from 'react'
 import ReactCountryFlag from 'react-country-flag'
 import slugify from 'slugify'
@@ -47,7 +46,7 @@ export default function Roadmap({ subtitle, team }: IRoadmap) {
             }
         }
     `)
-    const teamMembers = nodes
+    const teamMembers: any[] = nodes
         .filter((node) => node?.teams?.data?.some(({ attributes: { name: teamName } }) => teamName === team))
         .sort((l, r) =>
             l.leadTeams?.data?.some(({ attributes: { name: teamName } }) => teamName === team)
@@ -79,7 +78,7 @@ export default function Roadmap({ subtitle, team }: IRoadmap) {
 
                         <p className="text-xs mb-4 opacity-75">{PineappleText(pineapplePercentage)}</p>
                         <ul className="list-none m-0 mb-4 p-0 space-y-2 md:space-y-0">
-                            {teamMembers.map((member: any) => {
+                            {teamMembers.map((member, index) => {
                                 const {
                                     firstName,
                                     lastName,
@@ -90,7 +89,7 @@ export default function Roadmap({ subtitle, team }: IRoadmap) {
                                 } = member
                                 const name = [firstName, lastName].filter(Boolean).join(' ')
                                 return (
-                                    <li className="flex space-x-2 items-center py-1" key={name}>
+                                    <li className="flex space-x-2 items-center py-1" key={name || `idx${index}`}>
                                         <figure className="mb-0">
                                             <ContributorImageSmall className="w-[45px] h-[45px]" image={avatar} />
                                         </figure>
