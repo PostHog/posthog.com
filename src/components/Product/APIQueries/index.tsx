@@ -22,9 +22,7 @@ import { useLayoutData } from 'components/Layout/hooks'
 import Plans from 'components/Pricing/Plans'
 import Profile from '../../Team/Profile'
 import SideModal from '../../Modal/SideModal'
-import { VsCompetitor } from 'components/Products/Competitor'
-import { VsPostHog } from 'components/Products/Competitor/VsPostHog'
-import Comparison from '../Comparison'
+import { TutorialCard } from 'components/Products/TutorialCard'
 import { useStaticQuery, graphql } from 'gatsby'
 import { TextCard } from 'components/Products/TextCard'
 
@@ -55,82 +53,6 @@ const product = {
 const team = 'Clickhouse'
 const teamSlug = '/teams/clickhouse'
 
-const featuresPerRow = 4
-const features = [
-    {
-        title: 'JOETBD',
-        description: 'JOETBD',
-        image: (
-            <CloudinaryImage
-                src="https://res.cloudinary.com/dmukukwp6/image/upload/screenshot_alerts_00824b03f5.png"
-                width={428}
-                placeholder="none"
-            />
-        ),
-    },
-    {
-        title: 'JOETBD',
-        description: 'JOETBD',
-        image: (
-            <CloudinaryImage
-                src="https://res.cloudinary.com/dmukukwp6/image/upload/screenshot_assign_4c9bb9ee60.png"
-                width={428}
-                placeholder="none"
-            />
-        ),
-    },
-    {
-        title: 'JOETBD',
-        description: 'JOETBD',
-        image: (
-            <CloudinaryImage
-                src="https://res.cloudinary.com/dmukukwp6/image/upload/screenshot_organize_94b4d00ea2.png"
-                width={428}
-                placeholder="none"
-            />
-        ),
-    },
-    {
-        title: 'JOETBD',
-        description: 'JOETBD',
-        image: (
-            <CloudinaryImage
-                src="https://res.cloudinary.com/dmukukwp6/image/upload/screenshot_trace_3fc569059c.png"
-                width={428}
-                placeholder="none"
-            />
-        ),
-    },
-]
-
-const subfeaturesItemCount = 4
-const subfeatures = [
-    {
-        title: 'JOETBD',
-        description: 'JOETBD',
-        icon: <IconRewindPlay />,
-        color: 'yellow',
-    },
-    {
-        title: 'JOETBD',
-        description: 'JOETBD',
-        icon: <IconTrends />,
-        color: 'blue',
-    },
-    {
-        title: 'JOETBD',
-        description: 'JOETBD',
-        icon: <IconToggle />,
-        color: 'seagreen',
-    },
-    {
-        title: 'JOETBD',
-        description: 'JOETBD',
-        icon: <IconUser />,
-        color: 'purple',
-    },
-]
-
 const questions = [
     {
         question: 'What are the rate limits for the API?',
@@ -139,6 +61,18 @@ const questions = [
     {
         question: 'What does this error response mean?',
         url: '/docs/api#responses',
+    },
+    {
+        question: 'What endpoints are available for actions?',
+        url: '/docs/api/actions',
+    },
+    {
+        question: 'What is the main endpoint for querying data?',
+        url: '/docs/how-posthog-works/data-model',
+    },
+    {
+        question: 'How do I capture anonymous events with the API?',
+        url: '/docs/api/capture#anonymous-event-capture',
     },
 ]
 
@@ -175,90 +109,6 @@ const PairsWithArray = [
         product: 'JOETBD',
         url: '/JOETBD',
         color: 'seagreen',
-    },
-]
-
-const comparisonColumnCount = 4
-const comparison = [
-    {
-        feature: 'JOETBD',
-        companies: {
-            Sentry: true,
-            LogRocket: true,
-            PostHog: true,
-        },
-    },
-    {
-        feature: 'JOETBD',
-        companies: {
-            Sentry: true,
-            LogRocket: true,
-            PostHog: true,
-        },
-    },
-    {
-        feature: 'JOETBD',
-        companies: {
-            Sentry: true,
-            LogRocket: false,
-            PostHog: true,
-        },
-    },
-    {
-        feature: 'JOETBD',
-        companies: {
-            Sentry: true,
-            LogRocket: true,
-            PostHog: true,
-        },
-    },
-    {
-        feature: 'JOETBD',
-        companies: {
-            Sentry: true,
-            LogRocket: true,
-            PostHog: true,
-        },
-    },
-    {
-        feature: 'JOETBD',
-        companies: {
-            Sentry: true,
-            LogRocket: true,
-            PostHog: true,
-        },
-    },
-    {
-        feature: 'JOETBD',
-        companies: {
-            Sentry: true,
-            LogRocket: false,
-            PostHog: true,
-        },
-    },
-    {
-        feature: 'JOETBD',
-        companies: {
-            Sentry: false,
-            LogRocket: true,
-            PostHog: true,
-        },
-    },
-    {
-        feature: 'JOETBD',
-        companies: {
-            Sentry: true,
-            LogRocket: true,
-            PostHog: true,
-        },
-    },
-    {
-        feature: 'JOETBD',
-        companies: {
-            Sentry: false,
-            LogRocket: false,
-            PostHog: true,
-        },
     },
 ]
 
@@ -301,15 +151,15 @@ export const ProductAPI = () => {
                     color="blue"
                     icon={<IconBrackets />}
                     product={product.capitalized}
-                    title="Track errors and resolve issues"
-                    description="Take your product from exception to exceptional"
+                    title="Build it your way with the PostHog API"
+                    description="Capture. Query. Decide."
                     image="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/images/products/error-tracking.png"
                 />
 
                 <div className="text-center">
                     <CloudinaryImage
                         src="https://res.cloudinary.com/dmukukwp6/image/upload/screenshot_error_tracking_0f93eb652d.png"
-                        alt="Screenshot of the PostHog error tracking"
+                        alt="Screenshot of PostHog API Queries"
                         className="w-full max-w-[1440px]"
                         placeholder="none"
                     />
@@ -320,7 +170,7 @@ export const ProductAPI = () => {
                         <li className="hidden md:block"></li>
                         <CustomerCard
                             outcome="built and launched user-facing analytics in just three days"
-                            quote="You can quote me: PostHog is awesome. It really stands out for it’s developer friendliness and user experience"
+                            quote="You can quote me: PostHog is awesome. It really stands out for it’s developer friendliness and user experience. It's a great tool."
                             customer={mintlify}
                             colspan={2}
                         />
@@ -387,24 +237,6 @@ export const ProductAPI = () => {
                         </ul>
                     </section>
 
-                    <div className="mt-12">
-                        <ul
-                            className={`grid md:grid-cols-2 lg:grid-cols-${subfeaturesItemCount} gap-8 mt-12 list-none p-0`}
-                        >
-                            {subfeatures.map((subfeature, index) => (
-                                <Subfeature key={index} {...subfeature} />
-                            ))}
-                        </ul>
-                    </div>
-
-                    <div className="py-12">
-                        <ul className={`grid md:grid-cols-2 lg:grid-cols-${featuresPerRow} gap-8 list-none p-0`}>
-                            {features.map((feature, index) => (
-                                <Feature key={index} {...feature} />
-                            ))}
-                        </ul>
-                    </div>
-
                     <section>
                         <div className={`${fullWidthContent ? 'max-w-full px-8' : 'max-w-7xl mx-auto'} px-5 pb-0`}>
                             <div className="bg-accent dark:bg-accent-dark -mx-5 md:-mx-8">
@@ -415,6 +247,36 @@ export const ProductAPI = () => {
                                 </Marquee>
                             </div>
                         </div>
+                    </section>
+
+                    <section id="tutorials" className="mt-[45px]">
+                        <h3 className="text-3xl lg:text-4xl text-center mb-2">Featured tutorials</h3>
+                        <p className="mt-0 text-opacity-75 text-center mb-6">
+                            Visit the <Link to="/tutorials">tutorials</Link> section for more.
+                        </p>
+
+                        <ul className="list-none p-0 grid md:grid-cols-4 gap-4 mb-10 md:mb-20 mx-5 md:mx-0">
+                            <TutorialCard
+                                title="How to use the PostHog API to get insights and persons"
+                                description="Use GET requests to retrieve information on insights and persons from your project."
+                                url="/tutorials/api-get-insights-persons"
+                            />
+                            <TutorialCard
+                                title="How to use the PostHot API to capture events"
+                                description="Using the API directly allows for any language that can send requests to capture events, or completely customize your implementation."
+                                url="/tutorials/api-capture-events"
+                            />
+                            <TutorialCard
+                                title="How to set up customer-facing analytics"
+                                description="If you're building a B2B2C product, your users may want analytics about their users, which you can provide using the PostHog API."
+                                url="/tutorials/customer-facing-analytics"
+                            />
+                            <TutorialCard
+                                title="How to evaluate feature flags with the PostHog API"
+                                description="Once your  flag is set up, the request to evaluate the flag is straightforward. All you need is the project API key, and a bit of data."
+                                url="/tutorials/api-feature-flags"
+                            />
+                        </ul>
                     </section>
 
                     <section id="pricing" className="pt-20">
@@ -434,7 +296,6 @@ export const ProductAPI = () => {
                                 />
                             </div>
                         </div>
-
                         <div className="lg:flex justify-between items-start gap-12 -mx-5 md:mx-0">
                             <div className="flex-grow overflow-auto px-5 md:px-0 mb-8 md:mb-0">
                                 <Plans showTitle={false} groupsToShow={['error_tracking']} />
