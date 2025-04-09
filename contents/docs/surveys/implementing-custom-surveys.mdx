@@ -118,7 +118,7 @@ For more control over your surveys, you can use API surveys. When implementing a
 
 1. To get all surveys, call `getSurveys(callback, forceReload)`. This means you still need to handle display conditions yourself.
 
-2. To get surveys enabled for the current user, call `getActiveMatchingSurveys(callback, forceReload)`. This always returns an active survey if the user meets the display conditions, even if they have already seen, dismissed, or responded to the survey.
+2. To get surveys enabled for the current user, call `getActiveMatchingSurveys(callback, forceReload)`. This always returns an active survey if the user meets the display conditions, as long as the user (determined by their distinct ID) has not already dismissed or responded the survey.
 
 Surveys are requested on first load and then cached by default by the JavaScript SDK. If you want to force an API call to get an updated list of surveys, pass `true` to the `forceReload` parameter. You only need to do this if you want changed surveys to appear mid-session for users.
 
