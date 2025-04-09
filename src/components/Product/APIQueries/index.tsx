@@ -76,39 +76,32 @@ const questions = [
     },
 ]
 
-const faqs = [
-    {
-        question: 'JOETBD',
-        answer: 'JOETBD',
-        children: null,
-    },
-]
-
 const pairsWithItemCount = 3
 const PairsWithArray = [
     {
-        title: 'JOETBD',
-        description: 'JOETBD',
-        icon: <IconRewindPlay />,
-        product: 'JOETBD',
-        url: '/JOETBD',
-        color: 'yellow',
-    },
-    {
-        title: 'JOETBD',
-        description: 'JOETBD',
+        title: 'Product analytics',
+        description:
+            'Create customer-facing analytics, or retrieve information about any data in your PostHog instance.',
         icon: <IconGraph />,
-        product: 'JOETBD',
-        url: '/JOETBD',
+        product: 'Product analytics',
+        url: '/product-analytics',
         color: 'blue',
     },
     {
-        title: 'JOETBD',
-        description: 'JOETBD',
+        title: 'Feature flags',
+        description: 'Evaluate feature flags directly with the API, then update them using the `PATCH` method.',
         icon: <IconToggle />,
-        product: 'JOETBD',
-        url: '/JOETBD',
+        product: 'Feature flags',
+        url: '/feature-flags',
         color: 'seagreen',
+    },
+    {
+        title: 'Session replays',
+        description: 'Share replays outside of your organization automatically, giving others a front-row seat.',
+        icon: <IconRewindPlay />,
+        product: 'Session replays',
+        url: '/session-replays',
+        color: 'yellow',
     },
 ]
 
@@ -262,7 +255,7 @@ export const ProductAPI = () => {
                                 url="/tutorials/api-get-insights-persons"
                             />
                             <TutorialCard
-                                title="How to use the PostHot API to capture events"
+                                title="How to use the PostHog API to capture events"
                                 description="Using the API directly allows for any language that can send requests to capture events, or completely customize your implementation."
                                 url="/tutorials/api-capture-events"
                             />
