@@ -29,7 +29,6 @@ import {
     IconDownload,
     IconDatabase,
     IconHandMoney,
-    IconAI,
     IconDecisionTree,
     IconRetention,
     IconUserPaths,
@@ -53,6 +52,11 @@ import {
     IconArrowLeft,
     IconArrowRight,
     IconHeadset,
+    IconPiggyBank,
+    IconBell,
+    IconArchive,
+    IconCheck,
+    IconStack,
 } from '@posthog/icons'
 import CloudinaryImage from 'components/CloudinaryImage'
 import useProducts from 'hooks/useProducts'
@@ -210,6 +214,34 @@ const products: Product[] = [
         status: 'Production',
     },
     {
+        name: 'Error tracking',
+        // lottieSrc: '/lotties/product-icons/error-tracking.lottie',
+        color: 'orange',
+        Icon: IconWarning,
+        description: 'Track errors and resolve issues',
+        pricingKey: 'error_tracking',
+        types: ['Engineering'],
+        features: [
+            { title: 'Receive alerts', Icon: IconBell },
+            { title: 'Triage & assign', Icon: IconArchive },
+            { title: 'Organize & prioritize', Icon: IconCheck },
+            { title: 'Stack traces', Icon: IconStack },
+        ],
+        Images: () => {
+            return (
+                <>
+                    <div className="block dark:hidden">
+                        <CloudinaryImage src="https://res.cloudinary.com/dmukukwp6/image/upload/error_light_mode_a8704c77e6.png" />
+                    </div>
+                    <div className="hidden dark:block">
+                        <CloudinaryImage src="https://res.cloudinary.com/dmukukwp6/image/upload/error_dark_mode_390e70af6d.png" />
+                    </div>
+                </>
+            )
+        },
+        status: 'Production',
+    },
+    {
         name: 'Experiments',
         lottieSrc: '/lotties/product-icons/ab-testing.lottie',
         color: 'purple',
@@ -351,8 +383,17 @@ const products: Product[] = [
         color: 'blue',
         Icon: IconSend,
         types: ['Marketing'],
-        status: 'Roadmap',
+        status: 'WIP',
         roadmapID: 1999,
+    },
+
+    {
+        name: 'Revenue analytics',
+        Icon: IconPiggyBank,
+        color: 'orange',
+        types: ['Sales'],
+        status: 'WIP',
+        roadmapID: 2206,
     },
     {
         name: 'Product tours',
@@ -396,14 +437,6 @@ const products: Product[] = [
         types: ['Marketing'],
         status: 'WIP',
         roadmapID: 1809,
-    },
-    {
-        name: 'Error tracking',
-        Icon: IconWarning,
-        color: 'yellow',
-        types: ['Engineering'],
-        status: 'WIP',
-        roadmapID: 2017,
     },
     {
         name: 'Prompt evaluation',
@@ -450,7 +483,7 @@ const products: Product[] = [
         Icon: IconHeadset,
         color: 'green',
         types: ['Sales'],
-        status: 'Roadmap',
+        status: 'WIP',
         roadmapID: 2110,
     },
 ]
@@ -879,7 +912,7 @@ export default function Hero(): JSX.Element {
                 <div className="@container flex-1">
                     <ul className="grid @sm:grid-cols-2 @xl:grid-cols-3 md:gap-x-2 gap-y-6 @2xl:gap-y-8 @3xl:gap-y-10 list-none m-0 p-0 flex-grow flex-shrink-0 sm:max-h-[65vh] overflow-y-auto">
                         {groupedProducts.map(([type, products]) =>
-                            type === 'Sales' ? null : (
+                            type === 'Sales' || type === 'Business' ? null : (
                                 <li key={type}>
                                     <ProductButton
                                         type={type}
@@ -890,16 +923,18 @@ export default function Hero(): JSX.Element {
                                         setProductModalOpen={setProductModalOpen}
                                     />
                                     {type === 'Support' ? (
-                                        <div className="mt-2">
-                                            <ProductButton
-                                                type={'Sales'}
-                                                products={groupedProducts.find(([type]) => type === 'Sales')[1]}
-                                                activeProduct={activeProduct}
-                                                activeStatus={activeStatus}
-                                                setActiveProduct={setActiveProduct}
-                                                setProductModalOpen={setProductModalOpen}
-                                            />
-                                        </div>
+                                        <>
+                                            <div className="mt-6 md:mt-2">
+                                                <ProductButton
+                                                    type={'Sales'}
+                                                    products={groupedProducts.find(([type]) => type === 'Sales')[1]}
+                                                    activeProduct={activeProduct}
+                                                    activeStatus={activeStatus}
+                                                    setActiveProduct={setActiveProduct}
+                                                    setProductModalOpen={setProductModalOpen}
+                                                />
+                                            </div>
+                                        </>
                                     ) : null}
                                 </li>
                             )

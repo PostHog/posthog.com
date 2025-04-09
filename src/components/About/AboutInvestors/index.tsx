@@ -88,7 +88,6 @@ export const AboutInvestors = () => {
                     role="Imeem Founder, YC Admissions"
                     photo="/images/investors/dalton-caldwell.jpg"
                 />
-                <Investor name="David Cramer" role="Sentry Founder" photo="/images/investors/david-cramer.jpg" />
                 <Investor
                     name="Brad Flora"
                     role="Perfect Audience Founder, YC Group Partner"

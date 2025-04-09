@@ -13,6 +13,8 @@ import { IconX } from '@posthog/icons'
 import { motion } from 'framer-motion'
 import { StaticImage } from 'gatsby-plugin-image'
 import Board from './Board'
+import { useUser } from 'hooks/useUser'
+
 export const FeatureStrip = ({ className = '' }) => {
     return (
         <div className="text-center mt-0 mb-4">
@@ -36,7 +38,7 @@ const EnterpriseSignupCTA = () => {
     const posthog = usePostHog()
 
     const handleClick = () => {
-        if (window.confirm('Are you sure you don’t want to book a demo?')) {
+        if (window.confirm("Are you sure you don't want to book a demo?")) {
             window.location.href = `https://${
                 posthog?.isFeatureEnabled('direct-to-eu-cloud') ? 'eu' : 'app'
             }.posthog.com/signup`
@@ -110,7 +112,7 @@ const whitepaperFields = [
         options: ['Yes', 'No', 'Not yet'],
     },
     {
-        label: 'I’d like to learn more about saving 15% or more on car insurance',
+        label: "I'd like to learn more about saving 15% or more on car insurance",
         name: 'carInsurance',
         type: 'radio',
         options: ['Yes'],
@@ -208,6 +210,7 @@ const WhitepaperBanner = ({ onClose }) => {
 }
 
 export default function Hero() {
+    const { user } = useUser()
     const [whitepaperOpen, setWhitepaperOpen] = useState(false)
     const [selectedIndex, setSelectedIndex] = useState(9)
     const [showNPS, setShowNPS] = useState(false)
@@ -265,7 +268,7 @@ export default function Hero() {
                 </div>
             </Modal>
             {whitepaperOpen && enterpriseMode && <WhitepaperBanner onClose={() => setWhitepaperOpen(false)} />}
-            <section className="flex flex-col justify-center items-center">
+            <section className={`flex flex-col justify-center items-center`}>
                 <div className="relative w-full z-10">
                     <div className={section('z-10 relative md:!mb-8')}>
                         <h1 className={`${heading()} overflow-hidden pb-1 home-hero-title`}>

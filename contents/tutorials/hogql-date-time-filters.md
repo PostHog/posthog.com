@@ -93,7 +93,7 @@ toStartOfWeek(timestamp) == toStartOfWeek(now())
 Alternatively, if you wanted a weekly report for only weekdays, you can use [`toDayOfWeek`](https://clickhouse.com/docs/en/sql-reference/functions/date-time-functions#todayofweek) to filter out Saturday and Sunday with their day’s number:
 
 ```
-toDayOfWeek(timestamp) != 6 and toDayOfWeek(timestamp) != 7
+toInt(toDayOfWeek(timestamp)) NOT IN (6, 7)
 ```
 
 ## Analyzing subscribers or trial users

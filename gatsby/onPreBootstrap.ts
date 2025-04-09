@@ -1,9 +1,15 @@
 import { GatsbyNode } from 'gatsby'
 import fetch from 'node-fetch'
-
+import path from 'path'
+import fs from 'fs'
 export const PAGEVIEW_CACHE_KEY = 'onPreBootstrap@@posthog-pageviews'
 
 export const onPreBootstrap: GatsbyNode['onPreBootstrap'] = async ({ cache }) => {
+    // Copy hedgehog mode assets to public folder
+    const source = path.resolve('node_modules/@posthog/hedgehog-mode/assets')
+    const hedgehogModeDir = path.resolve(__dirname, '../public/hedgehog-mode')
+    fs.cpSync(source, hedgehogModeDir, { recursive: true })
+    
     if (process.env.POSTHOG_APP_API_KEY && !(await cache.get(PAGEVIEW_CACHE_KEY))) {
         const pageViews: Record<string, number> = {}
 

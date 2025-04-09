@@ -2,7 +2,6 @@ import React from 'react'
 import { StaticImage } from 'gatsby-plugin-image'
 
 interface FeatureProps {
-    name: string
     description: string
     image: any
     background?: boolean

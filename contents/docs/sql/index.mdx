@@ -15,9 +15,9 @@ export const SQLDark = "https://res.cloudinary.com/dmukukwp6/image/upload/postho
 export const WarehouseLight = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/features/hogql/warehouse-light.png"
 export const WarehouseDark = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/features/hogql/warehouse-dark.png"
 
-You can use SQL (Structured Query Language) throughout PostHog to manage, query, and modify data. Our "flavor" is effectively a wrapper around [ClickHouse SQL](https://clickhouse.com/docs/en/sql-reference), with tweaks such as simplified event and person property access, null handling, and visualization integrations.
+You can use SQL (Structured Query Language) throughout PostHog to manage, query, and modify data. 
 
-> SQL access is currently in **public beta**. This means it's not yet a perfect experience, and the language itself may still change. Follow along with the development [here](https://github.com/PostHog/meta/issues/81).
+Our "flavor" is effectively a wrapper around [ClickHouse SQL](https://clickhouse.com/docs/en/sql-reference), with tweaks such as simplified event and person property access, null handling, and visualization integrations.
 
 ## SQL expressions
 
@@ -35,7 +35,9 @@ For example, to group pageviews into "desktop" or "mobile," you can breakdown wi
 
 ## SQL insights
 
-[SQL insights](/docs/product-analytics/sql) enable you to directly query your data with SQL commands like `SELECT`, `FROM`, `JOIN`, `WHERE`, `GROUP BY` along with many of [ClickHouse SQL's function](/docs/sql/clickhouse-functions). This enables more complex and customizable queries and results than other insights.
+[SQL insights](/docs/product-analytics/sql) enable you to directly query your data with SQL commands like `SELECT`, `FROM`, `JOIN`, `WHERE`, `GROUP BY` along with many of [ClickHouse SQL's function](/docs/sql/clickhouse-functions). 
+
+This enables more complex and customizable queries and results than other insights.
 
 For example, to get a count of the most popular first pageview `current_url` values, we can use an SQL query like this:
 
@@ -66,13 +68,12 @@ You can use SQL insights within [notebooks](/docs/notebooks) and with external s
 
 ## Query API
 
-To query events using SQL via the [PostHog API](/docs/api/query), get [your project ID](https://us.posthog.com/settings/project-details#variables), a [personal API key](https://us.posthog.com/settings/user-api-keys) with the project query read permission and make a POST request to `/api/projects/:project_id/query` endpoint with the following JSON payload:
+To query events using SQL via the [PostHog API](/docs/api/queries), get [your project ID](https://us.posthog.com/settings/project-details#variables), a [personal API key](https://us.posthog.com/settings/user-api-keys) with the project query read permission and make a POST request to `/api/projects/:project_id/query` endpoint with the following JSON payload:
 
 ```json
 {"query": {"kind": "HogQLQuery", "query": "select * from events"}}
 ```
-
-> **Why HogQL?** HogQL is our former name for SQL access and is still the name we use for it internally.
+Why HogQL? Because HogQL is the name we use for SQL access internally.
 
 For example, to get a count of the most common `event` values, you can make a request like this (change `us.posthog.com` to `eu.posthog.com` if you're on EU cloud):
 

@@ -1,5 +1,5 @@
 ---
-title: SQL insights (beta)
+title: SQL insights
 availability:
     free: full
     selfServe: full

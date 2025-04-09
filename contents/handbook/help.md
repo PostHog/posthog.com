@@ -19,8 +19,8 @@ If you're new, the default goal is to be able to get work done autonomously.
 This will require:
 
 * You know how to ship things in our environment and with your equipment
-* You get to know your team and have a sense of who can QA your work
-* You get what the company (and your small team) care about and needs to get done, so you can prioritize appropriately
+* You get to know your team and have a sense of who can review your work
+* You get what the company, your customers, and your small team care about and needs to get done, so you can prioritize appropriately
 
 Everything else is a means to this end! We often do onboarding in person to accelerate all the above. This usually takes around a week.
 
@@ -60,6 +60,7 @@ We expect you to be proactive about answering questions in your domain, even ver
 Being wrong is way better than being silent – if you are wrong, someone will correct you. If you are silent, you're not doing your job.
 
 Similarly, if you need something to get done, you are responsible for making _sure_ it gets done. This is not your team lead's job or some other team's job - if you need it, you own it. _Most_ of the time this means doing it yourself (see section on helping yourself above); other times it means getting the right people together to understand the urgency and do it with you. But at the end of the day, the responsibility rests on you.
+
 ## Have an opinion
 
 You definitely don't need to have opinions on everything, but you should absolutely have opinions on your area of expertise. 

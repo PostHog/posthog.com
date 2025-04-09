@@ -189,6 +189,15 @@ const comparison = [
         },
     },
     {
+        feature: 'Revenue tracking',
+        companies: {
+            Matomo: true,
+            GA4: true,
+            PostHog:
+                '<span className="text-xs font-semibold text-opacity-60 bg-yellow px-1 py-0.5 rounded-sm uppercase text-primary">Beta</span>',
+        },
+    },
+    {
         feature: 'Real-time reporting',
         companies: {
             Matomo: true,
@@ -213,7 +222,7 @@ const comparison = [
         },
     },
     {
-        feature: 'No-cookie option',
+        feature: 'Cookieless tracking',
         companies: {
             Matomo: true,
             GA4: true,
@@ -404,7 +413,7 @@ export const ProductWebAnalytics = (): JSX.Element => {
 
                     <section className="mb-20">
                         <h3 className="text-center mb-8">So, what's best for you?</h3>
-                        <div className="mb-8 mx-5 md:mx-0 grid md:grid-cols-2 gap-4">
+                        <div className="@container mb-8 mx-5 md:mx-0 grid md:grid-cols-2 gap-4">
                             <VsCompetitor
                                 title="Reasons a competitor may be best for you (for now...)"
                                 image={
