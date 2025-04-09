@@ -4,12 +4,14 @@ import { Tooltip as RadixTooltip } from 'radix-ui'
 export interface TooltipDemoProps {
     trigger: React.ReactNode
     children: React.ReactNode
+    open?: boolean
+    onOpenChange?: (open: boolean) => void
 }
 
-const TooltipDemo = ({ trigger, children }: TooltipDemoProps) => {
+const TooltipDemo = ({ trigger, children, open, onOpenChange }: TooltipDemoProps) => {
     return (
         <RadixTooltip.Provider delayDuration={0}>
-            <RadixTooltip.Root>
+            <RadixTooltip.Root open={open} onOpenChange={onOpenChange}>
                 <RadixTooltip.Trigger asChild>
                     <button className="inline-flex">
                         <span>{trigger}</span>

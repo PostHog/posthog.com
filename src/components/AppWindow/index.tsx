@@ -45,6 +45,7 @@ export default function AppWindow({ item, constraintsRef }: { item: any; constra
         y: window.innerHeight / 2 - size.height / 2,
     }))
     const [snapIndicator, setSnapIndicator] = useState<'left' | 'right' | null>(null)
+    const [tooltipVisible, setTooltipVisible] = useState(false)
 
     useEffect(() => {
         const handleResize = () => {
@@ -169,6 +170,14 @@ export default function AppWindow({ item, constraintsRef }: { item: any; constra
         }))
     }
 
+    const handleContextMenuOpen = () => {
+        setTooltipVisible(false)
+    }
+
+    const handleContextMenuClose = () => {
+        setTooltipVisible(false)
+    }
+
     return (
         <WindowProvider appWindow={item}>
             <AnimatePresence>
@@ -257,18 +266,23 @@ export default function AppWindow({ item, constraintsRef }: { item: any; constra
                                         <IconMinus className="size-4" />
                                     </button>
 
-                                    <ContextMenu.Root>
+                                    <ContextMenu.Root onOpenChange={(open) => open ? handleContextMenuOpen() : handleContextMenuClose()}>
                                         <ContextMenu.Trigger className="data-[highlighted]:bg-accent data-[state=open]:bg-accent" asChild>
-                                                <OSButton
-                                                    variant="ghost"
-                                                    size="xs"
-                                                    onClick={size.width >= window?.innerWidth ? collapseWindow : expandWindow}
-                                                    >
-                                                <Tooltip trigger={
-                                                    <span>
-                                                        {size.width >= window?.innerWidth ? <IconCollapse45 className="size-4" /> : <IconExpand45 className="size-4" />}
-                                                    </span>
-                                                }>
+                                            <OSButton
+                                                variant="ghost"
+                                                size="xs"
+                                                onClick={size.width >= window?.innerWidth ? collapseWindow : expandWindow}
+                                                onMouseEnter={() => setTooltipVisible(true)}
+                                                onMouseLeave={() => setTooltipVisible(false)}
+                                            >
+                                                <Tooltip 
+                                                    trigger={
+                                                        <span>
+                                                            {size.width >= window?.innerWidth ? <IconCollapse45 className="size-4" /> : <IconExpand45 className="size-4" />}
+                                                        </span>
+                                                    }
+                                                    open={tooltipVisible}
+                                                >
                                                     Right click for more options
                                                 </Tooltip>
                                             </OSButton>
