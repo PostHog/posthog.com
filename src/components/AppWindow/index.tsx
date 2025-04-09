@@ -5,6 +5,7 @@ import { useApp } from '../../context/App'
 import { Provider as WindowProvider } from '../../context/Window'
 import { ContextMenu } from 'radix-ui'
 import Tooltip from 'components/RadixUI/Tooltip'
+import OSButton from 'components/OSButton'
 
 const getSizeDefaults = () => ({
     max: {
@@ -258,15 +259,14 @@ export default function AppWindow({ item, constraintsRef }: { item: any; constra
 
                                     <ContextMenu.Root>
                                         <Tooltip trigger={
-                                            <ContextMenu.Trigger className="flex select-none items-center justify-between gap-0.5 rounded px-2.5 py-0.5 text-[13px] leading-none text-primary outline-none data-[highlighted]:bg-accent hover:bg-primary data-[state=open]:bg-accent">
-                                                <span className="flex items-center justify-center">
-                                                    <button onClick={size.width >= window?.innerWidth ? collapseWindow : expandWindow}>
-                                                        {size.width >= window?.innerWidth ? (
-                                                            <IconCollapse45 className="size-4" />
-                                                        ) : (
-                                                            <IconExpand45 className="size-4" />
-                                                        )}
-                                                    </button>
+                                            <ContextMenu.Trigger className="data-[highlighted]:bg-accent data-[state=open]:bg-accent" asChild>
+                                                <span>
+                                                    <OSButton
+                                                        variant="ghost"
+                                                        size="sm"
+                                                        onClick={size.width >= window?.innerWidth ? collapseWindow : expandWindow}
+                                                        icon={size.width >= window?.innerWidth ? <IconCollapse45 className="size-4" /> : <IconExpand45 className="size-4" />}
+                                                    />
                                                 </span>
                                             </ContextMenu.Trigger>
                                         }>
