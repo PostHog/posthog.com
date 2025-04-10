@@ -452,7 +452,8 @@ export default function AppWindow({ item, constraintsRef }: { item: AppWindowTyp
                             </div>
                             <div className="w-full flex-grow overflow-hidden">{item.element}</div>
                             <motion.div
-                                className="absolute right-0 top-0 w-1.5 bottom-6 cursor-ew-resize"
+                                data-scheme="tertiary"
+                                className="group absolute right-0 top-0 w-1.5 bottom-6 cursor-ew-resize"
                                 drag="x"
                                 dragMomentum={false}
                                 dragConstraints={{ left: 0, right: 0 }}
@@ -465,9 +466,15 @@ export default function AppWindow({ item, constraintsRef }: { item: AppWindowTyp
                                         ),
                                     }))
                                 }}
-                            />
+                            >
+                                <div className="relative w-full h-full">
+                                    <div className="hidden group-hover:block absolute inset-y-0 right-0 w-[2px] bg-light-8" />
+                                    <div className="hidden group-hover:block absolute -bottom-6 h-6 right-0 w-[2px] bg-light-8" />
+                                </div>
+                            </motion.div>
                             <motion.div
-                                className="absolute bottom-0 left-0 right-6 h-1.5 cursor-ns-resize"
+                                data-scheme="tertiary"
+                                className="group absolute bottom-0 left-0 right-6 h-1.5 cursor-ns-resize"
                                 drag="y"
                                 dragMomentum={false}
                                 dragConstraints={{ top: 0, bottom: 0 }}
@@ -480,9 +487,14 @@ export default function AppWindow({ item, constraintsRef }: { item: AppWindowTyp
                                         ),
                                     }))
                                 }}
-                            />
+                            >
+                                <div className="relative w-full h-full">
+                                    <div className="hidden group-hover:block absolute inset-x-0 bottom-0 h-[2px] bg-light-8" />
+                                    <div className="hidden group-hover:block absolute bottom-0 -right-6 w-6 h-[2px] bg-light-8" />
+                                </div>
+                            </motion.div>
                             <motion.div
-                                className="absolute bottom-0 right-0 w-6 h-6 cursor-se-resize"
+                                className="group absolute bottom-0 right-0 w-6 h-6 cursor-se-resize flex items-center justify-center"
                                 drag
                                 dragMomentum={false}
                                 dragConstraints={{ left: 0, top: 0, right: 0, bottom: 0 }}
@@ -498,7 +510,11 @@ export default function AppWindow({ item, constraintsRef }: { item: AppWindowTyp
                                         ),
                                     }))
                                 }}
-                            />
+                            >
+                                <div className="hidden group-hover:block relative w-full h-full border-b border-r border-transparent overflow-hidden rounded-bl">
+                                    <div className="absolute -bottom-10 -right-10 group-hover:-bottom-5 group-hover:-right-5 transition-all h-8 w-8 bg-accent-2 border-t border-light-8 -rotate-45" />
+                                </div>
+                            </motion.div>
                         </motion.div>
                     </>
                 )}

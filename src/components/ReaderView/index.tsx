@@ -342,7 +342,7 @@ function ReaderViewContent({ body, title, tableOfContents, mdxComponents, commit
                     </div>
                 </div>
                 <motion.div
-                    className={`flex-shrink-0 items-center flex justify-end transition-all min-w-0 ${
+                    className={`flex-shrink-0 items-center flex justify-end transition-all min-w-0 relative z-10 ${
                         isTocVisible ? '@4xl:min-w-[300px]' : 'w-auto'
                     }`}
                     animate={isTocVisible ? 'open' : 'closed'}
