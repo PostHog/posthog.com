@@ -1114,7 +1114,7 @@ export const handbookSidebar = [
         ],
     },
     {
-        name: 'Sales & CS',
+        name: 'Sales',
         url: '',
         children: [
             {
@@ -1140,10 +1140,6 @@ export const handbookSidebar = [
             {
                 name: 'Expansion & Retention',
                 url: '/handbook/growth/sales/expansion-and-retention',
-            },
-            {
-                name: 'Customer Success',
-                url: '/handbook/growth/sales/customer-success',
             },
             {
                 name: 'How we work',
@@ -1200,9 +1196,13 @@ export const handbookSidebar = [
                 ],
             },
             {
-                name: 'CS Operations',
+                name: 'Customer Success',
                 url: '',
                 children: [
+                    {
+                        name: 'Overview',
+                        url: '/handbook/growth/sales/customer-success',
+                    },
                     {
                         name: 'Health tracking',
                         url: '/handbook/growth/sales/health-tracking',
@@ -3229,6 +3229,57 @@ export const docsMenu = {
             ],
         },
         {
+            name: 'Error tracking',
+            url: '/docs/error-tracking',
+            icon: 'IconWarning',
+            color: 'orange',
+            description: 'Track and monitor errors and exceptions in your code.',
+            children: [
+                {
+                    name: 'Error tracking',
+                },
+                {
+                    name: 'Overview',
+                    url: '/docs/error-tracking',
+                    icon: 'IconHome',
+                    color: 'seagreen',
+                },
+                {
+                    name: 'Installation',
+                    url: '/docs/error-tracking/installation',
+                    icon: 'IconBook',
+                    color: 'blue',
+                    featured: true,
+                },
+                {
+                    name: 'Stack traces',
+                    url: '/docs/error-tracking/stack-traces',
+                    icon: 'IconCode',
+                    color: 'purple',
+                },
+                {
+                    name: 'Monitor errors',
+                    url: '/docs/error-tracking/monitoring',
+                    icon: 'IconGraph',
+                    color: 'orange',
+                    featured: true,
+                },
+                {
+                    name: 'Alerts',
+                    url: '/docs/error-tracking/alerts',
+                    icon: 'IconBell',
+                    color: 'red',
+                },
+                {
+                    name: 'Troubleshooting and FAQs',
+                    url: '/docs/error-tracking/common-questions',
+                    icon: 'IconQuestion',
+                    color: 'purple',
+                    featured: true,
+                },
+            ],
+        },
+        {
             name: 'Surveys',
             url: '/docs/surveys',
             icon: 'IconMessage',
@@ -3432,51 +3483,6 @@ export const docsMenu = {
                 },
             ],
         },
-        {
-            name: 'Error tracking',
-            url: '/docs/error-tracking',
-            icon: 'IconWarning',
-            color: 'orange',
-            description: 'Track and monitor errors and exceptions in your code.',
-            children: [
-                {
-                    name: 'Error tracking',
-                },
-                {
-                    name: 'Overview',
-                    url: '/docs/error-tracking',
-                    icon: 'IconHome',
-                    color: 'seagreen',
-                },
-                {
-                    name: 'Installation',
-                    url: '/docs/error-tracking/installation',
-                    icon: 'IconBook',
-                    color: 'blue',
-                    featured: true,
-                },
-                {
-                    name: 'Stack traces',
-                    url: '/docs/error-tracking/stack-traces',
-                    icon: 'IconCode',
-                    color: 'seagreen',
-                },
-                {
-                    name: 'Monitor errors',
-                    url: '/docs/error-tracking/monitoring',
-                    icon: 'IconGraph',
-                    color: 'orange',
-                    featured: true,
-                },
-                {
-                    name: 'Troubleshooting and FAQs',
-                    url: '/docs/error-tracking/common-questions',
-                    icon: 'IconQuestion',
-                    color: 'purple',
-                    featured: true,
-                },
-            ],
-        },
     ],
 }
 
@@ -3583,6 +3589,13 @@ export const productMenu = {
             slug: 'experiments',
         },
         {
+            name: 'Error tracking',
+            icon: 'IconWarning',
+            color: 'orange',
+            url: '/error-tracking',
+            slug: 'error-tracking',
+        },
+        {
             name: 'Surveys',
             icon: 'IconMessage',
             color: 'salmon',
@@ -3602,13 +3615,6 @@ export const productMenu = {
             color: 'lilac',
             url: '/data-warehouse',
             slug: 'data-warehouse',
-        },
-        {
-            name: 'Error tracking',
-            icon: 'IconWarning',
-            color: 'orange',
-            url: '/error-tracking',
-            slug: 'error-tracking',
         },
         {
             name: 'Product OS',

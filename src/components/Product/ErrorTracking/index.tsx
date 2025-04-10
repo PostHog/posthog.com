@@ -281,17 +281,17 @@ const comparison = [
     {
         feature: 'Integration with session replays',
         companies: {
-            Sentry: false,
+            Sentry: true,
             LogRocket: true,
             PostHog: true,
         },
     },
     {
-        feature: 'Boring, purple website with corporate vibes',
+        feature: 'Integration with A/B experiments',
         companies: {
-            Sentry: true,
-            LogRocket: true,
-            PostHog: false,
+            Sentry: false,
+            LogRocket: false,
+            PostHog: true,
         },
     },
 ]
@@ -471,6 +471,12 @@ export const ProductErrorTracking = () => {
                                     </ul>
                                 </li>
                                 <li>Advanced error grouping systems</li>
+                                <li>Better mobile support</li>
+                                <ul className="pl-6">
+                                    <li className="text-sm">
+                                        Even our team thinks Sentry is better if you need mobile support. For now!
+                                    </li>
+                                </ul>
                             </ul>
                         </VsCompetitor>
                         <VsPostHog>
