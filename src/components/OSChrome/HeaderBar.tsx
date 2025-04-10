@@ -14,8 +14,6 @@ import {
 } from '@posthog/icons'
 import { useWindow } from '../../context/Window'
 interface HeaderBarProps {
-    sidebarVariants?: Variants
-    leftSidebarWidth?: string
     isNavVisible?: boolean
     isTocVisible?: boolean
     onToggleNav?: () => void
@@ -30,8 +28,6 @@ interface HeaderBarProps {
 }
 
 export default function HeaderBar({
-    sidebarVariants,
-    leftSidebarWidth,
     isNavVisible,
     isTocVisible,
     onToggleNav,
@@ -52,21 +48,21 @@ export default function HeaderBar({
         >
             <div>
                 <motion.div
-                    className="flex-shrink-0 overflow-hidden flex items-center gap-px"
-                    variants={sidebarVariants}
-                    custom={leftSidebarWidth}
-                    animate={isNavVisible ? 'open' : 'closed'}
-                    initial={{ width: leftSidebarWidth }}
+                    className={`flex-shrink-0 overflow-hidden flex items-center gap-px transition-all min-w-0 ${
+                        isNavVisible ? '@2xl:min-w-[250px]' : 'w-auto'
+                    }`}
                 >
                     {showHome && <OSButton variant="ghost" icon={<IconHome />} />}
-                    {showSidebar && (
-                        <OSButton
-                            onClick={onToggleNav}
-                            variant="ghost"
-                            active={isNavVisible}
-                            icon={isNavVisible ? <IconSidebarOpen /> : <IconSidebarClose />}
-                        />
-                    )}
+                    <div className="hidden @2xl:block">
+                        {showSidebar && (
+                            <OSButton
+                                onClick={onToggleNav}
+                                variant="ghost"
+                                active={isNavVisible}
+                                icon={isNavVisible ? <IconSidebarOpen /> : <IconSidebarClose />}
+                            />
+                        )}
+                    </div>
                 </motion.div>
             </div>
             <div className="flex-grow flex justify-between items-center">

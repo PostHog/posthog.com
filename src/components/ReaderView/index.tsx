@@ -22,23 +22,6 @@ import TooltipDemo from 'components/RadixUI/Tooltip'
 import { ReaderViewProvider, useReaderView } from './context/ReaderViewContext'
 dayjs.extend(relativeTime)
 
-const leftSidebarWidth = '250px'
-
-const sidebarVariants = {
-    open: (width: string) => ({
-        width: width,
-        transition: {
-            width: { duration: 0.2 },
-        },
-    }),
-    closed: {
-        width: 'auto',
-        transition: {
-            width: { duration: 0.2 },
-        },
-    },
-}
-
 interface ReaderViewProps {
     body: {
         type: 'mdx' | 'plain'
@@ -187,8 +170,6 @@ function ReaderViewContent({ body, title, tableOfContents, mdxComponents, commit
             <DebugContainerQuery />
             {/* First row - Header */}
             <HeaderBar
-                sidebarVariants={sidebarVariants}
-                leftSidebarWidth={leftSidebarWidth}
                 isNavVisible={isNavVisible}
                 isTocVisible={isTocVisible}
                 onToggleNav={toggleNav}
@@ -207,15 +188,15 @@ function ReaderViewContent({ body, title, tableOfContents, mdxComponents, commit
                     {isNavVisible && (
                         <motion.div
                             id="nav"
-                            className="flex-shrink-0 overflow-hidden mb-[-47px]"
-                            initial={{ width: leftSidebarWidth }}
+                            className="hidden @2xl:block flex-shrink-0 overflow-hidden mb-[-47px]"
+                            initial={{ width: '250px' }}
                             animate={{
-                                width: leftSidebarWidth,
+                                width: '250px',
                                 transition: { duration: 0.2 },
                             }}
                             exit={{
                                 width: 0,
-                                transition: { duration: 0.2, delay: 0.05 },
+                                transition: { duration: 0.25, delay: 0.05 },
                             }}
                         >
                             <motion.div
@@ -223,7 +204,7 @@ function ReaderViewContent({ body, title, tableOfContents, mdxComponents, commit
                                 initial={{ opacity: 1 }}
                                 animate={{
                                     opacity: 1,
-                                    transition: { duration: 0.05, delay: 0.2 },
+                                    transition: { duration: 0.5, delay: 1 },
                                 }}
                                 exit={{
                                     opacity: 0,
@@ -347,11 +328,7 @@ function ReaderViewContent({ body, title, tableOfContents, mdxComponents, commit
             {/* Third row - Footer */}
             <div data-scheme="secondary" className="bg-primary flex w-full gap-px p-2 flex-shrink-0">
                 <motion.div
-                    className="flex-shrink-0"
-                    variants={sidebarVariants}
-                    custom={leftSidebarWidth}
-                    animate={isNavVisible ? 'open' : 'closed'}
-                    initial={{ width: leftSidebarWidth }}
+                    className={`flex-shrink-0 transition-all min-w-0 ${isNavVisible ? '@2xl:min-w-[250px]' : 'w-auto'}`}
                 >
                     {/* this space intentionally left blank */}
                 </motion.div>
