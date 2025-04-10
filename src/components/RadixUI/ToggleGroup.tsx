@@ -1,6 +1,4 @@
 import React from 'react'
-import { IconTextWidth } from '@posthog/icons'
-import { IconTextWidthFixed } from 'components/OSIcons'
 import { ToggleGroup as RadixToggleGroup } from 'radix-ui'
 
 const toggleGroupItemClasses =

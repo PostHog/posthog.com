@@ -1,8 +1,6 @@
 import React, { useRef } from 'react'
 import { Popover as RadixPopover } from 'radix-ui'
 import { IconX } from '@posthog/icons'
-import OSButton from 'components/OSButton'
-import { IconTextWidthFixed, IconTableOfContents, IconClockRewind } from 'components/OSIcons'
 
 interface PopoverProps {
     trigger: React.ReactNode

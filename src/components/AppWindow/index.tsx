@@ -1,7 +1,6 @@
 import React, { useEffect, useState, useMemo } from 'react'
 import { AnimatePresence, motion, useDragControls } from 'framer-motion'
-import { IconChevronDown, IconDocument, IconMinus, IconX } from '@posthog/icons'
-import { IconCollapse, IconExpand, IconSquare } from '../OSIcons/Icons'
+import { IconChevronDown, IconDocument, IconMinus, IconX, IconCollapse, IconExpand, IconSquare } from '@posthog/icons'
 import { useApp } from '../../context/App'
 import { Provider as WindowProvider, AppWindow as AppWindowType } from '../../context/Window'
 import { ContextMenu } from 'radix-ui'

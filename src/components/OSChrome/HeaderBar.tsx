@@ -1,8 +1,6 @@
 import React from 'react'
 import { motion, Variants } from 'framer-motion'
 import OSButton from 'components/OSButton'
-import { IconTableOfContents } from 'components/OSIcons'
-
 import {
     IconHome,
     IconSidebarOpen,
@@ -11,6 +9,7 @@ import {
     IconChevronRight,
     IconSearch,
     IconBook,
+    IconTableOfContents,
 } from '@posthog/icons'
 import { useWindow } from '../../context/Window'
 interface HeaderBarProps {

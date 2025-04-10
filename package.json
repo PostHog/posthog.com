@@ -37,7 +37,7 @@
         "@inkeep/uikit-js": "^0.3.19",
         "@popperjs/core": "^2.11.2",
         "@posthog/hedgehog-mode": "^0.0.25",
-        "@posthog/icons": "0.11.1",
+        "@posthog/icons": "0.12.1",
         "@radix-ui/react-accordion": "^1.2.3",
         "@radix-ui/react-menubar": "^1.1.6",
         "@radix-ui/react-tabs": "^1.1.4",
