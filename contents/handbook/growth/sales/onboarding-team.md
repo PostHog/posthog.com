@@ -11,9 +11,9 @@ showTitle: true
 
 ### What does this team do?
 
-The north star metric for the Onboarding team is 3-month logo retention from the first $500+ forecasted bill, which can be tracked here (link).
+The north star metric for the Onboarding team is 3-month logo retention from the first $500+ forecasted bill, which can be tracked here (WIP).
 
-Secondarily, we also care about net dollar retention for this segment (link).
+Secondarily, we also care about net dollar retention for this segment (WIP).
 
 ### Which customers get onboarding?
 
@@ -71,13 +71,11 @@ To monitor and stay on top of where accounts are in their ~3-month-long Onboardi
 **1. Onboarding Status**
 
 - `Reach Out` – The account is waiting for our initial contact.
-- `Waiting for Response` – We’ve reached out and are waiting for a reply.
 - `Meeting Scheduled` – Self-explanatory.
-- `Ongoing` – We’ve either met and/or have an ongoing conversation.
-- `No Response (Follow-Up)` – We haven’t heard back, but we want to keep checking in.
+- `Ongoing` – They are in the onboarding cycle - we’ve reached out, and possibly we have an ongoing conversation.
 - `Onboarded (Follow-Up)` – They’re all set, but we want to monitor their activity throughout the onboarding billing cycle.
 - `Onboarded (Done)` – They have told us they are happy with PostHog and don't have any issues, or they have paid three bills.
-- `No Engagement` – We haven’t heard back despite our efforts, but they’re still using PostHog.
+- `No Engagement` – We haven’t heard back despite our efforts, but they’re still actively using PostHog.
 - `Churned` – Sadly, despite our efforts, we lost the customer.
 
 **2. Daily view** ([link](https://posthog.vitally-eu.io/hubs/152ccd4c-c7b2-4508-865b-b08fea5c3dc6/d08c5202-bdcd-40b8-aba7-5746c340a35b))
