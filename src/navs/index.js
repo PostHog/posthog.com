@@ -1545,6 +1545,10 @@ export const companyMenu = {
                     url: '/teams/marketing',
                 },
                 {
+                    name: 'CS & Onboarding',
+                    url: '/teams/cs-onboarding',
+                },
+                {
                     name: 'Exec',
                     url: '/teams/exec',
                 },
