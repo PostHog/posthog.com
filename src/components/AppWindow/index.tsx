@@ -332,8 +332,8 @@ export default function AppWindow({ item, constraintsRef }: { item: AppWindowTyp
                                     ]}
                                 />
 
-                                {menu && menu.length > 0 && (
-                                    <div className="flex-1 truncate flex items-center justify-start @md:justify-center">
+<div className="flex-1 truncate flex items-center justify-start @md:justify-center">
+                                {menu && menu.length > 0 ? (
                                         <Popover
                                             trigger={
                                                 <button className="text-primary hover:text-primary dark:text-primary-dark dark:hover:text-primary-dark text-left items-center justify-center text-sm font-semibold flex select-none">
@@ -346,8 +346,12 @@ export default function AppWindow({ item, constraintsRef }: { item: AppWindowTyp
                                         >
                                             <FileMenu menu={menu} />
                                         </Popover>
-                                    </div>
-                                )}
+                                    ) : (
+                                        <div className="text-primary hover:text-primary dark:text-primary-dark dark:hover:text-primary-dark text-left items-center justify-center text-sm font-semibold flex select-none">
+                                            {item.meta?.title && item.meta.title}
+                                        </div>
+                                    )}
+                                </div>
                                 <div className="flex">
                                     <OSButton variant="ghost" size="xs" onClick={handleMinimize} className="!px-1.5">
                                         <IconMinus className="size-4 relative top-1" />
