@@ -37,7 +37,7 @@ const client = new PostHog(
     { host: '<ph_client_api_host>' }
 )
 
-export const handleError = async ({ error, status }: HandleServerError) => {
+export const handleError = async ({ error, status }) => {
     if (status !== 404) {
         client.captureException(error);
         await client.shutdown();
