@@ -22,11 +22,11 @@ export const MaxCTA = ({ className = '', children, question }: MaxCTAProps): JSX
                     <p className="text-muted dark:text-muted-dark m-0">
                         If you're opted in to{' '}
                         <Link
-                            href="http://app.posthog.com/home#panel=feature-previews"
+                            href="https://us.posthog.com/#panel=feature-previews%3Aartificial-hog"
                             externalNoIcon
                             className="text-red-600 dark:text-yellow-400 hover:underline"
                         >
-                            our free Max AI beta
+                            our free PostHog AI beta
                         </Link>
                         , you can{' '}
                         <Link
