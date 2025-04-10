@@ -50,7 +50,7 @@ By default, the email forwarding feature only accepts emails from your PostHog a
 
 ### Your personal card
 
-- You shouldn't usually need to do this - if you can't use your PostHog card for some reason, ask Fraser to purchase it for you on theirs in the first instance. 
+- You shouldn't usually need to do this - if you can't use your PostHog card for some reason, ask Fraser to purchase it for you on theirs in the first instance. Please do not use your personal card to get points for purchases. We can't offer this to everybody as we do not want to be processing lots of reimbursements. Also, the company gets points for spending that we redeem for Billboard campaigns.
 - If you do need to use your personal card, just post the receipt in the #team-people-and-ops channel in Slack and tag Fraser to get reimbursed manually.
 
 Personal expenses should be submitted within 90 days of incurring the expense, otherwise these will not be repaid.
