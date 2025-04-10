@@ -44,7 +44,7 @@ Like a lot of writing, people see the finished post and expect their first copy 
 
 For example, our Next.js doc [started](https://github.com/PostHog/posthog.com/pull/1842) as a simple page with one snippet for installing and another for capturing a custom event. Since then, they changed 49 times to the current version with multiple install methods, details on app and pages routers, frequently asked questions, and more.
 
-![Next.js docs](https://res.cloudinary.com/dmukukwp6/image/upload/image_1_6c2f84d260.png)
+![Next.js docs](https://res.cloudinary.com/dmukukwp6/image/upload/nextdocs_e6906037dc.png)
 
 This iteration is guided by the feedback we receive. This means reviewing:
 
@@ -69,7 +69,7 @@ Reading a book is commonly thought of as a leisurely activity. Docs is sort of t
 
 Docs readers are trying to get what they need as fast as possible and get back to work. Their goal can be anything from figuring out if your product is a good fit to installing your product to debugging an issue they’re having. You want to help them do this as fast as possible.
 
-This means your docs should not look or read like a book. They should almost be the opposite. Here’s what we’ve found most important for accomplishing this:
+Here’s what we’ve found most important for accomplishing this:
 
 - Put the most important information first. Get to the point. No overly long intros.
 - Break up long sections with subheadings for better scanability (like we do in this newsletter).
@@ -77,30 +77,32 @@ This means your docs should not look or read like a book. They should almost be 
 - Use bullet points and numbered lists as these help readers know where they are and create a sense of progress.
 - Add functioning code samples, annotated screenshots, graphics, and even memes. Visuals help keep readers’ attention and provide an alternative way to explain a concept.
 
-Ideally, your writing should have texture and flow. This helps readers effectively find and understand what they are looking for so they can get back to work.
+When done well, docs don't look or read like a book. They have the variation and skimmability that helps readers know where they are and find what they need.
 
-![Texture](https://res.cloudinary.com/dmukukwp6/image/upload/image_3_25886bf103.png)
+![Texture](https://res.cloudinary.com/dmukukwp6/image/upload/badrad_14f62de3dc.png)
 
 ## 4. Focus on examples over abstractions
 
-Developers live in a world of abstractions. On a daily basis, developers use ideas like synchronicity, security, immutability, reactivity, and frameworks make these concepts comprehensible and practical. 
+Developers live in a world of abstractions. On a daily basis, they use ideas like synchronicity, security, immutability, reactivity, and frameworks make these concepts comprehensible and practical.
 
-It’s natural for them to want to bring these abstractions into the docs they write. To do this, developers often think the best path is to take the abstractions in their head and dump them onto the page. The problem with this is that:
+A PostHog example of an abstraction is user identification. Basically, PostHog's way of associating events with a user.
 
-1. Abstractions are hard to transmit. Readers don’t have the context you do, and they don’t have the time or energy to create that context.
-2. Users don’t care so much about how you solved their problem, only that you actually solved it. You think about how problems are solved 1000x more than they do. 
+A common mistake for documenting an abstraction like this is dumping what's in our head onto the page. Explaining how identification works, how we process identified events, and why it's important.
+
+The problem with this is that:
+
+1. Abstractions are hard to transmit. Readers don’t have the context we do, and they don’t have the time or energy to create that context.
+2. Users don’t care so much about how we solved their problem, only that we actually solved it. We think about how problems are solved 1000x more than they do. 
 
 Focusing too much on documenting concepts and abstractions can lead to docs that bore or confuse users instead of helping them.
 
-The fix to this is realizing one thing: software development is about building useful abstractions, while docs show users how to use them. In this way, docs are a complement to a product’s abstractions. 
-
-For example, user identification is a core abstraction for PostHog. If we focused on abstractions, we would explain how it works, how we process identified events, and why it’s important. 
-
-Instead, we mostly focus on implementation, using `posthog.identify()`, and providing code snippets you can use. You don’t even need to scroll to find the first code snippet.
+Instead, we mostly focus on implementation, using `posthog.identify()`, and providing code snippets you can use. In our user identification doc, you don’t even need to scroll to find the first code snippet.
 
 ![Identify](https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_04_03_at_12_01_092x_01127d03fc.png)
 
-To focus more on examples, think about “showing” rather than “telling.”
+Docs should be seen as a complement to a product's abstractions. You develop useful abstractions in your product, and show users how to use them in your docs.
+
+To do this, focus more on examples, think about “showing” rather than “telling.”
 
 - Showing an example JSON structure of a data type rather than giving a summary of it.
 - Showing a screenshot or video of your UI rather than explaining its sections and buttons.
