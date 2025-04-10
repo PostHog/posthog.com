@@ -155,39 +155,28 @@ export const FileMenu: React.FC<{ initialPath?: IMenu[]; menu: IMenu[] }> = ({ i
             data-scheme="primary"
             className="h-72 w-full border border-border dark:border-border-dark rounded-md overflow-hidden bg-bg-light dark:bg-bg-dark"
         >
-            <ScrollArea.Root className="h-full w-full" type="auto">
-                <ScrollArea.Viewport className="h-full w-full">
-                    <div className="flex h-full">
-                        {columns.map((col, index) => (
-                            <FileColumn
-                                key={index} // Using index is okay here as columns are added/removed predictably
-                                items={col.items}
-                                selectedId={col.selectedItem ? col.items.indexOf(col.selectedItem) : null}
-                                onSelect={(itemId) => handleSelect(index, col.items[itemId])}
-                            />
-                        ))}
-                        {/* Optional File Preview Column */}
-                        {showPreview && lastSelectedItem && (
-                            <div className="h-full w-64 border-r border-border dark:border-border-dark flex-shrink-0 p-4">
-                                <h3 className="text-lg font-semibold text-primary dark:text-primary-dark mb-2">
-                                    {lastSelectedItem.name}
-                                </h3>
-                                <p className="text-sm text-secondary dark:text-secondary-dark">
-                                    Type: {lastSelectedItem.children ? 'folder' : 'file'}
-                                </p>
-                                {/* Add more file details here */}
-                            </div>
-                        )}
+            <div className="flex h-full">
+                {columns.map((col, index) => (
+                    <FileColumn
+                        key={index} // Using index is okay here as columns are added/removed predictably
+                        items={col.items}
+                        selectedId={col.selectedItem ? col.items.indexOf(col.selectedItem) : null}
+                        onSelect={(itemId) => handleSelect(index, col.items[itemId])}
+                    />
+                ))}
+                {/* Optional File Preview Column */}
+                {showPreview && lastSelectedItem && (
+                    <div className="h-full w-64 border-r border-border dark:border-border-dark flex-shrink-0 p-4">
+                        <h3 className="text-lg font-semibold text-primary dark:text-primary-dark mb-2">
+                            {lastSelectedItem.name}
+                        </h3>
+                        <p className="text-sm text-secondary dark:text-secondary-dark">
+                            Type: {lastSelectedItem.children ? 'folder' : 'file'}
+                        </p>
+                        {/* Add more file details here */}
                     </div>
-                </ScrollArea.Viewport>
-                <ScrollArea.Scrollbar
-                    className="flex select-none touch-none p-0.5 bg-black/5 transition-colors duration-[160ms] ease-out data-[orientation=vertical]:w-2.5 data-[orientation=horizontal]:flex-col data-[orientation=horizontal]:h-2"
-                    orientation="horizontal"
-                >
-                    <ScrollArea.Thumb className="relative flex-1 rounded-[10px] bg-border dark:bg-border-dark before:absolute before:left-1/2 before:top-1/2 before:h-full before:min-h-[44px] before:w-full before:min-w-[44px] before:-translate-x-1/2 before:-translate-y-1/2 before:content-['']" />
-                </ScrollArea.Scrollbar>
-                <ScrollArea.Corner />
-            </ScrollArea.Root>
+                )}
+            </div>
         </div>
     )
 }
