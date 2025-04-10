@@ -36,7 +36,7 @@ If this means helping them install and set up your product, do it. If this means
 
 For example, our new [error tracking docs](https://posthog.com/docs/error-tracking) have less content than our other products and the structure isn’t perfect either. This is fine with us because we have the details on installation and the features error tracking users are looking for. Users have enough to use error tracking and we have something to build on.
 
-![CleanShot 2025-02-04 at 09.04.15.png](Writing%20better%20documentation%20newsletter%2018b7b2876a45808f9790eaaad328434a/CleanShot_2025-02-04_at_09.04.15.png)
+![Error tracking docs](https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_02_04_at_09_04_15_7a29ece39c.png)
 
 ## 2. Good docs are not written in one day
 
