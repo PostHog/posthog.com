@@ -196,8 +196,6 @@ export default function AppWindow({ item, constraintsRef }: { item: AppWindowTyp
         }
     }
 
-    console.log(history, activeHistoryIndex)
-
     return (
         <WindowProvider
             appWindow={item}
