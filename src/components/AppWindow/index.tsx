@@ -283,7 +283,7 @@ export default function AppWindow({ item, constraintsRef }: { item: AppWindowTyp
                             <div
                                 data-scheme="tertiary"
                                 onDoubleClick={handleDoubleClick}
-                                className="flex-shrink-0 w-full flex @md:grid grid-cols-[minmax(100px,auto)_1fr_minmax(100px,auto)] gap-1 items-center py-1 pl-1.5 bg-primary cursor-move"
+                                className="flex-shrink-0 w-full flex @md:grid grid-cols-[minmax(100px,auto)_1fr_minmax(100px,auto)] gap-1 items-center py-0.5 pl-1.5 bg-primary cursor-move"
                                 onPointerDown={(e) => controls.start(e)}
                             >
                                 <MenuBar
@@ -452,25 +452,7 @@ export default function AppWindow({ item, constraintsRef }: { item: AppWindowTyp
                             </div>
                             <div className="w-full flex-grow overflow-hidden">{item.element}</div>
                             <motion.div
-                                className="absolute bottom-0 right-0 w-4 h-4 cursor-se-resize"
-                                drag
-                                dragMomentum={false}
-                                dragConstraints={{ left: 0, top: 0, right: 0, bottom: 0 }}
-                                onDrag={(_event, info) => {
-                                    setSize((prev) => ({
-                                        width: Math.min(
-                                            Math.max(prev.width + info.delta.x, sizeDefaults.min.width),
-                                            sizeDefaults.max.width
-                                        ),
-                                        height: Math.min(
-                                            Math.max(prev.height + info.delta.y, sizeDefaults.min.height),
-                                            sizeDefaults.max.height
-                                        ),
-                                    }))
-                                }}
-                            />
-                            <motion.div
-                                className="absolute right-0 top-0 w-1 h-full cursor-ew-resize"
+                                className="absolute right-0 top-0 w-1.5 bottom-6 cursor-ew-resize"
                                 drag="x"
                                 dragMomentum={false}
                                 dragConstraints={{ left: 0, right: 0 }}
@@ -485,13 +467,31 @@ export default function AppWindow({ item, constraintsRef }: { item: AppWindowTyp
                                 }}
                             />
                             <motion.div
-                                className="absolute bottom-0 left-0 w-full h-1 cursor-ns-resize"
+                                className="absolute bottom-0 left-0 right-6 h-1.5 cursor-ns-resize"
                                 drag="y"
                                 dragMomentum={false}
                                 dragConstraints={{ top: 0, bottom: 0 }}
                                 onDrag={(_event, info) => {
                                     setSize((prev) => ({
                                         ...prev,
+                                        height: Math.min(
+                                            Math.max(prev.height + info.delta.y, sizeDefaults.min.height),
+                                            sizeDefaults.max.height
+                                        ),
+                                    }))
+                                }}
+                            />
+                            <motion.div
+                                className="absolute bottom-0 right-0 w-6 h-6 cursor-se-resize"
+                                drag
+                                dragMomentum={false}
+                                dragConstraints={{ left: 0, top: 0, right: 0, bottom: 0 }}
+                                onDrag={(_event, info) => {
+                                    setSize((prev) => ({
+                                        width: Math.min(
+                                            Math.max(prev.width + info.delta.x, sizeDefaults.min.width),
+                                            sizeDefaults.max.width
+                                        ),
                                         height: Math.min(
                                             Math.max(prev.height + info.delta.y, sizeDefaults.min.height),
                                             sizeDefaults.max.height
