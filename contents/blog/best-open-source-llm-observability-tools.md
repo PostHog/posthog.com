@@ -45,7 +45,7 @@ Its [LLM observability product](/docs/ai-engineering) integrates with popular LL
   classes="rounded"
 />
 
-### What makes PostHog special?
+#### What makes PostHog special?
 
 PostHog’s LLM observability product works with the rest of our product suite. This means you can visualize LLM-related data along product and business data, create custom queries using [SQL](/docs/product-analytics/sql), view [session replays](/docs/session-replay) of AI interactions, [A/B test prompts](/tutorials/llm-ab-tests), and more.
 
@@ -65,7 +65,7 @@ Langfuse can be self-hosted for free. If you prefer a managed service, Langfuse 
 
 ![Langfuse dashboard](https://res.cloudinary.com/dmukukwp6/image/upload/langfuse_6db7c2d9e7.png)
 
-### What makes Langfuse special?
+#### What makes Langfuse special?
 
 Langfuse is one of the original tools in the LLM observability space. This means it has a wide range of tools for LLM app developers to use and have been instrumental in defining what they look like. 
 
@@ -85,7 +85,7 @@ Opik’s free hosted plan provides 25k spans per month with unlimited team membe
 
 ![Opik dashboard](https://res.cloudinary.com/dmukukwp6/image/upload/opik_7fcc9b0840.png)
 
-### What makes Opik special?
+#### What makes Opik special?
 
 Thanks to Opik’s integration with Comet, it’s the only tool on this list that appeals to LLM developers, not just LLM *app* developers. This means it is ideal for teams training and hosting models of their own, not just using the LLM providers. 
 
@@ -103,7 +103,7 @@ OpenLLMetry can capture data from a range of LLM providers, vector DBs, and LLM 
 
 ![OpenLLMetry dashboard](https://res.cloudinary.com/dmukukwp6/image/upload/openllmetry_aa916c3921.png)
 
-### What makes OpenLLMetry special?
+#### What makes OpenLLMetry special?
 
 With its range of extensions and destinations, OpenLLMetry is very likely to integrate with the observability tools you already use. 
 
@@ -121,7 +121,7 @@ Arize doesn’t provide a free hosted version of Phoenix. Their product, AX Pro,
 
 ![Phoenix](https://res.cloudinary.com/dmukukwp6/image/upload/phoenix_fb7498c189.png)
 
-### What makes Phoenix special?
+#### What makes Phoenix special?
 
 Similar to OpenLLMetry, Phoenix works well with OpenTelemetry thanks to a set of conventions and plugins that are complimentary to OpenTelemetry. This means Phoenix can more easily integrate into your existing Telemetry stack. 
 
@@ -139,7 +139,7 @@ Its hosted version is free up to 10,000 requests with some features limited to t
 
 ![Helicone dashboard](https://res.cloudinary.com/dmukukwp6/image/upload/helicone_0a6eeadac6.png)
 
-### What makes Helicone special?
+#### What makes Helicone special?
 
 Helicone provides purpose-built tools for improving LLMs, like its prompt playground, prompt management, evaluation scoring, and feedback. This helps developers improve their LLM applications.
 
@@ -157,6 +157,6 @@ Its hosted version has a free tier, which offers 10k events per month with 30 da
 
 ![Lunary dashboard](https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_04_09_at_10_21_31_2x_51b9dbad71.png)
 
-### What makes Lunary special?
+#### What makes Lunary special?
 
 Lunary is purpose built for LLM chatbots like knowledge bases and support tools. This shows in their focus on features like PII masking, access management, human reviewing, and multi-modal support. 
