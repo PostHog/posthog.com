@@ -111,5 +111,11 @@ Our role is pretty hybrid and lives at the intersection of other teams. As much 
 
 Ideally, after the meeting with the user, they should know how to seek further help. That includes using Max, consulting the docs, and reaching out to our Support team.
 
+**Handover to the Sales team**
 
+If you see that the customer spends more than ~$1667 monthly, do the discovery for their high spend level. If they’re happy with PostHog moving forward, you can casually mention our annual plan to them, which helps them save 20%. However, if they’re happy paying monthly, they’re more than welcome to do so! 
+
+We can hand the account over to Sales when someone is interested in the annual plan, or requires some additional contractual or legal work. 
+
+If you see accounts where there were some previous conversations with Sales, ping your fellow AE to make sure you’re not stepping on their toes. If there’s clearly a problem with duplication, and we shouldn’t be involved, ping Mine to double-check the logic. 
 
