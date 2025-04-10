@@ -34,7 +34,7 @@ export const MaxCTA = ({ className = '', children, question }: MaxCTAProps): JSX
                             externalNoIcon
                             className="text-red-600 dark:text-yellow-400 hover:underline"
                         >
-                            ask our AI Max to do this for you
+                            ask our AI, Max, to do this for you
                         </Link>
                         .
                     </p>
