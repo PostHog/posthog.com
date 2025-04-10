@@ -30,7 +30,7 @@ Nothing matters if users can’t use your product.
 
 When users start with your product, you want them to go from “nothing” to “something” as quickly as possible. The best way to do this is learning by doing. Docs provide the structure to do this.
 
-Start by writing the stupidest, most basic doc to help someone use your product. What would you send to a friend to help them get started with this feature?
+Start by writing the most basic, obvious doc to help someone use your product. What would you send to a friend to help them get started with this feature?
 
 If this means helping them install and set up your product, do it. If this means teaching them the concepts necessary to succeed, do it. Either way, having a beginner’s mindset to your own product reveals the most important docs you need to write. 
 
@@ -63,9 +63,9 @@ It is the repeated little improvements that creates coveted polished docs experi
 
 ## 3. Your readers are in a rush
 
-Reading a book is commonly thought of as a leisurely activity. Docs is sort of the opposite of this.
-
 ![Docs enjoyer](https://res.cloudinary.com/dmukukwp6/image/upload/image_2_3639171928.png)
+
+Reading a book is commonly thought of as a leisurely activity. Docs is sort of the opposite of this.
 
 Docs readers are trying to get what they need as fast as possible and get back to work. Their goal can be anything from figuring out if your product is a good fit to installing your product to debugging an issue they’re having. You want to help them do this as fast as possible.
 
