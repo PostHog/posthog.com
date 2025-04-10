@@ -40,7 +40,7 @@ For example, our new [error tracking docs](https://posthog.com/docs/error-tracki
 
 ## 2. Good docs are not written in one day
 
-Like a lot of writing, people see the finished post and expect their first copy to be exactly like that. They are discouraged when that isn’t the case, but shouldn’t be. Polished docs aren’t the product of a single stroke of genius, but a result of iterative improvement.
+Like a lot of writing, people read a finished post and expect their first draft to be the same. They are discouraged when that isn’t the case, but shouldn’t be. Polished docs aren’t the product of a single stroke of genius, but a result of iterative improvement.
 
 For example, our Next.js doc [started](https://github.com/PostHog/posthog.com/pull/1842) as a simple page with one snippet for installing and another for capturing a custom event. Since then, they changed 49 times to the current version with multiple install methods, details on app and pages routers, frequently asked questions, and more.
 
@@ -49,9 +49,10 @@ For example, our Next.js doc [started](https://github.com/PostHog/posthog.com/pu
 This iteration is guided by the feedback we receive. This means reviewing:
 
 1. Most popular docs to make sure they are up-to-date.
-2. Comments and questions on the docs page. 
-3. Issues raised by support or on GitHub.
-4. Votes on whether docs pages were useful or not.
+2. Replays of docs sessions to see user paths and pain points.
+3. Comments and questions on the docs page.
+4. Issues raised by support or on GitHub.
+5. Votes on whether docs pages were useful or not.
 
 ![Our most unhelpful docs](https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_04_02_at_16_05_44_4f40c12dc8.png)
 
@@ -75,6 +76,7 @@ Here’s what we’ve found most important for accomplishing this:
 - Break up long sections with subheadings for better scanability (like we do in this newsletter).
 - Use short paragraphs (3-4 lines maximum). Break up hard to read or overly long sentences. Avoid walls of text.
 - Use bullet points and numbered lists as these help readers know where they are and create a sense of progress.
+- We often hide information behind `<details>` tags and let readers expand it if they want. Our data shows these create higher engagement.
 - Add functioning code samples, annotated screenshots, graphics, and even memes. Visuals help keep readers’ attention and provide an alternative way to explain a concept.
 
 When done well, docs don't look or read like a book. They have the variation and skimmability that helps readers know where they are and find what they need.
@@ -83,7 +85,7 @@ When done well, docs don't look or read like a book. They have the variation and
 
 ## 4. Focus on examples over abstractions
 
-Developers live in a world of abstractions. On a daily basis, they use ideas like synchronicity, security, immutability, reactivity, and frameworks make these concepts comprehensible and practical.
+Developers live in a world of abstractions. On a daily basis, you use ideas like synchronicity, security, immutability, reactivity, and frameworks make these concepts comprehensible and practical.
 
 A PostHog example of an abstraction is user identification. Basically, PostHog's way of associating events with a user.
 
@@ -120,12 +122,22 @@ Explaining your abstractions should be a task well into the future. Some signs i
 
 2. **Ship quickly and iterate.** The first versions of our docs are often barebones, we don’t expect to have it all figured out in the first version. We also don’t require multiple approvals from stakeholders. We ship something, get feedback, and do it again.
 
-3. **They require design and development investment.** Our docs benefit a lot from all of the work on our website and vibes team. They make the pages and components within those pages look good and work towards our goal. They also help us structure the site to help people find what they need.
+3. **Prioritize what really matters.** If you're reading this, you probably shouldn't be writing tutorials. They're useful, but less important than getting started or reference docs. Constantly evaluate what docs are most important to work on so you maximize your impact.
 
-4. **They require ownership.** If no one owns a product, it won’t get worked on. The same is true with docs. You can’t expect something to improve if it’s no one’s responsibility to improve it. Product teams are required to contribute but we also [keep a list](https://posthog.com/handbook/content-and-docs/docs) of the docs team members responsible. 
+4. **They require design and development investment.** Our docs benefit a lot from all of the work on our website and vibes team. They make the pages and components within those pages look good and work towards our goal. They also help us structure the site to help people find what they need.
 
-5. **Culture makes a big difference.** Your product is a product of your culture and so is your docs. For example, our values of being open source, everybody codes, trust and feedback over process, and biasing action fully apply to docs as well and ends up shaping how they are worked on.
+5. **They require ownership.** If no one owns a product, it won’t get worked on. The same is true with docs. You can’t expect something to improve if it’s no one’s responsibility to improve it. Product teams are required to contribute but we also [keep a list](https://posthog.com/handbook/content-and-docs/docs) of the docs team members responsible. 
+
+6. **Culture makes a big difference.** Your product is a product of your culture and so is your docs. For example, our values of being open source, everybody codes, trust and feedback over process, and biasing action fully apply to docs as well and ends up shaping how they are worked on.
 
 In a way, docs are your product. The quality and user experience of your docs is a significant part of your overall product experience. Treating docs as any less important than your product means that you’re missing out on huge potential gains.
+
+## Good docs to take inspiration from
+
+- [Stripe](https://docs.stripe.com/) for its interactive elements, focus on examples, and connection between docs and product.
+- [Tailwind](https://tailwindcss.com/docs/) for its ability to layer progressively complex concepts and its huge number of examples for every class. 
+- [Astro](https://docs.astro.build/en/getting-started/) for its step-by-step installation docs and getting started guide.
+- [HTMX](https://htmx.org/docs/) for its single page skimmability.
+- [ClickHouse](https://clickhouse.com/docs/) for its comprehensive reference docs and function explanations.
 
 <NewsletterForm />
