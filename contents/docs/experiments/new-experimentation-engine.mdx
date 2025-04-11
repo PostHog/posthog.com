@@ -1,0 +1,59 @@
+---
+title: New experimentation engine
+---
+
+We are building a new experimentation engine to support more advanced features and to improve the accuracy of experiment results. It's ready to try out and we would love your feedback if you do so! Here is a list of key features included in the new engine:
+* A single consistent exposure criteria for the whole experiment
+* Support for outlier handling (Winsorization)
+* Removing users with multiple variant exposures
+* Better conversion window support and time windows support on mean metrics (what we previously called trend metrics)
+* An improved running time calculator that will estimate running time based on your historical data
+
+The user interface also looks a bit different and now includes an chart showing experiment exposures, and the total number of users seen in each variant. You will also see number of users that have seen more than one variant.
+
+The UI is still very much WIP. Please give us feedback and what you'd like us to improve!
+
+Below you can find more in-depth information on the new features.
+
+
+### Running time calculator
+
+You can now more accurately estimate running times with the much improved running time calculator. It consists of the following steps:
+* **Traffic estimation**: Select an event to estimate traffic to your experiment. This can f.ex be a pageview event with a path/url filter.
+* **Select metric**: Select one of your added metrics that you'd like to use for estimating running time. Choose your most important metric here.
+* **Minimum detectable effect**: Set the relative change you'd like to be able to detect in your experiment. The smaller the change the longer you'll need to run your experiment as more data will be required. A typical value here would be somwhere between 5 % to 30 %. Smaller values may be suitable if you are doing subtle changes and have a high number of users (several thousands per day).
+
+
+### Experiment exposure
+
+This defines which users we should include in the experiment analysis. By default, the event `$feature_flag_called` is used, as this typically signals that a user was exposed to the experiment (i.e viewed the part of the app/website where the experiment is active). Only users that meet this criteria will be included in the analysis. You can see the total number of unique users in each variant displayed at the top. Users who have seen multiple variant values are put in the `$multiple` group and are excluded from the analysis.
+
+We only include metric events that happens _after_ the first exposure we have seen for each user.
+
+
+### Configuring metrics
+
+##### Funnel
+
+This works similarily to funnels in Product Analytics. Choose this to measure conversion rates. Note that we currently just display experiment results for the conversion rate for the last step. We are working on improving this so you can see the results for each step of the funnel.
+
+When adding a funnel metric, we insert a placeholder for experiment exposure in the preview. This is because we can't use the actual experiment exposure criteria as first step as no data would typically be displayed then. In the actual metric evaluation, the exposure criteria you have set for the experiment will be the first step of the funnel. In experiments, you can thus add funnels with one step, as experiment exposure is impliclity the first step.
+
+##### Mean
+
+Choose this to measure things like total count of events or sum of values such as revenue. They way it works, is that we aggreagte the value for each person in the experiment by the chosen aggregation method (total count, sum or average). We then compute the mean for each variant in the experiment, and use that to measure statistical difference between the variants. So f.ex, if you select "sum of revenue", we will first compute the total revenue for each user. Then we will take the mean of that as input to the statistical computation. If you choose "avgerage revenue", we will compute the average revenue for each user (so sum of revenue / number of events), and then take the mean of that (so average of average order value) as input to the statistical computation.
+
+##### Ratio
+
+Not supported yet, but on the roadmap!
+
+
+#### Outlier handling
+
+Set a lower and upper bound to cap metric values at the specified quantile thresholds. Very useful for skewed distributions like revenue or total counts.
+
+#### Conversion windows
+
+Only include metric events that happens after the specified time window after exposure to the experiment.
+
+
