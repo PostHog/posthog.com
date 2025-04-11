@@ -16,7 +16,30 @@ The user interface has also been updated. You’ll now see a chart showing exper
 
 The UI is still a work in progress, so please share your thoughts—your feedback helps us improve!
 
-Read on for a deeper dive into the new features.
+Read on for a how to enable and a deeper dive into the new features.
+
+---
+
+### How to enable
+
+To enable the new experimentation engine:
+
+1. Click on your name in the lower-left corner of the PostHog app to open the menu.
+2. Select **"Feature previews"**.
+3. In the side panel that appears on the right, find **"New experimentation engine"** and toggle it on.
+
+Once enabled, all new experiments you create will use the new engine. Existing experiments won’t be affected.
+
+If you'd like to migrate an existing experiment to the new engine, simply create a new experiment using the same feature flag, add your metrics, and launch it. After launching, you can adjust the start date to match your original experiment.
+
+To switch back to the old engine, just disable the feature preview. Any new experiments you create will then use the old engine, while those already created with the new engine will continue using it.
+
+<ProductScreenshot
+  imageLight = "https://res.cloudinary.com/dmukukwp6/image/upload/Screenshot_2025_04_11_at_13_40_00_96f6868c79.png"
+  imageDark = "https://res.cloudinary.com/dmukukwp6/image/upload/Screenshot_2025_04_11_at_13_39_36_9cc58e437d.png"
+  classes="rounded"
+  alt="Screenshot of how to find feature previews"
+/>
 
 ---
 
