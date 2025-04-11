@@ -56,7 +56,7 @@ This is a faster option to get up and running. If you don't want to or can't use
 3. Open the codespace, using one of the "Open in" options from the list.
 4. In the codespace, open a terminal window and run `docker compose -f docker-compose.dev.yml up`.
 5. In another terminal, run `pnpm i` (and use the same terminal for the following commands)
-6. Then run `pip install -r requirements.txt -r requirements-dev.txt`
+6. Then run `uv sync`
 7. Now run `DEBUG=1 ./bin/migrate` and then `./bin/start`.
 8. Open browser to http://localhost:8010/.
 9. To get some practical test data into your brand-new instance of PostHog, run `DEBUG=1 ./manage.py generate_demo_data`.
@@ -124,7 +124,7 @@ To get PostHog running in a dev environment:
 
     This gets you a fully fledged environment, with linked packages stored under `.flox/`. Might take a moment to run the first time, as dependencies get downloaded.
 
-    > Note on app dependencies: Python requirements get updated every time the environment is activated (`uv pip install` is lightning fast). JS dependencies only get installed if `node_modules/` is not present (`pnpm install` still takes a couple lengthy seconds). Dependencies for other languages currently don't get auto-installed.
+    > Note on app dependencies: Python requirements get updated every time the environment is activated (`uv sync` is lightning fast). JS dependencies only get installed if `node_modules/` is not present (`pnpm install` still takes a couple lengthy seconds). Dependencies for other languages currently don't get auto-installed.
 
 3. After successful environment activation, just look at its welcome message in the terminal. It contains all the commands for running the stack. Run those commands in the suggested order.
 
@@ -314,7 +314,7 @@ brew install python-setuptools
         sudo apt install python3.11 python3.11-venv python3.11-dev -y
         ```
 
-Make sure when outside of `venv` to always use `python3` instead of `python`, as the latter may point to Python 2.x on some systems. If installing multiple versions of Python 3, such as by using the `deadsnakes` PPA, use `python3.11` instead of `python3`.
+Make sure when outside the venv to always use `python3` instead of `python`, as the latter may point to Python 2.x on some systems. If installing multiple versions of Python 3, such as by using the `deadsnakes` PPA, use `python3.11` instead of `python3`.
 
 You can also use [pyenv](https://github.com/pyenv/pyenv) if you wish to manage multiple versions of Python 3 on the same machine.
 
@@ -322,10 +322,10 @@ You can also use [pyenv](https://github.com/pyenv/pyenv) if you wish to manage m
 
 `uv` is a very fast tool you can use for python virtual env and dependency management. See [https://docs.astral.sh/uv/](https://docs.astral.sh/uv/). Once installed you can prefix any `pip` command with `uv` to get the speed boost.
 
-1. Create the virtual environment in current directory called 'env':
+1. Create the virtual environment with the right Python version, and install dependencies - all in one with this command:
 
     ```bash
-    uv venv env --python 3.11
+    uv sync
     ```
 
    > **Friendly tip:** Creating an env could raise a `Failed to parse` warning related to `pyproject.toml`. However, you should still see the `Activate with:` line at the very end, which means that your env was created successfully.
@@ -334,21 +334,15 @@ You can also use [pyenv](https://github.com/pyenv/pyenv) if you wish to manage m
 
     ```bash
     # For bash/zsh/etc.
-    source env/bin/activate
+    source .venv/bin/activate
 
     # For fish
-    source env/bin/activate.fish
+    source .venv/bin/activate.fish
     ```
 
-1. Upgrade pip to the latest version:
+1. Install requirements with uv
 
-    ```bash
-    uv pip install -U pip
-    ```
-
-1. Install requirements with pip
-
-    If your workstation is an Apple Silicon Mac, the first time your run `pip install` you must set custom OpenSSL headers:
+    If your workstation is an Apple Silicon Mac, the first time you install Python packages, you must set custom OpenSSL headers:
 
     ```bash
     brew install openssl
@@ -506,7 +500,7 @@ With PyCharm's built in support for Django, it's fairly easy to setup debugging 
 
 1. Open the repository folder.
 2. Setup the python interpreter (Settings… > Project: posthog > Python interpreter > Add interpreter -> Existing):
-   - If using manual setup: `path_to_repo/posthog/env/bin/python`.
+   - If using manual setup: `path_to_repo/posthog/.venv/bin/python`.
    - If using Flox: `path_to_repo/posthog/.flox/cache/venv/bin/python`.
 3. Setup Django support (Settings… > Languages & Frameworks > Django):
    - Django project root: `path_to_repo`
