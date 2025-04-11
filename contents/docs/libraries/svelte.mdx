@@ -76,7 +76,7 @@ To use client-side feature flags, import PostHog into your Svelte component and 
   import { browser } from '$app/environment'
   import { onMount } from 'svelte'
   
-  let coolFeature = false
+  let coolFeature = $state(false)
   
   onMount(() => {
     if (browser) {
