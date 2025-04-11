@@ -153,7 +153,9 @@ if (toolbarJSON) {
 
 If you are having issues authenticating your toolbar and are using a [reverse proxy](/docs/advanced/proxy), be sure to pass the proper `ui_host` config parameter when initializing (like `ui_host: 'https://us.posthog.com'`). This ensures PostHog makes the authentication request to the correct host.
 
-### Toolbar not working with Nuxt
+### Toolbar not working with older Nuxt versions
+
+This is fixed in recent version of Nuxt (tested on ^3.16.2).
 
 The PostHog toolbar currently doesn't work for Nuxt users because Nuxt overrides the URL of our static asset URL from `https://app-static-prod.posthog.com` to `https:/app-static-prod.posthog.com`, removing the second `/`. If you have a solution, [please let us know](https://app.posthog.com/home#supportModal=feedback%3A).
 
