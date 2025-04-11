@@ -2,58 +2,76 @@
 title: New experimentation engine
 ---
 
-We are building a new experimentation engine to support more advanced features and to improve the accuracy of experiment results. It's ready to try out and we would love your feedback if you do so! Here is a list of key features included in the new engine:
-* A single consistent exposure criteria for the whole experiment
+We're building a new experimentation engine to support more advanced features and improve the accuracy of experiment results. It's ready to try out, and we’d love your feedback if you give it a spin!
+
+Here are some of the key features included in the new engine:
+
+* A single, consistent exposure criterion for the entire experiment
 * Support for outlier handling (Winsorization)
-* Removing users with multiple variant exposures
-* Better conversion window support and time windows support on mean metrics (what we previously called trend metrics)
-* An improved running time calculator that will estimate running time based on your historical data
+* Exclusion of users exposed to multiple variants
+* Improved support for conversion windows and time-based metrics (formerly called trend metrics)
+* A better running time calculator that uses your historical data to estimate experiment duration
 
-The user interface also looks a bit different and now includes an chart showing experiment exposures, and the total number of users seen in each variant. You will also see number of users that have seen more than one variant.
+The user interface has also been updated. You’ll now see a chart showing experiment exposures, as well as the total number of users in each variant. There's also a count of users who were exposed to more than one variant.
 
-The UI is still very much WIP. Please give us feedback and what you'd like us to improve!
+The UI is still a work in progress, so please share your thoughts—your feedback helps us improve!
 
-Below you can find more in-depth information on the new features.
+Read on for a deeper dive into the new features.
 
+---
 
-### Running time calculator
+### Running Time Calculator
 
-You can now more accurately estimate running times with the much improved running time calculator. It consists of the following steps:
-* **Traffic estimation**: Select an event to estimate traffic to your experiment. This can f.ex be a pageview event with a path/url filter.
-* **Select metric**: Select one of your added metrics that you'd like to use for estimating running time. Choose your most important metric here.
-* **Minimum detectable effect**: Set the relative change you'd like to be able to detect in your experiment. The smaller the change the longer you'll need to run your experiment as more data will be required. A typical value here would be somwhere between 5 % to 30 %. Smaller values may be suitable if you are doing subtle changes and have a high number of users (several thousands per day).
+The new running time calculator provides a more accurate estimate of how long your experiment will need to run. It walks you through a few steps:
 
+* **Traffic estimation**: Choose an event to estimate incoming traffic. For example, a pageview event with a specific path or URL filter.
+* **Select metric**: Pick one of your added metrics—ideally, your primary success metric—for estimating running time.
+* **Minimum detectable effect**: Set the minimum relative change you'd like to detect. Smaller changes require more data and longer run times. A common range is between 5% and 30%, depending on the impact you're trying to measure and your daily user volume.
 
-### Experiment exposure
+---
 
-This defines which users we should include in the experiment analysis. By default, the event `$feature_flag_called` is used, as this typically signals that a user was exposed to the experiment (i.e viewed the part of the app/website where the experiment is active). Only users that meet this criteria will be included in the analysis. You can see the total number of unique users in each variant displayed at the top. Users who have seen multiple variant values are put in the `$multiple` group and are excluded from the analysis.
+### Experiment Exposure
 
-We only include metric events that happens _after_ the first exposure we have seen for each user.
+This defines which users should be included in the experiment analysis. By default, we use the `$feature_flag_called` event, which typically indicates that a user was exposed to the experiment (i.e., saw the part of your app or site where the experiment is running). Only users who meet this criterion are included in the analysis.
 
+At the top of the experiment view, you'll see the total number of unique users in each variant. Users who saw more than one variant are grouped under `$multiple` and excluded from the analysis.
 
-### Configuring metrics
+Metric events are only counted if they occur *after* a user's first exposure.
 
-##### Funnel
+---
 
-This works similarily to funnels in Product Analytics. Choose this to measure conversion rates. Note that we currently just display experiment results for the conversion rate for the last step. We are working on improving this so you can see the results for each step of the funnel.
+### Configuring Metrics
 
-When adding a funnel metric, we insert a placeholder for experiment exposure in the preview. This is because we can't use the actual experiment exposure criteria as first step as no data would typically be displayed then. In the actual metric evaluation, the exposure criteria you have set for the experiment will be the first step of the funnel. In experiments, you can thus add funnels with one step, as experiment exposure is impliclity the first step.
+#### Funnel
 
-##### Mean
+This works similarly to funnels in Product Analytics. Use it to measure conversion rates. Currently, we only show results for the final step of the funnel, but we’re working on supporting breakdowns by step soon.
 
-Choose this to measure things like total count of events or sum of values such as revenue. They way it works, is that we aggreagte the value for each person in the experiment by the chosen aggregation method (total count, sum or average). We then compute the mean for each variant in the experiment, and use that to measure statistical difference between the variants. So f.ex, if you select "sum of revenue", we will first compute the total revenue for each user. Then we will take the mean of that as input to the statistical computation. If you choose "avgerage revenue", we will compute the average revenue for each user (so sum of revenue / number of events), and then take the mean of that (so average of average order value) as input to the statistical computation.
+When you add a funnel metric, we insert a placeholder for the experiment exposure in the preview. That’s because using the actual exposure criteria as the first step would typically result in no data being shown. During evaluation, your chosen exposure event will serve as the actual first step. This means you can add funnels with just one step—exposure is implicitly treated as step one.
 
-##### Ratio
+#### Mean
 
-Not supported yet, but on the roadmap!
+Use this to track metrics like total event count or summed values (e.g., revenue). Here’s how it works:
 
+1. We aggregate the chosen value for each user using your selected method (count, sum, or average).
+2. We then compute the *mean* of those values for each variant.
+3. This mean is used to determine the statistical difference between variants.
 
-#### Outlier handling
+For example:
+- If you choose “sum of revenue,” we calculate total revenue per user, then take the mean across users.
+- If you select “average revenue,” we first compute each user’s average (total revenue / number of events), then average those values across users. (NB: not yet supported, but coming soon!)
 
-Set a lower and upper bound to cap metric values at the specified quantile thresholds. Very useful for skewed distributions like revenue or total counts.
+#### Ratio
 
-#### Conversion windows
+Not yet supported—but it's on the roadmap!
 
-Only include metric events that happens after the specified time window after exposure to the experiment.
+---
 
+### Outlier Handling
 
+Cap metric values at specified quantile thresholds by setting lower and upper bounds. This is especially useful for metrics with skewed distributions, like revenue or total event counts.
+
+---
+
+### Conversion Windows
+
+Limit metric events to only those that occur within a specified time window after a user’s first exposure to the experiment.
