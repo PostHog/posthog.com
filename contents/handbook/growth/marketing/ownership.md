@@ -35,8 +35,8 @@ showTitle: true
 | **In-app notifications**                | Joe                  |
 | **Onboarding emails**                   | Joe                  |
 | **Paid ads strategy and messaging**     | Brian                |
-| **Paid ads design**                     | Hey                  |
-| **Paid ads operations**                 | Hey                  |
+| **Paid ads design**                     | Brian                  |
+| **Paid ads operations**                 | Brian                  |
 | **Paid ads performance**                | Brian                |
 | **Partnerships**                        | Joe                  |
 | **Product announcements**               | Joe                  |
