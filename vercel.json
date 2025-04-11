@@ -883,6 +883,9 @@
             "source": "/docs/getting-started/estimating-usage-costs",
             "destination": "/docs/billing/estimating-usage-costs"
         },
+        { "source": "/docs/getting-started/actions-and-insights", "destination": "/docs/data/actions" },
+        { "source": "/docs/getting-started/person-properties", "destination": "/docs/data/persons" },
+        { "source": "/docs/getting-started/group-analytics", "destination": "/docs/product-analytics/group-analytics" },
         { "source": "/docs/data/data-management", "destination": "/docs/data" },
         { "source": "/docs/batch-exports", "destination": "/docs/cdp/batch-exports" },
         { "source": "/docs/batch-exports/s3", "destination": "/docs/cdp/batch-exports/s3" },
