@@ -98,7 +98,7 @@ For example:
 
 ### Ratio
 
-Not yet supported, but it's on the roadmap.
+Ratio metrics—such as average order value—are not yet supported, but they’re on the roadmap. These metrics allow you to divide one metric by a different, meaningful denominator. For example, instead of calculating average order value by dividing total revenue by the total number of users in the experiment (including those who didn’t place an order), you would divide by the number of users who actually made a purchase. This provides a more accurate view of performance per relevant event or user segment.
 
 ## Outlier handling
 
@@ -116,7 +116,7 @@ This technique is commonly known as **Winsorization** and is especially useful f
 
 ## Conversion windows
 
-Conversion windows restrict metric events to those that occur within a defined time window following a user’s initial exposure to the experiment. Metric events outside of the conversion window aren't included in experiment calculations. 
+Conversion windows restrict metric events to those that occur within a defined time window following a user’s initial exposure to the experiment. Metric events outside of the conversion window aren't included in experiment calculations.
 
 This ensures that only relevant, post-exposure behavior is included in the analysis.
 
