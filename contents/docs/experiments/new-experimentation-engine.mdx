@@ -28,6 +28,13 @@ The new running time calculator provides a more accurate estimate of how long yo
 * **Select metric**: Pick one of your added metrics—ideally, your primary success metric—for estimating running time.
 * **Minimum detectable effect**: Set the minimum relative change you'd like to detect. Smaller changes require more data and longer run times. A common range is between 5% and 30%, depending on the impact you're trying to measure and your daily user volume.
 
+<ProductScreenshot
+  imageLight = "https://res.cloudinary.com/dmukukwp6/image/upload/running_time_calc_light_2_02a23ce16b.png"
+  imageDark = "https://res.cloudinary.com/dmukukwp6/image/upload/running_time_calc_dark_2_228e0dca78.png"
+  classes="rounded"
+  alt="Screenshot of the running time calculator"
+/>
+
 ---
 
 ### Experiment Exposure
@@ -68,10 +75,25 @@ Not yet supported—but it's on the roadmap!
 
 ### Outlier Handling
 
-Cap metric values at specified quantile thresholds by setting lower and upper bounds. This is especially useful for metrics with skewed distributions, like revenue or total event counts.
+Cap metric values at specified percentile thresholds by setting lower and upper bounds. This is especially useful for metrics with skewed distributions, like revenue or total event counts.
+
+<ProductScreenshot
+  imageLight = "https://res.cloudinary.com/dmukukwp6/image/upload/outlier_handling_light_8139933041.png"
+  imageDark = "https://res.cloudinary.com/dmukukwp6/image/upload/outlier_handling_dark_c7c0d775d6.png"
+  classes="rounded"
+  alt="Screenshot of outlier handling"
+/>
+
 
 ---
 
 ### Conversion Windows
 
 Limit metric events to only those that occur within a specified time window after a user’s first exposure to the experiment.
+
+<ProductScreenshot
+  imageLight = "https://res.cloudinary.com/dmukukwp6/image/upload/conversion_window_limit_light_25b34f15b9.png"
+  imageDark = "https://res.cloudinary.com/dmukukwp6/image/upload/conversion_window_limit_dark_c07beddef8.png"
+  classes="rounded"
+  alt="Screenshot of conversion window configuration"
+/>
