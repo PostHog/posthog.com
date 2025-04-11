@@ -155,9 +155,9 @@ If you are having issues authenticating your toolbar and are using a [reverse pr
 
 ### Toolbar not working with older Nuxt versions
 
-This is fixed in recent version of Nuxt (tested on ^3.16.2).
+The PostHog toolbar doesn't work for older Nuxt versions because Nuxt overwrote the URL of our static asset URL from `https://app-static-prod.posthog.com` to `https:/app-static-prod.posthog.com`, removing the second `/`.
 
-The PostHog toolbar currently doesn't work for Nuxt users because Nuxt overrides the URL of our static asset URL from `https://app-static-prod.posthog.com` to `https:/app-static-prod.posthog.com`, removing the second `/`. If you have a solution, [please let us know](https://app.posthog.com/home#supportModal=feedback%3A).
+The fix is to update to a newer version of Nuxt. It is fixed as of `^3.16.2` (we checked). 
 
 ### Toolbar non-functional on Wordpress website
 
