@@ -36,7 +36,7 @@ We talk to a lot of founders these days about hiring, and find ourselves saying 
 
 9. Get people to do actual work with you for a day. A [SuperDay](/handbook/people/hiring-process#4-posthog-superday) gives us the strongest signal, and helps to build excitement with a candidate you like.
 
-[![](https://substackcdn.com/image/fetch/w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fb45d864a-875a-4c62-81d2-55a9ce907adb_1769x2203.png)](https://substackcdn.com/image/fetch/f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fb45d864a-875a-4c62-81d2-55a9ce907adb_1769x2203.png)
+![hiring process](https://res.cloudinary.com/dmukukwp6/image/upload/hiring_process_a932decec1.png)
 
 10. If someone doesn’t want to do a SuperDay, that’s totally fine! It just means they’re not as excited to work for us as other places.
 
@@ -60,7 +60,7 @@ We talk to a lot of founders these days about hiring, and find ourselves saying 
 
 20. That said, getting social referrals via your team posting on LinkedIn works well.
 
-[![](https://substackcdn.com/image/fetch/w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F90d47478-1699-47d8-a4a8-b6a1325c22a3_2240x2596.png)](https://substackcdn.com/image/fetch/f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F90d47478-1699-47d8-a4a8-b6a1325c22a3_2240x2596.png)
+![linkedin](https://res.cloudinary.com/dmukukwp6/image/upload/linkedin_3fadf85e18.png)
 
 21. If recruitment is important to you, do it _in house._ Yes, there are lots of benefits to working with agencies. But outsourcing recruitment early on is like outsourcing your product, except here the product is your culture.
 
@@ -102,7 +102,7 @@ If you’re applying for a job right now, you will probably not like this stuff 
 
 38. Make it [obviously personalized](/founders/what-recruiters-see#write-a-short-and-obviously-personalized-cover-letter). Yes, we are still pretty good at spotting AI-generated stuff.
 
-[![](https://substackcdn.com/image/fetch/w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F06589e20-588d-4adc-a62c-3cac3eb41b09_1828x2300.png)](https://substackcdn.com/image/fetch/f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F06589e20-588d-4adc-a62c-3cac3eb41b09_1828x2300.png)
+![cover letters](https://res.cloudinary.com/dmukukwp6/image/upload/cover_letter_7bd5129ea6.png)
 
 39. Make your resumé [easy to read](/founders/what-recruiters-see#keep-your-cv-simple-and-up-to-date). Lighten the cognitive load on the person screening.
 
