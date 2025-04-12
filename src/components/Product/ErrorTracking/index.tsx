@@ -212,7 +212,7 @@ const PairsWithArray = [
     },
 ]
 
-const comparisonColumnCount = 4
+const comparisonColumnCount = 6
 const comparison = [
     {
         feature: 'Error alerts',
