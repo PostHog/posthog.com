@@ -57,22 +57,6 @@ export default function Chat(): JSX.Element | null {
     }
 
     useEffect(() => {
-        const handleClickOutside = (event: MouseEvent) => {
-            if (chatRef.current && !chatRef.current.contains(event.target as Node)) {
-                closeChat()
-            }
-        }
-
-        if (chatOpen) {
-            document.addEventListener('mousedown', handleClickOutside)
-        }
-
-        return () => {
-            document.removeEventListener('mousedown', handleClickOutside)
-        }
-    }, [chatOpen])
-
-    useEffect(() => {
         const handleEscKey = (event: KeyboardEvent) => {
             if (event.key === 'Escape' && chatOpen) {
                 closeChat()
@@ -100,9 +84,9 @@ export default function Chat(): JSX.Element | null {
             {chatting ? (
                 <motion.div
                     ref={chatRef}
-                    initial={{ translateX: '110%' }}
-                    animate={{ translateX: chatOpen ? 0 : '110%', transition: { type: 'tween' } }}
-                    className="fixed bottom-0 right-0 h-full bg-white dark:bg-dark z-[999999] border-l border-border dark:border-dark w-[350px] sm:w-[400px]"
+                    initial={{ translateY: '110%' }}
+                    animate={{ translateY: chatOpen ? 0 : '110%', transition: { type: 'tween' } }}
+                    className="fixed bottom-0 right-4 h-[400px] bg-white dark:bg-dark z-[999999] border border-border dark:border-dark w-[350px] sm:w-[400px] rounded-tr-md rounded-tl-md"
                     onAnimationComplete={handleAnimationComplete}
                     onClick={() => setHistoryOpen(false)}
                 >
@@ -111,9 +95,9 @@ export default function Chat(): JSX.Element | null {
                             closeChat()
                             posthog?.capture('Closed MaxAI chat')
                         }}
-                        className={`absolute left-0 -translate-x-full z-10 rounded-tl rounded-bl py-1 border-l border-t border-b border-border dark:border-dark group transition-colors bg-white dark:bg-[#1c1c1c] pr-0.5 top-[35px]`}
+                        className={`absolute right-4 top-3 z-10 rounded-tl group`}
                     >
-                        <IconChevronDown className="size-8 opacity-60 group-hover:opacity-100 transition-opacity -rotate-90 relative left-1" />
+                        <IconX className="size-5 opacity-60 group-hover:opacity-100 transition-opacity -rotate-90 relative left-1" />
                     </button>
                     <div style={{ height }}>
                         <AnimatePresence>
