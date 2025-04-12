@@ -3513,10 +3513,10 @@
   resolved "https://registry.yarnpkg.com/@popperjs/core/-/core-2.11.8.tgz#6b79032e760a0899cd4204710beede972a3a185f"
   integrity sha512-P1st0aksCrn9sGZhp8GMYwBnQsbvAWsZAX44oXNNvLHGqAOcoVxmjZiohstwQ7SqKnbR47akdNi+uleWD8+g6A==
 
-"@posthog/hedgehog-mode@^0.0.25":
-  version "0.0.25"
-  resolved "https://registry.yarnpkg.com/@posthog/hedgehog-mode/-/hedgehog-mode-0.0.25.tgz#b9a2f3e83800e95c78d1eda224b8b22507939954"
-  integrity sha512-WkIEPqzBsPljjSRQgeKJ2xSCOFlsVH4gTX6c8QxmjlZwa9snPc7X7ds4/JYi4/DJuw5rUYWT3jD703MJcuIx3A==
+"@posthog/hedgehog-mode@^0.0.26":
+  version "0.0.26"
+  resolved "https://registry.yarnpkg.com/@posthog/hedgehog-mode/-/hedgehog-mode-0.0.26.tgz#4f0f7cb2ccebcc092e30a12688c06322d6173004"
+  integrity sha512-aSIrnLu8VgCwCmmeVxqWceMPf1cuPZ7nH3BWfTWiaSW5d1Ts47IX1SG6q2Mt3QnfpxjRPGc/MO/CVRDLfL6OwQ==
   dependencies:
     gsap "^3.12.7"
     lodash "^4.17.21"
