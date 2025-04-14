@@ -1857,6 +1857,10 @@ export const docsMenu = {
                             url: '/docs/libraries/n8n',
                         },
                         {
+                            name: 'Phoenix',
+                            url: '/docs/libraries/phoenix',
+                        },
+                        {
                             name: 'Remix',
                             url: '/docs/libraries/remix',
                         },
