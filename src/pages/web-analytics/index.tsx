@@ -16,6 +16,7 @@ export default function WebAnalytics(): JSX.Element {
                 image={`/images/og/web-analytics.jpg`}
             />
         <Explorer
+            template="product"
             slug="web-analytics"
             title="Monitor your website traffic"
             // options below only needed to override matching the slug
