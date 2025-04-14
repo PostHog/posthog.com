@@ -1,6 +1,14 @@
 import React, { useEffect, useState, useMemo } from 'react'
 import { AnimatePresence, motion, useDragControls } from 'framer-motion'
-import { IconChevronDown, IconDocument, IconMinus, IconX, IconCollapse45Chevrons, IconExpand45Chevrons, IconSquare } from '@posthog/icons'
+import {
+    IconChevronDown,
+    IconDocument,
+    IconMinus,
+    IconX,
+    IconCollapse45Chevrons,
+    IconExpand45Chevrons,
+    IconSquare,
+} from '@posthog/icons'
 import { useApp } from '../../context/App'
 import { Provider as WindowProvider, AppWindow as AppWindowType } from '../../context/Window'
 import { ContextMenu } from 'radix-ui'
@@ -12,6 +20,7 @@ import { Popover } from '../RadixUI/Popover'
 import { FileMenu } from '../RadixUI/FileMenu'
 import { IMenu } from 'components/PostLayout/types'
 import { navigate } from 'gatsby'
+import { useChat } from '../../hooks/useChat'
 
 const getSizeDefaults = () => ({
     max: {
@@ -57,6 +66,7 @@ export default function AppWindow({ item, constraintsRef }: { item: AppWindowTyp
     const [menu, setMenu] = useState<IMenu[]>([])
     const [history, setHistory] = useState<string[]>([])
     const [activeHistoryIndex, setActiveHistoryIndex] = useState(0)
+    const { openChat } = useChat()
     useEffect(() => {
         const handleResize = () => {
             setSizeDefaults(getSizeDefaults())
@@ -300,6 +310,9 @@ export default function AppWindow({ item, constraintsRef }: { item: AppWindowTyp
                                                         {
                                                             type: 'item',
                                                             label: 'New Max chat',
+                                                            onClick() {
+                                                                openChat()
+                                                            },
                                                         },
                                                         {
                                                             type: 'separator',
@@ -332,7 +345,7 @@ export default function AppWindow({ item, constraintsRef }: { item: AppWindowTyp
                                 />
 
                                 <div className="flex-1 truncate flex items-center justify-start @md:justify-center">
-                                {menu && menu.length > 0 ? (
+                                    {menu && menu.length > 0 ? (
                                         <Popover
                                             trigger={
                                                 <button className="text-primary hover:text-primary dark:text-primary-dark dark:hover:text-primary-dark text-left items-center justify-center text-sm font-semibold flex select-none">
