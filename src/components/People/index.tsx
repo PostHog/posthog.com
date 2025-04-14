@@ -149,8 +149,8 @@ export default function People() {
                     </p>
 
                     <p>
-                        That's why we've hired in Belgium, the East and West coasts of the US, Canada, Germany, England,
-                        Finland, Poland, or Colombia (among other places).
+                        That's why we've hired in Belgium, the East and West coasts of the US, Canada, Germany, the United Kingdom,
+                        Finland, Poland, and Colombia (among other places).
                     </p>
 
                     <p className="mb-1">
