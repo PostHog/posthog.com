@@ -28,7 +28,7 @@ import SvelteInstallServer from '../../integrate/_snippets/install-svelte-server
 
 To capture exceptions on the server-side, you will also need to implement the `handleError` callback:
 
-```js file=src/hooks.server.js
+```js file=src/hooks.server.ts
 import type { HandleServerError } from '@sveltejs/kit';
 import { PostHog } from 'posthog-node';
 
@@ -37,7 +37,7 @@ const client = new PostHog(
     { host: '<ph_client_api_host>' }
 )
 
-export const handleError = async ({ error, status }) => {
+export const handleError = async ({ error, status }: HandleServerError) => {
     if (status !== 404) {
         client.captureException(error);
         await client.shutdown();
