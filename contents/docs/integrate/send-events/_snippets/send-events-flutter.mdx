@@ -47,6 +47,7 @@ void main() => runApp(MyApp());
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    // If you're using session replay, `PostHogWidget` has to be the root, and `MaterialApp` must be the child.
     return MaterialApp(
       navigatorObservers: [
         // The PosthogObserver records screen views automatically
@@ -77,6 +78,7 @@ final _router = GoRouter(
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    // If you're using session replay, `PostHogWidget` has to be the root, and `MaterialApp` must be the child.
     return MaterialApp.router(
       routerConfig: _router,
     );
