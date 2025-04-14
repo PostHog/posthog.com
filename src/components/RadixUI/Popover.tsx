@@ -7,13 +7,14 @@ interface PopoverProps {
     title?: string
     children: React.ReactNode
     dataScheme: string
+    header?: boolean
     className?: string
     contentClassName?: string
     sideOffset?: number
 }
 
 export const Popover = React.forwardRef<HTMLDivElement, PopoverProps>(
-    ({ trigger, title, children, dataScheme, className = '', contentClassName = '', sideOffset = 5 }, ref) => {
+    ({ trigger, header, title, children, dataScheme, className = '', contentClassName = '', sideOffset = 5 }, ref) => {
         return (
             <RadixPopover.Root>
                 <RadixPopover.Trigger asChild className={className}>
@@ -29,16 +30,18 @@ export const Popover = React.forwardRef<HTMLDivElement, PopoverProps>(
                         side="bottom"
                     >
                         <div className="flex flex-col gap-2.5">
-                            <div className="flex justify-between items-center">
-                                {title && <strong>{title}</strong>}
-                                <div className="flex items-center">
+                            {header && (
+                                <div className="flex justify-between items-center">
+                                    {title && <strong>{title}</strong>}
+                                    <div className="flex items-center">
                                     <RadixPopover.Close aria-label="Close" asChild>
                                         <button>
                                             <IconX className="size-4" />
                                         </button>
                                     </RadixPopover.Close>
+                                    </div>
                                 </div>
-                            </div>
+                            )}
                             {children}
                         </div>
                         <RadixPopover.Arrow className="fill-white" />
