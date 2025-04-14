@@ -7,27 +7,21 @@ import { Accordion, AccordionItem, AccordionTrigger, AccordionContent } from 'co
 import { Tabs } from "radix-ui";
 import { IconTrends, IconFunnels, IconLifecycle, IconUserPaths, IconCorrelationAnalysis, IconRetention, IconStickiness, IconDashboard, IconHogQL, IconArrowLeft, IconArrowRight } from '@posthog/icons'
 import OSButton from 'components/OSButton'
-import CloudinaryImage from 'components/CloudinaryImage'
-import { ZoomImage } from 'components/ZoomImage'
+import ImageSlider from 'components/Pricing/Test/ImageSlider'
+
 const featuresContent = [
     {
         title: "Funnels",
         headline: "Find drop-off across a series of actions",
         images: [
-            <CloudinaryImage
-                key="funnel-basic"
-                src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Products/Slider/images/funnel-basic.png"
-                className=""
-                height={335}
-                imgClassName="w-full max-h-40"
-            />,
-            <CloudinaryImage
-                key="funnel-grouped"
-                src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Products/Slider/images/funnel-grouped.png"
-                className=""
-                height={335}
-                imgClassName="w-full max-h-40"
-            />
+            {
+                src: "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Products/Slider/images/funnel-basic.png",
+                alt: "Basic funnel visualization"
+            },
+            {
+                src: "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Products/Slider/images/funnel-grouped.png",
+                alt: "Grouped funnel visualization"
+            }
         ],
         features: [
             {
@@ -56,16 +50,14 @@ const featuresContent = [
         icon: <IconTrends />,
         color: "yellow",
         images: [
-            <CloudinaryImage
-                height={420}
-                src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Product/ProductAnalytics/images/screenshot-trend-bar.png"
-                className="h-full"
-            />,
-            <CloudinaryImage
-              height={420}
-              src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Product/ProductAnalytics/images/screenshot-trend-multiple-sparklines.png"
-              className="h-full"
-          />
+            {
+                src: "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Product/ProductAnalytics/images/screenshot-trend-bar.png",
+                alt: "Trend bar visualization"
+            },
+            {
+                src: "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Product/ProductAnalytics/images/screenshot-trend-multiple-sparklines.png",
+                alt: "Multiple sparklines visualization"
+            }
         ],
         features: [
             {
@@ -93,12 +85,10 @@ const featuresContent = [
         icon: <IconLifecycle />,
         color: "purple",
         images: [
-            <CloudinaryImage
-                key="lifecycle-chart"
-                src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Product/ProductAnalytics/images/screenshot-lifecycle.png"
-                className="w-full"
-                height={335}
-            />
+            {
+                src: "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Product/ProductAnalytics/images/screenshot-lifecycle.png",
+                alt: "Lifecycle visualization"
+            }
         ],
         features: [
             {
@@ -126,12 +116,10 @@ const featuresContent = [
         icon: <IconUserPaths />,
         color: "green",
         images: [
-            <CloudinaryImage
-                key="user-paths"
-                src="https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/docs/user-guides/paths/example-light-mode.png"
-                className="w-full"
-                height={335}
-            />
+            {
+                src: "https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/docs/user-guides/paths/example-light-mode.png",
+                alt: "User paths visualization"
+            }
         ],
         features: [
             {
@@ -159,12 +147,10 @@ const featuresContent = [
         icon: <IconCorrelationAnalysis />,
         color: "red",
         images: [
-            <CloudinaryImage
-                key="correlation"
-                src="https://res.cloudinary.com/dmukukwp6/image/upload/v1716387676/posthog.com/contents/Screenshot_2024-05-22_at_3.20.17_PM.png"
-                className="w-full"
-                height={335}
-            />
+            {
+                src: "https://res.cloudinary.com/dmukukwp6/image/upload/v1716387676/posthog.com/contents/Screenshot_2024-05-22_at_3.20.17_PM.png",
+                alt: "Correlation analysis visualization"
+            }
         ],
         features: [
             {
@@ -192,12 +178,10 @@ const featuresContent = [
         icon: <IconRetention />,
         color: "blue",
         images: [
-            <CloudinaryImage
-                key="retention"
-                src="https://res.cloudinary.com/dmukukwp6/image/upload/retention_light_805120c74c.png"
-                className="w-full"
-                height={335}
-            />
+            {
+                src: "https://res.cloudinary.com/dmukukwp6/image/upload/retention_light_805120c74c.png",
+                alt: "Retention visualization"
+            }
         ],
         features: [
             {
@@ -225,12 +209,10 @@ const featuresContent = [
         icon: <IconStickiness />,
         color: "yellow",
         images: [
-            <CloudinaryImage
-                key="stickiness"
-                src="https://res.cloudinary.com/dmukukwp6/image/upload/v1716289464/posthog.com/contents/stickiness-light.png"
-                className="w-full"
-                height={335}
-            />
+            {
+                src: "https://res.cloudinary.com/dmukukwp6/image/upload/v1716289464/posthog.com/contents/stickiness-light.png",
+                alt: "Stickiness visualization"
+            }
         ],
         features: [
             {
@@ -258,12 +240,10 @@ const featuresContent = [
         icon: <IconDashboard />,
         color: "green",
         images: [
-            <CloudinaryImage
-                key="dashboards"
-                src="https://res.cloudinary.com/dmukukwp6/image/upload/web_analytics_top_light_mode_2024_10_be53cf5325.png"
-                className="w-full"
-                height={335}
-            />
+            {
+                src: "https://res.cloudinary.com/dmukukwp6/image/upload/web_analytics_top_light_mode_2024_10_be53cf5325.png",
+                alt: "Dashboard visualization"
+            }
         ],
         features: [
             {
@@ -291,12 +271,10 @@ const featuresContent = [
         icon: <IconHogQL />,
         color: "purple",
         images: [
-            <CloudinaryImage
-                key="sql"
-                src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Product/ProductAnalytics/images/screenshot-sql.png"
-                className="w-full"
-                height={335}
-            />
+            {
+                src: "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Product/ProductAnalytics/images/screenshot-sql.png",
+                alt: "SQL query visualization"
+            }
         ],
         features: [
             {
@@ -439,14 +417,8 @@ export default function ProductAnalyticsFeatures(): JSX.Element {
                       ))}
                     </div>
                     {item.images && item.images.length > 0 && (
-                      <div className="grid auto-cols-max @7xl:grid-cols-1 gap-1 order-1 @3xl:order-2">
-                        {item.images.map((image, index) => (
-                          <div key={index}>
-                            <ZoomImage>
-                              {image}
-                            </ZoomImage>
-                          </div>
-                        ))}
+                      <div className="order-1 @3xl:order-2">
+                        <ImageSlider images={item.images} />
                       </div>
                     )}
                   </div>
