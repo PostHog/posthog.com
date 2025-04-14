@@ -5,7 +5,7 @@ import Explorer from 'components/Explorer'
 import SEO from 'components/seo'
 import { Accordion, AccordionItem, AccordionTrigger, AccordionContent } from 'components/RadixUI/Accordion'
 import { Tabs } from "radix-ui";
-import { IconTrends, IconFunnels } from '@posthog/icons'
+import { IconTrends, IconFunnels, IconLifecycle, IconUserPaths, IconCorrelationAnalysis, IconRetention, IconStickiness, IconDashboard, IconHogQL } from '@posthog/icons'
 import OSButton from 'components/OSButton'
 import CloudinaryImage from 'components/CloudinaryImage'
 
@@ -91,12 +91,236 @@ const featuresContent = [
         ]
     },
     {
-        title: "Step ordering",
-        description: "Choose between a sequential series of steps, a strict order, or any order of steps that lead to conversion",
-        icon: <IconTrends />,
-        color: "yellow"
+        title: "Lifecycle",
+        headline: "Track user engagement patterns over time",
+        description: "Discover how your active users break down, highlighting those who have recently stopped being active or those who have just become active for the first time.",
+        icon: <IconLifecycle />,
+        color: "purple",
+        images: [
+            <CloudinaryImage
+                key="lifecycle-chart"
+                src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Product/ProductAnalytics/images/screenshot-lifecycle.png"
+                className="w-full shadow-xl"
+                height={335}
+            />
+        ],
+        features: [
+            {
+                title: "User categories",
+                description: "Track new, returning, resurrecting, and dormant users to understand engagement patterns"
+            },
+            {
+                title: "Time-based analysis",
+                description: "Configure intervals (hour, day, week, month) to match your product's natural usage patterns"
+            },
+            {
+                title: "Detailed breakdowns",
+                description: "View individual users in each category and analyze their behavior through session recordings"
+            },
+            {
+                title: "Integration",
+                description: "Works with cohorts, feature flags, and other PostHog features for comprehensive analysis"
+            }
+        ]
+    },
+    {
+        title: "User Paths",
+        headline: "Understand user navigation patterns",
+        description: "Track how users navigate through your product, identify where they get stuck, and discover why they aren't finding new features.",
+        icon: <IconUserPaths />,
+        color: "green",
+        images: [
+            <CloudinaryImage
+                key="user-paths"
+                src="https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/docs/user-guides/paths/example-light-mode.png"
+                className="w-full shadow-xl"
+                height={335}
+            />
+        ],
+        features: [
+            {
+                title: "Path visualization",
+                description: "See the most common paths users take through your product"
+            },
+            {
+                title: "Drop-off analysis",
+                description: "Identify where users are getting stuck or abandoning their journey"
+            },
+            {
+                title: "Session recordings",
+                description: "View recordings of user sessions to understand their behavior"
+            },
+            {
+                title: "Cohort creation",
+                description: "Create cohorts of users who follow specific paths for further analysis"
+            }
+        ]
+    },
+    {
+        title: "Correlation Analysis",
+        headline: "Discover factors affecting conversion",
+        description: "Automatically identify significant factors that impact user behavior and conversion rates.",
+        icon: <IconCorrelationAnalysis />,
+        color: "red",
+        images: [
+            <CloudinaryImage
+                key="correlation"
+                src="https://res.cloudinary.com/dmukukwp6/image/upload/v1716387676/posthog.com/contents/Screenshot_2024-05-22_at_3.20.17_PM.png"
+                className="w-full shadow-xl"
+                height={335}
+            />
+        ],
+        features: [
+            {
+                title: "Automatic detection",
+                description: "Automatically highlight significant factors affecting conversion"
+            },
+            {
+                title: "Property analysis",
+                description: "Analyze how different user properties impact behavior"
+            },
+            {
+                title: "Event correlation",
+                description: "Discover which events are most strongly correlated with success"
+            },
+            {
+                title: "Cohort creation",
+                description: "Create cohorts based on correlation analysis results"
+            }
+        ]
+    },
+    {
+        title: "Retention",
+        headline: "Track user return rates",
+        description: "Measure how many users come back to your product over time and compare retention between different user segments.",
+        icon: <IconRetention />,
+        color: "blue",
+        images: [
+            <CloudinaryImage
+                key="retention"
+                src="https://res.cloudinary.com/dmukukwp6/image/upload/retention_light_805120c74c.png"
+                className="w-full shadow-xl"
+                height={335}
+            />
+        ],
+        features: [
+            {
+                title: "Cohort analysis",
+                description: "Compare retention rates between different user cohorts"
+            },
+            {
+                title: "Time-based tracking",
+                description: "Track retention over hours, days, weeks, or months"
+            },
+            {
+                title: "First-time vs recurring",
+                description: "Analyze both first-time and recurring user retention"
+            },
+            {
+                title: "Detailed breakdowns",
+                description: "Break down retention by user properties and segments"
+            }
+        ]
+    },
+    {
+        title: "Stickiness",
+        headline: "Measure user engagement depth",
+        description: "Track how frequently users engage with your product and identify your most engaged users.",
+        icon: <IconStickiness />,
+        color: "yellow",
+        images: [
+            <CloudinaryImage
+                key="stickiness"
+                src="https://res.cloudinary.com/dmukukwp6/image/upload/v1716289464/posthog.com/contents/stickiness-light.png"
+                className="w-full shadow-xl"
+                height={335}
+            />
+        ],
+        features: [
+            {
+                title: "Engagement frequency",
+                description: "Track how many times users perform specific actions"
+            },
+            {
+                title: "User segmentation",
+                description: "Identify your most engaged users and their characteristics"
+            },
+            {
+                title: "Feature analysis",
+                description: "Determine which features drive the most engagement"
+            },
+            {
+                title: "Time-based analysis",
+                description: "Analyze engagement patterns over different time periods"
+            }
+        ]
+    },
+    {
+        title: "Dashboards",
+        headline: "Create custom analytics dashboards",
+        description: "Build and customize dashboards to monitor key metrics and share insights with your team.",
+        icon: <IconDashboard />,
+        color: "green",
+        images: [
+            <CloudinaryImage
+                key="dashboards"
+                src="https://res.cloudinary.com/dmukukwp6/image/upload/web_analytics_top_light_mode_2024_10_be53cf5325.png"
+                className="w-full shadow-xl"
+                height={335}
+            />
+        ],
+        features: [
+            {
+                title: "Custom layouts",
+                description: "Arrange insights in custom layouts to tell your data story"
+            },
+            {
+                title: "Real-time updates",
+                description: "See your metrics update in real-time as new data comes in"
+            },
+            {
+                title: "Sharing",
+                description: "Share dashboards with team members and stakeholders"
+            },
+            {
+                title: "Templates",
+                description: "Use pre-built templates for common analytics needs"
+            }
+        ]
+    },
+    {
+        title: "SQL",
+        headline: "Write custom SQL queries",
+        description: "Create custom insights using SQL to analyze your data in ways that go beyond standard insights.",
+        icon: <IconHogQL />,
+        color: "purple",
+        images: [
+            <CloudinaryImage
+                key="sql"
+                src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Product/ProductAnalytics/images/screenshot-sql.png"
+                className="w-full shadow-xl"
+                height={335}
+            />
+        ],
+        features: [
+            {
+                title: "Custom queries",
+                description: "Write SQL queries to analyze your data in any way you need"
+            },
+            {
+                title: "Advanced analysis",
+                description: "Perform complex calculations and data transformations"
+            },
+            {
+                title: "Data export",
+                description: "Export query results for further analysis"
+            },
+            {
+                title: "Query templates",
+                description: "Save and reuse common queries"
+            }
+        ]
     }
-    // Add more content as needed
 ]
 
 
@@ -109,6 +333,7 @@ export default function ProductAnalyticsFeatures(): JSX.Element {
             image={`/images/og/product-analytics.jpg`}
         />
         <Explorer slug="product-analytics" title="Features">
+          <div className="@xl:hidden">
             <Accordion
               items={featuresContent.map((feature, index) => ({
                 trigger: feature.title,
@@ -124,52 +349,54 @@ export default function ProductAnalyticsFeatures(): JSX.Element {
                 </AccordionItem>
               ))}
             </Accordion>
-            
+          </div>
           <button className="next-button">Next</button>
 
-          <Tabs.Root
-            className="flex items-start w-full border border-primary rounded p-1"
-            defaultValue="tab-0"
-            orientation="vertical"
-          >
-            <Tabs.List
-              className="flex flex-col shrink-0 p-1 gap-0.5"
-              aria-label="Features"
+          <div className="hidden @xl:block">
+            <Tabs.Root
+              className="flex items-start w-full border border-primary rounded p-1"
+              defaultValue="tab-0"
+              orientation="vertical"
             >
+              <Tabs.List
+                className="flex flex-col shrink-0 p-1 gap-0.5"
+                aria-label="Features"
+              >
+                {featuresContent.map((item, index) => (
+                  <Tabs.Trigger
+                    className={`flex h-[45px] flex-1 gap-2 cursor-default select-none items-center bg-white text-[15px] leading-none text-primary rounded outline-none hover:text-primary hover:bg-accent data-[state=active]:font-bold data-[state=active]:bg-accent data-[state=active]:focus:relative data-[state=active]:focus:shadow-[0_0_0_2px] data-[state=active]:focus:shadow-black group ${item.icon ? `p-1 bg-${item.icon}` : 'px-3 py-2'}`}
+                    key={index} value={`tab-${index}`}
+                  >
+                    {item.icon && <span className={`bg-accent p-1 rounded size-7 text-${item.color} hover:text-white group-hover:bg-${item.color} group-data-[state=active]:bg-${item.color} group-data-[state=active]:text-white`}>{item.icon}</span>}
+                    {item.title}
+                  </Tabs.Trigger>
+                ))}
+              </Tabs.List>
               {featuresContent.map((item, index) => (
-                <Tabs.Trigger
-                  className={`flex h-[45px] flex-1 gap-2 cursor-default select-none items-center bg-white text-[15px] leading-none text-primary rounded outline-none hover:text-primary hover:bg-accent data-[state=active]:font-bold data-[state=active]:bg-accent data-[state=active]:focus:relative data-[state=active]:focus:shadow-[0_0_0_2px] data-[state=active]:focus:shadow-black group ${item.icon ? `p-1 bg-${item.icon}` : 'px-3 py-2'}`}
-                  key={index} value={`tab-${index}`}
-                >
-                  {item.icon && <span className={`bg-accent p-1 rounded size-7 text-${item.color} hover:text-white group-hover:bg-${item.color} group-data-[state=active]:bg-${item.color} group-data-[state=active]:text-white`}>{item.icon}</span>}
-                  {item.title}
-                </Tabs.Trigger>
-              ))}
-            </Tabs.List>
-            {featuresContent.map((item, index) => (
-            <Tabs.Content
-              className="grow rounded bg-white p-5 outline-none focus-visible:shadow-[0_0_0_2px] focus-visible:shadow-black"
-              key={index} value={`tab-${index}`}
-            >
-              <h2>{item.headline}</h2>
-              {item.description}
-              <hr />
-              {item.images && item.images.map((image, index) => (
-                <div key={index}>
-                  {image}
-                </div>
-              ))}
-              {item.features && item.features.map((feature, index) => (
-                <div key={index}>
-                  <h3>{feature.title}</h3>
-                  <p>{feature.description}</p>
-                </div>
-              ))}
+              <Tabs.Content
+                className="grow rounded bg-white p-5 outline-none focus-visible:shadow-[0_0_0_2px] focus-visible:shadow-black"
+                key={index} value={`tab-${index}`}
+              >
+                <h2>{item.headline}</h2>
+                {item.description}
+                <hr />
+                {item.images && item.images.map((image, index) => (
+                  <div key={index}>
+                    {image}
+                  </div>
+                ))}
+                {item.features && item.features.map((feature, index) => (
+                  <div key={index}>
+                    <h3>{feature.title}</h3>
+                    <p>{feature.description}</p>
+                  </div>
+                ))}
 
-            </Tabs.Content>
-            ))}
-            
-          </Tabs.Root>
+              </Tabs.Content>
+              ))}
+              
+            </Tabs.Root>
+          </div>
         </Explorer>
       </>
     )

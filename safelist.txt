@@ -225,6 +225,8 @@ group-data-[state=active]:bg-teal
 group-data-[state=active]:bg-purple
 group-data-[state=active]:bg-red
 group-data-[state=active]:bg-seagreen
+group-data-[state=active]:bg-lime-green
+group-data-[state=active]:bg-green
 group-data-[state=active]:bg-salmon
 group-hover:animate-delay-[100ms]
 group-hover:animate-delay-[200ms]
