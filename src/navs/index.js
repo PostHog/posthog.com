@@ -3182,6 +3182,16 @@ export const docsMenu = {
                     color: 'orange',
                 },
                 {
+                    name: 'New experimentation engine',
+                    url: '/docs/experiments/new-experimentation-engine',
+                    icon: 'IconTestTube',
+                    color: 'green',
+                    badge: {
+                        title: 'Beta',
+                        className: 'uppercase !bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',
+                    },
+                },
+                {
                     name: 'Data warehouse',
                     url: '/docs/experiments/data-warehouse',
                     icon: 'IconDatabase',
