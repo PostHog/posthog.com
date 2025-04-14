@@ -1860,11 +1860,6 @@ export const docsMenu = {
                             name: 'Phoenix',
                             url: '/docs/libraries/phoenix',
                         },
-
-                        {
-                            name: 'Phoenix LiveView',
-                            url: '/docs/libraries/phoenix', // Same page, reusing for both frameworks
-                        },
                         {
                             name: 'Remix',
                             url: '/docs/libraries/remix',

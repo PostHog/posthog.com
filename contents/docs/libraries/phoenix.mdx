@@ -16,11 +16,12 @@ import PhoenixInstall from "../integrate/_snippets/install-phoenix.mdx"
 
 <PhoenixInstall />
 
-### LiveView Installation
+### LiveView installation
 
-PostHog also supports Phoenix LiveView with a small tweak to your configuration. PostHog's JavaScript snippet doesn't track LiveView's navigations by default.
+PostHog also supports Phoenix LiveView with a small tweak to your configuration as  the JavaScript snippet doesn't track LiveView's navigation by default.
 
-You'll need to add the following snippet to your main layout file, usually located in `lib/<app>/templates/layouts/app.html.eex` at the bottom of the `<head>` tag.
+To properly capture LiveView pageviews/navigation, you need to add an `phx:navigate` event listener to the bottom of the `<head>` tag in your main layout file,
+usually located in `lib/<app>/templates/layouts/app.html.eex`:
 
 ```javascript
 window.addEventListener("phx:navigate", ({ detail: { href } }) =>
@@ -30,8 +31,8 @@ window.addEventListener("phx:navigate", ({ detail: { href } }) =>
  )
 ```
 
-The `phx:navigate` event is triggered any time that the browser's URL bar is programatically changed by Phoenix or the user,
-according to the [Phoenix LiveView documentation](https://hexdocs.pm/phoenix_live_view/Phoenix.LiveView.html#navigate/2).
+This captures a `$pageview` event any time the browser's URL bar is programmatically changed by Phoenix or the user.
+You can learn more about the `phx:navigate` event in the [Phoenix LiveView documentation](https://hexdocs.pm/phoenix_live_view/Phoenix.LiveView.html#navigate/2).
 
 
 ## Capture custom events
@@ -103,4 +104,4 @@ document.addEventListener('phx:click', (e) => {
 
 ## Next steps
 
-For any technical questions for how to integrate specific PostHog features into Phoenix, have a look at our [JavaScript Web SDK docs](/docs/libraries/js/features).
+Installing the JavaScript Web SDK or snippet means all of its functionality is available in your Phoenix project. To learn more about this, have a look at our [JavaScript Web SDK docs](/docs/libraries/js/features).
