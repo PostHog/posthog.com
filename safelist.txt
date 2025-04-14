@@ -219,6 +219,13 @@ grid-rows-1
 grid-rows-2
 grid-rows-3
 grid-rows-4
+group-data-[state=active]:bg-blue
+group-data-[state=active]:bg-yellow
+group-data-[state=active]:bg-teal
+group-data-[state=active]:bg-purple
+group-data-[state=active]:bg-red
+group-data-[state=active]:bg-seagreen
+group-data-[state=active]:bg-salmon
 group-hover:animate-delay-[100ms]
 group-hover:animate-delay-[200ms]
 group-hover:animate-delay-[300ms]
