@@ -3549,6 +3549,7 @@ export const productMenu = {
     url: '/products',
     icon: 'IconApps',
     slug: 'products',
+    color: 'salmon',
     children: [
         {
             name: 'Product analytics',

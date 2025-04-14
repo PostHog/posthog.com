@@ -15,18 +15,13 @@ const selectOptions = [
     {
         label: 'Products',
         items: [
-            { value: 'products', label: 'Products' },
-            { value: 'product-os', label: 'Product OS' },
-            { value: 'product-analytics', label: 'Product Analytics' },
-            { value: 'web-analytics', label: 'Web Analytics' },
-            { value: 'session-replay', label: 'Session Replay' },
-            { value: 'feature-flags', label: 'Feature Flags' },
-            { value: 'experiments', label: 'Experiments' },
-            { value: 'surveys', label: 'Surveys' },
-            { value: 'data-warehouse', label: 'Data Warehouse' },
-            { value: 'cdp', label: 'Data Pipelines' },
-            { value: 'ai-engineering', label: 'LLM Observability' },
-            { value: 'error-tracking', label: 'Error Tracking' },
+            { value: 'products', label: 'Products', icon: productMenu.icon, color: productMenu.color },
+            ...productMenu.children.map((item) => ({
+                value: item.slug,
+                label: item.name,
+                icon: item.icon,
+                color: item.color
+            }))
         ],
     },
 ]
