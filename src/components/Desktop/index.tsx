@@ -1,5 +1,5 @@
 import React, { useRef } from 'react'
-import { IconGraph, IconPieChart } from '@posthog/icons'
+import { IconGraph, IconPieChart, IconDocument } from '@posthog/icons'
 import Link from 'components/Link'
 import { useApp } from '../../context/App'
 
@@ -17,6 +17,12 @@ const apps = [
         color: 'blue',
         url: '/product-analytics',
     },
+    {
+        label: 'notable customers.mdx',
+        Icon: IconDocument,
+        color: 'salmon',
+        url: '/customers',
+    },
 ]
 
 const AppLink = ({ Icon, type, color, label, url }) => {
@@ -26,7 +32,7 @@ const AppLink = ({ Icon, type, color, label, url }) => {
             <Link
                 to={url}
                 state={{ newWindow: true }}
-                className="flex flex-col justify-center items-center space-y-1 w-[90px] text-center"
+                className="flex flex-col justify-center items-center space-y-1 w-28 text-center"
             >
                 <Icon className={`size-7 text-${color}`} />
                 <p className="text-sm font-semibold">{label}</p>
