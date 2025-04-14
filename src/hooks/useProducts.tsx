@@ -24,7 +24,8 @@ const initialProducts = [
             min: 0,
             max: MAX_PRODUCT_ANALYTICS,
         },
-        worksWith: ['session-replay', 'experiments', 'surveys'],
+        sharesFreeTier: 'web_analytics',
+        worksWith: ['session_replay', 'feature_flags', 'surveys'],
         slug: '/product-analytics',
     },
     {

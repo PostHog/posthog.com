@@ -12,7 +12,17 @@ import { productMenu } from '../../navs'
 import { Accordion } from '../RadixUI/Accordion'
 import { FileMenu } from '../RadixUI/FileMenu'
 
-type ExplorerOption = 'features' | 'pricing' | 'customers' | 'comparison' | 'docs' | 'tutorials' | 'questions' | 'team' | 'roadmap' | 'changelog'
+type ExplorerOption =
+    | 'features'
+    | 'pricing'
+    | 'customers'
+    | 'comparison'
+    | 'docs'
+    | 'tutorials'
+    | 'questions'
+    | 'team'
+    | 'roadmap'
+    | 'changelog'
 
 interface AccordionItem {
     title: string
@@ -30,6 +40,29 @@ interface ExplorerProps {
     indexLinks?: ExplorerOption[]
     sidebarContent?: React.ReactNode | AccordionItem[]
     children?: React.ReactNode
+}
+
+const SidebarContent = ({ content }) => {
+    if (!content) return null
+
+    if (Array.isArray(content)) {
+        return content.map((item, index) => (
+            <Accordion
+                key={index}
+                data-scheme="primary"
+                className=""
+                defaultValue="item-0"
+                items={[
+                    {
+                        trigger: item.title,
+                        content: item.content,
+                    },
+                ]}
+            />
+        ))
+    }
+
+    return content
 }
 
 export default function Explorer({
@@ -57,13 +90,11 @@ export default function Explorer({
     const isSubpage = slug.includes('/')
 
     // Create the display label for the current page
-    const currentLabel = isSubpage 
-        ? `${baseProduct.name} → ${title}`
-        : baseProduct.name
+    const currentLabel = isSubpage ? `${baseProduct.name} → ${title}` : baseProduct.name
 
     // Create a map of options for easy lookup
     const enabledIndexLinks = new Set(indexLinks)
-    
+
     // Replace individual boolean checks with Set.has()
     const showFeatures = enabledIndexLinks.has('features')
     const showPricing = enabledIndexLinks.has('pricing')
@@ -76,164 +107,6 @@ export default function Explorer({
     const showRoadmap = enabledIndexLinks.has('roadmap')
     const showChangelog = enabledIndexLinks.has('changelog')
 
-    const renderSidebarContent = () => {
-        if (!sidebarContent) return null
-
-        if (Array.isArray(sidebarContent)) {
-            return sidebarContent.map((item, index) => (
-                <Accordion
-                    key={index}
-                    data-scheme="primary"
-                    className=""
-                    defaultValue="item-0"
-                    items={[
-                        {
-                            trigger: item.title,
-                            content: item.content
-                        }
-                    ]}
-                />
-            ))
-        }
-
-        return sidebarContent
-    }
-
-    const sidebarContentBlock = (
-        <>
-            {renderSidebarContent()}
-            {template === 'product' && product && ProductIcon && (
-                <>
-                    <Accordion
-                        data-scheme="primary"
-                        className=""
-                        defaultValue="item-0"
-                        items={[
-                            {
-                                trigger: (
-                                    <>
-                                        <ProductIcon className={`text-${product.color} size-5 inline-block`} />
-                                        <span className="flex-1">{product.name}</span>
-                                    </>
-                                ),
-                                content: (
-                                    <>
-                                        <p className="text-sm">
-                                            {product.description}
-                                        </p>
-                                        <p>
-                                            <span className="text-sm text-secondary">Pricing starts at</span><br />
-                                            <span className="font-bold text-[15px]">${product.startsAt}</span><span className="text-sm text-secondary">/{product.denomination}</span>
-                                        </p>
-                                        <p>
-                                            <span className="text-sm text-secondary">Monthly free tier{product.sharesFreeTier ? '*' : ''}</span><br />
-                                            <span className="font-bold text-[15px]">{product.freeTier?.toLocaleString()}</span><span className="text-sm text-secondary">/{product.denomination}</span>
-                                            {product.sharesFreeTier && (
-                                                <span className="block text-xs italic text-secondary mt-1">
-                                                    *Shares free tier with {productMenu.children.find((item) => item.slug === product.sharesFreeTier)?.name}
-                                                </span>
-                                            )}
-                                        </p>
-                                    </>
-                                )
-                            },
-                        ]}
-                    />
-    
-                    <Accordion
-                        data-scheme="primary"
-                        className=""
-                        defaultValue="item-0"
-                        contentClassName=""
-                        items={[
-                            {
-                                trigger: "Learn more",
-                                content: (
-                                    <div className="space-y-1">
-                                        <OSButton 
-                                            variant="underline" 
-                                            asLink 
-                                            align="left" 
-                                            width="full" 
-                                            size="md" 
-                                            icon={<Icons.IconCursor className="text-green" />} 
-                                            to="https://app.posthog.com/signup"
-                                            className="text-primary hover:text-primary"
-                                        >
-                                            Try it – free
-                                        </OSButton>
-    
-                                        <OSButton 
-                                            variant="underline" 
-                                            asLink 
-                                            align="left" 
-                                            width="full" 
-                                            size="md" 
-                                            icon={<Icons.IconHeadset className="text-purple" />} 
-                                            to="/talk-to-a-human"
-                                            className="text-primary hover:text-primary"
-                                        >
-                                            Talk to a human
-                                        </OSButton>
-    
-                                        <OSButton 
-                                            variant="underline" 
-                                            asLink 
-                                            align="left" 
-                                            width="full" 
-                                            size="md" 
-                                            icon={<Icons.IconQuestion className="text-blue" />} 
-                                            to="#"
-                                            className="text-primary hover:text-primary"
-                                        >
-                                            FAQ
-                                        </OSButton>
-                                    </div>
-                                )
-                            },
-                        ]}
-                    />
-    
-                    <Accordion 
-                        data-scheme="primary"
-                        className=""
-                        defaultValue="item-0"
-                        contentClassName=""
-                        items={[
-                            {
-                                trigger: "Works with...",
-                                content: (
-                                    <div className="space-y-1">
-                                        {product && product.worksWith && product.worksWith.map((productSlug) => {
-                                            const relatedProduct = productMenu.children.find((item) => item.slug === productSlug)
-                                            if (!relatedProduct) return null
-                                            const ProductIcon = Icons[relatedProduct.icon as keyof typeof Icons]
-                                            return (
-                                                <OSButton 
-                                                    key={productSlug}
-                                                    variant="underline" 
-                                                    asLink 
-                                                    align="left" 
-                                                    width="full" 
-                                                    size="md" 
-                                                    icon={<ProductIcon className={`text-${relatedProduct.color}`} />} 
-                                                    to={`/${relatedProduct.slug}`} 
-                                                    className="text-primary hover:text-primary"
-                                                >
-                                                    {relatedProduct.name}
-                                                </OSButton>
-                                            )
-                                        })}
-                                    </div>
-                                )
-                            },
-                        ]}
-                    />
-                </>
-            )}
-        </>
-    )
-
     const selectOptions = [
         {
             label: 'Products',
@@ -241,12 +114,14 @@ export default function Explorer({
                 { value: 'products', label: 'Products', icon: productMenu.icon, color: productMenu.color },
                 ...productMenu.children.flatMap((item) => {
                     // Add the base product
-                    const options = [{
-                        value: item.slug,
-                        label: item.name,
-                        icon: item.icon,
-                        color: item.color
-                    }]
+                    const options = [
+                        {
+                            value: item.slug,
+                            label: item.name,
+                            icon: item.icon,
+                            color: item.color,
+                        },
+                    ]
 
                     // Add subpage option if this is the current product and we're on a subpage
                     if (template === 'product' && item.slug === baseSlug && title && currentPath !== item.slug) {
@@ -254,12 +129,12 @@ export default function Explorer({
                             value: currentPath,
                             label: `${item.name} → ${title}`,
                             icon: item.icon,
-                            color: item.color
+                            color: item.color,
                         })
                     }
 
                     return options
-                })
+                }),
             ],
         },
     ]
@@ -286,7 +161,7 @@ export default function Explorer({
                 <aside data-scheme="secondary" className="w-64 bg-primary p-2 border-r border-primary h-full">
                     <ScrollArea>
                         <div className="space-y-3">
-                            {sidebarContentBlock}
+                            <SidebarContent content={sidebarContent} />
                         </div>
                     </ScrollArea>
                 </aside>
@@ -316,7 +191,9 @@ export default function Explorer({
                                             align="left"
                                             width="full"
                                             size="xl"
-                                            icon={React.createElement(Icons[product.icon as keyof typeof Icons], { className: `text-${product.color}` })}
+                                            icon={React.createElement(Icons[product.icon as keyof typeof Icons], {
+                                                className: `text-${product.color}`,
+                                            })}
                                             to={`/${slug}/features`}
                                             className="text-primary hover:text-primary"
                                         >
