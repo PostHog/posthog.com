@@ -38,7 +38,9 @@ PostHog autocapture automatically tracks the following events for you:
 
 > Note: Your routes should be named. Otherwise, they won't be recorded.
 
-Using `navigatorObservers`, Add the `PosthogObserver` to record screen views automatically:
+#### Using `navigatorObservers`
+
+Add the `PosthogObserver` to record screen views automatically:
 
 ```dart
 import 'package:flutter/material.dart';
@@ -61,6 +63,8 @@ class MyApp extends StatelessWidget {
 }
 ```
 
+Name your routes:
+
 ```dart
 ...
 MaterialPageRoute(builder: (context) => const HomeScreenRoute(),
@@ -69,7 +73,9 @@ MaterialPageRoute(builder: (context) => const HomeScreenRoute(),
 ...
 ```
 
-Using `go_router`, Add the `PosthogObserver` to record screen views automatically:
+#### Using `go_router`
+
+Add the `PosthogObserver` to record screen views automatically:
 
 ```dart
 import 'package:flutter/material.dart';
@@ -95,6 +101,8 @@ class MyApp extends StatelessWidget {
   }
 }
 ```
+
+Name your routes:
 
 ```dart
 ...
