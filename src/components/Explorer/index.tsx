@@ -11,20 +11,6 @@ import ScrollArea from 'components/RadixUI/ScrollArea'
 import { productMenu } from '../../navs'
 import { Accordion } from '../RadixUI/Accordion'
 import { FileMenu } from '../RadixUI/FileMenu'
-const selectOptions = [
-    {
-        label: 'Products',
-        items: [
-            { value: 'products', label: 'Products', icon: productMenu.icon, color: productMenu.color },
-            ...productMenu.children.map((item) => ({
-                value: item.slug,
-                label: item.name,
-                icon: item.icon,
-                color: item.color
-            }))
-        ],
-    },
-]
 
 type ExplorerOption = 'features' | 'pricing' | 'customers' | 'comparison' | 'docs' | 'tutorials' | 'questions' | 'team' | 'roadmap' | 'changelog'
 
@@ -58,9 +44,22 @@ export default function Explorer({
     sidebarContent,
     children,
 }: ExplorerProps) {
+    const location = useLocation()
+    const currentPath = location.pathname.replace(/^\//, '') // Remove leading slash
+
     // Find the product in the menu based on slug only if template is "product"
     const product = template === 'product' ? productMenu.children.find((item) => item.slug === slug) : null
     const ProductIcon = product ? Icons[product.icon as keyof typeof Icons] : null
+
+    // Get the base product slug (everything before the first slash)
+    const baseSlug = slug.split('/')[0]
+    const baseProduct = productMenu.children.find((item) => item.slug === baseSlug) || productMenu
+    const isSubpage = slug.includes('/')
+
+    // Create the display label for the current page
+    const currentLabel = isSubpage 
+        ? `${baseProduct.name} → ${title}`
+        : baseProduct.name
 
     // Create a map of options for easy lookup
     const enabledIndexLinks = new Set(indexLinks)
@@ -235,6 +234,36 @@ export default function Explorer({
         </>
     )
 
+    const selectOptions = [
+        {
+            label: 'Products',
+            items: [
+                { value: 'products', label: 'Products', icon: productMenu.icon, color: productMenu.color },
+                ...productMenu.children.flatMap((item) => {
+                    // Add the base product
+                    const options = [{
+                        value: item.slug,
+                        label: item.name,
+                        icon: item.icon,
+                        color: item.color
+                    }]
+
+                    // Add subpage option if this is the current product and we're on a subpage
+                    if (template === 'product' && item.slug === baseSlug && title && currentPath !== item.slug) {
+                        options.push({
+                            value: currentPath,
+                            label: `${item.name} → ${title}`,
+                            icon: item.icon,
+                            color: item.color
+                        })
+                    }
+
+                    return options
+                })
+            ],
+        },
+    ]
+
     const handleValueChange = (value: string) => {
         navigate(`/${value}`)
     }
@@ -247,7 +276,7 @@ export default function Explorer({
                     groups={selectOptions}
                     placeholder="Select..."
                     ariaLabel="Products"
-                    defaultValue={slug}
+                    defaultValue={currentPath}
                     onValueChange={handleValueChange}
                     className="w-full"
                     dataScheme="primary"
