@@ -16,6 +16,7 @@ export default function ProductAnalytics(): JSX.Element {
                 image={`/images/og/product-analytics.jpg`}
             />
         <Explorer
+            template="product"
             slug="product-analytics"
             title="Product analytics with autocapture"
             // options below only needed to override matching the slug

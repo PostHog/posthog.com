@@ -317,7 +317,11 @@ export default function ProductAnalyticsFeatures(): JSX.Element {
             description="PostHog is the only product analytics platform built to natively work with Session Replay, Feature Flags, Experiments, and Surveys."
             image={`/images/og/product-analytics.jpg`}
         />
-        <Explorer slug="product-analytics" title="Features">
+        <Explorer 
+          template="product" 
+          slug="product-analytics"
+          title="Features"
+        >
           <div className="@xl:hidden">
             <Accordion
               items={featuresContent.map((feature, index) => ({

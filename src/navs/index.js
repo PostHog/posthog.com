@@ -3548,13 +3548,8 @@ export const productMenu = {
     name: 'Products',
     url: '/products',
     icon: 'IconApps',
+    slug: 'products',
     children: [
-        {
-            name: 'All products',
-            icon: 'IconApps',
-            color: 'red',
-            url: '/products',
-        },
         {
             name: 'Product analytics',
             icon: 'IconGraph',
@@ -3633,7 +3628,7 @@ export const productMenu = {
         {
             name: 'Product OS',
             icon: 'IconStack',
-            color: 'blue',
+            color: 'salmon',
             url: '/product-os',
             slug: 'product-os',
         },
