@@ -55,6 +55,12 @@ const companies = {
     Sprig: {
         comparisonURL: '',
     },
+    BugSnag: {
+        comparisonURL: '',
+    },
+    Datadog: {
+        comparisonURL: '',
+    },
     PostHog: {
         comparisonURL: '',
     },

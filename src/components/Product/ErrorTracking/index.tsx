@@ -212,13 +212,15 @@ const PairsWithArray = [
     },
 ]
 
-const comparisonColumnCount = 4
+const comparisonColumnCount = 6
 const comparison = [
     {
         feature: 'Error alerts',
         companies: {
             Sentry: true,
             LogRocket: true,
+            BugSnag: true,
+            Datadog: true,
             PostHog: true,
         },
     },
@@ -227,6 +229,8 @@ const comparison = [
         companies: {
             Sentry: true,
             LogRocket: true,
+            BugSnag: true,
+            Datadog: true,
             PostHog: true,
         },
     },
@@ -235,6 +239,8 @@ const comparison = [
         companies: {
             Sentry: true,
             LogRocket: false,
+            BugSnag: true,
+            Datadog: true,
             PostHog: true,
         },
     },
@@ -243,6 +249,8 @@ const comparison = [
         companies: {
             Sentry: true,
             LogRocket: true,
+            BugSnag: true,
+            Datadog: true,
             PostHog: true,
         },
     },
@@ -251,6 +259,8 @@ const comparison = [
         companies: {
             Sentry: true,
             LogRocket: true,
+            BugSnag: true,
+            Datadog: true,
             PostHog: true,
         },
     },
@@ -259,6 +269,8 @@ const comparison = [
         companies: {
             Sentry: true,
             LogRocket: true,
+            BugSnag: true,
+            Datadog: true,
             PostHog: true,
         },
     },
@@ -267,6 +279,8 @@ const comparison = [
         companies: {
             Sentry: true,
             LogRocket: false,
+            BugSnag: true,
+            Datadog: true,
             PostHog: true,
         },
     },
@@ -275,6 +289,8 @@ const comparison = [
         companies: {
             Sentry: false,
             LogRocket: true,
+            BugSnag: false,
+            Datadog: false,
             PostHog: true,
         },
     },
@@ -283,6 +299,8 @@ const comparison = [
         companies: {
             Sentry: true,
             LogRocket: true,
+            BugSnag: false,
+            Datadog: true,
             PostHog: true,
         },
     },
@@ -291,6 +309,8 @@ const comparison = [
         companies: {
             Sentry: false,
             LogRocket: false,
+            BugSnag: true,
+            Datadog: false,
             PostHog: true,
         },
     },
@@ -430,7 +450,7 @@ export const ProductErrorTracking = () => {
                         </div>
 
                         <div className="px-5 md:px-0 lg:w-96 lg:mt-4">
-                            {/* 
+                            {/*
                             <h4 className="text-3xl">FAQs</h4>
                             {faqs.map((faq, index) => {
                                 return <FAQ {...faq} key={index} />

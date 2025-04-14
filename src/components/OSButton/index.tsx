@@ -27,7 +27,7 @@ import Link from 'components/Link'
 //   Cancel
 // </OSButton>
 
-interface OSButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+interface OSButtonProps extends Omit<React.ButtonHTMLAttributes<HTMLButtonElement>, 'className'> {
     children?: React.ReactNode
     variant?: 'default' | 'primary' | 'underline' | 'ghost'
     size?: 'xs' | 'sm' | 'md' | 'lg' | 'xl'
@@ -40,6 +40,8 @@ interface OSButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
     width?: 'auto' | 'full'
     asLink?: boolean
     to?: string
+    iconPosition?: 'left' | 'right'
+    onClick?: (e: React.MouseEvent<HTMLButtonElement> | React.MouseEvent<HTMLAnchorElement>) => void
 }
 
 export default function OSButton({
@@ -55,6 +57,8 @@ export default function OSButton({
     width = 'auto',
     asLink = false,
     to,
+    iconPosition = 'left',
+    onClick,
     ...props
 }: OSButtonProps) {
     const baseClasses =
@@ -90,9 +94,10 @@ export default function OSButton({
 
     const buttonContent = (
         <>
-            {icon && <span className={`${iconSizeClasses[size]}`}>{icon}</span>}
+            {icon && iconPosition === 'left' && <span className={`${iconSizeClasses[size]}`}>{icon}</span>}
             {children}
             {label && <span className="text-sm opacity-75">{label}</span>}
+            {icon && iconPosition === 'right' && <span className={`${iconSizeClasses[size]}`}>{icon}</span>}
             {tooltip && (
                 <span className="">
                     <Tooltip content={tooltip}>
@@ -103,23 +108,20 @@ export default function OSButton({
         </>
     )
 
+    const commonProps = {
+        className: `${baseClasses} ${sizeClasses[size]} ${variantClasses[variant]} ${
+            align === 'center' ? 'justify-center' : 'justify-start'
+        } ${width === 'full' ? 'w-full' : 'w-auto'} ${className}`,
+        onClick,
+        ...props
+    }
+
     return asLink ? (
-        <Link
-            to={to}
-            {...props}
-            className={`${baseClasses} ${sizeClasses[size]} ${variantClasses[variant]} ${
-                align === 'center' ? 'justify-center' : 'justify-start'
-            } ${width === 'full' ? 'w-full' : 'w-auto'} ${className}`}
-        >
+        <Link to={to || ''} {...commonProps}>
             {buttonContent}
         </Link>
     ) : (
-        <button
-            className={`${baseClasses} ${sizeClasses[size]} ${variantClasses[variant]} ${
-                align === 'center' ? 'justify-center' : 'justify-start'
-            } ${width === 'full' ? 'w-full' : 'w-auto'} ${className}`}
-            {...props}
-        >
+        <button {...commonProps}>
             {buttonContent}
         </button>
     )

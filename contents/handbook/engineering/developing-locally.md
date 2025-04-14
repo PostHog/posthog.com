@@ -56,7 +56,7 @@ This is a faster option to get up and running. If you don't want to or can't use
 3. Open the codespace, using one of the "Open in" options from the list.
 4. In the codespace, open a terminal window and run `docker compose -f docker-compose.dev.yml up`.
 5. In another terminal, run `pnpm i` (and use the same terminal for the following commands)
-6. Then run `pip install -r requirements.txt -r requirements-dev.txt`
+6. Then run `uv sync`
 7. Now run `DEBUG=1 ./bin/migrate` and then `./bin/start`.
 8. Open browser to http://localhost:8010/.
 9. To get some practical test data into your brand-new instance of PostHog, run `DEBUG=1 ./manage.py generate_demo_data`.
@@ -124,7 +124,7 @@ To get PostHog running in a dev environment:
 
     This gets you a fully fledged environment, with linked packages stored under `.flox/`. Might take a moment to run the first time, as dependencies get downloaded.
 
-    > Note on app dependencies: Python requirements get updated every time the environment is activated (`uv pip install` is lightning fast). JS dependencies only get installed if `node_modules/` is not present (`pnpm install` still takes a couple lengthy seconds). Dependencies for other languages currently don't get auto-installed.
+    > Note on app dependencies: Python requirements get updated every time the environment is activated (`uv sync` is lightning fast). JS dependencies only get installed if `node_modules/` is not present (`pnpm install` still takes a couple lengthy seconds). Dependencies for other languages currently don't get auto-installed.
 
 3. After successful environment activation, just look at its welcome message in the terminal. It contains all the commands for running the stack. Run those commands in the suggested order.
 
@@ -140,7 +140,7 @@ Alternatively, if you'd prefer not to use [Flox-based instant setup](#instant-se
 
 In this step we will start all the external services needed by PostHog to work.
 
-First, append line `127.0.0.1 kafka clickhouse clickhouse-coordinator objectstorage` to `/etc/hosts`. Our ClickHouse and Kafka data services won't be able to talk to each other without these mapped hosts.  
+First, append line `127.0.0.1 kafka clickhouse clickhouse-coordinator objectstorage` to `/etc/hosts`. Our ClickHouse and Kafka data services won't be able to talk to each other without these mapped hosts.
 You can do this in one line with:
 
 ```bash
@@ -226,7 +226,7 @@ This installs both the Postgres server and its tools. DO NOT start the server af
     sudo apt install -y postgresql-client postgresql-contrib libpq-dev
     ```
 
-This intentionally only installs the Postgres client and drivers, and not the server. If you wish to install the server, or have it installed already, you will want to stop it, because the TCP port it uses conflicts with the one used by the Postgres Docker container. 
+This intentionally only installs the Postgres client and drivers, and not the server. If you wish to install the server, or have it installed already, you will want to stop it, because the TCP port it uses conflicts with the one used by the Postgres Docker container.
 
 On Linux, it's recommended to disable Postgres service by default, to ensure no port conflict arises. If `postgres` is already running on the port `5432`, you can confirm it by checking the port, and then kill it manually.
 
@@ -314,7 +314,7 @@ brew install python-setuptools
         sudo apt install python3.11 python3.11-venv python3.11-dev -y
         ```
 
-Make sure when outside of `venv` to always use `python3` instead of `python`, as the latter may point to Python 2.x on some systems. If installing multiple versions of Python 3, such as by using the `deadsnakes` PPA, use `python3.11` instead of `python3`.
+Make sure when outside the venv to always use `python3` instead of `python`, as the latter may point to Python 2.x on some systems. If installing multiple versions of Python 3, such as by using the `deadsnakes` PPA, use `python3.11` instead of `python3`.
 
 You can also use [pyenv](https://github.com/pyenv/pyenv) if you wish to manage multiple versions of Python 3 on the same machine.
 
@@ -322,37 +322,31 @@ You can also use [pyenv](https://github.com/pyenv/pyenv) if you wish to manage m
 
 `uv` is a very fast tool you can use for python virtual env and dependency management. See [https://docs.astral.sh/uv/](https://docs.astral.sh/uv/). Once installed you can prefix any `pip` command with `uv` to get the speed boost.
 
-1. Create the virtual environment in current directory called 'env':
+1. Create the virtual environment with the right Python version, and install dependencies - all in one with this command:
 
     ```bash
-    uv venv env --python 3.11
+    uv sync
     ```
-   
+
    > **Friendly tip:** Creating an env could raise a `Failed to parse` warning related to `pyproject.toml`. However, you should still see the `Activate with:` line at the very end, which means that your env was created successfully.
 
 1. Activate the virtual environment:
 
     ```bash
     # For bash/zsh/etc.
-    source env/bin/activate
+    source .venv/bin/activate
 
     # For fish
-    source env/bin/activate.fish
+    source .venv/bin/activate.fish
     ```
 
-1. Upgrade pip to the latest version:
+1. Install requirements with uv
 
-    ```bash
-    uv pip install -U pip
-    ```
-
-1. Install requirements with pip
-
-    If your workstation is an Apple Silicon Mac, the first time your run `pip install` you must set custom OpenSSL headers:
+    If your workstation is an Apple Silicon Mac, the first time you install Python packages, you must set custom OpenSSL headers:
 
     ```bash
     brew install openssl
-    CFLAGS="-I /opt/homebrew/opt/openssl/include $(python3.11-config --includes)" LDFLAGS="-L /opt/homebrew/opt/openssl/lib" GRPC_PYTHON_BUILD_SYSTEM_OPENSSL=1 GRPC_PYTHON_BUILD_SYSTEM_ZLIB=1 uv pip install -r requirements.txt
+    CFLAGS="-I /opt/homebrew/opt/openssl/include $(python3.11-config --includes)" LDFLAGS="-L /opt/homebrew/opt/openssl/lib" GRPC_PYTHON_BUILD_SYSTEM_OPENSSL=1 GRPC_PYTHON_BUILD_SYSTEM_ZLIB=1 uv sync
     ```
 
     > **Friendly tip:** If you see `ERROR: Could not build wheels for xmlsec`, refer to this [issue](https://github.com/xmlsec/python-xmlsec/issues/254).
@@ -360,7 +354,7 @@ You can also use [pyenv](https://github.com/pyenv/pyenv) if you wish to manage m
     These will be used when installing `grpcio` and `psycopg2`. After doing this once, and assuming nothing changed with these two packages, next time simply run:
 
     ```bash
-    uv pip install -r requirements.txt -r requirements-dev.txt
+    uv sync
     ```
 
 #### 5. Prepare databases
@@ -376,7 +370,7 @@ DEBUG=1 ./bin/migrate
 
 > **Friendly tip 2:** You may run into `psycopg2` errors while migrating on an ARM machine. Try out the steps in this [comment](https://github.com/psycopg/psycopg2/issues/1216#issuecomment-820556849) to resolve this.
 
-> **Friendly tip 3:** When migrating, make sure the containers are running (detached or in a separate terminal tab). 
+> **Friendly tip 3:** When migrating, make sure the containers are running (detached or in a separate terminal tab).
 
 #### 6. Start PostHog
 
@@ -472,7 +466,7 @@ For an example of how to update a migration to run concurrently, see `posthog/mi
 
 ### Resolving merge conflicts
 
-Our database migrations must be applied linearly in order, to avoid any conflicts. With many developers working on the same codebase, this means it's common to run into merge conflicts when introducing a PR with migrations. 
+Our database migrations must be applied linearly in order, to avoid any conflicts. With many developers working on the same codebase, this means it's common to run into merge conflicts when introducing a PR with migrations.
 
 To help with this, we have introduced a tool called [django-linear-migrations](https://github.com/adamchainz/django-linear-migrations). When a migration-caused merge conflict arises, you can solve it by running `python manage.py rebase_migration <conflicted Django app> && git add <app>/migrations` (in our case the app is either `posthog` or `ee`).
 
@@ -496,7 +490,7 @@ Backend side flags are only evaluated locally, which requires the `POSTHOG_PERSO
 
 The PostHog repository includes [VS Code launch options for debugging](https://github.com/PostHog/posthog/blob/master/.vscode/launch.json). Simply go to the `Run and Debug` tab in VS Code, select the desired service you want to debug, and run it. Once it starts up, you can set breakpoints and step through code to see exactly what is happening. There are also debug launch options for frontend and backend tests if you're dealing with a tricky test failure.
 
-> **Note:** You can debug all services using the main "PostHog" launch option. Otherwise, if you are running most of the PostHog services locally with `./bin/start`, for example if you only want to debug the backend, make sure to comment out that service from the [start script temporarily](https://github.com/PostHog/posthog/blob/master/bin/start#L22). 
+> **Note:** You can debug all services using the main "PostHog" launch option. Otherwise, if you are running most of the PostHog services locally with `./bin/start`, for example if you only want to debug the backend, make sure to comment out that service from the [start script temporarily](https://github.com/PostHog/posthog/blob/master/bin/start#L22).
 
 ## Extra: Debugging the backend in PyCharm
 
@@ -505,8 +499,8 @@ With PyCharm's built in support for Django, it's fairly easy to setup debugging 
 ### Setup PyCharm
 
 1. Open the repository folder.
-2. Setup the python interpreter (Settings… > Project: posthog > Python interpreter > Add interpreter -> Existing): 
-   - If using manual setup: `path_to_repo/posthog/env/bin/python`.
+2. Setup the python interpreter (Settings… > Project: posthog > Python interpreter > Add interpreter -> Existing):
+   - If using manual setup: `path_to_repo/posthog/.venv/bin/python`.
    - If using Flox: `path_to_repo/posthog/.flox/cache/venv/bin/python`.
 3. Setup Django support (Settings… > Languages & Frameworks > Django):
    - Django project root: `path_to_repo`

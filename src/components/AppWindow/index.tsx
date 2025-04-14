@@ -1,6 +1,14 @@
 import React, { useEffect, useState, useMemo } from 'react'
 import { AnimatePresence, motion, useDragControls } from 'framer-motion'
-import { IconChevronDown, IconDocument, IconMinus, IconX, IconCollapse, IconExpand, IconSquare } from '@posthog/icons'
+import {
+    IconChevronDown,
+    IconDocument,
+    IconMinus,
+    IconX,
+    IconCollapse45Chevrons,
+    IconExpand45Chevrons,
+    IconSquare,
+} from '@posthog/icons'
 import { useApp } from '../../context/App'
 import { Provider as WindowProvider, AppWindow as AppWindowType } from '../../context/Window'
 import { ContextMenu } from 'radix-ui'
@@ -347,6 +355,7 @@ export default function AppWindow({ item, constraintsRef }: { item: AppWindowTyp
                                             }
                                             dataScheme="primary"
                                             contentClassName="w-auto p-0 border border-border dark:border-border-dark"
+                                            header={false}
                                         >
                                             <FileMenu menu={menu} />
                                         </Popover>
@@ -385,9 +394,9 @@ export default function AppWindow({ item, constraintsRef }: { item: AppWindowTyp
                                                         <span>
                                                             <IconSquare className="size-5 group-hover:hidden" />
                                                             {size.width >= window?.innerWidth ? (
-                                                                <IconCollapse className="size-6 -m-0.5 hidden group-hover:block" />
+                                                                <IconCollapse45Chevrons className="size-6 -m-0.5 hidden group-hover:block" />
                                                             ) : (
-                                                                <IconExpand className="size-6 -m-0.5 hidden group-hover:block" />
+                                                                <IconExpand45Chevrons className="size-6 -m-0.5 hidden group-hover:block" />
                                                             )}
                                                         </span>
                                                     }

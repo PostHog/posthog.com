@@ -214,6 +214,49 @@ const morePricingReads = [
     },
 ]
 
+const images = [
+    {
+        src: 'https://res.cloudinary.com/dmukukwp6/image/upload/product_os_df65018ac1.png',
+        thumb: 'https://res.cloudinary.com/dmukukwp6/image/upload/product_os_thumb_8a0a4b86c7.png',
+        alt: 'PostHog 3000',
+    },
+    {
+        src: 'https://res.cloudinary.com/dmukukwp6/image/upload/product_analytics_091434830d.png',
+        thumb: 'https://res.cloudinary.com/dmukukwp6/image/upload/product_analytics_thumb_0e75317413.png',
+        alt: 'Product analytics',
+    },
+    {
+        src: 'https://res.cloudinary.com/dmukukwp6/image/upload/web_analytics_d744f3a91b.png',
+        thumb: 'https://res.cloudinary.com/dmukukwp6/image/upload/web_analytics_thumb_6af44e8607.png',
+        alt: 'Web analytics',
+    },
+    {
+        src: 'https://res.cloudinary.com/dmukukwp6/image/upload/session_replay_40fdbb06e4.png',
+        thumb: 'https://res.cloudinary.com/dmukukwp6/image/upload/session_replay_thumb_6334319e64.png',
+        alt: 'Session replay',
+    },
+    {
+        src: 'https://res.cloudinary.com/dmukukwp6/image/upload/feature_flags_3c90797dd6.png',
+        thumb: 'https://res.cloudinary.com/dmukukwp6/image/upload/feature_flags_thumb_b4bc2d6f1.png',
+        alt: 'Feature flags',
+    },
+    {
+        src: 'https://res.cloudinary.com/dmukukwp6/image/upload/ab_testing_0c3f4b82f8.png',
+        thumb: 'https://res.cloudinary.com/dmukukwp6/image/upload/ab_testing_thumb_8729e68844.png',
+        alt: 'Experiments',
+    },
+    {
+        src: 'https://res.cloudinary.com/dmukukwp6/image/upload/surveys_224b1c8aaa.png',
+        thumb: 'https://res.cloudinary.com/dmukukwp6/image/upload/surveys_thumb_1ed78c7676.png',
+        alt: 'Surveys',
+    },
+    {
+        src: 'https://res.cloudinary.com/dmukukwp6/image/upload/data_warehouse_3303d90bcc.png',
+        thumb: 'https://res.cloudinary.com/dmukukwp6/image/upload/data_warehouse_thumb_0fc6126f10.png',
+        alt: 'Data warehouse',
+    },
+]
+
 const PricingExperiment = (): JSX.Element => {
     const [animateFreeTiers, setAnimateFreeTiers] = useState(false)
     const [currentModal, setCurrentModal] = useState<string | boolean>(false)
@@ -257,7 +300,7 @@ const PricingExperiment = (): JSX.Element => {
                     {/* <div className="aspect-square bg-accent dark:bg-accent-dark w-full flex items-center justify-center">
                                 image
                             </div> */}
-                    <ImageSlider />
+                    <ImageSlider images={images} showDisclaimer={true} className="aspect-square" />
                 </div>
 
                 <div className="@container col-span-8 lg:col-span-7 lgxl:col-span-8 md:border-b border-light dark:border-dark md:pl-8 lg:pl-6 xl:pl-10 md:mr-8 lg:mr-6 xl:mr-10 pb-4">
@@ -455,7 +498,7 @@ const PricingExperiment = (): JSX.Element => {
                                     <Link href="/side-project-insurance">
                                         your side project unexpectedly goes viral
                                     </Link>{' '}
-                                    or you’re unhappy), we’ll pretty much always refund it!
+                                    or you're unhappy), we'll pretty much always refund it!
                                 </SidebarListItem>
                                 <SidebarListItem>
                                     We've also written{' '}
@@ -560,7 +603,7 @@ const PricingExperiment = (): JSX.Element => {
                         <p className="text-white m-0 text-[18px] font-bold font-comic">
                             Looking for the signup button?
                         </p>
-                        <p className="text-[15px] mt-0 mb-2 text-white font-comic">(I’ll take you there.)</p>
+                        <p className="text-[15px] mt-0 mb-2 text-white font-comic">(I'll take you there.)</p>
                         <button
                             onClick={() => scroll.scrollToTop()}
                             className="mx-auto flex space-x-2 items-center bg-red text-[15px] font-bold text-white px-3 py-2 rounded-sm relative active:top-[1px] active:scale-[.97]"

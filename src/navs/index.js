@@ -1545,6 +1545,10 @@ export const companyMenu = {
                     url: '/teams/marketing',
                 },
                 {
+                    name: 'CS & Onboarding',
+                    url: '/teams/cs-onboarding',
+                },
+                {
                     name: 'Exec',
                     url: '/teams/exec',
                 },
@@ -3176,6 +3180,16 @@ export const docsMenu = {
                     url: '/docs/experiments/holdouts',
                     icon: 'IconPeople',
                     color: 'orange',
+                },
+                {
+                    name: 'New experimentation engine',
+                    url: '/docs/experiments/new-experimentation-engine',
+                    icon: 'IconTestTube',
+                    color: 'green',
+                    badge: {
+                        title: 'Beta',
+                        className: 'uppercase !bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',
+                    },
                 },
                 {
                     name: 'Data warehouse',

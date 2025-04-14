@@ -1,45 +1,68 @@
-### Q1 2025 objectives
+### Q2 2025 objectives
 
-This quarter is about:
+- 50 external users that love the PostHog editor
+- $1k ARR from the Max AI
+- Max AI features embedded in 5 PostHog products
 
-- excellence in solving level 1 analysis problems (broad, but straightforward)
-- reliable handling of level 2 analysis problems (deeper, ambiguous)
-- AI assistance as a core part of PostHog
+#### Editor
 
-Our projects:
+In the order we'll execute in:
 
-#### Core intelligence
+1. General parity with existing tools
+    - Autocomplete
+    - Codebase indexing
+2. PostHog tedium
+    - Login
+    - Pricing
+    - Billing
+3. PostHog magic
+    - "Add tracking for this feature" (AI)
+    - "Flag this feature" (AI)
+    - Feature indexing for Max's context (AI)
+    - Data analysis (AI)
+    - Instrumentation problems (static analysis)
+    - CodeLens for `posthog.capture()` (static analysis)
+    - "Fix this error"
+4. Extended parity with existing tools
+    - Deeper autocomplete features, like "jump to line"
+    - Iteration on coding agent
+5. PostHog pizzazz
+    - PostHog products iframed for direct access
+    - Full PostHog 3000 styling
+    - PostHog 3000-style side panels
 
-- Long-term memory (**high impact**, **low effort**)
-- Retrieval of actions and cohorts for context (**high impact**, high effort)
-- Retrieval of insights and dashboards for context (medium impact, high effort)
-- Integrate with customer's docs for product understanding (medium impact, high effort)
-- Understanding of data warehouse, tuned for common sources like Stripe (**high impact**, high effort)
-- More examples in prompts, e.g. taxonomy planning or summarization (low impact, **low effort**)
+<details>
+<summary>Rough impact matrix</summary>
+<img src="https://res.cloudinary.com/dmukukwp6/image/upload/max_q2_editor_7ba02a2941.png" alt="Editor Q2 tasks" />
+</details>
 
-#### New skills
+#### AI product manager platform
 
-- Automated pull request with event capture/SDK features (**high impact**, high effort)
-- HogQL insights (**high impact**, high effort)
-- PostHog docs search (**high impact**, medium effort)
-- Analysis of session recordings (**high impact**, high effort)
-- Analysis of experiment results (medium impact, **low effort**)
-- Analysis of surveys (medium impact, **low effort**)
-- Using feature flags in analysis (low impact, **low effort**)
+In the order we'll execute in:
 
-#### User experience
+1. Glaring gaps
+    - Internal docs for Max platform
+    - User-facing docs for Max UX
+    - History of conversations
+2. General release
+    - Pricing
+    - Billing
+3. Product analysis trust
+    - New query planning architecture (first plan, then choose insight type)
+    - Evals running on every Max PR
+    - Eval cases regularly added based on real-world failures
+    - Deep research-style reports
+    - Semantic search on existing insights
+    - Property values search in insight creation
+    - Step-by-step onboarding
+    - Replace generated question suggestions with a hand-crafted set
+    - BuildBetter-type product context accessible to Max
+4. Platform missions
+    - Data warehouse
+    - Product analytics
+    - TBD
 
-- Max in the sidebar (**high impact**, **low effort**)
-- "Edit with Max" button when hovering over existing insight (**high impact**, medium effort)
-- Max on the insight page (**high impact**, medium effort)
-- Max in "New dashboard" (**high impact**, high effort)
-- Max in the dashboard "Add insight" flow (**high impact**, high effort)
-- History of conversations (medium impact, **low effort**)
-- Hard-coded great question suggestions (medium impact, **low effort**)
-
-#### Evaluation
-
-- Evaluation tests speeded up 3x (**high impact**, **low effort**)
-- Junk in eval test data (**high impact**, medium effort)
-- Comparison of OpenAI vs. Anthropic vs. alternative LLMs quality (low impact, **low effort**)
-- LLM observability in production (medium impact, **low effort**)
+<details>
+<summary>Rough impact matrix</summary>
+<img src="https://res.cloudinary.com/dmukukwp6/image/upload/max_q2_product_manager_3e0d1640e3.png" alt="Platform + AI PM Q2 tasks" />
+</details>
