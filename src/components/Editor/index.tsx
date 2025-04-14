@@ -31,7 +31,7 @@ export default function Editor({
             <div className="flex flex-col flex-grow min-h-0">
                 <main data-scheme="primary" className="@container flex-1 bg-primary relative h-full">
                   <ScrollArea>
-                    <div className="p-4 mx-auto max-w-2xl">
+                    <div className="p-4 mx-auto max-w-3xl">
                       <h1 className="text-2xl font-bold">{title}</h1>
                       {children}
                     </div>
