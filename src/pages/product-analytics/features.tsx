@@ -18,14 +18,16 @@ const featuresContent = [
             <CloudinaryImage
                 key="funnel-basic"
                 src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Products/Slider/images/funnel-basic.png"
-                className="w-full shadow-xl"
+                className="shadow-xl "
                 height={335}
+                imgClassName="w-full max-h-40"
             />,
             <CloudinaryImage
                 key="funnel-grouped"
                 src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Products/Slider/images/funnel-grouped.png"
-                className="w-full shadow-xl"
+                className="shadow-xl "
                 height={335}
+                imgClassName="w-full max-h-40"
             />
         ],
         features: [
@@ -367,7 +369,7 @@ export default function ProductAnalyticsFeatures(): JSX.Element {
                     className={`flex h-[45px] flex-1 gap-2 cursor-default select-none items-center bg-white text-[15px] leading-none text-primary rounded outline-none hover:text-primary hover:bg-accent data-[state=active]:font-bold data-[state=active]:bg-accent data-[state=active]:focus:relative data-[state=active]:focus:shadow-[0_0_0_2px] data-[state=active]:focus:shadow-black group ${item.icon ? `p-1 bg-${item.icon}` : 'px-3 py-2'}`}
                     key={index} value={`tab-${index}`}
                   >
-                    {item.icon && <span className={`bg-accent p-1 rounded size-7 text-${item.color} hover:text-white group-hover:bg-${item.color} group-data-[state=active]:bg-${item.color} group-data-[state=active]:text-white`}>{item.icon}</span>}
+                    {item.icon && <span className={`bg-${item.color}/10 p-1 rounded size-7 text-${item.color} group-hover:bg-${item.color}/25 group-data-[state=active]:bg-${item.color} group-data-[state=active]:text-white`}>{item.icon}</span>}
                     {item.title}
                   </Tabs.Trigger>
                 ))}
@@ -377,20 +379,28 @@ export default function ProductAnalyticsFeatures(): JSX.Element {
                 className="grow rounded bg-white p-5 outline-none focus-visible:shadow-[0_0_0_2px] focus-visible:shadow-black"
                 key={index} value={`tab-${index}`}
               >
-                <h2>{item.headline}</h2>
-                {item.description}
-                <hr />
-                {item.images && item.images.map((image, index) => (
-                  <div key={index}>
-                    {image}
+                <h2 className="text-xl mb-2">{item.headline}</h2>
+                {item.description && <p>{item.description}</p>}
+
+                <div className="grid @3xl:grid-cols-2 gap-4 items-start">
+                  <div className="order-2 @3xl:order-1">
+                    {item.features && item.features.map((feature, index) => (
+                      <div key={index}>
+                        <h3 className="text-base mb-1">{feature.title}</h3>
+                        <p className="text-sm">{feature.description}</p>
+                      </div>
+                    ))}
                   </div>
-                ))}
-                {item.features && item.features.map((feature, index) => (
-                  <div key={index}>
-                    <h3>{feature.title}</h3>
-                    <p>{feature.description}</p>
-                  </div>
-                ))}
+                  {item.images && item.images.length > 0 && (
+                    <div className="grid auto-cols-max @7xl:grid-cols-1 gap-1 order-1 @3xl:order-2">
+                      {item.images.map((image, index) => (
+                        <div key={index}>
+                          {image}
+                        </div>
+                      ))}
+                    </div>
+                  )}
+                </div>
 
               </Tabs.Content>
               ))}

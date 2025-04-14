@@ -86,6 +86,7 @@ bg-purple-2
 bg-purple-2-dark
 bg-purple/10
 bg-red
+bg-red/10
 bg-salmon
 bg-salmon/10
 bg-seagreen
@@ -228,6 +229,15 @@ group-data-[state=active]:bg-seagreen
 group-data-[state=active]:bg-lime-green
 group-data-[state=active]:bg-green
 group-data-[state=active]:bg-salmon
+group-hover:bg-blue/25
+group-hover:bg-yellow/25
+group-hover:bg-teal/25
+group-hover:bg-purple/25
+group-hover:bg-red/25
+group-hover:bg-seagreen/25
+group-hover:bg-lime-green/25
+group-hover:bg-green/25
+group-hover:bg-salmon/25
 group-hover:animate-delay-[100ms]
 group-hover:animate-delay-[200ms]
 group-hover:animate-delay-[300ms]
