@@ -2,7 +2,7 @@ import React from 'react'
 import { Select } from '../RadixUI/Select'
 import HeaderBar from 'components/OSChrome/HeaderBar'
 import * as Icons from '@posthog/icons'
-import { Link } from 'gatsby'
+import { Link, navigate } from 'gatsby'
 import { useLocation } from '@reach/router'
 import OSButton from 'components/OSButton'
 import CloudinaryImage from 'components/CloudinaryImage'
@@ -235,6 +235,10 @@ export default function Explorer({
         </>
     )
 
+    const handleValueChange = (value: string) => {
+        navigate(`/${value}`)
+    }
+
     return (
         <div className="@container w-full h-full flex flex-col min-h-1">
             <HeaderBar showHome showBack showForward showSearch />
@@ -244,6 +248,7 @@ export default function Explorer({
                     placeholder="Select..."
                     ariaLabel="Products"
                     defaultValue={slug}
+                    onValueChange={handleValueChange}
                     className="w-full"
                     dataScheme="primary"
                 />
