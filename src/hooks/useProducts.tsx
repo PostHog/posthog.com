@@ -24,6 +24,9 @@ const initialProducts = [
             min: 0,
             max: MAX_PRODUCT_ANALYTICS,
         },
+        sharesFreeTier: 'web_analytics',
+        worksWith: ['session_replay', 'feature_flags', 'surveys'],
+        slug: '/product-analytics',
     },
     {
         Icon: IconRewindPlay,
@@ -36,6 +39,7 @@ const initialProducts = [
             max: 500000,
         },
         volume: 5000,
+        slug: '/session-replay',
     },
     {
         Icon: IconToggle,
@@ -48,6 +52,7 @@ const initialProducts = [
             max: 1000000000,
         },
         volume: 1000000,
+        slug: '/feature-flags',
     },
     {
         Icon: IconFlask,
@@ -55,6 +60,7 @@ const initialProducts = [
         type: 'feature_flags',
         color: 'purple',
         billedWith: 'Feature flags',
+        slug: '/experiments',
     },
     {
         Icon: IconMessage,
@@ -67,6 +73,7 @@ const initialProducts = [
             max: 100000,
         },
         volume: 250,
+        slug: '/surveys',
     },
     {
         Icon: IconDatabase,
@@ -79,6 +86,7 @@ const initialProducts = [
             max: 1000000000,
         },
         volume: 1000000,
+        slug: '/data-warehouse',
     },
     {
         Icon: IconWarning,
@@ -91,6 +99,7 @@ const initialProducts = [
             max: 50000000,
         },
         volume: 100000,
+        slug: '/error-tracking',
     },
 ]
 
