@@ -1,11 +1,11 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Layout from 'components/Layout'
 import ProductProductAnalytics from 'components/Product/ProductAnalytics'
 import Explorer from 'components/Explorer'
 import SEO from 'components/seo'
 import { Accordion, AccordionItem, AccordionTrigger, AccordionContent } from 'components/RadixUI/Accordion'
 import { Tabs } from "radix-ui";
-import { IconTrends, IconFunnels, IconLifecycle, IconUserPaths, IconCorrelationAnalysis, IconRetention, IconStickiness, IconDashboard, IconHogQL } from '@posthog/icons'
+import { IconTrends, IconFunnels, IconLifecycle, IconUserPaths, IconCorrelationAnalysis, IconRetention, IconStickiness, IconDashboard, IconHogQL, IconArrowLeft, IconArrowRight } from '@posthog/icons'
 import OSButton from 'components/OSButton'
 import CloudinaryImage from 'components/CloudinaryImage'
 import { ZoomImage } from 'components/ZoomImage'
@@ -13,19 +13,18 @@ const featuresContent = [
     {
         title: "Funnels",
         headline: "Find drop-off across a series of actions",
-        description: "Blah  filters for individual steps – or the entire funnel – by person property, group or cohort, or event property",
         images: [
             <CloudinaryImage
                 key="funnel-basic"
                 src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Products/Slider/images/funnel-basic.png"
-                className="shadow-xl "
+                className=""
                 height={335}
                 imgClassName="w-full max-h-40"
             />,
             <CloudinaryImage
                 key="funnel-grouped"
                 src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Products/Slider/images/funnel-grouped.png"
-                className="shadow-xl "
+                className=""
                 height={335}
                 imgClassName="w-full max-h-40"
             />
@@ -54,23 +53,18 @@ const featuresContent = [
     {
         title: "Graph & trends",
         headline: "Visualize user data with graphs, tables, charts, maps, and more",
-        description: "Blah",
         icon: <IconTrends />,
         color: "yellow",
         images: [
             <CloudinaryImage
-                objectPosition="left"
                 height={420}
-                objectFit="cover"
                 src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Product/ProductAnalytics/images/screenshot-trend-bar.png"
-                className="shadow-xl h-full"
+                className="h-full"
             />,
             <CloudinaryImage
-              objectPosition="left"
               height={420}
-              objectFit="cover"
               src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Product/ProductAnalytics/images/screenshot-trend-multiple-sparklines.png"
-              className="shadow-xl h-full"
+              className="h-full"
           />
         ],
         features: [
@@ -102,7 +96,7 @@ const featuresContent = [
             <CloudinaryImage
                 key="lifecycle-chart"
                 src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Product/ProductAnalytics/images/screenshot-lifecycle.png"
-                className="w-full shadow-xl"
+                className="w-full"
                 height={335}
             />
         ],
@@ -135,7 +129,7 @@ const featuresContent = [
             <CloudinaryImage
                 key="user-paths"
                 src="https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/docs/user-guides/paths/example-light-mode.png"
-                className="w-full shadow-xl"
+                className="w-full"
                 height={335}
             />
         ],
@@ -168,7 +162,7 @@ const featuresContent = [
             <CloudinaryImage
                 key="correlation"
                 src="https://res.cloudinary.com/dmukukwp6/image/upload/v1716387676/posthog.com/contents/Screenshot_2024-05-22_at_3.20.17_PM.png"
-                className="w-full shadow-xl"
+                className="w-full"
                 height={335}
             />
         ],
@@ -201,7 +195,7 @@ const featuresContent = [
             <CloudinaryImage
                 key="retention"
                 src="https://res.cloudinary.com/dmukukwp6/image/upload/retention_light_805120c74c.png"
-                className="w-full shadow-xl"
+                className="w-full"
                 height={335}
             />
         ],
@@ -234,7 +228,7 @@ const featuresContent = [
             <CloudinaryImage
                 key="stickiness"
                 src="https://res.cloudinary.com/dmukukwp6/image/upload/v1716289464/posthog.com/contents/stickiness-light.png"
-                className="w-full shadow-xl"
+                className="w-full"
                 height={335}
             />
         ],
@@ -267,7 +261,7 @@ const featuresContent = [
             <CloudinaryImage
                 key="dashboards"
                 src="https://res.cloudinary.com/dmukukwp6/image/upload/web_analytics_top_light_mode_2024_10_be53cf5325.png"
-                className="w-full shadow-xl"
+                className="w-full"
                 height={335}
             />
         ],
@@ -300,7 +294,7 @@ const featuresContent = [
             <CloudinaryImage
                 key="sql"
                 src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Product/ProductAnalytics/images/screenshot-sql.png"
-                className="w-full shadow-xl"
+                className="w-full"
                 height={335}
             />
         ],
@@ -327,6 +321,17 @@ const featuresContent = [
 
 
 export default function ProductAnalyticsFeatures(): JSX.Element {
+    const [currentTab, setCurrentTab] = useState(0)
+    const totalTabs = featuresContent.length
+
+    const handleNext = () => {
+        setCurrentTab((prev) => (prev + 1) % totalTabs)
+    }
+
+    const handlePrevious = () => {
+        setCurrentTab((prev) => (prev - 1 + totalTabs) % totalTabs)
+    }
+
     return (
       <>
         <SEO
@@ -342,7 +347,7 @@ export default function ProductAnalyticsFeatures(): JSX.Element {
                 content: feature.description,
                 value: `item-${index}`
               }))}
-              defaultValue="item-0"
+              defaultValue={`item-${currentTab}`}
             >
               {featuresContent.map((feature, index) => (
                 <AccordionItem key={index} value={`item-${index}`}>
@@ -351,23 +356,62 @@ export default function ProductAnalyticsFeatures(): JSX.Element {
                 </AccordionItem>
               ))}
             </Accordion>
+            <div className="flex justify-between mt-4">
+              <button 
+                className="previous-button" 
+                onClick={handlePrevious}
+                disabled={currentTab === 0}
+              >
+                Previous!!
+              </button>
+              <button 
+                className="next-button" 
+                onClick={handleNext}
+                disabled={currentTab === totalTabs - 1}
+              >
+                Next
+              </button>
+            </div>
           </div>
-          <button className="next-button">Next</button>
 
-          <div className="hidden @xl:block">
+          <div className="hidden @xl:block relative -mt-2">
+            <div className="flex gap-px -top-10 right-2 absolute">
+                  <OSButton 
+                    variant="ghost"
+                    className="previous-button" 
+                    icon={<IconArrowLeft className="rotate-90" />}
+                    onClick={handlePrevious}
+                    disabled={currentTab === 0}
+                  >
+                    Previous
+                  </OSButton>
+                  <OSButton 
+                    variant="ghost"
+                    className="next-button" 
+                    icon={<IconArrowRight className="rotate-90" />}
+                    iconPosition="right"
+                    onClick={handleNext}
+                    disabled={currentTab === totalTabs - 1}
+                  >
+                    Next
+                  </OSButton>
+                </div>
             <Tabs.Root
-              className="flex items-start w-full border border-primary rounded p-1"
-              defaultValue="tab-0"
+              className="flex items-start w-full"
+              defaultValue={`tab-${currentTab}`}
+              value={`tab-${currentTab}`}
+              onValueChange={(value) => setCurrentTab(parseInt(value.split('-')[1]))}
               orientation="vertical"
             >
               <Tabs.List
-                className="flex flex-col shrink-0 p-1 gap-0.5"
+                className="flex flex-col shrink-0 p-1 gap-0.5 min-w-52"
                 aria-label="Features"
               >
                 {featuresContent.map((item, index) => (
                   <Tabs.Trigger
                     className={`flex h-[45px] flex-1 gap-2 cursor-default select-none items-center bg-white text-[15px] leading-none text-primary rounded outline-none hover:text-primary hover:bg-accent data-[state=active]:font-bold data-[state=active]:bg-accent data-[state=active]:focus:relative data-[state=active]:focus:shadow-[0_0_0_2px] data-[state=active]:focus:shadow-black group ${item.icon ? `p-1 bg-${item.icon}` : 'px-3 py-2'}`}
-                    key={index} value={`tab-${index}`}
+                    key={index} 
+                    value={`tab-${index}`}
                   >
                     {item.icon && <span className={`bg-${item.color}/10 p-1 rounded size-7 text-${item.color} group-hover:bg-${item.color}/25 group-data-[state=active]:bg-${item.color} group-data-[state=active]:text-white`}>{item.icon}</span>}
                     {item.title}
@@ -375,39 +419,41 @@ export default function ProductAnalyticsFeatures(): JSX.Element {
                 ))}
               </Tabs.List>
               {featuresContent.map((item, index) => (
-              <Tabs.Content
-                className="grow rounded bg-white p-5 outline-none focus-visible:shadow-[0_0_0_2px] focus-visible:shadow-black"
-                key={index} value={`tab-${index}`}
-              >
-                <h2 className="text-xl mb-2">{item.headline}</h2>
-                {item.description && <p>{item.description}</p>}
-
-                <div className="grid @3xl:grid-cols-2 gap-4 items-start">
-                  <div className="order-2 @3xl:order-1">
-                    {item.features && item.features.map((feature, index) => (
-                      <div key={index}>
-                        <h3 className="text-base mb-1">{feature.title}</h3>
-                        <p className="text-sm">{feature.description}</p>
-                      </div>
-                    ))}
+                <Tabs.Content
+                  className="grow rounded bg-white px-5 py-2 outline-none focus-visible:shadow-[0_0_0_2px] focus-visible:shadow-black"
+                  key={index} 
+                  value={`tab-${index}`}
+                >
+                  <div className="pb-4">
+                    <h2 className="text-xl mb-0">{item.headline}</h2>
+                    {item.description && <p className="mt-1">{item.description}</p>}
                   </div>
-                  {item.images && item.images.length > 0 && (
-                    <div className="grid auto-cols-max @7xl:grid-cols-1 gap-1 order-1 @3xl:order-2">
-                      {item.images.map((image, index) => (
+
+                  <div className="grid @3xl:grid-cols-2 gap-4 @4xl:gap-8 items-start">
+                    <div className="order-2 @3xl:order-1">
+                      {item.features && item.features.map((feature, index) => (
                         <div key={index}>
-                          <ZoomImage>
-                            {image}
-                          </ZoomImage>
+                          <h3 className="text-base mb-1">{feature.title}</h3>
+                          <p className="text-sm">{feature.description}</p>
                         </div>
                       ))}
                     </div>
-                  )}
-                </div>
-
-              </Tabs.Content>
+                    {item.images && item.images.length > 0 && (
+                      <div className="grid auto-cols-max @7xl:grid-cols-1 gap-1 order-1 @3xl:order-2">
+                        {item.images.map((image, index) => (
+                          <div key={index}>
+                            <ZoomImage>
+                              {image}
+                            </ZoomImage>
+                          </div>
+                        ))}
+                      </div>
+                    )}
+                  </div>
+                </Tabs.Content>
               ))}
-              
             </Tabs.Root>
+
           </div>
         </Explorer>
       </>
