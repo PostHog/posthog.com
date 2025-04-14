@@ -68,6 +68,14 @@ export const quickLinks: QuickLinks = [
         to: '/docs/libraries/n8n',
     },
     {
+        name: 'Phoenix',
+        to: '/docs/libraries/phoenix',
+    },
+    {
+        name: 'Phoenix LiveView',
+        to: '/docs/libraries/phoenix',
+    },
+    {
         name: 'Remix',
         to: '/docs/libraries/remix',
     },
