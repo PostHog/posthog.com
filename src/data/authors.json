@@ -1,5 +1,13 @@
 [
     {
+        "handle": "edwin-lim",
+        "name": "Edwin Lim",
+        "role": "Hopeful Candidate",
+        "link_type": "github",
+        "link_url": "https://edwinyjlim.github.io",
+        "profile_id": 42424
+    },
+    {
         "handle": "james-hawkins",
         "name": "James Hawkins",
         "role": "Co-founder/CEO",

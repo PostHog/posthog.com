@@ -1,0 +1,754 @@
+---
+title: How to create user-facing analytics for LLM-powered apps
+date: 2025-04-14
+author:
+  - edwin-lim
+tags:
+  - LLM observability
+  - Product analytics
+  - sql
+---
+
+You’ve built an LLM-powered application that users love – an AI chatbot that can answer just about any question. People are even willing to pay for it. But while the experience feels magical, your users have no visibility into their usage, how the underlying LLM models work, and what it might cost them.
+
+PostHog’s LLM observability and queries API make it easy to add a user-facing analytics layer to your latest and greatest AI products.
+
+This tutorial will show you how to:
+- Set up LLM analytics with PostHog within a Next.js application and OpenAI integration
+- Query and retrieve LLM analytics from PostHog
+- Display user-facing LLM analytics within your application
+
+## Before you start
+
+Before continuing with this tutorial, you'll need:
+
+- A PostHog account + project API key + personal API key
+- LLM Observability enabled
+- OpenAI API key with credits
+- Node.js v18.18+
+
+## 1. Creating a Next.js app
+
+First we'll create a simple one-page LLM app with:
+- A prompt input field
+- A dropdown to select an OpenAI model
+
+Start by creating the app:
+
+```bash
+npx create-next-app@latest llm-analytics
+```
+
+After creating your app, go into the newly created `llm-analytics` directory and install the PostHog [Node SDK](/docs/libraries/node) and `ai` [package](/docs/ai-engineering/observability) as well as OpenAI's [JavaScript SDK](https://platform.openai.com/docs/libraries/typescript-javascript-library).
+
+```bash
+cd llm-analytics
+npm install --save posthog-node @posthog/ai openai
+```
+
+Next, we'll create our frontend by replacing the placeholder code in `app/page.js`. Our frontend will be a simple form with an input, model selector, and response label. Each of these will need a state. We'll also set up an API call to `/api/generate` with the user's input and model.
+
+```js file=app/page.js
+'use client'
+import React, { useState } from 'react';
+
+const models = ['gpt-4o', 'chatgpt-4o-latest', 'gpt-4o-mini'];
+
+export default function Home() {
+  const [userInput, setUserInput] = useState('');
+  const [modelResponse, setModelResponse] = useState('');
+  const [selectedModel, setSelectedModel] = useState(models[0]);
+
+  const fetchModelResponse = async () => {
+    try {
+
+      setModelResponse('Generating...');
+
+      const res = await fetch('/api/generate', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ input: userInput, model: selectedModel }),
+      })
+      const response = await res.json();
+      setModelResponse(response.content);
+    } catch (error) {
+      setModelResponse(error.message);
+    }
+  };
+
+  const handleInputChange = (event) => {
+    setUserInput(event.target.value);
+  };
+
+  const handleModelChange = (event) => {
+    setSelectedModel(event.target.value);
+  };
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    fetchModelResponse();
+  };
+
+  return (
+    <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', minHeight: '100vh', gap: '20px' }}>
+      <form onSubmit={handleSubmit}>
+        <input
+          type="text"
+          value={userInput}
+          onChange={handleInputChange}
+          placeholder="Type your message"
+        />
+        <button type="submit">Send</button>
+      </form>
+      <select value={selectedModel} onChange={handleModelChange}>
+        {models.map((model, index) => (
+          <option key={index} value={model}>
+            {model}
+          </option>
+        ))}
+      </select>     
+      <label>ChatGPT Response:</label>
+      <label>{modelResponse}</label>
+    </div>
+  );
+};
+```
+
+Run `npm run dev` to see our app in action:
+
+![Basic Next.js app with ChatGPT](https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_01_23_at_10_50_12_2x_482fd1852c.png)
+
+## 2. Adding and tracking the generate API route
+
+In the `app` folder, create an `api` folder, a `generate` folder inside it, and then a `route.js` file in that. This is our `/api/generate` API route that calls the OpenAI API and returns the response. 
+
+Next, set up:
+
+1. The PostHog Node client using our project API key and instance address which you can get from [your project settings](https://us.posthog.com/settings/project). 
+2. The OpenAI client which requires an API key.
+
+With both of these set up, we simply call the `openai.chat.completions.create` method with the input and model then return the response.
+
+```js file=app/api/generate/route.js
+import { NextResponse } from 'next/server';
+import { OpenAI } from '@posthog/ai'
+import { PostHog } from 'posthog-node'
+
+const phClient = new PostHog(
+  '<ph_project_api_key>',
+  { host: '<ph_api_client_host>' }
+)
+
+const openai = new OpenAI({
+  apiKey: '<openai_api_key>',
+  posthog: phClient,
+});
+
+export async function POST(request) {
+  try {
+    const body = await request.json();
+    const { input, model } = body;
+
+    const completion = await openai.chat.completions.create({
+      messages: [{ role: "user", content: input }],
+      model: model,
+    });
+
+    return NextResponse.json({ 
+      content: completion.choices[0].message.content 
+    });
+
+  } catch (error) {
+    console.error('OpenAI API error:', error);
+    return NextResponse.json(
+      { error: 'There was an error processing your request' },
+      { status: 500 }
+    );
+  }
+}
+```
+
+Now, when we run `npm run dev` again and submit an input, we should see a response as well as the generation autocaptured into PostHog as a `$ai_generation` event.
+
+![Generated](https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_01_23_at_10_50_43_2x_9cb0149c7e.png)
+
+## 3. Viewing generations in PostHog
+
+Once you generate a few responses, go to PostHog and enable the [LLM observability feature preview](https://app.posthog.com/#panel=feature-previews%3Allm-observability). Once enabled, go to the LLM observability tab to get an overview of traces, users, costs, and more.
+
+<ProductScreenshot
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_01_23_at_10_58_04_2x_a87f97d692.png" 
+  imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_01_23_at_10_57_32_2x_f8d6385951.png"
+  alt="LLM observability dashboard" 
+  classes="rounded"
+/>
+
+You can also go into more detail by clicking on the [generations tab](https://us.posthog.com/llm-observability/generations). This shows each generation as well as model, cost, token usage, latency, and more. You can even see the conversation input and output.
+
+<ProductScreenshot
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_01_23_at_11_05_47_2x_31ac89084d.png" 
+  imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_01_23_at_11_04_38_2x_4029e378cb.png"
+  alt="LLM observability dashboard" 
+  classes="rounded"
+/>
+
+From here, you can go further by filtering your LLM observability dashboard, use the `$ai_generation` event to [create insights](/docs/product-analytics/insights).
+
+
+## 4. Creating an EmailLogin component
+
+Now that LLM observability is working in our Next.js app, let’s take it a step further by tying generation data to individual users using `posthogDistinctId` — similar to how we use `posthog.identify()` in [product analytics](/docs/product-analytics/identify).
+
+We’ll create a lightweight email "login" flow that stores the user’s email in `localStorage` and sends it along with each LLM request. Then we'll pass the email to along with each LLM call so it’s attached to every `$ai_generation` event in PostHog.
+
+Create a new `components` directory and add a new file called `EmailLogin.js`. This component will handle email input and store the submitted value.
+
+```js file=app/components/EmailLogin.js
+'use client'
+import React, { useState } from 'react';
+
+export default function EmailLogin({ onLogin }) {
+  const [email, setEmail] = useState('');
+
+  const handleEmailChange = (event) => {
+    setEmail(event.target.value);
+  };
+
+  const handleEmailSubmit = (event) => {
+    event.preventDefault();
+    // Basic email validation
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (emailRegex.test(email)) {
+      localStorage.setItem('userEmail', email);
+      onLogin(email);
+    } else {
+      alert('Please enter a valid email address');
+    }
+  };
+
+  return (
+    <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', minHeight: '100vh', gap: '20px' }}>
+      <h1>Welcome</h1>
+      <p>Please enter your email to access the LLM application</p>
+      <form onSubmit={handleEmailSubmit}>
+        <input
+          type="email"
+          value={email}
+          onChange={handleEmailChange}
+          placeholder="Enter your email"
+          required
+          style={{
+            flex: 1,
+            padding: '8px',
+            border: '1px solid #ccc',
+            borderRadius: '6px',
+          }}
+        />
+        <button 
+          type="submit"
+          style={{
+            padding: '8px 16px',
+            backgroundColor: '#4CAF50',
+            color: '#fff',
+            border: 'none',
+            borderRadius: '6px',
+            cursor: 'pointer',
+            margin: '10px'
+          }}
+        >Login</button>
+      </form>
+    </div>
+  );
+}
+```
+
+Next, let's wire the `<EmailLogin />` component to the main app so we can:
+- Load the user's saved in `localStorage`
+- Set the logged-in state 
+- Protect the LLM feature from unauthenticated users
+- Show a logout button
+
+```js file=app/page.js
+'use client'
+import React, { useState, useEffect } from 'react';
+import EmailLogin from './components/EmailLogin';
+
+const models = ['gpt-4o', 'chatgpt-4o-latest', 'gpt-4o-mini'];
+
+export default function Home() {
+  const [userInput, setUserInput] = useState('');
+  const [modelResponse, setModelResponse] = useState('');
+  const [selectedModel, setSelectedModel] = useState(models[0]);
+  // Saving email state
+  const [email, setEmail] = useState('');
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  
+  // Check for saved login on page load
+  useEffect(() => {
+    const savedEmail = localStorage.getItem('userEmail');
+    if (savedEmail) {
+      setIsLoggedIn(true);
+      setEmail(savedEmail);
+    }
+  }, []);
+
+  const fetchModelResponse = async () => {
+    try {
+      setModelResponse('Generating...');
+      const res = await fetch('/api/generate', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ 
+            input: userInput, 
+            model: selectedModel,
+            email: email
+         }),
+      })
+      const response = await res.json();
+      setModelResponse(response.content);
+    } catch (error) {
+      setModelResponse(error.message);
+    }
+  };
+
+  const handleInputChange = (event) => {
+    setUserInput(event.target.value);
+  };
+
+  const handleModelChange = (event) => {
+    setSelectedModel(event.target.value);
+  };
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    fetchModelResponse();
+  };
+
+  // Add a new handler for the login event
+  const handleLogin = (userEmail) => {
+    setEmail(userEmail);
+    setIsLoggedIn(true);
+  };
+
+  // Add a new handler for the logout event
+  const handleLogout = () => {
+    localStorage.removeItem('userEmail');
+    setIsLoggedIn(false);
+    setEmail('');
+  };
+
+  // Unauthenticated users to EmailLogin component
+  if (!isLoggedIn) {
+    return <EmailLogin onLogin={handleLogin} />;
+  }
+
+  return (
+    <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', minHeight: '100vh', gap: '20px' }}>
+      <div>
+        <span>Logged in as: {email}</span>
+        <button 
+            onClick={handleLogout}
+            style={{
+                padding: '6px 12px',
+                backgroundColor: '#f44336',
+                color: '#fff',
+                border: 'none',
+                borderRadius: '6px',
+                cursor: 'pointer',
+                margin: '10px'
+              }}
+        >Logout</button>
+      </div>
+      
+      <form onSubmit={handleSubmit}>
+        <input
+          type="text"
+          value={userInput}
+          onChange={handleInputChange}
+          placeholder="Type your message"
+          style={{
+            flex: 1,
+            padding: '8px',
+            border: '1px solid #ccc',
+            borderRadius: '6px',
+          }}
+        />
+        <button 
+            type="submit"
+            style={{
+                padding: '8px 16px',
+                backgroundColor: '#4CAF50',
+                color: '#fff',
+                border: 'none',
+                borderRadius: '6px',
+                cursor: 'pointer',
+                margin: '10px'
+              }}
+        >
+            Send
+        </button>
+      </form>
+      
+      <select value={selectedModel} onChange={handleModelChange}>
+        {models.map((model, index) => (
+          <option 
+            key={index} 
+            value={model}
+            style={{
+                flex: 1,
+                padding: '8px',
+                border: '1px solid #ccc',
+                borderRadius: '6px',
+              }}
+          >
+            {model}
+          </option>
+        ))}
+      </select>
+      
+      <div>
+        <h3>ChatGPT Response:</h3>
+        <div>{modelResponse || 'Response will appear here'}</div>
+      </div>
+    </div>
+  );
+}
+```
+
+If you refresh, you should see our new login screen: 
+
+<ProductScreenshot
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/welcome_dd9eec5078.png" 
+  alt="LLM email login" 
+  classes="rounded"
+/>
+
+Enter any email address (it doesn’t need to be real) and click **Login**. Once you're logged in, you’ll be taken to the updated LLM app interface with a new red **Logout** button.
+
+<ProductScreenshot
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/awaiting_response_bedf252c20.png" 
+  alt="LLM interface with logout" 
+  classes="rounded"
+/>
+
+## 5. Using email as the posthogDistinctId
+
+Now that we have gated email login. We need to send the user's email address to PostHog, so it can be used as the distinct ID for each `$ai_generation` event.
+
+Go back to `app/api/generate/route.js` and update the code to include the email address as the `posthogDistinctId` when submitting a completion to the `opanai` client.
+
+```js file=app/api/generate/route.js
+import { NextResponse } from 'next/server';
+import { OpenAI } from '@posthog/ai'
+import { PostHog } from 'posthog-node'
+
+const phClient = new PostHog(
+  '<ph_project_api_key>',
+  { host: '<ph_api_client_host>' }
+)
+
+const openai = new OpenAI({
+  apiKey: '<openai_api_key>',
+  posthog: phClient,
+});
+
+export async function POST(request) {
+  try {
+    const body = await request.json();
+    const { input, model, email } = body; // Accept email from request
+
+    // Use email as distinct ID if provided, otherwise fallback to a default
+    const distinctId = email || "anonymous_user";
+
+    const completion = await openai.chat.completions.create({
+      messages: [{ role: "user", content: input }],
+      model: model,
+      posthogDistinctId: distinctId // ID based on submitted user email
+    });
+
+    return NextResponse.json({ 
+      content: completion.choices[0].message.content 
+    });
+
+  } catch (error) {
+    console.error('OpenAI API error:', error);
+    return NextResponse.json(
+      { error: 'There was an error processing your request' },
+      { status: 500 }
+    );
+  }
+}
+```
+
+In `app/page.js`, modify your `fetchModelResponse` function to include the email field in the request body:
+
+```js file=app/page.js
+const fetchModelResponse = async () => {
+  try {
+    setModelResponse('Generating...');
+    const res = await fetch('/api/generate', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ 
+        input: userInput, 
+        model: selectedModel,
+        email: email  // Pass the email to the /api/generate call
+      }),
+    })
+    // ...
+```
+
+Our LLM app should now be sending the logged-in user's email to PostHog. Go ahead and start submitting prompts so we can generate more LLM analytics data.
+
+Can't think of any? Here are a few prompts for you:
+- `Who is the lord of the rings`
+- `Write a haiku about debugging code at 3 AM`
+- `What are three fun facts about hedgehogs`
+
+## 6. Viewing generations by email in PostHog
+
+Head back to your PostHog project's **LLM observability**. You should see more data flowing in. 
+
+In the **Generations** tab, you should see `$ai_generation` events labeled with the logged-in user's email address.
+
+<ProductScreenshot
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/posthog_llm_observability_57d4d5c223.png" 
+  alt="LLM generations with distinct email ids" 
+  classes="rounded"
+/>
+
+## 7. Retrieving data from Queries API
+
+Now that we’ve started capturing LLM observability by user email, let’s fetch the data using PostHog’s [queries API](/docs/api/queries) so we can later display it in a dashboard for users to view.
+
+Create a new directory `./api/llm-analytics` then add a `route.js` file. This endpoint will retrieve `$ai_generation` events from PostHog, filtered by the logged-in user's email.
+
+```js file=src/app/api/llm-analytics/route.js
+import { NextResponse } from 'next/server';
+
+export async function POST(request) {
+  const posthogUrl = "<ph_api_client_host>"; 
+  const projectId = "<ph_project_id>"; 
+  const personalApiKey = "<ph_project_api_key>";
+
+  try {
+    // Get email from request body
+    const body = await request.json();
+    const { email } = body;
+    
+    // Create the base query - use a placeholder that will be safe in SQL
+    let queryFilter = '';
+    
+    // If email is provided, add a filter for that specific user
+    if (email) {
+      queryFilter = `AND distinct_id = '${email.replace(/'/g, "''")}'`; 
+    }
+
+    const url = `${posthogUrl}/api/projects/${projectId}/query/`;
+    
+    const response = await fetch(url, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${personalApiKey}`
+      },
+      body: JSON.stringify({
+        query: {
+          kind: 'HogQLQuery',
+          query: `
+          SELECT *
+          FROM events
+          WHERE 
+            event = '$ai_generation'
+            ${queryFilter}
+          ORDER BY timestamp DESC
+          LIMIT 100
+          `
+        }
+      }),
+    });
+
+    if (!response.ok) {
+      const errorText = await response.text();
+      console.error('PostHog API error:', errorText);
+      return NextResponse.json(
+        { error: `PostHog API error: ${response.status}` },
+        { status: response.status }
+      );
+    }
+
+    const data = await response.json();
+    return NextResponse.json(data.results || []);
+    
+  } catch (error) {
+    console.error('Error fetching LLM stats:', error);
+    return NextResponse.json(
+      { error: 'Internal server error', details: error.message },
+      { status: 500 }
+    );
+  }
+}
+
+// Also keeping GET method for backward compatibility
+export async function GET(request) {
+  // Get email from the URL query parameters
+  const { searchParams } = new URL(request.url);
+  const email = searchParams.get('email');
+  
+  // Create a fake request body with the email
+  const fakeRequest = {
+    json: async () => ({ email })
+  };
+  
+  // Call the POST handler with our fake request
+  return POST(fakeRequest);
+}
+```
+
+## 8. Building a user-facing LLM dashboard
+
+The last step, now that we can query LLM observability from PostHog, is to build a dashboard page to display the data for the user.
+
+Create a `app/llm-dashboard` directory then add a `page.js` file. We’ll use this file to build a `<LLMDashboard />` component that displays the user’s previous LLM prompts — along with helpful usage stats from PostHog like input, output, latency, and cost.
+
+```js file=app/llm-dashboard/page.js
+'use client'
+import { useState, useEffect } from 'react';
+import Link from 'next/link';
+import { useRouter } from 'next/navigation'
+
+function LLMDashboard() {
+  const [data, setData] = useState(null);
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState(null);
+  const [email, setEmail] = useState('');
+  const router = useRouter()
+
+  useEffect(() => {
+    async function fetchStats() {
+      try {
+        // Get the user's email from localStorage
+        const savedEmail = localStorage.getItem('userEmail');
+        if (savedEmail) {
+          setEmail(savedEmail);
+        } else {
+            router.push('/')
+        }
+
+        setIsLoading(true);
+        // Pass the email to the API using POST
+        const response = await fetch('/api/llm-analytics', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ email: savedEmail }), // Include email in the request body
+        });
+        
+        if (!response.ok) {
+          throw new Error(`Failed to fetch stats: ${response.status}`);
+        }
+        
+        const result = await response.json();
+        setData(result);
+      } catch (err) {
+        console.error('Error:', err);
+        setError(`Failed to load LLM stats: ${err.message}`);
+      } finally {
+        setIsLoading(false);
+      }
+    }
+    
+    fetchStats();
+  }, []);
+
+  if (isLoading) return <div className="p-8 text-center">Loading LLM analytics data...</div>;
+  if (error) return <div className="p-8 text-center text-red-500">{error}</div>;
+  if (!data) return <div className="p-8 text-center">No LLM usage data available</div>;
+
+  return (
+    <div className="container mx-auto p-8">
+      <div className="flex justify-between items-center mb-6">
+        <h1 className="text-3xl font-bold">LLM Analytics Dashboard</h1>
+        <Link href="/" className="bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded">
+          Back to Home
+        </Link>
+      </div>
+      
+      {email && (
+        <div className="bg-blue-50 border-l-4 border-blue-500 p-4 mb-6">
+          <p className="text-blue-700">
+            Showing results for user: <strong>{email}</strong>
+          </p>
+        </div>
+      )}
+      
+
+      {data.map((item, index) => {
+        const email = item[4];
+        const timeStamp = item[3];
+        const rawJson = item[2];
+        let parsed = {};
+
+        try {
+          parsed = JSON.parse(rawJson);
+        } catch (e) {
+          console.error('Error parsing JSON:', e);
+        }
+
+        const input = parsed?.$ai_input?.[0]?.content || 'N/A';
+        const output = parsed?.$ai_output_choices?.[0]?.content || 'N/A';
+        const latency = parsed?.$ai_latency || 'N/A';
+        const cost = parsed?.$ai_total_cost_usd || 'N/A';
+
+        return (
+          <div
+            key={index}
+            style={{
+              border: '1px solid #ccc',
+              borderRadius: '8px',
+              padding: '12px',
+              marginBottom: '16px',
+              backgroundColor: '#f9f9f9',
+            }}
+          >
+            <p><strong>User:</strong> {email}</p>
+            <p><strong>Prompt:</strong> {input}</p>
+            <p><strong>Response:</strong> {output}</p>
+            <p><strong>Latency:</strong> {latency} sec</p>
+            <p><strong>Total Cost:</strong> ${cost}</p>
+            <p><strong>Timestamp:</strong> {timeStamp}</p>
+          </div>
+        );
+      })}
+
+      <div className="bg-white p-6 rounded-lg shadow">
+        <h3 className="text-lg font-medium mb-2">LLM Usage Stats (Raw data from PostHog query API)</h3>
+        <pre className="bg-gray-100 p-4 overflow-auto max-h-[80vh] rounded">
+          {JSON.stringify(data, null, 2)}
+        </pre>
+      </div>
+    </div>
+  );
+}
+
+export default LLMDashboard;
+```
+
+Open `/llm-dashboard` in your browser, and you should see a list of LLM prompts and usage stats tied to the currently logged-in user.
+
+<ProductScreenshot
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/dashboard_a433ee449b.png" 
+  alt="LLM dashboard with user data" 
+  classes="rounded"
+/>
+
+## Further reading
+
+- [How to set up LLM analytics for Anthropic's Claude](/tutorials/anthropic-analytics) 
+- [How to set up LLM analytics for Cohere](/tutorials/cohere-analytics)
+- [How to monitor LlamaIndex apps with Langfuse and PostHog](/tutorials/monitor-llama-index-with-langfuse)
+
+<NewsletterForm />
