@@ -418,7 +418,7 @@ export default function ProductAnalyticsFeatures(): JSX.Element {
                     </div>
                     {item.images && item.images.length > 0 && (
                       <div className="order-1 @3xl:order-2">
-                        <ImageSlider images={item.images} />
+                        <ImageSlider images={item.images} id={`feature-${index}`} />
                       </div>
                     )}
                   </div>

@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { useInView } from 'react-intersection-observer'
+import { ZoomImage } from 'components/ZoomImage'
 
 interface Image {
     src: string
@@ -11,6 +12,7 @@ interface ImageSliderProps {
     images: Image[]
     showDisclaimer?: boolean
     className?: string
+    id: string
 }
 
 const Slide = ({
@@ -21,6 +23,8 @@ const Slide = ({
     alt,
     index,
     setActiveIndex,
+    isThumbnail = false,
+    sliderId,
 }: {
     className?: string
     onClick?: () => void
@@ -29,6 +33,8 @@ const Slide = ({
     alt: string
     index?: number
     setActiveIndex?: (index: number) => void
+    isThumbnail?: boolean
+    sliderId: string
 }) => {
     const handleClick = () => onClick?.()
     const [ref, inView] = useInView({ threshold: 0.9 })
@@ -40,23 +46,27 @@ const Slide = ({
         }
     }, [inView])
 
+    const content = (
+        <img src={src} alt={alt} className="w-full h-full object-contain" />
+    )
+
     return (
         <button
             ref={ref}
-            id={id}
+            id={`${sliderId}-${id}`}
             onClick={handleClick}
             className={`bg-accent dark:bg-accent-dark flex items-center justify-center flex-grow flex-shrink-0 snap-center ${className}`}
         >
-            <img src={src} alt={alt} />
+            {isThumbnail ? content : <ZoomImage>{content}</ZoomImage>}
         </button>
     )
 }
 
-export default function ImageSlider({ images, className, showDisclaimer = false }: ImageSliderProps): JSX.Element {
+export default function ImageSlider({ images, className, showDisclaimer = false, id }: ImageSliderProps): JSX.Element {
     const [activeIndex, setActiveIndex] = useState<number>(0)
 
-    const handleClick = (id: number) => {
-        const el = document.getElementById(`pricing-slider-slide-${id}`)
+    const handleClick = (index: number) => {
+        const el = document.getElementById(`${id}-pricing-slider-slide-${index}`)
         el?.scrollIntoView({ behavior: 'smooth', block: 'nearest' })
     }
 
@@ -90,6 +100,7 @@ export default function ImageSlider({ images, className, showDisclaimer = false 
                             alt={image.alt}
                             index={index}
                             setActiveIndex={setActiveIndex}
+                            sliderId={id}
                         />
                         {showDisclaimer && index === 0 && (
                             <div className="absolute bottom-2 md:bottom-1 xl:bottom-2 left-2 right-2 text-primary text-xs leading-tight opacity-60">
@@ -99,20 +110,24 @@ export default function ImageSlider({ images, className, showDisclaimer = false 
                     </>
                 ))}
             </div>
-            <div className="flex flex-nowrap md:grid grid-cols-5 lg:grid-cols-4 xl:grid-cols-5 overflow-x-auto md:[overflow:unset] -mx-4 px-4 md:mx-0 md:px-0 snap-x snap-mandatory my-2 gap-2">
-                {images.map((image, index) => (
-                    <Slide
-                        key={index}
-                        className={`w-1/5 md:w-auto p-1 border border-light hover:border-border dark:border-dark dark:hover:border-border-dark rounded relative transition-all hover:scale-[1.01] hover:top-[-.5px] active:scale-[.98] active:top-[.5px] ${
-                            index === activeIndex ? 'active' : 'opacity-70 hover:opacity-100'
-                        }`}
-                        id={`pricing-slider-nav-${index}`}
-                        onClick={() => handleClick(index)}
-                        src={image.thumb || image.src}
-                        alt={image.alt}
-                    />
-                ))}
-            </div>
+            {images.length > 1 && (
+                <div className="flex flex-nowrap md:grid grid-cols-5 lg:grid-cols-4 xl:grid-cols-5 overflow-x-auto md:[overflow:unset] -mx-4 px-4 md:mx-0 md:px-0 snap-x snap-mandatory my-2 gap-2">
+                    {images.map((image, index) => (
+                        <Slide
+                            key={index}
+                            className={`w-1/5 md:w-auto p-1 border border-light hover:border-border dark:border-dark dark:hover:border-border-dark rounded relative transition-all hover:scale-[1.01] hover:top-[-.5px] active:scale-[.98] active:top-[.5px] ${
+                                index === activeIndex ? 'active' : 'opacity-70 hover:opacity-100'
+                            }`}
+                            id={`pricing-slider-nav-${index}`}
+                            onClick={() => handleClick(index)}
+                            src={image.thumb || image.src}
+                            alt={image.alt}
+                            isThumbnail={true}
+                            sliderId={id}
+                        />
+                    ))}
+                </div>
+            )}
         </>
     )
 }
