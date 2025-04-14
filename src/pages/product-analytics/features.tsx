@@ -8,7 +8,7 @@ import { Tabs } from "radix-ui";
 import { IconTrends, IconFunnels, IconLifecycle, IconUserPaths, IconCorrelationAnalysis, IconRetention, IconStickiness, IconDashboard, IconHogQL } from '@posthog/icons'
 import OSButton from 'components/OSButton'
 import CloudinaryImage from 'components/CloudinaryImage'
-
+import { ZoomImage } from 'components/ZoomImage'
 const featuresContent = [
     {
         title: "Funnels",
@@ -395,7 +395,9 @@ export default function ProductAnalyticsFeatures(): JSX.Element {
                     <div className="grid auto-cols-max @7xl:grid-cols-1 gap-1 order-1 @3xl:order-2">
                       {item.images.map((image, index) => (
                         <div key={index}>
-                          {image}
+                          <ZoomImage>
+                            {image}
+                          </ZoomImage>
                         </div>
                       ))}
                     </div>
