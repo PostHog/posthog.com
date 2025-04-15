@@ -47,7 +47,7 @@ export const TeamMember = (props) => {
                             {country === 'world' ? 'Planet Earth' : location || country}
                         </span>
                     </span>
-                    <figure className="m-0 -mt-8 p-0 absolute right-0 bottom-0">
+                    <figure className="m-0 -mt-8 p-0 absolute right-0 bottom-0 pointer-events-none">
                         <img
                             src={
                                 avatar?.url ||
