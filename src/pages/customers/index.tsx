@@ -150,29 +150,6 @@ export default function Customers(): JSX.Element {
         {}
     )
 
-    const renderCustomerName = (customer: CustomerNode | ManualCustomer, isManual: boolean) => {
-        let logo = null
-        let name: string
-
-        if (isManual) {
-            const manualCustomer = customer as ManualCustomer
-            name = manualCustomer.name
-            logo = isDarkMode ? manualCustomer.logoDark : manualCustomer.logo
-        } else {
-            const frontmatterCustomer = customer as CustomerNode
-            name = frontmatterCustomer.frontmatter.customer
-            logo = isDarkMode
-                ? frontmatterCustomer.frontmatter.logoDark?.publicURL
-                : frontmatterCustomer.frontmatter.logo?.publicURL
-        }
-
-        return (
-            <div className="flex items-center gap-2">
-                {logo ? <img src={logo} alt={name} className="h-8 w-auto object-contain" /> : <span>{name}</span>}
-            </div>
-        )
-    }
-
     return (
         <>
             <SEO title="notable customers.mdx – PostHog" description="" image={`/images/og/customers.jpg`} />
