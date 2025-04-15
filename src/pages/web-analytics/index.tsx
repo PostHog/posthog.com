@@ -7,6 +7,7 @@ import { CallToAction } from 'components/CallToAction'
 import CloudinaryImage from 'components/CloudinaryImage'
 import SEO from 'components/seo'
 import ProductSidebar from 'components/Explorer/ProductSidebar'
+import Product from 'components/Explorer/Product'
 
 export default function WebAnalytics(): JSX.Element {
     return (
@@ -32,18 +33,6 @@ export default function WebAnalytics(): JSX.Element {
                         placeholder="none"
                     />
                 }
-                indexLinks={[
-                    'features',
-                    'pricing',
-                    'customers',
-                    'comparison',
-                    'docs',
-                    'tutorials',
-                    'questions',
-                    'team',
-                    'roadmap',
-                    'changelog',
-                ]}
                 sidebarContent={<ProductSidebar type="web_analytics" />}
             >
                 <p className="max-w-lg">Web analytics for people who really liked GA3...</p>
@@ -56,6 +45,21 @@ export default function WebAnalytics(): JSX.Element {
                         Talk to a human
                     </CallToAction>
                 </p>
+                <Product
+                    type="web_analytics"
+                    indexLinks={[
+                        'features',
+                        'pricing',
+                        'customers',
+                        'comparison',
+                        'docs',
+                        'tutorials',
+                        'questions',
+                        'team',
+                        'roadmap',
+                        'changelog',
+                    ]}
+                />
             </Explorer>
         </>
     )
