@@ -64,7 +64,7 @@ export default function Product({
                         width="full"
                         size="xl"
                         icon={<Icon className={`text-${color}`} />}
-                        to={slug}
+                        to={`${slug}/features`}
                         className="text-primary hover:text-primary"
                     >
                         Features
@@ -176,14 +176,14 @@ export default function Product({
                         width="full"
                         size="xl"
                         icon={<IconPeople className="text-purple" />}
-                        to={`/teams/${name || slug}`}
+                        to={`/teams${slug}`}
                         className="text-primary hover:text-primary"
                     >
                         Team
                     </OSButton>
                 </div>
             )}
-            {showRoadmap && roadmapCategory && (
+            {showRoadmap && (
                 <div>
                     <OSButton
                         variant="underline"
@@ -192,14 +192,14 @@ export default function Product({
                         width="full"
                         size="xl"
                         icon={<IconGanttChart className="text-seagreen" />}
-                        to={`/roadmap?product=${roadmapCategory}`}
+                        to={`/roadmap?product=${name}`}
                         className="text-primary hover:text-primary"
                     >
                         Roadmap
                     </OSButton>
                 </div>
             )}
-            {showChangelog && roadmapCategory && (
+            {showChangelog && (
                 <div>
                     <OSButton
                         variant="underline"
@@ -208,7 +208,7 @@ export default function Product({
                         width="full"
                         size="xl"
                         icon={<IconCalendar className="text-blue" />}
-                        to={`/changelog?product=${roadmapCategory}`}
+                        to={`/changelog?product=${name}`}
                         className="text-primary hover:text-primary"
                     >
                         Changelog
