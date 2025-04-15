@@ -26,7 +26,7 @@ Once created, go to the [data pipeline destinations tab](https://us.posthog.com/
 ```json
 {
   "text": {
-    "text": "*{person.name}* sent a response to {event.properties.$survey_name}: {event.properties.$survey_response}",
+    "text": "*{person.name}* sent a response to {event.properties.$survey_name}: {event.properties['$survey_response_a3071551-d599-4eeb-9ffe-69e93dc647b6']}",
     "type": "mrkdwn"
   },
   "type": "section"

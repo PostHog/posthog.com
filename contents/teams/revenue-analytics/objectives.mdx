@@ -1,3 +1,26 @@
-## Q2 2025 Goals
+## Q2 2025 objectives
 
-TBD 🤖🤖
+- Web Analytics-like default dashboard containing the following metrics, and its evolution over time
+    - MRR
+    - ARR
+    - LTV
+    - Churn
+    - Growth
+    - Retention
+    - Expansion
+    - Contraction
+- Customer shouldn't need to configure anything besides connecting with Stripe
+    - Opinionated settings on what revenue tracking should look like
+    - Users don't need to be able to customize our assumptions about what their Stripe data looks like
+        - This might change in follow-up quarters
+- Expose streamlined revenue DW view to allow customers to improve on top of it `revenue_analytics` (or similar)
+- Streamline Stripe + ChargeBee connectors setup
+    - Improve UX to make it easier to track what's happening during setup
+    - Allow connectors to be added directly from the new Revenue analytics page, instead of going to the connectors page
+        - Keep track of progress while data is being imported into DW
+
+
+### Stretch goal
+
+If we find the time, it would be interesting to update our Stripe setup to use the OAuth flow + create a PostHog [Stripe App](https://stripe.com/apps) -
+will work very well with the [CRM team](/teams/crm): display PostHog data *inside* Stripe.

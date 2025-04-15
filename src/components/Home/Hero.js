@@ -268,11 +268,7 @@ export default function Hero() {
                 </div>
             </Modal>
             {whitepaperOpen && enterpriseMode && <WhitepaperBanner onClose={() => setWhitepaperOpen(false)} />}
-            <section
-                className={`flex flex-col justify-center items-center ${
-                    user?.profile?.id === 21210 ? 'font-fancy' : ''
-                }`}
-            >
+            <section className={`flex flex-col justify-center items-center`}>
                 <div className="relative w-full z-10">
                     <div className={section('z-10 relative md:!mb-8')}>
                         <h1 className={`${heading()} overflow-hidden pb-1 home-hero-title`}>

@@ -436,6 +436,7 @@ export const Main = () => {
         post,
         hedgehogModeEnabled,
         setHedgehogModeEnabled,
+        compact,
     } = useLayoutData()
     const { pathname } = useLocation()
     const { websiteTheme } = useValues(layoutLogic)

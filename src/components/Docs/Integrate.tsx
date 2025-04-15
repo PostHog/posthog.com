@@ -129,6 +129,7 @@ const query = graphql`
                             "/docs/libraries/laravel"
                             "/docs/libraries/next-js"
                             "/docs/libraries/nuxt-js"
+                            "/docs/libraries/phoenix"
                             "/docs/libraries/remix"
                             "/docs/libraries/retool"
                             "/docs/libraries/rudderstack"

@@ -14,7 +14,7 @@ The real power of the data warehouse is the ability to combine data from multipl
 
 You can join external data on existing PostHog schemas and other external data tables. These joins are saved and interpreted anytime they're accessed on the origin table. 
 
-To define a join, go to the [data warehouse tab](https://us.posthog.com/data-warehouse), click the three dots next to your source table, and click **Add join**. Here you define the source table key, joining table, and joining table key as well as how the fields are accessed.
+To define a join, go to the [SQL tab](https://us.posthog.com/sql), click the three dots next to your source table, and click **Add join**. Here you define the source table key, joining table, and joining table key as well as how the fields are accessed.
 
 For example, if you import your Stripe data, you can define a join between the `events` table's `distinct_id` key and the `stripe_customer` table's `email` key. You can then access the `stripe_customer` table through the `events` table like `SELECT stripe_customer.id FROM events`. 
 

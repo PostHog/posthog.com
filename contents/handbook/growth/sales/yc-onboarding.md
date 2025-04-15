@@ -23,7 +23,7 @@ If a founder refers us to another YC company, both founders get an additional $5
 
 For previous batches:
 
-- Get $50k of credit for PostHog Cloud for 12 months ($25k / 6 months for anyone not in the last 4 batches).
+- Get $50k of credit for PostHog Cloud for 12 months ($25k / 12 months for anyone not in the last 4 batches).
 
 > Only James has the ability to update our deal in Bookface, so any changes to the deal text should be made in [this Google Doc](https://docs.google.com/document/d/17MtngAx2DeVo3YyhPwwKRvakI54SJuNmHkPtFns2IVQ/edit) then shared with him. 
 
@@ -60,113 +60,11 @@ Once you click the correct Approve button the [Zap](https://zapier.com/editor/19
 
 ### If we need to send giveaways outside of the Zapier automation
 
-Customers have the following giveaway options. Our default are a choice of AirPods or Timbuk2 rucksack for folks in the US or Canada - if they live outside these countries, you should offer them a choice between $150 merch credit or Open Collective donation.
+The easiest way to give a customer merch is to [create a gift card for them in Shopify](/handbook/company/merch-store#customers).
 
-Please do _not_ send Airpods or Timbuk2 outside of the US and Canada - this creates big customs headaches for us and is a bad experience for the user. If a user outside those countries is desperate for them, then either:
+If the customer lives outside the US or Canada, you should offer them a choice between $150 merch credit or Open Collective donation, rather than offering specific merch items.
+
+Please do not send specific merch items outside of the US and Canada - this creates big customs headaches for us and is a bad experience for the user. If a user outside those countries is desperate for them, then either:
 
 - Suggest they give us a US/Canada postal address they can forward or collect from
 - Send them the item but at their own risk for paying customs fees etc.
-
-<table>
-<thead>
-<tr>
-<td width="150" valign="top">
-
-**Giveaway**
-
-</td>
-<td width="100" valign="top">
-
-**Eligible locations**
-
-</td>
-<td valign="top">
-
-**How to share**
-
-</td>
-</tr>
-</thead>
-<tbody>
-
-<!-- AirPods or Timbuk2 backpack via Brilliant -->
-<tr>
-<td valign="top">
-
-AirPods or Timbuk2 backpack
-<small>(Depending on stock availability)</small>
-
-</td>
-<td valign="top">
-
-US and Canada addresses only*
-
-</td>
-<td valign="top">
-
-To create a one-time giveaway link:
-
-- Login to Brilliant ([details](/handbook/company/merch-store)).
-- _These instructions need updating._
-- ~~Go to **Campaigns** -> **Giveaways** -> **The PostHog YC Program**.~~
-- ~~Click the **Get New Link** button and copy the link.~~
-- ~~Send the link to the YC contact and mark the link as sent in Printfection.~~
-
-</td>
-</tr>
-
-<!-- Shopify merch giftcard -->
-
-<tr>
-<td valign="top">
-
-[PostHog merch](https://merch.posthog.com) $150 gift card (Shopify)
-
-</td>
-<td valign="top">
-
-Global
-
-</td>
-<td valign="top">
-
-To create a giftcard in Shopify:
-
-- [Login to Shopify](https://posthog.myshopify.com/admin)
-- Select **Products** -> **Gift cards** from the left-hand menu
-- Click **Issue gift card**
-- Create a new customer via the **Find or create a customer** section
-- Update the value to $150 and click **Save**
-
-</td>
-</tr>
-
-<!-- Open Collective giftcard -->
-
-<tr>
-<td valign="top">
-
-[Open Collective](https://opencollective.com) $150 gift card
-
-</td>
-<td valign="top">
-
-Global
-
-</td>
-<td valign="top">
-
-To create a giftcard in Open Collective:
-
-- [Signin to Open Collective](https://opencollective.com/signin)
-- Go to the [Gift Cards section within the PostHog org](https://opencollective.com/posthog/edit/gift-cards)
-- Click **Create gift cards**
-- Set the amount to $150 and set a reasonably long expiry
-- Choose to either send the customer the gift card via Open Collective or via a link
-- Depending on the option chosen for the above step, create the gift card
-
-</td>
-</tr>
-
-</tbody>
-</table>

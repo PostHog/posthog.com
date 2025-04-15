@@ -18,7 +18,7 @@ These are the ways in which customers can currently reach us:
 - **Community questions** - users can also search [previously answered questions](/questions) that have been asked anywhere on posthog.com in our Docs. This is a great way to help us improve our Docs for simpler use-case type questions, but more complex questions should be re-routed via a support ticket. 
 - **Dedicated Slack channels** - For higher-paying (or potential higher-paying) customers, we offer a dedicated channel on our main company Slack.
 
-Sometimes people reach out to us with support issues on Twitter/X. Regardless of whether someone reaches out to your personal account or to the company account the broad approach should be as follows:
+Sometimes, people reach out to us with support issues on Twitter/X. Regardless of whether someone reaches out to your personal account or to the company account the broad approach should be as follows:
 
 1. Check first if they already have a ticket in Zendesk (either in-app or via /questions). There is nothing more annoying for a user than being asked to create a support ticket if they already have. If you don't have Zendesk access, ask someone in CS. 
 2. If no tickets exist, explain that we can't provide support over social media and ask them to create a support ticket within the app - this is _much_ better than trying to solve their problem over Twitter as Zendesk pulls in a bunch of contextual information and is easier to collaborate in. Do this from the **PostHog** Twitter account - otherwise you will get personally contacted every time this user wants help. 
@@ -27,8 +27,6 @@ Sometimes people reach out to us with support issues on Twitter/X. Regardless of
 Your objective should be to get the conversation into Zendesk ASAP, because it's easier to help the person there and to avoid setting a precedent that complaining visibly on social media results in an expedited response. An exception to this rule is if you are engaging with someone who has provided general feedback about PostHog - feel free to use your personal account if someone has a feature request or similar. If a user engage in a way which causes you _any_ distress, you can skip all of the above and just highlight it in Slack for CS to deal with. 
 
 > Sometimes users ask about the progress of [certain issues](https://github.com/PostHog/posthog) that are important to them on GitHub. We don't consider GitHub to be a proper 'support' channel, but it is a useful place to gauge the popularity of feature requests or the prevalence of issues. 
-
-We send out CSAT surveys after a ticket has been closed for at least 3 days using [this Automation](https://posthoghelp.zendesk.com/admin/objects-rules/rules/automations/22328357692571). The emails contain a link to https://survey.posthog.com/ with their `distinct_id`, `ticketId`, and the assigned team as query parameters, which are being used alongside their satisfaction rating to capture a `survey sent` event. The code for the survey website is in the [PostHog-csat](https://github.com/PostHog/posthog-csat) repo and the responses can be viewed in [this dashboard](https://us.posthog.com/project/2/dashboard/130687).
 
 ### Support is done by actual engineers
 
@@ -44,11 +42,13 @@ Right now, support engineers provide the first level of support for the followin
 - Product analytics
 - Web analytics
 - Session replay
-- Feature success
-- Support
+- Feature flags
+- Surveys
+- Experiments
 - Data warehouse
 - Customer Success
 - Surveys
+- Batch exports
 
 Support engineers respond to and solve as many tickets as they can for these products, or escalate tickets to the appropriate product engineer if needed. For all other products, the engineers on those teams are directly responsible for support. The support runbook is maintained on the [Support Hero page](/handbook/engineering/support-hero). 
 
@@ -65,10 +65,10 @@ Supporting our customers isn't just about solving tickets, and we don't judge th
 The current rotation for Support Zero is: 
 
 **Monday:** Nobody 
-**Tuesday:** Steven <TeamMember name="Steven Shults" photo />
-**Wednesday:** Abigail <TeamMember name="Abigail Richardson" photo />
-**Thursday:** Ben Haynes <TeamMember name="Ben Haynes" photo />
-**Friday:** Ben Lea <TeamMember name="Ben Lea" photo />
+**Tuesday:** <TeamMember name="Steven Shults" photo /> (NA) & <TeamMember name="Luke Belton" photo /> (EU)
+**Wednesday:** <TeamMember name="Joshua Ordehi" photo /> (NA)
+**Thursday:** <TeamMember name="Ben Haynes" photo /> (NA)
+**Friday:** <TeamMember name="Ben Lea" photo /> (EU)
 
 We may occasionally pause this rotation if we have a big initiative that needs more attention from one person, or if we need to focus on clearing a backlog of tickets. When you are Support Zero you should continue working on tickets that you're currently assigned to (or escalate/reassign as needed) but shouldn't take on new tickets unless you want to. 
 
@@ -83,7 +83,7 @@ Note that tickets are automatically prioritized in Zendesk and users are updated
 The response targets listed below are our minimums for an initial response, and we often respond far faster. Please note that we do not offer any level of weekend customer support.
 
 #### High priority
-**Response target: 12 hours**
+**Response target: 1 business day**
 
 Tickets are considered high priority if they fulfill ANY of the following conditions:
 
@@ -95,27 +95,26 @@ Tickets are considered high priority if they fulfill ANY of the following condit
 This ensures that users who pay for support or which are otherwise considered a priority customer are prioritized and get the best possible support experience. Free users can raise critical impact bugs or issues to an appropriate level.
 
 #### Normal priority
-**Response target: 24 hours**
+**Response target: 2 business days**
 
 Tickets are considered normal priority if they fulfill ANY of the following conditions but the user does NOT qualify as a high-paying org:
 
 - The customer is subscribed to the `Ridiculously cheap` plan
 - The customer is on a PostHog for Startups or Y Combinator plan
 - The customer is raising a billing issue
-- The ticket is listed as high severity
 
-This ensures that most paying users get appropriately rapid support and that all billing issues are ensured to get a response. Free users can raise high impact bugs or issues to an appropriate level.
+This ensures that most paying users get appropriately rapid support and that all billing issues are ensured to get a response.
 
 #### Low priority 
 **Response target: N/A**
 
 Tickets are considered low priority if they fulfill none of the conditions for High or Normal priority. This includes tickets raised in the PostHog community, and is mostly users who are on a free plan and who have not entered a card.
 
-We always aim to respond to low priority tickets and will often read and consider them, but we do not set a response target or promise to respond due to the high volume and our need to focus on paying users. 
+We aim to respond to low priority tickets and will often read and consider them, but we do not set a response target or promise to respond due to the high volume and our need to focus on paying users. 
 
 ### Follow-up / next reply response targets
 
-After our initial response, our follow-up response targets are double those of our initial response targets. For example, if a user replies to our initial response on a high priority ticket (12 hours), our follow-up / next reply response target is within 24 hours.
+After our initial response, our follow-up response targets are double those of our initial response targets. For example, if a user replies to our initial response on a high priority ticket (1 business day), our follow-up / next reply response target is within 2 business days.
 
 ### Escalated ticket response targets
 
@@ -138,7 +137,7 @@ As an incentive, we offer to feed one hedgehog for every survey sent. <TeamMembe
 
 We very occasionally receive messages from people who are abusive, or who we suspect may have a mental illness. These can come via the app, or [Community Questions](/questions). We do not expect support engineers to deal with abuse of any kind, ever. 
 
-If this happens, notify <TeamMember name="Charles Cook" photo />, <TeamMember name="Joe Martin"/> or <TeamMember name="Fraser Hopper" photo />. They will either take this on, or advise you on how to reply.
+If this happens, notify <TeamMember name="Charles Cook" photo />, <TeamMember name="Abigail Richardson"/> or <TeamMember name="Fraser Hopper" photo />. They will either take this on, or advise you on how to reply.
 
 ### Dealing with legal requests from users
 
