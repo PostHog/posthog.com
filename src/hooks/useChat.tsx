@@ -8,7 +8,7 @@ import Chat from 'components/Chat'
 interface ChatContextType {
     chatOpen: boolean
     closeChat: () => void
-    openChat: () => void
+    openChat: ({ defaultMessage }: { defaultMessage?: string }) => void
     chatting: boolean
     hasUnread: boolean
     setHasUnread: (unread: boolean) => void
@@ -60,7 +60,13 @@ export function ChatProvider({ children }: { children: ReactNode }): JSX.Element
         [hasFirstResponse, chatOpen]
     )
 
-    const openChat = () => {
+    const openChat = ({ defaultMessage }: { defaultMessage?: string } = {}) => {
+        if (defaultMessage) {
+            setTimeout(() => {
+                embeddedChatRef.current?.updateInputMessage(defaultMessage)
+            }, 1000)
+        }
+
         setChatOpen(true)
     }
 

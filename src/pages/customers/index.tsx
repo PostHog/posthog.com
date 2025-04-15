@@ -33,7 +33,7 @@ interface CustomerNode {
 
 interface ManualCustomer {
     name: string
-    toolsUsed: string
+    toolsUsed: string[]
     notes?: string
     logo?: string
     logoDark?: string
@@ -45,58 +45,74 @@ const CUSTOMER_ORDER: CustomerOrder = [
     'ycombinator',
     {
         name: 'Mistral AI',
-        toolsUsed: '',
+        toolsUsed: [],
         notes: '',
         logo: MistralLogo,
-        logoDark: MistralLogo
+        logoDark: MistralLogo,
     },
     'elevenlabs',
     {
         name: 'Raycast',
-        toolsUsed: '',
+        toolsUsed: [],
         notes: '',
         logo: RaycastLogo,
-        logoDark: RaycastLogo
+        logoDark: RaycastLogo,
     },
     {
         name: 'Airbus',
-        toolsUsed: '',
+        toolsUsed: [],
         notes: '',
         logo: AirbusLogo,
-        logoDark: AirbusLogo
+        logoDark: AirbusLogo,
     },
     {
         name: 'DHL',
-        toolsUsed: '',
+        toolsUsed: [],
         notes: '',
         logo: DhlLogo,
-        logoDark: DhlLogo
+        logoDark: DhlLogo,
     },
     {
         name: 'StartEngine',
-        toolsUsed: '',
+        toolsUsed: [],
         notes: '',
         logo: StartEngineLogo,
-        logoDark: StartEngineLogo
+        logoDark: StartEngineLogo,
     },
     'assemblyai',
     'hasura',
     {
         name: 'Trust',
-        toolsUsed: '',
+        toolsUsed: [],
         notes: '',
         logo: TrustLogo,
-        logoDark: TrustLogo
+        logoDark: TrustLogo,
     },
     'researchgate',
     {
         name: 'PostHog',
-        toolsUsed: '',
+        toolsUsed: [],
         notes: 'Would it be clever or lame if we included our own company here?',
         logo: PostHogLogo,
-        logoDark: PostHogLogo
-    }
+        logoDark: PostHogLogo,
+    },
 ]
+
+const Customer = ({ number, logo, name, toolsUsed, slug, dark }) => {
+    return (
+        <React.Fragment>
+            <div>{number}</div>
+            <div className={dark ? 'bg-black' : ''}>
+                <div className="flex items-center gap-2">
+                    {logo ? <img src={logo} alt={name} className="h-8 w-auto object-contain" /> : <span>{name}</span>}
+                </div>
+            </div>
+            <div>{toolsUsed?.join(', ')}</div>
+            <div>{slug && <Link to={slug}>Link</Link>}</div>
+            <div>&nbsp;</div>
+        </React.Fragment>
+    )
+}
 
 export default function Customers(): JSX.Element {
     const { websiteTheme } = useValues(layoutLogic)
@@ -104,9 +120,7 @@ export default function Customers(): JSX.Element {
 
     const data = useStaticQuery(graphql`
         query {
-            allCustomers: allMdx(
-                filter: { fields: { slug: { regex: "/^/customers/" } } }
-            ) {
+            allCustomers: allMdx(filter: { fields: { slug: { regex: "/^/customers/" } } }) {
                 nodes {
                     fields {
                         slug
@@ -127,97 +141,44 @@ export default function Customers(): JSX.Element {
     `)
 
     // Create a map of frontmatter customers for quick lookup
-    const frontmatterCustomers = data.allCustomers.nodes.reduce((acc: Record<string, CustomerNode>, node: CustomerNode) => {
-        const key = node.fields.slug.split('/').pop() || ''
-        acc[key] = node
-        return acc
-    }, {})
-
-    const renderCustomerName = (customer: CustomerNode | ManualCustomer, isManual: boolean) => {
-        let logo = null
-        let name: string
-
-        if (isManual) {
-            const manualCustomer = customer as ManualCustomer
-            name = manualCustomer.name
-            logo = isDarkMode ? manualCustomer.logoDark : manualCustomer.logo
-        } else {
-            const frontmatterCustomer = customer as CustomerNode
-            name = frontmatterCustomer.frontmatter.customer
-            logo = isDarkMode 
-                ? frontmatterCustomer.frontmatter.logoDark?.publicURL 
-                : frontmatterCustomer.frontmatter.logo?.publicURL
-        }
-
-        return (
-            <div className="flex items-center gap-2">
-                {logo ? (
-                    <img 
-                        src={logo} 
-                        alt={name} 
-                        className="h-8 w-auto object-contain"
-                    />
-                ) : (
-                    <span>{name}</span>
-                )}
-            </div>
-        )
-    }
+    const frontmatterCustomers = data.allCustomers.nodes.reduce(
+        (acc: Record<string, CustomerNode>, node: CustomerNode) => {
+            const key = node.fields.slug.split('/').pop() || ''
+            acc[key] = node
+            return acc
+        },
+        {}
+    )
 
     return (
-      <>
-        <SEO
-            title="notable customers.mdx – PostHog"
-            description=""
-            image={`/images/og/customers.jpg`}
-        />
-        <Editor 
-          title="notable customers.mdx"
-          slug="/customers"
-        >
-          <div className="grid grid-cols-[auto_1fr_minmax(auto,150px)_minmax(auto,100px)_minmax(auto,150px)] divide-x divide-y divide-border border-r border-b border-primary [&_div]:p-2 text-[15px]">
-            <div className="border-l border-t border-border bg-input font-bold">&nbsp;</div>
-            <div className="bg-input font-bold">
-              Company name
-            </div>
-            <div className="bg-input font-bold">
-              Product(s) used
-            </div>
-            <div className="bg-input font-bold">
-              Case study?
-            </div>
-            <div className="bg-input font-bold">
-              Notes
-            </div>
+        <>
+            <SEO title="notable customers.mdx – PostHog" description="" image={`/images/og/customers.jpg`} />
+            <Editor title="notable customers.mdx" slug="/customers">
+                <div className="grid grid-cols-[auto_1fr_minmax(auto,150px)_minmax(auto,100px)_minmax(auto,150px)] divide-x divide-y divide-border border-r border-b border-primary [&_div]:p-2 text-[15px]">
+                    <div className="border-l border-t border-border bg-input font-bold">&nbsp;</div>
+                    <div className="bg-input font-bold">Company name</div>
+                    <div className="bg-input font-bold">Product(s) used</div>
+                    <div className="bg-input font-bold">Case study?</div>
+                    <div className="bg-input font-bold">Notes</div>
 
-            {CUSTOMER_ORDER.map((item, index) => {
-                if (typeof item === 'string') {
-                    const customer = frontmatterCustomers[item]
-                    if (!customer) return null
-                    
-                    return (
-                        <React.Fragment key={item}>
-                            <div>{index + 1}</div>
-                            <div>{renderCustomerName(customer, false)}</div>
-                            <div>{customer.frontmatter.toolsUsed?.join(', ')}</div>
-                            <div><Link to={customer.fields.slug}>Link</Link></div>
-                            <div>&nbsp;</div>
-                        </React.Fragment>
-                    )
-                } else {
-                    return (
-                        <React.Fragment key={item.name}>
-                            <div>{index + 1}</div>
-                            <div className="bg-black">{renderCustomerName(item, true)}</div>
-                            <div>{item.toolsUsed}</div>
-                            <div>&nbsp;</div>
-                            <div>{item.notes || '&nbsp;'}</div>
-                        </React.Fragment>
-                    )
-                }
-            })}
-          </div>
-        </Editor>
-      </>
+                    {CUSTOMER_ORDER.map((item, index) => {
+                        return (
+                            <Customer
+                                key={index}
+                                number={index + 1}
+                                logo={
+                                    frontmatterCustomers[item]?.frontmatter?.[isDarkMode ? 'logoDark' : 'logo']
+                                        ?.publicURL || item?.[isDarkMode ? 'logoDark' : 'logo']
+                                }
+                                dark={typeof item !== 'string'}
+                                name={frontmatterCustomers[item]?.frontmatter?.customer || item.name}
+                                slug={frontmatterCustomers[item]?.fields?.slug}
+                                toolsUsed={frontmatterCustomers[item]?.frontmatter?.toolsUsed || item.toolsUsed}
+                            />
+                        )
+                    })}
+                </div>
+            </Editor>
+        </>
     )
 }
