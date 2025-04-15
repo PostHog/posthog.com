@@ -1,28 +1,12 @@
 import React from 'react'
 import { Select } from '../RadixUI/Select'
 import HeaderBar from 'components/OSChrome/HeaderBar'
-import * as Icons from '@posthog/icons'
-import { Link, navigate } from 'gatsby'
+import { navigate } from 'gatsby'
 import { useLocation } from '@reach/router'
-import OSButton from 'components/OSButton'
-import CloudinaryImage from 'components/CloudinaryImage'
 import { DebugContainerQuery } from 'components/DebugContainerQuery'
 import ScrollArea from 'components/RadixUI/ScrollArea'
 import { productMenu } from '../../navs'
 import { Accordion } from '../RadixUI/Accordion'
-import { FileMenu } from '../RadixUI/FileMenu'
-
-type ExplorerOption =
-    | 'features'
-    | 'pricing'
-    | 'customers'
-    | 'comparison'
-    | 'docs'
-    | 'tutorials'
-    | 'questions'
-    | 'team'
-    | 'roadmap'
-    | 'changelog'
 
 interface AccordionItem {
     title: string
@@ -34,10 +18,6 @@ interface ExplorerProps {
     slug: string
     title: string
     accentImage?: React.ReactNode
-    teamName?: string
-    roadmapCategory?: string
-    changelogCategory?: string
-    indexLinks?: ExplorerOption[]
     sidebarContent?: React.ReactNode | AccordionItem[]
     children?: React.ReactNode
 }
@@ -65,47 +45,12 @@ const SidebarContent = ({ content }: { content: React.ReactNode | AccordionItem[
     return content
 }
 
-export default function Explorer({
-    template,
-    slug,
-    title,
-    accentImage,
-    teamName,
-    roadmapCategory,
-    changelogCategory,
-    indexLinks = [],
-    sidebarContent,
-    children,
-}: ExplorerProps) {
+export default function Explorer({ template, slug, title, accentImage, sidebarContent, children }: ExplorerProps) {
     const location = useLocation()
     const currentPath = location.pathname.replace(/^\//, '') // Remove leading slash
 
-    // Find the product in the menu based on slug only if template is "product"
-    const product = template === 'product' ? productMenu.children.find((item) => item.slug === slug) : null
-    const ProductIcon = product ? Icons[product.icon as keyof typeof Icons] : null
-
     // Get the base product slug (everything before the first slash)
     const baseSlug = slug.split('/')[0]
-    const baseProduct = productMenu.children.find((item) => item.slug === baseSlug) || productMenu
-    const isSubpage = slug.includes('/')
-
-    // Create the display label for the current page
-    const currentLabel = isSubpage ? `${baseProduct.name} → ${title}` : baseProduct.name
-
-    // Create a map of options for easy lookup
-    const enabledIndexLinks = new Set(indexLinks)
-
-    // Replace individual boolean checks with Set.has()
-    const showFeatures = enabledIndexLinks.has('features')
-    const showPricing = enabledIndexLinks.has('pricing')
-    const showCustomers = enabledIndexLinks.has('customers')
-    const showComparison = enabledIndexLinks.has('comparison')
-    const showDocs = enabledIndexLinks.has('docs')
-    const showTutorials = enabledIndexLinks.has('tutorials')
-    const showQuestions = enabledIndexLinks.has('questions')
-    const showTeam = enabledIndexLinks.has('team')
-    const showRoadmap = enabledIndexLinks.has('roadmap')
-    const showChangelog = enabledIndexLinks.has('changelog')
 
     const selectOptions = [
         {
@@ -181,172 +126,6 @@ export default function Explorer({
                             <h1>{title}</h1>
                             {children}
                         </div>
-                        {template === 'product' && (
-                            <div className="grid grid-cols-1 @sm:grid-cols-2 gap-2 p-2 relative max-w-4xl">
-                                {showFeatures && (
-                                    <div>
-                                        <OSButton
-                                            variant="underline"
-                                            asLink
-                                            align="left"
-                                            width="full"
-                                            size="xl"
-                                            icon={React.createElement(Icons[product.icon as keyof typeof Icons], {
-                                                className: `text-${product.color}`,
-                                            })}
-                                            to={`/${slug}/features`}
-                                            className="text-primary hover:text-primary"
-                                        >
-                                            Features
-                                        </OSButton>
-                                    </div>
-                                )}
-                                {showPricing && (
-                                    <div>
-                                        <OSButton
-                                            variant="underline"
-                                            asLink
-                                            align="left"
-                                            width="full"
-                                            size="xl"
-                                            icon={<Icons.IconCreditCard className="text-blue" />}
-                                            to={`/${slug}/pricing`}
-                                            className="text-primary hover:text-primary"
-                                        >
-                                            Pricing
-                                        </OSButton>
-                                    </div>
-                                )}
-                                {showCustomers && (
-                                    <div>
-                                        <OSButton
-                                            variant="underline"
-                                            asLink
-                                            align="left"
-                                            width="full"
-                                            size="xl"
-                                            icon={<Icons.IconMegaphone className="text-orange" />}
-                                            to={`/${slug}/customers`}
-                                            className="text-primary hover:text-primary"
-                                        >
-                                            Social proof
-                                        </OSButton>
-                                    </div>
-                                )}
-                                {showComparison && (
-                                    <div>
-                                        <OSButton
-                                            variant="underline"
-                                            asLink
-                                            align="left"
-                                            width="full"
-                                            size="xl"
-                                            icon={<Icons.IconListCheck className="text-lime-green" />}
-                                            to={`/${slug}/vs`}
-                                            className="text-primary hover:text-primary"
-                                        >
-                                            PostHog vs...
-                                        </OSButton>
-                                    </div>
-                                )}
-                                {showDocs && (
-                                    <div>
-                                        <OSButton
-                                            variant="underline"
-                                            asLink
-                                            align="left"
-                                            width="full"
-                                            size="xl"
-                                            icon={<Icons.IconBook className="text-blue" />}
-                                            to={`/docs/${slug}`}
-                                            className="text-primary hover:text-primary"
-                                        >
-                                            Docs
-                                        </OSButton>
-                                    </div>
-                                )}
-                                {showTutorials && (
-                                    <div>
-                                        <OSButton
-                                            variant="underline"
-                                            asLink
-                                            align="left"
-                                            width="full"
-                                            size="xl"
-                                            icon={<Icons.IconBook className="text-purple" />}
-                                            to={`/tutorials/${slug}`}
-                                            className="text-primary hover:text-primary"
-                                        >
-                                            Tutorials
-                                        </OSButton>
-                                    </div>
-                                )}
-                                {showQuestions && (
-                                    <div>
-                                        <OSButton
-                                            variant="underline"
-                                            asLink
-                                            align="left"
-                                            width="full"
-                                            size="xl"
-                                            icon={<Icons.IconMessage className="text-red" />}
-                                            to={`/questions/topic/${slug}`}
-                                            className="text-primary hover:text-primary"
-                                        >
-                                            Questions?
-                                        </OSButton>
-                                    </div>
-                                )}
-                                {showTeam && (
-                                    <div>
-                                        <OSButton
-                                            variant="underline"
-                                            asLink
-                                            align="left"
-                                            width="full"
-                                            size="xl"
-                                            icon={<Icons.IconPeople className="text-purple" />}
-                                            to={`/teams/${teamName || slug}`}
-                                            className="text-primary hover:text-primary"
-                                        >
-                                            Team
-                                        </OSButton>
-                                    </div>
-                                )}
-                                {showRoadmap && (
-                                    <div>
-                                        <OSButton
-                                            variant="underline"
-                                            asLink
-                                            align="left"
-                                            width="full"
-                                            size="xl"
-                                            icon={<Icons.IconGanttChart className="text-seagreen" />}
-                                            to={`/roadmap?product=${roadmapCategory || slug}`}
-                                            className="text-primary hover:text-primary"
-                                        >
-                                            Roadmap
-                                        </OSButton>
-                                    </div>
-                                )}
-                                {showChangelog && (
-                                    <div>
-                                        <OSButton
-                                            variant="underline"
-                                            asLink
-                                            align="left"
-                                            width="full"
-                                            size="xl"
-                                            icon={<Icons.IconCalendar className="text-blue" />}
-                                            to={`/changelog?product=${changelogCategory || slug}`}
-                                            className="text-primary hover:text-primary"
-                                        >
-                                            Changelog
-                                        </OSButton>
-                                    </div>
-                                )}
-                            </div>
-                        )}
                     </ScrollArea>
                 </main>
             </div>

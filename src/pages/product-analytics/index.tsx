@@ -7,6 +7,7 @@ import { CallToAction } from 'components/CallToAction'
 import CloudinaryImage from 'components/CloudinaryImage'
 import SEO from 'components/seo'
 import ProductSidebar from 'components/Explorer/ProductSidebar'
+import Product from 'components/Explorer/Product'
 
 export default function ProductAnalytics(): JSX.Element {
     return (
@@ -60,6 +61,21 @@ export default function ProductAnalytics(): JSX.Element {
                         Talk to a human
                     </CallToAction>
                 </p>
+                <Product
+                    indexLinks={[
+                        'features',
+                        'pricing',
+                        'customers',
+                        'comparison',
+                        'docs',
+                        'tutorials',
+                        'questions',
+                        'team',
+                        'roadmap',
+                        'changelog',
+                    ]}
+                    type="product_analytics"
+                />
             </Explorer>
         </>
     )
