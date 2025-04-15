@@ -59,6 +59,9 @@ This is a faster option to get up and running. If you don't want to or can't use
 6. Then run `uv sync`
    1. If the terminal returns `uv: command not found` error then that means it is not installed, run `python -m pip install uv` then try `uv sync` again. 
 8. Now run `DEBUG=1 ./bin/migrate` and then `./bin/start`.
+   1. Incase you get an error `sqlx: command not found`:
+   1. Install cargo `curl https://sh.rustup.rs -sSf | sh`
+   1. Install sqlx `argo install sqlx-cli` then try the command again
 9. Open browser to http://localhost:8010/.
 10. To get some practical test data into your brand-new instance of PostHog, run `DEBUG=1 ./manage.py generate_demo_data`.
 
