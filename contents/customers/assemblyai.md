@@ -2,9 +2,9 @@
 title: Why AssemblyAI switched from Mixpanel to PostHog
 customer: AssemblyAI
 logo: >-
-  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/customers/assemblyai/logo.svg
+  https://res.cloudinary.com/dmukukwp6/image/upload/assemblyai_light_d0e0d6627e.svg
 logoDark: >-
-  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/customers/assemblyai/logo_dark.svg
+  https://res.cloudinary.com/dmukukwp6/image/upload/assemblyai_dark_9961eafc2c.svg
 featuredImage: >-
   https://res.cloudinary.com/dmukukwp6/image/upload/posthog_assembly_AI_ef178ab0da.png
 industries:
