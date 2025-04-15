@@ -21,6 +21,7 @@ import { FileMenu } from '../RadixUI/FileMenu'
 import { IMenu } from 'components/PostLayout/types'
 import { navigate } from 'gatsby'
 import { useChat } from '../../hooks/useChat'
+import Inbox from 'components/Inbox'
 
 const getSizeDefaults = () => ({
     max: {
@@ -47,6 +48,14 @@ const fixedAppSizes = {
 } as const
 
 const snapThreshold = -50
+
+const Router = (props) => {
+    const { children, path } = props
+    if (/^\/questions/.test(path)) {
+        return <Inbox {...props} />
+    }
+    return children
+}
 
 export default function AppWindow({ item, constraintsRef }: { item: AppWindowType; constraintsRef: any }) {
     const { minimizeWindow, bringToFront, closeWindow, focusedWindow, taskbarHeight } = useApp()
@@ -467,7 +476,9 @@ export default function AppWindow({ item, constraintsRef }: { item: AppWindowTyp
                                     </OSButton>
                                 </div>
                             </div>
-                            <div className="w-full flex-grow overflow-hidden">{item.element}</div>
+                            <div className="w-full flex-grow overflow-hidden">
+                                <Router {...item.props}>{item.element}</Router>
+                            </div>
                             <motion.div
                                 data-scheme="tertiary"
                                 className="group absolute right-0 top-0 w-1.5 bottom-6 cursor-ew-resize"

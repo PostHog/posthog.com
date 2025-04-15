@@ -15,6 +15,7 @@ export interface AppWindow {
     minimized: boolean
     path: string
     fromHistory?: boolean
+    props: any
 }
 
 interface WindowProviderProps {

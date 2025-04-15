@@ -20,6 +20,12 @@ interface AppProviderProps {
         key: string
         props: {
             path: string
+            pageContext: any
+            data: any
+            params: any
+            location: {
+                pathname: string
+            }
         }
     }
 }
@@ -70,6 +76,7 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
                                   element: newWindow.element,
                                   path: newWindow.path,
                                   fromHistory: newWindow.fromHistory,
+                                  props: newWindow.props,
                               }
                             : w
                     )
@@ -90,15 +97,21 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
     }, [])
 
     useEffect(() => {
-        const existingWindow = windows.find((w) => w.path === element.props.path)
+        const existingWindow = windows.find((w) => w.path === element.props.location.pathname)
         const newWindow: AppWindow = {
             element,
             zIndex: windows.length,
             key: element.key,
             coordinates: location?.state?.coordinates || { x: 0, y: 0 },
             minimized: false,
-            path: element.props.path,
+            path: element.props.location.pathname,
             fromHistory: location?.state?.fromHistory || false,
+            props: {
+                pageContext: element.props.pageContext,
+                data: element.props.data,
+                params: element.props.params,
+                path: element.props.location.pathname,
+            },
         }
 
         if (existingWindow) {
