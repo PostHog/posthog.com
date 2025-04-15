@@ -311,7 +311,9 @@ export default function AppWindow({ item, constraintsRef }: { item: AppWindowTyp
                                                             type: 'item',
                                                             label: 'New Max chat',
                                                             onClick() {
-                                                                openChat()
+                                                                openChat({
+                                                                    defaultMessage: `I have a question about https://posthog.com${window.location.pathname}\n\n`,
+                                                                })
                                                             },
                                                         },
                                                         {
