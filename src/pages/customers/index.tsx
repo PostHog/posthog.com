@@ -7,13 +7,21 @@ import { useValues } from 'kea'
 import { layoutLogic } from 'logic/layoutLogic'
 
 // Import SVG logos
-import MistralLogo from '../../images/customers/mistral.svg'
-import RaycastLogo from '../../images/customers/raycast.svg'
-import AirbusLogo from '../../images/customers/airbus.svg'
-import DhlLogo from '../../images/customers/dhl.svg'
-import StartEngineLogo from '../../images/customers/startengine.svg'
-import TrustLogo from '../../images/customers/trustwallet.svg'
-import PostHogLogo from '../../images/customers/posthog.svg'
+import MistralLogo from '../../images/customers/mistralai-light.svg'
+import RaycastLogo from '../../images/customers/raycast-light.svg'
+import AirbusLogo from '../../images/customers/airbus-light.svg'
+import DhlLogo from '../../images/customers/dhl-light.svg'
+import StartEngineLogo from '../../images/customers/startengine-light.svg'
+import TrustWalletLogo from '../../images/customers/trustwallet-light.svg'
+import PostHogLogo from '../../images/customers/posthog-light.svg'
+
+import MistralLogoDark from '../../images/customers/mistralai-dark.svg'
+import RaycastLogoDark from '../../images/customers/raycast-dark.svg'
+import AirbusLogoDark from '../../images/customers/airbus-dark.svg'
+import DhlLogoDark from '../../images/customers/dhl-dark.svg'
+import StartEngineLogoDark from '../../images/customers/startengine-dark.svg'
+import TrustWalletLogoDark from '../../images/customers/trustwallet-dark.svg'
+import PostHogLogoDark from '../../images/customers/posthog-dark.svg'
 
 interface CustomerNode {
     fields: {
@@ -48,7 +56,7 @@ const CUSTOMER_ORDER: CustomerOrder = [
         toolsUsed: [],
         notes: '',
         logo: MistralLogo,
-        logoDark: MistralLogo,
+        logoDark: MistralLogoDark,
     },
     'elevenlabs',
     {
@@ -56,28 +64,28 @@ const CUSTOMER_ORDER: CustomerOrder = [
         toolsUsed: [],
         notes: '',
         logo: RaycastLogo,
-        logoDark: RaycastLogo,
+        logoDark: RaycastLogoDark,
     },
     {
         name: 'Airbus',
         toolsUsed: [],
         notes: '',
         logo: AirbusLogo,
-        logoDark: AirbusLogo,
+        logoDark: AirbusLogoDark,
     },
     {
         name: 'DHL',
         toolsUsed: [],
         notes: '',
         logo: DhlLogo,
-        logoDark: DhlLogo,
+        logoDark: DhlLogoDark,
     },
     {
         name: 'StartEngine',
         toolsUsed: [],
         notes: '',
         logo: StartEngineLogo,
-        logoDark: StartEngineLogo,
+        logoDark: StartEngineLogoDark,
     },
     'assemblyai',
     'hasura',
@@ -85,8 +93,8 @@ const CUSTOMER_ORDER: CustomerOrder = [
         name: 'Trust',
         toolsUsed: [],
         notes: '',
-        logo: TrustLogo,
-        logoDark: TrustLogo,
+        logo: TrustWalletLogo,
+        logoDark: TrustWalletLogoDark,
     },
     'researchgate',
     {
@@ -94,7 +102,7 @@ const CUSTOMER_ORDER: CustomerOrder = [
         toolsUsed: [],
         notes: 'Would it be clever or lame if we included our own company here?',
         logo: PostHogLogo,
-        logoDark: PostHogLogo,
+        logoDark: PostHogLogoDark,
     },
 ]
 
