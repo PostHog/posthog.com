@@ -42,7 +42,7 @@ interface ExplorerProps {
     children?: React.ReactNode
 }
 
-const SidebarContent = ({ content }) => {
+const SidebarContent = ({ content }: { content: React.ReactNode | AccordionItem[] }) => {
     if (!content) return null
 
     if (Array.isArray(content)) {
@@ -158,8 +158,8 @@ export default function Explorer({
                 />
             </div>
             <div className="flex flex-grow min-h-0">
-                <aside data-scheme="secondary" className="w-64 bg-primary p-2 border-r border-primary h-full">
-                    <ScrollArea>
+                <aside data-scheme="secondary" className="w-64 bg-primary border-r border-primary h-full">
+                    <ScrollArea className="p-2">
                         <div className="space-y-3">
                             <SidebarContent content={sidebarContent} />
                         </div>
