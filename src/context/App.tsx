@@ -90,7 +90,7 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
     }, [])
 
     useEffect(() => {
-        const existingWindow = windows.find((w) => w.key === element.key)
+        const existingWindow = windows.find((w) => w.path === element.props.path)
         const newWindow: AppWindow = {
             element,
             zIndex: windows.length,
