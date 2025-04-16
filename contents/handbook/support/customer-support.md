@@ -37,7 +37,7 @@ All support at PostHog is done by actual, full-time engineers. We have two types
 
 #### What do Support Engineers do?
 
-Right now, support engineers provide the first level of support for the following products:
+Right now, support engineers provide the first level of support for the following teams:
 
 - Product analytics
 - Web analytics
@@ -47,6 +47,7 @@ Right now, support engineers provide the first level of support for the followin
 - Surveys
 - Data warehouse
 - Batch exports
+- Sales & CS (Customer Success)
 
 Support engineers respond to and solve as many tickets as they can for these products, or escalate tickets to the appropriate product engineer if needed. For all other products, the engineers on those teams are directly responsible for support. The support runbook is maintained on the [Support Hero page](/handbook/engineering/support-hero). 
 
