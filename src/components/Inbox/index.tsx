@@ -10,6 +10,10 @@ import relativeTime from 'dayjs/plugin/relativeTime'
 import Link from 'components/Link'
 import { Question } from 'components/Squeak'
 import { useLocation } from '@reach/router'
+import OSButton from 'components/OSButton'
+import { IconCheck, IconCornerDownRight } from '@posthog/icons'
+import Switch from 'components/RadixUI/Switch'
+
 dayjs.extend(relativeTime)
 
 const Menu = () => {
@@ -52,7 +56,7 @@ export default function Inbox(props) {
             },
         },
     })
-    const [topHeight, setTopHeight] = useState(50)
+    const [topHeight, setTopHeight] = useState(33)
 
     useEffect(() => {
         if (initialTopicID && initialTopicID !== topicID) {
@@ -67,17 +71,17 @@ export default function Inbox(props) {
                 <aside data-scheme="secondary" className="w-64 bg-primary border-r border-primary h-full p-2">
                     <Menu />
                 </aside>
-                <main data-scheme="secondary" className="flex-1 bg-primary">
+                <main data-scheme="primary" className="flex-1 bg-primary">
                     <div className="flex flex-col h-full">
                         <div style={{ height: permalink ? `${topHeight}%` : '100%' }} className="min-h-0">
                             <ScrollArea className="h-full">
-                                <div className="flex items-center px-4 py-2 border-b border-primary font-semibold bg-secondary text-sm bg-accent-2 sticky top-0">
+                                <div className="flex items-center px-3.5 py-2 border-b border-primary font-medium bg-secondary text-sm bg-accent-2 sticky top-0">
                                     <div className="flex-1">Subject</div>
                                     <div className="w-24 text-center">Replies</div>
                                     <div className="w-36 text-center">Last updated</div>
                                     <div className="w-32 text-center">Latest activity</div>
                                 </div>
-                                <div>
+                                <div className="px-2 py-1">
                                     {questions.data?.map((question) => {
                                         const {
                                             attributes: { subject, numReplies, activeAt, replies, profile, permalink },
@@ -86,12 +90,14 @@ export default function Inbox(props) {
                                             replies?.data?.[replies.data.length - 1]?.attributes?.profile || profile
                                         const active = `/questions/${permalink}` === pathname
                                         return (
-                                            <Link
-                                                to={`/questions/${permalink}`}
-                                                key={question.id}
-                                                className={`flex items-center px-4 py-3 border-b border-primary text-sm w-full text-left hover:bg-accent-2/50 !text-inherit ${
-                                                    active ? '!bg-accent-2' : ''
-                                                }`}
+                                            <OSButton 
+                                                asLink 
+                                                to={`/questions/${permalink}`} 
+                                                variant="ghost"
+                                                align="left"
+                                                width="full"
+                                                key={question.id} 
+                                                className={`!text-inherit ${active ? 'bg-accent' : ''}`}
                                             >
                                                 <div className="flex-1">{subject}</div>
                                                 <div className="w-24 text-center">{numReplies}</div>
@@ -99,7 +105,7 @@ export default function Inbox(props) {
                                                 <div className="w-32 text-center">
                                                     {latestAuthor?.data.attributes.firstName}
                                                 </div>
-                                            </Link>
+                                            </OSButton>
                                         )
                                     })}
                                 </div>
@@ -124,8 +130,28 @@ export default function Inbox(props) {
                                 />
                                 <ScrollArea className="h-full">
                                     <div>
-                                        <div className="bg-accent px-4 py-2">
-                                            <button className="font-bold text-sm">Reply</button>
+                                        <div className="bg-accent border-y border-border px-4 py-2 flex gap-2 items-center sticky top-0 z-10">
+                                            <OSButton 
+                                                variant="secondary" 
+                                                size="sm" 
+                                                icon={<IconCornerDownRight className="scale-x-[-1]" 
+                                            />}>
+                                                Reply
+                                            </OSButton>
+                                            <OSButton
+                                                variant="ghost"
+                                                icon={<IconCheck />}>
+                                                Mark as resolved
+                                            </OSButton>
+
+                                            <Switch 
+                                                label="Thread notifications" 
+                                                className="ml-auto" 
+                                            />
+
+                                            
+
+
                                         </div>
                                         <div className="p-5">
                                             <Question id={permalink} />
