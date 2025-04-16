@@ -1,4 +1,4 @@
-import React from 'react'
+simport React from 'react'
 import InfoIcon from '../InfoIcon/Index'
 import CheckIcon from '../../images/check.svg'
 import XIcon from '../../images/x.svg'

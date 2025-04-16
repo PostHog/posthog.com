@@ -214,6 +214,18 @@ Stages will differ depending on the chosen Opportunity Record Type. The followin
 6. Closed Won (100%) - They have signed the contract and are officially a PostHog customer.
 7. Closed Lost (0%) - At some point in the pipeline they decided not to use us. The Loss Reason field is required for any opportunity to be marked as Closed lost.
 
+### Forecast categories
+**Commit:** PostHog is integrated and the buyer has stated an intent to purchase within the Close Date quarter
+
+**Best Case:** PostHog is or is being implemented, volume justifies an annual commitment, and the buyer has stated interest in purchaseing with the Close Date quarter
+
+**Pipeline:** Buyer is actively evaluating PostHog or intends to evaluate PostHog within the Close Date quarter and early volume/discussion indicates an annual contract could be justified.
+
+**Ommitted:** Use this for new Opportunities that have have not met the criteria above
+
+Forecase categories should be re-evaluated on an ongoing basis. While it is not ideal for Opportunities to move to a lest likely category, we should do so if this reflects reality, especially as quarter end approaches.
+
+
 ### Renewal pipeline
 When an opportunity with Annual Plan type is Closed Won, a Salesforce [flow](https://posthog.lightning.force.com/builder_platform_interaction/flowBuilder.app?flowId=301Hp0000019zhnIAA) will create an opportunity associated with the contact and account from the original opportunity. The following fields will also be set:
 
