@@ -29,7 +29,7 @@ import Link from 'components/Link'
 
 interface OSButtonProps extends Omit<React.ButtonHTMLAttributes<HTMLButtonElement>, 'className'> {
     children?: React.ReactNode
-    variant?: 'default' | 'primary' | 'underline' | 'ghost'
+    variant?: 'default' | 'primary' | 'secondary' | 'underline' | 'ghost'
     size?: 'xs' | 'sm' | 'md' | 'lg' | 'xl'
     icon?: React.ReactNode
     tooltip?: string
@@ -82,34 +82,62 @@ export default function OSButton({
 
     const variantClasses = {
         default: 'bg-black border-black text-white hover:bg-black/90 active:bg-black/80',
-        primary:
-            'bg-accent border-accent dark:border-accent-dark text-primary hover:bg-accent-dark active:bg-accent/80 dark:bg-accent-dark dark:hover:bg-accent dark:active:bg-accent-dark/80',
+        primary: {
+            parent: 'bg-button-shadow dark:bg-button-shadow-dark border-[1.5px] relative top-[2px] rounded-[6px] w-auto text-primary inline-block border-button text-center group disabled:opacity-50 disabled:cursor-not-allowed',
+            child: 'relative text-center w-auto bg-orange text-primary hover:text-primary dark:text-primary dark:hover:text-primary border-button dark:border-button-dark dark:bg-orange rounded-[6px] text-[14px] font-bold px-4 py-1.5 translate-y-[-2px] hover:translate-y-[-4px] active:translate-y-[-1px] border-[1.5px] mx-[-1.5px] group-disabled:hover:!translate-y-[-2px] block active:transition-all active:duration-100 select-none'
+        },
+        secondary: {
+            parent: 'bg-orange dark:bg-button-secondary-shadow-dark dark:border-button-secondary-dark border-[1.5px] relative top-[2px] rounded-[6px] w-auto text-primary inline-block border-button text-center group disabled:opacity-50 disabled:cursor-not-allowed',
+            child: 'relative text-center w-auto bg-white text-primary hover:text-primary dark:text-primary-dark dark:hover:text-primary-dark border-button dark:border-orange dark:bg-dark rounded-[6px] text-[14px] font-bold px-4 py-1.5 translate-y-[-2px] hover:translate-y-[-4px] active:translate-y-[-1px] border-[1.5px] mx-[-1.5px] group-disabled:hover:!translate-y-[-2px] block active:transition-all active:duration-100 select-none'
+        },
         underline: 'hover:underline border-transparent',
         ghost: `bg-transparent border-transparent ${
             active
-                ? 'font-bold !bg-accent-2 dark:!bg-accent-dark hover:border-light dark:hover:border-dark text-primary'
-                : 'hover:bg-accent-2 dark:hover:bg-accent-dark text-muted hover:text-primary focus:text-primary'
+                ? 'font-bold !bg-accent-2 dark:!bg-accent-dark hover:border-light dark:hover:border-dark'
+                : 'hover:bg-accent-2 dark:hover:bg-accent-dark'
         } active:bg-accent-2/80 dark:active:bg-accent-dark/80 focus:border-light dark:focus:border-dark`,
     }
 
     const buttonContent = (
         <>
-            {icon && iconPosition === 'left' && <span className={`${iconSizeClasses[size]}`}>{icon}</span>}
-            {children}
-            {label && <span className="text-sm opacity-75">{label}</span>}
-            {icon && iconPosition === 'right' && <span className={`${iconSizeClasses[size]}`}>{icon}</span>}
-            {tooltip && (
-                <span className="">
-                    <Tooltip content={tooltip}>
-                        <IconInfo className={`${iconSizeClasses[size]} opacity-50 hover:opacity-100`} />
-                    </Tooltip>
+            {variant === 'primary' || variant === 'secondary' ? (
+                <span className={`${variantClasses[variant].child} ${sizeClasses[size]}`}>
+                    {icon && iconPosition === 'left' && <span className={`${iconSizeClasses[size]}`}>{icon}</span>}
+                    {children}
+                    {label && <span className="text-sm opacity-75">{label}</span>}
+                    {icon && iconPosition === 'right' && <span className={`${iconSizeClasses[size]}`}>{icon}</span>}
+                    {tooltip && (
+                        <span className="">
+                            <Tooltip content={tooltip}>
+                                <IconInfo className={`${iconSizeClasses[size]} opacity-50 hover:opacity-100`} />
+                            </Tooltip>
+                        </span>
+                    )}
                 </span>
+            ) : (
+                <>
+                    {icon && iconPosition === 'left' && <span className={`${iconSizeClasses[size]}`}>{icon}</span>}
+                    {children}
+                    {label && <span className="text-sm opacity-75">{label}</span>}
+                    {icon && iconPosition === 'right' && <span className={`${iconSizeClasses[size]}`}>{icon}</span>}
+                    {tooltip && (
+                        <span className="">
+                            <Tooltip content={tooltip}>
+                                <IconInfo className={`${iconSizeClasses[size]} opacity-50 hover:opacity-100`} />
+                            </Tooltip>
+                        </span>
+                    )}
+                </>
             )}
         </>
     )
 
     const commonProps = {
-        className: `${baseClasses} ${sizeClasses[size]} ${variantClasses[variant]} ${
+        className: `${baseClasses} ${
+            variant === 'primary' || variant === 'secondary' 
+                ? variantClasses[variant].parent 
+                : `${sizeClasses[size]} ${variantClasses[variant]}`
+        } ${
             align === 'center' ? 'justify-center' : 'justify-start'
         } ${!children ? '' : width === 'full' ? 'w-full' : 'w-auto'} ${className}`,
         onClick,

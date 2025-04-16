@@ -160,6 +160,7 @@ const toolbarElements: ToolbarElement[] = [
     type: "button",
     variant: "primary",
     label: "Share",
+    size: "xs",
     className: "ml-auto"
   }
 ];

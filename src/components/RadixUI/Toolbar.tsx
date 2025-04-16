@@ -39,6 +39,8 @@ export type ToolbarSelect = {
 	}[];
 };
 
+type ButtonVariant = 'default' | 'primary' | 'secondary' | 'underline' | 'ghost';
+
 export type ToolbarElement = ToolbarGroup | { type: "separator" } | ToolbarSelect | { 
 	type: "button"; 
 	label: string; 
@@ -47,7 +49,8 @@ export type ToolbarElement = ToolbarGroup | { type: "separator" } | ToolbarSelec
 	className?: string;
 	icon?: React.ReactNode;
 	hideLabel?: boolean;
-	variant?: 'default' | 'primary' | 'underline' | 'ghost';
+	variant?: ButtonVariant;
+	size?: 'xs' | 'sm' | 'md' | 'lg' | 'xl';
 };
 
 interface ToolbarProps {
@@ -89,14 +92,13 @@ export const Toolbar = ({ elements, className, "aria-label": ariaLabel }: Toolba
 					return (
 						<RadixToolbar.Button
 							key={index}
-							className="hover:bg-secondary focus:relative focus:shadow-xl"
 							onClick={element.onClick}
 							disabled={element.disabled}
 							asChild
 						>
 							<OSButton
 								variant={element.variant || "ghost"}
-								size="sm"
+								size={element.size || "sm"}
 								icon={element.icon}
 								className={element.className}
 								disabled={element.disabled}
