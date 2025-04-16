@@ -335,5 +335,9 @@ val config = PostHogAndroidConfig(apiKey = POSTHOG_API_KEY, host = POSTHOG_HOST)
 
     // Session Replay configuration
     sessionReplayConfig = PostHogSessionReplayConfig(...)
+
+    // Whether the SDK should reuse the anonymous Id between user changes. 
+    // When enabled, a single Id will be used for all anonymous users on this device (off/false by default)
+    reuseAnonymousId = false
 }
 ```
