@@ -70,12 +70,9 @@ const getActiveItem = (items: MenuItem[], currentUrl: string): MenuItem | undefi
 }
 
 export function TreeMenu(props: TreeMenuProps) {
-    const initialActiveItem = useMemo(
-        () => props.activeItem || getActiveItem(props.items, window.location.pathname),
-        []
+    const [activeItem, setActiveItem] = useState<MenuItem>(
+        props.activeItem || getActiveItem(props.items, window.location.pathname)
     )
-    if (!initialActiveItem) return null
-    const [activeItem, setActiveItem] = useState<MenuItem>(initialActiveItem)
 
     const handleClick = (item: MenuItem) => {
         setActiveItem(item)

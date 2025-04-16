@@ -8,6 +8,7 @@ import dayjs from 'dayjs'
 import relativeTime from 'dayjs/plugin/relativeTime'
 import Link from 'components/Link'
 import { Question } from 'components/Squeak'
+import { useLocation } from '@reach/router'
 dayjs.extend(relativeTime)
 
 const Menu = () => {
@@ -34,6 +35,7 @@ export default function Inbox(props) {
     const initialTopicID = data?.topic?.squeakId
     const permalink = params?.permalink
     const [topicID, setTopicID] = useState(initialTopicID)
+    const { pathname } = useLocation()
     const { questions, isLoading, fetchMore, hasMore, refresh } = useQuestions({
         limit: 20,
         sortBy: 'activity',
@@ -80,11 +82,14 @@ export default function Inbox(props) {
                                         } = question
                                         const latestAuthor =
                                             replies?.data?.[replies.data.length - 1]?.attributes?.profile || profile
+                                        const active = `/questions/${permalink}` === pathname
                                         return (
                                             <Link
                                                 to={`/questions/${permalink}`}
                                                 key={question.id}
-                                                className="flex items-center px-4 py-3 border-b border-primary text-sm w-full text-left hover:bg-accent-2/50 !text-inherit"
+                                                className={`flex items-center px-4 py-3 border-b border-primary text-sm w-full text-left hover:bg-accent-2/50 !text-inherit ${
+                                                    active ? '!bg-accent-2' : ''
+                                                }`}
                                             >
                                                 <div className="flex-1">{subject}</div>
                                                 <div className="w-24 text-center">{numReplies}</div>
