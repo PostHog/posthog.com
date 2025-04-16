@@ -74,7 +74,7 @@ export const Select = React.forwardRef<HTMLButtonElement, SelectProps>(
         ref
     ) => {
         return (
-            <div data-scheme={dataScheme}>
+            <div className="flex items-center" data-scheme={dataScheme}>
                 <RadixSelect.Root
                     value={value}
                     defaultValue={defaultValue}
