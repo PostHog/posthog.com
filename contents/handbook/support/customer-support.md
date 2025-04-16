@@ -43,11 +43,9 @@ Right now, support engineers provide the first level of support for the followin
 - Web analytics
 - Session replay
 - Feature flags
-- Surveys
 - Experiments
-- Data warehouse
-- Customer Success
 - Surveys
+- Data warehouse
 - Batch exports
 
 Support engineers respond to and solve as many tickets as they can for these products, or escalate tickets to the appropriate product engineer if needed. For all other products, the engineers on those teams are directly responsible for support. The support runbook is maintained on the [Support Hero page](/handbook/engineering/support-hero). 
