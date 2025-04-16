@@ -91,13 +91,13 @@ export default function Inbox(props) {
                                             replies?.data?.[replies.data.length - 1]?.attributes?.profile || profile
                                         const active = `/questions/${permalink}` === pathname
                                         return (
-                                            <OSButton 
-                                                asLink 
-                                                to={`/questions/${permalink}`} 
+                                            <OSButton
+                                                asLink
+                                                to={`/questions/${permalink}`}
                                                 variant="ghost"
                                                 align="left"
                                                 width="full"
-                                                key={question.id} 
+                                                key={question.id}
                                                 className={`!text-inherit ${active ? 'bg-accent' : ''}`}
                                             >
                                                 <div className="flex-1">{subject}</div>
@@ -117,7 +117,7 @@ export default function Inbox(props) {
                             <div style={{ height: `${100 - topHeight}%` }} className="min-h-0 relative">
                                 <motion.div
                                     data-scheme="tertiary"
-                                    className="h-1.5 cursor-ns-resize top-0 left-0 !transform-none absolute z-10 w-full hover:bg-accent active:bg-accent"
+                                    className="h-1.5 cursor-ns-resize top-0 left-0 !transform-none absolute z-20 w-full hover:bg-accent active:bg-accent"
                                     drag="y"
                                     dragMomentum={false}
                                     dragConstraints={{ top: 0, bottom: 0 }}
@@ -132,16 +132,14 @@ export default function Inbox(props) {
                                 <ScrollArea className="h-full">
                                     <div>
                                         <div className="bg-accent border-y border-border px-4 py-2 flex gap-2 items-center sticky top-0 z-10">
-                                            <OSButton 
-                                                variant="secondary" 
-                                                size="sm" 
-                                                icon={<IconCornerDownRight className="scale-x-[-1]" 
-                                            />}>
+                                            <OSButton
+                                                variant="secondary"
+                                                size="sm"
+                                                icon={<IconCornerDownRight className="scale-x-[-1]" />}
+                                            >
                                                 Reply
                                             </OSButton>
-                                            <OSButton
-                                                variant="ghost"
-                                                icon={<IconCheck />}>
+                                            <OSButton variant="ghost" icon={<IconCheck />}>
                                                 Mark as resolved
                                             </OSButton>
 
@@ -151,12 +149,8 @@ export default function Inbox(props) {
                                                 action="Undo"
                                                 className="ml-auto"
                                             >
-                                                <Switch 
-                                                    label="Thread notifications" 
-                                                />
+                                                <Switch label="Thread notifications" />
                                             </Toast>
-
-
                                         </div>
                                         <div className="p-5">
                                             <Question id={permalink} />
