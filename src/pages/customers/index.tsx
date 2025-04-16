@@ -22,6 +22,7 @@ import DhlLogoDark from '../../images/customers/dhl-dark.svg'
 import StartEngineLogoDark from '../../images/customers/startengine-dark.svg'
 import TrustWalletLogoDark from '../../images/customers/trustwallet-dark.svg'
 import PostHogLogoDark from '../../images/customers/posthog-dark.svg'
+import ScrollArea from 'components/RadixUI/ScrollArea'
 
 interface CustomerNode {
     fields: {
@@ -30,6 +31,7 @@ interface CustomerNode {
     frontmatter: {
         customer: string
         toolsUsed?: string[]
+        notes?: string
         logo?: {
             publicURL: string
         }
@@ -43,8 +45,8 @@ interface ManualCustomer {
     name: string
     toolsUsed: string[]
     notes?: string
-    logo?: string
-    logoDark?: string
+    logo: string
+    logoDark: string
 }
 
 type CustomerOrder = (string | ManualCustomer)[]
@@ -106,25 +108,48 @@ const CUSTOMER_ORDER: CustomerOrder = [
     },
 ]
 
-const Customer = ({ number, logo, name, toolsUsed, slug, dark }) => {
+interface CustomerProps {
+    number: number
+    logo?: {
+        light: string
+        dark: string
+    }
+    name: string
+    toolsUsed?: string[]
+    slug?: string
+    notes?: string
+}
+
+const Customer = ({ number, logo, name, toolsUsed, slug, notes }: CustomerProps) => {
     return (
         <React.Fragment>
-            <div>{number}</div>
-            <div className={dark ? 'bg-black' : ''}>
-                <div className="flex items-center gap-2">
-                    {logo ? <img src={logo} alt={name} className="h-8 w-auto object-contain" /> : <span>{name}</span>}
-                </div>
+            <div className="flex items-center justify-center">{number}</div>
+            <div className={`flex items-center justify-center !p-4`}>
+                {logo ? (
+                    <>
+                        <img 
+                            src={logo.light} 
+                            alt={name} 
+                            className="w-auto object-contain dark:hidden" 
+                        />
+                        <img 
+                            src={logo.dark} 
+                            alt={name} 
+                            className="w-auto object-contain hidden dark:block" 
+                        />
+                    </>
+                ) : (
+                    <span>{name}</span>
+                )}
             </div>
-            <div>{toolsUsed?.join(', ')}</div>
-            <div>{slug && <Link to={slug}>Link</Link>}</div>
-            <div>&nbsp;</div>
+            <div className="flex items-center text-sm">{toolsUsed?.join(', ')}</div>
+            <div className="flex justify-center items-center">{slug && <Link to={slug}>Link</Link>}</div>
+            <div className="flex justify-center items-center text-sm">{notes || ''}</div>
         </React.Fragment>
     )
 }
 
 export default function Customers(): JSX.Element {
-    const { websiteTheme } = useValues(layoutLogic)
-    const isDarkMode = websiteTheme === 'dark'
 
     const data = useStaticQuery(graphql`
         query {
@@ -136,6 +161,7 @@ export default function Customers(): JSX.Element {
                     frontmatter {
                         customer
                         toolsUsed
+                        notes
                         logo {
                             publicURL
                         }
@@ -161,31 +187,43 @@ export default function Customers(): JSX.Element {
     return (
         <>
             <SEO title="notable customers.mdx – PostHog" description="" image={`/images/og/customers.jpg`} />
-            <Editor title="notable customers.mdx" slug="/customers">
-                <div className="grid grid-cols-[auto_1fr_minmax(auto,150px)_minmax(auto,100px)_minmax(auto,150px)] divide-x divide-y divide-border border-r border-b border-primary [&_div]:p-2 text-[15px]">
-                    <div className="border-l border-t border-border bg-input font-bold">&nbsp;</div>
-                    <div className="bg-input font-bold">Company name</div>
-                    <div className="bg-input font-bold">Product(s) used</div>
-                    <div className="bg-input font-bold">Case study?</div>
-                    <div className="bg-input font-bold">Notes</div>
+            <Editor title="notable customers" type="mdx" slug="/customers">
+              <ScrollArea>
+                <div className="grid grid-cols-[auto_minmax(150px,1fr)_minmax(auto,250px)_minmax(auto,100px)_minmax(auto,180px)] divide-x divide-y divide-border border-r border-b border-primary [&_div]:p-2 text-[15px]">
+                    <div className="text-sm border-l border-t border-border bg-input font-bold">&nbsp;</div>
+                    <div className="text-sm bg-input font-bold text-center">Company name</div>
+                    <div className="text-sm bg-input font-bold">Product(s) used</div>
+                    <div className="text-sm bg-input font-bold text-center">Case study?</div>
+                    <div className="text-sm bg-input font-bold">Notes</div>
 
                     {CUSTOMER_ORDER.map((item, index) => {
                         return (
                             <Customer
                                 key={index}
                                 number={index + 1}
-                                logo={
-                                    frontmatterCustomers[item]?.frontmatter?.[isDarkMode ? 'logoDark' : 'logo']
-                                        ?.publicURL || item?.[isDarkMode ? 'logoDark' : 'logo']
+                                logo={typeof item === 'string' 
+                                    ? frontmatterCustomers[item]?.frontmatter?.logo?.publicURL 
+                                        ? {
+                                            light: frontmatterCustomers[item].frontmatter.logo.publicURL,
+                                            dark: frontmatterCustomers[item].frontmatter.logoDark.publicURL
+                                        }
+                                        : undefined
+                                    : {
+                                        light: item.logo,
+                                        dark: item.logoDark
+                                    }
                                 }
-                                dark={typeof item !== 'string'}
-                                name={frontmatterCustomers[item]?.frontmatter?.customer || item.name}
-                                slug={frontmatterCustomers[item]?.fields?.slug}
-                                toolsUsed={frontmatterCustomers[item]?.frontmatter?.toolsUsed || item.toolsUsed}
+                                name={typeof item === 'string' ? frontmatterCustomers[item]?.frontmatter?.customer || '' : item.name}
+                                slug={typeof item === 'string' ? frontmatterCustomers[item]?.fields?.slug : undefined}
+                                toolsUsed={typeof item === 'string' ? frontmatterCustomers[item]?.frontmatter?.toolsUsed : item.toolsUsed}
+                                notes={typeof item === 'string' 
+                                    ? frontmatterCustomers[item]?.frontmatter?.notes 
+                                    : item.notes}
                             />
                         )
                     })}
                 </div>
+                </ScrollArea>
             </Editor>
         </>
     )

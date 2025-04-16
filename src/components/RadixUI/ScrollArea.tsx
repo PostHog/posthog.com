@@ -8,7 +8,7 @@ interface ScrollAreaProps {
     fadeOverflow?: boolean
 }
 
-const ScrollArea = ({ children, className, dataScheme, fadeOverflow = false }: ScrollAreaProps) => (
+const ScrollArea = ({ children, className = '', dataScheme, fadeOverflow = false }: ScrollAreaProps) => (
     <ScrollAreaPrimitive.Root data-scheme={dataScheme} className={`relative overflow-hidden h-full ${className}`}>
         <ScrollAreaPrimitive.Viewport className="size-full">{children}</ScrollAreaPrimitive.Viewport>
         <ScrollAreaPrimitive.Scrollbar

@@ -26,6 +26,7 @@ import { IconLink } from '../OSIcons/Icons'
 interface EditorProps {
     slug: string
     title: string
+    type?: string
     children?: React.ReactNode
 }
 
@@ -167,18 +168,19 @@ const toolbarElements: ToolbarElement[] = [
 
 export default function Editor({
     title,
+    type,
     children,
 }: EditorProps) {
     return (
         <div className="@container w-full h-full flex flex-col min-h-1">
-          <aside data-scheme="secondary" className="bg-primary p-2">
+          <aside data-scheme="secondary" className="bg-primary p-2 border-b border-border">
             <Toolbar elements={toolbarElements} />
           </aside>
             <div className="flex flex-col flex-grow min-h-0">
                 <main data-scheme="primary" className="@container flex-1 bg-primary relative h-full">
                   <ScrollArea>
                     <div className="p-4 mx-auto max-w-3xl">
-                      <h1 className="text-2xl font-bold">{title}</h1>
+                      <h1 className="text-2xl font-bold">{title}{type && <span className="opacity-40">.{type}</span>}</h1>
                       {children}
                     </div>
                   </ScrollArea>
