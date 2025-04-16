@@ -32,4 +32,83 @@ PostHog autocapture automatically tracks the following events for you:
 -   **Application Backgrounded** - when the app is sent to the background by the user
 -   **Application Installed** - when the app is installed.
 -   **Application Updated** - when the app is updated.
--   **$screen** - when the user navigates (if using [navigatorObservers](https://docs.flutter.dev/ui/navigation) or [go_router](https://pub.dev/packages/go_router))
+-   **$screen** - when the user navigates (if using [navigatorObservers](https://docs.flutter.dev/ui/navigation) or [go_router](https://pub.dev/packages/go_router). You'd need to set up the `PosthogObserver` manually.)
+
+### Capturing screen views
+
+> Note: Your routes should be named. Otherwise, they won't be recorded.
+
+#### Using `navigatorObservers`
+
+Add the `PosthogObserver` to record screen views automatically:
+
+```dart
+import 'package:flutter/material.dart';
+import 'package:posthog_flutter/posthog_flutter.dart';
+
+void main() => runApp(MyApp());
+
+class MyApp extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    // If you're using session replay, `PostHogWidget` has to be the root, and `MaterialApp` must be the child.
+    return MaterialApp(
+      navigatorObservers: [
+        // The PosthogObserver records screen views automatically
+        PosthogObserver(),
+      ],
+      ...
+    );
+  }
+}
+```
+
+Name your routes:
+
+```dart
+...
+MaterialPageRoute(builder: (context) => const HomeScreenRoute(),
+  settings: const RouteSettings(name: 'Home Screen'),
+),
+...
+```
+
+#### Using `go_router`
+
+Add the `PosthogObserver` to record screen views automatically:
+
+```dart
+import 'package:flutter/material.dart';
+import 'package:posthog_flutter/posthog_flutter.dart';
+import 'package:go_router/go_router.dart';
+
+// GoRouter configuration
+final _router = GoRouter(
+  routes: [
+    ...
+  ],
+  // The PosthogObserver records screen views automatically
+  observers: [PosthogObserver()],
+);
+
+class MyApp extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    // If you're using session replay, `PostHogWidget` has to be the root, and `MaterialApp` must be the child.
+    return MaterialApp.router(
+      routerConfig: _router,
+    );
+  }
+}
+```
+
+Name your routes:
+
+```dart
+...
+GoRoute(
+  name: 'Home Screen',
+  ...
+),
+...
+```

@@ -50,7 +50,7 @@ By default, the email forwarding feature only accepts emails from your PostHog a
 
 ### Your personal card
 
-- You shouldn't usually need to do this - if you can't use your PostHog card for some reason, ask Fraser to purchase it for you on theirs in the first instance. 
+- You shouldn't usually need to do this - if you can't use your PostHog card for some reason, ask Fraser to purchase it for you on theirs in the first instance. Please avoid using your personal card over your Brex card. The company get points which we use towards billboard campaigns, we also can't process lots of reimbursement requests for people looking to get their own points. 
 - If you do need to use your personal card, just post the receipt in the #team-people-and-ops channel in Slack and tag Fraser to get reimbursed manually.
 
 Personal expenses should be submitted within 90 days of incurring the expense, otherwise these will not be repaid.
@@ -191,7 +191,8 @@ We do not pre-approve your travel expenses, and trust team members to make the r
 - We all travel economy by default- we cannot afford for folks to fly premium or business class. Feel free to upgrade using your personal money/airmiles if you’d like to. If you are particularly tall and struggle to fit into an economy seat, PostHog will cover the cost of an emergency exit seat. 
 - Be sensible when considering the value of your time, and avoid over-optimizing for cost. It is probably not worth saving $100 to take a non-direct flight that takes you 5hrs extra. Similarly, it doesn’t make sense to save $50 by taking a flight that leaves at 6am, only to have to expense a taxi to get to the airport.
 - Related to the above, consider signing up for programs like Global Entry if you are regularly travelling to countries that offer it- these can pay for themselves in one trip with the amount of time saved, particularly when travelling to the US. PostHog will cover costs here.
-- When travelling internationally, PostHog does not cover roaming charges for your phone. You can expense a reasonable eSIM, which usually is no more than $20. 
+- When travelling internationally, PostHog does not cover roaming charges for your phone. You can expense a reasonable eSIM, which usually is no more than $20.
+- PostHog has international insurance for our work trips, so you will not need to buy travel insurance when travelling on behalf of PostHog.
 
 > If you find yourself needing to do extra travel outside of the regular things listed above, e.g. you've been asked to take a last minute trip to work on an emergency project, we may pay for a nicer seat here, especially if you are travelling at very short notice or long haul. Talk to Fraser in the first instance if you think this may apply to you. This is intended for genuine one-offs, not where you've decided you'd like to come along to an extra offsite!
 

@@ -49,10 +49,12 @@ Teams in the startup plan can use their credit for any PostHog product or add-on
 
 Unused credits do not carry over past 12 months and can not be converted into cash or other rewards. If credits are used up then the team will automatically trigger email warnings and move to a standard, paid plan. 
 
-### Mintlify partnership
-We maintain a partnership with Mintlify to help our users build better documentation. Once a team is accepted into PostHog for Startups, we'll automatically send them the voucher code they need in their welcome email. The code gives them 50% for six months. 
+### Partnership perks
+We maintain a partnership with Mintlify and Speakeasy to help our users build better documentation and APIs. Once a team is accepted into PostHog for Startups, we'll automatically send them the voucher code they need in their welcome email. The code gives them 50% for six months. This applies for both products. 
 
-If users have issues with the code, or accessing the benefit, we'll raise this directly with Mintlify's Product Marketing team. 
+If users have issues with the code, or accessing the benefit, we'll raise this directly with Mintlify and Speakeasy, but can't give any guarantees as all discounts are at their discretion. Our contacts at each company (in case Joe, who handles this usually, is away) are Tiffany Chen (Mintlify) and Nolan Di Mare Sullivan (Speakeasy).
+
+We previously partnered with DigitalOcean to offer users an additional $25,000 of infrastructure credit, but retired this partnership in Q2 2025.
 
 ### Program extensions
 Extensions aren’t something we usually do because we set the initial terms to keep things fair and consistent for everyone. We recommend using your credits within the deal period to make the most of the program. If you’ve had some unusual circumstances, we’re open to hearing about them. Please make sure your request clearly explains why you couldn’t use the credits as planned and shows recent growth or a change in direction that makes the extension necessary. Our Customer Success team reviews each request on a case-by-case basis.

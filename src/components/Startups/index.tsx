@@ -13,6 +13,7 @@ import SalesforceForm from 'components/SalesforceForm'
 const benefits = [
     '$50k in PostHog credit',
     '50% off Mintlify for 6 months',
+    '50% off Speakeasy for 6 months',
     'A whole year of PostHog',
     'Free PostHog merch',
     'Exclusive newsletters',

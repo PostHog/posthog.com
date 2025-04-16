@@ -1,0 +1,107 @@
+---
+title: Phoenix
+icon: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/phoenix_12da07e6ff.svg
+---
+
+PostHog makes it easy to get data about traffic and usage of your [Phoenix](https://www.phoenixframework.org/) projects. Integrating PostHog into your site enables analytics about user behavior, custom events capture, session recordings, feature flags, and more.
+
+This guide walks you through integrating PostHog into your Phoenix app using the [JavaScript Web SDK](/docs/libraries/js).
+
+You might also be interested in our [Elixir SDK](/docs/libraries/elixir) for capturing events from your servers.
+
+## Installation
+
+import PhoenixInstall from "../integrate/_snippets/install-phoenix.mdx"
+
+<PhoenixInstall />
+
+### LiveView installation
+
+PostHog also supports Phoenix LiveView with a small tweak to your configuration as  the JavaScript snippet doesn't track LiveView's navigation by default.
+
+To properly capture LiveView pageviews/navigation, you need to add an `phx:navigate` event listener to the bottom of the `<head>` tag in your main layout file,
+usually located in `lib/<app>/templates/layouts/app.html.eex`:
+
+```javascript
+window.addEventListener("phx:navigate", ({ detail: { href } }) =>
+  posthog.capture('$pageview', {
+    '$current_url': href
+  })
+ )
+```
+
+This captures a `$pageview` event any time the browser's URL bar is programmatically changed by Phoenix or the user.
+You can learn more about the `phx:navigate` event in the [Phoenix LiveView documentation](https://hexdocs.pm/phoenix_live_view/Phoenix.LiveView.html#navigate/2).
+
+
+## Capture custom events
+
+To [capture custom events](/docs/product-analytics/capture-events), you can use `posthog.capture()` in your LiveView or regular Phoenix views. Here are some examples:
+
+### Basic event capture
+
+```javascript
+// Capture a simple event
+posthog.capture('button_clicked')
+```
+
+### Event capture with properties
+
+```javascript
+// Capture an event with additional properties
+posthog.capture('form_submitted', {
+    form_name: 'contact',
+    form_fields: ['name', 'email', 'message'],
+    submission_time: new Date().toISOString()
+})
+```
+
+### Capturing events in LiveView
+
+In your LiveView, you can capture events in response to user interactions:
+
+```javascript
+// In your LiveView JavaScript hooks
+let Hooks = {
+    Form: {
+        mounted() {
+            this.el.addEventListener('submit', (e) => {
+                e.preventDefault()
+                posthog.capture('form_submitted', {
+                    form_id: this.el.id,
+                    form_data: new FormData(this.el)
+                })
+                // Handle form submission
+            })
+        }
+    }
+}
+
+let liveSocket = new LiveSocket("/live", Socket, {
+    params: {_csrf_token: csrfToken},
+    hooks: Hooks
+})
+```
+
+### Capturing events in regular Phoenix views
+
+For regular Phoenix views, you can add event tracking to your templates:
+
+```html
+<!-- In your template -->
+<button phx-click="track_button_click" data-event-name="signup_button">
+    Sign Up
+</button>
+
+<!-- In your JavaScript -->
+document.addEventListener('phx:click', (e) => {
+    if (e.target.dataset.eventName) {
+        posthog.capture(e.target.dataset.eventName)
+    }
+})
+```
+
+## Next steps
+
+Installing the JavaScript Web SDK or snippet means all of its functionality is available in your Phoenix project. To learn more about this, have a look at our [JavaScript Web SDK docs](/docs/libraries/js/features).
