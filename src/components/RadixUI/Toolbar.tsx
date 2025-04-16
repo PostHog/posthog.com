@@ -47,6 +47,7 @@ export type ToolbarElement = ToolbarGroup | { type: "separator" } | ToolbarSelec
 	className?: string;
 	icon?: React.ReactNode;
 	hideLabel?: boolean;
+	variant?: 'default' | 'primary' | 'underline' | 'ghost';
 };
 
 interface ToolbarProps {
@@ -58,6 +59,17 @@ interface ToolbarProps {
 const toggleItemButtonClasses = "bg-primary px-[5px] text-[13px] leading-none text-secondary outline-none hover:bg-accent hover:text-primary focus:relative focus-visible:shadow-[0_0_0_2px] focus-visible:shadow-primary data-[state=on]:bg-accent-2 hover:data-[state=on]:bg-accent-2 data-[state=on]:text-primary disabled:hover:bg-primary disabled:hover:text-secondary";
 
 export const Toolbar = ({ elements, className, "aria-label": ariaLabel }: ToolbarProps) => {
+	// Create a ref for each focusable element
+	const toggleGroupRefs = React.useRef<(HTMLDivElement | null)[]>([]);
+
+	// Handle focus management
+	const handleFocus = React.useCallback((index: number) => {
+		const element = toggleGroupRefs.current[index];
+		if (element) {
+			element.focus();
+		}
+	}, []);
+
 	return (
 		<RadixToolbar.Root
 			data-scheme="secondary"
@@ -93,7 +105,7 @@ export const Toolbar = ({ elements, className, "aria-label": ariaLabel }: Toolba
 							asChild
 						>
 							<OSButton
-								variant="ghost"
+								variant={element.variant || "ghost"}
 								size="sm"
 								icon={element.icon}
 								className={element.className}
@@ -115,6 +127,8 @@ export const Toolbar = ({ elements, className, "aria-label": ariaLabel }: Toolba
 						aria-label={element.label}
 						className={`flex items-center gap-px ${element.className || ""}`}
 						disabled={element.disabled || allItemsDisabled}
+						ref={(el) => (toggleGroupRefs.current[index] = el)}
+						onFocusCapture={() => handleFocus(index)}
 					>
 						{element.items.map((item) => (
 							<RadixToolbar.ToggleItem

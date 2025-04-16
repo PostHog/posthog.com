@@ -158,7 +158,9 @@ const toolbarElements: ToolbarElement[] = [
   },
   {
     type: "button",
-    label: "Share"
+    variant: "primary",
+    label: "Share",
+    className: "ml-auto"
   }
 ];
 
@@ -168,7 +170,7 @@ export default function Editor({
 }: EditorProps) {
     return (
         <div className="@container w-full h-full flex flex-col min-h-1">
-          <aside data-scheme="secondary" className="bg-primary p-2 border-r border-primary">
+          <aside data-scheme="secondary" className="bg-primary p-2">
             <Toolbar elements={toolbarElements} />
           </aside>
             <div className="flex flex-col flex-grow min-h-0">
