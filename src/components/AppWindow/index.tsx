@@ -22,6 +22,7 @@ import { IMenu } from 'components/PostLayout/types'
 import { navigate } from 'gatsby'
 import { useChat } from '../../hooks/useChat'
 import Inbox from 'components/Inbox'
+import Handbook from '../../templates/Handbook'
 
 const getSizeDefaults = () => ({
     max: {
@@ -53,6 +54,9 @@ const Router = (props) => {
     const { children, path } = props
     if (/^\/questions/.test(path)) {
         return <Inbox {...props} />
+    }
+    if (/^\/handbook|^\/docs\/(?!api)|^\/manual/.test(path) && props.data?.post) {
+        return <Handbook {...props} />
     }
     return children
 }
