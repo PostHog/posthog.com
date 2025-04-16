@@ -1,5 +1,5 @@
 import React, { useRef } from 'react'
-import { IconGraph, IconPieChart, IconDocument } from '@posthog/icons'
+import { IconGraph, IconPieChart, IconDocument, IconQuestion } from '@posthog/icons'
 import Link from 'components/Link'
 import { useApp } from '../../context/App'
 
@@ -23,6 +23,12 @@ const apps = [
         color: 'salmon',
         url: '/customers',
     },
+    {
+        label: 'Questions?',
+        Icon: IconQuestion,
+        color: 'blue',
+        url: '/questions',
+    },
 ]
 
 const AppLink = ({ Icon, type, color, label, url }) => {
@@ -35,7 +41,7 @@ const AppLink = ({ Icon, type, color, label, url }) => {
                 className="flex flex-col justify-center items-center space-y-1 w-28 text-center"
             >
                 <Icon className={`size-7 text-${color}`} />
-                <p className="text-sm font-semibold">{label}</p>
+                <p className="text-sm font-medium">{label}</p>
             </Link>
         </span>
     )

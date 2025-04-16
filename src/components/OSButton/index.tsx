@@ -66,7 +66,7 @@ export default function OSButton({
 
     const sizeClasses = {
         xs: 'px-2 py-1 text-xs gap-1',
-        sm: 'px-3 py-1.5 text-[13px] gap-1',
+        sm: 'px-2 py-1.5 text-[13px] gap-1',
         md: 'px-1.5 py-1 text-sm gap-1',
         lg: 'px-6 py-3 text-base gap-1.5',
         xl: 'px-2.5 py-1 text-sm @md:px-3 @md:py-1.5 @md:text-[15px] @lg:px-4 @lg:py-2 text-base gap-2',
@@ -111,7 +111,7 @@ export default function OSButton({
     const commonProps = {
         className: `${baseClasses} ${sizeClasses[size]} ${variantClasses[variant]} ${
             align === 'center' ? 'justify-center' : 'justify-start'
-        } ${width === 'full' ? 'w-full' : 'w-auto'} ${className}`,
+        } ${!children ? '' : width === 'full' ? 'w-full' : 'w-auto'} ${className}`,
         onClick,
         ...props
     }
