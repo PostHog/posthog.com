@@ -1,8 +1,7 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useMemo } from 'react'
 import * as Collapsible from '@radix-ui/react-collapsible'
 import { IconChevronRight } from '@posthog/icons'
 import { motion } from 'framer-motion'
-import Link from 'components/Link'
 import { useLocation } from '@reach/router'
 import { replacePath } from '../../../gatsby/utils'
 import OSButton from 'components/OSButton'
@@ -18,10 +17,19 @@ interface TreeMenuProps {
     activeItem?: MenuItem
 }
 
-const TreeLink = ({ menuItem, index }: { menuItem: MenuItem; index: number }) => {
-    const location = useLocation()
-    const pathname = replacePath(location?.pathname)
-    const active = pathname === menuItem.url
+const TreeLink = ({
+    menuItem,
+    index,
+    onClick,
+    activeItem,
+}: {
+    menuItem: MenuItem
+    index: number
+    onClick: (item: MenuItem) => void
+    activeItem: MenuItem
+}) => {
+    const active = menuItem === activeItem
+
     return menuItem.url ? (
         <OSButton
             variant="ghost"
@@ -31,6 +39,7 @@ const TreeLink = ({ menuItem, index }: { menuItem: MenuItem; index: number }) =>
             asLink
             to={menuItem.url}
             className={index === 0 ? '' : index === 1 ? 'pl-7' : 'pl-11'}
+            onClick={() => onClick(menuItem)}
         >
             {menuItem.name}
         </OSButton>
@@ -45,31 +54,69 @@ const TreeLink = ({ menuItem, index }: { menuItem: MenuItem; index: number }) =>
     )
 }
 
-export function TreeMenu({ items, activeItem }: TreeMenuProps) {
+const getActiveItem = (items: MenuItem[], currentUrl: string): MenuItem | undefined => {
+    for (const item of items) {
+        if (item.url === currentUrl) {
+            return item
+        }
+        if (item.children?.length) {
+            const activeChild = getActiveItem(item.children, currentUrl)
+            if (activeChild) {
+                return activeChild
+            }
+        }
+    }
+    return undefined
+}
+
+export function TreeMenu(props: TreeMenuProps) {
+    const initialActiveItem = useMemo(
+        () => props.activeItem || getActiveItem(props.items, window.location.pathname),
+        []
+    )
+    if (!initialActiveItem) return null
+    const [activeItem, setActiveItem] = useState<MenuItem>(initialActiveItem)
+
+    const handleClick = (item: MenuItem) => {
+        setActiveItem(item)
+    }
+
+    const items = useMemo(() => props.items, [])
+
     return (
         <div className="space-y-px">
             {items.map((item) => {
                 const hasChildren = item.children && item.children.length > 0
                 return hasChildren ? (
-                    <TreeMenuItem key={item.name} item={item} activeItem={activeItem} index={0} />
+                    <TreeMenuItem key={item.name} item={item} activeItem={activeItem} index={0} onClick={handleClick} />
                 ) : (
-                    <TreeLink menuItem={item} index={0} />
+                    <TreeLink menuItem={item} index={0} onClick={handleClick} activeItem={activeItem} />
                 )
             })}
         </div>
     )
 }
 
-const isOpen = (children: MenuItem[], pathname: string): boolean => {
+const isOpen = (children: MenuItem[], activeItem: MenuItem): boolean => {
     return (
         children &&
         children.some((child: MenuItem) => {
-            return child.url === pathname || (child.children && isOpen(child.children, pathname))
+            return child === activeItem || (child.children && isOpen(child.children, activeItem))
         })
     )
 }
 
-function TreeMenuItem({ item, activeItem, index = 0 }: { item: MenuItem; activeItem?: MenuItem; index: number }) {
+function TreeMenuItem({
+    item,
+    activeItem,
+    index = 0,
+    onClick,
+}: {
+    item: MenuItem
+    activeItem: MenuItem
+    index: number
+    onClick: (item: MenuItem) => void
+}) {
     const [open, setOpen] = useState(false)
     const hasChildren = item.children && item.children.length > 0
     const location = useLocation()
@@ -81,7 +128,7 @@ function TreeMenuItem({ item, activeItem, index = 0 }: { item: MenuItem; activeI
 
     useEffect(() => {
         if (item.children) {
-            setOpen(isOpen(item.children, pathname))
+            setOpen(isOpen(item.children, activeItem))
         }
     }, [pathname])
 
@@ -94,6 +141,7 @@ function TreeMenuItem({ item, activeItem, index = 0 }: { item: MenuItem; activeI
                     width="full"
                     className={index === 0 ? '' : index === 1 ? 'pl-6' : 'pl-11'}
                     active={activeItem === item}
+                    onClick={() => onClick(item)}
                 >
                     {hasChildren && (
                         <motion.div animate={{ rotate: open ? 90 : 0 }}>
@@ -110,9 +158,20 @@ function TreeMenuItem({ item, activeItem, index = 0 }: { item: MenuItem; activeI
                         {item.children?.map((child) => {
                             const hasChildren = child.children && child.children.length > 0
                             return hasChildren ? (
-                                <TreeMenuItem key={child.name} item={child} activeItem={activeItem} index={index + 1} />
+                                <TreeMenuItem
+                                    key={child.name}
+                                    item={child}
+                                    activeItem={activeItem}
+                                    index={index + 1}
+                                    onClick={onClick}
+                                />
                             ) : (
-                                <TreeLink menuItem={child} index={index + 1} />
+                                <TreeLink
+                                    menuItem={child}
+                                    index={index + 1}
+                                    onClick={onClick}
+                                    activeItem={activeItem}
+                                />
                             )
                         })}
                     </div>
