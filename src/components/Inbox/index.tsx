@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import { motion } from 'framer-motion'
 import { useQuestions } from 'hooks/useQuestions'
 import HeaderBar from 'components/OSChrome/HeaderBar'
 import ScrollArea from 'components/RadixUI/ScrollArea'
@@ -51,6 +52,7 @@ export default function Inbox(props) {
             },
         },
     })
+    const [topHeight, setTopHeight] = useState(50)
 
     useEffect(() => {
         if (initialTopicID && initialTopicID !== topicID) {
@@ -67,8 +69,8 @@ export default function Inbox(props) {
                 </aside>
                 <main data-scheme="secondary" className="flex-1 bg-primary">
                     <div className="flex flex-col h-full">
-                        <ScrollArea>
-                            <div className="h-1/2">
+                        <div style={{ height: permalink ? `${topHeight}%` : '100%' }} className="min-h-0">
+                            <ScrollArea className="h-full">
                                 <div className="flex items-center px-4 py-2 border-b border-primary font-semibold bg-secondary text-sm bg-accent-2 sticky top-0">
                                     <div className="flex-1">Subject</div>
                                     <div className="w-24 text-center">Replies</div>
@@ -101,14 +103,36 @@ export default function Inbox(props) {
                                         )
                                     })}
                                 </div>
-                            </div>
-                        </ScrollArea>
-                        {permalink && (
-                            <ScrollArea>
-                                <div className="h-1/2 p-5">
-                                    <Question id={permalink} />
-                                </div>
                             </ScrollArea>
+                        </div>
+
+                        {permalink && (
+                            <div style={{ height: `${100 - topHeight}%` }} className="min-h-0 relative">
+                                <motion.div
+                                    data-scheme="tertiary"
+                                    className="h-1.5 cursor-ns-resize top-0 left-0 !transform-none absolute z-10 w-full hover:bg-accent active:bg-accent"
+                                    drag="y"
+                                    dragMomentum={false}
+                                    dragConstraints={{ top: 0, bottom: 0 }}
+                                    onDrag={(_event, info) => {
+                                        const newTopHeight = Math.min(
+                                            Math.max(topHeight + (info.delta.y / window.innerHeight) * 100, 20),
+                                            80
+                                        )
+                                        setTopHeight(newTopHeight)
+                                    }}
+                                />
+                                <ScrollArea className="h-full">
+                                    <div>
+                                        <div className="bg-accent px-4 py-2">
+                                            <button className="font-bold text-sm">Reply</button>
+                                        </div>
+                                        <div className="p-5">
+                                            <Question id={permalink} />
+                                        </div>
+                                    </div>
+                                </ScrollArea>
+                            </div>
                         )}
                     </div>
                 </main>
