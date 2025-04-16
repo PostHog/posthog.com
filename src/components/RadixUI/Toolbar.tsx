@@ -59,22 +59,12 @@ interface ToolbarProps {
 const toggleItemButtonClasses = "bg-primary px-[5px] text-[13px] leading-none text-secondary outline-none hover:bg-accent hover:text-primary focus:relative focus-visible:shadow-[0_0_0_2px] focus-visible:shadow-primary data-[state=on]:bg-accent-2 hover:data-[state=on]:bg-accent-2 data-[state=on]:text-primary disabled:hover:bg-primary disabled:hover:text-secondary";
 
 export const Toolbar = ({ elements, className, "aria-label": ariaLabel }: ToolbarProps) => {
-	// Create a ref for each focusable element
-	const toggleGroupRefs = React.useRef<(HTMLDivElement | null)[]>([]);
-
-	// Handle focus management
-	const handleFocus = React.useCallback((index: number) => {
-		const element = toggleGroupRefs.current[index];
-		if (element) {
-			element.focus();
-		}
-	}, []);
-
 	return (
 		<RadixToolbar.Root
 			data-scheme="secondary"
 			className={`flex w-full min-w-max rounded bg-primary p-1 border border-border ${className || ""}`}
 			aria-label={ariaLabel}
+			loop={true}
 		>
 			{elements.map((element, index) => {
 				if (element.type === "separator") {
@@ -117,18 +107,19 @@ export const Toolbar = ({ elements, className, "aria-label": ariaLabel }: Toolba
 					);
 				}
 
-				const allItemsDisabled = element.items.every(item => item.disabled);
+				// For ToggleGroup items
+				const ToggleGroup = element.type === "single" 
+					? RadixToolbar.ToggleGroup 
+					: RadixToolbar.ToggleGroup;
 
 				return (
-					<RadixToolbar.ToggleGroup
+					<ToggleGroup
 						key={index}
 						type={element.type}
 						defaultValue={element.defaultValue}
 						aria-label={element.label}
 						className={`flex items-center gap-px ${element.className || ""}`}
-						disabled={element.disabled || allItemsDisabled}
-						ref={(el) => (toggleGroupRefs.current[index] = el)}
-						onFocusCapture={() => handleFocus(index)}
+						disabled={element.disabled}
 					>
 						{element.items.map((item) => (
 							<RadixToolbar.ToggleItem
@@ -152,7 +143,7 @@ export const Toolbar = ({ elements, className, "aria-label": ariaLabel }: Toolba
 								)}
 							</RadixToolbar.ToggleItem>
 						))}
-					</RadixToolbar.ToggleGroup>
+					</ToggleGroup>
 				);
 			})}
 		</RadixToolbar.Root>
