@@ -44,7 +44,7 @@ You can find this section by clicking "Settings" in the left sidebar.
 
 ### 3. Content security policy
 
-When surveys are enabled, `posthog-js` will fetch a `survey.js` script from the PostHog server. It is not included in the default `posthog-js` installation to minimize the default bundle size.
+When surveys are enabled, `posthog-js` will fetch a `surveys.js` script from the PostHog server. It is not included in the default `posthog-js` installation to minimize the default bundle size.
 
 Depending on your content security policy, this script may be blocked. If you have a `default-src`, `script-src`, `script-src-elem`, or `connect-src` directive in your CSP, you may need to ensure that PostHog domains are permitted (see [CSP documentation](/docs/advanced/content-security-policy)).
 
@@ -53,7 +53,7 @@ If PostHog is being blocked by your content security policy, you should see an e
 
 ### 4. Proxies
 
-If you're running behind a proxy, the `/static/survey.js` endpoint may be blocked. Read more about [how to configure your proxy to allow this endpoint](/docs/self-host/configure/running-behind-proxy#public-endpoints).
+If you're running behind a proxy, the `/static/surveys.js` endpoint may be blocked. Read more about [how to configure your proxy to allow this endpoint](/docs/self-host/configure/running-behind-proxy#public-endpoints).
 
 ### 5. Ad or tracking blockers
 
