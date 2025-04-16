@@ -347,6 +347,10 @@ export const dataPipelines = {
                     url: '/docs/cdp/transformations/customizing-transformations',
                 },
                 {
+                    name: 'Drop events',
+                    url: '/docs/cdp/transformations/drop-events',
+                },
+                {
                     name: 'Transformations',
                 },
             ],
