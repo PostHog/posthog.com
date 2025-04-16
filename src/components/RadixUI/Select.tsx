@@ -85,7 +85,7 @@ export const Select = React.forwardRef<HTMLButtonElement, SelectProps>(
                 >
                     <RadixSelect.Trigger
                         ref={ref}
-                        className={`flex justify-between items-center gap-1 rounded px-2 py-1 text-sm leading-none text-primary bg-primary outline-none hover:bg-input-hover border border-primary focus:shadow-[0_0_0_2px] focus:shadow-black data-[placeholder]:text-muted ${className}`}
+                        className={`flex justify-between items-center gap-1 rounded px-2 py-1 text-sm leading-none text-primary bg-primary outline-none hover:bg-input-hover border border-primary disabled:border-border focus:shadow-[0_0_0_2px] focus:shadow-black data-[placeholder]:text-muted disabled:cursor-not-allowed ${className}`}
                         aria-label={ariaLabel}
                         data-scheme={dataScheme}
                     >

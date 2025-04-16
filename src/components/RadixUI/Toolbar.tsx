@@ -1,171 +1,148 @@
 import * as React from "react";
-import { Toolbar as RadixToolbar } from "radix-ui";
+import * as RadixToolbar from "@radix-ui/react-toolbar";
 import OSButton from "components/OSButton";
-import {
-	StrikethroughIcon,
-	TextAlignLeftIcon,
-	TextAlignCenterIcon,
-	TextAlignRightIcon,
-	FontBoldIcon,
-	FontItalicIcon,
-	ReloadIcon,
-} from "@radix-ui/react-icons";
-import { IconSearch } from "@posthog/icons";
+import { Select } from "./Select";
 
-const buttonClasses = "bg-primary px-[5px] text-[13px] leading-none text-secondary outline-none hover:bg-accent hover:text-primary focus:relative focus-visible:shadow-[0_0_0_2px] focus-visible:shadow-primary data-[state=on]:bg-accent-2 hover:data-[state=on]:bg-accent-2 data-[state=on]:text-primary disabled:hover:bg-primary disabled:hover:text-secondary"
+export type ToolbarItem = {
+	value: string;
+	label: string;
+	icon?: React.ReactNode;
+	disabled?: boolean;
+	className?: string;
+};
 
-const ToolbarDemo = () => (
-	<RadixToolbar.Root
-    data-scheme="secondary"
-		className="flex w-full min-w-max rounded bg-primary p-1 border border-border"
-		aria-label="Formatting options"
-	>
+export type ToolbarGroup = {
+	type: "multiple" | "single";
+	label: string;
+	className?: string;
+	items: ToolbarItem[];
+	defaultValue?: string;
+	disabled?: boolean;
+};
 
-<RadixToolbar.ToggleGroup type="multiple" aria-label="Text formatting" className="flex items-center gap-px">
-			<RadixToolbar.ToggleItem
-				value="search"
-				aria-label="Search"
-        className={buttonClasses}
-        asChild
-        disabled
-			>
-        <OSButton
-          variant="ghost"
-          icon={<IconSearch />}
-        />
-			</RadixToolbar.ToggleItem>
-			<RadixToolbar.ToggleItem
-				value="undo"
-				aria-label="Undo"
-        className={buttonClasses}
-        asChild
-			>
-        <OSButton
-          variant="ghost"
-          icon={<ReloadIcon className="scale-x-[-1]" />}
-          className="[&_svg]:size-full"
-          size="sm"
-        />
-			</RadixToolbar.ToggleItem>
-			<RadixToolbar.ToggleItem
-				value="redo"
-				aria-label="Redo"
-        className={buttonClasses}
-        asChild
-			>
-        <OSButton
-          variant="ghost"
-          icon={<ReloadIcon />}
-          className="[&_svg]:size-full"
-          size="sm"
-        />
-			</RadixToolbar.ToggleItem>
-		</RadixToolbar.ToggleGroup>
+export type ToolbarSelect = {
+	type: "select";
+	value?: string;
+	defaultValue?: string;
+	placeholder?: string;
+	className?: string;
+	disabled?: boolean;
+	groups: {
+		label: string;
+		items: {
+			value: string;
+			label: string;
+			icon?: string;
+			color?: string;
+			disabled?: boolean;
+		}[];
+	}[];
+};
 
-		<RadixToolbar.Separator className="mx-2.5 w-px bg-border" />
-    
-		<RadixToolbar.ToggleGroup type="multiple" aria-label="Text formatting" className="flex items-center gap-px">
-			<RadixToolbar.ToggleItem
-				value="bold"
-				aria-label="Bold"
-        asChild
-        className={buttonClasses}
-			>
-        <OSButton
-          variant="ghost"
-          icon={<FontBoldIcon />}
-          className="[&_svg]:size-full"
-        />
-			</RadixToolbar.ToggleItem>
+export type ToolbarElement = ToolbarGroup | { type: "separator" } | ToolbarSelect | { 
+	type: "button"; 
+	label: string; 
+	onClick?: () => void; 
+	disabled?: boolean; 
+	className?: string;
+	icon?: React.ReactNode;
+	hideLabel?: boolean;
+};
 
-			<RadixToolbar.ToggleItem
-				value="italic"
-				aria-label="Italic"
-        asChild
-        className={buttonClasses}
-			>
-        <OSButton
-          variant="ghost"
-          icon={<FontItalicIcon />}
-          className="[&_svg]:size-full"
-        />
-			</RadixToolbar.ToggleItem>
+interface ToolbarProps {
+	elements: ToolbarElement[];
+	className?: string;
+	"aria-label"?: string;
+}
 
-			<RadixToolbar.ToggleItem
-				value="strikethrough"
-				aria-label="Strikethrough"
-        asChild
-        className={buttonClasses}
-			>
-        <OSButton
-          variant="ghost"
-          icon={<StrikethroughIcon />}
-          className="[&_svg]:size-full"
-        />
-			</RadixToolbar.ToggleItem>
-		</RadixToolbar.ToggleGroup>
+const toggleItemButtonClasses = "bg-primary px-[5px] text-[13px] leading-none text-secondary outline-none hover:bg-accent hover:text-primary focus:relative focus-visible:shadow-[0_0_0_2px] focus-visible:shadow-primary data-[state=on]:bg-accent-2 hover:data-[state=on]:bg-accent-2 data-[state=on]:text-primary disabled:hover:bg-primary disabled:hover:text-secondary";
 
-		<RadixToolbar.Separator className="mx-2.5 w-px bg-border" />
-
-		
-    
-		<RadixToolbar.ToggleGroup type="single" defaultValue="left" aria-label="Text alignment" className="flex items-center gap-px">
-			<RadixToolbar.ToggleItem
-				value="left"
-				aria-label="Left"
-        asChild
-        className={buttonClasses}
-			>
-        <OSButton
-          variant="ghost"
-          icon={<TextAlignLeftIcon />}
-          className="[&_svg]:size-full"
-        />
-			</RadixToolbar.ToggleItem>
-
-			<RadixToolbar.ToggleItem
-				value="center"
-				aria-label="Center"
-        asChild
-        className={buttonClasses}
-			>
-        <OSButton
-          variant="ghost"
-          icon={<TextAlignCenterIcon />}
-          className="[&_svg]:size-full"
-        />
-			</RadixToolbar.ToggleItem>
-
-			<RadixToolbar.ToggleItem
-				value="right"
-				aria-label="Right"
-        asChild
-        className={buttonClasses}
-			>
-        <OSButton
-          variant="ghost"
-          icon={<TextAlignRightIcon />}
-          className="[&_svg]:size-full"
-        />
-			</RadixToolbar.ToggleItem>
-		</RadixToolbar.ToggleGroup>
-
-		<RadixToolbar.Separator className="mx-2.5 w-px bg-secondary" />
-		<RadixToolbar.Link
-			className="ml-0.5 hidden h-[25px] flex-shrink-0 flex-grow-0 basis-auto items-center justify-center rounded bg-transparent bg-white px-[5px] text-[13px] leading-none text-secondary outline-none first:ml-0 hover:cursor-pointer hover:bg-transparent hover:bg-accent-2 hover:text-primary focus:relative focus:shadow-xl data-[state=on]:bg-accent-2 data-[state=on]:text-primary sm:inline-flex"
-			href="#"
-			target="_blank"
-			style={{ marginRight: 10 }}
+export const Toolbar = ({ elements, className, "aria-label": ariaLabel }: ToolbarProps) => {
+	return (
+		<RadixToolbar.Root
+			data-scheme="secondary"
+			className={`flex w-full min-w-max rounded bg-primary p-1 border border-border ${className || ""}`}
+			aria-label={ariaLabel}
 		>
-			Edited 2 hours ago
-		</RadixToolbar.Link>
-		<RadixToolbar.Button
-			className="inline-flex h-[25px] flex-shrink-0 flex-grow-0 basis-auto items-center justify-center rounded bg-primary px-2.5 text-[13px] leading-none text-white outline-none hover:bg-secondary focus:relative focus:shadow-xl"
-			style={{ marginLeft: "auto" }}
-		>
-			Share
-		</RadixToolbar.Button>
-	</RadixToolbar.Root>
-);
+			{elements.map((element, index) => {
+				if (element.type === "separator") {
+					return <RadixToolbar.Separator key={index} className="mx-2.5 w-px bg-border" />;
+				}
 
-export default ToolbarDemo;
+				if (element.type === "select") {
+					return (
+						<Select
+							key={index}
+							value={element.value}
+							defaultValue={element.defaultValue}
+							placeholder={element.placeholder}
+							groups={element.groups}
+							className={element.className}
+							disabled={element.disabled}
+						/>
+					);
+				}
+
+				if (element.type === "button") {
+					return (
+						<RadixToolbar.Button
+							key={index}
+							className="hover:bg-secondary focus:relative focus:shadow-xl"
+							onClick={element.onClick}
+							disabled={element.disabled}
+							asChild
+						>
+							<OSButton
+								variant="ghost"
+								size="sm"
+								icon={element.icon}
+								className={element.className}
+								disabled={element.disabled}
+							>
+								{!element.hideLabel && element.label}
+							</OSButton>
+						</RadixToolbar.Button>
+					);
+				}
+
+				const allItemsDisabled = element.items.every(item => item.disabled);
+
+				return (
+					<RadixToolbar.ToggleGroup
+						key={index}
+						type={element.type}
+						defaultValue={element.defaultValue}
+						aria-label={element.label}
+						className={`flex items-center gap-px ${element.className || ""}`}
+						disabled={element.disabled || allItemsDisabled}
+					>
+						{element.items.map((item) => (
+							<RadixToolbar.ToggleItem
+								key={item.value}
+								value={item.value}
+								aria-label={item.label}
+								className={toggleItemButtonClasses}
+								disabled={item.disabled}
+								asChild={!!item.icon}
+							>
+								{item.icon ? (
+									<OSButton
+										variant="ghost"
+										icon={item.icon}
+										className="[&_svg]:size-full"
+										size="sm"
+										disabled={item.disabled}
+									/>
+								) : (
+									item.label
+								)}
+							</RadixToolbar.ToggleItem>
+						))}
+					</RadixToolbar.ToggleGroup>
+				);
+			})}
+		</RadixToolbar.Root>
+	);
+};
+
+export default Toolbar;
