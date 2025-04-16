@@ -13,6 +13,7 @@ import { useLocation } from '@reach/router'
 import OSButton from 'components/OSButton'
 import { IconCheck, IconCornerDownRight } from '@posthog/icons'
 import Switch from 'components/RadixUI/Switch'
+import Toast from 'components/RadixUI/Toast'
 
 dayjs.extend(relativeTime)
 
@@ -144,12 +145,16 @@ export default function Inbox(props) {
                                                 Mark as resolved
                                             </OSButton>
 
-                                            <Switch 
-                                                label="Thread notifications" 
-                                                className="ml-auto" 
-                                            />
-
-                                            
+                                            <Toast
+                                                title="Thread notifications enabled"
+                                                description="You'll be notified of replies by email."
+                                                action="Undo"
+                                                className="ml-auto"
+                                            >
+                                                <Switch 
+                                                    label="Thread notifications" 
+                                                />
+                                            </Toast>
 
 
                                         </div>
