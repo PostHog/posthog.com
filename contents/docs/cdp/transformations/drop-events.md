@@ -18,7 +18,7 @@ The drop events transformation uses filters to target specific events for remova
 3. **Property filters**: Further refine your filters with property conditions:
    - Match on any event property
    - Supports operators like equals, contains, greater than, etc.
-   - Combined with AND/OR logic for complex conditions
+   - Apply property filters globally across all events or specifically to individual event types
 
 #### How to use the filters 
 
