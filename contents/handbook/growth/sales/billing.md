@@ -227,3 +227,20 @@ Stripe subscriptions can be modified relatively freely for example if moving to 
 
 Self-hosted billing is no longer supported except for legacy customers who were using the paid kubernetes deployment.
 
+
+### Event Filtering and Billing
+
+PostHog only charges for events that are successfully ingested and stored in ClickHouse. Events that are filtered out before reaching ClickHouse are not counted towards billing quotas.
+
+This applies e.g. to filtering mechanisms:
+
+**Data Pipelines Transformations**: Events that are filtered out or dropped by any transformation in your data pipeline do not count towards billing quotas.
+
+#### Example
+
+A customer implements the following filtering:
+
+- Blocks traffic from internal company IP ranges (10.0.0.0/8) using the Filter Out Plugin
+- Excludes test user events with email domains ending in @testhog.com
+
+In this scenario, only events that pass through all these filters and land in ClickHouse will count towards their billing quota. All filtered events are excluded from billing calculations, regardless of whether the customer is on a free or paid plan.
