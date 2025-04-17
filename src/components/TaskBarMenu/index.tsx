@@ -10,6 +10,7 @@ import OSButton from 'components/OSButton'
 import { useUser } from 'hooks/useUser'
 import getAvatarURL from 'components/Squeak/util/getAvatar'
 import { menuData } from './menuData'
+import { Authentication } from 'components/Squeak'
 
 export default function TaskBarMenu() {
     const { windows, bringToFront, focusedWindow } = useApp()
@@ -140,7 +141,9 @@ export default function TaskBarMenu() {
                     }
                     dataScheme="primary"
                 >
-                    <div className="w-full h-full bg-primary text-primary"></div>
+                    <div className="w-full h-full bg-primary text-primary">
+                        <Authentication initialView="sign-in" showBanner={false} showProfile={false} />
+                    </div>
                 </Popover>
             </aside>
         </motion.div>
