@@ -29,7 +29,7 @@ These are some things that Ops is _not_ responsible for which you might see at o
 
 ## Ops team values
 
-- Take ownership 
+- Take ownership!
 - Be supremely reliable
 - Act with care & compassion
 
