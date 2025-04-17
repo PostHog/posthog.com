@@ -5,9 +5,7 @@ import Intro from "./intro.mdx"
 <Intro />
 
 ```elixir
-Posthog.capture("user_signed_up", %{
-  distinct_id: distinct_id_of_the_user
-})
+Posthog.capture("user_signed_up", distinct_id_of_the_user)
 ```
 
 <NamingTip />
@@ -15,12 +13,9 @@ Posthog.capture("user_signed_up", %{
 <SettingProperties />
 
 ```elixir
-Posthog.capture("user_signed_up", %{
-  distinct_id: distinct_id_of_the_user,
-  properties: %{
-    login_type: "email",
-    is_free_trial: true
-  }
+Posthog.capture("user_signed_up", distinct_id_of_the_user, %{
+  login_type: "email",
+  is_free_trial: true
 })
 ```
 
@@ -29,5 +24,5 @@ Posthog.capture("user_signed_up", %{
 To capture multiple events at once, use `batch()`:
 
 ```elixir
-Posthog.batch([{"user_signed_up", [distinct_id: distinct_id_of_the_user], nil}])
+Posthog.batch([{"user_signed_up", distinct_id_of_the_user, %{}}])
 ```
