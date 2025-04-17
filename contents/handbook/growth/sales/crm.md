@@ -215,7 +215,7 @@ Stages will differ depending on the chosen Opportunity Record Type. The followin
 7. Closed Lost (0%) - At some point in the pipeline they decided not to use us. The Loss Reason field is required for any opportunity to be marked as Closed lost.
 
 ### Forecast categories
-**Commit:** PostHog is integrated and the buyer has stated an intent to purchase within the Close Date quarter
+**Commit:** PostHog is integrated and the buyer has stated an intent to purchase within the Close Date quarter.
 
 **Best Case:** PostHog is or is being implemented, volume justifies an annual commitment, and the buyer has stated interest in purchaseing with the Close Date quarter
 
