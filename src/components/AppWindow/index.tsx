@@ -149,13 +149,15 @@ export default function AppWindow({ item, constraintsRef }: { item: AppWindowTyp
             return
         }
 
-        const bounds = constraintsRef.current.getBoundingClientRect()
         const newX = position.x + info.offset.x
         const newY = position.y + info.offset.y
 
+        const constrainedX = Math.round(Math.min(Math.max(0, newX), window.innerWidth - size.width))
+        const constrainedY = Math.round(Math.min(Math.max(taskbarHeight, newY), window.innerHeight - size.height))
+
         setPosition({
-            x: Math.round(Math.min(Math.max(0, newX), bounds.width - size.width)),
-            y: Math.round(Math.min(Math.max(bounds.top, newY), Math.max(bounds.top, bounds.height - size.height))),
+            x: constrainedX,
+            y: constrainedY,
         })
     }
 
