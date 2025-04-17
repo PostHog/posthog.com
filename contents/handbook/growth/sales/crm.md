@@ -217,7 +217,7 @@ Stages will differ depending on the chosen Opportunity Record Type. The followin
 ### Forecast categories
 **Commit:** PostHog is integrated and the buyer has stated an intent to purchase within the Close Date quarter.
 
-**Best Case:** PostHog is or is being implemented, volume justifies an annual commitment, and the buyer has stated interest in purchaseing with the Close Date quarter
+**Best Case:** PostHog is or is being implemented, volume justifies an annual commitment, and the buyer has stated interest in purchasing with the Close Date quarter.
 
 **Pipeline:** Buyer is actively evaluating PostHog or intends to evaluate PostHog within the Close Date quarter and early volume/discussion indicates an annual contract could be justified.
 
