@@ -4,7 +4,7 @@ import './src/styles/global.css'
 import HandbookLayout from './src/templates/Handbook'
 import Job from './src/templates/Job'
 import Posts from './src/components/Edition/Posts'
-import { Provider as ToastProvider } from './src/context/toast'
+import { Provider as ToastProvider } from './src/context/Toast'
 import { RouteUpdateArgs } from 'gatsby'
 import { UserProvider } from './src/hooks/useUser'
 import { ChatProvider } from './src/hooks/useChat'
@@ -14,9 +14,7 @@ initKea(false)
 
 export const wrapRootElement = ({ element }) => (
     <UserProvider>
-        <ToastProvider>
-            <ChatProvider>{wrapElement({ element })}</ChatProvider>
-        </ToastProvider>
+        <ChatProvider>{wrapElement({ element })}</ChatProvider>
     </UserProvider>
 )
 export const onRouteUpdate = ({ location, prevLocation }: RouteUpdateArgs) => {
@@ -43,6 +41,8 @@ export const onRouteUpdate = ({ location, prevLocation }: RouteUpdateArgs) => {
 
 export const wrapPageElement = ({ element, props: { pageContext, location } }) => (
     <Provider element={element} location={location}>
-        <Wrapper />
+        <ToastProvider>
+            <Wrapper />
+        </ToastProvider>
     </Provider>
 )

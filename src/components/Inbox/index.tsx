@@ -13,7 +13,7 @@ import { useLocation } from '@reach/router'
 import OSButton from 'components/OSButton'
 import { IconCheck, IconCornerDownRight } from '@posthog/icons'
 import Switch from 'components/RadixUI/Switch'
-import Toast from 'components/RadixUI/Toast'
+import { useToast } from '../../context/Toast'
 
 dayjs.extend(relativeTime)
 
@@ -42,6 +42,7 @@ export default function Inbox(props) {
     const permalink = params?.permalink
     const [topicID, setTopicID] = useState(initialTopicID)
     const { pathname } = useLocation()
+    const { addToast } = useToast()
     const { questions, isLoading, fetchMore, hasMore, refresh } = useQuestions({
         limit: 20,
         sortBy: 'activity',
@@ -58,6 +59,7 @@ export default function Inbox(props) {
         },
     })
     const [topHeight, setTopHeight] = useState(33)
+    const [notificationsEnabled, setNotificationsEnabled] = useState(false)
 
     useEffect(() => {
         if (initialTopicID && initialTopicID !== topicID) {
@@ -130,31 +132,38 @@ export default function Inbox(props) {
                                     }}
                                 />
                                 <ScrollArea className="h-full">
-                                    <div>
-                                        <div className="bg-accent border-y border-border px-4 py-2 flex gap-2 items-center sticky top-0 z-10">
-                                            <OSButton
-                                                variant="secondary"
-                                                size="sm"
-                                                icon={<IconCornerDownRight className="scale-x-[-1]" />}
-                                            >
-                                                Reply
-                                            </OSButton>
-                                            <OSButton variant="ghost" icon={<IconCheck />}>
-                                                Mark as resolved
-                                            </OSButton>
+                                    <div className="bg-accent border-y border-border px-4 py-2 flex gap-2 items-center sticky top-0 z-10">
+                                        <OSButton
+                                            variant="secondary"
+                                            size="sm"
+                                            icon={<IconCornerDownRight className="scale-x-[-1]" />}
+                                        >
+                                            Reply
+                                        </OSButton>
+                                        <OSButton variant="ghost" icon={<IconCheck />}>
+                                            Mark as resolved
+                                        </OSButton>
 
-                                            <Toast
-                                                title="Thread notifications enabled"
-                                                description="You'll be notified of replies by email."
-                                                action="Undo"
-                                                className="ml-auto"
-                                            >
-                                                <Switch label="Thread notifications" />
-                                            </Toast>
-                                        </div>
-                                        <div className="p-5">
-                                            <Question id={permalink} />
-                                        </div>
+                                        <Switch
+                                            className="ml-auto"
+                                            checked={notificationsEnabled}
+                                            onChange={(checked) => {
+                                                setNotificationsEnabled(checked)
+                                                addToast({
+                                                    description: checked
+                                                        ? "You'll be notified of replies by email."
+                                                        : "You won't receive notifications for this thread.",
+                                                    title: checked
+                                                        ? 'Thread notifications enabled'
+                                                        : 'Thread notifications disabled',
+                                                    onUndo: () => setNotificationsEnabled(!checked),
+                                                })
+                                            }}
+                                            label="Thread notifications"
+                                        />
+                                    </div>
+                                    <div className="p-5">
+                                        <Question id={permalink} />
                                     </div>
                                 </ScrollArea>
                             </div>
