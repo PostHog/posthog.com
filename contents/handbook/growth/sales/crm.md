@@ -223,7 +223,7 @@ Stages will differ depending on the chosen Opportunity Record Type. The followin
 
 **Ommitted:** Use this for new Opportunities that have have not met the criteria above
 
-Forecase categories should be re-evaluated on an ongoing basis. While it is not ideal for Opportunities to move to a lest likely category, we should do so if this reflects reality, especially as quarter end approaches.
+Forecast categories should be re-evaluated on an ongoing basis. While it is not ideal for Opportunities to move to an earlier category, we should do so if this reflects reality, especially as quarter end approaches.  In addition, we should think about what we can do differently in future to make the forecast more accurate.
 
 
 ### Renewal pipeline
