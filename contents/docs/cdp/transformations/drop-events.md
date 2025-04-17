@@ -24,12 +24,12 @@ The drop events transformation uses filters to target specific events for remova
 
 The drop events transformation uses two types of filters that work together:
 
-1. **Match events and actions filters**: These filters operate with OR logic. If an event matches ANY of these filters, it will be considered for dropping. For example, if you select both `$pageview` and `$pageleave` events, the transformation will match events of either type.
+1. **Match events filters**: These filters operate with OR logic. If an event matches ANY of these filters, it will be considered for dropping. For example, if you select both `$pageview` and `$pageleave` events, the transformation will match events of either type.
 
 ![Drop events based on event filters](https://res.cloudinary.com/dmukukwp6/image/upload/Event_Filter_OR_066f58e3bc.png)
 
 
-2. **Property filters**: These filters use AND logic and are applied after the event/action matching. ALL property conditions must be met for an event to be dropped. For example, if you set:
+2. **Property filters**: These filters use AND logic and are applied after the event matching. ALL property conditions must be met for an event to be dropped. For example, if you set:
    - `browser is set`
    - `Country Name is set`
    
@@ -52,7 +52,7 @@ The drop events transformation uses two types of filters that work together:
 
 Let's say you configure the following:
 
-**Match events and actions**:
+**Match events**:
 - `$pageview`
 - `user_signed_up`
 
