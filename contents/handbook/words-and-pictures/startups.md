@@ -64,7 +64,7 @@ Extensions aren’t something we usually do because we set the initial terms to 
 ## PostHog for Y Combinator 
 In addition to [our startups](/startups) program, we also run a similar program for teams in Y Combinator. This is roughly the same as the startups program, but differs in a few ways: 
 
-- We offer teams in YC an enhanced package of merch, including co-founders
+- We offer teams in YC an enhanced package of merch, including their co-founders
 - We offer teams in YC a variable amount of credit based on which batch they are in ($50,000 for 12 months for the current/upcoming and previous 4 batches, $25,0000 for 12 months for older batches)
 - We invite founders for these teams into [our private Founder community](https://posthog.slack.com/archives/C04J1TJ11UZ)
 - Teams in YC can use credits towards a BAA via the Teams add-on
