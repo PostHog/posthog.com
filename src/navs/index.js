@@ -347,6 +347,10 @@ export const dataPipelines = {
                     url: '/docs/cdp/transformations/customizing-transformations',
                 },
                 {
+                    name: 'Drop events',
+                    url: '/docs/cdp/transformations/drop-events',
+                },
+                {
                     name: 'Transformations',
                 },
             ],
@@ -1114,7 +1118,7 @@ export const handbookSidebar = [
         ],
     },
     {
-        name: 'Sales & CS',
+        name: 'Sales',
         url: '',
         children: [
             {
@@ -1140,10 +1144,6 @@ export const handbookSidebar = [
             {
                 name: 'Expansion & Retention',
                 url: '/handbook/growth/sales/expansion-and-retention',
-            },
-            {
-                name: 'Customer Success',
-                url: '/handbook/growth/sales/customer-success',
             },
             {
                 name: 'How we work',
@@ -1200,9 +1200,13 @@ export const handbookSidebar = [
                 ],
             },
             {
-                name: 'CS Operations',
+                name: 'Customer Success',
                 url: '',
                 children: [
+                    {
+                        name: 'Overview',
+                        url: '/handbook/growth/sales/customer-success',
+                    },
                     {
                         name: 'Health tracking',
                         url: '/handbook/growth/sales/health-tracking',
@@ -1545,6 +1549,10 @@ export const companyMenu = {
                     url: '/teams/marketing',
                 },
                 {
+                    name: 'CS & Onboarding',
+                    url: '/teams/cs-onboarding',
+                },
+                {
                     name: 'Exec',
                     url: '/teams/exec',
                 },
@@ -1853,6 +1861,10 @@ export const docsMenu = {
                             url: '/docs/libraries/n8n',
                         },
                         {
+                            name: 'Phoenix',
+                            url: '/docs/libraries/phoenix',
+                        },
+                        {
                             name: 'Remix',
                             url: '/docs/libraries/remix',
                         },
@@ -1922,8 +1934,8 @@ export const docsMenu = {
                             url: '/docs/api/decide',
                         },
                         {
-                            name: 'Query',
-                            url: '/docs/api/query',
+                            name: 'Queries',
+                            url: '/docs/api/queries',
                         },
                         {
                             name: 'More endpoints',
@@ -2025,6 +2037,10 @@ export const docsMenu = {
                             url: '/docs/api/property-definitions',
                         },
                         {
+                            name: 'Query',
+                            url: '/docs/api/query',
+                        },
+                        {
                             name: 'Roles',
                             url: '/docs/api/roles',
                         },
@@ -2112,6 +2128,25 @@ export const docsMenu = {
                     name: 'Capturing revenue',
                     url: '/docs/new-to-posthog/revenue',
                     icon: 'IconHandMoney',
+                },
+                {
+                    name: 'Switching to PostHog',
+                    icon: 'IconLeave',
+                    url: '/docs/new-to-posthog/switch-guide/switching-to-posthog',
+                    children: [
+                        {
+                            name: 'Convincing teammates',
+                            url: '/docs/new-to-posthog/switch-guide/switching-to-posthog',
+                        },
+                        {
+                            name: 'Planning your pilot',
+                            url: '/docs/new-to-posthog/switch-guide/planning-your-pilot',
+                        },
+                        {
+                            name: 'What to expect when migrating',
+                            url: '/docs/new-to-posthog/switch-guide/migration-planning',
+                        },
+                    ],
                 },
                 {
                     name: 'PostHog explained',
@@ -3174,6 +3209,16 @@ export const docsMenu = {
                     color: 'orange',
                 },
                 {
+                    name: 'New experimentation engine',
+                    url: '/docs/experiments/new-experimentation-engine',
+                    icon: 'IconTestTube',
+                    color: 'green',
+                    badge: {
+                        title: 'Beta',
+                        className: 'uppercase !bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',
+                    },
+                },
+                {
                     name: 'Data warehouse',
                     url: '/docs/experiments/data-warehouse',
                     icon: 'IconDatabase',
@@ -3221,6 +3266,57 @@ export const docsMenu = {
                     url: '/docs/experiments/sample-size-running-time',
                     icon: 'IconDashboard',
                     color: 'blue',
+                },
+            ],
+        },
+        {
+            name: 'Error tracking',
+            url: '/docs/error-tracking',
+            icon: 'IconWarning',
+            color: 'orange',
+            description: 'Track and monitor errors and exceptions in your code.',
+            children: [
+                {
+                    name: 'Error tracking',
+                },
+                {
+                    name: 'Overview',
+                    url: '/docs/error-tracking',
+                    icon: 'IconHome',
+                    color: 'seagreen',
+                },
+                {
+                    name: 'Installation',
+                    url: '/docs/error-tracking/installation',
+                    icon: 'IconBook',
+                    color: 'blue',
+                    featured: true,
+                },
+                {
+                    name: 'Stack traces',
+                    url: '/docs/error-tracking/stack-traces',
+                    icon: 'IconCode',
+                    color: 'purple',
+                },
+                {
+                    name: 'Monitor errors',
+                    url: '/docs/error-tracking/monitoring',
+                    icon: 'IconGraph',
+                    color: 'orange',
+                    featured: true,
+                },
+                {
+                    name: 'Alerts',
+                    url: '/docs/error-tracking/alerts',
+                    icon: 'IconBell',
+                    color: 'red',
+                },
+                {
+                    name: 'Troubleshooting and FAQs',
+                    url: '/docs/error-tracking/common-questions',
+                    icon: 'IconQuestion',
+                    color: 'purple',
+                    featured: true,
                 },
             ],
         },
@@ -3428,55 +3524,6 @@ export const docsMenu = {
                 },
             ],
         },
-        {
-            name: 'Error tracking',
-            url: '/docs/error-tracking',
-            icon: 'IconWarning',
-            color: 'salmon',
-            description: 'Track and monitor errors and exceptions in your code.',
-            children: [
-                {
-                    name: 'Error tracking',
-                    badge: {
-                        title: 'Beta',
-                        className: 'uppercase !bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',
-                    },
-                },
-                {
-                    name: 'Overview',
-                    url: '/docs/error-tracking',
-                    icon: 'IconHome',
-                    color: 'seagreen',
-                },
-                {
-                    name: 'Installation',
-                    url: '/docs/error-tracking/installation',
-                    icon: 'IconBook',
-                    color: 'blue',
-                    featured: true,
-                },
-                {
-                    name: 'Stack traces',
-                    url: '/docs/error-tracking/stack-traces',
-                    icon: 'IconCode',
-                    color: 'seagreen',
-                },
-                {
-                    name: 'Monitor errors',
-                    url: '/docs/error-tracking/monitoring',
-                    icon: 'IconGraph',
-                    color: 'orange',
-                    featured: true,
-                },
-                {
-                    name: 'Troubleshooting and FAQs',
-                    url: '/docs/error-tracking/common-questions',
-                    icon: 'IconQuestion',
-                    color: 'purple',
-                    featured: true,
-                },
-            ],
-        },
     ],
 }
 
@@ -3564,6 +3611,12 @@ export const productMenu = {
             icon: 'IconFlask',
             color: 'purple',
             url: '/experiments',
+        },
+        {
+            name: 'Error tracking',
+            icon: 'IconWarning',
+            color: 'orange',
+            url: '/error-tracking',
         },
         {
             name: 'Surveys',

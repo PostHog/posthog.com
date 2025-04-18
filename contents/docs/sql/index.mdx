@@ -68,7 +68,7 @@ You can use SQL insights within [notebooks](/docs/notebooks) and with external s
 
 ## Query API
 
-To query events using SQL via the [PostHog API](/docs/api/query), get [your project ID](https://us.posthog.com/settings/project-details#variables), a [personal API key](https://us.posthog.com/settings/user-api-keys) with the project query read permission and make a POST request to `/api/projects/:project_id/query` endpoint with the following JSON payload:
+To query events using SQL via the [PostHog API](/docs/api/queries), get [your project ID](https://us.posthog.com/settings/project-details#variables), a [personal API key](https://us.posthog.com/settings/user-api-keys) with the project query read permission and make a POST request to `/api/projects/:project_id/query` endpoint with the following JSON payload:
 
 ```json
 {"query": {"kind": "HogQLQuery", "query": "select * from events"}}
@@ -141,7 +141,7 @@ While in the public beta, the response format may still change.
 
 ## Data warehouse
 
-To get a list of all the sources you can query with SQL, check out the ["Data warehouse" tab](https://us.posthog.com/data-warehouse). You can click on every table listed to see the data included and query them.
+To get a list of all the sources you can query with SQL, check out the ["SQL" tab](https://us.posthog.com/sql). You can click on every table listed to see the data included and query them.
 
 <DataWarehouseScreenshot
   imageLight={WarehouseLight}

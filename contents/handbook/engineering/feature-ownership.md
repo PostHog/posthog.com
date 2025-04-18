@@ -23,7 +23,7 @@ You can also view the list [directly in GitHub](https://github.com/PostHog/posth
 | API Structure | Shared responsibility. Features owned by the relevant Small Team. | <span class="lemon-tag gh-tag">feature/api-structure</span> |
 | Async migrations | [Team CDP][Team CDP]  | <span class="lemon-tag gh-tag">feature/async-migrations</span> |
 | Authentication | [Team Infrastructure][Team Infrastructure]  | <span class="lemon-tag gh-tag">feature/authentication</span> |
-| Batch exports | [Team Batch Exports](/teams/batch-exports)  | <span class="lemon-tag gh-tag">feature/batch-exports</span> |
+| Batch exports | [Team Data Warehouse][Team Data Warehouse]  | <span class="lemon-tag gh-tag">feature/batch-exports</span> |
 | Billing | [Team Billing][Team Billing]  |  <span class="lemon-tag gh-tag">feature/billing</span> |
 | Client libraries and SDKs | Shared responsibility with features owned by the relevant Small Team, or try #feature-client-libraries. There is an engineer assigned to SDK support on a rotating schedule. Check [the (private) pager duty schedule](https://posthog.pagerduty.com/schedules#P7B7NTR)  | <span class="lemon-tag gh-tag">feature/pipeline</span> |
 | Cohorts | [Team Feature Flags][Team Feature Flags]  |  <span class="lemon-tag gh-tag">feature/cohorts</span>  |
@@ -44,6 +44,7 @@ You can also view the list [directly in GitHub](https://github.com/PostHog/posth
 | Heatmaps | [Team Replay][Team Replay] | <span class="lemon-tag gh-tag">feature/heatmaps</span> |
 | Ingestion | [Team Ingestion][Team Ingestion]  | <span class="lemon-tag gh-tag">feature/team-ingestion</span> |
 | Insights | [Team Product Analytics][Team Product Analytics]  | <span class="lemon-tag gh-tag">feature/insights</span>  |
+| SQL Insights | [Team Data Warehouse][Team Data Warehouse]  |  <span class="lemon-tag gh-tag">feature/sql-insights</span> |
 | Internal Messaging (Email, Notifications) | [Team Billing][Team Billing]  | <span class="lemon-tag gh-tag">feature/notifications</span>  |
 | Live Events | [Team ClickHouse][Team ClickHouse]  | <span class="lemon-tag gh-tag">feature/live-events</span>  |
 | Messaging | [Team Messaging][Team Messaging]  | <span class="lemon-tag gh-tag">feature/messaging</span>  |

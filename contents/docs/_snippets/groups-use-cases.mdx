@@ -15,3 +15,13 @@ Building on the examples above, here are a few things you can do with groups:
 <br/>
 
 3. For collaborative, project-based apps like Jira, you can target [feature flags](/docs/feature-flags) at a project-level. For example, let's say you've refactored your codebase. You can target the new codebase to only a few projects and measure the impact on performance and errors metrics. Once you've gathered feedback, you can expand to the rest of your projects.
+
+Here's an overview to how groups can be applied across PostHog:
+
+| Product  | Functionality | Example |
+|----------|----------|----------|
+| Product analytics | Aggregate trends, funnels, retention, and stickiness by group. | Create a funnel to track how many companies completed your onboarding flow. |
+| Feature flags | Configure release conditions based on groups. | Ensure all users of a given company receive the same feature flag variant. |
+| Experiments | Evaluate experiment results based on group aggregations. | Run an A/B test to improve activation rate for new companies. |
+| Data warehouse | Join tables or enrich queries with groups data. | Write a custom SQL query that calculates product usage based across different company sizes. |
+

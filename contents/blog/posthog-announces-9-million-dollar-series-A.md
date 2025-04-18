@@ -13,7 +13,7 @@ tags:
   - Y Combinator
 ---
 
-(Dec 17, 2020) – PostHog, the open source product analytics company, today announced $12 million in funding and major new features - including plugins, session recordings and  feature flags. The company’s Series A was led by GV (formerly Google Ventures), with participation from Y Combinator’s Continuity Fund. PostHog also brings on board Jason Warner (CTO, GitHub) as an investor, joining Solomon Hykes (Founder, Docker) and David Cramer (Founder, Sentry) who participated in the company’s seed round. 
+(Dec 17, 2020) – PostHog, the open source product analytics company, today announced $12 million in funding and major new features - including plugins, session recordings and  feature flags. The company’s Series A was led by GV (formerly Google Ventures), with participation from Y Combinator’s Continuity Fund. PostHog also brings on board Jason Warner (CTO, GitHub) as an investor, joining Solomon Hykes (Founder, Docker) and others who participated in the company’s seed round. 
 
 Since February 2020, there have been 3,000 deployments of PostHog’s software, ranging from startups to some of the world’s largest institutions. PostHog was originally conceived during Y Combinator’s Winter 2020 batch, where co-founders James Hawkins (CEO) and Tim Glaser (CTO) had been working on a different product at the time, but were frustrated at having to send user data to third parties to understand which features of their software were being used. 
 

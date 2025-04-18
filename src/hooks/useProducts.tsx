@@ -1,4 +1,12 @@
-import { IconDatabase, IconFlask, IconGraph, IconMessage, IconRewindPlay, IconToggle } from '@posthog/icons'
+import {
+    IconDatabase,
+    IconWarning,
+    IconFlask,
+    IconGraph,
+    IconMessage,
+    IconRewindPlay,
+    IconToggle,
+} from '@posthog/icons'
 import { allProductsData } from 'components/Pricing/Pricing'
 import { calculatePrice } from 'components/Pricing/PricingSlider/pricingSliderLogic'
 import { FIFTY_MILLION, MAX_PRODUCT_ANALYTICS, MILLION, TEN_MILLION } from 'components/Pricing/pricingLogic'
@@ -71,6 +79,18 @@ const initialProducts = [
             max: 1000000000,
         },
         volume: 1000000,
+    },
+    {
+        Icon: IconWarning,
+        name: 'Error tracking',
+        type: 'error_tracking',
+        color: 'orange',
+        slider: {
+            marks: [100000, 1000000, 10000000, 50000000],
+            min: 100000,
+            max: 50000000,
+        },
+        volume: 100000,
     },
 ]
 

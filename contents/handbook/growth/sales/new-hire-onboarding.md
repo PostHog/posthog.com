@@ -26,20 +26,34 @@ Sales at PostHog isn't like most other software companies! These are some of the
 - Execute your previous company's playbook. We're trying to do things differently from 90% of the industry. But please do tell us what has _and_ hasn't worked at previous places. 
 - Keep information to yourself - share openly and frequently the things you are learning, what you've got right or wrong. We don't do lone wolfing here. PostHog is a huge product, so it's ok to ask dumb questions - so long as you've tried to figure it out yourself first! 
 - Use sales BS language - if you don't know the answer that's fine! Don't promise features. Don't use vague, non-specific language. Talk to our customers like real human beings, not 'prospects'. And don't be discouraged if they say 'can we talk to someone more technical'!
+- Being slow to reply to customers - even if it's just to acknowledge their message. Make sure you have notifications turned on for _all_ messages in your customer Slack channels (not just for mentions). 
+
+## Sales & CS Tools
+
+[Mine](/community/profiles/29862) or [Simon](/community/profiles/28895) can help you out for access or invites for the following tools:
+
+- [Salesforce](https://posthog.lightning.force.com/)
+- [BuildBetter](https://app.buildbetter.app)
+- [PandaDoc](https://app.pandadoc.com/)
+- [LinkedIn Sales Navigator](https://www.linkedin.com/sales/home)
+- [Vitally](https://posthog.vitally-eu.io/) - use Google SSO
+- [Zendesk](https://posthoghelp.zendesk.com/agent/dashboard) - use Google SSO
+- [Pitch](https://app.pitch.com/) - use Google SSO
+- [QuoteHog](https://quote.posthog.net/) - use Google SSO
+- [Pylon](https://usepylon.com/) - use Slack SSO
+- [Zoom](https://zoom.com/) - use Google SSO
+- [PostHog Billing](https://billing.posthog.com)- use Google SSO
+- PostHog [US](https://us.posthog.com/) and [EU](https://eu.posthog.com/) instances - use Google SSO
+- [PostHog App + Website](https://us.posthog.com/project/2) within PostHog US instance - use Google SSO
+- Metabase [US](https://metabase.prod-us.posthog.dev/) and [EU](https://metabase.prod-eu.posthog.dev/) - use Google SSO
+- Any additional [tools you may find useful](#tools-that-you-may-find-useful)!
 
 ## Technical Account Executive ramp
 
 ### Day 1
 
 - Meet with [Simon](/community/profiles/28895) who will run through this plan and answer any questions you may have.  In addition, come equipped to talk about any nuances around how you prefer to work (e.g. schedules, family time etc.).
-- [Mine](/community/profiles/29862) can help you out:
-  - [Salesforce](https://posthog.lightning.force.com/)
-  - [Vitally](https://posthog.vitally-eu.io/) - use Google SSO
-  - [Zendesk](https://posthoghelp.zendesk.com/agent/dashboard) - use Google SSO
-  - PostHog [US](https://us.posthog.com/) and [EU](https://eu.posthog.com/) instances (and our production project on the US)
-  - [Jimminy](https://app.jiminny.eu/dashboard)
-  - [PandaDoc](https://app.pandadoc.com/)
-  - Metabase [US](https://metabase.prod-us.posthog.dev/) and [EU](https://metabase.prod-eu.posthog.dev/) - use Google SSO
+- Setup relevant [Sales & CS Tools](#sales--cs-tools)
 - If you start on a Monday, join your first PostHog All Hands (at 4.30pm UK/8.30am PT) and be prepared to have a strong opinion on whether pineapple belongs on pizza.
 - If you start on a Monday, join your first Sales and CS standup.
   - We fill in a GitHub issue every week before this meeting so we are prepared for the discussion topics.  Simon will add your GitHub handle to the template.
@@ -54,7 +68,7 @@ Sales at PostHog isn't like most other software companies! These are some of the
 
 ### Week 2
 
-- During your first week, Simon will figure out your initial book of business (around 12 accounts).  We will review these at the start of your second week, and make sure you understand how your targets are set. 
+- During your first week, Simon will figure out your initial book of business (10 accounts).  We will review these at the start of your second week, and make sure you understand how your targets are set. 
 - Shadow more live calls and listen to more [Jiminny](https://app.jiminny.eu/dashboard) recordings. There is [a Jiminny playlist with sub-folders containing Sales calls and PostHog knowledge calls](https://app.jiminny.eu/playlists#playlist-355cdc2a-1326-4ea6-97e3-e7749800fc8a), add to it as you listen! 
 - Towards the end of the week, schedule a demo and feedback session with Simon.  We might need to do a couple of iterations over the next few weeks as you take on board feedback, don't worry if that's the case!
 - Prioritize your current book of customers, and start reaching out!
@@ -99,14 +113,7 @@ By the end of month 4:
 ### Day 1
 
 - Meet with [Simon](/community/profiles/28895) who will run through this plan and answer any questions you may have.  In addition, come equipped to talk about any nuances around how you prefer to work (e.g. schedules, family time etc.).
-- [Mine](/community/profiles/29862) can help you out:
-  - [Salesforce](https://posthog.lightning.force.com/)
-  - [Vitally](https://posthog.vitally-eu.io/) - use Google SSO
-  - [Zendesk](https://posthoghelp.zendesk.com/agent/dashboard) - use Google SSO
-  - PostHog [US](https://us.posthog.com/) and [EU](https://eu.posthog.com/) instances (and our production project on the US)
-  - [Jimminy](https://app.jiminny.eu/dashboard)
-  - [PandaDoc](https://app.pandadoc.com/)
-  - Metabase [US](https://metabase.prod-us.posthog.dev/) and [EU](https://metabase.prod-eu.posthog.dev/) - use Google SSO
+- Setup relevant [Sales & CS Tools](#sales--cs-tools)
 - If you start on a Monday, join your first PostHog All Hands (at 4.30pm UK/8.30am PT) and be prepared to have a strong opinion on whether pineapple belongs on pizza.
 - If you start on a Monday, join your first Sales and CS standup.
   - We fill in a GitHub issue every week before this meeting so we are prepared for the discussion topics.  Simon will add your GitHub handle to the template.
@@ -164,14 +171,7 @@ By the end of month 3:
 ### Day 1
 
 - Meet with [Simon](/community/profiles/28895) who will run through this plan and answer any questions you may have.  In addition, come equipped to talk about any nuances around how you prefer to work (e.g. schedules, family time etc.).
-- [Mine](/community/profiles/29862) can help you out:
-  - [Salesforce](https://posthog.lightning.force.com/)
-  - [Vitally](https://posthog.vitally-eu.io/) - use Google SSO
-  - [Zendesk](https://posthoghelp.zendesk.com/agent/dashboard) - use Google SSO
-  - PostHog [US](https://us.posthog.com/) and [EU](https://eu.posthog.com/) instances (and our production project on the US)
-  - [Jimminy](https://app.jiminny.eu/dashboard)
-  - [PandaDoc](https://app.pandadoc.com/)
-  - Metabase [US](https://metabase.prod-us.posthog.dev/) and [EU](https://metabase.prod-eu.posthog.dev/) - use Google SSO
+- Setup relevant [Sales & CS Tools](#sales--cs-tools)
 - If you start on a Monday, join your first PostHog All Hands (at 4.30pm UK/8.30am PT) and be prepared to have a strong opinion on whether pineapple belongs on pizza.
 - If you start on a Monday, join your first Sales and CS standup.
   - We fill in a GitHub issue every week before this meeting so we are prepared for the discussion topics.  Simon will add your GitHub handle to the template.
@@ -187,7 +187,7 @@ By the end of month 3:
 
 ### Week 2
 
-- Shadow more live calls and listen to more [Jiminny](https://app.jiminny.eu/dashboard) recordings. There is [a Jiminny playlist with sub-folders containing Sales calls and PostHog knowledge calls](https://app.jiminny.eu/playlists#playlist-355cdc2a-1326-4ea6-97e3-e7749800fc8a), add to it as you listen! 
+- Shadow more live calls and listen to more [Jiminny](https://app.jiminny.eu/dashboard) recordings. There is [a Jiminny playlist with sub-folders containing Sales calls and PostHog knowledge calls](https://app.jiminny.eu/playlists#playlist-355cdc2a-1326-4ea6-97e3-e7749800fc8a), and an [Onboarding folder](https://app.buildbetter.app/folders/14521) in BuildBetter. Add to it as you listen! 
 - Towards the end of the week, schedule a demo and feedback session with Simon.  We might need to do a couple of iterations over the next few weeks as you take on board feedback, don't worry if that's the case!
 - Get comfortable with the PostHog [Docs](/docs) around our main products. 
 - We'll start routing new leads to you at the end of week 1.  Start to review these and reach out, using a shared booking link with someone else from your region so they can back you up in the first few weeks. This is a great option to practise and fail.
@@ -233,10 +233,14 @@ In addition to following the guidance in the [spending money](/handbook/people/s
 ## Tools that you may find useful
 
 - [Cal.com](https://app.cal.com/) for shared meeting booking links
-- [Loom](https://www.loom.com/) for short videos (Simon can invite you to the company account)
-- [LinkedIn Sales Navigator](https://www.linkedin.com/sales/home) for account intelligence
 - [Clay](https://www.clay.com/) for account and contact enrichment
+- [Granola](https://www.granola.ai/) (app) for AI note taking in meetings
+- [In Your Face](https://www.inyourface.app/) (app) don't miss meeting notifications
+- [Loom](https://www.loom.com/) for short videos (Simon can invite you to the company account)
 - [Scratchpad](https://www.scratchpad.com/) for AI agents and a friendlier SFDC UI (sign up as part of your software budget)
+- [spark](https://sparkmailapp.com/) (app) AI powered inbox
+- [Superhuman](https://superhuman.com/) (app) AI powered inbox
+- [YubiKey Manager](https://www.yubico.com/support/download/yubikey-manager/) (app) for configuring provided YubiKey
 
 ## New hire frequently asked questions
 

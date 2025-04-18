@@ -16,7 +16,7 @@ end
 
 ```elixir
 {:ok, feature_flag} = Posthog.feature_flag("flag-key", "distinct_id_of_your_user")
-#  %Posthog.FeatureFlag{ name: "flag-key", value: %{"variant-1" => "value-1", "variant-2" => "value-2"}, enabled: "variant-2" }
+#  %Posthog.FeatureFlag{ name: "flag-key", payload: %{"variant-1" => "value-1", "variant-2" => "value-2"}, enabled: "variant-2" }
 
 if feature_flag.enabled == 'variant-2' # replace 'variant-2' with the key of your variant
     # Do something differently for this user

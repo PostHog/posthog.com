@@ -5,7 +5,7 @@ author:
   - lior-neu-ner
 showTitle: true
 sidebar: Docs
-featuredVideo: https://www.youtube-nocookie.com/embed/KSzLc80FIx4 
+featuredVideo: https://www.youtube-nocookie.com/embed/KSzLc80FIx4
 featuredImage: >-
   https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/tutorials/banners/tutorial-12.png
 tags:
@@ -49,7 +49,7 @@ Run `ng serve` and navigate to `http://localhost:4200` to see your app in action
 
 ## 2. Add PostHog
 
-We use PostHog to create and control our survey as well as monitor results. If you don't have a PostHog instance, you can [sign up for free here](https://us.posthog.com/signup). 
+We use PostHog to create and control our survey as well as monitor results. If you don't have a PostHog instance, you can [sign up for free here](https://us.posthog.com/signup).
 
 To start, install the [JavaScript web SDK](/docs/libraries/js):
 
@@ -57,7 +57,7 @@ To start, install the [JavaScript web SDK](/docs/libraries/js):
 npm i posthog-js
 ```
 
-In `src/main.ts`, initialize PostHog using your project API key and instance address. You can get both in your [project settings](https://us.posthog.com/project/settings).  
+In `src/main.ts`, initialize PostHog using your project API key and instance address. You can get both in your [project settings](https://us.posthog.com/project/settings).
 
 ```ts file=main.ts
 import { bootstrapApplication } from '@angular/platform-browser';
@@ -79,9 +79,9 @@ bootstrapApplication(AppComponent, appConfig)
 Once you’ve done this, reload your app. You should see events appearing in the [PostHog events explorer](https://us.posthog.com/events).
 
 <ProductScreenshot
-  imageLight={EventsLight} 
-  imageDark={EventsDark} 
-  alt="Events in PostHog" 
+  imageLight={EventsLight}
+  imageDark={EventsDark}
+  alt="Events in PostHog"
   classes="rounded"
 />
 
@@ -97,13 +97,13 @@ This tutorial will cover how to implement both options:
 ### Option 1: Use PostHog's prebuilt survey UI
 
 This is the simplest option. PostHog has a variety of [survey templates](/templates?filter=type&value=survey) to choose from, handles all the display logic, and captures responses for you. You can also customize the questions, branding, and display conditions as needed – see our [survey docs](/docs/surveys/creating-surveys) for more details on how to do so.
- 
-To create a survey with a prebuilt UI, go to the [surveys tab](https://us.posthog.com/surveys) in PostHog and click "New survey". 
+
+To create a survey with a prebuilt UI, go to the [surveys tab](https://us.posthog.com/surveys) in PostHog and click "New survey".
 
 <ProductScreenshot
-  imageLight={ImgSurveyTemplatesLight} 
-  imageDark={ImgSurveyTemplatesDark} 
-  alt="PostHog survey templates" 
+  imageLight={ImgSurveyTemplatesLight}
+  imageDark={ImgSurveyTemplatesDark}
+  alt="PostHog survey templates"
   classes="rounded"
 />
 
@@ -167,7 +167,7 @@ import { CommonModule } from '@angular/common';
 @Component({
   selector: 'app-custom-survey',
   standalone: true,
-  imports: [CommonModule], 
+  imports: [CommonModule],
   templateUrl: './custom-survey.component.html',
   styleUrls: ['./custom-survey.component.css']
 })
@@ -239,7 +239,7 @@ import { CustomSurveyComponent } from './components/custom-survey/custom-survey.
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, CustomSurveyComponent, CommonModule], 
+  imports: [RouterOutlet, CustomSurveyComponent, CommonModule],
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
@@ -389,7 +389,7 @@ export class AppComponent {
 
 #### 4. Capture interactions from it.
 
-The final step in setting up our survey is capturing interactions. This enables us to analyze the results in PostHog. 
+The final step in setting up our survey is capturing interactions. This enables us to analyze the results in PostHog.
 
 There are 3 events to capture:
 
@@ -429,7 +429,13 @@ export class AppComponent {
     localStorage.setItem(`hasInteractedWithSurvey_${this.surveyID}`, 'true');
     posthog.capture("survey sent", {
       $survey_id: this.surveyID, // required
-      $survey_response: `${value}` // required. Convert numbers to string
+      $survey_response_a3071551-d599-4eeb-9ffe-69e93dc647b6: `${value}` // required. Convert numbers to string
+      $survey_questions: [
+        {
+          id: "a3071551-d599-4eeb-9ffe-69e93dc647b6",
+          question: "How likely are you to recommend us to a friend?",
+        }
+      ] // required for `getSurveyResponse` to work as expected
     })
   }
 }
@@ -447,7 +453,7 @@ import { CustomSurveyComponent } from './components/custom-survey/custom-survey.
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, CustomSurveyComponent, CommonModule], 
+  imports: [RouterOutlet, CustomSurveyComponent, CommonModule],
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
@@ -501,7 +507,13 @@ export class AppComponent {
     localStorage.setItem(`hasInteractedWithSurvey_${this.surveyID}`, 'true');
     posthog.capture("survey sent", {
       $survey_id: this.surveyID, // required
-      $survey_response: `${value}` // required. Convert numbers to string
+      $survey_response_a3071551-d599-4eeb-9ffe-69e93dc647b6: `${value}` // required. Convert numbers to string
+      $survey_questions: [
+        {
+          id: "a3071551-d599-4eeb-9ffe-69e93dc647b6",
+          question: "How likely are you to recommend us to a friend?",
+        }
+      ] // required for `getSurveyResponse` to work as expected
     })
   }
 }
@@ -520,9 +532,9 @@ After interacting with your survey, you can view results by selecting the survey
 If you capture identified events, you can also filter these results based on [person properties](/docs/product-analytics/person-properties), [cohorts](/docs/data/cohorts), [feature flags](/docs/feature-flags/creating-feature-flags) and more.
 
 <ProductScreenshot
-  imageLight={ImgSurveyResultsLight} 
-  imageDark={ImgSurveyResultsDark} 
-  alt="Survey results" 
+  imageLight={ImgSurveyResultsLight}
+  imageDark={ImgSurveyResultsDark}
+  alt="Survey results"
   classes="rounded"
 />
 
