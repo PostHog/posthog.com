@@ -14,6 +14,7 @@ import { motion } from 'framer-motion'
 import { StaticImage } from 'gatsby-plugin-image'
 import Board from './Board'
 import { useUser } from 'hooks/useUser'
+import IntegrationPrompt from '../IntegrationPrompt'
 
 export const FeatureStrip = ({ className = '' }) => {
     return (
@@ -311,6 +312,9 @@ export default function Hero() {
                                 <EnterpriseSignupCTA />
                             </div>
                         )}
+                    </div>
+                    <div className="max-w-screen-lg mx-auto px-5 mt-8">
+                        <IntegrationPrompt />
                     </div>
                     <Board />
                 </div>
