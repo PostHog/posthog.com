@@ -34,6 +34,8 @@ type QuestionProps = {
     buttonText?: string
     showActions?: boolean
     askMax?: boolean
+    onQuestionReady?: (question: StrapiRecord<QuestionData>) => void
+    subscribeButton?: boolean
 }
 
 export const CurrentQuestionContext = createContext<any>({})
@@ -431,6 +433,12 @@ export const Question = (props: QuestionProps) => {
         mutate,
     } = useQuestion(id, { data: question })
 
+    useEffect(() => {
+        if (questionData) {
+            props.onQuestionReady?.(questionData)
+        }
+    }, [questionData])
+
     if (isLoading) {
         return <QuestionSkeleton />
     }
@@ -530,7 +538,7 @@ export const Question = (props: QuestionProps) => {
                                     />
                                 </>
                             )}
-                            {!archived && (
+                            {!archived && (props.subscribeButton ?? true) && (
                                 <SubscribeButton contentType="question" id={questionData?.id} show={showActions} />
                             )}
                         </div>

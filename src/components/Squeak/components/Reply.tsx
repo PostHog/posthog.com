@@ -477,7 +477,7 @@ export default function Reply({ reply, badgeText }: ReplyProps) {
                                 >
                                     <div
                                         className={`inline-flex space-x-1 ${
-                                            isModerator ? `bg-light dark:bg-dark px-1 mr-4 -mt-5` : ''
+                                            isModerator ? `bg-primary px-1 mr-4 -mt-5` : ''
                                         }`}
                                     >
                                         <VoteButton

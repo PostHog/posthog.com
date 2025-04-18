@@ -14,6 +14,8 @@ import OSButton from 'components/OSButton'
 import { IconCheck, IconCornerDownRight } from '@posthog/icons'
 import Switch from 'components/RadixUI/Switch'
 import { useToast } from '../../context/Toast'
+import { QuestionData, StrapiRecord } from 'lib/strapi'
+import { useUser } from 'hooks/useUser'
 
 dayjs.extend(relativeTime)
 
@@ -43,6 +45,7 @@ export default function Inbox(props) {
     const [topicID, setTopicID] = useState(initialTopicID)
     const { pathname } = useLocation()
     const { addToast } = useToast()
+    const { user, setSubscription, isSubscribed } = useUser()
     const { questions, isLoading, fetchMore, hasMore, refresh } = useQuestions({
         limit: 20,
         sortBy: 'activity',
@@ -60,12 +63,19 @@ export default function Inbox(props) {
     })
     const [topHeight, setTopHeight] = useState(33)
     const [notificationsEnabled, setNotificationsEnabled] = useState(false)
+    const [question, setQuestion] = useState<StrapiRecord<QuestionData>>()
 
     useEffect(() => {
         if (initialTopicID && initialTopicID !== topicID) {
             setTopicID(initialTopicID)
         }
     }, [initialTopicID])
+
+    useEffect(() => {
+        if (user && question?.id) {
+            isSubscribed('question', question.id).then((subscribed) => setNotificationsEnabled(subscribed))
+        }
+    }, [question, user])
 
     return (
         <div className="@container w-full h-full flex flex-col">
@@ -144,26 +154,44 @@ export default function Inbox(props) {
                                             Mark as resolved
                                         </OSButton>
 
-                                        <Switch
-                                            className="ml-auto"
-                                            checked={notificationsEnabled}
-                                            onChange={(checked) => {
-                                                setNotificationsEnabled(checked)
-                                                addToast({
-                                                    description: checked
-                                                        ? "You'll be notified of replies by email."
-                                                        : "You won't receive notifications for this thread.",
-                                                    title: checked
-                                                        ? 'Thread notifications enabled'
-                                                        : 'Thread notifications disabled',
-                                                    onUndo: () => setNotificationsEnabled(!checked),
-                                                })
-                                            }}
-                                            label="Thread notifications"
-                                        />
+                                        {question?.id && user && (
+                                            <Switch
+                                                className="ml-auto"
+                                                checked={notificationsEnabled}
+                                                onChange={(checked) => {
+                                                    setNotificationsEnabled(checked)
+                                                    setSubscription({
+                                                        contentType: 'question',
+                                                        id: question.id,
+                                                        subscribe: checked,
+                                                    })
+                                                    addToast({
+                                                        description: checked
+                                                            ? "You'll be notified of replies by email."
+                                                            : "You won't receive notifications for this thread.",
+                                                        title: checked
+                                                            ? 'Thread notifications enabled'
+                                                            : 'Thread notifications disabled',
+                                                        onUndo: () => {
+                                                            setNotificationsEnabled(!checked)
+                                                            setSubscription({
+                                                                contentType: 'question',
+                                                                id: question.id,
+                                                                subscribe: !checked,
+                                                            })
+                                                        },
+                                                    })
+                                                }}
+                                                label="Thread notifications"
+                                            />
+                                        )}
                                     </div>
                                     <div className="p-5">
-                                        <Question id={permalink} />
+                                        <Question
+                                            id={permalink}
+                                            onQuestionReady={(question) => setQuestion(question)}
+                                            subscribeButton={false}
+                                        />
                                     </div>
                                 </ScrollArea>
                             </div>
