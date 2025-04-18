@@ -126,7 +126,7 @@ Next, set up:
 
 With both of these set up, we simply call the `openai.chat.completions.create` method with the input and model then return the response.
 
-```js file=app/api/generate.js
+```js file=app/api/generate/route.js
 import { NextResponse } from 'next/server';
 import { OpenAI } from '@posthog/ai'
 import { PostHog } from 'posthog-node'
