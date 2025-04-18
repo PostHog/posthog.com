@@ -5,7 +5,7 @@ export default function IntegrationPrompt() {
     const [region, setRegion] = useState('us')
 
     return (
-        <>
+        <div className="hidden md:block">
             <div className="rounded-lg border border-light dark:border-dark px-6 py-4 mt-16 mb-2 w-[70%] mx-auto bg-white dark:bg-accent-dark">
                 <div className="flex items-center gap-2 mb-4">
                     <span className="bg-orange/10 !text-orange px-2 py-1 rounded text-sm font-semibold flex-shrink-0">
@@ -51,6 +51,6 @@ npx --yes @posthog/wizard@latest --default --region ${region}`,
                     give me the {region === 'us' ? 'eu' : 'us'} prompt!
                 </button>
             </div>
-        </>
+        </div>
     )
 }
