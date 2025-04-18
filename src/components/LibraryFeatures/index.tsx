@@ -30,6 +30,7 @@ const features = [
         url: 'https://posthog.com/docs/ai-engineering/observability',
     },
     { key: 'errorTracking', name: 'Error tracking', url: 'https://posthog.com/docs/error-tracking' },
+    { key: 'messaging', name: 'Messaging', url: 'https://posthog.com/docs/messaging' },
 ] as const
 
 export type LibraryFeaturesProps = {
