@@ -88,7 +88,7 @@ You want to help them do this as fast as possible. Here’s what we’ve found m
 
 - **Use bullet points and numbered lists** as these help readers know where they are and create a sense of progress.
 
-- **Hide less important information** behind <details> tags and let readers expand it if they want. Our metrics show these create higher engagement, especially for optional points that we tag as “recommended”.
+- **Hide less important information** behind `<details>` tags and let readers expand it if they want. Our metrics show these create higher engagement, especially for optional points that we tag as “recommended”.
 
 - **Add functional code samples**, annotated screenshots, graphics, and even memes. Visuals help keep readers’ attention and provide an alternative way to explain a concept.
 
