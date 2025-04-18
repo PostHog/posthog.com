@@ -1405,6 +1405,14 @@
         {
             "source": "/startups-sse",
             "destination": "/startups"
+        },
+        {
+            "source": "/startups/apply",
+            "destination": "https://app.posthog.com/startups"
+        },
+        {
+            "source": "/yc-onboarding",
+            "destination": "https://app.posthog.com/startups/yc"
         }
     ]
 }
