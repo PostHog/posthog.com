@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { motion } from 'framer-motion'
 import { useQuestions } from 'hooks/useQuestions'
 import HeaderBar from 'components/OSChrome/HeaderBar'
@@ -61,9 +61,10 @@ export default function Inbox(props) {
             },
         },
     })
-    const [topHeight, setTopHeight] = useState(33)
+    const [bottomHeight, setBottomHeight] = useState(300)
     const [notificationsEnabled, setNotificationsEnabled] = useState(false)
     const [question, setQuestion] = useState<StrapiRecord<QuestionData>>()
+    const containerRef = useRef<HTMLDivElement>(null)
 
     useEffect(() => {
         if (initialTopicID && initialTopicID !== topicID) {
@@ -85,8 +86,8 @@ export default function Inbox(props) {
                     <Menu />
                 </aside>
                 <main data-scheme="primary" className="flex-1 bg-primary">
-                    <div className="flex flex-col h-full">
-                        <div style={{ height: permalink ? `${topHeight}%` : '100%' }} className="min-h-0">
+                    <div ref={containerRef} className="flex flex-col h-full">
+                        <div className="flex-1 min-h-0">
                             <ScrollArea className="h-full">
                                 <div className="flex items-center px-3.5 py-2 border-b border-primary font-medium bg-secondary text-sm bg-accent-2 sticky top-0">
                                     <div className="flex-1">Subject</div>
@@ -124,9 +125,8 @@ export default function Inbox(props) {
                                 </div>
                             </ScrollArea>
                         </div>
-
                         {permalink && (
-                            <div style={{ height: `${100 - topHeight}%` }} className="min-h-0 relative">
+                            <div className="flex-none relative min-h-0" style={{ height: bottomHeight }}>
                                 <motion.div
                                     data-scheme="tertiary"
                                     className="h-1.5 cursor-ns-resize top-0 left-0 !transform-none absolute z-20 w-full hover:bg-accent active:bg-accent"
@@ -134,11 +134,18 @@ export default function Inbox(props) {
                                     dragMomentum={false}
                                     dragConstraints={{ top: 0, bottom: 0 }}
                                     onDrag={(_event, info) => {
-                                        const newTopHeight = Math.min(
-                                            Math.max(topHeight + (info.delta.y / window.innerHeight) * 100, 20),
-                                            80
+                                        if (!containerRef.current) return
+                                        const containerHeight = containerRef.current.getBoundingClientRect().height
+                                        const newBottomHeight = Math.min(
+                                            Math.max(bottomHeight - info.delta.y, 57),
+                                            containerHeight
                                         )
-                                        setTopHeight(newTopHeight)
+                                        setBottomHeight(newBottomHeight)
+                                    }}
+                                    onDoubleClick={() => {
+                                        if (!containerRef.current) return
+                                        const containerHeight = containerRef.current.getBoundingClientRect().height
+                                        setBottomHeight(bottomHeight <= 57 ? containerHeight : 57)
                                     }}
                                 />
                                 <ScrollArea className="h-full">
