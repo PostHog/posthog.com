@@ -1,0 +1,73 @@
+---
+date: 2025-04-23
+title: "Join the LLM coding agent revolution for $0"
+author:
+  - danilo-campos
+category: General
+tags:
+    - Product updates
+---
+
+AI agents are taking over the workflows of software development. They can burn through boilerplate and tedium fast, getting working prototypes up in minutes.
+
+The first problem with LLM codegen: there are so many stupid ways to build software.
+
+When an agent sets out to write code, it has many viable paths to both solve the problem and introduce mistakes. Mistakes are especially common for newer, upstart projects.
+
+Scale is one way to compensate: fill the training set with enough statistical weight that favors correct implementations, you’re less likely to see the boneheaded stuff.
+
+But that’s a lot of effort, plus significant lag time, and you want correct agent behavior *today*.
+
+The second problem with LLM codegen: it's very expensive. So what if you could join this revolution in software development without constructing an elaborate donation machine to Anthropic's coffers?
+
+You can! Build an **envoy**: software you control that developers can inject into their agent sessions with just a prompt.
+
+See, **these agents can run terminal commands**, so any CLI-based program can adopt this pattern.
+
+With this deterministic surface introduced to the agent workflow, you can reliably and predictably:
+
+- Enforce progression conditions, not moving to another step until requirements are satisfied  
+- Enforce correct versioning
+- Use API interactions to populate account secrets and other details, while enforcing good version control hygiene  
+- Introduce specific fragments of code verbatim
+- Inject up-to-date documentation and agent rules into the project to course-correct future agent sessions  
+- Do your own LLM-based transformations on code, using prompts, context and model versions that are known to be reliable for your goals
+- Enjoy same-day updates to agent workflows, just like the rest of your software
+
+Think of it like a sheepdog that keeps the agent session within a territory that is productive rather than stupid, adhering to best practices **you** as a developer can describe in code.
+
+## Example code: the PostHog wizard
+
+The PostHog wizard is an interactive command line tool that automates the basics of a PostHog integration. It grabs an API key from a user’s account and uses it to populate a .env file.
+
+From here it uses consistent prompting to read through the user’s code and integrate PostHog correctly.
+
+It turns out this is handy behavior: LLMs were hallucinating PostHog API keys and agents were using out-of-date code to perform integrations.
+
+To make the wizard into an effective **envoy**, all we had to do was add an argument that suppressed the interactive prompts, following the default path all the way through the workflow. The agent just runs the command in its terminal.
+
+From here, anyone using an AI agent can copy and paste one prompt and get a working integration in about 90 seconds. It’s the best of both worlds:
+
+- No hallucinations of API keys  
+- No out of date patterns  
+- Full vibe coding cruise control
+
+We can ship as many updates to the wizard as fast as we like, and the improved behavior will be available to developers who use agents instantly, with no other configuration.
+
+Try it yourself. Paste this into the agent chat for Cursor, Bolt, and others:
+
+```Agent
+Let's integrate PostHog. Run the following command; don't write any code until it completes:
+
+npx --yes @posthog/wizard@latest --default --region us
+```
+
+We’ve got support for Next.js, React, Svelte, and React Native, with others coming soon.
+
+## Steal this code
+
+Our [Joshua Snyder](https://posthog.com/community/profiles/32497) has been working hard to increase the surface of the wizard and make it more reliable. The code is tidy, and it even shows you how to integrate PostHog into a node-based CLI tool.
+
+We get reporting on completed wizard runs alongside all the rest of our data. It's awesome.
+
+[Fork the wizard] and use it as your own starting place for an envoy. You just don't have to spend a lot of money to get into the coding agent mix. 
