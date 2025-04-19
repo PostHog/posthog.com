@@ -112,6 +112,14 @@ export default function Inbox(props) {
                                                 width="full"
                                                 key={question.id}
                                                 className={`!text-inherit ${active ? 'bg-accent' : ''}`}
+                                                onClick={() => {
+                                                    if (!containerRef.current) return
+                                                    if (bottomHeight <= 57) {
+                                                        setBottomHeight(
+                                                            containerRef.current.getBoundingClientRect().height * 0.8
+                                                        )
+                                                    }
+                                                }}
                                             >
                                                 <div className="flex-1">{subject}</div>
                                                 <div className="w-24 text-center">{numReplies}</div>
