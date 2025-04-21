@@ -33,7 +33,7 @@ We want to make this feel as personalized and smooth as possible - there is an o
 - James H messages every single one of them individually so that a) they have his number, and b) to tell them about the YC deal on Bookface
 - YC companies check out the [deal on Bookface](https://bookface.ycombinator.com/deals/687)
 - Founders first need to [sign up](https://app.posthog.com/) for PostHog Cloud
-- After logging in, they can submit their [application form](http://app.posthog.com/startups/yc)
+- After logging in, they can submit their [application form](https://app.posthog.com/startups/yc)
   - We check if they have added their billing details (needed to ensure they have a Stripe account so we can add credits there) and prompt them to do so if needed
   - We ask for their YC batch (this determines their deal variant), a screenshot showing them on Bookface and a number of merch packs for them and their co-founders
 - Valid applications are added to the [Zapier table](https://tables.zapier.com/app/tables/t/01JRCYMWYAJNP3K0B6GTYKKBQB) and approved automatically, which means that founders get their credits almost instantly
