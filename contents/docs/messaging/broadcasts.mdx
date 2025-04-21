@@ -1,0 +1,30 @@
+---
+title: Broadcasts
+availability:
+    free: full
+    selfServe: full
+    enterprise: full
+---
+
+Broadcasts in PostHog allow you to send one-time messages to a specific audience. Unlike campaigns which can be triggered by events or scheduled, broadcasts are sent immediately to all users who match your targeting criteria at the time of sending.
+
+## When to use broadcasts
+
+Broadcasts are ideal for:
+
+- Newsletters
+- Product or event invitations
+- Feature release announcements
+- Maintenance notifications
+
+## Getting started
+
+To create an email broadcast:
+
+1. Go to **Messaging** > **Broadcasts** in your PostHog instance
+2. Click **New broadcast**
+3. Define your recipient audience using the Filters section
+4. Configure your email content or select an existing [template](/docs/messaging/message-templates)
+5. Use our [Liquid templating](/docs/messaging/liquid-templating) to personalize your emails with person properties
+6. (Optional) Use the "Test broadcast" section to send the broadcasts to yourself and validate the content
+7. Save your broadcast and trigger delivery using the "Send broadcast" section

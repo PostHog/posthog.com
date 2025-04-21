@@ -1,0 +1,31 @@
+---
+title: Campaigns
+availability:
+    free: full
+    selfServe: full
+    enterprise: full
+---
+
+PostHog's transactional email feature enables you to send personalized, event-triggered emails to your users directly from your application.
+
+## Overview
+
+Campaigns are message automations enabling you to send emails to individual users in response to specific actions or events. Unlike broadcasts or marketing emails, they're functional in nature and may include:
+
+- New user welcome campaigns
+- Account verification emails
+- Password resets
+- Receipt or invoice emails
+- Abandonded cart reminder
+
+## Getting started
+
+To create an email campaign:
+
+1. Go to **Messaging** > **Broadcasts** in your PostHog instance
+2. Click **New campaign**
+3. Define your event trigger and recipient audience using the Filters section
+4. Configure your email content or select an existing [template](/docs/messaging/message-templates)
+5. Use our [Liquid templating](/docs/messaging/liquid-templating) to personalize your emails with event and person properties
+6. (Optional) Use the "Testing" section to fire an example event to validate email content and delivery
+6. Save and enable your campaign to begin message delivery

@@ -53,4 +53,10 @@ export const slideButtons = [
         colorDark: '[#C170E8]',
         placeholderIcon: 'IconAI',
     },
+    {
+        title: 'Messaging',
+        color: 'orange',
+        colorDark: 'darkorange',
+        placeholderIcon: 'IconMessage',
+    },
 ]

@@ -1,0 +1,37 @@
+---
+title: Liquid templating
+availability:
+    free: full
+    selfServe: full
+    enterprise: full
+---
+
+PostHog's messaging features support [Liquid templating](https://shopify.github.io/liquid/) to personalize your messages with dynamic content.
+
+## Variables
+
+PostHog emails can include variables that get replaced with actual values when the message is sent. Common variables include:
+
+- Person properties (e.g., `{{ person.properties.email }}`)
+- Event properties (e.g., `{{ event.properties.message }}`)
+
+You can use curly braced variables in a Message's "To", "From", "Subject", and inside email content.
+
+## Supported features
+
+Currently, PostHog only supports basic variable substitution with Liquid. More advanced Liquid features like conditional rendering (`{% if %}`) or loops (`{% for %}`) are not yet supported.
+
+## Available variables
+
+You can use the following variables in your templates:
+
+- Person data
+  - ID: `person.id`
+  - Properties: `person.properties.firstName`
+
+- Event data
+  - Event name: `event.event`
+  - Properties: `event.properties.cartCheckoutAmount`
+
+- Group data
+  - Properties: `groups.yourGroupType.properties.subscriptionTier`

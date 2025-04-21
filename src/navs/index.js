@@ -3524,6 +3524,58 @@ export const docsMenu = {
                 },
             ],
         },
+        {
+            name: 'Messaging',
+            url: '/docs/messaging',
+            color: 'orange',
+            colorDark: 'darkorange',
+            icon: 'IconMegaphone',
+            description:
+                'Configure broadcasts, transactional emails and automated messaging workflows all within PostHog',
+            badge: {
+                title: 'Alpha',
+                className: 'uppercase !bg-purple/10 !text-purple !dark:text-white !dark:bg-purple/50',
+            },
+            children: [
+                {
+                    name: 'Messaging',
+                    badge: {
+                        title: 'Alpha',
+                        className: 'uppercase !bg-purple/10 !text-purple !dark:text-white !dark:bg-purple/50',
+                    },
+                },
+                {
+                    name: 'Overview',
+                    url: '/docs/messaging',
+                    icon: 'IconMegaphone',
+                    color: 'orange',
+                },
+                {
+                    name: 'Broadcasts',
+                    url: '/docs/messaging/broadcasts',
+                    icon: 'IconLetter',
+                    color: 'salmon',
+                },
+                {
+                    name: 'Campaigns',
+                    url: '/docs/messaging/campaigns',
+                    icon: 'IconDecisionTree',
+                    color: 'green',
+                },
+                {
+                    name: 'Message templates',
+                    url: '/docs/messaging/message-templates',
+                    icon: 'IconCopy',
+                    color: 'purple',
+                },
+                {
+                    name: 'Liquid templating',
+                    url: '/docs/messaging/liquid-templating',
+                    icon: 'IconBrackets',
+                    color: 'blue',
+                },
+            ],
+        },
     ],
 }
 
