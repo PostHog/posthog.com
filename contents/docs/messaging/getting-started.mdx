@@ -1,0 +1,24 @@
+---
+title: Getting started with Messaging
+availability:
+    free: full
+    selfServe: full
+    enterprise: full
+---
+
+PostHog Messaging allows you to send emails to your users directly from PostHog. This guide will help you set up your email domain and start sending messages.
+
+## Setting up your email domain
+
+Before you can send emails through PostHog, you need to set up and verify your sending domain. This helps ensure deliverability and prevents your emails from being marked as spam.
+
+1. Go to **Project Settings** > **Messaging** in your PostHog instance
+2. Click on **Add domain**
+3. Enter the domain you want to use for sending emails (e.g., `mail.yourdomain.com` or `yourdomain.com`)
+4. PostHog will generate DNS TXT records that you need to add to your domain's DNS configuration
+5. Add these TXT records to your domain's DNS settings through your domain registrar (like GoDaddy, Namecheap, or Squarespace)
+6. Return to PostHog and click **Verify domain**
+
+The verification process may take up to 24 hours to complete, depending on DNS propagation times. Once PostHog confirms that your DNS records are in place, you can use this sending domain in any messages moving forward.
+
+Next, set up your [Broadcasts](/docs/messaging/broadcasts) and [Campaigns](/docs/messaging/campaigns) to start sending emails to your users!

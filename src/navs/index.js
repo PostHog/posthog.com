@@ -3551,6 +3551,12 @@ export const docsMenu = {
                     color: 'orange',
                 },
                 {
+                    name: 'Getting started',
+                    url: '/docs/messaging/getting-started',
+                    icon: 'IconBook',
+                    color: 'blue',
+                },
+                {
                     name: 'Broadcasts',
                     url: '/docs/messaging/broadcasts',
                     icon: 'IconLetter',
