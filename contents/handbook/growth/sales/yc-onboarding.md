@@ -34,19 +34,20 @@ We want to make this feel as personalized and smooth as possible - there is an o
 - YC companies check out the [deal on Bookface](https://bookface.ycombinator.com/deals/687)
 - Founders first need to [sign up](https://app.posthog.com/) for PostHog Cloud
 - After logging in, they can submit their [application form](https://app.posthog.com/startups/yc)
-  - We check if they have added their billing details (needed to ensure they have a Stripe account so we can add credits there) and prompt them to do so if needed
-  - We ask for their YC batch (this determines their deal variant), a screenshot showing them on Bookface and a number of merch packs for them and their co-founders
+  - We check if they have added their billing details (needed to ensure they have a Stripe customer so we can add credits there) and prompt them to do so on the same page otherwise
+  - We ask for their YC batch (this determines their deal variant), a screenshot showing them on Bookface, and a number of merch packs for them and their co-founders
 - Valid applications are added to the [Zapier table](https://tables.zapier.com/app/tables/t/01JRCYMWYAJNP3K0B6GTYKKBQB) and approved automatically, which means that founders get their credits almost instantly
-  - A brief confirmation email from [Scott](https://posthog.com/community/profiles/32112) is sent right away
-  - Shortly after they receive automated emails with invite to the 
-    - Invite to the `#posthog-founders-club` channel in Slack - this is where they can get priority support
-    - Links to order merch (multiple emails with unique links, if more than 1 merch pack was requested) 
-  - After ~12h they receive a welcome email from [Joe](https://posthog.com/community/profiles/29070) with some additional information and access to perks
+- A brief confirmation email from [Scott](https://posthog.com/community/profiles/32112) is sent right away
+- Shortly after they receive automated emails with invite to the 
+  - Invite to the `#posthog-founders-club` channel in Slack - this is where they can get priority support
+  - Links to order merch (multiple emails with unique links, if more than 1 merch pack was requested) 
+- After ~12h they receive a welcome email from [Joe](https://posthog.com/community/profiles/29070) with some additional information and access to perks
 - We review submitted applications in the background
   - We automatically check their batch membership based on their company name and domain (using APIs like these: [1](https://api.ycombinator.com/v0.1/docs), [2](https://github.com/yc-oss/api) - they only include publicly launched companies)
-  - We manually review the rest of the details, especially the submitted screenshot
+  - We manually review the rest of the details, especially the submitted screenshot (you can use the `Under Review` view for that - it filters out `Reviewed` applications and hides some fields)
 - If there are some details missing or we believe they might not qualify for the YC deal, we can request additional information via the `Criteria Check` button in the table, which will trigger an email, which allows them to respond within a week
-- If we know they don't qualify for the deal or if we didn't hear back within a week, we can remove their Stripe credits using the `Rejection after approval` button in the table, which will also trigger an email informing them about this (they can still reply later and if we find they do qualify for the deal, we can onboard them to it again using the `Approve` button in the table - you might need to right click on the button first to re-enable it)
+- If we know they don't qualify for the deal or if we didn't hear back within a week, we can remove their Stripe credits using the `Reject after approval` button in the table, which will also trigger an email informing them about this (they can still reply later and if we find they do qualify for the deal, we can onboard them to it again using the `Approve` button in the table - you might need to right click on the button first to re-enable it)
+- After completing the review process, we mark them in the table as `Reviewed`
 
 ### If we need to send giveaways outside of the Zapier automation
 
