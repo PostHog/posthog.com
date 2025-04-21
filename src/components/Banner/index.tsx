@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { Link } from 'gatsby'
 import { useLayoutData } from '../Layout/hooks'
-import { IconX } from '@posthog/icons'
+import { IconWarning, IconX } from '@posthog/icons'
 
 function setCookie(name, value, days) {
     let expires = ''
@@ -45,14 +45,15 @@ export default function Banner() {
                 <div
                     className={`${
                         isCookieSet ? 'h-0' : '!max-h-96'
-                    } transition-all overflow-hidden relative hidden md:block border-b border-black/50`}
+                    } transition-all overflow-hidden relative hidden md:block border-b border-accent dark:border-accent-dark`}
                     style={{ maxHeight: '0px' }}
                 >
-                    <div className="bg-red-2-dark md:text-center text-sm text-white pl-4 pr-10 md:px-10 py-2 font-semibold">
-                        Why are you on a B2B SaaS website on Valentine’s Day weekend? Are you here for the{' '}
-                        <Link to="/photobooth" className="underline font-bold hover:text-white" onClick={handleDismiss}>
-                            photobooth?
-                        </Link>
+                    <div className="bg-yellow md:text-center text-sm text-primary pl-4 pr-10 md:px-10 py-2 font-semibold">
+                        <IconWarning className="size-5 text-primary inline-block mr-1" />
+                        <Link href="/error-tracking" className="text-primary font-bold underline">
+                            Error tracking
+                        </Link>{' '}
+                        is now out of beta. Get 100,000 exceptions free, every month.
                         <button
                             onClick={handleDismiss}
                             className="absolute right-2 top-2 md:top-1.5 p-1 cursor-pointer"

@@ -30,49 +30,6 @@ import FlutterInstall from '../../integrate/_snippets/install-flutter.mdx'
 
 <FlutterInstall />
 
-## Usage
-
-### Example
-
-```dart
-import 'package:flutter/material.dart';
-import 'package:posthog_flutter/posthog_flutter.dart';
-
-void main() => runApp(MyApp());
-
-class MyApp extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      navigatorObservers: [
-        // The PosthogObserver records screen views automatically
-        PosthogObserver(),
-      ],
-      home: Scaffold(
-        appBar: AppBar(
-          title: Text('PostHog example app'),
-        ),
-        body: Center(
-          child: FlatButton(
-            child: Text('TRACK ACTION WITH PostHog'),
-            onPressed: () async {
-              await Posthog().capture(
-                eventName: 'ButtonClicked',
-                properties: {
-                  'foo': 'bar',
-                  'number': 1337,
-                  'clicked': true,
-                },
-              );
-            },
-          ),
-        ),
-      )
-    );
-  }
-}
-```
-
 ## Capturing events
 
 import FlutterSendEvents from '../../integrate/send-events/_snippets/send-events-flutter.mdx'

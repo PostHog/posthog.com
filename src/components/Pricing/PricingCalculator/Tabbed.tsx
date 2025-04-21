@@ -291,10 +291,12 @@ export default function Tabbed() {
     )
 
     const generateURL = () => {
-        const volumes = {}
+        const params = {
+            ...(activeProduct && { calculator: activeProduct.type }),
+        }
         products.forEach((product) => {
             if (product.volume) {
-                volumes[product.type] = { volume: product.volume }
+                params[product.type] = { volume: product.volume }
                 if (product.type === 'product_analytics') {
                     const types = {}
                     Object.keys(analyticsData).forEach((type) => {
@@ -303,11 +305,11 @@ export default function Tabbed() {
                             types[type] = { volume: analyticsData[type].volume }
                         }
                     })
-                    volumes['product_analytics'].types = types
+                    params['product_analytics'].types = types
                 }
             }
         })
-        const URL = `${window.location.origin}${window.location.pathname}?${qs.stringify(volumes, {
+        const URL = `${window.location.origin}${window.location.pathname}?${qs.stringify(params, {
             encodeValuesOnly: true,
         })}`
         navigator.clipboard.writeText(URL)
@@ -315,11 +317,21 @@ export default function Tabbed() {
 
     useEffect(() => {
         const urlParams = new URLSearchParams(window.location.search)
-        const volumes = qs.parse(urlParams.toString())
-        const volumeTypes = Object.keys(volumes)
+        const params = qs.parse(urlParams.toString())
+        const { calculator, ...volumeParams } = params
+
+        if (calculator) {
+            const productIndex = products.findIndex((product) => product.type === calculator)
+            if (productIndex !== -1) {
+                setActiveTab(productIndex)
+            }
+        }
+
+        const volumeTypes = Object.keys(volumeParams)
         volumeTypes.forEach((type) => {
-            setVolume(type, volumes[type].volume)
+            setVolume(type, volumeParams[type].volume)
         })
+
         const el = document.getElementById('calculator')
         if (el && products.some((product) => volumeTypes.includes(product.type))) {
             const y = el.getBoundingClientRect().top + window.scrollY - (window.innerWidth > 767 ? 108 : 57)
@@ -448,12 +460,10 @@ export default function Tabbed() {
                     <p className="m-0 font-bold text-lg leading-none">${totalPrice.toLocaleString()}</p>
                 </div>
             </div>
-            {user?.role.type === 'moderator' && (
-                <div className="flex justify-end gap-0.5 mt-2 pr-2 md:pr-0">
-                    <IconCopy className="size-5 inline-block text-primary/50 dark:text-primary-dark/50 relative -top-px" />
-                    <CopyURLButton onClick={generateURL} />
-                </div>
-            )}
+            <div className="flex justify-end gap-0.5 mt-2 pr-2 md:pr-0">
+                <IconCopy className="size-5 inline-block text-primary/50 dark:text-primary-dark/50 relative -top-px" />
+                <CopyURLButton onClick={generateURL} />
+            </div>
         </div>
     )
 }

@@ -13,7 +13,7 @@ features:
   sessionRecording: true
   featureFlags: true
   groupAnalytics: true
-  surveys: false
+  surveys: true
   llmObservability: false
   errorTracking: false
 ---
@@ -30,6 +30,7 @@ PostHog supports the following Apple platforms:
 - **macOS:** Catalina (10.15) or later
 - **tvOS:** Version 13 or later
 - **watchOS:** Version 6 or later
+- **visionOS:** Version 1 or later
 
 ## Installation
 
@@ -278,6 +279,10 @@ Hence **starting with posthog-ios version 1.2.0** we have removed all references
 
 To set up [session replay](/docs/session-replay/mobile) in your project, all you need to do is install the iOS SDK, enable "Record user sessions" in [your project settings](https://us.posthog.com/settings/project-replay) and enable the `sessionReplay` option.
 
+## Surveys
+
+[Surveys](/docs/surveys) launched with [popover presentation](/docs/surveys/creating-surveys#presentation) are automatically shown to users matching the [display conditions](/docs/surveys/creating-surveys#display-conditions) you set up.
+
 ## All configuration options
 
 The `configuration` element contains several other settings you can toggle:
@@ -323,9 +328,8 @@ configuration.captureApplicationLifecycleEvents = true
 configuration.captureScreenViews = true
 
 /**
-* Whether the posthog client should automatically make a capture call when the user interacts with an element in a screen.
+* (UIKit only) Whether the posthog client should automatically make a capture call when the user interacts with an element in a screen.
 * 
-* Experimental support (UIKit)
 * Defaults to false
 */
 configuration.captureElementInteractions = false
@@ -389,4 +393,11 @@ configuration.sessionReplayConfig = .init()
 * PostHog will try to get the physical location of the App Group’s shared container, otherwise fallback to the default location
 */
 configuration.appGroupIdentifier = nil
+
+/**
+ * Whether the SDK should reuse the anonymous Id between user changes. 
+ * When enabled, a single Id will be used for all anonymous users on this device
+ * Defaults to false
+ */
+configuration.reuseAnonymousId = false
 ```

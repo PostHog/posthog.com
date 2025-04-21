@@ -11,9 +11,9 @@ showTitle: true
 
 ### What does this team do?
 
-The north star metric for the Onboarding team is 3-month logo retention from the first $500+ forecasted bill, which can be tracked here (link).
+The north star metric for the Onboarding team is 3-month logo retention from the first $500+ forecasted bill, which can be tracked here (WIP).
 
-Secondarily, we also care about net dollar retention for this segment (link).
+Secondarily, we also care about net dollar retention for this segment (WIP).
 
 ### Which customers get onboarding?
 
@@ -71,13 +71,11 @@ To monitor and stay on top of where accounts are in their ~3-month-long Onboardi
 **1. Onboarding Status**
 
 - `Reach Out` – The account is waiting for our initial contact.
-- `Waiting for Response` – We’ve reached out and are waiting for a reply.
 - `Meeting Scheduled` – Self-explanatory.
-- `Ongoing` – We’ve either met and/or have an ongoing conversation.
-- `No Response (Follow-Up)` – We haven’t heard back, but we want to keep checking in.
+- `Ongoing` – They are in the onboarding cycle - we’ve reached out, and possibly we have an ongoing conversation.
 - `Onboarded (Follow-Up)` – They’re all set, but we want to monitor their activity throughout the onboarding billing cycle.
 - `Onboarded (Done)` – They have told us they are happy with PostHog and don't have any issues, or they have paid three bills.
-- `No Engagement` – We haven’t heard back despite our efforts, but they’re still using PostHog.
+- `No Engagement` – We haven’t heard back despite our efforts, but they’re still actively using PostHog.
 - `Churned` – Sadly, despite our efforts, we lost the customer.
 
 **2. Daily view** ([link](https://posthog.vitally-eu.io/hubs/152ccd4c-c7b2-4508-865b-b08fea5c3dc6/d08c5202-bdcd-40b8-aba7-5746c340a35b))
@@ -107,11 +105,18 @@ Our role is pretty hybrid and lives at the intersection of other teams. As much 
 **How to deepen my product knowledge?**
 
 - Add yourself to some AEs' Slack channels to see what kinds of questions are being asked and how they’re solved.
+- Check recordings in the [Technical product troubleshooting](https://app.buildbetter.app/folders/14593) BuildBetter folder.
 - Go through [Product Homework](https://docs.google.com/document/d/1x8fnUUi5bDGeSYQl_E-_fViuNxi7j_tC0YwhLC5lwv0/edit?tab=t.0#heading=h.cioukeluttdh).
 
 **Teach how to fish**
 
 Ideally, after the meeting with the user, they should know how to seek further help. That includes using Max, consulting the docs, and reaching out to our Support team.
 
+### Handover to the Sales team
 
+If you see that the customer spends more than ~$1667 monthly, do the discovery for their high spend level. If they’re happy with PostHog moving forward, you can casually mention our annual plan to them, which helps them save 20%. However, if they’re happy paying monthly, they’re more than welcome to do so! 
+
+We can hand the account over to Sales when someone is interested in the annual plan, or requires some additional contractual or legal work. 
+
+If you see accounts where there were some previous conversations with Sales, ping your fellow AE to make sure you’re not stepping on their toes. If there’s clearly a problem with duplication, and we shouldn’t be involved, ping Mine to double-check the logic. 
 

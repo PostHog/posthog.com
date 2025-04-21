@@ -27,7 +27,7 @@ SELECT
 FROM events
 ```
 
-Common values to select are `*` (representing all), `event`, `timestamp`, `properties`, and functions like `count()`. You can access properties using dot notation like `person.properties.$initial_browser`. These values can be found in the data management [properties tab](https://app.posthog.com/data-management/properties) or inside tables in the [database warehouse tab](https://us.posthog.com/data-warehouse). 
+Common values to select are `*` (representing all), `event`, `timestamp`, `properties`, and functions like `count()`. You can access properties using dot notation like `person.properties.$initial_browser`. These values can be found in the data management [properties tab](https://app.posthog.com/data-management/properties) or inside tables in the [SQL tab](https://us.posthog.com/sql). 
 
 Add the `DISTINCT` clause to `SELECT` commands to keep only unique rows in query results.
 
@@ -488,7 +488,7 @@ SELECT * FROM events WHERE properties.`$browser` = 'Chrome'
 
 ### Types
 
-Types (and names) for the accessible data can be found in the [database](https://us.posthog.com/data-management/database), [properties](https://us.posthog.com/data-management/properties) tabs in data management as well as in the [data warehouse tab](https://us.posthog.com/data-warehouse) for external sources. They include:
+Types (and names) for the accessible data can be found in the [database](https://us.posthog.com/data-management/database), [properties](https://us.posthog.com/data-management/properties) tabs in data management as well as in the [SQL tab](https://us.posthog.com/sql) for external sources. They include:
 
 - `STRING` (default)
 - `JSON` (accessible with dot or bracket notation)

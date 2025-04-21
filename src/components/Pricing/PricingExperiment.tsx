@@ -375,6 +375,11 @@ const PricingExperiment = (): JSX.Element => {
                                 icon={<Icons.IconFlask className="text-purple size-5" />}
                             />
                             <FreeTierItem
+                                name="Error tracking"
+                                allocation="100K exceptions"
+                                icon={<Icons.IconWarning className="text-orange size-5" />}
+                            />
+                            <FreeTierItem
                                 name="Surveys"
                                 allocation="250 responses"
                                 icon={<Icons.IconMessage className="text-red size-5" />}
