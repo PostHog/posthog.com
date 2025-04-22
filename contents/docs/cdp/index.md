@@ -15,9 +15,7 @@ Destinations require the data pipeline add-on in [your billing settings](https:/
 
 ## Billing for data pipelines
 
-PostHog only charges for events that are successfully ingested and stored in ClickHouse. Events that are filtered out before reaching ClickHouse (such as those dropped by Data Pipeline Transformations) are not counted towards billing quotas. See our [event filtering and billing documentation](/handbook/growth/sales/billing#event-filtering-and-billing) for more details.
-
-For more information about pricing and to estimate your costs, visit our [estimating usage and costs](/docs/billing/estimating-usage-costs#how-am-i-billed-for-data-pipelines) documentation.
+For information about data pipeline pricing and billing, please visit our [add-ons page](https://posthog.com/addons#data-pipelines).
 
 ## Use cases
 

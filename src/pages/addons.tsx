@@ -50,6 +50,12 @@ const addons = [
                             'To facilitate sorting through your events, you can use transformations to determine arbitrary logic to label an event (e.g. by setting a label property). This can help you tailor your metrics in PostHog, as well as facilitate data ordering if you ever use PostHog data elsewhere.',
                         icon: IconAdvanced,
                     },
+                    {
+                        name: 'Only pay for ingested events',
+                        description:
+                            'PostHog only charges for events that are successfully ingested and stored in our Data Warehouse - events filtered out or dropped by transformations are not counted towards billing quotas.',
+                        icon: IconAdvanced,
+                    },
                 ],
             },
         ],
