@@ -3547,7 +3547,7 @@ export const docsMenu = {
                 {
                     name: 'Overview',
                     url: '/docs/messaging',
-                    icon: 'IconMegaphone',
+                    icon: 'IconHome',
                     color: 'orange',
                 },
                 {
