@@ -51,9 +51,9 @@ const addons = [
                         icon: IconAdvanced,
                     },
                     {
-                        name: 'Only pay for ingested events',
+                        name: 'Only pay for saved events',
                         description:
-                            'PostHog only charges for events that are successfully ingested and stored in our Data Warehouse - events filtered out or dropped by transformations are not counted towards billing quotas.',
+                            'PostHog only charges for events that are successfully saved to our platform - events filtered out or dropped by transformations are not counted towards billing quotas.',
                         icon: IconAdvanced,
                     },
                 ],
