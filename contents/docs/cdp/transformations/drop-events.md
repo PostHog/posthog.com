@@ -1,5 +1,5 @@
 ---
-title: Drop events
+title: Drop Events
 showTitle: true
 ---
 
