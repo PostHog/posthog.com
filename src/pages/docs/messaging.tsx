@@ -45,9 +45,6 @@ const Messaging: React.FC<MessagingProps> = () => {
                     description="Send emails to your early access lists, newsletter subscribers, or app users."
                     buttonText="Start sending emails"
                     buttonLink="/docs/messaging/getting-started"
-                    imageColumnClasses="max-w-96 mt-8 md:mt-0"
-                    imageUrl="https://res.cloudinary.com/dmukukwp6/image/upload/v1743523365/messaging_crest_8de90d3c39.png"
-                    imageClasses="max-h-48 md:max-h-64"
                 />
 
                 <AskMax
