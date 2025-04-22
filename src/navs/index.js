@@ -2879,8 +2879,8 @@ export const docsMenu = {
                     color: 'seagreen',
                 },
                 {
-                    name: 'Revenue tracking',
-                    url: '/docs/web-analytics/revenue-tracking',
+                    name: 'Revenue analytics',
+                    url: '/docs/web-analytics/revenue-analytics',
                     icon: 'IconPiggyBank',
                     color: 'salmon',
                     badge: {
