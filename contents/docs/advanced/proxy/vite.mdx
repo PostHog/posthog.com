@@ -1,0 +1,58 @@
+---
+title: Using Vite dev server proxy
+sidebar: Docs
+showTitle: true
+---
+import RegionWarning from "../_snippets/region-warning.mdx"
+import ProxyWarning from "../_snippets/proxy-usage-warning.mdx"
+
+<ProxyWarning />
+
+<RegionWarning />
+
+Vite's development server includes a built-in proxy feature, which is highly useful for forwarding requests from your frontend application (running on `localhost`) to an actual backend server. 
+You can configure the proxy settings within the `server.proxy` option in your `vite.config.js` or `vite.config.ts` file.
+
+Here's how you can set up a proxy based on your example:
+
+```typescript
+// vite.config.ts
+import { defineConfig } from "vite";
+import path from "path";
+
+// [https://vitejs.dev/config/](https://vitejs.dev/config/)
+export default defineConfig({
+  // ... other useful stuff
+  server: {
+    proxy: {
+      '/ingest/static': {
+        target: 'https://us-assets.i.posthog.com',
+        changeOrigin: true,
+        rewrite: (path) => path.replace('/ingest/static', '/static')
+      },
+      '/ingest/decide': {
+        target: 'https://us.i.posthog.com',
+        changeOrigin: true,
+        rewrite: (path) => path.replace('/ingest/decide', '/decide')
+      },
+      '/ingest': {
+        target: 'https://us.i.posthog.com',
+        changeOrigin: true,
+        rewrite: (path) => path.replace('/ingest', '')
+      }
+    }
+  },
+});
+```
+
+Then configure the PostHog client to send requests via your rewrite.
+
+```js
+const posthogUIHost = import.meta.env.VITE_POSTHOG_UI_HOST;
+const posthogKey = import.meta.env.VITE_POSTHOG_KEY;
+
+posthog.init(posthogKey, {
+  api_host: "/ingest",
+  ui_host: posthogUIHost
+})
+```
