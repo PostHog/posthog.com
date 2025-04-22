@@ -51,12 +51,16 @@ This doesn't preclude anyone from submitting new or improved docs for any produc
 |---------------------------------|----------------------|
 | **Product analytics**           | Ian                  |
 | **Web analytics**               | Andy                 |
+| **Revenue analytics**           | ?                    |
+| **B2B analytics**               | ?                    |
 | **Session replay**              | Ian                  |
-| **Feature flags**               | Ian                  |
+| **Feature flags**                | Ian                  |
 | **Experiments**                 | Ian                  |
 | **Surveys**                     | Andy                 |
+| **Messaging**                   | ?                    |
 | **Data pipelines**              | Danilo               |
 | **Data warehouse**              | Danilo               |
+| **LLM Observability**           | ?                    |
 
 ### Docs gardener
 
