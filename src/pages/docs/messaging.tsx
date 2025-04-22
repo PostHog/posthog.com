@@ -7,6 +7,8 @@ import { docsMenu } from '../../navs'
 import { useLayoutData } from 'components/Layout/hooks'
 import QuickLinks from 'components/QuickLinks'
 import Intro from 'components/Docs/Intro'
+import AskMax from 'components/AskMax'
+import { CallToAction } from 'components/CallToAction'
 
 type MessagingProps = {
     data: {
@@ -42,13 +44,24 @@ const Messaging: React.FC<MessagingProps> = () => {
                     title="Messaging"
                     description="Send emails to your early access lists, newsletter subscribers, or app users."
                     buttonText="Start sending emails"
-                    buttonLink="/docs/messaging/email-broadcasts"
+                    buttonLink="/docs/messaging/getting-started"
                     imageColumnClasses="max-w-96 mt-8 md:mt-0"
-                    imageUrl="https://res.cloudinary.com/dmukukwp6/image/upload/robot_960530c306.png"
+                    imageUrl="https://res.cloudinary.com/dmukukwp6/image/upload/v1743523365/messaging_crest_8de90d3c39.png"
                     imageClasses="max-h-48 md:max-h-64"
                 />
 
+                <AskMax
+                    quickQuestions={[
+                        'How do I send an email after a user signs up?',
+                        'How do I send an email to my newsletter subscribers?',
+                    ]}
+                />
+
                 <Content />
+
+                <CallToAction to="/docs/messaging/getting-started" width="full">
+                    Visit the manual
+                </CallToAction>
             </PostLayout>
         </Layout>
     )
