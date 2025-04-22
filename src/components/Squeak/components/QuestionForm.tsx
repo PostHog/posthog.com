@@ -457,6 +457,7 @@ export const QuestionForm = ({
                         />
                     </div>
                     <Button
+                        id="question-form-button"
                         disabled={archived}
                         onClick={() => setView('question-form')}
                         buttonType={formType === 'reply' ? 'outline' : 'primary'}

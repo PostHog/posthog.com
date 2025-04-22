@@ -75,6 +75,8 @@ export default function Inbox(props) {
     const [notificationsEnabled, setNotificationsEnabled] = useState(false)
     const [question, setQuestion] = useState<StrapiRecord<QuestionData>>()
     const containerRef = useRef<HTMLDivElement>(null)
+    const bottomContainerRef = useRef<HTMLDivElement>(null)
+    const [isDragging, setIsDragging] = useState(false)
 
     useEffect(() => {
         if (initialTopicID && initialTopicID !== filters.topics?.id?.$eq) {
@@ -169,13 +171,21 @@ export default function Inbox(props) {
                                 </ScrollArea>
                             </div>
                             {permalink && (
-                                <div className="flex-none relative min-h-0" style={{ height: bottomHeight }}>
+                                <div
+                                    ref={bottomContainerRef}
+                                    className={`flex-none relative min-h-0 ${
+                                        !isDragging ? 'transition-[height] duration-200 ease-out' : ''
+                                    }`}
+                                    style={{ height: bottomHeight }}
+                                >
                                     <motion.div
                                         data-scheme="tertiary"
                                         className="h-1.5 cursor-ns-resize top-0 left-0 !transform-none absolute z-20 w-full hover:bg-accent active:bg-accent"
                                         drag="y"
                                         dragMomentum={false}
                                         dragConstraints={{ top: 0, bottom: 0 }}
+                                        onDragStart={() => setIsDragging(true)}
+                                        onDragEnd={() => setIsDragging(false)}
                                         onDrag={(_event, info) => {
                                             if (!containerRef.current) return
                                             const containerHeight = containerRef.current.getBoundingClientRect().height
@@ -197,6 +207,22 @@ export default function Inbox(props) {
                                                 variant="secondary"
                                                 size="sm"
                                                 icon={<IconCornerDownRight className="scale-x-[-1]" />}
+                                                onClick={() => {
+                                                    if (!containerRef.current) return
+                                                    const containerHeight =
+                                                        containerRef.current.getBoundingClientRect().height
+                                                    setBottomHeight(containerHeight)
+                                                    document.getElementById('question-form-button')?.click()
+                                                    setTimeout(() => {
+                                                        const viewport = bottomContainerRef.current?.querySelector(
+                                                            '[data-radix-scroll-area-viewport]'
+                                                        )
+                                                        viewport?.scrollTo({
+                                                            top: viewport.scrollHeight,
+                                                            behavior: 'smooth',
+                                                        })
+                                                    }, 300)
+                                                }}
                                             >
                                                 Reply
                                             </OSButton>
