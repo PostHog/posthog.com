@@ -11,7 +11,7 @@ tags:
 OpenAI charges per API usage. LLM-powered apps using OpenAI will need usage tracking to correctly bill per usage or enforce usage limits. Usage reports are important to help users see how much they've used and what it will cost.
 
 In this tutorial, we'll add usage reporting to a Next.js chat app by:
-1. Track LLM usage with PostHog
+1. Tracking LLM usage with PostHog
 2. Query usage data via PostHog's API
 3. Display usage reports to users
 
