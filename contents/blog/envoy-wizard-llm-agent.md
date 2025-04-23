@@ -1,11 +1,13 @@
 ---
-date: 2025-04-23
 title: "Join the LLM coding agent revolution for $0"
+date: 2025-04-23
 author:
   - danilo-campos
-category: General
+featuredImage: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/posthog-engineering-blog.png
+featuredImageType: full
 tags:
-    - Product updates
+    - Engineering
 ---
 
 AI agents are taking over the workflows of software development. They can burn through boilerplate and tedium fast, getting working prototypes up in minutes.
