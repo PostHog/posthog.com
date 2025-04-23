@@ -38,7 +38,7 @@ npx --yes @posthog/wizard@latest --default --region ${region}`,
                 </CodeBlock>
                 <p className="text-sm text-primary/75 dark:text-primary-dark/75 mt-2 mb-0">
                     Supports Next.js, React, React Native, Svelte, and Astro.{' '}
-                    <a href="https://github.com/PostHog/wizard" className="text-orange hover:text-orange/75">
+                    <a href="/docs/getting-started/install?tab=wizard" className="text-orange hover:text-orange/75">
                         More on the way!
                     </a>
                 </p>

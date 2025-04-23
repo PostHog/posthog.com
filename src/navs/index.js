@@ -1656,14 +1656,6 @@ export const docsMenu = {
                             url: '/docs/getting-started/install?tab=snippet',
                         },
                         {
-                            name: 'Wizard and agent integration',
-                            url: '/docs/getting-started/wizard',
-                            badge: {
-                                title: 'Beta',
-                                className: '!bg-orange/10 !text-orange !dark:text-white !dark:bg-orange/50',
-                            },
-                        },
-                        {
                             name: 'Send events',
                             url: '/docs/getting-started/send-events',
                         },
