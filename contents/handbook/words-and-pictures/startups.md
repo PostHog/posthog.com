@@ -17,8 +17,8 @@ Any company that is <2 years old and has raised $5m in funding or less is eligib
 ### What happens after companies apply
 1. Company applies by signing up to PostHog with a paid plan, then applying on [our startups page](/startups)
 2. We ([Scott](community/profiles/32112)) verifies they meet the criteria and applies a $50k Stripe _coupon_ to their account that expires in 12 months.
-3. The user receives an automated email, via Zapier, which provides them with a welcome to the program (sent via Customer.io, comes from [Kevan](https://posthog.com/community/profiles/32499))
-4. Shortly after, they get a separate email about claiming their merch (sent via Zapier, comes from [Kevan](https://posthog.com/community/profiles/32499))
+3. The user receives an automated email, via Zapier, which provides them with a welcome to the program.
+4. Shortly after, they get a separate email about claiming their merch (sent via Zapier).
 
 Following the welcome email teams will get an additional email when they use 50%, 75%, and 100% of their credit, or when their credits fully expire - whichever comes first.
 
