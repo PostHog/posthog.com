@@ -32,12 +32,20 @@ Update `app/page.tsx` with the example code below:
 // app/page.tsx
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 export default function ChatPage() {
   const [prompt, setPrompt] = useState('');
+  const [nickname, setNickname] = useState('');
   const [response, setResponse] = useState('');
   const [isLoading, setIsLoading] = useState(false);
+
+  useEffect(() => {
+    // Read nickname from cookies on component mount
+    const savedNickname = document.cookie.split('; ')
+      .find(row => row.startsWith('nickname='))?.split('=')[1];
+    if (savedNickname) setNickname(decodeURIComponent(savedNickname));
+  }, []);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -49,7 +57,7 @@ export default function ChatPage() {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ prompt }),
+        body: JSON.stringify({ prompt, nickname }),
       });
 
       const data = await res.json();
@@ -71,6 +79,14 @@ export default function ChatPage() {
           <form onSubmit={handleSubmit} className="space-y-4">
             <input
               type="text"
+              value={nickname}
+              onChange={(e) => setNickname(e.target.value)}
+              placeholder="Your nickname"
+              className="w-full p-2 border rounded mb-2"
+              disabled={isLoading}
+            />
+            <input
+              type="text"
               value={prompt}
               onChange={(e) => setPrompt(e.target.value)}
               placeholder="Type your message..."
@@ -80,7 +96,7 @@ export default function ChatPage() {
             <button 
               type="submit"
               className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 disabled:bg-blue-300"
-              disabled={isLoading}
+              disabled={isLoading || !nickname}
             >
               {isLoading ? 'Sending...' : 'Send'}
             </button>
@@ -120,14 +136,13 @@ Next, create a new file with the path `app/api/chat/route.ts`. The example code 
 import { OpenAI } from '@posthog/ai'
 import { PostHog } from 'posthog-node'
 import { NextResponse } from 'next/server';
+import { cookies } from 'next/headers';
 
-// Init the PostHog client
 const phClient = new PostHog(
   process.env.POSTHOG_API_KEY ?? '',
   { host: process.env.POSTHOG_HOST ?? '' }
 );
 
-// Use the PostHog OpenAI wrapper
 const openai = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY ?? '',
   posthog: phClient,
@@ -135,9 +150,19 @@ const openai = new OpenAI({
 
 export async function POST(request: Request) {
   try {
-    const { prompt } = await request.json();
+    const { prompt, nickname } = await request.json();
 
-    // The PostHog OpenAPI wrapper automatically tracks usage
+    if (!nickname) {
+      return NextResponse.json(
+        { error: 'Nickname is required' },
+        { status: 400 }
+      );
+    }
+
+    // Save nickname in a cookie
+    const cookieStore = await cookies()
+    cookieStore.set('nickname', nickname);
+
     const completion = await openai.chat.completions.create({
       model: "gpt-3.5-turbo",
       messages: [
@@ -151,7 +176,7 @@ export async function POST(request: Request) {
         }
       ],
       max_tokens: 500,
-      posthogDistinctId: 'distinct_id_of_your_user' // use a unique user ID 
+      posthogDistinctId: nickname
     });
 
     const response = completion.choices[0]?.message?.content || "Sorry, I couldn't generate a response.";
@@ -204,6 +229,7 @@ With our query, we'll implement a new route `/api/usage` to fetch usage data fro
 Create a new file with the path `app/api/usage/route.ts`. We'll need the PostHog host, project ID from your [project settings](https://us.posthog.com/settings/project#variables), and a personal API key from your [user settings](https://us.posthog.com/settings/user#personal-api-keys). 
 ```tsx
 // app/api/usage/route.ts
+import { cookies } from 'next/headers';
 import { NextResponse } from 'next/server';
 
 // This is a mock implementation - you'll need to replace this with your actual data source
@@ -214,6 +240,16 @@ async function getUsageData(userId: string) {
   const personalApiKey = process.env.POSTHOG_PERSONAL_API_KEY
 
   const url = `${posthogUrl}/api/projects/${projectId}/query/`;
+
+  const cookieStore = await cookies()
+  const nickname = cookieStore.get('nickname');
+  
+  if (!nickname) {
+    return {
+      usage: 0,
+      estimatedCost: 0
+    };
+  }
 
   const response = await fetch(url, {
     method: 'POST',
@@ -230,13 +266,14 @@ async function getUsageData(userId: string) {
               COALESCE(SUM(properties.$ai_total_cost_usd), 0) as estimatedCost
           FROM events 
           WHERE event = '$ai_generation' 
-          AND distinct_id = 'distinct_id_of_your_user'
+          AND distinct_id = '${nickname}'
           `
       }
     }),
   });
 
   const data = await response.json();
+  console.log(data);
   return {
     usage: data.results[0][0],
     estimatedCost: data.results[0][1]
@@ -256,8 +293,10 @@ export async function GET(request: Request) {
     }
 
     const usageData = await getUsageData(userId);
+    console.log(usageData);
     return NextResponse.json(usageData);
   } catch (error) {
+    console.error('Error fetching usage data:', error);
     return NextResponse.json(
       { error: 'Failed to fetch usage data' },
       { status: 500 }
@@ -273,6 +312,7 @@ Finally, we can display the usage data in a usage report under `/usage`.
 Create a new file with the path `app/usage/page.tsx` to fetch and display usage data:
 
 ```tsx
+// app/usage/page.tsx
 'use client';
 
 import { useState, useEffect } from 'react';
@@ -357,3 +397,4 @@ PostHog also captures information such as LLM providers, the models invoked, and
 ## Further reading
 - [The basics of SQL for analytics](/product-engineers/sql-for-analytics)
 - [How to set up OpenAI observability](https://posthog.com/tutorials/openai-observability)
+= [Properties captured by LLM observability](https://posthog.com/docs/ai-engineering/observability#observability-installation)
