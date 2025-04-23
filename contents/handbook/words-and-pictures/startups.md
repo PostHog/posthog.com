@@ -15,7 +15,7 @@ Both programs give users some exclusive perks, as well as credit to use across a
 Any company that is <2 years old and has raised less than $5m in funding is eligible for PostHog for Startups.
 
 ### What happens after companies apply
-1. Company applies by signing up to PostHog, and then adding their billing details and applying on [our startups page](https://app.posthog.com/startups).
+1. Company applies by signing up to PostHog, completing onboarding, and then adding their billing details and applying on [our startups page](https://app.posthog.com/startups).
 2. If these criteria are fulfilled and the form gets submitted, we automatically apply a $50k Stripe _credit_ to their account that expires in 12 months.
 3. The user receives an automated email, via Zapier, which provides them with a confirmation about acceptance to the program (comes from [Scott](community/profiles/32112)).
 4. Shortly after, they get a separate email from Brilliant about claiming their merch (sent via Zapier, comes from [Scott](community/profiles/32112)).
