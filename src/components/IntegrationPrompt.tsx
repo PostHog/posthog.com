@@ -1,8 +1,15 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { CodeBlock } from './CodeBlock'
 
 export default function IntegrationPrompt() {
-    const [region, setRegion] = useState('us')
+    const promptCode = `Let's integrate PostHog. Run the following command; don't write any code until it completes:
+
+npx --yes @posthog/wizard@latest --default --region <ph_region>`
+
+    const languageOption = {
+        language: 'Agent',
+        code: promptCode,
+    }
 
     return (
         <div className="md:block">
@@ -16,25 +23,8 @@ export default function IntegrationPrompt() {
                 <p className="text-sm text-primary/75 dark:text-primary-dark/75 mb-4">
                     Works with agent-based coding tools like Cursor and Bolt:
                 </p>
-                <CodeBlock
-                    currentLanguage={{
-                        language: 'Agent',
-                        code: `Let's integrate PostHog. Run the following command; don't write any code until it completes:
-
-npx --yes @posthog/wizard@latest --default --region ${region}`,
-                    }}
-                    label="LLM agent prompt"
-                    showLabel={true}
-                    showCopy={true}
-                >
-                    {[
-                        {
-                            language: 'Agent',
-                            code: `Let's integrate PostHog. Run the following command; don't write any code until it completes:
-
-npx --yes @posthog/wizard@latest --default --region ${region}`,
-                        },
-                    ]}
+                <CodeBlock currentLanguage={languageOption} label="LLM agent prompt" showLabel={true} showCopy={true}>
+                    {[languageOption]}
                 </CodeBlock>
                 <p className="text-sm text-primary/75 dark:text-primary-dark/75 mt-2 mb-0">
                     Supports Next.js, React, React Native, Svelte, and Astro.{' '}
