@@ -27,10 +27,8 @@ For previous batches:
 
 ## Our process
 
-We want to make this feel as personalized and smooth as possible - there is an outsized impact in giving YC companies personal attention to ensure they are successful with PostHog. 
+We want to make this feel as smooth as possible - there is an outsized impact in giving YC companies a great experience to ensure they are successful with PostHog. 
 
-- Kendal maintains a sheet with the details for all companies in the current batch as they launch
-- James H messages every single one of them individually so that a) they have his number, and b) to tell them about the YC deal on Bookface
 - YC companies check out the [deal on Bookface](https://bookface.ycombinator.com/deals/687)
 - Founders first need to [sign up](https://app.posthog.com/) for PostHog Cloud
 - After logging in, they can submit their [application form](https://app.posthog.com/startups/yc)
