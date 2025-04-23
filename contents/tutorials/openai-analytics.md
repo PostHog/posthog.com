@@ -352,6 +352,8 @@ Run `npm run dev` and go to `http://localhost:3000/usage` in our browser. We sho
   classes="rounded"
 />
 
+PostHog also captures information such as LLM providers, the models invoked, and tokens sent. More about [properties captured here](/docs/ai-engineering/observability#observability-installation). Track which LLM models and providers your users are using for detailed usage and billing reports.
+
 ## Further reading
 - [The basics of SQL for analytics](/product-engineers/sql-for-analytics)
 - [How to set up OpenAI observability](https://posthog.com/tutorials/openai-observability)
