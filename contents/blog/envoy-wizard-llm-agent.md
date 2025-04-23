@@ -12,6 +12,8 @@ tags:
 
 AI agents are taking over the workflows of software development. They can burn through boilerplate and tedium fast, getting working prototypes up in minutes.
 
+But LLM codegen has two annoying problems...
+
 The first problem with LLM codegen: there are so many stupid ways to build software.
 
 When an agent sets out to write code, it has many viable paths to both solve the problem and introduce mistakes. Mistakes are especially common for newer, upstart projects.
