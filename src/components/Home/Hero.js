@@ -215,6 +215,7 @@ export default function Hero() {
     const [whitepaperOpen, setWhitepaperOpen] = useState(false)
     const [selectedIndex, setSelectedIndex] = useState(9)
     const [showNPS, setShowNPS] = useState(false)
+    const [showIntegrationPrompt, setShowIntegrationPrompt] = useState(false)
     const { enterpriseMode } = useLayoutData()
     const heroTitle = enterpriseMode
         ? 'The modern digital optimization platform'
@@ -306,6 +307,16 @@ export default function Hero() {
                             >
                                 {enterpriseMode ? 'Contact enterprise sales' : 'Talk to a human'}
                             </TrackedCTA>
+                            <TrackedCTA
+                                key="integrate-with-ai"
+                                event={{ name: `clicked Integrate with AI` }}
+                                onClick={() => setShowIntegrationPrompt(!showIntegrationPrompt)}
+                                type="secondary"
+                                size="lg"
+                                className="hidden md:inline-flex"
+                            >
+                                90 second AI integration
+                            </TrackedCTA>
                         </div>
                         {enterpriseMode && (
                             <div className="flex justify-center mt-2 enterprise-mode-home-hero-cta">
@@ -314,7 +325,7 @@ export default function Hero() {
                         )}
                     </div>
                     <div className="max-w-screen-lg mx-auto px-5 mt-8">
-                        <IntegrationPrompt />
+                        {showIntegrationPrompt && <IntegrationPrompt />}
                     </div>
                     <Board />
                 </div>
