@@ -169,11 +169,21 @@ export async function POST(request: Request) {
 
 Run `npm run dev` and go to `http://localhost:3000/` in our browser. We should see a simple chat interface that responds to your prompts.
 
-[IMAGE HERE]
+<ProductScreenshot
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/chat_prompt_35d06488d9.png" 
+  imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/chat_prompt_35d06488d9.png" 
+  alt="The simple chat interface we just created." 
+  classes="rounded"
+/>
 
 We can confirm if PostHog is receiving LLM usage events in the [Activity tab](https://us.posthog.com/activity) by filtering for **AI generation (LLM)** events.
 
-[IMAGE]
+<ProductScreenshot
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/openai_analytics_activity_light_e94ba9f048.png" 
+  imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/openai_analytics_activity_dark_e07ac2a3c0.png" 
+  alt="Confirming if LLM usage events have been received in Activities tab." 
+  classes="rounded"
+/>
 
 ## Querying LLM usage data
 
@@ -334,3 +344,10 @@ export default function UsagePage() {
 ```
 
 Run `npm run dev` and go to `http://localhost:3000/usage` in our browser. We should see a simple chat interface that responds to your prompts.
+
+<ProductScreenshot
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/chat_usage_c2b509a497.png" 
+  imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/chat_usage_c2b509a497.png" 
+  alt="The simple chat interface we just created." 
+  classes="rounded"
+/>
