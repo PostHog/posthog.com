@@ -24,8 +24,12 @@ They're useful for answering questions like:
 Retention insights are also a vital tool for evaluating whether you've [achieved product-market fit](/founders/product-market-fit-game).
 
 ## Creating a retention insight
-
-TODO: add video here
+<ProductScreenshot
+    imageLight = {"https://res.cloudinary.com/dmukukwp6/image/upload/retention_f69d5f3c7c.png"} 
+    imageDark = {"https://res.cloudinary.com/dmukukwp6/image/upload/retention_dark_51d858a4d0.png"}
+    alt="Retention config" 
+    classes="rounded"
+/>
 
 Retention insights support both [events](/docs/data/events) and [actions](/docs/data/actions).
 
@@ -37,13 +41,15 @@ When you create a retention insight, you're defining two things:
 It often, but not always, makes sense to use the same event or action for both.
 
 <ProductScreenshot
-    imageLight = {"https://res.cloudinary.com/dmukukwp6/image/upload/config_light_11286adf1f.png"} 
-    imageDark = {"https://res.cloudinary.com/dmukukwp6/image/upload/config_dark_e71c12764d.png"}
+    imageLight = {"https://res.cloudinary.com/dmukukwp6/image/upload/retention_product_interactions_light_5deef6c314.png"} 
+    imageDark = {"https://res.cloudinary.com/dmukukwp6/image/upload/retention_product_interactions_dark_d3c93467e9.png"}
     alt="Retention config" 
     classes="rounded"
 />
 
-In the example above, we used an action called 'Product Interactions' for both. We grouped users by 'Unique users' and chosen users who did the 'Product Interactions' action for the first time during a six-week period.
+In the example above, we used an action called 'Product Interactions' for both. 
+The start event is highlighted in blue and the return event in green.
+We grouped users by 'Unique users' and chosen users who did the 'Product Interactions' action for the first time during a six-week period.
 
 You can also:
 
@@ -114,7 +120,12 @@ This changes the retention calculation to be the percentage of users who returne
 With this option if Day 3 shows 40%, it means that 40% of the number of users who returned on Day 2 returned on Day 3.
 The option helps to see which time interval has the biggest percentage increase/drop offs in users.
 
-TODO: insert relative toggle image
+<ProductScreenshot
+    imageLight = {"https://res.cloudinary.com/dmukukwp6/image/upload/retention_toggle_light_991ef62419.png"} 
+    imageDark = {"https://res.cloudinary.com/dmukukwp6/image/upload/retention_toggle_dark_2b08408b59.png"}
+    alt="Retention reference toggle" 
+    classes="rounded"
+/>
 
 ### Retention criteria
 By default the retention numbers for a specific time interval, say Day 2, include only users who returned (performed 'return event') **on** Day 2.
