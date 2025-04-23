@@ -10,9 +10,11 @@ tags:
     - Engineering
 ---
 
+import Prompt from '../docs/integrate/_snippets/agent-prompt.mdx'
+
 AI agents are taking over the workflows of software development. They can burn through boilerplate and tedium fast, getting working prototypes up in minutes.
 
-The first problem with LLM codegen: there are so many stupid ways to build software.
+**The first problem with LLM codegen**: there are so many stupid ways to build software.
 
 When an agent sets out to write code, it has many viable paths to both solve the problem and introduce mistakes. Mistakes are especially common for newer, upstart projects.
 
@@ -20,7 +22,7 @@ Scale is one way to compensate: fill the training set with enough statistical we
 
 But that’s a lot of effort, plus significant lag time, and you want correct agent behavior *today*.
 
-The second problem with LLM codegen: it's very expensive. So what if you could join this revolution in software development without constructing an elaborate donation machine to Anthropic's coffers?
+**The second problem with LLM codegen**: it's very expensive. So what if you could join this revolution in software development without endless training or constructing an elaborate donation machine to Anthropic's coffers?
 
 You can! Build an **envoy**: software you control that developers can inject into their agent sessions with just a prompt.
 
@@ -40,13 +42,13 @@ Think of it like a sheepdog that keeps the agent session within a territory that
 
 ## Example code: the PostHog wizard
 
-The PostHog wizard is an interactive command line tool that automates the basics of a PostHog integration. It grabs an API key from a user’s account and uses it to populate a .env file.
+The PostHog [wizard](https://github.com/PostHog/wizard/tree/main) is an interactive command line tool that automates the basics of a PostHog integration. It grabs an API key from a user’s account and uses it to populate a .env file.
 
-From here it uses consistent prompting to read through the user’s code and integrate PostHog correctly.
+From here it uses LLMs and consistent prompting to read through the user’s code and integrate PostHog correctly.
 
-It turns out this is handy behavior: LLMs were hallucinating PostHog API keys and agents were using out-of-date code to perform integrations.
+It turns out this is handy behavior: other LLM workflows were hallucinating PostHog API keys and agents were using out-of-date code to perform integrations.
 
-To make the wizard into an effective **envoy**, all we had to do was add an argument that suppressed the interactive prompts, following the default path all the way through the workflow. The agent just runs the command in its terminal.
+To make the wizard into an effective **envoy**, all we had to do was add an argument that suppressed the interactivity, following the default path all the way through the workflow. The agent just runs the command in its terminal.
 
 From here, anyone using an AI agent can copy and paste one prompt and get a working integration in about 90 seconds. It’s the best of both worlds:
 
@@ -58,11 +60,7 @@ We can ship as many updates to the wizard as fast as we like, and the improved b
 
 Try it yourself. Paste this into the agent chat for Cursor, Bolt, and others:
 
-```Agent
-Let's integrate PostHog. Run the following command; don't write any code until it completes:
-
-npx --yes @posthog/wizard@latest --default --region us
-```
+<Prompt />
 
 We’ve got support for Next.js, React, Svelte, and React Native, with others coming soon.
 
@@ -72,4 +70,4 @@ Our [Joshua Snyder](https://posthog.com/community/profiles/32497) has been worki
 
 We get reporting on completed wizard runs alongside all the rest of our data. It's awesome.
 
-[Fork the wizard] and use it as your own starting place for an envoy. You just don't have to spend a lot of money to get into the coding agent mix. 
+[Fork the wizard](https://github.com/PostHog/wizard/tree/main) and use it as your own starting place for an envoy. You just don't have to spend a lot of money to get into the coding agent mix. 
