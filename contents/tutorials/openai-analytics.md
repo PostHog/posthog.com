@@ -351,3 +351,7 @@ Run `npm run dev` and go to `http://localhost:3000/usage` in our browser. We sho
   alt="The simple chat interface we just created." 
   classes="rounded"
 />
+
+## Further reading
+- [The basics of SQL for analytics](/product-engineers/sql-for-analytics)
+- [How to set up OpenAI observability](https://posthog.com/tutorials/openai-observability)
