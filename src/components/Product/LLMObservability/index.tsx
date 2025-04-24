@@ -61,11 +61,11 @@ const teamSlug = '/teams/llm-observability'
 const featuresPerRow = 3
 const features = [
     {
-        title: 'Release conditions',
-        description: 'Customize your rollout strategy by user or group properties, cohort, or traffic percentage',
+        title: 'Multivariate feature flags',
+        description: 'Simultaneously test multiple versions against a control group',
         image: (
             <CloudinaryImage
-                src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Product/FeatureFlags/images/release-conditions.png"
+                src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Product/FeatureFlags/images/multivariate.png"
                 width={420}
             />
         ),
@@ -83,35 +83,11 @@ const features = [
         border: true,
     },
     {
-        title: 'Test changes without touching your codebase',
-        description:
-            'JSON payloads let you change text, visuals, or entire blocks of code without subsequent deployments',
+        title: 'Multivariate feature flags',
+        description: 'Simultaneously test multiple versions against a control group',
         image: (
             <CloudinaryImage
-                src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Product/FeatureFlags/images/payloads.png"
-                width={420}
-            />
-        ),
-        border: true,
-    },
-    {
-        title: 'Developer-friendly automation',
-        description:
-            'Automated usage reports, IP address resolution (for location-based targeting), and recall person properties to avoid passing them manually every time',
-        image: (
-            <CloudinaryImage
-                src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Product/FeatureFlags/images/reports.png"
-                width={420}
-            />
-        ),
-        border: true,
-    },
-    {
-        title: 'Early access feature opt-in widget',
-        description: 'Allow users to opt in to (or out of) specified features. Or use the API to build your own UI.',
-        image: (
-            <CloudinaryImage
-                src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Product/FeatureFlags/images/early-access.png"
+                src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Product/FeatureFlags/images/multivariate.png"
                 width={420}
             />
         ),
@@ -423,60 +399,48 @@ export const ProductFeatureFlags = () => {
                     icon={<IconAI />}
                     product={product.capitalized}
                     title='Who keeps an eye on the AI? <span class="text-red dark:text-yellow">You do.</span>'
-                    description='Test changes with small groups of users before rolling out wider. Analyze usage with <a href="/product-analytics">product analytics</a> and <a href="/session-replay">session replay</a>.'
+                    description="Track usage, costs, latency, and more for you AI products"
                 />
 
                 <div className="text-center">
                     <CloudinaryImage
                         src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Product/FeatureFlags/images/screenshot-feature-flags.png"
-                        alt="Screenshot of a feature flag in PostHog"
+                        alt="Screenshot of llm observability in PostHog"
                         className="w-full max-w-[1361px]"
                         placeholder="none"
                     />
                 </div>
-
-                <section id="customers" className="-mt-36 pt-36">
-                    <ul className="list-none p-0 grid md:grid-cols-4 gap-4 mb-10 md:mb-20">
-                        <CustomerCard
-                            outcome="cut failure rates by 90%"
-                            quote="Feature flags are crucial for us. We use them as kill switches for all features and use the data to make decisions."
-                            customer={phantom}
-                        />
-                        <CustomerCard
-                            outcome="increased registrations 30%"
-                            quote="Teams used to use different tools. That led to confusion because flags didn't integrate with our analytics or replays."
-                            customer={contra}
-                        />
-                        <CustomerCard
-                            outcome="uses flags for feature testing"
-                            quote="We test changes as simple as changing the null state of a page through to new onboarding flows or new pricing changes."
-                            customer={elevenlabs}
-                        />
-                        <CustomerCard
-                            outcome="switched from in-house tools"
-                            quote="Feature flags immediately bought a lot of value. What's really elegant is how flags interlink with product analytics."
-                            customer={carvertical}
-                        />
-                    </ul>
-                </section>
             </div>
 
             <SmoothScroll />
-            <div id="features">
-                <section className="max-w-7xl mx-auto px-5 mb-10 md:mb-20">
-                    <h3 className="text-3xl text-center mb-8">Features</h3>
-                    <ul className={`list-none p-0 grid md:grid-cols-${featuresPerRow} gap-12 mb-8`}>
-                        {features.map((feature, index) => {
-                            return <Feature {...feature} key={index} />
-                        })}
-                    </ul>
-
-                    <ul className={`list-none p-0 grid grid-cols-2 md:grid-cols-${subfeaturesItemCount} gap-4`}>
-                        {subfeatures.map((subfeature, index) => {
-                            return <Subfeature {...subfeature} key={index} />
-                        })}
-                    </ul>
+            <div className={`${fullWidthContent ? 'max-w-full px-8' : 'max-w-7xl mx-auto'} px-5 py-4 pb-0`}>
+                <section id="features" className="-mt-36 pt-36">
+                    <h2 className="text-4xl md:text-5xl text-center">
+                        All the features you'd expect, but{' '}
+                        <span className="text-red dark:text-yellow">10x better in the PostHog ecosystem</span>
+                    </h2>
+                    <p className="text-lg opacity-75 text-center">
+                        Sure you can use error tracking solo, but it's better with other PostHog products.
+                    </p>
                 </section>
+
+                <div className="mt-12">
+                    <ul
+                        className={`grid md:grid-cols-2 lg:grid-cols-${subfeaturesItemCount} gap-8 mt-12 list-none p-0`}
+                    >
+                        {subfeatures.map((subfeature, index) => (
+                            <Subfeature key={index} {...subfeature} />
+                        ))}
+                    </ul>
+                </div>
+
+                <div className="py-12">
+                    <ul className={`grid md:grid-cols-2 lg:grid-cols-${featuresPerRow} gap-8 list-none p-0`}>
+                        {features.map((feature, index) => (
+                            <Feature key={index} {...feature} />
+                        ))}
+                    </ul>
+                </div>
 
                 <section className="bg-accent dark:bg-accent-dark">
                     <Marquee product={product.capitalized}>
@@ -665,7 +629,7 @@ export const ProductFeatureFlags = () => {
                         </CallToAction>
                     </div>
 
-                    <Questions topicIds={[360]} />
+                    <Questions topicIds={[390]} />
                 </section>
 
                 <PairsWith items={pairsWithItemCount}>
