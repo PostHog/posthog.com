@@ -411,7 +411,7 @@ export const ProductFeatureFlags = () => {
         <>
             <SEO
                 title="Feature flags - PostHog"
-                description="Safely roll out features to specific users or groups."
+                description="Who keeps an eye on the AI? You do."
                 image={`/images/og/feature-flags.jpg`}
             />
             <SideModal open={!!activeProfile} setOpen={setActiveProfile}>
@@ -422,7 +422,7 @@ export const ProductFeatureFlags = () => {
                     color="purple"
                     icon={<IconAI />}
                     product={product.capitalized}
-                    title='<span class="text-red dark:text-yellow">Safely roll out features</span> to specific users or groups'
+                    title='Who keeps an eye on the AI? <span class="text-red dark:text-yellow">You do.</span>'
                     description='Test changes with small groups of users before rolling out wider. Analyze usage with <a href="/product-analytics">product analytics</a> and <a href="/session-replay">session replay</a>.'
                 />
 
