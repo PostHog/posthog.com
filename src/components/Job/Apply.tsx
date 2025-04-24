@@ -119,6 +119,18 @@ const components = {
             </div>
         )
     },
+    boolean: ({ title, required, path }: IResumeComponentProps) => (
+        <div className="flex gap-4">
+            <label className="flex items-center gap-2">
+                <input type="radio" data-path={path} required={required} value={true} name={title} />
+                <span>Yes</span>
+            </label>
+            <label className="flex items-center gap-2">
+                <input type="radio" data-path={path} required={required} value={false} name={title} />
+                <span>No</span>
+            </label>
+        </div>
+    ),
 }
 
 const Form = ({ setSubmitted, info, id }) => {
