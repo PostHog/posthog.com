@@ -61,6 +61,7 @@ package main
 
 import (
     "os"
+    "time"
     "github.com/posthog/posthog-go"
 )
 
@@ -70,7 +71,7 @@ func main() {
 		posthog.Config{
 			Endpoint:       "<ph_client_api_host>",
 			PersonalApiKey: "your personal API key", // Optional, but much more performant. If this token is not supplied, then fetching feature flag values will be slower.
-            DefaultFeatureFlagsPollingInterval: 300000000000 // time.Duration // Optional. Measured in nanoseconds. Defaults to 300000000000 (5 minutes).
+            DefaultFeatureFlagsPollingInterval: time.Minute * 5 // time.Duration // Optional. Defaults to 5 minutes.
             // NextFeatureFlagsPollingTick: func() time.Duration {} // Optional. Use this to sync polling intervals between instances. For an example see: https://github.com/PostHog/posthog-go/pull/36#issuecomment-1991734125
 		},
 	)
