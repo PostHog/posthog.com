@@ -383,8 +383,8 @@ export const ProductFeatureFlags = () => {
     return (
         <>
             <SEO
-                title="Feature flags - PostHog"
-                description="Who keeps an eye on the AI? You do."
+                title="LLM Observability - PostHog"
+                description="Who keeps an eye on your AI? You do."
                 image={`/images/og/feature-flags.jpg`}
             />
             <SideModal open={!!activeProfile} setOpen={setActiveProfile}>
@@ -395,7 +395,7 @@ export const ProductFeatureFlags = () => {
                     color="purple"
                     icon={<IconAI />}
                     product={product.capitalized}
-                    title='Who keeps an eye on the AI? <span class="text-red dark:text-yellow">You do.</span>'
+                    title='Who keeps an eye on your AI? <span class="text-red dark:text-yellow">You do.</span>'
                     description="Track usage, costs, latency, and more for you AI products"
                 />
 
@@ -463,10 +463,6 @@ export const ProductFeatureFlags = () => {
                             <br className="hidden lg:block" />
                             Either way, your first {product.freeTier} are free – every month.
                         </p>
-                        <div className="bg-accent dark:bg-accent-dark border border-light dark:border-dark rounded-md px-8 py-4 mb-2 text-sm">
-                            <strong>Note:</strong> Feature flags and Experiments are currently packaged together and
-                            share volume limits.
-                        </div>
                     </div>
 
                     <div className="md:w-96">
