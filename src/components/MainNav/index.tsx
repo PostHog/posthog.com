@@ -239,14 +239,35 @@ const ActiveBackground = ({ mobile = false }) => {
     )
 }
 
-export const InternalMenu = ({ className = '', mobile = false, menu, activeIndex, scrollOnRender = true }) => {
+interface InternalMenuProps {
+    className?: string
+    mobile?: boolean
+    menu: Array<{
+        url?: string
+        color?: string
+        colorDark?: string
+        icon?: string
+        name: string
+        onClick?: () => void
+    }>
+    activeIndex: number
+    scrollOnRender?: boolean
+}
+
+export const InternalMenu = ({
+    className = '',
+    mobile = false,
+    menu,
+    activeIndex,
+    scrollOnRender = true,
+}: InternalMenuProps) => {
     const ref = useRef<HTMLUListElement>(null)
     const [firstRef, firstInView] = useInView({ threshold: 1 })
     const [lastRef, lastInView] = useInView({ threshold: 1 })
     const [overflowing, setOverflowing] = useState(false)
-    const menuItemsRef = useRef(null)
+    const menuItemsRef = useRef<Map<number, HTMLElement> | null>(null)
 
-    const scrollToIndex = (index) => {
+    const scrollToIndex = (index: number) => {
         const map = getMap()
         const node = map.get(index)
         node?.scrollIntoView({
@@ -298,7 +319,7 @@ export const InternalMenu = ({ className = '', mobile = false, menu, activeIndex
             >
                 {menu.map((menuItem, index) => {
                     const { url, color, colorDark, icon, name, onClick } = menuItem
-                    const Icon = icons[icon]
+                    const Icon = icon ? icons[icon] : null
                     const active = menu[activeIndex]?.name === menuItem.name
                     return (
                         <li
@@ -318,16 +339,18 @@ export const InternalMenu = ({ className = '', mobile = false, menu, activeIndex
                                         scrollToIndex(index)
                                         onClick?.()
                                     }}
-                                    to={url}
+                                    to={url || '#'}
                                     className={`snap-center group flex items-center relative px-2 pt-1.5 pb-1 mb-1 rounded hover:bg-light/50 hover:dark:bg-dark/50 ${
                                         active
                                             ? ''
                                             : 'border border-b-3 border-transparent md:hover:border-light dark:md:hover:border-dark hover:translate-y-[-1px] active:translate-y-[1px] active:transition-all'
                                     }`}
                                 >
-                                    <span className={`w-6 h-6 mr-2 text-${color} dark:text-${colorDark}`}>
-                                        <Icon />
-                                    </span>
+                                    {Icon && (
+                                        <span className={`w-6 h-6 mr-2 text-${color} dark:text-${colorDark}`}>
+                                            <Icon />
+                                        </span>
+                                    )}
                                     <span
                                         className={`text-sm whitespace-nowrap ${
                                             active

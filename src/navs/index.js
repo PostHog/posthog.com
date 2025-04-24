@@ -3637,6 +3637,13 @@ export const productMenu = {
             url: '/data-warehouse',
         },
         {
+            name: 'LLM Observability',
+            icon: 'IconAI',
+            color: '[#681291]',
+            colorDark: '[#C170E8]',
+            url: '/llm-observability',
+        },
+        {
             name: 'Product OS',
             icon: 'IconStack',
             color: 'blue',
