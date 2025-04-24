@@ -24,19 +24,19 @@ Scale is one way to compensate: fill the training set with enough statistical we
 
 But that’s a lot of effort, plus significant lag time, and you want correct agent behavior *today*.
 
-The second problem? **It's super expensive**.
+The second problem? **LLMs are so expensive**.
 
 Training models is expensive, GPUs are expensive. Sometimes it feels like the best case scenario is a successful donation machine piped to Anthropic's coffers.
 
 But: good news. You can join this revolution in a way that won't drain your bank account.
 
-Build an **envoy**: software you control that developers can inject into their agent sessions with just a prompt.
+Build an **envoy**: perfectly conventional software *you control* that developers can inject into their agent sessions with just a prompt.
 
 ## What's an envoy?
 
 To coin a term, an **envoy** is code that meets an AI agent on your behalf.
 
-See, **these agents can run terminal commands**, so any CLI-based program can adopt this pattern.
+See, **these agents can run terminal commands**, so any CLI-based program can adopt this pattern. Envoys provide a side entrance into any agent session. A CLI app can print things to the terminal, adding to the context the agent has available. This is in additon, of course, to all the modifications such a tool can make to the project's code and configuration.
 
 With this deterministic surface introduced to the agent workflow, you can reliably and predictably:
 
@@ -45,24 +45,25 @@ With this deterministic surface introduced to the agent workflow, you can reliab
 - Use API interactions to populate account secrets and other details, while enforcing good version control hygiene  
 - Introduce specific fragments of code verbatim
 - Inject up-to-date documentation and agent rules into the project to course-correct future agent sessions  
-- Do your own LLM-based transformations on code, using prompts, context and model versions that are known to be reliable for your goals
+- Configure MCPs and other project-specific settings
+- Do your own LLM-based transformations on code, using prompts, context and model versions that you carefully select and design for reliable outcomes
 - Enjoy same-day updates to agent workflows, just like the rest of your software
 
 Think of it like a sheepdog that keeps the agent session within a territory that is productive rather than stupid, adhering to best practices **you** as a developer can describe in code.
 
-Naturally, we're building our own envoy already. It's a beta, but it's already very cool and the feedback has been promising.
+Naturally, we're building our own envoy already. It's a beta, but it's already very cool and the feedback is encouraging.
 
 ## Example code: the PostHog wizard
 
-The PostHog [wizard](https://github.com/PostHog/wizard) is an interactive command line tool that automates the basics of a PostHog integration. It grabs an API key from a user’s account and uses it to populate a .env file.
+The PostHog [wizard](https://github.com/PostHog/wizard) started its life as an interactive command line tool for automating the basics of a PostHog integration. It grabs an API key from a user’s account and uses it to populate a .env file.
 
 From here it uses LLMs and consistent prompting to read through the user’s code and integrate PostHog correctly.
 
 It turns out this is handy behavior: other LLM workflows were hallucinating PostHog API keys and agents were using out-of-date code to perform integrations.
 
-To make the wizard into an effective **envoy**, all we had to do was add an argument that suppressed the interactivity, following the default path all the way through the workflow. The agent just runs the command in its terminal.
+To make the wizard into an effective **envoy**, all we had to do was add an argument that suppressed the interactivity, following the default path all the way through the workflow. The agent just runs the command in its terminal, on the user's behalf.
 
-From here, anyone using an AI agent can copy and paste one prompt and get a working integration in about 90 seconds. It’s the best of both worlds:
+Now anyone using an AI agent can copy and paste one prompt and get a working integration in about 90 seconds. It’s the best of all worlds:
 
 - No hallucinations of API keys  
 - No out of date patterns  
@@ -78,8 +79,8 @@ We’ve got support for Next.js, React, Svelte, and React Native, with others co
 
 ## Steal this code
 
-Our [Joshua Snyder](https://posthog.com/community/profiles/32497) has been working hard to increase the surface of the wizard and make it more reliable. The code is tidy, and it even shows you how to integrate PostHog into a node-based CLI tool.
+Our [Joshua Snyder](https://posthog.com/community/profiles/32497) has been working hard to increase the surface of the wizard and make it more reliable. The project code is tidy, and it even demonstrates how to integrate PostHog into a node-based CLI tool.
 
-We get reporting on completed wizard runs alongside all the rest of our data. It's awesome.
+We get reporting on completed wizard runs alongside all the rest of our data. You can learn a lot from this project!
 
 [Fork the wizard](https://github.com/PostHog/wizard) – it's MIT licensed – and you can use it as your own starting place for an envoy. You just don't have to spend a lot of money to get into the coding agent mix.
