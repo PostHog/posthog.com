@@ -13,6 +13,10 @@ Data pipeline provides a full-featured customer data platform (CDP) in PostHog, 
 
 Destinations require the data pipeline add-on in [your billing settings](https://us.posthog.com/organization/billing).
 
+## Billing for data pipelines
+
+For information about data pipeline pricing and billing, please visit our [add-ons page](https://posthog.com/addons#data-pipelines).
+
 ## Use cases
 
 Pipelines can be used for a wide variety of use cases, such as:

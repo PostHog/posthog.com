@@ -347,7 +347,7 @@ export const dataPipelines = {
                     url: '/docs/cdp/transformations/customizing-transformations',
                 },
                 {
-                    name: 'Drop events',
+                    name: 'Drop Events',
                     url: '/docs/cdp/transformations/drop-events',
                 },
                 {
@@ -2879,8 +2879,8 @@ export const docsMenu = {
                     color: 'seagreen',
                 },
                 {
-                    name: 'Revenue tracking',
-                    url: '/docs/web-analytics/revenue-tracking',
+                    name: 'Revenue analytics',
+                    url: '/docs/web-analytics/revenue-analytics',
                     icon: 'IconPiggyBank',
                     color: 'salmon',
                     badge: {
