@@ -280,7 +280,7 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
                 }
             }
             postCategories: allPostCategory(
-                filter: { attributes: { folder: { ne: null }, label: { ne: "Customers" } } }
+                filter: { attributes: { folder: { nin: [null, "customers"] }, label: { ne: "Customers" } } }
             ) {
                 nodes {
                     attributes {
