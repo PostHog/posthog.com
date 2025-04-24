@@ -232,7 +232,7 @@ In addition to following the guidance in the [spending money](/handbook/people/s
 
 ## Tools that you may find useful
 
-- [Cal.com](https://app.cal.com/) for shared meeting booking links
+- [Calendly.com](https://calendly.com/) for shared meeting booking links
 - [Clay](https://www.clay.com/) for account and contact enrichment
 - [Granola](https://www.granola.ai/) (app) for AI note taking in meetings
 - [In Your Face](https://www.inyourface.app/) (app) don't miss meeting notifications
