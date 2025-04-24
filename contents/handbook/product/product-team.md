@@ -21,10 +21,9 @@ Each PM belongs to a small number of our small engineering teams, so that all te
 Here is a overview that shows which of our PMs currently works with which team:
 
 **Anna**
+- [Data Warehouse](/teams/data-warehouse)
 - [Product Analytics](/teams/product-analytics)
 - [Web Analytics](web-analytics)
-- [CDP](/teams/cdp)
-- [Data Warehouse](/teams/data-warehouse)
 
 **Annika**
 - [Session Replay](/teams/session-replay)
@@ -32,6 +31,7 @@ Here is a overview that shows which of our PMs currently works with which team:
 - [Experiments](/teams/experiments)
   
 **Teams with no PM currently**
+- [CDP](/teams/cdp)
 - [CRM](/teams/crm)
 - [Error Tracking](/teams/error-tracking)
 - [LLM Observability](/teams/llm-observability)
