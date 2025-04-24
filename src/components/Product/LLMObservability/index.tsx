@@ -141,26 +141,24 @@ const subfeatures = [
 
 const questions = [
     {
-        question: 'How do I test features internally?',
-        url: '/blog/feature-flag-benefits-use-cases#3-test-changes-in-production',
+        question: 'How much money am I spending per week?',
+        url: '/docs/ai-engineering/dashboard',
     },
     {
-        question: 'How do I set up an allow or deny list?',
-        url: '/blog/feature-flag-benefits-use-cases#4-manage-access',
+        question: 'What is my cost per user?',
+        url: '/docs/ai-engineering/dashboard',
     },
     {
-        question: 'How do I do a canary release?',
-        url: '/tutorials/canary-release',
+        question: 'How might my LLM react to a new prompt?',
+        url: '/docs/ai-engineering/dashboard',
     },
     {
-        question: 'How do I sample events for a high-volume API?',
-        url: '/tutorials/track-high-volume-apis',
+        question: 'How do my generations compare to each other?',
+        url: '/docs/ai-engineering/traces-generations',
     },
     {
-        question: 'How do I set up a beta?',
-    },
-    {
-        question: 'How do I test bug fixes?',
+        question: 'What does a good AI product look like?',
+        url: '/docs/max-ai',
     },
 ]
 
@@ -330,23 +328,22 @@ const PairsWithArray = [
     {
         icon: <IconGraph />,
         color: 'blue',
-        product: 'Product analytics',
-        description:
-            "Run any insight filtered by a flag's value, or group by flag to see usage across a flag's variants",
+        product: 'JOETBD',
+        description: 'JOETBD',
         url: '/product-analytics',
     },
     {
         icon: <IconUserPaths />,
         color: 'primary dark:text-primary-dark',
-        product: 'User paths',
-        description: "See how a flag's value influenced an intended outcome",
+        product: 'JOETBD',
+        description: 'JOETBD',
         url: '/product-analytics',
     },
     {
         icon: <IconRewindPlay />,
         color: 'yellow',
-        product: 'Session replay',
-        description: 'Filter recordings down to only when a feature flag was called, or to a specific value of a flag',
+        product: 'JOETBD',
+        description: 'JOETBD',
         url: '/session-replay',
     },
 ]
@@ -442,12 +439,16 @@ export const ProductFeatureFlags = () => {
                     </ul>
                 </div>
 
-                <section className="bg-accent dark:bg-accent-dark">
-                    <Marquee product={product.capitalized}>
-                        {questions.map((question, index) => {
-                            return <Question {...question} key={index} />
-                        })}
-                    </Marquee>
+                <section>
+                    <div className={`${fullWidthContent ? 'max-w-full px-8' : 'max-w-7xl mx-auto'} px-5 pb-0`}>
+                        <div className="bg-accent dark:bg-accent-dark -mx-5 md:-mx-8">
+                            <Marquee product={product.capitalized} shortFade>
+                                {questions.map((question, index) => {
+                                    return <Question {...question} key={index} />
+                                })}
+                            </Marquee>
+                        </div>
+                    </div>
                 </section>
             </div>
             <section
@@ -511,31 +512,14 @@ export const ProductFeatureFlags = () => {
                                 }
                             >
                                 <ul>
-                                    <li>Triggers and workflows to enable/disable flags on other events</li>
-                                    <li>Data exports</li>
+                                    <li>JOETBD</li>
+                                    <li>JOETBD</li>
                                 </ul>
                             </VsCompetitor>
                             <VsPostHog>
                                 <ul>
-                                    <li>
-                                        Integration with other analysis products
-                                        <ul className="pl-6">
-                                            <li className="text-sm">
-                                                View replays attached to a flag, analyze data based on a flag, etc.
-                                            </li>
-                                        </ul>
-                                    </li>
-                                    <li>
-                                        JSON payloads
-                                        <ul className="pl-6">
-                                            <li className="text-sm">
-                                                Flags can return JSON and trigger other in-app changes (like displaying
-                                                a banner)
-                                            </li>
-                                        </ul>
-                                    </li>
-                                    <li>Targeting options</li>
-                                    <li>Early access management suite for toggling betas or new features</li>
+                                    <li>JOETBD</li>
+                                    <li>JOETBD</li>
                                 </ul>
                             </VsPostHog>
                         </div>
@@ -556,24 +540,24 @@ export const ProductFeatureFlags = () => {
 
                     <ul className="list-none p-0 grid md:grid-cols-4 gap-4 mb-10 md:mb-20 mx-5 md:mx-0">
                         <TutorialCard
-                            title="How to do a canary release with feature flags in PostHog"
-                            description="A canary release or canary deployment is the process of rolling out a new feature to a subset of users before releasing it to a larger group. Once satisfied with tests and analysis, the feature rolls out to a larger group (or everyone)."
-                            url="/tutorials/canary-release"
+                            title="How to set up LLM analytics for Cohere"
+                            description="Tracking your Cohere usage, costs, and latency is crucial to understanding how your users are interacting with your AI and LLM-powered features."
+                            url="/tutorials/cohere-analytics"
                         />
                         <TutorialCard
-                            title="How to evaluate and update feature flags with the PostHog API"
-                            description='Learn how to use the <code class="text-[13px]">decide</code> endpoint to evaluate your feature flags (both boolean and multivariate), get data about them, and update them.'
-                            url="/tutorials/api-feature-flags"
+                            title="How to set up LLM analytics for Anthropic's Claude"
+                            description="In this tutorial, we'll build a basic Next.js app, implement the Claude API, and capture these events automatically using PostHog's LLM observability product."
+                            url="/tutorials/anthropic-analytics"
                         />
                         <TutorialCard
-                            title="How to bootstrap feature flags in React and Express"
-                            description="Bootstrapping feature flags make them available as soon as React and PostHog load on the client side. This enables use cases like routing to different pages on load, all feature flagged content being available on first load, and visual consistency."
-                            url="/tutorials/bootstrap-feature-flags-react"
+                            title="How to monitor LlamaIndex with Langfuse and PostHog"
+                            description="LlamaIndex is a powerful framework for connecting LLMs with external data sources. Combin PostHog with Langfuse to easily monitor your LLM app."
+                            url="/tutorials/monitor-llama-index-with-langfuse"
                         />
                         <TutorialCard
-                            title="How to set up Angular feature flags"
-                            description="Learn you how to set up the tools PostHog provides by creating a basic Angular app, adding PostHog, and then using it to capture events and manage feature flags."
-                            url="/tutorials/angular-analytics"
+                            title="How to set up OpenAI observability"
+                            description="Let's explore how add and track the generate API route, then view generation data in PostHog."
+                            url="/tutorials/openai-observability"
                         />
                     </ul>
                 </section>
