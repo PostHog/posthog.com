@@ -3,6 +3,7 @@ import { companyMenu } from '../../navs'
 import Layout from 'components/Layout'
 import React from 'react'
 import { graphql, useStaticQuery } from 'gatsby'
+import HeaderBar from 'components/OSChrome/HeaderBar'
 
 type TeamPageProps = {
     params: {
@@ -83,17 +84,19 @@ export default function TeamPage(props: TeamPageProps) {
     )?.body
     const team = data?.allSqueakTeam?.nodes?.find((node) => node?.slug === slug)
     return (
-        <Layout
-            parent={companyMenu}
-            activeInternalMenu={companyMenu.children.find((menu) => menu.name.toLowerCase() === 'teams')}
-        >
-            <Team
-                emojis={team?.emojis}
-                roadmaps={team?.roadmaps}
-                objectives={objectives}
-                body={body}
-                slug={slug?.split('/').pop() || ''}
-            />
-        </Layout>
+        <div className="h-full flex flex-col">
+            <div className="flex-shrink-0">
+                <HeaderBar showHome showBack showForward showSearch />
+            </div>
+            <div data-scheme="secondary" className="bg-primary flex-grow min-h-0">
+                <Team
+                    emojis={team?.emojis}
+                    roadmaps={team?.roadmaps}
+                    objectives={objectives}
+                    body={body}
+                    slug={slug?.split('/').pop() || ''}
+                />
+            </div>
+        </div>
     )
 }

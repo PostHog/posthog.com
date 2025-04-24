@@ -134,8 +134,11 @@ export default function TeamUpdate({
     }, [])
 
     return user?.role?.type === 'moderator' ? (
-        <form onSubmit={handleSubmit} className="m-0 mt-4">
-            <Avatar className="w-[40px] mr-[10px]" image={getAvatarURL(user?.profile)} />
+        <form onSubmit={handleSubmit} className="m-0">
+            <div className="w-[40px] mr-[10px]">
+                <Avatar image={getAvatarURL(user?.profile)} />
+            </div>
+
             <div className="ml-[50px]">
                 <div className="bg-white dark:bg-accent-dark border border-light dark:border-dark rounded-md overflow-hidden mb-4">
                     {!hideTeamSelect && (
