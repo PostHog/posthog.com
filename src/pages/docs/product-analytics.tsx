@@ -15,6 +15,7 @@ import { graphql } from 'gatsby'
 import { IconLightBulb, IconSidebarOpen } from '@posthog/icons'
 import AskMax from 'components/AskMax'
 import Intro from 'components/Docs/Intro'
+import ReaderView from 'components/ReaderView'
 
 type ProductAnalyticsProps = {
     data: {
@@ -186,13 +187,11 @@ export const Content = ({ quickLinks = false }) => {
 
 const ProductAnalytics: React.FC<ProductAnalyticsProps> = ({ data }) => {
     return (
-        <Layout>
+        <ReaderView>
             <SEO title="Product analytics - Documentation - PostHog" />
 
-            <PostLayout title={'Product Analytics'} hideSurvey hideSidebar>
-                <Content />
-            </PostLayout>
-        </Layout>
+            <Content />
+        </ReaderView>
     )
 }
 

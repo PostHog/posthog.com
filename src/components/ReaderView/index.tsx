@@ -1,7 +1,16 @@
 import React, { useRef } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import OSButton from 'components/OSButton'
-import { IconPencil, IconPullRequest, IconTextWidth, IconGear, IconInfo, IconRefresh, IconClockRewind, IconTextWidthFixed } from '@posthog/icons'
+import {
+    IconPencil,
+    IconPullRequest,
+    IconTextWidth,
+    IconGear,
+    IconInfo,
+    IconRefresh,
+    IconClockRewind,
+    IconTextWidthFixed,
+} from '@posthog/icons'
 import ScrollArea from 'components/RadixUI/ScrollArea'
 import { DebugContainerQuery } from 'components/DebugContainerQuery'
 import { Select } from '../RadixUI/Select'
@@ -22,15 +31,16 @@ import { ReaderViewProvider, useReaderView } from './context/ReaderViewContext'
 dayjs.extend(relativeTime)
 
 interface ReaderViewProps {
-    body: {
+    body?: {
         type: 'mdx' | 'plain'
         content: string
     }
-    title: string
-    tableOfContents: any
+    title?: string
+    tableOfContents?: any
     mdxComponents?: any
     commits?: any[]
     filePath?: string
+    children?: React.ReactNode
 }
 
 const backgroundImageOptions: ToggleOption[] = [
@@ -128,12 +138,13 @@ const textWidthOptions: ToggleOption[] = [
 ]
 
 export default function ReaderView({
-    body,
+    body = {},
     title,
     tableOfContents,
     mdxComponents,
     commits,
     filePath,
+    children,
 }: ReaderViewProps) {
     return (
         <ReaderViewProvider>
@@ -144,12 +155,14 @@ export default function ReaderView({
                 mdxComponents={mdxComponents}
                 commits={commits}
                 filePath={filePath}
-            />
+            >
+                {children}
+            </ReaderViewContent>
         </ReaderViewProvider>
     )
 }
 
-function ReaderViewContent({ body, title, tableOfContents, mdxComponents, commits, filePath }) {
+function ReaderViewContent({ body, title, tableOfContents, mdxComponents, commits, filePath, children }) {
     const contentRef = useRef(null)
     const {
         isNavVisible,
@@ -163,6 +176,8 @@ function ReaderViewContent({ body, title, tableOfContents, mdxComponents, commit
         handleLineHeightChange,
         setActiveInternalMenu,
     } = useReaderView()
+
+    const showSidebar = tableOfContents && tableOfContents?.length > 0
 
     return (
         <div className="@container w-full h-full flex flex-col">
@@ -179,7 +194,7 @@ function ReaderViewContent({ body, title, tableOfContents, mdxComponents, commit
                 showSearch
                 showBookmark
                 showToc
-                showSidebar
+                showSidebar={showSidebar}
             />
             {/* Second row - Main Content */}
             <div data-scheme="secondary" className="bg-primary flex w-full gap-2 min-h-0 flex-grow">
@@ -245,9 +260,11 @@ function ReaderViewContent({ body, title, tableOfContents, mdxComponents, commit
                 <ScrollArea dataScheme="primary" className="bg-primary border border-primary flex-grow rounded">
                     <div
                         ref={contentRef}
-                        className={`p-4 mx-auto transition-all ${fullWidthContent ? 'max-w-full' : 'max-w-xl'}`}
+                        className={`p-4 mx-auto transition-all ${
+                            fullWidthContent || body?.type !== 'mdx' ? 'max-w-full' : 'max-w-xl'
+                        }`}
                     >
-                        <h2>{title}</h2>
+                        {title && <h2>{title}</h2>}
                         <div
                             data-scheme="secondary"
                             className="@4xl:hidden p-4 mb-4 bg-primary rounded border border-primary"
@@ -261,12 +278,12 @@ function ReaderViewContent({ body, title, tableOfContents, mdxComponents, commit
                                 </MDXProvider>
                             </div>
                         ) : (
-                            body.content
+                            children
                         )}
                     </div>
                 </ScrollArea>
                 <AnimatePresence>
-                    {isTocVisible && (
+                    {showSidebar && isTocVisible && (
                         <motion.div
                             id="toc"
                             className="hidden @4xl:block flex-shrink-0 overflow-hidden"
@@ -333,18 +350,20 @@ function ReaderViewContent({ body, title, tableOfContents, mdxComponents, commit
                 </motion.div>
                 <div className="flex-grow flex justify-between items-center">
                     <div>Questions?</div>
-                    <div>
-                        <AppOptionsButton
-                            lineHeightMultiplier={lineHeightMultiplier}
-                            handleLineHeightChange={handleLineHeightChange}
-                        />
-                    </div>
+                    {body?.type === 'mdx' && (
+                        <div>
+                            <AppOptionsButton
+                                lineHeightMultiplier={lineHeightMultiplier}
+                                handleLineHeightChange={handleLineHeightChange}
+                            />
+                        </div>
+                    )}
                 </div>
                 <motion.div
                     className={`flex-shrink-0 items-center flex justify-end transition-all min-w-0 relative z-10 ${
-                        isTocVisible ? '@4xl:min-w-[300px]' : 'w-auto'
+                        showSidebar && isTocVisible ? '@4xl:min-w-[300px]' : 'w-auto'
                     }`}
-                    animate={isTocVisible ? 'open' : 'closed'}
+                    animate={showSidebar && isTocVisible ? 'open' : 'closed'}
                 >
                     {filePath && (
                         <OSButton

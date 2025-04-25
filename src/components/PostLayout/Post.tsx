@@ -50,7 +50,7 @@ export default function Post({ children }: { children: React.ReactNode }) {
     const { user } = useUser()
 
     return (
-        <div className={!internalMenu ? '-mt-1' : ''}>
+        <div data-scheme="secondary" className={`${!internalMenu ? '-mt-1' : ''} bg-primary`}>
             {menu && mobileMenu && <MobileNav className={`flex ${compact ? '' : 'md:hidden'}`} menu={menu} />}
             <div
                 className={`w-full relative md:flex justify-between mx-auto transition-all ${

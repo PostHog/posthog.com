@@ -11,6 +11,7 @@ import { useLayoutData } from 'components/Layout/hooks'
 import QuickLinks from 'components/QuickLinks'
 import Intro from 'components/Docs/Intro'
 import AskMax from 'components/AskMax'
+import ReaderView from 'components/ReaderView'
 
 export const quickLinks = [
     {
@@ -124,38 +125,36 @@ export const Content = ({ quickLinks = false }) => {
 
 const SessionRecording: React.FC<SessionRecordingProps> = ({ data }) => {
     return (
-        <Layout>
+        <ReaderView>
             <SEO title="Session replay - Docs - PostHog" />
 
-            <PostLayout title={'Session replay'} hideSurvey hideSidebar>
-                <Intro
-                    subheader="Getting started"
-                    title="Session replay"
-                    description="Play back sessions to diagnose UI issues, improve support, and get context for nuanced user behavior."
-                    buttonText="Record your first session"
-                    buttonLink="/docs/session-replay/installation"
-                    imageColumnClasses="max-w-96 mt-8 md:mt-0"
-                    imageUrl="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Home/Slider/images/session-recording-hog.png"
-                    imageClasses=""
-                />
+            <Intro
+                subheader="Getting started"
+                title="Session replay"
+                description="Play back sessions to diagnose UI issues, improve support, and get context for nuanced user behavior."
+                buttonText="Record your first session"
+                buttonLink="/docs/session-replay/installation"
+                imageColumnClasses="max-w-96 mt-8 md:mt-0"
+                imageUrl="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Home/Slider/images/session-recording-hog.png"
+                imageClasses=""
+            />
 
-                <AskMax
-                    quickQuestions={[
-                        'How do I mask sensitive data?',
-                        'Can I enable recordings only for certain users?',
-                        'How can I control costs?',
-                    ]}
-                />
+            <AskMax
+                quickQuestions={[
+                    'How do I mask sensitive data?',
+                    'Can I enable recordings only for certain users?',
+                    'How can I control costs?',
+                ]}
+            />
 
-                <Content />
+            <Content />
 
-                <div className="">
-                    <CallToAction to="/docs/session-replay/manual" width="full">
-                        Visit the manual
-                    </CallToAction>
-                </div>
-            </PostLayout>
-        </Layout>
+            <div className="">
+                <CallToAction to="/docs/session-replay/manual" width="full">
+                    Visit the manual
+                </CallToAction>
+            </div>
+        </ReaderView>
     )
 }
 

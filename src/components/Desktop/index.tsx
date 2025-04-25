@@ -2,21 +2,9 @@ import React, { useRef } from 'react'
 import { IconGraph, IconPieChart, IconDocument, IconQuestion } from '@posthog/icons'
 import Link from 'components/Link'
 import { useApp } from '../../context/App'
+import useProduct from 'hooks/useProduct'
 
 const apps = [
-    {
-        Icon: IconPieChart,
-        type: 'link',
-        label: 'Web analytics',
-        color: '[#36C46F]',
-        url: '/web-analytics',
-    },
-    {
-        label: 'Product analytics',
-        Icon: IconGraph,
-        color: 'blue',
-        url: '/product-analytics',
-    },
     {
         label: 'notable customers.mdx',
         Icon: IconDocument,
@@ -49,6 +37,7 @@ const AppLink = ({ Icon, type, color, label, url }) => {
 
 export default function Desktop() {
     const { taskbarHeight } = useApp()
+    const products = useProduct()
 
     return (
         <div className="fixed size-full p-5">
@@ -67,7 +56,16 @@ export default function Desktop() {
                 className="overflow-hidden"
             >
                 <ul className="p-0 m-0 list-none flex flex-col flex-wrap h-full content-start gap-x-8 gap-y-4">
-                    {apps.map((app, index) => {
+                    {[
+                        ...products.map((product) => ({
+                            label: product.name,
+                            url: product.slug,
+                            type: 'link',
+                            Icon: product.Icon,
+                            color: product.color,
+                        })),
+                        ...apps,
+                    ].map((app, index) => {
                         return (
                             <li key={app.label + index} className="w-[90px]">
                                 <AppLink {...app} />
