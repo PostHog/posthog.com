@@ -217,6 +217,7 @@ export default function Hero() {
     const [showNPS, setShowNPS] = useState(false)
     const [showIntegrationPrompt, setShowIntegrationPrompt] = useState(false)
     const { enterpriseMode } = useLayoutData()
+    const posthog = usePostHog()
     const heroTitle = enterpriseMode
         ? 'The modern digital optimization platform'
         : 'How developers build successful products'
@@ -290,43 +291,57 @@ export default function Hero() {
                                 ? 'Product solutions reimagined for the 21 century'
                                 : 'The single platform to analyze, test, observe, and deploy new features'}
                         </h2>
-                        <div className="flex justify-center items-center gap-2 home-hero-cta">
-                            {enterpriseMode ? (
-                                <CallToAction size="lg" to="/demo">
-                                    Contact Sales
-                                </CallToAction>
-                            ) : (
-                                <SignupCTA />
+                        <div className="home-hero-cta">
+                            <div className="flex justify-center items-center gap-2">
+                                {enterpriseMode ? (
+                                    <CallToAction size="lg" to="/demo">
+                                        Contact Sales
+                                    </CallToAction>
+                                ) : (
+                                    <SignupCTA />
+                                )}
+                                <TrackedCTA
+                                    key={enterpriseMode ? 'talk-to-sales' : 'talk-to-a-human'}
+                                    event={{ name: `clicked Talk to a human` }}
+                                    href="/talk-to-a-human"
+                                    type="secondary"
+                                    size="lg"
+                                >
+                                    {enterpriseMode ? 'Contact enterprise sales' : 'Talk to a human'}
+                                </TrackedCTA>
+                            </div>
+                            {!showIntegrationPrompt && (
+                                <p className="text-sm text-center m-0 mt-5 font-semibold text-primary/85 dark:text-primary-dark/85 hidden md:block">
+                                    Or try our{' '}
+                                    <button
+                                        className="font-bold text-red dark:text-yellow"
+                                        onClick={() => {
+                                            setShowIntegrationPrompt(!showIntegrationPrompt)
+                                            posthog?.capture('clicked Integrate with AI')
+                                        }}
+                                    >
+                                        90-second AI integration
+                                    </button>
+                                </p>
                             )}
-                            <TrackedCTA
-                                key={enterpriseMode ? 'talk-to-sales' : 'talk-to-a-human'}
-                                event={{ name: `clicked Talk to a human` }}
-                                href="/talk-to-a-human"
-                                type="secondary"
-                                size="lg"
-                            >
-                                {enterpriseMode ? 'Contact enterprise sales' : 'Talk to a human'}
-                            </TrackedCTA>
-                            <TrackedCTA
-                                key="integrate-with-ai"
-                                event={{ name: `clicked Integrate with AI` }}
-                                onClick={() => setShowIntegrationPrompt(!showIntegrationPrompt)}
-                                type="secondary"
-                                size="lg"
-                                className="hidden md:inline-flex"
-                            >
-                                90 second AI integration
-                            </TrackedCTA>
                         </div>
+
                         {enterpriseMode && (
                             <div className="flex justify-center mt-2 enterprise-mode-home-hero-cta">
                                 <EnterpriseSignupCTA />
                             </div>
                         )}
+                        {showIntegrationPrompt && (
+                            <motion.div
+                                initial={{ height: 0 }}
+                                animate={{ height: 'auto' }}
+                                className="max-w-screen-lg mx-auto px-5 mt-8"
+                            >
+                                <IntegrationPrompt />
+                            </motion.div>
+                        )}
                     </div>
-                    <div className="max-w-screen-lg mx-auto px-5 mt-8">
-                        {showIntegrationPrompt && <IntegrationPrompt />}
-                    </div>
+
                     <Board />
                 </div>
             </section>
