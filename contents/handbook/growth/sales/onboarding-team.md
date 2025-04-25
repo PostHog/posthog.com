@@ -11,11 +11,11 @@ showTitle: true
 
 ### What does this team do?
 
-The north star metric for the Onboarding team is 3-month logo retention from the first $500+ forecasted bill, which can be tracked here (WIP).
+The north star metric for the Onboarding team is 3-month logo retention from the first $500+ forecasted bill, which can be tracked here ([link](https://us.posthog.com/project/2/dashboard/363452)).
 
-Secondarily, we also care about net dollar retention for this segment (WIP).
+Secondarily, we also care about net dollar retention for this segment.
 
-### Which customers get onboarding?
+### Which customers get onboarding
 
 As above, the segment consists of customers who self-serve PostHog and generate a forecasted bill over $500. In practice, because billing is metered and in arrears, and we don't know what people will pay when they sign up (or when they first exceed a $500 forecast), so _most_ accounts > $500 forecast are routed to us. We also handle a couple of other segments:
 
@@ -91,8 +91,13 @@ Remember to add a short summary from meetings in a Note, and if you need to foll
 **3. Kanban view** ([link](https://posthog.vitally-eu.io/hubs/fcbd959f-4b0e-4786-9c37-8a1d9fc4f634/5dca462e-a6d2-4710-a8f8-a2f4b492569c ))
 
 A supplementary view that’s great for getting a general overview of progress.
-   
-### How to deal with complex technical issues?
+
+### Account analysis
+
+- Take a look at the [Metabase primer](https://github.com/PostHog/company-internal/wiki/Onboarding-Workflows#metabase-account-analysis) and follow the tips included there.
+- Check and get familiar with the [Account health check](https://posthog.com/handbook/growth/sales/health-checks) page.
+
+### How to deal with complex technical issues
 
 Our role is pretty hybrid and lives at the intersection of other teams. As much as we love solving our own problems, escalations may happen. Here’s a brief guide on how to handle them:
 
