@@ -79,9 +79,7 @@ export default function Orders() {
 
     return user && orders?.length > 0 ? (
         <>
-            <li className="bg-border/20 dark:bg-border-dark/20 border-y border-light dark:border-dark text-[13px] px-2 py-1.5 !my-1 text-primary/50 dark:text-primary-dark/60 z-20 m-0 font-semibold">
-                Merch orders
-            </li>
+            <li className="text-[13px] px-2 py-1.5 font-semibold">Merch orders</li>
             <li className="px-1">
                 <ul className="m-0 p-0 list-none px-1 max-h-[130px] overflow-auto">
                     {orders.map(({ id, orderNumber, date, statusURL }) => {

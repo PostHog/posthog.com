@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { motion } from 'framer-motion'
-import { IconSearch, IconChatHelp, IconUser } from '@posthog/icons'
+import { IconSearch, IconChatHelp, IconUser, IconApp, IconMessage, IconLetter, IconLock } from '@posthog/icons'
 import { useApp } from '../../context/App'
 
 import { Popover } from 'components/RadixUI/Popover'
@@ -11,13 +11,15 @@ import { useUser } from 'hooks/useUser'
 import getAvatarURL from 'components/Squeak/util/getAvatar'
 import { menuData } from './menuData'
 import { Authentication } from 'components/Squeak'
+import Link from 'components/Link'
+import Orders from 'components/MainNav'
 
 export default function TaskBarMenu() {
     const { windows, bringToFront, focusedWindow } = useApp()
     const [isAnimating, setIsAnimating] = useState(false)
     const totalWindows = windows.length
     const [isWindowPopoverOpen, setIsWindowPopoverOpen] = useState(false)
-    const { user, notifications } = useUser()
+    const { user, notifications, logout } = useUser()
 
     const isLoggedIn = !!user
 
@@ -141,9 +143,75 @@ export default function TaskBarMenu() {
                     }
                     dataScheme="primary"
                 >
-                    <div className="w-full h-full bg-primary text-primary">
-                        <Authentication initialView="sign-in" showBanner={false} showProfile={false} />
-                    </div>
+                    {user ? (
+                        <ul className="list-none text-left m-0 p-0 pb-[3px] space-y-[2px] w-[200px]">
+                            <li className="text-[13px] px-2 py-1.5 font-semibold">Go to...</li>
+                            <li className="px-1">
+                                <Link
+                                    className="group/item text-sm px-2 py-2 rounded-sm hover:bg-border dark:hover:bg-border-dark block"
+                                    to="https://app.posthog.com"
+                                >
+                                    <IconApp className="opacity-50 group-hover/item:opacity-75 inline-block mr-2 w-6" />
+                                    PostHog app
+                                </Link>
+                            </li>
+                            <li className="text-[13px] px-2 py-1.5 font-semibold">Community</li>
+                            <li className="px-1">
+                                <Link
+                                    className="group/item text-sm px-2 py-2 rounded-sm hover:bg-border dark:hover:bg-border-dark block"
+                                    to="/questions"
+                                >
+                                    <IconMessage className="opacity-50 group-hover/item:opacity-75 inline-block mr-2 w-6" />
+                                    Forums
+                                </Link>
+                            </li>
+                            {user?.profile && (
+                                <>
+                                    <li className="px-1">
+                                        <Link
+                                            className="group/item flex items-center text-sm px-2 py-2 rounded-sm hover:bg-border dark:hover:bg-border-dark justify-between"
+                                            to="/community/notifications"
+                                        >
+                                            <span>
+                                                <IconLetter className="opacity-50 group-hover/item:opacity-75 inline-block mr-2 w-6" />
+                                                Notifications
+                                            </span>
+                                            {notifications.length > 0 ? (
+                                                <span className="py-0.5 px-0.5 min-w-[20px] text-xs bg-red text-white flex justify-center items-center rounded-full">
+                                                    {notifications.length}
+                                                </span>
+                                            ) : null}
+                                        </Link>
+                                    </li>
+                                    <li className="px-1">
+                                        <Link
+                                            className="group/item flex items-center text-sm px-2 py-2 rounded-sm hover:bg-border dark:hover:bg-border-dark"
+                                            to={`/community/profiles/${user?.profile.id}`}
+                                        >
+                                            <IconUser className="opacity-50 inline-block w-6 group-hover/parent:opacity-75 mr-2" />
+                                            My profile
+                                        </Link>
+                                    </li>
+                                </>
+                            )}
+
+                            <li className="px-1">
+                                <button
+                                    onClick={() => logout()}
+                                    className="group/item flex items-center text-sm px-2 py-2 rounded-sm hover:bg-border dark:hover:bg-border-dark w-full"
+                                >
+                                    <IconLock className="opacity-50 group-hover/item:opacity-75 inline-block mr-2 w-6" />
+                                    Community logout
+                                </button>
+                            </li>
+
+                            <Orders />
+                        </ul>
+                    ) : (
+                        <div className="w-full h-full bg-primary text-primary">
+                            <Authentication initialView="sign-in" showBanner={false} showProfile={false} />
+                        </div>
+                    )}
                 </Popover>
             </aside>
         </motion.div>
