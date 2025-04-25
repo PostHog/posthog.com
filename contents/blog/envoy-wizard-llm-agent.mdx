@@ -50,6 +50,8 @@ With this deterministic surface introduced to the agent workflow, you can reliab
 - Enjoy same-day updates to agent workflows, just like the rest of your software
 - Provide up-to-date information to the agent specific to the project
 
+![Envoy diagram](https://res.cloudinary.com/dmukukwp6/image/upload/envoy_diagram_9dd36b6c32.png)
+
 Think of it like a sheepdog that keeps the agent session within a territory that is productive rather than stupid, adhering to best practices **you** as a developer can describe in code.
 
 Naturally, we're building our own envoy already. It's a beta, but it's already very cool and the feedback is encouraging.
@@ -63,6 +65,8 @@ From here it uses LLMs and consistent prompting to read through the user’s cod
 It turns out this is handy behavior: other LLM workflows were hallucinating PostHog API keys and agents were using out-of-date code to perform integrations.
 
 To make the wizard into an effective **envoy**, all we had to do was add an argument that suppressed the interactivity, following the default path all the way through the workflow. The agent just runs the command in its terminal, on the user's behalf.
+
+![Agent session](https://res.cloudinary.com/dmukukwp6/image/upload/agent_session_04407be548.gif)
 
 Now anyone using an AI agent can copy and paste one prompt and get a working integration in about 90 seconds. It’s the best of all worlds:
 
@@ -80,7 +84,7 @@ We’ve got support for Next.js, React, Svelte, and React Native, with others co
 
 ## Steal this code
 
-Our [Joshua Snyder](https://posthog.com/community/profiles/32497) has been working hard to increase the surface of the wizard and make it more reliable. The project code is tidy, and it even demonstrates how to integrate PostHog into a node-based CLI tool.
+Our [Joshua Snyder](https://posthog.com/community/profiles/32497) has been working hard to increase the surface of the wizard and make it more reliable. The project code is tidy, and it even demonstrates how to integrate product analytics into a node-based CLI tool.
 
 We get reporting on completed wizard runs alongside all the rest of our data. You can learn a lot from this project!
 
