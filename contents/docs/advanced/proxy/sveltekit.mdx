@@ -14,11 +14,11 @@ import ProxyWarning from "../_snippets/proxy-usage-warning.mdx"
 For SvelteKit, you can use [server hooks](https://svelte.dev/docs/kit/hooks#Server-hooks) to proxy requests to PostHog. 
 This is proven to work with Cloudflare Workers. 
 
-**WARNING** This will only work in SSR mode, if your site is static, SvelteKit will ignore `hooks.server.ts`. 
-
 To do this, create a file named `hooks.server.ts` in your `src` directory (or the dir you configured to contain source files).  
 In this file, set up code to match requests to a custom route, set a new `host` header, change the URL to point to PostHog, and rewrite the response. 
 Change `us` to `eu` to proxy to our EU Cloud. 
+
+**WARNING** This will only work in SSR mode, if your site is static, SvelteKit will ignore `hooks.server.ts`. 
 
 ```ts
 import type { Handle } from '@sveltejs/kit';
