@@ -194,6 +194,7 @@ export const PlanColumns = ({ billingProducts, highlight = 'paid' }) => {
     const highestSupportPlan = platformAndSupportProduct?.plans?.slice(-1)[0]
 
     const [isPlanComparisonVisible, setIsPlanComparisonVisible] = useState(false)
+
     return (
         <>
             <section id="plans" className={`${section} mt-8 !mb-12 md:px-4`}>
@@ -307,7 +308,7 @@ export const PlanColumns = ({ billingProducts, highlight = 'paid' }) => {
                                             'project_based_permissioning',
                                             'ingestion_taxonomy',
                                             'tagging',
-                                        ].includes(f.key)
+                                        ].includes(f.key) || f.entitlement_only !== true
                                 )
                                 .map((feature: BillingV2FeatureType) => (
                                     <>
