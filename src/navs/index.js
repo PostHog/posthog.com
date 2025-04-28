@@ -343,15 +343,15 @@ export const dataPipelines = {
                     url: '/docs/cdp/transformations',
                 },
                 {
-                    name: 'Customization',
-                    url: '/docs/cdp/transformations/customizing-transformations',
+                    name: 'Transformations',
                 },
+                // {
+                //     name: 'Customization',
+                //     url: '/docs/cdp/transformations/customizing-transformations',
+                // },
                 {
                     name: 'Drop Events',
                     url: '/docs/cdp/transformations/drop-events',
-                },
-                {
-                    name: 'Transformations',
                 },
             ],
             dynamicChildren: 'data-pipeline-transformations',
