@@ -341,6 +341,7 @@ const allProductsData = graphql`
                                 key
                                 name
                                 description
+                                category
                                 limit
                                 note
                                 entitlement_only
@@ -366,6 +367,7 @@ const allProductsData = graphql`
                             key
                             name
                             description
+                            category
                             limit
                             note
                             entitlement_only

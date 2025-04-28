@@ -259,6 +259,21 @@ export const createSchemaCustomization: GatsbyNode['createSchemaCustomization'] 
       mdx: Mdx @link(by: "frontmatter.templateId", from: "pipelineId")
     }
     type ProductDataProductsAddonsFeatures {
+        category: String
+        limit: String
+        note: String
+        entitlement_only: Boolean
+        is_plan_default: Boolean
+    }
+    type ProductDataProductsAddonsPlansFeatures {
+        category: String
+        limit: String
+        note: String
+        entitlement_only: Boolean
+        is_plan_default: Boolean
+    }
+    type ProductDataProductsPlansFeatures {
+        category: String
         limit: String
         note: String
         entitlement_only: Boolean
