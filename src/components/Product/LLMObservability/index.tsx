@@ -477,7 +477,7 @@ export const ProductFeatureFlags = () => {
                             <VsPostHog>
                                 <ul>
                                     <li>
-                                        You want to understandLLM costs on a per user basis, in addition to other axes
+                                        You want to understand LLM costs on a per user basis, in addition to other axes
                                     </li>
                                     <li>
                                         You want to combine LLM observability with other tools, including error tracking
