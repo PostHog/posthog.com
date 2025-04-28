@@ -1,5 +1,5 @@
 import { NextApiRequest, NextApiResponse } from 'next'
-import { findNewAshbyJobs, addNewCompaniesToConfig } from '../components/Jobs/jobsAshby'
+import { findNewAshbyJobs } from '../components/Jobs/jobsAshby'
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
     const logs: string[] = []
@@ -12,8 +12,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     }
 
     try {
-        const companies = await findNewAshbyJobs()
-        const addedCompanies = await addNewCompaniesToConfig()
+        const { companies, configEntries } = await findNewAshbyJobs()
 
         // Restore original console.log
         console.log = originalLog
@@ -28,7 +27,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
                 logs: logs,
             },
             companiesFound: companies,
-            companiesAdded: addedCompanies,
+            companiesAdded: configEntries,
         })
     } catch (error) {
         // Restore original console.log

@@ -57,7 +57,7 @@ export async function findNewAshbyJobs() {
         console.log(configEntries)
         console.log('\nAdd these entries to the COMPANIES array in src/data/companies.ts')
 
-        return companies
+        return { companies, configEntries }
     } catch (error) {
         console.error('Error searching for Ashby jobs:', error)
         throw error
