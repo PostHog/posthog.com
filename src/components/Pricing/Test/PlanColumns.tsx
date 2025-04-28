@@ -280,6 +280,7 @@ export const PlanColumns = ({ billingProducts, highlight = 'paid' }) => {
                             <div className="col-span-4 bg-accent/50 dark:bg-black/75 px-3 py-2 text-sm">
                                 <strong className="text-primary/75 dark:text-primary-dark/75">Base price</strong>
                             </div>
+                            {/* Header */}
                             {platformAndSupportProduct?.plans
                                 ?.filter((plan: BillingV2PlanType) => plan.name !== 'Teams') // This is a temporary addition until the teams addon is shipped and the teams plan is removed
                                 ?.map((plan: BillingV2PlanType) => {
@@ -299,6 +300,7 @@ export const PlanColumns = ({ billingProducts, highlight = 'paid' }) => {
                                         </div>
                                     )
                                 })}
+                            {/* Rows */}
                             {highestSupportPlan?.features
                                 ?.filter(
                                     (f: BillingV2FeatureType) =>
@@ -312,6 +314,7 @@ export const PlanColumns = ({ billingProducts, highlight = 'paid' }) => {
                                 )
                                 .map((feature: BillingV2FeatureType) => (
                                     <>
+                                        {/* Feature names */}
                                         <div className="col-span-4 bg-accent/50 dark:bg-black/75 px-3 py-2 text-sm">
                                             {feature.description ? (
                                                 <Tooltip content={feature.description}>
@@ -325,6 +328,7 @@ export const PlanColumns = ({ billingProducts, highlight = 'paid' }) => {
                                                 </strong>
                                             )}
                                         </div>
+                                        {/* Feature values */}
                                         {platformAndSupportProduct?.plans
                                             ?.filter((plan: BillingV2PlanType) => plan.name !== 'Teams') // This is a temporary addition until the teams addon is shipped and the teams plan is removed
                                             ?.map((plan: BillingV2PlanType) => {
