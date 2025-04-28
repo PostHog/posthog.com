@@ -81,11 +81,3 @@ nuxt build
 <CLIUpload />
 
 Where `./path/to/assets` is the path to your built assets. This is usually `.output/public` for Nuxt 3.
-
-#### 6. Delete sourcemaps (recommended)
-
-You might want to prevent sourcemaps from being publicly accessible after uploading them to PostHog.
-
-```bash
-rm -rf ./path/to/assets/**/*.map
-```
