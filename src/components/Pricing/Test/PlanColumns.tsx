@@ -267,13 +267,11 @@ export const PlanColumns = ({ billingProducts, highlight = 'paid' }) => {
                     <div className="overflow-x-auto -mx-4 px-4 md:mx-0 md:px-0">
                         <div className="grid grid-cols-16 mb-1 min-w-[1000px]">
                             <div className="col-span-4 px-3 py-1">&nbsp;</div>
-                            {platformAndSupportProduct?.plans
-                                ?.filter((plan: BillingV2PlanType) => plan.name !== 'Teams') // This is a temporary addition until the teams addon is shipped and the teams plan is removed
-                                ?.map((plan: BillingV2PlanType) => (
-                                    <div className="col-span-4 px-3 py-1" key={plan.key}>
-                                        <strong className="text-sm opacity-75">{plan.name}</strong>
-                                    </div>
-                                ))}
+                            {platformAndSupportProduct?.plans?.map((plan: BillingV2PlanType) => (
+                                <div className="col-span-4 px-3 py-1" key={plan.key}>
+                                    <strong className="text-sm opacity-75">{plan.name}</strong>
+                                </div>
+                            ))}
                         </div>
 
                         <div className="grid grid-cols-16 mb-2 border-x border-b border-light dark:border-dark bg-white dark:bg-accent-dark [&>div]:border-t [&>div]:border-light dark:[&>div]:border-dark min-w-[1000px]">
@@ -281,25 +279,23 @@ export const PlanColumns = ({ billingProducts, highlight = 'paid' }) => {
                                 <strong className="text-primary/75 dark:text-primary-dark/75">Base price</strong>
                             </div>
                             {/* Header */}
-                            {platformAndSupportProduct?.plans
-                                ?.filter((plan: BillingV2PlanType) => plan.name !== 'Teams') // This is a temporary addition until the teams addon is shipped and the teams plan is removed
-                                ?.map((plan: BillingV2PlanType) => {
-                                    return (
-                                        <div className="col-span-4 px-3 py-2 text-sm" key={`${plan.key}-base-price`}>
-                                            {plan.included_if === 'no_active_subscription' ? (
-                                                <span>Free forever</span>
-                                            ) : plan.included_if === 'has_subscription' ? (
-                                                <span>$0</span>
-                                            ) : plan.unit_amount_usd ? (
-                                                `$${parseFloat(plan.unit_amount_usd).toFixed(0)}/mo`
-                                            ) : plan.contact_support ? (
-                                                'Contact us'
-                                            ) : (
-                                                'Contact us'
-                                            )}
-                                        </div>
-                                    )
-                                })}
+                            {platformAndSupportProduct?.plans?.map((plan: BillingV2PlanType) => {
+                                return (
+                                    <div className="col-span-4 px-3 py-2 text-sm" key={`${plan.key}-base-price`}>
+                                        {plan.included_if === 'no_active_subscription' ? (
+                                            <span>Free forever</span>
+                                        ) : plan.included_if === 'has_subscription' ? (
+                                            <span>$0</span>
+                                        ) : plan.unit_amount_usd ? (
+                                            `$${parseFloat(plan.unit_amount_usd).toFixed(0)}/mo`
+                                        ) : plan.contact_support ? (
+                                            'Contact us'
+                                        ) : (
+                                            'Contact us'
+                                        )}
+                                    </div>
+                                )
+                            })}
                             {/* Rows */}
                             {highestSupportPlan?.features
                                 ?.filter(
@@ -329,34 +325,32 @@ export const PlanColumns = ({ billingProducts, highlight = 'paid' }) => {
                                             )}
                                         </div>
                                         {/* Feature values */}
-                                        {platformAndSupportProduct?.plans
-                                            ?.filter((plan: BillingV2PlanType) => plan.name !== 'Teams') // This is a temporary addition until the teams addon is shipped and the teams plan is removed
-                                            ?.map((plan: BillingV2PlanType) => {
-                                                const planFeature = plan?.features?.find((f) => f.key === feature.key)
-                                                return (
-                                                    <div
-                                                        className="col-span-4 px-3 py-2 text-sm"
-                                                        key={`${plan.key}-${feature.key}`}
-                                                    >
-                                                        {planFeature ? (
-                                                            <div className="flex gap-x-2">
-                                                                {planFeature.note ?? (
-                                                                    <IconCheck className="w-5 h-5 text-green" />
-                                                                )}
-                                                                {planFeature.limit && (
-                                                                    <span className="opacity-75">
-                                                                        <>
-                                                                            {planFeature.limit} {planFeature.unit}
-                                                                        </>
-                                                                    </span>
-                                                                )}
-                                                            </div>
-                                                        ) : (
-                                                            <></>
-                                                        )}
-                                                    </div>
-                                                )
-                                            })}
+                                        {platformAndSupportProduct?.plans?.map((plan: BillingV2PlanType) => {
+                                            const planFeature = plan?.features?.find((f) => f.key === feature.key)
+                                            return (
+                                                <div
+                                                    className="col-span-4 px-3 py-2 text-sm"
+                                                    key={`${plan.key}-${feature.key}`}
+                                                >
+                                                    {planFeature ? (
+                                                        <div className="flex gap-x-2">
+                                                            {planFeature.note ?? (
+                                                                <IconCheck className="w-5 h-5 text-green" />
+                                                            )}
+                                                            {planFeature.limit && (
+                                                                <span className="opacity-75">
+                                                                    <>
+                                                                        {planFeature.limit} {planFeature.unit}
+                                                                    </>
+                                                                </span>
+                                                            )}
+                                                        </div>
+                                                    ) : (
+                                                        <></>
+                                                    )}
+                                                </div>
+                                            )
+                                        })}
                                     </>
                                 ))}
                         </div>
