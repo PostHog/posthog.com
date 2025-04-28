@@ -15,6 +15,12 @@ import {
     IconAI,
     IconUnlock,
     IconUserPaths,
+    IconWarning,
+    IconToggle,
+    IconPerson,
+    IconHandMoney,
+    IconActivity,
+    IconChatHelp,
 } from '@posthog/icons'
 import { CallToAction } from 'components/CallToAction'
 import { CustomerCard } from 'components/Products/CustomerCard'
@@ -61,33 +67,33 @@ const teamSlug = '/teams/llm-observability'
 const featuresPerRow = 3
 const features = [
     {
-        title: 'Multivariate feature flags',
-        description: 'Simultaneously test multiple versions against a control group',
+        title: 'Ready-made dashboards',
+        description: 'Use ready-made dashboards for tracking on a per model or per user',
         image: (
             <CloudinaryImage
-                src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Product/FeatureFlags/images/multivariate.png"
+                src="https://res.cloudinary.com/dmukukwp6/image/upload/cost_per_modal_e0d5520b4a.png"
                 width={420}
             />
         ),
         border: true,
     },
     {
-        title: 'Multivariate feature flags',
-        description: 'Simultaneously test multiple versions against a control group',
+        title: 'Latency alerts',
+        description: 'Get alerts when latency exceeds a threshold, or when it spikes for a specific model.',
         image: (
             <CloudinaryImage
-                src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Product/FeatureFlags/images/multivariate.png"
+                src="https://res.cloudinary.com/dmukukwp6/image/upload/generation_lag_d6246c9b28.png"
                 width={420}
             />
         ),
         border: true,
     },
     {
-        title: 'Multivariate feature flags',
-        description: 'Simultaneously test multiple versions against a control group',
+        title: 'Cost tracking',
+        description: 'Monitor your per-user costs, and combine with revenue analytics for more insights',
         image: (
             <CloudinaryImage
-                src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Product/FeatureFlags/images/multivariate.png"
+                src="https://res.cloudinary.com/dmukukwp6/image/upload/cost_perpuser_5d836abe95.png"
                 width={420}
             />
         ),
@@ -95,47 +101,32 @@ const features = [
     },
 ]
 
-const subfeaturesItemCount = 4
+const subfeaturesItemCount = 5
 const subfeatures = [
     {
-        icon: <IconClock />,
-        title: 'History & activity feed',
-        description: "See who hit a feature flag, the flag's value, and which page they were on",
+        icon: <IconChatHelp />,
+        title: 'Generation tracking',
+        description: 'Monitor generation events and prompts, with autocapture',
     },
     {
         icon: <IconDecisionTree />,
-        title: 'Local evaluation',
-        description: "Improves speed by caching a flag's value on initial load",
+        title: 'Trace monitoring',
+        description: 'Follow the full user interaction, including all generations',
     },
     {
-        icon: <IconRevert />,
-        title: 'Instant rollbacks',
-        description: 'Disable a feature without touching your codebase',
+        icon: <IconHandMoney />,
+        title: 'Cost reporting',
+        description: 'Keep an eye on overall costs, or break it down by model, user, and more',
     },
     {
-        icon: <IconLoading />,
-        title: 'Bootstrapping',
-        description: 'Get flags and values to trigger changes immediately on page load',
+        icon: <IconPerson />,
+        title: 'Users tracking',
+        description: 'Breakdown every interaction on an individual user basis',
     },
     {
-        icon: <IconUnlock />,
-        title: 'Persist flags across authentication steps',
-        description: 'Make sure users have a consistent experience after login',
-    },
-    {
-        icon: <IconShield />,
-        title: 'Flag administration',
-        description: 'See the history of a feature flag or control who can modify flags with user roles',
-    },
-    {
-        icon: <IconTerminal />,
-        title: 'SDKs or API',
-        description: 'Copy code snippets for your library of choice, or implement yourself with the API',
-    },
-    {
-        icon: <IconStack />,
-        title: 'Multi-environment support',
-        description: 'Test flags in local development or staging by using the same flag key across PostHog projects',
+        icon: <IconActivity />,
+        title: 'Latency monitoring',
+        description: 'Understand latency over time and how models impact performance',
     },
 ]
 
@@ -199,125 +190,95 @@ const faqs = [
     },
 ]
 
-const comparisonColumnCount = 6
+const comparisonColumnCount = 5
 const comparison = [
     {
-        feature: 'Target by percentage',
+        feature: 'Generation tracking',
         companies: {
-            LaunchDarkly: true,
-            Optimizely: true,
-            Flagsmith: true,
-            GrowthBook: true,
+            Langfuse: true,
+            Langsmith: true,
+            Helicone: true,
             PostHog: true,
         },
     },
     {
-        feature: 'Target by person properties',
+        feature: 'Latency tracking',
         companies: {
-            LaunchDarkly: true,
-            Optimizely: true,
-            Flagsmith: true,
-            GrowthBook: true,
+            Langfuse: true,
+            Langsmith: true,
+            Helicone: true,
             PostHog: true,
         },
     },
     {
-        feature: 'Flag scheduling',
+        feature: 'Cost tracking, incl. cost-per-user',
         companies: {
-            LaunchDarkly: true,
-            Optimizely: false,
-            Flagsmith: false,
-            GrowthBook: false,
+            Langfuse: true,
+            Langsmith: false,
+            Helicone: true,
             PostHog: true,
         },
     },
     {
-        feature: 'Experimentation',
+        feature: 'Trace visualization',
         companies: {
-            LaunchDarkly: true,
-            Optimizely: true,
-            Flagsmith: true,
-            GrowthBook: true,
+            Langfuse: true,
+            Langsmith: true,
+            Helicone: true,
             PostHog: true,
         },
     },
     {
-        feature: 'Multivariate flags',
+        feature: 'Token tracking',
         companies: {
-            LaunchDarkly: true,
-            Optimizely: false,
-            Flagsmith: true,
-            GrowthBook: false,
+            Langfuse: true,
+            Langsmith: true,
+            Helicone: true,
             PostHog: true,
         },
     },
     {
-        feature: 'Unlimited flags for free',
+        feature: 'Prompt playground',
         companies: {
-            LaunchDarkly: false,
-            Optimizely: true,
-            Flagsmith: true,
-            GrowthBook: true,
-            PostHog: true,
-        },
-    },
-    {
-        feature: 'Free third-party plugins',
-        companies: {
-            LaunchDarkly: true,
-            Optimizely: false,
-            Flagsmith: true,
-            GrowthBook: false,
-            PostHog: true,
-        },
-    },
-    {
-        feature: 'Activity logs',
-        companies: {
-            LaunchDarkly: true,
-            Optimizely: false,
-            Flagsmith: true,
-            GrowthBook: false,
-            PostHog: true,
-        },
-    },
-    {
-        feature: 'Data export',
-        companies: {
-            LaunchDarkly: true,
-            Optimizely: true,
-            Flagsmith: false,
-            GrowthBook: true,
+            Langfuse: true,
+            Langsmith: true,
+            Helicone: true,
             PostHog: false,
         },
     },
     {
-        feature: 'Multi-environment support',
+        feature: 'Prompt evaluations',
         companies: {
-            LaunchDarkly: true,
-            Optimizely: true,
-            Flagsmith: true,
-            GrowthBook: true,
+            Langfuse: true,
+            Langsmith: true,
+            Helicone: true,
+            PostHog: false,
+        },
+    },
+    {
+        feature: 'Alerting',
+        companies: {
+            Langfuse: false,
+            Langsmith: true,
+            Helicone: true,
             PostHog: true,
         },
     },
     {
-        feature: 'Automatic IP resolution',
+        feature: 'SOC 2 compliance',
         companies: {
-            LaunchDarkly: false,
-            Optimizely: false,
-            Flagsmith: false,
-            GrowthBook: false,
+            Langfuse: true,
+            Langsmith: true,
+            Helicone: true,
             PostHog: true,
         },
     },
     {
-        feature: 'Recall person properties by default',
+        feature: 'HIPAA and GDPR compliance',
         companies: {
-            LaunchDarkly: false,
-            Optimizely: false,
-            Flagsmith: false,
-            GrowthBook: false,
+            Langfuse: true,
+            Langsmith: true,
+            Helicone: true,
             PostHog: true,
         },
     },
@@ -326,25 +287,25 @@ const comparison = [
 const pairsWithItemCount = 3
 const PairsWithArray = [
     {
-        icon: <IconGraph />,
-        color: 'blue',
-        product: 'JOETBD',
-        description: 'JOETBD',
-        url: '/product-analytics',
-    },
-    {
-        icon: <IconUserPaths />,
-        color: 'primary dark:text-primary-dark',
-        product: 'JOETBD',
-        description: 'JOETBD',
-        url: '/product-analytics',
+        icon: <IconWarning />,
+        color: 'orange',
+        product: 'Error tracking',
+        description: 'Get alerts when an error occurs, then deep dive into it and assign blame to someone else.',
+        url: '/error-tracking',
     },
     {
         icon: <IconRewindPlay />,
         color: 'yellow',
-        product: 'JOETBD',
-        description: 'JOETBD',
+        product: 'Session replays',
+        description: 'Jump from a trace straight to the session that caused it to see what the user was doing.',
         url: '/session-replay',
+    },
+    {
+        icon: <IconToggle />,
+        color: 'blue',
+        product: 'Feature flags',
+        description: 'Gate changes behind feature flags, including new LLM models, pricing tiers or UI changes. ',
+        url: '/feature-flags',
     },
 ]
 
@@ -396,7 +357,7 @@ export const ProductFeatureFlags = () => {
                     icon={<IconAI />}
                     product={product.capitalized}
                     title='Who keeps an eye on your AI? <span class="text-red dark:text-yellow">You do.</span>'
-                    description="Track usage, costs, latency, and more for you AI products"
+                    description="Track usage, costs, latency, and loads more metrics for your AI products"
                 />
 
                 <div className="text-center">
@@ -413,12 +374,10 @@ export const ProductFeatureFlags = () => {
             <div className={`${fullWidthContent ? 'max-w-full px-8' : 'max-w-7xl mx-auto'} px-5 py-4 pb-0`}>
                 <section id="features" className="-mt-36 pt-36">
                     <h2 className="text-4xl md:text-5xl text-center">
-                        All the features you'd expect, but{' '}
-                        <span className="text-red dark:text-yellow">10x better in the PostHog ecosystem</span>
+                        Features that work great with Product OS,
+                        <br />
+                        <span className="text-red dark:text-yellow">or equally great on their own</span>
                     </h2>
-                    <p className="text-lg opacity-75 text-center">
-                        Sure you can use error tracking solo, but it's better with other PostHog products.
-                    </p>
                 </section>
 
                 <div className="mt-12">
@@ -508,14 +467,23 @@ export const ProductFeatureFlags = () => {
                                 }
                             >
                                 <ul>
-                                    <li>JOETBD</li>
-                                    <li>JOETBD</li>
+                                    <li>
+                                        You don't need any product insights and only want to track operational metrics
+                                    </li>
+                                    <li>You're building a mobile specific product and need deep mobile support</li>
+                                    <li>You don't want to use an open source product</li>
                                 </ul>
                             </VsCompetitor>
                             <VsPostHog>
                                 <ul>
-                                    <li>JOETBD</li>
-                                    <li>JOETBD</li>
+                                    <li>
+                                        You want to understandLLM costs on a per user basis, in addition to other axes
+                                    </li>
+                                    <li>
+                                        You want to combine LLM observability with other tools, including error tracking
+                                        and session replays
+                                    </li>
+                                    <li>You need easy regulatory compliance for HIPAA and GDPR</li>
                                 </ul>
                             </VsPostHog>
                         </div>
