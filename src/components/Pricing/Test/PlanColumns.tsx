@@ -298,16 +298,7 @@ export const PlanColumns = ({ billingProducts, highlight = 'paid' }) => {
                             })}
                             {/* Rows */}
                             {highestSupportPlan?.features
-                                ?.filter(
-                                    (f: BillingV2FeatureType) =>
-                                        ![
-                                            // TODO: this shouldn't be necessary, update billing products api to include entitlement_only info
-                                            'role_based_access',
-                                            'project_based_permissioning',
-                                            'ingestion_taxonomy',
-                                            'tagging',
-                                        ].includes(f.key) || f.entitlement_only !== true
-                                )
+                                ?.filter((f: BillingV2FeatureType) => f.entitlement_only !== true)
                                 .map((feature: BillingV2FeatureType) => (
                                     <>
                                         {/* Feature names */}
