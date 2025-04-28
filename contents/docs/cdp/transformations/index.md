@@ -16,7 +16,8 @@ PostHog enables you to transform your events in realtime using a variety of pre-
 
 ![Transformations list in PostHog](https://res.cloudinary.com/dmukukwp6/image/upload/transformation_list_a15ad4e309.png)
 
-<!-- Need more flexibility? Our [custom transformations](/docs/cdp/transformations/customizing-transformations) enable you to write your own Hog code to transform events exactly how you want. You can modify, enrich, or filter your events using our powerful Hog programming language. -->
+<!-- TODO: Add this back in once we support custom transformations
+Need more flexibility? Our [custom transformations](/docs/cdp/transformations/customizing-transformations) enable you to write your own Hog code to transform events exactly how you want. You can modify, enrich, or filter your events using our powerful Hog programming language. -->
 
 ## Filtering
 
@@ -51,7 +52,8 @@ This history helps you:
 
 The history tab is particularly useful when multiple team members are working with transformations, as it provides transparency and accountability for all changes.
 
-<!-- ## Going deeper
+<!--  TODO: Add this back in once we support custom transformations
+## Going deeper
 
 If your needs are more specific than our defaults, try customizing your transformation's implementation. You can write, test, and deploy your own transformation in minutes.
 

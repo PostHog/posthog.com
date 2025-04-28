@@ -345,6 +345,7 @@ export const dataPipelines = {
                 {
                     name: 'Transformations',
                 },
+                // TODO: Add this back in once we support custom transformations
                 // {
                 //     name: 'Customization',
                 //     url: '/docs/cdp/transformations/customizing-transformations',
