@@ -26,7 +26,8 @@ If you're selling subscriptions, record the subscription timeframe. If you're se
 ```javascript
 posthog.capture('subscription_purchased', {
 	months: 12,
-	price: 19.99
+	price: 1999,     // in cents, equivalent to $19.99
+	currency: 'USD', // ISO 4217 currency code
 })
 ```
 
@@ -46,7 +47,7 @@ Even at the earliest stages of a business, data can be scattered between multipl
 
 Instead of setting up complex event-sending pipelines, you can bring the data directly into PostHog's data warehouse and analyze it all from there.
 
-PostHog's **data warehouse** solves this problem by aggregating multiple data sources. Your dashboards can then report everything captured from data warehouse and analytics events in a single view. You can even build insights that traverse both.
+PostHog's **data warehouse** solves this problem by aggregating multiple data sources. You can then access our [revenue analytics](/docs/web-analytics/revenue-analytics) dashboard to see what your revenue looks like across time and across your events/sources! You can also build custom insights that traverse both.
 
 You can query *anything* from your app database with [data warehouse](/docs/data-warehouse/query). Data warehouse also provides quick setup for ongoing capture of revenue events from [Stripe](/docs/cdp/sources/stripe) and [Chargebee](/docs/cdp/sources/chargebee). 
 
@@ -65,7 +66,22 @@ Which events are revenue-generating? Are they already tracked, or do you need to
 
 ## Revenue reporting
 
-With revenue logged, we can build reports to understand how much revenue is captured over time. This is a great way to understand the health of a business.
+With revenue logged, you need a way to see it. There are two options here.
+
+### Revenue analytics dashboard
+
+Revenue analytics is now in beta! It enables easy reporting of revenue generated over time. You'll also get new insights for revenue growth and lifetime customer value.
+
+<ProductScreenshot
+    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/Screenshot_2025_04_22_at_15_18_52_079665efa3.png" 
+    imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/Screenshot_2025_04_22_at_15_18_35_71ced993e5.png"
+    alt="Revenue analytics dashboard"
+    classes="rounded"
+/>
+
+Revenue analytics is a work-in-progress, so stay tuned for additional insights.
+
+### Build a custom trend insight
 
 A **trends** insight is a great start for your revenue reporting:
 
@@ -77,7 +93,6 @@ A **trends** insight is a great start for your revenue reporting:
 It will look like something like this:
 
 ![revenue series configuration](https://res.cloudinary.com/dmukukwp6/image/upload/revenue_series_configuration_cfe291c330.png)
-
 
 From here we can choose the timespan for the report, grouping anywhere from hourly to monthly, with comparisons to the previous period if helpful.
 
