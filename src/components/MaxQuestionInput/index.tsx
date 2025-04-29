@@ -3,6 +3,7 @@ import Link from 'components/Link'
 import { CallToAction } from 'components/CallToAction'
 import CloudinaryImage from 'components/CloudinaryImage'
 import { navigate } from 'gatsby'
+import { Bang } from 'components/Icons'
 
 type MaxQuestionInputProps = {
     className?: string
@@ -35,8 +36,17 @@ export const MaxQuestionInput = ({
 
     return (
         <div
-            className={`bg-gradient-to-br from-[#e5e7e0] to-[#f0f2ed] dark:from-[#242529] dark:to-[#2a2c31] border border-border dark:border-border-dark text-[15px] rounded-lg p-8 my-8 ${className}`}
+            className={`bg-gradient-to-br from-[#e5e7e0] to-[#f0f2ed] dark:from-[#242529] dark:to-[#2a2c31] border border-border dark:border-border-dark text-[15px] rounded-lg p-8 my-8 ${className} relative`}
         >
+            <div className="absolute -top-6 -right-6">
+                <div className="relative">
+                    <Bang className="w-[120px] animate-grow" />
+                    <p className="px-4 text-center m-0 absolute top-0 left-0 right-0 bottom-0 flex flex-col items-center justify-center text-black uppercase leading-none font-bold text-sm rotate-6">
+                        Just <br />
+                        try it!
+                    </p>
+                </div>
+            </div>
             <div className="flex flex-col md:flex-row items-center gap-8">
                 <div className="w-full md:w-1/3 flex-shrink-0 flex items-center justify-center">
                     <CloudinaryImage
@@ -66,6 +76,7 @@ export const MaxQuestionInput = ({
                                 type="text"
                                 value={question}
                                 onChange={(e) => setQuestion(e.target.value)}
+                                onClick={() => setQuestion('')}
                                 onKeyDown={(e) => {
                                     if (e.key === 'Enter') {
                                         handleSubmit()

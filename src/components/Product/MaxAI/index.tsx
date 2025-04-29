@@ -243,13 +243,20 @@ export const ProductMaxAI = () => {
                 <Hero
                     icon="ai"
                     product={product.capitalized}
-                    title="Your AI-powered product analyst and assistant"
+                    title='Your <span class="text-red dark:text-yellow">AI-powered</span>, product-managing hedgehog'
                     description="Get instant insights, automate tasks, and learn best practices through natural conversation"
                     image="https://res.cloudinary.com/dmukukwp6/image/upload/max_preview_side_9365f7d4b2.png"
                 />
 
                 <div className="max-w-3xl mx-auto mt-8">
                     <MaxQuestionInput />
+                    <p className="text-center text-sm text-muted dark:text-muted-dark mt-1">
+                        Not got data in PostHog yet?{' '}
+                        <Link to="https://app.posthog.com/signup" className="text-red dark:text-yellow font-semibold">
+                            Sign up for free
+                        </Link>{' '}
+                        or read on 👇
+                    </p>
                 </div>
 
                 <div className="text-center"></div>
