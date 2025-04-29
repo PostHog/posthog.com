@@ -277,7 +277,7 @@ const comparison = [
         feature: 'Sequential step order',
         companies: {
             Amplitude: true,
-            Mixpanel: true,
+            Mixpanel: false,
             Heap: true,
             Pendo: true,
             PostHog: true,
@@ -779,7 +779,7 @@ export const ProductProductAnalytics = () => {
                     color="blue"
                     icon={<IconGraph />}
                     product={product.capitalized}
-                    title="Product analytics with autocapture"
+                    title="Product analytics with Brian says hello"
                     description="PostHog is the only product analytics platform built to natively work with <a href='/session-replay'>session replay</a>, <a href='/feature-flags'>feature flags</a>, <a href='/experiments'>experiments</a>, and <a href='/surveys'>surveys</a>."
                 />
 

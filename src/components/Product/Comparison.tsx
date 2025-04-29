@@ -61,6 +61,9 @@ const companies = {
     Datadog: {
         comparisonURL: '',
     },
+    ChatGPT: {
+        comparisonURL: '/blog/posthog-vs-chatgpt',
+    },
     PostHog: {
         comparisonURL: '',
     },
