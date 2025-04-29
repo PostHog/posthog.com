@@ -1,7 +1,7 @@
 import { MenuType } from 'components/RadixUI/MenuBar'
 import React from 'react'
 import { IconApps, IconLogomark } from '@posthog/icons'
-import { productMenu } from '../../navs'
+import { productMenu, docsMenu } from '../../navs'
 import * as Icons from '@posthog/icons'
 
 interface ProductMenuItem {
@@ -13,6 +13,18 @@ interface ProductMenuItem {
 
 interface ProductMenu {
     children: ProductMenuItem[]
+}
+
+interface DocsMenuItem {
+    name: string
+    url?: string
+    icon?: string
+    color?: string
+    children?: DocsMenuItem[]
+}
+
+interface DocsMenu {
+    children: DocsMenuItem[]
 }
 
 const getProductMenuItems = () => {
@@ -43,6 +55,42 @@ const getProductMenuItems = () => {
             icon: <IconApps className="text-red size-4" />,
         },
     ]
+}
+
+const getDocsMenuItems = () => {
+    const processMenuItem = (item: DocsMenuItem): any => {
+        if (!item.name) return null
+
+        const baseItem: any = {
+            type: 'item' as const,
+            label: item.name,
+        }
+
+        if (item.url) {
+            baseItem.link = item.url
+        }
+
+        if (item.icon) {
+            const IconComponent = Icons[item.icon as keyof typeof Icons]
+            baseItem.icon = <IconComponent className={`text-${item.color || 'gray'} size-4`} />
+        }
+
+        if (item.children) {
+            return {
+                type: 'submenu' as const,
+                label: item.name,
+                items: item.children
+                    .map(processMenuItem)
+                    .filter(Boolean)
+            }
+        }
+
+        return baseItem
+    }
+
+    return (docsMenu as DocsMenu).children
+        .map(processMenuItem)
+        .filter(Boolean)
 }
 
 export const menuData: MenuType[] = [
@@ -121,81 +169,7 @@ export const menuData: MenuType[] = [
     },
     {
         trigger: 'Docs',
-        items: [
-            {
-                type: 'item',
-                label: 'Getting started',
-                link: '/docs/getting-started/install',
-            },
-            { type: 'separator' },
-            {
-                type: 'submenu',
-                label: 'Product OS',
-                items: [
-                    {
-                        type: 'item',
-                        label: 'What is Product OS?',
-                        link: '/docs/product-os',
-                    },
-                    {
-                        type: 'item',
-                        label: 'Notebooks',
-                        link: '/docs/notebooks',
-                    },
-                    {
-                        type: 'item',
-                        label: 'Toolbar',
-                        link: '/docs/toolbar',
-                    },
-                    {
-                        type: 'item',
-                        label: 'Max AI',
-                        link: '/docs/max-ai',
-                    },
-                ],
-            },
-            { type: 'separator' },
-            {
-                type: 'submenu',
-                label: 'Products',
-                items: [
-                    {
-                        type: 'item',
-                        label: 'Email Link',
-                    },
-                    {
-                        type: 'item',
-                        label: 'Messages',
-                    },
-                    {
-                        type: 'item',
-                        label: 'Notes',
-                    },
-                ],
-            },
-            { type: 'separator' },
-            {
-                type: 'submenu',
-                label: 'Self-host',
-                items: [
-                    {
-                        type: 'item',
-                        label: 'Overview',
-                        link: '/docs/self-host',
-                    },
-                    {
-                        type: 'item',
-                        label: 'Configure',
-                        link: '/docs/self-host/configure',
-                    },
-                    {
-                        type: 'item',
-                        label: 'Troubleshooting',
-                        link: '/docs/self-host/deploy/troubleshooting',
-                    },
-                ],
-            },
-        ],
+        items: getDocsMenuItems(),
     },
     {
         trigger: 'Company',
