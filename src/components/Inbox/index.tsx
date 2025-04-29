@@ -16,6 +16,8 @@ import { useToast } from '../../context/Toast'
 import { QuestionData, StrapiRecord } from 'lib/strapi'
 import { useUser } from 'hooks/useUser'
 import { navigate } from 'gatsby'
+import Lottie from 'lottie-react'
+import hourglassAnimation from 'images/icons8-hourglass.json'
 
 dayjs.extend(relativeTime)
 
@@ -125,7 +127,11 @@ export default function Inbox(props) {
                                         <div className="w-32 text-center">Latest activity</div>
                                     </div>
                                     <div className="px-2 py-1">
-                                        {questions.data?.map((question) => {
+                                        {isLoading ? (
+                                            <div className="flex items-center justify-center py-8 h-full">
+                                                <Lottie animationData={hourglassAnimation} className="size-6 opacity-75" title="Loading questions..." />
+                                            </div>
+                                        ) : questions.data?.map((question) => {
                                             const {
                                                 attributes: {
                                                     subject,
