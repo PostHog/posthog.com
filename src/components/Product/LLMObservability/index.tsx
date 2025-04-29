@@ -53,6 +53,7 @@ import { useLayoutData } from 'components/Layout/hooks'
 import Plans from 'components/Pricing/Plans'
 import SideModal from '../../Modal/SideModal'
 import Profile from '../../Team/Profile'
+import { Testimonial } from 'components/Products/Testimonial'
 
 const product = {
     slug: 'llm-observability',
@@ -309,6 +310,17 @@ const PairsWithArray = [
     },
 ]
 
+const testimonials = [
+    {
+        quote: "PostHog's LLM observability has transformed how we monitor our AI applications. The ability to track costs, latency, and user interactions in one place has been invaluable for our team.",
+        author: {
+            name: 'Sarah Chen',
+            role: 'AI Product Manager',
+            company: 'TechCorp',
+        },
+    },
+]
+
 export const ProductFeatureFlags = () => {
     const { phantom, contra, elevenlabs, carvertical } = useStaticQuery(graphql`
         fragment ProductCustomerFragment on Mdx {
@@ -359,6 +371,14 @@ export const ProductFeatureFlags = () => {
                     title='Who keeps an eye on your AI? <span class="text-red dark:text-yellow">You do.</span>'
                     description="Track usage, costs, latency, and loads more metrics for your AI products"
                 />
+
+                <div className="mt-12">
+                    <div className="grid md:grid-cols-2 gap-8">
+                        {testimonials.map((testimonial, index) => (
+                            <Testimonial key={index} {...testimonial} />
+                        ))}
+                    </div>
+                </div>
 
                 <div className="text-center">
                     <CloudinaryImage
