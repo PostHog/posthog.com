@@ -57,40 +57,93 @@ const getProductMenuItems = () => {
     ]
 }
 
-const getDocsMenuItems = () => {
-    const processMenuItem = (item: DocsMenuItem): any => {
-        if (!item.name) return null
+// Recursively group items under section dividers at any level
+const groupBySectionDividers = (items: DocsMenuItem[]): any[] => {
+    const processedItems: any[] = []
+    let currentSection: DocsMenuItem | null = null
+    let currentSectionItems: any[] = []
 
+    for (const item of items) {
+        if (!item.name) continue
+
+        // If this is a section header (only has name)
+        if (!item.url && !item.children && !item.icon && !item.color) {
+            // If we have a previous section, add it to processed items
+            if (currentSection) {
+                processedItems.push({
+                    type: 'submenu' as const,
+                    label: currentSection.name,
+                    items: currentSectionItems,
+                })
+            }
+            // Start a new section
+            currentSection = item
+            currentSectionItems = []
+        } else {
+            // Process the item recursively
+            const processedItem = processMenuItemWithGrouping(item)
+            if (processedItem) {
+                if (currentSection) {
+                    currentSectionItems.push(processedItem)
+                } else {
+                    processedItems.push(processedItem)
+                }
+            }
+        }
+    }
+
+    // Add the last section if it exists
+    if (currentSection && currentSectionItems.length > 0) {
+        processedItems.push({
+            type: 'submenu' as const,
+            label: currentSection.name,
+            items: currentSectionItems,
+        })
+    }
+
+    return processedItems
+}
+
+const processMenuItemWithGrouping = (item: DocsMenuItem): any => {
+    if (!item.name) return null
+
+    // If the item has children, process them recursively with grouping
+    if (item.children) {
         const baseItem: any = {
-            type: 'item' as const,
+            type: 'submenu' as const,
             label: item.name,
         }
-
         if (item.url) {
             baseItem.link = item.url
         }
-
         if (item.icon) {
             const IconComponent = Icons[item.icon as keyof typeof Icons]
             baseItem.icon = <IconComponent className={`text-${item.color || 'gray'} size-4`} />
         }
-
-        if (item.children) {
-            return {
-                type: 'submenu' as const,
-                label: item.name,
-                items: item.children
-                    .map(processMenuItem)
-                    .filter(Boolean)
-            }
-        }
-
+        baseItem.items = groupBySectionDividers(item.children)
         return baseItem
     }
 
-    return (docsMenu as DocsMenu).children
-        .map(processMenuItem)
-        .filter(Boolean)
+    // If the item has a URL, it's a regular menu item
+    if (item.url) {
+        const baseItem: any = {
+            type: 'item' as const,
+            label: item.name,
+            link: item.url,
+        }
+        if (item.icon) {
+            const IconComponent = Icons[item.icon as keyof typeof Icons]
+            baseItem.icon = <IconComponent className={`text-${item.color || 'gray'} size-4`} />
+        }
+        return baseItem
+    }
+
+    // If the item only has a name, it's a section divider (handled in grouping)
+    return null
+}
+
+const getDocsMenuItems = () => {
+    return groupBySectionDividers((docsMenu as DocsMenu).children)
 }
 
 export const menuData: MenuType[] = [
