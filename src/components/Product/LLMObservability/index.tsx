@@ -310,17 +310,6 @@ const PairsWithArray = [
     },
 ]
 
-const testimonials = [
-    {
-        quote: "PostHog's LLM observability has transformed how we monitor our AI applications. The ability to track costs, latency, and user interactions in one place has been invaluable for our team.",
-        author: {
-            name: 'Sarah Chen',
-            role: 'AI Product Manager',
-            company: 'TechCorp',
-        },
-    },
-]
-
 export const ProductFeatureFlags = () => {
     const { phantom, contra, elevenlabs, carvertical } = useStaticQuery(graphql`
         fragment ProductCustomerFragment on Mdx {
@@ -372,14 +361,6 @@ export const ProductFeatureFlags = () => {
                     description="Track usage, costs, latency, and loads more metrics for your AI products"
                 />
 
-                <div className="mt-12">
-                    <div className="grid md:grid-cols-2 gap-8">
-                        {testimonials.map((testimonial, index) => (
-                            <Testimonial key={index} {...testimonial} />
-                        ))}
-                    </div>
-                </div>
-
                 <div className="text-center">
                     <CloudinaryImage
                         src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Product/FeatureFlags/images/screenshot-feature-flags.png"
@@ -392,6 +373,40 @@ export const ProductFeatureFlags = () => {
 
             <SmoothScroll />
             <div className={`${fullWidthContent ? 'max-w-full px-8' : 'max-w-7xl mx-auto'} px-5 py-4 pb-0`}>
+                <section className="mb-20 px-5">
+                    <div className="bg-accent dark:bg-accent-dark rounded-lg p-8 md:p-12">
+                        <div className="flex flex-col md:flex-row items-center gap-8">
+                            <div className="flex-shrink-0">
+                                <img
+                                    src="https://res.cloudinary.com/dmukukwp6/image/upload/chris_raroque_fb1af07ae1.jpg"
+                                    alt="Chris Raroque"
+                                    className="w-24 h-24 rounded-full object-cover"
+                                />
+                            </div>
+                            <div className="text-center md:text-left">
+                                <blockquote className="text-lg md:text-xl font-medium mb-4">
+                                    "PostHog's LLM observability saved us so much time. We used to use a whole system of
+                                    tools to track the prompts and responses for debugging and this is an infinitely
+                                    better UI. We use it for every single AI experiment we run now —{' '}
+                                    <span className="bg-highlight p-0.5">
+                                        so, let me know if you need another quote, because the whole team loves it!
+                                    </span>
+                                    "
+                                </blockquote>
+                                <div className="font-semibold">
+                                    <a
+                                        href="https://chrisraroque.com/"
+                                        className="hover:text-red dark:hover:text-yellow"
+                                    >
+                                        Chris Raroque
+                                    </a>
+                                </div>
+                                <div className="text-sm opacity-75">Founder and YouTuber</div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
                 <section id="features" className="-mt-36 pt-36">
                     <h2 className="text-4xl md:text-5xl text-center">
                         Features that work great with Product OS,
