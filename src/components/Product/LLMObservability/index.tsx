@@ -389,7 +389,8 @@ export const ProductFeatureFlags = () => {
                                     tools to track the prompts and responses for debugging and this is an infinitely
                                     better UI. We use it for every single AI experiment we run now —{' '}
                                     <span className="bg-highlight p-0.5">
-                                        so, let me know if you need another quote, because the whole team loves it!
+                                        also, if you need another quote then let me know, because the whole team loves
+                                        it!
                                     </span>
                                     "
                                 </blockquote>
