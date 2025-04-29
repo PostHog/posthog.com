@@ -20,15 +20,7 @@ export const MaxCTA = ({ className = '', children, question }: MaxCTAProps): JSX
                 <div className="space-y-1">
                     <div className="font-bold text-primary dark:text-primary-dark">Do this faster with Max AI</div>
                     <p className="text-muted dark:text-muted-dark m-0">
-                        If you're opted in to{' '}
-                        <Link
-                            href="https://us.posthog.com/#panel=feature-previews%3Aartificial-hog"
-                            externalNoIcon
-                            className="text-red-600 dark:text-yellow-400 hover:underline"
-                        >
-                            our free PostHog AI beta
-                        </Link>
-                        , you can{' '}
+                        If you've got data in PostHog already, you can{' '}
                         <Link
                             href={maxUrl}
                             externalNoIcon
