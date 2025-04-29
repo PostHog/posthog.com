@@ -16,6 +16,7 @@ To link Hubspot:
 2. Click **New source** and select Hubspot
 3. Select the Hubspot account you want to link and click **Connect app**
 4. *Optional:* Add a prefix to your table names
-5. Click **Next**
+5. Select the tables you want to import and configure [their syncing method](/docs/cdp/sources#incremental-vs-full-table).
+6. Click **Import**
 
-The data warehouse then starts syncing your Hubspot data. You can see details and progress in the [data pipeline sources tab](https://us.posthog.com/pipeline/sources).
+The data warehouse then starts syncing your Hubspot data. You can see details, progress, and rows synced in the [data pipeline sources tab](https://us.posthog.com/pipeline/sources).

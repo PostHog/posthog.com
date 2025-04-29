@@ -11,13 +11,13 @@ showTitle: true
 
 ### What does this team do?
 
-The north star metric for the Onboarding team is 3-month logo retention from the first $500+ forecasted bill, which can be tracked here (WIP).
+The north star metric for the Onboarding team is 3-month logo retention from the first $500+ forecasted bill, which can be tracked here ([link](https://us.posthog.com/project/2/dashboard/363452)).
 
-Secondarily, we also care about net dollar retention for this segment (WIP).
+Secondarily, we also care about net dollar retention for this segment.
 
 ### Which customers get onboarding?
 
-As above, the segment consists of customers who self-serve PostHog and generate a forecasted bill over $500. In practice, because billing is metered and in arrears, and we don't know what people will pay when they sign up (or when they first exceed a $500 forecast), so _most_ accounts > $500 forecast are routed to us. We also handle a couple of other segments:
+As above, the segment consists of customers who self-serve PostHog and generate a forecasted bill of over $500. In practice, because billing is metered and in arrears, and we don't know what people will pay when they sign up (or when they first exceed a $500 forecast), so _most_ accounts > $500 forecast are routed to us. We also handle a couple of other segments:
 
 - Startup customers rolling off, who have generated a first bill in the $500-$1500 range.
 - Startup plan customers with high credit usage (> ~$1500).
@@ -28,22 +28,22 @@ As above, the segment consists of customers who self-serve PostHog and generate 
 Since we primarily focus on customers who've signed up and have a forecasted bill, in most circumstances, we're not the right choice to talk to customers who've:
 
 - Not signed up/generated a bill, but have contacted sales.
-- Are early stage startups on the startup plan with no billing/low credit usage (<$500/mo).
+- Are early-stage startups on the startup plan with no billing/low credit usage (<$500/mo).
 
 ### What does onboarding consist of?
 
-Customers in this bucket essentially get high touch assistance for the first three months, who will focus on:
+Customers in this bucket essentially get high-touch assistance for the first three months, who will focus on:
 
 - **Billing Assistance**: It's easy to configure PostHog poorly, pay for products you don't use (eg Groups, Data Pipelines, Autocapture), or generally misconfigure such that the ROI is poor. Our main objective and first pass outreach is oriented towards trimming unnecessary spend, and communicating our position that [we are the cheapest for every product](/why).
-- **Technical Assistance**: Beyond billing related configuration, we assist customers with any technical questions they have around setup and fitting PostHog into their stack. One 30-minute call discussing customer's architecture/providing suggestions, can go a long way to preventing issues down the road, especially for more complex setups. Misconfiguration (especially for analytics/identity merging) is a known churn risk.
+- **Technical Assistance**: Beyond billing-related configuration, we assist customers with any technical questions they have around setup and fitting PostHog into their stack. One 30-minute call discussing customer's architecture/providing suggestions can go a long way to preventing issues down the road, especially for more complex setups. Misconfiguration (especially for analytics/identity merging) is a known churn risk.
 - **Annual Plan/Sales-Assist**: When appropriate, get the customer on an annual plan or pass off to an AE (for more complex procurement process).
 
 Tactically, the work consists of: 
 - Audit the account based on data in Vitally and elsewhere (see below for more on [tooling](#tooling)). 
-- Email owners/admins about any configuration issues affecting their bill or ability to use the product properly, and make ourselves available for a 30 mintue meeting.
+- Email owners/admins about any configuration issues affecting their bill or ability to use the product properly, and make ourselves available for a 30-minute meeting.
   - Refund/adjust bills for misconfigurations, per our [policy](/handbook/growth/sales/refunds).
 - Create a Slack Connect channel where spend is appropriate (on track to spend $20K/yr).
-- Continue follow up (1-3 times depending on reception) throughout 3 billing periods, serve as point of contact as questions come up. Escalate anything we cannot answer directly.  
+- Continue follow up (1-3 times, depending on reception) throughout 3 billing periods, serve as a point of contact as questions come up. Escalate anything we cannot answer directly.  
 
 The response rate for billing/cost-reduction initial messaging is typically very high (we don't have exact data yet, but ~75% at some point over the first three months).
 
@@ -57,7 +57,7 @@ The main tools for this team are:
   - Onboarding Specialist role is set by region [here](https://posthog.vitally-eu.io/settings/playbooks/50120bc6-98ae-4fc2-af38-7374ba424474)
 - Metabase [Customer Usage Dash (US/EU)](https://metabase.prod-us.posthog.dev/dashboard/139-customer-usage-breakdown?organization_id=&project_id=&lookback_days=30)
 - Stripe (make sure you have “Support Associate” permission level)
-- Cal.com and BuildBetter (read more in [How we work](https://posthog.com/handbook/growth/sales/how-we-work#tools-we-use))
+- Calendly and BuildBetter (read more in [How we work](https://posthog.com/handbook/growth/sales/how-we-work#tools-we-use))
 - QuoteHog (useful for predicting the usage)
 
 ### Onboarding Lifecycle
@@ -92,7 +92,12 @@ Remember to add a short summary from meetings in a Note, and if you need to foll
 
 A supplementary view that’s great for getting a general overview of progress.
    
-### How to deal with complex technical issues?
+### Account analysis
+
+- Take a look at the [Metabase primer](https://github.com/PostHog/company-internal/wiki/Onboarding-Workflows#metabase-account-analysis) and follow the tips included there.
+- Check and get familiar with the [Account health check](https://posthog.com/handbook/growth/sales/health-checks) page.
+
+### How to deal with complex technical issues
 
 Our role is pretty hybrid and lives at the intersection of other teams. As much as we love solving our own problems, escalations may happen. Here’s a brief guide on how to handle them:
 
@@ -102,9 +107,10 @@ Our role is pretty hybrid and lives at the intersection of other teams. As much 
 - If the issue requires in-depth troubleshooting, you can direct the user to create a ticket from the app, or you can do so on their behalf. Just remember to let them know before you do, so they’re not surprised when they see it in the UI!
 - Before escalating the issue to Support, gather as much information and context as possible so your handover is informative and thorough. You can also share a recording of the call with the team, highlighting the relevant timestamp.
 
-**How to deepen my product knowledge?**
+**How to deepen product knowledge**
 
 - Add yourself to some AEs' Slack channels to see what kinds of questions are being asked and how they’re solved.
+- Check recordings in the [Technical product troubleshooting](https://app.buildbetter.app/folders/14593) BuildBetter folder.
 - Go through [Product Homework](https://docs.google.com/document/d/1x8fnUUi5bDGeSYQl_E-_fViuNxi7j_tC0YwhLC5lwv0/edit?tab=t.0#heading=h.cioukeluttdh).
 
 **Teach how to fish**
@@ -115,7 +121,7 @@ Ideally, after the meeting with the user, they should know how to seek further h
 
 If you see that the customer spends more than ~$1667 monthly, do the discovery for their high spend level. If they’re happy with PostHog moving forward, you can casually mention our annual plan to them, which helps them save 20%. However, if they’re happy paying monthly, they’re more than welcome to do so! 
 
-We can hand the account over to Sales when someone is interested in the annual plan, or requires some additional contractual or legal work. 
+We can hand the account over to Sales when someone is interested in the annual plan or requires some additional contractual or legal work. 
 
 If you see accounts where there were some previous conversations with Sales, ping your fellow AE to make sure you’re not stepping on their toes. If there’s clearly a problem with duplication, and we shouldn’t be involved, ping Mine to double-check the logic. 
 

@@ -28,7 +28,7 @@ Each month, we send an email to users in our PostHog for Startup program. A test
 
 The email is usually comprised of three sections, which inform users of new guides which are relevant to startup use-cases, new betas which are available for them to try, and a spotlight written of a new org in the program. We end by asking for feedback.
 
-We categorize these emails as `Actually useful marketing emails` in Customer.io, so users can unsubscribe if they wish. This email usually comes directly from Joe or Kevan. 
+We categorize these emails as `Actually useful marketing emails` in Customer.io, so users can unsubscribe if they wish. This email usually comes directly from Joe. 
 
 ### Other broadcasts
 Any ad-hoc customer email broadcasts are owned by the Comms team, and are usually sent via Customer.io. These can include product updates, outage alerts, or other PostHog news if needed.

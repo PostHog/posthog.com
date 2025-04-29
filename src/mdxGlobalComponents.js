@@ -52,7 +52,6 @@ import { Signatures } from './components/Signatures'
 import { SlackPage } from './components/SlackPage'
 import { Squeak } from './components/Squeak'
 import { StarRepoButton } from './components/StarRepoButton'
-import { Startups } from './components/Startups'
 import { TracksCTA } from './components/TracksCTA'
 import { Tweet } from './components/Tweet'
 import { ZendeskTicket } from './components/ZendeskTicket'
@@ -111,7 +110,6 @@ export const shortcodes = {
     SlackPage,
     Squeak,
     StarRepoButton,
-    Startups,
     TracksCTA,
     Tweet,
     ZendeskTicket,

@@ -421,6 +421,16 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
         })
     }
 
+    result.data.allMdx.nodes.forEach((node) => {
+        createPage({
+            path: replacePath(node.slug),
+            component: PlainTemplate,
+            context: {
+                id: node.id,
+            },
+        })
+    })
+
     if (process.env.VERCEL_ENV !== 'preview') {
         const categories = {}
         result.data.categories.categories.forEach(({ category, totalCount }) => {
@@ -494,16 +504,6 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
                 regex: '/^/features/',
                 title: 'Features',
             },
-        })
-
-        result.data.allMdx.nodes.forEach((node) => {
-            createPage({
-                path: replacePath(node.slug),
-                component: PlainTemplate,
-                context: {
-                    id: node.id,
-                },
-            })
         })
 
         result.data.tutorials.categories.forEach(({ category, totalCount }) => {

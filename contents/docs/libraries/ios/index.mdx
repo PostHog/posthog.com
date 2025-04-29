@@ -328,9 +328,8 @@ configuration.captureApplicationLifecycleEvents = true
 configuration.captureScreenViews = true
 
 /**
-* Whether the posthog client should automatically make a capture call when the user interacts with an element in a screen.
+* (UIKit only) Whether the posthog client should automatically make a capture call when the user interacts with an element in a screen.
 * 
-* Experimental support (UIKit)
 * Defaults to false
 */
 configuration.captureElementInteractions = false
@@ -394,4 +393,11 @@ configuration.sessionReplayConfig = .init()
 * PostHog will try to get the physical location of the App Group’s shared container, otherwise fallback to the default location
 */
 configuration.appGroupIdentifier = nil
+
+/**
+ * Whether the SDK should reuse the anonymous Id between user changes. 
+ * When enabled, a single Id will be used for all anonymous users on this device
+ * Defaults to false
+ */
+configuration.reuseAnonymousId = false
 ```
