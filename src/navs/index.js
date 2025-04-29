@@ -668,11 +668,11 @@ export const handbookSidebar = [
         ],
     },
     {
-        name: 'Customer Success & Onboarding',
+        name: 'CS & Onboarding',
         url: '',
         children: [
             {
-                name: 'Overview',
+                name: 'Customer success team',
                 url: '/handbook/cs-and-onboarding/customer-success',
             },
             {
