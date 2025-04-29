@@ -27,6 +27,7 @@ import { HomepageCards } from '../NoHatingAllowed/data.js'
 import TimelineNew from './TimelineNew'
 import { CallToAction } from 'components/CallToAction'
 import { RadioGroup } from 'components/RadixUI/RadioGroup'
+import { navigate } from 'gatsby'
 
 const menuOptions = [
     {
@@ -47,6 +48,12 @@ const menuOptions = [
 const Home = () => {
     const posthog = usePostHog()
     const [selectedOption, setSelectedOption] = useState(menuOptions[0].value)
+
+    const handleContinue = () => {
+        if (selectedOption) {
+            navigate(selectedOption)
+        }
+    }
 
     return (
         <>
@@ -78,7 +85,7 @@ const Home = () => {
                         </div>
                     </div>
                     <div data-scheme="primary" className="w-full flex justify-end p-2 bg-accent">
-                        <CallToAction type="secondary" size="sm">Continue</CallToAction>
+                        <CallToAction type="secondary" size="sm" onClick={handleContinue}>Continue</CallToAction>
                     </div>
                 </div>
 
