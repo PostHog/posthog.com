@@ -2462,6 +2462,10 @@ export const docsMenu = {
                             url: '/docs/advanced/proxy/remix',
                         },
                         {
+                            name: 'SvelteKit',
+                            url: '/docs/advanced/proxy/sveltekit',
+                        },
+                        {
                             name: 'Vercel',
                             url: '/docs/advanced/proxy/vercel',
                         },
