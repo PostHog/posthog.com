@@ -50,7 +50,7 @@ export default function Desktop() {
             />
             <nav
                 style={{
-                    paddingTop: `${taskbarHeight}px`,
+                    // paddingTop: `${taskbarHeight}px`,
                     height: `calc(100vh - ${taskbarHeight}px - 48px)`,
                 }}
                 className="overflow-hidden"
