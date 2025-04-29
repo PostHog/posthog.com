@@ -116,12 +116,12 @@ const processMenuItemWithGrouping = (item: DocsMenuItem): any => {
         if (item.url) {
             baseItem.link = item.url
         }
+        // Always set icon and color for submenus if present
         if (item.icon) {
             const IconComponent = Icons[item.icon as keyof typeof Icons]
             baseItem.icon = <IconComponent className={`text-${item.color || 'gray'} size-4`} />
         }
         let grouped = groupBySectionDividers(item.children)
-
         // FLATTEN: If the first child is a submenu with the same label, bring its children up one level
         if (
             grouped.length > 0 &&

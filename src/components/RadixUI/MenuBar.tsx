@@ -44,6 +44,7 @@ const MenuItem: React.FC<{ item: MenuItemType }> = ({ item }) => {
         return (
             <RadixMenubar.Sub>
                 <RadixMenubar.SubTrigger className={SubTriggerClasses}>
+                    {item.icon && <span className="mr-2 flex items-center">{item.icon}</span>}
                     {item.label}
                     <div className={ShortcutClasses}>
                         <IconChevronRight className="size-4" />
