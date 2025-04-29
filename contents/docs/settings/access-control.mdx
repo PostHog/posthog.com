@@ -11,16 +11,20 @@ export const rbacSettingsLight = "https://res.cloudinary.com/dmukukwp6/image/upl
 export const rbacSettingsDark = "https://res.cloudinary.com/dmukukwp6/image/upload/access_control_organization_dark_a2f3786867.png"
 export const projectAccessControlLight = "https://res.cloudinary.com/dmukukwp6/image/upload/access_control_project_light_b3afca7e77.png"
 export const projectAccessControlDark = "https://res.cloudinary.com/dmukukwp6/image/upload/access_control_project_dark_d05334884e.png"
+export const resourceAccessControlLight = "https://res.cloudinary.com/dmukukwp6/image/upload/access_control_resource_light_7ccb0f5311.png"
+export const resourceAccessControlDark = "https://res.cloudinary.com/dmukukwp6/image/upload/access_control_resource_dark_aa8806bb1d.png"
+export const objectAccessControlLight = "https://res.cloudinary.com/dmukukwp6/image/upload/access_control_object_light_864b64cfa3.png"
+export const objectAccessControlDark = "https://res.cloudinary.com/dmukukwp6/image/upload/access_control_object_dark_17f1adda40.png"
 
-PostHog's access control system lets you manage permissions across three levels: organizations, projects, and resources. This hierarchical approach provides granular control over who can view and edit different parts of PostHog.
+PostHog's access control system allows you to manage permissions at three levels: organization, project, and resource. This hierarchical approach provides granular control over who can view and edit different parts of PostHog.
 
-## Three levels of access control
+## Levels of access control
 
 ### 1. Organization level
 
-Organization members have one of three access levels that determine their permissions for organization-wide settings and actions.
+Organization members can have one of three access levels, which determine their permissions for organization-wide settings and actions.
 
-There are three access levels in PostHog: Member, Admin, and Owner. An organization must have at lest one Owner.
+The three access levels are: Member, Admin, and Owner. An organization must have at least one Owner but can have more than one.
 
 | Permission                                                                            | Member (base level) | Admin | Owner |
 | ------------------------------------------------------------------------------------- | ------------------- | ------------- | ----- |
@@ -42,21 +46,19 @@ Access levels can be viewed and changed in the [Members section](https://app.pos
 
 ### 2. Project level
 
-> This is currently being rolled out to all users so you may not see this experience yet. If you're interested in trying it out please email zach@posthog.com with "Access control beta" in the subject line.
+> This feature is currently being rolled out to all users, so you may not see this experience yet. If you're interested in trying it out, please email zach@posthog.com with "Access control beta" in the subject line.
+
+At the project level, there are two access levels: member and admin.
 
 Each project has a default access level that applies to all organization members:
 
-- **No access** - Members need explicit permission to access the project
-- **Member** - All organization members have member-level access
-- **Admin** - All organization members have admin-level access
+- **No access** – Members need explicit permission to access the project
+- **Member** – All organization members have member-level access
+- **Admin** – All organization members have admin-level access
 
-Project permissions:
-- **Members** can view and edit resources they create or are explicitly given access to
-- **Admins** can view and edit all resources and manage access control settings
+You can override the default access level for specific members or roles. A user's effective access level is the highest level granted from any source.
 
-Organization owners and admins automatically receive project admin permissions.
-
-You can override the default access level for specific members or [roles](#role-based-access-control). A user's effective permission is the highest level granted across all sources.
+Organization owners and admins automatically receive project admin access.
 
 <ProductScreenshot
     imageLight = {projectAccessControlLight} 
@@ -65,29 +67,89 @@ You can override the default access level for specific members or [roles](#role-
     classes="rounded"
 />
 
+See the table below for a summary of project-level permissions:
+
+| Permission                                                                        | Member                                           | Admin                                            |
+|-----------------------------------------------------------------------------------|--------------------------------------------------|--------------------------------------------------|
+| Manage project access controls                                                    | <span className="text-red text-lg">✖</span>      | <span className="text-green text-lg">✔</span>    |
+| Delete project                                                                    | <span className="text-red text-lg">✖</span>      | <span className="text-green text-lg">✔</span>    |
+| Edit project settings                                                             | <span className="text-red text-lg">✖</span>      | <span className="text-green text-lg">✔</span>    |
+| View/edit own or permitted resources (based on resource-level access controls)    | <span className="text-green text-lg">✔</span>    | <span className="text-green text-lg">✔</span>    |
+| View/edit all resources (regardless of resource-level access controls)            | <span className="text-red text-lg">✖</span>      | <span className="text-green text-lg">✔</span>    |
+
 ### 3. Resource level
 
-> This is currently being rolled out to all users so you may not see this experience yet. If you're interested in trying it out please email zach@posthog.com with "Access control beta" in the subject line.
+> This feature is currently being rolled out to all users, so you may not see this experience yet. If you're interested in trying it out, please email zach@posthog.com with "Access control beta" in the subject line.
 
-Access control is available for:
+Resource access controls allow you to control who can view and edit specific resource objects. These can be accessed in the "Access control" sidebar when viewing a supported resource.
+
+Currently, resource access controls are available for:
 - Insights
 - Dashboards
 - Notebooks
 - Feature flags
-- (more resource types coming soon)
+- (more resource types coming soon – looking for others? Let us know!)
 
-Each resource has three possible access levels:
-- **No access** - Cannot view or edit the resource
-- **View** - Can view but not modify the resource
-- **Edit** - Can view and modify the resource
+Note: We do not yet support limiting access to querying data, viewing replays, or accessing person / group profiles. Support for these features is planned for the near future.
 
-Resources default to "Edit" access when created. You can modify the default and set specific permissions for members and roles.
+Resource access controls have three possible access levels:
+- **No access** – Cannot view or edit the resource
+- **View** – Can view but not modify the resource
+- **Edit** – Can view and modify the resource
 
-Resource creators and project admins can always view and edit resources as well as manage access controls.
+There are two ways to set resource-level access controls:
 
-## Role-based access control (RBAC)
+#### a. Individual resource object
 
-> RBAC is only available on Enterprise plans
+These settings allow you to control who can view and edit a specific resource object. You can access these controls via the project's access control settings.
+
+By default, new resources are set to "Edit" access. Users with appropriate permissions can modify this default and set specific permissions for members and roles.
+
+Resource creators and project admins can always view and edit resources, as well as manage their access controls. Only creators and project admins can manage access controls for a resource object.
+
+You cannot set resource-level access controls for project admins, as they always have full access.
+
+<ProductScreenshot
+    imageLight = {objectAccessControlLight} 
+    imageDark = {objectAccessControlDark}
+    alt="Object access control" 
+    classes="rounded"
+/>
+
+#### b. All resource objects of a given type in a project
+
+These settings allow you to control who can view and edit all resources of a given type within a project. These controls are set at the project level.
+
+You can set default access levels for all resources of a given type in a project. This allows you to set it once and apply it to all resources of that type in the project (past and future).
+
+Project-wide access controls for resources take precedence over individual resource object access controls.
+
+You cannot set project-wide access controls for project admins, as they always have full access.
+
+<ProductScreenshot
+    imageLight = {resourceAccessControlLight} 
+    imageDark = {resourceAccessControlDark}
+    alt="Resource access control" 
+    classes="rounded"
+/>
+
+## Feature availability
+
+### Free / Ridiculously cheap
+
+These plans do not currently offer any access control features. All projects are open to all members and all resources are open to all members with "Edit" access.
+
+### Teams
+
+The Teams Add-on gives advanced permissions.
+
+The goal of this is to allow teams with stricter access requirements to control who can access their projects and resources.
+
+On this plan, you can set default access levels for projects and resources, and also set specific access levels for individual members (but not roles).
+
+### Enterprise
+
+> While you can create roles on any plan, they can only be used for access control on Enterprise plans.
 
 Instead of managing permissions individually, you can create roles to group users together. Roles can be assigned permissions at both the project and resource level.
 
@@ -97,16 +159,3 @@ Instead of managing permissions individually, you can create roles to group user
     alt="RBAC settings" 
     classes="rounded"
 />
-
-## Feature availability
-
-The Teams Add-on includes "Advanced Permissions" - the ability to set default access levels and member-specific access levels for projects and resources.
-
-Enterprise adds role-based access control for managing access for groups of organization members.
-
-| Feature | Free | Teams | Enterprise |
-|---------|------|--------|------------|
-| Organization access levels | <span className="text-green text-lg">✔</span> | <span className="text-green text-lg">✔</span> | <span className="text-green text-lg">✔</span> |
-| Project access control (default and member-specific) | <span className="text-red text-lg">✖</span> | <span className="text-green text-lg">✔</span> | <span className="text-green text-lg">✔</span> |
-| Resource access control (default and member-specific) | <span className="text-red text-lg">✖</span> | <span className="text-green text-lg">✔</span> | <span className="text-green text-lg">✔</span> |
-| Role-based access control (for projects and resources) | <span className="text-red text-lg">✖</span> | <span className="text-red text-lg">✖</span> | <span className="text-green text-lg">✔</span> |

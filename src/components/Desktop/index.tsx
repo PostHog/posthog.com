@@ -1,5 +1,5 @@
 import React, { useRef } from 'react'
-import { IconGraph, IconPieChart, IconDocument, IconQuestion } from '@posthog/icons'
+import { IconGraph, IconPieChart, IconDocument, IconQuestion, IconMap } from '@posthog/icons'
 import Link from 'components/Link'
 import { useApp } from '../../context/App'
 import useProduct from 'hooks/useProduct'
@@ -16,6 +16,12 @@ const apps = [
         Icon: IconQuestion,
         color: 'blue',
         url: '/questions',
+    },
+    {
+        label: 'Tour',
+        Icon: IconMap,
+        color: 'green',
+        url: '/tour',
     },
 ]
 
@@ -50,7 +56,7 @@ export default function Desktop() {
             />
             <nav
                 style={{
-                    paddingTop: `${taskbarHeight}px`,
+                    // paddingTop: `${taskbarHeight}px`,
                     height: `calc(100vh - ${taskbarHeight}px - 48px)`,
                 }}
                 className="overflow-hidden"

@@ -343,11 +343,16 @@ export const dataPipelines = {
                     url: '/docs/cdp/transformations',
                 },
                 {
-                    name: 'Customization',
-                    url: '/docs/cdp/transformations/customizing-transformations',
-                },
-                {
                     name: 'Transformations',
+                },
+                // TODO: Add this back in once we support custom transformations
+                // {
+                //     name: 'Customization',
+                //     url: '/docs/cdp/transformations/customizing-transformations',
+                // },
+                {
+                    name: 'Drop Events',
+                    url: '/docs/cdp/transformations/drop-events',
                 },
             ],
             dynamicChildren: 'data-pipeline-transformations',
@@ -659,6 +664,32 @@ export const handbookSidebar = [
                         url: '/handbook/content-and-docs/components',
                     },
                 ],
+            },
+        ],
+    },
+    {
+        name: 'CS & Onboarding',
+        url: '',
+        children: [
+            {
+                name: 'Customer success team',
+                url: '/handbook/cs-and-onboarding/customer-success',
+            },
+            {
+                name: 'Onboarding team',
+                url: '/handbook/cs-and-onboarding/onboarding-team',
+            },
+            {
+                name: 'Health tracking',
+                url: '/handbook/cs-and-onboarding/health-tracking',
+            },
+            {
+                name: 'Feature requests',
+                url: '/handbook/cs-and-onboarding/feature-requests',
+            },
+            {
+                name: 'Customer health checks',
+                url: '/handbook/cs-and-onboarding/health-checks',
             },
         ],
     },
@@ -1134,10 +1165,6 @@ export const handbookSidebar = [
                 url: '/handbook/growth/sales/product-led-sales',
             },
             {
-                name: 'Onboarding team',
-                url: '/handbook/growth/sales/onboarding-team',
-            },
-            {
                 name: 'Expansion & Retention',
                 url: '/handbook/growth/sales/expansion-and-retention',
             },
@@ -1192,28 +1219,6 @@ export const handbookSidebar = [
                     {
                         name: 'Historical imports',
                         url: '/handbook/growth/sales/historical-import',
-                    },
-                ],
-            },
-            {
-                name: 'Customer Success',
-                url: '',
-                children: [
-                    {
-                        name: 'Overview',
-                        url: '/handbook/growth/sales/customer-success',
-                    },
-                    {
-                        name: 'Health tracking',
-                        url: '/handbook/growth/sales/health-tracking',
-                    },
-                    {
-                        name: 'Feature requests',
-                        url: '/handbook/growth/sales/feature-requests',
-                    },
-                    {
-                        name: 'Customer health checks',
-                        url: '/handbook/growth/sales/health-checks',
                     },
                 ],
             },
@@ -1857,6 +1862,10 @@ export const docsMenu = {
                             url: '/docs/libraries/n8n',
                         },
                         {
+                            name: 'Phoenix',
+                            url: '/docs/libraries/phoenix',
+                        },
+                        {
                             name: 'Remix',
                             url: '/docs/libraries/remix',
                         },
@@ -2120,6 +2129,25 @@ export const docsMenu = {
                     name: 'Capturing revenue',
                     url: '/docs/new-to-posthog/revenue',
                     icon: 'IconHandMoney',
+                },
+                {
+                    name: 'Switching to PostHog',
+                    icon: 'IconLeave',
+                    url: '/docs/new-to-posthog/switch-guide/switching-to-posthog',
+                    children: [
+                        {
+                            name: 'Convincing teammates',
+                            url: '/docs/new-to-posthog/switch-guide/switching-to-posthog',
+                        },
+                        {
+                            name: 'Planning your pilot',
+                            url: '/docs/new-to-posthog/switch-guide/planning-your-pilot',
+                        },
+                        {
+                            name: 'What to expect when migrating',
+                            url: '/docs/new-to-posthog/switch-guide/migration-planning',
+                        },
+                    ],
                 },
                 {
                     name: 'PostHog explained',
@@ -2641,6 +2669,9 @@ export const docsMenu = {
                     color: 'purple',
                 },
                 {
+                    type: 'divider',
+                },
+                {
                     name: 'Analysis views',
                 },
                 {
@@ -2852,8 +2883,8 @@ export const docsMenu = {
                     color: 'seagreen',
                 },
                 {
-                    name: 'Revenue tracking',
-                    url: '/docs/web-analytics/revenue-tracking',
+                    name: 'Revenue analytics',
+                    url: '/docs/web-analytics/revenue-analytics',
                     icon: 'IconPiggyBank',
                     color: 'salmon',
                     badge: {
@@ -2930,6 +2961,9 @@ export const docsMenu = {
                     url: '/docs/session-replay/cutting-costs',
                     icon: 'IconPiggyBank',
                     color: 'yellow',
+                },
+                {
+                    type: 'divider',
                 },
                 {
                     name: 'Features',
@@ -3167,6 +3201,9 @@ export const docsMenu = {
                     color: 'blue',
                 },
                 {
+                    type: 'divider',
+                },
+                {
                     name: 'Features',
                 },
                 {
@@ -3347,6 +3384,9 @@ export const docsMenu = {
                     icon: 'IconGraduationCap',
                     color: 'blue',
                     featured: true,
+                },
+                {
+                    type: 'divider',
                 },
                 {
                     name: 'Features',

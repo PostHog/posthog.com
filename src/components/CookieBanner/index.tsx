@@ -1,10 +1,11 @@
 import CloudinaryImage from 'components/CloudinaryImage'
+import { StaticImage } from 'gatsby-plugin-image'
 import usePostHog from '../../hooks/usePostHog'
 import React, { useEffect, useState } from 'react'
 import Tooltip from 'components/Tooltip'
 import { useLayoutData } from 'components/Layout/hooks'
 
-export default function CookieBanner(): JSX.Element | null {
+export default function CookieBanner() {
     const posthog = usePostHog()
     const { internalMenu } = useLayoutData()
     const [consentGiven, setConsentGiven] = useState('')

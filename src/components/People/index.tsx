@@ -47,7 +47,7 @@ export const TeamMember = (props) => {
                             {country === 'world' ? 'Planet Earth' : location || country}
                         </span>
                     </span>
-                    <figure className="m-0 -mt-8 p-0 absolute right-0 bottom-0">
+                    <figure className="m-0 -mt-8 p-0 absolute right-0 bottom-0 pointer-events-none">
                         <img
                             src={
                                 avatar?.url ||
@@ -149,8 +149,8 @@ export default function People() {
                     </p>
 
                     <p>
-                        That's why we've hired in Belgium, the East and West coasts of the US, Canada, England, France,
-                        Germany, Poland, and Colombia (among other places).
+                        That's why we've hired in Belgium, the East and West coasts of the US, Canada, Germany, the United Kingdom,
+                        Finland, Poland, and Colombia (among other places).
                     </p>
 
                     <p className="mb-1">

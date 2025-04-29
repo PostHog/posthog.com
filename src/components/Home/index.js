@@ -1,5 +1,5 @@
 import StarUsBanner from 'components/StarUsBanner'
-import React from 'react'
+import React, { useState } from 'react'
 import Layout from '../Layout'
 import { SEO } from '../seo'
 import Community from './Community'
@@ -25,19 +25,73 @@ import BillboardTruck from './BillboardTruck'
 import Spinner from 'components/Spinner'
 import { HomepageCards } from '../NoHatingAllowed/data.js'
 import TimelineNew from './TimelineNew'
+import { CallToAction } from 'components/CallToAction'
+import { RadioGroup } from 'components/RadixUI/RadioGroup'
+import { navigate } from 'gatsby'
+
+const menuOptions = [
+    {
+        label: 'Try it – free',
+        value: '/signup',
+        default: true,
+    },
+    {
+        label: 'Talk to a human',
+        value: '/contact-sales',
+    },
+    {
+        label: 'Take a tour',
+        value: '/tour',
+    },
+]
 
 const Home = () => {
     const posthog = usePostHog()
+    const [selectedOption, setSelectedOption] = useState(menuOptions[0].value)
+
+    const handleContinue = () => {
+        if (selectedOption) {
+            navigate(selectedOption)
+        }
+    }
 
     return (
         <>
             <StarUsBanner />
-            <Layout>
                 <SEO
                     title="PostHog - How developers build successful products"
                     description="PostHog is the only all-in-one platform for product analytics, feature flags, session replays, experiments, and surveys that's built for developers."
                     image="/images/home.png"
                 />
+
+                <div data-scheme="secondary" className="w-full h-full bg-primary flex flex-col">
+                    <div className="flex flex-1 w-full border-y border-primary">
+                        <div data-scheme="primary" className="w-[40%] flex items-center justify-center p-2 border-r border-primary">
+                            <div className="w-full bg-primary flex items-center justify-center h-full text-sm">
+                                Image placeholder
+                            </div>
+                        </div>
+                        <div className="w-[60%] flex flex-col justify-center px-8 py-4">
+                            <h1 className="text-xl font-bold mb-1">The toolkit for building successful products</h1>
+                            <p className="text-secondary text-[15px]">The single platform to build products, talk to users, and ship new features</p>
+                            <div className="mt-4">
+                                <RadioGroup 
+                                    title="Menu options" 
+                                    options={menuOptions} 
+                                    value={selectedOption}
+                                    onValueChange={setSelectedOption}
+                                />
+                            </div>
+                        </div>
+                    </div>
+                    <div data-scheme="primary" className="w-full flex justify-end p-2 bg-accent">
+                        <CallToAction type="secondary" size="sm" onClick={handleContinue}>Continue</CallToAction>
+                    </div>
+                </div>
+
+
+
+{/* 
                 <Hero />
                 <Customers />
                 <AllInOne />
@@ -68,15 +122,10 @@ const Home = () => {
                 <CustomerData />
                 <Roadmap />
                 <Startups />
-                {/*<Tutorials
-                    title="Latest tutorials"
-                    subtitle="Fresh from our keyboards"
-                    cta={{ url: '/tutorials', title: 'Explore all tutorials' }}
-                />*/}
                 <div className="relative">
                     <CTA />
                 </div>
-            </Layout>
+                 */}
         </>
     )
 }

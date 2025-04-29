@@ -131,3 +131,11 @@ At a more philosophical level, we question the premise of the question. PageSpee
 4. Utilize server-side tracking. We have a range of SDKs for backend languages and frameworks you can use to capture events and use the features of PostHog without needing to load any code on the client side.
 
 5. Keep an eye on your [web vitals](/docs/web-analytics/web-vitals) to see if there are any pages with worse performance.
+
+## I am online, but the online user count is not reflecting my user
+
+The recent online user count reflects the number of users we've seen in the last 30 seconds.
+
+If users are online but not sending events (e.g., reading a nicely written blog post), they won't be included in the count.
+
+Ingestion delays can also cause the count not to update as expected.

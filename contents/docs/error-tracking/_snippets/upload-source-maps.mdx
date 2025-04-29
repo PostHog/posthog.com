@@ -1,33 +1,26 @@
+import CLIDownload from "./cli/download.mdx"
+import CLIAuthenticate from "./cli/authenticate.mdx"
+import CLIInject from "./cli/inject.mdx"
+import CLIUpload from "./cli/upload.mdx"
+
 ### Uploading source maps
 
-If your source maps are not publicly hosted, you will need to upload them during your build process to see unminified code in your stack traces.
+If your source maps are not publicly hosted, you will need to upload them during your build process to see unminified code in your stack traces, the `posthog-cli` handles this process.
 
-The `posthog-cli` handles this process. You will need to install it and upgrade to the latest version:
+#### Download
 
-```bash
-curl --proto '=https' --tlsv1.2 -LsSf https://github.com/PostHog/posthog/releases/download/posthog-cli-v0.0.4/posthog-cli-installer.sh | sh
-posthog-cli-update
-```
+<CLIDownload/>
 
-#### Authenticating the CLI
+#### Authenticate
 
-To authenticate the CLI you can call the `login` command and follow the instructions:
+<CLIAuthenticate />
 
-```bash
-posthog-cli login
-```
+#### Inject
 
-If you are using the CLI in a CI/CD environment such as GitHub Actions you can set environment variables to authenticate. `POSTHOG_CLI_ENV_ID` and `POSTHOG_CLI_TOKEN` should be the number in your PostHog homepage URL and a [personal API key](/docs/api#private-endpoint-authentication) respectively.
+Once you've built your application and have bundled assets that serve your site, inject the context required by PostHog to associate the maps with the served code. You will then need to upload the modified assets to PostHog, and ensure that the modified asset bundles are the ones you're serving - if you serve a copy of the bundled assets as they were prior to running `posthog-cli sourcemap inject`, we won't be able to use the uploaded sourcemap to unminify or demangle your stack traces.
 
-#### Uploading source maps
+<CLIInject path="./path/to/assets" />
 
-Once you've built your application and have bundled assets that serve your site, inject the context required by PostHog to associate the maps with the served code. You will then need to upload the modified assets to PostHog, and ensure that the modified asset bundles are the ones you're serving - if you serve a copy of the bundled assets as they were prior to running `posthog-cli sourcemap inject`, we won't be able to use the uploaded sourcemap to deminify or demangle your stack traces.
+#### Upload
 
-Both of these operations can be done by running the respective `sourcemap` commands:
-
-```bash
-# Do the following prior to asset upload or publishing:
-posthog-cli sourcemap inject --directory ./path/to/assets
-posthog-cli sourcemap upload --directory ./path/to/assets
-# Now publish the modified assets however you normally do so
-```
+<CLIUpload path="./path/to/assets" />

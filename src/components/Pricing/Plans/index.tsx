@@ -338,9 +338,14 @@ const allProductsData = graphql`
                             unit
                             included_if
                             features {
-                                description
                                 key
                                 name
+                                description
+                                category
+                                limit
+                                note
+                                entitlement_only
+                                is_plan_default
                             }
                             tiers {
                                 current_amount_usd
@@ -359,12 +364,14 @@ const allProductsData = graphql`
                         description
                         docs_url
                         features {
-                            description
                             key
-                            limit
                             name
+                            description
+                            category
+                            limit
                             note
-                            unit
+                            entitlement_only
+                            is_plan_default
                         }
                         free_allocation
                         image_url

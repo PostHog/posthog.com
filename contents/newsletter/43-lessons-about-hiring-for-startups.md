@@ -1,10 +1,10 @@
 ---
 title: 43 things we've learned about hiring at PostHog
-date: 2025-04-10
+date: 2025-04-11
 author:
  - charles-cook
 featuredImage: >-
-  https://res.cloudinary.com/dmukukwp6/image/upload/bellcurve_meme_19c509edff.jpg
+  https://res.cloudinary.com/dmukukwp6/image/upload/353483136_5f00599e_346c_44d4_a94c_2cd85c9031a0_3c65d69b45.jpg
 featuredImageType: full
 tags:
   - Culture
