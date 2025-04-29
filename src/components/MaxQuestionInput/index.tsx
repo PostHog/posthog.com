@@ -36,7 +36,7 @@ export const MaxQuestionInput = ({
 
     return (
         <div
-            className={`bg-gradient-to-br from-[#e5e7e0] to-[#f0f2ed] dark:from-[#242529] dark:to-[#2a2c31] border border-border dark:border-border-dark text-[15px] rounded-lg p-8 my-8 ${className} relative`}
+            className={`bg-gradient-to-br from-[#e5e7e0] to-[#f0f2ed] dark:from-[#242529] dark:to-[#2a2c31] border border-border dark:border-border-dark text-[15px] rounded-lg p-8 my-8 ${className} relative shadow-lg`}
         >
             <div className="absolute -top-6 -right-6">
                 <div className="relative">

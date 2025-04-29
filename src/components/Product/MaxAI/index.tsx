@@ -1,7 +1,7 @@
 import CloudinaryImage from 'components/CloudinaryImage'
 import React, { useState } from 'react'
 import Link from 'components/Link'
-import { IconAI, IconChat, IconGraph, IconRewindPlay, IconThoughtBubble, IconUser } from '@posthog/icons'
+import { IconBook, IconChat, IconCode, IconGraph, IconRewindPlay, IconThoughtBubble, IconUser } from '@posthog/icons'
 import { CallToAction } from 'components/CallToAction'
 import { CustomerCard } from 'components/Products/CustomerCard'
 import { Hero } from 'components/Products/Hero'
@@ -49,7 +49,7 @@ const product = {
     slug: 'max-ai',
     lowercase: 'Max AI',
     capitalized: 'Max AI',
-    freeTier: '100 queries',
+    freeTier: 'JOETBD',
 }
 
 const team = 'Max AI'
@@ -58,33 +58,33 @@ const teamSlug = '/teams/max-ai'
 const featuresPerRow = 3
 const features = [
     {
-        title: 'Research answers',
-        description: 'Get instant insights by asking Max to analyze your product data',
+        title: '"How many sign-ups this week?"',
+        description: 'Get answers as big numbers, tables, graphs, funnels, and more',
         image: (
             <CloudinaryImage
-                src="https://res.cloudinary.com/dmukukwp6/image/upload/max_research_side_9365f7d4b2.png"
+                src="https://res.cloudinary.com/dmukukwp6/image/upload/big_number_e3383350cb.png"
                 width={428}
                 placeholder="none"
             />
         ),
     },
     {
-        title: 'UI automation',
-        description: 'Let Max handle routine tasks like updating filters or creating insights',
+        title: '"Show me users who have rageclicked"',
+        description: 'Let Max automatically build filters and playlists for you',
         image: (
             <CloudinaryImage
-                src="https://res.cloudinary.com/dmukukwp6/image/upload/max_automation_side_9365f7d4b2.png"
+                src="https://res.cloudinary.com/dmukukwp6/image/upload/replay_filer_c6b66bda7b.png"
                 width={428}
                 placeholder="none"
             />
         ),
     },
     {
-        title: 'Feature guidance',
-        description: 'Learn about PostHog features and best practices through natural conversation',
+        title: '"What is ARRRR?',
+        description: 'Get lessons in best practices and how to build better products',
         image: (
             <CloudinaryImage
-                src="https://res.cloudinary.com/dmukukwp6/image/upload/max_guide_side_9365f7d4b2.png"
+                src="https://res.cloudinary.com/dmukukwp6/image/upload/arrrr_6efb4b4164.png"
                 width={428}
                 placeholder="none"
             />
@@ -95,103 +95,97 @@ const features = [
 const subfeaturesItemCount = 4
 const subfeatures = [
     {
-        title: 'Data analysis',
-        description: 'Query and analyze your product data through natural language',
+        title: 'Product analytics',
+        description: 'Explore your product data with graphs, funnels, retention charts, and more just by asking Max',
         icon: <IconGraph />,
         color: 'blue',
     },
     {
-        title: 'Contextual help',
-        description: 'Get relevant documentation and guidance based on your current context',
-        icon: <IconChat />,
+        title: 'Session replays',
+        description: 'Tell Max what behaviours you are looking for and he can find the matching session recordings',
+        icon: <IconRewindPlay />,
         color: 'yellow',
     },
     {
-        title: 'User insights',
-        description: 'Understand user behavior and patterns through AI-powered analysis',
-        icon: <IconUser />,
+        title: 'SQL insights',
+        description: 'Tired of writing long SQL queries? Max can do that for you to help you query your data warehouse',
+        icon: <IconCode />,
         color: 'seagreen',
     },
     {
-        title: 'Session replay integration',
-        description: 'Connect insights with actual user sessions for deeper understanding',
-        icon: <IconRewindPlay />,
-        color: 'purple',
+        title: 'PostHog docs',
+        description: 'Want advice on building your product? Max can access all our docs and give you tips',
+        icon: <IconBook />,
+        color: 'green',
     },
 ]
 
 const questions = [
     {
-        question: 'How do I get started with Max?',
-        url: '/docs/max-ai',
+        question: 'Where do my users drop off?',
+        url: 'https://app.posthog.com/#panel=max%where%20do%users%dropoff%3F',
     },
     {
-        question: 'What data can Max access?',
-        url: '/docs/max-ai#what-access-does-max-have-to-my-data',
+        question: 'What is my ARR?',
+        url: 'https://app.posthog.com/#panel=max%what%is%my%arr%3F',
     },
     {
-        question: 'How do I enable Max?',
-        url: '/docs/max-ai#how-do-i-access-max',
+        question: 'How many pageviews did we get today?',
+        url: 'https://app.posthog.com/#panel=max%how%many%pageviews%today%3F',
     },
     {
-        question: 'Is my data secure?',
-        url: '/docs/max-ai#is-my-data-shared-with-third-parties',
+        question: 'Show me a signup funnel',
+        url: 'https://app.posthog.com/#panel=max%show%me%signup%funnel%3F',
     },
 ]
 
-const comparisonColumnCount = 6
+const comparisonColumnCount = 4
 const comparison = [
     {
-        feature: 'Natural language queries',
+        feature: 'Understands natural language',
         companies: {
-            Amplitude: false,
-            Mixpanel: false,
-            Heap: false,
+            ChatGPT: true,
+            Anthropic: true,
             PostHog: true,
         },
     },
     {
-        feature: 'Contextual help',
+        feature: 'Writes SQL queries',
         companies: {
-            Amplitude: false,
-            Mixpanel: false,
-            Heap: false,
+            ChatGPT: true,
+            Anthropic: true,
             PostHog: true,
         },
     },
     {
-        feature: 'UI automation',
+        feature: 'Builds insights',
         companies: {
-            Amplitude: false,
-            Mixpanel: false,
-            Heap: false,
+            ChatGPT: true,
+            Anthropic: true,
             PostHog: true,
         },
     },
     {
-        feature: 'Data analysis',
+        feature: 'Understands your data',
         companies: {
-            Amplitude: true,
-            Mixpanel: true,
-            Heap: true,
+            ChatGPT: false,
+            Anthropic: false,
             PostHog: true,
         },
     },
     {
-        feature: 'Session replay integration',
+        feature: 'Writes haikus',
         companies: {
-            Amplitude: false,
-            Mixpanel: false,
-            Heap: false,
+            ChatGPT: true,
+            Anthropic: true,
             PostHog: true,
         },
     },
     {
-        feature: 'Feature guidance',
+        feature: 'Is a pretend hedgehog',
         companies: {
-            Amplitude: false,
-            Mixpanel: false,
-            Heap: false,
+            ChatGPT: false,
+            Anthropic: false,
             PostHog: true,
         },
     },
@@ -201,7 +195,7 @@ const pairsWithItemCount = 3
 const PairsWithArray = [
     {
         title: 'Product Analytics',
-        description: 'Get AI-powered insights from your product data',
+        description: 'Ask questions about your product data, get instant answers',
         icon: <IconGraph />,
         product: 'Product Analytics',
         url: '/product-analytics',
@@ -209,18 +203,18 @@ const PairsWithArray = [
     },
     {
         title: 'Session Replay',
-        description: 'Connect insights with actual user sessions',
+        description: 'Create filters and playlists based on user behaviours',
         icon: <IconRewindPlay />,
         product: 'Session Replay',
         url: '/session-replay',
         color: 'yellow',
     },
     {
-        title: 'Feature Flags',
-        description: 'Get AI guidance on feature flag best practices',
-        icon: <IconThoughtBubble />,
-        product: 'Feature Flags',
-        url: '/feature-flags',
+        title: 'Documentation',
+        description: "We write lots of content. Now it's at your fingertips.",
+        icon: <IconBook />,
+        product: 'Documentation',
+        url: '/docs',
         color: 'seagreen',
     },
 ]
@@ -241,14 +235,14 @@ export const ProductMaxAI = () => {
             </SideModal>
             <div className={`${fullWidthContent ? 'max-w-full px-8' : 'max-w-7xl mx-auto'} px-5 py-10 md:pt-20 pb-0`}>
                 <Hero
-                    icon="ai"
+                    icon={<IconThoughtBubble />}
                     product={product.capitalized}
                     title='Your <span class="text-red dark:text-yellow">AI-powered</span>, product-managing hedgehog'
-                    description="Get instant insights, automate tasks, and learn best practices through natural conversation"
-                    image="https://res.cloudinary.com/dmukukwp6/image/upload/max_preview_side_9365f7d4b2.png"
+                    description="Use natural language to get instant answers, find replays, and more"
+                    image="https://res.cloudinary.com/dmukukwp6/image/upload/robot_f2dfddda15.png"
                 />
 
-                <div className="max-w-3xl mx-auto mt-8">
+                <div className="max-w-3xl mx-auto mt-18 mb-18">
                     <MaxQuestionInput />
                     <p className="text-center text-sm text-muted dark:text-muted-dark mt-1">
                         Not got data in PostHog yet?{' '}
@@ -259,15 +253,15 @@ export const ProductMaxAI = () => {
                     </p>
                 </div>
 
-                <div className="text-center"></div>
+                <div className="text-center mt-18 mb-18"></div>
 
-                <section id="features" className="-mt-36 pt-36">
+                <section id="features" className="-mt-36 pt-36 mt-18">
                     <h2 className="text-4xl md:text-5xl text-center">
-                        All the features you'd expect from an AI assistant,{' '}
-                        <span className="text-red dark:text-yellow">but built specifically for product analytics</span>
+                        These days, everyone has an AI. <br />
+                        <span className="text-red dark:text-yellow">But ours is a hedgehog powered by Product OS.</span>
                     </h2>
                     <p className="text-lg opacity-75 text-center">
-                        Max understands your product data and can help you make better decisions.
+                        Max can help you work across multiple PostHog products to find the data you need
                     </p>
                 </section>
 
@@ -312,7 +306,7 @@ export const ProductMaxAI = () => {
                                 alt="Max AI assistant"
                                 placeholder="blurred"
                                 className="w-full max-w-[250px]"
-                                src="https://res.cloudinary.com/dmukukwp6/image/upload/max_preview_side_9365f7d4b2.png"
+                                src="https://res.cloudinary.com/dmukukwp6/image/upload/robot_f2dfddda15.png"
                             />
                         </div>
                     </div>
@@ -340,17 +334,19 @@ export const ProductMaxAI = () => {
                             }
                         >
                             <ul>
-                                <li>Advanced AI model customization</li>
-                                <li>Custom AI model training</li>
-                                <li>Enterprise-grade AI security</li>
+                                <li>You like alt-tabbing out to other tools, like ChatGPT or Anthropic</li>
+                                <li>You prefer only to share copy-pasted info with an AI, piece by piece</li>
                             </ul>
                         </VsCompetitor>
                         <VsPostHog>
                             <ul>
-                                <li>Deep integration with PostHog products</li>
-                                <li>Product analytics-specific knowledge</li>
-                                <li>Simple, transparent pricing</li>
-                                <li>Built-in session replay integration</li>
+                                <li>You want questions and answers in one place</li>
+                                <li>
+                                    You want the AI to have access to data by default, with no copy-pasting or context
+                                    adding
+                                </li>
+                                <li>You want it to help create insights you can directly edit yourself later</li>
+                                <li>You want to query your data, replays, and more</li>
                             </ul>
                         </VsPostHog>
                     </div>
@@ -393,7 +389,7 @@ export const ProductMaxAI = () => {
                         </CallToAction>
                     </div>
 
-                    <Questions topicIds={[389]} />
+                    <Questions topicIds={[391]} />
                 </section>
 
                 <section className="pb-12">
