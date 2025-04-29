@@ -64,6 +64,15 @@ const groupBySectionDividers = (items: DocsMenuItem[]): any[] => {
     let currentSectionItems: any[] = []
 
     for (const item of items) {
+        // Handle divider type: add separator for menu, skip otherwise
+        if ((item as any).type === 'divider') {
+            if (currentSection) {
+                currentSectionItems.push({ type: 'separator' as const })
+            } else {
+                processedItems.push({ type: 'separator' as const })
+            }
+            continue
+        }
         if (!item.name) continue
 
         // If this is a section header (only has name)
@@ -105,6 +114,10 @@ const groupBySectionDividers = (items: DocsMenuItem[]): any[] => {
 }
 
 const processMenuItemWithGrouping = (item: DocsMenuItem): any => {
+    // Handle divider type: add separator for menu, skip otherwise
+    if ((item as any).type === 'divider') {
+        return { type: 'separator' as const }
+    }
     if (!item.name) return null
 
     // If the item has children, process them recursively with grouping

@@ -2669,6 +2669,9 @@ export const docsMenu = {
                     color: 'purple',
                 },
                 {
+                    type: 'divider',
+                },
+                {
                     name: 'Analysis views',
                 },
                 {
@@ -2960,6 +2963,9 @@ export const docsMenu = {
                     color: 'yellow',
                 },
                 {
+                    type: 'divider',
+                },
+                {
                     name: 'Features',
                 },
                 {
@@ -3195,6 +3201,9 @@ export const docsMenu = {
                     color: 'blue',
                 },
                 {
+                    type: 'divider',
+                },
+                {
                     name: 'Features',
                 },
                 {
@@ -3375,6 +3384,9 @@ export const docsMenu = {
                     icon: 'IconGraduationCap',
                     color: 'blue',
                     featured: true,
+                },
+                {
+                    type: 'divider',
                 },
                 {
                     name: 'Features',
