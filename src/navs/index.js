@@ -673,23 +673,23 @@ export const handbookSidebar = [
         children: [
             {
                 name: 'Overview',
-                url: '/handbook/growth/sales/customer-success',
+                url: '/handbook/cs-and-onboarding/customer-success',
             },
             {
                 name: 'Onboarding team',
-                url: '/handbook/growth/sales/onboarding-team',
+                url: '/handbook/cs-and-onboarding/onboarding-team',
             },
             {
                 name: 'Health tracking',
-                url: '/handbook/growth/sales/health-tracking',
+                url: '/handbook/cs-and-onboarding/health-tracking',
             },
             {
                 name: 'Feature requests',
-                url: '/handbook/growth/sales/feature-requests',
+                url: '/handbook/cs-and-onboarding/feature-requests',
             },
             {
                 name: 'Customer health checks',
-                url: '/handbook/growth/sales/health-checks',
+                url: '/handbook/cs-and-onboarding/health-checks',
             },
         ],
     },
