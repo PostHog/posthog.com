@@ -1,7 +1,7 @@
 import CloudinaryImage from 'components/CloudinaryImage'
 import React, { useState } from 'react'
 import Link from 'components/Link'
-import { IconChat, IconGraph, IconRewindPlay, IconThoughtBubble, IconUser } from '@posthog/icons'
+import { IconAI, IconChat, IconGraph, IconRewindPlay, IconThoughtBubble, IconUser } from '@posthog/icons'
 import { CallToAction } from 'components/CallToAction'
 import { CustomerCard } from 'components/Products/CustomerCard'
 import { Hero } from 'components/Products/Hero'
@@ -26,6 +26,7 @@ import { VsCompetitor } from 'components/Products/Competitor'
 import { VsPostHog } from 'components/Products/Competitor/VsPostHog'
 import Comparison from '../Comparison'
 import { useStaticQuery, graphql } from 'gatsby'
+import { MaxQuestionInput } from 'components/MaxQuestionInput'
 
 interface ProfileData {
     firstName: string
@@ -246,6 +247,10 @@ export const ProductMaxAI = () => {
                     description="Get instant insights, automate tasks, and learn best practices through natural conversation"
                     image="https://res.cloudinary.com/dmukukwp6/image/upload/max_preview_side_9365f7d4b2.png"
                 />
+
+                <div className="max-w-3xl mx-auto mt-8">
+                    <MaxQuestionInput />
+                </div>
 
                 <div className="text-center"></div>
 
