@@ -35,16 +35,22 @@ const ShortcutClasses =
     'ml-auto pl-5 text-secondary group-data-[disabled]:text-muted group-data-[highlighted]:text-primary'
 
 // Components
-const MenuItem: React.FC<{ item: MenuItemType }> = ({ item }) => {
+const MenuItem: React.FC<{ item: MenuItemType; forceIconIndent?: boolean }> = ({ item, forceIconIndent }) => {
     if (item.type === 'separator') {
         return <RadixMenubar.Separator className={SeparatorClasses} />
     }
 
     if (item.type === 'submenu' && item.items) {
+        // Check if any child has an icon
+        const anyChildHasIcon = item.items.some((subItem) => !!subItem.icon)
         return (
             <RadixMenubar.Sub>
                 <RadixMenubar.SubTrigger className={SubTriggerClasses}>
-                    {item.icon && <span className="mr-2 flex items-center">{item.icon}</span>}
+                    {item.icon ? (
+                        <span className="mr-2 flex items-center">{item.icon}</span>
+                    ) : forceIconIndent ? (
+                        <span style={{ display: 'inline-block', width: 16, minWidth: 16 }} className="mr-2" />
+                    ) : null}
                     {item.label}
                     <div className={ShortcutClasses}>
                         <IconChevronRight className="size-4" />
@@ -53,7 +59,7 @@ const MenuItem: React.FC<{ item: MenuItemType }> = ({ item }) => {
                 <RadixMenubar.Portal>
                     <RadixMenubar.SubContent className={ContentClasses} alignOffset={-5} data-scheme="primary">
                         {item.items.map((subItem, index) => (
-                            <MenuItem key={index} item={subItem} />
+                            <MenuItem key={index} item={subItem} forceIconIndent={anyChildHasIcon} />
                         ))}
                     </RadixMenubar.SubContent>
                 </RadixMenubar.Portal>
@@ -64,7 +70,11 @@ const MenuItem: React.FC<{ item: MenuItemType }> = ({ item }) => {
     return (
         <RadixMenubar.Item className={ItemClasses} disabled={item.disabled} onClick={item.onClick}>
             <div className="flex items-center gap-2">
-                {item.icon}
+                {item.icon ? (
+                    item.icon
+                ) : forceIconIndent ? (
+                    <span style={{ display: 'inline-block', width: 16, minWidth: 16 }} />
+                ) : null}
                 {item.link ? (
                     <Link to={item.link} state={{ newWindow: true }} className="no-underline text-primary">
                         {item.label}
