@@ -668,6 +668,32 @@ export const handbookSidebar = [
         ],
     },
     {
+        name: 'Customer Success & Onboarding',
+        url: '',
+        children: [
+            {
+                name: 'Overview',
+                url: '/handbook/growth/sales/customer-success',
+            },
+            {
+                name: 'Onboarding team',
+                url: '/handbook/growth/sales/onboarding-team',
+            },
+            {
+                name: 'Health tracking',
+                url: '/handbook/growth/sales/health-tracking',
+            },
+            {
+                name: 'Feature requests',
+                url: '/handbook/growth/sales/feature-requests',
+            },
+            {
+                name: 'Customer health checks',
+                url: '/handbook/growth/sales/health-checks',
+            },
+        ],
+    },
+    {
         name: 'Design',
         url: '',
         children: [
@@ -1139,10 +1165,6 @@ export const handbookSidebar = [
                 url: '/handbook/growth/sales/product-led-sales',
             },
             {
-                name: 'Onboarding team',
-                url: '/handbook/growth/sales/onboarding-team',
-            },
-            {
                 name: 'Expansion & Retention',
                 url: '/handbook/growth/sales/expansion-and-retention',
             },
@@ -1197,28 +1219,6 @@ export const handbookSidebar = [
                     {
                         name: 'Historical imports',
                         url: '/handbook/growth/sales/historical-import',
-                    },
-                ],
-            },
-            {
-                name: 'Customer Success',
-                url: '',
-                children: [
-                    {
-                        name: 'Overview',
-                        url: '/handbook/growth/sales/customer-success',
-                    },
-                    {
-                        name: 'Health tracking',
-                        url: '/handbook/growth/sales/health-tracking',
-                    },
-                    {
-                        name: 'Feature requests',
-                        url: '/handbook/growth/sales/feature-requests',
-                    },
-                    {
-                        name: 'Customer health checks',
-                        url: '/handbook/growth/sales/health-checks',
                     },
                 ],
             },
