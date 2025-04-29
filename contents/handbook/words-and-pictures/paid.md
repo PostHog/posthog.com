@@ -44,3 +44,17 @@ We usually focus campaigns on users in the US, Canada, UK, Germany and France, a
 We track conversion in the PostHog app, as using 3rd party trackers like Google Tag Manager is against our brand and values. 
 
 For Google Ads specifically, we have [an app](https://github.com/PostHog/plugin-write-google-ads-to-zapier) which syncs PostHog signups to Zapier, which connects to a Google Sheet that is than synced automatically to our Google Ads account once a day.
+
+## Dog-fooding new destinations
+
+Occasionally, we want to help the CDP team by testing new destinations, such as ad platforms. But we also have a strict policy against third-party cookies. So, here are some guidelines to make that testing work smoothly. 
+
+* If it creates third-party cookies for us, don't do it. 
+* All testing must align with [our privacy policy](/privacy)
+* Always verify what data is collected and how it is used. 
+* Don't collect any PII, obviously. 
+* Limit data collection only to what is _absolutely_ required. 
+* Always be transparent with users about what we're collecting, if any. 
+* Document changes in the handbook by opening a PR and getting a review. 
+* One week later, follow-up  to verify it's working as expected.
+* In the event something goes wrong, let the People & Ops team know. 
