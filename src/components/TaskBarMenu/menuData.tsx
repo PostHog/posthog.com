@@ -120,8 +120,16 @@ const processMenuItemWithGrouping = (item: DocsMenuItem): any => {
     }
     if (!item.name) return null
 
+    // Special case: If this is the Product OS menu, filter out 'Docs' and 'Overview' from its children
+    let children = item.children
+    if (item.name === 'Product OS' && Array.isArray(children)) {
+        children = children.filter(
+            (child) => child.name !== 'Docs' && child.name !== 'Overview'
+        )
+    }
+
     // If the item has children, process them recursively with grouping
-    if (item.children) {
+    if (children) {
         const baseItem: any = {
             type: 'submenu' as const,
             label: item.name,
@@ -134,7 +142,7 @@ const processMenuItemWithGrouping = (item: DocsMenuItem): any => {
             const IconComponent = Icons[item.icon as keyof typeof Icons]
             baseItem.icon = <IconComponent className={`text-${item.color || 'gray'} size-4`} />
         }
-        let grouped = groupBySectionDividers(item.children)
+        let grouped = groupBySectionDividers(children)
         // FLATTEN: If the first child is a submenu with the same label, bring its children up one level
         if (
             grouped.length > 0 &&
@@ -166,7 +174,18 @@ const processMenuItemWithGrouping = (item: DocsMenuItem): any => {
 }
 
 const getDocsMenuItems = () => {
-    return groupBySectionDividers((docsMenu as DocsMenu).children)
+    let items = groupBySectionDividers((docsMenu as DocsMenu).children)
+
+    // Remove any item (submenu or section divider) with label 'Docs'
+    items = items.filter((item) => {
+        // Remove if submenu with label 'Docs'
+        if (item.type === 'submenu' && item.label === 'Docs') return false
+        // Remove if section divider with label 'Docs' (no type, just label)
+        if (!item.type && item.label === 'Docs') return false
+        return true
+    })
+
+    return items
 }
 
 export const menuData: MenuType[] = [
