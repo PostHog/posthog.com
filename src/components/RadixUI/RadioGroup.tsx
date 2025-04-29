@@ -5,7 +5,7 @@ const radioGroupItemClasses =
     'group flex items-center gap-2 cursor-pointer'
 
 const radioGroupIndicatorOuterClasses =
-    'inline-block w-5 h-5 rounded-full border group-hover:border-primary flex items-center justify-center bg-primary border-input'
+    'inline-block w-5 h-5 rounded-full border border-primary group-hover:border-orange flex items-center justify-center bg-primary'
 
 const radioGroupIndicatorInnerClasses =
     'w-3 h-3 rounded-full block bg-orange border-orange'
@@ -48,7 +48,7 @@ export const RadioGroup = ({ title, options, onValueChange, value }: RadioGroupP
                             <span className={radioGroupIndicatorInnerClasses} />
                         </RadixRadioGroup.Indicator>
                     </span>
-                    <span className="text-base">{option.label}</span>
+                    <span className="text-sm">{option.label}</span>
                 </RadixRadioGroup.Item>
             ))}
         </RadixRadioGroup.Root>

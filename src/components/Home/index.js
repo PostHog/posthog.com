@@ -58,17 +58,15 @@ const Home = () => {
                 />
 
                 <div data-scheme="secondary" className="w-full h-full bg-primary flex flex-col">
-                    <div className="flex flex-1 w-full">
-                        {/* Left column: 40% */}
+                    <div className="flex flex-1 w-full border-y border-primary">
                         <div data-scheme="primary" className="w-[40%] flex items-center justify-center p-2 border-r border-primary">
-                            <div className="w-full bg-primary flex items-center justify-center text-lg h-full text-sm">
+                            <div className="w-full bg-primary flex items-center justify-center h-full text-sm">
                                 Image placeholder
                             </div>
                         </div>
-                        {/* Right column: 60% */}
                         <div className="w-[60%] flex flex-col justify-center px-8 py-4">
-                            <h1 className="text-xl font-bold mb-0">The toolkit for building successful products</h1>
-                            <p className="text-secondary">The single platform to build products, talk to users, and ship new features</p>
+                            <h1 className="text-xl font-bold mb-1">The toolkit for building successful products</h1>
+                            <p className="text-secondary text-[15px]">The single platform to build products, talk to users, and ship new features</p>
                             <div className="mt-4">
                                 <RadioGroup 
                                     title="Menu options" 
@@ -79,8 +77,7 @@ const Home = () => {
                             </div>
                         </div>
                     </div>
-                    {/* Bottom row: anchored */}
-                    <div data-scheme="secondary" className="w-full flex justify-end p-2 border-t border-primary bg-primary">
+                    <div data-scheme="primary" className="w-full flex justify-end p-2 bg-accent">
                         <CallToAction type="secondary" size="sm">Continue</CallToAction>
                     </div>
                 </div>
