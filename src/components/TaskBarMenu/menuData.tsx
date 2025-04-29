@@ -120,7 +120,17 @@ const processMenuItemWithGrouping = (item: DocsMenuItem): any => {
             const IconComponent = Icons[item.icon as keyof typeof Icons]
             baseItem.icon = <IconComponent className={`text-${item.color || 'gray'} size-4`} />
         }
-        baseItem.items = groupBySectionDividers(item.children)
+        let grouped = groupBySectionDividers(item.children)
+
+        // FLATTEN: If the first child is a submenu with the same label, bring its children up one level
+        if (
+            grouped.length > 0 &&
+            grouped[0].type === 'submenu' &&
+            grouped[0].label === item.name
+        ) {
+            grouped = [...grouped[0].items, ...grouped.slice(1)]
+        }
+        baseItem.items = grouped
         return baseItem
     }
 
