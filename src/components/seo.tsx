@@ -47,7 +47,7 @@ export const SEO = ({
         if (seo.title && appWindow) {
             setWindowTitle(appWindow, seo.title)
         }
-    }, [])
+    }, [seo.title])
 
     return (
         <Helmet title={seo.title} titleTemplate={titleTemplate}>

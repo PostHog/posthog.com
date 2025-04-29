@@ -1,31 +1,30 @@
-import React, { createContext, useContext, ReactNode, useState, useEffect, useRef, useCallback } from 'react'
+import React, { createContext, useContext, ReactNode, useState, useEffect, useCallback } from 'react'
 import useInkeepSettings, { defaultQuickQuestions } from './useInkeepSettings'
-import { layoutLogic } from 'logic/layoutLogic'
-import { useValues } from 'kea'
-import { AIChatFunctions } from '@inkeep/uikit'
 import Chat from 'components/Chat'
 
 interface ChatContextType {
     chatOpen: boolean
     closeChat: () => void
-    openChat: ({ defaultMessage }: { defaultMessage?: string }) => void
+    openChat: ({ context }: { context?: { type: 'page'; value: string } }) => void
     chatting: boolean
     hasUnread: boolean
     setHasUnread: (unread: boolean) => void
     loading: boolean
-    renderChat: (target: string, conversationId?: string) => void
-    inkeep: AIChatFunctions | null
+    renderChat: () => void
     setQuickQuestions: (questions: string[]) => void
     conversationHistory: { id: string; question: number; date: string }[]
     resetConversationHistory: () => void
+    EmbeddedChat: any
+    aiChatSettings: any
+    baseSettings: any
+    context: { type: 'page'; value: { path: string; label: string } }[]
+    setContext: (context: { type: 'page'; value: { path: string; label: string } }[]) => void
 }
 
 const ChatContext = createContext<ChatContextType | undefined>(undefined)
 
 export function ChatProvider({ children }: { children: ReactNode }): JSX.Element {
-    const { websiteTheme } = useValues(layoutLogic)
-    const { baseSettings, aiChatSettings } = useInkeepSettings()
-    const embeddedChatRef = useRef<AIChatFunctions | null>(null)
+    const { baseSettings, aiChatSettings, setBaseSettings, setAiChatSettings } = useInkeepSettings()
     const [chatting, setChatting] = useState(false)
     const [chatOpen, setChatOpen] = useState(false)
     const [hasUnread, setHasUnread] = useState(false)
@@ -33,16 +32,18 @@ export function ChatProvider({ children }: { children: ReactNode }): JSX.Element
     const [hasFirstResponse, setHasFirstResponse] = useState(false)
     const [quickQuestions, setQuickQuestions] = useState(defaultQuickQuestions)
     const [conversationHistory, setConversationHistory] = useState<{ id: string; question: number; date: string }[]>([])
+    const [context, setContext] = useState<{ type: 'page'; value: { path: string; label: string } }[]>([])
+    const [EmbeddedChat, setEmbeddedChat] = useState<any>()
 
     const logEventCallback = useCallback(
         (event: any) => {
-            if (event?.eventName === 'chat_message_bot_response_received') {
+            if (event?.eventName === 'assistant_message_received') {
                 if (!hasFirstResponse) {
                     setHasFirstResponse(true)
                     try {
                         const newConversation = {
-                            id: event.properties.chatSessionId,
-                            question: event.properties.question,
+                            id: event.properties.conversation.id,
+                            question: event.properties.conversation.messages[0].content,
                             date: new Date().toISOString(),
                         }
                         const conversations = JSON.parse(localStorage.getItem('conversations') || '[]')
@@ -60,11 +61,11 @@ export function ChatProvider({ children }: { children: ReactNode }): JSX.Element
         [hasFirstResponse, chatOpen]
     )
 
-    const openChat = ({ defaultMessage }: { defaultMessage?: string } = {}) => {
-        if (defaultMessage) {
-            setTimeout(() => {
-                embeddedChatRef.current?.updateInputMessage(defaultMessage)
-            }, 1000)
+    const openChat = ({
+        context: newContext,
+    }: { context?: { type: 'page'; value: { path: string; label: string } } } = {}) => {
+        if (newContext && !context.some((c) => c.value.path === newContext.value.path)) {
+            setContext((prev) => [...prev, newContext])
         }
 
         setChatOpen(true)
@@ -74,27 +75,13 @@ export function ChatProvider({ children }: { children: ReactNode }): JSX.Element
         setChatOpen(false)
     }
 
-    const renderChat = (target: string, conversationId?: string) => {
-        // Render chat (usually after the target element is mounted)
-        import('@inkeep/uikit-js').then((inkeepJS) => {
-            const inkeep = inkeepJS.Inkeep(baseSettings)
-            embeddedChatRef.current = inkeep.embed({
-                componentType: 'EmbeddedChat',
-                targetElement: target,
-                properties: {
-                    baseSettings: {
-                        ...baseSettings,
-                        logEventCallback,
-                    },
-                    aiChatSettings: {
-                        ...aiChatSettings,
-                        quickQuestions,
-                        ...(conversationId ? { chatId: conversationId } : {}),
-                    },
-                },
-            })
-            setLoading(false)
-        })
+    const renderChat = async () => {
+        try {
+            const { InkeepEmbeddedChat } = await import('@inkeep/cxkit-react')
+            setEmbeddedChat(() => InkeepEmbeddedChat)
+        } catch (error) {
+            console.error('Failed to load EmbeddedChat:', error)
+        }
     }
 
     const resetConversationHistory = () => {
@@ -113,31 +100,18 @@ export function ChatProvider({ children }: { children: ReactNode }): JSX.Element
     }, [])
 
     useEffect(() => {
-        // Update quick questions
-        if (quickQuestions.length > 0) {
-            if (embeddedChatRef.current) {
-                // Remove old quick questions first because they're not removed automatically
-                embeddedChatRef.current.render({
-                    aiChatSettings: {
-                        quickQuestions: false,
-                    },
-                })
-                // Add new quick questions
-                embeddedChatRef.current.render({
-                    aiChatSettings: {
-                        quickQuestions,
-                    },
-                })
-            }
-        }
+        setAiChatSettings({
+            ...aiChatSettings,
+            exampleQuestions: quickQuestions,
+        })
     }, [quickQuestions])
 
     useEffect(() => {
         // Add community suggestion to chat
-        if (hasFirstResponse && embeddedChatRef.current) {
+        if (hasFirstResponse) {
             const shadowRoot = document.querySelector('#embedded-chat-target>div')?.shadowRoot
             if (shadowRoot) {
-                const chatBubbleActions = shadowRoot.querySelector('.ikp-chat-bubble__message-actions')
+                const chatBubbleActions = shadowRoot.querySelector('.ikp-ai-chat-message-sources')
                 if (chatBubbleActions) {
                     const el = document.createElement('p')
                     el.classList.add('community-suggestion')
@@ -149,27 +123,6 @@ export function ChatProvider({ children }: { children: ReactNode }): JSX.Element
     }, [hasFirstResponse])
 
     useEffect(() => {
-        // Update dark/light theme
-        if (embeddedChatRef.current) {
-            embeddedChatRef.current.render({
-                baseSettings: {
-                    colorMode: {
-                        forcedColorMode: websiteTheme === 'dark' ? 'dark' : 'light',
-                    },
-                },
-            })
-        }
-    }, [websiteTheme])
-
-    useEffect(() => {
-        // Update event callback (sets unread messages and detects first response)
-        if (embeddedChatRef.current) {
-            embeddedChatRef.current.render({
-                baseSettings: {
-                    logEventCallback,
-                },
-            })
-        }
         // Reset unread messages when chat is opened
         if (chatOpen) {
             setHasUnread(false)
@@ -201,6 +154,23 @@ export function ChatProvider({ children }: { children: ReactNode }): JSX.Element
         return () => window.removeEventListener('keydown', handleKeyPress)
     }, [chatOpen])
 
+    useEffect(() => {
+        setBaseSettings({
+            ...baseSettings,
+            onEvent: logEventCallback,
+        })
+    }, [])
+
+    useEffect(() => {
+        const prompts = context.map((c) =>
+            c.type === 'page' ? `The user is currently viewing the page ${c.value.label} at ${c.value.path}` : ``
+        )
+        setAiChatSettings({
+            ...aiChatSettings,
+            prompts,
+        })
+    }, [context])
+
     return (
         <ChatContext.Provider
             value={{
@@ -212,10 +182,14 @@ export function ChatProvider({ children }: { children: ReactNode }): JSX.Element
                 setHasUnread,
                 loading,
                 renderChat,
-                inkeep: embeddedChatRef.current,
                 setQuickQuestions,
                 conversationHistory,
                 resetConversationHistory,
+                EmbeddedChat,
+                aiChatSettings,
+                baseSettings,
+                context,
+                setContext,
             }}
         >
             {children}

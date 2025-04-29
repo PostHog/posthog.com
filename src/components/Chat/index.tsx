@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
 import InkeepEmbeddedChat from './Inkeep'
 import { useChat } from 'hooks/useChat'
-import { IconChevronDown, IconRewind, IconX } from '@posthog/icons'
+import { IconChevronDown, IconDocument, IconRewind, IconX } from '@posthog/icons'
 import usePostHog from 'hooks/usePostHog'
 import { defaultQuickQuestions } from 'hooks/useInkeepSettings'
 import { groupBy } from 'lodash'
@@ -10,23 +10,27 @@ import dayjs from 'dayjs'
 
 const ConversationHistoryButton = ({ onClick }: { onClick: () => void }) => {
     return (
-        <motion.div className="absolute top-2 right-2 z-10">
+        <motion.div>
             <motion.button
                 onClick={(e) => {
                     e.stopPropagation()
                     onClick()
                 }}
-                className="border border-b-2 border-light dark:border-dark rounded p-1.5 bg-accent dark:bg-accent-dark flex items-center space-x-1 click overflow-hidden group h-[28px]"
+                className="border border-light-7 rounded p-1.5 flex items-center space-x-1 click overflow-hidden group h-[28px]"
                 whileHover={{ width: 'auto' }}
                 initial={{ width: '28px' }}
             >
-                <IconRewind className="size-3.5 opacity-80 flex-shrink-0" />
+                <IconRewind className="size-3.5 flex-shrink-0 opacity-60 group-hover:opacity-100 transition-opacity" />
                 <span className="text-xs whitespace-nowrap group-hover:opacity-100 opacity-0 transition-opacity font-semibold">
                     Conversation history
                 </span>
             </motion.button>
         </motion.div>
     )
+}
+
+const Context = () => {
+    return null
 }
 
 export default function Chat(): JSX.Element | null {
@@ -39,6 +43,8 @@ export default function Chat(): JSX.Element | null {
         conversationHistory,
         renderChat,
         resetConversationHistory,
+        context,
+        setContext,
     } = useChat()
     const [height, setHeight] = useState<string | number>('100%')
     const [showDisclaimer, setShowDisclaimer] = useState(false)
@@ -86,20 +92,67 @@ export default function Chat(): JSX.Element | null {
                     ref={chatRef}
                     initial={{ translateY: '110%' }}
                     animate={{ translateY: chatOpen ? 0 : '110%', transition: { type: 'tween' } }}
-                    className="fixed bottom-0 right-4 h-[400px] bg-white dark:bg-dark z-[999999] border border-border dark:border-dark w-[350px] sm:w-[400px] rounded-tr-md rounded-tl-md"
+                    className="fixed bottom-0 right-4 bg-white dark:bg-dark z-[999999] border border-border dark:border-dark w-[350px] sm:w-[400px] rounded-tr-md rounded-tl-md overflow-hidden"
                     onAnimationComplete={handleAnimationComplete}
                     onClick={() => setHistoryOpen(false)}
                 >
-                    <button
-                        onClick={() => {
-                            closeChat()
-                            posthog?.capture('Closed MaxAI chat')
-                        }}
-                        className={`absolute right-4 top-3 z-10 rounded-tl group`}
-                    >
-                        <IconX className="size-5 opacity-60 group-hover:opacity-100 transition-opacity -rotate-90 relative left-1" />
-                    </button>
                     <div style={{ height }}>
+                        <div data-scheme="secondary">
+                            <div className="flex items-center space-x-1 bg-primary p-1 border-b border-light-7 justify-end">
+                                {conversationHistory?.length > 0 && (
+                                    <ConversationHistoryButton onClick={() => setHistoryOpen(!historyOpen)} />
+                                )}
+                                <button
+                                    onClick={() => {
+                                        closeChat()
+                                        posthog?.capture('Closed MaxAI chat')
+                                    }}
+                                    data-scheme="secondary"
+                                    className={`border border-light-7 group p-1.5 rounded`}
+                                >
+                                    <IconX className="size-3.5 opacity-60 group-hover:opacity-100 transition-opacity" />
+                                </button>
+                            </div>
+                            {context?.length > 0 && (
+                                <ul className="m-0 list-none p-2 flex space-x-1 overflow-auto snap-x snap-mandatory">
+                                    {context.map((c) => {
+                                        const {
+                                            type,
+                                            value: { label, path },
+                                        } = c
+                                        return (
+                                            <li
+                                                key={path}
+                                                className={`font-semibold p-1.5 border border-light-7 rounded flex justify-between bg-primary ${
+                                                    context.length === 1 ? 'w-full' : ' w-[80%]'
+                                                } flex-shrink-0 transition-all`}
+                                            >
+                                                <div>
+                                                    <p className="text-xs opacity-70 m-0">Context</p>
+                                                    <span className="flex items-center space-x-1">
+                                                        <span>
+                                                            {type === 'page' ? (
+                                                                <IconDocument className="size-4" />
+                                                            ) : null}
+                                                        </span>
+                                                        <p className="m-0 text-sm line-clamp-1">{label || path}</p>
+                                                    </span>
+                                                </div>
+                                                <button
+                                                    onClick={() => {
+                                                        setContext(context.filter((c) => c.value.path !== path))
+                                                    }}
+                                                    className="opacity-60 hover:opacity-100 transition-opacity pr-1"
+                                                >
+                                                    <IconX className="size-4" />
+                                                </button>
+                                            </li>
+                                        )
+                                    })}
+                                </ul>
+                            )}
+                        </div>
+
                         <AnimatePresence>
                             {showDisclaimer && (
                                 <motion.div
@@ -125,16 +178,14 @@ export default function Chat(): JSX.Element | null {
                                 </motion.div>
                             )}
                         </AnimatePresence>
-                        {conversationHistory?.length > 0 && (
-                            <ConversationHistoryButton onClick={() => setHistoryOpen(!historyOpen)} />
-                        )}
                         <AnimatePresence>
                             {conversationHistory?.length > 0 && historyOpen && (
                                 <motion.div
                                     initial={{ opacity: 0, translateY: '-100%' }}
                                     animate={{ opacity: 1, translateY: 0, transition: { duration: 0.2 } }}
                                     exit={{ opacity: 0, translateY: '-100%', transition: { duration: 0.2 } }}
-                                    className="text-sm absolute top-0 left-0 w-full z-10 p-3 pb-2 bg-accent dark:bg-accent-dark border-b border-light dark:border-dark"
+                                    data-scheme="secondary"
+                                    className="text-sm absolute top-0 left-0 w-full z-10 p-3 pb-2 bg-primary border-b border-light dark:border-dark"
                                     onClick={(e) => {
                                         e.stopPropagation()
                                     }}
@@ -191,6 +242,7 @@ export default function Chat(): JSX.Element | null {
                                 </motion.div>
                             )}
                         </AnimatePresence>
+                        <Context />
                         <InkeepEmbeddedChat />
                     </div>
                 </motion.div>
