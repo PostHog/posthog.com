@@ -47,7 +47,7 @@ For Google Ads specifically, we have [an app](https://github.com/PostHog/plugin-
 
 ## Dog-fooding new destinations
 
-Occasionally, we want to help the CDP team by testing new destinations, such as ad platforms. But we also have a strict policy against third-party cookies. So, here are some guidelines to make that testing work smoothly. 
+Occasionally, we want to help the CDP team by testing new destinations, such as ad platforms. But we also have a strict policy against third-party cookies. So, here are some guidelines to make sure testing works smoothly. 
 
 * If it creates third-party cookies for us, don't do it. 
 * All testing must align with [our privacy policy](/privacy)
@@ -56,5 +56,5 @@ Occasionally, we want to help the CDP team by testing new destinations, such as 
 * Limit data collection only to what is _absolutely_ required. 
 * Always be transparent with users about what we're collecting, if any. 
 * Document changes in the handbook by opening a PR and getting a review. 
-* One week later, follow-up  to verify it's working as expected.
+* One week later, follow-up to verify it's working as expected.
 * In the event something goes wrong, let the People & Ops team know. 
