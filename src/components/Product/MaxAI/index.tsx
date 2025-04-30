@@ -336,7 +336,7 @@ export const ProductMaxAI = () => {
                                 <a href="/docs/privacy">our privacy docs</a>.
                             </p>
                         </div>
-                        <aside className="shrink-0 md:basis-[500px] self-end">
+                        <aside className="shrink-0 md:basis-[400px] self-end">
                             <CloudinaryImage
                                 src="https://res.cloudinary.com/dmukukwp6/image/upload/confused_small_8cc411c714.png"
                                 alt="confused hedgehog"
