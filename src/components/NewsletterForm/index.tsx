@@ -6,6 +6,7 @@ import { StaticImage } from 'gatsby-plugin-image'
 import Tooltip from 'components/Tooltip'
 import { IconInfo } from '@posthog/icons'
 import { child, container } from 'components/CallToAction'
+import { Link } from 'gatsby'
 
 interface NewsletterFormProps {
     className?: string
@@ -105,7 +106,8 @@ export const NewsletterForm = ({ className = '', placement }: NewsletterFormProp
                             <strong>
                                 <em>Product for Engineers</em>
                             </strong>{' '}
-                            from Substack in your inbox.
+                            from Substack in your inbox. Until then,
+                            <Link href="https://newsletter.posthog.com/" external>check out our previous editions.</Link>
                         </p>
                     </div>
                 )}
