@@ -43,9 +43,28 @@ export class AppComponent {
 
 ## Tracking pageviews
 
-PostHog only captures pageview events when a [page load](https://developer.mozilla.org/en-US/docs/Web/API/Window/load_event) is fired. Since Angular creates a single-page app, this only happens once, and the Angular router handles subsequent page changes.
+PostHog only captures pageview events when a [page load](https://developer.mozilla.org/en-US/docs/Web/API/Window/load_event) is fired by default. Since Angular creates a single-page app, this only happens once, and the Angular router handles subsequent page changes.
 
-If we want to capture every route change, we must write code to capture pageviews that integrates with the router.
+If we want to capture every route change, we have two option:
+
+1. Use the new posthog feature to capture pageviews based on the Browser's history api
+2. Manually capture the pageviews.
+
+### Capture pageviews using the Browsers's History API
+
+To use this, we need to update our `capture_pageview` config on posthog-js:
+
+```ts file=main.ts
+posthog.init(
+  '<ph_project_api_key>',
+  {
+    api_host:'<ph_client_api_host>',
+    capture_pageview: 'history_change'
+  }
+)
+```
+
+### Manually tracking pageviews
 
 To start, we need to add `capture_pageview: false` to the PostHog initialization to avoid double capturing the first pageview.
 
