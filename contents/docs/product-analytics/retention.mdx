@@ -13,17 +13,16 @@ availability:
     className="rounded shadow-xl"
 />
 
-Retention is a type of insight that shows you how many users return during subsequent periods. 
-
-They're useful for answering questions like:
+Retention shows you how many users return during subsequent periods. It's useful for answering questions like:
 
 - Are new sign ups coming back to use your product after trying it?
-- Is a new feature or user experience improving retention? 
+- Is a new feature or user experience getting people to return? 
 - What type of user retains the best?
 
 Retention insights are also a vital tool for evaluating whether you've [achieved product-market fit](/founders/product-market-fit-game).
 
 ## Creating a retention insight
+
 <ProductScreenshot
     imageLight = {"https://res.cloudinary.com/dmukukwp6/image/upload/retention_f69d5f3c7c.png"} 
     imageDark = {"https://res.cloudinary.com/dmukukwp6/image/upload/retention_dark_51d858a4d0.png"}
@@ -35,8 +34,8 @@ Retention insights support both [events](/docs/data/events) and [actions](/docs/
 
 When you create a retention insight, you're defining two things:
 
-1. A start event – an event or action that determines if the user should be included in the retention analysis.
-2. A return event – an event or action that the same user/entity 'returns' to perform. This tells us if the user was 'retained'.
+1. A start event - an event or action that determines if the user or group should be included in the retention cohorts.
+2. A return event - an event or action that the same user or group *returns* to perform. This tells us if they were *retained*.
 
 It often, but not always, makes sense to use the same event or action for both.
 
@@ -47,9 +46,7 @@ It often, but not always, makes sense to use the same event or action for both.
     classes="rounded"
 />
 
-In the example above, we used an action called 'Product Interactions' for both. 
-The start event is highlighted in blue and the return event in green.
-We grouped users by 'Unique users' and chosen users who did the 'Product Interactions' action for the first time during a six-week period.
+In the example above, we use an action called **Product Interactions** for both. We group by **Unique users** and chose users who did the **Product Interactions** action for the first time during a seven-week period.
 
 You can also:
 
@@ -59,24 +56,20 @@ You can also:
 
 - Filter your retention insights using filter groups, such as event properties (country, device, etc.), person properties (job title, company name, etc.), feature flags (users who have a flag enabled), and existing [cohorts](/docs/data/cohorts) (pre-defined groups of users).
 
-- Choose between **first time retention** and **recurring retention**. 
-Recurring retention counts a user as part of a cohort if they performed the start event during that time period, irrespective of it was their first time or not. 
-First time retention only counts a user as part of the cohort if it was their first time performing the start event.
+- Choose between **first time** and **recurring** retention. **Recurring retention** counts a user or group as part of a cohort if they performed the start event during that time period, irrespective of if it was their first time or not. **First time retention** only counts a user or group as part of the cohort if it was their first time performing the start event.
 
-- Add **breakdowns** to see how retention varies across different user segments. For example, you could break down by country to see which regions have the highest retention rates.
+- Add [breakdowns](#breakdowns) to see how retention varies across different properties.
 
-- Select between two **retention reference** options: "Period 0" (default) and "Previous period". The reference determines how percentages are calculated - either relative to the initial cohort or the previous period.
-
-- Choose between **weighted mean** (default) and **simple mean** for retention calculation. Weighted mean accounts for different cohort sizes when calculating the average retention, while simple mean treats all cohorts equally.
-
-
+- Set up a bunch more [advanced calculation options](#retention-calculation-options) like relative retention.
 
 ## Understanding retention insights
 
 Retention insights are visualized in two ways:
 
-1. A **retention graph**, where each cohorts retention is rendered in a comparable line graph.
+1. A **retention graph**, where each cohorts retention is rendered in a comparable line or bar graph.
 2. A **cohort retention table**, where the same data is shown in a table.
+
+By default, both show the percentage of users who retained in each cohort relative to 'Week 0'.
 
 <ProductScreenshot
     imageLight = {"https://res.cloudinary.com/dmukukwp6/image/upload/retention_light_805120c74c.png"} 
@@ -85,21 +78,21 @@ Retention insights are visualized in two ways:
     classes="rounded"
 />
 
-By default, both show the percentage of users who retained in each cohort relative to 'Week 0'
+Here's a breakdown of the columns in the table:
 
 - **Column A** denotes the cohort. This retention insight is grouped by week, so it shows the date range of the six most recent weeks, and the seventh currently incomplete week. 
 
-- **Column B** shows the size of each individual cohort. As noted earlier, retention insights default to unique users, but they can also be grouped by unique organizations, companies, etc.
+- **Column B** shows the size of each individual cohort. As noted earlier, retention insights default to unique users, but they can also use groups.
 
-- **Column C** is 'Week 0' – i.e. the week in which the start event or action first took place. This is always 100% because all users in that cohort must perform the event to be included. This would be 'Hour 0', 'Day 0', or 'Month 0' if you choose a different time period.
+- **Column C** is 'Week 0' - i.e. the week in which the start event or action first took place. This is always 100% because all users in that cohort must perform the event to be included. This would be 'Hour 0', 'Day 0', or 'Month 0' if you choose a different time period.
 
-- **Column D** is Week 2 – i.e. the second week after the cohort was created. In this example, 27.4% of the 'May 20 to May 26' cohort retained, or 372 users.
+- **Column D** is Week 2 - i.e. the second week after the cohort was created. In this example, 27.4% of the 'May 20 to May 26' cohort retained, or 372 users.
 
-When analyzing retention insights, remember that:
+### Tips for analyzing retention insights
 
-- Users cannot exist in more than one cohort – i.e. a user in the 'May 20 to May 26' won't also appear in the 'Jun 3 to Jun 9' cohort.
+- Users cannot exist in more than one cohort - i.e. a user in the 'May 20 to May 26' won't also appear in the 'Jun 3 to Jun 9' cohort.
 
-- Users can appear in more than one retention period – i.e. they could be counted in both 'Week 1' and 'Week 3', or all six weeks. This means, for example, that it's possible for a later period to have higher retention than an earlier period. This could suggest that users tend to return in a regular pattern – i.e. every few weeks or days – to perform a specific task.
+- Users can appear in more than one retention period - i.e. they could be counted in both 'Week 1' and 'Week 3', or all six weeks. This means that it's possible for a later period to have higher retention than an earlier period. This could suggest that users tend to return in a regular pattern - i.e. every few days or weeks - to perform a specific task.
 
 - Retention insights only show you whether users performed an action or event, not how often. For that, create a [stickiness insight](/docs/product-analytics/stickiness).
 
@@ -107,18 +100,19 @@ When analyzing retention insights, remember that:
 
 - Clicking on a retention cell opens a modal with details about the specific users retained in that period, allowing for deeper analysis.
 
+## Retention calculation options
 
-## Advanced retention options
+- Select between two **retention reference** options: "Period 0" (default) and "Previous period". The reference determines how percentages are calculated - either relative to the initial cohort or the previous period.
+
+- Choose between **weighted mean** (default) and **simple mean** for retention calculation. Weighted mean accounts for different cohort sizes when calculating the average retention, while simple mean treats all cohorts equally.
 
 ### Relative retention
-By default the retention percentage show in each cell is based off of 'starting cohort size' 
-(the total number of users/entities that performed the start event which is indicated in the 'size' column).
-So if Day 2 shows 25% for a cohort, it means that 25% of the users who performed the start event returned on Day 2.
 
-You can toggle this to show retention relative to 'previous period'.
-This changes the retention calculation to be the percentage of users who returned compared to the previous period.
-With this option if Day 3 shows 40%, it means that 40% of the number of users who returned on Day 2 returned on Day 3.
-The option helps to see which time interval has the biggest percentage increase/drop offs in users.
+There are two options for calculating retention percentage over time:
+
+1. **Starting cohort size (default)**. The percentage of users or groups who returned compared to the *initial cohort size*. For example, if Day 3 shows 25% for a cohort, it means that 25% of the users who performed the start event returned on Day 3.
+
+2. **Previous period**. The percentage of users or groups who returned compared to the *previous period*. With this option if Day 3 shows 40%, it means that 40% of the number of users who returned on Day 2 returned on Day 3. The option helps to see which time interval has the biggest percentage increase/drop offs in users.
 
 <ProductScreenshot
     imageLight = {"https://res.cloudinary.com/dmukukwp6/image/upload/retention_toggle_light_991ef62419.png"} 
@@ -127,47 +121,49 @@ The option helps to see which time interval has the biggest percentage increase/
     classes="rounded"
 />
 
-### Retention criteria
-By default the retention numbers for a specific time interval, say Day 2, include only users who returned (performed 'return event') **on** Day 2.
-This **on** retention is useful when you feature requires users to come back in each and every time interval.
+### Returning time criteria
 
-An alternative to this is the **on or after** criteria. Also know as 'cumulative', 'rolling' or 'unbounded' retention.
-When this is enabled, the retention number for a specific time interval, say Day 2, includes user who returned **on or after** Day 2 (i.e. users who returned on Day 3, Day 4,... are also counted in Day 2).
-**On or after** retention provides an absolute view of how effectively you keep users coming back. 
-It shows how many people first used your product and eventually returned to find more value, essentially highlighting the inverse of your overall churn rate.
-This is useful when you want to measure your features which don't require users to come back consistently in every time period and gives you signal if they still care about the feature.
+There are two options for calculating who is included in the returning cohort:
+
+1. **On (default)**. Only users who returned (performed 'return event') **on** the specific time interval are included. This is useful when you feature requires users to come back in each and every time interval.
+
+2. **On or after**. Also known as cumulative, rolling or unbounded retention. When selected, the retention number for a specific time interval, say Day 2, includes user who returned **on or after** Day 2 (i.e. users who returned on Day 3, Day 4,... are also counted in Day 2). This is essentially the inverse of your overall churn rate. It shows how many people used your product and eventually returned to find more value. This is useful for evaluating features that don't require users to come back in every time period.
 
 ### Mean calculation logic
+
 You can choose between two different calculation options for the mean/average retention for each time interval.
-1. 'simple' - Calculates the average retention rate across all cohorts by giving equal weight to each cohort, regardless of its size.
-2. 'weighted' - Calculates the average retention rate by giving more weight to larger cohorts, accounting for different cohort sizes in the final mean.
 
-### Breakdowns
-You can breakdown your retention numbers and graph on event/person properties.
-eg. Breaking down the retention numbers by 'Country Name' can help to see which countries/regions have higher retention for the feature.
+1. **Simple**. Calculates the average retention rate across all cohorts by giving equal weight to each cohort, regardless of its size.
 
-When using breakdowns you see the mean retention for each breakdown value and can click on each row to expand and show
-each cohort with that breakdown value. 
-There is also a dropdown selector next to the time range filter which lets you filter the graph and table
-for a specific breakdown value.
+2. **Weighted**. Calculates the average retention rate by giving more weight to larger cohorts, accounting for different cohort sizes in the final mean.
 
-Note, the breakdown logic is implemented such that both the start and return event must have the same breakdown value.
-Example, when breaking down by browser, if the user performs the start event in Google Chrome but performs the return event in Firefox,
-the return event won't be counted in the breakdown results for Google Chrome. 
+## Breakdowns
 
-### Configure display of retention insights on dashboards
-Retention insights let you toggle the type of graph you're using.
-You can select between a 'Line chart' and a 'Bar chart'.
-Also within 'Options' you can select how the retention insight should show up on dashboards.
-You can toggle between showing both/one of the retention graph and the retention table. 
+You can breakdown your retention numbers and graph on event, person, group properties, and more. For example, breaking down the retention numbers by **Country Name** can help to see which countries have higher retention for the feature.
 
+When using breakdowns, you see the mean retention for each breakdown value and can click on each row to expand and show each cohort with that breakdown value. There is also a dropdown selector which lets you filter the graph and table for a specific breakdown value.
+
+<ProductScreenshot
+    imageLight = "https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_04_29_at_15_05_11_57dcd61f8c.png"
+    imageDark = "https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_04_29_at_15_04_52_389ae5f3c6.png"
+    alt="Retention breakdown" 
+    classes="rounded"
+/>
+
+The breakdown logic is implemented such that **both** the start and return event must have the same breakdown value. For example, when breaking down by browser, if the user performs the start event in Google Chrome but performs the return event in Firefox, the return event won't be counted in the breakdown results for Google Chrome. 
+
+## Displaying retention insights
+
+When saving a retention insight, there are two things to consider:
+
+1. Whether you want it to show as a line or bar chart. Choose this on the chart when creating an insight.
+2. Whether you want it to show as a chart or a table (or both) on a dashboard. Choose this after saving the insight by clicking on **Options** and then set it to **Show table only**, **Show graph only**, or **Show both**.
 
 ##  Retention vs. Stickiness
 
-
 [Stickiness](/docs/product-analytics/stickiness) and retention insights can look very similar, but they tell you different things:
 
--   **Retention** measures the percentage of users who came back and performed an event within a given period **at least once**
--   **Stickiness** measures **how many** times within a period a user performed an event
+-  **Retention** measures the percentage of users who came back and performed an event within a given period **at least once**
+-  **Stickiness** measures **how many** times within a period a user performed an event
 
 Retention is good for seeing how well you're doing at keeping users engaged overall. Stickiness is useful for seeing deeply users are engaging with your product and helps you identify the most engaged users.
