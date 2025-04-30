@@ -327,11 +327,12 @@ export const ProductMaxAI = () => {
                             <p>
                                 When you ask a question, relevant data gets shared with{' '}
                                 <a href="/docs/max-ai#is-my-data-shared-with-third-parties">our LLM providers</a>. All
-                                of these are covered by <a href="/dpa">our DP-yay policy</a>, which you can sign if you
-                                want peace of mind.
+                                of these providers are bound by regulations such as GDPR, CCPA, and others. We also
+                                offer a <a href="/dpa">DP-yay policy</a>, which you can sign if you want additional
+                                peace of mind.
                             </p>
                             <p>
-                                Want more info about GDPR, HIPAA, and other regulations? Check{' '}
+                                Want more info about how PostHog handles GDPR, HIPAA, and other regulations? Check{' '}
                                 <a href="/docs/privacy">our privacy docs</a>.
                             </p>
                         </div>
