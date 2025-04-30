@@ -30,8 +30,6 @@ function DpaGenerator() {
     const [yourTitle, setYourTitle] = useState('')
     const [date, setDate] = useState('')
     const [representativeEmail, setRepresentativeEmail] = useState('')
-    const [jurisdiction, setJurisdiction] = useState('')
-    const [supervisoryAuthority, setSupervisoryAuthority] = useState('')
     const [mode, setMode] = useState('pretty')
     const [isFormComplete, setIsFormComplete] = useState(false)
     const divRef = useRef(null)
@@ -139,10 +137,10 @@ function DpaGenerator() {
                 <p className="border-b border-black w-full">&nbsp;</p>
 
                 <p>Name</p>
-                <p className="border-b border-black w-full">Fraser Hopper</p>
+                <p className="border-b border-black w-full">Hector Rodriguez</p>
 
                 <p>Title</p>
-                <p className="border-b border-black w-full">Operations & Finance Lead</p>
+                <p className="border-b border-black w-full">Legal & Compliance Manager</p>
 
                 <p>Date</p>
                 <p className="border-b border-black w-full">&nbsp;</p>
@@ -158,8 +156,6 @@ function DpaGenerator() {
             yourTitle &&
             date &&
             representativeEmail &&
-            jurisdiction &&
-            supervisoryAuthority &&
             mode
         ) {
             setIsFormComplete(true)
@@ -173,8 +169,6 @@ function DpaGenerator() {
         yourTitle,
         date,
         representativeEmail,
-        jurisdiction,
-        supervisoryAuthority,
         mode,
     ])
 
@@ -329,64 +323,6 @@ function DpaGenerator() {
                                 onChange={(e) => setDate(e.target.value)}
                                 placeholder="Date"
                                 id="date"
-                                className="col-span-5 @sm:col-span-3 mb-2 @sm:mb-0 bg-accent rounded border border-light hover:border-black/50 text-black"
-                                required
-                            />
-
-                            <label className="col-span-5 @sm:col-span-2 text-sm" htmlFor="jurisdiction">
-                                <Tooltip
-                                    content={() => <p className="max-w-sm !mb-0">Your country</p>}
-                                    placement="top"
-                                    className="[&_button]:cursor-auto"
-                                >
-                                    <span className="border-b border-dashed border-light dark:border-dark pb-0.5 mb-1 inline-block">
-                                        Jurisdiction
-                                    </span>
-                                </Tooltip>
-                            </label>
-                            <input
-                                type="text"
-                                value={jurisdiction}
-                                onChange={(e) => setJurisdiction(e.target.value)}
-                                placeholder="Jurisdiction"
-                                id="jurisdiction"
-                                className="col-span-5 @sm:col-span-3 mb-2 @sm:mb-0 bg-accent rounded border border-light hover:border-black/50 text-black"
-                                required
-                            />
-
-                            <label className="col-span-5 @sm:col-span-2 text-sm" htmlFor="supervisoryAuthority">
-                                <Tooltip
-                                    content={() => (
-                                        <>
-                                            <p className="max-w-sm !mb-2">
-                                                An individual authority established by its member state to supervise the
-                                                compliance with a specific regulation.
-                                            </p>
-                                            <p className="max-w-sm !mb-2">
-                                                In regards to the GDPR, each country will have its own authority, for
-                                                the UK the Information Commissioner's Office (ICO) will be the
-                                                Supervisory Authority.
-                                            </p>
-                                            <p className="max-w-sm !mb-0">
-                                                In the United States, this may be the state where you operate or are
-                                                incorporated, or the FTC.
-                                            </p>
-                                        </>
-                                    )}
-                                    placement="top"
-                                    className="[&_button]:cursor-auto"
-                                >
-                                    <span className="border-b border-dashed border-light dark:border-dark pb-0.5 mb-1 inline-block">
-                                        Supervisory Authority
-                                    </span>
-                                </Tooltip>
-                            </label>
-                            <input
-                                type="text"
-                                value={supervisoryAuthority}
-                                onChange={(e) => setSupervisoryAuthority(e.target.value)}
-                                placeholder="Supervisory Authority"
-                                id="supervisoryAuthority"
                                 className="col-span-5 @sm:col-span-3 mb-2 @sm:mb-0 bg-accent rounded border border-light hover:border-black/50 text-black"
                                 required
                             />
@@ -1298,84 +1234,16 @@ function DpaGenerator() {
                                     changes to the list shall be in accordance with Clause 5.3 above;
                                 </p>
                                 <p>
-                                    10.4.2. for the purposes of clause 17, the clauses shall be governed by the laws of{' '}
-                                    <Tooltip
-                                        content={() => (
-                                            <>
-                                                Fill out the form <span className="md:hidden">at the top</span>
-                                                <span className="hidden md:inline-block">to the left</span> populate
-                                                these fields
-                                            </>
-                                        )}
-                                        placement="top"
-                                        className="[&_button]:cursor-auto"
-                                    >
-                                        <span className="relative">
-                                            <button type="button">
-                                                <label
-                                                    htmlFor="jurisdiction"
-                                                    className="bg-yellow/40 font-bold px-0.5 py-0.5"
-                                                >
-                                                    {jurisdiction ? jurisdiction : '[JURISDICTION]'}
-                                                </label>
-                                            </button>
-                                        </span>
-                                    </Tooltip>
+                                    10.4.2. for the purposes of clause 17, the clauses shall be governed by the laws of Ireland
+                                    
                                 </p>
                                 <p>
-                                    10.4.3. for the purposes of clause 18, the courts of{' '}
-                                    <Tooltip
-                                        content={() => (
-                                            <>
-                                                Fill out the form <span className="md:hidden">at the top</span>
-                                                <span className="hidden md:inline-block">to the left</span> populate
-                                                these fields
-                                            </>
-                                        )}
-                                        placement="top"
-                                        className="[&_button]:cursor-auto"
-                                    >
-                                        <span className="relative">
-                                            <button type="button">
-                                                <label
-                                                    htmlFor="jurisdiction"
-                                                    className="bg-yellow/40 font-bold px-0.5 py-0.5"
-                                                >
-                                                    {jurisdiction ? jurisdiction : '[JURISDICTION]'}
-                                                </label>
-                                            </button>
-                                        </span>
-                                    </Tooltip>{' '}
-                                    shall have jurisdiction; and
+                                    10.4.3. for the purposes of clause 18, the courts of Ireland 
                                 </p>
                                 <p>
-                                    10.4.4. for the purposes of clause 13 and Annex I.C, the{' '}
-                                    <Tooltip
-                                        content={() => (
-                                            <>
-                                                Fill out the form <span className="md:hidden">at the top</span>
-                                                <span className="hidden md:inline-block">to the left</span> populate
-                                                these fields
-                                            </>
-                                        )}
-                                        placement="top"
-                                        className="[&_button]:cursor-auto"
-                                    >
-                                        <span className="relative">
-                                            <button type="button">
-                                                <label
-                                                    htmlFor="supervisoryAuthority"
-                                                    className="bg-yellow/40 font-bold px-0.5 py-0.5"
-                                                >
-                                                    {supervisoryAuthority
-                                                        ? supervisoryAuthority
-                                                        : '[SUPERVISORY AUTHORITY]'}
-                                                </label>
-                                            </button>
-                                        </span>
-                                    </Tooltip>
-                                </p>
-                            </div>
+                                    10.4.4. for the purposes of clause 13 and Annex I.C, thecompetent supervisory authority 
+                                    shall be determined in accordance with the GDPR, based on the data exporter’s establishment
+                                    or representative within the EEA.
                             <p>
                                 10.5. In relation to the UK Standard Contractual Clauses, as permitted by clause 17 of
                                 such Addendum, the Parties agree to change the format of the information set out in Part
