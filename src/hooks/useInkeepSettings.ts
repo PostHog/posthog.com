@@ -229,6 +229,11 @@ gap: .5rem;
 .ikp-ai-chat-wrapper {
     box-shadow: none !important;
 }
+.ikp-ai-chat-wrapper {
+    width: 100% !important;
+    max-height: initial !important;
+    border-radius: 0 !important;
+}
                 `,
             },
         ],

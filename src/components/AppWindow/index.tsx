@@ -20,7 +20,7 @@ import { Popover } from '../RadixUI/Popover'
 import { FileMenu } from '../RadixUI/FileMenu'
 import { IMenu } from 'components/PostLayout/types'
 import { navigate } from 'gatsby'
-import { useChat } from '../../hooks/useChat'
+import { ChatProvider } from '../../hooks/useChat'
 import Inbox from 'components/Inbox'
 import Handbook from '../../templates/Handbook'
 
@@ -62,7 +62,7 @@ const Router = (props) => {
 }
 
 export default function AppWindow({ item, constraintsRef }: { item: AppWindowType; constraintsRef: any }) {
-    const { minimizeWindow, bringToFront, closeWindow, focusedWindow, taskbarHeight } = useApp()
+    const { minimizeWindow, bringToFront, closeWindow, focusedWindow, taskbarHeight, addWindow } = useApp()
     const controls = useDragControls()
     const initialSizeKey = item.key as keyof typeof fixedAppSizes
     const hasFixedSize = Object.prototype.hasOwnProperty.call(fixedAppSizes, initialSizeKey)
@@ -79,7 +79,6 @@ export default function AppWindow({ item, constraintsRef }: { item: AppWindowTyp
     const [menu, setMenu] = useState<IMenu[]>([])
     const [history, setHistory] = useState<string[]>([])
     const [activeHistoryIndex, setActiveHistoryIndex] = useState(0)
-    const { openChat } = useChat()
     useEffect(() => {
         const handleResize = () => {
             setSizeDefaults(getSizeDefaults())
@@ -326,15 +325,22 @@ export default function AppWindow({ item, constraintsRef }: { item: AppWindowTyp
                                                             type: 'item',
                                                             label: 'New Max chat',
                                                             onClick() {
-                                                                openChat({
-                                                                    context: {
-                                                                        type: 'page',
-                                                                        value: {
-                                                                            path: item.path,
-                                                                            label: item.meta?.title,
-                                                                        },
-                                                                    },
-                                                                })
+                                                                addWindow(
+                                                                    <ChatProvider
+                                                                        location={{ pathname: `ask-max-${item.path}` }}
+                                                                        key={`ask-max-${item.path}`}
+                                                                        newWindow
+                                                                        context={[
+                                                                            {
+                                                                                type: 'page',
+                                                                                value: {
+                                                                                    path: item.path,
+                                                                                    label: item.meta?.title,
+                                                                                },
+                                                                            },
+                                                                        ]}
+                                                                    />
+                                                                )
                                                             },
                                                         },
                                                         {

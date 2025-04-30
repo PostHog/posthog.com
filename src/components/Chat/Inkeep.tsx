@@ -1,19 +1,15 @@
-import React, { useEffect, useRef } from 'react'
+import React, { useRef } from 'react'
 import { DotLottiePlayer } from '@dotlottie/react-player'
 import { useChat } from 'hooks/useChat'
 
 export default function InkeepEmbeddedChat(): JSX.Element {
     const lottieRef = useRef(null)
-    const { loading, renderChat, EmbeddedChat, aiChatSettings, baseSettings } = useChat()
-
-    useEffect(() => {
-        renderChat()
-    }, [])
+    const { EmbeddedChat, aiChatSettings, baseSettings } = useChat()
 
     return (
         <>
             {EmbeddedChat ? (
-                <div id="embedded-chat-target" className="h-[500px]">
+                <div id="embedded-chat-target" className="h-full">
                     <EmbeddedChat aiChatSettings={aiChatSettings} baseSettings={baseSettings} />
                 </div>
             ) : (

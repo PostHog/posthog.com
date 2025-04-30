@@ -2,21 +2,14 @@ import React from 'react'
 import { initKea, wrapElement } from './kea'
 import './src/styles/global.css'
 import HandbookLayout from './src/templates/Handbook'
-import Job from './src/templates/Job'
-import Posts from './src/components/Edition/Posts'
 import { Provider as ToastProvider } from './src/context/Toast'
 import { RouteUpdateArgs } from 'gatsby'
 import { UserProvider } from './src/hooks/useUser'
-import { ChatProvider } from './src/hooks/useChat'
 import Wrapper from './src/components/Wrapper'
 import { Provider } from './src/context/App'
 initKea(false)
 
-export const wrapRootElement = ({ element }) => (
-    <UserProvider>
-        <ChatProvider>{wrapElement({ element })}</ChatProvider>
-    </UserProvider>
-)
+export const wrapRootElement = ({ element }) => <UserProvider>{wrapElement({ element })}</UserProvider>
 export const onRouteUpdate = ({ location, prevLocation }: RouteUpdateArgs) => {
     // This is checked and set on initial load in the body script set in gatsby-ssr.js
     // Checking for prevLocation prevents this from happening twice

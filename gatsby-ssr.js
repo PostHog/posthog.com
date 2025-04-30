@@ -8,29 +8,22 @@
 const React = require('react')
 
 import { initKea, wrapElement } from './kea'
-import HandbookLayout from './src/templates/Handbook'
-import Job from './src/templates/Job'
 import { UserProvider } from './src/hooks/useUser'
-import Posts from './src/components/Edition/Posts'
-import { Provider as ToastProvider } from './src/context/Toast'
-import { ChatProvider } from './src/hooks/useChat'
-import Chat from './src/components/Chat'
 import Wrapper from './src/components/Wrapper'
+import { Provider } from './src/context/App'
 
 export const wrapPageElement = ({ element, props }) => {
     const slug = props.location.pathname.substring(1)
     initKea(true, props.location)
     return (
         <UserProvider>
-            <ChatProvider>
-                {wrapElement({
-                    element: (
-                        <Provider element={element} location={props.location}>
-                            <Wrapper element={element} />
-                        </Provider>
-                    ),
-                })}
-            </ChatProvider>
+            {wrapElement({
+                element: (
+                    <Provider element={element} location={props.location}>
+                        <Wrapper element={element} />
+                    </Provider>
+                ),
+            })}
         </UserProvider>
     )
 }

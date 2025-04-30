@@ -19,11 +19,16 @@ interface ChatContextType {
     baseSettings: any
     context: { type: 'page'; value: { path: string; label: string } }[]
     setContext: (context: { type: 'page'; value: { path: string; label: string } }[]) => void
+    addContext: (newContext: { type: 'page'; value: { path: string; label: string } }) => void
 }
 
 const ChatContext = createContext<ChatContextType | undefined>(undefined)
 
-export function ChatProvider({ children }: { children: ReactNode }): JSX.Element {
+export function ChatProvider({
+    context: initialContext,
+}: {
+    context?: { type: 'page'; value: { path: string; label: string } }[]
+}): JSX.Element {
     const { baseSettings, aiChatSettings, setBaseSettings, setAiChatSettings } = useInkeepSettings()
     const [chatting, setChatting] = useState(false)
     const [chatOpen, setChatOpen] = useState(false)
@@ -32,7 +37,9 @@ export function ChatProvider({ children }: { children: ReactNode }): JSX.Element
     const [hasFirstResponse, setHasFirstResponse] = useState(false)
     const [quickQuestions, setQuickQuestions] = useState(defaultQuickQuestions)
     const [conversationHistory, setConversationHistory] = useState<{ id: string; question: number; date: string }[]>([])
-    const [context, setContext] = useState<{ type: 'page'; value: { path: string; label: string } }[]>([])
+    const [context, setContext] = useState<{ type: 'page'; value: { path: string; label: string } }[]>(
+        initialContext || []
+    )
     const [EmbeddedChat, setEmbeddedChat] = useState<any>()
 
     const logEventCallback = useCallback(
@@ -71,6 +78,12 @@ export function ChatProvider({ children }: { children: ReactNode }): JSX.Element
         setChatOpen(true)
     }
 
+    const addContext = (newContext: { type: 'page'; value: { path: string; label: string } }) => {
+        if (newContext && !context.some((c) => c.value.path === newContext.value.path)) {
+            setContext((prev) => [...prev, newContext])
+        }
+    }
+
     const closeChat = () => {
         setChatOpen(false)
     }
@@ -90,6 +103,7 @@ export function ChatProvider({ children }: { children: ReactNode }): JSX.Element
     }
 
     useEffect(() => {
+        renderChat()
         // Open chat on ?chat=open
         const params = new URLSearchParams(window.location.search)
         if (params.get('chat') === 'open') {
@@ -190,9 +204,9 @@ export function ChatProvider({ children }: { children: ReactNode }): JSX.Element
                 baseSettings,
                 context,
                 setContext,
+                addContext,
             }}
         >
-            {children}
             <Chat />
         </ChatContext.Provider>
     )

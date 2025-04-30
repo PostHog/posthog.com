@@ -1,6 +1,20 @@
 import React, { createContext, useContext, useEffect, useMemo, useState, useCallback } from 'react'
 import { AppWindow } from './Window'
 
+type WindowElement = React.ReactNode & {
+    key: string
+    props: {
+        location: {
+            pathname: string
+        }
+        pageContext: any
+        data: any
+        params: any
+        path: string
+        newWindow: boolean
+    }
+}
+
 interface AppContextType {
     windows: AppWindow[]
     closeWindow: (item: AppWindow) => void
@@ -10,6 +24,7 @@ interface AppContextType {
     location: any
     minimizeWindow: (appWindow: AppWindow) => void
     taskbarHeight: number
+    addWindow: (element: WindowElement) => void
 }
 
 interface AppProviderProps {
@@ -39,6 +54,7 @@ export const Context = createContext<AppContextType>({
     location: {},
     minimizeWindow: () => {},
     taskbarHeight: 0,
+    addWindow: () => {},
 })
 
 export const Provider = ({ children, element, location }: AppProviderProps) => {
@@ -96,7 +112,7 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
         setWindows((windows) => windows.map((w) => (w === appWindow ? { ...appWindow, minimized: true } : w)))
     }, [])
 
-    useEffect(() => {
+    const updatePages = (element: WindowElement) => {
         const existingWindow = windows.find((w) => w.path === element.props.location.pathname)
         const newWindow: AppWindow = {
             element,
@@ -116,11 +132,19 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
 
         if (existingWindow) {
             bringToFront(existingWindow)
-        } else if (location?.state?.newWindow) {
+        } else if (element.props.newWindow || location?.state?.newWindow) {
             setWindows([...windows, newWindow])
         } else {
             replaceFocusedWindow(newWindow)
         }
+    }
+
+    const addWindow = (element: WindowElement) => {
+        updatePages(element)
+    }
+
+    useEffect(() => {
+        updatePages(element)
     }, [element])
 
     useEffect(() => {
@@ -146,6 +170,7 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
                 location,
                 minimizeWindow,
                 taskbarHeight,
+                addWindow,
             }}
         >
             {children}
