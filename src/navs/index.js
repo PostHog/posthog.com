@@ -3317,6 +3317,12 @@ export const docsMenu = {
                     color: 'red',
                 },
                 {
+                    name: 'Cutting costs',
+                    url: '/docs/error-tracking/cutting-costs',
+                    icon: 'IconPiggyBank',
+                    color: 'red',
+                },
+                {
                     name: 'Troubleshooting and FAQs',
                     url: '/docs/error-tracking/common-questions',
                     icon: 'IconQuestion',
