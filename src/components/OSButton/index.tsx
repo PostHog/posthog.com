@@ -42,6 +42,8 @@ interface OSButtonProps extends Omit<React.ButtonHTMLAttributes<HTMLButtonElemen
     to?: string
     iconPosition?: 'left' | 'right'
     onClick?: (e: React.MouseEvent<HTMLButtonElement> | React.MouseEvent<HTMLAnchorElement>) => void
+    state?: any
+
 }
 
 export default function OSButton({
@@ -59,6 +61,7 @@ export default function OSButton({
     to,
     iconPosition = 'left',
     onClick,
+    state = {},
     ...props
 }: OSButtonProps) {
     const baseClasses =
@@ -141,6 +144,7 @@ export default function OSButton({
             align === 'center' ? 'justify-center' : 'justify-start'
         } ${!children ? '' : width === 'full' ? 'w-full' : 'w-auto'} ${className}`,
         onClick,
+        state,
         ...props
     }
 

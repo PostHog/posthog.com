@@ -98,6 +98,7 @@ export default function Product({
                         icon={<IconMegaphone className="text-orange" />}
                         to={`${slug}/customers`}
                         className="text-primary hover:text-primary"
+                        state={{ newWindow: true }}
                     >
                         Social proof
                     </OSButton>
