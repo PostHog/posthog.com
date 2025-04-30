@@ -59,7 +59,7 @@ const featuresPerRow = 3
 const features = [
     {
         title: '"How many sign-ups this week?"',
-        description: 'Get answers as big numbers, tables, graphs, funnels, and more',
+        description: 'Get answers as big numbers, graphs, funnels, and more',
         image: (
             <CloudinaryImage
                 src="https://res.cloudinary.com/dmukukwp6/image/upload/big_number_e3383350cb.png"
@@ -73,18 +73,18 @@ const features = [
         description: 'Let Max automatically build filters and playlists for you',
         image: (
             <CloudinaryImage
-                src="https://res.cloudinary.com/dmukukwp6/image/upload/replay_filer_c6b66bda7b.png"
+                src="https://res.cloudinary.com/dmukukwp6/image/upload/table_cedb252de2.png"
                 width={428}
                 placeholder="none"
             />
         ),
     },
     {
-        title: '"What is ARRRR?',
-        description: 'Get lessons in best practices and how to build better products',
+        title: '"What is ARRRR?"',
+        description: 'Get advice on best practices for your product',
         image: (
             <CloudinaryImage
-                src="https://res.cloudinary.com/dmukukwp6/image/upload/arrrr_6efb4b4164.png"
+                src="https://res.cloudinary.com/dmukukwp6/image/upload/short_aarrr_e2143decd4.png"
                 width={428}
                 placeholder="none"
             />
@@ -227,7 +227,7 @@ export const ProductMaxAI = () => {
         <>
             <SEO
                 title="Max AI - PostHog"
-                description="Your AI-powered product analyst and assistant"
+                description="Your AI-powered, product-managing hedgehog"
                 image={`/images/og/max-ai.jpg`}
             />
             <SideModal open={!!activeProfile} setOpen={(open) => setActiveProfile(open ? activeProfile : null)}>
@@ -237,32 +237,21 @@ export const ProductMaxAI = () => {
                 <Hero
                     icon={<IconThoughtBubble />}
                     product={product.capitalized}
-                    title='Your <span class="text-red dark:text-yellow">AI-powered</span>, product-managing hedgehog'
+                    title='These days everyone has an AI. <br /><span class="text-red dark:text-yellow">But ours is a hedgehog powered by Product OS.</span>'
                     description="Use natural language to get instant answers, find replays, and more"
                     image="https://res.cloudinary.com/dmukukwp6/image/upload/robot_f2dfddda15.png"
                 />
 
                 <div className="max-w-3xl mx-auto mt-18 mb-18">
                     <MaxQuestionInput />
-                    <p className="text-center text-sm text-muted dark:text-muted-dark mt-1">
-                        Not got data in PostHog yet?{' '}
-                        <Link to="https://app.posthog.com/signup" className="text-red dark:text-yellow font-semibold">
-                            Sign up for free
-                        </Link>{' '}
-                        or read on 👇
-                    </p>
                 </div>
 
                 <div className="text-center mt-18 mb-18"></div>
 
-                <section id="features" className="-mt-36 pt-36 mt-18">
-                    <h2 className="text-4xl md:text-5xl text-center">
-                        These days, everyone has an AI. <br />
-                        <span className="text-red dark:text-yellow">But ours is a hedgehog powered by Product OS.</span>
-                    </h2>
-                    <p className="text-lg opacity-75 text-center">
-                        Max can help you work across multiple PostHog products to find the data you need
-                    </p>
+                <section id="features" className="-mt-28 pt-36 mt-18">
+                    <h3 className="text-2xl md:text-2xl text-center">
+                        Not got data in PostHog yet? Here's how Max can help you across multiple products.
+                    </h3>
                 </section>
 
                 <div className="mt-12">
@@ -320,8 +309,43 @@ export const ProductMaxAI = () => {
 
                 <section id="posthog-vs">
                     <h2 className="text-center text-3xl lg:text-4xl">PostHog vs...</h2>
-                    <Comparison comparison={comparison} columnCount={comparisonColumnCount} truncate />
+                    <Comparison comparison={comparison} columnCount={comparisonColumnCount} />
+                </section>
 
+                <section>
+                    <div className="flex flex-col-reverse items-center md:flex-row gap-8 mb-20">
+                        <div className="flex-1">
+                            <h2 className="text-4xl">
+                                "Hang on,{' '}
+                                <span className="text-red dark:text-yellow">how does Max AI use my data?</span>"
+                            </h2>
+                            <p>
+                                Max can access any data which is already stored in PostHog, such as events, persons,
+                                sessions and groups, as well as various schema. You can also give him additional
+                                information directly.
+                            </p>
+                            <p>
+                                When you ask a question, relevant data gets shared with{' '}
+                                <a href="/docs/max-ai#is-my-data-shared-with-third-parties">our LLM providers</a>. All
+                                of these are covered by <a href="/dpa">our DP-yay policy</a>, which you can sign if you
+                                want peace of mind.
+                            </p>
+                            <p>
+                                Want more info about GDPR, HIPAA, and other regulations? Check{' '}
+                                <a href="/docs/privacy">our privacy docs</a>.
+                            </p>
+                        </div>
+                        <aside className="shrink-0 md:basis-[500px] self-end">
+                            <CloudinaryImage
+                                src="https://res.cloudinary.com/dmukukwp6/image/upload/confused_small_8cc411c714.png"
+                                alt="confused hedgehog"
+                                className="w-full max-w-[350px]"
+                            />
+                        </aside>
+                    </div>
+                </section>
+
+                <section>
                     <h3 className="text-center mb-8">So, what's best for you?</h3>
                     <div className="@container mb-8 mx-5 md:mx-0 grid md:grid-cols-2 gap-4">
                         <VsCompetitor
