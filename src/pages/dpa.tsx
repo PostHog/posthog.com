@@ -1219,10 +1219,10 @@ function DpaGenerator() {
                                     10.4.2. for the purposes of clause 17, the clauses shall be governed by the laws of
                                     Ireland
                                 </p>
-                                <p>10.4.3. for the purposes of clause 18, the courts of Ireland</p>
+                                <p>10.4.3. for the purposes of clause 18, the courts of Ireland shall have jurisdiction; and</p>
                             </div>
                             <p>
-                                10.4.4. for the purposes of clause 13 and Annex I.C, thecompetent supervisory authority
+                                10.4.4. for the purposes of clause 13 and Annex I.C, the competent supervisory authority
                                 shall be determined in accordance with the GDPR, based on the data exporter’s
                                 establishment or representative within the EEA.
                             </p>
