@@ -82,6 +82,6 @@ config.sessionReplayConfig.throttleDelay = 1.0
 
 - On iOS, minimum deployment target is [iOS13](/docs/libraries/ios)
 - [SwiftUI](https://developer.apple.com/xcode/swiftui/) is only supported if the `screenshotMode` option is enabled.
-- Custom views are not fully supported if `screenshotMode` is disabled.
-- WebView is not supported. A placeholder will be shown.
+- Custom views are partly supported, and only fully supported if `screenshotMode`  is enabled.
+- WebView is only supported if `screenshotMode` is enabled. A placeholder will be shown as a fallback.
 - Currently only available on iOS.
