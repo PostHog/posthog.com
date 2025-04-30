@@ -3384,9 +3384,9 @@ export const docsMenu = {
                     name: 'Features',
                 },
                 {
-                    name: 'Webhook',
-                    url: '/docs/surveys/webhook',
-                    icon: 'IconLaptop',
+                    name: 'Destinations',
+                    url: '/docs/surveys/destinations',
+                    icon: 'IconLive',
                     color: 'orange',
                 },
                 {

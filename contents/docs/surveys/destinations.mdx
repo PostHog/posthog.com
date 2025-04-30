@@ -1,0 +1,29 @@
+---
+title: Survey responses webhook
+sidebar: Docs
+showTitle: true
+availability:
+  free: none
+  selfServe: full
+  enterprise: full
+---
+
+It can be useful to send survey responses to external [destinations](/docs/cdp/destinations). For example, to receive [Slack](/tutorials/slack-surveys) notification or send a [Zapier zap](https://posthog.com/docs/cdp/destinations/zapier) whenever a user responds to your survey. 
+
+To do this:
+
+1. Go to the [data pipeline destinations tab](https://us.posthog.com/pipeline/destinations) 
+
+2. Search for the destination you want and click **+Create** (or click **Create** on **HTTP Webhook** for custom destinations) 
+
+3. Follow the steps to integrate with destination.
+
+4. Under **Match event and actions**, select **survey sent**.
+
+You can extract the following properties from surveys:
+
+| Property | Description |
+|----------|-------------|
+| `event.properties.$survey_name` | The name of the survey |
+| `event.properties.$survey_response_{response_key}` | The response to a specific question. To find the response key, go to your survey page and click on the button **Copy survey response key**. There's one for each question in your survey. |
+| `person.name` and other person properties | The name of the person who responded and other properties |
