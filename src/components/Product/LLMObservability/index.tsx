@@ -446,6 +446,37 @@ export const ProductFeatureFlags = () => {
                     </div>
                 </section>
             </div>
+
+            <div className={`${fullWidthContent ? 'max-w-full px-8' : 'max-w-7xl mx-auto'} px-5 pt-24 pb-0`}>
+                <div className="flex flex-col-reverse items-center md:flex-row gap-8 mb-20">
+                    <div className="flex-1">
+                        <h2 className="text-4xl">
+                            We've also got <span className="text-red dark:text-yellow">privacy mode</span>, just in case
+                        </h2>
+                        <p>
+                            We care a lot about user privacy. If you do too then privacy mode gives you a way to filter
+                            inputs and outputs to your LLM while still tracking most of thehigh-level, anonymous data.
+                        </p>
+                        <p>
+                            That means you won't see what questions users ask (or the answers they get), but you will
+                            still be able to track costs, performance, and more - both overall, or at a per-user level.
+                            You just won't see the details of the conversation.
+                        </p>
+                        <p>
+                            You can <a href="/dpa">sign our DP-yay</a> for further protection, or find out more about{' '}
+                            <a href="/docs/privacy">how we think about privacy in the docs</a>.
+                        </p>
+                    </div>
+                    <aside className="shrink-0 md:basis-[400px]">
+                        <CloudinaryImage
+                            src="https://res.cloudinary.com/dmukukwp6/image/upload/disguise_c3409b2e2b.png"
+                            alt="privacy mode hedgehog"
+                            className="w-full max-w-[562px]"
+                        />
+                    </aside>
+                </div>
+            </div>
+
             <section
                 id="pricing"
                 className={`${fullWidthContent ? 'max-w-full px-8' : 'max-w-7xl'} mx-auto px-5 py-20`}
