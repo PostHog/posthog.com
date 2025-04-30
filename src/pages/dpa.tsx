@@ -149,28 +149,12 @@ function DpaGenerator() {
     )
 
     useEffect(() => {
-        if (
-            companyName &&
-            companyAddress &&
-            yourName &&
-            yourTitle &&
-            date &&
-            representativeEmail &&
-            mode
-        ) {
+        if (companyName && companyAddress && yourName && yourTitle && date && representativeEmail && mode) {
             setIsFormComplete(true)
         } else {
             setIsFormComplete(false)
         }
-    }, [
-        companyName,
-        companyAddress,
-        yourName,
-        yourTitle,
-        date,
-        representativeEmail,
-        mode,
-    ])
+    }, [companyName, companyAddress, yourName, yourTitle, date, representativeEmail, mode])
 
     const handlePrint = () => {
         window.print()
@@ -183,8 +167,6 @@ function DpaGenerator() {
         setYourTitle('')
         setDate('')
         setRepresentativeEmail('')
-        setJurisdiction('')
-        setSupervisoryAuthority('')
     }
 
     const handleInputChange = (e) => {
@@ -1234,16 +1216,16 @@ function DpaGenerator() {
                                     changes to the list shall be in accordance with Clause 5.3 above;
                                 </p>
                                 <p>
-                                    10.4.2. for the purposes of clause 17, the clauses shall be governed by the laws of Ireland
-                                    
+                                    10.4.2. for the purposes of clause 17, the clauses shall be governed by the laws of
+                                    Ireland
                                 </p>
-                                <p>
-                                    10.4.3. for the purposes of clause 18, the courts of Ireland 
-                                </p>
-                                <p>
-                                    10.4.4. for the purposes of clause 13 and Annex I.C, thecompetent supervisory authority 
-                                    shall be determined in accordance with the GDPR, based on the data exporter’s establishment
-                                    or representative within the EEA.
+                                <p>10.4.3. for the purposes of clause 18, the courts of Ireland</p>
+                            </div>
+                            <p>
+                                10.4.4. for the purposes of clause 13 and Annex I.C, thecompetent supervisory authority
+                                shall be determined in accordance with the GDPR, based on the data exporter’s
+                                establishment or representative within the EEA.
+                            </p>
                             <p>
                                 10.5. In relation to the UK Standard Contractual Clauses, as permitted by clause 17 of
                                 such Addendum, the Parties agree to change the format of the information set out in Part
@@ -1459,9 +1441,7 @@ function DpaGenerator() {
                                     the signature of the data exporter and the date of signature shall be as signed
                                     above;
                                 </li>
-                                <li>
-                                    the role of the exporter is controller; and
-                                </li>
+                                <li>the role of the exporter is controller; and</li>
                                 <li>the activities relate to the provision of the Services.</li>
                             </ul>
                         </div>
