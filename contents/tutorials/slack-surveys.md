@@ -9,11 +9,11 @@ tags:
   - surveys
 ---
 
-It's useful to send survey responses from your users to Slack. This way you're notified as soon as they respond to a survey. You can do this using our realtime destinations.
+> This tutorial requires you to first create a survey. Our [docs](/docs/surveys/creating-surveys) cover how to do this, so we won't go into detail here. We also have [framework-specific tutorials](/docs/surveys/tutorials#framework-guides).
 
-This requires you to create a survey. Our [docs](/docs/surveys/creating-surveys) cover how to do this, so we won't go into detail here. We also have [framework-specific tutorials](/docs/surveys/tutorials#framework-guides).
+It's useful receive Slack notifications as soon as users respond to your surveys. You can do this in PostHog using our [realtime destinations](/docs/cdp/destinations).
 
-Once created, go to the [data pipeline destinations tab](https://us.posthog.com/pipeline/destinations) and search for the **Slack** destination and click **+ Create**. On the creation screen:
+After you've created your survey, go to the [data pipeline destinations tab](https://us.posthog.com/pipeline/destinations), search for the **Slack** destination and click **+ Create**. Then on the creation screen:
 
 1. Follow the steps to integrate with your Slack workspace if you haven't already and then select it.
 
@@ -45,6 +45,17 @@ Once created, go to the [data pipeline destinations tab](https://us.posthog.com/
 You can then test the destination and it will start sending survey responses to Slack.
 
 ![Slack message](https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2024_09_27_at_11_21_34_2x_d12f7509fb.png)
+
+## Survey properties
+
+You can extract the following properties from surveys:
+
+| Property | Description |
+|----------|-------------|
+| `event.properties.$survey_name` | The name of the survey |
+| `event.properties.$survey_questions` | An array of objects containing the following survey question properties: `id`, `index`, and `question` |
+| `event.properties.$survey_response_{response_key}` | The response to a specific question. To find `response_key`, go to your survey page and click on the button **Copy survey response key**. There's one for each question in your survey. `response_key` is identical to the corresponding survey question ID |
+| `person.name` or other person properties | The name of the person who responded or other properties |
 
 ## Further reading
 
