@@ -138,7 +138,7 @@ CSMs are responsible for ensuring that a larger book of existing customers - bot
   - While the Q2 2025 target is 120%, this may change in future depending on how things go. 
 - Bonuses are paid out quarterly, and in any case after an invoice is paid
   - Bonus payments are made at the end of January, April, July, and October - at the end of each quarter, we'll monitor how many invoices actually get paid in the first two weeks of the next quarter. Fraser will send you an email that breaks down how you did.
-- Your bonus is guranteed at 100% for your first 3 months at PostHog - this gives you time to get up to speed, but also if you over-perform then you will get your additional bonus.
+- Your bonus is guaranteed at 100% for your first 3 months at PostHog - this gives you time to get up to speed, but also if you over-perform then you will get your additional bonus.
 - If an account is added to your book:
   - If you inherit a new account, you have a 3 month grace period - if they drop or churn in that initial period, they won't be counted against you. We want to encourage you to right-size customers, rather than your deliberately letting them wastefully spend money due to some poor implementation.
   - Obviously if you get a new account added their starting ARR doesn't count towards your target - only growth from the starting point. 
