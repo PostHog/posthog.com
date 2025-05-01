@@ -5,7 +5,9 @@ import { useStaticQuery, graphql } from 'gatsby'
 import MistralLogo from '../images/customers/mistralai-light.svg'
 import RaycastLogo from '../images/customers/raycast-light.svg'
 import AirbusLogo from '../images/customers/airbus-light.svg'
+import ContraLogo from '../images/customers/contra-light.svg'
 import DhlLogo from '../images/customers/dhl-light.svg'
+import SpeakeasyLogo from '../images/customers/speakeasy-light.svg'
 import StartEngineLogo from '../images/customers/startengine-light.svg'
 import TrustWalletLogo from '../images/customers/trustwallet-light.svg'
 import PostHogLogo from '../images/customers/posthog-light.svg'
@@ -13,6 +15,7 @@ import PostHogLogo from '../images/customers/posthog-light.svg'
 import MistralLogoDark from '../images/customers/mistralai-dark.svg'
 import RaycastLogoDark from '../images/customers/raycast-dark.svg'
 import AirbusLogoDark from '../images/customers/airbus-dark.svg'
+import ContraLogoDark from '../images/customers/contra-dark.svg'
 import DhlLogoDark from '../images/customers/dhl-dark.svg'
 import StartEngineLogoDark from '../images/customers/startengine-dark.svg'
 import TrustWalletLogoDark from '../images/customers/trustwallet-dark.svg'
@@ -57,6 +60,15 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
         logo: {
             light: 'https://res.cloudinary.com/dmukukwp6/image/upload/assemblyai_light.svg',
             dark: 'https://res.cloudinary.com/dmukukwp6/image/upload/assemblyai_dark.svg'
+        }
+    },
+    contra: {
+        name: 'Contra',
+        toolsUsed: [],
+        notes: '',
+        logo: {
+            light: ContraLogo,
+            dark: ContraLogoDark
         }
     },
     dhl: {
@@ -120,6 +132,15 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
         logo: {
             light: 'https://res.cloudinary.com/dmukukwp6/image/upload/researchgate_light.svg',
             dark: 'https://res.cloudinary.com/dmukukwp6/image/upload/researchgate_dark.svg'
+        }
+    },
+    speakeasy: {
+        name: 'Speakeasy',
+        toolsUsed: [],
+        notes: '',
+        logo: {
+            light: SpeakeasyLogo,
+            dark: SpeakeasyLogo
         }
     },
     startengine: {

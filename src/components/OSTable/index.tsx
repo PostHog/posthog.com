@@ -14,22 +14,19 @@ interface Row {
 }
 
 interface OSTableProps {
-    // Approach 1: Dynamic column widths
     columns?: Column[]
-    // Approach 2: Static column widths
-    columnWidths?: string
     rows: Row[]
     className?: string
 }
 
-const OSTable: React.FC<OSTableProps> = ({ columns, columnWidths, rows, className = '' }) => {
-    // If using dynamic approach, construct the grid class
-    const gridClass = columns
-        ? `grid grid-cols-[${columns.map(col => col.width || 'auto').join('_')}]`
-        : columnWidths || ''
+const OSTable: React.FC<OSTableProps> = ({ columns, rows, className = '' }) => {
+    const gridClass = columns?.map(col => col.width || 'auto').join(' ') || ''
 
     return (
-        <div className={`${gridClass} divide-x divide-y divide-border border-r border-b border-primary [&_div]:p-2 text-[15px] ${className}`}>
+        <div 
+            className={`grid divide-x divide-y divide-border border-r border-b border-primary [&_div]:p-2 text-[15px] ${className}`} 
+            style={{ gridTemplateColumns: gridClass }}
+        >
             {/* Header Row */}
             {columns && (
                 <>
@@ -52,9 +49,10 @@ const OSTable: React.FC<OSTableProps> = ({ columns, columnWidths, rows, classNam
                     {row.cells.map((cell, cellIndex) => (
                         <div
                             key={cellIndex}
-                            className={`flex items-center ${
-                                columns?.[cellIndex]?.align === 'center' ? 'justify-center' : ''
-                            } ${cell.className || ''}`}
+                            className={`flex justify-center ${
+                                columns?.[cellIndex]?.align === 'left' ? 'items-start' : 
+                                columns?.[cellIndex]?.align === 'right' ? 'items-end' : ''
+                            } ${cell.className || 'items-center'}`}
                         >
                             {cell.content}
                         </div>

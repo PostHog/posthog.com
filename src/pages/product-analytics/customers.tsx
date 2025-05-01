@@ -1,9 +1,10 @@
-import React, { useState } from 'react'
+import React from 'react'
 import SEO from 'components/seo'
 import ScrollArea from 'components/RadixUI/ScrollArea'
 import Editor from 'components/Editor'
+import ProductCustomerTable from 'components/ProductCustomerTable'
 
-export default function ProductAnalyticsFeatures(): JSX.Element {
+export default function ProductAnalyticsCustomers(): JSX.Element {
     return (
         <>
             <SEO
@@ -12,15 +13,15 @@ export default function ProductAnalyticsFeatures(): JSX.Element {
                 image={`/images/og/product-analytics.jpg`}
             />
             <Editor
-                title="customers"
+                title="notable product analytics customers"
                 type="mdx"
                 filters={{
-                  products: ['product_analytics'],
-                  caseStudy: true
+                    products: ['product_analytics'],
+                    caseStudy: true
                 }}
             >
                 <ScrollArea>
-                  blah
+                    <ProductCustomerTable productType="product_analytics" />
                 </ScrollArea>
             </Editor>
         </>
