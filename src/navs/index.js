@@ -680,6 +680,10 @@ export const handbookSidebar = [
                 url: '/handbook/cs-and-onboarding/onboarding-team',
             },
             {
+                name: 'New team member onboarding',
+                url: '/handbook/cs-and-onboarding/new-hire-onboarding',
+            },
+            {
                 name: 'Health tracking',
                 url: '/handbook/cs-and-onboarding/health-tracking',
             },
