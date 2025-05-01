@@ -86,6 +86,11 @@ export default function TaskBarMenu() {
                                 }}
                             >
                                 <OSButton
+                                    onClick={(e) => {
+                                        if (totalWindows <= 0) {
+                                            return e.stopPropagation()
+                                        }
+                                    }}
                                     variant="ghost"
                                     size="md"
                                     data-active-windows
