@@ -10,14 +10,14 @@ Welcome to the PostHog Customer Success & Onboarding team!  We only hire about 1
 
 Ramping up is mostly self serve - we won't sit you down in a room for training for 2 weeks. If you're not sure who is supposed to make something below happen, the person responsible is almost certainly you!
 
-Take a look at the [sales team's onboarding page](/handbook/growth/sales/new-hire-onboarding) for recommended tooling and guidance on what _not_ to do when you start. In general, there's a lot of good resources under [sales](/handbook/growth/sales) (as we were previously one sales & customer success team!)
+Make sure to also take a look at the [sales team's onboarding page](/handbook/growth/sales/new-hire-onboarding) for guidance on what _not_ to do when you start. In general, there's a lot of good resources within [sales](/handbook/growth/sales/overview) to reference (as we were previously one team!)
 
 ## Technical CSM ramp
 
 ### Day 1
 
 - Meet with [Dana](/community/profiles/32545) who will run through this plan and answer any questions you may have. In addition, come equipped to talk about any nuances around how you prefer to work (e.g. schedules, family time etc.).
-- Setup relevant [Sales & CS Tools](/contents//handbook/growth/sales/new-hire-onboarding.md#sales--cs-tools) 
+- Setup relevant [Sales & CS Tools](/handbook/growth/sales/new-hire-onboarding#sales--cs-tools) 
 - If you start on a Monday, join your first PostHog All Hands (at 4.30pm UK/8.30am PT) and be prepared to have a strong opinion on whether pineapple belongs on pizza.
 - If you start on a Monday, join your first CS and Onboarding standup.
   - We fill in a GitHub issue every week before this meeting so we are prepared for the discussion topics. Dana will add your GitHub handle to the template.
@@ -75,7 +75,7 @@ By the end of month 3:
 ### Day 1
 
 - Meet with [Dana](/community/profiles/32545) who will run through this plan and answer any questions you may have. In addition, come equipped to talk about any nuances around how you prefer to work (e.g. schedules, family time etc.).
-- Setup relevant [Sales & CS Tools](/contents//handbook/growth/sales/new-hire-onboarding.md#sales--cs-tools)
+- Setup relevant [Sales & CS Tools](/handbook/growth/sales/new-hire-onboarding#sales--cs-tools)
 - If you start on a Monday, join your first PostHog All Hands (at 4.30pm UK/8.30am PT) and be prepared to have a strong opinion on whether pineapple belongs on pizza.
 - If you start on a Monday, join your first CS and Onboarding standup.
   - We fill in a GitHub issue every week before this meeting so we are prepared for the discussion topics. Dana will add your GitHub handle to the template.
