@@ -1,6 +1,6 @@
 ---
 title: How to send survey responses to Zapier
-date: 2024-04-30
+date: 2025-05-01
 author:
   - lior-neu-ner
 showTitle: true
