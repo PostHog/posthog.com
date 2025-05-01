@@ -23,14 +23,23 @@ import {
 } from "@radix-ui/react-icons";
 import { IconSearch, IconMessage } from "@posthog/icons";
 import { IconLink } from '../OSIcons/Icons'
+import useProduct from 'hooks/useProduct'
+
 interface EditorProps {
-    slug: string
+    slug?: string
     title: string
     type?: string
     children?: React.ReactNode
+    filters?: {
+        products?: string[]
+        [key: string]: any
+    }
 }
 
-const toolbarElements: ToolbarElement[] = [
+const baseFilterClass = "ml-auto mr-1 "
+const selectedFilterClass = "font-bold !bg-accent-2 dark:!bg-accent-dark cursor-default"
+
+const toolbarElementsBase: ToolbarElement[] = [
   {
     type: "multiple",
     label: "Text formatting",
@@ -159,10 +168,16 @@ const toolbarElements: ToolbarElement[] = [
   },
   {
     type: "button",
+    icon: <Icons.IconFilter />,
+    label: "Filter",
+    hideLabel: true,
+    className: baseFilterClass,
+  },
+  {
+    type: "button",
     variant: "primary",
     label: "Share",
     size: "xs",
-    className: "ml-auto"
   }
 ];
 
@@ -170,7 +185,16 @@ export default function Editor({
     title,
     type,
     children,
+    filters,
 }: EditorProps) {
+    const products = useProduct() as { slug: string; name: string; type: string }[]
+    const getProductName = (type: string) => products.find((p) => p.type === type)?.name || type
+    const filterKeys = filters ? Object.keys(filters).filter((k) => filters[k] !== undefined && filters[k] !== null && (Array.isArray(filters[k]) ? filters[k].length > 0 : true)) : []
+    const toolbarElements = toolbarElementsBase.map(el =>
+      el.type === "button" && el.label === "Filter"
+        ? { ...el, className: filters ? `${baseFilterClass} ${selectedFilterClass}` : baseFilterClass }
+        : el
+    )
     return (
         <div className="@container w-full h-full flex flex-col min-h-1">
           <aside data-scheme="secondary" className="bg-primary p-2 border-b border-border">
@@ -178,6 +202,39 @@ export default function Editor({
           </aside>
             <div className="flex flex-col flex-grow min-h-0">
                 <main data-scheme="primary" className="@container flex-1 bg-primary relative h-full">
+                  {filterKeys.length > 0 && (
+                    <div className="bg-accent p-2 text-sm">
+                      <span>where </span>
+                      {filterKeys.map((key, i) => {
+                        if (key === "products" && Array.isArray(filters?.products) && filters.products.length > 0) {
+                          return (
+                            <span key={key}>
+                              <strong>product used</strong> <em>includes</em> {filters.products.map((type, idx) => (
+                                <span key={type} className="bg-blue/20 text-blue font-semibold border border-blue rounded-sm px-1.5 py-0.5 mr-1">
+                                  {getProductName(type)}
+                                </span>
+                              ))}
+                              {i < filterKeys.length - 1 && <span> and </span>}
+                            </span>
+                          )
+                        } else {
+                          const value = filters?.[key]
+                          return (
+                            <span key={key}>
+                              <strong>{key.replace(/([A-Z])/g, ' $1').toLowerCase()}</strong> <em>is</em> {typeof value === "boolean" ? (
+                                <span className={value ? "bg-green/20 text-green font-semibold border border-green rounded-sm px-1.5 py-0.5" : "bg-red/20 text-red font-semibold border border-red rounded-sm px-1.5 py-0.5"}>
+                                  {value ? "true" : "false"}
+                                </span>
+                              ) : (
+                                <span className="bg-accent-2 px-1.5 py-0.5 rounded-sm border font-semibold">{String(value)}</span>
+                              )}
+                              {i < filterKeys.length - 1 && <span> and </span>}
+                            </span>
+                          )
+                        }
+                      })}
+                    </div>
+                  )}
                   <ScrollArea>
                     <div className="p-4 mx-auto max-w-3xl">
                       <h1 className="text-2xl font-bold">{title}{type && <span className="opacity-40">.{type}</span>}</h1>

@@ -187,7 +187,11 @@ export default function Customers(): JSX.Element {
     return (
         <>
             <SEO title="notable customers.mdx – PostHog" description="" image={`/images/og/customers.jpg`} />
-            <Editor title="notable customers" type="mdx" slug="/customers">
+            <Editor
+                title="notable customers"
+                type="mdx"
+                slug="/customers"
+            >
               <ScrollArea>
                 <div className="grid grid-cols-[auto_minmax(150px,1fr)_minmax(auto,250px)_minmax(auto,100px)_minmax(auto,180px)] divide-x divide-y divide-border border-r border-b border-primary [&_div]:p-2 text-[15px]">
                     <div className="text-sm border-l border-t border-border bg-input font-bold">&nbsp;</div>

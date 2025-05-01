@@ -5,6 +5,7 @@ import Plans from 'components/Pricing/Plans'
 import CloudinaryImage from 'components/CloudinaryImage'
 import { FAQ } from 'components/Products/FAQ'
 import useProduct from 'hooks/useProduct'
+import ProductSidebar from 'components/Explorer/ProductSidebar'
 
 const faqs = [
     {
@@ -54,7 +55,12 @@ export default function ProductAnalyticsPricing(): JSX.Element {
                 description="PostHog is the only product analytics platform built to natively work with Session Replay, Feature Flags, Experiments, and Surveys."
                 image={`/images/og/product-analytics.jpg`}
             />
-            <Explorer template="product" slug={slug} title="Usage-based pricing">
+            <Explorer 
+                template="product" 
+                slug={slug} 
+                title="Usage-based pricing"
+                sidebarContent={<ProductSidebar type="product_analytics" />}
+            >
                 <div className="flex flex-col-reverse md:flex-row md:gap-12">
                     <div className="flex-1">
                         <p className="">

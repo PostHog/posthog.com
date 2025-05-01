@@ -4,7 +4,22 @@ import Link from 'components/Link'
 import { useApp } from '../../context/App'
 import useProduct from 'hooks/useProduct'
 
-const apps = [
+interface AppItem {
+    label: string
+    Icon: React.ComponentType<any>
+    color: string
+    url: string
+    type?: string
+}
+
+interface Product {
+    name: string
+    slug: string
+    Icon: React.ComponentType<any>
+    color: string
+}
+
+const apps: AppItem[] = [
     {
         label: 'notable customers.mdx',
         Icon: IconDocument,
@@ -25,7 +40,7 @@ const apps = [
     },
 ]
 
-const AppLink = ({ Icon, type, color, label, url }) => {
+const AppLink = ({ Icon, type, color, label, url }: AppItem) => {
     const ref = useRef<HTMLSpanElement>(null)
     return (
         <span ref={ref}>
@@ -43,7 +58,7 @@ const AppLink = ({ Icon, type, color, label, url }) => {
 
 export default function Desktop() {
     const { taskbarHeight } = useApp()
-    const products = useProduct()
+    const products = useProduct() as Product[]
 
     return (
         <div className="fixed size-full p-5">
@@ -59,25 +74,27 @@ export default function Desktop() {
                     // paddingTop: `${taskbarHeight}px`,
                     height: `calc(100vh - ${taskbarHeight}px - 48px)`,
                 }}
-                className="overflow-hidden"
+                className="overflow-hidden flex justify-between"
             >
                 <ul className="p-0 m-0 list-none flex flex-col flex-wrap h-full content-start gap-x-8 gap-y-4">
-                    {[
-                        ...products.map((product) => ({
-                            label: product.name,
-                            url: product.slug,
-                            type: 'link',
-                            Icon: product.Icon,
-                            color: product.color,
-                        })),
-                        ...apps,
-                    ].map((app, index) => {
-                        return (
-                            <li key={app.label + index} className="w-[90px]">
-                                <AppLink {...app} />
-                            </li>
-                        )
-                    })}
+                    {products?.map((product, index) => (
+                        <li key={product.name + index} className="w-[110px]">
+                            <AppLink
+                                label={product.name}
+                                url={product.slug}
+                                type="link"
+                                Icon={product.Icon}
+                                color={product.color}
+                            />
+                        </li>
+                    ))}
+                </ul>
+                <ul className="p-0 m-0 list-none flex flex-col flex-wrap h-full content-start gap-x-8 gap-y-4">
+                    {apps.map((app, index) => (
+                        <li key={app.label + index} className="w-[110px]">
+                            <AppLink {...app} />
+                        </li>
+                    ))}
                 </ul>
             </nav>
         </div>
