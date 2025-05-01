@@ -188,7 +188,9 @@ export default function Editor({
     filters,
 }: EditorProps) {
     const products = useProduct() as { slug: string; name: string; type: string }[]
+    // take the product name passed in and check the useProduct hook to get the product's display name
     const getProductName = (type: string) => products.find((p) => p.type === type)?.name || type
+    // if we're filtering to a product, show the filter button in an active/open state
     const filterKeys = filters ? Object.keys(filters).filter((k) => filters[k] !== undefined && filters[k] !== null && (Array.isArray(filters[k]) ? filters[k].length > 0 : true)) : []
     const toolbarElements = toolbarElementsBase.map(el =>
       el.type === "button" && el.label === "Filter"
