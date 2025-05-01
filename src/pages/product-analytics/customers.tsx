@@ -7,7 +7,7 @@ export default function ProductAnalyticsFeatures(): JSX.Element {
     return (
         <>
             <SEO
-                title="Features – Product Analytics"
+                title="Customers – Product Analytics"
                 description="PostHog is the only product analytics platform built to natively work with Session Replay, Feature Flags, Experiments, and Surveys."
                 image={`/images/og/product-analytics.jpg`}
             />

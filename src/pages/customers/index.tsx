@@ -5,6 +5,8 @@ import Editor from 'components/Editor'
 import { graphql, useStaticQuery } from 'gatsby'
 import { useValues } from 'kea'
 import { layoutLogic } from 'logic/layoutLogic'
+import OSTable from 'components/OSTable'
+import ScrollArea from 'components/RadixUI/ScrollArea'
 
 // Import SVG logos
 import MistralLogo from '../../images/customers/mistralai-light.svg'
@@ -22,7 +24,6 @@ import DhlLogoDark from '../../images/customers/dhl-dark.svg'
 import StartEngineLogoDark from '../../images/customers/startengine-dark.svg'
 import TrustWalletLogoDark from '../../images/customers/trustwallet-dark.svg'
 import PostHogLogoDark from '../../images/customers/posthog-dark.svg'
-import ScrollArea from 'components/RadixUI/ScrollArea'
 
 interface CustomerNode {
     fields: {
@@ -121,11 +122,11 @@ interface CustomerProps {
 }
 
 const Customer = ({ number, logo, name, toolsUsed, slug, notes }: CustomerProps) => {
-    return (
-        <React.Fragment>
-            <div className="flex items-center justify-center">{number}</div>
-            <div className={`flex items-center justify-center !p-4`}>
-                {logo ? (
+    return {
+        cells: [
+            { content: number },
+            { 
+                content: logo ? (
                     <>
                         <img 
                             src={logo.light} 
@@ -140,13 +141,14 @@ const Customer = ({ number, logo, name, toolsUsed, slug, notes }: CustomerProps)
                     </>
                 ) : (
                     <span>{name}</span>
-                )}
-            </div>
-            <div className="flex items-center text-sm">{toolsUsed?.join(', ')}</div>
-            <div className="flex justify-center items-center">{slug && <Link to={slug}>Link</Link>}</div>
-            <div className="flex justify-center items-center text-sm">{notes || ''}</div>
-        </React.Fragment>
-    )
+                ),
+                className: '!p-4'
+            },
+            { content: toolsUsed?.join(', '), className: 'text-sm' },
+            { content: slug && <Link to={slug}>Link</Link> },
+            { content: notes || '', className: 'text-sm' }
+        ]
+    }
 }
 
 export default function Customers(): JSX.Element {
@@ -184,6 +186,37 @@ export default function Customers(): JSX.Element {
         {}
     )
 
+    const columns = [
+        { name: '', width: 'auto', align: 'center' as const },
+        { name: 'Company name', width: 'minmax(150px,1fr)', align: 'center' as const },
+        { name: 'Product(s) used', width: 'minmax(auto,250px)' },
+        { name: 'Case study?', width: 'minmax(auto,100px)', align: 'center' as const },
+        { name: 'Notes', width: 'minmax(auto,180px)', align: 'center' as const }
+    ]
+
+    const rows = CUSTOMER_ORDER.map((item, index) => {
+        return Customer({
+            number: index + 1,
+            logo: typeof item === 'string' 
+                ? frontmatterCustomers[item]?.frontmatter?.logo?.publicURL 
+                    ? {
+                        light: frontmatterCustomers[item].frontmatter.logo.publicURL,
+                        dark: frontmatterCustomers[item].frontmatter.logoDark.publicURL
+                    }
+                    : undefined
+                : {
+                    light: item.logo,
+                    dark: item.logoDark
+                },
+            name: typeof item === 'string' ? frontmatterCustomers[item]?.frontmatter?.customer || '' : item.name,
+            slug: typeof item === 'string' ? frontmatterCustomers[item]?.fields?.slug : undefined,
+            toolsUsed: typeof item === 'string' ? frontmatterCustomers[item]?.frontmatter?.toolsUsed : item.toolsUsed,
+            notes: typeof item === 'string' 
+                ? frontmatterCustomers[item]?.frontmatter?.notes 
+                : item.notes
+        })
+    })
+
     return (
         <>
             <SEO title="notable customers.mdx – PostHog" description="" image={`/images/og/customers.jpg`} />
@@ -192,41 +225,8 @@ export default function Customers(): JSX.Element {
                 type="mdx"
                 slug="/customers"
             >
-              <ScrollArea>
-                <div className="grid grid-cols-[auto_minmax(150px,1fr)_minmax(auto,250px)_minmax(auto,100px)_minmax(auto,180px)] divide-x divide-y divide-border border-r border-b border-primary [&_div]:p-2 text-[15px]">
-                    <div className="text-sm border-l border-t border-border bg-input font-bold">&nbsp;</div>
-                    <div className="text-sm bg-input font-bold text-center">Company name</div>
-                    <div className="text-sm bg-input font-bold">Product(s) used</div>
-                    <div className="text-sm bg-input font-bold text-center">Case study?</div>
-                    <div className="text-sm bg-input font-bold">Notes</div>
-
-                    {CUSTOMER_ORDER.map((item, index) => {
-                        return (
-                            <Customer
-                                key={index}
-                                number={index + 1}
-                                logo={typeof item === 'string' 
-                                    ? frontmatterCustomers[item]?.frontmatter?.logo?.publicURL 
-                                        ? {
-                                            light: frontmatterCustomers[item].frontmatter.logo.publicURL,
-                                            dark: frontmatterCustomers[item].frontmatter.logoDark.publicURL
-                                        }
-                                        : undefined
-                                    : {
-                                        light: item.logo,
-                                        dark: item.logoDark
-                                    }
-                                }
-                                name={typeof item === 'string' ? frontmatterCustomers[item]?.frontmatter?.customer || '' : item.name}
-                                slug={typeof item === 'string' ? frontmatterCustomers[item]?.fields?.slug : undefined}
-                                toolsUsed={typeof item === 'string' ? frontmatterCustomers[item]?.frontmatter?.toolsUsed : item.toolsUsed}
-                                notes={typeof item === 'string' 
-                                    ? frontmatterCustomers[item]?.frontmatter?.notes 
-                                    : item.notes}
-                            />
-                        )
-                    })}
-                </div>
+                <ScrollArea>
+                    <OSTable columns={columns} rows={rows} />
                 </ScrollArea>
             </Editor>
         </>
