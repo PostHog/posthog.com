@@ -1220,6 +1220,10 @@ export const handbookSidebar = [
                         name: 'Historical imports',
                         url: '/handbook/growth/sales/historical-import',
                     },
+                    {
+                        name: 'Shared Slack channels',
+                        url: '/handbook/growth/sales/slack-channels',
+                    },
                 ],
             },
         ],
