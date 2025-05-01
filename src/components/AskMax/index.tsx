@@ -1,11 +1,13 @@
 import React from 'react'
-import { useChat } from 'hooks/useChat'
+import { ChatProvider } from '../../hooks/useChat'
 import { useStaticQuery } from 'gatsby'
 import { graphql } from 'gatsby'
 import { IconLightBulb, IconSidebarOpen } from '@posthog/icons'
 import { CallToAction } from 'components/CallToAction'
 import { useLayoutData } from 'components/Layout/hooks'
 import usePostHog from 'hooks/usePostHog'
+import { useApp } from '../../context/App'
+import { useLocation } from '@reach/router'
 
 interface AskMaxProps {
     border?: boolean
@@ -24,7 +26,8 @@ export default function AskMax({
 }: AskMaxProps) {
     const posthog = usePostHog()
     const { compact } = useLayoutData()
-    const { openChat, setQuickQuestions } = useChat()
+    const { addWindow } = useApp()
+    const location = useLocation()
     const {
         allDocsPages: { totalDocsCount },
     } = useStaticQuery(graphql`
@@ -39,10 +42,14 @@ export default function AskMax({
 
     const handleChatOpen = () => {
         posthog?.capture('Opened MaxAI chat')
-        if (quickQuestions) {
-            setQuickQuestions(quickQuestions)
-        }
-        openChat()
+        addWindow(
+            <ChatProvider
+                location={{ pathname: `ask-max-${location.pathname}` }}
+                key={`ask-max-${location.pathname}`}
+                newWindow
+                quickQuestions={quickQuestions}
+            />
+        )
     }
 
     if (linkOnly) {

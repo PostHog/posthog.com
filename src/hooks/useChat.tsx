@@ -26,8 +26,10 @@ const ChatContext = createContext<ChatContextType | undefined>(undefined)
 
 export function ChatProvider({
     context: initialContext,
+    quickQuestions: initialQuickQuestions,
 }: {
     context?: { type: 'page'; value: { path: string; label: string } }[]
+    quickQuestions?: string[]
 }): JSX.Element {
     const { baseSettings, aiChatSettings, setBaseSettings, setAiChatSettings } = useInkeepSettings()
     const [chatting, setChatting] = useState(false)
@@ -35,7 +37,7 @@ export function ChatProvider({
     const [hasUnread, setHasUnread] = useState(false)
     const [loading, setLoading] = useState(true)
     const [hasFirstResponse, setHasFirstResponse] = useState(false)
-    const [quickQuestions, setQuickQuestions] = useState(defaultQuickQuestions)
+    const [quickQuestions, setQuickQuestions] = useState(initialQuickQuestions || defaultQuickQuestions)
     const [conversationHistory, setConversationHistory] = useState<{ id: string; question: number; date: string }[]>([])
     const [context, setContext] = useState<{ type: 'page'; value: { path: string; label: string } }[]>(
         initialContext || []
@@ -114,13 +116,6 @@ export function ChatProvider({
     }, [])
 
     useEffect(() => {
-        setAiChatSettings({
-            ...aiChatSettings,
-            exampleQuestions: quickQuestions,
-        })
-    }, [quickQuestions])
-
-    useEffect(() => {
         // Add community suggestion to chat
         if (hasFirstResponse) {
             const shadowRoot = document.querySelector('#embedded-chat-target>div')?.shadowRoot
@@ -184,6 +179,13 @@ export function ChatProvider({
             prompts,
         })
     }, [context])
+
+    useEffect(() => {
+        setAiChatSettings({
+            ...aiChatSettings,
+            exampleQuestions: quickQuestions,
+        })
+    }, [quickQuestions])
 
     return (
         <ChatContext.Provider
