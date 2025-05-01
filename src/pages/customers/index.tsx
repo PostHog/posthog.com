@@ -2,189 +2,75 @@ import React from 'react'
 import SEO from 'components/seo'
 import Link from 'components/Link'
 import Editor from 'components/Editor'
-import { graphql, useStaticQuery } from 'gatsby'
 import { useValues } from 'kea'
 import { layoutLogic } from 'logic/layoutLogic'
 import OSTable from 'components/OSTable'
 import ScrollArea from 'components/RadixUI/ScrollArea'
+import { useCustomers } from 'hooks/useCustomers'
 
-// Import SVG logos
-import MistralLogo from '../../images/customers/mistralai-light.svg'
-import RaycastLogo from '../../images/customers/raycast-light.svg'
-import AirbusLogo from '../../images/customers/airbus-light.svg'
-import DhlLogo from '../../images/customers/dhl-light.svg'
-import StartEngineLogo from '../../images/customers/startengine-light.svg'
-import TrustWalletLogo from '../../images/customers/trustwallet-light.svg'
-import PostHogLogo from '../../images/customers/posthog-light.svg'
-
-import MistralLogoDark from '../../images/customers/mistralai-dark.svg'
-import RaycastLogoDark from '../../images/customers/raycast-dark.svg'
-import AirbusLogoDark from '../../images/customers/airbus-dark.svg'
-import DhlLogoDark from '../../images/customers/dhl-dark.svg'
-import StartEngineLogoDark from '../../images/customers/startengine-dark.svg'
-import TrustWalletLogoDark from '../../images/customers/trustwallet-dark.svg'
-import PostHogLogoDark from '../../images/customers/posthog-dark.svg'
-
-interface CustomerNode {
-    fields: {
-        slug: string
-    }
-    frontmatter: {
-        customer: string
-        toolsUsed?: string[]
-        notes?: string
-        logo?: {
-            publicURL: string
-        }
-        logoDark?: {
-            publicURL: string
-        }
-    }
-}
-
-interface ManualCustomer {
-    name: string
-    toolsUsed: string[]
-    notes?: string
-    logo: string
-    logoDark: string
-}
-
-type CustomerOrder = (string | ManualCustomer)[]
-
-const CUSTOMER_ORDER: CustomerOrder = [
+const CUSTOMER_ORDER = [
     'ycombinator',
-    {
-        name: 'Mistral AI',
-        toolsUsed: [],
-        notes: '',
-        logo: MistralLogo,
-        logoDark: MistralLogoDark,
-    },
+    'mistralai',
     'elevenlabs',
-    {
-        name: 'Raycast',
-        toolsUsed: [],
-        notes: '',
-        logo: RaycastLogo,
-        logoDark: RaycastLogoDark,
-    },
-    {
-        name: 'Airbus',
-        toolsUsed: [],
-        notes: '',
-        logo: AirbusLogo,
-        logoDark: AirbusLogoDark,
-    },
-    {
-        name: 'DHL',
-        toolsUsed: [],
-        notes: '',
-        logo: DhlLogo,
-        logoDark: DhlLogoDark,
-    },
-    {
-        name: 'StartEngine',
-        toolsUsed: [],
-        notes: '',
-        logo: StartEngineLogo,
-        logoDark: StartEngineLogoDark,
-    },
+    'raycast',
+    'airbus',
+    'dhl',
+    'startengine',
     'assemblyai',
     'hasura',
-    {
-        name: 'Trust',
-        toolsUsed: [],
-        notes: '',
-        logo: TrustWalletLogo,
-        logoDark: TrustWalletLogoDark,
-    },
+    'trust',
     'researchgate',
-    {
-        name: 'PostHog',
-        toolsUsed: [],
-        notes: 'Would it be clever or lame if we included our own company here?',
-        logo: PostHogLogo,
-        logoDark: PostHogLogoDark,
-    },
+    'posthog'
 ]
 
 interface CustomerProps {
     number: number
-    logo?: {
-        light: string
-        dark: string
+    customer: {
+        logo?: {
+            light: string
+            dark: string
+        }
+        name: string
+        toolsUsed?: string[]
+        slug: string
+        notes?: string
     }
-    name: string
-    toolsUsed?: string[]
-    slug?: string
-    notes?: string
 }
 
-const Customer = ({ number, logo, name, toolsUsed, slug, notes }: CustomerProps) => {
+const Customer = ({ number, customer }: CustomerProps) => {
+    const { hasCaseStudy } = useCustomers()
     return {
         cells: [
             { content: number },
             { 
-                content: logo ? (
+                content: customer.logo ? (
                     <>
                         <img 
-                            src={logo.light} 
-                            alt={name} 
+                            src={customer.logo.light} 
+                            alt={customer.name} 
                             className="w-auto object-contain dark:hidden" 
                         />
                         <img 
-                            src={logo.dark} 
-                            alt={name} 
+                            src={customer.logo.dark} 
+                            alt={customer.name} 
                             className="w-auto object-contain hidden dark:block" 
                         />
                     </>
                 ) : (
-                    <span>{name}</span>
+                    <span>{customer.name}</span>
                 ),
                 className: '!p-4'
             },
-            { content: toolsUsed?.join(', '), className: 'text-sm' },
-            { content: slug && <Link to={slug}>Link</Link> },
-            { content: notes || '', className: 'text-sm' }
+            { content: customer.toolsUsed?.join(', '), className: 'text-sm' },
+            { content: hasCaseStudy(customer.slug) ? <Link to={`/customers/${customer.slug}`}>Link</Link> : null },
+            { content: customer.notes || '', className: 'text-sm' }
         ]
     }
 }
 
 export default function Customers(): JSX.Element {
-
-    const data = useStaticQuery(graphql`
-        query {
-            allCustomers: allMdx(filter: { fields: { slug: { regex: "/^/customers/" } } }) {
-                nodes {
-                    fields {
-                        slug
-                    }
-                    frontmatter {
-                        customer
-                        toolsUsed
-                        notes
-                        logo {
-                            publicURL
-                        }
-                        logoDark {
-                            publicURL
-                        }
-                    }
-                }
-            }
-        }
-    `)
-
-    // Create a map of frontmatter customers for quick lookup
-    const frontmatterCustomers = data.allCustomers.nodes.reduce(
-        (acc: Record<string, CustomerNode>, node: CustomerNode) => {
-            const key = node.fields.slug.split('/').pop() || ''
-            acc[key] = node
-            return acc
-        },
-        {}
-    )
+    const { getCustomers } = useCustomers()
+    const customers = getCustomers(CUSTOMER_ORDER)
 
     const columns = [
         { name: '', width: 'auto', align: 'center' as const },
@@ -194,26 +80,10 @@ export default function Customers(): JSX.Element {
         { name: 'Notes', width: 'minmax(auto,180px)', align: 'center' as const }
     ]
 
-    const rows = CUSTOMER_ORDER.map((item, index) => {
+    const rows = customers.map((customer, index) => {
         return Customer({
             number: index + 1,
-            logo: typeof item === 'string' 
-                ? frontmatterCustomers[item]?.frontmatter?.logo?.publicURL 
-                    ? {
-                        light: frontmatterCustomers[item].frontmatter.logo.publicURL,
-                        dark: frontmatterCustomers[item].frontmatter.logoDark.publicURL
-                    }
-                    : undefined
-                : {
-                    light: item.logo,
-                    dark: item.logoDark
-                },
-            name: typeof item === 'string' ? frontmatterCustomers[item]?.frontmatter?.customer || '' : item.name,
-            slug: typeof item === 'string' ? frontmatterCustomers[item]?.fields?.slug : undefined,
-            toolsUsed: typeof item === 'string' ? frontmatterCustomers[item]?.frontmatter?.toolsUsed : item.toolsUsed,
-            notes: typeof item === 'string' 
-                ? frontmatterCustomers[item]?.frontmatter?.notes 
-                : item.notes
+            customer
         })
     })
 
