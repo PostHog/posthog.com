@@ -691,6 +691,10 @@ export const handbookSidebar = [
                 name: 'Customer health checks',
                 url: '/handbook/cs-and-onboarding/health-checks',
             },
+            {
+                name: 'Saying hi to your customers',
+                url: '/handbook/cs-and-onboarding/saying-hi-to-your-customers',
+            },
         ],
     },
     {
