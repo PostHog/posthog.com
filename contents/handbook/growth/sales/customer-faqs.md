@@ -12,7 +12,7 @@ We are working on a charging model for this, but in the interim you can opt cust
 
 ## Do you have plans to add more hosting options outside of the US and EU?
 
-Right now, no. The vast majority of our customers are happy to host on one or the other, with EU being the preffered domain for GDPR compliance. This is not a "never", just not in the near future.
+Right now, no. The vast majority of our customers are happy to host on one or the other, with EU being the preferred domain for GDPR compliance. This is not a "never", just not in the near future.
 
 ## Do you have a dummy account we can mess around with?
 
