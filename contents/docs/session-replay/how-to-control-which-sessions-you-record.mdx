@@ -46,7 +46,7 @@ posthog.startSessionRecording({
 })
 ```
 
-> **NOTE:** Session recording triggers work as OR conditions — the recording starts if *any* of the set triggers (URL or event) are matched.
+> **NOTE:** Originally session recording url and event triggers matched when either matched, while linked flags and sampling only when both matched. This was confusing, so from version 1.238.0 of the web SDK you can choose which behavior you want. See "Trigger matching" below.
 
 ## With URL trigger conditions
 
@@ -76,8 +76,8 @@ The client keeps a short buffer in-memory, so you'll still be able to see how th
 
 You can select a [feature flag](/docs/feature-flags) to control whether to record sessions or not. Recordings will only be collected for users when the flag is enabled for them.
 
-1. [Create a boolean flag](/docs/feature-flags/creating-feature-flags) that determines whether to record sessions or not.
-2. Go to the [replay ingestion settings page](https://us.posthog.com/settings/project-replay#replay-ingestion).
+1. [Create a boolean or multiple variant flag](/docs/feature-flags/creating-feature-flags) that determines whether to record sessions or not.
+2. Go to the [replay ingestion settings page](https://us.posthog.com/replay/settings#selectedSetting=replay-triggers).
 3. Link your newly created flag in the **Enable recordings using feature flag**.
 
 <ProductScreenshot
@@ -89,7 +89,7 @@ You can select a [feature flag](/docs/feature-flags) to control whether to recor
 
 ## Sampling
 
-Sampling enables you to record a percentage of all sessions. To set a sampling rate, go to the [replay ingestion settings page](https://us.posthog.com/settings/project-replay#replay-ingestion).
+Sampling enables you to record a percentage of all sessions. To set a sampling rate, go to the [replay ingestion settings page](https://us.posthog.com/replay/settings#selectedSetting=replay-triggers).
 
 <ProductScreenshot
     imageLight={ImgSampleConfigLight} 
@@ -102,9 +102,19 @@ Our recommendation is to start with capturing 100% of sessions and decrease it a
 
 > **Note:** Sampling reduces the number of sessions you record, but it doesn’t let you control which sessions are recorded.
 
-### Overriding sampling
+## Combining controls
 
-You can begin a recording regardless of sampling by calling `posthog.startSessionRecording({sampling: true})`
+Since version 1.238.0 of the web SDK you can control how multiple triggers are combined. Choosing whether recording will start when all triggers match or when any trigger matches.
+
+For example if you set an event trigger for Exception events, a URL trigger for the checkout page, and sampling to 20%.
+
+### With any matching
+
+You'll capture 20% of every session, and any session that has an exception event or is on the checkout page.
+
+### With all matching
+
+You'll capture 20% of any session on the check page that has an exception event.
 
 ## Minimum duration
 
