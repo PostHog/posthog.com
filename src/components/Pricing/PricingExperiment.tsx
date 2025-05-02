@@ -127,6 +127,7 @@ export const allProductsData = graphql`
                                 note
                                 entitlement_only
                                 is_plan_default
+                                unit
                             }
                             tiers {
                                 current_amount_usd
@@ -153,6 +154,7 @@ export const allProductsData = graphql`
                             note
                             entitlement_only
                             is_plan_default
+                            unit
                         }
                         free_allocation
                         image_url

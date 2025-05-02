@@ -109,7 +109,7 @@ The objective of the meeting is to hold each other to account, provide direct fe
     - Commission is still paid out quarterly even if the customer pays monthly
   - If we have to give a customer a big refund, we’ll deal with your commission on a case by case basis - in the future we may introduce a more formal clawback
   - Commission payments are made at the end of January, April, July, and October - at the end of each quarter, we'll monitor how many invoices actually get paid in the first two weeks of the next quarter. Fraser will send you an email that breaks down your commmission into the above 4 buckets and how you did. 
-- In your first 3 months you will not have a set quota but are expected to retain your existing book and have closed at least one Medium deal (either totally new or converting an existing customer to annual) - you'll be paid 100% OTE for this period.
+- In your first 3 months you are expected to retain your existing book and have closed at least one deal (either totally new or converting an existing customer to annual) - you'll be paid 100% OTE for this period.
 
 > Your quota and assigned customers are likely to change slightly from quarter to quarter. In any case, your quota will be amended appropriately (up or down) to account for any movement. We will also be flexible in making changes mid-quarter if it's obviously the sensible thing to do. If you inherit a new account, you have a 3 month grace period - if they churn in that initial period, they won't be counted against your quota.
 
@@ -133,11 +133,16 @@ CSMs are responsible for ensuring that a larger book of existing customers - bot
 **Variables**
 
 - Your OTE comprises a 90/10 split between base and contractual bonus.
-- Bonus is paid based on logo retention above 90%, and is capped at 100%.
-  - For example, if you have 90% logo retention, you get 0% of bonus. For 95% retention, it's 50% bonus, and for 100% retention, it's 100% bonus. 
+- Bonus is paid based on revenue retention above 100%, and is _uncapped_.
+  - For example, if you have 100% revenue retention and your target is 120% revenue retention, you get 0% of bonus. For 120% retention, it's 100% bonus, and for 140% retention, it's 200% bonus.
+  - While the Q2 2025 target is 120%, this may change in future depending on how things go. 
 - Bonuses are paid out quarterly, and in any case after an invoice is paid
   - Bonus payments are made at the end of January, April, July, and October - at the end of each quarter, we'll monitor how many invoices actually get paid in the first two weeks of the next quarter. Fraser will send you an email that breaks down how you did.
-- We count a customer as having been retained in your book if they are still spending > $500/month with us, so if for example you have a customer that was spending $20k+ annually who then scales down to $10/year, they obviously won't count as retained even if they are technically still spending money!
+- Your bonus is guaranteed at 100% for your first 3 months at PostHog - this gives you time to get up to speed, but also if you over-perform then you will get your additional bonus.
+- If an account is added to your book:
+  - If you inherit a new account, you have a 3 month grace period - if they drop or churn in that initial period, they won't be counted against you. We want to encourage you to right-size customers, rather than your deliberately letting them wastefully spend money due to some poor implementation.
+  - Obviously if you get a new account added their starting ARR doesn't count towards your target - only growth from the starting point. 
+- If we have to give a customer a big refund, we’ll deal with your bonus on a case by case basis depending on what happened.
 
 ## Travel to see customers
 
