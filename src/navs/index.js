@@ -1185,6 +1185,10 @@ export const handbookSidebar = [
                 url: '/handbook/growth/sales/new-hire-onboarding',
             },
             {
+                name: 'Customer FAQs',
+                url: '/handbook/growth/sales/customer-faqs',
+            },
+            {
                 name: 'SalesOps',
                 url: '',
                 children: [
