@@ -20,7 +20,7 @@ The first? **There are so many stupid ways to build software**.
 
 When an agent sets out to write code, it has many viable paths to both solve the problem and introduce mistakes. Mistakes are especially common for newer, upstart projects.
 
-Scale is one way to compensate: fill the training set with enough statistical weight that favors correct implementations, you’re less likely to see the boneheaded stuff.
+Scale is one way to compensate: fill the training set with enough statistical weight favoring the correct implementations and you’re less likely to see the boneheaded stuff.
 
 But that’s a lot of effort, plus significant lag time as you await scraping and training. You want correct agent behavior *today*.
 
@@ -58,7 +58,7 @@ Naturally, we're building our own envoy already. It's a beta, but it's already v
 
 ## Example code: the PostHog wizard
 
-The PostHog [wizard](https://github.com/PostHog/wizard) started its life as an interactive command line tool for automating the basics of a PostHog integration. It grabs an API key from a user’s account and uses it to populate a .env file.
+The PostHog [wizard](https://github.com/PostHog/wizard) started its life as an interactive command line tool for automating the basics of a PostHog integration. It grabs an API key from a user’s account and uses it to populate a `.env` file.
 
 From here it uses LLMs and consistent prompting to read through the user’s code and integrate PostHog correctly.
 
@@ -84,7 +84,7 @@ We’ve got support for Next.js, React, Svelte, and React Native, with others co
 
 ## Steal this code
 
-Our [Joshua Snyder](https://posthog.com/community/profiles/32497) has been working hard to increase the surface of the wizard and make it more reliable. The project code is tidy, and it even demonstrates how to integrate product analytics into a node-based CLI tool.
+[Joshua](https://posthog.com/community/profiles/32497) has been working hard to increase the surface of the wizard and make it more reliable. The project code is tidy, and it even demonstrates how to integrate product analytics into a Node-based CLI tool.
 
 We get reporting on completed wizard runs alongside all the rest of our data. You can learn a lot from this project!
 
