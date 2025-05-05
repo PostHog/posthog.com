@@ -1,15 +1,25 @@
 import React from 'react'
 import { CodeBlock } from './CodeBlock'
 import Link from './Link'
+import { useUser } from 'hooks/useUser'
 
 export default function IntegrationPrompt() {
-    const promptCode = `Let's integrate PostHog. Run the following command; don't write any code until it completes:
+    const { user } = useUser()
+    const basePrompt = `Let's integrate PostHog. Run the following command; don't write any code until it completes:
 
 npx --yes @posthog/wizard@latest --default --region <ph_region>`
 
+    let finalPrompt: string
+
+    if (user) {
+        finalPrompt = basePrompt
+    } else {
+        finalPrompt = `${basePrompt} --signup`
+    }
+
     const languageOption = {
         language: 'Agent',
-        code: promptCode,
+        code: finalPrompt,
     }
 
     return (
