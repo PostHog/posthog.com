@@ -56,7 +56,7 @@ val config = PostHogAndroidConfig(apiKey = "<ph_project_api_key>").apply {
 ### Limitations
 
 - Requires Android API >= 26.
-- Jetpack Compose is only supported if `screenshotMode` is enabled.
-- Custom views are partly supported, and only fully supported if `screenshotMode`  is enabled.
-- WebView is not supported. A placeholder will be shown.
+- Jetpack Compose is only supported if `screenshot` is enabled.
+- Custom views are partly supported, and only fully supported if `screenshot`  is enabled.
+- WebView is only supported if `screenshot` is enabled. A placeholder will be shown as a fallback.
 - Keyboard is not supported. A placeholder will be shown.

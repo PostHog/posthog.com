@@ -12,14 +12,14 @@ import { useFeatureFlag } from 'posthog-react-native'
 const MyComponent = () => {
     const booleanFlag = useFeatureFlag('key-for-your-boolean-flag')
 
-    if (showFlaggedFeature === undefined) {
+    if (booleanFlag === undefined) {
         // the response is undefined if the flags are being loaded
         return null
     }
 
     // Optional use the 'useFeatureFlagWithPayload' hook for fetching the feature flag payload
 
-    return showFlaggedFeature ? <Text>Testing feature 😄</Text> : <Text>Not Testing feature 😢</Text>
+    return booleanFlag ? <Text>Testing feature 😄</Text> : <Text>Not Testing feature 😢</Text>
 }
 ```
 

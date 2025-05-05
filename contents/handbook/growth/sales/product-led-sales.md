@@ -27,7 +27,7 @@ Just as with the [inbound sales process](/handbook/growth/sales/new-sales), it's
 
 > Getting people already happily using PostHog to talk to you can be challenging - [here are a few things](/handbook/growth/sales/expansion-and-retention#1-get-people-to-talk-to-you) you might want to try. 
 
-If it's a viable opportunity then you should convert the lead to an [opportunity](/handbook/growth/sales/crm#opportunities) and then follow the [New sales process](/handbook/growth/sales/new-sales). Bear in mind that you can join it at any point depending on where the customer is at in their buying journey (e.g. you might skip product evaluation if they are ready to buy).
+If it's a viable opportunity then you should convert the lead to an [opportunity](/handbook/growth/sales/crm#opportunities) and then follow the [New sales process](/handbook/growth/sales/new-sales). Bear in mind that you can join it at any point depending on where the customer is at in their buying journey (e.g. you might skip product evaluation if they are ready to buy). If they are eligible for [a shared Slack channel](/handbook/growth/sales/slack-channels) and they do not already have one, set one up.
 
 Even if after speaking with them you think they may not end up at $20k+, you should educate them on how to get help, as well as the value of adding our Teams and Enterprise plans.
 

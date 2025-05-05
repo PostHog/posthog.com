@@ -276,6 +276,7 @@ export const createSchemaCustomization: GatsbyNode['createSchemaCustomization'] 
         note: String
         entitlement_only: Boolean
         is_plan_default: Boolean
+        unit: String
     }
     type ProductDataProductsAddonsPlansFeatures {
         category: String
@@ -283,6 +284,7 @@ export const createSchemaCustomization: GatsbyNode['createSchemaCustomization'] 
         note: String
         entitlement_only: Boolean
         is_plan_default: Boolean
+        unit: String
     }
     type ProductDataProductsPlansFeatures {
         category: String
@@ -290,6 +292,7 @@ export const createSchemaCustomization: GatsbyNode['createSchemaCustomization'] 
         note: String
         entitlement_only: Boolean
         is_plan_default: Boolean
+        unit: String
     }
   `)
     createTypes([
