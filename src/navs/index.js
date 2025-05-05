@@ -343,15 +343,16 @@ export const dataPipelines = {
                     url: '/docs/cdp/transformations',
                 },
                 {
-                    name: 'Customization',
-                    url: '/docs/cdp/transformations/customizing-transformations',
-                },
-                {
-                    name: 'Drop events',
-                    url: '/docs/cdp/transformations/drop-events',
-                },
-                {
                     name: 'Transformations',
+                },
+                // TODO: Add this back in once we support custom transformations
+                // {
+                //     name: 'Customization',
+                //     url: '/docs/cdp/transformations/customizing-transformations',
+                // },
+                {
+                    name: 'Drop Events',
+                    url: '/docs/cdp/transformations/drop-events',
                 },
             ],
             dynamicChildren: 'data-pipeline-transformations',
@@ -663,6 +664,40 @@ export const handbookSidebar = [
                         url: '/handbook/content-and-docs/components',
                     },
                 ],
+            },
+        ],
+    },
+    {
+        name: 'CS & Onboarding',
+        url: '',
+        children: [
+            {
+                name: 'Customer success team',
+                url: '/handbook/cs-and-onboarding/customer-success',
+            },
+            {
+                name: 'Onboarding team',
+                url: '/handbook/cs-and-onboarding/onboarding-team',
+            },
+            {
+                name: 'New team member onboarding',
+                url: '/handbook/cs-and-onboarding/new-hire-onboarding',
+            },
+            {
+                name: 'Health tracking',
+                url: '/handbook/cs-and-onboarding/health-tracking',
+            },
+            {
+                name: 'Feature requests',
+                url: '/handbook/cs-and-onboarding/feature-requests',
+            },
+            {
+                name: 'Customer health checks',
+                url: '/handbook/cs-and-onboarding/health-checks',
+            },
+            {
+                name: 'Saying hi to your customers',
+                url: '/handbook/cs-and-onboarding/saying-hi-to-your-customers',
             },
         ],
     },
@@ -1138,10 +1173,6 @@ export const handbookSidebar = [
                 url: '/handbook/growth/sales/product-led-sales',
             },
             {
-                name: 'Onboarding team',
-                url: '/handbook/growth/sales/onboarding-team',
-            },
-            {
                 name: 'Expansion & Retention',
                 url: '/handbook/growth/sales/expansion-and-retention',
             },
@@ -1152,6 +1183,10 @@ export const handbookSidebar = [
             {
                 name: 'New team member onboarding',
                 url: '/handbook/growth/sales/new-hire-onboarding',
+            },
+            {
+                name: 'Customer FAQs',
+                url: '/handbook/growth/sales/customer-faqs',
             },
             {
                 name: 'SalesOps',
@@ -1197,27 +1232,9 @@ export const handbookSidebar = [
                         name: 'Historical imports',
                         url: '/handbook/growth/sales/historical-import',
                     },
-                ],
-            },
-            {
-                name: 'Customer Success',
-                url: '',
-                children: [
                     {
-                        name: 'Overview',
-                        url: '/handbook/growth/sales/customer-success',
-                    },
-                    {
-                        name: 'Health tracking',
-                        url: '/handbook/growth/sales/health-tracking',
-                    },
-                    {
-                        name: 'Feature requests',
-                        url: '/handbook/growth/sales/feature-requests',
-                    },
-                    {
-                        name: 'Customer health checks',
-                        url: '/handbook/growth/sales/health-checks',
+                        name: 'Shared Slack channels',
+                        url: '/handbook/growth/sales/slack-channels',
                     },
                 ],
             },
@@ -1567,6 +1584,10 @@ export const companyMenu = {
                 {
                     name: 'Support',
                     url: '/teams/support',
+                },
+                {
+                    name: 'Video',
+                    url: '/teams/video',
                 },
                 {
                     name: 'Website & Vibes',
@@ -2461,6 +2482,10 @@ export const docsMenu = {
                             url: '/docs/advanced/proxy/remix',
                         },
                         {
+                            name: 'SvelteKit',
+                            url: '/docs/advanced/proxy/sveltekit',
+                        },
+                        {
                             name: 'Vercel',
                             url: '/docs/advanced/proxy/vercel',
                         },
@@ -2879,8 +2904,8 @@ export const docsMenu = {
                     color: 'seagreen',
                 },
                 {
-                    name: 'Revenue tracking',
-                    url: '/docs/web-analytics/revenue-tracking',
+                    name: 'Revenue analytics',
+                    url: '/docs/web-analytics/revenue-analytics',
                     icon: 'IconPiggyBank',
                     color: 'salmon',
                     badge: {
@@ -3309,6 +3334,12 @@ export const docsMenu = {
                     name: 'Alerts',
                     url: '/docs/error-tracking/alerts',
                     icon: 'IconBell',
+                    color: 'red',
+                },
+                {
+                    name: 'Cutting costs',
+                    url: '/docs/error-tracking/cutting-costs',
+                    icon: 'IconPiggyBank',
                     color: 'red',
                 },
                 {

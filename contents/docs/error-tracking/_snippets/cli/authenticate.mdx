@@ -1,0 +1,13 @@
+To authenticate the CLI you can call the `login` command and follow the instructions:
+
+```bash
+posthog-cli login
+```
+
+If you are using the CLI in a CI/CD environment such as GitHub Actions you can set environment variables to authenticate. [`POSTHOG_CLI_ENV_ID`](https://app.posthog.com/settings/environment#variables) and [`POSTHOG_CLI_TOKEN`](https://app.posthog.com/settings/user-api-keys#variables) should be the number in your PostHog homepage URL and a [personal API key](/docs/api#private-endpoint-authentication) respectively.
+
+Use --host option in subsequent commands to specify a different PostHog instance / or region. For EU users:
+
+```bash
+posthog-cli --host https://eu.posthog.com [CMD]
+```

@@ -41,7 +41,7 @@ If this is a new contract for an existing customer, you will need to add their e
 
 **Do not proceed to the next steps until payment is confirmed.** Any credits added to an account gets automatically applied to outstanding invoices. If you add credits before payment is completed, the credits will settle any existing debts, and customer will not be able to make a payment.
 
-> For customers using Bill.com for payment, when they submit the invoice to the Bill platform it strips out the Stripe virtual account details.  You'll need to ask them to follow the instructions in this [help article](https://help.bill.com/direct/s/article/360000009246) to set the correct bank details for us in the Bill.com platform.  In case they don't do this we have a default customer account on [Stripe](https://dashboard.stripe.com/customers/cus_Rqm805zKTuxdqU) which the money will go to.  If this happens, mark their invoice as paid manually and then generate a new one against our default customer account to use the funds.
+> For customers using Bill.com for payment, when they submit the invoice to the Bill platform it strips out the Stripe virtual account details.  You'll need to ask them to follow the instructions in this [help article](https://help.bill.com/direct/s/article/360000009246) to set the correct bank details for us in the Bill.com platform. The account details is provided in the invoice sent over. They'll need to make sure they use the original contact information and not your email if you're set as signer on the contract so we can process payments in the right account.  In case they don't do this, we have a default customer account on [Stripe](https://dashboard.stripe.com/customers/cus_Rqm805zKTuxdqU) which the money will go to.  If this happens, mark their invoice as paid manually and then generate a new one against our default customer account to use the funds.
 
 ###### Step 4: Apply credits
 - Make sure that the payment is fully processed to avoid any automatic deductions.
@@ -227,20 +227,6 @@ Stripe subscriptions can be modified relatively freely for example if moving to 
 
 Self-hosted billing is no longer supported except for legacy customers who were using the paid kubernetes deployment.
 
+## Billing for data pipelines
 
-### Event Filtering and Billing
-
-PostHog only charges for events that are successfully ingested and stored in ClickHouse. Events that are filtered out before reaching ClickHouse are not counted towards billing quotas.
-
-This applies e.g. to filtering mechanisms:
-
-**Data Pipelines Transformations**: Events that are filtered out or dropped by any transformation in your data pipeline do not count towards billing quotas.
-
-#### Example
-
-A customer implements the following filtering:
-
-- Blocks traffic from internal company IP ranges (10.0.0.0/8) using the Filter Out Plugin
-- Excludes test user events with email domains ending in @testhog.com
-
-In this scenario, only events that pass through all these filters and land in ClickHouse will count towards their billing quota. All filtered events are excluded from billing calculations, regardless of whether the customer is on a free or paid plan.
+For information about data pipeline pricing and billing, please visit our [add-ons page](https://posthog.com/addons#data-pipelines).

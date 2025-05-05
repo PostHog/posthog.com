@@ -1382,6 +1382,7 @@
         { "source": "/docs/cdp/taxonomy-standardizer", "destination": "/docs/cdp/transformations/taxonomy-plugin" },
         { "source": "/docs/cdp/downsampling", "destination": "/docs/cdp/transformations/downsampling-plugin" },
         { "source": "/docs/cdp/filter-out", "destination": "/docs/cdp/transformations/posthog-filter-out-plugin" },
+        { "source": "/docs/web-analytics/revenue-tracking", "destination": "/docs/web-analytics/revenue-analytics" },
         {
             "source": "/startups-alif",
             "destination": "/startups"
@@ -1405,6 +1406,14 @@
         {
             "source": "/startups-sse",
             "destination": "/startups"
+        },
+        {
+            "source": "/startups/apply",
+            "destination": "https://app.posthog.com/startups"
+        },
+        {
+            "source": "/yc-onboarding",
+            "destination": "https://app.posthog.com/startups/yc"
         }
     ]
 }

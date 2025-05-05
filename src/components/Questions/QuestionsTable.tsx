@@ -104,8 +104,11 @@ const Row = ({
     } = question
 
     const latestAuthor = replies?.data?.[replies.data.length - 1]?.attributes?.profile || profile
-    const numReplies = replies?.data?.length || 0
-
+    const numReplies =
+        replies?.data?.filter(
+            // Hide replies that have been marked unhelpful from Max AI from the count
+            (reply: any) => reply?.attributes?.profile?.data.id !== 28378 || reply?.attributes?.helpful !== false
+        )?.length || 0
     const { ref, inView } = useInView({
         threshold: 0,
         triggerOnce: true,
