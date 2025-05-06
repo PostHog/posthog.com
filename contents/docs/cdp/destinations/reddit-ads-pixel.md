@@ -14,19 +14,21 @@ You should be aware that this destination relies on creating third-party cookies
 
 ## Installation
 
-1. In PostHog, click the [Data pipeline](https://us.posthog.com/pipeline/overview) tab in the left sidebar.
+1. Make sure that your `posthog.init` configuration contains `opt_in_site_apps: true`.
 
-2. Click the **Destinations** tab.
+2. In PostHog, click the [Data pipeline](https://us.posthog.com/pipeline/overview) tab in the left sidebar.
 
-3. Search for **Reddit Pixel** and select the destination.
+3. Click the **Destinations** tab.
 
-4. Find your Pixel ID in the Reddit [Events manager](https://ads.reddit.com/events-manager). Make sure that the intended business is selected.
+4. Search for **Reddit Pixel** and select the destination.
 
-5. Back in PostHog, add the Pixel ID to the destination configuration.
+5. Find your Pixel ID in the Reddit [Events manager](https://ads.reddit.com/events-manager). Make sure that the intended business is selected.
 
-6. Set up your event and property filters to remove unnecessary events. You only want to send events that are conversions. Filter out unrelated events or ones missing required data.
+6. Back in PostHog, add the Pixel ID to the destination configuration.
 
-7. Press **Create & enable**, test your destination, and then watch your conversions get sent to Snapchat Ads.
+7. Set up your event and property filters to remove unnecessary events. You only want to send events that are conversions. Filter out unrelated events or ones missing required data.
+
+8. Press **Create & enable**, test your destination, and then watch your conversions get sent to Snapchat Ads.
 
 <HideOnCDPIndex>
 
