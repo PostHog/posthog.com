@@ -70,7 +70,8 @@ export default function AskMax({
                                     Questions? <span className="text-red dark:text-yellow">Ask Max AI.</span>
                                 </h3>
                                 <p className="text-[15px] mb-0 opacity-75 text-balance">
-                                    It's easier than reading through <strong>{totalDocsCount} docs articles</strong>.
+                                    It's easier than reading through{' '}
+                                    <strong>{totalDocsCount} pages of documentation</strong>
                                 </p>
                             </div>
                         </div>

@@ -18,7 +18,7 @@ You'll also need access to the relevant Snapchat Business account.
 
 2. Click the **Destinations** tab.
 
-3. Search for **Snapchat Ads Conversions** and select the destination.
+3. Search for **Snapchat Ads Conversions** and click **+ Create**.
 
 4. Connect your Snapchat Business account at the configuration step.
 

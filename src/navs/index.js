@@ -668,6 +668,40 @@ export const handbookSidebar = [
         ],
     },
     {
+        name: 'CS & Onboarding',
+        url: '',
+        children: [
+            {
+                name: 'Customer success team',
+                url: '/handbook/cs-and-onboarding/customer-success',
+            },
+            {
+                name: 'Onboarding team',
+                url: '/handbook/cs-and-onboarding/onboarding-team',
+            },
+            {
+                name: 'New team member onboarding',
+                url: '/handbook/cs-and-onboarding/new-hire-onboarding',
+            },
+            {
+                name: 'Health tracking',
+                url: '/handbook/cs-and-onboarding/health-tracking',
+            },
+            {
+                name: 'Feature requests',
+                url: '/handbook/cs-and-onboarding/feature-requests',
+            },
+            {
+                name: 'Customer health checks',
+                url: '/handbook/cs-and-onboarding/health-checks',
+            },
+            {
+                name: 'Saying hi to your customers',
+                url: '/handbook/cs-and-onboarding/saying-hi-to-your-customers',
+            },
+        ],
+    },
+    {
         name: 'Design',
         url: '',
         children: [
@@ -1139,10 +1173,6 @@ export const handbookSidebar = [
                 url: '/handbook/growth/sales/product-led-sales',
             },
             {
-                name: 'Onboarding team',
-                url: '/handbook/growth/sales/onboarding-team',
-            },
-            {
                 name: 'Expansion & Retention',
                 url: '/handbook/growth/sales/expansion-and-retention',
             },
@@ -1153,6 +1183,10 @@ export const handbookSidebar = [
             {
                 name: 'New team member onboarding',
                 url: '/handbook/growth/sales/new-hire-onboarding',
+            },
+            {
+                name: 'Customer FAQs',
+                url: '/handbook/growth/sales/customer-faqs',
             },
             {
                 name: 'SalesOps',
@@ -1198,27 +1232,9 @@ export const handbookSidebar = [
                         name: 'Historical imports',
                         url: '/handbook/growth/sales/historical-import',
                     },
-                ],
-            },
-            {
-                name: 'Customer Success',
-                url: '',
-                children: [
                     {
-                        name: 'Overview',
-                        url: '/handbook/growth/sales/customer-success',
-                    },
-                    {
-                        name: 'Health tracking',
-                        url: '/handbook/growth/sales/health-tracking',
-                    },
-                    {
-                        name: 'Feature requests',
-                        url: '/handbook/growth/sales/feature-requests',
-                    },
-                    {
-                        name: 'Customer health checks',
-                        url: '/handbook/growth/sales/health-checks',
+                        name: 'Shared Slack channels',
+                        url: '/handbook/growth/sales/slack-channels',
                     },
                 ],
             },
@@ -1568,6 +1584,10 @@ export const companyMenu = {
                 {
                     name: 'Support',
                     url: '/teams/support',
+                },
+                {
+                    name: 'Video',
+                    url: '/teams/video',
                 },
                 {
                     name: 'Website & Vibes',
@@ -2458,6 +2478,10 @@ export const docsMenu = {
                             url: '/docs/advanced/proxy/remix',
                         },
                         {
+                            name: 'SvelteKit',
+                            url: '/docs/advanced/proxy/sveltekit',
+                        },
+                        {
                             name: 'Vercel',
                             url: '/docs/advanced/proxy/vercel',
                         },
@@ -3309,6 +3333,12 @@ export const docsMenu = {
                     color: 'red',
                 },
                 {
+                    name: 'Cutting costs',
+                    url: '/docs/error-tracking/cutting-costs',
+                    icon: 'IconPiggyBank',
+                    color: 'red',
+                },
+                {
                     name: 'Troubleshooting and FAQs',
                     url: '/docs/error-tracking/common-questions',
                     icon: 'IconQuestion',
@@ -3376,9 +3406,9 @@ export const docsMenu = {
                     name: 'Features',
                 },
                 {
-                    name: 'Webhook',
-                    url: '/docs/surveys/webhook',
-                    icon: 'IconLaptop',
+                    name: 'Destinations',
+                    url: '/docs/surveys/destinations',
+                    icon: 'IconLive',
                     color: 'orange',
                 },
                 {
