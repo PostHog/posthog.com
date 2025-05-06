@@ -36,25 +36,23 @@ Build an **envoy**: perfectly conventional software *you control* that developer
 
 To coin a term, an **envoy** is code that meets an AI agent on your behalf.
 
-See, **these agents can run terminal commands**, so any CLI-based program can adopt this pattern. Envoys provide a side entrance into any agent session. A CLI app can print things to the terminal, adding to the context the agent has available. This is in addition, of course, to all the modifications such a tool can make to the project's code and configuration.
+See, **these agents can run terminal commands**, so any CLI-based program can adopt this pattern. Envoys provide a side entrance into any agent session. A CLI app can print things to the terminal, adding to the context the agent has available. This is in addition, of course, to all the modifications such a tool can make to the project's code and configuration itself.
 
 With this deterministic surface introduced to the agent workflow, you can reliably and predictably:
 
 - Enforce progression conditions, not moving to another step until requirements are satisfied  
 - Enforce correct versioning
-- Use API interactions to populate account secrets and other details, while enforcing good version control hygiene  
+- Use API interactions to populate secrets and other details, while enforcing good version control hygiene to prevent checking in those secrets
 - Introduce specific fragments of code verbatim
 - Inject up-to-date documentation and agent rules into the project to course-correct future agent sessions  
 - Configure MCPs and other project-specific settings
-- Do your own LLM-based transformations on code, using prompts, context and model versions that you carefully select and design for reliable outcomes
+- Deliver LLM-based transformations on code, using prompts, context and model versions that you carefully select and design for reliable outcomes
 - Enjoy same-day updates to agent workflows, just like the rest of your software
-- Provide up-to-date information to the agent specific to a user's project
-
-![Envoy diagram](https://res.cloudinary.com/dmukukwp6/image/upload/envoy_diagram_9dd36b6c32.png)
+- Provide up-to-date information to the agent specific to a user's project or account
 
 Think of it like a sheepdog that keeps the agent session within a territory that is productive rather than stupid, adhering to best practices **you** as a developer can describe in code.
 
-Naturally, we're building our own envoy already. It's a beta, but it's already very cool and the feedback is encouraging.
+Naturally, we're building our own envoy already. It's a beta, but it's already very helpful and the feedback is encouraging.
 
 ## Example code: the PostHog wizard
 
