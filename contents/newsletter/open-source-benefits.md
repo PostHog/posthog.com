@@ -1,5 +1,5 @@
 ---
-title: The hidden benefits of being an open source startup
+title: Why open source startups win
 date: 2025-05-05
 author:
   - ian-vanagas
