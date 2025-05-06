@@ -4,6 +4,7 @@ import Highlight, { defaultProps, Language } from 'prism-react-renderer'
 import { generateRandomHtmlId, getCookie } from '../../lib/utils'
 import { Listbox, Tab } from '@headlessui/react'
 import { SelectorIcon } from '@heroicons/react/outline'
+import ScrollArea from 'components/RadixUI/ScrollArea'
 
 import { darkTheme, lightTheme } from './theme'
 import languageMap from './languages'
@@ -199,9 +200,9 @@ export const CodeBlock = ({
     }
 
     return (
-        <div className="code-block relative mt-2 mb-4 border border-light dark:border-dark rounded">
+        <div className="code-block relative mt-2 mb-4 border border-primary rounded">
             {showLabel && (
-                <div className="bg-accent dark:bg-accent-dark text-sm flex items-center w-full rounded-t">
+                <div className="bg-accent text-sm flex items-center w-full rounded-t">
                     {selector === 'tabs' && languages.length > 1 ? (
                         <Tab.Group onChange={(index) => onChange?.(languages[index])}>
                             <Tab.List className="flex items-center gap-[1px] flex-wrap">
@@ -328,79 +329,82 @@ export const CodeBlock = ({
             >
                 {({ className, style, tokens, getLineProps, getTokenProps }) => (
                     <pre
-                        className={`w-full m-0 p-0 rounded-t-none rounded-b bg-accent dark:bg-accent-dark border-light dark:border-dark ${
+                        data-scheme="secondary"
+                        className={`w-full m-0 p-0 rounded-t-none rounded-b bg-primary border-primary ${
                             showLabel ? 'border-t' : ''
                         }`}
                     >
-                        <div className="flex whitespace-pre-wrap relative" id={codeBlockId}>
-                            {showLineNumbers && (
-                                <pre className="m-0 py-4 pr-3 pl-5 inline-block font-code font-medium text-sm bg-accent dark:bg-accent-dark">
-                                    <span
-                                        className="select-none flex flex-col dark:text-white/60 text-black/60 shrink-0"
-                                        aria-hidden="true"
-                                    >
-                                        {tokens.map((_, i) => {
-                                            return (
-                                                <span className="inline-block text-right align-middle" key={i}>
-                                                    <span>{i + lineNumberStart}</span>
-                                                </span>
-                                            )
-                                        })}
-                                    </span>
-                                </pre>
-                            )}
+                        <ScrollArea>
+                            <div className="flex whitespace-pre-wrap relative" id={codeBlockId}>
+                                {showLineNumbers && (
+                                    <pre className="m-0 py-4 pr-3 pl-5 inline-block font-code font-medium text-sm bg-accent dark:bg-accent-dark">
+                                        <span
+                                            className="select-none flex flex-col dark:text-white/60 text-black/60 shrink-0"
+                                            aria-hidden="true"
+                                        >
+                                            {tokens.map((_, i) => {
+                                                return (
+                                                    <span className="inline-block text-right align-middle" key={i}>
+                                                        <span>{i + lineNumberStart}</span>
+                                                    </span>
+                                                )
+                                            })}
+                                        </span>
+                                    </pre>
+                                )}
 
-                            <code
-                                className={`${className} block rounded-none !m-0 p-4 shrink-0 font-code font-medium text-sm article-content-ignore`}
-                            >
-                                {tokens.map((line, i) => {
-                                    const { className, ...props } = getLineProps({ line, key: i })
-                                    const tooltipContent =
-                                        tooltips?.find((tooltip) => tooltip.lineNumber === i + lineNumberStart)
-                                            ?.content ||
-                                        line
-                                            .find((token) => token.content.startsWith(tooltipKey))
-                                            ?.content.replace(tooltipKey, '')
-                                    const firstContentIndex = line.findIndex((token) => !!token.content.trim())
-                                    return (
-                                        <div key={i} className={`${className} relative`} {...props}>
-                                            {line
-                                                .filter((token) => !token.content.startsWith(tooltipKey))
-                                                .map((token, key) => {
-                                                    const { className, children, ...props } = getTokenProps({
-                                                        token,
-                                                        key,
-                                                    })
-                                                    return (
-                                                        <span className="relative" key={key}>
-                                                            {firstContentIndex === key && tooltipContent && (
-                                                                <Tooltip
-                                                                    content={() => (
-                                                                        <div className="text-center max-w-[200px]">
-                                                                            {tooltipContent.trim()}
-                                                                        </div>
-                                                                    )}
+                                <code
+                                    className={`${className} block rounded-none !m-0 p-4 shrink-0 font-code font-medium text-sm article-content-ignore`}
+                                >
+                                    {tokens.map((line, i) => {
+                                        const { className, ...props } = getLineProps({ line, key: i })
+                                        const tooltipContent =
+                                            tooltips?.find((tooltip) => tooltip.lineNumber === i + lineNumberStart)
+                                                ?.content ||
+                                            line
+                                                .find((token) => token.content.startsWith(tooltipKey))
+                                                ?.content.replace(tooltipKey, '')
+                                        const firstContentIndex = line.findIndex((token) => !!token.content.trim())
+                                        return (
+                                            <div key={i} className={`${className} relative`} {...props}>
+                                                {line
+                                                    .filter((token) => !token.content.startsWith(tooltipKey))
+                                                    .map((token, key) => {
+                                                        const { className, children, ...props } = getTokenProps({
+                                                            token,
+                                                            key,
+                                                        })
+                                                        return (
+                                                            <span className="relative" key={key}>
+                                                                {firstContentIndex === key && tooltipContent && (
+                                                                    <Tooltip
+                                                                        content={() => (
+                                                                            <div className="text-center max-w-[200px]">
+                                                                                {tooltipContent.trim()}
+                                                                            </div>
+                                                                        )}
+                                                                    >
+                                                                        <span className="absolute -left-1 -translate-x-full top-1/2 -translate-y-1/2 flex h-3 w-3">
+                                                                            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-blue/80 opacity-75"></span>
+                                                                            <span className="relative inline-flex rounded-full h-3 w-3 bg-blue"></span>
+                                                                        </span>
+                                                                    </Tooltip>
+                                                                )}
+                                                                <span
+                                                                    className={`${className} text-shadow-none`}
+                                                                    {...props}
                                                                 >
-                                                                    <span className="absolute -left-1 -translate-x-full top-1/2 -translate-y-1/2 flex h-3 w-3">
-                                                                        <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-blue/80 opacity-75"></span>
-                                                                        <span className="relative inline-flex rounded-full h-3 w-3 bg-blue"></span>
-                                                                    </span>
-                                                                </Tooltip>
-                                                            )}
-                                                            <span
-                                                                className={`${className} text-shadow-none`}
-                                                                {...props}
-                                                            >
-                                                                {children}
+                                                                    {children}
+                                                                </span>
                                                             </span>
-                                                        </span>
-                                                    )
-                                                })}
-                                        </div>
-                                    )
-                                })}
-                            </code>
-                        </div>
+                                                        )
+                                                    })}
+                                            </div>
+                                        )
+                                    })}
+                                </code>
+                            </div>
+                        </ScrollArea>
                     </pre>
                 )}
             </Highlight>
