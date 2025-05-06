@@ -5,47 +5,40 @@ showTitle: true
 ---
 
 **Product teams** are responsible for ensuring their docs are up-to-date. This means:
-  - Documenting new features when they're launched
-  - Correcting mistakes reported by users
-  - Clarifying documentation where needed based on support tickets
-  - Ensuring public betas have documentation which is linked to from feature preview menu
+
+- Documenting new features when they're launched
+- Correcting mistakes reported by users
+- Clarifying documentation where needed based on support tickets
+- Ensuring public betas have documentation which is linked to from feature preview menu
 
 **Content & Docs** is responsible for improving the docs. This means:
-  - Reviewing and improving draft documentation created by product teams
-  - Identifying and improving low quality documentation
-  - Ensuring screenshots and other visual elements are up-to-date
-  - Shipping supplementary docs and tutorials based on feedback and emerging use cases
+
+- Reviewing and improving draft documentation created by product teams
+- Identifying and improving low quality documentation
+- Ensuring screenshots and other visual elements are up-to-date
+- Shipping supplementary docs and tutorials based on feedback and emerging use cases
 
 **Website & Vibes** is responsible for design, organization, and discovery. This means:
-  - The design and content of index pages
-  - The overall layout of docs and how they're organized
-  - In-page elements and components – e.g. light and dark mode screenshots
-  - Website search and other elements that help users find the answers they need
+
+- The design and content of index pages
+- The overall layout of docs and how they're organized
+- In-page elements and components – e.g. light and dark mode screenshots
+- Website search and other elements that help users find the answers they need
 
 ## Ownership in Content & Docs team
 
-We aim to have a named individual for most areas of the docs. Docs owners are responsible for:
+We aim to have a named individual for most areas of the docs. If one doesn't exist, make [a PR to add one](https://github.com/PostHog/posthog.com/blob/master/contents/handbook/content-and-docs/docs.md).
 
-- Reviewing and polishing docs created by product teams 
-- Ongoing maintenance of those docs
-- Improving docs based on user feedback / suggestions from the support team
-- Fixing 404s and reviewing to community docs PRs
-- Managing questions on docs pages (e.g. archiving stale questions, ensuring relevant ones are answered, marking comments as solutions)
+#### Product OS
 
-This doesn't preclude anyone from submitting new or improved docs for any product – remember: PRs > issues
+| &nbsp                                   | **Individual owner** |
+|-----------------------------------------|----------------------|
+| **Integration (SDKs, frameworks, API)** | Ian                  |
+| **Winning with PostHog**                | Danilo               |
+| **PostHog explained (data, tools)**     | Danilo               |
+| **Resources (migrate, reverse proxy)**  | Ian                  |
 
-### Product OS
-
-| &nbsp                           | **Individual owner** |
-|---------------------------------|----------------------|
-| **SDKs and frameworks**         | Ian                  |
-| **Reverse proxy**               | Ian                  |
-| **Migrate**                     | Ian                  |
-| **Data**                        | Danilo               |
-| **SQL**                         | Ian                  |
-| **API**                         | Ian                  |
-
-### Products
+#### Products
 
 | &nbsp                           | **Individual owner** |
 |---------------------------------|----------------------|
@@ -54,26 +47,53 @@ This doesn't preclude anyone from submitting new or improved docs for any produc
 | **Session replay**              | Ian                  |
 | **Feature flags**               | Ian                  |
 | **Experiments**                 | Ian                  |
+| **Error tracking**              | Ian                  |
 | **Surveys**                     | Andy                 |
+| **LLM observability**           | Ian                  |
 | **Data pipelines**              | Danilo               |
 | **Data warehouse**              | Danilo               |
 
-### Docs gardener
+New products should be given an owner when we are planning the product launch.
 
-Each week the Content & Docs crew picks someone to review the state of feedback across these channels:
+### What is the responsibility of the docs owner?
+
+For their assigned areas, docs owners are responsible for:
+
+1. Using and being an expert on the parts of the product they own.
+2. Reviewing and polishing docs created by product teams (or other contributors)
+3. Working on issues assigned to them by the [docs gardener](#docs-gardener)
+4. Planning and executing large docs overhauls and updates
+5. Reviewing and answering questions on their assigned docs pages
+
+This doesn't preclude anyone from submitting new or improved docs for any product – remember: PRs > issues.
+
+Also, because of how wide PostHog is, this can be an overwhelming amount of work. Here's some recommendations on how to prioritize:
+
+1. Make time to use the product, scroll the product team Slack, and read the docs. Reconcile glaring differences between them.
+2. Check the most popular *and* unhelpful docs pages you are responsible for. Prioritize these. 
+3. We care more about making sure everything has some coverage than a subset of things are 100% correct.
+
+## Docs gardener
+
+The docs gardener is a critical role for ensuring our docs are up to date and useful. We assign someone from the Content & Docs team to do this each week. Their responsibility is to:
+
+1. Review the feedback across the channels below.
+2. Create issues for docs updates with the context on why it's important and the source of the feedback (unless it is a very simple fix).
+3. Assign the issue to the [docs owner](#ownership-in-content--docs-team).
+
+It is then up to the assignee to prioritize and complete these issues.
+
+Docs gardening should occupy no more than 2-4 hours of effort each week.
+
+### Feedback channels
 
 - #docs-feedback
 - #content-docs-ideas
 - #ask-max for questions missing content
 - Zendesk tickets [where **root cause** is `documentation unclear`](https://posthoghelp.zendesk.com/agent/filters/33465387985947)
 - [Inkeep chat sessions](https://portal.inkeep.com/posthog/projects/clz7fyu8i001bomqpr7t8lds8/chat/chat-sessions?filters={%22isOnTopic%22:%22yes%22,%22isClear%22:%22yes%22,%22firstMessageTime%22:%2230d%22,%22isDocumented%22:%22no%22}) where there is a documentation gap
-
-Where appropriate and actionable, the gardener should either:
-
-1. Submit a new PR to solve easy to fix problems.
-2. Create new issues to capture feedback that needs actioning.
-
-We'll triage any new issues during our weekly sprint meeting. This should occupy no more than 2-4 hours of effort each week.
+- [Most unhelpful docs](https://us.posthog.com/project/2/insights/jNpQrgjg)
+- [Most popular docs](https://us.posthog.com/project/2/insights/nfKr7JOs)
 
 ## FAQ
 
