@@ -262,7 +262,7 @@ export const ProductMax = () => {
 
                 <section id="features" className="-mt-28 pt-36 mt-18">
                     <h3 className="text-2xl md:text-2xl text-center">
-                        Not got data in PostHog yet? Here's how Max can help you across multiple products.
+                        No data in PostHog yet? Here's how Max can help you across multiple products.
                     </h3>
                 </section>
 
