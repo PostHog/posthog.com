@@ -6,10 +6,15 @@ interface ScrollAreaProps {
     className?: string
     dataScheme?: string
     fadeOverflow?: boolean
+    style?: React.CSSProperties
 }
 
-const ScrollArea = ({ children, className = '', dataScheme, fadeOverflow = false }: ScrollAreaProps) => (
-    <ScrollAreaPrimitive.Root data-scheme={dataScheme} className={`relative overflow-hidden h-full ${className}`}>
+const ScrollArea = ({ children, className = '', dataScheme, fadeOverflow = false, style }: ScrollAreaProps) => (
+    <ScrollAreaPrimitive.Root
+        data-scheme={dataScheme}
+        className={`relative overflow-hidden h-full ${className}`}
+        style={style}
+    >
         <ScrollAreaPrimitive.Viewport className="size-full">{children}</ScrollAreaPrimitive.Viewport>
         <ScrollAreaPrimitive.Scrollbar
             className="flex touch-none select-none p-0.5 transition-colors duration-[160ms] ease-out hover:bg-accent-2 dark:hover:bg-accent-dark data-[orientation=horizontal]:h-2.5 data-[orientation=vertical]:w-2.5 data-[orientation=horizontal]:flex-col"

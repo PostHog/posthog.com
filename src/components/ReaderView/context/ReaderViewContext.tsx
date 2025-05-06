@@ -12,10 +12,12 @@ interface ReaderViewContextType {
     internalMenu: any[]
     activeInternalMenu: any
     lineHeightMultiplier: number
+    backgroundImage: string | null
     toggleNav: () => void
     toggleToc: () => void
     handleLineHeightChange: (value: number) => void
     setActiveInternalMenu: (menu: any) => void
+    setBackgroundImage: (image: string | null) => void
 }
 
 const recursiveSearch = (array: any[], value: string) => {
@@ -67,6 +69,13 @@ export function ReaderViewProvider({ children }: { children: React.ReactNode }) 
     const [lineHeightMultiplier, setLineHeightMultiplier] = useState<number>(1)
     const [lineHeightP, setLineHeightP] = useState<number | null>(null)
     const [lineHeightLi, setLineHeightLi] = useState<number | null>(null)
+    const [backgroundImage, setBackgroundImage] = useState<string | null>(() => {
+        if (typeof window !== 'undefined') {
+            const savedBackground = localStorage.getItem('background-image')
+            return savedBackground
+        }
+        return null
+    })
 
     const toggleNav = useCallback(() => {
         setIsNavVisible((prev) => !prev)
@@ -131,6 +140,17 @@ export function ReaderViewProvider({ children }: { children: React.ReactNode }) 
         setMenu?.(internalMenu)
     }, [activeInternalMenu])
 
+    const handleBackgroundImageChange = useCallback((image: string | null) => {
+        setBackgroundImage(image)
+        if (typeof window !== 'undefined') {
+            if (image) {
+                localStorage.setItem('background-image', image)
+            } else {
+                localStorage.removeItem('background-image')
+            }
+        }
+    }, [])
+
     const value = {
         isNavVisible,
         isTocVisible,
@@ -139,10 +159,12 @@ export function ReaderViewProvider({ children }: { children: React.ReactNode }) 
         internalMenu,
         activeInternalMenu,
         lineHeightMultiplier,
+        backgroundImage,
         toggleNav,
         toggleToc,
         handleLineHeightChange,
         setActiveInternalMenu,
+        setBackgroundImage: handleBackgroundImageChange,
     }
 
     return <ReaderViewContext.Provider value={value}>{children}</ReaderViewContext.Provider>

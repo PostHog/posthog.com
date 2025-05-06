@@ -43,6 +43,15 @@ interface ReaderViewProps {
     children?: React.ReactNode
 }
 
+interface BackgroundImageOption {
+    label: string
+    value: string
+    backgroundImage: string
+    backgroundPosition?: string
+    backgroundRepeat?: 'repeat' | 'repeat-x' | 'repeat-y' | 'no-repeat'
+    backgroundSize?: string
+}
+
 const contentWidthOptions: ToggleOption[] = [
     {
         label: 'Fixed',
@@ -57,22 +66,39 @@ const contentWidthOptions: ToggleOption[] = [
     },
 ]
 
-const backgroundImageOptions: ToggleOption[] = [
+const backgroundImageOptions: (BackgroundImageOption & ToggleOption)[] = [
     {
         label: 'None',
         value: 'none',
-        // icon: <IconLaptop className="size-5" />,
+        backgroundImage: 'none',
         default: true,
     },
     {
         label: '2',
-        value: '2',
-        // icon: <IconDay className="size-5" />,
+        value: 'james',
+        icon: (
+            <img
+                src="https://res.cloudinary.com/dmukukwp6/image/upload/v1738943658/James_H_5cb4c53d9a.png"
+                className="size-5"
+            />
+        ),
+        backgroundImage: 'https://res.cloudinary.com/dmukukwp6/image/upload/v1738943658/James_H_5cb4c53d9a.png',
+        backgroundRepeat: 'repeat',
+        backgroundSize: '10%',
     },
     {
         label: '3',
-        value: '3',
-        // icon: <IconNight className="size-5" />,
+        value: 'godzilla',
+        icon: (
+            <img
+                src="https://res.cloudinary.com/dmukukwp6/image/upload/Frame_10127_b7362fd913.png"
+                className="size-5"
+            />
+        ),
+        backgroundImage: 'https://res.cloudinary.com/dmukukwp6/image/upload/Frame_10127_b7362fd913.png',
+        backgroundPosition: 'bottom right',
+        backgroundRepeat: 'no-repeat',
+        backgroundSize: 'cover',
     },
 ]
 
@@ -96,7 +122,10 @@ const LineHeightSlider = ({ lineHeightMultiplier, onValueChange }) => {
 }
 
 const AppOptionsButton = ({ lineHeightMultiplier, handleLineHeightChange }) => {
-    const { fullWidthContent, setFullWidthContent } = useReaderView()
+    const { fullWidthContent, setFullWidthContent, setBackgroundImage, backgroundImage } = useReaderView()
+
+    const selectedOption =
+        backgroundImageOptions.find((option) => option.value === backgroundImage) || backgroundImageOptions[0]
 
     const handleContentWidthChange = (value: string) => {
         const isFullWidth = value === 'full'
@@ -138,9 +167,9 @@ const AppOptionsButton = ({ lineHeightMultiplier, handleLineHeightChange }) => {
                         <ToggleGroup
                             title="Background image"
                             options={backgroundImageOptions}
-                            value="none"
+                            value={selectedOption.value}
                             onValueChange={(value) => {
-                                console.log('Background image changed:', value)
+                                setBackgroundImage(value === 'none' ? null : value)
                             }}
                         />
                     </div>
@@ -206,14 +235,20 @@ function ReaderViewContent({ body, title, tableOfContents, mdxComponents, commit
         fullWidthContent,
         parent,
         activeInternalMenu,
+        backgroundImage,
         toggleNav,
         toggleToc,
         handleLineHeightChange,
         setActiveInternalMenu,
         setFullWidthContent,
+        setBackgroundImage,
     } = useReaderView()
 
     const showSidebar = tableOfContents && tableOfContents?.length > 0
+
+    const selectedBackgroundOption = backgroundImage
+        ? backgroundImageOptions.find((option) => option.value === backgroundImage)
+        : null
 
     const handleContentWidthChange = (value: string) => {
         const isFullWidth = value === 'full'
@@ -299,29 +334,48 @@ function ReaderViewContent({ body, title, tableOfContents, mdxComponents, commit
                         </motion.div>
                     )}
                 </AnimatePresence>
-                <ScrollArea dataScheme="primary" className="bg-primary border border-primary flex-grow rounded">
-                    <div
-                        ref={contentRef}
-                        className={`p-4 mx-auto transition-all ${
-                            fullWidthContent || body?.type !== 'mdx' ? 'max-w-full' : 'max-w-xl'
-                        }`}
-                    >
-                        {title && <h2>{title}</h2>}
+                <ScrollArea
+                    dataScheme="primary"
+                    className={`bg-primary border border-primary flex-grow rounded ${
+                        selectedBackgroundOption && selectedBackgroundOption.value !== 'none'
+                            ? 'before:absolute before:inset-0 before:bg-white/75'
+                            : ''
+                    }`}
+                    style={
+                        selectedBackgroundOption && selectedBackgroundOption.value !== 'none'
+                            ? {
+                                  backgroundImage: `url(${selectedBackgroundOption.backgroundImage})`,
+                                  backgroundRepeat: selectedBackgroundOption.backgroundRepeat || 'repeat',
+                                  backgroundSize: selectedBackgroundOption.backgroundSize || 'auto',
+                                  backgroundPosition: selectedBackgroundOption.backgroundPosition || 'center',
+                              }
+                            : undefined
+                    }
+                >
+                    <div className="relative">
                         <div
-                            data-scheme="secondary"
-                            className="@4xl:hidden p-4 mb-4 bg-primary rounded border border-primary"
+                            ref={contentRef}
+                            className={`relative p-4 mx-auto transition-all ${
+                                fullWidthContent || body?.type !== 'mdx' ? 'max-w-full' : 'max-w-xl'
+                            }`}
                         >
-                            inline table of contents
-                        </div>
-                        {body.type === 'mdx' ? (
-                            <div className={'article-content'}>
-                                <MDXProvider components={mdxComponents}>
-                                    <MDXRenderer>{body.content}</MDXRenderer>
-                                </MDXProvider>
+                            {title && <h2>{title}</h2>}
+                            <div
+                                data-scheme="secondary"
+                                className="@4xl:hidden p-4 mb-4 bg-primary rounded border border-primary"
+                            >
+                                inline table of contents
                             </div>
-                        ) : (
-                            children
-                        )}
+                            {body.type === 'mdx' ? (
+                                <div className={'article-content'}>
+                                    <MDXProvider components={mdxComponents}>
+                                        <MDXRenderer>{body.content}</MDXRenderer>
+                                    </MDXProvider>
+                                </div>
+                            ) : (
+                                children
+                            )}
+                        </div>
                     </div>
                 </ScrollArea>
                 <AnimatePresence>
