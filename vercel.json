@@ -1416,8 +1416,8 @@
             "destination": "https://app.posthog.com/startups/yc"
         },
         {
-            "source": "/max",
-            "destination": "/max-ai"
+            "source": "/max-ai",
+            "destination": "/max"
         }
     ]
 }

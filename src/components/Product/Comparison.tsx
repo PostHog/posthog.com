@@ -64,7 +64,7 @@ const companies = {
     ChatGPT: {
         comparisonURL: '',
     },
-    Anthropic: {
+    Claude: {
         comparisonURL: '',
     },
     PostHog: {

@@ -1,11 +1,11 @@
 import React from 'react'
-import ProductMaxAI from 'components/Product/MaxAI'
+import ProductMax from 'components/Product/Max'
 import Layout from 'components/Layout'
 
 export default function MaxAI(): JSX.Element {
     return (
         <Layout>
-            <ProductMaxAI />
+            <ProductMax />
         </Layout>
     )
 }

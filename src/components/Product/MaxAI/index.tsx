@@ -157,7 +157,7 @@ const comparison = [
         feature: 'Understands natural language',
         companies: {
             ChatGPT: true,
-            Anthropic: true,
+            Claude: true,
             PostHog: true,
         },
     },
@@ -165,15 +165,15 @@ const comparison = [
         feature: 'Writes SQL queries',
         companies: {
             ChatGPT: true,
-            Anthropic: true,
+            Claude: true,
             PostHog: true,
         },
     },
     {
         feature: 'Builds insights',
         companies: {
-            ChatGPT: true,
-            Anthropic: true,
+            ChatGPT: false,
+            Claude: false,
             PostHog: true,
         },
     },
@@ -181,7 +181,7 @@ const comparison = [
         feature: 'Understands your data',
         companies: {
             ChatGPT: false,
-            Anthropic: false,
+            Claude: false,
             PostHog: true,
         },
     },
@@ -189,7 +189,7 @@ const comparison = [
         feature: 'Writes haikus',
         companies: {
             ChatGPT: true,
-            Anthropic: true,
+            Claude: true,
             PostHog: true,
         },
     },
@@ -197,7 +197,7 @@ const comparison = [
         feature: 'Is a pretend hedgehog',
         companies: {
             ChatGPT: false,
-            Anthropic: false,
+            Claude: false,
             PostHog: true,
         },
     },
@@ -231,7 +231,7 @@ const PairsWithArray = [
     },
 ]
 
-export const ProductMaxAI = () => {
+export const ProductMax = () => {
     const { fullWidthContent } = useLayoutData()
     const [activeProfile, setActiveProfile] = useState<ProfileData | null>(null)
 
@@ -333,8 +333,8 @@ export const ProductMaxAI = () => {
                             </h2>
                             <p>
                                 Max can access any data which is already stored in PostHog, such as events, persons,
-                                sessions and groups, as well as various schema. You can also give him additional
-                                information directly.
+                                sessions and groups, as well as various schema and data warehouse tables. You can also
+                                give him additional information directly, which he can remember if asked.
                             </p>
                             <p>
                                 When you ask a question, relevant data gets shared with{' '}
@@ -371,8 +371,12 @@ export const ProductMaxAI = () => {
                             }
                         >
                             <ul>
-                                <li>You like alt-tabbing out to other tools, like ChatGPT or Anthropic</li>
+                                <li>You like alt-tabbing out to other tools, like ChatGPT or Claude</li>
                                 <li>You prefer only to share copy-pasted info with an AI, piece by piece</li>
+                                <li>
+                                    You'd like to talk with your assistant out loud (Max doesn't have voice mode yet)
+                                </li>
+                                <li>You want to remake a pic in Studio Ghibli's style (ChatGPT is still best)</li>
                             </ul>
                         </VsCompetitor>
                         <VsPostHog>
@@ -447,4 +451,4 @@ export const ProductMaxAI = () => {
     )
 }
 
-export default ProductMaxAI
+export default ProductMax
