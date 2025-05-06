@@ -20,6 +20,7 @@ interface ChatContextType {
     context: { type: 'page'; value: { path: string; label: string } }[]
     setContext: (context: { type: 'page'; value: { path: string; label: string } }[]) => void
     addContext: (newContext: { type: 'page'; value: { path: string; label: string } }) => void
+    firstResponse: string | null
 }
 
 const ChatContext = createContext<ChatContextType | undefined>(undefined)
@@ -43,9 +44,13 @@ export function ChatProvider({
         initialContext || []
     )
     const [EmbeddedChat, setEmbeddedChat] = useState<any>()
+    const [firstResponse, setFirstResponse] = useState<string | null>(null)
 
     const logEventCallback = useCallback(
         (event: any) => {
+            if (event?.eventName === 'user_message_submitted' && !firstResponse) {
+                setFirstResponse(event.properties.conversation.messages[0].content)
+            }
             if (event?.eventName === 'assistant_message_received') {
                 if (!hasFirstResponse) {
                     setHasFirstResponse(true)
@@ -207,6 +212,7 @@ export function ChatProvider({
                 context,
                 setContext,
                 addContext,
+                firstResponse,
             }}
         >
             <Chat />

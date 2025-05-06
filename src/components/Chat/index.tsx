@@ -6,6 +6,8 @@ import { IconDocument, IconRewind, IconX } from '@posthog/icons'
 import usePostHog from 'hooks/usePostHog'
 import { groupBy } from 'lodash'
 import dayjs from 'dayjs'
+import { useApp } from '../../context/App'
+import { useWindow } from '../../context/Window'
 
 const ConversationHistoryButton = ({ onClick }: { onClick: () => void }) => {
     return (
@@ -34,7 +36,9 @@ const Context = () => {
 
 export default function Chat(): JSX.Element | null {
     const posthog = usePostHog()
-    const { closeChat, conversationHistory, renderChat, resetConversationHistory, context, setContext } = useChat()
+    const { conversationHistory, renderChat, resetConversationHistory, context, setContext, firstResponse } = useChat()
+    const { setWindowTitle } = useApp()
+    const { appWindow } = useWindow()
     const [showDisclaimer, setShowDisclaimer] = useState(false)
     const [historyOpen, setHistoryOpen] = useState(false)
 
@@ -48,6 +52,12 @@ export default function Chat(): JSX.Element | null {
             setShowDisclaimer(true)
         }
     }, [])
+
+    useEffect(() => {
+        if (firstResponse && appWindow) {
+            setWindowTitle(appWindow, firstResponse)
+        }
+    }, [firstResponse])
 
     return (
         <div className="h-full relative" onClick={() => setHistoryOpen(false)}>

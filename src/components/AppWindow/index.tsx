@@ -62,7 +62,7 @@ const Router = (props) => {
 }
 
 export default function AppWindow({ item, constraintsRef }: { item: AppWindowType; constraintsRef: any }) {
-    const { minimizeWindow, bringToFront, closeWindow, focusedWindow, taskbarHeight, addWindow } = useApp()
+    const { minimizeWindow, bringToFront, closeWindow, focusedWindow, taskbarHeight, addWindow, windows } = useApp()
     const controls = useDragControls()
     const initialSizeKey = item.key as keyof typeof fixedAppSizes
     const hasFixedSize = Object.prototype.hasOwnProperty.call(fixedAppSizes, initialSizeKey)
@@ -219,6 +219,8 @@ export default function AppWindow({ item, constraintsRef }: { item: AppWindowTyp
         }
     }
 
+    const chatWindows = windows.filter((w) => w.key.startsWith('ask-max'))
+
     return (
         <WindowProvider
             appWindow={item}
@@ -343,14 +345,19 @@ export default function AppWindow({ item, constraintsRef }: { item: AppWindowTyp
                                                                 )
                                                             },
                                                         },
-                                                        {
-                                                            type: 'separator',
-                                                        },
-                                                        {
-                                                            type: 'item',
-                                                            label: 'No open chats',
-                                                            disabled: true,
-                                                        },
+
+                                                        ...(chatWindows.length > 0
+                                                            ? [
+                                                                  {
+                                                                      type: 'separator',
+                                                                  },
+                                                                  ...chatWindows.map((window, index) => ({
+                                                                      type: 'item',
+                                                                      label: window.meta?.title || `Chat ${index + 1}`,
+                                                                      onClick: () => bringToFront(window),
+                                                                  })),
+                                                              ]
+                                                            : []),
                                                     ],
                                                 },
                                                 {
