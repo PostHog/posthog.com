@@ -43,6 +43,20 @@ interface ReaderViewProps {
     children?: React.ReactNode
 }
 
+const contentWidthOptions: ToggleOption[] = [
+    {
+        label: 'Fixed',
+        value: 'fixed',
+        icon: <IconTextWidthFixed className="size-5 inline-block" />,
+        default: true,
+    },
+    {
+        label: 'Full',
+        value: 'full',
+        icon: <IconTextWidth className="size-5" />,
+    },
+]
+
 const backgroundImageOptions: ToggleOption[] = [
     {
         label: 'None',
@@ -82,6 +96,14 @@ const LineHeightSlider = ({ lineHeightMultiplier, onValueChange }) => {
 }
 
 const AppOptionsButton = ({ lineHeightMultiplier, handleLineHeightChange }) => {
+    const { fullWidthContent, setFullWidthContent } = useReaderView()
+
+    const handleContentWidthChange = (value: string) => {
+        const isFullWidth = value === 'full'
+        setFullWidthContent(isFullWidth)
+        localStorage.setItem('full-width-content', isFullWidth.toString())
+    }
+
     return (
         <Popover
             title="Options"
@@ -101,13 +123,26 @@ const AppOptionsButton = ({ lineHeightMultiplier, handleLineHeightChange }) => {
                             lineHeightMultiplier={lineHeightMultiplier}
                             onValueChange={handleLineHeightChange}
                         />
+
+                        <ToggleGroup
+                            title="Content width"
+                            options={contentWidthOptions}
+                            value={fullWidthContent ? 'full' : 'fixed'}
+                            onValueChange={handleContentWidthChange}
+                        />
                     </div>
                 </Fieldset>
 
                 <Fieldset legend="Why not?">
                     <div className="grid grid-cols-2 gap-2">
-                        <label className="pt-1.5 text-[15px]">Background image</label>
-                        <ToggleGroup title="Background image" options={backgroundImageOptions} />
+                        <ToggleGroup
+                            title="Background image"
+                            options={backgroundImageOptions}
+                            value="none"
+                            onValueChange={(value) => {
+                                console.log('Background image changed:', value)
+                            }}
+                        />
                     </div>
                 </Fieldset>
 
@@ -175,9 +210,16 @@ function ReaderViewContent({ body, title, tableOfContents, mdxComponents, commit
         toggleToc,
         handleLineHeightChange,
         setActiveInternalMenu,
+        setFullWidthContent,
     } = useReaderView()
 
     const showSidebar = tableOfContents && tableOfContents?.length > 0
+
+    const handleContentWidthChange = (value: string) => {
+        const isFullWidth = value === 'full'
+        setFullWidthContent(isFullWidth)
+        localStorage.setItem('full-width-content', isFullWidth.toString())
+    }
 
     return (
         <div className="@container w-full h-full flex flex-col">

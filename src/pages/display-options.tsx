@@ -157,7 +157,6 @@ export default function DisplayOptions() {
             <div data-scheme="secondary" className="w-full h-full bg-primary text-primary p-2">
                 <Fieldset legend="Display">
                     <div className="bg-primary grid grid-cols-2 gap-2">
-                        <label className="pt-1.5 text-[15px]">Color mode</label>
                         <ToggleGroup
                             title="Color mode"
                             options={colorModeOptions}
@@ -166,7 +165,6 @@ export default function DisplayOptions() {
                         />
                     </div>
                     <div className="bg-primary grid grid-cols-2 gap-2 mt-2">
-                        <label className="pt-1.5 text-[15px]">Cursor</label>
                         <ToggleGroup
                             title="Cursor"
                             options={cursorOptions}
