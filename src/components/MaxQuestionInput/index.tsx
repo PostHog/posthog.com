@@ -19,7 +19,7 @@ export const MaxQuestionInput = ({
     const [question, setQuestion] = useState('')
     const [currentPlaceholder, setCurrentPlaceholder] = useState(0)
     const encodedQuestion = encodeURIComponent(question)
-    const maxUrl = `https://app.posthog.com/#panel=max:${encodedQuestion}`
+    const maxUrl = `https://app.posthog.com/#panel=max:!${encodedQuestion}`
 
     useEffect(() => {
         const interval = setInterval(() => {
