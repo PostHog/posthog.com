@@ -12,8 +12,9 @@ const marqueeContent = <ProductList />
 const slides = [
     {
         image: 'placeholder',
-        title: 'There are other dev tool companies, but they\'re not like us',
-        subtitle: 'We\'re building every piece of SaaS you need to make your product successful. A single platform for people who build things.',
+        title: "There are other dev tool companies, but they're not like us",
+        subtitle:
+            "We're building every piece of SaaS you need to make your product successful. A single platform for people who build things.",
         content: marqueeContent,
         isFragment: true,
     },
@@ -99,35 +100,30 @@ const slides = [
 ]
 
 function ProductList() {
-  const products = productMenu.children
-  const marqueeProducts = [...products, ...products]
-  const animationDuration = `${products.length * 4.5}s`
-  return (
-      <div className="relative overflow-x-hidden w-full" style={{ height: 'auto' }}>
-          <div
-              className="marquee flex w-max"
-              tabIndex={0}
-              style={{ animationDuration }}
-          >
-              {marqueeProducts.map((product, idx) => {
-                  // @ts-ignore
-                  const Icon = Icons[product.icon]
-                  return (
-                      <Link
-                          key={product.slug + '-' + idx}
-                          to={product.url}
-                          className={`flex flex-col items-center gap-1 group py-2 px-3 rounded hover:bg-accent max-w-24`}
-                          state={{ newWindow: true }}
-                      >
-                          <span className={`size-6 mb-1 text-${product.color}`}>{Icon && <Icon />}</span>
-                          <span className="text-sm font-medium leading-tight group-hover:text-primary text-center">
-                              {product.name}
-                          </span>
-                      </Link>
-                  )
-              })}
-          </div>
-          <style>{`
+    const products = productMenu.children
+    const marqueeProducts = [...products, ...products]
+    const animationDuration = `${products.length * 4.5}s`
+    return (
+        <div className="relative overflow-x-hidden w-full" style={{ height: 'auto' }}>
+            <div className="marquee flex w-max" tabIndex={0} style={{ animationDuration }}>
+                {marqueeProducts.map((product, idx) => {
+                    const Icon = Icons[product.icon]
+                    return (
+                        <Link
+                            key={product.slug + '-' + idx}
+                            to={product.url}
+                            className={`flex flex-col items-center gap-1 group py-2 px-3 rounded hover:bg-accent max-w-24`}
+                            state={{ newWindow: true }}
+                        >
+                            <span className={`size-6 mb-1 text-${product.color}`}>{Icon && <Icon />}</span>
+                            <span className="text-sm font-medium leading-tight group-hover:text-primary text-center">
+                                {product.name}
+                            </span>
+                        </Link>
+                    )
+                })}
+            </div>
+            <style>{`
               .marquee {
                   animation: marquee-scroll linear infinite;
               }
@@ -139,35 +135,48 @@ function ProductList() {
                   100% { transform: translateX(-50%); }
               }
           `}</style>
-      </div>
-  )
+        </div>
+    )
 }
 
 function Slide({ slide }: { slide: any }) {
     if (slide.isFragment) {
         return (
             <Fragment>
-                <div className="px-8 flex flex-col items-center w-full mb-8">
-                    <div className="bg-accent border border-primary size-40 rounded-full flex items-center justify-center mb-4">{slide.image}</div>
+                <div className="pt-8 px-8 flex flex-col items-center w-full mb-8">
+                    <div className="bg-accent border border-primary size-40 rounded-full flex items-center justify-center mb-4">
+                        {slide.image}
+                    </div>
                     <h2 className="text-xl font-bold mb-1" dangerouslySetInnerHTML={{ __html: slide.title }} />
-                    <p className="text-[15px] text-secondary text-center" dangerouslySetInnerHTML={{ __html: slide.subtitle }} />
+                    <p
+                        className="text-[15px] text-secondary text-center text-balance"
+                        dangerouslySetInnerHTML={{ __html: slide.subtitle }}
+                    />
                 </div>
                 {slide.content}
             </Fragment>
         )
     }
     return (
-        <div className="px-8 flex flex-col items-center w-full mb-8">
-            <div className="bg-accent border border-primary size-40 rounded-full flex items-center justify-center mb-4">{slide.image || 'placeholder'}</div>
+        <div className="pt-8 px-8 pb-4 flex flex-col items-center w-full mb-8">
+            <div className="bg-accent border border-primary size-40 rounded-full flex items-center justify-center mb-4">
+                {slide.image || 'placeholder'}
+            </div>
             <h2 className="text-xl font-bold mb-1" dangerouslySetInnerHTML={{ __html: slide.title }} />
-            <p className="text-[15px] text-secondary text-center mb-10" dangerouslySetInnerHTML={{ __html: slide.subtitle }} />
+            <p
+                className="text-[15px] text-secondary text-center mb-10"
+                dangerouslySetInnerHTML={{ __html: slide.subtitle }}
+            />
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 w-full max-w-2xl">
                 {slide.features.map((feature: any, idx: number) => (
                     <div key={idx} className="flex items-start gap-3">
                         <span>{feature.icon}</span>
                         <div>
                             <div className="font-semibold" dangerouslySetInnerHTML={{ __html: feature.title }} />
-                            <div className="text-secondary text-[15px]" dangerouslySetInnerHTML={{ __html: feature.description }} />
+                            <div
+                                className="text-secondary text-[15px]"
+                                dangerouslySetInnerHTML={{ __html: feature.description }}
+                            />
                         </div>
                     </div>
                 ))}
@@ -182,32 +191,39 @@ export default function Tour(): JSX.Element {
     const isFirst = slideIndex === 0
     const isLast = slideIndex === slides.length - 1
     return (
-      <>
+        <>
             <SEO title="Tour" />
             <div data-scheme="primary" className="w-full h-full bg-primary flex flex-col">
                 {slideIndex === 0 ? (
-                  <div className="flex flex-col flex-1 items-center w-full border-y border-primary py-8">
-                    <Slide slide={slide} />
-                  </div>
+                    <div className="flex flex-col flex-1 items-center w-full border-y border-primary">
+                        <Slide slide={slide} />
+                    </div>
                 ) : (
-                  <ScrollArea className="flex-1 w-full border-y border-primary flex flex-col items-center py-8">
-                    <Slide slide={slide} />
-                  </ScrollArea>
+                    <ScrollArea className="flex-1 w-full border-y border-primary flex flex-col items-center">
+                        <Slide slide={slide} />
+                    </ScrollArea>
                 )}
                 <div className="w-full flex justify-between px-3 py-2 bg-accent">
                     {!isFirst ? (
-                        <CallToAction type="secondary" size="sm" onClick={() => setSlideIndex(slideIndex - 1)}>Back</CallToAction>
-                    ) : <span />}
+                        <CallToAction type="secondary" size="sm" onClick={() => setSlideIndex(slideIndex - 1)}>
+                            Back
+                        </CallToAction>
+                    ) : (
+                        <span />
+                    )}
                     {isLast ? (
                         <Link to="/products" state={{ newWindow: true }}>
-                            <CallToAction type="primary" size="sm">Go to product tour</CallToAction>
+                            <CallToAction type="primary" size="sm">
+                                Go to product tour
+                            </CallToAction>
                         </Link>
                     ) : (
-                        <CallToAction type="primary" size="sm" onClick={() => setSlideIndex(slideIndex + 1)}>Next</CallToAction>
+                        <CallToAction type="primary" size="sm" onClick={() => setSlideIndex(slideIndex + 1)}>
+                            Next
+                        </CallToAction>
                     )}
                 </div>
             </div>
-          </>
+        </>
     )
 }
-

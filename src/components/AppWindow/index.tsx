@@ -46,6 +46,16 @@ const fixedAppSizes = {
             height: 400,
         },
     },
+    '/tour': {
+        max: {
+            width: 750,
+            height: 575,
+        },
+        min: {
+            width: 750,
+            height: 575,
+        },
+    },
 } as const
 
 const snapThreshold = -50
