@@ -24,6 +24,7 @@ import { slugifyTeamName } from 'lib/utils'
 import Editor from 'components/Editor'
 import ScrollArea from 'components/RadixUI/ScrollArea'
 import SEO from 'components/seo'
+import OSTable from 'components/OSTable'
 
 interface IGitHubPage {
     title: string
@@ -101,7 +102,7 @@ export const Feature = ({ id, title, teams, description, likeCount, onLike, onUp
 
     return (
         <>
-            <SideModal title={title} open={authModalOpen} setOpen={setAuthModalOpen}>
+            <SideModal title="Sign in to vote" open={authModalOpen} setOpen={setAuthModalOpen}>
                 <h4 className="mb-4">Sign into PostHog.com</h4>
                 <div className="bg-border dark:bg-border-dark p-4 mb-2">
                     <p className="text-sm mb-2">
@@ -114,7 +115,15 @@ export const Feature = ({ id, title, teams, description, likeCount, onLike, onUp
                     </p>
                 </div>
 
-                <Authentication initialView="sign-in" onAuth={onAuth} showBanner={false} showProfile={false} />
+                <Authentication
+                    initialView="sign-in"
+                    onAuth={(user) => {
+                        setAuthModalOpen(false)
+                        like(user)
+                    }}
+                    showBanner={false}
+                    showProfile={false}
+                />
             </SideModal>
             <UpdateWrapper
                 id={id}
@@ -289,9 +298,155 @@ export default function Roadmap() {
     return (
         <>
             <SEO title="Roadmap – PostHog" description="" image={`/images/og/customers.jpg`} />
-            <Editor title="roadmap" type="mdx" slug="/roadmap">
+            <Editor title="roadmap" type="mdx" slug="/roadmap" maxWidth="full">
                 <ScrollArea>
                     <section>
+                        {(() => {
+                            const [loading, setLoading] = useState(false)
+                            const [authModalOpen, setAuthModalOpen] = useState(false)
+
+                            const like = async (id: number, title: string) => {
+                                setLoading(true)
+                                await likeRoadmap({
+                                    id,
+                                    title,
+                                    user,
+                                    unlike: user?.profile?.roadmapLikes?.some(({ id: roadmapID }) => roadmapID === id),
+                                })
+                                mutate()
+                                setLoading(false)
+                            }
+
+                            const columns = [
+                                { name: 'Votes', width: 'minmax(100px, auto)', align: 'center' as const },
+                                { name: 'Team', width: 'minmax(120px, auto)', align: 'center' as const },
+                                { name: 'Idea', width: 'minmax(200px, 1fr)', align: 'left' as const },
+                                { name: 'Details', width: 'minmax(300px, 2fr)', align: 'left' as const },
+                                { name: 'More info', width: 'minmax(100px, auto)', align: 'center' as const },
+                            ]
+
+                            const rows = [...roadmaps]
+                                .sort((a, b) => b.attributes.likeCount - a.attributes.likeCount)
+                                .map((roadmap) => {
+                                    const teamName = roadmap.attributes.teams?.data?.[0]?.attributes?.name
+                                    const liked = user?.profile?.roadmapLikes?.some(
+                                        ({ id: roadmapID }) => roadmapID === roadmap.id
+                                    )
+
+                                    return {
+                                        cells: [
+                                            {
+                                                content: (
+                                                    <div className="flex flex-col items-center gap-2">
+                                                        <VoteBox
+                                                            likeCount={roadmap.attributes.likeCount}
+                                                            liked={liked}
+                                                        />
+                                                        <CallToAction
+                                                            disabled={loading}
+                                                            onClick={() => {
+                                                                if (user) {
+                                                                    like(roadmap.id, roadmap.attributes.title)
+                                                                } else {
+                                                                    setAuthModalOpen(true)
+                                                                }
+                                                            }}
+                                                            size="sm"
+                                                            type={liked ? 'outline' : 'primary'}
+                                                        >
+                                                            <span className="flex items-center space-x-1">
+                                                                {liked ? (
+                                                                    <>
+                                                                        <IconUndo className="w-4 h-4" />
+                                                                        <span>Unvote</span>
+                                                                    </>
+                                                                ) : (
+                                                                    <>
+                                                                        <IconThumbsUp className="w-4 h-4" />
+                                                                        <span>Vote</span>
+                                                                    </>
+                                                                )}
+                                                            </span>
+                                                        </CallToAction>
+                                                    </div>
+                                                ),
+                                                className: '!p-2',
+                                            },
+                                            {
+                                                content: teamName ? (
+                                                    <Link
+                                                        to={`/teams/${slugifyTeamName(teamName)}`}
+                                                        className="text-sm opacity-70 text-inherit hover:opacity-100 hover:text-red dark:hover:text-yellow"
+                                                    >
+                                                        {teamName}
+                                                    </Link>
+                                                ) : (
+                                                    'Any'
+                                                ),
+                                            },
+                                            {
+                                                content: (
+                                                    <h3 className="text-lg m-0 leading-tight">
+                                                        {roadmap.attributes.title}
+                                                    </h3>
+                                                ),
+                                            },
+                                            {
+                                                content: (
+                                                    <div className="text-[15px] community-post-markdown">
+                                                        <Markdown>{roadmap.attributes.description}</Markdown>
+                                                    </div>
+                                                ),
+                                            },
+                                            {
+                                                content:
+                                                    roadmap.attributes.githubUrls?.length > 0 ? (
+                                                        <Link
+                                                            to={roadmap.attributes.githubUrls[0]}
+                                                            external
+                                                            className="text-sm"
+                                                        >
+                                                            GitHub
+                                                        </Link>
+                                                    ) : null,
+                                                className: 'text-center',
+                                            },
+                                        ],
+                                    }
+                                })
+
+                            return (
+                                <>
+                                    <SideModal title="Sign in to vote" open={authModalOpen} setOpen={setAuthModalOpen}>
+                                        <h4 className="mb-4">Sign into PostHog.com</h4>
+                                        <div className="bg-border dark:bg-border-dark p-4 mb-2">
+                                            <p className="text-sm mb-2">
+                                                <strong>
+                                                    Note: PostHog.com authentication is separate from your PostHog app.
+                                                </strong>
+                                            </p>
+
+                                            <p className="text-sm mb-0">
+                                                We suggest signing up with your personal email. Soon you'll be able to
+                                                link your PostHog app account.
+                                            </p>
+                                        </div>
+
+                                        <Authentication
+                                            initialView="sign-in"
+                                            onAuth={(user) => {
+                                                setAuthModalOpen(false)
+                                                like(roadmap.id, roadmap.attributes.title)
+                                            }}
+                                            showBanner={false}
+                                            showProfile={false}
+                                        />
+                                    </SideModal>
+                                    <OSTable columns={columns} rows={rows} className="mb-12" />
+                                </>
+                            )
+                        })()}
+
                         <div className="relative">
                             <div className="flex justify-between items-center">
                                 <div className="flex gap-4 items-center">
