@@ -3,6 +3,7 @@ import { IconGraph, IconPieChart, IconDocument, IconQuestion, IconMap } from '@p
 import Link from 'components/Link'
 import { useApp } from '../../context/App'
 import useProduct from 'hooks/useProduct'
+import { IconDice } from 'components/OSIcons/Icons'
 
 interface AppItem {
     label: string
@@ -35,8 +36,14 @@ const apps: AppItem[] = [
     {
         label: 'Tour',
         Icon: IconMap,
-        color: 'green',
+        color: 'orange',
         url: '/tour',
+    },
+    {
+        label: 'Games',
+        Icon: IconDice,
+        color: 'green',
+        url: '/games',
     },
 ]
 

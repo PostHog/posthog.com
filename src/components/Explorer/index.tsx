@@ -20,6 +20,7 @@ interface ExplorerProps {
     accentImage?: React.ReactNode
     sidebarContent?: React.ReactNode | AccordionItem[]
     children?: React.ReactNode
+    fullScreen?: boolean
 }
 
 const SidebarContent = ({ content }: { content: React.ReactNode | AccordionItem[] }) => {
@@ -45,7 +46,15 @@ const SidebarContent = ({ content }: { content: React.ReactNode | AccordionItem[
     return content
 }
 
-export default function Explorer({ template, slug, title, accentImage, sidebarContent, children }: ExplorerProps) {
+export default function Explorer({
+    template,
+    slug,
+    title,
+    accentImage,
+    sidebarContent,
+    children,
+    fullScreen = false,
+}: ExplorerProps) {
     const location = useLocation()
     const currentPath = location.pathname.replace(/^\//, '') // Remove leading slash
 
@@ -90,43 +99,56 @@ export default function Explorer({ template, slug, title, accentImage, sidebarCo
 
     return (
         <div className="@container w-full h-full flex flex-col min-h-1">
-            <HeaderBar showHome showBack showForward showSearch />
-            <div data-scheme="secondary" className="bg-primary px-2 pb-2 border-b border-primary">
-                <Select
-                    groups={selectOptions}
-                    placeholder="Select..."
-                    ariaLabel="Products"
-                    defaultValue={currentPath}
-                    onValueChange={handleValueChange}
-                    className="w-full"
-                    dataScheme="primary"
-                />
-            </div>
-            <div className="flex flex-grow min-h-0">
-                <aside data-scheme="secondary" className="w-64 bg-primary border-r border-primary h-full">
-                    <ScrollArea className="p-2">
-                        <div className="space-y-3">
-                            <SidebarContent content={sidebarContent} />
-                        </div>
-                    </ScrollArea>
-                </aside>
-                <main data-scheme="primary" className="@container flex-1 bg-primary relative h-full">
-                    <ScrollArea className="px-4">
-                        <DebugContainerQuery />
-                        {accentImage && (
-                            <div className="absolute right-0 top-6">
-                                <div className="relative max-w-md @4xl:max-w-lg @5xl:max-w-xl @6xl:max-w-2xl transition-all duration-700 ease-out opacity-25 @xl:opacity-50">
-                                    {accentImage}
-                                    <div className="absolute left-0 top-0 w-1/2 h-full bg-gradient-to-r from-[var(--bg)] to-[color-mix(in_srgb,var(--bg)_0%,transparent)]" />
-                                    <div className="absolute bottom-0 left-0 h-1/2 w-full bg-gradient-to-b from-[color-mix(in_srgb,var(--bg)_0%,transparent)] to-[var(--bg)]" />
-                                </div>
+            {!fullScreen && (
+                <>
+                    <HeaderBar showHome showBack showForward showSearch />
+                    <div data-scheme="secondary" className="bg-primary px-2 pb-2 border-b border-primary">
+                        <Select
+                            groups={selectOptions}
+                            placeholder="Select..."
+                            ariaLabel="Products"
+                            defaultValue={currentPath}
+                            onValueChange={handleValueChange}
+                            className="w-full"
+                            dataScheme="primary"
+                        />
+                    </div>
+                </>
+            )}
+            <div
+                data-scheme="secondary"
+                className={`flex flex-grow min-h-0 ${fullScreen ? 'border-t border-primary' : ''}`}
+            >
+                {sidebarContent && (
+                    <aside data-scheme="secondary" className="w-64 bg-primary border-r border-primary h-full">
+                        <ScrollArea className="p-2">
+                            <div className="space-y-3">
+                                <SidebarContent content={sidebarContent} />
                             </div>
-                        )}
-                        <div className="p-6 relative">
-                            <h1>{title}</h1>
-                            {children}
-                        </div>
-                    </ScrollArea>
+                        </ScrollArea>
+                    </aside>
+                )}
+                <main data-scheme="primary" className="@container flex-1 bg-primary relative h-full">
+                    {fullScreen ? (
+                        children
+                    ) : (
+                        <ScrollArea className="px-4">
+                            <DebugContainerQuery />
+                            {accentImage && (
+                                <div className="absolute right-0 top-6">
+                                    <div className="relative max-w-md @4xl:max-w-lg @5xl:max-w-xl @6xl:max-w-2xl transition-all duration-700 ease-out opacity-25 @xl:opacity-50">
+                                        {accentImage}
+                                        <div className="absolute left-0 top-0 w-1/2 h-full bg-gradient-to-r from-[var(--bg)] to-[color-mix(in_srgb,var(--bg)_0%,transparent)]" />
+                                        <div className="absolute bottom-0 left-0 h-1/2 w-full bg-gradient-to-b from-[color-mix(in_srgb,var(--bg)_0%,transparent)] to-[var(--bg)]" />
+                                    </div>
+                                </div>
+                            )}
+                            <div className="relative p-6">
+                                {!fullScreen && <h1>{title}</h1>}
+                                {children}
+                            </div>
+                        </ScrollArea>
+                    )}
                 </main>
             </div>
         </div>
