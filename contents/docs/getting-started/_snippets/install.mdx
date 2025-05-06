@@ -4,11 +4,13 @@ import SnippetInstructions from "../../integrate/\_snippets/install-js-snippet.m
 import SDKs from "../../integrate/\_snippets/sdks.mdx"
 import Frameworks from "../../integrate/\_snippets/frameworks.mdx"
 import API from "../../integrate/\_snippets/api.mdx"
+import Wizard from "./wizard.mdx"
 
 <!-- prettier-ignore -->
-<Tab.Group tabs={['snippet', 'sdks', 'guides', 'api']}>
-    <Tab.List>
+<Tab.Group tabs={['snippet', 'wizard', 'sdks', 'guides', 'api']}>
+    <Tab.List>  
         <Tab>JS snippet</Tab>
+        <Tab>AI wizard</Tab>
         <Tab count="14">Libraries</Tab>
         <Tab count="22">Framework guides</Tab>
         <Tab>API</Tab>
@@ -16,6 +18,9 @@ import API from "../../integrate/\_snippets/api.mdx"
     <Tab.Panels>
         <Tab.Panel>
             <SnippetInstructions />
+        </Tab.Panel>
+        <Tab.Panel>
+            <Wizard />
         </Tab.Panel>
         <Tab.Panel>
             <SDKs />
