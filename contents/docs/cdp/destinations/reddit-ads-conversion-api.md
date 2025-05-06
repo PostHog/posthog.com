@@ -18,7 +18,7 @@ You'll also need access to the relevant Reddit Ads account.
 
 2. Click the **Destinations** tab.
 
-3. Search for **Reddit Conversions API** and select the destination.
+3. Search for **Reddit Conversions API** and click **+ Create**.
 
 4. Find your Reddit Ads Account id on the [Reddit Ads dashboard](https://ads.reddit.com/).
    1. Click the business name in the top-left
