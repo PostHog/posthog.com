@@ -122,32 +122,30 @@ Instead, there are some non-obvious downsides to being open source we have found
 
 ### 1. It can be tough to monetize
 
-Early in PostHog’s life, we didn’t bother to monetize, Tim and James just focused on getting as many people as possible to use it. It was also not obvious *how best* to monetize. Enterprise plans? Paid self-hosted plans? Cloud? This is a common dilemma for open source startups.
+Every open source startup struggles with how best to monetize. Enterprise plans? Paid self-hosted plans? Cloud? 
 
-We tried a combination of these, but have entirely settled on cloud hosting. This enables us to build a sustainable business while continuing to offer a free product. For other companies, this might not be so obvious. Balancing paid vs free features is especially difficult. 
+We tried a combination of these, but settled on cloud hosting. This enabled us to build a sustainable business while continuing to offer a free product.
 
-What made this decision easier was the breadth of PostHog. While users love having more products, it did make hosting PostHog more complicated. We make up for this by offering a generous free tier for all products on Cloud, which satisfies the needs of most users.
+What made this decision easier was the breadth of PostHog. While users love having more products, it did make hosting PostHog more complicated. We make up for this by offering a generous free tier for all products on Cloud, which means everyone can use PostHog for free (which is usually what they want to self-host for).
 
 ### 2. Support is not free
 
-A classic downfall of open source products is their creators being burnt out by support. Because they offer the code for free, people expect support to be free as well. They become flooded with support requests without the resources to respond to them. 
+Because open source projects offer the code for free, people expect support to be free as well. Maintainers often burn out dealing with the flood of support requests without the resources to respond to them.
 
-We felt this too with our former paid Kubernetes deployments:
+We felt this too with our former paid Kubernetes deployment:
 
-1. They were becoming too complex and difficult to debug from afar.
-2. Supporting them was taking a significant amount of our engineering resources.
+1. It was becoming too complex and difficult to debug from afar.
+2. Supporting it was taking a significant amount of our engineering resources.
 3. Overall, it was not a good experience for us or our users.
 
-Eventually, we made the tough decision to shut it down and redirect our engineering resources to making our Cloud version work for our former Kubernetes users (like SOC 2 compliance). We made sure to [communicate all the details](/blog/sunsetting-helm-support-posthog) of this decision and provide multiple migration options (including our Docker Compose deployment).
+Eventually, we made the [tough decision to shut it down](/blog/sunsetting-helm-support-posthog), provide migration options (like Docker Compose), and redirect our engineering resources to making our Cloud version work for our former Kubernetes users (with features like SOC 2 compliance).
 
 ### 3. You might be competing with yourself
 
-Depending on how you structure your open source project, you might have two products competing for your attention: a free, open-source one and a hosted option. 
+It can be hard to balance a free, open-source product and a paid, hosted option. No matter what you do, you’ll face allegations that you are making the open source version worse intentionally (whether that is true or not). 
 
-It can be hard to balance this well. Basically, no matter what you do, you’ll face allegations that you are making the open source version worse intentionally (whether that is true or not). 
+To be honest, five years in, and we are still figuring this one out. PostHog has gotten more complex to host, even for us (our [infra team](/teams/infrastructure) has grown to 5 people). We continue to offer a generous free tier, but many people still want to self-host and find it difficult to do so. Again, we’re [working on it](/teams/developer-experience#goals)!
 
-To be honest, five years in, and we are still figuring this one out. As we’ve grown, PostHog has gotten more complex to host, even for us (our [infra team](/teams/infrastructure) is 5 people). We’ve managed to create a popular product that 96% of customers use for free, but the experience of self-hosting has not kept up. Again, we’re [working on it](/teams/developer-experience#goals)!
+What hasn’t changed is open source being a [core value](/handbook/values) of our company. We have a broader definition of open source than most. We think it’s not just the code you write, but your overall culture. We try to be open source in all the ways we can. Our [handbook](/handbook), [roadmap](/roadmap), and even this [newsletter](/newsletter) are all testaments to this.
 
-What hasn’t changed is open source being a [core value](/handbook/values) of our company. We have a broader definition of open source than most. We think it’s not just the code you write and the product you deliver, but the culture overall. This means we are open source in many ways, from our handbook to our roadmap to this newsletter. 
-
-We've found it is a lot easier to be consistently open source when your code isn’t the only thing you open source.
+We've found this to be a better solution as it is a lot easier to be consistently open source when your code isn’t the only thing you open source.
