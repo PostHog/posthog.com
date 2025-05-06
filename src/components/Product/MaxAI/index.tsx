@@ -123,31 +123,31 @@ const subfeatures = [
 const questions = [
     {
         question: 'Where do my users drop off?',
-        url: 'https://app.posthog.com/#panel=max%where%20do%users%dropoff%3F',
+        url: 'https://app.posthog.com/#panel=max:!%where%20do%users%dropoff%3F',
     },
     {
         question: 'What are my most popular pages?',
-        url: 'https://app.posthog.com/#panel=max%most%20popular%pages%3F',
+        url: 'https://app.posthog.com/#panel=max:!what are my most popular pages?',
     },
     {
         question: 'What is distribution of paid vs. organic traffic?',
-        url: 'https://app.posthog.com/#panel=max%paid%20vs%organic%traffic%3F',
+        url: 'https://app.posthog.com/#panel=max:!what is the distribution of paid vs organic traffic?',
     },
     {
         question: 'Write an SQL query for me?',
-        url: 'https://app.posthog.com/#panel=max%write%20an%sql%%3F',
+        url: 'https://app.posthog.com/#panel=max:!write an sql query for me',
     },
     {
         question: 'What is my ARR?',
-        url: 'https://app.posthog.com/#panel=max%what%is%my%arr%3F',
+        url: 'https://app.posthog.com/#panel=max:!what is my arr?',
     },
     {
         question: 'How many pageviews did we get today?',
-        url: 'https://app.posthog.com/#panel=max%how%many%pageviews%today%3F',
+        url: 'https://app.posthog.com/#panel=max:!how many pageviews did we get today?',
     },
     {
         question: 'Show me a signup funnel',
-        url: 'https://app.posthog.com/#panel=max%show%me%signup%funnel%3F',
+        url: 'https://app.posthog.com/#panel=max:!show me a signup funnel',
     },
 ]
 
