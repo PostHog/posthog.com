@@ -25,15 +25,6 @@ export default function AskMax({
     const posthog = usePostHog()
     const { compact } = useLayoutData()
     const { openChat, setQuickQuestions } = useChat()
-    const {
-        allDocsPages: { totalDocsCount },
-    } = useStaticQuery(graphql`
-        query {
-            allDocsPages: allMdx(filter: { slug: { regex: "^/docs/" } }) {
-                totalDocsCount: totalCount
-            }
-        }
-    `)
 
     const borderClasses = border ? 'py-6 mt-4 border-y border-light dark:border-dark' : 'mb-8'
 
@@ -70,7 +61,7 @@ export default function AskMax({
                                     Questions? <span className="text-red dark:text-yellow">Ask Max AI.</span>
                                 </h3>
                                 <p className="text-[15px] mb-0 opacity-75 text-balance">
-                                    It's easier than reading through <strong>{totalDocsCount} docs articles</strong>.
+                                    It's probably easier than reading through docs articles.
                                 </p>
                             </div>
                         </div>
