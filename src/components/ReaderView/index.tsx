@@ -338,7 +338,7 @@ function ReaderViewContent({ body, title, tableOfContents, mdxComponents, commit
                     dataScheme="primary"
                     className={`bg-primary border border-primary flex-grow rounded ${
                         selectedBackgroundOption && selectedBackgroundOption.value !== 'none'
-                            ? 'before:absolute before:inset-0 before:bg-white/75'
+                            ? 'before:absolute before:inset-0 before:bg-primary before:opacity-75'
                             : ''
                     }`}
                     style={
