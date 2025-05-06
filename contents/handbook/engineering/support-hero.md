@@ -71,9 +71,9 @@ It might be an intense week, but you're also going to solve so many real problem
 Outside of your team's Support Hero rotation, you are also eligible to serve in a one week SDK Support Hero rotation. [The schedule is managed in PagerDuty](https://posthog.pagerduty.com/schedules#P7B7NTR).
 
 Your primary responsibility is simply to make sure SDK questions get some love. During the rotation, please keep an eye on two things:
-- [Escalated SDK tickets in Zendesk](https://posthoghelp.zendesk.com/agent/filters/30528724215067)
+- [Escalated SDK tickets in Zendesk](https://posthoghelp.zendesk.com/agent/filters/33118780890267)
 - New issues in the SDK repositories
-  - [posthog-js (Web, React, Next)](https://github.com/PostHog/posthog-js/issues?q=sort%3Aupdated-desc+is%3Aissue+is%3Aopen)
+  - [posthog-js (Web, React, Next)](https://github.com/PostHog/posthog-js/)
   - [posthog-js-lite (React Native, Node)](https://github.com/PostHog/posthog-js-lite/)
   - [posthog-ios](https://github.com/PostHog/posthog-ios)
   - [posthog-android](https://github.com/PostHog/posthog-android)
