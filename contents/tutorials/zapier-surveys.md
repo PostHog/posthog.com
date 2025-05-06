@@ -1,6 +1,6 @@
 ---
 title: How to send survey responses to Zapier
-date: 2025-05-01
+date: 2025-05-06
 author:
   - lior-neu-ner
 showTitle: true
@@ -9,13 +9,13 @@ tags:
   - surveys
 ---
 
-It's useful to send survey responses to [Zapier](https://zapier.com/). This way you can automatically trigger workflows in thousands of other apps, such as creating tickets in your help desk, or updating your CRM with customer feedback.
+It can be useful to send survey responses to [Zapier](https://zapier.com/). This way you can automatically trigger workflows in thousands of other apps, such as creating tickets in your help desk or updating your CRM with customer feedback.
 
-To show you how, in this tutorial we set up an example Zap to add survey responses to a Google sheet.
+To show you how, in this tutorial we set up an example Zap to add survey responses to a Google Sheet.
 
 ## Step 1: Create a survey
 
-First you'll need to create a survey. Our [docs](/docs/surveys/creating-surveys) cover how to do this, so we won't go into detail here. We also have [framework-specific tutorials](/docs/surveys/tutorials#framework-guides).
+First, you'll need to create a survey. Our [docs](/docs/surveys/creating-surveys) cover how to do this, so we won't go into detail here. We also have [framework-specific tutorials](/docs/surveys/tutorials#framework-guides).
 
 Once your survey is created, submit a few sample responses.
 
@@ -32,7 +32,7 @@ You have two options for creating your Zap and setting its trigger:
 5. Then in your Zapier dashboard, go to your [zaps](https://zapier.com/app/assets/zaps) and create a new zap.
 6. Add the [PostHog app](https://zapier.com/apps/posthog/integrations/webhook) as a trigger.
 7. Configure the PostHog app by setting the **Trigger event** to `Action Performed`. 
-8. Click **Continue** and select the relevant organization and project. In the Action section, select the **Survey sent** action you created in the previous steps.
+8. Click **Continue** and select the relevant organization and project. In the Action section, select the **Survey sent action** you created in the previous steps.
 9. Click  **Continue** and test your trigger.
 
 <ProductScreenshot
@@ -47,13 +47,13 @@ You have two options for creating your Zap and setting its trigger:
 1. In PostHog, click the [Data pipeline](https://us.posthog.com/pipeline/overview) tab in the left sidebar.
 2. Click the [Destinations](https://us.posthog.com/pipeline/destinations) tab.
 3. Search for **Zapier** and click **+ Create**.
-4. In the **Match events and actions** section, search for `survey sent`.
+4. In the **Match events and actions** section, search for and select `survey sent`.
 5. Then in your Zapier dashboard, create a new Zap with a [webhook trigger](https://zapier.com/apps/webhook/integrations)
 6. Set the **Trigger event** in the webhook to `Catch Hook` and press **Continue**.
 7. Leave **Pick off a Child key** as blank and click **Continue**. Do not test your Zap just yet.
 8. Go back to your PostHog app then add your webhook URL in PostHog under **Zapier hook path**.
 9. Press **Create & Enable** and then click **Start testing**.
-10. In the test JSON, replace the `event` and `person` keys with the below (leave the rest of the json as is, as Zapier needs the `project` key):
+10. In the test JSON, replace the `event` and `person` keys with the below (leave the rest of the JSON as is, as Zapier needs the `project` key):
 
 ```js
 "event": {
@@ -103,7 +103,7 @@ You have two options for creating your Zap and setting its trigger:
 
 1. Create a new spreadsheet and name it something like `PostHog survey tutorial`.
 2. In the first row, add these headers to your columns: `email`, `question`, `response`
-3. Go to Zapier and add Google sheet as an action.
+3. Go to Zapier and add Google Sheet as an action.
 4. Under Action event, select `Create Spreadsheet Row`.
 5. Connect your Google account if you haven't already.
 6. Fill out the rest of the action as needed.
