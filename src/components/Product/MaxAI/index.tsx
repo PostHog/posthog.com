@@ -249,6 +249,7 @@ export const ProductMax = () => {
                 <Hero
                     icon={<IconThoughtBubble />}
                     product={product.capitalized}
+                    color="purple"
                     title='These days everyone has an AI. <br /><span class="text-red dark:text-yellow">But ours is a hedgehog powered by Product OS.</span>'
                     description="Use natural language to get instant answers, find replays, and more"
                     image="https://res.cloudinary.com/dmukukwp6/image/upload/robot_f2dfddda15.png"
