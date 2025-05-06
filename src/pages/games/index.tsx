@@ -1,13 +1,9 @@
 import React from 'react'
-import Layout from 'components/Layout'
-import ProductProductAnalytics from 'components/Product/ProductAnalytics'
 import Explorer from 'components/Explorer'
 import { Link } from 'gatsby'
 import { CallToAction } from 'components/CallToAction'
 import CloudinaryImage from 'components/CloudinaryImage'
 import SEO from 'components/seo'
-import ProductSidebar from 'components/Explorer/ProductSidebar'
-import Product from 'components/Explorer/Product'
 import { IconDice } from 'components/OSIcons/Icons'
 import { Accordion } from 'components/RadixUI/Accordion'
 

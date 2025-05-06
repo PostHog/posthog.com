@@ -131,6 +131,7 @@ export default function Product({
                         icon={<IconBook className="text-blue" />}
                         to={`/docs${slug}`}
                         className="text-primary hover:text-primary"
+                        state={{ newWindow: true }}
                     >
                         Docs
                     </OSButton>
