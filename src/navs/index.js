@@ -1232,6 +1232,10 @@ export const handbookSidebar = [
                         name: 'Historical imports',
                         url: '/handbook/growth/sales/historical-import',
                     },
+                    {
+                        name: 'Shared Slack channels',
+                        url: '/handbook/growth/sales/slack-channels',
+                    },
                 ],
             },
         ],
@@ -1580,6 +1584,10 @@ export const companyMenu = {
                 {
                     name: 'Support',
                     url: '/teams/support',
+                },
+                {
+                    name: 'Video',
+                    url: '/teams/video',
                 },
                 {
                     name: 'Website & Vibes',
@@ -3402,9 +3410,9 @@ export const docsMenu = {
                     name: 'Features',
                 },
                 {
-                    name: 'Webhook',
-                    url: '/docs/surveys/webhook',
-                    icon: 'IconLaptop',
+                    name: 'Destinations',
+                    url: '/docs/surveys/destinations',
+                    icon: 'IconLive',
                     color: 'orange',
                 },
                 {

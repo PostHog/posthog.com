@@ -20,7 +20,7 @@ You'll also need access to the relevant Google Ads account.
 
 2. Click the **Destinations** tab.
 
-3. Search for **Google Ads Conversions** and select the destination.
+3. Search for **Google Ads Conversions** and click **+ Create**.
 
 4. Connect your Google account at the configuration step.
 
