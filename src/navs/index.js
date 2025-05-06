@@ -3674,7 +3674,7 @@ export const productMenu = {
             name: 'Max AI',
             icon: 'IconThoughtBubble',
             color: 'purple',
-            url: '/max-ai',
+            url: '/max',
         },
         {
             name: 'Product OS',

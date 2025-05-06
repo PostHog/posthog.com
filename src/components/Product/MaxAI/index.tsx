@@ -371,8 +371,7 @@ export const ProductMax = () => {
                             }
                         >
                             <ul>
-                                <li>You like alt-tabbing out to other tools, like ChatGPT or Claude</li>
-                                <li>You prefer only to share copy-pasted info with an AI, piece by piece</li>
+                                <li>You like alt-tabbing and copy-pasting to other tools, like ChatGPT or Claude</li>
                                 <li>
                                     You'd like to talk with your assistant out loud (Max doesn't have voice mode yet)
                                 </li>
