@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect, useCallback } from 'react'
 import { Select } from '../RadixUI/Select'
 import HeaderBar from 'components/OSChrome/HeaderBar'
 import * as Icons from '@posthog/icons'
@@ -24,6 +24,8 @@ import {
 import { IconSearch, IconMessage, IconX } from '@posthog/icons'
 import { IconLink } from '../OSIcons/Icons'
 import useProduct from 'hooks/useProduct'
+import { SearchProvider } from './SearchProvider'
+import { SearchBar } from './SearchBar'
 
 interface EditorProps {
     slug?: string
@@ -164,7 +166,6 @@ const toolbarElementsBase: ToolbarElement[] = [
 export function Editor({ title, type, children, filters, maxWidth = '3xl', onSearchChange }: EditorProps) {
     const [showFilters, setShowFilters] = useState(false)
     const [showSearch, setShowSearch] = useState(false)
-    const [searchQuery, setSearchQuery] = useState('')
     const products = useProduct() as { slug: string; name: string; type: string }[]
     // take the product name passed in and check the useProduct hook to get the product's display name
     const getProductName = (type: string) => products.find((p) => p.type === type)?.name || type
@@ -178,44 +179,12 @@ export function Editor({ title, type, children, filters, maxWidth = '3xl', onSea
           )
         : []
 
-    // Handle Escape key to close search
-    const handleKeyDown = (e: React.KeyboardEvent) => {
-        if (e.key === 'Escape') {
-            setShowSearch(false)
-            setSearchQuery('') // Clear search query
-            if (onSearchChange) {
-                onSearchChange('') // Clear parent component's search query too
-            }
-        }
-    }
-
     const toggleSearch = () => {
-        const newSearchState = !showSearch
-        setShowSearch(newSearchState)
-
-        // If closing search, clear the query
-        if (!newSearchState) {
-            setSearchQuery('') // Clear search query
-            if (onSearchChange) {
-                onSearchChange('') // Clear parent component's search query too
-            }
-        }
+        setShowSearch(!showSearch)
     }
 
     const closeSearch = () => {
         setShowSearch(false)
-        setSearchQuery('') // Clear search query
-        if (onSearchChange) {
-            onSearchChange('') // Clear parent component's search query too
-        }
-    }
-
-    const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        const value = e.target.value
-        setSearchQuery(value)
-        if (onSearchChange) {
-            onSearchChange(value)
-        }
     }
 
     const toolbarElements = [
@@ -248,42 +217,32 @@ export function Editor({ title, type, children, filters, maxWidth = '3xl', onSea
     ]
 
     return (
-        <div className="@container w-full h-full flex flex-col min-h-1">
-            <aside data-scheme="secondary" className="bg-primary p-2 border-b border-border">
-                <Toolbar elements={toolbarElements} />
-            </aside>
-            <div className="flex flex-col flex-grow min-h-0">
-                <main data-scheme="primary" className="@container flex-1 bg-primary relative h-full">
-                    {showSearch && (
-                        <div className="-top-px right-8 absolute bg-accent w-64 p-1.5 rounded-b border border-primary border-t-0 z-10 flex items-center gap-1">
-                            <input
-                                placeholder="Search this page..."
-                                className="w-full p-1 rounded border border-input text-primary text-sm"
-                                onKeyDown={handleKeyDown}
-                                onChange={handleSearchChange}
-                                value={searchQuery}
-                                autoFocus
-                            />
-                            <OSButton variant="ghost" size="xs" icon={<IconX />} onClick={closeSearch} />
-                        </div>
-                    )}
-                    {showFilters && (
-                        <div className="bg-accent dark:bg-accent-dark p-2 text-sm border-b border-border dark:border-border-dark">
-                            filters go here
-                        </div>
-                    )}
-                    <ScrollArea>
-                        <div className={`p-4 mx-auto max-w-${maxWidth}`}>
-                            <h1 className="text-2xl font-bold">
-                                {title}
-                                {type && <span className="opacity-40">.{type}</span>}
-                            </h1>
-                            {children}
-                        </div>
-                    </ScrollArea>
-                </main>
+        <SearchProvider onSearchChange={onSearchChange}>
+            <div className="@container w-full h-full flex flex-col min-h-1">
+                <aside data-scheme="secondary" className="bg-primary p-2 border-b border-border">
+                    <Toolbar elements={toolbarElements} />
+                </aside>
+                <div className="flex flex-col flex-grow min-h-0">
+                    <main data-scheme="primary" className="@container flex-1 bg-primary relative h-full">
+                        <SearchBar visible={showSearch} onClose={closeSearch} />
+                        {showFilters && (
+                            <div className="bg-accent dark:bg-accent-dark p-2 text-sm border-b border-border dark:border-border-dark">
+                                filters go here
+                            </div>
+                        )}
+                        <ScrollArea>
+                            <div className={`p-4 mx-auto max-w-${maxWidth}`}>
+                                <h1 className="text-2xl font-bold">
+                                    {title}
+                                    {type && <span className="opacity-40">.{type}</span>}
+                                </h1>
+                                {children}
+                            </div>
+                        </ScrollArea>
+                    </main>
+                </div>
             </div>
-        </div>
+        </SearchProvider>
     )
 }
 

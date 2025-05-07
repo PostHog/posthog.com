@@ -35,6 +35,13 @@ import ScrollArea from 'components/RadixUI/ScrollArea'
 import SEO from 'components/seo'
 import OSTable from 'components/OSTable'
 import { Select } from 'components/RadixUI/Select'
+import {
+    createFuseInstance,
+    processItemsWithHighlighting,
+    HighlightedText,
+    HighlightedMarkdown,
+} from 'components/Editor/SearchUtils'
+import { useSearch } from 'components/Editor/SearchProvider'
 
 interface IGitHubPage {
     title: string
@@ -252,20 +259,17 @@ export default function Roadmap({ searchQuery = '' }: RoadmapProps) {
         title: string
     } | null>(null)
 
-    const { staticRoadmaps } = useStaticQuery(graphql`
-        {
-            staticRoadmaps: allSqueakRoadmap {
-                nodes {
-                    githubPages {
-                        reactions {
-                            total_count
-                        }
-                    }
-                    squeakId
-                }
-            }
-        }
-    `)
+    // Get search context if available (from Editor)
+    const searchContext = useSearch()
+
+    // Use the Editor's search query if available, otherwise use the prop or local state
+    const effectiveSearchTerm = searchContext?.searchQuery || searchQuery || roadmapSearch
+
+    // Update roadmapSearch when searchQuery changes
+    useEffect(() => {
+        // When searchQuery changes (including being cleared), update roadmapSearch
+        setRoadmapSearch(searchQuery || '')
+    }, [searchQuery])
 
     const {
         roadmaps: initialRoadmaps,
@@ -321,26 +325,29 @@ export default function Roadmap({ searchQuery = '' }: RoadmapProps) {
         }
     }, [isLoading])
 
-    // Update roadmapSearch when searchQuery changes
-    useEffect(() => {
-        // When searchQuery changes (including being cleared), update roadmapSearch
-        setRoadmapSearch(searchQuery || '')
-    }, [searchQuery])
-
-    // Update fuse search to use either the searchQuery prop or the internal roadmapSearch state
-    const searchTerm = searchQuery || roadmapSearch
-
+    // Create a Fuse instance for searching
     const fuse = useMemo(
-        () => new Fuse(initialRoadmaps, { keys: ['attributes.title', 'attributes.description'], includeMatches: true }),
+        () =>
+            createFuseInstance(initialRoadmaps, [
+                { name: 'attributes.title', weight: 2 }, // Give title more weight
+                { name: 'attributes.description', weight: 1 },
+            ]),
         [initialRoadmaps]
     )
 
-    const filteredRoadmaps = useMemo(() => {
-        if (!searchTerm) return initialRoadmaps
+    // Process roadmaps with search highlighting
+    const roadmapsWithHighlights = useMemo(() => {
+        // Process the items with highlighting
+        const processed = processItemsWithHighlighting(fuse, initialRoadmaps, effectiveSearchTerm)
 
-        const results = fuse.search(searchTerm).map(({ item }) => item)
-        return results.length > 0 ? results : []
-    }, [fuse, searchTerm])
+        // If no search results and we have a search term, return empty array
+        if (processed.length === 0 && effectiveSearchTerm) {
+            return []
+        }
+
+        // Otherwise, use the processed items or fall back to all items
+        return processed.length > 0 ? processed : initialRoadmaps.map((item) => ({ item, highlightedFields: {} }))
+    }, [initialRoadmaps, fuse, effectiveSearchTerm])
 
     useEffect(() => {
         const params = new URLSearchParams(search)
@@ -354,15 +361,41 @@ export default function Roadmap({ searchQuery = '' }: RoadmapProps) {
         }
     }, [search])
 
+    // Add the staticRoadmaps query back
+    const { staticRoadmaps } = useStaticQuery(graphql`
+        {
+            staticRoadmaps: allSqueakRoadmap {
+                nodes {
+                    githubPages {
+                        reactions {
+                            total_count
+                        }
+                    }
+                    squeakId
+                }
+            }
+        }
+    `)
+
+    // Process the roadmaps to include like counts and other data
     const roadmaps = useMemo(() => {
-        // Transform the filtered roadmaps
-        return filteredRoadmaps.map(({ id, attributes }) => {
+        // If no items with highlights, return empty array
+        if (roadmapsWithHighlights.length === 0) return []
+
+        // Transform the items with like counts and other data
+        return roadmapsWithHighlights.map(({ item, highlightedFields }) => {
+            const { id, attributes } = item
             const likeCount = attributes?.likes?.data?.length || 0
             const staticLikeCount =
-                staticRoadmaps.nodes.find((node) => node.squeakId === id)?.githubPages?.[0]?.reactions?.total_count || 0
-            return { id, attributes: { ...attributes, likeCount: likeCount + staticLikeCount } }
+                staticRoadmaps.nodes.find((node: any) => node.squeakId === id)?.githubPages?.[0]?.reactions
+                    ?.total_count || 0
+            return {
+                id,
+                attributes: { ...attributes, likeCount: likeCount + staticLikeCount },
+                highlightedFields,
+            }
         })
-    }, [filteredRoadmaps, staticRoadmaps.nodes])
+    }, [roadmapsWithHighlights, staticRoadmaps.nodes])
 
     const roadmapsGroupedByTeam = groupBy(
         roadmaps,
@@ -385,12 +418,6 @@ export default function Roadmap({ searchQuery = '' }: RoadmapProps) {
 
     const stripHtml = (html: string) => {
         return html.replace(/<\/?[^>]+(>|$)/g, '')
-    }
-
-    const preparePreviewText = (text: string, limit: number) => {
-        // Replace line breaks with spaces for the preview
-        const singleLine = text.replace(/(\r\n|\n|\r)/gm, ' ')
-        return truncateText(singleLine, limit)
     }
 
     const { likeRoadmap } = useUser()
@@ -432,7 +459,7 @@ export default function Roadmap({ searchQuery = '' }: RoadmapProps) {
     // Sort the rows based on tableSort value
     const sortedRows = useMemo(() => {
         // First filter roadmaps by team if needed
-        const filteredRoadmaps = [...roadmaps].filter((roadmap) => {
+        const filteredRoadmaps = [...roadmaps].filter((roadmap: any) => {
             const roadmapTeam = roadmap.attributes.teams?.data?.[0]?.attributes?.name
 
             if (selectedTeam === 'All teams') {
@@ -447,7 +474,7 @@ export default function Roadmap({ searchQuery = '' }: RoadmapProps) {
         })
 
         // Then sort the roadmaps based on the selected sort criteria
-        const sortedRoadmaps = filteredRoadmaps.sort((a, b) => {
+        const sortedRoadmaps = filteredRoadmaps.sort((a: any, b: any) => {
             switch (tableSort) {
                 case 'newest': {
                     const dateA = a.attributes.createdAt ? new Date(a.attributes.createdAt).getTime() : 0
@@ -467,7 +494,7 @@ export default function Roadmap({ searchQuery = '' }: RoadmapProps) {
 
         // Since we're regenerating cells for each sort option to include/exclude date column,
         // we need to rebuild the rows from scratch for the sorted roadmaps
-        return sortedRoadmaps.map((roadmap) => {
+        return sortedRoadmaps.map((roadmap: any) => {
             const teamName = roadmap.attributes.teams?.data?.[0]?.attributes?.name
             const liked = user?.profile?.roadmapLikes?.some(({ id: roadmapID }) => roadmapID === roadmap.id)
 
@@ -479,6 +506,10 @@ export default function Roadmap({ searchQuery = '' }: RoadmapProps) {
                       day: 'numeric',
                   })
                 : 'Unknown'
+
+            // Access highlighted fields
+            const highlightedTitle = roadmap.highlightedFields?.title
+            const highlightedDescription = roadmap.highlightedFields?.description
 
             const cells = [
                 {
@@ -548,21 +579,50 @@ export default function Roadmap({ searchQuery = '' }: RoadmapProps) {
                     ),
                 },
                 {
-                    content: <h3 className="text-[15px] m-0 leading-tight">{roadmap.attributes.title}</h3>,
+                    content: (
+                        <h3 className="text-[15px] m-0 font-normal leading-tight">
+                            {effectiveSearchTerm && effectiveSearchTerm.length > 1 ? (
+                                // Direct approach for highlighting when we have a search term
+                                <span
+                                    dangerouslySetInnerHTML={{
+                                        __html: roadmap.attributes.title.replace(
+                                            new RegExp(
+                                                `(${effectiveSearchTerm.replace(/[-/\\^$*+?.()|[\]{}]/g, '\\$&')})`,
+                                                'gi'
+                                            ),
+                                            '<strong>$1</strong>'
+                                        ),
+                                    }}
+                                />
+                            ) : (
+                                // Use the HighlightedText component when no direct search
+                                <HighlightedText text={roadmap.attributes.title} highlights={highlightedTitle} />
+                            )}
+                        </h3>
+                    ),
                     className: '!pt-0.75',
                 },
                 {
                     content: (
                         <div className="text-sm community-post-markdown !p-0">
                             {roadmap.attributes.description.length <= 120 ? (
-                                <Markdown>{roadmap.attributes.description}</Markdown>
+                                <HighlightedMarkdown
+                                    content={roadmap.attributes.description}
+                                    searchTerm={effectiveSearchTerm}
+                                />
                             ) : expandedDescriptions[roadmap.id] ? (
-                                <>
-                                    <Markdown>{roadmap.attributes.description}</Markdown>
-                                </>
+                                <HighlightedMarkdown
+                                    content={roadmap.attributes.description}
+                                    searchTerm={effectiveSearchTerm}
+                                />
                             ) : (
                                 <div>
-                                    <Markdown>{preparePreviewText(roadmap.attributes.description, 75)}</Markdown>
+                                    <HighlightedMarkdown
+                                        content={roadmap.attributes.description}
+                                        searchTerm={effectiveSearchTerm}
+                                        truncate={true}
+                                        limit={75}
+                                    />
                                     <button
                                         onClick={(e) => {
                                             e.stopPropagation()
@@ -593,7 +653,7 @@ export default function Roadmap({ searchQuery = '' }: RoadmapProps) {
                 cells,
             }
         })
-    }, [roadmaps, tableSort, expandedDescriptions, loading, user, selectedTeam, searchQuery])
+    }, [roadmaps, tableSort, expandedDescriptions, loading, user, selectedTeam, effectiveSearchTerm])
 
     return (
         <>

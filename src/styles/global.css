@@ -12,7 +12,7 @@
         --input-border: #d2d3cc;
         --input-border-hover: #d2d3cc;
         --text-primary: #4d4f46;
-        --text-secondary: #65675E;
+        --text-secondary: #65675e;
         --text-muted: #9ea096;
 
         .hover-invert:hover,
@@ -797,6 +797,10 @@ body.dark {
             }
         }
     }
+}
+
+strong {
+    font-variation-settings: 'wght' 700;
 }
 
 ol,

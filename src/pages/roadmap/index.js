@@ -1,15 +1,8 @@
-import React, { useState } from 'react'
+import React from 'react'
 import Roadmap from 'components/Roadmap'
 import { Editor } from 'components/Editor'
 
 const RoadmapPage = () => {
-    const [searchQuery, setSearchQuery] = useState('')
-
-    const handleSearchChange = (query) => {
-        // Update the search query state
-        setSearchQuery(query)
-    }
-
     return (
         <Editor
             title="roadmap"
@@ -20,9 +13,8 @@ const RoadmapPage = () => {
                 products: ['product_analytics'],
                 caseStudy: true,
             }}
-            onSearchChange={handleSearchChange}
         >
-            <Roadmap searchQuery={searchQuery} />
+            <Roadmap />
         </Editor>
     )
 }
