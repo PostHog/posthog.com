@@ -31,7 +31,6 @@ import Fuse from 'fuse.js'
 import Tooltip from 'components/Tooltip'
 import Spinner from 'components/Spinner'
 import { slugifyTeamName } from 'lib/utils'
-import Editor from 'components/Editor'
 import ScrollArea from 'components/RadixUI/ScrollArea'
 import SEO from 'components/seo'
 import OSTable from 'components/OSTable'
@@ -232,7 +231,11 @@ interface Row {
     }[]
 }
 
-export default function Roadmap() {
+interface RoadmapProps {
+    searchQuery?: string
+}
+
+export default function Roadmap({ searchQuery = '' }: RoadmapProps) {
     const { search } = useLocation()
     const { user } = useUser()
     const [sortBy, setSortBy] = useState('popular')
@@ -318,14 +321,26 @@ export default function Roadmap() {
         }
     }, [isLoading])
 
+    // Update roadmapSearch when searchQuery changes
+    useEffect(() => {
+        // When searchQuery changes (including being cleared), update roadmapSearch
+        setRoadmapSearch(searchQuery || '')
+    }, [searchQuery])
+
+    // Update fuse search to use either the searchQuery prop or the internal roadmapSearch state
+    const searchTerm = searchQuery || roadmapSearch
+
     const fuse = useMemo(
         () => new Fuse(initialRoadmaps, { keys: ['attributes.title', 'attributes.description'], includeMatches: true }),
         [initialRoadmaps]
     )
+
     const filteredRoadmaps = useMemo(() => {
-        const results = fuse.search(roadmapSearch).map(({ item }) => item)
-        return results.length > 0 ? results : null
-    }, [fuse, roadmapSearch])
+        if (!searchTerm) return initialRoadmaps
+
+        const results = fuse.search(searchTerm).map(({ item }) => item)
+        return results.length > 0 ? results : []
+    }, [fuse, searchTerm])
 
     useEffect(() => {
         const params = new URLSearchParams(search)
@@ -339,12 +354,16 @@ export default function Roadmap() {
         }
     }, [search])
 
-    const roadmaps = (filteredRoadmaps || initialRoadmaps).map(({ id, attributes }) => {
-        const likeCount = attributes?.likes?.data?.length || 0
-        const staticLikeCount =
-            staticRoadmaps.nodes.find((node) => node.squeakId === id)?.githubPages?.[0]?.reactions?.total_count || 0
-        return { id, attributes: { ...attributes, likeCount: likeCount + staticLikeCount } }
-    })
+    const roadmaps = useMemo(() => {
+        // Transform the filtered roadmaps
+        return filteredRoadmaps.map(({ id, attributes }) => {
+            const likeCount = attributes?.likes?.data?.length || 0
+            const staticLikeCount =
+                staticRoadmaps.nodes.find((node) => node.squeakId === id)?.githubPages?.[0]?.reactions?.total_count || 0
+            return { id, attributes: { ...attributes, likeCount: likeCount + staticLikeCount } }
+        })
+    }, [filteredRoadmaps, staticRoadmaps.nodes])
+
     const roadmapsGroupedByTeam = groupBy(
         roadmaps,
         (roadmap) => `${roadmap.attributes.teams?.data?.[0]?.attributes?.name ?? 'Any'} Team`
@@ -574,302 +593,284 @@ export default function Roadmap() {
                 cells,
             }
         })
-    }, [roadmaps, tableSort, expandedDescriptions, loading, user, selectedTeam])
+    }, [roadmaps, tableSort, expandedDescriptions, loading, user, selectedTeam, searchQuery])
 
     return (
         <>
             <SEO title="Roadmap – PostHog" description="" image={`/images/og/customers.jpg`} />
-            <Editor
-                title="roadmap"
-                type="psheet"
-                slug="/roadmap"
-                maxWidth="full"
-                filters={{
-                    products: ['product_analytics'],
-                    caseStudy: true,
-                }}
-            >
-                <ScrollArea>
-                    <section>
-                        <>
-                            <SideModal title="Sign in to vote" open={authModalOpen} setOpen={setAuthModalOpen}>
-                                <h4 className="mb-4">Sign into PostHog.com</h4>
-                                <div className="bg-border dark:bg-border-dark p-4 mb-2">
-                                    <p className="text-sm mb-2">
-                                        <strong>
-                                            Note: PostHog.com authentication is separate from your PostHog app.
-                                        </strong>
-                                    </p>
+            <ScrollArea>
+                <section>
+                    <>
+                        <SideModal title="Sign in to vote" open={authModalOpen} setOpen={setAuthModalOpen}>
+                            <h4 className="mb-4">Sign into PostHog.com</h4>
+                            <div className="bg-border dark:bg-border-dark p-4 mb-2">
+                                <p className="text-sm mb-2">
+                                    <strong>Note: PostHog.com authentication is separate from your PostHog app.</strong>
+                                </p>
 
-                                    <p className="text-sm mb-0">
-                                        We suggest signing up with your personal email. Soon you'll be able to link your
-                                        PostHog app account.
-                                    </p>
-                                </div>
-
-                                <Authentication
-                                    initialView="sign-in"
-                                    onAuth={(user) => {
-                                        setAuthModalOpen(false)
-                                        if (selectedRoadmapId) {
-                                            like(selectedRoadmapId.id, selectedRoadmapId.title)
-                                        }
-                                    }}
-                                    showBanner={false}
-                                    showProfile={false}
-                                />
-                            </SideModal>
-                            {isLoading ? (
-                                <div
-                                    data-scheme="primary"
-                                    className="border border-primary bg-accent rounded-md p-8 mb-12"
-                                >
-                                    <div className="max-w-xl mx-auto">
-                                        <div className="flex justify-between mb-2 text-sm">
-                                            <span className="font-semibold">Loading roadmap data...</span>
-                                            <span>{Math.round(progress)}%</span>
-                                        </div>
-                                        <div className="h-4 w-full border border-primary bg-primary overflow-hidden">
-                                            <div
-                                                className="h-full bg-red dark:bg-yellow transition-all duration-100 ease-out"
-                                                style={{ width: `${progress}%` }}
-                                            ></div>
-                                        </div>
-                                    </div>
-                                </div>
-                            ) : (
-                                <>
-                                    <div className="flex justify-between items-center mb-4">
-                                        <div className="flex items-center">
-                                            <span className="text-sm font-medium mr-2 text-secondary dark:text-secondary-dark">
-                                                Filter by:
-                                            </span>
-                                            <Select
-                                                value={selectedTeam}
-                                                onValueChange={setSelectedTeam}
-                                                placeholder="Filter by team"
-                                                className="w-[180px] text-sm border-border dark:border-dark hover:border-light dark:hover:border-dark"
-                                                dataScheme="primary"
-                                                groups={[
-                                                    {
-                                                        label: 'Teams',
-                                                        items: [
-                                                            {
-                                                                value: 'All teams',
-                                                                label: 'All teams',
-                                                                icon: 'IconHome',
-                                                            },
-                                                            {
-                                                                value: 'Any Team',
-                                                                label: 'Not assigned',
-                                                                icon: 'IconMinus',
-                                                            },
-                                                            ...teams
-                                                                .filter((team) => team !== 'Any Team') // Remove Any Team
-                                                                .map((team) => {
-                                                                    const teamName = team.replace(' Team', '')
-                                                                    return {
-                                                                        value: team,
-                                                                        label: teamName,
-                                                                        icon: 'IconUser',
-                                                                    }
-                                                                }),
-                                                        ],
-                                                    },
-                                                ]}
-                                            />
-                                        </div>
-                                        <div className="flex items-center">
-                                            <span className="text-sm font-medium mr-2 text-secondary dark:text-secondary-dark">
-                                                Sort by:
-                                            </span>
-                                            <Select
-                                                value={tableSort}
-                                                onValueChange={setTableSort}
-                                                placeholder="Sort by"
-                                                className="w-[180px] text-sm border-border dark:border-dark hover:border-light dark:hover:border-dark"
-                                                dataScheme="primary"
-                                                groups={[
-                                                    {
-                                                        label: 'Sort options',
-                                                        items: [
-                                                            {
-                                                                value: 'popular',
-                                                                label: 'Most popular',
-                                                                icon: 'IconThumbsUpFilled',
-                                                                color: 'red dark:text-yellow',
-                                                            },
-                                                            {
-                                                                value: 'newest',
-                                                                label: 'Newest date first',
-                                                                icon: 'IconClock',
-                                                            },
-                                                            {
-                                                                value: 'oldest',
-                                                                label: 'Oldest date first',
-                                                                icon: 'IconCalendar',
-                                                            },
-                                                        ],
-                                                    },
-                                                ]}
-                                            />
-                                        </div>
-                                    </div>
-                                    <OSTable columns={columns} rows={sortedRows} rowAlignment="top" className="mb-12" />
-                                </>
-                            )}
-                        </>
-
-                        <div className="relative">
-                            <div className="flex justify-between items-center">
-                                <div className="flex gap-4 items-center">
-                                    <h1 className="font-bold text-3xl sm:text-4xl my-0">Roadmap</h1>
-                                    {isModerator && !adding && (
-                                        <div className="relative top-1">
-                                            <CallToAction onClick={() => setAdding(true)} size="xs" type="secondary">
-                                                <Tooltip content="Only moderators can see this" placement="top">
-                                                    <IconShieldLock className="w-6 h-6 inline-block mr-1" />
-                                                </Tooltip>
-                                                Add a feature
-                                            </CallToAction>
-                                        </div>
-                                    )}
-                                </div>
-                                <Sort className="hidden sm:flex" setSortBy={setSortBy} sortBy={sortBy} />
+                                <p className="text-sm mb-0">
+                                    We suggest signing up with your personal email. Soon you'll be able to link your
+                                    PostHog app account.
+                                </p>
                             </div>
-                            <p className="my-0 font-semibold mt-2 mb-4">
-                                <span className="opacity-70">
-                                    Here's what we're thinking about building next. Vote for your favorites, or request
-                                    a new feature{' '}
-                                </span>
-                                <Link externalNoIcon to="https://github.com/PostHog/posthog/issues">
-                                    on GitHub
-                                </Link>
-                                <span className="opacity-70">.</span>
-                            </p>
-                            <Sort className="sm:hidden flex mt-4" setSortBy={setSortBy} sortBy={sortBy} />
 
-                            {isModerator && adding && (
-                                <RoadmapForm
-                                    status="under-consideration"
-                                    onSubmit={() => {
-                                        mutate()
-                                        setAdding(false)
-                                    }}
-                                />
-                            )}
-                        </div>
-                        <input
-                            onChange={(e) => setRoadmapSearch(e.target.value)}
-                            placeholder="Search this page..."
-                            className="w-full p-2 rounded-md border border-border dark:bg-accent-dark dark:border-dark text-primary dark:text-primary-dark"
-                        />
-                        {sortBy === 'team' && teams.length > 0 && (
-                            <Slider
-                                activeIndex={teams.indexOf(selectedTeam)}
-                                className="whitespace-nowrap space-x-1.5 mt-4"
-                            >
-                                {['All teams', ...teams].map((team) => {
-                                    return (
-                                        <button
-                                            key={team}
-                                            onClick={() => navigate(`?sort=team&team=${encodeURIComponent(team)}`)}
-                                            className={`px-2 py-1 text-sm border border-border dark:border-dark rounded-md relative hover:scale-[1.01] active:top-[.5px] active:scale-[.99] ${
-                                                selectedTeam === team
-                                                    ? 'bg-accent dark:bg-accent-dark font-bold'
-                                                    : 'text-primary-75 dark:hover:text-primary-dark-75 hover:bg-accent/75 dark:hover:bg-accent-dark'
-                                            }`}
-                                        >
-                                            {team.replace(' Team', '')}
-                                        </button>
-                                    )
-                                })}
-                            </Slider>
-                        )}
+                            <Authentication
+                                initialView="sign-in"
+                                onAuth={(user) => {
+                                    setAuthModalOpen(false)
+                                    if (selectedRoadmapId) {
+                                        like(selectedRoadmapId.id, selectedRoadmapId.title)
+                                    }
+                                }}
+                                showBanner={false}
+                                showProfile={false}
+                            />
+                        </SideModal>
                         {isLoading ? (
-                            <Skeleton />
+                            <div data-scheme="primary" className="border border-primary bg-accent rounded-md p-8 mb-12">
+                                <div className="max-w-xl mx-auto">
+                                    <div className="flex justify-between mb-2 text-sm">
+                                        <span className="font-semibold">Loading roadmap data...</span>
+                                        <span>{Math.round(progress)}%</span>
+                                    </div>
+                                    <div className="h-4 w-full border border-primary bg-primary overflow-hidden">
+                                        <div
+                                            className="h-full bg-red dark:bg-yellow transition-all duration-100 ease-out"
+                                            style={{ width: `${progress}%` }}
+                                        ></div>
+                                    </div>
+                                </div>
+                            </div>
                         ) : (
-                            <ul className="m-0 p-0 list-none mt-10 space-y-10">
-                                {sortBy === 'popular' || sortBy === 'latest' ? (
-                                    [...roadmaps]
-                                        .sort((a, b) => {
-                                            return sortBy === 'popular'
-                                                ? b.attributes.likeCount - a.attributes.likeCount
-                                                : b.attributes.createdAt - a.attributes.createdAt
-                                        })
-                                        .map((roadmap) => {
+                            <>
+                                <div className="flex justify-between items-center mb-4">
+                                    <div className="flex items-center">
+                                        <span className="text-sm font-medium mr-2 text-secondary dark:text-secondary-dark">
+                                            Filter by:
+                                        </span>
+                                        <Select
+                                            value={selectedTeam}
+                                            onValueChange={setSelectedTeam}
+                                            placeholder="Filter by team"
+                                            className="w-[180px] text-sm border-border dark:border-dark hover:border-light dark:hover:border-dark"
+                                            dataScheme="primary"
+                                            groups={[
+                                                {
+                                                    label: 'Teams',
+                                                    items: [
+                                                        {
+                                                            value: 'All teams',
+                                                            label: 'All teams',
+                                                            icon: 'IconHome',
+                                                        },
+                                                        {
+                                                            value: 'Any Team',
+                                                            label: 'Not assigned',
+                                                            icon: 'IconMinus',
+                                                        },
+                                                        ...teams
+                                                            .filter((team) => team !== 'Any Team') // Remove Any Team
+                                                            .map((team) => {
+                                                                const teamName = team.replace(' Team', '')
+                                                                return {
+                                                                    value: team,
+                                                                    label: teamName,
+                                                                    icon: 'IconUser',
+                                                                }
+                                                            }),
+                                                    ],
+                                                },
+                                            ]}
+                                        />
+                                    </div>
+                                    <div className="flex items-center">
+                                        <span className="text-sm font-medium mr-2 text-secondary dark:text-secondary-dark">
+                                            Sort by:
+                                        </span>
+                                        <Select
+                                            value={tableSort}
+                                            onValueChange={setTableSort}
+                                            placeholder="Sort by"
+                                            className="w-[180px] text-sm border-border dark:border-dark hover:border-light dark:hover:border-dark"
+                                            dataScheme="primary"
+                                            groups={[
+                                                {
+                                                    label: 'Sort options',
+                                                    items: [
+                                                        {
+                                                            value: 'popular',
+                                                            label: 'Most popular',
+                                                            icon: 'IconThumbsUpFilled',
+                                                            color: 'red dark:text-yellow',
+                                                        },
+                                                        {
+                                                            value: 'newest',
+                                                            label: 'Newest date first',
+                                                            icon: 'IconClock',
+                                                        },
+                                                        {
+                                                            value: 'oldest',
+                                                            label: 'Oldest date first',
+                                                            icon: 'IconCalendar',
+                                                        },
+                                                    ],
+                                                },
+                                            ]}
+                                        />
+                                    </div>
+                                </div>
+                                <OSTable columns={columns} rows={sortedRows} rowAlignment="top" className="mb-12" />
+                            </>
+                        )}
+                    </>
+
+                    <div className="relative">
+                        <div className="flex justify-between items-center">
+                            <div className="flex gap-4 items-center">
+                                <h1 className="font-bold text-3xl sm:text-4xl my-0">Roadmap</h1>
+                                {isModerator && !adding && (
+                                    <div className="relative top-1">
+                                        <CallToAction onClick={() => setAdding(true)} size="xs" type="secondary">
+                                            <Tooltip content="Only moderators can see this" placement="top">
+                                                <IconShieldLock className="w-6 h-6 inline-block mr-1" />
+                                            </Tooltip>
+                                            Add a feature
+                                        </CallToAction>
+                                    </div>
+                                )}
+                            </div>
+                            <Sort className="hidden sm:flex" setSortBy={setSortBy} sortBy={sortBy} />
+                        </div>
+                        <p className="my-0 font-semibold mt-2 mb-4">
+                            <span className="opacity-70">
+                                Here's what we're thinking about building next. Vote for your favorites, or request a
+                                new feature{' '}
+                            </span>
+                            <Link externalNoIcon to="https://github.com/PostHog/posthog/issues">
+                                on GitHub
+                            </Link>
+                            <span className="opacity-70">.</span>
+                        </p>
+                        <Sort className="sm:hidden flex mt-4" setSortBy={setSortBy} sortBy={sortBy} />
+
+                        {isModerator && adding && (
+                            <RoadmapForm
+                                status="under-consideration"
+                                onSubmit={() => {
+                                    mutate()
+                                    setAdding(false)
+                                }}
+                            />
+                        )}
+                    </div>
+
+                    {/* Team Slider - only show when sorting by team */}
+                    {sortBy === 'team' && teams.length > 0 && (
+                        <Slider
+                            activeIndex={teams.indexOf(selectedTeam)}
+                            className="whitespace-nowrap space-x-1.5 mt-4"
+                        >
+                            {['All teams', ...teams].map((team) => {
+                                return (
+                                    <button
+                                        key={team}
+                                        onClick={() => navigate(`?sort=team&team=${encodeURIComponent(team)}`)}
+                                        className={`px-2 py-1 text-sm border border-border dark:border-dark rounded-md relative hover:scale-[1.01] active:top-[.5px] active:scale-[.99] ${
+                                            selectedTeam === team
+                                                ? 'bg-accent dark:bg-accent-dark font-bold'
+                                                : 'text-primary-75 dark:hover:text-primary-dark-75 hover:bg-accent/75 dark:hover:bg-accent-dark'
+                                        }`}
+                                    >
+                                        {team.replace(' Team', '')}
+                                    </button>
+                                )
+                            })}
+                        </Slider>
+                    )}
+
+                    {isLoading ? (
+                        <Skeleton />
+                    ) : (
+                        <ul className="m-0 p-0 list-none mt-10 space-y-10">
+                            {sortBy === 'popular' || sortBy === 'latest' ? (
+                                [...roadmaps]
+                                    .sort((a, b) => {
+                                        return sortBy === 'popular'
+                                            ? b.attributes.likeCount - a.attributes.likeCount
+                                            : b.attributes.createdAt - a.attributes.createdAt
+                                    })
+                                    .map((roadmap) => {
+                                        return (
+                                            <li className="" key={roadmap.id}>
+                                                <Feature
+                                                    id={roadmap.id}
+                                                    {...roadmap.attributes}
+                                                    onLike={mutate}
+                                                    onUpdate={mutate}
+                                                />
+                                            </li>
+                                        )
+                                    })
+                            ) : (
+                                <ul className="m-0 p-0 list-none mt-6 space-y-10">
+                                    {teams
+                                        .filter((team) => selectedTeam === 'All teams' || team === selectedTeam)
+                                        .map((team) => {
+                                            const roadmaps = roadmapsGroupedByTeam[team]
                                             return (
-                                                <li className="" key={roadmap.id}>
-                                                    <Feature
-                                                        id={roadmap.id}
-                                                        {...roadmap.attributes}
-                                                        onLike={mutate}
-                                                        onUpdate={mutate}
-                                                    />
+                                                <li className="relative" key={team}>
+                                                    <h4 className="text-lg m-0 mb-6 pr-2 inline-flex items-center bg-light dark:bg-dark after:-z-10 after:absolute after:w-full after:h-[1px] after:bg-border after:dark:bg-border-dark after:translate-y-[2px]">
+                                                        {team}
+                                                    </h4>
+                                                    <ul className="m-0 p-0 list-none space-y-8">
+                                                        {[...roadmaps]
+                                                            .sort(
+                                                                (a, b) =>
+                                                                    b.attributes.likeCount - a.attributes.likeCount
+                                                            )
+                                                            .map((roadmap) => {
+                                                                return (
+                                                                    <li key={roadmap.id}>
+                                                                        <Feature
+                                                                            id={roadmap.id}
+                                                                            {...roadmap.attributes}
+                                                                            onLike={mutate}
+                                                                            onUpdate={mutate}
+                                                                        />
+                                                                    </li>
+                                                                )
+                                                            })}
+                                                    </ul>
                                                 </li>
                                             )
-                                        })
-                                ) : (
-                                    <ul className="m-0 p-0 list-none mt-6 space-y-10">
-                                        {teams
-                                            .filter((team) => selectedTeam === 'All teams' || team === selectedTeam)
-                                            .map((team) => {
-                                                const roadmaps = roadmapsGroupedByTeam[team]
-                                                return (
-                                                    <li className="relative" key={team}>
-                                                        <h4 className="text-lg m-0 mb-6 pr-2 inline-flex items-center bg-light dark:bg-dark after:-z-10 after:absolute after:w-full after:h-[1px] after:bg-border after:dark:bg-border-dark after:translate-y-[2px]">
-                                                            {team}
-                                                        </h4>
-                                                        <ul className="m-0 p-0 list-none space-y-8">
-                                                            {[...roadmaps]
-                                                                .sort(
-                                                                    (a, b) =>
-                                                                        b.attributes.likeCount - a.attributes.likeCount
-                                                                )
-                                                                .map((roadmap) => {
-                                                                    return (
-                                                                        <li key={roadmap.id}>
-                                                                            <Feature
-                                                                                id={roadmap.id}
-                                                                                {...roadmap.attributes}
-                                                                                onLike={mutate}
-                                                                                onUpdate={mutate}
-                                                                            />
-                                                                        </li>
-                                                                    )
-                                                                })}
-                                                        </ul>
-                                                    </li>
-                                                )
-                                            })}
-                                    </ul>
-                                )}
+                                        })}
+                                </ul>
+                            )}
 
-                                <div className="bg-accent dark:bg-accent-dark border border-light dark:border-dark px-8 py-8 rounded-md">
-                                    <h3 className="m-0 mb-2 text-lg">Request another feature</h3>
-                                    <p className="mb-3">
-                                        We add features to our roadmap based on customer feedback shared{' '}
-                                        <Link to="https://github.com/posthog/posthog/issues" external>
-                                            in our GitHub repo
-                                        </Link>
-                                        . We'd love to have you share your best ideas there!
-                                    </p>
-                                    <p className="mb-0">
-                                        <CallToAction
-                                            size="sm"
-                                            type="secondary"
-                                            to="https://github.com/posthog/posthog/issues"
-                                            externalNoIcon
-                                        >
-                                            Request a feature
-                                        </CallToAction>
-                                    </p>
-                                </div>
-                            </ul>
-                        )}
-                    </section>
-                </ScrollArea>
-            </Editor>
+                            <div className="bg-accent dark:bg-accent-dark border border-light dark:border-dark px-8 py-8 rounded-md">
+                                <h3 className="m-0 mb-2 text-lg">Request another feature</h3>
+                                <p className="mb-3">
+                                    We add features to our roadmap based on customer feedback shared{' '}
+                                    <Link to="https://github.com/posthog/posthog/issues" external>
+                                        in our GitHub repo
+                                    </Link>
+                                    . We'd love to have you share your best ideas there!
+                                </p>
+                                <p className="mb-0">
+                                    <CallToAction
+                                        size="sm"
+                                        type="secondary"
+                                        to="https://github.com/posthog/posthog/issues"
+                                        externalNoIcon
+                                    >
+                                        Request a feature
+                                    </CallToAction>
+                                </p>
+                            </div>
+                        </ul>
+                    )}
+                </section>
+            </ScrollArea>
         </>
     )
 }

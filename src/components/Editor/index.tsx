@@ -35,6 +35,7 @@ interface EditorProps {
         products?: string[]
         [key: string]: any
     }
+    onSearchChange?: (query: string) => void
 }
 
 const toolbarElementsBase: ToolbarElement[] = [
@@ -160,9 +161,10 @@ const toolbarElementsBase: ToolbarElement[] = [
     },
 ]
 
-export default function Editor({ title, type, children, filters, maxWidth = '3xl' }: EditorProps) {
+export function Editor({ title, type, children, filters, maxWidth = '3xl', onSearchChange }: EditorProps) {
     const [showFilters, setShowFilters] = useState(false)
     const [showSearch, setShowSearch] = useState(false)
+    const [searchQuery, setSearchQuery] = useState('')
     const products = useProduct() as { slug: string; name: string; type: string }[]
     // take the product name passed in and check the useProduct hook to get the product's display name
     const getProductName = (type: string) => products.find((p) => p.type === type)?.name || type
@@ -180,15 +182,40 @@ export default function Editor({ title, type, children, filters, maxWidth = '3xl
     const handleKeyDown = (e: React.KeyboardEvent) => {
         if (e.key === 'Escape') {
             setShowSearch(false)
+            setSearchQuery('') // Clear search query
+            if (onSearchChange) {
+                onSearchChange('') // Clear parent component's search query too
+            }
         }
     }
 
     const toggleSearch = () => {
-        setShowSearch(!showSearch)
+        const newSearchState = !showSearch
+        setShowSearch(newSearchState)
+
+        // If closing search, clear the query
+        if (!newSearchState) {
+            setSearchQuery('') // Clear search query
+            if (onSearchChange) {
+                onSearchChange('') // Clear parent component's search query too
+            }
+        }
     }
 
     const closeSearch = () => {
         setShowSearch(false)
+        setSearchQuery('') // Clear search query
+        if (onSearchChange) {
+            onSearchChange('') // Clear parent component's search query too
+        }
+    }
+
+    const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const value = e.target.value
+        setSearchQuery(value)
+        if (onSearchChange) {
+            onSearchChange(value)
+        }
     }
 
     const toolbarElements = [
@@ -233,6 +260,8 @@ export default function Editor({ title, type, children, filters, maxWidth = '3xl
                                 placeholder="Search this page..."
                                 className="w-full p-1 rounded border border-input text-primary text-sm"
                                 onKeyDown={handleKeyDown}
+                                onChange={handleSearchChange}
+                                value={searchQuery}
                                 autoFocus
                             />
                             <OSButton variant="ghost" size="xs" icon={<IconX />} onClick={closeSearch} />
@@ -257,3 +286,6 @@ export default function Editor({ title, type, children, filters, maxWidth = '3xl
         </div>
     )
 }
+
+// Add default export for backward compatibility
+export default Editor
