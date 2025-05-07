@@ -92,14 +92,16 @@ function NewsletterFBC() {
                                                 </span>
                                             </p>
                                             {!showContent && (
-                                                <p className="!text-sm opacity-50 !m-0 !-mt-2 !-mb-2">- or -</p>
+                                                <>
+                                                    <p className="!text-sm opacity-50 !m-0 !-mt-2 !-mb-2">- or -</p>
+                                                    <button
+                                                        onClick={() => setShowContent(true)}
+                                                        className="text-primary hover:text-primary-dark dark:text-primary-dark dark:hover:text-primary underline"
+                                                    >
+                                                        Read it first
+                                                    </button>
+                                                </>
                                             )}
-                                            <button
-                                                onClick={() => setShowContent(true)}
-                                                className="text-primary hover:text-primary-dark dark:text-primary-dark dark:hover:text-primary underline"
-                                            >
-                                                Read it first
-                                            </button>
                                         </div>
                                     </div>
                                 </>
