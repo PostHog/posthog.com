@@ -14,18 +14,18 @@ crosspost:
   - Blog
 ---
 
-It’s safe to say if PostHog wasn’t open source, you wouldn’t be reading this right now. PostHog might not even exist. Being open source is *that* core to our success, and has been since day one.
+It's safe to say if PostHog wasn't open source, you wouldn't be reading this right now. PostHog might not even exist. Being open source is *that* core to our success, and has been since day one.
 
-This isn’t to say what “being open source” means hasn’t changed as we’ve grown from a single product to a 14+ product platform. Open source has gone from a product differentiator to a core part of our company culture.
+This isn't to say what “being open source” means hasn't changed as we've grown from a single product to a 14+ product platform. Open source has gone from a product differentiator to a core part of our company culture.
 
-Throughout this evolution, we’ve learned a lot about what it means to be open source as well as the benefits it provides. We’re detailing those here.
+Throughout this evolution, we've learned a lot about what it means to be open source as well as the benefits it provides. We're detailing those here.
 
 > **For transparency, here are our open source credentials:**
 >
-> 1. You can find PostHog’s code (and work) publicly available on [GitHub](https://github.com/PostHog/posthog). A majority of it is MIT licensed but some parts are under a separate enterprise license.
-> 2. PostHog can be tricky to self-host due to our breadth of products, but many people have managed to do so. We’re also working on [making this better](/teams/developer-experience#goals). 
+> 1. You can find PostHog's code (and work) publicly available on [GitHub](https://github.com/PostHog/posthog). A majority of it is MIT licensed but some parts are under a separate enterprise license.
+> 2. PostHog can be tricky to self-host due to our breadth of products, but many people have managed to do so. We're also working on [making this better](/teams/developer-experience#goals). 
 >
-> It is totally fair for you to have a different definition of open source (some would call this “open core”), but this is where we’re coming from.
+> It is totally fair for you to have a different definition of open source (some would call this “open core”), but this is where we're coming from.
 
 ## 1. It distinguishes you from the crowd
 
@@ -39,18 +39,20 @@ We know this because PostHog did the same. Launching as “open-source product a
 
 ![PostHog launch](https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_04_29_at_15_49_50_fbf689f1d5.png)
 
-Beyond launch, being open source continues to distinguish your product from competitors. There are plenty of buyers who have been burned by closed source options and have seen the benefits open source products provide including:
+This is fueled by two groups. The first is **open source advocates**, who are dedicated to seeing open source succeed. They use open source products whenever possible, recommend them to others, and post about them. We benefit hugely from this (700+ messages in our `#brand-mentions` channel include "open source").
+
+The second group is the **buyers**. They have been burned by closed source options and have seen the benefits open source products provide including:
 
 - Easier to try out
 - Transparency
 - Freedom from lock-in
 - Cost reduction
 
-Again, we continue to see this. Even though we are a mature platform with many reasons to choose us, we still get signups where being open source is the most important one.
+Both these groups boost open source startups in launches and beyond. They create word-of-mouth and bottoms up growth. We continue to see this. Even though there are many reasons to choose PostHog, we still get many signups where being open source is the most important one.
 
 ## 2. It helps you hire
 
-We’ve written before about [how important hiring is](/newsletter/43-lessons-about-hiring-for-startups). Any advantage you can get here is huge. As non-obvious as it might seem, we’ve found being open source is one of them.
+We've written before about [how important hiring is](/newsletter/43-lessons-about-hiring-for-startups). Any advantage you can get here is huge. As non-obvious as it might seem, we've found being open source is one of them.
 
 This was true from the very beginning of PostHog. We can thank being open source for one of our earliest employees: King of ClickHouse, flip-flops, moustaches: James Greenhill aka Jams.
 
@@ -66,25 +68,25 @@ Since then, being open source has been instrumental to our hiring process:
 - This also means they know their code will see the light of day. Users will use it and there won't be tumbleweeds in their GitHub profiles. For future jobs, they have real features, code, and pull requests they can point to as examples.
 - They can contribute before they start. Opening a pull request with their solution is often part of the [superday process](/handbook/people/hiring-process#4-posthog-superday) and some keeners even do this before we ask them to (which makes an even better impression).
 
-This isn’t just the case for us, many companies hire people who contribute to their open source project and have for a long time. This is beneficial to both parties:
+This isn't just the case for us, many companies hire people who contribute to their open source project and have for a long time. This is beneficial to both parties:
 
 1. Companies can look for (and find) people who are more familiar with their codebase and domain.
 
-2. Candidates get a preview into what working at the company is actually like. Companies can’t lie when their work is in the open. This lowers the risk of their expectations not matching the reality of the job.
+2. Candidates get a preview into what working at the company is actually like. Companies can't lie when their work is in the open. This lowers the risk of their expectations not matching the reality of the job.
 
 ## 3. It creates trust
 
-PostHog (and many other open source startups) are built for developers. A defining feature of developers is their strong BS detector. Luckily, being open source is a key way to defuse this BS detector. As they say: “code don’t lie.”
+PostHog (and many other open source startups) are built for developers. A defining feature of developers is their strong BS detector. Luckily, being open source is a key way to defuse this BS detector. As they say: “code don't lie.”
 
 Open source builds trust in multiple ways:
 
-- Instead of saying “trust me bro, we’re working on it”, we can link to issues, or better yet, pull requests that show what we are actually doing. Users can then give us direct feedback about these and we ship a solution that actually solves their problem faster.
+- Instead of saying “trust me bro, we're working on it”, we can link to issues, or better yet, pull requests that show what we are actually doing. Users can then give us direct feedback about these and we ship a solution that actually solves their problem faster.
 
 - Similar to this, our [decision-making process](/newsletter/choosing-technologies) is also in public. We can talk through and share why we went with certain product or technology choices. Being secretive about this is not the source of our advantage.
 
 - If developers need to know the details of our implementation, they can [look for themselves](https://github.com/posthog/posthog). They can audit our code for bugs or potential issues. This enables developers to self-serve answers to their issues.
 
-- As buyers, you can see our [pricing](/pricing) and [entire sales process](/handbook/growth/sales/overview). There’s nothing hiding behind a “request a demo” button, whitepaper, or “quick call.” You can even see what sorts of [discounts](/handbook/growth/sales/contracts#discounts) we offer without needing to [haggle like a used car salesman](/founders/negotiate-software-better).
+- As buyers, you can see our [pricing](/pricing) and [entire sales process](/handbook/growth/sales/overview). There's nothing hiding behind a “request a demo” button, whitepaper, or “quick call.” You can even see what sorts of [discounts](/handbook/growth/sales/contracts#discounts) we offer without needing to [haggle like a used car salesman](/founders/negotiate-software-better).
 
 - As employees, everything from [compensation](/handbook/people/compensation) to [benefits](/handbook/people/benefits) to [ways of working](/newsletter/how-we-work-async) are detailed transparently in our [handbook](/handbook). This helps new joiners know what they are getting into and everyone gets treated with respect and fairness once in.
 
@@ -94,7 +96,7 @@ It is when this agreement is broken that people get angry (often more so than if
 
 1. Remaining alive and sustainable as a company.
 2. Setting clear expectations of how open source works at PostHog.
-3. Keeping our licensing the same as we’ve grown (and having no plans to change it).
+3. Keeping our licensing the same as we've grown (and having no plans to change it).
 
 ## 4. It generates more feedback and contribution
 
@@ -104,19 +106,19 @@ The solution to this is channeling these contributions. For example, we realize 
 
 1. Making our feature requests and [roadmap](/roadmap) open. We ask people to 👍 and comment on features they would like to see next. This also helps identify potential user interviewees and beta testers. 
 
-2. We open source our website too, making it easy for people to contribute small fixes like typos. Roughly 10% of pull requests on our [`posthog.com`](https://github.com/PostHog/posthog.com) repo are from contributors outside PostHog. I’ve even seen people write entirely new docs pages. 
+2. We open source our website too, making it easy for people to contribute small fixes like typos. Roughly 10% of pull requests on our [`posthog.com`](https://github.com/PostHog/posthog.com) repo are from contributors outside PostHog. I've even seen people write entirely new docs pages. 
 
 3. Having cool [merch](/merch) and being generous with giving it out to contributors. Anyone on our team has the power to give out a merch code. “Merch them” is a common response to seeing a great contribution.
 
 ![Merch them](https://res.cloudinary.com/dmukukwp6/image/upload/image_5_15cf22540d.png)
 
-By providing ways to contribute outside of code, we are able to maintain the community ethos of open source without asking people to make the heavy investment to get up to speed on development (we pay people to do this instead). The contributions we do get are hugely helpful. They help us ship a product that is both more polished and better tailored to our users’ actual use cases.
+By providing ways to contribute outside of code, we are able to maintain the community ethos of open source without asking people to make the heavy investment to get up to speed on development (we pay people to do this instead). The contributions we do get are hugely helpful. They help us ship a product that is both more polished and better tailored to our users' actual use cases.
 
 ## What are the downsides of being an open source startup?
 
-Not to paint too rosy a picture, but it’s not all good in open source land.
+Not to paint too rosy a picture, but it's not all good in open source land.
 
-There are some perceived downsides that don’t matter much in reality. For example, some worry that others will judge your work if it's in the open. This rarely happens in reality. 99% of people will never see your work and your coworkers will almost always be tougher critics than the community is. 
+There are some perceived downsides that don't matter much in reality. For example, some worry that others will judge your work if it's in the open. This rarely happens in reality. 99% of people will never see your work and your coworkers will almost always be tougher critics than the community is. 
 
 Instead, there are some non-obvious downsides to being open source we have found. These include:
 
@@ -142,10 +144,10 @@ Eventually, we made the [tough decision to shut it down](/blog/sunsetting-helm-s
 
 ### 3. You might be competing with yourself
 
-It can be hard to balance a free, open-source product and a paid, hosted option. No matter what you do, you’ll face allegations that you are making the open source version worse intentionally (whether that is true or not). 
+It can be hard to balance a free, open-source product and a paid, hosted option. No matter what you do, you'll face allegations that you are making the open source version worse intentionally (whether that is true or not). 
 
-To be honest, five years in, and we are still figuring this one out. PostHog has gotten more complex to host, even for us (our [infra team](/teams/infrastructure) has grown to 5 people). We continue to offer a generous free tier, but many people still want to self-host and find it difficult to do so. Again, we’re [working on it](/teams/developer-experience#goals)!
+To be honest, five years in, and we are still figuring this one out. PostHog has gotten more complex to host, even for us (our [infra team](/teams/infrastructure) has grown to 5 people). We continue to offer a generous free tier, but many people still want to self-host and find it difficult to do so. Again, we're [working on it](/teams/developer-experience#goals)!
 
-What hasn’t changed is open source being a [core value](/handbook/values) of our company. We have a broader definition of open source than most. We think it’s not just the code you write, but your overall culture. We try to be open source in all the ways we can. Our [handbook](/handbook), [roadmap](/roadmap), and even this [newsletter](/newsletter) are all testaments to this.
+What hasn't changed is open source being a [core value](/handbook/values) of our company. We have a broader definition of open source than most. We think it's not just the code you write, but your overall culture. We try to be open source in all the ways we can. Our [handbook](/handbook), [roadmap](/roadmap), and even this [newsletter](/newsletter) are all testaments to this.
 
-We've found this to be a better solution as it is a lot easier to be consistently open source when your code isn’t the only thing you open source.
+We've found this to be a better solution as it is a lot easier to be consistently open source when your code isn't the only thing you open source.
