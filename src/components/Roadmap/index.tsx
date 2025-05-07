@@ -305,6 +305,12 @@ export default function Roadmap() {
         return html.replace(/<\/?[^>]+(>|$)/g, '')
     }
 
+    const preparePreviewText = (text: string, limit: number) => {
+        // Replace line breaks with spaces for the preview
+        const singleLine = text.replace(/(\r\n|\n|\r)/gm, ' ')
+        return truncateText(singleLine, limit)
+    }
+
     return (
         <>
             <SEO title="Roadmap – PostHog" description="" image={`/images/og/customers.jpg`} />
@@ -349,6 +355,12 @@ export default function Roadmap() {
 
                             const stripHtml = (html: string) => {
                                 return html.replace(/<\/?[^>]+(>|$)/g, '')
+                            }
+
+                            const preparePreviewText = (text: string, limit: number) => {
+                                // Replace line breaks with spaces for the preview
+                                const singleLine = text.replace(/(\r\n|\n|\r)/gm, ' ')
+                                return truncateText(singleLine, limit)
                             }
 
                             const columns = [
@@ -419,7 +431,8 @@ export default function Roadmap() {
                                                     ) : (
                                                         <Link
                                                             to={`/teams/${slugifyTeamName(teamName)}`}
-                                                            className="text-sm opacity-70 text-inherit hover:opacity-100 hover:text-red dark:hover:text-yellow"
+                                                            className="text-sm"
+                                                            state={{ newWindow: true }}
                                                         >
                                                             {teamName}
                                                         </Link>
@@ -445,11 +458,13 @@ export default function Roadmap() {
                                                                 <Markdown>{roadmap.attributes.description}</Markdown>
                                                             </>
                                                         ) : (
-                                                            <>
-                                                                {truncateText(
-                                                                    stripHtml(roadmap.attributes.description),
-                                                                    120
-                                                                )}
+                                                            <div>
+                                                                <Markdown>
+                                                                    {preparePreviewText(
+                                                                        roadmap.attributes.description,
+                                                                        80
+                                                                    )}
+                                                                </Markdown>
                                                                 <button
                                                                     onClick={(e) => {
                                                                         e.stopPropagation()
@@ -459,7 +474,7 @@ export default function Roadmap() {
                                                                 >
                                                                     Show more
                                                                 </button>
-                                                            </>
+                                                            </div>
                                                         )}
                                                     </div>
                                                 ),

@@ -25,7 +25,7 @@ const OSTable: React.FC<OSTableProps> = ({ columns, rows, className = '', rowAli
 
     return (
         <div
-            className={`grid divide-x divide-y divide-border border-r border-b border-primary [&_div]:p-2 text-[15px] ${className}`}
+            className={`grid divide-x divide-y divide-border border-r border-b border-primary [&>div]:p-2 text-[15px] ${className}`}
             style={{ gridTemplateColumns: gridClass }}
         >
             {/* Header Row */}
