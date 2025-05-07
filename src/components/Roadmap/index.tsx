@@ -489,7 +489,16 @@ export default function Roadmap() {
     return (
         <>
             <SEO title="Roadmap – PostHog" description="" image={`/images/og/customers.jpg`} />
-            <Editor title="roadmap" type="mdx" slug="/roadmap" maxWidth="full">
+            <Editor
+                title="roadmap"
+                type="psheet"
+                slug="/roadmap"
+                maxWidth="full"
+                filters={{
+                    products: ['product_analytics'],
+                    caseStudy: true,
+                }}
+            >
                 <ScrollArea>
                     <section>
                         <>

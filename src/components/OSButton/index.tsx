@@ -36,6 +36,7 @@ interface OSButtonProps extends Omit<React.ButtonHTMLAttributes<HTMLButtonElemen
     label?: string
     className?: string
     active?: boolean
+    disabled?: boolean
     align?: 'left' | 'center'
     width?: 'auto' | 'full'
     asLink?: boolean
@@ -43,7 +44,6 @@ interface OSButtonProps extends Omit<React.ButtonHTMLAttributes<HTMLButtonElemen
     iconPosition?: 'left' | 'right'
     onClick?: (e: React.MouseEvent<HTMLButtonElement> | React.MouseEvent<HTMLAnchorElement>) => void
     state?: any
-
 }
 
 export default function OSButton({
@@ -55,6 +55,7 @@ export default function OSButton({
     label,
     className = '',
     active = false,
+    disabled = false,
     align = 'center',
     width = 'auto',
     asLink = false,
@@ -87,11 +88,11 @@ export default function OSButton({
         default: 'bg-black border-black text-white hover:bg-black/90 active:bg-black/80',
         primary: {
             parent: 'bg-button-shadow dark:bg-button-shadow-dark border-[1.5px] relative top-[2px] rounded-[6px] w-auto text-primary inline-block border-button text-center group disabled:opacity-50 disabled:cursor-not-allowed',
-            child: 'relative flex items-center justify-center w-auto bg-orange text-primary hover:text-primary dark:text-primary dark:hover:text-primary border-button dark:border-button-dark dark:bg-orange rounded-[6px] text-[14px] font-bold px-4 py-1.5 translate-y-[-2px] hover:translate-y-[-4px] active:translate-y-[-1px] border-[1.5px] mx-[-1.5px] group-disabled:hover:!translate-y-[-2px] block active:transition-all active:duration-100 select-none'
+            child: 'relative flex items-center justify-center w-auto bg-orange text-primary hover:text-primary dark:text-primary dark:hover:text-primary border-button dark:border-button-dark dark:bg-orange rounded-[6px] text-[14px] font-bold px-4 py-1.5 translate-y-[-2px] hover:translate-y-[-4px] active:translate-y-[-1px] border-[1.5px] mx-[-1.5px] group-disabled:hover:!translate-y-[-2px] block active:transition-all active:duration-100 select-none',
         },
         secondary: {
             parent: 'bg-orange dark:bg-button-secondary-shadow-dark dark:border-button-secondary-dark border-[1.5px] relative top-[2px] rounded-[6px] w-auto text-primary inline-block border-button text-center group disabled:opacity-50 disabled:cursor-not-allowed',
-            child: 'relative flex items-center justify-center w-auto bg-white text-primary hover:text-primary dark:text-primary-dark dark:hover:text-primary-dark border-button dark:border-orange dark:bg-dark rounded-[6px] text-[14px] font-bold px-4 py-1.5 translate-y-[-2px] hover:translate-y-[-4px] active:translate-y-[-1px] border-[1.5px] mx-[-1.5px] group-disabled:hover:!translate-y-[-2px] block active:transition-all active:duration-100 select-none'
+            child: 'relative flex items-center justify-center w-auto bg-white text-primary hover:text-primary dark:text-primary-dark dark:hover:text-primary-dark border-button dark:border-orange dark:bg-dark rounded-[6px] text-[14px] font-bold px-4 py-1.5 translate-y-[-2px] hover:translate-y-[-4px] active:translate-y-[-1px] border-[1.5px] mx-[-1.5px] group-disabled:hover:!translate-y-[-2px] block active:transition-all active:duration-100 select-none',
         },
         underline: 'hover:underline border-transparent',
         ghost: `bg-transparent border-transparent ${
@@ -137,15 +138,16 @@ export default function OSButton({
 
     const commonProps = {
         className: `${baseClasses} ${
-            variant === 'primary' || variant === 'secondary' 
-                ? variantClasses[variant].parent 
+            variant === 'primary' || variant === 'secondary'
+                ? variantClasses[variant].parent
                 : `${sizeClasses[size]} ${variantClasses[variant]}`
-        } ${
-            align === 'center' ? 'justify-center' : 'justify-start'
-        } ${!children ? '' : width === 'full' ? 'w-full' : 'w-auto'} ${className}`,
+        } ${align === 'center' ? 'justify-center' : 'justify-start'} ${
+            !children ? '' : width === 'full' ? 'w-full' : 'w-auto'
+        } ${className}`,
         onClick,
+        disabled,
         state,
-        ...props
+        ...props,
     }
 
     return asLink ? (
@@ -153,8 +155,6 @@ export default function OSButton({
             {buttonContent}
         </Link>
     ) : (
-        <button {...commonProps}>
-            {buttonContent}
-        </button>
+        <button {...commonProps}>{buttonContent}</button>
     )
 }

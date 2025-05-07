@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Select } from '../RadixUI/Select'
 import HeaderBar from 'components/OSChrome/HeaderBar'
 import * as Icons from '@posthog/icons'
@@ -36,9 +36,6 @@ interface EditorProps {
         [key: string]: any
     }
 }
-
-const baseFilterClass = 'ml-auto mr-1 '
-const selectedFilterClass = 'font-bold !bg-accent-2 dark:!bg-accent-dark cursor-default'
 
 const toolbarElementsBase: ToolbarElement[] = [
     {
@@ -167,22 +164,10 @@ const toolbarElementsBase: ToolbarElement[] = [
         hideLabel: true,
         disabled: true,
     },
-    {
-        type: 'button',
-        icon: <Icons.IconFilter />,
-        label: 'Filter',
-        hideLabel: true,
-        className: baseFilterClass,
-    },
-    {
-        type: 'button',
-        variant: 'primary',
-        label: 'Share',
-        size: 'xs',
-    },
 ]
 
 export default function Editor({ title, type, children, filters, maxWidth = '3xl' }: EditorProps) {
+    const [showFilters, setShowFilters] = useState(false)
     const products = useProduct() as { slug: string; name: string; type: string }[]
     // take the product name passed in and check the useProduct hook to get the product's display name
     const getProductName = (type: string) => products.find((p) => p.type === type)?.name || type
@@ -195,11 +180,29 @@ export default function Editor({ title, type, children, filters, maxWidth = '3xl
                   (Array.isArray(filters[k]) ? filters[k].length > 0 : true)
           )
         : []
-    const toolbarElements = toolbarElementsBase.map((el) =>
-        el.type === 'button' && el.label === 'Filter'
-            ? { ...el, className: filters ? `${baseFilterClass} ${selectedFilterClass}` : baseFilterClass }
-            : el
-    )
+
+    const toolbarElements = [
+        ...toolbarElementsBase,
+        {
+            type: 'container' as const,
+            className: 'ml-auto flex items-center gap-1',
+            children: (
+                <>
+                    <OSButton
+                        variant="ghost"
+                        size="sm"
+                        active={showFilters}
+                        icon={<Icons.IconFilter />}
+                        onClick={() => setShowFilters(!showFilters)}
+                    />
+                    <OSButton variant="primary" size="xs">
+                        Share
+                    </OSButton>
+                </>
+            ),
+        },
+    ]
+
     return (
         <div className="@container w-full h-full flex flex-col min-h-1">
             <aside data-scheme="secondary" className="bg-primary p-2 border-b border-border">
@@ -207,54 +210,9 @@ export default function Editor({ title, type, children, filters, maxWidth = '3xl
             </aside>
             <div className="flex flex-col flex-grow min-h-0">
                 <main data-scheme="primary" className="@container flex-1 bg-primary relative h-full">
-                    {filterKeys.length > 0 && (
-                        <div className="bg-accent p-2 text-sm">
-                            <span>where </span>
-                            {filterKeys.map((key, i) => {
-                                if (
-                                    key === 'products' &&
-                                    Array.isArray(filters?.products) &&
-                                    filters.products.length > 0
-                                ) {
-                                    return (
-                                        <span key={key}>
-                                            <strong>product used</strong> <em>includes</em>{' '}
-                                            {filters.products.map((type, idx) => (
-                                                <span
-                                                    key={type}
-                                                    className="bg-blue/20 text-blue font-semibold border border-blue rounded-sm px-1.5 py-0.5 mr-1"
-                                                >
-                                                    {getProductName(type)}
-                                                </span>
-                                            ))}
-                                            {i < filterKeys.length - 1 && <span> and </span>}
-                                        </span>
-                                    )
-                                } else {
-                                    const value = filters?.[key]
-                                    return (
-                                        <span key={key}>
-                                            <strong>{key.replace(/([A-Z])/g, ' $1').toLowerCase()}</strong> <em>is</em>{' '}
-                                            {typeof value === 'boolean' ? (
-                                                <span
-                                                    className={
-                                                        value
-                                                            ? 'bg-green/20 text-green font-semibold border border-green rounded-sm px-1.5 py-0.5'
-                                                            : 'bg-red/20 text-red font-semibold border border-red rounded-sm px-1.5 py-0.5'
-                                                    }
-                                                >
-                                                    {value ? 'true' : 'false'}
-                                                </span>
-                                            ) : (
-                                                <span className="bg-accent-2 px-1.5 py-0.5 rounded-sm border font-semibold">
-                                                    {String(value)}
-                                                </span>
-                                            )}
-                                            {i < filterKeys.length - 1 && <span> and </span>}
-                                        </span>
-                                    )
-                                }
-                            })}
+                    {showFilters && (
+                        <div className="bg-accent dark:bg-accent-dark p-2 text-sm border-b border-border dark:border-border-dark">
+                            filters go here
                         </div>
                     )}
                     <ScrollArea>
