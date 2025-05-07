@@ -83,7 +83,9 @@ function NewsletterFBC() {
                                                     </Tooltip>
                                                 </span>
                                             </p>
-                                            <p className="!text-sm opacity-50 !m-0 !-mt-2 !-mb-2">- or -</p>
+                                            {!showContent && (
+                                                <p className="!text-sm opacity-50 !m-0 !-mt-2 !-mb-2">- or -</p>
+                                            )}
                                             <button
                                                 onClick={() => setShowContent(true)}
                                                 className="text-primary hover:text-primary-dark dark:text-primary-dark dark:hover:text-primary underline"
@@ -103,6 +105,16 @@ function NewsletterFBC() {
                                         </strong>{' '}
                                         from Substack in your inbox.
                                     </p>
+                                    {!showContent && (
+                                        <button
+                                            onClick={() => setShowContent(true)}
+                                            className={`${container(undefined, 'md')} mt-4 w-full`}
+                                        >
+                                            <span className={child(undefined, undefined, undefined, 'md')}>
+                                                Read the newsletter
+                                            </span>
+                                        </button>
+                                    )}
                                 </div>
                             )}
                         </div>
