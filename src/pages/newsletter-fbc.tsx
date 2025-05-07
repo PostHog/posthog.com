@@ -31,17 +31,19 @@ function NewsletterFBC() {
     return (
         <Layout>
             <SEO title="Newsletter" description="Subscribe to our newsletter" />
-            <div className="mx-auto px-8 pt-2">
+            <div className="mx-auto px-4 pt-2">
                 <div className="flex flex-col items-center min-h-[60vh]">
                     {showContent && <ProductManagerNewsletterContent />}
-                    <div className="w-full max-w-[175px] mb-8">
-                        <CloudinaryImage
-                            src="https://res.cloudinary.com/dmukukwp6/image/upload/engineer_47d6638eae.png"
-                            className="w-full h-full"
-                        />
-                    </div>
-                    <div className="flex flex-col md:flex-row md:justify-center items-center gap-4 md:gap-8 border-light dark:border-dark border-y !mb-6 xs:!my-6 !py-4 w-full">
-                        <div className="w-full ">
+                    {!showContent && (
+                        <div className="w-full max-w-[175px] mb-8">
+                            <CloudinaryImage
+                                src="https://res.cloudinary.com/dmukukwp6/image/upload/engineer_47d6638eae.png"
+                                className="w-full h-full"
+                            />
+                        </div>
+                    )}
+                    <div className="max-w-3xl flex flex-col md:flex-row md:justify-center items-center gap-4 md:gap-8 border-light dark:border-dark border-y !mb-6 xs:!my-6 !py-4 w-full">
+                        <div className="w-full">
                             {!submitted ? (
                                 <>
                                     <p className="!text-sm opacity-50 !m-0">Subscribe to our newsletter</p>
@@ -81,6 +83,7 @@ function NewsletterFBC() {
                                                     </Tooltip>
                                                 </span>
                                             </p>
+                                            <p className="!text-sm opacity-50 !m-0 !-mt-2 !-mb-2">- or -</p>
                                             <button
                                                 onClick={() => setShowContent(true)}
                                                 className="text-primary hover:text-primary-dark dark:text-primary-dark dark:hover:text-primary underline"
@@ -104,6 +107,14 @@ function NewsletterFBC() {
                             )}
                         </div>
                     </div>
+                    {showContent && (
+                        <div className="w-full max-w-[175px] mb-8">
+                            <CloudinaryImage
+                                src="https://res.cloudinary.com/dmukukwp6/image/upload/engineer_47d6638eae.png"
+                                className="w-full h-full"
+                            />
+                        </div>
+                    )}
                 </div>
             </div>
         </Layout>

@@ -4,7 +4,7 @@ import Link from 'components/Link'
 
 export default function ProductManagerNewsletterContent() {
     return (
-        <div className="max-w-3xl mx-auto px-2 py-8">
+        <div className="max-w-3xl py-8">
             <div className="mb-8">
                 <CloudinaryImage
                     src="https://res.cloudinary.com/dmukukwp6/image/upload/390823720_35b0d6be_f823_4c45_8e80_cfc0727e8827_128b8bbd57.jpg"
