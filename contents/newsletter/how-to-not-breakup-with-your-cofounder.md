@@ -4,7 +4,7 @@ date: 2025-05-04
 author:
  - james-hawkins
 featuredImage: >-
-  https://res.cloudinary.com/dmukukwp6/image/upload/bellcurve_meme_19c509edff.jpg
+  https://res.cloudinary.com/dmukukwp6/image/upload/james_and_tim_6baec68f79.png
 featuredImageType: full
 tags:
   - Being a founder
@@ -14,7 +14,7 @@ crosspost:
   - Blog
 ---
 
-_In this issue of Product for Engineers, James Hawkins shares how he and[PostHog](https://posthog.com/?utm_source=posthog-newsletter&utm_medium=post&utm_campaign=cofounders) cofounder Tim Glaser keep their relationship healthy._
+_In this issue of Product for Engineers, James Hawkins shares how he and [PostHog](https://posthog.com/) cofounder Tim Glaser keep their relationship healthy._
 
 * * *
 
@@ -26,8 +26,8 @@ I had previously been a VP of sales, responsible for sales, support, and account
 
 I diligently pushed myself hard at school, got straight As, and went to one of the top universities in my country. Tim quit school at 16 because he realized he was earning more than his teacher, and has worked ever since.
 
-![tim and james](https://substackcdn.com/image/fetch/w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F412d29c3-1b76-4122-90e0-0132afb902a1_2806x2375.jpeg)
-[Caption]Me (left) and Tim (right) at our [Mykonos company offsite](https://posthog.com/blog/mykonos-hackathon?utm_source=posthog-newsletter&utm_medium=post&utm_campaign=cofounders) in 2024[/Caption]
+![tim and james](https://res.cloudinary.com/dmukukwp6/image/upload/Mykonos_2024_Photo_3343de9e4b.png)
+<Caption>Me (left) and Tim (right) at our [Mykonos company offsite](https://posthog.com/blog/mykonos-hackathon?utm_source=posthog-newsletter&utm_medium=post&utm_campaign=cofounders) in 2024</Caption>
 
 Despite these differences, we realized it was important to be equal partners in PostHog from the outset. We took 50:50 equity in the company and, once we could afford to do so, took the same salary, too.
 
@@ -65,7 +65,7 @@ We feel we make better decisions like this, and our intrinsic instincts compleme
 
 This doesn’t mean you shouldn’t use typical CEO / CTO titles, or whatever makes sense for you. Just don’t let those titles define how you work together.
 
-[![time and james on a boart](https://substackcdn.com/image/fetch/w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F11c44e01-55d1-4365-a467-e1acd0e4142d_4080x3072.jpeg)](https://substackcdn.com/image/fetch/f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F11c44e01-55d1-4365-a467-e1acd0e4142d_4080x3072.jpeg)
+![time and james on a boart](https://res.cloudinary.com/dmukukwp6/image/upload/james_and_tim_6baec68f79.png)
 
 ## 4. Work on the things you care about most
 
@@ -83,8 +83,8 @@ Right now, we split our responsibilities around the products we care most about,
 
 There are also a handful of things we _both_ want to be involved in, such as people and strategy. We think both of us being involved leads to the best decisions here, and keeps us aligned.
 
-[![max ai](https://substackcdn.com/image/fetch/w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F97eaaed7-a5a7-4879-b96b-f2424604d772_742x503.png)](https://substackcdn.com/image/fetch/f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F97eaaed7-a5a7-4879-b96b-f2424604d772_742x503.png)
-[Caption]I love taking big bets and Max AI is one of them. You can already use it to query your analytics data in PostHog, find session replays, and write SQL.[/Caption]
+![max ai](https://res.cloudinary.com/dmukukwp6/image/upload/max_ai_a2455c04fe.png)
+<Caption>I love taking big bets and Max AI is one of them. You can already use it to query your analytics data in PostHog, find session replays, and write SQL.</Caption>
 
 ## 5. Zoom out to solve problems 
 
@@ -120,6 +120,8 @@ Had we changed nothing, I’m certain our working relationship would have suffer
 
 ## 7. Shared values make everything easier
 
+![meme](https://res.cloudinary.com/dmukukwp6/image/upload/co_founder_meme_1f6ed3ebda.png)
+
 As I outlined at the start, on paper Tim and I are very different.
 
 I’m older, less technical, and I’m married with two kids. We took very different paths in both education and career. Tim loves pineapple on pizza; I think it’s a mortal sin.
@@ -140,8 +142,6 @@ And we both dislike:
   * Fluffy, enterprise sales BS
   * Hypothetical plans where no one does anything
   * Pointless meetings
-
-[![meme](https://substackcdn.com/image/fetch/w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F923b6f1d-bcbd-4a15-a338-b221eb91d861_3000x3144.png)](https://substackcdn.com/image/fetch/f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F923b6f1d-bcbd-4a15-a338-b221eb91d861_3000x3144.png)
 
 We didn’t talk about these things before we started working together, we just got lucky, but they are fundamental to why we work well together.
 
