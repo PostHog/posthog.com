@@ -18,7 +18,15 @@ function NewsletterFBC() {
 
     const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault()
+        const urlParams = new URLSearchParams(window.location.search)
+        const fbclid = urlParams.get('fbclid')
+
         posthog?.capture('newsletter_subscribed', { email })
+        posthog?.capture('user_signed_up_to_newsletter', {
+            ad_source: 'meta',
+            email: email,
+            fbclid: fbclid || undefined,
+        })
         setSubmitted(true)
     }
 
