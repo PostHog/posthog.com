@@ -40,6 +40,12 @@ const apps: AppItem[] = [
         url: '/tour',
     },
     {
+        label: 'Roadmap',
+        Icon: IconMap,
+        color: 'green',
+        url: '/roadmap',
+    },
+    {
         label: 'Games',
         Icon: IconDice,
         color: 'green',
