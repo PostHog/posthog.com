@@ -22,7 +22,7 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
     const ChangelogTemplate = path.resolve(`src/templates/Changelog.tsx`)
     const PostListingTemplate = path.resolve(`src/templates/PostListing.tsx`)
     const PaginationTemplate = path.resolve(`src/templates/Pagination.tsx`)
-
+    const AdTemplate = path.resolve(`src/templates/Ad.tsx`)
     // Tutorials
     const TutorialsTemplate = path.resolve(`src/templates/tutorials/index.tsx`)
     const TutorialTemplate = path.resolve(`src/templates/tutorials/Tutorial.tsx`)
@@ -604,6 +604,19 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
                 article: true,
             },
         })
+        if (slug.startsWith('/newsletter')) {
+            createPage({
+                path: slug.replace('/newsletter', '/newsletters-for-ads'),
+                component: AdTemplate,
+                context: {
+                    id: node.id,
+                    tableOfContents,
+                    slug,
+                    post: true,
+                    article: true,
+                },
+            })
+        }
     })
 
     createPage({
