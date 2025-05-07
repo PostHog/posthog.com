@@ -39,3 +39,11 @@ Why: This gives us insight into the actual usage value customers are receiving, 
 
 How: Calculate what customers would have paid without the annual plan discount (annual_mrr_value = total_mrr / (1 - discount))
 
+### 4. Account consolidations
+Reconciling multiple accounts that belong to the same organization.
+
+Why: Organizations sometimes have multiple accounts that should be viewed as a single customer for accurate revenue analysis. This way we can make sure we're tracking true customer retention rather than treating internal movements as churn
+
+How: 
+- identify and consolidate accounts when customers move from EU to US instances
+- combine revenue and usage from different teams under the same organization that may exist as separate PostHog accounts
