@@ -21,7 +21,7 @@ import {
     FontItalicIcon,
     ReloadIcon,
 } from '@radix-ui/react-icons'
-import { IconSearch, IconMessage } from '@posthog/icons'
+import { IconSearch, IconMessage, IconX } from '@posthog/icons'
 import { IconLink } from '../OSIcons/Icons'
 import useProduct from 'hooks/useProduct'
 
@@ -42,12 +42,6 @@ const toolbarElementsBase: ToolbarElement[] = [
         type: 'multiple',
         label: 'Text formatting',
         items: [
-            {
-                value: 'search',
-                label: 'Search',
-                icon: <IconSearch />,
-                disabled: true,
-            },
             {
                 value: 'undo',
                 label: 'Undo',
@@ -168,6 +162,7 @@ const toolbarElementsBase: ToolbarElement[] = [
 
 export default function Editor({ title, type, children, filters, maxWidth = '3xl' }: EditorProps) {
     const [showFilters, setShowFilters] = useState(false)
+    const [showSearch, setShowSearch] = useState(false)
     const products = useProduct() as { slug: string; name: string; type: string }[]
     // take the product name passed in and check the useProduct hook to get the product's display name
     const getProductName = (type: string) => products.find((p) => p.type === type)?.name || type
@@ -181,13 +176,35 @@ export default function Editor({ title, type, children, filters, maxWidth = '3xl
           )
         : []
 
+    // Handle Escape key to close search
+    const handleKeyDown = (e: React.KeyboardEvent) => {
+        if (e.key === 'Escape') {
+            setShowSearch(false)
+        }
+    }
+
+    const toggleSearch = () => {
+        setShowSearch(!showSearch)
+    }
+
+    const closeSearch = () => {
+        setShowSearch(false)
+    }
+
     const toolbarElements = [
         ...toolbarElementsBase,
         {
             type: 'container' as const,
-            className: 'ml-auto flex items-center gap-1',
+            className: 'ml-auto flex items-center gap-px',
             children: (
                 <>
+                    <OSButton
+                        variant="ghost"
+                        size="sm"
+                        active={showSearch}
+                        icon={<Icons.IconSearch />}
+                        onClick={toggleSearch}
+                    />
                     <OSButton
                         variant="ghost"
                         size="sm"
@@ -210,6 +227,17 @@ export default function Editor({ title, type, children, filters, maxWidth = '3xl
             </aside>
             <div className="flex flex-col flex-grow min-h-0">
                 <main data-scheme="primary" className="@container flex-1 bg-primary relative h-full">
+                    {showSearch && (
+                        <div className="-top-px right-8 absolute bg-accent w-64 p-1.5 rounded-b border border-primary border-t-0 z-10 flex items-center gap-1">
+                            <input
+                                placeholder="Search this page..."
+                                className="w-full p-1 rounded border border-input text-primary text-sm"
+                                onKeyDown={handleKeyDown}
+                                autoFocus
+                            />
+                            <OSButton variant="ghost" size="xs" icon={<IconX />} onClick={closeSearch} />
+                        </div>
+                    )}
                     {showFilters && (
                         <div className="bg-accent dark:bg-accent-dark p-2 text-sm border-b border-border dark:border-border-dark">
                             filters go here
