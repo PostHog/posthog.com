@@ -312,7 +312,7 @@ export default function Hero() {
                             </div>
                             {!showIntegrationPrompt && (
                                 <p className="text-sm text-center m-0 mt-5 font-semibold text-primary/85 dark:text-primary-dark/85 hidden md:block">
-                                    Or try our{' '}
+                                    Or{' '}
                                     <button
                                         className="font-bold text-red dark:text-yellow"
                                         onClick={() => {
@@ -320,7 +320,7 @@ export default function Hero() {
                                             posthog?.capture('clicked Integrate with AI')
                                         }}
                                     >
-                                        90-second AI integration
+                                        install with AI in 90-seconds
                                     </button>
                                 </p>
                             )}
