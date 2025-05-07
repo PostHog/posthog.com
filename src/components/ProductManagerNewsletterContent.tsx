@@ -8,13 +8,13 @@ export default function ProductManagerNewsletterContent() {
             <div className="mb-8">
                 <CloudinaryImage
                     src="https://res.cloudinary.com/dmukukwp6/image/upload/390823720_35b0d6be_f823_4c45_8e80_cfc0727e8827_128b8bbd57.jpg"
-                    className="w-full rounded-lg"
+                    className="w-full rounded-lg overflow-hidden shadow-xl"
                     alt="Product management is broken. Engineers can fix it"
                 />
             </div>
             <h1 className="text-3xl font-bold mb-6">Product management is broken. Engineers can fix it</h1>
 
-            <div className="prose dark:prose-invert max-w-none">
+            <div className="article-content prose dark:prose-invert max-w-none">
                 <p>
                     When Tim and I first started PostHog in 2020, I was adamant we would <strong>never</strong> hire a
                     product manager. I wanted engineers to wrestle with hard product problems. Product managers, I

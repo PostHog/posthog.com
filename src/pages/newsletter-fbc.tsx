@@ -8,6 +8,7 @@ import Tooltip from 'components/Tooltip'
 import { Info } from 'components/Icons/Icons'
 import { container, child } from 'components/CallToAction'
 import ProductManagerNewsletterContent from 'components/ProductManagerNewsletterContent'
+import { IconInfo } from '@posthog/icons'
 
 function NewsletterFBC() {
     const { user } = useUser()
@@ -43,70 +44,65 @@ function NewsletterFBC() {
                 <div className="flex flex-col items-center min-h-[60vh]">
                     {showContent && <ProductManagerNewsletterContent />}
                     {!showContent && (
-                        <div className="w-full max-w-[175px] mb-8">
+                        <div className="w-full max-w-[250px]">
                             <CloudinaryImage
                                 src="https://res.cloudinary.com/dmukukwp6/image/upload/engineer_47d6638eae.png"
                                 className="w-full h-full"
                             />
                         </div>
                     )}
-                    <div className="max-w-3xl flex flex-col md:flex-row md:justify-center items-center gap-4 md:gap-8 border-light dark:border-dark border-y !mb-6 xs:!my-6 !py-4 w-full">
+                    <div className="max-w-lg flex flex-col md:flex-row md:justify-center items-center gap-4 md:gap-8 !mb-4 xs:!my-4 !py-4 w-full border border-light dark:border-dark rounded bg-accent dark:bg-accent-dark">
                         <div className="w-full">
                             {!submitted ? (
                                 <>
-                                    <p className="!text-sm opacity-50 !m-0">Subscribe to our newsletter</p>
-                                    <h4 className="relative !text-2xl !m-0 !leading-tight">Product for Engineers</h4>
-                                    <p className="!m-0 !text-sm md:!text-[15px] !leading-normal !pt-1">
-                                        Read by 60,000+ founders and builders.
+                                    <p className="!text-[15px] opacity-50 !mb-2 text-center">
+                                        Subscribe to our newsletter
+                                    </p>
+                                    <h4 className="relative !text-2xl !m-0 !leading-tight text-center">
+                                        Product for Engineers
+                                    </h4>
+                                    <p className="!m-0 !text-sm md:!text-base !leading-normal !opacity-75 !pt-1 text-center">
+                                        Read by 60,000+ founders and builders
                                     </p>
                                     <div className="">
                                         <form
                                             onSubmit={handleSubmit}
-                                            className="flex flex-col lg:flex-row items-start gap-2 my-4 lg:my-2"
+                                            className="flex flex-col items-center gap-2 my-4 lg:my-2"
                                         >
                                             <input
                                                 required
                                                 onChange={(e) => setEmail(e.target.value)}
                                                 type="email"
                                                 placeholder="Email address"
-                                                className="dark:bg-accent-dark border border-light dark:border-dark rounded text-[15px] w-full flex-1"
+                                                className="dark:bg-accent-dark border border-light dark:border-dark rounded text-[15px] w-full flex-1 max-w-xs"
                                                 value={email}
                                             />
-                                            <button className={`${container(undefined, 'md')} -mt-px w-full lg:w-auto`}>
+                                            <button className={`${container(undefined, 'md')} -mt-px w-full max-w-xs`}>
                                                 <span className={child(undefined, undefined, undefined, 'md')}>
                                                     Subscribe
                                                 </span>
                                             </button>
                                         </form>
-                                        <div className="flex flex-col items-center gap-4">
+                                        <div className="flex flex-col items-center gap-4 lg:pt-2">
                                             <p className="!text-sm opacity-50 text-center md:text-left !mb-0">
                                                 We'll share your email with{' '}
                                                 <span className="whitespace-nowrap inline-flex">
-                                                    Substack
+                                                    Substack{' '}
                                                     <Tooltip
                                                         content="Substack's embed form isn't very pretty, so we made our own. But we need to let you know we'll subscribe you on your behalf. Thanks in advance!"
                                                         tooltipClassName="max-w-md"
                                                     >
-                                                        <Info className="pl-2 w-4 h-4 inline-block ml-1" />
+                                                        <span>
+                                                            <IconInfo className="w-4 h-4 inline-block ml-0.5 relative -top-px" />
+                                                        </span>
                                                     </Tooltip>
                                                 </span>
                                             </p>
-                                            {!showContent && (
-                                                <>
-                                                    <p className="!text-sm opacity-50 !m-0 !-mt-2 !-mb-2">- or -</p>
-                                                    <button
-                                                        onClick={() => setShowContent(true)}
-                                                        className="text-primary hover:text-primary-dark dark:text-primary-dark dark:hover:text-primary underline"
-                                                    >
-                                                        Read it first
-                                                    </button>
-                                                </>
-                                            )}
                                         </div>
                                     </div>
                                 </>
                             ) : (
-                                <div className="bg-accent dark:bg-accent-dark border border-border dark:border-dark px-6 py-4 rounded-md">
+                                <div className="px-4 pb-2">
                                     <h3 className="text-lg font-bold m-0">Thanks for subscribing!</h3>
                                     <p className="m-0 opacity-75 !leading-normal !text-[15px]">
                                         Keep an eye out for our next edition of{' '}
@@ -129,8 +125,19 @@ function NewsletterFBC() {
                             )}
                         </div>
                     </div>
+                    {!showContent && !submitted && (
+                        <div className="flex justify-center items-center gap-1">
+                            <span className="opacity-75">or</span>
+                            <button
+                                onClick={() => setShowContent(true)}
+                                className="text-red dark:text-yellow font-semibold"
+                            >
+                                read it first
+                            </button>
+                        </div>
+                    )}
                     {showContent && (
-                        <div className="w-full max-w-[175px] mb-8">
+                        <div className="w-full max-w-[250px]">
                             <CloudinaryImage
                                 src="https://res.cloudinary.com/dmukukwp6/image/upload/engineer_47d6638eae.png"
                                 className="w-full h-full"
