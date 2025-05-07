@@ -101,7 +101,7 @@ export const NewsletterForm = ({ className = '', placement }: NewsletterFormProp
                 ) : (
                     <div className="bg-accent dark:bg-accent-dark border border-border dark:border-dark px-6 py-4 rounded-md">
                         <h3 className="text-lg font-bold m-0">Thanks for subscribing!</h3>
-                        <p className="m-0 opacity-75 !leading-normal !text-[15px]">
+                        <p className="m-0 text-primary/75 !leading-normal !text-[15px]">
                             Keep an eye out for our next edition of{' '}
                             <strong>
                                 <em>Product for Engineers</em>
