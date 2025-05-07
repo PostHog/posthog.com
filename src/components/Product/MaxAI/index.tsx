@@ -27,6 +27,7 @@ import { VsPostHog } from 'components/Products/Competitor/VsPostHog'
 import Comparison from '../Comparison'
 import { useStaticQuery, graphql } from 'gatsby'
 import { MaxQuestionInput } from 'components/MaxQuestionInput'
+import { CalloutBox } from 'components/Docs/CalloutBox'
 
 interface ProfileData {
     firstName: string
@@ -259,8 +260,6 @@ export const ProductMax = () => {
                     <MaxQuestionInput />
                 </div>
 
-                <div className="text-center mt-18 mb-18"></div>
-
                 <section id="features" className="-mt-28 pt-36 mt-18">
                     <h3 className="text-2xl md:text-2xl text-center">
                         No data in PostHog yet? Here's how Max can help you across multiple products.
@@ -277,12 +276,41 @@ export const ProductMax = () => {
                     </ul>
                 </div>
 
-                <div className="py-12">
+                <div className="mt-12">
                     <ul className={`grid md:grid-cols-2 lg:grid-cols-${featuresPerRow} gap-8 list-none p-0`}>
                         {features.map((feature, index) => (
                             <Feature key={index} {...feature} />
                         ))}
                     </ul>
+                </div>
+
+                <div className="mt-8 mb-12">
+                    <CalloutBox icon="IconLightBulb" title="Max is still getting smarter" type="action">
+                        <div className="flex items-start gap-8">
+                            <div className="flex-1 mt-2">
+                                Max is just getting started and he's getting smarter every day. Soon he'll sync with
+                                your code, track changes, and help you ship improvements based on customer behaviour.
+                                For now, sign up to the in-app waitlist and we'll let you know when Max is ready to
+                                level up!
+                                <div className="mt-4">
+                                    <CallToAction
+                                        type="secondary"
+                                        size="sm"
+                                        to="https://app.posthog.com/#panel=feature-previews%3Aai-session-replay-summaries"
+                                    >
+                                        Sign up to the waitlist
+                                    </CallToAction>
+                                </div>
+                            </div>
+                            <div className="shrink-0">
+                                <CloudinaryImage
+                                    src="https://res.cloudinary.com/dmukukwp6/image/upload/reader_7e54eb67f7.png"
+                                    alt="Max reading a book"
+                                    className="w-28"
+                                />
+                            </div>
+                        </div>
+                    </CalloutBox>
                 </div>
 
                 <section>
