@@ -155,9 +155,4 @@ It’s more fun, too.
 
  _Words by James Hawkins, Pizza Margherita fundamentalist._
 
-## Good reads here
-
-  *  **[A high-velocity style of software development](https://mihaiolteanu.me/interactive-dev)**
-  *  **[Vibe-coding workflows 🪄](https://refactoring.fm/p/vibe-coding-workflows)**
-  *  **[Why are big tech companies so slow?](https://www.seangoedecke.com/difficulty-in-big-tech)**
-  *  **[The best developers I know](https://endler.dev/2025/best-programmers)**
+<NewsletterForm />
