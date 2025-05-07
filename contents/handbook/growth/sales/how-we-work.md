@@ -10,7 +10,6 @@ showTitle: true
 
 - Technical AE: new and expansion revenue in your book of business
 - RevOps: overall revenue from $20k+ segment
-- Technical CSM: logo retention 
 
 Other metrics we generally care about:
 - Closed - won % from demo
@@ -31,11 +30,6 @@ For Product-led leads we will only add them to your book for quota purposes if y
 For Inbound leads we will add them to your book of business once they are closed on an annual plan, or subscribed monthly with a plan to get them to an annual contract.  It's expected that you will own these for a minimum of three months after they sign to make sure they are properly onboarded before handing off the account.
 
 At the end of each quarter we will review your accounts and look to hand off some to bring your focus account list back down to 10.  Simon and Charles will also review everyone's accounts each month proactively to make sure that the balance of accounts across the team makes sense. 
-
-
-### Customer Success Managers
-
-Each CSM is assigned ~30 existing customer accounts to work with.  We use the CSM Managed Segment in Vitally to track this against goals and CSMs should not assign this themselve (that's up to Simon or Charles).
 
 ### Handing-off customers from Technical AE to Technical CSM
 
@@ -64,7 +58,6 @@ In addition to the weekly sprint planning meeting on a Monday, we do a weekly sa
 - What is the plan for any customers over $100k?  Do you have a visit planned?
 - Which accounts are at risk? Look at red health score or sentiment in Vitally.
 - How is cross-adoption going in your existing accounts? Check against Vitally goals.
-
 
 Turns are taken randomly so that you are incentivized to turn up to every meeting fully prepared, in case you are selected!
 
@@ -124,26 +117,6 @@ Example: With a flat quota per AE of $250,000 and 3 fully-ramped AEs, and 1 ramp
 
 > If someone leaves the team we don't recalculate the team quota as their accounts and opportunities will be reallocated to others in the team.
 
-## How contractual bonus works - Technical CSMs
-
-CSMs are responsible for ensuring that a larger book of existing customers - both annual and monthly - continue to use PostHog successfully. They nurture customers and are product experts - this isn't a role of just going back and forth between customers and support engineers, or collecting feedback. 
-
-> This plan will _also_ almost certainly change as we scale up the size and complexity of our sales machine! As above, we will always ensure folks are treated fairly when we make changes.
-
-**Variables**
-
-- Your OTE comprises a 90/10 split between base and contractual bonus.
-- Bonus is paid based on revenue retention above 100%, and is _uncapped_.
-  - For example, if you have 100% revenue retention and your target is 120% revenue retention, you get 0% of bonus. For 120% retention, it's 100% bonus, and for 140% retention, it's 200% bonus.
-  - While the Q2 2025 target is 120%, this may change in future depending on how things go. 
-- Bonuses are paid out quarterly, and in any case after an invoice is paid
-  - Bonus payments are made at the end of January, April, July, and October - at the end of each quarter, we'll monitor how many invoices actually get paid in the first two weeks of the next quarter. Fraser will send you an email that breaks down how you did.
-- Your bonus is guaranteed at 100% for your first 3 months at PostHog - this gives you time to get up to speed, but also if you over-perform then you will get your additional bonus.
-- If an account is added to your book:
-  - If you inherit a new account, you have a 3 month grace period - if they drop or churn in that initial period, they won't be counted against you. We want to encourage you to right-size customers, rather than your deliberately letting them wastefully spend money due to some poor implementation.
-  - Obviously if you get a new account added their starting ARR doesn't count towards your target - only growth from the starting point. 
-- If we have to give a customer a big refund, we’ll deal with your bonus on a case by case basis depending on what happened.
-
 ## Travel to see customers
 
 You are likely to need to travel a lot more than the typical PostHog team member in order to meet customers. Please make sure that you follow our company [travel policy](/handbook/people/spending-money) and act in PostHog's best interests. We trust you to do the right thing here and won't pre-approve your travel plans, but we do keep track of what people are spending and the Ops team will follow up with you if it looks like you are wasting money here. We are not a giant company that pays for fancy flights, accommodation, and meals so please be sensible. 
@@ -171,11 +144,9 @@ You will run into questions that you don't know the answer to from time to time 
 
 ## Working with customers in Slack
 
-Most of our customers use Slack, and it's a great way for us to be responsive to them.  Everyone has the permission in Slack to 
-create a Connect channel with a customer, and you should do this as early as possible in your relationship with them.
+Most of our customers use Slack, and it's a great way for us to be responsive to them. Everyone has the permission in Slack to create a Connect channel with a customer, and you should do this as early as possible in your relationship with them.
 
-When you've created the channel you should also add Pylon, which is used to sync Slack conversations with Zendesk so that our 
-Support and Engineering teams can work on customer issues in a familiar context.
+When you've created the channel you should also add Pylon, which is used to sync Slack conversations with Zendesk so that our Support and Engineering teams can work on customer issues in a familiar context.
 
 To add Pylon to your customer channel:
 
@@ -194,10 +165,8 @@ Once enabled, you can add the :ticket: emoji to a Slack thread to create a new T
 **Gmail**
 We use Gmail for our email and the team uses many different clients from [Superhuman](https://superhuman.com/) to [Spark](https://sparkmailapp.com/) to the default Gmail web interface. Find something that works well for you. To get your own email signature, copy the signature from someone else on the team (like Simon) and then fill in your own details. 
 
-**Cal.com:**
-We use Cal.com for scheduling meetings. In order to schedule a meeting between a customer and multiple members on the PostHog team, click on the members tab and select the check box next to the the members you want to add, then click “Group Meeting" in the toolbar that pops up on the bottom of the screen.
-
-This will take you to a link you can share to the group meeting.
+**Calendly:**
+We use Calendly for scheduling meetings. In order to schedule a meeting between a customer and multiple members on the PostHog team, click on "Event types" in the left hand navigation, then click "+ New Event Type" button in the top right, and select "Group" from the dropdown. This will allow you to create a group meeting and add multiple team members to the event and create a link you can share with the customer.
 
 **BuildBetter:**
 We use BuildBetter for call recording and notetaking. You will need to integrate BuildBetter with your calendar in order for it to automatically join your calls. To do so, click on settings and look for the integrations link under account (not the one under organization) and follow the steps from there.
