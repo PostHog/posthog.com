@@ -55,18 +55,10 @@ export interface IRoadmap {
 
 export const VoteBox = ({ likeCount, liked }) => {
     return (
-        <div className="text-center w-16 h-16 flex flex-col justify-center items-center bg-accent dark:bg-border-dark/50 flex-shrink-0 relative">
-            <p className="m-0 leading-none">
-                <strong className="text-lg leading-none">{likeCount}</strong>
-                <br />
-                <span className="text-sm">vote{likeCount !== 1 && 's'}</span>
-            </p>
-            {liked && (
-                <div className="absolute -top-2 -left-2.5 rotate-6 bg-green p-1 rounded-full">
-                    <IconThumbsUpFilled className="text-white w-4 h-4" />
-                </div>
-            )}
-        </div>
+        <>
+            <strong className={`leading-none`}>{likeCount}</strong>{' '}
+            <span className="text-sm">&nbsp;vote{likeCount !== 1 && 's'}</span>
+        </>
     )
 }
 
@@ -295,6 +287,24 @@ export default function Roadmap() {
     const teams = Object.keys(roadmapsGroupedByTeam).sort()
     const isModerator = user?.role?.type === 'moderator'
 
+    const [expandedDescriptions, setExpandedDescriptions] = useState<Record<number, boolean>>({})
+
+    const toggleDescription = (id: number) => {
+        setExpandedDescriptions((prev) => ({
+            ...prev,
+            [id]: !prev[id],
+        }))
+    }
+
+    const truncateText = (text: string, limit: number) => {
+        if (text.length <= limit) return text
+        return text.substring(0, limit).trim() + '...'
+    }
+
+    const stripHtml = (html: string) => {
+        return html.replace(/<\/?[^>]+(>|$)/g, '')
+    }
+
     return (
         <>
             <SEO title="Roadmap – PostHog" description="" image={`/images/og/customers.jpg`} />
@@ -304,6 +314,14 @@ export default function Roadmap() {
                         {(() => {
                             const [loading, setLoading] = useState(false)
                             const [authModalOpen, setAuthModalOpen] = useState(false)
+                            const [expandedDescriptions, setExpandedDescriptions] = useState<Record<number, boolean>>(
+                                {}
+                            )
+                            const [selectedRoadmapId, setSelectedRoadmapId] = useState<{
+                                id: number
+                                title: string
+                            } | null>(null)
+                            const { likeRoadmap } = useUser()
 
                             const like = async (id: number, title: string) => {
                                 setLoading(true)
@@ -317,9 +335,26 @@ export default function Roadmap() {
                                 setLoading(false)
                             }
 
+                            const toggleDescription = (id: number) => {
+                                setExpandedDescriptions((prev) => ({
+                                    ...prev,
+                                    [id]: !prev[id],
+                                }))
+                            }
+
+                            const truncateText = (text: string, limit: number) => {
+                                if (text.length <= limit) return text
+                                return text.substring(0, limit).trim() + '...'
+                            }
+
+                            const stripHtml = (html: string) => {
+                                return html.replace(/<\/?[^>]+(>|$)/g, '')
+                            }
+
                             const columns = [
-                                { name: 'Votes', width: 'minmax(100px, auto)', align: 'center' as const },
-                                { name: 'Team', width: 'minmax(120px, auto)', align: 'center' as const },
+                                { name: '', width: 'minmax(100px, auto)', align: 'center' as const },
+                                { name: 'Votes', width: 'minmax(100px, auto)', align: 'left' as const },
+                                { name: 'Team', width: 'minmax(120px, auto)', align: 'left' as const },
                                 { name: 'Idea', width: 'minmax(200px, 1fr)', align: 'left' as const },
                                 { name: 'Details', width: 'minmax(300px, 2fr)', align: 'left' as const },
                                 { name: 'More info', width: 'minmax(100px, auto)', align: 'center' as const },
@@ -337,21 +372,21 @@ export default function Roadmap() {
                                         cells: [
                                             {
                                                 content: (
-                                                    <div className="flex flex-col items-center gap-2">
-                                                        <VoteBox
-                                                            likeCount={roadmap.attributes.likeCount}
-                                                            liked={liked}
-                                                        />
+                                                    <>
                                                         <CallToAction
                                                             disabled={loading}
                                                             onClick={() => {
                                                                 if (user) {
                                                                     like(roadmap.id, roadmap.attributes.title)
                                                                 } else {
+                                                                    setSelectedRoadmapId({
+                                                                        id: roadmap.id,
+                                                                        title: roadmap.attributes.title,
+                                                                    })
                                                                     setAuthModalOpen(true)
                                                                 }
                                                             }}
-                                                            size="sm"
+                                                            size="xs"
                                                             type={liked ? 'outline' : 'primary'}
                                                         >
                                                             <span className="flex items-center space-x-1">
@@ -368,33 +403,64 @@ export default function Roadmap() {
                                                                 )}
                                                             </span>
                                                         </CallToAction>
-                                                    </div>
+                                                    </>
                                                 ),
-                                                className: '!p-2',
+                                            },
+                                            {
+                                                content: (
+                                                    <VoteBox likeCount={roadmap.attributes.likeCount} liked={liked} />
+                                                ),
+                                                className: `relative flex items-baseline ${liked ? 'bg-green/10' : ''}`,
                                             },
                                             {
                                                 content: teamName ? (
-                                                    <Link
-                                                        to={`/teams/${slugifyTeamName(teamName)}`}
-                                                        className="text-sm opacity-70 text-inherit hover:opacity-100 hover:text-red dark:hover:text-yellow"
-                                                    >
-                                                        {teamName}
-                                                    </Link>
+                                                    teamName === 'Exec' ? (
+                                                        <em className="text-secondary text-sm">Not assigned</em>
+                                                    ) : (
+                                                        <Link
+                                                            to={`/teams/${slugifyTeamName(teamName)}`}
+                                                            className="text-sm opacity-70 text-inherit hover:opacity-100 hover:text-red dark:hover:text-yellow"
+                                                        >
+                                                            {teamName}
+                                                        </Link>
+                                                    )
                                                 ) : (
                                                     'Any'
                                                 ),
                                             },
                                             {
                                                 content: (
-                                                    <h3 className="text-lg m-0 leading-tight">
+                                                    <h3 className="text-[15px] m-0 leading-tight">
                                                         {roadmap.attributes.title}
                                                     </h3>
                                                 ),
                                             },
                                             {
                                                 content: (
-                                                    <div className="text-[15px] community-post-markdown">
-                                                        <Markdown>{roadmap.attributes.description}</Markdown>
+                                                    <div className="text-sm community-post-markdown !p-0">
+                                                        {roadmap.attributes.description.length <= 120 ? (
+                                                            <Markdown>{roadmap.attributes.description}</Markdown>
+                                                        ) : expandedDescriptions[roadmap.id] ? (
+                                                            <>
+                                                                <Markdown>{roadmap.attributes.description}</Markdown>
+                                                            </>
+                                                        ) : (
+                                                            <>
+                                                                {truncateText(
+                                                                    stripHtml(roadmap.attributes.description),
+                                                                    120
+                                                                )}
+                                                                <button
+                                                                    onClick={(e) => {
+                                                                        e.stopPropagation()
+                                                                        toggleDescription(roadmap.id)
+                                                                    }}
+                                                                    className="ml-1 text-sm font-semibold text-red dark:text-yellow"
+                                                                >
+                                                                    Show more
+                                                                </button>
+                                                            </>
+                                                        )}
                                                     </div>
                                                 ),
                                             },
@@ -436,13 +502,15 @@ export default function Roadmap() {
                                             initialView="sign-in"
                                             onAuth={(user) => {
                                                 setAuthModalOpen(false)
-                                                like(roadmap.id, roadmap.attributes.title)
+                                                if (selectedRoadmapId) {
+                                                    like(selectedRoadmapId.id, selectedRoadmapId.title)
+                                                }
                                             }}
                                             showBanner={false}
                                             showProfile={false}
                                         />
                                     </SideModal>
-                                    <OSTable columns={columns} rows={rows} className="mb-12" />
+                                    <OSTable columns={columns} rows={rows} rowAlignment="top" className="mb-12" />
                                 </>
                             )
                         })()}

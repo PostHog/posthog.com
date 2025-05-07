@@ -17,14 +17,15 @@ interface OSTableProps {
     columns?: Column[]
     rows: Row[]
     className?: string
+    rowAlignment?: 'top' | 'center'
 }
 
-const OSTable: React.FC<OSTableProps> = ({ columns, rows, className = '' }) => {
-    const gridClass = columns?.map(col => col.width || 'auto').join(' ') || ''
+const OSTable: React.FC<OSTableProps> = ({ columns, rows, className = '', rowAlignment = 'center' }) => {
+    const gridClass = columns?.map((col) => col.width || 'auto').join(' ') || ''
 
     return (
-        <div 
-            className={`grid divide-x divide-y divide-border border-r border-b border-primary [&_div]:p-2 text-[15px] ${className}`} 
+        <div
+            className={`grid divide-x divide-y divide-border border-r border-b border-primary [&_div]:p-2 text-[15px] ${className}`}
             style={{ gridTemplateColumns: gridClass }}
         >
             {/* Header Row */}
@@ -49,10 +50,13 @@ const OSTable: React.FC<OSTableProps> = ({ columns, rows, className = '' }) => {
                     {row.cells.map((cell, cellIndex) => (
                         <div
                             key={cellIndex}
-                            className={`flex justify-center ${
-                                columns?.[cellIndex]?.align === 'left' ? 'items-start' : 
-                                columns?.[cellIndex]?.align === 'right' ? 'items-end' : ''
-                            } ${cell.className || 'items-center'}`}
+                            className={`flex ${rowAlignment === 'top' ? 'items-start' : 'items-center'} ${
+                                columns?.[cellIndex]?.align === 'left'
+                                    ? 'items-start'
+                                    : columns?.[cellIndex]?.align === 'right'
+                                    ? 'items-end'
+                                    : 'justify-center'
+                            } ${cell.className || ''}`}
                         >
                             {cell.content}
                         </div>
