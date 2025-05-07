@@ -8,7 +8,7 @@ availability:
     enterprise: full
 ---
 
-> **Note:** Local evaluation is only available in the [Node](/docs/libraries/node), [Ruby](/docs/libraries/ruby), [Go](/docs/libraries/go), [Python](/docs/libraries/python), and [PHP](/docs/libraries/php) SDKs.
+> **Note:** Local evaluation is only available in the [Node](/docs/libraries/node), [Ruby](/docs/libraries/ruby), [Go](/docs/libraries/go), [Python](/docs/libraries/python), [C#/.NET](/docs/libraries/dotnet), and [PHP](/docs/libraries/php) SDKs.
 
 > **Note:** Do not use local evaluation in an edge / lambda environment, as this can slow down performance, and also raise your bill drastically. It's best to use regular flag evaluation instead.
 
@@ -98,6 +98,18 @@ posthog = Posthog('<ph_project_api_key>',
     personal_api_key='your personal API key from step 1'
 )
 ```
+
+```dotnet
+// Note: We don't recommend passing these in directly.
+// Instead, rely on the config system and set the personal 
+// api key in a secrets manager.
+var client = new PostHogClient(
+    new PostHogOptions {
+        ProjectApiKey = "<ph_project_api_key>",
+        PersonalApiKey = "your personal API key from step 1"
+    });
+```
+
 
 </MultiLanguage>
 
