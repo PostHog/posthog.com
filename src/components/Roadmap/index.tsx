@@ -220,6 +220,15 @@ export default function Roadmap() {
     const [adding, setAdding] = useState(false)
     const [selectedTeam, setSelectedTeam] = useState('All teams')
     const [roadmapSearch, setRoadmapSearch] = useState('')
+    const [progress, setProgress] = useState(0)
+    const [loading, setLoading] = useState(false)
+    const [authModalOpen, setAuthModalOpen] = useState(false)
+    const [expandedDescriptions, setExpandedDescriptions] = useState<Record<number, boolean>>({})
+    const [selectedRoadmapId, setSelectedRoadmapId] = useState<{
+        id: number
+        title: string
+    } | null>(null)
+
     const { staticRoadmaps } = useStaticQuery(graphql`
         {
             staticRoadmaps: allSqueakRoadmap {
@@ -252,6 +261,42 @@ export default function Roadmap() {
         },
         limit: 100,
     })
+
+    useEffect(() => {
+        if (!isLoading) return
+
+        let interval: NodeJS.Timeout
+        let timeoutId: NodeJS.Timeout
+
+        const simulateProgress = () => {
+            interval = setInterval(() => {
+                setProgress((prevProgress) => {
+                    // Start slowing down at 70%
+                    if (prevProgress < 70) {
+                        return prevProgress + 2
+                    } else if (prevProgress < 85) {
+                        return prevProgress + 0.8
+                    } else if (prevProgress < 95) {
+                        return prevProgress + 0.2
+                    } else {
+                        return prevProgress
+                    }
+                })
+            }, 100)
+
+            // Set a timeout to stop at 95% if taking too long
+            timeoutId = setTimeout(() => {
+                clearInterval(interval)
+            }, 10000)
+        }
+
+        simulateProgress()
+
+        return () => {
+            clearInterval(interval)
+            clearTimeout(timeoutId)
+        }
+    }, [isLoading])
 
     const fuse = useMemo(
         () => new Fuse(initialRoadmaps, { keys: ['attributes.title', 'attributes.description'], includeMatches: true }),
@@ -287,8 +332,6 @@ export default function Roadmap() {
     const teams = Object.keys(roadmapsGroupedByTeam).sort()
     const isModerator = user?.role?.type === 'moderator'
 
-    const [expandedDescriptions, setExpandedDescriptions] = useState<Record<number, boolean>>({})
-
     const toggleDescription = (id: number) => {
         setExpandedDescriptions((prev) => ({
             ...prev,
@@ -311,224 +354,194 @@ export default function Roadmap() {
         return truncateText(singleLine, limit)
     }
 
+    const { likeRoadmap } = useUser()
+
+    const like = async (id: number, title: string) => {
+        setLoading(true)
+        await likeRoadmap({
+            id,
+            title,
+            user,
+            unlike: user?.profile?.roadmapLikes?.some(({ id: roadmapID }) => roadmapID === id),
+        })
+        mutate()
+        setLoading(false)
+    }
+
+    const columns = [
+        { name: '', width: 'minmax(100px, auto)', align: 'center' as const },
+        { name: 'Votes', width: 'minmax(100px, auto)', align: 'left' as const },
+        { name: 'Team', width: 'minmax(120px, auto)', align: 'left' as const },
+        { name: 'Idea', width: 'minmax(200px, 1.5fr)', align: 'left' as const },
+        { name: 'Details', width: 'minmax(300px, 2fr)', align: 'left' as const },
+        { name: 'More info', width: 'minmax(100px, auto)', align: 'center' as const },
+    ]
+
+    const rows = [...roadmaps]
+        .sort((a, b) => b.attributes.likeCount - a.attributes.likeCount)
+        .map((roadmap) => {
+            const teamName = roadmap.attributes.teams?.data?.[0]?.attributes?.name
+            const liked = user?.profile?.roadmapLikes?.some(({ id: roadmapID }) => roadmapID === roadmap.id)
+
+            return {
+                cells: [
+                    {
+                        content: (
+                            <>
+                                <CallToAction
+                                    disabled={loading}
+                                    onClick={() => {
+                                        if (user) {
+                                            like(roadmap.id, roadmap.attributes.title)
+                                        } else {
+                                            setSelectedRoadmapId({
+                                                id: roadmap.id,
+                                                title: roadmap.attributes.title,
+                                            })
+                                            setAuthModalOpen(true)
+                                        }
+                                    }}
+                                    size="xs"
+                                    type={liked ? 'outline' : 'primary'}
+                                    className="-mt-0.5"
+                                >
+                                    <span className="flex items-center space-x-1">
+                                        {liked ? (
+                                            <>
+                                                <IconUndo className="w-4 h-4" />
+                                                <span>Unvote</span>
+                                            </>
+                                        ) : (
+                                            <>
+                                                <IconThumbsUp className="w-4 h-4" />
+                                                <span>Vote</span>
+                                            </>
+                                        )}
+                                    </span>
+                                </CallToAction>
+                            </>
+                        ),
+                    },
+                    {
+                        content: <VoteBox likeCount={roadmap.attributes.likeCount} liked={liked} />,
+                        className: `relative flex items-baseline ${liked ? 'bg-green/10' : ''}`,
+                    },
+                    {
+                        content: teamName ? (
+                            teamName === 'Exec' ? (
+                                <em className="text-secondary text-sm">Not assigned</em>
+                            ) : (
+                                <Link
+                                    to={`/teams/${slugifyTeamName(teamName)}`}
+                                    className="text-sm"
+                                    state={{ newWindow: true }}
+                                >
+                                    {teamName}
+                                </Link>
+                            )
+                        ) : (
+                            'Any'
+                        ),
+                    },
+                    {
+                        content: <h3 className="text-[15px] m-0 leading-tight">{roadmap.attributes.title}</h3>,
+                        className: '!pt-0.75',
+                    },
+                    {
+                        content: (
+                            <div className="text-sm community-post-markdown !p-0">
+                                {roadmap.attributes.description.length <= 120 ? (
+                                    <Markdown>{roadmap.attributes.description}</Markdown>
+                                ) : expandedDescriptions[roadmap.id] ? (
+                                    <>
+                                        <Markdown>{roadmap.attributes.description}</Markdown>
+                                    </>
+                                ) : (
+                                    <div>
+                                        <Markdown>{preparePreviewText(roadmap.attributes.description, 75)}</Markdown>
+                                        <button
+                                            onClick={(e) => {
+                                                e.stopPropagation()
+                                                toggleDescription(roadmap.id)
+                                            }}
+                                            className="ml-1 text-sm font-semibold text-red dark:text-yellow"
+                                        >
+                                            Show more
+                                        </button>
+                                    </div>
+                                )}
+                            </div>
+                        ),
+                    },
+                    {
+                        content:
+                            roadmap.attributes.githubUrls?.length > 0 ? (
+                                <Link to={roadmap.attributes.githubUrls[0]} external className="text-sm">
+                                    GitHub
+                                </Link>
+                            ) : null,
+                        className: 'text-center',
+                    },
+                ],
+            }
+        })
+
     return (
         <>
             <SEO title="Roadmap – PostHog" description="" image={`/images/og/customers.jpg`} />
             <Editor title="roadmap" type="mdx" slug="/roadmap" maxWidth="full">
                 <ScrollArea>
                     <section>
-                        {(() => {
-                            const [loading, setLoading] = useState(false)
-                            const [authModalOpen, setAuthModalOpen] = useState(false)
-                            const [expandedDescriptions, setExpandedDescriptions] = useState<Record<number, boolean>>(
-                                {}
-                            )
-                            const [selectedRoadmapId, setSelectedRoadmapId] = useState<{
-                                id: number
-                                title: string
-                            } | null>(null)
-                            const { likeRoadmap } = useUser()
+                        <>
+                            <SideModal title="Sign in to vote" open={authModalOpen} setOpen={setAuthModalOpen}>
+                                <h4 className="mb-4">Sign into PostHog.com</h4>
+                                <div className="bg-border dark:bg-border-dark p-4 mb-2">
+                                    <p className="text-sm mb-2">
+                                        <strong>
+                                            Note: PostHog.com authentication is separate from your PostHog app.
+                                        </strong>
+                                    </p>
 
-                            const like = async (id: number, title: string) => {
-                                setLoading(true)
-                                await likeRoadmap({
-                                    id,
-                                    title,
-                                    user,
-                                    unlike: user?.profile?.roadmapLikes?.some(({ id: roadmapID }) => roadmapID === id),
-                                })
-                                mutate()
-                                setLoading(false)
-                            }
+                                    <p className="text-sm mb-0">
+                                        We suggest signing up with your personal email. Soon you'll be able to link your
+                                        PostHog app account.
+                                    </p>
+                                </div>
 
-                            const toggleDescription = (id: number) => {
-                                setExpandedDescriptions((prev) => ({
-                                    ...prev,
-                                    [id]: !prev[id],
-                                }))
-                            }
-
-                            const truncateText = (text: string, limit: number) => {
-                                if (text.length <= limit) return text
-                                return text.substring(0, limit).trim() + '...'
-                            }
-
-                            const stripHtml = (html: string) => {
-                                return html.replace(/<\/?[^>]+(>|$)/g, '')
-                            }
-
-                            const preparePreviewText = (text: string, limit: number) => {
-                                // Replace line breaks with spaces for the preview
-                                const singleLine = text.replace(/(\r\n|\n|\r)/gm, ' ')
-                                return truncateText(singleLine, limit)
-                            }
-
-                            const columns = [
-                                { name: '', width: 'minmax(100px, auto)', align: 'center' as const },
-                                { name: 'Votes', width: 'minmax(100px, auto)', align: 'left' as const },
-                                { name: 'Team', width: 'minmax(120px, auto)', align: 'left' as const },
-                                { name: 'Idea', width: 'minmax(200px, 1fr)', align: 'left' as const },
-                                { name: 'Details', width: 'minmax(300px, 2fr)', align: 'left' as const },
-                                { name: 'More info', width: 'minmax(100px, auto)', align: 'center' as const },
-                            ]
-
-                            const rows = [...roadmaps]
-                                .sort((a, b) => b.attributes.likeCount - a.attributes.likeCount)
-                                .map((roadmap) => {
-                                    const teamName = roadmap.attributes.teams?.data?.[0]?.attributes?.name
-                                    const liked = user?.profile?.roadmapLikes?.some(
-                                        ({ id: roadmapID }) => roadmapID === roadmap.id
-                                    )
-
-                                    return {
-                                        cells: [
-                                            {
-                                                content: (
-                                                    <>
-                                                        <CallToAction
-                                                            disabled={loading}
-                                                            onClick={() => {
-                                                                if (user) {
-                                                                    like(roadmap.id, roadmap.attributes.title)
-                                                                } else {
-                                                                    setSelectedRoadmapId({
-                                                                        id: roadmap.id,
-                                                                        title: roadmap.attributes.title,
-                                                                    })
-                                                                    setAuthModalOpen(true)
-                                                                }
-                                                            }}
-                                                            size="xs"
-                                                            type={liked ? 'outline' : 'primary'}
-                                                        >
-                                                            <span className="flex items-center space-x-1">
-                                                                {liked ? (
-                                                                    <>
-                                                                        <IconUndo className="w-4 h-4" />
-                                                                        <span>Unvote</span>
-                                                                    </>
-                                                                ) : (
-                                                                    <>
-                                                                        <IconThumbsUp className="w-4 h-4" />
-                                                                        <span>Vote</span>
-                                                                    </>
-                                                                )}
-                                                            </span>
-                                                        </CallToAction>
-                                                    </>
-                                                ),
-                                            },
-                                            {
-                                                content: (
-                                                    <VoteBox likeCount={roadmap.attributes.likeCount} liked={liked} />
-                                                ),
-                                                className: `relative flex items-baseline ${liked ? 'bg-green/10' : ''}`,
-                                            },
-                                            {
-                                                content: teamName ? (
-                                                    teamName === 'Exec' ? (
-                                                        <em className="text-secondary text-sm">Not assigned</em>
-                                                    ) : (
-                                                        <Link
-                                                            to={`/teams/${slugifyTeamName(teamName)}`}
-                                                            className="text-sm"
-                                                            state={{ newWindow: true }}
-                                                        >
-                                                            {teamName}
-                                                        </Link>
-                                                    )
-                                                ) : (
-                                                    'Any'
-                                                ),
-                                            },
-                                            {
-                                                content: (
-                                                    <h3 className="text-[15px] m-0 leading-tight">
-                                                        {roadmap.attributes.title}
-                                                    </h3>
-                                                ),
-                                            },
-                                            {
-                                                content: (
-                                                    <div className="text-sm community-post-markdown !p-0">
-                                                        {roadmap.attributes.description.length <= 120 ? (
-                                                            <Markdown>{roadmap.attributes.description}</Markdown>
-                                                        ) : expandedDescriptions[roadmap.id] ? (
-                                                            <>
-                                                                <Markdown>{roadmap.attributes.description}</Markdown>
-                                                            </>
-                                                        ) : (
-                                                            <div>
-                                                                <Markdown>
-                                                                    {preparePreviewText(
-                                                                        roadmap.attributes.description,
-                                                                        80
-                                                                    )}
-                                                                </Markdown>
-                                                                <button
-                                                                    onClick={(e) => {
-                                                                        e.stopPropagation()
-                                                                        toggleDescription(roadmap.id)
-                                                                    }}
-                                                                    className="ml-1 text-sm font-semibold text-red dark:text-yellow"
-                                                                >
-                                                                    Show more
-                                                                </button>
-                                                            </div>
-                                                        )}
-                                                    </div>
-                                                ),
-                                            },
-                                            {
-                                                content:
-                                                    roadmap.attributes.githubUrls?.length > 0 ? (
-                                                        <Link
-                                                            to={roadmap.attributes.githubUrls[0]}
-                                                            external
-                                                            className="text-sm"
-                                                        >
-                                                            GitHub
-                                                        </Link>
-                                                    ) : null,
-                                                className: 'text-center',
-                                            },
-                                        ],
-                                    }
-                                })
-
-                            return (
-                                <>
-                                    <SideModal title="Sign in to vote" open={authModalOpen} setOpen={setAuthModalOpen}>
-                                        <h4 className="mb-4">Sign into PostHog.com</h4>
-                                        <div className="bg-border dark:bg-border-dark p-4 mb-2">
-                                            <p className="text-sm mb-2">
-                                                <strong>
-                                                    Note: PostHog.com authentication is separate from your PostHog app.
-                                                </strong>
-                                            </p>
-
-                                            <p className="text-sm mb-0">
-                                                We suggest signing up with your personal email. Soon you'll be able to
-                                                link your PostHog app account.
-                                            </p>
+                                <Authentication
+                                    initialView="sign-in"
+                                    onAuth={(user) => {
+                                        setAuthModalOpen(false)
+                                        if (selectedRoadmapId) {
+                                            like(selectedRoadmapId.id, selectedRoadmapId.title)
+                                        }
+                                    }}
+                                    showBanner={false}
+                                    showProfile={false}
+                                />
+                            </SideModal>
+                            {isLoading ? (
+                                <div
+                                    data-scheme="primary"
+                                    className="border border-primary bg-accent rounded-md p-8 mb-12"
+                                >
+                                    <div className="max-w-xl mx-auto">
+                                        <div className="flex justify-between mb-2 text-sm">
+                                            <span className="font-semibold">Loading roadmap data...</span>
+                                            <span>{Math.round(progress)}%</span>
                                         </div>
-
-                                        <Authentication
-                                            initialView="sign-in"
-                                            onAuth={(user) => {
-                                                setAuthModalOpen(false)
-                                                if (selectedRoadmapId) {
-                                                    like(selectedRoadmapId.id, selectedRoadmapId.title)
-                                                }
-                                            }}
-                                            showBanner={false}
-                                            showProfile={false}
-                                        />
-                                    </SideModal>
-                                    <OSTable columns={columns} rows={rows} rowAlignment="top" className="mb-12" />
-                                </>
-                            )
-                        })()}
+                                        <div className="h-4 w-full border border-primary bg-primary overflow-hidden">
+                                            <div
+                                                className="h-full bg-red dark:bg-yellow transition-all duration-100 ease-out"
+                                                style={{ width: `${progress}%` }}
+                                            ></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            ) : (
+                                <OSTable columns={columns} rows={rows} rowAlignment="top" className="mb-12" />
+                            )}
+                        </>
 
                         <div className="relative">
                             <div className="flex justify-between items-center">
