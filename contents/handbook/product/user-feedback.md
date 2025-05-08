@@ -42,6 +42,7 @@ Here's an example of an email from a real project, crafted by <TeamMember name="
 >  
 > $GMAIL_SIGNATURE
 
+Don't copy-and-paste the above (lest someone gets a https://cal.com/posthog-michael link), but feel free to write your message using the same outline.
 
 ### Scheduling
 - Add all feedback calls to the [User interviews calendar](https://calendar.google.com/calendar/?cid=Y19tczllaWN1Ym92ZGgxYWhzNmtoY2xpNTQ3b0Bncm91cC5jYWxlbmRhci5nb29nbGUuY29t). If the invite was created from your own calendar, you can simply add "User interviews" as an invitee.
