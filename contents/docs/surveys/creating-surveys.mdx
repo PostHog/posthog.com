@@ -164,10 +164,9 @@ If you've created an [API survey](#presentation), you'll need to add your [custo
 
 You can enable partial responses in the "Completion conditions" section of the survey. This option is enabled by default for all new surveys. Please note that partial responses require `posthog-js` version `1.240.0` or higher and are currently only supported in `posthog-js` library.
 
-**If partial responses are disabled (or if a user completes it in one go):**
-If partial responses are not a factor (e.g., the feature is disabled, or a user simply completes the survey fully in one interaction), PostHog sends a single `survey sent` event. This event is triggered upon full completion and submission of the survey and contains all the user's answers. The `$survey_completed` property in this event will be `true`.
+**If partial responses are disabled, PostHog sends a single `survey sent` event**. This event is triggered once the user answers the last question of the survey. It contains all the user's responses. The `$survey_completed` property in this event will be `true`.
 
-**When partial responses are enabled (default behavior):**
+**When partial responses are enabled (default behavior for new surveys):**
 If partial responses are enabled, PostHog tracks user progress as follows:
 
 1.  **Initial Response:** The first `survey sent` event is triggered as soon as the user answers at least one question. This initial event includes the answer(s) provided up to that point. The `$survey_completed` property in this event will be `false`.
