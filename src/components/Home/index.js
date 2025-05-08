@@ -28,6 +28,8 @@ import TimelineNew from './TimelineNew'
 import { CallToAction } from 'components/CallToAction'
 import { RadioGroup } from 'components/RadixUI/RadioGroup'
 import { navigate } from 'gatsby'
+import { Link } from 'gatsby'
+import Logo from 'components/Logo'
 
 const menuOptions = [
     {
@@ -36,12 +38,12 @@ const menuOptions = [
         default: true,
     },
     {
-        label: 'Talk to a human',
-        value: '/contact-sales',
+        label: 'Install with AI',
+        value: '/ai-install',
     },
     {
-        label: 'Take a tour',
-        value: '/tour',
+        label: 'Talk to a human',
+        value: '/contact-sales',
     },
 ]
 
@@ -58,40 +60,64 @@ const Home = () => {
     return (
         <>
             <StarUsBanner />
-                <SEO
-                    title="PostHog - How developers build successful products"
-                    description="PostHog is the only all-in-one platform for product analytics, feature flags, session replays, experiments, and surveys that's built for developers."
-                    image="/images/home.png"
-                />
+            <SEO
+                title="PostHog - How developers build successful products"
+                description="PostHog is the only all-in-one platform for product analytics, feature flags, session replays, experiments, and surveys that's built for developers."
+                image="/images/home.png"
+            />
 
-                <div data-scheme="secondary" className="w-full h-full bg-primary flex flex-col">
-                    <div className="flex flex-1 w-full border-y border-primary">
-                        <div data-scheme="primary" className="w-[40%] flex items-center justify-center p-2 border-r border-primary">
-                            <div className="w-full bg-primary flex items-center justify-center h-full text-sm">
-                                Image placeholder
-                            </div>
-                        </div>
-                        <div className="w-[60%] flex flex-col justify-center px-8 py-4">
-                            <h1 className="text-xl font-bold mb-1">The toolkit for building successful products</h1>
-                            <p className="text-secondary text-[15px]">The single platform to build products, talk to users, and ship new features</p>
-                            <div className="mt-4">
-                                <RadioGroup 
-                                    title="Menu options" 
-                                    options={menuOptions} 
-                                    value={selectedOption}
-                                    onValueChange={setSelectedOption}
-                                />
-                            </div>
+            <div data-scheme="secondary" className="w-full h-full bg-primary flex flex-col">
+                <div className="flex flex-1 w-full border-y border-primary">
+                    <div
+                        data-scheme="primary"
+                        className="w-[40%] flex items-center justify-center p-2 border-r border-primary"
+                    >
+                        <div className="w-full bg-accent flex items-center justify-center h-full text-sm relative border border-primary overflow-hidden">
+                            <img
+                                src="https://res.cloudinary.com/dmukukwp6/image/upload/3000_773e0d4c49.png"
+                                className=""
+                            />
+                            <img
+                                src="https://res.cloudinary.com/dmukukwp6/image/upload/yc_approved_347c12b8e6.png"
+                                className="absolute -right-24 top-6 rotate-[45deg]"
+                            />
                         </div>
                     </div>
-                    <div data-scheme="primary" className="w-full flex justify-end p-2 bg-accent">
-                        <CallToAction type="secondary" size="sm" onClick={handleContinue}>Continue</CallToAction>
+                    <div className="w-[60%] flex flex-col justify-center px-8 py-4">
+                        <Logo className="h-10 mb-4" />
+                        <h1 className="text-xl font-bold mb-1">The toolkit for building successful products</h1>
+                        <p className="text-secondary text-[15px]">
+                            PostHog is the single platform to build products, talk to users, and ship new features
+                        </p>
+                        <div className="mt-4">
+                            <RadioGroup
+                                title="Menu options"
+                                options={menuOptions}
+                                value={selectedOption}
+                                onValueChange={setSelectedOption}
+                            />
+
+                            <div className="mt-6 text-sm border-t border-primary pt-6">
+                                You can also{' '}
+                                <Link to="/tour" className="text-red font-semibold">
+                                    take a tour
+                                </Link>{' '}
+                                or learn{' '}
+                                <Link to="/#" className="text-red font-semibold">
+                                    why our website looks like this
+                                </Link>
+                            </div>
+                        </div>
                     </div>
                 </div>
+                <div data-scheme="primary" className="w-full flex justify-end p-2 bg-accent">
+                    <CallToAction type="secondary" size="sm" onClick={handleContinue}>
+                        Continue
+                    </CallToAction>
+                </div>
+            </div>
 
-
-
-{/* 
+            {/* 
                 <Hero />
                 <Customers />
                 <AllInOne />
