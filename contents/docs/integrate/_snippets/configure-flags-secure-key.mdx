@@ -1,0 +1,77 @@
+<MultiLanguage>
+
+```node
+const client = new PostHog(
+    '<ph_project_api_key>',
+    { 
+        host: '<ph_client_api_host>',
+        personalApiKey: 'your feature flags secure API key from step 1',
+        featureFlagsPollingInterval: 30000 // Optional. Measured in milliseconds. Defaults to 30000 (30 seconds)
+    }
+) 
+```
+
+```ruby
+posthog = PostHog::Client.new({
+  api_key: "<ph_project_api_key>",
+  host: "<ph_client_api_host>",
+  personal_api_key: 'your feature flags secure API key from step 1',
+  feature_flags_polling_interval: 30 # Optional. Measured in seconds. Defaults to 30.
+})
+```
+
+```go
+package main
+
+import (
+    "os"
+    "time"
+    "github.com/posthog/posthog-go"
+)
+
+func main() {
+	client, _ := posthog.NewWithConfig(
+		os.Getenv("POSTHOG_API_KEY"),
+		posthog.Config{
+			Endpoint:       "<ph_client_api_host>",
+			PersonalApiKey: "your feature flags secure API key", // Optional, but much more performant. If this token is not supplied, then fetching feature flag values will be slower.
+            DefaultFeatureFlagsPollingInterval: time.Minute * 5 // time.Duration // Optional. Defaults to 5 minutes.
+            // NextFeatureFlagsPollingTick: func() time.Duration {} // Optional. Use this to sync polling intervals between instances. For an example see: https://github.com/PostHog/posthog-go/pull/36#issuecomment-1991734125
+		},
+	)
+	defer client.Close()
+	// run commands
+}
+```
+
+```php
+PostHog::init("<ph_project_api_key>",
+  array('host' => '<ph_client_api_host>'),
+  null, // or custom http client
+ 'YOUR PERSONAL API KEY from step 1'
+);
+// NOTE: PHP currently doesn't support a poller, so you'll need to reload flags as and when needed, or re-initialize the posthog client
+```
+
+```python
+from posthog import Posthog
+
+posthog = Posthog('<ph_project_api_key>', 
+    host='<ph_client_api_host>',
+    poll_interval=30, # Optional. Measured in seconds. Defaults to 30.
+    personal_api_key='your feature flags secure API key from step 1'
+)
+```
+
+```dotnet
+// Note: We don't recommend passing these in directly.
+// Instead, rely on the config system and set the personal 
+// api key in a secrets manager.
+var client = new PostHogClient(
+    new PostHogOptions {
+        ProjectApiKey = "<ph_project_api_key>",
+        PersonalApiKey = "your feature flags secure API key from step 1"
+    });
+```
+
+</MultiLanguage>
