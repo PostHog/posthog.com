@@ -22,7 +22,7 @@ Ways to invite users for an interview:
    - PMs use cal.com for scheduling interviews, but you can choose a different tool as well.
 - If a customer has requested a feature through Slack, then message them directly.
 - Email customers who have subscribed to the feature on the [roadmap](/roadmap).
-- Email a slice of users, e.g. top users of your product, or conversely people ones who churned.
+- Email a slice of users, e.g. top users of your product, or conversely, people who churned.
 
 #### Email writing inspiration
 
