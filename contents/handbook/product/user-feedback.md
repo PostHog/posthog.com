@@ -10,9 +10,9 @@ We actively seek (outbound) input in everything we work on. In addition to havin
 - General product and experience feedback. Continuous effort to gather general feedback on the product and their holistic experience with PostHog are led by the PMs supporting the team.
 - Usability tests. We generally run these for new big features the Engineering team is working on. Run by the engineer building that feature.
 
-### Feedback call process
+## Feedback call process
 
-**Recruiting users**
+### Recruiting users
 
 Ways to invite users for an interview:
 - [PostHog Surveys](https://app.posthog.com/survey_templates). We even have a template for [user interviews](/templates/user-interview).
@@ -43,10 +43,10 @@ Here's an example of an email from a real project, crafted by <TeamMember name="
 > $GMAIL_SIGNATURE
 
 
-**Scheduling**
+### Scheduling
 - Add all feedback calls to the [User interviews calendar](https://calendar.google.com/calendar/?cid=Y19tczllaWN1Ym92ZGgxYWhzNmtoY2xpNTQ3b0Bncm91cC5jYWxlbmRhci5nb29nbGUuY29t). If the invite was created from your own calendar, you can simply add "User interviews" as an invitee.
 
-**During the call**
+### During the call
 - We recommend recording interviews using [BuildBetter](https://app.buildbetter.app/). Please, always ask and make sure the user is comfortable with being recorded before doing so.
    - Once the user confirms they are okay with this, you can easily trigger the recording by clicking on `Join a call` on the BuildBetter homepage and copy-pasting the call URL.
    - If you do not have access to BuildBetter yet, drop a message in the `#pm` Slack channel.
@@ -54,7 +54,7 @@ Here's an example of an email from a real project, crafted by <TeamMember name="
 - Do a quick round of intros if you haven't met previously.
 - If this is the first interview with the user, ask them for context about their company, their role, if they're technical.
 
-**After the call**
+### After the call
 1. If you used BuildBetter, the tool will automatically generate a summary for you under the recording. We recommend checking this, and adding any additional thoughts, because the AI can sometimes pick up things incorrectly. You can also generate a doc using the platform, where you can give very specific prompts for the outline of the summary.
    1. We also want to keep recordings easily identifiable, therefore please rename the recording to `[topic of the interview] user interview with [first name of the user]`, e.g. Web analytics user interview with Joe.
 2. In case recording wasn't possible, add the notes to the [Google Doc][feedback-doc].
@@ -64,7 +64,7 @@ Here's an example of an email from a real project, crafted by <TeamMember name="
    1. Most of the time, the reward will be a gift card for the [PostHog merch store](https://merch.posthog.com/). If it's the case, create the gift card in Shopify.
 6. Follow-up with the user. Send any applicable rewards, links to any opened GitHub issues, and answers to any outstanding questions.
 
-### Rewards 
+## Rewards 
 We strongly value our users' time. As such, we usually send a small gift of appreciation. We have the following general _guidelines_, but just use your best judgement.
 
 - As a thank you for a call, we send users a gift card to the [PostHog merch store](https://merch.posthog.com/) with around $40 of value (great for a swanky T-shirt plus stickers).
@@ -73,13 +73,13 @@ We strongly value our users' time. As such, we usually send a small gift of appr
 
 Instructions on how to create gift cards can be found [here](/handbook/company/merch-store#customers).
 
-### Repositories of information 
+## Repositories of information 
 We keep a log of user feedback in the following places:
 - **BuildBetter.** Starting 2025, we keep track of all user interviews (recordings & notes) in [BuildBetter](https://app.buildbetter.app/).
 - **Feedback notes.** Feedback notes are mainly kept in this [Google doc][feedback-doc].
 - **Old recordings.** All older recordings are kept in [this folder][recordings] in the Product shared drive.
 
-### Additional notes
+## Wherever feedback happens, share it
 Any PostHog team member may receive feedback at any time, whether doing sales, customer support, on forums outside of PostHog or even friends & family. If you receive feedback for PostHog, it's important to **share it with the rest of the team.** To do so, just add it to the [#posthog-feedback](https://posthog.slack.com/archives/C011L071P8U) channel.
 
 <blockquote class='warning-note'>
