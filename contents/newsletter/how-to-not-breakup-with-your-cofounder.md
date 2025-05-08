@@ -27,7 +27,7 @@ I had previously been a VP of sales, responsible for sales, support, and account
 I diligently pushed myself hard at school, got straight As, and went to one of the top universities in my country. Tim quit school at 16 because he realized he was earning more than his teacher, and has worked ever since.
 
 ![tim and james](https://res.cloudinary.com/dmukukwp6/image/upload/Mykonos_2024_Photo_3343de9e4b.png)
-<Caption>Me (left) and Tim (right) at our [Mykonos company offsite](https://posthog.com/blog/mykonos-hackathon?utm_source=posthog-newsletter&utm_medium=post&utm_campaign=cofounders) in 2024</Caption>
+<Caption>Me (left) and Tim (right) at our Mykonos company offsite in 2024</Caption>
 
 Despite these differences, we realized it was important to be equal partners in PostHog from the outset. We took 50:50 equity in the company and, once we could afford to do so, took the same salary, too.
 
