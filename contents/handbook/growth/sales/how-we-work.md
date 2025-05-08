@@ -123,7 +123,7 @@ You are likely to need to travel a lot more than the typical PostHog team member
 
 ## Working with engineering teams
 
-We hire Technical AEs and Technical CSMs. This means you are responsible for dealing with the vast majority of product queries from your customers. However, we still work closely with engineering teams!
+We hire Technical AEs. This means you are responsible for dealing with the vast majority of product queries from your customers. However, we still work closely with engineering teams!
 
 **Product requests from large customers**
 
@@ -156,6 +156,7 @@ To add Pylon to your customer channel:
 4. In the popup that appears in the Slack channel, select Customer Channel.
 5. Add yourself as the Account Owner, and set the Triage channel to #support-customer-success.
 6. Click Enable.
+7. Add Tim, Simon, Charles, and Abigail to the channel.
 
 Once enabled, you can add the :ticket: emoji to a Slack thread to create a new Ticket in Zendesk.  Customers can also do this.  Make sure that a Group and Severity are selected or the ticket won't be routed properly.
 
@@ -172,4 +173,4 @@ We use Calendly for scheduling meetings. In order to schedule a meeting between 
 We use BuildBetter for call recording and notetaking. You will need to integrate BuildBetter with your calendar in order for it to automatically join your calls. To do so, click on settings and look for the integrations link under account (not the one under organization) and follow the steps from there.
 
 **Zoom:**
-We use Zoom for sales calls, and if you have Cal.com properly integrated, calls that are booked through the tool will default to Zoom. You can find backgrounds to use for the calls here: [This is fine \(and other awesome PostHog wallpapers\)](/blog/posthog-wallpapers).
+We use Zoom for sales calls, and if you have Calendly properly integrated, calls that are booked through the tool will default to Zoom. You can find backgrounds to use for the calls here: [This is fine \(and other awesome PostHog wallpapers\)](/blog/posthog-wallpapers).
