@@ -32,7 +32,7 @@ Why: These spikes can significantly distort our monthly growth metrics and don't
 
 How: We define a spike when all these conditions are met:
 - Customer's current month revenue is more than twice the average of the previous two months
-- The increase is at least $1000
+- The increase is at least $1000 in a given month
 - The following month's revenue decreases by 50% or more from the spike month
 
 ### 3. Annual plan adjustments
