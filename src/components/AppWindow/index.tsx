@@ -46,6 +46,16 @@ const fixedAppSizes = {
             height: 580,
         },
     },
+    '/signup': {
+        max: {
+            width: 900,
+            height: 750,
+        },
+        min: {
+            width: 900,
+            height: 750,
+        },
+    },
     '/display-options': {
         max: {
             width: 600,

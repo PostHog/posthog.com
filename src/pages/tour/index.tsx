@@ -1,5 +1,6 @@
 import React, { Fragment, useState } from 'react'
 import SEO from 'components/seo'
+import Wizard from 'components/Wizard'
 import { CallToAction } from 'components/CallToAction'
 import { productMenu } from '../../navs'
 import * as Icons from '@posthog/icons'
@@ -185,15 +186,43 @@ function Slide({ slide }: { slide: any }) {
     )
 }
 
-export default function Tour(): JSX.Element {
+export default function ProductAnalyticsCustomers(): JSX.Element {
     const [slideIndex, setSlideIndex] = useState(0)
     const slide = slides[slideIndex]
     const isFirst = slideIndex === 0
     const isLast = slideIndex === slides.length - 1
+
     return (
         <>
-            <SEO title="Tour" />
-            <div data-scheme="primary" className="w-full h-full bg-primary flex flex-col">
+            <SEO
+                title="Tour"
+                description="PostHog is the only product analytics platform built to natively work with Session Replay, Feature Flags, Experiments, and Surveys."
+                image={`/images/og/product-analytics.jpg`}
+            />
+            <Wizard
+                navigation={
+                    <>
+                        {!isFirst ? (
+                            <CallToAction type="secondary" size="sm" onClick={() => setSlideIndex(slideIndex - 1)}>
+                                Back
+                            </CallToAction>
+                        ) : (
+                            <span />
+                        )}
+                        {isLast ? (
+                            <Link to="/products" state={{ newWindow: true }}>
+                                <CallToAction type="primary" size="sm">
+                                    Go to product tour
+                                </CallToAction>
+                            </Link>
+                        ) : (
+                            <CallToAction type="primary" size="sm" onClick={() => setSlideIndex(slideIndex + 1)}>
+                                Next
+                            </CallToAction>
+                        )}
+                    </>
+                }
+            >
                 {slideIndex === 0 ? (
                     <div className="flex flex-col flex-1 items-center w-full border-y border-primary">
                         <Slide slide={slide} />
@@ -203,27 +232,7 @@ export default function Tour(): JSX.Element {
                         <Slide slide={slide} />
                     </ScrollArea>
                 )}
-                <div className="w-full flex justify-between px-3 py-2 bg-accent">
-                    {!isFirst ? (
-                        <CallToAction type="secondary" size="sm" onClick={() => setSlideIndex(slideIndex - 1)}>
-                            Back
-                        </CallToAction>
-                    ) : (
-                        <span />
-                    )}
-                    {isLast ? (
-                        <Link to="/products" state={{ newWindow: true }}>
-                            <CallToAction type="primary" size="sm">
-                                Go to product tour
-                            </CallToAction>
-                        </Link>
-                    ) : (
-                        <CallToAction type="primary" size="sm" onClick={() => setSlideIndex(slideIndex + 1)}>
-                            Next
-                        </CallToAction>
-                    )}
-                </div>
-            </div>
+            </Wizard>
         </>
     )
 }
