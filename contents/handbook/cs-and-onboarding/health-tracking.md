@@ -90,7 +90,7 @@ Data volume is a lagging indicator, by the time it drops, customers may have alr
 | Measure                                        | Poor | Concerning | Healthy |
 |------------------------------------------------|------|------------|---------|
 | Event count last 30 days (percentage decrease) | >20% | 5-20%      | <= 5%   |
-| Active users analyzing insights                | <20% | 20-40%     | ≥40%  |
+| Active users analyzing insights                | <20% | 20-40%     | ≥40%    |
 
 > Product analytics usage include: analyzing insights or dashboards, creating or saving insights, creating or updating dashboards
 
@@ -99,15 +99,15 @@ Data volume is a lagging indicator, by the time it drops, customers may have alr
 | Measure                                         | Poor | Concerning | Healthy |
 |-------------------------------------------------|------|------------|---------|
 | Replay count last 30 days (percentage decrease) | >20% | 5-20%      | <= 5%   |
-| Active users watching replays                   | <20% | 20-40%     | ≥40%  |
+| Active users watching replays                   | <20% | 20-40%     | ≥40%    |
 
 #### Feature flags & experiments
 
 | Measure                                            | Poor | Concerning | Healthy |
 |----------------------------------------------------|------|------------|---------|
 | Decide requests last 30 days (percentage decrease) | >20% | 5-20%      | <= 5%   |
-| Active users creating feature flags last 30 days*  | <5%  | 5-20%      | ≥20%  |
-| Active users using experiments**                   | <5%  | 5-20%      | ≥20%  |
+| Active users creating feature flags last 30 days*  | <5%  | 5-20%      | ≥20%    |
+| Active users using experiments**                   | <5%  | 5-20%      | ≥20%    |
 
 > Feature flag usage includes: creating or updating feature flags. We look at this over 30 days instead of the usual 14 as feature flags provide value over a longer time frame.
 > Experiments usage includes: creating experiments, viewing experiments, and launching experiments.
