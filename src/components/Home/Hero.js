@@ -320,7 +320,7 @@ export default function Hero() {
                                             posthog?.capture('clicked Integrate with AI')
                                         }}
                                     >
-                                        install with AI in 90-seconds
+                                        install with AI in 90 seconds
                                     </button>
                                 </p>
                             )}
