@@ -680,6 +680,10 @@ export const handbookSidebar = [
                 url: '/handbook/cs-and-onboarding/onboarding-team',
             },
             {
+                name: 'How we work',
+                url: '/handbook/cs-and-onboarding/how-we-work',
+            },
+            {
                 name: 'New team member onboarding',
                 url: '/handbook/cs-and-onboarding/new-hire-onboarding',
             },
@@ -3422,9 +3426,9 @@ export const docsMenu = {
                     name: 'Features',
                 },
                 {
-                    name: 'Webhook',
-                    url: '/docs/surveys/webhook',
-                    icon: 'IconLaptop',
+                    name: 'Destinations',
+                    url: '/docs/surveys/destinations',
+                    icon: 'IconLive',
                     color: 'orange',
                 },
                 {

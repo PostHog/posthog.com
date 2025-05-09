@@ -758,13 +758,14 @@ function Privacy() {
                             .
                         </p>
                         <p>
-                            In compliance with the EU-U.S. DPF and the UK Extension to the EU-U.S. DPF and the
-                            Swiss-U.S. DPF, PostHog Inc commits to cooperate and comply with the advice of the panel
-                            established by the EU data protection authorities (DPAs) and the UK Information
-                            Commissioner’s Office (ICO) and the Swiss Federal Data Protection and Information
-                            Commissioner (FDPIC) with regard to unresolved complaints concerning our handling of human
-                            resources data received in reliance on the EU-U.S. DPF and the UK Extension to the EU-U.S.
-                            DPF and the Swiss-U.S. DPF in the context of the employment relationship
+                            In compliance with the EU-U.S. Data Privacy Framework ("EU-U.S. DPF"), the UK Extension to
+                            the EU-U.S. DPF, and the Swiss-U.S. Data Privacy Framework ("Swiss-U.S. DPF"). DPF, PostHog
+                            Inc commits to cooperate and comply with the advice of the panel established by the EU data
+                            protection authorities (DPAs) and the UK Information Commissioner’s Office (ICO) and the
+                            Swiss Federal Data Protection and Information Commissioner (FDPIC) with regard to unresolved
+                            complaints concerning our handling of human resources data received in reliance on the
+                            EU-U.S. DPF and the UK Extension to the EU-U.S. DPF and the Swiss-U.S. DPF in the context of
+                            the employment relationship
                         </p>
                         <p>
                             For the actions of third party agents PostHog engages to process data on our behalf, PostHog
@@ -813,8 +814,8 @@ function Privacy() {
                                 </u>
                             </Link>
                             . The Federal Trade Commission has investigation and enforcement authority over PostHog’s
-                            compliance with the EU-U.S. DPF and the UK Extension to the EU-U.S. DPF, and the Swiss-U.S.
-                            DPF
+                            compliance with EU-U.S. Data Privacy Framework ("EU-U.S. DPF"), the UK Extension to the
+                            EU-U.S. DPF, and the Swiss-U.S. Data Privacy Framework ("Swiss-U.S. DPF")
                         </p>
                     </div>
                     <div>

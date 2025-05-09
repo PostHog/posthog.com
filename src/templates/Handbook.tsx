@@ -294,6 +294,7 @@ export const query = graphql`
                 availability {
                     free
                     selfServe
+                    teams
                     enterprise
                 }
                 thumbnail {
