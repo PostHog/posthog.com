@@ -200,7 +200,7 @@ export default function ProductAnalyticsCustomers(): JSX.Element {
                 image={`/images/og/product-analytics.jpg`}
             />
             <Wizard
-                navigation={
+                leftNavigation={
                     <>
                         {!isFirst ? (
                             <CallToAction type="secondary" size="sm" onClick={() => setSlideIndex(slideIndex - 1)}>
@@ -209,6 +209,10 @@ export default function ProductAnalyticsCustomers(): JSX.Element {
                         ) : (
                             <span />
                         )}
+                    </>
+                }
+                rightNavigation={
+                    <>
                         {isLast ? (
                             <Link to="/products" state={{ newWindow: true }}>
                                 <CallToAction type="primary" size="sm">

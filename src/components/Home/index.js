@@ -1,35 +1,16 @@
-import StarUsBanner from 'components/StarUsBanner'
-import React, { useState } from 'react'
-import Layout from '../Layout'
-import { SEO } from '../seo'
-import Community from './Community'
-import CTA from './CTA'
-import Customers from './Customers'
-import Hero from './Hero'
-import Pipelines from './Pipelines'
-import Timeline from './Timeline'
-import Roadmap from './Roadmap'
-import Startups from './Startups'
-import Tutorials from './Tutorials'
-import usePostHog from '../../hooks/usePostHog'
-import AllInOne from './AllInOne'
-import ApiExamples from './ApiExamples'
-import HogQL from './HogQL'
-import CustomerData from './CustomerData'
-import CodeBlocks from './CodeBlocks'
-import Libraries from './Libraries'
-import OnePlatform from './OnePlatform'
-import NoHatingAllowed from './../NoHatingAllowed'
-import { RenderInClient } from 'components/RenderInClient'
-import BillboardTruck from './BillboardTruck'
-import Spinner from 'components/Spinner'
-import { HomepageCards } from '../NoHatingAllowed/data.js'
-import TimelineNew from './TimelineNew'
+import React, { Fragment, useState } from 'react'
+import SEO from 'components/seo'
+import Wizard from 'components/Wizard'
 import { CallToAction } from 'components/CallToAction'
+import { productMenu } from '../../navs'
+import * as Icons from '@posthog/icons'
+import Link from 'components/Link'
+import { IconBold, IconLink } from 'components/OSIcons'
+import ScrollArea from 'components/RadixUI/ScrollArea'
+import Logo from 'components/Logo'
 import { RadioGroup } from 'components/RadixUI/RadioGroup'
 import { navigate } from 'gatsby'
-import { Link } from 'gatsby'
-import Logo from 'components/Logo'
+import usePostHog from '../../hooks/usePostHog'
 
 const menuOptions = [
     {
@@ -47,7 +28,7 @@ const menuOptions = [
     },
 ]
 
-const Home = () => {
+export default function Home() {
     const posthog = usePostHog()
     const [selectedOption, setSelectedOption] = useState(menuOptions[0].value)
 
@@ -56,17 +37,22 @@ const Home = () => {
             navigate(selectedOption)
         }
     }
-
     return (
         <>
-            <StarUsBanner />
             <SEO
                 title="PostHog - How developers build successful products"
                 description="PostHog is the only all-in-one platform for product analytics, feature flags, session replays, experiments, and surveys that's built for developers."
-                image="/images/home.png"
+                image={`/images/home.png`}
             />
-
-            <div data-scheme="secondary" className="w-full h-full bg-primary flex flex-col">
+            <Wizard
+                rightNavigation={
+                    <>
+                        <CallToAction type="secondary" size="sm">
+                            Continue
+                        </CallToAction>
+                    </>
+                }
+            >
                 <div className="flex flex-1 w-full border-y border-primary">
                     <div
                         data-scheme="primary"
@@ -110,50 +96,7 @@ const Home = () => {
                         </div>
                     </div>
                 </div>
-                <div data-scheme="primary" className="w-full flex justify-end p-2 bg-accent">
-                    <CallToAction type="secondary" size="sm" onClick={handleContinue}>
-                        Continue
-                    </CallToAction>
-                </div>
-            </div>
-
-            {/* 
-                <Hero />
-                <Customers />
-                <AllInOne />
-                <TimelineNew />
-                <Libraries />
-                <CodeBlocks />
-                <NoHatingAllowed data={HomepageCards} youllHate="PostHog" size="text-4xl lg:text-6xl" />
-
-                <RenderInClient
-                    render={() => {
-                        return posthog?.getFeatureFlag?.('homepage-billboard-truck') === true ? (
-                            <BillboardTruck leftHandDrive />
-                        ) : (
-                            <BillboardTruck />
-                        )
-                    }}
-                    placeholder={
-                        <div>
-                            <Spinner className="w-7 h-7 mx-auto my-12" />
-                        </div>
-                    }
-                />
-
-                <ApiExamples />
-                <HogQL />
-                <Community />
-                <OnePlatform />
-                <CustomerData />
-                <Roadmap />
-                <Startups />
-                <div className="relative">
-                    <CTA />
-                </div>
-                 */}
+            </Wizard>
         </>
     )
 }
-
-export default Home
