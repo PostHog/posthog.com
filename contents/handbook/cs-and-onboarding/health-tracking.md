@@ -6,7 +6,7 @@ showTitle: true
 
 We use Vitally as a Customer Success platform.  You can log in via Google SSO to view customer data but will need [Mine](/community/profiles/29862) or [Simon](/community/profiles/28895) to grant you admin access to let you manage your accounts.  It integrates with our other systems such as PostHog, Salesforce and Zendesk to give you a complete view of what's going on with your customers.
 
-## Health Scoring
+## Health scoring
 
 ### Overview
 
@@ -14,7 +14,7 @@ Health Scores are a great way to assess whether your customer is at risk of chur
 
 Health score metrics are divided into two categories: Customer Engagement (20%) and Product Engagement (80%).
 
-[**Customer Engagement**](/contents/handbook/cs-and-onboarding/health-tracking#customer-engagement)
+[**Customer engagement**](/contents/handbook/cs-and-onboarding/health-tracking#customer-engagement)
 
 | Score Name                | Measuring                                        | Weighting    | 
 |---------------------------|--------------------------------------------------|--------------|
@@ -22,7 +22,7 @@ Health score metrics are divided into two categories: Customer Engagement (20%) 
 | Product experience        | Are there negative experiences with the product? | 5%           | 
 | Company engagement        | Are they engaging with PostHog humans?           | 5%           | 
 
-[**Product Engagement**](/contents/handbook/cs-and-onboarding/health-tracking#product-engagement)
+[**Product engagement**](/contents/handbook/cs-and-onboarding/health-tracking#product-engagement)
 
 | Score Name                  | Measuring                                      | Weighting    | 
 |-----------------------------|------------------------------------------------|--------------|
@@ -31,7 +31,7 @@ Health score metrics are divided into two categories: Customer Engagement (20%) 
 | Feature flags & Experiments | Decide requests, users creating feature flags, users creating or viewing experiments | 17%          | 
 | Surveys & Data warehouse    | Users creating and viewing surveys, volume of rows synced | 5%           | 
 
-### Customer Engagement
+### Customer engagement
 
 Non-product metrics, looking holistically at: Are customers using PostHog? Do they have friction when using PostHog? Are they engaging with PostHog humans?
 
@@ -71,7 +71,7 @@ This looks at a customer's engagement with PostHog as a company. Most of PostHog
 | Most recent ticket          | >90 days | 30-90 days | ≤30 days  |
 | Total product count         | <3       | 3-6        | >6     |
 
-### Product Engagement
+### Product engagement
 
 Across PostHog's products, we look at 2 factors – data volume & user engagement.
 
@@ -120,7 +120,7 @@ Data volume is a lagging indicator, by the time it drops, customers may have alr
 | Rows synced last 30 days (percentage decrease)     | >20% | 5-20%      | <= 5%   |
 
 
-## Account Indicators
+## Account indicators
 
 Health scores are useful for tracking the long-term trends in an account, but occasionally there are more immediate point-in-time events that we should react to.  These are tracked as indicators in Vitally and fall into one of two categories
 
@@ -131,11 +131,11 @@ Health scores are useful for tracking the long-term trends in an account, but oc
 
 These are automatically applied via Vitally playbooks (see the Risk category [here](https://posthog.vitally-eu.io/settings/playbooks)):
 
-#### Forecasted MRR Decrease
+#### Forecasted MRR decrease
 
 Applied if the Forecasted MRR Change is less than -10%, indicating a drop in MRR.  We should look into the account to understand whether it is just a reduction in usage, or they are trending towards churn.
 
-#### Increased Billing Page Visits
+#### Increased billing page visits
 
 Applied if there have been more than 1 visits to the billing page in the previous 7 days.  Can be a good indicator that the customer needs help understanding or reducing their bill.
 
@@ -151,7 +151,7 @@ Applied if the Event count last 7 days (Success metric) decreases more than 20% 
 
 Applied if `insight analyzed` was last seen greater than 7 days ago.  Indicates that they may have stopped using PostHog to track analytics data.
 
-#### Payment Failed
+#### Payment failed
 
 Applied if there is a failed payment on their Stripe account.  We should reach out to get this resolved ASAP.
 
@@ -159,7 +159,7 @@ Applied if there is a failed payment on their Stripe account.  We should reach o
 
 Applied if they are currently in the Startup plan segment but also have Forecasted MRR, meaning that they are on track to make a payment this month.
 
-#### Organization Owner Recently Removed
+#### Organization owner recently removed
 
 Applied if the Owner role has been removed from a user in the last 14 days.  May be a sign that you've lost a champion.
 
@@ -167,10 +167,10 @@ Applied if the Owner role has been removed from a user in the last 14 days.  May
 
 These are automatically applied via Vitally playbooks (see the Opportunity category [here](https://posthog.vitally-eu.io/settings/playbooks)):
 
-#### Forecasted MRR Growth
+#### Forecasted MRR growth
 
 Applied if the Forecasted MRR Change is more than 10%, indicating an increase in MRR.  We should look into the account to understand whether it is likely to be deliberate or an accidental spike.
 
-#### Organization Owner Recently Added
+#### Organization owner recently added
 
 Applied if the Owner role has been added to a user in the last 14 days. This is a good opportunity to reach out to a potential champion if you've not met them before. 
