@@ -111,6 +111,8 @@ Our strong preference is for customers to pay by credit card, as this is easier 
 
 If a customer wants to pay by ACH or bank transfer, we will usually only consider this if they are paying for 1 year or more up front. This is more likely to be the case for very large customers.
 
+For customers in an annual contract but paying monthly we require them to pay via credit card for monthly payments below $2500.  For payment above we do allow ACH or bank transfer, but with Net14 terms.
+
 ## Contract buyouts
 
 Sometimes customers will be locked into a contract with a competitor, but want to switch to PostHog when their contract is up. In this case, we are willing to let them use PostHog for free for up to 6 months. This is beneficial to PostHog as well, as we can get them set up and using PostHog sooner, capitalizing on the momentum of their interest today, and giving them more time to get comfortable with the platform.
