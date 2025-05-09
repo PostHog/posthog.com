@@ -119,6 +119,12 @@ export const HandbookSidebar = ({ contributors, title, location, availability, r
                         <span>Self-serve</span>
                         {renderAvailabilityIcon(availability.selfServe)}
                     </div>
+                    {availability.teams && (
+                        <div className="flex items-center justify-between font-bold">
+                            <span>Teams</span>
+                            {renderAvailabilityIcon(availability.teams)}
+                        </div>
+                    )}
                     <div className="flex items-center justify-between font-bold">
                         <span>Enterprise</span>
                         {renderAvailabilityIcon(availability.enterprise)}
@@ -529,6 +535,7 @@ export const query = graphql`
                 availability {
                     free
                     selfServe
+                    teams
                     enterprise
                 }
                 thumbnail {
