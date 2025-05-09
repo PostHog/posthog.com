@@ -1,4 +1,4 @@
-import React, { Fragment, useState } from 'react'
+import React, { Fragment, useState, useEffect } from 'react'
 import SEO from 'components/seo'
 import Wizard from 'components/Wizard'
 import { CallToAction } from 'components/CallToAction'
@@ -13,6 +13,9 @@ import { navigate } from 'gatsby'
 import usePostHog from '../../hooks/usePostHog'
 import { useApp } from '../../context/App'
 import { useWindow } from '../../context/Window'
+import CodeBlock from './CodeBlock'
+import ContactForm from './ContactForm'
+import CloudinaryImage from 'components/CloudinaryImage'
 
 const MainContent = ({ selectedOption, setSelectedOption, options }) => (
     <div className="flex flex-1 w-full border-y border-primary">
@@ -56,117 +59,127 @@ const MainContent = ({ selectedOption, setSelectedOption, options }) => (
 
 const AIInstallContent = () => (
     <div className="pt-8 px-8 flex flex-col items-center w-full mb-8">
-        <div className="bg-accent border border-primary size-40 rounded-full flex items-center justify-center mb-4">
-            <IconBold className="size-12" />
-        </div>
-        <h2 className="text-xl font-bold mb-1">Install PostHog with AI assistance</h2>
+        <h2 className="text-xl font-bold mb-1">Integrate PostHog in 90 seconds</h2>
         <p className="text-[15px] text-secondary text-center mb-10">
-            Our AI will guide you through the installation process step by step
+            Let's integrate PostHog. Run the following command; don't write any code until it completes:
         </p>
-        <div className="grid grid-cols-1 gap-4 w-full max-w-2xl">
-            <div className="flex items-start gap-3">
-                <span>
-                    <IconBold className="size-6" />
-                </span>
-                <div>
-                    <div className="font-semibold">Quick setup</div>
-                    <div className="text-secondary text-[15px]">Install PostHog in minutes with our AI assistant</div>
-                </div>
-            </div>
-            <div className="flex items-start gap-3">
-                <span>
-                    <IconLink className="size-6" />
-                </span>
-                <div>
-                    <div className="font-semibold">Framework detection</div>
-                    <div className="text-secondary text-[15px]">
-                        AI detects your tech stack and provides customized installation instructions
-                    </div>
-                </div>
-            </div>
-            <div className="flex items-start gap-3">
-                <span>
-                    <IconBold className="size-6" />
-                </span>
-                <div>
-                    <div className="font-semibold">Code snippets</div>
-                    <div className="text-secondary text-[15px]">
-                        Get ready-to-use code snippets for your specific setup
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-)
 
-const TalkToHumanDemo = () => (
-    <div className="pt-8 px-8 flex flex-col items-center w-full mb-8">
-        <h2 className="text-xl font-bold mb-1">Watch a demo first</h2>
-        <p className="text-[15px] text-secondary text-center mb-10">
-            See how PostHog can help your team build better products
-        </p>
-        <div className="w-full max-w-2xl bg-accent border border-primary p-4 rounded">
-            <div className="aspect-video bg-primary flex items-center justify-center text-white">
-                <p>Demo video placeholder</p>
-            </div>
-        </div>
-    </div>
-)
-
-const TalkToHumanContact = () => (
-    <div className="pt-8 px-8 flex flex-col items-center w-full mb-8">
-        <h2 className="text-xl font-bold mb-1">Contact our team</h2>
-        <p className="text-[15px] text-secondary text-center mb-10">
-            Fill out this form and we'll get back to you shortly
-        </p>
         <div className="w-full max-w-2xl">
-            <div className="grid grid-cols-1 gap-4">
-                <div>
-                    <label htmlFor="name" className="block text-sm font-medium mb-1">
-                        Name
-                    </label>
-                    <input
-                        type="text"
-                        id="name"
-                        className="w-full border border-primary rounded p-2"
-                        placeholder="Your name"
-                    />
-                </div>
-                <div>
-                    <label htmlFor="email" className="block text-sm font-medium mb-1">
-                        Email
-                    </label>
-                    <input
-                        type="email"
-                        id="email"
-                        className="w-full border border-primary rounded p-2"
-                        placeholder="your.email@example.com"
-                    />
-                </div>
-                <div>
-                    <label htmlFor="message" className="block text-sm font-medium mb-1">
-                        Message
-                    </label>
-                    <textarea
-                        id="message"
-                        rows={4}
-                        className="w-full border border-primary rounded p-2"
-                        placeholder="How can we help you?"
-                    />
-                </div>
-            </div>
+            <CodeBlock
+                code="npx --yes @posthog/wizard@latest --default --region us"
+                language="bash"
+                hideNumbers={false}
+            />
         </div>
-    </div>
-)
-
-const TalkToHumanConfirmation = () => (
-    <div className="pt-8 px-8 flex flex-col items-center w-full mb-8">
-        <h2 className="text-xl font-bold mb-1">Thank you!</h2>
-        <p className="text-[15px] text-secondary text-center mb-10">
-            We've received your message and will get back to you soon.
+        <p className="text-[13px] text-primary/85 dark:text-primary-dark/85 m-0 -mt-0.5">
+            Works with agent-based coding tools like Cursor and Bolt. Supports Next.js, React, React Native, Svelte, and
+            Astro.{' '}
+            <Link to="/docs/getting-started/install?tab=wizard" className="font-semibold text-right dark:text-yellow">
+                More on the way!
+            </Link>
         </p>
     </div>
 )
+
+const VideoSection = () => (
+    <section
+        id="demo-video"
+        className={`overflow-hidden transition-all duration-300 h-auto max-h-[90vh] border border-light dark:border-dark rounded leading-[0] shadow-xl mb-8`}
+    >
+        <iframe
+            src="https://www.youtube-nocookie.com/embed/2jQco8hEvTI?autoplay=1"
+            className="rounded w-full aspect-video m-0"
+            allow="autoplay"
+        />
+    </section>
+)
+
+const TalkToHumanDemo = () => {
+    const [showVideo, setShowVideo] = useState(false)
+    const [isMobile, setIsMobile] = useState(false)
+
+    useEffect(() => {
+        const checkMobile = () => {
+            setIsMobile(window.innerWidth < 768)
+        }
+        checkMobile()
+        window.addEventListener('resize', checkMobile)
+        return () => window.removeEventListener('resize', checkMobile)
+    }, [])
+
+    const handleShowVideo = () => {
+        setShowVideo(true)
+        if (!isMobile) {
+            setTimeout(() => {
+                const videoElement = document.getElementById('demo-video')
+                if (videoElement) {
+                    window.scrollTo({
+                        top: videoElement.offsetTop - 80,
+                        behavior: 'smooth',
+                    })
+                }
+            }, 100)
+        }
+    }
+
+    return (
+        <div className="pt-8 px-8 flex flex-col items-center w-full mb-8">
+            <h2 className="text-xl font-bold mb-1">Watch a demo first</h2>
+            <p className="text-[15px] text-secondary text-center mb-10">
+                See how PostHog can help your team build better products
+            </p>
+
+            {!isMobile && showVideo && <VideoSection />}
+
+            <div className={`w-full max-w-2xl ${showVideo && !isMobile ? 'hidden' : ''}`}>
+                <button
+                    className="aspect-video cursor-pointer relative hover:-top-0.5 active:top-[2px] hover:scale-[1.005] active:scale-[.995] transition-all hover:duration-100 rounded border border-light dark:border-dark p-1 leading-[0] bg-accent dark:bg-accent-dark shadow-xl !m-0 w-full"
+                    onClick={handleShowVideo}
+                >
+                    <CloudinaryImage
+                        src="https://res.cloudinary.com/dmukukwp6/image/upload/demo_thumb_68d0d8d56d.jpg"
+                        className="rounded w-full"
+                    />
+                </button>
+            </div>
+
+            {isMobile && showVideo && <VideoSection />}
+        </div>
+    )
+}
+
+const TalkToHumanContact = ({ onClose, onFormSubmit }) => {
+    const [formSubmitted, setFormSubmitted] = useState(false)
+
+    const handleFormSubmit = () => {
+        setFormSubmitted(true)
+        onFormSubmit()
+    }
+
+    return (
+        <div className="pt-8 px-8 flex flex-col items-center w-full mb-8">
+            <h2 className="text-xl font-bold mb-1">Contact our team</h2>
+            <p className="text-[15px] text-secondary text-center mb-10">
+                Fill out this form and we'll get back to you shortly
+            </p>
+            <div className="w-full max-w-2xl">
+                <ContactForm
+                    onSubmit={handleFormSubmit}
+                    hideSubmitButton={true}
+                    buttonText="Submit"
+                    successMessage="Message received. We'll be in touch!"
+                />
+                {formSubmitted && (
+                    <div className="mt-4 flex justify-center">
+                        <CallToAction type="primary" size="sm" onClick={onClose}>
+                            Close
+                        </CallToAction>
+                    </div>
+                )}
+            </div>
+        </div>
+    )
+}
 
 export default function Home() {
     const posthog = usePostHog()
@@ -175,6 +188,15 @@ export default function Home() {
     const [selectedOption, setSelectedOption] = useState('free-signup')
     const [currentFlow, setCurrentFlow] = useState('main')
     const [currentSlide, setCurrentSlide] = useState(0)
+    const [contactFormSubmitted, setContactFormSubmitted] = useState(false)
+
+    const handleClose = () => {
+        closeWindow(appWindow)
+    }
+
+    const handleContactFormSubmit = () => {
+        setContactFormSubmitted(true)
+    }
 
     // Define the wizard flows
     const flows = {
@@ -223,7 +245,7 @@ export default function Home() {
                 },
                 forward: {
                     label: 'Open docs',
-                    action: () => navigate('/docs/getting-started/install', { state: { newWindow: true } }),
+                    action: () => navigate('/docs/getting-started/install?tab=snippet', { state: { newWindow: true } }),
                 },
             },
         },
@@ -247,26 +269,26 @@ export default function Home() {
                 },
                 {
                     component: TalkToHumanContact,
+                    props: {
+                        onClose: handleClose,
+                        onFormSubmit: handleContactFormSubmit,
+                    },
                     navigation: {
                         back: {
                             label: 'Back',
                             action: () => setCurrentSlide(0),
                         },
-                        forward: {
-                            label: 'Submit form',
-                            action: () => setCurrentSlide(2),
-                        },
-                    },
-                },
-                {
-                    component: TalkToHumanConfirmation,
-                    navigation: {
-                        forward: {
-                            label: 'Close',
-                            action: () => {
-                                closeWindow(appWindow)
-                            },
-                        },
+                        forward: contactFormSubmitted
+                            ? null
+                            : {
+                                  label: 'Submit form',
+                                  action: () => {
+                                      // Trigger form submission programmatically via the exposed window function
+                                      if (typeof window !== 'undefined' && window.submitContactForm) {
+                                          window.submitContactForm()
+                                      }
+                                  },
+                              },
                     },
                 },
             ],
@@ -284,6 +306,10 @@ export default function Home() {
 
     // Get the navigation config
     const navigationConfig = currentSlideConfig ? currentSlideConfig.navigation : currentFlowConfig.navigation
+
+    // Get props to pass to the component
+    const componentProps =
+        currentSlideConfig && currentSlideConfig.props ? currentSlideConfig.props : currentFlowConfig.props || {}
 
     // Render left navigation button
     const renderLeftNavigation = () => {
@@ -330,10 +356,10 @@ export default function Home() {
             />
             <Wizard leftNavigation={renderLeftNavigation()} rightNavigation={renderRightNavigation()}>
                 {currentFlow === 'main' ? (
-                    <ContentComponent {...currentFlowConfig.props} />
+                    <ContentComponent {...componentProps} />
                 ) : (
                     <ScrollArea className="flex-1 w-full border-y border-primary flex flex-col items-center">
-                        <ContentComponent />
+                        <ContentComponent {...componentProps} />
                     </ScrollArea>
                 )}
             </Wizard>

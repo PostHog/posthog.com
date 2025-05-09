@@ -10,7 +10,7 @@ import { motion } from 'framer-motion'
 import TextareaAutosize from 'react-textarea-autosize'
 import Confetti from 'react-confetti'
 import KeyboardShortcut from 'components/KeyboardShortcut'
-import usePostHog from 'hooks/usePostHog'
+import usePostHog from '../../hooks/usePostHog'
 
 const inputContainerClasses = `p-4 bg-accent dark:bg-accent-dark border-b border-light dark:border-dark group active:bg-white dark:active:bg-border-dark/50 hover:bg-white/25 dark:hover:bg-border-dark/25 focus-within:bg-white dark:focus-within:bg-border-dark/50 relative text-left`
 
@@ -23,26 +23,14 @@ const fields: {
     type?: string
 }[] = [
     {
-        name: 'workEmail',
-        placeHolder: 'Work email',
+        name: 'email',
+        placeHolder: 'Email',
         Component: Input,
         hubspotField: 'email',
     },
     {
-        name: 'firstName',
-        placeHolder: 'First name',
-        Component: Input,
-        hubspotField: 'firstname',
-    },
-    {
-        name: 'lastName',
-        placeHolder: 'Last name',
-        Component: Input,
-        hubspotField: 'lastname',
-    },
-    {
-        name: 'companyName',
-        placeHolder: 'Company name',
+        name: 'company',
+        placeHolder: 'Company',
         Component: Input,
         hubspotField: 'company',
     },
@@ -51,34 +39,37 @@ const fields: {
         placeHolder: 'Role',
         Component: RadioGroup,
         options: [
-            { value: 'Product Management', hubspotValue: 'product' },
-            { value: 'Engineering', hubspotValue: 'engineering' },
-            { value: 'Leadership', hubspotValue: 'leadership' },
-            { value: 'Marketing', hubspotValue: 'marketing' },
-            { value: 'Sales', hubspotValue: 'sales' },
-            { value: 'Other', hubspotValue: 'other' },
+            { value: 'Engineering', hubspotValue: 'Engineering' },
+            { value: 'Founder', hubspotValue: 'Founder' },
+            { value: 'Leadership', hubspotValue: 'Leadership' },
+            { value: 'Marketing', hubspotValue: 'Marketing' },
+            { value: 'Product', hubspotValue: 'Product' },
+            { value: 'Sales', hubspotValue: 'Sales' },
+            { value: 'Other', hubspotValue: 'Other' },
         ],
-        hubspotField: 'icp___role_list',
+        hubspotField: 'role',
     },
     {
-        name: 'contactSalesMonthlyActiveUsers',
-        placeHolder: 'How many monthly active users do you have?',
+        name: 'monthly_active_users',
+        placeHolder: 'Monthly active users',
         Component: Input,
-        hubspotField: 'contact_sales_monthly_active_users',
+        hubspotField: 'monthly_active_users',
+        type: 'number',
     },
     {
-        name: 'details',
-        placeHolder: 'Tell us more...',
+        name: 'talk_about',
+        placeHolder: 'What do you want to talk about on the call?',
         Component: TextArea,
-        hubspotField: 'message',
+        hubspotField: 'talk_about',
     },
     {
-        name: 'whereDidYouHearAboutPostHog',
-        placeHolder: 'Where did you first hear about PostHog?',
+        name: 'where_did_you_hear_about_us',
+        placeHolder: 'Where did you hear about us?',
         Component: Input,
-        hubspotField: 'where_did_you_first_hear_about_posthog_',
+        hubspotField: 'where_did_you_hear_about_us',
     },
 ]
+
 interface IInputProps {
     setFieldValue: (
         field: string,
@@ -250,7 +241,7 @@ function RadioGroup(props: InputHTMLAttributes<HTMLInputElement> & IInputProps) 
                         return (
                             <Radio
                                 reference={index === 0 ? radioRef : undefined}
-                                key={value}
+                                key={value || hubspotValue}
                                 {...props}
                                 value={value || hubspotValue}
                                 label={label || value}
@@ -265,76 +256,96 @@ function RadioGroup(props: InputHTMLAttributes<HTMLInputElement> & IInputProps) 
 }
 
 const ValidationSchema = Yup.object().shape({
-    firstName: Yup.string().required('Please enter your first name'),
-    lastName: Yup.string(),
-    workEmail: Yup.string().email('Please enter a valid email address').required('Please enter a valid email address'),
-    companyName: Yup.string().required('Please enter your company name'),
+    email: Yup.string().email('Please enter a valid email address').required('Please enter a valid email address'),
+    company: Yup.string().required('Please enter your company name'),
     role: Yup.string().required('Please select your role'),
-    contactSalesMonthlyActiveUsers: Yup.string().nullable(),
-    details: Yup.string().nullable(),
-    whereDidYouHearAboutPostHog: Yup.string().nullable(),
+    monthly_active_users: Yup.string().required('Please enter your monthly active users'),
+    talk_about: Yup.string().required('Please tell us what you want to talk about'),
+    where_did_you_hear_about_us: Yup.string().nullable(),
 })
 
-export default function Contact({
+export default function ContactForm({
     initialValues = {},
     onSubmit,
+    hideSubmitButton = false,
+    buttonText = 'Submit',
+    successMessage = "Message received. We'll be in touch!",
 }: {
     initialValues?: {
         [k: string]: any
     }
     onSubmit?: () => void
+    hideSubmitButton?: boolean
+    buttonText?: string
+    successMessage?: string
 }) {
     const posthog = usePostHog()
     const { href } = useLocation()
     const [submitted, setSubmitted] = useState(false)
     const [openOptions, setOpenOptions] = useState<string[]>([])
     const [confetti, setConfetti] = useState(true)
-    const { handleSubmit, values, handleChange, setFieldValue, errors, validateField } = useFormik({
+    const { handleSubmit, values, handleChange, setFieldValue, errors, validateField, submitForm } = useFormik({
         initialValues: Object.fromEntries(fields.map((field) => [field.name, initialValues[field.name]])),
         onSubmit: async (values) => {
             const distinctId = posthog?.get_distinct_id?.()
             posthog?.identify?.(distinctId, {
-                email: values.workEmail,
+                email: values.email,
             })
             posthog?.capture?.('form submission', {
                 form_name: 'Contact sales',
             })
-            const submission = {
+
+            // Format data for Salesforce lead
+            const formData = {
+                type: 'lead',
+                email: values.email,
+                company: values.company,
+                role: values.role,
+                monthly_active_users: values.monthly_active_users,
+                talk_about: values.talk_about,
+                where_did_you_hear_about_us: values.where_did_you_hear_about_us,
+                source: 'website',
+                page: 'Contact sales',
                 pageUri: href,
-                pageName: 'Contact sales',
-                fields: fields.map((field) => {
-                    const value = values[field.name]
-                    const option = field.options?.find((option) => value === option.value)?.hubspotValue
-                    return {
-                        objectTypeId: '0-1',
-                        name: field.hubspotField,
-                        value: option || value,
-                    }
-                }),
             }
 
-            const res = await fetch(
-                `https://api.hsforms.com/submissions/v3/integration/submit/6958578/21de475a-af2c-47c2-ae02-414aefdfdeb4`,
-                {
+            try {
+                // Use the Salesforce endpoint
+                const res = await fetch('/api/submit-salesforce-form', {
                     method: 'POST',
                     headers: {
-                        'content-type': 'application/json',
+                        'Content-Type': 'application/json',
                     },
-                    body: JSON.stringify(submission),
+                    body: JSON.stringify(formData),
+                })
+
+                if (res.ok) {
+                    setSubmitted(true)
+                    scroll.scrollToTop()
+                    onSubmit?.()
+                } else {
+                    console.error('Form submission failed:', await res.text())
                 }
-            ).catch((err) => {
-                console.log(err)
-                return err
-            })
-            if (res.status === 200) {
-                setSubmitted(true)
-                scroll.scrollToTop()
-                onSubmit?.()
+            } catch (err) {
+                console.error('Form submission error:', err)
             }
         },
         validationSchema: ValidationSchema,
         validateOnChange: false,
     })
+
+    // Expose submit function for parent components
+    React.useEffect(() => {
+        if (typeof window !== 'undefined') {
+            window.submitContactForm = submitForm
+        }
+
+        return () => {
+            if (typeof window !== 'undefined') {
+                delete window.submitContactForm
+            }
+        }
+    }, [submitForm])
 
     return submitted ? (
         <>
@@ -345,7 +356,7 @@ export default function Contact({
             )}
             <div className="bg-light dark:bg-dark border border-light dark:border-dark px-6 py-8 rounded-md mt-4">
                 <h4>
-                    ✅ <strong>Message received!</strong>
+                    ✅ <strong>{successMessage}</strong>
                 </h4>
                 <p>
                     A member of the PostHog team will get back to you as soon as we've had a chance to review your
@@ -357,7 +368,7 @@ export default function Contact({
             </div>
         </>
     ) : (
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit} id="contact-form">
             <p className="text-sm">
                 <strong>Tip:</strong> Press <KeyboardShortcut text="Tab" size="sm" /> to advance through the form at a
                 breakneck pace!
@@ -384,9 +395,18 @@ export default function Contact({
                     )
                 })}
             </div>
-            <button className={button(undefined, 'full', 'mt-4', 'md')} type="submit">
-                Send message
-            </button>
+            {!hideSubmitButton && (
+                <button className={button(undefined, 'full', 'mt-4', 'md')} type="submit">
+                    {buttonText}
+                </button>
+            )}
         </form>
     )
+}
+
+// Add global typescript interface
+declare global {
+    interface Window {
+        submitContactForm?: () => Promise<any>
+    }
 }
