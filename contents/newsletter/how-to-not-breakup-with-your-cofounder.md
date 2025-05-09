@@ -4,7 +4,7 @@ date: 2025-05-04
 author:
  - james-hawkins
 featuredImage: >-
-  https://res.cloudinary.com/dmukukwp6/image/upload/james_and_tim_6baec68f79.png
+  https://res.cloudinary.com/dmukukwp6/image/upload/james_and_tim_8d5006785b.png
 featuredImageType: full
 tags:
   - Being a founder
