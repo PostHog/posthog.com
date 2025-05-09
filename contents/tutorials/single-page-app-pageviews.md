@@ -114,9 +114,77 @@ export default function RootLayout({ children }) {
 
 Make sure to dynamically import the `PostHogPageView` component or the `useSearchParams` hook will deopt the entire app into client-side rendering.
 
-## Tracking pageviews in React Router
+## Tracking pageviews in React Router v7
 
-If you are using [React Router](https://reactrouter.com/en/main) AKA `react-router-dom`, start by adding the `PostHogProvider` component in the `app` folder. Make sure to set `capture_pageview: false` because we will manually capture pageviews.
+If you are using [React Router](https://reactrouter.com/en/main)
+
+Start by setting `posthog-js` and `posthog-js/react` as external packages in your `vite.config.ts` file.
+
+```ts
+// vite.config.ts
+// ... imports
+
+export default defineConfig({
+  plugins: [tailwindcss(), reactRouter(), tsconfigPaths()],
+  ssr: {
+    noExternal: ['posthog-js', 'posthog-js/react']
+  }
+});
+```
+
+Next, create a `providers.tsx` file in the `app` folder. In it, initialize the PostHog provider with `capture_pageview` set to `'history_change'`.
+
+```ts
+// app/providers.tsx
+import posthog from 'posthog-js'
+import { PostHogProvider } from 'posthog-js/react'
+
+if (typeof window !== 'undefined') {
+  posthog.init('<ph_project_api_key>', {
+    api_host: '<ph_client_api_host>',
+    capture_pageview: 'history_change',
+  })
+}
+
+export function PHProvider({ children }: { children: React.ReactNode }) {
+  return <PostHogProvider client={posthog}>{children}</PostHogProvider>
+} 
+```
+
+Finally, import the `PHProvider` component in the `app/root.tsx` file.
+
+```ts
+// app/root.tsx
+// ... imports
+import { PHProvider } from "./provider";
+
+// ... links, meta, etc.
+
+export function Layout({ children }: { children: React.ReactNode }) {
+  return (
+    <html lang="en">
+      <head>
+        <meta charSet="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <Meta />
+        <Links />
+      </head>
+      <body>
+        <PHProvider>
+          {children}
+          <ScrollRestoration />
+          <Scripts />
+        </PHProvider>
+      </body>
+    </html>
+  );
+}
+// ... rest of the file
+```
+
+## Tracking pageviews in React Router (v6 or below)
+
+If you are using React Router v6 or below AKA `react-router-dom`, start by adding the `PostHogProvider` component in the `app` folder. Make sure to set `capture_pageview: false` because we will manually capture pageviews.
 
 ```js
 // app/providers.js
