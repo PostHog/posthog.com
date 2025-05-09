@@ -90,10 +90,10 @@ Docs gardening should occupy no more than 2-4 hours of effort each week.
 - #docs-feedback
 - #content-docs-ideas
 - #ask-max for questions missing content
-- Zendesk tickets [where **root cause** is `documentation unclear`](https://posthoghelp.zendesk.com/agent/filters/33465387985947)
-- [Inkeep chat sessions](https://portal.inkeep.com/posthog/projects/clz7fyu8i001bomqpr7t8lds8/chat/chat-sessions?filters={%22isOnTopic%22:%22yes%22,%22isClear%22:%22yes%22,%22firstMessageTime%22:%2230d%22,%22isDocumented%22:%22no%22}) where there is a documentation gap
-- [Most unhelpful docs](https://us.posthog.com/project/2/insights/jNpQrgjg)
-- [Most popular docs](https://us.posthog.com/project/2/insights/nfKr7JOs)
+- <PrivateLink url="https://posthoghelp.zendesk.com/agent/filters/33465387985947">Zendesk tickets where **root cause** is documentation unclear</PrivateLink>
+- <PrivateLink url="https://portal.inkeep.com/posthog/projects/clz7fyu8i001bomqpr7t8lds8/chat/chat-sessions?filters={%22isOnTopic%22:%22yes%22,%22isClear%22:%22yes%22,%22firstMessageTime%22:%2230d%22,%22isDocumented%22:%22no%22}">Inkeep chat sessions</PrivateLink> where there is a documentation gap
+- <PrivateLink url="https://us.posthog.com/project/2/insights/jNpQrgjg">Most unhelpful docs</PrivateLink>
+- <PrivateLink url="https://us.posthog.com/project/2/insights/nfKr7JOs">Most popular docs</PrivateLink>
 
 ## FAQ
 
