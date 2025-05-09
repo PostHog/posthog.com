@@ -1,69 +1,124 @@
 ---
-title: Customer health scoring
+title: Customer health tracking
 sidebar: Handbook
 showTitle: true
 ---
-
-# Overview 
 
 We use Vitally as a Customer Success platform.  You can log in via Google SSO to view customer data but will need [Mine](/community/profiles/29862) or [Simon](/community/profiles/28895) to grant you admin access to let you manage your accounts.  It integrates with our other systems such as PostHog, Salesforce and Zendesk to give you a complete view of what's going on with your customers.
 
 ## Health Scoring
 
-Health Scores are a great way to assess whether your customer is at risk of churn or in a good state and are a common pattern in Customer Success tracking.  We compute an overall [health score](https://posthog.vitally-eu.io/settings/health/accounts) out of 10 based on the following factors and weighting.  You can read more about how Vitally health scores work in their docs [here](https://docs.vitally.io/account-health-scores-and-metrics/health-scores).  We have different weightings for scoring depending on whether a customer is New (organization created in the last 90 days) or not:
+### Overview
 
-| Score Name                | Measuring                                      | New Customer | Established Customer |
-|---------------------------|------------------------------------------------|--------------|----------------------|
-| Activation                | Onboarding completion                          | 50%          | 10%                  |
-| Primary Features Activity | Sustained usage of key PostHog features        | 40%          | 30%                  |
-| Data Volume               | Are they continuing to send data from our SDKs | 30%          | 10%                  |
-| Engagement                | Are they generally happy with PostHog          | 20%          | 10%                  |
+Health Scores are a great way to assess whether your customer is at risk of churn or in a good state and are a common pattern in Customer Success tracking.  We compute an overall [health score](https://posthog.vitally-eu.io/settings/health/accounts) out of 10 based on the following factors and weighting.  You can read more about how Vitally health scores work in their docs [here](https://docs.vitally.io/account-health-scores-and-metrics/health-scores). 
 
-### Activation
+Health score metrics are divided into two categories: Customer Engagement (20%) and Product Engagement (80%).
 
-This aligns with the Growth [definition of activation](https://us.posthog.com/project/2/dashboard/130345) and tracks whether a customer has completed onboarding for each of our products.  Data shows that if customers successfully complete onboarding they are more likely to still be customers three months later.  The following metrics look at the count of an event or Element since the customer was first seen in Vitally.
+[**Customer Engagement**](/contents/handbook/cs-and-onboarding/health-tracking#customer-engagement)
 
-| Measure             | Product Area      | Metric type | Poor | Concerning | Healthy |
-|---------------------|-------------------|-------------|------|------------|---------|
-| team member invited | Platform          | Event count | 0    | 1-2        | 3+      |
-| Insights            | Product Analytics | Element     | 0    | 1-2        | 3+      |
-| recording analyzed  | Session Replay    | Event count | 0    | 1-4        | 5+      |
-| Feature Flags       | Feature Flags     | Element     | 0    | 1          | 2+      |
-| Surveys             | Surveys           | Element     | 0    | 1          | 2+      |
+| Score Name                | Measuring                                        | Weighting    | 
+|---------------------------|--------------------------------------------------|--------------|
+| User engagement           | Are they using PostHog regularly?                | 15%          | 
+| Product experience        | Are there negative experiences with the product? | 5%           | 
+| Company engagement        | Are they engaging with PostHog humans?           | 5%           | 
 
-### Primary Features Activity
+[**Product Engagement**](/contents/handbook/cs-and-onboarding/health-tracking#product-engagement)
 
-This tracks whether users are continuing to log in to PostHog and use our features.  If these measures start to trend down, we know it can be an early indicator of churn/friction.  We use Success metrics here to track the total number of PostHog events over the last 14 days and then compare them with the previous 14 days on a rolling basis.  The percentages you see in the table below are the _decrease_ between the previous and current period.
+| Score Name                  | Measuring                                      | Weighting    | 
+|-----------------------------|------------------------------------------------|--------------|
+| Product Analytics           | Event volume and users analyzing insights      | 33%          | 
+| Session replay              | Replay volume and users analyzing replays                          | 20%          | 
+| Feature flags & Experiments | Decide requests, users creating feature flags, users creating or viewing experiments | 17%          | 
+| Surveys & Data warehouse    | Users creating and viewing surveys, volume of rows synced | 5%           | 
 
-| Measure                                   | Product Area      | Poor   | Concerning | Healthy |
-|-------------------------------------------|-------------------|--------|------------|---------|
-| Insight + Dashboard Analyzed last 14 days | Product Analytics | \> 20% | 5-20%      | <= 5%   |
-| Recordings Analyzed last 14 days          | Session Replay    | \> 20% | 5-20%      | <= 5%   |
-| Experiment Viewed last 14 days            | Feature Flags     | \> 20% | 5-20%      | <= 5%   |
-| Surveys Viewed last 14 days               | Surveys           | \> 20% | 5-20%      | <= 5%   |
+### Customer Engagement
 
-### Data Volume
+Non-product metrics, looking holistically at: Are customers using PostHog? Do they have friction when using PostHog? Are they engaging with PostHog humans?
 
-This tracks the change in data that users are sending to us to capture their user behavior.  Although directly related to billing, if customers start to reduce the data they send to us it is often too late to react as they have already made the decision to churn, which is why we weight this lower than the measure above.  We use Success metrics here to track the billable usage over the last 30 days and then compare them with the previous 30 days on a rolling basis.  The percentages you see in the table below are the _decrease_ between the previous and current period.
+#### User engagement
 
+This tracks whether users are logging in to PostHog. It can tell us if customers are getting value from PostHog (regardless of the products they're using). Customers that have a low active user percentage, or only have 1-3 users engaging with PostHog are at risk of churn.
 
-| Measure                            | Product Area          | Poor   | Concerning | Healthy |
-|------------------------------------|-----------------------|--------|------------|---------|
-| Event count last 30 days           | Product Analytics     | \> 20% | 5-20%      | <= 5%   |
-| Replay count last 30 days          | Session Replay        | \> 20% | 5-20%      | <= 5%   |
-| Feature Flag Requests last 30 days | Feature Flags         | \> 20% | 5-20%      | <= 5%   |
-| Rows synced last 30 days           | Data Warehouse | \> 20% | 5-20%      | <= 5%   |
+| Measure                                       | Poor | Concerning | Healthy |
+|-----------------------------------------------|------|------------|---------|
+| Last seen in product                          | >5 days  | 1-5 days   | ≤ 1 day      |
+| Active user percentage                        | <20%    | 20-40%       | ≥40%      |
+| Percentage decrease in active user percentage | >20%    | 5-20%        | ≤5%     |
+| Users engaging with features                  | <3    | 3-10          | ≥10      |
 
-> We don't yet track Surveys here, as the overall ARR from this product is still very low compared to the others.
+#### Product experience
 
-### Engagement
+This looks at the experience of using PostHog. 
 
-Here we track the sentiment of the customer, looking at the most recent NPS or CSAT score, as well as whether our technical champion has logged in recently.
+Creating a lot of tickets can mean users are not satisfied with PostHog, haven’t implemented PostHog correctly or aren’t using the product correctly (opportunity to offer training)! Similarly, visiting docs can mean users are trying to do something and could need help.
 
-| Measure                            | Poor         | Concerning     | Healthy       |
-|------------------------------------|--------------|----------------|---------------|
-| Current NPS Score                  | 0-6          | 7-8            | 9-10          |
-| Account owner last seen            | 31+ days ago | 15-30 days ago | 0-14 days ago |
+We also look at query failure rate. Failed queries are common (users can cancel a query, there can be SQL syntax errors, etc.), however, a high failure rate means users aren't getting the data they need from PostHog. You should [help investigate and provide recommendations](https://www.loom.com/share/dcd1da54963d46d79478425be0f22239?sid=3e85c8a0-3781-41f3-ab2a-2404991deafb).
+
+| Measure                                       | Poor | Concerning | Healthy |
+|-----------------------------------------------|------|------------|---------|
+| Tickets created in last 30 days               | >10  | 5-10       | ≤5      |
+| Urgent tickets that remain unresolved         | >2   | 0-2        | 0      |
+| Docs visited in last 7 days                   | >100 | 20-100     | ≤20     |
+| Query failure rate in last 7 days             | >13% | 5-13%      | ≤5%      |
+
+#### Company engagement
+
+This looks at a customer's engagement with PostHog as a company. Most of PostHog's customers are happily self served so this is weighted very little in the overall healthscore. 
+
+| Measure                     | Poor     | Concerning | Healthy |
+|-----------------------------|----------|------------|---------|
+| Most recent meeting         | >90 days | 30-90 days | ≤30 days  |
+| Most recent ticket          | >90 days | 30-90 days | ≤30 days  |
+| Total product count         | <3       | 3-6        | >6     |
+
+### Product Engagement
+
+Across PostHog's products, we look at 2 factors – data volume & user engagement.
+
+**Data volume**
+
+This tracks _percentage decrease_ in data volume over the last 30 days. We use [success metrics](https://posthog.vitally-eu.io/settings/successMetrics/accounts) to track billable usage over the last 30 days and compare it with the previous 30 days on a rolling basis. The percentages you see in the tables below are the _decrease_ between the previous and current period.
+
+**User engagement**
+
+Data volume is a lagging indicator, by the time it drops, customers may have already decided to churn. We combine data volume with product-specific user engagement, measuring the percentage of _active users_ interacting with product features over the last 14 days.
+
+> You'll see that there are products which we are not including in the health score. This is a limitation associated with Vitally (there's a maximum of 20 health metrics) so we are excluding other products as the overall ARR from them are still very low compared to the others.
+
+#### Product analytics
+
+| Measure                                        | Poor     | Concerning | Healthy |
+|------------------------------------------------|----------|------------|---------|
+| Event count last 30 days (percentage decrease) | >20% | 5-20%      | <= 5%   |
+| Active users analyzing insights                | <20% | 20-40% | ≥40%  |
+
+> Product analytics usage include: analyzing insights or dashboards, creating or saving insights, creating or updating dashboards
+
+#### Session replay
+
+| Measure                                         | Poor     | Concerning | Healthy |
+|-------------------------------------------------|----------|------------|---------|
+| Replay count last 30 days (percentage decrease) | >20% | 5-20%      | <= 5%   |
+| Active users watching replays                   | <20% | 20-40% | ≥40%  |
+
+#### Feature flags & experiments
+
+| Measure                                            | Poor     | Concerning | Healthy |
+|----------------------------------------------------|----------|------------|---------|
+| Decide requests last 30 days (percentage decrease) | >20% | 5-20%      | <= 5%   |
+| Active users creating feature flags last 30 days*  | <5% | 5-20% | ≥20%  |
+| Active users using experiments**                   | <5% | 5-20% | ≥20%  |
+
+> Feature flag usage includes: creating or updating feature flags. We look at this over 30 days instead of the usual 14 as feature flags provide value over a longer time frame.
+> Experiments usage includes: creating experiments, viewing experiments, and launching experiments.
+
+#### Surveys & data warehouse
+
+| Measure                                            | Poor     | Concerning | Healthy |
+|----------------------------------------------------|----------|------------|---------|
+| Active users viewing surveys                       | <5% | 5-20% | ≥20%  |
+| Rows synced last 30 days (percentage decrease)     | >20% | 5-20%      | <= 5%   |
+
 
 ## Account Indicators
 
@@ -118,4 +173,4 @@ Applied if the Forecasted MRR Change is more than 10%, indicating an increase in
 
 #### Organization Owner Recently Added
 
-Applied if the Owner role has been added to a user in the last 14 days.  This is a good opportunity to reach out to a potential champion if you've not met them before. 
+Applied if the Owner role has been added to a user in the last 14 days. This is a good opportunity to reach out to a potential champion if you've not met them before. 
