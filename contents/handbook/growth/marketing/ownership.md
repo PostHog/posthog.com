@@ -25,7 +25,6 @@ showTitle: true
 
 | &nbsp                                   | **Individual owner** |
 |-----------------------------------------|----------------------|
-| **Art requests / hedgehogs**            | Lottie               |
 | **Case studies**                        | Joe                  |
 | **Changelog**                           | Joe                  |
 | **Emailing customers**                  | Joe                  |
@@ -35,8 +34,8 @@ showTitle: true
 | **In-app notifications**                | Joe                  |
 | **Onboarding emails**                   | Joe                  |
 | **Paid ads strategy and messaging**     | Brian                |
-| **Paid ads design**                     | Brian                  |
-| **Paid ads operations**                 | Brian                  |
+| **Paid ads design**                     | Brian                |
+| **Paid ads operations**                 | Brian                |
 | **Paid ads performance**                | Brian                |
 | **Partnerships**                        | Joe                  |
 | **Product announcements**               | Joe                  |
@@ -48,6 +47,7 @@ showTitle: true
 
 | &nbsp                                   | **Individual owner** |
 |-----------------------------------------|----------------------|
+| **Art requests / hedgehogs**            | Lottie               |
 | **Community features**                  | Cory & Eli           |
 | **Docs layout and navigation**          | Cory & Eli           |
 | **Homepage**                            | Cory & Eli           |

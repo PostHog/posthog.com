@@ -979,14 +979,6 @@ export const handbookSidebar = [
                 url: '/handbook/growth/marketing/ownership',
             },
             {
-                name: 'Value proposition',
-                url: '/handbook/growth/marketing/value-propositions',
-            },
-            {
-                name: 'ICP scoring',
-                url: '/handbook/growth/marketing/icp',
-            },
-            {
                 name: 'Sponsorships',
                 url: '/handbook/growth/marketing/open-source-sponsorship',
             },

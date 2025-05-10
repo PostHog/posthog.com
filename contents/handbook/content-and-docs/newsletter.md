@@ -10,7 +10,7 @@ Sent and managed via [Substack](https://newsletter.posthog.com/), we put togethe
 
 The newsletter is long-form, original copy, often based on blog posts we already wrote. It focuses on product and business lessons and information for engineers. 
 
-We are currently testing new advertising channels to drive subscriptions for this newsletter.
+We [run ads](/handbook/growth/marketing/open-source-sponsorship) to drive subscriptions for this newsletter.
 
 ## How to write a good newsletter
 
@@ -31,6 +31,16 @@ These aren’t rules, just things that have worked well in the past. They provid
 - **Be bold and direct.** Address common questions. Focus on a specific role (engineers, founders). In retrospect, “[Using your own product is a superpower](https://newsletter.posthog.com/p/using-your-own-product-is-a-superpower)” is too boring and generic. Less is better: Gmail on mobile truncates titles at 35-40 characters
 
 - **Get readers curious to learn more.** Highlight a gap between where readers are and where they want to be. Hint at exclusive or non-obvious information.
+
+- **Some title formats that have worked well:**
+  - Non-obvious lessons / advice [about topic]
+  - Mistakes to avoid [doing a thing]
+  - WTF is (thing) and what you should you care?
+  - How to think like (person)
+  - The magic of (thing)
+  - What we learned about (blah) when doing (blah)
+  - What nobody tells you about (thing)
+  - X things we've learned about (thing)
 
 ### Intro
 
@@ -60,8 +70,18 @@ These aren’t rules, just things that have worked well in the past. They provid
 
 - **Be opinionated:** Sitting on the fence isn't interesting. It's ok for people to disagree with you, so avoid too much hedging.
 
+- **Use graphics and charts:** These are great ways for explaining complex ideas and make for great social content. Create bad version and ask Cory to help you make it better.
+
 - **Be fun and lighthearted:** We're writing about building software, not internet safety. Throw in jokes and memes occasionally. Again, footnotes and captions can be useful here.
 
 - **But use memes sparingly:** Too many memes can become overwhelming and a distraction. One per article is probably enough – two if they're really good, or the article is on long / serious side.
 
-**Address the reader directly:** Say this "this will help you" rather than "this will help your company" or "this will help people". You're talking to one person, not a collective. 
+- **Address the reader directly:** Say this "this will help you" rather than "this will help your company" or "this will help people". You're talking to one person, not a collective.
+
+## Publishing details
+
+- Having a good post preview image is important. Either create one using hedgehogs from the [Hoggies file in Figma](https://www.figma.com/design/I0VKEEjbkKUDSVzFus2Lpu/Hoggies?node-id=1-196&t=UZQMXMddH0DMLxqX-0) or [open an art request](/handbook/words-and-pictures/art-requests) to have Lottie make one for you (give her at least 1 week to do so). This needs to be 1200x630 px for the `posthog.com` OG image and 1456x1048 px for the Substack preview image.
+
+- We publish the newsletter on Substack and then add it to `posthog.com/newsletter` via GitHub. 
+
+- Make sure links in the newsletter point to `posthog.com` and include UTMs like `?utm_source=posthog-newsletter&utm_medium=post&utm_campaign=enter_name_here`.
