@@ -51,7 +51,7 @@ const apps: AppItem[] = [
         Icon: IconDemoThumb,
         color: 'blue',
         url: '/demo',
-        className: '!size-14 -my-3.5',
+        className: '!size-14 -mt-4 -mb-3',
     },
     {
         label: 'Games',
