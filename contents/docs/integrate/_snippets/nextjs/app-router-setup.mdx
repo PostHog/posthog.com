@@ -14,7 +14,7 @@ export function PostHogProvider({ children }) {
   useEffect(() => {
     posthog.init(process.env.NEXT_PUBLIC_POSTHOG_KEY, {
       api_host: process.env.NEXT_PUBLIC_POSTHOG_HOST,
-      capture_pageview: false // Disable automatic pageview capture, as we capture manually
+      capture_pageview: 'history_change', // Use the browser's history API to capture pageviews
     })
   }, [])
 
@@ -38,7 +38,7 @@ export function PostHogProvider({ children }: { children: React.ReactNode }) {
     useEffect(() => {
       posthog.init(process.env.NEXT_PUBLIC_POSTHOG_KEY, {
         api_host: process.env.NEXT_PUBLIC_POSTHOG_HOST,
-        capture_pageview: false // Disable automatic pageview capture, as we capture manually
+        capture_pageview: 'history_change', // Use the browser's history API to capture pageviews
       })
   }, [])
 
@@ -100,7 +100,18 @@ PostHog is now set up and ready to go. Files and components accessing PostHog on
 
 #### Capturing pageviews
 
-PostHog's `$pageview` autocapture relies on page load events. Since Next.js acts as a single-page app, this event doesn't trigger on navigation and we need to capture `$pageview` events manually. 
+There are two ways to capture pageviews:
+
+1. Use the `capture_pageview` option to capture pageviews automatically
+2. Manually capture pageviews
+
+##### Automatically capture pageviews
+
+Use the `capture_pageview: 'history_change'` option to capture pageviews based on the browser's history API.
+
+##### Manually capture pageviews
+
+PostHog's `$pageview` autocapture relies on page load events by. Since Next.js acts as a single-page app, this event doesn't trigger on navigation and we need to capture `$pageview` events manually. 
 
 To do this, we set up a `PostHogPageView` component to listen to URL path changes:
 
