@@ -755,6 +755,84 @@ article .article-content {
     }
 }
 
+.quicktime-scrubber {
+    @apply bg-primary border border-primary rounded-sm appearance-none w-full h-2 relative outline-none;
+}
+
+.quicktime-scrubber::-webkit-slider-thumb {
+    appearance: none;
+    width: 28px;
+    height: 28px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    position: relative;
+    z-index: 2;
+}
+
+.quicktime-scrubber::-webkit-slider-thumb > svg {
+    pointer-events: none;
+}
+
+.quicktime-scrubber::-webkit-slider-runnable-track {
+    height: 8px;
+    background: #e5e5e5;
+    border-radius: 4px;
+}
+
+.quicktime-scrubber:focus {
+    outline: none;
+}
+
+.quicktime-scrubber::-moz-range-thumb {
+    width: 28px;
+    height: 28px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+}
+
+.quicktime-scrubber::-ms-thumb {
+    width: 28px;
+    height: 28px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+}
+
+/* Hide the default outline for Firefox */
+.quicktime-scrubber::-moz-focus-outer {
+    border: 0;
+}
+
+.volume-slider {
+    @apply appearance-none rounded h-2 outline-none;
+}
+
+.volume-slider::-webkit-slider-thumb,
+.volume-slider::-moz-range-thumb,
+.volume-slider::-ms-thumb {
+    @apply bg-black appearance-none size-4 rounded-full relative top-[-3px];
+    background: var(--tw-text-opacity, 1) var(--tw-text-primary, #000);
+    border: 2px solid var(--tw-border-primary, #000);
+    cursor: pointer;
+    box-shadow: 0 0 0 1px var(--tw-border-primary, #000);
+}
+
+.volume-slider::-webkit-slider-runnable-track {
+    height: 8px;
+    background: var(--tw-bg-primary, #fff);
+    border-radius: 9999px;
+}
+.volume-slider::-ms-fill-lower,
+.volume-slider::-ms-fill-upper {
+    background: var(--tw-bg-primary, #fff);
+    border-radius: 9999px;
+}
+.volume-slider:focus {
+    outline: none;
+}
+
 @import 'backgrounds.css';
 @import 'buttons.scss';
 

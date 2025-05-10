@@ -4,9 +4,10 @@ import { Link } from 'gatsby'
 import { CallToAction } from 'components/CallToAction'
 import CloudinaryImage from 'components/CloudinaryImage'
 import SEO from 'components/seo'
-import { IconDice, IconFullScreen } from 'components/OSIcons/Icons'
+import { IconDice, IconFullScreen, IconVolumeFull, IconVolumeHalf, IconVolumeMuted } from 'components/OSIcons/Icons'
 import { Accordion } from 'components/RadixUI/Accordion'
 import { IconFastForward, IconPauseFilled, IconPlayFilled } from '@posthog/icons'
+import { IconPlayhead } from 'components/OSIcons/Icons'
 
 // Add types for YouTube API to avoid TS errors
 declare global {
@@ -195,35 +196,63 @@ function CustomVideoSection() {
 
             {/* Scrubbing bar */}
             <div className="w-full px-2 pt-2 pb-1 bg-[#EFF7DE] border-t border-primary dark:border-primary-dark flex items-center gap-2">
-                <span className="text-sm font-semibold text-right dark:text-yellow w-28">
+                <span className="text-sm font-semibold text-right dark:text-yellow w-24">
                     {Math.floor((isScrubbing ? scrubTime : playerState.currentTime) / 60)}:{Math.floor((isScrubbing ? scrubTime : playerState.currentTime) % 60).toString().padStart(2, '0')} / {Math.floor(playerState.duration / 60)}:{Math.floor(playerState.duration % 60).toString().padStart(2, '0')}
                 </span>
-                <input
-                    type="range"
-                    min={0}
-                    max={playerState.duration || 0}
-                    value={isScrubbing ? scrubTime : playerState.currentTime}
-                    onMouseDown={handleScrubStart}
-                    onTouchStart={handleScrubStart}
-                    onChange={handleScrub}
-                    onMouseUp={handleScrubEndMouse}
-                    onTouchEnd={handleScrubEndTouch}
-                    className="flex-1"
-                    step={0.1}
-                />
+                <div className="relative w-full flex-1">
+                    <input
+                        type="range"
+                        min={0}
+                        max={playerState.duration || 0}
+                        value={isScrubbing ? scrubTime : playerState.currentTime}
+                        onMouseDown={handleScrubStart}
+                        onTouchStart={handleScrubStart}
+                        onChange={handleScrub}
+                        onMouseUp={handleScrubEndMouse}
+                        onTouchEnd={handleScrubEndTouch}
+                        className={`quicktime-scrubber`}
+                        step={0.1}
+                    />
+                    <div
+                        className="absolute top-1/2 -translate-y-1/2 pointer-events-none border border-red"
+                        style={{
+                            left: `calc(${(isScrubbing ? scrubTime : playerState.currentTime) / playerState.duration * 100}% - 14px)`,
+                        }}
+                    >
+                        <IconPlayhead className="w-[11px] h-[15px]" />
+                    </div>
+                </div>
             </div>
 
             {/* Control bar */}
             <div className="grid grid-cols-12 px-4 py-2 bg-accent border-t border-primary gap-2">
                 <div className="col-span-3 flex flex-row gap-2 items-center">
-                  <button onClick={toggleMute} className="text-sm font-semibold text-right dark:text-yellow">{playerState.isMuted ? "Unmute" : "Mute"}</button>
-                  <input type="range" min="0" max="100" value={playerState.volume} onChange={handleVolumeChange} className="w-20" />
+                  <button onClick={toggleMute} className="text-sm font-semibold text-right dark:text-yellow">
+                    {playerState.isMuted ? (
+                        <IconVolumeMuted className="size-6" />
+                    ) : playerState.volume > 50 ? (
+                        <IconVolumeFull className="size-6" />
+                    ) : (
+                        <IconVolumeHalf className="size-6" />
+                    )}
+                  </button>
+                  <input
+                      type="range"
+                      min="0"
+                      max="100"
+                      value={playerState.volume}
+                      onChange={handleVolumeChange}
+                      className="w-24 volume-slider"
+                      style={{
+                          accentColor: "currentColor",
+                      }}
+                  />
                 </div>
                 <div className="col-span-6 flex flex-row gap-2 items-center justify-center">
 
-                    <button onClick={() => handleSeek(-10)} className="size-12 rounded-full border-2 border-primary bg-primary flex justify-center items-center text-secondary hover:text-primary"><IconFastForward className="size-8 scale-x-[-1]" /></button>
-                    <button onClick={handlePlayPause} className="size-16 rounded-full border-2 border-primary bg-primary flex items-center text-secondary hover:text-primary justify-center">{playerState.isPlaying ? <IconPauseFilled className="size-10" /> : <IconPlayFilled className="size-10" />}</button>
-                    <button onClick={() => handleSeek(10)} className="size-12 rounded-full border-2 border-primary bg-primary flex justify-center items-center text-secondary hover:text-primary"><IconFastForward className="size-8" /></button>
+                    <button onClick={() => handleSeek(-10)} className="size-10 rounded-full border-2 border-primary bg-primary flex justify-center items-center text-secondary hover:text-primary"><IconFastForward className="size-6 scale-x-[-1]" /></button>
+                    <button onClick={handlePlayPause} className="size-12 rounded-full border-2 border-primary bg-primary flex items-center text-secondary hover:text-primary justify-center">{playerState.isPlaying ? <IconPauseFilled className="size-8" /> : <IconPlayFilled className="size-8" />}</button>
+                    <button onClick={() => handleSeek(10)} className="size-10 rounded-full border-2 border-primary bg-primary flex justify-center items-center text-secondary hover:text-primary"><IconFastForward className="size-6" /></button>
                 </div>
                 <div className="col-span-3 flex flex-row gap-2 justify-end items-center">
                     <select value={playerState.playbackRate} onChange={(e) => handlePlaybackRateChange(parseFloat(e.target.value))} className="text-sm font-semibold text-right dark:text-yellow">

@@ -8,3 +8,7 @@ alwaysApply: true
 
 - Always use double quotes (unless something different is necessated by content)
 - We use sentence casing
+
+# General AI rules
+
+- Always check for any code changes in files you've edited before making further edits. I often make changes to files in between prompts and don't want my changes to get overwritten.

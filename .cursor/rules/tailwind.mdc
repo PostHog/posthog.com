@@ -14,6 +14,19 @@ There are two color modes (light and dark) and three color schemes within each:
 - secondary (aside content)
 - tertiary (not used often)
 
+Classes should use:
+
+- bg-primary
+- bg-accent
+- border-primary
+- border-input
+- text-primary
+- text-secondary
+- text-muted
+- text-input
+
+Any custom CSS should be added to [global.css](mdc:src/styles/global.css) and use @apply where possible. Then use JIT classes, then regular css but nested where possible.
+
 Links are styled with font-semibold and use different colors for light and dark mode:
 
 - text-right
