@@ -1,9 +1,9 @@
 import React, { useRef } from 'react'
-import { IconGraph, IconPieChart, IconDocument, IconQuestion, IconMap, IconPlay } from '@posthog/icons'
+import { IconGraph, IconPieChart, IconDocument, IconQuestion, IconMap } from '@posthog/icons'
 import Link from 'components/Link'
 import { useApp } from '../../context/App'
 import useProduct from 'hooks/useProduct'
-import { IconDice } from 'components/OSIcons/Icons'
+import { IconDice, IconDemoThumb } from 'components/OSIcons/Icons'
 
 interface AppItem {
     label: string
@@ -11,6 +11,7 @@ interface AppItem {
     color: string
     url: string
     type?: string
+    className?: string
 }
 
 interface Product {
@@ -47,9 +48,10 @@ const apps: AppItem[] = [
     },
     {
         label: 'demo.mov',
-        Icon: IconPlay,
+        Icon: IconDemoThumb,
         color: 'blue',
         url: '/demo',
+        className: '!size-14 -my-3.5',
     },
     {
         label: 'Games',
@@ -59,7 +61,7 @@ const apps: AppItem[] = [
     },
 ]
 
-const AppLink = ({ Icon, type, color, label, url }: AppItem) => {
+const AppLink = ({ Icon, type, color, label, url, className }: AppItem) => {
     const ref = useRef<HTMLSpanElement>(null)
     return (
         <span ref={ref}>
@@ -68,7 +70,7 @@ const AppLink = ({ Icon, type, color, label, url }: AppItem) => {
                 state={{ newWindow: true }}
                 className="flex flex-col justify-center items-center space-y-1 w-28 text-center"
             >
-                <Icon className={`size-7 text-${color}`} />
+                <Icon className={`size-7 text-${color} ${className}`} />
                 <p className="text-sm font-medium">{label}</p>
             </Link>
         </span>

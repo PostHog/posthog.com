@@ -4,15 +4,21 @@ import { useLocation } from '@reach/router'
 import { pricingMenu } from '../../navs'
 import Layout from 'components/Layout'
 import PricingExperiment from 'components/Pricing/PricingExperiment'
+import Explorer from 'components/Explorer'
 
 const PricingPage = (): JSX.Element => {
     const posthog = usePostHog()
     const { search } = useLocation()
 
     return (
-        <Layout parent={pricingMenu}>
+        <Explorer
+            title="pricing"
+            slug="/pricing"
+            template="generic"
+            fullScreen
+        >
             <PricingExperiment />
-        </Layout>
+        </Explorer>
     )
 }
 

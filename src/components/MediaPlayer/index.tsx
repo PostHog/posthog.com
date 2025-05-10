@@ -203,7 +203,7 @@ const handleScrubEndTouch = (e: React.TouchEvent<HTMLInputElement>) => {
             >
               <main data-scheme="primary" className="@container flex-1 bg-primary relative h-full">
 
-      <section className="bg-accent p-2">
+      <section className="bg-accent px-2 pb-2">
       {/* Main video area */}
       <div className="flex-1 flex flex-col justify-center items-center bg-primary mb-2">
           <div id="youtube-player-demo" className="rounded w-full aspect-video" />

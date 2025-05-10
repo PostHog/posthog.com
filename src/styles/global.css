@@ -826,9 +826,36 @@ article .article-content {
 }
 
 
-.volume-slider::-moz-range-thumb,
-.volume-slider::-ms-thumb {
+.volume-slider::-moz-range-thumb {
+    @apply appearance-none size-3.5 rounded-full relative top-[-3px];
+    background: var(--text-secondary, #000);
+    cursor: pointer;
+    box-shadow: 0 0 0 1px var(--tw-border-primary, #000);
 
+    &:hover {
+        outline: solid 2px var(--text-primary, #000);
+    }
+
+    &:active {
+        @apply top-[-2px];
+        background: var(--text-primary, #000);
+    }
+}
+
+.volume-slider::-ms-thumb {
+    @apply appearance-none size-3.5 rounded-full relative top-[-3px];
+    background: var(--text-secondary, #000);
+    cursor: pointer;
+    box-shadow: 0 0 0 1px var(--tw-border-primary, #000);
+
+    &:hover {
+        outline: solid 2px var(--text-primary, #000);
+    }
+
+    &:active {
+        @apply top-[-2px];
+        background: var(--text-primary, #000);
+    }
 }
 
 .volume-slider::-webkit-slider-runnable-track {
