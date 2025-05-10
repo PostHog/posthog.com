@@ -1,5 +1,5 @@
 import React, { useRef } from 'react'
-import { IconGraph, IconPieChart, IconDocument, IconQuestion, IconMap } from '@posthog/icons'
+import { IconGraph, IconPieChart, IconDocument, IconQuestion, IconMap, IconPlay } from '@posthog/icons'
 import Link from 'components/Link'
 import { useApp } from '../../context/App'
 import useProduct from 'hooks/useProduct'
@@ -44,6 +44,12 @@ const apps: AppItem[] = [
         Icon: IconMap,
         color: 'green',
         url: '/roadmap',
+    },
+    {
+        label: 'Demo',
+        Icon: IconPlay,
+        color: 'white',
+        url: '/demo',
     },
     {
         label: 'Games',
