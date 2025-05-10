@@ -214,9 +214,9 @@ export default function ProductAnalyticsCustomers(): JSX.Element {
                 rightNavigation={
                     <>
                         {isLast ? (
-                            <Link to="/products" state={{ newWindow: true }}>
+                            <Link to="/demo" state={{ newWindow: true }}>
                                 <CallToAction type="primary" size="sm">
-                                    Go to product tour
+                                    Watch a demo
                                 </CallToAction>
                             </Link>
                         ) : (

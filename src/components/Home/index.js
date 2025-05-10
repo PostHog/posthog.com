@@ -43,8 +43,8 @@ const MainContent = ({ selectedOption, setSelectedOption, options }) => (
 
                 <div className="mt-6 text-sm border-t border-primary pt-6">
                     You can also{' '}
-                    <Link to="/tour" className="font-semibold text-right dark:text-yellow">
-                        take a tour
+                    <Link to="/demo" className="font-semibold text-right dark:text-yellow">
+                        watch a demo
                     </Link>{' '}
                     or learn{' '}
                     <Link to="/#" className="font-semibold text-right dark:text-yellow">

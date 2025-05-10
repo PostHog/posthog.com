@@ -34,10 +34,10 @@ const apps: AppItem[] = [
         url: '/questions',
     },
     {
-        label: 'Tour',
-        Icon: IconMap,
+        label: 'Why PostHog?',
+        Icon: IconQuestion,
         color: 'orange',
-        url: '/tour',
+        url: '/why',
     },
     {
         label: 'Roadmap',

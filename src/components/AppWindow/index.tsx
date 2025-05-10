@@ -66,13 +66,23 @@ const fixedAppSizes = {
             height: 400,
         },
     },
-    '/tour': {
+    '/why': {
         max: {
             width: 750,
             height: 575,
         },
         min: {
             width: 750,
+            height: 575,
+        },
+    },
+    '/demo': {
+        max: {
+            width: 960,
+            height: 575,
+        },
+        min: {
+            width: 960,
             height: 575,
         },
     },
