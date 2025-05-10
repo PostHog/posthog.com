@@ -15,7 +15,6 @@ import { useApp } from '../../context/App'
 import { useWindow } from '../../context/Window'
 import CodeBlock from './CodeBlock'
 import ContactForm from './ContactForm'
-import CloudinaryImage from 'components/CloudinaryImage'
 
 const MainContent = ({ selectedOption, setSelectedOption, options }) => (
     <div className="flex flex-1 w-full border-y border-primary">
@@ -81,46 +80,264 @@ const AIInstallContent = () => (
     </div>
 )
 
-const VideoSection = () => (
-    <section
-        id="demo-video"
-        className={`overflow-hidden transition-all duration-300 h-auto max-h-[90vh] border border-light dark:border-dark rounded leading-[0] shadow-xl mb-8`}
-    >
-        <iframe
-            src="https://www.youtube-nocookie.com/embed/2jQco8hEvTI?autoplay=1"
-            className="rounded w-full aspect-video m-0"
-            allow="autoplay"
-        />
-    </section>
-)
+const VideoSection = () => {
+    const [playerState, setPlayerState] = useState({
+        isPlaying: true,
+        player: null,
+        volume: 100,
+        isMuted: false,
+        currentTime: 0,
+        duration: 0,
+        playbackRate: 1
+    });
+    const [isScrubbing, setIsScrubbing] = useState(false);
+    const [scrubTime, setScrubTime] = useState(0);
+
+    // Poll current time
+    useEffect(() => {
+        let interval = null;
+        if (playerState.player && playerState.isPlaying && !isScrubbing) {
+            interval = setInterval(() => {
+                const currentTime = playerState.player.getCurrentTime();
+                setPlayerState(prev => ({ ...prev, currentTime }));
+            }, 250);
+        }
+        return () => {
+            if (interval) clearInterval(interval);
+        };
+    }, [playerState.player, playerState.isPlaying, isScrubbing]);
+
+    useEffect(() => {
+        window.onYouTubeIframeAPIReady = () => {
+            const player = new window.YT.Player("youtube-player", {
+                host: "https://www.youtube-nocookie.com",
+                videoId: "2jQco8hEvTI",
+                playerVars: {
+                    autoplay: 1,
+                    controls: 0,
+                    modestbranding: 1,
+                    rel: 0
+                },
+                events: {
+                    onStateChange: (event) => {
+                        setPlayerState(prev => ({
+                            ...prev,
+                            isPlaying: event.data === window.YT.PlayerState.PLAYING
+                        }));
+                    },
+                    onReady: (event) => {
+                        setPlayerState(prev => ({
+                            ...prev,
+                            player: event.target,
+                            duration: event.target.getDuration(),
+                            currentTime: event.target.getCurrentTime()
+                        }));
+                        event.target.playVideo();
+                    },
+                    onPlaybackRateChange: (event) => {
+                        setPlayerState(prev => ({
+                            ...prev,
+                            playbackRate: event.target.getPlaybackRate()
+                        }));
+                    }
+                }
+            });
+        };
+        if (!window.YT) {
+            const tag = document.createElement("script");
+            tag.src = "https://www.youtube.com/iframe_api";
+            const firstScriptTag = document.getElementsByTagName("script")[0];
+            firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+        } else if (window.YT && window.YT.Player) {
+            window.onYouTubeIframeAPIReady();
+        }
+        return () => {
+            window.onYouTubeIframeAPIReady = null;
+        };
+    }, []);
+
+    const handlePlayPause = () => {
+        if (playerState.player) {
+            if (playerState.isPlaying) {
+                playerState.player.pauseVideo();
+            } else {
+                playerState.player.playVideo();
+            }
+        }
+    };
+
+    const handleSeek = (seconds) => {
+        if (playerState.player) {
+            const currentTime = playerState.player.getCurrentTime();
+            playerState.player.seekTo(currentTime + seconds, true);
+        }
+    };
+
+    const handleVolumeChange = (event) => {
+        const volume = event.target.value;
+        if (playerState.player) {
+            playerState.player.setVolume(volume);
+            setPlayerState(prev => ({
+                ...prev,
+                volume,
+                isMuted: volume === 0
+            }));
+        }
+    };
+
+    const toggleMute = () => {
+        if (playerState.player) {
+            if (playerState.isMuted) {
+                playerState.player.unMute();
+            } else {
+                playerState.player.mute();
+            }
+            setPlayerState(prev => ({
+                ...prev,
+                isMuted: !prev.isMuted
+            }));
+        }
+    };
+
+    const toggleFullscreen = () => {
+        const iframe = document.getElementById("youtube-player");
+        if (iframe.requestFullscreen) {
+            iframe.requestFullscreen();
+        } else if (iframe.mozRequestFullScreen) {
+            iframe.mozRequestFullScreen();
+        } else if (iframe.webkitRequestFullscreen) {
+            iframe.webkitRequestFullscreen();
+        } else if (iframe.msRequestFullscreen) {
+            iframe.msRequestFullscreen();
+        }
+    };
+
+    const handlePlaybackRateChange = (rate) => {
+        if (playerState.player) {
+            playerState.player.setPlaybackRate(rate);
+            setPlayerState(prev => ({
+                ...prev,
+                playbackRate: rate
+            }));
+        }
+    };
+
+    // Scrubbing handlers
+    const handleScrubStart = () => {
+        setIsScrubbing(true);
+        setScrubTime(playerState.currentTime);
+    };
+    const handleScrub = (e) => {
+        setScrubTime(Number(e.target.value));
+    };
+    const handleScrubEnd = (e) => {
+        const newTime = Number(e.target.value);
+        setIsScrubbing(false);
+        setScrubTime(newTime);
+        if (playerState.player) {
+            playerState.player.seekTo(newTime, true);
+        }
+    };
+
+    return (
+        <section
+            id="demo-video"
+            className="overflow-hidden transition-all duration-300 h-auto max-h-[90vh] border border-light dark:border-dark rounded leading-[0] shadow-xl mb-8"
+        >
+            {/* Scrubbing bar */}
+            <div className="w-full px-4 pt-2 pb-1">
+                <input
+                    type="range"
+                    min={0}
+                    max={playerState.duration || 0}
+                    value={isScrubbing ? scrubTime : playerState.currentTime}
+                    onMouseDown={handleScrubStart}
+                    onTouchStart={handleScrubStart}
+                    onChange={handleScrub}
+                    onMouseUp={handleScrubEnd}
+                    onTouchEnd={handleScrubEnd}
+                    className="w-full"
+                    step={0.1}
+                />
+            </div>
+            <div className="p-2 bg-accent dark:bg-accent-dark border-b border-light dark:border-dark flex justify-center gap-4">
+                <button 
+                    onClick={() => handleSeek(-10)} 
+                    className="text-sm font-semibold text-right dark:text-yellow"
+                >
+                    Back 10s
+                </button>
+                <button 
+                    onClick={handlePlayPause} 
+                    className="text-sm font-semibold text-right dark:text-yellow"
+                >
+                    {playerState.isPlaying ? "Pause" : "Play"}
+                </button>
+                <button 
+                    onClick={() => handleSeek(10)} 
+                    className="text-sm font-semibold text-right dark:text-yellow"
+                >
+                    Forward 10s
+                </button>
+                <button 
+                    onClick={toggleMute} 
+                    className="text-sm font-semibold text-right dark:text-yellow"
+                >
+                    {playerState.isMuted ? "Unmute" : "Mute"}
+                </button>
+                <button 
+                    onClick={toggleFullscreen} 
+                    className="text-sm font-semibold text-right dark:text-yellow"
+                >
+                    Fullscreen
+                </button>
+                <div className="flex items-center">
+                    <span className="text-sm font-semibold text-right dark:text-yellow mr-2">Volume:</span>
+                    <input 
+                        type="range" 
+                        min="0" 
+                        max="100" 
+                        value={playerState.volume} 
+                        onChange={handleVolumeChange} 
+                        className="w-24"
+                    />
+                </div>
+                <div className="flex items-center">
+                    <span className="text-sm font-semibold text-right dark:text-yellow mr-2">Speed:</span>
+                    <select 
+                        value={playerState.playbackRate} 
+                        onChange={(e) => handlePlaybackRateChange(parseFloat(e.target.value))} 
+                        className="text-sm font-semibold text-right dark:text-yellow"
+                    >
+                        <option value="0.5">0.5x</option>
+                        <option value="1">1x</option>
+                        <option value="1.5">1.5x</option>
+                        <option value="2">2x</option>
+                    </select>
+                </div>
+                <div className="flex items-center">
+                    <span className="text-sm font-semibold text-right dark:text-yellow mr-2">Time:</span>
+                    <span className="text-sm font-semibold text-right dark:text-yellow">
+                        {Math.floor((isScrubbing ? scrubTime : playerState.currentTime) / 60)}:{Math.floor((isScrubbing ? scrubTime : playerState.currentTime) % 60).toString().padStart(2, '0')} / {Math.floor(playerState.duration / 60)}:{Math.floor(playerState.duration % 60).toString().padStart(2, '0')}
+                    </span>
+                </div>
+            </div>
+            <div id="youtube-player" className="rounded w-full aspect-video m-0"></div>
+        </section>
+    );
+};
 
 const TalkToHumanDemo = () => {
-    const [showVideo, setShowVideo] = useState(false)
-    const [isMobile, setIsMobile] = useState(false)
+    const [isMobile, setIsMobile] = useState(false);
 
     useEffect(() => {
         const checkMobile = () => {
-            setIsMobile(window.innerWidth < 768)
-        }
-        checkMobile()
-        window.addEventListener('resize', checkMobile)
-        return () => window.removeEventListener('resize', checkMobile)
-    }, [])
-
-    const handleShowVideo = () => {
-        setShowVideo(true)
-        if (!isMobile) {
-            setTimeout(() => {
-                const videoElement = document.getElementById('demo-video')
-                if (videoElement) {
-                    window.scrollTo({
-                        top: videoElement.offsetTop - 80,
-                        behavior: 'smooth',
-                    })
-                }
-            }, 100)
-        }
-    }
+            setIsMobile(window.innerWidth < 768);
+        };
+        checkMobile();
+        window.addEventListener('resize', checkMobile);
+        return () => window.removeEventListener('resize', checkMobile);
+    }, []);
 
     return (
         <div className="pt-8 px-8 flex flex-col items-center w-full mb-8">
@@ -129,24 +346,12 @@ const TalkToHumanDemo = () => {
                 See how PostHog can help your team build better products
             </p>
 
-            {!isMobile && showVideo && <VideoSection />}
+            {!isMobile && <VideoSection />}
 
-            <div className={`w-full max-w-2xl ${showVideo && !isMobile ? 'hidden' : ''}`}>
-                <button
-                    className="aspect-video cursor-pointer relative hover:-top-0.5 active:top-[2px] hover:scale-[1.005] active:scale-[.995] transition-all hover:duration-100 rounded border border-light dark:border-dark p-1 leading-[0] bg-accent dark:bg-accent-dark shadow-xl !m-0 w-full"
-                    onClick={handleShowVideo}
-                >
-                    <CloudinaryImage
-                        src="https://res.cloudinary.com/dmukukwp6/image/upload/demo_thumb_68d0d8d56d.jpg"
-                        className="rounded w-full"
-                    />
-                </button>
-            </div>
-
-            {isMobile && showVideo && <VideoSection />}
+            {isMobile && <VideoSection />}
         </div>
-    )
-}
+    );
+};
 
 const TalkToHumanContact = ({ onClose, onFormSubmit }) => {
     const [formSubmitted, setFormSubmitted] = useState(false)
