@@ -159,3 +159,22 @@ Once you've set up your survey, click "Save as draft" to save your survey. This 
 If you've created a [popover survey](#presentation), your survey will begin showing immediately to users matching your display conditions.
 
 If you've created an [API survey](#presentation), you'll need to add your [custom survey code](/docs/surveys/implementing-custom-surveys) before launching.
+
+## How PostHog handles partial survey responses
+
+You can enable partial responses in the "Completion conditions" section of the survey. This option is enabled by default for all new surveys. Please note that partial responses require `posthog-js` version `1.240.0` or higher and are currently only supported in `posthog-js` library.
+
+**If partial responses are disabled, PostHog sends a single `survey sent` event**. This event is triggered once the user answers the last question of the survey. It contains all the user's responses. The `$survey_completed` property in this event will be `true`.
+
+**When partial responses are enabled (default behavior for new surveys):**
+If partial responses are enabled, PostHog tracks user progress as follows:
+
+1.  **Initial Response:** The first `survey sent` event is triggered as soon as the user answers at least one question. This initial event includes the answer(s) provided up to that point. The `$survey_completed` property in this event will be `false`.
+2.  **Subsequent Responses:** For each *additional* question the user answers, another `survey sent` event is captured. Each of these events will contain *all* responses submitted by the user for that survey instance up to that point, and `$survey_completed` will remain `false`.
+3.  **Full Completion:** When the user fully completes and submits the survey, a final `survey sent` event is sent. This event will again include all their answers, and the `$survey_completed` property will now be `true`.
+
+**The `$survey_submission_id`:**
+All `survey sent` events triggered during a single user's attempt to complete a survey (whether partial or complete) share the same unique `$survey_submission_id`.
+
+**Billing for partial responses:**
+We charge based on unique survey submissions, not individual `survey sent` events. Therefore, you are charged only once per unique `$survey_submission_id`. For example, if your survey has 5 questions and a user answers 3 of them (triggering multiple `survey sent` events with `$survey_completed: false`), you will still be charged for only one survey response, as all those events will share the same `$survey_submission_id`.
