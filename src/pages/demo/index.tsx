@@ -214,9 +214,9 @@ function CustomVideoSection() {
                         step={0.1}
                     />
                     <div
-                        className="absolute top-1/2 -translate-y-1/2 pointer-events-none border border-red"
+                        className="absolute top-1/2 -translate-y-1/2 pointer-events-none"
                         style={{
-                            left: `calc(${(isScrubbing ? scrubTime : playerState.currentTime) / playerState.duration * 100}% - 14px)`,
+                            left: `calc(${(isScrubbing ? scrubTime : playerState.currentTime) / playerState.duration * 100}% + 5.5px)`,
                         }}
                     >
                         <IconPlayhead className="w-[11px] h-[15px]" />
