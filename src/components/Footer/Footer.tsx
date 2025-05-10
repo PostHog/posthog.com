@@ -44,6 +44,10 @@ const linklist: IProps[] = [
                 url: '/surveys',
             },
             {
+                title: 'API queries',
+                url: '/api',
+            },
+            {
                 title: 'Product OS',
                 url: '/product-os',
             },
