@@ -4,8 +4,9 @@ import { Link } from 'gatsby'
 import { CallToAction } from 'components/CallToAction'
 import CloudinaryImage from 'components/CloudinaryImage'
 import SEO from 'components/seo'
-import { IconDice } from 'components/OSIcons/Icons'
+import { IconDice, IconFullScreen } from 'components/OSIcons/Icons'
 import { Accordion } from 'components/RadixUI/Accordion'
+import { IconFastForward, IconPauseFilled, IconPlayFilled } from '@posthog/icons'
 
 // Add types for YouTube API to avoid TS errors
 declare global {
@@ -186,11 +187,17 @@ function CustomVideoSection() {
     };
 
     return (
-        <section
-            className="overflow-hidden transition-all duration-300 h-auto max-h-[90vh] border border-light dark:border-dark rounded leading-[0] shadow-xl mb-8"
-        >
+        <section className="bg-accent p-2">
+            {/* Main video area */}
+            <div className="flex-1 flex flex-col justify-center items-center bg-primary mb-2">
+                <div id="youtube-player-demo" className="rounded w-full aspect-video" />
+            </div>
+
             {/* Scrubbing bar */}
-            <div className="w-full px-4 pt-2 pb-1">
+            <div className="w-full px-2 pt-2 pb-1 bg-[#EFF7DE] border-t border-primary dark:border-primary-dark flex items-center gap-2">
+                <span className="text-sm font-semibold text-right dark:text-yellow w-28">
+                    {Math.floor((isScrubbing ? scrubTime : playerState.currentTime) / 60)}:{Math.floor((isScrubbing ? scrubTime : playerState.currentTime) % 60).toString().padStart(2, '0')} / {Math.floor(playerState.duration / 60)}:{Math.floor(playerState.duration % 60).toString().padStart(2, '0')}
+                </span>
                 <input
                     type="range"
                     min={0}
@@ -201,73 +208,33 @@ function CustomVideoSection() {
                     onChange={handleScrub}
                     onMouseUp={handleScrubEndMouse}
                     onTouchEnd={handleScrubEndTouch}
-                    className="w-full"
+                    className="flex-1"
                     step={0.1}
                 />
             </div>
-            <div className="p-2 bg-accent dark:bg-accent-dark border-b border-light dark:border-dark flex justify-center gap-4">
-                <button 
-                    onClick={() => handleSeek(-10)} 
-                    className="text-sm font-semibold text-right dark:text-yellow"
-                >
-                    Back 10s
-                </button>
-                <button 
-                    onClick={handlePlayPause} 
-                    className="text-sm font-semibold text-right dark:text-yellow"
-                >
-                    {playerState.isPlaying ? "Pause" : "Play"}
-                </button>
-                <button 
-                    onClick={() => handleSeek(10)} 
-                    className="text-sm font-semibold text-right dark:text-yellow"
-                >
-                    Forward 10s
-                </button>
-                <button 
-                    onClick={toggleMute} 
-                    className="text-sm font-semibold text-right dark:text-yellow"
-                >
-                    {playerState.isMuted ? "Unmute" : "Mute"}
-                </button>
-                <button 
-                    onClick={toggleFullscreen} 
-                    className="text-sm font-semibold text-right dark:text-yellow"
-                >
-                    Fullscreen
-                </button>
-                <div className="flex items-center">
-                    <span className="text-sm font-semibold text-right dark:text-yellow mr-2">Volume:</span>
-                    <input 
-                        type="range" 
-                        min="0" 
-                        max="100" 
-                        value={playerState.volume} 
-                        onChange={handleVolumeChange} 
-                        className="w-24"
-                    />
+
+            {/* Control bar */}
+            <div className="grid grid-cols-12 px-4 py-2 bg-accent border-t border-primary gap-2">
+                <div className="col-span-3 flex flex-row gap-2 items-center">
+                  <button onClick={toggleMute} className="text-sm font-semibold text-right dark:text-yellow">{playerState.isMuted ? "Unmute" : "Mute"}</button>
+                  <input type="range" min="0" max="100" value={playerState.volume} onChange={handleVolumeChange} className="w-20" />
                 </div>
-                <div className="flex items-center">
-                    <span className="text-sm font-semibold text-right dark:text-yellow mr-2">Speed:</span>
-                    <select 
-                        value={playerState.playbackRate} 
-                        onChange={(e) => handlePlaybackRateChange(parseFloat(e.target.value))} 
-                        className="text-sm font-semibold text-right dark:text-yellow"
-                    >
+                <div className="col-span-6 flex flex-row gap-2 items-center justify-center">
+
+                    <button onClick={() => handleSeek(-10)} className="size-12 rounded-full border-2 border-primary bg-primary flex justify-center items-center text-secondary hover:text-primary"><IconFastForward className="size-8 scale-x-[-1]" /></button>
+                    <button onClick={handlePlayPause} className="size-16 rounded-full border-2 border-primary bg-primary flex items-center text-secondary hover:text-primary justify-center">{playerState.isPlaying ? <IconPauseFilled className="size-10" /> : <IconPlayFilled className="size-10" />}</button>
+                    <button onClick={() => handleSeek(10)} className="size-12 rounded-full border-2 border-primary bg-primary flex justify-center items-center text-secondary hover:text-primary"><IconFastForward className="size-8" /></button>
+                </div>
+                <div className="col-span-3 flex flex-row gap-2 justify-end items-center">
+                    <select value={playerState.playbackRate} onChange={(e) => handlePlaybackRateChange(parseFloat(e.target.value))} className="text-sm font-semibold text-right dark:text-yellow">
                         <option value="0.5">0.5x</option>
                         <option value="1">1x</option>
                         <option value="1.5">1.5x</option>
                         <option value="2">2x</option>
                     </select>
-                </div>
-                <div className="flex items-center">
-                    <span className="text-sm font-semibold text-right dark:text-yellow mr-2">Time:</span>
-                    <span className="text-sm font-semibold text-right dark:text-yellow">
-                        {Math.floor((isScrubbing ? scrubTime : playerState.currentTime) / 60)}:{Math.floor((isScrubbing ? scrubTime : playerState.currentTime) % 60).toString().padStart(2, '0')} / {Math.floor(playerState.duration / 60)}:{Math.floor(playerState.duration % 60).toString().padStart(2, '0')}
-                    </span>
+                    <button onClick={toggleFullscreen} className="text-sm font-semibold text-right dark:text-yellow"><IconFullScreen className="size-5" /></button>
                 </div>
             </div>
-            <div id="youtube-player-demo" className="rounded w-full aspect-video m-0"></div>
         </section>
     );
 }
