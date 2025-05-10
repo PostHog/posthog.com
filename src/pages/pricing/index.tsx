@@ -1,25 +1,25 @@
-import React, { useEffect, useState } from 'react'
-import usePostHog from 'hooks/usePostHog'
-import { useLocation } from '@reach/router'
-import { pricingMenu } from '../../navs'
-import Layout from 'components/Layout'
+import React from 'react'
+import OSTabs from 'components/OSTabs'
 import PricingExperiment from 'components/Pricing/PricingExperiment'
-import Explorer from 'components/Explorer'
 
-const PricingPage = (): JSX.Element => {
-    const posthog = usePostHog()
-    const { search } = useLocation()
+export default function Pricing() {
+    const tabs = [
+        {
+            value: 'pricing',
+            label: 'Pricing',
+            content: <PricingExperiment />,
+        },
+        {
+            value: 'comparison',
+            label: 'Comparison',
+            content: (
+                <div className="">
+                    <h2>Comparison</h2>
+                    <p>This tab will contain comparison content.</p>
+                </div>
+            ),
+        },
+    ]
 
-    return (
-        <Explorer
-            title="pricing"
-            slug="/pricing"
-            template="generic"
-            fullScreen
-        >
-            <PricingExperiment />
-        </Explorer>
-    )
+    return <OSTabs tabs={tabs} defaultValue="pricing" />
 }
-
-export default PricingPage

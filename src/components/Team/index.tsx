@@ -32,6 +32,7 @@ import Roadmap from './Roadmap'
 import { Tabs } from 'radix-ui'
 import { Fieldset } from 'components/OSFieldset'
 import ScrollArea from 'components/RadixUI/ScrollArea'
+import OSTabs from 'components/OSTabs'
 
 const hedgehogImageWidth = 30
 const hedgehogLengthInches = 7
@@ -280,275 +281,265 @@ export default function Team({ body, roadmaps, objectives, emojis, newTeam, slug
 
     const posthog = usePostHog()
 
-    return (
-        <div className="relative px-4 pb-4 h-full min-h-0">
-            <ScrollArea>
-                {name && (
-                    <SEO
-                        title={`${name} - PostHog`}
-                        description="We're organized into multi-disciplinary small teams."
-                        image={`/images/small-teams.png`}
+    const tabs = [
+        {
+            value: 'overview',
+            label: 'Overview',
+            content: (
+                <>
+                    <Header
+                        loading={loading}
+                        teamName={values.name}
+                        description={description}
+                        teamImage={teamImage}
+                        hasInProgress={hasInProgress}
+                        handleChange={handleChange}
+                        values={values}
+                        editing={editing}
+                        setFieldValue={setFieldValue}
                     />
-                )}
-                <SideModal open={!!activeProfile} setOpen={setActiveProfile}>
-                    {activeProfile && <Profile profile={{ ...activeProfile }} />}
-                </SideModal>
-                <Tabs.Root defaultValue="overview">
-                    <Tabs.List className="ml-4">
-                        <Tabs.Trigger
-                            value="overview"
-                            className="data-[state=active]:bg-white px-2 py-1 border border-transparent data-[state=active]:border-primary border-b-0 rounded-tr-md rounded-tl-md relative -bottom-px z-10"
-                        >
-                            Overview
-                        </Tabs.Trigger>
-                        <Tabs.Trigger
-                            value="roadmap"
-                            className="data-[state=active]:bg-white px-2 py-1 border border-transparent data-[state=active]:border-primary border-b-0 rounded-tr-md rounded-tl-md relative -bottom-px z-10"
-                        >
-                            Roadmap
-                        </Tabs.Trigger>
-                        {objectives && (
-                            <Tabs.Trigger
-                                value="goals"
-                                className="data-[state=active]:bg-white px-2 py-1 border border-transparent data-[state=active]:border-primary border-b-0 rounded-tr-md rounded-tl-md relative -bottom-px z-10"
-                            >
-                                Goals
-                            </Tabs.Trigger>
-                        )}
-                        {hasBody && (
-                            <Tabs.Trigger
-                                value="handbook"
-                                className="data-[state=active]:bg-white px-2 py-1 border border-transparent data-[state=active]:border-primary border-b-0 rounded-tr-md rounded-tl-md relative -bottom-px z-10"
-                            >
-                                Handbook
-                            </Tabs.Trigger>
-                        )}
-                    </Tabs.List>
-                    <Tabs.Content value="overview">
-                        <div className="bg-white p-5 flex flex-col gap-4 border border-primary rounded-md">
-                            <Header
-                                loading={loading}
-                                teamName={values.name}
-                                description={description}
-                                teamImage={teamImage}
-                                hasInProgress={hasInProgress}
-                                handleChange={handleChange}
-                                values={values}
-                                editing={editing}
-                                setFieldValue={setFieldValue}
-                            />
-                            <Fieldset legend="Members">
-                                <div className="@container flex-1">
-                                    <ul className="list-none p-0 m-0 grid grid-cols-2 @lg:grid-cols-3 @2xl:grid-cols-4 @4xl:grid-cols-5 gap-4">
-                                        {loading
-                                            ? new Array(4).fill(0).map((_, i) => (
-                                                  <li key={i}>
-                                                      <div className="w-full border border-border dark:border-border-dark rounded-md bg-accent dark:bg-accent-dark flex flex-col p-4 relative overflow-hidden h-64 animate-pulse" />
-                                                  </li>
-                                              ))
-                                            : profiles?.data || values.teamMembers
-                                            ? [...((editing ? values.teamMembers : profiles?.data) || [])]
-                                                  .sort((a, b) => isTeamLead(b.id) - isTeamLead(a.id))
-                                                  .map((profile) => {
-                                                      const {
-                                                          id,
-                                                          attributes: {
-                                                              avatar,
-                                                              firstName,
-                                                              lastName,
-                                                              country,
-                                                              location,
-                                                              companyRole,
-                                                              pineappleOnPizza,
-                                                          },
-                                                      } = profile
-                                                      const name = [firstName, lastName].filter(Boolean).join(' ')
-                                                      return (
-                                                          <li key={id} className="rounded-md relative">
-                                                              <button
-                                                                  onClick={() =>
-                                                                      setActiveProfile({
-                                                                          ...profile.attributes,
-                                                                          isTeamLead: isTeamLead(id),
-                                                                          id,
-                                                                      })
+                    <Fieldset legend="Members">
+                        <div className="@container flex-1">
+                            <ul className="list-none p-0 m-0 grid grid-cols-2 @lg:grid-cols-3 @2xl:grid-cols-4 @4xl:grid-cols-5 gap-4">
+                                {loading
+                                    ? new Array(4).fill(0).map((_, i) => (
+                                          <li key={i}>
+                                              <div className="w-full border border-border dark:border-border-dark rounded-md bg-accent dark:bg-accent-dark flex flex-col p-4 relative overflow-hidden h-64 animate-pulse" />
+                                          </li>
+                                      ))
+                                    : profiles?.data || values.teamMembers
+                                    ? [...((editing ? values.teamMembers : profiles?.data) || [])]
+                                          .sort((a, b) => isTeamLead(b.id) - isTeamLead(a.id))
+                                          .map((profile) => {
+                                              const {
+                                                  id,
+                                                  attributes: {
+                                                      avatar,
+                                                      firstName,
+                                                      lastName,
+                                                      country,
+                                                      location,
+                                                      companyRole,
+                                                      pineappleOnPizza,
+                                                  },
+                                              } = profile
+                                              const name = [firstName, lastName].filter(Boolean).join(' ')
+                                              return (
+                                                  <li key={id} className="rounded-md relative">
+                                                      <button
+                                                          onClick={() =>
+                                                              setActiveProfile({
+                                                                  ...profile.attributes,
+                                                                  isTeamLead: isTeamLead(id),
+                                                                  id,
+                                                              })
+                                                          }
+                                                          className="text-left w-full border border-border dark:border-border-dark rounded-md h-full flex flex-col p-4 relative hover:-top-0.5 active:top-[.5px] hover:transition-all z-10 overflow-hidden max-h-64"
+                                                      >
+                                                          <div className="mb-auto">
+                                                              <h3
+                                                                  className="mb-0 text-base leading-tight"
+                                                                  id={
+                                                                      kebabCase(name) +
+                                                                      '-' +
+                                                                      kebabCase(companyRole)
                                                                   }
-                                                                  className="text-left w-full border border-border dark:border-border-dark rounded-md h-full flex flex-col p-4 relative hover:-top-0.5 active:top-[.5px] hover:transition-all z-10 overflow-hidden max-h-64"
                                                               >
-                                                                  <div className="mb-auto">
-                                                                      <h3
-                                                                          className="mb-0 text-base leading-tight"
-                                                                          id={
-                                                                              kebabCase(name) +
-                                                                              '-' +
-                                                                              kebabCase(companyRole)
-                                                                          }
-                                                                      >
-                                                                          {name}
-                                                                      </h3>
-                                                                      <p className="text-primary/50 text-sm dark:text-primary-dark/50 m-0">
-                                                                          {companyRole}
-                                                                      </p>
+                                                                  {name}
+                                                              </h3>
+                                                              <p className="text-primary/50 text-sm dark:text-primary-dark/50 m-0">
+                                                                  {companyRole}
+                                                              </p>
 
-                                                                      <div className="mt-1 flex space-x-1 items-center">
-                                                                          <Stickers
-                                                                              country={country}
-                                                                              location={location}
-                                                                              isTeamLead={isTeamLead(id)}
-                                                                              pineappleOnPizza={pineappleOnPizza}
-                                                                              handleTeamLead={handleTeamLead}
-                                                                              editing={editing}
-                                                                              id={id}
-                                                                          />
-                                                                      </div>
-                                                                  </div>
-                                                                  <div className="ml-auto -mb-4 -mr-4 mt-2">
-                                                                      <img
-                                                                          src={
-                                                                              avatar?.data?.attributes?.url ||
-                                                                              avatar?.url ||
-                                                                              'https://res.cloudinary.com/dmukukwp6/image/upload/v1698231117/max_6942263bd1.png'
-                                                                          }
-                                                                          className="w-[165px]"
-                                                                      />
-                                                                  </div>
-                                                              </button>
-                                                              {editing && (
-                                                                  <button
-                                                                      onClick={() => removeTeamMember(id)}
-                                                                      className="w-7 h-7 rounded-full border border-border dark:border-dark absolute -right-2 flex items-center justify-center -top-2 z-10 bg-accent dark:bg-accent-dark"
-                                                                  >
-                                                                      <Tooltip
-                                                                          content="Remove team member"
-                                                                          placement="top"
-                                                                      >
-                                                                          <IconX className="w-4 h-4" />
-                                                                      </Tooltip>
-                                                                  </button>
-                                                              )}
-                                                          </li>
-                                                      )
-                                                  })
-                                            : new Array(4).fill(0).map((_, i) => (
-                                                  <li key={i}>
-                                                      <div className="w-full border border-border dark:border-border-dark rounded-md bg-accent dark:bg-accent-dark flex flex-col p-4 relative overflow-hidden h-64 animate-pulse" />
+                                                              <div className="mt-1 flex space-x-1 items-center">
+                                                                  <Stickers
+                                                                      country={country}
+                                                                      location={location}
+                                                                      isTeamLead={isTeamLead(id)}
+                                                                      pineappleOnPizza={pineappleOnPizza}
+                                                                      handleTeamLead={handleTeamLead}
+                                                                      editing={editing}
+                                                                      id={id}
+                                                                  />
+                                                              </div>
+                                                          </div>
+                                                          <div className="ml-auto -mb-4 -mr-4 mt-2">
+                                                              <img
+                                                                  src={
+                                                                      avatar?.data?.attributes?.url ||
+                                                                      avatar?.url ||
+                                                                      'https://res.cloudinary.com/dmukukwp6/image/upload/v1698231117/max_6942263bd1.png'
+                                                                  }
+                                                                  className="w-[165px]"
+                                                              />
+                                                          </div>
+                                                      </button>
+                                                      {editing && (
+                                                          <button
+                                                              onClick={() => removeTeamMember(id)}
+                                                              className="w-7 h-7 rounded-full border border-border dark:border-dark absolute -right-2 flex items-center justify-center -top-2 z-10 bg-accent dark:bg-accent-dark"
+                                                          >
+                                                              <Tooltip
+                                                                  content="Remove team member"
+                                                                  placement="top"
+                                                              >
+                                                                  <IconX className="w-4 h-4" />
+                                                              </Tooltip>
+                                                          </button>
+                                                      )}
                                                   </li>
-                                              ))}
-                                    </ul>
-                                    {editing && <AddTeamMember handleChange={(user) => addTeamMember(user.profile)} />}
-                                </div>
-                            </Fieldset>
-                            <div className="grid grid-cols-2 gap-4">
-                                <Fieldset legend="Pineapple on pizza">{PineappleText(pineapplePercentage)}</Fieldset>
-                                {teamEmojis?.length > 0 && (
-                                    <Fieldset legend="Custom emojis">
-                                        <ul className="list-none m-0 p-0 mt-2 flex flex-wrap gap-2">
-                                            {teamEmojis?.map(({ name, localFile }) => (
-                                                <li key={name}>
-                                                    <Tooltip content={`:${name}:`}>
-                                                        <img className="h-8" src={localFile?.publicURL} />
-                                                    </Tooltip>
-                                                </li>
-                                            ))}
-                                        </ul>
-                                    </Fieldset>
-                                )}
-                            </div>
-                            <Fieldset
-                                legend={
-                                    <span className="flex items-center gap-1">
-                                        Team length in hedgehogs{' '}
-                                        <Tooltip
-                                            placement="right"
-                                            content={`The average hedgehog is ${
-                                                posthog?.getFeatureFlag?.('are-you-in-the-us')
-                                                    ? '7 inches'
-                                                    : '17 centimeters'
-                                            } long`}
-                                        >
-                                            <IconInfo className="w-4" />
-                                        </Tooltip>
-                                    </span>
-                                }
-                            >
-                                <ul className="list-none m-0 p-0 flex flex-wrap">
-                                    {new Array(Math.floor(heightToHedgehogs)).fill(0).map((_, i) => (
-                                        <li className="m-0.5" key={i}>
-                                            <Hedgehog />
+                                              )
+                                          })
+                                    : new Array(4).fill(0).map((_, i) => (
+                                          <li key={i}>
+                                              <div className="w-full border border-border dark:border-border-dark rounded-md bg-accent dark:bg-accent-dark flex flex-col p-4 relative overflow-hidden h-64 animate-pulse" />
+                                          </li>
+                                      ))}
+                            </ul>
+                            {editing && <AddTeamMember handleChange={(user) => addTeamMember(user.profile)} />}
+                        </div>
+                    </Fieldset>
+                    <div className="grid grid-cols-2 gap-4">
+                        <Fieldset legend="Pineapple on pizza">{PineappleText(pineapplePercentage)}</Fieldset>
+                        {teamEmojis?.length > 0 && (
+                            <Fieldset legend="Custom emojis">
+                                <ul className="list-none m-0 p-0 mt-2 flex flex-wrap gap-2">
+                                    {teamEmojis?.map(({ name, localFile }) => (
+                                        <li key={name}>
+                                            <Tooltip content={`:${name}:`}>
+                                                <img className="h-8" src={localFile?.publicURL} />
+                                            </Tooltip>
                                         </li>
                                     ))}
-                                    {hedgehogPercentage && (
-                                        <li
-                                            style={{
-                                                width: hedgehogPercentage,
-                                            }}
-                                            className="overflow-hidden relative m-0.5"
-                                        >
-                                            <Hedgehog className="absolute object-none object-left" />
-                                        </li>
-                                    )}
                                 </ul>
                             </Fieldset>
-                        </div>
-                    </Tabs.Content>
-                    <Tabs.Content value="roadmap">
-                        <div className="bg-white p-5 flex flex-col gap-4 border border-primary rounded-md">
-                            {hasInProgress && (
-                                <Fieldset legend="What we're building">
-                                    <div className="lg:flex lg:space-x-12 space-y-8 lg:space-y-0 items-start">
-                                        <ul className="list-none m-0 p-0 flex flex-col gap-4">
-                                            {inProgress.map((roadmap) => (
-                                                <InProgress key={roadmap.squeakId} {...roadmap} />
-                                            ))}
-                                        </ul>
-                                        {(updates.length > 0 || isModerator) && (
-                                            <div className="lg:max-w-[340px] w-full flex-shrink-0">
-                                                {isModerator && (
-                                                    <div
-                                                        className={`${
-                                                            updates.length > 0
-                                                                ? 'mb-8 pb-8 border-border dark:border-dark '
-                                                                : ''
-                                                        }`}
-                                                    >
-                                                        <TeamUpdate teamName={name} hideTeamSelect />
-                                                    </div>
-                                                )}
-                                                {updates.length > 0 && (
-                                                    <Question key={updates[0].question} id={updates[0].question} />
-                                                )}
+                        )}
+                    </div>
+                    <Fieldset
+                        legend={
+                            <span className="flex items-center gap-1">
+                                Team length in hedgehogs{' '}
+                                <Tooltip
+                                    placement="right"
+                                    content={`The average hedgehog is ${
+                                        posthog?.getFeatureFlag?.('are-you-in-the-us')
+                                            ? '7 inches'
+                                            : '17 centimeters'
+                                    } long`}
+                                >
+                                    <IconInfo className="w-4" />
+                                </Tooltip>
+                            </span>
+                        }
+                    >
+                        <ul className="list-none m-0 p-0 flex flex-wrap">
+                            {new Array(Math.floor(heightToHedgehogs)).fill(0).map((_, i) => (
+                                <li className="m-0.5" key={i}>
+                                    <Hedgehog />
+                                </li>
+                            ))}
+                            {hedgehogPercentage && (
+                                <li
+                                    style={{
+                                        width: hedgehogPercentage,
+                                    }}
+                                    className="overflow-hidden relative m-0.5"
+                                >
+                                    <Hedgehog className="absolute object-none object-left" />
+                                </li>
+                            )}
+                        </ul>
+                    </Fieldset>
+                </>
+            ),
+        },
+        {
+            value: 'roadmap',
+            label: 'Roadmap',
+            content: (
+                <>
+                    {hasInProgress && (
+                        <Fieldset legend="What we're building">
+                            <div className="lg:flex lg:space-x-12 space-y-8 lg:space-y-0 items-start">
+                                <ul className="list-none m-0 p-0 flex flex-col gap-4">
+                                    {inProgress.map((roadmap) => (
+                                        <InProgress key={roadmap.squeakId} {...roadmap} />
+                                    ))}
+                                </ul>
+                                {(updates.length > 0 || isModerator) && (
+                                    <div className="lg:max-w-[340px] w-full flex-shrink-0">
+                                        {isModerator && (
+                                            <div
+                                                className={`${
+                                                    updates.length > 0
+                                                        ? 'mb-8 pb-8 border-border dark:border-dark '
+                                                        : ''
+                                                }`}
+                                            >
+                                                <TeamUpdate teamName={name} hideTeamSelect />
                                             </div>
                                         )}
+                                        {updates.length > 0 && (
+                                            <Question key={updates[0].question} id={updates[0].question} />
+                                        )}
                                     </div>
-                                </Fieldset>
-                            )}
-                            <Roadmap
-                                hasUnderConsideration={hasUnderConsideration}
-                                underConsideration={underConsideration}
-                                recentlyShipped={recentlyShipped}
-                            />
-                        </div>
-                    </Tabs.Content>
-                    {objectives && (
-                        <Tabs.Content value="goals">
-                            <div className="article-content team-page-content bg-white p-5 flex flex-col gap-4 border border-primary rounded-md">
-                                <MDXProvider components={{ TeamMember, FutureTeamMember }}>
-                                    <MDXRenderer>{objectives}</MDXRenderer>
-                                </MDXProvider>
+                                )}
                             </div>
-                        </Tabs.Content>
+                        </Fieldset>
                     )}
-                    {hasBody && (
-                        <Tabs.Content value="handbook">
-                            <div className="article-content team-page-content bg-white p-5 flex flex-col gap-4 border border-primary rounded-md">
-                                <MDXProvider components={{ PrivateLink }}>
-                                    <MDXRenderer>{body}</MDXRenderer>
-                                </MDXProvider>
-                            </div>
-                        </Tabs.Content>
-                    )}
-                </Tabs.Root>
+                    <Roadmap
+                        hasUnderConsideration={hasUnderConsideration}
+                        underConsideration={underConsideration}
+                        recentlyShipped={recentlyShipped}
+                    />
+                </>
+            ),
+        },
+        ...(objectives
+            ? [
+                  {
+                      value: 'goals',
+                      label: 'Goals',
+                      content: (
+                          <div className="article-content team-page-content">
+                              <MDXProvider components={{ TeamMember, FutureTeamMember }}>
+                                  <MDXRenderer>{objectives}</MDXRenderer>
+                              </MDXProvider>
+                          </div>
+                      ),
+                  },
+              ]
+            : []),
+        ...(hasBody
+            ? [
+                  {
+                      value: 'handbook',
+                      label: 'Handbook',
+                      content: (
+                          <div className="article-content team-page-content">
+                              <MDXProvider components={{ PrivateLink }}>
+                                  <MDXRenderer>{body}</MDXRenderer>
+                              </MDXProvider>
+                          </div>
+                      ),
+                  },
+              ]
+            : []),
+    ]
 
+    return (
+        <>
+            {name && (
+                <SEO
+                    title={`${name} - PostHog`}
+                    description="We're organized into multi-disciplinary small teams."
+                    image={`/images/small-teams.png`}
+                />
+            )}
+            <SideModal open={!!activeProfile} setOpen={setActiveProfile}>
+                {activeProfile && <Profile profile={{ ...activeProfile }} />}
+            </SideModal>
+            <OSTabs tabs={tabs} defaultValue="overview">
                 {isModerator && (
                     <div className="flex justify-end space-x-2 absolute bottom-4 right-4 z-50">
                         <CallToAction
@@ -588,7 +579,7 @@ export default function Team({ body, roadmaps, objectives, emojis, newTeam, slug
                         )}
                     </div>
                 )}
-            </ScrollArea>
-        </div>
+            </OSTabs>
+        </>
     )
 }
