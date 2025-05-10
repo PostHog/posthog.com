@@ -46,9 +46,9 @@ const apps: AppItem[] = [
         url: '/roadmap',
     },
     {
-        label: 'Demo',
+        label: 'demo.mov',
         Icon: IconPlay,
-        color: 'white',
+        color: 'blue',
         url: '/demo',
     },
     {

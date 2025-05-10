@@ -756,7 +756,7 @@ article .article-content {
 }
 
 .quicktime-scrubber {
-    @apply bg-primary border border-primary rounded-sm appearance-none w-full h-2 relative outline-none;
+    @apply border border-primary rounded-sm appearance-none w-full relative outline-none;
 }
 
 .quicktime-scrubber::-webkit-slider-thumb {
@@ -776,7 +776,7 @@ article .article-content {
 
 .quicktime-scrubber::-webkit-slider-runnable-track {
     height: 8px;
-    background: #e5e5e5;
+    background: #fff;
     border-radius: 4px;
 }
 
@@ -806,17 +806,29 @@ article .article-content {
 }
 
 .volume-slider {
-    @apply appearance-none rounded h-2 outline-none;
+    @apply appearance-none rounded h-2 outline-none border border-primary rounded-full;
 }
 
-.volume-slider::-webkit-slider-thumb,
-.volume-slider::-moz-range-thumb,
-.volume-slider::-ms-thumb {
-    @apply bg-black appearance-none size-4 rounded-full relative top-[-3px];
-    background: var(--tw-text-opacity, 1) var(--tw-text-primary, #000);
-    border: 2px solid var(--tw-border-primary, #000);
+.volume-slider::-webkit-slider-thumb {
+    @apply appearance-none size-3.5 rounded-full relative top-[-3px];
+    background: var(--text-secondary, #000);
     cursor: pointer;
     box-shadow: 0 0 0 1px var(--tw-border-primary, #000);
+
+    &:hover {
+        outline: solid 2px var(--text-primary, #000);
+    }
+
+    &:active {
+        @apply top-[-2px];
+        background: var(--text-primary, #000);
+    }
+}
+
+
+.volume-slider::-moz-range-thumb,
+.volume-slider::-ms-thumb {
+
 }
 
 .volume-slider::-webkit-slider-runnable-track {

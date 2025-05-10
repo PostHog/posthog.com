@@ -79,11 +79,11 @@ const fixedAppSizes = {
     '/demo': {
         max: {
             width: 960,
-            height: 750,
+            height: 690,
         },
         min: {
             width: 960,
-            height: 750,
+            height: 690,
         },
     },
 } as const
