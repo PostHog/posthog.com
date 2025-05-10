@@ -75,6 +75,16 @@ By default, `base` and `assets` imported from `$app/paths` in Svelte use relativ
 
 For apps with SSR enabled you should set `relative` to `false` in the [`paths` object of your config](https://kit.svelte.dev/docs/configuration#paths). This ensures all asset URLs will correctly be resolved against the base URL rather than the current page.
 
+## Unable to filter by user or page properties
+
+Filtering options in session replays depend on [product analytics](/docs/product-analytics) events. 
+
+To enable useful filtering options, we recommend at the very latest:
+- Identifying users via `identify()` - to allow filtering by person properties
+- Capturing `$pageview` events, either via [autocapture](/docs/product-analytics/autocapture) or manually - to allow filtering by page properties like URL
+
+Since these events contribute to the product analytics usage and [billing limits](/docs/billing/limits-alerts), if you exceed your product analytics monthly limit, the recordings captured after that (until new billing period starts or limit is increased) won't be possible to filter by these properties.
+
 ## Filtering can't find my custom events
 
 The most common reason for this is that you're trying to filter by events that weren't sent by the web SDK. For example, from another tool like Segment or one of our backend SDKs.
