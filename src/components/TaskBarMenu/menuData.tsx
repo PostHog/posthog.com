@@ -198,17 +198,17 @@ export const menuData: MenuType[] = [
         items: [
             {
                 type: 'item',
-                label: 'New Tab',
-                shortcut: '⌘ T',
+                label: 'About PostHog',
+                link: '/about',
             },
             {
                 type: 'item',
-                label: 'New Window',
-                shortcut: '⌘ N',
+                label: 'About this website',
+                link: '/credits',
             },
             {
                 type: 'item',
-                label: 'New Incognito Window',
+                label: 'Disabled option',
                 disabled: true,
             },
             {
