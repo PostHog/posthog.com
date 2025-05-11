@@ -272,10 +272,10 @@ export const Pizza = () => {
     })
 
     return (
-        <div className="px-4 max-w-7xl mx-auto py-12">
+        <div className="@container">
             <div className="text-center">
                 <div className="text-lg opacity-70 mb-2">Speaking of small teams...</div>
-                <h2 className="text-4xl font-bold mb-2 flex items-center gap-2 justify-center flex-col md:flex-row leading-none">
+                <h2 className="text-4xl font-bold mb-2 flex items-center gap-2 justify-center flex-col @4xl:flex-row leading-none">
                     <StickerPineapple className="inline-block size-10" />
                     Pineapple on pizza:{' '}
                     <span className="whitespace-nowrap">
@@ -293,18 +293,18 @@ export const Pizza = () => {
                 </div>
             </div>
 
-            <div className="grid md:grid-cols-3 gap-10 md:gap-6 lg:gap-12 pt-6 pb-12">
+            <div className="grid @4xl:grid-cols-3 gap-10 @4xl:gap-6 @6xl:gap-12 pt-6 pb-12">
                 <div>
-                    <div className="mb-4 border-b border-light dark:border-dark pb-2 flex gap-2 items-center md:items-start">
+                    <div className="mb-4 border-b border-light dark:border-dark pb-2 flex gap-2 items-center @4xl:items-start">
                         <StickerPineappleYes className="inline-block size-12" />
-                        <div className="flex-1 items-baseline gap-1 md:block">
-                            <p className="m-0 text-[15px] md:text-sm mdlg:text-[15px] font-bold md:font-normal">
-                                Small teams who<span className="hidden md:inline-block">...</span>
+                        <div className="flex-1 items-baseline gap-1 @4xl:block">
+                            <p className="m-0 text-[15px] @4xl:text-sm @5xl:text-[15px] font-bold @4xl:font-normal">
+                                Small teams who<span className="hidden @4xl:inline-block">...</span>
                             </p>
                             <h3 className="text-[19px] leading-tight m-0 font-bold">
                                 <span className="text-green">CORRECTLY agree</span>
                             </h3>
-                            <p className="text-[15px] md:text-sm mdlg:text-[15px] mb-0 font-bold md:font-normal">
+                            <p className="text-[15px] @4xl:text-sm @5xl:text-[15px] mb-0 font-bold @4xl:font-normal">
                                 pineapple belongs on pizza
                             </p>
                         </div>
@@ -351,11 +351,11 @@ export const Pizza = () => {
                 </div>
 
                 <div>
-                    <div className="mb-4 border-b border-light dark:border-dark pb-2 flex gap-2 items-center md:items-start">
+                    <div className="mb-4 border-b border-light dark:border-dark pb-2 flex gap-2 items-center @4xl:items-start">
                         <StickerPineappleUnknown className="inline-block size-12" />
-                        <div className="flex-1 items-baseline gap-1 md:block">
-                            <p className="m-0 text-[15px] md:text-sm mdlg:text-[15px] font-bold md:font-normal">
-                                Small teams who<span className="hidden md:inline-block">...</span>
+                        <div className="flex-1 items-baseline gap-1 @4xl:block">
+                            <p className="m-0 text-[15px] @4xl:text-sm @5xl:text-[15px] font-bold @4xl:font-normal">
+                                Small teams who<span className="hidden @4xl:inline-block">...</span>
                             </p>
                             <div className="flex items-baseline gap-1">
                                 <h3 className="text-[19px] leading-tight m-0 font-bold">
@@ -363,7 +363,7 @@ export const Pizza = () => {
                                 </h3>
                                 on whether
                             </div>
-                            <p className="text-[15px] md:text-sm mdlg:text-[15px] mb-0 font-bold md:font-normal">
+                            <p className="text-[15px] @4xl:text-sm @5xl:text-[15px] mb-0 font-bold @4xl:font-normal">
                                 pineapple belongs on pizza
                             </p>
                         </div>
@@ -411,16 +411,16 @@ export const Pizza = () => {
                 </div>
 
                 <div>
-                    <div className="mb-4 border-b border-light dark:border-dark pb-2 flex gap-2 items-center md:items-start">
+                    <div className="mb-4 border-b border-light dark:border-dark pb-2 flex gap-2 items-center @4xl:items-start">
                         <StickerPineappleNo className="inline-block size-12" />
-                        <div className="flex-1 items-baseline gap-1 md:block">
-                            <p className="m-0 text-[15px] md:text-sm mdlg:text-[15px] font-bold md:font-normal">
-                                Small teams who<span className="hidden md:inline-block">...</span>
+                        <div className="flex-1 items-baseline gap-1 @4xl:block">
+                            <p className="m-0 text-[15px] @4xl:text-sm @5xl:text-[15px] font-bold @4xl:font-normal">
+                                Small teams who<span className="hidden @4xl:inline-block">...</span>
                             </p>
                             <h3 className="text-[19px] leading-tight m-0 font-bold">
                                 <span className="text-red">shockingly DISAGREE</span>
                             </h3>
-                            <p className="text-[15px] md:text-sm mdlg:text-[15px] mb-0 font-bold md:font-normal">
+                            <p className="text-[15px] @4xl:text-sm @5xl:text-[15px] mb-0 font-bold @4xl:font-normal">
                                 pineapple belongs on pizza
                             </p>
                         </div>
@@ -522,10 +522,10 @@ export const Pizza = () => {
                         </div>
                     </SwiperSlide>
                 ))}
-                <button className="swiper-button-prev absolute left-0 top-1/2 -translate-y-1/2 -mt-8 hover:scale-[1.01] hover:top-[calc(50%-1px)] active:top-[calc(50%+0.5px)] active:scale-[.99] md:z-30 p-2 xl:p-6 box-border peer z-10">
+                <button className="swiper-button-prev absolute left-0 top-1/2 -translate-y-1/2 -mt-8 hover:scale-[1.01] hover:top-[calc(50%-1px)] active:top-[calc(50%+0.5px)] active:scale-[.99] @4xl:z-30 p-2 xl:p-6 box-border peer z-10">
                     <IconChevronDown className="w-12 h-12 rounded-sm text-white hover:text-white/100 dark:text-primary-dark dark:hover:text-primary-dark/100 rotate-90 bg-black/75 hover:bg-black/90 dark:hover:bg-accent-dark/25 hover:backdrop-blur-sm active:backdrop-blur-sm border border-r-3 border-black dark:border-dark peer-disabled:bg-transparent peer-disabled:border-transparent" />
                 </button>
-                <button className="swiper-button-next absolute right-0 top-1/2 -translate-y-1/2 -mt-8 hover:scale-[1.01] hover:top-[calc(50%-1px)] active:top-[calc(50%+0.5px)] active:scale-[.99] md:z-30 p-2 xl:p-6 box-border peer z-10">
+                <button className="swiper-button-next absolute right-0 top-1/2 -translate-y-1/2 -mt-8 hover:scale-[1.01] hover:top-[calc(50%-1px)] active:top-[calc(50%+0.5px)] active:scale-[.99] @4xl:z-30 p-2 xl:p-6 box-border peer z-10">
                     <IconChevronDown className="w-12 h-12 rounded-sm text-white hover:text-white/100 dark:text-primary-dark dark:hover:text-primary-dark/100 -rotate-90 bg-black/75 hover:bg-black/90 dark:hover:bg-accent-dark/25 hover:backdrop-blur-sm active:backdrop-blur-sm border border-l-3 border-black dark:border-dark peer-disabled:bg-transparent peer-disabled:border-transparent" />
                 </button>
             </Swiper>

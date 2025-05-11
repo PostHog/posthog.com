@@ -230,8 +230,8 @@ function RadioGroup(props: InputHTMLAttributes<HTMLInputElement> & IInputProps) 
             }}
             className={`${inputContainerClasses} ${error ? '' : ''} cursor-pointer`}
         >
-            <fieldset className="border border-primary p-2" id={`group-${props.name}`}>
-            <legend className="text-sm bg-primary px-1">{props.placeholder}</legend>
+            <fieldset id={`group-${props.name}`}>
+            <legend>{props.placeholder}</legend>
             {error && <p className="text-red font-medium m-0 text-xs -mt-1 mb-1">{error}</p>}
                 <div
                     role="radiogroup"

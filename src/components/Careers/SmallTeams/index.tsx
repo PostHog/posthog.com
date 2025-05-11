@@ -32,11 +32,10 @@ export const SmallTeams = () => {
     const roundedProfilesTotalCount = Math.floor(profilesTotalCount / 10) * 10
 
     return (
-        <div className="px-4 max-w-7xl mx-auto mb-6 md:mb-12 flex justify-center 2xl:px-8">
-            <div className="flex flex-col md:flex-row md:gap-8 w-full">
-                <div className="flex-1">
-                    <h2 className="text-5xl font-bold mb-4">
-                        Join a startup <em className="text-red dark:text-yellow block">within a startup</em>
+        <div className="@container">
+                <div className="mb-8">
+                    <h2 className="text-3xl font-bold mb-4">
+                        Join a startup <em className="text-red dark:text-yellow">within a startup</em>
                     </h2>
                     <div className="max-w-xl">
                         <p>Starting a job at a company of {roundedProfilesTotalCount}+ people can be intimidating!</p>
@@ -54,9 +53,9 @@ export const SmallTeams = () => {
                     </div>
                 </div>
 
-                <div>
-                    <h3 className="text-base font-bold mb-2 md:ml-4 pt-1">Our small teams</h3>
-                    <div className="grid grid-cols-2 text-center max-w-xl -mx-4 md:mx-0 md:gap-x-8">
+                <fieldset>
+                    <legend>Our small teams</legend>
+                    <div className="grid @xl:grid-cols-2 @3xl:grid-cols-3 text-center -mx-4 md:mx-0 md:gap-x-8">
                         {allTeams.nodes.map(({ id, name, miniCrest }) => {
                             const gatsbyImageMiniCrest = getImage(miniCrest)
                             return (
@@ -89,8 +88,7 @@ export const SmallTeams = () => {
                             )
                         })}
                     </div>
-                </div>
-            </div>
+                </fieldset>
         </div>
     )
 }

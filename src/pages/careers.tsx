@@ -20,6 +20,11 @@ import TeamQuotes from 'components/Careers/TeamQuotes'
 import { SmallTeams } from 'components/Careers/SmallTeams'
 import { Pizza } from 'components/Careers/Pizza'
 import FunStuff from 'components/Careers/FunStuff'
+import OSTabs from 'components/OSTabs'
+import HeaderBar from 'components/OSChrome/HeaderBar'
+import { Select } from 'components/RadixUI/Select'
+import { productMenu, companyMenu } from '../navs'
+import { useNavigate, useLocation } from '@gatsbyjs/reach-router'
 
 const IndexPage = () => {
     const data = useStaticQuery(query)
@@ -27,8 +32,57 @@ const IndexPage = () => {
     const latestJobCreatedAt = latestJob && new Date(latestJob['publishedDate'])
 
     const breakpoints = useBreakpoint()
+    const navigate = useNavigate()
+    const location = useLocation()
+    const currentPath = location.pathname.replace('/', '')
+
+    const tabs = [
+        {
+            value: 'roles',
+            label: 'Open Roles',
+            content: <CareersHero />,
+        },
+        {
+            value: 'small-teams',
+            label: 'Small Teams',
+            content: <SmallTeams />,
+        },
+        {
+            value: 'pizza',
+            label: 'Pineapple on pizza?',
+            content: <Pizza />,
+        },
+        {
+            value: 'salary',
+            label: 'Salary calculator',
+            content: <Compensation />,
+        },
+        {
+            value: 'interview-process',
+            label: 'Interview process',
+            content: <InterviewProcessOverview />,
+        },
+        
+        
+    ]
+
+    const selectOptions = [
+        {
+            label: 'Company',
+            items: [
+                { value: 'company', label: 'Company', icon: companyMenu.icon },
+                ...companyMenu.children.map((item) => ({
+                    value: item.url?.replace('/', '') || item.name.toLowerCase(),
+                    label: item.name,
+                    icon: item.icon,
+                    color: item.color || undefined,
+                })),
+            ],
+        },
+    ]
+
     return (
-        <Layout>
+        <>
             <SEO
                 title="Careers - PostHog"
                 description="We're working to increase the number of successful products in the world.
@@ -39,9 +93,22 @@ const IndexPage = () => {
                 imageType="absolute"
             />
 
-            <CareersHero />
-            <SmallTeams />
-            <Pizza />
+            <HeaderBar showHome showBack showForward showSearch />
+            <div data-scheme="secondary" className="bg-primary px-2">
+            <Select
+                groups={selectOptions}
+                placeholder="Select a page"
+                ariaLabel="Select a page"
+                defaultValue={currentPath}
+                onValueChange={(value) => navigate(`/${value}`)}
+                className="w-full"
+                dataScheme="primary"
+            />
+            </div>
+
+            <OSTabs tabs={tabs} defaultValue="roles" />
+
+            
             <FounderNote />
             <MegaQuote />
             <CompanyHandbook />
@@ -49,15 +116,13 @@ const IndexPage = () => {
             <IdealEmployeeProfile />
             <BenefitsUnexpected />
             <BenefitsUsual />
-            <Compensation />
-            <InterviewProcessOverview />
+            
             <Transparency />
             <FunStuff />
             <TeamQuotes />
-            <OpenRoles />
-            <br />
-            <br />
-        </Layout>
+            <OpenRoles /> 
+           
+        </>
     )
 }
 
