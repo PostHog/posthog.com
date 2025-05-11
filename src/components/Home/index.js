@@ -89,26 +89,37 @@ const TalkToHumanContact = ({ onClose, onFormSubmit }) => {
     }
 
     return (
-        <div className="pt-8 px-8 flex flex-col items-center w-full mb-8">
-            <h2 className="text-xl font-bold mb-1">Contact our team</h2>
-            <p className="text-[15px] text-secondary text-center mb-10">
-                Fill out this form and we'll get back to you shortly
-            </p>
-            <div className="w-full max-w-2xl">
-                <ContactForm
-                    onSubmit={handleFormSubmit}
-                    hideSubmitButton={true}
-                    buttonText="Submit"
-                    successMessage="Message received. We'll be in touch!"
-                />
-                {formSubmitted && (
-                    <div className="mt-4 flex justify-center">
-                        <CallToAction type="primary" size="sm" onClick={onClose}>
-                            Close
-                        </CallToAction>
-                    </div>
-                )}
+        <div data-scheme="secondary" className="flex flex-1 w-full overflow-hidden border-y border-primary bg-primary">
+            <div data-scheme="primary" className="w-[40%] flex items-center justify-center p-2 border-r border-primary">
+                <div className="w-full bg-accent flex items-end justify-center h-full px-4 text-sm relative border border-primary overflow-hidden">
+                    <img src="https://res.cloudinary.com/dmukukwp6/image/upload/quick_calls_5c19368fa0.png" className="w-[415px] max-w-full" />
+
+                </div>
             </div>
+            <ScrollArea className="h-full w-[60%] ">
+                <div className="flex flex-col justify-center px-8 py-4 h-full">
+                        <h2 className="text-xl font-bold mb-1">Let's chat</h2>
+
+                        <div className="border border-primary p-2 text-sm mb-4">
+                            Want to watch a <Link to="/demo" className="font-semibold text-red" state={{ newWindow: true }}>demo</Link> first?
+                        </div>
+                        <div className="w-full max-w-2xl">
+                            <ContactForm
+                                onSubmit={handleFormSubmit}
+                                hideSubmitButton={true}
+                                buttonText="Submit"
+                                successMessage="Message received. We'll be in touch!"
+                            />
+                            {formSubmitted && (
+                                <div className="mt-4 flex justify-center">
+                                    <CallToAction type="primary" size="sm" onClick={onClose}>
+                                        Close
+                                    </CallToAction>
+                                </div>
+                            )}
+                        </div>
+                </div>
+            </ScrollArea>   
         </div>
     )
 }
@@ -266,7 +277,7 @@ export default function Home() {
                 image={`/images/home.png`}
             />
             <Wizard leftNavigation={renderLeftNavigation()} rightNavigation={renderRightNavigation()}>
-                {currentFlow === 'main' ? (
+                {currentFlow === 'main' || currentFlow === 'talk-to-a-human' ? (
                     <ContentComponent {...componentProps} />
                 ) : (
                     <ScrollArea className="flex-1 w-full border-y border-primary flex flex-col items-center">

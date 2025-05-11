@@ -12,7 +12,7 @@ import Confetti from 'react-confetti'
 import KeyboardShortcut from 'components/KeyboardShortcut'
 import usePostHog from '../../hooks/usePostHog'
 
-const inputContainerClasses = `p-4 bg-accent dark:bg-accent-dark border-b border-light dark:border-dark group active:bg-white dark:active:bg-border-dark/50 hover:bg-white/25 dark:hover:bg-border-dark/25 focus-within:bg-white dark:focus-within:bg-border-dark/50 relative text-left`
+const inputContainerClasses = `text-sm`
 
 const fields: {
     name: string
@@ -97,21 +97,25 @@ function TextArea(props: React.RefAttributes<HTMLTextAreaElement> & IInputProps)
     const error = errors[props.name]
     const [height, setHeight] = useState<string | number>('auto')
     return (
-        <label style={{ height }} className={`${inputContainerClasses} ${error ? 'pb-8' : ''}`} htmlFor={other.name}>
+        <div>
+            <div className="flex flex-col gap-1 justify-between items-start">
+            <label className={`${inputContainerClasses} ${error ? '' : ''}`} htmlFor={other.name}>
+                {other.placeholder}
+            </label>
+            {error && <p className="text-red font-medium m-0 pb-1 text-xs">{error}</p>}
+        </div>
+
             <TextareaAutosize
                 onHeightChange={(height) => setHeight(height + 32)}
                 onBlur={() => validateField(props.name)}
-                className={`bg-transparent w-full outline-none absolute left-0 px-4 ${
-                    error ? 'bottom-6 placeholder-shown:bottom-8' : 'bottom-2 placeholder-shown:bottom-4'
-                } peer placeholder-shown:placeholder-transparent transition-all border-0 py-0 shadow-none ring-0 focus:ring-0 resize-none`}
+                className={`outline-none ${
+                    error ? '!border-red' : ''
+                }  `}
                 id={other.name}
                 {...other}
             />
-            <span className="relative -top-3 peer-placeholder-shown:top-0 text-xs peer-placeholder-shown:text-base peer-placeholder-shown:opacity-50 transition-all">
-                {other.placeholder}
-            </span>
-            {error && <p className="text-red font-semibold m-0 text-sm absolute bottom-1">{error}</p>}
-        </label>
+            
+        </div> 
     )
 }
 
@@ -120,20 +124,24 @@ function Input(props: InputHTMLAttributes<HTMLInputElement> & IInputProps) {
         props
     const error = errors[props.name]
     return (
-        <label className={`${inputContainerClasses} ${error ? 'pb-8' : ''}`} htmlFor={other.name}>
+        <div>
+            <div className="flex justify-between items-center pb-1">
+                <label className={`${inputContainerClasses} ${error ? '' : ''}`} htmlFor={other.name}>
+                    {other.placeholder}
+                </label>
+                {error && <p className="text-red font-medium m-0 pb-1 text-xs">{error}</p>}
+            </div>
+
             <input
                 onBlur={() => validateField(props.name)}
-                className={`bg-transparent w-full outline-none absolute left-0 px-4 ${
-                    error ? 'bottom-6 placeholder-shown:bottom-8' : 'bottom-2 placeholder-shown:bottom-4'
-                } peer placeholder-shown:placeholder-transparent transition-all border-0 py-0 shadow-none ring-0 focus:ring-0`}
+                className={`outline-none ${
+                    error ? '!border-red' : ''
+                } `}
                 id={other.name}
                 {...other}
             />
-            <span className="relative -top-3 peer-placeholder-shown:top-0 text-xs peer-placeholder-shown:text-base peer-placeholder-shown:opacity-50 transition-all">
-                {other.placeholder}
-            </span>
-            {error && <p className="text-red font-semibold m-0 text-sm absolute bottom-1">{error}</p>}
-        </label>
+            
+            </div>
     )
 }
 
@@ -176,25 +184,27 @@ function Radio(props: InputHTMLAttributes<HTMLInputElement> & IInputProps & { la
     }
 
     return (
+        <div className="flex gap-1 items-center">
+        <input
+            checked={values[other.name] == other.value}
+            className=""
+            {...other}
+            type="radio"
+            value={props.value}
+            onChange={handleChange}
+            id={`${other.name}-${other.value}`}
+            ref={reference || null}
+        />
         <label
             onMouseUp={handleClick}
-            className="relative w-full text-center cursor-pointer"
+            className="relative flex-1 cursor-pointer"
             htmlFor={`${other.name}-${other.value}`}
         >
-            <input
-                checked={values[other.name] == other.value}
-                className="absolute opacity-0 peer inset-0"
-                {...other}
-                type="radio"
-                value={props.value}
-                onChange={handleChange}
-                id={`${other.name}-${other.value}`}
-                ref={reference || null}
-            />
-            <span className="block py-2 w-full rounded-md border-[2px] peer-focus:border-dashed peer-checked:border-solid border-light dark:border-dark  peer-focus:border-black/40 dark:peer-focus:border-white/75 peer-checked:border-red dark:peer-checked:border-yellow text-sm">
+            <span className="text-sm">
                 {label || other.value}
             </span>
         </label>
+        </div>
     )
 }
 
@@ -218,23 +228,15 @@ function RadioGroup(props: InputHTMLAttributes<HTMLInputElement> & IInputProps) 
                     }
                 }
             }}
-            className={`${inputContainerClasses} ${error ? 'pb-8' : ''} cursor-pointer`}
+            className={`${inputContainerClasses} ${error ? '' : ''} cursor-pointer`}
         >
-            <p
-                className={`m-0 ${open ? 'text-sm opacity-100' : 'opacity-50'} transition-all`}
-                id={`group-${props.name}`}
-            >
-                {props.placeholder}
-            </p>
-            <motion.div className="overflow-hidden" animate={{ height: open ? 'auto' : 0 }} initial={{ height: 0 }}>
-                <p className="m-0 mt-1 mb-4 text-sm">
-                    <strong>Tip:</strong> Use <KeyboardShortcut text="←" /> <KeyboardShortcut text="→" /> to advance
-                    through options
-                </p>
+            <fieldset className="border border-primary p-2" id={`group-${props.name}`}>
+            <legend className="text-sm bg-primary px-1">{props.placeholder}</legend>
+            {error && <p className="text-red font-medium m-0 text-xs -mt-1 mb-1">{error}</p>}
                 <div
                     role="radiogroup"
                     aria-labelledby={`group-${props.name}`}
-                    className={`mt-2 grid grid-cols-2 gap-x-2 gap-y-2 ${open ? 'opacity-100' : 'opacity-0 absolute'}`}
+                    className="flex flex-col gap-1"
                 >
                     {options?.map((option, index) => {
                         const { value, hubspotValue, label } = option
@@ -249,8 +251,7 @@ function RadioGroup(props: InputHTMLAttributes<HTMLInputElement> & IInputProps) 
                         )
                     })}
                 </div>
-            </motion.div>
-            {error && <p className="text-red font-semibold m-0 text-sm absolute bottom-1">{error}</p>}
+            </fieldset>
         </div>
     )
 }
@@ -260,7 +261,7 @@ const ValidationSchema = Yup.object().shape({
     company: Yup.string().required('Please enter your company name'),
     role: Yup.string().required('Please select your role'),
     monthly_active_users: Yup.string().required('Please enter your monthly active users'),
-    talk_about: Yup.string().required('Please tell us what you want to talk about'),
+    talk_about: Yup.string().required('Sorry for being annoying, but mind filling this out?'),
     where_did_you_hear_about_us: Yup.string().nullable(),
 })
 
@@ -369,11 +370,7 @@ export default function ContactForm({
         </>
     ) : (
         <form onSubmit={handleSubmit} id="contact-form">
-            <p className="text-sm">
-                <strong>Tip:</strong> Press <KeyboardShortcut text="Tab" size="sm" /> to advance through the form at a
-                breakneck pace!
-            </p>
-            <div className="grid border border-light dark:border-dark rounded overflow-hidden">
+            <div className="space-y-2">
                 {fields.map(({ Component, name, placeHolder, type = 'text', options = [] }, index) => {
                     return (
                         <Component

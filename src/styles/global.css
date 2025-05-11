@@ -242,6 +242,18 @@ h4 {
     }
 }
 
+input[type="text"],
+input[type="email"],
+input[type="tel"],
+input[type="number"],
+input[type="password"] {
+    @apply border border-primary px-1.5 py-1 text-sm w-full ring-0 focus:ring-1;
+}
+
+textarea {
+    @apply border border-primary !px-1.5 !py-1 !text-sm w-full ring-0 focus:ring-1;
+}
+
 /* Content pages (Handbook,  Docs, Blog, Customers, FAQ) */
 .article-content {
     h1,
