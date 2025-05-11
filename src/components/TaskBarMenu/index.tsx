@@ -159,7 +159,37 @@ export default function TaskBarMenu() {
             >
                 <MenuBar menus={menuData} className="[&_button]:px-2" />
                 <aside className="flex items-center gap-px py-0.5">
-                    <OSButton variant="ghost" size="sm" to="https://app.posthog.com/signup" asLink external className="text-red font-semibold">Get started - free</OSButton>
+                    <MenuBar
+                        menus={[
+                            {
+                                trigger: <span className="text-red font-semibold">Get started - free</span>,
+                                items: [
+                                    {
+                                        type: 'item',
+                                        label: 'Sign up',
+                                        link: 'https://app.posthog.com/signup',
+                                        external: true,
+                                    },
+                                    {
+                                        type: 'item',
+                                        label: 'Install with AI',
+                                    },
+                                    {
+                                        type: 'item',
+                                        label: 'Talk to a human',
+                                    },
+                                    {
+                                        type: 'separator',
+                                    },
+                                    {
+                                        type: 'item',
+                                        label: 'Login',
+                                    },
+                                ],
+                            },
+                        ]}
+                        className="[&_button]:px-2"
+                    />
                     <OSButton variant="ghost" size="md">
                         <IconSearch className="size-5" />
                     </OSButton>
