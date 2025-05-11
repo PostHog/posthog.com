@@ -11,7 +11,7 @@ import { StaticImage } from 'gatsby-plugin-image'
 
 const PricingPhilosophy = (): JSX.Element => {
     return (
-        <Layout parent={pricingMenu}>
+        <>
             <section className="bg-white dark:bg-accent-dark text-primary dark:text-primary-dark shadow-xl rounded pt-6 pb-2 md:py-8 px-8 md:px-12 mx-6 md:mx-auto my-12 w-[calc(100%_-_3rem)] md:w-full max-w-3xl border border-transparent dark:border-dark">
                 <SectionHeader>
                     <p className="opacity-60 text-[15px] mb-2">A note from our co-founder</p>
@@ -106,7 +106,7 @@ const PricingPhilosophy = (): JSX.Element => {
                     When James isn't thinking about how to cut prices (again), you'll likely find him changing a diaper.
                 </p>
             </section>
-        </Layout>
+        </>
     )
 }
 

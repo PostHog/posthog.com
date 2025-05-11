@@ -121,10 +121,8 @@ export const Calculator = ({ SidebarList, SidebarListItem, Discounts }: Calculat
     `)
 
     return (
-        <SectionLayout id="calculator">
-            <SectionHeader>
+        <div id="calculator">
                 <h3>Pricing calculator</h3>
-            </SectionHeader>
 
             <div className="flex flex-col lgxl:flex-row lgxl:gap-8 2xl:gap-12 items-start pt-4">
                 <Tabbed />
@@ -175,6 +173,6 @@ export const Calculator = ({ SidebarList, SidebarListItem, Discounts }: Calculat
                     </div>
                 </div>
             </div>
-        </SectionLayout>
+        </div>
     )
 }
