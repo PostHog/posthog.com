@@ -13,6 +13,7 @@ export type MenuItemType = {
     icon?: React.ReactNode
     items?: MenuItemType[] // For submenus
     onClick?: () => void
+    node?: React.ReactNode // Allow embedding a React node
 }
 
 export type MenuType = {
@@ -38,6 +39,14 @@ const ShortcutClasses =
 const MenuItem: React.FC<{ item: MenuItemType; forceIconIndent?: boolean }> = ({ item, forceIconIndent }) => {
     if (item.type === 'separator') {
         return <RadixMenubar.Separator className={SeparatorClasses} />
+    }
+
+    if (item.node) {
+        return (
+            <RadixMenubar.Item className={ItemClasses} disabled={item.disabled} onClick={item.onClick}>
+                {item.node}
+            </RadixMenubar.Item>
+        )
     }
 
     if (item.type === 'submenu' && item.items) {
@@ -80,7 +89,7 @@ const MenuItem: React.FC<{ item: MenuItemType; forceIconIndent?: boolean }> = ({
                 </Link>
             ) : (
                 <span className="px-2.5 flex w-full justify-between items-center gap-2">
-                    <span className="flex-1">
+                    <span className="flex-1 flex items-center gap-2">
                         {item.icon ? (
                             item.icon
                         ) : forceIconIndent ? (

@@ -22,6 +22,7 @@ export default function TaskBarMenu() {
     const totalWindows = windows.length
     const [isWindowPopoverOpen, setIsWindowPopoverOpen] = useState(false)
     const { user, notifications, logout } = useUser()
+    const [showAuthPanel, setShowAuthPanel] = useState(false)
 
     const isLoggedIn = !!user
 
@@ -50,6 +51,14 @@ export default function TaskBarMenu() {
     const handleWindowClick = (window: any) => {
         bringToFront(window)
         setIsWindowPopoverOpen(false)
+    }
+
+    const handleSignInClick = () => {
+        setShowAuthPanel(true)
+        // Close the menu by blurring the active element
+        if (document.activeElement instanceof HTMLElement) {
+            document.activeElement.blur()
+        }
     }
 
     const accountMenu: MenuType[] = [
@@ -128,90 +137,104 @@ export default function TaskBarMenu() {
                       },
                   ]
                 : [
-                      {
-                          type: 'item' as const,
-                          label: 'Sign in',
-                          disabled: true,
-                      },
-                  ],
+                    {
+                        type: 'item' as const,
+                        label: 'Sign in',
+                        onClick: handleSignInClick,
+                    },
+                ],
         },
     ]
 
     return (
-        <motion.div
-            id="taskbar"
-            data-scheme="primary"
-            initial={{ translateY: '100%' }}
-            animate={{ translateY: 0 }}
-            exit={{ translateY: '100%' }}
-            className="w-full bg-accent border-b border-primary z-50 flex justify-between pl-0.5 pr-2"
-        >
-            <MenuBar menus={menuData} className="[&_button]:px-2" />
-            <aside className="flex items-center gap-px py-0.5">
-                {/* <OSButton variant="primary" size="xs">Get started - free</OSButton> */}
-                <OSButton variant="ghost" size="md">
-                    <IconSearch className="size-5" />
-                </OSButton>
-                <OSButton variant="ghost" size="md">
-                    <IconChatHelp className="size-5" />
-                </OSButton>
-                <PopoverRoot open={isWindowPopoverOpen} onOpenChange={setIsWindowPopoverOpen}>
-                    <Popover
-                        trigger={
-                            <motion.div
-                                animate={
-                                    isAnimating
-                                        ? {
-                                              scale: [1, 1.2, 1],
-                                              rotate: [0, -5, 5, -5, 5, 0],
-                                          }
-                                        : {}
-                                }
-                                transition={{
-                                    duration: 0.5,
-                                    ease: 'easeInOut',
-                                    times: [0, 0.2, 0.4, 0.6, 0.8, 1],
-                                }}
-                            >
-                                <OSButton
-                                    onClick={(e) => {
-                                        if (totalWindows <= 0) {
-                                            return e.stopPropagation()
-                                        }
+        <>
+            <motion.div
+                id="taskbar"
+                data-scheme="primary"
+                initial={{ translateY: '100%' }}
+                animate={{ translateY: 0 }}
+                exit={{ translateY: '100%' }}
+                className="w-full bg-accent border-b border-primary z-50 flex justify-between pl-0.5 pr-2"
+            >
+                <MenuBar menus={menuData} className="[&_button]:px-2" />
+                <aside className="flex items-center gap-px py-0.5">
+                    {/* <OSButton variant="primary" size="xs">Get started - free</OSButton> */}
+                    <OSButton variant="ghost" size="md">
+                        <IconSearch className="size-5" />
+                    </OSButton>
+                    <OSButton variant="ghost" size="md">
+                        <IconChatHelp className="size-5" />
+                    </OSButton>
+                    <PopoverRoot open={isWindowPopoverOpen} onOpenChange={setIsWindowPopoverOpen}>
+                        <Popover
+                            trigger={
+                                <motion.div
+                                    animate={
+                                        isAnimating
+                                            ? {
+                                                  scale: [1, 1.2, 1],
+                                                  rotate: [0, -5, 5, -5, 5, 0],
+                                              }
+                                            : {}
+                                    }
+                                    transition={{
+                                        duration: 0.5,
+                                        ease: 'easeInOut',
+                                        times: [0, 0.2, 0.4, 0.6, 0.8, 1],
                                     }}
-                                    variant="ghost"
-                                    size="md"
-                                    data-active-windows
-                                    className="border-2 border-primary"
                                 >
-                                    <span className="text-sm font-semibold">{totalWindows}</span>
-                                </OSButton>
-                            </motion.div>
-                        }
-                        title="Active Windows"
-                        dataScheme="primary"
-                    >
-                        <div className="flex flex-col gap-1 min-w-[200px]">
-                            {windows.map((window) => (
-                                <button
-                                    key={window.key}
-                                    onClick={() => handleWindowClick(window)}
-                                    className="text-left px-2 py-1.5 rounded hover:bg-accent dark:hover:bg-accent-dark text-sm flex items-center gap-2"
-                                >
-                                    <span
-                                        className={`truncate ${
-                                            window.minimized ? 'italic' : focusedWindow === window ? 'font-bold' : ''
-                                        }`}
+                                    <OSButton
+                                        onClick={(e) => {
+                                            if (totalWindows <= 0) {
+                                                return e.stopPropagation()
+                                            }
+                                        }}
+                                        variant="ghost"
+                                        size="md"
+                                        data-active-windows
+                                        className="border-2 border-primary"
                                     >
-                                        {window.meta?.title || 'Untitled'}
-                                    </span>
-                                </button>
-                            ))}
-                        </div>
-                    </Popover>
-                </PopoverRoot>
-                <MenuBar menus={accountMenu} className="[&_button]:px-2" />
-            </aside>
-        </motion.div>
+                                        <span className="text-sm font-semibold">{totalWindows}</span>
+                                    </OSButton>
+                                </motion.div>
+                            }
+                            title="Active Windows"
+                            dataScheme="primary"
+                        >
+                            <div className="flex flex-col gap-1 min-w-[200px]">
+                                {windows.map((window) => (
+                                    <button
+                                        key={window.key}
+                                        onClick={() => handleWindowClick(window)}
+                                        className="text-left px-2 py-1.5 rounded hover:bg-accent dark:hover:bg-accent-dark text-sm flex items-center gap-2"
+                                    >
+                                        <span
+                                            className={`truncate ${
+                                                window.minimized ? 'italic' : focusedWindow === window ? 'font-bold' : ''
+                                            }`}
+                                        >
+                                            {window.meta?.title || 'Untitled'}
+                                        </span>
+                                    </button>
+                                ))}
+                            </div>
+                        </Popover>
+                    </PopoverRoot>
+                    <MenuBar menus={accountMenu} className="[&_button]:px-2" />
+                </aside>
+            </motion.div>
+            {showAuthPanel && (
+                <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50">
+                    <div className="bg-white dark:bg-dark rounded shadow-lg p-6 relative">
+                        <button
+                            onClick={() => setShowAuthPanel(false)}
+                            className="absolute top-2 right-2 text-2xl"
+                            aria-label="Close"
+                        >✕</button>
+                        <Authentication initialView="sign-in" showBanner={false} showProfile={false} />
+                    </div>
+                </div>
+            )}
+        </>
     )
 }
