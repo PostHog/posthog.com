@@ -158,7 +158,7 @@ export default function TaskBarMenu() {
             >
                 <MenuBar menus={menuData} className="[&_button]:px-2" />
                 <aside className="flex items-center gap-px py-0.5">
-                    {/* <OSButton variant="primary" size="xs">Get started - free</OSButton> */}
+                    <OSButton variant="ghost" size="sm" to="https://app.posthog.com/signup" asLink external className="text-red font-semibold">Get started - free</OSButton>
                     <OSButton variant="ghost" size="md">
                         <IconSearch className="size-5" />
                     </OSButton>

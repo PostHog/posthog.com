@@ -334,29 +334,5 @@ export const menuData: MenuType[] = [
                 disabled: true,
             },
         ],
-    },
-    {
-        trigger: (
-            <>
-                <span className="ml-1 text-red">Get started - free</span>
-            </>
-        ),
-        items: [
-            {
-                type: 'item',
-                label: 'New Tab',
-                shortcut: '⌘ T',
-            },
-            {
-                type: 'item',
-                label: 'New Window',
-                shortcut: '⌘ N',
-            },
-            {
-                type: 'item',
-                label: 'New Incognito Window',
-                disabled: true,
-            },
-        ],
-    },
+    }
 ]

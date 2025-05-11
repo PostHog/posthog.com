@@ -40,6 +40,7 @@ interface OSButtonProps extends Omit<React.ButtonHTMLAttributes<HTMLButtonElemen
     align?: 'left' | 'center'
     width?: 'auto' | 'full'
     asLink?: boolean
+    external?: boolean
     to?: string
     iconPosition?: 'left' | 'right'
     onClick?: (e: React.MouseEvent<HTMLButtonElement> | React.MouseEvent<HTMLAnchorElement>) => void
@@ -59,6 +60,7 @@ export default function OSButton({
     align = 'center',
     width = 'auto',
     asLink = false,
+    external = false,
     to,
     iconPosition = 'left',
     onClick,
@@ -151,7 +153,7 @@ export default function OSButton({
     }
 
     return asLink ? (
-        <Link to={to || ''} {...commonProps}>
+        <Link to={to || ''} {...commonProps} {...(external ? { externalNoIcon: true } : {})}>
             {buttonContent}
         </Link>
     ) : (
