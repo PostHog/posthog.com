@@ -2,8 +2,10 @@ import Team from 'components/Team'
 import { companyMenu } from '../../navs'
 import Layout from 'components/Layout'
 import React from 'react'
-import { graphql, useStaticQuery } from 'gatsby'
+import { graphql, navigate, useStaticQuery } from 'gatsby'
 import HeaderBar from 'components/OSChrome/HeaderBar'
+import { Select } from 'components/RadixUI/Select'
+import { useNavigate, useLocation } from '@gatsbyjs/reach-router'
 
 type TeamPageProps = {
     params: {
@@ -83,10 +85,41 @@ export default function TeamPage(props: TeamPageProps) {
         (node) => node?.fields?.slug === `/teams/${slug}/objectives`
     )?.body
     const team = data?.allSqueakTeam?.nodes?.find((node) => node?.slug === slug)
+
+    const navigate = useNavigate()
+    const location = useLocation()
+    const currentPath = location.pathname.replace('/', '')
+
+    const selectOptions = [
+        {
+            label: 'Company',
+            items: [
+                { value: 'company', label: 'Company', icon: companyMenu.icon },
+                ...companyMenu.children.map((item) => ({
+                    value: item.url?.replace('/', '') || item.name.toLowerCase(),
+                    label: item.name,
+                    icon: item.icon,
+                    color: item.color || undefined,
+                })),
+            ],
+        },
+    ]
+
     return (
         <div className="h-full flex flex-col">
             <div className="flex-shrink-0">
                 <HeaderBar showHome showBack showForward showSearch />
+            </div>
+            <div data-scheme="secondary" className="bg-primary px-2">
+            <Select
+                groups={selectOptions}
+                placeholder="Select a page"
+                ariaLabel="Select a page"
+                defaultValue={currentPath}
+                onValueChange={(value) => navigate(`/${value}`)}
+                className="w-full"
+                dataScheme="primary"
+            />
             </div>
             <div data-scheme="secondary" className="bg-primary flex-grow min-h-0">
                 <Team

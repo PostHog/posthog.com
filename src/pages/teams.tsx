@@ -4,13 +4,36 @@ import { SEO } from 'components/seo'
 import Link from 'components/Link'
 import PostLayout from 'components/PostLayout'
 import Tooltip from 'components/Tooltip'
-import { graphql, useStaticQuery } from 'gatsby'
+import { graphql, navigate, useStaticQuery } from 'gatsby'
 import slugify from 'slugify'
 import TeamPatch from 'components/TeamPatch'
 import { CallToAction } from 'components/CallToAction'
 import { useUser } from 'hooks/useUser'
+import HeaderBar from 'components/OSChrome/HeaderBar'
+import { Select } from 'components/RadixUI/Select'
+import { productMenu, companyMenu } from '../navs'
+import { useNavigate, useLocation } from '@gatsbyjs/reach-router'
 
 const Teams: React.FC = () => {
+    const navigate = useNavigate()
+    const location = useLocation()
+    const currentPath = location.pathname.replace('/', '')
+
+    const selectOptions = [
+        {
+            label: 'Company',
+            items: [
+                { value: 'company', label: 'Company', icon: companyMenu.icon },
+                ...companyMenu.children.map((item) => ({
+                    value: item.url?.replace('/', '') || item.name.toLowerCase(),
+                    label: item.name,
+                    icon: item.icon,
+                    color: item.color || undefined,
+                })),
+            ],
+        },
+    ]
+
     const { isModerator } = useUser()
     const { allTeams } = useStaticQuery(graphql`
         {
@@ -65,14 +88,26 @@ const Teams: React.FC = () => {
         }
     `)
     return (
-        <Layout>
+        <>
             <SEO
                 title="Teams - PostHog"
                 description="We're organized into multi-disciplinary small teams."
                 image={`/images/small-teams.png`}
             />
-            <PostLayout article={false} title={'Handbook'} hideSidebar hideSurvey>
-                <section className="mx-auto">
+
+<HeaderBar showHome showBack showForward showSearch />
+            <div data-scheme="secondary" className="bg-primary px-2 pb-2 border-b border-primary">
+            <Select
+                groups={selectOptions}
+                placeholder="Select a page"
+                ariaLabel="Select a page"
+                defaultValue={currentPath}
+                onValueChange={(value) => navigate(`/${value}`)}
+                className="w-full"
+                dataScheme="primary"
+            />
+            </div>
+                <section data-scheme="primary" className="bg-primary p-4">
                     <div className="flex flex-col md:items-center md:justify-end md:flex-row-reverse gap-8 md:gap-2">
                         <div className="md:flex-1">
                             <h1 className="font-bold text-3xl md:text-4xl mb-6">Small teams</h1>
@@ -84,7 +119,7 @@ const Teams: React.FC = () => {
                                 <Link to="/handbook/company/small-teams">Learn more about why we have small teams</Link>
                             </p>
 
-                            <div className="grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-4 xl:gap-5 text-center">
+                            <div className="grid grid-cols-2 @lg:grid-cols-3 @xl:grid-cols-4 @2xl:grid-cols-5 gap-4 @xl:gap-5 text-center">
                                 {allTeams.nodes
                                     .sort((a, b) => a.name.localeCompare(b.name))
                                     .map(({ id, name, slug, profiles, crest, crestOptions, leadProfiles }) => (
@@ -196,8 +231,7 @@ const Teams: React.FC = () => {
                         </div>
                     </div>
                 </section>
-            </PostLayout>
-        </Layout>
+        </>
     )
 }
 
