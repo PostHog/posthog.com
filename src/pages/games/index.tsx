@@ -4,7 +4,7 @@ import { Link } from 'gatsby'
 import { CallToAction } from 'components/CallToAction'
 import CloudinaryImage from 'components/CloudinaryImage'
 import SEO from 'components/seo'
-import { IconDice } from 'components/OSIcons/Icons'
+import { IconDice, IconDictator } from 'components/OSIcons/Icons'
 import { Accordion } from 'components/RadixUI/Accordion'
 
 export default function Games(): JSX.Element {
@@ -56,6 +56,8 @@ export default function Games(): JSX.Element {
                     </>
                 }
             >
+                <div className="@container">
+                <div className="grid grid-cols-2 @lg:grid-cols-3 @xl:grid-cols-4 @2xl:grid-cols-5 @3xl:grid-cols-6 @4xl:grid-cols-7 @5xl:grid-cols-8 gap-4">
                 <Link
                     to="/games/hedgehog-mode"
                     state={{ newWindow: true }}
@@ -64,6 +66,16 @@ export default function Games(): JSX.Element {
                     <IconDice className={`size-7 text-green`} />
                     <p className="text-sm font-medium">Hedgehog mode</p>
                 </Link>
+                <Link
+                    to="/games/dictator-or-tech-bro"
+                    state={{ newWindow: true }}
+                    className="flex flex-col justify-center items-center space-y-1 w-28 text-center text-primary hover:text-primary relative top-0"
+                >
+                    <IconDictator className={`!size-14 -mt-2`} />
+                    <p className="text-sm font-medium">Dictator or tech bro?</p>
+                </Link>
+                </div>
+                </div>
             </Explorer>
         </>
     )
