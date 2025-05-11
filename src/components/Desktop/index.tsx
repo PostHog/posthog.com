@@ -68,7 +68,7 @@ const AppLink = ({ Icon, type, color, label, url, className }: AppItem) => {
             <Link
                 to={url}
                 state={{ newWindow: true }}
-                className="flex flex-col justify-center items-center space-y-1 w-28 text-center"
+                className="flex flex-col justify-center items-center space-y-1 w-28 text-center select-none"
             >
                 <Icon className={`size-7 text-${color} ${className}`} />
                 <p className="text-sm font-medium">{label}</p>

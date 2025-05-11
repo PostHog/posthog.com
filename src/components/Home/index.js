@@ -80,6 +80,16 @@ const AIInstallContent = () => (
     </div>
 )
 
+const SignupContent = () => (
+    <div className="flex flex-1 w-full h-full border-y border-primary">
+        <iframe 
+            src="http://app.dev.posthog.dev/signup"
+            className="w-full h-full border-0"
+            title="PostHog signup"
+        />
+    </div>
+)
+
 const TalkToHumanContact = ({ onClose, onFormSubmit }) => {
     const [formSubmitted, setFormSubmitted] = useState(false)
 
@@ -169,13 +179,22 @@ export default function Home() {
                     label: 'Continue',
                     action: () => {
                         if (selectedOption === 'free-signup') {
-                            window.open('https://app.posthog.com/signup', '_blank')
+                            setCurrentFlow('signup')
                         } else if (selectedOption === 'install-with-ai') {
                             setCurrentFlow('install-with-ai')
                         } else if (selectedOption === 'talk-to-a-human') {
                             setCurrentFlow('talk-to-a-human')
                         }
                     },
+                },
+            },
+        },
+        signup: {
+            component: SignupContent,
+            navigation: {
+                back: {
+                    label: 'Back',
+                    action: () => setCurrentFlow('main'),
                 },
             },
         },
@@ -277,7 +296,7 @@ export default function Home() {
                 image={`/images/home.png`}
             />
             <Wizard leftNavigation={renderLeftNavigation()} rightNavigation={renderRightNavigation()}>
-                {currentFlow === 'main' || currentFlow === 'talk-to-a-human' ? (
+                {currentFlow === 'main' || currentFlow === 'signup' || currentFlow === 'talk-to-a-human' ? (
                     <ContentComponent {...componentProps} />
                 ) : (
                     <ScrollArea className="flex-1 w-full border-y border-primary flex flex-col items-center">
