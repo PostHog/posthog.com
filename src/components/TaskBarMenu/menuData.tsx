@@ -3,6 +3,10 @@ import React from 'react'
 import { IconApps, IconLogomark } from '@posthog/icons'
 import { productMenu, docsMenu, handbookSidebar } from '../../navs'
 import * as Icons from '@posthog/icons'
+import { graphql, useStaticQuery } from 'gatsby'
+import { GatsbyImage, getImage } from 'gatsby-plugin-image'
+import slugify from 'slugify'
+import { useSmallTeamsMenuItems } from './SmallTeamsMenuItems'
 
 interface ProductMenuItem {
     name: string
@@ -221,174 +225,182 @@ const processHandbookSidebar = (items: any[], isRoot = true): any[] => {
         })
 }
 
-export const menuData: MenuType[] = [
-    {
-        trigger: (
-            <>
-                <IconLogomark className="size-6" />
-            </>
-        ),
-        items: [
-            {
-                type: 'item',
-                label: 'About PostHog',
-                link: '/about',
-            },
-            {
-                type: 'item',
-                label: 'About this website',
-                link: '/credits',
-            },
-            {
-                type: 'item',
-                label: 'Disabled option',
-                disabled: true,
-            },
-            {
-                type: 'item',
-                label: 'Display options',
-                link: '/display-options',
-            },
-            { type: 'separator' },
-            {
-                type: 'item',
-                label: 'Print a coloring page',
-                link: '/draw',
-                shortcut: '⌘ P',
-            },
-        ],
-    },
-    {
-        trigger: 'Products',
-        items: getProductMenuItems(),
-    },
-    {
-        trigger: 'Pricing',
-        items: [
-            {
-                type: 'item',
-                label: 'Plans & usage-based pricing',
-                link: '/pricing',
-            },
-            {
-                type: 'item',
-                label: 'Pricing calculator',
-                link: '/calculator',
-            },
-            {
-                type: 'item',
-                label: 'Add-ons',
-                link: '/addons',
-            },
-            {
-                type: 'item',
-                label: 'Pricing philosophy',
-                link: '/pricing/philosophy',
-            },
-            {
-                type: 'item',
-                label: 'How we do sales',
-                link: '/sales',
-            },
-            {
-                type: 'item',
-                label: 'Founder stack',
-                link: '/founders',
-            },
-            {
-                type: 'item',
-                label: 'Enterprise',
-                link: '/enterprise',
-            },
-        ],
-    },
-    {
-        trigger: 'Docs',
-        items: getDocsMenuItems(),
-    },
-    {
-        trigger: 'Company',
-        items: [
-            {
-                type: 'item',
-                label: 'About',
-                link: '/about',
-            },
-            {
-                type: 'item',
-                label: 'People',
-                link: '/people',
-            },
-            {
-                type: 'submenu',
-                label: 'Handbook',
-                link: '/handbook',
-                items: processHandbookSidebar(handbookSidebar),
-            },
-            {
-                type: 'item',
-                label: 'Blog',
-                link: '/blog',
-            },
-            {
-                type: 'item',
-                label: 'Careers',
-                link: '/careers',
-            },
-            {
-                type: 'submenu',
-                label: 'Social media',
-                items: [
-                    {
-                        type: 'item',
-                        label: 'X',
-                        link: 'https://x.com/posthog',
-                        external: true,
-                    },
-                    {
-                        type: 'item',
-                        label: 'LinkedIn',
-                        link: 'https://www.linkedin.com/company/posthog',
-                        external: true,
-                    },
-                    {
-                        type: 'item',
-                        label: 'Substack',
-                        link: 'https://newsletter.posthog.com',
-                        external: true,
-                    },
-                    {
-                        type: 'item',
-                        label: 'YouTube',
-                        link: 'https://www.youtube.com/@posthog',
-                        external: true,
-                    },
-                ],
-            }
-        ],
-    },
-    {
-        trigger: (
-            <>
-                <span className="ml-1">More</span>
-            </>
-        ),
-        items: [
-            {
-                type: 'item',
-                label: 'New Tab',
-                shortcut: '⌘ T',
-            },
-            {
-                type: 'item',
-                label: 'New Window',
-                shortcut: '⌘ N',
-            },
-            {
-                type: 'item',
-                label: 'New Incognito Window',
-                disabled: true,
-            },
-        ],
-    }
-]
+export function useMenuData(): MenuType[] {
+    const smallTeamsMenuItems = useSmallTeamsMenuItems()
+    return [
+        {
+            trigger: (
+                <>
+                    <IconLogomark className="size-6" />
+                </>
+            ),
+            items: [
+                {
+                    type: 'item',
+                    label: 'About PostHog',
+                    link: '/about',
+                },
+                {
+                    type: 'item',
+                    label: 'About this website',
+                    link: '/credits',
+                },
+                {
+                    type: 'item',
+                    label: 'Disabled option',
+                    disabled: true,
+                },
+                {
+                    type: 'item',
+                    label: 'Display options',
+                    link: '/display-options',
+                },
+                { type: 'separator' },
+                {
+                    type: 'item',
+                    label: 'Print a coloring page',
+                    link: '/draw',
+                    shortcut: '⌘ P',
+                },
+            ],
+        },
+        {
+            trigger: 'Products',
+            items: getProductMenuItems(),
+        },
+        {
+            trigger: 'Pricing',
+            items: [
+                {
+                    type: 'item',
+                    label: 'Plans & usage-based pricing',
+                    link: '/pricing',
+                },
+                {
+                    type: 'item',
+                    label: 'Pricing calculator',
+                    link: '/calculator',
+                },
+                {
+                    type: 'item',
+                    label: 'Add-ons',
+                    link: '/addons',
+                },
+                {
+                    type: 'item',
+                    label: 'Pricing philosophy',
+                    link: '/pricing/philosophy',
+                },
+                {
+                    type: 'item',
+                    label: 'How we do sales',
+                    link: '/sales',
+                },
+                {
+                    type: 'item',
+                    label: 'Founder stack',
+                    link: '/founders',
+                },
+                {
+                    type: 'item',
+                    label: 'Enterprise',
+                    link: '/enterprise',
+                },
+            ],
+        },
+        {
+            trigger: 'Docs',
+            items: getDocsMenuItems(),
+        },
+        {
+            trigger: 'Company',
+            items: [
+                {
+                    type: 'item',
+                    label: 'About',
+                    link: '/about',
+                },
+                {
+                    type: 'item',
+                    label: 'People',
+                    link: '/people',
+                },
+                {
+                    type: 'submenu',
+                    label: 'Small teams',
+                    items: smallTeamsMenuItems,
+                },
+                {
+                    type: 'submenu',
+                    label: 'Handbook',
+                    link: '/handbook',
+                    items: processHandbookSidebar(handbookSidebar),
+                },
+                {
+                    type: 'item',
+                    label: 'Blog',
+                    link: '/blog',
+                },
+                {
+                    type: 'item',
+                    label: 'Careers',
+                    link: '/careers',
+                },
+                {
+                    type: 'submenu',
+                    label: 'Social media',
+                    items: [
+                        {
+                            type: 'item',
+                            label: 'X',
+                            link: 'https://x.com/posthog',
+                            external: true,
+                        },
+                        {
+                            type: 'item',
+                            label: 'LinkedIn',
+                            link: 'https://www.linkedin.com/company/posthog',
+                            external: true,
+                        },
+                        {
+                            type: 'item',
+                            label: 'Substack',
+                            link: 'https://newsletter.posthog.com',
+                            external: true,
+                        },
+                        {
+                            type: 'item',
+                            label: 'YouTube',
+                            link: 'https://www.youtube.com/@posthog',
+                            external: true,
+                        },
+                    ],
+                }
+            ],
+        },
+        {
+            trigger: (
+                <>
+                    <span className="ml-1">More</span>
+                </>
+            ),
+            items: [
+                {
+                    type: 'item',
+                    label: 'New Tab',
+                    shortcut: '⌘ T',
+                },
+                {
+                    type: 'item',
+                    label: 'New Window',
+                    shortcut: '⌘ N',
+                },
+                {
+                    type: 'item',
+                    label: 'New Incognito Window',
+                    disabled: true,
+                },
+            ],
+        }
+    ]
+}

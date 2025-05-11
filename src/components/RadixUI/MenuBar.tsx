@@ -51,30 +51,55 @@ const MenuItem: React.FC<{ item: MenuItemType; forceIconIndent?: boolean }> = ({
     }
 
     if (item.type === 'submenu' && item.items) {
-        // Check if any child has an icon
-        const anyChildHasIcon = item.items.some((subItem) => !!subItem.icon)
-        return (
-            <RadixMenubar.Sub>
-                <RadixMenubar.SubTrigger className={SubTriggerClasses}>
-                    {item.icon ? (
-                        <span className="mr-2 flex items-center">{item.icon}</span>
-                    ) : forceIconIndent ? (
-                        <span style={{ display: 'inline-block', width: 16, minWidth: 16 }} className="mr-2" />
-                    ) : null}
-                    {item.label}
-                    <div className={ShortcutClasses}>
-                        <IconChevronRight className="size-4" />
-                    </div>
-                </RadixMenubar.SubTrigger>
-                <RadixMenubar.Portal>
-                    <RadixMenubar.SubContent className={ContentClasses} alignOffset={-5} data-scheme="primary">
-                        {item.items.map((subItem, index) => (
-                            <MenuItem key={index} item={subItem} forceIconIndent={anyChildHasIcon} />
-                        ))}
-                    </RadixMenubar.SubContent>
-                </RadixMenubar.Portal>
-            </RadixMenubar.Sub>
-        )
+        // If items is an array, render as before
+        if (Array.isArray(item.items)) {
+            const anyChildHasIcon = item.items.some((subItem) => !!subItem.icon)
+            return (
+                <RadixMenubar.Sub>
+                    <RadixMenubar.SubTrigger className={SubTriggerClasses}>
+                        {item.icon ? (
+                            <span className="mr-2 flex items-center">{item.icon}</span>
+                        ) : forceIconIndent ? (
+                            <span style={{ display: 'inline-block', width: 16, minWidth: 16 }} className="mr-2" />
+                        ) : null}
+                        {item.label}
+                        <div className={ShortcutClasses}>
+                            <IconChevronRight className="size-4" />
+                        </div>
+                    </RadixMenubar.SubTrigger>
+                    <RadixMenubar.Portal>
+                        <RadixMenubar.SubContent className={ContentClasses} alignOffset={-5} data-scheme="primary">
+                            {item.items.map((subItem, index) => (
+                                <MenuItem key={index} item={subItem} forceIconIndent={anyChildHasIcon} />
+                            ))}
+                        </RadixMenubar.SubContent>
+                    </RadixMenubar.Portal>
+                </RadixMenubar.Sub>
+            )
+        }
+        // If items is a React element, render it directly
+        if (React.isValidElement(item.items)) {
+            return (
+                <RadixMenubar.Sub>
+                    <RadixMenubar.SubTrigger className={SubTriggerClasses}>
+                        {item.icon ? (
+                            <span className="mr-2 flex items-center">{item.icon}</span>
+                        ) : forceIconIndent ? (
+                            <span style={{ display: 'inline-block', width: 16, minWidth: 16 }} className="mr-2" />
+                        ) : null}
+                        {item.label}
+                        <div className={ShortcutClasses}>
+                            <IconChevronRight className="size-4" />
+                        </div>
+                    </RadixMenubar.SubTrigger>
+                    <RadixMenubar.Portal>
+                        <RadixMenubar.SubContent className={ContentClasses} alignOffset={-5} data-scheme="primary">
+                            {item.items}
+                        </RadixMenubar.SubContent>
+                    </RadixMenubar.Portal>
+                </RadixMenubar.Sub>
+            )
+        }
     }
 
     return (

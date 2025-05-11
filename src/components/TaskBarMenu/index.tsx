@@ -9,7 +9,7 @@ import MenuBar, { MenuType, MenuItemType } from 'components/RadixUI/MenuBar'
 import OSButton from 'components/OSButton'
 import { useUser } from 'hooks/useUser'
 import getAvatarURL from 'components/Squeak/util/getAvatar'
-import { menuData } from './menuData'
+import { useMenuData } from './menuData'
 import { Authentication } from 'components/Squeak'
 import Link from 'components/Link'
 import Orders from 'components/MainNav'
@@ -24,6 +24,7 @@ export default function TaskBarMenu() {
     const [isWindowPopoverOpen, setIsWindowPopoverOpen] = useState(false)
     const { user, notifications, logout } = useUser()
     const [showAuthPanel, setShowAuthPanel] = useState(false)
+    const menuData = useMenuData()
 
     const isLoggedIn = !!user
 
