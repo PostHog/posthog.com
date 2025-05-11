@@ -1,7 +1,7 @@
 import { MenuType } from 'components/RadixUI/MenuBar'
 import React from 'react'
 import { IconApps, IconLogomark } from '@posthog/icons'
-import { productMenu, docsMenu } from '../../navs'
+import { productMenu, docsMenu, handbookSidebar } from '../../navs'
 import * as Icons from '@posthog/icons'
 
 interface ProductMenuItem {
@@ -188,6 +188,39 @@ const getDocsMenuItems = () => {
     return items
 }
 
+// Process handbookSidebar into menu item structure
+const processHandbookSidebar = (items: any[], isRoot = true): any[] => {
+    return items
+        .filter((item, idx) => {
+            // Omit the first 'Handbook' item at the root level
+            if (isRoot && idx === 0 && item.name === 'Handbook') return false
+            return !!item.name
+        })
+        .map((item) => {
+            if (item.children) {
+                return {
+                    type: "submenu" as const,
+                    label: item.name,
+                    ...(item.url ? { link: item.url } : {}),
+                    items: processHandbookSidebar(item.children, false),
+                }
+            }
+            // If no url and no children, mark as disabled (label-like)
+            if (!item.url && !item.children) {
+                return {
+                    type: "item" as const,
+                    label: item.name,
+                    disabled: true,
+                }
+            }
+            return {
+                type: "item" as const,
+                label: item.name,
+                ...(item.url ? { link: item.url } : {}),
+            }
+        })
+}
+
 export const menuData: MenuType[] = [
     {
         trigger: (
@@ -215,6 +248,13 @@ export const menuData: MenuType[] = [
                 type: 'item',
                 label: 'Display options',
                 link: '/display-options',
+            },
+            { type: 'separator' },
+            {
+                type: 'item',
+                label: 'Print a coloring page',
+                link: '/draw',
+                shortcut: '⌘ P',
             },
         ],
     },
@@ -271,44 +311,60 @@ export const menuData: MenuType[] = [
         items: [
             {
                 type: 'item',
-                label: 'New Tab',
-                shortcut: '⌘ T',
+                label: 'About',
+                link: '/about',
             },
             {
                 type: 'item',
-                label: 'New Window',
-                shortcut: '⌘ N',
+                label: 'People',
+                link: '/people',
             },
-            {
-                type: 'item',
-                label: 'New Incognito Window',
-                disabled: true,
-            },
-            { type: 'separator' },
             {
                 type: 'submenu',
-                label: 'Share',
+                label: 'Handbook',
+                link: '/handbook',
+                items: processHandbookSidebar(handbookSidebar),
+            },
+            {
+                type: 'item',
+                label: 'Blog',
+                link: '/blog',
+            },
+            {
+                type: 'item',
+                label: 'Careers',
+                link: '/careers',
+            },
+            {
+                type: 'submenu',
+                label: 'Social media',
                 items: [
                     {
                         type: 'item',
-                        label: 'Email Link',
+                        label: 'X',
+                        link: 'https://x.com/posthog',
+                        external: true,
                     },
                     {
                         type: 'item',
-                        label: 'Messages',
+                        label: 'LinkedIn',
+                        link: 'https://www.linkedin.com/company/posthog',
+                        external: true,
                     },
                     {
                         type: 'item',
-                        label: 'Notes',
+                        label: 'Substack',
+                        link: 'https://newsletter.posthog.com',
+                        external: true,
+                    },
+                    {
+                        type: 'item',
+                        label: 'YouTube',
+                        link: 'https://www.youtube.com/@posthog',
+                        external: true,
                     },
                 ],
-            },
-            { type: 'separator' },
-            {
-                type: 'item',
-                label: 'Print…',
-                shortcut: '⌘ P',
-            },
+            }
         ],
     },
     {
