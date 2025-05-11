@@ -29,7 +29,7 @@ Go to the **SEO / metatags** tab in site settings. Paste your PostHog snippet in
 
 By default, PostHog only captures full page loads. To capture client-side navigation within Bubble (if you use the ['Go to page...' Bubble action](https://manual.bubble.io/core-resources/actions/navigation#go-to-page)), you need to edit your snippet to capture history events.
 
-Add the option `capture_pageview: 'history_change'` into the call to posthog.init (separated by a comma from any other options):
+Add the option `capture_pageview: 'history_change'` into the call to `posthog.init` (separated by a comma from any other options):
 
 ```diff
 @@ -1,7 +1,7 @@
