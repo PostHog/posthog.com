@@ -15,6 +15,7 @@ import Link from 'components/Link'
 import Orders from 'components/MainNav'
 import { StrapiRecord, ProfileData } from 'lib/strapi'
 import { Avatar as MainNavAvatar } from 'components/MainNav'
+import Wizard from 'components/Wizard'
 
 export default function TaskBarMenu() {
     const { windows, bringToFront, focusedWindow } = useApp()
@@ -224,16 +225,9 @@ export default function TaskBarMenu() {
                 </aside>
             </motion.div>
             {showAuthPanel && (
-                <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50">
-                    <div className="bg-white dark:bg-dark rounded shadow-lg p-6 relative">
-                        <button
-                            onClick={() => setShowAuthPanel(false)}
-                            className="absolute top-2 right-2 text-2xl"
-                            aria-label="Close"
-                        >✕</button>
+                
                         <Authentication initialView="sign-in" showBanner={false} showProfile={false} />
-                    </div>
-                </div>
+                    
             )}
         </>
     )
