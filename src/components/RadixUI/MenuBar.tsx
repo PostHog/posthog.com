@@ -14,6 +14,7 @@ export type MenuItemType = {
     items?: MenuItemType[] // For submenus
     onClick?: () => void
     node?: React.ReactNode // Allow embedding a React node
+    external?: boolean // Whether the link should open in a new window with external styling
 }
 
 export type MenuType = {
@@ -79,7 +80,12 @@ const MenuItem: React.FC<{ item: MenuItemType; forceIconIndent?: boolean }> = ({
     return (
         <RadixMenubar.Item className={ItemClasses} disabled={item.disabled} onClick={item.onClick}>
             {item.link ? (
-                <Link to={item.link} state={{ newWindow: true }} className="w-full h-full px-2.5 flex items-center gap-2 no-underline text-primary">
+                <Link 
+                    to={item.link} 
+                    state={{ newWindow: true }} 
+                    externalNoIcon={item.external}
+                    className="w-full h-full px-2.5 flex items-center gap-2 no-underline text-primary"
+                >
                     {item.icon ? (
                         item.icon
                     ) : forceIconIndent ? (
@@ -98,7 +104,7 @@ const MenuItem: React.FC<{ item: MenuItemType; forceIconIndent?: boolean }> = ({
                         <span>{item.label}</span>
                     </span>
                     {item.shortcut && <div className={ShortcutClasses}>{item.shortcut}</div>}
-            </span>
+                </span>
             )}
         </RadixMenubar.Item>
     )
