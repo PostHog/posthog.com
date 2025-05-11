@@ -25,7 +25,7 @@ const RootClasses = 'flex gap-px py-0.5 h-full'
 const TriggerClasses =
     'group flex select-none items-center justify-between gap-0.5 rounded px-1.5 py-0.5 text-[13px] leading-none text-primary outline-none data-[highlighted]:bg-accent hover:bg-accent-2 data-[state=open]:bg-accent'
 const ItemClasses =
-    'hover-invert group relative flex h-[25px] select-none items-center rounded px-2.5 text-[13px] leading-none text-primary hover:bg-primary outline-none data-[disabled]:pointer-events-none data-[state=open]:bg-accent data-[highlighted]:bg-input-bg data-[disabled]:text-muted data-[highlighted]:data-[state=open]:text-secondary data-[highlighted]:bg-text-secondary data-[state=open]:text-secondary'
+    'hover-invert group relative flex h-[25px] select-none justify-between items-center rounded text-[13px] leading-none text-primary hover:bg-primary outline-none data-[disabled]:pointer-events-none data-[state=open]:bg-accent data-[highlighted]:bg-input-bg data-[disabled]:text-muted data-[highlighted]:data-[state=open]:text-secondary data-[highlighted]:bg-text-secondary data-[state=open]:text-secondary'
 const SubTriggerClasses =
     'hover-invert group relative flex h-[25px] select-none items-center rounded px-2.5 text-[13px] leading-none text-primary hover:bg-primary outline-none data-[disabled]:pointer-events-none data-[state=open]:bg-primary data-[disabled]:text-muted data-[highlighted]:data-[state=open]:text-secondary data-[highlighted]:bg-text-secondary data-[state=open]:text-secondary'
 const ContentClasses =
@@ -69,21 +69,28 @@ const MenuItem: React.FC<{ item: MenuItemType; forceIconIndent?: boolean }> = ({
 
     return (
         <RadixMenubar.Item className={ItemClasses} disabled={item.disabled} onClick={item.onClick}>
-            <div className="flex items-center gap-2">
-                {item.icon ? (
-                    item.icon
-                ) : forceIconIndent ? (
-                    <span style={{ display: 'inline-block', width: 16, minWidth: 16 }} />
-                ) : null}
-                {item.link ? (
-                    <Link to={item.link} state={{ newWindow: true }} className="no-underline text-primary">
-                        {item.label}
-                    </Link>
-                ) : (
+            {item.link ? (
+                <Link to={item.link} state={{ newWindow: true }} className="w-full h-full px-2.5 flex items-center gap-2 no-underline text-primary">
+                    {item.icon ? (
+                        item.icon
+                    ) : forceIconIndent ? (
+                        <span style={{ display: 'inline-block', width: 16, minWidth: 16 }} />
+                    ) : null}
                     <span>{item.label}</span>
-                )}
-            </div>
-            {item.shortcut && <div className={ShortcutClasses}>{item.shortcut}</div>}
+                </Link>
+            ) : (
+                <span className="px-2.5 flex w-full justify-between items-center gap-2">
+                    <span className="flex-1">
+                        {item.icon ? (
+                            item.icon
+                        ) : forceIconIndent ? (
+                            <span style={{ display: 'inline-block', width: 16, minWidth: 16 }} />
+                        ) : null}
+                        <span>{item.label}</span>
+                    </span>
+                    {item.shortcut && <div className={ShortcutClasses}>{item.shortcut}</div>}
+            </span>
+            )}
         </RadixMenubar.Item>
     )
 }
