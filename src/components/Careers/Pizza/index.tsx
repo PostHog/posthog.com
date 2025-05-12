@@ -274,7 +274,6 @@ export const Pizza = () => {
     return (
         <div className="@container">
             <div className="text-center">
-                <div className="text-lg opacity-70 mb-2">Speaking of small teams...</div>
                 <h2 className="text-4xl font-bold mb-2 flex items-center gap-2 justify-center flex-col @4xl:flex-row leading-none">
                     <StickerPineapple className="inline-block size-10" />
                     Pineapple on pizza:{' '}
@@ -284,11 +283,7 @@ export const Pizza = () => {
                 </h2>
                 <div className="max-w-2xl mx-auto">
                     <p>
-                        Our small teams meet up in various places around the world. Pizza is often involved. Pineapple
-                        on the pizza is <span className="opacity-60 line-through">optional</span> contentious.
-                    </p>
-                    <p className="mb-2">
-                        <strong>Here's how our teams feel.</strong> (Choose your team wisely.)
+                        Everyone at PostHog has an opinion about whether pineapple belongs on pizza (no matter how wrong they may be.) Here's how it breaks down for each small team.
                     </p>
                 </div>
             </div>

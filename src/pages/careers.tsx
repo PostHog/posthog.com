@@ -39,12 +39,12 @@ const IndexPage = () => {
     const tabs = [
         {
             value: 'roles',
-            label: 'Open Roles',
+            label: 'Open roles',
             content: <CareersHero />,
         },
         {
             value: 'small-teams',
-            label: 'Small Teams',
+            label: 'Small teams',
             content: <SmallTeams />,
         },
         {
