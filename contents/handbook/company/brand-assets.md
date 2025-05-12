@@ -4,7 +4,7 @@ sidebar: Handbook
 showTitle: true
 hideAnchor: false
 ---
-> Want to add the [PostHog badge](/docs/contribute/badge) to your website? (Did we mention free merch?)
+> **Want to use our hedgehogs for your community event or article?** We'd love that, and have [a huge library of assets you can use](https://www.figma.com/design/I0VKEEjbkKUDSVzFus2Lpu/Hoggies?node-id=2226-55&t=1sj1GezTKuCfaybF-1). Can't see what you need? Please [let us know](mailto:joe@posthog.com) instead of using AI art. It hurts our feelings.
 
 ## Logo
 
