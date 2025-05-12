@@ -46,7 +46,7 @@ interface OSButtonProps extends Omit<React.ButtonHTMLAttributes<HTMLButtonElemen
     iconPosition?: 'left' | 'right'
     onClick?: (e: React.MouseEvent<HTMLButtonElement> | React.MouseEvent<HTMLAnchorElement>) => void
     state?: any
-    zoomHover?: string
+    zoomHover?: boolean | 'xs' | 'sm' | 'md' | 'lg'
 }
 
 export default function OSButton({
