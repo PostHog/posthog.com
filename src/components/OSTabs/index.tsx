@@ -30,6 +30,7 @@ export default function OSTabs({
                                 key={tab.value}
                                 value={tab.value}
                                 className="data-[state=active]:bg-white px-2 py-1 border border-transparent data-[state=active]:border-primary border-b-0 rounded-tr-md rounded-tl-md relative -bottom-px z-10 text-sm"
+                                className="data-[state=active]:bg-white px-2 py-1 border border-transparent data-[state=active]:border-primary border-b-0 rounded-tr-md rounded-tl-md relative -bottom-px z-10 text-sm select-none"
                             >
                                 {tab.label}
                             </Tabs.Trigger>
