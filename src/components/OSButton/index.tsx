@@ -2,6 +2,7 @@ import React from 'react'
 import { IconInfo } from '@posthog/icons'
 import Tooltip from 'components/Tooltip'
 import Link from 'components/Link'
+import ZoomHover from 'components/ZoomHover'
 // Basic usage
 // <OSButton>Click me</OSButton>
 
@@ -45,6 +46,7 @@ interface OSButtonProps extends Omit<React.ButtonHTMLAttributes<HTMLButtonElemen
     iconPosition?: 'left' | 'right'
     onClick?: (e: React.MouseEvent<HTMLButtonElement> | React.MouseEvent<HTMLAnchorElement>) => void
     state?: any
+    zoomHover?: string
 }
 
 export default function OSButton({
@@ -65,6 +67,7 @@ export default function OSButton({
     iconPosition = 'left',
     onClick,
     state = {},
+    zoomHover,
     ...props
 }: OSButtonProps) {
     const baseClasses =
@@ -153,10 +156,24 @@ export default function OSButton({
     }
 
     return asLink ? (
-        <Link to={to || ''} {...commonProps} {...(external ? { externalNoIcon: true } : {})}>
-            {buttonContent}
-        </Link>
+        zoomHover ? (
+            <ZoomHover size={zoomHover === true ? undefined : zoomHover}>
+                <Link to={to || ''} {...commonProps} {...(external ? { externalNoIcon: true } : {})}>
+                    {buttonContent}
+                </Link>
+            </ZoomHover>
+        ) : (
+            <Link to={to || ''} {...commonProps} {...(external ? { externalNoIcon: true } : {})}>
+                {buttonContent}
+            </Link>
+        )
     ) : (
-        <button {...commonProps}>{buttonContent}</button>
+        zoomHover ? (
+            <ZoomHover size={zoomHover === true ? undefined : zoomHover} width={width}>
+                <button {...commonProps}>{buttonContent}</button>
+            </ZoomHover>
+        ) : (
+            <button {...commonProps}>{buttonContent}</button>
+        )
     )
 }

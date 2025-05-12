@@ -228,6 +228,7 @@ export const CareersHero = () => {
                                         size="md"
                                         align="left"
                                         width="full"
+                                        zoomHover="md"
                                         active={selectedJob.fields.title === job.fields.title}
                                         className={` ${
                                             selectedJob.fields.title === job.fields.title
