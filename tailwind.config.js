@@ -330,5 +330,9 @@ module.exports = {
         require('@headlessui/tailwindcss'),
         require('@tailwindcss/container-queries'),
         require('tailwindcss-animated'),
+        function({ addVariant }) {
+            addVariant('skin-modern', 'body[data-skin="modern"] &')
+            addVariant('skin-classic', 'body[data-skin="classic"] &')
+        }
     ],
 }

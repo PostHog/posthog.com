@@ -26,6 +26,19 @@ const colorModeOptions: ToggleOption[] = [
     },
 ]
 
+const skinOptions: ToggleOption[] = [
+    {
+        label: 'Modern',
+        value: 'modern',
+        // icon: <IconLaptop className="size-5" />,
+    },
+    {
+        label: 'Classic',
+        value: 'classic',
+        // icon: <IconLaptop className="size-5" />,
+    },
+]
+
 const cursorOptions: ToggleOption[] = [
     {
         label: 'Default',
@@ -51,11 +64,20 @@ const cursorOptions: ToggleOption[] = [
 
 export default function DisplayOptions() {
     const [colorMode, setColorMode] = useState('system')
+    const [skinMode, setSkinMode] = useState('modern')
     const [cursor, setCursor] = useState('default')
 
     const handleColorModeChange = (value: string) => {
         window.__setPreferredTheme(value)
         setColorMode(value)
+    }
+
+    const handleSkinChange = (value: string) => {
+        localStorage.setItem('skin', value)
+        setSkinMode(value)
+        document.body.setAttribute('data-skin', value)
+        // Dispatch custom event for real-time updates
+        window.dispatchEvent(new CustomEvent('skinchange', { detail: value }))
     }
 
     const applyStyles = (content: string) => {
@@ -146,8 +168,10 @@ export default function DisplayOptions() {
     useEffect(() => {
         const colorMode = localStorage.getItem('theme') || 'system'
         const savedCursor = localStorage.getItem('cursor') || 'default'
+        const savedSkin = localStorage.getItem('skin') || 'modern'
         setColorMode(colorMode)
         setCursor(savedCursor)
+        setSkinMode(savedSkin)
         updateCursor(savedCursor)
     }, [])
 
@@ -162,6 +186,14 @@ export default function DisplayOptions() {
                             options={colorModeOptions}
                             onValueChange={handleColorModeChange}
                             value={colorMode}
+                        />
+                    </div>
+                    <div className="bg-primary grid grid-cols-2 gap-2">
+                        <ToggleGroup
+                            title="Theme"
+                            options={skinOptions}
+                            onValueChange={handleSkinChange}
+                            value={skinMode}
                         />
                     </div>
                     <div className="bg-primary grid grid-cols-2 gap-2 mt-2">

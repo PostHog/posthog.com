@@ -62,6 +62,12 @@ export const onRenderBody = function ({ setPreBodyComponents }) {
         } catch (err) {}
     }
     setTheme(preferredTheme === 'system' ? (darkQuery.matches ? 'dark' : 'light') : preferredTheme)
+
+    // Set initial skin value
+    try {
+        const savedSkin = localStorage.getItem('skin') || 'modern'
+        document.body.setAttribute('data-skin', savedSkin)
+    } catch (err) {}
 })()
       `,
             },
