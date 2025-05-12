@@ -17,7 +17,7 @@ const them = [
         title: 'Extract more info than a stalker',
         children: (
             <>
-                <div className="col-span-5 pl-1 md:pl-9 [&_p]:mb-2 max-w-2xl pb-10">
+                <div className="col-span-5 pl-1 @3xl:pl-9 [&_p]:mb-2 max-w-2xl pb-10">
                     <p>
                         You click ‘contact us’ and type in a bunch of personal information that has nothing to do with
                         your use of the product.
@@ -26,7 +26,7 @@ const them = [
                     <p>Your phone number is required, even though they’ll respond by email.</p>
                 </div>
 
-                <div className="col-span-3 rotate-2 -mt-6 mb-6 relative left-3 md:left-0">
+                <div className="col-span-3 rotate-2 -mt-6 mb-6 relative left-3 @3xl:left-0">
                     <div className="dark:hidden">
                         <CloudinaryImage
                             quality={100}
@@ -53,7 +53,7 @@ const them = [
         title: 'The discovery call of shame',
         children: (
             <>
-                <div className="col-span-5 pl-1 md:pl-9 [&_p]:mb-2 max-w-2xl pb-10">
+                <div className="col-span-5 pl-1 @3xl:pl-9 [&_p]:mb-2 max-w-2xl pb-10">
                     <p>Get booked with a junior rep who decides if you are a worthy human being.</p>
                     <p>They will ask you the same questions you already filled out on the form.</p>
                 </div>
@@ -68,7 +68,7 @@ const them = [
         title: 'Finally, a generic demo!',
         children: (
             <>
-                <div className="col-span-4 pl-1 md:pl-9 [&_p]:mb-2 max-w-2xl pb-4 md:pb-20">
+                <div className="col-span-4 pl-1 @3xl:pl-9 [&_p]:mb-2 max-w-2xl pb-4 @3xl:pb-20">
                     <p>
                         Deemed worthy? They will book you into a further call for a demo with a different person, five
                         minutes of which will cover what you are specifically interested in.
@@ -86,7 +86,7 @@ const them = [
         title: 'The follow up meeting of no hope',
         children: (
             <>
-                <div className="col-span-5 pl-1 md:pl-9 [&_p]:mb-2 max-w-2xl pb-4 md:pb-20">
+                <div className="col-span-5 pl-1 @3xl:pl-9 [&_p]:mb-2 max-w-2xl pb-4 @3xl:pb-20">
                     <p>It's now time to talk about your usage so they can put together a commercial proposal.</p>
                     <p>
                         A quote will be provided at a later date because they need to "circle back with the team" to
@@ -94,7 +94,7 @@ const them = [
                     </p>
                 </div>
 
-                <div className="col-span-3 -mt-6 md:-mt-12 pb-4">
+                <div className="col-span-3 -mt-6 @3xl:-mt-12 pb-4">
                     <CloudinaryImage quality={90} placeholder="blurred" src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/images/sales/no-hope.png" width={352} />
                 </div>
             </>
@@ -104,7 +104,7 @@ const them = [
         title: 'Sticker shock',
         children: (
             <>
-                <div className="col-span-3 pl-1 md:pl-9 [&_p]:mb-2 max-w-2xl pb-12 md:pb-20">
+                <div className="col-span-3 pl-1 @3xl:pl-9 [&_p]:mb-2 max-w-2xl pb-12 @3xl:pb-20">
                     <p>
                         There will be a long period of commercial wrangling because they massively inflated the price so
                         they can then discount it heavily.
@@ -122,7 +122,7 @@ const them = [
         title: '"We don\'t usually do this, but..."',
         children: (
             <>
-                <div className="col-span-4 pl-1 md:pl-9 [&_p]:mb-2 max-w-2xl pb-12 md:pb-20">
+                <div className="col-span-4 pl-1 @3xl:pl-9 [&_p]:mb-2 max-w-2xl pb-12 @3xl:pb-20">
                     <p>
                         Any legal questions require a ton of time seeking ‘approval’ and coming back with amazing
                         special exceptions they made that were ‘really painful’ when you know it’s all BS.
@@ -144,7 +144,7 @@ const them = [
         title: 'SaaS contract or War and Peace?',
         children: (
             <>
-                <div className="col-span-5 pl-1 md:pl-9 [&_p]:mb-2 max-w-2xl pb-8 md:pb-20">
+                <div className="col-span-5 pl-1 @3xl:pl-9 [&_p]:mb-2 max-w-2xl pb-8 @3xl:pb-20">
                     <p>
                         Eventually sign the contract - hopefully you saw the auto-renewal and mandatory price increases
                         in there! 'Professional services'? Yeah that's just a fancy word for onboarding, but they'll
@@ -167,7 +167,7 @@ const them = [
         title: 'The implementation phase of regret',
         children: (
             <>
-                <div className="col-span-4 pl-1 md:pl-9 [&_p]:mb-2 max-w-2xl pb-12 md:pb-20">
+                <div className="col-span-4 pl-1 @3xl:pl-9 [&_p]:mb-2 max-w-2xl pb-12 @3xl:pb-20">
                     <p>
                         Spend <strong>a few months (!!)</strong> on implementation with yet another person on their
                         team, because the person who demoed isn’t technical but has to be the person through whom all
@@ -175,7 +175,7 @@ const them = [
                     </p>
                 </div>
 
-                <div className="col-span-4 -mt-8 pb-8 -mx-2 md:mx-0">
+                <div className="col-span-4 -mt-8 pb-8 -mx-2 @3xl:mx-0">
                     <div className="dark:hidden">
                         <CloudinaryImage
                             quality={90}
@@ -200,20 +200,20 @@ const them = [
         title: '"Wait, who\'s my point of contact now??"',
         children: (
             <>
-                <div className="col-span-5 pl-1 md:pl-9 [&_p]:mb-2 max-w-2xl pb-4 md:pb-20">
+                <div className="col-span-5 pl-1 @3xl:pl-9 [&_p]:mb-2 max-w-2xl pb-4 @3xl:pb-20">
                     <p>
                         All the sales people who got you on board immediately disappear and you are passed onto yet
                         another team who ask you the same questions again...
                     </p>
                 </div>
 
-                <div className="col-span-3 -mt-4 md:-mt-8 md:pb-8 text-center">
+                <div className="col-span-3 -mt-4 @3xl:-mt-8 @3xl:pb-8 text-center">
                     <CloudinaryImage quality={90} placeholder="blurred" src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/images/sales/shocked-hog.png" width={200} />
                 </div>
             </>
         ),
         cta: (
-            <div className="flex flex-col md:flex-row gap-3 my-4">
+            <div className="flex flex-col @3xl:flex-row gap-3 my-4">
                 <CallToAction href="https://app.posthog.com/signup">Ew, take me to PostHog, please!</CallToAction>
                 <CallToAction href="/talk-to-a-human" type="outline">
                     Get a demo (but not like this one!)
@@ -229,7 +229,7 @@ const us = [
 
         children: (
             <>
-                <div className="col-span-5 pl-1 md:pl-9 [&_p]:mb-2 max-w-2xl pb-8 md:pb-20">
+                <div className="col-span-5 pl-1 @3xl:pl-9 [&_p]:mb-2 max-w-2xl pb-8 @3xl:pb-20">
                     <p className="leading-relaxed">
                         <em>“How much does it cost?”</em> <Link href="/pricing">It’s on our website.</Link>
                         <br />
@@ -268,7 +268,7 @@ const us = [
 
         children: (
             <>
-                <div className="col-span-5 pl-1 md:pl-9 [&_p]:mb-2 max-w-2xl md:pb-24">
+                <div className="col-span-5 pl-1 @3xl:pl-9 [&_p]:mb-2 max-w-2xl @3xl:pb-24">
                     <p>
                         Get booked on a demo call with a technical person who will spend 90% of the call in the PostHog
                         app, not chatting about our vision. They will use the info you’ve shared to customize the demo.
@@ -290,7 +290,7 @@ const us = [
         title: 'Zero to implementation in a week',
         children: (
             <>
-                <div className="col-span-4 pl-1 md:pl-9 [&_p]:mb-2 max-w-2xl pb-4 md:pb-20">
+                <div className="col-span-4 pl-1 @3xl:pl-9 [&_p]:mb-2 max-w-2xl pb-4 @3xl:pb-20">
                     <p>
                         After the call, the same person will quickly follow up with targeted, useful information about
                         your specific use case.
@@ -323,7 +323,7 @@ const us = [
 
         children: (
             <>
-                <div className="col-span-4 pl-1 md:pl-9 [&_p]:mb-2 max-w-2xl pb-4 md:pb-20">
+                <div className="col-span-4 pl-1 @3xl:pl-9 [&_p]:mb-2 max-w-2xl pb-4 @3xl:pb-20">
                     <p>
                         Want to negotiate a discount for longer commitment? Sure thing - take your pick{' '}
                         <Link href="/handbook/growth/sales/contracts">from our website</Link>! We believe this should be
@@ -335,7 +335,7 @@ const us = [
                     </p>
                 </div>
 
-                <div className="col-span-4 -mt-8 md:-mt-12 text-center">
+                <div className="col-span-4 -mt-8 @3xl:-mt-12 text-center">
                     <CloudinaryImage
                         quality={90}
                         placeholder="blurred"
@@ -350,7 +350,7 @@ const us = [
         title: 'Besties forever?',
         children: (
             <>
-                <div className="col-span-8 pl-1 md:pl-9 [&_p]:mb-2">
+                <div className="col-span-8 pl-1 @3xl:pl-9 [&_p]:mb-2">
                     <p>
                         Contract signed - now you get passed onto… wait is that still the same person who did the
                         initial demo and knows everything about me? And they will be my main point of contact for
@@ -358,14 +358,14 @@ const us = [
                     </p>
                     <p>We’re going to be best friends!</p>
 
-                    <div className="flex flex-col md:flex-row gap-3 my-4">
+                    <div className="flex flex-col @3xl:flex-row gap-3 my-4">
                         <CallToAction href="https://app.posthog.com/signup">Get started - free</CallToAction>
                         <CallToAction href="/demo" type="outline">
                             Get a demo (just like this one!)
                         </CallToAction>
                     </div>
 
-                    <div className="-mx-4 md:ml-[-3.25rem] md:-mr-4">
+                    <div className="-mx-4 @3xl:ml-[-3.25rem] @3xl:-mr-4">
                         <CloudinaryImage
                             quality={90}
                             placeholder="blurred"
@@ -413,7 +413,7 @@ const AccordionItem = ({
                         {number}
                     </span>
                     <span
-                        className={`transition-all leading-tight ${isOpen ? 'font-bold text-lg md:text-2xl' : 'font-semibold text-[17px]'
+                        className={`transition-all leading-tight ${isOpen ? 'font-bold text-lg @3xl:text-2xl' : 'font-semibold text-[17px]'
                             }`}
                     >
                         {title}
@@ -434,12 +434,12 @@ const AccordionItem = ({
                 className={isOpen ? '' : 'overflow-hidden'}
             >
                 <div className="px-4">
-                    <div className="flex flex-col md:grid grid-cols-8 gap-2 md:gap-8 justify-between relative">
+                    <div className="flex flex-col @3xl:grid grid-cols-8 gap-2 @3xl:gap-8 justify-between relative">
                         {children}
 
-                        <div className="pb-4 md:pb-0 md:absolute left-9 bottom-6">
+                        <div className="pb-4 @3xl:pb-0 @3xl:absolute left-9 bottom-6">
                             {hasNext ? (
-                                <CallToAction onClick={onNext} size="sm" type="secondary" className="w-full md:w-auto">
+                                <CallToAction onClick={onNext} size="sm" type="secondary" className="w-full @3xl:w-auto">
                                     <span className="mr-2 bg-accent dark:bg-accent-dark border border-light dark:border-dark px-1.5 rounded border-b-2 inline-flex text-sm font-medium font-code">
                                         N
                                     </span>
@@ -579,11 +579,11 @@ function Sales() {
                 description="We actually don't make you get on a call to find out our pricing."
                 image={`/images/og/sales.png`}
             />
-            <div className="w-screen overflow-x-hidden">
-                <div className="max-w-7xl mx-auto grid md:grid-cols-2 gap-4 md:gap-0 lg:gap-8 py-6 md:py-12">
-                    <div className="order-2 md:order-1 pl-8">
-                        <div className="text-3xl md:text-4xl font-bold mb-0 opacity-90 uppercase">Sales:</div>
-                        <h1 className="text-[2.25rem] md:text-5xl mb-2 text-red dark:text-yellow">
+            <div className="overflow-x-hidden">
+                <div className="grid @3xl:grid-cols-2 gap-4 @3xl:gap-0 lg:gap-8 py-6 @3xl:py-12">
+                    <div className="order-2 @3xl:order-1 pl-8">
+                        <div className="text-3xl @3xl:text-4xl font-bold mb-0 opacity-90 uppercase">Sales:</div>
+                        <h1 className="text-[2.25rem] @3xl:text-5xl mb-2 text-red dark:text-yellow">
                             [Everyone else] vs. PostHog
                         </h1>
 
@@ -605,14 +605,14 @@ function Sales() {
                             </Tooltip>
                         </p>
                     </div>
-                    <div className="relative order-1 md:order-2 pl-8 md:pl-0">
-                        <div className="md:absolute md:top-0 md:left-0 md:bottom-0">
+                    <div className="relative order-1 @3xl:order-2 pl-8 @3xl:pl-0">
+                        <div className="@3xl:absolute @3xl:top-0 @3xl:left-0 @3xl:bottom-0">
                             <div className="dark:hidden">
                                 <CloudinaryImage
                                     quality={100}
                                     placeholder="none"
                                     src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/images/sales/phone-hog-light.png"
-                                    className="h-48 xs:h-[17rem] md:h-72"
+                                    className="h-48 xs:h-[17rem] @3xl:h-72"
                                     loading="eager"
                                     objectPosition="left top"
                                     objectFit="cover"
@@ -623,7 +623,7 @@ function Sales() {
                                     quality={100}
                                     placeholder="none"
                                     src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/images/sales/phone-hog-dark.png"
-                                    className="h-48 xs:h-[17rem] md:h-72"
+                                    className="h-48 xs:h-[17rem] @3xl:h-72"
                                     loading="eager"
                                     objectPosition="left top"
                                     objectFit="cover"
@@ -634,7 +634,7 @@ function Sales() {
                     </div>
                 </div>
 
-                <div className="max-w-7xl mx-auto md:py-8 px-4 md:px-8">
+                <div className="@3xl:py-8">
                     <div className="flex justify-center">
                         <div className="inline-flex flex-col items-center mb-10 mx-auto">
                             <h2 className="mb-1 text-center relative">
@@ -670,15 +670,15 @@ function Sales() {
                 </div>
 
                 <div className="max-w-7xl mx-auto">
-                    <div className="p-4 md:p-8 mb-12 mx-4 md:mx-8 bg-accent dark:bg-accent-dark rounded-md border border-light dark:border-dark">
-                        <h3 className="mb-1 text-center md:text-left">Craving more unhinged rants like this?</h3>
-                        <div className="flex flex-col md:flex-row md:gap-2 md:items-baseline mb-4">
+                    <div className="p-4 @3xl:p-8 mb-12 mx-4 @3xl:mx-8 bg-accent dark:bg-accent-dark rounded-md border border-light dark:border-dark">
+                        <h3 className="mb-1 text-center @3xl:text-left">Craving more unhinged rants like this?</h3>
+                        <div className="flex flex-col @3xl:flex-row @3xl:gap-2 @3xl:items-baseline mb-4">
                             <CallToAction
                                 href="/newsletter"
                                 type="outline"
                                 size="sm"
                                 className="mt-4"
-                                width="[calc(100%+4px)] md:w-auto"
+                                width="[calc(100%+4px)] @3xl:w-auto"
                             >
                                 Check out our newsletter
                             </CallToAction>
@@ -688,13 +688,13 @@ function Sales() {
                                 type="outline"
                                 size="sm"
                                 className="mt-4"
-                                width="[calc(100%+4px)] full md:w-auto"
+                                width="[calc(100%+4px)] full @3xl:w-auto"
                             >
                                 Visit the blog
                             </CallToAction>
                         </div>
 
-                        <p className="mb-0 text-sm text-primary/75 dark:text-primary-dark/75 text-balance text-center md:text-left">
+                        <p className="mb-0 text-sm text-primary/75 dark:text-primary-dark/75 text-balance text-center @3xl:text-left">
                             <em>
                                 Brought to you by the team who thought making{' '}
                                 <Link href="/terms">terms and conditions fun</Link> was a good idea
