@@ -2,6 +2,7 @@ import * as React from 'react'
 import { Menubar as RadixMenubar } from 'radix-ui'
 import { IconChevronRight } from '@posthog/icons'
 import Link from 'components/Link'
+import ScrollArea from './ScrollArea'
 
 // Types
 export type MenuItemType = {
@@ -69,9 +70,11 @@ const MenuItem: React.FC<{ item: MenuItemType; forceIconIndent?: boolean }> = ({
                     </RadixMenubar.SubTrigger>
                     <RadixMenubar.Portal>
                         <RadixMenubar.SubContent className={ContentClasses} alignOffset={-5} data-scheme="primary">
-                            {item.items.map((subItem, index) => (
-                                <MenuItem key={index} item={subItem} forceIconIndent={anyChildHasIcon} />
-                            ))}
+                            <ScrollArea className="max-h-screen !overflow-y-auto">
+                                {item.items.map((subItem, index) => (
+                                    <MenuItem key={index} item={subItem} forceIconIndent={anyChildHasIcon} />
+                                ))}
+                            </ScrollArea>
                         </RadixMenubar.SubContent>
                     </RadixMenubar.Portal>
                 </RadixMenubar.Sub>
