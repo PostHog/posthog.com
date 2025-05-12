@@ -86,7 +86,30 @@ const fixedAppSizes = {
             height: 682,
         },
     },
+    'ask-max': {
+        max: {
+            width: 400,
+            height: 600,
+        },
+        min: {
+            width: 400,
+            height: 600,
+        },
+    },
 } as const
+
+const getPositionDefaults = (item: AppWindowType, size: { width: number; height: number }) => {
+    if (item.key.startsWith('ask-max')) {
+        return {
+            x: window.innerWidth - size.width - 20,
+            y: window.innerHeight - size.height - 20,
+        }
+    }
+    return {
+        x: window.innerWidth / 2 - size.width / 2,
+        y: window.innerHeight / 2 - size.height / 2,
+    }
+}
 
 const snapThreshold = -50
 
@@ -106,14 +129,17 @@ export default function AppWindow({ item, constraintsRef }: { item: AppWindowTyp
     const controls = useDragControls()
     const initialSizeKey = item.key as keyof typeof fixedAppSizes
     const hasFixedSize = Object.prototype.hasOwnProperty.call(fixedAppSizes, initialSizeKey)
-    const [sizeDefaults, setSizeDefaults] = useState(hasFixedSize ? fixedAppSizes[initialSizeKey] : getSizeDefaults())
+    const [sizeDefaults, setSizeDefaults] = useState(
+        hasFixedSize
+            ? fixedAppSizes[initialSizeKey]
+            : item.key.startsWith('ask-max')
+            ? fixedAppSizes['ask-max']
+            : getSizeDefaults()
+    )
     const [previousSize, setPreviousSize] = useState({ width: sizeDefaults.max.width, height: sizeDefaults.max.height })
     const [size, setSize] = useState({ width: sizeDefaults.max.width, height: sizeDefaults.max.height })
     const [previousPosition, setPreviousPosition] = useState({ x: 0, y: 0 })
-    const [position, setPosition] = useState(() => ({
-        x: window.innerWidth / 2 - size.width / 2,
-        y: window.innerHeight / 2 - size.height / 2,
-    }))
+    const [position, setPosition] = useState(() => getPositionDefaults(item, size))
     const [snapIndicator, setSnapIndicator] = useState<'left' | 'right' | null>(null)
     const [windowOptionsTooltipVisible, setWindowOptionsTooltipVisible] = useState(false)
     const [menu, setMenu] = useState<IMenu[]>([])
