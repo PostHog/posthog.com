@@ -4,32 +4,44 @@ import { useLayoutData } from 'components/Layout/hooks'
 import menu from '../../../navs'
 import { useWindow } from '../../../context/Window'
 
+interface MenuItem {
+    name: string
+    url?: string
+    icon?: React.ReactNode
+    color?: string
+    children?: MenuItem[]
+}
+
+type Menu = MenuItem[]
+
 interface ReaderViewContextType {
     isNavVisible: boolean
     isTocVisible: boolean
     fullWidthContent: boolean
-    parent: any
-    internalMenu: any[]
-    activeInternalMenu: any
+    parent: MenuItem
+    internalMenu: MenuItem[]
+    activeInternalMenu: MenuItem | undefined
     lineHeightMultiplier: number
     backgroundImage: string | null
     toggleNav: () => void
     toggleToc: () => void
     handleLineHeightChange: (value: number) => void
-    setActiveInternalMenu: (menu: any) => void
+    setActiveInternalMenu: (menu: MenuItem) => void
     setBackgroundImage: (image: string | null) => void
 }
 
-const recursiveSearch = (array: any[], value: string) => {
-    for (let i = 0; i < array?.length || 0; i++) {
+const recursiveSearch = (array: MenuItem[] | undefined, value: string): boolean => {
+    if (!array) return false
+    
+    for (let i = 0; i < array.length; i++) {
         const element = array[i]
 
-        if (typeof element === 'string' && element.split('?')[0] === value) {
+        if (element.url?.split('?')[0] === value) {
             return true
         }
 
-        if (typeof element === 'object' && element !== null) {
-            const found = recursiveSearch(Object.values(element), value)
+        if (element.children) {
+            const found = recursiveSearch(element.children, value)
             if (found) {
                 return true
             }
@@ -122,15 +134,15 @@ export function ReaderViewProvider({ children }: { children: React.ReactNode }) 
         }
     }, [])
 
-    const parent = menu.find(({ children, url }) => {
+    const parent = (menu as Menu).find(({ children, url }) => {
         const currentURL = pathname
-        return currentURL === url.split('?')[0] || recursiveSearch(children, currentURL)
-    })
+        return currentURL === url?.split('?')[0] || recursiveSearch(children, currentURL)
+    }) || { name: 'Default', children: [] }
 
-    const internalMenu = parent?.children
+    const internalMenu = parent?.children || []
 
-    const [activeInternalMenu, setActiveInternalMenu] = useState(
-        internalMenu?.find((menuItem) => {
+    const [activeInternalMenu, setActiveInternalMenu] = useState<MenuItem | undefined>(
+        internalMenu?.find((menuItem: MenuItem) => {
             const currentURL = pathname
             return currentURL === menuItem.url?.split('?')[0] || recursiveSearch(menuItem.children, currentURL)
         })
