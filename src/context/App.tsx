@@ -25,6 +25,7 @@ interface AppContextType {
     minimizeWindow: (appWindow: AppWindow) => void
     taskbarHeight: number
     addWindow: (element: WindowElement) => void
+    updateWindowRef: (appWindow: AppWindow, ref: React.RefObject<HTMLDivElement>) => void
 }
 
 interface AppProviderProps {
@@ -55,6 +56,7 @@ export const Context = createContext<AppContextType>({
     minimizeWindow: () => {},
     taskbarHeight: 0,
     addWindow: () => {},
+    updateWindowRef: () => {},
 })
 
 export const Provider = ({ children, element, location }: AppProviderProps) => {
@@ -143,6 +145,10 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
         updatePages(element)
     }
 
+    const updateWindowRef = (appWindow: AppWindow, ref: React.RefObject<HTMLDivElement>) => {
+        setWindows((windows) => windows.map((w) => (w === appWindow ? { ...appWindow, ref } : w)))
+    }
+
     useEffect(() => {
         updatePages(element)
     }, [element])
@@ -171,6 +177,7 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
                 minimizeWindow,
                 taskbarHeight,
                 addWindow,
+                updateWindowRef,
             }}
         >
             {children}

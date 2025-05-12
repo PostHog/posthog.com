@@ -16,6 +16,7 @@ export interface AppWindow {
     path: string
     fromHistory?: boolean
     props: any
+    ref?: React.RefObject<HTMLDivElement>
 }
 
 interface WindowProviderProps {

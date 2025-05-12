@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useMemo } from 'react'
+import React, { useEffect, useState, useMemo, useRef } from 'react'
 import { AnimatePresence, motion, useDragControls } from 'framer-motion'
 import {
     IconChevronDown,
@@ -98,13 +98,32 @@ const fixedAppSizes = {
     },
 } as const
 
-const getPositionDefaults = (item: AppWindowType, size: { width: number; height: number }) => {
+const getPositionDefaults = (
+    item: AppWindowType,
+    size: { width: number; height: number },
+    windows: AppWindowType[]
+) => {
     if (item.key.startsWith('ask-max')) {
         return {
             x: window.innerWidth - size.width - 20,
             y: window.innerHeight - size.height - 20,
         }
     }
+
+    const sortedWindows = [...windows].sort((a, b) => b.zIndex - a.zIndex)
+    const previousWindow = sortedWindows[1]
+
+    if (previousWindow) {
+        const ref = previousWindow.ref?.current
+        if (ref) {
+            const rect = ref.getBoundingClientRect()
+            return {
+                x: rect.left + 20,
+                y: rect.top + 20,
+            }
+        }
+    }
+
     return {
         x: window.innerWidth / 2 - size.width / 2,
         y: window.innerHeight / 2 - size.height / 2,
@@ -125,7 +144,16 @@ const Router = (props) => {
 }
 
 export default function AppWindow({ item, constraintsRef }: { item: AppWindowType; constraintsRef: any }) {
-    const { minimizeWindow, bringToFront, closeWindow, focusedWindow, taskbarHeight, addWindow, windows } = useApp()
+    const {
+        minimizeWindow,
+        bringToFront,
+        closeWindow,
+        focusedWindow,
+        taskbarHeight,
+        addWindow,
+        windows,
+        updateWindowRef,
+    } = useApp()
     const controls = useDragControls()
     const initialSizeKey = item.key as keyof typeof fixedAppSizes
     const hasFixedSize = Object.prototype.hasOwnProperty.call(fixedAppSizes, initialSizeKey)
@@ -139,12 +167,14 @@ export default function AppWindow({ item, constraintsRef }: { item: AppWindowTyp
     const [previousSize, setPreviousSize] = useState({ width: sizeDefaults.max.width, height: sizeDefaults.max.height })
     const [size, setSize] = useState({ width: sizeDefaults.max.width, height: sizeDefaults.max.height })
     const [previousPosition, setPreviousPosition] = useState({ x: 0, y: 0 })
-    const [position, setPosition] = useState(() => getPositionDefaults(item, size))
+    const [position, setPosition] = useState(() => getPositionDefaults(item, size, windows))
     const [snapIndicator, setSnapIndicator] = useState<'left' | 'right' | null>(null)
     const [windowOptionsTooltipVisible, setWindowOptionsTooltipVisible] = useState(false)
     const [menu, setMenu] = useState<IMenu[]>([])
     const [history, setHistory] = useState<string[]>([])
     const [activeHistoryIndex, setActiveHistoryIndex] = useState(0)
+    const windowRef = useRef<HTMLDivElement>(null)
+
     useEffect(() => {
         const handleResize = () => {
             setSizeDefaults(getSizeDefaults())
@@ -153,6 +183,13 @@ export default function AppWindow({ item, constraintsRef }: { item: AppWindowTyp
         window.addEventListener('resize', handleResize)
         return () => window.removeEventListener('resize', handleResize)
     }, [])
+
+    useEffect(() => {
+        if (windowRef.current) {
+            updateWindowRef(item, windowRef)
+            setPosition(() => getPositionDefaults(item, size, windows))
+        }
+    }, [windowRef.current])
 
     const handleDoubleClick = () => {
         setSize((prev) => (prev.width === sizeDefaults.max.width ? sizeDefaults.min : sizeDefaults.max))
@@ -315,6 +352,7 @@ export default function AppWindow({ item, constraintsRef }: { item: AppWindowTyp
                             />
                         )}
                         <motion.div
+                            ref={windowRef}
                             className={`@container absolute flex flex-col border rounded overflow-hidden !select-auto  ${
                                 focusedWindow === item
                                     ? 'shadow-2xl border-light-7 dark:border-dark-7'
