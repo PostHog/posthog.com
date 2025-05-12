@@ -1,9 +1,9 @@
 import React, { useRef } from 'react'
-import { IconGraph, IconPieChart, IconDocument, IconQuestion, IconMap } from '@posthog/icons'
+import { IconGraph, IconPieChart, IconDocument, IconQuestion, IconMap, IconPiggyBank } from '@posthog/icons'
 import Link from 'components/Link'
 import { useApp } from '../../context/App'
 import useProduct from 'hooks/useProduct'
-import { IconDice, IconDemoThumb } from 'components/OSIcons/Icons'
+import { IconDice, IconDemoThumb, IconMessages } from 'components/OSIcons/Icons'
 
 interface AppItem {
     label: string
@@ -23,14 +23,20 @@ interface Product {
 
 const apps: AppItem[] = [
     {
+        label: 'Pricing',
+        Icon: IconPiggyBank,
+        color: 'green',
+        url: '/pricing',
+    },
+    {
         label: 'notable customers.mdx',
         Icon: IconDocument,
         color: 'salmon',
         url: '/customers',
     },
     {
-        label: 'Questions?',
-        Icon: IconQuestion,
+        label: 'Forums',
+        Icon: IconMessages,
         color: 'blue',
         url: '/questions',
     },
@@ -43,7 +49,7 @@ const apps: AppItem[] = [
     {
         label: 'Roadmap',
         Icon: IconMap,
-        color: 'green',
+        color: 'purple',
         url: '/roadmap',
     },
     {

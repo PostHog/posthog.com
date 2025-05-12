@@ -184,12 +184,18 @@ const getDocsMenuItems = () => {
     items = items.filter((item) => {
         // Remove if submenu with label 'Docs'
         if (item.type === 'submenu' && item.label === 'Docs') return false
-        // Remove if section divider with label 'Docs' (no type, just label)
-        if (!item.type && item.label === 'Docs') return false
         return true
     })
 
     return items
+}
+
+const mergedDocsMenu = () => {
+    return [
+        ...DocsItemsStart,
+        ...getDocsMenuItems(),
+        ...DocsItemsEnd,
+    ]
 }
 
 // Process handbookSidebar into menu item structure
@@ -310,7 +316,32 @@ export function useMenuData(): MenuType[] {
         },
         {
             trigger: 'Docs',
-            items: getDocsMenuItems(),
+            items: mergedDocsMenu(),
+        },
+        {
+            trigger: 'Content',
+            items: [
+                {
+                    type: 'item',
+                    label: 'Newsletter',
+                    link: '/newsletter',
+                },
+                {
+                    type: 'item',
+                    label: 'Product for engineers',
+                    link: '/product-engineers',
+                },
+                {
+                    type: 'item',
+                    label: 'Founders hub',
+                    link: '/founders',
+                },
+                {
+                    type: 'item',
+                    label: 'Blog',
+                    link: '/blog',
+                },
+            ],
         },
         {
             trigger: 'Company',
@@ -374,6 +405,12 @@ export function useMenuData(): MenuType[] {
                             link: 'https://www.youtube.com/@posthog',
                             external: true,
                         },
+                        {
+                            type: 'item',
+                            label: 'GitHub',
+                            link: 'https://github.com/posthog',
+                            external: true,
+                        },
                     ],
                 }
             ],
@@ -387,20 +424,81 @@ export function useMenuData(): MenuType[] {
             items: [
                 {
                     type: 'item',
-                    label: 'New Tab',
-                    shortcut: '⌘ T',
+                    label: 'Merch store',
+                    link: '/merch'
                 },
                 {
                     type: 'item',
-                    label: 'New Window',
-                    shortcut: '⌘ N',
+                    label: 'Cool tech jobs',
+                    link: '/cool-tech-jobs',
+                },
+                {
+                    type: 'submenu',
+                    label: 'Sexy legal stuff',
+                    items: [
+                        {
+                            type: 'item',
+                            label: 'Terms',
+                            link: '/terms',
+                        },
+                        {
+                            type: 'item',
+                            label: 'Privacy',
+                            link: '/privacy',
+                        },
+                        {
+                            type: 'item',
+                            label: 'DPA generator',
+                            link: '/dpa',
+                        },
+                        {
+                            type: 'item',
+                            label: 'SOC ✌️',
+                            link: '/handbook/company/security#soc-2',
+                        },
+                        {
+                            type: 'item',
+                            label: 'HIPAA',
+                            link: '/docs/privacy/hipaa-compliance',
+                        },
+                    ],
+                },
+                {
+                    type: 'separator',
                 },
                 {
                     type: 'item',
-                    label: 'New Incognito Window',
-                    disabled: true,
+                    label: 'System status',
+                    link: 'https://status.posthog.com',
+                    external: true,
                 },
             ],
         }
     ]
 }
+
+export const DocsItemsStart = [
+    {
+        type: 'item' as const,
+        label: 'Overview',
+        link: '/docs',
+    },
+    {
+        type: 'separator' as const,
+    },
+]
+
+
+export const DocsItemsEnd = [
+    { type: 'separator' as const },
+    {
+        type: 'item' as const,
+        label: 'Tutorials',
+        link: '/tutorials',
+    },
+    {
+        type: 'item' as const,
+        label: 'Templates',
+        link: '/templates',
+    },
+]

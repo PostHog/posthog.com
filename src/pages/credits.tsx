@@ -19,7 +19,7 @@ const CreditsPage = () => {
             </ul>
             <p>As website creators, we can organize the content as best we can, but we’ll never overcome the natural human behavior of wanting to explore on our own.</p>
             <p>So instead of fighting this, we built PostHog.com to act more like an operating system where you can multi-task and open multiple pages simultaneously. And since we all know how to use an OS, there's not much of a learning curve.</p>
-            <p>This also lends toward breaking out of the mold of whitespace and simplicity in exchange for power and information density – something important to our audience.</p>
+            <p>This also lends toward breaking out of the mold of whitespace and simplicity in exchange for information density and the ability to access everything with less effort.</p>
             <p>So welcome to the new PostHog.com. Be curious, click on things, and discover all the easter eggs that we hope will spark joy in your experience.</p>
 
             <p>

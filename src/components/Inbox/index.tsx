@@ -153,7 +153,7 @@ export default function Inbox(props) {
                                                     align="left"
                                                     width="full"
                                                     key={question.id}
-                                                    className={`!text-inherit ${active ? 'bg-accent' : ''}`}
+                                                    className={`!text-inherit font-normal ${active ? 'bg-accent' : ''}`}
                                                     onClick={() => {
                                                         if (!containerRef.current) return
                                                         if (bottomHeight <= 57) {
@@ -164,7 +164,7 @@ export default function Inbox(props) {
                                                         }
                                                     }}
                                                 >
-                                                    <div className="flex-1">{subject}</div>
+                                                    <div className="flex-1 font-medium">{subject}</div>
                                                     <div className="w-24 text-center">{numReplies}</div>
                                                     <div className="w-36 text-center">{dayjs(activeAt).fromNow()}</div>
                                                     <div className="w-32 text-center">

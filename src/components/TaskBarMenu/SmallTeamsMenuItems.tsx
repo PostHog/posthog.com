@@ -18,6 +18,9 @@ export function useSmallTeamsMenuItems() {
         }
     `)
 
+    // Sort teams alphabetically by name
+    const sortedTeams = [...allTeams.nodes].sort((a, b) => a.name.localeCompare(b.name))
+
     return [
         {
             type: "item" as const,
@@ -25,7 +28,7 @@ export function useSmallTeamsMenuItems() {
             link: "/teams",
         },
         { type: "separator" as const },
-        ...allTeams.nodes.map(({ id, name, miniCrest }: { id: string; name: string; miniCrest: any }) => {
+        ...sortedTeams.map(({ id, name, miniCrest }: { id: string; name: string; miniCrest: any }) => {
             const image = getImage(miniCrest)
             return {
                 type: "item" as const,
