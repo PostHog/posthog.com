@@ -407,7 +407,7 @@ posthog.init('<ph_project_api_key>', {
 
         function redactObject(objectToRedact: Record<string, any>): Record<string, any> {
             return Object.entries(objectToRedact).reduce((acc, [key, value]) => {
-                if (key !== '_url' && (key.includes('url') || key === 'u') && typeof value === 'string') {
+                if ((key.includes('url') || key.includes('href')) && typeof value === 'string') {
                     acc[key] = redactUrl(value)
                 } else if (typeof value === 'object' && value) {
                     acc[key] = redactObject(value)
