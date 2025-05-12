@@ -15,7 +15,7 @@ import { useApp } from '../../context/App'
 import { useWindow } from '../../context/Window'
 import CodeBlock from './CodeBlock'
 import ContactForm from './ContactForm'
-
+import { useLocation } from '@reach/router'
 const MainContent = ({ selectedOption, setSelectedOption, options }) => (
     <div className="flex flex-1 w-full border-y border-primary">
         <div data-scheme="primary" className="w-[40%] flex items-center justify-center p-2 border-r border-primary">
@@ -49,7 +49,8 @@ const MainContent = ({ selectedOption, setSelectedOption, options }) => (
                     or learn{' '}
                     <Link to="/credits" className="font-semibold text-red" state={{ newWindow: true }}>
                         why our website looks like this
-                    </Link>.
+                    </Link>
+                    .
                 </div>
             </div>
         </div>
@@ -82,11 +83,7 @@ const AIInstallContent = () => (
 
 const SignupContent = () => (
     <div className="flex flex-1 w-full h-full border-y border-primary">
-        <iframe 
-            src="http://app.dev.posthog.dev/signup"
-            className="w-full h-full border-0"
-            title="PostHog signup"
-        />
+        <iframe src="http://app.dev.posthog.dev/signup" className="w-full h-full border-0" title="PostHog signup" />
     </div>
 )
 
@@ -102,34 +99,40 @@ const TalkToHumanContact = ({ onClose, onFormSubmit }) => {
         <div data-scheme="secondary" className="flex flex-1 w-full overflow-hidden border-y border-primary bg-primary">
             <div data-scheme="primary" className="w-[40%] flex items-center justify-center p-2 border-r border-primary">
                 <div className="w-full bg-accent flex items-end justify-center h-full px-4 text-sm relative border border-primary overflow-hidden">
-                    <img src="https://res.cloudinary.com/dmukukwp6/image/upload/quick_calls_5c19368fa0.png" className="w-[415px] max-w-full" />
-
+                    <img
+                        src="https://res.cloudinary.com/dmukukwp6/image/upload/quick_calls_5c19368fa0.png"
+                        className="w-[415px] max-w-full"
+                    />
                 </div>
             </div>
             <ScrollArea className="h-full w-[60%] ">
                 <div className="flex flex-col justify-center px-8 py-4 h-full">
-                        <h2 className="text-xl font-bold mb-1">Let's chat</h2>
+                    <h2 className="text-xl font-bold mb-1">Let's chat</h2>
 
-                        <div className="border border-primary p-2 text-sm mb-4">
-                            Want to watch a <Link to="/demo" className="font-semibold text-red" state={{ newWindow: true }}>demo</Link> first?
-                        </div>
-                        <div className="w-full max-w-2xl">
-                            <ContactForm
-                                onSubmit={handleFormSubmit}
-                                hideSubmitButton={true}
-                                buttonText="Submit"
-                                successMessage="Message received. We'll be in touch!"
-                            />
-                            {formSubmitted && (
-                                <div className="mt-4 flex justify-center">
-                                    <CallToAction type="primary" size="sm" onClick={onClose}>
-                                        Close
-                                    </CallToAction>
-                                </div>
-                            )}
-                        </div>
+                    <div className="border border-primary p-2 text-sm mb-4">
+                        Want to watch a{' '}
+                        <Link to="/demo" className="font-semibold text-red" state={{ newWindow: true }}>
+                            demo
+                        </Link>{' '}
+                        first?
+                    </div>
+                    <div className="w-full max-w-2xl">
+                        <ContactForm
+                            onSubmit={handleFormSubmit}
+                            hideSubmitButton={true}
+                            buttonText="Submit"
+                            successMessage="Message received. We'll be in touch!"
+                        />
+                        {formSubmitted && (
+                            <div className="mt-4 flex justify-center">
+                                <CallToAction type="primary" size="sm" onClick={onClose}>
+                                    Close
+                                </CallToAction>
+                            </div>
+                        )}
+                    </div>
                 </div>
-            </ScrollArea>   
+            </ScrollArea>
         </div>
     )
 }
@@ -142,6 +145,7 @@ export default function Home() {
     const [currentFlow, setCurrentFlow] = useState('main')
     const [currentSlide, setCurrentSlide] = useState(0)
     const [contactFormSubmitted, setContactFormSubmitted] = useState(false)
+    const { search } = useLocation()
 
     const handleClose = () => {
         closeWindow(appWindow)
@@ -240,7 +244,8 @@ export default function Home() {
     const currentFlowConfig = flows[currentFlow]
 
     // For talk-to-a-human flow, get the current slide
-    const currentSlideConfig = currentFlowConfig.slides && typeof currentSlide === 'number' ? currentFlowConfig.slides[currentSlide] : null
+    const currentSlideConfig =
+        currentFlowConfig.slides && typeof currentSlide === 'number' ? currentFlowConfig.slides[currentSlide] : null
 
     // Get the component to render
     const ContentComponent = currentSlideConfig ? currentSlideConfig.component : currentFlowConfig.component
@@ -287,6 +292,14 @@ export default function Home() {
         }
         return null
     }
+
+    useEffect(() => {
+        const params = new URLSearchParams(search)
+        const flow = params.get('flow')
+        if (flow) {
+            setCurrentFlow(flow)
+        }
+    }, [search])
 
     return (
         <>
