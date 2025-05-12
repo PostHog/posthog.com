@@ -8,10 +8,11 @@ import { AboutTransparency } from 'components/About/AboutTransparency'
 import { AboutTeam } from 'components/About/AboutTeam'
 import { AboutInvestors } from 'components/About/AboutInvestors'
 import { AboutBlog } from 'components/About/AboutBlog'
+import Explorer from 'components/Explorer'
 
 const AboutPage = () => {
     return (
-        <Layout>
+        <Explorer template="generic" slug="about" title="About PostHog">
             <SEO
                 title="About PostHog"
                 description="PostHog is building the world's first open source Product OS."
@@ -25,7 +26,7 @@ const AboutPage = () => {
             <AboutTeam />
             <AboutInvestors />
             <AboutBlog />
-        </Layout>
+        </Explorer>
     )
 }
 
