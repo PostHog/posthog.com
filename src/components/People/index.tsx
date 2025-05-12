@@ -15,6 +15,7 @@ import ReactMarkdown from 'react-markdown'
 import rehypeRaw from 'rehype-raw'
 import SideModal from 'components/Modal/SideModal'
 import Profile from 'components/Team/Profile'
+import ScrollArea from 'components/RadixUI/ScrollArea'
 
 export const TeamMember = (props) => {
     const { avatar, lastName, firstName, companyRole, country, squeakId, location, biography, setActiveProfile } = props
@@ -113,12 +114,13 @@ export default function People() {
     ]
 
     return (
-        <Layout>
+        <div data-scheme="primary" className="bg-primary border-t border-primary h-full">
             <SEO title="Team - PostHog" />
             <SideModal open={!!activeProfile} setOpen={setActiveProfile}>
                 <Profile profile={{ ...activeProfile }} />
             </SideModal>
-            <div className="flex flex-col xl:flex-row gap-8 pt-10 md:pb-3 px-4 md:px-8 2xl:px-4 3xl:p-0 max-w-screen-2xl mx-auto">
+            <ScrollArea className="h-full">
+            <div className="flex flex-col xl:flex-row gap-8 p-4">
                 <div className="flex-1">
                     <h2 className="text-4xl">People</h2>
 
@@ -181,7 +183,8 @@ export default function People() {
                     return <TeamMember key={index} {...teamMember} setActiveProfile={setActiveProfile} />
                 })}
             </ul>
-        </Layout>
+            </ScrollArea>
+        </div>
     )
 }
 
