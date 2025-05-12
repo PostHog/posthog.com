@@ -4,6 +4,7 @@ import Link from 'components/Link'
 import { useApp } from '../../context/App'
 import useProduct from 'hooks/useProduct'
 import { IconDice, IconDemoThumb, IconMessages } from 'components/OSIcons/Icons'
+import ZoomHover from 'components/ZoomHover'
 
 interface AppItem {
     label: string
@@ -35,12 +36,6 @@ const apps: AppItem[] = [
         url: '/customers',
     },
     {
-        label: 'Forums',
-        Icon: IconMessages,
-        color: 'blue',
-        url: '/questions',
-    },
-    {
         label: 'Why PostHog?',
         Icon: IconQuestion,
         color: 'orange',
@@ -60,6 +55,12 @@ const apps: AppItem[] = [
         className: '!size-14 -mt-4 -mb-3',
     },
     {
+        label: 'Forums',
+        Icon: IconMessages,
+        color: 'blue',
+        url: '/questions',
+    },
+    {
         label: 'Games',
         Icon: IconDice,
         color: 'green',
@@ -74,10 +75,10 @@ const AppLink = ({ Icon, type, color, label, url, className }: AppItem) => {
             <Link
                 to={url}
                 state={{ newWindow: true }}
-                className="flex flex-col justify-center items-center space-y-1 w-28 text-center select-none"
+                className="group inline-flex flex-col justify-center items-center space-y-1 w-auto max-w-28 text-center select-none"
             >
                 <Icon className={`size-7 text-${color} ${className}`} />
-                <p className="text-sm font-medium">{label}</p>
+                <p className="text-sm font-medium leading-tight"><span className="bg-[rgba(238,239,233,0.75)] group-hover:bg-[rgba(238,239,233,1)] rounded-[2px] px-0.5">{label}</span></p>
             </Link>
         </span>
     )
@@ -105,21 +106,25 @@ export default function Desktop() {
             >
                 <ul className="p-0 m-0 list-none flex flex-col flex-wrap h-full content-start gap-x-8 gap-y-4">
                     {products?.map((product, index) => (
-                        <li key={product.name + index} className="w-[110px]">
-                            <AppLink
-                                label={product.name}
-                                url={product.slug}
-                                type="link"
-                                Icon={product.Icon}
-                                color={product.color}
-                            />
+                        <li key={product.name + index} className="w-[110px] flex justify-center">
+                            <ZoomHover>
+                                <AppLink
+                                    label={product.name}
+                                    url={product.slug}
+                                    type="link"
+                                    Icon={product.Icon}
+                                    color={product.color}
+                                />
+                            </ZoomHover>
                         </li>
                     ))}
                 </ul>
                 <ul className="p-0 m-0 list-none flex flex-col flex-wrap h-full content-start gap-x-8 gap-y-4">
                     {apps.map((app, index) => (
-                        <li key={app.label + index} className="w-[110px]">
-                            <AppLink {...app} />
+                        <li key={app.label + index} className="w-[110px] flex justify-center">
+                            <ZoomHover>
+                                <AppLink {...app} />
+                            </ZoomHover>
                         </li>
                     ))}
                 </ul>
