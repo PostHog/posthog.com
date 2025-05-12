@@ -10,6 +10,7 @@ import { IconPineapple } from '@posthog/icons'
 import { StickerPineapple, StickerPineappleNo, StickerPineappleYes } from 'components/Stickers/Index'
 import TeamPatch from 'components/TeamPatch'
 import { slugifyTeamName } from 'lib/utils'
+import OSButton from 'components/OSButton'
 
 const query = graphql`
     query CareersHero {
@@ -193,7 +194,7 @@ export const CareersHero = () => {
 
     return (
         <>
-            <h1 className="text-2xl lg:text-3xl font-bold mb-2 px-2">Who's hiring?</h1>
+            <h1 className="text-2xl lg:text-3xl font-bold mb-2">Who's hiring?</h1>
             <p className="mb-4 text-base">
                 Our small teams are looking to add{' '}
                 <strong className="whitespace-nowrap">{jobs.length} team members</strong>.
@@ -222,23 +223,29 @@ export const CareersHero = () => {
                         {jobs.map((job) => {
                             return (
                                 <li key={job.fields.title} className="">
-                                    <button
-                                        className={`w-full flex flex-col text-left px-2 py-1 rounded border border-b-3 ${
+                                    <OSButton
+                                        variant="ghost"
+                                        size="md"
+                                        align="left"
+                                        width="full"
+                                        active={selectedJob.fields.title === job.fields.title}
+                                        className={` ${
                                             selectedJob.fields.title === job.fields.title
-                                                ? 'border-light dark:border-dark bg-white dark:bg-accent-dark'
-                                                : 'hover:bg-light/50 hover:dark:bg-dark/50 border-transparent md:hover:border-light dark:md:hover:border-dark hover:translate-y-[-1px] active:translate-y-[1px] active:transition-all'
+                                                ? ''
+                                                : ''
                                         }`}
                                         onClick={() => setSelectedJob(job)}
                                     >
+                                        <div className="flex flex-col w-full items-start">
                                         <span
                                             className={`font-semibold text-[15px] ${
-                                                selectedJob.fields.title === job.fields.title ? 'font-bold' : ''
+                                                selectedJob.fields.title === job.fields.title ? '' : ''
                                             }`}
                                         >
                                             {job.fields.title}
                                         </span>
                                         {!hideTeamsByJob.includes(job.fields?.title) && (
-                                            <span className="text-[13px] text-black/50 dark:text-white/50">
+                                            <span className="text-[13px] text-secondary !font-normal">
                                                 {(() => {
                                                     const teamsField = job.parent.customFields.find(
                                                         (field: { title: string }) => field.title === 'Teams'
@@ -250,7 +257,8 @@ export const CareersHero = () => {
                                                 })()}
                                             </span>
                                         )}
-                                    </button>
+                                        </div>
+                                    </OSButton>
                                 </li>
                             )
                         })}
