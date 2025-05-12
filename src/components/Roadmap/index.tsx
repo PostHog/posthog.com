@@ -703,6 +703,16 @@ export default function Roadmap({ searchQuery = '' }: RoadmapProps) {
                             </div>
                         ) : (
                             <>
+                                <p className="my-0 text-sm -mt-2 mb-4">
+                                    <span className="opacity-70">
+                                        Here's what we're thinking about building next. Vote for your favorites, or request a
+                                        new feature{' '}
+                                    </span>
+                                    <Link externalNoIcon to="https://github.com/PostHog/posthog/issues">
+                                        on GitHub
+                                    </Link>
+                                    <span className="opacity-70">.</span>
+                                </p>
                                 <div className="flex justify-between items-center mb-4">
                                     <div className="flex items-center">
                                         <span className="text-sm font-medium mr-2 text-secondary dark:text-secondary-dark">
@@ -743,7 +753,20 @@ export default function Roadmap({ searchQuery = '' }: RoadmapProps) {
                                             ]}
                                         />
                                     </div>
-                                    <div className="flex items-center">
+                                    <div className="flex items-center gap-2">
+
+
+                                    {isModerator && !adding && (
+                                        <div className="relative top-1">
+                                            <CallToAction onClick={() => setAdding(true)} size="xs" type="secondary">
+                                                <Tooltip content="Only moderators can see this" placement="top">
+                                                    <IconShieldLock className="w-6 h-6 inline-block mr-1" />
+                                                </Tooltip>
+                                                Add a feature
+                                            </CallToAction>
+                                        </div>
+                                    )}
+
                                         <span className="text-sm font-medium mr-2 text-secondary dark:text-secondary-dark">
                                             Sort by:
                                         </span>
@@ -779,156 +802,22 @@ export default function Roadmap({ searchQuery = '' }: RoadmapProps) {
                                         />
                                     </div>
                                 </div>
+                                {isModerator && adding && (
+                                    <RoadmapForm
+                                        status="under-consideration"
+                                        onSubmit={() => {
+                                            mutate()
+                                            setAdding(false)
+                                        }}
+                                    />
+                                )}
+
                                 <OSTable columns={columns} rows={sortedRows} rowAlignment="top" className="mb-12" />
                             </>
                         )}
                     </>
 
-                    <div className="relative">
-                        <div className="flex justify-between items-center">
-                            <div className="flex gap-4 items-center">
-                                <h1 className="font-bold text-3xl sm:text-4xl my-0">Roadmap</h1>
-                                {isModerator && !adding && (
-                                    <div className="relative top-1">
-                                        <CallToAction onClick={() => setAdding(true)} size="xs" type="secondary">
-                                            <Tooltip content="Only moderators can see this" placement="top">
-                                                <IconShieldLock className="w-6 h-6 inline-block mr-1" />
-                                            </Tooltip>
-                                            Add a feature
-                                        </CallToAction>
-                                    </div>
-                                )}
-                            </div>
-                            <Sort className="hidden sm:flex" setSortBy={setSortBy} sortBy={sortBy} />
-                        </div>
-                        <p className="my-0 font-semibold mt-2 mb-4">
-                            <span className="opacity-70">
-                                Here's what we're thinking about building next. Vote for your favorites, or request a
-                                new feature{' '}
-                            </span>
-                            <Link externalNoIcon to="https://github.com/PostHog/posthog/issues">
-                                on GitHub
-                            </Link>
-                            <span className="opacity-70">.</span>
-                        </p>
-                        <Sort className="sm:hidden flex mt-4" setSortBy={setSortBy} sortBy={sortBy} />
-
-                        {isModerator && adding && (
-                            <RoadmapForm
-                                status="under-consideration"
-                                onSubmit={() => {
-                                    mutate()
-                                    setAdding(false)
-                                }}
-                            />
-                        )}
-                    </div>
-
-                    {/* Team Slider - only show when sorting by team */}
-                    {sortBy === 'team' && teams.length > 0 && (
-                        <Slider
-                            activeIndex={teams.indexOf(selectedTeam)}
-                            className="whitespace-nowrap space-x-1.5 mt-4"
-                        >
-                            {['All teams', ...teams].map((team) => {
-                                return (
-                                    <button
-                                        key={team}
-                                        onClick={() => navigate(`?sort=team&team=${encodeURIComponent(team)}`)}
-                                        className={`px-2 py-1 text-sm border border-border dark:border-dark rounded-md relative hover:scale-[1.01] active:top-[.5px] active:scale-[.99] ${
-                                            selectedTeam === team
-                                                ? 'bg-accent dark:bg-accent-dark font-bold'
-                                                : 'text-primary-75 dark:hover:text-primary-dark-75 hover:bg-accent/75 dark:hover:bg-accent-dark'
-                                        }`}
-                                    >
-                                        {team.replace(' Team', '')}
-                                    </button>
-                                )
-                            })}
-                        </Slider>
-                    )}
-
-                    {isLoading ? (
-                        <Skeleton />
-                    ) : (
-                        <ul className="m-0 p-0 list-none mt-10 space-y-10">
-                            {sortBy === 'popular' || sortBy === 'latest' ? (
-                                [...roadmaps]
-                                    .sort((a, b) => {
-                                        return sortBy === 'popular'
-                                            ? b.attributes.likeCount - a.attributes.likeCount
-                                            : b.attributes.createdAt - a.attributes.createdAt
-                                    })
-                                    .map((roadmap) => {
-                                        return (
-                                            <li className="" key={roadmap.id}>
-                                                <Feature
-                                                    id={roadmap.id}
-                                                    {...roadmap.attributes}
-                                                    onLike={mutate}
-                                                    onUpdate={mutate}
-                                                />
-                                            </li>
-                                        )
-                                    })
-                            ) : (
-                                <ul className="m-0 p-0 list-none mt-6 space-y-10">
-                                    {teams
-                                        .filter((team) => selectedTeam === 'All teams' || team === selectedTeam)
-                                        .map((team) => {
-                                            const roadmaps = roadmapsGroupedByTeam[team]
-                                            return (
-                                                <li className="relative" key={team}>
-                                                    <h4 className="text-lg m-0 mb-6 pr-2 inline-flex items-center bg-light dark:bg-dark after:-z-10 after:absolute after:w-full after:h-[1px] after:bg-border after:dark:bg-border-dark after:translate-y-[2px]">
-                                                        {team}
-                                                    </h4>
-                                                    <ul className="m-0 p-0 list-none space-y-8">
-                                                        {[...roadmaps]
-                                                            .sort(
-                                                                (a, b) =>
-                                                                    b.attributes.likeCount - a.attributes.likeCount
-                                                            )
-                                                            .map((roadmap) => {
-                                                                return (
-                                                                    <li key={roadmap.id}>
-                                                                        <Feature
-                                                                            id={roadmap.id}
-                                                                            {...roadmap.attributes}
-                                                                            onLike={mutate}
-                                                                            onUpdate={mutate}
-                                                                        />
-                                                                    </li>
-                                                                )
-                                                            })}
-                                                    </ul>
-                                                </li>
-                                            )
-                                        })}
-                                </ul>
-                            )}
-
-                            <div className="bg-accent dark:bg-accent-dark border border-light dark:border-dark px-8 py-8 rounded-md">
-                                <h3 className="m-0 mb-2 text-lg">Request another feature</h3>
-                                <p className="mb-3">
-                                    We add features to our roadmap based on customer feedback shared{' '}
-                                    <Link to="https://github.com/posthog/posthog/issues" external>
-                                        in our GitHub repo
-                                    </Link>
-                                    . We'd love to have you share your best ideas there!
-                                </p>
-                                <p className="mb-0">
-                                    <CallToAction
-                                        size="sm"
-                                        type="secondary"
-                                        to="https://github.com/posthog/posthog/issues"
-                                        externalNoIcon
-                                    >
-                                        Request a feature
-                                    </CallToAction>
-                                </p>
-                            </div>
-                        </ul>
-                    )}
+                
                 </section>
             </ScrollArea>
         </>
