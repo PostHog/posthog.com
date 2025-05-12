@@ -46,7 +46,7 @@ interface OSButtonProps extends Omit<React.ButtonHTMLAttributes<HTMLButtonElemen
     iconPosition?: 'left' | 'right'
     onClick?: (e: React.MouseEvent<HTMLButtonElement> | React.MouseEvent<HTMLAnchorElement>) => void
     state?: any
-    zoomHover?: string
+    zoomHover?: boolean | 'xs' | 'sm' | 'md' | 'lg'
 }
 
 export default function OSButton({
@@ -146,7 +146,7 @@ export default function OSButton({
             variant === 'primary' || variant === 'secondary'
                 ? variantClasses[variant].parent
                 : `${sizeClasses[size]} ${variantClasses[variant]}`
-        } ${align === 'center' ? 'justify-center' : 'justify-start'} ${
+        } ${align === 'center' ? 'justify-center' : 'justify-start text-left'} ${
             !children ? '' : width === 'full' ? 'w-full' : 'w-auto'
         } ${className}`,
         onClick,
