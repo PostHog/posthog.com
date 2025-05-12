@@ -122,12 +122,12 @@ export const Calculator = ({ SidebarList, SidebarListItem, Discounts }: Calculat
 
     return (
         <div id="calculator">
-                <h3>Pricing calculator</h3>
+                <h3 className="text-lg">Pricing calculator</h3>
 
-            <div className="flex flex-col lgxl:flex-row lgxl:gap-8 2xl:gap-12 items-start pt-4">
+            <div className="flex flex-col @6xl:flex-row @6xl:gap-8 2xl:gap-12 items-start">
                 <Tabbed />
 
-                <div className="grid md:grid-cols-2 lgxl:grid-cols-1 gap-8 mt-12 lgxl:mt-0 max-w-6xl lgxl:max-w-xs 2xl:max-w-sm sticky top-4">
+                <div className="grid @2xl:grid-cols-2 @6xl:grid-cols-1 gap-8 mt-12 @6xl:mt-0 @6xl:max-w-xs sticky top-4">
                     <div>
                         <h4 className="text-lg mb-2">How our pricing works</h4>
                         <SidebarList>

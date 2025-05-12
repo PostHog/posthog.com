@@ -469,7 +469,7 @@ export default function ProductAnalyticsTab({
                     First 1,000,000 events free – every month!
                 </div>
                 <div className="grid grid-cols-6 gap-8 items-end mb-2">
-                    <h3 className="col-span-4 lg:col-span-5 m-0 text-base">
+                    <h3 className="col-span-3 @2xl:col-span-4 m-0 text-base">
                         Event usage{' '}
                         <button
                             onClick={() => setModalOpen(true)}
@@ -478,7 +478,7 @@ export default function ProductAnalyticsTab({
                             explain event types
                         </button>
                     </h3>
-                    <p className="col-span-2 lg:col-span-1 m-0 text-right opacity-70 text-sm">Events/mo</p>
+                    <p className="col-span-3 @2xl:col-span-2 m-0 text-right opacity-70 text-sm">Events/mo</p>
                 </div>
 
                 {analyticsSliders.map((slider) => (

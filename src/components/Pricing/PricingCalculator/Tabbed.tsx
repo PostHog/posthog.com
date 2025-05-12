@@ -340,11 +340,11 @@ export default function Tabbed() {
     }, [])
 
     return (
-        <div className="w-full flex-1 max-w-6xl">
-            <div className="grid md:grid-cols-12 mb-1">
-                <div className="md:col-span-4 lg:col-span-3 md:pr-6 mb-4 md:mb-0">
+        <div className="w-full flex-1">
+            <div className="grid grid-cols-12 mb-1">
+                <div className="col-span-12 @2xl:col-span-4 md:pr-6 mb-4 md:mb-0">
                     <h4 className="m-0 md:pl-3 pb-1 font-normal text-sm opacity-70">Products</h4>
-                    <ul className="list-none m-0 p-0 pb-2 flex flex-row md:flex-col gap-px overflow-x-auto w-screen md:w-auto -mx-4 px-4">
+                    <ul className="list-none m-0 p-0 pb-2 flex flex-row md:flex-col gap-px overflow-x-auto w-screen @md:w-auto -mx-4 px-4 @md:px-0 @md:mx-0">
                         {products.map(({ name, Icon, cost, color, billingData }, index) => {
                             const active = activeTab === index
                             const addonsPrice = productAddons
@@ -383,7 +383,7 @@ export default function Tabbed() {
                         })}
                     </ul>
                 </div>
-                <div className="md:col-span-8 lg:col-span-9 md:pl-0">
+                <div className="col-span-12 @2xl:col-span-8 md:pl-0">
                     <div className="flex space-x-12 justify-between items-center mb-2">
                         <h3 className="m-0 text-lg">Estimate your price</h3>
                         {!activeProduct.name == 'Experiments' && (
@@ -402,8 +402,8 @@ export default function Tabbed() {
                         setAnalyticsData={setAnalyticsData}
                     />
                 </div>
-                <div className="md:col-span-4 lg:col-span-3 pt-2 pb-0 md:pt-2.5 md:pb-2 pl-4 md:pl-3 md:pr-6 border-t border-light dark:border-dark"></div>
-                <div className="md:col-span-8 lg:col-span-9 py-2 md:border-t border-light dark:border-dark">
+
+                <div className="col-span-12 py-2 md:border-t border-primary">
                     <h4 className="mb-0.5 md:mb-1 font-normal text-sm opacity-70">Platform add-ons</h4>
 
                     {platform.addons.map(({ type, name, description, plans }) => {
