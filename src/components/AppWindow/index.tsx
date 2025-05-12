@@ -279,7 +279,7 @@ export default function AppWindow({ item, constraintsRef }: { item: AppWindowTyp
                                 initial={{ opacity: 0 }}
                                 animate={{ opacity: 0.3 }}
                                 exit={{ opacity: 0 }}
-                                className="fixed inset-0 border pointer-events-none rounded-md"
+                                className="fixed inset-4 border-2 border-blue bg-blue/40 pointer-events-none rounded-md"
                                 style={{
                                     left: snapIndicator === 'left' ? 0 : '50%',
                                     width: '50%',
