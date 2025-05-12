@@ -16,14 +16,14 @@ import Orders from 'components/MainNav'
 import { StrapiRecord, ProfileData } from 'lib/strapi'
 import { Avatar as MainNavAvatar } from 'components/MainNav'
 import Wizard from 'components/Wizard'
+import ScrollArea from 'components/RadixUI/ScrollArea'
 
 export default function TaskBarMenu() {
-    const { windows, bringToFront, focusedWindow } = useApp()
+    const { windows, bringToFront, focusedWindow, addWindow, closeWindow } = useApp()
     const [isAnimating, setIsAnimating] = useState(false)
     const totalWindows = windows.length
     const [isWindowPopoverOpen, setIsWindowPopoverOpen] = useState(false)
     const { user, notifications, logout } = useUser()
-    const [showAuthPanel, setShowAuthPanel] = useState(false)
     const menuData = useMenuData()
 
     const isLoggedIn = !!user
@@ -56,11 +56,20 @@ export default function TaskBarMenu() {
     }
 
     const handleSignInClick = () => {
-        setShowAuthPanel(true)
         // Close the menu by blurring the active element
         if (document.activeElement instanceof HTMLElement) {
             document.activeElement.blur()
         }
+        addWindow(
+            <ScrollArea location={{ pathname: `community-auth` }} key="community-auth">
+                <Authentication
+                    initialView="sign-in"
+                    showBanner={false}
+                    showProfile={false}
+                    onAuth={() => closeWindow({ key: 'community-auth' })}
+                />
+            </ScrollArea>
+        )
     }
 
     const accountMenu: MenuType[] = [
@@ -72,16 +81,13 @@ export default function TaskBarMenu() {
                             <div className="relative">
                                 <img
                                     src={getAvatarURL(user?.profile)}
-                                    className={`size-6 rounded-full bg-${
-                                        user?.profile?.color ?? 'white dark:bg-dark'
-                                    }`}
+                                    className={`size-6 rounded-full bg-${user?.profile?.color ?? 'white dark:bg-dark'}`}
                                     alt=""
                                 />
                                 {notifications?.length > 0 && (
                                     <span className="absolute top-4 -right-1 size-2.5 bg-red border border-accent rounded-full" />
                                 )}
                             </div>
-                        
                         </>
                     ) : (
                         <IconUser className="size-6" />
@@ -139,12 +145,12 @@ export default function TaskBarMenu() {
                       },
                   ]
                 : [
-                    {
-                        type: 'item' as const,
-                        label: 'Sign in',
-                        onClick: handleSignInClick,
-                    },
-                ],
+                      {
+                          type: 'item' as const,
+                          label: 'Sign in',
+                          onClick: handleSignInClick,
+                      },
+                  ],
         },
     ]
 
@@ -242,7 +248,11 @@ export default function TaskBarMenu() {
                                     >
                                         <span
                                             className={`truncate ${
-                                                window.minimized ? 'italic' : focusedWindow === window ? 'font-bold' : ''
+                                                window.minimized
+                                                    ? 'italic'
+                                                    : focusedWindow === window
+                                                    ? 'font-bold'
+                                                    : ''
                                             }`}
                                         >
                                             {window.meta?.title || 'Untitled'}
@@ -255,11 +265,6 @@ export default function TaskBarMenu() {
                     <MenuBar menus={accountMenu} className="[&_button]:px-2" />
                 </aside>
             </motion.div>
-            {showAuthPanel && (
-                
-                        <Authentication initialView="sign-in" showBanner={false} showProfile={false} />
-                    
-            )}
         </>
     )
 }

@@ -96,6 +96,16 @@ const fixedAppSizes = {
             height: 600,
         },
     },
+    'community-auth': {
+        max: {
+            width: 400,
+            height: 369,
+        },
+        min: {
+            width: 400,
+            height: 369,
+        },
+    },
 } as const
 
 const getPositionDefaults = (
@@ -118,8 +128,8 @@ const getPositionDefaults = (
         if (ref) {
             const rect = ref.getBoundingClientRect()
             return {
-                x: rect.left + 20,
-                y: rect.top + 20,
+                x: rect.left + 10,
+                y: rect.top + 10,
             }
         }
     }
