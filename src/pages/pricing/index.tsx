@@ -12,11 +12,14 @@ import { FAQs } from 'components/Pricing/FAQs'
 import CTA from 'components/Home/CTA.js'
 import Philosophy from './philosophy'
 import Sales from '../sales'
+import { useLocation } from '@reach/router'
 
 export default function Pricing() {
     const [activePlan, setActivePlan] = useState('free')
     const [animateFreeTiers, setAnimateFreeTiers] = useState(false)
     const [currentModal, setCurrentModal] = useState<string | boolean>(false)
+    const [defaultTab, setDefaultTab] = useState('plans')
+    const { search } = useLocation()
 
     const {
         allProductData: {
@@ -127,7 +130,7 @@ export default function Pricing() {
             value: 'plans',
             label: 'Plans',
             content: (
-                <PricingExperiment 
+                <PricingExperiment
                     activePlan={activePlan}
                     setActivePlan={setActivePlan}
                     animateFreeTiers={animateFreeTiers}
@@ -143,71 +146,63 @@ export default function Pricing() {
             label: 'Calculator',
             content: (
                 <div className="">
-                    <Calculator 
-                        SidebarList={SidebarList}
-                        SidebarListItem={SidebarListItem}
-                        Discounts={Discounts}
-                    />
+                    <Calculator SidebarList={SidebarList} SidebarListItem={SidebarListItem} Discounts={Discounts} />
                 </div>
             ),
         },
         {
             value: 'addons',
             label: 'Add-ons',
-            content: (
-                <Addons />
-            ),
+            content: <Addons />,
         },
         {
             value: 'vs',
             label: 'PostHog vs...',
-            content: (
-                <SimilarProducts />
-            ),
+            content: <SimilarProducts />,
         },
         {
             value: 'reviews',
             label: 'Reviews',
-            content: (
-                <Reviews />
-            ),
+            content: <Reviews />,
         },
         {
             value: 'philosophy',
             label: 'Pricing philosophy',
-            content: (
-                <Philosophy />
-            ),
+            content: <Philosophy />,
         },
         {
             value: 'sales',
             label: 'How we do "sales"',
-            content: (
-                <Sales />
-            ),
+            content: <Sales />,
         },
         {
             value: 'faq',
             label: 'FAQ',
             content: (
                 <>
-                <h2 className="text-2xl m-0 mb-6 pb-6 border-b border-light dark:border-dark">Pricing FAQ</h2>
-                <FAQs />
-                <p className="my-6 pt-6 relative before:w-48 before:absolute before:top-0 before:left-0 before:border-t before:border-light before:dark:border-dark before:h-px">
-                    Have another pricing-related question?{' '}
-                    <Link to="/questions/topic/pricing">Ask in our community forum</Link>
-                </p>
+                    <h2 className="text-2xl m-0 mb-6 pb-6 border-b border-light dark:border-dark">Pricing FAQ</h2>
+                    <FAQs />
+                    <p className="my-6 pt-6 relative before:w-48 before:absolute before:top-0 before:left-0 before:border-t before:border-light before:dark:border-dark before:h-px">
+                        Have another pricing-related question?{' '}
+                        <Link to="/questions/topic/pricing">Ask in our community forum</Link>
+                    </p>
                 </>
             ),
         },
         {
             value: 'cta',
             label: 'Shameless CTA',
-            content: (
-                <CTA />
-            ),
+            content: <CTA />,
         },
     ]
 
-    return <OSTabs tabs={tabs} defaultValue="plans" />
+    useEffect(() => {
+        const params = new URLSearchParams(search)
+        const tab = params.get('tab')
+        if (tab) {
+            setDefaultTab(tab)
+        }
+    }, [search])
+
+    return <OSTabs key={defaultTab} tabs={tabs} defaultValue={defaultTab} />
 }

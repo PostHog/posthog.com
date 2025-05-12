@@ -127,9 +127,7 @@ const processMenuItemWithGrouping = (item: DocsMenuItem): any => {
     // Special case: If this is the Product OS menu, filter out 'Docs' and 'Overview' from its children
     let children = item.children
     if (item.name === 'Product OS' && Array.isArray(children)) {
-        children = children.filter(
-            (child) => child.name !== 'Docs' && child.name !== 'Overview'
-        )
+        children = children.filter((child) => child.name !== 'Docs' && child.name !== 'Overview')
     }
 
     // If the item has children, process them recursively with grouping
@@ -148,11 +146,7 @@ const processMenuItemWithGrouping = (item: DocsMenuItem): any => {
         }
         let grouped = groupBySectionDividers(children)
         // FLATTEN: If the first child is a submenu with the same label, bring its children up one level
-        if (
-            grouped.length > 0 &&
-            grouped[0].type === 'submenu' &&
-            grouped[0].label === item.name
-        ) {
+        if (grouped.length > 0 && grouped[0].type === 'submenu' && grouped[0].label === item.name) {
             grouped = [...grouped[0].items, ...grouped.slice(1)]
         }
         baseItem.items = grouped
@@ -191,11 +185,7 @@ const getDocsMenuItems = () => {
 }
 
 const mergedDocsMenu = () => {
-    return [
-        ...DocsItemsStart,
-        ...getDocsMenuItems(),
-        ...DocsItemsEnd,
-    ]
+    return [...DocsItemsStart, ...getDocsMenuItems(), ...DocsItemsEnd]
 }
 
 // Process handbookSidebar into menu item structure
@@ -209,7 +199,7 @@ const processHandbookSidebar = (items: any[], isRoot = true): any[] => {
         .map((item) => {
             if (item.children) {
                 return {
-                    type: "submenu" as const,
+                    type: 'submenu' as const,
                     label: item.name,
                     ...(item.url ? { link: item.url } : {}),
                     items: processHandbookSidebar(item.children, false),
@@ -218,13 +208,13 @@ const processHandbookSidebar = (items: any[], isRoot = true): any[] => {
             // If no url and no children, mark as disabled (label-like)
             if (!item.url && !item.children) {
                 return {
-                    type: "item" as const,
+                    type: 'item' as const,
                     label: item.name,
                     disabled: true,
                 }
             }
             return {
-                type: "item" as const,
+                type: 'item' as const,
                 label: item.name,
                 ...(item.url ? { link: item.url } : {}),
             }
@@ -285,22 +275,22 @@ export function useMenuData(): MenuType[] {
                 {
                     type: 'item',
                     label: 'Pricing calculator',
-                    link: '/calculator',
+                    link: '/pricing?tab=calculator',
                 },
                 {
                     type: 'item',
                     label: 'Add-ons',
-                    link: '/addons',
+                    link: '/pricing?tab=addons',
                 },
                 {
                     type: 'item',
                     label: 'Pricing philosophy',
-                    link: '/pricing/philosophy',
+                    link: '/pricing?tab=philosophy',
                 },
                 {
                     type: 'item',
                     label: 'How we do sales',
-                    link: '/sales',
+                    link: '/pricing?tab=sales',
                 },
                 {
                     type: 'item',
@@ -412,7 +402,7 @@ export function useMenuData(): MenuType[] {
                             external: true,
                         },
                     ],
-                }
+                },
             ],
         },
         {
@@ -425,7 +415,7 @@ export function useMenuData(): MenuType[] {
                 {
                     type: 'item',
                     label: 'Merch store',
-                    link: '/merch'
+                    link: '/merch',
                 },
                 {
                     type: 'item',
@@ -473,7 +463,7 @@ export function useMenuData(): MenuType[] {
                     external: true,
                 },
             ],
-        }
+        },
     ]
 }
 
@@ -487,7 +477,6 @@ export const DocsItemsStart = [
         type: 'separator' as const,
     },
 ]
-
 
 export const DocsItemsEnd = [
     { type: 'separator' as const },
