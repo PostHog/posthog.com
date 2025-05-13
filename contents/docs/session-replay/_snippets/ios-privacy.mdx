@@ -25,3 +25,22 @@ imvProfilePhoto.accessibilityIdentifier = "ph-no-capture"
   MyCoolView()
     .postHogNoMask()
   ```
+
+### Handling sensitive third-party screens
+
+Third-party components (like payment forms or authentication screens) are often rendered in separate view hierarchies that can't be accessed or modified for masking.
+
+For these cases, manually controlling the recording state is the only reliable solution:
+
+```ios_swift
+// Before presenting a payment screen
+PostHogSDK.shared.stopSessionRecording()
+
+// Present your payment screen
+presentPaymentScreen()
+
+// When payment sheet is dismissed, resume recording
+PostHogSDK.shared.startSessionRecording()
+```
+
+> **Important:** Be aware that some recordings might still capture sensitive content if the recording isn't stopped in time. Consider implementing these controls as early as possible in your navigation flow.
