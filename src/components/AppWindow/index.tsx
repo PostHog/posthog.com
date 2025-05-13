@@ -153,6 +153,25 @@ const Router = (props) => {
     return children
 }
 
+const getInitialSize = (
+    sizeDefaults: { max: { width: number; height: number }; min: { width: number; height: number } },
+    windows: AppWindowType[]
+) => {
+    const sortedWindows = [...windows].sort((a, b) => b.zIndex - a.zIndex)
+    const previousWindow = sortedWindows[1]
+    if (previousWindow) {
+        const ref = previousWindow.ref?.current
+        if (ref) {
+            const rect = ref.getBoundingClientRect()
+            return {
+                width: Math.min(Math.max(sizeDefaults.max.width, rect.width), window.innerWidth - rect.left - 20),
+                height: Math.min(Math.max(sizeDefaults.max.height, rect.height), window.innerHeight - rect.top - 20),
+            }
+        }
+    }
+    return { width: sizeDefaults.max.width, height: sizeDefaults.max.height }
+}
+
 export default function AppWindow({ item, constraintsRef }: { item: AppWindowType; constraintsRef: any }) {
     const {
         minimizeWindow,
@@ -175,7 +194,7 @@ export default function AppWindow({ item, constraintsRef }: { item: AppWindowTyp
             : getSizeDefaults()
     )
     const [previousSize, setPreviousSize] = useState({ width: sizeDefaults.max.width, height: sizeDefaults.max.height })
-    const [size, setSize] = useState({ width: sizeDefaults.max.width, height: sizeDefaults.max.height })
+    const [size, setSize] = useState(() => getInitialSize(sizeDefaults, windows))
     const [previousPosition, setPreviousPosition] = useState({ x: 0, y: 0 })
     const [position, setPosition] = useState(() => getPositionDefaults(item, size, windows))
     const [snapIndicator, setSnapIndicator] = useState<'left' | 'right' | null>(null)
