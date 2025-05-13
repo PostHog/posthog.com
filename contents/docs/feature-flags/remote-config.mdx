@@ -10,35 +10,52 @@ availability:
 
 Boolean and multivariate flags are helpful for dynamic values that differ from user to user, but sometimes you need a simple way to pass configuration related to your application without having to make code changes or redeploy your app.
 
-Remote config flags enable you to configure a simple flag that always returns the same payload wherever it is called:
+Remote config flags enable you to configure a simple flag that always returns the same payload wherever it is called. Remote config flags can also be stored as encrypted values and decrypted on the server side when requested. Encryption/decryption is handled automatically.
+
+There are 3 steps to start using remote config flags:
+
+## Step 1: Find your feature flags secure API key
+
+import ObtainFeatureFlagsSecureAPIKey from "../integrate/_snippets/obtain-flags-secure-key.mdx"
+
+<ObtainFeatureFlagsSecureAPIKey />
+
+## Step 2: Initialize PostHog with your feature flags secure API key
+
+import ConfigureFlagsSecureKey from "../integrate/_snippets/configure-flags-secure-key.mdx"
+
+<ConfigureFlagsSecureKey />
+
+> **Note:** When you initialize PostHog with your feature flags secure API key to enable remote config, PostHog also enables [local evaluation](./local-evaluation).
+
+
+## Step 3: Use remote config flags
 
 <MultiLanguage>
 
-```js-web
-const themedLogoUrl = posthog.getFeatureFlagPayload('company-holiday-logo-url')
-```
-
 ```node
-const remoteConfigValue = posthog.getFeatureFlagPayload({
-    key: 'current-chat-completion-model',
-    distinctId: '_irrelevant_',
-})
+const config = posthog.getRemoteConfigPayload('landing-page-config')
+// config is a JsonType
 ```
 
-```ios_swift
-let themedLogoUrl = PostHogSDK.shared.getFeatureFlagPayload('company-holiday-logo-url')
+```python
+config = posthog.get_remote_config_payload('landing-page-config')
+# config is a JSON encoded string. It will need to be parsed as a JSON object.
 ```
 
-```android_kotlin
-val themedLogoUrl = PostHog.getFeatureFlagPayload('company-holiday-logo-url')
+```go
+config, err := posthog.GetRemoteConfigPayload("landing-page-config")
+// config is a JSON encoded string. It will need to be parsed as a JSON object.
 ```
 
-```react-native
-const themedLogoUrl = useFeatureFlagWithPayload('company-holiday-logo-url')
+```ruby
+config = posthog.get_remote_config_payload('landing-page-config')
+# config is a JSON encoded string. It will need to be parsed as a JSON object.
 ```
 
-```flutter
-final themedLogoUrl = await Posthog().getFeatureFlagPayload('company-holiday-logo-url')
+```csharp
+var config = await posthog.GetRemoteConfigPayloadAsync("landing-page-config");
+// config is a JsonDocument
 ```
 
 </MultiLanguage>
