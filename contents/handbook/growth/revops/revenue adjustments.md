@@ -9,7 +9,7 @@ growth.
 4. Standardize our reporting methodology
 
 ## Where we use adjusted revenue
-We continue to report unadjusted revenue for our top line reporting and overall growth metrics. We use adjusted revenue for retention metrics (NDR/GDR) and other business lifecycle analysis to get a clearer picture of our growth. This way we maintain standard financial reporting while getting a better understanding of our performance.
+We continue to report unadjusted revenue for our top line reporting and overall growth metrics. We use adjusted revenue for retention metrics (NDR/GDR) and other business lifecycle analysis to get a clearer picture of our growth. This way we maintain standard financial reporting (unadjusted revenue) while getting a better understanding of our performance (via adjusted revenue).
 
 ## Adjustments
 We make three primary adjustments to our revenue data:
