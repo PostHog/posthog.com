@@ -95,21 +95,18 @@ export default function DisplayOptions() {
         setCursor(cursor)
         if (cursor === 'james') {
             applyStyles(`
-                * {
-                    cursor: url(https://res.cloudinary.com/dmukukwp6/image/upload/james_cursor_default_d6f7983b0a.png), auto !important;
+                :root {
+                    --cursor-default: url(https://res.cloudinary.com/dmukukwp6/image/upload/james_cursor_default_d6f7983b0a.png), auto;
+                    --cursor-pointer: url(https://res.cloudinary.com/dmukukwp6/image/upload/james_cursor_pointer_8bf0dd7a15.png), auto;
                 }
-                button, a {
-                    cursor: url(https://res.cloudinary.com/dmukukwp6/image/upload/james_cursor_pointer_8bf0dd7a15.png), auto !important;
-                }
+                * { cursor: var(--cursor-default) !important; }
+                button, a { cursor: var(--cursor-pointer) !important; }
             `)
         } else if (cursor === 'xl') {
             // Default XL cursor
             const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><path fill="#000" stroke="#fff" stroke-width="5" d="m57.77 96.196.024.01.025.008c.48.177 1.014.286 1.58.286.665 0 1.28-.147 1.837-.392l.012-.006.013-.006 8.8-3.997.002-.001a4.5 4.5 0 0 0 2.225-5.969l-10.73-23.395 16.828-1.446.008-.001a4.504 4.504 0 0 0 2.678-7.78L33.073 8.712a4.51 4.51 0 0 0-4.858-.844l-.011.006A4.499 4.499 0 0 0 25.5 12v66a4.503 4.503 0 0 0 2.715 4.132l.01.004a4.505 4.505 0 0 0 4.86-.859L45.01 70.072l10.259 23.717.005.012.005.011a4.527 4.527 0 0 0 2.492 2.384Z"/></svg>`
             const encodedSvg = encodeURIComponent(svg)
             const cursorUrl = `url('data:image/svg+xml;utf8,${encodedSvg}'), auto`
-            console.log('Setting cursor to:', cursorUrl)
-            document.body.style.cursor = cursorUrl
-            document.documentElement.style.cursor = cursorUrl
 
             // Hand cursor for links/buttons
             const handSvg = `<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><path fill="#fff" stroke="#000" stroke-width="5" d="M34.5 12.5V57l-13-7.5L15 57l33.5 32.5H72L84.5 75V39h-13v-6h-24V14L41 9l-6.5 3.5Z"/><path fill="#000" d="M40.625 6.25c-5.139 0-9.375 4.236-9.375 9.375v36.914l-2.05-2.148-.782-.684c-3.601-3.601-9.485-3.601-13.086 0-3.6 3.601-3.6 9.485 0 13.086v.098l25.586 25.293.195.097.098.196c4.212 3.161 9.583 5.273 15.625 5.273h5.371a25.533 25.533 0 0 0 25.586-25.586V43.75c0-5.14-4.236-9.375-9.375-9.375-1.33 0-2.563.366-3.71.879-1.026-4.065-4.725-7.129-9.083-7.129-2.392 0-4.59.94-6.25 2.441-1.66-1.501-3.857-2.441-6.25-2.441-1.099 0-2.136.232-3.125.586V15.625c0-5.14-4.236-9.375-9.375-9.375Zm0 6.25a3.115 3.115 0 0 1 3.125 3.125V50H50V37.5a3.115 3.115 0 0 1 3.125-3.125A3.115 3.115 0 0 1 56.25 37.5V50h6.25V37.5a3.115 3.115 0 0 1 3.125-3.125A3.115 3.115 0 0 1 68.75 37.5V50h6.543v-6.25a3.115 3.115 0 0 1 3.125-3.125 3.115 3.115 0 0 1 3.125 3.125v24.414c0 10.828-8.508 19.336-19.336 19.336h-5.37c-4.579 0-8.534-1.636-11.817-4.102l-25.293-25c-1.392-1.391-1.392-2.905 0-4.296 1.391-1.392 2.905-1.392 4.297 0L37.5 67.578V15.625a3.115 3.115 0 0 1 3.125-3.125Z"/></svg>`
@@ -132,25 +129,32 @@ export default function DisplayOptions() {
             const horizontalResizeCursorUrl = `url('data:image/svg+xml;utf8,${encodedHorizontalResizeSvg}'), auto`
 
             applyStyles(`
-                a, 
-                button, 
-                [role="button"], 
-                [tabindex="0"], 
-                input[type="button"], 
-                input[type="submit"], 
-                input[type="reset"],
+                :root {
+                    --cursor-default: ${cursorUrl};
+                    --cursor-pointer: ${handCursorUrl};
+                    --cursor-move: ${moveCursorUrl};
+                    --cursor-ew-resize: ${horizontalResizeCursorUrl};
+                    --cursor-ns-resize: ${verticalResizeCursorUrl};
+                }
+                
+                * { cursor: var(--cursor-default); }
+                
+                a, button, [role="button"], [tabindex="0"],
+                input[type="button"], input[type="submit"], input[type="reset"],
                 .cursor-pointer { 
-                    cursor: ${handCursorUrl} !important; 
+                    cursor: var(--cursor-pointer) !important; 
                 }
-                [data-draggable="true"],
-                .cursor-move {
-                    cursor: ${moveCursorUrl} !important;
+                
+                [data-draggable="true"], .cursor-move {
+                    cursor: var(--cursor-move) !important;
                 }
+                
                 .cursor-ew-resize {
-                    cursor: ${horizontalResizeCursorUrl} !important;
+                    cursor: var(--cursor-ew-resize) !important;
                 }
+                
                 .cursor-ns-resize {
-                    cursor: ${verticalResizeCursorUrl} !important;
+                    cursor: var(--cursor-ns-resize) !important;
                 }
             `)
         } else {
