@@ -1,7 +1,7 @@
 import CloudinaryImage from 'components/CloudinaryImage'
 import React, { useState } from 'react'
 import Link from 'components/Link'
-import { IconBook, IconChat, IconCode, IconGraph, IconRewindPlay, IconThoughtBubble, IconUser } from '@posthog/icons'
+import { IconBook, IconChat, IconCode, IconGraph, IconRewindPlay, IconThoughtBubble, IconUser, IconBell, IconUndo, IconInfo, IconThumbsUp } from '@posthog/icons'
 import { CallToAction } from 'components/CallToAction'
 import { CustomerCard } from 'components/Products/CustomerCard'
 import { Hero } from 'components/Products/Hero'
@@ -28,6 +28,13 @@ import Comparison from '../Comparison'
 import { useStaticQuery, graphql } from 'gatsby'
 import { MaxQuestionInput } from 'components/MaxQuestionInput'
 import { CalloutBox } from 'components/Docs/CalloutBox'
+import { useRoadmaps } from 'hooks/useRoadmaps'
+import { useUser } from 'hooks/useUser'
+import { VoteBox } from 'components/Roadmap'
+import { useToast } from 'hooks/toast'
+import Tooltip from 'components/Tooltip'
+import Spinner from 'components/Spinner'
+import { Authentication } from 'components/Squeak'
 
 interface ProfileData {
     firstName: string
@@ -44,6 +51,21 @@ interface ProfileData {
     isTeamLead: boolean
     id: string
     location: string
+}
+
+interface RoadmapItem {
+    id: string
+    attributes: {
+        title: string
+        description: string
+        projectedCompletion: string | null
+        dateCompleted: string | null
+        complete: boolean
+        betaAvailable: boolean
+        likes: {
+            data: { id: string }[]
+        }
+    }
 }
 
 const product = {
@@ -235,6 +257,82 @@ const PairsWithArray = [
 export const ProductMax = () => {
     const { fullWidthContent } = useLayoutData()
     const [activeProfile, setActiveProfile] = useState<ProfileData | null>(null)
+    const { user, likeRoadmap, getJwt } = useUser()
+    const { addToast } = useToast()
+    const [authModalOpen, setAuthModalOpen] = useState(false)
+    const [loading, setLoading] = useState<{ [id: string]: boolean }>({})
+    const [subscribed, setSubscribed] = useState<{ [id: string]: boolean }>({})
+    const [voteLoading, setVoteLoading] = useState<{ [id: string]: boolean }>({})
+
+    const { roadmaps, isLoading, mutate } = useRoadmaps({
+        params: {
+            filters: {
+                topic: {
+                    id: {
+                        $eq: "391"
+                    }
+                }
+            }
+        },
+        limit: 100
+    })
+
+    const handleLike = async (roadmap: RoadmapItem) => {
+        if (!user) {
+            setAuthModalOpen(true)
+            return
+        }
+        setVoteLoading((prev) => ({ ...prev, [roadmap.id]: true }))
+        const liked = roadmap.attributes.likes.data.some(({ id }) => id === user.profile?.id?.toString())
+        await likeRoadmap({
+            id: parseInt(roadmap.id),
+            unlike: liked,
+            title: roadmap.attributes.title
+        })
+        mutate()
+        setVoteLoading((prev) => ({ ...prev, [roadmap.id]: false }))
+        addToast({
+            message: liked ? 'Removed your vote.' : 'Thanks for voting!'
+        })
+    }
+
+    const handleSubscribe = async (roadmap: RoadmapItem) => {
+        if (!user) {
+            setAuthModalOpen(true)
+            return
+        }
+
+        setLoading((prev) => ({ ...prev, [roadmap.id]: true }))
+        try {
+            const token = await getJwt()
+            const isSubscribed = !!subscribed[roadmap.id]
+            const res = await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/roadmap/${roadmap.id}/${isSubscribed ? 'unsubscribe' : 'subscribe'}`, {
+                method: 'POST',
+                credentials: 'include',
+                headers: {
+                    Accept: 'application/json',
+                    'Content-Type': 'application/json',
+                    Authorization: `Bearer ${token}`,
+                },
+            })
+
+            if (res.ok) {
+                setSubscribed((prev) => ({ ...prev, [roadmap.id]: !isSubscribed }))
+                addToast({ 
+                    message: isSubscribed
+                        ? `Unsubscribed from ${roadmap.attributes.title}. You will no longer receive updates.`
+                        : `Subscribed to ${roadmap.attributes.title}. We'll email you with updates!`
+                })
+            } else {
+                addToast({ error: true, message: 'Whoops! Something went wrong.' })
+            }
+        } catch (error) {
+            console.error(error)
+            addToast({ error: true, message: 'Whoops! Something went wrong.' })
+        } finally {
+            setLoading((prev) => ({ ...prev, [roadmap.id]: false }))
+        }
+    }
 
     return (
         <>
@@ -245,6 +343,26 @@ export const ProductMax = () => {
             />
             <SideModal open={!!activeProfile} setOpen={(open) => setActiveProfile(open ? activeProfile : null)}>
                 {activeProfile && <Profile profile={activeProfile} />}
+            </SideModal>
+            <SideModal title="Sign into PostHog.com" open={authModalOpen} setOpen={setAuthModalOpen}>
+                <h4 className="mb-1 text-red">Sign into PostHog.com</h4>
+                <div className="bg-border dark:bg-border-dark p-4 mb-2">
+                    <p className="text-sm mb-2">
+                        <strong>Note: PostHog.com authentication is separate from your PostHog app.</strong>
+                    </p>
+                    <p className="text-sm mb-0">
+                        We suggest signing up with your personal email. Soon you'll be able to link your PostHog app
+                        account.
+                    </p>
+                </div>
+                <Authentication
+                    initialView="sign-in"
+                    onAuth={() => {
+                        setAuthModalOpen(false)
+                    }}
+                    showBanner={false}
+                    showProfile={false}
+                />
             </SideModal>
             <div className={`${fullWidthContent ? 'max-w-full px-8' : 'max-w-7xl mx-auto'} px-5 py-10 md:pt-20 pb-0`}>
                 <Hero
@@ -259,6 +377,188 @@ export const ProductMax = () => {
                 <div className="max-w-3xl mx-auto mt-18 mb-18">
                     <MaxQuestionInput />
                 </div>
+
+                <section className="mt-20">
+                    <h2 className="text-4xl text-center mb-12">Roadmap</h2>
+                    <div className="grid grid-cols-3 gap-8">
+                        <div>
+                            <h3 className="text-2xl mb-6">Under consideration</h3>
+                            <div className="space-y-6">
+                                {roadmaps
+                                    .filter(
+                                        (roadmap: RoadmapItem) =>
+                                            !roadmap.attributes.projectedCompletion && !roadmap.attributes.complete
+                                    )
+                                    .map((roadmap: RoadmapItem) => (
+                                        <div key={roadmap.id} className="bg-accent dark:bg-accent-dark p-6 rounded-lg">
+                                            <div className="flex space-x-4">
+                                                <VoteBox 
+                                                    likeCount={roadmap.attributes.likes.data.length} 
+                                                    liked={roadmap.attributes.likes.data.some(({ id }) => id === user?.profile?.id?.toString())}
+                                                />
+                                                <div className="flex-1">
+                                                    <h4 className="text-lg font-bold mb-2">{roadmap.attributes.title}</h4>
+                                                    <p className="text-sm opacity-75">{roadmap.attributes.description}</p>
+                                                    <div className="mt-4">
+                                                        <CallToAction
+                                                            size="sm"
+                                                            type={roadmap.attributes.likes.data.some(({ id }) => id === user?.profile?.id?.toString()) ? 'outline' : 'primary'}
+                                                            disabled={voteLoading[roadmap.id]}
+                                                            onClick={() => handleLike(roadmap)}
+                                                        >
+                                                            <span className="flex items-center space-x-1">
+                                                                {roadmap.attributes.likes.data.some(({ id }) => id === user?.profile?.id?.toString()) ? (
+                                                                    <>
+                                                                        <IconUndo className="w-4 h-4" />
+                                                                        <span>Unvote</span>
+                                                                    </>
+                                                                ) : (
+                                                                    <>
+                                                                        <IconThumbsUp className="w-4 h-4" />
+                                                                        <span>Vote</span>
+                                                                    </>
+                                                                )}
+                                                            </span>
+                                                        </CallToAction>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    ))}
+                            </div>
+                        </div>
+                        <div>
+                            <h3 className="text-2xl mb-6">In progress</h3>
+                            <div className="space-y-6">
+                                {roadmaps
+                                    .filter((roadmap: RoadmapItem) => roadmap.attributes.projectedCompletion && !roadmap.attributes.complete)
+                                    .map((roadmap: RoadmapItem) => (
+                                        <div key={roadmap.id} className="bg-accent dark:bg-accent-dark p-6 rounded-lg">
+                                            <div className="flex space-x-4">
+                                                <VoteBox 
+                                                    likeCount={roadmap.attributes.likes.data.length} 
+                                                    liked={roadmap.attributes.likes.data.some(({ id }) => id === user?.profile?.id?.toString())}
+                                                />
+                                                <div className="flex-1">
+                                                    <h4 className="text-lg font-bold mb-2">{roadmap.attributes.title}</h4>
+                                                    <p className="text-sm opacity-75">{roadmap.attributes.description}</p>
+                                                    {roadmap.attributes.projectedCompletion && (
+                                                        <p className="text-sm mt-2">
+                                                            Expected: {new Date(roadmap.attributes.projectedCompletion).toLocaleDateString()}
+                                                        </p>
+                                                    )}
+                                                    <div className="mt-4 flex gap-2">
+                                                        <CallToAction
+                                                            size="sm"
+                                                            type={subscribed[roadmap.id] ? 'outline' : 'primary'}
+                                                            disabled={loading[roadmap.id]}
+                                                            onClick={() => handleSubscribe(roadmap)}
+                                                            className="text-sm font-semibold flex gap-2 items-center"
+                                                        >
+                                                            <>
+                                                                {loading[roadmap.id] ? (
+                                                                    <Spinner className="w-[14px] h-[14px] !text-blue" />
+                                                                ) : subscribed[roadmap.id] ? (
+                                                                    <IconUndo className="w-5 h-5 inline-block" />
+                                                                ) : roadmap.attributes.betaAvailable ? (
+                                                                    null
+                                                                ) : (
+                                                                    <IconBell className="w-5 h-5 inline-block" />
+                                                                )}
+                                                                <span>
+                                                                    {subscribed[roadmap.id]
+                                                                        ? 'Unsubscribe'
+                                                                        : roadmap.attributes.betaAvailable
+                                                                        ? 'Request early access'
+                                                                        : 'Get updates about this project'}
+                                                                    {!subscribed[roadmap.id] && !roadmap.attributes.betaAvailable && (
+                                                                        <Tooltip
+                                                                            content="Get email notifications when the team shares updates about this project, releases a beta, or
+                                                                            ships this feature."
+                                                                            contentContainerClassName="max-w-xs"
+                                                                        >
+                                                                            <div className="inline-block relative">
+                                                                                <IconInfo className="w-4 h-4 ml-1 opacity-50 inline-block" />
+                                                                            </div>
+                                                                        </Tooltip>
+                                                                    )}
+                                                                </span>
+                                                            </>
+                                                        </CallToAction>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    ))}
+                            </div>
+                        </div>
+                        <div>
+                            <h3 className="text-2xl mb-6">Shipped</h3>
+                            <div className="space-y-6">
+                                {roadmaps
+                                    .filter((roadmap: RoadmapItem) => roadmap.attributes.complete)
+                                    .map((roadmap: RoadmapItem) => (
+                                        <div key={roadmap.id} className="bg-accent dark:bg-accent-dark p-6 rounded-lg">
+                                            <div className="flex space-x-4">
+                                                <VoteBox 
+                                                    likeCount={roadmap.attributes.likes.data.length} 
+                                                    liked={roadmap.attributes.likes.data.some(({ id }) => id === user?.profile?.id?.toString())}
+                                                />
+                                                <div className="flex-1">
+                                                    <h4 className="text-lg font-bold mb-2">{roadmap.attributes.title}</h4>
+                                                    <p className="text-sm opacity-75">{roadmap.attributes.description}</p>
+                                                    {roadmap.attributes.dateCompleted && (
+                                                        <p className="text-sm mt-2">
+                                                            Shipped: {new Date(roadmap.attributes.dateCompleted).toLocaleDateString()}
+                                                        </p>
+                                                    )}
+                                                    <div className="mt-4">
+                                                        <CallToAction
+                                                            size="sm"
+                                                            type={subscribed[roadmap.id] ? 'outline' : 'primary'}
+                                                            disabled={loading[roadmap.id]}
+                                                            onClick={() => handleSubscribe(roadmap)}
+                                                            className="text-sm font-semibold flex gap-2 items-center"
+                                                        >
+                                                            <>
+                                                                {loading[roadmap.id] ? (
+                                                                    <Spinner className="w-[14px] h-[14px] !text-blue" />
+                                                                ) : subscribed[roadmap.id] ? (
+                                                                    <IconUndo className="w-5 h-5 inline-block" />
+                                                                ) : roadmap.attributes.betaAvailable ? (
+                                                                    null
+                                                                ) : (
+                                                                    <IconBell className="w-5 h-5 inline-block" />
+                                                                )}
+                                                                <span>
+                                                                    {subscribed[roadmap.id]
+                                                                        ? 'Unsubscribe'
+                                                                        : roadmap.attributes.betaAvailable
+                                                                        ? 'Request early access'
+                                                                        : 'Get updates about this project'}
+                                                                    {!subscribed[roadmap.id] && !roadmap.attributes.betaAvailable && (
+                                                                        <Tooltip
+                                                                            content="Get email notifications when the team shares updates about this project, releases a beta, or
+                                                                            ships this feature."
+                                                                            contentContainerClassName="max-w-xs"
+                                                                        >
+                                                                            <div className="inline-block relative">
+                                                                                <IconInfo className="w-4 h-4 ml-1 opacity-50 inline-block" />
+                                                                            </div>
+                                                                        </Tooltip>
+                                                                    )}
+                                                                </span>
+                                                            </>
+                                                        </CallToAction>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    ))}
+                            </div>
+                        </div>
+                    </div>
+                </section>
 
                 <section id="features" className="-mt-28 pt-36 mt-18">
                     <h3 className="text-2xl md:text-2xl text-center">
