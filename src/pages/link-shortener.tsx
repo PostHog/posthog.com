@@ -85,7 +85,6 @@ function Hero(): JSX.Element {
 
         const intervalId = setInterval(() => {
             setTime(Date.now()) // Trigger re-render for countdowns
-            setLinks(getValidLinks())
         }, 60000) // Update every minute
 
         return () => clearInterval(intervalId) // Cleanup on unmount
@@ -146,7 +145,7 @@ function Hero(): JSX.Element {
                     Short links but more fun
                 </h1>
                 <div className="flex flex-col sm:flex-row gap-1 items-center justify-around mb-12">
-                    <div className="flex flex-col gap-2">
+                    <div className="flex flex-col gap-2 items-center">
                         <p className="text-lg mb-0 text-gray-500 lg:text-xl sm:px-16 xl:px-48 dark:text-gray-400">
                             PostHog includes a modern link management platform for developers, product teams, and
                             marketers.
@@ -156,17 +155,15 @@ function Hero(): JSX.Element {
                             permanent links.
                         </p>
 
-                        <div className="flex flex-col mb-8 space-y-4 sm:flex-row sm:justify-center sm:space-y-0 sm:space-x-4">
-                            <TrackedCTA
-                                event={{ name: `clicked link tracking get started` }}
-                                type="primary"
-                                size="sm"
-                                to="/signup"
-                                className="[&>span]:flex [&>span]:items-center [&>span]:gap-1 relative mt-2"
-                            >
-                                Get started - free
-                            </TrackedCTA>
-                        </div>
+                        <TrackedCTA
+                            event={{ name: `clicked link tracking get started` }}
+                            type="primary"
+                            className="max-w-xs mt-2 mb-8"
+                            size="sm"
+                            to="/signup"
+                        >
+                            Get started - free
+                        </TrackedCTA>
                     </div>
                 </div>
 
@@ -184,9 +181,17 @@ function Hero(): JSX.Element {
                             />
                         </div>
 
-                        <CallToAction onClick={handleShortenLink} size="sm" type="secondary" disabled={isShortening}>
-                            {isShortening ? 'Shortening...' : 'Shorten link'}
-                        </CallToAction>
+                        <div className="w-full sm:w-auto">
+                            <CallToAction
+                                onClick={handleShortenLink}
+                                className="w-full"
+                                size="sm"
+                                type="secondary"
+                                disabled={isShortening}
+                            >
+                                {isShortening ? 'Shortening...' : 'Shorten link'}
+                            </CallToAction>
+                        </div>
                     </div>
 
                     <div className="mt-8 p-4 bg-gray-50 dark:bg-gray-800 text-left">
