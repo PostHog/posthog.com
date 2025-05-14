@@ -1,5 +1,5 @@
 import React, { useRef } from 'react'
-import { IconGraph, IconPieChart, IconDocument, IconQuestion, IconMap, IconPiggyBank } from '@posthog/icons'
+import { IconGraph, IconPieChart, IconDocument, IconQuestion, IconMap, IconPiggyBank, IconStack, IconVideoCamera } from '@posthog/icons'
 import Link from 'components/Link'
 import { useApp } from '../../context/App'
 import useProduct from 'hooks/useProduct'
@@ -22,7 +22,13 @@ interface Product {
     color: string
 }
 
-const apps: AppItem[] = [
+const productLinks: AppItem[] = [
+    {
+        label: 'Products',
+        Icon: IconStack,
+        color: 'blue',
+        url: '/products',
+    },
     {
         label: 'Pricing',
         Icon: IconPiggyBank,
@@ -36,6 +42,22 @@ const apps: AppItem[] = [
         url: '/customers',
     },
     {
+        label: 'demo.mov',
+        Icon: IconDemoThumb,
+        color: 'blue',
+        url: '/demo',
+        className: '!size-14 -mt-4 -mb-3',
+    },
+    {
+        label: 'Docs',
+        Icon: IconDocument,
+        color: 'salmon',
+        url: '/docs',
+    },
+]
+
+const apps: AppItem[] = [
+    {
         label: 'Why PostHog?',
         Icon: IconQuestion,
         color: 'orange',
@@ -48,13 +70,6 @@ const apps: AppItem[] = [
         url: '/roadmap',
     },
     {
-        label: 'demo.mov',
-        Icon: IconDemoThumb,
-        color: 'blue',
-        url: '/demo',
-        className: '!size-14 -mt-4 -mb-3',
-    },
-    {
         label: 'Forums',
         Icon: IconMessages,
         color: 'blue',
@@ -65,6 +80,12 @@ const apps: AppItem[] = [
         Icon: IconDice,
         color: 'green',
         url: '/games',
+    },
+    {
+        label: 'Photo booth',
+        Icon: IconVideoCamera,
+        color: 'orange',
+        url: '/photobooth',
     },
 ]
 
@@ -105,6 +126,14 @@ export default function Desktop() {
                 className="overflow-hidden flex justify-between"
             >
                 <ul className="p-0 m-0 list-none flex flex-col flex-wrap h-full content-start gap-x-8 gap-y-4">
+                    {productLinks.map((app, index) => (
+                        <li key={app.label + index} className="w-[110px] flex justify-center">
+                            <ZoomHover>
+                                <AppLink {...app} />
+                            </ZoomHover>
+                        </li>
+                    ))}
+                    {/* 
                     {products?.map((product, index) => (
                         <li key={product.name + index} className="w-[110px] flex justify-center">
                             <ZoomHover>
@@ -118,6 +147,7 @@ export default function Desktop() {
                             </ZoomHover>
                         </li>
                     ))}
+                     */}
                 </ul>
                 <ul className="p-0 m-0 list-none flex flex-col flex-wrap h-full content-start gap-x-8 gap-y-4">
                     {apps.map((app, index) => (

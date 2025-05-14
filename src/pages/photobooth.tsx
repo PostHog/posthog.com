@@ -9,6 +9,7 @@ import { toJpeg } from 'html-to-image'
 import { IconDownload } from '@posthog/icons'
 import Link from 'components/Link'
 import { SEO } from 'components/seo'
+import Explorer from 'components/Explorer'
 
 const numImages = 4
 const initialCount = 3
@@ -962,7 +963,8 @@ export default function Photobooth(): JSX.Element {
     }, [])
 
     return (
-        <Layout>
+        <Explorer template="generic" slug="photobooth" title="Photobooth">
+            
             <SEO
                 title="PostHog photo booth"
                 description="A Valentine's Day photo booth"
@@ -1059,6 +1061,6 @@ export default function Photobooth(): JSX.Element {
                     )}
                 </AnimatePresence>
             </div>
-        </Layout>
+        </Explorer>
     )
 }

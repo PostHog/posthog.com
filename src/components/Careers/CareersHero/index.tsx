@@ -219,7 +219,7 @@ export const CareersHero = () => {
                             </option>
                         ))}
                     </select>
-                    <ul className="hidden md:block list-none p-0 m-0 space-y-0.5">
+                    <ul data-scheme="primary" className="hidden md:block list-none p-0 m-0 space-y-0.5">
                         {jobs.map((job) => {
                             return (
                                 <li key={job.fields.title} className="">
