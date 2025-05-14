@@ -1431,7 +1431,7 @@
             "headers": [
                 {
                     "key": "Content-Security-Policy-Report-Only",
-                    "value": "report-uri https://d1iyf54ud053a4.cloudfront.net/csp?token=sTMFPsFhdP1Ssg; report-to csp-endpoint"
+                    "value": "default-src 'self'; script-src 'self' 'unsafe-inline' https://*.posthog.com; style-src 'self' 'unsafe-inline'; img-src 'self' data: https://*.posthog.com; font-src 'self'; connect-src 'self' https://*.posthog.com; frame-src 'self'; report-uri https://d1iyf54ud053a4.cloudfront.net/csp?token=sTMFPsFhdP1Ssg; report-to csp-endpoint"
                 },
                 {
                     "key": "Reporting-Endpoints",
