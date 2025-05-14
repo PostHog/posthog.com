@@ -1424,5 +1424,20 @@
             "source": "/docs/surveys/webhook",
             "destination": "/docs/surveys/destinations"
         }
+    ],
+    "headers": [
+        {
+            "source": "/(.*)",
+            "headers": [
+                {
+                    "key": "Content-Security-Policy-Report-Only",
+                    "value": "report-uri https://d1iyf54ud053a4.cloudfront.net/csp?token=sTMFPsFhdP1Ssg; report-to csp-endpoint"
+                },
+                {
+                    "key": "Reporting-Endpoints",
+                    "value": "csp-endpoint=\"https://d1iyf54ud053a4.cloudfront.net/csp?token=sTMFPsFhdP1Ssg\""
+                }
+            ]
+        }
     ]
 }
