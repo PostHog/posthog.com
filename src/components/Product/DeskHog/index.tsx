@@ -1,6 +1,7 @@
 import CloudinaryImage from 'components/CloudinaryImage'
 import React from 'react'
 import Link from 'components/Link'
+import { IconLaptop, IconWrench, IconHandwave, IconCode2 } from '@posthog/icons'
 import {
     IconAsterisk,
     IconBolt,
@@ -15,7 +16,6 @@ import {
     IconPlus,
     IconRevert,
     IconRewindPlay,
-    IconLaptop,
     IconServer,
     IconStack,
     IconToggle,
@@ -24,6 +24,8 @@ import {
     IconHandMoney,
     IconThumbsUp,
     IconHeartFilled,
+    IconThoughtBubble,
+    IconCode,
 } from '@posthog/icons'
 import { CallToAction } from 'components/CallToAction'
 import { Hero } from 'components/Products/Hero'
@@ -70,67 +72,49 @@ const product = {
     capitalized: 'DeskHog',
 }
 
-const subfeaturesItemCount = 5
+const subfeaturesItemCount = 3
 const subfeatures = [
     {
-        title: 'Track insights',
-        description: 'Pull data from your PostHog instance to track important metrics.',
-        icon: <IconGraph />,
+        title: 'Open-source',
+        description:
+            "We're open-source, which means DeskHog is yours to hack. Build your own games, tools, with AI editors (or C++ if you're a masochist).",
+        icon: <IconCode2 />,
     },
     {
-        title: 'Get motivated',
-        description: 'Ships with FriendCard, a friendly hedgehog who encourages you.',
-        icon: <IconThumbsUp />,
+        title: '3D printed',
+        description:
+            "Danilo prints these at home and assembles them by hand. It's a friction-fit labor of love. Or you can print your own from the files on GitHub.",
+        icon: <IconWrench />,
     },
     {
-        title: 'Play games',
-        description: 'Play Pog (Pong), Flappy Hog, and One Button Dungeon (Roguelike).',
-        icon: <IconPlay />,
-    },
-    {
-        title: 'Increase revenue',
-        description: "Clicker game? Wry satire? Doesn't matter, shareholders love it.",
-        icon: <IconHandMoney />,
-    },
-    {
-        title: 'Nurture hedgehogs',
-        description: 'Take care of a virtual hedgehog who loves pineapples on pizza.',
-        icon: <IconHeartFilled />,
-    },
-]
-
-const faqs = [
-    {
-        question: 'What is DeskHog?',
-        children: 'DeskHog is a revolutionary way to manage and optimize your desk setup!',
-    },
-    {
-        question: 'Is there a free tier?',
-        children: 'Yes, DeskHog offers a generous free tier to get you started.',
+        title: 'Palm-sized',
+        description:
+            "DeskHog is small enough to fit in your pocket. It's got a 7-day battery life, WiFi, and a cute flashing LED so you can find it in the dark.",
+        icon: <IconHandwave />,
     },
 ]
 
 const pairsWithItemCount = 3
 const PairsWithArray = [
     {
-        icon: <IconGraph />,
-        product: 'Productivity Tracker',
+        icon: <IconCode />,
+        product: 'Developers',
         color: 'blue',
-        description: 'Integrate DeskHog with your favorite productivity tools.',
+        description: 'Using an AI editor, or write your own C++ to show off.',
         url: '#',
     },
     {
-        icon: <IconToggle />,
-        product: 'Smart Home Hub',
+        icon: <IconPeople />,
+        product: 'Bathroom breaks',
         color: 'seagreen',
-        description: 'Control your smart desk accessories through DeskHog.',
+        description: "Trust us. Your boss will never suspect you're DeskHogging.",
         url: '#',
     },
     {
-        icon: <IconServer />,
-        product: 'Cloud Backup',
+        icon: <IconThoughtBubble />,
+        product: 'Imagination',
         color: 'black dark:text-white',
-        description: 'Backup your DeskHog configurations to the cloud.',
+        description: 'Build anything you want and test it instantly.',
         url: '#',
     },
 ]
@@ -141,7 +125,7 @@ export const ProductDeskHog = () => {
         <>
             <SEO
                 title="DeskHog - PostHog"
-                description="Manage your desk setup like never before with DeskHog, the ultimate desk optimization tool."
+                description="It's an open source, 3D printed, 100% hackable developer toy that brings developers joy."
                 image={`/images/og/deskhog.jpg`}
             />
             <div className={`${fullWidthContent ? 'max-w-full px-8' : 'max-w-7xl mx-auto'} px-5 py-10 md:pt-20 pb-0`}>
@@ -149,8 +133,8 @@ export const ProductDeskHog = () => {
                     color="orange"
                     icon={<IconLaptop />}
                     product={product.capitalized}
-                    title="It's a developer toy that <br /> brings <span class='text-red dark:text-yellow'>developers joy</span>"
-                    description="Open source, 3D printed, 100% hackable."
+                    title="It's a developer toy that <br /> <span className='text-red dark:text-yellow'>brings developers joy</span>"
+                    description="Yes, we make hardware now."
                 />
 
                 <div className="text-center mb-12">
@@ -163,10 +147,12 @@ export const ProductDeskHog = () => {
             </div>
 
             <div id="features">
-                <section className="max-w-7xl mx-auto px-5 md:mb-20">
+                <section className="max-w-7xl mx-auto px-5 md:mb-32">
                     <div className="mb-4">
-                        <h2 className="text-4xl text-center mb-8">
-                            It's not <span className="text-red dark:text-yellow">just</span> a hedgehog in a box
+                        <h2 className="text-4xl text-center mb-12">
+                            DeskHog is an <span className="text-red dark:text-yellow">open-source</span>,{' '}
+                            <span className="text-red dark:text-yellow">3D printed</span>, and{' '}
+                            <span className="text-red dark:text-yellow">palm-sized</span> slice of developer joy.
                         </h2>
                         <ul className={`list-none p-0 grid md:grid-cols-${subfeaturesItemCount} gap-4`}>
                             {subfeatures.map((subfeature, index) => {
@@ -175,12 +161,27 @@ export const ProductDeskHog = () => {
                         </ul>
                     </div>
 
-                    <div className="flex flex-col-reverse items-center md:flex-row gap-8 mb-20">
+                    <div className="flex flex-col-reverse items-center md:flex-row gap-8 pt-20 mb-20">
                         <div className="flex-1">
                             <h2 className="text-4xl">
-                                100% <span className="text-red dark:text-yellow">open-source</span>
+                                What about the hardware?
+                                <br />
+                                <span className="text-red dark:text-yellow">It's tiny, but mighty.</span>
                             </h2>
-                            <p>DeskHog provides a seamless experience to manage all aspects of your desk setup.</p>
+                            <p>
+                                Yes, someone from our marketing team makes these by hand at home. But it still kicks
+                                ass.
+                            </p>
+                            <p>
+                                DeskHog packs a ESP32-S3 Reverse TFT Feather in a custom-made 3D printed. It comes
+                                complete with a 240x135 color TFT display, a 7-day battery life, WiFi, and a cute little
+                                LED.
+                            </p>
+                            <p>
+                                <b>Can it play Pong?</b> Yes.
+                                <br /> <b>Can it play Flappy Bird?</b> Yes.
+                                <br /> <b>Can it play Doom?</b> We're working on it.
+                            </p>
                         </div>
                         <aside className="shrink-0 md:basis-[500px]">
                             <CloudinaryImage
@@ -190,56 +191,82 @@ export const ProductDeskHog = () => {
                             />
                         </aside>
                     </div>
-
-                    <div className="mb-20">
-                        <div className="flex gap-8 flex-col-reverse md:flex-row">
-                            <div className="flex-1">
-                                <h2 className="text-4xl">
-                                    Integrates <span className="text-red dark:text-yellow">With Your Tools</span>
-                                </h2>
-                                <p className="max-w-2xl">
-                                    DeskHog connects with {PRODUCT_COUNT}+ other PostHog products and external services
-                                    to streamline your workflow.
-                                </p>
-                            </div>
-                            <div className="shrink-0 flex flex-wrap gap-2">
-                                <ProductIcon name="Productivity Suite" url="#" color="blue" icon={<IconGraph />} />
-                                <ProductIcon name="Smart Lighting" url="#" color="yellow" icon={<IconRewindPlay />} />
-                            </div>
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-20">
+                        <div className="text-center">
+                            <CloudinaryImage
+                                src="https://res.cloudinary.com/dmukukwp6/image/upload/Screenshot_2025_05_14_at_16_31_37_5e009d0dd5.png"
+                                alt="Game screenshot 1"
+                                className="w-full max-w-[200px] mx-auto mb-4"
+                            />
+                            <h3 className="text-xl font-bold">Pog</h3>
+                            <p className="text-sm">
+                                It's Pong, built by Leon Daly. <br />
+                                It's perfect for playing on the toilet.
+                            </p>
+                        </div>
+                        <div className="text-center">
+                            <CloudinaryImage
+                                src="https://res.cloudinary.com/dmukukwp6/image/upload/Screenshot_2025_05_14_at_16_31_37_5e009d0dd5.png"
+                                alt="Game screenshot 2"
+                                className="w-full max-w-[200px] mx-auto mb-4"
+                            />
+                            <h3 className="text-xl font-bold">Shareholder Value Clicker</h3>
+                            <p className="text-sm">
+                                Wry satire? Idle clicker game? Creator Chris
+                                <br /> McNeill says it's both.
+                            </p>
+                        </div>
+                        <div className="text-center">
+                            <CloudinaryImage
+                                src="https://res.cloudinary.com/dmukukwp6/image/upload/Screenshot_2025_05_14_at_16_31_37_5e009d0dd5.png"
+                                alt="Game screenshot 3"
+                                className="w-full max-w-[200px] mx-auto mb-4"
+                            />
+                            <h3 className="text-xl font-bold">One Button Dungeon</h3>
+                            <p className="text-sm">
+                                A roguelike throwback about an endless corridor.
+                                <br /> Such is life, says Joe Martin.
+                            </p>
+                        </div>
+                        <div className="text-center">
+                            <CloudinaryImage
+                                src="https://res.cloudinary.com/dmukukwp6/image/upload/Screenshot_2025_05_14_at_16_31_37_5e009d0dd5.png"
+                                alt="Game screenshot 4"
+                                className="w-full max-w-[200px] mx-auto mb-4"
+                            />
+                            <h3 className="text-xl font-bold">Awkwardness Avoider</h3>
+                            <p className="text-sm">
+                                Need some icebreakers at a party? <br />
+                                Annika Schmid's game has you covered.
+                            </p>
+                        </div>
+                        <div className="text-center">
+                            <CloudinaryImage
+                                src="https://res.cloudinary.com/dmukukwp6/image/upload/Screenshot_2025_05_14_at_16_31_37_5e009d0dd5.png"
+                                alt="Game screenshot 5"
+                                className="w-full max-w-[200px] mx-auto mb-4"
+                            />
+                            <h3 className="text-xl font-bold">Notchagotchi</h3>
+                            <p className="text-sm">
+                                Creator Sophie Payne was a little worried <br />
+                                she'd be sued if she called this what it is.
+                            </p>
+                        </div>
+                        <div className="text-center">
+                            <CloudinaryImage
+                                src="https://res.cloudinary.com/dmukukwp6/image/upload/Screenshot_2025_05_14_at_16_31_37_5e009d0dd5.png"
+                                alt="Game screenshot 6"
+                                className="w-full max-w-[200px] mx-auto mb-4"
+                            />
+                            <h3 className="text-xl font-bold">Flappy Hog</h3>
+                            <p className="text-sm">
+                                Despite the title, creator Joe Martin <br />
+                                admits this game has no hedgehogs.
+                            </p>
                         </div>
                     </div>
                 </section>
             </div>
-
-            <section
-                id="pricing"
-                className={`${fullWidthContent ? 'max-w-full px-8' : 'max-w-7xl'} mx-auto px-5 py-20`}
-            >
-                <div className="flex flex-col-reverse md:flex-row md:gap-12">
-                    <div className="flex-1">
-                        <h2 className="text-4xl md:text-5xl">Usage-based pricing</h2>
-                        <p className="">Use {product.lowercase} with a generous free tier.</p>
-                    </div>
-                    <div className="md:w-96 md:text-right mb-8 md:mb-0 -mt-8">
-                        <CloudinaryImage
-                            alt="DeskHog Mascot"
-                            placeholder="blurred"
-                            quality={100}
-                            className="w-full max-w-[140px]"
-                            src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/products/product-os/mascot.png"
-                        />
-                    </div>
-                </div>
-
-                <div className="lg:flex justify-between items-start gap-12 -mx-5 md:mx-0">
-                    <div className="px-5 md:px-0 lg:w-96 lg:mt-4">
-                        <h4 className="text-3xl">FAQs</h4>
-                        {faqs.map((faq, index) => {
-                            return <FAQ {...faq} key={index} />
-                        })}
-                    </div>
-                </div>
-            </section>
 
             <div className={`${fullWidthContent ? 'max-w-full px-8' : 'max-w-7xl mx-auto'} px-5 py-10 md:pt-20 pb-0`}>
                 <PairsWith items={pairsWithItemCount}>
