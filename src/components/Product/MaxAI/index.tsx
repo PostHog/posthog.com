@@ -1,7 +1,19 @@
 import CloudinaryImage from 'components/CloudinaryImage'
 import React, { useState } from 'react'
 import Link from 'components/Link'
-import { IconBook, IconChat, IconCode, IconGraph, IconRewindPlay, IconThoughtBubble, IconUser, IconBell, IconUndo, IconInfo, IconThumbsUp } from '@posthog/icons'
+import {
+    IconBook,
+    IconChat,
+    IconCode,
+    IconGraph,
+    IconRewindPlay,
+    IconThoughtBubble,
+    IconUser,
+    IconBell,
+    IconUndo,
+    IconInfo,
+    IconThumbsUp,
+} from '@posthog/icons'
 import { CallToAction } from 'components/CallToAction'
 import { CustomerCard } from 'components/Products/CustomerCard'
 import { Hero } from 'components/Products/Hero'
@@ -63,7 +75,7 @@ interface RoadmapItem {
         complete: boolean
         betaAvailable: boolean
         likes: {
-            data: { id: string }[]
+            data: { id: number }[]
         }
     }
 }
@@ -269,12 +281,12 @@ export const ProductMax = () => {
             filters: {
                 topic: {
                     id: {
-                        $eq: "391"
-                    }
-                }
-            }
+                        $eq: '391',
+                    },
+                },
+            },
         },
-        limit: 100
+        limit: 100,
     })
 
     const handleLike = async (roadmap: RoadmapItem) => {
@@ -283,16 +295,16 @@ export const ProductMax = () => {
             return
         }
         setVoteLoading((prev) => ({ ...prev, [roadmap.id]: true }))
-        const liked = roadmap.attributes.likes.data.some(({ id }) => id === user.profile?.id?.toString())
+        const liked = roadmap.attributes.likes.data.some(({ id }) => id === user.profile?.id)
         await likeRoadmap({
             id: parseInt(roadmap.id),
             unlike: liked,
-            title: roadmap.attributes.title
+            title: roadmap.attributes.title,
         })
         mutate()
         setVoteLoading((prev) => ({ ...prev, [roadmap.id]: false }))
         addToast({
-            message: liked ? 'Removed your vote.' : 'Thanks for voting!'
+            message: liked ? 'Removed your vote.' : 'Thanks for voting!',
         })
     }
 
@@ -306,22 +318,27 @@ export const ProductMax = () => {
         try {
             const token = await getJwt()
             const isSubscribed = !!subscribed[roadmap.id]
-            const res = await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/roadmap/${roadmap.id}/${isSubscribed ? 'unsubscribe' : 'subscribe'}`, {
-                method: 'POST',
-                credentials: 'include',
-                headers: {
-                    Accept: 'application/json',
-                    'Content-Type': 'application/json',
-                    Authorization: `Bearer ${token}`,
-                },
-            })
+            const res = await fetch(
+                `${process.env.GATSBY_SQUEAK_API_HOST}/api/roadmap/${roadmap.id}/${
+                    isSubscribed ? 'unsubscribe' : 'subscribe'
+                }`,
+                {
+                    method: 'POST',
+                    credentials: 'include',
+                    headers: {
+                        Accept: 'application/json',
+                        'Content-Type': 'application/json',
+                        Authorization: `Bearer ${token}`,
+                    },
+                }
+            )
 
             if (res.ok) {
                 setSubscribed((prev) => ({ ...prev, [roadmap.id]: !isSubscribed }))
-                addToast({ 
+                addToast({
                     message: isSubscribed
                         ? `Unsubscribed from ${roadmap.attributes.title}. You will no longer receive updates.`
-                        : `Subscribed to ${roadmap.attributes.title}. We'll email you with updates!`
+                        : `Subscribed to ${roadmap.attributes.title}. We'll email you with updates!`,
                 })
             } else {
                 addToast({ error: true, message: 'Whoops! Something went wrong.' })
@@ -392,22 +409,36 @@ export const ProductMax = () => {
                                     .map((roadmap: RoadmapItem) => (
                                         <div key={roadmap.id} className="bg-accent dark:bg-accent-dark p-6 rounded-lg">
                                             <div className="flex space-x-4">
-                                                <VoteBox 
-                                                    likeCount={roadmap.attributes.likes.data.length} 
-                                                    liked={roadmap.attributes.likes.data.some(({ id }) => id === user?.profile?.id?.toString())}
+                                                <VoteBox
+                                                    likeCount={roadmap.attributes.likes.data.length}
+                                                    liked={roadmap.attributes.likes.data.some(
+                                                        ({ id }) => id === user?.profile?.id
+                                                    )}
                                                 />
                                                 <div className="flex-1">
-                                                    <h4 className="text-lg font-bold mb-2">{roadmap.attributes.title}</h4>
-                                                    <p className="text-sm opacity-75">{roadmap.attributes.description}</p>
+                                                    <h4 className="text-lg font-bold mb-2">
+                                                        {roadmap.attributes.title}
+                                                    </h4>
+                                                    <p className="text-sm opacity-75">
+                                                        {roadmap.attributes.description}
+                                                    </p>
                                                     <div className="mt-4">
                                                         <CallToAction
                                                             size="sm"
-                                                            type={roadmap.attributes.likes.data.some(({ id }) => id === user?.profile?.id?.toString()) ? 'outline' : 'primary'}
+                                                            type={
+                                                                roadmap.attributes.likes.data.some(
+                                                                    ({ id }) => id === user?.profile?.id
+                                                                )
+                                                                    ? 'outline'
+                                                                    : 'primary'
+                                                            }
                                                             disabled={voteLoading[roadmap.id]}
                                                             onClick={() => handleLike(roadmap)}
                                                         >
                                                             <span className="flex items-center space-x-1">
-                                                                {roadmap.attributes.likes.data.some(({ id }) => id === user?.profile?.id?.toString()) ? (
+                                                                {roadmap.attributes.likes.data.some(
+                                                                    ({ id }) => id === user?.profile?.id
+                                                                ) ? (
                                                                     <>
                                                                         <IconUndo className="w-4 h-4" />
                                                                         <span>Unvote</span>
@@ -431,20 +462,32 @@ export const ProductMax = () => {
                             <h3 className="text-2xl mb-6">In progress</h3>
                             <div className="space-y-6">
                                 {roadmaps
-                                    .filter((roadmap: RoadmapItem) => roadmap.attributes.projectedCompletion && !roadmap.attributes.complete)
+                                    .filter(
+                                        (roadmap: RoadmapItem) =>
+                                            roadmap.attributes.projectedCompletion && !roadmap.attributes.complete
+                                    )
                                     .map((roadmap: RoadmapItem) => (
                                         <div key={roadmap.id} className="bg-accent dark:bg-accent-dark p-6 rounded-lg">
                                             <div className="flex space-x-4">
-                                                <VoteBox 
-                                                    likeCount={roadmap.attributes.likes.data.length} 
-                                                    liked={roadmap.attributes.likes.data.some(({ id }) => id === user?.profile?.id?.toString())}
+                                                <VoteBox
+                                                    likeCount={roadmap.attributes.likes.data.length}
+                                                    liked={roadmap.attributes.likes.data.some(
+                                                        ({ id }) => id === user?.profile?.id
+                                                    )}
                                                 />
                                                 <div className="flex-1">
-                                                    <h4 className="text-lg font-bold mb-2">{roadmap.attributes.title}</h4>
-                                                    <p className="text-sm opacity-75">{roadmap.attributes.description}</p>
+                                                    <h4 className="text-lg font-bold mb-2">
+                                                        {roadmap.attributes.title}
+                                                    </h4>
+                                                    <p className="text-sm opacity-75">
+                                                        {roadmap.attributes.description}
+                                                    </p>
                                                     {roadmap.attributes.projectedCompletion && (
                                                         <p className="text-sm mt-2">
-                                                            Expected: {new Date(roadmap.attributes.projectedCompletion).toLocaleDateString()}
+                                                            Expected:{' '}
+                                                            {new Date(
+                                                                roadmap.attributes.projectedCompletion
+                                                            ).toLocaleDateString()}
                                                         </p>
                                                     )}
                                                     <div className="mt-4 flex gap-2">
@@ -460,9 +503,7 @@ export const ProductMax = () => {
                                                                     <Spinner className="w-[14px] h-[14px] !text-blue" />
                                                                 ) : subscribed[roadmap.id] ? (
                                                                     <IconUndo className="w-5 h-5 inline-block" />
-                                                                ) : roadmap.attributes.betaAvailable ? (
-                                                                    null
-                                                                ) : (
+                                                                ) : roadmap.attributes.betaAvailable ? null : (
                                                                     <IconBell className="w-5 h-5 inline-block" />
                                                                 )}
                                                                 <span>
@@ -471,17 +512,18 @@ export const ProductMax = () => {
                                                                         : roadmap.attributes.betaAvailable
                                                                         ? 'Request early access'
                                                                         : 'Get updates about this project'}
-                                                                    {!subscribed[roadmap.id] && !roadmap.attributes.betaAvailable && (
-                                                                        <Tooltip
-                                                                            content="Get email notifications when the team shares updates about this project, releases a beta, or
+                                                                    {!subscribed[roadmap.id] &&
+                                                                        !roadmap.attributes.betaAvailable && (
+                                                                            <Tooltip
+                                                                                content="Get email notifications when the team shares updates about this project, releases a beta, or
                                                                             ships this feature."
-                                                                            contentContainerClassName="max-w-xs"
-                                                                        >
-                                                                            <div className="inline-block relative">
-                                                                                <IconInfo className="w-4 h-4 ml-1 opacity-50 inline-block" />
-                                                                            </div>
-                                                                        </Tooltip>
-                                                                    )}
+                                                                                contentContainerClassName="max-w-xs"
+                                                                            >
+                                                                                <div className="inline-block relative">
+                                                                                    <IconInfo className="w-4 h-4 ml-1 opacity-50 inline-block" />
+                                                                                </div>
+                                                                            </Tooltip>
+                                                                        )}
                                                                 </span>
                                                             </>
                                                         </CallToAction>
@@ -500,16 +542,25 @@ export const ProductMax = () => {
                                     .map((roadmap: RoadmapItem) => (
                                         <div key={roadmap.id} className="bg-accent dark:bg-accent-dark p-6 rounded-lg">
                                             <div className="flex space-x-4">
-                                                <VoteBox 
-                                                    likeCount={roadmap.attributes.likes.data.length} 
-                                                    liked={roadmap.attributes.likes.data.some(({ id }) => id === user?.profile?.id?.toString())}
+                                                <VoteBox
+                                                    likeCount={roadmap.attributes.likes.data.length}
+                                                    liked={roadmap.attributes.likes.data.some(
+                                                        ({ id }) => id === user?.profile?.id
+                                                    )}
                                                 />
                                                 <div className="flex-1">
-                                                    <h4 className="text-lg font-bold mb-2">{roadmap.attributes.title}</h4>
-                                                    <p className="text-sm opacity-75">{roadmap.attributes.description}</p>
+                                                    <h4 className="text-lg font-bold mb-2">
+                                                        {roadmap.attributes.title}
+                                                    </h4>
+                                                    <p className="text-sm opacity-75">
+                                                        {roadmap.attributes.description}
+                                                    </p>
                                                     {roadmap.attributes.dateCompleted && (
                                                         <p className="text-sm mt-2">
-                                                            Shipped: {new Date(roadmap.attributes.dateCompleted).toLocaleDateString()}
+                                                            Shipped:{' '}
+                                                            {new Date(
+                                                                roadmap.attributes.dateCompleted
+                                                            ).toLocaleDateString()}
                                                         </p>
                                                     )}
                                                     <div className="mt-4">
@@ -525,9 +576,7 @@ export const ProductMax = () => {
                                                                     <Spinner className="w-[14px] h-[14px] !text-blue" />
                                                                 ) : subscribed[roadmap.id] ? (
                                                                     <IconUndo className="w-5 h-5 inline-block" />
-                                                                ) : roadmap.attributes.betaAvailable ? (
-                                                                    null
-                                                                ) : (
+                                                                ) : roadmap.attributes.betaAvailable ? null : (
                                                                     <IconBell className="w-5 h-5 inline-block" />
                                                                 )}
                                                                 <span>
@@ -536,17 +585,18 @@ export const ProductMax = () => {
                                                                         : roadmap.attributes.betaAvailable
                                                                         ? 'Request early access'
                                                                         : 'Get updates about this project'}
-                                                                    {!subscribed[roadmap.id] && !roadmap.attributes.betaAvailable && (
-                                                                        <Tooltip
-                                                                            content="Get email notifications when the team shares updates about this project, releases a beta, or
+                                                                    {!subscribed[roadmap.id] &&
+                                                                        !roadmap.attributes.betaAvailable && (
+                                                                            <Tooltip
+                                                                                content="Get email notifications when the team shares updates about this project, releases a beta, or
                                                                             ships this feature."
-                                                                            contentContainerClassName="max-w-xs"
-                                                                        >
-                                                                            <div className="inline-block relative">
-                                                                                <IconInfo className="w-4 h-4 ml-1 opacity-50 inline-block" />
-                                                                            </div>
-                                                                        </Tooltip>
-                                                                    )}
+                                                                                contentContainerClassName="max-w-xs"
+                                                                            >
+                                                                                <div className="inline-block relative">
+                                                                                    <IconInfo className="w-4 h-4 ml-1 opacity-50 inline-block" />
+                                                                                </div>
+                                                                            </Tooltip>
+                                                                        )}
                                                                 </span>
                                                             </>
                                                         </CallToAction>
