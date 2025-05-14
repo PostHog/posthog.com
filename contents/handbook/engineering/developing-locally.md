@@ -524,7 +524,7 @@ While developing, there are times you may want to connect to the database to que
 
 ## Extra: Accessing the Django Admin
 
-If you cannot access the Django admin http://localhost:8000/admin/, it could be that your local user is not set up as a staff user. You can connect to the database, find your `posthog_user` and set `is_staf` to `true`. This should make the admin page accessible.
+If you cannot access the Django admin http://localhost:8000/admin/, it could be that your local user is not set up as a staff user. You can connect to the database, find your `posthog_user` and set `is_staff` to `true`. This should make the admin page accessible.
 
 ## Extra: Developing paid features (PostHog employees only)
 
