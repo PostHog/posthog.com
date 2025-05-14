@@ -3664,6 +3664,12 @@ export const productMenu = {
             url: '/data-warehouse',
         },
         {
+            name: 'DeskHog',
+            icon: 'IconLaptop',
+            color: 'orange',
+            url: '/deskhog',
+        },
+        {
             name: 'Product OS',
             icon: 'IconStack',
             color: 'blue',
