@@ -10,6 +10,7 @@ import { IconInfo, IconRevert } from '@posthog/icons'
 import Tooltip from 'components/Tooltip'
 import subprocessors from '../data/subprocessors.json'
 import { sexyLegalMenu } from '../navs'
+import usePostHog from 'hooks/usePostHog'
 
 const IconPrint = ({ className = '' }) => (
     <svg xmlns="http://www.w3.org/2000/svg" className={className} fill="none" viewBox="0 0 24 24">
@@ -33,9 +34,33 @@ function DpaGenerator() {
     const [mode, setMode] = useState('pretty')
     const [isFormComplete, setIsFormComplete] = useState(false)
     const divRef = useRef(null)
+    const posthog = usePostHog()
 
     const FloatRight = `float-right -mr-2 @2xl:-mr-20 -my-8 @2xl:-mt-16 w-48 @2xl:w-80`
     const FloatLeft = `float-left -ml-2 @2xl:-ml-20 -my-8 @2xl:-mt-16 w-48 @2xl:w-80`
+
+    const handleDpaSubmit = () => {
+        if (typeof posthog === 'undefined') return
+        if (posthog === null) return
+        if (typeof posthog.capture !== 'function') return
+        try {
+            fetch('/api/dpa-export-event', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    companyName,
+                    companyAddress,
+                    yourName,
+                    yourTitle,
+                    date,
+                    representativeEmail,
+                    distinctId: posthog?.get_distinct_id?.() || undefined,
+                }),
+            })
+        } catch (e) {
+            // fail silently
+        }
+    }
 
     const SignatureFields = () => (
         <>
@@ -444,7 +469,10 @@ function DpaGenerator() {
                                     type="primary"
                                     size="sm"
                                     disabled={!isFormComplete}
-                                    onClick={handlePrint}
+                                    onClick={() => {
+                                        handleDpaSubmit()
+                                        handlePrint()
+                                    }}
                                     className="[&>span]:flex [&>span]:items-center [&>span]:gap-1 relative md:left-4"
                                 >
                                     <>
@@ -1219,7 +1247,10 @@ function DpaGenerator() {
                                     10.4.2. for the purposes of clause 17, the clauses shall be governed by the laws of
                                     Ireland
                                 </p>
-                                <p>10.4.3. for the purposes of clause 18, the courts of Ireland shall have jurisdiction; and</p>
+                                <p>
+                                    10.4.3. for the purposes of clause 18, the courts of Ireland shall have
+                                    jurisdiction; and
+                                </p>
                             </div>
                             <p>
                                 10.4.4. for the purposes of clause 13 and Annex I.C, the competent supervisory authority
