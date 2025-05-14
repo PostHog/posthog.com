@@ -158,6 +158,28 @@ const HeroDeskHog = ({ color, icon, beta, product, title, description }: HeroDes
     )
 }
 
+const VideoDeskHog = () => (
+    <section
+        id="demo-video"
+        className={`overflow-hidden transition-all duration-300 h-auto max-h-[90vh] border border-light dark:border-dark rounded leading-[0] shadow-xl mb-8`}
+    >
+        <iframe
+            src="https://res.cloudinary.com/dmukukwp6/video/upload/Termagotchi_084775b39f.mp4"
+            className="rounded aspect-video m-0"
+            style={{
+                width: '100%',
+                height: 'auto',
+                maxWidth: '55%',
+                margin: '0 auto',
+                display: 'block',
+                border: '1px solid',
+                borderColor: 'inherit',
+            }}
+            allow="autoplay"
+        />
+    </section>
+)
+
 export const ProductDeskHog = () => {
     const { fullWidthContent } = useLayoutData()
     return (
@@ -175,14 +197,7 @@ export const ProductDeskHog = () => {
                     title="It's a developer toy that <br /> <span className='text-red dark:text-yellow'>brings developers joy</span>"
                     description="Yes, we make hardware now."
                 />
-
-                <div className="text-center mb-12">
-                    <CloudinaryImage
-                        src="https://res.cloudinary.com/dmukukwp6/image/upload/deskhoggo_7caeace8d8.png"
-                        alt="DeskHog"
-                        className="w-full max-w-[600px]"
-                    />
-                </div>
+                <VideoDeskHog />
             </div>
 
             <div id="features">
@@ -205,7 +220,7 @@ export const ProductDeskHog = () => {
                             <h2 className="text-4xl">
                                 What about the hardware?
                                 <br />
-                                <span className="text-red dark:text-yellow">It's tiny, but mighty.</span>
+                                <span className="text-red dark:text-yellow">It's a teeny, tiny, beast.</span>
                             </h2>
                             <p>
                                 Yes, someone from our marketing team makes these by hand at home. But it still kicks
@@ -224,9 +239,9 @@ export const ProductDeskHog = () => {
                         </div>
                         <aside className="shrink-0 md:basis-[500px]">
                             <CloudinaryImage
-                                src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Product/ProductOS/images/sql-hog.png"
-                                alt="DeskHog control panel"
-                                className="w-full max-w-[562px]"
+                                src="https://res.cloudinary.com/dmukukwp6/image/upload/hogzilla_73b822a689.png"
+                                alt="DeskHog is a beast"
+                                className="w-full max-w-[470px]"
                             />
                         </aside>
                     </div>
@@ -239,7 +254,7 @@ export const ProductDeskHog = () => {
                         too)
                     </h3>
 
-                    <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-20">
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
                         <div className="text-center">
                             <CloudinaryImage
                                 src="https://res.cloudinary.com/dmukukwp6/image/upload/Screenshot_2025_05_14_at_16_31_37_5e009d0dd5.png"
@@ -319,8 +334,52 @@ export const ProductDeskHog = () => {
                             </p>
                         </div>
                     </div>
+                    <p className="text-center text-lg mb-30 bg-[#E5E7E0] p-4 rounded-md shadow-md w-full">
+                        <strong>Hang on. I can make my own games for it?</strong> Yep, just head to{' '}
+                        <Link to="https://github.com/PostHog/DeskHog" className="text-red dark:text-yellow">
+                            GitHub to get started
+                        </Link>
+                        .
+                    </p>
                 </section>
             </div>
+
+            <section>
+                <div className={`${fullWidthContent ? 'max-w-full px-8' : 'max-w-7xl mx-auto'} px-5 py-5 md:pt-1 pb-0`}>
+                    <h2 className="text-4xl text-center mb-2">It also has important business tools</h2>
+                    <h4 className="text-2xl text-center mb-12">(A great excuse to expense your DeskHog purchase)</h4>
+
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
+                        <div className="text-center">
+                            <CloudinaryImage
+                                src="https://res.cloudinary.com/dmukukwp6/image/upload/Screenshot_2025_05_14_at_16_31_37_5e009d0dd5.png"
+                                alt="Business tool 1"
+                                className="w-full max-w-[200px] mx-auto mb-4"
+                            />
+                            <h3 className="text-xl font-bold">Clock</h3>
+                            <p className="text-sm">But, wait, it also includes a timer!</p>
+                        </div>
+                        <div className="text-center">
+                            <CloudinaryImage
+                                src="https://res.cloudinary.com/dmukukwp6/image/upload/Screenshot_2025_05_14_at_16_31_37_5e009d0dd5.png"
+                                alt="Business tool 2"
+                                className="w-full max-w-[200px] mx-auto mb-4"
+                            />
+                            <h3 className="text-xl font-bold">Pomodoro Timer</h3>
+                            <p className="text-sm">Gives you time to ponder 20 tomatoes.</p>
+                        </div>
+                        <div className="text-center">
+                            <CloudinaryImage
+                                src="https://res.cloudinary.com/dmukukwp6/image/upload/Screenshot_2025_05_14_at_16_31_37_5e009d0dd5.png"
+                                alt="Business tool 3"
+                                className="w-full max-w-[200px] mx-auto mb-4"
+                            />
+                            <h3 className="text-xl font-bold">Insight Keeper-upper</h3>
+                            <p className="text-sm">Grab graphs from PostHog and squint at them.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
 
             <div className={`${fullWidthContent ? 'max-w-full px-8' : 'max-w-7xl mx-auto'} px-5 py-10 md:pt-20 pb-0`}>
                 <PairsWith items={pairsWithItemCount}>
