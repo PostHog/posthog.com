@@ -197,7 +197,7 @@ function Hero(): JSX.Element {
                                     return (
                                         <li key={link.short}>
                                             <div
-                                                className={`relative bg-white dark:bg-gray-700 rounded-md shadow-sm hover:shadow-md transition-shadow relative ${
+                                                className={`relative bg-white dark:bg-white/10 rounded-md shadow-sm hover:shadow-md transition-shadow relative ${
                                                     timeLeft <= 0 ? 'opacity-50' : ''
                                                 } ${
                                                     link.loading ? 'opacity-50' : '' // Slightly fade the content to make spinner more visible
@@ -224,12 +224,12 @@ function Hero(): JSX.Element {
                                                 <div className="flex p-3 justify-between items-center">
                                                     <div>
                                                         <div className="flex flex-row items-center gap-1">
-                                                            <LinkIcon className="w-[15px] h-[15px] text-red" />
+                                                            <LinkIcon className="w-[15px] h-[15px] text-red dark:text-yellow" />
                                                             <a
                                                                 href={link.loading ? undefined : link.short}
                                                                 target="_blank"
                                                                 rel="noopener noreferrer"
-                                                                className={`text-blue-600 dark:text-blue-400 font-semibold ${
+                                                                className={`font-semibold ${
                                                                     link.loading
                                                                         ? 'cursor-not-allowed'
                                                                         : 'hover:underline'
