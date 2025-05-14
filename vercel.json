@@ -1435,7 +1435,7 @@
                 },
                 {
                     "key": "Reporting-Endpoints",
-                    "value": "csp-endpoint=\"https://d1iyf54ud053a4.cloudfront.net/csp?token=sTMFPsFhdP1Ssg\""
+                    "value": "csp-endpoint=\"https://d1iyf54ud053a4.cloudfront.net/csp?token=sTMFPsFhdP1Ssg&sample_rate=0.1&v=1\""
                 }
             ]
         }
