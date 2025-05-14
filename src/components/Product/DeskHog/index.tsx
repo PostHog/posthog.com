@@ -100,24 +100,63 @@ const PairsWithArray = [
         icon: <IconCode />,
         product: 'Developers',
         color: 'blue',
-        description: 'Using an AI editor, or write your own C++ to show off.',
+        description:
+            'Make your own games and tools with an AI editor, or C++ if you really want to show off your l33t skills.',
         url: '#',
     },
     {
         icon: <IconPeople />,
         product: 'Bathroom breaks',
         color: 'seagreen',
-        description: "Trust us. Your boss will never suspect you're DeskHogging.",
+        description: "You can take DeskHog anywhere and your boss will never suspect you're DeskHogging. Trust us. ",
         url: '#',
     },
     {
         icon: <IconThoughtBubble />,
         product: 'Imagination',
         color: 'black dark:text-white',
-        description: 'Build anything you want and test it instantly.',
+        description: 'Build games, tools, whatever you want. We made DeskHog for you to tear apart and build on.',
         url: '#',
     },
 ]
+
+interface HeroDeskHogProps {
+    icon: React.ReactNode
+    color: string
+    beta?: boolean
+    product: string
+    title: string
+    description: string
+}
+
+const HeroDeskHog = ({ color, icon, beta, product, title, description }: HeroDeskHogProps): JSX.Element => {
+    return (
+        <section>
+            <div className="flex gap-1.5 justify-center items-center mb-3">
+                <span className={`w-6 h-6 text-${color}`}>{icon}</span>
+                <span className="text-[15px] font-semibold text-opacity-60">{product}</span>
+                {beta && (
+                    <span className="text-xs font-semibold text-opacity-60 bg-yellow px-1 py-0.5 rounded-sm uppercase text-primary">
+                        Beta
+                    </span>
+                )}
+            </div>
+            <h1
+                className="text-5xl md:text-6xl text-center mb-4 md:mb-2 text-balance"
+                dangerouslySetInnerHTML={{ __html: title }}
+            />
+            <p
+                className="text-lg font-semibold text-center text-opacity-75 mb-5"
+                dangerouslySetInnerHTML={{ __html: description }}
+            />
+            <div className="flex justify-center gap-2 mb-12">
+                <CallToAction href="https://posthog.com/merch" type="primary">
+                    Buy it now, hack it later
+                </CallToAction>
+            </div>
+        </section>
+    )
+}
 
 export const ProductDeskHog = () => {
     const { fullWidthContent } = useLayoutData()
@@ -125,11 +164,11 @@ export const ProductDeskHog = () => {
         <>
             <SEO
                 title="DeskHog - PostHog"
-                description="It's an open source, 3D printed, 100% hackable developer toy that brings developers joy."
+                description="Manage your desk setup like never before with DeskHog, the ultimate desk optimization tool."
                 image={`/images/og/deskhog.jpg`}
             />
             <div className={`${fullWidthContent ? 'max-w-full px-8' : 'max-w-7xl mx-auto'} px-5 py-10 md:pt-20 pb-0`}>
-                <Hero
+                <HeroDeskHog
                     color="orange"
                     icon={<IconLaptop />}
                     product={product.capitalized}
@@ -139,8 +178,8 @@ export const ProductDeskHog = () => {
 
                 <div className="text-center mb-12">
                     <CloudinaryImage
-                        src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Product/ProductOS/images/product-os.png"
-                        alt="DeskHog interface"
+                        src="https://res.cloudinary.com/dmukukwp6/image/upload/deskhoggo_7caeace8d8.png"
+                        alt="DeskHog"
                         className="w-full max-w-[600px]"
                     />
                 </div>
@@ -180,7 +219,7 @@ export const ProductDeskHog = () => {
                             <p>
                                 <b>Can it play Pong?</b> Yes.
                                 <br /> <b>Can it play Flappy Bird?</b> Yes.
-                                <br /> <b>Can it play Doom?</b> We're working on it.
+                                <br /> <b>Can it play Doom?</b> ...We're working on it.
                             </p>
                         </div>
                         <aside className="shrink-0 md:basis-[500px]">
@@ -191,6 +230,15 @@ export const ProductDeskHog = () => {
                             />
                         </aside>
                     </div>
+                    <h2 className="text-5xl text-center mb-2">Of course we made some games for it</h2>
+                    <h3 className="text-2xl text-center mb-12">
+                        (but you can{' '}
+                        <Link to="https://github.com/PostHog/DeskHog" className="text-red dark:text-yellow">
+                            make your own
+                        </Link>{' '}
+                        too)
+                    </h3>
+
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-20">
                         <div className="text-center">
                             <CloudinaryImage
@@ -200,7 +248,8 @@ export const ProductDeskHog = () => {
                             />
                             <h3 className="text-xl font-bold">Pog</h3>
                             <p className="text-sm">
-                                It's Pong, built by Leon Daly. <br />
+                                It's Pong, built by{' '}
+                                <Link to="https://posthog.com/community/profiles/30833">Leon Daly</Link>. <br />
                                 It's perfect for playing on the toilet.
                             </p>
                         </div>
@@ -212,8 +261,9 @@ export const ProductDeskHog = () => {
                             />
                             <h3 className="text-xl font-bold">Shareholder Value Clicker</h3>
                             <p className="text-sm">
-                                Wry satire? Idle clicker game? Creator Chris
-                                <br /> McNeill says it's both.
+                                Wry satire? Idle clicker game? Creator <br />{' '}
+                                <Link to="https://posthog.com/community/profiles/33534">Chris McNeill</Link> says it's
+                                both.
                             </p>
                         </div>
                         <div className="text-center">
@@ -225,7 +275,8 @@ export const ProductDeskHog = () => {
                             <h3 className="text-xl font-bold">One Button Dungeon</h3>
                             <p className="text-sm">
                                 A roguelike throwback about an endless corridor.
-                                <br /> Such is life, says Joe Martin.
+                                <br /> Such is life, says{' '}
+                                <Link to="https://posthog.com/community/profiles/29070">Joe Martin</Link>.
                             </p>
                         </div>
                         <div className="text-center">
@@ -237,7 +288,8 @@ export const ProductDeskHog = () => {
                             <h3 className="text-xl font-bold">Awkwardness Avoider</h3>
                             <p className="text-sm">
                                 Need some icebreakers at a party? <br />
-                                Annika Schmid's game has you covered.
+                                <Link to="https://posthog.com/community/profiles/28619">Annika Schmid</Link>'s game has
+                                you covered.
                             </p>
                         </div>
                         <div className="text-center">
@@ -248,7 +300,8 @@ export const ProductDeskHog = () => {
                             />
                             <h3 className="text-xl font-bold">Notchagotchi</h3>
                             <p className="text-sm">
-                                Creator Sophie Payne was a little worried <br />
+                                Creator <Link to="https://posthog.com/community/profiles/33385">Sophie Payne</Link> was
+                                a little worried <br />
                                 she'd be sued if she called this what it is.
                             </p>
                         </div>
@@ -260,7 +313,8 @@ export const ProductDeskHog = () => {
                             />
                             <h3 className="text-xl font-bold">Flappy Hog</h3>
                             <p className="text-sm">
-                                Despite the title, creator Joe Martin <br />
+                                Despite the title, creator{' '}
+                                <Link to="https://posthog.com/community/profiles/29070">Joe Martin</Link> <br />
                                 admits this game has no hedgehogs.
                             </p>
                         </div>
