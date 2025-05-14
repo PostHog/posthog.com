@@ -194,6 +194,10 @@ const linklist: IProps[] = [
                 url: '/contributors',
             },
             {
+                title: 'Link shortener',
+                url: '/link-shortener',
+            },
+            {
                 title: 'Newsletter',
                 url: 'https://newsletter.posthog.com',
             },
