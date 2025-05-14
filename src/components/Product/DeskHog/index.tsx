@@ -236,6 +236,12 @@ export const ProductDeskHog = () => {
                                 <br /> <b>Can it play Flappy Bird?</b> Yes.
                                 <br /> <b>Can it play Doom?</b> ...We're working on it.
                             </p>
+                            <div>
+                                <p className="text-center text-lg mb-4 bg-[#E5E7E0] p-4 rounded-md shadow-md w-full">
+                                    <strong>Want more hardware?</strong> We included an I2C expansion port, just for
+                                    people like you.
+                                </p>
+                            </div>
                         </div>
                         <aside className="shrink-0 md:basis-[500px]">
                             <CloudinaryImage
@@ -334,7 +340,7 @@ export const ProductDeskHog = () => {
                             </p>
                         </div>
                     </div>
-                    <p className="text-center text-lg mb-30 bg-[#E5E7E0] p-4 rounded-md shadow-md w-full">
+                    <p className="text-center text-lg mb-4 bg-[#E5E7E0] p-4 rounded-md shadow-md w-full">
                         <strong>Hang on. I can make my own games for it?</strong> Yep, just head to{' '}
                         <Link to="https://github.com/PostHog/DeskHog" className="text-red dark:text-yellow">
                             GitHub to get started
