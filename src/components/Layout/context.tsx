@@ -1,14 +1,24 @@
 import React, { createContext, useEffect, useMemo, useState } from 'react'
-import menu, { docsMenu } from '../../navs'
+import menu, { docsMenu, getFilteredCompanyMenu } from '../../navs'
 import { IMenu } from 'components/PostLayout/types'
 import { useLocation } from '@reach/router'
 import { navigate } from 'gatsby'
 import { useActions } from 'kea'
 import { layoutLogic } from 'logic/layoutLogic'
+import { useIsTeamMember } from 'hooks/useIsTeamMember'
 
 export const Context = createContext<any>(undefined)
 
-function recursiveSearch(array, value) {
+// Extend window type to include PostHog-specific properties
+declare global {
+    interface Window {
+        __theme: string
+        __onThemeChange: () => void
+        __setPreferredTheme: (theme: string) => void
+    }
+}
+
+function recursiveSearch(array: any[], value: string): boolean {
     for (let i = 0; i < array?.length || 0; i++) {
         const element = array[i]
 
@@ -40,6 +50,17 @@ export const LayoutProvider = ({ children, ...other }: IProps) => {
     const [fullWidthContent, setFullWidthContent] = useState<boolean>(
         compact || (typeof window !== 'undefined' && localStorage.getItem('full-width-content') === 'true')
     )
+    const isTeamMember = useIsTeamMember()
+    
+    // Filter the menu items to only show Hogsites to team members
+    const filteredMenu = useMemo(() => {
+        return menu.map(menuItem => {
+            if (menuItem.name === 'Company') {
+                return getFilteredCompanyMenu(isTeamMember)
+            }
+            return menuItem
+        })
+    }, [isTeamMember])
 
     const hedgehogModeLocalStorage = useMemo(() => {
         // Only default it to be on if it's April 1st but still respect if they turned it off
@@ -59,21 +80,61 @@ export const LayoutProvider = ({ children, ...other }: IProps) => {
     const [enterpriseMode, setEnterpriseMode] = useState(false)
     const [theoMode, setTheoMode] = useState(false)
     const [post, setPost] = useState<boolean>(false)
-    const parent =
-        other.parent ??
-        menu.find(({ children, url }) => {
-            const currentURL = pathname
-            return currentURL === url.split('?')[0] || recursiveSearch(children, currentURL)
-        })
+    
+    // Use the filtered menu to find the parent
+    const parent = useMemo(() => {
+        if (other.parent) {
+            return other.parent;
+        }
+        
+        // Use type assertion to help TypeScript understand the structure
+        return filteredMenu.find((menuItem: any) => {
+            const currentURL = pathname;
+            // Add type safety checks
+            const menuUrl = menuItem?.url;
+            const children = menuItem?.children;
+            
+            if (menuUrl && currentURL === menuUrl.split('?')[0]) {
+                return true;
+            }
+            
+            if (children) {
+                return recursiveSearch(children, currentURL);
+            }
+            
+            return false;
+        });
+    }, [other.parent, pathname, filteredMenu]);
 
-    const internalMenu = parent?.children
+    // Get the internal menu from the parent
+    const internalMenu = parent ? (parent as any).children : undefined;
 
-    const activeInternalMenu =
-        other.activeInternalMenu ??
-        internalMenu?.find((menuItem) => {
-            const currentURL = pathname
-            return currentURL === menuItem.url?.split('?')[0] || recursiveSearch(menuItem.children, currentURL)
-        })
+    // Find the active internal menu item
+    const activeInternalMenu = useMemo(() => {
+        if (other.activeInternalMenu) {
+            return other.activeInternalMenu;
+        }
+        
+        if (!internalMenu) {
+            return undefined;
+        }
+        
+        return internalMenu.find((menuItem: any) => {
+            const currentURL = pathname;
+            const menuUrl = menuItem?.url;
+            const children = menuItem?.children;
+            
+            if (menuUrl && currentURL === menuUrl.split('?')[0]) {
+                return true;
+            }
+            
+            if (children) {
+                return recursiveSearch(children, currentURL);
+            }
+            
+            return false;
+        });
+    }, [other.activeInternalMenu, internalMenu, pathname]);
 
     useEffect(() => {
         localStorage.setItem('full-width-content', fullWidthContent + '')
@@ -175,10 +236,18 @@ export const LayoutProvider = ({ children, ...other }: IProps) => {
         }
     }, [pathname])
 
+    // Log filteredMenu in dev mode for debugging
+    useEffect(() => {
+        if (process.env.NODE_ENV === 'development') {
+            console.log('Layout Context: isTeamMember =', isTeamMember);
+            console.log('Layout Context: filteredMenu =', filteredMenu);
+        }
+    }, [isTeamMember, filteredMenu]);
+
     return (
         <Context.Provider
             value={{
-                menu,
+                menu: filteredMenu,
                 parent,
                 internalMenu,
                 activeInternalMenu,

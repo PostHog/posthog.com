@@ -1440,7 +1440,20 @@ export const sexyLegalMenu = {
     ],
 }
 
-export const companyMenu = {
+// Filter function to conditionally include menu items based on user privileges
+const filterForTeamMembers = (menuItems, isTeamMember = false) => {
+    return menuItems.filter(item => {
+        // If the item is Hogsites, only include it for team members
+        if (item.name === 'Hogsites') {
+            return isTeamMember;
+        }
+        // Include all other items
+        return true;
+    });
+};
+
+// Base company menu with all items
+const baseCompanyMenu = {
     name: 'Company',
     url: '/about',
     icon: 'IconLogomark',
@@ -1637,8 +1650,28 @@ export const companyMenu = {
             ],
         },
         { name: 'Careers', icon: 'IconLaptop', color: 'purple', url: '/careers' },
+        { name: 'Hogsites', icon: 'IconHome', color: 'blue', url: '/hogsites' },
     ],
-}
+};
+
+// Export the company menu which can be filtered based on user privileges
+export const companyMenu = baseCompanyMenu;
+
+// Function to get the filtered company menu based on whether the user is a team member
+export const getFilteredCompanyMenu = (isTeamMember = false) => {
+    // Create a copy of the baseCompanyMenu to avoid modifying the original
+    const filteredMenu = { 
+        ...baseCompanyMenu,
+        children: [...baseCompanyMenu.children]
+    };
+    
+    // If not a team member, remove the Hogsites menu item
+    if (!isTeamMember) {
+        filteredMenu.children = filteredMenu.children.filter(item => item.name !== 'Hogsites');
+    }
+    
+    return filteredMenu;
+};
 
 export const docsMenu = {
     name: 'Docs',
