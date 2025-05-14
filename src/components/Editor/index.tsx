@@ -33,11 +33,21 @@ interface EditorProps {
     type?: string
     maxWidth?: string
     children?: React.ReactNode
-    filters?: {
-        products?: string[]
-        [key: string]: any
-    }
+    availableFilters?: {
+        label: string
+        options: {
+            label: string
+            value: any
+        }[]
+        onChange?: (value: string) => void
+        operator: string
+        filter: (obj: any, key: string, value: any) => boolean
+    }[]
     onSearchChange?: (query: string) => void
+    showFilters?: boolean
+    disableFilterChange?: boolean
+    dataToFilter?: any
+    onFilterChange?: (data: any) => void
 }
 
 const toolbarElementsBase: ToolbarElement[] = [
@@ -163,21 +173,37 @@ const toolbarElementsBase: ToolbarElement[] = [
     },
 ]
 
-export function Editor({ title, type, children, filters, maxWidth = '3xl', onSearchChange }: EditorProps) {
-    const [showFilters, setShowFilters] = useState(false)
+const filterData = (data: any, filters: any) => {
+    return data.filter((obj: any) => {
+        return Object.keys(filters).every((key) => {
+            const { value, filter } = filters[key]
+            if (value === null) {
+                return true
+            }
+            return filter(obj, value)
+        })
+    })
+}
+
+export function Editor({
+    title,
+    type,
+    children,
+    availableFilters,
+    maxWidth = '3xl',
+    onSearchChange,
+    showFilters: initialShowFilters = false,
+    disableFilterChange = false,
+    dataToFilter,
+    onFilterChange,
+}: EditorProps) {
+    const [showFilters, setShowFilters] = useState(initialShowFilters)
     const [showSearch, setShowSearch] = useState(false)
+    const [filters, setFilters] = useState({})
     const products = useProduct() as { slug: string; name: string; type: string }[]
     // take the product name passed in and check the useProduct hook to get the product's display name
     const getProductName = (type: string) => products.find((p) => p.type === type)?.name || type
     // if we're filtering to a product, show the filter button in an active/open state
-    const filterKeys = filters
-        ? Object.keys(filters).filter(
-              (k) =>
-                  filters[k] !== undefined &&
-                  filters[k] !== null &&
-                  (Array.isArray(filters[k]) ? filters[k].length > 0 : true)
-          )
-        : []
 
     const toggleSearch = () => {
         setShowSearch(!showSearch)
@@ -201,13 +227,15 @@ export function Editor({ title, type, children, filters, maxWidth = '3xl', onSea
                         icon={<Icons.IconSearch />}
                         onClick={toggleSearch}
                     />
-                    <OSButton
-                        variant="ghost"
-                        size="sm"
-                        active={showFilters}
-                        icon={<Icons.IconFilter />}
-                        onClick={() => setShowFilters(!showFilters)}
-                    />
+                    {availableFilters && availableFilters.length > 0 && (
+                        <OSButton
+                            variant="ghost"
+                            size="sm"
+                            active={showFilters}
+                            icon={<Icons.IconFilter />}
+                            onClick={() => setShowFilters(!showFilters)}
+                        />
+                    )}
                     <OSButton variant="primary" size="xs">
                         Share
                     </OSButton>
@@ -215,6 +243,13 @@ export function Editor({ title, type, children, filters, maxWidth = '3xl', onSea
             ),
         },
     ]
+
+    const handleFilterChange = (key: string, value: any, filter: (obj: any, value: any) => boolean) => {
+        const newFilters = { ...filters, [key]: { value, filter } }
+        setFilters(newFilters)
+        const filteredData = filterData(dataToFilter, newFilters)
+        onFilterChange?.(filteredData)
+    }
 
     return (
         <SearchProvider onSearchChange={onSearchChange}>
@@ -225,9 +260,35 @@ export function Editor({ title, type, children, filters, maxWidth = '3xl', onSea
                 <div className="flex flex-col flex-grow min-h-0">
                     <main data-scheme="primary" className="@container flex-1 bg-primary relative h-full">
                         <SearchBar visible={showSearch} onClose={closeSearch} />
-                        {showFilters && (
-                            <div className="bg-accent dark:bg-accent-dark p-2 text-sm border-b border-border dark:border-border-dark">
-                                filters go here
+                        {showFilters && availableFilters && availableFilters.length > 0 && (
+                            <div className="bg-accent dark:bg-accent-dark p-2 text-sm border-b border-border dark:border-border-dark flex gap-1">
+                                {availableFilters?.map((filter, index) => {
+                                    return (
+                                        <div key={filter.label} className="flex items-center gap-1">
+                                            <span>{index === 0 ? 'where' : 'and'}</span>
+                                            <span className="text-sm font-bold">{filter.label}</span>
+                                            <span className="italic">{filter.operator}</span>
+                                            <Select
+                                                disabled={disableFilterChange}
+                                                placeholder={filter.label}
+                                                defaultValue={filter.options[0].value}
+                                                key={filter.label}
+                                                groups={[
+                                                    {
+                                                        label: filter.label,
+                                                        items: filter.options.map((option) => ({
+                                                            label: option.label,
+                                                            value: option.value,
+                                                        })),
+                                                    },
+                                                ]}
+                                                onValueChange={(value) =>
+                                                    handleFilterChange(filter.label, value, filter.filter)
+                                                }
+                                            />
+                                        </div>
+                                    )
+                                })}
                             </div>
                         )}
                         <ScrollArea>

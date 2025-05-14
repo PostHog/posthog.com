@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import SEO from 'components/seo'
 import Link from 'components/Link'
 import Editor from 'components/Editor'
@@ -20,7 +20,7 @@ const CUSTOMER_ORDER = [
     'hasura',
     'trust',
     'researchgate',
-    'posthog'
+    'posthog',
 ]
 
 interface CustomerProps {
@@ -42,48 +42,49 @@ const Customer = ({ number, customer }: CustomerProps) => {
     return {
         cells: [
             { content: number },
-            { 
+            {
                 content: customer.logo ? (
                     <>
-                        <img 
-                            src={customer.logo.light} 
-                            alt={customer.name} 
-                            className="w-auto object-contain dark:hidden" 
+                        <img
+                            src={customer.logo.light}
+                            alt={customer.name}
+                            className="w-auto object-contain dark:hidden"
                         />
-                        <img 
-                            src={customer.logo.dark} 
-                            alt={customer.name} 
-                            className="w-auto object-contain hidden dark:block" 
+                        <img
+                            src={customer.logo.dark}
+                            alt={customer.name}
+                            className="w-auto object-contain hidden dark:block"
                         />
                     </>
                 ) : (
                     <span>{customer.name}</span>
                 ),
-                className: '!p-4'
+                className: '!p-4',
             },
             { content: customer.toolsUsed?.join(', '), className: 'text-sm' },
             { content: hasCaseStudy(customer.slug) ? <Link to={`/customers/${customer.slug}`}>Link</Link> : null },
-            { content: customer.notes || '', className: 'text-sm' }
-        ]
+            { content: customer.notes || '', className: 'text-sm' },
+        ],
     }
 }
 
 export default function Customers(): JSX.Element {
-    const { getCustomers } = useCustomers()
+    const { getCustomers, hasCaseStudy } = useCustomers()
     const customers = getCustomers(CUSTOMER_ORDER)
+    const [filteredCustomers, setFilteredCustomers] = useState<any>(null)
 
     const columns = [
         { name: '', width: 'auto', align: 'center' as const },
         { name: 'Company name', width: 'minmax(150px,1fr)', align: 'center' as const },
         { name: 'Product(s) used', width: 'minmax(auto,250px)' },
         { name: 'Case study?', width: 'minmax(auto,100px)', align: 'center' as const },
-        { name: 'Notes', width: 'minmax(auto,180px)', align: 'center' as const }
+        { name: 'Notes', width: 'minmax(auto,180px)', align: 'center' as const },
     ]
 
-    const rows = customers.map((customer, index) => {
+    const rows = (filteredCustomers || customers).map((customer, index) => {
         return Customer({
             number: index + 1,
-            customer
+            customer,
         })
     })
 
@@ -94,6 +95,50 @@ export default function Customers(): JSX.Element {
                 title="notable customers"
                 type="mdx"
                 slug="/customers"
+                availableFilters={[
+                    {
+                        label: 'company name',
+                        options: [
+                            { label: 'Any', value: null },
+                            ...customers.map((customer) => ({
+                                label: customer.name,
+                                value: customer.name,
+                            })),
+                        ],
+                        filter: (obj, value) => obj['name'] === value,
+                        operator: 'equals',
+                    },
+                    {
+                        label: 'product(s) used',
+                        options: [
+                            { label: 'Any', value: null },
+                            ...Array.from(
+                                new Set(
+                                    customers
+                                        .filter((customer) => customer.toolsUsed?.length)
+                                        .flatMap((customer) => customer.toolsUsed || [])
+                                )
+                            ).map((tool) => ({
+                                label: tool,
+                                value: tool,
+                            })),
+                        ],
+                        filter: (obj, value) => obj['toolsUsed'].includes(value),
+                        operator: 'includes',
+                    },
+                    {
+                        label: 'case study',
+                        options: [
+                            { label: 'Any', value: null },
+                            { label: 'TRUE', value: true },
+                            { label: 'FALSE', value: false },
+                        ],
+                        filter: (obj, value) => (value ? hasCaseStudy(obj.slug) : !hasCaseStudy(obj.slug)),
+                        operator: 'equals',
+                    },
+                ]}
+                dataToFilter={customers}
+                onFilterChange={(data) => setFilteredCustomers(data)}
             >
                 <ScrollArea>
                     <OSTable columns={columns} rows={rows} />

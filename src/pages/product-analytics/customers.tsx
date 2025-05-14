@@ -15,10 +15,25 @@ export default function ProductAnalyticsCustomers(): JSX.Element {
             <Editor
                 title="notable product analytics customers"
                 type="mdx"
-                filters={{
-                    products: ['product_analytics'],
-                    caseStudy: true
-                }}
+                showFilters
+                disableFilterChange
+                availableFilters={[
+                    {
+                        label: 'product used',
+                        options: [{ label: 'Product Analytics', value: 'product analytics' }],
+                        filter: () => false,
+                        operator: 'includes',
+                    },
+                    {
+                        label: 'case study',
+                        options: [
+                            { label: 'TRUE', value: true },
+                            { label: 'FALSE', value: false },
+                        ],
+                        filter: () => false,
+                        operator: 'equals',
+                    },
+                ]}
             >
                 <ScrollArea>
                     <ProductCustomerTable productType="product_analytics" />
