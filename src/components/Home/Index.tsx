@@ -1,0 +1,250 @@
+import React, { useEffect, useState } from 'react'
+import SEO from 'components/seo'
+import Link from 'components/Link'
+import Editor from 'components/Editor'
+import { useValues } from 'kea'
+import { layoutLogic } from 'logic/layoutLogic'
+import OSTable from 'components/OSTable'
+import ScrollArea from 'components/RadixUI/ScrollArea'
+import { useCustomers } from 'hooks/useCustomers'
+import Logo from 'components/Logo'
+import CTA from './CTA'
+
+const sections = [
+    {
+        title: 'products',
+        description: 'PostHog helps you...',
+        content: '', // products, grouped by goal
+    },
+    {
+        title: 'roadmap',
+        description: "we haven't built our defining feature. customers help us decide what to build next.",
+        content: '', // component with tabbable tables (work in progress, under consideration)
+    },
+    {
+        title: 'pricing',
+        description: 'our usage-based pricing means you don\'t have to "talk to sales". plus each product has a generous monthly free tier – in fact, 98% of customers use PostHog for free!',
+        content: '', // component with tabbable tables (work in progress, under consideration)
+    },
+    {
+        title: 'logos',
+        description: "here are some of our paying customers. (yes they actually use us, no it's not just some random engineer that tried us out 2+ years ago.)",
+        content: '', // component with logos
+    },
+    {
+        title: 'why PostHog?',
+        description: "we're different from most companies for a bunch of reasons:",
+        content: (
+            <>
+                <ul>
+                    <li>
+                        <strong>transparency.</strong> read our <Link to="/handbook">company handbook</Link>, our <Link to="/sales-manual">sales manual</Link>, or <Link to="/strategy">company strategy</Link>
+                    </li>
+                    <li>
+                        <strong>we ship fast.</strong> see our <Link to="/changelog">changelog</Link>
+                    </li>
+                    <li>
+                        <strong>actually-technical support.</strong> our <Link to="/support">support people</Link> all have engineering backgrounds.
+                    </li>
+                </ul>
+                <p>
+                    <Link to="/company-tour">take the company tour</Link> →
+                </p>
+            </>
+        )
+    },
+    {
+        title: 'bedtime reading',
+        description: 'here are some links that may be interesting to you:',
+        content: (
+            <>
+                <ul>
+                    <li>
+                        <Link to="/demo.mov">demo.mov</Link>
+                    </li>
+                    <li>
+                        <Link to="/technical-docs">technical docs</Link>
+                    </li>
+                    <li>
+                        <Link to="/api">api</Link>
+                    </li>
+                    <li>
+                        <Link to="/ask-a-question">ask a question</Link>
+                    </li>
+                    <li>
+                        <Link to="/small-teams-at-posthog">small teams at PostHog</Link>
+                    </li>
+                </ul>
+            </>
+        ),
+    },
+    {
+        title: 'shameless CTA',
+        // description: 'we have a lot of features. here are some of them.',
+        content: <CTA />,
+    }
+]
+
+const CUSTOMER_ORDER = [
+    'ycombinator',
+    'mistralai',
+    'elevenlabs',
+    'raycast',
+    'airbus',
+    'dhl',
+    'startengine',
+    'assemblyai',
+    'hasura',
+    'trust',
+    'researchgate',
+    'posthog',
+]
+
+interface CustomerProps {
+    number: number
+    customer: {
+        logo?: {
+            light: string
+            dark: string
+        }
+        name: string
+        toolsUsed?: string[]
+        slug: string
+        notes?: string
+    }
+}
+
+const Customer = ({ number, customer }: CustomerProps) => {
+    const { hasCaseStudy } = useCustomers()
+    return {
+        cells: [
+            { content: number },
+            {
+                content: customer.logo ? (
+                    <>
+                        <img
+                            src={customer.logo.light}
+                            alt={customer.name}
+                            className="w-auto object-contain dark:hidden"
+                        />
+                        <img
+                            src={customer.logo.dark}
+                            alt={customer.name}
+                            className="w-auto object-contain hidden dark:block"
+                        />
+                    </>
+                ) : (
+                    <span>{customer.name}</span>
+                ),
+                className: '!p-4',
+            },
+            { content: customer.toolsUsed?.join(', '), className: 'text-sm' },
+            { content: hasCaseStudy(customer.slug) ? <Link to={`/customers/${customer.slug}`}>Link</Link> : null },
+            { content: customer.notes || '', className: 'text-sm' },
+        ],
+    }
+}
+
+export default function Home(): JSX.Element {
+    const { getCustomers, hasCaseStudy } = useCustomers()
+    const customers = getCustomers(CUSTOMER_ORDER)
+    const [filteredCustomers, setFilteredCustomers] = useState<any>(null)
+
+    const columns = [
+        { name: '', width: 'auto', align: 'center' as const },
+        { name: 'Company name', width: 'minmax(150px,1fr)', align: 'center' as const },
+        { name: 'Product(s) used', width: 'minmax(auto,250px)' },
+        { name: 'Case study?', width: 'minmax(auto,100px)', align: 'center' as const },
+        { name: 'Notes', width: 'minmax(auto,180px)', align: 'center' as const },
+    ]
+
+    const rows = (filteredCustomers || customers).map((customer: CustomerProps, index: number) => {
+        return Customer({
+            number: index + 1,
+            customer,
+        })
+    })
+
+    return (
+        <>
+            <SEO title="home.mdx – PostHog" description="" image={`/images/og/customers.jpg`} />
+            <Editor
+                title="home"
+                type="mdx"
+                slug="/"
+                availableFilters={[
+                    {
+                        label: 'company name',
+                        options: [
+                            { label: 'Any', value: null },
+                            ...customers.map((customer) => ({
+                                label: customer.name,
+                                value: customer.name,
+                            })),
+                        ],
+                        filter: (obj, value) => obj['name'] === value,
+                        operator: 'equals',
+                    },
+                    {
+                        label: 'product(s) used',
+                        options: [
+                            { label: 'Any', value: null },
+                            ...Array.from(
+                                new Set(
+                                    customers
+                                        .filter((customer) => customer.toolsUsed?.length)
+                                        .flatMap((customer) => customer.toolsUsed || [])
+                                )
+                            ).map((tool) => ({
+                                label: tool,
+                                value: tool,
+                            })),
+                        ],
+                        filter: (obj, value) => obj['toolsUsed'].includes(value),
+                        operator: 'includes',
+                    },
+                    {
+                        label: 'case study',
+                        options: [
+                            { label: 'Any', value: null },
+                            { label: 'TRUE', value: true },
+                            { label: 'FALSE', value: false },
+                        ],
+                        filter: (obj, value) => (value ? hasCaseStudy(obj.slug) : !hasCaseStudy(obj.slug)),
+                        operator: 'equals',
+                    },
+                ]}
+                dataToFilter={customers}
+                onFilterChange={(data) => setFilteredCustomers(data)}
+            >
+                <ScrollArea>
+                    <h1>welcome to <Logo className="inline-block" /></h1>
+                    <p>we build tools for people who build products.</p>
+
+                    <div className="bg-accent p-4 rounded">
+                        <div><strong>contents</strong></div>
+                        <ol>
+                            {sections.map((section) => (
+                                <li key={section.title}>
+                                    <Link to={`#${section.title.toLowerCase().replace(/\s+/g, '-')}`}>
+                                        {section.title}
+                                    </Link>
+                                </li>
+                            ))}
+                        </ol>
+                    </div>
+
+                    {sections.map((section, index) => (
+                        <div key={section.title} id={section.title.toLowerCase().replace(/\s+/g, '-')}>
+                            <h2>{section.title}</h2>
+                            {section.description && <p>{section.description}</p>}
+                            {section.content}
+                        </div>
+                    ))}
+
+                    <OSTable columns={columns} rows={rows} />
+                </ScrollArea>
+            </Editor>
+        </>
+    )
+}
