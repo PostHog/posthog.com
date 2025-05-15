@@ -1325,6 +1325,11 @@
         },
         { "source": "/handbook/growth/marketing/components", "destination": "/handbook/content-and-docs/components" },
         { "source": "/handbook/growth/marketing/paid", "destination": "/handbook/words-and-pictures/paid" },
+        {
+            "source": "/handbook/growth/marketing/value-propositions",
+            "destination": "/handbook/why-does-posthog-exist"
+        },
+        { "source": "/handbook/growth/marketing/icp", "destination": "/handbook/growth/sales/lead-scoring" },
         { "source": "/features/self-hosted", "destination": "/docs/self-host" },
         { "source": "/docs/settings/organizations-and-projects", "destination": "/docs/settings/organizations" },
         { "source": "/docs/settings/role-based-access", "destination": "/docs/settings/access-control" },
@@ -1418,6 +1423,21 @@
         {
             "source": "/docs/surveys/webhook",
             "destination": "/docs/surveys/destinations"
+        }
+    ],
+    "headers": [
+        {
+            "source": "/(.*)",
+            "headers": [
+                {
+                    "key": "Content-Security-Policy-Report-Only",
+                    "value": "default-src 'self'; script-src 'self' 'unsafe-inline' https://*.posthog.com; style-src 'self' 'unsafe-inline'; img-src 'self' data: https://*.posthog.com https://res.cloudinary.com font-src 'self' data: https://d27nj4tzr3d5tm.cloudfront.net; connect-src 'self' https://*.posthog.com https://api.github.com https://lottie.host; frame-src 'self'; report-uri https://d1iyf54ud053a4.cloudfront.net/csp?token=sTMFPsFhdP1Ssg&sample_rate=0.1&v=1; report-to csp-endpoint"
+                },
+                {
+                    "key": "Reporting-Endpoints",
+                    "value": "csp-endpoint=\"https://d1iyf54ud053a4.cloudfront.net/csp?token=sTMFPsFhdP1Ssg&sample_rate=0.1&v=1\""
+                }
+            ]
         }
     ]
 }
