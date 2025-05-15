@@ -198,11 +198,9 @@ Candidates who are unsuccessful at this stage should receive a short personalize
 
 ### 2. Technical interview with the Hiring Manager
 
-In this round, the candidate will meet a 1-2 future team members. This round is usually 45-60 minutes and will focus on a mix of experience and technical skills. Please check the specific hiring process for each team for more details.  
+In this round, the candidate will meet a future team members. This round is usually 45-60 minutes and will focus on a mix of experience and technical skills. Please check the specific hiring process for each team for more details.  
 
 As a rule of thumb, everyone interviewing must feel a genuine sense of excitement about working with the candidate. Again - if it is not a _definite yes_, then it's a _no_. Ask yourself - does this candidate raise the bar?
-
-Candidates who are unsuccessful at this stage should receive a personalized email with feedback.
 
 ### 3. Small Team interview with James or Tim
 
@@ -229,13 +227,14 @@ Overall, the candidate should aim to spend at least 80% of their time and energy
 
 In advance of the SuperDay, we will need to do some additional prep to ensure that the candidate has a great experience:
 
-*   Send the candidate, Tim, James, two people from Ops, and the SuperDay buddy (technical roles) or the lead (for all other non-technical roles) a Google calendar invite to remind the team when the SuperDay will take place (mark the invite free and all day or split days)
+*   Send the candidate, Tim, Raquel, or James (depending on the role), someone from the talent team, and the SuperDay buddy (technical roles) or the lead (for all other non-technical roles) a Google calendar invite to remind the team when the SuperDay will take place (mark the invite free and all day or split days)
 *   Send them an email in the first instance to schedule the SuperDay - we aim to  do this as soon as possible, as candidates often will need to book a day off work. Use the Ashby email template for this. If the task involves them doing 'real' work for PostHog, we should ask them to check that their current employment contract permits this - we try to create fake tasks for this reason. For all US candidates there is a requirement we collect a [W9](https://www.irs.gov/forms-pubs/about-form-w-9) from the candidate for accounting and tax purposes (_this doesn't apply if the US candidate decides to donate the funds to one of our sponsored projects_) 
-*   We also send the candidate a follow up email with details of the task, and ask them for their day rate and bank details right away so the candidate can fully prepared what to expect and who they will meet. There is a template for this email in Ashby, depending on the role - this will probably need customising.
-*   (One day before the SuperDay) Create a private channel in Slack for the candidate and all relevant people - this will be where they can chat to us over the course of the day if they have any questions etc. Invite the candidate as a single channel guest. We might need to add the candidate to one of our systems depending on the role, e.g. Ashby for a recruiter SuperDay, but on the whole this should be minimized.
+*   We also send the candidate a follow up email with details of the day, and ask them for their day rate and bank details right away so the candidate can fully prepared what to expect and who they will meet. There is a template for this email in Ashby, depending on the role - this will probably need customising.
+*   Create a private channel in Slack for the candidate and all relevant people - this will be where they can chat to us over the course of the day if they have any questions etc. Invite the candidate as a single channel guest. We might need to add the candidate to one of our systems depending on the role, e.g. Ashby for a recruiter SuperDay, but on the whole this should be minimized.
 *   (One day before the SuperDay) For Product Engineer SuperDays, upload the zip file by going into the the [Git SuperDay task](https://github.com/PostHog/superday-interview-test/blob/main/.github/workflows/generate-full-stack-package.yml) then hover over the "Actions" tab and click on "Generate Full Stack Package" and click on "Run Workflow" then name the file under the candidate's first name. Once the zip file has completed, click into the file and hit the download button and upload the zip file into the candidate's slack channel to go out the morning of the SuperDay by 8:00 am in the candidate's timezone. 
 *           * For the Clickhouse Engineer task, please follow this [task](https://github.com/PostHog/clickhouse-superday) and click on the "Code" button and hit download button and upload the zip file into the candidate's slack channel to go out the morning of the SuperDay by 8:00 am in the candidate's timezone. 
 *   (One day before the SuperDay) For non-technical roles, invite the candidate to a kickoff meeting with the hiring manager at the start of the day and send the candidate the task - aim to send this before the kick-off session so if the candidate has any questions they are able to go through them during the kick-off session. We encourage the candidate to ask questions throughout their SuperDay, but sometimes it is nice to have any questions answered in advance so they can kick off their task appropriately.
+*   It is important for product engineer candidates to be prepped for their check-in call to do some pair-programming with their SuperDay buddy while other non-technical roles in Sales, Onboarding, and Customer Success, the candidates will be running a demo mid-point of their SuperDay. 
 *   (On the SuperDay) Give the candidate a warm welcome! Make it clear that the team is here to answer any questions, and they should feel free to reach out any time! Otherwise don't feel like we need to check in with them - let them get on with the task and trust that they will message us.
 
 > For some roles, we may occasionally set a task that goes over multiple days. For example, we have set Content Marketer tasks that last 3 days in order to create a piece of content. 
