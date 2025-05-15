@@ -10,11 +10,55 @@ import { useCustomers } from 'hooks/useCustomers'
 import Logo from 'components/Logo'
 import CTA from './CTA'
 
+const Products = () => {
+    const columns = [
+        { name: '', width: 'auto', align: 'center' as const },
+        { name: 'goal', width: 'minmax(150px,1fr)', align: 'center' as const },
+        { name: 'products', width: 'minmax(auto,250px)' },
+    ]
+    const rows = [
+        {
+            cells: [
+                { content: 1 },
+                { content: 'understand product usage', className: '!p-4' },
+                { content: 'products', className: 'text-sm' },
+            ],
+        },
+        {
+            cells: [
+                { content: 2 },
+                { content: 'test new features', className: '!p-4' },
+                { content: 'products', className: 'text-sm' },
+            ],
+        },
+        {
+            cells: [
+                { content: 3 },
+                { content: 'get feedback from users', className: '!p-4' },
+                { content: 'products', className: 'text-sm' },
+            ],
+        },
+        {
+            cells: [
+                { content: 4 },
+                { content: 'consolidate product usage data', className: '!p-4' },
+                { content: 'products', className: 'text-sm' },
+            ],
+        },
+    ]
+
+    return (
+        <div>
+            <OSTable columns={columns} rows={rows} />
+        </div>
+    )
+}
+
 const sections = [
     {
         title: 'products',
         description: 'PostHog helps you...',
-        content: '', // products, grouped by goal
+        content: (<Products />),
     },
     {
         title: 'roadmap',
@@ -84,6 +128,8 @@ const sections = [
         content: <CTA />,
     }
 ]
+
+
 
 const CUSTOMER_ORDER = [
     'ycombinator',
