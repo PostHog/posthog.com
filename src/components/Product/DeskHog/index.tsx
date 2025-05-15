@@ -160,20 +160,28 @@ const HeroDeskHog = ({ color, icon, beta, product, title, description }: HeroDes
 }
 
 const VideoDeskHog = () => (
-    <section id="demo-video" className={`overflow-hidden h-auto max-h-[90vh] mb-8`}>
-        <iframe
-            src="https://res.cloudinary.com/dmukukwp6/video/upload/Termagotchi_084775b39f.mp4"
-            className="rounded aspect-video m-0 shadow-xl"
-            style={{
-                width: '100%',
-                height: 'auto',
-                maxWidth: '55%',
-                margin: '0 auto',
-                display: 'block',
-                border: '1px solid var(--border-light, #e0e0e0)',
-            }}
-            allow="autoplay"
-        />
+    <section id="demo-video" className={`overflow-hidden h-auto max-h-[90vh] mb-8 pt-10`}>
+        <div className="relative">
+            <iframe
+                src="https://res.cloudinary.com/dmukukwp6/video/upload/Termagotchi_084775b39f.mp4"
+                className="rounded aspect-video m-0 shadow-xl"
+                style={{
+                    width: '100%',
+                    height: 'auto',
+                    maxWidth: '55%',
+                    margin: '0 auto',
+                    display: 'block',
+                    border: '1px solid var(--border-light, #e0e0e0)',
+                }}
+                allow="autoplay"
+            />
+            <div className="absolute top-[-10px] left-[200px] mt-4 ml-4">
+                <span className="inline-block bg-yellow text-black px-6 py-2 rounded-full text-xl font-semibold shadow-lg transform -rotate-45 scale-90">
+                    Pre-order now
+                    <br />
+                </span>
+            </div>
+        </div>
     </section>
 )
 
@@ -219,6 +227,35 @@ const DeskHogCTA = () => {
                 </div>
             </div>
         </section>
+    )
+}
+
+// Expandable Callout Component
+const ExpandableCallout = () => {
+    const [isOpen, setIsOpen] = React.useState(false)
+
+    return (
+        <div className="col-span-2 bg-[#E5E7E0] dark:bg-slate-700 dark:text-slate-200 p-4 rounded-md shadow-md mt-10 w-full max-w-lg mx-auto">
+            <button onClick={() => setIsOpen(!isOpen)} className="text-lg font-semibold text-center w-full">
+                Oh, and there's DeskHog Pro too 👇
+            </button>
+            {isOpen && (
+                <div className="mt-4 flex flex-col items-center">
+                    <CloudinaryImage
+                        src="https://res.cloudinary.com/dmukukwp6/image/upload/deskhog_max_904ca43b3e.png"
+                        alt="DeskHog Pro"
+                        className="w-1/2 mx-auto mb-4"
+                    />
+                    <h5>Coming soon: DeskHog Pro & Friends</h5>
+                    <p>This is just the beginning of the DeskHog adventure. If you like it we'll make more, maybe.</p>
+                    <p>
+                        DeskHog Pro will connect via the I²C port, adding more buttons, a speaker, and a huge dial so
+                        you can crank up the vibes. We're also thinking about making a watch strap, so you can wear
+                        DeskHog on your wrist.
+                    </p>
+                </div>
+            )}
+        </div>
     )
 }
 
@@ -347,7 +384,7 @@ export const ProductDeskHog = () => {
                                 {/* Back Face */}
                                 <div className="absolute h-full w-full [backface-visibility:hidden] [transform:rotateY(180deg)] bg-accent dark:bg-accent-dark border border-border dark:border-border-dark rounded-lg p-6 flex flex-col justify-center items-center">
                                     <div className="text-center">
-                                        <h4 className="text-xl font-bold mb-2">Idle Value Generator</h4>
+                                        <h4 className="text-xl font-bold mb-2">IdleHog</h4>
                                         <p className="text-sm text-primary/80 dark:text-primary-dark/80">
                                             It's a wry satire. It's an idle clicker game. It's delivering shareholder
                                             value.
@@ -673,17 +710,12 @@ export const ProductDeskHog = () => {
                                     </div>
                                 </div>
                             ))}
+                            {/* New expandable callout */}
+                            <ExpandableCallout />
                         </div>
                     </div>
                 </div>
             </section>
-
-            {/* New Centered Banner Location */}
-            <div className="text-center py-10">
-                <span className="inline-block bg-yellow text-black px-6 py-2 rounded-full text-xl font-semibold shadow-lg transform -rotate-3">
-                    Shipped in random colors!!
-                </span>
-            </div>
 
             <div className={`${fullWidthContent ? 'max-w-full px-8' : 'max-w-7xl mx-auto'} px-5 py-10`}>
                 <PairsWith items={pairsWithItemCount}>
