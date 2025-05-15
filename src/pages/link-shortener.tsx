@@ -62,8 +62,12 @@ const getValidLinks = (): Link[] => {
     return []
 }
 
+// Currently using a temporary endpoint to shorten links
+// const SHORTENER_URL = 'https://phog.gg/shorten'
+const SHORTENER_URL = 'https://eu.posthog.com/redirect/ph'
+
 const shortenLink = async (long_url: string): Promise<Link> => {
-    const response = await fetch('https://phog.gg/shorten', {
+    const response = await fetch(SHORTENER_URL, {
         method: 'POST',
         body: JSON.stringify({ long_url }),
     })
