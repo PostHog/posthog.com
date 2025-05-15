@@ -9,6 +9,7 @@ import ScrollArea from 'components/RadixUI/ScrollArea'
 import { useCustomers } from 'hooks/useCustomers'
 import Logo from 'components/Logo'
 import CTA from './CTA'
+import { IconArrowRight, IconArrowUpLeftDiagonal } from '@posthog/icons'
 
 const Products = () => {
     const columns = [
@@ -50,6 +51,9 @@ const Products = () => {
     return (
         <div>
             <OSTable columns={columns} rows={rows} />
+            <div className="bg-accent p-1 text-right text-xs border-primary border-x border-b">
+                <Link to="/products" state={{ newWindow: true }} className="hover:underline">Open product explorer <IconArrowRight className="inline-block -rotate-45 size-4 text-primary" /></Link>
+            </div>
         </div>
     )
 }
@@ -267,26 +271,29 @@ export default function Home(): JSX.Element {
                     <h1>welcome to <Logo className="inline-block" /></h1>
                     <p>we build tools for people who build products.</p>
 
-                    <div className="bg-accent p-4 rounded">
-                        <div><strong>contents</strong></div>
-                        <ol>
+                    <div className="bg-accent p-4 rounded mb-8 text-sm inline-block min-w-[250px]">
+                        <div className="pb-1"><strong>contents</strong></div>
+                        <ol className="pl-4">
                             {sections.map((section) => (
                                 <li key={section.title}>
-                                    <Link to={`#${section.title.toLowerCase().replace(/\s+/g, '-')}`}>
-                                        {section.title}
+                                    <Link to={`/#${section.title.toLowerCase().replace(/\s+/g, '-')}`} className="group flex items-center gap-1">
+                                        <span>{section.title}</span>
+                                        <IconArrowRight className="inline-block rotate-90 size-3 text-primary opacity-0 group-hover:opacity-100" />
                                     </Link>
                                 </li>
                             ))}
                         </ol>
                     </div>
 
-                    {sections.map((section, index) => (
-                        <div key={section.title} id={section.title.toLowerCase().replace(/\s+/g, '-')}>
-                            <h2>{section.title}</h2>
-                            {section.description && <p>{section.description}</p>}
-                            {section.content}
-                        </div>
-                    ))}
+                    <div className="space-y-8">
+                        {sections.map((section, index) => (
+                            <div key={section.title} id={section.title.toLowerCase().replace(/\s+/g, '-')}>
+                                <h2>{section.title}</h2>
+                                {section.description && <p>{section.description}</p>}
+                                {section.content}
+                            </div>
+                        ))}
+                    </div>
 
                     <OSTable columns={columns} rows={rows} />
                 </ScrollArea>
