@@ -7,8 +7,8 @@ import Layout from 'components/Layout'
 import { LinkIcon } from 'components/Icons'
 
 interface Link {
-    short: string
-    long: string
+    shortUrl: string
+    longUrl: string
     createdAt: number // Timestamp in milliseconds
     loading?: boolean
 }
@@ -104,8 +104,8 @@ function Hero(): JSX.Element {
         }
 
         const temporaryNewLink: Link = {
-            short: DEFAULT_SHORT_URL,
-            long: longUrl,
+            shortUrl: DEFAULT_SHORT_URL,
+            longUrl,
             createdAt: Date.now(),
             loading: true,
         }
@@ -116,9 +116,9 @@ function Hero(): JSX.Element {
 
         // Run our promise in the background, and then update the links array with the new link
         // once it's finished loading
-        shortenLink(temporaryNewLink.long)
+        shortenLink(temporaryNewLink.longUrl)
             .then((newLink) => {
-                const finalLinks = links.map((link) => (link.short === DEFAULT_SHORT_URL ? newLink : link))
+                const finalLinks = links.map((link) => (link.shortUrl === DEFAULT_SHORT_URL ? newLink : link))
                 setLinks(finalLinks)
                 setLongUrl('')
                 addToast({ message: 'Link shortened successfully!' })
@@ -142,17 +142,16 @@ function Hero(): JSX.Element {
         <section className="py-20">
             <div className="py-8 px-4 mx-auto max-w-screen-xl text-center lg:px-12">
                 <h1 className="mb-12 text-4xl font-extrabold tracking-tight leading-none text-gray-900 md:text-5xl lg:text-6xl dark:text-white">
-                    Short links but more fun
+                    Short links. No fluff.
                 </h1>
                 <div className="flex flex-col sm:flex-row gap-1 items-center justify-around mb-12">
                     <div className="flex flex-col gap-2 items-center">
                         <p className="text-lg mb-0 text-gray-500 lg:text-xl sm:px-16 xl:px-48 dark:text-gray-400">
-                            PostHog includes a modern link management platform for developers, product teams, and
-                            marketers.
+                            PostHog includes a fast, flexible link shortener for engineers, product teams, and
+                            marketers. Built in – no extra tools required through our generous free tier.
                         </p>
                         <p className="text-sm mb-0 text-gray-500 lg:text-base sm:px-16 xl:px-48 dark:text-gray-400">
-                            These short links only last 24 hours. Sign up for a free account to create customizable
-                            permanent links.
+                            Links last 24 hours by default. Need permanent or branded links? Sign up for a free account.
                         </p>
 
                         <TrackedCTA
@@ -200,7 +199,7 @@ function Hero(): JSX.Element {
                                 {links.map((link) => {
                                     const timeLeft = LINK_EXPIRY_DURATION - (time - link.createdAt)
                                     return (
-                                        <li key={link.short}>
+                                        <li key={link.shortUrl}>
                                             <div
                                                 className={`relative bg-white dark:bg-white/10 rounded-md shadow-sm hover:shadow-md transition-shadow relative ${
                                                     timeLeft <= 0 ? 'opacity-50' : ''
@@ -231,7 +230,7 @@ function Hero(): JSX.Element {
                                                         <div className="flex flex-row items-center gap-1">
                                                             <LinkIcon className="w-[15px] h-[15px] text-red dark:text-yellow" />
                                                             <a
-                                                                href={link.loading ? undefined : link.short}
+                                                                href={link.loading ? undefined : link.shortUrl}
                                                                 target="_blank"
                                                                 rel="noopener noreferrer"
                                                                 className={`font-semibold ${
@@ -240,15 +239,15 @@ function Hero(): JSX.Element {
                                                                         : 'hover:underline'
                                                                 }`}
                                                             >
-                                                                {link.short}
+                                                                {link.shortUrl}
                                                             </a>
                                                         </div>
 
                                                         <p
                                                             className="text-xs text-gray-500 dark:text-gray-400 truncate"
-                                                            title={link.long}
+                                                            title={link.longUrl}
                                                         >
-                                                            {link.long}
+                                                            {link.longUrl}
                                                         </p>
                                                     </div>
                                                     <span className="text-sm text-gray-600 dark:text-gray-300 whitespace-nowrap">
@@ -262,7 +261,7 @@ function Hero(): JSX.Element {
                             </ul>
                         ) : (
                             <p className="text-gray-700 dark:text-gray-300 text-center py-4">
-                                Your shortened links will appear here for 24 hours.
+                                Your shortened links will work - and appear here - for 24 hours.
                             </p>
                         )}
                     </div>
@@ -277,7 +276,7 @@ function LinkShortener(): JSX.Element {
         <Layout headerBlur={false}>
             <SEO
                 title="PostHog - Link shortener"
-                description="Create short, trackable links that expire after 24 hours. Perfect for sharing on social media or tracking campaign performance."
+                description="Create short, trackable links that expire after 24 hours. Perfect for slide decks, social media, and more."
             />
             <Hero />
         </Layout>
