@@ -102,22 +102,21 @@ const PairsWithArray = [
         icon: <IconCode />,
         product: 'Developers',
         color: 'blue',
-        description:
-            'Make your own games and tools with an AI editor, or C++ if you really want to show off your l33t skills.',
+        description: 'Make things with an AI editor, or C++ if you want to show off your l33t skills.',
         url: '#',
     },
     {
         icon: <IconPeople />,
         product: 'Bathroom breaks',
         color: 'seagreen',
-        description: "You can take DeskHog anywhere and your boss will never suspect you're DeskHogging. Trust us. ",
+        description: "Your boss will never suspect you're DeskHogging. Trust us. ",
         url: '#',
     },
     {
         icon: <IconThoughtBubble />,
         product: 'Imagination',
         color: 'black dark:text-white',
-        description: 'Build games, tools, whatever you want. We made DeskHog for you to tear apart and build on.',
+        description: 'Build new features, add extra hardware, or just tinker with it.',
         url: '#',
     },
 ]
@@ -180,13 +179,11 @@ const VideoDeskHog = () => (
 
 // Define DeskHogCTA component
 const DeskHogCTA = () => {
-    // PostHog style heading classes
     const headingClasses = 'font-bold text-center text-4xl lg:text-5xl mb-3 text-red dark:text-yellow animate-pulse'
     const subheadingClasses = 'text-center text-primary dark:text-primary-dark opacity-75 max-w-xl mx-auto mb-6'
 
     return (
-        // Section styling simplified, relying on outer page structure for background
-        <section className="py-12 md:py-16 px-4">
+        <section className="py-12 md:py-16 px-4 relative overflow-hidden">
             {/* Text Content Wrapper with PostHog card style */}
             <div className="relative z-10 bg-white dark:bg-gray-800 p-8 rounded-lg mx-auto max-w-2xl border border-border dark:border-border-dark shadow-xl">
                 <h2 className={headingClasses}>Limited stock available</h2>
@@ -199,13 +196,13 @@ const DeskHogCTA = () => {
                         href="https://posthog.com/merch"
                         type="primary"
                         size="lg"
-                        className="w-full sm:w-auto" // Ensure buttons are responsive
+                        className="w-full sm:w-auto"
                     >
                         Buy it now
                     </CallToAction>
                     <CallToAction
                         href="https://github.com/PostHog/DeskHog"
-                        type="secondary" // Using secondary type for a standard PostHog look
+                        type="secondary"
                         size="lg"
                         className="w-full sm:w-auto"
                     >
@@ -255,7 +252,7 @@ export const ProductDeskHog = () => {
                     <div className="flex flex-col-reverse items-center md:flex-row gap-8 pt-20 mb-20">
                         <div className="flex-1">
                             <h2 className="text-4xl">
-                                What about the hardware?
+                                But what is DeskHog really?
                                 <br />
                                 <span className="text-red dark:text-yellow">It's a teeny, tiny, beast.</span>
                             </h2>
@@ -298,83 +295,160 @@ export const ProductDeskHog = () => {
                     </h3>
 
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
-                        <div className="text-center">
-                            <CloudinaryImage
-                                src="https://res.cloudinary.com/dmukukwp6/image/upload/Screenshot_2025_05_14_at_16_31_37_5e009d0dd5.png"
-                                alt="Game screenshot 1"
-                                className="w-full max-w-[200px] mx-auto mb-4"
-                            />
-                            <h3 className="text-xl font-bold">Pog</h3>
-                            <p className="text-sm">
-                                It's Pong, built by{' '}
-                                <Link to="https://posthog.com/community/profiles/30833">Leon Daly</Link>. <br />
-                                It's perfect for playing on the toilet.
-                            </p>
+                        {/* Game 1: Pog */}
+                        <div className="h-[174px] relative group [perspective:1000px] text-center">
+                            <div className="relative h-full w-full transition-transform duration-700 [transform-style:preserve-3d] group-hover:[transform:rotateY(180deg)]">
+                                {/* Front Face */}
+                                <div className="absolute h-full w-full [backface-visibility:hidden] bg-accent dark:bg-accent-dark border border-border dark:border-border-dark rounded-lg p-4 flex flex-col justify-center items-center">
+                                    <CloudinaryImage
+                                        src="https://res.cloudinary.com/dmukukwp6/image/upload/Screenshot_2025_05_14_at_16_31_37_5e009d0dd5.png"
+                                        alt="Pog game screenshot"
+                                        className="w-full max-w-[146px] mx-auto"
+                                    />
+                                </div>
+                                {/* Back Face */}
+                                <div className="absolute h-full w-full [backface-visibility:hidden] [transform:rotateY(180deg)] bg-accent dark:bg-accent-dark border border-border dark:border-border-dark rounded-lg p-6 flex flex-col justify-center items-center">
+                                    <div className="text-center">
+                                        <h4 className="text-xl font-bold mb-2">Pog</h4>
+                                        It's Pong, but with a different name. It's perfect for playing on the toilet.
+                                        Apparently.
+                                        <br /> <br />
+                                        <p>
+                                            <b>Built by:</b>{' '}
+                                            <Link to="https://posthog.com/community/profiles/30833">Leon Daly</Link>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                        <div className="text-center">
-                            <CloudinaryImage
-                                src="https://res.cloudinary.com/dmukukwp6/image/upload/Screenshot_2025_05_14_at_16_31_37_5e009d0dd5.png"
-                                alt="Game screenshot 2"
-                                className="w-full max-w-[200px] mx-auto mb-4"
-                            />
-                            <h3 className="text-xl font-bold">Shareholder Value Clicker</h3>
-                            <p className="text-sm">
-                                Wry satire? Idle clicker game? Creator <br />{' '}
-                                <Link to="https://posthog.com/community/profiles/33534">Chris McNeill</Link> says it's
-                                both.
-                            </p>
+
+                        {/* Game 2: Shareholder Value Clicker */}
+                        <div className="h-[174px] relative group [perspective:1000px] text-center">
+                            <div className="relative h-full w-full transition-transform duration-700 [transform-style:preserve-3d] group-hover:[transform:rotateY(180deg)]">
+                                {/* Front Face */}
+                                <div className="absolute h-full w-full [backface-visibility:hidden] bg-accent dark:bg-accent-dark border border-border dark:border-border-dark rounded-lg p-4 flex flex-col justify-center items-center">
+                                    <CloudinaryImage
+                                        src="https://res.cloudinary.com/dmukukwp6/image/upload/Screenshot_2025_05_14_at_16_31_37_5e009d0dd5.png"
+                                        alt="Shareholder Value Clicker screenshot"
+                                        className="w-full max-w-[146px] mx-auto"
+                                    />
+                                </div>
+                                {/* Back Face */}
+                                <div className="absolute h-full w-full [backface-visibility:hidden] [transform:rotateY(180deg)] bg-accent dark:bg-accent-dark border border-border dark:border-border-dark rounded-lg p-6 flex flex-col justify-center items-center">
+                                    <div className="text-center">
+                                        <h4 className="text-xl font-bold mb-2">Idle Value Generator</h4>
+                                        It's a wry satire. It's an idle clicker game. It's delivering shareholder value.
+                                        <br /> <br />
+                                        <p>
+                                            <b>Built by:</b>{' '}
+                                            <Link to="https://posthog.com/community/profiles/33534">Chris McNeill</Link>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                        <div className="text-center">
-                            <CloudinaryImage
-                                src="https://res.cloudinary.com/dmukukwp6/image/upload/Screenshot_2025_05_14_at_16_31_37_5e009d0dd5.png"
-                                alt="Game screenshot 3"
-                                className="w-full max-w-[200px] mx-auto mb-4"
-                            />
-                            <h3 className="text-xl font-bold">One Button Dungeon</h3>
-                            <p className="text-sm">
-                                A roguelike throwback about an endless corridor.
-                                <br /> Such is life, says{' '}
-                                <Link to="https://posthog.com/community/profiles/29070">Joe Martin</Link>.
-                            </p>
+
+                        {/* Game 3: One Button Dungeon */}
+                        <div className="h-[174px] relative group [perspective:1000px] text-center">
+                            <div className="relative h-full w-full transition-transform duration-700 [transform-style:preserve-3d] group-hover:[transform:rotateY(180deg)]">
+                                {/* Front Face */}
+                                <div className="absolute h-full w-full [backface-visibility:hidden] bg-accent dark:bg-accent-dark border border-border dark:border-border-dark rounded-lg p-4 flex flex-col justify-center items-center">
+                                    <CloudinaryImage
+                                        src="https://res.cloudinary.com/dmukukwp6/image/upload/Screenshot_2025_05_14_at_16_31_37_5e009d0dd5.png"
+                                        alt="One Button Dungeon screenshot"
+                                        className="w-full max-w-[146px] mx-auto"
+                                    />
+                                </div>
+                                {/* Back Face */}
+                                <div className="absolute h-full w-full [backface-visibility:hidden] [transform:rotateY(180deg)] bg-accent dark:bg-accent-dark border border-border dark:border-border-dark rounded-lg p-6 flex flex-col justify-center items-center">
+                                    <div className="text-center">
+                                        <h4 className="text-xl font-bold mb-2">One Button Dungeon</h4>
+                                        It's a roguelike throwback about an endless corridor. Such is life. <br />{' '}
+                                        <br />
+                                        <p>
+                                            <b>Built by:</b>{' '}
+                                            <Link to="https://posthog.com/community/profiles/29070">Joe Martin</Link>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                        <div className="text-center">
-                            <CloudinaryImage
-                                src="https://res.cloudinary.com/dmukukwp6/image/upload/Screenshot_2025_05_14_at_16_31_37_5e009d0dd5.png"
-                                alt="Game screenshot 4"
-                                className="w-full max-w-[200px] mx-auto mb-4"
-                            />
-                            <h3 className="text-xl font-bold">Awkwardness Avoider</h3>
-                            <p className="text-sm">
-                                Need some icebreakers at a party? <br />
-                                <Link to="https://posthog.com/community/profiles/28619">Annika Schmid</Link>'s game has
-                                you covered.
-                            </p>
+
+                        {/* Game 4: Awkwardness Avoider */}
+                        <div className="h-[174px] relative group [perspective:1000px] text-center">
+                            <div className="relative h-full w-full transition-transform duration-700 [transform-style:preserve-3d] group-hover:[transform:rotateY(180deg)]">
+                                {/* Front Face */}
+                                <div className="absolute h-full w-full [backface-visibility:hidden] bg-accent dark:bg-accent-dark border border-border dark:border-border-dark rounded-lg p-4 flex flex-col justify-center items-center">
+                                    <CloudinaryImage
+                                        src="https://res.cloudinary.com/dmukukwp6/image/upload/Screenshot_2025_05_14_at_16_31_37_5e009d0dd5.png"
+                                        alt="Awkwardness Avoider screenshot"
+                                        className="w-full max-w-[146px] mx-auto"
+                                    />
+                                </div>
+                                {/* Back Face */}
+                                <div className="absolute h-full w-full [backface-visibility:hidden] [transform:rotateY(180deg)] bg-accent dark:bg-accent-dark border border-border dark:border-border-dark rounded-lg p-6 flex flex-col justify-center items-center">
+                                    <div className="text-center">
+                                        <h4 className="text-xl font-bold mb-2">Awkwardness Avoider</h4>
+                                        Need some way to avoid awkward smalltalk? These icebreakers have you covered.
+                                        <br /> <br />
+                                        <p>
+                                            <b>Built by:</b>{' '}
+                                            <Link to="https://posthog.com/community/profiles/28619">Annika Schmid</Link>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                        <div className="text-center">
-                            <CloudinaryImage
-                                src="https://res.cloudinary.com/dmukukwp6/image/upload/Screenshot_2025_05_14_at_16_31_37_5e009d0dd5.png"
-                                alt="Game screenshot 5"
-                                className="w-full max-w-[200px] mx-auto mb-4"
-                            />
-                            <h3 className="text-xl font-bold">Notchagotchi</h3>
-                            <p className="text-sm">
-                                Creator <Link to="https://posthog.com/community/profiles/33385">Sophie Payne</Link> was
-                                a little worried <br />
-                                she'd be sued if she called this what it is.
-                            </p>
+
+                        {/* Game 5: Notchagotchi */}
+                        <div className="h-[174px] relative group [perspective:1000px] text-center">
+                            <div className="relative h-full w-full transition-transform duration-700 [transform-style:preserve-3d] group-hover:[transform:rotateY(180deg)]">
+                                {/* Front Face */}
+                                <div className="absolute h-full w-full [backface-visibility:hidden] bg-accent dark:bg-accent-dark border border-border dark:border-border-dark rounded-lg p-4 flex flex-col justify-center items-center">
+                                    <CloudinaryImage
+                                        src="https://res.cloudinary.com/dmukukwp6/image/upload/Screenshot_2025_05_14_at_16_31_37_5e009d0dd5.png"
+                                        alt="Notchagotchi screenshot"
+                                        className="w-full max-w-[146px] mx-auto"
+                                    />
+                                </div>
+                                {/* Back Face */}
+                                <div className="absolute h-full w-full [backface-visibility:hidden] [transform:rotateY(180deg)] bg-accent dark:bg-accent-dark border border-border dark:border-border-dark rounded-lg p-6 flex flex-col justify-center items-center">
+                                    <div className="text-center">
+                                        <h4 className="text-xl font-bold mb-2">Notchagotchi</h4>
+                                        We were a little worried we'd be sued if we called this what it really is.{' '}
+                                        <br /> <br />
+                                        <p>
+                                            <b>Built by:</b>{' '}
+                                            <Link to="https://posthog.com/community/profiles/33385">Sophie Payne</Link>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                        <div className="text-center">
-                            <CloudinaryImage
-                                src="https://res.cloudinary.com/dmukukwp6/image/upload/Screenshot_2025_05_14_at_16_31_37_5e009d0dd5.png"
-                                alt="Game screenshot 6"
-                                className="w-full max-w-[200px] mx-auto mb-4"
-                            />
-                            <h3 className="text-xl font-bold">Flappy Hog</h3>
-                            <p className="text-sm">
-                                Despite the title, creator{' '}
-                                <Link to="https://posthog.com/community/profiles/29070">Joe Martin</Link> <br />
-                                admits this game has no hedgehogs.
-                            </p>
+
+                        {/* Game 6: Flappy Hog */}
+                        <div className="h-[174px] relative group [perspective:1000px] text-center">
+                            <div className="relative h-full w-full transition-transform duration-700 [transform-style:preserve-3d] group-hover:[transform:rotateY(180deg)]">
+                                {/* Front Face */}
+                                <div className="absolute h-full w-full [backface-visibility:hidden] bg-accent dark:bg-accent-dark border border-border dark:border-border-dark rounded-lg p-4 flex flex-col justify-center items-center">
+                                    <CloudinaryImage
+                                        src="https://res.cloudinary.com/dmukukwp6/image/upload/Screenshot_2025_05_14_at_16_31_37_5e009d0dd5.png"
+                                        alt="Flappy Hog screenshot"
+                                        className="w-full max-w-[146px] mx-auto"
+                                    />
+                                </div>
+                                {/* Back Face */}
+                                <div className="absolute h-full w-full [backface-visibility:hidden] [transform:rotateY(180deg)] bg-accent dark:bg-accent-dark border border-border dark:border-border-dark rounded-lg p-6 flex flex-col justify-center items-center">
+                                    <div className="text-center">
+                                        <h4 className="text-xl font-bold mb-2">Flappy Hog</h4>
+                                        Despite the title, this game has neither hedgehogs nor flapping. <br /> <br />
+                                        <p>
+                                            <b>Built by:</b>{' '}
+                                            <Link to="https://posthog.com/community/profiles/29070">Joe Martin</Link>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                     <p className="text-center text-lg mb-4 bg-[#E5E7E0] p-4 rounded-md shadow-md w-full">
@@ -393,36 +467,178 @@ export const ProductDeskHog = () => {
                     <h4 className="text-2xl text-center mb-12">(A great excuse to expense your DeskHog purchase)</h4>
 
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
-                        <div className="text-center">
-                            <CloudinaryImage
-                                src="https://res.cloudinary.com/dmukukwp6/image/upload/Screenshot_2025_05_14_at_16_31_37_5e009d0dd5.png"
-                                alt="Business tool 1"
-                                className="w-full max-w-[200px] mx-auto mb-4"
-                            />
-                            <h3 className="text-xl font-bold">Clock</h3>
-                            <p className="text-sm">But, wait, it also includes a timer!</p>
+                        {/* Item 1: Clock */}
+                        <div className="h-[174px] relative group [perspective:1000px]">
+                            <div className="relative h-full w-full transition-transform duration-700 [transform-style:preserve-3d] group-hover:[transform:rotateY(180deg)]">
+                                {/* Front Face */}
+                                <div className="absolute h-full w-full [backface-visibility:hidden] bg-accent dark:bg-accent-dark border border-border dark:border-border-dark rounded-lg p-4 text-center flex flex-col justify-center items-center">
+                                    <CloudinaryImage
+                                        src="https://res.cloudinary.com/dmukukwp6/image/upload/Screenshot_2025_05_14_at_16_31_37_5e009d0dd5.png"
+                                        alt="Clock tool"
+                                        className="w-full max-w-[146px] mx-auto"
+                                    />
+                                </div>
+                                {/* Back Face */}
+                                <div className="absolute h-full w-full [backface-visibility:hidden] [transform:rotateY(180deg)] bg-accent dark:bg-accent-dark border border-border dark:border-border-dark rounded-lg p-6 flex flex-col justify-center items-center">
+                                    <div className="text-center">
+                                        <h4 className="text-xl font-bold mb-2">Clock</h4>
+                                        <p className="text-sm text-primary/80 dark:text-primary-dark/80">
+                                            But, wait, it also includes a timer!
+                                        </p>
+                                        <p>
+                                            <b>Built by:</b>{' '}
+                                            <Link to="https://posthog.com/community/profiles/29070">Joe Martin</Link>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                        <div className="text-center">
-                            <CloudinaryImage
-                                src="https://res.cloudinary.com/dmukukwp6/image/upload/Screenshot_2025_05_14_at_16_31_37_5e009d0dd5.png"
-                                alt="Business tool 2"
-                                className="w-full max-w-[200px] mx-auto mb-4"
-                            />
-                            <h3 className="text-xl font-bold">Pomodoro Timer</h3>
-                            <p className="text-sm">Gives you time to ponder 20 tomatoes.</p>
+
+                        {/* Item 2: Pomodoro Timer */}
+                        <div className="h-[174px] relative group [perspective:1000px]">
+                            <div className="relative h-full w-full transition-transform duration-700 [transform-style:preserve-3d] group-hover:[transform:rotateY(180deg)]">
+                                {/* Front Face */}
+                                <div className="absolute h-full w-full [backface-visibility:hidden] bg-accent dark:bg-accent-dark border border-border dark:border-border-dark rounded-lg p-4 text-center flex flex-col justify-center items-center">
+                                    <CloudinaryImage
+                                        src="https://res.cloudinary.com/dmukukwp6/image/upload/Screenshot_2025_05_14_at_16_31_37_5e009d0dd5.png"
+                                        alt="Pomodoro Timer tool"
+                                        className="w-full max-w-[146px] mx-auto"
+                                    />
+                                </div>
+                                {/* Back Face */}
+                                <div className="absolute h-full w-full [backface-visibility:hidden] [transform:rotateY(180deg)] bg-accent dark:bg-accent-dark border border-border dark:border-border-dark rounded-lg p-6 flex flex-col justify-center items-center">
+                                    <div className="text-center">
+                                        <h4 className="text-xl font-bold mb-2">Pomodoro Timer</h4>
+                                        <p className="text-sm text-primary/80 dark:text-primary-dark/80">
+                                            Gives you time to ponder 20 tomatoes.
+                                        </p>
+                                        <p>
+                                            <b>Built by:</b>{' '}
+                                            <Link to="https://posthog.com/community/profiles/28619">Annika Schmid</Link>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                        <div className="text-center">
-                            <CloudinaryImage
-                                src="https://res.cloudinary.com/dmukukwp6/image/upload/Screenshot_2025_05_14_at_16_31_37_5e009d0dd5.png"
-                                alt="Business tool 3"
-                                className="w-full max-w-[200px] mx-auto mb-4"
-                            />
-                            <h3 className="text-xl font-bold">Insight Keeper-upper</h3>
-                            <p className="text-sm">Grab graphs from PostHog and squint at them.</p>
+
+                        {/* Item 3: Insight Keeper-upper */}
+                        <div className="h-[174px] relative group [perspective:1000px]">
+                            <div className="relative h-full w-full transition-transform duration-700 [transform-style:preserve-3d] group-hover:[transform:rotateY(180deg)]">
+                                {/* Front Face */}
+                                <div className="absolute h-full w-full [backface-visibility:hidden] bg-accent dark:bg-accent-dark border border-border dark:border-border-dark rounded-lg p-4 text-center flex flex-col justify-center items-center">
+                                    <CloudinaryImage
+                                        src="https://res.cloudinary.com/dmukukwp6/image/upload/Screenshot_2025_05_14_at_16_31_37_5e009d0dd5.png"
+                                        alt="Insight Keeper-upper tool"
+                                        className="w-full max-w-[146px] mx-auto"
+                                    />
+                                </div>
+                                {/* Back Face */}
+                                <div className="absolute h-full w-full [backface-visibility:hidden] [transform:rotateY(180deg)] bg-accent dark:bg-accent-dark border border-border dark:border-border-dark rounded-lg p-6 flex flex-col justify-center items-center">
+                                    <div className="text-center">
+                                        <h4 className="text-xl font-bold mb-2">Insight Keeper-upper</h4>
+                                        <p className="text-sm text-primary/80 dark:text-primary-dark/80">
+                                            Grab graphs from PostHog and squint at them.
+                                        </p>
+                                        <p>
+                                            <b>Built by:</b>{' '}
+                                            <Link to="https://posthog.com/community/profiles/31731">Danilo Campos</Link>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
             </section>
+
+            {/* DeskHog Specs Section */}
+            <section className="py-12 md:py-16">
+                <div className={`${fullWidthContent ? 'max-w-full px-8' : 'max-w-7xl mx-auto'} px-5`}>
+                    <h2
+                        className="text-5xl font-bold text-center mb-16 text-primary dark:text-primary-dark"
+                        dangerouslySetInnerHTML={{
+                            __html: 'The <s>devil</s> <span class="text-red dark:text-yellow">power</span> is in the details<br />',
+                        }}
+                    />
+                    <div className="flex justify-center">
+                        <div className="inline-grid grid-cols-1 md:grid-cols-2 gap-x-16 gap-y-10">
+                            {[
+                                {
+                                    label: 'Processor',
+                                    icon: <IconBolt />,
+                                    details: 'ESP32-S3 Dual Core\n240MHz Tensilica',
+                                },
+                                {
+                                    label: 'Memory',
+                                    icon: <IconStack />,
+                                    details: '4MB Flash, 2MB PSRAM\n512KB SRAM',
+                                },
+                                {
+                                    label: 'Display',
+                                    icon: <IconEye />,
+                                    details: '1.14" Color IPS TFT\n240x135 pixels (ST7789)\n',
+                                },
+                                {
+                                    label: 'Connectivity',
+                                    icon: <IconShare />,
+                                    details: '2.4GHz Wi-Fi (802.11b/g/n)\nBluetooth LE (BLE)',
+                                },
+                                {
+                                    label: 'Power & Battery',
+                                    icon: <IconRewindPlay />,
+                                    details:
+                                        'USB Type-C / LiPo Battery\nBuilt-in Charging, MAX17048 Monitor\nLow Power Sleep (40-50µA)',
+                                },
+                                {
+                                    label: 'Expansion',
+                                    icon: <IconPlus />,
+                                    details: 'STEMMA QT (I²C)\nFeatherWing Compatible\nSerial Debug Pin',
+                                },
+                                {
+                                    label: 'Enclosure',
+                                    icon: <IconWrench />,
+                                    details: 'Custom 3D Printed (PLA)\nOpen source files available',
+                                },
+                                {
+                                    label: 'Inputs',
+                                    icon: <IconCursorClick />,
+                                    details: '3x User Tactile Buttons\nReset & DFU Buttons',
+                                },
+                                {
+                                    label: 'Dimensions',
+                                    icon: <IconBuilding />,
+                                    details: '~70mm x 40mm x 15mm\nPalm-Perfectly-Sized',
+                                },
+                                {
+                                    label: 'Also included',
+                                    icon: <IconToggle />,
+                                    details: 'Unlimited potential\n(Hardware permitting)',
+                                },
+                            ].map((spec, index) => (
+                                <div key={index} className="flex items-start gap-4">
+                                    <span className="text-orange w-8 h-8 mt-1 shrink-0">{spec.icon}</span>
+                                    <div>
+                                        <h3 className="text-xl font-semibold text-primary/80 dark:text-primary-dark/80 mb-1.5">
+                                            {spec.label}
+                                        </h3>
+                                        <p
+                                            className="text-md text-primary dark:text-primary-dark whitespace-pre-line"
+                                            dangerouslySetInnerHTML={{ __html: spec.details }}
+                                        />
+                                    </div>
+                                </div>
+                            ))}
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            {/* New Centered Banner Location */}
+            <div className="text-center py-8">
+                <span className="inline-block bg-yellow text-black px-6 py-2 rounded-full text-xl font-semibold shadow-lg transform -rotate-3">
+                    Shipped in random colors!!
+                </span>
+            </div>
 
             <div className={`${fullWidthContent ? 'max-w-full px-8' : 'max-w-7xl mx-auto'} px-5 py-10 md:pt-20 pb-0`}>
                 <PairsWith items={pairsWithItemCount}>
