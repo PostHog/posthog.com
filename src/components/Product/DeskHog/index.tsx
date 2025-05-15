@@ -237,7 +237,7 @@ const ExpandableCallout = () => {
     return (
         <div className="col-span-2 bg-[#E5E7E0] dark:bg-slate-700 dark:text-slate-200 p-4 rounded-md shadow-md mt-10 w-full max-w-lg mx-auto">
             <button onClick={() => setIsOpen(!isOpen)} className="text-lg font-semibold text-center w-full">
-                Oh, and there's DeskHog Pro too 👇
+                And this is just for starters 👇
             </button>
             {isOpen && (
                 <div className="mt-4 flex flex-col items-center">
