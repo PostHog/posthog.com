@@ -178,7 +178,7 @@ function DpaGenerator() {
     // Determine if the current mode is a request mode
     const isRequestMode = mode === 'pretty' || mode === 'lawyer'
 
-    // Only use handleDpaSubmit for PDF export modes
+    // Only use handleDpaSubmit for non PDF export modes
     const handleButtonClick = () => {
         if (isRequestMode) {
             handleDpaSubmit()
@@ -489,7 +489,337 @@ function DpaGenerator() {
                             </p>
                         </div>
                     ) : (
-                        <>{/* ...rest of your content... */}</>
+                        <>
+                            <div className={`${mode === 'fairytale' ? 'block' : 'hidden'}`}>
+                                <div className="bg-yellow/25 py-4 px-8 text-sm text-center -mx-8 border-t border-light">
+                                    <strong>Notice:</strong> While this version is a great way to understand what the
+                                    DPA says, we don't recommend sending this version to the lawyers.
+                                </div>
+                                <h2 className="text-center !text-[2.25rem] text-balance !leading-snug py-8 font-fairytale-title">
+                                    Weaving a Magical Pact for Data Protection: An Enchanted Alliance
+                                </h2>
+                                <div className="[&>p]:text-[19px] [&>p]:leading-relaxed [&>p]:pb-6 [&_li]:text-[19px] [&_li]:leading-relaxed max-w-xl mx-auto font-fairytale">
+                                    <CloudinaryImage
+                                        src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/images/dpa/map.png"
+                                        alt="Map"
+                                        placeholder="blurred"
+                                        className={FloatRight}
+                                    />
+                                    <p>
+                                        Once upon a time in the enchanted land of Data, a wise and gentle kingdom known
+                                        as{' '}
+                                        <Tooltip
+                                            content={() => (
+                                                <>
+                                                    Fill out the form <span className="md:hidden">at the top</span>
+                                                    <span className="hidden md:inline-block">to the left</span> populate
+                                                    these fields
+                                                </>
+                                            )}
+                                            placement="top"
+                                            className="[&_button]:cursor-auto"
+                                        >
+                                            <span className="relative">
+                                                <button type="button">
+                                                    <label
+                                                        htmlFor="companyName"
+                                                        className="bg-yellow/40 font-bold px-0.5 py-0.5"
+                                                    >
+                                                        {companyName ? companyName : '[COMPANY NAME]'}
+                                                    </label>
+                                                </button>
+                                            </span>
+                                        </Tooltip>{' '}
+                                        sought to ensure that all its precious treasures—bits and bytes of
+                                        knowledge—were safely guarded. To do this, they reached out to the guardian
+                                        wizards of <strong>PostHog, Inc.</strong>, a famed group known for their
+                                        powerful data spells and secure magic vaults.
+                                    </p>
+
+                                    <CloudinaryImage
+                                        src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/images/dpa/sword.png"
+                                        alt="Sword"
+                                        placeholder="blurred"
+                                        className={FloatLeft}
+                                    />
+                                    <p>
+                                        <Tooltip
+                                            content={() => (
+                                                <>
+                                                    Fill out the form <span className="md:hidden">at the top</span>
+                                                    <span className="hidden md:inline-block">to the left</span> populate
+                                                    these fields
+                                                </>
+                                            )}
+                                            placement="top"
+                                            className="[&_button]:cursor-auto"
+                                        >
+                                            <span className="relative">
+                                                <button type="button">
+                                                    <label
+                                                        htmlFor="companyName"
+                                                        className="bg-yellow/40 font-bold px-0.5 py-0.5"
+                                                    >
+                                                        {companyName ? companyName : '[COMPANY NAME]'}
+                                                    </label>
+                                                </button>
+                                            </span>
+                                        </Tooltip>{' '}
+                                        and the PostHog wizards agreed to create a magical pact called the "Data
+                                        Protection Agreement," ensuring that all the treasures would be handled with
+                                        care and respect for the laws of the land, including the ancient scrolls of GDPR
+                                        and the mystical tomes of the EEA.
+                                    </p>
+
+                                    <CloudinaryImage
+                                        src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/images/dpa/wizard.png"
+                                        alt="Wizard"
+                                        placeholder="blurred"
+                                        className={FloatRight}
+                                    />
+
+                                    <p>
+                                        <Tooltip
+                                            content={() => (
+                                                <>
+                                                    Fill out the form <span className="md:hidden">at the top</span>
+                                                    <span className="hidden md:inline-block">to the left</span> populate
+                                                    these fields
+                                                </>
+                                            )}
+                                            placement="top"
+                                            className="[&_button]:cursor-auto"
+                                        >
+                                            <span className="relative">
+                                                <button type="button">
+                                                    <label
+                                                        htmlFor="companyName"
+                                                        className="bg-yellow/40 font-bold px-0.5 py-0.5"
+                                                    >
+                                                        {companyName ? companyName : '[COMPANY NAME]'}
+                                                    </label>
+                                                </button>
+                                            </span>
+                                        </Tooltip>{' '}
+                                        a noble Data Controller, entrusted its treasures to the PostHog wizards. The
+                                        wizards promised to safeguard the treasures by using their enchanted tools and
+                                        secret spells to process and analyze the data. They vowed never to use the
+                                        treasures for evil and always to follow{' '}
+                                        <Tooltip
+                                            content={() => (
+                                                <>
+                                                    Fill out the form <span className="md:hidden">at the top</span>
+                                                    <span className="hidden md:inline-block">to the left</span> populate
+                                                    these fields
+                                                </>
+                                            )}
+                                            placement="top"
+                                            className="[&_button]:cursor-auto"
+                                        >
+                                            <span className="relative">
+                                                <button type="button">
+                                                    <label
+                                                        htmlFor="companyName"
+                                                        className="bg-yellow/40 font-bold px-0.5 py-0.5"
+                                                    >
+                                                        {companyName ? companyName : '[COMPANY NAME]'}
+                                                    </label>
+                                                </button>
+                                            </span>
+                                        </Tooltip>
+                                        's wise instructions.
+                                    </p>
+
+                                    <CloudinaryImage
+                                        src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/images/dpa/gnomes.png"
+                                        alt="Gnomes"
+                                        placeholder="blurred"
+                                        className={FloatLeft}
+                                    />
+                                    <p>
+                                        In the depths of their crystal-clear agreement, they outlined the adventures the
+                                        data could undertake and specified who could handle the data, ensuring that only
+                                        the most trusted apprentice wizards or external guardians could assist in
+                                        safeguarding it. Each apprentice was sworn to secrecy with a magical oath to
+                                        protect{' '}
+                                        <Tooltip
+                                            content={() => (
+                                                <>
+                                                    Fill out the form <span className="md:hidden">at the top</span>
+                                                    <span className="hidden md:inline-block">to the left</span> populate
+                                                    these fields
+                                                </>
+                                            )}
+                                            placement="top"
+                                            className="[&_button]:cursor-auto"
+                                        >
+                                            <span className="relative">
+                                                <button type="button">
+                                                    <label
+                                                        htmlFor="companyName"
+                                                        className="bg-yellow/40 font-bold px-0.5 py-0.5"
+                                                    >
+                                                        {companyName ? companyName : '[COMPANY NAME]'}
+                                                    </label>
+                                                </button>
+                                            </span>
+                                        </Tooltip>{' '}
+                                        treasures.
+                                    </p>
+
+                                    <p>
+                                        They built a fortress of security measures, enchantments so strong that only
+                                        those with the right spells could access the treasures. They agreed to help each
+                                        other in times of trouble, like when a data gremlin might sneak in to create
+                                        mischief.
+                                    </p>
+
+                                    <CloudinaryImage
+                                        src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/images/dpa/porridge.png"
+                                        alt="Porridge"
+                                        placeholder="blurred"
+                                        className={FloatRight}
+                                    />
+                                    <p>
+                                        <Tooltip
+                                            content={() => (
+                                                <>
+                                                    Fill out the form <span className="md:hidden">at the top</span>
+                                                    <span className="hidden md:inline-block">to the left</span> populate
+                                                    these fields
+                                                </>
+                                            )}
+                                            placement="top"
+                                            className="[&_button]:cursor-auto"
+                                        >
+                                            <span className="relative">
+                                                <button type="button">
+                                                    <label
+                                                        htmlFor="companyName"
+                                                        className="bg-yellow/40 font-bold px-0.5 py-0.5"
+                                                    >
+                                                        {companyName ? companyName : '[COMPANY NAME]'}
+                                                    </label>
+                                                </button>
+                                            </span>
+                                        </Tooltip>{' '}
+                                        and PostHog celebrated their alliance with a grand feast in the grand hall,
+                                        signing their pact with quill and enchanted ink. They agreed that their magical
+                                        contract would be overseen by the wise elders of the land—judges from the
+                                        jurisdiction of England and Wales.
+                                    </p>
+
+                                    <p>
+                                        As the years passed, their partnership flourished.{' '}
+                                        <Tooltip
+                                            content={() => (
+                                                <>
+                                                    Fill out the form <span className="md:hidden">at the top</span>
+                                                    <span className="hidden md:inline-block">to the left</span> populate
+                                                    these fields
+                                                </>
+                                            )}
+                                            placement="top"
+                                            className="[&_button]:cursor-auto"
+                                        >
+                                            <span className="relative">
+                                                <button type="button">
+                                                    <label
+                                                        htmlFor="companyName"
+                                                        className="bg-yellow/40 font-bold px-0.5 py-0.5"
+                                                    >
+                                                        {companyName ? companyName : '[COMPANY NAME]'}
+                                                    </label>
+                                                </button>
+                                            </span>
+                                        </Tooltip>
+                                        's treasures were kept safe and grew in wisdom, bringing joy and prosperity to
+                                        the land. And they all lived securely and data-compliantly ever after.
+                                    </p>
+                                    <div className="pb-16">
+                                        <SignatureFields />
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div className={`${mode === 'tswift' ? 'block' : 'hidden'} [&>p]:text-[15px] pb-4`}>
+                                <div className="bg-yellow/25 py-4 px-8 text-sm text-center -mx-8 border-t border-light">
+                                    <strong>Notice:</strong> We don't recommend this version, unless you know a judge
+                                    who's a Swiftie.
+                                </div>
+
+                                <div className="@container mx-auto max-w-3xl">
+                                    <h2 className="pt-8 pb-0">Data Dance</h2>
+
+                                    <div className="@lg:float-right flex flex-col -mr-2 ml-2 md:ml-0 mb-2 mt:mt-0 w-48 md:w-64">
+                                        <CloudinaryImage
+                                            src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/images/dpa/t-swift.png"
+                                            alt="Taylor Swift hog"
+                                            placeholder="blurred"
+                                            className="mb-2"
+                                        />
+                                    </div>
+
+                                    <p>
+                                        We started with a promise, data in our hands,
+                                        <br />
+                                        You're the controller, I'm the one who understands,
+                                        <br />
+                                        You wanna share your secrets, let me hold the key,
+                                        <br />
+                                        We'll keep it all secure, like it's meant to be.
+                                    </p>
+                                    <p>
+                                        We'll follow every rule, every law, every line,
+                                        <br />
+                                        From the EEA to the Swiss, we'll keep it fine,
+                                        <br />
+                                        No breach of trust, no whispers in the dark,
+                                        <br />
+                                        We'll protect it all, every little spark.
+                                    </p>
+                                    <p className="font-bold">
+                                        This is our data dance, under moonlit skies,
+                                        <br />
+                                        With the GDPR watching, we'll never compromise,
+                                        <br />
+                                        I'll be your processor, with a duty so true,
+                                        <br />
+                                        Every byte, every bit, I'll handle it for you.
+                                    </p>
+                                    <p>
+                                        If there's a breach, I'll let you know,
+                                        <br />
+                                        In the dead of night, or the morning glow,
+                                        <br />
+                                        We'll fix it fast, we'll make it right,
+                                        <br />
+                                        Together we'll stand, in this data fight.
+                                    </p>
+                                    <p className="font-bold">
+                                        This is our data dance, under moonlit skies,
+                                        <br />
+                                        With the GDPR watching, we'll never compromise,
+                                        <br />
+                                        I'll be your processor, with a duty so true,
+                                        <br />
+                                        Every byte, every bit, I'll handle it for you.
+                                    </p>
+                                    <p>
+                                        In this digital world, where privacy's the song,
+                                        <br />
+                                        We'll keep on dancing, where we both belong,
+                                        <br />
+                                        With every step, we'll take this vow,
+                                        <br />
+                                        To protect and cherish, here and now.
+                                    </p>
+                                    <div className="pb-16">
+                                        <SignatureFields />
+                                    </div>
+                                </div>
+                            </div>
+                        </>
                     )}
                 </div>
 
