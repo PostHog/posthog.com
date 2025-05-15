@@ -503,7 +503,6 @@ export const ProductDeskHog = () => {
                                         <p className="text-sm text-primary/80 dark:text-primary-dark/80">
                                             Hate smalltalk? These icebreakers will help.
                                         </p>
-                                        <br /> <br />
                                         <p>
                                             <b>Built by:</b>{' '}
                                             <Link to="https://posthog.com/community/profiles/28619">Annika Schmid</Link>
