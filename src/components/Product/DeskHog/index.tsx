@@ -161,10 +161,7 @@ const HeroDeskHog = ({ color, icon, beta, product, title, description }: HeroDes
 }
 
 const VideoDeskHog = () => (
-    <section
-        id="demo-video"
-        className={`overflow-hidden transition-all duration-300 h-auto max-h-[90vh] border border-light dark:border-dark rounded leading-[0] shadow-xl mb-8`}
-    >
+    <section id="demo-video" className={`overflow-hidden h-auto max-h-[90vh] mb-8`}>
         <iframe
             src="https://res.cloudinary.com/dmukukwp6/video/upload/Termagotchi_084775b39f.mp4"
             className="rounded aspect-video m-0"
@@ -174,8 +171,7 @@ const VideoDeskHog = () => (
                 maxWidth: '55%',
                 margin: '0 auto',
                 display: 'block',
-                border: '1px solid',
-                borderColor: 'inherit',
+                border: '1px solid var(--border-light, #e0e0e0)',
             }}
             allow="autoplay"
         />
