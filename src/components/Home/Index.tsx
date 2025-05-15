@@ -2,14 +2,13 @@ import React, { useEffect, useState } from 'react'
 import SEO from 'components/seo'
 import Link from 'components/Link'
 import Editor from 'components/Editor'
-import { useValues } from 'kea'
-import { layoutLogic } from 'logic/layoutLogic'
 import OSTable from 'components/OSTable'
 import ScrollArea from 'components/RadixUI/ScrollArea'
 import { useCustomers } from 'hooks/useCustomers'
 import Logo from 'components/Logo'
 import CTA from './CTA'
-import { IconArrowRight, IconArrowUpLeftDiagonal } from '@posthog/icons'
+import { IconArrowRight } from '@posthog/icons'
+import Roadmap from './New/Roadmap'
 
 const Products = () => {
     const columns = [
@@ -52,7 +51,9 @@ const Products = () => {
         <div>
             <OSTable columns={columns} rows={rows} />
             <div className="bg-accent p-1 text-right text-xs border-primary border-x border-b">
-                <Link to="/products" state={{ newWindow: true }} className="hover:underline">Open product explorer <IconArrowRight className="inline-block -rotate-45 size-4 text-primary" /></Link>
+                <Link to="/products" state={{ newWindow: true }} className="hover:underline">
+                    Open product explorer <IconArrowRight className="inline-block -rotate-45 size-4 text-primary" />
+                </Link>
             </div>
         </div>
     )
@@ -62,21 +63,23 @@ const sections = [
     {
         title: 'products',
         description: 'PostHog helps you...',
-        content: (<Products />),
+        content: <Products />,
     },
     {
         title: 'roadmap',
         description: "we haven't built our defining feature. customers help us decide what to build next.",
-        content: '', // component with tabbable tables (work in progress, under consideration)
+        content: <Roadmap />,
     },
     {
         title: 'pricing',
-        description: 'our usage-based pricing means you don\'t have to "talk to sales". plus each product has a generous monthly free tier – in fact, 98% of customers use PostHog for free!',
+        description:
+            'our usage-based pricing means you don\'t have to "talk to sales". plus each product has a generous monthly free tier – in fact, 98% of customers use PostHog for free!',
         content: '', // component with tabbable tables (work in progress, under consideration)
     },
     {
         title: 'logos',
-        description: "here are some of our paying customers. (yes they actually use us, no it's not just some random engineer that tried us out 2+ years ago.)",
+        description:
+            "here are some of our paying customers. (yes they actually use us, no it's not just some random engineer that tried us out 2+ years ago.)",
         content: '', // component with logos
     },
     {
@@ -86,20 +89,22 @@ const sections = [
             <>
                 <ul>
                     <li>
-                        <strong>transparency.</strong> read our <Link to="/handbook">company handbook</Link>, our <Link to="/sales-manual">sales manual</Link>, or <Link to="/strategy">company strategy</Link>
+                        <strong>transparency.</strong> read our <Link to="/handbook">company handbook</Link>, our{' '}
+                        <Link to="/sales-manual">sales manual</Link>, or <Link to="/strategy">company strategy</Link>
                     </li>
                     <li>
                         <strong>we ship fast.</strong> see our <Link to="/changelog">changelog</Link>
                     </li>
                     <li>
-                        <strong>actually-technical support.</strong> our <Link to="/support">support people</Link> all have engineering backgrounds.
+                        <strong>actually-technical support.</strong> our <Link to="/support">support people</Link> all
+                        have engineering backgrounds.
                     </li>
                 </ul>
                 <p>
                     <Link to="/company-tour">take the company tour</Link> →
                 </p>
             </>
-        )
+        ),
     },
     {
         title: 'bedtime reading',
@@ -130,10 +135,8 @@ const sections = [
         title: 'shameless CTA',
         // description: 'we have a lot of features. here are some of them.',
         content: <CTA />,
-    }
+    },
 ]
-
-
 
 const CUSTOMER_ORDER = [
     'ycombinator',
@@ -268,15 +271,22 @@ export default function Home(): JSX.Element {
                 onFilterChange={(data) => setFilteredCustomers(data)}
             >
                 <ScrollArea>
-                    <h1>welcome to <Logo className="inline-block" /></h1>
+                    <h1>
+                        welcome to <Logo className="inline-block" />
+                    </h1>
                     <p>we build tools for people who build products.</p>
 
                     <div className="bg-accent p-4 rounded mb-8 text-sm inline-block min-w-[250px]">
-                        <div className="pb-1"><strong>contents</strong></div>
+                        <div className="pb-1">
+                            <strong>contents</strong>
+                        </div>
                         <ol className="pl-4">
                             {sections.map((section) => (
                                 <li key={section.title}>
-                                    <Link to={`/#${section.title.toLowerCase().replace(/\s+/g, '-')}`} className="group flex items-center gap-1">
+                                    <Link
+                                        to={`/#${section.title.toLowerCase().replace(/\s+/g, '-')}`}
+                                        className="group flex items-center gap-1"
+                                    >
                                         <span>{section.title}</span>
                                         <IconArrowRight className="inline-block rotate-90 size-3 text-primary opacity-0 group-hover:opacity-100" />
                                     </Link>

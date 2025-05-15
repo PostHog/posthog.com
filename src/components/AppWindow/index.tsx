@@ -36,16 +36,6 @@ const getSizeDefaults = () => ({
 })
 
 const fixedAppSizes = {
-    '/': {
-        min: {
-            width: 600,
-            height: 500,
-        },
-        max: {
-            width: 1000,
-            height: 1000,
-        },
-    },
     '/start': {
         max: {
             width: 850,
