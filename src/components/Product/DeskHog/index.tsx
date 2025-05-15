@@ -176,10 +176,13 @@ const VideoDeskHog = () => (
                 allow="autoplay"
             />
             <div className="absolute top-[-10px] left-[200px] mt-4 ml-4">
-                <span className="inline-block bg-yellow text-black px-6 py-2 rounded-full text-xl font-semibold shadow-lg transform -rotate-45 scale-90">
-                    Pre-order now
+                <a
+                    href="https://github.com/PostHog/DeskHog"
+                    className="inline-block bg-yellow text-black px-6 py-2 rounded-full text-xl font-semibold shadow-lg transform -rotate-45 scale-90"
+                >
+                    <span className="text-black">Build it yourself</span>
                     <br />
-                </span>
+                </a>
             </div>
         </div>
     </section>
@@ -347,7 +350,7 @@ export const ProductDeskHog = () => {
                         <div className="h-[174px] relative group [perspective:1000px] text-center">
                             <div className="relative h-full w-full transition-transform duration-700 [transform-style:preserve-3d] group-hover:[transform:rotateY(180deg)]">
                                 {/* Front Face */}
-                                <div className="absolute h-full w-full [backface-visibility:hidden] bg-accent dark:bg-accent-dark border border-border dark:border-border-dark rounded-lg p-4 flex flex-col justify-center items-center">
+                                <div className="absolute h-full w-full [backface-visibility:hidden] flex flex-col justify-center items-center">
                                     <CloudinaryImage
                                         src="https://res.cloudinary.com/dmukukwp6/image/upload/edcbc25d_262b_4590_936a_552c445a2ccb_1812ec3330.png"
                                         alt="Pog game screenshot"
@@ -375,7 +378,7 @@ export const ProductDeskHog = () => {
                         <div className="h-[174px] relative group [perspective:1000px] text-center">
                             <div className="relative h-full w-full transition-transform duration-700 [transform-style:preserve-3d] group-hover:[transform:rotateY(180deg)]">
                                 {/* Front Face */}
-                                <div className="absolute h-full w-full [backface-visibility:hidden] bg-accent dark:bg-accent-dark border border-border dark:border-border-dark rounded-lg p-4 flex flex-col justify-center items-center">
+                                <div className="absolute h-full w-full [backface-visibility:hidden] flex flex-col justify-center items-center">
                                     <CloudinaryImage
                                         src="https://res.cloudinary.com/dmukukwp6/image/upload/a3e7c64e_2bfa_424e_aad2_f79bf1b86c63_7028720d2a.png"
                                         alt="Shareholder Value Clicker screenshot"
@@ -403,7 +406,7 @@ export const ProductDeskHog = () => {
                         <div className="h-[174px] relative group [perspective:1000px] text-center">
                             <div className="relative h-full w-full transition-transform duration-700 [transform-style:preserve-3d] group-hover:[transform:rotateY(180deg)]">
                                 {/* Front Face */}
-                                <div className="absolute h-full w-full [backface-visibility:hidden] bg-accent dark:bg-accent-dark border border-border dark:border-border-dark rounded-lg p-4 flex flex-col justify-center items-center">
+                                <div className="absolute h-full w-full [backface-visibility:hidden] flex flex-col justify-center items-center">
                                     <CloudinaryImage
                                         src="https://res.cloudinary.com/dmukukwp6/image/upload/e90c7a39_484a_40a0_94b1_693962bbd13e_52085d0806.png"
                                         alt="One Button Dungeon screenshot"
@@ -430,10 +433,10 @@ export const ProductDeskHog = () => {
                         <div className="h-[174px] relative group [perspective:1000px] text-center">
                             <div className="relative h-full w-full transition-transform duration-700 [transform-style:preserve-3d] group-hover:[transform:rotateY(180deg)]">
                                 {/* Front Face */}
-                                <div className="absolute h-full w-full [backface-visibility:hidden] bg-accent dark:bg-accent-dark border border-border dark:border-border-dark rounded-lg p-4 flex flex-col justify-center items-center">
+                                <div className="absolute h-full w-full [backface-visibility:hidden] flex flex-col justify-center items-center">
                                     <CloudinaryImage
                                         src="https://res.cloudinary.com/dmukukwp6/image/upload/52974df0_4084_41c0_a1e1_3e628c143c2c_dca92f8f5c.png"
-                                        alt="Awkwardness Avoider screenshot"
+                                        alt="Dictator or Techbro Mobile screenshot"
                                         className="w-full max-w-[224px] mx-auto"
                                     />
                                 </div>
@@ -458,7 +461,7 @@ export const ProductDeskHog = () => {
                         <div className="h-[174px] relative group [perspective:1000px] text-center">
                             <div className="relative h-full w-full transition-transform duration-700 [transform-style:preserve-3d] group-hover:[transform:rotateY(180deg)]">
                                 {/* Front Face */}
-                                <div className="absolute h-full w-full [backface-visibility:hidden] bg-accent dark:bg-accent-dark border border-border dark:border-border-dark rounded-lg p-4 flex flex-col justify-center items-center">
+                                <div className="absolute h-full w-full [backface-visibility:hidden] flex flex-col justify-center items-center">
                                     <CloudinaryImage
                                         src="https://res.cloudinary.com/dmukukwp6/image/upload/b46b4cb6_d18e_4ae2_9913_7a8966a778ed_3e9927cf98.png"
                                         alt="Notchagotchi screenshot"
@@ -485,7 +488,7 @@ export const ProductDeskHog = () => {
                         <div className="h-[174px] relative group [perspective:1000px] text-center">
                             <div className="relative h-full w-full transition-transform duration-700 [transform-style:preserve-3d] group-hover:[transform:rotateY(180deg)]">
                                 {/* Front Face */}
-                                <div className="absolute h-full w-full [backface-visibility:hidden] bg-accent dark:bg-accent-dark border border-border dark:border-border-dark rounded-lg p-4 flex flex-col justify-center items-center">
+                                <div className="absolute h-full w-full [backface-visibility:hidden] flex flex-col justify-center items-center">
                                     <CloudinaryImage
                                         src="https://res.cloudinary.com/dmukukwp6/image/upload/e9f1d2df_e53a_4af0_ac7b_fbf564444cd0_ff08ab6c7f.png"
                                         alt="Flappy Hog screenshot"
@@ -512,7 +515,7 @@ export const ProductDeskHog = () => {
                         <div className="h-[174px] relative group [perspective:1000px] text-center">
                             <div className="relative h-full w-full transition-transform duration-700 [transform-style:preserve-3d] group-hover:[transform:rotateY(180deg)]">
                                 {/* Front Face */}
-                                <div className="absolute h-full w-full [backface-visibility:hidden] bg-accent dark:bg-accent-dark border border-border dark:border-border-dark rounded-lg p-4 flex flex-col justify-center items-center">
+                                <div className="absolute h-full w-full [backface-visibility:hidden] flex flex-col justify-center items-center">
                                     <CloudinaryImage
                                         src="https://res.cloudinary.com/dmukukwp6/image/upload/54ac3129_4dd2_446d_afa2_e6c25668f52b_0e92dbcf4c.png"
                                         alt="Hogspeed game screenshot"
@@ -540,7 +543,7 @@ export const ProductDeskHog = () => {
                         <div className="h-[174px] relative group [perspective:1000px] text-center">
                             <div className="relative h-full w-full transition-transform duration-700 [transform-style:preserve-3d] group-hover:[transform:rotateY(180deg)]">
                                 {/* Front Face */}
-                                <div className="absolute h-full w-full [backface-visibility:hidden] bg-accent dark:bg-accent-dark border border-border dark:border-border-dark rounded-lg p-4 flex flex-col justify-center items-center">
+                                <div className="absolute h-full w-full [backface-visibility:hidden] flex flex-col justify-center items-center">
                                     <CloudinaryImage
                                         src="https://res.cloudinary.com/dmukukwp6/image/upload/a06eea35_ff91_4b86_945b_3f25fc5fd259_c3307a2350.png"
                                         alt="Pineapple Reflex game screenshot"
@@ -563,21 +566,19 @@ export const ProductDeskHog = () => {
                             </div>
                         </div>
 
-                        {/* Game 9: Make Your Own Games */}
+                        {/* Game 9: Build Your Own */}
                         <div className="h-[174px] relative group [perspective:1000px] text-center">
                             <div className="relative h-full w-full transition-transform duration-700 [transform-style:preserve-3d] group-hover:[transform:rotateY(180deg)]">
                                 {/* Front Face */}
-                                <div className="absolute h-full w-full [backface-visibility:hidden] bg-accent dark:bg-accent-dark border border-border dark:border-border-dark rounded-lg p-4 flex flex-col justify-center items-center">
-                                    <div className="text-center">
-                                        <h4 className="text-xl font-bold mb-2">Coming soon...</h4>
-                                    </div>
+                                <div className="absolute h-full w-full [backface-visibility:hidden] flex flex-col justify-center items-center">
+                                    <h4 className="text-xl font-bold mb-2">Build your own →</h4>
                                 </div>
                                 {/* Back Face */}
                                 <div className="absolute h-full w-full [backface-visibility:hidden] [transform:rotateY(180deg)] bg-accent dark:bg-accent-dark border border-border dark:border-border-dark rounded-lg p-6 flex flex-col justify-center items-center">
                                     <div className="text-center">
                                         <h4 className="text-xl font-bold mb-2">Want more games?</h4>
                                         <p className="text-sm text-primary/80 dark:text-primary-dark/80">
-                                            Start your game development journey on our GitHub. Vibe coding encouraged!
+                                            Start your game development journey with DeskHog. Vibe coding encouraged!
                                         </p>
                                         <p>
                                             <Link
@@ -608,11 +609,11 @@ export const ProductDeskHog = () => {
                     <h4 className="text-2xl text-center mb-12">(A great excuse to expense your DeskHog purchase)</h4>
 
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
-                        {/* Game 4: Awkwardness Avoider */}
+                        {/* Tool 1: Awkwardness Avoider */}
                         <div className="h-[174px] relative group [perspective:1000px] text-center">
                             <div className="relative h-full w-full transition-transform duration-700 [transform-style:preserve-3d] group-hover:[transform:rotateY(180deg)]">
                                 {/* Front Face */}
-                                <div className="absolute h-full w-full [backface-visibility:hidden] bg-accent dark:bg-accent-dark border border-border dark:border-border-dark rounded-lg p-4 flex flex-col justify-center items-center">
+                                <div className="absolute h-full w-full [backface-visibility:hidden] flex flex-col justify-center items-center">
                                     <CloudinaryImage
                                         src="https://res.cloudinary.com/dmukukwp6/image/upload/5598bc45_d969_45c3_bce9_3cc4c5cf0ad5_ef111c5357.png"
                                         alt="Awkwardness Avoider screenshot"
@@ -635,11 +636,11 @@ export const ProductDeskHog = () => {
                             </div>
                         </div>
 
-                        {/* Item 2: Pomodoro Timer */}
-                        <div className="h-[174px] relative group [perspective:1000px]">
+                        {/* Tool 2: Pomodoro Timer */}
+                        <div className="h-[174px] relative group [perspective:1000px] text-center">
                             <div className="relative h-full w-full transition-transform duration-700 [transform-style:preserve-3d] group-hover:[transform:rotateY(180deg)]">
                                 {/* Front Face */}
-                                <div className="absolute h-full w-full [backface-visibility:hidden] bg-accent dark:bg-accent-dark border border-border dark:border-border-dark rounded-lg p-4 text-center flex flex-col justify-center items-center">
+                                <div className="absolute h-full w-full [backface-visibility:hidden] flex flex-col justify-center items-center">
                                     <CloudinaryImage
                                         src="https://res.cloudinary.com/dmukukwp6/image/upload/d507387e_798f_4fe8_9a4a_c0d13e7525a3_f842494c9e.png"
                                         alt="Pomodoro Timer tool"
@@ -662,11 +663,11 @@ export const ProductDeskHog = () => {
                             </div>
                         </div>
 
-                        {/* Item 3: Insight Keeper-upper */}
-                        <div className="h-[174px] relative group [perspective:1000px]">
+                        {/* Tool 3: Insight Keeper-upper */}
+                        <div className="h-[174px] relative group [perspective:1000px] text-center">
                             <div className="relative h-full w-full transition-transform duration-700 [transform-style:preserve-3d] group-hover:[transform:rotateY(180deg)]">
                                 {/* Front Face */}
-                                <div className="absolute h-full w-full [backface-visibility:hidden] bg-accent dark:bg-accent-dark border border-border dark:border-border-dark rounded-lg p-4 text-center flex flex-col justify-center items-center">
+                                <div className="absolute h-full w-full [backface-visibility:hidden] flex flex-col justify-center items-center">
                                     <CloudinaryImage
                                         src="https://res.cloudinary.com/dmukukwp6/image/upload/3c4149d1_f52b_4861_96f5_ee5123b0dd39_9441f50703.png"
                                         alt="Insight Keeper-upper tool"
