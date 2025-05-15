@@ -180,23 +180,35 @@ const VideoDeskHog = () => (
 
 // Define DeskHogCTA component
 const DeskHogCTA = () => {
-    const headingClasses = 'font-bold text-center text-4xl lg:text-5xl mb-2 animate-pulse'
-    const subheadingClasses = 'text-center opacity-80 max-w-xl mx-auto mb-6'
+    // PostHog style heading classes
+    const headingClasses = 'font-bold text-center text-4xl lg:text-5xl mb-3 text-red dark:text-yellow animate-pulse'
+    const subheadingClasses = 'text-center text-primary dark:text-primary-dark opacity-75 max-w-xl mx-auto mb-6'
 
     return (
-        <section className="py-12 md:py-20 px-5 relative">
-            {/* Text Content Wrapper */}
-            <div className="relative z-10 bg-white bg-opacity-75 dark:bg-dark dark:bg-opacity-75 p-8 rounded-lg mx-auto max-w-3xl">
+        // Section styling simplified, relying on outer page structure for background
+        <section className="py-12 md:py-16 px-4">
+            {/* Text Content Wrapper with PostHog card style */}
+            <div className="relative z-10 bg-white dark:bg-gray-800 p-8 rounded-lg mx-auto max-w-2xl border border-border dark:border-border-dark shadow-xl">
                 <h2 className={headingClasses}>Limited stock available</h2>
                 <h3 className={subheadingClasses}>
                     If nothing else has sold you on DeskHog, hopefully this classic marketing tactic will.
                 </h3>
                 <h6 className={subheadingClasses}>(Seriously though, we only made 250 of these)</h6>
-                <div className="flex justify-center gap-2.5">
-                    <CallToAction href="https://posthog.com/merch" type="primary" size="lg">
+                <div className="flex flex-col sm:flex-row justify-center items-center gap-4 mt-8">
+                    <CallToAction
+                        href="https://posthog.com/merch"
+                        type="primary"
+                        size="lg"
+                        className="w-full sm:w-auto" // Ensure buttons are responsive
+                    >
                         Buy it now
                     </CallToAction>
-                    <CallToAction href="https://github.com/PostHog/DeskHog" type="secondary" size="lg">
+                    <CallToAction
+                        href="https://github.com/PostHog/DeskHog"
+                        type="secondary" // Using secondary type for a standard PostHog look
+                        size="lg"
+                        className="w-full sm:w-auto"
+                    >
                         Make your own
                     </CallToAction>
                 </div>
@@ -263,7 +275,7 @@ export const ProductDeskHog = () => {
                             </p>
                             <div>
                                 <p className="text-center text-lg mb-4 bg-[#E5E7E0] p-4 rounded-md shadow-md w-full">
-                                    <strong>Want more hardware?</strong> We included an I2C expansion port, just for
+                                    <strong>Want more hardware?</strong> We included an I²C expansion port, just for
                                     people like you.
                                 </p>
                             </div>
