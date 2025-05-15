@@ -38,7 +38,7 @@ The exact method for adding HTTP headers to your site will depend on your web se
 
 <MultiLanguage>
 
-```javascript file=NodeJs with Express
+```javascript file=Express
 const express = require('express');
 const helmet  = require('helmet');
 const app = express();
@@ -61,7 +61,7 @@ app.use((req, res, next) => {
 });
 ```
 
-```ruby file=Ruby on Rails
+```ruby file=Rails
 # config/initializers/content_security_policy.rb
 Rails.application.config.content_security_policy do |policy|
   policy.default_src :self
