@@ -15,6 +15,7 @@ import { graphql } from 'gatsby'
 import { IconLightBulb, IconSidebarOpen } from '@posthog/icons'
 import AskMax from 'components/AskMax'
 import Intro from 'components/Docs/Intro'
+import { PosthogStoriesContainer } from './PosthogStories/PosthogStoriesContainer'
 
 type ProductAnalyticsProps = {
     data: {
@@ -58,6 +59,8 @@ export const Content = ({ quickLinks = false }) => {
                     'What are person profiles and how are they billed?',
                 ]}
             />
+
+            <PosthogStoriesContainer groupId="product-analytics" />
 
             {(quickLinks || compact) && (
                 <QuickLinks

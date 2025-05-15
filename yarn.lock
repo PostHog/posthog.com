@@ -21507,6 +21507,11 @@ react-inspector@^5.1.0:
     is-dom "^1.0.0"
     prop-types "^15.0.0"
 
+react-insta-stories@^2.8.0:
+  version "2.8.0"
+  resolved "https://registry.yarnpkg.com/react-insta-stories/-/react-insta-stories-2.8.0.tgz#785f245586cd4a1ab582e858c764c5056809048d"
+  integrity sha512-GkzJGEomtWLf27zsZQ31Tgd+uWLLarVZr/XY8PVEZp89711gsAc3lW+rTzoHU+tlLbhhrSeQTttPA68ViXI+ag==
+
 react-instantsearch-hooks-web@^6.38.1:
   version "6.47.3"
   resolved "https://registry.yarnpkg.com/react-instantsearch-hooks-web/-/react-instantsearch-hooks-web-6.47.3.tgz#aad0381c72ee85dc0465a59894d1f0c16bf4e3b5"

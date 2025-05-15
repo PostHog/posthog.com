@@ -123,6 +123,7 @@
         "react-github-btn": "^1.2.1",
         "react-helmet": "^5.2.1",
         "react-input-autosize": "^3.0.0",
+        "react-insta-stories": "^2.8.0",
         "react-instantsearch-hooks-web": "^6.38.1",
         "react-intersection-observer": "^8.32.1",
         "react-lottie": "^1.2.3",
