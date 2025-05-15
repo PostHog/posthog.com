@@ -490,7 +490,7 @@ export const ProductDeskHog = () => {
                                 {/* Front Face */}
                                 <div className="absolute h-full w-full [backface-visibility:hidden] flex flex-col justify-center items-center">
                                     <CloudinaryImage
-                                        src="https://res.cloudinary.com/dmukukwp6/image/upload/e9f1d2df_e53a_4af0_ac7b_fbf564444cd0_ff08ab6c7f.png"
+                                        src="https://res.cloudinary.com/dmukukwp6/image/upload/0e9ed66b_2907_4e08_b105_99f15bfee041_3bca3468a4.png"
                                         alt="Flappy Hog screenshot"
                                         className="w-full max-w-[224px] mx-auto"
                                     />
@@ -593,13 +593,6 @@ export const ProductDeskHog = () => {
                             </div>
                         </div>
                     </div>
-                    <p className="text-center text-lg mb-4 bg-[#E5E7E0] dark:bg-slate-700 dark:text-slate-200 p-4 rounded-md shadow-md w-full">
-                        <strong>Hang on. I can make my own games for it?</strong> Yep, just head to{' '}
-                        <Link to="https://github.com/PostHog/DeskHog" className="text-red dark:text-yellow">
-                            GitHub to get started
-                        </Link>
-                        .
-                    </p>
                 </section>
             </div>
 
