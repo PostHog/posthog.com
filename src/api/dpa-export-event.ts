@@ -36,9 +36,9 @@ const handler = async (req: GatsbyFunctionRequest, res: GatsbyFunctionResponse) 
         await client.shutdown()
 
         // Send the same data to Zapier webhook
-        if (process.env.ZAPIER_WEBHOOK_URL) {
+        if (process.env.ZAPIER_DPA_WEBHOOK_URL) {
             try {
-                const zapierResponse = await fetch(process.env.ZAPIER_WEBHOOK_URL, {
+                const zapierResponse = await fetch(process.env.ZAPIER_DPA_WEBHOOK_URL, {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
@@ -49,8 +49,6 @@ const handler = async (req: GatsbyFunctionRequest, res: GatsbyFunctionResponse) 
                         representative_name: yourName,
                         representative_title: yourTitle,
                         representative_email: representativeEmail,
-                        ip: ip,
-                        distinct_id: distinctId || 'dpa_export_anon',
                     }),
                 })
 
