@@ -375,7 +375,7 @@ export const ProductDeskHog = () => {
                         <div className="h-[174px] relative group [perspective:1000px] text-center">
                             <div className="relative h-full w-full transition-transform duration-700 [transform-style:preserve-3d] group-hover:[transform:rotateY(180deg)]">
                                 {/* Front Face */}
-                                <div className="absolute h-full w-full [backface-visibility:hidden] bg-accent dark:bg-accent-dark border border-border dark:border-border-dark rounded-lg p-4 flex flex-col justify-center items-center">
+                                <div className="absolute h-full w-full [backface-visibility:hidden] bg-accent dark:bg-accent-dark rounded-lg p-4 flex flex-col justify-center items-center">
                                     <CloudinaryImage
                                         src="https://res.cloudinary.com/dmukukwp6/image/upload/a3e7c64e_2bfa_424e_aad2_f79bf1b86c63_7028720d2a.png"
                                         alt="Shareholder Value Clicker screenshot"
@@ -403,7 +403,7 @@ export const ProductDeskHog = () => {
                         <div className="h-[174px] relative group [perspective:1000px] text-center">
                             <div className="relative h-full w-full transition-transform duration-700 [transform-style:preserve-3d] group-hover:[transform:rotateY(180deg)]">
                                 {/* Front Face */}
-                                <div className="absolute h-full w-full [backface-visibility:hidden] bg-accent dark:bg-accent-dark border border-border dark:border-border-dark rounded-lg p-4 flex flex-col justify-center items-center">
+                                <div className="absolute h-full w-full [backface-visibility:hidden] bg-accent dark:bg-accent-dark rounded-lg p-4 flex flex-col justify-center items-center">
                                     <CloudinaryImage
                                         src="https://res.cloudinary.com/dmukukwp6/image/upload/e9f1d2df_e53a_4af0_ac7b_fbf564444cd0_ff08ab6c7f.png"
                                         alt="One Button Dungeon screenshot"
