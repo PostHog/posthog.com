@@ -577,13 +577,12 @@ export const ProductDeskHog = () => {
                         </h2>
                         <p>
                             Scan the QR code with your phone to access a portal where you can configure your DeskHog,
-                            connect to WiFi, and connect insights from your PostHog instance to the Insight
-                            Keeper-upper.
+                            connect to WiFi, and link data from your PostHog instance to the Insight Keeper-upper.
                         </p>
                         <p>
                             You can also use the mobile app to add new cards to your DeskHog. Cards are the building
                             block of the DeskHog UI, and they include all the standard tools and games. Rearrange them
-                            as you like, to build the experience you want.
+                            as you like, or build new ones, to make DeskHog your own.
                         </p>
                     </div>
                     <aside className="shrink-0 md:basis-[500px] flex justify-center">
