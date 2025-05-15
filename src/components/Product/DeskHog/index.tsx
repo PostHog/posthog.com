@@ -183,13 +183,20 @@ const DeskHogCTA = () => {
     const subheadingClasses = 'text-center text-primary dark:text-primary-dark opacity-75 max-w-xl mx-auto mb-6'
 
     return (
-        <section className="py-12 md:py-16 px-4 relative overflow-hidden">
+        <section className="px-4 relative overflow-hidden">
             {/* Text Content Wrapper with PostHog card style */}
             <div className="relative z-10 bg-white dark:bg-gray-800 p-8 rounded-lg mx-auto max-w-2xl border border-border dark:border-border-dark shadow-xl">
                 <h2 className={headingClasses}>Limited stock available</h2>
-                <h3 className={subheadingClasses}>
+                <h3 className={`${subheadingClasses} mb-0`}>
                     If nothing else has sold you on DeskHog, hopefully this classic marketing tactic will.
                 </h3>
+                <div className="flex justify-center my-6">
+                    <CloudinaryImage
+                        src="https://res.cloudinary.com/dmukukwp6/image/upload/435072519_6e5d1fe6_1887_4d66_8497_4b582eb0391a_2cb01d1ae9.png"
+                        alt="DeskHog marketing accent image"
+                        width={300}
+                    />
+                </div>
                 <h6 className={subheadingClasses}>(Seriously though, we only made 250 of these)</h6>
                 <div className="flex flex-col sm:flex-row justify-center items-center gap-4 mt-8">
                     <CallToAction
@@ -223,7 +230,7 @@ export const ProductDeskHog = () => {
                 description="Manage your desk setup like never before with DeskHog, the ultimate desk optimization tool."
                 image={`/images/og/deskhog.jpg`}
             />
-            <div className={`${fullWidthContent ? 'max-w-full px-8' : 'max-w-7xl mx-auto'} px-5 py-10 md:pt-20 pb-0`}>
+            <div className={`${fullWidthContent ? 'max-w-full px-8' : 'max-w-7xl mx-auto'} px-5 pt-10 pb-10`}>
                 <HeroDeskHog
                     color="orange"
                     icon={<IconLaptop />}
@@ -235,7 +242,7 @@ export const ProductDeskHog = () => {
             </div>
 
             <div id="features">
-                <section className="max-w-7xl mx-auto px-5 md:mb-32">
+                <section className="max-w-7xl mx-auto px-5 py-10">
                     <div className="mb-4">
                         <h2 className="text-4xl text-center mb-12">
                             DeskHog is an <span className="text-red dark:text-yellow">open-source</span>,{' '}
@@ -272,8 +279,10 @@ export const ProductDeskHog = () => {
                             </p>
                             <div>
                                 <p className="text-center text-lg mb-4 bg-[#E5E7E0] p-4 rounded-md shadow-md w-full">
-                                    <strong>Want more hardware?</strong> We included an I²C expansion port, just for
-                                    people like you.
+                                    <strong>
+                                        Want <i>more</i> hardware?
+                                    </strong>{' '}
+                                    We included an I²C expansion port, just for people like you.
                                 </p>
                             </div>
                         </div>
@@ -374,7 +383,7 @@ export const ProductDeskHog = () => {
                             </div>
                         </div>
 
-                        {/* Game 4: Awkwardness Avoider */}
+                        {/* Game 4: Dictator or Techbro Mobile */}
                         <div className="h-[174px] relative group [perspective:1000px] text-center">
                             <div className="relative h-full w-full transition-transform duration-700 [transform-style:preserve-3d] group-hover:[transform:rotateY(180deg)]">
                                 {/* Front Face */}
@@ -388,12 +397,13 @@ export const ProductDeskHog = () => {
                                 {/* Back Face */}
                                 <div className="absolute h-full w-full [backface-visibility:hidden] [transform:rotateY(180deg)] bg-accent dark:bg-accent-dark border border-border dark:border-border-dark rounded-lg p-6 flex flex-col justify-center items-center">
                                     <div className="text-center">
-                                        <h4 className="text-xl font-bold mb-2">Awkwardness Avoider</h4>
-                                        Need some way to avoid awkward smalltalk? These icebreakers have you covered.
+                                        <h4 className="text-xl font-bold mb-2">Dictator or Techbro: Mobile Edition</h4>A
+                                        good is worth stealing. So are{' '}
+                                        <Link to="https://posthog.com/community/profiles/28625">Charles'</Link>.
                                         <br /> <br />
                                         <p>
                                             <b>Built by:</b>{' '}
-                                            <Link to="https://posthog.com/community/profiles/28619">Annika Schmid</Link>
+                                            <Link to="https://posthog.com/community/profiles/33534">Chris McNeill</Link>
                                         </p>
                                     </div>
                                 </div>
@@ -461,33 +471,32 @@ export const ProductDeskHog = () => {
                 </section>
             </div>
 
-            <section>
-                <div className={`${fullWidthContent ? 'max-w-full px-8' : 'max-w-7xl mx-auto'} px-5 py-5 md:pt-1 pb-0`}>
+            <section className="py-10">
+                <div className={`${fullWidthContent ? 'max-w-full px-8' : 'max-w-7xl mx-auto'} px-5`}>
                     <h2 className="text-4xl text-center mb-2">It also has important business tools</h2>
                     <h4 className="text-2xl text-center mb-12">(A great excuse to expense your DeskHog purchase)</h4>
 
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
-                        {/* Item 1: Clock */}
-                        <div className="h-[174px] relative group [perspective:1000px]">
+                        {/* Game 4: Awkwardness Avoider */}
+                        <div className="h-[174px] relative group [perspective:1000px] text-center">
                             <div className="relative h-full w-full transition-transform duration-700 [transform-style:preserve-3d] group-hover:[transform:rotateY(180deg)]">
                                 {/* Front Face */}
-                                <div className="absolute h-full w-full [backface-visibility:hidden] bg-accent dark:bg-accent-dark border border-border dark:border-border-dark rounded-lg p-4 text-center flex flex-col justify-center items-center">
+                                <div className="absolute h-full w-full [backface-visibility:hidden] bg-accent dark:bg-accent-dark border border-border dark:border-border-dark rounded-lg p-4 flex flex-col justify-center items-center">
                                     <CloudinaryImage
                                         src="https://res.cloudinary.com/dmukukwp6/image/upload/Screenshot_2025_05_14_at_16_31_37_5e009d0dd5.png"
-                                        alt="Clock tool"
+                                        alt="Awkwardness Avoider screenshot"
                                         className="w-full max-w-[146px] mx-auto"
                                     />
                                 </div>
                                 {/* Back Face */}
                                 <div className="absolute h-full w-full [backface-visibility:hidden] [transform:rotateY(180deg)] bg-accent dark:bg-accent-dark border border-border dark:border-border-dark rounded-lg p-6 flex flex-col justify-center items-center">
                                     <div className="text-center">
-                                        <h4 className="text-xl font-bold mb-2">Clock</h4>
-                                        <p className="text-sm text-primary/80 dark:text-primary-dark/80">
-                                            But, wait, it also includes a timer!
-                                        </p>
+                                        <h4 className="text-xl font-bold mb-2">Awkwardness Avoider</h4>
+                                        Hate smalltalk? These icebreakers will help.
+                                        <br /> <br />
                                         <p>
                                             <b>Built by:</b>{' '}
-                                            <Link to="https://posthog.com/community/profiles/29070">Joe Martin</Link>
+                                            <Link to="https://posthog.com/community/profiles/28619">Annika Schmid</Link>
                                         </p>
                                     </div>
                                 </div>
@@ -551,8 +560,35 @@ export const ProductDeskHog = () => {
                 </div>
             </section>
 
+            <section className="max-w-7xl mx-auto px-5">
+                <div className="flex flex-col-reverse items-center md:flex-row gap-8 mb-20">
+                    <div className="flex-1">
+                        <h2 className="text-4xl">
+                            Your phone is <span className="text-red dark:text-yellow">DeskHog's best friend</span>
+                        </h2>
+                        <p>
+                            Scan the QR code with your phone to access a portal where you can configure your DeskHog,
+                            connect to WiFi, and connect insights from your PostHog instance to the Insight
+                            Keeper-upper.
+                        </p>
+                        <p>
+                            You can also use the mobile app to add new cards to your DeskHog. Cards are the building
+                            block of the DeskHog UI, and they include all the standard tools and games. Rearrange them
+                            as you like, to build the experience you want.
+                        </p>
+                    </div>
+                    <aside className="shrink-0 md:basis-[500px] flex justify-center">
+                        <CloudinaryImage
+                            src="https://res.cloudinary.com/dmukukwp6/image/upload/hell_yeah_app_c750f3c058.png"
+                            alt="DeskHog is a beast"
+                            className="w-1/2 max-w-[470px] mx-auto"
+                        />
+                    </aside>
+                </div>
+            </section>
+
             {/* DeskHog Specs Section */}
-            <section className="py-12 md:py-16">
+            <section className="py-10">
                 <div className={`${fullWidthContent ? 'max-w-full px-8' : 'max-w-7xl mx-auto'} px-5`}>
                     <h2
                         className="text-5xl font-bold text-center mb-16 text-primary dark:text-primary-dark"
@@ -634,13 +670,13 @@ export const ProductDeskHog = () => {
             </section>
 
             {/* New Centered Banner Location */}
-            <div className="text-center py-8">
+            <div className="text-center py-10">
                 <span className="inline-block bg-yellow text-black px-6 py-2 rounded-full text-xl font-semibold shadow-lg transform -rotate-3">
                     Shipped in random colors!!
                 </span>
             </div>
 
-            <div className={`${fullWidthContent ? 'max-w-full px-8' : 'max-w-7xl mx-auto'} px-5 py-10 md:pt-20 pb-0`}>
+            <div className={`${fullWidthContent ? 'max-w-full px-8' : 'max-w-7xl mx-auto'} px-5 py-10`}>
                 <PairsWith items={pairsWithItemCount}>
                     {PairsWithArray.map((card, index) => {
                         return <PairsWithItem {...card} key={index} />
@@ -648,8 +684,9 @@ export const ProductDeskHog = () => {
                 </PairsWith>
             </div>
 
-            <div className={`${fullWidthContent ? 'max-w-full px-8' : 'mx-auto'} relative px-5 py-10 pb-0`}>
-                <section className="mb-20">
+            {/* DeskHogCTA Section Wrapper */}
+            <div className={`${fullWidthContent ? 'max-w-full px-8' : 'mx-auto'} relative px-5 pb-10`}>
+                <section className="mb-0">
                     <DeskHogCTA />
                 </section>
             </div>
