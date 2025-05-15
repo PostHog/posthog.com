@@ -123,7 +123,7 @@ const getPositionDefaults = (
     const sortedWindows = [...windows].sort((a, b) => b.zIndex - a.zIndex)
     const previousWindow = sortedWindows[1]
 
-    if (previousWindow) {
+    if (previousWindow && !previousWindow.key.startsWith('ask-max')) {
         const ref = previousWindow.ref?.current
         if (ref) {
             const rect = ref.getBoundingClientRect()
@@ -159,7 +159,8 @@ const getInitialSize = (
 ) => {
     const sortedWindows = [...windows].sort((a, b) => b.zIndex - a.zIndex)
     const previousWindow = sortedWindows[1]
-    if (previousWindow) {
+
+    if (previousWindow && !previousWindow.key.startsWith('ask-max')) {
         const ref = previousWindow.ref?.current
         if (ref) {
             const rect = ref.getBoundingClientRect()
@@ -185,16 +186,17 @@ export default function AppWindow({ item, constraintsRef }: { item: AppWindowTyp
     } = useApp()
     const controls = useDragControls()
     const initialSizeKey = item.key as keyof typeof fixedAppSizes
-    const hasFixedSize = Object.prototype.hasOwnProperty.call(fixedAppSizes, initialSizeKey)
     const [sizeDefaults, setSizeDefaults] = useState(
-        hasFixedSize
-            ? fixedAppSizes[initialSizeKey]
-            : item.key.startsWith('ask-max')
-            ? fixedAppSizes['ask-max']
-            : getSizeDefaults()
+        fixedAppSizes[initialSizeKey] || (item.key.startsWith('ask-max') ? fixedAppSizes['ask-max'] : getSizeDefaults())
     )
     const [previousSize, setPreviousSize] = useState({ width: sizeDefaults.max.width, height: sizeDefaults.max.height })
-    const [size, setSize] = useState(() => getInitialSize(sizeDefaults, windows))
+    const [size, setSize] = useState(() =>
+        fixedAppSizes[initialSizeKey]
+            ? { width: fixedAppSizes[initialSizeKey].max.width, height: fixedAppSizes[initialSizeKey].max.height }
+            : item.key.startsWith('ask-max')
+            ? { width: fixedAppSizes['ask-max'].max.width, height: fixedAppSizes['ask-max'].max.height }
+            : getInitialSize(sizeDefaults, windows)
+    )
     const [previousPosition, setPreviousPosition] = useState({ x: 0, y: 0 })
     const [position, setPosition] = useState(() => getPositionDefaults(item, size, windows))
     const [snapIndicator, setSnapIndicator] = useState<'left' | 'right' | null>(null)

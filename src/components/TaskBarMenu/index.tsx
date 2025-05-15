@@ -17,6 +17,7 @@ import { StrapiRecord, ProfileData } from 'lib/strapi'
 import { Avatar as MainNavAvatar } from 'components/MainNav'
 import Wizard from 'components/Wizard'
 import ScrollArea from 'components/RadixUI/ScrollArea'
+import { ChatProvider } from 'hooks/useChat'
 
 export default function TaskBarMenu() {
     const { windows, bringToFront, focusedWindow, addWindow, closeWindow } = useApp()
@@ -200,7 +201,13 @@ export default function TaskBarMenu() {
                     <OSButton variant="ghost" size="md">
                         <IconSearch className="size-5" />
                     </OSButton>
-                    <OSButton variant="ghost" size="md">
+                    <OSButton
+                        onClick={() =>
+                            addWindow(<ChatProvider location={{ pathname: `ask-max` }} key={`ask-max`} newWindow />)
+                        }
+                        variant="ghost"
+                        size="md"
+                    >
                         <IconChatHelp className="size-5" />
                     </OSButton>
                     <PopoverRoot open={isWindowPopoverOpen} onOpenChange={setIsWindowPopoverOpen}>

@@ -100,7 +100,12 @@ export const Toolbar = ({ elements, className, 'aria-label': ariaLabel }: Toolba
 
                 if (element.type === 'button') {
                     return (
-                        <RadixToolbar.Button key={index} onClick={element.onClick} disabled={element.disabled} asChild>
+                        <RadixToolbar.Button
+                            key={index}
+                            onClick={(e) => element.onClick?.(e)}
+                            disabled={element.disabled}
+                            asChild
+                        >
                             <OSButton
                                 variant={element.variant || 'ghost'}
                                 size={element.size || 'sm'}
