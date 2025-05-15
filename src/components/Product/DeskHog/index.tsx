@@ -237,7 +237,7 @@ const ExpandableCallout = () => {
     return (
         <div className="col-span-2 bg-[#E5E7E0] dark:bg-slate-700 dark:text-slate-200 p-4 rounded-md shadow-md mt-10 w-full max-w-lg mx-auto">
             <button onClick={() => setIsOpen(!isOpen)} className="text-lg font-semibold text-center w-full">
-                And this is just for starters 👇
+                ⬇ And this is just for starters ⬇
             </button>
             {isOpen && (
                 <div className="mt-4 flex flex-col items-center">
@@ -251,7 +251,8 @@ const ExpandableCallout = () => {
                     <p>
                         DeskHog Pro will connect via the I²C port, adding more buttons, a speaker, and a huge dial so
                         you can crank up the vibes. We're also thinking about making a watch strap, so you can wear
-                        DeskHog on your wrist.
+                        DeskHog on your wrist. Got ideas for other accessories?{' '}
+                        <a href="mailto:danilo@posthog.com">Let us know!</a>
                     </p>
                 </div>
             )}
