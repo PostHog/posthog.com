@@ -347,11 +347,11 @@ export const ProductDeskHog = () => {
                         <div className="h-[174px] relative group [perspective:1000px] text-center">
                             <div className="relative h-full w-full transition-transform duration-700 [transform-style:preserve-3d] group-hover:[transform:rotateY(180deg)]">
                                 {/* Front Face */}
-                                <div className="absolute h-full w-full [backface-visibility:hidden] bg-accent dark:bg-accent-dark rounded-lg p-4 flex flex-col justify-center items-center">
+                                <div className="absolute h-full w-full [backface-visibility:hidden] bg-accent dark:bg-accent-dark border border-border dark:border-border-dark rounded-lg p-4 flex flex-col justify-center items-center">
                                     <CloudinaryImage
                                         src="https://res.cloudinary.com/dmukukwp6/image/upload/edcbc25d_262b_4590_936a_552c445a2ccb_1812ec3330.png"
                                         alt="Pog game screenshot"
-                                        className="w-full h-full max-h-[135px] object-cover"
+                                        className="w-full max-w-[146px] mx-auto"
                                     />
                                 </div>
                                 {/* Back Face */}
@@ -375,11 +375,11 @@ export const ProductDeskHog = () => {
                         <div className="h-[174px] relative group [perspective:1000px] text-center">
                             <div className="relative h-full w-full transition-transform duration-700 [transform-style:preserve-3d] group-hover:[transform:rotateY(180deg)]">
                                 {/* Front Face */}
-                                <div className="absolute h-full w-full [backface-visibility:hidden] bg-accent dark:bg-accent-dark rounded-lg p-4 flex flex-col justify-center items-center">
+                                <div className="absolute h-full w-full [backface-visibility:hidden] bg-accent dark:bg-accent-dark border border-border dark:border-border-dark rounded-lg p-4 flex flex-col justify-center items-center">
                                     <CloudinaryImage
                                         src="https://res.cloudinary.com/dmukukwp6/image/upload/a3e7c64e_2bfa_424e_aad2_f79bf1b86c63_7028720d2a.png"
                                         alt="Shareholder Value Clicker screenshot"
-                                        className="w-full h-full max-h-[135px] object-cover"
+                                        className="w-full max-w-[146px] mx-auto"
                                     />
                                 </div>
                                 {/* Back Face */}
@@ -403,11 +403,11 @@ export const ProductDeskHog = () => {
                         <div className="h-[174px] relative group [perspective:1000px] text-center">
                             <div className="relative h-full w-full transition-transform duration-700 [transform-style:preserve-3d] group-hover:[transform:rotateY(180deg)]">
                                 {/* Front Face */}
-                                <div className="absolute h-full w-full [backface-visibility:hidden] bg-accent dark:bg-accent-dark rounded-lg p-4 flex flex-col justify-center items-center">
+                                <div className="absolute h-full w-full [backface-visibility:hidden] bg-accent dark:bg-accent-dark border border-border dark:border-border-dark rounded-lg p-4 flex flex-col justify-center items-center">
                                     <CloudinaryImage
-                                        src="https://res.cloudinary.com/dmukukwp6/image/upload/e9f1d2df_e53a_4af0_ac7b_fbf564444cd0_ff08ab6c7f.png"
+                                        src="https://res.cloudinary.com/dmukukwp6/image/upload/e90c7a39_484a_40a0_94b1_693962bbd13e_52085d0806.png"
                                         alt="One Button Dungeon screenshot"
-                                        className="w-full h-full max-h-[135px] object-cover"
+                                        className="w-full max-w-[146px] mx-auto"
                                     />
                                 </div>
                                 {/* Back Face */}
@@ -432,7 +432,7 @@ export const ProductDeskHog = () => {
                                 {/* Front Face */}
                                 <div className="absolute h-full w-full [backface-visibility:hidden] bg-accent dark:bg-accent-dark border border-border dark:border-border-dark rounded-lg p-4 flex flex-col justify-center items-center">
                                     <CloudinaryImage
-                                        src="https://res.cloudinary.com/dmukukwp6/image/upload/Screenshot_2025_05_14_at_16_31_37_5e009d0dd5.png"
+                                        src="https://res.cloudinary.com/dmukukwp6/image/upload/a87a4d00_caf1_463b_a66b_87943ee594e2_93d5b4a9d2.png"
                                         alt="Awkwardness Avoider screenshot"
                                         className="w-full max-w-[146px] mx-auto"
                                     />
@@ -460,7 +460,7 @@ export const ProductDeskHog = () => {
                                 {/* Front Face */}
                                 <div className="absolute h-full w-full [backface-visibility:hidden] bg-accent dark:bg-accent-dark border border-border dark:border-border-dark rounded-lg p-4 flex flex-col justify-center items-center">
                                     <CloudinaryImage
-                                        src="https://res.cloudinary.com/dmukukwp6/image/upload/Screenshot_2025_05_14_at_16_31_37_5e009d0dd5.png"
+                                        src="https://res.cloudinary.com/dmukukwp6/image/upload/b46b4cb6_d18e_4ae2_9913_7a8966a778ed_3e9927cf98.png"
                                         alt="Notchagotchi screenshot"
                                         className="w-full max-w-[146px] mx-auto"
                                     />
@@ -487,7 +487,7 @@ export const ProductDeskHog = () => {
                                 {/* Front Face */}
                                 <div className="absolute h-full w-full [backface-visibility:hidden] bg-accent dark:bg-accent-dark border border-border dark:border-border-dark rounded-lg p-4 flex flex-col justify-center items-center">
                                     <CloudinaryImage
-                                        src="https://res.cloudinary.com/dmukukwp6/image/upload/Screenshot_2025_05_14_at_16_31_37_5e009d0dd5.png"
+                                        src="https://res.cloudinary.com/dmukukwp6/image/upload/e9f1d2df_e53a_4af0_ac7b_fbf564444cd0_ff08ab6c7f.png"
                                         alt="Flappy Hog screenshot"
                                         className="w-full max-w-[146px] mx-auto"
                                     />
@@ -530,7 +530,7 @@ export const ProductDeskHog = () => {
                                 {/* Front Face */}
                                 <div className="absolute h-full w-full [backface-visibility:hidden] bg-accent dark:bg-accent-dark border border-border dark:border-border-dark rounded-lg p-4 flex flex-col justify-center items-center">
                                     <CloudinaryImage
-                                        src="https://res.cloudinary.com/dmukukwp6/image/upload/Screenshot_2025_05_14_at_16_31_37_5e009d0dd5.png"
+                                        src="https://res.cloudinary.com/dmukukwp6/image/upload/5598bc45_d969_45c3_bce9_3cc4c5cf0ad5_ef111c5357.png"
                                         alt="Awkwardness Avoider screenshot"
                                         className="w-full max-w-[146px] mx-auto"
                                     />
@@ -557,7 +557,7 @@ export const ProductDeskHog = () => {
                                 {/* Front Face */}
                                 <div className="absolute h-full w-full [backface-visibility:hidden] bg-accent dark:bg-accent-dark border border-border dark:border-border-dark rounded-lg p-4 text-center flex flex-col justify-center items-center">
                                     <CloudinaryImage
-                                        src="https://res.cloudinary.com/dmukukwp6/image/upload/Screenshot_2025_05_14_at_16_31_37_5e009d0dd5.png"
+                                        src="https://res.cloudinary.com/dmukukwp6/image/upload/d507387e_798f_4fe8_9a4a_c0d13e7525a3_f842494c9e.png"
                                         alt="Pomodoro Timer tool"
                                         className="w-full max-w-[146px] mx-auto"
                                     />
@@ -584,7 +584,7 @@ export const ProductDeskHog = () => {
                                 {/* Front Face */}
                                 <div className="absolute h-full w-full [backface-visibility:hidden] bg-accent dark:bg-accent-dark border border-border dark:border-border-dark rounded-lg p-4 text-center flex flex-col justify-center items-center">
                                     <CloudinaryImage
-                                        src="https://res.cloudinary.com/dmukukwp6/image/upload/Screenshot_2025_05_14_at_16_31_37_5e009d0dd5.png"
+                                        src="https://res.cloudinary.com/dmukukwp6/image/upload/3c4149d1_f52b_4861_96f5_ee5123b0dd39_9441f50703.png"
                                         alt="Insight Keeper-upper tool"
                                         className="w-full max-w-[146px] mx-auto"
                                     />
