@@ -164,7 +164,7 @@ const VideoDeskHog = () => (
     <section id="demo-video" className={`overflow-hidden h-auto max-h-[90vh] mb-8`}>
         <iframe
             src="https://res.cloudinary.com/dmukukwp6/video/upload/Termagotchi_084775b39f.mp4"
-            className="rounded aspect-video m-0"
+            className="rounded aspect-video m-0 shadow-xl"
             style={{
                 width: '100%',
                 height: 'auto',
