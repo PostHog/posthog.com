@@ -79,7 +79,7 @@ const subfeatures = [
     {
         title: 'Open-source',
         description:
-            "We're open-source, which means DeskHog is yours to hack. Build your own games, tools, with AI editors (or C++ if you're a masochist).",
+            "We're open-source, which means DeskHog is yours to hack. Build your own games and tools with AI editors (or C++ if you're a masochist).",
         icon: <IconCode2 />,
     },
     {
@@ -268,7 +268,7 @@ export const ProductDeskHog = () => {
                                 ass.
                             </p>
                             <p>
-                                DeskHog packs a ESP32-S3 Reverse TFT Feather in a custom-made 3D printed. It comes
+                                DeskHog packs a ESP32-S3 Reverse TFT Feather in a custom-made 3D printed case. It comes
                                 complete with a 240x135 color TFT display, a 7-day battery life, WiFi, and a cute little
                                 LED.
                             </p>
@@ -319,9 +319,10 @@ export const ProductDeskHog = () => {
                                 <div className="absolute h-full w-full [backface-visibility:hidden] [transform:rotateY(180deg)] bg-accent dark:bg-accent-dark border border-border dark:border-border-dark rounded-lg p-6 flex flex-col justify-center items-center">
                                     <div className="text-center">
                                         <h4 className="text-xl font-bold mb-2">Pog</h4>
-                                        It's Pong, but with a different name. It's perfect for playing on the toilet.
-                                        Apparently.
-                                        <br /> <br />
+                                        <p className="text-sm text-primary/80 dark:text-primary-dark/80">
+                                            It's Pong, but with a different name. It's perfect for playing on the
+                                            toilet. Apparently.
+                                        </p>
                                         <p>
                                             <b>Built by:</b>{' '}
                                             <Link to="https://posthog.com/community/profiles/30833">Leon Daly</Link>
@@ -346,8 +347,10 @@ export const ProductDeskHog = () => {
                                 <div className="absolute h-full w-full [backface-visibility:hidden] [transform:rotateY(180deg)] bg-accent dark:bg-accent-dark border border-border dark:border-border-dark rounded-lg p-6 flex flex-col justify-center items-center">
                                     <div className="text-center">
                                         <h4 className="text-xl font-bold mb-2">Idle Value Generator</h4>
-                                        It's a wry satire. It's an idle clicker game. It's delivering shareholder value.
-                                        <br /> <br />
+                                        <p className="text-sm text-primary/80 dark:text-primary-dark/80">
+                                            It's a wry satire. It's an idle clicker game. It's delivering shareholder
+                                            value.
+                                        </p>
                                         <p>
                                             <b>Built by:</b>{' '}
                                             <Link to="https://posthog.com/community/profiles/33534">Chris McNeill</Link>
@@ -372,8 +375,9 @@ export const ProductDeskHog = () => {
                                 <div className="absolute h-full w-full [backface-visibility:hidden] [transform:rotateY(180deg)] bg-accent dark:bg-accent-dark border border-border dark:border-border-dark rounded-lg p-6 flex flex-col justify-center items-center">
                                     <div className="text-center">
                                         <h4 className="text-xl font-bold mb-2">One Button Dungeon</h4>
-                                        It's a roguelike throwback about an endless corridor. Such is life. <br />{' '}
-                                        <br />
+                                        <p className="text-sm text-primary/80 dark:text-primary-dark/80">
+                                            It's a roguelike throwback about an endless corridor. Such is life.
+                                        </p>
                                         <p>
                                             <b>Built by:</b>{' '}
                                             <Link to="https://posthog.com/community/profiles/29070">Joe Martin</Link>
@@ -397,10 +401,11 @@ export const ProductDeskHog = () => {
                                 {/* Back Face */}
                                 <div className="absolute h-full w-full [backface-visibility:hidden] [transform:rotateY(180deg)] bg-accent dark:bg-accent-dark border border-border dark:border-border-dark rounded-lg p-6 flex flex-col justify-center items-center">
                                     <div className="text-center">
-                                        <h4 className="text-xl font-bold mb-2">Dictator or Techbro: Mobile Edition</h4>A
-                                        good is worth stealing. So are{' '}
-                                        <Link to="https://posthog.com/community/profiles/28625">Charles'</Link>.
-                                        <br /> <br />
+                                        <h4 className="text-xl font-bold mb-2">Dictator or Techbro: Mobile Edition</h4>
+                                        <p className="text-sm text-primary/80 dark:text-primary-dark/80">
+                                            A good is worth stealing. Even if it's{' '}
+                                            <Link to="https://posthog.com/community/profiles/28625">Charles'</Link>.
+                                        </p>
                                         <p>
                                             <b>Built by:</b>{' '}
                                             <Link to="https://posthog.com/community/profiles/33534">Chris McNeill</Link>
@@ -425,8 +430,9 @@ export const ProductDeskHog = () => {
                                 <div className="absolute h-full w-full [backface-visibility:hidden] [transform:rotateY(180deg)] bg-accent dark:bg-accent-dark border border-border dark:border-border-dark rounded-lg p-6 flex flex-col justify-center items-center">
                                     <div className="text-center">
                                         <h4 className="text-xl font-bold mb-2">Notchagotchi</h4>
-                                        We were a little worried we'd be sued if we called this what it really is.{' '}
-                                        <br /> <br />
+                                        <p className="text-sm text-primary/80 dark:text-primary-dark/80">
+                                            We were a little worried we'd be sued if we called this what it really is.
+                                        </p>{' '}
                                         <p>
                                             <b>Built by:</b>{' '}
                                             <Link to="https://posthog.com/community/profiles/33385">Sophie Payne</Link>
@@ -451,7 +457,9 @@ export const ProductDeskHog = () => {
                                 <div className="absolute h-full w-full [backface-visibility:hidden] [transform:rotateY(180deg)] bg-accent dark:bg-accent-dark border border-border dark:border-border-dark rounded-lg p-6 flex flex-col justify-center items-center">
                                     <div className="text-center">
                                         <h4 className="text-xl font-bold mb-2">Flappy Hog</h4>
-                                        Despite the title, this game has neither hedgehogs nor flapping. <br /> <br />
+                                        <p className="text-sm text-primary/80 dark:text-primary-dark/80">
+                                            Despite the title, this game has neither hedgehogs nor flapping.
+                                        </p>
                                         <p>
                                             <b>Built by:</b>{' '}
                                             <Link to="https://posthog.com/community/profiles/29070">Joe Martin</Link>
@@ -492,7 +500,9 @@ export const ProductDeskHog = () => {
                                 <div className="absolute h-full w-full [backface-visibility:hidden] [transform:rotateY(180deg)] bg-accent dark:bg-accent-dark border border-border dark:border-border-dark rounded-lg p-6 flex flex-col justify-center items-center">
                                     <div className="text-center">
                                         <h4 className="text-xl font-bold mb-2">Awkwardness Avoider</h4>
-                                        Hate smalltalk? These icebreakers will help.
+                                        <p className="text-sm text-primary/80 dark:text-primary-dark/80">
+                                            Hate smalltalk? These icebreakers will help.
+                                        </p>
                                         <br /> <br />
                                         <p>
                                             <b>Built by:</b>{' '}
