@@ -39,6 +39,8 @@ import { TextCard } from 'components/Products/TextCard'
 import { SEO } from 'components/seo'
 import { useLayoutData } from 'components/Layout/hooks'
 import { PRODUCT_COUNT } from '../../../constants'
+import { Bang } from 'components/Icons'
+import { motion } from 'framer-motion'
 
 const ProductIcon = ({
     name,
@@ -179,6 +181,33 @@ const VideoDeskHog = () => (
         />
     </section>
 )
+
+// Define DeskHogCTA component
+const DeskHogCTA = () => {
+    const headingClasses = 'font-bold text-center text-4xl lg:text-5xl mb-2 animate-pulse'
+    const subheadingClasses = 'text-center opacity-80 max-w-xl mx-auto mb-6'
+
+    return (
+        <section className="py-12 md:py-20 px-5 relative">
+            {/* Text Content Wrapper */}
+            <div className="relative z-10 bg-white bg-opacity-75 dark:bg-dark dark:bg-opacity-75 p-8 rounded-lg mx-auto max-w-3xl">
+                <h2 className={headingClasses}>Limited stock available</h2>
+                <h3 className={subheadingClasses}>
+                    If nothing else has sold you on DeskHog, hopefully this classic marketing tactic will.
+                </h3>
+                <h6 className={subheadingClasses}>(Seriously though, we only made 250 of these)</h6>
+                <div className="flex justify-center gap-2.5">
+                    <CallToAction href="https://posthog.com/merch" type="primary" size="lg">
+                        Buy it now
+                    </CallToAction>
+                    <CallToAction href="https://github.com/PostHog/DeskHog" type="secondary" size="lg">
+                        Make your own
+                    </CallToAction>
+                </div>
+            </div>
+        </section>
+    )
+}
 
 export const ProductDeskHog = () => {
     const { fullWidthContent } = useLayoutData()
@@ -397,7 +426,7 @@ export const ProductDeskHog = () => {
 
             <div className={`${fullWidthContent ? 'max-w-full px-8' : 'mx-auto'} relative px-5 py-10 pb-0`}>
                 <section className="mb-20">
-                    <CTA />
+                    <DeskHogCTA />
                 </section>
             </div>
         </>
