@@ -24,6 +24,13 @@ const IconPrint = ({ className = '' }) => (
     </svg>
 )
 
+const IconDocument = ({ className = '' }) => (
+    <svg xmlns="http://www.w3.org/2000/svg" className={className} fill="none" viewBox="0 0 24 24">
+        <rect x="4" y="2" width="16" height="20" rx="2" stroke="#000" strokeWidth="1.5" />
+        <path d="M8 6h8M8 10h8M8 14h5" stroke="#000" strokeWidth="1.5" strokeLinecap="round" />
+    </svg>
+)
+
 function DpaGenerator() {
     const [companyName, setCompanyName] = useState('')
     const [companyAddress, setCompanyAddress] = useState('')
@@ -478,7 +485,7 @@ function DpaGenerator() {
                                 onClick={handleButtonClick}
                                 className="[&>span]:flex [&>span]:items-center [&>span]:gap-2"
                             >
-                                <IconPrint className="size-6" />
+                                <IconDocument className="size-6" />
                                 <span>Request a DPA</span>
                             </TrackedCTA>
                             <p className="text-sm text-primary/60 mt-6">
