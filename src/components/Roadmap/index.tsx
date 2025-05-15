@@ -42,6 +42,7 @@ import {
     HighlightedMarkdown,
 } from 'components/Editor/SearchUtils'
 import { useSearch } from 'components/Editor/SearchProvider'
+import ProgressBar from 'components/ProgressBar'
 
 interface IGitHubPage {
     title: string
@@ -250,7 +251,6 @@ export default function Roadmap({ searchQuery = '' }: RoadmapProps) {
     const [adding, setAdding] = useState(false)
     const [selectedTeam, setSelectedTeam] = useState('All teams')
     const [roadmapSearch, setRoadmapSearch] = useState('')
-    const [progress, setProgress] = useState(0)
     const [loading, setLoading] = useState(false)
     const [authModalOpen, setAuthModalOpen] = useState(false)
     const [expandedDescriptions, setExpandedDescriptions] = useState<Record<number, boolean>>({})
@@ -288,42 +288,6 @@ export default function Roadmap({ searchQuery = '' }: RoadmapProps) {
         },
         limit: 100,
     })
-
-    useEffect(() => {
-        if (!isLoading) return
-
-        let interval: NodeJS.Timeout
-        let timeoutId: NodeJS.Timeout
-
-        const simulateProgress = () => {
-            interval = setInterval(() => {
-                setProgress((prevProgress) => {
-                    // Start slowing down at 70%
-                    if (prevProgress < 70) {
-                        return prevProgress + 2
-                    } else if (prevProgress < 85) {
-                        return prevProgress + 0.8
-                    } else if (prevProgress < 95) {
-                        return prevProgress + 0.2
-                    } else {
-                        return prevProgress
-                    }
-                })
-            }, 100)
-
-            // Set a timeout to stop at 95% if taking too long
-            timeoutId = setTimeout(() => {
-                clearInterval(interval)
-            }, 10000)
-        }
-
-        simulateProgress()
-
-        return () => {
-            clearInterval(interval)
-            clearTimeout(timeoutId)
-        }
-    }, [isLoading])
 
     // Create a Fuse instance for searching
     const fuse = useMemo(
@@ -687,26 +651,13 @@ export default function Roadmap({ searchQuery = '' }: RoadmapProps) {
                             />
                         </SideModal>
                         {isLoading ? (
-                            <div data-scheme="primary" className="border border-primary bg-accent rounded-md p-8 mb-12">
-                                <div className="max-w-xl mx-auto">
-                                    <div className="flex justify-between mb-2 text-sm">
-                                        <span className="font-semibold">Loading roadmap data...</span>
-                                        <span>{Math.round(progress)}%</span>
-                                    </div>
-                                    <div className="h-4 w-full border border-primary bg-primary overflow-hidden">
-                                        <div
-                                            className="h-full bg-red dark:bg-yellow transition-all duration-100 ease-out"
-                                            style={{ width: `${progress}%` }}
-                                        ></div>
-                                    </div>
-                                </div>
-                            </div>
+                            <ProgressBar />
                         ) : (
                             <>
                                 <p className="my-0 text-sm -mt-2 mb-4">
                                     <span className="opacity-70">
-                                        Here's what we're thinking about building next. Vote for your favorites, or request a
-                                        new feature{' '}
+                                        Here's what we're thinking about building next. Vote for your favorites, or
+                                        request a new feature{' '}
                                     </span>
                                     <Link externalNoIcon to="https://github.com/PostHog/posthog/issues">
                                         on GitHub
@@ -754,18 +705,20 @@ export default function Roadmap({ searchQuery = '' }: RoadmapProps) {
                                         />
                                     </div>
                                     <div className="flex items-center gap-2">
-
-
-                                    {isModerator && !adding && (
-                                        <div className="relative top-1">
-                                            <CallToAction onClick={() => setAdding(true)} size="xs" type="secondary">
-                                                <Tooltip content="Only moderators can see this" placement="top">
-                                                    <IconShieldLock className="w-6 h-6 inline-block mr-1" />
-                                                </Tooltip>
-                                                Add a feature
-                                            </CallToAction>
-                                        </div>
-                                    )}
+                                        {isModerator && !adding && (
+                                            <div className="relative top-1">
+                                                <CallToAction
+                                                    onClick={() => setAdding(true)}
+                                                    size="xs"
+                                                    type="secondary"
+                                                >
+                                                    <Tooltip content="Only moderators can see this" placement="top">
+                                                        <IconShieldLock className="w-6 h-6 inline-block mr-1" />
+                                                    </Tooltip>
+                                                    Add a feature
+                                                </CallToAction>
+                                            </div>
+                                        )}
 
                                         <span className="text-sm font-medium mr-2 text-secondary dark:text-secondary-dark">
                                             Sort by:
@@ -816,8 +769,6 @@ export default function Roadmap({ searchQuery = '' }: RoadmapProps) {
                             </>
                         )}
                     </>
-
-                
                 </section>
             </ScrollArea>
         </>

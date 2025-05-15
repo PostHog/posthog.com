@@ -1,5 +1,14 @@
 import React, { useRef } from 'react'
-import { IconGraph, IconPieChart, IconDocument, IconQuestion, IconMap, IconPiggyBank, IconStack, IconVideoCamera } from '@posthog/icons'
+import {
+    IconGraph,
+    IconPieChart,
+    IconDocument,
+    IconQuestion,
+    IconMap,
+    IconPiggyBank,
+    IconStack,
+    IconVideoCamera,
+} from '@posthog/icons'
 import Link from 'components/Link'
 import { useApp } from '../../context/App'
 import useProduct from 'hooks/useProduct'
@@ -23,6 +32,12 @@ interface Product {
 }
 
 const productLinks: AppItem[] = [
+    {
+        label: 'home.mdx',
+        Icon: IconDocument,
+        color: 'salmon',
+        url: '/',
+    },
     {
         label: 'Products',
         Icon: IconStack,
@@ -99,7 +114,11 @@ const AppLink = ({ Icon, type, color, label, url, className }: AppItem) => {
                 className="group inline-flex flex-col justify-center items-center space-y-1 w-auto max-w-28 text-center select-none"
             >
                 <Icon className={`size-7 text-${color} ${className}`} />
-                <p className="text-sm font-medium leading-tight"><span className="bg-[rgba(238,239,233,0.75)] group-hover:bg-[rgba(238,239,233,1)] rounded-[2px] px-0.5">{label}</span></p>
+                <p className="text-sm font-medium leading-tight">
+                    <span className="bg-[rgba(238,239,233,0.75)] group-hover:bg-[rgba(238,239,233,1)] rounded-[2px] px-0.5">
+                        {label}
+                    </span>
+                </p>
             </Link>
         </span>
     )

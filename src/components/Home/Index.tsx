@@ -9,7 +9,7 @@ import Logo from 'components/Logo'
 import CTA from './CTA'
 import { IconArrowRight } from '@posthog/icons'
 import Roadmap from './New/Roadmap'
-
+import Pricing from './New/Pricing'
 const Products = () => {
     const columns = [
         { name: '', width: 'auto', align: 'center' as const },
@@ -74,7 +74,7 @@ const sections = [
         title: 'pricing',
         description:
             'our usage-based pricing means you don\'t have to "talk to sales". plus each product has a generous monthly free tier – in fact, 98% of customers use PostHog for free!',
-        content: '', // component with tabbable tables (work in progress, under consideration)
+        content: <Pricing />,
     },
     {
         title: 'logos',

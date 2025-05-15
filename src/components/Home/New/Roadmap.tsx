@@ -11,7 +11,7 @@ import { Authentication } from 'components/Squeak/components/Authentication'
 import SideModal from 'components/Modal/SideModal'
 import { CallToAction } from 'components/CallToAction'
 import { User, useUser } from 'hooks/useUser'
-
+import ProgressBar from 'components/ProgressBar'
 const Table = ({
     headerLabel,
     columns,
@@ -113,7 +113,11 @@ const VoteButton = ({ roadmap, onLike }: { roadmap: any; onLike: () => void }) =
 }
 
 const UnderConsiderationTable = ({ data }: { data: any }) => {
-    const { roadmaps: initialRoadmaps, mutate } = useRoadmaps({
+    const {
+        roadmaps: initialRoadmaps,
+        mutate,
+        isLoading,
+    } = useRoadmaps({
         limit: 100,
         params: {
             filters: {
@@ -137,7 +141,9 @@ const UnderConsiderationTable = ({ data }: { data: any }) => {
         })
     }, [initialRoadmaps, data])
 
-    return (
+    return isLoading ? (
+        <ProgressBar />
+    ) : (
         <Table
             headerMargin="100px"
             headerLabel="under consideration"

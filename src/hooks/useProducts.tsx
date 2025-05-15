@@ -116,6 +116,7 @@ export default function useProducts() {
             const paidPlan = billingData?.plans.find((plan: any) => plan.tiers)
             const startsAt = paidPlan?.tiers?.find((tier: any) => tier.unit_amount_usd !== '0')?.unit_amount_usd
             const freeLimit = paidPlan?.tiers?.find((tier: any) => tier.unit_amount_usd === '0')?.up_to
+            const unit = billingData?.unit
             return {
                 ...product,
                 cost: 0,
@@ -123,6 +124,7 @@ export default function useProducts() {
                 costByTier: calculatePrice(product.volume || 0, paidPlan?.tiers).costByTier,
                 freeLimit,
                 startsAt: startsAt.length <= 3 ? Number(startsAt).toFixed(2) : startsAt,
+                unit,
             }
         })
     )
