@@ -91,7 +91,7 @@ const subfeatures = [
     {
         title: 'Palm-sized',
         description:
-            "DeskHog is small enough to fit in your pocket. It's got a 7-day battery life, WiFi, and a cute flashing LED so you can find it in the dark.",
+            "DeskHog is small enough to fit in your pocket. It's got a 24-hour battery life, WiFi, and a cute flashing LED so you can find it in the dark.",
         icon: <IconHandwave />,
     },
 ]
@@ -180,12 +180,13 @@ const VideoDeskHog = () => (
 // Define DeskHogCTA component
 const DeskHogCTA = () => {
     const headingClasses = 'font-bold text-center text-4xl lg:text-5xl mb-3 text-red dark:text-yellow animate-pulse'
-    const subheadingClasses = 'text-center text-primary dark:text-primary-dark opacity-75 max-w-xl mx-auto mb-6'
+    const subheadingClasses =
+        'text-center text-primary dark:text-primary-dark opacity-75 dark:opacity-100 max-w-xl mx-auto mb-6'
 
     return (
         <section className="px-4 relative overflow-hidden">
             {/* Text Content Wrapper with PostHog card style */}
-            <div className="relative z-10 bg-white dark:bg-gray-800 p-8 rounded-lg mx-auto max-w-2xl border border-border dark:border-border-dark shadow-xl">
+            <div className="relative z-10 bg-white dark:bg-[#2C2C2C] p-8 rounded-lg mx-auto max-w-2xl border border-border dark:border-border-dark shadow-xl">
                 <h2 className={headingClasses}>Limited stock available</h2>
                 <h3 className={`${subheadingClasses} mb-0`}>
                     If nothing else has sold you on DeskHog, hopefully this classic marketing tactic will.
@@ -264,13 +265,13 @@ export const ProductDeskHog = () => {
                                 <span className="text-red dark:text-yellow">It's a teeny, tiny, beast.</span>
                             </h2>
                             <p>
-                                Yes, someone from our marketing team makes these by hand at home. But it still kicks
-                                ass.
+                                DeskHog packs a ESP32-S3 Reverse TFT Feather in a custom-made 3D printed case. It comes
+                                complete with a 240x135 color TFT display, a 24-hour battery life, WiFi, and a cute
+                                little LED.
                             </p>
                             <p>
-                                DeskHog packs a ESP32-S3 Reverse TFT Feather in a custom-made 3D printed case. It comes
-                                complete with a 240x135 color TFT display, a 7-day battery life, WiFi, and a cute little
-                                LED.
+                                It's a hand-made micro games console. It's a desktop terminal for PostHog data. It's a
+                                friend.
                             </p>
                             <p>
                                 <b>Can it play Pong?</b> Yes.
@@ -278,7 +279,7 @@ export const ProductDeskHog = () => {
                                 <br /> <b>Can it play Doom?</b> ...We're working on it.
                             </p>
                             <div>
-                                <p className="text-center text-lg mb-4 bg-[#E5E7E0] p-4 rounded-md shadow-md w-full">
+                                <p className="text-center text-lg mb-4 bg-[#E5E7E0] dark:bg-slate-700 dark:text-slate-200 p-4 rounded-md shadow-md w-full">
                                     <strong>
                                         Want <i>more</i> hardware?
                                     </strong>{' '}
@@ -469,7 +470,7 @@ export const ProductDeskHog = () => {
                             </div>
                         </div>
                     </div>
-                    <p className="text-center text-lg mb-4 bg-[#E5E7E0] p-4 rounded-md shadow-md w-full">
+                    <p className="text-center text-lg mb-4 bg-[#E5E7E0] dark:bg-slate-700 dark:text-slate-200 p-4 rounded-md shadow-md w-full">
                         <strong>Hang on. I can make my own games for it?</strong> Yep, just head to{' '}
                         <Link to="https://github.com/PostHog/DeskHog" className="text-red dark:text-yellow">
                             GitHub to get started
@@ -641,7 +642,7 @@ export const ProductDeskHog = () => {
                                 {
                                     label: 'Enclosure',
                                     icon: <IconWrench />,
-                                    details: 'Custom 3D Printed (PLA)\nOpen source files available',
+                                    details: 'Custom 3D Printed (PETG)\nOpen source files available',
                                 },
                                 {
                                     label: 'Inputs',
