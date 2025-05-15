@@ -1431,11 +1431,11 @@
             "headers": [
                 {
                     "key": "Content-Security-Policy-Report-Only",
-                    "value": "default-src 'self'; script-src 'self' 'unsafe-inline' https://*.posthog.com; style-src 'self' 'unsafe-inline'; img-src 'self' data: https://*.posthog.com https://res.cloudinary.com font-src 'self' data: https://d27nj4tzr3d5tm.cloudfront.net; connect-src 'self' https://*.posthog.com https://api.github.com https://lottie.host; frame-src 'self'; report-uri https://d1iyf54ud053a4.cloudfront.net/csp?token=sTMFPsFhdP1Ssg&sample_rate=0.1&v=1; report-to csp-endpoint"
+                    "value": "default-src 'self'; script-src 'self' 'unsafe-inline' https://*.posthog.com; style-src 'self' 'unsafe-inline'; img-src 'self' data: https://*.posthog.com https://res.cloudinary.com https://www.gravatar.com; font-src 'self' data: https://d27nj4tzr3d5tm.cloudfront.net; connect-src 'self' https://*.posthog.com https://api.github.com https://lottie.host https://better-animal-d658c56969.strapiapp.com; media-src 'self' https://d1hovhsvet4m1p.cloudfront.net; frame-src 'self' https://www.youtube-nocookie.com; report-uri https://app.posthog.com/csp?token=sTMFPsFhdP1Ssg&sample_rate=0.1&v=1; report-to posthog"
                 },
                 {
                     "key": "Reporting-Endpoints",
-                    "value": "csp-endpoint=\"https://d1iyf54ud053a4.cloudfront.net/csp?token=sTMFPsFhdP1Ssg&sample_rate=0.1&v=1\""
+                    "value": "posthog=\"https://app.posthog.com/csp?token=sTMFPsFhdP1Ssg&sample_rate=0.1&v=1\""
                 }
             ]
         }
