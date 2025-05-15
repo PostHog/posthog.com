@@ -31,7 +31,9 @@ export const PosthogStoriesContainer = ({ groupId }: PosthogStoriesContainerProp
                         return (
                             <div
                                 key={story.id}
-                                className={`relative cursor-pointer group transition-opacity ${hasStoryBeenViewed ? 'opacity-60' : ''}`}
+                                className={`relative cursor-pointer group transition-opacity ${
+                                    hasStoryBeenViewed ? 'opacity-60' : ''
+                                }`}
                                 onClick={() => {
                                     setActiveStoryIndex(storyIndex)
                                     setActiveGroupIndex(groupIndex)
@@ -53,7 +55,9 @@ export const PosthogStoriesContainer = ({ groupId }: PosthogStoriesContainerProp
                                         >
                                             <path d="M8 5v14l11-7z" />
                                         </svg>
-                                        <span className="text-xs">Video</span>
+                                        <span className="text-xs">
+                                            {story.durationMs ? `${story.durationMs / 1000}s` : 'Video'}
+                                        </span>
                                     </div>
                                 )}
                             </div>

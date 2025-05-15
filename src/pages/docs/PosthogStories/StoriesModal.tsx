@@ -10,6 +10,9 @@ import { storiesLogic } from './storiesLogic'
 import type { story } from './storiesMap'
 import Modal from 'components/Modal'
 
+const STORY_INTERVAL = 3000
+const MAX_VIDEO_DURATION_MS = 1000000
+
 interface StoryEndEventProps extends StoryEndEventPropsExtraProps {
     reason: string
     story_id: string
@@ -19,6 +22,7 @@ interface StoryEndEventProps extends StoryEndEventPropsExtraProps {
     time_spent_seconds: number
     story_group_id: string
     story_group_title: string
+    story_watched_percentage?: number
 }
 
 interface StoryEndEventPropsExtraProps {
@@ -28,14 +32,8 @@ interface StoryEndEventPropsExtraProps {
 }
 
 export const StoriesModal = (): JSX.Element | null => {
-    const {
-        openStoriesModal,
-        activeGroup,
-        activeStoryIndex,
-        activeStory,
-    } = useValues(storiesLogic)
-    const { setOpenStoriesModal, setActiveStoryIndex, markStoryAsViewed } =
-        useActions(storiesLogic)
+    const { openStoriesModal, activeGroup, activeStoryIndex, activeStory } = useValues(storiesLogic)
+    const { setOpenStoriesModal, setActiveStoryIndex, markStoryAsViewed } = useActions(storiesLogic)
     const storyStartTimeRef = useRef<number>(Date.now())
 
     // Mark story as viewed when it becomes active
@@ -61,6 +59,10 @@ export const StoriesModal = (): JSX.Element | null => {
                 story_group_title: activeGroup?.title,
                 time_spent_ms: timeSpentMs,
                 time_spent_seconds: Math.round(timeSpentMs / 1000),
+                story_watched_percentage:
+                    activeStory?.durationMs && activeStory?.durationMs > 0
+                        ? Math.round((timeSpentMs / activeStory.durationMs) * 100)
+                        : undefined,
                 ...(extraProps || {}),
             }
             posthog.capture('posthog.com_story_ended', props)
@@ -68,20 +70,23 @@ export const StoriesModal = (): JSX.Element | null => {
         [activeGroup, activeStoryIndex]
     )
 
-    const handleClose = useCallback((forceClose: boolean) => {
-        const timeSpentMs = Date.now() - storyStartTimeRef.current
-        posthog.capture('posthog.com_story_closed', {
-            reason: forceClose ? 'force_close' : 'natural_close',
-            story_id: activeGroup?.stories[activeStoryIndex].id,
-            story_title: activeGroup?.stories[activeStoryIndex].title,
-            story_thumbnail_url: activeGroup?.stories[activeStoryIndex].thumbnailUrl,
-            story_group_id: activeGroup?.id,
-            story_group_title: activeGroup?.title,
-            time_spent_ms: timeSpentMs,
-            time_spent_seconds: Math.round(timeSpentMs / 1000),
-        })
-        setOpenStoriesModal(false)
-    }, [setOpenStoriesModal, activeGroup, activeStoryIndex])
+    const handleClose = useCallback(
+        (forceClose: boolean) => {
+            const timeSpentMs = Date.now() - storyStartTimeRef.current
+            posthog.capture('posthog.com_story_closed', {
+                reason: forceClose ? 'force_close' : 'natural_close',
+                story_id: activeGroup?.stories[activeStoryIndex].id,
+                story_title: activeGroup?.stories[activeStoryIndex].title,
+                story_thumbnail_url: activeGroup?.stories[activeStoryIndex].thumbnailUrl,
+                story_group_id: activeGroup?.id,
+                story_group_title: activeGroup?.title,
+                time_spent_ms: timeSpentMs,
+                time_spent_seconds: Math.round(timeSpentMs / 1000),
+            })
+            setOpenStoriesModal(false)
+        },
+        [setOpenStoriesModal, activeGroup, activeStoryIndex]
+    )
 
     const handlePrevious = useCallback(() => {
         if (activeStoryIndex > 0) {
@@ -122,9 +127,9 @@ export const StoriesModal = (): JSX.Element | null => {
             seeMore: () =>
                 story.link
                     ? (() => {
-                        sendStoryEndEvent('see_more')
-                        window.open(story.link, '_self')
-                        return <></>
+                          sendStoryEndEvent('see_more')
+                          window.open(story.link, '_self')
+                          return <></>
                       })()
                     : undefined,
             preloadResource: true,
@@ -132,16 +137,19 @@ export const StoriesModal = (): JSX.Element | null => {
     )
 
     return (
-        <Modal open={openStoriesModal} setOpen={(value: boolean) => {
-            setOpenStoriesModal(value)
-            if (!value) {
-                handleClose(true)
-            }
-        }}>
+        <Modal
+            open={openStoriesModal}
+            setOpen={(value: boolean) => {
+                setOpenStoriesModal(value)
+                if (!value) {
+                    handleClose(true)
+                }
+            }}
+        >
             <div className="flex items-center justify-center w-full h-full StoriesModal__modal">
                 <Stories
                     stories={stories}
-                    defaultInterval={3000}
+                    defaultInterval={activeStory?.type === 'video' ? MAX_VIDEO_DURATION_MS : STORY_INTERVAL}
                     width="100%"
                     height="100%"
                     currentIndex={activeStoryIndex}
