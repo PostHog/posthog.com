@@ -1,0 +1,34 @@
+---
+title: Getting started with messaging
+availability:
+    free: full
+    selfServe: full
+    enterprise: full
+---
+
+> 🚧 **Note:** Messaging is currently available as a feature preview. To access it, enable the [feature preview](https://app.posthog.com/#panel=feature-previews%3Amessaging) in your PostHog account.
+>
+> We are keen to gather as much feedback as possible so if you try this out please let us know. You can email [haven@posthog.com](mailto:haven@posthog.com), send feedback via the [in-app support panel]([https://us.posthog.com#panel=support%3Afeedback%3Amessaging%3Alow](https://us.posthog.com/#panel=support%3Afeedback%3Amessaging%3Alow)), or use one of our other [support options](/docs/support-options).
+
+Messaging enables you to send emails to your users directly from PostHog in one of two ways:
+
+- **[Broadcasts](/docs/messaging/broadcasts)**: Manually triggered email blast, sent to a list of people. Broadcasts are useful for newsletters, product updates, or early invite lists.
+
+- **[Campaigns](/docs/messaging/campaigns)**: Event-triggered transactional emails. Campaigns enable you to automatically sending messages to your users in response to their activity in your app.
+
+The only prerequisite to using messaging is setting up sending email domain.
+
+## Setting up your email domain
+
+Before you can send emails through PostHog, you need to set up and verify your sending domain. This helps ensure deliverability and prevents your emails from being marked as spam.
+
+1. Go to **Project Settings** > **Messaging** in your PostHog instance
+2. Click on **Add domain**
+3. Enter the domain you want to use for sending emails (e.g., `mail.yourdomain.com` or `yourdomain.com`)
+4. PostHog will generate DNS TXT records that you need to add to your domain's DNS configuration
+5. Add these TXT records to your domain's DNS settings through your domain registrar (like GoDaddy, Namecheap, or Squarespace)
+6. Return to PostHog and click **Verify domain**
+
+The verification process may take up to 24 hours to complete, depending on DNS propagation times. Once PostHog confirms that your DNS records are in place, you can use this sending domain in any messages moving forward.
+
+Next, set up your [broadcasts](/docs/messaging/broadcasts) and [campaigns](/docs/messaging/campaigns) to start sending emails to your users!
