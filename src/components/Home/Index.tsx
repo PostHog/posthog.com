@@ -12,6 +12,7 @@ import Roadmap from './New/Roadmap'
 import Pricing from './New/Pricing'
 import OSButton from 'components/OSButton'
 import useProduct from 'hooks/useProduct'
+import { Accordion } from 'components/RadixUI/Accordion'
 
 interface ProductButtonsProps {
     productTypes: string[]
@@ -104,7 +105,7 @@ const Products = () => {
                 { content: 4 },
                 { content: 'consolidate product usage data', className: 'font-bold' },
                 { 
-                    content: <ProductButtons productTypes={['data_warehouse']} />,
+                    content: <ProductButtons productTypes={['data_warehouse', 'data_pipelines']} />,
                     className: 'text-sm' 
                 },
             ],
@@ -340,23 +341,30 @@ export default function Home(): JSX.Element {
                     </h1>
                     <p>we build tools for people who build products.</p>
 
-                    <div className="bg-accent p-4 rounded mb-8 text-sm inline-block min-w-[250px]">
-                        <div className="pb-1">
-                            <strong>contents</strong>
-                        </div>
-                        <ol className="pl-4">
-                            {sections.map((section) => (
-                                <li key={section.title}>
-                                    <Link
-                                        to={`/#${section.title.toLowerCase().replace(/\s+/g, '-')}`}
-                                        className="group flex items-center gap-1"
-                                    >
-                                        <span>{section.title}</span>
-                                        <IconArrowRight className="inline-block rotate-90 size-3 text-primary opacity-0 group-hover:opacity-100" />
-                                    </Link>
-                                </li>
-                            ))}
-                        </ol>
+                    <div data-scheme="secondary">
+                        <Accordion
+                        items={[
+                            {
+                                value: 'table-of-contents',
+                                trigger: <strong>Contents</strong>,
+                                content: <div>
+                                    <ol className="pl-4">
+                                        {sections.map((section) => (
+                                            <li key={section.title}>
+                                                <Link
+                                                    to={`/#${section.title.toLowerCase().replace(/\s+/g, '-')}`}
+                                                    className="group flex items-center gap-1"
+                                                >
+                                                    <span>{section.title}</span>
+                                                    <IconArrowRight className="inline-block rotate-90 size-3 text-primary opacity-0 group-hover:opacity-100" />
+                                                </Link>
+                                            </li>
+                                        ))}
+                                    </ol>
+                                </div>
+                            }
+                        ]}
+                        />
                     </div>
 
                     <div className="space-y-8">
