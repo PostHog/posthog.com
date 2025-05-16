@@ -36,7 +36,7 @@ export default function ProductSidebar({ type }: { type: string }): JSX.Element 
                         ),
                         content: (
                             <>
-                                <p className="text-sm">{description}</p>
+                                {description && <p className="text-sm">{description}</p>}
                                 <p>
                                     <span className="text-sm text-secondary">Pricing starts at</span>
                                     <br />

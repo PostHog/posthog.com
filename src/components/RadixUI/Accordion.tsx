@@ -7,10 +7,12 @@ interface AccordionItemProps extends React.ComponentPropsWithoutRef<typeof Radix
     className?: string
 }
 
+// border-primary border-x overflow-hidden first:mt-0 first:rounded-t last:rounded-b 
+
 const AccordionItem = React.forwardRef<HTMLDivElement, AccordionItemProps>(
     ({ children, className, ...props }, forwardedRef) => (
         <RadixAccordion.Item
-            className={`border-primary border-x overflow-hidden first:mt-0 first:rounded-t last:rounded-b focus-within:relative focus-within:z-10 focus-within:shadow-[0_0_2px_2px] focus-within:shadow-border [&_h3]:mb-0 ${className}`}
+            className={`border-t border-primary first:border-t-0 [&_h3]:mb-0 focus-within:relative focus-within:z-10 focus-within:shadow-[0_0_2px_2px] focus-within:shadow-border ${className}`}
             {...props}
             ref={forwardedRef}
         >
@@ -25,11 +27,13 @@ interface AccordionTriggerProps extends React.ComponentPropsWithoutRef<typeof Ra
     className?: string
 }
 
+// border-b border-primary
+
 const AccordionTrigger = React.forwardRef<HTMLButtonElement, AccordionTriggerProps>(
     ({ children, className, ...props }, forwardedRef) => (
         <RadixAccordion.Header className="flex">
             <RadixAccordion.Trigger
-                className={`group flex flex-1 items-center justify-between bg-primary px-2 py-1 text-sm leading-none text-primary border-b border-primary outline-none hover:bg-mauve2 ${className}`}
+                className={`group flex flex-1 items-center justify-between px-2 py-1 text-sm leading-none first:rounded-t last:rounded-b text-primary bg-accent outline-none hover:bg-accent ${className}`}
                 {...props}
                 ref={forwardedRef}
             >
@@ -49,10 +53,12 @@ interface AccordionContentProps extends React.ComponentPropsWithoutRef<typeof Ra
     className?: string
 }
 
+// data-[state=open]:border-b
+
 const AccordionContent = React.forwardRef<HTMLDivElement, AccordionContentProps>(
     ({ children, className, ...props }, forwardedRef) => (
         <RadixAccordion.Content
-            className={`overflow-hidden bg-primary text-primary data-[state=closed]:animate-slideUp data-[state=open]:animate-slideDown data-[state=open]:border-primary data-[state=open]:border-b p-2 ${className}`}
+            className={`overflow-hidden bg-primary text-primary data-[state=closed]:animate-slideUp data-[state=open]:animate-slideDown border-primary border-t p-2 last:rounded-b [&>p:last-child]:mb-0 ${className}`}
             {...props}
             ref={forwardedRef}
             asChild
@@ -78,7 +84,7 @@ interface AccordionRootProps extends Omit<React.ComponentPropsWithoutRef<typeof 
 export const Accordion = ({ items, className, defaultValue, onValueChange, contentClassName, ...props }: AccordionRootProps) => {
     return (
         <RadixAccordion.Root
-            className={`rounded ${className}`}
+            className={`rounded border border-primary ${className}`}
             type="single"
             collapsible
             defaultValue={defaultValue}

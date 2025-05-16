@@ -341,13 +341,13 @@ export default function Home(): JSX.Element {
                     </h1>
                     <p>we build tools for people who build products.</p>
 
-                    <div data-scheme="secondary">
-                        <Accordion
+                    <Accordion
+                        className="mb-8"
                         items={[
                             {
                                 value: 'table-of-contents',
                                 trigger: <strong>Contents</strong>,
-                                content: <div>
+                                content: <div data-scheme="primary">
                                     <ol className="pl-4">
                                         {sections.map((section) => (
                                             <li key={section.title}>
@@ -364,8 +364,7 @@ export default function Home(): JSX.Element {
                                 </div>
                             }
                         ]}
-                        />
-                    </div>
+                    />
 
                     <div className="space-y-8">
                         {sections.map((section, index) => (
