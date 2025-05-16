@@ -20,7 +20,7 @@ export default function useProduct({ type } = {}) {
             Icon: IconPieChart,
             description: 'Monitor your website traffic. Built for people who really liked GA3...',
             type: 'web_analytics',
-            color: '[#36C46F]',
+            color: 'green-2',
             sharesFreeTier: 'product_analytics',
             worksWith: ['product_analytics', 'session_replay', 'surveys'],
             slug: '/web-analytics',

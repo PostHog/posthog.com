@@ -11,8 +11,57 @@ import { IconArrowRight, IconGraph, IconPieChart, IconRewindPlay } from '@postho
 import Roadmap from './New/Roadmap'
 import Pricing from './New/Pricing'
 import OSButton from 'components/OSButton'
+import useProduct from 'hooks/useProduct'
+
+interface ProductButtonsProps {
+    productTypes: string[]
+    className?: string
+}
+
+const ProductButtons: React.FC<ProductButtonsProps> = ({ productTypes, className = "" }) => {
+    const allProducts = useProduct()
+
+    // Helper to get product by type or name
+    const getProduct = (typeOrName: string) =>
+        Array.isArray(allProducts)
+            ? allProducts.find(
+                (p: any) => p.type === typeOrName || p.name === typeOrName
+            )
+            : undefined
+
+    return (
+        <span className={`flex flex-wrap gap-1 ${className}`}>
+            {productTypes.map((type) => {
+                const product = getProduct(type)
+                return product ? (
+                    <OSButton
+                        key={product.type}
+                        variant="ghost"
+                        icon={product.Icon ? <product.Icon /> : undefined}
+                        iconClassName={`text-${product.color}`}
+                        color={product.color}
+                        className="font-medium text-primary hover:text-primary"
+                        to={`${product.slug}`}
+                        state={{ newWindow: true }}
+                        asLink
+                    >
+                        {product.name}
+                    </OSButton>
+                ) : null
+            })}
+        </span>
+    )
+}
 
 const Products = () => {
+    const allProducts = useProduct() // This returns the deduped array of products
+
+    // Helper to get product by type or name
+    const getProduct = (typeOrName) =>
+        allProducts.find(
+            (p) => p.type === typeOrName || p.name === typeOrName
+        )
+
     const columns = [
         { name: '', width: 'auto', align: 'center' as const },
         { name: 'goal', width: 'minmax(150px,250px)', align: 'left' as const },
@@ -24,14 +73,10 @@ const Products = () => {
             cells: [
                 { content: 1 },
                 { content: 'understand product usage', className: 'font-bold' },
-                { 
-                    content: <div>
-                        <OSButton variant="ghost" icon={<IconPieChart />} color="green" className="[&>span]:text-green font-semibold" >Web analytics</OSButton>
-                        <OSButton variant="ghost" icon={<IconGraph />} color="blue" className="[&>span]:text-blue font-semibold" >Product analytics</OSButton>
-                        <OSButton variant="ghost" icon={<IconRewindPlay />} color="yellow" className="[&>span]:text-yellow font-semibold" >Session replay</OSButton>
-                    </div>, 
-                    className: 'text-sm' 
-                },
+                {
+                    content: <ProductButtons productTypes={['web_analytics', 'product_analytics', 'session_replay']} />,
+                    className: 'text-sm flex-wrap gap-px',
+                }
             ],
         },
         {
@@ -39,7 +84,7 @@ const Products = () => {
                 { content: 2 },
                 { content: 'test new features', className: 'font-bold' },
                 { 
-                    content: 'text', 
+                    content: <ProductButtons productTypes={['feature_flags', 'experiments', 'error_tracking']} />,
                     className: 'text-sm' 
                 },
             ],
@@ -49,7 +94,7 @@ const Products = () => {
                 { content: 3 },
                 { content: 'get feedback from users', className: 'font-bold' },
                 { 
-                    content: 'here', 
+                    content: <ProductButtons productTypes={['surveys']} />,
                     className: 'text-sm' 
                 },
             ],
@@ -59,7 +104,7 @@ const Products = () => {
                 { content: 4 },
                 { content: 'consolidate product usage data', className: 'font-bold' },
                 { 
-                    content: 'content', 
+                    content: <ProductButtons productTypes={['data_warehouse']} />,
                     className: 'text-sm' 
                 },
             ],

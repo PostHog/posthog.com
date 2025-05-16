@@ -33,6 +33,7 @@ interface OSButtonProps extends Omit<React.ButtonHTMLAttributes<HTMLButtonElemen
     variant?: 'default' | 'primary' | 'secondary' | 'underline' | 'ghost'
     size?: 'xs' | 'sm' | 'md' | 'lg' | 'xl'
     icon?: React.ReactNode
+    iconClassName?: string
     tooltip?: string
     label?: string
     className?: string
@@ -54,6 +55,7 @@ export default function OSButton({
     variant = 'default',
     size = 'md',
     icon,
+    iconClassName,
     tooltip,
     label,
     className = '',
@@ -111,10 +113,10 @@ export default function OSButton({
         <>
             {variant === 'primary' || variant === 'secondary' ? (
                 <span className={`${variantClasses[variant].child} ${sizeClasses[size]}`}>
-                    {icon && iconPosition === 'left' && <span className={`${iconSizeClasses[size]}`}>{icon}</span>}
+                    {icon && iconPosition === 'left' && <span className={`${iconSizeClasses[size]} ${iconClassName}`}>{icon}</span>}
                     {children}
                     {label && <span className="text-sm opacity-75">{label}</span>}
-                    {icon && iconPosition === 'right' && <span className={`${iconSizeClasses[size]}`}>{icon}</span>}
+                    {icon && iconPosition === 'right' && <span className={`${iconSizeClasses[size]} ${iconClassName}`}>{icon}</span>}
                     {tooltip && (
                         <span className="">
                             <Tooltip content={tooltip}>
@@ -125,10 +127,10 @@ export default function OSButton({
                 </span>
             ) : (
                 <>
-                    {icon && iconPosition === 'left' && <span className={`${iconSizeClasses[size]}`}>{icon}</span>}
+                    {icon && iconPosition === 'left' && <span className={`${iconSizeClasses[size]} ${iconClassName}`}>{icon}</span>}
                     {children}
                     {label && <span className="text-sm opacity-75">{label}</span>}
-                    {icon && iconPosition === 'right' && <span className={`${iconSizeClasses[size]}`}>{icon}</span>}
+                    {icon && iconPosition === 'right' && <span className={`${iconSizeClasses[size]} ${iconClassName}`}>{icon}</span>}
                     {tooltip && (
                         <span className="">
                             <Tooltip content={tooltip}>

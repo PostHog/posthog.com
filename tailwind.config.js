@@ -106,6 +106,7 @@ module.exports = {
                 'fuchsia-dark': '#74108D',
                 gray: '#8F8F8C',
                 green: '#6AA84F',
+                'green-2': '#36C46F',
                 gold: '#FFBA53',
                 'gold-dark': '#E38907',
                 lilac: '#8567FF',

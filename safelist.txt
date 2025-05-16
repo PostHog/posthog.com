@@ -425,6 +425,7 @@ text-gold
 text-gold-dark
 text-gray
 text-green
+text-green-2
 text-light-blue
 text-light-purple
 text-lilac
