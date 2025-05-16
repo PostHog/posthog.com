@@ -1,10 +1,10 @@
 import cntl from 'cntl'
-import Accordion from 'components/Accordion'
 import Link from 'components/Link'
 import Logo from 'components/Logo'
 import React from 'react'
 import { IProps, LinkListItem } from './LinkList'
-import { GitHub, LinkedIn, YouTube, SlackMonochrome, Twitter } from 'components/Icons/Icons'
+import { GitHub, LinkedIn, YouTube, Twitter } from 'components/Icons/Icons'
+import { useLocation } from '@reach/router'
 
 const linklist: IProps[] = [
     {
@@ -354,6 +354,11 @@ const FooterMenuItem = ({ title, url, className = '', marginBottom = '1' }) => {
 }
 
 export function Footer(): JSX.Element {
+    const { pathname } = useLocation()
+    if (pathname === '/newsletter-fbc') {
+        return <></>
+    }
+
     const social: Social[] = [
         {
             Icon: <Twitter className="w-5 h-5 box-border fill-current" />,
