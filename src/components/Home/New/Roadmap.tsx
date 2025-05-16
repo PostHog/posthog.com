@@ -178,7 +178,7 @@ const UnderConsiderationTable = ({ data }: { data: any }) => {
     )
 }
 
-export default function Roadmap() {
+export default function Roadmap({ frame }) {
     const { wip, underConsideration } = useStaticQuery(graphql`
         {
             wip: allSqueakRoadmap(
@@ -213,6 +213,7 @@ export default function Roadmap() {
     return (
         <OSTabs
             className="relative flex flex-col h-full min-h-0"
+            frame={frame}
             tabs={[
                 {
                     label: 'wip',

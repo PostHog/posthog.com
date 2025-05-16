@@ -132,7 +132,7 @@ const sections = [
     {
         title: 'roadmap',
         description: "we haven't built our defining feature. customers help us decide what to build next.",
-        content: <Roadmap />,
+        content: <Roadmap frame={false} />,
     },
     {
         title: 'pricing',

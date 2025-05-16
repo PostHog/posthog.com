@@ -11,12 +11,13 @@ interface TabItem {
 interface OSTabsProps {
     tabs: TabItem[]
     defaultValue?: string
+    frame: boolean
     children?: React.ReactNode
     fullScreen?: boolean
     className?: string
 }
 
-export default function OSTabs({ tabs, defaultValue, children, fullScreen = false, className }: OSTabsProps) {
+export default function OSTabs({ tabs, defaultValue, children, frame = true, className }: OSTabsProps) {
     return (
         <>
             <Tabs.Root
@@ -29,7 +30,6 @@ export default function OSTabs({ tabs, defaultValue, children, fullScreen = fals
                         <Tabs.Trigger
                             key={tab.value}
                             value={tab.value}
-                            className="data-[state=active]:bg-white px-2 py-1 border border-transparent data-[state=active]:border-primary border-b-0 rounded-tr-md rounded-tl-md relative -bottom-px z-10 text-sm"
                             className="data-[state=active]:bg-white px-2 py-1 border border-transparent data-[state=active]:border-primary border-b-0 rounded-tr-md rounded-tl-md relative -bottom-px z-10 text-sm select-none"
                         >
                             {tab.label}
@@ -38,8 +38,8 @@ export default function OSTabs({ tabs, defaultValue, children, fullScreen = fals
                 </Tabs.List>
                 {tabs.map((tab) => (
                     <Tabs.Content data-scheme="primary" key={tab.value} value={tab.value} className="flex-1 h-full">
-                        <ScrollArea className="@container bg-primary border border-primary rounded-md">
-                            <div className="p-4 @2xl:p-6">{tab.content}</div>
+                        <ScrollArea className={`@container bg-primary ${frame ? 'border border-primary rounded-md' : ''}`}>
+                            <div className={frame ? 'p-4 @2xl:p-6' : ''}>{tab.content}</div>
                         </ScrollArea>
                     </Tabs.Content>
                 ))}
