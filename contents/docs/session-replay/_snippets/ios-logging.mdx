@@ -41,7 +41,7 @@ config.sessionReplayConfig.captureLogsConfig.logSanitizer = { output in
         options: .regularExpression
     )
     
-    return PostHogConsoleLogResult(level: level, message: sanitizedMessage)
+    return PostHogLogEntry(level: level, message: sanitizedMessage)
 }
 
 PostHogSDK.shared.setup(config)
@@ -50,7 +50,7 @@ PostHogSDK.shared.setup(config)
 ### Configuring minimum log level
 
 By default, the SDK only captures error-level logs to minimize noise in session replays.
- You can adjust this using the `minLogLevel` setting:
+You can adjust this using the `minLogLevel` setting:
 
 ```ios_swift
 // Capture errors only (default)
