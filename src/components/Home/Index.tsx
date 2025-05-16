@@ -7,42 +7,61 @@ import ScrollArea from 'components/RadixUI/ScrollArea'
 import { useCustomers } from 'hooks/useCustomers'
 import Logo from 'components/Logo'
 import CTA from './CTA'
-import { IconArrowRight } from '@posthog/icons'
+import { IconArrowRight, IconGraph, IconPieChart, IconRewindPlay } from '@posthog/icons'
 import Roadmap from './New/Roadmap'
 import Pricing from './New/Pricing'
+import OSButton from 'components/OSButton'
+
 const Products = () => {
     const columns = [
         { name: '', width: 'auto', align: 'center' as const },
-        { name: 'goal', width: 'minmax(150px,1fr)', align: 'center' as const },
-        { name: 'products', width: 'minmax(auto,250px)' },
+        { name: 'goal', width: 'minmax(150px,250px)', align: 'left' as const },
+        { name: 'products', width: 'minmax(auto,1fr)', align: 'left' as const },
     ]
+
     const rows = [
         {
             cells: [
                 { content: 1 },
-                { content: 'understand product usage', className: '!p-4' },
-                { content: 'products', className: 'text-sm' },
+                { content: 'understand product usage', className: 'font-bold' },
+                { 
+                    content: <div>
+                        <OSButton variant="ghost" icon={<IconPieChart />} color="green" className="[&>span]:text-green font-semibold" >Web analytics</OSButton>
+                        <OSButton variant="ghost" icon={<IconGraph />} color="blue" className="[&>span]:text-blue font-semibold" >Product analytics</OSButton>
+                        <OSButton variant="ghost" icon={<IconRewindPlay />} color="yellow" className="[&>span]:text-yellow font-semibold" >Session replay</OSButton>
+                    </div>, 
+                    className: 'text-sm' 
+                },
             ],
         },
         {
             cells: [
                 { content: 2 },
-                { content: 'test new features', className: '!p-4' },
-                { content: 'products', className: 'text-sm' },
+                { content: 'test new features', className: 'font-bold' },
+                { 
+                    content: 'text', 
+                    className: 'text-sm' 
+                },
             ],
         },
         {
             cells: [
                 { content: 3 },
-                { content: 'get feedback from users', className: '!p-4' },
-                { content: 'products', className: 'text-sm' },
+                { content: 'get feedback from users', className: 'font-bold' },
+                { 
+                    content: 'here', 
+                    className: 'text-sm' 
+                },
             ],
         },
         {
             cells: [
                 { content: 4 },
-                { content: 'consolidate product usage data', className: '!p-4' },
-                { content: 'products', className: 'text-sm' },
+                { content: 'consolidate product usage data', className: 'font-bold' },
+                { 
+                    content: 'content', 
+                    className: 'text-sm' 
+                },
             ],
         },
     ]
