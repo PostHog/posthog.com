@@ -61,6 +61,15 @@ const companies = {
     Datadog: {
         comparisonURL: '',
     },
+    Langfuse: {
+        comparisonURL: '',
+    },
+    Langsmith: {
+        comparisonURL: '',
+    },
+    Helicone: {
+        comparisonURL: '',
+    },
     PostHog: {
         comparisonURL: '',
     },
