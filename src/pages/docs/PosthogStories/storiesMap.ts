@@ -25,7 +25,7 @@ export const storiesMap: storyGroup[] = [
             {
                 id: 'changelog_save_filters_replay_1',
                 title: 'Save filters for session replay',
-                thumbnailUrl: 'https://res.cloudinary.com/dmukukwp6/image/upload/thumbnail_16a69202cc.png',
+                thumbnailUrl: 'https://res.cloudinary.com/dmukukwp6/image/upload/save_filters_thumbnail_a585c4dfe2.png',
                 mediaUrl:
                     'https://res.cloudinary.com/dmukukwp6/video/upload/changelog_save_filters_replay_1_9aabb9799c.mp4',
                 type: 'video',
@@ -36,7 +36,7 @@ export const storiesMap: storyGroup[] = [
             {
                 id: 'changelog_linear_share_1',
                 title: 'Linear share',
-                thumbnailUrl: 'https://res.cloudinary.com/dmukukwp6/image/upload/happy_2496675ac4.png',
+                thumbnailUrl: 'https://res.cloudinary.com/dmukukwp6/image/upload/share_linear_thumbnail_1_1b0e014f43.png',
                 mediaUrl: 'https://res.cloudinary.com/dmukukwp6/video/upload/changelog_linear_share_1_11fdaee4cd.mp4',
                 type: 'video',
                 link: 'https://picsum.photos/id/1012/400/600',
@@ -46,7 +46,7 @@ export const storiesMap: storyGroup[] = [
             {
                 id: 'toolbar_overview_1',
                 title: 'Toolbar overview',
-                thumbnailUrl: 'https://res.cloudinary.com/dmukukwp6/image/upload/feature_flag_12cb052a7e.png',
+                thumbnailUrl: 'https://res.cloudinary.com/dmukukwp6/image/upload/thumbnail_16a69202cc.png',
                 mediaUrl: 'https://res.cloudinary.com/dmukukwp6/video/upload/toolbar_2_0a34e62550.mp4',
                 type: 'video',
                 durationMs: 41000,
@@ -56,7 +56,7 @@ export const storiesMap: storyGroup[] = [
             {
                 id: 'toolbar_actions_1',
                 title: 'Toolbar actions',
-                thumbnailUrl: 'https://res.cloudinary.com/dmukukwp6/image/upload/feature_flag_12cb052a7e.png',
+                thumbnailUrl: 'https://res.cloudinary.com/dmukukwp6/image/upload/toolbar_actions_thumbnail_fc04b490ca.png',
                 mediaUrl: 'https://res.cloudinary.com/dmukukwp6/video/upload/toolbar_actions_07e751a76a.mp4',
                 type: 'video',
                 durationMs: 45000,
@@ -66,12 +66,12 @@ export const storiesMap: storyGroup[] = [
             {
                 id: 'tulum_2024_1',
                 title: 'Tulum 2024',
-                thumbnailUrl: 'https://res.cloudinary.com/dmukukwp6/image/upload/relax_c82945b849.png',
+                thumbnailUrl: 'https://res.cloudinary.com/dmukukwp6/image/upload/tulum_2025_6d591ab225.png',
                 description: 'Amzing experience with the team in Tulum',
                 mediaUrl: 'https://res.cloudinary.com/dmukukwp6/video/upload/0515_85f1cca991.mov',
                 type: 'video',
                 order: 5,
-                durationMs: 64000,
+                durationMs: 66000,
             },
         ],
         order: 1,
