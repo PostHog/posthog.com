@@ -69,7 +69,7 @@ const MaxPromptButton = ({ text, className = '' }: MaxPromptButtonProps): JSX.El
     return (
         <button 
             onClick={() => window.open(maxUrl, '_blank')}
-            className={`text-red dark:text-yellow font-sans font-semibold border border-light dark:border-dark rounded-full px-2 py-0.5 inline-block text-sm ${className}`}
+            className={`text-red font-sans font-semibold border border-light rounded-full px-2 py-0.5 inline-block text-sm ${className}`}
         >
             {text}
         </button>
@@ -195,10 +195,10 @@ const Roadmap = () => {
     return (
         <>
             <h2 className="text-4xl text-center mb-8">Roadmap</h2>
-                    <div className="grid mdlg:grid-cols-3 border border-light dark:border-dark">
+                    <div className="grid mdlg:grid-cols-3 border border-light">
                         <div>
-                            <h3 className="text-base text-center bg-[#F5E2B2] dark:bg-accent-dark px-4 py-2 mb-0 border-b border-light dark:border-dark">Under consideration</h3>
-                            <div className="flex flex-col h-full divide-y divide-light dark:divide-dark">
+                            <h3 className="text-base text-center bg-[#F5E2B2] px-4 py-2 mb-0 border-b border-light">Under consideration</h3>
+                            <div className="flex flex-col h-full divide-y divide-light">
                                 {roadmaps
                                     .filter(
                                         (roadmap: RoadmapItem) =>
@@ -217,7 +217,7 @@ const Roadmap = () => {
                                                     <h4 className="text-lg font-bold mb-1 leading-tight">
                                                         {roadmap.attributes.title}
                                                     </h4>
-                                                    <Markdown>{roadmap.attributes.description}</Markdown>
+                                                    <Markdown className="dark:text-primary">{roadmap.attributes.description}</Markdown>
                                                     <div className="mt-4">
                                                         <CallToAction
                                                             size="sm"
@@ -254,9 +254,9 @@ const Roadmap = () => {
                                     ))}
                             </div>
                         </div>
-                        <div className="mdlg:border-x border-light dark:border-dark">
-                            <h3 className="text-base text-center bg-[#F5E2B2] dark:bg-accent-dark px-4 py-2 mb-0 border-b border-light dark:border-dark">In progress</h3>
-                            <div className="divide-y divide-light dark:divide-dark">
+                        <div className="mdlg:border-x border-light ">
+                            <h3 className="text-base text-center bg-[#F5E2B2] px-4 py-2 mb-0 border-b border-light">In progress</h3>
+                            <div className="divide-y divide-light">
                                 {roadmaps
                                     .filter(
                                         (roadmap: RoadmapItem) =>
@@ -320,8 +320,8 @@ const Roadmap = () => {
                             </div>
                         </div>
                         <div>
-                            <h3 className="text-base text-center bg-[#F5E2B2] dark:bg-accent-dark px-4 py-2 mb-0 border-b border-light dark:border-dark">Shipped</h3>
-                            <div className="divide-y divide-light dark:divide-dark">
+                            <h3 className="text-base text-center bg-[#F5E2B2] px-4 py-2 mb-0 border-b border-light">Shipped</h3>
+                            <div className="divide-y divide-light">
                                 {roadmaps
                                     .filter((roadmap: RoadmapItem) => roadmap.attributes.complete)
                                     .map((roadmap: RoadmapItem) => (
@@ -347,7 +347,7 @@ const Roadmap = () => {
 
                     <div className="mt-auto text-center pt-8 flex flex-col gap-2 mdlg:flex-row mdlg:justify-center mdlg:items-center pb-8">
                         <strong className="">Have an idea for Max?</strong>
-                        <CallToAction href="https://github.com/PostHog/posthog/issues" type="secondary" size="sm">
+                        <CallToAction href="https://github.com/PostHog/posthog/issues" type="secondary" size="sm" childClassName="!text-primary !bg-[#FFF6DE]">
                             Request a feature on GitHub
                         </CallToAction>
                     </div>
@@ -591,7 +591,7 @@ export const ProductMax = () => {
                 href="https://res.cloudinary.com/dmukukwp6/raw/upload/charter_regular_webfont_f2e9d7f011.eot"
                 crossOrigin="anonymous"
             />
-            <div className="bg-[#FFF6DE]">
+            <div className="bg-[#FFF6DE] text-primary">
                 <div className={`${fullWidthContent ? 'max-w-full' : 'max-w-7xl mx-auto'} px-2 mdlg:px-5 py-4 md:pt-20 pb-0`}>
                     <div className="flex flex-col-reverse mdlg:grid mdlg:grid-cols-2 gap-8 xl:gap-16 mb-12 xl:mb-16 px-2 mdlg:px-0">
                         <div className="flex flex-col gap-8 items-center justify-center max-w-4xl mx-auto">
@@ -639,7 +639,7 @@ export const ProductMax = () => {
                                 </form>
 
                                 <div className="mt-4 text-center">
-                                    Want to <button onClick={() => setShowBeta(!showBeta)} className="text-red dark:text-yellow font-semibold">try the beta?</button>
+                                    Want to <button onClick={() => setShowBeta(!showBeta)} className="text-red font-semibold">try the beta?</button>
                                 </div>
                             </div>
                         </div>
@@ -650,12 +650,12 @@ export const ProductMax = () => {
 
 
                     <div className={`transition-all duration-500 ease-in-out overflow-hidden ${showBeta ? 'max-h-[800px] opacity-100' : 'max-h-0 opacity-0'}`}>
-                            <div className="bg-white border border-light dark:border-dark rounded p-4 mb-12 font-serif">
+                            <div className="bg-white border border-light rounded p-4 mb-12 font-serif">
                                         <h3 className="font-bold">Try Max AI beta</h3>
                                         <div className="mb-4">
                                             <p className="mb-2">
                                                 <strong>1. New to PostHog?</strong>{' '}<br />
-                                                <span className="inline-block pl-5">Install with Max AI in 90 seconds or <CallToAction href="https://app.posthog.com/signup" type="custom" size="sm" className="!bg-transparent !top-0 !border-none" childClassName="!p-0 !bg-transparent !text-red dark:!text-yellow !border-none !font-semibold !text-base !border-none !m-0 !border-none !translate-y-0">sign up the old fashioned way</CallToAction>.</span>
+                                                <span className="inline-block pl-5">Install with Max AI in 90 seconds or <CallToAction href="https://app.posthog.com/signup" type="custom" size="sm" className="!bg-transparent !top-0 !border-none" childClassName="!p-0 !bg-transparent !text-red !border-none !font-semibold !text-base !border-none !m-0 !border-none !translate-y-0">sign up the old fashioned way</CallToAction>.</span>
                                             </p>
                                             <div className="pl-5">
                                                 <IntegrationPrompt />
@@ -674,7 +674,7 @@ export const ProductMax = () => {
                     </div>
 
                     <div className="mb-12">
-                        <div className="max-w-3xl mx-auto p-4 mdlg:p-8 bg-white dark:bg-dark shadow-xl rounded-lg prose font-serif">
+                        <div className="max-w-3xl mx-auto p-4 mdlg:p-8 bg-white shadow-xl rounded-lg prose dark:text-primary font-serif">
                         <h3 className="font-bold">
                                 We're building a
                                 real product manager in your browser.
@@ -694,7 +694,7 @@ export const ProductMax = () => {
                                         {!showMorePrompts && (
                                             <button 
                                                 onClick={() => setShowMorePrompts(true)}
-                                                className="text-red dark:text-yellow font-semibold border border-light dark:border-dark rounded-full px-2 py-0.5 inline-block text-sm font-sans"
+                                                className="text-red font-semibold border border-light rounded-full px-2 py-0.5 inline-block text-sm font-sans"
                                             >
                                                 Show more prompts
                                             </button>
@@ -750,7 +750,7 @@ export const ProductMax = () => {
                         </div>
                     </div>
 
-                <section className="mt-20">
+                <section className="mt-20 dark:text-primary">
                     <Roadmap />
                 </section>
 
@@ -781,10 +781,10 @@ export const ProductMax = () => {
 
                 <section id="posthog-vs">
                     <h2 className="text-center text-3xl lg:text-4xl">PostHog vs...</h2>
-                    <Comparison comparison={comparison} columnCount={comparisonColumnCount} />
+                    <Comparison comparison={comparison} columnCount={comparisonColumnCount} className="text-primary" />
                 </section>
 
-                <section>
+                <section className="">
                     <h3 className="text-center mb-8">So, what's best for you?</h3>
                     <div className="@container mb-8 mx-5 md:mx-0 grid md:grid-cols-2 gap-4">
                         <VsCompetitor
@@ -795,6 +795,7 @@ export const ProductMax = () => {
                                     className="max-w-[176px]"
                                 />
                             }
+                            className="!bg-transparent"
                         >
                             <ul>
                                 <li>You like alt-tabbing and copy-pasting to other tools, like ChatGPT or Claude</li>
@@ -804,7 +805,7 @@ export const ProductMax = () => {
                                 <li>You want to remake a pic in Studio Ghibli's style (ChatGPT is still best)</li>
                             </ul>
                         </VsCompetitor>
-                        <VsPostHog>
+                        <VsPostHog className="!bg-transparent">
                             <ul>
                                 <li>You want questions and answers in one place</li>
                                 <li>

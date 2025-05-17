@@ -20,11 +20,13 @@ export const Markdown = ({
     transformImageUri,
     allowedElements,
     regularText,
+    className,
 }: {
     children: string
     transformImageUri?: TransformImage | undefined
     allowedElements?: string[]
     regularText?: 'false'
+    className?: string
 }) => {
     return (
         <ReactMarkdown
@@ -32,8 +34,9 @@ export const Markdown = ({
             remarkPlugins={[remarkGfm]}
             transformImageUri={transformImageUri}
             rehypePlugins={[rehypeSanitize]}
-            className={`flex-1 !text-sm overflow-hidden text-ellipsis !pb-0 mr-1 text-primary/75 dark:text-primary-dark/75 font-normal [&_p:last-child]:mb-0 ${regularText ? '' : 'question-content community-post-markdown'
-                }`}
+            className={`flex-1 !text-sm overflow-hidden text-ellipsis !pb-0 mr-1 text-primary/75 font-normal [&_p:last-child]:mb-0 ${
+                regularText ? '' : 'question-content community-post-markdown'
+            } ${className || ''}`}
             components={{
                 pre: ({ children }) => {
                     return (
