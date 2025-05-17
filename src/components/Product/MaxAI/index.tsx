@@ -64,7 +64,7 @@ interface MaxPromptButtonProps {
 
 const MaxPromptButton = ({ text, className = '' }: MaxPromptButtonProps): JSX.Element => {
     const encodedText = encodeURIComponent(text.toLowerCase())
-    const maxUrl = `https://app.posthog.com/#panel=max:!${encodedText}`
+    const maxUrl = `https://app.posthog.com/#panel=max:${encodedText}`
 
     return (
         <button 

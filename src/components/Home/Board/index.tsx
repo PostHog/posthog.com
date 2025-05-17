@@ -361,10 +361,10 @@ const products: Product[] = [
             return (
                 <>
                     <div className="block dark:hidden">
-                        <CloudinaryImage src="https://res.cloudinary.com/dmukukwp6/image/upload/llm_observability_dashboard_4_6b54d8abd7.png" />
+                        <CloudinaryImage src="https://res.cloudinary.com/dmukukwp6/image/upload/max_489a283f4c.png" />
                     </div>
                     <div className="hidden dark:block">
-                        <CloudinaryImage src="https://res.cloudinary.com/dmukukwp6/image/upload/llm_observability_dashboard_4_6b54d8abd7.png" />
+                        <CloudinaryImage src="https://res.cloudinary.com/dmukukwp6/image/upload/max_489a283f4c.png" />
                     </div>
                 </>
             )
