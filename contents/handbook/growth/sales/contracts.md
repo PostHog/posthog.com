@@ -111,6 +111,8 @@ Our strong preference is for customers to pay by credit card, as this is easier 
 
 If a customer wants to pay by ACH or bank transfer, we will usually only consider this if they are paying for 1 year or more up front. This is more likely to be the case for very large customers.
 
+For customers in an annual contract but paying monthly we require them to pay via credit card for monthly payments below $2500.  For payment above we do allow ACH or bank transfer, but with Net14 terms.
+
 ## Contract buyouts
 
 Sometimes customers will be locked into a contract with a competitor, but want to switch to PostHog when their contract is up. In this case, we are willing to let them use PostHog for free for up to 6 months. This is beneficial to PostHog as well, as we can get them set up and using PostHog sooner, capitalizing on the momentum of their interest today, and giving them more time to get comfortable with the platform.
@@ -131,22 +133,23 @@ Some rules:
 An Order Form is a lightweight document that captures the customer details, credit amount, discount, term, and signatures from both
 PostHog and the Customer.  They are either governed by our standard terms or a custom MSA (see below).
 
-You will likely need to use the [Pricing Calculator](https://docs.google.com/spreadsheets/d/1QsDV2ECtMwM9IfC_D7Embmpu7K7q6qbq60t8ARglQaI/edit#gid=358353731) to get the correct credit amount to be included in the order form.
+You will likely need to use [QuoteHog](https://quote.posthog.com/) to get the correct credit amount to be included in the order form.
 
 ### Creating an Order Form
 
-We use [PandaDoc](https://app.pandadoc.com/a/#/) to handle document generation, routing and signature.  Ask Cameron or Simon for access if you don't have it.
+We use [PandaDoc](https://app.pandadoc.com/a/#/) to handle document generation, routing and signature.  Ask Mine or Simon for access if you don't have it.
 
 1. The [order form template](https://app.pandadoc.com/a/#/templates/87jsEEeg8rvYYri9Y8gK5B) to use is titled `[Client.Company] PostHog Cloud Order Form - <MMM YYYY>`
 2. When looking at the template, click the link to **Use this template** in the top bar.
 3. In the Add recipients box which pops up:
     1. Replace `<MMM YYYY>` with the month and year the contract starts (e.g. March 2023)
     2. Add the Client email, first and last name
-    3. Add the PostHog Signer email - normally Cameron or Simon
+    3. Add the PostHog Signer email - normally the team member who is responsible for the customer (AE or CSM).
     4. Click continue
 4. In the pricing table, set the total amount of credit in the Amount box next to **PostHog Cloud Credit**
-5. At the bottom of the pricing table, set the **Discount %** just above the Total
-6. On the right of the screen there is a sidebar, select the **Variables** tab and populate them as follows:
+5. Remove the Enterprise Plan line item if not needed.
+6. At the bottom of the pricing table, set the **Discount %** just above the Total
+7. On the right of the screen there is a sidebar, select the **Variables** tab and populate them as follows:
     * **Client Address Information** - Needs to be their legal correspondence address (check with your customer contact)
     * **Client.Company** - The legal company name
     * **Contract.Discount** - The discount % (appears in the Additional credit purchase section)
@@ -161,14 +164,21 @@ We use [PandaDoc](https://app.pandadoc.com/a/#/) to handle document generation, 
         - **Note:** Pay-as-you-go products are charged after the end of the period, while flat-rate subscriptions are charged at the beginning of the period. As a result the first two payments on a monthly schedule may occur within the same billing period as part of the transition. Make sure to send a note to the customer to ensure they're fully informed!
 
     * **Contract.Term** - The term in months of the contract (12 months by default)
-7. If an MSA is being used rather than the standard terms you will need to replace the following text:
+8. If they are paying monthly:
+   * For payments equal to or above $2500/month, change the **Payment Terms** section to read 
+     > 12 equal monthly payments (Net 14) from Contract start date
+   * For payments below $2500 then we _require credit card payment_.  Change the **Payment Terms** section to read
+     >  12 equal monthly payments from Contract start date
+     
+     The *Payment Method* should also be updated to `Credit Card`.
+9. If an MSA is being used rather than the standard terms you will need to replace the following text:
    > PostHog Cloud License Terms appearing at: https://www.posthog.com/terms and Privacy Policy appearing at: /privacy (collectively the “Agreement”)
 
    with
 
    > PostHog Cloud License Terms executed by and between PostHog, Inc. and CUSTOMER LEGAL NAME (the “Agreement”)
 
-8. You should link the order form to the opportunity record in Salesforce using the `Contract Link` field in the "Opportunity Closure Details" so that we have a reference to the completed paperwork from our CRM.
+10. You should link the order form to the opportunity record in Salesforce using the `Contract Link` field in the "Opportunity Closure Details" so that we have a reference to the completed paperwork from our CRM.
 
 ### Routing an Order Form for review and signature
 

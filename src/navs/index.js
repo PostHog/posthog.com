@@ -680,6 +680,10 @@ export const handbookSidebar = [
                 url: '/handbook/cs-and-onboarding/onboarding-team',
             },
             {
+                name: 'How we work',
+                url: '/handbook/cs-and-onboarding/how-we-work',
+            },
+            {
                 name: 'New team member onboarding',
                 url: '/handbook/cs-and-onboarding/new-hire-onboarding',
             },
@@ -973,14 +977,6 @@ export const handbookSidebar = [
             {
                 name: 'Marketing ownership',
                 url: '/handbook/growth/marketing/ownership',
-            },
-            {
-                name: 'Value proposition',
-                url: '/handbook/growth/marketing/value-propositions',
-            },
-            {
-                name: 'ICP scoring',
-                url: '/handbook/growth/marketing/icp',
             },
             {
                 name: 'Sponsorships',

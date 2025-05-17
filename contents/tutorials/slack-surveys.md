@@ -35,9 +35,11 @@ After you've created your survey, go to the [data pipeline destinations tab](htt
 
 5. Customize the name and description, and press **Create & enable**.
 
+> **Note:** If you're using partial responses, you'll need to add the `$survey_completed = true` property to the event filters. Otherwise, the destination will trigger for every question answered, and not only when the survey is completed. [See more details here](/docs/surveys/troubleshooting#handling-partial-responses).
+
 <ProductScreenshot
-    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2024_09_27_at_11_13_44_2x_c72ef7d42e.png"
-    imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2024_09_27_at_11_14_01_2x_abcf087a94.png"
+    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_05_08_at_16_17_17_2x_c8235c0413.jpg"
+    imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_05_08_at_16_18_54_2x_e1cee82eaf.jpg"
     alt="Create Slack destination"
     classes="rounded"
 />
@@ -53,8 +55,9 @@ You can extract the following properties from surveys:
 | Property | Description |
 |----------|-------------|
 | `event.properties.$survey_name` | The name of the survey |
-| `event.properties.$survey_questions` | An array of objects containing the following survey question properties: `id`, `index`, and `question` |
+| `event.properties.$survey_questions` | An array of objects containing the following survey question properties: `id`, `question`, and `response` |
 | `event.properties.$survey_response_{response_key}` | The response to a specific question. To find `response_key`, go to your survey page and click on the button **Copy survey response key**. There's one for each question in your survey. `response_key` is identical to the corresponding survey question ID |
+| `event.properties.$survey_completed` | Whether the survey was completed. Relevant if you're using partial responses. |
 | `person.name` or other person properties | The name of the person who responded or other properties |
 
 ## Further reading
