@@ -516,14 +516,15 @@ export const ProductMax = () => {
 
                     <div className="">
                         <div className="max-w-2xl mx-auto p-4 mdlg:p-8 bg-white shadow-xl rounded-lg prose font-serif">
-                            <h3 className="font-bold">We're making Max so much more than just a chat interface for your data.</h3>
-                            <p>
-                                We call our friendly chat hedgebot, "Max", and with just a few keystrokes, you can do some cool things.
-                            </p>
+                        <h3 className="font-bold">
+                                We're making Max so much more than just a chat interface for your data. We're building a
+                                real product manager in your browser.
+                            </h3>
 
                             <h3 className="font-bold">What Max can do today</h3>
                             <ol>
-                                <li>Answers product usage questions
+                                <li>
+                                    Answers product usage questions
                                     <div style={{ margin: '8px 0;' }}>
                                         <button>What's my churn rate?</button>
                                         <button>Show me user retention by country</button>
@@ -531,7 +532,9 @@ export const ProductMax = () => {
                                         <button>What's my ARR?</button>
                                         <button>Show more prompts</button>
                                     </div>
-                                    <small>(If you're signed into PostHog, click one of these prompts to try it out!)</small>
+                                    <small>
+                                        (If you're signed into PostHog, click one of these prompts to try it out!)
+                                    </small>
                                 </li>
                                 <li>Filter a playlist of session recordings</li>
                                 <li>Generate SQL queries without having to understand SQL at all.</li>
@@ -541,36 +544,33 @@ export const ProductMax = () => {
 
                             <h3 className="font-bold">What Max doesn't do... yet!</h3>
                             <p>
-                                Max works great for precise questions or requests. "How many companies signed up in the last month" will likely work well, "What should I build next" won't.
-                            </p>
-                            <p>
-                                As we improve him over time, we'll be adding more and more data and better evals to let him deal with more abstracted questions.
-                            </p>
-                            <p>
-                                It's not just about answering higher level questions though – we have much bigger plans...
+                                Max works great for precise questions or requests. "How many companies signed up in the
+                                last month" will likely work well, "What should I build next" won't.
                             </p>
 
                             <h3 className="font-bold">What's next for Max?</h3>
                             <p>
-                                Max is totally core to our company strategy so will work across everything. 14+ products. The whole shebang.
+                                Wider tool use across all our products. The whole shebang. Automatic feature flag use,
+                                finding important errors and so on.
                             </p>
                             <p>
-                                We're working on Max deep research mode. This feels like using Cursor – Max will build a deep understanding of your customers and product to answer questions, pulling together context from all our stuff – like a real life analyst or PM, but automatic.
+                                Deep research mode. Max will build a deep understanding of your customers and product to
+                                answer questions, pulling together context from all our tools and data – like a an
+                                automatic PM or analyst.
                             </p>
                             <p>
-                                Max will automate the setup of capturing events too. He'll integrate with your codebase to detect and add event tracking to new features that we detect automatically, flags, and error tracking.
-                            </p>
-                            <p>Using our existing features will speed up too - iImagine building a new feature, then asking Max to create a feature flag, set up an experiment, and drive a percentage of traffic to it, then sending them an in-app survey to get feedback after they've interacted with the new feature.
-                            </p>
-                            <p>
-                                Check out our AI roadmap below and share your feedback! If you have thoughts on how you'd like to interact with Max in PostHog, we'd love to hear from you.
+                                Automatic event and feature capture. Max will integrate with your codebase to detect and
+                                add event tracking to new features that we detect automatically.
                             </p>
                             <p>
-                                Feel free to <Link href="https://github.com/PostHog/posthog/issues" external>create a GitHub issue</Link> and we'll add new ideas to our roadmap when we're considering Max's future superpowers.
+                                Feel free to{' '}
+                                <Link href="https://github.com/PostHog/posthog/issues" external>
+                                    create a GitHub issue
+                                </Link>{' '}
+                                and we'll add new ideas to our roadmap when we're considering Max's future superpowers.
                             </p>
                         </div>
                     </div>
-
                 </div>
             </div>
             <div className={`${fullWidthContent ? 'max-w-full px-8' : 'max-w-7xl mx-auto'} px-5 py-10 md:pt-20 pb-0`}>
