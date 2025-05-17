@@ -494,17 +494,21 @@ export const ProductMax = () => {
                     </div>
 
 
-                    <div className={`transition-all duration-500 ease-in-out overflow-hidden ${showBeta ? 'max-h-[500px] opacity-100' : 'max-h-0 opacity-0'}`}>
+                    <div className={`transition-all duration-500 ease-in-out overflow-hidden ${showBeta ? 'max-h-[800px] opacity-100' : 'max-h-0 opacity-0'}`}>
                             <div className="bg-white border border-light dark:border-dark rounded p-4 mb-12 font-serif">
-                                        <h3 className="font-bold">Try Max AI</h3>
-                                        <p>
-                                            <strong>1. New to PostHog?</strong> 
-                                            Install with Max AI in 90 seconds.
-                                        </p>
-                                        <IntegrationPrompt />
-                                        <p>
-                                            <strong>2. Already use PostHog?</strong>
-                                            Look for the Max button in the side panel in the app (top right)!
+                                        <h3 className="font-bold">Try Max AI beta</h3>
+                                        <div className="mb-4">
+                                            <p className="mb-2">
+                                                <strong>1. New to PostHog?</strong>{' '}<br />
+                                                <span className="inline-block pl-5">Install with Max AI in 90 seconds.</span>
+                                            </p>
+                                            <div className="pl-5">
+                                                <IntegrationPrompt />
+                                            </div>
+                                        </div>
+                                        <p className="mb-0">
+                                            <strong>2. Already use PostHog?</strong>{' '}<br />
+                                            <span className="inline-block pl-5">Look for the Max button in the side panel in the app (top right)!</span>
                                         </p>
                             </div>
                     </div>
