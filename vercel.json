@@ -1426,6 +1426,10 @@
         {
             "source": "/docs/surveys/webhook",
             "destination": "/docs/surveys/destinations"
+        },
+        {
+            "source": "/heysf",
+            "destination": "/?utm_source=billboard&utm_campaign=may25-shelter"
         }
     ],
     "headers": [
