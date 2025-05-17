@@ -13,10 +13,10 @@ export default function Wrapper() {
             <TaskBarMenu />
             <div ref={constraintsRef} className="flex-grow">
                 <Desktop />
+                {windows.map((item) => {
+                    return <AppWindow item={item} key={item.key} constraintsRef={constraintsRef} />
+                })}
             </div>
-            {windows.map((item) => {
-                return <AppWindow item={item} key={item.key} constraintsRef={constraintsRef} />
-            })}
         </div>
     )
 }

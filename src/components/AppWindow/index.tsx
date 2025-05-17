@@ -82,7 +82,7 @@ export default function AppWindow({ item, constraintsRef }: { item: AppWindowTyp
         setPreviousSize(size)
         setPreviousPosition(position)
         updateWindow(item, {
-            position: { x: 0, y: taskbarHeight },
+            position: { x: 0, y: 0 },
             size: { width: window.innerWidth, height: window.innerHeight - taskbarHeight },
         })
     }
@@ -130,23 +130,11 @@ export default function AppWindow({ item, constraintsRef }: { item: AppWindowTyp
     }
 
     const handleDragEnd = (_event: any, info: any) => {
-        if (!constraintsRef.current) return
-
         if (snapIndicator !== null) {
             handleSnapToSide(snapIndicator)
             setSnapIndicator(null)
             return
         }
-
-        const newX = position.x + info.offset.x
-        const newY = position.y + info.offset.y
-
-        const constrainedX = Math.round(Math.min(Math.max(0, newX), window.innerWidth - size.width))
-        const constrainedY = Math.round(Math.min(Math.max(taskbarHeight, newY), window.innerHeight - size.height))
-
-        updateWindow(item, {
-            position: { x: constrainedX, y: constrainedY },
-        })
     }
 
     const windowPosition = useMemo(() => {
