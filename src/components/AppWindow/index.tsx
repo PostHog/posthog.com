@@ -115,6 +115,7 @@ export default function AppWindow({ item, constraintsRef }: { item: AppWindowTyp
     }
 
     const handleDrag = (_event: any, info: any) => {
+        if (item.fixedSize) return
         if (!constraintsRef.current) return
 
         const bounds = constraintsRef.current.getBoundingClientRect()
@@ -129,8 +130,8 @@ export default function AppWindow({ item, constraintsRef }: { item: AppWindowTyp
         }
     }
 
-    const handleDragEnd = (_event: any, info: any) => {
-        if (snapIndicator !== null) {
+    const handleDragEnd = () => {
+        if (!item.fixedSize && snapIndicator !== null) {
             handleSnapToSide(snapIndicator)
             setSnapIndicator(null)
             return
@@ -151,22 +152,15 @@ export default function AppWindow({ item, constraintsRef }: { item: AppWindowTyp
     const handleSnapToSide = (side: 'left' | 'right') => {
         if (!constraintsRef.current) return
 
-        const isFixedSize = item.fixedSize
         const bounds = constraintsRef.current.getBoundingClientRect()
-        const x = isFixedSize
-            ? side === 'left'
-                ? window.innerWidth / 4 - item.size.width / 2
-                : (window.innerWidth * 3) / 4 - item.size.width / 2
-            : side === 'left'
-            ? 0
-            : bounds.width / 2
+        const x = side === 'left' ? 0 : bounds.width / 2
         const finalWidth = bounds.width / 2
         const size = { width: finalWidth, height: bounds.height }
-        const position = { x, y: bounds.top }
+        const position = { x, y: 0 }
 
         updateWindow(item, {
             position,
-            ...(!isFixedSize ? { size } : {}),
+            size,
         })
     }
 
@@ -282,6 +276,7 @@ export default function AppWindow({ item, constraintsRef }: { item: AppWindowTyp
                             dragConstraints={constraintsRef}
                             onDrag={handleDrag}
                             onDragEnd={handleDragEnd}
+                            onDragTransitionEnd={handleDragEnd}
                             onMouseDown={() => bringToFront(item)}
                         >
                             <div
