@@ -457,7 +457,7 @@ const comparison = [
         },
     },
     {
-        feature: 'Understands your data',
+        feature: 'Has access to all your data',
         companies: {
             ChatGPT: false,
             Claude: false,
@@ -469,14 +469,6 @@ const comparison = [
         companies: {
             ChatGPT: true,
             Claude: true,
-            PostHog: true,
-        },
-    },
-    {
-        feature: 'Is a pretend hedgehog',
-        companies: {
-            ChatGPT: false,
-            Claude: false,
             PostHog: true,
         },
     },
@@ -614,9 +606,9 @@ export const ProductMax = () => {
                                     posthog?.capture('max_ai_subscribed', { email })
                                     setFormSubmitted(true)
                                 }}
-                                className="mt-4">
+                                className="mt-4 text-center">
                                     <div
-                                        className={`subscription-form-container duration-500 bg-white shadow-2xl rounded-full p-4 flex items-center transition[max-width_0.5s_cubic-bezier(0.4,0,0.2,1)]`}
+                                        className={`subscription-form-container text-center duration-500 bg-white shadow-2xl rounded-full p-4 inline-flex items-center transition[max-width_0.5s_cubic-bezier(0.4,0,0.2,1)]`}
                                         style={{
                                             maxWidth: formSubmitted ? 120 : 600,
                                             margin: '0 auto',
@@ -762,71 +754,13 @@ export const ProductMax = () => {
                     <Roadmap />
                 </section>
 
-                </div>
-            </div>
-            <div className={`${fullWidthContent ? 'max-w-full px-8' : 'max-w-7xl mx-auto'} px-5 py-10 md:pt-20 pb-0`}>
-                <section className="mt-20">
-                    
-                </section>
-
-                <section id="features" className="-mt-28 pt-36 mt-18">
-                    <h3 className="text-2xl md:text-2xl text-center">
-                        No data in PostHog yet? Here's how Max can help you across multiple products.
-                    </h3>
-                </section>
-
-                <div className="mt-12">
-                    <ul
-                        className={`grid md:grid-cols-2 lg:grid-cols-${subfeaturesItemCount} gap-8 mt-12 list-none p-0`}
-                    >
-                        {subfeatures.map((subfeature, index) => (
-                            <Subfeature key={index} {...subfeature} />
-                        ))}
-                    </ul>
-                </div>
-
-                <div className="mt-12">
-                    <ul className={`grid md:grid-cols-2 lg:grid-cols-${featuresPerRow} gap-8 list-none p-0`}>
-                        {features.map((feature, index) => (
-                            <Feature key={index} {...feature} />
-                        ))}
-                    </ul>
-                </div>
-
-                <div className="mt-8 mb-12">
-                    <CalloutBox icon="IconLightBulb" title="Max is still getting smarter" type="action">
-                        <div className="flex items-start gap-8">
-                            <div className="flex-1 mt-2">
-                                Max is just getting started and he's getting smarter every day. Soon he'll sync with
-                                your code, track changes, and help you ship improvements based on customer behaviour.
-                                For now, sign up to the in-app waitlist and we'll let you know when Max is ready to
-                                level up!
-                                <div className="mt-4">
-                                    <CallToAction
-                                        type="secondary"
-                                        size="sm"
-                                        to="https://us.posthog.com/#panel=feature-previews%3Aadvanced-max-ai-features"
-                                    >
-                                        Sign up to the waitlist
-                                    </CallToAction>
-                                </div>
-                            </div>
-                            <div className="shrink-0">
-                                <CloudinaryImage
-                                    src="https://res.cloudinary.com/dmukukwp6/image/upload/reader_7e54eb67f7.png"
-                                    alt="Max reading a book"
-                                    className="w-28"
-                                />
-                            </div>
-                        </div>
-                    </CalloutBox>
-                </div>
-
                 <section id="pricing" className="pt-20">
                     <div className="flex flex-col-reverse md:flex-row md:gap-12">
                         <div className="flex-1">
                             <h2 className="text-4xl md:text-5xl">Usage-based pricing</h2>
-                            <p className="">Use Max AI for free up to {product.freeTier} queries per month.</p>
+                            <p className="mb-2">We have big free tiers on all our products.</p>
+                            <p>
+                            <strong>Max is free during beta</strong> and doesn't cost anything extra. We will charge something, but with a generous free tier, when he's out of beta.</p>
                         </div>
                         <div className="md:w-96 md:text-right mb-8 md:mb-0 -mt-16">
                             <CloudinaryImage
@@ -848,40 +782,6 @@ export const ProductMax = () => {
                 <section id="posthog-vs">
                     <h2 className="text-center text-3xl lg:text-4xl">PostHog vs...</h2>
                     <Comparison comparison={comparison} columnCount={comparisonColumnCount} />
-                </section>
-
-                <section>
-                    <div className="flex flex-col-reverse items-center md:flex-row gap-8 mb-20">
-                        <div className="flex-1">
-                            <h2 className="text-4xl">
-                                "Hang on,{' '}
-                                <span className="text-red dark:text-yellow">how does Max AI use my data?</span>"
-                            </h2>
-                            <p>
-                                Max can access any data which is already stored in PostHog, such as events, persons,
-                                sessions and groups, as well as various schema and data warehouse tables. You can also
-                                give him additional information directly, which he can remember if asked.
-                            </p>
-                            <p>
-                                When you ask a question, relevant data gets shared with{' '}
-                                <a href="/docs/max-ai#is-my-data-shared-with-third-parties">our LLM providers</a>. All
-                                of these providers are bound by regulations such as GDPR, CCPA, and others. We also
-                                offer a <a href="/dpa">DP-yay policy</a>, which you can sign if you want additional
-                                peace of mind.
-                            </p>
-                            <p>
-                                Want more info about how PostHog handles GDPR, HIPAA, and other regulations? Check{' '}
-                                <a href="/docs/privacy">our privacy docs</a>.
-                            </p>
-                        </div>
-                        <aside className="shrink-0 md:basis-[400px] self-end">
-                            <CloudinaryImage
-                                src="https://res.cloudinary.com/dmukukwp6/image/upload/confused_small_8cc411c714.png"
-                                alt="confused hedgehog"
-                                className="w-full max-w-[350px]"
-                            />
-                        </aside>
-                    </div>
                 </section>
 
                 <section>
@@ -965,6 +865,94 @@ export const ProductMax = () => {
                         })}
                     </PairsWith>
                 </section>
+
+                </div>
+            </div>
+            <div className={`${fullWidthContent ? 'max-w-full px-8' : 'max-w-7xl mx-auto'} px-5 py-10 md:pt-20 pb-0`}>
+
+{/* 
+                <div className="mt-12">
+                    <ul
+                        className={`grid md:grid-cols-2 lg:grid-cols-${subfeaturesItemCount} gap-8 mt-12 list-none p-0`}
+                    >
+                        {subfeatures.map((subfeature, index) => (
+                            <Subfeature key={index} {...subfeature} />
+                        ))}
+                    </ul>
+                </div>
+
+                <div className="mt-12">
+                    <ul className={`grid md:grid-cols-2 lg:grid-cols-${featuresPerRow} gap-8 list-none p-0`}>
+                        {features.map((feature, index) => (
+                            <Feature key={index} {...feature} />
+                        ))}
+                    </ul>
+                </div>
+
+                <div className="mt-8 mb-12">
+                    <CalloutBox icon="IconLightBulb" title="Max is still getting smarter" type="action">
+                        <div className="flex items-start gap-8">
+                            <div className="flex-1 mt-2">
+                                Max is just getting started and he's getting smarter every day. Soon he'll sync with
+                                your code, track changes, and help you ship improvements based on customer behaviour.
+                                For now, sign up to the in-app waitlist and we'll let you know when Max is ready to
+                                level up!
+                                <div className="mt-4">
+                                    <CallToAction
+                                        type="secondary"
+                                        size="sm"
+                                        to="https://us.posthog.com/#panel=feature-previews%3Aadvanced-max-ai-features"
+                                    >
+                                        Sign up to the waitlist
+                                    </CallToAction>
+                                </div>
+                            </div>
+                            <div className="shrink-0">
+                                <CloudinaryImage
+                                    src="https://res.cloudinary.com/dmukukwp6/image/upload/reader_7e54eb67f7.png"
+                                    alt="Max reading a book"
+                                    className="w-28"
+                                />
+                            </div>
+                        </div>
+                    </CalloutBox>
+                </div>
+
+                <section>
+                    <div className="flex flex-col-reverse items-center md:flex-row gap-8 mb-20">
+                        <div className="flex-1">
+                            <h2 className="text-4xl">
+                                "Hang on,{' '}
+                                <span className="text-red dark:text-yellow">how does Max AI use my data?</span>"
+                            </h2>
+                            <p>
+                                Max can access any data which is already stored in PostHog, such as events, persons,
+                                sessions and groups, as well as various schema and data warehouse tables. You can also
+                                give him additional information directly, which he can remember if asked.
+                            </p>
+                            <p>
+                                When you ask a question, relevant data gets shared with{' '}
+                                <a href="/docs/max-ai#is-my-data-shared-with-third-parties">our LLM providers</a>. All
+                                of these providers are bound by regulations such as GDPR, CCPA, and others. We also
+                                offer a <a href="/dpa">DP-yay policy</a>, which you can sign if you want additional
+                                peace of mind.
+                            </p>
+                            <p>
+                                Want more info about how PostHog handles GDPR, HIPAA, and other regulations? Check{' '}
+                                <a href="/docs/privacy">our privacy docs</a>.
+                            </p>
+                        </div>
+                        <aside className="shrink-0 md:basis-[400px] self-end">
+                            <CloudinaryImage
+                                src="https://res.cloudinary.com/dmukukwp6/image/upload/confused_small_8cc411c714.png"
+                                alt="confused hedgehog"
+                                className="w-full max-w-[350px]"
+                            />
+                        </aside>
+                    </div>
+                </section> */}
+
+                
             </div>
 
             <div className="max-w-7xl mx-auto relative">

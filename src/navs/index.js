@@ -3549,7 +3549,7 @@ export const docsMenu = {
         },
         {
             name: 'Max AI',
-            icon: 'IconThoughtBubble',
+            icon: 'IconMagicWand',
             color: 'purple',
             url: '/docs/max-ai',
             description: 'AI-powered product analyst and assistant',
@@ -3698,7 +3698,7 @@ export const productMenu = {
         },
         {
             name: 'Max AI',
-            icon: 'IconThoughtBubble',
+            icon: 'IconMagicWand',
             color: 'purple',
             url: '/max',
         },

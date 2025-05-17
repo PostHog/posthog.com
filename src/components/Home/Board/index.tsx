@@ -57,6 +57,8 @@ import {
     IconArchive,
     IconCheck,
     IconStack,
+    IconQuestion,
+    IconMagic,
 } from '@posthog/icons'
 import CloudinaryImage from 'components/CloudinaryImage'
 import useProducts from 'hooks/useProducts'
@@ -342,6 +344,38 @@ const products: Product[] = [
                     </div>
                 </>
             )
+        },
+    },
+    {
+        name: 'Max AI',
+        color: 'purple',
+        Icon: IconMagicWand,
+        description: 'AI-powered product analyst and assistant',
+        types: ['AI'],
+        features: [
+            { title: 'Answers product usage questions', Icon: IconQuestion },
+            { title: 'Generates SQL queries', Icon: IconHogQL },
+            { title: 'Installs itself', Icon: IconMagic },
+        ],
+        Images: () => {
+            return (
+                <>
+                    <div className="block dark:hidden">
+                        <CloudinaryImage src="https://res.cloudinary.com/dmukukwp6/image/upload/llm_observability_dashboard_4_6b54d8abd7.png" />
+                    </div>
+                    <div className="hidden dark:block">
+                        <CloudinaryImage src="https://res.cloudinary.com/dmukukwp6/image/upload/llm_observability_dashboard_4_6b54d8abd7.png" />
+                    </div>
+                </>
+            )
+        },
+        status: 'WIP',
+        badge: 'BETA',
+        pricing: {
+            cta: {
+                url: '/max',
+                text: 'Learn more',
+            },
         },
     },
     {
