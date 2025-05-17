@@ -591,7 +591,7 @@ export const ProductMax = () => {
                 href="https://res.cloudinary.com/dmukukwp6/raw/upload/charter_regular_webfont_f2e9d7f011.eot"
                 crossOrigin="anonymous"
             />
-            <div className="bg-[#FFF6DE] text-primary">
+            <div className="max-ai-body bg-[#FFF6DE] text-primary">
                 <div className={`${fullWidthContent ? 'max-w-full' : 'max-w-7xl mx-auto'} px-2 mdlg:px-5 py-4 md:pt-20 pb-0`}>
                     <div className="flex flex-col-reverse mdlg:grid mdlg:grid-cols-2 gap-8 xl:gap-16 mb-12 xl:mb-16 px-2 mdlg:px-0">
                         <div className="flex flex-col gap-8 items-center justify-center max-w-4xl mx-auto">
@@ -845,7 +845,7 @@ export const ProductMax = () => {
                     <TeamMembers teamName={team} setActiveProfile={setActiveProfile} />
                 </section>
 
-                <section id="questions" className="my-20 px-5">
+                <section id="questions" className="my-20 px-5 hidden">
                     <h3 className="text-3xl lg:text-4xl text-center mb-2">Questions?</h3>
 
                     <p className="text-center mb-4">See more questions (or ask your own!) in our community forums.</p>
@@ -859,7 +859,7 @@ export const ProductMax = () => {
                     <Questions topicIds={[391]} />
                 </section>
 
-                <section className="pb-12">
+                <section className="py-12">
                     <PairsWith items={pairsWithItemCount}>
                         {PairsWithArray.map((card, index) => {
                             return <PairsWithItem {...card} key={index} />
@@ -869,10 +869,12 @@ export const ProductMax = () => {
 
                 </div>
             </div>
-            <div className="max-w-7xl mx-auto relative bg-[#FFF6DE]">
-                <section>
-                    <CTA />
-                </section>
+            <div className="max-ai-body bg-[#FFF6DE]">
+                <div className="max-w-7xl mx-auto relative">
+                    <section>
+                        <CTA />
+                    </section>
+                </div>
             </div>
 {/* 
             <div className={`${fullWidthContent ? 'max-w-full px-8' : 'max-w-7xl mx-auto'} px-5 py-10 md:pt-20 pb-0`}>
