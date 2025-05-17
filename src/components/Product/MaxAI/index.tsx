@@ -13,6 +13,7 @@ import {
     IconUndo,
     IconInfo,
     IconThumbsUp,
+    IconCheck,
 } from '@posthog/icons'
 import { CallToAction } from 'components/CallToAction'
 import { CustomerCard } from 'components/Products/CustomerCard'
@@ -48,6 +49,11 @@ import Tooltip from 'components/Tooltip'
 import Spinner from 'components/Spinner'
 import { Authentication } from 'components/Squeak'
 import Markdown from 'components/Squeak/components/Markdown'
+import headlineImg from './headline.svg'
+import betaDesktopImg from './beta-desktop.svg'
+import betaMobileImg from './beta-mobile.svg'
+import descriptionDesktopImg from './description-desktop.svg'
+import descriptionMobileImg from './description-mobile.svg'
 
 interface ProfileData {
     firstName: string
@@ -382,6 +388,45 @@ export const ProductMax = () => {
                     showProfile={false}
                 />
             </SideModal>
+            <div className="bg-[#FFF6DE]">
+                <div className={`${fullWidthContent ? 'max-w-full' : 'max-w-7xl mx-auto'} px-2 mdlg:px-5 py-4 md:pt-20 pb-0`}>
+                    <div className="flex flex-col-reverse mdlg:grid mdlg:grid-cols-2 gap-8 xl:gap-16 mb-12 xl:mb-16 px-2 mdlg:px-0">
+                        <div className="flex flex-col gap-8 items-center justify-center max-w-4xl mx-auto">
+                            <img src={headlineImg} alt="Max AI" className="w-full max-w-[604px]" />
+                            <img src={betaMobileImg} alt="Max AI" className="w-full mdlg:hidden max-w-[222px]" />
+                            <img src={betaDesktopImg} alt="Max AI" className="w-full hidden mdlg:block max-w-[437px]" />
+
+                            <form>
+                                <div className="bg-white shadow-2xl rounded-full p-4 flex items-center w-full transition-all max-w-[1000px] min-w-[0px]">
+                                    {/* form content: start */}
+                                    <input type="email" placeholder="Enter your email" className="flex-1 border border-light rounded-l-full rounded-r-none px-4 py-2 bg-[#E5E7E0] text-lg" />
+                                    <div>
+                                        <CallToAction type="primary" size="lg" className="rounded-r-full rounded-l-none" childClassName="rounded-l-none rounded-r-full">
+                                            Join the list
+                                        </CallToAction>
+                                    </div>
+                                    {/* form content: end */}
+                                    {/* form success: start */}
+                                        <div className="bg-green text-white p-3 rounded-full">
+                                            <IconCheck className="size-6" />
+                                        </div>
+                                    {/* form success: end */}
+                                </div>
+                            </form>
+                        </div>
+                        <aside className="bg-[#F5E2B2] px-4 pt-4 max-w-2xl w-full mx-auto rounded-lg shadow-2xl leading-[0] text-center">
+                            <CloudinaryImage src="https://res.cloudinary.com/dmukukwp6/image/upload/i_just_asked_max_a4bd43bb9f.png" className="max-w-[442px] mx-auto" />
+                        </aside>
+                    </div>
+                    <div>
+                        <div className="text-center">
+                            <img src={descriptionMobileImg} alt="Max AI" className="w-full mdlg:hidden max-w-[412px] mx-auto" />
+                            <img src={descriptionDesktopImg} alt="Max AI" className="w-full hidden mdlg:block max-w-[619px] mx-auto" />
+                        </div>
+                    </div>
+
+                </div>
+            </div>
             <div className={`${fullWidthContent ? 'max-w-full px-8' : 'max-w-7xl mx-auto'} px-5 py-10 md:pt-20 pb-0`}>
                 <Hero
                     icon={<IconThoughtBubble />}
