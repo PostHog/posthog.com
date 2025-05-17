@@ -55,6 +55,7 @@ import betaMobileImg from './beta-mobile.svg'
 import descriptionDesktopImg from './description-desktop.svg'
 import descriptionMobileImg from './description-mobile.svg'
 import usePostHog from 'hooks/usePostHog'
+import IntegrationPrompt from 'components/IntegrationPrompt'
 
 interface ProfileData {
     firstName: string
@@ -497,8 +498,10 @@ export const ProductMax = () => {
                             <div className="bg-white border border-light dark:border-dark rounded p-4 mb-12 font-serif">
                                         <h3 className="font-bold">Try Max AI</h3>
                                         <p>
-                                            <strong>1. New to PostHog?</strong> <button>Install with Max AI in 90 seconds.</button>
+                                            <strong>1. New to PostHog?</strong> 
+                                            Install with Max AI in 90 seconds.
                                         </p>
+                                        <IntegrationPrompt />
                                         <p>
                                             <strong>2. Already use PostHog?</strong>
                                             Look for the Max button in the side panel in the app (top right)!
