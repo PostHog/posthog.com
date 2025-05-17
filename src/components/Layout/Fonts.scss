@@ -64,3 +64,25 @@
     font-weight: bold;
     font-style: normal;
 }
+
+@font-face {
+    font-family: 'Charter';
+    src: url('https://res.cloudinary.com/dmukukwp6/raw/upload/charter_regular_webfont_f2e9d7f011.eot');
+    src: url('https://res.cloudinary.com/dmukukwp6/raw/upload/charter_regular_webfont_f2e9d7f011.eot?#iefix') format('embedded-opentype'),
+         url('https://res.cloudinary.com/dmukukwp6/raw/upload/charter_regular_webfont_a7b51e1a63.woff') format('woff'),
+         url('https://res.cloudinary.com/dmukukwp6/raw/upload/charter_regular_webfont_5fd18ab8a9.ttf') format('truetype');
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Charter';
+    src: url('https://res.cloudinary.com/dmukukwp6/raw/upload/charter_bold_webfont_ee994b940c.eot');
+    src: url('https://res.cloudinary.com/dmukukwp6/raw/upload/charter_bold_webfont_ee994b940c.eot?#iefix') format('embedded-opentype'),
+         url('https://res.cloudinary.com/dmukukwp6/raw/upload/charter_bold_webfont_479d813f7d.woff') format('woff'),
+         url('https://res.cloudinary.com/dmukukwp6/raw/upload/charter_bold_webfont_cfd6a9556e.ttf') format('truetype');
+    font-weight: 700;
+    font-style: normal;
+    font-display: swap;
+}

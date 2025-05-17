@@ -54,6 +54,7 @@ import betaDesktopImg from './beta-desktop.svg'
 import betaMobileImg from './beta-mobile.svg'
 import descriptionDesktopImg from './description-desktop.svg'
 import descriptionMobileImg from './description-mobile.svg'
+import usePostHog from 'hooks/usePostHog'
 
 interface ProfileData {
     firstName: string
@@ -282,6 +283,9 @@ export const ProductMax = () => {
     const [loading, setLoading] = useState<{ [id: string]: boolean }>({})
     const [subscribed, setSubscribed] = useState<{ [id: string]: boolean }>({})
     const [voteLoading, setVoteLoading] = useState<{ [id: string]: boolean }>({})
+    const [email, setEmail] = useState('')
+    const [formSubmitted, setFormSubmitted] = useState(false)
+    const posthog = usePostHog()
 
     const { roadmaps, isLoading, mutate } = useRoadmaps({
         params: {
@@ -388,6 +392,48 @@ export const ProductMax = () => {
                     showProfile={false}
                 />
             </SideModal>
+            <link
+                rel="preload"
+                as="font"
+                type="font/woff"
+                href="https://res.cloudinary.com/dmukukwp6/raw/upload/charter_bold_webfont_479d813f7d.woff"
+                crossOrigin="anonymous"
+            />
+            <link
+                rel="preload"
+                as="font"
+                type="font/woff"
+                href="https://res.cloudinary.com/dmukukwp6/raw/upload/charter_bold_webfont_ee994b940c.eot"
+                crossOrigin="anonymous"
+            />
+            <link
+                rel="preload"
+                as="font"
+                type="font/woff"
+                href="https://res.cloudinary.com/dmukukwp6/raw/upload/charter_bold_webfont_cfd6a9556e.ttf"
+                crossOrigin="anonymous"
+            />
+            <link
+                rel="preload"
+                as="font"
+                type="font/woff"
+                href="https://res.cloudinary.com/dmukukwp6/raw/upload/charter_regular_webfont_5fd18ab8a9.ttf"
+                crossOrigin="anonymous"
+            />
+            <link
+                rel="preload"
+                as="font"
+                type="font/woff"
+                href="https://res.cloudinary.com/dmukukwp6/raw/upload/charter_regular_webfont_a7b51e1a63.woff"
+                crossOrigin="anonymous"
+            />
+            <link
+                rel="preload"
+                as="font"
+                type="font/woff"
+                href="https://res.cloudinary.com/dmukukwp6/raw/upload/charter_regular_webfont_f2e9d7f011.eot"
+                crossOrigin="anonymous"
+            />
             <div className="bg-[#FFF6DE]">
                 <div className={`${fullWidthContent ? 'max-w-full' : 'max-w-7xl mx-auto'} px-2 mdlg:px-5 py-4 md:pt-20 pb-0`}>
                     <div className="flex flex-col-reverse mdlg:grid mdlg:grid-cols-2 gap-8 xl:gap-16 mb-12 xl:mb-16 px-2 mdlg:px-0">
@@ -396,21 +442,39 @@ export const ProductMax = () => {
                             <img src={betaMobileImg} alt="Max AI" className="w-full mdlg:hidden max-w-[222px]" />
                             <img src={betaDesktopImg} alt="Max AI" className="w-full hidden mdlg:block max-w-[437px]" />
 
-                            <form>
-                                <div className="bg-white shadow-2xl rounded-full p-4 flex items-center w-full transition-all max-w-[1000px] min-w-[0px]">
-                                    {/* form content: start */}
-                                    <input type="email" placeholder="Enter your email" className="flex-1 border border-light rounded-l-full rounded-r-none px-4 py-2 bg-[#E5E7E0] text-lg" />
-                                    <div>
-                                        <CallToAction type="primary" size="lg" className="rounded-r-full rounded-l-none" childClassName="rounded-l-none rounded-r-full">
-                                            Join the list
-                                        </CallToAction>
-                                    </div>
-                                    {/* form content: end */}
-                                    {/* form success: start */}
+                            <form onSubmit={(e) => {
+                                e.preventDefault()
+                                posthog?.capture('max_ai_subscribed', { email })
+                                setFormSubmitted(true)
+                            }}>
+                                <div
+                                    className={`subscription-form-container duration-500 bg-white shadow-2xl rounded-full p-4 flex items-center transition[max-width_0.5s_cubic-bezier(0.4,0,0.2,1)]`}
+                                    style={{
+                                        maxWidth: formSubmitted ? 120 : 600,
+                                        margin: '0 auto',
+                                    }}
+                                >
+                                    {!formSubmitted ? (
+                                        <>
+                                            <input 
+                                                type="email" 
+                                                placeholder="Enter your email" 
+                                                className="flex-1 border border-light rounded-l-full rounded-r-none px-4 py-2 bg-[#E5E7E0] text-lg"
+                                                value={email}
+                                                onChange={(e) => setEmail(e.target.value)}
+                                                required
+                                            />
+                                            <div>
+                                                <CallToAction type="primary" size="lg" className="rounded-r-full rounded-l-none" childClassName="rounded-l-none rounded-r-full">
+                                                    Join the list
+                                                </CallToAction>
+                                            </div>
+                                        </>
+                                    ) : (
                                         <div className="bg-green text-white p-3 rounded-full">
                                             <IconCheck className="size-6" />
                                         </div>
-                                    {/* form success: end */}
+                                    )}
                                 </div>
                             </form>
                         </div>
@@ -418,10 +482,66 @@ export const ProductMax = () => {
                             <CloudinaryImage src="https://res.cloudinary.com/dmukukwp6/image/upload/i_just_asked_max_a4bd43bb9f.png" className="max-w-[442px] mx-auto" />
                         </aside>
                     </div>
-                    <div>
-                        <div className="text-center">
-                            <img src={descriptionMobileImg} alt="Max AI" className="w-full mdlg:hidden max-w-[412px] mx-auto" />
-                            <img src={descriptionDesktopImg} alt="Max AI" className="w-full hidden mdlg:block max-w-[619px] mx-auto" />
+
+                    <div className="text-center mb-12">
+                        <img src={descriptionMobileImg} alt="Max AI" className="w-full mdlg:hidden max-w-[412px] mx-auto" />
+                        <img src={descriptionDesktopImg} alt="Max AI" className="w-full hidden mdlg:block max-w-[619px] mx-auto" />
+                    </div>
+
+                    <div className="">
+                        <div className="max-w-2xl mx-auto p-4 mdlg:p-8 bg-white shadow-xl rounded-lg prose font-serif">
+                            <h3 className="font-bold">We're making Max so much more than just a chat interface for your data.</h3>
+                            <p>
+                                We call our friendly chat hedgebot, "Max", and with just a few keystrokes, you can do some cool things.
+                            </p>
+
+                            <h3 className="font-bold">What Max can do today</h3>
+                            <ol>
+                                <li>Answers product usage questions
+                                    <div style={{ margin: '8px 0;' }}>
+                                        <button>What's my churn rate?</button>
+                                        <button>Show me user retention by country</button>
+                                        <button>What's our most popular feature?</button>
+                                        <button>What's my ARR?</button>
+                                        <button>Show more prompts</button>
+                                    </div>
+                                    <small>(If you're signed into PostHog, click one of these prompts to try it out!)</small>
+                                </li>
+                                <li>Filter a playlist of session recordings</li>
+                                <li>Generate SQL queries without having to understand SQL at all.</li>
+                                <li>Explain how to use PostHog features, or best practices for using our products</li>
+                                <li>Add PostHog's tracking code to your new project automatically</li>
+                            </ol>
+
+                            <h3 className="font-bold">What Max doesn't do... yet!</h3>
+                            <p>
+                                Max works great for precise questions or requests. "How many companies signed up in the last month" will likely work well, "What should I build next" won't.
+                            </p>
+                            <p>
+                                As we improve him over time, we'll be adding more and more data and better evals to let him deal with more abstracted questions.
+                            </p>
+                            <p>
+                                It's not just about answering higher level questions though – we have much bigger plans...
+                            </p>
+
+                            <h3 className="font-bold">What's next for Max?</h3>
+                            <p>
+                                Max is totally core to our company strategy so will work across everything. 14+ products. The whole shebang.
+                            </p>
+                            <p>
+                                We're working on Max deep research mode. This feels like using Cursor – Max will build a deep understanding of your customers and product to answer questions, pulling together context from all our stuff – like a real life analyst or PM, but automatic.
+                            </p>
+                            <p>
+                                Max will automate the setup of capturing events too. He'll integrate with your codebase to detect and add event tracking to new features that we detect automatically, flags, and error tracking.
+                            </p>
+                            <p>Using our existing features will speed up too - iImagine building a new feature, then asking Max to create a feature flag, set up an experiment, and drive a percentage of traffic to it, then sending them an in-app survey to get feedback after they’ve interacted with the new feature.
+                            </p>
+                            <p>
+                                Check out our AI roadmap below and share your feedback! If you have thoughts on how you’d like to interact with Max in PostHog, we’d love to hear from you.
+                            </p>
+                            <p>
+                                Feel free to <Link href="https://github.com/PostHog/posthog/issues" external>create a GitHub issue</Link> and we’ll add new ideas to our roadmap when we’re considering Max’s future superpowers.
+                            </p>
                         </div>
                     </div>
 
@@ -586,10 +706,7 @@ export const ProductMax = () => {
                                                     </h4>
                                                     {roadmap.attributes.dateCompleted && (
                                                         <p className="text-sm opacity-60 mt-2 mb-2">
-                                                            Shipped:{' '}
-                                                            {new Date(
-                                                                roadmap.attributes.dateCompleted
-                                                            ).toLocaleDateString()}
+                                                            Shipped: {new Date(roadmap.attributes.dateCompleted).toLocaleDateString()}
                                                         </p>
                                                     )}
                                                     <Markdown>{roadmap.attributes.description}</Markdown>
