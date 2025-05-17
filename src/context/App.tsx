@@ -274,7 +274,7 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
     }
 
     const getInitialSize = (key: string) => {
-        return (
+        const defaultSize =
             appSettings[key]?.size?.max ||
             (key.startsWith('ask-max')
                 ? appSettings['ask-max']?.size?.max
@@ -282,7 +282,10 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
                       width: window.innerWidth * 0.9,
                       height: window.innerHeight * 0.9,
                   })
-        )
+        return {
+            width: Math.min(defaultSize.width, window.innerWidth * 0.9),
+            height: Math.min(defaultSize.height, window.innerHeight * 0.9),
+        }
     }
 
     const updatePages = (element: WindowElement) => {
