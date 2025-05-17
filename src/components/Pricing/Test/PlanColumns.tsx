@@ -62,7 +62,7 @@ const Plan: React.FC<{ planData: PlanData }> = ({ planData }) => {
                     <div className="mt-auto">
                         <div className="space-y-2 mb-4">
                             <p className="mb-0 font-bold text-sm">
-                                {planData.projects} project{planData.projects > 1 && 's'}
+                                {planData.projects} {planData.projects === 1 ? 'project' : 'projects'}
                             </p>
                             <p className="mb-0 font-bold text-sm">{planData.dataRetention} data retention</p>
                         </div>
