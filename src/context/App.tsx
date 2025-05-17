@@ -81,7 +81,7 @@ const appSettings = {
                 width: 800,
                 height: 1000,
             },
-            fixed: true,
+            fixed: false,
         },
     },
     '/start': {
