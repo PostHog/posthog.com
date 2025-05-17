@@ -67,7 +67,7 @@ const MaxPromptButton = ({ text, className = '' }: MaxPromptButtonProps): JSX.El
     const maxUrl = `https://app.posthog.com/#panel=max:${encodedText}`
 
     return (
-        <button 
+        <button
             onClick={() => window.open(maxUrl, '_blank')}
             className={`text-red font-sans font-semibold border border-light rounded-full px-2 py-0.5 inline-block text-sm ${className}`}
         >
@@ -109,7 +109,6 @@ interface RoadmapItem {
 }
 
 const Roadmap = () => {
-
     const [activeProfile, setActiveProfile] = useState<ProfileData | null>(null)
     const { user, likeRoadmap, getJwt } = useUser()
     const { addToast } = useToast()
@@ -194,163 +193,195 @@ const Roadmap = () => {
 
     return (
         <>
+            <SideModal title="Sign into PostHog.com" open={authModalOpen} setOpen={setAuthModalOpen}>
+                <h4 className="mb-1 text-red">Sign into PostHog.com</h4>
+                <div className="bg-border dark:bg-border-dark p-4 mb-2">
+                    <p className="text-sm mb-2">
+                        <strong>Note: PostHog.com authentication is separate from your PostHog app.</strong>
+                    </p>
+                    <p className="text-sm mb-0">
+                        We suggest signing up with your personal email. Soon you'll be able to link your PostHog app
+                        account.
+                    </p>
+                </div>
+                <Authentication
+                    initialView="sign-in"
+                    onAuth={() => {
+                        setAuthModalOpen(false)
+                    }}
+                    showBanner={false}
+                    showProfile={false}
+                />
+            </SideModal>
             <h2 className="text-4xl text-center mb-8">Roadmap</h2>
-                    <div className="grid mdlg:grid-cols-3 border border-light">
-                        <div>
-                            <h3 className="text-base text-center bg-[#F5E2B2] px-4 py-2 mb-0 border-b border-light">Under consideration</h3>
-                            <div className="flex flex-col h-full divide-y divide-light">
-                                {roadmaps
-                                    .filter(
-                                        (roadmap: RoadmapItem) =>
-                                            !roadmap.attributes.projectedCompletion && !roadmap.attributes.complete
-                                    )
-                                    .map((roadmap: RoadmapItem) => (
-                                        <div key={roadmap.id} className="p-4">
-                                            <div className="flex space-x-4 [&>div.vote-box]:bg-[#F5E2B2]">
-                                                <VoteBox
-                                                    likeCount={roadmap.attributes.likes.data.length}
-                                                    liked={roadmap.attributes.likes.data.some(
-                                                        ({ id }) => id === user?.profile?.id
-                                                    )}
-                                                />
-                                                <div className="flex-1">
-                                                    <h4 className="text-lg font-bold mb-1 leading-tight">
-                                                        {roadmap.attributes.title}
-                                                    </h4>
-                                                    <Markdown className="dark:text-primary">{roadmap.attributes.description}</Markdown>
-                                                    <div className="mt-4">
-                                                        <CallToAction
-                                                            size="sm"
-                                                            type={
-                                                                roadmap.attributes.likes.data.some(
-                                                                    ({ id }) => id === user?.profile?.id
-                                                                )
-                                                                    ? 'outline'
-                                                                    : 'primary'
-                                                            }
-                                                            disabled={voteLoading[roadmap.id]}
-                                                            onClick={() => handleLike(roadmap)}
-                                                        >
-                                                            <span className="flex items-center space-x-1">
-                                                                {roadmap.attributes.likes.data.some(
-                                                                    ({ id }) => id === user?.profile?.id
-                                                                ) ? (
-                                                                    <>
-                                                                        <IconUndo className="w-4 h-4" />
-                                                                        <span>Unvote</span>
-                                                                    </>
-                                                                ) : (
-                                                                    <>
-                                                                        <IconThumbsUp className="w-4 h-4" />
-                                                                        <span>Vote</span>
-                                                                    </>
-                                                                )}
-                                                            </span>
-                                                        </CallToAction>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    ))}
-                            </div>
-                        </div>
-                        <div className="mdlg:border-x border-light ">
-                            <h3 className="text-base text-center bg-[#F5E2B2] px-4 py-2 mb-0 border-b border-light">In progress</h3>
-                            <div className="divide-y divide-light">
-                                {roadmaps
-                                    .filter(
-                                        (roadmap: RoadmapItem) =>
-                                            roadmap.attributes.projectedCompletion && !roadmap.attributes.complete
-                                    )
-                                    .map((roadmap: RoadmapItem) => (
-                                        <div key={roadmap.id} className="p-4">
-                                            <div className="flex space-x-4 [&>div.vote-box]:bg-[#F5E2B2]">
-                                                <VoteBox
-                                                    likeCount={roadmap.attributes.likes.data.length}
-                                                    liked={roadmap.attributes.likes.data.some(
-                                                        ({ id }) => id === user?.profile?.id
-                                                    )}
-                                                />
-                                                <div className="flex-1">
-                                                    <h4 className="text-lg font-bold mb-1 leading-tight">
-                                                        {roadmap.attributes.title}
-                                                    </h4>
-                                                    <Markdown>{roadmap.attributes.description}</Markdown>
-                                                    <div className="mt-4 flex gap-2">
-                                                        <CallToAction
-                                                            size="sm"
-                                                            type={subscribed[roadmap.id] ? 'outline' : 'primary'}
-                                                            disabled={loading[roadmap.id]}
-                                                            onClick={() => handleSubscribe(roadmap)}
-                                                            className="text-sm font-semibold [&>span]:flex [&>span]:gap-1.5 [&>span]:items-center"
-                                                        >
+            <div className="grid mdlg:grid-cols-3 border border-light">
+                <div>
+                    <h3 className="text-base text-center bg-[#F5E2B2] px-4 py-2 mb-0 border-b border-light">
+                        Under consideration
+                    </h3>
+                    <div className="flex flex-col h-full divide-y divide-light">
+                        {roadmaps
+                            .filter(
+                                (roadmap: RoadmapItem) =>
+                                    !roadmap.attributes.projectedCompletion && !roadmap.attributes.complete
+                            )
+                            .map((roadmap: RoadmapItem) => (
+                                <div key={roadmap.id} className="p-4">
+                                    <div className="flex space-x-4 [&>div.vote-box]:bg-[#F5E2B2]">
+                                        <VoteBox
+                                            likeCount={roadmap.attributes.likes.data.length}
+                                            liked={roadmap.attributes.likes.data.some(
+                                                ({ id }) => id === user?.profile?.id
+                                            )}
+                                        />
+                                        <div className="flex-1">
+                                            <h4 className="text-lg font-bold mb-1 leading-tight">
+                                                {roadmap.attributes.title}
+                                            </h4>
+                                            <Markdown className="dark:text-primary">
+                                                {roadmap.attributes.description}
+                                            </Markdown>
+                                            <div className="mt-4">
+                                                <CallToAction
+                                                    size="sm"
+                                                    type={
+                                                        roadmap.attributes.likes.data.some(
+                                                            ({ id }) => id === user?.profile?.id
+                                                        )
+                                                            ? 'outline'
+                                                            : 'primary'
+                                                    }
+                                                    disabled={voteLoading[roadmap.id]}
+                                                    onClick={() => handleLike(roadmap)}
+                                                >
+                                                    <span className="flex items-center space-x-1">
+                                                        {roadmap.attributes.likes.data.some(
+                                                            ({ id }) => id === user?.profile?.id
+                                                        ) ? (
                                                             <>
-                                                                {loading[roadmap.id] ? (
-                                                                    <Spinner className="w-[14px] h-[14px] !text-blue" />
-                                                                ) : subscribed[roadmap.id] ? (
-                                                                    <IconUndo className="w-5 h-5 inline-block" />
-                                                                ) : roadmap.attributes.betaAvailable ? null : (
-                                                                    <IconBell className="w-5 h-5 inline-block" />
-                                                                )}
-                                                                <span> 
-                                                                    {subscribed[roadmap.id]
-                                                                        ? 'Unsubscribe'
-                                                                        : roadmap.attributes.betaAvailable
-                                                                        ? 'Request early access'
-                                                                        : 'Get updates'}
-                                                                    {!subscribed[roadmap.id] &&
-                                                                        !roadmap.attributes.betaAvailable && (
-                                                                            <Tooltip
-                                                                                content="Get email notifications when the team shares updates about this feature or when it's released."
-                                                                                contentContainerClassName="max-w-xs"
-                                                                            >
-                                                                                <div className="inline-block relative">
-                                                                                    <IconInfo className="w-4 h-4 ml-1 opacity-50 inline-block" />
-                                                                                </div>
-                                                                            </Tooltip>
-                                                                        )}
-                                                                </span>
+                                                                <IconUndo className="w-4 h-4" />
+                                                                <span>Unvote</span>
                                                             </>
-                                                        </CallToAction>
-                                                    </div>
-                                                </div>
+                                                        ) : (
+                                                            <>
+                                                                <IconThumbsUp className="w-4 h-4" />
+                                                                <span>Vote</span>
+                                                            </>
+                                                        )}
+                                                    </span>
+                                                </CallToAction>
                                             </div>
                                         </div>
-                                    ))}
-                            </div>
-                        </div>
-                        <div>
-                            <h3 className="text-base text-center bg-[#F5E2B2] px-4 py-2 mb-0 border-b border-light">Shipped</h3>
-                            <div className="divide-y divide-light">
-                                {roadmaps
-                                    .filter((roadmap: RoadmapItem) => roadmap.attributes.complete)
-                                    .map((roadmap: RoadmapItem) => (
-                                        <div key={roadmap.id} className="p-4">
-                                            <div>
-                                                <div className="flex-1">
-                                                    <h4 className="text-lg font-bold mb-1 leading-tight">
-                                                        {roadmap.attributes.title}
-                                                    </h4>
-                                                    {roadmap.attributes.dateCompleted && (
-                                                        <p className="text-sm opacity-60 mt-2 mb-2">
-                                                            Shipped: {new Date(roadmap.attributes.dateCompleted).toLocaleDateString()}
-                                                        </p>
-                                                    )}
-                                                    <Markdown>{roadmap.attributes.description}</Markdown>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    ))}
-                            </div>
-                        </div>
+                                    </div>
+                                </div>
+                            ))}
                     </div>
+                </div>
+                <div className="mdlg:border-x border-light ">
+                    <h3 className="text-base text-center bg-[#F5E2B2] px-4 py-2 mb-0 border-b border-light">
+                        In progress
+                    </h3>
+                    <div className="divide-y divide-light">
+                        {roadmaps
+                            .filter(
+                                (roadmap: RoadmapItem) =>
+                                    roadmap.attributes.projectedCompletion && !roadmap.attributes.complete
+                            )
+                            .map((roadmap: RoadmapItem) => (
+                                <div key={roadmap.id} className="p-4">
+                                    <div className="flex space-x-4 [&>div.vote-box]:bg-[#F5E2B2]">
+                                        <VoteBox
+                                            likeCount={roadmap.attributes.likes.data.length}
+                                            liked={roadmap.attributes.likes.data.some(
+                                                ({ id }) => id === user?.profile?.id
+                                            )}
+                                        />
+                                        <div className="flex-1">
+                                            <h4 className="text-lg font-bold mb-1 leading-tight">
+                                                {roadmap.attributes.title}
+                                            </h4>
+                                            <Markdown>{roadmap.attributes.description}</Markdown>
+                                            <div className="mt-4 flex gap-2">
+                                                <CallToAction
+                                                    size="sm"
+                                                    type={subscribed[roadmap.id] ? 'outline' : 'primary'}
+                                                    disabled={loading[roadmap.id]}
+                                                    onClick={() => handleSubscribe(roadmap)}
+                                                    className="text-sm font-semibold [&>span]:flex [&>span]:gap-1.5 [&>span]:items-center"
+                                                >
+                                                    <>
+                                                        {loading[roadmap.id] ? (
+                                                            <Spinner className="w-[14px] h-[14px] !text-blue" />
+                                                        ) : subscribed[roadmap.id] ? (
+                                                            <IconUndo className="w-5 h-5 inline-block" />
+                                                        ) : roadmap.attributes.betaAvailable ? null : (
+                                                            <IconBell className="w-5 h-5 inline-block" />
+                                                        )}
+                                                        <span>
+                                                            {subscribed[roadmap.id]
+                                                                ? 'Unsubscribe'
+                                                                : roadmap.attributes.betaAvailable
+                                                                ? 'Request early access'
+                                                                : 'Get updates'}
+                                                            {!subscribed[roadmap.id] &&
+                                                                !roadmap.attributes.betaAvailable && (
+                                                                    <Tooltip
+                                                                        content="Get email notifications when the team shares updates about this feature or when it's released."
+                                                                        contentContainerClassName="max-w-xs"
+                                                                    >
+                                                                        <div className="inline-block relative">
+                                                                            <IconInfo className="w-4 h-4 ml-1 opacity-50 inline-block" />
+                                                                        </div>
+                                                                    </Tooltip>
+                                                                )}
+                                                        </span>
+                                                    </>
+                                                </CallToAction>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            ))}
+                    </div>
+                </div>
+                <div>
+                    <h3 className="text-base text-center bg-[#F5E2B2] px-4 py-2 mb-0 border-b border-light">Shipped</h3>
+                    <div className="divide-y divide-light">
+                        {roadmaps
+                            .filter((roadmap: RoadmapItem) => roadmap.attributes.complete)
+                            .map((roadmap: RoadmapItem) => (
+                                <div key={roadmap.id} className="p-4">
+                                    <div>
+                                        <div className="flex-1">
+                                            <h4 className="text-lg font-bold mb-1 leading-tight">
+                                                {roadmap.attributes.title}
+                                            </h4>
+                                            {roadmap.attributes.dateCompleted && (
+                                                <p className="text-sm opacity-60 mt-2 mb-2">
+                                                    Shipped:{' '}
+                                                    {new Date(roadmap.attributes.dateCompleted).toLocaleDateString()}
+                                                </p>
+                                            )}
+                                            <Markdown>{roadmap.attributes.description}</Markdown>
+                                        </div>
+                                    </div>
+                                </div>
+                            ))}
+                    </div>
+                </div>
+            </div>
 
-                    <div className="mt-auto text-center pt-8 flex flex-col gap-2 mdlg:flex-row mdlg:justify-center mdlg:items-center pb-8">
-                        <strong className="">Have an idea for Max?</strong>
-                        <CallToAction href="https://github.com/PostHog/posthog/issues" type="secondary" size="sm" childClassName="!text-primary !bg-[#FFF6DE]">
-                            Request a feature on GitHub
-                        </CallToAction>
-                    </div>
+            <div className="mt-auto text-center pt-8 flex flex-col gap-2 mdlg:flex-row mdlg:justify-center mdlg:items-center pb-8">
+                <strong className="">Have an idea for Max?</strong>
+                <CallToAction
+                    href="https://github.com/PostHog/posthog/issues"
+                    type="secondary"
+                    size="sm"
+                    childClassName="!text-primary !bg-[#FFF6DE]"
+                >
+                    Request a feature on GitHub
+                </CallToAction>
+            </div>
         </>
     )
 }
@@ -507,7 +538,6 @@ export const ProductMax = () => {
     const [activeProfile, setActiveProfile] = useState<ProfileData | null>(null)
     const { user, likeRoadmap, getJwt } = useUser()
     const { addToast } = useToast()
-    const [authModalOpen, setAuthModalOpen] = useState(false)
     const [loading, setLoading] = useState<{ [id: string]: boolean }>({})
     const [subscribed, setSubscribed] = useState<{ [id: string]: boolean }>({})
     const [voteLoading, setVoteLoading] = useState<{ [id: string]: boolean }>({})
@@ -516,8 +546,6 @@ export const ProductMax = () => {
     const [showBeta, setShowBeta] = useState(false)
     const [showMorePrompts, setShowMorePrompts] = useState(false)
     const posthog = usePostHog()
-
-    
 
     return (
         <>
@@ -528,26 +556,6 @@ export const ProductMax = () => {
             />
             <SideModal open={!!activeProfile} setOpen={(open) => setActiveProfile(open ? activeProfile : null)}>
                 {activeProfile && <Profile profile={activeProfile} />}
-            </SideModal>
-            <SideModal title="Sign into PostHog.com" open={authModalOpen} setOpen={setAuthModalOpen}>
-                <h4 className="mb-1 text-red">Sign into PostHog.com</h4>
-                <div className="bg-border dark:bg-border-dark p-4 mb-2">
-                    <p className="text-sm mb-2">
-                        <strong>Note: PostHog.com authentication is separate from your PostHog app.</strong>
-                    </p>
-                    <p className="text-sm mb-0">
-                        We suggest signing up with your personal email. Soon you'll be able to link your PostHog app
-                        account.
-                    </p>
-                </div>
-                <Authentication
-                    initialView="sign-in"
-                    onAuth={() => {
-                        setAuthModalOpen(false)
-                    }}
-                    showBanner={false}
-                    showProfile={false}
-                />
             </SideModal>
             <link
                 rel="preload"
@@ -592,21 +600,31 @@ export const ProductMax = () => {
                 crossOrigin="anonymous"
             />
             <div className="max-ai-body bg-[#FFF6DE] text-primary">
-                <div className={`${fullWidthContent ? 'max-w-full' : 'max-w-7xl mx-auto'} px-2 mdlg:px-5 py-4 md:pt-20 pb-0`}>
+                <div
+                    className={`${
+                        fullWidthContent ? 'max-w-full' : 'max-w-7xl mx-auto'
+                    } px-2 mdlg:px-5 py-4 md:pt-20 pb-0`}
+                >
                     <div className="flex flex-col-reverse mdlg:grid mdlg:grid-cols-2 gap-8 xl:gap-16 mb-12 xl:mb-16 px-2 mdlg:px-0">
                         <div className="flex flex-col gap-8 items-center justify-center max-w-4xl mx-auto">
                             <img src={headlineImg} alt="Max AI" className="w-full max-w-[604px]" />
 
                             <div>
                                 <img src={betaMobileImg} alt="Max AI" className="w-full mdlg:hidden max-w-[222px]" />
-                                <img src={betaDesktopImg} alt="Max AI" className="w-full hidden mdlg:block max-w-[437px]" />
+                                <img
+                                    src={betaDesktopImg}
+                                    alt="Max AI"
+                                    className="w-full hidden mdlg:block max-w-[437px]"
+                                />
 
-                                <form onSubmit={(e) => {
-                                    e.preventDefault()
-                                    posthog?.capture('max_ai_subscribed', { email })
-                                    setFormSubmitted(true)
-                                }}
-                                className="mt-4 text-center">
+                                <form
+                                    onSubmit={(e) => {
+                                        e.preventDefault()
+                                        posthog?.capture('max_ai_subscribed', { email })
+                                        setFormSubmitted(true)
+                                    }}
+                                    className="mt-4 text-center"
+                                >
                                     <div
                                         className={`subscription-form-container text-center duration-500 bg-white shadow-2xl rounded-full p-4 inline-flex items-center transition[max-width_0.5s_cubic-bezier(0.4,0,0.2,1)]`}
                                         style={{
@@ -616,16 +634,21 @@ export const ProductMax = () => {
                                     >
                                         {!formSubmitted ? (
                                             <>
-                                                <input 
-                                                    type="email" 
-                                                    placeholder="Enter your email" 
+                                                <input
+                                                    type="email"
+                                                    placeholder="Enter your email"
                                                     className="flex-1 border border-light rounded-l-full rounded-r-none px-4 py-2 bg-[#E5E7E0] text-lg"
                                                     value={email}
                                                     onChange={(e) => setEmail(e.target.value)}
                                                     required
                                                 />
                                                 <div>
-                                                    <CallToAction type="primary" size="lg" className="rounded-r-full rounded-l-none" childClassName="rounded-l-none rounded-r-full">
+                                                    <CallToAction
+                                                        type="primary"
+                                                        size="lg"
+                                                        className="rounded-r-full rounded-l-none"
+                                                        childClassName="rounded-l-none rounded-r-full"
+                                                    >
                                                         Join the list
                                                     </CallToAction>
                                                 </div>
@@ -639,46 +662,74 @@ export const ProductMax = () => {
                                 </form>
 
                                 <div className="mt-4 text-center">
-                                    Want to <button onClick={() => setShowBeta(!showBeta)} className="text-red font-semibold">try the beta?</button>
+                                    Want to{' '}
+                                    <button onClick={() => setShowBeta(!showBeta)} className="text-red font-semibold">
+                                        try the beta?
+                                    </button>
                                 </div>
                             </div>
                         </div>
                         <aside className="bg-[#F5E2B2] px-4 pt-4 max-w-2xl w-full mx-auto rounded-lg shadow-2xl leading-[0] text-center">
-                            <CloudinaryImage src="https://res.cloudinary.com/dmukukwp6/image/upload/i_just_asked_max_a4bd43bb9f.png" className="max-w-[442px] mx-auto" />
+                            <CloudinaryImage
+                                src="https://res.cloudinary.com/dmukukwp6/image/upload/i_just_asked_max_a4bd43bb9f.png"
+                                className="max-w-[442px] mx-auto"
+                            />
                         </aside>
                     </div>
 
-
-                    <div className={`transition-all duration-500 ease-in-out overflow-hidden ${showBeta ? 'max-h-[800px] opacity-100' : 'max-h-0 opacity-0'}`}>
-                            <div className="bg-white border border-light rounded p-4 mb-12 font-serif">
-                                        <h3 className="font-bold">Try Max AI beta</h3>
-                                        <div className="mb-4">
-                                            <p className="mb-2">
-                                                <strong>1. New to PostHog?</strong>{' '}<br />
-                                                <span className="inline-block pl-5">Install with Max AI in 90 seconds or <CallToAction href="https://app.posthog.com/signup" type="custom" size="sm" className="!bg-transparent !top-0 !border-none" childClassName="!p-0 !bg-transparent !text-red !border-none !font-semibold !text-base !border-none !m-0 !border-none !translate-y-0">sign up the old fashioned way</CallToAction>.</span>
-                                            </p>
-                                            <div className="pl-5">
-                                                <IntegrationPrompt />
-                                            </div>
-                                        </div>
-                                        <p className="mb-0">
-                                            <strong>2. Already use PostHog?</strong>{' '}<br />
-                                            <span className="inline-block pl-5">Look for the Max button in the side panel in the app (top right)!</span>
-                                        </p>
+                    <div
+                        className={`transition-all duration-500 ease-in-out overflow-hidden ${
+                            showBeta ? 'max-h-[800px] opacity-100' : 'max-h-0 opacity-0'
+                        }`}
+                    >
+                        <div className="bg-white border border-light rounded p-4 mb-12 font-serif">
+                            <h3 className="font-bold">Try Max AI beta</h3>
+                            <div className="mb-4">
+                                <p className="mb-2">
+                                    <strong>1. New to PostHog?</strong> <br />
+                                    <span className="inline-block pl-5">
+                                        Install with Max AI in 90 seconds or{' '}
+                                        <CallToAction
+                                            href="https://app.posthog.com/signup"
+                                            type="custom"
+                                            size="sm"
+                                            className="!bg-transparent !top-0 !border-none"
+                                            childClassName="!p-0 !bg-transparent !text-red !border-none !font-semibold !text-base !border-none !m-0 !border-none !translate-y-0"
+                                        >
+                                            sign up the old fashioned way
+                                        </CallToAction>
+                                        .
+                                    </span>
+                                </p>
+                                <div className="pl-5">
+                                    <IntegrationPrompt />
+                                </div>
                             </div>
+                            <p className="mb-0">
+                                <strong>2. Already use PostHog?</strong> <br />
+                                <span className="inline-block pl-5">
+                                    Look for the Max button in the side panel in the app (top right)!
+                                </span>
+                            </p>
+                        </div>
                     </div>
 
                     <div className="text-center mb-12">
-                        <img src={descriptionMobileImg} alt="Max AI" className="w-full mdlg:hidden max-w-[412px] mx-auto" />
-                        <img src={descriptionDesktopImg} alt="Max AI" className="w-full hidden mdlg:block max-w-[619px] mx-auto" />
+                        <img
+                            src={descriptionMobileImg}
+                            alt="Max AI"
+                            className="w-full mdlg:hidden max-w-[412px] mx-auto"
+                        />
+                        <img
+                            src={descriptionDesktopImg}
+                            alt="Max AI"
+                            className="w-full hidden mdlg:block max-w-[619px] mx-auto"
+                        />
                     </div>
 
                     <div className="mb-12">
                         <div className="max-w-3xl mx-auto p-4 mdlg:p-8 bg-white shadow-xl rounded-lg prose dark:text-primary font-serif">
-                        <h3 className="font-bold">
-                                We're building a
-                                real product manager in your browser.
-                            </h3>
+                            <h3 className="font-bold">We're building a real product manager in your browser.</h3>
                             <p>Max AI is so much more than just a chat interface for your data. </p>
 
                             <h3 className="font-bold">What Max can do today</h3>
@@ -692,7 +743,7 @@ export const ProductMax = () => {
                                         <MaxPromptButton text="What's my ARR?" />
                                         <MaxPromptButton text="Where do my users drop off?" />
                                         {!showMorePrompts && (
-                                            <button 
+                                            <button
                                                 onClick={() => setShowMorePrompts(true)}
                                                 className="text-red font-semibold border border-light rounded-full px-2 py-0.5 inline-block text-sm font-sans"
                                             >
@@ -750,123 +801,133 @@ export const ProductMax = () => {
                         </div>
                     </div>
 
-                <section className="mt-20 dark:text-primary">
-                    <Roadmap />
-                </section>
+                    <section className="mt-20 dark:text-primary">
+                        <Roadmap />
+                    </section>
 
-                <section id="pricing" className="pt-20">
-                    <div className="flex flex-col-reverse md:flex-row md:gap-12">
-                        <div className="flex-1">
-                            <h2 className="text-4xl md:text-5xl">Usage-based pricing</h2>
-                            <p className="mb-2">We have big free tiers on all our products.</p>
-                            <p>
-                            <strong>Max is free during beta</strong> and doesn't cost anything extra. We will charge something, but with a generous free tier, when he's out of beta.</p>
-                        </div>
-                        <div className="md:w-96 md:text-right mb-8 md:mb-0 -mt-16">
-                            <CloudinaryImage
-                                alt="Max AI assistant"
-                                placeholder="blurred"
-                                className="w-full max-w-[250px]"
-                                src="https://res.cloudinary.com/dmukukwp6/image/upload/robot_f2dfddda15.png"
-                            />
-                        </div>
-                    </div>
-
-                    <div className="lg:flex justify-between items-start gap-12 -mx-5 md:mx-0">
-                        <div className="flex-grow overflow-auto px-5 md:px-0 mb-8 md:mb-0">
-                            <Plans showTitle={false} groupsToShow={['max_ai']} />
-                        </div>
-                    </div>
-                </section>
-
-                <section id="posthog-vs">
-                    <h2 className="text-center text-3xl lg:text-4xl">PostHog vs...</h2>
-                    <Comparison comparison={comparison} columnCount={comparisonColumnCount} className="text-primary" />
-                </section>
-
-                <section className="">
-                    <h3 className="text-center mb-8">So, what's best for you?</h3>
-                    <div className="@container mb-8 mx-5 md:mx-0 grid md:grid-cols-2 gap-4">
-                        <VsCompetitor
-                            title="Reasons a competitor may be best for you (for now...)"
-                            image={
+                    <section id="pricing" className="pt-20">
+                        <div className="flex flex-col-reverse md:flex-row md:gap-12">
+                            <div className="flex-1">
+                                <h2 className="text-4xl md:text-5xl">Usage-based pricing</h2>
+                                <p className="mb-2">We have big free tiers on all our products.</p>
+                                <p>
+                                    <strong>Max is free during beta</strong> and doesn't cost anything extra. We will
+                                    charge something, but with a generous free tier, when he's out of beta.
+                                </p>
+                            </div>
+                            <div className="md:w-96 md:text-right mb-8 md:mb-0 -mt-16">
                                 <CloudinaryImage
-                                    src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/images/products/competitors-ff.png"
-                                    className="max-w-[176px]"
+                                    alt="Max AI assistant"
+                                    placeholder="blurred"
+                                    className="w-full max-w-[250px]"
+                                    src="https://res.cloudinary.com/dmukukwp6/image/upload/robot_f2dfddda15.png"
                                 />
-                            }
-                            className="!bg-transparent"
-                        >
-                            <ul>
-                                <li>You like alt-tabbing and copy-pasting to other tools, like ChatGPT or Claude</li>
-                                <li>
-                                    You'd like to talk with your assistant out loud (Max doesn't have voice mode yet)
-                                </li>
-                                <li>You want to remake a pic in Studio Ghibli's style (ChatGPT is still best)</li>
-                            </ul>
-                        </VsCompetitor>
-                        <VsPostHog className="!bg-transparent">
-                            <ul>
-                                <li>You want questions and answers in one place</li>
-                                <li>
-                                    You want the AI to have access to data by default, with no copy-pasting or context
-                                    adding
-                                </li>
-                                <li>You want it to help create insights you can directly edit yourself later</li>
-                                <li>You want to query your data, replays, and more</li>
-                            </ul>
-                        </VsPostHog>
-                    </div>
+                            </div>
+                        </div>
 
-                    <p className="text-center text-sm font-medium">
-                        Have questions about Max AI? <br className="md:hidden" />
-                        <Link to={`/questions/${product.slug}`}>Ask the community</Link> or{' '}
-                        <Link to="/talk-to-a-human">book a demo</Link>.
-                    </p>
-                </section>
+                        <div className="lg:flex justify-between items-start gap-12 -mx-5 md:mx-0">
+                            <div className="flex-grow overflow-auto px-5 md:px-0 mb-8 md:mb-0">
+                                <Plans showTitle={false} groupsToShow={['max_ai']} />
+                            </div>
+                        </div>
+                    </section>
 
-                <section id="docs" className="py-16">
-                    <h3 className="text-3xl lg:text-4xl text-center mb-2">Explore the docs</h3>
-                    <p className="mt-0 text-opacity-70 text-center">
-                        Get a more technical overview of how everything works <Link to="/docs">in our docs</Link>.
-                    </p>
-                    <DocLinks
-                        menu={docsMenu.children.find(({ name }) => name.toLowerCase() === 'max ai')?.children || []}
-                    />
-                </section>
+                    <section id="posthog-vs">
+                        <h2 className="text-center text-3xl lg:text-4xl">PostHog vs...</h2>
+                        <Comparison
+                            comparison={comparison}
+                            columnCount={comparisonColumnCount}
+                            className="text-primary"
+                        />
+                    </section>
 
-                <section id="team">
-                    <h3 className="text-3xl lg:text-4xl text-center">Meet the team</h3>
+                    <section className="">
+                        <h3 className="text-center mb-8">So, what's best for you?</h3>
+                        <div className="@container mb-8 mx-5 md:mx-0 grid md:grid-cols-2 gap-4">
+                            <VsCompetitor
+                                title="Reasons a competitor may be best for you (for now...)"
+                                image={
+                                    <CloudinaryImage
+                                        src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/images/products/competitors-ff.png"
+                                        className="max-w-[176px]"
+                                    />
+                                }
+                                className="!bg-transparent"
+                            >
+                                <ul>
+                                    <li>
+                                        You like alt-tabbing and copy-pasting to other tools, like ChatGPT or Claude
+                                    </li>
+                                    <li>
+                                        You'd like to talk with your assistant out loud (Max doesn't have voice mode
+                                        yet)
+                                    </li>
+                                    <li>You want to remake a pic in Studio Ghibli's style (ChatGPT is still best)</li>
+                                </ul>
+                            </VsCompetitor>
+                            <VsPostHog className="!bg-transparent">
+                                <ul>
+                                    <li>You want questions and answers in one place</li>
+                                    <li>
+                                        You want the AI to have access to data by default, with no copy-pasting or
+                                        context adding
+                                    </li>
+                                    <li>You want it to help create insights you can directly edit yourself later</li>
+                                    <li>You want to query your data, replays, and more</li>
+                                </ul>
+                            </VsPostHog>
+                        </div>
 
-                    <p className="text-center mb-0">
-                        PostHog works in small teams. The <Link to={teamSlug}>{team}</Link> team is responsible for
-                        building this product.
-                    </p>
-                    <TeamMembers teamName={team} setActiveProfile={setActiveProfile} />
-                </section>
+                        <p className="text-center text-sm font-medium">
+                            Have questions about Max AI? <br className="md:hidden" />
+                            <Link to={`/questions/${product.slug}`}>Ask the community</Link> or{' '}
+                            <Link to="/talk-to-a-human">book a demo</Link>.
+                        </p>
+                    </section>
 
-                <section id="questions" className="my-20 px-5 hidden">
-                    <h3 className="text-3xl lg:text-4xl text-center mb-2">Questions?</h3>
+                    <section id="docs" className="py-16">
+                        <h3 className="text-3xl lg:text-4xl text-center mb-2">Explore the docs</h3>
+                        <p className="mt-0 text-opacity-70 text-center">
+                            Get a more technical overview of how everything works <Link to="/docs">in our docs</Link>.
+                        </p>
+                        <DocLinks
+                            menu={docsMenu.children.find(({ name }) => name.toLowerCase() === 'max ai')?.children || []}
+                        />
+                    </section>
 
-                    <p className="text-center mb-4">See more questions (or ask your own!) in our community forums.</p>
+                    <section id="team">
+                        <h3 className="text-3xl lg:text-4xl text-center">Meet the team</h3>
 
-                    <div className="text-center mb-8">
-                        <CallToAction href={`/questions/${product.slug}`} type="secondary" size="sm">
-                            <span>View {product.lowercase} questions</span>
-                        </CallToAction>
-                    </div>
+                        <p className="text-center mb-0">
+                            PostHog works in small teams. The <Link to={teamSlug}>{team}</Link> team is responsible for
+                            building this product.
+                        </p>
+                        <TeamMembers teamName={team} setActiveProfile={setActiveProfile} />
+                    </section>
 
-                    <Questions topicIds={[391]} />
-                </section>
+                    <section id="questions" className="my-20 px-5 hidden">
+                        <h3 className="text-3xl lg:text-4xl text-center mb-2">Questions?</h3>
 
-                <section className="py-12">
-                    <PairsWith items={pairsWithItemCount}>
-                        {PairsWithArray.map((card, index) => {
-                            return <PairsWithItem {...card} key={index} />
-                        })}
-                    </PairsWith>
-                </section>
+                        <p className="text-center mb-4">
+                            See more questions (or ask your own!) in our community forums.
+                        </p>
 
+                        <div className="text-center mb-8">
+                            <CallToAction href={`/questions/${product.slug}`} type="secondary" size="sm">
+                                <span>View {product.lowercase} questions</span>
+                            </CallToAction>
+                        </div>
+
+                        <Questions topicIds={[391]} />
+                    </section>
+
+                    <section className="py-12">
+                        <PairsWith items={pairsWithItemCount}>
+                            {PairsWithArray.map((card, index) => {
+                                return <PairsWithItem {...card} key={index} />
+                            })}
+                        </PairsWith>
+                    </section>
                 </div>
             </div>
             <div className="max-ai-body bg-[#FFF6DE]">
@@ -876,7 +937,7 @@ export const ProductMax = () => {
                     </section>
                 </div>
             </div>
-{/* 
+            {/* 
             <div className={`${fullWidthContent ? 'max-w-full px-8' : 'max-w-7xl mx-auto'} px-5 py-10 md:pt-20 pb-0`}>
 
                 <div className="mt-12">
