@@ -57,6 +57,25 @@ import descriptionMobileImg from './description-mobile.svg'
 import usePostHog from 'hooks/usePostHog'
 import IntegrationPrompt from 'components/IntegrationPrompt'
 
+interface MaxPromptButtonProps {
+    text: string
+    className?: string
+}
+
+const MaxPromptButton = ({ text, className = '' }: MaxPromptButtonProps): JSX.Element => {
+    const encodedText = encodeURIComponent(text.toLowerCase())
+    const maxUrl = `https://app.posthog.com/#panel=max:!${encodedText}`
+
+    return (
+        <button 
+            onClick={() => window.open(maxUrl, '_blank')}
+            className={`text-red dark:text-yellow font-sans font-semibold border border-light dark:border-dark rounded-full px-2 py-0.5 inline-block text-sm ${className}`}
+        >
+            {text}
+        </button>
+    )
+}
+
 interface ProfileData {
     firstName: string
     lastName: string
@@ -164,37 +183,6 @@ const subfeatures = [
     },
 ]
 
-const questions = [
-    {
-        question: 'Where do my users drop off?',
-        url: 'https://app.posthog.com/#panel=max:!%where%20do%users%dropoff%3F',
-    },
-    {
-        question: 'What are my most popular pages?',
-        url: 'https://app.posthog.com/#panel=max:!what are my most popular pages?',
-    },
-    {
-        question: 'What is distribution of paid vs. organic traffic?',
-        url: 'https://app.posthog.com/#panel=max:!what is the distribution of paid vs organic traffic?',
-    },
-    {
-        question: 'Write an SQL query for me?',
-        url: 'https://app.posthog.com/#panel=max:!write an sql query for me',
-    },
-    {
-        question: 'What is my ARR?',
-        url: 'https://app.posthog.com/#panel=max:!what is my arr?',
-    },
-    {
-        question: 'How many pageviews did we get today?',
-        url: 'https://app.posthog.com/#panel=max:!how many pageviews did we get today?',
-    },
-    {
-        question: 'Show me a signup funnel',
-        url: 'https://app.posthog.com/#panel=max:!show me a signup funnel',
-    },
-]
-
 const comparisonColumnCount = 4
 const comparison = [
     {
@@ -287,6 +275,7 @@ export const ProductMax = () => {
     const [email, setEmail] = useState('')
     const [formSubmitted, setFormSubmitted] = useState(false)
     const [showBeta, setShowBeta] = useState(false)
+    const [showMorePrompts, setShowMorePrompts] = useState(false)
     const posthog = usePostHog()
 
     const { roadmaps, isLoading, mutate } = useRoadmaps({
@@ -500,7 +489,7 @@ export const ProductMax = () => {
                                         <div className="mb-4">
                                             <p className="mb-2">
                                                 <strong>1. New to PostHog?</strong>{' '}<br />
-                                                <span className="inline-block pl-5">Install with Max AI in 90 seconds.</span>
+                                                <span className="inline-block pl-5">Install with Max AI in 90 seconds or <CallToAction href="https://app.posthog.com/signup" type="custom" size="sm" className="!bg-transparent !top-0 !border-none" childClassName="!p-0 !bg-transparent !text-red dark:!text-yellow !border-none !font-semibold !text-base !border-none !m-0 !border-none !translate-y-0">sign up the old fashioned way</CallToAction>.</span>
                                             </p>
                                             <div className="pl-5">
                                                 <IntegrationPrompt />
@@ -519,24 +508,43 @@ export const ProductMax = () => {
                     </div>
 
                     <div className="">
-                        <div className="max-w-2xl mx-auto p-4 mdlg:p-8 bg-white shadow-xl rounded-lg prose font-serif">
+                        <div className="max-w-3xl mx-auto p-4 mdlg:p-8 bg-white dark:bg-dark shadow-xl rounded-lg prose font-serif">
                         <h3 className="font-bold">
-                                We're making Max so much more than just a chat interface for your data. We're building a
+                                We're building a
                                 real product manager in your browser.
                             </h3>
+                            <p>Max AI is so much more than just a chat interface for your data. </p>
 
                             <h3 className="font-bold">What Max can do today</h3>
-                            <ol>
+                            <ol className="space-y-1">
                                 <li>
                                     Answers product usage questions
-                                    <div style={{ margin: '8px 0;' }}>
-                                        <button>What's my churn rate?</button>
-                                        <button>Show me user retention by country</button>
-                                        <button>What's our most popular feature?</button>
-                                        <button>What's my ARR?</button>
-                                        <button>Show more prompts</button>
+                                    <div className="flex flex-wrap gap-1 my-1">
+                                        <MaxPromptButton text="What's my churn rate?" />
+                                        <MaxPromptButton text="Show me user retention by country" />
+                                        <MaxPromptButton text="What's our most popular feature?" />
+                                        <MaxPromptButton text="What's my ARR?" />
+                                        {!showMorePrompts && (
+                                            <button 
+                                                onClick={() => setShowMorePrompts(true)}
+                                                className="text-red dark:text-yellow font-semibold border border-light dark:border-dark rounded-full px-2 py-0.5 inline-block text-sm font-sans"
+                                            >
+                                                Show more prompts
+                                            </button>
+                                        )}
+
+                                        {showMorePrompts && (
+                                            <>
+                                                <MaxPromptButton text="Where do my users drop off?" />
+                                                <MaxPromptButton text="What are my most popular pages?" />
+                                                <MaxPromptButton text="What is distribution of paid vs. organic traffic?" />
+                                                <MaxPromptButton text="Write an SQL query for me?" />
+                                                <MaxPromptButton text="How many pageviews did we get today?" />
+                                                <MaxPromptButton text="Show me a signup funnel" />
+                                            </>
+                                        )}
                                     </div>
-                                    <small>
+                                    <small className="block mb-1">
                                         (If you're signed into PostHog, click one of these prompts to try it out!)
                                     </small>
                                 </li>
@@ -801,18 +809,6 @@ export const ProductMax = () => {
                         </div>
                     </CalloutBox>
                 </div>
-
-                <section>
-                    <div className={`${fullWidthContent ? 'max-w-full px-8' : 'max-w-7xl mx-auto'} px-5 pb-0`}>
-                        <div className="bg-accent dark:bg-accent-dark -mx-5 md:-mx-8">
-                            <Marquee product={product.capitalized} shortFade>
-                                {questions.map((question, index) => {
-                                    return <Question {...question} key={index} />
-                                })}
-                            </Marquee>
-                        </div>
-                    </div>
-                </section>
 
                 <section id="pricing" className="pt-20">
                     <div className="flex flex-col-reverse md:flex-row md:gap-12">
