@@ -57,6 +57,8 @@ import {
     IconArchive,
     IconCheck,
     IconStack,
+    IconQuestion,
+    IconMagic,
 } from '@posthog/icons'
 import CloudinaryImage from 'components/CloudinaryImage'
 import useProducts from 'hooks/useProducts'
@@ -342,6 +344,38 @@ const products: Product[] = [
                     </div>
                 </>
             )
+        },
+    },
+    {
+        name: 'Max AI',
+        color: 'purple',
+        Icon: IconMagicWand,
+        description: 'AI-powered product analyst and assistant',
+        types: ['AI'],
+        features: [
+            { title: 'Answers product usage questions', Icon: IconQuestion },
+            { title: 'Generates SQL queries', Icon: IconHogQL },
+            { title: 'Installs itself', Icon: IconMagic },
+        ],
+        Images: () => {
+            return (
+                <>
+                    <div className="block dark:hidden">
+                        <CloudinaryImage src="https://res.cloudinary.com/dmukukwp6/image/upload/max_489a283f4c.png" />
+                    </div>
+                    <div className="hidden dark:block">
+                        <CloudinaryImage src="https://res.cloudinary.com/dmukukwp6/image/upload/max_489a283f4c.png" />
+                    </div>
+                </>
+            )
+        },
+        status: 'WIP',
+        badge: 'BETA',
+        pricing: {
+            cta: {
+                url: '/max',
+                text: 'Learn more',
+            },
         },
     },
     {
@@ -659,25 +693,35 @@ const ProductDetails = ({ product, onNext, onPrev }: { product: Product; onNext:
             {(billingData || pricing) && (
                 <div className="grid md:grid-cols-3 md:gap-0 gap-2 p-6 border-t border-border dark:border-dark bg-accent dark:bg-accent-dark relative">
                     <div>
-                        <h3 className="text-sm opacity-60 font-semibold m-0">Monthly free tier</h3>
-                        {pricing?.FreeTier ? (
-                            <pricing.FreeTier />
-                        ) : (
-                            <p className="text-sm text-green font-bold m-0">
-                                {numberToWords(billingData?.freeLimit)} {billingData?.billingData.unit}s
-                            </p>
-                        )}
+                        {pricing?.FreeTier ||
+                            (billingData && (
+                                <div>
+                                    <h3 className="text-sm opacity-60 font-semibold m-0">Monthly free tier</h3>
+                                    {pricing?.FreeTier ? (
+                                        <pricing.FreeTier />
+                                    ) : (
+                                        <p className="text-sm text-green font-bold m-0">
+                                            {numberToWords(billingData?.freeLimit)} {billingData?.billingData.unit}s
+                                        </p>
+                                    )}
+                                </div>
+                            ))}
                     </div>
                     <div>
-                        <h3 className="text-sm opacity-60 font-semibold m-0">Starts at</h3>
-                        {pricing?.StartsAt ? (
-                            <pricing.StartsAt />
-                        ) : (
-                            <p className="text-sm m-0">
-                                <strong>${billingData?.startsAt}</strong>
-                                <span className="opacity-60">/{billingData?.billingData.unit}</span>
-                            </p>
-                        )}
+                        {pricing?.StartsAt ||
+                            (billingData && (
+                                <div>
+                                    <h3 className="text-sm opacity-60 font-semibold m-0">Starts at</h3>
+                                    {pricing?.StartsAt ? (
+                                        <pricing.StartsAt />
+                                    ) : (
+                                        <p className="text-sm m-0">
+                                            <strong>${billingData?.startsAt}</strong>
+                                            <span className="opacity-60">/{billingData?.billingData.unit}</span>
+                                        </p>
+                                    )}
+                                </div>
+                            ))}
                     </div>
                     <div className="md:ml-auto">
                         <CallToAction type="outline" size="sm" to={pricing?.cta?.url || '/pricing'}>

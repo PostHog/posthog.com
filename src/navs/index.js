@@ -2246,10 +2246,6 @@ export const docsMenu = {
                         {
                             name: 'Max AI',
                             url: '/docs/max-ai',
-                            badge: {
-                                title: 'Beta',
-                                className: 'uppercase !bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',
-                            },
                         },
                         {
                             name: 'Toolbar',
@@ -3551,6 +3547,43 @@ export const docsMenu = {
                 },
             ],
         },
+        {
+            name: 'Max AI',
+            icon: 'IconMagicWand',
+            color: 'purple',
+            url: '/docs/max-ai',
+            description: 'AI-powered product analyst and assistant',
+            children: [
+                {
+                    name: 'Max AI',
+                },
+                {
+                    name: 'Overview',
+                    url: '/docs/max-ai',
+                    icon: 'IconHome',
+                    color: 'seagreen',
+                },
+                {
+                    name: 'Getting started',
+                    url: '/docs/max-ai#how-do-i-access-max',
+                    icon: 'IconBook',
+                    color: 'blue',
+                    featured: true,
+                },
+                {
+                    name: 'Data access',
+                    url: '/docs/max-ai#what-access-does-max-have-to-my-data',
+                    icon: 'IconDatabase',
+                    color: 'orange',
+                },
+                {
+                    name: 'Security',
+                    url: '/docs/max-ai#is-my-data-shared-with-third-parties',
+                    icon: 'IconShield',
+                    color: 'red',
+                },
+            ],
+        },
     ],
 }
 
@@ -3662,6 +3695,12 @@ export const productMenu = {
             icon: 'IconDatabase',
             color: 'lilac',
             url: '/data-warehouse',
+        },
+        {
+            name: 'Max AI',
+            icon: 'IconMagicWand',
+            color: 'purple',
+            url: '/max',
         },
         {
             name: 'Product OS',
