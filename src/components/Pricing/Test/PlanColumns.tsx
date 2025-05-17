@@ -1,10 +1,9 @@
-import React, { useState } from 'react'
 import { IconCheck, IconChevronDown } from '@posthog/icons'
-import cntl from 'cntl'
-import Tooltip from 'components/Tooltip'
-import Plans, { CTA as PlanCTA, PricingTiers } from '../Plans'
-import { section, SectionHeader } from './Sections'
 import Link from 'components/Link'
+import Tooltip from 'components/Tooltip'
+import React, { useState } from 'react'
+import { CTA as PlanCTA } from '../Plans'
+import { section, SectionHeader } from './Sections'
 
 interface PlanData {
     title: string
