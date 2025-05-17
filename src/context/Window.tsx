@@ -17,6 +17,29 @@ export interface AppWindow {
     fromHistory?: boolean
     props: any
     ref?: React.RefObject<HTMLDivElement>
+    sizeDefaults: {
+        min: {
+            width: number
+            height: number
+        }
+        max: {
+            width: number
+            height: number
+        }
+    }
+    positionDefaults?: {
+        x: number
+        y: number
+    }
+    size: {
+        width: number
+        height: number
+    }
+    position: {
+        x: number
+        y: number
+    }
+    fixedSize: boolean
 }
 
 interface WindowProviderProps {

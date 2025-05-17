@@ -24,132 +24,6 @@ import { ChatProvider } from '../../hooks/useChat'
 import Inbox from 'components/Inbox'
 import Handbook from '../../templates/Handbook'
 
-const getSizeDefaults = () => ({
-    max: {
-        width: window.innerWidth * 0.9,
-        height: window.innerHeight * 0.9,
-    },
-    min: {
-        width: window.innerWidth * 0.2,
-        height: window.innerHeight * 0.2,
-    },
-})
-
-const fixedAppSizes = {
-    '/': {
-        min: {
-            width: 700,
-            height: 500,
-        },
-        max: {
-            width: 800,
-            height: 1000,
-        },
-    },
-    '/start': {
-        max: {
-            width: 850,
-            height: 580,
-        },
-        min: {
-            width: 850,
-            height: 580,
-        },
-    },
-    '/signup': {
-        max: {
-            width: 900,
-            height: 750,
-        },
-        min: {
-            width: 900,
-            height: 750,
-        },
-    },
-    '/display-options': {
-        max: {
-            width: 600,
-            height: 400,
-        },
-        min: {
-            width: 600,
-            height: 400,
-        },
-    },
-    '/why': {
-        max: {
-            width: 750,
-            height: 575,
-        },
-        min: {
-            width: 750,
-            height: 575,
-        },
-    },
-    '/demo': {
-        max: {
-            width: 960,
-            height: 682,
-        },
-        min: {
-            width: 960,
-            height: 682,
-        },
-    },
-    'ask-max': {
-        max: {
-            width: 400,
-            height: 600,
-        },
-        min: {
-            width: 400,
-            height: 600,
-        },
-    },
-    'community-auth': {
-        max: {
-            width: 400,
-            height: 369,
-        },
-        min: {
-            width: 400,
-            height: 369,
-        },
-    },
-} as const
-
-const getPositionDefaults = (
-    item: AppWindowType,
-    size: { width: number; height: number },
-    windows: AppWindowType[]
-) => {
-    if (item.key.startsWith('ask-max')) {
-        return {
-            x: window.innerWidth - size.width - 20,
-            y: window.innerHeight - size.height - 20,
-        }
-    }
-
-    const sortedWindows = [...windows].sort((a, b) => b.zIndex - a.zIndex)
-    const previousWindow = sortedWindows[1]
-
-    if (previousWindow && !previousWindow.key.startsWith('ask-max')) {
-        const ref = previousWindow.ref?.current
-        if (ref) {
-            const rect = ref.getBoundingClientRect()
-            return {
-                x: rect.left + 10,
-                y: rect.top + 10,
-            }
-        }
-    }
-
-    return {
-        x: window.innerWidth / 2 - size.width / 2,
-        y: window.innerHeight / 2 - size.height / 2,
-    }
-}
-
 const snapThreshold = -50
 
 const Router = (props) => {
@@ -163,26 +37,6 @@ const Router = (props) => {
     return children
 }
 
-const getInitialSize = (
-    sizeDefaults: { max: { width: number; height: number }; min: { width: number; height: number } },
-    windows: AppWindowType[]
-) => {
-    const sortedWindows = [...windows].sort((a, b) => b.zIndex - a.zIndex)
-    const previousWindow = sortedWindows[1]
-
-    if (previousWindow && !previousWindow.key.startsWith('ask-max')) {
-        const ref = previousWindow.ref?.current
-        if (ref) {
-            const rect = ref.getBoundingClientRect()
-            return {
-                width: Math.min(Math.max(sizeDefaults.max.width, rect.width), window.innerWidth - rect.left - 20),
-                height: Math.min(Math.max(sizeDefaults.max.height, rect.height), window.innerHeight - rect.top - 20),
-            }
-        }
-    }
-    return { width: sizeDefaults.max.width, height: sizeDefaults.max.height }
-}
-
 export default function AppWindow({ item, constraintsRef }: { item: AppWindowType; constraintsRef: any }) {
     const {
         minimizeWindow,
@@ -193,22 +47,15 @@ export default function AppWindow({ item, constraintsRef }: { item: AppWindowTyp
         addWindow,
         windows,
         updateWindowRef,
+        updateWindow,
+        getPositionDefaults,
     } = useApp()
     const controls = useDragControls()
-    const initialSizeKey = item.key as keyof typeof fixedAppSizes
-    const [sizeDefaults, setSizeDefaults] = useState(
-        fixedAppSizes[initialSizeKey] || (item.key.startsWith('ask-max') ? fixedAppSizes['ask-max'] : getSizeDefaults())
-    )
+    const sizeDefaults = item.sizeDefaults
     const [previousSize, setPreviousSize] = useState({ width: sizeDefaults.max.width, height: sizeDefaults.max.height })
-    const [size, setSize] = useState(() =>
-        fixedAppSizes[initialSizeKey]
-            ? { width: fixedAppSizes[initialSizeKey].max.width, height: fixedAppSizes[initialSizeKey].max.height }
-            : item.key.startsWith('ask-max')
-            ? { width: fixedAppSizes['ask-max'].max.width, height: fixedAppSizes['ask-max'].max.height }
-            : getInitialSize(sizeDefaults, windows)
-    )
+    const size = item.size
     const [previousPosition, setPreviousPosition] = useState({ x: 0, y: 0 })
-    const [position, setPosition] = useState(() => getPositionDefaults(item, size, windows))
+    const position = item.position
     const [snapIndicator, setSnapIndicator] = useState<'left' | 'right' | null>(null)
     const [windowOptionsTooltipVisible, setWindowOptionsTooltipVisible] = useState(false)
     const [menu, setMenu] = useState<IMenu[]>([])
@@ -217,35 +64,34 @@ export default function AppWindow({ item, constraintsRef }: { item: AppWindowTyp
     const windowRef = useRef<HTMLDivElement>(null)
 
     useEffect(() => {
-        const handleResize = () => {
-            setSizeDefaults(getSizeDefaults())
-        }
-
-        window.addEventListener('resize', handleResize)
-        return () => window.removeEventListener('resize', handleResize)
-    }, [])
-
-    useEffect(() => {
         if (windowRef.current) {
             updateWindowRef(item, windowRef)
-            setPosition(() => getPositionDefaults(item, size, windows))
+            updateWindow(item, {
+                position: getPositionDefaults(item.key, size, windows),
+            })
         }
     }, [windowRef.current])
 
     const handleDoubleClick = () => {
-        setSize((prev) => (prev.width === sizeDefaults.max.width ? sizeDefaults.min : sizeDefaults.max))
+        updateWindow(item, {
+            size: sizeDefaults.max,
+        })
     }
 
     const expandWindow = () => {
         setPreviousSize(size)
         setPreviousPosition(position)
-        setPosition({ x: 0, y: taskbarHeight })
-        setSize({ width: window.innerWidth, height: window.innerHeight - taskbarHeight })
+        updateWindow(item, {
+            position: { x: 0, y: taskbarHeight },
+            size: { width: window.innerWidth, height: window.innerHeight - taskbarHeight },
+        })
     }
 
     const collapseWindow = () => {
-        setSize(previousSize)
-        setPosition(previousPosition)
+        updateWindow(item, {
+            size: previousSize,
+            position: previousPosition,
+        })
     }
 
     const getActiveWindowsButtonPosition = () => {
@@ -298,9 +144,8 @@ export default function AppWindow({ item, constraintsRef }: { item: AppWindowTyp
         const constrainedX = Math.round(Math.min(Math.max(0, newX), window.innerWidth - size.width))
         const constrainedY = Math.round(Math.min(Math.max(taskbarHeight, newY), window.innerHeight - size.height))
 
-        setPosition({
-            x: constrainedX,
-            y: constrainedY,
+        updateWindow(item, {
+            position: { x: constrainedX, y: constrainedY },
         })
     }
 
@@ -322,16 +167,10 @@ export default function AppWindow({ item, constraintsRef }: { item: AppWindowTyp
         const finalX = side === 'left' ? 0 : bounds.width / 2
         const finalWidth = bounds.width / 2
 
-        setPosition({
-            x: finalX,
-            y: bounds.top,
+        updateWindow(item, {
+            position: { x: finalX, y: bounds.top },
+            size: { width: finalWidth, height: bounds.height },
         })
-
-        setSize((prev) => ({
-            ...prev,
-            width: finalWidth,
-            height: bounds.height,
-        }))
     }
 
     useEffect(() => {
@@ -656,13 +495,14 @@ export default function AppWindow({ item, constraintsRef }: { item: AppWindowTyp
                                 dragMomentum={false}
                                 dragConstraints={{ left: 0, right: 0 }}
                                 onDrag={(_event, info) => {
-                                    setSize((prev) => ({
-                                        ...prev,
-                                        width: Math.min(
-                                            Math.max(prev.width + info.delta.x, sizeDefaults.min.width),
-                                            sizeDefaults.max.width
-                                        ),
-                                    }))
+                                    updateWindow(item, {
+                                        size: {
+                                            width: Math.min(
+                                                Math.max(size.width + info.delta.x, sizeDefaults.min.width),
+                                                sizeDefaults.max.width
+                                            ),
+                                        },
+                                    })
                                 }}
                             >
                                 <div className="relative w-full h-full">
@@ -677,13 +517,14 @@ export default function AppWindow({ item, constraintsRef }: { item: AppWindowTyp
                                 dragMomentum={false}
                                 dragConstraints={{ top: 0, bottom: 0 }}
                                 onDrag={(_event, info) => {
-                                    setSize((prev) => ({
-                                        ...prev,
-                                        height: Math.min(
-                                            Math.max(prev.height + info.delta.y, sizeDefaults.min.height),
-                                            sizeDefaults.max.height
-                                        ),
-                                    }))
+                                    updateWindow(item, {
+                                        size: {
+                                            height: Math.min(
+                                                Math.max(size.height + info.delta.y, sizeDefaults.min.height),
+                                                sizeDefaults.max.height
+                                            ),
+                                        },
+                                    })
                                 }}
                             >
                                 <div className="relative w-full h-full">
@@ -697,16 +538,18 @@ export default function AppWindow({ item, constraintsRef }: { item: AppWindowTyp
                                 dragMomentum={false}
                                 dragConstraints={{ left: 0, top: 0, right: 0, bottom: 0 }}
                                 onDrag={(_event, info) => {
-                                    setSize((prev) => ({
-                                        width: Math.min(
-                                            Math.max(prev.width + info.delta.x, sizeDefaults.min.width),
-                                            sizeDefaults.max.width
-                                        ),
-                                        height: Math.min(
-                                            Math.max(prev.height + info.delta.y, sizeDefaults.min.height),
-                                            sizeDefaults.max.height
-                                        ),
-                                    }))
+                                    updateWindow(item, {
+                                        size: {
+                                            width: Math.min(
+                                                Math.max(size.width + info.delta.x, sizeDefaults.min.width),
+                                                sizeDefaults.max.width
+                                            ),
+                                            height: Math.min(
+                                                Math.max(size.height + info.delta.y, sizeDefaults.min.height),
+                                                sizeDefaults.max.height
+                                            ),
+                                        },
+                                    })
                                 }}
                             >
                                 <div className="hidden group-hover:block relative w-full h-full border-b border-r border-transparent overflow-hidden rounded-bl">
