@@ -868,9 +868,14 @@ export const ProductMax = () => {
 
                 </div>
             </div>
+            <div className="max-w-7xl mx-auto relative bg-[#FFF6DE]">
+                <section>
+                    <CTA />
+                </section>
+            </div>
+{/* 
             <div className={`${fullWidthContent ? 'max-w-full px-8' : 'max-w-7xl mx-auto'} px-5 py-10 md:pt-20 pb-0`}>
 
-{/* 
                 <div className="mt-12">
                     <ul
                         className={`grid md:grid-cols-2 lg:grid-cols-${subfeaturesItemCount} gap-8 mt-12 list-none p-0`}
@@ -950,16 +955,9 @@ export const ProductMax = () => {
                             />
                         </aside>
                     </div>
-                </section> */}
-
-                
+                </section> 
             </div>
-
-            <div className="max-w-7xl mx-auto relative">
-                <section className="mb-12">
-                    <CTA />
-                </section>
-            </div>
+            */}
         </>
     )
 }
