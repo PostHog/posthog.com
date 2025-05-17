@@ -66,9 +66,6 @@ export default function AppWindow({ item, constraintsRef }: { item: AppWindowTyp
     useEffect(() => {
         if (windowRef.current) {
             updateWindowRef(item, windowRef)
-            updateWindow(item, {
-                position: getPositionDefaults(item.key, size, windows),
-            })
         }
     }, [windowRef.current])
 

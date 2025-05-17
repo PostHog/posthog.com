@@ -257,13 +257,9 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
         const previousWindow = sortedWindows[0]
 
         if (previousWindow && !previousWindow.key.startsWith('ask-max')) {
-            const ref = previousWindow.ref?.current
-            if (ref) {
-                const rect = ref.getBoundingClientRect()
-                return {
-                    x: rect.left + 10,
-                    y: rect.top + 10,
-                }
+            return {
+                x: previousWindow.position.x + 10,
+                y: previousWindow.position.y + 10,
             }
         }
 
