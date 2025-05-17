@@ -51,9 +51,9 @@ export default function AppWindow({ item, constraintsRef }: { item: AppWindowTyp
         getPositionDefaults,
     } = useApp()
     const controls = useDragControls()
-    const sizeDefaults = item.sizeDefaults
-    const [previousSize, setPreviousSize] = useState({ width: sizeDefaults.max.width, height: sizeDefaults.max.height })
+    const sizeConstraints = item.sizeConstraints
     const size = item.size
+    const [previousSize, setPreviousSize] = useState(item.size)
     const [previousPosition, setPreviousPosition] = useState({ x: 0, y: 0 })
     const position = item.position
     const [snapIndicator, setSnapIndicator] = useState<'left' | 'right' | null>(null)
@@ -74,7 +74,7 @@ export default function AppWindow({ item, constraintsRef }: { item: AppWindowTyp
 
     const handleDoubleClick = () => {
         updateWindow(item, {
-            size: sizeDefaults.max,
+            size: sizeConstraints.max,
         })
     }
 
@@ -163,13 +163,22 @@ export default function AppWindow({ item, constraintsRef }: { item: AppWindowTyp
     const handleSnapToSide = (side: 'left' | 'right') => {
         if (!constraintsRef.current) return
 
+        const isFixedSize = item.fixedSize
         const bounds = constraintsRef.current.getBoundingClientRect()
-        const finalX = side === 'left' ? 0 : bounds.width / 2
+        const x = isFixedSize
+            ? side === 'left'
+                ? window.innerWidth / 4 - item.size.width / 2
+                : (window.innerWidth * 3) / 4 - item.size.width / 2
+            : side === 'left'
+            ? 0
+            : bounds.width / 2
         const finalWidth = bounds.width / 2
+        const size = { width: finalWidth, height: bounds.height }
+        const position = { x, y: bounds.top }
 
         updateWindow(item, {
-            position: { x: finalX, y: bounds.top },
-            size: { width: finalWidth, height: bounds.height },
+            position,
+            ...(!isFixedSize ? { size } : {}),
         })
     }
 
@@ -385,7 +394,7 @@ export default function AppWindow({ item, constraintsRef }: { item: AppWindowTyp
                                         </div>
                                     )}
                                 </div>
-                                <div className="flex">
+                                <div className="flex justify-end">
                                     <OSButton variant="ghost" size="xs" onClick={handleMinimize} className="!px-1.5">
                                         <IconMinus className="size-4 relative top-1" />
                                     </OSButton>
@@ -395,36 +404,38 @@ export default function AppWindow({ item, constraintsRef }: { item: AppWindowTyp
                                             className="data-[highlighted]:bg-accent data-[state=open]:bg-accent"
                                             asChild
                                         >
-                                            <OSButton
-                                                variant="ghost"
-                                                size="xs"
-                                                onClick={
-                                                    size.width >= window?.innerWidth ? collapseWindow : expandWindow
-                                                }
-                                                onMouseEnter={() => {
-                                                    setWindowOptionsTooltipVisible(true)
-                                                }}
-                                                onMouseLeave={() => {
-                                                    setWindowOptionsTooltipVisible(false)
-                                                }}
-                                                className="!px-1.5 group"
-                                            >
-                                                <Tooltip
-                                                    trigger={
-                                                        <span>
-                                                            <IconSquare className="size-5 group-hover:hidden" />
-                                                            {size.width >= window?.innerWidth ? (
-                                                                <IconCollapse45Chevrons className="size-6 -m-0.5 hidden group-hover:block" />
-                                                            ) : (
-                                                                <IconExpand45Chevrons className="size-6 -m-0.5 hidden group-hover:block" />
-                                                            )}
-                                                        </span>
+                                            {!item.fixedSize && (
+                                                <OSButton
+                                                    variant="ghost"
+                                                    size="xs"
+                                                    onClick={
+                                                        size.width >= window?.innerWidth ? collapseWindow : expandWindow
                                                     }
-                                                    open={windowOptionsTooltipVisible}
+                                                    onMouseEnter={() => {
+                                                        setWindowOptionsTooltipVisible(true)
+                                                    }}
+                                                    onMouseLeave={() => {
+                                                        setWindowOptionsTooltipVisible(false)
+                                                    }}
+                                                    className="!px-1.5 group"
                                                 >
-                                                    Right click for more options
-                                                </Tooltip>
-                                            </OSButton>
+                                                    <Tooltip
+                                                        trigger={
+                                                            <span>
+                                                                <IconSquare className="size-5 group-hover:hidden" />
+                                                                {size.width >= window?.innerWidth ? (
+                                                                    <IconCollapse45Chevrons className="size-6 -m-0.5 hidden group-hover:block" />
+                                                                ) : (
+                                                                    <IconExpand45Chevrons className="size-6 -m-0.5 hidden group-hover:block" />
+                                                                )}
+                                                            </span>
+                                                        }
+                                                        open={windowOptionsTooltipVisible}
+                                                    >
+                                                        Right click for more options
+                                                    </Tooltip>
+                                                </OSButton>
+                                            )}
                                         </ContextMenu.Trigger>
                                         <ContextMenu.Portal>
                                             <ContextMenu.Content
@@ -488,74 +499,80 @@ export default function AppWindow({ item, constraintsRef }: { item: AppWindowTyp
                             <div className="w-full flex-grow overflow-hidden">
                                 <Router {...item.props}>{item.element}</Router>
                             </div>
-                            <motion.div
-                                data-scheme="tertiary"
-                                className="group absolute right-0 top-0 w-1.5 bottom-6 cursor-ew-resize"
-                                drag="x"
-                                dragMomentum={false}
-                                dragConstraints={{ left: 0, right: 0 }}
-                                onDrag={(_event, info) => {
-                                    updateWindow(item, {
-                                        size: {
-                                            width: Math.min(
-                                                Math.max(size.width + info.delta.x, sizeDefaults.min.width),
-                                                sizeDefaults.max.width
-                                            ),
-                                        },
-                                    })
-                                }}
-                            >
-                                <div className="relative w-full h-full">
-                                    <div className="hidden group-hover:block absolute inset-y-0 right-0 w-[2px] bg-light-8" />
-                                    <div className="hidden group-hover:block absolute -bottom-6 h-6 right-0 w-[2px] bg-light-8" />
-                                </div>
-                            </motion.div>
-                            <motion.div
-                                data-scheme="tertiary"
-                                className="group absolute bottom-0 left-0 right-6 h-1.5 cursor-ns-resize"
-                                drag="y"
-                                dragMomentum={false}
-                                dragConstraints={{ top: 0, bottom: 0 }}
-                                onDrag={(_event, info) => {
-                                    updateWindow(item, {
-                                        size: {
-                                            height: Math.min(
-                                                Math.max(size.height + info.delta.y, sizeDefaults.min.height),
-                                                sizeDefaults.max.height
-                                            ),
-                                        },
-                                    })
-                                }}
-                            >
-                                <div className="relative w-full h-full">
-                                    <div className="hidden group-hover:block absolute inset-x-0 bottom-0 h-[2px] bg-light-8" />
-                                    <div className="hidden group-hover:block absolute bottom-0 -right-6 w-6 h-[2px] bg-light-8" />
-                                </div>
-                            </motion.div>
-                            <motion.div
-                                className="group absolute bottom-0 right-0 w-6 h-6 cursor-se-resize flex items-center justify-center"
-                                drag
-                                dragMomentum={false}
-                                dragConstraints={{ left: 0, top: 0, right: 0, bottom: 0 }}
-                                onDrag={(_event, info) => {
-                                    updateWindow(item, {
-                                        size: {
-                                            width: Math.min(
-                                                Math.max(size.width + info.delta.x, sizeDefaults.min.width),
-                                                sizeDefaults.max.width
-                                            ),
-                                            height: Math.min(
-                                                Math.max(size.height + info.delta.y, sizeDefaults.min.height),
-                                                sizeDefaults.max.height
-                                            ),
-                                        },
-                                    })
-                                }}
-                            >
-                                <div className="hidden group-hover:block relative w-full h-full border-b border-r border-transparent overflow-hidden rounded-bl">
-                                    <div className="absolute -bottom-10 -right-10 group-hover:-bottom-5 group-hover:-right-5 transition-all h-8 w-8 bg-accent-2 border-t border-light-8 -rotate-45" />
-                                </div>
-                            </motion.div>
+                            {!item.fixedSize && (
+                                <motion.div
+                                    data-scheme="tertiary"
+                                    className="group absolute right-0 top-0 w-1.5 bottom-6 cursor-ew-resize !transform-none"
+                                    drag="x"
+                                    dragMomentum={false}
+                                    dragConstraints={{ left: 0, right: 0 }}
+                                    onDrag={(_event, info) => {
+                                        updateWindow(item, {
+                                            size: {
+                                                width: Math.min(
+                                                    Math.max(size.width + info.delta.x, sizeConstraints.min.width),
+                                                    sizeConstraints.max.width
+                                                ),
+                                            },
+                                        })
+                                    }}
+                                >
+                                    <div className="relative w-full h-full">
+                                        <div className="hidden group-hover:block absolute inset-y-0 right-0 w-[2px] bg-light-8" />
+                                        <div className="hidden group-hover:block absolute -bottom-6 h-6 right-0 w-[2px] bg-light-8" />
+                                    </div>
+                                </motion.div>
+                            )}
+                            {!item.fixedSize && (
+                                <motion.div
+                                    data-scheme="tertiary"
+                                    className="group absolute bottom-0 left-0 right-6 h-1.5 cursor-ns-resize !transform-none"
+                                    drag="y"
+                                    dragMomentum={false}
+                                    dragConstraints={{ top: 0, bottom: 0 }}
+                                    onDrag={(_event, info) => {
+                                        updateWindow(item, {
+                                            size: {
+                                                height: Math.min(
+                                                    Math.max(size.height + info.delta.y, sizeConstraints.min.height),
+                                                    sizeConstraints.max.height
+                                                ),
+                                            },
+                                        })
+                                    }}
+                                >
+                                    <div className="relative w-full h-full">
+                                        <div className="hidden group-hover:block absolute inset-x-0 bottom-0 h-[2px] bg-light-8" />
+                                        <div className="hidden group-hover:block absolute bottom-0 -right-6 w-6 h-[2px] bg-light-8" />
+                                    </div>
+                                </motion.div>
+                            )}
+                            {!item.fixedSize && (
+                                <motion.div
+                                    className="group absolute bottom-0 right-0 w-6 h-6 cursor-se-resize flex items-center justify-center !transform-none"
+                                    drag
+                                    dragMomentum={false}
+                                    dragConstraints={{ left: 0, top: 0, right: 0, bottom: 0 }}
+                                    onDrag={(_event, info) => {
+                                        updateWindow(item, {
+                                            size: {
+                                                width: Math.min(
+                                                    Math.max(size.width + info.delta.x, sizeConstraints.min.width),
+                                                    sizeConstraints.max.width
+                                                ),
+                                                height: Math.min(
+                                                    Math.max(size.height + info.delta.y, sizeConstraints.min.height),
+                                                    sizeConstraints.max.height
+                                                ),
+                                            },
+                                        })
+                                    }}
+                                >
+                                    <div className="hidden group-hover:block relative w-full h-full border-b border-r border-transparent overflow-hidden rounded-bl">
+                                        <div className="absolute -bottom-10 -right-10 group-hover:-bottom-5 group-hover:-right-5 transition-all h-8 w-8 bg-accent-2 border-t border-light-8 -rotate-45" />
+                                    </div>
+                                </motion.div>
+                            )}
                         </motion.div>
                     </>
                 )}

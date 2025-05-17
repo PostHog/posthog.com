@@ -129,50 +129,61 @@ export default function Inbox(props) {
                                     <div className="px-2 py-1">
                                         {isLoading ? (
                                             <div className="flex items-center justify-center py-8 h-full">
-                                                <Lottie animationData={hourglassAnimation} className="size-6 opacity-75" title="Loading questions..." />
+                                                <Lottie
+                                                    animationData={hourglassAnimation}
+                                                    className="size-6 opacity-75"
+                                                    title="Loading questions..."
+                                                />
                                             </div>
-                                        ) : questions.data?.map((question) => {
-                                            const {
-                                                attributes: {
-                                                    subject,
-                                                    numReplies,
-                                                    activeAt,
-                                                    replies,
-                                                    profile,
-                                                    permalink,
-                                                },
-                                            } = question
-                                            const latestAuthor =
-                                                replies?.data?.[replies.data.length - 1]?.attributes?.profile || profile
-                                            const active = `/questions/${permalink}` === pathname
-                                            return (
-                                                <OSButton
-                                                    asLink
-                                                    to={`/questions/${permalink}`}
-                                                    variant="ghost"
-                                                    align="left"
-                                                    width="full"
-                                                    key={question.id}
-                                                    className={`!text-inherit font-normal ${active ? 'bg-accent' : ''}`}
-                                                    onClick={() => {
-                                                        if (!containerRef.current) return
-                                                        if (bottomHeight <= 57) {
-                                                            setBottomHeight(
-                                                                containerRef.current.getBoundingClientRect().height *
-                                                                    0.8
-                                                            )
-                                                        }
-                                                    }}
-                                                >
-                                                    <div className="flex-1 font-medium">{subject}</div>
-                                                    <div className="w-24 text-center">{numReplies}</div>
-                                                    <div className="w-36 text-center">{dayjs(activeAt).fromNow()}</div>
-                                                    <div className="w-32 text-center">
-                                                        {latestAuthor?.data.attributes.firstName}
-                                                    </div>
-                                                </OSButton>
-                                            )
-                                        })}
+                                        ) : (
+                                            questions.data?.map((question) => {
+                                                const {
+                                                    attributes: {
+                                                        subject,
+                                                        numReplies,
+                                                        activeAt,
+                                                        replies,
+                                                        profile,
+                                                        permalink,
+                                                    },
+                                                } = question
+                                                const latestAuthor =
+                                                    replies?.data?.[replies.data.length - 1]?.attributes?.profile ||
+                                                    profile
+                                                const active = `/questions/${permalink}` === pathname
+                                                return (
+                                                    <OSButton
+                                                        asLink
+                                                        to={`/questions/${permalink}`}
+                                                        variant="ghost"
+                                                        align="left"
+                                                        width="full"
+                                                        key={question.id}
+                                                        className={`!text-inherit font-normal ${
+                                                            active ? 'bg-accent' : ''
+                                                        }`}
+                                                        onClick={() => {
+                                                            if (!containerRef.current) return
+                                                            if (bottomHeight <= 57) {
+                                                                setBottomHeight(
+                                                                    containerRef.current.getBoundingClientRect()
+                                                                        .height * 0.8
+                                                                )
+                                                            }
+                                                        }}
+                                                    >
+                                                        <div className="flex-1 font-medium">{subject}</div>
+                                                        <div className="w-24 text-center">{numReplies}</div>
+                                                        <div className="w-36 text-center">
+                                                            {dayjs(activeAt).fromNow()}
+                                                        </div>
+                                                        <div className="w-32 text-center">
+                                                            {latestAuthor?.data.attributes.firstName}
+                                                        </div>
+                                                    </OSButton>
+                                                )
+                                            })
+                                        )}
                                     </div>
                                 </ScrollArea>
                             </div>
@@ -231,9 +242,6 @@ export default function Inbox(props) {
                                                 }}
                                             >
                                                 Reply
-                                            </OSButton>
-                                            <OSButton variant="ghost" icon={<IconCheck />}>
-                                                Mark as resolved
                                             </OSButton>
 
                                             {question?.id && user && (

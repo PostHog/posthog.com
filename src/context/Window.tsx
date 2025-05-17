@@ -17,7 +17,7 @@ export interface AppWindow {
     fromHistory?: boolean
     props: any
     ref?: React.RefObject<HTMLDivElement>
-    sizeDefaults: {
+    sizeConstraints: {
         min: {
             width: number
             height: number

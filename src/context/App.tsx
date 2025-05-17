@@ -35,7 +35,6 @@ interface AppContextType {
         size: { width: number; height: number },
         windows: AppWindow[]
     ) => { x: number; y: number }
-    getSizeDefaults: (key: string) => { max: { width: number; height: number }; min: { width: number; height: number } }
 }
 
 interface AppProviderProps {
@@ -69,12 +68,11 @@ export const Context = createContext<AppContextType>({
     updateWindowRef: () => {},
     updateWindow: () => {},
     getPositionDefaults: () => ({ x: 0, y: 0 }),
-    getSizeDefaults: () => ({ max: { width: 0, height: 0 }, min: { width: 0, height: 0 } }),
 })
 
 const appSettings = {
     '/': {
-        sizeDefaults: {
+        size: {
             min: {
                 width: 700,
                 height: 500,
@@ -83,98 +81,99 @@ const appSettings = {
                 width: 800,
                 height: 1000,
             },
+            fixed: true,
         },
-        fixedSize: true,
     },
     '/start': {
-        sizeDefaults: {
-            max: {
-                width: 850,
-                height: 580,
-            },
+        size: {
             min: {
                 width: 850,
                 height: 580,
             },
+            max: {
+                width: 850,
+                height: 580,
+            },
+            fixed: true,
         },
-        fixedSize: true,
     },
     '/signup': {
-        sizeDefaults: {
-            max: {
-                width: 900,
-                height: 750,
-            },
+        size: {
             min: {
                 width: 900,
                 height: 750,
             },
+            max: {
+                width: 900,
+                height: 750,
+            },
+            fixed: true,
         },
-        fixedSize: true,
     },
     '/display-options': {
-        sizeDefaults: {
-            max: {
-                width: 600,
-                height: 400,
-            },
+        size: {
             min: {
                 width: 600,
                 height: 400,
             },
+            max: {
+                width: 600,
+                height: 400,
+            },
+            fixed: true,
         },
-        fixedSize: true,
     },
     '/why': {
-        sizeDefaults: {
-            max: {
-                width: 750,
-                height: 575,
-            },
+        size: {
             min: {
                 width: 750,
                 height: 575,
             },
+            max: {
+                width: 750,
+                height: 575,
+            },
+            fixed: true,
         },
-        fixedSize: true,
     },
     '/demo': {
-        sizeDefaults: {
-            max: {
-                width: 960,
-                height: 682,
-            },
+        size: {
             min: {
                 width: 960,
                 height: 682,
             },
+            max: {
+                width: 960,
+                height: 682,
+            },
+            fixed: false,
         },
-        fixedSize: true,
     },
     'ask-max': {
-        sizeDefaults: {
-            max: {
-                width: 400,
-                height: 600,
-            },
+        size: {
             min: {
                 width: 400,
                 height: 600,
             },
+            max: {
+                width: 400,
+                height: 600,
+            },
+            fixed: false,
         },
     },
     'community-auth': {
-        sizeDefaults: {
-            max: {
-                width: 400,
-                height: 369,
-            },
+        size: {
             min: {
                 width: 400,
                 height: 369,
             },
+            max: {
+                width: 400,
+                height: 369,
+            },
+            fixed: true,
         },
-        fixedSize: true,
     },
 } as const
 
@@ -233,24 +232,17 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
         setWindows((windows) => windows.map((w) => (w === appWindow ? { ...appWindow, minimized: true } : w)))
     }, [])
 
-    const getSizeDefaults = (
-        key: string
-    ): { max: { width: number; height: number }; min: { width: number; height: number } } => {
-        return (
-            appSettings[key]?.sizeDefaults ||
-            (key.startsWith('ask-max')
-                ? appSettings['ask-max']?.sizeDefaults
-                : {
-                      max: {
-                          width: window.innerWidth * 0.9,
-                          height: window.innerHeight * 0.9,
-                      },
-                      min: {
-                          width: window.innerWidth * 0.2,
-                          height: window.innerHeight * 0.2,
-                      },
-                  })
-        )
+    const getWindowBasedSizeConstraints = () => {
+        return {
+            min: {
+                width: window.innerWidth * 0.2,
+                height: window.innerHeight * 0.2,
+            },
+            max: {
+                width: window.innerWidth * 0.9,
+                height: window.innerHeight * 0.9,
+            },
+        }
     }
 
     const getPositionDefaults = (key: string, size: { width: number; height: number }, windows: AppWindow[]) => {
@@ -281,11 +273,23 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
         }
     }
 
+    const getInitialSize = (key: string) => {
+        return (
+            appSettings[key]?.size?.max ||
+            (key.startsWith('ask-max')
+                ? appSettings['ask-max']?.size?.max
+                : {
+                      width: window.innerWidth * 0.9,
+                      height: window.innerHeight * 0.9,
+                  })
+        )
+    }
+
     const updatePages = (element: WindowElement) => {
         const existingWindow = windows.find((w) => w.path === element.props.location.pathname)
-        const sizeDefaults = getSizeDefaults(element.key)
-        const size = sizeDefaults.max
+        const size = getInitialSize(element.key)
         const position = getPositionDefaults(element.key, size, windows)
+        const settings = appSettings[element.key]
 
         const newWindow: AppWindow = {
             element,
@@ -303,8 +307,10 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
             },
             size,
             position,
-            sizeDefaults,
-            fixedSize: appSettings[element.key]?.fixedSize || false,
+            sizeConstraints: settings?.size?.fixed
+                ? { min: settings.size.min, max: settings.size.max }
+                : getWindowBasedSizeConstraints(),
+            fixedSize: settings?.size.fixed || false,
         }
 
         if (existingWindow) {
@@ -380,7 +386,6 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
                 addWindow,
                 updateWindowRef,
                 getPositionDefaults,
-                getSizeDefaults,
                 updateWindow,
             }}
         >
