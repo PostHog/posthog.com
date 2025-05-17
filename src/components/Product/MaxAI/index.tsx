@@ -285,6 +285,7 @@ export const ProductMax = () => {
     const [voteLoading, setVoteLoading] = useState<{ [id: string]: boolean }>({})
     const [email, setEmail] = useState('')
     const [formSubmitted, setFormSubmitted] = useState(false)
+    const [showBeta, setShowBeta] = useState(false)
     const posthog = usePostHog()
 
     const { roadmaps, isLoading, mutate } = useRoadmaps({
@@ -439,48 +440,70 @@ export const ProductMax = () => {
                     <div className="flex flex-col-reverse mdlg:grid mdlg:grid-cols-2 gap-8 xl:gap-16 mb-12 xl:mb-16 px-2 mdlg:px-0">
                         <div className="flex flex-col gap-8 items-center justify-center max-w-4xl mx-auto">
                             <img src={headlineImg} alt="Max AI" className="w-full max-w-[604px]" />
-                            <img src={betaMobileImg} alt="Max AI" className="w-full mdlg:hidden max-w-[222px]" />
-                            <img src={betaDesktopImg} alt="Max AI" className="w-full hidden mdlg:block max-w-[437px]" />
 
-                            <form onSubmit={(e) => {
-                                e.preventDefault()
-                                posthog?.capture('max_ai_subscribed', { email })
-                                setFormSubmitted(true)
-                            }}>
-                                <div
-                                    className={`subscription-form-container duration-500 bg-white shadow-2xl rounded-full p-4 flex items-center transition[max-width_0.5s_cubic-bezier(0.4,0,0.2,1)]`}
-                                    style={{
-                                        maxWidth: formSubmitted ? 120 : 600,
-                                        margin: '0 auto',
-                                    }}
-                                >
-                                    {!formSubmitted ? (
-                                        <>
-                                            <input 
-                                                type="email" 
-                                                placeholder="Enter your email" 
-                                                className="flex-1 border border-light rounded-l-full rounded-r-none px-4 py-2 bg-[#E5E7E0] text-lg"
-                                                value={email}
-                                                onChange={(e) => setEmail(e.target.value)}
-                                                required
-                                            />
-                                            <div>
-                                                <CallToAction type="primary" size="lg" className="rounded-r-full rounded-l-none" childClassName="rounded-l-none rounded-r-full">
-                                                    Join the list
-                                                </CallToAction>
+                            <div>
+                                <img src={betaMobileImg} alt="Max AI" className="w-full mdlg:hidden max-w-[222px]" />
+                                <img src={betaDesktopImg} alt="Max AI" className="w-full hidden mdlg:block max-w-[437px]" />
+
+                                <form onSubmit={(e) => {
+                                    e.preventDefault()
+                                    posthog?.capture('max_ai_subscribed', { email })
+                                    setFormSubmitted(true)
+                                }}
+                                className="mt-4">
+                                    <div
+                                        className={`subscription-form-container duration-500 bg-white shadow-2xl rounded-full p-4 flex items-center transition[max-width_0.5s_cubic-bezier(0.4,0,0.2,1)]`}
+                                        style={{
+                                            maxWidth: formSubmitted ? 120 : 600,
+                                            margin: '0 auto',
+                                        }}
+                                    >
+                                        {!formSubmitted ? (
+                                            <>
+                                                <input 
+                                                    type="email" 
+                                                    placeholder="Enter your email" 
+                                                    className="flex-1 border border-light rounded-l-full rounded-r-none px-4 py-2 bg-[#E5E7E0] text-lg"
+                                                    value={email}
+                                                    onChange={(e) => setEmail(e.target.value)}
+                                                    required
+                                                />
+                                                <div>
+                                                    <CallToAction type="primary" size="lg" className="rounded-r-full rounded-l-none" childClassName="rounded-l-none rounded-r-full">
+                                                        Join the list
+                                                    </CallToAction>
+                                                </div>
+                                            </>
+                                        ) : (
+                                            <div className="bg-green text-white p-3 rounded-full">
+                                                <IconCheck className="size-6" />
                                             </div>
-                                        </>
-                                    ) : (
-                                        <div className="bg-green text-white p-3 rounded-full">
-                                            <IconCheck className="size-6" />
-                                        </div>
-                                    )}
+                                        )}
+                                    </div>
+                                </form>
+
+                                <div className="mt-4 text-center">
+                                    Want to <button onClick={() => setShowBeta(!showBeta)} className="text-red dark:text-yellow font-semibold">try the beta?</button>
                                 </div>
-                            </form>
+                            </div>
                         </div>
                         <aside className="bg-[#F5E2B2] px-4 pt-4 max-w-2xl w-full mx-auto rounded-lg shadow-2xl leading-[0] text-center">
                             <CloudinaryImage src="https://res.cloudinary.com/dmukukwp6/image/upload/i_just_asked_max_a4bd43bb9f.png" className="max-w-[442px] mx-auto" />
                         </aside>
+                    </div>
+
+
+                    <div className={`transition-all duration-500 ease-in-out overflow-hidden ${showBeta ? 'max-h-[500px] opacity-100' : 'max-h-0 opacity-0'}`}>
+                            <div className="bg-white border border-light dark:border-dark rounded p-4 mb-12 font-serif">
+                                        <h3 className="font-bold">Try Max AI</h3>
+                                        <p>
+                                            <strong>1. New to PostHog?</strong> <button>Install with Max AI in 90 seconds.</button>
+                                        </p>
+                                        <p>
+                                            <strong>2. Already use PostHog?</strong>
+                                            Look for the Max button in the side panel in the app (top right)!
+                                        </p>
+                            </div>
                     </div>
 
                     <div className="text-center mb-12">
@@ -534,13 +557,13 @@ export const ProductMax = () => {
                             <p>
                                 Max will automate the setup of capturing events too. He'll integrate with your codebase to detect and add event tracking to new features that we detect automatically, flags, and error tracking.
                             </p>
-                            <p>Using our existing features will speed up too - iImagine building a new feature, then asking Max to create a feature flag, set up an experiment, and drive a percentage of traffic to it, then sending them an in-app survey to get feedback after they’ve interacted with the new feature.
+                            <p>Using our existing features will speed up too - iImagine building a new feature, then asking Max to create a feature flag, set up an experiment, and drive a percentage of traffic to it, then sending them an in-app survey to get feedback after they've interacted with the new feature.
                             </p>
                             <p>
-                                Check out our AI roadmap below and share your feedback! If you have thoughts on how you’d like to interact with Max in PostHog, we’d love to hear from you.
+                                Check out our AI roadmap below and share your feedback! If you have thoughts on how you'd like to interact with Max in PostHog, we'd love to hear from you.
                             </p>
                             <p>
-                                Feel free to <Link href="https://github.com/PostHog/posthog/issues" external>create a GitHub issue</Link> and we’ll add new ideas to our roadmap when we’re considering Max’s future superpowers.
+                                Feel free to <Link href="https://github.com/PostHog/posthog/issues" external>create a GitHub issue</Link> and we'll add new ideas to our roadmap when we're considering Max's future superpowers.
                             </p>
                         </div>
                     </div>
