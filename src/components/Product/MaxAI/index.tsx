@@ -610,11 +610,11 @@ export const ProductMax = () => {
                             <img src={headlineImg} alt="Max AI" className="w-full max-w-[604px]" />
 
                             <div>
-                                <img src={betaMobileImg} alt="Max AI" className="w-full mdlg:hidden max-w-[222px]" />
+                                <img src={betaMobileImg} alt="Max AI" className="w-full mdlg:hidden max-w-[222px] mx-auto" />
                                 <img
                                     src={betaDesktopImg}
                                     alt="Max AI"
-                                    className="w-full hidden mdlg:block max-w-[437px]"
+                                    className="w-full hidden mdlg:block max-w-[437px] mx-auto"
                                 />
 
                                 <form
