@@ -43,7 +43,7 @@ export default function Banner() {
         <>
             {!compact && (
                 <div
-                    className={`${
+                    className={`announcement-bar ${
                         isCookieSet ? 'h-0' : '!max-h-96'
                     } transition-all overflow-hidden relative hidden md:block border-b border-accent dark:border-accent-dark`}
                     style={{ maxHeight: '0px' }}

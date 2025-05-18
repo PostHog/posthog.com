@@ -14,6 +14,7 @@ import { Contributor } from 'components/PostLayout/Contributors'
 import { productMenu } from '../navs'
 import RoadmapPreview from 'components/RoadmapPreview'
 import { PRODUCT_COUNT } from '../constants'
+import CloudinaryImage from 'components/CloudinaryImage'
 
 const Teams: React.FC = () => {
     const { james, supportTeam } = useStaticQuery(graphql`
@@ -138,6 +139,27 @@ const Teams: React.FC = () => {
                     },
                 ]}
             >
+                <style dangerouslySetInnerHTML={{
+                    __html: `
+                        .announcement-bar {
+                            display: none;
+                        }
+
+                        .active-tab {
+                            background: #B8DBF3;
+                        }
+
+                        .active-tab .absolute {
+                            border-color: #B8DBF3;
+                        }
+                    `
+                }} />
+                <div className="bg-[#B8DBF3] -mx-5 lg:-mx-6 xl:-mx-12 -mt-10 mb-4 leading-[0]">
+                    <CloudinaryImage src="https://res.cloudinary.com/dmukukwp6/image/upload/spaghetti_4ed4cf4aae.jpg" alt="Data spaghetti" className="w-full" />
+                    <div className="sr-only">"Tastes better than data spaghetti!" All your customer data lives in one place when you PostHog.</div>
+                </div>
+                
+
                 <section className="mx-auto">
                     <div className="flex flex-col md:items-center md:justify-end md:flex-row-reverse gap-8 md:gap-2">
                         <div className="md:flex-1">
@@ -192,33 +214,33 @@ const Teams: React.FC = () => {
                                         <em>there's a reason other companies don't list their pricing!</em>
                                     </li>
                                     <li>
-                                        We don’t sell products at a loss - we run the company default alive. This means
-                                        we’ve never had layoffs, and we don’t take huge risks that could result in the
+                                        We don't sell products at a loss - we run the company default alive. This means
+                                        we've never had layoffs, and we don't take huge risks that could result in the
                                         company disappearing overnight.
                                     </li>
-                                    <li>We don’t screw you on contract terms like auto-renewal.</li>
+                                    <li>We don't screw you on contract terms like auto-renewal.</li>
                                     <li>
                                         You can use all our stuff monthly until you want to lock things in with us. We
-                                        don’t pressure people.
+                                        don't pressure people.
                                     </li>
                                     <li>
-                                        The way we write our content. <Link href="/posts">Just read it</Link> and you’ll
-                                        get what we mean. It’s more honest and not like marketing-speak you've come to
+                                        The way we write our content. <Link href="/posts">Just read it</Link> and you'll
+                                        get what we mean. It's more honest and not like marketing-speak you've come to
                                         expect from other companies - it actively helps developers build successful
-                                        products. That’s our mission.
+                                        products. That's our mission.
                                     </li>
                                     <li>
                                         PostHog has zero intention of selling our business. We want to see just how
                                         crazy huge this gigantic software stack can get - and we think that it will
-                                        reach at least $100bn in value. We’ll be around and fighting for a long, long
-                                        time. It’s our life’s work.
+                                        reach at least $100bn in value. We'll be around and fighting for a long, long
+                                        time. It's our life's work.
                                     </li>
                                     <li>
                                         You can also see how our entire company operates - our{' '}
                                         <Link href="/handbook/growth/sales/overview">manual for our salespeople</Link>,{' '}
                                         <Link href="/handbook/growth/marketing">marketing team</Link>, and so on. You
-                                        can even <Link href="/handbook/people/compensation">see what they’re paid</Link>{' '}
-                                        - it’s all in our public handbook. You won't get this level of transparency from
+                                        can even <Link href="/handbook/people/compensation">see what they're paid</Link>{' '}
+                                        - it's all in our public handbook. You won't get this level of transparency from
                                         most companies!
                                     </li>
                                     <li>
@@ -310,9 +332,9 @@ const Teams: React.FC = () => {
                                 </div>
 
                                 <p>
-                                    We’ve also got dedicated support people - they’ve all got engineering backgrounds
-                                    too. If they can’t answer, you get the OG engineers mentioned above. Frankly our
-                                    support engineers answer most stuff when it gets deep. We don’t want you waiting on
+                                    We've also got dedicated support people - they've all got engineering backgrounds
+                                    too. If they can't answer, you get the OG engineers mentioned above. Frankly our
+                                    support engineers answer most stuff when it gets deep. We don't want you waiting on
                                     our triage.
                                 </p>
 
@@ -322,7 +344,7 @@ const Teams: React.FC = () => {
                                 </p>
 
                                 <p>
-                                    <em>“Everybody codes”</em> has made it to{' '}
+                                    <em>"Everybody codes"</em> has made it to{' '}
                                     <Link href="/handbook/values">our list of values</Link>.
                                 </p>
 
