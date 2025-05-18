@@ -116,18 +116,22 @@ export default function Banner() {
                 <div
                     className={`announcement-bar bg-[#B8DBF3] border-b border-[#B8C0CA] font-retro ${
                         isCookieSet ? 'h-0' : '!max-h-96'
-                    } transition-all overflow-hidden relative hidden md:block`}
+                    } transition-all overflow-hidden relative`}
                     style={{ maxHeight: '0px' }}
                 >
-                    <Link href="/why" className="text-primary text-center text-4xl pl-4 pr-10 md:px-10 drop-shadow-[2px_2px_0px_rgba(255,255,255,.5)] flex items-center justify-center">
-                        <div className="flex items-baseline justify-center pt-1">
+                    <Link href="/why" className="text-primary text-center text-4xl pl-4 pr-6 md:px-10 drop-shadow-[2px_2px_0px_rgba(255,255,255,.5)] flex flex-col xl:flex-row items-center justify-center">
+                        <div className="xl:flex items-baseline justify-center pt-1 text-balance leading-none">
                             All your customer data lives in one place when you
-                            <Logo noText color="primary" className="inline-block h-7 ml-2 mr-1" />
-                            PostHog
+                            <span className="inline-flex items-baseline">
+                                <Logo noText color="primary" className="inline-block h-7 ml-2 mr-1" />
+                                PostHog
+                            </span>
                         </div>
-                        <CloudinaryImage src="https://res.cloudinary.com/dmukukwp6/image/upload/kitchen_james_e2991bded4.png" alt="Kitchen James" className="inline-block ml-1" imgClassName="max-h-[53px]" />
+                        <div className="flex">
+                            <CloudinaryImage src="https://res.cloudinary.com/dmukukwp6/image/upload/kitchen_james_e2991bded4.png" alt="Kitchen James" className=" inline-block md:ml-1 relative top-1 md:top-0" imgClassName="max-h-[53px]" />
 
-                        <Quote className="relative top-1" />
+                            <Quote className="relative top-2" />
+                        </div>
                         <button
                             onClick={handleDismiss}
                             className="absolute right-2 top-2 md:top-[calc(50%_-_.75rem)] p-1 cursor-pointer"
