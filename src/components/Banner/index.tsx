@@ -120,7 +120,7 @@ export default function Banner() {
                     style={{ maxHeight: '0px' }}
                 >
                     <Link href="/why" className="text-primary text-center text-4xl pl-4 pr-6 md:px-10 drop-shadow-[2px_2px_0px_rgba(255,255,255,.5)] flex flex-col xl:flex-row items-center justify-center">
-                        <div className="xl:flex items-baseline justify-center pt-1 text-balance leading-none">
+                        <div className="xl:flex items-baseline justify-center text-balance leading-none">
                             All your customer data lives in one place when you
                             <span className="inline-flex items-baseline">
                                 <Logo noText color="primary" className="inline-block h-7 ml-2 mr-1" />
