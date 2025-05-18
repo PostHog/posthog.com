@@ -163,7 +163,7 @@ const Teams: React.FC = () => {
                     `
                 }} />
                 <div className="bg-[#B8DBF3] -mx-5 lg:-mx-6 xl:-mx-12 -mt-10 mb-4 2xl:mb-8 leading-[0]">
-                    <CloudinaryImage src="https://res.cloudinary.com/dmukukwp6/image/upload/spaghetti_4ed4cf4aae.jpg" alt="Data spaghetti" className="w-full" />
+                    <CloudinaryImage src="https://res.cloudinary.com/dmukukwp6/image/upload/spaghetti_ddfd1b4f45.jpg" alt="Data spaghetti" className="w-full" />
                     <div className="sr-only">"Tastes better than data spaghetti!" All your customer data lives in one place when you PostHog.</div>
                 </div>
                 

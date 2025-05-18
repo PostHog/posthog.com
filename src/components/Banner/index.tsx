@@ -119,7 +119,7 @@ export default function Banner() {
                     } transition-all overflow-hidden relative`}
                     style={{ maxHeight: '0px' }}
                 >
-                    <Link href="/why" className="text-primary text-center text-4xl pl-4 pr-6 md:px-10 drop-shadow-[2px_2px_0px_rgba(255,255,255,.5)] flex flex-col xl:flex-row items-center justify-center">
+                    <Link href="/why" className="group text-primary text-center text-4xl pl-4 pr-6 md:px-10 drop-shadow-[2px_2px_0px_rgba(255,255,255,.5)] flex flex-col xl:flex-row items-center justify-center">
                         <div className="xl:flex items-baseline justify-center text-balance leading-none">
                             All your customer data lives in one place when you
                             <span className="inline-flex items-baseline">
@@ -128,7 +128,7 @@ export default function Banner() {
                             </span>
                         </div>
                         <div className="flex">
-                            <CloudinaryImage src="https://res.cloudinary.com/dmukukwp6/image/upload/kitchen_james_e2991bded4.png" alt="Kitchen James" className=" inline-block md:ml-1 relative top-1 md:top-0" imgClassName="max-h-[53px]" />
+                            <CloudinaryImage src="https://res.cloudinary.com/dmukukwp6/image/upload/kitchen_james_e2991bded4.png" alt="Kitchen James" className=" inline-block md:ml-1 relative group-hover:rotate-6 group-hover:scale-110 top-1 md:top-0" imgClassName="max-h-[53px]" />
 
                             <Quote className="relative top-2" />
                         </div>
