@@ -152,14 +152,21 @@ const Teams: React.FC = () => {
                         .active-tab .absolute {
                             border-color: #B8DBF3;
                         }
+
+                        #content-menu-wrapper {
+                            max-width: 100% !important;
+                        }
+
+                        #content-menu-wrapper section.mx-auto {
+                            max-width: 48rem;
+                        }
                     `
                 }} />
-                <div className="bg-[#B8DBF3] -mx-5 lg:-mx-6 xl:-mx-12 -mt-10 mb-4 leading-[0]">
+                <div className="bg-[#B8DBF3] -mx-5 lg:-mx-6 xl:-mx-12 -mt-10 mb-4 2xl:mb-8 leading-[0]">
                     <CloudinaryImage src="https://res.cloudinary.com/dmukukwp6/image/upload/spaghetti_4ed4cf4aae.jpg" alt="Data spaghetti" className="w-full" />
                     <div className="sr-only">"Tastes better than data spaghetti!" All your customer data lives in one place when you PostHog.</div>
                 </div>
                 
-
                 <section className="mx-auto">
                     <div className="flex flex-col md:items-center md:justify-end md:flex-row-reverse gap-8 md:gap-2">
                         <div className="md:flex-1">
