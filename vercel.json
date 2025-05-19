@@ -1442,7 +1442,7 @@
                 },
                 {
                     "key": "Reporting-Endpoints",
-                    "value": "posthog=\"https://us.i.posthog.com/report?token=sTMFPsFhdP1Ssg&sample_rate=0.1&v=1\""
+                    "value": "posthog=\"https://us.i.posthog.com/report/?token=sTMFPsFhdP1Ssg&sample_rate=0.1&v=1\""
                 }
             ]
         }
