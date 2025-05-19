@@ -37,10 +37,14 @@ Also look at the [sales team's onboarding page](/handbook/growth/sales/new-hire-
 - Explore Vitally and [Metabase](https://github.com/PostHog/company-internal/wiki/Onboarding-Workflows#metabase-account-analysis) – take note of any questions you have to go through during in-person onboarding.
 - Towards the end of the week, schedule a demo and feedback session with Dana. We might need to do a couple of iterations over the next few weeks as you take on board feedback, don't worry if that's the case!
 - Get comfortable with the PostHog [Docs](/docs) around our main products.
-- (CSM) During your first week, Dana will figure out your initial book of business (around 30 accounts). We will review these at the start of your second week, and make sure you understand how your targets are set. 
-- (CSM) Prioritize your current book of customers, and start reaching out! You should check conversations in Vitally to see if someone else has a prior relationship as they can make a warm intro for you.
-- (Onboarding specialist) Book time with Magda for a deep dive on PostHog billing, sales process/routing. This will help you understand how your role fits in the broader context of the CS and Onboarding team
-- (Onboarding specialist) We'll start routing new leads to you at the end of week 1. Start to review these and reach out, using a shared booking link with someone else from your region so they can back you up in the first few weeks. This is a great option to practise and fail.
+
+#### CSM
+- During your first week, Dana will figure out your initial book of business (around 30 accounts). We will review these at the start of your second week, and make sure you understand how your targets are set. 
+- Prioritize your current book of customers, and start reaching out! You should check conversations in Vitally to see if someone else has a prior relationship as they can make a warm intro for you.
+
+#### Onboarding specialist
+- Book time with Magda for a deep dive on PostHog billing, sales process/routing. This will help you understand how your role fits in the broader context of the CS and Onboarding team
+- We'll start routing new leads to you at the end of week 1. Start to review these and reach out, using a shared booking link with someone else from your region so they can back you up in the first few weeks. This is a great option to practise and fail.
 
 ### In-person onboarding
 
@@ -91,11 +95,13 @@ By the end of month 3:
 
 ## PostHog curriculum
 
-PostHog has a lot of products! To help you figure out how to start and continue building your knowledge, here's a recommended list of topics to work through.
+PostHog has a lot of products! To help you figure out how to start and continue build your knowledge, here's a recommended list of topics to work through. 
 
-### Fundamental (Week 1-3)
+Add and modify this list as you work through it.
 
-Product analytics
+### Fundamental
+
+#### Product analytics
 1. Creating insights: everything in Trends, Funnels, User paths
    - Retention, Stickiness, Lifecycle
    - How to filter out test users?
@@ -108,7 +114,7 @@ Product analytics
 4. Toolbar – heatmaps, actions
 5. Groups – what is it? what is the use case? how is it charged?
 
-Implementation
+#### Implementation
 1. How is PostHog implemented?
 2. Autocapture – how do you customize autocapture? How do you leverage autocapture?
 3. What are custom events? How do you set custom properties?
@@ -116,36 +122,33 @@ Implementation
 5. What are groups? How do you set group properties?
 6. Projects, Cross-domain tracking, reverse proxy, cookie consent (EU)
 
-### Intermediate (Week 4-6)
+### Intermediate
 
-Feature flags
+#### Feature flags
 1. Creating and using them in code
-    1. How do I ensure flags are loaded before capturing any events?
-    2. Can you evaluate feature flags using properties that haven't been ingested yet?
+    - How do I ensure flags are loaded before capturing any events?
+    - Can you evaluate feature flags using properties that haven't been ingested yet?
 2. Locally testing feature flags using toolbar
 3. Insights based on feature flags:
-    1. Some users have access to a beta feature. How do I filter insights on these users?
+    - Some users have access to a beta feature. How do I filter insights for these users?
 4. Local evaluation
 5. Client-side bootstrapping
 6. Troubleshooting
 
-Experiments
+#### Experiments
 1. Creating an experiment from PostHog UI
 2. Understanding MDE, primary metrics, secondary metrics, interpreting results
 3. Traffic allocation - configuring it and validating it. What are some reasons why 80/20 split may not be an 80/20 split?
 4. Returning users: user sees variant A in session 1, does not convert; user sees variant B in session 2, does convert
-    1. Does this happen? Can the same user see different variants in different sessions?
-    2. If so, how does this affect the results?
+    - Does this happen? Can the same user see different variants in different sessions? If so, how does this affect the results?
 5. No-code web experiments
-    1. Implementation requirements
-    2. Landing page experiments – how to deal with flickering of content when page is first loaded?
+    - Implementation requirements
+    - Landing page experiments – how to deal with flickering of content when page is first loaded?
 
-Product analytics
+#### Others
 1. Creating cohorts – static vs dynamic
 2. RBAC, Teams add-on
-
-Data pipelines
-1. You should all be familiar with this!
+3. Data pipelines
 
 ### Advanced
 
