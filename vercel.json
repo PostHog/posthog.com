@@ -1438,7 +1438,7 @@
             "headers": [
                 {
                     "key": "Content-Security-Policy-Report-Only",
-                    "value": "default-src 'self'; script-src 'self' 'unsafe-inline' https://*.posthog.com; style-src 'self' 'unsafe-inline'; img-src 'self' data: https://*.posthog.com https://res.cloudinary.com https://www.gravatar.com; font-src 'self' data: https://d27nj4tzr3d5tm.cloudfront.net; connect-src 'self' https://*.posthog.com https://api.github.com https://lottie.host https://better-animal-d658c56969.strapiapp.com; media-src 'self' https://d1hovhsvet4m1p.cloudfront.net; frame-src 'self' https://www.youtube-nocookie.com; report-uri https://app.posthog.com/csp?token=sTMFPsFhdP1Ssg&sample_rate=0.1&v=1; report-to posthog"
+                    "value": "default-src 'self'; script-src 'self' 'unsafe-inline' https://*.posthog.com; style-src 'self' 'unsafe-inline'; img-src 'self' data: https://*.posthog.com https://res.cloudinary.com https://www.gravatar.com; font-src 'self' data: https://d27nj4tzr3d5tm.cloudfront.net https://res.cloudinary.com; connect-src 'self' https://*.posthog.com https://api.github.com https://lottie.host https://better-animal-d658c56969.strapiapp.com; media-src 'self' https://d1hovhsvet4m1p.cloudfront.net; frame-src 'self' https://www.youtube-nocookie.com; worker-src 'self' blob:; child-src 'self' blob:; object-src 'none'; frame-ancestors 'none'; require-trusted-types-for 'script'; report-uri https://app.posthog.com/csp?token=sTMFPsFhdP1Ssg&sample_rate=0.1&v=1; report-to posthog"
                 },
                 {
                     "key": "Reporting-Endpoints",
