@@ -18,6 +18,7 @@ import { useUser } from 'hooks/useUser'
 import { navigate } from 'gatsby'
 import Lottie from 'lottie-react'
 import hourglassAnimation from 'images/icons8-hourglass.json'
+import { useInView } from 'react-intersection-observer'
 
 dayjs.extend(relativeTime)
 
@@ -79,6 +80,13 @@ export default function Inbox(props) {
     const containerRef = useRef<HTMLDivElement>(null)
     const bottomContainerRef = useRef<HTMLDivElement>(null)
     const [isDragging, setIsDragging] = useState(false)
+    const [lastQuestionRef, inView] = useInView({ threshold: 0.1 })
+
+    useEffect(() => {
+        if (inView && hasMore) {
+            fetchMore()
+        }
+    }, [inView, hasMore])
 
     useEffect(() => {
         if (initialTopicID && initialTopicID !== filters.topics?.id?.$eq) {
@@ -127,31 +135,22 @@ export default function Inbox(props) {
                                         <div className="w-32 text-center">Latest activity</div>
                                     </div>
                                     <div className="px-2 py-1">
-                                        {isLoading ? (
-                                            <div className="flex items-center justify-center py-8 h-full">
-                                                <Lottie
-                                                    animationData={hourglassAnimation}
-                                                    className="size-6 opacity-75"
-                                                    title="Loading questions..."
-                                                />
-                                            </div>
-                                        ) : (
-                                            questions.data?.map((question) => {
-                                                const {
-                                                    attributes: {
-                                                        subject,
-                                                        numReplies,
-                                                        activeAt,
-                                                        replies,
-                                                        profile,
-                                                        permalink,
-                                                    },
-                                                } = question
-                                                const latestAuthor =
-                                                    replies?.data?.[replies.data.length - 1]?.attributes?.profile ||
-                                                    profile
-                                                const active = `/questions/${permalink}` === pathname
-                                                return (
+                                        {questions.data?.map((question) => {
+                                            const {
+                                                attributes: {
+                                                    subject,
+                                                    numReplies,
+                                                    activeAt,
+                                                    replies,
+                                                    profile,
+                                                    permalink,
+                                                },
+                                            } = question
+                                            const latestAuthor =
+                                                replies?.data?.[replies.data.length - 1]?.attributes?.profile || profile
+                                            const active = `/questions/${permalink}` === pathname
+                                            return (
+                                                <span key={question.id} ref={lastQuestionRef}>
                                                     <OSButton
                                                         asLink
                                                         to={`/questions/${permalink}`}
@@ -181,8 +180,17 @@ export default function Inbox(props) {
                                                             {latestAuthor?.data.attributes.firstName}
                                                         </div>
                                                     </OSButton>
-                                                )
-                                            })
+                                                </span>
+                                            )
+                                        })}
+                                        {isLoading && (
+                                            <div className="flex items-center justify-center py-8 h-full">
+                                                <Lottie
+                                                    animationData={hourglassAnimation}
+                                                    className="size-6 opacity-75"
+                                                    title="Loading questions..."
+                                                />
+                                            </div>
                                         )}
                                     </div>
                                 </ScrollArea>
