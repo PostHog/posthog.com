@@ -48,7 +48,7 @@ export default function AppWindow({ item, constraintsRef }: { item: AppWindowTyp
         windows,
         updateWindowRef,
         updateWindow,
-        getPositionDefaults,
+        getDesktopCenterPosition,
     } = useApp()
     const controls = useDragControls()
     const sizeConstraints = item.sizeConstraints
@@ -72,6 +72,7 @@ export default function AppWindow({ item, constraintsRef }: { item: AppWindowTyp
     const handleDoubleClick = () => {
         updateWindow(item, {
             size: sizeConstraints.max,
+            position: getDesktopCenterPosition(sizeConstraints.max),
         })
     }
 

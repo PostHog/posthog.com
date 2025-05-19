@@ -35,6 +35,7 @@ interface AppContextType {
         size: { width: number; height: number },
         windows: AppWindow[]
     ) => { x: number; y: number }
+    getDesktopCenterPosition: (size: { width: number; height: number }) => { x: number; y: number }
 }
 
 interface AppProviderProps {
@@ -68,6 +69,7 @@ export const Context = createContext<AppContextType>({
     updateWindowRef: () => {},
     updateWindow: () => {},
     getPositionDefaults: () => ({ x: 0, y: 0 }),
+    getDesktopCenterPosition: () => ({ x: 0, y: 0 }),
 })
 
 const appSettings = {
@@ -245,6 +247,13 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
         }
     }
 
+    const getDesktopCenterPosition = (size: { width: number; height: number }) => {
+        return {
+            x: window.innerWidth / 2 - size.width / 2,
+            y: (window.innerHeight - taskbarHeight) / 2 - size.height / 2,
+        }
+    }
+
     const getPositionDefaults = (key: string, size: { width: number; height: number }, windows: AppWindow[]) => {
         if (key.startsWith('ask-max')) {
             return {
@@ -263,10 +272,7 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
             }
         }
 
-        return {
-            x: window.innerWidth / 2 - size.width / 2,
-            y: (window.innerHeight - taskbarHeight) / 2 - size.height / 2,
-        }
+        return getDesktopCenterPosition(size)
     }
 
     const getInitialSize = (key: string) => {
@@ -386,6 +392,7 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
                 updateWindowRef,
                 getPositionDefaults,
                 updateWindow,
+                getDesktopCenterPosition,
             }}
         >
             {children}
