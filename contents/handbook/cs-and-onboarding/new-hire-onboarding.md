@@ -25,7 +25,7 @@ Make sure to also take a look at the [sales team's onboarding page](/handbook/gr
 ### Rest of week 1
 
  - Ask team members in your region to be invited to some customer calls so you can gain an understanding of how we work with customers.
- - Check out some [Jimminy](https://app.jiminny.eu/dashboard) calls and add yourself to a bunch of Slack channels - get immersed in what our customers are saying. 
+ - Check out some [BuildBetter](https://app.buildbetter.app/) calls and add yourself to a bunch of Slack channels - get immersed in what our customers are saying. 
  - Learn and practise a [demo](https://youtu.be/2jQco8hEvTI) of PostHog.
  - Read all of the CS & Onboarding section in the Handbook as well as the Sales section, and update it as you learn more.
  - Meet with [Charles](/community/profiles/28625), the exec responsible for CS and Onboarding. 
@@ -33,7 +33,7 @@ Make sure to also take a look at the [sales team's onboarding page](/handbook/gr
 ### Week 2
 
 - During your first week, Dana will figure out your initial book of business (around 30 accounts). We will review these at the start of your second week, and make sure you understand how your targets are set. 
-- Shadow more live calls and listen to more [Jiminny](https://app.jiminny.eu/dashboard) recordings. There is [a Jiminny playlist with sub-folders containing Sales calls and PostHog knowledge calls](https://app.jiminny.eu/playlists#playlist-355cdc2a-1326-4ea6-97e3-e7749800fc8a), add to it as you listen! 
+- Shadow more live calls and listen to more [BuildBetter](https://app.buildbetter.app/) recordings. There is [a BuildBetter playlist with sub-folders containing customer calls and PostHog knowledge calls](https://app.buildbetter.app/folders/12228), add to it as you listen! 
 - Towards the end of the week, schedule a demo and feedback session with Dana. We might need to do a couple of iterations over the next few weeks as you take on board feedback, don't worry if that's the case!
 - Prioritize your current book of customers, and start reaching out! You should check conversations in Vitally to see if someone else has a prior relationship as they can make a warm intro for you.
 - Get comfortable with the PostHog [Docs](/docs) around our main products. 
@@ -83,7 +83,7 @@ By the end of month 3:
 ### Rest of week 1
 
  - Ask team members in your region to be invited to some customer calls so you can gain an understanding of how we work with customers. Make sure you are in the private YC startup Slack channel (ask someone to add you). 
- - Check out some [Jimminy](https://app.jiminny.eu/dashboard) calls and add yourself to a bunch of Slack channels - get immersed in what our customers are saying. 
+ - Check out some [BuildBetter](https://app.buildbetter.app/) calls and add yourself to a bunch of Slack channels - get immersed in what our customers are saying. 
  - Learn and practise a [demo](https://youtu.be/2jQco8hEvTI) of PostHog.
  - Read all of the CS and Onboarding section in the Handbook, and update it as you learn more.
  - Meet with [Charles](/community/profiles/28625), the exec responsible for CS and Onboarding.
@@ -91,7 +91,7 @@ By the end of month 3:
 
 ### Week 2
 
-- Shadow more live calls and listen to more [Jiminny](https://app.jiminny.eu/dashboard) recordings. There is [a Jiminny playlist with sub-folders containing Sales calls and PostHog knowledge calls](https://app.jiminny.eu/playlists#playlist-355cdc2a-1326-4ea6-97e3-e7749800fc8a), and an [Onboarding folder](https://app.buildbetter.app/folders/14521) in BuildBetter. Add to it as you listen! 
+- Shadow more live calls and listen to more [BuildBetter](https://app.buildbetter.app/) recordings. There is [a BuildBetter playlist with sub-folders containing customer calls and PostHog knowledge calls](https://app.buildbetter.app/folders/12228), and an [Onboarding folder](https://app.buildbetter.app/folders/14521). Add to them as you listen! 
 - Towards the end of the week, schedule a demo and feedback session with Dana. We might need to do a couple of iterations over the next few weeks as you take on board feedback, don't worry if that's the case!
 - Get comfortable with the PostHog [Docs](/docs) around our main products. 
 - We'll start routing new leads to you at the end of week 1. Start to review these and reach out, using a shared booking link with someone else from your region so they can back you up in the first few weeks. This is a great option to practise and fail.
