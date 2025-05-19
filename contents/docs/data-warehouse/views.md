@@ -26,7 +26,7 @@ Views can be materialized and stored in the PostHog data warehouse. This means t
 
 After you create a view, you can also schedule it to be updated at a specific interval. This is useful when you have a view that is used frequently, and you want to ensure that the data synced at a specified cadence. For example, a materialized view can be scheduled for an expensive query that is used in multiple dashboards.
 
-To materialize a view, go to the sql editor, select the `Materialize` option or the lighting bolt tab, and click `Save and materialize`. Materialized views are reversible, so you can revert back to a normal view at any time.
+To materialize a view, go to the [SQL editor](https://us.posthog.com/sql), select the **Materialize** option or the lighting bolt tab, and click **Save and materialize**. Materialized views are reversible, so you can revert back to a normal view at any time.
 
 
 ![materialized view](https://res.cloudinary.com/dmukukwp6/image/upload/ph_materialization_a3dd7dfb0b.png)
