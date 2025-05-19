@@ -178,7 +178,7 @@ const appSettings = {
 } as const
 
 export const Provider = ({ children, element, location }: AppProviderProps) => {
-    const [taskbarHeight, setTaskbarHeight] = useState(0)
+    const [taskbarHeight, setTaskbarHeight] = useState(38)
     const [windows, setWindows] = useState<AppWindow[]>([])
     const focusedWindow = useMemo(() => {
         return windows.reduce<AppWindow | undefined>(
@@ -265,7 +265,7 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
 
         return {
             x: window.innerWidth / 2 - size.width / 2,
-            y: window.innerHeight / 2 - size.height / 2,
+            y: (window.innerHeight - taskbarHeight) / 2 - size.height / 2,
         }
     }
 
