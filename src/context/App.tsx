@@ -298,7 +298,7 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
 
         const newWindow: AppWindow = {
             element,
-            zIndex: windows.length,
+            zIndex: windows.length + 1,
             key: element.key,
             coordinates: location?.state?.coordinates || { x: 0, y: 0 },
             minimized: false,
@@ -316,6 +316,16 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
                 ? { min: settings.size.min, max: settings.size.max }
                 : getWindowBasedSizeConstraints(),
             fixedSize: settings?.size.fixed || false,
+        }
+
+        // Adjust width if window extends beyond right edge
+        if (newWindow.position.x + newWindow.size.width > window.innerWidth - 20) {
+            newWindow.size.width = window.innerWidth - newWindow.position.x - 20
+        }
+
+        // Adjust height if window extends beyond bottom edge
+        if (newWindow.position.y + newWindow.size.height > window.innerHeight - taskbarHeight - 20) {
+            newWindow.size.height = window.innerHeight - newWindow.position.y - taskbarHeight - 20
         }
 
         if (existingWindow) {

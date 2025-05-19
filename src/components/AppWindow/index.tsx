@@ -128,12 +128,38 @@ export default function AppWindow({ item, constraintsRef }: { item: AppWindowTyp
         }
     }
 
-    const handleDragEnd = () => {
+    const handleDragEnd = (_event: any, info: any) => {
         if (!item.fixedSize && snapIndicator !== null) {
             handleSnapToSide(snapIndicator)
             setSnapIndicator(null)
             return
+        } else {
+            if (!constraintsRef.current) return
+
+            const bounds = constraintsRef.current.getBoundingClientRect()
+            const newX = position.x + info?.offset?.x
+            const newY = position.y + info?.offset?.y
+
+            if (newX >= 0 && newY >= 0 && newX + size.width <= bounds.width && newY + size.height <= bounds.height) {
+                updateWindow(item, {
+                    position: { x: newX, y: newY },
+                })
+            }
         }
+    }
+
+    const handleDragTransitionEnd = () => {
+        if (!constraintsRef.current || !item.ref?.current) return
+
+        const containerBounds = constraintsRef.current.getBoundingClientRect()
+        const windowBounds = item.ref.current.getBoundingClientRect()
+
+        const newX = windowBounds.left - containerBounds.left
+        const newY = windowBounds.top - containerBounds.top
+
+        updateWindow(item, {
+            position: { x: newX, y: newY },
+        })
     }
 
     const windowPosition = useMemo(() => {
@@ -274,7 +300,7 @@ export default function AppWindow({ item, constraintsRef }: { item: AppWindowTyp
                             dragConstraints={constraintsRef}
                             onDrag={handleDrag}
                             onDragEnd={handleDragEnd}
-                            onDragTransitionEnd={handleDragEnd}
+                            onDragTransitionEnd={handleDragTransitionEnd}
                             onMouseDown={() => bringToFront(item)}
                         >
                             <div
