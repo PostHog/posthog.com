@@ -672,36 +672,36 @@ export const handbookSidebar = [
         url: '',
         children: [
             {
-                name: 'Customer success team',
+                name: 'Customer success overview',
                 url: '/handbook/cs-and-onboarding/customer-success',
             },
             {
-                name: 'Onboarding team',
+                name: 'Onboarding specialist overview',
                 url: '/handbook/cs-and-onboarding/onboarding-team',
             },
             {
-                name: 'How we work',
-                url: '/handbook/cs-and-onboarding/how-we-work',
+                name: 'New starter onboarding',
+                url: '/handbook/cs-and-onboarding/new-hire-onboarding',
             },
             {
-                name: 'New team member onboarding',
-                url: '/handbook/cs-and-onboarding/new-hire-onboarding',
+                name: 'Saying hi to your customers',
+                url: '/handbook/cs-and-onboarding/saying-hi-to-your-customers',
             },
             {
                 name: 'Health tracking',
                 url: '/handbook/cs-and-onboarding/health-tracking',
             },
             {
-                name: 'Feature requests',
-                url: '/handbook/cs-and-onboarding/feature-requests',
-            },
-            {
                 name: 'Customer health checks',
                 url: '/handbook/cs-and-onboarding/health-checks',
             },
             {
-                name: 'Saying hi to your customers',
-                url: '/handbook/cs-and-onboarding/saying-hi-to-your-customers',
+                name: 'How we work',
+                url: '/handbook/cs-and-onboarding/how-we-work',
+            },
+            {
+                name: 'Tracking feature requests',
+                url: '/handbook/cs-and-onboarding/feature-requests',
             },
         ],
     },
