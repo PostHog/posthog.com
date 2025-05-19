@@ -5,7 +5,7 @@ showTitle: true
 hideAnchor: false
 ---
 
-[Lottie](/community/profiles/227), PostHog's in-house graphic designer, handles all requests for branding and artwork. She can help you with things like:
+[Lottie](/lottie), PostHog's in-house graphic designer, handles all requests for branding and artwork. She can help you with things like:
 
 - Custom visuals for paid ad campaigns
 - Blog and social media artwork
