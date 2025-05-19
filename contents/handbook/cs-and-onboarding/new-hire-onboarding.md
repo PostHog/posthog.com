@@ -88,3 +88,69 @@ By the end of month 2:
 
 By the end of month 3:
  - You've implemented process and system-level changes to make your job better/more effective
+
+## PostHog curriculum
+
+PostHog has a lot of products! To help you figure out how to start and continue building your knowledge, here's a recommended list of topics to work through.
+
+### Fundamental (Week 1-3)
+
+Product analytics
+1. Creating insights: everything in Trends, Funnels, User paths
+   - Retention, Stickiness, Lifecycle
+   - How to filter out test users?
+2. Persons
+   - What are persons and how are they created?
+   - Identify()
+   - identified vs anonymous events
+   - Pricing
+3. Session replay – masking, cutting costs, filtering
+4. Toolbar – heatmaps, actions
+5. Groups – what is it? what is the use case? how is it charged?
+
+Implementation
+1. How is PostHog implemented?
+2. Autocapture – how do you customize autocapture? How do you leverage autocapture?
+3. What are custom events? How do you set custom properties?
+4. What is identify? How do you set custom person properties? How do you merge users? What is alias?
+5. What are groups? How do you set group properties?
+6. Projects, Cross-domain tracking, reverse proxy, cookie consent (EU)
+
+### Intermediate (Week 4-6)
+
+Feature flags
+1. Creating and using them in code
+    1. How do I ensure flags are loaded before capturing any events?
+    2. Can you evaluate feature flags using properties that haven't been ingested yet?
+2. Locally testing feature flags using toolbar
+3. Insights based on feature flags:
+    1. Some users have access to a beta feature. How do I filter insights on these users?
+4. Local evaluation
+5. Client-side bootstrapping
+6. Troubleshooting
+
+Experiments
+1. Creating an experiment from PostHog UI
+2. Understanding MDE, primary metrics, secondary metrics, interpreting results
+3. Traffic allocation - configuring it and validating it. What are some reasons why 80/20 split may not be an 80/20 split?
+4. Returning users: user sees variant A in session 1, does not convert; user sees variant B in session 2, does convert
+    1. Does this happen? Can the same user see different variants in different sessions?
+    2. If so, how does this affect the results?
+5. No-code web experiments
+    1. Implementation requirements
+    2. Landing page experiments – how to deal with flickering of content when page is first loaded?
+
+Product analytics
+1. Creating cohorts – static vs dynamic
+2. RBAC, Teams add-on
+
+Data pipelines
+1. You should all be familiar with this!
+
+### Advanced
+
+1. SPA (single page apps)
+2. User paths
+    - wildcard groups
+    - path cleaning rules
+3. API
