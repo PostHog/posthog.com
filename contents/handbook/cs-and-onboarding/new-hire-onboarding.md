@@ -102,6 +102,7 @@ Add and modify this list as you work through it.
 ### Fundamental
 
 #### Product analytics
+[Quick primer on Product analytics](https://www.loom.com/share/645de3987e4947ba8164b4d7b7cc719b?sid=ae5f8a50-dc56-4cc4-93d5-d398b398d5a0)
 1. Creating insights: everything in Trends, Funnels, User paths
    - Retention, Stickiness, Lifecycle
    - How to filter out test users?
