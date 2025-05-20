@@ -26,7 +26,20 @@ Views can be materialized and stored in the PostHog data warehouse. This means t
 
 After you create a view, you can also schedule it to be updated at a specific interval. This is useful when you have a view that is used frequently, and you want to ensure that the data synced at a specified cadence. For example, a materialized view can be scheduled for an expensive query that is used in multiple dashboards.
 
-![materialized view](https://res.cloudinary.com/dmukukwp6/image/upload/materialized_view_6ba7a6b53d.png)
+To materialize a view, go to the [SQL editor](https://us.posthog.com/sql), select the **Materialize** option or the lighting bolt tab, and click **Save and materialize**. Materialized views are reversible, so you can revert back to a normal view at any time.
+
+
+![materialized view](https://res.cloudinary.com/dmukukwp6/image/upload/ph_materialization_a3dd7dfb0b.png)
+
+#### Tips for Materialization
+
+- The purpose of materialization is to speed up queries, so you don't need to materialize views that are already fast.
+
+- You can materialize only the slow part of a larger query, like a `with` expression or a subquery. Often times, materializing a subset of a larger query is a good way to create a resource that's usable for various different places within PostHog, including insights and other data warehouse views.
+
+- Datasets generated from materialized views are only going to update at the specified intervals and not in real-time. This means that if you have a view that is used in a dashboard or relied upon for another query, the dashboard will not update until the materialized view is updated. We offer a 5-minute refresh interval, but if the query takes longer than that to execute, it will only be updated once the query is finished and rerun at the next 5-minute interval.
+
+- Materialization runs have more compute and memory resources allocated to them than standard queries, but they still can timeout for inefficient queries. We time out after 1 hour of processing time.
 
 ### Extending PostHog models with views
 
