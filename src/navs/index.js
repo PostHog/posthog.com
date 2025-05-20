@@ -1239,6 +1239,16 @@ export const handbookSidebar = [
     {
         name: 'RevOps',
         url: '/handbook/growth/revops',
+        children: [
+                    {
+                        name: 'Revenue Adjustments',
+                        url: '/handbook/growth/revops/revenue-adjustments',
+                    },
+                    {
+                        name: 'Retention Metrics',
+                        url: '/handbook/growth/revops/retention-metrics',
+                    } 
+        ],
     },
     {
         name: 'Comms',
