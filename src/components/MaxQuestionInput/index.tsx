@@ -36,14 +36,14 @@ export const MaxQuestionInput = ({
 
     return (
         <div
-            className={`border border-border dark:border-border-dark text-[15px] rounded-lg p-8 my-8 ${className} relative shadow-lg`}
+            className={`bg-gradient-to-br from-[#e5e7e0] to-[#f0f2ed] dark:from-[#242529] dark:to-[#2a2c31] border border-border dark:border-border-dark text-[15px] rounded-lg p-8 my-8 ${className} relative shadow-lg`}
         >
             <div className="absolute -top-6 -right-6">
                 <div className="relative">
                     <Bang className="w-[120px] animate-grow" />
                     <p className="px-4 text-center m-0 absolute top-0 left-0 right-0 bottom-0 flex flex-col items-center justify-center text-black uppercase leading-none font-bold text-sm rotate-6">
-                        Try it <br />
-                        for free
+                        Just <br />
+                        try it!
                     </p>
                 </div>
             </div>
@@ -58,14 +58,13 @@ export const MaxQuestionInput = ({
                 </div>
                 <div className="flex-1 space-y-6">
                     <div className="space-y-2">
-                        <h3 className="text-xl font-bold text-primary dark:text-primary-dark font-serif">
-                            Crikey, there's already a free beta?
+                        <h3 className="text-xl font-bold text-primary dark:text-primary-dark">
+                            Already got data in PostHog?
                         </h3>
-                        <p className="text-primary dark:text-primary-dark font-serif">
-                            Yep. Max can already answer product questions, generate SQL, compose haikus, and filter
-                            session replays for you. Try him out by asking questions like:
+                        <p className="text-muted dark:text-muted-dark">
+                            Then it's easiest to just show you Max AI in action. You can ask him anything, including:
                         </p>
-                        <ul className="list-disc list-inside text-primary dark:text-primary-dark space-y-1 font-serif">
+                        <ul className="list-disc list-inside text-muted dark:text-muted-dark space-y-1">
                             <li>"What's our most popular feature?"</li>
                             <li>"Show me user retention by country"</li>
                             <li>"What's my churn rate?"</li>
