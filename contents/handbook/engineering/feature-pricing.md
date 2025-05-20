@@ -58,8 +58,6 @@ A good question to ask yourself here is, "If I were to switch away from PostHog,
 
 For example, if someone were to consider moving from PostHog to some other provider, cohorts would need to be manually recreated in the other provider, which would be tedious. However, something like Web Performance just happens and doesn't require any user involvement, so isn't sticky.
 
-### Product pricing should include everything required to use that product
-
 ### Products should work independently but shine together
 
 Each product should be usable on its own. For example, session replay can be enabled independently of other products. But to get the most value out of it, it's best to use it together with product analytics. This enables users to filter recordings based on e.g. URLs and person profile properties, such as email or organization. Similarly, you can use error tracking on its own, but it's a lot more powerful if you also use session replay, enabling you to easily click through to the recording of a session where the error occurred.
