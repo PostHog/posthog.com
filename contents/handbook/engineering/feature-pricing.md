@@ -60,7 +60,7 @@ For example, if someone were to consider moving from PostHog to some other provi
 
 ### Products should work independently but shine together
 
-Each product should be usable on its own. For example, session replay can be enabled independently of other products. But to get the most value out of it, it's best to use it together with product analytics. This enables users to filter recordings based on e.g. URLs and person profile properties, such as email or organization. Similarly, you can use error tracking on its own, but it's a lot more powerful if you also use session replay, enabling you to easily click through to the recording of a session where the error occurred.
+Each product should be usable on its own. For example, session replay can be enabled independently of other products. But to get the most value out of it, it's best to use it together with our other products. This enables users to have rich filters using the data from the other parts of PostHog. Similarly, you can use error tracking on its own, but it's a lot more powerful if you also use session replay, enabling you to easily click through to the recording of a session where the error occurred.
 
 ### Other guidelines
 
