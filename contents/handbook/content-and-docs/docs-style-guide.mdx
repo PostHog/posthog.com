@@ -47,6 +47,30 @@ Put button, tab, and other navigation names in bold. This makes it easier for ou
 
 > **Example:** "Go to the [insights tab](https://us.posthog.com/insights) and click **+ New insight**."
 
+### UI navigation
+When documenting UI steps, references to UI elements should be in chronological order. When possible, hyper link to the correct location.
+
+<CalloutBox icon="IconInfo" title="Here is some information" type="fyi">
+  
+  Example:
+
+  - 👍 Under Settings > User, under the [Two-factor section](https://us.posthog.com/settings/user#2fa), click the 2FA button.
+
+  - 👎 Under User in your Settings, click the Set up 2FA button under Two-factor authentication,
+</CalloutBox>
+
+
+For long UI flows, like big menus or settings, use `>` to show the menu or heading hierarchy. Use exact names for headers and labels for easier searching. Don't mix navigating and taking actions, such as clicking a button.
+
+<CalloutBox icon="IconInfo" title="Here is some information" type="fyi">
+
+Example:
+
+- 👍 Under Settings > Product analytics > Date & time, under Time zone, select your timezone.
+
+- 👎 Under Settings > Product analytics > Date & time > Time zone > select your timezone.
+</CalloutBox>
+
 ### The backtick is your friend
 
 Remember to use backticks around inline code snippets, and triple backticks around multiline code samples.
