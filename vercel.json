@@ -868,6 +868,7 @@
         { "source": "/lottie", "destination": "/community/profiles/27881" },
         { "source": "/joe", "destination": "/community/profiles/29070" },
         { "source": "/cory", "destination": "/community/profiles/30200" },
+        { "source": "/michael", "destination": "/community/profiles/28847" },
         { "source": "/docs/surveys/manual", "destination": "/docs/surveys" },
         { "source": "/docs/surveys/setup", "destination": "/docs/surveys/installation" },
         { "source": "/docs/surveys/new", "destination": "/docs/surveys/creating-surveys" },
