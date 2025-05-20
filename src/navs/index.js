@@ -2314,6 +2314,10 @@ export const docsMenu = {
                             name: 'Command palette',
                             url: '/docs/cmd-k',
                         },
+                        {
+                            name: 'Account settings',
+                            url: '/docs/settings/account-settings',
+                        },
                     ],
                 },
                 {
