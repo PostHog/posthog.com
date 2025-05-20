@@ -65,7 +65,7 @@ As always, please communicate that a beta has been released by sharing updates i
 
 At some point most of our products should be paid-for products. Start this process with a pricing RFC using the [pricing RFC template](https://github.com/PostHog/product-internal/blob/main/requests-for-comments/templates/request-for-comments-new-pricing.md?plain=1) and be sure to tag members of [the Billing team](/teams/billing) for review.
 
-Bonus points if you share your Priding RFC with the #marketing channel, as always. 
+Bonus points if you share your pricing RFC with the #marketing channel, as always. 
 
 ## 5. Ship it 
 
