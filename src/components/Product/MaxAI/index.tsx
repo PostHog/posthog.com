@@ -610,7 +610,11 @@ export const ProductMax = () => {
                             <img src={headlineImg} alt="Max AI" className="w-full max-w-[604px]" />
 
                             <div>
-                                <img src={betaMobileImg} alt="Max AI" className="w-full mdlg:hidden max-w-[222px] mx-auto" />
+                                <img
+                                    src={betaMobileImg}
+                                    alt="Max AI"
+                                    className="w-full mdlg:hidden max-w-[222px] mx-auto"
+                                />
                                 <img
                                     src={betaDesktopImg}
                                     alt="Max AI"
@@ -798,7 +802,22 @@ export const ProductMax = () => {
                                 </Link>{' '}
                                 and we'll add new ideas to our roadmap when we're considering Max's future superpowers.
                             </p>
+                            <h3 className="font-bold">Is there a beta version I can try?</h3>
+                            <p>
+                                Yes, and it's free too.{' '}
+                                <Link href="https://us.posthog.com/#panel=feature-previews%3Aartificial-hog" external>
+                                    Opt in in the app
+                                </Link>
+                                , or just try him out below!
+                            </p>
                         </div>
+                    </div>
+
+                    <div className="mb-12">
+                        <MaxQuestionInput
+                            className="bg-[#f5e2b1] border-[#F5E2B2] shadow-xl"
+                            placeholder="Ask Max anything about your product data..."
+                        />
                     </div>
 
                     <section className="mt-20 dark:text-primary">
