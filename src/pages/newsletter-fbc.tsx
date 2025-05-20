@@ -23,7 +23,7 @@ function NewsletterFBC() {
         const fbclid = urlParams.get('fbclid')
 
         posthog?.capture('newsletter_subscribed', { email })
-        posthog?.capture('user_signed_up_to_newsletter', {
+        posthog?.capture('user_signed_up_to_newsletter_from_ad', {
             ad_source: 'meta',
             email: email,
             fbclid: fbclid || undefined,
@@ -79,7 +79,7 @@ function NewsletterFBC() {
                                             />
                                             <button className={`${container(undefined, 'md')} -mt-px w-full max-w-xs`}>
                                                 <span className={child(undefined, undefined, undefined, 'md')}>
-                                                    Subscribe
+                                                    Subscribe for free
                                                 </span>
                                             </button>
                                         </form>
