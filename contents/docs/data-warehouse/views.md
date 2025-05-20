@@ -16,7 +16,7 @@ Query views are created directly inside SQL insights. If the query has valid vie
 
 For a query to be a valid view, all fields being accessed must be aliased (with the SQL `as` keyword). The alias names are how you access the fields on the view. This also means that we cannot use `SELECT *...` type SQL syntax for a query we would like to be a view since none of the columns are aliased.
 
-> **Note:** Nested views are already supported. You can create a view based on other views.
+> **Note:** Nested views are supported. You can create a view based on other views.
 
 ![valid view](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/features/data-warehouse/valid-view.png)
 
