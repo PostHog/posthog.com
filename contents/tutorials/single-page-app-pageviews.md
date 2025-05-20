@@ -116,9 +116,7 @@ Make sure to dynamically import the `PostHogPageView` component or the `useSearc
 
 ## Tracking pageviews in React Router v7
 
-If you are using [React Router](https://reactrouter.com/en/main)
-
-Start by setting `posthog-js` and `posthog-js/react` as external packages in your `vite.config.ts` file.
+If you are using [React Router](https://reactrouter.com/en/main), start by setting `posthog-js` and `posthog-js/react` as external packages in your `vite.config.ts` file.
 
 ```ts
 // vite.config.ts
