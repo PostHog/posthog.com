@@ -260,8 +260,9 @@ export default function AppWindow({ item, constraintsRef }: { item: AppWindowTyp
                             }}
                             initial={{
                                 scale: 0.005,
-                                x: windowPosition.x,
-                                y: windowPosition.y,
+
+                                x: item.fromOrigin?.x || windowPosition.x,
+                                y: item.fromOrigin?.y || windowPosition.y,
                             }}
                             animate={{
                                 scale: 1,
@@ -329,7 +330,9 @@ export default function AppWindow({ item, constraintsRef }: { item: AppWindowTyp
                                                             onClick() {
                                                                 addWindow(
                                                                     <ChatProvider
-                                                                        location={{ pathname: `ask-max-${item.path}` }}
+                                                                        location={{
+                                                                            pathname: `ask-max-${item.path}`,
+                                                                        }}
                                                                         key={`ask-max-${item.path}`}
                                                                         newWindow
                                                                         context={[

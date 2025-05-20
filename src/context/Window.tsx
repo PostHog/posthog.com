@@ -40,6 +40,10 @@ export interface AppWindow {
         y: number
     }
     fixedSize: boolean
+    fromOrigin?: {
+        x: number
+        y: number
+    }
 }
 
 interface WindowProviderProps {

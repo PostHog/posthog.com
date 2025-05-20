@@ -182,6 +182,7 @@ const appSettings = {
 export const Provider = ({ children, element, location }: AppProviderProps) => {
     const [taskbarHeight, setTaskbarHeight] = useState(38)
     const [windows, setWindows] = useState<AppWindow[]>([])
+    const [lastClickedElement, setLastClickedElement] = useState<HTMLElement | null>(null)
     const focusedWindow = useMemo(() => {
         return windows.reduce<AppWindow | undefined>(
             (highest, current) => (current.zIndex > (highest?.zIndex ?? -1) ? current : highest),
@@ -290,11 +291,21 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
         }
     }
 
+    const getLastClickedElementRect = () => {
+        const rect = lastClickedElement?.getBoundingClientRect()
+        if (!rect) return undefined
+        return {
+            x: rect.left,
+            y: rect.top,
+        }
+    }
+
     const updatePages = (element: WindowElement) => {
         const existingWindow = windows.find((w) => w.path === element.props.location.pathname)
         const size = getInitialSize(element.key)
         const position = getPositionDefaults(element.key, size, windows)
         const settings = appSettings[element.key]
+        const lastClickedElementRect = getLastClickedElementRect()
 
         const newWindow: AppWindow = {
             element,
@@ -316,6 +327,12 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
                 ? { min: settings.size.min, max: settings.size.max }
                 : getWindowBasedSizeConstraints(),
             fixedSize: settings?.size.fixed || false,
+            fromOrigin: lastClickedElementRect
+                ? {
+                      x: lastClickedElementRect.x - size.width / 2,
+                      y: lastClickedElementRect.y - taskbarHeight - size.height / 2,
+                  }
+                : undefined,
         }
 
         // Adjust width if window extends beyond right edge
@@ -385,6 +402,23 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
 
         window.addEventListener('resize', updateTaskbarHeight)
         return () => window.removeEventListener('resize', updateTaskbarHeight)
+    }, [])
+
+    useEffect(() => {
+        const handleClick = (e: MouseEvent) => {
+            const target = e.target as HTMLElement
+            const link = target.closest('a')
+            const button = target.closest('button')
+            const isClickable = link || button
+            if (isClickable) {
+                setLastClickedElement(target)
+            }
+        }
+        document.addEventListener('click', handleClick)
+
+        return () => {
+            document.removeEventListener('click', handleClick)
+        }
     }, [])
 
     return (
