@@ -52,7 +52,7 @@ export const MaxQuestionInput = ({
                     <CloudinaryImage
                         src="https://res.cloudinary.com/dmukukwp6/image/upload/robot_f2dfddda15.png"
                         alt="Max AI Robot"
-                        className="w-full max-w-[180px]"
+                        className="w-full max-w-[180px] animate-[wobble_3s_ease-in-out_infinite]"
                         placeholder="none"
                     />
                 </div>
