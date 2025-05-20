@@ -1723,3 +1723,37 @@ li.squeak-left-border {
         }
     }
 }
+
+/* styles for dark mode since /max only exists in light mode */
+.max-ai-body {
+    .bg-accent {
+        background: #F5E2B2 !important;
+    }
+
+    .dark\:bg-accent-dark:is(.dark *) {
+        background: #F5E2B2 !important;
+    }
+    
+    .article-content a:not(.cta):is(.dark *),
+    .dark\:text-primary-dark:is(.dark *) {
+        color: #151515 !important;
+    }
+
+    .dark\:text-primary-dark\/50:is(.dark *) {
+        color: #151515 !important;
+        opacity: .5;
+    }
+
+    .dark\:text-primary-dark\/70:is(.dark *) {
+        color: #151515 !important;
+        opacity: .7;
+    }
+
+    .dark\:border-white:is(.dark *) {
+        border-color: #151515 !important;
+    }
+}
+
+body.dark .max-ai-body {
+    color: #151515;
+}
