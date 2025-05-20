@@ -37,12 +37,40 @@ Speed is our differentiator as an engineering org. We grow fast by building fast
 * **Build "must have" features ahead of more SDK coverage.**
   * Sometimes we could add more SDKs "to get more growth", but we should start by making sure we can offer the bare minimum within the most popular SDKs we support (posthog-js, python, typescript). Don't default to loads of SDKs if you know you have huge feature gaps as that will disappoint lots of users.
  
-### Launching
+## 3. Test it and get feedback
 
-// JOE TO FILL OUT
+As soon as possible we want to start a waitlist of users who are interested (via a roadmap item) and then collecting actual feedback (via a beta). It's your responsibility to create both of these stages, but the marketing teams can help you amplify these activities and make them successful. 
 
-You can also read more detail on the process of [launching a feature or product into beta](/handbook/product/releasing-as-beta).
+If you have questions about anything beta related, reach out to [the Comms team](/teams/words-and-pictures) for answers. 
 
-## Step 3. Price it
+> The best thing you can do as a team lead to ensure a smooth launch and beta process is to overcommunicate with the marketing and billing teams via the #marketing channel. You can never give too much warning or too many updates on how your product is progressing. 
 
-At some point most of our products should be paid-for products. Start this process with a pricing RFC using the [pricing RFC template](https://github.com/PostHog/product-internal/blob/main/requests-for-comments/templates/request-for-comments-new-pricing.md?plain=1). 
+### Roadmap
+
+Add your product to [the in-app feature preview roadmap](/docs/feature-flags/early-access-feature-management) as soon as you start seriously thinking about developing a new product or feature. Then you'll start gathering a waitlist of interested users, ready for a beta announcement. 
+
+Give your product a clear title and simple description in the app, so users know what they're signing up for. Let the Marketing and Billing teams know you've done this via the main #marketing channel or #tell-posthog-anything. That'll enable them to drive users to sign-up to your roadmap by mentioning it in relevant comms. 
+
+### Betas
+
+Move your roadmap item from `concept` to `beta` when it is usable and people can opt-in with the feature previews menu. All items in the Beta stage should have a feedback link and a docs link on their listing so that users know how to get started and share their thoughts. 
+
+If you need help creating docs for your beta, the [Content & Docs team](/teams/marketing) can assist and review your drafts. Feedback links can direct either to the support modal, or to your email address. 
+
+As always, please communicate that a beta has been released by sharing updates in the #marketing channel. This enables the marketing teams to announce the beta in relevant comms, on socials, and more. Product marketing will, for example, run communication that turns your roadmap waitlist into beta testers, and create a beta onboarding flow that helps you collect feedback automatically. 
+
+> You can also read more detail on the process of [launching a feature or product into beta](/handbook/product/releasing-as-beta).
+
+## Step 4. Price it
+
+At some point most of our products should be paid-for products. Start this process with a pricing RFC using the [pricing RFC template](https://github.com/PostHog/product-internal/blob/main/requests-for-comments/templates/request-for-comments-new-pricing.md?plain=1) and be sure to tag members of [the Billing team](/teams/billing) for review.
+
+Bonus points if you share your Priding RFC with the #marketing channel, as always. 
+
+## 5. Ship it 
+
+Betas move into full releases when we roll them out to all users. This is when we trigger a [new product announcement](/handbook/words-and-pictures/product-announcements#new-product-announcements). As always, the simplest and easiest way to work with marketing is to post in the #marketing Slack channel.  
+
+A new product announcement takes time. Product marketing will begin by working you to collect information and create a launch plan ([example here](https://github.com/PostHog/meta/issues/298)). This will include creating landing pages, deciding rewards for beta users, requesting key art for your product, planning the launch comms, and arming the sales team to sell your product to users. 
+
+Marketing teams will not start planning a full launch until a pricing RFC has been created, and will typically ask for a firm release window. The more warning you can give the Marketing teams and the more certainty you have around a launch date, the smoother your launch will be for you and your users. **Typically, you must give at least 2-3 weeks notice of a product launch and you should reach out directly to marketing team leads if this is not possible.**
