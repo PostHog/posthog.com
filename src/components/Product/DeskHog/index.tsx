@@ -1,7 +1,7 @@
 import CloudinaryImage from 'components/CloudinaryImage'
 import React from 'react'
 import Link from 'components/Link'
-import { IconLaptop, IconWrench, IconHandwave, IconCode2 } from '@posthog/icons'
+import { IconLaptop, IconWrench, IconHandwave, IconCode2, IconChip, IconMemory, IconScreen, IconSignal, IconBatteryCharge, IconExpand45, IconBox, IconButton, IconRuler, IconInfinity, IconExternal, IconDeskHog } from '@posthog/icons'
 import {
     IconAsterisk,
     IconBolt,
@@ -143,16 +143,17 @@ const HeroDeskHog = ({ color, icon, beta, product, title, description }: HeroDes
                 )}
             </div>
             <h1
-                className="text-5xl md:text-6xl text-center mb-4 md:mb-2 text-balance"
-                dangerouslySetInnerHTML={{ __html: title }}
-            />
+                className="text-5xl md:text-6xl text-center mb-4 md:mb-2 text-balance">
+                    It's a developer <span className="text-red dark:text-yellow">toy</span> that brings developers <span className="text-red dark:text-yellow">joy</span>
+                </h1>
             <p
-                className="text-lg font-semibold text-center text-opacity-75 mb-5"
-                dangerouslySetInnerHTML={{ __html: description }}
-            />
+                className="text-lg font-semibold text-center text-opacity-75 mb-5">Pre-built kits coming soon. DIY version available now.</p>
             <div className="flex justify-center gap-2 mb-12">
-                <CallToAction href="https://github.com/PostHog/DeskHog" type="primary">
-                    Get the DIY kit
+                <CallToAction href="https://github.com/PostHog/DeskHog" type="primary" externalNoIcon>
+                    <>
+                        Get the DIY kit
+                        <IconExternal className="size-4 inline-block ml-1" />
+                    </>
                 </CallToAction>
             </div>
         </section>
@@ -161,27 +162,19 @@ const HeroDeskHog = ({ color, icon, beta, product, title, description }: HeroDes
 
 const VideoDeskHog = () => (
     <section id="demo-video" className={`overflow-hidden h-auto max-h-[90vh] mb-8 pt-10`}>
-        <div className="relative">
+        <div className="inline-flex mx-auto relative overflow-hidden w-full aspect-video">
             <iframe
                 src="https://res.cloudinary.com/dmukukwp6/video/upload/Termagotchi_084775b39f.mp4"
                 className="rounded aspect-video m-0 shadow-xl"
-                style={{
-                    width: '100%',
-                    height: 'auto',
-                    maxWidth: '55%',
-                    margin: '0 auto',
-                    display: 'block',
-                    border: '1px solid var(--border-light, #e0e0e0)',
-                }}
                 allow="autoplay"
             />
-            <div className="absolute top-[-10px] left-[200px] mt-4 ml-4">
+            <div className="absolute top-10 -right-10 md:top-10 md:-right-14">
                 <a
                     href="https://github.com/PostHog/DeskHog"
-                    className="inline-block bg-yellow text-black px-6 py-2 rounded-full text-xl font-semibold shadow-lg transform -rotate-45 scale-90"
+                    className="inline-block bg-yellow text-black hover:text-black px-8 py-1 md:px-12 md:py-2 text-sm md:text-base font-semibold shadow-lg transform rotate-45"
                 >
                     <span className="text-black">Build it yourself</span>
-                    <br />
+                    <IconExternal className="size-4 inline-block ml-1 relative -top-0.5" />
                 </a>
             </div>
         </div>
@@ -265,8 +258,8 @@ export const ProductDeskHog = () => {
             />
             <div className={`${fullWidthContent ? 'max-w-full px-8' : 'max-w-7xl mx-auto'} px-5 pt-10 pb-10`}>
                 <HeroDeskHog
-                    color="orange"
-                    icon={<IconLaptop />}
+                    color="blue"
+                    icon={<IconDeskHog />}
                     product={product.capitalized}
                     title="It's a developer toy that <br /> <span className='text-red dark:text-yellow'>brings developers joy</span>"
                     description="Pre-built kits coming soon. DIY version available now."
@@ -275,12 +268,12 @@ export const ProductDeskHog = () => {
             </div>
 
             <div id="features">
-                <section className="max-w-7xl mx-auto px-5 py-10">
+                <section className="max-w-7xl mx-auto px-5 pb-6">
                     <div className="mb-4">
-                        <h2 className="text-4xl text-center mb-12">
-                            DeskHog is an <span className="text-red dark:text-yellow">open-source</span>,{' '}
-                            <span className="text-red dark:text-yellow">3D printed</span>, and{' '}
-                            <span className="text-red dark:text-yellow">palm-sized</span> slice of developer joy.
+                        <h2 className="text-4xl lg:text-5xl text-center text-balance mb-12">
+                            DeskHog is an <span className="text-red dark:text-yellow">open-source,</span>{' '}
+                            <span className="text-red dark:text-yellow">3D printed,</span>{' '}
+                            <span className="text-red dark:text-yellow">palm-sized</span> slice of developer joy
                         </h2>
                         <ul className={`list-none p-0 grid md:grid-cols-${subfeaturesItemCount} gap-4`}>
                             {subfeatures.map((subfeature, index) => {
@@ -291,7 +284,7 @@ export const ProductDeskHog = () => {
 
                     <div className="flex flex-col-reverse items-center md:flex-row gap-8 pt-20 mb-20">
                         <div className="flex-1">
-                            <h2 className="text-4xl">
+                            <h2 className="text-4xl lg:text-5xl">
                                 But what is DeskHog really?
                                 <br />
                                 <span className="text-red dark:text-yellow">It's a teeny, tiny, beast.</span>
@@ -305,19 +298,20 @@ export const ProductDeskHog = () => {
                                 It's a hand-made micro games console. It's a desktop terminal for PostHog data. It's a
                                 friend.
                             </p>
-                            <p>
-                                <b>Can it play Pong?</b> Yes.
-                                <br /> <b>Can it play Flappy Bird?</b> Yes.
-                                <br /> <b>Can it play Doom?</b> ...We're working on it.
-                            </p>
-                            <div>
-                                <p className="text-center text-lg mb-4 bg-[#E5E7E0] dark:bg-slate-700 dark:text-slate-200 p-4 rounded-md shadow-md w-full">
-                                    <strong>
-                                        Want <i>more</i> hardware?
-                                    </strong>{' '}
-                                    We included an I²C expansion port, just for people like you.
-                                </p>
+                            <div className="inline-grid grid-cols-2 [&>*]:p-2 divide-y divide-border dark:divide-border-dark border border-light dark:border-dark text-sm mb-6">
+                                <strong className="border-r border-light dark:border-dark">Can it play Pong?</strong>
+                                <span className="!border-t-0">Yes.</span>
+                                <strong className="border-r border-light dark:border-dark">Can it play Flappy Bird?</strong>
+                                <span>Yes.</span>
+                                <strong className="border-r border-light dark:border-dark">Can it play Doom?</strong>
+                                <span>...We're working on it.</span>
                             </div>
+                            <p className="text-sm mb-4 border-l-4 border-light dark:border-dark pl-2 py-1">
+                                <strong>
+                                    Want <i>more</i> hardware?
+                                </strong>{' '}
+                                We included an I²C expansion port, just for people like you.
+                            </p>
                         </div>
                         <aside className="shrink-0 md:basis-[500px]">
                             <CloudinaryImage
@@ -328,12 +322,12 @@ export const ProductDeskHog = () => {
                         </aside>
                     </div>
                     <h2 className="text-5xl text-center mb-2">Of course we made some games for it</h2>
-                    <h3 className="text-2xl text-center mb-12">
-                        (but you can{' '}
-                        <Link to="https://github.com/PostHog/DeskHog" className="text-red dark:text-yellow">
+                    <h3 className="text-xl text-center font-medium mb-12">
+                        (And you can{' '}
+                        <Link to="https://github.com/PostHog/DeskHog" externalNoIcon className="text-red dark:text-yellow">
                             make your own
-                        </Link>{' '}
-                        too)
+                        </Link>, 
+                        too!)
                     </h3>
 
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
@@ -349,7 +343,7 @@ export const ProductDeskHog = () => {
                                     />
                                 </div>
                                 {/* Back Face */}
-                                <div className="absolute h-full w-full [backface-visibility:hidden] [transform:rotateY(180deg)] bg-accent dark:bg-accent-dark border border-border dark:border-border-dark rounded-lg p-6 flex flex-col justify-center items-center">
+                                <div className="absolute h-full w-full [backface-visibility:hidden] [transform:rotateY(180deg)] bg-accent dark:bg-accent-dark border border-light dark:border-dark rounded p-6 duration-150 flex flex-col justify-center items-center">
                                     <div className="text-center">
                                         <h4 className="text-xl font-bold mb-2">Pog</h4>
                                         <p className="text-sm text-primary/80 dark:text-primary-dark/80">
@@ -377,7 +371,7 @@ export const ProductDeskHog = () => {
                                     />
                                 </div>
                                 {/* Back Face */}
-                                <div className="absolute h-full w-full [backface-visibility:hidden] [transform:rotateY(180deg)] bg-accent dark:bg-accent-dark border border-border dark:border-border-dark rounded-lg p-6 flex flex-col justify-center items-center">
+                                <div className="absolute h-full w-full [backface-visibility:hidden] [transform:rotateY(180deg)] bg-accent dark:bg-accent-dark border border-light dark:border-dark rounded p-6 duration-150 flex flex-col justify-center items-center">
                                     <div className="text-center">
                                         <h4 className="text-xl font-bold mb-2">IdleHog</h4>
                                         <p className="text-sm text-primary/80 dark:text-primary-dark/80">
@@ -405,7 +399,7 @@ export const ProductDeskHog = () => {
                                     />
                                 </div>
                                 {/* Back Face */}
-                                <div className="absolute h-full w-full [backface-visibility:hidden] [transform:rotateY(180deg)] bg-accent dark:bg-accent-dark border border-border dark:border-border-dark rounded-lg p-6 flex flex-col justify-center items-center">
+                                <div className="absolute h-full w-full [backface-visibility:hidden] [transform:rotateY(180deg)] bg-accent dark:bg-accent-dark border border-light dark:border-dark rounded p-6 duration-150 flex flex-col justify-center items-center">
                                     <div className="text-center">
                                         <h4 className="text-xl font-bold mb-2">One Button Dungeon</h4>
                                         <p className="text-sm text-primary/80 dark:text-primary-dark/80">
@@ -432,7 +426,7 @@ export const ProductDeskHog = () => {
                                     />
                                 </div>
                                 {/* Back Face */}
-                                <div className="absolute h-full w-full [backface-visibility:hidden] [transform:rotateY(180deg)] bg-accent dark:bg-accent-dark border border-border dark:border-border-dark rounded-lg p-6 flex flex-col justify-center items-center">
+                                <div className="absolute h-full w-full [backface-visibility:hidden] [transform:rotateY(180deg)] bg-accent dark:bg-accent-dark border border-light dark:border-dark rounded p-6 duration-150 flex flex-col justify-center items-center">
                                     <div className="text-center">
                                         <h4 className="text-xl font-bold mb-2">Dictator or Techbro: Mobile Edition</h4>
                                         <p className="text-sm text-primary/80 dark:text-primary-dark/80">
@@ -460,7 +454,7 @@ export const ProductDeskHog = () => {
                                     />
                                 </div>
                                 {/* Back Face */}
-                                <div className="absolute h-full w-full [backface-visibility:hidden] [transform:rotateY(180deg)] bg-accent dark:bg-accent-dark border border-border dark:border-border-dark rounded-lg p-6 flex flex-col justify-center items-center">
+                                <div className="absolute h-full w-full [backface-visibility:hidden] [transform:rotateY(180deg)] bg-accent dark:bg-accent-dark border border-light dark:border-dark rounded p-6 duration-150 flex flex-col justify-center items-center">
                                     <div className="text-center">
                                         <h4 className="text-xl font-bold mb-2">Notchagotchi</h4>
                                         <p className="text-sm text-primary/80 dark:text-primary-dark/80">
@@ -487,7 +481,7 @@ export const ProductDeskHog = () => {
                                     />
                                 </div>
                                 {/* Back Face */}
-                                <div className="absolute h-full w-full [backface-visibility:hidden] [transform:rotateY(180deg)] bg-accent dark:bg-accent-dark border border-border dark:border-border-dark rounded-lg p-6 flex flex-col justify-center items-center">
+                                <div className="absolute h-full w-full [backface-visibility:hidden] [transform:rotateY(180deg)] bg-accent dark:bg-accent-dark border border-light dark:border-dark rounded p-6 duration-150 flex flex-col justify-center items-center">
                                     <div className="text-center">
                                         <h4 className="text-xl font-bold mb-2">Flappy Hog</h4>
                                         <p className="text-sm text-primary/80 dark:text-primary-dark/80">
@@ -514,7 +508,7 @@ export const ProductDeskHog = () => {
                                     />
                                 </div>
                                 {/* Back Face */}
-                                <div className="absolute h-full w-full [backface-visibility:hidden] [transform:rotateY(180deg)] bg-accent dark:bg-accent-dark border border-border dark:border-border-dark rounded-lg p-6 flex flex-col justify-center items-center">
+                                <div className="absolute h-full w-full [backface-visibility:hidden] [transform:rotateY(180deg)] bg-accent dark:bg-accent-dark border border-light dark:border-dark rounded p-6 duration-150 flex flex-col justify-center items-center">
                                     <div className="text-center">
                                         <h4 className="text-xl font-bold mb-2">Hogspeed</h4>
                                         <p className="text-sm text-primary/80 dark:text-primary-dark/80">
@@ -542,7 +536,7 @@ export const ProductDeskHog = () => {
                                     />
                                 </div>
                                 {/* Back Face */}
-                                <div className="absolute h-full w-full [backface-visibility:hidden] [transform:rotateY(180deg)] bg-accent dark:bg-accent-dark border border-border dark:border-border-dark rounded-lg p-6 flex flex-col justify-center items-center">
+                                <div className="absolute h-full w-full [backface-visibility:hidden] [transform:rotateY(180deg)] bg-accent dark:bg-accent-dark border border-light dark:border-dark rounded p-6 duration-150 flex flex-col justify-center items-center">
                                     <div className="text-center">
                                         <h4 className="text-xl font-bold mb-2">Pineapple Reflex</h4>
                                         <p className="text-sm text-primary/80 dark:text-primary-dark/80">
@@ -565,7 +559,7 @@ export const ProductDeskHog = () => {
                                     <h4 className="text-xl font-bold mb-2">Build your own →</h4>
                                 </div>
                                 {/* Back Face */}
-                                <div className="absolute h-full w-full [backface-visibility:hidden] [transform:rotateY(180deg)] bg-accent dark:bg-accent-dark border border-border dark:border-border-dark rounded-lg p-6 flex flex-col justify-center items-center">
+                                <div className="absolute h-full w-full [backface-visibility:hidden] [transform:rotateY(180deg)] bg-accent dark:bg-accent-dark border border-light dark:border-dark rounded p-6 duration-150 flex flex-col justify-center items-center">
                                     <div className="text-center">
                                         <h4 className="text-xl font-bold mb-2">Want more games?</h4>
                                         <p className="text-sm text-primary/80 dark:text-primary-dark/80">
@@ -589,7 +583,7 @@ export const ProductDeskHog = () => {
 
             <section className="py-10">
                 <div className={`${fullWidthContent ? 'max-w-full px-8' : 'max-w-7xl mx-auto'} px-5`}>
-                    <h2 className="text-4xl text-center mb-2">It also has important business tools</h2>
+                    <h2 className="text-4xl lg:text-5xl text-center mb-2">It also has important business tools</h2>
                     <h4 className="text-2xl text-center mb-12">(A great excuse to expense your DeskHog purchase)</h4>
 
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
@@ -605,7 +599,7 @@ export const ProductDeskHog = () => {
                                     />
                                 </div>
                                 {/* Back Face */}
-                                <div className="absolute h-full w-full [backface-visibility:hidden] [transform:rotateY(180deg)] bg-accent dark:bg-accent-dark border border-border dark:border-border-dark rounded-lg p-6 flex flex-col justify-center items-center">
+                                <div className="absolute h-full w-full [backface-visibility:hidden] [transform:rotateY(180deg)] bg-accent dark:bg-accent-dark border border-light dark:border-dark rounded p-6 duration-150 flex flex-col justify-center items-center">
                                     <div className="text-center">
                                         <h4 className="text-xl font-bold mb-2">Awkwardness Avoider</h4>
                                         <p className="text-sm text-primary/80 dark:text-primary-dark/80">
@@ -632,7 +626,7 @@ export const ProductDeskHog = () => {
                                     />
                                 </div>
                                 {/* Back Face */}
-                                <div className="absolute h-full w-full [backface-visibility:hidden] [transform:rotateY(180deg)] bg-accent dark:bg-accent-dark border border-border dark:border-border-dark rounded-lg p-6 flex flex-col justify-center items-center">
+                                <div className="absolute h-full w-full [backface-visibility:hidden] [transform:rotateY(180deg)] bg-accent dark:bg-accent-dark border border-light dark:border-dark rounded p-6 duration-150 flex flex-col justify-center items-center">
                                     <div className="text-center">
                                         <h4 className="text-xl font-bold mb-2">Pomodoro Timer</h4>
                                         <p className="text-sm text-primary/80 dark:text-primary-dark/80">
@@ -659,7 +653,7 @@ export const ProductDeskHog = () => {
                                     />
                                 </div>
                                 {/* Back Face */}
-                                <div className="absolute h-full w-full [backface-visibility:hidden] [transform:rotateY(180deg)] bg-accent dark:bg-accent-dark border border-border dark:border-border-dark rounded-lg p-6 flex flex-col justify-center items-center">
+                                <div className="absolute h-full w-full [backface-visibility:hidden] [transform:rotateY(180deg)] bg-accent dark:bg-accent-dark border border-light dark:border-dark rounded p-6 duration-150 flex flex-col justify-center items-center">
                                     <div className="text-center">
                                         <h4 className="text-xl font-bold mb-2">Insight Keeper-upper</h4>
                                         <p className="text-sm text-primary/80 dark:text-primary-dark/80">
@@ -717,53 +711,53 @@ export const ProductDeskHog = () => {
                             {[
                                 {
                                     label: 'Processor',
-                                    icon: <IconBolt />,
+                                    icon: <IconChip />,
                                     details: 'ESP32-S3 Dual Core\n240MHz Tensilica',
                                 },
                                 {
                                     label: 'Memory',
-                                    icon: <IconStack />,
+                                    icon: <IconMemory />,
                                     details: '4MB Flash, 2MB PSRAM\n512KB SRAM',
                                 },
                                 {
                                     label: 'Display',
-                                    icon: <IconEye />,
+                                    icon: <IconScreen />,
                                     details: '1.14" Color IPS TFT\n240x135 pixels (ST7789)\n',
                                 },
                                 {
                                     label: 'Connectivity',
-                                    icon: <IconShare />,
+                                    icon: <IconSignal />,
                                     details: '2.4GHz Wi-Fi (802.11b/g/n)\nBluetooth LE (BLE)',
                                 },
                                 {
                                     label: 'Power & Battery',
-                                    icon: <IconRewindPlay />,
+                                    icon: <IconBatteryCharge />,
                                     details:
                                         'USB Type-C / LiPo Battery\nBuilt-in Charging, MAX17048 Monitor\nLow Power Sleep (40-50µA)',
                                 },
                                 {
                                     label: 'Expansion',
-                                    icon: <IconPlus />,
+                                    icon: <IconExpand45 />,
                                     details: 'STEMMA QT (I²C)\nFeatherWing Compatible\nSerial Debug Pin',
                                 },
                                 {
                                     label: 'Enclosure',
-                                    icon: <IconWrench />,
+                                    icon: <IconBox />,
                                     details: 'Custom 3D Printed (PETG)\nOpen source files available',
                                 },
                                 {
                                     label: 'Inputs',
-                                    icon: <IconCursorClick />,
+                                    icon: <IconButton />,
                                     details: '3x User Tactile Buttons\nReset & DFU Buttons',
                                 },
                                 {
                                     label: 'Dimensions',
-                                    icon: <IconBuilding />,
+                                    icon: <IconRuler />,
                                     details: '~70mm x 40mm x 15mm\nPalm-Perfectly-Sized',
                                 },
                                 {
                                     label: 'Also included',
-                                    icon: <IconToggle />,
+                                    icon: <IconInfinity />,
                                     details: 'Unlimited potential\n(Hardware permitting)',
                                 },
                             ].map((spec, index) => (

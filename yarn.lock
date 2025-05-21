@@ -3524,10 +3524,10 @@
     pixi.js "^8.4.0"
     react-shadow "^20.6.0"
 
-"@posthog/icons@0.11.1":
-  version "0.11.1"
-  resolved "https://registry.yarnpkg.com/@posthog/icons/-/icons-0.11.1.tgz#f21430fa400b125dec5d96846b0366bd1d1bc7f8"
-  integrity sha512-usNM3nAk1EuWut577qu2enGedfhrQLcRR0nLPYt0U3wt3YV7fKR9VSFbX/J2mcbF+bqdY89lAi6OQnHj6ZJo1A==
+"@posthog/icons@0.15.0":
+  version "0.15.0"
+  resolved "https://registry.yarnpkg.com/@posthog/icons/-/icons-0.15.0.tgz#0377a7ac6ac1bace661ab5338836353a7035a04e"
+  integrity sha512-X+tNoljZRdcqOWxYWkHfPgvqkz0GP8nqKu3jJmNUFfDUBZ0KrVyGDvQ1cf0adQig4A7b4tOWdUYDa4MfRDG8XA==
 
 "@preact/signals-core@^1.2.3":
   version "1.8.0"
