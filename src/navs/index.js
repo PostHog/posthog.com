@@ -1238,16 +1238,20 @@ export const handbookSidebar = [
     },
     {
         name: 'RevOps',
-        url: '/handbook/growth/revops',
+        url: '',
         children: [
-                    {
-                        name: 'Revenue Adjustments',
-                        url: '/handbook/growth/revops/revenue-adjustments',
-                    },
-                    {
-                        name: 'Retention Metrics',
-                        url: '/handbook/growth/revops/retention-metrics',
-                    } 
+            {
+                name: 'Overview',
+                url: '/handbook/growth/revops',
+            },
+            {
+                name: 'Revenue Adjustments',
+                url: '/handbook/growth/revops/revenue-adjustments',
+            },
+            {
+                name: 'Retention Metrics',
+                url: '/handbook/growth/revops/retention-metrics',
+            } 
         ],
     },
     {
