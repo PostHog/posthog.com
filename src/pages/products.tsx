@@ -22,11 +22,11 @@ interface ProductListingProps {
     name: string
     description: string
     freeTierLimit?: string
-    startingPrice: string
+    startingPrice?: string
     url: string
     icon: React.ReactNode
     color: string
-    denominator: string
+    denominator?: string
 }
 
 const ProductListing: FC<ProductListingProps> = ({
@@ -46,7 +46,8 @@ const ProductListing: FC<ProductListingProps> = ({
                 <h2 className="text-lg mb-0 text-primary dark:text-primary-dark">{name}</h2>
             </Link>
             <p className="opacity-70 text-[15px] mb-2">{description}</p>
-            <div className="mt-auto w-full">
+            <div className={`${freeTierLimit && denominator ? 'mt-auto' : 'h-full flex flex-col'} w-full`}>
+                {freeTierLimit && denominator ? (
                 <dl className="grid @3xl:grid-cols-2 gap-x-2 @3xl:gap-y-1 text-sm mb-4 w-full">
                     <dt className="order-1 @3xl:order-none">
                         <label className="font-normal opacity-75">Monthly free tier</label>
@@ -67,9 +68,12 @@ const ProductListing: FC<ProductListingProps> = ({
                         </p>
                     </dd>
                 </dl>
+                ) : <p className="text-sm opacity-70 italic">Free during beta</p>}
+                <div className={`${freeTierLimit && denominator ? '' : 'mt-auto'}`}>
                 <CallToAction to={url} type="secondary" size="sm" width="auto">
                     Explore
                 </CallToAction>
+                </div>
             </div>
         </div>
     )
@@ -167,6 +171,12 @@ const productDetails: Record<
         roles: ['Product engineers'],
         goals: ['Find errors', 'Solve performance issues'],
         complexity: ['People who code'],
+    },
+    'max': {
+        description: 'AI-powered product analyst and assistant',
+        roles: ['Product people', 'Startups & founders', 'Marketing', 'Sales'],
+        goals: ['Understand user behavior', 'Improve product'],
+        complexity: ['Low-code'],
     },
 }
 

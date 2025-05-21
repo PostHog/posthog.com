@@ -1,10 +1,9 @@
-import React, { useState } from 'react'
 import { IconCheck, IconChevronDown } from '@posthog/icons'
-import cntl from 'cntl'
-import Tooltip from 'components/Tooltip'
-import Plans, { CTA as PlanCTA, PricingTiers } from '../Plans'
-import { section, SectionHeader } from './Sections'
 import Link from 'components/Link'
+import Tooltip from 'components/Tooltip'
+import React, { useState } from 'react'
+import { CTA as PlanCTA } from '../Plans'
+import { section, SectionHeader } from './Sections'
 
 interface PlanData {
     title: string
@@ -63,7 +62,7 @@ const Plan: React.FC<{ planData: PlanData }> = ({ planData }) => {
                     <div className="mt-auto">
                         <div className="space-y-2 mb-4">
                             <p className="mb-0 font-bold text-sm">
-                                {planData.projects} project{planData.projects > 1 && 's'}
+                                {planData.projects} {planData.projects === 1 ? 'project' : 'projects'}
                             </p>
                             <p className="mb-0 font-bold text-sm">{planData.dataRetention} data retention</p>
                         </div>

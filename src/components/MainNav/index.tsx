@@ -795,6 +795,11 @@ export const Main = () => {
 }
 
 export const Mobile = () => {
+    const { pathname } = useLocation()
+    if (pathname === '/newsletter-fbc') {
+        return <></>
+    }
+
     const enterpiseModeNames = {
         Products: 'Solutions',
         Pricing: 'Plans',
