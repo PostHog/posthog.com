@@ -34,8 +34,7 @@ To book a day off:
    - PTO - this will be the majority of the time for vacation or any other time off that doesn't fit below
    - Out Sick - this is when you're sick and will take time off unexpectedly
    - [Parental Leave](https://posthog.com/handbook/people/time-off#parental-leave)
-   - Medical Leave - this is planned time off for you personally, on medical grounds - if it is a family member who requires support meaning you      will be off, this is PTO. 
-- Block out your own personal GCal to show that you are out. This is because PTO by Deel _only_ books in an all day event in your calendar to show that you are out. If you don't do this, automated meetings such as interviews or demos might still get booked into your cal.  
+   - Medical Leave - this is planned time off for you personally, on medical grounds - if it is a family member who requires support meaning you      will be off, this is PTO.
 - Set an out of office message on your email and have it point to someone else on the team, or hey@posthog.com. PTO by Deel will automatically set your Slack status to out of office and will autorespond to Slack messages.
 
 > Please manually book in public holidays you plan to take off as well. We have team members working in countries all over the world, so it is not practical for us to book these all in on your behalf. Some people also prefer to work on certain days even if they're considered a public holiday in the country they are living in or visiting. 
