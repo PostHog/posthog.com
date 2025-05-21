@@ -48,12 +48,10 @@ interface EditorProps {
     disableFilterChange?: boolean
     dataToFilter?: any
     onFilterChange?: (data: any) => void
-    onUndo?: () => void
-    onRedo?: () => void
     actionButtons?: EditorActionButtons
 }
 
-type EditorAction = 'bold' | 'italic' | 'strikethrough' | 'undo' | 'redo'
+type EditorAction = 'bold' | 'italic' | 'strikethrough' | 'undo' | 'redo' | 'leftAlign' | 'centerAlign' | 'rightAlign'
 
 type EditorActionButtons = Partial<Record<EditorAction, EditorActionButton>>
 
@@ -85,8 +83,6 @@ export function Editor({
     disableFilterChange = false,
     dataToFilter,
     onFilterChange,
-    onUndo,
-    onRedo,
     actionButtons,
 }: EditorProps) {
     const [showFilters, setShowFilters] = useState(initialShowFilters)
@@ -185,30 +181,30 @@ export function Editor({
         },
         { type: 'separator' },
         {
-            type: 'single',
-            label: 'Text alignment',
-            defaultValue: 'left',
-            items: [
-                {
-                    value: 'left',
-                    label: 'Left',
-                    icon: <TextAlignLeftIcon />,
-                    disabled: true,
-                },
-                {
-                    value: 'center',
-                    label: 'Center',
-                    icon: <TextAlignCenterIcon />,
-                    disabled: true,
-                },
-                {
-                    value: 'right',
-                    label: 'Right',
-                    icon: <TextAlignRightIcon />,
-                    disabled: true,
-                },
-            ],
+            type: 'button',
+            label: 'Left',
+            icon: <TextAlignLeftIcon />,
+            onClick: actionButtons?.leftAlign?.onClick,
+            active: actionButtons?.leftAlign?.active,
+            hideLabel: true,
         },
+        {
+            type: 'button',
+            label: 'Center',
+            icon: <TextAlignCenterIcon />,
+            onClick: actionButtons?.centerAlign?.onClick,
+            active: actionButtons?.centerAlign?.active,
+            hideLabel: true,
+        },
+        {
+            type: 'button',
+            label: 'Right',
+            icon: <TextAlignRightIcon />,
+            onClick: actionButtons?.rightAlign?.onClick,
+            active: actionButtons?.rightAlign?.active,
+            hideLabel: true,
+        },
+
         { type: 'separator' },
         {
             type: 'button',

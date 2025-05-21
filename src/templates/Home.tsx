@@ -32,7 +32,14 @@ import {
     IS_STRIKETHROUGH,
     activeEditor$,
 } from '@mdxeditor/editor'
-import { LexicalEditor, REDO_COMMAND, UNDO_COMMAND } from 'lexical'
+import {
+    LexicalEditor,
+    REDO_COMMAND,
+    UNDO_COMMAND,
+    FORMAT_ELEMENT_COMMAND,
+    $getSelection,
+    $isRangeSelection,
+} from 'lexical'
 
 interface ProductButtonsProps {
     productTypes: string[]
@@ -378,6 +385,37 @@ export default function Home({
     const [currentFormat, setCurrentFormat] = useState<FORMAT>(0)
     const [activeEditor, setActiveEditor] = useState<LexicalEditor>()
     const applyFormatRef = React.useRef<((value: any) => void) | null>(null)
+    const [currentAlignment, setCurrentAlignment] = useState<'left' | 'center' | 'right' | 'justify'>('left')
+
+    useEffect(() => {
+        if (activeEditor) {
+            const removeUpdateListener = activeEditor.registerUpdateListener(({ editorState }) => {
+                editorState.read(() => {
+                    const selection = $getSelection()
+                    if (selection && $isRangeSelection(selection)) {
+                        const anchorNode = selection.anchor.getNode()
+                        const element = anchorNode.getParent()
+                        if (element) {
+                            const format = element.getFormat()
+                            const alignment = format & 0x7
+                            setCurrentAlignment(
+                                alignment === 1
+                                    ? 'left'
+                                    : alignment === 2
+                                    ? 'center'
+                                    : alignment === 3
+                                    ? 'right'
+                                    : alignment === 4
+                                    ? 'justify'
+                                    : 'left'
+                            )
+                        }
+                    }
+                })
+            })
+            return () => removeUpdateListener()
+        }
+    }, [activeEditor])
 
     return (
         <Editor
@@ -402,6 +440,18 @@ export default function Home({
                 strikethrough: {
                     onClick: () => applyFormatRef.current?.('strikethrough'),
                     active: (currentFormat & IS_STRIKETHROUGH) !== 0,
+                },
+                leftAlign: {
+                    onClick: () => activeEditor?.dispatchCommand(FORMAT_ELEMENT_COMMAND, 'left'),
+                    active: currentAlignment === 'left',
+                },
+                centerAlign: {
+                    onClick: () => activeEditor?.dispatchCommand(FORMAT_ELEMENT_COMMAND, 'center'),
+                    active: currentAlignment === 'center',
+                },
+                rightAlign: {
+                    onClick: () => activeEditor?.dispatchCommand(FORMAT_ELEMENT_COMMAND, 'right'),
+                    active: currentAlignment === 'right',
                 },
             }}
         >

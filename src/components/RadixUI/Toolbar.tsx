@@ -9,6 +9,7 @@ export type ToolbarItem = {
     icon?: React.ReactNode
     disabled?: boolean
     className?: string
+    onClick?: () => void
 }
 
 export type ToolbarGroup = {
@@ -111,9 +112,10 @@ export const Toolbar = ({ elements, className, 'aria-label': ariaLabel }: Toolba
                                 variant={element.variant || 'ghost'}
                                 size={element.size || 'sm'}
                                 icon={element.icon}
-                                className={element.className}
+                                className={`${element.className} !px-[5px] ${
+                                    element.active ? '!bg-accent-2 hover:!bg-accent-2 text-primary' : ''
+                                }`}
                                 disabled={element.disabled}
-                                active={element.active ?? false}
                             >
                                 {!element.hideLabel && element.label}
                             </OSButton>
@@ -149,6 +151,7 @@ export const Toolbar = ({ elements, className, 'aria-label': ariaLabel }: Toolba
                                 className={toggleItemButtonClasses}
                                 disabled={item.disabled}
                                 asChild={!!item.icon}
+                                onClick={item.onClick}
                             >
                                 {item.icon ? (
                                     <OSButton
