@@ -235,14 +235,14 @@ const VideoDeskHog = () => (
 
 // Define DeskHogCTA component
 const DeskHogCTA = () => {
-    const headingClasses = 'font-bold text-center text-4xl lg:text-5xl mb-3 text-red dark:text-yellow animate-pulse'
+    const headingClasses = 'font-bold text-center text-4xl lg:text-5xl mb-3 text-red dark:text-yellow'
     const subheadingClasses =
         'text-center text-primary dark:text-primary-dark opacity-75 dark:opacity-100 max-w-xl mx-auto mb-6'
 
     return (
-        <section className="px-4 relative overflow-hidden">
+        <section className="relative overflow-hidden">
             {/* Text Content Wrapper with PostHog card style */}
-            <div className="relative z-10 bg-white dark:bg-[#2C2C2C] p-8 rounded-lg mx-auto max-w-2xl border border-border dark:border-border-dark shadow-xl">
+            <div className="relative z-10 bg-white dark:bg-accent-dark p-8 rounded-lg mx-auto max-w-xl border border-light dark:border-dark shadow-xl">
                 <h2 className={headingClasses}>3D print it yourself now</h2>
                 <h3 className={`${subheadingClasses} mb-0`}>
                     DeskHog kits are coming soon but you can 3D print it yourself right now. Just add components!
@@ -257,11 +257,15 @@ const DeskHogCTA = () => {
                 <div className="flex justify-center">
                     <CallToAction
                         href="https://github.com/PostHog/DeskHog"
-                        type="secondary"
+                        type="primary"
                         size="lg"
                         className="w-full sm:w-auto"
+                        externalNoIcon
                     >
-                        Make your own
+                        <>
+                            Make your own
+                            <IconExternal className="size-4 inline-block ml-1" />
+                        </>
                     </CallToAction>
                 </div>
             </div>
@@ -271,30 +275,26 @@ const DeskHogCTA = () => {
 
 // Expandable Callout Component
 const ExpandableCallout = () => {
-    const [isOpen, setIsOpen] = React.useState(false)
-
     return (
-        <div className="col-span-2 bg-[#E5E7E0] dark:bg-slate-700 dark:text-slate-200 p-4 rounded-md shadow-md mt-10 w-full max-w-lg mx-auto">
-            <button onClick={() => setIsOpen(!isOpen)} className="text-lg font-semibold text-center w-full">
-                ⬇ And this is just for starters ⬇
-            </button>
-            {isOpen && (
-                <div className="mt-4 flex flex-col items-center">
+        <div className="col-span-2 bg-accent dark:bg-accent-dark py-4 px-8 rounded-lg w-full max-w-lg mx-auto">
+            
+                <div className="mt-4 flex flex-col">
                     <CloudinaryImage
                         src="https://res.cloudinary.com/dmukukwp6/image/upload/deskhog_max_904ca43b3e.png"
                         alt="DeskHog Pro"
                         className="w-full max-w-[224px] mx-auto mb-4"
                     />
-                    <h5>Coming soon: DeskHog Pro & Friends</h5>
+                    <h5 className="text-center">Coming soon: DeskHog Pro & Friends</h5>
                     <p>This is just the beginning of the DeskHog adventure. If you like it we'll make more, maybe.</p>
                     <p>
                         DeskHog Pro will connect via the I²C port, adding more buttons, a speaker, and a huge dial so
                         you can crank up the vibes. We're also thinking about making a watch strap, so you can wear
-                        DeskHog on your wrist. Got ideas for other accessories?{' '}
+                        DeskHog on your wrist.
+                    </p>
+                    <p>Got ideas for other accessories?{' '}
                         <a href="mailto:danilo@posthog.com">Let us know!</a>
                     </p>
                 </div>
-            )}
         </div>
     )
 }
@@ -482,9 +482,9 @@ export const ProductDeskHog = () => {
             </section>
 
             <section className="max-w-7xl mx-auto px-5">
-                <div className="flex flex-col-reverse items-center md:flex-row gap-8 mb-20">
+                <div className="flex flex-col-reverse items-center md:flex-row gap-8 mb-8">
                     <div className="flex-1">
-                        <h2 className="text-4xl">
+                        <h2 className="text-4xl lg:text-5xl text-center md:text-left">
                             Your phone is <span className="text-red dark:text-yellow">DeskHog's best friend</span>
                         </h2>
                         <p>
@@ -517,7 +517,7 @@ export const ProductDeskHog = () => {
                         }}
                     />
                     <div className="flex justify-center">
-                        <div className="inline-grid grid-cols-1 md:grid-cols-2 gap-x-16 gap-y-10">
+                        <div className="grid md:inline-grid grid-cols-2 gap-x-8 md:gap-x-16 gap-y-10">
                             {[
                                 {
                                     label: 'Processor',
@@ -571,33 +571,36 @@ export const ProductDeskHog = () => {
                                     details: 'Unlimited potential\n(Hardware permitting)',
                                 },
                             ].map((spec, index) => (
-                                <div key={index} className="flex items-start gap-4">
-                                    <span className="text-orange w-8 h-8 mt-1 shrink-0">{spec.icon}</span>
+                                <div key={index} className="grid-cols-2 md:grid-cols-1 flex flex-col md:flex-row items-start gap-4">
+                                    <span className="text-primary/50 size-8 -mt-1 shrink-0">{spec.icon}</span>
                                     <div>
-                                        <h3 className="text-xl font-semibold text-primary/80 dark:text-primary-dark/80 mb-1.5">
+                                        <h3 className="text-base font-bold text-primary/80 dark:text-primary-dark/80 mb-1">
                                             {spec.label}
                                         </h3>
                                         <p
-                                            className="text-md text-primary dark:text-primary-dark whitespace-pre-line"
+                                            className="text-sm text-primary dark:text-primary-dark whitespace-pre-line"
                                             dangerouslySetInnerHTML={{ __html: spec.details }}
                                         />
                                     </div>
                                 </div>
                             ))}
-                            {/* New expandable callout */}
-                            <ExpandableCallout />
+                            </div>
                         </div>
-                    </div>
+                            {/* New expandable callout */}
+                            <div className="text-base italic font-semibold text-center w-full pb-6 mt-12">
+                And this is just for starters...
+                </div>
+                            <ExpandableCallout />
                 </div>
             </section>
 
-            <div className={`${fullWidthContent ? 'max-w-full px-8' : 'max-w-7xl mx-auto'} px-5 py-10`}>
+            {/* <div className={`${fullWidthContent ? 'max-w-full px-8' : 'max-w-7xl mx-auto'} px-5 py-10`}>
                 <PairsWith items={pairsWithItemCount}>
                     {PairsWithArray.map((card, index) => {
                         return <PairsWithItem {...card} key={index} />
                     })}
                 </PairsWith>
-            </div>
+            </div> */}
 
             {/* DeskHogCTA Section Wrapper */}
             <div className={`${fullWidthContent ? 'max-w-full px-8' : 'mx-auto'} relative px-5 pb-10`}>
