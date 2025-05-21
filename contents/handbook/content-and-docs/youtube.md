@@ -4,6 +4,8 @@ sidebar: Handbook
 showTitle: true
 ---
 
+> See also [how we do video at PostHog](/handbook/growth/marketing/video).
+
 We experimented with [YouTube](https://www.youtube.com/@PostHog) from November 2022 to July 2023, but have paused creation and publishing for now. We may try again in the future.
 
 Although videos were driving X00s of views each (some hit X000s), and we received some positive feedback, we didn't see an increase in signups, traffic, or mentions from the videos. For example, the video on [why and how we use GitHub as our CMS](https://www.youtube.com/watch?v=Z2-dSM2i2_Y) got 3,000 views in 1 one week, but made no noticeable impact on signups.
