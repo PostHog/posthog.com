@@ -1880,6 +1880,10 @@ export const docsMenu = {
                             url: '/docs/libraries/google-tag-manager',
                         },
                         {
+                            name: 'Hono',
+                            url: '/docs/libraries/hono',
+                        },
+                        {
                             name: 'Laravel',
                             url: '/docs/libraries/laravel',
                         },
