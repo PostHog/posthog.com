@@ -55,6 +55,7 @@ export type ToolbarElement =
           hideLabel?: boolean
           variant?: ButtonVariant
           size?: 'xs' | 'sm' | 'md' | 'lg' | 'xl'
+          active?: boolean
       }
     | {
           type: 'container'
@@ -112,6 +113,7 @@ export const Toolbar = ({ elements, className, 'aria-label': ariaLabel }: Toolba
                                 icon={element.icon}
                                 className={element.className}
                                 disabled={element.disabled}
+                                active={element.active ?? false}
                             >
                                 {!element.hideLabel && element.label}
                             </OSButton>

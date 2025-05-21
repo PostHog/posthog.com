@@ -48,130 +48,19 @@ interface EditorProps {
     disableFilterChange?: boolean
     dataToFilter?: any
     onFilterChange?: (data: any) => void
+    onUndo?: () => void
+    onRedo?: () => void
+    actionButtons?: EditorActionButtons
 }
 
-const toolbarElementsBase: ToolbarElement[] = [
-    {
-        type: 'multiple',
-        label: 'Text formatting',
-        items: [
-            {
-                value: 'undo',
-                label: 'Undo',
-                icon: <ReloadIcon className="scale-x-[-1]" />,
-                disabled: true,
-            },
-            {
-                value: 'redo',
-                label: 'Redo',
-                icon: <ReloadIcon />,
-                disabled: true,
-            },
-        ],
-    },
-    { type: 'separator' },
-    {
-        type: 'select',
-        placeholder: 'Zoom',
-        className: '!text-[13px] !pr-0 !py-0.5',
-        disabled: true,
-        groups: [
-            {
-                label: 'Zoom Levels',
-                items: [
-                    { value: '50', label: '50%', disabled: true },
-                    { value: '75', label: '75%', disabled: true },
-                    { value: '100', label: '100%', disabled: true },
-                    { value: '150', label: '150%', disabled: true },
-                    { value: '200', label: '200%', disabled: true },
-                ],
-            },
-        ],
-    },
-    { type: 'separator' },
-    {
-        type: 'multiple',
-        label: 'Text formatting',
-        items: [
-            {
-                value: 'bold',
-                label: 'Bold',
-                icon: <FontBoldIcon />,
-                disabled: true,
-            },
-            {
-                value: 'italic',
-                label: 'Italic',
-                icon: <FontItalicIcon />,
-                disabled: true,
-            },
-            {
-                value: 'strikethrough',
-                label: 'Strikethrough',
-                icon: <StrikethroughIcon />,
-                disabled: true,
-            },
-        ],
-    },
-    { type: 'separator' },
-    {
-        type: 'select',
-        placeholder: 'Font',
-        className: '!text-[13px] !pr-0 !py-0.5',
-        disabled: true,
-        groups: [
-            {
-                label: 'Fonts',
-                items: [
-                    { value: 'arial', label: 'Arial', disabled: true },
-                    { value: 'times', label: 'Times New Roman', disabled: true },
-                    { value: 'courier', label: 'Courier New', disabled: true },
-                ],
-            },
-        ],
-    },
-    { type: 'separator' },
-    {
-        type: 'single',
-        label: 'Text alignment',
-        defaultValue: 'left',
-        items: [
-            {
-                value: 'left',
-                label: 'Left',
-                icon: <TextAlignLeftIcon />,
-                disabled: true,
-            },
-            {
-                value: 'center',
-                label: 'Center',
-                icon: <TextAlignCenterIcon />,
-                disabled: true,
-            },
-            {
-                value: 'right',
-                label: 'Right',
-                icon: <TextAlignRightIcon />,
-                disabled: true,
-            },
-        ],
-    },
-    { type: 'separator' },
-    {
-        type: 'button',
-        icon: <IconLink />,
-        label: 'Link',
-        hideLabel: true,
-        disabled: true,
-    },
-    {
-        type: 'button',
-        icon: <IconMessage />,
-        label: 'Comment',
-        hideLabel: true,
-        disabled: true,
-    },
-]
+type EditorAction = 'bold' | 'italic' | 'strikethrough' | 'undo' | 'redo'
+
+type EditorActionButtons = Partial<Record<EditorAction, EditorActionButton>>
+
+type EditorActionButton = {
+    onClick: () => void
+    active?: boolean
+}
 
 const filterData = (data: any, filters: any) => {
     return data.filter((obj: any) => {
@@ -196,6 +85,9 @@ export function Editor({
     disableFilterChange = false,
     dataToFilter,
     onFilterChange,
+    onUndo,
+    onRedo,
+    actionButtons,
 }: EditorProps) {
     const [showFilters, setShowFilters] = useState(initialShowFilters)
     const [showSearch, setShowSearch] = useState(false)
@@ -213,8 +105,125 @@ export function Editor({
         setShowSearch(false)
     }
 
-    const toolbarElements = [
-        ...toolbarElementsBase,
+    const toolbarElements: ToolbarElement[] = [
+        {
+            type: 'button',
+            label: 'Undo',
+            icon: <ReloadIcon className="scale-x-[-1]" />,
+            hideLabel: true,
+            onClick: actionButtons?.undo?.onClick,
+            active: actionButtons?.undo?.active,
+        },
+        {
+            type: 'button',
+            label: 'Redo',
+            icon: <ReloadIcon />,
+            hideLabel: true,
+            onClick: actionButtons?.redo?.onClick,
+            active: actionButtons?.redo?.active,
+        },
+        { type: 'separator' },
+        {
+            type: 'select',
+            placeholder: 'Zoom',
+            className: '!text-[13px] !pr-0 !py-0.5',
+            disabled: true,
+            groups: [
+                {
+                    label: 'Zoom Levels',
+                    items: [
+                        { value: '50', label: '50%', disabled: true },
+                        { value: '75', label: '75%', disabled: true },
+                        { value: '100', label: '100%', disabled: true },
+                        { value: '150', label: '150%', disabled: true },
+                        { value: '200', label: '200%', disabled: true },
+                    ],
+                },
+            ],
+        },
+        { type: 'separator' },
+        {
+            type: 'button',
+            label: 'Bold',
+            icon: <FontBoldIcon />,
+            hideLabel: true,
+            onClick: actionButtons?.bold?.onClick,
+            active: actionButtons?.bold?.active,
+        },
+        {
+            type: 'button',
+            label: 'Italic',
+            icon: <FontItalicIcon />,
+            hideLabel: true,
+            onClick: actionButtons?.italic?.onClick,
+            active: actionButtons?.italic?.active,
+        },
+        {
+            type: 'button',
+            label: 'Strikethrough',
+            icon: <StrikethroughIcon />,
+            hideLabel: true,
+            onClick: actionButtons?.strikethrough?.onClick,
+            active: actionButtons?.strikethrough?.active,
+        },
+        { type: 'separator' },
+        {
+            type: 'select',
+            placeholder: 'Font',
+            className: '!text-[13px] !pr-0 !py-0.5',
+            disabled: true,
+            groups: [
+                {
+                    label: 'Fonts',
+                    items: [
+                        { value: 'arial', label: 'Arial', disabled: true },
+                        { value: 'times', label: 'Times New Roman', disabled: true },
+                        { value: 'courier', label: 'Courier New', disabled: true },
+                    ],
+                },
+            ],
+        },
+        { type: 'separator' },
+        {
+            type: 'single',
+            label: 'Text alignment',
+            defaultValue: 'left',
+            items: [
+                {
+                    value: 'left',
+                    label: 'Left',
+                    icon: <TextAlignLeftIcon />,
+                    disabled: true,
+                },
+                {
+                    value: 'center',
+                    label: 'Center',
+                    icon: <TextAlignCenterIcon />,
+                    disabled: true,
+                },
+                {
+                    value: 'right',
+                    label: 'Right',
+                    icon: <TextAlignRightIcon />,
+                    disabled: true,
+                },
+            ],
+        },
+        { type: 'separator' },
+        {
+            type: 'button',
+            icon: <IconLink />,
+            label: 'Link',
+            hideLabel: true,
+            disabled: true,
+        },
+        {
+            type: 'button',
+            icon: <IconMessage />,
+            label: 'Comment',
+            hideLabel: true,
+            disabled: true,
+        },
         {
             type: 'container' as const,
             className: 'ml-auto flex items-center gap-px',

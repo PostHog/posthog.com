@@ -242,11 +242,11 @@ h4 {
     }
 }
 
-input[type="text"],
-input[type="email"],
-input[type="tel"],
-input[type="number"],
-input[type="password"] {
+input[type='text'],
+input[type='email'],
+input[type='tel'],
+input[type='number'],
+input[type='password'] {
     @apply border border-primary px-1.5 py-1 text-sm w-full ring-0 focus:ring-1;
 }
 
@@ -844,7 +844,6 @@ article .article-content {
         background: var(--text-primary, #000);
     }
 }
-
 
 .volume-slider::-moz-range-thumb {
     @apply appearance-none size-3.5 rounded-full relative top-[-3px];
@@ -1974,13 +1973,13 @@ li.squeak-left-border {
 /* styles for dark mode since /max only exists in light mode */
 .max-ai-body {
     .bg-accent {
-        background: #F5E2B2 !important;
+        background: #f5e2b2 !important;
     }
 
     .dark\:bg-accent-dark:is(.dark *) {
-        background: #F5E2B2 !important;
+        background: #f5e2b2 !important;
     }
-    
+
     .article-content a:not(.cta):is(.dark *),
     .dark\:text-primary-dark:is(.dark *) {
         color: #151515 !important;
@@ -1988,12 +1987,12 @@ li.squeak-left-border {
 
     .dark\:text-primary-dark\/50:is(.dark *) {
         color: #151515 !important;
-        opacity: .5;
+        opacity: 0.5;
     }
 
     .dark\:text-primary-dark\/70:is(.dark *) {
         color: #151515 !important;
-        opacity: .7;
+        opacity: 0.7;
     }
 
     .dark\:border-white:is(.dark *) {
@@ -2003,4 +2002,16 @@ li.squeak-left-border {
 
 body.dark .max-ai-body {
     color: #151515;
+}
+
+._bold_1tncs_10 {
+    @apply !font-bold;
+}
+
+._italic_1tncs_14 {
+    @apply !italic;
+}
+
+._strikethrough_1tncs_34 {
+    @apply !line-through;
 }

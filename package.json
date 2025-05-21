@@ -36,6 +36,7 @@
         "@inkeep/cxkit-react": "^0.5.72",
         "@inkeep/uikit": "^0.3.20",
         "@inkeep/uikit-js": "^0.3.20",
+        "@mdxeditor/editor": "^3.32.3",
         "@popperjs/core": "^2.11.2",
         "@posthog/hedgehog-mode": "^0.0.26",
         "@posthog/icons": "0.12.1",

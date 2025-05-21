@@ -22,7 +22,7 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
     const ChangelogTemplate = path.resolve(`src/templates/Changelog.tsx`)
     const PostListingTemplate = path.resolve(`src/templates/PostListing.tsx`)
     const PaginationTemplate = path.resolve(`src/templates/Pagination.tsx`)
-
+    const HomeTemplate = path.resolve(`src/templates/Home.tsx`)
     // Tutorials
     const TutorialsTemplate = path.resolve(`src/templates/tutorials/index.tsx`)
     const TutorialTemplate = path.resolve(`src/templates/tutorials/Tutorial.tsx`)
@@ -45,6 +45,9 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
                 nodes {
                     id
                     slug
+                    frontmatter {
+                        template
+                    }
                 }
             }
             handbook: allMdx(
@@ -422,9 +425,13 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
     }
 
     result.data.allMdx.nodes.forEach((node) => {
+        const templates = {
+            home: HomeTemplate,
+        }
+        const template = templates[node.frontmatter.template] || PlainTemplate
         createPage({
-            path: replacePath(node.slug),
-            component: PlainTemplate,
+            path: node.frontmatter.template === 'home' ? '/' : replacePath(node.slug),
+            component: template,
             context: {
                 id: node.id,
             },
