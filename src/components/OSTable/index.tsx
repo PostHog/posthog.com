@@ -1,3 +1,4 @@
+import { MDXEditor } from '@mdxeditor/editor'
 import React from 'react'
 
 interface Column {
@@ -18,9 +19,16 @@ interface OSTableProps {
     rows: Row[]
     className?: string
     rowAlignment?: 'top' | 'center'
+    editable?: boolean
 }
 
-const OSTable: React.FC<OSTableProps> = ({ columns, rows, className = '', rowAlignment = 'center' }) => {
+const OSTable: React.FC<OSTableProps> = ({
+    columns,
+    rows,
+    className = '',
+    rowAlignment = 'center',
+    editable = false,
+}) => {
     const gridClass = columns?.map((col) => col.width || 'auto').join(' ') || ''
 
     return (
@@ -58,7 +66,11 @@ const OSTable: React.FC<OSTableProps> = ({ columns, rows, className = '', rowAli
                                     : 'justify-center'
                             } ${cell.className || ''}`}
                         >
-                            {cell.content}
+                            {editable && typeof cell.content === 'string' ? (
+                                <MDXEditor contentEditableClassName="[&_p]:m-0 min-w-[10px]" markdown={cell.content} />
+                            ) : (
+                                cell.content
+                            )}
                         </div>
                     ))}
                 </React.Fragment>
