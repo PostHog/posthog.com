@@ -4,27 +4,27 @@ sidebar: Handbook
 showTitle: true
 ---
 
-> If you’re planning an event and want support or promotion from the PostHog team, go to [Community Events](https://posthog.com/handbook/words-and-pictures/events#community-events)
+> If you’re planning an event and want support or promotion from the PostHog team, go to [Community Events](handbook/words-and-pictures/events#community-events)
 
-We’re [100% remote](https://posthog.com/handbook/company/culture) and set up the company to work asynchronously–but there's a real benefit in getting together in real life (and our best ideas come from [working together](https://posthog.com/handbook/company/offsites)).
+We’re [100% remote](handbook/company/culture) and set up to work asynchronously–but there's a real benefit in getting together in real life (and our best ideas come from [working together](handbook/company/offsites)).
 
-Still, we’re skeptical about how much value events deliver. We prefer to be a small fish in a big pond, so we pass on conferences. We [prefer pull](https://posthog.com/handbook/growth/marketing#2-pull-dont-push) over push, so we avoid formats like webinars, dinners, and lunch & learns.
+Still, we’re skeptical about how much value events deliver. We prefer to be a small fish in a big pond, so we pass on big conferences. We [prefer pull](handbook/growth/marketing#2-pull-dont-push) over push, so we avoid formats like webinars, dinners, and lunch & learns.
 
 To get us to perk up with curiosity, at least one of these desired event criteria gets met:
 
   - Hands-on gatherings that help our customers build faster and better for their customers
   - Experiences that allow engineers and founders to flex their product muscles
-  - When [product engineers](https://posthog.com/blog/what-is-a-product-engineer) get together to identify problems and build solutions for users
+  - When [product engineers](blog/what-is-a-product-engineer) get together to identify problems and build solutions for users
 
 ## Community Events
 
-People often underestimate the power and potential within their teams and ecosystems. Community events are in real life (IRL) manifestations of [our mission](https://posthog.com/handbook/why-does-posthog-exist#our-mission) organized by enthusiastic customers. They take place when someone has identified a gap or opportunity where an event helps people move [faster](https://posthog.com/newsletter/this-is-why-youre-not-shipping), smarter, and more together.
+People often underestimate the power and potential within their teams and ecosystems. Community events are in real life (IRL) manifestations of [our mission](handbook/why-does-posthog-exist#our-mission) organized by enthusiastic customers. They take place when someone has identified a gap or opportunity where an event helps people move [faster](newsletter/this-is-why-youre-not-shipping), smarter, and more together.
 
 We avoid limiting event potential, so we don’t have a template to follow. With that said, some considerations:
 
   - **Structure:** participatory > nonparticipatory, bottoms-up > top down. unconference > conference.
   - **Curation:** Get the right mix of people to the event. Prioritise this alongside the content. This extends to speakers, co-hosts, and attendees.
-  - **Atmosphere** foster a [welcoming environment](https://posthog.com/handbook/company/grown-ups#things-we-do-to-create-a-welcoming-environment) where everyone can succeed.
+  - **Atmosphere** foster a [welcoming environment](handbook/company/grown-ups#things-we-do-to-create-a-welcoming-environment) where everyone can succeed.
 
 In our high trust environment we expect organizers who initiate events to fully own them.
 
@@ -40,7 +40,7 @@ An impactful event follows the principles of user-driven development which stems
 
 > We use GitHub for everything at PostHog. When you’re ready to organize an event, create a GitHub issue [using this template](https://github.com/PostHog/meta/issues/new?template=event-plan.md) and assign it to Daniel Zaltsman. Prioritize progress (on which you can build) over perfection.
 
-Put real effort into this first step. Defining the "what, why and how" of an event beforehand will pay off on event day. Let our [shared values](https://posthog.com/handbook/values) guide you. Don’t submit until your answer to “Would I attend this?” is a clear “yes.”
+Put real effort into this first step. Defining the "what, why and how" of an event beforehand will pay off on event day. Let our [shared values](handbook/values) guide you. Don’t submit until your answer to “Would I attend this?” is a clear “yes.”
 
 For an event to meet the high bar of quality for our work, we’ve provided considerations for ways to make it achieve its purpose within the GitHub issue template.
 
@@ -56,9 +56,9 @@ We support Community Events led by proactive organizers with a bias for action.
 
 Want a speaker in our ecosystem (team PostHog, customers, partners)? We’ll try our best.
 
-**Content:** If your speaker(s) are unsure of what to talk about consider going back to the formulating purpose step. Otherwise, [we](https://posthog.com/founders) [have](https://posthog.com/founders/product-market-fit-game) [plenty](https://posthog.com/handbook) [of](https://posthog.com/about) [material](https://newsletter.posthog.com/) [for](https://www.youtube.com/channel/UCn4mJ4kK5KVSvozJre645LA) [your](https://posthog.com/questions) [inspiration](https://posthog.com/docs).
+**Content:** If your speaker(s) are unsure of what to talk about consider going back to the formulating purpose step. Otherwise, [we](founders) [have](founders/product-market-fit-game) [plenty](handbook) [of](about) [material](https://newsletter.posthog.com/) [for](https://www.youtube.com/channel/UCn4mJ4kK5KVSvozJre645LA) [your](questions) [inspiration](docs).
 
-**Merch:** We use the [store](https://posthog.com/merch) [processes](https://posthog.com/handbook/company/merch-store) to handle distribution of PostHog-branded merch. We may be generous with merch for Community Events. Outline what you had in mind in the issue.
+**Merch:** We use the [store](merch) [processes](handbook/company/merch-store) to handle distribution of PostHog-branded merch. We may be generous with merch for Community Events. Outline what you had in mind in the issue.
 
 **Co-promotion:** Most of the time the help requested is in the form of promotion. As a general rule, we don't promote events we aren't supporting or co-hosting ourselves. We decide when to repost Community Events on our social media channels on a case by case basis. To boost your chances of co-promotion:
 
@@ -72,16 +72,16 @@ Want a speaker in our ecosystem (team PostHog, customers, partners)? We’ll try
 
 ### Branding it
 
-Our brand is a reflection of us and [how we’re experienced by others](https://posthog.com/blog/brand), including events.
+Our brand is a reflection of us and [how we’re experienced by others](blog/brand), including events.
 
 **Words:** For our customers to have a clear sense of our involvement in Community Events, avoid including PostHog in the title. The same goes for referring to it as a “PostHog Event/Meetup/Gathering” with or without the word "Official." Accepted alternatives are "PostHog-supported," “with support from the PostHog team,” or “with PostHog’s support.”
 
-**Pictures:** Every event is improved with a flyer or poster that showcases the essence of the experience. We keep a comprehensive list of brand assets and guidelines for their use on the dedicated [brand assets page](https://posthog.com/handbook/company/brand-assets). Share your assets and we’ll give feedback. Depending on the scale and timing of the event, our team may be able to help with branding as well.
+**Pictures:** Every event is improved with a flyer or poster that showcases the essence of the experience. We keep a comprehensive list of brand assets and guidelines for their use on the dedicated [brand assets page](handbook/company/brand-assets). Share your assets and we’ll give feedback. Depending on the scale and timing of the event, our team may be able to help with branding as well.
 
 ### Follow-ups
 
 Community Events are better when organizers share what happened and any follow-up actions.
 
-[We value feedback](https://posthog.com/handbook/people/feedback) and expect the same from event organizers. A great event will speak for itself but sometimes an event will miss the mark, too. Either way, we want to hear how it went and value organizers who learn from the experience.
+[We value feedback](handbook/people/feedback) and expect the same from event organizers. A great event will speak for itself but sometimes an event will miss the mark, too. Either way, we want to hear how it went and value organizers who learn from the experience.
 
 In addition to what you learned and feedback from attendees, we will share any photos, videos, quotes, data points with our team.
