@@ -4,6 +4,9 @@
     "version": "1.0.0",
     "author": "PostHog",
     "license": "MIT",
+    "engines": {
+        "node": "18.x"
+    },
     "repository": {
         "type": "git",
         "url": "https://github.com/PostHog/posthog.com"
