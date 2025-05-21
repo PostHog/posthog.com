@@ -151,8 +151,8 @@ const HeroDeskHog = ({ color, icon, beta, product, title, description }: HeroDes
                 dangerouslySetInnerHTML={{ __html: description }}
             />
             <div className="flex justify-center gap-2 mb-12">
-                <CallToAction href="https://posthog.com/merch" type="primary">
-                    Buy it now, hack it later
+                <CallToAction href="https://github.com/PostHog/DeskHog" type="primary">
+                    Get the DIY kit
                 </CallToAction>
             </div>
         </section>
@@ -198,9 +198,9 @@ const DeskHogCTA = () => {
         <section className="px-4 relative overflow-hidden">
             {/* Text Content Wrapper with PostHog card style */}
             <div className="relative z-10 bg-white dark:bg-[#2C2C2C] p-8 rounded-lg mx-auto max-w-2xl border border-border dark:border-border-dark shadow-xl">
-                <h2 className={headingClasses}>Limited stock available</h2>
+                <h2 className={headingClasses}>3D print it yourself now</h2>
                 <h3 className={`${subheadingClasses} mb-0`}>
-                    If nothing else has sold you on DeskHog, hopefully this classic marketing tactic will.
+                    DeskHog kits are coming soon but you can 3D print it yourself right now. Just add components!
                 </h3>
                 <div className="flex justify-center my-6">
                     <CloudinaryImage
@@ -209,16 +209,7 @@ const DeskHogCTA = () => {
                         width={300}
                     />
                 </div>
-                <h6 className={subheadingClasses}>(Seriously though, we only made 250 of these)</h6>
-                <div className="flex flex-col sm:flex-row justify-center items-center gap-4 mt-8">
-                    <CallToAction
-                        href="https://posthog.com/merch"
-                        type="primary"
-                        size="lg"
-                        className="w-full sm:w-auto"
-                    >
-                        Buy it now
-                    </CallToAction>
+                <div className="flex justify-center">
                     <CallToAction
                         href="https://github.com/PostHog/DeskHog"
                         type="secondary"
@@ -278,7 +269,7 @@ export const ProductDeskHog = () => {
                     icon={<IconLaptop />}
                     product={product.capitalized}
                     title="It's a developer toy that <br /> <span className='text-red dark:text-yellow'>brings developers joy</span>"
-                    description="Yes, we make hardware now."
+                    description="Pre-built kits coming soon. DIY version available now."
                 />
                 <VideoDeskHog />
             </div>
@@ -445,7 +436,7 @@ export const ProductDeskHog = () => {
                                     <div className="text-center">
                                         <h4 className="text-xl font-bold mb-2">Dictator or Techbro: Mobile Edition</h4>
                                         <p className="text-sm text-primary/80 dark:text-primary-dark/80">
-                                            A good is worth stealing. Even if it's{' '}
+                                            A good idea is worth stealing. Even if it's{' '}
                                             <Link to="https://posthog.com/community/profiles/28625">Charles'</Link>.
                                         </p>
                                         <p>
@@ -555,7 +546,7 @@ export const ProductDeskHog = () => {
                                     <div className="text-center">
                                         <h4 className="text-xl font-bold mb-2">Pineapple Reflex</h4>
                                         <p className="text-sm text-primary/80 dark:text-primary-dark/80">
-                                            Does pineapple belong on pizza. Sophie thinks so.
+                                            Does pineapple belong on pizza? Sophie thinks so.
                                         </p>
                                         <p>
                                             <b>Built by:</b>{' '}
