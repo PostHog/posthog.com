@@ -760,7 +760,7 @@ function Privacy() {
                         <p>
                             In compliance with the EU-U.S. DPF, the UK Extension
                             to the EU-U.S. DPF, and the Swiss-U.S. DPF. 
-                            DPF, PostHog Inc commits to cooperate and comply with the advice of the panel
+                            PostHog Inc commits to cooperate and comply with the advice of the panel
                             established by the EU data protection authorities (DPAs), the UK Information
                             Commissioner’s Office (ICO), and the Swiss Federal Data Protection and Information
                             Commissioner (FDPIC) with regard to unresolved complaints concerning our handling of human
