@@ -27,7 +27,7 @@ const OSTable: React.FC<OSTableProps> = ({
     rows,
     className = '',
     rowAlignment = 'center',
-    editable = false,
+    editable = true,
 }) => {
     const gridClass = columns?.map((col) => col.width || 'auto').join(' ') || ''
 
