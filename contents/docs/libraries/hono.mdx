@@ -48,11 +48,6 @@ app.use('*', posthogServerMiddleware)
 
 In your routes, you can pass information to be captured by your middleware using [context `set()` and `get()` pair](https://hono.dev/docs/api/context#set-get)
 
-### Explore the Node SDK
-See the [Node SDK docs](/docs/libraries/node) for all usable functions, such as:
-- [Capture custom event capture, identify users, and more.](/docs/libraries/node#capturing-events)
-- [Feature flags including variants and payloads.](/docs/libraries/node#feature-flags)
-
 ## Error tracking
 Hono uses [`app.onError`](https://hono.dev/docs/api/exception#handling-httpexception) for root-level
 error handling. You can take advantage of this for [Error tracking](/docs/error-tracking).
@@ -111,4 +106,7 @@ If you're using Hono along side a framework, you can follow [guides for each fra
 
 ## Next steps
 
-For any technical questions for how to integrate specific PostHog features into Hono (such as analytics, feature flags, A/B testing, surveys, etc.), have a look at our [Node](/docs/libraries/node) SDK docs.
+For any technical questions for how to integrate specific PostHog features into Hono, have a look at our [Node](/docs/libraries/node) SDK docs
+for concepts such as:
+- [Capture custom events, identify users, and more.](/docs/libraries/node#capturing-events)
+- [Feature flags including variants and payloads.](/docs/libraries/node#feature-flags)
