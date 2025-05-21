@@ -83,7 +83,7 @@ import Tab from "components/Tab"
 import ListNoNextLine from "./_snippets/list-no-nextline.md"
 import ListNoNextMarkdown from "./_snippets/list-no-nextline-md.md"
 
-<Tab.Group tabs={['Markdown', 'Rendered']}>
+<Tab.Group tabs={['Markdown', 'Preview']}>
     <Tab.List>
         <Tab>Markdown</Tab>
         <Tab>Rendered</Tab>
@@ -104,7 +104,7 @@ Is harder to read than this passage:
 import ListWithNextLine from "./_snippets/list-with-nextline.md"
 import ListWithNextMarkdown from "./_snippets/list-with-nextline-md.md"
 
-<Tab.Group tabs={['Markdown', 'Rendered']}>
+<Tab.Group tabs={['Markdown', 'Preview']}>
     <Tab.List>
         <Tab>Markdown</Tab>
         <Tab>Rendered</Tab>
