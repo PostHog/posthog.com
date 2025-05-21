@@ -85,7 +85,7 @@ Rails.application.config.content_security_policy do |policy|
   policy.default_src :self
   policy.report_uri  "<ph_client_api_host>/report/?token=<ph_project_api_key>"
 
-  # The Rails DSL doesn’t yet have a helper for `report-to`,
+  # The Rails DSL doesn't yet have a helper for `report-to`,
   # but you can add any custom directive manually:
   policy.directives['report-to'] = %w[posthog]
 end
@@ -107,9 +107,11 @@ end
 You can enable some advanced features by adding additional parameters to the report URL. These can be combined.
 
 ### Sampling
-You can reduce the number of reports sent to PostHog by sampling them. This is useful if you have a lot of traffic and want to reduce the number of reports sent.
+Sampling is **highly recommended** because each pageview can generate multiple CSP violation reports, which may quickly add up and overwhelm your reporting or dashboard. By sampling, you can reduce the number of reports sent to PostHog while still getting a representative view of violations.
 
 You can add the `sample_rate` property to the URL to specify the percentage of reports to send. For example, to send 5% of reports, you can use the following URL:
+
+The default value is 1, meaning no sampling.
 
 ```http
 <ph_client_api_host>/report/?token=<ph_project_api_key>&sample_rate=0.05
