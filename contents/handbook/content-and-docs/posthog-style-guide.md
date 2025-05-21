@@ -86,7 +86,7 @@ import ListNoNextMarkdown from "./_snippets/list-no-nextline-md.md"
 <Tab.Group tabs={['Markdown', 'Preview']}>
     <Tab.List>
         <Tab>Markdown</Tab>
-        <Tab>Rendered</Tab>
+        <Tab>Preview</Tab>
     </Tab.List>
     <Tab.Panels>
         <Tab.Panel>
@@ -107,7 +107,7 @@ import ListWithNextMarkdown from "./_snippets/list-with-nextline-md.md"
 <Tab.Group tabs={['Markdown', 'Preview']}>
     <Tab.List>
         <Tab>Markdown</Tab>
-        <Tab>Rendered</Tab>
+        <Tab>Preview</Tab>
     </Tab.List>
     <Tab.Panels>
         <Tab.Panel>
