@@ -1251,7 +1251,7 @@ export const handbookSidebar = [
             {
                 name: 'Retention Metrics',
                 url: '/handbook/growth/revops/retention-metrics',
-            } 
+            },
         ],
     },
     {
@@ -1273,6 +1273,10 @@ export const handbookSidebar = [
             {
                 name: 'In-app messaging',
                 url: '/handbook/words-and-pictures/in-app',
+            },
+            {
+                name: 'Events',
+                url: '/handbook/words-and-pictures/events',
             },
             {
                 name: 'Partnerships',
