@@ -58,6 +58,7 @@ type EditorActionButtons = Partial<Record<EditorAction, EditorActionButton>>
 type EditorActionButton = {
     onClick: () => void
     active?: boolean
+    disabled?: boolean
 }
 
 const filterData = (data: any, filters: any) => {
@@ -109,6 +110,7 @@ export function Editor({
             hideLabel: true,
             onClick: actionButtons?.undo?.onClick,
             active: actionButtons?.undo?.active,
+            disabled: actionButtons?.undo?.disabled,
         },
         {
             type: 'button',
@@ -117,6 +119,7 @@ export function Editor({
             hideLabel: true,
             onClick: actionButtons?.redo?.onClick,
             active: actionButtons?.redo?.active,
+            disabled: actionButtons?.redo?.disabled,
         },
         { type: 'separator' },
         {
@@ -145,6 +148,7 @@ export function Editor({
             hideLabel: true,
             onClick: actionButtons?.bold?.onClick,
             active: actionButtons?.bold?.active,
+            disabled: actionButtons?.bold?.disabled,
         },
         {
             type: 'button',
@@ -153,6 +157,7 @@ export function Editor({
             hideLabel: true,
             onClick: actionButtons?.italic?.onClick,
             active: actionButtons?.italic?.active,
+            disabled: actionButtons?.italic?.disabled,
         },
         {
             type: 'button',
@@ -161,6 +166,7 @@ export function Editor({
             hideLabel: true,
             onClick: actionButtons?.strikethrough?.onClick,
             active: actionButtons?.strikethrough?.active,
+            disabled: actionButtons?.strikethrough?.disabled,
         },
         { type: 'separator' },
         {
@@ -187,6 +193,7 @@ export function Editor({
             onClick: actionButtons?.leftAlign?.onClick,
             active: actionButtons?.leftAlign?.active,
             hideLabel: true,
+            disabled: actionButtons?.leftAlign?.disabled,
         },
         {
             type: 'button',
@@ -195,6 +202,7 @@ export function Editor({
             onClick: actionButtons?.centerAlign?.onClick,
             active: actionButtons?.centerAlign?.active,
             hideLabel: true,
+            disabled: actionButtons?.centerAlign?.disabled,
         },
         {
             type: 'button',
@@ -203,6 +211,7 @@ export function Editor({
             onClick: actionButtons?.rightAlign?.onClick,
             active: actionButtons?.rightAlign?.active,
             hideLabel: true,
+            disabled: actionButtons?.rightAlign?.disabled,
         },
 
         { type: 'separator' },

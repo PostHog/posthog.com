@@ -39,7 +39,11 @@ import {
     FORMAT_ELEMENT_COMMAND,
     $getSelection,
     $isRangeSelection,
+    COMMAND_PRIORITY_CRITICAL,
+    CAN_REDO_COMMAND,
+    CAN_UNDO_COMMAND,
 } from 'lexical'
+import { mergeRegister } from '@lexical/utils'
 
 interface ProductButtonsProps {
     productTypes: string[]
@@ -386,9 +390,30 @@ export default function Home({
     const [activeEditor, setActiveEditor] = useState<LexicalEditor>()
     const applyFormatRef = React.useRef<((value: any) => void) | null>(null)
     const [currentAlignment, setCurrentAlignment] = useState<'left' | 'center' | 'right' | 'justify'>('left')
+    const [canUndo, setCanUndo] = React.useState(false)
+    const [canRedo, setCanRedo] = React.useState(false)
 
     useEffect(() => {
         if (activeEditor) {
+            mergeRegister(
+                activeEditor.registerCommand<boolean>(
+                    CAN_UNDO_COMMAND,
+                    (payload) => {
+                        setCanUndo(payload)
+                        return false
+                    },
+                    COMMAND_PRIORITY_CRITICAL
+                ),
+                activeEditor.registerCommand<boolean>(
+                    CAN_REDO_COMMAND,
+                    (payload) => {
+                        setCanRedo(payload)
+                        return false
+                    },
+                    COMMAND_PRIORITY_CRITICAL
+                )
+            )
+
             const removeUpdateListener = activeEditor.registerUpdateListener(({ editorState }) => {
                 editorState.read(() => {
                     const selection = $getSelection()
@@ -425,9 +450,11 @@ export default function Home({
             actionButtons={{
                 undo: {
                     onClick: () => activeEditor?.dispatchCommand(UNDO_COMMAND, undefined),
+                    disabled: !canUndo,
                 },
                 redo: {
                     onClick: () => activeEditor?.dispatchCommand(REDO_COMMAND, undefined),
+                    disabled: !canRedo,
                 },
                 bold: {
                     onClick: () => applyFormatRef.current?.('bold'),

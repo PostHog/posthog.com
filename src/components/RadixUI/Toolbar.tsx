@@ -102,24 +102,19 @@ export const Toolbar = ({ elements, className, 'aria-label': ariaLabel }: Toolba
 
                 if (element.type === 'button') {
                     return (
-                        <RadixToolbar.Button
+                        <OSButton
                             key={index}
-                            onClick={(e) => element.onClick?.(e)}
+                            onClick={() => !element.disabled && element.onClick?.()}
+                            variant={element.variant || 'ghost'}
+                            size={element.size || 'sm'}
+                            icon={element.icon}
+                            className={`${element.className} !px-[5px] ${
+                                element.active ? '!bg-accent-2 hover:!bg-accent-2 text-primary' : ''
+                            }`}
                             disabled={element.disabled}
-                            asChild
                         >
-                            <OSButton
-                                variant={element.variant || 'ghost'}
-                                size={element.size || 'sm'}
-                                icon={element.icon}
-                                className={`${element.className} !px-[5px] ${
-                                    element.active ? '!bg-accent-2 hover:!bg-accent-2 text-primary' : ''
-                                }`}
-                                disabled={element.disabled}
-                            >
-                                {!element.hideLabel && element.label}
-                            </OSButton>
-                        </RadixToolbar.Button>
+                            {!element.hideLabel && element.label}
+                        </OSButton>
                     )
                 }
 
