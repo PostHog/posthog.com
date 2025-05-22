@@ -27,7 +27,7 @@ The fastest way to set up autocapture is to copy the snippet below and paste it 
 
 > **Alternative**: Alternatively, you can install one of the SDKs such as [JavaScript Web](/docs/libraries/js), [React](/docs/libraries/react), or [React Native](/docs/libraries/react-native).
 
-Once setup, this autocaptures events like clicks, change of inputs, or submission of **`a`**, **`button`**, **`form`**, **`input`**, **`select`**, **`textarea`**, and **`label`** tags. Those events flow automatically into PostHog for you to see and analyze.
+Once setup, this autocaptures events like pageviews,clicks, change of inputs, or submission of **`a`**, **`button`**, **`form`**, **`input`**, **`select`**, **`textarea`**, and **`label`** tags. Those events flow automatically into PostHog for you to see and analyze.
 
 Autocapture can also capture non-event data like session duration, mouse movement, bounce rate, performance, and more. You can learn more about this in the [autocapture docs](/docs/product-analytics/autocapture).
 
@@ -39,7 +39,9 @@ Although autocapture is a great way to get started, it can be limiting for more 
 
 2. **Frontend only**. Autocapture only works on the frontend. This enables you to capture events from your website or app, but not your server.
 
-3. **Customization**. Although it is possible to [add properties to autocapture](/docs/product-analytics/autocapture#capturing-additional-properties-in-autocapture-events), getting exactly the data you want at the exact moment you want requires customization. 
+3. **Customization**. Although it is possible to [add properties to autocapture](/docs/product-analytics/autocapture#capturing-additional-properties-in-autocapture-events), getting exactly the data you want at the exact moment you want requires customization.
+
+4. **Pageviews rely on page loads**. Pageview captures rely on page load events. This means they don't work well with [single-page apps (SPAs)](/tutorials/single-page-app-pageviews). To fix this, you can rely on the history API to capture pageviews by setting the `capture_pageview` configuration option to `history_change`.
 
 ## Setting up custom events
 

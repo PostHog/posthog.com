@@ -17,6 +17,7 @@ PostHog can capture frontend events automatically using autocapture. This captur
 This means you don't need to manually add tracking for individual components, links, buttons, divs, spans, or other parts of your product. Autocapture also provides data for [heatmaps](/docs/toolbar/heatmaps).
 
 Autocapture is available in the following SDKs:  
+
 - [JavaScript Web](/docs/libraries/js) - enabled by default
 - [React](/docs/libraries/react) - enabled by default
 - [React Native](/docs/libraries/react-native) - disabled by default
@@ -26,6 +27,18 @@ Autocapture is available in the following SDKs:
 
 > This covers configuring autocapture in the JavaScript and React SDKs. For the React Native SDK, see our [React Native docs](/docs/libraries/react-native#autocapture).
 
+### Capturing pageviews in single-page apps
+
+PostHog usually relies on the page load event to capture pageviews. This means it only captures pageviews when a user loads a new page.
+
+This doesn't work for single-page app frameworks like [Next.js](/docs/libraries/next-js), [React Router](/docs/libraries/react-router), or [Vue](/docs/libraries/vue-js). Instead, you can the `capture_pageview` configuration option to `history_change`. This uses the history API to capture pageviews whenever the user navigates within your app.
+
+```js-web
+posthog.init("<ph_project_api_key>", {
+  api_host: "<ph_client_api_host>",
+  capture_pageview: "history_change",
+})
+```
 ### Reducing events with an allow and ignorelist
 
 Autocapture enables you to start capturing events on your site quickly, but this can lead to large numbers of events. To counteract this, you can configure autocapture using `allowlists` and `ignorelists` (NB some options use allow behavior and some use ignore behavior. 
