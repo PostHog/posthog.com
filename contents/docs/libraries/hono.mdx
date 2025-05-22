@@ -5,8 +5,16 @@ icon: >-
 ---
 import { CalloutBox } from 'components/Docs/CalloutBox'
 
-PostHog makes it easy to get data about usage of your [Hono](https://hono.dev/) app. 
-Integrating PostHog into your app enables analytics, custom events capture, feature flags, and more.
+PostHog makes it easy to get data about usage of your [Hono](https://hono.dev/) app. Integrating PostHog into your app enables analytics, custom events capture, feature flags, and more.
+
+This guide walks you through integrating PostHog with your Hono app running on the [Node.js](https://hono.dev/docs/getting-started/nodejs) runtimes. You can hook into the same middleware and `onError` for other runtimes to capture events.
+
+## Prerequisites
+
+To follow this guide along, you need:
+
+1. A PostHog instance (either [Cloud](https://app.posthog.com/signup) or [self-hosted](/docs/self-host))
+2. A Hono application. We suggest trying first with a fresh [Hono Node.js starter template](https://hono.dev/docs/getting-started/nodejs#_1-setup).
 
 ## Installation
 
@@ -15,19 +23,23 @@ Start by installing the `posthog-node` package using your package manager.
 npm install --save posthog-node
 ```
 
-Then, create a [middleware](https://hono.dev/docs/guides/middleware) to capture events for your routes.
+Then, create a [middleware](https://hono.dev/docs/guides/middleware) to capture events for your routes. Remember to export your [project API key](https://us.posthog.com/settings/project#variables) as an environment variable.
 
-```js file="middleware.js"
+```js
+import { env } from 'hono/adapter'
+import { createMiddleware } from 'hono/factory'
+import { PostHog } from 'posthog-node'
+
 const posthogServerMiddleware = createMiddleware(async (c, next) => {
-    const { POSTHOG_HOST, POSTHOG_PUBLIC_KEY } = env<{ POSTHOG_HOST, POSTHOG_PUBLIC_KEY }>(c)
-    const posthog = new PostHog(POSTHOG_PUBLIC_KEY, { host: POSTHOG_HOST })
+  const { POSTHOG_PUBLIC_KEY } = env<{ POSTHOG_PUBLIC_KEY:string }>(c)
+  const posthog = new PostHog(POSTHOG_PUBLIC_KEY, { host: 'https://us.i.posthog.com' })
 
-    posthog.capture({
-        distinctId: 'distinct_id_of_user', // Their user id or email
-        event: 'user_did_something',
-    })
-    await posthog.shutdown() // TIP: On program exit, call shutdown to stop pending pollers and flush any remaining events
-    await next()
+  posthog.capture({
+      distinctId: 'distinct_id_of_user', // Their user id or email
+      event: 'user_did_something',
+  })
+  await posthog.shutdown() // TIP: On program exit, call shutdown to stop pending pollers and flush any remaining events
+  await next()
 })
 ```
 
@@ -46,11 +58,20 @@ app.use('*', posthogServerMiddleware)
 
 In your routes, you can pass information to be captured by your middleware using [context `set()` and `get()` pair](https://hono.dev/docs/api/context#set-get)
 
+<CalloutBox icon="IconInfo" title="Cloudflare Pages">
+
+Cloudflare Pages uses its own middleware system that is different from Hono's middleware. Follow the [Hono documentation on Cloudflare Pages](https://hono.dev/docs/getting-started/cloudflare-pages#cloudflare-pages-middleware) to handle middleware. 
+
+</CalloutBox>
+
 ## Error tracking
 
 Hono uses [`app.onError`](https://hono.dev/docs/api/exception#handling-httpexception) for root-level error handling. You can take advantage of this for [Error tracking](/docs/error-tracking).
 
 ```ts file=index.ts
+import { env } from 'hono/adapter'
+import { PostHog } from 'posthog-node'
+
 app.onError((err, c) => {
   const { POSTHOG_HOST, POSTHOG_PUBLIC_KEY } = env<{ POSTHOG_HOST: string, POSTHOG_PUBLIC_KEY: string }>(c)
   const posthog = new PostHog(POSTHOG_PUBLIC_KEY, { host: POSTHOG_HOST })
@@ -70,7 +91,6 @@ app.onError((err, c) => {
 
 ## Next steps
 
-For any technical questions for how to integrate specific PostHog features into Hono, have a look at our [Node](/docs/libraries/node) SDK docs
-for concepts such as:
+For any technical questions for how to integrate specific PostHog features into Hono, have a look at our [Node](/docs/libraries/node) SDK docs for concepts such as:
 - [Capture custom events, identify users, and more.](/docs/libraries/node#capturing-events)
 - [Feature flags including variants and payloads.](/docs/libraries/node#feature-flags)
