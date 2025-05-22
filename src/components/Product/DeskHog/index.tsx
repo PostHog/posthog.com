@@ -143,7 +143,7 @@ const subfeatures = [
     {
         title: 'Palm-sized',
         description:
-            "DeskHog is small enough to fit in your pocket. It's got a 24-hour battery life, WiFi, and a cute flashing LED so you can find it in the dark.",
+            "DeskHog is small enough to fit in your pocket. It's got a 10-hour battery life, WiFi, and a cute flashing LED so you can find it in the dark.",
         icon: <IconHandwave />,
     },
 ]
