@@ -27,7 +27,7 @@ The fastest way to set up autocapture is to copy the snippet below and paste it 
 
 > **Alternative**: Alternatively, you can install one of the SDKs such as [JavaScript Web](/docs/libraries/js), [React](/docs/libraries/react), or [React Native](/docs/libraries/react-native).
 
-Once setup, this autocaptures events like pageviews,clicks, change of inputs, or submission of **`a`**, **`button`**, **`form`**, **`input`**, **`select`**, **`textarea`**, and **`label`** tags. Those events flow automatically into PostHog for you to see and analyze.
+Once setup, this autocaptures events like pageviews, clicks, change of inputs, or submission of **`a`**, **`button`**, **`form`**, **`input`**, **`select`**, **`textarea`**, and **`label`** tags. Those events flow automatically into PostHog for you to see and analyze.
 
 Autocapture can also capture non-event data like session duration, mouse movement, bounce rate, performance, and more. You can learn more about this in the [autocapture docs](/docs/product-analytics/autocapture).
 
