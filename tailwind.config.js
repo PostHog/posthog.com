@@ -330,15 +330,25 @@ module.exports = {
                 '-100': '-1',
             },
         },
+        typography: {
+            DEFAULT: {
+                css: {
+                    h5: {
+                        marginBottom: '.25rem',
+                    },
+                },
+            },
+        },
     },
     plugins: [
         require('@tailwindcss/forms'),
         require('@headlessui/tailwindcss'),
         require('@tailwindcss/container-queries'),
         require('tailwindcss-animated'),
-        function({ addVariant }) {
+        require('@tailwindcss/typography'),
+        function ({ addVariant }) {
             addVariant('skin-modern', 'body[data-skin="modern"] &')
             addVariant('skin-classic', 'body[data-skin="classic"] &')
-        }
+        },
     ],
 }

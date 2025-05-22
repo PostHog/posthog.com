@@ -7,12 +7,12 @@ interface AccordionItemProps extends React.ComponentPropsWithoutRef<typeof Radix
     className?: string
 }
 
-// border-primary border-x overflow-hidden first:mt-0 first:rounded-t last:rounded-b 
+// border-primary border-x overflow-hidden first:mt-0 first:rounded-t last:rounded-b
 
 const AccordionItem = React.forwardRef<HTMLDivElement, AccordionItemProps>(
     ({ children, className, ...props }, forwardedRef) => (
         <RadixAccordion.Item
-            className={`border-t border-primary first:border-t-0 [&_h3]:mb-0 focus-within:relative focus-within:z-10 focus-within:shadow-[0_0_2px_2px] focus-within:shadow-border ${className}`}
+            className={`not-prose border-t border-primary first:border-t-0 [&_h3]:mb-0 focus-within:relative focus-within:z-10 focus-within:shadow-[0_0_2px_2px] focus-within:shadow-border ${className}`}
             {...props}
             ref={forwardedRef}
         >
@@ -69,7 +69,11 @@ const AccordionContent = React.forwardRef<HTMLDivElement, AccordionContentProps>
 )
 AccordionContent.displayName = 'AccordionContent'
 
-interface AccordionRootProps extends Omit<React.ComponentPropsWithoutRef<typeof RadixAccordion.Root>, 'type' | 'value' | 'defaultValue' | 'onValueChange'> {
+interface AccordionRootProps
+    extends Omit<
+        React.ComponentPropsWithoutRef<typeof RadixAccordion.Root>,
+        'type' | 'value' | 'defaultValue' | 'onValueChange'
+    > {
     items: {
         value?: string
         trigger: React.ReactNode
@@ -81,7 +85,14 @@ interface AccordionRootProps extends Omit<React.ComponentPropsWithoutRef<typeof 
     contentClassName?: string
 }
 
-export const Accordion = ({ items, className, defaultValue, onValueChange, contentClassName, ...props }: AccordionRootProps) => {
+export const Accordion = ({
+    items,
+    className,
+    defaultValue,
+    onValueChange,
+    contentClassName,
+    ...props
+}: AccordionRootProps) => {
     return (
         <RadixAccordion.Root
             className={`rounded border border-primary ${className}`}

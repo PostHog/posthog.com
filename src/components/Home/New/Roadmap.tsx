@@ -145,10 +145,10 @@ const UnderConsiderationTable = ({ data }: { data: any }) => {
         <ProgressBar />
     ) : (
         <Table
-            headerMargin="100px"
+            headerMargin="120px"
             headerLabel="under consideration"
             columns={[
-                { name: '', width: '100px', align: 'center' as const },
+                { name: '', width: '120px', align: 'center' as const },
                 { name: 'votes', width: '60px', align: 'center' as const },
                 { name: 'team', width: '140px', align: 'left' as const },
                 { name: 'description', width: 'minmax(200px,2fr)', align: 'left' as const },

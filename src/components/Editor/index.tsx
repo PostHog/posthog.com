@@ -310,7 +310,7 @@ export function Editor({
                             </div>
                         )}
                         <ScrollArea>
-                            <div className={`p-4 mx-auto max-w-${maxWidth}`}>
+                            <div className={`prose p-4 mx-auto max-w-${maxWidth}`}>
                                 {title && (
                                     <h1 className="text-2xl font-bold">
                                         {title}

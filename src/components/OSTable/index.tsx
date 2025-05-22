@@ -19,6 +19,7 @@ interface OSTableProps {
     rows: Row[]
     className?: string
     rowAlignment?: 'top' | 'center'
+    size?: 'sm' | 'md' | 'lg'
     editable?: boolean
 }
 
@@ -28,12 +29,15 @@ const OSTable: React.FC<OSTableProps> = ({
     className = '',
     rowAlignment = 'center',
     editable = true,
+    size = 'md',
 }) => {
     const gridClass = columns?.map((col) => col.width || 'auto').join(' ') || ''
 
     return (
         <div
-            className={`grid divide-x divide-y divide-border border-r border-b border-primary [&>div]:p-2 text-[15px] ${className}`}
+            className={`grid divide-x divide-y divide-border border-r border-b border-primary text-[15px] [&>div]:px-2 ${
+                size === 'sm' ? '[&>div]:py-1' : size === 'md' ? '[&>div]:py-2' : '[&>div]:py-3'
+            } ${className}`}
             style={{ gridTemplateColumns: gridClass }}
         >
             {/* Header Row */}

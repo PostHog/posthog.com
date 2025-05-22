@@ -143,7 +143,7 @@ const Products = () => {
 
     return (
         <div>
-            <OSTable columns={columns} rows={rows} />
+            <OSTable columns={columns} rows={rows} size="sm" />
             <div className="bg-accent p-1 text-right text-xs border-primary border-x border-b">
                 <Link to="/products" state={{ newWindow: true }} className="hover:underline">
                     Open product explorer <IconArrowRight className="inline-block -rotate-45 size-4 text-primary" />
@@ -293,33 +293,46 @@ const Customer = ({ number, customer }: CustomerProps) => {
 }
 
 const PageNavigation = () => {
+    const [showTableOfContents, setShowTableOfContents] = useState(false)
     return (
-        <Accordion
-            className="mb-8"
-            items={[
-                {
-                    value: 'table-of-contents',
-                    trigger: <strong>Contents</strong>,
-                    content: (
-                        <div data-scheme="primary">
-                            <ol className="pl-4">
-                                {sections.map((section) => (
-                                    <li key={section.title}>
-                                        <Link
-                                            to={`/#${section.title.toLowerCase().replace(/\s+/g, '-')}`}
-                                            className="group flex items-center gap-1"
-                                        >
-                                            <span>{section.title}</span>
-                                            <IconArrowRight className="inline-block rotate-90 size-3 text-primary opacity-0 group-hover:opacity-100" />
-                                        </Link>
-                                    </li>
-                                ))}
-                            </ol>
-                        </div>
-                    ),
-                },
-            ]}
-        />
+        <div className="mb-8">
+            {!showTableOfContents && (
+                <button
+                    className="underline text-sm font-semibold"
+                    onClick={() => setShowTableOfContents(!showTableOfContents)}
+                >
+                    table of contents
+                </button>
+            )}
+            {showTableOfContents && (
+                <Accordion
+                    defaultValue="table-of-contents"
+                    items={[
+                        {
+                            value: 'table-of-contents',
+                            trigger: <strong>Contents</strong>,
+                            content: (
+                                <div data-scheme="primary">
+                                    <ol className="pl-4">
+                                        {sections.map((section) => (
+                                            <li key={section.title}>
+                                                <Link
+                                                    to={`/#${section.title.toLowerCase().replace(/\s+/g, '-')}`}
+                                                    className="group flex items-center gap-1"
+                                                >
+                                                    <span>{section.title}</span>
+                                                    <IconArrowRight className="inline-block rotate-90 size-3 text-primary opacity-0 group-hover:opacity-100" />
+                                                </Link>
+                                            </li>
+                                        ))}
+                                    </ol>
+                                </div>
+                            ),
+                        },
+                    ]}
+                />
+            )}
+        </div>
     )
 }
 
@@ -342,7 +355,7 @@ const Customers = () => {
         })
     })
 
-    return <OSTable columns={columns} rows={rows} />
+    return <OSTable columns={columns} rows={rows} size="sm" />
 }
 
 const jsxComponentDescriptors: JsxComponentDescriptor[] = [
@@ -386,7 +399,7 @@ const jsxComponentDescriptors: JsxComponentDescriptor[] = [
         name: 'Logo',
         kind: 'flow',
         props: [],
-        Editor: () => <Logo className="inline-block" />,
+        Editor: () => <Logo noText className="inline-block" />,
     },
 ]
 
