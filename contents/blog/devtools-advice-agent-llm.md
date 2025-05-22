@@ -13,7 +13,7 @@ tags:
 
 The way software gets made is changing. Developers are using LLM tools to build quick-and-dirty prototypes that test assumptions and validate demand.
 
-If we want our developer tools to be part of that mix, there’s some evolution to do. The robot has different needs, advantages and weaknesses from the human.
+If we want our developer tools to be part of that mix, they need to evolve. The robot has different needs, advantages, and weaknesses than the human.
 
 For example, here’s AI luminary Andrej Karpathy with an observation about docs:
 
@@ -31,7 +31,7 @@ Here’s the good news: you already know how to do it.
 
 In the AI age, this approach could be combined with plaintext documentation the developer can copy and paste into an agent chat. The agent would then have everything it needed to know to pull real data from a service. With this data added to the context, the agent would write much more effective code.
 
-But you can take it further: beyond existing CLI tools, you can [write your own](/blog/envoy-wizard-llm-agent) that specifically target agent sessions and the developers who run them. Steal our wizard code and get started.
+But you can take it further: beyond existing CLI tools, you can [write your own](/blog/envoy-wizard-llm-agent) that specifically target agent sessions and the developers who run them. [Steal our wizard code](https://github.com/PostHog/wizard) and get started.
 
 ## Constrain the path
 
@@ -41,7 +41,7 @@ Our job in serving developers is to prevent this. Bad code is a landmine hidden 
 
 No developer can know everything, so the possibility of these details being missed is ever-present, even if you’re serving a more experienced audience.
 
-So the job becomes constraining what’s possible.
+The fix is constraining what’s possible.
 
 One way to do this is the same way we did it before the age of robots:
 
@@ -59,14 +59,12 @@ At its best, automation relieves tedium.
 
 When they’re set up to succeed, agents can relieve *loads* of tedium for developers, doing repetitive tasks and boring setup in a flash.
 
-The most exotic approach we’ll nod to here is the [MCP](https://github.com/modelcontextprotocol) server: 
+The most exotic approach we’ll nod to here is the [MCP](https://github.com/modelcontextprotocol) server. This is *new*, but beneath the surface, it’s not *that new*.
 
-This is *new*, but beneath the surface, it’s not *that new*.
+An MCP server creates an interface between your existing technology and a coding agent. It provides these surfaces:
 
-An MCP server creates a direct interface between your existing technology and a coding agent. It provides these surfaces:
-
-- [Tools](https://modelcontextprotocol.io/docs/concepts/tools): these are buttons and levers the agent can operate for the user. They might enable an agent to create, update or delete resources in a developer’s project.
-- [Resources](https://modelcontextprotocol.io/docs/concepts/resources): this is data the agent can use to be more effective. Maybe a dump of a database schema, or authentication keys for a project.
+- [Tools](https://modelcontextprotocol.io/docs/concepts/tools): buttons and levers the agent can operate for the user. They might enable an agent to create, update or delete resources in a developer’s project.
+- [Resources](https://modelcontextprotocol.io/docs/concepts/resources): data the agent can use to be more effective. Maybe a dump of a database schema, or authentication keys for a project.
 - [Prompts](https://modelcontextprotocol.io/docs/concepts/prompts): you can provide consistent yet customized guidance to an agent, and its developer, via MCP.
 
 So that’s the new part.
