@@ -12,23 +12,10 @@ import SideModal from 'components/Modal/SideModal'
 import { CallToAction } from 'components/CallToAction'
 import { User, useUser } from 'hooks/useUser'
 import ProgressBar from 'components/ProgressBar'
-const Table = ({
-    headerLabel,
-    columns,
-    rows,
-    headerMargin = '50px',
-}: {
-    headerLabel: string
-    columns: any
-    rows: any
-    headerMargin?: string
-}) => {
+import { preparePreviewText } from 'components/Editor/SearchUtils'
+const Table = ({ columns, rows }: { columns: any; rows: any }) => {
     return (
         <div>
-            <div className="bg-accent border-primary border-x border-t font-semibold flex">
-                <div style={{ width: headerMargin }} className="border-r border-primary py-1" />
-                <div className="py-1 px-2">{headerLabel}</div>
-            </div>
             <OSTable columns={columns} rows={rows} />
             <div className="bg-accent p-1 text-left text-xs border-primary border-x border-b flex justify-end">
                 <Link to="/roadmap" state={{ newWindow: true }} className="hover:underline">
@@ -145,8 +132,6 @@ const UnderConsiderationTable = ({ data }: { data: any }) => {
         <ProgressBar />
     ) : (
         <Table
-            headerMargin="120px"
-            headerLabel="under consideration"
             columns={[
                 { name: '', width: '120px', align: 'center' as const },
                 { name: 'votes', width: '60px', align: 'center' as const },
@@ -167,7 +152,7 @@ const UnderConsiderationTable = ({ data }: { data: any }) => {
                             {
                                 content: (
                                     <div className="community-post-markdown">
-                                        <Markdown>{roadmap.attributes.description}</Markdown>
+                                        <Markdown>{preparePreviewText(roadmap.attributes.description, 75)}</Markdown>
                                     </div>
                                 ),
                             },
@@ -184,7 +169,6 @@ export default function Roadmap({ frame }) {
             wip: allSqueakRoadmap(
                 filter: { complete: { ne: true }, projectedCompletion: { ne: null } }
                 sort: { fields: createdAt }
-                limit: 5
             ) {
                 nodes {
                     id
@@ -216,18 +200,17 @@ export default function Roadmap({ frame }) {
             frame={frame}
             tabs={[
                 {
-                    label: 'wip',
+                    label: `wip (${wip.nodes.length})`,
                     value: 'wip',
                     content: (
                         <Table
-                            headerLabel="wip"
                             columns={[
                                 { name: '', width: '50px', align: 'center' as const },
                                 { name: 'team', width: '120px', align: 'left' as const },
                                 { name: 'status', width: '70px' },
                                 { name: 'description', width: 'minmax(200px,2fr)', align: 'left' as const },
                             ]}
-                            rows={wip.nodes.map((node, idx) => ({
+                            rows={wip.nodes.slice(0, 5).map((node, idx) => ({
                                 cells: [
                                     { content: idx + 1 },
                                     {
@@ -239,7 +222,7 @@ export default function Roadmap({ frame }) {
                                     {
                                         content: (
                                             <div className="community-post-markdown">
-                                                <Markdown>{node.description}</Markdown>
+                                                <Markdown>{preparePreviewText(node.description, 68)}</Markdown>
                                             </div>
                                         ),
                                     },
@@ -249,7 +232,7 @@ export default function Roadmap({ frame }) {
                     ),
                 },
                 {
-                    label: 'under consideration',
+                    label: `under consideration (${underConsideration.nodes.length})`,
                     value: 'under-consideration',
                     content: <UnderConsiderationTable data={underConsideration} />,
                 },
