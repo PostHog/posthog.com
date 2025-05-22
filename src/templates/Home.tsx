@@ -45,6 +45,8 @@ import {
 } from 'lexical'
 import { mergeRegister } from '@lexical/utils'
 import Logo from 'components/Logo'
+import { useApp } from '../context/App'
+import { useWindow } from '../context/Window'
 
 interface ProductButtonsProps {
     productTypes: string[]
@@ -399,6 +401,8 @@ export default function Home({
     const [currentAlignment, setCurrentAlignment] = useState<'left' | 'center' | 'right' | 'justify'>('left')
     const [canUndo, setCanUndo] = React.useState(false)
     const [canRedo, setCanRedo] = React.useState(false)
+    const { appWindow } = useWindow()
+    const { setWindowTitle } = useApp()
 
     useEffect(() => {
         if (activeEditor) {
@@ -448,6 +452,12 @@ export default function Home({
             return () => removeUpdateListener()
         }
     }, [activeEditor])
+
+    useEffect(() => {
+        if (appWindow) {
+            setWindowTitle(appWindow, 'home.mdx')
+        }
+    }, [appWindow])
 
     return (
         <Editor
