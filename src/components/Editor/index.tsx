@@ -29,7 +29,7 @@ import { SearchBar } from './SearchBar'
 
 interface EditorProps {
     slug?: string
-    title: string
+    title?: string
     type?: string
     maxWidth?: string
     children?: React.ReactNode
@@ -307,10 +307,12 @@ export function Editor({
                         )}
                         <ScrollArea>
                             <div className={`p-4 mx-auto max-w-${maxWidth}`}>
-                                <h1 className="text-2xl font-bold">
-                                    {title}
-                                    {type && <span className="opacity-40">.{type}</span>}
-                                </h1>
+                                {title && (
+                                    <h1 className="text-2xl font-bold">
+                                        {title}
+                                        {type && <span className="opacity-40">.{type}</span>}
+                                    </h1>
+                                )}
                                 {children}
                             </div>
                         </ScrollArea>
