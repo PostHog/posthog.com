@@ -41,7 +41,7 @@ Our job in serving developers is to prevent this. Bad code is a landmine hidden 
 
 No developer can know everything, so the possibility of these details being missed is ever-present, even if you’re serving a more experienced audience.
 
-So the job becomes constraining what’s possible.
+The fix is constraining what’s possible.
 
 One way to do this is the same way we did it before the age of robots:
 
