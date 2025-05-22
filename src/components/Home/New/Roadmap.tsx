@@ -135,7 +135,7 @@ const UnderConsiderationTable = ({ data }: { data: any }) => {
             columns={[
                 { name: '', width: '120px', align: 'center' as const },
                 { name: 'votes', width: '60px', align: 'center' as const },
-                { name: 'team', width: '140px', align: 'left' as const },
+                { name: 'idea', width: '140px', align: 'left' as const },
                 { name: 'description', width: 'minmax(200px,2fr)', align: 'left' as const },
             ]}
             rows={[...roadmaps]
@@ -147,7 +147,7 @@ const UnderConsiderationTable = ({ data }: { data: any }) => {
                             { content: <VoteButton onLike={mutate} roadmap={roadmap} /> },
                             { content: roadmap.likes },
                             {
-                                content: roadmap.attributes.teams?.data?.[0]?.attributes?.name || '',
+                                content: roadmap.attributes.title,
                             },
                             {
                                 content: (
@@ -172,9 +172,7 @@ export default function Roadmap({ frame }) {
             ) {
                 nodes {
                     id
-                    teams {
-                        name
-                    }
+                    title
                     betaAvailable
                     description
                 }
@@ -185,9 +183,7 @@ export default function Roadmap({ frame }) {
                 nodes {
                     id
                     squeakId
-                    teams {
-                        name
-                    }
+                    title
                     betaAvailable
                     description
                 }
@@ -206,7 +202,7 @@ export default function Roadmap({ frame }) {
                         <Table
                             columns={[
                                 { name: '', width: '50px', align: 'center' as const },
-                                { name: 'team', width: '120px', align: 'left' as const },
+                                { name: 'idea', width: '120px', align: 'left' as const },
                                 { name: 'status', width: '70px' },
                                 { name: 'description', width: 'minmax(200px,2fr)', align: 'left' as const },
                             ]}
@@ -214,7 +210,7 @@ export default function Roadmap({ frame }) {
                                 cells: [
                                     { content: idx + 1 },
                                     {
-                                        content: node.teams?.[0]?.name || 'Unknown',
+                                        content: node.title,
                                     },
                                     {
                                         content: node.betaAvailable ? 'beta' : '',
