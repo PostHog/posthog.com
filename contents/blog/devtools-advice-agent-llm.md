@@ -13,9 +13,9 @@ tags:
 
 The way software gets made is changing. Developers are using LLM tools to build quick-and-dirty prototypes that test assumptions and validate demand.
 
-If we want our developer tools to be part of that mix, they need to evolve. The robot has different needs, advantages, and weaknesses than the human.
+If we want our developer tools to be part of that mix, they need to evolve. The robot has different needs, advantages, and weaknesses from we humans.
 
-For example, here’s AI luminary Andrej Karpathy with an observation about docs:
+For example, here’s AI luminary Andrej Karpathy's call to action on docs:
 
 > […] docs also have to change in the content. Eg instead of instructing a person to go to some page and do this or that, they could show curl commands to run - actions that  are a lot easier for an LLM to carry out.
 
@@ -27,7 +27,9 @@ Here’s the good news: you already know how to do it.
 
 `cURL` commands are a great start: you can ship them this afternoon, and you can be clever by auto-populating their values with a developer’s API keys and other details.
 
-[Airtable](https://airtable.com/developers/web/api/introduction) is perhaps the canonical example of rich, pre-populated commands folded into documentation. Each database gets a fully-customized reference full of example commands for every CRUD operation.
+![Airtable's documentation](https://res.cloudinary.com/dmukukwp6/image/upload/Screenshot_2025_05_22_at_1_20_44_PM_22007ac69e.png)
+
+[Airtable](https://airtable.com/developers/web/api/introduction) is perhaps the canonical example of rich, pre-populated commands folded into documentation. Each database gets a fully-customized reference full of examples for every CRUD operation.
 
 In the AI age, this approach could be combined with plaintext documentation the developer can copy and paste into an agent chat. The agent would then have everything it needed to know to pull real data from a service. With this data added to the context, the agent would write much more effective code.
 
