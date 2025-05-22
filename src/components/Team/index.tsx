@@ -339,11 +339,7 @@ export default function Team({ body, roadmaps, objectives, emojis, newTeam, slug
                                                           <div className="mb-auto">
                                                               <h3
                                                                   className="mb-0 text-base leading-tight"
-                                                                  id={
-                                                                      kebabCase(name) +
-                                                                      '-' +
-                                                                      kebabCase(companyRole)
-                                                                  }
+                                                                  id={kebabCase(name) + '-' + kebabCase(companyRole)}
                                                               >
                                                                   {name}
                                                               </h3>
@@ -379,10 +375,7 @@ export default function Team({ body, roadmaps, objectives, emojis, newTeam, slug
                                                               onClick={() => removeTeamMember(id)}
                                                               className="w-7 h-7 rounded-full border border-border dark:border-dark absolute -right-2 flex items-center justify-center -top-2 z-10 bg-accent dark:bg-accent-dark"
                                                           >
-                                                              <Tooltip
-                                                                  content="Remove team member"
-                                                                  placement="top"
-                                                              >
+                                                              <Tooltip content="Remove team member" placement="top">
                                                                   <IconX className="w-4 h-4" />
                                                               </Tooltip>
                                                           </button>
@@ -422,9 +415,7 @@ export default function Team({ body, roadmaps, objectives, emojis, newTeam, slug
                                 <Tooltip
                                     placement="right"
                                     content={`The average hedgehog is ${
-                                        posthog?.getFeatureFlag?.('are-you-in-the-us')
-                                            ? '7 inches'
-                                            : '17 centimeters'
+                                        posthog?.getFeatureFlag?.('are-you-in-the-us') ? '7 inches' : '17 centimeters'
                                     } long`}
                                 >
                                     <IconInfo className="w-4" />
@@ -539,7 +530,7 @@ export default function Team({ body, roadmaps, objectives, emojis, newTeam, slug
             <SideModal open={!!activeProfile} setOpen={setActiveProfile}>
                 {activeProfile && <Profile profile={{ ...activeProfile }} />}
             </SideModal>
-            <OSTabs tabs={tabs} defaultValue="overview">
+            <OSTabs tabs={tabs} triggerDataScheme="primary" defaultValue="overview">
                 {isModerator && (
                     <div className="flex justify-end space-x-2 absolute bottom-4 right-4 z-50">
                         <CallToAction

@@ -15,15 +15,9 @@ export default function Home(): JSX.Element {
                 image={`/images/og/customers.jpg`}
                 updateWindowTitle={false}
             />
-            <Editor title="home" type="mdx" slug="/" onFilterChange={(data) => setFilteredCustomers(data)}>
-                <ScrollArea>
-                    <h1>
-                        welcome to <Logo className="inline-block" />
-                    </h1>
-                    <p>we build tools for people who build products.</p>
-                    test. @todo i think this is old?
-                    <OSTable columns={columns} rows={rows} />
-                </ScrollArea>
+            <Editor title="home" type="mdx" slug="/">
+                <p>we build tools for people who build products.</p>
+                test. @todo i think this is old?
             </Editor>
         </>
     )

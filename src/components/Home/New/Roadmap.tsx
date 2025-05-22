@@ -184,7 +184,7 @@ const Description = ({ description, buttonClassName = '' }: { description: strin
     )
 }
 
-export default function Roadmap({ frame }) {
+export default function Roadmap({ frame }: { frame: boolean }) {
     const { wip, underConsideration } = useStaticQuery(graphql`
         {
             wip: allSqueakRoadmap(
