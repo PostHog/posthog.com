@@ -444,9 +444,7 @@ export default function Home({
 
     return (
         <Editor
-            title="home"
             type="mdx"
-            hideTitle
             slug="/"
             actionButtons={{
                 undo: {
