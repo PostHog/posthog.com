@@ -99,7 +99,7 @@ With our app set up, it’s time to install and set up PostHog. To start, instal
 npm i posthog-js
 ```
 
-To premptively fix a TypeScript compilation error, we need to install some `rrweb` types and then clear the `npm` cache.
+To preemptively fix a TypeScript compilation error, we need to install some `rrweb` types and then clear the `npm` cache.
 
 ```bash
 npm install @rrweb/types@2.0.0-alpha.17 rrweb-snapshot@2.0.0-alpha.17
