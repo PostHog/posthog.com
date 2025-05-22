@@ -287,7 +287,7 @@ const ExpandableCallout = () => {
                     <h5 className="text-center">Coming soon: DeskHog Pro & Friends</h5>
                     <p>This is just the beginning of the DeskHog adventure. If you like it we'll make more, maybe.</p>
                     <p>
-                        DeskHog Pro will connect via the I²C port, adding more buttons, a speaker, and a huge dial so
+                        DeskHog Pro will connect via the I²C port, adding more buttons, and a huge dial so
                         you can crank up the vibes. We're also thinking about making a watch strap, so you can wear
                         DeskHog on your wrist.
                     </p>
