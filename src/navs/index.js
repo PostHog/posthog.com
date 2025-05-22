@@ -1246,11 +1246,11 @@ export const handbookSidebar = [
             },
             {
                 name: 'Revenue Adjustments',
-                url: '/handbook/growth/revops/revenue-adjustments',
+                url: '/handbook/growth/revops/revenue adjustments.md',
             },
             {
                 name: 'Retention Metrics',
-                url: '/handbook/growth/revops/retention-metrics',
+                url: '/handbook/growth/revops/retention-metrics.md',
             },
         ],
     },
