@@ -7,7 +7,7 @@ import { CalloutBox } from 'components/Docs/CalloutBox'
 
 PostHog makes it easy to get data about usage of your [Hono](https://hono.dev/) app. Integrating PostHog into your app enables analytics, custom events capture, feature flags, and more.
 
-This guide walks you through integrating PostHog with your Hono app running on the [Node.js](https://hono.dev/docs/getting-started/nodejs) runtimes. You can hook into the same middleware and `onError` for other runtimes to capture events.
+This guide walks you through integrating PostHog with your Hono app running on the [Node.js](https://hono.dev/docs/getting-started/nodejs) runtime, but has also been tested with Cloudflare Workers, Vercel, and Bun. You can hook into the same middleware and `onError` for other runtimes to capture events.
 
 ## Prerequisites
 
@@ -23,7 +23,7 @@ Start by installing the `posthog-node` package using your package manager.
 npm install --save posthog-node
 ```
 
-Then, create a [middleware](https://hono.dev/docs/guides/middleware) to capture events for your routes. Remember to export your [project API key](https://us.posthog.com/settings/project#variables) as an environment variable.
+Then, create a [middleware](https://hono.dev/docs/guides/middleware) to capture events for your routes. Remember to **export** your [project API key](https://us.posthog.com/settings/project#variables) as an environment variable.
 
 ```js file=index.ts
 import { env } from 'hono/adapter'
@@ -32,7 +32,7 @@ import { PostHog } from 'posthog-node'
 
 const posthogServerMiddleware = createMiddleware(async (c, next) => {
   const { POSTHOG_PUBLIC_KEY } = env<{ POSTHOG_PUBLIC_KEY:string }>(c)
-  const posthog = new PostHog(POSTHOG_PUBLIC_KEY, { host: 'https://us.i.posthog.com' })
+  const posthog = new PostHog(POSTHOG_PUBLIC_KEY, { host: '<ph_client_api_host>' })
 
   posthog.capture({
       distinctId: 'distinct_id_of_user', // Their user id or email
@@ -45,7 +45,7 @@ const posthogServerMiddleware = createMiddleware(async (c, next) => {
 
 <CalloutBox icon="IconInfo" title="Shutdown">
 
-Make sure to always call `posthog.shutdown()` after capturing events from the server-side. PostHog queues events into larger batches, and this call forces all batched events to be flushed immediately.
+Make sure to always call `posthog.shutdown()` after capturing events from the server-side. PostHog queues events into larger batches. This call forces all batched events to be flushed immediately.
 
 </CalloutBox>
 
@@ -74,7 +74,7 @@ import { PostHog } from 'posthog-node'
 
 app.onError((err, c) => {
   const { POSTHOG_PUBLIC_KEY } = env<{ POSTHOG_PUBLIC_KEY:string }>(c)
-  const posthog = new PostHog(POSTHOG_PUBLIC_KEY, { host: 'https://us.i.posthog.com' })
+  const posthog = new PostHog(POSTHOG_PUBLIC_KEY, { host: '<ph_client_api_host>' })
   
   posthog.captureException(new Error(err.message, { cause: err }), 'user_distinct_id_with_err_rethrow', {
     path: c.req.path,
@@ -91,6 +91,6 @@ app.onError((err, c) => {
 
 ## Next steps
 
-For any technical questions for how to integrate specific PostHog features into Hono, have a look at our [Node](/docs/libraries/node) SDK docs for concepts such as:
-- [Capture custom events, identify users, and more.](/docs/libraries/node#capturing-events)
-- [Feature flags including variants and payloads.](/docs/libraries/node#feature-flags)
+To read more about how to integrate specific PostHog features into Hono, have a look at our [Node SDK docs](/docs/libraries/node) for concepts such as:
+- [Capturing custom events, setting properties, and more.](/docs/libraries/node#capturing-events)
+- [Setting up feature flags including variants and payloads.](/docs/libraries/node#feature-flags)
