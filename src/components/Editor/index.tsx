@@ -270,11 +270,15 @@ export function Editor({
     return (
         <SearchProvider onSearchChange={onSearchChange}>
             <div className="@container w-full h-full flex flex-col min-h-1">
-                <aside data-scheme="secondary" className="bg-primary p-2 border-b border-border">
+                <aside data-scheme="secondary" className="bg-primary p-2 border-b border-primary">
                     <Toolbar elements={toolbarElements} />
                 </aside>
                 <div className="flex flex-col flex-grow min-h-0">
-                    <main data-scheme="primary" className="@container flex-1 bg-primary relative h-full">
+                    <main
+                        data-app="Editor"
+                        data-scheme="primary"
+                        className="@container flex-1 bg-primary relative h-full"
+                    >
                         <SearchBar visible={showSearch} onClose={closeSearch} />
                         {showFilters && availableFilters && availableFilters.length > 0 && (
                             <div className="bg-accent dark:bg-accent-dark p-2 text-sm border-b border-border dark:border-border-dark flex gap-1">

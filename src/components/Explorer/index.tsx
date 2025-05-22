@@ -128,7 +128,11 @@ export default function Explorer({
                         </ScrollArea>
                     </aside>
                 )}
-                <main data-scheme="primary" className="@container flex-1 bg-primary relative h-full">
+                <main
+                    data-app="Explorer"
+                    data-scheme="primary"
+                    className="@container flex-1 bg-primary relative h-full"
+                >
                     {fullScreen ? (
                         children
                     ) : (
