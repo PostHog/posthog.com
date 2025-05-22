@@ -13,15 +13,15 @@ tags:
 
 The way software gets made is changing. Developers are using LLM tools to build quick-and-dirty prototypes that test assumptions and validate demand.
 
-So the tools developers use need to evolve. The robot has different needs, advantages, and weaknesses from we humans.
+The robot has different needs, advantages, and weaknesses from we humans. So developer tools will need to evolve.
 
-For example, here’s AI luminary Andrej Karpathy's call to action on docs:
+For example, here’s AI luminary Andrej Karpathy's [call to action](https://x.com/karpathy/status/1914489538006933770) on docs:
 
-> […] docs also have to change in the content. Eg instead of instructing a person to go to some page and do this or that, they could show curl commands to run - actions that  are a lot easier for an LLM to carry out.
+> docs also have to change in the content. Eg instead of instructing a person to go to some page and do this or that, they could show curl commands to run - actions that  are a lot easier for an LLM to carry out.
 
-This is good, but we can take it much further.
+This is good, but we can take LLM agent developer experience even further.
 
-Here’s the good news: you already know how to do it.
+Here's a bit of what we've learned about this. You can totally steal this and use it yourself, we don't mind.
 
 ## Commands the agent can run
 
@@ -49,11 +49,11 @@ One way to do this is the same way we did it before the age of robots:
 
 **Starter code**.
 
-A great starter project packages a bunch of design decisions *on behalf of the developer*, robot or not. Which things happen on the client, which things happen on the server, which things are secret, how secrets are managed… a strong starter just handles these questions.
+A great starter project packages a bunch of design decisions *on behalf of the developer*, robot or not. Which things happen on the client, which things happen on the server, which things are secret, how secrets are managed… it's better if the developer – robot or not – doesn't have to reinvent the wheel on this stuff.
 
-There’s no upside to letting an agent inject a bunch of variation in that foundation. We have conventions for a reason. We have *best practices* because there are worse practices.
+We have conventions for a reason. We have *best practices* because there are worse practices.
 
-On this stable ground, developers and their agents can work on the final 20% of a project that *is* fully unique to their plans.
+On the stable ground of a thoughtfully designed project, developers and their agents can work on the final 20% of a project that *is* fully unique to their plans.
 
 ## Build an interface
 
