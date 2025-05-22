@@ -33,7 +33,7 @@ Former games journalist Joe has repeatedly recommended this collection of essays
 
 ![From Switzerland](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tracks/from-switzerland.jpg)
 ## [From Switzerland by Counterprint](https://www.goodreads.com/book/show/60695040-from-switzerland)
-**Recommended by [Lottie Coxon, Graphic Designer](/community/profiles/227)**
+**Recommended by [Lottie Coxon, Graphic Designer](/lottie)**
 
 Lottie claims she doesn’t read very much, but when pressed for recommendations offered up From Switzerland as a representative of the entire Counterprint collection. Each book in the series collects work from some of the best agencies, designers and artists in each country — Switzerland, in this case.
 
@@ -92,7 +92,7 @@ When it came to envisioning the sort of culture he wanted to build at PostHog, n
 
 ![getting real](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tracks/getting-real.jpg)
 ## [Getting Real by Basecamp](https://basecamp.com/gettingreal)
-**Recommended by [David Newell, Software Engineer](/community/profiles/860)**
+**Recommended by [David Newell, Software Engineer](/david)**
 
 Basecamp’s online manifesto about how they build products echoes a lot of the same principles we believe in, from the importance of iterative development to the focus on user feedback. David, who built several successful products before joining PostHog, thinks it’s a resource everyone can benefit from — not just engineers. 
 
@@ -103,7 +103,7 @@ David's review: “It very simply talks about avoiding ‘work work’. The focu
 
 ![continuous discovery habits](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tracks/continuous-discovery.jpg)
 ## [Continuous Discovery Habits by Teresa Torres](https://www.goodreads.com/book/show/58046715-continuous-discovery-habits) 
-**Recommended by [Annika Schmid, Product Manager](/community/profiles/221)**
+**Recommended by [Annika Schmid, Product Manager](/annika)**
 
 In addition to The Mom Test, Annika recommends this book for its practical advice on gathering information from users and turning that information into actionable change. 
 
@@ -127,7 +127,7 @@ James recommends it in his guide to [finding product-market fit](/blog/product-m
 ![founding sales](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tracks/founding-sales.jpg)
 
 ## [Founding Sales: The Startup Sales Handbook by Daniel Kazanjy](https://www.goodreads.com/book/show/46019973-founding-sales---the-startup-sales-handbook)
-**Recommended by [Simon Fisher, Customer Success](/community/profiles/49)**
+**Recommended by [Simon Fisher, Customer Success](/simon)**
 
 PostHog doesn’t have a sales team, but if we did then this book by Daniel Kazanjy would likely be an important resource for them. It covers a lot of ground and much of it isn’t directly relevant to a team like ours, but it remains worth reading for the practical discussion of how to scale customer-facing functions. 
 
@@ -138,7 +138,7 @@ PostHog doesn’t have a sales team, but if we did then this book by Daniel Kaza
 
 ![saas playbook](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tracks/saas-playbook.jpg)
 ## [The SaaS Playbook by Rob Walling](https://www.goodreads.com/book/show/178816351-the-saas-playbook)
-**Recommended by [Lior Neu-ner, Technical Content Marketer](/community/profiles/684)**
+**Recommended by [Lior Neu-ner, Technical Content Marketer](/lior)**
 
 The SaaS Playbook isn’t your normal startup how-to guide, according to Lior. It doesn’t offer the usual hype around massive valuations and the importance of venture capital. Instead, it offers down-to-earth, practical advice for launching a new SaaS product in a repeatable way. 
 

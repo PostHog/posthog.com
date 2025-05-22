@@ -1238,7 +1238,21 @@ export const handbookSidebar = [
     },
     {
         name: 'RevOps',
-        url: '/handbook/growth/revops',
+        url: '',
+        children: [
+            {
+                name: 'Overview',
+                url: '/handbook/growth/revops',
+            },
+            {
+                name: 'Revenue Adjustments',
+                url: '/handbook/growth/revops/revenue-adjustments',
+            },
+            {
+                name: 'Retention Metrics',
+                url: '/handbook/growth/revops/retention-metrics',
+            },
+        ],
     },
     {
         name: 'Comms',
@@ -1259,6 +1273,10 @@ export const handbookSidebar = [
             {
                 name: 'In-app messaging',
                 url: '/handbook/words-and-pictures/in-app',
+            },
+            {
+                name: 'Events',
+                url: '/handbook/words-and-pictures/events',
             },
             {
                 name: 'Partnerships',

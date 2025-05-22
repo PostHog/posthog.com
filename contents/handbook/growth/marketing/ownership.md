@@ -28,7 +28,7 @@ showTitle: true
 | **Case studies**                        | Joe                  |
 | **Changelog**                           | Joe                  |
 | **Emailing customers**                  | Joe                  |
-| **Events**                              | Joe                  |
+| **Events**                              | Daniel               |
 | **Growth review**                       | Brian                |
 | **Incident response**                   | Joe                  |
 | **In-app notifications**                | Joe                  |
