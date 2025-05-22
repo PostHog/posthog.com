@@ -25,7 +25,7 @@ Here's a bit of what we've learned about this. You can totally steal this and us
 
 ## Commands the agent can run
 
-`cURL` commands are a great start: you can ship them this afternoon, and you can be clever by auto-populating their values with a developer’s API keys and other details.
+`curl` commands are a great start: you can ship them this afternoon, and you can be clever by auto-populating their values with a developer’s API keys and other details.
 
 ![Airtable's documentation](https://res.cloudinary.com/dmukukwp6/image/upload/Screenshot_2025_05_22_at_1_20_44_PM_22007ac69e.png)
 
