@@ -170,7 +170,7 @@ const Description = ({ description, buttonClassName = '' }: { description: strin
     const [showMore, setShowMore] = React.useState(false)
     const canShowMore = description.length > 68
     return (
-        <div className="community-post-markdown">
+        <div className="community-post-markdown !pb-0">
             <Markdown>{showMore ? description : preparePreviewText(description, 68)}</Markdown>
             {!showMore && canShowMore && (
                 <button
@@ -223,18 +223,14 @@ export default function Roadmap({ frame }: { frame: boolean }) {
                         <Table
                             columns={[
                                 { name: '', width: '50px', align: 'center' as const },
-                                { name: 'idea', width: '120px', align: 'left' as const },
-                                { name: 'status', width: '70px' },
+                                { name: 'idea', width: 'minmax(150px,1fr)', align: 'left' as const },
                                 { name: 'description', width: 'minmax(200px,2fr)', align: 'left' as const },
                             ]}
                             rows={wip.nodes.slice(0, 5).map((node, idx) => ({
                                 cells: [
                                     { content: idx + 1 },
                                     {
-                                        content: node.title,
-                                    },
-                                    {
-                                        content: node.betaAvailable ? 'beta' : '',
+                                        content: node.title + (node.betaAvailable ? ' (beta)' : ''),
                                     },
                                     {
                                         content: <Description description={node.description} />,
