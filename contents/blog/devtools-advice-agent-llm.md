@@ -49,7 +49,7 @@ One way to do this is the same way we did it before the age of robots:
 
 **Starter code**.
 
-A great starter project packages a bunch of design decisions *on behalf of the developer*, robot or not. Which things happen on the client, which things happen on the server, which things are secret, how secrets are managed… it's better if the developer – robot or not – doesn't have to reinvent the wheel on this stuff.
+A great starter project packages a bunch of design decisions *on behalf of the developer*, robot or not. Which things happen on the client, which things happen on the server, which things are secret, how secrets are managed… it's better if the developer-agent team doesn't have to reinvent the wheel for this stuff.
 
 We have conventions for a reason. We have *best practices* because there are worse practices.
 
