@@ -61,7 +61,7 @@ When they’re set up to succeed, agents can relieve *loads* of tedium for devel
 
 The most exotic approach we’ll nod to here is the [MCP](https://github.com/modelcontextprotocol) server. This is *new*, but beneath the surface, it’s not *that new*.
 
-An MCP server creates a direct interface between your existing technology and a coding agent. It provides these surfaces:
+An MCP server creates an interface between your existing technology and a coding agent. It provides these surfaces:
 
 - [Tools](https://modelcontextprotocol.io/docs/concepts/tools): these are buttons and levers the agent can operate for the user. They might enable an agent to create, update or delete resources in a developer’s project.
 - [Resources](https://modelcontextprotocol.io/docs/concepts/resources): this is data the agent can use to be more effective. Maybe a dump of a database schema, or authentication keys for a project.
