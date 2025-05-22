@@ -27,7 +27,7 @@ Here’s the good news: you already know how to do it.
 
 `cURL` commands are a great start: you can ship them this afternoon, and you can be clever by auto-populating their values with a developer’s API keys and other details.
 
-[Airtable](https://airtable.com/developers/web/api/introduction) is perhaps the canonical example of rich, pre-populated commands  folded into documentation. Each database gets a fully-customized reference full of example commands for every CRUD operation.
+[Airtable](https://airtable.com/developers/web/api/introduction) is perhaps the canonical example of rich, pre-populated commands folded into documentation. Each database gets a fully-customized reference full of example commands for every CRUD operation.
 
 In the AI age, this approach could be combined with plaintext documentation the developer can copy and paste into an agent chat. The agent would then have everything it needed to know to pull real data from a service. With this data added to the context, the agent would write much more effective code.
 
@@ -45,7 +45,7 @@ So the job becomes constraining what’s possible.
 
 One way to do this is the same way we did it before the age of robots:
 
-Starter code.
+**Starter code**.
 
 A great starter project packages a bunch of design decisions *on behalf of the developer*, robot or not. Which things happen on the client, which things happen on the server, which things are secret, how secrets are managed… a strong starter just handles these questions.
 
