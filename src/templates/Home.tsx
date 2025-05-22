@@ -44,6 +44,7 @@ import {
     CAN_UNDO_COMMAND,
 } from 'lexical'
 import { mergeRegister } from '@lexical/utils'
+import Logo from 'components/Logo'
 
 interface ProductButtonsProps {
     productTypes: string[]
@@ -378,6 +379,12 @@ const jsxComponentDescriptors: JsxComponentDescriptor[] = [
         kind: 'flow',
         props: [],
         Editor: () => <CTA />,
+    },
+    {
+        name: 'Logo',
+        kind: 'flow',
+        props: [],
+        Editor: () => <Logo className="inline-block" />,
     },
 ]
 
