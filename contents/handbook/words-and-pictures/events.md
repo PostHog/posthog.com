@@ -3,8 +3,7 @@ title: Events
 sidebar: Handbook
 showTitle: true
 ---
-
-> If you’re planning an event and want support or promotion from the PostHog team, go to [Community events](handbook/words-and-pictures/events#community-events)
+> If you’re planning an event and want support or promotion from the PostHog team, go to [Community events](#community-events)
 
 We’re [100% remote](handbook/company/culture) and set up to work asynchronously–but there's a real benefit in getting together in real life (and our best ideas come from [working together](handbook/company/offsites)).
 
