@@ -13,21 +13,20 @@ import Pricing from './New/Pricing'
 import OSButton from 'components/OSButton'
 import useProduct from 'hooks/useProduct'
 import { Accordion } from 'components/RadixUI/Accordion'
-
+import { useWindow } from '../../context/Window'
+import { useApp } from '../../context/App'
 interface ProductButtonsProps {
     productTypes: string[]
     className?: string
 }
 
-const ProductButtons: React.FC<ProductButtonsProps> = ({ productTypes, className = "" }) => {
+const ProductButtons: React.FC<ProductButtonsProps> = ({ productTypes, className = '' }) => {
     const allProducts = useProduct()
 
     // Helper to get product by type or name
     const getProduct = (typeOrName: string) =>
         Array.isArray(allProducts)
-            ? allProducts.find(
-                (p: any) => p.type === typeOrName || p.name === typeOrName
-            )
+            ? allProducts.find((p: any) => p.type === typeOrName || p.name === typeOrName)
             : undefined
 
     return (
@@ -58,10 +57,7 @@ const Products = () => {
     const allProducts = useProduct() // This returns the deduped array of products
 
     // Helper to get product by type or name
-    const getProduct = (typeOrName) =>
-        allProducts.find(
-            (p) => p.type === typeOrName || p.name === typeOrName
-        )
+    const getProduct = (typeOrName) => allProducts.find((p) => p.type === typeOrName || p.name === typeOrName)
 
     const columns = [
         { name: '', width: 'auto', align: 'center' as const },
@@ -77,16 +73,16 @@ const Products = () => {
                 {
                     content: <ProductButtons productTypes={['web_analytics', 'product_analytics', 'session_replay']} />,
                     className: 'text-sm flex-wrap gap-px',
-                }
+                },
             ],
         },
         {
             cells: [
                 { content: 2 },
                 { content: 'test new features', className: 'font-bold' },
-                { 
+                {
                     content: <ProductButtons productTypes={['feature_flags', 'experiments', 'error_tracking']} />,
-                    className: 'text-sm' 
+                    className: 'text-sm',
                 },
             ],
         },
@@ -94,9 +90,9 @@ const Products = () => {
             cells: [
                 { content: 3 },
                 { content: 'get feedback from users', className: 'font-bold' },
-                { 
+                {
                     content: <ProductButtons productTypes={['surveys']} />,
-                    className: 'text-sm' 
+                    className: 'text-sm',
                 },
             ],
         },
@@ -104,9 +100,9 @@ const Products = () => {
             cells: [
                 { content: 4 },
                 { content: 'consolidate product usage data', className: 'font-bold' },
-                { 
+                {
                     content: <ProductButtons productTypes={['data_warehouse', 'data_pipelines']} />,
-                    className: 'text-sm' 
+                    className: 'text-sm',
                 },
             ],
         },
@@ -264,6 +260,8 @@ const Customer = ({ number, customer }: CustomerProps) => {
 }
 
 export default function Home(): JSX.Element {
+    const { setWindowTitle } = useApp()
+    const { appWindow } = useWindow()
     const { getCustomers, hasCaseStudy } = useCustomers()
     const customers = getCustomers(CUSTOMER_ORDER)
     const [filteredCustomers, setFilteredCustomers] = useState<any>(null)
@@ -283,9 +281,20 @@ export default function Home(): JSX.Element {
         })
     })
 
+    useEffect(() => {
+        if (appWindow) {
+            setWindowTitle(appWindow, 'home.mdx')
+        }
+    }, [appWindow])
+
     return (
         <>
-            <SEO title="home.mdx – PostHog" description="" image={`/images/og/customers.jpg`} />
+            <SEO
+                title="home.mdx – PostHog"
+                description=""
+                image={`/images/og/customers.jpg`}
+                updateWindowTitle={false}
+            />
             <Editor
                 title="home"
                 type="mdx"
@@ -347,22 +356,24 @@ export default function Home(): JSX.Element {
                             {
                                 value: 'table-of-contents',
                                 trigger: <strong>Contents</strong>,
-                                content: <div data-scheme="primary">
-                                    <ol className="pl-4">
-                                        {sections.map((section) => (
-                                            <li key={section.title}>
-                                                <Link
-                                                    to={`/#${section.title.toLowerCase().replace(/\s+/g, '-')}`}
-                                                    className="group flex items-center gap-1"
-                                                >
-                                                    <span>{section.title}</span>
-                                                    <IconArrowRight className="inline-block rotate-90 size-3 text-primary opacity-0 group-hover:opacity-100" />
-                                                </Link>
-                                            </li>
-                                        ))}
-                                    </ol>
-                                </div>
-                            }
+                                content: (
+                                    <div data-scheme="primary">
+                                        <ol className="pl-4">
+                                            {sections.map((section) => (
+                                                <li key={section.title}>
+                                                    <Link
+                                                        to={`/#${section.title.toLowerCase().replace(/\s+/g, '-')}`}
+                                                        className="group flex items-center gap-1"
+                                                    >
+                                                        <span>{section.title}</span>
+                                                        <IconArrowRight className="inline-block rotate-90 size-3 text-primary opacity-0 group-hover:opacity-100" />
+                                                    </Link>
+                                                </li>
+                                            ))}
+                                        </ol>
+                                    </div>
+                                ),
+                            },
                         ]}
                     />
 

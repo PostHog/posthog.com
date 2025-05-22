@@ -14,6 +14,7 @@ interface SEOProps {
     canonicalUrl?: string
     noindex?: boolean
     imageType?: 'absolute' | 'relative'
+    updateWindowTitle?: boolean
 }
 
 export const SEO = ({
@@ -24,6 +25,7 @@ export const SEO = ({
     canonicalUrl,
     noindex,
     imageType = 'relative',
+    updateWindowTitle = true,
 }: SEOProps): JSX.Element => {
     const { appWindow } = useWindow()
     const { setWindowTitle } = useApp()
@@ -44,7 +46,7 @@ export const SEO = ({
     }
 
     useEffect(() => {
-        if (seo.title && appWindow) {
+        if (updateWindowTitle && seo.title && appWindow) {
             setWindowTitle(appWindow, seo.title)
         }
     }, [seo.title])
