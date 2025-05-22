@@ -9,6 +9,7 @@ PostHog makes it easy to get data about usage of your [Hono](https://hono.dev/) 
 Integrating PostHog into your app enables analytics, custom events capture, feature flags, and more.
 
 ## Installation
+
 Start by installing the `posthog-node` package using your package manager.
 ```sh
 npm install --save posthog-node
@@ -32,13 +33,11 @@ const posthogServerMiddleware = createMiddleware(async (c, next) => {
 
 <CalloutBox icon="IconInfo" title="Shutdown">
 
-Make sure to always call `posthog.shutdown()` after capturing events from the server-side. 
-PostHog queues events into larger batches, and this call forces all batched events to be flushed immediately.
+Make sure to always call `posthog.shutdown()` after capturing events from the server-side. PostHog queues events into larger batches, and this call forces all batched events to be flushed immediately.
 
 </CalloutBox>
 
-Next, apply this middleware to your app. This middleware will be called on every request handled by Hono,
-denoted by the wildcard `*`.
+Next, apply this middleware to your app. This middleware will be called on every request handled by Hono, denoted by the wildcard `*`.
 
 ```ts file=index.ts
 // use the middleware on all (*) routes.
@@ -48,8 +47,8 @@ app.use('*', posthogServerMiddleware)
 In your routes, you can pass information to be captured by your middleware using [context `set()` and `get()` pair](https://hono.dev/docs/api/context#set-get)
 
 ## Error tracking
-Hono uses [`app.onError`](https://hono.dev/docs/api/exception#handling-httpexception) for root-level
-error handling. You can take advantage of this for [Error tracking](/docs/error-tracking).
+
+Hono uses [`app.onError`](https://hono.dev/docs/api/exception#handling-httpexception) for root-level error handling. You can take advantage of this for [Error tracking](/docs/error-tracking).
 
 ```ts file=index.ts
 app.onError((err, c) => {
