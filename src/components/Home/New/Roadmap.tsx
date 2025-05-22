@@ -152,7 +152,10 @@ const UnderConsiderationTable = ({ data }: { data: any }) => {
                             {
                                 content: (
                                     <div className="community-post-markdown">
-                                        <Markdown>{preparePreviewText(roadmap.attributes.description, 75)}</Markdown>
+                                        <Description
+                                            buttonClassName="ml-1"
+                                            description={roadmap.attributes.description}
+                                        />
                                     </div>
                                 ),
                             },
@@ -160,6 +163,24 @@ const UnderConsiderationTable = ({ data }: { data: any }) => {
                     }
                 })}
         />
+    )
+}
+
+const Description = ({ description, buttonClassName = '' }: { description: string; buttonClassName?: string }) => {
+    const [showMore, setShowMore] = React.useState(false)
+    const canShowMore = description.length > 68
+    return (
+        <div className="community-post-markdown">
+            <Markdown>{showMore ? description : preparePreviewText(description, 68)}</Markdown>
+            {!showMore && canShowMore && (
+                <button
+                    className={`text-sm font-semibold text-red dark:text-yellow inline-block ${buttonClassName}`}
+                    onClick={() => setShowMore(!showMore)}
+                >
+                    Show more
+                </button>
+            )}
+        </div>
     )
 }
 
@@ -216,11 +237,7 @@ export default function Roadmap({ frame }) {
                                         content: node.betaAvailable ? 'beta' : '',
                                     },
                                     {
-                                        content: (
-                                            <div className="community-post-markdown">
-                                                <Markdown>{preparePreviewText(node.description, 68)}</Markdown>
-                                            </div>
-                                        ),
+                                        content: <Description description={node.description} />,
                                     },
                                 ],
                             }))}
