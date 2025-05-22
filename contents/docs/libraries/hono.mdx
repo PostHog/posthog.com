@@ -73,8 +73,8 @@ import { env } from 'hono/adapter'
 import { PostHog } from 'posthog-node'
 
 app.onError((err, c) => {
-  const { POSTHOG_HOST, POSTHOG_PUBLIC_KEY } = env<{ POSTHOG_HOST: string, POSTHOG_PUBLIC_KEY: string }>(c)
-  const posthog = new PostHog(POSTHOG_PUBLIC_KEY, { host: POSTHOG_HOST })
+  const { POSTHOG_PUBLIC_KEY } = env<{ POSTHOG_PUBLIC_KEY:string }>(c)
+  const posthog = new PostHog(POSTHOG_PUBLIC_KEY, { host: 'https://us.i.posthog.com' })
   
   posthog.captureException(new Error(err.message, { cause: err }), 'user_distinct_id_with_err_rethrow', {
     path: c.req.path,
