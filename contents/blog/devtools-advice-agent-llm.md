@@ -63,7 +63,7 @@ The most exotic approach we’ll nod to here is the [MCP](https://github.com/mod
 
 An MCP server creates an interface between your existing technology and a coding agent. It provides these surfaces:
 
-- [Tools](https://modelcontextprotocol.io/docs/concepts/tools): these are buttons and levers the agent can operate for the user. They might enable an agent to create, update or delete resources in a developer’s project.
+- [Tools](https://modelcontextprotocol.io/docs/concepts/tools): buttons and levers the agent can operate for the user. They might enable an agent to create, update or delete resources in a developer’s project.
 - [Resources](https://modelcontextprotocol.io/docs/concepts/resources): data the agent can use to be more effective. Maybe a dump of a database schema, or authentication keys for a project.
 - [Prompts](https://modelcontextprotocol.io/docs/concepts/prompts): you can provide consistent yet customized guidance to an agent, and its developer, via MCP.
 
