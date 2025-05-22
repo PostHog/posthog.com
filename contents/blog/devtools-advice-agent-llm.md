@@ -13,7 +13,7 @@ tags:
 
 The way software gets made is changing. Developers are using LLM tools to build quick-and-dirty prototypes that test assumptions and validate demand.
 
-If we want our developer tools to be part of that mix, they need to evolve. The robot has different needs, advantages, and weaknesses from we humans.
+So the tools developers use need to evolve. The robot has different needs, advantages, and weaknesses from we humans.
 
 For example, here’s AI luminary Andrej Karpathy's call to action on docs:
 
