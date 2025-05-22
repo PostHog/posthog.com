@@ -457,7 +457,7 @@ export default function Home({
         if (appWindow) {
             setWindowTitle(appWindow, 'home.mdx')
         }
-    }, [appWindow])
+    }, [])
 
     return (
         <Editor
