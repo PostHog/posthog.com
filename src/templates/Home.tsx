@@ -86,6 +86,16 @@ const ProductButtons: React.FC<ProductButtonsProps> = ({ productTypes, className
     )
 }
 
+const HappyHog = () => {
+    return (
+        <img
+            src="https://res.cloudinary.com/dmukukwp6/image/upload/happy_hog_ebc59e4658.png"
+            alt="happy hog"
+            className="float-right max-w-[400px] max-h-36 -mt-4 -mr-2"
+        />
+    )
+}
+
 const Products = () => {
     const allProducts = useProduct() // This returns the deduped array of products
 
@@ -302,6 +312,12 @@ const jsxComponentDescriptors: JsxComponentDescriptor[] = [
         kind: 'flow',
         props: [],
         Editor: () => <PageNavigation />,
+    },
+    {
+        name: 'HappyHog',
+        kind: 'flow',
+        props: [],
+        Editor: () => <HappyHog />,
     },
     {
         name: 'Products',
