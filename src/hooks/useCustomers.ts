@@ -11,6 +11,7 @@ import SpeakeasyLogo from '../images/customers/speakeasy-light.svg'
 import StartEngineLogo from '../images/customers/startengine-light.svg'
 import TrustWalletLogo from '../images/customers/trustwallet-light.svg'
 import PostHogLogo from '../images/customers/posthog-light.svg'
+import SupabaseLogo from '../images/customers/supabase-light.svg'
 
 import MistralLogoDark from '../images/customers/mistralai-dark.svg'
 import RaycastLogoDark from '../images/customers/raycast-dark.svg'
@@ -20,6 +21,7 @@ import DhlLogoDark from '../images/customers/dhl-dark.svg'
 import StartEngineLogoDark from '../images/customers/startengine-dark.svg'
 import TrustWalletLogoDark from '../images/customers/trustwallet-dark.svg'
 import PostHogLogoDark from '../images/customers/posthog-dark.svg'
+import SupabaseLogoDark from '../images/customers/supabase-dark.svg'
 
 export interface Customer {
     slug: string
@@ -30,6 +32,7 @@ export interface Customer {
         light: string
         dark: string
     }
+    height?: number
 }
 
 interface BaseCustomer {
@@ -40,6 +43,7 @@ interface BaseCustomer {
         light: string
         dark: string
     }
+    height?: number
 }
 
 // Define all customer data
@@ -50,8 +54,9 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
         notes: '',
         logo: {
             light: AirbusLogo,
-            dark: AirbusLogoDark
-        }
+            dark: AirbusLogoDark,
+        },
+        height: 24,
     },
     assemblyai: {
         name: 'AssemblyAI',
@@ -59,8 +64,8 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
         notes: '',
         logo: {
             light: 'https://res.cloudinary.com/dmukukwp6/image/upload/assemblyai_light.svg',
-            dark: 'https://res.cloudinary.com/dmukukwp6/image/upload/assemblyai_dark.svg'
-        }
+            dark: 'https://res.cloudinary.com/dmukukwp6/image/upload/assemblyai_dark.svg',
+        },
     },
     contra: {
         name: 'Contra',
@@ -68,8 +73,8 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
         notes: '',
         logo: {
             light: ContraLogo,
-            dark: ContraLogoDark
-        }
+            dark: ContraLogoDark,
+        },
     },
     dhl: {
         name: 'DHL',
@@ -77,8 +82,8 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
         notes: '',
         logo: {
             light: DhlLogo,
-            dark: DhlLogoDark
-        }
+            dark: DhlLogoDark,
+        },
     },
     elevenlabs: {
         name: 'ElevenLabs',
@@ -86,8 +91,9 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
         notes: '',
         logo: {
             light: 'https://res.cloudinary.com/dmukukwp6/image/upload/elevenlabs_light.svg',
-            dark: 'https://res.cloudinary.com/dmukukwp6/image/upload/elevenlabs_dark.svg'
-        }
+            dark: 'https://res.cloudinary.com/dmukukwp6/image/upload/elevenlabs_dark.svg',
+        },
+        height: 18,
     },
     hasura: {
         name: 'Hasura',
@@ -95,8 +101,8 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
         notes: '',
         logo: {
             light: 'https://res.cloudinary.com/dmukukwp6/image/upload/hasura_light.svg',
-            dark: 'https://res.cloudinary.com/dmukukwp6/image/upload/hasura_dark.svg'
-        }
+            dark: 'https://res.cloudinary.com/dmukukwp6/image/upload/hasura_dark.svg',
+        },
     },
     mistralai: {
         name: 'Mistral AI',
@@ -104,8 +110,8 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
         notes: '',
         logo: {
             light: MistralLogo,
-            dark: MistralLogoDark
-        }
+            dark: MistralLogoDark,
+        },
     },
     posthog: {
         name: 'PostHog',
@@ -113,8 +119,8 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
         notes: 'Would it be clever or lame if we included our own company here?',
         logo: {
             light: PostHogLogo,
-            dark: PostHogLogoDark
-        }
+            dark: PostHogLogoDark,
+        },
     },
     raycast: {
         name: 'Raycast',
@@ -122,8 +128,8 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
         notes: '',
         logo: {
             light: RaycastLogo,
-            dark: RaycastLogoDark
-        }
+            dark: RaycastLogoDark,
+        },
     },
     researchgate: {
         name: 'ResearchGate',
@@ -131,8 +137,9 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
         notes: '',
         logo: {
             light: 'https://res.cloudinary.com/dmukukwp6/image/upload/researchgate_light.svg',
-            dark: 'https://res.cloudinary.com/dmukukwp6/image/upload/researchgate_dark.svg'
-        }
+            dark: 'https://res.cloudinary.com/dmukukwp6/image/upload/researchgate_dark.svg',
+        },
+        height: 20,
     },
     speakeasy: {
         name: 'Speakeasy',
@@ -140,8 +147,17 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
         notes: '',
         logo: {
             light: SpeakeasyLogo,
-            dark: SpeakeasyLogo
-        }
+            dark: SpeakeasyLogo,
+        },
+    },
+    supabase: {
+        name: 'Supabase',
+        toolsUsed: [],
+        notes: '',
+        logo: {
+            light: SupabaseLogo,
+            dark: SupabaseLogoDark,
+        },
     },
     startengine: {
         name: 'StartEngine',
@@ -149,8 +165,8 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
         notes: '',
         logo: {
             light: StartEngineLogo,
-            dark: StartEngineLogoDark
-        }
+            dark: StartEngineLogoDark,
+        },
     },
     trust: {
         name: 'Trust',
@@ -158,8 +174,8 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
         notes: '',
         logo: {
             light: TrustWalletLogo,
-            dark: TrustWalletLogoDark
-        }
+            dark: TrustWalletLogoDark,
+        },
     },
     ycombinator: {
         name: 'Y Combinator',
@@ -167,9 +183,9 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
         notes: '',
         logo: {
             light: 'https://res.cloudinary.com/dmukukwp6/image/upload/ycombinator_light_86e121ca81.svg',
-            dark: 'https://res.cloudinary.com/dmukukwp6/image/upload/ycombinator_dark_926586dfe2.svg'
-        }
-    }
+            dark: 'https://res.cloudinary.com/dmukukwp6/image/upload/ycombinator_dark_926586dfe2.svg',
+        },
+    },
 }
 
 export const useCustomers = () => {
@@ -197,21 +213,18 @@ export const useCustomers = () => {
     `)
 
     // Create a map of frontmatter customers for quick lookup
-    const frontmatterCustomers = data.allCustomers.nodes.reduce(
-        (acc: Record<string, any>, node: any) => {
-            const key = node.fields.slug.split('/').pop() || ''
-            acc[key] = node
-            return acc
-        },
-        {}
-    )
+    const frontmatterCustomers = data.allCustomers.nodes.reduce((acc: Record<string, any>, node: any) => {
+        const key = node.fields.slug.split('/').pop() || ''
+        acc[key] = node
+        return acc
+    }, {})
 
     // Merge markdown data with our base customer data
     const customers = Object.entries(CUSTOMER_DATA).reduce((acc, [key, customer]) => {
         const markdownData = frontmatterCustomers[key]
         const customerWithSlug: Customer = {
             ...customer,
-            slug: key
+            slug: key,
         }
 
         if (markdownData) {
@@ -222,16 +235,18 @@ export const useCustomers = () => {
                     name: markdownData.frontmatter.customer || customer.name,
                     toolsUsed: markdownData.frontmatter.toolsUsed || customer.toolsUsed,
                     notes: markdownData.frontmatter.notes || customer.notes,
-                    logo: markdownData.frontmatter.logo?.publicURL ? {
-                        light: markdownData.frontmatter.logo.publicURL,
-                        dark: markdownData.frontmatter.logoDark.publicURL
-                    } : customer.logo
-                }
+                    logo: markdownData.frontmatter.logo?.publicURL
+                        ? {
+                              light: markdownData.frontmatter.logo.publicURL,
+                              dark: markdownData.frontmatter.logoDark.publicURL,
+                          }
+                        : customer.logo,
+                },
             }
         }
         return {
             ...acc,
-            [key]: customerWithSlug
+            [key]: customerWithSlug,
         }
     }, {} as Record<string, Customer>)
 
@@ -240,7 +255,7 @@ export const useCustomers = () => {
     }
 
     const getCustomers = (slugs: string[]): Customer[] => {
-        return slugs.map(slug => customers[slug]).filter(Boolean) as Customer[]
+        return slugs.map((slug) => customers[slug]).filter(Boolean) as Customer[]
     }
 
     const hasCaseStudy = (slug: string): boolean => {
@@ -251,6 +266,6 @@ export const useCustomers = () => {
         customers,
         getCustomer,
         getCustomers,
-        hasCaseStudy
+        hasCaseStudy,
     }
 }

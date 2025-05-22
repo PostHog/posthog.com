@@ -153,98 +153,19 @@ const Products = () => {
     )
 }
 
-const sections = [
-    {
-        title: 'products',
-        description: 'PostHog helps you...',
-        content: <Products />,
-    },
-    {
-        title: 'roadmap',
-        description: "we haven't built our defining feature. customers help us decide what to build next.",
-        content: <Roadmap frame={false} />,
-    },
-    {
-        title: 'pricing',
-        description:
-            'our usage-based pricing means you don\'t have to "talk to sales". plus each product has a generous monthly free tier – in fact, 98% of customers use PostHog for free!',
-        content: <Pricing />,
-    },
-    {
-        title: 'logos',
-        description:
-            "here are some of our paying customers. (yes they actually use us, no it's not just some random engineer that tried us out 2+ years ago.)",
-        content: '', // component with logos
-    },
-    {
-        title: 'why PostHog?',
-        description: "we're different from most companies for a bunch of reasons:",
-        content: (
-            <>
-                <ul>
-                    <li>
-                        <strong>transparency.</strong> read our <Link to="/handbook">company handbook</Link>, our{' '}
-                        <Link to="/sales-manual">sales manual</Link>, or <Link to="/strategy">company strategy</Link>
-                    </li>
-                    <li>
-                        <strong>we ship fast.</strong> see our <Link to="/changelog">changelog</Link>
-                    </li>
-                    <li>
-                        <strong>actually-technical support.</strong> our <Link to="/support">support people</Link> all
-                        have engineering backgrounds.
-                    </li>
-                </ul>
-                <p>
-                    <Link to="/company-tour">take the company tour</Link> →
-                </p>
-            </>
-        ),
-    },
-    {
-        title: 'bedtime reading',
-        description: 'here are some links that may be interesting to you:',
-        content: (
-            <>
-                <ul>
-                    <li>
-                        <Link to="/demo.mov">demo.mov</Link>
-                    </li>
-                    <li>
-                        <Link to="/technical-docs">technical docs</Link>
-                    </li>
-                    <li>
-                        <Link to="/api">api</Link>
-                    </li>
-                    <li>
-                        <Link to="/ask-a-question">ask a question</Link>
-                    </li>
-                    <li>
-                        <Link to="/small-teams-at-posthog">small teams at PostHog</Link>
-                    </li>
-                </ul>
-            </>
-        ),
-    },
-    {
-        title: 'shameless CTA',
-        // description: 'we have a lot of features. here are some of them.',
-        content: <CTA />,
-    },
-]
+const CUSTOMER_ORDER = ['ycombinator', 'airbus', 'dhl', 'startengine']
 
-const CUSTOMER_ORDER = [
-    'ycombinator',
+const HUGE = ['ycombinator', 'airbus', 'dhl', 'startengine']
+
+const GONNA_BE_HUGE = [
+    'supabase',
     'mistralai',
     'elevenlabs',
     'raycast',
-    'airbus',
-    'dhl',
-    'startengine',
     'assemblyai',
     'hasura',
     'trust',
     'researchgate',
-    'posthog',
 ]
 
 interface CustomerProps {
@@ -258,37 +179,6 @@ interface CustomerProps {
         toolsUsed?: string[]
         slug: string
         notes?: string
-    }
-}
-
-const Customer = ({ number, customer }: CustomerProps) => {
-    const { hasCaseStudy } = useCustomers()
-    return {
-        cells: [
-            { content: number },
-            {
-                content: customer.logo ? (
-                    <>
-                        <img
-                            src={customer.logo.light}
-                            alt={customer.name}
-                            className="w-auto object-contain dark:hidden"
-                        />
-                        <img
-                            src={customer.logo.dark}
-                            alt={customer.name}
-                            className="w-auto object-contain hidden dark:block"
-                        />
-                    </>
-                ) : (
-                    <span>{customer.name}</span>
-                ),
-                className: '!p-4',
-            },
-            { content: customer.toolsUsed?.join(', '), className: 'text-sm' },
-            { content: hasCaseStudy(customer.slug) ? <Link to={`/customers/${customer.slug}`}>Link</Link> : null },
-            { content: customer.notes || '', className: 'text-sm' },
-        ],
     }
 }
 
@@ -338,22 +228,70 @@ const PageNavigation = () => {
 
 const Customers = () => {
     const { getCustomers } = useCustomers()
-    const customers = getCustomers(CUSTOMER_ORDER)
+    const hugeCustomers = getCustomers(HUGE)
+    const gonnaBeHugeCustomers = getCustomers(GONNA_BE_HUGE)
 
     const columns = [
-        { name: '', width: 'auto', align: 'center' as const },
-        { name: 'Company name', width: 'minmax(150px,1fr)', align: 'center' as const },
-        { name: 'Product(s) used', width: 'minmax(auto,250px)' },
-        { name: 'Case study?', width: 'minmax(auto,100px)', align: 'center' as const },
-        { name: 'Notes', width: 'minmax(auto,180px)', align: 'center' as const },
+        { name: 'Huge companies', width: 'minmax(auto,1fr)', align: 'center' as const },
+        { name: 'Gonna be huge companies', width: 'minmax(auto,1fr)', align: 'center' as const },
     ]
 
-    const rows = customers.map((customer: CustomerProps, index: number) => {
-        return Customer({
-            number: index + 1,
-            customer,
-        })
-    })
+    const rows = [
+        {
+            cells: [
+                {
+                    content: (
+                        <div className="flex flex-wrap gap-4 justify-center items-center">
+                            {hugeCustomers.map((customer) =>
+                                customer.logo ? (
+                                    <div key={customer.slug} className="h-8 flex items-center justify-center">
+                                        <img
+                                            src={customer.logo.light}
+                                            alt={customer.name}
+                                            className={`h-full w-auto object-contain dark:hidden`}
+                                            style={{ maxHeight: customer.height ? `${customer.height}px` : 'auto' }}
+                                        />
+                                        <img
+                                            src={customer.logo.dark}
+                                            alt={customer.name}
+                                            className={`h-full w-auto object-contain hidden dark:block`}
+                                            style={{ maxHeight: customer.height ? `${customer.height}px` : 'auto' }}
+                                        />
+                                    </div>
+                                ) : null
+                            )}
+                        </div>
+                    ),
+                    className: '!p-4',
+                },
+                {
+                    content: (
+                        <div className="flex flex-wrap gap-4 justify-center items-center">
+                            {gonnaBeHugeCustomers.map((customer) =>
+                                customer.logo ? (
+                                    <div key={customer.slug} className="h-8 flex items-center justify-center">
+                                        <img
+                                            src={customer.logo.light}
+                                            alt={customer.name}
+                                            className={`h-full w-auto object-contain dark:hidden`}
+                                            style={{ maxHeight: customer.height ? `${customer.height}px` : 'auto' }}
+                                        />
+                                        <img
+                                            src={customer.logo.dark}
+                                            alt={customer.name}
+                                            className={`h-full w-auto object-contain hidden dark:block`}
+                                            style={{ maxHeight: customer.height ? `${customer.height}px` : 'auto' }}
+                                        />
+                                    </div>
+                                ) : null
+                            )}
+                        </div>
+                    ),
+                    className: '!p-4',
+                },
+            ],
+        },
+    ]
 
     return <OSTable columns={columns} rows={rows} size="sm" />
 }
