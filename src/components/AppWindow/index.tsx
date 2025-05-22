@@ -62,6 +62,7 @@ export default function AppWindow({ item, constraintsRef }: { item: AppWindowTyp
     const [history, setHistory] = useState<string[]>([])
     const [activeHistoryIndex, setActiveHistoryIndex] = useState(0)
     const windowRef = useRef<HTMLDivElement>(null)
+    const [rendered, setRendered] = useState(false)
 
     useEffect(() => {
         if (windowRef.current) {
@@ -217,6 +218,10 @@ export default function AppWindow({ item, constraintsRef }: { item: AppWindowTyp
         }
     }
 
+    useEffect(() => {
+        setRendered(true)
+    }, [])
+
     const chatWindows = windows.filter((w) => w.key.startsWith('ask-max'))
 
     return (
@@ -262,8 +267,8 @@ export default function AppWindow({ item, constraintsRef }: { item: AppWindowTyp
                             initial={{
                                 scale: 0.005,
 
-                                x: item.fromOrigin?.x || windowPosition.x,
-                                y: item.fromOrigin?.y || windowPosition.y,
+                                x: rendered ? windowPosition.x : item.fromOrigin?.x || windowPosition.x,
+                                y: rendered ? windowPosition.y : item.fromOrigin?.y || windowPosition.y,
                             }}
                             animate={{
                                 scale: 1,
