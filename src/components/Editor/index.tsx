@@ -29,8 +29,7 @@ import { SearchBar } from './SearchBar'
 
 interface EditorProps {
     slug?: string
-    title: string
-    hideTitle?: boolean
+    title?: string
     type?: string
     maxWidth?: string
     children?: React.ReactNode
@@ -77,7 +76,6 @@ const filterData = (data: any, filters: any) => {
 export function Editor({
     title,
     type,
-    hideTitle,
     children,
     availableFilters,
     maxWidth = '3xl',
@@ -313,7 +311,7 @@ export function Editor({
                         )}
                         <ScrollArea>
                             <div className={`p-4 mx-auto max-w-${maxWidth}`}>
-                                {!hideTitle && (
+                                {title && (
                                     <h1 className="text-2xl font-bold">
                                         {title}
                                         {type && <span className="opacity-40">.{type}</span>}
