@@ -254,8 +254,8 @@ export function useMenuData(): MenuType[] {
                 { type: 'separator' },
                 {
                     type: 'item',
-                    label: 'Print a coloring page',
-                    link: '/draw',
+                    label: 'Print a coloring book',
+                    link: '/coloring-book.pdf',
                     shortcut: '⌘ P',
                 },
             ],

@@ -248,6 +248,7 @@ export default function AppWindow({ item, constraintsRef }: { item: AppWindowTyp
                         )}
                         <motion.div
                             ref={windowRef}
+                            data-app="AppWindow"
                             className={`@container absolute flex flex-col border rounded overflow-hidden !select-auto  ${
                                 focusedWindow === item
                                     ? 'shadow-2xl border-light-7 dark:border-dark-7'
