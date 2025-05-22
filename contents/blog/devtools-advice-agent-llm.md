@@ -31,7 +31,7 @@ Here’s the good news: you already know how to do it.
 
 In the AI age, this approach could be combined with plaintext documentation the developer can copy and paste into an agent chat. The agent would then have everything it needed to know to pull real data from a service. With this data added to the context, the agent would write much more effective code.
 
-But you can take it further: beyond existing CLI tools, you can [write your own](/blog/envoy-wizard-llm-agent) that specifically target agent sessions and the developers who run them. Steal our wizard code and get started.
+But you can take it further: beyond existing CLI tools, you can [write your own](/blog/envoy-wizard-llm-agent) that specifically target agent sessions and the developers who run them. [Steal our wizard code](https://github.com/PostHog/wizard) and get started.
 
 ## Constrain the path
 
