@@ -131,11 +131,9 @@ will return a sources list:
 }
 ```
 
-If you have any blob_v2 sources, you can ignore all other sources
+If you have any `blob_v2` sources, you can ignore all other sources and only make calls to snapshot(s) with `?source=blob_v2&blob_key={the blob_key}` for each `blob_v2` source. 
 
-And only make calls to snapshot s with `?source=blob_v2&blob_key={the blob_key}` for each `blob_v2` source
-
-Because `blob_v2` files are flushed more frequently, there is no need to poll the realtime source. And instead you can poll the original snapshot API to check for new sources to load.
+This is because `blob_v2` files are flushed more frequently. There is no need to poll the realtime source. Instead, you can poll the original snapshot API to check for new sources to load.
 
 ### Post-processing
 
