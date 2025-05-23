@@ -36,18 +36,23 @@ const Features = ({ title, addonName, features }: { title: string; addonName: st
     )
 }
 
-const Addons = (): JSX.Element => {
+const PlatformAddons = (): JSX.Element => {
     const platform = usePlatform()
-    console.log('platform', platform)
     const platformAddons = platform.addons.filter((addon: any) => !addon.inclusion_only)
 
     const [showComparison, setShowComparison] = useState(false)
 
     const allFeatureNames: string[] = Array.from(
-        new Set(platformAddons.flatMap((addon: any) => (addon.features || []).map((f: any) => f.name)))
+        new Set(
+            platformAddons.flatMap((addon: any) =>
+                (addon.plans[0].features || [])
+                    // Filter out support_response_time as it's a unique feature that should be displayed separately
+                    .filter((f: any) => f.key !== 'support_response_time')
+                    .map((f: any) => f.name)
+            )
+        )
     )
 
-    console.log('allFeatureNames', allFeatureNames)
     return (
         <Layout parent={pricingMenu}>
             <section className="xl:w-11/12 mx-auto px-4 md:px-8 2xl:px-12 py-8 relative">
@@ -134,8 +139,9 @@ const Addons = (): JSX.Element => {
                                             {featureName}
                                         </td>
                                         {platformAddons.map((addon: any) => {
-                                            const feature = addon.features.find((f: any) => f.name === featureName)
-                                            console.log('feature', feature)
+                                            const feature = addon.plans[0].features.find(
+                                                (f: any) => f.name === featureName
+                                            )
                                             return (
                                                 <td
                                                     key={addon.name}
@@ -144,14 +150,10 @@ const Addons = (): JSX.Element => {
                                                     {feature ? (
                                                         <div className="flex flex-col items-center justify-center min-h-[24px] gap-y-1">
                                                             {/* Note (primary) */}
-                                                            {feature.note && (
-                                                                <span className="text-[15px] opacity-80">
-                                                                    {feature.note}
-                                                                </span>
-                                                            )}
+                                                            {feature.note && <span>{feature.note}</span>}
                                                             {/* Limit and unit (secondary) */}
                                                             {feature.limit && (
-                                                                <span className="opacity-75 text-[13px]">
+                                                                <span>
                                                                     {feature.limit} {feature.unit}
                                                                 </span>
                                                             )}
@@ -257,4 +259,4 @@ const Addons = (): JSX.Element => {
     )
 }
 
-export default Addons
+export default PlatformAddons
