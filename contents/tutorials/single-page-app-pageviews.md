@@ -76,8 +76,7 @@ export default function RootLayout({ children }) {
 
 If you are using [React Router](https://reactrouter.com/en/main), start by setting `posthog-js` and `posthog-js/react` as external packages in your `vite.config.ts` file.
 
-```ts
-// vite.config.ts
+```ts file=vite.config.ts
 // ... imports
 
 export default defineConfig({
