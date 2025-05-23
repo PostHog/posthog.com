@@ -139,7 +139,7 @@ This is because `blob_v2` files are flushed more frequently. There is no need to
 
 All post-processing entrypoints in [our code can be found on GitHub](https://github.com/PostHog/posthog/blob/37babfa29f05f2d4e169e2f33f1643fffe540e95/frontend/src/scenes/session-recordings/player/snapshot-processing/process-all-snapshots.ts)
 
-For each source we load we call `parseEncodedSnapshots` and before using the loaded snapshots we call `processAllSnapshots`
+For each source we load, we call `parseEncodedSnapshots`, and before using the loaded snapshots, we call `processAllSnapshots`
 
 You're welcome to use these directly or rewrite them in your language of choice.
 
