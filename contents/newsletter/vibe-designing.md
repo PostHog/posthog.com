@@ -1,6 +1,7 @@
 ---
 title: The vibe coder's guide to vibe designing
 alternative title: The product engineer's guide to vibe designing
+
 date: 2025-05-22
 author:
   - lior-neu-ner
