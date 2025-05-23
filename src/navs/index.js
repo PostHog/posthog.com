@@ -3046,6 +3046,12 @@ export const docsMenu = {
                     icon: 'IconPalette',
                     color: 'blue',
                 },
+                {
+                    name: 'Snapshot API',
+                    url: '/docs/session-replay/snapshot-api',
+                    icon: 'IconCalculator',
+                    color: 'orange',
+                },
             ],
         },
         {
