@@ -15,7 +15,7 @@ VITE_PUBLIC_POSTHOG_KEY=<ph_project_api_key>
 VITE_PUBLIC_POSTHOG_HOST=<ph_client_api_host>
 ```
 
-3. Integrate PostHog at the root of your app (such as `main.jsx` if you are using Vite). Setting `capture_pageview` to `history_change` is recommended as React usually acts as a single-page app and doesn't fire page load events on route changes.
+3. Integrate PostHog at the root of your app (such as `main.jsx` if you are using Vite). Setting `capture_pageview` to `history_change` is recommended as React *usually* acts as a single-page app and doesn't fire page load events on route changes.
 
 ```react
 // src/main.jsx

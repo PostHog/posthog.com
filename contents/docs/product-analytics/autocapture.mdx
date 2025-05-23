@@ -31,7 +31,7 @@ Autocapture is available in the following SDKs:
 
 PostHog usually relies on the page load event to capture pageviews. This means it only captures pageviews when a user loads a new page.
 
-This doesn't work for single-page app frameworks like [Next.js](/docs/libraries/next-js), [React Router](/docs/libraries/react-router), or [Vue](/docs/libraries/vue-js). Instead, you can the `capture_pageview` configuration option to `history_change`. This uses the history API to capture pageviews whenever the user navigates within your app.
+This doesn't capture all navigation in single-page app frameworks like [Next.js](/docs/libraries/next-js), [React Router](/docs/libraries/react-router), or [Vue](/docs/libraries/vue-js). Instead, you should set the `capture_pageview` configuration option to `history_change`. This uses the history API to capture pageviews whenever the user navigates within your app.
 
 ```js-web
 posthog.init("<ph_project_api_key>", {
