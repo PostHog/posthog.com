@@ -12,12 +12,11 @@ This API is structured a little like hitting the homepage of a website to see wh
 
 ## Overview
 
-1. call the snapshots API with no parameters and receive a list of the sources in the recording
-    * this is not idempotent and can change from second to second
-3. call the snapshots API with each source one after the other
-    * this call is idempotent, we never change this data once stored
-4. post-process the data
-    * session replay is write-heavy, we do not attempt to store or return vanilla rrweb-compatible JSON
+The standard pattern for using this API is:
+
+1. Call the snapshots API with no parameters and receive a list of the sources in the recording. This is not idempotent and can change from second to second.
+2. Call the snapshots API with each source one after the other. This call is idempotent, we never change this data once stored.
+3. Post-process the data. Since session replay is write-heavy, we do not attempt to store or return vanilla rrweb-compatible JSON.
 
 > **Important:** For batch export it is safest to only export recordings that started more than 24 hours ago. We cut off sessions after 24 hours and so you know the recording is immutable at that point.
 
