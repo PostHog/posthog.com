@@ -44,7 +44,7 @@ Section on how to use lovable/v0/bolt to get your 80% of the way there
 
 Prompt: 
 ```
-Creat an xyz...
+Create an xyz...
 
 Attached are what I like an dislike
 
