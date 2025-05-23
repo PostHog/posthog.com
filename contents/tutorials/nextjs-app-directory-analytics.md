@@ -1,6 +1,6 @@
 ---
 title: 'How to set up Next.js app router analytics, feature flags, and more'
-date: 2023-04-05
+date: 2025-05-22
 author:
   - ian-vanagas
 showTitle: true
@@ -12,9 +12,9 @@ tags:
   - events
 ---
 
-Next.js release 13 added many improvements including the Turbopack bundler, an improved `next/image` component, changes to the `Link` component, and more. One of the big ones was the move from the `pages` to the `app` directory and router.
+Next.js is one of the most popular frameworks for building web apps. Need to know what users are doing in these apps or release a feature safely? PostHog can help.
 
-The `app` router includes support for layouts, server components, streaming, and component-level data fetching. These are all upgrades to the Next.js `pages` directory, but change the implementation of a Next.js app, including setting up PostHog. This tutorial goes over how to implement PostHog on the client and server side when using the Next.js app router. 
+In this tutorial, we'll create a simple Next.js app and set up PostHog on the client and server side. We'll also capture pageviews and custom events, set up feature flags, and more.
 
 > If you use Next.js with the **pages** router, check out our other [Next.js pages router analytics tutorial](/tutorials/nextjs-analytics).
 
@@ -35,66 +35,9 @@ npm run dev
 
 This opens a new page showing we are running Next.js.
 
-![Next.js app](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/nextjs-app-directory-analytics/app.png)
+![Next.js app](https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_05_22_at_13_55_42_2x_ad54322d19.png)
 
-## Setting up PostHog on the client side
-
-First, we need a PostHog instance ([signup for free](https://app.posthog.com/signup)). From this instance, we need a project API key, which is in project settings, and an the relevant ingestion address (`http://us.i.posthog.com`, `http://eu.i.posthog.com`, or a custom address). Add both of these to a `.env.local` file in our base directory.
-
-```
-NEXT_PUBLIC_POSTHOG_KEY=<ph_project_api_key>
-NEXT_PUBLIC_POSTHOG_HOST=<ph_client_api_host>
-```
-
-Using the Next.js app router requires us to initialize PostHog differently than with the [pages directory](/tutorials/nextjs-analytics). Specifically, the app router server-side renders components by default, and the `posthog-js` library is a client-side library. To make these work together, create a `providers.js` file and set up the `PostHogProvider` with the `'use client'`  directive.
-
-```js
-// app/providers.js
-'use client'
-import posthog from 'posthog-js'
-import { PostHogProvider } from 'posthog-js/react'
-import { useEffect } from 'react'
-
-export function PHProvider({ children }) {
-  useEffect(() => {
-    posthog.init(process.env.NEXT_PUBLIC_POSTHOG_KEY, {
-      api_host: process.env.NEXT_PUBLIC_POSTHOG_HOST,
-    })
-  }, []);
-
-  return <PostHogProvider client={posthog}>{children}</PostHogProvider>
-}
-```
-
-Once we do this, we can then import the `provider.js` file in our `app/layout.js` file, and wrap our app in the PostHog provider. 
-
-```js
-// app/layout.js
-import './globals.css'
-import { PHProvider } from './providers'
-
-export default function RootLayout({ children }) {
-  return (
-    <html lang="en">
-      <PHProvider>
-        <body>{children}</body>
-      </PHProvider>
-    </html>
-  )
-}
-```
-
-After setting this up, events start being autocaptured into your PostHog instance. This also means you can use the PostHog on the client side in all your client-side rendered Next.js components (the ones with the `"use client"` directive).
-
-![Events](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/nextjs-app-directory-analytics/events.png)
-
-> **Note:** If you don’t use the `"use client"` directive, Next.js assumes your page is server-side rendered. This means the client hooks like `usePostHog` cause errors. To interact with PostHog on the server side, use the [PostHog Node SDK](/docs/libraries/node) (which we show [later](#using-posthog-with-server-rendered-components)).
-
-## Capturing pageviews on the client side
-
-When used with the app router, Next.js replaces `next/router` with `next/navigation.` This means we need a new implementation for capturing pageviews beyond the first-page load because Next.js acts as a [single-page app](/tutorials/single-page-app-pageviews). Luckily, we can add the code to handle this into our `provider.js` file.
-
-To start, we need another page to navigate to. In the app folder, create a new folder named `about` and create a `page.js` file inside with a basic component.
+Next, we'll add a couple pages to the app. In the app folder, create a new folder named `about` and create a `page.js` file inside with a basic component.
 
 ```js
 // app/about/page.js
@@ -127,80 +70,68 @@ export default function Home() {
 }
 ```
 
-Once this is set up, we create one more file named `PostHogPageView.jsx`. In it, we use the `usePathname` and `useSearchParams` client-side hooks from `next/navigation` to check when the URL changes and then capture a custom `$pageview` event. We use the data from the pathname and search params to accurately create string for the `$current_url` property too.
+You can now move between the home and about pages which will be useful for testing event capture next.
 
-It is a separate file because [`useSearchParams`](https://nextjs.org/docs/app/api-reference/functions/use-search-params) will [deopt](https://nextjs.org/docs/messages/deopted-into-client-rendering) the entire app into client-side rendering. To ensure we can still server-side render pages, we dynamically import it later.
+## Setting up PostHog on the client side
 
-This looks like this:
+First, we need a PostHog instance ([signup for free](https://app.posthog.com/signup)). From this instance, we need a project API key, which is in [project settings](https://app.posthog.com/settings/project), and an the relevant ingestion address (`http://us.i.posthog.com`, `http://eu.i.posthog.com`, or a custom address). Add both of these to a `.env.local` file in our base directory.
 
-```js
-// app/PostHogPageView.jsx
+```
+NEXT_PUBLIC_POSTHOG_KEY=<ph_project_api_key>
+NEXT_PUBLIC_POSTHOG_HOST=<ph_client_api_host>
+```
+
+Using the Next.js app router requires us to initialize PostHog differently than with the [pages router](/tutorials/nextjs-analytics). Specifically, the app router server-side renders components by default, and the `posthog-js` library is a client-side library.
+
+To make these work together, create a `providers.js` file and set up the `PostHogProvider` with the `'use client'`  directive. Make sure to set `capture_pageview` to `history_change` because Next.js acts as a single-page app and doesn't fire the page load events PostHog usually relies to capture pageviews.
+
+```js file=app/providers.js
+// app/providers.js
 'use client'
-import { usePathname, useSearchParams } from "next/navigation";
-import { useEffect } from "react";
-import { usePostHog } from 'posthog-js/react';
+import posthog from 'posthog-js'
+import { PostHogProvider } from 'posthog-js/react'
+import { useEffect } from 'react'
 
-export default function PostHogPageView() {
-  const pathname = usePathname();
-  const searchParams = useSearchParams();
-  const posthog = usePostHog();
-  // Track pageviews
+export function PHProvider({ children }) {
   useEffect(() => {
-    if (pathname && posthog) {
-      let url = window.origin + pathname
-      if (searchParams.toString()) {
-        url = url + `?${searchParams.toString()}`
-      }
-      posthog.capture(
-        '$pageview',
-        {
-          '$current_url': url,
-        }
-      )
-    }
-  }, [pathname, searchParams, posthog])
-  
-  return null
+    posthog.init(process.env.NEXT_PUBLIC_POSTHOG_KEY, {
+      api_host: process.env.NEXT_PUBLIC_POSTHOG_HOST,
+      capture_pageview: 'history_change',
+    })
+  }, []);
+
+  return <PostHogProvider client={posthog}>{children}</PostHogProvider>
 }
 ```
 
-Finally, we dynamically import the `PostHogPageview` component in `layout.js` and add it in the `<body>`.
+Once we do this, we can then import the `provider.js` file in our `app/layout.js` file, and wrap our app in the PostHog provider. 
 
 ```js
 // app/layout.js
 import './globals.css'
 import { PHProvider } from './providers'
-import dynamic from 'next/dynamic'
-
-const PostHogPageView = dynamic(() => import('./PostHogPageView'), {
-  ssr: false,
-})
 
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <PHProvider>
-        <body>
-          <PostHogPageView /> 
-          {children}
-        </body>
+        <body>{children}</body>
       </PHProvider>
     </html>
   )
 }
 ```
 
-Once done, you should see pageview events for individual pages in your PostHog instance.
+After you set this up, PostHog starts autocapturing events and pageviews. This also means you can use the PostHog on the client side in all your client-side rendered Next.js components (the ones with the `"use client"` directive).
 
-![Pageviews](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/nextjs-app-directory-analytics/pageview.png)
+<ProductScreenshot
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_05_22_at_14_08_00_2x_b68fe96604.png"
+  imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_05_22_at_14_07_42_2x_ed74436fb9.png"
+  alt="Events in PostHog"
+  classes="rounded"
+/>
 
-> **Note:** To avoid the initial pageview from being duplicated, we need to set `capture_pageview: false` in the `posthog.init` call in `app/providers.js`.
-> ```js
-> posthog.init(process.env.NEXT_PUBLIC_POSTHOG_KEY, {
->   api_host: process.env.NEXT_PUBLIC_POSTHOG_HOST,
->   capture_pageview: false
-> })
-> ```
+> **Note:** If you don’t use the `"use client"` directive, Next.js assumes your page is server-side rendered. This means the client hooks like `usePostHog` cause errors. To interact with PostHog on the server side, use the [PostHog Node SDK](/docs/libraries/node) (which we show [later](#using-posthog-with-server-rendered-components)).
 
 ## Using PostHog with server-rendered components
 
