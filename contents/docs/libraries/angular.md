@@ -20,27 +20,6 @@ import AngularInstall from "../integrate/_snippets/install-angular.mdx"
 >
 > In the rare case the versions above get out-of-date, you can check our [JavaScript SDK's `package.json`](https://github.com/PostHog/posthog-js/blob/main/package.json) to understand what's the exact version you need to depend on.
 
-## Capture custom events
-
-To [capture custom events](/docs/product-analytics/capture-events), import `posthog` and call `posthog.capture()`. Below is an example of how to do this in a component:
-
-```typescript file=app.component.ts
-import { Component } from '@angular/core';
-import posthog from 'posthog-js'
-
-@Component({
- // existing component code
-})
-
-export class AppComponent {
-  handleClick() {
-    posthog.capture(
-      'home_button_clicked', 
-    )
-  }
-}
-```
-
 ## Tracking pageviews
 
 PostHog only captures pageview events when a [page load](https://developer.mozilla.org/en-US/docs/Web/API/Window/load_event) is fired. Since Angular creates a single-page app, this only happens once, and the Angular router handles subsequent page changes.
@@ -64,6 +43,27 @@ posthog.init(
 
 bootstrapApplication(AppComponent, appConfig)
   .catch((err) => console.error(err));
+```
+
+## Capture custom events
+
+To [capture custom events](/docs/product-analytics/capture-events), import `posthog` and call `posthog.capture()`. Below is an example of how to do this in a component:
+
+```typescript file=app.component.ts
+import { Component } from '@angular/core';
+import posthog from 'posthog-js'
+
+@Component({
+ // existing component code
+})
+
+export class AppComponent {
+  handleClick() {
+    posthog.capture(
+      'home_button_clicked', 
+    )
+  }
+}
 ```
 
 ## Session replay
@@ -119,9 +119,7 @@ The service itself looks like this:
 import { DestroyRef, Injectable, NgZone } from "@angular/core";
 import posthog from "posthog-js";
 import { environment } from "../../environments/environment";
-import { NavigationEnd, Router } from "@angular/router";
-import { filter } from "rxjs";
-import { takeUntilDestroyed } from "@angular/core/rxjs-interop";
+import { Router } from "@angular/router";
 
 @Injectable({ providedIn: "root" })
 export class PosthogService {
@@ -138,27 +136,14 @@ export class PosthogService {
         api_host: environment.posthogHost,
         debug: false,
         cross_subdomain_cookie: true,
-        person_profiles: "always",
-        capture_pageview: false,
-        capture_pageleave: true,
-        loaded: (posthogInstance) => {
-          this.router.events
-            .pipe(
-              filter((event) => event instanceof NavigationEnd),
-              takeUntilDestroyed(this.destroyRef),
-            )
-            .subscribe((event: NavigationEnd) => {
-              posthogInstance.capture("$pageview");
-            });
-        },
+        capture_pageview: 'history_change',
       });
     });
   }
 }
 ```
 
-This service contains PostHog initialization, and upon success, enables pageviews.
-
+This service contains PostHog initialization.
 
 ## Next steps
 
