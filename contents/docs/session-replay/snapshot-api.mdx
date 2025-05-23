@@ -4,6 +4,8 @@ title: Session recording snapshot API
 
 > **Important:** This API was never built for public use and is built around the needs of our UI. But an increasing number of people are building on top of it. That's cool and exciting but also means that it is not straight-forward to use. This documentation is to make life easier but this API will change with relatively little notice. We are building a batch export mechanism to remove the need to use this API for bulk copying of replay data.
 
+This API is structured a little like hitting the homepage of a website to see what documents are available, and then right-clicking to open each one in a new tab
+
 ## Overview
 
 1. call the snapshots API with no parameters and receive a list of the sources in the recording
@@ -13,12 +15,9 @@ title: Session recording snapshot API
 4. post-process the data
     * session replay is write-heavy, we do not attempt to store or return vanilla rrweb-compatible JSON
 
-
-> **Important:** extra important. For batch export it is safest to only export recordings that started more than 24 hours ago. We cut off sessions after 24 hours and so you know the recording is immutable at that point.
+> **Important:** For batch export it is safest to only export recordings that started more than 24 hours ago. We cut off sessions after 24 hours and so you know the recording is immutable at that point.
 
 ## The API (Version 1)
-
-This is a little like hitting the homepage of a website to see what documents are available, and then right-clicking to open each one in a new tab
 
 ### First call:
 
