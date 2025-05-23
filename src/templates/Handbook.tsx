@@ -312,7 +312,8 @@ export default function Handbook({
     )
 
     const handleCopyMarkdown = () => {
-        navigator.clipboard.writeText(rawBody)
+        const contentWithoutFrontmatter = rawBody.replace(/^---[\s\S]*?---\n*/m, '')
+        navigator.clipboard.writeText(contentWithoutFrontmatter)
         setCopied(true)
         setTimeout(() => {
             setCopied(false)
