@@ -30,7 +30,16 @@ If the recording is less than around 10 minutes old it will not yet be in perman
 We return only the realtime source. For playback you should poll this endpoint for new data. For exporting for further processing or storage, you should wait as long as feasible (and ideally 24 hours) before retrying.
 
 ```json
-{"sources":[{"source":"realtime","start_timestamp":null,"end_timestamp":null,"blob_key":null}]}
+{
+    "sources": [
+        {
+            "source": "realtime",
+            "start_timestamp": null,
+            "end_timestamp": null,
+            "blob_key": null
+        }
+    ]
+}
 ```
 
 Once the recording is older then around 10 minutes, some data will be in permanent storage and some data will be available on the realtime source.
@@ -38,7 +47,22 @@ Once the recording is older then around 10 minutes, some data will be in permane
 For exporting for further processing or storage, you should wait as long as feasible (and ideally 24 hours) before retrying.
 
 ```json
-{"sources":[{"source":"blob","start_timestamp":"2025-05-23T10:17:04.911000Z","end_timestamp":"2025-05-23T10:22:13.168000Z","blob_key":"1747995424911-1747995733168"},{"source":"realtime","start_timestamp":"2025-05-23T10:22:13.168000Z","end_timestamp":null,"blob_key":null}]}
+{
+    "sources": [
+        {
+            "source": "blob",
+            "start_timestamp": "2025-05-23T10:17:04.911000Z",
+            "end_timestamp": "2025-05-23T10:22:13.168000Z",
+            "blob_key": "1747995424911-1747995733168"
+        },
+        {
+            "source": "realtime",
+            "start_timestamp": "2025-05-23T10:22:13.168000Z",
+            "end_timestamp": null,
+            "blob_key": null
+        }
+    ]
+}
 ```
 
 Once the recording is older than around 24 hours (and cannot send any new information). We will no longer return the realtime source.
@@ -46,7 +70,16 @@ Once the recording is older than around 24 hours (and cannot send any new inform
 You can iterate each blob source
 
 ```json
-{"sources":[{"source":"blob","start_timestamp":"2025-05-18T03:59:43.283000Z","end_timestamp":"2025-05-18T03:59:47.122000Z","blob_key":"1747540783283-1747540787122"}]}
+{
+    "sources": [
+        {
+            "source": "blob",
+            "start_timestamp": "2025-05-18T03:59:43.283000Z",
+            "end_timestamp": "2025-05-18T03:59:47.122000Z",
+            "blob_key": "1747540783283-1747540787122"
+        }
+    ]
+}
 ```
 
 ### Second and subsequent calls
@@ -62,7 +95,7 @@ both are read from the source returned from the first call
 
 ## The API (Version 2)
 
-We (Pawel) have been working on a new version of ingestion pipeline that is way more efficient and uses way less resources. Last time we improved the ingestion pipeline and let our new costs settle we were able to reduce prices... watch this space
+We (Pawel 🦸) have been working on a new version of ingestion pipeline that is way more efficient and uses way less resources. Last time we improved the ingestion pipeline and let our new costs settle we were able to reduce prices... (investors hate this one weird trick 😅)
 
 Version 2 writes more files than version 1 (so we don't have to batch for as long, so our ingestion can be faster and cheaper. Cool!)
 
