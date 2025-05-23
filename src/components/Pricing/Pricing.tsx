@@ -293,6 +293,7 @@ export const allProductsData = graphql`
                         name
                         type
                         unit
+                        legacy_product
                         features {
                             key
                             name
@@ -338,6 +339,7 @@ export const allProductsData = graphql`
                     type
                     unit
                     usage_key
+                    legacy_product
                     plans {
                         description
                         docs_url
