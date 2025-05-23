@@ -27,7 +27,7 @@ posthog.capture('user_signed_up', {
 
 ### Manually capturing pageviews in single-page apps
 
-PostHog automatically sends `$pageview` events whenever it gets loaded and `$pageleave` when they leaves. If you have a [single-page app](/tutorials/single-page-app-pageviews), that means it only sends pageview and pageleave once by default (when your app loads and when they leave).
+PostHog automatically captures `$pageview` events on page load and `$pageleave` when users leave the site. If you have a [single-page app](/tutorials/single-page-app-pageviews), that means PostHog captures pageview and pageleave once by default (when your app loads and when users leave).
 
 To fix this, you can set the `capture_pageview` configuration option to `history_change`. This uses the history API to capture pageviews and pageleaves whenever the user navigates within your app.
 
