@@ -55,7 +55,6 @@ You can also attach a few files of code samples of UI components from your app, 
 
 This should get you 80% of the way there. The next 20% is polish
 
-- You're attempting to reach parity on a product or feature with other competitors in the space
 
 ## Step 2: Decide on your UX
 
