@@ -21,11 +21,11 @@ For example, here’s AI luminary Andrej Karpathy's [call to action](https://x.c
 
 This is good, but we can take LLM agent developer experience even further.
 
-Here's a bit of what we've learned about this. You can totally steal it and to use yourself, we don't mind.
+Here's a bit of what we've learned about this. You can totally steal it to use yourself, we don't mind.
 
 ## Commands the agent can run
 
-`curl` commands are a great start: you can ship them this afternoon, and you can be clever by auto-populating their values with a project's details.
+As Karpathy notes, `curl` commands are a great start: you can ship them this afternoon, and you can be clever by auto-populating their values with a project's details.
 
 ![Airtable's documentation](https://res.cloudinary.com/dmukukwp6/image/upload/Screenshot_2025_05_22_at_1_20_44_PM_22007ac69e.png)
 
