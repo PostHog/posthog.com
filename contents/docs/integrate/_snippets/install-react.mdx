@@ -40,19 +40,20 @@ createRoot(document.getElementById('root')).render(
 ```
 
 <details>
-<summary>Using React Router v7?</summary>
-You need to set `posthog-js` and `posthog-js/react` as external packages in your `vite.config.ts` file to avoid SSR errors.
+  <summary>Using React Router v7?</summary>
 
-```ts file=vite.config.ts
-// ... imports
+  You need to set `posthog-js` and `posthog-js/react` as external packages in your `vite.config.ts` file to avoid SSR errors.
 
-export default defineConfig({
-  plugins: [tailwindcss(), reactRouter(), tsconfigPaths()],
-  ssr: {
-    noExternal: ['posthog-js', 'posthog-js/react']
-  }
-});
-``` 
+  ```ts file=vite.config.ts
+  // ... imports
 
-See our [Remix docs](/docs/libraries/remix) for more details.
+  export default defineConfig({
+    plugins: [tailwindcss(), reactRouter(), tsconfigPaths()],
+    ssr: {
+      noExternal: ['posthog-js', 'posthog-js/react']
+    }
+  });
+  ``` 
+
+  See our [Remix docs](/docs/libraries/remix) for more details.
 </details>
