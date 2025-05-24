@@ -1,1 +1,1 @@
-export const PRODUCT_COUNT = 10
+export const PRODUCT_COUNT = 12
