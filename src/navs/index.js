@@ -3637,6 +3637,12 @@ export const pricingMenu = {
             url: '/addons',
         },
         {
+            name: 'Platform add-ons',
+            icon: 'IconServer',
+            color: 'purple',
+            url: '/platform-addons',
+        },
+        {
             name: 'Pricing philosophy',
             icon: 'IconLightBulb',
             color: 'yellow',

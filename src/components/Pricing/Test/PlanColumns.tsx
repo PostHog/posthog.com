@@ -4,6 +4,7 @@ import Tooltip from 'components/Tooltip'
 import React, { useState } from 'react'
 import { CTA as PlanCTA } from '../Plans'
 import { section, SectionHeader } from './Sections'
+import { BillingV2PlanType } from 'types'
 
 interface PlanData {
     title: string
@@ -23,7 +24,7 @@ const Plan: React.FC<{ planData: PlanData }> = ({ planData }) => {
     return (
         <>
             <div className="flex flex-col h-full border border-light dark:border-dark bg-white dark:bg-accent-dark rounded-md relative">
-                {planData.title === 'Totally free' && (
+                {planData.title === 'Free' && (
                     <div className="absolute -top-6 right-4 !border-2 border-yellow bg-white dark:bg-dark rounded-sm text-center py-1 px-2">
                         <strong className="block text-yellow text-sm">Just pick this one!</strong>
                         <p className="text-xs mb-0 text-opacity-75">You can upgrade later.</p>
@@ -67,7 +68,7 @@ const Plan: React.FC<{ planData: PlanData }> = ({ planData }) => {
                             <p className="mb-0 font-bold text-sm">{planData.dataRetention} data retention</p>
                         </div>
                         <PlanCTA
-                            type={planData.title === 'Totally free' ? 'primary' : 'secondary'}
+                            type={planData.title === 'Free' ? 'primary' : 'secondary'}
                             ctaText={planData.CTAText}
                             ctaLink={planData.CTALink}
                             width="full"
@@ -83,7 +84,7 @@ const Plan: React.FC<{ planData: PlanData }> = ({ planData }) => {
 
 const planSummary = [
     {
-        title: 'Totally free',
+        title: 'Free',
         subtitle: 'No credit card required',
         price: 'Free',
         features: [
@@ -105,7 +106,7 @@ const planSummary = [
         intent: 'free',
     },
     {
-        title: 'Ridiculously cheap',
+        title: 'Pay-as-you-go',
         subtitle: 'Usage-based pricing after free tier',
         pricePreface: 'Starts at',
         price: '$0',
@@ -123,48 +124,17 @@ const planSummary = [
                 description: 'Support via email, Slack-based over $2k/mo',
             },
         ],
-        projects: '6',
+        projects: 6,
         dataRetention: '7-year',
         intent: 'paid',
-    },
-    {
-        title: 'Starship enterprise',
-        subtitle: 'Usage-based pricing after free tier',
-        pricePreface: 'From',
-        price: '$2,000',
-        features: [
-            {
-                name: 'SAML SSO',
-            },
-            {
-                name: 'Custom MSA',
-            },
-            {
-                name: 'Dedicated support',
-            },
-            {
-                name: 'Training & onboarding',
-            },
-            {
-                name: 'Advanced permissions',
-            },
-            {
-                name: 'Audit logs',
-            },
-        ],
-        projects: 'Unlimited',
-        dataRetention: 'Custom',
-        CTAText: 'Talk to a human',
-        CTALink: '/talk-to-a-human',
-        intent: 'enterprise',
     },
 ]
 
 const AllPlansInclude = () => {
     return (
-        <div className="inline-flex xl:inline-flex w-full flex-col md:flex-row xl:flex-col md:gap-12 lg:gap-6 xl:gap-2 xl:pl-6">
-            <p className="font-bold text-[15px] xl:mt-4 mb-2 lg:mb-0">All plans include:</p>
-            <ul className="flex-1 list-none pl-0 xs:grid grid-cols-2 lg:flex gap-x-4 xs:gap-x-2 md:gap-x-6 xl:gap-x-4 gap-y-2 xl:gap-1 xl:flex-col">
+        <div className="inline-flex lg:inline-flex w-full flex-col md:flex-row lg:flex-col md:gap-12 lg:gap-6 lg:gap-2 lg:pl-6">
+            <p className="font-bold text-[15px] lg:mt-4 mb-2 lg:mb-0">All plans include:</p>
+            <ul className="flex-1 list-none pl-0 xs:grid grid-cols-2 lg:flex gap-x-4 xs:gap-x-2 md:gap-x-6 lg:gap-x-4 gap-y-2 lg:gap-1 lg:flex-col">
                 <li className="flex gap-1 items-start text-[15px]">
                     <IconCheck className="w-5 h-5 text-green relative top-0.5" />
                     Unlimited team members
@@ -190,9 +160,11 @@ export const PlanColumns = ({ billingProducts, highlight = 'paid' }) => {
     const platformAndSupportProduct = billingProducts.find(
         (product: BillingProductV2Type) => product.type === 'platform_and_support'
     )
-    const highestSupportPlan = platformAndSupportProduct?.plans?.slice(-1)[0]
 
     const [isPlanComparisonVisible, setIsPlanComparisonVisible] = useState(false)
+
+    const mainPlans = platformAndSupportProduct?.plans?.filter((p) => !p.contact_support)
+    const highestSupportPlan = mainPlans.slice(-1)[0]
 
     return (
         <>
@@ -209,20 +181,33 @@ export const PlanColumns = ({ billingProducts, highlight = 'paid' }) => {
                                     : '[&>*:nth-child(2)_>div]:border-yellow [&>*:nth-child(2)_>div]:border-3'
                             }`}
                         >
+                            <div className="col-span-0 sm:col-span-1 hidden lg:block"></div>
                             {planSummary.map((plan, index) => (
                                 <Plan key={index} planData={plan} />
                             ))}
-                            <div className="hidden xl:flex justify-center col-span-3 md:col-span-1">
+                            <div className="hidden lg:block col-span-3 md:col-span-1">
                                 <AllPlansInclude />
+                                <div className="md:gap-12 lg:gap-6 xl:gap-2 xl:pl-6 mt-6">
+                                    <p className="font-bold text-[15px] xl:mt-4 mb-2 lg:mb-0">
+                                        Looking for features for larger teams?
+                                    </p>
+                                    <Link to="/platform-addons">Check out our platform add-ons.</Link>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div className="xl:hidden mb-8">
+                <div className="lg:hidden mb-8">
                     <AllPlansInclude />
+                    <div className="md:gap-12 lg:gap-6 xl:gap-2 xl:pl-6 mt-6">
+                        <p className="font-bold text-[15px] xl:mt-4 mb-2 lg:mb-0">
+                            Looking for features for larger teams?
+                        </p>
+                        <Link to="/platform-addons">Check out our platform add-ons.</Link>
+                    </div>
                 </div>
                 <p
-                    className="text-red dark:text-yellow font-bold cursor-pointer flex items-center mb-0"
+                    className="text-red dark:text-yellow font-bold cursor-pointer flex items-center justify-center mb-0"
                     onClick={() => setIsPlanComparisonVisible(!isPlanComparisonVisible)}
                 >
                     {isPlanComparisonVisible ? (
@@ -241,60 +226,55 @@ export const PlanColumns = ({ billingProducts, highlight = 'paid' }) => {
                 <div
                     className={`${
                         isPlanComparisonVisible
-                            ? 'visible max-h-full opacity-1 mb-12 mt-8 md:px-4'
+                            ? 'visible max-h-full opacity-1 mb-12 mt-2 md:px-4'
                             : 'overflow-y-hidden invisible max-h-0 opacity-0'
                     } transition duration-500 ease-in-out transform`}
                 >
-                    <div className="border border-light dark:border-dark bg-accent dark:bg-accent-dark px-4 py-3 mb-4 rounded">
-                        <p className="mb-2 text-[15px]">
-                            The table below compares <span className="bg-yellow/25 p-0.5">platform features</span>{' '}
-                            between plans.
-                        </p>
-                        <p className="mb-0 text-[15px]">
-                            <strong>
-                                Looking to compare <span className="bg-yellow/25 p-0.5">product features</span>{' '}
-                                availability?
-                            </strong>{' '}
-                            Visit the product comparison pages:{' '}
-                            <Link to="/product-analytics#pricing">Product analytics</Link> |{' '}
-                            <Link to="/session-replay#pricing">Session replay</Link> |{' '}
-                            <Link to="/feature-flags#pricing">Feature flags</Link> |{' '}
-                            <Link to="/experiments#pricing">Experiments</Link> |{' '}
-                            <Link to="/surveys#pricing">Surveys</Link>
-                        </p>
-                    </div>
                     <div className="overflow-x-auto -mx-4 px-4 md:mx-0 md:px-0">
-                        <div className="grid grid-cols-16 mb-1 min-w-[1000px]">
+                        <div className="grid grid-cols-12 sm:grid-cols-16 mb-1 min-w-[1000px]">
                             <div className="col-span-4 px-3 py-1">&nbsp;</div>
-                            {platformAndSupportProduct?.plans?.map((plan: BillingV2PlanType) => (
+                            {mainPlans.map((plan: BillingV2PlanType) => (
                                 <div className="col-span-4 px-3 py-1" key={plan.key}>
                                     <strong className="text-sm opacity-75">{plan.name}</strong>
                                 </div>
                             ))}
+                            <div
+                                key="empty-cell-plan-names"
+                                className="col-span-0 sm:col-span-4 hidden sm:block px-3 py-2 text-sm empty-cell"
+                            ></div>
                         </div>
 
-                        <div className="grid grid-cols-16 mb-2 border-x border-b border-light dark:border-dark bg-white dark:bg-accent-dark [&>div]:border-t [&>div]:border-light dark:[&>div]:border-dark min-w-[1000px]">
+                        <div className="grid grid-cols-12 sm:grid-cols-16 mb-2 border-l border-light dark:border-dark bg-white dark:bg-accent-dark [&>div]:border-t [&>div]:border-light dark:[&>div]:border-dark min-w-[1000px]">
                             <div className="col-span-4 bg-accent/50 dark:bg-black/75 px-3 py-2 text-sm">
                                 <strong className="text-primary/75 dark:text-primary-dark/75">Base price</strong>
                             </div>
                             {/* Header */}
-                            {platformAndSupportProduct?.plans?.map((plan: BillingV2PlanType) => {
+                            {mainPlans.map((plan: BillingV2PlanType, idx: number) => {
+                                // Add border-r to the last plan column (Pay-as-you-go)
+                                const isLast = idx === mainPlans.length - 1
                                 return (
-                                    <div className="col-span-4 px-3 py-2 text-sm" key={`${plan.key}-base-price`}>
+                                    <div
+                                        className={`main col-span-4 px-3 py-2 text-sm${
+                                            isLast ? ' border-r border-light dark:border-dark' : ''
+                                        }`}
+                                        key={`${plan.key}-base-price`}
+                                    >
                                         {plan.included_if === 'no_active_subscription' ? (
                                             <span>Free forever</span>
                                         ) : plan.included_if === 'has_subscription' ? (
                                             <span>$0</span>
                                         ) : plan.unit_amount_usd ? (
                                             `$${parseFloat(plan.unit_amount_usd).toFixed(0)}/mo`
-                                        ) : plan.contact_support ? (
-                                            'Contact us'
                                         ) : (
                                             'Contact us'
                                         )}
                                     </div>
                                 )
                             })}
+                            <div
+                                key="empty-cell-header"
+                                className="col-span-0 sm:col-span-4 hidden sm:block px-3 py-2 text-sm empty-cell bg-[#eeefe9] dark:bg-[#1d1f27] !border-none"
+                            ></div>
                             {/* Rows */}
                             {highestSupportPlan?.features
                                 ?.filter((f: BillingV2FeatureType) => f.entitlement_only !== true)
@@ -315,11 +295,15 @@ export const PlanColumns = ({ billingProducts, highlight = 'paid' }) => {
                                             )}
                                         </div>
                                         {/* Feature values */}
-                                        {platformAndSupportProduct?.plans?.map((plan: BillingV2PlanType) => {
+                                        {mainPlans.map((plan: BillingV2PlanType, idx: number) => {
                                             const planFeature = plan?.features?.find((f) => f.key === feature.key)
+                                            const isLastColumn = idx === mainPlans.length - 1
+                                            const isLastRow = idx === highestSupportPlan?.features?.length - 1
                                             return (
                                                 <div
-                                                    className="col-span-4 px-3 py-2 text-sm"
+                                                    className={`inside col-span-4 px-3 py-2 text-sm ${
+                                                        isLastColumn ? 'border-r border-light dark:border-dark' : ''
+                                                    } ${isLastRow ? 'border-b border-light dark:border-dark' : ''}`}
                                                     key={`${plan.key}-${feature.key}`}
                                                 >
                                                     {planFeature ? (
@@ -341,9 +325,31 @@ export const PlanColumns = ({ billingProducts, highlight = 'paid' }) => {
                                                 </div>
                                             )
                                         })}
+                                        <div
+                                            key={`empty-cell-${feature.key}`}
+                                            className="col-span-0 sm:col-span-4 hidden sm:block px-3 py-2 text-sm empty-cell bg-[#eeefe9] dark:bg-[#1d1f27] !border-none"
+                                        ></div>
                                     </>
                                 ))}
                         </div>
+                    </div>
+                    <div className="border border-light dark:border-dark bg-accent dark:bg-accent-dark px-4 py-3 mt-2 mb-4 rounded">
+                        <p className="mb-2 text-[15px]">
+                            The table above compares <span className="bg-yellow/25 p-0.5">platform features</span>{' '}
+                            between plans.
+                        </p>
+                        <p className="mb-0 text-[15px]">
+                            <strong>
+                                Looking to compare <span className="bg-yellow/25 p-0.5">product features</span>{' '}
+                                availability?
+                            </strong>{' '}
+                            Visit the product comparison pages:{' '}
+                            <Link to="/product-analytics#pricing">Product analytics</Link> |{' '}
+                            <Link to="/session-replay#pricing">Session replay</Link> |{' '}
+                            <Link to="/feature-flags#pricing">Feature flags</Link> |{' '}
+                            <Link to="/experiments#pricing">Experiments</Link> |{' '}
+                            <Link to="/surveys#pricing">Surveys</Link>
+                        </p>
                     </div>
                 </div>
             </section>

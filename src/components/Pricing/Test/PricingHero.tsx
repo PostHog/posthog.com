@@ -17,7 +17,7 @@ const PricingHero = ({ activePlan, setActivePlan }: PricingHeroProps): JSX.Eleme
         setActivePlan('free')
         window.history.pushState(null, '', '?plan=free')
     }
-    
+
     const handlePaidPlanClick = () => {
         setActivePlan('paid')
         window.history.pushState(null, '', '?plan=paid')
@@ -135,8 +135,8 @@ const PricingHero = ({ activePlan, setActivePlan }: PricingHeroProps): JSX.Eleme
             </div>
 
             <p className="mb-4">
-                PostHog is designed to grow with you. Our <strong>{PRODUCT_COUNT}+ products</strong> (and
-                counting) will take you from idea to product-market fit to IPO and beyond. 🚀
+                PostHog is designed to grow with you. Our <strong>{PRODUCT_COUNT}+ products</strong> (and counting) will
+                take you from idea to product-market fit to IPO and beyond. 🚀
             </p>
 
             <p className="mb-4">
@@ -144,8 +144,8 @@ const PricingHero = ({ activePlan, setActivePlan }: PricingHeroProps): JSX.Eleme
                 <strong>
                     <em>more than 90% of companies use PostHog for free.</em>
                 </strong>{' '}
-                Only add a card if you need more than the free tier limits, advanced features, or want more
-                projects. You still keep the same monthly free volume, even after upgrading.
+                Only add a card if you need more than the free tier limits, advanced features, or want more projects.
+                You still keep the same monthly free volume, even after upgrading.
             </p>
 
             <div className="max-w-xs @sm:min-w-2xs @md:max-w-none @md:inline-block">
@@ -184,10 +184,8 @@ const PricingHero = ({ activePlan, setActivePlan }: PricingHeroProps): JSX.Eleme
                                     : 'border-light hover:border-dark/50 dark:border-dark dark:hover:border-light/50 bg-transparent'
                             }`}
                         >
-                            <strong className="whitespace-nowrap">Totally free</strong>
-                            <span className="text-sm opacity-75 whitespace-nowrap">
-                                Free - no credit card required
-                            </span>
+                            <strong className="whitespace-nowrap">Free</strong>
+                            <span className="text-sm opacity-75 whitespace-nowrap">Free - no credit card required</span>
                         </button>
                     </li>
                     <li>
@@ -199,7 +197,7 @@ const PricingHero = ({ activePlan, setActivePlan }: PricingHeroProps): JSX.Eleme
                                     : 'border-yellow bg-white dark:bg-white/5'
                             }`}
                         >
-                            <strong className="whitespace-nowrap">Ridiculously cheap</strong>
+                            <strong className="whitespace-nowrap">Pay-as-you-go</strong>
                             <span className="text-sm opacity-75 whitespace-nowrap">Usage-based pricing</span>
                         </button>
                     </li>

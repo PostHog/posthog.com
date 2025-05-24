@@ -258,6 +258,12 @@ export const createSchemaCustomization: GatsbyNode['createSchemaCustomization'] 
     type PostHogPipeline implements Node {
       mdx: Mdx @link(by: "frontmatter.templateId", from: "pipelineId")
     }
+    type ProductDataProductsAddons {
+      legacy_product: Boolean
+    }
+    type ProductDataProducts {
+      legacy_product: Boolean
+    }
     type ProductDataProductsAddonsFeatures {
         category: String
         limit: String

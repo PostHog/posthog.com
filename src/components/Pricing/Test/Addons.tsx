@@ -1,6 +1,5 @@
 import React, { useState } from 'react'
 import { section, SectionHeader } from './Sections'
-import { usePlatform } from '../Platform/usePlatform'
 import useProducts from '../Products'
 import * as Icons from '@posthog/icons'
 import { PricingTiers } from '../Plans'
@@ -76,13 +75,9 @@ const Addon = ({ name, icon_key, description, plans, unit, type, ...other }) => 
 }
 
 export const Addons = (props) => {
-    const addons = props.addons
-
-    const platform = usePlatform()
     const products = useProducts()
-    const platformAddons = platform.addons.filter((addon) => !addon.inclusion_only)
     const productAddons = products.flatMap((product) => product.addons)
-    const allAddons = [...platformAddons, ...productAddons]
+    const allAddons = productAddons
 
     return (
         <section className={`${section} mb-12 mt-8 md:px-4`}>
@@ -97,7 +92,9 @@ export const Addons = (props) => {
                     ))}
                 </div>
             </div>
-            <Link to="/addons" className="font-bold">Explore add-ons</Link>
+            <Link to="/addons" className="font-bold">
+                Explore add-ons
+            </Link>
         </section>
     )
 }
