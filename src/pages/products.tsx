@@ -156,7 +156,7 @@ const productDetails: Record<
     },
     cdp: {
         freeTierLimit: '1 million',
-        denominator: 'row',
+        denominator: 'event',
         startingPrice: '$0.000062',
         description: 'Send customer data anywhere with our CDP and reverse ETL pipeline',
         roles: ['Data engineers', 'Marketing'],
