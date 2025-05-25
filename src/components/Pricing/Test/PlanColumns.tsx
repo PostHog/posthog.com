@@ -12,7 +12,7 @@ interface PlanData {
     price: string
     priceSubtitle?: string | JSX.Element
     features: React.ReactNode[]
-    projects: number
+    projects: number | 'Unlimited'
     dataRetention: string
     CTAText?: string
     CTALink?: string
