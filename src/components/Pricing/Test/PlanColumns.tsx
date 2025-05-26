@@ -165,7 +165,6 @@ export const PlanColumns = ({ billingProducts, highlight = 'paid' }) => {
 
     const mainPlans = platformAndSupportProduct?.plans?.filter((p) => !p.contact_support)
     const highestSupportPlan = mainPlans.slice(-1)[0]
-
     const highestPlanFeatures = highestSupportPlan?.features?.filter(
         (f: BillingV2FeatureType) => f.entitlement_only !== true
     )
