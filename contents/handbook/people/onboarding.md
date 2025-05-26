@@ -226,6 +226,10 @@ Below are a list of Slack channels you may find helpful:
 - `#team-people-and-ops` - for asking ops or company meta related questions (or you can ping the ops team privately)
 - `#tell-posthog-anything` 
 - `#ask-posthog-anything` 
+- `#dev`
+- `#general`
+- `#alerts`
+- `#industry-news`
 
 ### Social channels
 
@@ -234,3 +238,23 @@ Below are a list of Slack channels you may find helpful:
 - `#no-context-posthog` 
 - `#random` 
 - `#whereintheworld`
+- `#devel-random`
+- `#books-and-films`
+- `#climbing`
+- `#coffee-snobs`
+- `#dad-jokes`
+- `#fitness`
+- `#hoglife`
+- `#rockets`
+- `#stonks`
+- `#cycling`
+- `#devel-random`
+- `#listening-to`
+- `#design-inspiration`
+
+### Location specific channels
+
+- `#london`
+- `#germany`
+- `#sf-bay-area`
+etc.
