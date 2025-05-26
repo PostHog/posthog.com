@@ -51,7 +51,7 @@ We aim to have a named individual for most areas of the docs. If one doesn't exi
 | **Surveys**                     | Andy                 |
 | **LLM observability**           | Ian                  |
 | **Data pipelines**              | Lior                 |
-| **Data warehouse**              | Danilo               |
+| **Data warehouse**              | Vincent               |
 
 New products should be given an owner when we are planning the product launch.
 
@@ -78,9 +78,9 @@ Also, because of how wide PostHog is, this can be an overwhelming amount of work
 The docs gardener is a critical role for ensuring our docs are up to date and useful. We assign someone from the Content & Docs team to do this each week. Their responsibility is to:
 
 1. Review the feedback across the channels below.
-2. Create issues for docs updates with the context on why it's important and the source of the feedback (unless it is a very simple fix).
+2. Create issues for docs updates with the context on why it's important and the source of the feedback (unless it is a very simple fix). Be careful not to publish private data (like user emails) in these. 
 3. Assign the issue to the [docs owner](#ownership-in-content--docs-team).
-4. When done, attach a ✅ emoji or similar (if possible) so that the next doc's gardener knows that this has been assigned.
+4. When done, attach a ✅ emoji or similar (if possible) so that the next docs gardener knows that this has been assigned.
 
 It is then up to the assignee to prioritize and complete these issues.
 
