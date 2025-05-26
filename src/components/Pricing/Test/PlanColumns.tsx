@@ -132,7 +132,7 @@ const planSummary = [
 
 const AllPlansInclude = () => {
     return (
-        <div className="inline-flex lg:inline-flex w-full flex-col md:flex-row lg:flex-col md:gap-12 lg:gap-6 lg:gap-2 lg:pl-6">
+        <div className="inline-flex lg:inline-flex w-full flex-col md:flex-row lg:flex-col md:gap-12 lg:gap-4 lg:pl-6">
             <p className="font-bold text-[15px] lg:mt-4 mb-2 lg:mb-0">All plans include:</p>
             <ul className="flex-1 list-none pl-0 xs:grid grid-cols-2 lg:flex gap-x-4 xs:gap-x-2 md:gap-x-6 lg:gap-x-4 gap-y-2 lg:gap-1 lg:flex-col">
                 <li className="flex gap-1 items-start text-[15px]">
@@ -166,6 +166,10 @@ export const PlanColumns = ({ billingProducts, highlight = 'paid' }) => {
     const mainPlans = platformAndSupportProduct?.plans?.filter((p) => !p.contact_support)
     const highestSupportPlan = mainPlans.slice(-1)[0]
 
+    const highestPlanFeatures = highestSupportPlan?.features?.filter(
+        (f: BillingV2FeatureType) => f.entitlement_only !== true
+    )
+
     return (
         <>
             <section id="plans" className={`${section} mt-8 !mb-12 md:px-4`}>
@@ -177,32 +181,30 @@ export const PlanColumns = ({ billingProducts, highlight = 'paid' }) => {
                         <div
                             className={`grid grid-cols-[repeat(3,_minmax(300px,_1fr))] md:grid-cols-[repeat(3,_minmax(300px,_1fr))_1fr] gap-4 mb-4 ${
                                 highlight === 'free'
-                                    ? '[&>*:nth-child(1)_>div]:border-yellow [&>*:nth-child(1)_>div]:border-3'
-                                    : '[&>*:nth-child(2)_>div]:border-yellow [&>*:nth-child(2)_>div]:border-3'
+                                    ? '[&>*:nth-child(2)_>div]:border-yellow [&>*:nth-child(2)_>div]:border-3'
+                                    : '[&>*:nth-child(3)_>div]:border-yellow [&>*:nth-child(3)_>div]:border-3'
                             }`}
                         >
-                            <div className="col-span-0 sm:col-span-1 hidden lg:block"></div>
-                            {planSummary.map((plan, index) => (
-                                <Plan key={index} planData={plan} />
-                            ))}
                             <div className="hidden lg:block col-span-3 md:col-span-1">
                                 <AllPlansInclude />
-                                <div className="md:gap-12 lg:gap-6 xl:gap-2 xl:pl-6 mt-6">
-                                    <p className="font-bold text-[15px] xl:mt-4 mb-2 lg:mb-0">
+                                <div className="md:gap-12 xl:pl-6 mt-6">
+                                    <p className="font-bold text-[15px] xl:mt-4 mb-2">
                                         Looking for features for larger teams?
                                     </p>
                                     <Link to="/platform-addons">Check out our platform add-ons.</Link>
                                 </div>
                             </div>
+                            {planSummary.map((plan, index) => (
+                                <Plan key={index} planData={plan} />
+                            ))}
+                            <div className="col-span-0 sm:col-span-1 hidden lg:block"></div>
                         </div>
                     </div>
                 </div>
                 <div className="lg:hidden mb-8">
                     <AllPlansInclude />
-                    <div className="md:gap-12 lg:gap-6 xl:gap-2 xl:pl-6 mt-6">
-                        <p className="font-bold text-[15px] xl:mt-4 mb-2 lg:mb-0">
-                            Looking for features for larger teams?
-                        </p>
+                    <div className="md:gap-12 xl:pl-6 mt-6">
+                        <p className="font-bold text-[15px] xl:mt-4 mb-2">Looking for features for larger teams?</p>
                         <Link to="/platform-addons">Check out our platform add-ons.</Link>
                     </div>
                 </div>
@@ -276,61 +278,65 @@ export const PlanColumns = ({ billingProducts, highlight = 'paid' }) => {
                                 className="col-span-0 sm:col-span-4 hidden sm:block px-3 py-2 text-sm empty-cell bg-[#eeefe9] dark:bg-[#1d1f27] !border-none"
                             ></div>
                             {/* Rows */}
-                            {highestSupportPlan?.features
-                                ?.filter((f: BillingV2FeatureType) => f.entitlement_only !== true)
-                                .map((feature: BillingV2FeatureType) => (
-                                    <>
-                                        {/* Feature names */}
-                                        <div className="col-span-4 bg-accent/50 dark:bg-black/75 px-3 py-2 text-sm">
-                                            {feature.description ? (
-                                                <Tooltip content={feature.description}>
-                                                    <strong className="border-b border-dashed border-light dark:border-dark cursor-help text-primary/75 dark:text-primary-dark/75">
-                                                        {feature.name}
-                                                    </strong>
-                                                </Tooltip>
-                                            ) : (
-                                                <strong className="text-primary/75 dark:text-primary-dark/75">
+                            {highestPlanFeatures.map((feature: BillingV2FeatureType, idx_outer: number) => (
+                                <>
+                                    {/* Feature names */}
+                                    <div
+                                        className={`col-span-4 bg-accent/50 dark:bg-black/75 px-3 py-2 text-sm ${
+                                            idx_outer === highestPlanFeatures?.length - 1
+                                                ? 'border-b border-light dark:border-dark'
+                                                : ''
+                                        }`}
+                                    >
+                                        {feature.description ? (
+                                            <Tooltip content={feature.description}>
+                                                <strong className="border-b border-dashed border-light dark:border-dark cursor-help text-primary/75 dark:text-primary-dark/75">
                                                     {feature.name}
                                                 </strong>
-                                            )}
-                                        </div>
-                                        {/* Feature values */}
-                                        {mainPlans.map((plan: BillingV2PlanType, idx: number) => {
-                                            const planFeature = plan?.features?.find((f) => f.key === feature.key)
-                                            const isLastColumn = idx === mainPlans.length - 1
-                                            const isLastRow = idx === highestSupportPlan?.features?.length - 1
-                                            return (
-                                                <div
-                                                    className={`inside col-span-4 px-3 py-2 text-sm ${
-                                                        isLastColumn ? 'border-r border-light dark:border-dark' : ''
-                                                    } ${isLastRow ? 'border-b border-light dark:border-dark' : ''}`}
-                                                    key={`${plan.key}-${feature.key}`}
-                                                >
-                                                    {planFeature ? (
-                                                        <div className="flex gap-x-2">
-                                                            {planFeature.note ?? (
-                                                                <IconCheck className="w-5 h-5 text-green" />
-                                                            )}
-                                                            {planFeature.limit && (
-                                                                <span className="opacity-75">
-                                                                    <>
-                                                                        {planFeature.limit} {planFeature.unit}
-                                                                    </>
-                                                                </span>
-                                                            )}
-                                                        </div>
-                                                    ) : (
-                                                        <></>
-                                                    )}
-                                                </div>
-                                            )
-                                        })}
-                                        <div
-                                            key={`empty-cell-${feature.key}`}
-                                            className="col-span-0 sm:col-span-4 hidden sm:block px-3 py-2 text-sm empty-cell bg-[#eeefe9] dark:bg-[#1d1f27] !border-none"
-                                        ></div>
-                                    </>
-                                ))}
+                                            </Tooltip>
+                                        ) : (
+                                            <strong className="text-primary/75 dark:text-primary-dark/75">
+                                                {feature.name}
+                                            </strong>
+                                        )}
+                                    </div>
+                                    {/* Feature values */}
+                                    {mainPlans.map((plan: BillingV2PlanType, idx_inner: number) => {
+                                        const planFeature = plan?.features?.find((f) => f.key === feature.key)
+                                        const isLastColumn = idx_inner === mainPlans.length - 1
+                                        const isLastRow = idx_outer === highestPlanFeatures?.length - 1
+                                        return (
+                                            <div
+                                                className={`inside col-span-4 px-3 py-2 text-sm ${
+                                                    isLastColumn ? 'border-r border-light dark:border-dark' : ''
+                                                } ${isLastRow ? 'border-b border-light dark:border-dark' : ''}`}
+                                                key={`${plan.key}-${feature.key}`}
+                                            >
+                                                {planFeature ? (
+                                                    <div className="flex gap-x-2">
+                                                        {planFeature.note ?? (
+                                                            <IconCheck className="w-5 h-5 text-green" />
+                                                        )}
+                                                        {planFeature.limit && (
+                                                            <span className="opacity-75">
+                                                                <>
+                                                                    {planFeature.limit} {planFeature.unit}
+                                                                </>
+                                                            </span>
+                                                        )}
+                                                    </div>
+                                                ) : (
+                                                    <></>
+                                                )}
+                                            </div>
+                                        )
+                                    })}
+                                    <div
+                                        key={`empty-cell-${feature.key}`}
+                                        className="col-span-0 sm:col-span-4 hidden sm:block px-3 py-2 text-sm empty-cell bg-[#eeefe9] dark:bg-[#1d1f27] !border-none"
+                                    ></div>
+                                </>
+                            ))}
                         </div>
                     </div>
                     <div className="border border-light dark:border-dark bg-accent dark:bg-accent-dark px-4 py-3 mt-2 mb-4 rounded">
