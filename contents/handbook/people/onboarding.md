@@ -223,9 +223,10 @@ Below are a list of Slack channels you may find helpful:
 ### Work-related channels
 
 - `#content-docs-ideas` - for suggesting ideas for the newsletter, tutorials, and docs to be written by the content and docs team
-- `#team-people-and-ops` - for asking ops or company meta related questions (or you can ping the ops team privately)
-- `#tell-posthog-anything` 
-- `#ask-posthog-anything` 
+- `#brand-mentions`
+- `#do-more-weird`
+- `#newsletters`
+- `#team-exec`
 - `#dev`
 - `#general`
 - `#alerts`
