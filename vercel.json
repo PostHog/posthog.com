@@ -1262,7 +1262,7 @@
         { "source": "/docs/webhooks/slack", "destination": "/docs/cdp/destinations/slack" },
         { "source": "/docs/webhooks/microsoft-teams", "destination": "/docs/cdp/destinations/webhook" },
         { "source": "/docs/webhooks/discord", "destination": "/docs/cdp/destinations/webhook" },
-        { "source": "/teams/website-docs", "destination": "/teams/website-vibes" },
+        { "source": "/teams/website-docs", "destination": "/teams/brand-vibes" },
         {
             "source": "/questions/manually-merging-persons",
             "destination": "/docs/product-analytics/identify#how-to-merge-userss"
@@ -1442,6 +1442,10 @@
         {
             "source": "/heysf",
             "destination": "/?utm_source=billboard&utm_campaign=may25-triples"
+        },
+        {
+            "source": "/teams/marketing",
+            "destination": "/teams/content"
         },
         {
             "source": "/teams/video",
