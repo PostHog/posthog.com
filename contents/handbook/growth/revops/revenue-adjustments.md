@@ -1,3 +1,9 @@
+---
+title: Revenue Adjustments
+sidebar: Handbook
+showTitle: true
+---
+
 Raw revenue numbers can sometimes be misleading due to various factors that don't reflect the true health of our 
 business. Our adjusted revenue methodology helps us account for these factors to get a clearer picture of our 
 growth.

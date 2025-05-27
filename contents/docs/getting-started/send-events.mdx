@@ -23,9 +23,9 @@ When you call `posthog.init`, the PostHog browser JS library begins automaticall
 - **Autocaptured events**, such as any click, change of input, or submission associated with `a`, `button`, `form`, `input`, `select`, `textarea`, and `label` tags
 
 <details>
-  <summary>Configuring single page apps</summary>
+  <summary>Configuring single-page apps</summary>
 
-  If you have a [single-page app](/tutorials/single-page-app-pageviews), you'll need to manually capture pageviews and pageleaves as PostHog only sends them once – i.e. when your app loads and when they leave.
+  Because PostHog relies on page loads to capture pageviews, it doesn't capture all navigation for [single-page app](/tutorials/single-page-app-pageviews) frameworks like [Next.js](/docs/libraries/next-js), [React Router](/docs/libraries/react-router), or [Vue](/docs/libraries/vue-js). Instead, you need to set the `capture_pageview` configuration option to `history_change`. This uses the history API to capture pageviews whenever the user navigates within your app.
 </details>
 
 <details>

@@ -98,7 +98,7 @@ This ensures that users who pay for support or which are otherwise considered a 
 
 Tickets are considered normal priority if they fulfill ANY of the following conditions but the user does NOT qualify as a high-paying org:
 
-- The customer is subscribed to the `Ridiculously cheap` plan
+- The customer is subscribed to the `Pay-as-you-go` plan
 - The customer is on a PostHog for Startups or Y Combinator plan
 - The customer is raising a billing issue
 
