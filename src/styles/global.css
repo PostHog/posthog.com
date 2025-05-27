@@ -4,7 +4,7 @@
 
 @layer utilities {
     .light {
-        main a,
+        main a:not(.text-primary),
         .article-content a:not(.cta) {
             @apply text-red hover:text-red dark:text-yellow dark:hover:text-yellow font-semibold;
         }

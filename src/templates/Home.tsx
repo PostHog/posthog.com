@@ -51,9 +51,10 @@ import { useWindow } from '../context/Window'
 interface ProductButtonsProps {
     productTypes: string[]
     className?: string
+    beta?: boolean
 }
 
-const ProductButtons: React.FC<ProductButtonsProps> = ({ productTypes, className = '' }) => {
+const ProductButtons: React.FC<ProductButtonsProps> = ({ productTypes, className = '', beta = false }) => {
     const allProducts = useProduct()
 
     // Helper to get product by type or name
@@ -79,6 +80,7 @@ const ProductButtons: React.FC<ProductButtonsProps> = ({ productTypes, className
                         asLink
                     >
                         {product.name}
+                        {beta && <span className="text-xs opacity-50">beta</span>}
                     </OSButton>
                 ) : null
             })}
@@ -114,7 +116,7 @@ const Products = () => {
                 { content: 1 },
                 { content: 'understand product usage', className: 'font-bold' },
                 {
-                    content: <ProductButtons productTypes={['web_analytics', 'product_analytics', 'session_replay']} />,
+                    content: <ProductButtons productTypes={['Web analytics', 'Product analytics', 'Session replay']} />,
                     className: 'text-sm flex-wrap gap-px',
                 },
             ],
@@ -124,7 +126,7 @@ const Products = () => {
                 { content: 2 },
                 { content: 'test new features', className: 'font-bold' },
                 {
-                    content: <ProductButtons productTypes={['feature_flags', 'experiments', 'error_tracking']} />,
+                    content: <ProductButtons productTypes={['Feature flags', 'Experiments', 'Error tracking']} />,
                     className: 'text-sm',
                 },
             ],
@@ -132,9 +134,9 @@ const Products = () => {
         {
             cells: [
                 { content: 3 },
-                { content: 'get feedback from users', className: 'font-bold' },
+                { content: 'talk to customers', className: 'font-bold' },
                 {
-                    content: <ProductButtons productTypes={['surveys']} />,
+                    content: <ProductButtons productTypes={['Surveys', 'messaging', 'User interviews', 'Broadcasts']} />,
                     className: 'text-sm',
                 },
             ],
@@ -142,7 +144,7 @@ const Products = () => {
         {
             cells: [
                 { content: 4 },
-                { content: 'consolidate product usage data', className: 'font-bold' },
+                { content: 'organize usage data', className: 'font-bold' },
                 {
                     content: <ProductButtons productTypes={['data_warehouse', 'data_pipelines']} />,
                     className: 'text-sm',
@@ -159,6 +161,14 @@ const Products = () => {
                     Open product explorer <IconArrowRight className="inline-block -rotate-45 size-4 text-primary" />
                 </Link>
             </div>
+
+            <p className="mt-2 inline-flex items-center">
+                <span>using these tools, you can track your findings with</span>
+                <ProductButtons productTypes={['Dashboards']} />
+                    
+                <span>or create</span>
+                <ProductButtons productTypes={['Notebooks']} />
+            </p>
         </div>
     )
 }

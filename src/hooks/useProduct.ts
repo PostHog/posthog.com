@@ -1,11 +1,11 @@
-import { IconPieChart } from '@posthog/icons'
+import { IconPieChart, IconThoughtBubble, IconPlug, IconMessage, IconDashboard, IconNotebook } from '@posthog/icons'
 import useProducts from './useProducts'
 
 const dedupe = (products) => {
     const deduped = {}
     for (const product of products) {
-        if (!deduped[product.type]) {
-            deduped[product.type] = product
+        if (!deduped[product.name]) {
+            deduped[product.name] = product
         }
     }
     return Object.values(deduped)
@@ -15,7 +15,7 @@ export default function useProduct({ type } = {}) {
     const { products } = useProducts()
     const extendedProducts = [
         {
-            ...products.find((product) => product.type === 'product_analytics'),
+            ...products.find((product) => product.type === 'web_analytics'),
             name: 'Web analytics',
             Icon: IconPieChart,
             description: 'Monitor your website traffic. Built for people who really liked GA3...',
@@ -48,6 +48,53 @@ export default function useProduct({ type } = {}) {
                     description: '...top-to-bottom view of conversion rates and user paths, without... extra setup time.'
                 },
             },
+        },
+        {
+            name: 'Broadcasts',
+            Icon: IconMessage,
+            description: 'send messages to users.',
+            type: 'broadcasts',
+            color: 'blue',
+            // worksWith: ['product_analytics', 'session_replay', 'surveys'],
+            slug: '/broadcasts',
+            beta: true,
+        },
+        {
+            name: 'User interviews',
+            Icon: IconThoughtBubble,
+            description: 'Get feedback from users.',
+            type: 'user_interviews',
+            color: 'blue',
+            // worksWith: ['product_analytics', 'session_replay', 'surveys'],
+            slug: '/user-interviews',
+            beta: true,
+        },
+        {
+            name: 'Data pipelines',
+            Icon: IconPlug,
+            description: 'Get data into PostHog and send it where it needs to go.',
+            type: 'data_pipelines',
+            color: 'sky-blue',
+            // worksWith: ['product_analytics', 'session_replay', 'surveys'],
+            slug: '/cdp',
+        },
+        {
+            name: 'Dashboards',
+            Icon: IconDashboard,
+            description: 'Get data into PostHog and send it where it needs to go.',
+            type: 'dashboards',
+            color: 'blue',
+            // worksWith: ['product_analytics', 'session_replay', 'surveys'],
+            slug: '/dashboards',
+        },
+        {
+            name: 'Notebooks',
+            Icon: IconNotebook,
+            description: 'Get data into PostHog and send it where it needs to go.',
+            type: 'notebooks',
+            color: 'purple',
+            // worksWith: ['product_analytics', 'session_replay', 'surveys'],
+            slug: '/notebooks',
         },
         ...products,
     ]
