@@ -23,7 +23,7 @@ We do this by:
 - Not relying on freelancers or guest contributors for content
 - Avoiding tedious enterprise marketing nonsense (PDFs, gated content, webinars, etc.)
 
-The latest goals for marketing can be found on the [Content & Docs team page](/teams/marketing).
+The latest goals for marketing can be found on the [Content Team page](/teams/content).
 
 Content is the main pillar of our marketing strategy. Our strategy is to go _deeper_ and create better content as we grow. We don't rely on AI. We don't take content in exchange for links. We don't have arbitrary volume goals.
 
