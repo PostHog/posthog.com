@@ -80,7 +80,7 @@ The docs gardener is a critical role for ensuring our docs are up to date and us
 1. Review the feedback across the channels below.
 2. Create issues for docs updates with the context on why it's important and the source of the feedback (unless it is a very simple fix). Be careful not to publish private data (like user emails) in these. 
 3. Assign the issue to the [docs owner](#ownership-in-content--docs-team).
-4. When done, attach a ✅ emoji or similar (if possible) so that the next docs gardener knows that this has been assigned.
+4. When done, add a ✅ emoji react to the message in Slack or similar (if possible) so that the next docs gardener knows that this has been assigned.
 
 It is then up to the assignee to prioritize and complete these issues.
 
