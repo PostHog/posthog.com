@@ -12,7 +12,8 @@
             "source": "/handbook/growth/marketing/product-announcements",
             "destination": "/handbook/words-and-pictures/product-announcements"
         },
-        { "source": "/teams/words-and-pictures", "destination": "/teams/words-pictures" },
+        { "source": "/teams/words-and-pictures", "destination": "/teams/brand-vibes" },
+        { "source": "/teams/words-pictures", "destination": "/teams/brand-vibes" },
         { "source": "/tutorials/nps-survey", "destination": "/templates/nps-survey" },
         { "source": "/questions/topics/:path*", "destination": "/questions/topic/:path*" },
         { "source": "/docs/sdks/:path*", "destination": "/docs/libraries/:path*" },
@@ -512,7 +513,7 @@
             "destination": "/handbook/small-teams/infrastructure"
         },
         { "source": "/handbook/people/team-structure/ingestion", "destination": "/handbook/small-teams/ingestion" },
-        { "source": "/handbook/people/team-structure/marketing", "destination": "/handbook/small-teams/marketing" },
+        { "source": "/handbook/people/team-structure/marketing", "destination": "/teams/content" },
         { "source": "/handbook/people/team-structure/people", "destination": "/handbook/small-teams/people" },
         { "source": "/handbook/people/team-structure/platform", "destination": "/handbook/small-teams/platform" },
         { "source": "/handbook/small-teams/ops", "destination": "/handbook/small-teams/people" },
@@ -1182,7 +1183,7 @@
         { "source": "/handbook/small-teams/replay", "destination": "/teams/replay" },
         { "source": "/handbook/small-teams/website-docs", "destination": "/teams/website-docs" },
         { "source": "/handbook/small-teams/people", "destination": "/teams/people" },
-        { "source": "/handbook/small-teams/marketing", "destination": "/teams/marketing" },
+        { "source": "/handbook/small-teams/marketing", "destination": "/teams/content" },
         { "source": "/handbook/small-teams/exec", "destination": "/teams/exec" },
         { "source": "/handbook/small-teams/feature-success", "destination": "/teams/feature-success" },
         { "source": "/handbook/small-teams/customer-success", "destination": "/teams/customer-success" },
@@ -1261,7 +1262,7 @@
         { "source": "/docs/webhooks/slack", "destination": "/docs/cdp/destinations/slack" },
         { "source": "/docs/webhooks/microsoft-teams", "destination": "/docs/cdp/destinations/webhook" },
         { "source": "/docs/webhooks/discord", "destination": "/docs/cdp/destinations/webhook" },
-        { "source": "/teams/website-docs", "destination": "/teams/website-vibes" },
+        { "source": "/teams/website-docs", "destination": "/teams/brand-vibes" },
         {
             "source": "/questions/manually-merging-persons",
             "destination": "/docs/product-analytics/identify#how-to-merge-userss"
@@ -1316,24 +1317,28 @@
         { "source": "/docs/data-warehouse/setup/vitally", "destination": "/docs/cdp/sources/vitally" },
         { "source": "/docs/data-warehouse/setup/zendesk", "destination": "/docs/cdp/sources/zendesk" },
         { "source": "/docs/data-warehouse/setup/", "destination": "/docs/data-warehouse/query/" },
-        { "source": "/handbook/growth/marketing/content", "destination": "/handbook/content-and-docs" },
-        { "source": "/handbook/company/docs", "destination": "/handbook/content-and-docs/docs" },
-        { "source": "/handbook/growth/marketing/newsletter", "destination": "/handbook/content-and-docs/newsletter" },
-        { "source": "/handbook/growth/marketing/youtube", "destination": "/handbook/content-and-docs/youtube" },
+        { "source": "/handbook/growth/marketing/content", "destination": "/handbook/content" },
+        { "source": "/handbook/company/docs", "destination": "/handbook/content/docs" },
+        { "source": "/handbook/growth/marketing/newsletter", "destination": "/handbook/content/newsletter" },
+        { "source": "/handbook/growth/marketing/youtube", "destination": "/handbook/content/youtube" },
         {
             "source": "/handbook/growth/marketing/writing-for-posthog",
-            "destination": "/handbook/content-and-docs/writing-for-posthog"
+            "destination": "/handbook/content/writing-for-posthog"
         },
-        { "source": "/handbook/growth/marketing/seo-guide", "destination": "/handbook/content-and-docs/seo-guide" },
+        { "source": "/handbook/growth/marketing/seo-guide", "destination": "/handbook/content/seo-guide" },
         {
             "source": "/handbook/growth/marketing/posthog-style-guide",
-            "destination": "/handbook/content-and-docs/posthog-style-guide"
+            "destination": "/handbook/content/posthog-style-guide"
         },
         {
-            "source": "/handbook/growth/marketing/tags-and-categories",
-            "destination": "/handbook/content-and-docs/tags-and-categories"
+            "source": "/handbook/content-and-docs",
+            "destination": "/handbook/content"
         },
-        { "source": "/handbook/growth/marketing/components", "destination": "/handbook/content-and-docs/components" },
+        {
+            "source": "/handbook/content-and-docs/tags-and-categories",
+            "destination": "/handbook/content/tags-and-categories"
+        },
+        { "source": "/handbook/growth/marketing/components", "destination": "/handbook/content/components" },
         { "source": "/handbook/growth/marketing/paid", "destination": "/handbook/words-and-pictures/paid" },
         {
             "source": "/handbook/growth/marketing/value-propositions",
@@ -1364,7 +1369,7 @@
         { "source": "/cdp/user-agent-populator", "destination": "/docs/cdp/user-agent-populator" },
         {
             "source": "/handbook/growth/marketing/components",
-            "destination": "/handbook/content-and-docs/components"
+            "destination": "/handbook/content/components"
         },
         {
             "source": "/handbook/growth/marketing/paid",
@@ -1441,6 +1446,14 @@
         {
             "source": "/heysf",
             "destination": "/?utm_source=billboard&utm_campaign=may25-triples"
+        },
+        {
+            "source": "/teams/marketing",
+            "destination": "/teams/content"
+        },
+        {
+            "source": "/teams/video",
+            "destination": "/teams/content"
         }
     ],
     "headers": [

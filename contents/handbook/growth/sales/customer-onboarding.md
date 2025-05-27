@@ -125,7 +125,7 @@ If they do become a customer (yay!) then we should agree a regular check in call
 
 ## 1-hr onboarding call
 
-Customers on the Teams plan (and up) are entitled to a one hour kickoff/implementation call. This could include a high-level discussion of how PostHog fits into their stack, troubleshooting issues they've hit so far, or walking them through as they code it up, for simple setups. In practice we only need to worry about this for product-led / customers who haven't talked to sales before. [TO DO] Include a team calendly link in the welcome emails for Teams purchases or set up a separate campaign to email from a CSM. 
+Customers with a platform add-on (and up) are entitled to a one hour kickoff/implementation call. This could include a high-level discussion of how PostHog fits into their stack, troubleshooting issues they've hit so far, or walking them through as they code it up, for simple setups. In practice we only need to worry about this for product-led / customers who haven't talked to sales before. [TO DO] Include a team calendly link in the welcome emails for Teams purchases or set up a separate campaign to email from a CSM. 
 
 ## Ongoing Training
 
