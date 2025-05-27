@@ -104,19 +104,23 @@ export default function OSButton({
         underline: 'hover:underline border-transparent',
         ghost: `bg-transparent border-transparent skin-classic:border-b-3 rounded ${
             active
-                ? 'font-bold skin-modern:!bg-accent-2 dark:!bg-accent-dark skin-modern:hover:border-light dark:hover:border-dark skin-classic:border-primary skin-classic:bg-white'
-                : 'hover:bg-accent-2 dark:hover:bg-accent-dark hover:skin-classic:bg-primary skin-classic:hover:border-primary skin-classic:border-transparent'
-        } active:bg-accent-2/80 dark:active:bg-accent-dark/80 focus:border-light dark:focus:border-dark`,
+                ? 'font-bold skin-modern:bg-accent skin-modern:hover:border-light skin-classic:border-primary skin-classic:bg-primary'
+                : 'hover:bg-accent hover:skin-classic:bg-primary skin-classic:hover:border-primary skin-classic:border-transparent'
+        } active:bg-accent-2/80 focus:border-light`,
     }
 
     const buttonContent = (
         <>
             {variant === 'primary' || variant === 'secondary' ? (
                 <span className={`${variantClasses[variant].child} ${sizeClasses[size]}`}>
-                    {icon && iconPosition === 'left' && <span className={`${iconSizeClasses[size]} ${iconClassName}`}>{icon}</span>}
+                    {icon && iconPosition === 'left' && (
+                        <span className={`${iconSizeClasses[size]} ${iconClassName}`}>{icon}</span>
+                    )}
                     {children}
                     {label && <span className="text-sm opacity-75">{label}</span>}
-                    {icon && iconPosition === 'right' && <span className={`${iconSizeClasses[size]} ${iconClassName}`}>{icon}</span>}
+                    {icon && iconPosition === 'right' && (
+                        <span className={`${iconSizeClasses[size]} ${iconClassName}`}>{icon}</span>
+                    )}
                     {tooltip && (
                         <span className="">
                             <Tooltip content={tooltip}>
@@ -127,10 +131,14 @@ export default function OSButton({
                 </span>
             ) : (
                 <>
-                    {icon && iconPosition === 'left' && <span className={`${iconSizeClasses[size]} ${iconClassName}`}>{icon}</span>}
+                    {icon && iconPosition === 'left' && (
+                        <span className={`${iconSizeClasses[size]} ${iconClassName}`}>{icon}</span>
+                    )}
                     {children}
                     {label && <span className="text-sm opacity-75">{label}</span>}
-                    {icon && iconPosition === 'right' && <span className={`${iconSizeClasses[size]} ${iconClassName}`}>{icon}</span>}
+                    {icon && iconPosition === 'right' && (
+                        <span className={`${iconSizeClasses[size]} ${iconClassName}`}>{icon}</span>
+                    )}
                     {tooltip && (
                         <span className="">
                             <Tooltip content={tooltip}>
@@ -169,13 +177,11 @@ export default function OSButton({
                 {buttonContent}
             </Link>
         )
-    ) : (
-        zoomHover ? (
-            <ZoomHover size={zoomHover === true ? undefined : zoomHover} width={width}>
-                <button {...commonProps}>{buttonContent}</button>
-            </ZoomHover>
-        ) : (
+    ) : zoomHover ? (
+        <ZoomHover size={zoomHover === true ? undefined : zoomHover} width={width}>
             <button {...commonProps}>{buttonContent}</button>
-        )
+        </ZoomHover>
+    ) : (
+        <button {...commonProps}>{buttonContent}</button>
     )
 }

@@ -105,6 +105,80 @@
         --bg: #fdfdf8;
     }
 
+    .dark [data-scheme='primary'] {
+        --bg: #111111;
+        --accent: #65675e;
+        --border: #3a3b37;
+        --input-bg: #1b1c1a;
+        --input-bg-hover: #222320;
+        --input-border: #4d4f46;
+        --input-border-hover: #5c5e54;
+        --text-primary: #fdfdf8;
+        --text-secondary: #d2d3cc;
+        --text-muted: #9ea096;
+
+        .hover-invert:hover,
+        .hover-invert[data-state='open'],
+        .hover-invert[data-state='highlighted'] {
+            --bg: #fdfdf8;
+            --accent: #d2d3cc;
+            --border: #4d4f46;
+            --input-bg: #1b1c1a;
+            --input-bg-hover: #1b1c1a;
+            --text-primary: #111111;
+            --text-secondary: #65675e;
+            --text-muted: #65675e;
+        }
+    }
+
+    .dark [data-scheme='secondary'] {
+        --bg: #1b1c1a;
+        --accent: #4d4f46;
+        --border: #3a3b37;
+        --input-bg: #111111;
+        --input-border: #2c2d2a;
+        --text-primary: #eeefe9;
+        --text-secondary: #d2d3cc;
+        --text-muted: #9ea096;
+
+        .hover-invert:hover,
+        .hover-invert[data-state='open'],
+        .hover-invert[data-state='highlighted'] {
+            --bg: #eeefe9;
+            --accent: #d2d3cc;
+            --border: #3a3b37;
+            --input-bg: #111111;
+            --input-border: #2c2d2a;
+            --text-primary: #1b1c1a;
+            --text-secondary: #4d4f46;
+            --text-muted: #65675e;
+        }
+    }
+
+    .dark [data-scheme='tertiary'] {
+        --bg: #222320;
+        --accent: #5c5e54;
+        --border: #4d4f46;
+        --input-bg: #1b1c1a;
+        --input-border: #3a3b37;
+        --text-primary: #e5e7e0;
+        --text-secondary: #bfc1b7;
+        --text-muted: #8a8c81;
+
+        .hover-invert:hover,
+        .hover-invert[data-state='open'],
+        .hover-invert[data-state='highlighted'] {
+            --bg: #e5e7e0;
+            --accent: #bfc1b7;
+            --border: #4d4f46;
+            --input-bg: #1b1c1a;
+            --input-border: #3a3b37;
+            --text-primary: #222320;
+            --text-secondary: #65675e;
+            --text-muted: #73756b;
+        }
+    }
+
     .bg-primary {
         background-color: var(--bg);
     }

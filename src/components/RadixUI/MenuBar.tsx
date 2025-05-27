@@ -32,7 +32,7 @@ const ItemClasses =
 const SubTriggerClasses =
     'hover-invert group relative flex h-[25px] select-none items-center rounded px-2.5 text-[13px] leading-none text-primary hover:bg-primary outline-none data-[disabled]:pointer-events-none data-[state=open]:bg-primary data-[disabled]:text-muted data-[highlighted]:data-[state=open]:text-secondary data-[highlighted]:bg-text-secondary data-[state=open]:text-secondary'
 const ContentClasses =
-    'min-w-[220px] rounded-md bg-white p-[5px] shadow-[0px_10px_38px_-10px_rgba(22,_23,_24,_0.35),_0px_10px_20px_-15px_rgba(22,_23,_24,_0.2)] will-change-[transform,opacity] [animation-duration:_400ms] [animation-timing-function:_cubic-bezier(0.16,_1,_0.3,_1)]'
+    'bg-primary min-w-[220px] rounded-md p-[5px] shadow-[0px_10px_38px_-10px_rgba(22,_23,_24,_0.35),_0px_10px_20px_-15px_rgba(22,_23,_24,_0.2)] will-change-[transform,opacity] [animation-duration:_400ms] [animation-timing-function:_cubic-bezier(0.16,_1,_0.3,_1)]'
 const SeparatorClasses = 'm-[5px] h-px bg-border'
 const ShortcutClasses =
     'ml-auto pl-5 text-secondary group-data-[disabled]:text-muted group-data-[highlighted]:text-primary'
@@ -108,9 +108,9 @@ const MenuItem: React.FC<{ item: MenuItemType; forceIconIndent?: boolean }> = ({
     return (
         <RadixMenubar.Item className={ItemClasses} disabled={item.disabled} onClick={item.onClick}>
             {item.link ? (
-                <Link 
-                    to={item.link} 
-                    state={{ newWindow: true }} 
+                <Link
+                    to={item.link}
+                    state={{ newWindow: true }}
                     externalNoIcon={item.external}
                     className="w-full h-full px-2.5 flex items-center gap-2 no-underline text-primary"
                 >
@@ -149,10 +149,12 @@ const MenuBar: React.FC<MenuBarProps> = ({ menus, className, triggerAsChild, cus
     return (
         <RadixMenubar.Root data-scheme="tertiary" className={`${RootClasses} ${className || ''}`}>
             {menus.map((menu, menuIndex) => (
-                <RadixMenubar.Menu key={`menu-${menuIndex}`}>
+                <RadixMenubar.Menu key={`menu-${menuIndex}`} data-scheme="primary">
                     <RadixMenubar.Trigger
                         asChild={triggerAsChild}
-                        className={`${triggerAsChild ? '' : TriggerClasses } ${menu.bold ? 'font-bold' : 'font-medium'} ${customTriggerClasses}`}
+                        className={`${triggerAsChild ? '' : TriggerClasses} ${
+                            menu.bold ? 'font-bold' : 'font-medium'
+                        } ${customTriggerClasses}`}
                     >
                         {menu.trigger}
                     </RadixMenubar.Trigger>
@@ -168,6 +170,7 @@ const MenuBar: React.FC<MenuBarProps> = ({ menus, className, triggerAsChild, cus
                                 <MenuItem
                                     key={`menu-${menuIndex}-item-${itemIndex}-${item.label || item.type}`}
                                     item={item}
+                                    data-scheme="primary"
                                 />
                             ))}
                         </RadixMenubar.Content>
