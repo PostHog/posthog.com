@@ -621,23 +621,23 @@ export const handbookSidebar = [
         children: [
             {
                 name: 'Overview',
-                url: '/handbook/content-and-docs',
+                url: '/handbook/content',
             },
             {
                 name: 'Docs ownership',
-                url: '/handbook/content-and-docs/docs',
+                url: '/handbook/content/docs',
             },
             {
                 name: 'Docs style guide',
-                url: '/handbook/content-and-docs/docs-style-guide',
+                url: '/handbook/content/docs-style-guide',
             },
             {
                 name: 'Newsletter',
-                url: '/handbook/content-and-docs/newsletter',
+                url: '/handbook/content/newsletter',
             },
             {
                 name: 'YouTube',
-                url: '/handbook/content-and-docs/youtube',
+                url: '/handbook/content/youtube',
             },
             {
                 name: 'Writing for PostHog',
@@ -645,23 +645,23 @@ export const handbookSidebar = [
                 children: [
                     {
                         name: 'Overview',
-                        url: '/handbook/content-and-docs/writing-for-posthog',
+                        url: '/handbook/content/writing-for-posthog',
                     },
                     {
                         name: 'SEO best practices',
-                        url: '/handbook/content-and-docs/seo-guide',
+                        url: '/handbook/content/seo-guide',
                     },
                     {
                         name: 'Style guide',
-                        url: '/handbook/content-and-docs/posthog-style-guide',
+                        url: '/handbook/content/posthog-style-guide',
                     },
                     {
                         name: 'Tags and categories',
-                        url: '/handbook/content-and-docs/tags-and-categories',
+                        url: '/handbook/content/tags-and-categories',
                     },
                     {
                         name: 'Content components',
-                        url: '/handbook/content-and-docs/components',
+                        url: '/handbook/content/components',
                     },
                 ],
             },

@@ -148,7 +148,7 @@ This means ideas that apply to building a great product also apply to writing gr
 
 3. **Invest in design and development.** The structure and navigability of your docs helps people find what they need. We're lucky to have a [Brand & Vibes](/teams/brand-vibes) to help us with this. They make the pages and components within those pages look good and work towards our goal.
 
-4. **They require ownership.** You can’t expect something to improve if it’s no one’s responsibility to improve it. Product teams are required to contribute, but we also [keep a list](/handbook/content-and-docs/docs) of the docs team members are responsible for.
+4. **They require ownership.** You can’t expect something to improve if it’s no one’s responsibility to improve it. Product teams are required to contribute, but we also [keep a list](/handbook/content/docs) of the docs team members are responsible for.
 
 5. **Culture makes a big difference.** Your product is a product of your culture and so is your docs. [Our values](/handbook/values) of being open source, everybody codes, trust and feedback over process, and biasing for action play a big role in how we write docs.
 
