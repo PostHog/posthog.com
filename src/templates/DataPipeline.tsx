@@ -6,7 +6,7 @@ import { graphql } from 'gatsby'
 import APIExamples from 'components/Product/Pipelines/APIExamples'
 import Configuration from 'components/Product/Pipelines/Configuration'
 import SEO from 'components/seo'
-import { getIconUrl } from 'components/Product/Pipelines'
+import { getIconUrl, NotifyMe } from 'components/Product/Pipelines'
 
 export default function DataPipeline({
     data,
@@ -19,11 +19,12 @@ export default function DataPipeline({
             id: string
             type: string
             icon_url: string
+            status: string
         }
     }
 }): JSX.Element {
     const {
-        postHogPipeline: { name, description, inputs_schema, id, type, icon_url },
+        postHogPipeline: { name, description, inputs_schema, id, type, icon_url, status },
     } = data
 
     return (
@@ -39,13 +40,16 @@ export default function DataPipeline({
                 </div>
                 <div className="article-content">
                     <p>{description}</p>
-                    {inputs_schema?.length > 0 && (
+                    {status !== 'coming-soon' && inputs_schema?.length > 0 && (
                         <>
                             <h2>Configuration</h2>
                             <Configuration inputs_schema={inputs_schema} />
                         </>
                     )}
-                    <APIExamples initialOpen id={id} name={name} inputs_schema={inputs_schema} type={type} />
+                    {status !== 'coming-soon' && (
+                        <APIExamples initialOpen id={id} name={name} inputs_schema={inputs_schema} type={type} />
+                    )}
+                    {status === 'coming-soon' && <NotifyMe pipeline={{ name, type }} />}
                 </div>
             </PostLayout>
         </Layout>
@@ -68,6 +72,7 @@ export const query = graphql`
                 required
                 description
             }
+            status
         }
     }
 `
