@@ -1313,56 +1313,6 @@ export const handbookSidebar = [
             },
         ],
     },
-    {
-        name: 'Comms',
-        url: '',
-        children: [
-            {
-                name: 'Overview',
-                url: '/handbook/brand/brand',
-            },
-            {
-                name: 'Art requests',
-                url: '/handbook/brand/art-requests',
-            },
-            {
-                name: 'Email marketing',
-                url: '/handbook/brand/email-comms',
-            },
-            {
-                name: 'In-app messaging',
-                url: '/handbook/brand/in-app',
-            },
-            {
-                name: 'Events',
-                url: '/handbook/brand/events',
-            },
-            {
-                name: 'Partnerships',
-                url: '/handbook/brand/partners',
-            },
-            {
-                name: 'Paid ads',
-                url: '/handbook/brand/paid',
-            },
-            {
-                name: 'Press & PR',
-                url: '/handbook/brand/press',
-            },
-            {
-                name: 'Product launches',
-                url: '/handbook/brand/product-announcements',
-            },
-            {
-                name: 'Startups & YC Programs',
-                url: '/handbook/brand/startups',
-            },
-            {
-                name: 'Testimonials & G2',
-                url: '/handbook/brand/testimonials',
-            },
-        ],
-    },
 ]
 
 export const communityMenu = {
