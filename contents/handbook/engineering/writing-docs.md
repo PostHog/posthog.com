@@ -9,7 +9,7 @@ Product engineers are responsible for writing docs and making sure they are up t
 > **What about the so-called "content & docs team"?** They are responsible for improving the docs. This means:
 >
 > - Reviewing and improving draft documentation created by product teams
-> - Identifying and improving low quality documentation
+> - Identifying and improving low-quality documentation
 > - Shipping supplementary docs and tutorials based on feedback and emerging use cases
 > - Working on large scale docs projects
 
@@ -17,7 +17,7 @@ Product engineers are responsible for writing docs and making sure they are up t
 
 Two great times to write docs:
 
-1. When you ship a new user-facing product or feature. You should write docs for big product launches before they are released (when they are in early access or beta). Smaller features and updates can wait until after they are shipped.
+1. When you ship a new user-facing product or feature. Write docs for big product launches before they release (during early access or beta). Smaller features and updates can wait until after they are shipped.
 
 2. When you recognize a confusion or gap in users' understanding of your product. This could be based on support tickets, sales requests, or just user feedback.
 
@@ -60,7 +60,7 @@ Code should be self-documenting. If it's complicated to figure out, you probably
 For cases where code isn't self-documenting or easy to understand, include a `README.md` file in the directory that is closest to the entry point of the code. 
 
 This `README` should:
-- Describe the general flow of interacting with the functions, but only to the point where the code starts to become self-documenting.
+- Describe the general flow of interacting with the functions, but stop where the code starts to become self-documenting.
 - Be short. If it's long, then your interfaces should be made simpler.
 
 For an example, see the [PostHog AI `README`](https://github.com/PostHog/posthog/blob/master/ee/hogai/README.md).
