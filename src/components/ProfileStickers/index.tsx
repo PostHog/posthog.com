@@ -5,6 +5,7 @@ import {
     StickerFlagAR,
     StickerFlagAT,
     StickerFlagBE,
+    StickerFlagBG,
     StickerFlagBR,
     StickerFlagCA,
     StickerFlagCL,
@@ -46,6 +47,8 @@ const Stickers = ({ location, country, pineappleOnPizza, isTeamLead, editing, id
             <Tooltip content={`Lives in ${location}`}>
                 {country === 'BE' ? (
                     <StickerFlagBE className="w-8 h-8" />
+                ) : country === 'BG' ? (
+                    <StickerFlagBG className="w-8 h-8" />
                 ) : country === 'BR' ? (
                     <StickerFlagBR className="w-8 h-8" />
                 ) : country === 'US' ? (
