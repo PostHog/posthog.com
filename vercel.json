@@ -1454,6 +1454,10 @@
         {
             "source": "/teams/video",
             "destination": "/teams/content"
+        },
+        {
+            "source": "/docs/api/user",
+            "destination": "/docs/api/users"
         }
     ],
     "headers": [
