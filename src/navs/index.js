@@ -1600,10 +1600,6 @@ export const companyMenu = {
                     url: '/teams/support',
                 },
                 {
-                    name: 'Video',
-                    url: '/teams/video',
-                },
-                {
                     name: 'Website & Vibes',
                     url: '/teams/website-vibes',
                 },
