@@ -154,7 +154,7 @@ If transparency is the answer, how do you make this happen in a company where it
 
 Your goal here is to train people in how you want to work, and hopefully convince others to do the same. For inspiration, here are some examples from PostHog:
 
-* Joe Martin, who runs our Comms Team, creates a GitHub issue every quarter distilling his personal goals, and his progress – [read his Q2 2025 goals](https://github.com/PostHog/meta/issues/301). 
+* Joe Martin, who runs our Brand team, creates a GitHub issue every quarter distilling his personal goals, and his progress – [read his Q2 2025 goals](https://github.com/PostHog/meta/issues/301). 
 
 * Cory’s [PostHog 3000 issue](https://github.com/PostHog/posthog/issues/12923), where he shared his ongoing work on a UI overhaul.
 
