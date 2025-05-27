@@ -817,10 +817,6 @@ export const handbookSidebar = [
                         name: 'How to do product, as an engineer',
                         url: '/handbook/engineering/product-engineering',
                     },
-                    {
-                        name: 'How to write docs (for engineers)',
-                        url: '/handbook/engineering/writing-docs',
-                    },
                 ],
             },
             {
@@ -1227,10 +1223,6 @@ export const handbookSidebar = [
                 name: 'Expansion & Retention',
                 url: '/handbook/growth/sales/expansion-and-retention',
             },
-                        {
-                name: 'Account Planning',
-                url: '/handbook/growth/sales/account-planning',
-            },
             {
                 name: 'How we work',
                 url: '/handbook/growth/sales/how-we-work',
@@ -1310,6 +1302,56 @@ export const handbookSidebar = [
             {
                 name: 'Retention Metrics',
                 url: '/handbook/growth/revops/retention-metrics',
+            },
+        ],
+    },
+    {
+        name: 'Comms',
+        url: '',
+        children: [
+            {
+                name: 'Overview',
+                url: '/handbook/brand/brand',
+            },
+            {
+                name: 'Art requests',
+                url: '/handbook/brand/art-requests',
+            },
+            {
+                name: 'Email marketing',
+                url: '/handbook/brand/email-comms',
+            },
+            {
+                name: 'In-app messaging',
+                url: '/handbook/brand/in-app',
+            },
+            {
+                name: 'Events',
+                url: '/handbook/brand/events',
+            },
+            {
+                name: 'Partnerships',
+                url: '/handbook/brand/partners',
+            },
+            {
+                name: 'Paid ads',
+                url: '/handbook/brand/paid',
+            },
+            {
+                name: 'Press & PR',
+                url: '/handbook/brand/press',
+            },
+            {
+                name: 'Product launches',
+                url: '/handbook/brand/product-announcements',
+            },
+            {
+                name: 'Startups & YC Programs',
+                url: '/handbook/brand/startups',
+            },
+            {
+                name: 'Testimonials & G2',
+                url: '/handbook/brand/testimonials',
             },
         ],
     },
@@ -2106,7 +2148,7 @@ export const docsMenu = {
                         },
                         {
                             name: 'Users',
-                            url: '/docs/api/users',
+                            url: '/docs/api/user',
                         },
                         {
                             name: 'Data model',
@@ -3257,6 +3299,10 @@ export const docsMenu = {
                     url: '/docs/experiments/new-experimentation-engine',
                     icon: 'IconTestTube',
                     color: 'green',
+                    badge: {
+                        title: 'Beta',
+                        className: 'uppercase !bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',
+                    },
                 },
                 {
                     name: 'Data warehouse',
