@@ -6,7 +6,7 @@ showTitle: true
 
 > **Have something you want to announce?** Drop a message in the #team-comms Slack channel so Comms can assist and prevent overlapping messages. If it's an iterative update, you can also demo it in the all-hands, or post in the #tell-posthog-anything Slack channel. 
 
-Comms takes responsibility for coordinating and publicizing news about PostHog, including product announcements. We also help with [incident](/handbook/engineering/incidents) and [maintenance announcements](/handbook/words-and-pictures/product-announcements#announcing-scheduled-maintenance), if needed. 
+Comms takes responsibility for coordinating and publicizing news about PostHog, including product announcements. We also help with [incident](/handbook/engineering/incidents) and [maintenance announcements](/handbook/brand/product-announcements#announcing-scheduled-maintenance), if needed. 
 
 ## Types of announcement
 
@@ -54,7 +54,7 @@ For new product announcements we generally apply the following best practices:
 Comms should also be aware of [the engineering best practices for product launches](/handbook/engineering/development-process#best-practices-for-full-releases), so we can be sure that features launch well.
 
 ### PR announcements
-We do not typically do public relations for anything other than company-level news. We have separate [processes and guides for managing press announcements](/handbook/growth/words-and-pictures/press). 
+We do not typically do public relations for anything other than company-level news. We have separate [processes and guides for managing press announcements](/handbook/growth/brand/press). 
 
 ## Maintenance communications
 

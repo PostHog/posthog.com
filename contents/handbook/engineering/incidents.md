@@ -28,7 +28,7 @@ Things that _shouldn’t_ be an incident
 - Unable to save insights, create feature flags
 - Expected disruption which happens as part of scheduled maintenance
 
-> Planning some maintenance? Check the [announcements](/handbook/growth/words-and-pictures/product-announcements) section instead.
+> Planning some maintenance? Check the [announcements](/handbook/growth/brand/product-announcements) section instead.
 
 ### Security-specific guidance
 

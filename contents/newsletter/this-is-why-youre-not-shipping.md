@@ -69,7 +69,7 @@ And, just like 1:1s, the impact of this latency compounds as a company grows unt
 
 This is a hard problem to solve from the bottom up: it has to come from the top. At PostHog, we solve for this in a few different ways:
 
-1. **We operate a "no design by default" approach**. It's up to product engineers to decide if and when they require design help, and they're free to ship entire products without design input if they choose. We maintain a design system to assist them, and have [clear guidelines on how to work with design](/handbook/design/philosophy).
+1. **We operate a "no design by default" approach**. It's up to product engineers to decide if and when they require design help, and they're free to ship entire products without design input if they choose. We maintain a design system to assist them, and have [clear guidelines on how to work with design](/handbook/brand/philosophy).
 
 2. **Engineers make product decisions.** Product managers at PostHog don't decide what to build, or sign-off on features before they ship. Instead, they gather deep context on users, competitors, and potential solutions, so [product engineers can make informed decisions](/newsletter/product-management-is-broken).
 
