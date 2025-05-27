@@ -1572,12 +1572,12 @@ export const companyMenu = {
                     name: 'Not engineering',
                 },
                 {
-                    name: 'Comms',
-                    url: '/teams/words-pictures',
+                    name: 'Brand & Vibes',
+                    url: '/teams/brand-vibes',
                 },
                 {
-                    name: 'Content & Docs',
-                    url: '/teams/marketing',
+                    name: 'Content',
+                    url: '/teams/content',
                 },
                 {
                     name: 'CS & Onboarding',
@@ -1598,14 +1598,6 @@ export const companyMenu = {
                 {
                     name: 'Support',
                     url: '/teams/support',
-                },
-                {
-                    name: 'Video',
-                    url: '/teams/video',
-                },
-                {
-                    name: 'Website & Vibes',
-                    url: '/teams/website-vibes',
                 },
             ],
         },
