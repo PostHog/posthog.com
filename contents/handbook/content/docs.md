@@ -4,7 +4,7 @@ sidebar: Handbook
 showTitle: true
 ---
 
-**Product teams** are responsible for ensuring their docs are up-to-date. This means:
+**Product teams** are responsible for [writing docs](/handbook/engineering/writing-docs) and ensuring they are up-to-date. This means:
 
 - Documenting new features when they're launched
 - Correcting mistakes reported by users

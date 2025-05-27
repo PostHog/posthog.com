@@ -66,7 +66,7 @@ Being an all-in-one platform has two further benefits:
 - **Self-hostable:** <span className="text-green text-lg">✔</span>
 - **BAA available:** <span className="text-green text-lg">✔</span>
 
-A BAA is available on PostHog's [Teams plan](/pricing), which also includes priority support and generous free usage limits for all tools – e.g. 1 million free analytics events every month. You can also self-host the open-source edition of PostHog, but this isn't recommended as it's provided without guarantee or support.
+A BAA is available on PostHog's [platform add-ons](/platform-addons), which also includes priority support and generous free usage limits for all tools – e.g. 1 million free analytics events every month. You can also self-host the open-source edition of PostHog, but this isn't recommended as it's provided without guarantee or support.
 
 ### 2. Mixpanel
 
