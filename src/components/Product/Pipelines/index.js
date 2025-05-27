@@ -480,7 +480,7 @@ export const NotifyMe = ({ pipeline }) => {
                 <>
                     <h3 className="!m-0 !leading-none !mb-0.5">Get notified</h3>
                     <p className="m-0 !mb-2.5">
-                        Enter your email to get notified when this {pipeline.type} is available
+                        Enter your email to get notified when this {pipeline.type} is available.
                     </p>
                     <div className="flex space-x-2">
                         <input
