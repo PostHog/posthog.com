@@ -765,6 +765,10 @@ export const handbookSidebar = [
                         name: 'How to do product, as an engineer',
                         url: '/handbook/engineering/product-engineering',
                     },
+                    {
+                        name: 'How to write docs (for engineers)',
+                        url: '/handbook/engineering/writing-docs',
+                    },
                 ],
             },
             {
