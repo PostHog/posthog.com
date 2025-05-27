@@ -6,7 +6,7 @@ showTitle: true
 
 Product engineers are responsible for writing docs and making sure they are up to date. This page is a guide to help you do this. 
 
-> **What about the so-called "content & docs team"?** They are responsible for improving the docs. This means:
+> **What about the so-called "content team"?** They are responsible for improving the docs. This means:
 >
 > - Reviewing and improving draft documentation created by product teams
 > - Identifying and improving low-quality documentation
@@ -43,7 +43,7 @@ Nearly all our docs live on `posthog.com/docs`. You can find the repo to add and
 
 Most docs should go somewhere in your product's section. Product docs usually have sections on installation, basic set up, key features, troubleshooting, common questions, and more. Docs for platform features like [SDKs](/docs/libraries), [data types](/docs/new-to-posthog/understand-posthog), and [Max AI](/docs/max-ai) live in the [Product OS](/docs) section.
 
-> **Don't know where a doc or feature should go?** Ask in [`#team-content-and-docs`](https://app.slack.com/client/TSS5W8YQZ/C01FHN8DNN6).
+> **Don't know where a doc or feature should go?** Ask in [`#team-content`](https://app.slack.com/client/TSS5W8YQZ/C01FHN8DNN6).
 
 ## What about internal docs?
 
