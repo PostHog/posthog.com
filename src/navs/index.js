@@ -1242,7 +1242,7 @@ export const handbookSidebar = [
         children: [
             {
                 name: 'Overview',
-                url: '/handbook/growth/revops',
+                url: '/handbook/growth/revops/overview',
             },
             {
                 name: 'Revenue Adjustments',
