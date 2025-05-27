@@ -436,7 +436,7 @@ export default function Tabbed() {
                                 </div>
                                 <div className="col-span-3 sm:col-span-2 flex justify-between">
                                     <div>
-                                        <strong className="text-[15px] md:text-base">$450</strong>
+                                        <strong className="text-[15px] md:text-base">${platformAddon?.price}</strong>
                                         <span className="text-sm opacity-70">/mo</span>
                                     </div>
                                     <div className="text-right">
