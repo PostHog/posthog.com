@@ -47,7 +47,7 @@ We encourage members of the PostHog for Startups program to inform us when they 
 Once a month, we send a short newsletter to all users in the program. We send the email as a Customer.io broadcast and there is a template set up in Customer.io. [This email is covered on the email comms page.](/handbook/words-and-pictures/email-comms)
 
 ### Credit usage
-Teams in the startup plan can use their credit for any PostHog product or add-on, including the platform add-ons. Teams within PostHog for Startups cannot use credits toward a BAA however due to the legal risk to PostHog. If a startup requires a BAA, they should speak to the CS & Sales team to find a solution. 
+Teams in the startup plan can use their credit for any PostHog product or add-on, including the [platform add-ons](/platform-addons). Teams within PostHog for Startups cannot use credits toward a BAA however due to the legal risk to PostHog. If a startup requires a BAA, they should speak to the CS & Sales team to find a solution. 
 
 Unused credits do not carry over past 12 months and cannot be converted into cash or other rewards. If credits are used up then the team will automatically trigger email warnings and move to a standard, paid plan. 
 
