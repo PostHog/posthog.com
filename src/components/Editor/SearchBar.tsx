@@ -1,16 +1,21 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { IconSearch, IconX } from '@posthog/icons'
 import OSButton from 'components/OSButton'
 import { useSearch } from './SearchProvider'
+import Mark from 'mark.js'
+import debounce from 'lodash/debounce'
 
 interface SearchBarProps {
     visible: boolean
     onClose: () => void
+    contentRef: React.RefObject<HTMLDivElement>
 }
 
-export const SearchBar: React.FC<SearchBarProps> = ({ visible, onClose }) => {
+export const SearchBar: React.FC<SearchBarProps> = ({ visible, onClose, contentRef }) => {
     const { searchQuery, setSearchQuery } = useSearch()
     const [inputValue, setInputValue] = useState(searchQuery)
+    const markedRef = useRef(null)
+    const duplicateContainerRef = useRef<HTMLDivElement>(null)
 
     // Sync input value with searchQuery when it changes externally
     useEffect(() => {
@@ -21,8 +26,40 @@ export const SearchBar: React.FC<SearchBarProps> = ({ visible, onClose }) => {
     useEffect(() => {
         if (!visible) {
             setInputValue('')
+            if (duplicateContainerRef.current) {
+                duplicateContainerRef.current.remove()
+                contentRef.current.style.display = 'block'
+            }
+        } else {
+            createDuplicateForHighlighting()
         }
     }, [visible])
+
+    const createDuplicateForHighlighting = () => {
+        if (!contentRef.current) return
+
+        if (duplicateContainerRef.current) {
+            duplicateContainerRef.current.remove()
+        }
+
+        const duplicate = document.createElement('div')
+        const clone = contentRef.current.cloneNode(true) as HTMLElement
+
+        duplicate.appendChild(clone)
+        duplicate.className = 'highlight-container'
+
+        contentRef.current?.parentElement?.appendChild(duplicate)
+        contentRef.current.style.display = 'none'
+
+        duplicateContainerRef.current = duplicate
+
+        markedRef.current = new Mark(duplicate)
+
+        if (inputValue) {
+            markedRef.current.unmark()
+            markedRef.current.mark(inputValue)
+        }
+    }
 
     // Handle Escape key to close search
     const handleKeyDown = (e: React.KeyboardEvent) => {
@@ -38,13 +75,28 @@ export const SearchBar: React.FC<SearchBarProps> = ({ visible, onClose }) => {
     }
 
     // Update the global search state after a brief delay (debounce)
-    useEffect(() => {
-        const timer = setTimeout(() => {
-            setSearchQuery(inputValue)
-        }, 200) // 200ms debounce
+    const debouncedSetSearchQuery = React.useCallback(
+        debounce((value) => {
+            setSearchQuery(value)
+            if (markedRef.current && duplicateContainerRef.current) {
+                markedRef.current.unmark()
+                markedRef.current.mark(value)
+            }
+        }, 200),
+        []
+    )
 
-        return () => clearTimeout(timer)
-    }, [inputValue, setSearchQuery])
+    useEffect(() => {
+        debouncedSetSearchQuery(inputValue)
+    }, [inputValue, debouncedSetSearchQuery])
+
+    useEffect(() => {
+        return () => {
+            if (duplicateContainerRef.current) {
+                duplicateContainerRef.current.remove()
+            }
+        }
+    }, [])
 
     if (!visible) return null
 
@@ -57,6 +109,12 @@ export const SearchBar: React.FC<SearchBarProps> = ({ visible, onClose }) => {
                 onChange={handleInputChange}
                 onKeyDown={handleKeyDown}
                 autoFocus
+                onBlur={() => {
+                    if (duplicateContainerRef.current) {
+                        duplicateContainerRef.current.remove()
+                    }
+                    onClose()
+                }}
             />
             <OSButton variant="ghost" size="xs" icon={<IconX />} onClick={onClose} />
         </div>

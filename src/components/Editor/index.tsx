@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from 'react'
+import React, { useState, useRef } from 'react'
 import { Select } from '../RadixUI/Select'
 import HeaderBar from 'components/OSChrome/HeaderBar'
 import * as Icons from '@posthog/icons'
@@ -93,6 +93,7 @@ export function Editor({
     // take the product name passed in and check the useProduct hook to get the product's display name
     const getProductName = (type: string) => products.find((p) => p.type === type)?.name || type
     // if we're filtering to a product, show the filter button in an active/open state
+    const searchContentRef = useRef(null)
 
     const toggleSearch = () => {
         setShowSearch(!showSearch)
@@ -277,7 +278,7 @@ export function Editor({
                         data-scheme="primary"
                         className="@container flex-1 bg-primary relative h-full"
                     >
-                        <SearchBar visible={showSearch} onClose={closeSearch} />
+                        <SearchBar visible={showSearch} onClose={closeSearch} contentRef={searchContentRef} />
                         {showFilters && availableFilters && availableFilters.length > 0 && (
                             <div className="bg-accent dark:bg-accent-dark p-2 text-sm border-b border-border dark:border-border-dark flex gap-1">
                                 {availableFilters?.map((filter, index) => {
@@ -317,7 +318,9 @@ export function Editor({
                                         {type && <span className="opacity-40">.{type}</span>}
                                     </h1>
                                 )}
-                                {children}
+                                <div className="relative">
+                                    <div ref={searchContentRef}>{children}</div>
+                                </div>
                             </div>
                         </ScrollArea>
                     </main>
