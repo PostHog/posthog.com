@@ -1246,7 +1246,7 @@ export const handbookSidebar = [
             },
             {
                 name: 'Revenue Adjustments',
-                url: '/handbook/growth/revops/revenue adjustments',
+                url: '/handbook/growth/revops/revenue-adjustments',
             },
             {
                 name: 'Retention Metrics',
