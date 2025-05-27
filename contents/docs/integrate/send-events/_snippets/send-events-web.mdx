@@ -25,18 +25,15 @@ posthog.capture('user_signed_up', {
 })
 ```
 
-### Manually capturing pageviews and pageleaves in single-page apps
+### Capturing pageviews in single-page apps
 
-PostHog automatically captures `$pageview` events on page load and `$pageleave` events on page unload. If you have a single-page app, that means it only sends pageview and pageleave once (when your app loads and when users leave).
+PostHog captures `$pageview` events on page load and `$pageleave` when users leave the site. If you have a [single-page app](/tutorials/single-page-app-pageviews), that means PostHog captures pageview and pageleave once by default (when your app loads and when users leave).
 
-To make sure any navigating a user does within your app gets captured, you can make pageview and pageleave calls manually like this:
+To fix this, you can set the `capture_pageview` [configuration option](/docs/libraries/js/config) to `history_change`. This uses the history API to capture pageviews and pageleaves whenever the user navigates within your app.
 
-```js-web
-// Capture pageview
-posthog.capture('$pageview')
-
-// Capture pageleave
-posthog.capture('$pageleave')
+```js
+posthog.init("<ph_project_api_key>", {
+  api_host: "<ph_client_api_host>",
+  capture_pageview: "history_change",
+})
 ```
-
-This automatically sends the current URL along with other [autocaptured properties](/docs/product-analytics/autocapture#autocaptured-properties) like the referrer, OS, scroll depth, and more. See our guide to [tracking pageviews in single-page apps](/tutorials/single-page-app-pageviews) for more details.

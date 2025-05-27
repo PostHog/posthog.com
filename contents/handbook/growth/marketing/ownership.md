@@ -10,7 +10,7 @@ showTitle: true
 |---------------------------------|----------------------|
 | **Alternative guides**          | Andy                 |
 | **AI integrations**             | Lior                 |
-| **Docs & tutorials**            | [See docs ownership](/handbook/content-and-docs/docs)   |
+| **Docs & tutorials**            | [See docs ownership](/handbook/content/docs)   |
 | **Influencer sponsorships**     | Ian                  |
 | **Marketing dashboards**        | Andy                 |
 | **Newsletter**                  | Ian & Andy           |
@@ -28,7 +28,7 @@ showTitle: true
 | **Case studies**                        | Joe                  |
 | **Changelog**                           | Joe                  |
 | **Emailing customers**                  | Joe                  |
-| **Events**                              | Joe                  |
+| **Events**                              | Daniel               |
 | **Growth review**                       | Brian                |
 | **Incident response**                   | Joe                  |
 | **In-app notifications**                | Joe                  |

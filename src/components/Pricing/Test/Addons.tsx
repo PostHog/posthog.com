@@ -1,6 +1,5 @@
 import React, { useState } from 'react'
 import { section, SectionHeader } from './Sections'
-import { usePlatform } from '../Platform/usePlatform'
 import useProducts from '../Products'
 import * as Icons from '@posthog/icons'
 import { PricingTiers } from '../Plans'
@@ -163,15 +162,19 @@ const Features = ({ title, addonName, features }: { title: string; addonName: st
         <React.Fragment>
             <fieldset>
                 <legend>{title}</legend>
-                
-                <div className={`grid grid-cols-2 gap-8 ${addonName === 'Teams' ? '@lg:grid-cols-2' : '@lg:grid-cols-2'}`}>
-                {features.map((feature, itemIndex) => (
-                    <FeatureItem
-                        key={`${addonName}-${title}-${itemIndex}`}
-                        size={addonName === 'Teams' ? 'small' : ''}
-                        {...feature}
-                    />
-                ))}
+
+                <div
+                    className={`grid grid-cols-2 gap-8 ${
+                        addonName === 'Teams' ? '@lg:grid-cols-2' : '@lg:grid-cols-2'
+                    }`}
+                >
+                    {features.map((feature, itemIndex) => (
+                        <FeatureItem
+                            key={`${addonName}-${title}-${itemIndex}`}
+                            size={addonName === 'Teams' ? 'small' : ''}
+                            {...feature}
+                        />
+                    ))}
                 </div>
             </fieldset>
         </React.Fragment>
@@ -246,19 +249,19 @@ const Addon = ({ name, icon_key, description, plans, unit, type, ...other }: Add
     )
 }
 
-export const Addons = (props: AddonsProps) => {
-    const platform = usePlatform()
+export const Addons = (props) => {
     const products = useProducts()
-    const platformAddons = platform.addons.filter((addon: any) => !addon.inclusion_only)
-    const productAddons = products.flatMap((product: any) => product.addons)
-    const allAddons = [...platformAddons, ...productAddons]
+    const productAddons = products.flatMap((product) => product.addons)
+    const allAddons = productAddons
 
     return (
         <section>
             <div className="grid @lg:grid-cols-3 gap-8">
                 <div className="@lg:col-span-2">
                     <h3 className="mb-2">Add-ons</h3>
-                    <p className="">Specialized functionality are offered as add-ons so you never pay for things you don't need.</p>
+                    <p className="">
+                        Specialized functionality are offered as add-ons so you never pay for things you don't need.
+                    </p>
                 </div>
                 <aside className="justify-self-end">
                     <CloudinaryImage
@@ -269,6 +272,7 @@ export const Addons = (props: AddonsProps) => {
                 </aside>
             </div>
 
+            {/*
             <section className="">
                 <div className="flex flex-col-reverse md:flex-row gap-4">
                 </div>
@@ -370,6 +374,10 @@ export const Addons = (props: AddonsProps) => {
                     </CallToAction>
                 </div>
             </section>
+            */}
+            <Link to="/addons" className="font-bold">
+                Explore add-ons
+            </Link>
         </section>
     )
 }
