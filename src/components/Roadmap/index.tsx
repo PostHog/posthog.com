@@ -622,155 +622,149 @@ export default function Roadmap({ searchQuery = '' }: RoadmapProps) {
     return (
         <>
             <SEO title="Roadmap – PostHog" description="" image={`/images/og/customers.jpg`} />
-            <ScrollArea>
-                <section>
-                    <>
-                        <SideModal title="Sign in to vote" open={authModalOpen} setOpen={setAuthModalOpen}>
-                            <h4 className="mb-4">Sign into PostHog.com</h4>
-                            <div className="bg-border dark:bg-border-dark p-4 mb-2">
-                                <p className="text-sm mb-2">
-                                    <strong>Note: PostHog.com authentication is separate from your PostHog app.</strong>
-                                </p>
+            <section>
+                <>
+                    <SideModal title="Sign in to vote" open={authModalOpen} setOpen={setAuthModalOpen}>
+                        <h4 className="mb-4">Sign into PostHog.com</h4>
+                        <div className="bg-border dark:bg-border-dark p-4 mb-2">
+                            <p className="text-sm mb-2">
+                                <strong>Note: PostHog.com authentication is separate from your PostHog app.</strong>
+                            </p>
 
-                                <p className="text-sm mb-0">
-                                    We suggest signing up with your personal email. Soon you'll be able to link your
-                                    PostHog app account.
-                                </p>
-                            </div>
+                            <p className="text-sm mb-0">
+                                We suggest signing up with your personal email. Soon you'll be able to link your PostHog
+                                app account.
+                            </p>
+                        </div>
 
-                            <Authentication
-                                initialView="sign-in"
-                                onAuth={(user) => {
-                                    setAuthModalOpen(false)
-                                    if (selectedRoadmapId) {
-                                        like(selectedRoadmapId.id, selectedRoadmapId.title)
-                                    }
-                                }}
-                                showBanner={false}
-                                showProfile={false}
-                            />
-                        </SideModal>
-                        {isLoading ? (
-                            <ProgressBar />
-                        ) : (
-                            <>
-                                <p className="my-0 text-sm -mt-2 mb-4">
-                                    <span className="opacity-70">
-                                        Here's what we're thinking about building next. Vote for your favorites, or
-                                        request a new feature{' '}
+                        <Authentication
+                            initialView="sign-in"
+                            onAuth={(user) => {
+                                setAuthModalOpen(false)
+                                if (selectedRoadmapId) {
+                                    like(selectedRoadmapId.id, selectedRoadmapId.title)
+                                }
+                            }}
+                            showBanner={false}
+                            showProfile={false}
+                        />
+                    </SideModal>
+                    {isLoading ? (
+                        <ProgressBar />
+                    ) : (
+                        <>
+                            <p className="my-0 text-sm -mt-2 mb-4">
+                                <span className="opacity-70">
+                                    Here's what we're thinking about building next. Vote for your favorites, or request
+                                    a new feature{' '}
+                                </span>
+                                <Link externalNoIcon to="https://github.com/PostHog/posthog/issues">
+                                    on GitHub
+                                </Link>
+                                <span className="opacity-70">.</span>
+                            </p>
+                            <div className="flex justify-between items-center mb-4">
+                                <div className="flex items-center">
+                                    <span className="text-sm font-medium mr-2 text-secondary dark:text-secondary-dark">
+                                        Filter by:
                                     </span>
-                                    <Link externalNoIcon to="https://github.com/PostHog/posthog/issues">
-                                        on GitHub
-                                    </Link>
-                                    <span className="opacity-70">.</span>
-                                </p>
-                                <div className="flex justify-between items-center mb-4">
-                                    <div className="flex items-center">
-                                        <span className="text-sm font-medium mr-2 text-secondary dark:text-secondary-dark">
-                                            Filter by:
-                                        </span>
-                                        <Select
-                                            value={selectedTeam}
-                                            onValueChange={setSelectedTeam}
-                                            placeholder="Filter by team"
-                                            className="w-[180px] text-sm border-border dark:border-dark hover:border-light dark:hover:border-dark"
-                                            dataScheme="primary"
-                                            groups={[
-                                                {
-                                                    label: 'Teams',
-                                                    items: [
-                                                        {
-                                                            value: 'All teams',
-                                                            label: 'All teams',
-                                                            icon: 'IconHome',
-                                                        },
-                                                        {
-                                                            value: 'Any Team',
-                                                            label: 'Not assigned',
-                                                            icon: 'IconMinus',
-                                                        },
-                                                        ...teams
-                                                            .filter((team) => team !== 'Any Team') // Remove Any Team
-                                                            .map((team) => {
-                                                                const teamName = team.replace(' Team', '')
-                                                                return {
-                                                                    value: team,
-                                                                    label: teamName,
-                                                                    icon: 'IconUser',
-                                                                }
-                                                            }),
-                                                    ],
-                                                },
-                                            ]}
-                                        />
-                                    </div>
-                                    <div className="flex items-center gap-2">
-                                        {isModerator && !adding && (
-                                            <div className="relative top-1">
-                                                <CallToAction
-                                                    onClick={() => setAdding(true)}
-                                                    size="xs"
-                                                    type="secondary"
-                                                >
-                                                    <Tooltip content="Only moderators can see this" placement="top">
-                                                        <IconShieldLock className="w-6 h-6 inline-block mr-1" />
-                                                    </Tooltip>
-                                                    Add a feature
-                                                </CallToAction>
-                                            </div>
-                                        )}
-
-                                        <span className="text-sm font-medium mr-2 text-secondary dark:text-secondary-dark">
-                                            Sort by:
-                                        </span>
-                                        <Select
-                                            value={tableSort}
-                                            onValueChange={setTableSort}
-                                            placeholder="Sort by"
-                                            className="w-[180px] text-sm border-border dark:border-dark hover:border-light dark:hover:border-dark"
-                                            dataScheme="primary"
-                                            groups={[
-                                                {
-                                                    label: 'Sort options',
-                                                    items: [
-                                                        {
-                                                            value: 'popular',
-                                                            label: 'Most popular',
-                                                            icon: 'IconThumbsUpFilled',
-                                                            color: 'red dark:text-yellow',
-                                                        },
-                                                        {
-                                                            value: 'newest',
-                                                            label: 'Newest date first',
-                                                            icon: 'IconClock',
-                                                        },
-                                                        {
-                                                            value: 'oldest',
-                                                            label: 'Oldest date first',
-                                                            icon: 'IconCalendar',
-                                                        },
-                                                    ],
-                                                },
-                                            ]}
-                                        />
-                                    </div>
-                                </div>
-                                {isModerator && adding && (
-                                    <RoadmapForm
-                                        status="under-consideration"
-                                        onSubmit={() => {
-                                            mutate()
-                                            setAdding(false)
-                                        }}
+                                    <Select
+                                        value={selectedTeam}
+                                        onValueChange={setSelectedTeam}
+                                        placeholder="Filter by team"
+                                        className="w-[180px] text-sm border-border dark:border-dark hover:border-light dark:hover:border-dark"
+                                        dataScheme="primary"
+                                        groups={[
+                                            {
+                                                label: 'Teams',
+                                                items: [
+                                                    {
+                                                        value: 'All teams',
+                                                        label: 'All teams',
+                                                        icon: 'IconHome',
+                                                    },
+                                                    {
+                                                        value: 'Any Team',
+                                                        label: 'Not assigned',
+                                                        icon: 'IconMinus',
+                                                    },
+                                                    ...teams
+                                                        .filter((team) => team !== 'Any Team') // Remove Any Team
+                                                        .map((team) => {
+                                                            const teamName = team.replace(' Team', '')
+                                                            return {
+                                                                value: team,
+                                                                label: teamName,
+                                                                icon: 'IconUser',
+                                                            }
+                                                        }),
+                                                ],
+                                            },
+                                        ]}
                                     />
-                                )}
+                                </div>
+                                <div className="flex items-center gap-2">
+                                    {isModerator && !adding && (
+                                        <div className="relative top-1">
+                                            <CallToAction onClick={() => setAdding(true)} size="xs" type="secondary">
+                                                <Tooltip content="Only moderators can see this" placement="top">
+                                                    <IconShieldLock className="w-6 h-6 inline-block mr-1" />
+                                                </Tooltip>
+                                                Add a feature
+                                            </CallToAction>
+                                        </div>
+                                    )}
 
-                                <OSTable columns={columns} rows={sortedRows} rowAlignment="top" className="mb-12" />
-                            </>
-                        )}
-                    </>
-                </section>
-            </ScrollArea>
+                                    <span className="text-sm font-medium mr-2 text-secondary dark:text-secondary-dark">
+                                        Sort by:
+                                    </span>
+                                    <Select
+                                        value={tableSort}
+                                        onValueChange={setTableSort}
+                                        placeholder="Sort by"
+                                        className="w-[180px] text-sm border-border dark:border-dark hover:border-light dark:hover:border-dark"
+                                        dataScheme="primary"
+                                        groups={[
+                                            {
+                                                label: 'Sort options',
+                                                items: [
+                                                    {
+                                                        value: 'popular',
+                                                        label: 'Most popular',
+                                                        icon: 'IconThumbsUpFilled',
+                                                        color: 'red dark:text-yellow',
+                                                    },
+                                                    {
+                                                        value: 'newest',
+                                                        label: 'Newest date first',
+                                                        icon: 'IconClock',
+                                                    },
+                                                    {
+                                                        value: 'oldest',
+                                                        label: 'Oldest date first',
+                                                        icon: 'IconCalendar',
+                                                    },
+                                                ],
+                                            },
+                                        ]}
+                                    />
+                                </div>
+                            </div>
+                            {isModerator && adding && (
+                                <RoadmapForm
+                                    status="under-consideration"
+                                    onSubmit={() => {
+                                        mutate()
+                                        setAdding(false)
+                                    }}
+                                />
+                            )}
+
+                            <OSTable columns={columns} rows={sortedRows} rowAlignment="top" className="mb-12" />
+                        </>
+                    )}
+                </>
+            </section>
         </>
     )
 }

@@ -77,7 +77,9 @@ export const Toolbar = ({ elements, className, 'aria-label': ariaLabel }: Toolba
     return (
         <RadixToolbar.Root
             data-scheme="secondary"
-            className={`flex w-full min-w-max rounded bg-primary p-1 border border-border ${className || ''}`}
+            className={`flex w-full min-w-max skin-modern:rounded bg-primary skin-modern:p-1 skin-modern:border border-border ${
+                className || ''
+            }`}
             aria-label={ariaLabel}
             loop={true}
         >

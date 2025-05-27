@@ -41,10 +41,7 @@ export default function HeaderBar({
 }: HeaderBarProps) {
     const { goBack, goForward, canGoBack, canGoForward } = useWindow()
     return (
-        <div
-            data-scheme="secondary"
-            className="bg-primary border-t border-primary flex w-full gap-px p-2 flex-shrink-0"
-        >
+        <div data-scheme="secondary" className="bg-primary flex w-full gap-px p-2 flex-shrink-0">
             <div>
                 <motion.div
                     className={`flex-shrink-0 overflow-hidden flex items-center gap-px transition-all min-w-0 ${

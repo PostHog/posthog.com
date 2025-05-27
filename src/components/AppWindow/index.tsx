@@ -313,7 +313,7 @@ export default function AppWindow({ item, constraintsRef }: { item: AppWindowTyp
                             <div
                                 data-scheme="tertiary"
                                 onDoubleClick={handleDoubleClick}
-                                className="flex-shrink-0 w-full flex @md:grid grid-cols-[minmax(100px,auto)_1fr_minmax(100px,auto)] gap-1 items-center py-0.5 pl-1.5 bg-primary cursor-move"
+                                className="flex-shrink-0 w-full flex @md:grid grid-cols-[minmax(100px,auto)_1fr_minmax(100px,auto)] gap-1 items-center py-0.5 pl-1.5 pr-0.5 bg-primary border-b border-border cursor-move"
                                 onPointerDown={(e) => controls.start(e)}
                             >
                                 <MenuBar

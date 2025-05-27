@@ -3,6 +3,13 @@
 @tailwind utilities;
 
 @layer utilities {
+    .light {
+        main a,
+        .article-content a:not(.cta) {
+            @apply text-red hover:text-red dark:text-yellow dark:hover:text-yellow font-semibold;
+        }
+    }
+
     .light [data-scheme='primary'] {
         --bg: #fdfdf8;
         --accent: #e5e7e0;
@@ -29,6 +36,18 @@
         }
     }
 
+    /* only overrides from modern */
+    .light[data-skin='classic'] {
+        main a,
+        .article-content a:not(.cta) {
+            @apply text-[#111] underline;
+        }
+    }
+
+    .light[data-skin='classic'] [data-scheme='primary'] {
+        --accent: #fdfdf8;
+    }
+
     .light [data-scheme='secondary'] {
         --bg: #eeefe9;
         --accent: #d2d3cc;
@@ -53,6 +72,10 @@
         }
     }
 
+    /* only overrides from modern */
+    .light[data-skin='classic'] [data-scheme='secondary'] {
+    }
+
     .light [data-scheme='tertiary'] {
         --bg: #e5e7e0;
         --accent: #c8cac1;
@@ -75,6 +98,11 @@
             --text-secondary: #c8cac1;
             --text-muted: #c8cac1;
         }
+    }
+
+    /* only overrides from modern */
+    .light[data-skin='classic'] [data-scheme='tertiary'] {
+        --bg: #fdfdf8;
     }
 
     .bg-primary {
@@ -170,16 +198,6 @@ code {
 a {
     @apply box-border;
     font-variant-ligatures: none;
-}
-
-main a,
-.article-content a:not(.cta) {
-    @apply text-red hover:text-red dark:text-yellow dark:hover:text-yellow font-semibold;
-}
-
-a.no-hover {
-    /* override links in article-content so they don't have animated underlines on hover */
-    @apply !bg-none !pb-0;
 }
 
 p {

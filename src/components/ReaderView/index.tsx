@@ -258,7 +258,7 @@ function ReaderViewContent({ body, title, tableOfContents, mdxComponents, commit
 
     return (
         <div className="@container w-full h-full flex flex-col">
-            <DebugContainerQuery />
+            {/* <DebugContainerQuery /> */}
             {/* First row - Header */}
             <HeaderBar
                 isNavVisible={isNavVisible}

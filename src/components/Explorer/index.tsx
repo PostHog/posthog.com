@@ -137,7 +137,7 @@ export default function Explorer({
                         children
                     ) : (
                         <ScrollArea className="px-4">
-                            <DebugContainerQuery />
+                            {/* <DebugContainerQuery /> */}
                             {accentImage && (
                                 <div className="absolute right-0 top-6">
                                     <div className="relative max-w-md @4xl:max-w-lg @5xl:max-w-xl @6xl:max-w-2xl transition-all duration-700 ease-out opacity-25 @xl:opacity-50">
