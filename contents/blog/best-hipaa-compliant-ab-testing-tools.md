@@ -57,7 +57,7 @@ These are the broad principles, but **please consult an expert** before making a
 
 [PostHog](https://posthog.com/) is an open source all-in-one platform that combines A/B testing with product analytics, session replay, feature management, and user surveys – everything you need to understand user behavior. All these tools are seamlessly integrated and, because you get everything in one, you only need to sign one BAA for all your analytics needs.
 
-PostHog offers a BAA on its Teams plan, which starts at $450 and includes [generous monthly free allowances](/pricing), such as 1 million analytics events every month. You can also self-host the open-source edition for free, though this isn't recommended as it's provided without support or guarantee. 
+PostHog offers a BAA on its [platform add-ons](/platform-addons), which start at $250 and include [generous monthly free allowances](/pricing), such as 1 million analytics events every month. You can also self-host the open-source edition for free, though this isn't recommended as it's provided without support or guarantee. 
 
 ### 2. Kameleoon
 

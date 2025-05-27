@@ -237,15 +237,15 @@ Sometimes large customers will ask for changes to our MSA. We have a list of the
 
 ## Business Associate Agreement (BAA)
 
-We offer HIPAA Compliance on PostHog Cloud and as such health companies will require us to sign a Business Associate Agreement with them. As this means we take on increased financial risk in case of a breach we ask them as a minimum to subscribe to the Teams plan which is a guaranteed monthly payment. A maximum of one BAA per organization will be signed. Under most circumstances, it should be the company that owns the org/pays us.
+We offer HIPAA Compliance on PostHog Cloud and as such health companies will require us to sign a Business Associate Agreement with them. As this means we take on increased financial risk in case of a breach we ask them as a minimum to subscribe to one of the platform add-ons which is a guaranteed monthly payment. A maximum of one BAA per organization will be signed. Under most circumstances, it should be the company that owns the org/pays us.
 
-1. Ask the customer to subscribe to the Teams plan (as well as any other paid plans they wish to use).  You can verify this in Vitally by ensuring that they are in the `Teams Plan` segment.
+1. Ask the customer to subscribe to the platform add-on (as well as any other paid plans they wish to use).  You can verify this in Vitally by ensuring that they are in the `Teams Plan` segment.
 2. Create a new document from the [PandaDoc Template](https://app.pandadoc.com/a/#/templates/4psCXzU527sNE6WEbFBg3a).
 3. All you need to do it set the `Client.Company` variable and then send it to them for review and signature.
 4. It has been pre-signed by Fraser and will automatically add today's date as the date of signature for PostHog.
 5. You'll get a notification when everybody has signed it - we have automation in place to ensure that the `HIPAA BAA Signed Date` property on the customer's Salesforce Account record is updated.
 
-> We only provide our default BAA for Teams plan subscribers - customization requires >$20k annual spend. The BAA only remains active for as long as the customer is subscribed to Teams - if they unsubscribe, we send them a message that their BAA will become inactive at the end of the month in which they cancelled. A customer who is on a Teams trial (with a credit card in PostHog) is eligible to sign a default BAA, but you should make it clear to them that the default BAA will be voided if/when the Teams subscription lapses. If the lead is not sure whether they will need a custom BAA and their usage wouldn't put them at $20K, then it is worth pushing them to get legal feedback by sending them our BAA before moving forward, else you risk spending a lot of time on an evaluation that ends up at $450/month.
+> We only provide our default BAA for platform add-on subscribers - customization requires >$20k annual spend. The BAA only remains active for as long as the customer is subscribed to a platform add-on - if they unsubscribe, we send them a message that their BAA will become inactive at the end of the month in which they cancelled. A customer who is on a platform add-on trial (with a credit card in PostHog) is eligible to sign a default BAA, but you should make it clear to them that the default BAA will be voided if/when the platform add-on subscription lapses. If the lead is not sure whether they will need a custom BAA and their usage wouldn't put them at $20K, then it is worth pushing them to get legal feedback by sending them our BAA before moving forward, else you risk spending a lot of time on an evaluation that ends up at $450/month.
 
 ## Non-PostHog contracts
 
