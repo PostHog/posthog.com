@@ -1,3 +1,9 @@
+---
+title: Retention Metrics
+sidebar: Handbook
+showTitle: true
+---
+
 We use Net Dollar Retention (NDR) and Gross Dollar Retention (GDR) to track how well we're 
 retaining and growing customer revenue over time. We use adjusted revenue to calculate these retention metrics 
 for a more accurate picture of our business. This way we get clearer signals about retention by removing the 
