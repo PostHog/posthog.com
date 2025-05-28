@@ -1,7 +1,24 @@
 import CloudinaryImage from 'components/CloudinaryImage'
 import React from 'react'
 import Link from 'components/Link'
-import { IconLaptop, IconWrench, IconHandwave, IconCode2, IconChip, IconMemory, IconScreen, IconSignal, IconBatteryCharge, IconExpand45, IconBox, IconButton, IconRuler, IconInfinity, IconExternal, IconDeskHog } from '@posthog/icons'
+import {
+    IconLaptop,
+    IconWrench,
+    IconHandwave,
+    IconCode2,
+    IconChip,
+    IconMemory,
+    IconScreen,
+    IconSignal,
+    IconBatteryCharge,
+    IconExpand45,
+    IconBox,
+    IconButton,
+    IconRuler,
+    IconInfinity,
+    IconExternal,
+    IconDeskHog,
+} from '@posthog/icons'
 import {
     IconAsterisk,
     IconBolt,
@@ -57,11 +74,7 @@ const App = ({ image, title, description, author, authorUrl, isBuildYourOwn }: A
             {/* Front Face */}
             <div className="absolute h-full w-full [backface-visibility:hidden] flex flex-col justify-center items-center">
                 {image ? (
-                    <CloudinaryImage
-                        src={image}
-                        alt={`${title} screenshot`}
-                        className="w-full max-w-[224px] mx-auto"
-                    />
+                    <CloudinaryImage src={image} alt={`${title} screenshot`} className="w-full max-w-[224px] mx-auto" />
                 ) : (
                     <h4 className="text-xl font-bold mb-2">{title} →</h4>
                 )}
@@ -70,20 +83,14 @@ const App = ({ image, title, description, author, authorUrl, isBuildYourOwn }: A
             <div className="absolute h-full w-full [backface-visibility:hidden] [transform:rotateY(180deg)] bg-accent dark:bg-accent-dark border border-light dark:border-dark rounded p-6 duration-150 flex flex-col justify-center items-center">
                 <div className="text-center">
                     <h4 className="text-xl font-bold mb-2">{title}</h4>
-                    <p className="text-[15px] text-primary/80 dark:text-primary-dark/80 mb-2">
-                        {description}
-                    </p>
+                    <p className="text-[15px] text-primary/80 dark:text-primary-dark/80 mb-2">{description}</p>
                     {!isBuildYourOwn ? (
                         <p className="text-sm">
-                            <b>Built by:</b>{' '}
-                            <Link to={authorUrl}>{author}</Link>
+                            <b>Built by:</b> <Link to={authorUrl}>{author}</Link>
                         </p>
                     ) : (
                         <p>
-                            <Link
-                                to="https://github.com/PostHog/DeskHog"
-                                className="text-red dark:text-yellow"
-                            >
+                            <Link to="https://github.com/PostHog/DeskHog" className="text-red dark:text-yellow">
                                 Get started on GitHub
                             </Link>
                         </p>
@@ -194,12 +201,13 @@ const HeroDeskHog = ({ color, icon, beta, product, title, description }: HeroDes
                     </span>
                 )}
             </div>
-            <h1
-                className="text-5xl md:text-6xl text-center mb-4 md:mb-2 text-balance">
-                    It's a developer <span className="text-red dark:text-yellow">toy</span> that brings developers <span className="text-red dark:text-yellow">joy</span>
-                </h1>
-            <p
-                className="text-lg font-semibold text-center text-opacity-75 mb-5">Pre-built kits coming soon. DIY version available now.</p>
+            <h1 className="text-5xl md:text-6xl text-center mb-4 md:mb-2 text-balance">
+                It's a developer <span className="text-red dark:text-yellow">toy</span> that brings developers{' '}
+                <span className="text-red dark:text-yellow">joy</span>
+            </h1>
+            <p className="text-lg font-semibold text-center text-opacity-75 mb-5">
+                Pre-built kits coming soon. DIY version available now.
+            </p>
             <div className="flex justify-center gap-2 mb-12">
                 <CallToAction href="https://github.com/PostHog/DeskHog" type="primary" externalNoIcon>
                     <>
@@ -277,24 +285,22 @@ const DeskHogCTA = () => {
 const ExpandableCallout = () => {
     return (
         <div className="col-span-2 bg-accent dark:bg-accent-dark py-4 px-8 rounded-lg w-full max-w-lg mx-auto">
-            
-                <div className="mt-4 flex flex-col">
-                    <CloudinaryImage
-                        src="https://res.cloudinary.com/dmukukwp6/image/upload/deskhog_max_904ca43b3e.png"
-                        alt="DeskHog Pro"
-                        className="w-full max-w-[224px] mx-auto mb-4"
-                    />
-                    <h5 className="text-center">Coming soon: DeskHog Pro & Friends</h5>
-                    <p>This is just the beginning of the DeskHog adventure. If you like it we'll make more, maybe.</p>
-                    <p>
-                        DeskHog Pro will connect via the I²C port, adding more buttons, and a huge dial so
-                        you can crank up the vibes. We're also thinking about making a watch strap, so you can wear
-                        DeskHog on your wrist.
-                    </p>
-                    <p>Got ideas for other accessories?{' '}
-                        <a href="mailto:danilo@posthog.com">Let us know!</a>
-                    </p>
-                </div>
+            <div className="mt-4 flex flex-col">
+                <CloudinaryImage
+                    src="https://res.cloudinary.com/dmukukwp6/image/upload/deskhog_max_904ca43b3e.png"
+                    alt="DeskHog Pro"
+                    className="w-full max-w-[224px] mx-auto mb-4"
+                />
+                <h5 className="text-center">Coming soon: DeskHog Pro & Friends</h5>
+                <p>This is just the beginning of the DeskHog adventure. If you like it we'll make more, maybe.</p>
+                <p>
+                    DeskHog Pro will connect via the I²C port, adding more buttons, and a huge dial so you can crank up
+                    the vibes. We're also thinking about making a watch strap, so you can wear DeskHog on your wrist.
+                </p>
+                <p>
+                    Got ideas for other accessories? <a href="mailto:danilo@posthog.com">Let us know!</a>
+                </p>
+            </div>
         </div>
     )
 }
@@ -343,7 +349,7 @@ export const ProductDeskHog = () => {
                             </h2>
                             <p>
                                 DeskHog packs a ESP32-S3 Reverse TFT Feather in a custom-made 3D printed case. It comes
-                                complete with a 240x135 color TFT display, a 24-hour battery life, WiFi, and a cute
+                                complete with a 240x135 color TFT display, a 10-hour battery life, WiFi, and a cute
                                 little LED.
                             </p>
                             <p>
@@ -353,7 +359,9 @@ export const ProductDeskHog = () => {
                             <div className="inline-grid grid-cols-2 [&>*]:p-2 divide-y divide-border dark:divide-border-dark border border-light dark:border-dark text-sm mb-6">
                                 <strong className="border-r border-light dark:border-dark">Can it play Pong?</strong>
                                 <span className="!border-t-0">Yes.</span>
-                                <strong className="border-r border-light dark:border-dark">Can it play Flappy Bird?</strong>
+                                <strong className="border-r border-light dark:border-dark">
+                                    Can it play Flappy Bird?
+                                </strong>
                                 <span>Yes.</span>
                                 <strong className="border-r border-light dark:border-dark">Can it play Doom?</strong>
                                 <span>...We're working on it.</span>
@@ -376,10 +384,14 @@ export const ProductDeskHog = () => {
                     <h2 className="text-5xl text-center mb-2">Of course we made some games for it</h2>
                     <h3 className="text-xl text-center font-medium mb-12">
                         (And you can{' '}
-                        <Link to="https://github.com/PostHog/DeskHog" externalNoIcon className="text-red dark:text-yellow">
+                        <Link
+                            to="https://github.com/PostHog/DeskHog"
+                            externalNoIcon
+                            className="text-red dark:text-yellow"
+                        >
                             make your own
-                        </Link>, 
-                        too!)
+                        </Link>
+                        , too!)
                     </h3>
 
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
@@ -571,7 +583,10 @@ export const ProductDeskHog = () => {
                                     details: 'Unlimited potential\n(Hardware permitting)',
                                 },
                             ].map((spec, index) => (
-                                <div key={index} className="grid-cols-2 md:grid-cols-1 flex flex-col md:flex-row items-start gap-4">
+                                <div
+                                    key={index}
+                                    className="grid-cols-2 md:grid-cols-1 flex flex-col md:flex-row items-start gap-4"
+                                >
                                     <span className="text-primary/50 size-8 -mt-1 shrink-0">{spec.icon}</span>
                                     <div>
                                         <h3 className="text-base font-bold text-primary/80 dark:text-primary-dark/80 mb-1">
@@ -584,13 +599,13 @@ export const ProductDeskHog = () => {
                                     </div>
                                 </div>
                             ))}
-                            </div>
                         </div>
-                            {/* New expandable callout */}
-                            <div className="text-base italic font-semibold text-center w-full pb-6 mt-12">
-                And this is just for starters...
-                </div>
-                            <ExpandableCallout />
+                    </div>
+                    {/* New expandable callout */}
+                    <div className="text-base italic font-semibold text-center w-full pb-6 mt-12">
+                        And this is just for starters...
+                    </div>
+                    <ExpandableCallout />
                 </div>
             </section>
 
