@@ -58,7 +58,11 @@ showTitle: true
 ## Owned by other teams (who help marketing out)
 
 | &nbsp                                   | **Individual owner** |
-| **Growth review**                       | Brian, Sales         |
+| **Growth review**                       | Brian                |
+| **Paid ads strategy and messaging**     | Brian                |
+| **Paid ads design**                     | Brian                |
+| **Paid ads operations**                 | Brian                |
+| **Paid ads performance**                | Brian                |
 
 
  
