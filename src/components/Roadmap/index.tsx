@@ -43,6 +43,7 @@ import {
 } from 'components/Editor/SearchUtils'
 import { useSearch } from 'components/Editor/SearchProvider'
 import ProgressBar from 'components/ProgressBar'
+import Editor from 'components/Editor'
 
 interface IGitHubPage {
     title: string
@@ -258,6 +259,7 @@ export default function Roadmap({ searchQuery = '' }: RoadmapProps) {
         id: number
         title: string
     } | null>(null)
+    const [filteredRoadmaps, setFilteredRoadmaps] = useState()
 
     // Get search context if available (from Editor)
     const searchContext = useSearch()
@@ -422,23 +424,8 @@ export default function Roadmap({ searchQuery = '' }: RoadmapProps) {
 
     // Sort the rows based on tableSort value
     const sortedRows = useMemo(() => {
-        // First filter roadmaps by team if needed
-        const filteredRoadmaps = [...roadmaps].filter((roadmap: any) => {
-            const roadmapTeam = roadmap.attributes.teams?.data?.[0]?.attributes?.name
-
-            if (selectedTeam === 'All teams') {
-                return true
-            }
-
-            if (selectedTeam === 'Any Team') {
-                return !roadmapTeam // Return items with no team
-            }
-
-            return roadmapTeam && `${roadmapTeam} Team` === selectedTeam
-        })
-
         // Then sort the roadmaps based on the selected sort criteria
-        const sortedRoadmaps = filteredRoadmaps.sort((a: any, b: any) => {
+        const sortedRoadmaps = (filteredRoadmaps || roadmaps).sort((a: any, b: any) => {
             switch (tableSort) {
                 case 'newest': {
                     const dateA = a.attributes.createdAt ? new Date(a.attributes.createdAt).getTime() : 0
@@ -517,18 +504,14 @@ export default function Roadmap({ searchQuery = '' }: RoadmapProps) {
                     content: <VoteBox likeCount={roadmap.attributes.likeCount} liked={liked} />,
                     className: `relative flex items-baseline ${liked ? 'bg-green/10' : ''}`,
                 },
-            ]
-
-            // Add date cell if we're sorting by date
-            if (tableSort === 'newest' || tableSort === 'oldest') {
-                cells.push({
-                    content: <span className="text-sm font-medium">{formattedDate}</span>,
-                    className: 'text-secondary dark:text-secondary-dark',
-                })
-            }
-
-            // Add remaining cells
-            cells.push(
+                ...(tableSort === 'newest' || tableSort === 'oldest'
+                    ? [
+                          {
+                              content: <span className="text-sm font-medium">{formattedDate}</span>,
+                              className: 'text-secondary dark:text-secondary-dark',
+                          },
+                      ]
+                    : []),
                 {
                     content: teamName ? (
                         <Link
@@ -609,18 +592,49 @@ export default function Roadmap({ searchQuery = '' }: RoadmapProps) {
                             </Link>
                         ) : null,
                     className: 'text-center',
-                }
-            )
+                },
+            ]
 
             return {
                 roadmapId: roadmap.id,
                 cells,
             }
         })
-    }, [roadmaps, tableSort, expandedDescriptions, loading, user, selectedTeam, effectiveSearchTerm])
+    }, [roadmaps, tableSort, expandedDescriptions, loading, user, selectedTeam, effectiveSearchTerm, filteredRoadmaps])
 
     return (
-        <>
+        <Editor
+            title="roadmap"
+            type="psheet"
+            slug="/roadmap"
+            maxWidth="full"
+            dataToFilter={roadmaps}
+            onFilterChange={(data) => setFilteredRoadmaps(data)}
+            availableFilters={
+                roadmaps.length > 0
+                    ? [
+                          {
+                              label: 'Team',
+                              operator: 'equals',
+                              options: Object.keys(
+                                  groupBy(
+                                      roadmaps,
+                                      (roadmap) => roadmap.attributes.teams?.data?.[0]?.attributes?.name ?? 'Any'
+                                  )
+                              )
+                                  .sort()
+                                  .map((team) => ({
+                                      label: team,
+                                      value: team === 'Any' ? null : team,
+                                  })),
+                              filter: (roadmap, value) => {
+                                  return roadmap.attributes.teams?.data?.[0]?.attributes?.name === value
+                              },
+                          },
+                      ]
+                    : undefined
+            }
+        >
             <SEO title="Roadmap – PostHog" description="" image={`/images/og/customers.jpg`} />
             <section>
                 <>
@@ -663,58 +677,8 @@ export default function Roadmap({ searchQuery = '' }: RoadmapProps) {
                                 </Link>
                                 <span className="opacity-70">.</span>
                             </p>
-                            <div className="flex justify-between items-center mb-4">
-                                <div className="flex items-center">
-                                    <span className="text-sm font-medium mr-2 text-secondary dark:text-secondary-dark">
-                                        Filter by:
-                                    </span>
-                                    <Select
-                                        value={selectedTeam}
-                                        onValueChange={setSelectedTeam}
-                                        placeholder="Filter by team"
-                                        className="w-[180px] text-sm border-border dark:border-dark hover:border-light dark:hover:border-dark"
-                                        dataScheme="primary"
-                                        groups={[
-                                            {
-                                                label: 'Teams',
-                                                items: [
-                                                    {
-                                                        value: 'All teams',
-                                                        label: 'All teams',
-                                                        icon: 'IconHome',
-                                                    },
-                                                    {
-                                                        value: 'Any Team',
-                                                        label: 'Not assigned',
-                                                        icon: 'IconMinus',
-                                                    },
-                                                    ...teams
-                                                        .filter((team) => team !== 'Any Team') // Remove Any Team
-                                                        .map((team) => {
-                                                            const teamName = team.replace(' Team', '')
-                                                            return {
-                                                                value: team,
-                                                                label: teamName,
-                                                                icon: 'IconUser',
-                                                            }
-                                                        }),
-                                                ],
-                                            },
-                                        ]}
-                                    />
-                                </div>
+                            <div className="flex justify-between items-center space-x-2 mb-4">
                                 <div className="flex items-center gap-2">
-                                    {isModerator && !adding && (
-                                        <div className="relative top-1">
-                                            <CallToAction onClick={() => setAdding(true)} size="xs" type="secondary">
-                                                <Tooltip content="Only moderators can see this" placement="top">
-                                                    <IconShieldLock className="w-6 h-6 inline-block mr-1" />
-                                                </Tooltip>
-                                                Add a feature
-                                            </CallToAction>
-                                        </div>
-                                    )}
-
                                     <span className="text-sm font-medium mr-2 text-secondary dark:text-secondary-dark">
                                         Sort by:
                                     </span>
@@ -749,6 +713,16 @@ export default function Roadmap({ searchQuery = '' }: RoadmapProps) {
                                         ]}
                                     />
                                 </div>
+                                {isModerator && !adding && (
+                                    <div className="relative">
+                                        <CallToAction onClick={() => setAdding(true)} size="xs" type="secondary">
+                                            <Tooltip content="Only moderators can see this" placement="top">
+                                                <IconShieldLock className="w-6 h-6 inline-block" />
+                                            </Tooltip>
+                                            Add a feature
+                                        </CallToAction>
+                                    </div>
+                                )}
                             </div>
                             {isModerator && adding && (
                                 <RoadmapForm
@@ -765,6 +739,6 @@ export default function Roadmap({ searchQuery = '' }: RoadmapProps) {
                     )}
                 </>
             </section>
-        </>
+        </Editor>
     )
 }
