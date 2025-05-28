@@ -982,6 +982,10 @@ export const handbookSidebar = [
                 url: '/handbook/growth/marketing/ownership',
             },
             {
+                name: 'How we do video at PostHog',
+                url: '/handbook/growth/marketing/video',
+            },
+            {
                 name: 'Sponsorships',
                 url: '/handbook/growth/marketing/open-source-sponsorship',
             },
