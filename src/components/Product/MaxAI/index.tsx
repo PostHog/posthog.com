@@ -300,7 +300,9 @@ const Roadmap = () => {
                                             <h4 className="text-lg font-bold mb-1 leading-tight">
                                                 {roadmap.attributes.title}
                                             </h4>
-                                            <Markdown>{roadmap.attributes.description}</Markdown>
+                                            <Markdown className="dark:text-primary">
+                                                {roadmap.attributes.description}
+                                            </Markdown>
                                             <div className="mt-4 flex gap-2">
                                                 <CallToAction
                                                     size="sm"
@@ -362,7 +364,9 @@ const Roadmap = () => {
                                                     {new Date(roadmap.attributes.dateCompleted).toLocaleDateString()}
                                                 </p>
                                             )}
-                                            <Markdown>{roadmap.attributes.description}</Markdown>
+                                            <Markdown className="dark:text-primary">
+                                                {roadmap.attributes.description}
+                                            </Markdown>
                                         </div>
                                     </div>
                                 </div>
